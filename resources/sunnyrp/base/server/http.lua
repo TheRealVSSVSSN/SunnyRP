@@ -1,20 +1,13 @@
--- Lightweight HMAC-SHA256 signing for game->backend requests.
--- Signs: method \n path \n ts \n nonce \n rawBody
-
+-- Signed HTTP with HMAC + retries + circuit breaker + typed results
 SRP_HTTP = {}
 local json = json or {}
+
+-- bit ops
 local bit = bit32
 local band, bor, bxor, bnot, rshift, rrotate =
   bit.band, bit.bor, bit.bxor, bit.bnot, bit.rshift, bit.rrotate
 
--- === SHA-256 (compact pure Lua) ===
-local function tobytes32(x)
-  return string.char(rshift(x,24)%256, rshift(x,16)%256, rshift(x,8)%256, x%256)
-end
-local function str2w(s, i)
-  local a,b,c,d = s:byte(i, i+3)
-  return ((a*256 + b)*256 + c)*256 + d
-end
+-- ==== SHA-256 (compact pure Lua) ====
 local K = {
   0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
   0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,
@@ -25,12 +18,19 @@ local K = {
   0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,
   0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2
 }
+local function tobytes32(x)
+  return string.char(rshift(x,24)%256, rshift(x,16)%256, rshift(x,8)%256, x%256)
+end
+local function str2w(s, i)
+  local a,b,c,d = s:byte(i, i+3)
+  return ((a*256 + b)*256 + c)*256 + d
+end
 local function sha256(msg)
   local h0,h1,h2,h3,h4,h5,h6,h7 =
     0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19
   local ml = #msg
   msg = msg .. '\128' .. string.rep('\0', (56 - (ml + 1) % 64) % 64) ..
-        string.pack('>I8', ml * 8)
+        string.char(0,0,0,0, (ml*8 >> 24) & 255, (ml*8 >> 16) & 255, (ml*8 >> 8) & 255, (ml*8) & 255)
   for i=1,#msg,64 do
     local w = {}
     for j=0,15 do w[j] = str2w(msg, i + j*4) end
@@ -62,7 +62,6 @@ local function sha256(msg)
   return tobytes32(h0)..tobytes32(h1)..tobytes32(h2)..tobytes32(h3)..
          tobytes32(h4)..tobytes32(h5)..tobytes32(h6)..tobytes32(h7)
 end
-
 local function hmac_sha256(key, msg)
   local block = 64
   if #key > block then key = sha256(key) end
@@ -75,29 +74,37 @@ local function hmac_sha256(key, msg)
   end
   return sha256(table.concat(o) .. sha256(table.concat(i) .. msg))
 end
-
-local function hex(s)
-  local t = {}
-  for i=1,#s do t[i] = string.format('%02x', s:byte(i)) end
-  return table.concat(t)
-end
-
-local function jsonEncode(tbl)
-  return type(tbl) == 'table' and json.encode(tbl) or (tbl or '')
-end
-
 local function sign(method, path, ts, nonce, body)
   local raw = table.concat({method, path, ts, nonce, body or ''}, '\n')
-  return hex(hmac_sha256(SRP_API.token or 'CHANGE_ME', raw))
+  local mac = hmac_sha256(SRP_API.token or 'CHANGE_ME', raw)
+  local out = {}
+  for i=1,#mac do out[i] = string.format('%02x', mac:byte(i)) end
+  return table.concat(out)
+end
+
+-- Circuit breaker
+local CB = { failures = 0, openUntil = 0 }
+local function cbOpen(ms) CB.openUntil = GetGameTimer() + ms end
+local function cbClosed() return GetGameTimer() > CB.openUntil end
+local function cbOnResult(ok)
+  if ok then CB.failures = 0; CB.openUntil = 0
+  else
+    CB.failures = CB.failures + 1
+    if CB.failures >= 4 then cbOpen(8000) end
+  end
 end
 
 local function httpRequest(method, path, bodyTbl, opts)
   opts = opts or {}
   local url = SRP_API.url .. path
-  local body = bodyTbl and jsonEncode(bodyTbl) or ''
+  local body = bodyTbl and json.encode(bodyTbl) or ''
   local ts = tostring(os.time())
   local nonce = ('%06d-%s-%06d'):format(math.random(0,999999), ts, math.random(0,999999))
   local sig = sign(method, path, ts, nonce, body)
+
+  if not cbClosed() then
+    return { ok=false, status=0, error='circuit_open', message='Backend temporarily unavailable' }
+  end
 
   local headers = {
     ['Content-Type'] = 'application/json',
@@ -110,7 +117,7 @@ local function httpRequest(method, path, bodyTbl, opts)
 
   local tries = opts.retries or 2
   local timeout = opts.timeout or 10000
-  local result = { ok=false, status=0, data=nil, error=nil }
+  local result = { ok=false, status=0, data=nil, error=nil, message=nil }
 
   for attempt = 1, tries + 1 do
     local done = false
@@ -124,17 +131,23 @@ local function httpRequest(method, path, bodyTbl, opts)
         result.data = ok and data or {}
       else
         result.ok = false
-        result.error = ('HTTP %s: %s'):format(statusCode or '0', respBody or '')
+        result.error = 'http_error'
+        result.message = ('HTTP %s'):format(statusCode or '0')
+        result.data = SRP_Utils.safeJsonDecode(respBody)
       end
       done = true
     end, method, body, headers)
 
     local t0 = GetGameTimer()
-    while not done and GetGameTimer() - t0 < timeout do
-      Wait(0)
+    while not done and GetGameTimer() - t0 < timeout do Wait(0) end
+
+    if result.ok then
+      cbOnResult(true)
+      return result
+    else
+      cbOnResult(false)
+      if attempt <= tries then Citizen.Wait((attempt * 500) + math.random(0, 250)) end
     end
-    if done and result.ok then return result end
-    if attempt <= tries then Citizen.Wait((attempt * 500) + math.random(0, 250)) end
   end
   return result
 end
@@ -145,11 +158,8 @@ end
 
 function SRP_HTTP.Emit(typeName, subject, data)
   return httpRequest('POST', '/events/emit', {
-    type = typeName,
-    subject = subject,
-    data = data or {},
-    time = os.time()
-  }, { retries = 1 })
+    type = typeName, subject = subject, data = data or {}, time = os.time()
+  }, { retries = 1, timeout = 7000 })
 end
 
 exports('Fetch', SRP_HTTP.Fetch)

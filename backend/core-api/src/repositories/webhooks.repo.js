@@ -1,6 +1,6 @@
-const knex = require('./db');
+import knex from './db.js';
 
-async function listEnabled() {
+export async function listEnabled() {
     const rows = await knex('webhooks').where({ enabled: 1 }).select('*');
     return rows.map(r => ({
         id: r.id, name: r.name, url: r.url,
@@ -10,7 +10,7 @@ async function listEnabled() {
     }));
 }
 
-async function createEvent(webhookId, type, payload) {
+export async function createEvent(webhookId, type, payload) {
     const [id] = await knex('webhook_events').insert({
         webhook_id: webhookId,
         type,
@@ -21,20 +21,20 @@ async function createEvent(webhookId, type, payload) {
     return id;
 }
 
-async function nextPending(limit = 10) {
+export async function nextPending(limit = 10) {
     return knex('webhook_events')
         .where({ status: 'pending' })
         .orderBy('id', 'asc')
         .limit(limit);
 }
 
-async function markDelivered(id) {
+export async function markDelivered(id) {
     return knex('webhook_events')
         .where({ id })
         .update({ status: 'delivered', delivered_at: knex.fn.now(), last_error: null });
 }
 
-async function markFailed(id, err) {
+export async function markFailed(id, err) {
     return knex('webhook_events')
         .where({ id })
         .update({
@@ -44,10 +44,4 @@ async function markFailed(id, err) {
         });
 }
 
-module.exports = {
-    listEnabled,
-    createEvent,
-    nextPending,
-    markDelivered,
-    markFailed,
-};
+export default { listEnabled, createEvent, nextPending, markDelivered, markFailed };

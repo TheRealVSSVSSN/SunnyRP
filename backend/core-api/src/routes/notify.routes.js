@@ -1,7 +1,8 @@
-const express = require('express');
-const router = express.Router();
-const hmacVerify = require('../middleware/hmacVerify'); // game uses HMAC
-const notify = require('../services/notify.service');
+import { Router } from 'express';
+import hmacVerify from '../middleware/hmacVerify.js';
+import * as notify from '../services/notify.service.js';
+
+const router = Router();
 
 // Game server calls this with { channel, content?, embed? }
 router.post('/emit', hmacVerify(), async (req, res) => {
@@ -9,8 +10,8 @@ router.post('/emit', hmacVerify(), async (req, res) => {
         const result = await notify.emit(req.body || {});
         res.json(result);
     } catch (e) {
-        res.status(400).json({ error: e.message });
+        res.status(400).json({ ok: false, error: { code: 'BAD_REQUEST', message: e.message } });
     }
 });
 
-module.exports = router;
+export default router;

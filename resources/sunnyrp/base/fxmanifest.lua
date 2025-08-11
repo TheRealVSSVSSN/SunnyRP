@@ -5,7 +5,7 @@ lua54 'yes'
 name 'srp_base'
 description 'SunnyRP Base — server-authoritative spine, live-config, buckets, RP defaults'
 author 'SunnyRP'
-version '2.0.0'
+version '2.1.0'
 
 ui_page 'html/index.html'
 
@@ -32,6 +32,7 @@ server_scripts {
   'server/permissions.lua',
   'server/state.lua',
   'server/buckets.lua',
+  'server/config_bus.lua',
   'server/commands.lua',
   'server/config_live.lua',
   'server/inbox.lua',

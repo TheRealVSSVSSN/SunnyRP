@@ -1,10 +1,6 @@
--- Command framework + admin commands
-local function hasScope(src, scope)
-  return exports['srp_base']:HasScope(src, scope)
-end
-
+local function hasScope(src, scope) return exports['srp_base']:HasScope(src, scope) end
 local function guard(src, scope)
-  if src <= 0 then return true end -- console permitted
+  if src <= 0 then return true end
   if not hasScope(src, scope) then
     TriggerClientEvent('chat:addMessage', src, { args = {'SRP', '^1No permission.'} })
     return false
@@ -12,36 +8,30 @@ local function guard(src, scope)
   return true
 end
 
--- /srpflags set <path> <on|off>
+-- /srpflags set <A.B.C> <on|off>
 RegisterCommand('srpflags', function(src, args)
   if not guard(src, SRP_CONST.SCOPES.ADMIN_FLAGS) then return end
-  local action = args[1]
-  if action ~= 'set' then
-    TriggerClientEvent('chat:addMessage', src, { args={'SRP', 'Usage: /srpflags set <path> <on|off>'} })
-    return
-  end
-  local path = args[2]
-  local onoff = args[3]
-  if not path or not onoff then
+  local action, path, onoff = args[1], args[2], args[3]
+  if action ~= 'set' or not path or not onoff then
     TriggerClientEvent('chat:addMessage', src, { args={'SRP', 'Usage: /srpflags set <path> <on|off>'} })
     return
   end
   local value = (onoff == 'on')
-  local payload = {}
-  payload[path] = value
-  local res = SRP_HTTP.Fetch('PATCH', '/config/live', payload, { retries = 1 })
-  if res.ok then
-    TriggerClientEvent('chat:addMessage', src, { args={'SRP', 'Updated live config.'} })
+  local patch = {}
+  SRP_Utils.setByPath(patch, path, value)
+  local ok = select(1, exports['srp_base']:ConfigPatch(patch))
+  if ok then
+    TriggerClientEvent('chat:addMessage', src, { args={'SRP', 'Live config updated.'} })
   else
-    TriggerClientEvent('chat:addMessage', src, { args={'SRP', '^1Update failed: '..(res.error or '')} })
+    TriggerClientEvent('chat:addMessage', src, { args={'SRP', '^1Update failed.'} })
   end
 end, false)
 
--- /bucket [targetId?] [loading|main|char|admin]
+-- /bucket [id?] [loading|main|char|admin]
 RegisterCommand('bucket', function(src, args)
   if not guard(src, SRP_CONST.SCOPES.ADMIN_BUCKET) then return end
   local target = tonumber(args[1]) or src
-  local mode = args[2] or 'main'
+  local mode = (args[2] or 'main'):lower()
   if mode == 'loading' then
     exports['srp_base']:SetBucket(target, SRP_Config.Buckets.loading)
   elseif mode == 'char' then
@@ -70,7 +60,7 @@ RegisterCommand('time', function(src, args)
   end
 end, false)
 
--- /weather CLEAR|EXTRASUNNY|RAIN|THUNDER|SMOG|FOGGY|...
+-- /weather TYPE
 RegisterCommand('weather', function(src, args)
   if not guard(src, SRP_CONST.SCOPES.ADMIN_WORLD) then return end
   local w = args[1] or 'CLEAR'

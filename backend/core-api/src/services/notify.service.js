@@ -1,6 +1,6 @@
-const https = require('https');
-const { URL } = require('url');
-const webhooksRepo = require('../repositories/webhooks.repo');
+import https from 'https';
+import { URL } from 'url';
+import * as webhooksRepo from '../repositories/webhooks.repo.js';
 
 function postJson(urlStr, body) {
     const url = new URL(urlStr);
@@ -29,8 +29,7 @@ function postJson(urlStr, body) {
     });
 }
 
-// Accepts { channel, content?, embed? } and fans out to matching webhooks.
-async function emit(payload) {
+export async function emit(payload) {
     const { channel } = payload || {};
     if (!channel) throw new Error('channel required');
 
@@ -40,18 +39,15 @@ async function emit(payload) {
     if (payload.content) body.content = String(payload.content).slice(0, 1900);
     if (payload.embed) body.embeds = [payload.embed];
 
-    // queue all and try immediate delivery
     const ids = [];
     for (const h of targets) {
         const id = await webhooksRepo.createEvent(h.id, 'srp.notify', payload);
         ids.push(id);
-        // fire and forget immediate attempt
-        postJson(h.url, body).then(
-            () => webhooksRepo.markDelivered(id),
-            (err) => webhooksRepo.markFailed(id, err.message || String(err))
-        );
+        postJson(h.url, body)
+            .then(() => webhooksRepo.markDelivered(id))
+            .catch((err) => webhooksRepo.markFailed(id, err.message || String(err)));
     }
-    return { enqueued: ids.length };
+    return { ok: true, enqueued: ids.length };
 }
 
-module.exports = { emit };
+export default { emit }

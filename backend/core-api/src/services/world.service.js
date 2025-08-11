@@ -1,29 +1,25 @@
-const config = require('./config.service');
+import * as config from './config.service.js';
 
-async function getTime() {
+export async function getTime() {
     const live = await config.getLive();
     return live.Time || {};
 }
 
-async function setTimeOverride(hhmm) {
+export async function setTimeOverride(hhmm) {
     if (!/^\d{1,2}:\d{2}$/.test(hhmm)) throw new Error('Bad time format HH:MM');
-    const patch = { Time: { override: hhmm } };
-    return config.patchLive(patch);
+    const merged = await config.patchLive({ Time: { override: hhmm } });
+    return merged.Time || {};
 }
 
-async function getWeather() {
+export async function getWeather() {
     const live = await config.getLive();
     return live.Weather || {};
 }
 
-async function setWeather(type) {
-    const patch = { Weather: { current: { type } } };
-    return config.patchLive(patch);
+export async function setWeather(type) {
+    if (!type || typeof type !== 'string') throw new Error('type required');
+    const merged = await config.patchLive({ Weather: { current: { type } } });
+    return merged.Weather || {};
 }
 
-module.exports = {
-    getTime,
-    setTimeOverride,
-    getWeather,
-    setWeather,
-};
+export default { getTime, setTimeOverride, getWeather, setWeather };

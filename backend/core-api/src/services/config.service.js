@@ -1,28 +1,25 @@
-const repo = require('../repositories/config.repo');
+import * as repo from '../repositories/config.repo.js';
 
-async function getLive() {
+function isObject(o) { return typeof o === 'object' && o !== null && !Array.isArray(o); }
+
+export async function getLive() {
     const cfg = await repo.getLiveConfig();
     return cfg || {};
 }
 
-async function patchLive(patch) {
-    // minimal validation – real app should zod/joi this
-    if (typeof patch !== 'object' || !patch) throw new Error('Invalid payload');
+export async function patchLive(patch) {
+    if (!isObject(patch)) throw new Error('Invalid payload');
     const merged = await repo.patchLiveConfig(patch);
     return merged;
 }
 
-async function setFeatureFlag(name, enabled) {
+export async function setFeatureFlag(name, enabled) {
+    if (!name || typeof name !== 'string') throw new Error('name required');
     return repo.setFlag(name, !!enabled);
 }
 
-async function listFeatureFlags() {
+export async function listFeatureFlags() {
     return repo.listFlags();
 }
 
-module.exports = {
-    getLive,
-    patchLive,
-    setFeatureFlag,
-    listFeatureFlags,
-};
+export default { getLive, patchLive, setFeatureFlag, listFeatureFlags };

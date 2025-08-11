@@ -47,17 +47,39 @@ SRP_Config = {
   }
 }
 
--- ConVar overrides at boot (backend may overwrite at runtime)
+-- ConVar helper (reads server.cfg convars)
 local function convarOr(default, name)
   local v = GetConvar(name, '')
   return (v ~= '' and v) or default
 end
 
+-- Prefer srp_* convars; fall back to vss_* if present; final default points at 3301
+local apiUrl =
+  GetConvar('srp_api_url', '') ~= '' and GetConvar('srp_api_url', '') or
+  GetConvar('vss_api_url', '') ~= '' and GetConvar('vss_api_url', '') or
+  'http://127.0.0.1:3301'
+
+local apiToken =
+  GetConvar('srp_api_token', '') ~= '' and GetConvar('srp_api_token', '') or
+  GetConvar('vss_api_token', '') ~= '' and GetConvar('vss_api_token', '') or
+  'CHANGE_ME'
+
 SRP_API = {
-  url   = convarOr('http://127.0.0.1:3100', 'vss_api_url'),
-  token = convarOr('CHANGE_ME', 'vss_api_token')
+  url   = apiUrl,
+  token = apiToken
 }
 
+-- Optional overrides at boot (backend may overwrite at runtime)
 SRP_Config.Time.timezone = convarOr(SRP_Config.Time.timezone, 'srp_tz')
-SRP_Config.Time.realistic = GetConvar('srp_time_mode', 'realistic') == 'realistic'
-SRP_Config.Weather.mode   = convarOr(SRP_Config.Weather.mode, 'srp_weather_mode')
+
+-- Time mode: 'realistic' | 'scripted'
+do
+  local tm = GetConvar('srp_time_mode', '')
+  if tm ~= '' then SRP_Config.Time.realistic = (tm == 'realistic') end
+end
+
+-- Weather mode: 'scripted' | 'provider'
+do
+  local wm = GetConvar('srp_weather_mode', '')
+  if wm ~= '' then SRP_Config.Weather.mode = wm end
+end

@@ -1,35 +1,39 @@
-const express = require('express');
-const router = express.Router();
+import { Router } from 'express';
+import hmacVerify from '../middleware/hmacVerify.js';
+import * as configSvc from '../services/config.service.js';
 
-const hmacVerify = require('../middleware/hmacVerify');
-const configSvc = require('../services/config.service');
+const router = Router();
 
-// Game server calls these with HMAC; admin console can later use JWT scopes.
+// Game server calls with HMAC
 router.get('/live', hmacVerify(), async (req, res) => {
     const cfg = await configSvc.getLive();
-    res.json(cfg);
+    res.json(cfg); // base expects raw snapshot (not wrapped)
 });
 
 router.patch('/live', hmacVerify(), async (req, res) => {
     try {
         const merged = await configSvc.patchLive(req.body || {});
-        // In the future we can push an inbox event to game here.
-        res.json(merged);
+        res.json(merged); // base expects merged snapshot back
     } catch (e) {
-        res.status(400).json({ error: e.message });
+        res.status(400).json({ ok: false, error: { code: 'BAD_REQUEST', message: e.message } });
     }
 });
 
-// Optional: feature flags endpoints (for admin later)
+// Optional: feature flags (admin console can later use JWT)
 router.get('/flags', hmacVerify(), async (req, res) => {
-    res.json(await configSvc.listFeatureFlags());
+    const rows = await configSvc.listFeatureFlags();
+    res.json({ ok: true, flags: rows });
 });
 
 router.post('/flags', hmacVerify(), async (req, res) => {
-    const { name, enabled } = req.body || {};
-    if (!name) return res.status(400).json({ error: 'name required' });
-    const row = await configSvc.setFeatureFlag(name, !!enabled);
-    res.json(row);
+    try {
+        const { name, enabled } = req.body || {};
+        if (!name) return res.status(400).json({ ok: false, error: { code: 'NAME_REQUIRED', message: 'name required' } });
+        const row = await configSvc.setFeatureFlag(name, !!enabled);
+        res.json({ ok: true, flag: row });
+    } catch (e) {
+        res.status(400).json({ ok: false, error: { code: 'BAD_REQUEST', message: e.message } });
+    }
 });
 
-module.exports = router;
+export default router;
