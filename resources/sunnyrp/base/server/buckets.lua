@@ -1,44 +1,48 @@
-SRP_Buckets = {}
+-- srp_base: server/buckets.lua
+-- Central routing-bucket helpers and conventions.
+-- Buckets Config comes from SRP_Config.Buckets (config.lua)
 
-local BUCKET = SRP_CONST.BUCKET
+SRP_Buckets = SRP_Buckets or {}
 
-local function setBucket(src, id)
-  SetPlayerRoutingBucket(src, id)
-  return id
+local function cfg()
+  return SRP_Config and SRP_Config.Buckets or {
+    loading = 1, main = 2, charStart = 10001, charCount = 1000, adminStart = 50001
+  }
 end
 
-function SRP_Buckets.AssignLoading(src)
-  return setBucket(src, SRP_Config.Buckets.loading or BUCKET.LOADING)
-end
-
-function SRP_Buckets.AssignMain(src)
-  return setBucket(src, SRP_Config.Buckets.main or BUCKET.MAIN)
-end
-
-local start  = SRP_Config.Buckets.charStart or BUCKET.CHAR_START
-local count  = SRP_Config.Buckets.charCount or BUCKET.CHAR_COUNT
-local finish = start + count - 1
-local allocated = {}
-
-function SRP_Buckets.AssignCharCreate(src)
-  for id = start, finish do
-    if not allocated[id] then
-      allocated[id] = src
-      return setBucket(src, id)
-    end
-  end
-  return setBucket(src, SRP_Config.Buckets.main or BUCKET.MAIN)
-end
-
-function SRP_Buckets.Free(src)
-  for id,owner in pairs(allocated) do
-    if owner == src then allocated[id] = nil end
+local function setBucket(src, bucket)
+  SetPlayerRoutingBucket(src, bucket)
+  -- Optional: reflect in statebag
+  local ped = GetPlayerPed(src)
+  if ped and ped ~= 0 then
+    Entity(ped).state:set('srp:bucket', bucket, true)
   end
 end
 
-function SRP_Buckets.AssignAdmin(src, tag)
-  local id = (SRP_Config.Buckets.adminStart or BUCKET.ADMIN_START) + (src % 1000)
-  return setBucket(src, id)
+function SRP_Buckets.ToLoading(src)
+  setBucket(src, cfg().loading)
 end
 
+function SRP_Buckets.ToMain(src)
+  setBucket(src, cfg().main)
+end
+
+-- Deterministic per-character bucket: base + (charId % charCount)
+function SRP_Buckets.ToCharacter(src, charId)
+  local C = cfg()
+  local offset = (tonumber(charId) or 0) % (C.charCount or 1000)
+  setBucket(src, (C.charStart or 10001) + offset)
+end
+
+-- Simple admin bucket grouping: adminStart + small index
+function SRP_Buckets.ToAdmin(src, groupIndex)
+  local base = cfg().adminStart or 50001
+  setBucket(src, base + (tonumber(groupIndex) or 0))
+end
+
+-- Export helpers
 exports('SetBucket', setBucket)
+exports('ToLoading', SRP_Buckets.ToLoading)
+exports('ToMain', SRP_Buckets.ToMain)
+exports('ToCharacter', SRP_Buckets.ToCharacter)
+exports('ToAdmin', SRP_Buckets.ToAdmin)

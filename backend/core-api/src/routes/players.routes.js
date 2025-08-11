@@ -1,24 +1,30 @@
+// players.routes.js
 import { Router } from 'express';
-import authToken from '../middleware/authToken.js';
-import { linkPlayer, getPlayer } from '../services/players.service.js';
+import { link as linkSvc } from '../services/players.service.js';
+import eitherAuth from '../middleware/eitherAuth.js'; // HMAC or API token (server-only)
 
 const router = Router();
 
-// POST /players/link
-router.post('/players/link', authToken(true), async (req, res, next) => {
+/**
+ * POST /players/link
+ * Body: { name?: string, identifiers: { [type]: value }, primary?: string, meta?: object }
+ * Returns: { ok, playerId, banned, banReason, verified, whitelisted, scopes }
+ *
+ * Security: server-only (FiveM), enforced by HMAC/auth middlewares configured in bootstrap.
+ */
+router.post('/players/link', eitherAuth(), async (req, res) => {
     try {
-        const { identifiers = {}, primary = 'license', ip = null } = req.body || {};
-        const result = await linkPlayer({ identifiers, primary, ip });
-        res.json({ ok: true, data: result });
-    } catch (e) { next(e); }
-});
+        const { name, identifiers, primary, meta } = req.body || {};
+        if (!identifiers || typeof identifiers !== 'object') {
+            return res.status(400).json({ ok: false, error: { code: 'BAD_REQUEST', message: 'identifiers required' } });
+        }
 
-// GET /players/:userId
-router.get('/players/:userId', authToken(true), async (req, res, next) => {
-    try {
-        const data = await getPlayer(Number(req.params.userId));
-        res.json({ ok: true, data });
-    } catch (e) { next(e); }
+        const result = await linkSvc({ name, identifiers, primary, meta });
+        return res.json({ ok: true, ...result });
+    } catch (err) {
+        const message = err?.message || 'link_failed';
+        return res.status(500).json({ ok: false, error: { code: 'LINK_FAILED', message } });
+    }
 });
 
 export default router;

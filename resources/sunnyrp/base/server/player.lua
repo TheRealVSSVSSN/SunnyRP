@@ -1,4 +1,6 @@
+-- srp_base: server/player.lua
 -- Player module export: getModule('Player') NP-style, backed by Core-API (expanded)
+
 local Player = {}
 local cache = {}  -- src -> { playerId, identifiers, verified, scopes, vars = {}, char = {...}, accounts = {...}, job = {...} }
 local TTL = { accounts = 10000, job = 10000 } -- ms
@@ -21,17 +23,20 @@ end
 
 -- Link or create player in backend, cache minimal record
 function Player.Link(src, displayName)
-  local idents = collectIdentifiers(src)
+  cache[src] = cache[src] or { vars = {} }
+  cache[src].identifiers = collectIdentifiers(src)
+
   local res = SRP_HTTP.Fetch('POST', '/players/link', {
     name = displayName or ('player:%d'):format(src),
-    identifiers = idents,
+    identifiers = cache[src].identifiers,
   }, { retries = 1, timeout = 8000 })
-  if not res.ok then return nil, (res.message or res.error or 'link_failed') end
+
+  if not res.ok then
+    return nil, (res.message or res.error or 'link_failed')
+  end
 
   local data = res.data or {}
-  cache[src] = cache[src] or { vars = {} }
   cache[src].playerId = data.playerId or data.id or data.player_id
-  cache[src].identifiers = idents
   cache[src].verified = (data.verified == true)
   cache[src].scopes = data.scopes or cache[src].scopes or {}
   return cache[src]
@@ -40,7 +45,9 @@ end
 function Player.RefreshPerms(src, playerId)
   SRP_Perms.refreshFor(src, playerId)
   local entry = cache[src]
-  if entry then entry.scopes = (SRP_Perms.cache[src] and SRP_Perms.cache[src].scopes) or entry.scopes end
+  if entry then
+    entry.scopes = (SRP_Perms.cache[src] and SRP_Perms.cache[src].scopes) or entry.scopes or {}
+  end
 end
 
 -- Characters: Base does not own selection; expose setters so Characters resource can update us
@@ -57,7 +64,6 @@ function Player._touchAccounts(src, force)
   c._accT = c._accT or 0
   if not force and (GetGameTimer() - c._accT) < TTL.accounts then return end
   local res = SRP_HTTP.Fetch('GET', ('/inventory/%s'):format(c.char.id), nil, { retries = 1, timeout = 6000 })
-  -- NOTE: your backend likely has a dedicated accounts endpoint; adjust path as needed.
   local acct = { cash = 0, bank = 0 }
   if res.ok and res.data and res.data.accounts then
     acct.cash = tonumber(res.data.accounts.cash or 0) or 0
