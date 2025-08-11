@@ -22,6 +22,8 @@ import shopsRoutes from './routes/shops.routes.js';
 import crimeRoutes from './routes/crime.routes.js';
 import phoneRoutes from './routes/phone.routes.js';
 import telemetryRoutes from './routes/telemetry.routes.js';
+import outboxRoutes from './routes/outbox.routes.js';
+
 
 export function makeApp() {
     const app = express();
@@ -62,6 +64,8 @@ export function makeApp() {
     app.use(phoneRoutes);
 
     app.use(telemetryRoutes);
+
+    app.use(outboxRoutes);
 
     app.use((req, res) => res.status(404).json({ ok: false, error: { code: 'NOT_FOUND', message: 'No route' } }));
     app.use(errorHandler);
