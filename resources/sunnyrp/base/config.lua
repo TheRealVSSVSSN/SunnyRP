@@ -7,6 +7,22 @@ SRP_Config = {
     illness = false,
     disabilities = false
   },
+  Registration = {
+    enabled = true,              -- base honors registration state (verification) during deferrals
+    requireVerified = true,      -- if true, block join until verified
+    steps = {                    -- future: external resource can flip these live via ConfigPatch
+      phone = true,              -- real phone verification
+      email = false,
+      discord = true,
+      ageGate = true,
+      tos = true,
+      captcha = true
+    },
+    webBaseUrl = 'https://example.com/register',  -- shown in deferrals text if not verified
+    pollIntervalMs = 2000,       -- how often base polls backend for verified status
+    maxWaitMs = 300000,          -- max time to wait in deferrals (5 min)
+    allowJoinIfUnverified = false -- emergency override
+  },
   Death = {
     autoRespawn = false,
     allowPlayerChoice = true,
@@ -43,7 +59,8 @@ SRP_Config = {
   },
   Dev = {
     fakeBackend = false,
-    debug = false
+    debug = false,
+    exposeRPCGlobal = true       -- NP-style: sets global RPC table for compat
   }
 }
 
@@ -53,7 +70,7 @@ local function convarOr(default, name)
   return (v ~= '' and v) or default
 end
 
--- Prefer srp_* convars; fall back to vss_* if present; final default points at 3301
+-- Prefer srp_* convars; fall back to vss_*; final default points to 3301 (your server.cfg)
 local apiUrl =
   GetConvar('srp_api_url', '') ~= '' and GetConvar('srp_api_url', '') or
   GetConvar('vss_api_url', '') ~= '' and GetConvar('vss_api_url', '') or
@@ -82,4 +99,10 @@ end
 do
   local wm = GetConvar('srp_weather_mode', '')
   if wm ~= '' then SRP_Config.Weather.mode = wm end
+end
+
+-- Optional: registration web URL override from convar
+do
+  local ru = GetConvar('srp_reg_url', '')
+  if ru ~= '' then SRP_Config.Registration.webBaseUrl = ru end
 end

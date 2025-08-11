@@ -19,17 +19,20 @@ import inventoryRoutes from '../routes/inventory.routes.js';
 import economyRoutes from '../routes/economy.routes.js';
 import vehiclesRoutes from '../routes/vehicles.routes.js';
 import jobsRoutes from '../routes/jobs.routes.js';
-import businessesRoutes from '../routes/businesses.routes.js'; // fixed path
-import shopsRoutes from '../routes/shops.routes.js';           // fixed path
+import businessesRoutes from '../routes/businesses.routes.js';
+import shopsRoutes from '../routes/shops.routes.js';
 import crimeRoutes from '../routes/crime.routes.js';
 import phoneRoutes from '../routes/phone.routes.js';
 import telemetryRoutes from '../routes/telemetry.routes.js';
 import outboxRoutes from '../routes/outbox.routes.js';
 
-// NEW routes
+// NEW routes we added earlier
 import configRoutes from '../routes/config.routes.js';
 import worldRoutes from '../routes/world.routes.js';
 import notifyRoutes from '../routes/notify.routes.js';
+
+// NEW: Registration routes (status + verify)
+import registrationRoutes from '../routes/registration.routes.js';
 
 export function makeApp() {
     const app = express();
@@ -58,32 +61,27 @@ export function makeApp() {
     app.use(playersRoutes);
     app.use(permissionsRoutes);
     app.use(adminRoutes);
-
     app.use(charactersRoutes);
-
     app.use(mapRoutes);
     app.use(chatRoutes);
     app.use(statusRoutes);
-
     app.use(itemsRoutes);
     app.use(inventoryRoutes);
-
     app.use(economyRoutes);
     app.use(vehiclesRoutes);
     app.use(jobsRoutes);
-
     app.use(businessesRoutes);
     app.use(shopsRoutes);
-
     app.use(crimeRoutes);
     app.use(phoneRoutes);
     app.use(telemetryRoutes);
     app.use(outboxRoutes);
 
-    // NEW: live config, world state, and notify/Discord endpoints
+    // New platform routes
     app.use('/config', configRoutes);
     app.use('/world', worldRoutes);
     app.use('/notify', notifyRoutes);
+    app.use('/registration', registrationRoutes);
 
     // 404 + error handler
     app.use((req, res) =>

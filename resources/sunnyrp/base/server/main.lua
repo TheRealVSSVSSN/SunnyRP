@@ -1,17 +1,14 @@
 print('^2[SRP]^7 Base server booting...')
 
+-- Use deferral orchestrator so we’re ready for registration gating
 AddEventHandler('playerConnecting', function(name, setKickReason, deferrals)
-  deferrals.defer()
   local src = source
-  deferrals.update('Checking permissions...')
-  -- TODO: replace "player:src" with your real identifier mapping when Identity is wired
   SRP_Utils.try(function()
-    SRP_Perms.refreshFor(src, ('player:%d'):format(src))
+    SRP_Deferrals.handle(src, name, setKickReason, deferrals)
   end)
-  deferrals.update('Welcome to Sunny Roleplay!')
-  deferrals.done()
 end)
 
+-- After join: buckets + HUD seed + signal character selection (other resource)
 AddEventHandler('playerJoining', function()
   local src = source
   SRP_Utils.try(function()

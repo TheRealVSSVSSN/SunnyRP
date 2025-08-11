@@ -5,7 +5,7 @@ lua54 'yes'
 name 'srp_base'
 description 'SunnyRP Base — server-authoritative spine, live-config, buckets, RP defaults'
 author 'SunnyRP'
-version '2.1.0'
+version '2.2.0'
 
 ui_page 'html/index.html'
 
@@ -22,6 +22,7 @@ shared_scripts {
 }
 
 client_scripts {
+  'client/rpc.lua',
   'client/main.lua',
   'client/time_weather.lua',
   'client/ipls.lua'
@@ -29,6 +30,8 @@ client_scripts {
 
 server_scripts {
   'server/http.lua',
+  'server/rpc.lua',
+  'server/player.lua',
   'server/permissions.lua',
   'server/state.lua',
   'server/buckets.lua',
@@ -39,6 +42,7 @@ server_scripts {
   'server/outbox.lua',
   'server/telemetry.lua',
   'server/devtools.lua',
+  'server/deferrals.lua',
   'server/main.lua'
 }
 
