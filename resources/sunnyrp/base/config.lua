@@ -1,28 +1,63 @@
-SRP = SRP or {}
-
-SRP.Config = {
-  ApiUrl = GetConvar('srp_api_url', 'http://127.0.0.1:3301'),
-  ApiToken = GetConvar('srp_api_token', 'changeme_please'),
-  FeaturesCsv = GetConvar('srp_features', 'players,characters,inventory'),
-  PrimaryIdentifier = GetConvar('srp_primary_identifier', 'license'),
-  RequiredIdentifiersCsv = GetConvar('srp_required_identifiers', 'license,discord'),
-  HttpTimeoutMs = tonumber(GetConvar('srp_http_timeout_ms', '5000')) or 5000,
-  HttpRetries = tonumber(GetConvar('srp_http_retries', '3')) or 3,
-  LogLevel = GetConvar('srp_log_level', 'info')
+-- Live config defaults (backend can override later via /config/live)
+SRP_Config = {
+  Features = {
+    police = false,
+    ems = false,
+    doc = false,
+    illness = false,
+    disabilities = false
+  },
+  Death = {
+    autoRespawn = false,
+    allowPlayerChoice = true,
+    minBleedoutSec = 300,
+    maxBleedoutSec = 900
+  },
+  Time = {
+    realistic = true,
+    timezone = 'America/Phoenix',
+    syncHz = 1
+  },
+  Weather = {
+    mode = 'scripted',           -- 'scripted' | 'provider'
+    syncIntervalSec = 60,
+    current = { type = 'CLEAR', wind = 0.0 }
+  },
+  Buckets = {
+    loading = 1,
+    main = 2,
+    charStart = 10001,
+    charCount = 1000,
+    adminStart = 50001
+  },
+  QoL = {
+    holdToSpeak = true,
+    showCompass = true,
+    streetDisplay = 'name',      -- 'none' | 'name' | 'name+zone'
+    hudRateHz = 6,
+    densityScale = 0.8
+  },
+  AntiCheat = {
+    maxSpeedKmh = 280,
+    maxTeleportMeters = 120
+  },
+  Dev = {
+    fakeBackend = false,
+    debug = false
+  }
 }
 
-local function splitCsv(v)
-  local out = {}
-  for s in string.gmatch(v or '', '([^,]+)') do out[#out+1] = (s:gsub('^%s*(.-)%s*$', '%1')) end
-  return out
+-- ConVar overrides at boot (backend may overwrite at runtime)
+local function convarOr(default, name)
+  local v = GetConvar(name, '')
+  return (v ~= '' and v) or default
 end
 
-SRP.Features = SRP.Features or {}
-SRP.Features._set = {}
-for _, name in ipairs(splitCsv(SRP.Config.FeaturesCsv)) do
-  SRP.Features._set[name] = true
-end
+SRP_API = {
+  url   = convarOr('http://127.0.0.1:3100', 'vss_api_url'),
+  token = convarOr('CHANGE_ME', 'vss_api_token')
+}
 
-function SRP.Features.IsEnabled(name)
-  return SRP.Features._set[name] == true
-end
+SRP_Config.Time.timezone = convarOr(SRP_Config.Time.timezone, 'srp_tz')
+SRP_Config.Time.realistic = GetConvar('srp_time_mode', 'realistic') == 'realistic'
+SRP_Config.Weather.mode   = convarOr(SRP_Config.Weather.mode, 'srp_weather_mode')

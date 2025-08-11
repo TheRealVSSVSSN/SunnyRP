@@ -1,27 +1,31 @@
-SRP = SRP or {}
+SRP_Utils = SRP_Utils or {}
 
-local json = json or {}
+function SRP_Utils.tableMerge(dst, src)
+  if type(dst) ~= 'table' then dst = {} end
+  if type(src) ~= 'table' then return dst end
+  for k,v in pairs(src) do dst[k] = v end
+  return dst
+end
 
-function SRP._log(level, msg, data)
-  if data ~= nil then
-    print(('[SRP][%s] %s | %s'):format(level, msg, json.encode(data)))
-  else
-    print(('[SRP][%s] %s'):format(level, msg))
+function SRP_Utils.deepMerge(dst, src)
+  if type(dst) ~= 'table' then dst = {} end
+  if type(src) ~= 'table' then return dst end
+  for k, v in pairs(src) do
+    if type(v) == 'table' and type(dst[k]) == 'table' then
+      SRP_Utils.deepMerge(dst[k], v)
+    else
+      dst[k] = v
+    end
   end
+  return dst
 end
 
-function SRP.Info(msg, data) SRP._log('INFO', msg, data) end
-function SRP.Warn(msg, data) SRP._log('WARN', msg, data) end
-function SRP.Error(msg, data) SRP._log('ERROR', msg, data) end
-
-function SRP.TableClone(tbl)
-  local t = {}; for k,v in pairs(tbl or {}) do t[k] = v end; return t
+function SRP_Utils.round(n, dp)
+  local m = 10^(dp or 0)
+  return math.floor(n * m + 0.5) / m
 end
 
-function SRP.GenerateUUID()
-  local template ='xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
-  return string.gsub(template, '[xy]', function (c)
-      local v = (c == 'x') and math.random(0, 0xf) or math.random(8, 0xb)
-      return string.format('%x', v)
-  end)
+function SRP_Utils.try(cb)
+  local ok, err = pcall(cb)
+  if not ok then print(('^1[SRP][ERR]^7 %s'):format(err)) end
 end
