@@ -1,57 +1,51 @@
 fx_version 'cerulean'
 game 'gta5'
-lua54 'yes'
 
-name 'srp_base'
-description 'SunnyRP Base — server-authoritative spine, live-config, buckets, RP defaults + zones/keybinds/taskbar/errorlog'
+name 'sunnyrp-base'
 author 'SunnyRP'
-version '2.3.0'
+description 'Sunny Roleplay Base Framework (server-authoritative)'
+version '0.2.0'
+
+lua54 'yes'
 
 ui_page 'html/index.html'
 
 files {
   'html/index.html',
   'html/app.js',
-  'html/style.css'
+  'html/style.css',
 }
 
 shared_scripts {
+  'config.lua',
   'shared/utils.lua',
-  'shared/constants.lua',
-  'shared/zones.lua',
-  'config.lua'
 }
 
 client_scripts {
-  'client/rpc.lua',
-  'client/keybinds.lua',
-  'client/taskbar.lua',
-  'client/errorlog.lua',
-  'client/world.lua',
   'client/main.lua',
-  'client/time_weather.lua',
-  'client/ipls.lua'
 }
 
 server_scripts {
-  'server/http.lua',
-  'server/rpc.lua',
-  'server/player.lua',
-  'server/keybinds.lua',
-  'server/world.lua',
-  'server/errorlog.lua',
-  'server/permissions.lua',
-  'server/state.lua',
   'server/buckets.lua',
-  'server/config_bus.lua',
+  'server/permissions.lua',
+  'server/player.lua',
+  'server/guard.lua',
   'server/commands.lua',
-  'server/config_live.lua',
-  'server/inbox.lua',
-  'server/outbox.lua',
-  'server/telemetry.lua',
-  'server/devtools.lua',
   'server/deferrals.lua',
-  'server/main.lua'
+  'server/main.lua',
+}
+
+server_exports {
+  'getModule',          -- from player.lua (NP-style)
+  'HasScope',           -- from permissions.lua
+  'RefreshPerms',       -- from permissions.lua
+  'SetBucket',          -- from buckets.lua
+  'ToLoading',          -- from buckets.lua
+  'ToMain',             -- from buckets.lua
+  'ToCharacter',        -- from buckets.lua
+  'ToAdmin',            -- from buckets.lua
+  'RegisterCommandEx',  -- from commands.lua
+  'GuardNetEvent',      -- from guard.lua
 }
 
 dependencies {

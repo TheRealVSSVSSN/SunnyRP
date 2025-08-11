@@ -1,27 +1,19 @@
 -- srp_base: server/player.lua
--- Player module export: getModule('Player') NP-style, backed by Core-API (expanded)
 
 local Player = {}
-local cache = {}  -- src -> { playerId, identifiers, verified, scopes, vars = {}, char = {...}, accounts = {...}, job = {...} }
-local TTL = { accounts = 10000, job = 10000 } -- ms
+local cache = {}
+local TTL = { accounts = 10000, job = 10000 }
 
 local function collectIdentifiers(src)
   local ids = GetPlayerIdentifiers(src)
   local out = { ip = GetPlayerEndpoint(src) or '' }
   for _,v in ipairs(ids) do
     local k, val = v:match('([^:]+):(.*)')
-    if k and val then
-      if k == 'license' then out.license = val
-      elseif k == 'steam' then out.steam = val
-      elseif k == 'discord' then out.discord = val
-      elseif k == 'fivem' then out.fivem = val
-      else out[k] = val end
-    end
+    if k and val then out[k] = val end
   end
   return out
 end
 
--- Link or create player in backend, cache minimal record
 function Player.Link(src, displayName)
   cache[src] = cache[src] or { vars = {} }
   cache[src].identifiers = collectIdentifiers(src)
@@ -50,15 +42,13 @@ function Player.RefreshPerms(src, playerId)
   end
 end
 
--- Characters: Base does not own selection; expose setters so Characters resource can update us
 function Player.SetCurrentCharacter(src, char)
   cache[src] = cache[src] or { vars = {} }
-  cache[src].char = char -- expect { id, firstName, lastName, gender, dob, ... }
+  cache[src].char = char
   Player._touchAccounts(src, true)
   Player._touchJob(src, true)
 end
 
--- Read-through caches ---------------------------------------------------------
 function Player._touchAccounts(src, force)
   local c = cache[src]; if not c or not (c.char and c.char.id) then return end
   c._accT = c._accT or 0
@@ -88,10 +78,9 @@ function Player._touchJob(src, force)
   c._jobT = GetGameTimer()
 end
 
--- Public getters --------------------------------------------------------------
 function Player.GetUser(src) return cache[src] end
 function Player.GetIdentifiers(src) return (cache[src] and cache[src].identifiers) or collectIdentifiers(src) end
-function Player.HasScope(src, scope) return exports['srp_base']:HasScope(src, scope) end
+function Player.HasScope(src, scope) return exports['sunnyrp-base']:HasScope(src, scope) end
 
 function Player.GetVar(src, key)
   local entry = cache[src] or {}
@@ -110,14 +99,11 @@ function Player.getBank(src) Player._touchAccounts(src, false); return (cache[sr
 function Player.getJob(src)  Player._touchJob(src, false); return (cache[src] and cache[src].job) or { name='unemployed', grade=0, duty=false } end
 function Player.getDuty(src) local j = Player.getJob(src); return j and j.duty or false end
 
--- cleanup
 AddEventHandler('playerDropped', function() cache[source] = nil end)
 
--- NP-style module export
 local modules = { Player = Player }
 exports('getModule', function(name) return modules[name] end)
 
--- Back-compat helpers
 exports('GetPlayer', Player.GetUser)
 exports('GetIdentifiers', Player.GetIdentifiers)
 exports('SetCurrentCharacter', Player.SetCurrentCharacter)

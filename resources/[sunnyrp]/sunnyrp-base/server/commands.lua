@@ -1,73 +1,89 @@
-local function hasScope(src, scope) return exports['srp_base']:HasScope(src, scope) end
-local function guard(src, scope)
-  if src <= 0 then return true end
-  if not hasScope(src, scope) then
-    TriggerClientEvent('chat:addMessage', src, { args = {'SRP', '^1No permission.'} })
+-- srp_base: server/commands.lua
+-- RegisterCommandEx(name, opts, handler)
+-- opts = { description, scopes, anyScope, cooldownMs, argsHint, restricted=true }
+
+local COMMANDS = {}
+local COOLDOWN = {}  -- src -> name -> lastMs
+
+local function now() return GetGameTimer() end
+
+local function canUse(src, scopes, anyScope)
+  if not scopes or #scopes == 0 then return true end
+  if anyScope then
+    for _,s in ipairs(scopes) do if SRP_Perms.hasScope(src, s) then return true end end
     return false
+  else
+    for _,s in ipairs(scopes) do if not SRP_Perms.hasScope(src, s) then return false end end
+    return true
   end
+end
+
+local function checkCooldown(src, name, ms)
+  if not ms or ms <= 0 then return true end
+  COOLDOWN[src] = COOLDOWN[src] or {}
+  local last = COOLDOWN[src][name] or 0
+  local t = now()
+  if (t - last) < ms then return false end
+  COOLDOWN[src][name] = t
   return true
 end
 
--- /srpflags set <A.B.C> <on|off>
-RegisterCommand('srpflags', function(src, args)
-  if not guard(src, SRP_CONST.SCOPES.ADMIN_FLAGS) then return end
-  local action, path, onoff = args[1], args[2], args[3]
-  if action ~= 'set' or not path or not onoff then
-    TriggerClientEvent('chat:addMessage', src, { args={'SRP', 'Usage: /srpflags set <path> <on|off>'} })
-    return
-  end
-  local value = (onoff == 'on')
-  local patch = {}
-  SRP_Utils.setByPath(patch, path, value)
-  local ok = select(1, exports['srp_base']:ConfigPatch(patch))
-  if ok then
-    TriggerClientEvent('chat:addMessage', src, { args={'SRP', 'Live config updated.'} })
+local function msg(src, text)
+  if GetResourceState('chat') ~= 'missing' then
+    TriggerClientEvent('chat:addMessage', src, { args = { '^3SRP', text } })
   else
-    TriggerClientEvent('chat:addMessage', src, { args={'SRP', '^1Update failed.'} })
+    -- fallback
+    print(('[SRP:CMD][%s] %s'):format(tostring(src), text))
   end
-end, false)
+end
 
--- /bucket [id?] [loading|main|char|admin]
-RegisterCommand('bucket', function(src, args)
-  if not guard(src, SRP_CONST.SCOPES.ADMIN_BUCKET) then return end
-  local target = tonumber(args[1]) or src
-  local mode = (args[2] or 'main'):lower()
-  if mode == 'loading' then
-    exports['srp_base']:SetBucket(target, SRP_Config.Buckets.loading)
-  elseif mode == 'char' then
-    SRP_Buckets.AssignCharCreate(target)
-  elseif mode == 'admin' then
-    SRP_Buckets.AssignAdmin(target, 'manual')
-  else
-    SRP_Buckets.AssignMain(target)
+function RegisterCommandEx(name, opts, handler)
+  if COMMANDS[name] then
+    print(('[SRP:CMD] Command "%s" already registered; overwriting.'):format(name))
   end
-  TriggerClientEvent('chat:addMessage', src, { args={'SRP', ('Moved %s to %s'):format(target, mode)} })
-end, false)
+  local cfg = {
+    description = (opts and opts.description) or 'no description',
+    scopes      = (opts and opts.scopes) or nil,
+    anyScope    = (opts and opts.anyScope) or false,
+    cooldownMs  = (opts and opts.cooldownMs) or 1000,
+    argsHint    = (opts and opts.argsHint) or '',
+    restricted  = (opts and opts.restricted) ~= false, -- FiveM suggestion
+  }
+  COMMANDS[name] = cfg
 
--- /time HH:MM
-RegisterCommand('time', function(src, args)
-  if not guard(src, SRP_CONST.SCOPES.ADMIN_WORLD) then return end
-  local hhmm = args[1]
-  if not hhmm or not hhmm:match('^%d%d?:%d%d$') then
-    TriggerClientEvent('chat:addMessage', src, { args={'SRP', 'Usage: /time HH:MM'} })
-    return
-  end
-  local res = SRP_HTTP.Fetch('POST', '/world/time', { override = hhmm }, { retries = 1 })
-  if res.ok then
-    TriggerClientEvent('chat:addMessage', src, { args={'SRP', 'Time override set.'} })
-  else
-    TriggerClientEvent('chat:addMessage', src, { args={'SRP', '^1Failed.'} })
-  end
-end, false)
+  RegisterCommand(name, function(src, args, raw)
+    if not canUse(src, cfg.scopes, cfg.anyScope) then
+      return msg(src, 'You do not have permission.')
+    end
+    if not checkCooldown(src, name, cfg.cooldownMs) then
+      return msg(src, 'Slow down.')
+    end
 
--- /weather TYPE
-RegisterCommand('weather', function(src, args)
-  if not guard(src, SRP_CONST.SCOPES.ADMIN_WORLD) then return end
-  local w = args[1] or 'CLEAR'
-  local res = SRP_HTTP.Fetch('POST', '/world/weather', { type = w }, { retries = 1 })
-  if res.ok then
-    TriggerClientEvent('chat:addMessage', src, { args={'SRP', 'Weather set: '..w} })
-  else
-    TriggerClientEvent('chat:addMessage', src, { args={'SRP', '^1Failed.'} })
+    local ok, err = pcall(handler, src, args, raw)
+    if not ok then
+      print(('[SRP:CMD] Error in "%s" by %s: %s'):format(name, tostring(src), tostring(err)))
+      msg(src, 'Command error.')
+    end
+  end, cfg.restricted)
+
+  -- Add chat suggestion if chat is running
+  if GetResourceState('chat') ~= 'missing' then
+    TriggerEvent('chat:addSuggestion', ('/%s'):format(name), cfg.description, (cfg.argsHint ~= '' and { { name = cfg.argsHint, help = '' } } or {}))
   end
-end, false)
+end
+exports('RegisterCommandEx', RegisterCommandEx)
+
+-- Built-in /help
+RegisterCommandEx('help', {
+  description = 'List available commands',
+  scopes = nil,
+  cooldownMs = 1000,
+  restricted = false,
+}, function(src)
+  msg(src, 'Available commands:')
+  for name, cfg in pairs(COMMANDS) do
+    if canUse(src, cfg.scopes, cfg.anyScope) then
+      msg(src, ('/%s — %s'):format(name, cfg.description))
+    end
+  end
+end)
