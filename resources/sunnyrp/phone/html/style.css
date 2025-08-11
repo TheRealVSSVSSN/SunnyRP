@@ -1,0 +1,146 @@
+:root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --muted: #8b949e;
+    --text: #c9d1d9;
+    --accent: #58a6ff;
+    --ok: #3fb950;
+    --err: #f85149;
+    --border: #30363d;
+}
+
+html,
+body {
+    margin: 0;
+    height: 100%;
+    background: transparent;
+    color: var(--text);
+    font: 14px/1.4 system-ui, Segoe UI, Roboto
+}
+
+.phone {
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
+    width: 320px;
+    height: 570px;
+    border-radius: 22px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .4);
+    overflow: hidden;
+    display: none
+}
+
+.phone.show {
+    display: block
+}
+
+.statusbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background: linear-gradient(180deg, #141a23, #0d1117);
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--muted)
+}
+
+.dock {
+    display: flex;
+    gap: 8px;
+    padding: 8px;
+    border-bottom: 1px solid var(--border);
+    background: #10151e
+}
+
+.app-btn {
+    flex: 1;
+    padding: 8px;
+    border-radius: 10px;
+    background: #1b2230;
+    border: 1px solid var(--border);
+    color: var(--text);
+    cursor: pointer
+}
+
+.app-btn:hover {
+    background: #20283a
+}
+
+#screen {
+    position: absolute;
+    top: 78px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto
+}
+
+.screen {
+    display: none;
+    padding: 10px
+}
+
+.screen.active {
+    display: block
+}
+
+.row {
+    display: flex;
+    gap: 6px;
+    margin: 6px 8px
+}
+
+input,
+textarea,
+button {
+    background: #0b1320;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px
+}
+
+.list {
+    padding: 6px 8px
+}
+
+.msg {
+    padding: 6px 8px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 6px 0;
+    background: #0b1320
+}
+
+.contact {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 8px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 6px 0
+}
+
+.ad {
+    padding: 8px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 6px 0;
+    background: #0b1320
+}
+
+.close {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: #1b2230;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    color: #fff;
+    cursor: pointer
+}

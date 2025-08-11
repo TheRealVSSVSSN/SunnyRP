@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>SRP Phone</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div id="phone" class="phone">
+        <div class="statusbar">
+            <span id="p-number">•••</span>
+            <span id="p-signal">LTE</span>
+            <span id="p-battery">100%</span>
+        </div>
+
+        <div class="dock">
+            <button class="app-btn" data-app="messages">Messages</button>
+            <button class="app-btn" data-app="contacts">Contacts</button>
+            <button class="app-btn" data-app="ads">Ads</button>
+        </div>
+
+        <div id="screen">
+            <div id="loading" class="screen">Loading…</div>
+
+            <div id="app-messages" class="screen">
+                <div class="row">
+                    <input id="sms-to" placeholder="To (10 digits)" />
+                </div>
+                <div id="sms-list" class="list"></div>
+                <div class="row">
+                    <input id="sms-text" placeholder="Message… (Enter to send)" maxlength="500" />
+                </div>
+            </div>
+
+            <div id="app-contacts" class="screen">
+                <div class="row">
+                    <input id="c-name" placeholder="Name" />
+                    <input id="c-number" placeholder="Number" />
+                    <button id="c-save">Save</button>
+                </div>
+                <div id="contacts-list" class="list"></div>
+            </div>
+
+            <div id="app-ads" class="screen">
+                <div class="row">
+                    <input id="ad-title" placeholder="Ad title (short)" />
+                </div>
+                <div class="row">
+                    <textarea id="ad-body" placeholder="Describe what you're selling or looking for…"></textarea>
+                </div>
+                <div class="row">
+                    <button id="ad-post">Post Ad</button>
+                </div>
+                <div id="ads-list" class="list"></div>
+            </div>
+        </div>
+
+        <button id="btn-close" class="close">×</button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

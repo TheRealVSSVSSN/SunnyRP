@@ -20,6 +20,7 @@ import jobsRoutes from '../routes/jobs.routes.js';
 import businessesRoutes from './routes/businesses.routes.js';
 import shopsRoutes from './routes/shops.routes.js';
 import crimeRoutes from './routes/crime.routes.js';
+import phoneRoutes from './routes/phone.routes.js';
 
 export function makeApp() {
     const app = express();
@@ -56,6 +57,8 @@ export function makeApp() {
     app.use(shopsRoutes);
 
     app.use(crimeRoutes);
+
+    app.use(phoneRoutes);
 
     app.use((req, res) => res.status(404).json({ ok: false, error: { code: 'NOT_FOUND', message: 'No route' } }));
     app.use(errorHandler);
