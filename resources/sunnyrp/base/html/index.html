@@ -1,19 +1,22 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <title>SRP Base</title>
-  <link rel="stylesheet" href="style.css"/>
+  <meta charset="utf-8" />
+  <title>SunnyRP Base UI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="root">
-    <div class="card">
-      <h1>Sunny Roleplay (SRP)</h1>
-      <p id="status">NUI ready.</p>
-      <button id="pingBtn">Ping Server (NUICallback)</button>
-      <p class="hint">Press F10 to toggle focus</p>
+  <div id="root"></div>
+
+  <!-- Taskbar overlay -->
+  <div id="taskbar" class="hidden">
+    <div id="taskbar-inner">
+      <div id="taskbar-label">Working...</div>
+      <div id="taskbar-bar"><div id="taskbar-progress"></div></div>
     </div>
   </div>
+
   <script src="app.js"></script>
 </body>
 </html>

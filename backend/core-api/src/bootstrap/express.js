@@ -26,19 +26,20 @@ import phoneRoutes from '../routes/phone.routes.js';
 import telemetryRoutes from '../routes/telemetry.routes.js';
 import outboxRoutes from '../routes/outbox.routes.js';
 
-// NEW routes we added earlier
+// New platform routes we already added
 import configRoutes from '../routes/config.routes.js';
 import worldRoutes from '../routes/world.routes.js';
 import notifyRoutes from '../routes/notify.routes.js';
-
-// NEW: Registration routes (status + verify)
 import registrationRoutes from '../routes/registration.routes.js';
+
+// NEW: keybinds
+import keybindsRoutes from '../routes/keybinds.routes.js';
 
 export function makeApp() {
     const app = express();
     app.disable('x-powered-by');
 
-    // Capture rawBody for HMAC verification (must be BEFORE any routes)
+    // rawBody (HMAC)
     app.use(express.json({
         limit: '1mb',
         verify: (req, res, buf) => { req.rawBody = buf.toString('utf8'); }
@@ -57,7 +58,7 @@ export function makeApp() {
     // Health first
     app.use(healthRoutes);
 
-    // Existing feature routes
+    // Feature routes
     app.use(playersRoutes);
     app.use(permissionsRoutes);
     app.use(adminRoutes);
@@ -77,11 +78,12 @@ export function makeApp() {
     app.use(telemetryRoutes);
     app.use(outboxRoutes);
 
-    // New platform routes
+    // Platform routes
     app.use('/config', configRoutes);
     app.use('/world', worldRoutes);
     app.use('/notify', notifyRoutes);
     app.use('/registration', registrationRoutes);
+    app.use('/keybinds', keybindsRoutes);
 
     // 404 + error handler
     app.use((req, res) =>
