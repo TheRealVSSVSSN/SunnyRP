@@ -1,0 +1,95 @@
+body {
+    margin: 0;
+    background: #0d1117;
+    color: #c9d1d9;
+    font: 15px/1.4 system-ui
+}
+
+.wrap {
+    width: 920px;
+    margin: 24px auto;
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 12px;
+    padding: 16px
+}
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px
+}
+
+h2 {
+    margin: 0
+}
+
+button {
+    background: #21262d;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    color: #c9d1d9;
+    padding: 8px 10px;
+    cursor: pointer;
+    margin-right: 6px
+}
+
+button:hover {
+    background: #1f6feb
+}
+
+input {
+    background: #0b1320;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    color: #c9d1d9;
+    padding: 8px 10px
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 16px
+}
+
+.panel {
+    background: #0b1117;
+    border: 1px solid #30363d;
+    padding: 12px;
+    border-radius: 10px
+}
+
+.list {
+    max-height: 420px;
+    overflow: auto;
+    border: 1px solid #30363d;
+    border-radius: 8px
+}
+
+.row {
+    margin: 8px 0;
+    display: flex;
+    gap: 8px
+}
+
+.player {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 10px;
+    border-bottom: 1px solid #30363d;
+    cursor: pointer
+}
+
+.player:hover {
+    background: #0f1520
+}
+
+.player.active {
+    background: #1b2230
+}
+
+.status {
+    margin-top: 8px;
+    color: #8b949e
+}
