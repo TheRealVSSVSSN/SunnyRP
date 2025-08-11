@@ -1,0 +1,109 @@
+:root {
+    --bg: #0d1117;
+    --panel: #0f141a;
+    --text: #dfe6ee;
+    --muted: #8b949e;
+    --local: #d1e3ff;
+    --me: #c2f0c2;
+    --do: #ffe3a3;
+    --ooc: #f1c0e8;
+    --staff: #ffadad;
+    --accent: #58a6ff;
+    --border: #263040;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans;
+    color: var(--text);
+}
+
+.feed {
+    position: absolute;
+    left: 24px;
+    bottom: 110px;
+    width: 520px;
+    max-height: 50vh;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 8px;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.msg {
+    background: rgba(15, 20, 26, .72);
+    backdrop-filter: blur(4px);
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    max-width: 100%;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.msg .meta {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 2px;
+}
+
+.msg.local {
+    border-left: 3px solid var(--accent);
+    color: var(--local);
+}
+
+.msg.me {
+    border-left: 3px solid #3fb950;
+    color: var(--me);
+}
+
+.msg.do {
+    border-left: 3px solid #d29922;
+    color: var(--do);
+}
+
+.msg.ooc {
+    border-left: 3px solid #f778ba;
+    color: var(--ooc);
+}
+
+.msg.staff {
+    border-left: 3px solid #ff6b6b;
+    color: var(--staff);
+}
+
+.inputWrap {
+    position: absolute;
+    left: 24px;
+    bottom: 40px;
+    width: 560px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .4);
+}
+
+.hidden {
+    display: none;
+}
+
+.input {
+    width: 100%;
+    background: #0b0f14;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: var(--text);
+    outline: none;
+}
+
+.hint {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 6px;
+}

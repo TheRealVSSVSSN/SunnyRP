@@ -1,0 +1,87 @@
+:root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --text: #c9d1d9;
+    --muted: #8b949e;
+    --border: #30363d;
+    --accent: #58a6ff;
+}
+
+html,
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.5 system-ui, sans-serif;
+}
+
+#wrap {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+}
+
+.panel {
+    width: 720px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 20px;
+}
+
+h1 {
+    margin: 0 0 10px;
+}
+
+.error {
+    background: #3b0e0e;
+    border: 1px solid #6f1d1d;
+    padding: 8px 10px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+}
+
+input,
+select {
+    background: #0b0f14;
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 8px;
+    border-radius: 8px;
+}
+
+button {
+    background: var(--accent);
+    color: #041423;
+    border: 0;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.small {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.actions button {
+    margin-left: 6px;
+}

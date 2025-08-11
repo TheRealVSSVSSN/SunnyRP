@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>SRP — Character Select</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div id="wrap">
+        <div class="panel">
+            <h1>Sunny Roleplay — Characters</h1>
+            <div id="error" class="error" style="display:none"></div>
+            <div id="list"></div>
+            <div id="create">
+                <h3>Create</h3>
+                <div class="grid">
+                    <input id="fn" placeholder="First name" />
+                    <input id="ln" placeholder="Last name" />
+                    <input id="dob" placeholder="DOB (YYYY-MM-DD)" />
+                    <select id="gender">
+                        <option value="">Gender</option>
+                        <option>M</option>
+                        <option>F</option>
+                    </select>
+                </div>
+                <button id="btnCreate">Create Character</button>
+            </div>
+            <p class="small" id="slots"></p>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
