@@ -17,6 +17,8 @@ import inventoryRoutes from '../routes/inventory.routes.js';
 import economyRoutes from '../routes/economy.routes.js';
 import vehiclesRoutes from '../routes/vehicles.routes.js';
 import jobsRoutes from '../routes/jobs.routes.js';
+import businessesRoutes from './routes/businesses.routes.js';
+import shopsRoutes from './routes/shops.routes.js';
 
 export function makeApp() {
     const app = express();
@@ -44,10 +46,13 @@ export function makeApp() {
     app.use(inventoryRoutes);
 
     app.use(economyRoutes);
-    
+
     app.use(vehiclesRoutes);
 
     app.use(jobsRoutes);
+
+    app.use(businessesRoutes);
+    app.use(shopsRoutes);
 
     app.use((req, res) => res.status(404).json({ ok: false, error: { code: 'NOT_FOUND', message: 'No route' } }));
     app.use(errorHandler);
