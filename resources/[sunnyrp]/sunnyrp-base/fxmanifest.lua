@@ -4,7 +4,7 @@ game 'gta5'
 name 'sunnyrp-base'
 author 'SunnyRP'
 description 'Sunny Roleplay Base Framework (server-authoritative)'
-version '0.3.0'
+version '0.4.0'
 lua54 'yes'
 
 ui_page 'html/index.html'
@@ -18,10 +18,12 @@ files {
 shared_scripts {
   'config.lua',
   'shared/utils.lua',
+  'shared/state.lua',
 }
 
 client_scripts {
   'client/main.lua',
+  'client/presence.lua',
 }
 
 server_scripts {
@@ -30,6 +32,9 @@ server_scripts {
   'server/instance.lua',
   'server/permissions.lua',
   'server/player.lua',
+  'server/state.lua',
+  'server/charstate.lua',
+  'server/presence.lua',
   'server/hudbridge.lua',
   'server/guard.lua',
   'server/commands.lua',
@@ -38,24 +43,36 @@ server_scripts {
 }
 
 server_exports {
-  'getModule',          -- player.lua
-  'HasScope',           -- permissions.lua
-  'RefreshPerms',       -- permissions.lua
-  'SetBucket',          -- buckets.lua
-  'ToLoading',          -- buckets.lua
-  'ToMain',             -- buckets.lua
-  'ToCharacter',        -- buckets.lua
-  'ToAdmin',            -- buckets.lua
-  'InstanceCreate',     -- instance.lua
-  'InstanceAddPlayer',  -- instance.lua
-  'InstanceRemovePlayer', -- instance.lua
-  'InstanceDestroy',    -- instance.lua
-  'RegisterCommandEx',  -- commands.lua
-  'GuardNetEvent',      -- guard.lua
-  'EmitHud',            -- hudbridge.lua
-  'TryLock',            -- locks.lua
-  'Unlock',             -- locks.lua
-  'WithLock',           -- locks.lua
+  'getModule',            -- player.lua (NP-style)
+  'HasScope',             -- permissions.lua
+  'RefreshPerms',         -- permissions.lua
+
+  'SetBucket',            -- buckets.lua
+  'ToLoading',
+  'ToMain',
+  'ToCharacter',
+  'ToAdmin',
+
+  'InstanceCreate',       -- instance.lua
+  'InstanceAddPlayer',
+  'InstanceRemovePlayer',
+  'InstanceDestroy',
+
+  'RegisterCommandEx',    -- commands.lua
+  'GuardNetEvent',        -- guard.lua
+
+  'EmitHud',              -- hudbridge.lua
+
+  'TryLock',              -- locks.lua
+  'Unlock',
+  'WithLock',
+
+  'SetState',             -- state.lua
+  'GetState',
+  'SetStateMany',
+  'StateKey',
+
+  'SetCharacterState',    -- charstate.lua
 }
 
 dependencies {

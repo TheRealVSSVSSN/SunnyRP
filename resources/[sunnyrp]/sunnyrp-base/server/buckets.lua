@@ -1,6 +1,9 @@
--- srp_base: server/buckets.lua
+-- sunnyrp-base/server/buckets.lua
+-- Central routing-bucket helpers and conventions. Emits change events.
 
 SRP_Buckets = SRP_Buckets or {}
+
+local Keys = (SRP_State and SRP_State.Keys) or {}
 
 local function cfg()
   return SRP_Config and SRP_Config.Buckets or {
@@ -9,10 +12,20 @@ local function cfg()
 end
 
 local function setBucket(src, bucket)
-  SetPlayerRoutingBucket(src, bucket)
   local ped = GetPlayerPed(src)
+  local prev = 0
   if ped and ped ~= 0 then
-    Entity(ped).state:set('srp:bucket', bucket, true)
+    prev = Entity(ped).state[Keys.bucket] or 0
+  end
+
+  SetPlayerRoutingBucket(src, bucket)
+
+  if ped and ped ~= 0 then
+    Entity(ped).state:set(Keys.bucket, bucket, true)
+  end
+
+  if prev ~= bucket then
+    TriggerEvent('srp:buckets:changed', src, prev, bucket)
   end
 end
 

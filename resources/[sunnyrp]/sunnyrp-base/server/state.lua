@@ -1,33 +1,43 @@
-SRP_State = { players = {}, dirty = {}, lastPush = {} }
+-- sunnyrp-base/server/state.lua
+-- Authoritative server-side helpers to set/get player state bags.
 
-local function ensure(pid)
-  SRP_State.players[pid] = SRP_State.players[pid] or {
-    job = nil, duty = false, cash = 0, bank = 0,
-    voiceMode = 'normal', radio = 0,
-    vitals = { health = 200, armor = 0, stress = 0, hunger = 50 },
-    street = '', time = '', weather = '', isDead = false
-  }
-  return SRP_State.players[pid]
+local Keys = (SRP_State and SRP_State.Keys) or {}
+
+local function pedOf(src)
+  local ped = GetPlayerPed(src)
+  if not ped or ped == 0 then return nil end
+  return ped
 end
 
-function SRP_State.update(pid, patch)
-  local s = ensure(pid)
-  for k,v in pairs(patch) do s[k] = v end
-  SRP_State.dirty[pid] = true
+local function setState(src, key, value, replicate)
+  local ped = pedOf(src); if not ped then return false end
+  -- default replicate=true (sync to others)
+  local rep = (replicate == nil) and true or (replicate == true)
+  Entity(ped).state:set(key, value, rep)
+  return true
 end
 
-CreateThread(function()
-  while true do
-    Wait(math.floor(1000 / (SRP_Config.QoL.hudRateHz or 6)))
-    for pid,_ in pairs(SRP_State.dirty) do
-      local now = GetGameTimer()
-      if not SRP_State.lastPush[pid] or (now - SRP_State.lastPush[pid] > 1000 / (SRP_Config.QoL.hudRateHz or 6)) then
-        TriggerClientEvent(SRP_CONST.EVENTS.HUD_SET, pid, SRP_State.players[pid] or {})
-        SRP_State.lastPush[pid] = now
-        SRP_State.dirty[pid] = nil
-      end
-    end
+local function getState(src, key)
+  local ped = pedOf(src); if not ped then return nil end
+  return Entity(ped).state[key]
+end
+
+local function setBatch(src, tbl, replicate)
+  local ped = pedOf(src); if not ped then return false end
+  local rep = (replicate == nil) and true or (replicate == true)
+  for k,v in pairs(tbl or {}) do
+    Entity(ped).state:set(k, v, rep)
   end
-end)
+  return true
+end
 
-exports('EmitHud', function(pid, delta) SRP_State.update(pid, delta or {}) end)
+SRP_State = SRP_State or {}
+SRP_State.Set     = setState
+SRP_State.Get     = getState
+SRP_State.SetMany = setBatch
+
+-- Exports for other resources
+exports('SetState', setState)
+exports('GetState', getState)
+exports('SetStateMany', setBatch)
+exports('StateKey', function(name) return Keys[name] end)
