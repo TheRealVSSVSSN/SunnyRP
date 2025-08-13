@@ -15,64 +15,108 @@ files {
   'html/style.css',
 }
 
+-- Shared first (constants/utils/state), then config
 shared_scripts {
+  'shared/core/constants.lua',
+  'shared/core/utils.lua',
+  'shared/core/state.lua',
+  'shared/world/zones.lua',
   'config.lua',
-  'shared/utils.lua',
-  'shared/state.lua',
 }
 
 client_scripts {
-  'client/main.lua',
-  'client/presence.lua',
+  -- core (boot/helpers)
+  'client/core/errorlog.lua',
+  'client/core/keybinds.lua',
+  'client/core/main.lua',
+
+  -- networking & UI helpers
+  'client/net/rpc.lua',
+  'client/ui/taskbar.lua',
+
+  -- state + world (presence/ipls/time/weather/world)
+  'client/state/presence.lua',
+  'client/world/ipls.lua',
+  'client/world/time_weather.lua',
+  'client/world/world.lua',
 }
 
 server_scripts {
-  'server/locks.lua',
-  'server/buckets.lua',
-  'server/instance.lua',
-  'server/permissions.lua',
-  'server/player.lua',
-  'server/state.lua',
-  'server/charstate.lua',
-  'server/presence.lua',
-  'server/hudbridge.lua',
-  'server/guard.lua',
-  'server/commands.lua',
-  'server/deferrals.lua',
-  'server/main.lua',
+  -- core (boot/deferrals/player attach/logging/keybinds)
+  'server/core/errorlog.lua',
+  'server/core/keybinds.lua',
+  'server/core/deferrals.lua',
+  'server/core/player.lua',
+  'server/core/main.lua',
+
+  -- security (guard & permissions)
+  'server/security/guard.lua',
+  'server/security/permissions.lua',
+  'server/security/telemetry.lua',
+
+  -- state (buckets/instances/state/charstate/presence/world)
+  'server/state/buckets.lua',
+  'server/state/instance.lua',
+  'server/state/state.lua',
+  'server/state/charstate.lua',
+  'server/state/presence.lua',
+  'server/state/world.lua',
+
+  -- integration bridges (http/outbox/inbox/hud/config/rpc)
+  'server/integration/http.lua',
+  'server/integration/outbox.lua',
+  'server/integration/inbox.lua',
+  'server/integration/hudbridge.lua',
+  'server/integration/config_bus.lua',
+  'server/integration/config_live.lua',
+  'server/integration/rpc.lua',
+
+  -- features (commands/locks/devtools) — loaded last
+  'server/features/commands.lua',
+  'server/features/locks.lua',
+  'server/features/devtools.lua',
 }
 
 server_exports {
-  'getModule',            -- player.lua (NP-style)
-  'HasScope',             -- permissions.lua
-  'RefreshPerms',         -- permissions.lua
+  -- player module (if provided by server/core/player.lua)
+  'getModule',
 
-  'SetBucket',            -- buckets.lua
+  -- security/permissions
+  'HasScope',
+  'RefreshPerms',
+
+  -- buckets/instances
+  'SetBucket',
   'ToLoading',
   'ToMain',
   'ToCharacter',
   'ToAdmin',
 
-  'InstanceCreate',       -- instance.lua
+  'InstanceCreate',
   'InstanceAddPlayer',
   'InstanceRemovePlayer',
   'InstanceDestroy',
 
-  'RegisterCommandEx',    -- commands.lua
-  'GuardNetEvent',        -- guard.lua
+  -- command/guard helpers
+  'RegisterCommandEx',
+  'GuardNetEvent',
 
-  'EmitHud',              -- hudbridge.lua
+  -- HUD patch coalescer
+  'EmitHud',
 
-  'TryLock',              -- locks.lua
+  -- locks & concurrency
+  'TryLock',
   'Unlock',
   'WithLock',
 
-  'SetState',             -- state.lua
+  -- state helpers
+  'SetState',
   'GetState',
   'SetStateMany',
   'StateKey',
 
-  'SetCharacterState',    -- charstate.lua
+  -- character state
+  'SetCharacterState',
 }
 
 dependencies {
