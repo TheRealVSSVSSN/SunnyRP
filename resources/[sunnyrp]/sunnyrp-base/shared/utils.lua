@@ -1,77 +1,103 @@
-SRP_Utils = SRP_Utils or {}
+-- sunnyrp-base/shared/utils.lua
+-- Shared helpers (client/server safe), including HTTP wrapper with retries.
 
--- Shallow merge
-function SRP_Utils.tableMerge(dst, src)
-  if type(dst) ~= 'table' then dst = {} end
-  if type(src) ~= 'table' then return dst end
-  for k,v in pairs(src) do dst[k] = v end
-  return dst
+SRP_HTTP = SRP_HTTP or {}
+SRP_Util = SRP_Util or {}
+
+local function convarOr(name, d)
+  local v = GetConvar(name, '')
+  if v == '' then return d end
+  return v
 end
 
--- Deep merge
-function SRP_Utils.deepMerge(dst, src)
-  if type(dst) ~= 'table' then dst = {} end
-  if type(src) ~= 'table' then return dst end
-  for k, v in pairs(src) do
-    if type(v) == 'table' and type(dst[k]) == 'table' then
-      SRP_Utils.deepMerge(dst[k], v)
+-- API target (from config.lua or ConVars)
+local API_URL   = convarOr('srp_api_url', 'http://127.0.0.1:3301')
+local API_TOKEN = convarOr('srp_api_token', 'changeme_please')
+
+-- Simple UUID-ish (idempotency key / request-id)
+local function randhex(n)
+  local t = {}
+  for i=1,n do t[i] = string.format('%x', math.random(0,15)) end
+  return table.concat(t)
+end
+math.randomseed((os.time() % 100000) + GetGameTimer())
+
+function SRP_Util.newId()
+  return string.format('%s-%s-%s-%s-%s',
+    randhex(8), randhex(4), randhex(4), randhex(4), randhex(12))
+end
+
+local function joinUrl(base, path)
+  if path:sub(1,1) == '/' then
+    return base .. path
+  else
+    return base .. '/' .. path
+  end
+end
+
+-- Core HTTP (server-only native). If called on client by mistake, it will error.
+-- opts = { timeout=ms, retries=n, idempotencyKey=string, headers=table }
+function SRP_HTTP.Fetch(method, path, body, opts)
+  opts = opts or {}
+  local url = joinUrl(API_URL, path)
+  local timeout = tonumber(opts.timeout or convarOr('srp_http_timeout_ms','5000')) or 5000
+  local retries = tonumber(opts.retries or convarOr('srp_http_retries','2')) or 2
+  local idemKey = opts.idempotencyKey or SRP_Util.newId()
+
+  local headers = {
+    ['Content-Type']    = 'application/json',
+    ['Accept']          = 'application/json',
+    ['X-API-Token']     = API_TOKEN,
+    ['X-Request-Id']    = idemKey,
+    ['X-Idempotency-Key']= idemKey,
+    ['X-Nonce']         = randhex(16),
+    ['X-Ts']            = tostring(os.time()),
+    -- ['X-Sig']        = 'TODO-HMAC', -- When we enable HMAC, we’ll compute and set this.
+  }
+  for k,v in pairs(opts.headers or {}) do headers[k] = v end
+
+  local payload = body and json.encode(body) or ''
+  local backoff = 200
+
+  for attempt=0,retries do
+    local p = promise.new()
+    -- FiveM timeout is not per-request; we emulate with a watchdog.
+    local timedOut = false
+    local timer = SetTimeout(timeout, function()
+      timedOut = true
+      p:resolve({ status = 0, data = nil, headers = nil, err = 'timeout' })
+    end)
+
+    PerformHttpRequest(url, function(status, data, respHeaders)
+      if timedOut then return end
+      if timer then
+        pcall(function() ClearTimeout(timer) end)
+      end
+      p:resolve({ status = status, data = data, headers = respHeaders })
+    end, method, payload, headers)
+
+    local res = Citizen.Await(p)
+    local ok = (res.status >= 200 and res.status < 300)
+    local decoded = nil
+
+    if type(res.data) == 'string' and #res.data > 0 then
+      local okd, val = pcall(json.decode, res.data)
+      if okd then decoded = val end
+    end
+
+    if ok then
+      return { ok = true, status = res.status, data = decoded, raw = res.data, headers = res.headers }
+    end
+
+    -- retry on 0 (timeout) or 5xx
+    if attempt < retries and (res.status == 0 or (res.status >= 500 and res.status <= 599)) then
+      Citizen.Wait(backoff)
+      backoff = math.min(backoff * 2, 1500)
     else
-      dst[k] = v
+      local msg = (decoded and decoded.error and decoded.error.message) or res.err or ('HTTP ' .. tostring(res.status))
+      return { ok = false, status = res.status, data = decoded, error = msg, message = msg }
     end
   end
-  return dst
-end
 
--- Safe JSON decode
-function SRP_Utils.safeJsonDecode(s)
-  if type(s) ~= 'string' or s == '' then return nil end
-  local ok, res = pcall(function() return json.decode(s) end)
-  return ok and res or nil
-end
-
--- Simple logger
-local function now() return os.date('%m-%d-%Y %H:%M:%S') end
-function SRP_Utils.log(level, msg)
-  print(('%s ^5[SRP]^7 [%s] %s'):format(now(), level, msg))
-end
-
--- "A.B.C" path helpers
-local function splitDots(path)
-  local out = {}
-  for part in string.gmatch(path, '([^%.]+)') do table.insert(out, part) end
-  return out
-end
-
-function SRP_Utils.getByPath(tbl, path)
-  if type(tbl) ~= 'table' or type(path) ~= 'string' then return nil end
-  local t = tbl
-  for _,p in ipairs(splitDots(path)) do
-    if type(t) ~= 'table' then return nil end
-    t = t[p]
-  end
-  return t
-end
-
-function SRP_Utils.setByPath(tbl, path, value)
-  if type(tbl) ~= 'table' or type(path) ~= 'string' then return end
-  local t = tbl
-  local parts = splitDots(path)
-  for i=1,#parts-1 do
-    local p = parts[i]
-    if type(t[p]) ~= 'table' then t[p] = {} end
-    t = t[p]
-  end
-  t[parts[#parts]] = value
-end
-
-function SRP_Utils.round(n, dp)
-  local m = 10^(dp or 0)
-  return math.floor(n * m + 0.5) / m
-end
-
--- Guard a function to avoid crashing threads/handlers
-function SRP_Utils.try(fn, ...)
-  local ok, err = pcall(fn, ...)
-  if not ok then SRP_Utils.log('ERR', tostring(err)) end
-  return ok
+  return { ok = false, status = 0, error = 'exhausted', message = 'retries_exhausted' }
 end
