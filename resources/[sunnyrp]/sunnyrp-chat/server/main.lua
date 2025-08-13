@@ -1,157 +1,232 @@
--- resources/sunnyrp/chat/server/main.lua
-SRP = SRP or {}
-SRP.Chat = SRP.Chat or {}
-SRP.Chat.__cooldowns = SRP.Chat.__cooldowns or {} -- [src][channel]=lastMs
+-- sunnyrp-chat: server/main.lua
+-- Proximity chat, /me /do, OOC, staff chat. Uses sunnyrp-base guards & perms.
 
-local function nowMs() return GetGameTimer() end
-
-local function hasScope(src, scope)
-  local id = SRP.Identity and SRP.Identity.cacheBySrc and SRP.Identity.cacheBySrc[src]
-  if not id or not id.scopes then return false end
-  for _, s in ipairs(id.scopes) do if s == scope then return true end end
-  return false
+local function convarOr(name, default)
+  local v = GetConvar(name, '')
+  if v == '' then return default end
+  return v
 end
 
-local function throttle(src, channel, delay)
-  SRP.Chat.__cooldowns[src] = SRP.Chat.__cooldowns[src] or {}
-  local last = SRP.Chat.__cooldowns[src][channel] or 0
-  local n = nowMs()
-  if n - last < delay then return false end
-  SRP.Chat.__cooldowns[src][channel] = n
+local CHAT_ENABLED      = (convarOr('srp_chat_enable', 'true') == 'true')
+local OOC_ENABLED       = (convarOr('srp_chat_ooc_enabled', 'true') == 'true')
+local FILTER_PROFANITY  = (convarOr('srp_chat_profanity_filter', 'true') == 'true')
+
+local RANGE_LOCAL       = tonumber(convarOr('srp_chat_range_local', '15.0')) or 15.0
+local RANGE_ME_DO       = tonumber(convarOr('srp_chat_range_me_do', '15.0')) or 15.0
+
+local RATE_GENERAL_MS   = tonumber(convarOr('srp_chat_rate_ms_general', '1500')) or 1500
+local RATE_ME_DO_MS     = tonumber(convarOr('srp_chat_rate_ms_me_do', '1000')) or 1000
+local RATE_OOC_MS       = tonumber(convarOr('srp_chat_rate_ms_ooc', '3000')) or 3000
+local RATE_STAFF_MS     = tonumber(convarOr('srp_chat_rate_ms_staff', '1000')) or 1000
+
+local STAFF_SCOPE       = convarOr('srp_chat_staff_scope', 'staff.chat')
+
+-- Minimal profanity list (extend/replace later from backend)
+local BAD_WORDS = {
+  'fuck','shit','bitch','cunt','faggot','retard'
+}
+local function sanitize(text)
+  if type(text) ~= 'string' then return '' end
+  -- strip GTA color codes & overly long strings
+  text = text:gsub('%^%d', '')
+  text = text:sub(1, 300)
+  if FILTER_PROFANITY then
+    local lower = text:lower()
+    for _,w in ipairs(BAD_WORDS) do
+      local patt = '%f[%a]' .. w .. '%f[%A]'
+      lower = lower:gsub(patt, string.rep('*', #w))
+    end
+    -- rebuild preserving original case per-char mask
+    local masked = {}
+    for i=1,#text do
+      local ch = text:sub(i,i)
+      local m  = lower:sub(i,i)
+      if m == '*' then ch = '*' end
+      masked[#masked+1] = ch
+    end
+    text = table.concat(masked)
+  end
+  return text
+end
+
+local function getCoords(src)
+  local ped = GetPlayerPed(src)
+  if not ped or ped == 0 then return nil end
+  local x,y,z = table.unpack(GetEntityCoords(ped))
+  return vector3(x,y,z)
+end
+
+local function dist(a, b)
+  return #(a - b)
+end
+
+local function broadcastLocal(src, message, range, color, tag)
+  local pos = getCoords(src)
+  if not pos then return end
+  for _, pid in ipairs(GetPlayers()) do
+    local p = tonumber(pid)
+    local ppos = getCoords(p)
+    if ppos and dist(pos, ppos) <= range then
+      TriggerClientEvent('srp:chat:push', p, {
+        channel = tag, text = message, color = color or {255,255,255},
+        from = src
+      })
+    end
+  end
+end
+
+local function broadcastAll(message, color, tag)
+  for _, pid in ipairs(GetPlayers()) do
+    TriggerClientEvent('srp:chat:push', tonumber(pid), {
+      channel = tag, text = message, color = color or {255,255,255},
+      from = -1
+    })
+  end
+end
+
+local function broadcastStaff(message, color, tag)
+  for _, pid in ipairs(GetPlayers()) do
+    local p = tonumber(pid)
+    if exports['sunnyrp-base']:HasScope(p, STAFF_SCOPE) then
+      TriggerClientEvent('srp:chat:push', p, {
+        channel = tag, text = message, color = color or {255,180,255},
+        from = -1
+      })
+    end
+  end
+end
+
+local function logToBackend(src, channel, text)
+  if not SRP_HTTP or not SRP_HTTP.Fetch then return end
+  local P = exports['sunnyrp-base']:getModule('Player')
+  local u = P.GetUser(src) or {}
+  local char = u.char or {}
+  local pos = getCoords(src)
+  local payload = {
+    playerId = u.playerId,
+    characterId = char.id,
+    channel = channel,
+    message = text,
+    coords = pos and { x = pos.x, y = pos.y, z = pos.z } or nil
+  }
+  SRP_HTTP.Fetch('POST', '/chat/log', payload, { retries = 0, timeout = 3000 })
+end
+
+-- Validation helpers ----------------------------------------------------------
+local function validatePayload(_, p)
+  if type(p) ~= 'table' or type(p.text) ~= 'string' then
+    return false, 'bad_payload'
+  end
+  if #p.text < 1 then return false, 'empty' end
   return true
 end
 
-local function sanitize(s)
-  if not s then return '' end
-  s = tostring(s)
-  s = s:gsub('[%z\1-\8\11-\31\127]', '')   -- control chars
-  s = s:gsub('%s+', ' '):gsub('^%s+', ''):gsub('%s+$', '')
-  if #s > 300 then s = s:sub(1, 300) end
-  return s
+if not CHAT_ENABLED then
+  print('[sunnyrp-chat] Chat disabled via srp_chat_enable=false')
+  return
 end
 
-local PROFANITY = { 'fuck','shit','bitch','asshole' }
-local function filterProfanity(s)
-  if not SRP.Chat.Config.profanity then return s end
-  local out = s
-  for _, w in ipairs(PROFANITY) do
-    local pattern = '%f[%w]' .. w .. '%f[%W]'
-    out = out:gsub(pattern, string.rep('*', #w))
-    out = out:gsub(pattern:upper(), string.rep('*', #w))
-  end
-  return out
+-- Event guards via base -------------------------------------------------------
+local Guard = exports['sunnyrp-base'].GuardNetEvent
+
+-- LOCAL (default say)
+Guard('srp:chat:local', {
+  scopes = nil,
+  cooldownMs = RATE_GENERAL_MS,
+  bucket = { capacity = 5, refill = 5, perMs = 5000 },
+  validate = validatePayload,
+  logName = 'chat.local',
+}, function(src, p)
+  local msg = sanitize(p.text)
+  broadcastLocal(src, msg, RANGE_LOCAL, {255,255,255}, 'local')
+  logToBackend(src, 'local', msg)
+end)
+
+-- /me
+Guard('srp:chat:me', {
+  cooldownMs = RATE_ME_DO_MS,
+  bucket = { capacity = 6, refill = 6, perMs = 4000 },
+  validate = validatePayload,
+  logName = 'chat.me',
+}, function(src, p)
+  local msg = sanitize(p.text)
+  broadcastLocal(src, ('* %s *'):format(msg), RANGE_ME_DO, {180,200,255}, 'me')
+  logToBackend(src, 'me', msg)
+end)
+
+-- /do
+Guard('srp:chat:do', {
+  cooldownMs = RATE_ME_DO_MS,
+  bucket = { capacity = 6, refill = 6, perMs = 4000 },
+  validate = validatePayload,
+  logName = 'chat.do',
+}, function(src, p)
+  local msg = sanitize(p.text)
+  broadcastLocal(src, ('%s'):format(msg), RANGE_ME_DO, {255,200,160}, 'do')
+  logToBackend(src, 'do', msg)
+end)
+
+-- OOC (global)
+if OOC_ENABLED then
+  Guard('srp:chat:ooc', {
+    cooldownMs = RATE_OOC_MS,
+    bucket = { capacity = 4, refill = 4, perMs = 6000 },
+    validate = validatePayload,
+    logName = 'chat.ooc',
+  }, function(src, p)
+    local msg = sanitize(p.text)
+    broadcastAll(('[OOC] %s'):format(msg), {200,200,200}, 'ooc')
+    logToBackend(src, 'ooc', msg)
+  end)
+else
+  print('[sunnyrp-chat] OOC disabled (srp_chat_ooc_enabled=false)')
 end
 
--- broadcast helpers
-local function getRecipientsInRange(src, range)
-  local recipients = {}
-  local srcPed = GetPlayerPed(src)
-  if not srcPed or srcPed == 0 then return recipients end
-  local sx, sy, sz = table.unpack(GetEntityCoords(srcPed))
-  local range2 = range * range
-  for _, pid in ipairs(GetPlayers()) do
-    local ped = GetPlayerPed(pid)
-    if ped and ped ~= 0 then
-      local x, y, z = table.unpack(GetEntityCoords(ped))
-      local dx, dy, dz = x - sx, y - sy, z - sz
-      local dist2 = dx*dx + dy*dy + dz*dz
-      if dist2 <= range2 then table.insert(recipients, pid) end
-    end
-  end
-  return recipients, vector3(sx, sy, sz)
-end
+-- STAFF (scoped)
+Guard('srp:chat:staff', {
+  scopes = { STAFF_SCOPE },
+  cooldownMs = RATE_STAFF_MS,
+  bucket = { capacity = 8, refill = 8, perMs = 5000 },
+  validate = validatePayload,
+  logName = 'chat.staff',
+}, function(src, p)
+  local msg = sanitize(p.text)
+  broadcastStaff(('[STAFF] %s'):format(msg), {255,180,255}, 'staff')
+  logToBackend(src, 'staff', msg)
+end)
 
-local function sendToClients(recipients, payload)
-  for _, pid in ipairs(recipients) do
-    TriggerClientEvent('srp:chat:message', pid, payload)
-  end
-end
+-- Commands via base dispatcher -----------------------------------------------
+local RegisterCommandEx = exports['sunnyrp-base'].RegisterCommandEx
 
--- log to backend
-local function logToBackend(src, channel, message, pos)
-  local user = SRP.Identity.cacheBySrc[src] and SRP.Identity.cacheBySrc[src].user
-  local charId = SRP.Characters.GetActiveCharId and SRP.Characters.GetActiveCharId(src) or nil
-  if not user then return end
-  local body = {
-    userId = user.id,
-    characterId = charId,
-    channel = channel,
-    message = message,
-    position = pos and { x = pos.x + 0.0, y = pos.y + 0.0, z = pos.z + 0.0, heading = 0.0 } or nil,
-    routing_bucket = GetPlayerRoutingBucket(src),
-    src = src
-  }
-  SRP.Fetch({ path = '/chat/log', method = 'POST', body = body, headers = { ['X-Profanity'] = SRP.Chat.Config.profanity and 'true' or 'false' } })
-end
+RegisterCommandEx('me', {
+  description = 'Local emote text',
+  cooldownMs = RATE_ME_DO_MS,
+  restricted = false,
+}, function(src, args)
+  TriggerEvent('srp:chat:me', src, { text = table.concat(args, ' ') })
+end)
 
--- Public API (other scripts could reuse)
-SRP.Chat.SendLocal = function(src, text)
-  if not throttle(src, 'local', SRP.Chat.Config.rate.general) then return end
-  local msg = filterProfanity(sanitize(text))
-  local recips, pos = getRecipientsInRange(src, SRP.Chat.Config.rangeLocal)
-  sendToClients(recips, { channel='local', from=src, text=msg })
-  logToBackend(src, 'local', msg, pos)
-end
+RegisterCommandEx('do', {
+  description = 'Describe scene (local)',
+  cooldownMs = RATE_ME_DO_MS,
+  restricted = false,
+}, function(src, args)
+  TriggerEvent('srp:chat:do', src, { text = table.concat(args, ' ') })
+end)
 
-SRP.Chat.SendOOC = function(src, text)
-  if not SRP.Chat.Config.oocEnabled then return end
-  if not throttle(src, 'ooc', SRP.Chat.Config.rate.ooc) then return end
-  local msg = filterProfanity(sanitize(text))
-  sendToClients(GetPlayers(), { channel='ooc', from=src, text=msg })
-  logToBackend(src, 'ooc', msg, nil)
-end
+RegisterCommandEx('ooc', {
+  description = 'Out-of-character (global)',
+  cooldownMs = RATE_OOC_MS,
+  restricted = false,
+}, function(src, args)
+  if not OOC_ENABLED then return end
+  TriggerEvent('srp:chat:ooc', src, { text = table.concat(args, ' ') })
+end)
 
-SRP.Chat.SendMe = function(src, text)
-  if not throttle(src, 'me', SRP.Chat.Config.rate.me_do) then return end
-  local msg = filterProfanity(sanitize(text))
-  local recips, pos = getRecipientsInRange(src, SRP.Chat.Config.rangeMeDo)
-  sendToClients(recips, { channel='me', from=src, text=msg })
-  logToBackend(src, 'me', msg, pos)
-end
-
-SRP.Chat.SendDo = function(src, text)
-  if not throttle(src, 'do', SRP.Chat.Config.rate.me_do) then return end
-  local msg = filterProfanity(sanitize(text))
-  local recips, pos = getRecipientsInRange(src, SRP.Chat.Config.rangeMeDo)
-  sendToClients(recips, { channel='do', from=src, text=msg })
-  logToBackend(src, 'do', msg, pos)
-end
-
-SRP.Chat.SendStaff = function(src, text)
-  local scope = SRP.Chat.Config.staffScope
-  if not hasScope(src, scope) then return end
-  if not throttle(src, 'staff', SRP.Chat.Config.rate.staff) then return end
-  local msg = sanitize(text) -- staff may bypass profanity filter for accuracy
-  local targets = {}
-  for _, pid in ipairs(GetPlayers()) do
-    if hasScope(pid, scope) then table.insert(targets, pid) end
-  end
-  sendToClients(targets, { channel='staff', from=src, text=msg })
-  logToBackend(src, 'staff', msg, nil)
-end
-
--- Command dispatcher (server authoritative)
-RegisterCommand('me', function(src, args) SRP.Chat.SendMe(src, table.concat(args, ' ')) end, false)
-RegisterCommand('do', function(src, args) SRP.Chat.SendDo(src, table.concat(args, ' ')) end, false)
-RegisterCommand('ooc', function(src, args) SRP.Chat.SendOOC(src, table.concat(args, ' ')) end, false)
-RegisterCommand('staff', function(src, args) SRP.Chat.SendStaff(src, table.concat(args, ' ')) end, false)
-
--- NUI submit (plain text -> inferred channel: default local; allow /me,/do,/ooc,/staff prefix)
-RegisterNetEvent('srp:chat:submit', function(payload)
-  local src = source
-  local text = sanitize(payload and payload.text or '')
-  if text == '' then return end
-  if text:sub(1,1) == '/' then
-    local cmd, rest = text:match('^/(%S+)%s*(.*)$')
-    cmd = (cmd or ''):lower()
-    if cmd == 'me' then return SRP.Chat.SendMe(src, rest)
-    elseif cmd == 'do' then return SRP.Chat.SendDo(src, rest)
-    elseif cmd == 'ooc' then return SRP.Chat.SendOOC(src, rest)
-    elseif cmd == 'staff' then return SRP.Chat.SendStaff(src, rest)
-    else
-      -- unknown command: ignore silently or echo
-      return
-    end
-  end
-  SRP.Chat.SendLocal(src, text)
+RegisterCommandEx('a', {
+  description = 'Staff chat',
+  scopes = { STAFF_SCOPE },
+  cooldownMs = RATE_STAFF_MS,
+}, function(src, args)
+  TriggerEvent('srp:chat:staff', src, { text = table.concat(args, ' ') })
 end)

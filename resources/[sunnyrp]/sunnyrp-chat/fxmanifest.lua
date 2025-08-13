@@ -1,28 +1,32 @@
 fx_version 'cerulean'
 game 'gta5'
-lua54 'yes'
 
 name 'sunnyrp-chat'
-author 'Sunny Roleplay'
-description 'SRP Custom Chat — local/me/do/ooc/staff, ACL, rate limits, telemetry logging'
-version '1.0.0'
+author 'SunnyRP'
+description 'SunnyRP proximity chat with scopes, rate limits, profanity filter, NUI'
+version '0.2.0'
+lua54 'yes'
 
 ui_page 'html/index.html'
 
 files {
   'html/index.html',
   'html/style.css',
-  'html/app.js'
+  'html/app.js',
+}
+
+shared_scripts {
+  -- none
 }
 
 client_scripts {
-  '@sunnyrp-base/shared/utils.lua',
-  'client/main.lua'
+  'client/main.lua',
 }
 
 server_scripts {
-  '@sunnyrp-base/shared/utils.lua',
-  '@sunnyrp-base/config.lua',
-  'config.lua',
-  'server/main.lua'
+  'server/main.lua',
+}
+
+dependencies {
+  'sunnyrp-base'
 }
