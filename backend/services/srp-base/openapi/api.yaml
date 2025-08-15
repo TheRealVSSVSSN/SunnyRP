@@ -1,0 +1,195 @@
+openapi: 3.0.3
+info:
+  title: SRP Base (srp-base)
+  version: 1.0.0
+  description: >
+    Base service for SunnyRP. All requests must include X-API-Token and HMAC headers (X-Ts, X-Nonce, X-Sig).
+servers:
+  - url: http://localhost:3301
+paths:
+  /v1/health:
+    get:
+      summary: Liveness check
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OkHealth'
+  /v1/ready:
+    get:
+      summary: Readiness check (deps)
+      responses:
+        '200':
+          description: Ready
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OkReady'
+        '503':
+          description: Dependency down
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fail'
+  /v1/metrics:
+    get:
+      summary: Prometheus metrics
+      responses:
+        '200':
+          description: Metrics text
+          content:
+            text/plain:
+              schema:
+                type: string
+  /v1/players/link:
+    post:
+      summary: Link or upsert player identity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlayerLinkRequest'
+      responses:
+        '200':
+          description: Link result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OkPlayerLink'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fail'
+  /v1/permissions/{playerId}:
+    get:
+      summary: Get permission scopes for a player
+      parameters:
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Scopes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OkScopes'
+components:
+  schemas:
+    EnvelopeOk:
+      type: object
+      required: [ok, data, requestId, traceId]
+      properties:
+        ok:
+          type: boolean
+          enum: [true]
+        data:
+          type: object
+        requestId:
+          type: string
+        traceId:
+          type: string
+    EnvelopeFail:
+      type: object
+      required: [ok, error, requestId, traceId]
+      properties:
+        ok:
+          type: boolean
+          enum: [false]
+        error:
+          type: object
+          required: [code, message]
+          properties:
+            code:
+              type: string
+              enum:
+                - INVALID_INPUT
+                - UNAUTHENTICATED
+                - FORBIDDEN
+                - NOT_FOUND
+                - CONFLICT
+                - FAILED_PRECONDITION
+                - RATE_LIMITED
+                - INTERNAL_ERROR
+                - DEPENDENCY_DOWN
+            message:
+              type: string
+            details:
+              type: object
+        requestId:
+          type: string
+        traceId:
+          type: string
+    OkHealth:
+      allOf:
+        - $ref: '#/components/schemas/EnvelopeOk'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                status:
+                  type: string
+                  example: ok
+    OkReady:
+      allOf:
+        - $ref: '#/components/schemas/EnvelopeOk'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                ready:
+                  type: boolean
+                  example: true
+    OkPlayerLink:
+      allOf:
+        - $ref: '#/components/schemas/EnvelopeOk'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                banned:
+                  type: boolean
+                banReason:
+                  type: [string, 'null']
+                scopes:
+                  type: array
+                  items:
+                    type: string
+    OkScopes:
+      allOf:
+        - $ref: '#/components/schemas/EnvelopeOk'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                scopes:
+                  type: array
+                  items:
+                    type: string
+    Fail:
+      $ref: '#/components/schemas/EnvelopeFail'
+    PlayerLinkRequest:
+      type: object
+      required: [primary, identifiers]
+      properties:
+        primary:
+          type: string
+          description: license|steam|discord
+        identifiers:
+          type: array
+          items:
+            type: string
+        ip:
+          type: string
+          example: "127.0.0.1"

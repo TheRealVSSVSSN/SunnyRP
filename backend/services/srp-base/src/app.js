@@ -14,11 +14,12 @@ import { replayGuard } from './middleware/replayGuard.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import { healthRouter } from './routes/health.routes.js';
 import { initMetrics, metricsRouter } from './utils/metrics.js';
+import { identityRouter } from './routes/identity.routes.js';
 
 export function buildApp() {
     const app = express();
 
-    // raw body must come before json parsing for HMAC
+    // raw body must come before json parsing for HMAC verification
     app.use(captureRawBody());
     app.use(express.json({ limit: '1mb' }));
 
@@ -41,9 +42,10 @@ export function buildApp() {
         app.use(metricsRouter);
     }
 
-    // Phase B routes mount here (e.g., identityRouter)
+    // Phase B (minimal) routes
+    app.use(identityRouter);
 
-    // last: uniform error envelope
+    // uniform error envelope
     app.use(errorHandler());
 
     return app;

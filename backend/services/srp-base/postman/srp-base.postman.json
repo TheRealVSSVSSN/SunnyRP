@@ -1,0 +1,129 @@
+{
+    "info": {
+        "name": "SRP Base",
+        "_postman_id": "5d1a4f7b-7a0b-4e7a-9a2b-6f1ef0a1d001",
+        "description": "Postman collection for SRP Base service",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "http://localhost:3301"
+        },
+        {
+            "key": "apiToken",
+            "value": "change_me_base_api_only"
+        }
+    ],
+    "item": [
+        {
+            "name": "Health",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "X-API-Token",
+                        "value": "{{apiToken}}"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseUrl}}/v1/health",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "v1",
+                        "health"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Ready",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "X-API-Token",
+                        "value": "{{apiToken}}"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseUrl}}/v1/ready",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "v1",
+                        "ready"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Metrics",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "X-API-Token",
+                        "value": "{{apiToken}}"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseUrl}}/v1/metrics",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "v1",
+                        "metrics"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Players Link",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "X-API-Token",
+                        "value": "{{apiToken}}"
+                    },
+                    {
+                        "key": "X-Ts",
+                        "value": "0000000000"
+                    },
+                    {
+                        "key": "X-Nonce",
+                        "value": "nonce-demo"
+                    },
+                    {
+                        "key": "X-Sig",
+                        "value": "hmac-demo"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"primary\": \"license\",\n  \"identifiers\": [\"license:xxxx\"],\n  \"ip\": \"127.0.0.1\"\n}"
+                },
+                "url": {
+                    "raw": "{{baseUrl}}/v1/players/link",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "v1",
+                        "players",
+                        "link"
+                    ]
+                }
+            }
+        }
+    ]
+}
