@@ -1,17 +1,20 @@
 {
     "name": "srp-base",
     "version": "1.0.0",
+    "description": "SunnyRP Base Service (server-authoritative, HMAC-signed, feature-toggleable)",
     "type": "module",
     "scripts": {
         "dev": "node src/server.js",
         "start": "node src/server.js",
-        "pm2": "pm2 start pm2/ecosystem.config.js"
+        "pm2": "pm2 start pm2/ecosystem.config.js",
+        "migrate": "node src/bootstrap/migrate.js"
     },
     "dependencies": {
         "compression": "^1.7.4",
         "cors": "^2.8.5",
         "express": "^4.19.2",
         "helmet": "^7.1.0",
+        "mysql2": "^3.11.3",
         "pino": "^9.3.0",
         "pino-http": "^9.0.0",
         "prom-client": "^15.1.3",
