@@ -27,6 +27,11 @@ import { outboxRouter } from './routes/outbox.routes.js';
 export function buildApp() {
     const app = express();
 
+    // trust proxy for real client IPs if behind reverse proxy
+    if (env.TRUST_PROXY) {
+        app.set('trust proxy', true);
+    }
+
     // raw body must come before json parsing for HMAC verification
     app.use(captureRawBody());
     app.use(express.json({ limit: '1mb' }));

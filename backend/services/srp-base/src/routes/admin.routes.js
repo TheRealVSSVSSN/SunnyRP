@@ -85,7 +85,7 @@ adminRouter.post(
 
 /**
  * GET /v1/admin/audit
- * (rate-limited; no scope required for read here, but you can add requireScopes if desired)
+ * query: { userId?, limit?, action?, after?, before? }
  */
 adminRouter.get(
     '/v1/admin/audit',
@@ -97,13 +97,22 @@ adminRouter.get(
     validate({
         query: (z) => z.object({
             userId: z.coerce.number().optional(),
-            limit: z.coerce.number().min(1).max(200).default(50)
+            limit: z.coerce.number().min(1).max(200).default(50),
+            action: z.string().optional(),
+            after: z.string().optional(),
+            before: z.string().optional()
         })
     }),
     async (req, res, next) => {
         try {
-            const { userId, limit } = req.query;
-            const entries = await readAudit({ userId: userId || null, limit: limit || 50 });
+            const { userId, limit, action, after, before } = req.query;
+            const entries = await readAudit({
+                userId: userId || null,
+                limit: limit || 50,
+                action: action || null,
+                after: after || null,
+                before: before || null
+            });
             return ok(req, res, { entries });
         } catch (err) {
             return next(err);

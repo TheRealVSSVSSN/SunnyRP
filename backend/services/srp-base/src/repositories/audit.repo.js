@@ -4,25 +4,45 @@ import { pool } from './db.js';
 export async function recordAudit(actorUserId, targetUserId, action, meta = null) {
     await pool.query(
         `INSERT INTO audit (actor_user_id, target_user_id, action, meta)
-     VALUES (?, ?, ?, ?)`,
+        VALUES (?, ?, ?, ?)`,
         [actorUserId || null, targetUserId || null, action, meta ? JSON.stringify(meta) : null]
     );
 }
 
-export async function readAudit({ userId = null, limit = 50 }) {
+/**
+ * Read audit with optional filters.
+ * filters: { userId?: number, limit?: number, action?: string, after?: string(ISO), before?: string(ISO) }
+ */
+export async function readAudit({ userId = null, limit = 50, action = null, after = null, before = null }) {
     const args = [];
-    let where = '';
+    const clauses = [];
+
     if (userId) {
-        where = 'WHERE actor_user_id = ? OR target_user_id = ?';
+        clauses.push('(actor_user_id = ? OR target_user_id = ?)');
         args.push(userId, userId);
     }
+    if (action) {
+        clauses.push('action = ?');
+        args.push(action);
+    }
+    if (after) {
+        clauses.push('created_at >= ?');
+        args.push(after);
+    }
+    if (before) {
+        clauses.push('created_at <= ?');
+        args.push(before);
+    }
+
+    const where = clauses.length ? `WHERE ${clauses.join(' AND ')}` : '';
     const [rows] = await pool.query(
         `SELECT id, actor_user_id, target_user_id, action, meta, created_at
-     FROM audit ${where}
-     ORDER BY id DESC
-     LIMIT ?`,
+        FROM audit ${where}
+        ORDER BY id DESC
+        LIMIT ?`,
         [...args, Math.min(Math.max(limit, 1), 200)]
     );
+
     return rows.map(r => ({
         id: r.id,
         actor_user_id: r.actor_user_id,

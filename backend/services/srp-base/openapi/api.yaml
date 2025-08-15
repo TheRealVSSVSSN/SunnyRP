@@ -201,6 +201,18 @@ paths:
           in: query
           required: false
           schema: { type: integer, default: 50, minimum: 1, maximum: 200 }
+        - name: action
+          in: query
+          required: false
+          schema: { type: string }
+        - name: after
+          in: query
+          required: false
+          schema: { type: string, format: date-time }
+        - name: before
+          in: query
+          required: false
+          schema: { type: string, format: date-time }
       responses:
         '200':
           description: Audit entries
@@ -208,37 +220,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OkAudit'
-  /v1/config/live:
-    get:
-      summary: Get live config map
-      responses:
-        '200':
-          description: Config map
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OkConfigMap'
-    post:
-      summary: Set a config key (requires ENABLE_CONFIG_WRITE=true)
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ConfigSetRequest'
-      responses:
-        '200':
-          description: Set OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OkConfigSet'
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Fail'
 components:
   schemas:
     EnvelopeOk:
@@ -358,34 +339,6 @@ components:
                       action: { type: string }
                       meta: { type: object, nullable: true, additionalProperties: true }
                       created_at: { type: string }
-    OkConfigMap:
-      allOf:
-        - $ref: '#/components/schemas/EnvelopeOk'
-        - type: object
-          properties:
-            data:
-              type: object
-              additionalProperties: true
-    OkConfigSet:
-      allOf:
-        - $ref: '#/components/schemas/EnvelopeOk'
-        - type: object
-          properties:
-            data:
-              type: object
-              properties:
-                key: { type: string }
-                value: { type: object }
-    OkRefreshed:
-      allOf:
-        - $ref: '#/components/schemas/EnvelopeOk'
-        - type: object
-          properties:
-            data:
-              type: object
-              properties:
-                refreshed: { type: boolean }
-                userId: { type: [integer, 'null'] }
     Fail:
       $ref: '#/components/schemas/EnvelopeFail'
     PlayerLinkRequest:

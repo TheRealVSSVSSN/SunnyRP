@@ -31,6 +31,9 @@ const Schema = z.object({
   ENABLE_IP_ALLOWLIST: z.coerce.boolean().default(false),
   ALLOWLIST_IPS: z.string().default('127.0.0.1,::1'),
 
+  // Reverse proxy
+  TRUST_PROXY: z.coerce.boolean().default(false),
+
   // Idempotency
   IDEMPOTENCY_TTL_SEC: z.coerce.number().default(600),
 
@@ -39,7 +42,15 @@ const Schema = z.object({
 
   // Caches
   FEATURE_CACHE_TTL_SEC: z.coerce.number().default(10),
-  SCOPES_CACHE_TTL_SEC: z.coerce.number().default(30)
+  SCOPES_CACHE_TTL_SEC: z.coerce.number().default(30),
+
+  // Outbox worker
+  ENABLE_OUTBOX_WORKER: z.coerce.boolean().default(false),
+  OUTBOX_BATCH_SIZE: z.coerce.number().default(50),
+  OUTBOX_CLAIM_TIMEOUT_SEC: z.coerce.number().default(60),
+  OUTBOX_INTERVAL_MS: z.coerce.number().default(1000),
+  OUTBOX_DELIVERY_URL: z.string().optional(),
+  OUTBOX_REDIS_CHANNEL_PREFIX: z.string().default('srp:outbox:')
 });
 
 export const env = Object.freeze(Schema.parse(process.env));
