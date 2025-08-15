@@ -7,17 +7,18 @@ import { env } from '../config/env.js';
 import { readAudit } from '../repositories/audit.repo.js';
 import {
     ensureUserByIdentifiers,
-    isAdmin,
     banUser,
     kickUser
 } from '../repositories/admin.repo.js';
 import { findUserIdByAnyIdentifier } from '../repositories/identity.repo.js';
 import { idempotentRoute } from '../middleware/idempotency.js';
+import { requireScopes } from '../middleware/requireScopes.js';
 
 export const adminRouter = Router();
 
 /**
  * POST /v1/admin/ban
+ * requires scope: admin OR admin.ban
  */
 adminRouter.post(
     '/v1/admin/ban',
@@ -36,12 +37,9 @@ adminRouter.post(
             active: z.coerce.boolean().default(true)
         })
     }),
+    requireScopes(req => req.body.actorUserId, ['admin', 'admin.ban']),
     idempotentRoute(async (req, res) => {
         const { actorUserId, targetUserId, primary, identifiers, reason, active } = req.body;
-
-        if (!(await isAdmin(actorUserId))) {
-            return fail(req, res, 'FORBIDDEN', 'Admin scope required');
-        }
 
         let targetId = targetUserId || null;
         if (!targetId) {
@@ -61,6 +59,7 @@ adminRouter.post(
 
 /**
  * POST /v1/admin/kick
+ * requires scope: admin OR admin.kick
  */
 adminRouter.post(
     '/v1/admin/kick',
@@ -76,13 +75,9 @@ adminRouter.post(
             reason: z.string().optional()
         })
     }),
+    requireScopes(req => req.body.actorUserId, ['admin', 'admin.kick']),
     idempotentRoute(async (req, res) => {
         const { actorUserId, targetUserId, reason } = req.body;
-
-        if (!(await isAdmin(actorUserId))) {
-            return fail(req, res, 'FORBIDDEN', 'Admin scope required');
-        }
-
         const result = await kickUser(actorUserId, targetUserId, reason || null);
         return ok(req, res, result);
     })
@@ -90,6 +85,7 @@ adminRouter.post(
 
 /**
  * GET /v1/admin/audit
+ * (rate-limited; no scope required for read here, but you can add requireScopes if desired)
  */
 adminRouter.get(
     '/v1/admin/audit',

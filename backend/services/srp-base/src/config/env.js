@@ -35,7 +35,11 @@ const Schema = z.object({
   IDEMPOTENCY_TTL_SEC: z.coerce.number().default(600),
 
   // Live config
-  ENABLE_CONFIG_WRITE: z.coerce.boolean().default(false)
+  ENABLE_CONFIG_WRITE: z.coerce.boolean().default(false),
+
+  // Caches
+  FEATURE_CACHE_TTL_SEC: z.coerce.number().default(10),
+  SCOPES_CACHE_TTL_SEC: z.coerce.number().default(30)
 });
 
 export const env = Object.freeze(Schema.parse(process.env));

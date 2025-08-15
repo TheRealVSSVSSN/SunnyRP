@@ -12,9 +12,12 @@ import { requestId } from './middleware/requestId.js';
 import { authToken } from './middleware/authToken.js';
 import { replayGuard } from './middleware/replayGuard.js';
 import { ipAllowlist } from './middleware/ipAllowlist.js';
+import { featureGate } from './middleware/featureGate.js';
 import { errorHandler } from './middleware/errorHandler.js';
+
 import { healthRouter } from './routes/health.routes.js';
 import { initMetrics, metricsRouter } from './utils/metrics.js';
+
 import { identityRouter } from './routes/identity.routes.js';
 import { adminRouter } from './routes/admin.routes.js';
 import { permissionsRouter } from './routes/permissions.routes.js';
@@ -51,12 +54,12 @@ export function buildApp() {
         app.use(metricsRouter);
     }
 
-    // base routes
-    app.use(identityRouter);
-    app.use(adminRouter);
-    app.use(permissionsRouter);
-    app.use(configRouter);
-    app.use(outboxRouter);
+    // Feature-gated routers (runtime toggleable via config 'features' map)
+    app.use(featureGate('identity'), identityRouter);
+    app.use(featureGate('admin'), adminRouter);
+    app.use(featureGate('permissions'), permissionsRouter);
+    app.use(featureGate('config'), configRouter);
+    app.use(featureGate('outbox'), outboxRouter);
 
     // uniform error envelope
     app.use(errorHandler());

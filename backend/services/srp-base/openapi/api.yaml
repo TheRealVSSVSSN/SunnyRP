@@ -83,7 +83,7 @@ paths:
                 $ref: '#/components/schemas/OkScopes'
   /v1/permissions/grant:
     post:
-      summary: Grant a role to a user
+      summary: Grant a role to a user (requires admin or admin.permissions)
       requestBody:
         required: true
         content:
@@ -105,7 +105,7 @@ paths:
                 $ref: '#/components/schemas/Fail'
   /v1/permissions/revoke:
     post:
-      summary: Revoke a role from a user
+      summary: Revoke a role from a user (requires admin or admin.permissions)
       requestBody:
         required: true
         content:
@@ -125,9 +125,29 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Fail'
+  /v1/permissions/cache/refresh:
+    post:
+      summary: Clear scopes cache (all or one user) (requires admin or admin.permissions)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [actorUserId]
+              properties:
+                actorUserId: { type: integer }
+                userId: { type: integer, nullable: true }
+      responses:
+        '200':
+          description: Refreshed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OkRefreshed'
   /v1/admin/ban:
     post:
-      summary: Ban or re-ban a user
+      summary: Ban or re-ban a user (requires admin or admin.ban)
       requestBody:
         required: true
         content:
@@ -149,7 +169,7 @@ paths:
                 $ref: '#/components/schemas/Fail'
   /v1/admin/kick:
     post:
-      summary: Record a kick (audit); game kick handled by server
+      summary: Record a kick (requires admin or admin.kick)
       requestBody:
         required: true
         content:
@@ -219,22 +239,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Fail'
-  /v1/outbox/enqueue:
-    post:
-      summary: Enqueue an outbox event for async processing
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OutboxEnqueueRequest'
-      responses:
-        '200':
-          description: Enqueued
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OkOutbox'
 components:
   schemas:
     EnvelopeOk:
@@ -372,7 +376,7 @@ components:
               properties:
                 key: { type: string }
                 value: { type: object }
-    OkOutbox:
+    OkRefreshed:
       allOf:
         - $ref: '#/components/schemas/EnvelopeOk'
         - type: object
@@ -380,8 +384,8 @@ components:
             data:
               type: object
               properties:
-                id: { type: integer }
-                topic: { type: string }
+                refreshed: { type: boolean }
+                userId: { type: [integer, 'null'] }
     Fail:
       $ref: '#/components/schemas/EnvelopeFail'
     PlayerLinkRequest:
@@ -427,15 +431,3 @@ components:
         actorUserId: { type: integer }
         targetUserId: { type: integer }
         reason: { type: string, nullable: true }
-    ConfigSetRequest:
-      type: object
-      required: [key, value]
-      properties:
-        key: { type: string }
-        value: { type: object, additionalProperties: true }
-    OutboxEnqueueRequest:
-      type: object
-      required: [topic, payload]
-      properties:
-        topic: { type: string }
-        payload: { type: object, additionalProperties: true }

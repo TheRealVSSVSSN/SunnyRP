@@ -4,6 +4,7 @@ import { ok, fail } from '../utils/respond.js';
 import { getAllConfig, setConfig } from '../repositories/config.repo.js';
 import { env } from '../config/env.js';
 import { recordAudit } from '../repositories/audit.repo.js';
+import { invalidateFeaturesCache } from '../services/features.service.js';
 
 export const configRouter = Router();
 
@@ -24,6 +25,7 @@ configRouter.get('/v1/config/live', async (req, res, next) => {
  * POST /v1/config/live
  * body: { key: string, value: any, actorUserId?: number }
  * Requires ENABLE_CONFIG_WRITE=true (env guard).
+ * If key === 'features', feature cache is invalidated immediately.
  */
 configRouter.post('/v1/config/live', async (req, res, next) => {
     try {
@@ -35,6 +37,9 @@ configRouter.post('/v1/config/live', async (req, res, next) => {
             return fail(req, res, 'INVALID_INPUT', 'Missing key');
         }
         await setConfig(key, value);
+        if (key === 'features') {
+            await invalidateFeaturesCache();
+        }
         if (actorUserId) {
             await recordAudit(actorUserId, null, 'config.set', { key, value });
         }
