@@ -19,7 +19,13 @@ const Schema = z.object({
     DB_USER: z.string(),
     DB_PASSWORD: z.string(),
     DB_NAME: z.string(),
-    DB_CONN_LIMIT: z.coerce.number().default(10)
+    DB_CONN_LIMIT: z.coerce.number().default(10),
+
+    // Rate limits
+    RATE_LIMIT_WINDOW_SEC: z.coerce.number().default(60),
+    RATE_LIMIT_MAX_BAN: z.coerce.number().default(10),
+    RATE_LIMIT_MAX_PERMISSIONS: z.coerce.number().default(60),
+    RATE_LIMIT_MAX_AUDIT_READ: z.coerce.number().default(120)
 });
 
 export const env = Object.freeze(Schema.parse(process.env));

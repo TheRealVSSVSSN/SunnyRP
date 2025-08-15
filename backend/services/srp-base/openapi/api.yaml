@@ -81,6 +81,91 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OkScopes'
+  /v1/permissions/grant:
+    post:
+      summary: Grant a role to a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GrantRoleRequest'
+      responses:
+        '200':
+          description: Granted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OkGrantRevoke'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fail'
+  /v1/permissions/revoke:
+    post:
+      summary: Revoke a role from a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RevokeRoleRequest'
+      responses:
+        '200':
+          description: Revoked
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OkGrantRevoke'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fail'
+  /v1/admin/ban:
+    post:
+      summary: Ban or re-ban a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BanRequest'
+      responses:
+        '200':
+          description: Banned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OkBan'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fail'
+  /v1/admin/audit:
+    get:
+      summary: Read audit log
+      parameters:
+        - name: userId
+          in: query
+          required: false
+          schema: { type: string }
+        - name: limit
+          in: query
+          required: false
+          schema: { type: integer, default: 50, minimum: 1, maximum: 200 }
+      responses:
+        '200':
+          description: Audit entries
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OkAudit'
 components:
   schemas:
     EnvelopeOk:
@@ -109,16 +194,6 @@ components:
           properties:
             code:
               type: string
-              enum:
-                - INVALID_INPUT
-                - UNAUTHENTICATED
-                - FORBIDDEN
-                - NOT_FOUND
-                - CONFLICT
-                - FAILED_PRECONDITION
-                - RATE_LIMITED
-                - INTERNAL_ERROR
-                - DEPENDENCY_DOWN
             message:
               type: string
             details:
@@ -165,6 +240,8 @@ components:
                   type: array
                   items:
                     type: string
+                userId:
+                  type: integer
     OkScopes:
       allOf:
         - $ref: '#/components/schemas/EnvelopeOk'
@@ -177,6 +254,54 @@ components:
                   type: array
                   items:
                     type: string
+    OkGrantRevoke:
+      allOf:
+        - $ref: '#/components/schemas/EnvelopeOk'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                userId:
+                  type: integer
+                role:
+                  type: string
+                action:
+                  type: string
+                  example: "granted"
+    OkBan:
+      allOf:
+        - $ref: '#/components/schemas/EnvelopeOk'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                userId:
+                  type: integer
+                banned:
+                  type: boolean
+                reason:
+                  type: [string, 'null']
+    OkAudit:
+      allOf:
+        - $ref: '#/components/schemas/EnvelopeOk'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                entries:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id: { type: integer }
+                      actor_user_id: { type: [integer, 'null'] }
+                      target_user_id: { type: [integer, 'null'] }
+                      action: { type: string }
+                      meta: { type: object, nullable: true, additionalProperties: true }
+                      created_at: { type: string }
     Fail:
       $ref: '#/components/schemas/EnvelopeFail'
     PlayerLinkRequest:
@@ -193,3 +318,30 @@ components:
         ip:
           type: string
           example: "127.0.0.1"
+    GrantRoleRequest:
+      type: object
+      required: [actorUserId, targetUserId, role]
+      properties:
+        actorUserId: { type: integer }
+        targetUserId: { type: integer }
+        role: { type: string }
+    RevokeRoleRequest:
+      type: object
+      required: [actorUserId, targetUserId, role]
+      properties:
+        actorUserId: { type: integer }
+        targetUserId: { type: integer }
+        role: { type: string }
+    BanRequest:
+      type: object
+      required: [actorUserId]
+      properties:
+        actorUserId: { type: integer }
+        targetUserId: { type: integer, nullable: true }
+        primary: { type: string, nullable: true, description: license|steam|discord }
+        identifiers:
+          type: array
+          nullable: true
+          items: { type: string }
+        reason: { type: string, nullable: true }
+        active: { type: boolean, default: true }

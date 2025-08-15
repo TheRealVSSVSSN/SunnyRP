@@ -15,6 +15,8 @@ import { errorHandler } from './middleware/errorHandler.js';
 import { healthRouter } from './routes/health.routes.js';
 import { initMetrics, metricsRouter } from './utils/metrics.js';
 import { identityRouter } from './routes/identity.routes.js';
+import { adminRouter } from './routes/admin.routes.js';
+import { permissionsRouter } from './routes/permissions.routes.js';
 
 export function buildApp() {
     const app = express();
@@ -42,8 +44,10 @@ export function buildApp() {
         app.use(metricsRouter);
     }
 
-    // Phase B (minimal) routes
+    // Phase B routes
     app.use(identityRouter);
+    app.use(adminRouter);
+    app.use(permissionsRouter);
 
     // uniform error envelope
     app.use(errorHandler());
