@@ -19,7 +19,7 @@ paths:
                 $ref: '#/components/schemas/OkHealth'
   /v1/ready:
     get:
-      summary: Readiness check (deps)
+      summary: Readiness check (DB/Redis)
       responses:
         '200':
           description: Ready
@@ -147,6 +147,28 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Fail'
+  /v1/admin/kick:
+    post:
+      summary: Record a kick (audit); game kick handled by server
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KickRequest'
+      responses:
+        '200':
+          description: Kicked (recorded)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OkKick'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fail'
   /v1/admin/audit:
     get:
       summary: Read audit log
@@ -166,42 +188,77 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OkAudit'
+  /v1/config/live:
+    get:
+      summary: Get live config map
+      responses:
+        '200':
+          description: Config map
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OkConfigMap'
+    post:
+      summary: Set a config key (requires ENABLE_CONFIG_WRITE=true)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfigSetRequest'
+      responses:
+        '200':
+          description: Set OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OkConfigSet'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fail'
+  /v1/outbox/enqueue:
+    post:
+      summary: Enqueue an outbox event for async processing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OutboxEnqueueRequest'
+      responses:
+        '200':
+          description: Enqueued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OkOutbox'
 components:
   schemas:
     EnvelopeOk:
       type: object
       required: [ok, data, requestId, traceId]
       properties:
-        ok:
-          type: boolean
-          enum: [true]
-        data:
-          type: object
-        requestId:
-          type: string
-        traceId:
-          type: string
+        ok: { type: boolean, enum: [true] }
+        data: { type: object }
+        requestId: { type: string }
+        traceId: { type: string }
     EnvelopeFail:
       type: object
       required: [ok, error, requestId, traceId]
       properties:
-        ok:
-          type: boolean
-          enum: [false]
+        ok: { type: boolean, enum: [false] }
         error:
           type: object
           required: [code, message]
           properties:
-            code:
-              type: string
-            message:
-              type: string
-            details:
-              type: object
-        requestId:
-          type: string
-        traceId:
-          type: string
+            code: { type: string }
+            message: { type: string }
+            details: { type: object }
+        requestId: { type: string }
+        traceId: { type: string }
     OkHealth:
       allOf:
         - $ref: '#/components/schemas/EnvelopeOk'
@@ -210,9 +267,7 @@ components:
             data:
               type: object
               properties:
-                status:
-                  type: string
-                  example: ok
+                status: { type: string, example: ok }
     OkReady:
       allOf:
         - $ref: '#/components/schemas/EnvelopeOk'
@@ -221,9 +276,7 @@ components:
             data:
               type: object
               properties:
-                ready:
-                  type: boolean
-                  example: true
+                ready: { type: boolean, example: true }
     OkPlayerLink:
       allOf:
         - $ref: '#/components/schemas/EnvelopeOk'
@@ -232,16 +285,12 @@ components:
             data:
               type: object
               properties:
-                banned:
-                  type: boolean
-                banReason:
-                  type: [string, 'null']
+                banned: { type: boolean }
+                banReason: { type: [string, 'null'] }
                 scopes:
                   type: array
-                  items:
-                    type: string
-                userId:
-                  type: integer
+                  items: { type: string }
+                userId: { type: integer }
     OkScopes:
       allOf:
         - $ref: '#/components/schemas/EnvelopeOk'
@@ -252,8 +301,7 @@ components:
               properties:
                 scopes:
                   type: array
-                  items:
-                    type: string
+                  items: { type: string }
     OkGrantRevoke:
       allOf:
         - $ref: '#/components/schemas/EnvelopeOk'
@@ -262,13 +310,9 @@ components:
             data:
               type: object
               properties:
-                userId:
-                  type: integer
-                role:
-                  type: string
-                action:
-                  type: string
-                  example: "granted"
+                userId: { type: integer }
+                role: { type: string }
+                action: { type: string, example: granted }
     OkBan:
       allOf:
         - $ref: '#/components/schemas/EnvelopeOk'
@@ -277,12 +321,20 @@ components:
             data:
               type: object
               properties:
-                userId:
-                  type: integer
-                banned:
-                  type: boolean
-                reason:
-                  type: [string, 'null']
+                userId: { type: integer }
+                banned: { type: boolean }
+                reason: { type: [string, 'null'] }
+    OkKick:
+      allOf:
+        - $ref: '#/components/schemas/EnvelopeOk'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                userId: { type: integer }
+                kicked: { type: boolean }
+                reason: { type: [string, 'null'] }
     OkAudit:
       allOf:
         - $ref: '#/components/schemas/EnvelopeOk'
@@ -302,22 +354,45 @@ components:
                       action: { type: string }
                       meta: { type: object, nullable: true, additionalProperties: true }
                       created_at: { type: string }
+    OkConfigMap:
+      allOf:
+        - $ref: '#/components/schemas/EnvelopeOk'
+        - type: object
+          properties:
+            data:
+              type: object
+              additionalProperties: true
+    OkConfigSet:
+      allOf:
+        - $ref: '#/components/schemas/EnvelopeOk'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                key: { type: string }
+                value: { type: object }
+    OkOutbox:
+      allOf:
+        - $ref: '#/components/schemas/EnvelopeOk'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                id: { type: integer }
+                topic: { type: string }
     Fail:
       $ref: '#/components/schemas/EnvelopeFail'
     PlayerLinkRequest:
       type: object
       required: [primary, identifiers]
       properties:
-        primary:
-          type: string
-          description: license|steam|discord
+        primary: { type: string, description: license|steam|discord }
         identifiers:
           type: array
-          items:
-            type: string
-        ip:
-          type: string
-          example: "127.0.0.1"
+          items: { type: string }
+        ip: { type: string, example: "127.0.0.1" }
     GrantRoleRequest:
       type: object
       required: [actorUserId, targetUserId, role]
@@ -345,3 +420,22 @@ components:
           items: { type: string }
         reason: { type: string, nullable: true }
         active: { type: boolean, default: true }
+    KickRequest:
+      type: object
+      required: [actorUserId, targetUserId]
+      properties:
+        actorUserId: { type: integer }
+        targetUserId: { type: integer }
+        reason: { type: string, nullable: true }
+    ConfigSetRequest:
+      type: object
+      required: [key, value]
+      properties:
+        key: { type: string }
+        value: { type: object, additionalProperties: true }
+    OutboxEnqueueRequest:
+      type: object
+      required: [topic, payload]
+      properties:
+        topic: { type: string }
+        payload: { type: object, additionalProperties: true }

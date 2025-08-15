@@ -11,6 +11,7 @@ import {
     getBanStatus,
     getScopes
 } from '../repositories/identity.repo.js';
+import { idempotentRoute } from '../middleware/idempotency.js';
 
 export const identityRouter = Router();
 
@@ -22,31 +23,23 @@ export const identityRouter = Router();
 identityRouter.post(
     '/v1/players/link',
     validate({ body: PlayerLinkRequestSchema }),
-    async (req, res, next) => {
-        try {
-            const { primary, identifiers, ip } = req.body;
+    idempotentRoute(async (req, res) => {
+        const { primary, identifiers, ip } = req.body;
 
-            // Find existing user by any provided identifier
-            let userId = await findUserIdByAnyIdentifier(identifiers);
+        let userId = await findUserIdByAnyIdentifier(identifiers);
 
-            // Create user if not found
-            if (!userId) {
-                userId = await createUser(primary);
-            }
-
-            // Upsert identifiers + IP and touch last_seen / last_ip
-            await addIdentifiers(userId, identifiers, ip);
-            await touchUser(userId, ip);
-
-            // Ban check + scopes
-            const { banned, banReason } = await getBanStatus(userId);
-            const scopes = await getScopes(userId);
-
-            return ok(req, res, { banned, banReason, scopes, userId });
-        } catch (err) {
-            return next(err);
+        if (!userId) {
+            userId = await createUser(primary);
         }
-    }
+
+        await addIdentifiers(userId, identifiers, ip);
+        await touchUser(userId, ip);
+
+        const { banned, banReason } = await getBanStatus(userId);
+        const scopes = await getScopes(userId);
+
+        return ok(req, res, { banned, banReason, scopes, userId });
+    })
 );
 
 /**

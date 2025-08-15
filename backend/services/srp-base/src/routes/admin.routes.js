@@ -11,21 +11,13 @@ import {
     banUser,
     kickUser
 } from '../repositories/admin.repo.js';
-
 import { findUserIdByAnyIdentifier } from '../repositories/identity.repo.js';
+import { idempotentRoute } from '../middleware/idempotency.js';
 
 export const adminRouter = Router();
 
 /**
  * POST /v1/admin/ban
- * body: {
- *   actorUserId: number,
- *   targetUserId?: number,
- *   primary?: 'license'|'steam'|'discord',
- *   identifiers?: string[],
- *   reason?: string,
- *   active?: boolean
- * }
  */
 adminRouter.post(
     '/v1/admin/ban',
@@ -44,39 +36,31 @@ adminRouter.post(
             active: z.coerce.boolean().default(true)
         })
     }),
-    async (req, res, next) => {
-        try {
-            const { actorUserId, targetUserId, primary, identifiers, reason, active } = req.body;
+    idempotentRoute(async (req, res) => {
+        const { actorUserId, targetUserId, primary, identifiers, reason, active } = req.body;
 
-            if (!(await isAdmin(actorUserId))) {
-                return fail(req, res, 'FORBIDDEN', 'Admin scope required');
-            }
-
-            let targetId = targetUserId || null;
-            if (!targetId) {
-                if (!identifiers || identifiers.length === 0) {
-                    return fail(req, res, 'INVALID_INPUT', 'Provide targetUserId or identifiers[]');
-                }
-                // resolve or create target user
-                targetId = await ensureUserByIdentifiers(primary || 'license', identifiers, null);
-            } else {
-                // sanity check: exists?
-                const found = await findUserIdByAnyIdentifier([`user:${targetId}`]).catch(() => null);
-                (void found); // non-fatal; we allow direct ban by id even if not found in identifiers
-            }
-
-            const result = await banUser(actorUserId, targetId, reason || null, active !== false);
-            return ok(req, res, result);
-        } catch (err) {
-            return next(err);
+        if (!(await isAdmin(actorUserId))) {
+            return fail(req, res, 'FORBIDDEN', 'Admin scope required');
         }
-    }
+
+        let targetId = targetUserId || null;
+        if (!targetId) {
+            if (!identifiers || identifiers.length === 0) {
+                return fail(req, res, 'INVALID_INPUT', 'Provide targetUserId or identifiers[]');
+            }
+            targetId = await ensureUserByIdentifiers(primary || 'license', identifiers, null);
+        } else {
+            const found = await findUserIdByAnyIdentifier([`user:${targetId}`]).catch(() => null);
+            (void found);
+        }
+
+        const result = await banUser(actorUserId, targetId, reason || null, active !== false);
+        return ok(req, res, result);
+    })
 );
 
 /**
  * POST /v1/admin/kick
- * body: { actorUserId: number, targetUserId: number, reason?: string }
- * (Records audit; actual kick can be performed by FiveM base via separate channel/outbox later.)
  */
 adminRouter.post(
     '/v1/admin/kick',
@@ -92,24 +76,20 @@ adminRouter.post(
             reason: z.string().optional()
         })
     }),
-    async (req, res, next) => {
-        try {
-            const { actorUserId, targetUserId, reason } = req.body;
+    idempotentRoute(async (req, res) => {
+        const { actorUserId, targetUserId, reason } = req.body;
 
-            if (!(await isAdmin(actorUserId))) {
-                return fail(req, res, 'FORBIDDEN', 'Admin scope required');
-            }
-
-            const result = await kickUser(actorUserId, targetUserId, reason || null);
-            return ok(req, res, result);
-        } catch (err) {
-            return next(err);
+        if (!(await isAdmin(actorUserId))) {
+            return fail(req, res, 'FORBIDDEN', 'Admin scope required');
         }
-    }
+
+        const result = await kickUser(actorUserId, targetUserId, reason || null);
+        return ok(req, res, result);
+    })
 );
 
 /**
- * GET /v1/admin/audit?userId=&limit=
+ * GET /v1/admin/audit
  */
 adminRouter.get(
     '/v1/admin/audit',

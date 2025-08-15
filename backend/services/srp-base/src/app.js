@@ -11,12 +11,15 @@ import { captureRawBody } from './middleware/rawBody.js';
 import { requestId } from './middleware/requestId.js';
 import { authToken } from './middleware/authToken.js';
 import { replayGuard } from './middleware/replayGuard.js';
+import { ipAllowlist } from './middleware/ipAllowlist.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import { healthRouter } from './routes/health.routes.js';
 import { initMetrics, metricsRouter } from './utils/metrics.js';
 import { identityRouter } from './routes/identity.routes.js';
 import { adminRouter } from './routes/admin.routes.js';
 import { permissionsRouter } from './routes/permissions.routes.js';
+import { configRouter } from './routes/config.routes.js';
+import { outboxRouter } from './routes/outbox.routes.js';
 
 export function buildApp() {
     const app = express();
@@ -33,6 +36,10 @@ export function buildApp() {
     app.use(requestId());
     app.use(authToken(env.API_TOKEN));
 
+    if (env.ENABLE_IP_ALLOWLIST) {
+        app.use(ipAllowlist(env.ALLOWLIST_IPS));
+    }
+
     if (env.ENABLE_REPLAY_GUARD) {
         app.use(replayGuard());
     }
@@ -44,10 +51,12 @@ export function buildApp() {
         app.use(metricsRouter);
     }
 
-    // Phase B routes
+    // base routes
     app.use(identityRouter);
     app.use(adminRouter);
     app.use(permissionsRouter);
+    app.use(configRouter);
+    app.use(outboxRouter);
 
     // uniform error envelope
     app.use(errorHandler());

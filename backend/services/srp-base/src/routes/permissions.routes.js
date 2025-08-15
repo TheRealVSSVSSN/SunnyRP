@@ -6,12 +6,12 @@ import { rateLimit } from '../middleware/rateLimit.js';
 import { env } from '../config/env.js';
 import { grantRole, revokeRole } from '../repositories/roles.repo.js';
 import { isAdmin } from '../repositories/admin.repo.js';
+import { idempotentRoute } from '../middleware/idempotency.js';
 
 export const permissionsRouter = Router();
 
 /**
  * POST /v1/permissions/grant
- * body: { actorUserId: number, targetUserId: number, role: string }
  */
 permissionsRouter.post(
     '/v1/permissions/grant',
@@ -27,24 +27,18 @@ permissionsRouter.post(
             role: z.string().min(2)
         })
     }),
-    async (req, res, next) => {
-        try {
-            const { actorUserId, targetUserId, role } = req.body;
-            if (!(await isAdmin(actorUserId))) {
-                return fail(req, res, 'FORBIDDEN', 'Admin scope required');
-            }
-
-            const r = await grantRole(targetUserId, role);
-            return ok(req, res, { userId: targetUserId, role: r, action: 'granted' });
-        } catch (err) {
-            return next(err);
+    idempotentRoute(async (req, res) => {
+        const { actorUserId, targetUserId, role } = req.body;
+        if (!(await isAdmin(actorUserId))) {
+            return fail(req, res, 'FORBIDDEN', 'Admin scope required');
         }
-    }
+        const r = await grantRole(targetUserId, role);
+        return ok(req, res, { userId: targetUserId, role: r, action: 'granted' });
+    })
 );
 
 /**
  * POST /v1/permissions/revoke
- * body: { actorUserId: number, targetUserId: number, role: string }
  */
 permissionsRouter.post(
     '/v1/permissions/revoke',
@@ -60,17 +54,12 @@ permissionsRouter.post(
             role: z.string().min(2)
         })
     }),
-    async (req, res, next) => {
-        try {
-            const { actorUserId, targetUserId, role } = req.body;
-            if (!(await isAdmin(actorUserId))) {
-                return fail(req, res, 'FORBIDDEN', 'Admin scope required');
-            }
-
-            await revokeRole(targetUserId, role);
-            return ok(req, res, { userId: targetUserId, role, action: 'revoked' });
-        } catch (err) {
-            return next(err);
+    idempotentRoute(async (req, res) => {
+        const { actorUserId, targetUserId, role } = req.body;
+        if (!(await isAdmin(actorUserId))) {
+            return fail(req, res, 'FORBIDDEN', 'Admin scope required');
         }
-    }
+        await revokeRole(targetUserId, role);
+        return ok(req, res, { userId: targetUserId, role, action: 'revoked' });
+    })
 );

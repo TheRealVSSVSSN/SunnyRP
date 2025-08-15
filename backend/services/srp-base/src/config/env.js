@@ -2,30 +2,40 @@
 import { z } from 'zod';
 
 const Schema = z.object({
-    NODE_ENV: z.string().default('development'),
-    PORT: z.coerce.number().default(3301),
-    API_TOKEN: z.string().min(8),
+  NODE_ENV: z.string().default('development'),
+  PORT: z.coerce.number().default(3301),
+  API_TOKEN: z.string().min(8),
 
-    ENABLE_REPLAY_GUARD: z.coerce.boolean().default(true),
-    REPLAY_ALLOWED_SKEW_SECONDS: z.coerce.number().default(90),
-    REDIS_URL: z.string().optional(),
+  ENABLE_REPLAY_GUARD: z.coerce.boolean().default(true),
+  REPLAY_ALLOWED_SKEW_SECONDS: z.coerce.number().default(90),
+  REDIS_URL: z.string().optional(),
 
-    ENABLE_METRICS: z.coerce.boolean().default(true),
-    LOG_LEVEL: z.string().default('info'),
+  ENABLE_METRICS: z.coerce.boolean().default(true),
+  LOG_LEVEL: z.string().default('info'),
 
-    // MySQL
-    DB_HOST: z.string(),
-    DB_PORT: z.coerce.number().default(3306),
-    DB_USER: z.string(),
-    DB_PASSWORD: z.string(),
-    DB_NAME: z.string(),
-    DB_CONN_LIMIT: z.coerce.number().default(10),
+  // MySQL
+  DB_HOST: z.string(),
+  DB_PORT: z.coerce.number().default(3306),
+  DB_USER: z.string(),
+  DB_PASSWORD: z.string(),
+  DB_NAME: z.string(),
+  DB_CONN_LIMIT: z.coerce.number().default(10),
 
-    // Rate limits
-    RATE_LIMIT_WINDOW_SEC: z.coerce.number().default(60),
-    RATE_LIMIT_MAX_BAN: z.coerce.number().default(10),
-    RATE_LIMIT_MAX_PERMISSIONS: z.coerce.number().default(60),
-    RATE_LIMIT_MAX_AUDIT_READ: z.coerce.number().default(120)
+  // Rate limits
+  RATE_LIMIT_WINDOW_SEC: z.coerce.number().default(60),
+  RATE_LIMIT_MAX_BAN: z.coerce.number().default(10),
+  RATE_LIMIT_MAX_PERMISSIONS: z.coerce.number().default(60),
+  RATE_LIMIT_MAX_AUDIT_READ: z.coerce.number().default(120),
+
+  // IP allowlist
+  ENABLE_IP_ALLOWLIST: z.coerce.boolean().default(false),
+  ALLOWLIST_IPS: z.string().default('127.0.0.1,::1'),
+
+  // Idempotency
+  IDEMPOTENCY_TTL_SEC: z.coerce.number().default(600),
+
+  // Live config
+  ENABLE_CONFIG_WRITE: z.coerce.boolean().default(false)
 });
 
 export const env = Object.freeze(Schema.parse(process.env));
