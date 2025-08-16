@@ -10,6 +10,7 @@ import { env } from '../config/env.js';
 import { logger } from '../utils/logger.js';
 import { claimPendingBatch, markDelivered, markFailed } from '../repositories/outbox.repo.js';
 import { createClient } from 'redis';
+import { httpPostJson } from '../utils/httpClient.js';
 
 let redis = null;
 
@@ -29,14 +30,11 @@ async function deliverMessage(msg) {
     if (env.OUTBOX_DELIVERY_URL) {
         deliveries.push(
             (async () => {
-                const res = await fetch(env.OUTBOX_DELIVERY_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ id: msg.id, topic: msg.topic, payload: msg.payload })
+                await httpPostJson(env.OUTBOX_DELIVERY_URL, {
+                    id: msg.id,
+                    topic: msg.topic,
+                    payload: msg.payload
                 });
-                if (!res.ok) {
-                    throw new Error(`HTTP ${res.status}`);
-                }
             })()
         );
     }

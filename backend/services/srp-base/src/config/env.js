@@ -26,6 +26,7 @@ const Schema = z.object({
   RATE_LIMIT_MAX_BAN: z.coerce.number().default(10),
   RATE_LIMIT_MAX_PERMISSIONS: z.coerce.number().default(60),
   RATE_LIMIT_MAX_AUDIT_READ: z.coerce.number().default(120),
+  RATE_LIMIT_MAX_ADMIN_READ: z.coerce.number().default(120),
 
   // IP allowlist
   ENABLE_IP_ALLOWLIST: z.coerce.boolean().default(false),
@@ -43,6 +44,7 @@ const Schema = z.object({
   // Caches
   FEATURE_CACHE_TTL_SEC: z.coerce.number().default(10),
   SCOPES_CACHE_TTL_SEC: z.coerce.number().default(30),
+  SCOPES_CACHE_USE_REDIS: z.coerce.boolean().default(true),
 
   // Outbox worker
   ENABLE_OUTBOX_WORKER: z.coerce.boolean().default(false),
@@ -50,7 +52,11 @@ const Schema = z.object({
   OUTBOX_CLAIM_TIMEOUT_SEC: z.coerce.number().default(60),
   OUTBOX_INTERVAL_MS: z.coerce.number().default(1000),
   OUTBOX_DELIVERY_URL: z.string().optional(),
-  OUTBOX_REDIS_CHANNEL_PREFIX: z.string().default('srp:outbox:')
+  OUTBOX_REDIS_CHANNEL_PREFIX: z.string().default('srp:outbox:'),
+
+  // HTTP client
+  HTTP_TIMEOUT_MS: z.coerce.number().default(3000),
+  HTTP_RETRY_COUNT: z.coerce.number().default(2)
 });
 
 export const env = Object.freeze(Schema.parse(process.env));

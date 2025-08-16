@@ -24,6 +24,31 @@ export async function findUserIdByAnyIdentifier(identifiers) {
     return rows[0]?.user_id || null;
 }
 
+export async function resolveUserByIdentifier(identifier) {
+    const { type, value } = parseIdentifier(identifier);
+    const [rows] = await pool.query(
+        `SELECT u.*
+     FROM users u
+     JOIN user_identifiers ui ON ui.user_id = u.id
+     WHERE ui.id_type = ? AND ui.id_value = ?
+     LIMIT 1`,
+        [type, value]
+    );
+    return rows[0] || null;
+}
+
+export async function getUserWithIdentifiers(userId) {
+    const [uRows] = await pool.query(`SELECT * FROM users WHERE id = ?`, [userId]);
+    if (!uRows.length) return null;
+    const user = uRows[0];
+    const [iRows] = await pool.query(
+        `SELECT id_type, id_value FROM user_identifiers WHERE user_id = ? ORDER BY id ASC`,
+        [userId]
+    );
+    const identifiers = iRows.map(r => `${r.id_type}:${r.id_value}`);
+    return { ...user, identifiers };
+}
+
 export async function createUser(primaryIdentifier) {
     const [res] = await pool.query(
         `INSERT INTO users (primary_identifier) VALUES (?)`,

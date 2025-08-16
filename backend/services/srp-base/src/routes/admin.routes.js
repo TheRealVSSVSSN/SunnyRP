@@ -10,7 +10,11 @@ import {
     banUser,
     kickUser
 } from '../repositories/admin.repo.js';
-import { findUserIdByAnyIdentifier } from '../repositories/identity.repo.js';
+import {
+    findUserIdByAnyIdentifier,
+    resolveUserByIdentifier,
+    getUserWithIdentifiers
+} from '../repositories/identity.repo.js';
 import { idempotentRoute } from '../middleware/idempotency.js';
 import { requireScopes } from '../middleware/requireScopes.js';
 
@@ -114,6 +118,69 @@ adminRouter.get(
                 before: before || null
             });
             return ok(req, res, { entries });
+        } catch (err) {
+            return next(err);
+        }
+    }
+);
+
+/**
+ * GET /v1/admin/users/resolve?actorUserId=&identifier=
+ * requires scope: admin OR admin.users
+ * Resolves a single identifier (e.g., license:xxx) to a user with identifiers.
+ */
+adminRouter.get(
+    '/v1/admin/users/resolve',
+    rateLimit({
+        key: (req) => `adminusers:${req.query?.actorUserId || req.ip}`,
+        windowSec: env.RATE_LIMIT_WINDOW_SEC,
+        limit: env.RATE_LIMIT_MAX_ADMIN_READ
+    }),
+    validate({
+        query: (z) => z.object({
+            actorUserId: z.coerce.number(),
+            identifier: z.string().min(3)
+        })
+    }),
+    requireScopes(req => Number(req.query.actorUserId), ['admin', 'admin.users']),
+    async (req, res, next) => {
+        try {
+            const { identifier } = req.query;
+            const user = await resolveUserByIdentifier(identifier);
+            if (!user) {
+                return fail(req, res, 'NOT_FOUND', 'No user for identifier');
+            }
+            const full = await getUserWithIdentifiers(user.id);
+            return ok(req, res, { user: full });
+        } catch (err) {
+            return next(err);
+        }
+    }
+);
+
+/**
+ * GET /v1/admin/users/:userId
+ * requires scope: admin OR admin.users
+ * Returns user row + identifiers[] for quick admin diagnostics.
+ */
+adminRouter.get(
+    '/v1/admin/users/:userId',
+    rateLimit({
+        key: (req) => `adminusers:${req.query?.actorUserId || req.ip}`,
+        windowSec: env.RATE_LIMIT_WINDOW_SEC,
+        limit: env.RATE_LIMIT_MAX_ADMIN_READ
+    }),
+    validate({
+        params: (z) => z.object({ userId: z.coerce.number() }),
+        query: (z) => z.object({ actorUserId: z.coerce.number() })
+    }),
+    requireScopes(req => Number(req.query.actorUserId), ['admin', 'admin.users']),
+    async (req, res, next) => {
+        try {
+            const { userId } = req.params;
+            const full = await getUserWithIdentifiers(userId);
+            if (!full) return fail(req, res, 'NOT_FOUND', 'User not found');
+            return ok(req, res, { user: full });
         } catch (err) {
             return next(err);
         }
