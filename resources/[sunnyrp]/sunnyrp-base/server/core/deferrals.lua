@@ -1,4 +1,5 @@
--- srp_base: server/deferrals.lua
+-- server/core/deferrals.lua
+-- Aligns to /v1/players/link and handles standard envelope from backend.
 
 local function splitCsv(s)
   local out = {}
@@ -63,7 +64,7 @@ AddEventHandler('playerConnecting', function(playerName, setKickReason, deferral
     meta = { endpoint = ids.ip or '', ts = os.time() }
   }
 
-  local res = SRP_HTTP.Fetch('POST', '/players/link', payload, { retries = 1, timeout = 8000 })
+  local res = SRP_HTTP.Fetch('POST', '/v1/players/link', payload, { retries = 1, timeout = 8000 })
   if not res.ok then
     if SRP_Config.Dev and SRP_Config.Dev.fakeBackend then
       step(deferrals, 'Backend unavailable; dev bypass enabled.')
@@ -73,7 +74,7 @@ AddEventHandler('playerConnecting', function(playerName, setKickReason, deferral
     end
   end
 
-  local data = (res.data or {})
+  local data = res.data or {}
   local playerId = data.playerId or data.id
   if not playerId and not (SRP_Config.Dev and SRP_Config.Dev.fakeBackend) then
     deferrals.done('Failed to create/link your account. (No playerId)')
@@ -117,7 +118,7 @@ AddEventHandler('playerConnecting', function(playerName, setKickReason, deferral
     Entity(ped).state:set('srp:verified', data.verified == true, true)
   end
 
-  -- loading bucket
+  -- loading bucket if available
   if SRP_Buckets and SRP_Buckets.ToLoading then
     SRP_Buckets.ToLoading(src)
   end

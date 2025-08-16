@@ -1,65 +1,40 @@
 // src/routes/permissions.routes.js
-import { Router } from 'express';
-import { ok, fail } from '../utils/respond.js';
-import { validate } from '../middleware/validate.js';
-import { rateLimit } from '../middleware/rateLimit.js';
-import { env } from '../config/env.js';
-import { grantRole, revokeRole } from '../repositories/roles.repo.js';
-import { isAdmin } from '../repositories/admin.repo.js';
-import { idempotentRoute } from '../middleware/idempotency.js';
+import { Router } from "express";
+import { ok, fail } from "../utils/respond.js";
 
-export const permissionsRouter = Router();
+let rolesRepo = null;
+async function loadRepo() {
+    if (!rolesRepo) {
+        try { rolesRepo = await import("../repositories/roles.repo.js"); }
+        catch { rolesRepo = null; }
+    }
+}
 
-/**
- * POST /v1/permissions/grant
- */
-permissionsRouter.post(
-    '/v1/permissions/grant',
-    rateLimit({
-        key: (req) => `perm:${req.body?.actorUserId || req.ip}`,
-        windowSec: env.RATE_LIMIT_WINDOW_SEC,
-        limit: env.RATE_LIMIT_MAX_PERMISSIONS
-    }),
-    validate({
-        body: (z) => z.object({
-            actorUserId: z.coerce.number(),
-            targetUserId: z.coerce.number(),
-            role: z.string().min(2)
-        })
-    }),
-    idempotentRoute(async (req, res) => {
-        const { actorUserId, targetUserId, role } = req.body;
-        if (!(await isAdmin(actorUserId))) {
-            return fail(req, res, 'FORBIDDEN', 'Admin scope required');
-        }
-        const r = await grantRole(targetUserId, role);
-        return ok(req, res, { userId: targetUserId, role: r, action: 'granted' });
-    })
-);
+const router = Router();
 
-/**
- * POST /v1/permissions/revoke
- */
-permissionsRouter.post(
-    '/v1/permissions/revoke',
-    rateLimit({
-        key: (req) => `perm:${req.body?.actorUserId || req.ip}`,
-        windowSec: env.RATE_LIMIT_WINDOW_SEC,
-        limit: env.RATE_LIMIT_MAX_PERMISSIONS
-    }),
-    validate({
-        body: (z) => z.object({
-            actorUserId: z.coerce.number(),
-            targetUserId: z.coerce.number(),
-            role: z.string().min(2)
-        })
-    }),
-    idempotentRoute(async (req, res) => {
-        const { actorUserId, targetUserId, role } = req.body;
-        if (!(await isAdmin(actorUserId))) {
-            return fail(req, res, 'FORBIDDEN', 'Admin scope required');
-        }
-        await revokeRole(targetUserId, role);
-        return ok(req, res, { userId: targetUserId, role, action: 'revoked' });
-    })
-);
+async function handleGet(req, res) {
+    const raw = req.params.playerId;
+    const playerId = Number(raw);
+    if (!playerId || Number.isNaN(playerId)) {
+        return fail(req, res, "INVALID_INPUT", "playerId must be a number");
+    }
+
+    await loadRepo();
+    if (!rolesRepo || !rolesRepo.getScopesForUserId) {
+        // Non-blocking fallback while DB comes up
+        return ok(req, res, { scopes: ["player"] });
+    }
+
+    try {
+        const scopes = await rolesRepo.getScopesForUserId(playerId);
+        return ok(req, res, { scopes: Array.isArray(scopes) ? scopes : [] });
+    } catch {
+        return fail(req, res, "INTERNAL_ERROR", "Could not fetch permissions");
+    }
+}
+
+// Back-compat (legacy path) AND v1 path
+router.get("/permissions/:playerId", handleGet);
+router.get("/v1/permissions/:playerId", handleGet);
+
+export const permissionsRouter = router;

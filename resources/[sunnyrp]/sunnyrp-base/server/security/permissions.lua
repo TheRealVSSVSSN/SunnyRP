@@ -1,6 +1,15 @@
--- srp_base: server/permissions.lua
+-- server/security/permissions.lua
+-- Aligns to /v1/permissions/:playerId and envelope.
 
 SRP_Perms = SRP_Perms or { cache = {} }
+
+local function has(scopeList, scope)
+  if not scope or scope == '' then return false end
+  for _,s in ipairs(scopeList or {}) do
+    if s == scope then return true end
+  end
+  return false
+end
 
 function SRP_Perms.refreshFor(src, playerId)
   if not playerId then
@@ -9,18 +18,10 @@ function SRP_Perms.refreshFor(src, playerId)
   end
   if not playerId then return end
 
-  local res = SRP_HTTP.Fetch('GET', ('/permissions/%s'):format(playerId), nil, { retries = 1, timeout = 6000 })
+  local res = SRP_HTTP.Fetch('GET', ('/v1/permissions/%s'):format(playerId), nil, { retries = 1, timeout = 6000 })
   if res.ok and res.data and type(res.data.scopes) == 'table' then
     SRP_Perms.cache[src] = { playerId = playerId, scopes = res.data.scopes, ts = GetGameTimer() }
   end
-end
-
-local function has(scopeList, scope)
-  if not scope or scope == '' then return false end
-  for _,s in ipairs(scopeList or {}) do
-    if s == scope then return true end
-  end
-  return false
 end
 
 function SRP_Perms.hasScope(src, scope)

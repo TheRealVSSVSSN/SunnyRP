@@ -31,3 +31,18 @@ export async function revokeRole(userId, roleName) {
     );
     return res.affectedRows;
 }
+
+/**
+ * === NEW ===
+ * Used by routes to fetch effective scopes for a user.
+ */
+export async function getScopesForUserId(userId) {
+    const [rows] = await pool.query(
+        `SELECT DISTINCT rs.scope
+     FROM user_roles ur
+     JOIN role_scopes rs ON rs.role_id = ur.role_id
+     WHERE ur.user_id = ?`,
+        [userId]
+    );
+    return rows.map(r => r.scope);
+}

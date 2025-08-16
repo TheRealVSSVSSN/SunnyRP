@@ -1,166 +1,178 @@
--- Signed HTTP with HMAC + retries + circuit breaker + typed results
-SRP_HTTP = {}
+-- server/integration/http.lua
+-- Unified HTTP client for SRP services with HMAC, retries, and envelope unwrapping.
+-- Signature format (matches backend replayGuard): method|path|rawBody|ts|nonce
+
+SRP_HTTP = SRP_HTTP or {}
 local json = json or {}
 
--- bit ops
-local bit = bit32
-local band, bor, bxor, bnot, rshift, rrotate =
-  bit.band, bit.bor, bit.bxor, bit.bnot, bit.rshift, bit.rrotate
+-- ==== utilities ====
+local function uuid4()
+  local template ='xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
+  return (template:gsub('[xy]', function(c)
+    local v = math.random(0,15)
+    if c == 'y' then v = (v % 4) + 8 end
+    return string.format('%x', v)
+  end))
+end
 
--- ==== SHA-256 (compact pure Lua) ====
-local K = {
-  0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
-  0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,
-  0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,
-  0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,
-  0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,
-  0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,
-  0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,
-  0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2
-}
-local function tobytes32(x)
-  return string.char(rshift(x,24)%256, rshift(x,16)%256, rshift(x,8)%256, x%256)
+local function now_unix_seconds()
+  return os.time() -- seconds (server expects seconds skew window)
 end
-local function str2w(s, i)
-  local a,b,c,d = s:byte(i, i+3)
-  return ((a*256 + b)*256 + c)*256 + d
+
+local function tohex(bin)
+  return (bin:gsub('.', function(c) return string.format('%02x', string.byte(c)) end))
 end
+
+-- ==== SHA-256 + HMAC (compact pure Lua) ====
+local bit = bit32
+local band, bor, bxor, rshift, lshift = bit.band, bit.bor, bit.bxor, bit.rshift, bit.lshift
+local function rotr(x,n) return bor(rshift(x,n), lshift(x,32-n)) end
 local function sha256(msg)
-  local h0,h1,h2,h3,h4,h5,h6,h7 =
-    0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19
-  local ml = #msg
-  msg = msg .. '\128' .. string.rep('\0', (56 - (ml + 1) % 64) % 64) ..
-        string.char(0,0,0,0, (ml*8 >> 24) & 255, (ml*8 >> 16) & 255, (ml*8 >> 8) & 255, (ml*8) & 255)
-  for i=1,#msg,64 do
-    local w = {}
-    for j=0,15 do w[j] = str2w(msg, i + j*4) end
-    for j=16,63 do
-      local s0 = bxor(rrotate(w[j-15],7), rrotate(w[j-15],18), rshift(w[j-15],3))
-      local s1 = bxor(rrotate(w[j-2],17), rrotate(w[j-2],19), rshift(w[j-2],10))
-      w[j] = (w[j-16] + s0 + w[j-7] + s1) % 0x100000000
-    end
-    local a,b,c,d,e,f,g,h = h0,h1,h2,h3,h4,h5,h6,h7
-    for j=0,63 do
-      local S1 = bxor(rrotate(e,6), rrotate(e,11), rrotate(e,25))
-      local ch = bxor(band(e,f), band(bnot(e), g))
-      local t1 = (h + S1 + ch + K[j+1] + w[j]) % 0x100000000
-      local S0 = bxor(rrotate(a,2), rrotate(a,13), rrotate(a,22))
-      local maj = bxor(band(a,b), band(a,c), band(b,c))
-      local t2 = (S0 + maj) % 0x100000000
-      h = g; g = f; f = e; e = (d + t1) % 0x100000000
-      d = c; c = b; b = a; a = (t1 + t2) % 0x100000000
-    end
-    h0 = (h0 + a) % 0x100000000
-    h1 = (h1 + b) % 0x100000000
-    h2 = (h2 + c) % 0x100000000
-    h3 = (h3 + d) % 0x100000000
-    h4 = (h4 + e) % 0x100000000
-    h5 = (h5 + f) % 0x100000000
-    h6 = (h6 + g) % 0x100000000
-    h7 = (h7 + h) % 0x100000000
+  local K = {
+    0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
+    0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,
+    0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,
+    0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,
+    0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,
+    0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,
+    0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,
+    0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2
+  }
+  local function preproc(s)
+    local l = #s * 8
+    s = s .. '\128' .. string.rep('\0', ((56 - (#s + 1) % 64) % 64))
+    return s .. string.pack('>I8', l)
   end
-  return tobytes32(h0)..tobytes32(h1)..tobytes32(h2)..tobytes32(h3)..
-         tobytes32(h4)..tobytes32(h5)..tobytes32(h6)..tobytes32(h7)
+  local H = {0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19}
+  local s = preproc(msg)
+  for i=1,#s,64 do
+    local W = {}
+    local chunk = s:sub(i,i+63)
+    for j=1,16 do W[j] = string.unpack('>I4', chunk, (j-1)*4+1) end
+    for j=17,64 do
+      local a = W[j-15]; local b = W[j-2]
+      local s0 = bxor(rotr(a,7), rotr(a,18), rshift(a,3))
+      local s1 = bxor(rotr(b,17), rotr(b,19), rshift(b,10))
+      W[j] = (W[j-16] + s0 + W[j-7] + s1) % 2^32
+    end
+    local a,b,c,d,e,f,g,h = table.unpack(H)
+    for j=1,64 do
+      local S1 = bxor(rotr(e,6), rotr(e,11), rotr(e,25))
+      local ch = bxor(band(e,f), band(bnot(e or 0), g or 0))
+      local t1 = (h + S1 + ch + K[j] + W[j]) % 2^32
+      local S0 = bxor(rotr(a,2), rotr(a,13), rotr(a,22))
+      local maj = bxor(band(a,b), band(a,c), band(b,c))
+      local t2 = (S0 + maj) % 2^32
+      h,g,f,e,d,c,b,a = g,f,e,(d + t1) % 2^32,c,b,a,(t1 + t2) % 2^32
+    end
+    H = { (H[1]+a)%2^32,(H[2]+b)%2^32,(H[3]+c)%2^32,(H[4]+d)%2^32,(H[5]+e)%2^32,(H[6]+f)%2^32,(H[7]+g)%2^32,(H[8]+h)%2^32 }
+  end
+  return string.pack('>I4I4I4I4I4I4I4I4', table.unpack(H))
 end
 local function hmac_sha256(key, msg)
-  local block = 64
-  if #key > block then key = sha256(key) end
-  if #key < block then key = key .. string.rep('\0', block - #key) end
-  local o, i = {}, {}
-  for idx=1,#key do
-    local kb = key:byte(idx)
-    o[idx] = string.char(bxor(kb, 0x5c))
-    i[idx] = string.char(bxor(kb, 0x36))
-  end
-  return sha256(table.concat(o) .. sha256(table.concat(i) .. msg))
+  if #key > 64 then key = sha256(key) end
+  if #key < 64 then key = key .. string.rep('\0', 64 - #key) end
+  local o_key_pad = key:gsub('.', function(c) return string.char(bit.bxor(string.byte(c), 0x5c)) end)
+  local i_key_pad = key:gsub('.', function(c) return string.char(bit.bxor(string.byte(c), 0x36)) end)
+  return sha256(o_key_pad .. sha256(i_key_pad .. msg))
 end
-local function sign(method, path, ts, nonce, body)
-  local raw = table.concat({method, path, ts, nonce, body or ''}, '\n')
-  local mac = hmac_sha256(SRP_API.token or 'CHANGE_ME', raw)
+
+local function sign(method, path, rawBody, ts, nonce)
+  local signing = string.format('%s|%s|%s|%s|%s', method, path, rawBody or '', ts, nonce)
+  return tohex(hmac_sha256(SRP_API.token or 'CHANGE_ME', signing))
+end
+
+-- ==== core HTTP ====
+local function normalizeHeaders(h)
   local out = {}
-  for i=1,#mac do out[i] = string.format('%02x', mac:byte(i)) end
-  return table.concat(out)
+  for k,v in pairs(h or {}) do out[string.lower(k)] = v end
+  return out
 end
 
--- Circuit breaker
-local CB = { failures = 0, openUntil = 0 }
-local function cbOpen(ms) CB.openUntil = GetGameTimer() + ms end
-local function cbClosed() return GetGameTimer() > CB.openUntil end
-local function cbOnResult(ok)
-  if ok then CB.failures = 0; CB.openUntil = 0
-  else
-    CB.failures = CB.failures + 1
-    if CB.failures >= 4 then cbOpen(8000) end
+local function decodeJson(body)
+  if not body or body == '' then return nil end
+  local ok, val = pcall(json.decode, body)
+  return ok and val or nil
+end
+
+local function unwrapEnvelope(status, bodyTbl)
+  -- Expected: { ok:boolean, data:?, error:{ code, message }, requestId?, traceId? }
+  if type(bodyTbl) == 'table' and bodyTbl.ok ~= nil then
+    local okb = bodyTbl.ok == true
+    return {
+      ok = okb,
+      status = status or (okb and 200 or 500),
+      data = okb and bodyTbl.data or nil,
+      error = (not okb and bodyTbl.error and (bodyTbl.error.code or 'INTERNAL_ERROR')) or nil,
+      message = (not okb and bodyTbl.error and bodyTbl.error.message) or nil,
+      requestId = bodyTbl.requestId,
+      traceId = bodyTbl.traceId
+    }
   end
+  -- Fallback: treat 2xx as ok and pass through
+  return { ok = (status and status >= 200 and status < 300) or false, status = status or 0, data = bodyTbl }
 end
 
-local function httpRequest(method, path, bodyTbl, opts)
+local function doRequest(method, path, bodyTbl, opts)
   opts = opts or {}
-  local url = SRP_API.url .. path
-  local body = bodyTbl and json.encode(bodyTbl) or ''
-  local ts = tostring(os.time())
-  local nonce = ('%06d-%s-%06d'):format(math.random(0,999999), ts, math.random(0,999999))
-  local sig = sign(method, path, ts, nonce, body)
-
-  if not cbClosed() then
-    return { ok=false, status=0, error='circuit_open', message='Backend temporarily unavailable' }
-  end
+  local url = (SRP_API.url or 'http://127.0.0.1:3301') .. path
+  local raw = bodyTbl and json.encode(bodyTbl) or ''
+  local ts = tostring(now_unix_seconds())
+  local nonce = uuid4()
+  local sig = sign(method, path, raw, ts, nonce)
 
   local headers = {
     ['Content-Type'] = 'application/json',
-    ['X-API-Token']  = SRP_API.token,
+    ['Accept']       = 'application/json',
+    ['X-API-Token']  = SRP_API.token or 'CHANGE_ME',
     ['X-Ts']         = ts,
     ['X-Nonce']      = nonce,
-    ['X-Sig']        = sig
+    ['X-Sig']        = sig,
+    ['x-request-id'] = uuid4(),
   }
-  if opts.idempotencyKey then headers['Idempotency-Key'] = opts.idempotencyKey end
 
-  local tries = opts.retries or 2
+  if (method == 'POST' or method == 'PUT' or method == 'PATCH') then
+    headers['Idempotency-Key'] = (opts.idempotencyKey) or uuid4()
+  end
+
+  local retries = opts.retries or 1
   local timeout = opts.timeout or 10000
-  local result = { ok=false, status=0, data=nil, error=nil, message=nil }
+  local attempt = 0
+  local last = { ok=false, status=0, data=nil, error=nil, message=nil }
 
-  for attempt = 1, tries + 1 do
-    local done = false
-    PerformHttpRequest(url, function(statusCode, respBody)
-      result.status = statusCode or 0
-      if statusCode and statusCode >= 200 and statusCode < 300 then
-        local ok, data = pcall(function()
-          return (respBody and #respBody > 0) and json.decode(respBody) or {}
-        end)
-        result.ok = true
-        result.data = ok and data or {}
-      else
-        result.ok = false
-        result.error = 'http_error'
-        result.message = ('HTTP %s'):format(statusCode or '0')
-        result.data = SRP_Utils.safeJsonDecode(respBody)
-      end
-      done = true
-    end, method, body, headers)
+  repeat
+    attempt = attempt + 1
+    local p = promise.new()
+    PerformHttpRequest(url, function(status, respBody, respHeaders)
+      local bodyTbl = decodeJson(respBody)
+      local norm = unwrapEnvelope(status or 0, bodyTbl)
+      norm.headers = normalizeHeaders(respHeaders)
+      p:resolve(norm)
+    end, method, raw, headers)
 
     local t0 = GetGameTimer()
-    while not done and GetGameTimer() - t0 < timeout do Wait(0) end
-
-    if result.ok then
-      cbOnResult(true)
-      return result
-    else
-      cbOnResult(false)
-      if attempt <= tries then Citizen.Wait((attempt * 500) + math.random(0, 250)) end
+    local res
+    while true do
+      res = Citizen.Await(p)
+      if res then break end
+      if GetGameTimer() - t0 > timeout then
+        res = { ok=false, status=0, error='TIMEOUT', message='Request timed out' }
+        break
+      end
+      Wait(0)
     end
-  end
-  return result
+
+    last = res
+    -- retry only safe/idempotent reads or 5xx on GET/HEAD/DELETE
+    local shouldRetry = (not last.ok) and (last.status == 0 or (last.status >= 500 and (method == 'GET' or method == 'HEAD' or method == 'DELETE')))
+    if shouldRetry and attempt <= retries then Citizen.Wait(150 * attempt) else break end
+  until attempt > retries
+
+  return last
 end
 
 function SRP_HTTP.Fetch(method, path, bodyTbl, opts)
-  return httpRequest(string.upper(method), path, bodyTbl, opts)
-end
-
-function SRP_HTTP.Emit(typeName, subject, data)
-  return httpRequest('POST', '/events/emit', {
-    type = typeName, subject = subject, data = data or {}, time = os.time()
-  }, { retries = 1, timeout = 7000 })
+  return doRequest(string.upper(method), path, bodyTbl, opts)
 end
 
 exports('Fetch', SRP_HTTP.Fetch)
-exports('Emit', SRP_HTTP.Emit)

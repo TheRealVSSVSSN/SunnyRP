@@ -1,6 +1,9 @@
 // src/repositories/identity.repo.js
 import { pool } from './db.js';
 
+/**
+ * Local helpers
+ */
 function parseIdentifier(idStr) {
     const idx = idStr.indexOf(':');
     if (idx === -1) return { type: 'license', value: idStr };
@@ -144,4 +147,78 @@ export async function getScopes(userId) {
         [userId]
     );
     return rows.map(r => r.scope);
+}
+
+/**
+ * === NEW ===
+ * Link or create a user by the provided identifiers.
+ * - Tries to find any existing user with ANY of the identifiers (type:value).
+ * - If not found, creates a new user with 'primary' as users.primary_identifier.
+ * - Adds all identifiers (INSERT IGNORE).
+ * - Touches last_ip/last_seen.
+ * - Returns: { userId, playerId, banned, banReason, verified, whitelisted, scopes? }
+ *
+ * NOTE: We treat "playerId" == "userId" in base.
+ */
+export async function linkOrCreatePlayerByIdentifiers({ name, primary, identifiers = {}, meta = {} }) {
+    // Build list of "type:value" strings from identifiers map
+    const list = [];
+    for (const [k, v] of Object.entries(identifiers)) {
+        if (v && String(v).length) list.push(`${k}:${v}`);
+    }
+    if (primary && !list.some(s => s.startsWith(`${primary.split(':')[0]}:`))) {
+        // Ensure primary is present in the set
+        list.push(primary);
+    }
+
+    // 1) Find existing user by any identifier
+    let userId = await findUserIdByAnyIdentifier(list);
+
+    // 2) Create if not found
+    if (!userId) {
+        userId = await createUser(primary || list[0] || null);
+    }
+
+    // 3) Add all identifiers (idempotent via INSERT IGNORE)
+    await addIdentifiers(userId, list, identifiers.ip || null);
+
+    // 4) Touch last seen/ip
+    await touchUser(userId, identifiers.ip || null);
+
+    // 5) Ban status + scopes
+    const { banned, banReason } = await getBanStatus(userId);
+    let scopes = await getScopes(userId);
+
+    // 6) Verified/whitelisted flags
+    // If columns exist on users, prefer them; otherwise default to true.
+    let verified = true;
+    let whitelisted = true;
+    try {
+        const [uRows] = await pool.query(`SELECT verified, whitelisted FROM users WHERE id = ? LIMIT 1`, [userId]);
+        if (uRows.length) {
+            if (uRows[0].verified !== undefined && uRows[0].verified !== null) verified = !!uRows[0].verified;
+            if (uRows[0].whitelisted !== undefined && uRows[0].whitelisted !== null) whitelisted = !!uRows[0].whitelisted;
+        }
+    } catch {
+        // Columns may not exist yet in your schema; ignore and keep defaults
+    }
+
+    // 7) Optional: set display_name if empty (best-effort)
+    try {
+        if (name && name.length) {
+            await pool.query(`UPDATE users SET display_name = COALESCE(display_name, ?) WHERE id = ? AND (display_name IS NULL OR display_name = '')`, [name, userId]);
+        }
+    } catch {
+        // not fatal
+    }
+
+    return {
+        userId,
+        playerId: userId,
+        banned,
+        banReason,
+        verified,
+        whitelisted,
+        scopes,
+    };
 }

@@ -1,473 +1,656 @@
-openapi: 3.0.3
+openapi: 3.1.0
 info:
-  title: SRP Base (srp-base)
-  version: 1.0.0
-  description: >
-    Base service for SunnyRP. All requests must include X-API-Token and HMAC headers (X-Ts, X-Nonce, X-Sig).
-    Inter-service **read-only** calls may use **X-Service-Token** (GET/HEAD/OPTIONS; if ENABLE_SERVICE_TOKENS=true).
-    Inter-service **read/write** calls may use **X-Internal-Ts / X-Internal-Nonce / X-Internal-Sig** (if ENABLE_INTERNAL_HMAC=true).
+  title: SunnyRP Base API
+  version: "1.0.0"
+  description: |
+    Core service for SunnyRP: identity link, permissions, config live flags, admin, and delivery outbox.
+
+    ## Envelopes (ALWAYS)
+    - **Success**: `{ ok: true, data, requestId, traceId }`
+    - **Error**: `{ ok: false, error: { code, message, details? }, requestId, traceId }`
+
+    ## Auth & Replay Protection
+    - All requests MUST include `X-API-Token`.
+    - If HMAC is enabled, also include `X-Ts`, `X-Nonce`, `X-Sig` where:
+      - `X-Sig = hex(hmac_sha256(secret, "method|path|rawBody|ts|nonce"))`
+      - `X-Ts` is a UNIX timestamp (seconds or milliseconds; server allows ±90s skew)
+      - `X-Nonce` is a UUID; each nonce may only be used once within TTL.
+
 servers:
-  - url: http://localhost:3301
+  - url: http://localhost:3001
+    description: Local dev
+  - url: https://api.sunnysrv.local
+    description: Production (example)
+
+tags:
+  - name: health
+    description: Liveness & readiness
+  - name: identity
+    description: Player linking & account resolution
+  - name: permissions
+    description: RBAC permissions for players
+  - name: admin
+    description: Administrative actions & audit
+  - name: config
+    description: Live configuration & feature flags
+  - name: outbox
+    description: Delivery outbox for cross-service events
+  - name: misc
+    description: Utility endpoints
+
+security:
+  - ApiTokenAuth: []
+
+paths:
+  /v1/health:
+    get:
+      operationId: getHealth
+      tags: [health]
+      summary: Service liveness probe
+      description: Returns basic service status.
+      security: []   # no auth
+      responses:
+        '200':
+          description: OK
+          headers:
+            x-request-id:
+              schema: { type: string }
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/EnvelopeOk'
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        properties:
+                          status: { type: string, example: "ok" }
+                          uptimeSec: { type: integer, example: 123 }
+                          pid: { type: integer }
+                          hostname: { type: string }
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /v1/ready:
+    get:
+      operationId: getReady
+      tags: [health]
+      summary: Readiness probe
+      description: Returns 200 only when dependencies are reachable.
+      security: []   # no auth
+      responses:
+        '200':
+          description: Ready
+          headers:
+            x-request-id:
+              schema: { type: string }
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/EnvelopeOk'
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        properties:
+                          ready: { type: boolean, example: true }
+        '503':
+          $ref: '#/components/responses/DependencyDown'
+
+  /v1/metrics:
+    get:
+      operationId: getMetrics
+      tags: [health]
+      summary: Prometheus metrics
+      description: Exposes Prometheus/`text/plain` metrics if enabled.
+      security: []   # no auth
+      responses:
+        '200':
+          description: Prometheus metrics
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  /v1/ping:
+    get:
+      operationId: getPing
+      tags: [misc]
+      summary: Lightweight ping with timestamp
+      responses:
+        '200':
+          description: OK
+          headers:
+            x-request-id:
+              schema: { type: string }
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/EnvelopeOk'
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        properties:
+                          service: { type: string, example: "srp-base" }
+                          ts: { type: integer }
+                          env: { type: string, example: "development" }
+
+  /v1/players/link:
+    post:
+      operationId: postPlayersLink
+      tags: [identity]
+      summary: Link or create a player account by identifiers
+      description: |
+        Idempotent link by any supplied identifiers. If no user exists, one is created.
+        Returns ban/verify/whitelist flags and effective scopes.
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+        - $ref: '#/components/parameters/HmacTs'
+        - $ref: '#/components/parameters/HmacNonce'
+        - $ref: '#/components/parameters/HmacSig'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LinkPlayerRequest'
+            examples:
+              example:
+                value:
+                  name: "VSSVSSN"
+                  primary: "license:abcd1234"
+                  identifiers:
+                    license: "license:abcd1234"
+                    discord: "discord:1234567890"
+                    ip: "127.0.0.1"
+                  meta:
+                    endpoint: "127.0.0.1"
+      responses:
+        '200':
+          description: Linked (existing or new)
+          headers:
+            x-request-id:
+              schema: { type: string }
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/EnvelopeOk'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/LinkPlayerResponse'
+        '400':
+          $ref: '#/components/responses/InvalidInput'
+        '401':
+          $ref: '#/components/responses/Unauthenticated'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /v1/permissions/{playerId}:
+    get:
+      operationId: getPermissionsByPlayerId
+      tags: [permissions]
+      summary: Get effective scopes for a player
+      parameters:
+        - name: playerId
+          in: path
+          required: true
+          description: Numeric player/user id (srp-base treats playerId === userId)
+          schema: { type: integer, minimum: 1 }
+      responses:
+        '200':
+          description: OK
+          headers:
+            x-request-id:
+              schema: { type: string }
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/EnvelopeOk'
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        properties:
+                          scopes:
+                            type: array
+                            items: { type: string }
+                            example: ["player","admin"]
+        '400':
+          $ref: '#/components/responses/InvalidInput'
+        '401':
+          $ref: '#/components/responses/Unauthenticated'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /v1/admin/ban:
+    post:
+      operationId: postAdminBan
+      tags: [admin]
+      summary: Ban a user
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+        - $ref: '#/components/parameters/HmacTs'
+        - $ref: '#/components/parameters/HmacNonce'
+        - $ref: '#/components/parameters/HmacSig'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [userId, reason]
+              properties:
+                userId: { type: integer, minimum: 1 }
+                reason: { type: string }
+                durationMinutes:
+                  type: integer
+                  description: Optional duration; omit for permanent ban
+      responses:
+        '200':
+          description: Banned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvelopeOk'
+        '400':
+          $ref: '#/components/responses/InvalidInput'
+        '401':
+          $ref: '#/components/responses/Unauthenticated'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /v1/admin/kick:
+    post:
+      operationId: postAdminKick
+      tags: [admin]
+      summary: Kick an online player
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [source, reason]
+              properties:
+                source: { type: integer, description: FXServer source id }
+                reason: { type: string }
+      responses:
+        '200':
+          description: Kicked
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvelopeOk'
+        '400':
+          $ref: '#/components/responses/InvalidInput'
+        '401':
+          $ref: '#/components/responses/Unauthenticated'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /v1/admin/audit:
+    get:
+      operationId: getAdminAudit
+      tags: [admin]
+      summary: List recent admin actions
+      parameters:
+        - name: limit
+          in: query
+          schema: { type: integer, default: 50, minimum: 1, maximum: 500 }
+        - name: cursor
+          in: query
+          schema: { type: string, description: Opaque pagination cursor }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/EnvelopeOk'
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        properties:
+                          items:
+                            type: array
+                            items:
+                              type: object
+                              additionalProperties: true
+                          nextCursor: { type: [ 'string', 'null' ] }
+
+  /v1/config/live:
+    get:
+      operationId: getConfigLive
+      tags: [config]
+      summary: Get current live config/feature flags
+      responses:
+        '200':
+          description: Current live config
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/EnvelopeOk'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/LiveConfig'
+    post:
+      operationId: postConfigLive
+      tags: [config]
+      summary: Update live config/feature flags (broadcast to game)
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+        - $ref: '#/components/parameters/HmacTs'
+        - $ref: '#/components/parameters/HmacNonce'
+        - $ref: '#/components/parameters/HmacSig'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LiveConfig'
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvelopeOk'
+        '400':
+          $ref: '#/components/responses/InvalidInput'
+        '401':
+          $ref: '#/components/responses/Unauthenticated'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /v1/outbox/enqueue:
+    post:
+      operationId: postOutboxEnqueue
+      tags: [outbox]
+      summary: Enqueue an outbox message (for async delivery)
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+        - $ref: '#/components/parameters/HmacTs'
+        - $ref: '#/components/parameters/HmacNonce'
+        - $ref: '#/components/parameters/HmacSig'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [topic, payload]
+              properties:
+                topic: { type: string, example: "player.created" }
+                payload:
+                  type: object
+                  additionalProperties: true
+                deliverAfterMs:
+                  type: integer
+                  description: Optional delay (ms)
+                dedupeKey:
+                  type: string
+                  description: Optional dedupe key for idempotent enqueue
+      responses:
+        '200':
+          description: Enqueued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvelopeOk'
+        '400':
+          $ref: '#/components/responses/InvalidInput'
+        '401':
+          $ref: '#/components/responses/Unauthenticated'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/InternalError'
 
 components:
+  securitySchemes:
+    ApiTokenAuth:
+      type: apiKey
+      in: header
+      name: X-API-Token
+      description: Static service token configured per-service.
+
+  parameters:
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: false
+      description: |
+        Provide to make mutating requests idempotent. The server will not re-apply the same mutation for a previously seen key.
+      schema:
+        type: string
+        maxLength: 128
+    HmacTs:
+      name: X-Ts
+      in: header
+      required: false
+      description: UNIX timestamp (seconds or ms). Used for HMAC replay guard; ±90s skew permitted.
+      schema:
+        type: integer
+        format: int64
+    HmacNonce:
+      name: X-Nonce
+      in: header
+      required: false
+      description: Unique nonce (UUID). Only valid once within TTL when HMAC is enabled.
+      schema:
+        type: string
+    HmacSig:
+      name: X-Sig
+      in: header
+      required: false
+      description: HMAC-SHA256 signature of `method|path|rawBody|ts|nonce`, hex-encoded.
+      schema:
+        type: string
+
   schemas:
     EnvelopeOk:
       type: object
-      required: [ok, data, requestId, traceId]
+      required: [ok, data]
       properties:
-        ok: { type: boolean, enum: [true] }
-        data: { type: object }
-        requestId: { type: string }
-        traceId: { type: string }
-    EnvelopeFail:
+        ok: { type: boolean, const: true }
+        data: {}
+        requestId: { type: [ 'string', 'null' ] }
+        traceId: { type: [ 'string', 'null' ] }
+
+    EnvelopeErr:
       type: object
-      required: [ok, error, requestId, traceId]
+      required: [ok, error]
       properties:
-        ok: { type: boolean, enum: [false] }
+        ok: { type: boolean, const: false }
         error:
           type: object
           required: [code, message]
           properties:
             code:
               type: string
-              enum: [INVALID_INPUT, UNAUTHENTICATED, FORBIDDEN, NOT_FOUND, CONFLICT, FAILED_PRECONDITION, RATE_LIMITED, INTERNAL_ERROR, DEPENDENCY_DOWN]
+              enum:
+                - INVALID_INPUT
+                - UNAUTHENTICATED
+                - FORBIDDEN
+                - NOT_FOUND
+                - CONFLICT
+                - FAILED_PRECONDITION
+                - RATE_LIMITED
+                - INTERNAL_ERROR
+                - DEPENDENCY_DOWN
             message: { type: string }
-            details: { type: object }
-        requestId: { type: string }
-        traceId: { type: string }
-    OkHealth:
-      allOf:
-        - $ref: '#/components/schemas/EnvelopeOk'
-        - type: object
-          properties:
-            data: { type: object, properties: { status: { type: string, example: ok } } }
-    OkReady:
-      allOf:
-        - $ref: '#/components/schemas/EnvelopeOk'
-        - type: object
-          properties:
-            data: { type: object, properties: { ready: { type: boolean, example: true } } }
-    OkPlayerLink:
-      allOf:
-        - $ref: '#/components/schemas/EnvelopeOk'
-        - type: object
-          properties:
-            data:
+            details:
               type: object
-              properties:
-                banned: { type: boolean }
-                banReason: { type: [string, 'null'] }
-                scopes: { type: array, items: { type: string } }
-                userId: { type: integer }
-      example:
-        ok: true
-        data: { banned: false, banReason: null, scopes: [player], userId: 42 }
-        requestId: "c8a3d4d7-7a49-4f0b-8a3a-aaaa1111bbbb"
-        traceId: "trace-001"
-    OkScopes:
-      allOf:
-        - $ref: '#/components/schemas/EnvelopeOk'
-        - type: object
-          properties:
-            data: { type: object, properties: { scopes: { type: array, items: { type: string } } } }
-      example:
-        ok: true
-        data: { scopes: [admin, "admin.ban"] }
-        requestId: "rid"
-        traceId: "tid"
-    OkGrantRevoke:
-      allOf:
-        - $ref: '#/components/schemas/EnvelopeOk'
-        - type: object
-          properties:
-            data:
-              type: object
-              properties:
-                userId: { type: integer }
-                role: { type: string }
-                action: { type: string, example: granted }
-      example:
-        ok: true
-        data: { userId: 42, role: admin, action: granted }
-        requestId: "rid"
-        traceId: "tid"
-    OkBan:
-      allOf:
-        - $ref: '#/components/schemas/EnvelopeOk'
-        - type: object
-          properties:
-            data: { type: object, properties: { userId: { type: integer }, banned: { type: boolean }, reason: { type: [ 'string', 'null' ] } } }
-      example:
-        ok: true
-        data: { userId: 99, banned: true, reason: "Toxic behavior" }
-        requestId: "rid"
-        traceId: "tid"
-    OkKick:
-      allOf:
-        - $ref: '#/components/schemas/EnvelopeOk'
-        - type: object
-          properties:
-            data: { type: object, properties: { userId: { type: integer }, kicked: { type: boolean }, reason: { type: [ 'string', 'null' ] } } }
-      example:
-        ok: true
-        data: { userId: 99, kicked: true, reason: "AFK" }
-        requestId: "rid"
-        traceId: "tid"
-    OkAudit:
-      allOf:
-        - $ref: '#/components/schemas/EnvelopeOk'
-        - type: object
-          properties:
-            data:
-              type: object
-              properties:
-                entries:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      id: { type: integer }
-                      actor_user_id: { type: [integer, 'null'] }
-                      target_user_id: { type: [integer, 'null'] }
-                      action: { type: string }
-                      meta: { type: object, nullable: true, additionalProperties: true }
-                      created_at: { type: string }
-      example:
-        ok: true
-        data:
-          entries:
-            - { id: 1, actor_user_id: 5, target_user_id: 42, action: admin.ban, meta: { reason: "X" }, created_at: "2025-08-15T00:00:00Z" }
-        requestId: "rid"
-        traceId: "tid"
-    OkUser:
-      allOf:
-        - $ref: '#/components/schemas/EnvelopeOk'
-        - type: object
-          properties:
-            data:
-              type: object
-              properties:
-                user:
-                  type: object
-                  properties:
-                    id: { type: integer }
-                    primary_identifier: { type: string }
-                    display_name: { type: ['string','null'] }
-                    last_ip: { type: ['string','null'] }
-                    last_seen: { type: ['string','null'] }
-                    created_at: { type: string }
-                    updated_at: { type: string }
-                    deleted_at: { type: ['string','null'] }
-                    identifiers: { type: array, items: { type: string } }
-      example:
-        ok: true
-        data:
-          user:
-            id: 42
-            primary_identifier: "license"
-            display_name: "SunnyRP Fan"
-            last_ip: "127.0.0.1"
-            last_seen: "2025-08-14T12:34:56Z"
-            created_at: "2025-08-01T00:00:00Z"
-            updated_at: "2025-08-10T00:00:00Z"
-            deleted_at: null
-            identifiers: ["license:abc", "discord:123"]
-        requestId: "rid"
-        traceId: "tid"
-    Fail:
-      $ref: '#/components/schemas/EnvelopeFail'
-    PlayerLinkRequest:
+              additionalProperties: true
+        requestId: { type: [ 'string', 'null' ] }
+        traceId: { type: [ 'string', 'null' ] }
+
+    LinkPlayerRequest:
       type: object
-      required: [primary, identifiers]
+      required: [name, primary, identifiers]
       properties:
-        primary: { type: string, description: license|steam|discord }
-        identifiers: { type: array, items: { type: string } }
-        ip: { type: string, example: "127.0.0.1" }
-    GrantRoleRequest:
-      type: object
-      required: [actorUserId, targetUserId, role]
-      properties:
-        actorUserId: { type: integer }
-        targetUserId: { type: integer }
-        role: { type: string }
-    RevokeRoleRequest:
-      type: object
-      required: [actorUserId, targetUserId, role]
-      properties:
-        actorUserId: { type: integer }
-        targetUserId: { type: integer }
-        role: { type: string }
-    BanRequest:
-      type: object
-      required: [actorUserId]
-      properties:
-        actorUserId: { type: integer }
-        targetUserId: { type: integer, nullable: true }
-        primary: { type: string, nullable: true, description: license|steam|discord }
+        name:
+          type: string
+          minLength: 1
+          maxLength: 64
+        primary:
+          type: string
+          description: Primary identifier, e.g. "license:abcdef..."
         identifiers:
-          type: array
-          nullable: true
-          items: { type: string }
-        reason: { type: string, nullable: true }
-        active: { type: boolean, default: true }
-    KickRequest:
+          type: object
+          description: Map of identifierName -> value (e.g., license, discord, steam, ip)
+          additionalProperties: { type: string }
+        meta:
+          type: object
+          additionalProperties: true
+
+    LinkPlayerResponse:
       type: object
-      required: [actorUserId, targetUserId]
+      required: [userId, playerId, banned, verified, whitelisted, scopes]
       properties:
-        actorUserId: { type: integer }
-        targetUserId: { type: integer }
-        reason: { type: string, nullable: true }
+        userId: { type: integer, example: 123 }
+        playerId: { type: integer, example: 123, description: Same as userId in base }
+        banned: { type: boolean, example: false }
+        banReason: { type: [ 'string', 'null' ] }
+        verified: { type: boolean, example: true }
+        whitelisted: { type: boolean, example: true }
+        scopes:
+          type: array
+          items: { type: string }
+          example: ["player"]
 
-paths:
-  /v1/admin/ban:
-    post:
-      summary: Ban or re-ban (requires admin or admin.ban)
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema: { $ref: '#/components/schemas/BanRequest' }
-            examples:
-              simple:
-                value: { actorUserId: 1, targetUserId: 42, reason: "Toxic behavior", active: true }
-      responses:
-        '200': { description: Banned, content: { application/json: { schema: { $ref: '#/components/schemas/OkBan' } } } }
-        '403': { description: Forbidden, content: { application/json: { schema: { $ref: '#/components/schemas/Fail' } } } }
+    LiveConfig:
+      type: object
+      description: Arbitrary live configuration and feature flags.
+      properties:
+        features:
+          type: object
+          additionalProperties:
+            type: boolean
+          example:
+            identity: true
+            permissions: true
+            admin: true
+            outbox: true
+        settings:
+          type: object
+          additionalProperties: true
+      additionalProperties: true
 
-  /v1/admin/unban:
-    post:
-      summary: Unban (deactivate active bans) (requires admin or admin.ban)
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required: [actorUserId, targetUserId]
-              properties:
-                actorUserId: { type: integer }
-                targetUserId: { type: integer }
-            examples:
-              user:
-                value: { actorUserId: 1, targetUserId: 42 }
-      responses:
-        '200':
-          description: Unbanned
-          content: { application/json: { schema:
-            allOf:
-              - $ref: '#/components/schemas/EnvelopeOk'
-              - type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      userId: { type: integer }
-                      unbanned: { type: boolean }
-                      deactivated: { type: integer }
-          } }
-
-  /v1/admin/kick:
-    post:
-      summary: Record a kick (requires admin or admin.kick)
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema: { $ref: '#/components/schemas/KickRequest' }
-            examples:
-              afk:
-                value: { actorUserId: 1, targetUserId: 42, reason: "AFK" }
-      responses:
-        '200': { description: Kicked, content: { application/json: { schema: { $ref: '#/components/schemas/OkKick' } } } }
-
-  /v1/admin/audit:
-    get:
-      summary: Read audit log
-      parameters:
-        - { name: userId, in: query, schema: { type: string } }
-        - { name: limit, in: query, schema: { type: integer, default: 50, minimum: 1, maximum: 200 } }
-        - { name: action, in: query, schema: { type: string } }
-        - { name: after, in: query, schema: { type: string, format: date-time } }
-        - { name: before, in: query, schema: { type: string, format: date-time } }
-      responses:
-        '200': { description: Audit entries, content: { application/json: { schema: { $ref: '#/components/schemas/OkAudit' } } } }
-
-  /v1/admin/users/resolve:
-    get:
-      summary: Resolve by identifier (requires admin or admin.users)
-      parameters:
-        - { name: actorUserId, in: query, required: true, schema: { type: integer } }
-        - { name: identifier, in: query, required: true, schema: { type: string, example: "license:abc123" } }
-      responses:
-        '200': { description: User, content: { application/json: { schema: { $ref: '#/components/schemas/OkUser' } } } }
-        '404': { description: Not Found, content: { application/json: { schema: { $ref: '#/components/schemas/Fail' } } } }
-
-  /v1/admin/users/search:
-    get:
-      summary: Search users (identifier prefix or display name) (requires admin or admin.users)
-      parameters:
-        - { name: actorUserId, in: query, required: true, schema: { type: integer } }
-        - { name: q, in: query, required: true, schema: { type: string } }
-        - { name: limit, in: query, schema: { type: integer, default: 20, minimum: 1, maximum: 100 } }
-      responses:
-        '200':
-          description: Results
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/EnvelopeOk'
-                  - type: object
-                    properties:
-                      data:
-                        type: object
-                        properties:
-                          results:
-                            type: array
-                            items:
-                              type: object
-                              properties:
-                                id: { type: integer }
-                                primary_identifier: { type: string }
-                                display_name: { type: ['string','null'] }
-                                identifiers: { type: array, items: { type: string } }
+  responses:
+    InvalidInput:
+      description: 400 invalid input
+      headers:
+        x-request-id:
+          schema: { type: string }
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/EnvelopeErr' }
           examples:
-            prefix:
+            example:
               value:
-                ok: true
-                data:
-                  results:
-                    - { id: 42, primary_identifier: "license", display_name: "Sunny", identifiers: ["license:abc","discord:123"] }
-                requestId: "rid"
-                traceId: "tid"
-
-  /v1/admin/bans/list:
-    get:
-      summary: List bans (requires admin or admin.ban)
-      parameters:
-        - { name: actorUserId, in: query, required: true, schema: { type: integer } }
-        - { name: userId, in: query, schema: { type: integer } }
-        - { name: active, in: query, schema: { type: boolean } }
-        - { name: limit, in: query, schema: { type: integer, default: 50, minimum: 1, maximum: 200 } }
-      responses:
-        '200':
-          description: Bans
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/EnvelopeOk'
-                  - type: object
-                    properties:
-                      data:
-                        type: object
-                        properties:
-                          bans:
-                            type: array
-                            items:
-                              type: object
-                              properties:
-                                id: { type: integer }
-                                user_id: { type: integer }
-                                reason: { type: ['string','null'] }
-                                active: { type: boolean }
-                                created_at: { type: string }
-
-  /v1/admin/users/merge:
-    post:
-      summary: Merge a user into another (requires admin or admin.users)
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required: [actorUserId, fromUserId, intoUserId]
-              properties:
-                actorUserId: { type: integer }
-                fromUserId: { type: integer }
-                intoUserId: { type: integer }
-            examples:
-              merge:
-                value: { actorUserId: 1, fromUserId: 41, intoUserId: 42 }
-      responses:
-        '200':
-          description: Merge result
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/EnvelopeOk'
-                  - type: object
-                    properties:
-                      data:
-                        type: object
-                        properties:
-                          fromUserId: { type: integer }
-                          intoUserId: { type: integer }
-                          merged: { type: boolean }
-
-  /v1/admin/users/soft-delete:
-    post:
-      summary: Soft-delete a user (mark deleted_at) (requires admin or admin.users)
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required: [actorUserId, targetUserId]
-              properties:
-                actorUserId: { type: integer }
-                targetUserId: { type: integer }
-                reason: { type: string, nullable: true }
-            examples:
-              soft:
-                value: { actorUserId: 1, targetUserId: 42, reason: "Duplicate account" }
-      responses:
-        '200':
-          description: Soft-deleted
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/EnvelopeOk'
-                  - type: object
-                    properties:
-                      data:
-                        type: object
-                        properties:
-                          userId: { type: integer }
-                          deleted: { type: boolean }
-
-  /v1/admin/users/restore:
-    post:
-      summary: Restore a soft-deleted user (requires admin or admin.users)
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required: [actorUserId, targetUserId]
-              properties:
-                actorUserId: { type: integer }
-                targetUserId: { type: integer }
-            examples:
-              restore:
-                value: { actorUserId: 1, targetUserId: 42 }
-      responses:
-        '200':
-          description: Restored
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/EnvelopeOk'
-                  - type: object
-                    properties:
-                      data:
-                        type: object
-                        properties:
-                          userId: { type: integer }
-                          restored: { type: boolean }
+                ok: false
+                error:
+                  code: INVALID_INPUT
+                  message: "Bad request"
+                  details:
+                    fieldErrors:
+                      - { path: "name", message: "Required" }
+                requestId: "d49c..."
+                traceId: "d49c..."
+    Unauthenticated:
+      description: 401 unauthenticated
+      headers:
+        x-request-id:
+          schema: { type: string }
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/EnvelopeErr' }
+          examples:
+            example:
+              value:
+                ok: false
+                error: { code: UNAUTHENTICATED, message: "Missing or invalid X-API-Token" }
+                requestId: "d49c..."
+                traceId: "d49c..."
+    Forbidden:
+      description: 403 forbidden
+      headers:
+        x-request-id:
+          schema: { type: string }
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/EnvelopeErr' }
+          examples:
+            example:
+              value:
+                ok: false
+                error: { code: FORBIDDEN, message: "Insufficient scope" }
+                requestId: "d49c..."
+                traceId: "d49c..."
+    DependencyDown:
+      description: 503 dependency down
+      headers:
+        x-request-id:
+          schema: { type: string }
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/EnvelopeErr' }
+          examples:
+            example:
+              value:
+                ok: false
+                error: { code: DEPENDENCY_DOWN, message: "DB not ready" }
+                requestId: "d49c..."
+                traceId: "d49c..."
+    RateLimited:
+      description: 429 rate limited
+      headers:
+        retry-after:
+          schema: { type: integer, description: Seconds to retry }
+        x-request-id:
+          schema: { type: string }
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/EnvelopeErr' }
+          examples:
+            example:
+              value:
+                ok: false
+                error: { code: RATE_LIMITED, message: "Too many requests" }
+                requestId: "d49c..."
+                traceId: "d49c..."
+    InternalError:
+      description: 500 internal error
+      headers:
+        x-request-id:
+          schema: { type: string }
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/EnvelopeErr' }
+          examples:
+            example:
+              value:
+                ok: false
+                error: { code: INTERNAL_ERROR, message: "Unexpected error" }
+                requestId: "d49c..."
+                traceId: "d49c..."
