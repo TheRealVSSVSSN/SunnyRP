@@ -27,12 +27,10 @@ export async function ensureUserByIdentifiers(primary, identifiers, ip) {
 
 export async function isAdmin(userId) {
     const scopes = await getScopes(userId);
-    // Simple gate: 'admin' or 'admin.*' style scopes supported
     return scopes.some(s => s === 'admin' || s.startsWith('admin.'));
 }
 
 export async function banUser(actorUserId, targetUserId, reason = null, active = true) {
-    // close existing active bans
     await pool.query(`UPDATE bans SET active = 0 WHERE user_id = ? AND active = 1`, [targetUserId]);
     if (active) {
         await pool.query(
@@ -45,7 +43,29 @@ export async function banUser(actorUserId, targetUserId, reason = null, active =
 }
 
 export async function kickUser(actorUserId, targetUserId, reason = null) {
-    // We only record audit here; actual kick can be handled by FiveM base via separate mechanism/outbox later.
     await recordAudit(actorUserId, targetUserId, 'admin.kick', { reason });
     return { userId: targetUserId, kicked: true, reason: reason || null };
+}
+
+export async function listBans({ userId = null, active = null, limit = 50 }) {
+    const args = [];
+    const clauses = [];
+    if (userId != null) {
+        clauses.push('b.user_id = ?');
+        args.push(userId);
+    }
+    if (active != null) {
+        clauses.push('b.active = ?');
+        args.push(active ? 1 : 0);
+    }
+    const where = clauses.length ? `WHERE ${clauses.join(' AND ')}` : '';
+    const [rows] = await pool.query(
+        `SELECT b.id, b.user_id, b.reason, b.active, b.created_at
+     FROM bans b
+     ${where}
+     ORDER BY b.id DESC
+     LIMIT ?`,
+        [...args, Math.min(Math.max(limit, 1), 200)]
+    );
+    return rows;
 }

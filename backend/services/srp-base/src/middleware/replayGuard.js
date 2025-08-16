@@ -7,12 +7,15 @@ import { fail } from '../utils/respond.js';
 let redis;
 
 /**
- * Verifies HMAC headers and prevents replay using Redis (optional).
- * Canonical string: `${ts}\n${nonce}\n${METHOD}\n${path}\n${rawBody}`
+ * HMAC replay guard.
+ * NOTE: If a request is authenticated via a service token (req.isService === true),
+ * we SKIP HMAC to ease inter-service reads on a trusted network.
  */
 export function replayGuard() {
     return async (req, res, next) => {
         try {
+            if (req.isService) return next();
+
             const ts = req.header('X-Ts');
             const nonce = req.header('X-Nonce');
             const sig = req.header('X-Sig');
@@ -21,8 +24,7 @@ export function replayGuard() {
                 return fail(req, res, 'UNAUTHENTICATED', 'Missing HMAC headers');
             }
 
-            const nowSec = Math.floor(Date.now() / 1000);
-            const skew = Math.abs(nowSec - parseInt(ts, 10));
+            const skew = Math.abs(Math.floor(Date.now() / 1000) - parseInt(ts, 10));
             if (skew > env.REPLAY_ALLOWED_SKEW_SECONDS) {
                 return fail(req, res, 'UNAUTHENTICATED', 'Timestamp skew');
             }
@@ -30,9 +32,7 @@ export function replayGuard() {
             const method = req.method.toUpperCase();
             const path = req.originalUrl.split('?')[0];
             const canonical = `${ts}\n${nonce}\n${method}\n${path}\n${req.rawBody || ''}`;
-
-            const calc = crypto
-                .createHmac('sha256', env.API_TOKEN)
+            const calc = crypto.createHmac('sha256', env.API_TOKEN)
                 .update(canonical, 'utf8')
                 .digest('hex');
 
@@ -40,25 +40,24 @@ export function replayGuard() {
                 return fail(req, res, 'UNAUTHENTICATED', 'BAD_SIG');
             }
 
-            // Optional Redis replay dedupe
             if (env.REDIS_URL) {
                 if (!redis) {
                     redis = createClient({ url: env.REDIS_URL });
                     await redis.connect();
                 }
                 const key = `replay:${nonce}:${ts}`;
-                const ok = await redis.set(key, '1', {
+                const nx = await redis.set(key, '1', {
                     NX: true,
                     EX: env.REPLAY_ALLOWED_SKEW_SECONDS
                 });
-                if (!ok) {
+                if (!nx) {
                     return fail(req, res, 'UNAUTHENTICATED', 'REPLAY');
                 }
             }
 
             return next();
-        } catch (err) {
-            return next(err);
+        } catch (e) {
+            return next(e);
         }
     };
 }

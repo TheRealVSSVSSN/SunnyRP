@@ -2,9 +2,8 @@
 import { pool } from './db.js';
 
 function parseIdentifier(idStr) {
-    // expects formats like "license:xyz", "steam:1100001...", "discord:1234"
     const idx = idStr.indexOf(':');
-    if (idx === -1) return { type: 'license', value: idStr }; // fallback
+    if (idx === -1) return { type: 'license', value: idStr };
     return { type: idStr.slice(0, idx), value: idStr.slice(idx + 1) };
 }
 
@@ -12,9 +11,7 @@ export async function findUserIdByAnyIdentifier(identifiers) {
     if (!identifiers.length) return null;
     const pairs = identifiers.map(parseIdentifier);
 
-    const where = pairs
-        .map(() => '(id_type = ? AND id_value = ?)')
-        .join(' OR ');
+    const where = pairs.map(() => '(id_type = ? AND id_value = ?)').join(' OR ');
     const args = pairs.flatMap(p => [p.type, p.value]);
 
     const [rows] = await pool.query(
@@ -47,6 +44,30 @@ export async function getUserWithIdentifiers(userId) {
     );
     const identifiers = iRows.map(r => `${r.id_type}:${r.id_value}`);
     return { ...user, identifiers };
+}
+
+export async function searchUsersByIdentifierOrName(q, limit = 20) {
+    const like = `${q}%`;
+    const [rows] = await pool.query(
+        `SELECT u.id,
+            u.primary_identifier,
+            u.display_name,
+            GROUP_CONCAT(CONCAT(ui.id_type, ':', ui.id_value) ORDER BY ui.id SEPARATOR ',') AS identifiers
+     FROM users u
+     JOIN user_identifiers ui ON ui.user_id = u.id
+     WHERE ui.id_value LIKE ? OR u.display_name LIKE ?
+     GROUP BY u.id
+     ORDER BY u.id DESC
+     LIMIT ?`,
+        [like, like, Math.min(Math.max(limit, 1), 100)]
+    );
+
+    return rows.map(r => ({
+        id: r.id,
+        primary_identifier: r.primary_identifier,
+        display_name: r.display_name,
+        identifiers: (r.identifiers || '').split(',').filter(Boolean)
+    }));
 }
 
 export async function createUser(primaryIdentifier) {

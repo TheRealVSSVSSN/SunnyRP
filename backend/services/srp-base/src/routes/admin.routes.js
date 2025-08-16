@@ -8,12 +8,14 @@ import { readAudit } from '../repositories/audit.repo.js';
 import {
     ensureUserByIdentifiers,
     banUser,
-    kickUser
+    kickUser,
+    listBans
 } from '../repositories/admin.repo.js';
 import {
     findUserIdByAnyIdentifier,
     resolveUserByIdentifier,
-    getUserWithIdentifiers
+    getUserWithIdentifiers,
+    searchUsersByIdentifierOrName
 } from '../repositories/identity.repo.js';
 import { idempotentRoute } from '../middleware/idempotency.js';
 import { requireScopes } from '../middleware/requireScopes.js';
@@ -127,7 +129,6 @@ adminRouter.get(
 /**
  * GET /v1/admin/users/resolve?actorUserId=&identifier=
  * requires scope: admin OR admin.users
- * Resolves a single identifier (e.g., license:xxx) to a user with identifiers.
  */
 adminRouter.get(
     '/v1/admin/users/resolve',
@@ -159,28 +160,67 @@ adminRouter.get(
 );
 
 /**
- * GET /v1/admin/users/:userId
+ * GET /v1/admin/users/search?actorUserId=&q=&limit=
  * requires scope: admin OR admin.users
- * Returns user row + identifiers[] for quick admin diagnostics.
+ * prefix matches identifiers or display_name
  */
 adminRouter.get(
-    '/v1/admin/users/:userId',
+    '/v1/admin/users/search',
     rateLimit({
-        key: (req) => `adminusers:${req.query?.actorUserId || req.ip}`,
+        key: (req) => `adminsearch:${req.query?.actorUserId || req.ip}`,
         windowSec: env.RATE_LIMIT_WINDOW_SEC,
         limit: env.RATE_LIMIT_MAX_ADMIN_READ
     }),
     validate({
-        params: (z) => z.object({ userId: z.coerce.number() }),
-        query: (z) => z.object({ actorUserId: z.coerce.number() })
+        query: (z) => z.object({
+            actorUserId: z.coerce.number(),
+            q: z.string().min(2),
+            limit: z.coerce.number().min(1).max(100).default(20)
+        })
     }),
     requireScopes(req => Number(req.query.actorUserId), ['admin', 'admin.users']),
     async (req, res, next) => {
         try {
-            const { userId } = req.params;
-            const full = await getUserWithIdentifiers(userId);
-            if (!full) return fail(req, res, 'NOT_FOUND', 'User not found');
-            return ok(req, res, { user: full });
+            const { q, limit } = req.query;
+            const results = await searchUsersByIdentifierOrName(q, limit);
+            return ok(req, res, { results });
+        } catch (err) {
+            return next(err);
+        }
+    }
+);
+
+/**
+ * GET /v1/admin/bans/list?actorUserId=&userId=&active=true&limit=
+ * requires scope: admin OR admin.ban
+ */
+adminRouter.get(
+    '/v1/admin/bans/list',
+    rateLimit({
+        key: (req) => `bans:${req.query?.actorUserId || req.ip}`,
+        windowSec: env.RATE_LIMIT_WINDOW_SEC,
+        limit: env.RATE_LIMIT_MAX_ADMIN_READ
+    }),
+    validate({
+        query: (z) => z.object({
+            actorUserId: z.coerce.number(),
+            userId: z.coerce.number().optional(),
+            active: z.union([z.string(), z.boolean()]).optional(), // allow 'true'/'false'
+            limit: z.coerce.number().min(1).max(200).default(50)
+        })
+    }),
+    requireScopes(req => Number(req.query.actorUserId), ['admin', 'admin.ban']),
+    async (req, res, next) => {
+        try {
+            const userId = req.query.userId ?? null;
+            const activeRaw = req.query.active;
+            let active = null;
+            if (typeof activeRaw !== 'undefined') {
+                active = String(activeRaw).toLowerCase() === 'true' ? true :
+                    String(activeRaw).toLowerCase() === 'false' ? false : null;
+            }
+            const list = await listBans({ userId, active, limit: req.query.limit || 50 });
+            return ok(req, res, { bans: list });
         } catch (err) {
             return next(err);
         }

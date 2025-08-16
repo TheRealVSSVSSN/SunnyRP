@@ -56,7 +56,11 @@ const Schema = z.object({
 
   // HTTP client
   HTTP_TIMEOUT_MS: z.coerce.number().default(3000),
-  HTTP_RETRY_COUNT: z.coerce.number().default(2)
+  HTTP_RETRY_COUNT: z.coerce.number().default(2),
+
+  // Service tokens (read-only)
+  ENABLE_SERVICE_TOKENS: z.coerce.boolean().default(false),
+  SERVICE_TOKENS: z.string().default('')
 });
 
 export const env = Object.freeze(Schema.parse(process.env));
