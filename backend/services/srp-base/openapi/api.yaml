@@ -4,7 +4,8 @@ info:
   version: 1.0.0
   description: >
     Base service for SunnyRP. All requests must include X-API-Token and HMAC headers (X-Ts, X-Nonce, X-Sig).
-    Inter-service **read-only** calls may use **X-Service-Token** (if ENABLE_SERVICE_TOKENS=true) for GET/HEAD/OPTIONS.
+    Inter-service **read-only** calls may use **X-Service-Token** (GET/HEAD/OPTIONS; if ENABLE_SERVICE_TOKENS=true).
+    Inter-service **read/write** calls may use **X-Internal-Ts / X-Internal-Nonce / X-Internal-Sig** (if ENABLE_INTERNAL_HMAC=true).
 servers:
   - url: http://localhost:3301
 paths:
@@ -12,9 +13,7 @@ paths:
     get:
       summary: Liveness check
       responses:
-        '200':
-          description: OK
-          content: { application/json: { schema: { $ref: '#/components/schemas/OkHealth' } } }
+        '200': { description: OK, content: { application/json: { schema: { $ref: '#/components/schemas/OkHealth' } } } }
   /v1/ready:
     get:
       summary: Readiness check (DB/Redis)
@@ -38,8 +37,7 @@ paths:
   /v1/permissions/{playerId}:
     get:
       summary: Get permission scopes for a player
-      parameters:
-        - { name: playerId, in: path, required: true, schema: { type: string } }
+      parameters: [ { name: playerId, in: path, required: true, schema: { type: string } } ]
       responses:
         '200': { description: Scopes, content: { application/json: { schema: { $ref: '#/components/schemas/OkScopes' } } } }
 
@@ -83,6 +81,37 @@ paths:
         '200': { description: Banned, content: { application/json: { schema: { $ref: '#/components/schemas/OkBan' } } } }
         '403': { description: Forbidden, content: { application/json: { schema: { $ref: '#/components/schemas/Fail' } } } }
 
+  /v1/admin/unban:
+    post:
+      summary: Unban (deactivate active bans) (requires admin or admin.ban)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [actorUserId, targetUserId]
+              properties:
+                actorUserId: { type: integer }
+                targetUserId: { type: integer }
+      responses:
+        '200':
+          description: Unbanned
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/EnvelopeOk'
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        properties:
+                          userId: { type: integer }
+                          unbanned: { type: boolean }
+                          deactivated: { type: integer }
+        '403': { description: Forbidden, content: { application/json: { schema: { $ref: '#/components/schemas/Fail' } } } }
+
   /v1/admin/kick:
     post:
       summary: Record a kick (requires admin or admin.kick)
@@ -110,7 +139,7 @@ paths:
         - { name: actorUserId, in: query, required: true, schema: { type: integer } }
         - { name: identifier, in: query, required: true, schema: { type: string, example: "license:abc123" } }
       responses:
-        '200': { description: User and identifiers, content: { application/json: { schema: { $ref: '#/components/schemas/OkUser' } } } }
+        '200': { description: User, content: { application/json: { schema: { $ref: '#/components/schemas/OkUser' } } } }
         '404': { description: Not Found, content: { application/json: { schema: { $ref: '#/components/schemas/Fail' } } } }
 
   /v1/admin/users/search:
@@ -141,9 +170,7 @@ paths:
                                 id: { type: integer }
                                 primary_identifier: { type: string }
                                 display_name: { type: ['string','null'] }
-                                identifiers:
-                                  type: array
-                                  items: { type: string }
+                                identifiers: { type: array, items: { type: string } }
 
   /v1/admin/bans/list:
     get:
@@ -176,6 +203,39 @@ paths:
                                 reason: { type: ['string','null'] }
                                 active: { type: boolean }
                                 created_at: { type: string }
+
+  /v1/admin/users/merge:
+    post:
+      summary: Merge one user into another (requires admin or admin.users)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [actorUserId, fromUserId, intoUserId]
+              properties:
+                actorUserId: { type: integer }
+                fromUserId: { type: integer }
+                intoUserId: { type: integer }
+      responses:
+        '200':
+          description: Merge result
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/EnvelopeOk'
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        properties:
+                          fromUserId: { type: integer }
+                          intoUserId: { type: integer }
+                          identifiersMoved: { type: integer }
+                          rolesMoved: { type: integer }
+                          bansReassigned: { type: integer }
 
 components:
   schemas:
@@ -292,10 +352,8 @@ components:
                     created_at: { type: string }
                     updated_at: { type: string }
                     identifiers: { type: array, items: { type: string } }
-
     Fail:
       $ref: '#/components/schemas/EnvelopeFail'
-
     PlayerLinkRequest:
       type: object
       required: [primary, identifiers]
@@ -303,7 +361,6 @@ components:
         primary: { type: string, description: license|steam|discord }
         identifiers: { type: array, items: { type: string } }
         ip: { type: string, example: "127.0.0.1" }
-
     GrantRoleRequest:
       type: object
       required: [actorUserId, targetUserId, role]
@@ -311,7 +368,6 @@ components:
         actorUserId: { type: integer }
         targetUserId: { type: integer }
         role: { type: string }
-
     RevokeRoleRequest:
       type: object
       required: [actorUserId, targetUserId, role]
@@ -319,7 +375,6 @@ components:
         actorUserId: { type: integer }
         targetUserId: { type: integer }
         role: { type: string }
-
     BanRequest:
       type: object
       required: [actorUserId]
@@ -333,7 +388,6 @@ components:
           items: { type: string }
         reason: { type: string, nullable: true }
         active: { type: boolean, default: true }
-
     KickRequest:
       type: object
       required: [actorUserId, targetUserId]

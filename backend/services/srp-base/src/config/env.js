@@ -60,7 +60,12 @@ const Schema = z.object({
 
   // Service tokens (read-only)
   ENABLE_SERVICE_TOKENS: z.coerce.boolean().default(false),
-  SERVICE_TOKENS: z.string().default('')
+  SERVICE_TOKENS: z.string().default(''),
+
+  // NEW: Inter-service HMAC
+  ENABLE_INTERNAL_HMAC: z.coerce.boolean().default(false),
+  INTERNAL_HMAC_SECRET: z.string().default('change_me_internal_hmac'),
+  INTERNAL_HMAC_TTL_SEC: z.coerce.number().default(90)
 });
 
 export const env = Object.freeze(Schema.parse(process.env));

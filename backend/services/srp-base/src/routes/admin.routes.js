@@ -9,7 +9,9 @@ import {
     ensureUserByIdentifiers,
     banUser,
     kickUser,
-    listBans
+    listBans,
+    unbanUser,
+    mergeUsers
 } from '../repositories/admin.repo.js';
 import {
     findUserIdByAnyIdentifier,
@@ -59,6 +61,31 @@ adminRouter.post(
         }
 
         const result = await banUser(actorUserId, targetId, reason || null, active !== false);
+        return ok(req, res, result);
+    })
+);
+
+/**
+ * POST /v1/admin/unban
+ * requires scope: admin OR admin.ban
+ */
+adminRouter.post(
+    '/v1/admin/unban',
+    rateLimit({
+        key: (req) => `unban:${req.body?.actorUserId || req.ip}`,
+        windowSec: env.RATE_LIMIT_WINDOW_SEC,
+        limit: env.RATE_LIMIT_MAX_BAN
+    }),
+    validate({
+        body: (z) => z.object({
+            actorUserId: z.coerce.number(),
+            targetUserId: z.coerce.number()
+        })
+    }),
+    requireScopes(req => req.body.actorUserId, ['admin', 'admin.ban']),
+    idempotentRoute(async (req, res) => {
+        const { actorUserId, targetUserId } = req.body;
+        const result = await unbanUser(actorUserId, targetUserId);
         return ok(req, res, result);
     })
 );
@@ -162,7 +189,6 @@ adminRouter.get(
 /**
  * GET /v1/admin/users/search?actorUserId=&q=&limit=
  * requires scope: admin OR admin.users
- * prefix matches identifiers or display_name
  */
 adminRouter.get(
     '/v1/admin/users/search',
@@ -205,7 +231,7 @@ adminRouter.get(
         query: (z) => z.object({
             actorUserId: z.coerce.number(),
             userId: z.coerce.number().optional(),
-            active: z.union([z.string(), z.boolean()]).optional(), // allow 'true'/'false'
+            active: z.union([z.string(), z.boolean()]).optional(),
             limit: z.coerce.number().min(1).max(200).default(50)
         })
     }),
@@ -225,4 +251,38 @@ adminRouter.get(
             return next(err);
         }
     }
+);
+
+/**
+ * POST /v1/admin/users/merge
+ * body: { actorUserId, fromUserId, intoUserId }
+ * requires scope: admin OR admin.users
+ */
+adminRouter.post(
+    '/v1/admin/users/merge',
+    rateLimit({
+        key: (req) => `merge:${req.body?.actorUserId || req.ip}`,
+        windowSec: env.RATE_LIMIT_WINDOW_SEC,
+        limit: 10
+    }),
+    validate({
+        body: (z) => z.object({
+            actorUserId: z.coerce.number(),
+            fromUserId: z.coerce.number(),
+            intoUserId: z.coerce.number()
+        })
+    }),
+    requireScopes(req => req.body.actorUserId, ['admin', 'admin.users']),
+    idempotentRoute(async (req, res, next) => {
+        try {
+            const { actorUserId, fromUserId, intoUserId } = req.body;
+            if (fromUserId === intoUserId) {
+                return fail(req, res, 'INVALID_INPUT', 'fromUserId and intoUserId must differ');
+            }
+            const result = await mergeUsers(actorUserId, fromUserId, intoUserId);
+            return ok(req, res, result);
+        } catch (err) {
+            return next(err);
+        }
+    })
 );
