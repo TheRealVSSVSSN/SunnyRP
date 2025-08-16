@@ -81,9 +81,34 @@ export async function unbanUser(actorUserId, targetUserId) {
 }
 
 /**
+ * Soft delete user (mark deleted_at). No cascades; identifiers remain for history.
+ */
+export async function softDeleteUser(actorUserId, targetUserId, reason = null) {
+    const [res] = await pool.query(
+        `UPDATE users SET deleted_at = CURRENT_TIMESTAMP WHERE id = ? AND deleted_at IS NULL`,
+        [targetUserId]
+    );
+    const changed = res.affectedRows || 0;
+    await recordAudit(actorUserId, targetUserId, 'admin.users.soft_delete', { reason, changed });
+    return { userId: targetUserId, deleted: changed > 0 };
+}
+
+/**
+ * Restore a soft-deleted user.
+ */
+export async function restoreUser(actorUserId, targetUserId) {
+    const [res] = await pool.query(
+        `UPDATE users SET deleted_at = NULL WHERE id = ? AND deleted_at IS NOT NULL`,
+        [targetUserId]
+    );
+    const changed = res.affectedRows || 0;
+    await recordAudit(actorUserId, targetUserId, 'admin.users.restore', { changed });
+    return { userId: targetUserId, restored: changed > 0 };
+}
+
+/**
  * Merge "fromUserId" into "intoUserId".
- * Moves identifiers (deduplicated), roles (deduplicated), and re-assigns bans.
- * Does not delete the source user row for history (optional).
+ * Moves identifiers (deduped), roles (deduped), and re-assigns bans, then clears fromUser's identifiers/roles.
  */
 export async function mergeUsers(actorUserId, fromUserId, intoUserId) {
     if (fromUserId === intoUserId) {
@@ -99,60 +124,41 @@ export async function mergeUsers(actorUserId, fromUserId, intoUserId) {
             `SELECT id_type, id_value FROM user_identifiers WHERE user_id = ?`,
             [fromUserId]
         );
-        let identifiersMoved = 0;
         for (const row of idents) {
-            // insert ignore to avoid unique conflicts
             await conn.query(
                 `INSERT IGNORE INTO user_identifiers (user_id, id_type, id_value) VALUES (?,?,?)`,
                 [intoUserId, row.id_type, row.id_value]
             );
         }
-        // delete all old identifiers
-        const [delRes] = await conn.query(
-            `DELETE FROM user_identifiers WHERE user_id = ?`,
-            [fromUserId]
-        );
-        identifiersMoved = delRes.affectedRows || 0;
+        await conn.query(`DELETE FROM user_identifiers WHERE user_id = ?`, [fromUserId]);
 
         // roles
         const [roles] = await conn.query(
             `SELECT role_id FROM user_roles WHERE user_id = ?`,
             [fromUserId]
         );
-        let rolesMoved = 0;
         for (const r of roles) {
-            const [ins] = await conn.query(
+            await conn.query(
                 `INSERT IGNORE INTO user_roles (user_id, role_id) VALUES (?, ?)`,
                 [intoUserId, r.role_id]
             );
-            rolesMoved += ins.affectedRows || 0;
         }
         await conn.query(`DELETE FROM user_roles WHERE user_id = ?`, [fromUserId]);
 
-        // bans -> reassign to target user
-        const [banMove] = await conn.query(
-            `UPDATE bans SET user_id = ? WHERE user_id = ?`,
-            [intoUserId, fromUserId]
-        );
-        const bansReassigned = banMove.affectedRows || 0;
+        // bans -> reassign to intoUser
+        await conn.query(`UPDATE bans SET user_id = ? WHERE user_id = ?`, [intoUserId, fromUserId]);
 
-        // optional: retarget audits referencing target_user_id
-        await conn.query(
-            `UPDATE audit SET target_user_id = ? WHERE target_user_id = ?`,
-            [intoUserId, fromUserId]
-        );
+        // audits -> retarget target_user_id
+        await conn.query(`UPDATE audit SET target_user_id = ? WHERE target_user_id = ?`, [intoUserId, fromUserId]);
 
         await conn.commit();
 
         await recordAudit(actorUserId, intoUserId, 'admin.users.merge', {
             fromUserId,
-            intoUserId,
-            identifiersMoved,
-            rolesMoved,
-            bansReassigned
+            intoUserId
         });
 
-        return { fromUserId, intoUserId, identifiersMoved, rolesMoved, bansReassigned };
+        return { fromUserId, intoUserId, merged: true };
     } catch (e) {
         await conn.rollback();
         throw e;

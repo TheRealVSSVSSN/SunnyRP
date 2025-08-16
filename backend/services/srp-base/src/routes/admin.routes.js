@@ -11,7 +11,9 @@ import {
     kickUser,
     listBans,
     unbanUser,
-    mergeUsers
+    mergeUsers,
+    softDeleteUser,
+    restoreUser
 } from '../repositories/admin.repo.js';
 import {
     findUserIdByAnyIdentifier,
@@ -255,7 +257,6 @@ adminRouter.get(
 
 /**
  * POST /v1/admin/users/merge
- * body: { actorUserId, fromUserId, intoUserId }
  * requires scope: admin OR admin.users
  */
 adminRouter.post(
@@ -284,5 +285,58 @@ adminRouter.post(
         } catch (err) {
             return next(err);
         }
+    })
+);
+
+/**
+ * POST /v1/admin/users/soft-delete
+ * body: { actorUserId, targetUserId, reason? }
+ * requires scope: admin OR admin.users
+ */
+adminRouter.post(
+    '/v1/admin/users/soft-delete',
+    rateLimit({
+        key: (req) => `softdel:${req.body?.actorUserId || req.ip}`,
+        windowSec: env.RATE_LIMIT_WINDOW_SEC,
+        limit: 10
+    }),
+    validate({
+        body: (z) => z.object({
+            actorUserId: z.coerce.number(),
+            targetUserId: z.coerce.number(),
+            reason: z.string().optional()
+        })
+    }),
+    requireScopes(req => req.body.actorUserId, ['admin', 'admin.users']),
+    idempotentRoute(async (req, res) => {
+        const { actorUserId, targetUserId, reason } = req.body;
+        const result = await softDeleteUser(actorUserId, targetUserId, reason || null);
+        return ok(req, res, result);
+    })
+);
+
+/**
+ * POST /v1/admin/users/restore
+ * body: { actorUserId, targetUserId }
+ * requires scope: admin OR admin.users
+ */
+adminRouter.post(
+    '/v1/admin/users/restore',
+    rateLimit({
+        key: (req) => `restore:${req.body?.actorUserId || req.ip}`,
+        windowSec: env.RATE_LIMIT_WINDOW_SEC,
+        limit: 10
+    }),
+    validate({
+        body: (z) => z.object({
+            actorUserId: z.coerce.number(),
+            targetUserId: z.coerce.number()
+        })
+    }),
+    requireScopes(req => req.body.actorUserId, ['admin', 'admin.users']),
+    idempotentRoute(async (req, res) => {
+        const { actorUserId, targetUserId } = req.body;
+        const result = await restoreUser(actorUserId, targetUserId);
+        return ok(req, res, result);
     })
 );

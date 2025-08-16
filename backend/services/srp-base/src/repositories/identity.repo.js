@@ -7,33 +7,49 @@ function parseIdentifier(idStr) {
     return { type: idStr.slice(0, idx), value: idStr.slice(idx + 1) };
 }
 
-export async function findUserIdByAnyIdentifier(identifiers) {
-    if (!identifiers.length) return null;
+/**
+ * Default behavior excludes soft-deleted users.
+ */
+export async function findUserIdByAnyIdentifier(identifiers, { includeDeleted = false } = {}) {
+    if (!identifiers?.length) return null;
     const pairs = identifiers.map(parseIdentifier);
 
-    const where = pairs.map(() => '(id_type = ? AND id_value = ?)').join(' OR ');
+    const wherePairs = pairs.map(() => '(ui.id_type = ? AND ui.id_value = ?)').join(' OR ');
     const args = pairs.flatMap(p => [p.type, p.value]);
 
+    const deletedClause = includeDeleted ? '' : 'AND u.deleted_at IS NULL';
+
     const [rows] = await pool.query(
-        `SELECT user_id FROM user_identifiers WHERE ${where} LIMIT 1`,
+        `SELECT u.id AS user_id
+     FROM user_identifiers ui
+     JOIN users u ON u.id = ui.user_id
+     WHERE (${wherePairs}) ${deletedClause}
+     LIMIT 1`,
         args
     );
     return rows[0]?.user_id || null;
 }
 
-export async function resolveUserByIdentifier(identifier) {
+/**
+ * Resolve by single identifier. Excludes deleted by default.
+ */
+export async function resolveUserByIdentifier(identifier, { includeDeleted = false } = {}) {
     const { type, value } = parseIdentifier(identifier);
+    const deletedClause = includeDeleted ? '' : 'AND u.deleted_at IS NULL';
     const [rows] = await pool.query(
         `SELECT u.*
      FROM users u
      JOIN user_identifiers ui ON ui.user_id = u.id
-     WHERE ui.id_type = ? AND ui.id_value = ?
+     WHERE ui.id_type = ? AND ui.id_value = ? ${deletedClause}
      LIMIT 1`,
         [type, value]
     );
     return rows[0] || null;
 }
 
+/**
+ * Always returns the row even if deleted; caller decides what to do.
+ */
 export async function getUserWithIdentifiers(userId) {
     const [uRows] = await pool.query(`SELECT * FROM users WHERE id = ?`, [userId]);
     if (!uRows.length) return null;
@@ -46,8 +62,12 @@ export async function getUserWithIdentifiers(userId) {
     return { ...user, identifiers };
 }
 
-export async function searchUsersByIdentifierOrName(q, limit = 20) {
+/**
+ * Search by identifier prefix or display name. Excludes deleted by default.
+ */
+export async function searchUsersByIdentifierOrName(q, limit = 20, { includeDeleted = false } = {}) {
     const like = `${q}%`;
+    const deletedClause = includeDeleted ? '' : 'AND u.deleted_at IS NULL';
     const [rows] = await pool.query(
         `SELECT u.id,
             u.primary_identifier,
@@ -55,7 +75,7 @@ export async function searchUsersByIdentifierOrName(q, limit = 20) {
             GROUP_CONCAT(CONCAT(ui.id_type, ':', ui.id_value) ORDER BY ui.id SEPARATOR ',') AS identifiers
      FROM users u
      JOIN user_identifiers ui ON ui.user_id = u.id
-     WHERE ui.id_value LIKE ? OR u.display_name LIKE ?
+     WHERE (ui.id_value LIKE ? OR u.display_name LIKE ?) ${deletedClause}
      GROUP BY u.id
      ORDER BY u.id DESC
      LIMIT ?`,
@@ -79,11 +99,10 @@ export async function createUser(primaryIdentifier) {
 }
 
 export async function addIdentifiers(userId, identifiers, ip) {
-    const pairs = identifiers.map(parseIdentifier);
-    const values = pairs.map(() => '(?,?,?)').join(',');
-    const args = pairs.flatMap(p => [userId, p.type, p.value]);
-
+    const pairs = (identifiers || []).map(parseIdentifier);
     if (pairs.length) {
+        const values = pairs.map(() => '(?,?,?)').join(',');
+        const args = pairs.flatMap(p => [userId, p.type, p.value]);
         await pool.query(
             `INSERT IGNORE INTO user_identifiers (user_id, id_type, id_value)
        VALUES ${values}`,
