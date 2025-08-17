@@ -1,0 +1,48 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, 'Helvetica Neue', Arial, sans-serif;
+    user-select: none;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#taskbar {
+    position: absolute;
+    left: 50%;
+    bottom: 10%;
+    transform: translateX(-50%);
+    width: 36rem;
+    max-width: 90vw;
+    background: rgba(14, 14, 16, 0.85);
+    border-radius: 8px;
+    padding: 12px 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+#taskbar-label {
+    color: #fff;
+    font-size: 14px;
+    margin-bottom: 8px;
+    letter-spacing: .3px;
+}
+
+#taskbar-bar {
+    width: 100%;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+#taskbar-progress {
+    height: 100%;
+    width: 0%;
+    background: #4cc9f0;
+    transition: width .08s linear;
+}
