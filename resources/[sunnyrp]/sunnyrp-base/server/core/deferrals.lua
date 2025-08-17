@@ -1,127 +1,87 @@
--- server/core/deferrals.lua
--- Aligns to /v1/players/link and handles standard envelope from backend.
+-- resources/[sunnyrp]/sunnyrp-base/server/core/deferrals.lua
+-- Deferral flow: link player, verify ban/whitelist, ensure user exists/created.
 
-local function splitCsv(s)
-  local out = {}
-  for token in string.gmatch(s or '', '([^,]+)') do
-    out[#out+1] = (token:gsub('^%s*',''):gsub('%s*$',''))
+local function idPair(typeName, value) return { type = typeName, value = value } end
+
+local function collectIdentifiers(src)
+  local ids = GetPlayerIdentifiers(src)
+  local out = { license = nil, steam = nil, discord = nil, fivem = nil }
+  for _,id in ipairs(ids or {}) do
+    if id:sub(1,8) == 'license:' then out.license = id:sub(9)
+    elseif id:sub(1,6) == 'steam:' then out.steam = id:sub(7)
+    elseif id:sub(1,8) == 'discord:' then out.discord = id:sub(9)
+    elseif id:sub(1,6) == 'fivem:' then out.fivem = id:sub(7)
+    end
   end
   return out
 end
 
-local function getIdentifiers(src)
-  local ids = GetPlayerIdentifiers(src)
-  local map = { ip = GetPlayerEndpoint(src) or '' }
-  for _,v in ipairs(ids) do
-    local k, val = v:match('([^:]+):(.*)')
-    if k and val then map[k] = val end
-  end
-  return map
-end
-
-local function convarOr(name, default)
-  local v = GetConvar(name, '')
-  if v == '' then return default end
-  return v
-end
-
-local REQ_IDS_CSV = convarOr('srp_required_identifiers', 'license,discord')
-local PRIMARY_ID  = convarOr('srp_primary_identifier', 'license')
-local WHITELIST   = (convarOr('srp_whitelist_enabled', 'false') == 'true')
-local REQUIRE_VER = (convarOr('srp_require_verification', 'false') == 'true')
-local DEBUG_DEF   = (convarOr('srp_deferrals_debug', 'false') == 'true')
-
-local function step(deferrals, msg)
-  if DEBUG_DEF then print(('[SRP:DEF] %s'):format(msg)) end
-  deferrals.update(msg)
+local function canonicalHexId(idset)
+  return idset.license or idset.steam or idset.fivem or idset.discord or ('p'..tostring(math.random(100000,999999)))
 end
 
 AddEventHandler('playerConnecting', function(playerName, setKickReason, deferrals)
   local src = source
   deferrals.defer()
+  deferrals.update('Linking your account...')
 
-  step(deferrals, 'Checking identifiers…')
-  local ids = getIdentifiers(src)
-
-  -- required identifiers
-  local missing = {}
-  for _, need in ipairs(splitCsv(REQ_IDS_CSV)) do
-    if (ids[need] == nil) or (ids[need] == '') then
-      missing[#missing+1] = need
-    end
-  end
-  if #missing > 0 then
-    deferrals.done(('Connection blocked: missing required identifier(s): %s'):format(table.concat(missing, ', ')))
-    CancelEvent(); return
+  if not SRP_HTTP or not SRP_HTTP.Fetch then
+    deferrals.done('Service unavailable. Try again later.')
+    return
   end
 
-  -- link / create
-  step(deferrals, 'Linking your account…')
-  local payload = {
-    name = playerName or ('player:%d'):format(src),
-    identifiers = ids,
-    primary = ids[PRIMARY_ID],
-    meta = { endpoint = ids.ip or '', ts = os.time() }
+  local ids = collectIdentifiers(src)
+  local linkPayload = {
+    playerId = src,
+    identifiers = {}
   }
+  if ids.license then table.insert(linkPayload.identifiers, idPair('license', ids.license)) end
+  if ids.steam then table.insert(linkPayload.identifiers, idPair('steam', ids.steam)) end
+  if ids.discord then table.insert(linkPayload.identifiers, idPair('discord', ids.discord)) end
+  if ids.fivem then table.insert(linkPayload.identifiers, idPair('community', ids.fivem)) end
 
-  local res = SRP_HTTP.Fetch('POST', '/v1/players/link', payload, { retries = 1, timeout = 8000 })
-  if not res.ok then
-    if SRP_Config.Dev and SRP_Config.Dev.fakeBackend then
-      step(deferrals, 'Backend unavailable; dev bypass enabled.')
-    else
-      deferrals.done(('Core-API unavailable (%s). Try again soon.'):format(res.message or res.error or 'timeout'))
-      CancelEvent(); return
+  local linkRes = SRP_HTTP.Fetch('POST', '/v1/players/link', linkPayload, { retries = 0, timeout = 6000 })
+  if not linkRes or not linkRes.ok then
+    deferrals.done('Unable to link your account. Please retry.')
+    return
+  end
+
+  if linkRes.data and linkRes.data.banned then
+    local reason = (linkRes.data.banReason or 'You are banned.')
+    deferrals.done(('Banned: %s'):format(reason))
+    return
+  end
+
+  if SRP_CONFIG and SRP_CONFIG.whitelist and SRP_CONFIG.whitelist.enforce then
+    if not (linkRes.data and linkRes.data.whitelisted) then
+      deferrals.done(SRP_CONFIG.whitelist.message or 'Not whitelisted.')
+      return
     end
   end
 
-  local data = res.data or {}
-  local playerId = data.playerId or data.id
-  if not playerId and not (SRP_Config.Dev and SRP_Config.Dev.fakeBackend) then
-    deferrals.done('Failed to create/link your account. (No playerId)')
-    CancelEvent(); return
+  -- ensure user exists / create if missing
+  deferrals.update('Verifying your profile...')
+  local hex = canonicalHexId(ids)
+  local existsOk, exists = SRP_Users.Exists(hex)
+  if not existsOk then
+    deferrals.done('Could not verify user profile.')
+    return
   end
 
-  -- gates
-  if data.banned == true then
-    deferrals.done(('You are banned.%s'):format(data.banReason and (' Reason: ' .. tostring(data.banReason)) or ''))
-    CancelEvent(); return
-  end
-  if WHITELIST and (data.whitelisted ~= true) then
-    deferrals.done('Whitelist only at this time. Apply via website/Discord.')
-    CancelEvent(); return
-  end
-  if REQUIRE_VER and (data.verified ~= true) then
-    deferrals.done('Account not verified. Complete SMS/Discord verification to play.')
-    CancelEvent(); return
+  if not exists then
+    local idents = {}
+    if ids.license then table.insert(idents, idPair('license', ids.license)) end
+    if ids.steam then table.insert(idents, idPair('steam', ids.steam)) end
+    if ids.discord then table.insert(idents, idPair('discord', ids.discord)) end
+    if ids.fivem then table.insert(idents, idPair('community', ids.fivem)) end
+
+    local createRes = SRP_Users.Create(hex, playerName, idents, 'user')
+    if not createRes or not createRes.ok then
+      deferrals.done('Failed to initialize your user profile.')
+      return
+    end
   end
 
-  -- hydrate player cache
-  step(deferrals, 'Finalizing session…')
-  local P = exports['sunnyrp-base']:getModule('Player')
-  local user, linkErr = P.Link(src, playerName)
-  if not user then
-    deferrals.done(('Internal link error: %s'):format(linkErr or 'unknown'))
-    CancelEvent(); return
-  end
-
-  -- perms cache
-  if type(data.scopes) == 'table' then
-    SRP_Perms.cache[src] = { playerId = playerId, scopes = data.scopes, ts = GetGameTimer() }
-  else
-    P.RefreshPerms(src, playerId)
-  end
-
-  -- statebag hints
-  local ped = GetPlayerPed(src)
-  if ped and ped ~= 0 then
-    Entity(ped).state:set('srp:playerId', playerId, true)
-    Entity(ped).state:set('srp:verified', data.verified == true, true)
-  end
-
-  -- loading bucket if available
-  if SRP_Buckets and SRP_Buckets.ToLoading then
-    SRP_Buckets.ToLoading(src)
-  end
-
+  deferrals.update('Welcome to SunnyRP!')
   deferrals.done()
 end)

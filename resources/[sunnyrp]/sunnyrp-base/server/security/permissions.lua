@@ -1,36 +1,38 @@
--- server/security/permissions.lua
--- Aligns to /v1/permissions/:playerId and envelope.
+-- resources/[sunnyrp]/sunnyrp-base/server/security/permissions.lua
+-- Fetches scopes for a player from the backend (authoritative), with a small cache.
 
-SRP_Perms = SRP_Perms or { cache = {} }
+SRP_PERMS = SRP_PERMS or {}
+local CACHE = {}
+local TTL_MS = 10 * 1000
 
-local function has(scopeList, scope)
-  if not scope or scope == '' then return false end
-  for _,s in ipairs(scopeList or {}) do
-    if s == scope then return true end
+local function now() return GetGameTimer() end
+
+local function fetchScopes(playerId)
+  local res = SRP_HTTP.Fetch('GET', '/v1/permissions/' .. tostring(playerId), nil, { retries = 0, timeout = 5000 })
+  if res and res.ok and res.data and res.data.scopes then
+    return res.data.scopes
   end
+  return { 'player' }
+end
+
+function SRP_PERMS.GetScopes(playerId)
+  local key = tostring(playerId)
+  local entry = CACHE[key]
+  if entry and (now() - entry.t) < TTL_MS then
+    return entry.v
+  end
+  local scopes = fetchScopes(playerId)
+  CACHE[key] = { v = scopes, t = now() }
+  return scopes
+end
+
+function SRP_PERMS.HasScope(playerId, scope)
+  local scopes = SRP_PERMS.GetScopes(playerId)
+  if not scopes or type(scopes) ~= 'table' then return false end
+  if scope == 'player' then return true end
+  for _,s in ipairs(scopes) do if s == 'admin' or s == scope then return true end end
   return false
 end
 
-function SRP_Perms.refreshFor(src, playerId)
-  if not playerId then
-    local P = exports['sunnyrp-base']:getModule('Player').GetUser(src)
-    playerId = P and P.playerId
-  end
-  if not playerId then return end
-
-  local res = SRP_HTTP.Fetch('GET', ('/v1/permissions/%s'):format(playerId), nil, { retries = 1, timeout = 6000 })
-  if res.ok and res.data and type(res.data.scopes) == 'table' then
-    SRP_Perms.cache[src] = { playerId = playerId, scopes = res.data.scopes, ts = GetGameTimer() }
-  end
-end
-
-function SRP_Perms.hasScope(src, scope)
-  local e = SRP_Perms.cache[src]
-  if not e or not e.scopes then return false end
-  return has(e.scopes, scope)
-end
-
-exports('HasScope', SRP_Perms.hasScope)
-exports('RefreshPerms', SRP_Perms.refreshFor)
-
-AddEventHandler('playerDropped', function() SRP_Perms.cache[source] = nil end)
+exports('GetScopes', SRP_PERMS.GetScopes)
+exports('HasScope', SRP_PERMS.HasScope)

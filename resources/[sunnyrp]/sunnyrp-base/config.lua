@@ -1,108 +1,38 @@
--- Live config defaults (backend can override later via /config/live)
-SRP_Config = {
-  Features = {
-    police = false,
-    ems = false,
-    doc = false,
-    illness = false,
-    disabilities = false
+-- resources/[sunnyrp]/sunnyrp-base/config.lua
+-- Authoritative API settings + feature toggles for SunnyRP base.
+
+SRP_CONFIG = SRP_CONFIG or {}
+
+-- API configuration (read via ConVars so you can change without edits)
+SRP_CONFIG.api = {
+  baseUrl = GetConvar('srp_api_base_url', 'http://127.0.0.1:3010'),
+  token   = GetConvar('srp_api_token', 'CHANGE-ME'),
+  timeoutMs = tonumber(GetConvar('srp_api_timeout_ms', '5000')) or 5000,
+  retries = tonumber(GetConvar('srp_api_retries', '1')) or 1,
+
+  -- Optional HMAC replay guard; must match backend settings
+  hmac = {
+    enabled = (GetConvar('srp_api_hmac_enabled', '0') == '1'),
+    secret  = GetConvar('srp_api_hmac_secret', ''),
+
+    -- canonical string style used by backend replay guard:
+    -- 'newline' => "ts\nnonce\nMETHOD\n/path\nrawBody"
+    -- 'pipe'    => "METHOD|/path|rawBody|ts|nonce"
+    style   = GetConvar('srp_api_hmac_style', 'newline'),
   },
-  Registration = {
-    enabled = true,              -- base honors registration state (verification) during deferrals
-    requireVerified = true,      -- if true, block join until verified
-    steps = {                    -- future: external resource can flip these live via ConfigPatch
-      phone = true,              -- real phone verification
-      email = false,
-      discord = true,
-      ageGate = true,
-      tos = true,
-      captcha = true
-    },
-    webBaseUrl = 'https://example.com/register',  -- shown in deferrals text if not verified
-    pollIntervalMs = 2000,       -- how often base polls backend for verified status
-    maxWaitMs = 300000,          -- max time to wait in deferrals (5 min)
-    allowJoinIfUnverified = false -- emergency override
-  },
-  Death = {
-    autoRespawn = false,
-    allowPlayerChoice = true,
-    minBleedoutSec = 300,
-    maxBleedoutSec = 900
-  },
-  Time = {
-    realistic = true,
-    timezone = 'America/Phoenix',
-    syncHz = 1
-  },
-  Weather = {
-    mode = 'scripted',           -- 'scripted' | 'provider'
-    syncIntervalSec = 60,
-    current = { type = 'CLEAR', wind = 0.0 }
-  },
-  Buckets = {
-    loading = 1,
-    main = 2,
-    charStart = 10001,
-    charCount = 1000,
-    adminStart = 50001
-  },
-  QoL = {
-    holdToSpeak = true,
-    showCompass = true,
-    streetDisplay = 'name',      -- 'none' | 'name' | 'name+zone'
-    hudRateHz = 6,
-    densityScale = 0.8
-  },
-  AntiCheat = {
-    maxSpeedKmh = 280,
-    maxTeleportMeters = 120
-  },
-  Dev = {
-    fakeBackend = false,
-    debug = false,
-    exposeRPCGlobal = true       -- NP-style: sets global RPC table for compat
-  }
 }
 
--- ConVar helper (reads server.cfg convars)
-local function convarOr(default, name)
-  local v = GetConvar(name, '')
-  return (v ~= '' and v) or default
-end
-
--- Prefer srp_* convars; fall back to vss_*; final default points to 3301 (your server.cfg)
-local apiUrl =
-  GetConvar('srp_api_url', '') ~= '' and GetConvar('srp_api_url', '') or
-  GetConvar('vss_api_url', '') ~= '' and GetConvar('vss_api_url', '') or
-  'http://127.0.0.1:3301'
-
-local apiToken =
-  GetConvar('srp_api_token', '') ~= '' and GetConvar('srp_api_token', '') or
-  GetConvar('vss_api_token', '') ~= '' and GetConvar('vss_api_token', '') or
-  'CHANGE_ME'
-
-SRP_API = {
-  url   = apiUrl,
-  token = apiToken
+-- Config sync polling
+SRP_CONFIG.poll = {
+  enabled = (GetConvar('srp_feature_config_sync_enabled', '1') == '1'),
+  intervalMs = tonumber(GetConvar('srp_config_poll_ms', '10000')) or 10000,
 }
 
--- Optional overrides at boot (backend may overwrite at runtime)
-SRP_Config.Time.timezone = convarOr(SRP_Config.Time.timezone, 'srp_tz')
+-- Optional whitelist gating (honors backend response fields; purely cosmetic if backend already gates)
+SRP_CONFIG.whitelist = {
+  enforce = (GetConvar('srp_whitelist_enforce', '0') == '1'),
+  message = GetConvar('srp_whitelist_message', 'You are not whitelisted.'),
+}
 
--- Time mode: 'realistic' | 'scripted'
-do
-  local tm = GetConvar('srp_time_mode', '')
-  if tm ~= '' then SRP_Config.Time.realistic = (tm == 'realistic') end
-end
-
--- Weather mode: 'scripted' | 'provider'
-do
-  local wm = GetConvar('srp_weather_mode', '')
-  if wm ~= '' then SRP_Config.Weather.mode = wm end
-end
-
--- Optional: registration web URL override from convar
-do
-  local ru = GetConvar('srp_reg_url', '')
-  if ru ~= '' then SRP_Config.Registration.webBaseUrl = ru end
-end
+-- Logging verbosity for this resource
+SRP_CONFIG.logLevel = GetConvar('srp_log_level', 'info') -- 'debug' | 'info' | 'warn' | 'error'

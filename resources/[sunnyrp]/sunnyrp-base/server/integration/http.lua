@@ -1,13 +1,23 @@
--- server/integration/http.lua
--- Unified HTTP client for SRP services with HMAC, retries, and envelope unwrapping.
--- Signature format (matches backend replayGuard): method|path|rawBody|ts|nonce
+-- resources/[sunnyrp]/sunnyrp-base/server/integration/http.lua
+-- Unified HTTP client for calling the authoritative srp-base backend.
+-- - Adds X-API-Token and optional HMAC (X-Ts, X-Nonce, X-Sig)
+-- - Retries idempotent requests on 5xx
+-- - Unwraps the standard envelope: { ok, data } or { ok:false, error:{ code, message } }
 
 SRP_HTTP = SRP_HTTP or {}
-local json = json or {}
 
--- ==== utilities ====
+local json = json or {}
+local function log(level, msg)
+  level = level or 'info'
+  local cur = (SRP_CONFIG and SRP_CONFIG.logLevel) or 'info'
+  local priority = { debug=1, info=2, warn=3, error=4 }
+  if (priority[level] or 2) < (priority[cur] or 2) then return end
+  print(('[srp-http][%s] %s'):format(level, msg))
+end
+
+-- ===== helpers =====
 local function uuid4()
-  local template ='xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
+  local template = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
   return (template:gsub('[xy]', function(c)
     local v = math.random(0,15)
     if c == 'y' then v = (v % 4) + 8 end
@@ -15,18 +25,17 @@ local function uuid4()
   end))
 end
 
-local function now_unix_seconds()
-  return os.time() -- seconds (server expects seconds skew window)
-end
-
 local function tohex(bin)
   return (bin:gsub('.', function(c) return string.format('%02x', string.byte(c)) end))
 end
 
--- ==== SHA-256 + HMAC (compact pure Lua) ====
-local bit = bit32
-local band, bor, bxor, rshift, lshift = bit.band, bit.bor, bit.bxor, bit.rshift, bit.lshift
+-- ===== SHA256 + HMAC (pure Lua) =====
+local bit = bit32 or bit
+local band, bor, bxor, rshift, lshift, bnot =
+  bit.band, bit.bor, bit.bxor, bit.rshift, bit.lshift, bit.bnot
+
 local function rotr(x,n) return bor(rshift(x,n), lshift(x,32-n)) end
+
 local function sha256(msg)
   local K = {
     0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
@@ -69,110 +78,131 @@ local function sha256(msg)
   end
   return string.pack('>I4I4I4I4I4I4I4I4', table.unpack(H))
 end
+
 local function hmac_sha256(key, msg)
   if #key > 64 then key = sha256(key) end
   if #key < 64 then key = key .. string.rep('\0', 64 - #key) end
-  local o_key_pad = key:gsub('.', function(c) return string.char(bit.bxor(string.byte(c), 0x5c)) end)
-  local i_key_pad = key:gsub('.', function(c) return string.char(bit.bxor(string.byte(c), 0x36)) end)
+  local o_key_pad = key:gsub('.', function(c) return string.char(bxor(string.byte(c), 0x5c)) end)
+  local i_key_pad = key:gsub('.', function(c) return string.char(bxor(string.byte(c), 0x36)) end)
   return sha256(o_key_pad .. sha256(i_key_pad .. msg))
 end
 
-local function sign(method, path, rawBody, ts, nonce)
-  local signing = string.format('%s|%s|%s|%s|%s', method, path, rawBody or '', ts, nonce)
-  return tohex(hmac_sha256(SRP_API.token or 'CHANGE_ME', signing))
+local function canonical(style, method, path, rawBody, ts, nonce)
+  method = string.upper(method or '')
+  path = path or ''
+  rawBody = rawBody or ''
+  ts = ts or ''
+  nonce = nonce or ''
+  if style == 'pipe' then
+    return string.format('%s|%s|%s|%s|%s', method, path, rawBody, ts, nonce)
+  else -- default: newline
+    return string.format('%s\n%s\n%s\n%s\n%s', ts, nonce, method, path, rawBody)
+  end
 end
 
--- ==== core HTTP ====
-local function normalizeHeaders(h)
-  local out = {}
-  for k,v in pairs(h or {}) do out[string.lower(k)] = v end
-  return out
+local function computeSig(secret, method, path, rawBody, ts, nonce)
+  local style = (SRP_CONFIG and SRP_CONFIG.api and SRP_CONFIG.api.hmac and SRP_CONFIG.api.hmac.style) or 'newline'
+  local signStr = canonical(style, method, path, rawBody, ts, nonce)
+  return tohex(hmac_sha256(secret or '', signStr))
 end
 
-local function decodeJson(body)
-  if not body or body == '' then return nil end
-  local ok, val = pcall(json.decode, body)
-  return ok and val or nil
-end
-
-local function unwrapEnvelope(status, bodyTbl)
-  -- Expected: { ok:boolean, data:?, error:{ code, message }, requestId?, traceId? }
-  if type(bodyTbl) == 'table' and bodyTbl.ok ~= nil then
-    local okb = bodyTbl.ok == true
+-- ===== core request =====
+local function unwrap(status, body)
+  if type(body) == 'table' and body.ok ~= nil then
     return {
-      ok = okb,
-      status = status or (okb and 200 or 500),
-      data = okb and bodyTbl.data or nil,
-      error = (not okb and bodyTbl.error and (bodyTbl.error.code or 'INTERNAL_ERROR')) or nil,
-      message = (not okb and bodyTbl.error and bodyTbl.error.message) or nil,
-      requestId = bodyTbl.requestId,
-      traceId = bodyTbl.traceId
+      ok = body.ok == true,
+      status = status or (body.ok and 200 or 500),
+      data = body.ok and body.data or nil,
+      error = (not body.ok and body.error and body.error.code) or nil,
+      message = (not body.ok and body.error and body.error.message) or nil,
+      requestId = body.requestId,
+      traceId = body.traceId
     }
   end
-  -- Fallback: treat 2xx as ok and pass through
-  return { ok = (status and status >= 200 and status < 300) or false, status = status or 0, data = bodyTbl }
+  return { ok = status and status >= 200 and status < 300, status = status or 0, data = body }
 end
 
-local function doRequest(method, path, bodyTbl, opts)
-  opts = opts or {}
-  local url = (SRP_API.url or 'http://127.0.0.1:3301') .. path
-  local raw = bodyTbl and json.encode(bodyTbl) or ''
-  local ts = tostring(now_unix_seconds())
-  local nonce = uuid4()
-  local sig = sign(method, path, raw, ts, nonce)
-
+local function doRequest(method, path, payload, opts)
+  local cfg = SRP_CONFIG and SRP_CONFIG.api or {}
+  local url = (cfg.baseUrl or '') .. path
+  local raw = payload and json.encode(payload) or ''
   local headers = {
     ['Content-Type'] = 'application/json',
     ['Accept']       = 'application/json',
-    ['X-API-Token']  = SRP_API.token or 'CHANGE_ME',
-    ['X-Ts']         = ts,
-    ['X-Nonce']      = nonce,
-    ['X-Sig']        = sig,
+    ['X-API-Token']  = cfg.token or '',
     ['x-request-id'] = uuid4(),
   }
 
-  if (method == 'POST' or method == 'PUT' or method == 'PATCH') then
-    headers['Idempotency-Key'] = (opts.idempotencyKey) or uuid4()
+  -- Optional HMAC
+  if cfg.hmac and cfg.hmac.enabled and cfg.hmac.secret and cfg.hmac.secret ~= '' then
+    local ts = tostring(os.time())
+    local nonce = uuid4()
+    headers['X-Ts'] = ts
+    headers['X-Nonce'] = nonce
+    headers['X-Sig'] = computeSig(cfg.hmac.secret, method, path, raw, ts, nonce)
   end
 
-  local retries = opts.retries or 1
-  local timeout = opts.timeout or 10000
+  -- Idempotency for mutating ops
+  if (method == 'POST' or method == 'PUT' or method == 'PATCH') then
+    headers['Idempotency-Key'] = (opts and opts.idempotencyKey) or uuid4()
+  end
+
+  local retries = (opts and opts.retries) or cfg.retries or 0
+  local timeout = (opts and opts.timeout) or cfg.timeoutMs or 5000
   local attempt = 0
-  local last = { ok=false, status=0, data=nil, error=nil, message=nil }
+  local last
 
   repeat
     attempt = attempt + 1
     local p = promise.new()
-    PerformHttpRequest(url, function(status, respBody, respHeaders)
-      local bodyTbl = decodeJson(respBody)
-      local norm = unwrapEnvelope(status or 0, bodyTbl)
-      norm.headers = normalizeHeaders(respHeaders)
-      p:resolve(norm)
-    end, method, raw, headers)
+    local done = false
 
-    local t0 = GetGameTimer()
-    local res
-    while true do
-      res = Citizen.Await(p)
-      if res then break end
-      if GetGameTimer() - t0 > timeout then
-        res = { ok=false, status=0, error='TIMEOUT', message='Request timed out' }
+    Citizen.CreateThread(function()
+      PerformHttpRequest(url, function(status, bodyText, respHeaders)
+        local parsed
+        if bodyText and bodyText ~= '' then
+          local ok, val = pcall(json.decode, bodyText)
+          parsed = ok and val or nil
+        end
+        local res = unwrap(status or 0, parsed)
+        res.headers = respHeaders or {}
+        p:resolve(res)
+        done = true
+      end, method, raw, headers)
+    end)
+
+    local started = GetGameTimer()
+    while not done do
+      Citizen.Wait(0)
+      if GetGameTimer() - started > timeout then
+        last = { ok=false, status=0, error='TIMEOUT', message='Request timed out' }
         break
       end
-      Wait(0)
     end
+    if done then last = Citizen.Await(p) end
 
-    last = res
-    -- retry only safe/idempotent reads or 5xx on GET/HEAD/DELETE
-    local shouldRetry = (not last.ok) and (last.status == 0 or (last.status >= 500 and (method == 'GET' or method == 'HEAD' or method == 'DELETE')))
-    if shouldRetry and attempt <= retries then Citizen.Wait(150 * attempt) else break end
+    local canRetry = (not last.ok) and (last.status == 0 or last.status >= 500)
+    if canRetry and attempt <= retries then
+      local backoff = 150 * attempt
+      log('warn', ('retrying %s %s (attempt %d)'):format(method, path, attempt))
+      Citizen.Wait(backoff)
+    else
+      break
+    end
   until attempt > retries
 
   return last
 end
 
-function SRP_HTTP.Fetch(method, path, bodyTbl, opts)
-  return doRequest(string.upper(method), path, bodyTbl, opts)
+function SRP_HTTP.Fetch(method, path, payload, opts)
+  if not path or path == '' then
+    return { ok=false, status=0, error='INVALID_PATH', message='Missing path' }
+  end
+  if string.sub(path, 1, 1) ~= '/' then
+    path = '/' .. path
+  end
+  method = string.upper(method or 'GET')
+  return doRequest(method, path, payload, opts or {})
 end
 
 exports('Fetch', SRP_HTTP.Fetch)
