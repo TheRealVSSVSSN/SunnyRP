@@ -1,118 +1,102 @@
-// src/repositories/characters.repo.js
+// backend/services/srp-base/src/repositories/characters.repo.js
 import { pool } from './db.js';
 
-// Normalize DB row -> Character object
-function mapRow(r) {
-    return {
-        id: r.id,
-        owner_hex: r.owner_hex,
-        first_name: r.first_name,
-        last_name: r.last_name,
-        dob: r.dob ? r.dob.toISOString().slice(0, 10) : null,
-        gender: r.gender,
-        phone_number: r.phone_number,
-        story: r.story,
-        created_at: r.created_at && r.created_at.toISOString ? r.created_at.toISOString() : r.created_at
-    };
+function randomPhone(prefix = '555') {
+    // Generates prefix + 7 random digits -> 10 digits total (US style: 555XXXXXXX)
+    const n = Math.floor(Math.random() * 10_000_000).toString().padStart(7, '0');
+    return `${prefix}${n}`;
 }
 
-export async function listByOwnerHex(owner_hex) {
+export async function listByOwner(owner_hex) {
     const [rows] = await pool.query(
         `SELECT id, owner_hex, first_name, last_name, dob, gender, phone_number, story, created_at
-     FROM characters
-     WHERE owner_hex = ?
-     ORDER BY id ASC`,
-        [owner_hex]
+       FROM characters
+      WHERE owner_hex = ?
+      ORDER BY id ASC`,
+        [owner_hex],
     );
-    return rows.map(mapRow);
+    return rows;
 }
 
-export async function getById(id) {
+export async function getByNamePair(first, last) {
     const [rows] = await pool.query(
-        `SELECT id, owner_hex, first_name, last_name, dob, gender, phone_number, story, created_at
-     FROM characters
-     WHERE id = ?
-     LIMIT 1`,
-        [id]
+        'SELECT id, owner_hex, first_name, last_name, dob, gender, phone_number, story, created_at FROM characters WHERE first_name = ? AND last_name = ? LIMIT 1',
+        [first, last],
     );
-    return rows[0] ? mapRow(rows[0]) : null;
+    return rows[0] || null;
 }
 
-function randomPhone() {
-    // 3-3-4 pattern: XXX-XXX-XXXX
-    const r3 = () => String(Math.floor(Math.random() * 900) + 100);
-    const r4 = () => String(Math.floor(Math.random() * 9000) + 1000);
-    return `${r3()}-${r3()}-${r4()}`;
-}
-
-async function phoneExists(conn, phone) {
-    const [rows] = await conn.query('SELECT 1 FROM characters WHERE phone_number = ? LIMIT 1', [phone]);
-    return rows.length > 0;
-}
-
-async function allocatePhone(conn, maxAttempts = 20) {
-    for (let i = 0; i < maxAttempts; i++) {
-        const p = randomPhone();
-        // Locking by checking in the same connection/tx is sufficient with unique index too
-        const exists = await phoneExists(conn, p);
-        if (!exists) return p;
+async function allocatePhone(conn, tries = 10, prefix = '555') {
+    for (let i = 0; i < tries; i++) {
+        const phone = randomPhone(prefix);
+        const [rows] = await conn.query('SELECT 1 FROM characters WHERE phone_number = ? LIMIT 1', [phone]);
+        if (!rows.length) return phone;
     }
-    const err = new Error('phone_exhausted');
-    err.code = 'PHONE_EXHAUSTED';
-    throw err;
+    throw new Error('PHONE_ALLOCATION_FAILED');
 }
 
-export async function createCharacterAtomic({ owner_hex, first_name, last_name, dob = null, gender = null, story = null }) {
+/**
+ * Idempotent create:
+ * - Enforces unique (first_name, last_name) at DB-level (migration 010)
+ * - Generates unique phone_number server-side
+ * - If duplicate name, throws { code: 'DUPLICATE_NAME' }
+ */
+export async function createCharacter({ owner_hex, first_name, last_name, dob = null, gender = null, story = null }) {
+    // Fast check on duplicate name
+    const existing = await getByNamePair(first_name, last_name);
+    if (existing) {
+        const e = new Error('Duplicate character name');
+        e.code = 'DUPLICATE_NAME';
+        throw e;
+    }
+
     const conn = await pool.getConnection();
     try {
         await conn.beginTransaction();
 
-        // Enforce unique name across server
-        const [nameRows] = await conn.query(
-            `SELECT 1 FROM characters WHERE first_name = ? AND last_name = ? LIMIT 1`,
-            [first_name, last_name]
+        // Guard again under txn
+        const [chk] = await conn.query(
+            'SELECT id FROM characters WHERE first_name = ? AND last_name = ? LIMIT 1',
+            [first_name, last_name],
         );
-        if (nameRows.length > 0) {
-            const err = new Error('duplicate_name');
-            err.code = 'DUPLICATE_NAME';
-            throw err;
+        if (chk.length) {
+            const e = new Error('Duplicate character name');
+            e.code = 'DUPLICATE_NAME';
+            throw e;
         }
 
-        // Unique phone allocation
-        const phone = await allocatePhone(conn);
+        const phone = await allocatePhone(conn, 10, '555');
 
-        const [res] = await conn.query(
-            `INSERT INTO characters (owner_hex, first_name, last_name, dob, gender, phone_number, story)
+        const [ins] = await conn.query(
+            `INSERT INTO characters
+       (owner_hex, first_name, last_name, dob, gender, phone_number, story)
        VALUES (?, ?, ?, ?, ?, ?, ?)`,
-            [owner_hex, first_name, last_name, dob, gender, phone, story]
+            [owner_hex, first_name, last_name, dob, gender, phone, story],
         );
 
-        const id = res.insertId;
-        const created = await getById(id);
+        const [rows] = await conn.query(
+            'SELECT id, owner_hex, first_name, last_name, dob, gender, phone_number, story, created_at FROM characters WHERE id = ?',
+            [ins.insertId],
+        );
+
         await conn.commit();
-        return created;
+        return rows[0];
     } catch (e) {
-        try { await conn.rollback(); } catch { }
+        await conn.rollback();
+        if (e && e.code === 'ER_DUP_ENTRY') {
+            const dup = new Error('Duplicate character name');
+            dup.code = 'DUPLICATE_NAME';
+            throw dup;
+        }
         throw e;
     } finally {
         conn.release();
     }
 }
 
-export async function updateCharacter(id, patch) {
-    const fields = [];
-    const values = [];
-    for (const [k, v] of Object.entries(patch)) {
-        fields.push(`${k} = ?`);
-        values.push(v);
-    }
-    if (fields.length === 0) return null;
-    values.push(id);
-
-    const [res] = await pool.query(
-        `UPDATE characters SET ${fields.join(', ')} WHERE id = ?`,
-        values
-    );
-    if (res.affectedRows === 0) return null;
-    return getById(id);
+export async function deleteCharacter(id) {
+    const [pre] = await pool.query('SELECT 1 FROM characters WHERE id = ? LIMIT 1', [id]);
+    if (!pre.length) return false;
+    await pool.query('DELETE FROM characters WHERE id = ?', [id]);
+    return true;
 }

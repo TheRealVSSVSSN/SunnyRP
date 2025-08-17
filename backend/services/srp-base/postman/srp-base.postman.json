@@ -1,18 +1,22 @@
 {
     "info": {
-        "name": "SRP Base",
-        "_postman_id": "5d1a4f7b-7a0b-4e7a-9a2b-6f1ef0a1d001",
-        "description": "Postman collection for SRP Base service",
+        "name": "SunnyRP - srp-base",
+        "_postman_id": "6c1c3c9d-7a7a-4f5f-a1bb-111122223333",
+        "description": "SunnyRP Base API collection (health, config, permissions, users, characters).",
         "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
     "variable": [
         {
             "key": "baseUrl",
-            "value": "http://localhost:3301"
+            "value": "http://127.0.0.1:3010"
         },
         {
-            "key": "apiToken",
-            "value": "change_me_base_api_only"
+            "key": "token",
+            "value": "CHANGE-ME"
+        },
+        {
+            "key": "hex",
+            "value": "license:test123"
         }
     ],
     "item": [
@@ -20,109 +24,133 @@
             "name": "Health",
             "request": {
                 "method": "GET",
+                "url": "{{baseUrl}}/v1/healthz",
                 "header": [
                     {
                         "key": "X-API-Token",
-                        "value": "{{apiToken}}"
+                        "value": "{{token}}"
                     }
-                ],
-                "url": {
-                    "raw": "{{baseUrl}}/v1/health",
-                    "host": [
-                        "{{baseUrl}}"
-                    ],
-                    "path": [
-                        "v1",
-                        "health"
-                    ]
-                }
+                ]
             }
         },
         {
-            "name": "Ready",
+            "name": "Config Live - GET",
             "request": {
                 "method": "GET",
+                "url": "{{baseUrl}}/v1/config/live",
                 "header": [
                     {
                         "key": "X-API-Token",
-                        "value": "{{apiToken}}"
+                        "value": "{{token}}"
                     }
-                ],
-                "url": {
-                    "raw": "{{baseUrl}}/v1/ready",
-                    "host": [
-                        "{{baseUrl}}"
-                    ],
-                    "path": [
-                        "v1",
-                        "ready"
-                    ]
-                }
+                ]
             }
         },
         {
-            "name": "Metrics",
+            "name": "Permissions - GET",
             "request": {
                 "method": "GET",
+                "url": "{{baseUrl}}/v1/permissions/1",
                 "header": [
                     {
                         "key": "X-API-Token",
-                        "value": "{{apiToken}}"
+                        "value": "{{token}}"
                     }
-                ],
-                "url": {
-                    "raw": "{{baseUrl}}/v1/metrics",
-                    "host": [
-                        "{{baseUrl}}"
-                    ],
-                    "path": [
-                        "v1",
-                        "metrics"
-                    ]
-                }
+                ]
             }
         },
         {
-            "name": "Players Link",
+            "name": "Users - exists",
+            "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/v1/users/exists?hex_id={{hex}}",
+                "header": [
+                    {
+                        "key": "X-API-Token",
+                        "value": "{{token}}"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Users - create (idempotent)",
             "request": {
                 "method": "POST",
+                "url": "{{baseUrl}}/v1/users",
                 "header": [
+                    {
+                        "key": "X-API-Token",
+                        "value": "{{token}}"
+                    },
                     {
                         "key": "Content-Type",
                         "value": "application/json"
-                    },
-                    {
-                        "key": "X-API-Token",
-                        "value": "{{apiToken}}"
-                    },
-                    {
-                        "key": "X-Ts",
-                        "value": "0000000000"
-                    },
-                    {
-                        "key": "X-Nonce",
-                        "value": "nonce-demo"
-                    },
-                    {
-                        "key": "X-Sig",
-                        "value": "hmac-demo"
                     }
                 ],
                 "body": {
                     "mode": "raw",
-                    "raw": "{\n  \"primary\": \"license\",\n  \"identifiers\": [\"license:xxxx\"],\n  \"ip\": \"127.0.0.1\"\n}"
-                },
-                "url": {
-                    "raw": "{{baseUrl}}/v1/players/link",
-                    "host": [
-                        "{{baseUrl}}"
-                    ],
-                    "path": [
-                        "v1",
-                        "players",
-                        "link"
-                    ]
+                    "raw": "{\"hex_id\":\"{{hex}}\",\"name\":\"Test User\",\"identifiers\":[{\"type\":\"license\",\"value\":\"{{hex}}\"}]}"
                 }
+            }
+        },
+        {
+            "name": "Users - get",
+            "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/v1/users/{{hex}}",
+                "header": [
+                    {
+                        "key": "X-API-Token",
+                        "value": "{{token}}"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Characters - list",
+            "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/v1/characters?owner_hex={{hex}}",
+                "header": [
+                    {
+                        "key": "X-API-Token",
+                        "value": "{{token}}"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Characters - create",
+            "request": {
+                "method": "POST",
+                "url": "{{baseUrl}}/v1/characters",
+                "header": [
+                    {
+                        "key": "X-API-Token",
+                        "value": "{{token}}"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\"owner_hex\":\"{{hex}}\",\"first_name\":\"Jordan\",\"last_name\":\"Avery\"}"
+                }
+            }
+        },
+        {
+            "name": "Characters - delete",
+            "request": {
+                "method": "DELETE",
+                "url": "{{baseUrl}}/v1/characters/1",
+                "header": [
+                    {
+                        "key": "X-API-Token",
+                        "value": "{{token}}"
+                    }
+                ]
             }
         }
     ]

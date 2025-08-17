@@ -1,111 +1,60 @@
-// src/routes/characters.routes.js
+// backend/services/srp-base/src/routes/characters.routes.js
 import { Router } from 'express';
-import { z } from 'zod';
-import { ok, fail } from '../utils/respond.js';
-import * as Users from '../repositories/users.repo.js';
-import * as Characters from '../repositories/characters.repo.js';
+import Joi from 'joi';
+import { ok, err } from '../utils/respond.js';
+import * as charRepo from '../repositories/characters.repo.js';
+import * as usersRepo from '../repositories/users.repo.js';
 
 export const charactersRouter = Router();
 
-// GET /v1/characters?owner_hex=abc
-charactersRouter.get('/v1/characters', async (req, res) => {
-    const Schema = z.object({ owner_hex: z.string().min(3) });
-    const parsed = Schema.safeParse(req.query);
-    if (!parsed.success) {
-        const fieldErrors = parsed.error.errors.map(e => ({ path: e.path.join('.'), message: e.message }));
-        return fail(req, res, 'INVALID_INPUT', 'Bad query', { fieldErrors });
-    }
-    try {
-        const list = await Characters.listByOwnerHex(parsed.data.owner_hex);
-        return ok(req, res, { characters: list });
-    } catch {
-        return fail(req, res, 'INTERNAL_ERROR', 'Failed to list characters');
-    }
+const listQuery = Joi.object({
+    owner_hex: Joi.string().trim().min(3).max(128).required(),
 });
 
-// POST /v1/characters
-// body: { owner_hex, first_name, last_name, dob?, gender?, story? }
-// Atomic: validates owner exists, unique name, and unique phone generation.
-charactersRouter.post('/v1/characters', async (req, res) => {
-    const Schema = z.object({
-        owner_hex: z.string().min(3),
-        first_name: z.string().min(1),
-        last_name: z.string().min(1),
-        dob: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
-        gender: z.string().optional(),
-        story: z.string().optional()
-    });
+const createBody = Joi.object({
+    owner_hex: Joi.string().trim().min(3).max(128).required(),
+    first_name: Joi.string().trim().min(2).max(48).regex(/^[A-Za-z][A-Za-z'-]{1,47}$/).required(),
+    last_name: Joi.string().trim().min(2).max(48).regex(/^[A-Za-z][A-Za-z'-]{1,47}$/).required(),
+    dob: Joi.string().isoDate().allow(null).optional(),
+    gender: Joi.number().integer().min(0).max(9).allow(null).optional(), // small int code; 0..9 reserved
+    story: Joi.string().trim().max(2048).allow('', null).optional(),
+});
 
-    const parsed = Schema.safeParse(req.body || {});
-    if (!parsed.success) {
-        const fieldErrors = parsed.error.errors.map(e => ({ path: e.path.join('.'), message: e.message }));
-        return fail(req, res, 'INVALID_INPUT', 'Bad body', { fieldErrors });
-    }
-
-    const { owner_hex } = parsed.data;
+charactersRouter.get('/v1/characters', async (req, res, next) => {
     try {
-        const exists = await Users.existsByHexId(owner_hex);
-        if (!exists) return fail(req, res, 'FAILED_PRECONDITION', 'Owner user does not exist');
+        const { error, value } = listQuery.validate(req.query);
+        if (error) return err(res, 'INVALID_INPUT', error.message, error.details, 400);
+        const list = await charRepo.listByOwner(value.owner_hex);
+        ok(res, { owner_hex: value.owner_hex, characters: list });
+    } catch (e) { next(e); }
+});
 
-        const created = await Characters.createCharacterAtomic(parsed.data);
-        return ok(req, res, created, 201);
+charactersRouter.post('/v1/characters', async (req, res, next) => {
+    try {
+        const { error, value } = createBody.validate(req.body);
+        if (error) return err(res, 'INVALID_INPUT', error.message, error.details, 400);
+
+        // Ensure owner user exists to avoid orphaned characters
+        const owner = await usersRepo.getByHex(value.owner_hex);
+        if (!owner) return err(res, 'FAILED_PRECONDITION', 'Owner user does not exist', null, 412);
+
+        const created = await charRepo.createCharacter(value);
+        ok(res, created);
     } catch (e) {
-        // Map repo error codes
         if (e && e.code === 'DUPLICATE_NAME') {
-            return fail(req, res, 'CONFLICT', 'Character name already exists');
+            return err(res, 'CONFLICT', 'Character name already exists', null, 409);
         }
-        if (e && e.code === 'PHONE_EXHAUSTED') {
-            return fail(req, res, 'FAILED_PRECONDITION', 'Could not allocate phone number');
-        }
-        return fail(req, res, 'INTERNAL_ERROR', 'Failed to create character');
+        next(e);
     }
 });
 
-// GET /v1/characters/:id
-charactersRouter.get('/v1/characters/:id', async (req, res) => {
-    const Schema = z.object({ id: z.coerce.number().int().positive() });
-    const parsed = Schema.safeParse(req.params);
-    if (!parsed.success) {
-        const fieldErrors = parsed.error.errors.map(e => ({ path: e.path.join('.'), message: e.message }));
-        return fail(req, res, 'INVALID_INPUT', 'Bad params', { fieldErrors });
-    }
-
+charactersRouter.delete('/v1/characters/:id', async (req, res, next) => {
     try {
-        const char = await Characters.getById(parsed.data.id);
-        if (!char) return fail(req, res, 'NOT_FOUND', 'Character not found');
-        return ok(req, res, char);
-    } catch {
-        return fail(req, res, 'INTERNAL_ERROR', 'Failed to fetch character');
-    }
-});
+        const id = Number(req.params.id);
+        if (!Number.isInteger(id) || id <= 0) return err(res, 'INVALID_INPUT', 'Invalid character id', null, 400);
 
-// PATCH /v1/characters/:id (optional)
-charactersRouter.patch('/v1/characters/:id', async (req, res) => {
-    const ParamSchema = z.object({ id: z.coerce.number().int().positive() });
-    const BodySchema = z.object({
-        first_name: z.string().min(1).optional(),
-        last_name: z.string().min(1).optional(),
-        dob: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
-        gender: z.string().optional(),
-        story: z.string().optional()
-    }).refine(b => Object.keys(b).length > 0, { message: 'No fields to update' });
-
-    const p1 = ParamSchema.safeParse(req.params);
-    if (!p1.success) {
-        const fieldErrors = p1.error.errors.map(e => ({ path: e.path.join('.'), message: e.message }));
-        return fail(req, res, 'INVALID_INPUT', 'Bad params', { fieldErrors });
-    }
-    const p2 = BodySchema.safeParse(req.body || {});
-    if (!p2.success) {
-        const fieldErrors = p2.error.errors.map(e => ({ path: e.path.join('.'), message: e.message }));
-        return fail(req, res, 'INVALID_INPUT', 'Bad body', { fieldErrors });
-    }
-
-    try {
-        const updated = await Characters.updateCharacter(p1.data.id, p2.data);
-        if (!updated) return fail(req, res, 'NOT_FOUND', 'Character not found');
-        return ok(req, res, updated);
-    } catch {
-        return fail(req, res, 'INTERNAL_ERROR', 'Failed to update character');
-    }
+        const existed = await charRepo.deleteCharacter(id);
+        if (!existed) return err(res, 'NOT_FOUND', 'Character not found', null, 404);
+        ok(res, { deleted: true, id });
+    } catch (e) { next(e); }
 });
