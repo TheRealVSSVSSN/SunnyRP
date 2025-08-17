@@ -20,10 +20,10 @@ export async function claimPendingBatch(batchSize) {
 
     const [ids] = await pool.query(
         `SELECT id FROM outbox
-        WHERE status = 'pending'
-        AND (locked_at IS NULL OR locked_at < (NOW() - INTERVAL ? SECOND))
-        ORDER BY id ASC
-        LIMIT ?`,
+     WHERE status = 'pending'
+       AND (locked_at IS NULL OR locked_at < (NOW() - INTERVAL ? SECOND))
+     ORDER BY id ASC
+     LIMIT ?`,
         [env.OUTBOX_CLAIM_TIMEOUT_SEC, batchSize]
     );
 
@@ -31,10 +31,10 @@ export async function claimPendingBatch(batchSize) {
     for (const row of ids) {
         const [res] = await pool.query(
             `UPDATE outbox
-            SET lock_token = ?, locked_at = NOW()
-            WHERE id = ?
-            AND status = 'pending'
-            AND (lock_token IS NULL OR locked_at < (NOW() - INTERVAL ? SECOND))`,
+       SET lock_token = ?, locked_at = NOW()
+       WHERE id = ?
+         AND status = 'pending'
+         AND (lock_token IS NULL OR locked_at < (NOW() - INTERVAL ? SECOND))`,
             [lockToken, row.id, env.OUTBOX_CLAIM_TIMEOUT_SEC]
         );
         if (res.affectedRows === 1) {
@@ -46,8 +46,8 @@ export async function claimPendingBatch(batchSize) {
 
     const [rows] = await pool.query(
         `SELECT id, topic, payload
-        FROM outbox
-        WHERE lock_token = ?`,
+     FROM outbox
+     WHERE lock_token = ?`,
         [lockToken]
     );
 
@@ -61,8 +61,8 @@ export async function claimPendingBatch(batchSize) {
 export async function markDelivered(id) {
     await pool.query(
         `UPDATE outbox
-        SET status = 'delivered', locked_at = NULL, lock_token = NULL
-        WHERE id = ?`,
+     SET status = 'delivered', locked_at = NULL, lock_token = NULL
+     WHERE id = ?`,
         [id]
     );
 }
@@ -70,8 +70,8 @@ export async function markDelivered(id) {
 export async function markFailed(id, reason) {
     await pool.query(
         `UPDATE outbox
-        SET status = 'failed', last_error = ?
-        WHERE id = ?`,
+     SET status = 'failed', last_error = ?
+     WHERE id = ?`,
         [reason?.toString().slice(0, 255) || null, id]
     );
 }

@@ -1,7 +1,6 @@
 // src/middleware/idempotency.js
 import { createClient } from 'redis';
 import { env } from '../config/env.js';
-import { fail } from '../utils/respond.js';
 
 let redis;
 const memory = new Map(); // fallback per-process
