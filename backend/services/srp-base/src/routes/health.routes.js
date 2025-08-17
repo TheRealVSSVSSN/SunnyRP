@@ -11,6 +11,11 @@ healthRouter.get('/v1/health', (req, res) => {
     return ok(req, res, { status: 'ok' });
 });
 
+// Alias for liveness used by some ops tooling
+healthRouter.get('/v1/healthz', (req, res) => {
+    return ok(req, res, { status: 'ok' });
+});
+
 healthRouter.get('/v1/ready', async (req, res) => {
     try {
         await pingDB(); // DB must be reachable for readiness
