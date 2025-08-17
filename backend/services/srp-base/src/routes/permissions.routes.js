@@ -1,40 +1,26 @@
-// src/routes/permissions.routes.js
-import { Router } from "express";
-import { ok, fail } from "../utils/respond.js";
+// backend/services/srp-base/src/routes/permissions.routes.js
+import { Router } from 'express';
+import * as rolesRepo from '../repositories/roles.repo.js';
+import { ok } from '../utils/respond.js';
 
-let rolesRepo = null;
-async function loadRepo() {
-    if (!rolesRepo) {
-        try { rolesRepo = await import("../repositories/roles.repo.js"); }
-        catch { rolesRepo = null; }
-    }
-}
+export const permissionsRouter = Router();
 
-const router = Router();
+// tiny in-memory TTL cache to reduce DB chatter
+const cache = new Map(); // key: playerId, val: { exp, scopes[] }
+const TTL_MS = 5000;
 
-async function handleGet(req, res) {
-    const raw = req.params.playerId;
-    const playerId = Number(raw);
-    if (!playerId || Number.isNaN(playerId)) {
-        return fail(req, res, "INVALID_INPUT", "playerId must be a number");
-    }
-
-    await loadRepo();
-    if (!rolesRepo || !rolesRepo.getScopesForUserId) {
-        // Non-blocking fallback while DB comes up
-        return ok(req, res, { scopes: ["player"] });
-    }
-
+permissionsRouter.get('/v1/permissions/:playerId', async (req, res, next) => {
     try {
-        const scopes = await rolesRepo.getScopesForUserId(playerId);
-        return ok(req, res, { scopes: Array.isArray(scopes) ? scopes : [] });
-    } catch {
-        return fail(req, res, "INTERNAL_ERROR", "Could not fetch permissions");
-    }
-}
+        const playerId = String(req.params.playerId);
+        const now = Date.now();
+        const hit = cache.get(playerId);
+        if (hit && hit.exp > now) {
+            return ok(res, { playerId, scopes: hit.scopes });
+        }
 
-// Back-compat (legacy path) AND v1 path
-router.get("/permissions/:playerId", handleGet);
-router.get("/v1/permissions/:playerId", handleGet);
-
-export const permissionsRouter = router;
+        const scopes = await rolesRepo.getScopesForPlayer(playerId);
+        const arr = Array.isArray(scopes) ? scopes : [];
+        cache.set(playerId, { exp: now + TTL_MS, scopes: arr });
+        ok(res, { playerId, scopes: arr });
+    } catch (e) { next(e); }
+});
