@@ -71,6 +71,11 @@ const config = {
     outbox: process.env.FEATURE_OUTBOX !== '0',
     users: process.env.FEATURE_USERS !== '0',
     characters: process.env.FEATURE_CHARACTERS !== '0',
+    inventory: process.env.FEATURE_INVENTORY !== '0',
+    economy: process.env.FEATURE_ECONOMY !== '0',
+    vehicles: process.env.FEATURE_VEHICLES !== '0',
+    world: process.env.FEATURE_WORLD !== '0',
+    jobs: process.env.FEATURE_JOBS !== '0',
   },
 
   /**

@@ -17,6 +17,20 @@ const playersRoutes = require('./routes/players.routes');
 const outboxRoutes = require('./routes/outbox.routes');
 const adminRoutes = require('./routes/admin.routes');
 
+// extended domain routes merged from former microservices
+const dispatchRoutes = require('./routes/dispatch.routes');
+const evidenceRoutes = require('./routes/evidence.routes');
+const emsRoutes = require('./routes/ems.routes');
+const keysRoutes = require('./routes/keys.routes');
+const lootRoutes = require('./routes/loot.routes');
+
+// additional domain routes merged from other microservices
+const inventoryRoutes = require('./routes/inventory.routes');
+const economyRoutes = require('./routes/economy.routes');
+const vehiclesRoutes = require('./routes/vehicles.routes');
+const worldRoutes = require('./routes/world.routes');
+const jobsRoutes = require('./routes/jobs.routes');
+
 const app = express();
 
 // Capture raw body for HMAC signature verification
@@ -50,6 +64,20 @@ app.use(permissionsRoutes);
 app.use(playersRoutes);
 app.use(outboxRoutes);
 app.use(adminRoutes);
+
+// mount extended domain routes
+app.use(dispatchRoutes);
+app.use(evidenceRoutes);
+app.use(emsRoutes);
+app.use(keysRoutes);
+app.use(lootRoutes);
+
+// mount additional domain routes
+app.use(inventoryRoutes);
+app.use(economyRoutes);
+app.use(vehiclesRoutes);
+app.use(worldRoutes);
+app.use(jobsRoutes);
 
 // Rate limiting on admin endpoints (simple example).  Limit to 10
 // requests per minute per IP.  In a production environment this

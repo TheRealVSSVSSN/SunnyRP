@@ -36,9 +36,10 @@ srp-base/
     config/env.js           # configuration loader
     middleware/             # auth, idempotency, requestId, rateLimit
     repositories/           # DB access for users, characters, permissions, outbox
-    routes/                 # routers grouped by domain
+                            # and domain models (inventory, economy, vehicles, world, jobs)
+    routes/                 # routers grouped by domain (identity, characters, inventory, economy, vehicles, world, jobs, etc.)
     utils/                  # logger, HMAC, response helpers
-    migrations/001_init.sql # initial schema
+    migrations/             # SQL migrations (001_init.sql, 002_extended_services.sql, 003_additional_tables.sql)
 ```
 
 ## Usage
