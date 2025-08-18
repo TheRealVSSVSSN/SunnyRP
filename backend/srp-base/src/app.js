@@ -39,6 +39,9 @@ const shopsRoutes = require('./routes/shops.routes');
 const blipsRoutes = require('./routes/blips.routes');
 const crimeSchoolRoutes = require('./routes/crimeSchool.routes');
 
+// broadcaster domain route
+const broadcasterRoutes = require('./routes/broadcaster.routes');
+
 // new domain routes for gangs, garages, apartments, police
 const gangsRoutes = require('./routes/gangs.routes');
 const garagesRoutes = require('./routes/garages.routes');
@@ -100,6 +103,9 @@ app.use(weaponsRoutes);
 app.use(shopsRoutes);
 app.use(blipsRoutes);
 app.use(crimeSchoolRoutes);
+
+// mount broadcaster route
+app.use(broadcasterRoutes);
 
 // mount gang, garage, apartment and police routes
 app.use(gangsRoutes);

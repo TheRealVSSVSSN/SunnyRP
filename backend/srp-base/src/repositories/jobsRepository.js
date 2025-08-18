@@ -49,6 +49,22 @@ async function getJob(id) {
 }
 
 /**
+ * Retrieve a job record by its name.  Returns null if no job with
+ * that name exists.  Useful for modules that need to look up jobs
+ * by a stable identifier, such as the broadcaster role.
+ *
+ * @param {string} name
+ * @returns {Promise<object|null>}
+ */
+async function getJobByName(name) {
+  const rows = await db.query(
+    'SELECT id, name, label, description, created_at AS createdAt FROM jobs WHERE name = ? LIMIT 1',
+    [name],
+  );
+  return rows[0] || null;
+}
+
+/**
  * Assign a job to a player.  Inserts or updates the player_jobs
  * record with on_duty set to 0.  Returns the assigned record.
  *
@@ -113,7 +129,29 @@ module.exports = {
   listJobs,
   createJob,
   getJob,
+  getJobByName,
   assignJob,
   setDuty,
   getPlayerJobs,
+  /**
+   * Count the number of players currently assigned to a given job.  This
+   * helper is used by modules like broadcaster to enforce limits on how
+   * many players can hold a particular role at one time.  It joins the
+   * jobs table on player_jobs to look up by job name.  The on_duty
+   * status is ignored so that both off and on duty assignments are
+   * counted.  Returns a numeric count.
+   *
+   * @param {string} name Name of the job (e.g. 'broadcaster').
+   * @returns {Promise<number>}
+   */
+  async countPlayersForJob(name) {
+    const rows = await db.query(
+      `SELECT COUNT(*) AS count
+         FROM player_jobs pj
+         JOIN jobs j ON pj.job_id = j.id
+        WHERE j.name = ?`,
+      [name],
+    );
+    return rows[0]?.count || 0;
+  },
 };
