@@ -36,10 +36,14 @@ srp-base/
     config/env.js           # configuration loader
     middleware/             # auth, idempotency, requestId, rateLimit
     repositories/           # DB access for users, characters, permissions, outbox
-                            # and domain models (inventory, economy, vehicles, world, jobs)
+                            # and domain models (inventory, economy, vehicles, world, jobs,
+                            # gangs, garages, apartments, police, doors, error log,
+                            # evidence, EMS, keys, loot, weapons, shops, blips, crime school)
     routes/                 # routers grouped by domain (identity, characters, inventory, economy, vehicles, world, jobs, etc.)
     utils/                  # logger, HMAC, response helpers
-    migrations/             # SQL migrations (001_init.sql, 002_extended_services.sql, 003_additional_tables.sql)
+    migrations/             # SQL migrations (001_init.sql, 002_extended_services.sql,
+                            # 003_additional_tables.sql, 004_add_doors_error_weapons_shops.sql,
+                            # 005_add_gangs_garages_apartments_police.sql, 006_add_blips_crimeschool.sql)
 ```
 
 ## Usage
