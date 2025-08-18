@@ -1,184 +1,51 @@
-# SunnyRP — `srp-base` (Authoritative Backend)
+# SunnyRP — `srp-base` (Authoritative Backend, Node.js + MySQL)
 
-`srp-base` is the **authoritative** Node.js service for SunnyRP. It owns **all persistence** and exposes a stable HTTP API consumed by the FiveM Lua resources (notably `resources/[sunnyrp]/sunnyrp-base`). Lua never touches the DB; it calls this service for user linking, permissions, config, users, and characters.
+`srp-base` is the **server‑authoritative** backend for the SunnyRP FiveM stack.  
+All persistence (users, characters, permissions/RBAC, live config/feature flags, outbox events) is handled here; Lua never touches SQL directly. Other SunnyRP resources (inventory, jobs, economy, vehicles, world, telemetry, etc.) call this service over HTTP.
 
 ---
 
 ## Highlights
-
-- **Authoritative persistence**: Users, characters, bans/permissions, config
-- **Uniform envelope**  
-  - Success → `{ ok: true, data, requestId, traceId }`  
-  - Error → `{ ok: false, error:{ code, message, details? }, requestId, traceId }`
-- **Security**: `X-API-Token` (required), optional HMAC replay guard (`X-Ts`, `X-Nonce`, `X-Sig`)
-- **Resilience/ops**: Timeouts, metrics (`/metrics`), health (`/v1/healthz`), readiness (`/v1/ready`), structured logs
-- **Feature flags** via `/v1/config/live`, pluggable with runtime `featureGate`
-- **Idempotency & rate limits** on sensitive routes
-- **Outbox** infrastructure included (routes + worker) for async delivery
+- **Authoritative persistence:** Node.js + MySQL for all game data — Lua is display/logic only.
+- **Security:** Every request requires `X-API-Token`; optional HMAC replay guard (`X-Ts`, `X-Nonce`, `X-Sig`).
+- **Consistency:** Uniform JSON envelopes for success & error; idempotency keys on mutating routes.
+- **Resilience:** Rate limits, timeouts, health & readiness probes, Prometheus `/metrics`.
+- **Config/Flags:** `/v1/config/live` broadcasts live world settings and feature flags.
+- **Outbox pattern:** Async events fan‑out without blocking gameplay.
+- **Docs:** OpenAPI 3 (`openapi/api.yaml`) and Postman collection slot (`postman/`).
 
 ---
 
-## Repository Layout (service)
-backend/services/srp-base/
-├─ openapi/
-│ └─ api.yaml
-├─ pm2/
-│ └─ ecosystem.config.js # (if present; add worker here when enabled)
-├─ postman/
-│ └─ srp-base.postman.json # collection (kept in sync with openapi)
-├─ src/
-│ ├─ app.js # Express app, middleware, router wiring
-│ ├─ server.js # HTTP bootstrap
-│ ├─ bootstrap/
-│ │ └─ migrate.js # migration helper (if used)
-│ ├─ config/
-│ │ └─ env.js # env validation + defaults
-│ ├─ middleware/ # auth, ids, replay guard, validation, etc.
-│ ├─ repositories/ # db.js + domain repos (users, characters, ...)
-│ ├─ routes/ # /v1/* routers (health, identity, config, ...)
-│ ├─ services/ # features service, caches
-│ ├─ utils/ # logger, respond, metrics, http client
-│ ├─ workers/
-│ │ └─ outbox.worker.js # optional worker
-│ └─ migrations/ # 001..008_*.sql
-└─ scripts/
-└─ smoke.mjs # quick API smoke test
-
+## Repository Layout
+```
+openapi/            # OpenAPI 3.0 spec (api.yaml)
+src/
+  app.js           # Express app wiring
+  server.js        # Bootstrap + metrics init
+  bootstrap/
+    migrate.js     # SQL migration runner
+  config/
+    env.js         # Env parsing/validation
+  middleware/      # auth, hmac, idempotency, rate limit, requestId
+  repositories/    # users, characters, permissions, outbox
+  routes/          # health, config, users, characters, permissions, players, outbox, admin
+  utils/           # logger, respond(), hmac helpers
+  migrations/      # 001_init.sql (users, characters, permissions, outbox)
+postman/           # Postman collection (optional)
+scripts/           # smoke tests (optional)
+```
 
 ---
 
-## API Overview
-
-**Health & Ops**
-- `GET /v1/healthz` — liveness
-- `GET /v1/ready` — readiness (DB/Redis checks)
-- `GET /metrics` — Prometheus metrics (if enabled)
-
-**Config**
-- `GET /v1/config/live` — live config + feature flags (consumed by Lua)
-
-**Identity & Permissions**
-- `POST /v1/players/link` — link FiveM identifiers; return ban/whitelist/scopes
-- `GET /v1/permissions/:playerId` — RBAC scopes for actor
-
-**Users**
-- `GET /v1/users/exists?hex_id=...` — user existence
-- `POST /v1/users` — create user (atomic)
-- `GET /v1/users/:hex_id` — fetch user profile
-
-**Characters**
-- `GET /v1/characters?owner_hex=...` — list owner’s characters
-- `POST /v1/characters` — create character (atomic: unique name + phone)
-- `GET /v1/characters/:id` — get character
-- `PATCH /v1/characters/:id` — update character (optional)
-
-**Outbox**
-- `POST /v1/outbox/enqueue` — enqueue async event (idempotent)
-
-> See `openapi/api.yaml` for schemas (OpenAPI 3.0.3) and `postman/srp-base.postman.json`.
+## Prereqs
+- Node.js LTS (≥ 18)
+- MySQL 8+
+- (Optional) Redis (distributed rate limits / idempotency / outbox)
 
 ---
 
-## Request/Response Envelope
-
-**Success**
-```json
-{ "ok": true, "data": { /* payload */ }, "requestId": "uuid", "traceId": "trace" }
-
-**Error**
-```json
-{
-  "ok": false,
-  "error": { "code": "INVALID_INPUT", "message": "Bad body", "details": { "fieldErrors": [] } },
-  "requestId": "uuid",
-  "traceId": "trace"
-}
-
-Error codes
-
-INVALID_INPUT, UNAUTHENTICATED, FORBIDDEN, NOT_FOUND, CONFLICT,
-FAILED_PRECONDITION, RATE_LIMITED, INTERNAL_ERROR, DEPENDENCY_DOWN
-
-Security
-
-Headers
-
-X-API-Token — required on all requests (FiveM → API and inter-service)
-
-Optional HMAC (if enabled in env/convars):
-
-X-Ts — unix seconds
-
-X-Nonce — UUID v4
-
-X-Sig — signature of a canonical string over method/path/body/timestamp/nonce
-Supported canonical styles:
-
-newline: "ts\nnonce\nMETHOD\n/path\nrawBody" (default)
-
-pipe: "METHOD|/path|rawBody|ts|nonce"
-
-Window: configurable TTL (default ~90s) with nonce replay protection
-
-CORS / IP allowlist
-
-CORS enabled for FiveM host
-
-Optional ENABLE_IP_ALLOWLIST with IP_ALLOWLIST CIDRs
-
-Feature Flags
-
-/v1/config/live returns:
-
-{
-  "features": {
-    "identity": true,
-    "admin": true,
-    "permissions": true,
-    "config": true,
-    "outbox": true,
-    "users": true,
-    "characters": true
-  },
-  "settings": {
-    "Time": { "hour": 12, "minute": 0, "freeze": false },
-    "Weather": { "type": "EXTRASUNNY", "dynamic": false }
-  }
-}
-
-Routers are guarded at runtime by featureGate('<name>').
-
-Database
-
-Engine: MySQL 8+ (InnoDB, utf8mb4)
-
-Migrations (partial list)
-
-001_init.sql … 007_users_softdelete.sql (existing)
-
-008_characters.sql — creates characters:
-
-Columns: id, owner_hex, first_name, last_name, dob, gender, phone_number, story, created_at
-
-Indexes: uniq_character_name (first_name, last_name), uniq_phone (phone_number), idx_owner_hex (owner_hex)
-
-Users (expected columns)
-
-hex_id (PK unique), name, rank, steam_id, license, discord, community_id, created_at
-
-If your existing schema differs, align repo SQL and repos accordingly.
-
-Install & Run
-Prereqs
-
-Node.js LTS (≥18)
-
-MySQL 8+
-
-(Optional) Redis for some features / outbox
-
-Env (.env)
-
+## Environment (`.env`)
+```
 PORT=3010
 API_TOKEN=CHANGE-ME
 TRUST_PROXY=1
@@ -198,157 +65,150 @@ IP_ALLOWLIST=127.0.0.1/32
 # Metrics
 ENABLE_METRICS=1
 
-# Feature fallbacks (live config still authoritative)
+# Feature fallbacks (live config is authoritative)
 FEATURE_USERS=1
 FEATURE_CHARACTERS=1
 
-# Optional
+# Optional (Redis / Outbox worker)
 REDIS_URL=
-
-Service
-
-cd backend/services/srp-base
-npm ci
-
-# Migrations (choose one)
-node src/bootstrap/migrate.js           # if script exists and is wired
-# OR: apply SQL in src/migrations/ manually in order
-
-# Run (dev)
-node src/server.js
-
-# PM2 (if you use it)
-pm2 start pm2/ecosystem.config.js --only srp-base
-
-Outbox worker: when enabled via env (ENABLE_OUTBOX_WORKER=1), wire workers/outbox.worker.js into PM2 as a separate process. Configure OUTBOX_* & REDIS_URL as needed.
-
-Lua Integration (consumers)
-
-ConVars (FiveM server.cfg)
-
-set srp_api_base_url "http://127.0.0.1:3010"
-set srp_api_token "CHANGE-ME"
-set srp_api_timeout_ms "5000"
-set srp_api_retries "1"
-
-# Optional HMAC (default canonical style is 'newline')
-set srp_api_hmac_enabled "0"
-set srp_api_hmac_secret ""
-set srp_api_hmac_style "newline"
-
-# Live config poll
-set srp_feature_config_sync_enabled "1"
-set srp_config_poll_ms "10000"
-
-Expected Lua flows (from sunnyrp-base)
-
-On connect/deferral:
-
-POST /v1/players/link to validate & fetch ban/whitelist/scopes
-
-Ensure user exists via /v1/users/exists → POST /v1/users (if missing)
-
-Permissions:
-
-GET /v1/permissions/:playerId (short-lived cache in Lua)
-
-Config:
-
-Poll GET /v1/config/live and broadcast world time/weather
-
-Characters:
-
-List/create via /v1/characters endpoints. No Lua SQL
-
-Curl Smoke
-
-API="http://127.0.0.1:3010"
-TOKEN="CHANGE-ME"
-HEX="license:test$(date +%s)"
-
-curl -sS -H "X-API-Token: $TOKEN" "$API/v1/healthz" | jq
-
-curl -sS -H "X-API-Token: $TOKEN" "$API/v1/users/exists?hex_id=$HEX" | jq
-
-curl -sS -H "X-API-Token: $TOKEN" -H "Content-Type: application/json" \
-  -d "{\"hex_id\":\"$HEX\",\"name\":\"Test User\",\"identifiers\":[{\"type\":\"license\",\"value\":\"$HEX\"}]}" \
-  "$API/v1/users" | jq
-
-curl -sS -H "X-API-Token: $TOKEN" "$API/v1/users/$HEX" | jq
-
-curl -sS -H "X-API-Token: $TOKEN" -H "Content-Type: application/json" \
-  -d "{\"owner_hex\":\"$HEX\",\"first_name\":\"Jordan\",\"last_name\":\"Avery\"}" \
-  "$API/v1/characters" | jq
-
-curl -sS -H "X-API-Token: $TOKEN" "$API/v1/characters?owner_hex=$HEX" | jq
-
-Or:
-
-BASE_URL=$API API_TOKEN=$TOKEN node scripts/smoke.mjs
-
-Rate Limiting & Idempotency
-
-Rate limiting: applied to sensitive admin routes and reads (window, max via env; Redis-backed or in-memory fallback).
-
-Idempotency: Idempotency-Key supported on mutating routes; Redis-backed or in-memory fallback to deduplicate.
-
-Outbox (Optional)
-
-POST /v1/outbox/enqueue with idempotency supports async fanout
-
-Worker claims batches with DB locks and delivers via HTTP and/or Redis channel (configurable)
-
-Env (when using outbox)
-
-ENABLE_OUTBOX_WORKER=1
+ENABLE_OUTBOX_WORKER=0
 OUTBOX_BATCH_SIZE=100
 OUTBOX_INTERVAL_MS=500
 OUTBOX_CLAIM_TIMEOUT_SEC=30
 OUTBOX_DELIVERY_URL=
 OUTBOX_REDIS_CHANNEL_PREFIX=
-REDIS_URL=
+```
 
-Logging & Metrics
+---
 
-Logs: pino (requestId, traceId), sanitized errors
+## Install & Run
+```bash
+# from backend/services/srp-base
+npm ci
 
-Metrics: GET /metrics Prometheus exporter (disabled/enabled via env)
+# migrate database
+node src/bootstrap/migrate.js   # or run SQL in src/migrations/ manually
 
-Health: GET /v1/healthz (fast), Readiness: GET /v1/ready (checks DB/Redis)
+# dev run
+node src/server.js
 
-Development Notes
+# production example (PM2)
+pm2 start pm2/ecosystem.config.js --only srp-base
+```
+Liveness: `GET /v1/healthz`  
+Readiness: `GET /v1/ready` (checks DB; returns 503 if down)  
+Metrics: `GET /metrics` (when `ENABLE_METRICS=1`)
 
-Keep OpenAPI (openapi/api.yaml) in sync with routes
+---
 
-Postman collection mirrors routes (postman/srp-base.postman.json)
+## Security Model
+- **API Token** — All requests must include `X-API-Token: <API_TOKEN>`.
+- **Optional HMAC Replay Guard** — For POST/PUT/PATCH/DELETE, send:
+  - `X-Ts` (unix seconds), `X-Nonce` (uuid v4), `X-Sig` (HMAC‑SHA256 over canonical string).
+  - Canonical styles supported: `newline` (`ts\\nnonce\\nMETHOD\\n/path\\nrawBody`) and `pipe` (`METHOD|/path|rawBody|ts|nonce`).
+  - TTL window default: 90s; nonces are single‑use.
+- **Rate Limiting** — Sensitive routes (e.g. admin ban) are limited; Redis recommended in multi‑instance.
+- **Idempotency** — Mutating endpoints accept `X-Idempotency-Key` and return the original result on safe retries.
 
-Prefer atomic server-side operations (e.g., character name uniqueness + phone allocation)
+---
 
-Maintain the uniform envelope and error code taxonomy
+## Database Schema (001_init.sql)
+- `users(hex_id PK, name, rank, steam_id, license, discord, community_id, created_at)`
+- `permissions(id PK, player_id (hex), scope, granted_at)`
+- `characters(id PK, owner_hex FK users, first_name, last_name, dob, gender, phone_number UNIQUE, story, created_at)`
+- `outbox(id PK, topic, payload JSON, created_at, claimed_at, delivered_at, delivery_attempts)`
 
-Troubleshooting
-Symptom	Likely cause	Fix
-401 UNAUTHENTICATED	Missing/invalid X-API-Token	Set correct token in Lua convar & server env
-429 RATE_LIMITED	Hitting admin read/ban limits	Lower frequency or raise window/limit in env
-FAILED_PRECONDITION creating character	Owner user missing	Ensure user exists first
-HMAC signature mismatch	Canonical style/secret mismatch	Set srp_api_hmac_style and secret to match backend
-Lua timeouts	API unreachable or wrong URL	Check srp_api_base_url, firewall, service port
-Changelog (this phase)
+---
 
-Added Users + Characters routes and repos
+## API Overview (see OpenAPI for full details)
+**Health & Ops**
+- `GET /v1/healthz` — liveness
+- `GET /v1/ready` — readiness (DB check)
+- `GET /metrics` — Prometheus (if enabled)
 
-Added 008_characters.sql migration
+**Config**
+- `GET /v1/config/live` — feature flags + world settings (time/weather)
+- `POST /v1/config/live` — update config (admin only)
 
-Added /v1/healthz alias in health router
+**Identity & Permissions**
+- `POST /v1/players/link` — validate identifiers; return ban/whitelist/scopes; create user on first seen
+- `GET /v1/permissions/:playerId` — list scopes
+- `POST /v1/permissions/grant` — grant scope
+- `POST /v1/permissions/revoke` — revoke scope
 
-Wired routers via src/app.js with feature gates
+**Users**
+- `GET /v1/users/exists?hex_id=...` — does user exist
+- `POST /v1/users` — create user `{ hex_id, name, identifiers[] }`
+- `GET /v1/users/:hex_id` — fetch user
 
-Provided scripts/smoke.mjs for quick validation
+**Characters**
+- `GET /v1/characters?owner_hex=...` — list owner’s chars
+- `POST /v1/characters` — create character (unique name & phone enforced)
+- `GET /v1/characters/:id` — get character
+- `PATCH /v1/characters/:id` — update character (partial)
 
-Confirmed /v1/config/live consumption by Lua config bus
+**Outbox**
+- `POST /v1/outbox/enqueue` — enqueue `{ topic, payload }` (idempotent)
 
-Consolidated Lua HTTP helper (HMAC-ready), users/characters wrappers, deferrals & permissions
+**Admin**
+- `POST /v1/admin/ban` — ban a player `{ playerId, reason, until? }`
 
-License
+---
 
-This project inherits the repository’s root license (LICENSE).
+## FiveM Integration Quickstart
+**server.cfg ConVars**
+```
+set srp_api_base_url "http://127.0.0.1:3010"
+set srp_api_token "CHANGE-ME"
+set srp_api_timeout_ms "5000"
+set srp_api_retries "1"
+
+# Optional HMAC
+set srp_api_hmac_enabled "0"
+set srp_api_hmac_secret ""
+set srp_api_hmac_style "newline"
+
+# Live config polling
+set srp_feature_config_sync_enabled "1"
+set srp_config_poll_ms "10000"
+```
+
+**Expected Lua flow on connect**
+1) `POST /v1/players/link` (deferrals)  
+2) `GET /v1/users/exists` → `POST /v1/users` if missing  
+3) `GET /v1/permissions/:playerId` (cache briefly)  
+4) Poll `GET /v1/config/live` and broadcast to clients
+
+---
+
+## Curl Smoke
+```bash
+API="http://127.0.0.1:3010"
+TOKEN="CHANGE-ME"
+HEX="license:test$(date +%s)"
+
+curl -sS -H "X-API-Token: $TOKEN" "$API/v1/healthz" | jq
+curl -sS -H "X-API-Token: $TOKEN" "$API/v1/users/exists?hex_id=$HEX" | jq
+curl -sS -H "X-API-Token: $TOKEN" -H "Content-Type: application/json" \
+  -d "{\"hex_id\":\"$HEX\",\"name\":\"Test User\",\"identifiers\":[{\"type\":\"license\",\"value\":\"$HEX\"}]}" \
+  "$API/v1/users" | jq
+curl -sS -H "X-API-Token: $TOKEN" "$API/v1/users/$HEX" | jq
+curl -sS -H "X-API-Token: $TOKEN" -H "Content-Type: application/json" \
+  -d "{\"owner_hex\":\"$HEX\",\"first_name\":\"Jordan\",\"last_name\":\"Avery\"}" \
+  "$API/v1/characters" | jq
+curl -sS -H "X-API-Token: $TOKEN" "$API/v1/characters?owner_hex=$HEX" | jq
+```
+
+---
+
+## Development Notes
+- Keep `openapi/api.yaml` in sync with the code.
+- Prefer atomic server‑side ops (e.g. unique phone allocation in a single transaction).
+- Preserve the uniform response envelope and error taxonomy.
+- Add Postman collection updates alongside code changes.
+- Use idempotency keys and rate limits for creation/admin routes.
+
+---
+
+## License
+This service follows your repository’s root license.
