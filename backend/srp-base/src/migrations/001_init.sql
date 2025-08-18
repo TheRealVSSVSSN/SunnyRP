@@ -1,0 +1,49 @@
+-- Initial schema for srp-base
+
+CREATE TABLE IF NOT EXISTS users (
+  hex_id VARCHAR(64) NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  rank VARCHAR(32) DEFAULT NULL,
+  steam_id VARCHAR(100) DEFAULT NULL,
+  license VARCHAR(100) DEFAULT NULL,
+  discord VARCHAR(100) DEFAULT NULL,
+  community_id VARCHAR(100) DEFAULT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (hex_id),
+  UNIQUE KEY uniq_license (license),
+  UNIQUE KEY uniq_discord (discord)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS permissions (
+  player_id VARCHAR(64) NOT NULL,
+  scope VARCHAR(64) NOT NULL,
+  granted_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (player_id, scope),
+  CONSTRAINT fk_permissions_user FOREIGN KEY (player_id) REFERENCES users (hex_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS characters (
+  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  owner_hex VARCHAR(64) NOT NULL,
+  first_name VARCHAR(50) NOT NULL,
+  last_name VARCHAR(50) NOT NULL,
+  dob DATE DEFAULT NULL,
+  gender VARCHAR(20) DEFAULT NULL,
+  phone_number VARCHAR(20) DEFAULT NULL,
+  story TEXT DEFAULT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY uniq_character_name (first_name, last_name),
+  UNIQUE KEY uniq_phone (phone_number),
+  INDEX idx_owner_hex (owner_hex),
+  CONSTRAINT fk_characters_user FOREIGN KEY (owner_hex) REFERENCES users (hex_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS outbox (
+  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  topic VARCHAR(100) NOT NULL,
+  payload JSON NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  claimed_at TIMESTAMP NULL DEFAULT NULL,
+  delivered_at TIMESTAMP NULL DEFAULT NULL,
+  delivery_attempts INT DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
