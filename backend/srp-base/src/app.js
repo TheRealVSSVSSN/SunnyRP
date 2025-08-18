@@ -37,6 +37,12 @@ const errorRoutes = require('./routes/error.routes');
 const weaponsRoutes = require('./routes/weapons.routes');
 const shopsRoutes = require('./routes/shops.routes');
 
+// new domain routes for gangs, garages, apartments, police
+const gangsRoutes = require('./routes/gangs.routes');
+const garagesRoutes = require('./routes/garages.routes');
+const apartmentsRoutes = require('./routes/apartments.routes');
+const policeRoutes = require('./routes/police.routes');
+
 const app = express();
 
 // Capture raw body for HMAC signature verification
@@ -90,6 +96,12 @@ app.use(doorsRoutes);
 app.use(errorRoutes);
 app.use(weaponsRoutes);
 app.use(shopsRoutes);
+
+// mount gang, garage, apartment and police routes
+app.use(gangsRoutes);
+app.use(garagesRoutes);
+app.use(apartmentsRoutes);
+app.use(policeRoutes);
 
 // Rate limiting on admin endpoints (simple example).  Limit to 10
 // requests per minute per IP.  In a production environment this

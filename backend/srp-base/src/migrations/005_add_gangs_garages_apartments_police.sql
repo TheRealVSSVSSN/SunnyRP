@@ -1,0 +1,63 @@
+-- Create gangs and gang_members tables
+CREATE TABLE IF NOT EXISTS gangs (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS gang_members (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  gang_id INT NOT NULL,
+  player_id INT NOT NULL,
+  role VARCHAR(50) DEFAULT 'member',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (gang_id) REFERENCES gangs(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Create garages and garage_vehicles tables
+CREATE TABLE IF NOT EXISTS garages (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  location JSON,
+  capacity INT DEFAULT 10,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS garage_vehicles (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  garage_id INT NOT NULL,
+  vehicle_id INT NOT NULL,
+  stored_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  retrieved_at TIMESTAMP NULL,
+  FOREIGN KEY (garage_id) REFERENCES garages(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Create apartments and apartment_residents tables
+CREATE TABLE IF NOT EXISTS apartments (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  location JSON,
+  price DECIMAL(10,2) DEFAULT 0,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS apartment_residents (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  apartment_id INT NOT NULL,
+  player_id INT NOT NULL,
+  assigned_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (apartment_id) REFERENCES apartments(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Create police_officers table
+CREATE TABLE IF NOT EXISTS police_officers (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  player_id INT NOT NULL,
+  rank VARCHAR(50) DEFAULT 'officer',
+  on_duty TINYINT(1) DEFAULT 0,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
