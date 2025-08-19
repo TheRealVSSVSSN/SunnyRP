@@ -210,3 +210,29 @@ We ported this behaviour into the Node.js API as the Websites
 domain.  Resources reviewed but skipped include gym, heatmap,
 hospitalization (deferred) and hunting, as they either lack server
 logic or require more comprehensive systems (e.g. EMS) to support.
+
+### Changed (Part 7)
+
+* **progress‑ledger.md** – Added entries for `np-infinity`, `np-interior`,
+  `np-inventory`, `np-jewelrob`, `np-jobmanager`, `np-keypad`, `np-keys`,
+  `np-lockpicking`, `np-lootsystem` and `np-login` reflecting skip or defer decisions.
+* **index.md** – Added a seventh part to the sprint overview summarising the skip
+  and defer decisions for these resources.
+* **MANIFEST.md** – Updated to include documentation changes for Part 7.
+
+### Notes (Part 7)
+
+In this sprint we examined another batch of NoPixel resources.
+`np-infinity` broadcasts players’ coordinates via events and does not
+require persistence【569396379702026†L0-L12】.  `np-interior`, `np-keypad`,
+`np-keys`, `np-lockpicking`, `np-lootsystem` and `np-login` contain
+only client code or trivial events【894325454073906†L0-L55】【237659149565814†L0-L81】.
+The legacy `np-inventory` resource implements its own inventory system【108768342973504†L0-L131】,
+but our microservice already provides inventory endpoints, so no new backend
+is necessary.  `np-jewelrob` defines robbery events without persistence【564860878882183†L0-L35】.
+`np-jobmanager` handles job whitelisting and assignment using database
+queries【769332134670781†L0-L43】; this was deferred because a comprehensive jobs
+and permissions framework is not yet implemented.  Accordingly, no new
+endpoints or migrations were introduced in this part.  The changes are
+limited to documentation updates: the progress ledger and index reflect
+these decisions and outline the remaining resources for future sprints.

@@ -61,4 +61,15 @@ server‑side logic is considered; purely client resources are skipped.
 | 46 | np‑hospitalization | Updates `hospital_patients` table via events `stress:illnesslevel` and `stress:illnesslevel:new`; controls triage state via `doctor:enableTriage` and `doctor:disableTriage`【491902441918069†L0-L37】. | Defer — implementing patient management requires an EMS module; scheduled for a dedicated sprint. | — |
 | 47 | np‑hunting | Contains only client scripts for hunting minigame. | Skip — nothing to port. | — |
 
+| 48 | np‑infinity | Broadcasts players' coordinates to clients via events; no persistent state【569396379702026†L0-L12】. | Skip — nothing to port. | — |
+| 49 | np‑interior | Contains only client scripts that manage interiors【894325454073906†L0-L55】. | Skip — nothing to port. | — |
+| 50 | np‑inventory | Comprehensive inventory system implemented in Lua; our inventory microservice already covers these features【108768342973504†L0-L131】. | Skip — no additional backend needed. | — |
+| 51 | np‑jewelrob | Registers `jewel:hasrobbed` and `jewel:request` events; no database persistence【564860878882183†L0-L35】. | Skip — nothing to port. | — |
+| 52 | np‑jobmanager | Manages job whitelisting and assignments, counting active job holders【769332134670781†L0-L43】. | Defer — job/permissions system will be handled in a dedicated sprint. | — |
+| 53 | np‑keypad | Contains only client code for keypad puzzles【237659149565814†L0-L81】. | Skip — nothing to port. | — |
+| 54 | np‑keys | Simple event to send keys to a player【53794332482796†L0-L3】. | Skip — in-game event only; no persistence. | — |
+| 55 | np‑lockpicking | Client-only lockpicking mini-game【680002010711533†L56-L76】. | Skip — nothing to port. | — |
+| 56 | np‑lootsystem | Awards random items on `loot:useItem`; no persistent state【827029519194534†L0-L66】. | Skip — will be revisited when inventory mechanics are expanded. | — |
+| 57 | np‑login | Contains only a `np-login:disconnectPlayer` event that drops players【57298370178638†L0-L4】. | Skip — no backend needed. | — |
+
 **Legend:** *Skip* – no action taken because equivalent functionality already exists or the resource is client‑side. *Extend* – partially implemented; only missing behaviour added. *Create* – new module/endpoints created to port behaviour.

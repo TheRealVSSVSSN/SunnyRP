@@ -270,3 +270,35 @@ records the skip/defer decisions and the new module.
   This functionality is outside the scope of the external API and
   has been deferred.  A future jobs/vehicles sprint can revisit
   this domain.
+
+---
+
+# Sprint Overview – 2025‑08‑19 (Part 7)
+
+In this sprint we reviewed the next batch of NoPixel resources after
+`np‑hunting`.  The majority of these modules are purely client‑side
+or implement simple event relays that do not require any persistence
+or interplayer coordination.  Consequently, we **skipped** them.  The
+`np‑jobmanager` resource, which manages job whitelisting and
+assignments, was deferred until our jobs and permissions systems are
+in place.
+
+### Resources processed
+
+* **np‑infinity** – Relays players’ coordinates via `np:infinity:player:ready` and
+  `np:infinity:entity:coords` events【569396379702026†L0-L12】; no persistent data to store.
+* **np‑interior** – Contains only client scripts managing interior loading【894325454073906†L0-L55】.
+* **np‑inventory** – Contains the legacy Lua inventory system【108768342973504†L0-L131】; our
+  microservice-based inventory already supersedes it.
+* **np‑jewelrob** – Defines robbery events but does not store any data【564860878882183†L0-L35】.
+* **np‑jobmanager** – Implements job whitelisting and job assignment in Lua, using database
+  queries【769332134670781†L0-L43】; deferred to a jobs/permissions sprint.
+* **np‑keypad** – Client-only keypad interactions【237659149565814†L0-L81】.
+* **np‑keys** – Simple event to hand over keys【53794332482796†L0-L3】.
+* **np‑lockpicking** – Client-only lockpicking mini-game【680002010711533†L56-L76】.
+* **np‑lootsystem** – Gives random items when players use loot; no backend state【827029519194534†L0-L66】.
+* **np‑login** – Drops players via `np-login:disconnectPlayer` event【57298370178638†L0-L4】.
+
+No new endpoints, migrations or repositories were added in this part.  The progress
+ledger records these skip and defer decisions.  Future sprints will resume with
+`np-phone`, `np-police`, `np-polyzone` and other remaining resources.

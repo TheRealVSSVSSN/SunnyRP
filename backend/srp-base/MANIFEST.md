@@ -62,3 +62,12 @@ Legend: **A** = Added, **M** = Modified.
 | `openapi/api.yaml` | M | Added `Website` and `WebsiteCreateRequest` schemas and a `/v1/websites` path definition. |
 | `DOCS/progress-ledger.md` | M | Added entries for `np-firedepartment`, `np-fish`, `np-furniture`, `np-fx`, `np-gangs`, `np-gangweapons`, `np-golf`, `np-gunmeta`, `np-gunmetaDLC`, `np-gunmetas`, `np-gurgle`, `np-gym`, `np-heatmap`, `np-hospitalization` and `np-hunting`. |
 | `DOCS/index.md` | M | Added a sixth part of the sprint overview covering the websites API and new skip/defer decisions. |
+
+# Additional updates for the seventh part of the 2025‑08‑19 sprint
+
+| Path | Status | Notes |
+|---|---|---|
+| `DOCS/progress-ledger.md` | M | Added entries for `np-infinity`, `np-interior`, `np-inventory`, `np-jewelrob`, `np-jobmanager`, `np-keypad`, `np-keys`, `np-lockpicking`, `np-lootsystem` and `np-login`. |
+| `DOCS/index.md` | M | Added a seventh part of the sprint overview summarising skip and defer decisions for these resources. |
+| `MANIFEST.md` | M | Updated to record documentation changes for Part 7. |
+| `CHANGELOG.md` | M | Added notes for Part 7. |
