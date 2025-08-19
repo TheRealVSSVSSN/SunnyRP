@@ -1,0 +1,11 @@
+-- Create weed_plants table
+CREATE TABLE IF NOT EXISTS weed_plants (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  coords JSON NOT NULL,
+  seed VARCHAR(100) NOT NULL,
+  owner_id INT NOT NULL,
+  growth INT DEFAULT 0,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  INDEX idx_weed_plants_owner (owner_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

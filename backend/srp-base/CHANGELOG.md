@@ -142,3 +142,71 @@ jobs/permissions framework that will be tackled later.  The
 `np-drugdeliveries` resource, which orchestrates drug delivery jobs
 and chop shop lists【896869969423342†L0-L93】, was skipped because it
 involves complex game mechanics beyond the scope of this sprint.
+
+### Added (Part 5)
+
+* **Weed plants API.** Added a new domain for managing cannabis crops.  A
+  repository (`weedPlantsRepository.js`), routes (`weedPlants.routes.js`) and
+  migration (`010_add_weed_plants.sql`) were introduced.  Endpoints
+  include:
+    * `GET /v1/weed-plants` – list all weed plants.
+    * `POST /v1/weed-plants` – create a new plant with coordinates,
+      seed and owner ID.
+    * `PATCH /v1/weed-plants/{id}` – update the growth value of an
+      existing plant.
+    * `DELETE /v1/weed-plants/{id}` – remove a plant.
+  The OpenAPI spec now defines a `WeedPlant` schema and the new paths.
+
+### Changed (Part 5)
+
+* **app.js** – Mounted the weed plants router.
+* **openapi/api.yaml** – Added `WeedPlant` schema and `/v1/weed-plants` paths.
+* **progress‑ledger.md** – Added entries for `np-firedepartment`, `np-fish`,
+  `np-furniture`, `np-fx`, `np-gangs`, `np-gangweapons`, `np-golf`,
+  `np-gunmeta`, `np-gunmetaDLC`, `np-gunmetas` reflecting skip/create decisions.
+* **index.md** – Added a fifth part to the sprint overview summarising
+  the weed plants implementation and associated skip decisions.
+
+### Notes (Part 5)
+
+The **np‑gangs** resource includes server events for creating,
+destroying and updating cannabis plants stored in a MySQL table【366444498392161†L9-L33】.
+To support this behaviour we added a weed plants domain to the API.  All other
+resources reviewed in this part (fire department, fish, furniture,
+fx, gang weapons, golf, gunmeta, gunmetaDLC, gunmetas) contained only
+client scripts or trivial events and were therefore skipped.
+
+### Added (Part 6)
+
+* **Websites API.** Implemented new endpoints to support the Gurgle
+  phone app.  Players can purchase websites for a fixed fee and list
+  existing websites.  A new repository (`websitesRepository.js`)
+  encapsulates database operations and a migration (`011_add_websites.sql`)
+  creates the `websites` table.  The API exposes:
+    * `GET /v1/websites` – list all websites or filter by owner via
+      query parameter `ownerId`.
+    * `POST /v1/websites` – create a new website, charging the
+      player’s cash balance and returning the created record.
+  The OpenAPI specification now includes `Website` and
+  `WebsiteCreateRequest` schemas and the new paths.  Rate limiting
+  restricts website creation to 5 per minute per IP.
+
+### Changed (Part 6)
+
+* **app.js** – Mounted the websites router.
+* **openapi/api.yaml** – Added `Website` and `WebsiteCreateRequest` schemas and
+  `/v1/websites` paths.
+* **progress‑ledger.md** – Added entries for `np-gurgle`, `np-gym`,
+  `np-heatmap`, `np-hospitalization` and `np-hunting` with skip/defer
+  decisions.
+* **index.md** – Added a sixth part to the sprint overview describing
+  the websites integration and additional skip/defer decisions.
+
+### Notes (Part 6)
+
+The **np‑gurgle** resource defines server logic for purchasing
+websites using a fixed fee and storing them in a database【73746484563419†L0-L48】.
+We ported this behaviour into the Node.js API as the Websites
+domain.  Resources reviewed but skipped include gym, heatmap,
+hospitalization (deferred) and hunting, as they either lack server
+logic or require more comprehensive systems (e.g. EMS) to support.

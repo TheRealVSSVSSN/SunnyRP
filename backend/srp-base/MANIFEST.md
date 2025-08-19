@@ -50,3 +50,15 @@ Legend: **A** = Added, **M** = Modified.
 | `openapi/api.yaml` | M | Added `DrivingTest` and `DriftSchoolPayment` schemas and new paths for driving tests and drift school payment.
 | `DOCS/progress-ledger.md` | M | Added entries for `np-driftschool`, `np-driving-instructor` and `np-drugdeliveries`.
 | `DOCS/index.md` | M | Added fourth part of sprint overview detailing driving tests and drift school features.
+
+# Additional updates for the sixth part of the 2025‑08‑19 sprint
+
+| Path | Status | Notes |
+|---|---|---|
+| `src/repositories/websitesRepository.js` | A | New repository for creating and listing player websites, supporting the Gurgle phone app. |
+| `src/routes/websites.routes.js` | A | New routes exposing `/v1/websites` (GET and POST) for listing and creating websites. |
+| `src/migrations/011_add_websites.sql` | A | Migration creating the `websites` table with owner, name, keywords, description and timestamps. |
+| `src/app.js` | M | Mounted the new websites routes. |
+| `openapi/api.yaml` | M | Added `Website` and `WebsiteCreateRequest` schemas and a `/v1/websites` path definition. |
+| `DOCS/progress-ledger.md` | M | Added entries for `np-firedepartment`, `np-fish`, `np-furniture`, `np-fx`, `np-gangs`, `np-gangweapons`, `np-golf`, `np-gunmeta`, `np-gunmetaDLC`, `np-gunmetas`, `np-gurgle`, `np-gym`, `np-heatmap`, `np-hospitalization` and `np-hunting`. |
+| `DOCS/index.md` | M | Added a sixth part of the sprint overview covering the websites API and new skip/defer decisions. |

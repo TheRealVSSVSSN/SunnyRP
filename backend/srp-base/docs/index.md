@@ -114,6 +114,64 @@ persistence or cross‑player interactions.
 
 ---
 
+# Sprint Overview – 2025‑08‑19 (Part 5)
+
+In this sprint we continued our methodical march through the NoPixel
+resources directory.  After handling driving schools and tests in the
+previous sprint, the next group of resources mostly contained
+client‑only features or simple event relays.  However, the **weed
+farming** logic embedded in the `np‑gangs` resource defined
+server‑side persistence for cannabis plants.  We ported this
+behaviour into the `srp‑base` service by introducing a new
+**weed plants** domain.
+
+### Highlights
+
+* **Weed plants API** – Created a REST interface for managing
+  cannabis crops.  Weed plants are stored in a new
+  `weed_plants` table (migration 010) with JSON coordinates, seed
+  identifier, owner ID and growth value.  The API exposes:
+    * `GET /v1/weed-plants` to list all plants.
+    * `POST /v1/weed-plants` to create a new plant.  The request
+      body accepts `coords` (object with x/y/z), `seed` and
+      `ownerId`.
+    * `PATCH /v1/weed-plants/{id}` to update a plant’s growth value.
+    * `DELETE /v1/weed-plants/{id}` to remove a plant.
+* Added **weed plants repository** and **routes**; mounted the
+  router in `app.js`.  Updated the OpenAPI specification with
+  `WeedPlant` schema and the new paths.
+* Added migration **010_add_weed_plants.sql** to create the
+  `weed_plants` table with an index on `owner_id` for efficient
+  queries.
+
+### Resources processed
+
+* **np‑firedepartment** – Contains only event relays for door and
+  particle effects【349291604510523†L0-L13】.  No persistence; skipped.
+* **np‑fish** – Client-only resource for fishing minigame; skipped.
+* **np‑furniture** – UI and object lists for furniture placement;
+  no server code; skipped.
+* **np‑fx** – Visual effects resource; client-only; skipped.
+* **np‑gangs** – Contains a weed farming system that inserts,
+  deletes and updates `weed_plants` rows via MySQL
+  【366444498392161†L9-L33】.  We **extended** the API to support
+  this persistence (see highlights).
+* **np‑gangweapons** – Only registers a money check event and
+  displays a client menu【403321870441425†L1-L4】.  No persistence;
+  skipped.
+* **np‑golf** – Empty server script【981050033116644†L0-L0】;
+  skipped.
+* **np‑gunmeta**, **np‑gunmetaDLC**, **np‑gunmetas** – Contain only
+  `.meta` files for weapon definitions; no server code; skipped.
+
+The progress ledger has been updated accordingly, and the new
+documentation covers the weed plants domain.  Upcoming sprints will
+examine further resources such as **np‑gurgle** and **np‑heatmap**,
+porting backend behaviour only when persistence or multi‑player
+interaction is required.
+
+---
+
 # Sprint Overview – 2025‑08‑19 (Part 4)
 
 This sprint processed the next set of NoPixel resources after
@@ -140,6 +198,55 @@ skipped the unrelated `np‑drugdeliveries` resource.
     * `GET /v1/driving-tests?cid=123` to list recent tests for a
       player (default limit 5).
     * `GET /v1/driving-tests/{id}` to retrieve a specific test.
+
+---
+
+# Sprint Overview – 2025‑08‑19 (Part 6)
+
+After completing the weed plants integration, we turned our attention to
+the next batch of NoPixel resources.  Most were client‑only or
+implemented purely cosmetic features, but two stood out: **np‑gurgle**
+and **np‑hospitalization**.  The former provides a phone app for
+purchasing personal websites, while the latter updates patient
+records and triage state in a medical system.  In this sprint we
+implemented the backend support for Gurgle and deferred the hospital
+module for a future EMS sprint.
+
+### Highlights
+
+* **Websites API** – Implemented a new REST interface for the
+  Gurgle app.  Players can purchase websites for a fixed fee ($500)
+  and retrieve their owned sites:
+    * `GET /v1/websites` lists all websites, or filters by
+      `ownerId` when provided.
+    * `POST /v1/websites` creates a new website.  The API charges
+      the player and stores the website in the `websites` table.
+  The service uses the existing economy repository to withdraw funds
+  and records websites via a new repository and migration.  A
+  `Website` schema and `WebsiteCreateRequest` schema were added to
+  the OpenAPI specification.
+* Added a **websites repository** for database operations and
+  a **migration (011)** creating the `websites` table with indexes
+  on `owner_id`.
+* Mounted the websites routes in `app.js` and updated the
+  OpenAPI spec accordingly.
+
+### Resources processed
+
+* **np‑gurgle** – Contains server logic for purchasing and listing
+  websites【73746484563419†L0-L48】.  We ported this behaviour into
+  the Websites API as described above.
+* **np‑gym** – Client‑only gym actions; skipped.
+* **np‑heatmap** – Client‑side heatmap display; skipped.
+* **np‑hospitalization** – Updates the `hospital_patients` table and
+  toggles triage state【491902441918069†L0-L37】.  Implementing this
+  requires an EMS/patient module; deferred to a future sprint.
+* **np‑hunting** – Client‑only hunting mini‑game; skipped.
+
+With these additions the microservice continues to achieve parity
+with important server behaviours while deferring modules that need
+a more robust job/healthcare infrastructure.  The progress ledger
+records the skip/defer decisions and the new module.
 * Updated the **OpenAPI specification** with `DrivingTest` and
   `DriftSchoolPayment` schemas and new path definitions.
 * Added repository and routes for driving tests and drift school,

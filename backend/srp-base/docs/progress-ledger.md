@@ -45,5 +45,20 @@ server‑side logic is considered; purely client resources are skipped.
 | 30 | np‑driftschool | Handles `np-driftschool:takemoney` event to deduct cash for drift school participation【761714451400029†L0-L11】. | Create — added `/v1/driftschool/pay` endpoint that withdraws a specified amount from a player's account using the economy repository. | this sprint |
 | 31 | np‑driving‑instructor | Provides driving test submission, history lookup, report retrieval and instructor vehicle actions; persists test results to `driving_tests` table【393162189931023†L0-L45】. | Create — implemented driving test APIs (`/v1/driving-tests` POST/GET) and `/v1/driving-tests/{id}` GET; added repository and migration. | this sprint |
 | 32 | np‑drugdeliveries | Manages drug deliveries and chop shop via `oxydelivery:server`, `drugdelivery:server`, `delivery:status`, and chop shop list refresh timers【896869969423342†L0-L93】. | Skip — delivery and chop shop mechanics require in-game logic and will be handled in a dedicated jobs/vehicles sprint. | — |
+| 33 | np‑firedepartment | Handles saw door and particle events; registers events `Saw:SyncDoorFall`, `Saw:StartParticles`, `Saw:SyncStopParticles` and relays them to clients【349291604510523†L0-L13】. | Skip — no persistent state; client effects only. | — |
+| 34 | np‑fish | Contains only client scripts; no server logic. | Skip — nothing to port. | — |
+| 35 | np‑furniture | Furniture placement/decor UI; client only. | Skip — nothing to port. | — |
+| 36 | np‑fx | Client visual effects; no server script. | Skip — nothing to port. | — |
+| 37 | np‑gangs | Implements weed farming via events `weed:createplant`, `weed:killplant`, `weed:UpdateWeedGrowth`, `weed:requestTable`; persists to a `weed_plants` table【366444498392161†L9-L33】. | Create — added weed plants repository, routes and migration to support CRUD operations on weed plants. | this sprint |
+| 38 | np‑gangweapons | Simple shop event checks player cash and sells gang weapons【403321870441425†L1-L4】. | Skip — gang weapons shop depends on inventory and job systems; deferred. | — |
+| 39 | np‑golf | No server scripts; resource removed. | Skip — nothing to port. | — |
+| 40 | np‑gunmeta | Contains only metadata files (no Lua). | Skip — nothing to port. | — |
+| 41 | np‑gunmetaDLC | Same as `np‑gunmeta`; metadata only. | Skip — nothing to port. | — |
+| 42 | np‑gunmetas | Same as above; metadata only. | Skip — nothing to port. | — |
+| 43 | np‑gurgle | Provides `website:new` event to purchase websites; charges $500, inserts row into `websites` table and broadcasts list【73746484563419†L0-L48】. | Create — implemented websites API with endpoints to list and create websites, including payment and persistence. | this sprint |
+| 44 | np‑gym | Contains only client scripts for gym activities. | Skip — nothing to port. | — |
+| 45 | np‑heatmap | Contains only client scripts. | Skip — nothing to port. | — |
+| 46 | np‑hospitalization | Updates `hospital_patients` table via events `stress:illnesslevel` and `stress:illnesslevel:new`; controls triage state via `doctor:enableTriage` and `doctor:disableTriage`【491902441918069†L0-L37】. | Defer — implementing patient management requires an EMS module; scheduled for a dedicated sprint. | — |
+| 47 | np‑hunting | Contains only client scripts for hunting minigame. | Skip — nothing to port. | — |
 
 **Legend:** *Skip* – no action taken because equivalent functionality already exists or the resource is client‑side. *Extend* – partially implemented; only missing behaviour added. *Create* – new module/endpoints created to port behaviour.
