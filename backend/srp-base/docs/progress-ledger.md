@@ -23,4 +23,8 @@ server‑side logic is considered; purely client resources are skipped.
 | 11 | np‑bennys | Handles `np-bennys:attemptPurchase` and `np-bennys:updateRepairCost`; deducts cash from players and updates repair cost【789232318723476†L0-L30】. | Create — implemented Bennys endpoints in previous sprint: purchase attempts and repair cost updates with transaction logging. | See previous sprint |
 | 12 | np‑broadcaster | Registers `attemptBroadcast` event; counts active broadcasters and assigns the broadcaster job if below limit【123927081072201†L0-L12】. | Create — added `POST /v1/broadcast/attempt` endpoint that assigns the `broadcaster` job if fewer than `MAX_BROADCASTERS` players currently hold it, using `jobsRepository` helpers. | commit: added `src/routes/broadcaster.routes.js` and repository helpers |
 
+| 13 | np‑errorlog | Registers an `error` server event that forwards error messages to a Discord webhook via HTTP【608897531749594†L0-L23】. | Skip — error logging is already handled by the unified error API in `srp‑base`, so no new backend logic is required. | — |
+| 14 | LockDoors | Client script controlling door locks; no server code. | Skip — nothing to port. | — |
+| 15 | np‑density | Listens for `np:peds:rogue` events and forwards them to clients to delete rogue peds【14920766739437†L0-L4】. | Skip — no persistent server state and no backend logic to port. | — |
+
 **Legend:** *Skip* – no action taken because equivalent functionality already exists or the resource is client‑side. *Extend* – partially implemented; only missing behaviour added. *Create* – new module/endpoints created to port behaviour.

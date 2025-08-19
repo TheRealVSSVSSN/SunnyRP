@@ -1,4 +1,4 @@
-# Manifest – Sprint 2025‑08‑18
+# Manifest – Sprint 2025‑08‑19
 
 This manifest summarises the files added or modified in this sprint
 for the `srp‑base` Node.js service.  Only files that changed are
@@ -12,5 +12,9 @@ listed here.  Files not mentioned were left untouched.
 | `DOCS/progress-ledger.md` | A | Progress log for processed NoPixel resources and decisions. |
 | `DOCS/index.md` | A | Sprint overview summarising tasks and outcomes. |
 | `DOCS/modules/broadcaster.md` | A | Per‑module documentation describing the broadcaster API. |
+
+| `DOCS/framework-compliance.md` | A | Added framework compliance rubric and evaluation for the Node.js service. |
+| `DOCS/progress-ledger.md` | M | Added entries for `np‑errorlog`, `LockDoors` and `np‑density`. |
+| `DOCS/index.md` | M | Added sprint 2025‑08‑19 overview and summary. |
 
 Legend: **A** = Added, **M** = Modified.
