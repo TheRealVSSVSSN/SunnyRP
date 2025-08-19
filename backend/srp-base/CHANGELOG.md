@@ -43,11 +43,27 @@ is configurable via the `MAX_BROADCASTERS` environment variable.
 
 ### Notes
 
-This sprint focused on research and documentation rather than new
-features.  After auditing Node.js architecture best practices,
-we concluded that the current codebase already satisfies many of
-the core requirements.  The NoPixel resources processed during this
-cycle contained no server logic that warranted implementation, so
-the service code remains unchanged.  Future sprints will continue
-processing additional resources and address remaining gaps in testing,
-dependency injection and continuous integration.
+This sprint focused on research, documentation and gap analysis
+rather than new features.  After compiling a framework compliance
+rubric and auditing the existing codebase, we resumed processing
+NoPixel resources.  The following resources were reviewed:
+
+* **koilWeatherSync** – provides events to sync weather and time; the
+  existing `/v1/world/state` endpoints already handle world state via
+  REST, so no server changes were required.
+* **mapmanager** – manages maps and game types; internal to FiveM and
+  not relevant to our API.
+* **chat** – chat messaging and command suggestions; purely client‑side.
+* **cron** – minimal cron scheduler; Node.js has built‑in scheduling.
+* **minimap** – client‑only minimap adjustments.
+* **np‑admin** – complex administrative system requiring a job and
+  permissions framework; deferred.
+* **np‑barriers** – client‑only barrier placement.
+* **np‑base** – enormous core framework; deferred for a dedicated sprint.
+
+All of these were **skipped** in this sprint because they either lack
+server logic or would require a much larger effort to integrate.
+Consequently, no new endpoints, services or migrations were added.
+Future sprints will revisit deferred resources (e.g. `np‑admin`,
+`np‑base`) and continue to fill remaining gaps once supporting
+infrastructure (jobs, permissions, etc.) is in place.

@@ -18,3 +18,10 @@ listed here.  Files not mentioned were left untouched.
 | `DOCS/index.md` | M | Added sprint 2025‑08‑19 overview and summary. |
 
 Legend: **A** = Added, **M** = Modified.
+
+# Additional updates for the second part of the 2025‑08‑19 sprint
+
+| Path | Status | Notes |
+|---|---|---|
+| `DOCS/progress-ledger.md` | M | Added entries for koilWeatherSync, mapmanager, chat, cron, minimap, np‑admin, np‑barriers and deferred np‑base. |
+| `DOCS/index.md` | M | Added second part of the sprint overview summarising additional skip decisions. |
