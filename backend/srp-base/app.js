@@ -39,13 +39,6 @@ const shopsRoutes = require('./routes/shops.routes');
 const blipsRoutes = require('./routes/blips.routes');
 const crimeSchoolRoutes = require('./routes/crimeSchool.routes');
 
-// contracts domain route
-const contractsRoutes = require('./routes/contracts.routes');
-
-// driving tests and drift school domain routes
-const drivingTestsRoutes = require('./routes/drivingTests.routes');
-const driftSchoolRoutes = require('./routes/driftschool.routes');
-
 // broadcaster domain route
 const broadcasterRoutes = require('./routes/broadcaster.routes');
 
@@ -110,9 +103,6 @@ app.use(weaponsRoutes);
 app.use(shopsRoutes);
 app.use(blipsRoutes);
 app.use(crimeSchoolRoutes);
-app.use(contractsRoutes);
-app.use(drivingTestsRoutes);
-app.use(driftSchoolRoutes);
 
 // mount broadcaster route
 app.use(broadcasterRoutes);
