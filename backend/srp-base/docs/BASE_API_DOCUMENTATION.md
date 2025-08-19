@@ -195,6 +195,15 @@ Below is a summary of the core routes.  For full request/response schemas, consu
 | `GET` | `/v1/config/live` | Returns current feature flags and world settings (e.g. time, weather)【67730289104851†L56-L58】. |
 | `POST` | `/v1/config/live` | Update live config.  Body may include `features` (object mapping module names to booleans) and/or `settings` (object with `Time` and `Weather` subobjects).  Requires admin privileges. |
 
+### Driving & Drift School
+
+| Method | Path | Description |
+|-------|-----|-------------|
+| `POST` | `/v1/driving-tests` | Record a new driving test.  Requires `cid`, `icid`, `points` and `passed` in the request body.  Optionally includes `instructor` name and a JSON `results` payload.  Returns the persisted test with its new `id`. |
+| `GET` | `/v1/driving-tests` | List recent driving tests for a player by passing `cid` as a query parameter; returns up to 5 tests in descending order. |
+| `GET` | `/v1/driving-tests/{id}` | Retrieve a specific driving test by its numeric ID.  Returns the full test record or `404` if not found. |
+| `POST` | `/v1/driftschool/pay` | Withdraw funds from a player's account to pay for drift school participation.  Requires `playerId` and positive `amount` in the body.  Returns the new account balance or an insufficient funds error. |
+
 The default config shape looks like【67730289104851†L128-L146】:
 
 ```json

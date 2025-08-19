@@ -14,6 +14,90 @@ components:
       type: apiKey
       in: header
       name: X-API-Token
+  # Schema definitions for reusable data objects.  These types can be
+  # referenced elsewhere in the spec via $ref.  Adding contract here
+  # enables clients to understand the structure of contract objects.
+  schemas:
+    Contract:
+      type: object
+      properties:
+        id:
+          type: integer
+        sender_id:
+          type: string
+          description: Player ID of the contract creator
+        receiver_id:
+          type: string
+          description: Player ID who must accept or decline the contract
+        amount:
+          type: integer
+          description: Amount in whole cents
+        info:
+          type: string
+          nullable: true
+          description: Optional description of the contract
+        paid:
+          type: boolean
+        accepted:
+          type: boolean
+          nullable: true
+          description: null = pending, true = accepted, false = declined
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    # Driving test record
+    DrivingTest:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the driving test
+        cid:
+          type: string
+          description: Player identifier of the test taker
+        icid:
+          type: string
+          description: Player identifier of the instructor
+        instructor:
+          type: string
+          description: Display name of the instructor
+        timestamp:
+          type: integer
+          description: Epoch seconds when the test was recorded
+        points:
+          type: integer
+          description: Numeric score of the test
+        passed:
+          type: boolean
+          description: Whether the student passed the test
+        results:
+          type: object
+          additionalProperties: true
+          description: Arbitrary result details encoded as JSON
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    # Drift school payment request
+    DriftSchoolPayment:
+      type: object
+      required:
+        - playerId
+        - amount
+      properties:
+        playerId:
+          type: string
+          description: Identifier of the paying player
+        amount:
+          type: number
+          description: Amount in whole cents to pay for drift school
 security:
   - ApiToken: []
 paths:
@@ -295,3 +379,238 @@ paths:
       responses:
         '200':
           description: Player banned
+
+  # Contracts API
+  /v1/contracts:
+    get:
+      summary: List contracts for a player
+      description: Returns all contracts where the specified player is either the sender or receiver.
+      parameters:
+        - in: query
+          name: playerId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of contracts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contract'
+    post:
+      summary: Create a new contract
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - senderId
+                - receiverId
+                - amount
+              properties:
+                senderId:
+                  type: string
+                receiverId:
+                  type: string
+                amount:
+                  type: integer
+                  description: Amount in whole cents
+                info:
+                  type: string
+                  nullable: true
+      responses:
+        '200':
+          description: Contract created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+
+  /v1/contracts/{id}/accept:
+    post:
+      summary: Accept a contract
+      description: Accepts a pending contract, withdrawing funds from the receiver and depositing into the sender.  Requires the playerId of the receiver in the body.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - playerId
+              properties:
+                playerId:
+                  type: string
+      responses:
+        '200':
+          description: Contract accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+
+  /v1/contracts/{id}/decline:
+    post:
+      summary: Decline a contract
+      description: Declines a pending contract without transferring funds.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Contract declined
+
+  # Driving tests API
+  /v1/driving-tests:
+    get:
+      summary: List recent driving tests for a player
+      parameters:
+        - in: query
+          name: cid
+          required: true
+          schema:
+            type: string
+          description: Player identifier to fetch tests for
+      responses:
+        '200':
+          description: List of driving tests
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      tests:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/DrivingTest'
+    post:
+      summary: Record a new driving test result
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - cid
+                - icid
+                - points
+                - passed
+              properties:
+                cid:
+                  type: string
+                icid:
+                  type: string
+                instructor:
+                  type: string
+                  nullable: true
+                points:
+                  type: number
+                passed:
+                  type: boolean
+                results:
+                  type: object
+                  additionalProperties: true
+      responses:
+        '200':
+          description: Driving test recorded
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      test:
+                        $ref: '#/components/schemas/DrivingTest'
+
+  /v1/driving-tests/{id}:
+    get:
+      summary: Retrieve a driving test by id
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Driving test found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      test:
+                        $ref: '#/components/schemas/DrivingTest'
+        '404':
+          description: Test not found
+
+  /v1/driftschool/pay:
+    post:
+      summary: Pay for drift school participation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DriftSchoolPayment'
+      responses:
+        '200':
+          description: Payment successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      success:
+                        type: boolean
+                      newBalance:
+                        type: number
+        '402':
+          description: Insufficient funds
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer

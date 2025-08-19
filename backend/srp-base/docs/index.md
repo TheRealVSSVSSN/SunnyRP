@@ -68,3 +68,98 @@ Resources reviewed in this part:
 No new code or migrations were required for this part.  The
 documentation has been updated to reflect the decisions and to
 ensure the progress ledger is current.
+
+---
+
+# Sprint Overview – 2025‑08‑19 (Part 3)
+
+In this follow‑on sprint we continued our systematic audit of the
+NoPixel resources, focusing on modules that appear after
+`np‑base` in the GitHub ordering.  Most resources examined
+contained only client scripts and therefore required no backend
+support.  However, the **np‑contracts** resource contained server
+logic for creating and accepting contracts between players.  To
+support this functionality in our Node.js API we introduced a
+new **contracts** domain with routes, repository and migration.
+
+### Highlights
+
+* **Contracts API** – implemented a set of REST endpoints for
+  creating, listing, accepting and declining player contracts.  A
+  contract records the sender, receiver, amount and info.  When
+  accepted, the API withdraws the funds from the receiver’s
+  account and deposits them into the sender’s account, then marks
+  the contract as paid and accepted.  A new `contracts` table was
+  added via migration 008 to persist these records.
+* Updated **app.js** to mount the contracts router and added a
+  `Contract` schema definition in the OpenAPI spec.
+
+### Resources processed
+
+* **np‑camera** – contains only a client script; skipped.
+* **np‑cid** – registers an event to generate ID cards【836458714788436†L0-L12】; skipped pending a full inventory system.
+* **np‑contracts** – implements server events to send and accept
+  contracts【400719268596618†L10-L20】.  We created the contracts
+  API and migration.
+* **np‑dances** – client‑only emote resource; skipped.
+* **np‑dealer** – client‑only vendor UI; skipped.
+* **np‑dirtymoney** – defines events to drop and convert dirty
+  money【414013350686833†L0-L15】; skipped for now because the
+  economy system requires a dedicated sprint.
+
+The progress ledger has been updated to reflect these decisions
+and the new module.  Future sprints will continue down the
+resource list, porting server behaviours only when they involve
+persistence or cross‑player interactions.
+
+---
+
+# Sprint Overview – 2025‑08‑19 (Part 4)
+
+This sprint processed the next set of NoPixel resources after
+`np‑dirtymoney` in the repository ordering.  We identified two
+resources that required backend support: **np‑driftschool** and
+**np‑driving‑instructor**.  Each defines server events that
+interact with player finances and store driving test results in a
+database.  We ported their behaviour into the `srp‑base` API and
+skipped the unrelated `np‑drugdeliveries` resource.
+
+### Highlights
+
+* **Drift school payment** – added a new `/v1/driftschool/pay` endpoint
+  allowing clients to withdraw funds from a player's account to pay
+  for drift school participation.  The endpoint validates the
+  player ID and amount, checks the player's balance, and returns
+  the updated balance on success.
+* **Driving tests API** – implemented a complete CRUD interface
+  for driving tests.  A new `driving_tests` table (migration 009)
+  stores test records including student CID, instructor CID,
+  instructor name, timestamp, score, pass/fail status and a JSON
+  results payload.  The API exposes:
+    * `POST /v1/driving-tests` to record a new driving test.
+    * `GET /v1/driving-tests?cid=123` to list recent tests for a
+      player (default limit 5).
+    * `GET /v1/driving-tests/{id}` to retrieve a specific test.
+* Updated the **OpenAPI specification** with `DrivingTest` and
+  `DriftSchoolPayment` schemas and new path definitions.
+* Added repository and routes for driving tests and drift school,
+  mounted them in `app.js`.
+* Extended the progress ledger to include decisions for
+  `np-driftschool`, `np-driving-instructor` (create) and
+  `np-drugdeliveries` (skip).
+
+### Resources processed
+
+* **np‑driftschool** – handles a `takemoney` event to deduct cash
+  for drift school participation【761714451400029†L0-L11】.  We
+  created a REST endpoint to perform the same withdrawal from the
+  player's account.
+* **np‑driving‑instructor** – manages driving test submissions,
+  history retrieval and reports【393162189931023†L0-L45】.  We added
+  driving tests endpoints and a persistent table to store test
+  results.
+* **np‑drugdeliveries** – orchestrates drug deliveries and chop
+  shop lists with timers and random generation【896869969423342†L0-L93】.
+  This functionality is outside the scope of the external API and
+  has been deferred.  A future jobs/vehicles sprint can revisit
+  this domain.
