@@ -1,4 +1,63 @@
-# SunnyRP Base API (srp-base) Documentation
+# SunnyRoleplay Server
+
+## This is the in progress documation for the Sunny Roleplay (Sunny RP/SRP) server
+
+Sunny Roleplay will run on a custom framework.
+
+The ** [simplified] ** structure of Sunny Roleplay will be similar to the following but may change a bit overtime:
+├── LICENSE
+├── README.md
+├── backend
+│   └── srp-base
+│       ├── CHANGELOG.md
+│       ├── MANIFEST.md
+│       ├── README.md
+│       ├── app.js
+│       ├── docs
+│       ├── openapi
+│       ├── package.json
+│       ├── postman
+│       ├── scripts
+│       ├── server.js
+│       └── src
+│           ├── app.js
+│           ├── bootstrap
+│           │   └── files
+│           ├── config
+│           │   └── files
+│           ├── middleware
+│           │   └── files
+│           ├── migrations
+│           │   └── files
+│           ├── openapi
+│           │   └── files
+│           ├── repositories
+│           │   └── files
+│           ├── routes
+│           │   └── files
+│           ├── server.js
+│           ├── services
+│           ├── utils
+│           │   └── files
+│           └── workers
+├── logs
+├── resources
+│   └── [sunnyroleplay]
+│       └── sunnyrp-base
+│           ├── client
+│           │   └── files
+│           ├── server
+│           │   └── files
+│           ├── sshared
+│           │   └── files
+│           ├── ui (If resource has a UI)
+│           │   └── files
+│           ├── assets (If resource has assets)
+│           │   └── files
+│           └── fxmanifest.lua
+└── server.cfg
+
+## SunnyRP Base API (srp-base) [Framework] Documentation (Current microservice in progress.)
 
 This document provides a comprehensive overview of the `srp-base` microservice—the authoritative backend for the SunnyRP FiveM server.  It covers the service’s purpose, architecture, configuration, database schema, security model and endpoints, along with guidance for installation, deployment and integration with FiveM Lua resources.
 
