@@ -276,6 +276,13 @@ In addition to the core identity, permissions, characters and admin APIs describ
 | `POST` | `/v1/jobs/duty` | Toggle a player’s duty status for a job (body: `{ playerId, jobId, onDuty }`). |
 | `GET` | `/v1/jobs/:playerId/assignments` | List all job assignments for a player with duty status. |
 
+#### Weapons & Ammo
+
+| Method | Path | Description |
+|-------|-----|-------------|
+| `GET` | `/v1/players/{playerId}/ammo` | Retrieve a player’s ammunition counts as an object keyed by weapon type. |
+| `PATCH` | `/v1/players/{playerId}/ammo` | Update the ammunition count for a specific weapon type (body: `{ weaponType, ammo }`). |
+
 These endpoints round out the foundation of `srp-base`.  Together with the previously documented identity, permissions, config and outbox APIs they provide a **complete backend** capable of supporting all future gameplay modules.  Lua resources can rely on these endpoints to persist and retrieve state while implementing their own behaviour.
 
 ### Identity & Permissions

@@ -181,6 +181,70 @@ components:
           type: number
           description: Amount in whole cents to pay for drift school
 
+    # Harness response
+    VehicleHarness:
+      type: object
+      properties:
+        harness:
+          type: integer
+          nullable: true
+          description: Harness durability; null if not installed or unknown
+
+    # Harness update request
+    HarnessUpdateRequest:
+      type: object
+      required:
+        - durability
+      properties:
+        durability:
+          type: integer
+          description: New harness durability value
+
+    # Plate change request
+    PlateChangeRequest:
+      type: object
+      required:
+        - oldPlate
+        - newPlate
+      properties:
+        oldPlate:
+          type: string
+          description: Existing license plate number
+        newPlate:
+          type: string
+          description: New license plate number to assign
+
+    # Secondary job record
+    SecondaryJob:
+      type: object
+      properties:
+        id:
+          type: integer
+        playerId:
+          type: string
+        job:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    # Secondary job create request
+    SecondaryJobCreateRequest:
+      type: object
+      required:
+        - playerId
+        - job
+      properties:
+        playerId:
+          type: string
+          description: Identifier of the character receiving the secondary job
+        job:
+          type: string
+          description: Name of the secondary job to assign
+
     # Note record
     Note:
       type: object
@@ -205,6 +269,30 @@ components:
         updated_at:
           type: string
           format: date-time
+
+    # Player ammunition inventory
+    PlayerAmmo:
+      type: object
+      description: |
+        A map of weapon types to ammunition counts for a single player. Each key
+        corresponds to a weapon type string (e.g. "WEAPON_PISTOL") and the value
+        is the number of rounds of ammunition currently held.
+      additionalProperties:
+        type: integer
+
+    # Ammo update request
+    AmmoUpdateRequest:
+      type: object
+      required:
+        - weaponType
+        - ammo
+      properties:
+        weaponType:
+          type: string
+          description: Weapon type name (e.g. "WEAPON_PISTOL")
+        ammo:
+          type: integer
+          description: Number of rounds remaining for the weapon type
 
     # Request body for creating a note
     NoteCreateRequest:
@@ -905,11 +993,10 @@ paths:
     post:
       summary: Create a new website
       description: >
-        Creates a new website entry for the given character.  The
-        server deducts a fixed fee of $500 from the player's cash
-        balance.  If the player does not have sufficient funds a
-        400 error is returned.  On success, the created website
-        record is returned.
+        Creates a new website entry for the given character.  The server
+        deducts a fixed fee of $500 from the player's cash balance.  If the
+        player does not have sufficient funds a 400 error is returned.  On
+        success, the created website record is returned.
       requestBody:
         required: true
         content:
@@ -937,6 +1024,109 @@ paths:
                     type: string
         '400':
           description: Invalid input or insufficient funds
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+
+  # Player ammunition management
+  /v1/players/{playerId}/ammo:
+    get:
+      summary: List a player's ammunition counts
+      parameters:
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of ammo counts for the player
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      ammo:
+                        $ref: '#/components/schemas/PlayerAmmo'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+    patch:
+      summary: Update ammunition count for a weapon type
+      parameters:
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AmmoUpdateRequest'
+      responses:
+        '200':
+          description: Ammo updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      ammo:
+                        $ref: '#/components/schemas/PlayerAmmo'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          description: Invalid input
           content:
             application/json:
               schema:
@@ -1004,6 +1194,183 @@ paths:
                     properties:
                       note:
                         $ref: '#/components/schemas/Note'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+
+  # Vehicle harness management
+  /v1/vehicles/harness/{plate}:
+    get:
+      summary: Get the harness durability for a vehicle
+      parameters:
+        - in: path
+          name: plate
+          required: true
+          schema:
+            type: string
+          description: License plate of the vehicle
+      responses:
+        '200':
+          description: Harness value
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/VehicleHarness'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+    patch:
+      summary: Update the harness durability for a vehicle
+      parameters:
+        - in: path
+          name: plate
+          required: true
+          schema:
+            type: string
+          description: License plate of the vehicle
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HarnessUpdateRequest'
+      responses:
+        '200':
+          description: Harness updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      updated:
+                        type: integer
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+
+  # Vehicle plate change
+  /v1/vehicles/plate-change:
+    post:
+      summary: Change a vehicle's license plate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlateChangeRequest'
+      responses:
+        '200':
+          description: Plate updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      updated:
+                        type: integer
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+
+  # Secondary jobs
+  /v1/secondary-jobs:
+    get:
+      summary: List secondary jobs for a player
+      parameters:
+        - in: query
+          name: playerId
+          required: true
+          schema:
+            type: string
+          description: Identifier of the character whose secondary jobs to list
+      responses:
+        '200':
+          description: List of secondary jobs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SecondaryJob'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+    post:
+      summary: Assign a new secondary job to a player
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecondaryJobCreateRequest'
+      responses:
+        '200':
+          description: Secondary job created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+    delete:
+      summary: Remove all secondary jobs for a player
+      parameters:
+        - in: query
+          name: playerId
+          required: true
+          schema:
+            type: string
+          description: Identifier of the character whose secondary jobs should be removed
+      responses:
+        '200':
+          description: Secondary jobs removed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      deleted:
+                        type: integer
                   requestId:
                     type: string
                   traceId:

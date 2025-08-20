@@ -79,4 +79,48 @@ server‑side logic is considered; purely client resources are skipped.
 | 62 | np‑newsJob | Registers `light:addNews` and `news:removeLight` events to broadcast light updates【361323525276692†L0-L19】. | Skip — no persistent state to port. | — |
 | 63 | np‑notepad | Maintains `serverNotes` array and events to add, remove and list notes【136491508201320†L0-L19】. | Create — added notes API with endpoints to create, list and delete notes; persists notes in database. | this sprint |
 
+| 64 | np‑oBinoculars | Contains only client script. | Skip — no server logic to port. | — |
+| 65 | np‑oCam | Client‑only camera overlay; no server logic. | Skip — nothing to port. | — |
+| 66 | np‑oGasStations | Client/UI for gas stations; no server script. | Skip — nothing to port. | — |
+| 67 | np‑oHideFrames | Client‑side hide frames utility. | Skip — nothing to port. | — |
+| 68 | np‑oPlayerNumbers | Client script to display player IDs above heads. | Skip — no backend needed. | — |
+| 69 | np‑oRecoil | Client script to adjust weapon recoil. | Skip — no server component. | — |
+| 70 | np‑oStress | Client script adjusting stress mechanics. | Skip — no server component. | — |
+| 71 | np‑oVehicleMod | Handles `vehicleMod:changePlate`, `vehicleMod:getHarness`, `vehicleMod:applyHarness`, `vehicleMod:updateHarness` and forwards carhud events【562190696785774†L0-L90】. | Extend — added vehicle harness and plate change endpoints (`GET/PATCH /v1/vehicles/harness/{plate}`, `POST /v1/vehicles/plate-change`); harness durability stored in vehicles table and new migration added. | this sprint |
+| 72 | np‑particles | Registers `particle:StartParticleAtLocation` and `particle:StopParticle` events to broadcast to all clients【867960581482973†L0-L11】. | Skip — client effects only; no persistence. | — |
+| 73 | np‑prison | Contains only stream files; no server script. | Skip — nothing to port. | — |
+| 74 | np‑propattach | Client utility to attach props; no server script. | Skip — nothing to port. | — |
+| 75 | np‑rehab | Adds `/rehab` command that triggers a client rehab event for EMS/judge jobs【501607415487925†L0-L17】. | Skip — no persistent state; event forwarding only. | — |
+| 76 | np‑restart | Schedules restart notifications via chat messages at fixed times【998733077849360†L0-L121】. | Skip — server restarts are managed externally; no API needed. | — |
+| 77 | np‑robbery | Complex heist logic managing power state, doors, markers and loot. | Defer — will be tackled in a dedicated heists sprint due to scope. | — |
+| 78 | np‑scoreboard | Handles AddPlayer, AddAllPlayers and RemovePlayer events for scoreboard display【201703089677931†L0-L84】. | Skip — no persistence; scoreboard is client UI. | — |
+| 79 | np‑secondaryjobs | Provides `secondary:NewJobServer` and `secondary:NewJobServerWipe` events to insert/delete from `secondary_jobs` table【649885668358986†L0-L35】. | Create — added secondary jobs API with endpoints to assign and remove secondary jobs and list a player's jobs; new migration and repository added. | this sprint |
+
+| 80 | np‑securityheists | Tracks a list of recent heist licenses to prevent duplicate robberies; no database or state beyond runtime memory. | Skip — simple event gating without persistence; no backend API required. | — |
+| 81 | np‑sirens | Only client scripts controlling siren sounds. | Skip — no server logic to port. | — |
+| 82 | np‑spikes | Broadcasts `addSpikes` and `removeSpikes` events to all clients【644264532347613†L0-L9】. | Skip — event relay only; no persistence. | — |
+| 83 | np‑stash | Defines stash house configurations and writes state to disk【217965367344869†L0-L48】【172428215327821†L0-L8】. | Skip — uses file I/O; not ported to the database. | — |
+| 84 | np‑stashhouse | Contains only stream assets; no server script. | Skip — nothing to port. | — |
+| 85 | np‑stripclub | Client‑side only; no server logic. | Skip — nothing to port. | — |
+| 86 | np‑stripperbitches | Client‑side only; no server logic. | Skip — nothing to port. | — |
+| 87 | np‑taskbar | Progress bar UI implemented on the client. | Skip — nothing to port. | — |
+| 88 | np‑taskbarskill | Skill check mini‑game implemented on the client. | Skip — nothing to port. | — |
+| 89 | np‑taskbarthreat | Threat gauge mini‑game implemented on the client. | Skip — nothing to port. | — |
+| 90 | np‑tasknotify | Client notifications; no server logic. | Skip — nothing to port. | — |
+| 91 | np‑taximeter | Registers meter events and fares【147099589493415†L0-L17】; uses in‑game events only. | Skip — no persistence; no API needed. | — |
+| 92 | np‑thermite | Forwards `thermite:StartFireAtLocation` and `thermite:StopFires` events to clients【564208794634241†L0-L10】. | Skip — effects only; no backend state. | — |
+| 93 | np‑tow | Contains only metadata; no server script【296072965027253†L0-L107】. | Skip — nothing to port. | — |
+| 94 | np‑tuner | Forwards modification events to clients【993976871895598†L0-L4】. | Skip — no persistence. | — |
+| 95 | np‑tunershop | Includes only client code and vehicle metadata. | Skip — nothing to port. | — |
+| 96 | np‑vanillaCarTweak | Contains only vehicle metadata files【731581791128896†L0-L57】. | Skip — nothing to port. | — |
+| 97 | np‑voice | Sets voice convars and forwards voice state events【10705249783831†L11-L52】. | Skip — voice system is handled by FiveM; no backend API required. | — |
+| 98 | np‑votesystem | Implements mayoral pay, hot spot randomisation and gang coordinates updates with complex DB interactions【121521488790210†L35-L168】. | Defer — full port requires multiple subsystems; will be addressed in a dedicated sprint. | — |
+| 99 | np‑warrants | Contains only client and HTML files; no server logic. | Skip — nothing to port. | — |
+| 100 | np‑weapons | Stores ammunition counts via events `np-weapons:getAmmo` and `np-weapons:updateAmmo`, persisting ammo in the characters_weapons table【735206341651753†L6-L44】. | Create — added player ammunition API with new table, repository and endpoints to get and update ammo counts. | this sprint |
+| 101 | np‑webpages | Server file contains no logic; websites are handled in a separate module. | Skip — nothing to port. | — |
+| 102 | np‑whitelist | Loads whitelists and job priority queues for the connection queue【360360555555541†L14-L107】. | Defer — requires integration with connection queue and job/permissions system. | — |
+| 103 | np‑xhair | Client‑side crosshair overlay. | Skip — nothing to port. | — |
+| 104 | nui_blocker | Detects devtools and kicks players via event and webhook【499166097351950†L0-L26】. | Skip — simple moderation event; no backend state. | — |
+| 105 | outlawalert | Defines an RGB colour table; no events or persistence【895876963551968†L0-L120】. | Skip — nothing to port. | — |
+
 **Legend:** *Skip* – no action taken because equivalent functionality already exists or the resource is client‑side. *Extend* – partially implemented; only missing behaviour added. *Create* – new module/endpoints created to port behaviour.

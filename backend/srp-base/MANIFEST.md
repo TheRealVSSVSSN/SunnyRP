@@ -86,3 +86,39 @@ Legend: **A** = Added, **M** = Modified.
 | `DOCS/modules/notes.md` | A | New module documentation describing the notes domain, endpoints, schema and troubleshooting. |
 | `MANIFEST.md` | M | Updated to include Part 8 file additions and modifications. |
 | `CHANGELOG.md` | M | Appended Part 8 notes describing the new notes API and updated docs. |
+
+# Additional updates for the 2025‑08‑20 sprint
+
+| Path | Status | Notes |
+|---|---|---|
+| `src/migrations/013_add_vehicle_harness.sql` | A | Migration adding a `harness` column to the `vehicles` table and indexing the `plate` column to support harness and plate-change APIs. |
+| `src/repositories/vehiclesRepository.js` | M | Added `getHarnessByPlate`, `updateHarnessByPlate` and `changePlate` functions to manage harness durability and plate updates. |
+| `src/routes/vehicles.routes.js` | M | Added new endpoints: `GET/PATCH /v1/vehicles/harness/{plate}` and `POST /v1/vehicles/plate-change` to retrieve/update harness and change plates. |
+| `src/repositories/secondaryJobsRepository.js` | A | New repository to persist secondary job assignments. |
+| `src/routes/secondaryJobs.routes.js` | A | New routes exposing `/v1/secondary-jobs` (GET, POST, DELETE) for managing secondary jobs. |
+| `src/migrations/014_add_secondary_jobs.sql` | A | Migration creating the `secondary_jobs` table with indexes on `player_id`. |
+| `src/app.js` | M | Mounted the secondary jobs router. |
+| `openapi/api.yaml` | M | Added schemas (`VehicleHarness`, `HarnessUpdateRequest`, `PlateChangeRequest`, `SecondaryJob`, `SecondaryJobCreateRequest`) and path definitions for harness/plate and secondary job endpoints. |
+| `DOCS/progress-ledger.md` | M | Added entries 64‑79 documenting skip decisions for `np-o*` resources and the creation of vehicle harness and secondary jobs APIs. |
+| `DOCS/index.md` | M | Added sprint overview for 2025‑08‑20 describing the harness and secondary jobs features and skip decisions. |
+
+# Additional updates for the 2025‑08‑20 documentation refresh
+
+| Path | Status | Notes |
+|---|---|---|
+| `README.md` | M | Added a **Domain Endpoints** section summarising all major REST endpoints and their purposes, along with guidance on authentication, idempotency and response envelopes. |
+
+# Additional updates for the 2025‑08‑21 sprint
+
+| Path | Status | Notes |
+|---|---|---|
+| `src/repositories/ammoRepository.js` | A | New repository to retrieve and update player ammunition counts using an upsert query. |
+| `src/routes/ammo.routes.js` | A | New routes exposing `/v1/players/{playerId}/ammo` for listing and updating ammunition. |
+| `src/migrations/015_add_player_ammo.sql` | A | Migration creating the `player_ammo` table with composite primary key and index on `player_id`. |
+| `openapi/api.yaml` | M | Moved the website POST definition to `/v1/websites`, removed the erroneous POST under the ammo path, and added documentation for the ammo endpoints. |
+| `DOCS/progress-ledger.md` | M | Added entries 80–105 with skip/defer decisions and the creation of the ammo API. |
+| `DOCS/index.md` | M | Added a new sprint overview (2025‑08‑21) summarising the ammunition API and additional skip decisions. |
+| `DOCS/modules/ammo.md` | A | New module documentation describing the ammo domain, endpoints, repository and migration. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Added a **Weapons & Ammo** section summarising the new ammo endpoints. |
+| `MANIFEST.md` | M | Updated to include this section and list new files/changes. |
+| `CHANGELOG.md` | M | Appended notes for the 2025‑08‑21 sprint covering the ammo API and documentation updates. |

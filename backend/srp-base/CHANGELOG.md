@@ -280,3 +280,90 @@ validation, authentication, rate limiting and idempotency consistent
 with the rest of the service.  Other resources in this batch were
 skipped because they lack server logic or will be addressed in
 dedicated sprints (e.g., news, menu, lost and memorial modules).
+
+### Added (2025‑08‑20)
+
+* **Vehicle harness & plate change API.** Added new functions to the
+  vehicles repository (`getHarnessByPlate`, `updateHarnessByPlate`,
+  `changePlate`) and exposed REST endpoints:
+  `GET /v1/vehicles/harness/{plate}`, `PATCH /v1/vehicles/harness/{plate}` and
+  `POST /v1/vehicles/plate-change`.  A migration (013) augments the
+  `vehicles` table with a `harness` column and indexes the `plate`
+  column to support these queries.
+* **Secondary jobs API.** Implemented a new domain to manage
+  secondary job assignments.  Added `secondaryJobsRepository.js`,
+  `secondaryJobs.routes.js` and a migration (`014_add_secondary_jobs.sql`)
+  creating the `secondary_jobs` table.  Endpoints include
+  `GET /v1/secondary-jobs?playerId=cid`, `POST /v1/secondary-jobs` and
+  `DELETE /v1/secondary-jobs?playerId=cid`.
+
+### Changed (2025‑08‑20)
+
+* **vehicles.routes.js** – Added new routes for harness management and
+  plate changes.  These endpoints validate input and call the
+  corresponding repository functions.
+* **app.js** – Mounted the secondary jobs router so the new
+  endpoints are available under `/v1/secondary-jobs`.
+* **openapi/api.yaml** – Added schemas (`VehicleHarness`,
+  `HarnessUpdateRequest`, `PlateChangeRequest`, `SecondaryJob`,
+  `SecondaryJobCreateRequest`) and path definitions for harness/plate
+  and secondary job endpoints.
+* **progress‑ledger.md** – Added entries 64–79 covering the
+  `np-o` resources up to `np-secondaryjobs`, with skip decisions and
+  notes on new functionality.
+* **index.md** – Added a sprint overview for 2025‑08‑20 summarising the
+  new features and skip decisions.
+* **MANIFEST.md** – Updated to list new files (migrations, repository,
+  routes) and modifications.
+
+### Notes (2025‑08‑20)
+
+This sprint examined the `np-o*` modules and beyond.  Most of these
+resources were client‑only or contained simple event relays, so
+they were skipped.  The notable exceptions were **np‑oVehicleMod**
+and **np‑secondaryjobs**.  The former includes server events to
+retrieve and update harness durability and to change a vehicle’s
+license plate【562190696785774†L0-L90】.  To support this, we
+extended the vehicles domain with dedicated endpoints and added a
+`harness` column to the vehicles table.  The latter manages
+secondary job assignments by inserting and deleting entries in a
+`secondary_jobs` table【649885668358986†L0-L35】.  We created an
+API to assign, list and remove secondary jobs, backed by a new
+table.  All new endpoints honour authentication, rate limiting and
+idempotency conventions established in earlier sprints.  The
+remaining `np-o*` resources and other simple modules (particles,
+prison, propattach, rehab, restart, scoreboard, sirens, spikes,
+stash, stashhouse, stripclub, taskbar variants, taximeter, thermite,
+tow, tuner, tunershop, vanillaCarTweak) were skipped as they do not
+require persistent state.  The heist resource `np-robbery` was
+deferred for a future sprint due to its complexity.  The progress
+ledger and documentation have been updated to reflect these
+decisions and new capabilities.
+
+### Added (2025‑08‑20 – Documentation refresh)
+
+* **README.md** – Added a **Domain Endpoints** section that summarises all major REST endpoints across the players, characters, economy, inventory, vehicles, jobs, world, notes, weed plants, websites, driving tests, drift school and contracts domains.  This update ensures developers and API consumers can quickly discover available endpoints and understand their purpose.  The new section also reminds readers about the uniform response envelope, authentication headers and idempotency conventions.
+
+### Notes (2025‑08‑20 – Documentation refresh)
+
+This sprint was a documentation‑only update.  No new endpoints, migrations or business logic were added.  The README was enhanced to include a comprehensive table of domains and sample endpoints, consolidating information scattered across the OpenAPI spec and module documentation.  Developers should now refer to this section for a high‑level view of the service capabilities.
+
+### Added (2025‑08‑21)
+
+* **Player ammunition API.**  Introduced a new domain for managing per‑player ammunition counts, inspired by the `np‑weapons` resource which stores ammo in the Lua backend【735206341651753†L6-L44】.  Added:
+  * `ammoRepository.js` with `getPlayerAmmo` and `updatePlayerAmmo` functions utilising an UPSERT query.
+  * `ammo.routes.js` exposing `GET /v1/players/{playerId}/ammo` and `PATCH /v1/players/{playerId}/ammo` for retrieving and updating ammo counts.
+  * Migration `015_add_player_ammo.sql` creating the `player_ammo` table keyed by `(player_id, weapon_type)` with an index on `player_id`.
+  * Module documentation (`docs/modules/ammo.md`) describing the domain, endpoints and DB schema.
+* **Domain endpoints documentation.** Added a Weapons & Ammo section to `BASE_API_DOCUMENTATION.md` summarising the new ammo endpoints.
+
+### Changed (2025‑08‑21)
+
+* **openapi/api.yaml** – Corrected the websites API definition by moving the POST operation to the `/v1/websites` path and removing the erroneous POST under `/v1/players/{playerId}/ammo`.  Added path documentation for the ammo endpoints.
+* **progress‑ledger.md** – Added entries 80–105 recording skip, defer and create decisions for resources from `np‑securityheists` through `outlawalert`.  Notably, it records the creation of the ammo API for `np‑weapons`.
+* **index.md** – Appended a new sprint overview for 2025‑08‑21 summarising the ammo API and skip/defer decisions.
+* **MANIFEST.md** – Updated to include new files (`ammoRepository.js`, `ammo.routes.js`, migration 015, module doc) and modifications.
+
+### Notes (2025‑08‑21)
+
+This sprint continued the systematic audit of NoPixel resources.  The vast majority of modules processed (from `np‑securityheists` to `outlawalert`) either contained only client scripts or relayed events without persisting state【644264532347613†L0-L9】【147099589493415†L0-L17】.  These were skipped or deferred.  The notable exception was **np‑weapons**, which keeps ammunition counts in a SQL table and updates them via events【735206341651753†L6-L44】.  To provide equivalent functionality, we created the **player ammunition API** described above.  We also fixed an OpenAPI misplacement for the websites POST endpoint.  No other endpoints or migrations were modified.  Future sprints will address remaining resources such as `pNotify`, `pPassword`, `ped`, `phone`, `police` and others.

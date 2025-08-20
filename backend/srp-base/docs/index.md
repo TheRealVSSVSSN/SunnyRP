@@ -342,3 +342,90 @@ delete notes when they are removed.
 The progress ledger has been updated with entries 58‑63 to record the skip or
 create decisions for these resources.  The microservice now persists notes
 across server restarts, filling a gap in the original Lua implementation.
+
+---
+
+# Sprint Overview – 2025‑08‑20
+
+In this sprint we continued down the NoPixel `resources` directory,
+processing modules starting from the `np‑o` prefix.  We found that
+most of these resources contain only client‑side scripts or visual
+effects, and therefore require no backend support.  Two notable
+exceptions were **np‑oVehicleMod**, which manages harness durability
+and license plate changes, and **np‑secondaryjobs**, which allows
+characters to hold a second job.  We extended the API accordingly
+and recorded the skip decisions for the remaining modules.
+
+### Highlights
+
+* **Vehicle harness and plate management** – Implemented GET and
+  PATCH endpoints (`/v1/vehicles/harness/{plate}`) to retrieve and
+  update the harness durability of a vehicle, and a POST endpoint
+  (`/v1/vehicles/plate-change`) to change a vehicle’s license plate.
+  A new migration (013) adds a `harness` column to the `vehicles`
+  table and an index on the `plate` column for efficient lookups.
+* **Secondary jobs API** – Added a CRUD API for secondary job
+  assignments (`/v1/secondary-jobs`), allowing clients to list,
+  create and remove secondary jobs for a player.  Migration 014
+  creates the `secondary_jobs` table and indexes it by player ID.
+
+### Resources processed
+
+* **np‑oBinoculars**, **np‑oCam**, **np‑oGasStations**, **np‑oHideFrames**,
+  **np‑oPlayerNumbers**, **np‑oRecoil**, **np‑oStress** – purely
+  client‑side; skipped.
+* **np‑oVehicleMod** – defines events for harness and plate changes
+  【562190696785774†L0-L90】; we extended the vehicles API (see
+  highlights).
+* **np‑particles** – event relays for particle effects【867960581482973†L0-L11】;
+  skipped.
+* **np‑prison**, **np‑propattach**, **np‑rehab**, **np‑restart** – no
+  persistent state; skipped【501607415487925†L0-L17】【998733077849360†L0-L121】.
+* **np‑robbery** – complex heist mechanics; deferred.
+* **np‑scoreboard** – scoreboard events【201703089677931†L0-L84】;
+  skipped.
+* **np‑secondaryjobs** – inserts/deletes from `secondary_jobs` table
+  【649885668358986†L0-L35】; created secondary jobs API (see highlights).
+* **np‑securityheists**, **np‑sirens**, **np‑spikes**, **np‑stash**,
+  **np‑stashhouse**, **np‑stripclub**, **np‑stripperbitches**, **np‑taskbar**,
+  **np‑taskbarskill**, **np‑taskbarthreat**, **np‑tasknotify**, **np‑taximeter**,
+  **np‑thermite**, **np‑tow**, **np‑tuner**, **np‑tunershop**, **np‑vanillaCarTweak**
+  – no server logic; skipped.
+
+---
+
+# Sprint Overview – 2025‑08‑21
+
+This sprint processed the next set of NoPixel resources starting with `np‑voice` and extending through `outlawalert`.  Most of these modules are either client-only or implement event relays with no persistent state, so they were **skipped**.  The primary new feature introduced is a **player ammunition management API** to reflect the behaviour of the `np‑weapons` resource, which stores ammunition counts on the server.  We also corrected a path placement error in the OpenAPI specification for the websites API.
+
+### Highlights
+
+* **Player ammunition API** – Added GET and PATCH endpoints (`/v1/players/{playerId}/ammo`) that allow clients to retrieve and update a player's ammunition counts per weapon type.  A new `player_ammo` table stores these counts keyed by player ID and weapon type (see migration 015).  The repository uses an upsert query to insert or update ammo rows atomically.  The OpenAPI specification introduces `PlayerAmmo` and `AmmoUpdateRequest` schemas and documents the new path.
+* **Website API fix** – Moved the POST definition for creating websites to the correct `/v1/websites` path in the OpenAPI specification and removed the stray insertion under the ammo endpoint.
+
+### Resources processed
+
+* **np‑securityheists** – Simple licence array to prevent duplicate heists; no persistence; skipped.
+* **np‑sirens** – Client‑side siren control; skipped.
+* **np‑spikes** – Broadcasts spike strip placement/removal events【644264532347613†L0-L9】; skipped.
+* **np‑stash** and **np‑stashhouse** – Stash house config written to files【217965367344869†L0-L48】【172428215327821†L0-L8】; skipped.
+* **np‑stripclub** and **np‑stripperbitches** – Client animations; skipped.
+* **np‑taskbar**, **np‑taskbarskill**, **np‑taskbarthreat**, **np‑tasknotify** – Client‑side UI and minigames; skipped.
+* **np‑taximeter** – Event relay for taxi fare updates【147099589493415†L0-L17】; skipped.
+* **np‑thermite** – Broadcasts thermite start/stop events【564208794634241†L0-L10】; skipped.
+* **np‑tow**, **np‑tuner**, **np‑tunershop**, **np‑vanillaCarTweak** – Metadata or client‑only; skipped【296072965027253†L0-L107】【993976871895598†L0-L4】【731581791128896†L0-L57】.
+* **np‑voice** – Sets convars and forwards voice state events【10705249783831†L11-L52】; no database or API; skipped.
+* **np‑votesystem** – Complex mayoral pay and gang/weed management【121521488790210†L35-L168】; deferred to a future sprint due to scope.
+* **np‑warrants** – No server script; skipped.
+* **np‑weapons** – Stores ammo counts via events and a MySQL table【735206341651753†L6-L44】.  We **created** a player ammunition API with repository, routes and migration (see highlights).
+* **np‑webpages** – Empty server script; skipped.
+* **np‑whitelist** – Manages connection queue priority and job whitelists【360360555555541†L14-L107】; deferred for a dedicated queue/permissions sprint.
+* **np‑xhair**, **nui_blocker**, **outlawalert** – Client‑side overlays or static data【499166097351950†L0-L26】【895876963551968†L0-L120】; skipped.
+
+The progress ledger now includes rows 80–105 reflecting these decisions and the creation of the ammunition API.  With this sprint complete, the remaining resources to process begin with `pNotify`, `pPassword`, `ped`, `phone`, `police` and beyond.  We will continue to scan and port server behaviours in order while adhering to the Node.js microservice guidelines.
+
+The progress ledger has been updated with rows 64‑79 summarising
+these decisions.  Future sprints will continue with `np‑voice`,
+`np‑votesystem`, `np‑warrants`, `np‑weapons`, `np‑webpages`,
+`np‑whitelist` and beyond, adding backend support only where
+persistent state or cross‑player interactions are required.
