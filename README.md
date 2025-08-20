@@ -60,7 +60,8 @@ The structure below is illustrative and may change over time.
 │       │   │   └── files
 │       │   └── fxmanifest.lua
 │       └── (More Suunny Roleplay resources. Example: sunnyrp-resource-name)
-└── server.cfg .
+└── server.cfg
+```
 
 ## SunnyRP Base API (srp-base) [Framework] Documentation (Current microservice in progress.)
 
