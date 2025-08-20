@@ -254,6 +254,12 @@ In addition to the core identity, permissions, characters and admin APIs describ
 | `POST` | `/v1/vehicles` | Register a new vehicle (body: `{ playerId, model, plate, properties? }`). Returns vehicle ID. |
 | `POST` | `/v1/vehicles/:id/update` | Update an existing vehicle (body: partial). |
 | `GET` | `/v1/vehicles/shop` | Placeholder endpoint to list vehicles available for purchase. Returns an empty array by default. |
+| `GET` | `/v1/vehicles/{plate}/condition` | Retrieve the engine damage, body damage, fuel level and degradation array for a vehicle. |
+| `PATCH` | `/v1/vehicles/{plate}/condition` | Update the engine damage, body damage or fuel level for a vehicle. |
+| `PATCH` | `/v1/vehicles/{plate}/degradation` | Update the degradation array (eight integers) for a vehicle. |
+| `GET` | `/v1/vehicles/harness/{plate}` | Retrieve harness durability for a vehicle (see Vehicle harness API). |
+| `PATCH` | `/v1/vehicles/harness/{plate}` | Update harness durability for a vehicle. |
+| `POST` | `/v1/vehicles/plate-change` | Change the license plate of a vehicle (body: `{ oldPlate, newPlate }`). |
 
 #### World (Global State & Events)
 

@@ -123,4 +123,42 @@ server‑side logic is considered; purely client resources are skipped.
 | 104 | nui_blocker | Detects devtools and kicks players via event and webhook【499166097351950†L0-L26】. | Skip — simple moderation event; no backend state. | — |
 | 105 | outlawalert | Defines an RGB colour table; no events or persistence【895876963551968†L0-L120】. | Skip — nothing to port. | — |
 
+| 106 | pNotify | Client-side notification resource. | Skip — no server logic to port. | — |
+| 107 | pPassword | Displays a password prompt using an adaptive card on player connecting【892608004331820†L0-L102】. | Skip — no persistence; handled client-side. | — |
+| 108 | ped | Contains only ped metadata and stream files【924553068577613†L0-L59】. | Skip — nothing to port. | — |
+| 109 | phone | Implements full phone system with tweets, contacts and messages stored in the `tweets`, `user_contacts` and `user_messages` tables【698764890169078†L11-L161】. | Defer — complex social/communication system requiring dedicated sprint. | — |
+| 110 | police | Comprehensive police framework touching arrests, records, dispatch and more【144748342260087†L93-L103】. | Defer — large system deferred to a future sprint. | — |
+| 111 | policegarage | Registers `attemptduty` event to set players on duty and assign callsigns【418527089586763†L0-L15】. | Skip — simple event handled by existing job APIs. | — |
+| 112 | radio | Contains only client-side radio functionality【734740907190639†L23-L46】. | Skip — nothing to port. | — |
+| 113 | ragdoll | Server handles CPR and revival events; deducts cash but does not persist state【193465885647296†L19-L50】. | Skip — simple event without persistence. | — |
+| 114 | raid_carmenu | Provides raid car menu UI; no server script【352287188473429†L24-L44】. | Skip — nothing to port. | — |
+| 115 | raid_cars | Contains only vehicle meta and stream files【64360211707915†L0-L112】. | Skip — nothing to port. | — |
+| 116 | raid_clothes | Server script manages character clothing and tattoos using MySQL tables `character_current`, `character_face` and `playersTattoos`【260261677411862†L0-L92】. | Defer — clothing customisation requires separate module and is deferred. | — |
+| 117 | rconlog | Logs chat and player events to RCON【178744145956972†L0-L91】. | Skip — logging is handled by server infrastructure. | — |
+| 118 | runcode | Provides a server-side runcode command executing arbitrary JavaScript【150006144275698†L0-L11】. | Skip — not applicable to microservice. | — |
+| 119 | sessionmanager | Controls session host locks and concurrency【816883107725052†L0-L69】. | Skip — no persistent data to port. | — |
+| 120 | shops | Server implements shop creation and product listing; already implemented in earlier sprint【706885775886456†L71-L90】. | Skip — existing shops API covers this behaviour. | — |
+| 121 | spawnmanager | Manages spawn points in memory with callback support【588765684156119†L0-L209】. | Skip — no persistence required. | — |
+| 122 | stereo | Server file contains only a placeholder comment【465528865608002†L0-L0】. | Skip — nothing to port. | — |
+| 123 | storage | Contains only client scripts and HTML; no server logic【482228180969166†L25-L46】. | Skip — nothing to port. | — |
+| 124 | tf-pointing | Client script controlling pointing animation【553780633308761†L0-L180】. | Skip — nothing to port. | — |
+| 125 | towtruckjob | Server script updates the `delivery_job` table to mark jobs as taken or finished and provides a command to list jobs【190337792359191†L11-L50】. | Create — implemented trucker jobs API with routes to list jobs, create new jobs and mark jobs as taken, finished or failed; added new table, repository and OpenAPI definitions. | this sprint |
+| 126 | trains | Forwards train request event to clients【193153652951221†L0-L5】. | Skip — no persistence. | — |
+| 127 | truckerjob | Duplicate of towtruckjob in this repo; see towtruckjob entry. | Skip — handled by towtruckjob API. | — |
+| 128 | uitest | Client UI testing resource; no server script【731137467970403†L24-L46】. | Skip — nothing to port. | — |
+
+| 129 | veh | Server script manages vehicle condition (engine/body damage, fuel, degradation) and updates cars table【694334601143938†L14-L84】【694334601143938†L76-L113】. | Extend — added vehicle condition API with endpoints to retrieve and update engine/body/fuel/degradation, added migration to store these fields and updated OpenAPI. | this sprint |
+| 130 | veh_shop | Handles car shop operations including purchasing and financing vehicles with complex logic and scheduled payments【502841985823853†L20-L179】【502841985823853†L184-L233】. | Defer — vehicle shop/finance system is complex and will be implemented as a separate service. | — |
+| 131 | veh_shop_imports | Similar to veh_shop; manages import dealership operations, finance and stock. | Defer — same as veh_shop; to be implemented later. | — |
+| 132 | lux_vehcontrol | Forwards siren state events to all clients; no persistence【888760073244974†L12-L34】. | Skip — event relay handled in FiveM layer. | — |
+| 133 | lmfao | Awards cash and handles OOC chat; uses economy API for payments【663963080467880†L1-L26】. | Skip — simple cash events handled by existing economy routes. | — |
+| 134 | koillove | Contains only timecycle XML files and no server scripts【918376698318068†L2-L44】. | Skip — nothing to port. | — |
+| 135 | k9 | Contains only client‑side k9 handler script【923347416079626†L0-L69】. | Skip — no server logic. | — |
+| 136 | gabz_mrpd | Interiors and map assets for police department; no server scripts. | Skip — nothing to port. | — |
+| 137 | gabz_pillbox_hospital | Interiors and map assets for hospital; no server scripts. | Skip — nothing to port. | — |
+| 138 | emotes | Contains only client emote definitions and animations. | Skip — no server logic. | — |
+| 139 | webpack | Contains compile scripts for UI; no server logic. | Skip — nothing to port. | — |
+| 140 | wk_wrs | Contains only client or meta files; no server scripts. | Skip — nothing to port. | — |
+| 141 | yarn | Contains UI environment for Node but no FiveM server scripts. | Skip — nothing to port. | — |
+
 **Legend:** *Skip* – no action taken because equivalent functionality already exists or the resource is client‑side. *Extend* – partially implemented; only missing behaviour added. *Create* – new module/endpoints created to port behaviour.

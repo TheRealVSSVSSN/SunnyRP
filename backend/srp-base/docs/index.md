@@ -429,3 +429,41 @@ these decisions.  Future sprints will continue with `np‑voice`,
 `np‑votesystem`, `np‑warrants`, `np‑weapons`, `np‑webpages`,
 `np‑whitelist` and beyond, adding backend support only where
 persistent state or cross‑player interactions are required.
+
+---
+
+# Sprint Overview – 2025‑08‑20 (Part 10)
+
+This sprint processed the next batch of resources from `veh` through `yarn`.  With
+the exception of the **vehicles** resource, all modules examined were client‑only
+or contained simple event relays without persistent state.  We therefore
+**extended** our vehicles API to handle condition tracking and **skipped** or
+**deferred** the rest.
+
+## Highlights
+
+* **Vehicle condition API** – Added REST endpoints to retrieve and update a
+  vehicle’s condition, including engine and body damage, fuel level and
+  component degradation.  A new migration (`017_add_vehicle_condition.sql`)
+  adds the necessary columns to the `vehicles` table.  The repository now
+  exposes functions to read and update these fields, and the OpenAPI
+  specification defines corresponding schemas and paths.
+
+## Resources processed
+
+* **veh** – Extended existing vehicles API with condition management based on
+  engine/body damage, fuel and degradation fields stored in the `vehicles` table
+  【694334601143938†L14-L84】【694334601143938†L76-L113】.
+* **veh_shop** and **veh_shop_imports** – Car dealership logic involving
+  financing and scheduled payments【502841985823853†L20-L179】【502841985823853†L184-L233】; deferred for a dedicated vehicles service.
+* **lux_vehcontrol** – Siren state relay; skipped【888760073244974†L12-L34】.
+* **lmfao** – Mission payouts and OOC chat; skipped【663963080467880†L1-L26】.
+* **koillove** – Timecycle files only【918376698318068†L2-L44】; skipped.
+* **k9** – Client‑side k9 handler【923347416079626†L0-L69】; skipped.
+* **gabz_mrpd**, **gabz_pillbox_hospital** – Map interiors; skipped.
+* **emotes**, **webpack**, **wk_wrs**, **yarn** – Developer tools or client assets; skipped.
+
+The progress ledger now includes entries 129–141 to reflect these decisions.  In
+upcoming sprints we will begin exploring the remaining resources, starting with
+any leftover interior packs or developer tooling, and confirm that all server
+behaviour requiring persistence has been ported.

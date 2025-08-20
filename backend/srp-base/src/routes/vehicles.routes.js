@@ -51,4 +51,92 @@ router.get('/v1/vehicles/shop', async (req, res, next) => {
   }
 });
 
+// -----------------------------------------------------------------------------
+// Harness and plate management
+//
+// Retrieve the harness durability for a given vehicle plate.  If the vehicle
+// has no harness value, `harness` will be null.
+router.get('/v1/vehicles/harness/:plate', async (req, res, next) => {
+  try {
+    const { plate } = req.params;
+    const harness = await vehiclesRepo.getHarnessByPlate(plate);
+    sendOk(res, { harness }, res.locals.requestId, res.locals.traceId);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Update harness durability for a vehicle plate.  Expects JSON body with
+// `durability` property (integer).  Returns the number of rows updated.
+router.patch('/v1/vehicles/harness/:plate', async (req, res, next) => {
+  try {
+    const { plate } = req.params;
+    const { durability } = req.body || {};
+    const updated = await vehiclesRepo.updateHarnessByPlate(plate, durability);
+    sendOk(res, { updated }, res.locals.requestId, res.locals.traceId);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Change the license plate of a vehicle.  Expects JSON body with
+// `oldPlate` and `newPlate`.  Returns the number of rows updated.
+router.post('/v1/vehicles/plate-change', async (req, res, next) => {
+  try {
+    const { oldPlate, newPlate } = req.body || {};
+    const updated = await vehiclesRepo.changePlate(oldPlate, newPlate);
+    sendOk(res, { updated }, res.locals.requestId, res.locals.traceId);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// -----------------------------------------------------------------------------
+// Vehicle condition management
+//
+// Retrieve the condition for a vehicle (engine damage, body damage, fuel and
+// degradation array).  Plate is passed in the URL path.  Returns null if
+// the vehicle does not exist or has no condition recorded.
+router.get('/v1/vehicles/:plate/condition', async (req, res, next) => {
+  try {
+    const { plate } = req.params;
+    const condition = await vehiclesRepo.getVehicleConditionByPlate(plate);
+    sendOk(res, condition, res.locals.requestId, res.locals.traceId);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Update engine, body and fuel condition for a vehicle.  Expects a JSON body
+// with any combination of `engineDamage`, `bodyDamage` or `fuel`.  Fields
+// omitted will remain unchanged.  Returns the number of rows updated.
+router.patch('/v1/vehicles/:plate/condition', async (req, res, next) => {
+  try {
+    const { plate } = req.params;
+    const { engineDamage, bodyDamage, fuel } = req.body || {};
+    const updated = await vehiclesRepo.updateVehicleConditionByPlate(plate, {
+      engineDamage,
+      bodyDamage,
+      fuel,
+    });
+    sendOk(res, { updated }, res.locals.requestId, res.locals.traceId);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Update degradation array for a vehicle.  Expects a JSON body with a
+// `degradation` property as an array of eight integers.  Returns the number
+// of rows updated.
+router.patch('/v1/vehicles/:plate/degradation', async (req, res, next) => {
+  try {
+    const { plate } = req.params;
+    const { degradation } = req.body || {};
+    const updated = await vehiclesRepo.updateVehicleDegradationByPlate(plate, degradation);
+    sendOk(res, { updated }, res.locals.requestId, res.locals.traceId);
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;
