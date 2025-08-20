@@ -1,60 +1,65 @@
 # SunnyRoleplay Server
 
-## This is the in progress documation for the Sunny Roleplay (Sunny RP/SRP) server
+> **Status:** Work in progress
 
-Sunny Roleplay will run on a custom framework.
+## Overview
+This document outlines the evolving structure for the Sunny Roleplay (Sunny RP / SRP) server. SunnyRoleplay runs on a custom framework designed for clarity, modularity, and long-term maintainability.
 
-The ** [simplified] ** structure of Sunny Roleplay will be similar to the following but may change a bit overtime:
+## Repository Layout (simplified)
+The structure below is illustrative and may change over time.
+
+```text
 ├── LICENSE
 ├── README.md
 ├── backend
-│   └── srp-base
-│       ├── CHANGELOG.md
-│       ├── MANIFEST.md
-│       ├── README.md
-│       ├── app.js
-│       ├── docs
-│       ├── openapi
-│       ├── package.json
-│       ├── postman
-│       ├── scripts
-│       ├── server.js
-│       └── src
-│           ├── app.js
-│           ├── bootstrap
-│           │   └── files
-│           ├── config
-│           │   └── files
-│           ├── middleware
-│           │   └── files
-│           ├── migrations
-│           │   └── files
-│           ├── openapi
-│           │   └── files
-│           ├── repositories
-│           │   └── files
-│           ├── routes
-│           │   └── files
-│           ├── server.js
-│           ├── services
-│           ├── utils
-│           │   └── files
-│           └── workers
+│   └── srp-base
+│       ├── CHANGELOG.md
+│       ├── MANIFEST.md
+│       ├── README.md
+│       ├── app.js
+│       ├── docs
+│       ├── openapi
+│       ├── package.json
+│       ├── postman
+│       ├── scripts
+│       ├── server.js
+│       └── src
+│           ├── app.js
+│           ├── bootstrap
+│           │   └── files
+│           ├── config
+│           │   └── files
+│           ├── middleware
+│           │   └── files
+│           ├── migrations
+│           │   └── files
+│           ├── openapi
+│           │   └── files
+│           ├── repositories
+│           │   └── files
+│           ├── routes
+│           │   └── files
+│           ├── server.js
+│           ├── services
+│           ├── utils
+│           │   └── files
+│           └── workers
 ├── logs
 ├── resources
-│   └── [sunnyroleplay]
-│       └── sunnyrp-base
-│           ├── client
-│           │   └── files
-│           ├── server
-│           │   └── files
-│           ├── sshared
-│           │   └── files
-│           ├── ui (If resource has a UI)
-│           │   └── files
-│           ├── assets (If resource has assets)
-│           │   └── files
-│           └── fxmanifest.lua
+│   └── [sunnyroleplay]
+│       └── sunnyrp-base
+│       │   ├── client
+│       │   │   └── files
+│       │   ├── server
+│       │   │   └── files
+│       │   ├── sshared
+│       │   │   └── files
+│       │   ├── ui (if the resource has a UI)
+│       │   │   └── files
+│       │   ├── assets (if the resource has assets)
+│       │   │   └── files
+│       │   └── fxmanifest.lua
+│       └── (More Suunny Roleplay resources. Example: sunnyrp-resource-name)
 └── server.cfg
 
 ## SunnyRP Base API (srp-base) [Framework] Documentation (Current microservice in progress.)
