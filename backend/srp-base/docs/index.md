@@ -302,3 +302,43 @@ in place.
 No new endpoints, migrations or repositories were added in this part.  The progress
 ledger records these skip and defer decisions.  Future sprints will resume with
 `np-phone`, `np-police`, `np-polyzone` and other remaining resources.
+
+# Sprint Overview – 2025‑08‑19 (Part 8)
+
+This sprint continued processing the next set of NoPixel resources in order,
+covering `np‑lost` through `np‑notepad`.  Most of these resources contain
+client‑only scripts or simple event relays with no persistent data, so they were
+**skipped**.  However, the **np‑notepad** resource maintains a `serverNotes`
+array on the server and exposes events to add, remove and list notes【136491508201320†L0-L19】.
+To provide persistence and allow notes to survive server restarts, we
+implemented a new **notes** domain in the SRP API.  The new endpoints allow
+clients to create notes with text and world coordinates, list all notes, and
+delete notes when they are removed.
+
+### Resources processed
+
+* **np‑lost** – Contains only a client script; no server code to port.
+* **np‑memorial** – Client‑side memorial interactions; no backend logic.
+* **np‑menu** – UI resource with client‑only code and configuration.
+* **np‑news** – Relays `NewsStandCheckFinish` event to clients【675594937447961†L0-L4】; no persistence.
+* **np‑newsJob** – Broadcasts light updates via `light:addNews` and `news:removeLight` events【361323525276692†L0-L19】; no persistence.
+* **np‑notepad** – Maintains an array of notes and provides events to add, remove and list them【136491508201320†L0-L19】.
+  We **created** the Notes API with `/v1/notes` and `/v1/notes/{id}` endpoints.
+
+### What’s new in the API
+
+* Added a **notes** repository with functions to create, delete and list notes in
+  the database.
+* Added a new migration `012_add_notes.sql` that creates the `notes` table with
+  coordinates and timestamp fields.
+* Added a **notes** route exposing the following endpoints:
+  * `GET /v1/notes` – Lists all notes.
+  * `POST /v1/notes` – Creates a new note with text and x,y,z coordinates.
+  * `DELETE /v1/notes/{id}` – Deletes an existing note.
+* Updated `src/app.js` to mount the new notes routes.
+* Extended the OpenAPI specification with `Note` and `NoteCreateRequest` schemas
+  and the `/v1/notes` and `/v1/notes/{id}` paths.
+
+The progress ledger has been updated with entries 58‑63 to record the skip or
+create decisions for these resources.  The microservice now persists notes
+across server restarts, filling a gap in the original Lua implementation.

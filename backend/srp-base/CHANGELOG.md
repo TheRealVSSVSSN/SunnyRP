@@ -236,3 +236,47 @@ and permissions framework is not yet implemented.  Accordingly, no new
 endpoints or migrations were introduced in this part.  The changes are
 limited to documentation updates: the progress ledger and index reflect
 these decisions and outline the remaining resources for future sprints.
+
+### Added (Part 8)
+
+* **Notes API.** Implemented a new domain to persist world notes.  Added
+  `notesRepository.js` and `notes.routes.js` along with a migration
+  (`012_add_notes.sql`) to create the `notes` table.  The API supports
+  `GET /v1/notes` to list all notes, `POST /v1/notes` to create a new
+  note with text and coordinates, and `DELETE /v1/notes/{id}` to remove
+  an existing note.  A new `Note` schema and the `/v1/notes` paths
+  were added to the OpenAPI specification.
+* **Documentation.** Added module documentation for the notes domain
+  under `DOCS/modules/notes.md`.
+
+### Changed (Part 8)
+
+* **app.js** – Mounted the notes router so the new endpoints are
+  available.
+* **openapi/api.yaml** – Added `Note` and `NoteCreateRequest` schemas
+  and defined paths `/v1/notes` and `/v1/notes/{id}` with request and
+  response payload definitions.
+* **progress‑ledger.md** – Added entries for `np-lost`, `np-memorial`,
+  `np-menu`, `np-news`, `np-newsJob` and `np-notepad`, documenting
+  skip decisions and the creation of the notes API.
+* **index.md** – Added an eighth part to the sprint overview summarising
+  the notes implementation and skip decisions.
+* **MANIFEST.md** – Updated to list new files and modifications for
+  Part 8.
+* **CHANGELOG.md** – This file (current section) records the changes.
+
+### Notes (Part 8)
+
+This sprint focused on a set of resources (`np-lost` through
+`np-notepad`).  Most contained only client-side code or event relays
+that do not require backend state.  The **np-notepad** resource stood
+out because it maintains a `serverNotes` table and exposes events to
+add, remove and list notes【136491508201320†L0-L19】.  To support
+persistence across server restarts and a standard API, we implemented
+a Notes domain.  Players can create notes specifying a message and
+world coordinates; the service persists notes in a new `notes` table
+and allows retrieval and deletion via HTTP.  The API enforces
+validation, authentication, rate limiting and idempotency consistent
+with the rest of the service.  Other resources in this batch were
+skipped because they lack server logic or will be addressed in
+dedicated sprints (e.g., news, menu, lost and memorial modules).

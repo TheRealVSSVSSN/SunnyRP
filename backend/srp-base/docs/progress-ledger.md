@@ -72,4 +72,11 @@ server‑side logic is considered; purely client resources are skipped.
 | 56 | np‑lootsystem | Awards random items on `loot:useItem`; no persistent state【827029519194534†L0-L66】. | Skip — will be revisited when inventory mechanics are expanded. | — |
 | 57 | np‑login | Contains only a `np-login:disconnectPlayer` event that drops players【57298370178638†L0-L4】. | Skip — no backend needed. | — |
 
+| 58 | np‑lost | Contains only a client script; no server code. | Skip — nothing to port. | — |
+| 59 | np‑memorial | Contains only client logic for memorial interactions. | Skip — nothing to port. | — |
+| 60 | np‑menu | UI resource with client-only menu code and configuration. | Skip — nothing to port. | — |
+| 61 | np‑news | Registers `NewsStandCheckFinish` server event to relay parameters to clients【675594937447961†L0-L4】. | Skip — simple event relay with no persistence. | — |
+| 62 | np‑newsJob | Registers `light:addNews` and `news:removeLight` events to broadcast light updates【361323525276692†L0-L19】. | Skip — no persistent state to port. | — |
+| 63 | np‑notepad | Maintains `serverNotes` array and events to add, remove and list notes【136491508201320†L0-L19】. | Create — added notes API with endpoints to create, list and delete notes; persists notes in database. | this sprint |
+
 **Legend:** *Skip* – no action taken because equivalent functionality already exists or the resource is client‑side. *Extend* – partially implemented; only missing behaviour added. *Create* – new module/endpoints created to port behaviour.

@@ -71,3 +71,18 @@ Legend: **A** = Added, **M** = Modified.
 | `DOCS/index.md` | M | Added a seventh part of the sprint overview summarising skip and defer decisions for these resources. |
 | `MANIFEST.md` | M | Updated to record documentation changes for Part 7. |
 | `CHANGELOG.md` | M | Added notes for Part 7. |
+
+# Additional updates for the eighth part of the 2025‑08‑19 sprint
+
+| Path | Status | Notes |
+|---|---|---|
+| `src/repositories/notesRepository.js` | A | New repository to persist notes dropped in the world, with CRUD helpers. |
+| `src/routes/notes.routes.js` | A | New routes exposing `/v1/notes` (GET and POST) and `/v1/notes/{id}` (DELETE). |
+| `src/migrations/012_add_notes.sql` | A | Migration creating the `notes` table with coordinates and timestamps. |
+| `src/app.js` | M | Mounted the notes routes. |
+| `openapi/api.yaml` | M | Added `Note` and `NoteCreateRequest` schemas and new paths for notes. |
+| `DOCS/progress-ledger.md` | M | Added entries 58–63 to document skip decisions and the creation of the notes API. |
+| `DOCS/index.md` | M | Added Part 8 sprint overview detailing the notes API and skip decisions. |
+| `DOCS/modules/notes.md` | A | New module documentation describing the notes domain, endpoints, schema and troubleshooting. |
+| `MANIFEST.md` | M | Updated to include Part 8 file additions and modifications. |
+| `CHANGELOG.md` | M | Appended Part 8 notes describing the new notes API and updated docs. |
