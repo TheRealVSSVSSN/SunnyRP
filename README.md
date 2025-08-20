@@ -77,6 +77,8 @@ Error codes include `INVALID_INPUT`, `UNAUTHENTICATED`, `FORBIDDEN`, `NOT_FOUND`
 
 ## Installation and Setup
 
+#### This server is not ready for use but the installation and setup docs are currently useful to understand the server. Everything here is subject to change and likely will change
+
 ### Prerequisites
 
 - **Node.js** LTS (≥18) and **npm**【67730289104851†L170-L174】.
@@ -195,6 +197,15 @@ Below is a summary of the core routes.  For full request/response schemas, consu
 | `GET` | `/v1/config/live` | Returns current feature flags and world settings (e.g. time, weather)【67730289104851†L56-L58】. |
 | `POST` | `/v1/config/live` | Update live config.  Body may include `features` (object mapping module names to booleans) and/or `settings` (object with `Time` and `Weather` subobjects).  Requires admin privileges. |
 
+### Driving & Drift School
+
+| Method | Path | Description |
+|-------|-----|-------------|
+| `POST` | `/v1/driving-tests` | Record a new driving test.  Requires `cid`, `icid`, `points` and `passed` in the request body.  Optionally includes `instructor` name and a JSON `results` payload.  Returns the persisted test with its new `id`. |
+| `GET` | `/v1/driving-tests` | List recent driving tests for a player by passing `cid` as a query parameter; returns up to 5 tests in descending order. |
+| `GET` | `/v1/driving-tests/{id}` | Retrieve a specific driving test by its numeric ID.  Returns the full test record or `404` if not found. |
+| `POST` | `/v1/driftschool/pay` | Withdraw funds from a player's account to pay for drift school participation.  Requires `playerId` and positive `amount` in the body.  Returns the new account balance or an insufficient funds error. |
+
 The default config shape looks like【67730289104851†L128-L146】:
 
 ```json
@@ -266,6 +277,13 @@ In addition to the core identity, permissions, characters and admin APIs describ
 | `POST` | `/v1/jobs/assign` | Assign a player to a job (body: `{ playerId, jobId }`). |
 | `POST` | `/v1/jobs/duty` | Toggle a player’s duty status for a job (body: `{ playerId, jobId, onDuty }`). |
 | `GET` | `/v1/jobs/:playerId/assignments` | List all job assignments for a player with duty status. |
+
+#### Weapons & Ammo
+
+| Method | Path | Description |
+|-------|-----|-------------|
+| `GET` | `/v1/players/{playerId}/ammo` | Retrieve a player’s ammunition counts as an object keyed by weapon type. |
+| `PATCH` | `/v1/players/{playerId}/ammo` | Update the ammunition count for a specific weapon type (body: `{ weaponType, ammo }`). |
 
 These endpoints round out the foundation of `srp-base`.  Together with the previously documented identity, permissions, config and outbox APIs they provide a **complete backend** capable of supporting all future gameplay modules.  Lua resources can rely on these endpoints to persist and retrieve state while implementing their own behaviour.
 
