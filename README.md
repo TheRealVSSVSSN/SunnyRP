@@ -5,10 +5,25 @@
 ## Overview
 This document outlines the evolving structure for the Sunny Roleplay (Sunny RP / SRP) server. SunnyRoleplay runs on a custom framework designed for clarity, modularity, and long-term maintainability.
 
+### Server duel environment:
+
+```
+Client: Lua (For client scripts)
+Client: HTML (For NUI)
+Client: CSS (For NUI)
+Client: Javascript (For NUI)
+Server: Node.JS (For data handling and services that can be handled outside of the game environment to help maintain performance)
+Server: Lua (To make calls via PerformHTTPRequest to the Node.JS api and as a backup with the same functionality of the Node.JS server incase the Node.JS server is unavailable or backed up.)
+Server: Javascript (Another backup to help ensure stability.)
+```
+
+#### Note to developers:
+Backup server code within Lua and Javascript will function exactly as the Node.JS server. Consistency is important here. If Node.JS gets an update then server backups in Lua and Javascript will also need to mirror the update before the new version final release or the code will likey break.
+
 ## Repository Layout (simplified)
 The structure below is illustrative and may change over time.
 
-```text
+```
 ├── LICENSE
 ├── README.md
 ├── backend
@@ -64,7 +79,6 @@ The structure below is illustrative and may change over time.
 ```
 
 ## SunnyRP Base API (srp-base) [Framework] Documentation (Current microservice in progress.)
-
 This document provides a comprehensive overview of the `srp-base` microservice—the authoritative backend for the SunnyRP FiveM server.  It covers the service’s purpose, architecture, configuration, database schema, security model and endpoints, along with guidance for installation, deployment and integration with FiveM Lua resources.
 
 ## Purpose and Overview
