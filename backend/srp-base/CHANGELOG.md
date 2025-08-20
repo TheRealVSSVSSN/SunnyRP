@@ -367,24 +367,3 @@ This sprint was a documentation‑only update.  No new endpoints, migrations or 
 ### Notes (2025‑08‑21)
 
 This sprint continued the systematic audit of NoPixel resources.  The vast majority of modules processed (from `np‑securityheists` to `outlawalert`) either contained only client scripts or relayed events without persisting state【644264532347613†L0-L9】【147099589493415†L0-L17】.  These were skipped or deferred.  The notable exception was **np‑weapons**, which keeps ammunition counts in a SQL table and updates them via events【735206341651753†L6-L44】.  To provide equivalent functionality, we created the **player ammunition API** described above.  We also fixed an OpenAPI misplacement for the websites POST endpoint.  No other endpoints or migrations were modified.  Future sprints will address remaining resources such as `pNotify`, `pPassword`, `ped`, `phone`, `police` and others.
-
-### Added (2025‑08‑20 – Part 10)
-
-* **Vehicle condition API.**  Introduced new endpoints to retrieve and update a vehicle’s condition (engine damage, body damage, fuel level and component degradation).  Added:
-  * Migration `017_add_vehicle_condition.sql` to add `engine_damage`, `body_damage`, `fuel` and `degradation` columns to the `vehicles` table.
-  * Functions `getVehicleConditionByPlate`, `updateVehicleConditionByPlate` and `updateVehicleDegradationByPlate` in `vehiclesRepository.js`.
-  * Routes in `vehicles.routes.js` providing `GET /v1/vehicles/{plate}/condition`, `PATCH /v1/vehicles/{plate}/condition`, and `PATCH /v1/vehicles/{plate}/degradation`.
-  * New schemas (`VehicleCondition`, `VehicleConditionUpdateRequest`, `VehicleDegradationUpdateRequest`) and path definitions in `openapi/api.yaml`.
-
-### Changed (2025‑08‑20 – Part 10)
-
-* **vehiclesRepository.js** – Extended to support reading and updating condition fields and degradation array.
-* **vehicles.routes.js** – Added new routes for condition retrieval and updates.
-* **openapi/api.yaml** – Added definitions and paths for vehicle condition management.
-* **progress‑ledger.md** – Added entries 129–141 recording the extension of vehicles API and skip/defer decisions for resources from `veh` through `yarn`.
-* **index.md** – Added a sprint overview for Part 10 detailing the vehicle condition API and processed resources.
-* **MANIFEST.md** – Updated to record the new migration and modifications.
-
-### Notes (2025‑08‑20 – Part 10)
-
-This sprint focused on the later `veh`–`yarn` resources.  Only the **veh** resource required backend support.  We extended the vehicles API to handle condition tracking based on engine and body damage, fuel level and a degradation array, mirroring the behaviour of the Nopixel `veh` script【694334601143938†L14-L84】【694334601143938†L76-L113】.  Complex dealership logic in `veh_shop` and `veh_shop_imports` was deferred for a dedicated vehicles service【502841985823853†L20-L179】【502841985823853†L184-L233】.  All other resources inspected (lux_vehcontrol, lmfao, koillove, k9, gabz_mrpd, gabz_pillbox_hospital, emotes, webpack, wk_wrs, yarn) lacked server code and were skipped【888760073244974†L12-L34】【663963080467880†L1-L26】【918376698318068†L2-L44】.  The new endpoints adopt the existing authentication, idempotency and error handling conventions.

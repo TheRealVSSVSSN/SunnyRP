@@ -122,14 +122,3 @@ Legend: **A** = Added, **M** = Modified.
 | `docs/BASE_API_DOCUMENTATION.md` | M | Added a **Weapons & Ammo** section summarising the new ammo endpoints. |
 | `MANIFEST.md` | M | Updated to include this section and list new files/changes. |
 | `CHANGELOG.md` | M | Appended notes for the 2025‑08‑21 sprint covering the ammo API and documentation updates. |
-
-# Additional updates for the 2025‑08‑20 (Part 10) sprint
-
-| Path | Status | Notes |
-|---|---|---|
-| `src/migrations/017_add_vehicle_condition.sql` | A | Migration adding engine_damage, body_damage, fuel and degradation columns to the vehicles table. |
-| `src/routes/vehicles.routes.js` | M | Added endpoints to retrieve and update vehicle condition (`/v1/vehicles/{plate}/condition`) and update degradation (`/v1/vehicles/{plate}/degradation`). |
-| `src/repositories/vehiclesRepository.js` | M | Added functions to get and update engine/body damage, fuel and degradation values for a vehicle. |
-| `openapi/api.yaml` | M | Added `VehicleCondition`, `VehicleConditionUpdateRequest` and `VehicleDegradationUpdateRequest` schemas; documented new vehicle condition and degradation paths. |
-| `DOCS/progress-ledger.md` | M | Added entries 129–141 summarising decisions for veh through yarn resources and noting the vehicle condition API. |
-| `DOCS/index.md` | M | Added sprint overview for Part 10 detailing the vehicle condition API and processed resources. |
