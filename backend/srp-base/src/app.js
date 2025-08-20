@@ -62,6 +62,9 @@ const websitesRoutes = require('./routes/websites.routes');
 // notes domain route
 const notesRoutes = require('./routes/notes.routes');
 
+// secondary jobs domain route
+const secondaryJobsRoutes = require('./routes/secondaryJobs.routes');
+
 const app = express();
 
 // Capture raw body for HMAC signature verification
@@ -138,6 +141,9 @@ app.use(websitesRoutes);
 
 // mount notes routes
 app.use(notesRoutes);
+
+// mount secondary jobs routes
+app.use(secondaryJobsRoutes);
 
 // Rate limiting on admin endpoints (simple example).  Limit to 10
 // requests per minute per IP.  In a production environment this
