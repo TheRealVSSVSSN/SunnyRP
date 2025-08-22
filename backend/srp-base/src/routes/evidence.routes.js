@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/v1/evidence/items', async (req, res) => {
   try {
     const items = await evidenceRepo.getItems();
-    sendOk(res, items, res.locals.requestId, res.locals.traceId);
+    sendOk(res, { items }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'INTERNAL_ERROR', message: 'Failed to fetch evidence' }, 500, res.locals.requestId, res.locals.traceId);
   }
@@ -21,7 +21,7 @@ router.get('/v1/evidence/items/:id', async (req, res) => {
     if (!item) {
       return sendError(res, { code: 'NOT_FOUND', message: 'Item not found' }, 404, res.locals.requestId, res.locals.traceId);
     }
-    sendOk(res, item, res.locals.requestId, res.locals.traceId);
+    sendOk(res, { item }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'INTERNAL_ERROR', message: 'Failed to fetch item' }, 500, res.locals.requestId, res.locals.traceId);
   }
@@ -35,7 +35,7 @@ router.post('/v1/evidence/items', express.json(), async (req, res) => {
   }
   try {
     const item = await evidenceRepo.createItem({ type, description, location, owner, metadata });
-    sendOk(res, item, res.locals.requestId, res.locals.traceId);
+    sendOk(res, { item }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'INTERNAL_ERROR', message: 'Failed to create item' }, 500, res.locals.requestId, res.locals.traceId);
   }
@@ -48,7 +48,7 @@ router.patch('/v1/evidence/items/:id', express.json(), async (req, res) => {
     if (!item) {
       return sendError(res, { code: 'NOT_FOUND', message: 'Item not found' }, 404, res.locals.requestId, res.locals.traceId);
     }
-    sendOk(res, item, res.locals.requestId, res.locals.traceId);
+    sendOk(res, { item }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'INTERNAL_ERROR', message: 'Failed to update item' }, 500, res.locals.requestId, res.locals.traceId);
   }

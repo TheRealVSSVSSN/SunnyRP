@@ -283,6 +283,16 @@ In addition to the core identity, permissions, characters and admin APIs describ
 | `GET` | `/v1/players/{playerId}/ammo` | Retrieve a player’s ammunition counts as an object keyed by weapon type. |
 | `PATCH` | `/v1/players/{playerId}/ammo` | Update the ammunition count for a specific weapon type (body: `{ weaponType, ammo }`). |
 
+#### Evidence (Forensic Items)
+
+| Method | Path | Description |
+|-------|-----|-------------|
+| `GET` | `/v1/evidence/items` | List stored evidence items. |
+| `POST` | `/v1/evidence/items` | Create a new evidence item. |
+| `GET` | `/v1/evidence/items/{id}` | Retrieve a specific evidence item. |
+| `PATCH` | `/v1/evidence/items/{id}` | Update fields on an evidence item. |
+| `DELETE` | `/v1/evidence/items/{id}` | Remove an evidence item. |
+=======
 #### Phone (Tweets)
 
 | Method | Path | Description |

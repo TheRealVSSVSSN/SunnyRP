@@ -129,6 +129,15 @@ Legend: **A** = Added, **M** = Modified.
 
 | Path | Status | Notes |
 |---|---|---|
+| `src/routes/evidence.routes.js` | M | Normalised responses to use `{ items }` and `{ item }` envelopes. |
+| `openapi/api.yaml` | M | Added `EvidenceItem` schemas and `/v1/evidence/items` paths. |
+| `docs/modules/evidence.md` | A | Documented the evidence API and schemas. |
+| `docs/index.md` | M | Added Part 2 overview noting evidence documentation work. |
+| `docs/progress-ledger.md` | M | Updated `np‑evidence` row with OpenAPI coverage. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Added evidence endpoints to domain summary. |
+| `MANIFEST.md` | M | Recorded Part 2 file changes. |
+| `CHANGELOG.md` | M | Logged evidence OpenAPI and documentation updates. |
+=======
 | `src/repositories/phoneRepository.js` | A | Query helpers to list and create tweets. |
 | `src/routes/phone.routes.js` | A | New endpoints `/v1/phone/tweets` for listing and creating tweets. |
 | `src/migrations/018_add_tweets.sql` | A | Migration creating `tweets` table with index on time. |

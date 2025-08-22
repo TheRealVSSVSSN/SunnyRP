@@ -449,7 +449,14 @@ these decisions.  Future sprints will continue with `np‑voice`,
 `np‑votesystem`, `np‑warrants`, `np‑weapons`, `np‑webpages`,
 `np‑whitelist` and beyond, adding backend support only where
 persistent state or cross‑player interactions are required.
+---
 
+# Sprint Overview – 2025‑08‑21 (Part 2)
+
+This follow‑up sprint addressed documentation gaps for the **evidence** module. We added OpenAPI schemas and path definitions for evidence items and aligned the route responses with the standard `{ ok, data }` envelope. Module documentation now covers the evidence API.
+
+No new NoPixel resources were processed in this part; the focus was solely on bringing existing evidence functionality into compliance with the service documentation standards.
+=======
 ---
 
 # Sprint Overview – 2025‑08‑21 (Part 2)
