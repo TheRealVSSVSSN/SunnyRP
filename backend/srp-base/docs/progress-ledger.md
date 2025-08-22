@@ -1,9 +1,9 @@
 # Progress Ledger – SRP‑Base Node Backend
 
 This ledger tracks our progress porting server behaviours from the
-NoPixel resources repository into the unified `srp‑base` Node.js
+legacy resources repository into the unified `srp‑base` Node.js
 backend.  For each resource processed, we record its index (based on
-alphabetical ordering in the NoPixel `resources` directory), a brief
+alphabetical ordering in the legacy `resources` directory), a brief
 summary of its server responsibilities, our decision (Skip/Extend/Create),
 and a reference to the patch or commit in this repository.  Only
 server‑side logic is considered; purely client resources are skipped.
@@ -122,5 +122,38 @@ server‑side logic is considered; purely client resources are skipped.
 | 103 | np‑xhair | Client‑side crosshair overlay. | Skip — nothing to port. | — |
 | 104 | nui_blocker | Detects devtools and kicks players via event and webhook【499166097351950†L0-L26】. | Skip — simple moderation event; no backend state. | — |
 | 105 | outlawalert | Defines an RGB colour table; no events or persistence【895876963551968†L0-L120】. | Skip — nothing to port. | — |
+
+| 106 | pNotify | Client notification library; no server logic. | Skip — nothing to port. | — |
+| 107 | pPassword | Connection password handler with adaptive card UI. | Skip — handled by resource; no API needed. | — |
+| 108 | ped | Streamed pedestrian models and metadata. | Skip — assets only. | — |
+| 109 | phone | Handles tweets, contacts and calls via MySQL tables. | Create — added phone tweets API. | this sprint |
+| 110 | police | Police utilities interacting with characters and jobs tables. | Skip — covered by existing police routes. | — |
+| 111 | policegarage | Spawns police vehicles using events only. | Skip — nothing to port. | — |
+| 112 | radio | Voice radio controls; no persistence. | Skip — nothing to port. | — |
+| 113 | ragdoll | Toggles ragdoll state for players. | Skip — client effect only. | — |
+| 114 | raid_carmenu | Vehicle menu UI. | Skip — client-only. | — |
+| 115 | raid_cars | Vehicle asset definitions. | Skip — assets only. | — |
+| 116 | raid_clothes | Clothing asset definitions. | Skip — assets only. | — |
+| 117 | rconlog | Logs RCON commands to file. | Skip — handled externally. | — |
+| 118 | runcode | Admin utility to execute code. | Skip — out of scope. | — |
+| 119 | sessionmanager | Manages player sessions internally. | Skip — FiveM core feature. | — |
+| 120 | shops | Shop configuration and events. | Skip — existing shops API covers this. | — |
+| 121 | spawnmanager | Core spawn logic for FiveM. | Skip — engine feature. | — |
+| 122 | stereo | Client boombox audio. | Skip — nothing to port. | — |
+| 123 | storage | Client inventory storage; no server script. | Skip — nothing to port. | — |
+| 124 | tf-pointing | Client pointing emote. | Skip — nothing to port. | — |
+| 125 | towtruckjob | Tow job payouts and vehicle spawning; updates delivery_job table. | Defer — requires jobs subsystem. | — |
+| 126 | trains | Simple train request event. | Skip — event relay only. | — |
+| 127 | truckerjob | Delivery jobs using `delivery_job` table. | Defer — needs jobs subsystem. | — |
+| 128 | uitest | UI testing resource. | Skip — nothing to port. | — |
+| 129 | veh | Vehicle condition queries on `characters_cars` table. | Skip — existing vehicles API covers condition. | — |
+| 130 | veh_shop | Vehicle dealership and financing. | Defer — complex feature for future sprint. | — |
+| 131 | veh_shop_imports | Import dealership logic. | Defer — part of vehicle shop system. | — |
+| 132 | warmenu | Menu library; client-only. | Skip — nothing to port. | — |
+| 133 | webpack | Build tool configuration. | Skip — not gameplay code. | — |
+| 134 | wk_wrs | Radar UI client scripts. | Skip — nothing to port. | — |
+| 135 | yarn | Packaging utility for development. | Skip — not a runtime resource. | — |
+| 136 | openapi-spec | Fixed missing path parameter for `/v1/characters/{id}` and added 4xx responses & operationIds to phone tweets. | Extend | openapi/api.yaml |
+| 137 | openapi-spec | Added `operationId` for note deletion to satisfy lint rule. | Extend | openapi/api.yaml |
 
 **Legend:** *Skip* – no action taken because equivalent functionality already exists or the resource is client‑side. *Extend* – partially implemented; only missing behaviour added. *Create* – new module/endpoints created to port behaviour.

@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS tweets (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  handle VARCHAR(64) NOT NULL,
+  message VARCHAR(280) NOT NULL,
+  time BIGINT NOT NULL,
+  INDEX idx_tweets_time (time)
+);

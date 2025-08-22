@@ -78,6 +78,88 @@ components:
           type: object
           additionalProperties: true
           description: Arbitrary result details encoded as JSON
+
+    # Weed plant record
+    WeedPlant:
+      type: object
+      properties:
+        id:
+          type: integer
+        coords:
+          type: object
+          properties:
+            x:
+              type: number
+            y:
+              type: number
+            z:
+              type: number
+          required:
+            - x
+            - y
+            - z
+        seed:
+          type: string
+          description: Seed identifier used when planting
+        ownerId:
+          type: integer
+          description: Player identifier who owns the plant
+        growth:
+          type: integer
+          description: Growth percentage or arbitrary unit
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    # Website record
+    Website:
+      type: object
+      properties:
+        id:
+          type: integer
+        owner_id:
+          type: integer
+          description: Character ID of the website owner
+        name:
+          type: string
+          description: Website title
+        keywords:
+          type: string
+          nullable: true
+          description: Space separated keywords for search
+        description:
+          type: string
+          nullable: true
+          description: Optional description of the website
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    # Request body for creating a website
+    WebsiteCreateRequest:
+      type: object
+      required:
+        - ownerId
+        - name
+      properties:
+        ownerId:
+          type: integer
+          description: Character ID of the website owner
+        name:
+          type: string
+          description: Website title
+        keywords:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
         created_at:
           type: string
           format: date-time
@@ -98,6 +180,170 @@ components:
         amount:
           type: number
           description: Amount in whole cents to pay for drift school
+
+    # Harness response
+    VehicleHarness:
+      type: object
+      properties:
+        harness:
+          type: integer
+          nullable: true
+          description: Harness durability; null if not installed or unknown
+
+    # Harness update request
+    HarnessUpdateRequest:
+      type: object
+      required:
+        - durability
+      properties:
+        durability:
+          type: integer
+          description: New harness durability value
+
+    # Plate change request
+    PlateChangeRequest:
+      type: object
+      required:
+        - oldPlate
+        - newPlate
+      properties:
+        oldPlate:
+          type: string
+          description: Existing license plate number
+        newPlate:
+          type: string
+          description: New license plate number to assign
+
+    # Secondary job record
+    SecondaryJob:
+      type: object
+      properties:
+        id:
+          type: integer
+        playerId:
+          type: string
+        job:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    # Secondary job create request
+    SecondaryJobCreateRequest:
+      type: object
+      required:
+        - playerId
+        - job
+      properties:
+        playerId:
+          type: string
+          description: Identifier of the character receiving the secondary job
+        job:
+          type: string
+          description: Name of the secondary job to assign
+
+    # Note record
+    Note:
+      type: object
+      properties:
+        id:
+          type: integer
+        text:
+          type: string
+          description: The contents of the note
+        x:
+          type: number
+          description: X coordinate where the note is placed
+        y:
+          type: number
+          description: Y coordinate where the note is placed
+        z:
+          type: number
+          description: Z coordinate where the note is placed
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    # Player ammunition inventory
+    PlayerAmmo:
+      type: object
+      description: |
+        A map of weapon types to ammunition counts for a single player. Each key
+        corresponds to a weapon type string (e.g. "WEAPON_PISTOL") and the value
+        is the number of rounds of ammunition currently held.
+      additionalProperties:
+        type: integer
+
+    # Ammo update request
+    AmmoUpdateRequest:
+      type: object
+      required:
+        - weaponType
+        - ammo
+      properties:
+        weaponType:
+          type: string
+          description: Weapon type name (e.g. "WEAPON_PISTOL")
+        ammo:
+          type: integer
+          description: Number of rounds remaining for the weapon type
+
+    # Request body for creating a note
+    NoteCreateRequest:
+      type: object
+      required:
+        - text
+        - x
+        - y
+        - z
+      properties:
+        text:
+          type: string
+          description: The contents of the note
+        x:
+          type: number
+          description: X coordinate where the note is placed
+        y:
+          type: number
+          description: Y coordinate where the note is placed
+        z:
+          type: number
+          description: Z coordinate where the note is placed
+
+    Tweet:
+      type: object
+      properties:
+        handle:
+          type: string
+          maxLength: 64
+        message:
+          type: string
+          maxLength: 280
+        time:
+          type: integer
+          format: int64
+
+    TweetCreateRequest:
+      type: object
+      required:
+        - handle
+        - message
+      properties:
+        handle:
+          type: string
+          maxLength: 64
+        message:
+          type: string
+          maxLength: 280
+        time:
+          type: integer
+          format: int64
 security:
   - ApiToken: []
 paths:
@@ -236,14 +482,14 @@ paths:
         '200':
           description: Created character
   /v1/characters/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
     get:
       summary: Get a character by id
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
       responses:
         '200':
           description: Character object
@@ -614,3 +860,672 @@ paths:
                 properties:
                   id:
                     type: integer
+
+  # Weed plant management
+  /v1/weed-plants:
+    get:
+      summary: List all weed plants
+      responses:
+        '200':
+          description: List of weed plants
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      plants:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/WeedPlant'
+    post:
+      summary: Create a weed plant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - coords
+                - seed
+                - ownerId
+              properties:
+                coords:
+                  type: object
+                  required:
+                    - x
+                    - y
+                    - z
+                  properties:
+                    x:
+                      type: number
+                    y:
+                      type: number
+                    z:
+                      type: number
+                seed:
+                  type: string
+                ownerId:
+                  type: integer
+      responses:
+        '200':
+          description: Created weed plant
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      plant:
+                        $ref: '#/components/schemas/WeedPlant'
+  /v1/weed-plants/{id}:
+    patch:
+      summary: Update weed plant growth
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - growth
+              properties:
+                growth:
+                  type: integer
+      responses:
+        '200':
+          description: Updated weed plant
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      plant:
+                        $ref: '#/components/schemas/WeedPlant'
+    delete:
+      summary: Delete a weed plant
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Weed plant deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+
+  # Website management
+  /v1/websites:
+    get:
+      summary: List websites
+      description: >
+        Returns a list of all websites.  Provide `ownerId` as a query
+        parameter to filter by a specific character ID.  Without
+        `ownerId` the endpoint returns all websites.
+      parameters:
+        - name: ownerId
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Character ID to filter websites
+      responses:
+        '200':
+          description: List of websites
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      websites:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Website'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+    post:
+      summary: Create a new website
+      description: >
+        Creates a new website entry for the given character.  The server
+        deducts a fixed fee of $500 from the player's cash balance.  If the
+        player does not have sufficient funds a 400 error is returned.  On
+        success, the created website record is returned.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebsiteCreateRequest'
+      responses:
+        '200':
+          description: Website created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      website:
+                        $ref: '#/components/schemas/Website'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          description: Invalid input or insufficient funds
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+
+  # Player ammunition management
+  /v1/players/{playerId}/ammo:
+    get:
+      summary: List a player's ammunition counts
+      parameters:
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of ammo counts for the player
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      ammo:
+                        $ref: '#/components/schemas/PlayerAmmo'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+    patch:
+      summary: Update ammunition count for a weapon type
+      parameters:
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AmmoUpdateRequest'
+      responses:
+        '200':
+          description: Ammo updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      ammo:
+                        $ref: '#/components/schemas/PlayerAmmo'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+
+  # Notes management
+  /v1/notes:
+    get:
+      summary: List all notes
+      responses:
+        '200':
+          description: List of notes
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      notes:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Note'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+    post:
+      summary: Create a note
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NoteCreateRequest'
+      responses:
+        '200':
+          description: Note created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      note:
+                        $ref: '#/components/schemas/Note'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+
+  # Vehicle harness management
+  /v1/vehicles/harness/{plate}:
+    get:
+      summary: Get the harness durability for a vehicle
+      parameters:
+        - in: path
+          name: plate
+          required: true
+          schema:
+            type: string
+          description: License plate of the vehicle
+      responses:
+        '200':
+          description: Harness value
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/VehicleHarness'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+    patch:
+      summary: Update the harness durability for a vehicle
+      parameters:
+        - in: path
+          name: plate
+          required: true
+          schema:
+            type: string
+          description: License plate of the vehicle
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HarnessUpdateRequest'
+      responses:
+        '200':
+          description: Harness updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      updated:
+                        type: integer
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+
+  # Vehicle plate change
+  /v1/vehicles/plate-change:
+    post:
+      summary: Change a vehicle's license plate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlateChangeRequest'
+      responses:
+        '200':
+          description: Plate updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      updated:
+                        type: integer
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+
+  # Secondary jobs
+  /v1/secondary-jobs:
+    get:
+      summary: List secondary jobs for a player
+      parameters:
+        - in: query
+          name: playerId
+          required: true
+          schema:
+            type: string
+          description: Identifier of the character whose secondary jobs to list
+      responses:
+        '200':
+          description: List of secondary jobs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SecondaryJob'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+    post:
+      summary: Assign a new secondary job to a player
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecondaryJobCreateRequest'
+      responses:
+        '200':
+          description: Secondary job created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+    delete:
+      summary: Remove all secondary jobs for a player
+      parameters:
+        - in: query
+          name: playerId
+          required: true
+          schema:
+            type: string
+          description: Identifier of the character whose secondary jobs should be removed
+      responses:
+        '200':
+          description: Secondary jobs removed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      deleted:
+                        type: integer
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+
+  /v1/notes/{id}:
+    delete:
+      summary: Delete a note
+      operationId: deleteNote
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Note deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          description: Invalid ID supplied
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+
+  /v1/phone/tweets:
+    get:
+      summary: List recent tweets
+      operationId: listTweets
+      responses:
+        '200':
+          description: List of tweets
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      tweets:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Tweet'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          description: Invalid input
+    post:
+      summary: Create a tweet
+      operationId: createTweet
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TweetCreateRequest'
+      responses:
+        '200':
+          description: Created tweet
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      tweet:
+                        $ref: '#/components/schemas/Tweet'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          description: Invalid input

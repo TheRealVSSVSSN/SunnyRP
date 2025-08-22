@@ -315,6 +315,35 @@ components:
         z:
           type: number
           description: Z coordinate where the note is placed
+
+    Tweet:
+      type: object
+      properties:
+        handle:
+          type: string
+          maxLength: 64
+        message:
+          type: string
+          maxLength: 280
+        time:
+          type: integer
+          format: int64
+
+    TweetCreateRequest:
+      type: object
+      required:
+        - handle
+        - message
+      properties:
+        handle:
+          type: string
+          maxLength: 64
+        message:
+          type: string
+          maxLength: 280
+        time:
+          type: integer
+          format: int64
 security:
   - ApiToken: []
 paths:
@@ -453,14 +482,14 @@ paths:
         '200':
           description: Created character
   /v1/characters/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
     get:
       summary: Get a character by id
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
       responses:
         '200':
           description: Character object
@@ -1399,6 +1428,7 @@ paths:
   /v1/notes/{id}:
     delete:
       summary: Delete a note
+      operationId: deleteNote
       parameters:
         - name: id
           in: path
@@ -1441,3 +1471,61 @@ paths:
                     type: string
                   traceId:
                     type: string
+
+  /v1/phone/tweets:
+    get:
+      summary: List recent tweets
+      operationId: listTweets
+      responses:
+        '200':
+          description: List of tweets
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      tweets:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Tweet'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          description: Invalid input
+    post:
+      summary: Create a tweet
+      operationId: createTweet
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TweetCreateRequest'
+      responses:
+        '200':
+          description: Created tweet
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      tweet:
+                        $ref: '#/components/schemas/Tweet'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          description: Invalid input
