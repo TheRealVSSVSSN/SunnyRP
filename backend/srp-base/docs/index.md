@@ -429,9 +429,4 @@ these decisions.  Future sprints will continue with `np‑voice`,
 `np‑votesystem`, `np‑warrants`, `np‑weapons`, `np‑webpages`,
 `np‑whitelist` and beyond, adding backend support only where
 persistent state or cross‑player interactions are required.
-# Sprint Overview – 2025‑08‑21 (Contracts module restore)
 
-A brief maintenance sprint restored the contracts domain that was
-referenced in documentation but missing from the codebase. The update
-adds a repository, routes and a database migration so contracts can be
-created, accepted or declined via the API.

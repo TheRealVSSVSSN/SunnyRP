@@ -124,14 +124,3 @@ Legend: **A** = Added, **M** = Modified.
 | `CHANGELOG.md` | M | Appended notes for the 2025‑08‑21 sprint covering the ammo API and documentation updates. |
 
 
-# Additional updates for the 2025‑08‑21 sprint (contracts restore)
-
-| Path | Status | Notes |
-|---|---|---|
-| `src/repositories/contractsRepository.js` | A | Repository for contract CRUD operations and status updates. |
-| `src/routes/contracts.routes.js` | A | Routes for listing, creating, accepting and declining contracts. |
-| `src/migrations/018_add_contracts.sql` | A | Migration adding the `contracts` table with sender/receiver, amount and status flags. |
-| `docs/modules/contracts.md` | A | Module documentation for the contracts API. |
-| `docs/index.md` | M | Added overview for contracts restore. |
-| `CHANGELOG.md` | M | Recorded restoration of the contracts module. |
-| `MANIFEST.md` | M | Logged this update. |
