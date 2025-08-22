@@ -122,3 +122,12 @@ Legend: **A** = Added, **M** = Modified.
 | `docs/BASE_API_DOCUMENTATION.md` | M | Added a **Weapons & Ammo** section summarising the new ammo endpoints. |
 | `MANIFEST.md` | M | Updated to include this section and list new files/changes. |
 | `CHANGELOG.md` | M | Appended notes for the 2025‑08‑21 sprint covering the ammo API and documentation updates. |
+
+# Additional updates for the 2025‑08‑22 sprint
+
+| Path | Status | Notes |
+|---|---|---|
+| `openapi/api.yaml` | M | Documented evidence item endpoints and schemas. |
+| `docs/progress-ledger.md` | M | Updated entry for evidence module to note OpenAPI coverage. |
+| `docs/index.md` | M | Added sprint overview for evidence documentation. |
+| `docs/modules/evidence.md` | A | New module documentation describing evidence API. |
