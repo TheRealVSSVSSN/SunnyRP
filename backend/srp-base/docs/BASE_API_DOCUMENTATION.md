@@ -363,7 +363,7 @@ By adhering to this documentation and the provided templates, you can build out 
 
 ## Additional Domain Services (Dispatch, Evidence, EMS, Keys, Loot)
 
-To support all features present in the original NoPixelServer resources at the framework level without introducing gameplay logic, the SunnyRP repository includes several **additional microservices** under `backend/services`: `srp-dispatch`, `srp-evidence`, `srp-ems`, `srp-keys` and `srp-loot`.  Each service mirrors the patterns used in `srp-base`—Express routing, MySQL persistence, token/HMAC authentication, idempotency and rate limiting—and maintains its own database schema and migrations.  These services act as the scaffolding for high‑level gameplay modules that will be written in Lua later.
+To support all features present in the original server resources at the framework level without introducing gameplay logic, the SunnyRP repository includes several **additional microservices** under `backend/services`: `srp-dispatch`, `srp-evidence`, `srp-ems`, `srp-keys` and `srp-loot`.  Each service mirrors the patterns used in `srp-base`—Express routing, MySQL persistence, token/HMAC authentication, idempotency and rate limiting—and maintains its own database schema and migrations.  These services act as the scaffolding for high‑level gameplay modules that will be written in Lua later.
 
 - **srp-dispatch** – Centralised storage and management of dispatch alerts (e.g. 911 calls, panic buttons).  It exposes:
   - `GET /v1/dispatch/alerts` – List recent dispatch alerts.
@@ -397,4 +397,4 @@ To support all features present in the original NoPixelServer resources at the f
   - `PATCH /v1/loot/items/:id` – Update fields on a loot item.
   - `DELETE /v1/loot/items/:id` – Remove a loot item after it is collected or expired.
 
-These services run on separate ports (3080 for dispatch, 3090 for evidence, 3100 for EMS, 3110 for keys and 3120 for loot) and require their own environment variables (database credentials, API token, HMAC secret, etc.).  By providing them now, the backend offers a **complete foundation** for every NoPixel resource.  Future Lua resources will call these APIs to create and retrieve alerts, evidence, medical records, keys or loot, but no gameplay logic exists on the backend; it merely stores and retrieves data.
+These services run on separate ports (3080 for dispatch, 3090 for evidence, 3100 for EMS, 3110 for keys and 3120 for loot) and require their own environment variables (database credentials, API token, HMAC secret, etc.).  By providing them now, the backend offers a **complete foundation** for every original resource.  Future Lua resources will call these APIs to create and retrieve alerts, evidence, medical records, keys or loot, but no gameplay logic exists on the backend; it merely stores and retrieves data.

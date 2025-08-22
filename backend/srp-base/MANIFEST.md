@@ -9,7 +9,7 @@ listed here.  Files not mentioned were left untouched.
 | `src/repositories/jobsRepository.js` | M | Added `countPlayersForJob` and `getJobByName` helpers to support the broadcaster module. |
 | `src/routes/broadcaster.routes.js` | A | New route for assigning the broadcaster job while enforcing a maximum number of concurrent broadcasters. |
 | `src/app.js` | M | Mounted the new broadcaster route. |
-| `DOCS/progress-ledger.md` | A | Progress log for processed NoPixel resources and decisions. |
+| `DOCS/progress-ledger.md` | A | Progress log for processed original resources and decisions. |
 | `DOCS/index.md` | A | Sprint overview summarising tasks and outcomes. |
 | `DOCS/modules/broadcaster.md` | A | Per‑module documentation describing the broadcaster API. |
 
@@ -122,3 +122,14 @@ Legend: **A** = Added, **M** = Modified.
 | `docs/BASE_API_DOCUMENTATION.md` | M | Added a **Weapons & Ammo** section summarising the new ammo endpoints. |
 | `MANIFEST.md` | M | Updated to include this section and list new files/changes. |
 | `CHANGELOG.md` | M | Appended notes for the 2025‑08‑21 sprint covering the ammo API and documentation updates. |
+# Documentation Sanitization – 2025-08-21
+
+| Path | Status | Notes |
+|---|---|---|
+| `CHANGELOG.md` | M | Noted removal of external brand references. |
+| `MANIFEST.md` | M | Added this section. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Replaced explicit brand mentions with neutral terminology. |
+| `docs/index.md` | M | Scrubbed brand references from sprint overviews. |
+| `docs/modules/broadcaster.md` | M | Generalised module description. |
+| `src/routes/broadcaster.routes.js` | M | Removed brand reference in comments. |
+| `src/routes/websites.routes.js` | M | Removed brand reference in comments. |
