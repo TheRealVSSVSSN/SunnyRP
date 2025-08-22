@@ -429,16 +429,4 @@ these decisions.  Future sprints will continue with `np‑voice`,
 `np‑votesystem`, `np‑warrants`, `np‑weapons`, `np‑webpages`,
 `np‑whitelist` and beyond, adding backend support only where
 persistent state or cross‑player interactions are required.
----
-# Sprint Overview – 2025‑08‑22
 
-This documentation sprint added missing OpenAPI coverage for the existing
-evidence module. The evidence routes were implemented in earlier work but
-lacked formal specification.
-
-### Highlights
-
-* **Evidence OpenAPI** – documented CRUD endpoints for evidence items and introduced `EvidenceItem` schemas.
-* **Module docs** – added `docs/modules/evidence.md` describing repository, routes and schemas.
-
-No database schema changes were required in this sprint.
