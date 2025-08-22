@@ -12,6 +12,8 @@ There is no feature flag for the phone module; it is always enabled.
 |---|---|---|---|---|---|---|
 | **GET `/v1/phone/tweets`** | Retrieve up to the 50 most recent tweets in chronological order. | 60/min per IP | Required | Yes | None | `200 { ok, data: { tweets: Tweet[] }, requestId, traceId }` `400 INVALID_INPUT` |
 | **POST `/v1/phone/tweets`** | Create a new tweet with `handle` and `message` (and optional `time`). | 30/min per IP | Required | Yes | `TweetCreateRequest` | `200 { ok, data: { tweet: Tweet }, requestId, traceId }` `400 INVALID_INPUT` |
+| **GET `/v1/phone/tweets`** | Retrieve up to the 50 most recent tweets in chronological order. | 60/min per IP | Required | Yes | None | `{ ok, data: { tweets: Tweet[] }, requestId, traceId }` |
+| **POST `/v1/phone/tweets`** | Create a new tweet with `handle` and `message` (and optional `time`). | 30/min per IP | Required | Yes | `TweetCreateRequest` | `{ ok, data: { tweet: Tweet }, requestId, traceId }` |
 
 ### Schemas
 

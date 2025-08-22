@@ -1501,6 +1501,8 @@ paths:
     post:
       summary: Create a tweet
       operationId: createTweet
+    post:
+      summary: Create a tweet
       requestBody:
         required: true
         content:
@@ -1528,3 +1530,4 @@ paths:
                     type: string
         '400':
           description: Invalid input
+                    type: string

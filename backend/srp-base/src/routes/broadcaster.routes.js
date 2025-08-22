@@ -18,6 +18,8 @@ const MAX_BROADCASTERS = Number.parseInt(process.env.MAX_BROADCASTERS, 10) || 5;
  * assignment uses the existing jobs repository and does not toggle
  * duty; additional logic to set on-duty status can be added by
  * callers.
+=======
+ * Routes for managing broadcaster roles. The original Lua resource allowed players to become broadcasters if there were fewer than a set number of active broadcasters. This endpoint implements similar logic on the server-side. It counts the current assignments of the 'broadcaster' job and, if below the configured limit, assigns the job to the requesting player. The assignment uses the existing jobs repository and does not toggle duty; additional logic to set on-duty status can be added by callers.
  */
 const router = express.Router();
 

@@ -9,6 +9,9 @@ resources while conforming to a clean, layered Node.js architecture.
 
 * Added a **broadcaster** module that replicates the behaviour of
   the legacy `np-broadcaster` resource.  A new REST endpoint
+=======
+=======
+  the original `np-broadcaster` resource.  A new REST endpoint
   (`POST /v1/broadcast/attempt`) assigns the `broadcaster` job to
   a player while enforcing a configurable maximum number of
   broadcasters.
@@ -27,6 +30,7 @@ For a full list of processed resources and their decisions, see
 
 This continuation of the 2025‑08‑19 sprint focused on processing
 additional legacy resources and documenting the decisions taken.
+additional original resources and documenting the decisions taken.
 Following the earlier documentation and compliance effort, we
 examined a further set of resources in the order listed by
 GitHub.  Because most of these resources either contain only
@@ -75,6 +79,7 @@ ensure the progress ledger is current.
 
 In this follow‑on sprint we continued our systematic audit of the
 legacy resources, focusing on modules that appear after
+original resources, focusing on modules that appear after
 `np‑base` in the GitHub ordering.  Most resources examined
 contained only client scripts and therefore required no backend
 support.  However, the **np‑contracts** resource contained server
@@ -205,6 +210,7 @@ skipped the unrelated `np‑drugdeliveries` resource.
 
 After completing the weed plants integration, we turned our attention to
 the next batch of legacy resources.  Most were client‑only or
+the next batch of original resources.  Most were client‑only or
 implemented purely cosmetic features, but two stood out: **np‑gurgle**
 and **np‑hospitalization**.  The former provides a phone app for
 purchasing personal websites, while the latter updates patient
@@ -304,8 +310,7 @@ ledger records these skip and defer decisions.  Future sprints will resume with
 `np-phone`, `np-police`, `np-polyzone` and other remaining resources.
 
 # Sprint Overview – 2025‑08‑19 (Part 8)
-
-This sprint continued processing the next set of legacy resources in order,
+This sprint continued processing the next set of original resources in order,
 covering `np‑lost` through `np‑notepad`.  Most of these resources contain
 client‑only scripts or simple event relays with no persistent data, so they were
 **skipped**.  However, the **np‑notepad** resource maintains a `serverNotes`
@@ -346,8 +351,7 @@ across server restarts, filling a gap in the original Lua implementation.
 ---
 
 # Sprint Overview – 2025‑08‑20
-
-In this sprint we continued down the legacy `resources` directory,
+In this sprint we continued down the original `resources` directory,
 processing modules starting from the `np‑o` prefix.  We found that
 most of these resources contain only client‑side scripts or visual
 effects, and therefore require no backend support.  Two notable
@@ -430,7 +434,11 @@ these decisions.  Future sprints will continue with `np‑voice`,
 `np‑whitelist` and beyond, adding backend support only where
 persistent state or cross‑player interactions are required.
 
----
+# Sprint Overview – 2025‑08‑21 (Part 2)
+
+This follow‑up sprint addressed documentation gaps for the **evidence** module. We added OpenAPI schemas and path definitions for evidence items and aligned the route responses with the standard `{ ok, data }` envelope. Module documentation now covers the evidence API.
+
+No new NoPixel resources were processed in this part; the focus was solely on bringing existing evidence functionality into compliance with the service documentation standards.
 
 # Sprint Overview – 2025‑08‑21 (Part 2)
 
@@ -456,4 +464,6 @@ small API to manage these tweets.
 * towtruckjob, truckerjob, veh_shop, veh_shop_imports – depend on a
   fuller jobs/vehicles subsystem; deferred.
 * trains, uitest, veh, warmenu, webpack, wk_wrs, yarn – no persistent
-  server logic; skipped.
+# Sprint Overview – 2025‑08‑21 (Infrastructure)
+
+A short hardening pass added a global `uncaughtException` handler so the server logs unexpected errors and exits cleanly. The reference resource repository was unreachable (HTTP 403), therefore no new gameplay resources were processed in this run.

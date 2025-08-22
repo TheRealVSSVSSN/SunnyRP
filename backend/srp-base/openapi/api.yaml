@@ -315,7 +315,6 @@ components:
         z:
           type: number
           description: Z coordinate where the note is placed
-
     Tweet:
       type: object
       properties:
@@ -345,6 +344,113 @@ components:
           type: integer
           format: int64
 security:
+    # Evidence item record
+    EvidenceItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+          description: Item category or classification
+        description:
+          type: string
+          description: Details about the evidence
+        location:
+          type: string
+          nullable: true
+          description: Optional location description
+        owner:
+          type: string
+          nullable: true
+          description: Owner or subject associated with the item
+        metadata:
+          type: object
+          nullable: true
+          additionalProperties: true
+          description: Arbitrary metadata encoded as JSON
+        description:
+          type: string
+        location:
+          type: string
+          nullable: true
+        owner:
+          type: string
+          nullable: true
+        metadata:
+          type: object
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    # Request body for creating an evidence item
+    EvidenceItemCreateRequest:
+      type: object
+      required:
+        - type
+        - description
+      properties:
+        type:
+          type: string
+          description: Item category or classification
+        description:
+          type: string
+          description: Details about the evidence
+        location:
+          type: string
+          nullable: true
+        owner:
+          type: string
+          nullable: true
+        metadata:
+          type: object
+          nullable: true
+          additionalProperties: true
+
+    # Request body for updating an evidence item
+    EvidenceItemCreateRequest:
+      type: object
+      properties:
+        type:
+          type: string
+        description:
+          type: string
+        location:
+          type: string
+        owner:
+          type: string
+        metadata:
+          type: object
+      required:
+        - type
+        - description
+    EvidenceItemUpdateRequest:
+      type: object
+      properties:
+        type:
+          type: string
+        description:
+          type: string
+        location:
+          type: string
+          nullable: true
+        owner:
+          type: string
+          nullable: true
+        metadata:
+          type: object
+          nullable: true
+          additionalProperties: true
+security:
+        owner:
+          type: string
+        metadata:
+          type: object
+    security:
   - ApiToken: []
 paths:
   /v1/healthz:
@@ -1071,7 +1177,206 @@ paths:
                     type: string
                   traceId:
                     type: string
-
+  # Evidence management
+  /v1/evidence/items:
+    get:
+      summary: List evidence items
+      responses:
+        '200':
+          description: List of evidence items
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      items:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/EvidenceItem'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+    post:
+      summary: Create evidence item
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvidenceItemCreateRequest'
+      responses:
+        '200':
+          description: Evidence item created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      item:
+                        $ref: '#/components/schemas/EvidenceItem'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+  /v1/evidence/items/{id}:
+    get:
+      summary: Fetch evidence item
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Evidence item
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      item:
+                        $ref: '#/components/schemas/EvidenceItem'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+    patch:
+      summary: Update evidence item
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvidenceItemUpdateRequest'
+      responses:
+        '200':
+          description: Evidence item updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      item:
+                        $ref: '#/components/schemas/EvidenceItem'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+    delete:
+      summary: Delete evidence item
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Evidence item deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      deleted:
+                        type: boolean
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
   # Player ammunition management
   /v1/players/{playerId}/ammo:
     get:
@@ -1475,6 +1780,15 @@ paths:
     get:
       summary: List recent tweets
       operationId: listTweets
+  /v1/evidence/items:
+    get:
+      summary: List evidence items
+      responses:
+        '200':
+          description: List of evidence items
+  /v1/phone/tweets:
+    get:
+      summary: List recent tweets
       responses:
         '200':
           description: List of tweets
@@ -1488,6 +1802,10 @@ paths:
                   data:
                     type: object
                     properties:
+                      items:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/EvidenceItem'
                       tweets:
                         type: array
                         items:
@@ -1501,11 +1819,18 @@ paths:
     post:
       summary: Create a tweet
       operationId: createTweet
+    post:
+      summary: Create an evidence item
+      summary: Create a tweet
       requestBody:
         required: true
         content:
           application/json:
             schema:
+              $ref: '#/components/schemas/EvidenceItemCreateRequest'
+      responses:
+        '200':
+          description: Evidence item created
               $ref: '#/components/schemas/TweetCreateRequest'
       responses:
         '200':
@@ -1520,6 +1845,107 @@ paths:
                   data:
                     type: object
                     properties:
+                      item:
+                        $ref: '#/components/schemas/EvidenceItem'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+
+  /v1/evidence/items/{id}:
+    get:
+      summary: Get an evidence item
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Evidence item found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      item:
+                        $ref: '#/components/schemas/EvidenceItem'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '404':
+          description: Item not found
+    patch:
+      summary: Update an evidence item
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvidenceItemUpdateRequest'
+      responses:
+        '200':
+          description: Evidence item updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      item:
+                        $ref: '#/components/schemas/EvidenceItem'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '404':
+          description: Item not found
+    delete:
+      summary: Delete an evidence item
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Evidence item deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      deleted:
+                        type: boolean
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '404':
+          description: Item not found
                       tweet:
                         $ref: '#/components/schemas/Tweet'
                   requestId:
