@@ -22,11 +22,6 @@
 This sprint continues the integration of legacy server behaviours into
 the unified `srp‑base` Node.js backend.  The broadcaster module
 implements the server-side logic of the legacy `np-broadcaster`
-=======
-=======
-This sprint continues the integration of original server behaviours into
-the unified `srp‑base` Node.js backend.  The broadcaster module
-implements the server-side logic of the original `np-broadcaster`
 resource in a RESTful manner.  The limit of concurrent broadcasters
 is configurable via the `MAX_BROADCASTERS` environment variable.
 
@@ -52,9 +47,6 @@ This sprint focused on research, documentation and gap analysis
 rather than new features.  After compiling a framework compliance
 rubric and auditing the existing codebase, we resumed processing
 legacy resources.  The following resources were reviewed:
-=======
-=======
-original resources.  The following resources were reviewed
 
 * **koilWeatherSync** – provides events to sync weather and time; the
   existing `/v1/world/state` endpoints already handle world state via
@@ -231,9 +223,6 @@ logic or require more comprehensive systems (e.g. EMS) to support.
 ### Notes (Part 7)
 
 In this sprint we examined another batch of legacy resources.
-=======
-=======
-In this sprint we examined another batch of original resources.
 `np-infinity` broadcasts players’ coordinates via events and does not
 require persistence【569396379702026†L0-L12】.  `np-interior`, `np-keypad`,
 `np-keys`, `np-lockpicking`, `np-lootsystem` and `np-login` contain
@@ -415,26 +404,3 @@ Cleanup pass to remove external branding and tighten validation on the phone twe
 ### Notes (2025‑08‑23)
 
 Resolved OpenAPI lint error and clarified phone tweet error handling in documentation.
-=======
-=======
-This sprint continued the systematic audit of original resources.  The vast majority of modules processed (from `np‑securityheists` to `outlawalert`) either contained only client scripts or relayed events without persisting state【644264532347613†L0-L9】【147099589493415†L0-L17】.  These were skipped or deferred.  The notable exception was **np‑weapons**, which keeps ammunition counts in a SQL table and updates them via events【735206341651753†L6-L44】.  To provide equivalent functionality, we created the **player ammunition API** described above.  We also fixed an OpenAPI misplacement for the websites POST endpoint.  No other endpoints or migrations were modified.  Future sprints will address remaining resources such as `pNotify`, `pPassword`, `ped`, `phone`, `police` and others.
-=======
-This sprint continued the systematic audit of NoPixel resources.  The vast majority of modules processed (from `np‑securityheists` to `outlawalert`) either contained only client scripts or relayed events without persisting state【644264532347613†L0-L9】【147099589493415†L0-L17】.  These were skipped or deferred.  The notable exception was **np‑weapons**, which keeps ammunition counts in a SQL table and updates them via events【735206341651753†L6-L44】.  To provide equivalent functionality, we created the **player ammunition API** described above.  We also fixed an OpenAPI misplacement for the websites POST endpoint.  No other endpoints or migrations were modified.  Future sprints will address remaining resources such as `pNotify`, `pPassword`, `ped`, `phone`, `police` and others.
-
-### Changed (2025‑08‑21 Part 2)
-
-* **Evidence module.** Normalised route responses to wrap data under `items`, `item` or `deleted` and added corresponding OpenAPI schemas and path definitions.
-* **Documentation.** Added module docs for evidence and updated the progress ledger and API overview.
-
-### Notes (2025‑08‑21 Part 2)
-
-This small follow‑up sprint focused on documenting and standardising the existing evidence functionality. No additional resources were processed and no database changes were required.
-=======
-### Changed (2025‑08‑21 – Infrastructure)
-
-* **src/server.js** – Added global `uncaughtException` handler to log and exit on unexpected errors.
-* **docs/framework-compliance.md** – Updated compliance notes to mention global exception listeners.
-* **docs/index.md** – Added infrastructure sprint overview.
-* **docs/progress-ledger.md** – Noted inability to access reference resource repository.
-* **docs/research-log.md** – New file capturing research and access issue.
-=======

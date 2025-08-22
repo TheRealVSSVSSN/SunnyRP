@@ -7,14 +7,12 @@ alphabetical ordering in the legacy `resources` directory), a brief
 summary of its server responsibilities, our decision (Skip/Extend/Create),
 and a reference to the patch or commit in this repository.  Only
 server‑side logic is considered; purely client resources are skipped.
-
 | Index | Resource | Summary of Server Responsibilities | Decision | Patch Reference |
 |---|---|---|---|---|
 | 1 | baseevents | Handles player connecting, spawning and dropping; registers players and records spawn positions. | Already implemented in initial sprint | — |
 | 2 | coordsaver | Saves, lists and deletes coordinate presets; writes to `srp_coords` table. | Already implemented in initial sprint | — |
 | 3 | PolyZone | Registers, removes and lists named zones; maintains an in‑memory zone registry. | Already implemented in initial sprint | — |
 | 4 | np‑evidence | Receives `evidence:pooled`, `evidence:removal` and `evidence:clear` events; relays them to clients via corresponding events【457964279538678†L0-L15】. | Create — added evidence routes/events to forward these events. Extend — documented evidence API in OpenAPI and module docs. | this sprint |
-=======
 | 4 | np‑evidence | Receives `evidence:pooled`, `evidence:removal` and `evidence:clear` events; relays them to clients via corresponding events【457964279538678†L0-L15】. | Create — added evidence routes/events; OpenAPI and docs extended. | See previous sprint |
 | 5 | np‑eblips | Receives `e-blips:updateBlips` with ped network ID, job and callsign; responds with `e-blips:addHandler` to the sender【423160286560117†L0-L8】. | Create — added blips routes/events to update client blips. | See previous sprint |
 | 6 | np‑dispatch | Central dispatch: listens for `dispatch:svNotify` events with codes 10‑13A/B and others; builds recipient lists and blip data and broadcasts `dispatch:clNotify`; defines commands (`togglealerts`) and alert events【737463347219154†L0-L29】【737463347219154†L30-L111】. | Create — added dispatch routes and logic for notifications, toggles and alert handlers. | See previous sprint |
@@ -24,11 +22,9 @@ server‑side logic is considered; purely client resources are skipped.
 | 10 | np‑actionbar | Client hotbar UI; no server logic. | Skip — nothing to port. | — |
 | 11 | np‑bennys | Handles `np-bennys:attemptPurchase` and `np-bennys:updateRepairCost`; deducts cash from players and updates repair cost【789232318723476†L0-L30】. | Create — implemented Bennys endpoints in previous sprint: purchase attempts and repair cost updates with transaction logging. | See previous sprint |
 | 12 | np‑broadcaster | Registers `attemptBroadcast` event; counts active broadcasters and assigns the broadcaster job if below limit【123927081072201†L0-L12】. | Create — added `POST /v1/broadcast/attempt` endpoint that assigns the `broadcaster` job if fewer than `MAX_BROADCASTERS` players currently hold it, using `jobsRepository` helpers. | commit: added `src/routes/broadcaster.routes.js` and repository helpers |
-
 | 13 | np‑errorlog | Registers an `error` server event that forwards error messages to a Discord webhook via HTTP【608897531749594†L0-L23】. | Skip — error logging is already handled by the unified error API in `srp‑base`, so no new backend logic is required. | — |
 | 14 | LockDoors | Client script controlling door locks; no server code. | Skip — nothing to port. | — |
 | 15 | np‑density | Listens for `np:peds:rogue` events and forwards them to clients to delete rogue peds【14920766739437†L0-L4】. | Skip — no persistent server state and no backend logic to port. | — |
-
 | 16 | koilWeatherSync | Maintains the current weather and time via `kGetWeather`, `kTimeSync`, `kWeatherSync`, `weather:time`, `weather:setWeather` events and a `syncallweather` command【864410210965398†L23-L33】【864410210965398†L36-L40】. | Skip — our `world` endpoints already provide time/weather state via REST; FiveM event hooks are not needed in the external API. | — |
 | 17 | mapmanager | Central resource that manages maps and gametypes using resource metadata and events like `onResourceStarting`, `onResourceStart`, `onResourceStop`【32727640578048†L6-L41】【32727640578048†L107-L167】. | Skip — purely affects internal resource loading and game type switching; not applicable to the Node API. | — |
 | 18 | chat | Handles chat messages via `_chat:messageEntered`, `chat:init`, `chat:addMessage`, `chat:addTemplate`, command fallback and suggestions【147364517015620†L0-L23】【147364517015620†L41-L67】. | Skip — chat is a client-side feature with no persistence; no server endpoints required. | — |
@@ -43,7 +39,6 @@ server‑side logic is considered; purely client resources are skipped.
 | 27 | np‑dances | Only includes a client script implementing dance emotes; no server logic. | Skip — nothing to port. | — |
 | 28 | np‑dealer | Contains only a client script for vendor UI; no server code. | Skip — nothing to port. | — |
 | 29 | np‑dirtymoney | Registers events to attempt dirty money drops, modify dirty money and convert it to clean cash【414013350686833†L0-L15】. | Skip — dirty money management will be handled in a dedicated economy sprint. | — |
-
 | 30 | np‑driftschool | Handles `np-driftschool:takemoney` event to deduct cash for drift school participation【761714451400029†L0-L11】. | Create — added `/v1/driftschool/pay` endpoint that withdraws a specified amount from a player's account using the economy repository. | this sprint |
 | 31 | np‑driving‑instructor | Provides driving test submission, history lookup, report retrieval and instructor vehicle actions; persists test results to `driving_tests` table【393162189931023†L0-L45】. | Create — implemented driving test APIs (`/v1/driving-tests` POST/GET) and `/v1/driving-tests/{id}` GET; added repository and migration. | this sprint |
 | 32 | np‑drugdeliveries | Manages drug deliveries and chop shop via `oxydelivery:server`, `drugdelivery:server`, `delivery:status`, and chop shop list refresh timers【896869969423342†L0-L93】. | Skip — delivery and chop shop mechanics require in-game logic and will be handled in a dedicated jobs/vehicles sprint. | — |
@@ -62,7 +57,6 @@ server‑side logic is considered; purely client resources are skipped.
 | 45 | np‑heatmap | Contains only client scripts. | Skip — nothing to port. | — |
 | 46 | np‑hospitalization | Updates `hospital_patients` table via events `stress:illnesslevel` and `stress:illnesslevel:new`; controls triage state via `doctor:enableTriage` and `doctor:disableTriage`【491902441918069†L0-L37】. | Defer — implementing patient management requires an EMS module; scheduled for a dedicated sprint. | — |
 | 47 | np‑hunting | Contains only client scripts for hunting minigame. | Skip — nothing to port. | — |
-
 | 48 | np‑infinity | Broadcasts players' coordinates to clients via events; no persistent state【569396379702026†L0-L12】. | Skip — nothing to port. | — |
 | 49 | np‑interior | Contains only client scripts that manage interiors【894325454073906†L0-L55】. | Skip — nothing to port. | — |
 | 50 | np‑inventory | Comprehensive inventory system implemented in Lua; our inventory microservice already covers these features【108768342973504†L0-L131】. | Skip — no additional backend needed. | — |
@@ -73,14 +67,12 @@ server‑side logic is considered; purely client resources are skipped.
 | 55 | np‑lockpicking | Client-only lockpicking mini-game【680002010711533†L56-L76】. | Skip — nothing to port. | — |
 | 56 | np‑lootsystem | Awards random items on `loot:useItem`; no persistent state【827029519194534†L0-L66】. | Skip — will be revisited when inventory mechanics are expanded. | — |
 | 57 | np‑login | Contains only a `np-login:disconnectPlayer` event that drops players【57298370178638†L0-L4】. | Skip — no backend needed. | — |
-
 | 58 | np‑lost | Contains only a client script; no server code. | Skip — nothing to port. | — |
 | 59 | np‑memorial | Contains only client logic for memorial interactions. | Skip — nothing to port. | — |
 | 60 | np‑menu | UI resource with client-only menu code and configuration. | Skip — nothing to port. | — |
 | 61 | np‑news | Registers `NewsStandCheckFinish` server event to relay parameters to clients【675594937447961†L0-L4】. | Skip — simple event relay with no persistence. | — |
 | 62 | np‑newsJob | Registers `light:addNews` and `news:removeLight` events to broadcast light updates【361323525276692†L0-L19】. | Skip — no persistent state to port. | — |
 | 63 | np‑notepad | Maintains `serverNotes` array and events to add, remove and list notes【136491508201320†L0-L19】. | Create — added notes API with endpoints to create, list and delete notes; persists notes in database. | this sprint |
-
 | 64 | np‑oBinoculars | Contains only client script. | Skip — no server logic to port. | — |
 | 65 | np‑oCam | Client‑only camera overlay; no server logic. | Skip — nothing to port. | — |
 | 66 | np‑oGasStations | Client/UI for gas stations; no server script. | Skip — nothing to port. | — |
@@ -97,7 +89,6 @@ server‑side logic is considered; purely client resources are skipped.
 | 77 | np‑robbery | Complex heist logic managing power state, doors, markers and loot. | Defer — will be tackled in a dedicated heists sprint due to scope. | — |
 | 78 | np‑scoreboard | Handles AddPlayer, AddAllPlayers and RemovePlayer events for scoreboard display【201703089677931†L0-L84】. | Skip — no persistence; scoreboard is client UI. | — |
 | 79 | np‑secondaryjobs | Provides `secondary:NewJobServer` and `secondary:NewJobServerWipe` events to insert/delete from `secondary_jobs` table【649885668358986†L0-L35】. | Create — added secondary jobs API with endpoints to assign and remove secondary jobs and list a player's jobs; new migration and repository added. | this sprint |
-
 | 80 | np‑securityheists | Tracks a list of recent heist licenses to prevent duplicate robberies; no database or state beyond runtime memory. | Skip — simple event gating without persistence; no backend API required. | — |
 | 81 | np‑sirens | Only client scripts controlling siren sounds. | Skip — no server logic to port. | — |
 | 82 | np‑spikes | Broadcasts `addSpikes` and `removeSpikes` events to all clients【644264532347613†L0-L9】. | Skip — event relay only; no persistence. | — |
@@ -124,7 +115,6 @@ server‑side logic is considered; purely client resources are skipped.
 | 103 | np‑xhair | Client‑side crosshair overlay. | Skip — nothing to port. | — |
 | 104 | nui_blocker | Detects devtools and kicks players via event and webhook【499166097351950†L0-L26】. | Skip — simple moderation event; no backend state. | — |
 | 105 | outlawalert | Defines an RGB colour table; no events or persistence【895876963551968†L0-L120】. | Skip — nothing to port. | — |
-
 | 106 | pNotify | Client notification library; no server logic. | Skip — nothing to port. | — |
 | 107 | pPassword | Connection password handler with adaptive card UI. | Skip — handled by resource; no API needed. | — |
 | 108 | ped | Streamed pedestrian models and metadata. | Skip — assets only. | — |

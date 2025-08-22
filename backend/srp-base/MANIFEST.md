@@ -10,7 +10,6 @@ listed here.  Files not mentioned were left untouched.
 | `src/routes/broadcaster.routes.js` | A | New route for assigning the broadcaster job while enforcing a maximum number of concurrent broadcasters. |
 | `src/app.js` | M | Mounted the new broadcaster route. |
 | `DOCS/progress-ledger.md` | A | Progress log for processed legacy resources and decisions. |
-| `DOCS/progress-ledger.md` | A | Progress log for processed original resources and decisions. |
 | `DOCS/index.md` | A | Sprint overview summarising tasks and outcomes. |
 | `DOCS/modules/broadcaster.md` | A | Per‑module documentation describing the broadcaster API. |
 | `DOCS/framework-compliance.md` | A | Added framework compliance rubric and evaluation for the Node.js service. |
@@ -127,14 +126,6 @@ Legend: **A** = Added, **M** = Modified.
 
 | Path | Status | Notes |
 |---|---|---|
-| `src/routes/evidence.routes.js` | M | Normalised responses to use `{ items }` and `{ item }` envelopes. |
-| `openapi/api.yaml` | M | Added `EvidenceItem` schemas and `/v1/evidence/items` paths. |
-| `docs/modules/evidence.md` | A | Documented the evidence API and schemas. |
-| `docs/index.md` | M | Added Part 2 overview noting evidence documentation work. |
-| `docs/progress-ledger.md` | M | Updated `np‑evidence` row with OpenAPI coverage. |
-| `docs/BASE_API_DOCUMENTATION.md` | M | Added evidence endpoints to domain summary. |
-| `MANIFEST.md` | M | Recorded Part 2 file changes. |
-| `CHANGELOG.md` | M | Logged evidence OpenAPI and documentation updates. |
 | `src/repositories/phoneRepository.js` | A | Query helpers to list and create tweets. |
 | `src/routes/phone.routes.js` | A | New endpoints `/v1/phone/tweets` for listing and creating tweets. |
 | `src/migrations/018_add_tweets.sql` | A | Migration creating `tweets` table with index on time. |
@@ -170,27 +161,3 @@ Legend: **A** = Added, **M** = Modified.
 | `docs/modules/phone.md` | M | Documented 400 INVALID_INPUT responses. |
 | `docs/BASE_API_DOCUMENTATION.md` | M | Mentioned possible 400 errors on phone tweet endpoints. |
 | `docs/progress-ledger.md` | M | Logged OpenAPI spec cleanup entry. |
-
-# Documentation Sanitization – 2025-08-21
-
-| Path | Status | Notes |
-|---|---|---|
-| `CHANGELOG.md` | M | Noted removal of external brand references. |
-| `MANIFEST.md` | M | Added this section. |
-| `docs/BASE_API_DOCUMENTATION.md` | M | Replaced explicit brand mentions with neutral terminology. |
-| `docs/index.md` | M | Scrubbed brand references from sprint overviews. |
-| `docs/modules/broadcaster.md` | M | Generalised module description. |
-| `src/routes/broadcaster.routes.js` | M | Removed brand reference in comments. |
-| `src/routes/websites.routes.js` | M | Removed brand reference in comments. |
-
-# Additional updates for the 2025‑08‑21 infrastructure patch
-
-| Path | Status | Notes |
-|---|---|---|
-| `src/server.js` | M | Added `uncaughtException` handler to log and exit on fatal errors. |
-| `docs/framework-compliance.md` | M | Documented global exception handling in compliance rubric. |
-| `docs/index.md` | M | Added infrastructure sprint overview and noted repository access issue. |
-| `docs/progress-ledger.md` | M | Recorded resource repository access issue. |
-| `docs/research-log.md` | A | New research log noting failed repository clone and Node.js docs reference. |
-| `MANIFEST.md` | M | Updated to include infrastructure patch notes. |
-| `CHANGELOG.md` | M | Added entry for infrastructure patch. |
