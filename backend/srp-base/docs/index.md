@@ -429,3 +429,10 @@ these decisions.  Future sprints will continue with `np‑voice`,
 `np‑votesystem`, `np‑warrants`, `np‑weapons`, `np‑webpages`,
 `np‑whitelist` and beyond, adding backend support only where
 persistent state or cross‑player interactions are required.
+
+---
+
+# Sprint Overview – 2025‑08‑21 (Infrastructure)
+
+A short hardening pass added a global `uncaughtException` handler so the server logs unexpected errors and exits cleanly. The reference resource repository was unreachable (HTTP 403), therefore no new gameplay resources were processed in this run.
+
