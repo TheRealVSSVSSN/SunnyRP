@@ -9,7 +9,7 @@ listed here.  Files not mentioned were left untouched.
 | `src/repositories/jobsRepository.js` | M | Added `countPlayersForJob` and `getJobByName` helpers to support the broadcaster module. |
 | `src/routes/broadcaster.routes.js` | A | New route for assigning the broadcaster job while enforcing a maximum number of concurrent broadcasters. |
 | `src/app.js` | M | Mounted the new broadcaster route. |
-| `DOCS/progress-ledger.md` | A | Progress log for processed NoPixel resources and decisions. |
+| `DOCS/progress-ledger.md` | A | Progress log for processed legacy resources and decisions. |
 | `DOCS/index.md` | A | Sprint overview summarising tasks and outcomes. |
 | `DOCS/modules/broadcaster.md` | A | Per‑module documentation describing the broadcaster API. |
 
@@ -122,3 +122,43 @@ Legend: **A** = Added, **M** = Modified.
 | `docs/BASE_API_DOCUMENTATION.md` | M | Added a **Weapons & Ammo** section summarising the new ammo endpoints. |
 | `MANIFEST.md` | M | Updated to include this section and list new files/changes. |
 | `CHANGELOG.md` | M | Appended notes for the 2025‑08‑21 sprint covering the ammo API and documentation updates. |
+
+# Additional updates for the 2025‑08‑21 sprint (Part 2)
+
+| Path | Status | Notes |
+|---|---|---|
+| `src/repositories/phoneRepository.js` | A | Query helpers to list and create tweets. |
+| `src/routes/phone.routes.js` | A | New endpoints `/v1/phone/tweets` for listing and creating tweets. |
+| `src/migrations/018_add_tweets.sql` | A | Migration creating `tweets` table with index on time. |
+| `src/app.js` | M | Mounted the phone routes. |
+| `openapi/api.yaml` | M | Added `Tweet` schemas and `/v1/phone/tweets` path. |
+| `docs/modules/phone.md` | A | Module documentation for phone tweets API. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented phone tweet endpoints. |
+| `docs/progress-ledger.md` | M | Added rows 106–135 covering remaining resources and phone API creation. |
+| `docs/index.md` | M | Added sprint overview for resources `pNotify` through `yarn`. |
+
+# Additional updates for the 2025‑08‑22 cleanup
+
+| Path | Status | Notes |
+|---|---|---|
+| `openapi/api.yaml` | M | Added length constraints for tweet fields. |
+| `src/openapi/api.yaml` | M | Synced OpenAPI specification with root copy. |
+| `src/routes/phone.routes.js` | M | Added length validation and removed redundant body parser. |
+| `docs/modules/phone.md` | M | Documented tweet field limits. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Replaced legacy server references. |
+| `docs/index.md` | M | Replaced legacy server references. |
+| `docs/modules/broadcaster.md` | M | Replaced legacy server references. |
+| `docs/progress-ledger.md` | M | Replaced legacy server references. |
+| `src/routes/broadcaster.routes.js` | M | Reworded comments to remove legacy brand. |
+| `src/routes/websites.routes.js` | M | Reworded comments to remove legacy brand. |
+| `CHANGELOG.md` | M | Logged cleanup and validation changes. |
+
+# Additional updates for the 2025‑08‑23 spec fix
+
+| Path | Status | Notes |
+|---|---|---|
+| `openapi/api.yaml` | M | Moved character ID parameter to path level and added operationIds/400 responses to phone tweets. |
+| `src/openapi/api.yaml` | M | Synced spec changes. |
+| `docs/modules/phone.md` | M | Documented 400 INVALID_INPUT responses. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Mentioned possible 400 errors on phone tweet endpoints. |
+| `docs/progress-ledger.md` | M | Logged OpenAPI spec cleanup entry. |

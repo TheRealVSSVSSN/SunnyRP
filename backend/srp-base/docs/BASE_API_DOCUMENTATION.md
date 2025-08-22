@@ -283,6 +283,13 @@ In addition to the core identity, permissions, characters and admin APIs describ
 | `GET` | `/v1/players/{playerId}/ammo` | Retrieve a player’s ammunition counts as an object keyed by weapon type. |
 | `PATCH` | `/v1/players/{playerId}/ammo` | Update the ammunition count for a specific weapon type (body: `{ weaponType, ammo }`). |
 
+#### Phone (Tweets)
+
+| Method | Path | Description |
+|-------|-----|-------------|
+| `GET` | `/v1/phone/tweets` | Retrieve up to the 50 most recent tweets. Returns `400 INVALID_INPUT` on malformed query. |
+| `POST` | `/v1/phone/tweets` | Create a new tweet with a handle and message. Returns `400 INVALID_INPUT` on validation errors. |
+
 These endpoints round out the foundation of `srp-base`.  Together with the previously documented identity, permissions, config and outbox APIs they provide a **complete backend** capable of supporting all future gameplay modules.  Lua resources can rely on these endpoints to persist and retrieve state while implementing their own behaviour.
 
 ### Identity & Permissions
@@ -363,7 +370,7 @@ By adhering to this documentation and the provided templates, you can build out 
 
 ## Additional Domain Services (Dispatch, Evidence, EMS, Keys, Loot)
 
-To support all features present in the original NoPixelServer resources at the framework level without introducing gameplay logic, the SunnyRP repository includes several **additional microservices** under `backend/services`: `srp-dispatch`, `srp-evidence`, `srp-ems`, `srp-keys` and `srp-loot`.  Each service mirrors the patterns used in `srp-base`—Express routing, MySQL persistence, token/HMAC authentication, idempotency and rate limiting—and maintains its own database schema and migrations.  These services act as the scaffolding for high‑level gameplay modules that will be written in Lua later.
+To support all features present in the original server resources at the framework level without introducing gameplay logic, the SunnyRP repository includes several **additional microservices** under `backend/services`: `srp-dispatch`, `srp-evidence`, `srp-ems`, `srp-keys` and `srp-loot`.  Each service mirrors the patterns used in `srp-base`—Express routing, MySQL persistence, token/HMAC authentication, idempotency and rate limiting—and maintains its own database schema and migrations.  These services act as the scaffolding for high‑level gameplay modules that will be written in Lua later.
 
 - **srp-dispatch** – Centralised storage and management of dispatch alerts (e.g. 911 calls, panic buttons).  It exposes:
   - `GET /v1/dispatch/alerts` – List recent dispatch alerts.
@@ -397,4 +404,4 @@ To support all features present in the original NoPixelServer resources at the f
   - `PATCH /v1/loot/items/:id` – Update fields on a loot item.
   - `DELETE /v1/loot/items/:id` – Remove a loot item after it is collected or expired.
 
-These services run on separate ports (3080 for dispatch, 3090 for evidence, 3100 for EMS, 3110 for keys and 3120 for loot) and require their own environment variables (database credentials, API token, HMAC secret, etc.).  By providing them now, the backend offers a **complete foundation** for every NoPixel resource.  Future Lua resources will call these APIs to create and retrieve alerts, evidence, medical records, keys or loot, but no gameplay logic exists on the backend; it merely stores and retrieves data.
+These services run on separate ports (3080 for dispatch, 3090 for evidence, 3100 for EMS, 3110 for keys and 3120 for loot) and require their own environment variables (database credentials, API token, HMAC secret, etc.).  By providing them now, the backend offers a **complete foundation** for every external resource.  Future Lua resources will call these APIs to create and retrieve alerts, evidence, medical records, keys or loot, but no gameplay logic exists on the backend; it merely stores and retrieves data.
