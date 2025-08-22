@@ -436,3 +436,4 @@ persistent state or cross‑player interactions are required.
 
 A short hardening pass added a global `uncaughtException` handler so the server logs unexpected errors and exits cleanly. The reference resource repository was unreachable (HTTP 403), therefore no new gameplay resources were processed in this run.
 
+=======

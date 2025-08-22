@@ -134,3 +134,4 @@ Legend: **A** = Added, **M** = Modified.
 | `docs/research-log.md` | A | New research log noting failed repository clone and Node.js docs reference. |
 | `MANIFEST.md` | M | Updated to include infrastructure patch notes. |
 | `CHANGELOG.md` | M | Added entry for infrastructure patch. |
+=======
