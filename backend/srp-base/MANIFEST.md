@@ -10,11 +10,9 @@ listed here.  Files not mentioned were left untouched.
 | `src/routes/broadcaster.routes.js` | A | New route for assigning the broadcaster job while enforcing a maximum number of concurrent broadcasters. |
 | `src/app.js` | M | Mounted the new broadcaster route. |
 | `DOCS/progress-ledger.md` | A | Progress log for processed legacy resources and decisions. |
-=======
 | `DOCS/progress-ledger.md` | A | Progress log for processed original resources and decisions. |
 | `DOCS/index.md` | A | Sprint overview summarising tasks and outcomes. |
 | `DOCS/modules/broadcaster.md` | A | Per‑module documentation describing the broadcaster API. |
-
 | `DOCS/framework-compliance.md` | A | Added framework compliance rubric and evaluation for the Node.js service. |
 | `DOCS/progress-ledger.md` | M | Added entries for `np‑errorlog`, `LockDoors` and `np‑density`. |
 | `DOCS/index.md` | M | Added sprint 2025‑08‑19 overview and summary. |
@@ -137,7 +135,6 @@ Legend: **A** = Added, **M** = Modified.
 | `docs/BASE_API_DOCUMENTATION.md` | M | Added evidence endpoints to domain summary. |
 | `MANIFEST.md` | M | Recorded Part 2 file changes. |
 | `CHANGELOG.md` | M | Logged evidence OpenAPI and documentation updates. |
-=======
 | `src/repositories/phoneRepository.js` | A | Query helpers to list and create tweets. |
 | `src/routes/phone.routes.js` | A | New endpoints `/v1/phone/tweets` for listing and creating tweets. |
 | `src/migrations/018_add_tweets.sql` | A | Migration creating `tweets` table with index on time. |
@@ -163,7 +160,17 @@ Legend: **A** = Added, **M** = Modified.
 | `src/routes/broadcaster.routes.js` | M | Reworded comments to remove legacy brand. |
 | `src/routes/websites.routes.js` | M | Reworded comments to remove legacy brand. |
 | `CHANGELOG.md` | M | Logged cleanup and validation changes. |
-=======
+
+# Additional updates for the 2025‑08‑23 spec fix
+
+| Path | Status | Notes |
+|---|---|---|
+| `openapi/api.yaml` | M | Moved character ID parameter to path level and added operationIds/400 responses to phone tweets. |
+| `src/openapi/api.yaml` | M | Synced spec changes. |
+| `docs/modules/phone.md` | M | Documented 400 INVALID_INPUT responses. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Mentioned possible 400 errors on phone tweet endpoints. |
+| `docs/progress-ledger.md` | M | Logged OpenAPI spec cleanup entry. |
+
 # Documentation Sanitization – 2025-08-21
 
 | Path | Status | Notes |
@@ -175,7 +182,6 @@ Legend: **A** = Added, **M** = Modified.
 | `docs/modules/broadcaster.md` | M | Generalised module description. |
 | `src/routes/broadcaster.routes.js` | M | Removed brand reference in comments. |
 | `src/routes/websites.routes.js` | M | Removed brand reference in comments. |
-=======
 
 # Additional updates for the 2025‑08‑21 infrastructure patch
 
@@ -188,4 +194,3 @@ Legend: **A** = Added, **M** = Modified.
 | `docs/research-log.md` | A | New research log noting failed repository clone and Node.js docs reference. |
 | `MANIFEST.md` | M | Updated to include infrastructure patch notes. |
 | `CHANGELOG.md` | M | Added entry for infrastructure patch. |
-=======

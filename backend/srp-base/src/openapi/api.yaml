@@ -482,14 +482,14 @@ paths:
         '200':
           description: Created character
   /v1/characters/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
     get:
       summary: Get a character by id
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
       responses:
         '200':
           description: Character object
@@ -1474,6 +1474,7 @@ paths:
   /v1/phone/tweets:
     get:
       summary: List recent tweets
+      operationId: listTweets
       responses:
         '200':
           description: List of tweets
@@ -1495,6 +1496,11 @@ paths:
                     type: string
                   traceId:
                     type: string
+        '400':
+          description: Invalid input
+    post:
+      summary: Create a tweet
+      operationId: createTweet
     post:
       summary: Create a tweet
       requestBody:
@@ -1521,4 +1527,7 @@ paths:
                   requestId:
                     type: string
                   traceId:
+                    type: string
+        '400':
+          description: Invalid input
                     type: string

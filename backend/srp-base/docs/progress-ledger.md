@@ -155,8 +155,4 @@ server‑side logic is considered; purely client resources are skipped.
 | 133 | webpack | Build tool configuration. | Skip — not gameplay code. | — |
 | 134 | wk_wrs | Radar UI client scripts. | Skip — nothing to port. | — |
 | 135 | yarn | Packaging utility for development. | Skip — not a runtime resource. | — |
-
-**Legend:** *Skip* – no action taken because equivalent functionality already exists or the resource is client‑side. *Extend* – partially implemented; only missing behaviour added. *Create* – new module/endpoints created to port behaviour.
-=======
-**Legend:** *Skip* – no action taken because equivalent functionality already exists or the resource is client‑side. *Extend* – partially implemented; only missing behaviour added. *Create* – new module/endpoints created to port behaviour.
-2025‑08‑21: Reference resource repository was inaccessible (HTTP 403), so no new resources were processed this run.
+| 136 | openapi-spec | Fixed missing path parameter for `/v1/characters/{id}` and added 4xx responses & operationIds to phone tweets. | Extend | openapi/api.yaml |

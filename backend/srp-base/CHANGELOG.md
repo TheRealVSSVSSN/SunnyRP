@@ -23,6 +23,7 @@ This sprint continues the integration of legacy server behaviours into
 the unified `srp‑base` Node.js backend.  The broadcaster module
 implements the server-side logic of the legacy `np-broadcaster`
 =======
+=======
 This sprint continues the integration of original server behaviours into
 the unified `srp‑base` Node.js backend.  The broadcaster module
 implements the server-side logic of the original `np-broadcaster`
@@ -51,6 +52,7 @@ This sprint focused on research, documentation and gap analysis
 rather than new features.  After compiling a framework compliance
 rubric and auditing the existing codebase, we resumed processing
 legacy resources.  The following resources were reviewed:
+=======
 =======
 original resources.  The following resources were reviewed
 
@@ -230,6 +232,7 @@ logic or require more comprehensive systems (e.g. EMS) to support.
 
 In this sprint we examined another batch of legacy resources.
 =======
+=======
 In this sprint we examined another batch of original resources.
 `np-infinity` broadcasts players’ coordinates via events and does not
 require persistence【569396379702026†L0-L12】.  `np-interior`, `np-keypad`,
@@ -401,6 +404,18 @@ Processed the remaining legacy resources from `pNotify` through `yarn`. All were
 ### Notes (2025‑08‑22)
 
 Cleanup pass to remove external branding and tighten validation on the phone tweets API.
+
+### Changed (2025‑08‑23)
+
+* **openapi/api.yaml** – Fixed missing path parameter for `/v1/characters/{id}` and added operationIds/400 responses for phone tweets.
+* **src/openapi/api.yaml** – Synced specification copy.
+* **docs/modules/phone.md**, **docs/BASE_API_DOCUMENTATION.md** – Documented potential `400 INVALID_INPUT` responses.
+* **docs/progress-ledger.md** – Logged OpenAPI spec cleanup entry.
+
+### Notes (2025‑08‑23)
+
+Resolved OpenAPI lint error and clarified phone tweet error handling in documentation.
+=======
 =======
 This sprint continued the systematic audit of original resources.  The vast majority of modules processed (from `np‑securityheists` to `outlawalert`) either contained only client scripts or relayed events without persisting state【644264532347613†L0-L9】【147099589493415†L0-L17】.  These were skipped or deferred.  The notable exception was **np‑weapons**, which keeps ammunition counts in a SQL table and updates them via events【735206341651753†L6-L44】.  To provide equivalent functionality, we created the **player ammunition API** described above.  We also fixed an OpenAPI misplacement for the websites POST endpoint.  No other endpoints or migrations were modified.  Future sprints will address remaining resources such as `pNotify`, `pPassword`, `ped`, `phone`, `police` and others.
 =======

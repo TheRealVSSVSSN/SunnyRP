@@ -2,8 +2,6 @@
 
 The broadcaster module implements the server‑side logic of the
 legacy `np-broadcaster` resource in the unified `srp‑base`
-=======
-original `np-broadcaster` resource in the unified `srp‑base`
 backend.  In the original Lua resource, players trigger an
 `attemptBroadcast` event to become a broadcaster.  The server
 counts how many broadcasters are currently active and, if below a

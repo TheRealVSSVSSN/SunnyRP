@@ -292,11 +292,14 @@ In addition to the core identity, permissions, characters and admin APIs describ
 | `GET` | `/v1/evidence/items/{id}` | Retrieve a specific evidence item. |
 | `PATCH` | `/v1/evidence/items/{id}` | Update fields on an evidence item. |
 | `DELETE` | `/v1/evidence/items/{id}` | Remove an evidence item. |
-=======
+
 #### Phone (Tweets)
 
 | Method | Path | Description |
 |-------|-----|-------------|
+| `GET` | `/v1/phone/tweets` | Retrieve up to the 50 most recent tweets. Returns `400 INVALID_INPUT` on malformed query. |
+| `POST` | `/v1/phone/tweets` | Create a new tweet with a handle and message. Returns `400 INVALID_INPUT` on validation errors. |
+=======
 | `GET` | `/v1/phone/tweets` | Retrieve up to the 50 most recent tweets. |
 | `POST` | `/v1/phone/tweets` | Create a new tweet with a handle and message. |
 
@@ -413,8 +416,5 @@ To support all features present in the original server resources at the framewor
   - `POST /v1/loot/items` – Create a loot drop (requires `owner_id` and `item_type`; optional `value`, `coordinates`, `metadata`).
   - `PATCH /v1/loot/items/:id` – Update fields on a loot item.
   - `DELETE /v1/loot/items/:id` – Remove a loot item after it is collected or expired.
-
+ 
 These services run on separate ports (3080 for dispatch, 3090 for evidence, 3100 for EMS, 3110 for keys and 3120 for loot) and require their own environment variables (database credentials, API token, HMAC secret, etc.).  By providing them now, the backend offers a **complete foundation** for every external resource.  Future Lua resources will call these APIs to create and retrieve alerts, evidence, medical records, keys or loot, but no gameplay logic exists on the backend; it merely stores and retrieves data.
-=======
-These services run on separate ports (3080 for dispatch, 3090 for evidence, 3100 for EMS, 3110 for keys and 3120 for loot) and require their own environment variables (database credentials, API token, HMAC secret, etc.).  By providing them now, the backend offers a **complete foundation** for every original resource.  Future Lua resources will call these APIs to create and retrieve alerts, evidence, medical records, keys or loot, but no gameplay logic exists on the backend; it merely stores and retrieves data.
-
