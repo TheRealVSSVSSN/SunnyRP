@@ -122,3 +122,16 @@ Legend: **A** = Added, **M** = Modified.
 | `docs/BASE_API_DOCUMENTATION.md` | M | Added a **Weapons & Ammo** section summarising the new ammo endpoints. |
 | `MANIFEST.md` | M | Updated to include this section and list new files/changes. |
 | `CHANGELOG.md` | M | Appended notes for the 2025‑08‑21 sprint covering the ammo API and documentation updates. |
+
+# Additional updates for the 2025‑08‑21 sprint (Part 2)
+
+| Path | Status | Notes |
+|---|---|---|
+| `src/routes/evidence.routes.js` | M | Normalised responses to use `{ items }` and `{ item }` envelopes. |
+| `openapi/api.yaml` | M | Added `EvidenceItem` schemas and `/v1/evidence/items` paths. |
+| `docs/modules/evidence.md` | A | Documented the evidence API and schemas. |
+| `docs/index.md` | M | Added Part 2 overview noting evidence documentation work. |
+| `docs/progress-ledger.md` | M | Updated `np‑evidence` row with OpenAPI coverage. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Added evidence endpoints to domain summary. |
+| `MANIFEST.md` | M | Recorded Part 2 file changes. |
+| `CHANGELOG.md` | M | Logged evidence OpenAPI and documentation updates. |

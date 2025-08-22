@@ -315,6 +315,81 @@ components:
         z:
           type: number
           description: Z coordinate where the note is placed
+
+    # Evidence item record
+    EvidenceItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+          description: Item category or classification
+        description:
+          type: string
+          description: Details about the evidence
+        location:
+          type: string
+          nullable: true
+          description: Optional location description
+        owner:
+          type: string
+          nullable: true
+          description: Owner or subject associated with the item
+        metadata:
+          type: object
+          nullable: true
+          additionalProperties: true
+          description: Arbitrary metadata encoded as JSON
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    # Request body for creating an evidence item
+    EvidenceItemCreateRequest:
+      type: object
+      required:
+        - type
+        - description
+      properties:
+        type:
+          type: string
+          description: Item category or classification
+        description:
+          type: string
+          description: Details about the evidence
+        location:
+          type: string
+          nullable: true
+        owner:
+          type: string
+          nullable: true
+        metadata:
+          type: object
+          nullable: true
+          additionalProperties: true
+
+    # Request body for updating an evidence item
+    EvidenceItemUpdateRequest:
+      type: object
+      properties:
+        type:
+          type: string
+        description:
+          type: string
+        location:
+          type: string
+          nullable: true
+        owner:
+          type: string
+          nullable: true
+        metadata:
+          type: object
+          nullable: true
+          additionalProperties: true
 security:
   - ApiToken: []
 paths:
@@ -1441,3 +1516,150 @@ paths:
                     type: string
                   traceId:
                     type: string
+
+  /v1/evidence/items:
+    get:
+      summary: List evidence items
+      responses:
+        '200':
+          description: List of evidence items
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      items:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/EvidenceItem'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+    post:
+      summary: Create an evidence item
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvidenceItemCreateRequest'
+      responses:
+        '200':
+          description: Evidence item created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      item:
+                        $ref: '#/components/schemas/EvidenceItem'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+
+  /v1/evidence/items/{id}:
+    get:
+      summary: Get an evidence item
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Evidence item found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      item:
+                        $ref: '#/components/schemas/EvidenceItem'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '404':
+          description: Item not found
+    patch:
+      summary: Update an evidence item
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvidenceItemUpdateRequest'
+      responses:
+        '200':
+          description: Evidence item updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      item:
+                        $ref: '#/components/schemas/EvidenceItem'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '404':
+          description: Item not found
+    delete:
+      summary: Delete an evidence item
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Evidence item deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      deleted:
+                        type: boolean
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '404':
+          description: Item not found

@@ -367,3 +367,12 @@ This sprint was a documentation‑only update.  No new endpoints, migrations or 
 ### Notes (2025‑08‑21)
 
 This sprint continued the systematic audit of NoPixel resources.  The vast majority of modules processed (from `np‑securityheists` to `outlawalert`) either contained only client scripts or relayed events without persisting state【644264532347613†L0-L9】【147099589493415†L0-L17】.  These were skipped or deferred.  The notable exception was **np‑weapons**, which keeps ammunition counts in a SQL table and updates them via events【735206341651753†L6-L44】.  To provide equivalent functionality, we created the **player ammunition API** described above.  We also fixed an OpenAPI misplacement for the websites POST endpoint.  No other endpoints or migrations were modified.  Future sprints will address remaining resources such as `pNotify`, `pPassword`, `ped`, `phone`, `police` and others.
+
+### Changed (2025‑08‑21 Part 2)
+
+* **Evidence module.** Normalised route responses to wrap data under `items`, `item` or `deleted` and added corresponding OpenAPI schemas and path definitions.
+* **Documentation.** Added module docs for evidence and updated the progress ledger and API overview.
+
+### Notes (2025‑08‑21 Part 2)
+
+This small follow‑up sprint focused on documenting and standardising the existing evidence functionality. No additional resources were processed and no database changes were required.
