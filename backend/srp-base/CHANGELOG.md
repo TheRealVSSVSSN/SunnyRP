@@ -359,6 +359,8 @@ This sprint was a documentation‑only update.  No new endpoints, migrations or 
 
 ### Changed (2025‑08‑21)
 
+* Sanitised documentation and route comments to remove explicit references to the original server brand.
+
 * **openapi/api.yaml** – Corrected the websites API definition by moving the POST operation to the `/v1/websites` path and removing the erroneous POST under `/v1/players/{playerId}/ammo`.  Added path documentation for the ammo endpoints.
 * **progress‑ledger.md** – Added entries 80–105 recording skip, defer and create decisions for resources from `np‑securityheists` through `outlawalert`.  Notably, it records the creation of the ammo API for `np‑weapons`.
 * **index.md** – Appended a new sprint overview for 2025‑08‑21 summarising the ammo API and skip/defer decisions.
@@ -402,12 +404,3 @@ Cleanup pass to remove external branding and tighten validation on the phone twe
 ### Notes (2025‑08‑23)
 
 Resolved OpenAPI lint error and clarified phone tweet error handling in documentation.
-
-### Changed (2025‑08‑24)
-
-* **openapi/api.yaml**, **src/openapi/api.yaml** – Added `operationId` for `/v1/notes/{id}` delete endpoint to satisfy lint rule.
-* **docs/progress-ledger.md** – Recorded OpenAPI operationId addition.
-
-### Notes (2025‑08‑24)
-
-Added missing `operationId` to keep specification lint‑clean.

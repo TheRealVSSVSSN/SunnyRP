@@ -32,7 +32,7 @@ practice is supported by citations.
 | **Dependency injection** | The current design uses simple factory functions and explicit imports.  While providers (e.g. for players) can be swapped via configuration, there is no dedicated DI container.  Introducing DI for repositories and external services could further improve testability. |
 | **Unit testing** | There are no test suites in this repository.  Adding unit tests for repositories and routes using a framework such as Jest is recommended. |
 | **Logging** | A structured logger is implemented in `src/utils/logger.js` using Pino.  Logs include timestamps and can be configured via environment variables.  Request IDs are attached via middleware. |
-| **Error handling** | Errors are caught in route handlers and forwarded to a global error handler in `app.js`, which logs the error and returns a standard JSON envelope. |
+| **Error handling** | Errors are caught in route handlers and forwarded to a global error handler in `app.js`, which logs the error and returns a standard JSON envelope.  The server also listens for `unhandledRejection` and `uncaughtException` events to log and exit safely. |
 | **Event‑driven design** | As an HTTP API the service does not implement an event bus, but it does persist domain events in an outbox table.  FiveM network events are handled by the Lua layer (outside this service) and forwarded via HTTP. |
 | **Clean code and modularity** | The code is modular and uses CommonJS modules.  Each domain resides in its own file.  ESLint and Prettier configuration are absent; adding them would enforce consistent style. |
 | **Environment management** | The `dotenv` library loads environment variables and the `env.js` config file ensures required variables are present. |

@@ -1428,7 +1428,6 @@ paths:
   /v1/notes/{id}:
     delete:
       summary: Delete a note
-      operationId: deleteNote
       parameters:
         - name: id
           in: path
@@ -1528,4 +1527,3 @@ paths:
                   traceId:
                     type: string
         '400':
-          description: Invalid input

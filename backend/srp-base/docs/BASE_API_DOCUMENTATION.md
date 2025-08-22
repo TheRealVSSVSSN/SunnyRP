@@ -403,5 +403,3 @@ To support all features present in the original server resources at the framewor
   - `POST /v1/loot/items` – Create a loot drop (requires `owner_id` and `item_type`; optional `value`, `coordinates`, `metadata`).
   - `PATCH /v1/loot/items/:id` – Update fields on a loot item.
   - `DELETE /v1/loot/items/:id` – Remove a loot item after it is collected or expired.
-
-These services run on separate ports (3080 for dispatch, 3090 for evidence, 3100 for EMS, 3110 for keys and 3120 for loot) and require their own environment variables (database credentials, API token, HMAC secret, etc.).  By providing them now, the backend offers a **complete foundation** for every external resource.  Future Lua resources will call these APIs to create and retrieve alerts, evidence, medical records, keys or loot, but no gameplay logic exists on the backend; it merely stores and retrieves data.

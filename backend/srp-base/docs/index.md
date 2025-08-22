@@ -304,8 +304,6 @@ ledger records these skip and defer decisions.  Future sprints will resume with
 `np-phone`, `np-police`, `np-polyzone` and other remaining resources.
 
 # Sprint Overview – 2025‑08‑19 (Part 8)
-
-This sprint continued processing the next set of legacy resources in order,
 covering `np‑lost` through `np‑notepad`.  Most of these resources contain
 client‑only scripts or simple event relays with no persistent data, so they were
 **skipped**.  However, the **np‑notepad** resource maintains a `serverNotes`
@@ -346,8 +344,6 @@ across server restarts, filling a gap in the original Lua implementation.
 ---
 
 # Sprint Overview – 2025‑08‑20
-
-In this sprint we continued down the legacy `resources` directory,
 processing modules starting from the `np‑o` prefix.  We found that
 most of these resources contain only client‑side scripts or visual
 effects, and therefore require no backend support.  Two notable
@@ -430,8 +426,6 @@ these decisions.  Future sprints will continue with `np‑voice`,
 `np‑whitelist` and beyond, adding backend support only where
 persistent state or cross‑player interactions are required.
 
----
-
 # Sprint Overview – 2025‑08‑21 (Part 2)
 
 Continuing the audit, we processed the remaining legacy resources
@@ -456,4 +450,3 @@ small API to manage these tweets.
 * towtruckjob, truckerjob, veh_shop, veh_shop_imports – depend on a
   fuller jobs/vehicles subsystem; deferred.
 * trains, uitest, veh, warmenu, webpack, wk_wrs, yarn – no persistent
-  server logic; skipped.

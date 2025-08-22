@@ -12,7 +12,6 @@ listed here.  Files not mentioned were left untouched.
 | `DOCS/progress-ledger.md` | A | Progress log for processed legacy resources and decisions. |
 | `DOCS/index.md` | A | Sprint overview summarising tasks and outcomes. |
 | `DOCS/modules/broadcaster.md` | A | Per‑module documentation describing the broadcaster API. |
-
 | `DOCS/framework-compliance.md` | A | Added framework compliance rubric and evaluation for the Node.js service. |
 | `DOCS/progress-ledger.md` | M | Added entries for `np‑errorlog`, `LockDoors` and `np‑density`. |
 | `DOCS/index.md` | M | Added sprint 2025‑08‑19 overview and summary. |
@@ -162,12 +161,3 @@ Legend: **A** = Added, **M** = Modified.
 | `docs/modules/phone.md` | M | Documented 400 INVALID_INPUT responses. |
 | `docs/BASE_API_DOCUMENTATION.md` | M | Mentioned possible 400 errors on phone tweet endpoints. |
 | `docs/progress-ledger.md` | M | Logged OpenAPI spec cleanup entry. |
-
-# Additional updates for the 2025‑08‑24 spec fix
-
-| Path | Status | Notes |
-|---|---|---|
-| `openapi/api.yaml` | M | Added `operationId` for note deletion to satisfy lint rule. |
-| `src/openapi/api.yaml` | M | Synced spec change. |
-| `docs/progress-ledger.md` | M | Recorded OpenAPI operationId addition. |
-| `CHANGELOG.md` | M | Noted operationId addition for note deletion. |
