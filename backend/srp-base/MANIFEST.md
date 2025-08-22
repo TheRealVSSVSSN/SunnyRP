@@ -10,6 +10,8 @@ listed here.  Files not mentioned were left untouched.
 | `src/routes/broadcaster.routes.js` | A | New route for assigning the broadcaster job while enforcing a maximum number of concurrent broadcasters. |
 | `src/app.js` | M | Mounted the new broadcaster route. |
 | `DOCS/progress-ledger.md` | A | Progress log for processed legacy resources and decisions. |
+=======
+| `DOCS/progress-ledger.md` | A | Progress log for processed original resources and decisions. |
 | `DOCS/index.md` | A | Sprint overview summarising tasks and outcomes. |
 | `DOCS/modules/broadcaster.md` | A | Per‑module documentation describing the broadcaster API. |
 
@@ -152,3 +154,29 @@ Legend: **A** = Added, **M** = Modified.
 | `src/routes/broadcaster.routes.js` | M | Reworded comments to remove legacy brand. |
 | `src/routes/websites.routes.js` | M | Reworded comments to remove legacy brand. |
 | `CHANGELOG.md` | M | Logged cleanup and validation changes. |
+=======
+# Documentation Sanitization – 2025-08-21
+
+| Path | Status | Notes |
+|---|---|---|
+| `CHANGELOG.md` | M | Noted removal of external brand references. |
+| `MANIFEST.md` | M | Added this section. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Replaced explicit brand mentions with neutral terminology. |
+| `docs/index.md` | M | Scrubbed brand references from sprint overviews. |
+| `docs/modules/broadcaster.md` | M | Generalised module description. |
+| `src/routes/broadcaster.routes.js` | M | Removed brand reference in comments. |
+| `src/routes/websites.routes.js` | M | Removed brand reference in comments. |
+=======
+
+# Additional updates for the 2025‑08‑21 infrastructure patch
+
+| Path | Status | Notes |
+|---|---|---|
+| `src/server.js` | M | Added `uncaughtException` handler to log and exit on fatal errors. |
+| `docs/framework-compliance.md` | M | Documented global exception handling in compliance rubric. |
+| `docs/index.md` | M | Added infrastructure sprint overview and noted repository access issue. |
+| `docs/progress-ledger.md` | M | Recorded resource repository access issue. |
+| `docs/research-log.md` | A | New research log noting failed repository clone and Node.js docs reference. |
+| `MANIFEST.md` | M | Updated to include infrastructure patch notes. |
+| `CHANGELOG.md` | M | Added entry for infrastructure patch. |
+=======
