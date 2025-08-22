@@ -16,7 +16,9 @@ router.use('/v1/websites', websitesLimiter);
  * Returns a list of websites.  If `ownerId` query parameter is provided,
  * only websites belonging to that character are returned.  Otherwise all
  * websites are returned.  This endpoint mirrors the `websitesList`
- * event in the NoPixel server, but exposed as an HTTP API.
+ * event in the legacy server, but exposed as an HTTP API.
+=======
+ * event in the original server, but exposed as an HTTP API.
  */
 router.get('/v1/websites', async (req, res) => {
   try {

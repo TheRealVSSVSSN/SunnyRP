@@ -315,6 +315,35 @@ components:
         z:
           type: number
           description: Z coordinate where the note is placed
+    Tweet:
+      type: object
+      properties:
+        handle:
+          type: string
+          maxLength: 64
+        message:
+          type: string
+          maxLength: 280
+        time:
+          type: integer
+          format: int64
+
+    TweetCreateRequest:
+      type: object
+      required:
+        - handle
+        - message
+      properties:
+        handle:
+          type: string
+          maxLength: 64
+        message:
+          type: string
+          maxLength: 280
+        time:
+          type: integer
+          format: int64
+security:
     # Evidence item record
     EvidenceItem:
       type: object
@@ -1746,13 +1775,18 @@ paths:
                     type: string
                   traceId:
                     type: string
-
   /v1/evidence/items:
     get:
       summary: List evidence items
       responses:
         '200':
           description: List of evidence items
+  /v1/phone/tweets:
+    get:
+      summary: List recent tweets
+      responses:
+        '200':
+          description: List of tweets
           content:
             application/json:
               schema:
@@ -1767,12 +1801,17 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/EvidenceItem'
+                      tweets:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Tweet'
                   requestId:
                     type: string
                   traceId:
                     type: string
     post:
       summary: Create an evidence item
+      summary: Create a tweet
       requestBody:
         required: true
         content:
@@ -1782,6 +1821,10 @@ paths:
       responses:
         '200':
           description: Evidence item created
+              $ref: '#/components/schemas/TweetCreateRequest'
+      responses:
+        '200':
+          description: Created tweet
           content:
             application/json:
               schema:
@@ -1893,3 +1936,9 @@ paths:
                     type: string
         '404':
           description: Item not found
+                      tweet:
+                        $ref: '#/components/schemas/Tweet'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string

@@ -19,9 +19,13 @@
 
 ### Notes
 
-This sprint continues the integration of NoPixel server behaviours into
+This sprint continues the integration of legacy server behaviours into
 the unified `srp‑base` Node.js backend.  The broadcaster module
-implements the server-side logic of the NoPixel `np-broadcaster`
+implements the server-side logic of the legacy `np-broadcaster`
+=======
+This sprint continues the integration of original server behaviours into
+the unified `srp‑base` Node.js backend.  The broadcaster module
+implements the server-side logic of the original `np-broadcaster`
 resource in a RESTful manner.  The limit of concurrent broadcasters
 is configurable via the `MAX_BROADCASTERS` environment variable.
 
@@ -46,7 +50,9 @@ is configurable via the `MAX_BROADCASTERS` environment variable.
 This sprint focused on research, documentation and gap analysis
 rather than new features.  After compiling a framework compliance
 rubric and auditing the existing codebase, we resumed processing
-NoPixel resources.  The following resources were reviewed:
+legacy resources.  The following resources were reviewed:
+=======
+original resources.  The following resources were reviewed
 
 * **koilWeatherSync** – provides events to sync weather and time; the
   existing `/v1/world/state` endpoints already handle world state via
@@ -222,7 +228,9 @@ logic or require more comprehensive systems (e.g. EMS) to support.
 
 ### Notes (Part 7)
 
-In this sprint we examined another batch of NoPixel resources.
+In this sprint we examined another batch of legacy resources.
+=======
+In this sprint we examined another batch of original resources.
 `np-infinity` broadcasts players’ coordinates via events and does not
 require persistence【569396379702026†L0-L12】.  `np-interior`, `np-keypad`,
 `np-keys`, `np-lockpicking`, `np-lootsystem` and `np-login` contain
@@ -359,6 +367,8 @@ This sprint was a documentation‑only update.  No new endpoints, migrations or 
 
 ### Changed (2025‑08‑21)
 
+* Sanitised documentation and route comments to remove explicit references to the original server brand.
+
 * **openapi/api.yaml** – Corrected the websites API definition by moving the POST operation to the `/v1/websites` path and removing the erroneous POST under `/v1/players/{playerId}/ammo`.  Added path documentation for the ammo endpoints.
 * **progress‑ledger.md** – Added entries 80–105 recording skip, defer and create decisions for resources from `np‑securityheists` through `outlawalert`.  Notably, it records the creation of the ammo API for `np‑weapons`.
 * **index.md** – Appended a new sprint overview for 2025‑08‑21 summarising the ammo API and skip/defer decisions.
@@ -366,6 +376,34 @@ This sprint was a documentation‑only update.  No new endpoints, migrations or 
 
 ### Notes (2025‑08‑21)
 
+This sprint continued the systematic audit of legacy resources.  The vast majority of modules processed (from `np‑securityheists` to `outlawalert`) either contained only client scripts or relayed events without persisting state【644264532347613†L0-L9】【147099589493415†L0-L17】.  These were skipped or deferred.  The notable exception was **np‑weapons**, which keeps ammunition counts in a SQL table and updates them via events【735206341651753†L6-L44】.  To provide equivalent functionality, we created the **player ammunition API** described above.  We also fixed an OpenAPI misplacement for the websites POST endpoint.  No other endpoints or migrations were modified.  Future sprints will address remaining resources such as `pNotify`, `pPassword`, `ped`, `phone`, `police` and others.
+
+### Added (2025‑08‑21 – Part 2)
+
+* **Phone tweets API.** Introduced `phoneRepository.js`, `phone.routes.js` and migration `018_add_tweets.sql` to persist tweets and expose `GET/POST /v1/phone/tweets`.
+
+### Changed (2025‑08‑21 – Part 2)
+
+* **app.js** – Mounted the phone routes.
+* **openapi/api.yaml** – Added `Tweet` schemas and path documentation for `/v1/phone/tweets`.
+* **Docs** – Updated progress ledger, index and base API documentation; added `docs/modules/phone.md`.
+
+### Notes (2025‑08‑21 – Part 2)
+
+Processed the remaining legacy resources from `pNotify` through `yarn`. All were client‑side or configuration assets except **phone**, which required the tweets API. Other modules were skipped or deferred pending broader subsystems (e.g. jobs, vehicle shops).
+
+### Changed (2025‑08‑22)
+
+* **openapi/api.yaml** – Added `maxLength` constraints to tweet fields and synced specification copy.
+* **phone.routes.js** – Removed redundant JSON parser and enforced handle/message length limits.
+* **Docs & comments** – Replaced remaining external project references with neutral language across documentation and route comments.
+
+### Notes (2025‑08‑22)
+
+Cleanup pass to remove external branding and tighten validation on the phone tweets API.
+=======
+This sprint continued the systematic audit of original resources.  The vast majority of modules processed (from `np‑securityheists` to `outlawalert`) either contained only client scripts or relayed events without persisting state【644264532347613†L0-L9】【147099589493415†L0-L17】.  These were skipped or deferred.  The notable exception was **np‑weapons**, which keeps ammunition counts in a SQL table and updates them via events【735206341651753†L6-L44】.  To provide equivalent functionality, we created the **player ammunition API** described above.  We also fixed an OpenAPI misplacement for the websites POST endpoint.  No other endpoints or migrations were modified.  Future sprints will address remaining resources such as `pNotify`, `pPassword`, `ped`, `phone`, `police` and others.
+=======
 This sprint continued the systematic audit of NoPixel resources.  The vast majority of modules processed (from `np‑securityheists` to `outlawalert`) either contained only client scripts or relayed events without persisting state【644264532347613†L0-L9】【147099589493415†L0-L17】.  These were skipped or deferred.  The notable exception was **np‑weapons**, which keeps ammunition counts in a SQL table and updates them via events【735206341651753†L6-L44】.  To provide equivalent functionality, we created the **player ammunition API** described above.  We also fixed an OpenAPI misplacement for the websites POST endpoint.  No other endpoints or migrations were modified.  Future sprints will address remaining resources such as `pNotify`, `pPassword`, `ped`, `phone`, `police` and others.
 
 ### Changed (2025‑08‑21 Part 2)
@@ -376,3 +414,12 @@ This sprint continued the systematic audit of NoPixel resources.  The vast major
 ### Notes (2025‑08‑21 Part 2)
 
 This small follow‑up sprint focused on documenting and standardising the existing evidence functionality. No additional resources were processed and no database changes were required.
+=======
+### Changed (2025‑08‑21 – Infrastructure)
+
+* **src/server.js** – Added global `uncaughtException` handler to log and exit on unexpected errors.
+* **docs/framework-compliance.md** – Updated compliance notes to mention global exception listeners.
+* **docs/index.md** – Added infrastructure sprint overview.
+* **docs/progress-ledger.md** – Noted inability to access reference resource repository.
+* **docs/research-log.md** – New file capturing research and access issue.
+=======

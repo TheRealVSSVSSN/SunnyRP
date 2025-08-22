@@ -62,6 +62,9 @@ const websitesRoutes = require('./routes/websites.routes');
 // notes domain route
 const notesRoutes = require('./routes/notes.routes');
 
+// phone domain route
+const phoneRoutes = require('./routes/phone.routes');
+
 // secondary jobs domain route
 const secondaryJobsRoutes = require('./routes/secondaryJobs.routes');
 
@@ -141,6 +144,9 @@ app.use(websitesRoutes);
 
 // mount notes routes
 app.use(notesRoutes);
+
+// mount phone routes
+app.use(phoneRoutes);
 
 // mount secondary jobs routes
 app.use(secondaryJobsRoutes);
