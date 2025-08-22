@@ -135,3 +135,4 @@ Legend: **A** = Added, **M** = Modified.
 | `docs/BASE_API_DOCUMENTATION.md` | M | Added evidence endpoints to domain summary. |
 | `MANIFEST.md` | M | Recorded Part 2 file changes. |
 | `CHANGELOG.md` | M | Logged evidence OpenAPI and documentation updates. |
+=======

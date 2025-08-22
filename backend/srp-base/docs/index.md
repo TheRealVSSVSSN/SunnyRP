@@ -436,3 +436,4 @@ persistent state or cross‑player interactions are required.
 This follow‑up sprint addressed documentation gaps for the **evidence** module. We added OpenAPI schemas and path definitions for evidence items and aligned the route responses with the standard `{ ok, data }` envelope. Module documentation now covers the evidence API.
 
 No new NoPixel resources were processed in this part; the focus was solely on bringing existing evidence functionality into compliance with the service documentation standards.
+=======
