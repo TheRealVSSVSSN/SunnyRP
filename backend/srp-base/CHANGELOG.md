@@ -19,9 +19,9 @@
 
 ### Notes
 
-This sprint continues the integration of NoPixel server behaviours into
+This sprint continues the integration of original server behaviours into
 the unified `srp‑base` Node.js backend.  The broadcaster module
-implements the server-side logic of the NoPixel `np-broadcaster`
+implements the server-side logic of the original `np-broadcaster`
 resource in a RESTful manner.  The limit of concurrent broadcasters
 is configurable via the `MAX_BROADCASTERS` environment variable.
 
@@ -46,7 +46,7 @@ is configurable via the `MAX_BROADCASTERS` environment variable.
 This sprint focused on research, documentation and gap analysis
 rather than new features.  After compiling a framework compliance
 rubric and auditing the existing codebase, we resumed processing
-NoPixel resources.  The following resources were reviewed:
+original resources.  The following resources were reviewed:
 
 * **koilWeatherSync** – provides events to sync weather and time; the
   existing `/v1/world/state` endpoints already handle world state via
@@ -222,7 +222,7 @@ logic or require more comprehensive systems (e.g. EMS) to support.
 
 ### Notes (Part 7)
 
-In this sprint we examined another batch of NoPixel resources.
+In this sprint we examined another batch of original resources.
 `np-infinity` broadcasts players’ coordinates via events and does not
 require persistence【569396379702026†L0-L12】.  `np-interior`, `np-keypad`,
 `np-keys`, `np-lockpicking`, `np-lootsystem` and `np-login` contain
@@ -359,6 +359,8 @@ This sprint was a documentation‑only update.  No new endpoints, migrations or 
 
 ### Changed (2025‑08‑21)
 
+* Sanitised documentation and route comments to remove explicit references to the original server brand.
+
 * **openapi/api.yaml** – Corrected the websites API definition by moving the POST operation to the `/v1/websites` path and removing the erroneous POST under `/v1/players/{playerId}/ammo`.  Added path documentation for the ammo endpoints.
 * **progress‑ledger.md** – Added entries 80–105 recording skip, defer and create decisions for resources from `np‑securityheists` through `outlawalert`.  Notably, it records the creation of the ammo API for `np‑weapons`.
 * **index.md** – Appended a new sprint overview for 2025‑08‑21 summarising the ammo API and skip/defer decisions.
@@ -366,6 +368,8 @@ This sprint was a documentation‑only update.  No new endpoints, migrations or 
 
 ### Notes (2025‑08‑21)
 
+This sprint continued the systematic audit of original resources.  The vast majority of modules processed (from `np‑securityheists` to `outlawalert`) either contained only client scripts or relayed events without persisting state【644264532347613†L0-L9】【147099589493415†L0-L17】.  These were skipped or deferred.  The notable exception was **np‑weapons**, which keeps ammunition counts in a SQL table and updates them via events【735206341651753†L6-L44】.  To provide equivalent functionality, we created the **player ammunition API** described above.  We also fixed an OpenAPI misplacement for the websites POST endpoint.  No other endpoints or migrations were modified.  Future sprints will address remaining resources such as `pNotify`, `pPassword`, `ped`, `phone`, `police` and others.
+=======
 This sprint continued the systematic audit of NoPixel resources.  The vast majority of modules processed (from `np‑securityheists` to `outlawalert`) either contained only client scripts or relayed events without persisting state【644264532347613†L0-L9】【147099589493415†L0-L17】.  These were skipped or deferred.  The notable exception was **np‑weapons**, which keeps ammunition counts in a SQL table and updates them via events【735206341651753†L6-L44】.  To provide equivalent functionality, we created the **player ammunition API** described above.  We also fixed an OpenAPI misplacement for the websites POST endpoint.  No other endpoints or migrations were modified.  Future sprints will address remaining resources such as `pNotify`, `pPassword`, `ped`, `phone`, `police` and others.
 
 ### Changed (2025‑08‑21 – Infrastructure)
