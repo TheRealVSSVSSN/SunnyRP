@@ -123,4 +123,15 @@ Legend: **A** = Added, **M** = Modified.
 | `MANIFEST.md` | M | Updated to include this section and list new files/changes. |
 | `CHANGELOG.md` | M | Appended notes for the 2025‑08‑21 sprint covering the ammo API and documentation updates. |
 
+# Additional updates for the 2025‑08‑21 infrastructure patch
 
+| Path | Status | Notes |
+|---|---|---|
+| `src/server.js` | M | Added `uncaughtException` handler to log and exit on fatal errors. |
+| `docs/framework-compliance.md` | M | Documented global exception handling in compliance rubric. |
+| `docs/index.md` | M | Added infrastructure sprint overview and noted repository access issue. |
+| `docs/progress-ledger.md` | M | Recorded resource repository access issue. |
+| `docs/research-log.md` | A | New research log noting failed repository clone and Node.js docs reference. |
+| `MANIFEST.md` | M | Updated to include infrastructure patch notes. |
+| `CHANGELOG.md` | M | Added entry for infrastructure patch. |
+=======
