@@ -283,6 +283,13 @@ In addition to the core identity, permissions, characters and admin APIs describ
 | `GET` | `/v1/players/{playerId}/ammo` | Retrieve a player’s ammunition counts as an object keyed by weapon type. |
 | `PATCH` | `/v1/players/{playerId}/ammo` | Update the ammunition count for a specific weapon type (body: `{ weaponType, ammo }`). |
 
+#### Phone (Tweets)
+
+| Method | Path | Description |
+|-------|-----|-------------|
+| `GET` | `/v1/phone/tweets` | Retrieve up to the 50 most recent tweets. |
+| `POST` | `/v1/phone/tweets` | Create a new tweet with a handle and message. |
+
 These endpoints round out the foundation of `srp-base`.  Together with the previously documented identity, permissions, config and outbox APIs they provide a **complete backend** capable of supporting all future gameplay modules.  Lua resources can rely on these endpoints to persist and retrieve state while implementing their own behaviour.
 
 ### Identity & Permissions
@@ -397,4 +404,7 @@ To support all features present in the original server resources at the framewor
   - `PATCH /v1/loot/items/:id` – Update fields on a loot item.
   - `DELETE /v1/loot/items/:id` – Remove a loot item after it is collected or expired.
 
+These services run on separate ports (3080 for dispatch, 3090 for evidence, 3100 for EMS, 3110 for keys and 3120 for loot) and require their own environment variables (database credentials, API token, HMAC secret, etc.).  By providing them now, the backend offers a **complete foundation** for every external resource.  Future Lua resources will call these APIs to create and retrieve alerts, evidence, medical records, keys or loot, but no gameplay logic exists on the backend; it merely stores and retrieves data.
+=======
 These services run on separate ports (3080 for dispatch, 3090 for evidence, 3100 for EMS, 3110 for keys and 3120 for loot) and require their own environment variables (database credentials, API token, HMAC secret, etc.).  By providing them now, the backend offers a **complete foundation** for every original resource.  Future Lua resources will call these APIs to create and retrieve alerts, evidence, medical records, keys or loot, but no gameplay logic exists on the backend; it merely stores and retrieves data.
+

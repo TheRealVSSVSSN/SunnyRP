@@ -1,5 +1,7 @@
 # Sprint Overview – 2025‑08‑18
 
+This sprint focused on continuing the migration of legacy
+=======
 This sprint focused on continuing the migration of original
 server-side behaviours into the unified `srp‑base` Node.js service.
 The goal is to provide feature parity with the original Lua
@@ -8,6 +10,8 @@ resources while conforming to a clean, layered Node.js architecture.
 ### Highlights
 
 * Added a **broadcaster** module that replicates the behaviour of
+  the legacy `np-broadcaster` resource.  A new REST endpoint
+=======
   the original `np-broadcaster` resource.  A new REST endpoint
   (`POST /v1/broadcast/attempt`) assigns the `broadcaster` job to
   a player while enforcing a configurable maximum number of
@@ -26,6 +30,8 @@ For a full list of processed resources and their decisions, see
 # Sprint Overview – 2025‑08‑19 (Part 2)
 
 This continuation of the 2025‑08‑19 sprint focused on processing
+additional legacy resources and documenting the decisions taken.
+=======
 additional original resources and documenting the decisions taken.
 Following the earlier documentation and compliance effort, we
 examined a further set of resources in the order listed by
@@ -74,6 +80,8 @@ ensure the progress ledger is current.
 # Sprint Overview – 2025‑08‑19 (Part 3)
 
 In this follow‑on sprint we continued our systematic audit of the
+legacy resources, focusing on modules that appear after
+=======
 original resources, focusing on modules that appear after
 `np‑base` in the GitHub ordering.  Most resources examined
 contained only client scripts and therefore required no backend
@@ -116,6 +124,8 @@ persistence or cross‑player interactions.
 
 # Sprint Overview – 2025‑08‑19 (Part 5)
 
+In this sprint we continued our methodical march through the legacy
+=======
 In this sprint we continued our methodical march through the original
 resources directory.  After handling driving schools and tests in the
 previous sprint, the next group of resources mostly contained
@@ -174,6 +184,8 @@ interaction is required.
 
 # Sprint Overview – 2025‑08‑19 (Part 4)
 
+This sprint processed the next set of legacy resources after
+=======
 This sprint processed the next set of original resources after
 `np‑dirtymoney` in the repository ordering.  We identified two
 resources that required backend support: **np‑driftschool** and
@@ -204,6 +216,8 @@ skipped the unrelated `np‑drugdeliveries` resource.
 # Sprint Overview – 2025‑08‑19 (Part 6)
 
 After completing the weed plants integration, we turned our attention to
+the next batch of legacy resources.  Most were client‑only or
+=======
 the next batch of original resources.  Most were client‑only or
 implemented purely cosmetic features, but two stood out: **np‑gurgle**
 and **np‑hospitalization**.  The former provides a phone app for
@@ -275,6 +289,8 @@ records the skip/defer decisions and the new module.
 
 # Sprint Overview – 2025‑08‑19 (Part 7)
 
+In this sprint we reviewed the next batch of legacy resources after
+=======
 In this sprint we reviewed the next batch of original resources after
 `np‑hunting`.  The majority of these modules are purely client‑side
 or implement simple event relays that do not require any persistence
@@ -304,7 +320,8 @@ ledger records these skip and defer decisions.  Future sprints will resume with
 `np-phone`, `np-police`, `np-polyzone` and other remaining resources.
 
 # Sprint Overview – 2025‑08‑19 (Part 8)
-
+This sprint continued processing the next set of legacy resources in order,
+=======
 This sprint continued processing the next set of original resources in order,
 covering `np‑lost` through `np‑notepad`.  Most of these resources contain
 client‑only scripts or simple event relays with no persistent data, so they were
@@ -346,7 +363,8 @@ across server restarts, filling a gap in the original Lua implementation.
 ---
 
 # Sprint Overview – 2025‑08‑20
-
+In this sprint we continued down the legacy `resources` directory,
+=======
 In this sprint we continued down the original `resources` directory,
 processing modules starting from the `np‑o` prefix.  We found that
 most of these resources contain only client‑side scripts or visual
@@ -396,6 +414,8 @@ and recorded the skip decisions for the remaining modules.
 
 # Sprint Overview – 2025‑08‑21
 
+This sprint processed the next set of legacy resources starting with `np‑voice` and extending through `outlawalert`.  Most of these modules are either client-only or implement event relays with no persistent state, so they were **skipped**.  The primary new feature introduced is a **player ammunition management API** to reflect the behaviour of the `np‑weapons` resource, which stores ammunition counts on the server.  We also corrected a path placement error in the OpenAPI specification for the websites API.
+=======
 This sprint processed the next set of original resources starting with `np‑voice` and extending through `outlawalert`.  Most of these modules are either client-only or implement event relays with no persistent state, so they were **skipped**.  The primary new feature introduced is a **player ammunition management API** to reflect the behaviour of the `np‑weapons` resource, which stores ammunition counts on the server.  We also corrected a path placement error in the OpenAPI specification for the websites API.
 
 ### Highlights
@@ -432,6 +452,32 @@ persistent state or cross‑player interactions are required.
 
 ---
 
+# Sprint Overview – 2025‑08‑21 (Part 2)
+
+Continuing the audit, we processed the remaining legacy resources
+from `pNotify` through `yarn`.  Nearly all were client‑side utilities
+or asset packs and required no backend work.  The notable exception
+was the **phone** resource which stores tweets in MySQL; we added a
+small API to manage these tweets.
+
+### Highlights
+
+* **Phone tweets API** – Implemented `GET` and `POST /v1/phone/tweets`
+  with persistence in a new `tweets` table.
+
+### Resources processed
+
+* pNotify, pPassword, ped – client features; skipped.
+* phone – tweet system; **created** tweets API.
+* police, policegarage – already covered by existing routes; skipped.
+* radio, ragdoll, raid_carmenu, raid_cars, raid_clothes, rconlog,
+  runcode, sessionmanager, shops, spawnmanager, stereo, storage,
+  tf-pointing – client or engine features; skipped.
+* towtruckjob, truckerjob, veh_shop, veh_shop_imports – depend on a
+  fuller jobs/vehicles subsystem; deferred.
+* trains, uitest, veh, warmenu, webpack, wk_wrs, yarn – no persistent
+  server logic; skipped.
+=======
 # Sprint Overview – 2025‑08‑21 (Infrastructure)
 
 A short hardening pass added a global `uncaughtException` handler so the server logs unexpected errors and exits cleanly. The reference resource repository was unreachable (HTTP 403), therefore no new gameplay resources were processed in this run.
