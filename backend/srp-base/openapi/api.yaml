@@ -315,6 +315,19 @@ components:
         z:
           type: number
           description: Z coordinate where the note is placed
+    # Job assignment returned when a broadcaster job is granted
+    JobAssignment:
+      type: object
+      properties:
+        playerId:
+          type: string
+        jobId:
+          type: integer
+        onDuty:
+          type: boolean
+        hiredAt:
+          type: string
+          format: date-time
     Tweet:
       type: object
       properties:
@@ -604,6 +617,9 @@ paths:
   /v1/admin/ban:
     post:
       summary: Ban a player
+      operationId: banPlayer
+      security:
+        - ApiToken: []
       requestBody:
         required: true
         content:
@@ -624,7 +640,113 @@ paths:
       responses:
         '200':
           description: Player banned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      banned:
+                        type: boolean
+                      reason:
+                        type: string
+                      until:
+                        type: string
+                        format: date-time
+                        nullable: true
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '500':
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
 
+  /v1/broadcast/attempt:
+    post:
+      summary: Attempt to become a broadcaster
+      operationId: attemptBroadcast
+      security:
+        - ApiToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - playerId
+              properties:
+                playerId:
+                  type: string
+      responses:
+        '200':
+          description: Broadcaster job assigned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      assignment:
+                        $ref: '#/components/schemas/JobAssignment'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          description: Invalid input
+        '404':
+          description: Broadcaster job not found
+        '409':
+          description: Broadcaster limit reached
+        '429':
+          description: Rate limit exceeded
   # Contracts API
   /v1/contracts:
     get:
