@@ -181,3 +181,13 @@ Legend: **A** = Added, **M** = Modified.
 | `docs/progress-ledger.md` | M | Removed duplicate `np‑evidence` entry. |
 | `MANIFEST.md` | M | Recorded broadcaster spec and ledger cleanup. |
 | `CHANGELOG.md` | M | Logged broadcaster path addition and ledger cleanup. |
+
+# Additional updates for the 2025-08-23 broadcaster follow-up
+
+| Path | Status | Notes |
+|---|---|---|
+| `openapi/api.yaml` | M | Added operationId and error responses for broadcaster attempt. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Clarified broadcaster error cases. |
+| `docs/modules/broadcaster.md` | M | Documented standard envelope and error codes; ensured newline. |
+| `MANIFEST.md` | M | Recorded broadcaster follow-up changes. |
+| `CHANGELOG.md` | M | Logged broadcaster follow-up changes. |

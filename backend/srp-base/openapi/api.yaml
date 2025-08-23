@@ -641,6 +641,9 @@ paths:
   /v1/broadcast/attempt:
     post:
       summary: Attempt to become a broadcaster
+      operationId: attemptBroadcast
+      security:
+        - ApiToken: []
       requestBody:
         required: true
         content:
@@ -671,11 +674,14 @@ paths:
                     type: string
                   traceId:
                     type: string
+        '400':
+          description: Invalid input
         '404':
           description: Broadcaster job not found
         '409':
           description: Broadcaster limit reached
-
+        '429':
+          description: Rate limit exceeded
   # Contracts API
   /v1/contracts:
     get:

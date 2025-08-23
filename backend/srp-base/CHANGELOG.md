@@ -427,3 +427,14 @@ Housekeeping pass to deduplicate migration numbers, remove an obsolete OpenAPI c
 ### Notes (2025-08-23 broadcaster)
 
 Documented broadcaster endpoint in OpenAPI and base API docs; cleaned progress ledger duplication.
+
+### Changed (2025-08-23 broadcaster follow-up)
+
+* **openapi/api.yaml** – Added operationId and error responses for `/v1/broadcast/attempt`.
+* **docs/BASE_API_DOCUMENTATION.md** – Clarified broadcaster error cases.
+* **docs/modules/broadcaster.md** – Documented response envelope and error codes.
+* **MANIFEST.md** – Recorded broadcaster follow-up changes.
+
+### Notes (2025-08-23 broadcaster follow-up)
+
+Expanded broadcaster documentation and OpenAPI to address review feedback.

@@ -337,6 +337,8 @@ These endpoints round out the foundation of `srp-base`.  Together with the previ
 
 | Method | Path | Description |
 |-------|-----|-------------|
+| `POST` | `/v1/broadcast/attempt` | Assign the `broadcaster` job if below the configured limit; returns `400 INVALID_INPUT`, `404 NOT_FOUND` or `409 LIMIT_REACHED` on error. |
+=======
 | `POST` | `/v1/broadcast/attempt` | Assign the `broadcaster` job to a player if under the active broadcaster limit. |
 
 ## Feature Flags
