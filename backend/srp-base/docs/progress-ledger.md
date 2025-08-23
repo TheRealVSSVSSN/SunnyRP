@@ -145,3 +145,5 @@ server‑side logic is considered; purely client resources are skipped.
 | 134 | wk_wrs | Radar UI client scripts. | Skip — nothing to port. | — |
 | 135 | yarn | Packaging utility for development. | Skip — not a runtime resource. | — |
 | 136 | openapi-spec | Fixed missing path parameter for `/v1/characters/{id}` and added 4xx responses & operationIds to phone tweets. | Extend | openapi/api.yaml |
+| 137 | np-admin (ban endpoint) | Adds ban API persisting player bans with reason and optional expiry. | Create — implemented admin ban repository, route and migration. | this sprint |
+| 138 | openapi-spec (evidence) | Added schemas for evidence items to satisfy specification references. | Extend | openapi/api.yaml |

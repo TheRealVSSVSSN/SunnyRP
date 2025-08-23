@@ -456,3 +456,11 @@ small API to manage these tweets.
 * Removed duplicate OpenAPI specification copy and cleaned stray security block.
 * Renamed tweets migration to resolve numbering conflict.
 * Cleared merge artifacts in broadcaster route and evidence documentation.
+
+### Sprint 2025-08-22 (Admin bans)
+
+* Implemented persistent player bans via `/v1/admin/ban` with a dedicated repository and `bans` table. Updated OpenAPI and documentation accordingly.
+
+### Sprint 2025-08-23 (Evidence schema fix)
+
+* Added missing `EvidenceItem` schemas to the OpenAPI specification and cleaned merge artifact in base API documentation.

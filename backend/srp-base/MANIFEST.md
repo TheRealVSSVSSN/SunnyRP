@@ -191,3 +191,27 @@ Legend: **A** = Added, **M** = Modified.
 | `docs/modules/broadcaster.md` | M | Documented standard envelope and error codes; ensured newline. |
 | `MANIFEST.md` | M | Recorded broadcaster follow-up changes. |
 | `CHANGELOG.md` | M | Logged broadcaster follow-up changes. |
+
+# Additional updates for the 2025-08-22 admin bans
+
+| Path | Status | Notes |
+|---|---|---|
+| `src/repositories/adminRepository.js` | A | Repository to persist player bans. |
+| `src/routes/admin.routes.js` | M | Store bans via repository and validate inputs. |
+| `src/migrations/020_add_bans.sql` | A | Migration creating the `bans` table with optional expiry. |
+| `openapi/api.yaml` | M | Documented admin ban endpoint with security and response envelope. |
+| `docs/modules/admin.md` | A | Module documentation for admin ban API. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Updated admin ban description to note persistence. |
+| `docs/index.md` | M | Added sprint overview for admin bans feature. |
+| `docs/progress-ledger.md` | M | Logged admin ban API creation. |
+| `docs/research-log.md` | M | Noted reference repository access failure. |
+
+# Additional updates for the 2025-08-23 evidence schema fix
+
+| Path | Status | Notes |
+|---|---|---|
+| `openapi/api.yaml` | M | Defined `EvidenceItem` schemas referenced by evidence routes. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Removed merge artifact in broadcaster section. |
+| `docs/index.md` | M | Logged evidence schema fix. |
+| `docs/progress-ledger.md` | M | Recorded OpenAPI evidence entry. |
+| `docs/research-log.md` | M | Noted reference repository access failure. |

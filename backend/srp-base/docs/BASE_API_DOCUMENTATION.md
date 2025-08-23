@@ -1,4 +1,4 @@
-# SunnyRP Base API (srp-base) Documentation
+|  |  | Ban a player.  Body .  Persists to the bans table and returns ban status. |# SunnyRP Base API (srp-base) Documentation
 
 This document provides a comprehensive overview of the `srp-base` microservice—the authoritative backend for the SunnyRP FiveM server.  It covers the service’s purpose, architecture, configuration, database schema, security model and endpoints, along with guidance for installation, deployment and integration with FiveM Lua resources.
 
@@ -328,7 +328,7 @@ These endpoints round out the foundation of `srp-base`.  Together with the previ
 
 | Method | Path | Description |
 |-------|-----|-------------|
-| `POST` | `/v1/admin/ban` | Ban a player.  Body `{ playerId, reason, until? }`.  Returns the new ban status. |
+| `POST` | `/v1/admin/ban` | Ban a player.  Body `{ playerId, reason, until? }`.  Persists to the bans table and returns ban status. |
 | `POST` | `/v1/admin/kick` | Kick a player (future extension). |
 | `GET` | `/v1/admin/audit` | Fetch audit logs (future extension). |
 
@@ -338,8 +338,6 @@ These endpoints round out the foundation of `srp-base`.  Together with the previ
 | Method | Path | Description |
 |-------|-----|-------------|
 | `POST` | `/v1/broadcast/attempt` | Assign the `broadcaster` job if below the configured limit; returns `400 INVALID_INPUT`, `404 NOT_FOUND` or `409 LIMIT_REACHED` on error. |
-=======
-| `POST` | `/v1/broadcast/attempt` | Assign the `broadcaster` job to a player if under the active broadcaster limit. |
 
 ## Feature Flags
 
