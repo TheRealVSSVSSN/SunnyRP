@@ -449,3 +449,12 @@ Expanded broadcaster documentation and OpenAPI to address review feedback.
 
 ### Notes (2025-08-22 – admin bans)
 Bans now survive service restarts. Rollback by dropping the `bans` table and reverting the route and repository changes.
+
+### Changed (2025-08-23 – evidence schemas)
+
+* **openapi/api.yaml** – Added `EvidenceItem` schemas referenced by evidence endpoints.
+* **docs** – Removed merge artifact in base API docs and logged evidence schema fix in index and ledger.
+
+### Notes (2025-08-23 – evidence schemas)
+
+Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour changes. Rollback by removing the schema definitions and restoring previous documentation versions.

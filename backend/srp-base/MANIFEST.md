@@ -205,3 +205,13 @@ Legend: **A** = Added, **M** = Modified.
 | `docs/index.md` | M | Added sprint overview for admin bans feature. |
 | `docs/progress-ledger.md` | M | Logged admin ban API creation. |
 | `docs/research-log.md` | M | Noted reference repository access failure. |
+
+# Additional updates for the 2025-08-23 evidence schema fix
+
+| Path | Status | Notes |
+|---|---|---|
+| `openapi/api.yaml` | M | Defined `EvidenceItem` schemas referenced by evidence routes. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Removed merge artifact in broadcaster section. |
+| `docs/index.md` | M | Logged evidence schema fix. |
+| `docs/progress-ledger.md` | M | Recorded OpenAPI evidence entry. |
+| `docs/research-log.md` | M | Noted reference repository access failure. |
