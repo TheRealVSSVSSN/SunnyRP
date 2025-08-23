@@ -65,6 +65,9 @@ const notesRoutes = require('./routes/notes.routes');
 // phone domain route
 const phoneRoutes = require('./routes/phone.routes');
 
+// diamond blackjack domain route
+const diamondBlackjackRoutes = require('./routes/diamondBlackjack.routes');
+
 // secondary jobs domain route
 const secondaryJobsRoutes = require('./routes/secondaryJobs.routes');
 
@@ -147,6 +150,9 @@ app.use(notesRoutes);
 
 // mount phone routes
 app.use(phoneRoutes);
+
+// mount diamond blackjack routes
+app.use(diamondBlackjackRoutes);
 
 // mount secondary jobs routes
 app.use(secondaryJobsRoutes);

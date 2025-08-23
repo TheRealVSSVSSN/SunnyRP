@@ -215,3 +215,26 @@ Legend: **A** = Added, **M** = Modified.
 | `docs/index.md` | M | Logged evidence schema fix. |
 | `docs/progress-ledger.md` | M | Recorded OpenAPI evidence entry. |
 | `docs/research-log.md` | M | Noted reference repository access failure. |
+
+# Updates for 2025-08-23 (DiamondBlackjack)
+
+| Path | Status | Notes |
+|---|---|---|
+| `src/repositories/diamondBlackjackRepository.js` | A | Persist blackjack hand history. |
+| `src/routes/diamondBlackjack.routes.js` | A | Endpoints for recording and listing hands. |
+| `src/migrations/021_add_diamond_blackjack.sql` | A | Creates `diamond_blackjack_hands` table. |
+| `src/app.js` | M | Mounted diamond blackjack routes. |
+| `openapi/api.yaml` | M | Added schemas and paths for diamond blackjack. |
+| `docs/index.md` | M | Reset with new sprint overview. |
+| `docs/progress-ledger.md` | M | Reset ledger with DiamondBlackjack entry. |
+| `docs/framework-compliance.md` | M | Noted diamond blackjack module compliance. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented diamond blackjack endpoints. |
+| `docs/events-and-rpcs.md` | A | Mapped blackjack events to API. |
+| `docs/db-schema.md` | A | Documented `diamond_blackjack_hands` table. |
+| `docs/migrations.md` | A | Listed migration files including 021. |
+| `docs/admin-ops.md` | A | Operations notes including migration command. |
+| `docs/security.md` | A | Security notes for new endpoints. |
+| `docs/testing.md` | A | Manual verification guidance. |
+| `docs/modules/diamondBlackjack.md` | A | Module documentation. |
+| `docs/research-log.md` | M | Logged research sources. |
+| `CHANGELOG.md` | M | Added diamond blackjack entry. |
