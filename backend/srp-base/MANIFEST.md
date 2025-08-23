@@ -171,3 +171,13 @@ Legend: **A** = Added, **M** = Modified.
 | `docs/modules/phone.md` | M | Updated migration reference to `019_add_tweets.sql`. |
 | `MANIFEST.md` | M | Recorded canonicalization changes. |
 | `CHANGELOG.md` | M | Logged canonicalization actions. |
+
+# Additional updates for the 2025-08-23 broadcaster documentation
+
+| Path | Status | Notes |
+|---|---|---|
+| `openapi/api.yaml` | M | Documented `/v1/broadcast/attempt` and added `JobAssignment` schema. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Added broadcaster endpoint description. |
+| `docs/progress-ledger.md` | M | Removed duplicate `np‑evidence` entry. |
+| `MANIFEST.md` | M | Recorded broadcaster spec and ledger cleanup. |
+| `CHANGELOG.md` | M | Logged broadcaster path addition and ledger cleanup. |

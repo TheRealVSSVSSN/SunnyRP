@@ -417,3 +417,13 @@ Resolved OpenAPI lint error and clarified phone tweet error handling in document
 ### Notes (2025-08-22 canonicalization)
 
 Housekeeping pass to deduplicate migration numbers, remove an obsolete OpenAPI copy and fix merge artifacts in documentation and routes. No functional behaviour changed.
+
+### Changed (2025-08-23 broadcaster)
+
+* **openapi/api.yaml** – Documented `/v1/broadcast/attempt` and added `JobAssignment` schema.
+* **docs/BASE_API_DOCUMENTATION.md** – Added broadcaster endpoint description.
+* **docs/progress-ledger.md** – Removed duplicate `np-evidence` entry.
+
+### Notes (2025-08-23 broadcaster)
+
+Documented broadcaster endpoint in OpenAPI and base API docs; cleaned progress ledger duplication.
