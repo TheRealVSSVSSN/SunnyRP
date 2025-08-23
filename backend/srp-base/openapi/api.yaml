@@ -344,11 +344,6 @@ components:
           type: integer
           format: int64
 security:
-        owner:
-          type: string
-        metadata:
-          type: object
-    security:
   - ApiToken: []
 paths:
   /v1/healthz:
@@ -1731,3 +1726,4 @@ paths:
                   traceId:
                     type: string
         '400':
+

@@ -128,7 +128,7 @@ Legend: **A** = Added, **M** = Modified.
 |---|---|---|
 | `src/repositories/phoneRepository.js` | A | Query helpers to list and create tweets. |
 | `src/routes/phone.routes.js` | A | New endpoints `/v1/phone/tweets` for listing and creating tweets. |
-| `src/migrations/018_add_tweets.sql` | A | Migration creating `tweets` table with index on time. |
+| `src/migrations/019_add_tweets.sql` | A | Migration creating `tweets` table with index on time. |
 | `src/app.js` | M | Mounted the phone routes. |
 | `openapi/api.yaml` | M | Added `Tweet` schemas and `/v1/phone/tweets` path. |
 | `docs/modules/phone.md` | A | Module documentation for phone tweets API. |
@@ -141,7 +141,6 @@ Legend: **A** = Added, **M** = Modified.
 | Path | Status | Notes |
 |---|---|---|
 | `openapi/api.yaml` | M | Added length constraints for tweet fields. |
-| `src/openapi/api.yaml` | M | Synced OpenAPI specification with root copy. |
 | `src/routes/phone.routes.js` | M | Added length validation and removed redundant body parser. |
 | `docs/modules/phone.md` | M | Documented tweet field limits. |
 | `docs/BASE_API_DOCUMENTATION.md` | M | Replaced legacy server references. |
@@ -157,7 +156,18 @@ Legend: **A** = Added, **M** = Modified.
 | Path | Status | Notes |
 |---|---|---|
 | `openapi/api.yaml` | M | Moved character ID parameter to path level and added operationIds/400 responses to phone tweets. |
-| `src/openapi/api.yaml` | M | Synced spec changes. |
 | `docs/modules/phone.md` | M | Documented 400 INVALID_INPUT responses. |
 | `docs/BASE_API_DOCUMENTATION.md` | M | Mentioned possible 400 errors on phone tweet endpoints. |
 | `docs/progress-ledger.md` | M | Logged OpenAPI spec cleanup entry. |
+# Additional updates for the 2025-08-22 canonicalization run
+
+| Path | Status | Notes |
+|---|---|---|
+| `src/migrations/019_add_tweets.sql` | R | Renamed from `018_add_tweets.sql` to resolve migration number collision. |
+| `src/openapi/api.yaml` | D | Removed duplicate specification; `openapi/api.yaml` is now canonical. |
+| `openapi/api.yaml` | M | Removed stray security block and aligned with canonical content. |
+| `src/routes/broadcaster.routes.js` | M | Cleared merge marker and tidied documentation. |
+| `docs/modules/evidence.md` | M | Resolved merge conflict and cleaned structure. |
+| `docs/modules/phone.md` | M | Updated migration reference to `019_add_tweets.sql`. |
+| `MANIFEST.md` | M | Recorded canonicalization changes. |
+| `CHANGELOG.md` | M | Logged canonicalization actions. |
