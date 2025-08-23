@@ -617,6 +617,9 @@ paths:
   /v1/admin/ban:
     post:
       summary: Ban a player
+      operationId: banPlayer
+      security:
+        - ApiToken: []
       requestBody:
         required: true
         content:
@@ -637,6 +640,68 @@ paths:
       responses:
         '200':
           description: Player banned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      banned:
+                        type: boolean
+                      reason:
+                        type: string
+                      until:
+                        type: string
+                        format: date-time
+                        nullable: true
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '500':
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
 
   /v1/broadcast/attempt:
     post:

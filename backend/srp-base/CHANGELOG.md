@@ -438,3 +438,14 @@ Documented broadcaster endpoint in OpenAPI and base API docs; cleaned progress l
 ### Notes (2025-08-23 broadcaster follow-up)
 
 Expanded broadcaster documentation and OpenAPI to address review feedback.
+
+### Added (2025-08-22 – admin bans)
+* **Admin ban persistence.** Introduced `adminRepository`, `admin.routes` changes and migration `020_add_bans.sql` to store bans with optional expiry.
+
+### Changed (2025-08-22 – admin bans)
+* **admin.routes.js** – Replaced in-memory store with database persistence and input validation.
+* **openapi/api.yaml** – Documented admin ban endpoint with security, response envelope and error cases.
+* **docs** – Added `docs/modules/admin.md` and updated base documentation, index and progress ledger.
+
+### Notes (2025-08-22 – admin bans)
+Bans now survive service restarts. Rollback by dropping the `bans` table and reverting the route and repository changes.
