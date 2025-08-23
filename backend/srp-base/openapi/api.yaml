@@ -682,7 +682,6 @@ paths:
           description: Broadcaster limit reached
         '429':
           description: Rate limit exceeded
-
   # Contracts API
   /v1/contracts:
     get:
