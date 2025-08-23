@@ -332,6 +332,13 @@ These endpoints round out the foundation of `srp-base`.  Together with the previ
 | `POST` | `/v1/admin/kick` | Kick a player (future extension). |
 | `GET` | `/v1/admin/audit` | Fetch audit logs (future extension). |
 
+
+### Broadcaster
+
+| Method | Path | Description |
+|-------|-----|-------------|
+| `POST` | `/v1/broadcast/attempt` | Assign the `broadcaster` job if below the configured limit; returns `400 INVALID_INPUT`, `404 NOT_FOUND` or `409 LIMIT_REACHED` on error. |
+
 ## Feature Flags
 
 Feature flags allow modules to be toggled on or off at runtime.  `srp-base` supports static fallbacks via environment variables (`FEATURE_USERS=1`, `FEATURE_CHARACTERS=1`, etc.) and dynamic toggles returned from `/v1/config/live`【67730289104851†L128-L141】.  Lua resources should respect these flags to avoid calling endpoints that are disabled.  Routers are internally guarded by a `featureGate()` middleware, preventing access when a feature is turned off.

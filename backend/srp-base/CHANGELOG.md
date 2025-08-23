@@ -372,7 +372,7 @@ This sprint continued the systematic audit of legacy resources.  The vast majori
 
 ### Added (2025‑08‑21 – Part 2)
 
-* **Phone tweets API.** Introduced `phoneRepository.js`, `phone.routes.js` and migration `018_add_tweets.sql` to persist tweets and expose `GET/POST /v1/phone/tweets`.
+* **Phone tweets API.** Introduced `phoneRepository.js`, `phone.routes.js` and migration `019_add_tweets.sql` to persist tweets and expose `GET/POST /v1/phone/tweets`.
 
 ### Changed (2025‑08‑21 – Part 2)
 
@@ -397,10 +397,44 @@ Cleanup pass to remove external branding and tighten validation on the phone twe
 ### Changed (2025‑08‑23)
 
 * **openapi/api.yaml** – Fixed missing path parameter for `/v1/characters/{id}` and added operationIds/400 responses for phone tweets.
-* **src/openapi/api.yaml** – Synced specification copy.
 * **docs/modules/phone.md**, **docs/BASE_API_DOCUMENTATION.md** – Documented potential `400 INVALID_INPUT` responses.
 * **docs/progress-ledger.md** – Logged OpenAPI spec cleanup entry.
 
 ### Notes (2025‑08‑23)
 
 Resolved OpenAPI lint error and clarified phone tweet error handling in documentation.
+
+### Changed (2025-08-22 canonicalization)
+
+* **openapi/api.yaml** – Removed stray security block and aligned with canonical root spec.
+* **src/openapi/api.yaml** – Deleted duplicate specification file.
+* **src/migrations/019_add_tweets.sql** – Renamed from `018_add_tweets.sql` to resolve migration number collision.
+* **src/routes/broadcaster.routes.js** – Cleaned merge artifact and ensured newline.
+* **docs/modules/evidence.md** – Resolved merge conflicts.
+* **docs/modules/phone.md** – Updated migration reference.
+* **MANIFEST.md** – Recorded canonicalization changes.
+
+### Notes (2025-08-22 canonicalization)
+
+Housekeeping pass to deduplicate migration numbers, remove an obsolete OpenAPI copy and fix merge artifacts in documentation and routes. No functional behaviour changed.
+
+### Changed (2025-08-23 broadcaster)
+
+* **openapi/api.yaml** – Documented `/v1/broadcast/attempt` and added `JobAssignment` schema.
+* **docs/BASE_API_DOCUMENTATION.md** – Added broadcaster endpoint description.
+* **docs/progress-ledger.md** – Removed duplicate `np-evidence` entry.
+
+### Notes (2025-08-23 broadcaster)
+
+Documented broadcaster endpoint in OpenAPI and base API docs; cleaned progress ledger duplication.
+
+### Changed (2025-08-23 broadcaster follow-up)
+
+* **openapi/api.yaml** – Added operationId and error responses for `/v1/broadcast/attempt`.
+* **docs/BASE_API_DOCUMENTATION.md** – Clarified broadcaster error cases.
+* **docs/modules/broadcaster.md** – Documented response envelope and error codes.
+* **MANIFEST.md** – Recorded broadcaster follow-up changes.
+
+### Notes (2025-08-23 broadcaster follow-up)
+
+Expanded broadcaster documentation and OpenAPI to address review feedback.

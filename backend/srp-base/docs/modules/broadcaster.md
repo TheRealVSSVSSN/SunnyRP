@@ -37,15 +37,22 @@ job (on duty remains false) and responds with the assignment.
 
 ```
 {
-  "playerId": "<string>",
-  "jobId": <number>,
-  "onDuty": false,
-  "hiredAt": "<ISO8601 timestamp>"
+  "ok": true,
+  "data": {
+    "assignment": {
+      "playerId": "<string>",
+      "jobId": <number>,
+      "onDuty": false,
+      "hiredAt": "<ISO8601 timestamp>"
+    }
+  },
+  "requestId": "<uuid>",
+  "traceId": "<uuid>"
 }
 ```
 
-On error, the response follows the standard SRP error envelope
-containing a code and message.
+Error responses follow the standard envelope and may return codes
+`INVALID_INPUT` (400), `NOT_FOUND` (404) or `LIMIT_REACHED` (409).
 
 ## Configuration
 

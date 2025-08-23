@@ -450,3 +450,9 @@ small API to manage these tweets.
 * towtruckjob, truckerjob, veh_shop, veh_shop_imports – depend on a
   fuller jobs/vehicles subsystem; deferred.
 * trains, uitest, veh, warmenu, webpack, wk_wrs, yarn – no persistent
+
+### Housekeeping 2025-08-22
+
+* Removed duplicate OpenAPI specification copy and cleaned stray security block.
+* Renamed tweets migration to resolve numbering conflict.
+* Cleared merge artifacts in broadcaster route and evidence documentation.
