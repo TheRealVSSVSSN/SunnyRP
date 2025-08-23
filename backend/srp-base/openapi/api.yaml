@@ -315,6 +315,19 @@ components:
         z:
           type: number
           description: Z coordinate where the note is placed
+    # Job assignment returned when a broadcaster job is granted
+    JobAssignment:
+      type: object
+      properties:
+        playerId:
+          type: string
+        jobId:
+          type: integer
+        onDuty:
+          type: boolean
+        hiredAt:
+          type: string
+          format: date-time
     Tweet:
       type: object
       properties:
@@ -344,11 +357,6 @@ components:
           type: integer
           format: int64
 security:
-        owner:
-          type: string
-        metadata:
-          type: object
-    security:
   - ApiToken: []
 paths:
   /v1/healthz:
@@ -629,6 +637,44 @@ paths:
       responses:
         '200':
           description: Player banned
+
+  /v1/broadcast/attempt:
+    post:
+      summary: Attempt to become a broadcaster
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - playerId
+              properties:
+                playerId:
+                  type: string
+      responses:
+        '200':
+          description: Broadcaster job assigned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      assignment:
+                        $ref: '#/components/schemas/JobAssignment'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '404':
+          description: Broadcaster job not found
+        '409':
+          description: Broadcaster limit reached
 
   # Contracts API
   /v1/contracts:
@@ -1731,3 +1777,4 @@ paths:
                   traceId:
                     type: string
         '400':
+

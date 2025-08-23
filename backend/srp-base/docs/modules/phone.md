@@ -31,7 +31,7 @@ There is no feature flag for the phone module; it is always enabled.
 ## Implementation details
 
 * **Repository:** `src/repositories/phoneRepository.js` provides `listTweets` and `createTweet` using parameterised queries.
-* **Migration:** `src/migrations/018_add_tweets.sql` creates the `tweets` table and indexes `time` for efficient retrieval.
+* **Migration:** `src/migrations/019_add_tweets.sql` creates the `tweets` table and indexes `time` for efficient retrieval.
 * **Routes:** `src/routes/phone.routes.js` defines the HTTP endpoints and handles validation.
 * **OpenAPI:** `openapi/api.yaml` documents the `Tweet` and `TweetCreateRequest` schemas and the `/v1/phone/tweets` path.
 
