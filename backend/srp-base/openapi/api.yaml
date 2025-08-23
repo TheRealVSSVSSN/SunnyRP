@@ -421,6 +421,54 @@ components:
           type: object
           additionalProperties: true
           nullable: true
+
+    DiamondBlackjackHand:
+      type: object
+      properties:
+        id:
+          type: integer
+        characterId:
+          type: string
+        tableId:
+          type: integer
+        bet:
+          type: integer
+        payout:
+          type: integer
+        dealerHand:
+          type: string
+        playerHand:
+          type: string
+        playedAt:
+          type: integer
+          format: int64
+
+    DiamondBlackjackHandCreateRequest:
+      type: object
+      required:
+        - characterId
+        - tableId
+        - bet
+        - payout
+        - dealerHand
+        - playerHand
+      properties:
+        characterId:
+          type: string
+        tableId:
+          type: integer
+        bet:
+          type: integer
+        payout:
+          type: integer
+        dealerHand:
+          type: string
+        playerHand:
+          type: string
+        playedAt:
+          type: integer
+          format: int64
+          nullable: true
 security:
   - ApiToken: []
 paths:
@@ -1932,3 +1980,67 @@ paths:
                     type: string
                   traceId:
                     type: string
+  /v1/diamond-blackjack/hands:
+    post:
+      summary: Record a blackjack hand
+      operationId: recordBlackjackHand
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DiamondBlackjackHandCreateRequest'
+      responses:
+        '200':
+          description: Hand recorded
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      hand:
+                        $ref: '#/components/schemas/DiamondBlackjackHand'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          description: Invalid input
+  /v1/diamond-blackjack/hands/{characterId}:
+    get:
+      summary: List recent blackjack hands for a character
+      operationId: listBlackjackHands
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of hands
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      hands:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/DiamondBlackjackHand'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          description: Invalid input

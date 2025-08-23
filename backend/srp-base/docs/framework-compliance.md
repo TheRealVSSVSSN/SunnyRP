@@ -36,6 +36,7 @@ practice is supported by citations.
 | **Event‑driven design** | As an HTTP API the service does not implement an event bus, but it does persist domain events in an outbox table.  FiveM network events are handled by the Lua layer (outside this service) and forwarded via HTTP. |
 | **Clean code and modularity** | The code is modular and uses CommonJS modules.  Each domain resides in its own file.  ESLint and Prettier configuration are absent; adding them would enforce consistent style. |
 | **Environment management** | The `dotenv` library loads environment variables and the `env.js` config file ensures required variables are present. |
+| **Diamond Blackjack module** | New endpoints for recording blackjack hands follow the established layered architecture with authentication, idempotency and request correlation. |
 | **Testing & CI** | There is no CI pipeline or test suite.  Future work should include setting up continuous integration with linting and test execution. |
 
 ## Remaining Gaps / TODOs

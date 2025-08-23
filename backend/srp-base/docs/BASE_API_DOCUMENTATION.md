@@ -410,3 +410,6 @@ To support all features present in the original server resources at the framewor
   - `POST /v1/loot/items` – Create a loot drop (requires `owner_id` and `item_type`; optional `value`, `coordinates`, `metadata`).
   - `PATCH /v1/loot/items/:id` – Update fields on a loot item.
   - `DELETE /v1/loot/items/:id` – Remove a loot item after it is collected or expired.
+- **srp-diamond-blackjack** – Records casino blackjack hand history.
+  - `GET /v1/diamond-blackjack/hands/:characterId` – List recent hands for a character.
+  - `POST /v1/diamond-blackjack/hands` – Record a hand result with `characterId`, `tableId`, `bet`, `payout`, `dealerHand`, `playerHand` and optional `playedAt`.
