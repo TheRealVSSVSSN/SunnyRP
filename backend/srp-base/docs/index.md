@@ -140,3 +140,11 @@ Introduced photo storage to support the **camera** resource.
 * Added Camera module with `GET /v1/camera/photos/{characterId}`, `POST /v1/camera/photos` and `DELETE /v1/camera/photos/{id}` endpoints.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/camera.md`.
+
+## Update – 2025-08-24
+
+Introduced HUD preference storage to support the **carandplayerhud** resource.
+
+* Added HUD module with `GET /v1/characters/{characterId}/hud` and `PUT /v1/characters/{characterId}/hud` endpoints.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/hud.md`.

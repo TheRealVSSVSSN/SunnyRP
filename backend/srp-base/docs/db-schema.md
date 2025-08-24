@@ -198,3 +198,15 @@
 | description | VARCHAR(255) | Optional description |
 | created_at | TIMESTAMP | Creation time |
 | updated_at | TIMESTAMP | Update time |
+
+## character_hud_preferences
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| character_id | BIGINT | Owning character |
+| speed_unit | ENUM('mph','kph') | Preferred speed units |
+| show_fuel | TINYINT(1) | 1 show fuel gauge |
+| hud_theme | VARCHAR(50) | Optional theme |
+| created_at | TIMESTAMP | Creation time |
+| updated_at | TIMESTAMP | Update time |

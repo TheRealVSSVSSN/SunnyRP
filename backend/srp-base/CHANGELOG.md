@@ -728,3 +728,21 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Remove camera routes and drop `camera_photos` table.
+
+## 2025-08-24 (carandplayerhud)
+
+### Added
+
+* HUD module with `/v1/characters/{characterId}/hud` endpoints and `character_hud_preferences` table.
+
+### Migrations
+
+* `037_add_character_hud_preferences.sql`
+
+### Risks
+
+* Preference fields are client-supplied; ensure callers sanitize theme names.
+
+### Rollback
+
+* Remove HUD routes and drop `character_hud_preferences` table.

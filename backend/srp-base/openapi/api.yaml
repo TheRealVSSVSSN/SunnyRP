@@ -990,6 +990,34 @@ components:
         description:
           type: string
           nullable: true
+    HudPreferences:
+      type: object
+      properties:
+        characterId:
+          type: integer
+        speedUnit:
+          type: string
+          enum:
+            - mph
+            - kph
+        showFuel:
+          type: boolean
+        hudTheme:
+          type: string
+          nullable: true
+    HudPreferencesInput:
+      type: object
+      properties:
+        speedUnit:
+          type: string
+          enum:
+            - mph
+            - kph
+        showFuel:
+          type: boolean
+        hudTheme:
+          type: string
+          nullable: true
 
 security:
   - ApiToken: []
@@ -3732,5 +3760,48 @@ paths:
                     type: string
                   traceId:
                     type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/characters/{characterId}/hud:
+    get:
+      summary: Get HUD preferences
+      operationId: getHudPreferences
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: HUD preferences
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HudPreferences'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    put:
+      summary: Update HUD preferences
+      operationId: updateHudPreferences
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HudPreferencesInput'
+      responses:
+        '200':
+          description: HUD preferences updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HudPreferences'
         '400':
           $ref: '#/components/responses/BadRequest'

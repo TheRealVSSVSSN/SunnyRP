@@ -21,3 +21,4 @@
 - Ensure the `base_event_logs` table exists for base event history.
 - Ensure the `boatshop_boats` table exists for boat catalog data.
 - Ensure the `camera_photos` table exists for stored photos.
+- Ensure the `character_hud_preferences` table exists for HUD settings.

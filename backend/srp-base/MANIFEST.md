@@ -615,3 +615,26 @@ Legend: **A** = Added, **M** = Modified.
 | `docs/modules/camera.md` | A | Module documentation. |
 | `docs/research-log.md` | M | Logged camera research. |
 | `CHANGELOG.md` | M | Added camera entry. |
+# Update – 2025-08-24 (carandplayerhud)
+
+| Path | Status | Notes |
+|---|---|---|
+| `src/repositories/hudRepository.js` | A | Store and retrieve HUD preferences. |
+| `src/routes/hud.routes.js` | A | Endpoints for HUD preferences. |
+| `src/migrations/037_add_character_hud_preferences.sql` | A | Create character_hud_preferences table. |
+| `src/app.js` | M | Mounted hud routes. |
+| `openapi/api.yaml` | M | Added HUD schemas and paths. |
+| `docs/index.md` | M | Logged carandplayerhud update. |
+| `docs/progress-ledger.md` | M | Added carandplayerhud entry. |
+| `docs/framework-compliance.md` | M | Noted hud module compliance. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented hud endpoints. |
+| `docs/events-and-rpcs.md` | M | Mapped carandplayerhud events. |
+| `docs/db-schema.md` | M | Documented character_hud_preferences table. |
+| `docs/migrations.md` | M | Listed migration 037. |
+| `docs/admin-ops.md` | M | Added hud table check. |
+| `docs/security.md` | M | Hud security note. |
+| `docs/testing.md` | M | Hud curl examples. |
+| `docs/modules/hud.md` | A | Module documentation. |
+| `docs/research-log.md` | M | Logged carandplayerhud research. |
+| `CHANGELOG.md` | M | Added carandplayerhud entry. |
+| `MANIFEST.md` | M | Recorded carandplayerhud update. |

@@ -165,3 +165,12 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: cam1' -H 'Content-Type: ap
   http://localhost:3010/v1/camera/photos
 curl -H 'X-API-Token: <token>' -X DELETE http://localhost:3010/v1/camera/photos/1
 ```
+
+Manually verify the hud endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/characters/1/hud
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: hud1' -H 'Content-Type: application/json' \
+  -d '{"speedUnit":"mph","showFuel":true}' \
+  http://localhost:3010/v1/characters/1/hud
+```
