@@ -33,3 +33,4 @@
 | 033_update_economy_character_scoping.sql | Rename player columns to character columns for accounts and transactions |
 | 034_add_base_event_logs.sql | Base event logs table |
 | 035_add_boatshop.sql | Boat shop catalog |
+| 036_add_camera_photos.sql | Camera photos table |

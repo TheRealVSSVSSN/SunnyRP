@@ -65,3 +65,4 @@ practice is supported by citations.
 | **baseevents module** | Base event logging endpoints follow the established layered pattern with authentication and idempotency. |
 | **boatshop module** | Boatshop endpoints follow the established layered pattern with authentication and idempotency. |
 
+| **camera module** | Photo storage endpoints follow the established layered pattern with authentication and idempotency. |

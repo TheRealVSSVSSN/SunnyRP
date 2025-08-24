@@ -705,3 +705,26 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * No actions needed.
+
+## 2025-08-24 (camera)
+
+### Added
+
+* **Camera module.** Added endpoints `GET /v1/camera/photos/{characterId}`, `POST /v1/camera/photos` and `DELETE /v1/camera/photos/{id}` plus repository and table for photo storage.
+
+### Changed
+
+* **app.js** – Mounted camera routes.
+* **openapi/api.yaml** – Added CameraPhoto schemas and paths.
+
+### Migrations
+
+* `036_add_camera_photos.sql`
+
+### Risks
+
+* Photo URLs are stored as provided; ensure upstream validation to avoid malicious content.
+
+### Rollback
+
+* Remove camera routes and drop `camera_photos` table.

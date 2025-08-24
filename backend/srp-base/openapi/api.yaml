@@ -957,6 +957,40 @@ components:
           type: string
         price:
           type: integer
+    CameraPhoto:
+      type: object
+      properties:
+        id:
+          type: integer
+        characterId:
+          type: integer
+        imageUrl:
+          type: string
+          format: uri
+        description:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    CameraPhotoCreateRequest:
+      type: object
+      required:
+        - characterId
+        - imageUrl
+      properties:
+        characterId:
+          type: integer
+        imageUrl:
+          type: string
+          format: uri
+        description:
+          type: string
+          nullable: true
+
 security:
   - ApiToken: []
 paths:
@@ -3606,5 +3640,97 @@ paths:
                     type: integer
                   price:
                     type: integer
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/camera/photos/{characterId}:
+    get:
+      summary: List photos for a character
+      operationId: listCameraPhotos
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of photos
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      photos:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/CameraPhoto'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/camera/photos:
+    post:
+      summary: Create a photo
+      operationId: createCameraPhoto
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CameraPhotoCreateRequest'
+      responses:
+        '200':
+          description: Photo created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      photo:
+                        $ref: '#/components/schemas/CameraPhoto'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/camera/photos/{id}:
+    delete:
+      summary: Delete a photo
+      operationId: deleteCameraPhoto
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Photo deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
         '400':
           $ref: '#/components/responses/BadRequest'

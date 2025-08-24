@@ -72,6 +72,9 @@ const baseEventsRoutes = require('./routes/baseEvents.routes');
 // phone domain route
 const phoneRoutes = require('./routes/phone.routes');
 
+// camera domain route
+const cameraRoutes = require('./routes/camera.routes');
+
 // interact sound domain route
 const interactSoundRoutes = require('./routes/interactSound.routes');
 
@@ -178,6 +181,9 @@ app.use(baseEventsRoutes);
 
 // mount phone routes
 app.use(phoneRoutes);
+
+// mount camera routes
+app.use(cameraRoutes);
 
 // mount interact sound routes
 app.use(interactSoundRoutes);

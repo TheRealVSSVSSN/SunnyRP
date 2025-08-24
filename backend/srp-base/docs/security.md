@@ -18,3 +18,4 @@
 - Economy routes inherit the same authentication and idempotency requirements.
 - Base events routes inherit the same authentication and idempotency requirements.
 - Boatshop routes inherit the same authentication and idempotency requirements.
+- Camera routes inherit the same authentication and idempotency requirements.
