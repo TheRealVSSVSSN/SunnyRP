@@ -62,3 +62,5 @@ practice is supported by citations.
 * **Linting and Formatting:** add ESLint and Prettier configurations to enforce coding standards and catch issues early【896482121972210†L482-L525】.
 * **Event bus:** implement an internal event emitter or message queue to decouple complex workflows if required by future features.
 * **Enhanced Metrics:** expand Prometheus metrics to include domain‑specific counters and error rates.
+| **baseevents module** | Base event logging endpoints follow the established layered pattern with authentication and idempotency. |
+
