@@ -205,3 +205,12 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: qp1' -H 'Content-Type: app
   http://localhost:3010/v1/connectqueue/priorities
 curl -H 'X-API-Token: <token>' -X DELETE -H 'X-Idempotency-Key: qp2' http://localhost:3010/v1/connectqueue/priorities/1
 ```
+
+Manually verify the cron endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/cron/jobs
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: cron1' -H 'Content-Type: application/json' \
+  -d '{"name":"paycheck","schedule":"0 * * * *","nextRun":"2025-08-24T00:00:00Z"}' \
+  http://localhost:3010/v1/cron/jobs
+```

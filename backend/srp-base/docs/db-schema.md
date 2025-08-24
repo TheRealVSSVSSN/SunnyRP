@@ -251,3 +251,19 @@
 | expires_at | TIMESTAMP | Optional expiration |
 | created_at | TIMESTAMP | Creation time |
 | updated_at | TIMESTAMP | Update time |
+
+## cron_jobs
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| name | VARCHAR(100) | Unique job name |
+| schedule | VARCHAR(100) | Cron schedule expression |
+| payload | JSON | Optional payload |
+| account_id | INT | Optional account scope |
+| character_id | INT | Optional character scope |
+| priority | INT | Job priority |
+| next_run | DATETIME | Next scheduled execution |
+| last_run | DATETIME | Last execution time |
+| created_at | TIMESTAMP | Creation time |
+| updated_at | TIMESTAMP | Update time |

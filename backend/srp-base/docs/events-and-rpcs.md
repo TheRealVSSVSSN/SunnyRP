@@ -18,6 +18,7 @@
 | banking | Resource processes deposits, withdrawals and transfers between characters | `POST /v1/characters/{characterId}/account:deposit`, `POST /v1/characters/{characterId}/account:withdraw`, `POST /v1/transactions` |
 | maps | No server events; world mapping assets | N/A |
 | furnished-shells | No server events; interior shell assets | N/A |
+| Cron | Resource triggers scheduled events for maintenance and gameplay loops | `GET /v1/cron/jobs`, `POST /v1/cron/jobs` |
 | hair-pack | No server events; cosmetic hair assets | N/A |
 | mh65c | No server events; vehicle model asset | N/A |
 | motel | No server events; building interior asset | N/A |

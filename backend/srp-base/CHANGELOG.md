@@ -805,3 +805,21 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Remove connectqueue routes and drop `queue_priorities` table.
+
+## 2025-08-24 (Cron)
+
+### Added
+
+* Cron module with `GET /v1/cron/jobs` and `POST /v1/cron/jobs` endpoints to persist scheduled tasks.
+
+### Migrations
+
+* `041_add_cron_jobs.sql`
+
+### Risks
+
+* Incorrect schedules could cause missed or duplicate server events.
+
+### Rollback
+
+* Remove cron routes and drop `cron_jobs` table.

@@ -708,3 +708,25 @@ Legend: **A** = Added, **M** = Modified.
 | `docs/testing.md` | M | Added connectqueue curl examples. |
 | `docs/modules/connectqueue.md` | A | Module documentation. |
 | `docs/research-log.md` | M | Logged connectqueue research. |
+
+# Update – 2025-08-24 (Cron)
+
+| Path | Status | Notes |
+|---|---|---|
+| `src/repositories/cronRepository.js` | A | Manage cron job records. |
+| `src/routes/cron.routes.js` | A | Cron job endpoints. |
+| `src/migrations/041_add_cron_jobs.sql` | A | Create cron_jobs table. |
+| `src/app.js` | M | Mounted cron routes. |
+| `openapi/api.yaml` | M | Added CronJob schemas and paths. |
+| `docs/index.md` | M | Logged Cron update. |
+| `docs/progress-ledger.md` | M | Added Cron entry. |
+| `docs/framework-compliance.md` | M | Added cron module compliance row. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented cron endpoints. |
+| `docs/events-and-rpcs.md` | M | Mapped cron events. |
+| `docs/db-schema.md` | M | Documented cron_jobs table. |
+| `docs/migrations.md` | M | Listed migration 041. |
+| `docs/admin-ops.md` | M | Added cron table check. |
+| `docs/security.md` | M | Cron security note. |
+| `docs/testing.md` | M | Added cron curl examples. |
+| `docs/modules/cron.md` | A | Module documentation. |
+| `docs/research-log.md` | M | Logged cron research. |

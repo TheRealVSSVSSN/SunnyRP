@@ -495,3 +495,6 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
   - `GET /v1/connectqueue/priorities` – List queue priorities optionally filtered by `accountId`.
   - `POST /v1/connectqueue/priorities` – Upsert a priority with `accountId`, `priority`, optional `reason` and `expiresAt`.
   - `DELETE /v1/connectqueue/priorities/{accountId}` – Remove priority for an account.
+- **srp-cron** – Schedules timed server tasks.
+  - `GET /v1/cron/jobs` – List registered cron jobs.
+  - `POST /v1/cron/jobs` – Create or replace a cron job with `name`, `schedule`, optional `payload`, `accountId`, `characterId`, `priority` and `nextRun`.
