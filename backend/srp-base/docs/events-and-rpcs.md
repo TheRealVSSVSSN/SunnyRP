@@ -5,3 +5,4 @@
 | DiamondBlackjack | Resource emits a server event after each blackjack hand with the character ID, table, bet and outcome | `POST /v1/diamond-blackjack/hands` persists the hand; clients can fetch history via `GET /v1/diamond-blackjack/hands/:characterId` |
 | InteractSound | Resource triggers audio playback events specifying sound name and volume to target clients | `POST /v1/interact-sound/plays` logs the play; history via `GET /v1/interact-sound/plays/:characterId` |
 | LockDoors | Resource emits door lock/unlock events with door identifier and state | `POST /v1/doors` upserts door records; `PATCH /v1/doors/:doorId/state` toggles lock state |
+| InteractSound | Resource triggers audio playback events specifying sound name and volume to target clients | `POST /v1/interact-sound/plays` logs the play; history via `GET /v1/interact-sound/plays/:characterId` |

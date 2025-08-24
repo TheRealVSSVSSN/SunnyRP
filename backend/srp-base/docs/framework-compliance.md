@@ -39,6 +39,9 @@ practice is supported by citations.
 | **Diamond Blackjack module** | New endpoints for recording blackjack hands follow the established layered architecture with authentication, idempotency and request correlation. |
 | **Interact Sound module** | Sound play logging endpoints follow the same patterns with validation and repository abstractions. |
 | **Doors module** | Door management endpoints documented and aligned with OpenAPI for persistent lock state. |
+
+| **Interact Sound module** | Sound play logging endpoints follow the same patterns with validation and repository abstractions. |
+
 | **Testing & CI** | There is no CI pipeline or test suite.  Future work should include setting up continuous integration with linting and test execution. |
 
 ## Remaining Gaps / TODOs
