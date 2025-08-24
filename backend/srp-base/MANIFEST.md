@@ -424,3 +424,29 @@ Legend: **A** = Added, **M** = Modified.
 | `docs/research-log.md` | M | Logged WiseGuy-Vanilla research. |
 
 Legend: **A** = Added, **M** = Modified, **D** = Deleted.
+
+# Update – 2025-08-24 (WiseGuy-Wheels)
+
+| Path | Status | Notes |
+|---|---|---|
+| `src/repositories/wiseWheelsRepository.js` | A | Repository for wheel spin history. |
+| `src/routes/wiseWheels.routes.js` | A | Endpoints for listing and recording wheel spins. |
+| `src/migrations/029_add_wise_wheels.sql` | A | Create wise_wheels_spins table. |
+| `src/app.js` | M | Mounted wise wheels routes. |
+| `openapi/api.yaml` | M | Added Wise Wheels schemas and paths. |
+| `docs/index.md` | M | Logged Wise Wheels update. |
+| `docs/progress-ledger.md` | M | Added WiseGuy-Wheels entry. |
+| `docs/framework-compliance.md` | M | Added Wise Wheels compliance row. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented Wise Wheels endpoints. |
+| `docs/events-and-rpcs.md` | M | Mapped WiseGuy-Wheels events. |
+| `docs/db-schema.md` | M | Documented wise_wheels_spins table. |
+| `docs/migrations.md` | M | Listed migration 029. |
+| `docs/admin-ops.md` | M | Added table check for wise_wheels_spins. |
+| `docs/security.md` | M | Wise Wheels security note. |
+| `docs/testing.md` | M | Added wise wheels curl examples. |
+| `docs/modules/wise-wheels.md` | A | Module documentation. |
+| `docs/research-log.md` | M | Logged WiseGuy-Wheels research. |
+| `MANIFEST.md` | M | Recorded WiseGuy-Wheels changes. |
+| `CHANGELOG.md` | M | Added Wise Wheels entry. |
+
+Legend: **A** = Added, **M** = Modified.

@@ -431,6 +431,9 @@ To support all features present in the original server resources at the framewor
 - **srp-wise-uc** – Manages undercover profiles.
   - `GET /v1/wise-uc/profiles/{characterId}` – Retrieve undercover profile for a character.
   - `POST /v1/wise-uc/profiles` – Create or update a profile with `characterId`, `alias` and optional `active`.
+- **srp-wise-wheels** – Records wheel spin results.
+  - `GET /v1/wise-wheels/spins/{characterId}` – List spins for a character.
+  - `POST /v1/wise-wheels/spins` – Record a spin with `characterId` and `prize`.
 - **srp-zones** – Stores polygonal zone definitions for world interactions.
   - `GET /v1/zones` – List zones.
   - `POST /v1/zones` – Create a zone with `name`, `type`, and `data`.

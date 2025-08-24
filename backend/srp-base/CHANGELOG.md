@@ -583,3 +583,17 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Restore `characters.routes.js`, re-add removed OpenAPI paths, and remount the route in `src/app.js`.
+
+## 2025-08-24 (WiseGuy-Wheels)
+
+### Added
+
+* Wise Wheels module with `/v1/wise-wheels/spins` endpoints and `wise_wheels_spins` table.
+
+### Risks
+
+* None beyond standard migration.
+
+### Rollback
+
+* Drop `wise_wheels_spins` table and remove related routes and repository.

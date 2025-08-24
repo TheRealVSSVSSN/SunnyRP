@@ -95,3 +95,12 @@
 | active | TINYINT(1) | 1 active, 0 inactive |
 | created_at | BIGINT | Epoch milliseconds |
 | updated_at | BIGINT | Epoch milliseconds |
+
+## wise_wheels_spins
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| character_id | BIGINT | Owning character |
+| prize | VARCHAR(255) | Prize description |
+| created_at | BIGINT | Epoch milliseconds |
