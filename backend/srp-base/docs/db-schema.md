@@ -115,3 +115,14 @@
 | type | VARCHAR(100) | MIME or category |
 | name | VARCHAR(255) | Optional name |
 | created_at | TIMESTAMP | Creation time |
+
+## clothes
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| character_id | BIGINT | Owning character |
+| slot | VARCHAR(50) | Outfit slot identifier |
+| name | VARCHAR(100) | Optional outfit name |
+| data | TEXT | JSON outfit data |
+| created_at | TIMESTAMP | Creation time |

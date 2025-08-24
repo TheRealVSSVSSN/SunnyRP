@@ -100,3 +100,13 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: a1' -H 'Content-Type: appl
 curl -H 'X-API-Token: <token>' http://localhost:3010/v1/assets/1
 curl -H 'X-API-Token: <token>' -X DELETE http://localhost:3010/v1/assets/1
 ```
+
+Manually verify the clothes endpoints:
+
+```
+curl -H 'X-API-Token: <token>' "http://localhost:3010/v1/clothes?characterId=1"
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: c1' -H 'Content-Type: application/json' \
+  -d '{"characterId":1,"slot":"casual","data":{"pants":1}}' \
+  http://localhost:3010/v1/clothes
+curl -H 'X-API-Token: <token>' -X DELETE http://localhost:3010/v1/clothes/1
+```

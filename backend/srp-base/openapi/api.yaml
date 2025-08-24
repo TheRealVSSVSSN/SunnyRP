@@ -270,6 +270,39 @@ components:
         name:
           type: string
           nullable: true
+    Clothing:
+      type: object
+      properties:
+        id:
+          type: integer
+        characterId:
+          type: integer
+        slot:
+          type: string
+        name:
+          type: string
+          nullable: true
+        data:
+          type: object
+        createdAt:
+          type: string
+          format: date-time
+    ClothingCreateRequest:
+      type: object
+      required:
+        - characterId
+        - slot
+        - data
+      properties:
+        characterId:
+          type: integer
+        slot:
+          type: string
+        data:
+          type: object
+        name:
+          type: string
+          nullable: true
     # Drift school payment request
     DriftSchoolPayment:
       type: object
@@ -1798,6 +1831,97 @@ paths:
       responses:
         '200':
           description: Asset deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      deleted:
+                        type: boolean
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '404':
+          description: Not found
+  /v1/clothes:
+    get:
+      summary: List clothing outfits for a character
+      parameters:
+        - name: characterId
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of clothing records
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      clothes:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Clothing'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    post:
+      summary: Create a clothing record
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClothingCreateRequest'
+      responses:
+        '200':
+          description: Clothing created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      clothing:
+                        $ref: '#/components/schemas/Clothing'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/clothes/{id}:
+    delete:
+      summary: Delete a clothing record
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Clothing deleted
           content:
             application/json:
               schema:

@@ -439,6 +439,10 @@ To support all features present in the original server resources at the framewor
   - `GET /v1/assets/{id}` – Retrieve an asset by id.
   - `POST /v1/assets` – Create an asset with `ownerId`, `url` and `type` (requires `Idempotency-Key`).
   - `DELETE /v1/assets/{id}` – Remove an asset record.
+- **srp-clothes** – Stores character outfit data.
+  - `GET /v1/clothes?characterId={cid}` – List outfits for a character.
+  - `POST /v1/clothes` – Save an outfit (`characterId`, `slot`, `data`) (requires `Idempotency-Key`).
+  - `DELETE /v1/clothes/{id}` – Remove an outfit.
 - **srp-zones** – Stores polygonal zone definitions for world interactions.
   - `GET /v1/zones` – List zones.
   - `POST /v1/zones` – Create a zone with `name`, `type`, and `data`.

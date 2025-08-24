@@ -78,3 +78,11 @@ Introduced asset metadata storage to support the **assets** resource.
 * Added Assets module with `GET /v1/assets`, `GET /v1/assets/{id}`, `POST /v1/assets` and `DELETE /v1/assets/{id}` endpoints.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/assets.md`.
+
+## Update – 2025-08-24
+
+Introduced character outfit storage to support the **assets_clothes** resource.
+
+* Added Clothes module with `GET /v1/clothes`, `POST /v1/clothes` and `DELETE /v1/clothes/{id}` endpoints.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/clothes.md`.

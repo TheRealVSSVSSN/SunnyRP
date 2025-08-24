@@ -28,3 +28,4 @@
 | 028_add_wise_uc.sql | Wise UC profiles table |
 | 029_add_wise_wheels.sql | Wise wheels spins table |
 | 030_add_assets.sql | Assets table |
+| 031_add_clothes.sql | Clothes table |

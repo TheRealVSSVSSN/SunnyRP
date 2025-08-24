@@ -610,3 +610,16 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Drop `assets` table and remove related routes and repository.
+## 2025-08-24 (assets_clothes)
+
+### Added
+
+* Clothes module with `/v1/clothes` endpoints and `clothes` table for character outfits.
+
+### Risks
+
+* None beyond standard migration.
+
+### Rollback
+
+* Drop `clothes` table and remove related routes and repository.

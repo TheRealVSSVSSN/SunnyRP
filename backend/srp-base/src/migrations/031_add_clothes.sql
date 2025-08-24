@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS clothes (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  character_id BIGINT NOT NULL,
+  slot VARCHAR(50) NOT NULL,
+  name VARCHAR(100) DEFAULT NULL,
+  data TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_clothes_character ON clothes(character_id);
