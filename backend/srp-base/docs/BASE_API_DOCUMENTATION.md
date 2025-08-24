@@ -505,3 +505,7 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
   - `GET /v1/characters/{characterId}/coords` – List saved coordinates.
   - `POST /v1/characters/{characterId}/coords` – Save or update a coordinate (`name`, `x`, `y`, `z`, optional `heading`).
   - `DELETE /v1/characters/{characterId}/coords/{id}` – Remove a coordinate.
+- **srp-emotes** – Stores per-character favorite emotes.
+  - `GET /v1/characters/{characterId}/emotes` – List favorite emotes.
+  - `POST /v1/characters/{characterId}/emotes` – Add a favorite emote (`emote`).
+  - `DELETE /v1/characters/{characterId}/emotes/{emote}` – Remove a favorite emote.

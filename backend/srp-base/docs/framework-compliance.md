@@ -73,3 +73,4 @@ practice is supported by citations.
 | **cron module** | Cron job endpoints follow the established layered pattern with authentication and idempotency. |
 | **coordsaver module** | Coordinate endpoints follow the established layered pattern with authentication and idempotency. |
 | **interiors module** | Interior endpoints follow the established layered pattern with authentication and idempotency. |
+| **emotes module** | Favorite emote endpoints follow the established layered pattern with authentication and idempotency. |

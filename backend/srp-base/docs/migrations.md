@@ -41,3 +41,4 @@
 | 041_add_character_coords.sql | Coordinate storage table |
 | 042_add_cron_jobs.sql | Cron jobs table |
 | 043_add_interiors.sql | Apartment interior layouts |
+| 044_add_character_emotes.sql | Character emote favorites table |

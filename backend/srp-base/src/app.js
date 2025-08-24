@@ -87,6 +87,9 @@ const cameraRoutes = require('./routes/camera.routes');
 // hud domain route
 const hudRoutes = require('./routes/hud.routes');
 
+// emotes domain route
+const emotesRoutes = require('./routes/emotes.routes');
+
 // interact sound domain route
 const interactSoundRoutes = require('./routes/interactSound.routes');
 
@@ -211,6 +214,9 @@ app.use(cameraRoutes);
 
 // mount hud routes
 app.use(hudRoutes);
+
+// mount emotes routes
+app.use(emotesRoutes);
 
 // mount interact sound routes
 app.use(interactSoundRoutes);

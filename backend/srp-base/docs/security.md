@@ -26,3 +26,4 @@
 - Cron routes inherit the same authentication and idempotency requirements.
 - Coordsaver routes inherit the same authentication and idempotency requirements.
 - Interiors routes inherit the same authentication and idempotency requirements.
+- Emotes routes inherit the same authentication and idempotency requirements.

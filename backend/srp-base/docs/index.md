@@ -194,3 +194,10 @@ Introduced interior layout persistence to support the **drz_interiors** resource
 * Added Interiors module with `GET /v1/apartments/{apartmentId}/interior` and `POST /v1/apartments/{apartmentId}/interior` endpoints.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/interiors.md`.
+## Update – 2025-08-24
+
+Introduced favorite emote persistence to support the **emotes** resource.
+
+* Added Emotes module with `GET /v1/characters/{characterId}/emotes`, `POST /v1/characters/{characterId}/emotes` and `DELETE /v1/characters/{characterId}/emotes/{emote}` endpoints.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/emotes.md`.

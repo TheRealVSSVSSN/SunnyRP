@@ -1249,6 +1249,26 @@ components:
         heading:
           type: number
           nullable: true
+    CharacterEmote:
+      type: object
+      properties:
+        id:
+          type: integer
+        characterId:
+          type: integer
+        emote:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+    CharacterEmoteCreateRequest:
+      type: object
+      required:
+        - emote
+      properties:
+        emote:
+          type: string
+          description: Emote command name
 security:
   - ApiToken: []
 paths:
@@ -4493,6 +4513,8 @@ paths:
                     type: string
         '400':
           $ref: '#/components/responses/BadRequest'
+
+
     post:
       summary: Create or replace a cron job
       operationId: createCronJob
@@ -4517,6 +4539,107 @@ paths:
                     properties:
                       job:
                         $ref: '#/components/schemas/CronJob'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/characters/{characterId}/emotes:
+    get:
+      summary: List favorite emotes for a character
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of favorite emotes
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      emotes:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/CharacterEmote'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    post:
+      summary: Add a favorite emote for a character
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CharacterEmoteCreateRequest'
+      responses:
+        '200':
+          description: Favorite emote stored
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      emote:
+                        $ref: '#/components/schemas/CharacterEmote'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/characters/{characterId}/emotes/{emote}:
+    delete:
+      summary: Remove a favorite emote from a character
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+        - in: path
+          name: emote
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Emote removed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
                   requestId:
                     type: string
                   traceId:

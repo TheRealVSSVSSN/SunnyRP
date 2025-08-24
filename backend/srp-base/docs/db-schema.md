@@ -284,3 +284,12 @@
 | heading | FLOAT | Optional heading |
 | created_at | TIMESTAMP | Creation time |
 | updated_at | TIMESTAMP | Update time |
+
+## character_emotes
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| character_id | INT | FK to characters.id |
+| emote | VARCHAR(64) | Emote command name |
+| created_at | TIMESTAMP | Creation time |

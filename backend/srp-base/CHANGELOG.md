@@ -874,3 +874,27 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Drop `interiors` table and remove interiors routes.
+## 2025-08-24 – emotes
+
+### Added
+
+* Emotes module with `/v1/characters/{characterId}/emotes` and `/v1/characters/{characterId}/emotes/{emote}` endpoints, repository and docs.
+* Migration `044_add_character_emotes.sql` for favorite emotes.
+
+### Changed
+
+* `app.js` – mounted emotes routes.
+* `openapi/api.yaml` – added CharacterEmote schemas and paths.
+* Documentation updated for emotes module.
+
+### Migrations
+
+* `044_add_character_emotes.sql`
+
+### Risks
+
+* Emote names are user-defined; sanitize input to avoid injection in downstream consumers.
+
+### Rollback
+
+* Drop `character_emotes` table and remove emotes routes.
