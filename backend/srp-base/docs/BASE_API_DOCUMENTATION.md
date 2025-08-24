@@ -476,3 +476,7 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
 - **srp-boatshop** – Lists and sells boats to characters.
   - `GET /v1/boatshop` – List boats available for purchase.
   - `POST /v1/boatshop/purchase` – Purchase a boat with `characterId`, `boatId`, `plate` and optional `properties`.
+- **srp-camera** – Stores character photos.
+  - `GET /v1/camera/photos/{characterId}` – List photos for a character.
+  - `POST /v1/camera/photos` – Save a photo with `characterId`, `imageUrl` and optional `description`.
+  - `DELETE /v1/camera/photos/{id}` – Remove a photo record.

@@ -592,3 +592,26 @@ Legend: **A** = Added, **M** = Modified.
 | `docs/research-log.md` | M | Recorded bob74_ipl research |
 | `MANIFEST.md` | M | Recorded bob74_ipl documentation update |
 | `CHANGELOG.md` | M | Logged bob74_ipl skip decision |
+
+# Update – 2025-08-24 (camera)
+
+| Path | Status | Notes |
+|---|---|---|
+| `src/repositories/cameraRepository.js` | A | Photo storage queries. |
+| `src/routes/camera.routes.js` | A | Camera photo endpoints. |
+| `src/migrations/036_add_camera_photos.sql` | A | Create camera_photos table. |
+| `src/app.js` | M | Mounted camera routes. |
+| `openapi/api.yaml` | M | Added CameraPhoto schemas and paths. |
+| `docs/index.md` | M | Logged camera update. |
+| `docs/progress-ledger.md` | M | Added camera entry. |
+| `docs/framework-compliance.md` | M | Noted camera module compliance. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented camera endpoints. |
+| `docs/events-and-rpcs.md` | M | Mapped camera events. |
+| `docs/db-schema.md` | M | Documented camera_photos table. |
+| `docs/migrations.md` | M | Listed migration 036. |
+| `docs/admin-ops.md` | M | Added camera table check. |
+| `docs/security.md` | M | Camera security note. |
+| `docs/testing.md` | M | Camera curl examples. |
+| `docs/modules/camera.md` | A | Module documentation. |
+| `docs/research-log.md` | M | Logged camera research. |
+| `CHANGELOG.md` | M | Added camera entry. |

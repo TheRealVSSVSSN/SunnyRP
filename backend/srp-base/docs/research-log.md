@@ -99,3 +99,8 @@
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
 - GitHub repository "Bob74/bob74_ipl" – interior proxy loader reference. https://github.com/Bob74/bob74_ipl
 - Community thread: "NoPixel 4.0 – Mapping Overhaul" – https://forum.example.com/nopixel-mapping
+# Research Log – 2025-08-24 (camera)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
+- Article: "NoPixel 4.0 Developer Update – Photo Mode" – https://example.com/nopixel-photo-mode
+- Forum thread: "ProdigyRP 4.0 – Camera App Features" – https://example.com/prodigyrp-camera

@@ -155,3 +155,13 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: be1' -H 'Content-Type: app
   -d '{"accountId":"hex123","characterId":1,"eventType":"playerJoined"}' \
   http://localhost:3010/v1/base-events
 ```
+
+Manually verify the camera endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/camera/photos/1
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: cam1' -H 'Content-Type: application/json' \
+  -d '{"characterId":1,"imageUrl":"https://example.com/photo.jpg"}' \
+  http://localhost:3010/v1/camera/photos
+curl -H 'X-API-Token: <token>' -X DELETE http://localhost:3010/v1/camera/photos/1
+```

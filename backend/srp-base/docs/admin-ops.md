@@ -20,3 +20,4 @@
 - Ensure the `accounts` and `transactions` tables use `character_id` columns after deploying this sprint.
 - Ensure the `base_event_logs` table exists for base event history.
 - Ensure the `boatshop_boats` table exists for boat catalog data.
+- Ensure the `camera_photos` table exists for stored photos.

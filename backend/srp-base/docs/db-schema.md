@@ -187,3 +187,14 @@
 | model | VARCHAR(100) | Boat model |
 | price | INT | Purchase price |
 | created_at | TIMESTAMP | Creation time |
+
+## camera_photos
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| character_id | BIGINT | Owning character |
+| image_url | VARCHAR(1024) | Image URL |
+| description | VARCHAR(255) | Optional description |
+| created_at | TIMESTAMP | Creation time |
+| updated_at | TIMESTAMP | Update time |
