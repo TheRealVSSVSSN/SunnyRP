@@ -46,6 +46,8 @@ const contractsRoutes = require('./routes/contracts.routes');
 // driving tests and drift school domain routes
 const drivingTestsRoutes = require('./routes/drivingTests.routes');
 const driftSchoolRoutes = require('./routes/driftschool.routes');
+// boatshop domain route
+const boatshopRoutes = require('./routes/boatshop.routes');
 
 // broadcaster domain route
 const broadcasterRoutes = require('./routes/broadcaster.routes');
@@ -150,6 +152,7 @@ app.use(zonesRoutes);
 app.use(contractsRoutes);
 app.use(drivingTestsRoutes);
 app.use(driftSchoolRoutes);
+app.use(boatshopRoutes);
 
 // mount broadcaster route
 app.use(broadcasterRoutes);

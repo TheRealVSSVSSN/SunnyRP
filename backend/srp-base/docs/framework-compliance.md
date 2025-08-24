@@ -63,4 +63,5 @@ practice is supported by citations.
 * **Event bus:** implement an internal event emitter or message queue to decouple complex workflows if required by future features.
 * **Enhanced Metrics:** expand Prometheus metrics to include domain‑specific counters and error rates.
 | **baseevents module** | Base event logging endpoints follow the established layered pattern with authentication and idempotency. |
+| **boatshop module** | Boatshop endpoints follow the established layered pattern with authentication and idempotency. |
 

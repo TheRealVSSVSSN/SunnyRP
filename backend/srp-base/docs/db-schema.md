@@ -178,3 +178,12 @@
 | event_type | VARCHAR(50) | Event type identifier |
 | metadata | JSON | Optional details |
 | created_at | TIMESTAMP | Creation time |
+
+## boatshop_boats
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| model | VARCHAR(100) | Boat model |
+| price | INT | Purchase price |
+| created_at | TIMESTAMP | Creation time |

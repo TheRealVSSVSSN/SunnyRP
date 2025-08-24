@@ -17,3 +17,4 @@
 - Apartments routes inherit the same authentication and idempotency requirements.
 - Economy routes inherit the same authentication and idempotency requirements.
 - Base events routes inherit the same authentication and idempotency requirements.
+- Boatshop routes inherit the same authentication and idempotency requirements.
