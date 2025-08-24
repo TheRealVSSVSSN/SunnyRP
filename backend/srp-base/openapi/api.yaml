@@ -421,6 +421,87 @@ components:
           type: object
           additionalProperties: true
           nullable: true
+
+    DiamondBlackjackHand:
+      type: object
+      properties:
+        id:
+          type: integer
+        characterId:
+          type: string
+        tableId:
+          type: integer
+        bet:
+          type: integer
+        payout:
+          type: integer
+        dealerHand:
+          type: string
+        playerHand:
+          type: string
+        playedAt:
+          type: integer
+          format: int64
+
+    DiamondBlackjackHandCreateRequest:
+      type: object
+      required:
+        - characterId
+        - tableId
+        - bet
+        - payout
+        - dealerHand
+        - playerHand
+      properties:
+        characterId:
+          type: string
+        tableId:
+          type: integer
+        bet:
+          type: integer
+        payout:
+          type: integer
+        dealerHand:
+          type: string
+        playerHand:
+          type: string
+        playedAt:
+          type: integer
+          format: int64
+          nullable: true
+
+    InteractSoundPlay:
+      type: object
+      properties:
+        id:
+          type: integer
+        characterId:
+          type: string
+        sound:
+          type: string
+        volume:
+          type: number
+        playedAt:
+          type: integer
+          format: int64
+
+    InteractSoundPlayCreateRequest:
+      type: object
+      required:
+        - characterId
+        - sound
+        - volume
+      properties:
+        characterId:
+          type: string
+        sound:
+          type: string
+        volume:
+          type: number
+        playedAt:
+          type: integer
+          format: int64
+          nullable: true
 security:
   - ApiToken: []
 paths:
@@ -1932,3 +2013,133 @@ paths:
                     type: string
                   traceId:
                     type: string
+  /v1/diamond-blackjack/hands:
+    post:
+      summary: Record a blackjack hand
+      operationId: recordBlackjackHand
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DiamondBlackjackHandCreateRequest'
+      responses:
+        '200':
+          description: Hand recorded
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      hand:
+                        $ref: '#/components/schemas/DiamondBlackjackHand'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          description: Invalid input
+  /v1/diamond-blackjack/hands/{characterId}:
+    get:
+      summary: List recent blackjack hands for a character
+      operationId: listBlackjackHands
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of hands
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      hands:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/DiamondBlackjackHand'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          description: Invalid input
+
+  /v1/interact-sound/plays:
+    post:
+      summary: Record a sound play
+      operationId: recordInteractSound
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InteractSoundPlayCreateRequest'
+      responses:
+        '200':
+          description: Play recorded
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      play:
+                        $ref: '#/components/schemas/InteractSoundPlay'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          description: Invalid input
+
+  /v1/interact-sound/plays/{characterId}:
+    get:
+      summary: List recent sound plays for a character
+      operationId: listInteractSoundPlays
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of plays
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      plays:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/InteractSoundPlay'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          description: Invalid input
