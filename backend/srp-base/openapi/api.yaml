@@ -1084,6 +1084,67 @@ components:
         message:
           type: string
 
+    CronJob:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        schedule:
+          type: string
+        payload:
+          type: object
+          nullable: true
+        accountId:
+          type: integer
+          nullable: true
+        characterId:
+          type: integer
+          nullable: true
+        priority:
+          type: integer
+        nextRun:
+          type: string
+          format: date-time
+        lastRun:
+          type: string
+          format: date-time
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    CronJobCreateRequest:
+      type: object
+      required:
+        - name
+        - schedule
+        - nextRun
+      properties:
+        name:
+          type: string
+        schedule:
+          type: string
+        payload:
+          type: object
+          nullable: true
+        accountId:
+          type: integer
+          nullable: true
+        characterId:
+          type: integer
+          nullable: true
+        priority:
+          type: integer
+          default: 0
+        nextRun:
+          type: string
+          format: date-time
+
     QueuePriority:
       type: object
       properties:
@@ -4324,6 +4385,64 @@ paths:
                     properties:
                       deleted:
                         type: boolean
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/cron/jobs:
+    get:
+      summary: List scheduled cron jobs
+      operationId: listCronJobs
+      responses:
+        '200':
+          description: List of cron jobs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      jobs:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/CronJob'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    post:
+      summary: Create or replace a cron job
+      operationId: createCronJob
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CronJobCreateRequest'
+      responses:
+        '200':
+          description: Cron job stored
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      job:
+                        $ref: '#/components/schemas/CronJob'
                   requestId:
                     type: string
                   traceId:

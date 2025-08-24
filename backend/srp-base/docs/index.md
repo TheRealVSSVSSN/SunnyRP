@@ -175,6 +175,12 @@ For resource decisions see `progress-ledger.md`. Module details are documented i
 
 ## Update – 2025-08-24
 
+Introduced cron job scheduling to support the **Cron** resource.
+
+* Added Cron module with `GET /v1/cron/jobs` and `POST /v1/cron/jobs` endpoints.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/cron.md`.
+
 Introduced coordinate saving to support the **coordsaver** resource.
 
 * Added Coordsaver module with `GET /v1/characters/{characterId}/coords`, `POST /v1/characters/{characterId}/coords` and `DELETE /v1/characters/{characterId}/coords/{id}` endpoints.

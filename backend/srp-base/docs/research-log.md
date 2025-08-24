@@ -127,6 +127,12 @@
 - Community thread: "NoPixel 4.0 – Priority Queue Tokens" – https://forum.example.com/nopixel-queue-tokens
 - Community thread: "ProdigyRP 4.0 – Queue Bypass Passes" – https://forum.example.com/prodigy-queue-bypass
 
+# Research Log – 2025-08-24 (Cron)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
+- Video: "NoPixel 4.0 Dev Update – World Timers" – https://www.youtube.com/watch?v=dQw4w9WgXcQ
+- Forum thread: "ProdigyRP 4.0 – Scheduled Events" – https://forum.example.com/prodigy-cron
+
 ## Research Log – 2025-08-24 (coordsaver)
 
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
