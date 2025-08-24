@@ -37,7 +37,9 @@ practice is supported by citations.
 | **Clean code and modularity** | The code is modular and uses CommonJS modules.  Each domain resides in its own file.  ESLint and Prettier configuration are absent; adding them would enforce consistent style. |
 | **Environment management** | The `dotenv` library loads environment variables and the `env.js` config file ensures required variables are present. |
 | **Diamond Blackjack module** | New endpoints for recording blackjack hands follow the established layered architecture with authentication, idempotency and request correlation. |
+
 | **Interact Sound module** | Sound play logging endpoints follow the same patterns with validation and repository abstractions. |
+
 | **Testing & CI** | There is no CI pipeline or test suite.  Future work should include setting up continuous integration with linting and test execution. |
 
 ## Remaining Gaps / TODOs

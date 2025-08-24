@@ -469,7 +469,6 @@ components:
           type: integer
           format: int64
           nullable: true
-
     InteractSoundPlay:
       type: object
       properties:
@@ -484,7 +483,6 @@ components:
         playedAt:
           type: integer
           format: int64
-
     InteractSoundPlayCreateRequest:
       type: object
       required:
@@ -2077,7 +2075,6 @@ paths:
                     type: string
         '400':
           description: Invalid input
-
   /v1/interact-sound/plays:
     post:
       summary: Record a sound play
@@ -2109,7 +2106,6 @@ paths:
                     type: string
         '400':
           description: Invalid input
-
   /v1/interact-sound/plays/{characterId}:
     get:
       summary: List recent sound plays for a character

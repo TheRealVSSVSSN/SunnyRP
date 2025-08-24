@@ -413,6 +413,7 @@ To support all features present in the original server resources at the framewor
 - **srp-diamond-blackjack** – Records casino blackjack hand history.
   - `GET /v1/diamond-blackjack/hands/:characterId` – List recent hands for a character.
   - `POST /v1/diamond-blackjack/hands` – Record a hand result with `characterId`, `tableId`, `bet`, `payout`, `dealerHand`, `playerHand` and optional `playedAt`.
+  - 
 - **srp-interact-sound** – Logs sound play events.
   - `GET /v1/interact-sound/plays/:characterId` – Retrieve recent sound plays for a character.
   - `POST /v1/interact-sound/plays` – Record a sound play with `characterId`, `sound`, `volume` and optional `playedAt`.
