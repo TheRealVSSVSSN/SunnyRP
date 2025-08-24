@@ -104,3 +104,14 @@
 | character_id | BIGINT | Owning character |
 | prize | VARCHAR(255) | Prize description |
 | created_at | BIGINT | Epoch milliseconds |
+
+## assets
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| owner_id | BIGINT | Character ID owning the asset |
+| url | VARCHAR(1024) | Asset URL |
+| type | VARCHAR(100) | MIME or category |
+| name | VARCHAR(255) | Optional name |
+| created_at | TIMESTAMP | Creation time |

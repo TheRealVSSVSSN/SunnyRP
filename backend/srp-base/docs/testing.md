@@ -89,3 +89,14 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: ww1' -H 'Content-Type: app
   -d '{"characterId":"char123","prize":"cash"}' \
   http://localhost:3010/v1/wise-wheels/spins
 ```
+
+Manually verify the assets endpoints:
+
+```
+curl -H 'X-API-Token: <token>' "http://localhost:3010/v1/assets?ownerId=1"
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: a1' -H 'Content-Type: application/json' \
+  -d '{"ownerId":1,"url":"https://example.com/img.png","type":"image/png"}' \
+  http://localhost:3010/v1/assets
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/assets/1
+curl -H 'X-API-Token: <token>' -X DELETE http://localhost:3010/v1/assets/1
+```

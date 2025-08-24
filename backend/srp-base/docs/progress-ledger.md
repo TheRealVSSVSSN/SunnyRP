@@ -12,3 +12,4 @@
 | 8 | Wise-UC | Undercover alias profiles per character | Create | Added profile API |
 | 9 | WiseGuy-Vanilla | Baseline character management; remove legacy unscoped endpoints | Extend | Consolidated account-scoped APIs |
 | 10 | WiseGuy-Wheels | Wheel spin logging per character | Create | Added spin history API |
+| 11 | assets | Store and retrieve character-bound asset metadata | Create | Added asset APIs |

@@ -59,6 +59,7 @@ const policeRoutes = require('./routes/police.routes');
 // weed plants domain routes
 const weedPlantsRoutes = require('./routes/weedPlants.routes');
 const websitesRoutes = require('./routes/websites.routes');
+const assetsRoutes = require('./routes/assets.routes');
 
 // notes domain route
 const notesRoutes = require('./routes/notes.routes');
@@ -161,6 +162,7 @@ app.use(weedPlantsRoutes);
 
 // mount websites routes
 app.use(websitesRoutes);
+app.use(assetsRoutes);
 
 // mount notes routes
 app.use(notesRoutes);

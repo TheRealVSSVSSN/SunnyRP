@@ -27,3 +27,4 @@
 | 027_add_wise_imports.sql | Wise imports orders table |
 | 028_add_wise_uc.sql | Wise UC profiles table |
 | 029_add_wise_wheels.sql | Wise wheels spins table |
+| 030_add_assets.sql | Assets table |

@@ -597,3 +597,16 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Drop `wise_wheels_spins` table and remove related routes and repository.
+## 2025-08-24 (assets)
+
+### Added
+
+* Assets module with `/v1/assets` endpoints and `assets` table.
+
+### Risks
+
+* None beyond standard migration.
+
+### Rollback
+
+* Drop `assets` table and remove related routes and repository.

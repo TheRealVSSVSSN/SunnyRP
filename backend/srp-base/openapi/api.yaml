@@ -233,6 +233,43 @@ components:
         updated_at:
           type: string
           format: date-time
+    # Asset record
+    Asset:
+      type: object
+      properties:
+        id:
+          type: integer
+        owner_id:
+          type: integer
+          description: Character ID owning the asset
+        url:
+          type: string
+        type:
+          type: string
+          description: Asset type or MIME category
+        name:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+    # Asset creation request
+    AssetCreateRequest:
+      type: object
+      required:
+        - ownerId
+        - url
+        - type
+      properties:
+        ownerId:
+          type: integer
+        url:
+          type: string
+        type:
+          type: string
+        name:
+          type: string
+          nullable: true
     # Drift school payment request
     DriftSchoolPayment:
       type: object
@@ -1659,6 +1696,126 @@ paths:
                     type: string
                   traceId:
                     type: string
+  /v1/assets:
+    get:
+      summary: List assets for a character
+      parameters:
+        - name: ownerId
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of assets
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      assets:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Asset'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    post:
+      summary: Create an asset
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssetCreateRequest'
+      responses:
+        '200':
+          description: Asset created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      asset:
+                        $ref: '#/components/schemas/Asset'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/assets/{id}:
+    get:
+      summary: Get an asset by id
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Asset found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      asset:
+                        $ref: '#/components/schemas/Asset'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '404':
+          description: Not found
+    delete:
+      summary: Delete an asset
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Asset deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      deleted:
+                        type: boolean
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '404':
+          description: Not found
   # Evidence management
   /v1/evidence/items:
     get:
