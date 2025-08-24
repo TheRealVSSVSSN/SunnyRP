@@ -74,6 +74,8 @@ const phoneRoutes = require('./routes/phone.routes');
 
 // chat domain route
 const chatRoutes = require('./routes/chat.routes');
+// connect queue domain route
+const connectqueueRoutes = require('./routes/connectqueue.routes');
 
 // camera domain route
 const cameraRoutes = require('./routes/camera.routes');
@@ -191,6 +193,9 @@ app.use(phoneRoutes);
 
 // mount chat routes
 app.use(chatRoutes);
+
+// mount connect queue routes
+app.use(connectqueueRoutes);
 
 // mount camera routes
 app.use(cameraRoutes);

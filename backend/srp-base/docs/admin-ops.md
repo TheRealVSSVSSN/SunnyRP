@@ -24,3 +24,4 @@
 - Ensure the `character_hud_preferences` table exists for HUD settings.
 - Ensure the `carwash_transactions` and `vehicle_cleanliness` tables exist for carwash tracking.
 - Ensure the `chat_messages` table exists for chat logging.
+- Ensure the `queue_priorities` table exists for connection queue priority management.

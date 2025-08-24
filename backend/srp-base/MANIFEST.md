@@ -686,3 +686,25 @@ Legend: **A** = Added, **M** = Modified.
 | `MANIFEST.md` | M | Recorded chat update. |
 
 Legend: **A** = Added, **M** = Modified.
+
+# Update – 2025-08-24 (connectqueue)
+
+| Path | Status | Notes |
+|---|---|---|
+| `src/repositories/connectqueueRepository.js` | A | Manage account queue priorities. |
+| `src/routes/connectqueue.routes.js` | A | API endpoints for queue priorities. |
+| `src/migrations/040_add_queue_priorities.sql` | A | Create queue_priorities table. |
+| `src/app.js` | M | Mounted connect queue routes. |
+| `openapi/api.yaml` | M | Documented connect queue schemas and paths. |
+| `docs/index.md` | M | Logged connectqueue update. |
+| `docs/progress-ledger.md` | M | Added connectqueue entry. |
+| `docs/framework-compliance.md` | M | Added connectqueue compliance row. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented connectqueue endpoints. |
+| `docs/events-and-rpcs.md` | M | Mapped connectqueue events. |
+| `docs/db-schema.md` | M | Documented queue_priorities table. |
+| `docs/migrations.md` | M | Listed migration 040. |
+| `docs/admin-ops.md` | M | Added queue_priorities table check. |
+| `docs/security.md` | M | Connect queue security note. |
+| `docs/testing.md` | M | Added connectqueue curl examples. |
+| `docs/modules/connectqueue.md` | A | Module documentation. |
+| `docs/research-log.md` | M | Logged connectqueue research. |

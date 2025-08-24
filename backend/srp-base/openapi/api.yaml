@@ -1084,6 +1084,43 @@ components:
         message:
           type: string
 
+    QueuePriority:
+      type: object
+      properties:
+        accountId:
+          type: integer
+        priority:
+          type: integer
+        reason:
+          type: string
+          nullable: true
+        expiresAt:
+          type: string
+          format: date-time
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    QueuePriorityUpsertRequest:
+      type: object
+      required:
+        - accountId
+        - priority
+      properties:
+        accountId:
+          type: integer
+        priority:
+          type: integer
+        reason:
+          type: string
+          nullable: true
+        expiresAt:
+          type: string
+          format: date-time
+          nullable: true
 security:
   - ApiToken: []
 paths:
@@ -4050,5 +4087,103 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HudPreferences'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/connectqueue/priorities:
+    get:
+      summary: List account queue priorities
+      operationId: listQueuePriorities
+      parameters:
+        - in: query
+          name: accountId
+          schema:
+            type: integer
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 50
+      responses:
+        '200':
+          description: Queue priorities
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      priorities:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/QueuePriority'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    post:
+      summary: Upsert queue priority
+      operationId: upsertQueuePriority
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueuePriorityUpsertRequest'
+      responses:
+        '200':
+          description: Queue priority upserted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      priority:
+                        $ref: '#/components/schemas/QueuePriority'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/connectqueue/priorities/{accountId}:
+    delete:
+      summary: Remove queue priority
+      operationId: deleteQueuePriority
+      parameters:
+        - in: path
+          name: accountId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Queue priority removed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      deleted:
+                        type: boolean
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
         '400':
           $ref: '#/components/responses/BadRequest'

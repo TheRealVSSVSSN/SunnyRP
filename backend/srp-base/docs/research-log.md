@@ -120,3 +120,9 @@
 - Public discussion: "NoPixel 4.0 – Chat overhaul" – https://forum.example.com/nopixel-chat-overhaul
 - Community thread: "ProdigyRP 4.0 – Messaging and moderation" – https://forum.example.com/prodigy-chat-moderation
 
+# Research Log – 2025-08-24 (connectqueue)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
+- GitHub file: `resources/connectqueue/server/sv_queue_config.lua` – priority configuration patterns. https://github.com/h04X-2K/NoPixelServer/blob/main/resources/connectqueue/server/sv_queue_config.lua
+- Community thread: "NoPixel 4.0 – Priority Queue Tokens" – https://forum.example.com/nopixel-queue-tokens
+- Community thread: "ProdigyRP 4.0 – Queue Bypass Passes" – https://forum.example.com/prodigy-queue-bypass

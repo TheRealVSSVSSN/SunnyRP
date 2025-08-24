@@ -22,3 +22,4 @@
 - HUD routes inherit the same authentication and idempotency requirements.
 - Carwash routes inherit the same authentication and idempotency requirements.
 - Chat routes inherit the same authentication and idempotency requirements.
+- Connect queue routes inherit the same authentication, idempotency and rate limiting requirements.

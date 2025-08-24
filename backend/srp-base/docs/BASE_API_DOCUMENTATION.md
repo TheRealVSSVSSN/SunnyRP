@@ -491,3 +491,7 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
 - **srp-chat** – Stores chat messages for moderation.
   - `GET /v1/chat/messages/{characterId}` – List recent chat messages for a character.
   - `POST /v1/chat/messages` – Record a chat message (`characterId`, `channel`, `message`).
+- **srp-connectqueue** – Manages account queue priorities.
+  - `GET /v1/connectqueue/priorities` – List queue priorities optionally filtered by `accountId`.
+  - `POST /v1/connectqueue/priorities` – Upsert a priority with `accountId`, `priority`, optional `reason` and `expiresAt`.
+  - `DELETE /v1/connectqueue/priorities/{accountId}` – Remove priority for an account.

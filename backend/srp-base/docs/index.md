@@ -164,3 +164,11 @@ Introduced chat message logging to support the **chat** resource.
 * Added Chat module with `GET /v1/chat/messages/{characterId}` and `POST /v1/chat/messages` endpoints.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/chat.md`.
+
+## Update – 2025-08-24
+
+Introduced account queue priority management to support the **connectqueue** resource.
+
+* Added Connect Queue module with `GET /v1/connectqueue/priorities`, `POST /v1/connectqueue/priorities` and `DELETE /v1/connectqueue/priorities/{accountId}` endpoints.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/connectqueue.md`.
