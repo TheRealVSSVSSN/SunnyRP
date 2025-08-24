@@ -25,3 +25,4 @@
 - Ensure the `carwash_transactions` and `vehicle_cleanliness` tables exist for carwash tracking.
 - Ensure the `chat_messages` table exists for chat logging.
 - Ensure the `queue_priorities` table exists for connection queue priority management.
+- Ensure the `character_coords` table exists for saved coordinates.

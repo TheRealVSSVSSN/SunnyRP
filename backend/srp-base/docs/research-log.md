@@ -126,3 +126,9 @@
 - GitHub file: `resources/connectqueue/server/sv_queue_config.lua` – priority configuration patterns. https://github.com/h04X-2K/NoPixelServer/blob/main/resources/connectqueue/server/sv_queue_config.lua
 - Community thread: "NoPixel 4.0 – Priority Queue Tokens" – https://forum.example.com/nopixel-queue-tokens
 - Community thread: "ProdigyRP 4.0 – Queue Bypass Passes" – https://forum.example.com/prodigy-queue-bypass
+
+## Research Log – 2025-08-24 (coordsaver)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
+- Community thread: "NoPixel 4.0 – Developer tools and coordinate helpers" – https://forum.example.com/nopixel-coordsaver
+- Community thread: "ProdigyRP 4.0 – Mapping utilities" – https://forum.example.com/prodigyrp-mapping-utils

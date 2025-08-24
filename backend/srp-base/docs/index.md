@@ -172,3 +172,11 @@ Introduced account queue priority management to support the **connectqueue** res
 * Added Connect Queue module with `GET /v1/connectqueue/priorities`, `POST /v1/connectqueue/priorities` and `DELETE /v1/connectqueue/priorities/{accountId}` endpoints.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/connectqueue.md`.
+
+## Update – 2025-08-24
+
+Introduced coordinate saving to support the **coordsaver** resource.
+
+* Added Coordsaver module with `GET /v1/characters/{characterId}/coords`, `POST /v1/characters/{characterId}/coords` and `DELETE /v1/characters/{characterId}/coords/{id}` endpoints.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/coordsaver.md`.

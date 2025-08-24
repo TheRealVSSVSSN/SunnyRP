@@ -495,3 +495,7 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
   - `GET /v1/connectqueue/priorities` – List queue priorities optionally filtered by `accountId`.
   - `POST /v1/connectqueue/priorities` – Upsert a priority with `accountId`, `priority`, optional `reason` and `expiresAt`.
   - `DELETE /v1/connectqueue/priorities/{accountId}` – Remove priority for an account.
+- **srp-coordsaver** – Stores character-specific saved coordinates.
+  - `GET /v1/characters/{characterId}/coords` – List saved coordinates.
+  - `POST /v1/characters/{characterId}/coords` – Save or update a coordinate (`name`, `x`, `y`, `z`, optional `heading`).
+  - `DELETE /v1/characters/{characterId}/coords/{id}` – Remove a coordinate.

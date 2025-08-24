@@ -68,6 +68,8 @@ const clothesRoutes = require('./routes/clothes.routes');
 const notesRoutes = require('./routes/notes.routes');
 // base events domain route
 const baseEventsRoutes = require('./routes/baseEvents.routes');
+// coordsaver domain route
+const coordsaverRoutes = require('./routes/coordsaver.routes');
 
 // phone domain route
 const phoneRoutes = require('./routes/phone.routes');
@@ -185,6 +187,8 @@ app.use(clothesRoutes);
 
 // mount notes routes
 app.use(notesRoutes);
+// mount coordsaver routes
+app.use(coordsaverRoutes);
 // mount base events routes
 app.use(baseEventsRoutes);
 

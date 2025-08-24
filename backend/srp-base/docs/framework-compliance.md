@@ -70,3 +70,4 @@ practice is supported by citations.
 | **carwash module** | Carwash endpoints follow the established layered pattern with authentication and idempotency. |
 | **chat module** | Chat message endpoints follow the established layered pattern with authentication and idempotency. |
 | **connectqueue module** | Queue priority endpoints follow the established layered pattern with authentication, idempotency and rate limiting. |
+| **coordsaver module** | Coordinate endpoints follow the established layered pattern with authentication and idempotency. |
