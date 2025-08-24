@@ -764,3 +764,21 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Remove carwash routes and drop `carwash_transactions` and `vehicle_cleanliness` tables.
+
+## 2025-08-24 (chat)
+
+### Added
+
+* Chat module with `GET /v1/chat/messages/{characterId}` and `POST /v1/chat/messages` endpoints and persistence.
+
+### Migrations
+
+* `039_add_chat_messages.sql`
+
+### Risks
+
+* Chat messages may contain sensitive content; ensure access controls are enforced.
+
+### Rollback
+
+* Remove chat routes and drop `chat_messages` table.

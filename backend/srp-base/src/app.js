@@ -72,6 +72,9 @@ const baseEventsRoutes = require('./routes/baseEvents.routes');
 // phone domain route
 const phoneRoutes = require('./routes/phone.routes');
 
+// chat domain route
+const chatRoutes = require('./routes/chat.routes');
+
 // camera domain route
 const cameraRoutes = require('./routes/camera.routes');
 
@@ -185,6 +188,9 @@ app.use(baseEventsRoutes);
 
 // mount phone routes
 app.use(phoneRoutes);
+
+// mount chat routes
+app.use(chatRoutes);
 
 // mount camera routes
 app.use(cameraRoutes);

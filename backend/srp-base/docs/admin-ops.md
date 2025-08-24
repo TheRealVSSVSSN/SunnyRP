@@ -23,3 +23,4 @@
 - Ensure the `camera_photos` table exists for stored photos.
 - Ensure the `character_hud_preferences` table exists for HUD settings.
 - Ensure the `carwash_transactions` and `vehicle_cleanliness` tables exist for carwash tracking.
+- Ensure the `chat_messages` table exists for chat logging.

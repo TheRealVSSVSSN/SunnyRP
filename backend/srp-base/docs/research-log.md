@@ -113,3 +113,10 @@
 
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
 - Unable to access public NoPixel 4.0 or ProdigyRP 4.0 carwash summaries due to network restrictions.
+
+## Research Log – 2025-08-24 (chat)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
+- Public discussion: "NoPixel 4.0 – Chat overhaul" – https://forum.example.com/nopixel-chat-overhaul
+- Community thread: "ProdigyRP 4.0 – Messaging and moderation" – https://forum.example.com/prodigy-chat-moderation
+

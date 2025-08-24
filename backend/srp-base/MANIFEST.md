@@ -660,3 +660,29 @@ Legend: **A** = Added, **M** = Modified.
 | `docs/research-log.md` | M | Logged carandplayerhud research. |
 | `CHANGELOG.md` | M | Added carandplayerhud entry. |
 | `MANIFEST.md` | M | Recorded carandplayerhud update. |
+
+# Update – 2025-08-24 (chat)
+
+| Path | Status | Notes |
+|---|---|---|
+| `src/repositories/chatRepository.js` | A | Store and retrieve chat messages. |
+| `src/routes/chat.routes.js` | A | Chat message endpoints. |
+| `src/migrations/039_add_chat_messages.sql` | A | Create chat_messages table. |
+| `src/app.js` | M | Mounted chat routes. |
+| `openapi/api.yaml` | M | Added ChatMessage schemas and paths. |
+| `docs/index.md` | M | Logged chat update. |
+| `docs/progress-ledger.md` | M | Added chat entry. |
+| `docs/framework-compliance.md` | M | Added chat module compliance row. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented chat endpoints. |
+| `docs/events-and-rpcs.md` | M | Mapped chat events. |
+| `docs/db-schema.md` | M | Documented chat_messages table. |
+| `docs/migrations.md` | M | Listed migration 039. |
+| `docs/admin-ops.md` | M | Added chat table check. |
+| `docs/security.md` | M | Chat security note. |
+| `docs/testing.md` | M | Added chat curl examples. |
+| `docs/modules/chat.md` | A | Module documentation. |
+| `docs/research-log.md` | M | Logged chat research. |
+| `CHANGELOG.md` | M | Added chat entry. |
+| `MANIFEST.md` | M | Recorded chat update. |
+
+Legend: **A** = Added, **M** = Modified.

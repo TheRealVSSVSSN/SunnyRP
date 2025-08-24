@@ -36,3 +36,4 @@
 | 036_add_camera_photos.sql | Camera photos table |
 | 037_add_character_hud_preferences.sql | HUD preferences table |
 | 038_add_carwash.sql | Carwash transactions and vehicle cleanliness tables |
+| 039_add_chat_messages.sql | Chat messages table |

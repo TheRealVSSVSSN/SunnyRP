@@ -186,3 +186,12 @@ curl -H 'X-API-Token: <token>' http://localhost:3010/v1/vehicles/ABC123/dirt
 curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: cw2' -H 'Content-Type: application/json' \
   -X PATCH -d '{"dirt":50}' http://localhost:3010/v1/vehicles/ABC123/dirt
 ```
+
+Manually verify the chat endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/chat/messages/1
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: chat1' -H 'Content-Type: application/json' \
+  -d '{"characterId":1,"channel":"ooc","message":"Hello"}' \
+  http://localhost:3010/v1/chat/messages
+```
