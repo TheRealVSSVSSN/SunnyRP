@@ -8,3 +8,4 @@
 - Ensure the `interact_sound_plays` table exists after deploying this sprint.
 - Ensure the `doors` table exists to track door states.
 - Manage the Node.js process with tools like `pm2` for restarts and monitoring.
+- Ensure the `evidence_chain` and `character_selections` tables exist after deploying this sprint.

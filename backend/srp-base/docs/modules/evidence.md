@@ -15,6 +15,8 @@ There is no feature flag for evidence; the module is always enabled.
 | **GET `/v1/evidence/items/{id}`** | Retrieve a specific evidence item by ID. | 60/min per IP | Required | Yes | None | `{ ok, data: { item: EvidenceItem }, requestId, traceId }` |
 | **PATCH `/v1/evidence/items/{id}`** | Update fields on an evidence item. Any of `type`, `description`, `location`, `owner`, `metadata` may be supplied. | 30/min per IP | Required | Yes | `EvidenceItemUpdateRequest` | `{ ok, data: { item: EvidenceItem }, requestId, traceId }` |
 | **DELETE `/v1/evidence/items/{id}`** | Delete an evidence item. | 30/min per IP | Required | Yes | None | `{ ok, data: { deleted: true }, requestId, traceId }` |
+| **GET `/v1/evidence/items/{id}/custody`** | List custody chain entries for an evidence item. | 60/min per IP | Required | Yes | None | `{ ok, data: { entries: EvidenceChainEntry[] }, requestId, traceId }` |
+| **POST `/v1/evidence/items/{id}/custody`** | Add a custody chain entry. Requires `handlerId` and `action`; optional `notes`. | 30/min per IP | Required | Yes | `EvidenceChainEntryCreateRequest` | `{ ok, data: { entry: EvidenceChainEntry }, requestId, traceId }` |
 
 ### Schemas
 

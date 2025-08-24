@@ -6,3 +6,4 @@
 - Diamond blackjack routes inherit the same authentication and idempotency requirements.
 - Interact sound routes inherit the same authentication and idempotency requirements.
 - Doors routes inherit the same authentication and idempotency requirements.
+- PolicePack routes (evidence custody and account characters) inherit the same authentication and idempotency requirements.

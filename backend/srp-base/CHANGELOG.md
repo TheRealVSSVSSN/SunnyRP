@@ -500,3 +500,17 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Remove documentation sections related to doors if necessary.
+## 2025-08-24 (PolicePack)
+
+### Added
+
+* Evidence custody chain tracking with `/v1/evidence/items/{id}/custody` endpoints and `evidence_chain` table.
+* Account-based character selection endpoints and `character_selections` table.
+
+### Risks
+
+* Minimal; ensure migrations run before enabling routes.
+
+### Rollback
+
+* Drop `evidence_chain` and `character_selections` tables and remove related routes and repositories.

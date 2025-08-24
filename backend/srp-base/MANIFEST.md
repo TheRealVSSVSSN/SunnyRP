@@ -277,3 +277,31 @@ Legend: **A** = Added, **M** = Modified.
 | `docs/framework-compliance.md` | M | Added doors module compliance row. |
 | `docs/modules/doors.md` | A | Module documentation for doors. |
 | `docs/research-log.md` | M | Logged LockDoors research. |
+# Updates for 2025-08-24 PolicePack
+
+| Path | Status | Notes |
+|---|---|---|
+| `src/repositories/evidenceChainRepository.js` | A | Track evidence custody chain. |
+| `src/repositories/characterSelectionRepository.js` | A | Persist active character selection. |
+| `src/repositories/characterRepository.js` | M | Add delete support. |
+| `src/routes/accountCharacters.routes.js` | A | Account character list/create/select/delete endpoints. |
+| `src/routes/evidence.routes.js` | M | Custody chain endpoints. |
+| `src/app.js` | M | Mount account character routes. |
+| `src/migrations/023_add_evidence_chain.sql` | A | Create evidence_chain table. |
+| `src/migrations/024_add_character_selections.sql` | A | Create character_selections table. |
+| `openapi/api.yaml` | M | Document custody and account character endpoints. |
+| `docs/index.md` | M | Logged PolicePack update. |
+| `docs/progress-ledger.md` | M | Added PolicePack entry. |
+| `docs/framework-compliance.md` | M | Added PolicePack row. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Added PolicePack API descriptions. |
+| `docs/events-and-rpcs.md` | M | Mapped PolicePack events. |
+| `docs/db-schema.md` | M | Documented new tables. |
+| `docs/migrations.md` | M | Listed migrations 023–024. |
+| `docs/admin-ops.md` | M | Added table checks. |
+| `docs/security.md` | M | Notes on PolicePack routes. |
+| `docs/testing.md` | M | Added manual tests. |
+| `docs/modules/evidence.md` | M | Custody chain endpoints. |
+| `docs/modules/characters.md` | A | Character selection module. |
+| `docs/research-log.md` | M | Logged research limitations. |
+
+Legend: **A** = Added, **M** = Modified.
