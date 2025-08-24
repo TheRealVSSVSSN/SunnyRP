@@ -37,3 +37,4 @@
 | 037_add_character_hud_preferences.sql | HUD preferences table |
 | 038_add_carwash.sql | Carwash transactions and vehicle cleanliness tables |
 | 039_add_chat_messages.sql | Chat messages table |
+| 040_add_queue_priorities.sql | Queue priority table |

@@ -69,3 +69,4 @@ practice is supported by citations.
 | **hud module** | HUD preference endpoints follow the established layered pattern with authentication and idempotency. |
 | **carwash module** | Carwash endpoints follow the established layered pattern with authentication and idempotency. |
 | **chat module** | Chat message endpoints follow the established layered pattern with authentication and idempotency. |
+| **connectqueue module** | Queue priority endpoints follow the established layered pattern with authentication, idempotency and rate limiting. |

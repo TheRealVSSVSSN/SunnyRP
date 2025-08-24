@@ -782,3 +782,26 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Remove chat routes and drop `chat_messages` table.
+
+## 2025-08-24 (connectqueue)
+
+### Added
+
+* Connect queue module with `/v1/connectqueue/priorities` endpoints and priority table.
+
+### Changed
+
+* `app.js` – Mounted connect queue routes.
+* `openapi/api.yaml` – Added QueuePriority schemas and paths.
+
+### Migrations
+
+* `040_add_queue_priorities.sql`
+
+### Risks
+
+* Misconfigured priorities could allow unintended access; monitor entries.
+
+### Rollback
+
+* Remove connectqueue routes and drop `queue_priorities` table.

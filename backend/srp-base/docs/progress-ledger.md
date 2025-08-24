@@ -30,3 +30,4 @@
 | 26 | carandplayerhud | Store per-character HUD preferences | Create | Added HUD preference API |
 | 27 | carwash | Vehicle cleaning service; log washes and dirt levels | Create | Added carwash endpoints |
 | 28 | chat | In-game chat message logging for moderation | Create | Added chat message API |
+| 29 | connectqueue | Manage account queue priorities | Create | Added priority management APIs |

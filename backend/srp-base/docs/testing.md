@@ -195,3 +195,13 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: chat1' -H 'Content-Type: a
   -d '{"characterId":1,"channel":"ooc","message":"Hello"}' \
   http://localhost:3010/v1/chat/messages
 ```
+
+Manually verify the connect queue priority endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/connectqueue/priorities
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: qp1' -H 'Content-Type: application/json' \
+  -d '{"accountId":1,"priority":10,"reason":"donor"}' \
+  http://localhost:3010/v1/connectqueue/priorities
+curl -H 'X-API-Token: <token>' -X DELETE -H 'X-Idempotency-Key: qp2' http://localhost:3010/v1/connectqueue/priorities/1
+```

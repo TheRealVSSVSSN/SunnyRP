@@ -30,3 +30,4 @@
 | carandplayerhud | Resource broadcasts HUD updates when preferences change | `GET /v1/characters/{characterId}/hud`, `PUT /v1/characters/{characterId}/hud` |
 | carwash | Resource triggers wash events with plate and cost | `POST /v1/carwash`, `GET /v1/carwash/history/{characterId}`, `GET/PATCH /v1/vehicles/{plate}/dirt` |
 | chat | Resource broadcasts chat messages | `POST /v1/chat/messages` logs message; history via `GET /v1/chat/messages/{characterId}` |
+| connectqueue | Resource uses exports `AddPriority` and `RemovePriority` with account identifiers | `GET/POST/DELETE /v1/connectqueue/priorities` manage backend priority records |

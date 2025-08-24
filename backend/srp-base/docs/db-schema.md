@@ -239,3 +239,15 @@
 | channel | VARCHAR(32) | Message channel |
 | message | TEXT | Message content |
 | created_at | TIMESTAMP | Creation time |
+
+## queue_priorities
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| account_id | INT | FK to accounts.id |
+| priority | INT | Higher value = higher queue priority |
+| reason | VARCHAR(255) | Optional note |
+| expires_at | TIMESTAMP | Optional expiration |
+| created_at | TIMESTAMP | Creation time |
+| updated_at | TIMESTAMP | Update time |
