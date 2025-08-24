@@ -158,6 +158,28 @@ Legend: **A** = Added, **M** = Modified.
 | `openapi/api.yaml` | M | Added `Tweet` schemas and `/v1/phone/tweets` path. |
 | `docs/modules/phone.md` | A | Module documentation for phone tweets API. |
 | `docs/BASE_API_DOCUMENTATION.md` | M | Documented phone tweet endpoints. |
+# Updates for 2025-08-24 (Carwash)
+
+| Path | Status | Notes |
+|---|---|---|
+| `src/repositories/carwashRepository.js` | A | Repository for car wash logs and dirt levels. |
+| `src/routes/carwash.routes.js` | A | REST endpoints for car washes and vehicle dirt. |
+| `src/migrations/038_add_carwash.sql` | A | Tables for carwash transactions and vehicle cleanliness. |
+| `src/app.js` | M | Mounted carwash routes. |
+| `openapi/api.yaml` | M | Documented carwash schemas and paths. |
+| `docs/index.md` | M | Logged carwash update. |
+| `docs/progress-ledger.md` | M | Added carwash entry. |
+| `docs/framework-compliance.md` | M | Noted carwash module compliance. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented carwash endpoints. |
+| `docs/events-and-rpcs.md` | M | Mapped carwash events. |
+| `docs/db-schema.md` | M | Described carwash tables. |
+| `docs/migrations.md` | M | Listed migration 038. |
+| `docs/admin-ops.md` | M | Added carwash tables check. |
+| `docs/security.md` | M | Added security note for carwash. |
+| `docs/testing.md` | M | Added carwash curl examples. |
+| `docs/modules/carwash.md` | A | Module documentation for carwash. |
+| `docs/research-log.md` | M | Logged carwash research. |
+| `CHANGELOG.md` | M | Added carwash entry. |
 | `docs/progress-ledger.md` | M | Added rows 106–135 covering remaining resources and phone API creation. |
 | `docs/index.md` | M | Added sprint overview for resources `pNotify` through `yarn`. |
 

@@ -483,3 +483,8 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
 - **srp-hud** – Stores per-character HUD settings.
   - `GET /v1/characters/{characterId}/hud` – Retrieve HUD preferences.
   - `PUT /v1/characters/{characterId}/hud` – Update HUD preferences.
+- **srp-carwash** – Records vehicle washes and dirt levels.
+  - `POST /v1/carwash` – Record a car wash (`characterId`, `plate`, `location`, `cost`).
+  - `GET /v1/carwash/history/{characterId}` – List recent washes for a character.
+  - `GET /v1/vehicles/{plate}/dirt` – Fetch vehicle dirt level.
+  - `PATCH /v1/vehicles/{plate}/dirt` – Update vehicle dirt level.

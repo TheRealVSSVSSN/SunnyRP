@@ -159,6 +159,25 @@
 | reason | VARCHAR(255) | Optional memo |
 | created_at | TIMESTAMP | Creation time |
 
+## carwash_transactions
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| character_id | BIGINT | Owning character |
+| plate | VARCHAR(32) | Vehicle plate |
+| location | VARCHAR(64) | Carwash location identifier |
+| cost | INT | Price paid |
+| washed_at | TIMESTAMP | Wash time |
+
+## vehicle_cleanliness
+
+| Column | Type | Notes |
+|---|---|---|
+| plate | VARCHAR(32) | Primary key |
+| dirt_level | INT | 0 clean, higher is dirtier |
+| updated_at | TIMESTAMP | Update time |
+
 ## apartment_residents
 
 | Column | Type | Notes |
