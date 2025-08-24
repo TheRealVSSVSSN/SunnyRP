@@ -42,6 +42,7 @@ practice is supported by citations.
 
 | **Interact Sound module** | Sound play logging endpoints follow the same patterns with validation and repository abstractions. |
 | **PolicePack module** | Evidence custody chain and character selection endpoints respect layered design, authentication and idempotency. |
+| **Zones module** | Zone definition endpoints follow the established layered pattern with authentication and idempotency. |
 
 | **Testing & CI** | There is no CI pipeline or test suite.  Future work should include setting up continuous integration with linting and test execution. |
 

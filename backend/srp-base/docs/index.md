@@ -23,3 +23,11 @@ For resource decisions see `progress-ledger.md`. Module details are documented i
 ## Update – 2025-08-24
 
 Extended parity for the **PolicePack** resource by introducing evidence chain-of-custody tracking and account-based character selection APIs.
+
+## Update – 2025-08-24
+
+Introduced basic zone management to support the **PolyZone** resource.
+
+* Added zones module with `GET /v1/zones`, `POST /v1/zones` and `DELETE /v1/zones/{id}` endpoints.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/zones.md`.

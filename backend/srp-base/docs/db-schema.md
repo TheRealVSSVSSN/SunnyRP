@@ -53,3 +53,14 @@
 | owner_hex | VARCHAR(64) | Player account, primary key |
 | character_id | BIGINT | Selected character ID |
 | selected_at | TIMESTAMP | Selection timestamp |
+
+## zones
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| name | VARCHAR(50) | Zone name |
+| type | VARCHAR(20) | Shape type |
+| data | JSON | Coordinates and dimensions |
+| created_by | BIGINT | Optional character ID |
+| created_at | TIMESTAMP | Creation time |

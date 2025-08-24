@@ -18,6 +18,31 @@ listed here.  Files not mentioned were left untouched.
 
 Legend: **A** = Added, **M** = Modified.
 
+# Updates for 2025-08-24 (PolyZone)
+
+| Path | Status | Notes |
+|---|---|---|
+| `src/repositories/zonesRepository.js` | A | Repository for zone definitions. |
+| `src/routes/zones.routes.js` | A | REST endpoints for zones. |
+| `src/migrations/025_add_zones.sql` | A | Create zones table. |
+| `src/app.js` | M | Mounted zones routes. |
+| `openapi/api.yaml` | M | Added Zone schemas and `/v1/zones` paths. |
+| `docs/index.md` | M | Logged PolyZone update. |
+| `docs/progress-ledger.md` | M | Added PolyZone entry. |
+| `docs/framework-compliance.md` | M | Noted zones module compliance. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented zones endpoints. |
+| `docs/events-and-rpcs.md` | M | Mapped PolyZone events. |
+| `docs/db-schema.md` | M | Documented zones table. |
+| `docs/migrations.md` | M | Listed migration 025. |
+| `docs/admin-ops.md` | M | Zones table check. |
+| `docs/security.md` | M | Zones security note. |
+| `docs/testing.md` | M | Added zones curl examples. |
+| `docs/modules/zones.md` | A | Module documentation. |
+| `docs/research-log.md` | M | Logged PolyZone research. |
+| `CHANGELOG.md` | M | Added PolyZone entry. |
+
+Legend: **A** = Added, **M** = Modified.
+
 # Additional updates for the second part of the 2025‑08‑19 sprint
 
 | Path | Status | Notes |
