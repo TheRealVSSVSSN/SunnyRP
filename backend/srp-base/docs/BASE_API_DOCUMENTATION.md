@@ -308,15 +308,16 @@ These endpoints round out the foundation of `srp-base`.  Together with the previ
 | `GET` | `/v1/users/exists?hex_id=…` | Return `{ exists: true/false }` if a user exists【67730289104851†L63-L67】. |
 | `POST` | `/v1/users` | Create a user with `hex_id`, `name` and `identifiers` array; atomic【67730289104851†L64-L67】. |
 | `GET` | `/v1/users/:hex_id` | Fetch user profile by hex ID【67730289104851†L64-L67】. |
-
 ### Characters
 
 | Method | Path | Description |
 |-------|-----|-------------|
-| `GET` | `/v1/characters?owner_hex=…` | List all characters owned by the given user【67730289104851†L68-L71】. |
-| `POST` | `/v1/characters` | Create a character.  Body must include `owner_hex`, `first_name` and `last_name`; server enforces unique name and phone number【67730289104851†L69-L72】. |
-| `GET` | `/v1/characters/:id` | Fetch a character by ID【67730289104851†L69-L72】. |
-| `PATCH` | `/v1/characters/:id` | Update a character (e.g. changing story).  Only provided fields are modified【67730289104851†L69-L72】. |
+| `GET` | `/v1/accounts/{accountId}/characters` | List characters owned by an account. |
+| `POST` | `/v1/accounts/{accountId}/characters` | Create a character for an account. Body must include `first_name` and `last_name`; server enforces unique name and phone. |
+| `POST` | `/v1/accounts/{accountId}/characters/{characterId}:select` | Select the active character for the account. Idempotent. |
+| `DELETE` | `/v1/accounts/{accountId}/characters/{characterId}` | Delete a character and clear selection if active. |
+
+
 
 ### Outbox
 

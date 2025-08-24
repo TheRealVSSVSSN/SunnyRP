@@ -55,3 +55,10 @@ Introduced undercover profile storage to support the **Wise-UC** resource.
 * Added Wise UC module with `GET /v1/wise-uc/profiles/{characterId}` and `POST /v1/wise-uc/profiles` endpoints.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/wise-uc.md`.
+## Update – 2025-08-24
+
+Retired legacy unscoped character endpoints to consolidate account-scoped character management.
+
+* Removed `/v1/characters` and `/v1/characters/{id}` routes and OpenAPI paths.
+
+For resource decisions see `progress-ledger.md`.

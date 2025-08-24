@@ -826,66 +826,6 @@ paths:
           description: User object
         '404':
           description: Not found
-  /v1/characters:
-    get:
-      summary: List characters for an owner
-      parameters:
-        - name: owner_hex
-          in: query
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: List of characters
-    post:
-      summary: Create a character
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - owner_hex
-                - first_name
-                - last_name
-              properties:
-                owner_hex:
-                  type: string
-                first_name:
-                  type: string
-                last_name:
-                  type: string
-      responses:
-        '200':
-          description: Created character
-  /v1/characters/{id}:
-    parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-    get:
-      summary: Get a character by id
-      responses:
-        '200':
-          description: Character object
-        '404':
-          description: Not found
-    patch:
-      summary: Update a character
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-      responses:
-        '200':
-          description: Updated character
-
   /v1/accounts/{accountId}/characters:
     get:
       summary: List characters for an account
