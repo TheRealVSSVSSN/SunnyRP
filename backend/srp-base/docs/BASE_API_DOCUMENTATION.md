@@ -410,6 +410,17 @@ To support all features present in the original server resources at the framewor
   - `POST /v1/loot/items` – Create a loot drop (requires `owner_id` and `item_type`; optional `value`, `coordinates`, `metadata`).
   - `PATCH /v1/loot/items/:id` – Update fields on a loot item.
   - `DELETE /v1/loot/items/:id` – Remove a loot item after it is collected or expired.
+  - 
+- **srp-doors** – Manages door definitions and locked state.
+  - `GET /v1/doors` – List all doors.
+  - `POST /v1/doors` – Create or update a door.
+  - `PATCH /v1/doors/{doorId}/state` – Set locked state.
+- **srp-diamond-blackjack** – Records casino blackjack hand history.
+  - `GET /v1/diamond-blackjack/hands/:characterId` – List recent hands for a character.
+  - `POST /v1/diamond-blackjack/hands` – Record a hand result with `characterId`, `tableId`, `bet`, `payout`, `dealerHand`, `playerHand` and optional `playedAt`.
+- **srp-interact-sound** – Logs sound play events.
+  - `GET /v1/interact-sound/plays/:characterId` – Retrieve recent sound plays for a character.
+  - `POST /v1/interact-sound/plays` – Record a sound play with `characterId`, `sound`, `volume` and optional `playedAt`.
 - **srp-diamond-blackjack** – Records casino blackjack hand history.
   - `GET /v1/diamond-blackjack/hands/:characterId` – List recent hands for a character.
   - `POST /v1/diamond-blackjack/hands` – Record a hand result with `characterId`, `tableId`, `bet`, `payout`, `dealerHand`, `playerHand` and optional `playedAt`.

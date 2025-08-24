@@ -239,7 +239,6 @@ Legend: **A** = Added, **M** = Modified.
 | `docs/research-log.md` | M | Logged research sources. |
 | `CHANGELOG.md` | M | Added diamond blackjack entry. |
 
-
 # Updates for 2025-08-23 (InteractSound)
 
 | Path | Status | Notes |
@@ -261,3 +260,20 @@ Legend: **A** = Added, **M** = Modified.
 | `docs/testing.md` | M | Added interact sound test guidance. |
 | `docs/modules/interactSound.md` | A | Module documentation. |
 | `docs/research-log.md` | M | Logged InteractSound research. |
+
+# Updates for 2025-08-24 (LockDoors)
+
+| Path | Status | Notes |
+|---|---|---|
+| `openapi/api.yaml` | M | Documented door schemas and paths. |
+| `docs/index.md` | M | Added LockDoors update note. |
+| `docs/progress-ledger.md` | M | Logged LockDoors resource extension. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Added door API descriptions. |
+| `docs/events-and-rpcs.md` | M | Mapped door events to API routes. |
+| `docs/db-schema.md` | M | Documented `doors` table. |
+| `docs/admin-ops.md` | M | Added doors table check. |
+| `docs/security.md` | M | Noted authentication for door routes. |
+| `docs/testing.md` | M | Added curl examples for door endpoints. |
+| `docs/framework-compliance.md` | M | Added doors module compliance row. |
+| `docs/modules/doors.md` | A | Module documentation for doors. |
+| `docs/research-log.md` | M | Logged LockDoors research. |

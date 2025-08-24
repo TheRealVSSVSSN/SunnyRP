@@ -22,3 +22,16 @@
 | sound | VARCHAR(128) | Sound identifier |
 | volume | FLOAT | Playback volume |
 | played_at | BIGINT | Epoch milliseconds |
+
+## doors
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| door_id | VARCHAR(100) | Unique door identifier |
+| name | VARCHAR(255) | Optional label |
+| state | TINYINT(1) | 1 locked, 0 unlocked |
+| position | JSON | Coordinates metadata |
+| heading | FLOAT | Orientation |
+| created_at | TIMESTAMP | Creation time |
+| updated_at | TIMESTAMP | Update time |

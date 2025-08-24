@@ -486,3 +486,17 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Drop `interact_sound_plays` table and remove related routes and repository.
+
+## 2025-08-24 (LockDoors)
+
+### Added
+
+* Documented existing door APIs in OpenAPI and module docs for the LockDoors resource.
+
+### Risks
+
+* None beyond standard deployment.
+
+### Rollback
+
+* Remove documentation sections related to doors if necessary.

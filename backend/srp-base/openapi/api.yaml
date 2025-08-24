@@ -48,7 +48,6 @@ components:
         updated_at:
           type: string
           format: date-time
-
     # Driving test record
     DrivingTest:
       type: object
@@ -78,7 +77,6 @@ components:
           type: object
           additionalProperties: true
           description: Arbitrary result details encoded as JSON
-
     # Weed plant record
     WeedPlant:
       type: object
@@ -113,7 +111,6 @@ components:
         updated_at:
           type: string
           format: date-time
-
     # Website record
     Website:
       type: object
@@ -140,7 +137,6 @@ components:
         updated_at:
           type: string
           format: date-time
-
     # Request body for creating a website
     WebsiteCreateRequest:
       type: object
@@ -166,7 +162,6 @@ components:
         updated_at:
           type: string
           format: date-time
-
     # Drift school payment request
     DriftSchoolPayment:
       type: object
@@ -180,7 +175,6 @@ components:
         amount:
           type: number
           description: Amount in whole cents to pay for drift school
-
     # Harness response
     VehicleHarness:
       type: object
@@ -189,7 +183,6 @@ components:
           type: integer
           nullable: true
           description: Harness durability; null if not installed or unknown
-
     # Harness update request
     HarnessUpdateRequest:
       type: object
@@ -199,7 +192,6 @@ components:
         durability:
           type: integer
           description: New harness durability value
-
     # Plate change request
     PlateChangeRequest:
       type: object
@@ -213,7 +205,6 @@ components:
         newPlate:
           type: string
           description: New license plate number to assign
-
     # Secondary job record
     SecondaryJob:
       type: object
@@ -230,7 +221,6 @@ components:
         updated_at:
           type: string
           format: date-time
-
     # Secondary job create request
     SecondaryJobCreateRequest:
       type: object
@@ -244,7 +234,6 @@ components:
         job:
           type: string
           description: Name of the secondary job to assign
-
     # Note record
     Note:
       type: object
@@ -269,7 +258,6 @@ components:
         updated_at:
           type: string
           format: date-time
-
     # Player ammunition inventory
     PlayerAmmo:
       type: object
@@ -279,7 +267,6 @@ components:
         is the number of rounds of ammunition currently held.
       additionalProperties:
         type: integer
-
     # Ammo update request
     AmmoUpdateRequest:
       type: object
@@ -293,7 +280,6 @@ components:
         ammo:
           type: integer
           description: Number of rounds remaining for the weapon type
-
     # Request body for creating a note
     NoteCreateRequest:
       type: object
@@ -340,7 +326,6 @@ components:
         time:
           type: integer
           format: int64
-
     TweetCreateRequest:
       type: object
       required:
@@ -356,7 +341,6 @@ components:
         time:
           type: integer
           format: int64
-
     EvidenceItem:
       type: object
       properties:
@@ -382,7 +366,6 @@ components:
         updated_at:
           type: string
           format: date-time
-
     EvidenceItemCreateRequest:
       type: object
       required:
@@ -403,7 +386,6 @@ components:
           type: object
           additionalProperties: true
           nullable: true
-
     EvidenceItemUpdateRequest:
       type: object
       properties:
@@ -421,7 +403,6 @@ components:
           type: object
           additionalProperties: true
           nullable: true
-
     DiamondBlackjackHand:
       type: object
       properties:
@@ -442,7 +423,6 @@ components:
         playedAt:
           type: integer
           format: int64
-
     DiamondBlackjackHandCreateRequest:
       type: object
       required:
@@ -500,6 +480,58 @@ components:
           type: integer
           format: int64
           nullable: true
+    Door:
+      type: object
+      properties:
+        doorId:
+          type: string
+        name:
+          type: string
+          nullable: true
+        locked:
+          type: boolean
+        position:
+          type: object
+          nullable: true
+          additionalProperties: true
+        heading:
+          type: number
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    DoorUpsertRequest:
+      type: object
+      required:
+        - doorId
+      properties:
+        doorId:
+          type: string
+        name:
+          type: string
+          nullable: true
+        locked:
+          type: boolean
+          nullable: true
+        position:
+          type: object
+          nullable: true
+          additionalProperties: true
+        heading:
+          type: number
+          nullable: true
+
+    DoorStateUpdateRequest:
+      type: object
+      required:
+        - locked
+      properties:
+        locked:
+          type: boolean
 security:
   - ApiToken: []
 paths:
@@ -1125,7 +1157,6 @@ paths:
                 properties:
                   id:
                     type: integer
-
   # Weed plant management
   /v1/weed-plants:
     get:
@@ -1247,7 +1278,6 @@ paths:
                     type: boolean
                   data:
                     type: object
-
   # Website management
   /v1/websites:
     get:
@@ -1638,7 +1668,6 @@ paths:
                     type: string
                   traceId:
                     type: string
-
   # Notes management
   /v1/notes:
     get:
@@ -1691,7 +1720,6 @@ paths:
                     type: string
                   traceId:
                     type: string
-
   # Vehicle harness management
   /v1/vehicles/harness/{plate}:
     get:
@@ -1753,7 +1781,6 @@ paths:
                     type: string
                   traceId:
                     type: string
-
   # Vehicle plate change
   /v1/vehicles/plate-change:
     post:
@@ -1783,7 +1810,6 @@ paths:
                     type: string
                   traceId:
                     type: string
-
   # Secondary jobs
   /v1/secondary-jobs:
     get:
@@ -1888,7 +1914,6 @@ paths:
                     type: string
                   traceId:
                     type: string
-
   /v1/notes/{id}:
     delete:
       summary: Delete a note
@@ -2133,6 +2158,101 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/InteractSoundPlay'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          description: Invalid input
+  /v1/doors:
+    get:
+      summary: List all doors
+      operationId: listDoors
+      responses:
+        '200':
+          description: List of doors
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      doors:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Door'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          description: Invalid input
+    post:
+      summary: Create or update a door
+      operationId: upsertDoor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DoorUpsertRequest'
+      responses:
+        '200':
+          description: Door saved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      door:
+                        $ref: '#/components/schemas/Door'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          description: Invalid input
+
+  /v1/doors/{doorId}/state:
+    patch:
+      summary: Set door locked state
+      operationId: setDoorState
+      parameters:
+        - in: path
+          name: doorId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DoorStateUpdateRequest'
+      responses:
+        '200':
+          description: Door state updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      door:
+                        $ref: '#/components/schemas/Door'
                   requestId:
                     type: string
                   traceId:
