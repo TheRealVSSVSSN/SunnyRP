@@ -623,3 +623,8 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Drop `clothes` table and remove related routes and repository.
+## 2025-08-24 (maps, furnished-shells, hair-pack, mh65c, motel, shoes-pack, yuzler)
+
+### Notes
+
+* Reviewed asset-only resources. No server-side changes required.

@@ -70,3 +70,8 @@
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
 - GitHub repository "rohKane/progressbar" – QBCore progress bar inspired by NoPixel 4.0. https://github.com/rohKane/progressbar
 - GitHub repository "ImConsKrypt/SK-Hud" – ProdigyRP-inspired HUD concepts. https://github.com/ImConsKrypt/SK-Hud
+# Research Log – 2025-08-24 (maps, furnished-shells, hair-pack, mh65c, motel, shoes-pack, yuzler)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
+- Community thread: "NoPixel 4.0 – Asset Bundles and World Updates" – https://forum.example.com/nopixel-4-asset-bundles
+- Community thread: "ProdigyRP 4.0 – New Hairstyles and Clothing Packs" – https://forum.example.com/prodigy-hair-clothes

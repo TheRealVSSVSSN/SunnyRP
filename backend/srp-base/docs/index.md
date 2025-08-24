@@ -86,3 +86,9 @@ Introduced character outfit storage to support the **assets_clothes** resource.
 * Added Clothes module with `GET /v1/clothes`, `POST /v1/clothes` and `DELETE /v1/clothes/{id}` endpoints.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/clothes.md`.
+
+## Update – 2025-08-24
+
+Reviewed asset-only resources **maps**, **furnished-shells**, **hair-pack**, **mh65c**, **motel**, **shoes-pack** and **yuzler**. No server-side responsibilities were identified; no API changes required.
+
+For resource decisions see `progress-ledger.md`.
