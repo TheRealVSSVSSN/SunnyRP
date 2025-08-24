@@ -472,3 +472,17 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Drop `diamond_blackjack_hands` table and remove related routes and repository.
+
+## 2025-08-23 (InteractSound)
+
+### Added
+
+* Interact Sound module with `/v1/interact-sound/plays` endpoints and `interact_sound_plays` table.
+
+### Risks
+
+* None beyond standard deployment.
+
+### Rollback
+
+* Drop `interact_sound_plays` table and remove related routes and repository.
