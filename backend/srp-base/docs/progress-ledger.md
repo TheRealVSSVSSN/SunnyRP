@@ -28,3 +28,4 @@
 | 24 | bob74_ipl | Loads interior proxy definitions; purely client-side mapping | Skip | Asset-only |
 | 25 | camera | Capture and store character photos; provide gallery management | Create | Added photo storage API |
 | 26 | carandplayerhud | Store per-character HUD preferences | Create | Added HUD preference API |
+| 27 | carwash | Vehicle cleaning service; log washes and dirt levels | Create | Added carwash endpoints |

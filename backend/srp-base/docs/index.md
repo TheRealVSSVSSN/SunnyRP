@@ -148,3 +148,11 @@ Introduced HUD preference storage to support the **carandplayerhud** resource.
 * Added HUD module with `GET /v1/characters/{characterId}/hud` and `PUT /v1/characters/{characterId}/hud` endpoints.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/hud.md`.
+
+## Update – 2025-08-24
+
+Introduced vehicle cleaning logs to support the **carwash** resource.
+
+* Added Carwash module with `POST /v1/carwash`, `GET /v1/carwash/history/{characterId}` and vehicle dirt endpoints.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/carwash.md`.

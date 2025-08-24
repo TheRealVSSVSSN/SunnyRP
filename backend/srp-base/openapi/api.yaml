@@ -1018,6 +1018,44 @@ components:
         hudTheme:
           type: string
           nullable: true
+    CarwashTransaction:
+      type: object
+      properties:
+        id:
+          type: integer
+        characterId:
+          type: integer
+        plate:
+          type: string
+        location:
+          type: string
+        cost:
+          type: integer
+        washedAt:
+          type: string
+          format: date-time
+    CarwashCreateRequest:
+      type: object
+      required:
+        - characterId
+        - plate
+        - location
+        - cost
+      properties:
+        characterId:
+          type: integer
+        plate:
+          type: string
+        location:
+          type: string
+        cost:
+          type: integer
+    VehicleDirt:
+      type: object
+      properties:
+        dirt:
+          type: integer
+          nullable: true
 
 security:
   - ApiToken: []
@@ -1540,6 +1578,117 @@ paths:
                         type: string
                         format: date-time
                         nullable: true
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/carwash:
+    post:
+      summary: Record a car wash and reset dirt level
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CarwashCreateRequest'
+      responses:
+        '200':
+          description: Car wash recorded
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/CarwashTransaction'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/carwash/history/{characterId}:
+    get:
+      summary: List car wash history for a character
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Car wash history
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      history:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/CarwashTransaction'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+
+  /v1/vehicles/{plate}/dirt:
+    get:
+      summary: Get vehicle dirt level
+      parameters:
+        - in: path
+          name: plate
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Dirt level
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VehicleDirt'
+    patch:
+      summary: Update vehicle dirt level
+      parameters:
+        - in: path
+          name: plate
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VehicleDirt'
+      responses:
+        '200':
+          description: Dirt level updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      updated:
+                        type: integer
                   requestId:
                     type: string
                   traceId:

@@ -174,3 +174,15 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: hud1' -H 'Content-Type: ap
   -d '{"speedUnit":"mph","showFuel":true}' \
   http://localhost:3010/v1/characters/1/hud
 ```
+
+Manually verify the carwash endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: cw1' -H 'Content-Type: application/json' \
+  -d '{"characterId":1,"plate":"ABC123","location":"downtown","cost":100}' \
+  http://localhost:3010/v1/carwash
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/carwash/history/1
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/vehicles/ABC123/dirt
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: cw2' -H 'Content-Type: application/json' \
+  -X PATCH -d '{"dirt":50}' http://localhost:3010/v1/vehicles/ABC123/dirt
+```

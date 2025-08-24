@@ -746,3 +746,21 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Remove HUD routes and drop `character_hud_preferences` table.
+
+## 2025-08-24 (carwash)
+
+### Added
+
+* **Carwash module.** Repository, routes and OpenAPI paths to record car washes and track vehicle dirt levels.
+
+### Migrations
+
+* `038_add_carwash.sql`
+
+### Risks
+
+* Dirt updates are client-supplied; ensure callers trust the source.
+
+### Rollback
+
+* Remove carwash routes and drop `carwash_transactions` and `vehicle_cleanliness` tables.

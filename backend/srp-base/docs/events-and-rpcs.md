@@ -28,3 +28,4 @@
 | bob74_ipl | Loads interior proxies; no server events | N/A |
 | camera | Resource captures photos and uploads metadata | `GET /v1/camera/photos/{characterId}`, `POST /v1/camera/photos`, `DELETE /v1/camera/photos/{id}` |
 | carandplayerhud | Resource broadcasts HUD updates when preferences change | `GET /v1/characters/{characterId}/hud`, `PUT /v1/characters/{characterId}/hud` |
+| carwash | Resource triggers wash events with plate and cost | `POST /v1/carwash`, `GET /v1/carwash/history/{characterId}`, `GET/PATCH /v1/vehicles/{plate}/dirt` |
