@@ -62,3 +62,12 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: w1' -H 'Content-Type: appl
   -d '{"characterId":"char123","label":"greeting","url":"http://example.com/greet.ogg"}' \
   http://localhost:3010/v1/wise-audio/tracks
 ```
+
+Manually verify the wise imports endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/wise-imports/orders/char123
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: wi1' -H 'Content-Type: application/json' \
+  -d '{"characterId":"char123","model":"sultan"}' \
+  http://localhost:3010/v1/wise-imports/orders
+```

@@ -356,3 +356,29 @@ Legend: **A** = Added, **M** = Modified.
 | `MANIFEST.md` | M | Recorded Wise Audio changes. |
 
 Legend: **A** = Added, **M** = Modified.
+
+# Updates for 2025-08-24 (Wise Imports)
+
+| Path | Status | Notes |
+|---|---|---|
+| `src/repositories/wiseImportsRepository.js` | A | Repository for vehicle import orders. |
+| `src/routes/wiseImports.routes.js` | A | Endpoints for listing and creating import orders. |
+| `src/migrations/027_add_wise_imports.sql` | A | Create wise_import_orders table. |
+| `src/app.js` | M | Mounted wise imports routes. |
+| `openapi/api.yaml` | M | Added Wise Imports schemas and paths. |
+| `docs/index.md` | M | Logged Wise Imports update. |
+| `docs/progress-ledger.md` | M | Added Wise Imports entry. |
+| `docs/framework-compliance.md` | M | Added Wise Imports compliance row. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented Wise Imports endpoints. |
+| `docs/events-and-rpcs.md` | M | Mapped Wise Imports events. |
+| `docs/db-schema.md` | M | Documented wise_import_orders table. |
+| `docs/migrations.md` | M | Listed migration 027. |
+| `docs/admin-ops.md` | M | Added table check for wise_import_orders. |
+| `docs/security.md` | M | Wise Imports security note. |
+| `docs/testing.md` | M | Added wise imports curl examples. |
+| `docs/modules/wise-imports.md` | A | Module documentation. |
+| `docs/research-log.md` | M | Logged Wise Imports research. |
+| `CHANGELOG.md` | M | Added Wise Imports entry. |
+| `MANIFEST.md` | M | Recorded Wise Imports changes. |
+
+Legend: **A** = Added, **M** = Modified.

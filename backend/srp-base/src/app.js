@@ -73,6 +73,9 @@ const interactSoundRoutes = require('./routes/interactSound.routes');
 // wise audio domain route
 const wiseAudioRoutes = require('./routes/wiseAudio.routes');
 
+// wise imports domain route
+const wiseImportsRoutes = require('./routes/wiseImports.routes');
+
 // diamond blackjack domain route
 const diamondBlackjackRoutes = require('./routes/diamondBlackjack.routes');
 
@@ -166,6 +169,9 @@ app.use(interactSoundRoutes);
 
 // mount wise audio routes
 app.use(wiseAudioRoutes);
+
+// mount wise imports routes
+app.use(wiseImportsRoutes);
 
 // mount diamond blackjack routes
 app.use(diamondBlackjackRoutes);

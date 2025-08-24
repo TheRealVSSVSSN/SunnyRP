@@ -24,3 +24,4 @@
 | 024_add_character_selections.sql | Track active character per account |
 | 025_add_zones.sql | Zones table |
 | 026_add_wise_audio.sql | Wise audio tracks table |
+| 027_add_wise_imports.sql | Wise imports orders table |

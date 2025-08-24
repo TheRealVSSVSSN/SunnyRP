@@ -44,6 +44,7 @@ practice is supported by citations.
 | **PolicePack module** | Evidence custody chain and character selection endpoints respect layered design, authentication and idempotency. |
 | **Zones module** | Zone definition endpoints follow the established layered pattern with authentication and idempotency. |
 | **Wise Audio module** | Audio track storage endpoints follow the established layered pattern with authentication and idempotency. |
+| **Wise Imports module** | Import order endpoints follow the established layered pattern with authentication and idempotency. |
 
 | **Testing & CI** | There is no CI pipeline or test suite.  Future work should include setting up continuous integration with linting and test execution. |
 

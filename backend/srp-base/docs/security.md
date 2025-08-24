@@ -9,3 +9,4 @@
 - PolicePack routes (evidence custody and account characters) inherit the same authentication and idempotency requirements.
 - Zones routes inherit the same authentication and idempotency requirements.
 - Wise Audio routes inherit the same authentication and idempotency requirements.
+- Wise Imports routes inherit the same authentication and idempotency requirements.

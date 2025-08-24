@@ -541,3 +541,17 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Drop `wise_audio_tracks` table and remove related routes and repository.
+
+## 2025-08-24 (Wise Imports)
+
+### Added
+
+* Wise Imports module with `/v1/wise-imports/orders` endpoints and `wise_import_orders` table.
+
+### Risks
+
+* None beyond standard migration.
+
+### Rollback
+
+* Drop `wise_import_orders` table and remove related routes and repository.
