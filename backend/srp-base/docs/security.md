@@ -10,3 +10,4 @@
 - Zones routes inherit the same authentication and idempotency requirements.
 - Wise Audio routes inherit the same authentication and idempotency requirements.
 - Wise Imports routes inherit the same authentication and idempotency requirements.
+- Wise UC routes inherit the same authentication and idempotency requirements.

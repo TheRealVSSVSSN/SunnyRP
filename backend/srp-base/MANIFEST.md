@@ -382,3 +382,29 @@ Legend: **A** = Added, **M** = Modified.
 | `MANIFEST.md` | M | Recorded Wise Imports changes. |
 
 Legend: **A** = Added, **M** = Modified.
+
+# Update – 2025-08-24 (Wise-UC)
+
+| Path | Status | Notes |
+|---|---|---|
+| `src/repositories/wiseUCRepository.js` | A | Repository for undercover profiles. |
+| `src/routes/wiseUC.routes.js` | A | Endpoints for creating and retrieving undercover profiles. |
+| `src/migrations/028_add_wise_uc.sql` | A | Create wise_uc_profiles table. |
+| `src/app.js` | M | Mounted wise uc routes. |
+| `openapi/api.yaml` | M | Added Wise UC schemas and paths. |
+| `docs/index.md` | M | Logged Wise-UC update. |
+| `docs/progress-ledger.md` | M | Added Wise-UC entry. |
+| `docs/framework-compliance.md` | M | Added Wise UC compliance row. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented Wise UC endpoints. |
+| `docs/events-and-rpcs.md` | M | Mapped Wise UC events. |
+| `docs/db-schema.md` | M | Documented wise_uc_profiles table. |
+| `docs/migrations.md` | M | Listed migration 028. |
+| `docs/admin-ops.md` | M | Added table check for wise_uc_profiles. |
+| `docs/security.md` | M | Wise UC security note. |
+| `docs/testing.md` | M | Added wise uc curl examples. |
+| `docs/modules/wise-uc.md` | A | Module documentation. |
+| `docs/research-log.md` | M | Logged Wise-UC research. |
+| `CHANGELOG.md` | M | Added Wise-UC entry. |
+| `MANIFEST.md` | M | Recorded Wise-UC changes. |
+
+Legend: **A** = Added, **M** = Modified.

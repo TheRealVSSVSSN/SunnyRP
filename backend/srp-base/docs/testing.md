@@ -71,3 +71,12 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: wi1' -H 'Content-Type: app
   -d '{"characterId":"char123","model":"sultan"}' \
   http://localhost:3010/v1/wise-imports/orders
 ```
+
+Manually verify the wise uc endpoints:
+
+```
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/wise-uc/profiles/char123
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: uc1' -H 'Content-Type: application/json' \
+  -d '{"characterId":"char123","alias":"Shadow","active":true}' \
+  http://localhost:3010/v1/wise-uc/profiles
+```

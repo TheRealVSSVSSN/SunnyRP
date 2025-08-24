@@ -555,3 +555,17 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Drop `wise_import_orders` table and remove related routes and repository.
+
+## 2025-08-24 (Wise-UC)
+
+### Added
+
+* Wise UC module with `/v1/wise-uc/profiles` endpoints and `wise_uc_profiles` table.
+
+### Risks
+
+* None beyond standard migration.
+
+### Rollback
+
+* Drop `wise_uc_profiles` table and remove related routes and repository.
