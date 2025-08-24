@@ -70,3 +70,11 @@ Introduced wheel spin tracking to support the **Wise Wheels** resource.
 * Added Wise Wheels module with `GET /v1/wise-wheels/spins/{characterId}` and `POST /v1/wise-wheels/spins` endpoints.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/wise-wheels.md`.
+
+## Update – 2025-08-24
+
+Introduced asset metadata storage to support the **assets** resource.
+
+* Added Assets module with `GET /v1/assets`, `GET /v1/assets/{id}`, `POST /v1/assets` and `DELETE /v1/assets/{id}` endpoints.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/assets.md`.

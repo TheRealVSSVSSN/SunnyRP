@@ -434,6 +434,11 @@ To support all features present in the original server resources at the framewor
 - **srp-wise-wheels** – Records wheel spin results.
   - `GET /v1/wise-wheels/spins/{characterId}` – List spins for a character.
   - `POST /v1/wise-wheels/spins` – Record a spin with `characterId` and `prize`.
+- **srp-assets** – Stores references to character-bound assets such as images or media.
+  - `GET /v1/assets?ownerId={cid}` – List assets for a character.
+  - `GET /v1/assets/{id}` – Retrieve an asset by id.
+  - `POST /v1/assets` – Create an asset with `ownerId`, `url` and `type` (requires `Idempotency-Key`).
+  - `DELETE /v1/assets/{id}` – Remove an asset record.
 - **srp-zones** – Stores polygonal zone definitions for world interactions.
   - `GET /v1/zones` – List zones.
   - `POST /v1/zones` – Create a zone with `name`, `type`, and `data`.
