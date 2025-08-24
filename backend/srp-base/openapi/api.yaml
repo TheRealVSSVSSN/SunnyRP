@@ -837,6 +837,58 @@ components:
         createdBy:
           type: integer
           nullable: true
+    Apartment:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        location:
+          type: object
+          nullable: true
+        price:
+          type: number
+          format: float
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+          nullable: true
+    ApartmentCreateRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        location:
+          type: object
+          nullable: true
+        price:
+          type: number
+          format: float
+    ApartmentResident:
+      type: object
+      properties:
+        id:
+          type: integer
+        apartmentId:
+          type: integer
+        characterId:
+          type: integer
+        assignedAt:
+          type: string
+          format: date-time
+    ApartmentResidentAssignRequest:
+      type: object
+      required:
+        - characterId
+      properties:
+        characterId:
+          type: integer
 security:
   - ApiToken: []
 paths:
@@ -3141,3 +3193,89 @@ paths:
                     type: string
                   traceId:
                     type: string
+  /v1/apartments:
+    get:
+      summary: List apartments
+      parameters:
+        - in: query
+          name: characterId
+          schema:
+            type: integer
+          required: false
+          description: Filter by resident character ID
+      responses:
+        '200':
+          description: List of apartments
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  apartments:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Apartment'
+    post:
+      summary: Create an apartment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApartmentCreateRequest'
+      responses:
+        '200':
+          description: Apartment created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  apartment:
+                    $ref: '#/components/schemas/Apartment'
+  /v1/apartments/{apartmentId}/residents:
+    post:
+      summary: Assign a resident to an apartment
+      parameters:
+        - in: path
+          name: apartmentId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApartmentResidentAssignRequest'
+      responses:
+        '200':
+          description: Resident assigned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  record:
+                    $ref: '#/components/schemas/ApartmentResident'
+  /v1/apartments/{apartmentId}/residents/{characterId}:
+    delete:
+      summary: Remove a resident from an apartment
+      parameters:
+        - in: path
+          name: apartmentId
+          required: true
+          schema:
+            type: integer
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Resident removed
+          content:
+            application/json:
+              schema:
+                type: object

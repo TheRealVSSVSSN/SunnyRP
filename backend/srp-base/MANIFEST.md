@@ -489,3 +489,25 @@ Legend: **A** = Added, **M** = Modified.
 | `CHANGELOG.md` | M | Logged asset pack skip decisions. |
 
 Legend: **A** = Added, **M** = Modified.
+# Update – 2025-08-24 (apartments)
+
+| Path | Status | Notes |
+|---|---|---|
+| `src/repositories/apartmentsRepository.js` | M | Character-scoped queries and assignments |
+| `src/routes/apartments.routes.js` | M | Accept characterId and filter by resident |
+| `src/migrations/032_add_apartment_residents_character_fk.sql` | A | Convert apartment_residents to character_id |
+| `openapi/api.yaml` | M | Added apartment schemas and paths |
+| `docs/index.md` | M | Logged apartments update |
+| `docs/progress-ledger.md` | M | Added apartments entry |
+| `docs/framework-compliance.md` | M | Added apartments row |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented apartment endpoints |
+| `docs/events-and-rpcs.md` | M | Mapped apartment events |
+| `docs/db-schema.md` | M | Documented apartments tables |
+| `docs/migrations.md` | M | Listed migration 032 |
+| `docs/admin-ops.md` | M | Table check for apartments |
+| `docs/security.md` | M | Apartments security note |
+| `docs/testing.md` | M | Added apartments curl examples |
+| `docs/modules/apartments.md` | A | Module documentation |
+| `CHANGELOG.md` | M | Added apartments entry |
+
+Legend: **A** = Added, **M** = Modified.

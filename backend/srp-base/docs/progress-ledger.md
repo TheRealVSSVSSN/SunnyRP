@@ -21,3 +21,4 @@
 | 17 | motel | Motel interior assets; no backend | Skip | Asset-only |
 | 18 | shoes-pack | Footwear model assets; no backend | Skip | Asset-only |
 | 19 | yuzler | Clothing asset pack; no backend | Skip | Asset-only |
+| 20 | apartments | Apartment definitions and resident assignments | Extend | Added character-scoped residency and GET filter |

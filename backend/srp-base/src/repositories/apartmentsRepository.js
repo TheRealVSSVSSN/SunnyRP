@@ -1,10 +1,20 @@
 const db = require('./db');
 
 /**
- * List all apartments.
+ * List apartments. Optionally filter by resident character.
+ * @param {number|null} characterId
  * @returns {Promise<Array>} list of apartments
  */
-async function listApartments() {
+async function listApartments(characterId = null) {
+  if (characterId) {
+    const [rows] = await db.query(
+      `SELECT a.* FROM apartments a
+       JOIN apartment_residents ar ON ar.apartment_id = a.id
+       WHERE ar.character_id = ?`,
+      [characterId],
+    );
+    return rows;
+  }
   const [rows] = await db.query('SELECT * FROM apartments');
   return rows;
 }
@@ -27,25 +37,28 @@ async function createApartment(name, location = null, price = 0) {
 /**
  * Assign a resident to an apartment.
  * @param {number} apartmentId - Apartment ID
- * @param {number} playerId - Player ID
+ * @param {number} characterId - Character ID
  * @returns {Promise<Object>} created assignment
  */
-async function assignResident(apartmentId, playerId) {
+async function assignResident(apartmentId, characterId) {
   const [result] = await db.query(
-    'INSERT INTO apartment_residents (apartment_id, player_id) VALUES (?, ?)',
-    [apartmentId, playerId],
+    'INSERT INTO apartment_residents (apartment_id, character_id) VALUES (?, ?)',
+    [apartmentId, characterId],
   );
-  return { id: result.insertId, apartmentId, playerId };
+  return { id: result.insertId, apartmentId, characterId };
 }
 
 /**
  * Remove a resident from an apartment.
  * @param {number} apartmentId - Apartment ID
- * @param {number} playerId - Player ID
+ * @param {number} characterId - Character ID
  * @returns {Promise<void>}
  */
-async function vacateResident(apartmentId, playerId) {
-  await db.query('DELETE FROM apartment_residents WHERE apartment_id = ? AND player_id = ?', [apartmentId, playerId]);
+async function vacateResident(apartmentId, characterId) {
+  await db.query(
+    'DELETE FROM apartment_residents WHERE apartment_id = ? AND character_id = ?',
+    [apartmentId, characterId],
+  );
 }
 
 module.exports = {
