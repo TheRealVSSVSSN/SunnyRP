@@ -14,6 +14,27 @@ components:
       type: apiKey
       in: header
       name: X-API-Token
+  responses:
+    BadRequest:
+      description: Invalid input
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              ok:
+                type: boolean
+              error:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+              requestId:
+                type: string
+              traceId:
+                type: string
   # Schema definitions for reusable data objects.  These types can be
   # referenced elsewhere in the spec via $ref.  Adding contract here
   # enables clients to understand the structure of contract objects.
@@ -1129,25 +1150,7 @@ paths:
                   traceId:
                     type: string
         '400':
-          description: Invalid input
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  ok:
-                    type: boolean
-                  error:
-                    type: object
-                    properties:
-                      code:
-                        type: string
-                      message:
-                        type: string
-                  requestId:
-                    type: string
-                  traceId:
-                    type: string
+          $ref: '#/components/responses/BadRequest'
         '500':
           description: Internal error
           content:
@@ -1206,7 +1209,7 @@ paths:
                   traceId:
                     type: string
         '400':
-          description: Invalid input
+          $ref: '#/components/responses/BadRequest'
         '404':
           description: Broadcaster job not found
         '409':
@@ -1803,25 +1806,7 @@ paths:
                   traceId:
                     type: string
         '400':
-          description: Invalid input
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  ok:
-                    type: boolean
-                  error:
-                    type: object
-                    properties:
-                      code:
-                        type: string
-                      message:
-                        type: string
-                  requestId:
-                    type: string
-                  traceId:
-                    type: string
+          $ref: '#/components/responses/BadRequest'
     patch:
       summary: Update evidence item
       parameters:
@@ -1952,25 +1937,7 @@ paths:
                   traceId:
                     type: string
         '400':
-          description: Invalid input
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  ok:
-                    type: boolean
-                  error:
-                    type: object
-                    properties:
-                      code:
-                        type: string
-                      message:
-                        type: string
-                  requestId:
-                    type: string
-                  traceId:
-                    type: string
+          $ref: '#/components/responses/BadRequest'
     patch:
       summary: Update ammunition count for a weapon type
       parameters:
@@ -2005,25 +1972,7 @@ paths:
                   traceId:
                     type: string
         '400':
-          description: Invalid input
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  ok:
-                    type: boolean
-                  error:
-                    type: object
-                    properties:
-                      code:
-                        type: string
-                      message:
-                        type: string
-                  requestId:
-                    type: string
-                  traceId:
-                    type: string
+          $ref: '#/components/responses/BadRequest'
   # Notes management
   /v1/notes:
     get:
@@ -2251,25 +2200,7 @@ paths:
                   traceId:
                     type: string
         '400':
-          description: Invalid input
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  ok:
-                    type: boolean
-                  error:
-                    type: object
-                    properties:
-                      code:
-                        type: string
-                      message:
-                        type: string
-                  requestId:
-                    type: string
-                  traceId:
-                    type: string
+          $ref: '#/components/responses/BadRequest'
   /v1/notes/{id}:
     delete:
       summary: Delete a note
@@ -2343,7 +2274,7 @@ paths:
                   traceId:
                     type: string
         '400':
-          description: Invalid input
+          $ref: '#/components/responses/BadRequest'
     post:
       summary: Create a tweet
       operationId: createTweet
@@ -2373,25 +2304,7 @@ paths:
                   traceId:
                     type: string
         '400':
-          description: Invalid input
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  ok:
-                    type: boolean
-                  error:
-                    type: object
-                    properties:
-                      code:
-                        type: string
-                      message:
-                        type: string
-                  requestId:
-                    type: string
-                  traceId:
-                    type: string
+          $ref: '#/components/responses/BadRequest'
   /v1/diamond-blackjack/hands:
     post:
       summary: Record a blackjack hand
@@ -2422,7 +2335,7 @@ paths:
                   traceId:
                     type: string
         '400':
-          description: Invalid input
+          $ref: '#/components/responses/BadRequest'
   /v1/diamond-blackjack/hands/{characterId}:
     get:
       summary: List recent blackjack hands for a character
@@ -2455,7 +2368,7 @@ paths:
                   traceId:
                     type: string
         '400':
-          description: Invalid input
+          $ref: '#/components/responses/BadRequest'
   /v1/interact-sound/plays:
     post:
       summary: Record a sound play
@@ -2486,7 +2399,7 @@ paths:
                   traceId:
                     type: string
         '400':
-          description: Invalid input
+          $ref: '#/components/responses/BadRequest'
   /v1/interact-sound/plays/{characterId}:
     get:
       summary: List recent sound plays for a character
@@ -2519,7 +2432,7 @@ paths:
                   traceId:
                     type: string
         '400':
-          description: Invalid input
+          $ref: '#/components/responses/BadRequest'
   /v1/wise-audio/tracks:
     post:
       summary: Create an audio track
@@ -2550,7 +2463,7 @@ paths:
                   traceId:
                     type: string
         '400':
-          description: Invalid input
+          $ref: '#/components/responses/BadRequest'
   /v1/wise-audio/tracks/{characterId}:
     get:
       summary: List audio tracks for a character
@@ -2583,7 +2496,7 @@ paths:
                   traceId:
                     type: string
         '400':
-          description: Invalid input
+          $ref: '#/components/responses/BadRequest'
   /v1/wise-imports/orders:
     post:
       summary: Create an import order
@@ -2614,7 +2527,7 @@ paths:
                   traceId:
                     type: string
         '400':
-          description: Invalid input
+          $ref: '#/components/responses/BadRequest'
   /v1/wise-imports/orders/{characterId}:
     get:
       summary: List import orders for a character
@@ -2647,7 +2560,7 @@ paths:
                   traceId:
                     type: string
         '400':
-          description: Invalid input
+          $ref: '#/components/responses/BadRequest'
   /v1/wise-uc/profiles:
     post:
       summary: Create or update an undercover profile
@@ -2678,7 +2591,7 @@ paths:
                   traceId:
                     type: string
         '400':
-          description: Invalid input
+          $ref: '#/components/responses/BadRequest'
   /v1/wise-uc/profiles/{characterId}:
     get:
       summary: Get undercover profile for a character
@@ -2711,7 +2624,7 @@ paths:
         '404':
           description: Profile not found
         '400':
-          description: Invalid input
+          $ref: '#/components/responses/BadRequest'
   /v1/wise-wheels/spins:
     post:
       summary: Record a wheel spin result
@@ -2742,7 +2655,7 @@ paths:
                   traceId:
                     type: string
         '400':
-          description: Invalid input
+          $ref: '#/components/responses/BadRequest'
   /v1/wise-wheels/spins/{characterId}:
     get:
       summary: List wheel spins for a character
@@ -2775,7 +2688,7 @@ paths:
                   traceId:
                     type: string
         '400':
-          description: Invalid input
+          $ref: '#/components/responses/BadRequest'
   /v1/doors:
     get:
       summary: List all doors
@@ -2802,7 +2715,7 @@ paths:
                   traceId:
                     type: string
         '400':
-          description: Invalid input
+          $ref: '#/components/responses/BadRequest'
     post:
       summary: Create or update a door
       operationId: upsertDoor
@@ -2832,7 +2745,7 @@ paths:
                   traceId:
                     type: string
         '400':
-          description: Invalid input
+          $ref: '#/components/responses/BadRequest'
 
   /v1/doors/{doorId}/state:
     patch:
@@ -2870,7 +2783,7 @@ paths:
                   traceId:
                     type: string
         '400':
-          description: Invalid input
+          $ref: '#/components/responses/BadRequest'
   /v1/zones:
     get:
       summary: List zones
@@ -2923,7 +2836,7 @@ paths:
                   traceId:
                     type: string
         '400':
-          description: Invalid input
+          $ref: '#/components/responses/BadRequest'
   /v1/zones/{id}:
     delete:
       summary: Delete zone
