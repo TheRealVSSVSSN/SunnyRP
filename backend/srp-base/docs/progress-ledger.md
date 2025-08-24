@@ -6,3 +6,4 @@
 | 2 | InteractSound | Play sound effects for players; log sound playback events | Create | Added sound play API |
 | 3 | LockDoors | Door state persistence and management | Extend | Added OpenAPI spec and documentation |
 | 4 | PolicePack | Evidence custody chain and account character selection | Create | Added custody and selection APIs |
+| 5 | PolyZone | Zone definitions and management | Create | Added zone storage API |

@@ -421,6 +421,10 @@ To support all features present in the original server resources at the framewor
 - **srp-interact-sound** – Logs sound play events.
   - `GET /v1/interact-sound/plays/:characterId` – Retrieve recent sound plays for a character.
   - `POST /v1/interact-sound/plays` – Record a sound play with `characterId`, `sound`, `volume` and optional `playedAt`.
+- **srp-zones** – Stores polygonal zone definitions for world interactions.
+  - `GET /v1/zones` – List zones.
+  - `POST /v1/zones` – Create a zone with `name`, `type`, and `data`.
+  - `DELETE /v1/zones/{id}` – Remove a zone.
 - **srp-diamond-blackjack** – Records casino blackjack hand history.
   - `GET /v1/diamond-blackjack/hands/:characterId` – List recent hands for a character.
   - `POST /v1/diamond-blackjack/hands` – Record a hand result with `characterId`, `tableId`, `bet`, `payout`, `dealerHand`, `playerHand` and optional `playedAt`.

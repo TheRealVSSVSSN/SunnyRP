@@ -39,6 +39,7 @@ const weaponsRoutes = require('./routes/weapons.routes');
 const shopsRoutes = require('./routes/shops.routes');
 const blipsRoutes = require('./routes/blips.routes');
 const crimeSchoolRoutes = require('./routes/crimeSchool.routes');
+const zonesRoutes = require('./routes/zones.routes');
 
 // contracts domain route
 const contractsRoutes = require('./routes/contracts.routes');
@@ -131,6 +132,7 @@ app.use(weaponsRoutes);
 app.use(shopsRoutes);
 app.use(blipsRoutes);
 app.use(crimeSchoolRoutes);
+app.use(zonesRoutes);
 app.use(contractsRoutes);
 app.use(drivingTestsRoutes);
 app.use(driftSchoolRoutes);

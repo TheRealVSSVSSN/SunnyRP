@@ -22,3 +22,4 @@
 | 022_add_interact_sound.sql | Sound play history table |
 | 023_add_evidence_chain.sql | Evidence custody chain table |
 | 024_add_character_selections.sql | Track active character per account |
+| 025_add_zones.sql | Zones table |

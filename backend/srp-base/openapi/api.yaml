@@ -612,6 +612,39 @@ components:
       properties:
         locked:
           type: boolean
+    Zone:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        type:
+          type: string
+        data:
+          type: object
+        createdBy:
+          type: integer
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+    ZoneCreateRequest:
+      type: object
+      required:
+        - name
+        - type
+        - data
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+        data:
+          type: object
+        createdBy:
+          type: integer
+          nullable: true
 security:
   - ApiToken: []
 paths:
@@ -2541,3 +2574,79 @@ paths:
                     type: string
         '400':
           description: Invalid input
+  /v1/zones:
+    get:
+      summary: List zones
+      responses:
+        '200':
+          description: List of zones
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      zones:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Zone'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+    post:
+      summary: Create zone
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ZoneCreateRequest'
+      responses:
+        '200':
+          description: Zone created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      zone:
+                        $ref: '#/components/schemas/Zone'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          description: Invalid input
+  /v1/zones/{id}:
+    delete:
+      summary: Delete zone
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Zone deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string

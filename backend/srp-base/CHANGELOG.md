@@ -514,3 +514,16 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Drop `evidence_chain` and `character_selections` tables and remove related routes and repositories.
+## 2025-08-24 (PolyZone)
+
+### Added
+
+* Zones module with `/v1/zones` endpoints and `zones` table.
+
+### Risks
+
+* None beyond standard migration.
+
+### Rollback
+
+* Drop `zones` table and remove related routes and repository.
