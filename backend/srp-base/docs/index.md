@@ -62,3 +62,11 @@ Retired legacy unscoped character endpoints to consolidate account-scoped charac
 * Removed `/v1/characters` and `/v1/characters/{id}` routes and OpenAPI paths.
 
 For resource decisions see `progress-ledger.md`.
+
+## Update – 2025-08-24
+
+Introduced wheel spin tracking to support the **Wise Wheels** resource.
+
+* Added Wise Wheels module with `GET /v1/wise-wheels/spins/{characterId}` and `POST /v1/wise-wheels/spins` endpoints.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/wise-wheels.md`.

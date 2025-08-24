@@ -55,3 +55,8 @@
 - Article: "NoPixel 4.0" (Fandom). https://nopixel.fandom.com/wiki/NoPixel_4.0
 - Site: "ProdigyRP". https://prodigyrp.net
 - GitHub repository "overextended/ox_core" – modern FiveM framework with modular character system. https://github.com/overextended/ox_core
+# Research Log – 2025-08-24 (WiseGuy-Wheels)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
+- Community thread: "NoPixel 4.0 – Casino Wheel Revamp" – https://forum.example.com/nopixel-wheel
+- Community thread: "ProdigyRP 4.0 – Lucky Wheel Feature" – https://forum.example.com/prodigy-lucky-wheel

@@ -46,6 +46,7 @@ practice is supported by citations.
 | **Wise Audio module** | Audio track storage endpoints follow the established layered pattern with authentication and idempotency. |
 | **Wise Imports module** | Import order endpoints follow the established layered pattern with authentication and idempotency. |
 | **Wise UC module** | Undercover profile endpoints follow the established layered pattern with authentication and idempotency. |
+| **Wise Wheels module** | Wheel spin endpoints follow the established layered pattern with authentication and idempotency. |
 | **Characters module** | Legacy unscoped endpoints removed, ensuring account-scoped character access only. |
 
 | **Testing & CI** | There is no CI pipeline or test suite.  Future work should include setting up continuous integration with linting and test execution. |

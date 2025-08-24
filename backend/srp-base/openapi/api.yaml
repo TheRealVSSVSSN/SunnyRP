@@ -638,6 +638,29 @@ components:
           type: string
         active:
           type: boolean
+
+    WiseWheelsSpin:
+      type: object
+      properties:
+        id:
+          type: integer
+        characterId:
+          type: string
+        prize:
+          type: string
+        createdAt:
+          type: integer
+          format: int64
+    WiseWheelsSpinCreateRequest:
+      type: object
+      required:
+        - characterId
+        - prize
+      properties:
+        characterId:
+          type: string
+        prize:
+          type: string
     Door:
       type: object
       properties:
@@ -2687,6 +2710,70 @@ paths:
                     type: string
         '404':
           description: Profile not found
+        '400':
+          description: Invalid input
+  /v1/wise-wheels/spins:
+    post:
+      summary: Record a wheel spin result
+      operationId: createWiseWheelsSpin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WiseWheelsSpinCreateRequest'
+      responses:
+        '200':
+          description: Spin stored
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      spin:
+                        $ref: '#/components/schemas/WiseWheelsSpin'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          description: Invalid input
+  /v1/wise-wheels/spins/{characterId}:
+    get:
+      summary: List wheel spins for a character
+      operationId: listWiseWheelsSpins
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Spin history
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      spins:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/WiseWheelsSpin'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
         '400':
           description: Invalid input
   /v1/doors:
