@@ -587,6 +587,30 @@ components:
           type: string
         url:
           type: string
+    WiseImportOrder:
+      type: object
+      properties:
+        id:
+          type: integer
+        characterId:
+          type: string
+        model:
+          type: string
+        status:
+          type: string
+        createdAt:
+          type: integer
+          format: int64
+    WiseImportOrderCreateRequest:
+      type: object
+      required:
+        - characterId
+        - model
+      properties:
+        characterId:
+          type: string
+        model:
+          type: string
     Door:
       type: object
       properties:
@@ -2564,6 +2588,70 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/WiseAudioTrack'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          description: Invalid input
+  /v1/wise-imports/orders:
+    post:
+      summary: Create an import order
+      operationId: createWiseImportOrder
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WiseImportOrderCreateRequest'
+      responses:
+        '200':
+          description: Order created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      order:
+                        $ref: '#/components/schemas/WiseImportOrder'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          description: Invalid input
+  /v1/wise-imports/orders/{characterId}:
+    get:
+      summary: List import orders for a character
+      operationId: listWiseImportOrders
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of orders
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      orders:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/WiseImportOrder'
                   requestId:
                     type: string
                   traceId:

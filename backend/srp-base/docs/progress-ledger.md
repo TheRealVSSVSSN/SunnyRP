@@ -8,3 +8,4 @@
 | 4 | PolicePack | Evidence custody chain and account character selection | Create | Added custody and selection APIs |
 | 5 | PolyZone | Zone definitions and management | Create | Added zone storage API |
 | 6 | Wise Audio | Custom audio track storage per character | Create | Added track storage API |
+| 7 | Wise Imports | Vehicle import order tracking per character | Create | Added order storage API |

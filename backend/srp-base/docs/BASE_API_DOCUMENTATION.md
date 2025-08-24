@@ -424,6 +424,9 @@ To support all features present in the original server resources at the framewor
 - **srp-wise-audio** – Stores custom audio tracks.
   - `GET /v1/wise-audio/tracks/{characterId}` – List tracks for a character.
   - `POST /v1/wise-audio/tracks` – Create a track with `characterId`, `label` and `url`.
+- **srp-wise-imports** – Manages vehicle import orders.
+  - `GET /v1/wise-imports/orders/{characterId}` – List import orders for a character.
+  - `POST /v1/wise-imports/orders` – Create an order with `characterId` and `model`.
 - **srp-zones** – Stores polygonal zone definitions for world interactions.
   - `GET /v1/zones` – List zones.
   - `POST /v1/zones` – Create a zone with `name`, `type`, and `data`.

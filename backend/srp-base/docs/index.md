@@ -39,3 +39,11 @@ Introduced audio track storage to support the **Wise Audio** resource.
 * Added Wise Audio module with `GET /v1/wise-audio/tracks/{characterId}` and `POST /v1/wise-audio/tracks` endpoints.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/wise-audio.md`.
+
+## Update – 2025-08-24
+
+Introduced import order tracking to support the **Wise Imports** resource.
+
+* Added Wise Imports module with `GET /v1/wise-imports/orders/{characterId}` and `POST /v1/wise-imports/orders` endpoints.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/wise-imports.md`.

@@ -74,3 +74,13 @@
 | label | VARCHAR(255) | Track label |
 | url | VARCHAR(1024) | Audio URL |
 | created_at | BIGINT | Epoch milliseconds |
+
+## wise_import_orders
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| character_id | BIGINT | Owning character |
+| model | VARCHAR(64) | Vehicle model identifier |
+| status | VARCHAR(32) | Order status |
+| created_at | BIGINT | Epoch milliseconds |
