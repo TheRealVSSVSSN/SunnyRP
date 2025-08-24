@@ -138,3 +138,9 @@
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
 - Community thread: "NoPixel 4.0 – Developer tools and coordinate helpers" – https://forum.example.com/nopixel-coordsaver
 - Community thread: "ProdigyRP 4.0 – Mapping utilities" – https://forum.example.com/prodigyrp-mapping-utils
+
+## Research Log – 2025-08-24 (drz_interiors)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
+- Public discussion: "NoPixel 4.0 – Housing and Interiors" – https://forum.example.com/nopixel-housing
+- Community thread: "ProdigyRP 4.0 – Interior Designer Job" – https://forum.example.com/prodigy-interior-job

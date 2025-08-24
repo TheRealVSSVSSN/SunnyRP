@@ -27,3 +27,4 @@
 - Ensure the `chat_messages` table exists for chat logging.
 - Ensure the `queue_priorities` table exists for connection queue priority management.
 - Ensure the `character_coords` table exists for saved coordinates.
+- Ensure the `interiors` table exists for apartment interior layouts.

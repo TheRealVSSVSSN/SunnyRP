@@ -70,7 +70,6 @@ const notesRoutes = require('./routes/notes.routes');
 const baseEventsRoutes = require('./routes/baseEvents.routes');
 // cron domain route
 const cronRoutes = require('./routes/cron.routes');
-=======
 // coordsaver domain route
 const coordsaverRoutes = require('./routes/coordsaver.routes');
 
@@ -109,6 +108,7 @@ const diamondBlackjackRoutes = require('./routes/diamondBlackjack.routes');
 // secondary jobs domain route
 const secondaryJobsRoutes = require('./routes/secondaryJobs.routes');
 const carwashRoutes = require('./routes/carwash.routes');
+const interiorsRoutes = require('./routes/interiors.routes');
 
 const app = express();
 
@@ -235,6 +235,7 @@ app.use(secondaryJobsRoutes);
 
 // mount carwash routes
 app.use(carwashRoutes);
+app.use(interiorsRoutes);
 
 // Rate limiting on admin endpoints (simple example).  Limit to 10
 // requests per minute per IP.  In a production environment this

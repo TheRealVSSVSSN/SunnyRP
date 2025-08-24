@@ -72,3 +72,4 @@ practice is supported by citations.
 | **connectqueue module** | Queue priority endpoints follow the established layered pattern with authentication, idempotency and rate limiting. |
 | **cron module** | Cron job endpoints follow the established layered pattern with authentication and idempotency. |
 | **coordsaver module** | Coordinate endpoints follow the established layered pattern with authentication and idempotency. |
+| **interiors module** | Interior endpoints follow the established layered pattern with authentication and idempotency. |

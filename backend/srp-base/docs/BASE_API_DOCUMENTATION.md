@@ -449,6 +449,9 @@ To support all features present in the original server resources at the framewor
   - `POST /v1/apartments` – Create an apartment (`name`, optional `location`, optional `price`).
   - `POST /v1/apartments/{apartmentId}/residents` – Assign a character to an apartment.
   - `DELETE /v1/apartments/{apartmentId}/residents/{characterId}` – Remove a resident.
+- **drz_interiors** – Stores interior layouts per apartment.
+  - `GET /v1/apartments/{apartmentId}/interior?characterId={cid}` – Retrieve interior layout.
+  - `POST /v1/apartments/{apartmentId}/interior` – Save interior layout (`characterId`, `template`).
 - **srp-zones** – Stores polygonal zone definitions for world interactions.
   - `GET /v1/zones` – List zones.
   - `POST /v1/zones` – Create a zone with `name`, `type`, and `data`.
