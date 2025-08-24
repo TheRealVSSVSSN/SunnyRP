@@ -24,3 +24,22 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: 1' -H 'Content-Type: appli
 curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: 2' -H 'Content-Type: application/json' \
   -d '{"locked":false}' http://localhost:3010/v1/doors/front/state
 ```
+
+Manually verify PolicePack endpoints:
+
+```sh
+# Create a character for an account
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: c1' \
+  -H 'Content-Type: application/json' \
+  -d '{"first_name":"John","last_name":"Doe"}' \
+  http://localhost:3010/v1/accounts/hex123/characters
+
+# Select the character
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/accounts/hex123/characters/1:select
+
+# Append custody entry
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: e1' \
+  -H 'Content-Type: application/json' \
+  -d '{"handlerId":1,"action":"bagged"}' \
+  http://localhost:3010/v1/evidence/items/10/custody
+```

@@ -24,4 +24,7 @@
 
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
 - GitHub repository "glitchdetector/nui-doorlock" – door lock management patterns. https://github.com/glitchdetector/nui-doorlock
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.# Research Log – 2025-08-24 (PolicePack)
+
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
+- Unable to access public NoPixel 4.0 or ProdigyRP 4.0 feature summaries due to network restrictions.

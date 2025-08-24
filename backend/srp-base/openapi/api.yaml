@@ -77,6 +77,56 @@ components:
           type: object
           additionalProperties: true
           description: Arbitrary result details encoded as JSON
+    Character:
+      type: object
+      properties:
+        id:
+          type: integer
+        ownerHex:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        dob:
+          type: string
+          format: date
+          nullable: true
+        gender:
+          type: string
+          nullable: true
+        phoneNumber:
+          type: string
+          nullable: true
+        story:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+    CharacterCreateRequest:
+      type: object
+      required:
+        - first_name
+        - last_name
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        dob:
+          type: string
+          format: date
+          nullable: true
+        gender:
+          type: string
+          nullable: true
+        phone_number:
+          type: string
+          nullable: true
+        story:
+          type: string
+          nullable: true
     # Weed plant record
     WeedPlant:
       type: object
@@ -403,6 +453,36 @@ components:
           type: object
           additionalProperties: true
           nullable: true
+    EvidenceChainEntry:
+      type: object
+      properties:
+        id:
+          type: integer
+        evidenceId:
+          type: integer
+        handlerId:
+          type: integer
+        action:
+          type: string
+        notes:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+    EvidenceChainEntryCreateRequest:
+      type: object
+      required:
+        - handlerId
+        - action
+      properties:
+        handlerId:
+          type: integer
+        action:
+          type: string
+        notes:
+          type: string
+          nullable: true
     DiamondBlackjackHand:
       type: object
       properties:
@@ -694,6 +774,142 @@ paths:
       responses:
         '200':
           description: Updated character
+
+  /v1/accounts/{accountId}/characters:
+    get:
+      summary: List characters for an account
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of characters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      characters:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Character'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+    post:
+      summary: Create a character for an account
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CharacterCreateRequest'
+      responses:
+        '200':
+          description: Created character
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      character:
+                        $ref: '#/components/schemas/Character'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+
+  /v1/accounts/{accountId}/characters/{characterId}:select:
+    post:
+      summary: Select a character for the session
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: characterId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Selected character
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      selected:
+                        type: integer
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '404':
+          description: Not found
+
+  /v1/accounts/{accountId}/characters/{characterId}:
+    delete:
+      summary: Delete a character
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: characterId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Character deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      deleted:
+                        type: boolean
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '404':
+          description: Not found
   /v1/permissions/{playerId}:
     get:
       summary: List permissions for a player
@@ -1448,6 +1664,72 @@ paths:
                     type: string
         '404':
           description: Not found
+
+  /v1/evidence/items/{id}/custody:
+    get:
+      summary: List custody chain for an evidence item
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Custody chain entries
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      entries:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/EvidenceChainEntry'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+    post:
+      summary: Add custody entry
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvidenceChainEntryCreateRequest'
+      responses:
+        '200':
+          description: Custody entry added
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      entry:
+                        $ref: '#/components/schemas/EvidenceChainEntry'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          description: Invalid input
           content:
             application/json:
               schema:

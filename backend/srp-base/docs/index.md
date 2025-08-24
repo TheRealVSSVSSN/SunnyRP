@@ -19,3 +19,7 @@ Extended parity for the **LockDoors** resource by documenting existing door mana
 * Reset the progress ledger to begin a new parity run.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/diamondBlackjack.md`.
+
+## Update – 2025-08-24
+
+Extended parity for the **PolicePack** resource by introducing evidence chain-of-custody tracking and account-based character selection APIs.

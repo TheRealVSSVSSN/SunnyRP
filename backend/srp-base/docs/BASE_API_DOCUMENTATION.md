@@ -428,3 +428,13 @@ To support all features present in the original server resources at the framewor
 - **srp-interact-sound** – Logs sound play events.
   - `GET /v1/interact-sound/plays/:characterId` – Retrieve recent sound plays for a character.
   - `POST /v1/interact-sound/plays` – Record a sound play with `characterId`, `sound`, `volume` and optional `playedAt`.
+### PolicePack Extensions
+
+- `GET /v1/evidence/items/{id}/custody` – List custody chain entries for an evidence item.
+- `POST /v1/evidence/items/{id}/custody` – Add a custody entry.
+- `GET /v1/accounts/{accountId}/characters` – List characters for an account.
+- `POST /v1/accounts/{accountId}/characters` – Create a character for an account.
+- `POST /v1/accounts/{accountId}/characters/{characterId}:select` – Select the active character.
+- `DELETE /v1/accounts/{accountId}/characters/{characterId}` – Remove a character and clear selection if active.
+
+All routes require `X-API-Token` authentication. Idempotency keys are supported on POST requests and standard rate limits apply.

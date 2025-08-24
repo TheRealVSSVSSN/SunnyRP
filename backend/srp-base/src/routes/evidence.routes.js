@@ -1,5 +1,6 @@
 const express = require('express');
 const evidenceRepo = require('../repositories/evidenceRepository');
+const evidenceChainRepo = require('../repositories/evidenceChainRepository');
 const { sendOk, sendError } = require('../utils/respond');
 
 const router = express.Router();
@@ -64,6 +65,30 @@ router.delete('/v1/evidence/items/:id', async (req, res) => {
     sendOk(res, { deleted: true }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'INTERNAL_ERROR', message: 'Failed to delete item' }, 500, res.locals.requestId, res.locals.traceId);
+  }
+});
+
+// GET /v1/evidence/items/:id/custody
+router.get('/v1/evidence/items/:id/custody', async (req, res) => {
+  try {
+    const entries = await evidenceChainRepo.listByItem(req.params.id);
+    sendOk(res, { entries }, res.locals.requestId, res.locals.traceId);
+  } catch (err) {
+    sendError(res, { code: 'INTERNAL_ERROR', message: 'Failed to fetch custody chain' }, 500, res.locals.requestId, res.locals.traceId);
+  }
+});
+
+// POST /v1/evidence/items/:id/custody
+router.post('/v1/evidence/items/:id/custody', express.json(), async (req, res) => {
+  const { handlerId, action, notes } = req.body || {};
+  if (!handlerId || !action) {
+    return sendError(res, { code: 'INVALID_INPUT', message: 'handlerId and action are required' }, 400, res.locals.requestId, res.locals.traceId);
+  }
+  try {
+    const entry = await evidenceChainRepo.addEntry(req.params.id, handlerId, action, notes);
+    sendOk(res, { entry }, res.locals.requestId, res.locals.traceId);
+  } catch (err) {
+    sendError(res, { code: 'INTERNAL_ERROR', message: 'Failed to add custody entry' }, 500, res.locals.requestId, res.locals.traceId);
   }
 });
 

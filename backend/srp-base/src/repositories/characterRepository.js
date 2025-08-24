@@ -91,4 +91,17 @@ async function update(id, updates) {
   return getById(id);
 }
 
-module.exports = { listByOwner, create, getById, update };
+/**
+ * Delete a character owned by the specified account.
+ * Returns true if a row was removed.
+ *
+ * @param {number} id
+ * @param {string} ownerHex
+ * @returns {Promise<boolean>}
+ */
+async function remove(id, ownerHex) {
+  const result = await db.query('DELETE FROM characters WHERE id = ? AND owner_hex = ?', [id, ownerHex]);
+  return (result.affectedRows || result[0]?.affectedRows) > 0;
+}
+
+module.exports = { listByOwner, create, getById, update, remove };

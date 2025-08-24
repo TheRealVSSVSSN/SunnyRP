@@ -35,3 +35,21 @@
 | heading | FLOAT | Orientation |
 | created_at | TIMESTAMP | Creation time |
 | updated_at | TIMESTAMP | Update time |
+## evidence_chain
+
+| Column | Type | Notes |
+|---|---|---|
+| id | BIGINT AUTO_INCREMENT | Primary key |
+| evidence_id | BIGINT | FK to evidence_items.id |
+| handler_id | BIGINT | Character handling the evidence |
+| action | VARCHAR(50) | Action description |
+| notes | TEXT | Optional notes |
+| created_at | TIMESTAMP | Entry timestamp |
+
+## character_selections
+
+| Column | Type | Notes |
+|---|---|---|
+| owner_hex | VARCHAR(64) | Player account, primary key |
+| character_id | BIGINT | Selected character ID |
+| selected_at | TIMESTAMP | Selection timestamp |

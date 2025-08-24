@@ -20,4 +20,5 @@
 | 020_add_bans.sql | Bans table |
 | 021_add_diamond_blackjack.sql | Blackjack hand history table |
 | 022_add_interact_sound.sql | Sound play history table |
-| 022_add_interact_sound.sql | Sound play history table |
+| 023_add_evidence_chain.sql | Evidence custody chain table |
+| 024_add_character_selections.sql | Track active character per account |
