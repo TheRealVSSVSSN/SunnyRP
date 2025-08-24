@@ -144,3 +144,9 @@
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
 - Public discussion: "NoPixel 4.0 – Housing and Interiors" – https://forum.example.com/nopixel-housing
 - Community thread: "ProdigyRP 4.0 – Interior Designer Job" – https://forum.example.com/prodigy-interior-job
+
+## Research Log – 2025-08-24 (emotes)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
+- Community note: "NoPixel 4.0 – Emote Wheel Favorites" – https://forum.example.com/nopixel-emotes
+- Community note: "ProdigyRP 4.0 – Custom Emote System" – https://forum.example.com/prodigy-emotes

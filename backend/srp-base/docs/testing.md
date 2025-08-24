@@ -230,3 +230,14 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: int1' -H 'Content-Type: ap
   -d '{"characterId":1,"template":{}}' \\
   http://localhost:3010/v1/apartments/1/interior
 ```
+
+Manually verify the emotes endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/characters/1/emotes
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: emo1' -H 'Content-Type: application/json' \\
+  -d '{"emote":"wave"}' \\
+  http://localhost:3010/v1/characters/1/emotes
+curl -H 'X-API-Token: <token>' -X DELETE -H 'X-Idempotency-Key: emo2' \\
+  http://localhost:3010/v1/characters/1/emotes/wave
+```

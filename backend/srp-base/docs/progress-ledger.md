@@ -34,3 +34,4 @@
 | 30 | Cron | Schedule timed server tasks with optional character scope | Create | Added cron job API |
 | 31 | coordsaver | Save and recall world coordinates per character | Create | Added coordinate storage APIs |
 | 32 | drz_interiors | Interior layout persistence per apartment | Create | Added interior storage API |
+| 33 | emotes | Character favorite emote persistence | Create | Added emote favorite APIs |

@@ -34,3 +34,4 @@
 | connectqueue | Resource uses exports `AddPriority` and `RemovePriority` with account identifiers | `GET/POST/DELETE /v1/connectqueue/priorities` manage backend priority records |
 | coordsaver | Resource lets players save named coordinates | `GET /v1/characters/{characterId}/coords`, `POST /v1/characters/{characterId}/coords`, `DELETE /v1/characters/{characterId}/coords/{id}` |
 | drz_interiors | Resource triggers save/load events for apartment interior templates | `GET /v1/apartments/{apartmentId}/interior`, `POST /v1/apartments/{apartmentId}/interior` |
+| emotes | Resource lets players mark favorite emote commands for quick selection | `GET/POST/DELETE /v1/characters/{characterId}/emotes` |

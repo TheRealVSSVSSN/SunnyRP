@@ -777,3 +777,28 @@ Legend: **A** = Added, **M** = Modified.
 | `docs/testing.md` | M | Added interiors curl examples. |
 | `docs/modules/interiors.md` | A | Module documentation for interiors. |
 | `docs/research-log.md` | M | Logged drz_interiors research. |
+# Update – 2025-08-24 (emotes)
+
+| Path | Status | Notes |
+|---|---|---|
+| `src/repositories/emotesRepository.js` | A | Repository for character favorite emotes. |
+| `src/routes/emotes.routes.js` | A | Favorite emote endpoints. |
+| `src/migrations/044_add_character_emotes.sql` | A | Create character_emotes table. |
+| `src/app.js` | M | Mounted emotes routes. |
+| `openapi/api.yaml` | M | Added CharacterEmote schemas and paths. |
+| `docs/index.md` | M | Logged emotes update. |
+| `docs/progress-ledger.md` | M | Added emotes entry. |
+| `docs/framework-compliance.md` | M | Noted emotes module compliance. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented emotes endpoints. |
+| `docs/events-and-rpcs.md` | M | Mapped emotes events. |
+| `docs/db-schema.md` | M | Documented character_emotes table. |
+| `docs/migrations.md` | M | Listed migration 044. |
+| `docs/admin-ops.md` | M | Added character_emotes table check. |
+| `docs/security.md` | M | Emotes security note. |
+| `docs/testing.md` | M | Added emotes curl examples. |
+| `docs/modules/emotes.md` | A | Module documentation. |
+| `docs/research-log.md` | M | Logged emotes research. |
+| `CHANGELOG.md` | M | Added emotes entry. |
+| `MANIFEST.md` | M | Recorded emotes update. |
+
+Legend: **A** = Added, **M** = Modified.
