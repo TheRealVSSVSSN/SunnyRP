@@ -159,6 +159,16 @@
 | reason | VARCHAR(255) | Optional memo |
 | created_at | TIMESTAMP | Creation time |
 
+## interiors
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| apartment_id | INT | FK to apartments.id |
+| character_id | BIGINT | Owner character |
+| template | JSON | Serialized layout |
+| updated_at | TIMESTAMP | Last update |
+
 ## carwash_transactions
 
 | Column | Type | Notes |

@@ -25,3 +25,4 @@
 - Connect queue routes inherit the same authentication, idempotency and rate limiting requirements.
 - Cron routes inherit the same authentication and idempotency requirements.
 - Coordsaver routes inherit the same authentication and idempotency requirements.
+- Interiors routes inherit the same authentication and idempotency requirements.

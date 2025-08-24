@@ -889,6 +889,32 @@ components:
       properties:
         characterId:
           type: integer
+    Interior:
+      type: object
+      properties:
+        id:
+          type: integer
+        apartment_id:
+          type: integer
+        character_id:
+          type: integer
+        template:
+          type: object
+          additionalProperties: true
+        updated_at:
+          type: string
+          format: date-time
+    InteriorSaveRequest:
+      type: object
+      required:
+        - characterId
+        - template
+      properties:
+        characterId:
+          type: integer
+        template:
+          type: object
+          additionalProperties: true
     BankAccount:
       type: object
       properties:
@@ -3969,6 +3995,54 @@ paths:
             application/json:
               schema:
                 type: object
+  /v1/apartments/{apartmentId}/interior:
+    get:
+      summary: Get interior for an apartment
+      parameters:
+        - in: path
+          name: apartmentId
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: characterId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Interior data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  interior:
+                    $ref: '#/components/schemas/Interior'
+    post:
+      summary: Save interior for an apartment
+      parameters:
+        - in: path
+          name: apartmentId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InteriorSaveRequest'
+      responses:
+        '200':
+          description: Interior saved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  interior:
+                    $ref: '#/components/schemas/Interior'
   /v1/base-events:
     post:
       summary: Log a base event

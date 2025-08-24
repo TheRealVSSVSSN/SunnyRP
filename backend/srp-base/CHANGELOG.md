@@ -846,3 +846,31 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Remove coordsaver routes and drop `character_coords` table.
+
+## 2025-08-24 – drz_interiors
+
+### Added
+
+* Interiors module with `/v1/apartments/{apartmentId}/interior` endpoints and repository.
+* Migration `043_add_interiors.sql` for interior layouts.
+
+### Changed
+
+* Renamed `041_add_cron_jobs.sql` to `042_add_cron_jobs.sql` to resolve numbering conflict.
+* `app.js` – mounted interiors routes.
+* `openapi/api.yaml` – added Interior schemas and paths.
+* Documentation updated for interiors module.
+
+### Migrations
+
+* `042_add_cron_jobs.sql`
+* `043_add_interiors.sql`
+
+### Risks
+
+* Large interior templates may increase database storage.
+* Only one interior per apartment; concurrent edits may overwrite.
+
+### Rollback
+
+* Drop `interiors` table and remove interiors routes.

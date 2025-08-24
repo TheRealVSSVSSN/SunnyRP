@@ -186,3 +186,11 @@ Introduced coordinate saving to support the **coordsaver** resource.
 * Added Coordsaver module with `GET /v1/characters/{characterId}/coords`, `POST /v1/characters/{characterId}/coords` and `DELETE /v1/characters/{characterId}/coords/{id}` endpoints.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/coordsaver.md`.
+
+## Update – 2025-08-24
+
+Introduced interior layout persistence to support the **drz_interiors** resource.
+
+* Added Interiors module with `GET /v1/apartments/{apartmentId}/interior` and `POST /v1/apartments/{apartmentId}/interior` endpoints.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/interiors.md`.

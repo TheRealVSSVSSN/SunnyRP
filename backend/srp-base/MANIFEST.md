@@ -754,3 +754,26 @@ Legend: **A** = Added, **M** = Modified.
 | `docs/research-log.md` | M | Logged coordsaver research. |
 | `CHANGELOG.md` | M | Added coordsaver entry. |
 | `MANIFEST.md` | M | Recorded coordsaver update. |
+
+# Updates for 2025-08-24 (drz_interiors)
+
+| Path | Status | Notes |
+|---|---|---|
+| `src/repositories/interiorsRepository.js` | A | Repository for apartment interior layouts. |
+| `src/routes/interiors.routes.js` | A | Endpoints for saving and fetching interiors. |
+| `src/migrations/042_add_cron_jobs.sql` | R | Renamed from 041 to resolve numbering conflict. |
+| `src/migrations/043_add_interiors.sql` | A | Create interiors table. |
+| `src/app.js` | M | Mounted interiors routes and cleaned merge marker. |
+| `openapi/api.yaml` | M | Added Interior schemas and paths. |
+| `docs/index.md` | M | Logged drz_interiors update. |
+| `docs/progress-ledger.md` | M | Added drz_interiors entry. |
+| `docs/migrations.md` | M | Listed migrations 042 and 043. |
+| `docs/db-schema.md` | M | Documented interiors table. |
+| `docs/framework-compliance.md` | M | Noted interiors module compliance. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented interiors endpoints. |
+| `docs/events-and-rpcs.md` | M | Mapped interiors events. |
+| `docs/admin-ops.md` | M | Added interiors table check. |
+| `docs/security.md` | M | Added interiors security note. |
+| `docs/testing.md` | M | Added interiors curl examples. |
+| `docs/modules/interiors.md` | A | Module documentation for interiors. |
+| `docs/research-log.md` | M | Logged drz_interiors research. |

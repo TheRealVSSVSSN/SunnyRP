@@ -33,3 +33,4 @@
 | 29 | connectqueue | Manage account queue priorities | Create | Added priority management APIs |
 | 30 | Cron | Schedule timed server tasks with optional character scope | Create | Added cron job API |
 | 31 | coordsaver | Save and recall world coordinates per character | Create | Added coordinate storage APIs |
+| 32 | drz_interiors | Interior layout persistence per apartment | Create | Added interior storage API |
