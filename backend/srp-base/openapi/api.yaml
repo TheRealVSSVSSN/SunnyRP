@@ -915,6 +915,39 @@ components:
         created_at:
           type: string
           format: date-time
+    BaseEventLog:
+      type: object
+      properties:
+        id:
+          type: integer
+        accountId:
+          type: string
+        characterId:
+          type: integer
+        eventType:
+          type: string
+        metadata:
+          type: object
+          nullable: true
+        createdAt:
+          type: integer
+          format: int64
+    BaseEventLogCreateRequest:
+      type: object
+      required:
+        - accountId
+        - characterId
+        - eventType
+      properties:
+        accountId:
+          type: string
+        characterId:
+          type: integer
+        eventType:
+          type: string
+        metadata:
+          type: object
+          nullable: true
 security:
   - ApiToken: []
 paths:
@@ -3448,3 +3481,66 @@ paths:
             application/json:
               schema:
                 type: object
+  /v1/base-events:
+    post:
+      summary: Log a base event
+      operationId: logBaseEvent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BaseEventLogCreateRequest'
+      responses:
+        '200':
+          description: Event logged
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      event:
+                        $ref: '#/components/schemas/BaseEventLog'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    get:
+      summary: List recent base events
+      operationId: listBaseEvents
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 50
+      responses:
+        '200':
+          description: List of events
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      events:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/BaseEventLog'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'

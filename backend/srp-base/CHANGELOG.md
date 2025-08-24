@@ -655,3 +655,16 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Recreate `player_id` columns on `accounts` and `transactions` tables and remove banking routes.
+## 2025-08-24 (baseevents)
+
+### Added
+
+* Base Events module with `/v1/base-events` endpoints and `base_event_logs` table.
+
+### Risks
+
+* None beyond standard migration.
+
+### Rollback
+
+* Drop `base_event_logs` table and remove related routes and repository.

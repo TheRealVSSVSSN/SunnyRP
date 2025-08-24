@@ -167,3 +167,14 @@
 | apartment_id | INT | FK to apartments.id |
 | character_id | BIGINT | Resident character |
 | assigned_at | TIMESTAMP | Assignment time |
+
+## base_event_logs
+
+| Column | Type | Notes |
+|---|---|---|
+| id | BIGINT AUTO_INCREMENT | Primary key |
+| account_id | VARCHAR(64) | Owning account hex |
+| character_id | BIGINT | Character ID |
+| event_type | VARCHAR(50) | Event type identifier |
+| metadata | JSON | Optional details |
+| created_at | TIMESTAMP | Creation time |

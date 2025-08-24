@@ -536,3 +536,25 @@ Legend: **A** = Added, **M** = Modified.
 | `MANIFEST.md` | M | Recorded banking changes |
 
 Legend: **A** = Added, **M** = Modified.
+# Update – 2025-08-24 (baseevents)
+
+| Path | Status | Notes |
+|---|---|---|
+| `src/repositories/baseEventsRepository.js` | A | Repository for logging and retrieving base events. |
+| `src/routes/baseEvents.routes.js` | A | Endpoints for recording and listing base events. |
+| `src/migrations/034_add_base_event_logs.sql` | A | Create base_event_logs table. |
+| `src/app.js` | M | Mounted base events routes. |
+| `openapi/api.yaml` | M | Added BaseEventLog schemas and `/v1/base-events` paths. |
+| `docs/index.md` | M | Logged baseevents update. |
+| `docs/progress-ledger.md` | M | Added baseevents entry. |
+| `docs/framework-compliance.md` | M | Added baseevents compliance row. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented base events endpoints. |
+| `docs/events-and-rpcs.md` | M | Mapped baseevents events. |
+| `docs/db-schema.md` | M | Documented base_event_logs table. |
+| `docs/migrations.md` | M | Listed migration 034. |
+| `docs/admin-ops.md` | M | Added base_event_logs table check. |
+| `docs/security.md` | M | Added base events security note. |
+| `docs/testing.md` | M | Added base events curl examples. |
+| `docs/modules/baseevents.md` | A | Module documentation. |
+| `docs/research-log.md` | M | Logged baseevents research. |
+| `CHANGELOG.md` | M | Added baseevents entry. |

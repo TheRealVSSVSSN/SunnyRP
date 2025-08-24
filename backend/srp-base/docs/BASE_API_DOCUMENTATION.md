@@ -470,3 +470,6 @@ To support all features present in the original server resources at the framewor
 - `DELETE /v1/accounts/{accountId}/characters/{characterId}` – Remove a character and clear selection if active.
 
 All routes require `X-API-Token` authentication. Idempotency keys are supported on POST requests and standard rate limits apply.
+- **srp-base-events** – Records player lifecycle and combat events.
+  - `GET /v1/base-events?limit={n}` – List recent events.
+  - `POST /v1/base-events` – Log an event (`accountId`, `characterId`, `eventType`, optional `metadata`).

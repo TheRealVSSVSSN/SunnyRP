@@ -109,3 +109,10 @@ Introduced character-scoped banking to support the **banking** resource.
 * Added economy module with account retrieval, deposit, withdrawal and transaction endpoints plus migration and OpenAPI documentation.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/economy.md`.
+
+## Update – 2025-08-24
+
+Introduced base event logging to support the **baseevents** resource.
+
+* Added Base Events module with `GET /v1/base-events` and `POST /v1/base-events` endpoints.
+

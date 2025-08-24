@@ -137,3 +137,12 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: b3' -H 'Content-Type: appl
   http://localhost:3010/v1/transactions
 curl -H 'X-API-Token: <token>' http://localhost:3010/v1/characters/char123/transactions
 ```
+
+Manually verify the base events endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/base-events?limit=10
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: be1' -H 'Content-Type: application/json' \
+  -d '{"accountId":"hex123","characterId":1,"eventType":"playerJoined"}' \
+  http://localhost:3010/v1/base-events
+```

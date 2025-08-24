@@ -23,3 +23,4 @@
 | motel | No server events; building interior asset | N/A |
 | shoes-pack | No server events; footwear assets | N/A |
 | yuzler | No server events; clothing assets | N/A |
+| baseevents | Emits player join, drop and kill events | `POST /v1/base-events` logs events; `GET /v1/base-events` lists history |

@@ -16,3 +16,4 @@
 - Clothes routes inherit the same authentication, idempotency and rate limiting requirements.
 - Apartments routes inherit the same authentication and idempotency requirements.
 - Economy routes inherit the same authentication and idempotency requirements.
+- Base events routes inherit the same authentication and idempotency requirements.
