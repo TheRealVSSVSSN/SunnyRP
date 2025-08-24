@@ -527,3 +527,17 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Drop `zones` table and remove related routes and repository.
+
+## 2025-08-24 (Wise Audio)
+
+### Added
+
+* Wise Audio module with `/v1/wise-audio/tracks` endpoints and `wise_audio_tracks` table.
+
+### Risks
+
+* None beyond standard migration.
+
+### Rollback
+
+* Drop `wise_audio_tracks` table and remove related routes and repository.

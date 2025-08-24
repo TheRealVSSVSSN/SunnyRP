@@ -64,3 +64,13 @@
 | data | JSON | Coordinates and dimensions |
 | created_by | BIGINT | Optional character ID |
 | created_at | TIMESTAMP | Creation time |
+
+## wise_audio_tracks
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| character_id | BIGINT | Owning character |
+| label | VARCHAR(255) | Track label |
+| url | VARCHAR(1024) | Audio URL |
+| created_at | BIGINT | Epoch milliseconds |

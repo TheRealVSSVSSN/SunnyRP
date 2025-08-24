@@ -560,6 +560,33 @@ components:
           type: integer
           format: int64
           nullable: true
+    WiseAudioTrack:
+      type: object
+      properties:
+        id:
+          type: integer
+        characterId:
+          type: string
+        label:
+          type: string
+        url:
+          type: string
+        createdAt:
+          type: integer
+          format: int64
+    WiseAudioTrackCreateRequest:
+      type: object
+      required:
+        - characterId
+        - label
+        - url
+      properties:
+        characterId:
+          type: string
+        label:
+          type: string
+        url:
+          type: string
     Door:
       type: object
       properties:
@@ -2473,6 +2500,70 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/InteractSoundPlay'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          description: Invalid input
+  /v1/wise-audio/tracks:
+    post:
+      summary: Create an audio track
+      operationId: createWiseAudioTrack
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WiseAudioTrackCreateRequest'
+      responses:
+        '200':
+          description: Track created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      track:
+                        $ref: '#/components/schemas/WiseAudioTrack'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          description: Invalid input
+  /v1/wise-audio/tracks/{characterId}:
+    get:
+      summary: List audio tracks for a character
+      operationId: listWiseAudioTracks
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of tracks
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      tracks:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/WiseAudioTrack'
                   requestId:
                     type: string
                   traceId:

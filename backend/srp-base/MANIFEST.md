@@ -330,3 +330,29 @@ Legend: **A** = Added, **M** = Modified.
 | `docs/research-log.md` | M | Logged research limitations. |
 
 Legend: **A** = Added, **M** = Modified.
+
+# Updates for 2025-08-24 (Wise Audio)
+
+| Path | Status | Notes |
+|---|---|---|
+| `src/repositories/wiseAudioRepository.js` | A | Repository for character audio tracks. |
+| `src/routes/wiseAudio.routes.js` | A | Endpoints for listing and creating audio tracks. |
+| `src/migrations/026_add_wise_audio.sql` | A | Create wise_audio_tracks table. |
+| `src/app.js` | M | Mounted wise audio routes. |
+| `openapi/api.yaml` | M | Added Wise Audio schemas and paths. |
+| `docs/index.md` | M | Logged Wise Audio update. |
+| `docs/progress-ledger.md` | M | Added Wise Audio entry. |
+| `docs/framework-compliance.md` | M | Added Wise Audio compliance row. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented Wise Audio endpoints. |
+| `docs/events-and-rpcs.md` | M | Mapped Wise Audio events. |
+| `docs/db-schema.md` | M | Documented wise_audio_tracks table. |
+| `docs/migrations.md` | M | Listed migration 026. |
+| `docs/admin-ops.md` | M | Added table check for wise_audio_tracks. |
+| `docs/security.md` | M | Wise Audio security note. |
+| `docs/testing.md` | M | Added wise audio curl examples. |
+| `docs/modules/wise-audio.md` | A | Module documentation. |
+| `docs/research-log.md` | M | Logged Wise Audio research. |
+| `CHANGELOG.md` | M | Added Wise Audio entry. |
+| `MANIFEST.md` | M | Recorded Wise Audio changes. |
+
+Legend: **A** = Added, **M** = Modified.

@@ -31,3 +31,11 @@ Introduced basic zone management to support the **PolyZone** resource.
 * Added zones module with `GET /v1/zones`, `POST /v1/zones` and `DELETE /v1/zones/{id}` endpoints.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/zones.md`.
+
+## Update – 2025-08-24
+
+Introduced audio track storage to support the **Wise Audio** resource.
+
+* Added Wise Audio module with `GET /v1/wise-audio/tracks/{characterId}` and `POST /v1/wise-audio/tracks` endpoints.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/wise-audio.md`.

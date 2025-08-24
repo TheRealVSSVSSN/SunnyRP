@@ -10,3 +10,4 @@
 - Manage the Node.js process with tools like `pm2` for restarts and monitoring.
 - Ensure the `evidence_chain` and `character_selections` tables exist after deploying this sprint.
 - Ensure the `zones` table exists for polygonal zone definitions.
+- Ensure the `wise_audio_tracks` table exists for character audio tracks.
