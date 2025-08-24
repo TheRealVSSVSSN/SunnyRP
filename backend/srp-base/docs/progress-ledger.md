@@ -25,3 +25,4 @@
 | 21 | banking | Character bank accounts and transactions | Extend | Added account and transaction APIs |
 | 22 | baseevents | Player lifecycle and combat events logging | Create | Added base event log API |
 | 23 | boatshop | Boat catalog and purchases for characters | Create | Added listing and purchase endpoints |
+| 24 | bob74_ipl | Loads interior proxy definitions; purely client-side mapping | Skip | Asset-only |

@@ -691,3 +691,17 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Remove boatshop routes and drop `boatshop_boats` table.
+
+## 2025-08-24 (bob74_ipl)
+
+### Notes
+
+* Reviewed mapping resource bob74_ipl. No server-side responsibilities; no API changes required.
+
+### Risks
+
+* None.
+
+### Rollback
+
+* No actions needed.

@@ -25,3 +25,4 @@
 | yuzler | No server events; clothing assets | N/A |
 | baseevents | Emits player join, drop and kill events | `POST /v1/base-events` logs events; `GET /v1/base-events` lists history |
 | boatshop | Resource sends purchase requests for boats | `GET /v1/boatshop`, `POST /v1/boatshop/purchase` |
+| bob74_ipl | Loads interior proxies; no server events | N/A |
