@@ -251,3 +251,17 @@
 | expires_at | TIMESTAMP | Optional expiration |
 | created_at | TIMESTAMP | Creation time |
 | updated_at | TIMESTAMP | Update time |
+
+## character_coords
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| character_id | INT | FK to characters.id |
+| name | VARCHAR(100) | Unique per character |
+| x | FLOAT | X coordinate |
+| y | FLOAT | Y coordinate |
+| z | FLOAT | Z coordinate |
+| heading | FLOAT | Optional heading |
+| created_at | TIMESTAMP | Creation time |
+| updated_at | TIMESTAMP | Update time |
