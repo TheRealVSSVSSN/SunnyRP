@@ -126,3 +126,9 @@ Introduced boat catalog and purchase endpoints to support the **boatshop** resou
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/boatshop.md`.
 
+
+## Update – 2025-08-24
+
+Reviewed map streaming resource **bob74_ipl**; no server-side responsibilities identified; no API changes required.
+
+For resource decisions see `progress-ledger.md`.

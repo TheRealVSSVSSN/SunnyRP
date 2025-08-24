@@ -581,3 +581,14 @@ Legend: **A** = Added, **M** = Modified.
 | `docs/modules/boatshop.md` | A | Module documentation. |
 | `docs/research-log.md` | M | Logged boatshop research. |
 | `CHANGELOG.md` | M | Added boatshop entry. |
+
+# Update – 2025-08-24 (bob74_ipl)
+
+| Path | Status | Notes |
+|---|---|---|
+| `docs/index.md` | M | Logged bob74_ipl evaluation |
+| `docs/progress-ledger.md` | M | Added bob74_ipl entry |
+| `docs/events-and-rpcs.md` | M | Noted absence of bob74_ipl events |
+| `docs/research-log.md` | M | Recorded bob74_ipl research |
+| `MANIFEST.md` | M | Recorded bob74_ipl documentation update |
+| `CHANGELOG.md` | M | Logged bob74_ipl skip decision |
