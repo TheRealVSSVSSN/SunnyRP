@@ -8,3 +8,4 @@
 - Doors routes inherit the same authentication and idempotency requirements.
 - PolicePack routes (evidence custody and account characters) inherit the same authentication and idempotency requirements.
 - Zones routes inherit the same authentication and idempotency requirements.
+- Wise Audio routes inherit the same authentication and idempotency requirements.
