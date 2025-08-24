@@ -476,3 +476,16 @@ Legend: **A** = Added, **M** = Modified.
 | `MANIFEST.md` | M | Recorded assets_clothes changes. |
 
 Legend: **A** = Added, **M** = Modified.
+
+# Update – 2025-08-24 (maps, furnished-shells, hair-pack, mh65c, motel, shoes-pack, yuzler)
+
+| Path | Status | Notes |
+|---|---|---|
+| `docs/index.md` | M | Logged asset-only resources evaluation. |
+| `docs/progress-ledger.md` | M | Added entries for asset-only resources. |
+| `docs/events-and-rpcs.md` | M | Noted absence of events for asset-only resources. |
+| `docs/research-log.md` | M | Recorded asset pack research references. |
+| `MANIFEST.md` | M | Recorded documentation-only update. |
+| `CHANGELOG.md` | M | Logged asset pack skip decisions. |
+
+Legend: **A** = Added, **M** = Modified.

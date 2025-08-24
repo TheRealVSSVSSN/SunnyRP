@@ -14,3 +14,10 @@
 | 10 | WiseGuy-Wheels | Wheel spin logging per character | Create | Added spin history API |
 | 11 | assets | Store and retrieve character-bound asset metadata | Create | Added asset APIs |
 | 12 | assets_clothes | Save and manage character outfit data | Create | Added clothing outfit APIs |
+| 13 | maps | World mapping assets; no server interaction | Skip | Asset-only |
+| 14 | furnished-shells | Interior shell models; no persistence | Skip | Asset-only |
+| 15 | hair-pack | Hair style models; no backend | Skip | Asset-only |
+| 16 | mh65c | Helicopter model assets; no backend | Skip | Asset-only |
+| 17 | motel | Motel interior assets; no backend | Skip | Asset-only |
+| 18 | shoes-pack | Footwear model assets; no backend | Skip | Asset-only |
+| 19 | yuzler | Clothing asset pack; no backend | Skip | Asset-only |
