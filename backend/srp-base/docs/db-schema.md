@@ -126,3 +126,23 @@
 | name | VARCHAR(100) | Optional outfit name |
 | data | TEXT | JSON outfit data |
 | created_at | TIMESTAMP | Creation time |
+
+## apartments
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| name | VARCHAR(255) | Apartment name |
+| location | JSON | Coordinates metadata |
+| price | DECIMAL(10,2) | Purchase price |
+| created_at | TIMESTAMP | Creation time |
+| updated_at | TIMESTAMP | Update time |
+
+## apartment_residents
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| apartment_id | INT | FK to apartments.id |
+| character_id | BIGINT | Resident character |
+| assigned_at | TIMESTAMP | Assignment time |

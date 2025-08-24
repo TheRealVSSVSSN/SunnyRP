@@ -49,6 +49,7 @@ practice is supported by citations.
 | **Wise Wheels module** | Wheel spin endpoints follow the established layered pattern with authentication and idempotency. |
 | **assets module** | Asset endpoints follow the established layered pattern with authentication, rate limiting and idempotency. |
 | **clothes module** | Clothing endpoints follow the established layered pattern with authentication, rate limiting and idempotency. |
+| **apartments module** | Apartment endpoints follow the established layered pattern with authentication and idempotency. |
 | **Characters module** | Legacy unscoped endpoints removed, ensuring account-scoped character access only. |
 
 | **Testing & CI** | There is no CI pipeline or test suite.  Future work should include setting up continuous integration with linting and test execution. |

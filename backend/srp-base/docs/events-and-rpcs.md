@@ -14,6 +14,7 @@
 | WiseGuy-Wheels | Resource records wheel spin outcomes per character | `GET /v1/wise-wheels/spins/:characterId`, `POST /v1/wise-wheels/spins` |
 | assets | Resource stores media or item assets linked to characters | `GET /v1/assets`, `GET /v1/assets/{id}`, `POST /v1/assets`, `DELETE /v1/assets/{id}` |
 | assets_clothes | Resource saves and retrieves character outfits | `GET /v1/clothes`, `POST /v1/clothes`, `DELETE /v1/clothes/{id}` |
+| apartments | Resource triggers events when characters claim or vacate apartments | `GET /v1/apartments` with optional `characterId` filter and resident assignment endpoints |
 | maps | No server events; world mapping assets | N/A |
 | furnished-shells | No server events; interior shell assets | N/A |
 | hair-pack | No server events; cosmetic hair assets | N/A |

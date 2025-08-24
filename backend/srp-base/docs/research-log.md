@@ -75,3 +75,7 @@
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
 - Community thread: "NoPixel 4.0 – Asset Bundles and World Updates" – https://forum.example.com/nopixel-4-asset-bundles
 - Community thread: "ProdigyRP 4.0 – New Hairstyles and Clothing Packs" – https://forum.example.com/prodigy-hair-clothes
+# Research Log – 2025-08-24 (apartments)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
+- Unable to access public NoPixel 4.0 or ProdigyRP 4.0 feature summaries due to network restrictions.

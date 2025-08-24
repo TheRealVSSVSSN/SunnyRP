@@ -110,3 +110,16 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: c1' -H 'Content-Type: appl
   http://localhost:3010/v1/clothes
 curl -H 'X-API-Token: <token>' -X DELETE http://localhost:3010/v1/clothes/1
 ```
+
+Manually verify the apartments endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' "http://localhost:3010/v1/apartments?characterId=1"
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: ap1' -H 'Content-Type: application/json' \
+  -d '{"name":"Eclipse Tower","location":{},"price":1000}' \
+  http://localhost:3010/v1/apartments
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: ap2' -H 'Content-Type: application/json' \
+  -d '{"characterId":1}' \
+  http://localhost:3010/v1/apartments/1/residents
+curl -H 'X-API-Token: <token>' -X DELETE http://localhost:3010/v1/apartments/1/residents/1
+```

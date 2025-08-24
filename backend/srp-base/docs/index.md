@@ -92,3 +92,12 @@ For resource decisions see `progress-ledger.md`. Module details are documented i
 Reviewed asset-only resources **maps**, **furnished-shells**, **hair-pack**, **mh65c**, **motel**, **shoes-pack** and **yuzler**. No server-side responsibilities were identified; no API changes required.
 
 For resource decisions see `progress-ledger.md`.
+
+## Update – 2025-08-24
+
+Extended parity for the **apartments** resource by enforcing character-scoped residency.
+
+* Added optional `characterId` filter to `GET /v1/apartments`.
+* Updated resident assignment to use character identifiers and added migration for `character_id` column.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/apartments.md`.

@@ -628,3 +628,16 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Notes
 
 * Reviewed asset-only resources. No server-side changes required.
+## 2025-08-24 (apartments)
+
+### Changed
+* Apartment endpoints now accept `characterId` and apartment_residents table converted to `character_id`.
+
+### Migrations
+* `032_add_apartment_residents_character_fk.sql`
+
+### Risks
+* Existing data must have valid character references; migration copies legacy `player_id`.
+
+### Rollback
+* Drop `apartment_residents` foreign key and `character_id` column, restore `player_id`.

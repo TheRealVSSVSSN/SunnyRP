@@ -443,6 +443,11 @@ To support all features present in the original server resources at the framewor
   - `GET /v1/clothes?characterId={cid}` – List outfits for a character.
   - `POST /v1/clothes` – Save an outfit (`characterId`, `slot`, `data`) (requires `Idempotency-Key`).
   - `DELETE /v1/clothes/{id}` – Remove an outfit.
+- **srp-apartments** – Manages apartments and residents.
+  - `GET /v1/apartments?characterId={cid}` – List apartments, optionally filtered by resident.
+  - `POST /v1/apartments` – Create an apartment (`name`, optional `location`, optional `price`).
+  - `POST /v1/apartments/{apartmentId}/residents` – Assign a character to an apartment.
+  - `DELETE /v1/apartments/{apartmentId}/residents/{characterId}` – Remove a resident.
 - **srp-zones** – Stores polygonal zone definitions for world interactions.
   - `GET /v1/zones` – List zones.
   - `POST /v1/zones` – Create a zone with `name`, `type`, and `data`.
