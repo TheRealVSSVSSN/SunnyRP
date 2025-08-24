@@ -427,6 +427,9 @@ To support all features present in the original server resources at the framewor
 - **srp-wise-imports** – Manages vehicle import orders.
   - `GET /v1/wise-imports/orders/{characterId}` – List import orders for a character.
   - `POST /v1/wise-imports/orders` – Create an order with `characterId` and `model`.
+- **srp-wise-uc** – Manages undercover profiles.
+  - `GET /v1/wise-uc/profiles/{characterId}` – Retrieve undercover profile for a character.
+  - `POST /v1/wise-uc/profiles` – Create or update a profile with `characterId`, `alias` and optional `active`.
 - **srp-zones** – Stores polygonal zone definitions for world interactions.
   - `GET /v1/zones` – List zones.
   - `POST /v1/zones` – Create a zone with `name`, `type`, and `data`.

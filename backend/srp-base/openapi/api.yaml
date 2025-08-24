@@ -611,6 +611,33 @@ components:
           type: string
         model:
           type: string
+    WiseUCProfile:
+      type: object
+      properties:
+        characterId:
+          type: string
+        alias:
+          type: string
+        active:
+          type: boolean
+        createdAt:
+          type: integer
+          format: int64
+        updatedAt:
+          type: integer
+          format: int64
+    WiseUCProfileCreateRequest:
+      type: object
+      required:
+        - characterId
+        - alias
+      properties:
+        characterId:
+          type: string
+        alias:
+          type: string
+        active:
+          type: boolean
     Door:
       type: object
       properties:
@@ -2656,6 +2683,70 @@ paths:
                     type: string
                   traceId:
                     type: string
+        '400':
+          description: Invalid input
+  /v1/wise-uc/profiles:
+    post:
+      summary: Create or update an undercover profile
+      operationId: upsertWiseUCProfile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WiseUCProfileCreateRequest'
+      responses:
+        '200':
+          description: Profile stored
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      profile:
+                        $ref: '#/components/schemas/WiseUCProfile'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          description: Invalid input
+  /v1/wise-uc/profiles/{characterId}:
+    get:
+      summary: Get undercover profile for a character
+      operationId: getWiseUCProfile
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Profile information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      profile:
+                        $ref: '#/components/schemas/WiseUCProfile'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '404':
+          description: Profile not found
         '400':
           description: Invalid input
   /v1/doors:

@@ -84,3 +84,14 @@
 | model | VARCHAR(64) | Vehicle model identifier |
 | status | VARCHAR(32) | Order status |
 | created_at | BIGINT | Epoch milliseconds |
+
+## wise_uc_profiles
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| character_id | BIGINT | Owning character |
+| alias | VARCHAR(100) | Undercover alias |
+| active | TINYINT(1) | 1 active, 0 inactive |
+| created_at | BIGINT | Epoch milliseconds |
+| updated_at | BIGINT | Epoch milliseconds |

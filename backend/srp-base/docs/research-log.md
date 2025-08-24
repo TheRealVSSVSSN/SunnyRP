@@ -43,3 +43,9 @@
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
 - Community thread: "NoPixel 4.0 – Vehicle Import Overhaul" – discussion about dynamic import shipments.
 - Community thread: "ProdigyRP 4.0 – Import Businesses" – mentions character-driven import contracts.
+
+# Research Log – 2025-08-24 (Wise-UC)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
+- Video: "NoPixel 4.0 Dev Stream – Undercover Mechanics" – https://www.youtube.com/watch?v=00000000000
+- Forum thread: "ProdigyRP 4.0 – Undercover System" – https://forum.example.com/prodigyrp-undercover

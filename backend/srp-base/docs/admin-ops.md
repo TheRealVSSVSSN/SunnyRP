@@ -12,3 +12,4 @@
 - Ensure the `zones` table exists for polygonal zone definitions.
 - Ensure the `wise_audio_tracks` table exists for character audio tracks.
 - Ensure the `wise_import_orders` table exists for vehicle import orders.
+- Ensure the `wise_uc_profiles` table exists for undercover aliases.

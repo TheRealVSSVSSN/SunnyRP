@@ -9,3 +9,4 @@
 | 5 | PolyZone | Zone definitions and management | Create | Added zone storage API |
 | 6 | Wise Audio | Custom audio track storage per character | Create | Added track storage API |
 | 7 | Wise Imports | Vehicle import order tracking per character | Create | Added order storage API |
+| 8 | Wise-UC | Undercover alias profiles per character | Create | Added profile API |
