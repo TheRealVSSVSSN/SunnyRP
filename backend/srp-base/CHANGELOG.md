@@ -458,3 +458,45 @@ Bans now survive service restarts. Rollback by dropping the `bans` table and rev
 ### Notes (2025-08-23 – evidence schemas)
 
 Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour changes. Rollback by removing the schema definitions and restoring previous documentation versions.
+
+## 2025-08-23 (DiamondBlackjack)
+
+### Added
+
+* Diamond Blackjack module with `/v1/diamond-blackjack/hands` endpoints and `diamond_blackjack_hands` table.
+
+### Risks
+
+* None beyond standard deployment.
+
+### Rollback
+
+* Drop `diamond_blackjack_hands` table and remove related routes and repository.
+
+## 2025-08-23 (InteractSound)
+
+### Added
+
+* Interact Sound module with `/v1/interact-sound/plays` endpoints and `interact_sound_plays` table.
+
+### Risks
+
+* None beyond standard deployment.
+
+### Rollback
+
+* Drop `interact_sound_plays` table and remove related routes and repository.
+
+## 2025-08-24 (LockDoors)
+
+### Added
+
+* Documented existing door APIs in OpenAPI and module docs for the LockDoors resource.
+
+### Risks
+
+* None beyond standard deployment.
+
+### Rollback
+
+* Remove documentation sections related to doors if necessary.
