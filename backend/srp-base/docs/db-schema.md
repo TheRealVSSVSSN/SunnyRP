@@ -138,6 +138,27 @@
 | created_at | TIMESTAMP | Creation time |
 | updated_at | TIMESTAMP | Update time |
 
+## accounts
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| character_id | VARCHAR(64) | Owning character |
+| balance | BIGINT | Balance in cents |
+| created_at | TIMESTAMP | Creation time |
+| updated_at | TIMESTAMP | Update time |
+
+## transactions
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| from_character_id | VARCHAR(64) | Sender character |
+| to_character_id | VARCHAR(64) | Receiver character |
+| amount | BIGINT | Transfer amount |
+| reason | VARCHAR(255) | Optional memo |
+| created_at | TIMESTAMP | Creation time |
+
 ## apartment_residents
 
 | Column | Type | Notes |

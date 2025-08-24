@@ -1,18 +1,18 @@
 const express = require('express');
-const { sendOk } = require('../utils/respond');
+const { sendOk, sendError } = require('../utils/respond');
 const economyRepo = require('../repositories/economyRepository');
 
 // Routes for economy operations (accounts and transactions).  These
-// endpoints expose basic banking functionality for players.  More
+// endpoints expose basic banking functionality for characters.  More
 // complex features such as loans, business accounts or tax are
 // intentionally omitted at this framework level.
 const router = express.Router();
 
-// Get a player's account
-router.get('/v1/accounts/:playerId', async (req, res, next) => {
+// Get or create a character's account
+router.get('/v1/characters/:characterId/account', async (req, res, next) => {
   try {
-    const { playerId } = req.params;
-    const account = await economyRepo.getAccount(playerId);
+    const { characterId } = req.params;
+    const account = await economyRepo.getAccount(characterId);
     sendOk(res, account, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     next(err);
@@ -20,11 +20,15 @@ router.get('/v1/accounts/:playerId', async (req, res, next) => {
 });
 
 // Deposit into an account
-router.post('/v1/accounts/:playerId/deposit', async (req, res, next) => {
+router.post('/v1/characters/:characterId/account:deposit', async (req, res, next) => {
   try {
-    const { playerId } = req.params;
+    const { characterId } = req.params;
     const { amount } = req.body || {};
-    const result = await economyRepo.deposit(playerId, Number(amount) || 0);
+    const amt = Number(amount);
+    if (!Number.isFinite(amt) || amt <= 0) {
+      return sendError(res, { code: 'INVALID_AMOUNT', message: 'Amount must be positive' }, 400, res.locals.requestId, res.locals.traceId);
+    }
+    const result = await economyRepo.deposit(characterId, amt);
     sendOk(res, result, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     next(err);
@@ -32,22 +36,45 @@ router.post('/v1/accounts/:playerId/deposit', async (req, res, next) => {
 });
 
 // Withdraw from an account
-router.post('/v1/accounts/:playerId/withdraw', async (req, res, next) => {
+router.post('/v1/characters/:characterId/account:withdraw', async (req, res, next) => {
   try {
-    const { playerId } = req.params;
+    const { characterId } = req.params;
     const { amount } = req.body || {};
-    const result = await economyRepo.withdraw(playerId, Number(amount) || 0);
+    const amt = Number(amount);
+    if (!Number.isFinite(amt) || amt <= 0) {
+      return sendError(res, { code: 'INVALID_AMOUNT', message: 'Amount must be positive' }, 400, res.locals.requestId, res.locals.traceId);
+    }
+    const result = await economyRepo.withdraw(characterId, amt);
     sendOk(res, result, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     next(err);
   }
 });
 
-// Create a transaction between two players
+// List recent transactions for a character
+router.get('/v1/characters/:characterId/transactions', async (req, res, next) => {
+  try {
+    const { characterId } = req.params;
+    const limit = Math.min(Number(req.query.limit) || 50, 100);
+    const txs = await economyRepo.listTransactions(characterId, limit);
+    sendOk(res, { transactions: txs }, res.locals.requestId, res.locals.traceId);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Create a transaction between two characters
 router.post('/v1/transactions', async (req, res, next) => {
   try {
-    const { fromPlayerId, toPlayerId, amount, reason } = req.body || {};
-    const result = await economyRepo.createTransaction({ fromPlayerId, toPlayerId, amount, reason });
+    const { fromCharacterId, toCharacterId, amount, reason } = req.body || {};
+    if (!fromCharacterId || !toCharacterId) {
+      return sendError(res, { code: 'INVALID_INPUT', message: 'fromCharacterId and toCharacterId are required' }, 400, res.locals.requestId, res.locals.traceId);
+    }
+    const amt = Number(amount);
+    if (!Number.isFinite(amt) || amt <= 0) {
+      return sendError(res, { code: 'INVALID_AMOUNT', message: 'Amount must be positive' }, 400, res.locals.requestId, res.locals.traceId);
+    }
+    const result = await economyRepo.createTransaction({ fromCharacterId, toCharacterId, amount: amt, reason });
     sendOk(res, result, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     next(err);

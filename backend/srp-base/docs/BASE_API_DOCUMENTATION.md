@@ -240,11 +240,12 @@ In addition to the core identity, permissions, characters and admin APIs describ
 
 | Method | Path | Description |
 |-------|-----|-------------|
-| `GET` | `/v1/accounts/:playerId` | Get (or lazily create) a player’s account; returns balance. |
-| `POST` | `/v1/accounts/:playerId/deposit` | Deposit funds into a player’s account (body: `{ amount }`). |
-| `POST` | `/v1/accounts/:playerId/withdraw` | Withdraw funds from a player’s account (body: `{ amount }`, clamped to zero). |
-| `POST` | `/v1/transactions` | Transfer funds between two players (body: `{ fromPlayerId, toPlayerId, amount, reason? }`). Returns transaction ID and sender balance. |
-| `GET` | `/v1/transactions/:id` | Retrieve a transaction by ID. |
+| `GET` | `/v1/characters/{characterId}/account` | Retrieve or create the character's bank account. |
+| `POST` | `/v1/characters/{characterId}/account:deposit` | Deposit funds into the account. |
+| `POST` | `/v1/characters/{characterId}/account:withdraw` | Withdraw funds from the account. |
+| `GET` | `/v1/characters/{characterId}/transactions` | List recent transactions for the character. |
+| `POST` | `/v1/transactions` | Transfer funds between characters. |
+| `GET` | `/v1/transactions/{id}` | Retrieve a transaction by ID. |
 
 #### Vehicles (Ownership & Registration)
 

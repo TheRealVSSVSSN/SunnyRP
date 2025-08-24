@@ -889,6 +889,32 @@ components:
       properties:
         characterId:
           type: integer
+    BankAccount:
+      type: object
+      properties:
+        id:
+          type: integer
+        character_id:
+          type: string
+        balance:
+          type: integer
+    Transaction:
+      type: object
+      properties:
+        id:
+          type: integer
+        from_character_id:
+          type: string
+        to_character_id:
+          type: string
+        amount:
+          type: integer
+        reason:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
 security:
   - ApiToken: []
 paths:
@@ -902,11 +928,154 @@ paths:
             application/json:
               schema:
                 type: object
+  /v1/characters/{characterId}/account:
+    get:
+      summary: Retrieve or create a character bank account
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Bank account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankAccount'
+  /v1/characters/{characterId}/account:deposit:
+    post:
+      summary: Deposit funds into a character account
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: integer
+      responses:
+        '200':
+          description: New balance
+          content:
+            application/json:
+              schema:
+                type: object
                 properties:
-                  ok:
-                    type: boolean
-                  data:
-                    type: object
+                  balance:
+                    type: integer
+  /v1/characters/{characterId}/account:withdraw:
+    post:
+      summary: Withdraw funds from a character account
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: integer
+      responses:
+        '200':
+          description: New balance
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  balance:
+                    type: integer
+  /v1/characters/{characterId}/transactions:
+    get:
+      summary: List recent transactions for a character
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: limit
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of transactions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transactions:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Transaction'
+  /v1/transactions:
+    post:
+      summary: Transfer funds between characters
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - fromCharacterId
+                - toCharacterId
+                - amount
+              properties:
+                fromCharacterId:
+                  type: string
+                toCharacterId:
+                  type: string
+                amount:
+                  type: integer
+                reason:
+                  type: string
+                  nullable: true
+      responses:
+        '200':
+          description: Transfer recorded
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  senderBalance:
+                    type: integer
+  /v1/transactions/{id}:
+    get:
+      summary: Retrieve a transaction
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Transaction record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
   /v1/ready:
     get:
       summary: Readiness probe

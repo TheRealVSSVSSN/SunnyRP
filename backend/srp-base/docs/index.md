@@ -101,3 +101,11 @@ Extended parity for the **apartments** resource by enforcing character-scoped re
 * Updated resident assignment to use character identifiers and added migration for `character_id` column.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/apartments.md`.
+
+## Update – 2025-08-24
+
+Introduced character-scoped banking to support the **banking** resource.
+
+* Added economy module with account retrieval, deposit, withdrawal and transaction endpoints plus migration and OpenAPI documentation.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/economy.md`.
