@@ -17,3 +17,4 @@
 - Ensure the `assets` table exists for character asset records.
 - Ensure the `clothes` table exists for character outfit records.
 - Ensure the `apartments` and `apartment_residents` tables exist and include the `character_id` column after deploying this sprint.
+- Ensure the `accounts` and `transactions` tables use `character_id` columns after deploying this sprint.

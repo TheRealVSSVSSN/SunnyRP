@@ -641,3 +641,17 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Drop `apartment_residents` foreign key and `character_id` column, restore `player_id`.
+
+## 2025-08-24 (banking)
+
+### Changed
+* Economy module with character-scoped bank accounts and transactions. Renamed economy tables to use `character_id`.
+
+### Migrations
+* `033_update_economy_character_scoping.sql`
+
+### Risks
+* Migration alters existing economy tables; ensure data copy succeeds.
+
+### Rollback
+* Recreate `player_id` columns on `accounts` and `transactions` tables and remove banking routes.

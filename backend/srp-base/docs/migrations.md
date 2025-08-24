@@ -30,3 +30,4 @@
 | 030_add_assets.sql | Assets table |
 | 031_add_clothes.sql | Clothes table |
 | 032_add_apartment_residents_character_fk.sql | Enforce character_id for apartment residents |
+| 033_update_economy_character_scoping.sql | Rename player columns to character columns for accounts and transactions |

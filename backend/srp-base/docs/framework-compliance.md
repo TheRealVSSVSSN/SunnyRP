@@ -49,6 +49,7 @@ practice is supported by citations.
 | **Wise Wheels module** | Wheel spin endpoints follow the established layered pattern with authentication and idempotency. |
 | **assets module** | Asset endpoints follow the established layered pattern with authentication, rate limiting and idempotency. |
 | **clothes module** | Clothing endpoints follow the established layered pattern with authentication, rate limiting and idempotency. |
+| **economy module** | Banking endpoints follow the established layered pattern with authentication and idempotency. |
 | **apartments module** | Apartment endpoints follow the established layered pattern with authentication and idempotency. |
 | **Characters module** | Legacy unscoped endpoints removed, ensuring account-scoped character access only. |
 

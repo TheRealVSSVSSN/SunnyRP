@@ -123,3 +123,17 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: ap2' -H 'Content-Type: app
   http://localhost:3010/v1/apartments/1/residents
 curl -H 'X-API-Token: <token>' -X DELETE http://localhost:3010/v1/apartments/1/residents/1
 ```
+
+Manually verify the economy endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/characters/char123/account
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: b1' -H 'Content-Type: application/json' \
+  -d '{"amount":100}' http://localhost:3010/v1/characters/char123/account:deposit
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: b2' -H 'Content-Type: application/json' \
+  -d '{"amount":50}' http://localhost:3010/v1/characters/char123/account:withdraw
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: b3' -H 'Content-Type: application/json' \
+  -d '{"fromCharacterId":"char123","toCharacterId":"char456","amount":25}' \
+  http://localhost:3010/v1/transactions
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/characters/char123/transactions
+```

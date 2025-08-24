@@ -511,3 +511,28 @@ Legend: **A** = Added, **M** = Modified.
 | `CHANGELOG.md` | M | Added apartments entry |
 
 Legend: **A** = Added, **M** = Modified.
+
+# Update – 2025-08-24 (banking)
+
+| Path | Status | Notes |
+|---|---|---|
+| `src/repositories/economyRepository.js` | M | Renamed columns to character scope and added transaction listing |
+| `src/routes/economy.routes.js` | M | Character-scoped banking endpoints and validation |
+| `src/migrations/033_update_economy_character_scoping.sql` | A | Rename economy tables to character_id |
+| `openapi/api.yaml` | M | Added banking schemas and paths |
+| `docs/index.md` | M | Logged banking update |
+| `docs/progress-ledger.md` | M | Added banking entry |
+| `docs/framework-compliance.md` | M | Added economy module compliance row |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented banking endpoints |
+| `docs/events-and-rpcs.md` | M | Mapped banking events |
+| `docs/db-schema.md` | M | Documented accounts and transactions tables |
+| `docs/migrations.md` | M | Listed migration 033 |
+| `docs/admin-ops.md` | M | Added accounts and transactions checks |
+| `docs/security.md` | M | Added economy security note |
+| `docs/testing.md` | M | Added banking curl examples |
+| `docs/modules/economy.md` | A | Module documentation |
+| `docs/research-log.md` | M | Logged banking research |
+| `CHANGELOG.md` | M | Added banking entry |
+| `MANIFEST.md` | M | Recorded banking changes |
+
+Legend: **A** = Added, **M** = Modified.
