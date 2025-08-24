@@ -450,3 +450,29 @@ Legend: **A** = Added, **M** = Modified, **D** = Deleted.
 | `CHANGELOG.md` | M | Added Wise Wheels entry. |
 
 Legend: **A** = Added, **M** = Modified.
+
+# Update – 2025-08-24 (assets_clothes)
+
+| Path | Status | Notes |
+|---|---|---|
+| `src/repositories/clothesRepository.js` | A | Repository for character outfit records. |
+| `src/routes/clothes.routes.js` | A | Endpoints for listing, creating and deleting outfits. |
+| `src/migrations/031_add_clothes.sql` | A | Create clothes table. |
+| `src/app.js` | M | Mounted clothes routes. |
+| `openapi/api.yaml` | M | Added Clothing schemas and `/v1/clothes` paths. |
+| `docs/index.md` | M | Logged assets_clothes update. |
+| `docs/progress-ledger.md` | M | Added assets_clothes entry. |
+| `docs/framework-compliance.md` | M | Added clothes module compliance row. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented clothes endpoints. |
+| `docs/events-and-rpcs.md` | M | Mapped assets_clothes events. |
+| `docs/db-schema.md` | M | Documented clothes table. |
+| `docs/migrations.md` | M | Listed migration 031. |
+| `docs/admin-ops.md` | M | Added clothes table check. |
+| `docs/security.md` | M | Added clothes security note. |
+| `docs/testing.md` | M | Added clothes curl examples. |
+| `docs/modules/clothes.md` | A | Module documentation. |
+| `docs/research-log.md` | M | Logged assets_clothes research. |
+| `CHANGELOG.md` | M | Added assets_clothes entry. |
+| `MANIFEST.md` | M | Recorded assets_clothes changes. |
+
+Legend: **A** = Added, **M** = Modified.

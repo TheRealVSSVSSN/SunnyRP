@@ -13,3 +13,4 @@
 - Wise UC routes inherit the same authentication and idempotency requirements.
 - Wise Wheels routes inherit the same authentication and idempotency requirements.
 - Assets routes inherit the same authentication, idempotency and rate limiting requirements.
+- Clothes routes inherit the same authentication, idempotency and rate limiting requirements.

@@ -13,3 +13,4 @@
 | 9 | WiseGuy-Vanilla | Baseline character management; remove legacy unscoped endpoints | Extend | Consolidated account-scoped APIs |
 | 10 | WiseGuy-Wheels | Wheel spin logging per character | Create | Added spin history API |
 | 11 | assets | Store and retrieve character-bound asset metadata | Create | Added asset APIs |
+| 12 | assets_clothes | Save and manage character outfit data | Create | Added clothing outfit APIs |
