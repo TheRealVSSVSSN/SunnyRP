@@ -569,3 +569,17 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Drop `wise_uc_profiles` table and remove related routes and repository.
+
+## 2025-08-24 (WiseGuy-Vanilla)
+
+### Changed
+
+* Removed legacy `/v1/characters` and `/v1/characters/{id}` endpoints to enforce account-scoped character APIs.
+
+### Risks
+
+* Clients using legacy endpoints must migrate to account-scoped paths.
+
+### Rollback
+
+* Restore `characters.routes.js`, re-add removed OpenAPI paths, and remount the route in `src/app.js`.

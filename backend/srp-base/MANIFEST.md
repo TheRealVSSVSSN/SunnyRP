@@ -408,3 +408,19 @@ Legend: **A** = Added, **M** = Modified.
 | `MANIFEST.md` | M | Recorded Wise-UC changes. |
 
 Legend: **A** = Added, **M** = Modified.
+# Update – 2025-08-24 (WiseGuy-Vanilla)
+
+| Path | Status | Notes |
+|---|---|---|
+| `src/routes/characters.routes.js` | D | Removed legacy unscoped character routes. |
+| `src/app.js` | M | Dropped import and mount of legacy character routes. |
+| `openapi/api.yaml` | M | Removed `/v1/characters` paths. |
+| `docs/index.md` | M | Logged removal of legacy character endpoints. |
+| `docs/progress-ledger.md` | M | Added WiseGuy-Vanilla entry. |
+| `docs/framework-compliance.md` | M | Noted consolidation of character module. |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented account-scoped character API only. |
+| `docs/events-and-rpcs.md` | M | Mapped WiseGuy-Vanilla to account character endpoints. |
+| `docs/modules/characters.md` | M | Added note about legacy endpoint removal. |
+| `docs/research-log.md` | M | Logged WiseGuy-Vanilla research. |
+
+Legend: **A** = Added, **M** = Modified, **D** = Deleted.

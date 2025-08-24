@@ -11,7 +11,6 @@ const { sendError } = require('./utils/respond');
 const healthRoutes = require('./routes/health.routes');
 const configRoutes = require('./routes/config.routes');
 const usersRoutes = require('./routes/users.routes');
-const charactersRoutes = require('./routes/characters.routes');
 const accountCharactersRoutes = require('./routes/accountCharacters.routes');
 const permissionsRoutes = require('./routes/permissions.routes');
 const playersRoutes = require('./routes/players.routes');
@@ -113,7 +112,6 @@ app.use(healthRoutes);
 // For now we mount all routers unconditionally.
 app.use(configRoutes);
 app.use(usersRoutes);
-app.use(charactersRoutes);
 app.use(accountCharactersRoutes);
 app.use(permissionsRoutes);
 app.use(playersRoutes);

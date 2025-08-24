@@ -49,3 +49,9 @@
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
 - Video: "NoPixel 4.0 Dev Stream – Undercover Mechanics" – https://www.youtube.com/watch?v=00000000000
 - Forum thread: "ProdigyRP 4.0 – Undercover System" – https://forum.example.com/prodigyrp-undercover
+# Research Log – 2025-08-24 (WiseGuy-Vanilla)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
+- Article: "NoPixel 4.0" (Fandom). https://nopixel.fandom.com/wiki/NoPixel_4.0
+- Site: "ProdigyRP". https://prodigyrp.net
+- GitHub repository "overextended/ox_core" – modern FiveM framework with modular character system. https://github.com/overextended/ox_core

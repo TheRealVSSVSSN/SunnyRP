@@ -18,4 +18,5 @@ Supports multi-character accounts. Provides endpoints to list, create, select an
 
 ## Notes
 
+- Legacy unscoped `/v1/characters` endpoints have been removed; use account-scoped paths.
 - `character_selections` enforces one active character per account via primary key.
