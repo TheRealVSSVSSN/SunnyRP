@@ -823,3 +823,26 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Remove cron routes and drop `cron_jobs` table.
+
+## 2025-08-24 – coordsaver module
+
+### Added
+
+* Coordsaver module with `/v1/characters/{characterId}/coords` endpoints for managing saved coordinates.
+
+### Changed
+
+* `app.js` – Mounted coordsaver routes.
+* `openapi/api.yaml` – Added Coordinate schemas and paths.
+
+### Migrations
+
+* `041_add_character_coords.sql`
+
+### Risks
+
+* Saved coordinates may expose sensitive locations; monitor usage.
+
+### Rollback
+
+* Remove coordsaver routes and drop `character_coords` table.

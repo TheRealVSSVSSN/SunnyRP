@@ -253,6 +253,7 @@
 | updated_at | TIMESTAMP | Update time |
 
 ## cron_jobs
+## character_coords
 
 | Column | Type | Notes |
 |---|---|---|
@@ -265,5 +266,11 @@
 | priority | INT | Job priority |
 | next_run | DATETIME | Next scheduled execution |
 | last_run | DATETIME | Last execution time |
+| character_id | INT | FK to characters.id |
+| name | VARCHAR(100) | Unique per character |
+| x | FLOAT | X coordinate |
+| y | FLOAT | Y coordinate |
+| z | FLOAT | Z coordinate |
+| heading | FLOAT | Optional heading |
 | created_at | TIMESTAMP | Creation time |
 | updated_at | TIMESTAMP | Update time |
