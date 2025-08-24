@@ -27,3 +27,4 @@
 | boatshop | Resource sends purchase requests for boats | `GET /v1/boatshop`, `POST /v1/boatshop/purchase` |
 | bob74_ipl | Loads interior proxies; no server events | N/A |
 | camera | Resource captures photos and uploads metadata | `GET /v1/camera/photos/{characterId}`, `POST /v1/camera/photos`, `DELETE /v1/camera/photos/{id}` |
+| carandplayerhud | Resource broadcasts HUD updates when preferences change | `GET /v1/characters/{characterId}/hud`, `PUT /v1/characters/{characterId}/hud` |

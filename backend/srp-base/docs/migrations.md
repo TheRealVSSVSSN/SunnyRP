@@ -34,3 +34,4 @@
 | 034_add_base_event_logs.sql | Base event logs table |
 | 035_add_boatshop.sql | Boat shop catalog |
 | 036_add_camera_photos.sql | Camera photos table |
+| 037_add_character_hud_preferences.sql | HUD preferences table |

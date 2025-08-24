@@ -66,3 +66,4 @@ practice is supported by citations.
 | **boatshop module** | Boatshop endpoints follow the established layered pattern with authentication and idempotency. |
 
 | **camera module** | Photo storage endpoints follow the established layered pattern with authentication and idempotency. |
+| **hud module** | HUD preference endpoints follow the established layered pattern with authentication and idempotency. |

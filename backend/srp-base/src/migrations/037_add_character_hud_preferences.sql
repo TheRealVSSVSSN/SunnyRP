@@ -1,0 +1,11 @@
+CREATE TABLE IF NOT EXISTS character_hud_preferences (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  character_id BIGINT NOT NULL,
+  speed_unit ENUM('mph','kph') NOT NULL DEFAULT 'mph',
+  show_fuel TINYINT(1) NOT NULL DEFAULT 1,
+  hud_theme VARCHAR(50) DEFAULT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE KEY uniq_character (character_id),
+  CONSTRAINT fk_hud_pref_character FOREIGN KEY (character_id) REFERENCES characters(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

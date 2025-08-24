@@ -480,3 +480,6 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
   - `GET /v1/camera/photos/{characterId}` – List photos for a character.
   - `POST /v1/camera/photos` – Save a photo with `characterId`, `imageUrl` and optional `description`.
   - `DELETE /v1/camera/photos/{id}` – Remove a photo record.
+- **srp-hud** – Stores per-character HUD settings.
+  - `GET /v1/characters/{characterId}/hud` – Retrieve HUD preferences.
+  - `PUT /v1/characters/{characterId}/hud` – Update HUD preferences.
