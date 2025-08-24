@@ -488,3 +488,6 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
   - `GET /v1/carwash/history/{characterId}` – List recent washes for a character.
   - `GET /v1/vehicles/{plate}/dirt` – Fetch vehicle dirt level.
   - `PATCH /v1/vehicles/{plate}/dirt` – Update vehicle dirt level.
+- **srp-chat** – Stores chat messages for moderation.
+  - `GET /v1/chat/messages/{characterId}` – List recent chat messages for a character.
+  - `POST /v1/chat/messages` – Record a chat message (`characterId`, `channel`, `message`).

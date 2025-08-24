@@ -229,3 +229,13 @@
 | hud_theme | VARCHAR(50) | Optional theme |
 | created_at | TIMESTAMP | Creation time |
 | updated_at | TIMESTAMP | Update time |
+
+## chat_messages
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| character_id | BIGINT | Owning character |
+| channel | VARCHAR(32) | Message channel |
+| message | TEXT | Message content |
+| created_at | TIMESTAMP | Creation time |

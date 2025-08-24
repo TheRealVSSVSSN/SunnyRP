@@ -68,3 +68,4 @@ practice is supported by citations.
 | **camera module** | Photo storage endpoints follow the established layered pattern with authentication and idempotency. |
 | **hud module** | HUD preference endpoints follow the established layered pattern with authentication and idempotency. |
 | **carwash module** | Carwash endpoints follow the established layered pattern with authentication and idempotency. |
+| **chat module** | Chat message endpoints follow the established layered pattern with authentication and idempotency. |

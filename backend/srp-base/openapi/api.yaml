@@ -1056,6 +1056,33 @@ components:
         dirt:
           type: integer
           nullable: true
+    ChatMessage:
+      type: object
+      properties:
+        id:
+          type: integer
+        characterId:
+          type: integer
+        channel:
+          type: string
+        message:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+    ChatMessageCreateRequest:
+      type: object
+      required:
+        - characterId
+        - channel
+        - message
+      properties:
+        characterId:
+          type: integer
+        channel:
+          type: string
+        message:
+          type: string
 
 security:
   - ApiToken: []
@@ -3928,6 +3955,77 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HudPreferences'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/chat/messages/{characterId}:
+    get:
+      summary: List chat messages for a character
+      operationId: listChatMessages
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 50
+      responses:
+        '200':
+          description: Chat messages
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      messages:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/ChatMessage'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/chat/messages:
+    post:
+      summary: Create chat message
+      operationId: createChatMessage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatMessageCreateRequest'
+      responses:
+        '200':
+          description: Chat message created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        $ref: '#/components/schemas/ChatMessage'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
         '400':
           $ref: '#/components/responses/BadRequest'
     put:

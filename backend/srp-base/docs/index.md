@@ -156,3 +156,11 @@ Introduced vehicle cleaning logs to support the **carwash** resource.
 * Added Carwash module with `POST /v1/carwash`, `GET /v1/carwash/history/{characterId}` and vehicle dirt endpoints.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/carwash.md`.
+
+## Update – 2025-08-24
+
+Introduced chat message logging to support the **chat** resource.
+
+* Added Chat module with `GET /v1/chat/messages/{characterId}` and `POST /v1/chat/messages` endpoints.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/chat.md`.

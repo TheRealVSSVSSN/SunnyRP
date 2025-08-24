@@ -21,3 +21,4 @@
 - Camera routes inherit the same authentication and idempotency requirements.
 - HUD routes inherit the same authentication and idempotency requirements.
 - Carwash routes inherit the same authentication and idempotency requirements.
+- Chat routes inherit the same authentication and idempotency requirements.
