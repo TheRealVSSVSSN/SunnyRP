@@ -668,3 +668,26 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Drop `base_event_logs` table and remove related routes and repository.
+
+## 2025‑08‑24
+
+### Added
+
+* **Boatshop module.** Added endpoints `GET /v1/boatshop` and `POST /v1/boatshop/purchase` plus repository and table for boat catalog.
+
+### Changed
+
+* **app.js** – Mounted boatshop routes.
+* **openapi/api.yaml** – Added Boat schema and boatshop paths.
+
+### Migrations
+
+* `035_add_boatshop.sql`
+
+### Risks
+
+* Purchases assume client-side balance checks; misuse could allow free boats.
+
+### Rollback
+
+* Remove boatshop routes and drop `boatshop_boats` table.

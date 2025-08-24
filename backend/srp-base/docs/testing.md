@@ -90,6 +90,15 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: ww1' -H 'Content-Type: app
   http://localhost:3010/v1/wise-wheels/spins
 ```
 
+Manually verify the boatshop endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/boatshop
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: b1' -H 'Content-Type: application/json' \
+  -d '{"characterId":"char123","boatId":1,"plate":"SEA123"}' \
+  http://localhost:3010/v1/boatshop/purchase
+```
+
 Manually verify the assets endpoints:
 
 ```

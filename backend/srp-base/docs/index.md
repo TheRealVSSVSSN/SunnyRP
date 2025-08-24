@@ -116,3 +116,13 @@ Introduced base event logging to support the **baseevents** resource.
 
 * Added Base Events module with `GET /v1/base-events` and `POST /v1/base-events` endpoints.
 
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/baseevents.md`.
+
+## Update – 2025-08-24
+
+Introduced boat catalog and purchase endpoints to support the **boatshop** resource.
+
+* Added Boatshop module with `GET /v1/boatshop` and `POST /v1/boatshop/purchase` endpoints.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/boatshop.md`.
+

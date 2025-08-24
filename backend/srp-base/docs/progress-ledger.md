@@ -24,3 +24,4 @@
 | 20 | apartments | Apartment definitions and resident assignments | Extend | Added character-scoped residency and GET filter |
 | 21 | banking | Character bank accounts and transactions | Extend | Added account and transaction APIs |
 | 22 | baseevents | Player lifecycle and combat events logging | Create | Added base event log API |
+| 23 | boatshop | Boat catalog and purchases for characters | Create | Added listing and purchase endpoints |

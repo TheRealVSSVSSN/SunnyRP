@@ -948,6 +948,15 @@ components:
         metadata:
           type: object
           nullable: true
+    Boat:
+      type: object
+      properties:
+        id:
+          type: integer
+        model:
+          type: string
+        price:
+          type: integer
 security:
   - ApiToken: []
 paths:
@@ -3542,5 +3551,60 @@ paths:
                     type: string
                   traceId:
                     type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/boatshop:
+    get:
+      summary: List boats available for purchase
+      tags:
+        - boatshop
+      responses:
+        '200':
+          description: Boat catalog
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Boat'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/boatshop/purchase:
+    post:
+      summary: Purchase a boat
+      tags:
+        - boatshop
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - characterId
+                - boatId
+                - plate
+              properties:
+                characterId:
+                  type: string
+                boatId:
+                  type: integer
+                plate:
+                  type: string
+                properties:
+                  type: object
+                  additionalProperties: true
+      responses:
+        '200':
+          description: Purchase result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  price:
+                    type: integer
         '400':
           $ref: '#/components/responses/BadRequest'

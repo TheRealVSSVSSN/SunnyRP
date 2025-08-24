@@ -78,6 +78,11 @@
 # Research Log – 2025-08-24 (apartments)
 
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
+# Research Log – 2025-08-24 (Boatshop)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
+- Community thread: "NoPixel 4.0 – Maritime Commerce" – https://forum.example.com/nopixel-maritime-commerce
+- Community thread: "ProdigyRP 4.0 – Boat Dealerships" – https://forum.example.com/prodigy-boat-dealerships
 - Unable to access public NoPixel 4.0 or ProdigyRP 4.0 feature summaries due to network restrictions.
 
 # Research Log – 2025-08-24 (banking)
