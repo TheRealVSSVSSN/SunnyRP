@@ -1290,3 +1290,19 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Remove scheduler registration and event broadcasts; drop index `idx_assets_created_at`.
+
+## 2025-08-25 – Properties module
+
+### Added
+* Unified properties API consolidating apartments, garages and rentals.
+* WebSocket and webhook events for property create/update/delete.
+* Hourly `properties-expire` scheduler releasing leases past `expires_at`.
+
+### Migrations
+* `066_add_properties.sql`
+
+### Risks
+* Incorrect scheduler interval may release active leases prematurely.
+
+### Rollback
+* Remove properties routes and scheduler; drop `properties` table.

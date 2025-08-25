@@ -3,6 +3,7 @@
 - Added hourly purge and expiry events for Wise Wheels spins.
 - Indexed `wise_wheels_spins.created_at` for efficient retention cleanup.
 - Broadcast asset create/delete events and scheduled asset retention cleanup.
+- Added unified properties backend with lease expiry scheduler.
 
 | File | Action | Note |
 |---|---|---|
@@ -27,3 +28,23 @@
 | docs/run-docs.md | M | Summary of this run |
 | docs/research-log.md | M | Logged assets research |
 | CHANGELOG.md | M | Release notes for assets retention |
+| src/repositories/propertiesRepository.js | A | Property persistence helpers |
+| src/routes/properties.routes.js | A | `/v1/properties` endpoints |
+| src/tasks/properties.js | A | Hourly lease expiry task |
+| src/server.js | M | Registers `properties-expire` task |
+| src/app.js | M | Mounts properties routes |
+| src/migrations/066_add_properties.sql | A | Properties table |
+| openapi/api.yaml | M | Documented properties paths and schemas |
+| docs/modules/properties.md | A | Module docs |
+| docs/events-and-rpcs.md | M | Mapped property events |
+| docs/db-schema.md | M | Documented properties table |
+| docs/migrations.md | M | Listed properties migration |
+| docs/admin-ops.md | M | Properties table notes |
+| docs/naming-map.md | M | apartments/garages → properties |
+| docs/research-log.md | M | Logged properties research |
+| docs/index.md | M | Update summary for properties module |
+| docs/progress-ledger.md | M | Logged properties module |
+| docs/framework-compliance.md | M | Evaluation update |
+| docs/todo-gaps.md | A | Outstanding tasks |
+| docs/run-docs.md | M | Run summary updated |
+| docs/BASE_API_DOCUMENTATION.md | M | Documented properties endpoints |

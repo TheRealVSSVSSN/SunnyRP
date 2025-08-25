@@ -10,3 +10,5 @@
 | assets_maps | assets-maps |
 | assets_weapons | weapons |
 | assets_clothes | clothes |
+| apartments | properties |
+| garages | properties |

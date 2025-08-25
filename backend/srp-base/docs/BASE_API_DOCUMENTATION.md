@@ -469,6 +469,12 @@ To support all features present in the original server resources at the framewor
 - **drz_interiors** – Stores interior layouts per apartment.
   - `GET /v1/apartments/{apartmentId}/interior?characterId={cid}` – Retrieve interior layout.
   - `POST /v1/apartments/{apartmentId}/interior` – Save interior layout (`characterId`, `template`).
+- **srp-properties** – Unified housing (apartments, garages, hotel rooms).
+  - `GET /v1/properties?type=&ownerCharacterId=` – List properties.
+  - `POST /v1/properties` – Create a property.
+  - `GET /v1/properties/{propertyId}` – Retrieve a property.
+  - `PATCH /v1/properties/{propertyId}` – Update a property.
+  - `DELETE /v1/properties/{propertyId}` – Delete a property.
 - **srp-zones** – Stores polygonal zone definitions for world interactions.
   - `GET /v1/zones` – List active zones.
   - `POST /v1/zones` – Create a zone with `name`, `type`, `data` and optional `expiresAt`; pushes `zone.created`.

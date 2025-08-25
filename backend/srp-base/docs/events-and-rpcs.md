@@ -14,7 +14,7 @@
 | WiseGuy-Wheels | Resource records wheel spin outcomes per character | `GET /v1/wise-wheels/spins/:characterId`, `POST /v1/wise-wheels/spins` → pushes `wise-wheels.spin.created`; scheduler emits `wise-wheels.spin.expired` |
 | assets | Resource stores media or item assets linked to characters | `GET /v1/assets`, `GET /v1/assets/{id}`, `POST /v1/assets`, `DELETE /v1/assets/{id}` → pushes `assets.assetCreated`/`assets.assetDeleted` |
 | assets_clothes | Resource saves and retrieves character outfits | `GET /v1/clothes`, `POST /v1/clothes`, `DELETE /v1/clothes/{id}` |
-| apartments | Resource triggers events when characters claim or vacate apartments | `GET /v1/apartments` with optional `characterId` filter and resident assignment endpoints |
+| properties | Resource manages apartments, garages and rentals with ownership and lease events | `GET/POST/PATCH/DELETE /v1/properties`; broadcasts `properties.propertyCreated`/`properties.propertyUpdated`/`properties.propertyDeleted` |
 | banking | Resource processes deposits, withdrawals and transfers between characters | `POST /v1/characters/{characterId}/account:deposit`, `POST /v1/characters/{characterId}/account:withdraw`, `POST /v1/transactions` |
 | maps | No server events; world mapping assets | N/A |
 | furnished-shells | No server events; interior shell assets | N/A |

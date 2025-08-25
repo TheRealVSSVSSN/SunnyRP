@@ -405,3 +405,12 @@ Extended parity for the **PolyZone** resource with expiration and real-time push
 * Zone creation and deletion events broadcast via WebSocket and webhook dispatcher.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/zones.md`.
+
+## Update – 2025-08-25
+
+Introduced unified properties backend to consolidate apartments, garages and hotel rentals.
+
+* Added `/v1/properties` CRUD endpoints with WebSocket and webhook events.
+* Hourly `properties-expire` scheduler releases leases past `expires_at`.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/properties.md`.
