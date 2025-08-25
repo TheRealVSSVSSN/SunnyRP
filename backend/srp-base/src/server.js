@@ -5,6 +5,10 @@ const websocket = require('./realtime/websocket');
 const scheduler = require('./bootstrap/scheduler');
 const casinoTasks = require('./tasks/diamondCasino');
 const interactSoundTasks = require('./tasks/interactSound');
+const dispatchTasks = require('./tasks/dispatch');
+const zoneTasks = require('./tasks/zones');
+const wiseImportsTasks = require('./tasks/wiseImports');
+const wiseWheelsTasks = require('./tasks/wiseWheels');
 
 // Register Prometheus metrics if enabled.  This must be done before
 // the server starts so that middleware can increment counters.
@@ -22,6 +26,20 @@ const wss = websocket.init(server);
 // Scheduled tasks
 scheduler.register('casino-resolver', () => casinoTasks.resolvePending(wss), 30000, { jitter: 5000 });
 scheduler.register('interact-sound-purge', () => interactSoundTasks.purgeOld(), 3600000, { jitter: 60000 });
+scheduler.register('dispatch-alert-purge', () => dispatchTasks.purgeOld(), 3600000, { jitter: 60000 });
+scheduler.register('zone-expiry-purge', () => zoneTasks.pruneExpired(), 60000, { jitter: 5000 });
+scheduler.register(
+  wiseImportsTasks.JOB_NAME,
+  () => wiseImportsTasks.notifyReady(),
+  wiseImportsTasks.INTERVAL_MS,
+  { jitter: 60000, persistName: wiseImportsTasks.JOB_NAME },
+);
+scheduler.register(
+  wiseWheelsTasks.JOB_NAME,
+  () => wiseWheelsTasks.purgeOld(),
+  wiseWheelsTasks.INTERVAL_MS,
+  { jitter: 60000 },
+);
 
 // Handle graceful shutdown
 function shutdown() {

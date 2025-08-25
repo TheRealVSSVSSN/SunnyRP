@@ -32,6 +32,14 @@ Introduced basic zone management to support the **PolyZone** resource.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/zones.md`.
 
+## Update – 2025-08-25
+
+Extended parity for the **Wise Wheels** resource by introducing spin retention and expiry events.
+
+* Spins older than 30 days are purged hourly, broadcasting `wise-wheels.spin.expired` via WebSocket and webhooks.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/wise-wheels.md`.
+
 ## Update – 2025-08-24
 
 Introduced audio track storage to support the **Wise Audio** resource.
@@ -117,6 +125,15 @@ Introduced base event logging to support the **baseevents** resource.
 * Added Base Events module with `GET /v1/base-events` and `POST /v1/base-events` endpoints.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/baseevents.md`.
+
+## Update – 2025-03-15
+
+Enhanced the Wise Imports module with scheduler-driven order readiness and delivery confirmation.
+
+* Added background task promoting pending orders to ready status with real-time pushes.
+* Added `POST /v1/wise-imports/orders/{id}/deliver` endpoint to finalize deliveries.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/wise-imports.md`.
 
 ## Update – 2025-08-24
 
@@ -362,3 +379,20 @@ Expanded parity for the **InteractSound** cluster by pushing sound play events o
 * Broadcast `interactSound.play` events to connected clients.
 * Added admin webhook endpoint management at `/v1/hooks/endpoints`.
 * Scheduler task removes plays older than `INTERACT_SOUND_RETENTION_MS`.
+
+## Update – 2025-08-25
+
+Consolidated police dispatch responsibilities with real-time push and retention.
+
+* Broadcast and webhook `dispatchAlert` and `dispatchAck` events.
+* Scheduler purges `dispatch_alerts` older than `DISPATCH_ALERT_RETENTION_MS`.
+* Documented dispatch APIs in OpenAPI and module docs.
+
+## Update – 2025-02-14
+
+Extended parity for the **PolyZone** resource with expiration and real-time pushes.
+
+* Zones may specify `expiresAt`; a scheduler purges expired entries hourly.
+* Zone creation and deletion events broadcast via WebSocket and webhook dispatcher.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/zones.md`.

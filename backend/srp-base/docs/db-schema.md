@@ -38,6 +38,20 @@ Added `world_forecast` table for weather scheduling. K9 migration renamed to 057
 | volume | FLOAT | Playback volume |
 | played_at | BIGINT | Epoch milliseconds |
 
+## dispatch_alerts
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| code | VARCHAR(10) | Alert code |
+| title | VARCHAR(255) | Short description |
+| description | TEXT | Detailed info |
+| sender | VARCHAR(255) | Originating unit |
+| coords | JSON | Location data |
+| status | ENUM('new','acknowledged') | Default 'new' |
+| created_at | TIMESTAMP | Indexed by `idx_dispatch_alerts_created_at` |
+| updated_at | TIMESTAMP | Auto updated |
+
 ## jobs
 
 | Column | Type | Notes |
@@ -99,6 +113,7 @@ Added `world_forecast` table for weather scheduling. K9 migration renamed to 057
 | data | JSON | Coordinates and dimensions |
 | created_by | BIGINT | Optional character ID |
 | created_at | TIMESTAMP | Creation time |
+| expires_at | TIMESTAMP | Optional expiration time |
 
 ## wise_audio_tracks
 
@@ -118,7 +133,8 @@ Added `world_forecast` table for weather scheduling. K9 migration renamed to 057
 | character_id | BIGINT | Owning character |
 | model | VARCHAR(64) | Vehicle model identifier |
 | status | VARCHAR(32) | Order status |
-| created_at | BIGINT | Epoch milliseconds |
+| created_at | BIGINT | Created timestamp (ms) |
+| updated_at | BIGINT | Last status update timestamp (ms) |
 
 ## wise_uc_profiles
 
@@ -139,6 +155,11 @@ Added `world_forecast` table for weather scheduling. K9 migration renamed to 057
 | character_id | BIGINT | Owning character |
 | prize | VARCHAR(255) | Prize description |
 | created_at | BIGINT | Epoch milliseconds |
+
+Indexes:
+
+* `idx_wise_wheels_character` on `character_id`
+* `idx_wise_wheels_created` on `created_at`
 
 ## assets
 

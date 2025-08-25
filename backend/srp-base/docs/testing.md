@@ -58,7 +58,7 @@ Manually verify the zones endpoints:
 ```sh
 curl -H 'X-API-Token: <token>' http://localhost:3010/v1/zones
 curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: z1' -H 'Content-Type: application/json' \
-  -d '{"name":"prison","type":"poly","data":{}}' \
+  -d '{"name":"prison","type":"poly","data":{},"expiresAt":"2025-12-31T00:00:00Z"}' \
   http://localhost:3010/v1/zones
 curl -H 'X-API-Token: <token>' -X DELETE http://localhost:3010/v1/zones/1
 ```
@@ -79,6 +79,9 @@ curl -H 'X-API-Token: <token>' http://localhost:3010/v1/wise-imports/orders/char
 curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: wi1' -H 'Content-Type: application/json' \
   -d '{"characterId":"char123","model":"sultan"}' \
   http://localhost:3010/v1/wise-imports/orders
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: wi2' -H 'Content-Type: application/json' \
+  -d '{"characterId":"char123"}' \
+  http://localhost:3010/v1/wise-imports/orders/1/deliver
 ```
 
 Manually verify the wise uc endpoints:
@@ -98,6 +101,8 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: ww1' -H 'Content-Type: app
   -d '{"characterId":"char123","prize":"cash"}' \
   http://localhost:3010/v1/wise-wheels/spins
 ```
+
+To test spin expiry, manually backdate a record in `wise_wheels_spins` by more than 30 days and wait for the `wise-wheels-expire` scheduler to emit a `wise-wheels.spin.expired` event.
 
 Manually verify the boatshop endpoints:
 

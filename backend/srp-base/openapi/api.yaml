@@ -743,6 +743,9 @@ components:
         createdAt:
           type: integer
           format: int64
+        updatedAt:
+          type: integer
+          format: int64
     WiseImportOrderCreateRequest:
       type: object
       required:
@@ -911,6 +914,10 @@ components:
         createdAt:
           type: string
           format: date-time
+        expiresAt:
+          type: string
+          format: date-time
+          nullable: true
     ZoneCreateRequest:
       type: object
       required:
@@ -926,6 +933,10 @@ components:
           type: object
         createdBy:
           type: integer
+          nullable: true
+        expiresAt:
+          type: string
+          format: date-time
           nullable: true
     Apartment:
       type: object
@@ -1786,6 +1797,62 @@ components:
       createdAt:
         type: string
         format: date-time
+  DispatchAlert:
+    type: object
+    properties:
+      id:
+        type: integer
+      code:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+        nullable: true
+      sender:
+        type: string
+        nullable: true
+      coords:
+        type: object
+        additionalProperties: true
+        nullable: true
+      status:
+        type: string
+      created_at:
+        type: string
+        format: date-time
+      updated_at:
+        type: string
+        format: date-time
+  DispatchAlertCreateRequest:
+    type: object
+    required:
+      - code
+      - title
+    properties:
+      code:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+        nullable: true
+      sender:
+        type: string
+        nullable: true
+      coords:
+        type: object
+        additionalProperties: true
+        nullable: true
+  DispatchCode:
+    type: object
+    properties:
+      id:
+        type: integer
+      code:
+        type: string
+      description:
+        type: string
 security:
   - ApiToken: []
 paths:
@@ -4732,6 +4799,7 @@ paths:
   /v1/wise-audio/tracks:
     post:
       summary: Create an audio track
+      description: Stores a track and broadcasts `wise-audio.track.created` via WebSocket and webhooks.
       operationId: createWiseAudioTrack
       requestBody:
         required: true
@@ -4796,6 +4864,7 @@ paths:
   /v1/wise-imports/orders:
     post:
       summary: Create an import order
+      description: Stores an order and broadcasts `wise-imports.order.created` via WebSocket and webhooks.
       operationId: createWiseImportOrder
       requestBody:
         required: true
@@ -4839,6 +4908,51 @@ paths:
           description: List of orders
           content:
             application/json:
+          schema:
+            type: object
+            properties:
+              ok:
+                type: boolean
+              data:
+                type: object
+                properties:
+                  orders:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/WiseImportOrder'
+              requestId:
+                type: string
+              traceId:
+                type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/wise-imports/orders/{id}/deliver:
+    post:
+      summary: Mark an import order as delivered
+      description: Updates status to delivered and broadcasts `wise-imports.order.delivered`.
+      operationId: deliverWiseImportOrder
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - characterId
+              properties:
+                characterId:
+                  type: string
+      responses:
+        '200':
+          description: Order delivered
+          content:
+            application/json:
               schema:
                 type: object
                 properties:
@@ -4847,10 +4961,8 @@ paths:
                   data:
                     type: object
                     properties:
-                      orders:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/WiseImportOrder'
+                      delivered:
+                        type: boolean
                   requestId:
                     type: string
                   traceId:
@@ -5055,6 +5167,7 @@ paths:
   /v1/wise-uc/profiles:
     post:
       summary: Create or update an undercover profile
+      description: Upserts a profile and broadcasts `wise-uc.profile.upserted` via WebSocket and webhooks.
       operationId: upsertWiseUCProfile
       requestBody:
         required: true
@@ -5119,6 +5232,7 @@ paths:
   /v1/wise-wheels/spins:
     post:
       summary: Record a wheel spin result
+      description: Stores a spin result and broadcasts `wise-wheels.spin.created` via WebSocket and webhooks. Spins older than 30 days are purged hourly with `wise-wheels.spin.expired` events.
       operationId: createWiseWheelsSpin
       requestBody:
         required: true
@@ -7312,6 +7426,122 @@ paths:
                     properties:
                       removed:
                         type: integer
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/dispatch/alerts:
+    get:
+      summary: List dispatch alerts
+      operationId: listDispatchAlerts
+      responses:
+        '200':
+          description: Alerts list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      alerts:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/DispatchAlert'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+    post:
+      summary: Create dispatch alert
+      operationId: createDispatchAlert
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DispatchAlertCreateRequest'
+      responses:
+        '200':
+          description: Alert created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      alert:
+                        $ref: '#/components/schemas/DispatchAlert'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/dispatch/alerts/{id}/ack:
+    patch:
+      summary: Acknowledge dispatch alert
+      operationId: acknowledgeDispatchAlert
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Alert acknowledged
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      acknowledged:
+                        type: boolean
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/dispatch/codes:
+    get:
+      summary: List dispatch codes
+      operationId: listDispatchCodes
+      responses:
+        '200':
+          description: Codes list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      codes:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/DispatchCode'
                   requestId:
                     type: string
                   traceId:

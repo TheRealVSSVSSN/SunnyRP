@@ -435,6 +435,7 @@ To support all features present in the original server resources at the framewor
 - **srp-wise-imports** – Manages vehicle import orders.
   - `GET /v1/wise-imports/orders/{characterId}` – List import orders for a character.
   - `POST /v1/wise-imports/orders` – Create an order with `characterId` and `model`.
+  - `POST /v1/wise-imports/orders/{id}/deliver` – Mark a ready order as delivered.
 - **srp-import-pack** – Tracks vehicle import packages.
   - `GET /v1/import-pack/orders/character/{characterId}` – List import package orders for a character.
   - `GET /v1/import-pack/orders/{id}?characterId={characterId}` – Fetch a specific order.
@@ -449,6 +450,7 @@ To support all features present in the original server resources at the framewor
 - **srp-wise-wheels** – Records wheel spin results.
   - `GET /v1/wise-wheels/spins/{characterId}` – List spins for a character.
   - `POST /v1/wise-wheels/spins` – Record a spin with `characterId` and `prize`.
+  - Spins older than 30 days are purged hourly, emitting `wise-wheels.spin.expired`.
 - **srp-assets** – Stores references to character-bound assets such as images or media.
   - `GET /v1/assets?ownerId={cid}` – List assets for a character.
   - `GET /v1/assets/{id}` – Retrieve an asset by id.
@@ -467,9 +469,9 @@ To support all features present in the original server resources at the framewor
   - `GET /v1/apartments/{apartmentId}/interior?characterId={cid}` – Retrieve interior layout.
   - `POST /v1/apartments/{apartmentId}/interior` – Save interior layout (`characterId`, `template`).
 - **srp-zones** – Stores polygonal zone definitions for world interactions.
-  - `GET /v1/zones` – List zones.
-  - `POST /v1/zones` – Create a zone with `name`, `type`, and `data`.
-  - `DELETE /v1/zones/{id}` – Remove a zone.
+  - `GET /v1/zones` – List active zones.
+  - `POST /v1/zones` – Create a zone with `name`, `type`, `data` and optional `expiresAt`; pushes `zone.created`.
+  - `DELETE /v1/zones/{id}` – Remove a zone and push `zone.deleted`.
 - **srp-diamond-blackjack** – Records casino blackjack hand history.
   - `GET /v1/diamond-blackjack/hands/:characterId` – List recent hands for a character.
   - `POST /v1/diamond-blackjack/hands` – Record a hand result with `characterId`, `tableId`, `bet`, `payout`, `dealerHand`, `playerHand` and optional `playedAt`.
@@ -612,3 +614,16 @@ Added world timecycle management endpoints.
 - `GET /v1/hooks/endpoints` – list registered webhook sinks (admin).
 - `POST /v1/hooks/endpoints` – register a webhook sink (admin).
 - `DELETE /v1/hooks/endpoints/{id}` – remove a webhook sink (admin).
+
+## Update – 2025-08-25 (police dispatch)
+
+Added dispatch alert APIs with WebSocket and webhook push.
+
+### Endpoints
+
+- `GET /v1/dispatch/alerts` – list recent dispatch alerts.
+- `POST /v1/dispatch/alerts` – create a dispatch alert (requires `X-Idempotency-Key`).
+- `PATCH /v1/dispatch/alerts/{id}/ack` – acknowledge an alert (requires `X-Idempotency-Key`).
+- `GET /v1/dispatch/codes` – list configured dispatch codes.
+
+All endpoints require standard authentication headers.

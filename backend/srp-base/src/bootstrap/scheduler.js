@@ -1,4 +1,5 @@
 const logger = require('../utils/logger');
+const cronRepo = require('../repositories/cronRepository');
 
 const tasks = [];
 
@@ -9,6 +10,9 @@ function schedule(task) {
     task.lastRun = Date.now();
     try {
       await task.fn(task);
+      if (task.persistName) {
+        await cronRepo.updateLastRun(task.persistName, new Date(task.lastRun).toISOString());
+      }
     } catch (err) {
       logger.error({ err }, `Scheduler task ${task.name} failed`);
     }
@@ -23,6 +27,7 @@ function register(name, fn, intervalMs, options = {}) {
     fn,
     intervalMs,
     jitter: options.jitter || 0,
+    persistName: options.persistName,
     lastRun: 0,
     nextRun: Date.now() + intervalMs,
   };

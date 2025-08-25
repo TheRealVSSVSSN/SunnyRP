@@ -63,7 +63,12 @@ async function createJob({ name, schedule, payload, accountId, characterId, prio
   };
 }
 
+async function updateLastRun(name, lastRun) {
+  await db.query('UPDATE cron_jobs SET last_run = ? WHERE name = ?', [lastRun, name]);
+}
+
 module.exports = {
   getAllJobs,
   createJob,
+  updateLastRun,
 };

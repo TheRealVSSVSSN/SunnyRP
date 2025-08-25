@@ -34,10 +34,15 @@ async function getCodes() {
   return rows;
 }
 
+async function deleteOlderThan(cutoff) {
+  await query('DELETE FROM dispatch_alerts WHERE created_at < FROM_UNIXTIME(?)', [Math.floor(cutoff / 1000)]);
+}
+
 module.exports = {
   getAlerts,
   getAlert,
   createAlert,
   acknowledgeAlert,
   getCodes,
+  deleteOlderThan,
 };

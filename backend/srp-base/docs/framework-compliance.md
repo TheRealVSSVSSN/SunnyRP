@@ -41,11 +41,12 @@ practice is supported by citations.
 
 | **Interact Sound module** | Sound play logging endpoints follow the same patterns with validation and repository abstractions. |
 | **PolicePack module** | Evidence custody chain and character selection endpoints respect layered design, authentication and idempotency. |
-| **Zones module** | Zone definition endpoints follow the established layered pattern with authentication and idempotency. |
+| **Zones module** | Zone endpoints now support expiration with scheduled purges and broadcast create/delete events over WebSocket and webhooks. |
 | **Wise Audio module** | Audio track storage endpoints follow the established layered pattern with authentication and idempotency. |
 | **Wise Imports module** | Import order endpoints follow the established layered pattern with authentication and idempotency. |
 | **Wise UC module** | Undercover profile endpoints follow the established layered pattern with authentication and idempotency. |
-| **Wise Wheels module** | Wheel spin endpoints follow the established layered pattern with authentication and idempotency. |
+| **Wise Wheels module** | Wheel spin endpoints follow the established layered pattern with authentication and idempotency. Scheduler purges spins older than 30 days with expiry events. |
+| **Wise cluster realtime** | Wise Audio/Imports/UC/Wheels broadcast create events over WebSockets and webhooks, reducing client polling. |
 | **assets module** | Asset endpoints follow the established layered pattern with authentication, rate limiting and idempotency. |
 | **clothes module** | Clothing endpoints follow the established layered pattern with authentication, rate limiting and idempotency. |
 | **economy module** | Banking endpoints follow the established layered pattern with authentication and idempotency. |
@@ -64,6 +65,8 @@ practice is supported by citations.
 * **Casino logic:** implement full payout rules for all casino game types.
 * **Webhook endpoints:** admin CRUD added; implement secret rotation.
 * **Base API documentation:** update global API docs for new realtime components.
+* **Dispatch workflow:** implement call assignment and unit tracking.
+* **Wise Imports:** add order cancellation and ownership integration.
 | **baseevents module** | Base event logging endpoints follow the established layered pattern with authentication and idempotency. |
 | **boatshop module** | Boatshop endpoints follow the established layered pattern with authentication and idempotency. |
 | **camera module** | Photo storage endpoints follow the established layered pattern with authentication and idempotency. |
@@ -96,3 +99,4 @@ practice is supported by citations.
 | **Scheduler** | Jittered task runner replaces client loops for casino resolutions. |
 | **Webhook dispatcher** | HMAC-signed webhook publisher with retries and dead-letter logging. |
 | **world module** | World state, forecast and timecycle endpoints follow the established layered pattern with authentication and idempotency. |
+| **dispatch module** | Dispatch alert endpoints follow the established layered pattern with authentication and idempotency. |

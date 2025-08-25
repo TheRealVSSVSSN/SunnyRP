@@ -11,8 +11,8 @@ There is no feature flag for this module; it is always enabled.
 | Method & Path | Description | Rate Limit | Auth | Idempotent | Request Body | Response |
 |---|---|---|---|---|---|---|
 | **GET `/v1/zones`** | List defined zones. | n/a | Required | Yes | None | `200 { ok, data: { zones: Zone[] }, requestId, traceId }` |
-| **POST `/v1/zones`** | Create a new zone. | n/a | Required | Yes (use `X-Idempotency-Key`) | `ZoneCreateRequest` | `200 { ok, data: { zone: Zone }, requestId, traceId }` |
-| **DELETE `/v1/zones/{id}`** | Remove a zone. | n/a | Required | Yes | None | `200 { ok, requestId, traceId }` |
+| **POST `/v1/zones`** | Create a new zone. Broadcasts `zone.created` over WebSocket and webhooks. | n/a | Required | Yes (use `X-Idempotency-Key`) | `ZoneCreateRequest` | `200 { ok, data: { zone: Zone }, requestId, traceId }` |
+| **DELETE `/v1/zones/{id}`** | Remove a zone. Broadcasts `zone.deleted` over WebSocket and webhooks. | n/a | Required | Yes | None | `200 { ok, requestId, traceId }` |
 
 ### Schemas
 
@@ -24,6 +24,7 @@ There is no feature flag for this module; it is always enabled.
   data: object
   createdBy: integer | null
   createdAt: string(date-time)
+  expiresAt: string(date-time) | null
   ```
 
 * **ZoneCreateRequest** –
@@ -32,11 +33,12 @@ There is no feature flag for this module; it is always enabled.
   type: string (required)
   data: object (required)
   createdBy: integer (optional)
+  expiresAt: string(date-time) | null
   ```
 
 ## Implementation details
 
-* **Repository:** `src/repositories/zonesRepository.js` provides `listZones`, `createZone` and `deleteZone`.
-* **Migration:** `src/migrations/025_add_zones.sql` creates the `zones` table.
-* **Routes:** `src/routes/zones.routes.js` defines HTTP endpoints.
+* **Repository:** `src/repositories/zonesRepository.js` provides `listZones`, `createZone`, `deleteZone` and `removeExpiredZones`.
+* **Migration:** `src/migrations/025_add_zones.sql` creates the `zones` table; `062_add_zone_expiry.sql` adds `expires_at`.
+* **Routes:** `src/routes/zones.routes.js` defines HTTP endpoints and broadcasts.
 * **OpenAPI:** `openapi/api.yaml` documents `/v1/zones` paths and schemas.

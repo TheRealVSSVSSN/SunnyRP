@@ -1,21 +1,20 @@
 # Run Summary – 2025-08-25
 
 ## Modules
-- InteractSound broadcast & retention
-- Hooks webhook endpoint management
+- Wise Wheels spin expiry scheduler
 
 ## Migrations
-- Renamed `059_add_world_timecycle.sql` to `060_add_world_timecycle.sql`
+- 064_add_wise_wheels_created_index.sql
 
 ## Documentation Updated
-- index.md
-- progress-ledger.md
-- framework-compliance.md
-- BASE_API_DOCUMENTATION.md
-- events-and-rpcs.md
-- db-schema.md
-- migrations.md
-- admin-ops.md
-- modules/interactSound.md
-- modules/hooks.md
-- research-log.md
+- docs/index.md
+- docs/progress-ledger.md
+- docs/framework-compliance.md
+- docs/events-and-rpcs.md
+- docs/BASE_API_DOCUMENTATION.md
+- docs/db-schema.md
+- docs/migrations.md
+- docs/admin-ops.md
+- docs/testing.md
+- docs/modules/wise-wheels.md
+- docs/research-log.md

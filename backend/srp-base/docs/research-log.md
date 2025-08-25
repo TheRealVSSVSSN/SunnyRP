@@ -78,6 +78,11 @@
 # Research Log – 2025-08-24 (apartments)
 
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
+
+# Research Log – 2025-03-15 (Wise Imports ready notifier)
+
+- Cloned `https://github.com/h04X-2K/NoPixelServer` and inspected `resources/WiseGuy-Imports` for vehicle import context.
+- Reviewed vehicle import order flows in ESX (`es_extended`) and ND (`ND_Core`) for status transition patterns.
 # Research Log – 2025-08-24 (Boatshop)
 
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
@@ -249,3 +254,24 @@
 - GitHub repository "ImConsKrypt/SK-Hud" – ProdigyRP-inspired HUD concepts. https://github.com/ImConsKrypt/SK-Hud
 - Reference resources unavailable; proceeding with internal consistency only.
 - InteractSound resource events – https://github.com/h04X-2K/NoPixelServer/blob/main/resources/InteractSound/server/main.lua
+
+## Research Log – 2025-08-25 (Police dispatch)
+
+- Sparse checkout of `resources/PolicePack` from `https://github.com/h04X-2K/NoPixelServer` for police asset naming.
+- ESX police job dispatch flow – https://github.com/ESX-Official/esx_policejob
+
+## Research Log – 2025-02-14 (PolyZone)
+
+- Cloned `https://github.com/h04X-2K/NoPixelServer` and reviewed `resources/PolyZone` for zone definition patterns.
+- Reviewed ND Core and ESX zone handling to align naming and expiration flows.
+
+## Research Log – 2025-08-25 (Wise cluster realtime)
+
+- Reviewed `ws` WebSocket library documentation for broadcast patterns: https://github.com/websockets/ws
+- Reference resources unavailable; proceeding with internal consistency only.
+
+## Research Log – 2025-08-25 (Wise Wheels expiry)
+
+- Scanned `resources/WiseGuy-Wheels` from `https://github.com/h04X-2K/NoPixelServer` for spin logging behavior.
+- Reviewed ESX gambling scripts for spin reward retention patterns: https://github.com/ESX-Official/esx_drpbar
+- Reference resources unavailable; proceeding with internal consistency only.

@@ -1211,3 +1211,66 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Remove hooks routes, dispatcher updates and scheduler task; rename migration back to `059_add_world_timecycle.sql`.
+
+## 2025-08-25 – Police dispatch
+
+### Added
+* Dispatch alert endpoints with WebSocket and webhook push.
+* Scheduler purge for stale alerts.
+
+### Changed
+* Config `DISPATCH_ALERT_RETENTION_MS` for alert retention.
+
+### Migrations
+* `061_add_dispatch_alert_index.sql`.
+
+### Risks
+* Excessive alert volume may overwhelm clients if not filtered.
+
+### Rollback
+* Remove dispatch routes, repository changes and scheduler; drop index `idx_dispatch_alerts_created_at`.
+
+## 2025-02-14 – PolyZone expiration
+
+### Added
+* Zone expiration support with optional `expires_at` column and scheduler purge.
+* WebSocket and webhook broadcasts for `zone.created` and `zone.deleted`.
+
+### Migrations
+* `062_add_zone_expiry.sql`
+
+### Risks
+* Misconfigured expiry times could delete active zones.
+
+### Rollback
+* Drop `expires_at` column from `zones` and remove zone scheduler/broadcast logic.
+
+## 2025-03-15 – Wise Imports scheduler & delivery
+
+### Added
+* Scheduler task to promote pending import orders to `ready` with WebSocket and webhook pushes.
+* `POST /v1/wise-imports/orders/{id}/deliver` endpoint to finalize deliveries.
+
+### Migrations
+* `063_update_wise_import_orders.sql`
+
+### Risks
+* Misconfigured interval may spam readiness events.
+
+### Rollback
+* Remove wise imports scheduler registration and delivery route; drop `updated_at` column and status index from `wise_import_orders`.
+
+## 2025-08-25 – Wise Wheels spin expiry
+
+### Added
+* Hourly scheduler purges `wise_wheels_spins` older than 30 days and emits `wise-wheels.spin.expired` via WebSocket and webhooks.
+* WebSocket/webhook event `wise-wheels.spin.expired` for spin removal.
+
+### Migrations
+* `064_add_wise_wheels_created_index.sql`
+
+### Risks
+* Incorrect system time or misconfigured retention may delete recent spins.
+
+### Rollback
+* Remove scheduler registration, delete `src/tasks/wiseWheels.js`, and drop index `idx_wise_wheels_created`.

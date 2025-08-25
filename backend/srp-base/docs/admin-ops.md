@@ -6,14 +6,18 @@
   ```
 - Ensure the `diamond_casino_games` and `diamond_casino_bets` tables exist after deploying this sprint.
 - Ensure the `interact_sound_plays` table exists after deploying this sprint.
+- Ensure the `dispatch_alerts` table has index `idx_dispatch_alerts_created_at`; tune `DISPATCH_ALERT_RETENTION_MS` for purge interval.
 - Ensure the `doors` table exists to track door states.
 - Manage the Node.js process with tools like `pm2` for restarts and monitoring.
 - Ensure the `evidence_chain` and `character_selections` tables exist after deploying this sprint.
 - Ensure the `zones` table exists for polygonal zone definitions.
+- Ensure `zones` table includes `expires_at`; expired zones are purged hourly by `zone-expiry-purge` scheduler.
 - Ensure the `wise_audio_tracks` table exists for character audio tracks.
 - Ensure the `wise_import_orders` table exists for vehicle import orders.
+  - Ensure `wise_import_orders` includes `updated_at` column and index `idx_wise_import_orders_status`.
 - Ensure the `wise_uc_profiles` table exists for undercover aliases.
 - Ensure the `wise_wheels_spins` table exists for wheel spin history.
+  - Ensure index `idx_wise_wheels_created` exists; spins older than 30 days are purged hourly by `wise-wheels-expire` scheduler.
 - Ensure the `assets` table exists for character asset records.
 - Ensure the `clothes` table exists for character outfit records.
 - Ensure the `apartments` and `apartment_residents` tables exist and include the `character_id` column after deploying this sprint.

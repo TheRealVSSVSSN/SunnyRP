@@ -17,4 +17,11 @@ async function listSpinsByCharacter(characterId, limit = 50) {
   return rows;
 }
 
-module.exports = { createSpin, listSpinsByCharacter };
+async function purgeOldSpins(cutoffMs) {
+  const rows = await db.query('SELECT id FROM wise_wheels_spins WHERE created_at < ?', [cutoffMs]);
+  if (rows.length === 0) return [];
+  await db.query('DELETE FROM wise_wheels_spins WHERE created_at < ?', [cutoffMs]);
+  return rows.map((r) => r.id);
+}
+
+module.exports = { createSpin, listSpinsByCharacter, purgeOldSpins };

@@ -1,6 +1,8 @@
 const express = require('express');
 const { sendOk, sendError } = require('../utils/respond');
 const repo = require('../repositories/wiseWheelsRepository');
+const websocket = require('../realtime/websocket');
+const hooks = require('../hooks/dispatcher');
 
 const router = express.Router();
 
@@ -33,6 +35,8 @@ router.post('/v1/wise-wheels/spins', async (req, res) => {
   }
   try {
     const spin = await repo.createSpin({ characterId, prize });
+    websocket.broadcast('wise-wheels', 'spin-created', { spin });
+    hooks.dispatch('wise-wheels.spin.created', spin);
     sendOk(res, { spin }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(

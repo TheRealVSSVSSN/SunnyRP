@@ -58,3 +58,8 @@
 | 53 | Scheduler | Server-side loop migration | Create | Added jittered task scheduler |
 | 50 | climate-overrides | Timecycle overrides and weather preset controls | Extend | Added world timecycle API |
 | 54 | InteractSound cluster | Sound play logging with WS/webhooks and retention scheduler | Extend | Broadcast plays and purge stale records |
+| 55 | Police dispatch | Alert broadcasting and retention | Extend | WS/webhook push and hourly purge |
+| 56 | PolyZone expiry & pushes | Zone expiration and real-time broadcasts | Extend | Added expiresAt field and scheduler |
+| 57 | Wise cluster realtime | WebSocket/webhook pushes for Wise Audio/Imports/UC/Wheels | Extend | Broadcast create events |
+| 58 | Wise Imports ready notifier | Promote pending import orders to ready via scheduler and delivery endpoint | Extend | Added ready scheduler and `/v1/wise-imports/orders/{id}/deliver` |
+| 59 | WiseGuy-Wheels | Spin retention and expiry events | Extend | Purge spins older than 30 days; broadcast `wise-wheels.spin.expired` |
