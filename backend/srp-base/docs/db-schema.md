@@ -437,3 +437,15 @@
 | armor | INT | Last known armor |
 | updated_at | TIMESTAMP | Update timestamp |
 
+
+## jailbreak_attempts
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| character_id | BIGINT | FK to characters.id |
+| prison | VARCHAR(50) | Prison identifier |
+| status | ENUM('active','completed','failed') | Attempt state |
+| started_at | TIMESTAMP | Start time |
+| ended_at | TIMESTAMP | Completion time |
+| success | TINYINT(1) | 1 success, 0 failure |

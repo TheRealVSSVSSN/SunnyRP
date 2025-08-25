@@ -297,3 +297,10 @@ Introduced ped state persistence to support the **isPed** resource.
 * Added Peds module with `GET /v1/characters/{characterId}/ped` and `PUT /v1/characters/{characterId}/ped` endpoints.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/peds.md`.
+## Update – 2025-08-25
+
+Introduced jailbreak attempt tracking to support the **jailbreak** resource.
+
+* Added Jailbreak module with `/v1/jailbreaks`, `/v1/jailbreaks/active` and `/v1/jailbreaks/{id}/complete` endpoints.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/jailbreak.md`.

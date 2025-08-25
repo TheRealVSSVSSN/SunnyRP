@@ -1612,6 +1612,44 @@ components:
         type: integer
       armor:
         type: integer
+  JailbreakAttempt:
+    type: object
+    properties:
+      id:
+        type: integer
+      characterId:
+        type: integer
+      prison:
+        type: string
+      status:
+        type: string
+      startedAt:
+        type: string
+        format: date-time
+      endedAt:
+        type: string
+        format: date-time
+        nullable: true
+      success:
+        type: boolean
+        nullable: true
+  JailbreakCreateRequest:
+    type: object
+    required:
+      - characterId
+      - prison
+    properties:
+      characterId:
+        type: integer
+      prison:
+        type: string
+  JailbreakCompleteRequest:
+    type: object
+    required:
+      - success
+    properties:
+      success:
+        type: boolean
 security:
   - ApiToken: []
 paths:
@@ -6297,3 +6335,98 @@ paths:
                     type: string
         '400':
           $ref: '#/components/responses/BadRequest'
+
+  /v1/jailbreaks:
+    post:
+      summary: Start a jailbreak attempt
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JailbreakCreateRequest'
+      responses:
+        '200':
+          description: Jailbreak attempt started
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      attempt:
+                        $ref: '#/components/schemas/JailbreakAttempt'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/jailbreaks/{id}/complete:
+    post:
+      summary: Complete a jailbreak attempt
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JailbreakCompleteRequest'
+      responses:
+        '200':
+          description: Jailbreak attempt completed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      attempt:
+                        $ref: '#/components/schemas/JailbreakAttempt'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          description: Not found
+
+  /v1/jailbreaks/active:
+    get:
+      summary: List active jailbreak attempts
+      responses:
+        '200':
+          description: Active jailbreak attempts
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      attempts:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/JailbreakAttempt'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string

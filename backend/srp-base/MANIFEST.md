@@ -11,6 +11,7 @@
 - Added import pack order APIs.
 - Extended import pack order APIs with pricing, retrieval and cancellation.
 - Added ped state APIs.
+- Added jailbreak attempt tracking APIs.
 
 ## File Changes
 
@@ -139,6 +140,23 @@
 | `docs/migrations.md` | M | Listed migration 052 |
 | `docs/modules/import-pack.md` | A | Module documentation |
 | `docs/research-log.md` | M | Logged import-pack research |
+| `src/repositories/jailbreakRepository.js` | A | Persistence for jailbreak attempts |
+| `src/routes/jailbreak.routes.js` | A | REST endpoints for jailbreak tracking |
+| `src/migrations/055_add_jailbreak_attempts.sql` | A | Create `jailbreak_attempts` table |
+| `src/app.js` | M | Mounted jailbreak routes |
+| `openapi/api.yaml` | M | Documented jailbreak schemas and paths |
+| `docs/index.md` | M | Logged jailbreak update |
+| `docs/progress-ledger.md` | M | Added jailbreak entry |
+| `docs/framework-compliance.md` | M | Noted jailbreak module compliance |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented jailbreak endpoints |
+| `docs/events-and-rpcs.md` | M | Mapped jailbreak events |
+| `docs/db-schema.md` | M | Documented `jailbreak_attempts` table |
+| `docs/migrations.md` | M | Listed migration 055 |
+| `docs/admin-ops.md` | M | Added jailbreak table check |
+| `docs/security.md` | M | Added jailbreak security note |
+| `docs/testing.md` | M | Added jailbreak curl examples |
+| `docs/modules/jailbreak.md` | A | Module documentation |
+| `docs/research-log.md` | M | Logged jailbreak research |
 
 | `src/repositories/pedsRepository.js` | A | Persistence for character ped state |
 | `src/routes/peds.routes.js` | A | REST endpoints for ped state |
@@ -165,3 +183,4 @@
 - Run `node src/bootstrap/migrate.js` to apply migration `051_add_heli_flights.sql`.
 - Run `node src/bootstrap/migrate.js` to apply migration `052_add_import_pack_orders.sql`.
 - Run `node src/bootstrap/migrate.js` to apply migration `054_add_character_peds.sql`.
+- Run `node src/bootstrap/migrate.js` to apply migration `055_add_jailbreak_attempts.sql`.

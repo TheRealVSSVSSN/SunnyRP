@@ -337,3 +337,15 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: ped1' -H 'Content-Type: ap
   -d '{"model":"mp_m_freemode_01","health":200,"armor":50}' \
   http://localhost:3010/v1/characters/1/ped
 ```
+
+Manually verify the jailbreak endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: jb1' -H 'Content-Type: application/json' \
+  -d '{"characterId":1,"prison":"bolingbroke"}' \
+  http://localhost:3010/v1/jailbreaks
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: jb2' -H 'Content-Type: application/json' \
+  -d '{"success":true}' \
+  http://localhost:3010/v1/jailbreaks/1/complete
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/jailbreaks/active
+```
