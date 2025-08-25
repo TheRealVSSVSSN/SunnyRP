@@ -100,3 +100,10 @@ practice is supported by citations.
 | **Webhook dispatcher** | HMAC-signed webhook publisher with retries and dead-letter logging. |
 | **world module** | World state, forecast and timecycle endpoints follow the established layered pattern with authentication and idempotency. |
 | **dispatch module** | Dispatch alert endpoints follow the established layered pattern with authentication and idempotency. |
+| **properties module** | Property endpoints consolidate apartments, garages and rentals with layered design, rate limiting, idempotency, WebSocket/webhook events and lease expiry scheduler. |
+
+## Outstanding Items
+
+- Integrate OpenAPI validation middleware for all routes.
+- Add unit test coverage.
+- Migrate legacy apartments and garages routes to `/v1/properties`.

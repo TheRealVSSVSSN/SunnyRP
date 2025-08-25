@@ -58,6 +58,7 @@ const broadcasterRoutes = require('./routes/broadcaster.routes');
 const gangsRoutes = require('./routes/gangs.routes');
 const garagesRoutes = require('./routes/garages.routes');
 const apartmentsRoutes = require('./routes/apartments.routes');
+const propertiesRoutes = require('./routes/properties.routes');
 const policeRoutes = require('./routes/police.routes');
 
 // weed plants domain routes
@@ -205,6 +206,7 @@ app.use(broadcasterRoutes);
 app.use(gangsRoutes);
 app.use(garagesRoutes);
 app.use(apartmentsRoutes);
+app.use(propertiesRoutes);
 app.use(policeRoutes);
 
 // mount weed plants routes

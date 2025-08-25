@@ -64,3 +64,4 @@
 | 58 | Wise Imports ready notifier | Promote pending import orders to ready via scheduler and delivery endpoint | Extend | Added ready scheduler and `/v1/wise-imports/orders/{id}/deliver` |
 | 59 | WiseGuy-Wheels | Spin retention and expiry events | Extend | Purge spins older than 30 days; broadcast `wise-wheels.spin.expired` |
 | 60 | assets realtime | Asset create/delete pushes and cleanup scheduler | Extend | Broadcast events and hourly purge |
+| 61 | properties | Unified apartments, garages and rentals backend | Create | Added properties API and lease expiry scheduler |

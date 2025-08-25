@@ -280,3 +280,9 @@
 
 - Attempted to clone `https://github.com/h04X-2K/NoPixelServer` for assets context but download size exceeded limits. Reference resources unavailable; proceeding with internal consistency only.
 - Reviewed ESX and ND Core documentation for asset cleanup patterns and realtime notifications (conceptual only).
+
+## Research Log – 2025-08-25 (properties)
+
+- Attempted to clone `https://github.com/h04X-2K/NoPixelServer` for apartments/garages context but download size exceeded limits. Reference resources unavailable; proceeding with internal consistency only.
+- Retrieved repo metadata from essentialmode, ESX, ND, FSN, QB, vRP and vORP frameworks for housing flows via `git ls-remote`.
+- Reviewed community discussions on NoPixel/QB/ESX housing systems for naming and lease expiry concepts.

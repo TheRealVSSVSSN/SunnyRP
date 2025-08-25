@@ -971,6 +971,60 @@ components:
         price:
           type: number
           format: float
+    Property:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+          enum: [APARTMENT, GARAGE, HOTEL_ROOM]
+        name:
+          type: string
+        location:
+          type: object
+          nullable: true
+        price:
+          type: number
+          format: float
+        ownerCharacterId:
+          type: integer
+          nullable: true
+        expiresAt:
+          type: string
+          format: date-time
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+          nullable: true
+    PropertyCreateRequest:
+      type: object
+      required:
+        - type
+        - name
+      properties:
+        type:
+          type: string
+          enum: [APARTMENT, GARAGE, HOTEL_ROOM]
+        name:
+          type: string
+        location:
+          type: object
+          nullable: true
+        price:
+          type: number
+          format: float
+        ownerCharacterId:
+          type: integer
+          nullable: true
+        expiresAt:
+          type: string
+          format: date-time
+          nullable: true
     ApartmentResident:
       type: object
       properties:
@@ -7548,3 +7602,163 @@ paths:
                     type: string
         '400':
           $ref: '#/components/responses/BadRequest'
+  /v1/properties:
+    get:
+      summary: List properties
+      parameters:
+        - in: query
+          name: type
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: ownerCharacterId
+          schema:
+            type: integer
+          required: false
+      responses:
+        '200':
+          description: Properties list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      properties:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Property'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    post:
+      summary: Create property
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PropertyCreateRequest'
+      responses:
+        '200':
+          description: Property created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      property:
+                        $ref: '#/components/schemas/Property'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/properties/{propertyId}:
+    get:
+      summary: Get property
+      parameters:
+        - in: path
+          name: propertyId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Property found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      property:
+                        $ref: '#/components/schemas/Property'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '404':
+          description: Not found
+    patch:
+      summary: Update property
+      parameters:
+        - in: path
+          name: propertyId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PropertyCreateRequest'
+      responses:
+        '200':
+          description: Property updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      property:
+                        $ref: '#/components/schemas/Property'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '404':
+          description: Not found
+    delete:
+      summary: Delete property
+      parameters:
+        - in: path
+          name: propertyId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Property deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      deleted:
+                        type: boolean
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '404':
+          description: Not found
