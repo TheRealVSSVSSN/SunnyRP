@@ -711,6 +711,9 @@ components:
           type: string
         package:
           type: string
+        price:
+          type: number
+          format: float
         status:
           type: string
         createdAt:
@@ -720,16 +723,24 @@ components:
           type: integer
           format: int64
           nullable: true
+        canceledAt:
+          type: integer
+          format: int64
+          nullable: true
     ImportPackOrderCreateRequest:
       type: object
       required:
         - characterId
         - package
+        - price
       properties:
         characterId:
           type: string
         package:
           type: string
+        price:
+          type: number
+          format: float
     WiseUCProfile:
       type: object
       properties:
@@ -4379,6 +4390,12 @@ paths:
     post:
       summary: Create an import package order
       operationId: createImportPackOrder
+      parameters:
+        - in: header
+          name: X-Idempotency-Key
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -4406,7 +4423,7 @@ paths:
                     type: string
         '400':
           $ref: '#/components/responses/BadRequest'
-  /v1/import-pack/orders/{characterId}:
+  /v1/import-pack/orders/character/{characterId}:
     get:
       summary: List import package orders for a character
       operationId: listImportPackOrders
@@ -4439,6 +4456,45 @@ paths:
                     type: string
         '400':
           $ref: '#/components/responses/BadRequest'
+
+  /v1/import-pack/orders/{id}:
+    get:
+      summary: Get import package order by id
+      operationId: getImportPackOrder
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: characterId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Order details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      order:
+                        $ref: '#/components/schemas/ImportPackOrder'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '404':
+          description: Order not found
+        '400':
+          $ref: '#/components/responses/BadRequest'
   /v1/import-pack/orders/{id}/deliver:
     post:
       summary: Mark import package order as delivered
@@ -4449,6 +4505,11 @@ paths:
           required: true
           schema:
             type: integer
+        - in: header
+          name: X-Idempotency-Key
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: Order delivered
@@ -4470,6 +4531,56 @@ paths:
                     type: string
         '404':
           description: Order not found
+
+  /v1/import-pack/orders/{id}/cancel:
+    post:
+      summary: Cancel import package order
+      operationId: cancelImportPackOrder
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+        - in: header
+          name: X-Idempotency-Key
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - characterId
+              properties:
+                characterId:
+                  type: string
+      responses:
+        '200':
+          description: Order canceled
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      canceled:
+                        type: boolean
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '404':
+          description: Order not found
+        '400':
+          $ref: '#/components/responses/BadRequest'
   /v1/wise-uc/profiles:
     post:
       summary: Create or update an undercover profile

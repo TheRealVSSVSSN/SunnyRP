@@ -1062,3 +1062,21 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Drop `import_pack_orders` table and remove import pack routes.
+
+## 2025-08-25 – import-Pack2
+
+### Added
+
+* Order pricing, retrieval and cancellation endpoints for import packages.
+
+### Migrations
+
+* `053_add_import_pack_order_price_cancel.sql`
+
+### Risks
+
+* Incomplete cancellation logic may leave orders active if race conditions occur.
+
+### Rollback
+
+* Remove new endpoints and drop `price` and `canceled_at` columns from `import_pack_orders`.

@@ -433,7 +433,11 @@ To support all features present in the original server resources at the framewor
   - `GET /v1/wise-imports/orders/{characterId}` – List import orders for a character.
   - `POST /v1/wise-imports/orders` – Create an order with `characterId` and `model`.
 - **srp-import-pack** – Tracks vehicle import packages.
-  - `GET /v1/import-pack/orders/{characterId}` – List import package orders for a character.
+  - `GET /v1/import-pack/orders/character/{characterId}` – List import package orders for a character.
+  - `GET /v1/import-pack/orders/{id}?characterId={characterId}` – Fetch a specific order.
+  - `POST /v1/import-pack/orders` – Create a new import package order.
+  - `POST /v1/import-pack/orders/{id}/deliver` – Mark an order as delivered.
+  - `POST /v1/import-pack/orders/{id}/cancel` – Cancel a pending order.
   - `POST /v1/import-pack/orders` – Create an order with `characterId` and `package`.
   - `POST /v1/import-pack/orders/{id}/deliver` – Mark an order as delivered.
 - **srp-wise-uc** – Manages undercover profiles.

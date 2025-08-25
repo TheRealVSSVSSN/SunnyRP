@@ -33,3 +33,4 @@
 - Hospital routes inherit the same authentication and idempotency requirements.
 - Hardcap routes inherit the same authentication, idempotency and rate limiting requirements.
 - Heli routes inherit the same authentication and idempotency requirements.
+- Import pack routes inherit the same authentication and idempotency requirements.
