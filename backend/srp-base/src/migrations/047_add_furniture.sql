@@ -1,0 +1,13 @@
+CREATE TABLE IF NOT EXISTS furniture (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  character_id INT NOT NULL,
+  item VARCHAR(100) NOT NULL,
+  x DOUBLE NOT NULL,
+  y DOUBLE NOT NULL,
+  z DOUBLE NOT NULL,
+  heading DOUBLE DEFAULT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  INDEX idx_furniture_character_id (character_id),
+  CONSTRAINT fk_furniture_character FOREIGN KEY (character_id) REFERENCES characters(id) ON DELETE CASCADE
+);

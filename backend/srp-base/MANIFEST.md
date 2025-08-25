@@ -3,6 +3,7 @@
 ## Summary
 
 - Added taxi dispatch and ride logging APIs.
+- Added furniture placement APIs.
 
 ## File Changes
 
@@ -24,7 +25,23 @@
 | `docs/modules/taxi.md` | A | Module documentation |
 | `docs/research-log.md` | M | Logged research attempt |
 | `docs/BASE_API_DOCUMENTATION.md` | M | Documented taxi endpoints |
-| `docs/framework-compliance.md` | M | Noted taxi module compliance |
+| `docs/framework-compliance.md` | M | Noted taxi and furniture module compliance |
+| `src/repositories/furnitureRepository.js` | A | Persistence for furniture items |
+| `src/routes/furniture.routes.js` | A | REST endpoints for furniture |
+| `src/migrations/047_add_furniture.sql` | A | Create `furniture` table |
+| `openapi/api.yaml` | M | Documented furniture schemas and paths |
+| `src/app.js` | M | Mounted furniture routes |
+| `docs/index.md` | M | Logged furniture update |
+| `docs/progress-ledger.md` | M | Added furniture entry |
+| `docs/events-and-rpcs.md` | M | Mapped furniture events |
+| `docs/db-schema.md` | M | Documented `furniture` table |
+| `docs/migrations.md` | M | Listed migration 047 |
+| `docs/admin-ops.md` | M | Added furniture table check |
+| `docs/security.md` | M | Added furniture security note |
+| `docs/testing.md` | M | Added furniture curl examples |
+| `docs/modules/furniture.md` | A | Module documentation |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented furniture endpoints |
+| `docs/research-log.md` | M | Logged furniture research attempt |
 
 ## Startup Notes
 

@@ -334,3 +334,17 @@
 | created_at | TIMESTAMP | Creation time |
 | accepted_at | TIMESTAMP | Driver accepted time |
 | completed_at | TIMESTAMP | Completion time |
+
+## furniture
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| character_id | INT | Owning character |
+| item | VARCHAR(100) | Furniture item name |
+| x | DOUBLE | X coordinate |
+| y | DOUBLE | Y coordinate |
+| z | DOUBLE | Z coordinate |
+| heading | DOUBLE | Optional heading |
+| created_at | TIMESTAMP | Creation time |
+| updated_at | TIMESTAMP | Update time |

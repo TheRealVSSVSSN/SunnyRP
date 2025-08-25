@@ -31,3 +31,4 @@
 - Ensure the `character_emotes` table exists for favorite emotes.
 - Ensure the `ems_records` and `ems_shift_logs` tables exist for EMS operations.
 - Ensure the `taxi_rides` table exists for taxi dispatch.
+- Ensure the `furniture` table exists for stored furniture placements.
