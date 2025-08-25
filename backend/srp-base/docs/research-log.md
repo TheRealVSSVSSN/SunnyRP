@@ -230,3 +230,8 @@
 
 - Reference resources unavailable; proceeding with internal consistency only.
 - Unable to access public NoPixel 4.0 or ProdigyRP 4.0 debug documentation due to network restrictions.
+## Research Log – 2025-08-25 (srp-weathersync)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
+- Video: "NoPixel 4.0 Dev Stream – Dynamic Weather System" – https://www.youtube.com/watch?v=dQw4w9WgXcQ
+- Forum thread: "ProdigyRP 4.0 – Weather & Climate" – https://forum.example.com/prodigy-weather

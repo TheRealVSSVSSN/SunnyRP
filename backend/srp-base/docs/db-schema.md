@@ -1,5 +1,5 @@
 # Database Schema
-No schema changes for debug module. K9 migration renamed to 057_add_k9_units.sql.
+Added `world_forecast` table for weather scheduling. K9 migration renamed to 057_add_k9_units.sql.
 
 
 ## diamond_blackjack_hands
@@ -483,3 +483,11 @@ No schema changes for debug module. K9 migration renamed to 057_add_k9_units.sql
 | active | TINYINT(1) | 1 active, 0 inactive |
 | created_at | TIMESTAMP | Creation time |
 | retired_at | TIMESTAMP | Retirement time |
+
+## world_forecast
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| forecast | JSON | Array of weather steps |
+| created_at | TIMESTAMP | Creation time |

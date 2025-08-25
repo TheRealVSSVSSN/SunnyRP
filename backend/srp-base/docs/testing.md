@@ -389,3 +389,16 @@ Manually verify the debug endpoint:
 ```sh
 curl -H 'X-API-Token: <token>' http://localhost:3010/v1/debug/status
 ```
+
+Manually verify the world state and forecast endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/world/state
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: 1' -H 'Content-Type: application/json' \
+  -d '{"time":"12:00","weather":"CLEAR","density":{}}' \
+  http://localhost:3010/v1/world/state
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/world/forecast
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: 2' -H 'Content-Type: application/json' \
+  -d '{"forecast":[{"weather":"RAIN","duration":30}]}' \
+  http://localhost:3010/v1/world/forecast
+```

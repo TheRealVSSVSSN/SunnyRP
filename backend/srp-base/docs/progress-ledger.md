@@ -51,3 +51,4 @@
 | 47 | k9 | Police K9 unit assignments and status tracking | Create | Added K9 unit APIs |
 | 47 | jobsystem | Manage job definitions, assignments and duty status | Create | Added character-scoped jobs API |
 | 48 | srp-debug | Developer diagnostics endpoints | Create | Added server status API |
+| 49 | srp-weathersync | Global weather synchronization with forecast scheduling | Extend | Added world state documentation and forecast API |

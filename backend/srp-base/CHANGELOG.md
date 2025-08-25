@@ -1157,3 +1157,25 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Remove debug routes and repository and restore original migration filename.
+
+## 2025-08-25
+
+### Added
+
+* Weather forecast endpoints `/v1/world/forecast` with persistence and repository.
+
+### Changed
+
+* Documented existing world state endpoints in OpenAPI.
+
+### Migrations
+
+* `058_add_world_forecast.sql`
+
+### Risks
+
+* Forecast data reveals planned weather; ensure API token and HMAC headers are enforced.
+
+### Rollback
+
+* Drop `world_forecast` table and remove world forecast routes.
