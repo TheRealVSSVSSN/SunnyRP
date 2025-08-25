@@ -36,7 +36,6 @@ practice is supported by citations.
 | **Event‑driven design** | As an HTTP API the service does not implement an event bus, but it does persist domain events in an outbox table.  FiveM network events are handled by the Lua layer (outside this service) and forwarded via HTTP. |
 | **Clean code and modularity** | The code is modular and uses CommonJS modules.  Each domain resides in its own file.  ESLint and Prettier configuration are absent; adding them would enforce consistent style. |
 | **Environment management** | The `dotenv` library loads environment variables and the `env.js` config file ensures required variables are present. |
-| **Diamond Blackjack module** | New endpoints for recording blackjack hands follow the established layered architecture with authentication, idempotency and request correlation. |
 | **Interact Sound module** | Sound play logging endpoints follow the same patterns with validation and repository abstractions. |
 | **Doors module** | Door management endpoints documented and aligned with OpenAPI for persistent lock state. |
 
@@ -62,6 +61,9 @@ practice is supported by citations.
 * **Linting and Formatting:** add ESLint and Prettier configurations to enforce coding standards and catch issues early【896482121972210†L482-L525】.
 * **Event bus:** implement an internal event emitter or message queue to decouple complex workflows if required by future features.
 * **Enhanced Metrics:** expand Prometheus metrics to include domain‑specific counters and error rates.
+* **Casino logic:** implement full payout rules for all casino game types.
+* **Webhook endpoints:** add admin CRUD for webhook sinks and secret rotation.
+* **Base API documentation:** update global API docs for new realtime components.
 | **baseevents module** | Base event logging endpoints follow the established layered pattern with authentication and idempotency. |
 | **boatshop module** | Boatshop endpoints follow the established layered pattern with authentication and idempotency. |
 | **camera module** | Photo storage endpoints follow the established layered pattern with authentication and idempotency. |
@@ -88,4 +90,9 @@ practice is supported by citations.
 | **k9 module** | K9 unit endpoints follow the established layered pattern with authentication and idempotency. |
 | **jobs module** | Job CRUD and assignment endpoints follow the established layered pattern with authentication and idempotency. |
 | **broadcaster module** | Broadcaster assignment uses character-scoped job logic and follows the established layered pattern. || **debug module** | Debug status endpoint follows the established layered pattern with authentication and rate limiting. |
+| **world module** | World state and forecast endpoints follow the established layered pattern with authentication and idempotency. |
+| **diamondCasino module** | Casino game endpoints follow the established layered pattern with authentication and idempotency. |
+| **WebSocket gateway** | Provides authenticated connections with heartbeat and at-least-once broadcast semantics. |
+| **Scheduler** | Jittered task runner replaces client loops for casino resolutions. |
+| **Webhook dispatcher** | HMAC-signed webhook publisher with retries and dead-letter logging. |
 | **world module** | World state, forecast and timecycle endpoints follow the established layered pattern with authentication and idempotency. |

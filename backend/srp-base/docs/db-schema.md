@@ -2,18 +2,31 @@
 Added `world_forecast` table for weather scheduling. K9 migration renamed to 057_add_k9_units.sql.
 
 
-## diamond_blackjack_hands
+## diamond_casino_games
 
 | Column | Type | Notes |
 |---|---|---|
 | id | INT AUTO_INCREMENT | Primary key |
-| character_id | VARCHAR(64) | Owning character |
-| table_id | INT | Blackjack table identifier |
-| bet | INT | Wagered chips |
-| payout | INT | Net payout (can be negative) |
-| dealer_hand | VARCHAR(64) | Dealer card representation |
-| player_hand | VARCHAR(64) | Player card representation |
-| played_at | BIGINT | Epoch milliseconds |
+| game_type | VARCHAR(32) | blackjack, slots, horse_racing, etc. |
+| state | VARCHAR(16) | pending or resolved |
+| metadata | JSON | Game-specific data |
+| result | JSON | Resolution result |
+| created_at | BIGINT | Epoch milliseconds |
+| resolved_at | BIGINT | Null until resolved |
+
+## diamond_casino_bets
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| game_id | INT | FK to diamond_casino_games.id |
+| character_id | VARCHAR(64) | Betting character |
+| bet_amount | INT | Wagered chips |
+| bet_data | JSON | Bet details |
+| result | JSON | Outcome data |
+| payout | INT | Payout amount |
+| created_at | BIGINT | Epoch milliseconds |
+| resolved_at | BIGINT | Null until resolved |
 
 ## interact_sound_plays
 

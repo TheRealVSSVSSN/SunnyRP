@@ -1,6 +1,9 @@
 const app = require('./app');
 const config = require('./config/env');
 const logger = require('./utils/logger');
+const websocket = require('./realtime/websocket');
+const scheduler = require('./bootstrap/scheduler');
+const casinoTasks = require('./tasks/diamondCasino');
 
 // Register Prometheus metrics if enabled.  This must be done before
 // the server starts so that middleware can increment counters.
@@ -12,6 +15,11 @@ if (config.enableMetrics) {
 const server = app.listen(config.port, () => {
   logger.info(`srp-base listening on port ${config.port}`);
 });
+
+const wss = websocket.init(server);
+
+// Scheduled tasks
+scheduler.register('casino-resolver', () => casinoTasks.resolvePending(wss), 30000, { jitter: 5000 });
 
 // Handle graceful shutdown
 function shutdown() {

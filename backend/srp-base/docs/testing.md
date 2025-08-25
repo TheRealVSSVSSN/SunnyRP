@@ -1,9 +1,18 @@
 # Testing Notes
 
-Automated test suites are not yet implemented. Manually verify the diamond blackjack endpoints after deployment:
+Automated test suites are not yet implemented. Manually verify the diamond casino endpoints after deployment:
 
 ```sh
-curl -H 'X-API-Token: <token>' http://localhost:3010/v1/diamond-blackjack/hands/char123
+# Create a game
+curl -H 'X-API-Token: <token>' -H 'Content-Type: application/json' -H 'X-Idempotency-Key: dc1' \
+  -d '{"gameType":"blackjack"}' http://localhost:3010/v1/diamond-casino/games
+
+# Place a bet
+curl -H 'X-API-Token: <token>' -H 'Content-Type: application/json' -H 'X-Idempotency-Key: dc2' \
+  -d '{"characterId":"char123","amount":100}' http://localhost:3010/v1/diamond-casino/games/1/bets
+
+# Retrieve game with bets
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/diamond-casino/games/1
 ```
 
 Manually verify the interact sound endpoints:
@@ -362,6 +371,8 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: k92' -H 'Content-Type: app
   http://localhost:3010/v1/characters/1/k9s/1/active
 curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: k93' -X DELETE \
   http://localhost:3010/v1/characters/1/k9s/1
+Manually verify the jobs endpoints:
+=======
 =Manually verify the jobs endpoints:
 
 ```sh

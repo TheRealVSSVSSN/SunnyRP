@@ -122,8 +122,8 @@ const wiseUCRoutes = require('./routes/wiseUC.routes');
 // wise wheels domain route
 const wiseWheelsRoutes = require('./routes/wiseWheels.routes');
 
-// diamond blackjack domain route
-const diamondBlackjackRoutes = require('./routes/diamondBlackjack.routes');
+// diamond casino domain route (blackjack, slots, horse racing, etc.)
+const diamondCasinoRoutes = require('./routes/diamondCasino.routes');
 
 // jailbreak domain route
 const jailbreakRoutes = require('./routes/jailbreak.routes');
@@ -272,7 +272,7 @@ app.use(wiseUCRoutes);
 app.use(wiseWheelsRoutes);
 
 // mount diamond blackjack routes
-app.use(diamondBlackjackRoutes);
+app.use(diamondCasinoRoutes);
 
 // mount jailbreak routes
 app.use(jailbreakRoutes);
