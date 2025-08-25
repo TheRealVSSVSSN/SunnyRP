@@ -250,3 +250,10 @@ Extended parity for the **garages** resource by scoping stored vehicles to chara
 * Migration `049_add_garage_vehicle_character.sql` adds `character_id` to `garage_vehicles`.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/garages.md`.
+
+## Update – 2025-08-25
+
+Enhanced core database utilities to align with the **ghmattimysql** resource.
+
+* Added named parameter handling, scalar queries and transaction helper functions in `src/repositories/db.js`.
+
