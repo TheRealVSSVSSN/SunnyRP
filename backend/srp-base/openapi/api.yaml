@@ -1326,6 +1326,62 @@ components:
       properties:
         characterId:
           type: integer
+  TaxiRequest:
+    type: object
+    properties:
+      id:
+        type: integer
+      passengerCharacterId:
+        type: integer
+      driverCharacterId:
+        type: integer
+        nullable: true
+      pickupX:
+        type: number
+      pickupY:
+        type: number
+      pickupZ:
+        type: number
+      dropoffX:
+        type: number
+        nullable: true
+      dropoffY:
+        type: number
+        nullable: true
+      dropoffZ:
+        type: number
+        nullable: true
+      fare:
+        type: integer
+      status:
+        type: string
+      createdAt:
+        type: string
+        format: date-time
+      acceptedAt:
+        type: string
+        format: date-time
+        nullable: true
+      completedAt:
+        type: string
+        format: date-time
+        nullable: true
+  TaxiRequestCreate:
+    type: object
+    required:
+      - passengerCharacterId
+      - pickupX
+      - pickupY
+      - pickupZ
+    properties:
+      passengerCharacterId:
+        type: integer
+      pickupX:
+        type: number
+      pickupY:
+        type: number
+      pickupZ:
+        type: number
 security:
   - ApiToken: []
 paths:
@@ -4916,3 +4972,198 @@ paths:
         '400':
           $ref: '#/components/responses/BadRequest'
 
+  /v1/taxi/requests:
+    get:
+      summary: List taxi ride requests
+      parameters:
+        - in: query
+          name: status
+          schema:
+            type: string
+            enum: [requested, accepted, completed, cancelled]
+      responses:
+        '200':
+          description: List of requests
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      requests:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/TaxiRequest'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    post:
+      summary: Create taxi ride request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaxiRequestCreate'
+      responses:
+        '200':
+          description: Request created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      request:
+                        $ref: '#/components/schemas/TaxiRequest'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/taxi/requests/{id}/accept:
+    post:
+      summary: Accept taxi ride request
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - driverCharacterId
+              properties:
+                driverCharacterId:
+                  type: integer
+      responses:
+        '200':
+          description: Request accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      request:
+                        $ref: '#/components/schemas/TaxiRequest'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/taxi/requests/{id}/complete:
+    post:
+      summary: Complete taxi ride request
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - driverCharacterId
+                - dropoffX
+                - dropoffY
+                - dropoffZ
+                - fare
+              properties:
+                driverCharacterId:
+                  type: integer
+                dropoffX:
+                  type: number
+                dropoffY:
+                  type: number
+                dropoffZ:
+                  type: number
+                fare:
+                  type: integer
+      responses:
+        '200':
+          description: Request completed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      request:
+                        $ref: '#/components/schemas/TaxiRequest'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/characters/{characterId}/taxi/rides:
+    get:
+      summary: List completed taxi rides for a character
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: role
+          schema:
+            type: string
+            enum: [driver, passenger]
+      responses:
+        '200':
+          description: List of rides
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      rides:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/TaxiRequest'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'

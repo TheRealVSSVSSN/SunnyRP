@@ -75,3 +75,4 @@ practice is supported by citations.
 | **interiors module** | Interior endpoints follow the established layered pattern with authentication and idempotency. |
 | **emotes module** | Favorite emote endpoints follow the established layered pattern with authentication and idempotency. |
 | **ems module** | EMS record and shift endpoints follow the established layered pattern with authentication and idempotency. |
+| **taxi module** | Taxi ride endpoints follow the established layered pattern with authentication and idempotency. |

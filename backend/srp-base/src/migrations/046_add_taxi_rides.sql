@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS taxi_rides (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  passenger_character_id INT NOT NULL,
+  driver_character_id INT DEFAULT NULL,
+  pickup_x DOUBLE NOT NULL,
+  pickup_y DOUBLE NOT NULL,
+  pickup_z DOUBLE NOT NULL,
+  dropoff_x DOUBLE DEFAULT NULL,
+  dropoff_y DOUBLE DEFAULT NULL,
+  dropoff_z DOUBLE DEFAULT NULL,
+  fare INT DEFAULT 0,
+  status ENUM('requested','accepted','completed','cancelled') NOT NULL DEFAULT 'requested',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  accepted_at TIMESTAMP NULL,
+  completed_at TIMESTAMP NULL,
+  FOREIGN KEY (passenger_character_id) REFERENCES characters(id),
+  FOREIGN KEY (driver_character_id) REFERENCES characters(id),
+  INDEX idx_passenger (passenger_character_id),
+  INDEX idx_driver (driver_character_id)
+);

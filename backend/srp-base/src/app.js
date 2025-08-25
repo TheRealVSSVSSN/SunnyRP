@@ -110,7 +110,7 @@ const diamondBlackjackRoutes = require('./routes/diamondBlackjack.routes');
 
 // secondary jobs domain route
 const secondaryJobsRoutes = require('./routes/secondaryJobs.routes');
-const carwashRoutes = require('./routes/carwash.routes');
+const taxiRoutes = require('./routes/taxi.routes');
 const interiorsRoutes = require('./routes/interiors.routes');
 
 const app = express();
@@ -240,7 +240,7 @@ app.use(diamondBlackjackRoutes);
 app.use(secondaryJobsRoutes);
 
 // mount carwash routes
-app.use(carwashRoutes);
+app.use(taxiRoutes);
 app.use(interiorsRoutes);
 
 // Rate limiting on admin endpoints (simple example).  Limit to 10

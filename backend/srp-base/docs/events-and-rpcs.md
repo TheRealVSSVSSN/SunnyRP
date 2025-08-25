@@ -36,3 +36,4 @@
 | drz_interiors | Resource triggers save/load events for apartment interior templates | `GET /v1/apartments/{apartmentId}/interior`, `POST /v1/apartments/{apartmentId}/interior` |
 | emotes | Resource lets players mark favorite emote commands for quick selection | `GET/POST/DELETE /v1/characters/{characterId}/emotes` |
 | emspack | Resource emits duty start/end and treatment events | `GET/POST/PATCH/DELETE /v1/ems/records`, `GET /v1/ems/shifts/active`, `POST /v1/ems/shifts`, `POST /v1/ems/shifts/{id}/end` |
+| es_taxi | Players request taxi rides and drivers accept/complete them | `POST /v1/taxi/requests`, `POST /v1/taxi/requests/{id}/accept`, `POST /v1/taxi/requests/{id}/complete` |

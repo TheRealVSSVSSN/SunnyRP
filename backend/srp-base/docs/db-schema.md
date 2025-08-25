@@ -315,3 +315,22 @@
 | start_time | TIMESTAMP | Shift start time |
 | end_time | TIMESTAMP NULL | Shift end time |
 
+
+## taxi_rides
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| passenger_character_id | INT | FK to characters.id |
+| driver_character_id | INT | FK to characters.id |
+| pickup_x | DOUBLE | Pickup X coordinate |
+| pickup_y | DOUBLE | Pickup Y coordinate |
+| pickup_z | DOUBLE | Pickup Z coordinate |
+| dropoff_x | DOUBLE | Dropoff X coordinate |
+| dropoff_y | DOUBLE | Dropoff Y coordinate |
+| dropoff_z | DOUBLE | Dropoff Z coordinate |
+| fare | INT | Fare amount |
+| status | ENUM('requested','accepted','completed','cancelled') | Ride state |
+| created_at | TIMESTAMP | Creation time |
+| accepted_at | TIMESTAMP | Driver accepted time |
+| completed_at | TIMESTAMP | Completion time |

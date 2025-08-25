@@ -253,3 +253,17 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: ems2' -H 'Content-Type: ap
   -d '{"characterId":1}' http://localhost:3010/v1/ems/shifts
 curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: ems3' http://localhost:3010/v1/ems/shifts/1/end
 ```
+
+Manually verify the taxi endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: tx1' -H 'Content-Type: application/json' \
+  -d '{"passengerCharacterId":1,"pickupX":0,"pickupY":0,"pickupZ":0}' \
+  http://localhost:3010/v1/taxi/requests
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: tx2' -H 'Content-Type: application/json' \
+  -d '{"driverCharacterId":2}' \
+  http://localhost:3010/v1/taxi/requests/1/accept
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: tx3' -H 'Content-Type: application/json' \
+  -d '{"driverCharacterId":2,"dropoffX":1,"dropoffY":1,"dropoffZ":1,"fare":50}' \
+  http://localhost:3010/v1/taxi/requests/1/complete
+```

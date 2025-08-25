@@ -513,3 +513,11 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
   - `POST /v1/characters/{characterId}/emotes` – Add a favorite emote (`emote`).
   - `DELETE /v1/characters/{characterId}/emotes/{emote}` – Remove a favorite emote.
 
+
+### Taxi
+
+- `GET /v1/taxi/requests` – list requests by status
+- `POST /v1/taxi/requests` – create a taxi request
+- `POST /v1/taxi/requests/{id}/accept` – accept a request
+- `POST /v1/taxi/requests/{id}/complete` – complete a ride
+- `GET /v1/characters/{characterId}/taxi/rides` – ride history
