@@ -18,6 +18,7 @@
 - Renamed k9 migration to `057_add_k9_units.sql` to resolve duplication.
 - Added debug diagnostics endpoint and repository.
  - Added world state and forecast APIs.
+- Added timecycle override API for world timecycle presets.
 
 ## File Changes
 
@@ -243,6 +244,23 @@
 | `docs/framework-compliance.md` | M | Noted world module compliance |
 | `CHANGELOG.md` | M | Added world forecast entry |
 | `docs/framework-compliance.md` | M | Added debug module compliance |
+| `src/repositories/worldRepository.js` | M | Timecycle override persistence |
+| `src/routes/world.routes.js` | M | Timecycle override endpoints |
+| `src/migrations/059_add_world_timecycle.sql` | A | Create `world_timecycle` table |
+| `openapi/api.yaml` | M | Document timecycle override paths |
+| `docs/index.md` | M | Logged climate-overrides update |
+| `docs/progress-ledger.md` | M | Added climate-overrides entry |
+| `docs/framework-compliance.md` | M | Noted world timecycle compliance |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented world timecycle endpoints |
+| `docs/events-and-rpcs.md` | M | Mapped climate-overrides resource |
+| `docs/db-schema.md` | M | Documented `world_timecycle` table |
+| `docs/migrations.md` | M | Listed migration 059 |
+| `docs/admin-ops.md` | M | Added world_timecycle table check |
+| `docs/security.md` | M | Noted world timecycle security |
+| `docs/testing.md` | M | Added timecycle curl examples |
+| `docs/modules/world.md` | M | Updated module documentation |
+| `docs/research-log.md` | M | Logged climate-overrides research |
+| `CHANGELOG.md` | M | Added climate-overrides entry |
 ## Startup Notes
 
 - Run `node src/bootstrap/migrate.js` to apply migration `046_add_taxi_rides.sql`.
@@ -254,3 +272,4 @@
 - Run `node src/bootstrap/migrate.js` to apply migration `057_add_k9_units.sql`.
 - Run `node src/bootstrap/migrate.js` to apply migration `056_add_character_jobs.sql`.
 - Run `node src/bootstrap/migrate.js` to apply migration `058_add_world_forecast.sql`.
+- Run `node src/bootstrap/migrate.js` to apply migration `059_add_world_timecycle.sql`.

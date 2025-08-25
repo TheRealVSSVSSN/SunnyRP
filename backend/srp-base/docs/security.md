@@ -40,4 +40,4 @@
 - Jobs routes inherit the same authentication and idempotency requirements.
 - Broadcaster routes inherit the same authentication and idempotency requirements.
 - Debug routes inherit the same authentication and rate limiting requirements.
-- World routes inherit the same authentication and idempotency requirements.
+- World routes (state, forecast and timecycle) inherit the same authentication and idempotency requirements.

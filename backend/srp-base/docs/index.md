@@ -334,3 +334,12 @@ Introduced world weather forecast tracking to support the **srp-weathersync** re
 * Added world forecast endpoints and migration `058_add_world_forecast.sql`.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/world.md`.
+
+## Update – 2025-08-25
+
+Extended world module with timecycle override support for the **climate-overrides** resource (formerly koillove).
+
+* Added world timecycle endpoints and repository functions.
+* Migration `059_add_world_timecycle.sql` creates `world_timecycle` table.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/world.md`.
