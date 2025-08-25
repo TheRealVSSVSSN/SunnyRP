@@ -432,6 +432,10 @@ To support all features present in the original server resources at the framewor
 - **srp-wise-imports** – Manages vehicle import orders.
   - `GET /v1/wise-imports/orders/{characterId}` – List import orders for a character.
   - `POST /v1/wise-imports/orders` – Create an order with `characterId` and `model`.
+- **srp-import-pack** – Tracks vehicle import packages.
+  - `GET /v1/import-pack/orders/{characterId}` – List import package orders for a character.
+  - `POST /v1/import-pack/orders` – Create an order with `characterId` and `package`.
+  - `POST /v1/import-pack/orders/{id}/deliver` – Mark an order as delivered.
 - **srp-wise-uc** – Manages undercover profiles.
   - `GET /v1/wise-uc/profiles/{characterId}` – Retrieve undercover profile for a character.
   - `POST /v1/wise-uc/profiles` – Create or update a profile with `characterId`, `alias` and optional `active`.

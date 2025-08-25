@@ -44,3 +44,4 @@
 | 40 | ghmattimysql | MySQL middleware offering execute, scalar and transaction utilities | Extend | Added named parameters, scalar and transaction helpers |
 | 41 | hardcap | Enforce player slot limits and track active sessions | Create | Added config and session APIs |
 | 42 | heli | Helicopter flight logging and tracking | Create | Added flight tracking API |
+| 43 | import-Pack | Vehicle import package tracking per character | Create | Added import package API |

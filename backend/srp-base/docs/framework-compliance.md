@@ -83,3 +83,4 @@ practice is supported by citations.
 | **database helpers** | Core MySQL adapter now supports named parameters, scalar queries and transaction wrappers for safer, more flexible persistence. |
 | **hardcap module** | Hardcap endpoints follow the established layered pattern with authentication, rate limiting and idempotency. |
 | **heli module** | Heli flight endpoints follow the established layered pattern with authentication and idempotency. |
+| **import-pack module** | Import package endpoints follow the established layered pattern with authentication and idempotency. |
