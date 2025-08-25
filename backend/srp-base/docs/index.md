@@ -304,3 +304,11 @@ Introduced jailbreak attempt tracking to support the **jailbreak** resource.
 * Added Jailbreak module with `/v1/jailbreaks`, `/v1/jailbreaks/active` and `/v1/jailbreaks/{id}/complete` endpoints.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/jailbreak.md`.
+
+## Update – 2025-08-25
+
+Introduced police K9 unit tracking to support the **k9** resource.
+
+* Added K9 module with `GET /v1/characters/{characterId}/k9s`, `POST /v1/characters/{characterId}/k9s`, `PATCH /v1/characters/{characterId}/k9s/{k9Id}/active` and `DELETE /v1/characters/{characterId}/k9s/{k9Id}` endpoints.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/k9.md`.

@@ -1098,3 +1098,22 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Drop `character_peds` table and remove ped routes and repository.
+
+## 2025-08-25 – k9
+
+### Added
+
+* K9 unit endpoints: `/v1/characters/{characterId}/k9s` GET/POST, `/v1/characters/{characterId}/k9s/{k9Id}/active` PATCH, `/v1/characters/{characterId}/k9s/{k9Id}` DELETE.
+* Schema and documentation for managing police dogs per character.
+
+### Migrations
+
+* `056_add_k9_units.sql` creates `k9_units` table.
+
+### Risks
+
+* Mismanaged active flags could allow multiple active K9s per character if clients race.
+
+### Rollback
+
+* Drop `k9_units` table and remove K9 routes and repository.

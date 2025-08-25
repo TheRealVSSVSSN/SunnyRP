@@ -449,3 +449,15 @@
 | started_at | TIMESTAMP | Start time |
 | ended_at | TIMESTAMP | Completion time |
 | success | TINYINT(1) | 1 success, 0 failure |
+
+## k9_units
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| character_id | BIGINT | FK to characters.id |
+| name | VARCHAR(50) | Dog name |
+| breed | VARCHAR(50) | Dog breed |
+| active | TINYINT(1) | 1 active, 0 inactive |
+| created_at | TIMESTAMP | Creation time |
+| retired_at | TIMESTAMP | Retirement time |

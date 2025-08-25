@@ -12,6 +12,7 @@
 - Extended import pack order APIs with pricing, retrieval and cancellation.
 - Added ped state APIs.
 - Added jailbreak attempt tracking APIs.
+- Added K9 unit management APIs.
 
 ## File Changes
 
@@ -175,6 +176,23 @@
 | `docs/research-log.md` | M | Logged isPed research |
 | `docs/BASE_API_DOCUMENTATION.md` | M | Documented peds endpoints |
 | `docs/framework-compliance.md` | M | Noted peds module compliance |
+| `src/repositories/k9Repository.js` | A | Persistence for police K9 units |
+| `src/routes/k9.routes.js` | A | REST endpoints for K9 units |
+| `src/migrations/056_add_k9_units.sql` | A | Create `k9_units` table |
+| `src/app.js` | M | Mounted k9 routes |
+| `openapi/api.yaml` | M | Documented k9 schemas and paths |
+| `docs/index.md` | M | Logged k9 update |
+| `docs/progress-ledger.md` | M | Added k9 entry |
+| `docs/framework-compliance.md` | M | Noted k9 module compliance |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented k9 endpoints |
+| `docs/events-and-rpcs.md` | M | Mapped k9 events |
+| `docs/db-schema.md` | M | Documented `k9_units` table |
+| `docs/migrations.md` | M | Listed migration 056 |
+| `docs/admin-ops.md` | M | Added k9 table check |
+| `docs/security.md` | M | Added k9 security note |
+| `docs/testing.md` | M | Added k9 curl examples |
+| `docs/modules/k9.md` | A | Module documentation |
+| `docs/research-log.md` | M | Logged k9 research |
 
 ## Startup Notes
 
@@ -184,3 +202,4 @@
 - Run `node src/bootstrap/migrate.js` to apply migration `052_add_import_pack_orders.sql`.
 - Run `node src/bootstrap/migrate.js` to apply migration `054_add_character_peds.sql`.
 - Run `node src/bootstrap/migrate.js` to apply migration `055_add_jailbreak_attempts.sql`.
+- Run `node src/bootstrap/migrate.js` to apply migration `056_add_k9_units.sql`.

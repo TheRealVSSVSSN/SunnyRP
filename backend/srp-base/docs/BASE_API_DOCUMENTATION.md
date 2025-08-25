@@ -573,3 +573,16 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
 - `POST /v1/jailbreaks` – start a jailbreak attempt (`characterId`, `prison`).
 - `POST /v1/jailbreaks/{id}/complete` – complete an attempt with `success` flag.
 - `GET /v1/jailbreaks/active` – list active attempts.
+
+## Update – 2025-08-25 (k9)
+
+Introduced K9 unit management for police characters.
+
+### Endpoints
+
+* `GET /v1/characters/{characterId}/k9s` – list K9 units for a character.
+* `POST /v1/characters/{characterId}/k9s` – create a K9 unit (requires `X-Idempotency-Key`).
+* `PATCH /v1/characters/{characterId}/k9s/{k9Id}/active` – update active state (requires `X-Idempotency-Key`).
+* `DELETE /v1/characters/{characterId}/k9s/{k9Id}` – retire a K9 unit (requires `X-Idempotency-Key`).
+
+All endpoints require standard authentication headers.
