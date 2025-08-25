@@ -1748,6 +1748,21 @@ components:
       createdAt:
         type: string
         format: date-time
+  TimecycleOverride:
+    type: object
+    properties:
+      id:
+        type: integer
+      preset:
+        type: string
+        nullable: true
+      expiresAt:
+        type: string
+        format: date-time
+        nullable: true
+      createdAt:
+        type: string
+        format: date-time
 security:
   - ApiToken: []
 paths:
@@ -7021,6 +7036,88 @@ paths:
       responses:
         '200':
           description: Update acknowledgement
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/world/timecycle:
+    get:
+      summary: Get timecycle override
+      responses:
+        '200':
+          description: Current timecycle override
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/TimecycleOverride'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    post:
+      summary: Set timecycle override
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - preset
+              properties:
+                preset:
+                  type: string
+                expiresAt:
+                  type: string
+                  format: date-time
+                  nullable: true
+      responses:
+        '200':
+          description: Update acknowledgement
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    delete:
+      summary: Clear timecycle override
+      responses:
+        '200':
+          description: Clear acknowledgement
           content:
             application/json:
               schema:

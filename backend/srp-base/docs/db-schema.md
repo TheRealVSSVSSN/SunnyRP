@@ -491,3 +491,12 @@ Added `world_forecast` table for weather scheduling. K9 migration renamed to 057
 | id | INT AUTO_INCREMENT | Primary key |
 | forecast | JSON | Array of weather steps |
 | created_at | TIMESTAMP | Creation time |
+
+## world_timecycle
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| preset | VARCHAR(64) | Active timecycle preset |
+| expires_at | TIMESTAMP | Optional expiration time |
+| created_at | TIMESTAMP | Creation time |

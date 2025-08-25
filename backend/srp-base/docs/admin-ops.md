@@ -41,3 +41,4 @@
 - Ensure the `jobs` and `character_jobs` tables exist for job management.
 - Ensure the `k9_units` table exists after applying migration 057.
 - Ensure the `world_forecast` table exists for weather scheduling.
+- Ensure the `world_timecycle` table exists for timecycle overrides.

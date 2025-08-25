@@ -58,6 +58,38 @@ router.post('/v1/world/forecast', async (req, res, next) => {
   }
 });
 
+// Fetch the current timecycle override. Returns null if none is set.
+router.get('/v1/world/timecycle', async (req, res, next) => {
+  try {
+    const override = await worldRepo.getTimecycleOverride();
+    sendOk(res, override, res.locals.requestId, res.locals.traceId);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Set a timecycle override. Clients should include idempotency and
+// HMAC headers to authenticate and avoid duplicates.
+router.post('/v1/world/timecycle', async (req, res, next) => {
+  try {
+    const { preset, expiresAt } = req.body || {};
+    await worldRepo.setTimecycleOverride({ preset, expiresAt });
+    sendOk(res, { message: 'Timecycle override set' }, res.locals.requestId, res.locals.traceId);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Clear any active timecycle override.
+router.delete('/v1/world/timecycle', async (req, res, next) => {
+  try {
+    await worldRepo.clearTimecycleOverride();
+    sendOk(res, { message: 'Timecycle override cleared' }, res.locals.requestId, res.locals.traceId);
+  } catch (err) {
+    next(err);
+  }
+});
+
 // Record a death event.  Accepts a JSON body with playerId,
 // killerId (optional), weapon (optional) and coords.  This
 // endpoint simply persists the event; consumers can subscribe to

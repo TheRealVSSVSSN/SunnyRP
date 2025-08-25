@@ -52,3 +52,4 @@
 | 47 | jobsystem | Manage job definitions, assignments and duty status | Create | Added character-scoped jobs API |
 | 48 | srp-debug | Developer diagnostics endpoints | Create | Added server status API |
 | 49 | srp-weathersync | Global weather synchronization with forecast scheduling | Extend | Added world state documentation and forecast API |
+| 50 | climate-overrides | Timecycle overrides and weather preset controls | Extend | Added world timecycle API |
