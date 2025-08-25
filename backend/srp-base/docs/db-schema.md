@@ -421,6 +421,8 @@
 | id | INT AUTO_INCREMENT | Primary key |
 | character_id | BIGINT | FK to characters.id |
 | package | VARCHAR(64) | Package identifier |
-| status | VARCHAR(32) | pending or delivered |
+| price | DECIMAL(10,2) | Order cost |
+| status | VARCHAR(32) | pending, delivered or canceled |
 | created_at | BIGINT | Milliseconds timestamp |
-| delivered_at | BIGINT | Delivery timestamp, null if pending |
+| delivered_at | BIGINT | Delivery timestamp, null if not delivered |
+| canceled_at | BIGINT | Cancellation timestamp, null if not canceled |

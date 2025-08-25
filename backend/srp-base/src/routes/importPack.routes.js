@@ -4,7 +4,7 @@ const repo = require('../repositories/importPackRepository');
 
 const router = express.Router();
 
-router.get('/v1/import-pack/orders/:characterId', async (req, res) => {
+router.get('/v1/import-pack/orders/character/:characterId', async (req, res) => {
   try {
     const { characterId } = req.params;
     const orders = await repo.listOrdersByCharacter(characterId);
@@ -14,19 +14,57 @@ router.get('/v1/import-pack/orders/:characterId', async (req, res) => {
   }
 });
 
-router.post('/v1/import-pack/orders', async (req, res) => {
-  const { characterId, package: packageName } = req.body || {};
-  if (!characterId || !packageName) {
+router.get('/v1/import-pack/orders/:id', async (req, res) => {
+  const { id } = req.params;
+  const { characterId } = req.query;
+  if (!characterId) {
     return sendError(
       res,
-      { code: 'VALIDATION_ERROR', message: 'characterId and package are required' },
+      { code: 'VALIDATION_ERROR', message: 'characterId is required' },
       400,
       res.locals.requestId,
       res.locals.traceId,
     );
   }
   try {
-    const order = await repo.createOrder({ characterId, packageName });
+    const order = await repo.getOrder(Number(id), characterId);
+    if (!order) {
+      return sendError(
+        res,
+        { code: 'NOT_FOUND', message: 'Order not found' },
+        404,
+        res.locals.requestId,
+        res.locals.traceId,
+      );
+    }
+    sendOk(res, { order }, res.locals.requestId, res.locals.traceId);
+  } catch (err) {
+    sendError(res, { code: 'IMPORT_PACK_GET_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);
+  }
+});
+
+router.post('/v1/import-pack/orders', async (req, res) => {
+  if (!req.get('X-Idempotency-Key')) {
+    return sendError(
+      res,
+      { code: 'IDEMPOTENCY_KEY_REQUIRED', message: 'X-Idempotency-Key header is required' },
+      400,
+      res.locals.requestId,
+      res.locals.traceId,
+    );
+  }
+  const { characterId, package: packageName, price } = req.body || {};
+  if (!characterId || !packageName || typeof price !== 'number') {
+    return sendError(
+      res,
+      { code: 'VALIDATION_ERROR', message: 'characterId, package, and numeric price are required' },
+      400,
+      res.locals.requestId,
+      res.locals.traceId,
+    );
+  }
+  try {
+    const order = await repo.createOrder({ characterId, packageName, price });
     sendOk(res, { order }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'IMPORT_PACK_CREATE_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);
@@ -34,6 +72,15 @@ router.post('/v1/import-pack/orders', async (req, res) => {
 });
 
 router.post('/v1/import-pack/orders/:id/deliver', async (req, res) => {
+  if (!req.get('X-Idempotency-Key')) {
+    return sendError(
+      res,
+      { code: 'IDEMPOTENCY_KEY_REQUIRED', message: 'X-Idempotency-Key header is required' },
+      400,
+      res.locals.requestId,
+      res.locals.traceId,
+    );
+  }
   try {
     const { id } = req.params;
     const updated = await repo.markDelivered(Number(id));
@@ -49,6 +96,44 @@ router.post('/v1/import-pack/orders/:id/deliver', async (req, res) => {
     sendOk(res, { delivered: true }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'IMPORT_PACK_DELIVER_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);
+  }
+});
+
+router.post('/v1/import-pack/orders/:id/cancel', async (req, res) => {
+  if (!req.get('X-Idempotency-Key')) {
+    return sendError(
+      res,
+      { code: 'IDEMPOTENCY_KEY_REQUIRED', message: 'X-Idempotency-Key header is required' },
+      400,
+      res.locals.requestId,
+      res.locals.traceId,
+    );
+  }
+  const { id } = req.params;
+  const { characterId } = req.body || {};
+  if (!characterId) {
+    return sendError(
+      res,
+      { code: 'VALIDATION_ERROR', message: 'characterId is required' },
+      400,
+      res.locals.requestId,
+      res.locals.traceId,
+    );
+  }
+  try {
+    const canceled = await repo.cancelOrder(Number(id), characterId);
+    if (!canceled) {
+      return sendError(
+        res,
+        { code: 'NOT_FOUND', message: 'Order not found or not pending' },
+        404,
+        res.locals.requestId,
+        res.locals.traceId,
+      );
+    }
+    sendOk(res, { canceled: true }, res.locals.requestId, res.locals.traceId);
+  } catch (err) {
+    sendError(res, { code: 'IMPORT_PACK_CANCEL_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);
   }
 });
 

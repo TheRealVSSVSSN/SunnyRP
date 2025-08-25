@@ -314,3 +314,18 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: heli2' \
   http://localhost:3010/v1/heli/flights/1/end
 curl -H 'X-API-Token: <token>' http://localhost:3010/v1/characters/1/heli/flights
 ```
+
+Manually verify the import pack endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/import-pack/orders/character/1
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: imp1' -H 'Content-Type: application/json' \
+  -d '{"characterId":1,"package":"starter","price":5000}' \
+  http://localhost:3010/v1/import-pack/orders
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/import-pack/orders/1?characterId=1
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: imp2' \
+  http://localhost:3010/v1/import-pack/orders/1/deliver
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: imp3' -H 'Content-Type: application/json' \
+  -d '{"characterId":1}' \
+  http://localhost:3010/v1/import-pack/orders/1/cancel
+```

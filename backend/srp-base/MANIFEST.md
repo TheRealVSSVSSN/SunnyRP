@@ -9,6 +9,7 @@
 - Added hardcap configuration and session tracking APIs.
 - Added heli flight logging APIs.
 - Added import pack order APIs.
+- Extended import pack order APIs with pricing, retrieval and cancellation.
 
 ## File Changes
 
@@ -38,6 +39,22 @@
 | `src/app.js` | M | Mounted furniture routes |
 | `docs/index.md` | M | Logged furniture update |
 | `docs/progress-ledger.md` | M | Added furniture entry |
+| `src/repositories/importPackRepository.js` | M | Added pricing, retrieval and cancelation support |
+| `src/routes/importPack.routes.js` | M | Added order retrieval and cancelation endpoints |
+| `src/migrations/053_add_import_pack_order_price_cancel.sql` | A | Add price and canceled_at columns |
+| `openapi/api.yaml` | M | Documented import pack pricing and cancel paths |
+| `docs/index.md` | M | Logged import-Pack2 update |
+| `docs/progress-ledger.md` | M | Added import-Pack2 entry |
+| `docs/framework-compliance.md` | M | Noted import pack module compliance |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented import pack retrieval and cancel endpoints |
+| `docs/events-and-rpcs.md` | M | Mapped import-Pack2 events |
+| `docs/db-schema.md` | M | Documented import pack order pricing columns |
+| `docs/migrations.md` | M | Listed migration 053 |
+| `docs/admin-ops.md` | M | Added import pack table check |
+| `docs/security.md` | M | Added import pack security note |
+| `docs/testing.md` | M | Added import pack curl examples |
+| `docs/modules/import-pack.md` | M | Module documentation updated for pricing and cancelation |
+| `docs/research-log.md` | M | Logged import-Pack2 research |
 | `docs/events-and-rpcs.md` | M | Mapped furniture events |
 | `docs/db-schema.md` | M | Documented `furniture` table |
 | `docs/migrations.md` | M | Listed migration 047 |
