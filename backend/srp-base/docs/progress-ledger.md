@@ -38,3 +38,4 @@
 | 34 | emspack | EMS medical records and duty shift tracking | Extend | Documented record APIs and added shift logs |
 | 35 | es_taxi | Taxi job dispatch and ride logging | Create | Added taxi request API |
 | 36 | furniture | Furniture placement persistence per character | Create | Added furniture APIs |
+| 37 | gabz_mrpd | Mission Row PD mapping; no server logic | Skip | Asset-only |

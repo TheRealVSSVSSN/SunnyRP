@@ -16,6 +16,42 @@ router.get('/v1/accounts/:accountId/characters', async (req, res) => {
   }
 });
 
+// GET /v1/accounts/:accountId/characters/selected
+router.get('/v1/accounts/:accountId/characters/selected', async (req, res) => {
+  const { accountId } = req.params;
+  try {
+    const selectedId = await selectionRepo.getSelected(accountId);
+    if (!selectedId) {
+      return sendError(
+        res,
+        { code: 'NOT_FOUND', message: 'No character selected' },
+        404,
+        res.locals.requestId,
+        res.locals.traceId,
+      );
+    }
+    const character = await charRepo.getById(Number(selectedId));
+    if (!character || character.ownerHex !== accountId) {
+      return sendError(
+        res,
+        { code: 'NOT_FOUND', message: 'Character not found' },
+        404,
+        res.locals.requestId,
+        res.locals.traceId,
+      );
+    }
+    sendOk(res, { character }, res.locals.requestId, res.locals.traceId);
+  } catch (err) {
+    sendError(
+      res,
+      { code: 'INTERNAL_ERROR', message: 'Failed to retrieve selected character' },
+      500,
+      res.locals.requestId,
+      res.locals.traceId,
+    );
+  }
+});
+
 // POST /v1/accounts/:accountId/characters
 router.post('/v1/accounts/:accountId/characters', express.json(), async (req, res) => {
   const { accountId } = req.params;

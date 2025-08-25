@@ -1699,6 +1699,7 @@ paths:
                     type: string
                   traceId:
                     type: string
+
     post:
       summary: Create a character for an account
       parameters:
@@ -1732,6 +1733,37 @@ paths:
                     type: string
                   traceId:
                     type: string
+
+  /v1/accounts/{accountId}/characters/selected:
+    get:
+      summary: Get selected character for an account
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Selected character
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      character:
+                        $ref: '#/components/schemas/Character'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '404':
+          description: Not found
 
   /v1/accounts/{accountId}/characters/{characterId}:select:
     post:
