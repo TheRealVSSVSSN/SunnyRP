@@ -286,3 +286,8 @@
 - Attempted to clone `https://github.com/h04X-2K/NoPixelServer` for apartments/garages context but download size exceeded limits. Reference resources unavailable; proceeding with internal consistency only.
 - Retrieved repo metadata from essentialmode, ESX, ND, FSN, QB, vRP and vORP frameworks for housing flows via `git ls-remote`.
 - Reviewed community discussions on NoPixel/QB/ESX housing systems for naming and lease expiry concepts.
+
+## Research Log – 2025-08-25 (banking invoices)
+
+- Attempted to clone reference repository `https://github.com/h04X-2K/NoPixelServer` but download size was prohibitive. Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed READMEs from EssentialMode, ESX, ND Core, FSN Framework, QB-Core and vORP for banking and billing patterns.

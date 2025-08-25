@@ -12,3 +12,4 @@
 | assets_clothes | clothes |
 | apartments | properties |
 | garages | properties |
+| banking | economy |

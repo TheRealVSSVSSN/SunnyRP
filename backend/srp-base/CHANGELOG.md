@@ -1306,3 +1306,18 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Remove properties routes and scheduler; drop `properties` table.
+
+## 2025-08-25 – Banking invoices
+
+### Added
+* Invoice API with WebSocket and webhook events.
+* Hourly `invoice-purge` scheduler removing settled invoices.
+
+### Migrations
+* `067_add_invoices.sql`
+
+### Risks
+* Incorrect invoice payments may transfer funds unexpectedly.
+
+### Rollback
+* Drop `invoices` table and remove invoice routes and scheduler.

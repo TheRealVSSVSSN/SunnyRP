@@ -23,6 +23,7 @@
 - Ensure the `apartments` and `apartment_residents` tables exist and include the `character_id` column after deploying this sprint.
 - Ensure the `accounts` and `transactions` tables use `character_id` columns after deploying this sprint.
 - Ensure the `properties` table exists with indexes `idx_properties_owner` and `idx_properties_expires_at`; expired leases are released hourly by the `properties-expire` scheduler.
+- Ensure the `invoices` table exists for character billing. Settled invoices older than `INVOICE_RETENTION_MS` are purged by `invoice-purge` scheduler.
 - Ensure the `cron_jobs` table exists for scheduled tasks.
 - Ensure the `base_event_logs` table exists for base event history.
 - Ensure the `boatshop_boats` table exists for boat catalog data.

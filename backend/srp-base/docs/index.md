@@ -414,3 +414,12 @@ Introduced unified properties backend to consolidate apartments, garages and hot
 * Hourly `properties-expire` scheduler releases leases past `expires_at`.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/properties.md`.
+
+## Update – 2025-08-25
+
+Extended parity for the **banking** resource with invoice support and real-time notifications.
+
+* Added invoice endpoints with WebSocket and webhook events.
+* Hourly scheduler purges settled invoices.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/economy.md`.

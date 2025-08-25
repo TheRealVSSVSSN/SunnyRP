@@ -220,6 +220,20 @@ Indexes:
 | reason | VARCHAR(255) | Optional memo |
 | created_at | TIMESTAMP | Creation time |
 
+## invoices
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| from_character_id | VARCHAR(64) | Issuing character |
+| to_character_id | VARCHAR(64) | Receiving character |
+| amount | BIGINT | Amount in cents |
+| reason | VARCHAR(255) | Optional memo |
+| status | ENUM('pending','paid','cancelled') | Current state |
+| due_at | TIMESTAMP | Optional due date |
+| created_at | TIMESTAMP | Creation time |
+| updated_at | TIMESTAMP | Update time |
+
 ## interiors
 
 | Column | Type | Notes |
