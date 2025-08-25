@@ -248,3 +248,4 @@
 - GitHub repository "DP-Hacking-Game" – NoPixel 4.0 hacking minigame references. https://github.com/01priyanshubisht/DP-Hacking-Game
 - GitHub repository "ImConsKrypt/SK-Hud" – ProdigyRP-inspired HUD concepts. https://github.com/ImConsKrypt/SK-Hud
 - Reference resources unavailable; proceeding with internal consistency only.
+- InteractSound resource events – https://github.com/h04X-2K/NoPixelServer/blob/main/resources/InteractSound/server/main.lua

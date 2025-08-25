@@ -605,3 +605,10 @@ Added world timecycle management endpoints.
 - `GET /v1/world/timecycle` – retrieve current timecycle override.
 - `POST /v1/world/timecycle` – set override with `preset` and optional `expiresAt`.
 - `DELETE /v1/world/timecycle` – clear override.
+
+## Update – 2025-08-25 (interactSound hooks)
+
+- `POST /v1/interact-sound/plays` – record a sound play and push to clients via WebSocket and webhooks.
+- `GET /v1/hooks/endpoints` – list registered webhook sinks (admin).
+- `POST /v1/hooks/endpoints` – register a webhook sink (admin).
+- `DELETE /v1/hooks/endpoints/{id}` – remove a webhook sink (admin).

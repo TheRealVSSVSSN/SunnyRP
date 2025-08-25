@@ -513,3 +513,4 @@ Added `world_forecast` table for weather scheduling. K9 migration renamed to 057
 | preset | VARCHAR(64) | Active timecycle preset |
 | expires_at | TIMESTAMP | Optional expiration time |
 | created_at | TIMESTAMP | Creation time |
+Retention of sound play logs is controlled by `INTERACT_SOUND_RETENTION_MS`; older rows are purged by a scheduled task.

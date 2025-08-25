@@ -16,6 +16,7 @@ const permissionsRoutes = require('./routes/permissions.routes');
 const playersRoutes = require('./routes/players.routes');
 const outboxRoutes = require('./routes/outbox.routes');
 const adminRoutes = require('./routes/admin.routes');
+const hooksRoutes = require('./routes/hooks.routes');
 
 // extended domain routes merged from former microservices
 const dispatchRoutes = require('./routes/dispatch.routes');
@@ -167,6 +168,7 @@ app.use(permissionsRoutes);
 app.use(playersRoutes);
 app.use(outboxRoutes);
 app.use(adminRoutes);
+app.use(hooksRoutes);
 
 // mount extended domain routes
 app.use(dispatchRoutes);

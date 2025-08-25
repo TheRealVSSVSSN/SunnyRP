@@ -71,6 +71,7 @@ const config = {
       secret: process.env.WEBHOOK_DISCORD_SECRET || '',
     },
   },
+  interactSound: { retentionMs: parseInt(process.env.INTERACT_SOUND_RETENTION_MS || '604800000', 10) },
 
   /**
    * Feature flags for core modules.  Lua consumers still drive

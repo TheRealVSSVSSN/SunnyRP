@@ -3,10 +3,29 @@ const { v4: uuidv4 } = require('uuid');
 const config = require('../config/env');
 const logger = require('../utils/logger');
 
-function init(server) {
-  const wss = new WebSocket.Server({ server, path: '/ws' });
+let wssInstance;
 
-  wss.on('connection', (ws, req) => {
+function broadcast(topic, event, data) {
+  if (!wssInstance) return;
+  const payload = JSON.stringify({
+    eventId: uuidv4(),
+    createdAt: Date.now(),
+    ttl: config.wsHeartbeatIntervalMs || 30000,
+    topic,
+    event,
+    data,
+  });
+  wssInstance.clients.forEach((client) => {
+    if (client.readyState === WebSocket.OPEN && client.bufferedAmount < 1e6) {
+      client.send(payload);
+    }
+  });
+}
+
+function init(server) {
+  wssInstance = new WebSocket.Server({ server, path: '/ws' });
+
+  wssInstance.on('connection', (ws, req) => {
     try {
       const url = new URL(req.url, 'http://localhost');
       const token = url.searchParams.get('token');
@@ -25,7 +44,7 @@ function init(server) {
   });
 
   const interval = setInterval(() => {
-    wss.clients.forEach((ws) => {
+    wssInstance.clients.forEach((ws) => {
       if (!ws.isAlive) {
         return ws.terminate();
       }
@@ -34,25 +53,10 @@ function init(server) {
     });
   }, config.wsHeartbeatIntervalMs || 30000);
 
-  wss.broadcast = function broadcast(topic, event, data) {
-    const payload = JSON.stringify({
-      eventId: uuidv4(),
-      createdAt: Date.now(),
-      ttl: config.wsHeartbeatIntervalMs || 30000,
-      topic,
-      event,
-      data,
-    });
-    wss.clients.forEach((client) => {
-      if (client.readyState === WebSocket.OPEN && client.bufferedAmount < 1e6) {
-        client.send(payload);
-      }
-    });
-  };
-
-  wss.on('close', () => clearInterval(interval));
+  wssInstance.broadcast = broadcast;
+  wssInstance.on('close', () => clearInterval(interval));
   logger.info('WebSocket gateway initialised');
-  return wss;
+  return wssInstance;
 }
 
-module.exports = { init };
+module.exports = { init, broadcast };
