@@ -186,6 +186,7 @@ Below is a summary of the core routes.  For full request/response schemas, consu
 |-------|-----|-------------|---------|
 | `GET` | `/v1/healthz` | Liveness probe; returns `{ ok: true, data: { status: 'ok' } }` | `200 OK`【67730289104851†L51-L55】 |
 | `GET` | `/v1/ready` | Readiness probe; checks DB connectivity; returns `503` if dependencies are down【67730289104851†L52-L54】 | `200 OK`/`503` |
+| `GET` | `/v1/debug/status` | Retrieve server diagnostics (uptime, memory, load averages). | `200 OK` |
 | `GET` | `/metrics` | Prometheus metrics; enabled when `ENABLE_METRICS=1`【67730289104851†L51-L55】 | plaintext metrics |
 
 ### Configuration
@@ -262,6 +263,8 @@ In addition to the core identity, permissions, characters and admin APIs describ
 |-------|-----|-------------|
 | `GET` | `/v1/world/state` | Fetch the most recent world state (time, weather, density). |
 | `POST` | `/v1/world/state` | Set a new world state (body: `{ time, weather, density }`). |
+| `GET` | `/v1/world/forecast` | Fetch the latest weather forecast schedule. |
+| `POST` | `/v1/world/forecast` | Set a new forecast (body: `{ forecast: [{ weather, duration }] }`). |
 | `POST` | `/v1/world/events/death` | Record a death event (body: `{ playerId, killerId?, weapon?, coords?, meta? }`). |
 | `POST` | `/v1/world/events/kill` | Record a kill event (same structure as death). |
 | `POST` | `/v1/world/coords/save` | Save arbitrary labelled coordinates (body: `{ playerId, label, coords }`). |
@@ -529,8 +532,16 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
 - **srp-furniture** – Stores custom furniture placements per character.
   - `GET /v1/characters/{characterId}/furniture` – List furniture items for a character.
   - `POST /v1/characters/{characterId}/furniture` – Place a furniture item with `item`, `x`, `y`, `z` and optional `heading`.
-  - `DELETE /v1/characters/{characterId}/furniture/{id}` – Remove a furniture item.
+- `DELETE /v1/characters/{characterId}/furniture/{id}` – Remove a furniture item.
+### Jobs
 
+- `GET /v1/jobs` – list defined jobs
+- `POST /v1/jobs` – create a job
+- `GET /v1/jobs/{id}` – retrieve job details
+- `POST /v1/jobs/assign` – assign a job to a character (`characterId`, `jobId`, optional `grade`)
+- `POST /v1/jobs/duty` – set job duty status (`characterId`, `jobId`, `onDuty`)
+- `GET /v1/jobs/{characterId}/assignments` – list assignments for a character
+- `POST /v1/broadcast/attempt` – attempt to become a broadcaster
 
 ### Taxi
 
@@ -573,3 +584,24 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
 - `POST /v1/jailbreaks` – start a jailbreak attempt (`characterId`, `prison`).
 - `POST /v1/jailbreaks/{id}/complete` – complete an attempt with `success` flag.
 - `GET /v1/jailbreaks/active` – list active attempts.
+
+## Update – 2025-08-25 (k9)
+
+Introduced K9 unit management for police characters.
+
+### Endpoints
+
+* `GET /v1/characters/{characterId}/k9s` – list K9 units for a character.
+* `POST /v1/characters/{characterId}/k9s` – create a K9 unit (requires `X-Idempotency-Key`).
+* `PATCH /v1/characters/{characterId}/k9s/{k9Id}/active` – update active state (requires `X-Idempotency-Key`).
+* `DELETE /v1/characters/{characterId}/k9s/{k9Id}` – retire a K9 unit (requires `X-Idempotency-Key`).
+
+All endpoints require standard authentication headers.
+
+## Update – 2025-08-25 (climate-overrides)
+
+Added world timecycle management endpoints.
+
+- `GET /v1/world/timecycle` – retrieve current timecycle override.
+- `POST /v1/world/timecycle` – set override with `preset` and optional `expiresAt`.
+- `DELETE /v1/world/timecycle` – clear override.

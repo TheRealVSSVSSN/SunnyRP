@@ -2,7 +2,7 @@ const express = require('express');
 const jobsRepo = require('../repositories/jobsRepository');
 const { sendOk, sendError } = require('../utils/respond');
 
-// Maximum number of players allowed to hold the broadcaster job at the
+// Maximum number of characters allowed to hold the broadcaster job at the
 // same time.  Defaults to 5 but can be overridden with the
 // MAX_BROADCASTERS environment variable.  When the limit is reached
 // additional attempts will be rejected.
@@ -21,26 +21,26 @@ const router = express.Router();
 /**
  * POST /v1/broadcast/attempt
  *
- * Body: { playerId: string }
+ * Body: { characterId: number }
  *
- * Attempts to assign the 'broadcaster' job to the given player.  If
+ * Attempts to assign the 'broadcaster' job to the given character.  If
  * the maximum number of broadcasters has been reached, an error is
  * returned.  On success the assigned job record is returned.
  */
 router.post('/v1/broadcast/attempt', express.json(), async (req, res, next) => {
   try {
-    const { playerId } = req.body || {};
-    if (!playerId) {
+    const { characterId } = req.body || {};
+    if (characterId === undefined) {
       return sendError(
         res,
-        { code: 'INVALID_INPUT', message: 'playerId is required' },
+        { code: 'INVALID_INPUT', message: 'characterId is required' },
         400,
         res.locals.requestId,
         res.locals.traceId,
       );
     }
-    // Determine how many players currently have the broadcaster job
-    const count = await jobsRepo.countPlayersForJob('broadcaster');
+    // Determine how many characters currently have the broadcaster job
+    const count = await jobsRepo.countCharactersForJob('broadcaster');
     if (count >= MAX_BROADCASTERS) {
       return sendError(
         res,
@@ -61,9 +61,9 @@ router.post('/v1/broadcast/attempt', express.json(), async (req, res, next) => {
         res.locals.traceId,
       );
     }
-    // Assign the job to the player (on_duty will be false).  If the
+    // Assign the job to the character (on_duty will be false).  If the
     // assignment already exists it will update the record.
-    const assignment = await jobsRepo.assignJob(playerId, job.id);
+    const assignment = await jobsRepo.assignJob(parseInt(characterId, 10), job.id);
     sendOk(res, assignment, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     next(err);

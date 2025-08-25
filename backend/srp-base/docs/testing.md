@@ -349,3 +349,65 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: jb2' -H 'Content-Type: app
   http://localhost:3010/v1/jailbreaks/1/complete
 curl -H 'X-API-Token: <token>' http://localhost:3010/v1/jailbreaks/active
 ```
+
+Manually verify the k9 endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/characters/1/k9s
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: k91' -H 'Content-Type: application/json' \
+  -d '{"name":"Rex","breed":"German Shepherd"}' \
+  http://localhost:3010/v1/characters/1/k9s
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: k92' -H 'Content-Type: application/json' \
+  -d '{"active":true}' \
+  http://localhost:3010/v1/characters/1/k9s/1/active
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: k93' -X DELETE \
+  http://localhost:3010/v1/characters/1/k9s/1
+=Manually verify the jobs endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/jobs
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: job1' -H 'Content-Type: application/json' \
+  -d '{"name":"police","label":"Police"}' \
+  http://localhost:3010/v1/jobs
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: job2' -H 'Content-Type: application/json' \
+  -d '{"characterId":1,"jobId":1,"grade":0}' \
+  http://localhost:3010/v1/jobs/assign
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/jobs/1/assignments
+```
+
+Manually verify the broadcaster endpoint:
+
+```sh
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: bc1' -H 'Content-Type: application/json' \
+  -d '{"characterId":1}' \
+  http://localhost:3010/v1/broadcast/attempt
+```
+
+Manually verify the debug endpoint:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/debug/status
+```
+
+Manually verify the world state and forecast endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/world/state
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: 1' -H 'Content-Type: application/json' \
+  -d '{"time":"12:00","weather":"CLEAR","density":{}}' \
+  http://localhost:3010/v1/world/state
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/world/forecast
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: 2' -H 'Content-Type: application/json' \
+  -d '{"forecast":[{"weather":"RAIN","duration":30}]}' \
+  http://localhost:3010/v1/world/forecast
+```
+
+Manually verify the world timecycle endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/world/timecycle
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: tc1' -H 'Content-Type: application/json' \
+  -d '{"preset":"w_xmas"}' \
+  http://localhost:3010/v1/world/timecycle
+curl -H 'X-API-Token: <token>' -X DELETE http://localhost:3010/v1/world/timecycle
+```

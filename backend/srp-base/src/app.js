@@ -79,6 +79,9 @@ const coordsaverRoutes = require('./routes/coordsaver.routes');
 // phone domain route
 const phoneRoutes = require('./routes/phone.routes');
 
+// debug domain route
+const debugRoutes = require('./routes/debug.routes');
+
 // chat domain route
 const chatRoutes = require('./routes/chat.routes');
 // connect queue domain route
@@ -97,6 +100,9 @@ const emotesRoutes = require('./routes/emotes.routes');
 
 // peds domain route
 const pedsRoutes = require('./routes/peds.routes');
+
+// k9 domain route
+const k9Routes = require('./routes/k9.routes');
 
 // interact sound domain route
 const interactSoundRoutes = require('./routes/interactSound.routes');
@@ -220,6 +226,9 @@ app.use(cronRoutes);
 
 // mount phone routes
 app.use(phoneRoutes);
+// mount debug routes
+app.use(debugRoutes);
+
 
 // mount chat routes
 app.use(chatRoutes);
@@ -237,6 +246,9 @@ app.use(hudRoutes);
 
 // mount peds routes
 app.use(pedsRoutes);
+
+// mount k9 routes
+app.use(k9Routes);
 
 // mount emotes routes
 app.use(emotesRoutes);

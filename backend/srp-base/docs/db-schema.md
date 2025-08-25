@@ -1,4 +1,6 @@
 # Database Schema
+Added `world_forecast` table for weather scheduling. K9 migration renamed to 057_add_k9_units.sql.
+
 
 ## diamond_blackjack_hands
 
@@ -22,6 +24,26 @@
 | sound | VARCHAR(128) | Sound identifier |
 | volume | FLOAT | Playback volume |
 | played_at | BIGINT | Epoch milliseconds |
+
+## jobs
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| name | VARCHAR(64) | Unique job name |
+| label | VARCHAR(100) | Display label |
+| description | TEXT | Optional description |
+| created_at | TIMESTAMP | Creation time |
+
+## character_jobs
+
+| Column | Type | Notes |
+|---|---|---|
+| character_id | BIGINT | FK to characters.id |
+| job_id | INT | FK to jobs.id |
+| grade | INT | Job grade or rank |
+| on_duty | TINYINT(1) | 1 on duty, 0 off |
+| hired_at | TIMESTAMP | Assignment time |
 
 ## doors
 
@@ -449,3 +471,32 @@
 | started_at | TIMESTAMP | Start time |
 | ended_at | TIMESTAMP | Completion time |
 | success | TINYINT(1) | 1 success, 0 failure |
+
+## k9_units
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| character_id | BIGINT | FK to characters.id |
+| name | VARCHAR(50) | Dog name |
+| breed | VARCHAR(50) | Dog breed |
+| active | TINYINT(1) | 1 active, 0 inactive |
+| created_at | TIMESTAMP | Creation time |
+| retired_at | TIMESTAMP | Retirement time |
+
+## world_forecast
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| forecast | JSON | Array of weather steps |
+| created_at | TIMESTAMP | Creation time |
+
+## world_timecycle
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| preset | VARCHAR(64) | Active timecycle preset |
+| expires_at | TIMESTAMP | Optional expiration time |
+| created_at | TIMESTAMP | Creation time |

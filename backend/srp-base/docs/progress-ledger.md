@@ -48,3 +48,8 @@
 | 44 | import-Pack2 | Enhanced import package management with pricing and cancellation | Extend | Added order retrieval and cancel endpoints |
 | 45 | isPed | Character ped model and state persistence | Create | Added ped state APIs |
 | 46 | jailbreak | Track jailbreak attempts and outcomes | Create | Added attempt logging API |
+| 47 | k9 | Police K9 unit assignments and status tracking | Create | Added K9 unit APIs |
+| 47 | jobsystem | Manage job definitions, assignments and duty status | Create | Added character-scoped jobs API |
+| 48 | srp-debug | Developer diagnostics endpoints | Create | Added server status API |
+| 49 | srp-weathersync | Global weather synchronization with forecast scheduling | Extend | Added world state documentation and forecast API |
+| 50 | climate-overrides | Timecycle overrides and weather preset controls | Extend | Added world timecycle API |

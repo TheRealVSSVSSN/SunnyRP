@@ -12,6 +12,13 @@
 - Extended import pack order APIs with pricing, retrieval and cancellation.
 - Added ped state APIs.
 - Added jailbreak attempt tracking APIs.
+- Added K9 unit management APIs.
+- Added job definition and assignment APIs with character scoping.
+- Updated broadcaster endpoint to use character-based job assignments.
+- Renamed k9 migration to `057_add_k9_units.sql` to resolve duplication.
+- Added debug diagnostics endpoint and repository.
+ - Added world state and forecast APIs.
+- Added timecycle override API for world timecycle presets.
 
 ## File Changes
 
@@ -20,8 +27,8 @@
 | `src/repositories/taxiRepository.js` | A | Persistence for taxi ride requests and completions |
 | `src/routes/taxi.routes.js` | A | REST endpoints for taxi requests and ride lifecycle |
 | `src/migrations/046_add_taxi_rides.sql` | A | Create `taxi_rides` table |
-| `src/app.js` | M | Mounted taxi routes |
-| `openapi/api.yaml` | M | Documented taxi schemas and paths |
+| `src/app.js` | M | Mounted taxi and debug routes |
+| `openapi/api.yaml` | M | Documented taxi and debug paths |
 | `docs/index.md` | M | Logged es_taxi update |
 | `docs/progress-ledger.md` | M | Added es_taxi entry |
 | `docs/events-and-rpcs.md` | M | Mapped taxi events |
@@ -157,7 +164,6 @@
 | `docs/testing.md` | M | Added jailbreak curl examples |
 | `docs/modules/jailbreak.md` | A | Module documentation |
 | `docs/research-log.md` | M | Logged jailbreak research |
-
 | `src/repositories/pedsRepository.js` | A | Persistence for character ped state |
 | `src/routes/peds.routes.js` | A | REST endpoints for ped state |
 | `src/migrations/054_add_character_peds.sql` | A | Create `character_peds` table |
@@ -175,7 +181,86 @@
 | `docs/research-log.md` | M | Logged isPed research |
 | `docs/BASE_API_DOCUMENTATION.md` | M | Documented peds endpoints |
 | `docs/framework-compliance.md` | M | Noted peds module compliance |
+| `src/repositories/k9Repository.js` | A | Persistence for police K9 units |
+| `src/routes/k9.routes.js` | A | REST endpoints for K9 units |
+| `src/migrations/057_add_k9_units.sql` | A | Create `k9_units` table |
+| `src/app.js` | M | Mounted k9 routes |
+| `openapi/api.yaml` | M | Documented k9 schemas and paths |
+| `docs/index.md` | M | Logged k9 update |
+| `docs/progress-ledger.md` | M | Added k9 entry |
+| `docs/framework-compliance.md` | M | Noted k9 module compliance |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented k9 endpoints |
+| `docs/events-and-rpcs.md` | M | Mapped k9 events |
+| `docs/db-schema.md` | M | Documented `k9_units` table |
+| `docs/migrations.md` | M | Listed migration 056 |
+| `docs/admin-ops.md` | M | Added k9 table check |
+| `docs/security.md` | M | Added k9 security note |
+| `docs/testing.md` | M | Added k9 curl examples |
+| `docs/modules/k9.md` | A | Module documentation |
+| `docs/research-log.md` | M | Logged k9 research |
+| `src/repositories/jobsRepository.js` | M | Character-scoped job assignments |
+| `src/routes/jobs.routes.js` | M | CharacterId and grade support |
+| `src/routes/broadcaster.routes.js` | M | Character-based broadcaster attempts |
+| `src/migrations/056_add_character_jobs.sql` | A | Create `character_jobs` table |
+| `openapi/api.yaml` | M | Documented jobs and broadcaster paths |
+| `docs/index.md` | M | Logged jobsystem update |
+| `docs/progress-ledger.md` | M | Added jobsystem entry |
+| `docs/framework-compliance.md` | M | Noted jobs and broadcaster module compliance |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented jobs and broadcaster endpoints |
+| `docs/events-and-rpcs.md` | M | Mapped jobsystem and broadcaster events |
+| `docs/db-schema.md` | M | Documented jobs and character_jobs tables |
+| `docs/migrations.md` | M | Listed migration 056 |
+| `docs/modules/jobs.md` | A | Module documentation |
+| `docs/modules/broadcaster.md` | M | Updated for characterId |
+| `docs/research-log.md` | M | Logged jobsystem research |
 
+| `src/repositories/debugRepository.js` | A | Gather runtime diagnostics |
+| `src/routes/debug.routes.js` | A | Expose debug status endpoint |
+| `docs/modules/debug.md` | A | Module documentation |
+| `docs/index.md` | M | Logged srp-debug update and migration fix |
+| `docs/progress-ledger.md` | M | Added srp-debug entry |
+| `docs/events-and-rpcs.md` | M | Mapped srp-debug diagnostics |
+| `docs/db-schema.md` | M | Noted migration rename |
+| `docs/migrations.md` | M | Renamed K9 migration to 057 |
+| `docs/admin-ops.md` | M | Added k9_units check |
+| `docs/security.md` | M | Added debug security note |
+| `docs/testing.md` | M | Added debug test example |
+| `docs/research-log.md` | M | Logged srp-debug research attempt |
+| `src/repositories/worldRepository.js` | M | Added forecast methods |
+| `src/routes/world.routes.js` | M | Added forecast endpoints |
+| `src/migrations/058_add_world_forecast.sql` | A | Create `world_forecast` table |
+| `openapi/api.yaml` | M | Documented world state and forecast paths |
+| `docs/index.md` | M | Logged srp-weathersync update |
+| `docs/progress-ledger.md` | M | Added srp-weathersync entry |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented world forecast endpoints |
+| `docs/events-and-rpcs.md` | M | Mapped srp-weathersync resource |
+| `docs/db-schema.md` | M | Documented `world_forecast` table |
+| `docs/migrations.md` | M | Listed migration 058 |
+| `docs/admin-ops.md` | M | Added world_forecast table check |
+| `docs/security.md` | M | Added world route security note |
+| `docs/testing.md` | M | Added world curl examples |
+| `docs/modules/world.md` | A | Module documentation |
+| `docs/research-log.md` | M | Logged srp-weathersync research |
+| `docs/framework-compliance.md` | M | Noted world module compliance |
+| `CHANGELOG.md` | M | Added world forecast entry |
+| `docs/framework-compliance.md` | M | Added debug module compliance |
+| `src/repositories/worldRepository.js` | M | Timecycle override persistence |
+| `src/routes/world.routes.js` | M | Timecycle override endpoints |
+| `src/migrations/059_add_world_timecycle.sql` | A | Create `world_timecycle` table |
+| `openapi/api.yaml` | M | Document timecycle override paths |
+| `docs/index.md` | M | Logged climate-overrides update |
+| `docs/progress-ledger.md` | M | Added climate-overrides entry |
+| `docs/framework-compliance.md` | M | Noted world timecycle compliance |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented world timecycle endpoints |
+| `docs/events-and-rpcs.md` | M | Mapped climate-overrides resource |
+| `docs/db-schema.md` | M | Documented `world_timecycle` table |
+| `docs/migrations.md` | M | Listed migration 059 |
+| `docs/admin-ops.md` | M | Added world_timecycle table check |
+| `docs/security.md` | M | Noted world timecycle security |
+| `docs/testing.md` | M | Added timecycle curl examples |
+| `docs/modules/world.md` | M | Updated module documentation |
+| `docs/research-log.md` | M | Logged climate-overrides research |
+| `CHANGELOG.md` | M | Added climate-overrides entry |
 ## Startup Notes
 
 - Run `node src/bootstrap/migrate.js` to apply migration `046_add_taxi_rides.sql`.
@@ -184,3 +269,7 @@
 - Run `node src/bootstrap/migrate.js` to apply migration `052_add_import_pack_orders.sql`.
 - Run `node src/bootstrap/migrate.js` to apply migration `054_add_character_peds.sql`.
 - Run `node src/bootstrap/migrate.js` to apply migration `055_add_jailbreak_attempts.sql`.
+- Run `node src/bootstrap/migrate.js` to apply migration `057_add_k9_units.sql`.
+- Run `node src/bootstrap/migrate.js` to apply migration `056_add_character_jobs.sql`.
+- Run `node src/bootstrap/migrate.js` to apply migration `058_add_world_forecast.sql`.
+- Run `node src/bootstrap/migrate.js` to apply migration `059_add_world_timecycle.sql`.

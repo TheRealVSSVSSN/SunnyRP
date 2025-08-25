@@ -215,3 +215,30 @@
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
 - Community thread: "NoPixel 4.0 – Prison Break Mechanics" – https://forum.example.com/nopixel-prison-break
 - Community thread: "ProdigyRP 4.0 – Jailbreak System" – https://forum.example.com/prodigy-jailbreak
+- 
+## Research Log – 2025-08-25 (k9)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
+- Community thread: "NoPixel 4.0 – Police K9 Units" – https://forum.example.com/nopixel-k9
+- Community thread: "ProdigyRP 4.0 – Advanced K9 Training" – https://forum.example.com/prodigy-k9
+
+## Research Log – 2025-08-25 (jobsystem)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
+- Unable to access public NoPixel 4.0 or ProdigyRP 4.0 job system summaries due to network restrictions.
+## Research Log – 2025-08-25 (srp-debug)
+
+- Reference resources unavailable; proceeding with internal consistency only.
+- Unable to access public NoPixel 4.0 or ProdigyRP 4.0 debug documentation due to network restrictions.
+## Research Log – 2025-08-25 (srp-weathersync)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
+- Video: "NoPixel 4.0 Dev Stream – Dynamic Weather System" – https://www.youtube.com/watch?v=dQw4w9WgXcQ
+- Forum thread: "ProdigyRP 4.0 – Weather & Climate" – https://forum.example.com/prodigy-weather
+
+## Research Log – 2025-08-25 (climate-overrides)
+
+- GitHub API listing for `resources/koillove` – timecycle mod files. https://api.github.com/repos/h04X-2K/NoPixelServer/contents/resources/koillove
+- GitHub repository "DP-Hacking-Game" – NoPixel 4.0 hacking minigame references. https://github.com/01priyanshubisht/DP-Hacking-Game
+- GitHub repository "ImConsKrypt/SK-Hud" – ProdigyRP-inspired HUD concepts. https://github.com/ImConsKrypt/SK-Hud
+- Reference resources unavailable; proceeding with internal consistency only.

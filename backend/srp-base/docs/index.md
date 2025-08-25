@@ -304,3 +304,42 @@ Introduced jailbreak attempt tracking to support the **jailbreak** resource.
 * Added Jailbreak module with `/v1/jailbreaks`, `/v1/jailbreaks/active` and `/v1/jailbreaks/{id}/complete` endpoints.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/jailbreak.md`.
+
+## Update – 2025-08-25
+
+Introduced police K9 unit tracking to support the **k9** resource.
+
+* Added K9 module with `GET /v1/characters/{characterId}/k9s`, `POST /v1/characters/{characterId}/k9s`, `PATCH /v1/characters/{characterId}/k9s/{k9Id}/active` and `DELETE /v1/characters/{characterId}/k9s/{k9Id}` endpoints.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/k9.md`.
+Introduced character-scoped job assignments to support the **jobsystem** resource.
+
+* Added Jobs module with `/v1/jobs` CRUD and assignment endpoints plus migration and OpenAPI documentation.
+* Updated Broadcaster module to use character identifiers for role attempts.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/jobs.md`.
+
+## Update – 2025-08-25
+
+Resolved duplicate migration numbering and added debug diagnostics endpoint supporting the **srp-debug** resource.
+
+* Renamed K9 migration to `057_add_k9_units.sql`.
+* Added Debug module with `GET /v1/debug/status` endpoint.
+* Reference resources unavailable; proceeding with internal consistency only.
+
+## Update – 2025-08-25
+
+Introduced world weather forecast tracking to support the **srp-weathersync** resource.
+
+* Added world forecast endpoints and migration `058_add_world_forecast.sql`.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/world.md`.
+
+## Update – 2025-08-25
+
+Extended world module with timecycle override support for the **climate-overrides** resource (formerly koillove).
+
+* Added world timecycle endpoints and repository functions.
+* Migration `059_add_world_timecycle.sql` creates `world_timecycle` table.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/world.md`.

@@ -1098,3 +1098,98 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Drop `character_peds` table and remove ped routes and repository.
+
+## 2025-08-25 – k9
+
+### Added
+
+* K9 unit endpoints: `/v1/characters/{characterId}/k9s` GET/POST, `/v1/characters/{characterId}/k9s/{k9Id}/active` PATCH, `/v1/characters/{characterId}/k9s/{k9Id}` DELETE.
+* Schema and documentation for managing police dogs per character.
+
+### Migrations
+
+* `057_add_k9_units.sql` creates `k9_units` table.
+
+### Risks
+
+* Mismanaged active flags could allow multiple active K9s per character if clients race.
+
+### Rollback
+
+* Drop `k9_units` table and remove K9 routes and repository.
+
+## 2025-08-25 – jobsystem
+
+### Added
+
+* Jobs module with `/v1/jobs` CRUD and character assignments.
+* Broadcaster updates to use character-based assignments.
+
+### Migrations
+
+* `056_add_character_jobs.sql`
+
+### Risks
+
+* Incorrect character scoping could misassign jobs or duty status.
+
+### Rollback
+
+* Drop `character_jobs` table and remove job and broadcaster changes.
+## 2025-08-25 – srp-debug
+
+### Added
+
+* Debug status endpoint exposing runtime diagnostics.
+
+### Changed
+
+* Renamed `056_add_k9_units.sql` to `057_add_k9_units.sql` to resolve duplicate migration numbers.
+
+### Migrations
+
+* `057_add_k9_units.sql`
+
+### Risks
+
+* Debug endpoint reveals internal metrics; ensure API token remains secret.
+
+### Rollback
+
+* Remove debug routes and repository and restore original migration filename.
+
+## 2025-08-25
+
+### Added
+
+* Weather forecast endpoints `/v1/world/forecast` with persistence and repository.
+
+### Changed
+
+* Documented existing world state endpoints in OpenAPI.
+
+### Migrations
+
+* `058_add_world_forecast.sql`
+
+### Risks
+
+* Forecast data reveals planned weather; ensure API token and HMAC headers are enforced.
+
+### Rollback
+
+* Drop `world_forecast` table and remove world forecast routes.
+
+## 2025-08-25 – climate-overrides
+
+### Added
+* Timecycle override endpoints `/v1/world/timecycle` and repository helpers.
+
+### Migrations
+* `059_add_world_timecycle.sql` creates `world_timecycle` table.
+
+### Risks
+* Incorrect preset names could cause inconsistent visuals.
+
+### Rollback
+* Drop `world_timecycle` table and remove timecycle routes and repository.

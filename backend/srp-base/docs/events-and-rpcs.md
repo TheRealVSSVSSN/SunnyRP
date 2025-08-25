@@ -38,6 +38,7 @@
 | emotes | Resource lets players mark favorite emote commands for quick selection | `GET/POST/DELETE /v1/characters/{characterId}/emotes` |
 | emspack | Resource emits duty start/end and treatment events | `GET/POST/PATCH/DELETE /v1/ems/records`, `GET /v1/ems/shifts/active`, `POST /v1/ems/shifts`, `POST /v1/ems/shifts/{id}/end` |
 | es_taxi | Players request taxi rides and drivers accept/complete them | `POST /v1/taxi/requests`, `POST /v1/taxi/requests/{id}/accept`, `POST /v1/taxi/requests/{id}/complete` |
+| k9 | Police dog deployment and status commands | `GET/POST /v1/characters/{characterId}/k9s`, `PATCH /v1/characters/{characterId}/k9s/{k9Id}/active`, `DELETE /v1/characters/{characterId}/k9s/{k9Id}` |
 | furniture | Resource lets players place or remove furniture items | `GET /v1/characters/{characterId}/furniture`, `POST /v1/characters/{characterId}/furniture`, `DELETE /v1/characters/{characterId}/furniture/{id}` |
 | gabz_mrpd | Map resource for Mission Row PD building; no events | N/A |
 | gabz_pillbox_hospital | Resource handles hospital admissions and bed management | `GET /v1/hospital/admissions/active`, `POST /v1/hospital/admissions`, `POST /v1/hospital/admissions/{id}/discharge` |
@@ -47,3 +48,8 @@
 | heli | Resource logs helicopter flight start and end events | `POST /v1/heli/flights`, `POST /v1/heli/flights/{id}/end`, `GET /v1/characters/{characterId}/heli/flights` |
 | isPed | Resource manages ped state updates like model, health and armor | `GET/PUT /v1/characters/{characterId}/ped` |
 | jailbreak | Resource triggers jailbreak start and completion events with character and prison info | `POST /v1/jailbreaks`, `POST /v1/jailbreaks/{id}/complete`, `GET /v1/jailbreaks/active` |
+| jobsystem | Resource manages job definitions and assignments | `GET /v1/jobs`, `POST /v1/jobs`, `GET /v1/jobs/{id}`, `POST /v1/jobs/assign`, `POST /v1/jobs/duty`, `GET /v1/jobs/{characterId}/assignments` |
+| broadcaster | Event to attempt joining the broadcaster job | `POST /v1/broadcast/attempt` |
+| srp-debug | Developer requests for runtime diagnostics | `GET /v1/debug/status` returns server metrics |
+| srp-weathersync | Resource broadcasts weather and time updates to clients | `GET /v1/world/state`, `POST /v1/world/state`, `GET /v1/world/forecast`, `POST /v1/world/forecast` |
+| climate-overrides | Resource applies custom timecycle XMLs | `/v1/world/timecycle` to set or clear presets |
