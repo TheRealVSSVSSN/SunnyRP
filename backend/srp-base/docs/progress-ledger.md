@@ -40,3 +40,4 @@
 | 36 | furniture | Furniture placement persistence per character | Create | Added furniture APIs |
 | 37 | gabz_mrpd | Mission Row PD mapping; no server logic | Skip | Asset-only |
 | 38 | gabz_pillbox_hospital | Pillbox hospital admissions and bed tracking | Create | Added patient admission API |
+| 39 | garages | Vehicle storage per character with garage definitions | Extend | Added character-scoped storage API |

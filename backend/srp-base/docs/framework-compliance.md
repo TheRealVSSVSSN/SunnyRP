@@ -79,3 +79,4 @@ practice is supported by citations.
 | **furniture module** | Furniture endpoints follow the established layered pattern with authentication and idempotency. |
 | **characters module** | Added endpoint to retrieve the active character, maintaining layered design and validation. |
 | **hospital module** | Hospital admission endpoints follow the established layered pattern with authentication and idempotency. |
+| **garages module** | Garage endpoints follow the established layered pattern with authentication, rate limiting and idempotency. |

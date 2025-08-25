@@ -988,3 +988,23 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Drop `hospital_admissions` table and remove hospital routes and documentation.
+
+## 2025-08-25 – garages
+
+### Added
+
+* Garage CRUD and character-scoped vehicle storage endpoints.
+* Listing stored vehicles by character.
+
+### Migrations
+
+* `049_add_garage_vehicle_character.sql` adds `character_id` to `garage_vehicles`.
+
+### Risks
+
+* Incorrect character scoping could expose vehicle records to other players.
+
+### Rollback
+
+* Remove garage routes and repository changes.
+* Drop `character_id` column from `garage_vehicles`.

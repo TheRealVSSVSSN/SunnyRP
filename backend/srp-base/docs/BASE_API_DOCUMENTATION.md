@@ -532,3 +532,13 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
 - `GET /v1/hospital/admissions/active` – list current admissions
 - `POST /v1/hospital/admissions` – admit a character
 - `POST /v1/hospital/admissions/{id}/discharge` – discharge an admission
+
+### Garages
+
+- `GET /v1/garages` – list all garages
+- `POST /v1/garages` – create a garage
+- `PUT /v1/garages/{id}` – update a garage
+- `DELETE /v1/garages/{id}` – delete a garage
+- `POST /v1/garages/{garageId}/store` – store a vehicle for a character
+- `POST /v1/garages/{garageId}/retrieve` – retrieve a stored vehicle
+- `GET /v1/characters/{characterId}/garages/{garageId}/vehicles` – list character vehicles in a garage

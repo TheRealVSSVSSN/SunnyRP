@@ -241,3 +241,12 @@ Introduced patient admission tracking to support the **gabz_pillbox_hospital** r
 * Added Hospital module with `/v1/hospital/admissions` endpoints and migration.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/hospital.md`.
+
+## Update – 2025-08-25
+
+Extended parity for the **garages** resource by scoping stored vehicles to characters.
+
+* Added Garage module with `/v1/garages` CRUD and character vehicle endpoints.
+* Migration `049_add_garage_vehicle_character.sql` adds `character_id` to `garage_vehicles`.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/garages.md`.

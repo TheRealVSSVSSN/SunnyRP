@@ -46,3 +46,4 @@
 | 046_add_taxi_rides.sql | Taxi ride request table |
 | 047_add_furniture.sql | Furniture table |
 | 048_add_hospital_admissions.sql | Hospital admissions table |
+| 049_add_garage_vehicle_character.sql | Add character_id to garage_vehicles |

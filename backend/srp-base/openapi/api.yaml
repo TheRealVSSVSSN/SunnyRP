@@ -1445,6 +1445,36 @@ components:
       notes:
         type: string
         nullable: true
+  Garage:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      location:
+        type: object
+        nullable: true
+      capacity:
+        type: integer
+  GarageVehicle:
+    type: object
+    properties:
+      id:
+        type: integer
+      garageId:
+        type: integer
+      vehicleId:
+        type: integer
+      characterId:
+        type: integer
+      storedAt:
+        type: string
+        format: date-time
+      retrievedAt:
+        type: string
+        format: date-time
+        nullable: true
 security:
   - ApiToken: []
 paths:
@@ -5458,3 +5488,214 @@ paths:
                     type: string
         '400':
           $ref: '#/components/responses/BadRequest'
+  /v1/garages:
+    get:
+      summary: List all garages
+      responses:
+        '200':
+          description: List of garages
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      garages:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Garage'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+    post:
+      summary: Create a garage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Garage'
+      responses:
+        '200':
+          description: Created garage
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/Garage'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+  /v1/garages/{id}:
+    put:
+      summary: Update a garage
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Garage'
+      responses:
+        '200':
+          description: Updated garage
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/Garage'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+    delete:
+      summary: Delete a garage
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+  /v1/garages/{garageId}/store:
+    post:
+      summary: Store a vehicle in a garage
+      parameters:
+        - in: path
+          name: garageId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                vehicleId:
+                  type: integer
+                characterId:
+                  type: integer
+      responses:
+        '200':
+          description: Stored record
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/GarageVehicle'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/garages/{garageId}/retrieve:
+    post:
+      summary: Retrieve a vehicle from a garage
+      parameters:
+        - in: path
+          name: garageId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                vehicleId:
+                  type: integer
+                characterId:
+                  type: integer
+      responses:
+        '200':
+          description: Vehicle retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/characters/{characterId}/garages/{garageId}/vehicles:
+    get:
+      summary: List vehicles stored by a character in a garage
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+        - in: path
+          name: garageId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Stored vehicles
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      vehicles:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/GarageVehicle'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+
