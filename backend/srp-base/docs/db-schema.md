@@ -113,6 +113,7 @@ Added `world_forecast` table for weather scheduling. K9 migration renamed to 057
 | data | JSON | Coordinates and dimensions |
 | created_by | BIGINT | Optional character ID |
 | created_at | TIMESTAMP | Creation time |
+| expires_at | TIMESTAMP | Optional expiration time |
 
 ## wise_audio_tracks
 

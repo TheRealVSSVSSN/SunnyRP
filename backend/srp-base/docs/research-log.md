@@ -254,3 +254,8 @@
 
 - Sparse checkout of `resources/PolicePack` from `https://github.com/h04X-2K/NoPixelServer` for police asset naming.
 - ESX police job dispatch flow – https://github.com/ESX-Official/esx_policejob
+
+## Research Log – 2025-02-14 (PolyZone)
+
+- Cloned `https://github.com/h04X-2K/NoPixelServer` and reviewed `resources/PolyZone` for zone definition patterns.
+- Reviewed ND Core and ESX zone handling to align naming and expiration flows.
