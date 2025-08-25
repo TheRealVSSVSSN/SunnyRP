@@ -35,3 +35,4 @@
 | coordsaver | Resource lets players save named coordinates | `GET /v1/characters/{characterId}/coords`, `POST /v1/characters/{characterId}/coords`, `DELETE /v1/characters/{characterId}/coords/{id}` |
 | drz_interiors | Resource triggers save/load events for apartment interior templates | `GET /v1/apartments/{apartmentId}/interior`, `POST /v1/apartments/{apartmentId}/interior` |
 | emotes | Resource lets players mark favorite emote commands for quick selection | `GET/POST/DELETE /v1/characters/{characterId}/emotes` |
+| emspack | Resource emits duty start/end and treatment events | `GET/POST/PATCH/DELETE /v1/ems/records`, `GET /v1/ems/shifts/active`, `POST /v1/ems/shifts`, `POST /v1/ems/shifts/{id}/end` |

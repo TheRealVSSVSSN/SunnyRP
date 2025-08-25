@@ -29,3 +29,4 @@
 - Ensure the `character_coords` table exists for saved coordinates.
 - Ensure the `interiors` table exists for apartment interior layouts.
 - Ensure the `character_emotes` table exists for favorite emotes.
+- Ensure the `ems_records` and `ems_shift_logs` tables exist for EMS operations.

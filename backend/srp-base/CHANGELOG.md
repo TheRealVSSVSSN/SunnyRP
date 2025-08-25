@@ -898,3 +898,21 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Drop `character_emotes` table and remove emotes routes.
+
+## 2025-08-25 – emspack
+
+### Added
+
+* EMS module with `/v1/ems/records` and `/v1/ems/shifts` endpoints to log medical records and duty shifts.
+
+### Migrations
+
+* `045_add_ems_shift_logs.sql`
+
+### Risks
+
+* Multiple active shifts could occur if clients bypass the API; server guards only via code checks.
+
+### Rollback
+
+* Remove EMS routes and drop `ems_shift_logs` table.

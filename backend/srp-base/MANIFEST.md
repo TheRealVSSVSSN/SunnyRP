@@ -802,3 +802,26 @@ Legend: **A** = Added, **M** = Modified.
 | `MANIFEST.md` | M | Recorded emotes update. |
 
 Legend: **A** = Added, **M** = Modified.
+
+# Update – 2025-08-25 (emspack)
+
+| Path | Status | Notes |
+|---|---|---|
+| `src/repositories/emsRepository.js` | M | Added EMS shift helpers |
+| `src/routes/ems.routes.js` | M | Added shift routes |
+| `src/migrations/045_add_ems_shift_logs.sql` | A | Create EMS shift logs table |
+| `openapi/api.yaml` | M | Documented EMS record and shift endpoints |
+| `docs/index.md` | M | Logged emspack update |
+| `docs/progress-ledger.md` | M | Added emspack entry |
+| `docs/framework-compliance.md` | M | Noted EMS module compliance |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented EMS endpoints |
+| `docs/events-and-rpcs.md` | M | Mapped EMS events |
+| `docs/db-schema.md` | M | Documented ems tables |
+| `docs/migrations.md` | M | Listed migration 045 |
+| `docs/admin-ops.md` | M | Added EMS table checks |
+| `docs/security.md` | M | EMS security note |
+| `docs/testing.md` | M | Added EMS curl examples |
+| `docs/modules/ems.md` | A | Module documentation |
+| `docs/research-log.md` | M | Logged emspack research |
+
+Legend: **A** = Added, **M** = Modified.

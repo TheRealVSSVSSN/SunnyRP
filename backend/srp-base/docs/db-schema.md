@@ -293,3 +293,25 @@
 | character_id | INT | FK to characters.id |
 | emote | VARCHAR(64) | Emote command name |
 | created_at | TIMESTAMP | Creation time |
+
+## ems_records
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| patient_id | VARCHAR(50) | Character ID of the patient |
+| doctor_id | VARCHAR(50) | Character ID of the medic |
+| treatment | TEXT | Treatment details |
+| status | ENUM('open','closed') | Record status |
+| created_at | TIMESTAMP | Creation time |
+| updated_at | TIMESTAMP | Update time |
+
+## ems_shift_logs
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| character_id | BIGINT | FK to characters.id |
+| start_time | TIMESTAMP | Shift start time |
+| end_time | TIMESTAMP NULL | Shift end time |
+
