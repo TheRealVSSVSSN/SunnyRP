@@ -602,52 +602,75 @@ components:
         notes:
           type: string
           nullable: true
-    DiamondBlackjackHand:
+    DiamondCasinoGame:
       type: object
       properties:
         id:
           type: integer
-        characterId:
+        gameType:
           type: string
-        tableId:
-          type: integer
-        bet:
-          type: integer
-        payout:
-          type: integer
-        dealerHand:
+        state:
           type: string
-        playerHand:
-          type: string
-        playedAt:
+        metadata:
+          type: object
+        result:
+          type: object
+        createdAt:
           type: integer
           format: int64
-    DiamondBlackjackHandCreateRequest:
-      type: object
-      required:
-        - characterId
-        - tableId
-        - bet
-        - payout
-        - dealerHand
-        - playerHand
-      properties:
-        characterId:
-          type: string
-        tableId:
-          type: integer
-        bet:
-          type: integer
-        payout:
-          type: integer
-        dealerHand:
-          type: string
-        playerHand:
-          type: string
-        playedAt:
+        resolvedAt:
           type: integer
           format: int64
           nullable: true
+        bets:
+          type: array
+          items:
+            $ref: '#/components/schemas/DiamondCasinoBet'
+    DiamondCasinoGameCreateRequest:
+      type: object
+      required:
+        - gameType
+      properties:
+        gameType:
+          type: string
+        metadata:
+          type: object
+    DiamondCasinoBet:
+      type: object
+      properties:
+        id:
+          type: integer
+        gameId:
+          type: integer
+        characterId:
+          type: string
+        betAmount:
+          type: integer
+        betData:
+          type: object
+        result:
+          type: object
+        payout:
+          type: integer
+        createdAt:
+          type: integer
+          format: int64
+        resolvedAt:
+          type: integer
+          format: int64
+          nullable: true
+    DiamondCasinoBetCreateRequest:
+      type: object
+      required:
+        - characterId
+        - amount
+      properties:
+        characterId:
+          type: string
+        amount:
+          type: integer
+        betData:
+          type: object
     InteractSoundPlay:
       type: object
       properties:
@@ -4526,19 +4549,19 @@ paths:
                     type: string
         '400':
           $ref: '#/components/responses/BadRequest'
-  /v1/diamond-blackjack/hands:
+  /v1/diamond-casino/games:
     post:
-      summary: Record a blackjack hand
-      operationId: recordBlackjackHand
+      summary: Create a casino game session
+      operationId: createDiamondCasinoGame
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DiamondBlackjackHandCreateRequest'
+              $ref: '#/components/schemas/DiamondCasinoGameCreateRequest'
       responses:
         '200':
-          description: Hand recorded
+          description: Game created
           content:
             application/json:
               schema:
@@ -4549,27 +4572,27 @@ paths:
                   data:
                     type: object
                     properties:
-                      hand:
-                        $ref: '#/components/schemas/DiamondBlackjackHand'
+                      game:
+                        $ref: '#/components/schemas/DiamondCasinoGame'
                   requestId:
                     type: string
                   traceId:
                     type: string
         '400':
           $ref: '#/components/responses/BadRequest'
-  /v1/diamond-blackjack/hands/{characterId}:
+  /v1/diamond-casino/games/{gameId}:
     get:
-      summary: List recent blackjack hands for a character
-      operationId: listBlackjackHands
+      summary: Retrieve a casino game with bets
+      operationId: getDiamondCasinoGame
       parameters:
         - in: path
-          name: characterId
+          name: gameId
           required: true
           schema:
-            type: string
+            type: integer
       responses:
         '200':
-          description: List of hands
+          description: Game
           content:
             application/json:
               schema:
@@ -4580,14 +4603,51 @@ paths:
                   data:
                     type: object
                     properties:
-                      hands:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/DiamondBlackjackHand'
+                      game:
+                        $ref: '#/components/schemas/DiamondCasinoGame'
                   requestId:
                     type: string
                   traceId:
                     type: string
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /v1/diamond-casino/games/{gameId}/bets:
+    post:
+      summary: Place a bet on a casino game
+      operationId: placeDiamondCasinoBet
+      parameters:
+        - in: path
+          name: gameId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DiamondCasinoBetCreateRequest'
+      responses:
+        '200':
+          description: Bet placed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      bet:
+                        $ref: '#/components/schemas/DiamondCasinoBet'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '400':
           $ref: '#/components/responses/BadRequest'
   /v1/interact-sound/plays:

@@ -334,3 +334,14 @@ Introduced world weather forecast tracking to support the **srp-weathersync** re
 * Added world forecast endpoints and migration `058_add_world_forecast.sql`.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/world.md`.
+
+## Update – 2025-03-02
+
+Replaced the standalone DiamondBlackjack module with a unified **Diamond Casino** backend and introduced core realtime infrastructure.
+
+* Added Diamond Casino module with `/v1/diamond-casino/games` and `/v1/diamond-casino/games/{gameId}/bets` endpoints.
+* Added WebSocket gateway with heartbeat and authenticated connections.
+* Added webhook dispatcher scaffolding with HMAC signatures and retry.
+* Added drift-aware scheduler to resolve casino games server-side.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/diamondCasino.md`.

@@ -3,7 +3,7 @@
 - All requests must include `X-API-Token`.
 - Optional HMAC protection via `X-Ts`, `X-Nonce` and `X-Sig` headers.
 - Mutating endpoints should provide `X-Idempotency-Key` for safe retries.
-- Diamond blackjack routes inherit the same authentication and idempotency requirements.
+- Diamond casino routes inherit the same authentication and idempotency requirements.
 - Interact sound routes inherit the same authentication and idempotency requirements.
 - Doors routes inherit the same authentication and idempotency requirements.
 - PolicePack routes (evidence custody and account characters) inherit the same authentication and idempotency requirements.
@@ -38,6 +38,8 @@
 - Jailbreak routes inherit the same authentication and idempotency requirements.
 - K9 routes inherit the same authentication and idempotency requirements.
 - Jobs routes inherit the same authentication and idempotency requirements.
+- WebSocket connections require a `token` query parameter matching the `X-API-Token` and drop clients missing heartbeats.
+- Webhook dispatcher signs payloads with HMAC and retries failed deliveries.
 - Broadcaster routes inherit the same authentication and idempotency requirements.
 - Debug routes inherit the same authentication and rate limiting requirements.
 - World routes inherit the same authentication and idempotency requirements.

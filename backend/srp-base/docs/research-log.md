@@ -235,3 +235,8 @@
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
 - Video: "NoPixel 4.0 Dev Stream – Dynamic Weather System" – https://www.youtube.com/watch?v=dQw4w9WgXcQ
 - Forum thread: "ProdigyRP 4.0 – Weather & Climate" – https://forum.example.com/prodigy-weather
+## Research Log – 2025-03-02 (DiamondCasino)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` for DiamondBlackjack but received HTTP 403; proceeded with internal consistency only.
+- Reviewed `ws` WebSocket server documentation for heartbeat and broadcast patterns.
+- Reviewed Node.js `setTimeout` and scheduling guidance for jittered task runners.
