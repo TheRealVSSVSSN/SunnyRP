@@ -34,6 +34,30 @@ router.post('/v1/world/state', async (req, res, next) => {
   }
 });
 
+// Fetch the latest weather forecast schedule. Returns null if no
+// forecast has been stored.
+router.get('/v1/world/forecast', async (req, res, next) => {
+  try {
+    const forecast = await worldRepo.getForecast();
+    sendOk(res, forecast, res.locals.requestId, res.locals.traceId);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Update the weather forecast schedule. Clients should include
+// idempotency and HMAC headers to avoid duplicate updates and to
+// authenticate the call.
+router.post('/v1/world/forecast', async (req, res, next) => {
+  try {
+    const { forecast } = req.body || {};
+    await worldRepo.updateForecast(forecast);
+    sendOk(res, { message: 'Forecast updated' }, res.locals.requestId, res.locals.traceId);
+  } catch (err) {
+    next(err);
+  }
+});
+
 // Record a death event.  Accepts a JSON body with playerId,
 // killerId (optional), weapon (optional) and coords.  This
 // endpoint simply persists the event; consumers can subscribe to

@@ -326,3 +326,11 @@ Resolved duplicate migration numbering and added debug diagnostics endpoint supp
 * Renamed K9 migration to `057_add_k9_units.sql`.
 * Added Debug module with `GET /v1/debug/status` endpoint.
 * Reference resources unavailable; proceeding with internal consistency only.
+
+## Update – 2025-08-25
+
+Introduced world weather forecast tracking to support the **srp-weathersync** resource.
+
+* Added world forecast endpoints and migration `058_add_world_forecast.sql`.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/world.md`.

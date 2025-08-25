@@ -1711,6 +1711,43 @@ components:
     properties:
       active:
         type: boolean
+  WorldState:
+    type: object
+    properties:
+      id:
+        type: integer
+      time:
+        type: string
+        nullable: true
+      weather:
+        type: string
+        nullable: true
+      density:
+        type: object
+        nullable: true
+      updatedAt:
+        type: string
+        format: date-time
+  ForecastEntry:
+    type: object
+    properties:
+      weather:
+        type: string
+      duration:
+        type: integer
+        description: Minutes for this weather step
+  WorldForecast:
+    type: object
+    properties:
+      id:
+        type: integer
+      forecast:
+        type: array
+        items:
+          $ref: '#/components/schemas/ForecastEntry'
+      createdAt:
+        type: string
+        format: date-time
 security:
   - ApiToken: []
 paths:
@@ -6879,6 +6916,123 @@ paths:
                     properties:
                       removed:
                         type: integer
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/world/state:
+    get:
+      summary: Get latest world state
+      responses:
+        '200':
+          description: Latest world state
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/WorldState'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    post:
+      summary: Update world state
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                time:
+                  type: string
+                  nullable: true
+                weather:
+                  type: string
+                  nullable: true
+                density:
+                  type: object
+                  nullable: true
+      responses:
+        '200':
+          description: Update acknowledgement
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/world/forecast:
+    get:
+      summary: Get weather forecast
+      responses:
+        '200':
+          description: Current forecast
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/WorldForecast'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    post:
+      summary: Update weather forecast
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                forecast:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ForecastEntry'
+      responses:
+        '200':
+          description: Update acknowledgement
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
                   requestId:
                     type: string
                   traceId:

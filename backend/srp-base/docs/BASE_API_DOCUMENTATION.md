@@ -263,6 +263,8 @@ In addition to the core identity, permissions, characters and admin APIs describ
 |-------|-----|-------------|
 | `GET` | `/v1/world/state` | Fetch the most recent world state (time, weather, density). |
 | `POST` | `/v1/world/state` | Set a new world state (body: `{ time, weather, density }`). |
+| `GET` | `/v1/world/forecast` | Fetch the latest weather forecast schedule. |
+| `POST` | `/v1/world/forecast` | Set a new forecast (body: `{ forecast: [{ weather, duration }] }`). |
 | `POST` | `/v1/world/events/death` | Record a death event (body: `{ playerId, killerId?, weapon?, coords?, meta? }`). |
 | `POST` | `/v1/world/events/kill` | Record a kill event (same structure as death). |
 | `POST` | `/v1/world/coords/save` | Save arbitrary labelled coordinates (body: `{ playerId, label, coords }`). |

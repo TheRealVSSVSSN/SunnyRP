@@ -38,6 +38,34 @@ async function updateWorldState(state) {
 }
 
 /**
+ * Retrieve the latest weather forecast schedule. Returns null if no
+ * forecast has been stored.
+ *
+ * @returns {Promise<object|null>}
+ */
+async function getForecast() {
+  const rows = await db.query(
+    'SELECT id, forecast, created_at AS createdAt FROM world_forecast ORDER BY id DESC LIMIT 1',
+    [],
+  );
+  if (!rows[0]) return null;
+  return { ...rows[0], forecast: JSON.parse(rows[0].forecast || '[]') };
+}
+
+/**
+ * Persist a new weather forecast. The forecast should be an array of
+ * objects describing upcoming weather steps.
+ *
+ * @param {Array<object>} forecast
+ */
+async function updateForecast(forecast) {
+  await db.query(
+    'INSERT INTO world_forecast (forecast) VALUES (?)',
+    [JSON.stringify(forecast || [])],
+  );
+}
+
+/**
  * Record a world event (death, kill or other).  The event type is
  * stored along with player identifiers, weapon used, coordinates
  * and arbitrary metadata.
@@ -77,6 +105,8 @@ async function saveCoordinates(entry) {
 module.exports = {
   getWorldState,
   updateWorldState,
+  getForecast,
+  updateForecast,
   recordEvent,
   saveCoordinates,
 };
