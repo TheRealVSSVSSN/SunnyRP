@@ -383,3 +383,9 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: bc1' -H 'Content-Type: app
   -d '{"characterId":1}' \
   http://localhost:3010/v1/broadcast/attempt
 ```
+
+Manually verify the debug endpoint:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/debug/status
+```

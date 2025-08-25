@@ -1724,6 +1724,43 @@ paths:
             application/json:
               schema:
                 type: object
+  /v1/debug/status:
+    get:
+      summary: Get server diagnostics
+      operationId: getDebugStatus
+      security:
+        - ApiToken: []
+      responses:
+        '200':
+          description: Debug information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      uptime:
+                        type: number
+                      memory:
+                        type: integer
+                      timestamp:
+                        type: string
+                        format: date-time
+                      loadavg:
+                        type: array
+                        items:
+                          type: number
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
   /v1/characters/{characterId}/account:
     get:
       summary: Retrieve or create a character bank account
@@ -3576,7 +3613,7 @@ paths:
                   traceId:
                     type: string
         '400':
-          description: Invalid input or insufficient funds
+          $ref: '#/components/responses/BadRequest'
           content:
             application/json:
               schema:
@@ -4375,7 +4412,7 @@ paths:
                   traceId:
                     type: string
         '400':
-          description: Invalid ID supplied
+          $ref: '#/components/responses/BadRequest'
           content:
             application/json:
               schema:

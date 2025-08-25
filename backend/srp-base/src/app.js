@@ -79,6 +79,9 @@ const coordsaverRoutes = require('./routes/coordsaver.routes');
 // phone domain route
 const phoneRoutes = require('./routes/phone.routes');
 
+// debug domain route
+const debugRoutes = require('./routes/debug.routes');
+
 // chat domain route
 const chatRoutes = require('./routes/chat.routes');
 // connect queue domain route
@@ -223,6 +226,9 @@ app.use(cronRoutes);
 
 // mount phone routes
 app.use(phoneRoutes);
+// mount debug routes
+app.use(debugRoutes);
+
 
 // mount chat routes
 app.use(chatRoutes);

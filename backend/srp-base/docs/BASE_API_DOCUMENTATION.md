@@ -186,6 +186,7 @@ Below is a summary of the core routes.  For full request/response schemas, consu
 |-------|-----|-------------|---------|
 | `GET` | `/v1/healthz` | Liveness probe; returns `{ ok: true, data: { status: 'ok' } }` | `200 OK`【67730289104851†L51-L55】 |
 | `GET` | `/v1/ready` | Readiness probe; checks DB connectivity; returns `503` if dependencies are down【67730289104851†L52-L54】 | `200 OK`/`503` |
+| `GET` | `/v1/debug/status` | Retrieve server diagnostics (uptime, memory, load averages). | `200 OK` |
 | `GET` | `/metrics` | Prometheus metrics; enabled when `ENABLE_METRICS=1`【67730289104851†L51-L55】 | plaintext metrics |
 
 ### Configuration

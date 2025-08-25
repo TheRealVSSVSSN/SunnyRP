@@ -39,3 +39,4 @@
 - K9 routes inherit the same authentication and idempotency requirements.
 - Jobs routes inherit the same authentication and idempotency requirements.
 - Broadcaster routes inherit the same authentication and idempotency requirements.
+- Debug routes inherit the same authentication and rate limiting requirements.

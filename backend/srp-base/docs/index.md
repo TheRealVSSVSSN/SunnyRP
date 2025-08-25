@@ -318,3 +318,11 @@ Introduced character-scoped job assignments to support the **jobsystem** resourc
 * Updated Broadcaster module to use character identifiers for role attempts.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/jobs.md`.
+
+## Update – 2025-08-25
+
+Resolved duplicate migration numbering and added debug diagnostics endpoint supporting the **srp-debug** resource.
+
+* Renamed K9 migration to `057_add_k9_units.sql`.
+* Added Debug module with `GET /v1/debug/status` endpoint.
+* Reference resources unavailable; proceeding with internal consistency only.

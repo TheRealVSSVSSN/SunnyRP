@@ -1108,7 +1108,7 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Migrations
 
-* `056_add_k9_units.sql` creates `k9_units` table.
+* `057_add_k9_units.sql` creates `k9_units` table.
 
 ### Risks
 
@@ -1136,3 +1136,24 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Drop `character_jobs` table and remove job and broadcaster changes.
+## 2025-08-25 – srp-debug
+
+### Added
+
+* Debug status endpoint exposing runtime diagnostics.
+
+### Changed
+
+* Renamed `056_add_k9_units.sql` to `057_add_k9_units.sql` to resolve duplicate migration numbers.
+
+### Migrations
+
+* `057_add_k9_units.sql`
+
+### Risks
+
+* Debug endpoint reveals internal metrics; ensure API token remains secret.
+
+### Rollback
+
+* Remove debug routes and repository and restore original migration filename.
