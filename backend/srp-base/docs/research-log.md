@@ -291,3 +291,8 @@
 
 - Attempted to clone reference repository `https://github.com/h04X-2K/NoPixelServer` but download size was prohibitive. Reference resources unavailable; proceeding with internal consistency only.
 - Reviewed READMEs from EssentialMode, ESX, ND Core, FSN Framework, QB-Core and vORP for banking and billing patterns.
+
+## Research Log – 2025-08-25 (baseevents)
+
+- Attempted to clone `https://github.com/h04X-2K/NoPixelServer` for baseevents and np-base context but checkout failed due to repository size. Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed EssentialMode, ESX, ND Core, FSN Framework, QB-Core, vRP and vORP documentation for event logging patterns (names/flows only).

@@ -1,6 +1,7 @@
 const express = require('express');
 const { sendOk, sendError } = require('../utils/respond');
 const { logEvent, listEvents } = require('../repositories/baseEventsRepository');
+const websocket = require('../realtime/websocket');
 
 const router = express.Router();
 
@@ -46,6 +47,7 @@ router.post('/v1/base-events', async (req, res) => {
   }
   try {
     const event = await logEvent({ accountId, characterId: charNum, eventType, metadata: metadata || null });
+    websocket.broadcast('base-events', 'base-events.logged', event);
     sendOk(res, { event }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(

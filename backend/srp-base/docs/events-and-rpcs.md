@@ -24,7 +24,7 @@
 | motel | No server events; building interior asset | N/A |
 | shoes-pack | No server events; footwear assets | N/A |
 | yuzler | No server events; clothing assets | N/A |
-| baseevents | Emits player join, drop and kill events | `POST /v1/base-events` logs events; `GET /v1/base-events` lists history |
+| baseevents | Emits player join, drop and kill events | `POST /v1/base-events` logs events and broadcasts `base-events.logged`; `GET /v1/base-events` lists history |
 | boatshop | Resource sends purchase requests for boats | `GET /v1/boatshop`, `POST /v1/boatshop/purchase` |
 | bob74_ipl | Loads interior proxies; no server events | N/A |
 | camera | Resource captures photos and uploads metadata | `GET /v1/camera/photos/{characterId}`, `POST /v1/camera/photos`, `DELETE /v1/camera/photos/{id}` |

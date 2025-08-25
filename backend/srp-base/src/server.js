@@ -12,6 +12,7 @@ const wiseWheelsTasks = require('./tasks/wiseWheels');
 const assetsTasks = require('./tasks/assets');
 const propertiesTasks = require('./tasks/properties');
 const economyTasks = require('./tasks/economy');
+const baseEventTasks = require('./tasks/baseEvents');
 
 // Register Prometheus metrics if enabled.  This must be done before
 // the server starts so that middleware can increment counters.
@@ -59,6 +60,12 @@ scheduler.register(
   economyTasks.JOB_NAME,
   () => economyTasks.purgeOld(),
   economyTasks.INTERVAL_MS,
+  { jitter: 60000 },
+);
+scheduler.register(
+  baseEventTasks.JOB_NAME,
+  () => baseEventTasks.purgeOld(),
+  baseEventTasks.INTERVAL_MS,
   { jitter: 60000 },
 );
 

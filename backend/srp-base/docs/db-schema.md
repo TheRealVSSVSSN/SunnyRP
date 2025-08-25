@@ -283,6 +283,8 @@ Indexes:
 | metadata | JSON | Optional details |
 | created_at | TIMESTAMP | Creation time |
 
+Rows older than `BASE_EVENT_RETENTION_MS` are purged hourly by the `base-events-purge` scheduler.
+
 ## boatshop_boats
 
 | Column | Type | Notes |
