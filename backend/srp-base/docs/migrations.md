@@ -60,3 +60,4 @@
 | 060_add_world_timecycle.sql | Timecycle override table |
 | 061_add_dispatch_alert_index.sql | Index dispatch_alerts created_at |
 | 062_add_zone_expiry.sql | Add expires_at to zones |
+| 063_update_wise_import_orders.sql | Add updated_at column and status index to wise_import_orders |

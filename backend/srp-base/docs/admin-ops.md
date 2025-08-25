@@ -14,6 +14,7 @@
 - Ensure `zones` table includes `expires_at`; expired zones are purged hourly by `zone-expiry-purge` scheduler.
 - Ensure the `wise_audio_tracks` table exists for character audio tracks.
 - Ensure the `wise_import_orders` table exists for vehicle import orders.
+  - Ensure `wise_import_orders` includes `updated_at` column and index `idx_wise_import_orders_status`.
 - Ensure the `wise_uc_profiles` table exists for undercover aliases.
 - Ensure the `wise_wheels_spins` table exists for wheel spin history.
 - Ensure the `assets` table exists for character asset records.

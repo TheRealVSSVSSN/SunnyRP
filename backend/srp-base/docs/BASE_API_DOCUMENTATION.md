@@ -435,6 +435,7 @@ To support all features present in the original server resources at the framewor
 - **srp-wise-imports** – Manages vehicle import orders.
   - `GET /v1/wise-imports/orders/{characterId}` – List import orders for a character.
   - `POST /v1/wise-imports/orders` – Create an order with `characterId` and `model`.
+  - `POST /v1/wise-imports/orders/{id}/deliver` – Mark a ready order as delivered.
 - **srp-import-pack** – Tracks vehicle import packages.
   - `GET /v1/import-pack/orders/character/{characterId}` – List import package orders for a character.
   - `GET /v1/import-pack/orders/{id}?characterId={characterId}` – Fetch a specific order.

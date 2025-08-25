@@ -743,6 +743,9 @@ components:
         createdAt:
           type: integer
           format: int64
+        updatedAt:
+          type: integer
+          format: int64
     WiseImportOrderCreateRequest:
       type: object
       required:
@@ -4905,6 +4908,51 @@ paths:
           description: List of orders
           content:
             application/json:
+          schema:
+            type: object
+            properties:
+              ok:
+                type: boolean
+              data:
+                type: object
+                properties:
+                  orders:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/WiseImportOrder'
+              requestId:
+                type: string
+              traceId:
+                type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/wise-imports/orders/{id}/deliver:
+    post:
+      summary: Mark an import order as delivered
+      description: Updates status to delivered and broadcasts `wise-imports.order.delivered`.
+      operationId: deliverWiseImportOrder
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - characterId
+              properties:
+                characterId:
+                  type: string
+      responses:
+        '200':
+          description: Order delivered
+          content:
+            application/json:
               schema:
                 type: object
                 properties:
@@ -4913,10 +4961,8 @@ paths:
                   data:
                     type: object
                     properties:
-                      orders:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/WiseImportOrder'
+                      delivered:
+                        type: boolean
                   requestId:
                     type: string
                   traceId:

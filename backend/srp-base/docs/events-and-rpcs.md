@@ -7,7 +7,7 @@
 | InteractSound | Resource triggers audio playback events specifying sound name and volume to target clients | `POST /v1/interact-sound/plays` logs and broadcasts; history via `GET /v1/interact-sound/plays/:characterId` |
 | PolyZone | Resource defines polygonal zones for triggers | `GET /v1/zones`, `POST /v1/zones`, `DELETE /v1/zones/:id` manage zone records; `zone.created` and `zone.deleted` pushed via WebSocket/webhooks |
 | Wise Audio | Resource manages character soundboard tracks | `GET /v1/wise-audio/tracks/:characterId`, `POST /v1/wise-audio/tracks` → pushes `wise-audio.track.created` |
-| Wise Imports | Resource manages vehicle import orders | `GET /v1/wise-imports/orders/:characterId`, `POST /v1/wise-imports/orders` → pushes `wise-imports.order.created` |
+| Wise Imports | Resource manages vehicle import orders | `GET /v1/wise-imports/orders/:characterId`, `POST /v1/wise-imports/orders`, `POST /v1/wise-imports/orders/{id}/deliver` → pushes `wise-imports.order.created`, scheduler pushes `wise-imports.order.ready`, delivery pushes `wise-imports.order.delivered` |
 | import-Pack2 | Resource manages vehicle import packages with pricing and cancellation | `GET /v1/import-pack/orders/character/{characterId}`, `GET /v1/import-pack/orders/{id}`, `POST /v1/import-pack/orders`, `POST /v1/import-pack/orders/{id}/deliver`, `POST /v1/import-pack/orders/{id}/cancel` |
 | WiseGuy-Vanilla | Base resource using account-scoped character management | `GET/POST/DELETE/POST select/GET selected /v1/accounts/{accountId}/characters` |
 | Wise-UC | Resource manages undercover aliases for characters | `GET /v1/wise-uc/profiles/:characterId`, `POST /v1/wise-uc/profiles` → pushes `wise-uc.profile.upserted` |

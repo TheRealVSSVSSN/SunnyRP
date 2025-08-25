@@ -61,3 +61,4 @@
 | 55 | Police dispatch | Alert broadcasting and retention | Extend | WS/webhook push and hourly purge |
 | 56 | PolyZone expiry & pushes | Zone expiration and real-time broadcasts | Extend | Added expiresAt field and scheduler |
 | 57 | Wise cluster realtime | WebSocket/webhook pushes for Wise Audio/Imports/UC/Wheels | Extend | Broadcast create events |
+| 58 | Wise Imports ready notifier | Promote pending import orders to ready via scheduler and delivery endpoint | Extend | Added ready scheduler and `/v1/wise-imports/orders/{id}/deliver` |

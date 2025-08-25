@@ -66,6 +66,7 @@ practice is supported by citations.
 * **Webhook endpoints:** admin CRUD added; implement secret rotation.
 * **Base API documentation:** update global API docs for new realtime components.
 * **Dispatch workflow:** implement call assignment and unit tracking.
+* **Wise Imports:** add order cancellation and ownership integration.
 | **baseevents module** | Base event logging endpoints follow the established layered pattern with authentication and idempotency. |
 | **boatshop module** | Boatshop endpoints follow the established layered pattern with authentication and idempotency. |
 | **camera module** | Photo storage endpoints follow the established layered pattern with authentication and idempotency. |
