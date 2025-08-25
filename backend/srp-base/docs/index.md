@@ -198,6 +198,15 @@ Introduced cron job scheduling to support the **Cron** resource.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/cron.md`.
 
+## Update – 2025-08-25
+
+Extended realtime support for the **assets** resource.
+
+* Asset creation and deletion broadcast `assets.assetCreated` and `assets.assetDeleted` over WebSockets and webhooks.
+* Hourly `assets-prune` scheduler removes entries older than `ASSET_RETENTION_MS` (default 30 days).
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/assets.md`.
+
 Introduced coordinate saving to support the **coordsaver** resource.
 
 * Added Coordsaver module with `GET /v1/characters/{characterId}/coords`, `POST /v1/characters/{characterId}/coords` and `DELETE /v1/characters/{characterId}/coords/{id}` endpoints.

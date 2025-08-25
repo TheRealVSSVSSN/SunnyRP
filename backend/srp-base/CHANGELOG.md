@@ -1274,3 +1274,19 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Remove scheduler registration, delete `src/tasks/wiseWheels.js`, and drop index `idx_wise_wheels_created`.
+
+## 2025-08-25 – Assets realtime & retention
+
+### Added
+* WebSocket and webhook events for asset creation and deletion.
+* Hourly `assets-prune` scheduler purges assets older than `ASSET_RETENTION_MS`.
+* `ASSET_RETENTION_MS` config for retention window.
+
+### Migrations
+* `065_add_assets_created_index.sql`
+
+### Risks
+* Misconfigured retention may delete recent assets.
+
+### Rollback
+* Remove scheduler registration and event broadcasts; drop index `idx_assets_created_at`.

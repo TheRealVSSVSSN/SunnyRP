@@ -275,3 +275,8 @@
 - Scanned `resources/WiseGuy-Wheels` from `https://github.com/h04X-2K/NoPixelServer` for spin logging behavior.
 - Reviewed ESX gambling scripts for spin reward retention patterns: https://github.com/ESX-Official/esx_drpbar
 - Reference resources unavailable; proceeding with internal consistency only.
+
+## Research Log – 2025-08-25 (assets realtime)
+
+- Attempted to clone `https://github.com/h04X-2K/NoPixelServer` for assets context but download size exceeded limits. Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed ESX and ND Core documentation for asset cleanup patterns and realtime notifications (conceptual only).

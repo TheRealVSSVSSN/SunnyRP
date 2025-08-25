@@ -172,6 +172,11 @@ Indexes:
 | name | VARCHAR(255) | Optional name |
 | created_at | TIMESTAMP | Creation time |
 
+Indexes:
+
+* `idx_assets_owner` on `owner_id`
+* `idx_assets_created_at` on `created_at`
+
 ## clothes
 
 | Column | Type | Notes |

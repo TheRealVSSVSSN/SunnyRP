@@ -64,6 +64,17 @@ class AssetsRepository {
   static async deleteAsset(id) {
     await db.query('DELETE FROM assets WHERE id = ?', [id]);
   }
+
+  /**
+   * Delete assets older than the provided cutoff date.
+   *
+   * @param {Date} cutoff Remove assets created before this time
+   * @returns {Promise<number>} Count of removed rows
+   */
+  static async deleteOlderThan(cutoff) {
+    const result = await db.query('DELETE FROM assets WHERE created_at < ?', [cutoff]);
+    return result.affectedRows || 0;
+  }
 }
 
 module.exports = AssetsRepository;

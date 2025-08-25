@@ -105,6 +105,7 @@ The service reads configuration from environment variables or a `.env` file.  Th
 | `REDIS_URL` | No | Redis connection string for rate limiting, idempotency and outbox【67730289104851†L204-L206】. |
 | `ENABLE_OUTBOX_WORKER` | No | Set to `1` to run the outbox worker (requires PM2 or another process manager)【67730289104851†L222-L223】. |
 | `OUTBOX_BATCH_SIZE`, `OUTBOX_INTERVAL_MS`, `OUTBOX_CLAIM_TIMEOUT_SEC`, `OUTBOX_DELIVERY_URL`, `OUTBOX_REDIS_CHANNEL_PREFIX` | No | Outbox worker tuning parameters【67730289104851†L294-L307】. |
+| `ASSET_RETENTION_MS` | No | Milliseconds to retain assets before purge (default `2592000000`). |
 
 ### Setup Steps
 
