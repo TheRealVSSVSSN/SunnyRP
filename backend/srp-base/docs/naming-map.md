@@ -15,3 +15,4 @@
 | banking | economy |
 | baseevents | base-events |
 | np-base | base-events |
+| boatshop | boatshop |

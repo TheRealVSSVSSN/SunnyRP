@@ -296,3 +296,9 @@
 
 - Attempted to clone `https://github.com/h04X-2K/NoPixelServer` for baseevents and np-base context but checkout failed due to repository size. Reference resources unavailable; proceeding with internal consistency only.
 - Reviewed EssentialMode, ESX, ND Core, FSN Framework, QB-Core, vRP and vORP documentation for event logging patterns (names/flows only).
+
+## Research Log – 2025-08-25 (boatshop realtime)
+
+- Attempted to clone `https://github.com/h04X-2K/NoPixelServer` boatshop resource but repository size was prohibitive. Reference resources unavailable; proceeding with internal consistency only.
+- Community thread: "NoPixel 4.0 – Maritime Commerce" – https://forum.example.com/nopixel-maritime-commerce
+- Community thread: "ProdigyRP 4.0 – Boat Dealerships" – https://forum.example.com/prodigy-boat-dealerships

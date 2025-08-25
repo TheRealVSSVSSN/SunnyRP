@@ -141,8 +141,8 @@ const heliRoutes = require('./routes/heli.routes');
 
 const app = express();
 
-// CORS support
-app.use(cors());
+// Attach requestId and traceId to res.locals
+app.use(requestId);
 
 // Capture raw body for HMAC signature verification
 app.use(
@@ -153,8 +153,12 @@ app.use(
   }),
 );
 
-// Attach requestId and traceId to res.locals
-app.use(requestId);
+// CORS support
+app.use(cors());
+
+// Global rate limiting (in-memory)
+const globalLimiter = createRateLimiter({ windowMs: 60_000, max: 1000 });
+app.use(globalLimiter);
 
 // Authentication & security (IP allowlist, API token, HMAC)
 app.use(authMiddleware);

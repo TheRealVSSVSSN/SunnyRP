@@ -27,6 +27,7 @@
 - Ensure the `cron_jobs` table exists for scheduled tasks.
 - Ensure the `base_event_logs` table exists for base event history; tune `BASE_EVENT_RETENTION_MS` for the purge scheduler.
 - Ensure the `boatshop_boats` table exists for boat catalog data.
+- Scheduler `boatshop-catalog-broadcast` pushes catalog updates; monitor logs for successful runs.
 - Ensure the `camera_photos` table exists for stored photos.
 - Ensure the `character_hud_preferences` table exists for HUD settings.
 - Ensure the `carwash_transactions` and `vehicle_cleanliness` tables exist for carwash tracking.

@@ -113,6 +113,8 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: b1' -H 'Content-Type: appl
   http://localhost:3010/v1/boatshop/purchase
 ```
 
+While running the above purchase, connect a WebSocket client to `ws://localhost:3010/ws?token=<token>` and verify receipt of a `boatshop.purchase` event. Catalog updates should arrive every five minutes as `boatshop.catalog`.
+
 Manually verify the assets endpoints:
 
 ```

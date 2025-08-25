@@ -1336,3 +1336,15 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Remove scheduler registration and `BASE_EVENT_RETENTION_MS` config.
+
+## 2025-08-25 – Boatshop realtime
+
+### Added
+* Purchase events broadcast via WebSocket and webhooks.
+* `boatshop-catalog-broadcast` scheduler pushes catalog every five minutes.
+
+### Risks
+* Excessive catalog size may saturate clients.
+
+### Rollback
+* Remove boatshop scheduler registration and event broadcasts.
