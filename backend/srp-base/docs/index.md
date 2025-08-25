@@ -218,3 +218,12 @@ Introduced taxi dispatch backend to support the **es_taxi** resource.
 * Migration `046_add_taxi_rides.sql` creates the `taxi_rides` table.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/taxi.md`.
+
+## Update – 2025-08-25
+
+Introduced furniture placement storage to support the **furniture** resource.
+
+* Added Furniture module with `/v1/characters/{characterId}/furniture` endpoints.
+* Migration `047_add_furniture.sql` creates the `furniture` table.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/furniture.md`.

@@ -512,6 +512,10 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
   - `GET /v1/characters/{characterId}/emotes` – List favorite emotes.
   - `POST /v1/characters/{characterId}/emotes` – Add a favorite emote (`emote`).
   - `DELETE /v1/characters/{characterId}/emotes/{emote}` – Remove a favorite emote.
+- **srp-furniture** – Stores custom furniture placements per character.
+  - `GET /v1/characters/{characterId}/furniture` – List furniture items for a character.
+  - `POST /v1/characters/{characterId}/furniture` – Place a furniture item with `item`, `x`, `y`, `z` and optional `heading`.
+  - `DELETE /v1/characters/{characterId}/furniture/{id}` – Remove a furniture item.
 
 
 ### Taxi

@@ -1249,6 +1249,47 @@ components:
         heading:
           type: number
           nullable: true
+    FurnitureItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        item:
+          type: string
+        x:
+          type: number
+        y:
+          type: number
+        z:
+          type: number
+        heading:
+          type: number
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    FurnitureCreateRequest:
+      type: object
+      required:
+        - item
+        - x
+        - y
+        - z
+      properties:
+        item:
+          type: string
+        x:
+          type: number
+        y:
+          type: number
+        z:
+          type: number
+        heading:
+          type: number
+          nullable: true
     CharacterEmote:
       type: object
       properties:
@@ -2217,6 +2258,107 @@ paths:
                     properties:
                       deleted:
                         type: boolean
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/characters/{characterId}/furniture:
+    get:
+      summary: List furniture items for a character
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of furniture
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      furniture:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/FurnitureItem'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    post:
+      summary: Place a furniture item for a character
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FurnitureCreateRequest'
+      responses:
+        '200':
+          description: Furniture placed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      furniture:
+                        $ref: '#/components/schemas/FurnitureItem'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/characters/{characterId}/furniture/{id}:
+    delete:
+      summary: Delete a furniture item
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Furniture deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
                   requestId:
                     type: string
                   traceId:

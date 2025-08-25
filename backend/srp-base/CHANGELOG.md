@@ -934,3 +934,21 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Remove taxi routes and drop `taxi_rides` table.
+
+## 2025-08-25 – furniture
+
+### Added
+
+* Furniture module with character-scoped placement endpoints.
+
+### Migrations
+
+* `047_add_furniture.sql`
+
+### Risks
+
+* Misplaced items could accumulate; monitor table growth.
+
+### Rollback
+
+* Remove furniture routes and drop `furniture` table.

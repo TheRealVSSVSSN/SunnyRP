@@ -156,3 +156,9 @@
 - GitHub API search results for "NoPixel 4.0" – https://api.github.com/search/repositories?q=nopixel+4.0
 - GitHub API search results for "ProdigyRP 4.0" – https://api.github.com/search/repositories?q=ProdigyRP+4.0
 - 2025-08-25: Attempted to review public es_taxi and NoPixel 4.0 taxi documentation, but external sources were inaccessible (HTTP 403). Proceeded with internal knowledge.
+
+## Research Log – 2025-08-25 (furniture)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
+- GitHub API search results for "NoPixel 4.0 furniture" – https://api.github.com/search/repositories?q=nopixel%204.0%20furniture
+- GitHub API search results for "ProdigyRP 4.0 furniture" – https://api.github.com/search/repositories?q=ProdigyRP%204.0%20furniture

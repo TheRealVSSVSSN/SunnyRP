@@ -267,3 +267,14 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: tx3' -H 'Content-Type: app
   -d '{"driverCharacterId":2,"dropoffX":1,"dropoffY":1,"dropoffZ":1,"fare":50}' \
   http://localhost:3010/v1/taxi/requests/1/complete
 ```
+
+Manually verify the furniture endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/characters/1/furniture
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: furn1' -H 'Content-Type: application/json' \
+  -d '{"item":"chair","x":0,"y":0,"z":0}' \
+  http://localhost:3010/v1/characters/1/furniture
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: furn2' -X DELETE \
+  http://localhost:3010/v1/characters/1/furniture/1
+```
