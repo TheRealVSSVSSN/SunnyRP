@@ -173,3 +173,7 @@
 
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403.
 - Attempted to access ProdigyRP 4.0 repository `https://github.com/ProdigyRP/ProdigyRP-4.0` but received HTTP 404.
+## Research Log – 2025-08-25 (garages)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
+- GitHub API search results for "NoPixel garages" – https://api.github.com/search/repositories?q=NoPixel+garages

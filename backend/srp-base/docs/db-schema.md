@@ -360,3 +360,25 @@
 | admitted_at | TIMESTAMP | Admission time |
 | discharged_at | TIMESTAMP | Discharge time |
 | notes | TEXT | Additional notes |
+
+## garages
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| name | VARCHAR(255) | Garage name |
+| location | JSON | Optional coordinates |
+| capacity | INT | Maximum vehicles |
+| created_at | TIMESTAMP | Creation time |
+| updated_at | TIMESTAMP | Update time |
+
+## garage_vehicles
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| garage_id | INT | FK to garages.id |
+| vehicle_id | INT | FK to vehicles.id |
+| character_id | BIGINT | Character storing the vehicle |
+| stored_at | TIMESTAMP | Storage time |
+| retrieved_at | TIMESTAMP | Retrieval time |

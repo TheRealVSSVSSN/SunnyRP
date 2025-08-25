@@ -1,5 +1,6 @@
 const express = require('express');
 const { sendOk, sendError } = require('../utils/respond');
+const { createRateLimiter } = require('../middleware/rateLimit');
 const {
   listGarages,
   createGarage,
@@ -7,6 +8,7 @@ const {
   deleteGarage,
   storeVehicle,
   retrieveVehicle,
+  listGarageVehicles,
 } = require('../repositories/garagesRepository');
 
 const router = express.Router();
@@ -62,14 +64,15 @@ router.delete('/v1/garages/:id', async (req, res) => {
 });
 
 // Store a vehicle in a garage
-router.post('/v1/garages/:garageId/store', async (req, res) => {
+const storeLimiter = createRateLimiter({ windowMs: 60000, max: 30, errorCode: 'RATE_LIMIT', message: 'Too many store requests' });
+router.post('/v1/garages/:garageId/store', storeLimiter, async (req, res) => {
   const { garageId } = req.params;
-  const { vehicleId } = req.body;
-  if (!vehicleId) {
-    return sendError(res, { code: 'VALIDATION_ERROR', message: 'vehicleId is required' }, 400, res.locals.requestId, res.locals.traceId);
+  const { vehicleId, characterId } = req.body;
+  if (!vehicleId || !characterId) {
+    return sendError(res, { code: 'VALIDATION_ERROR', message: 'vehicleId and characterId are required' }, 400, res.locals.requestId, res.locals.traceId);
   }
   try {
-    const record = await storeVehicle(garageId, vehicleId);
+    const record = await storeVehicle(Number(garageId), Number(vehicleId), Number(characterId));
     sendOk(res, { record }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'GARAGE_STORE_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);
@@ -77,17 +80,29 @@ router.post('/v1/garages/:garageId/store', async (req, res) => {
 });
 
 // Retrieve a vehicle from a garage
-router.post('/v1/garages/:garageId/retrieve', async (req, res) => {
+const retrieveLimiter = createRateLimiter({ windowMs: 60000, max: 30, errorCode: 'RATE_LIMIT', message: 'Too many retrieve requests' });
+router.post('/v1/garages/:garageId/retrieve', retrieveLimiter, async (req, res) => {
   const { garageId } = req.params;
-  const { vehicleId } = req.body;
-  if (!vehicleId) {
-    return sendError(res, { code: 'VALIDATION_ERROR', message: 'vehicleId is required' }, 400, res.locals.requestId, res.locals.traceId);
+  const { vehicleId, characterId } = req.body;
+  if (!vehicleId || !characterId) {
+    return sendError(res, { code: 'VALIDATION_ERROR', message: 'vehicleId and characterId are required' }, 400, res.locals.requestId, res.locals.traceId);
   }
   try {
-    await retrieveVehicle(garageId, vehicleId);
+    await retrieveVehicle(Number(garageId), Number(vehicleId), Number(characterId));
     sendOk(res, {}, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'GARAGE_RETRIEVE_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);
+  }
+});
+
+// List vehicles stored by a character in a garage
+router.get('/v1/characters/:characterId/garages/:garageId/vehicles', async (req, res) => {
+  const { characterId, garageId } = req.params;
+  try {
+    const vehicles = await listGarageVehicles(Number(garageId), Number(characterId));
+    sendOk(res, { vehicles }, res.locals.requestId, res.locals.traceId);
+  } catch (err) {
+    sendError(res, { code: 'GARAGE_VEHICLES_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);
   }
 });
 

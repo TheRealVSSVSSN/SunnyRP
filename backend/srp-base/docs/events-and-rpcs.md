@@ -40,3 +40,4 @@
 | furniture | Resource lets players place or remove furniture items | `GET /v1/characters/{characterId}/furniture`, `POST /v1/characters/{characterId}/furniture`, `DELETE /v1/characters/{characterId}/furniture/{id}` |
 | gabz_mrpd | Map resource for Mission Row PD building; no events | N/A |
 | gabz_pillbox_hospital | Resource handles hospital admissions and bed management | `GET /v1/hospital/admissions/active`, `POST /v1/hospital/admissions`, `POST /v1/hospital/admissions/{id}/discharge` |
+| garages | Resource emits events when vehicles are stored or retrieved from garages | `/v1/garages` CRUD, `/v1/garages/{garageId}/store`, `/v1/garages/{garageId}/retrieve`, `/v1/characters/{characterId}/garages/{garageId}/vehicles` |

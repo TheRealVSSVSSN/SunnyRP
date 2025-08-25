@@ -72,12 +72,12 @@ async function deleteGarage(id) {
  * @param {number} vehicleId - Vehicle ID
  * @returns {Promise<Object>} inserted record
  */
-async function storeVehicle(garageId, vehicleId) {
+async function storeVehicle(garageId, vehicleId, characterId) {
   const [result] = await db.query(
-    'INSERT INTO garage_vehicles (garage_id, vehicle_id) VALUES (?, ?)',
-    [garageId, vehicleId],
+    'INSERT INTO garage_vehicles (garage_id, vehicle_id, character_id) VALUES (?, ?, ?)',
+    [garageId, vehicleId, characterId],
   );
-  return { id: result.insertId, garageId, vehicleId };
+  return { id: result.insertId, garageId, vehicleId, characterId };
 }
 
 /**
@@ -86,11 +86,25 @@ async function storeVehicle(garageId, vehicleId) {
  * @param {number} vehicleId - Vehicle ID
  * @returns {Promise<void>}
  */
-async function retrieveVehicle(garageId, vehicleId) {
+async function retrieveVehicle(garageId, vehicleId, characterId) {
   await db.query(
-    'UPDATE garage_vehicles SET retrieved_at = NOW() WHERE garage_id = ? AND vehicle_id = ? AND retrieved_at IS NULL',
-    [garageId, vehicleId],
+    'UPDATE garage_vehicles SET retrieved_at = NOW() WHERE garage_id = ? AND vehicle_id = ? AND character_id = ? AND retrieved_at IS NULL',
+    [garageId, vehicleId, characterId],
   );
+}
+
+/**
+ * List vehicles stored by a character in a garage.
+ * @param {number} garageId - Garage ID
+ * @param {number} characterId - Character ID
+ * @returns {Promise<Array>} stored vehicles
+ */
+async function listGarageVehicles(garageId, characterId) {
+  const [rows] = await db.query(
+    'SELECT id, garage_id AS garageId, vehicle_id AS vehicleId, character_id AS characterId, stored_at AS storedAt, retrieved_at AS retrievedAt FROM garage_vehicles WHERE garage_id = ? AND character_id = ? AND retrieved_at IS NULL',
+    [garageId, characterId],
+  );
+  return rows;
 }
 
 module.exports = {
@@ -100,4 +114,5 @@ module.exports = {
   deleteGarage,
   storeVehicle,
   retrieveVehicle,
+  listGarageVehicles,
 };
