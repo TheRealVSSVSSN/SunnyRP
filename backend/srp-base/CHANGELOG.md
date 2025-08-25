@@ -1026,3 +1026,21 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Drop `hardcap_config` and `hardcap_sessions` tables and remove hardcap routes.
+
+## 2025-08-25 – heli
+
+### Added
+
+* Heli module with `/v1/heli/flights`, `/v1/heli/flights/{id}/end` and `/v1/characters/{characterId}/heli/flights` endpoints.
+
+### Migrations
+
+* `051_add_heli_flights.sql`
+
+### Risks
+
+* Incorrect flight tracking could misrepresent aerial activity.
+
+### Rollback
+
+* Drop `heli_flights` table and remove heli routes.

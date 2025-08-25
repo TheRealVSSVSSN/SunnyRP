@@ -48,3 +48,4 @@
 | 048_add_hospital_admissions.sql | Hospital admissions table |
 | 049_add_garage_vehicle_character.sql | Add character_id to garage_vehicles |
 | 050_add_hardcap.sql | Hardcap configuration and session tables |
+| 051_add_heli_flights.sql | Helicopter flight logging table |

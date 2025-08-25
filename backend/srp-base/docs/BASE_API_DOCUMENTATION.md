@@ -547,3 +547,9 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
 - `POST /v1/garages/{garageId}/store` – store a vehicle for a character
 - `POST /v1/garages/{garageId}/retrieve` – retrieve a stored vehicle
 - `GET /v1/characters/{characterId}/garages/{garageId}/vehicles` – list character vehicles in a garage
+
+### Heli
+
+- `POST /v1/heli/flights` – start a flight
+- `POST /v1/heli/flights/{id}/end` – end a flight
+- `GET /v1/characters/{characterId}/heli/flights` – list flights for a character

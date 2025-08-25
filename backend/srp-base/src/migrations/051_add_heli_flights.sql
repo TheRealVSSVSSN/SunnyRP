@@ -1,0 +1,12 @@
+-- Track helicopter flights per character
+CREATE TABLE IF NOT EXISTS heli_flights (
+  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  character_id BIGINT NOT NULL,
+  purpose VARCHAR(50) NOT NULL,
+  start_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  end_time TIMESTAMP NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_heli_flights_character ON heli_flights(character_id);

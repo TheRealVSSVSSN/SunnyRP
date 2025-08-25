@@ -401,3 +401,15 @@
 | character_id | BIGINT | FK to characters.id |
 | connected_at | TIMESTAMP | Connection time |
 | disconnected_at | TIMESTAMP | Disconnection time; null if active |
+
+## heli_flights
+
+| Column | Type | Notes |
+|---|---|---|
+| id | BIGINT AUTO_INCREMENT | Primary key |
+| character_id | BIGINT | FK to characters.id |
+| purpose | VARCHAR(50) | Reason for flight |
+| start_time | TIMESTAMP | Flight start time |
+| end_time | TIMESTAMP | Flight end time; null if active |
+| created_at | TIMESTAMP | Creation time |
+| updated_at | TIMESTAMP | Update time |

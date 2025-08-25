@@ -1520,6 +1520,32 @@ components:
         type: integer
       characterId:
         type: integer
+  HeliFlight:
+    type: object
+    properties:
+      id:
+        type: integer
+      characterId:
+        type: integer
+      purpose:
+        type: string
+      startTime:
+        type: string
+        format: date-time
+      endTime:
+        type: string
+        format: date-time
+        nullable: true
+  HeliFlightCreate:
+    type: object
+    required:
+      - characterId
+      - purpose
+    properties:
+      characterId:
+        type: integer
+      purpose:
+        type: string
 security:
   - ApiToken: []
 paths:
@@ -2073,6 +2099,101 @@ paths:
                         type: string
                         format: date-time
                         nullable: true
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/heli/flights:
+    post:
+      summary: Start helicopter flight
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HeliFlightCreate'
+      responses:
+        '200':
+          description: Flight started
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      flight:
+                        $ref: '#/components/schemas/HeliFlight'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/heli/flights/{id}/end:
+    post:
+      summary: End helicopter flight
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Flight ended
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      flight:
+                        $ref: '#/components/schemas/HeliFlight'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/characters/{characterId}/heli/flights:
+    get:
+      summary: List helicopter flights for a character
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of flights
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      flights:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/HeliFlight'
                   requestId:
                     type: string
                   traceId:

@@ -7,6 +7,7 @@
 - Added endpoint to retrieve the active character for multi-character support.
 - Added hospital admission APIs.
 - Added hardcap configuration and session tracking APIs.
+- Added heli flight logging APIs.
 
 ## File Changes
 
@@ -88,8 +89,26 @@
 | `docs/testing.md` | M | Added hardcap curl examples |
 | `docs/modules/hardcap.md` | A | Module documentation |
 | `docs/research-log.md` | M | Logged hardcap research attempt |
+| `src/repositories/heliRepository.js` | A | Persist helicopter flights |
+| `src/routes/heli.routes.js` | A | REST endpoints for flight logging |
+| `src/migrations/051_add_heli_flights.sql` | A | Create `heli_flights` table |
+| `src/app.js` | M | Mounted heli routes |
+| `openapi/api.yaml` | M | Documented heli schemas and paths |
+| `docs/index.md` | M | Logged heli update |
+| `docs/progress-ledger.md` | M | Added heli entry |
+| `docs/framework-compliance.md` | M | Noted heli module compliance |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented heli endpoints |
+| `docs/events-and-rpcs.md` | M | Mapped heli events |
+| `docs/db-schema.md` | M | Documented `heli_flights` table |
+| `docs/migrations.md` | M | Listed migration 051 |
+| `docs/admin-ops.md` | M | Added heli table check |
+| `docs/security.md` | M | Added heli security note |
+| `docs/testing.md` | M | Added heli curl examples |
+| `docs/modules/heli.md` | A | Module documentation |
+| `docs/research-log.md` | M | Logged heli research attempt |
 
 ## Startup Notes
 
 - Run `node src/bootstrap/migrate.js` to apply migration `046_add_taxi_rides.sql`.
 - Run `node src/bootstrap/migrate.js` to apply migration `048_add_hospital_admissions.sql`.
+- Run `node src/bootstrap/migrate.js` to apply migration `051_add_heli_flights.sql`.

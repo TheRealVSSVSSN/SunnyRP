@@ -265,3 +265,11 @@ Introduced server capacity tracking to support the **hardcap** resource.
 * Added Hardcap module with `/v1/hardcap/status`, `/v1/hardcap/config` and `/v1/hardcap/sessions` endpoints.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/hardcap.md`.
+
+## Update – 2025-08-25
+
+Introduced helicopter flight logging to support the **heli** resource.
+
+* Added Heli module with `/v1/heli/flights`, `/v1/heli/flights/{id}/end` and `/v1/characters/{characterId}/heli/flights` endpoints.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/heli.md`.
