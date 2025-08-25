@@ -1786,6 +1786,62 @@ components:
       createdAt:
         type: string
         format: date-time
+  DispatchAlert:
+    type: object
+    properties:
+      id:
+        type: integer
+      code:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+        nullable: true
+      sender:
+        type: string
+        nullable: true
+      coords:
+        type: object
+        additionalProperties: true
+        nullable: true
+      status:
+        type: string
+      created_at:
+        type: string
+        format: date-time
+      updated_at:
+        type: string
+        format: date-time
+  DispatchAlertCreateRequest:
+    type: object
+    required:
+      - code
+      - title
+    properties:
+      code:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+        nullable: true
+      sender:
+        type: string
+        nullable: true
+      coords:
+        type: object
+        additionalProperties: true
+        nullable: true
+  DispatchCode:
+    type: object
+    properties:
+      id:
+        type: integer
+      code:
+        type: string
+      description:
+        type: string
 security:
   - ApiToken: []
 paths:
@@ -7312,6 +7368,122 @@ paths:
                     properties:
                       removed:
                         type: integer
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/dispatch/alerts:
+    get:
+      summary: List dispatch alerts
+      operationId: listDispatchAlerts
+      responses:
+        '200':
+          description: Alerts list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      alerts:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/DispatchAlert'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+    post:
+      summary: Create dispatch alert
+      operationId: createDispatchAlert
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DispatchAlertCreateRequest'
+      responses:
+        '200':
+          description: Alert created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      alert:
+                        $ref: '#/components/schemas/DispatchAlert'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/dispatch/alerts/{id}/ack:
+    patch:
+      summary: Acknowledge dispatch alert
+      operationId: acknowledgeDispatchAlert
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Alert acknowledged
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      acknowledged:
+                        type: boolean
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/dispatch/codes:
+    get:
+      summary: List dispatch codes
+      operationId: listDispatchCodes
+      responses:
+        '200':
+          description: Codes list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      codes:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/DispatchCode'
                   requestId:
                     type: string
                   traceId:

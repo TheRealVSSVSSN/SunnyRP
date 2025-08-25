@@ -1211,3 +1211,21 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Remove hooks routes, dispatcher updates and scheduler task; rename migration back to `059_add_world_timecycle.sql`.
+
+## 2025-08-25 – Police dispatch
+
+### Added
+* Dispatch alert endpoints with WebSocket and webhook push.
+* Scheduler purge for stale alerts.
+
+### Changed
+* Config `DISPATCH_ALERT_RETENTION_MS` for alert retention.
+
+### Migrations
+* `061_add_dispatch_alert_index.sql`.
+
+### Risks
+* Excessive alert volume may overwhelm clients if not filtered.
+
+### Rollback
+* Remove dispatch routes, repository changes and scheduler; drop index `idx_dispatch_alerts_created_at`.

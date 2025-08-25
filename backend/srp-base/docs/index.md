@@ -362,3 +362,11 @@ Expanded parity for the **InteractSound** cluster by pushing sound play events o
 * Broadcast `interactSound.play` events to connected clients.
 * Added admin webhook endpoint management at `/v1/hooks/endpoints`.
 * Scheduler task removes plays older than `INTERACT_SOUND_RETENTION_MS`.
+
+## Update – 2025-08-25
+
+Consolidated police dispatch responsibilities with real-time push and retention.
+
+* Broadcast and webhook `dispatchAlert` and `dispatchAck` events.
+* Scheduler purges `dispatch_alerts` older than `DISPATCH_ALERT_RETENTION_MS`.
+* Documented dispatch APIs in OpenAPI and module docs.

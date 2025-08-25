@@ -58,3 +58,4 @@
 | 058_add_world_forecast.sql | Weather forecast schedule table |
 | 059_add_diamond_casino.sql | Casino game and bet tables |
 | 060_add_world_timecycle.sql | Timecycle override table |
+| 061_add_dispatch_alert_index.sql | Index dispatch_alerts created_at |

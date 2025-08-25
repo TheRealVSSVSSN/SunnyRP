@@ -64,6 +64,7 @@ practice is supported by citations.
 * **Casino logic:** implement full payout rules for all casino game types.
 * **Webhook endpoints:** admin CRUD added; implement secret rotation.
 * **Base API documentation:** update global API docs for new realtime components.
+* **Dispatch workflow:** implement call assignment and unit tracking.
 | **baseevents module** | Base event logging endpoints follow the established layered pattern with authentication and idempotency. |
 | **boatshop module** | Boatshop endpoints follow the established layered pattern with authentication and idempotency. |
 | **camera module** | Photo storage endpoints follow the established layered pattern with authentication and idempotency. |
@@ -96,3 +97,4 @@ practice is supported by citations.
 | **Scheduler** | Jittered task runner replaces client loops for casino resolutions. |
 | **Webhook dispatcher** | HMAC-signed webhook publisher with retries and dead-letter logging. |
 | **world module** | World state, forecast and timecycle endpoints follow the established layered pattern with authentication and idempotency. |
+| **dispatch module** | Dispatch alert endpoints follow the established layered pattern with authentication and idempotency. |
