@@ -87,4 +87,4 @@ practice is supported by citations.
 | **jailbreak module** | Jailbreak endpoints follow the established layered pattern with authentication and idempotency. |
 | **k9 module** | K9 unit endpoints follow the established layered pattern with authentication and idempotency. |
 | **jobs module** | Job CRUD and assignment endpoints follow the established layered pattern with authentication and idempotency. |
-| **broadcaster module** | Broadcaster assignment uses character-scoped job logic and follows the established layered pattern. |
+| **broadcaster module** | Broadcaster assignment uses character-scoped job logic and follows the established layered pattern. || **debug module** | Debug status endpoint follows the established layered pattern with authentication and rate limiting. |

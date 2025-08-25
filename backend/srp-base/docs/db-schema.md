@@ -1,4 +1,6 @@
 # Database Schema
+No schema changes for debug module. K9 migration renamed to 057_add_k9_units.sql.
+
 
 ## diamond_blackjack_hands
 

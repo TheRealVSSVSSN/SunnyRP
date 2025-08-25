@@ -50,3 +50,4 @@
 | jailbreak | Resource triggers jailbreak start and completion events with character and prison info | `POST /v1/jailbreaks`, `POST /v1/jailbreaks/{id}/complete`, `GET /v1/jailbreaks/active` |
 | jobsystem | Resource manages job definitions and assignments | `GET /v1/jobs`, `POST /v1/jobs`, `GET /v1/jobs/{id}`, `POST /v1/jobs/assign`, `POST /v1/jobs/duty`, `GET /v1/jobs/{characterId}/assignments` |
 | broadcaster | Event to attempt joining the broadcaster job | `POST /v1/broadcast/attempt` |
+| srp-debug | Developer requests for runtime diagnostics | `GET /v1/debug/status` returns server metrics |
