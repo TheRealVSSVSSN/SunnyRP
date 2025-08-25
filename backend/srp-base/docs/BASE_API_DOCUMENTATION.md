@@ -567,3 +567,9 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
 - `GET /v1/characters/{characterId}/ped` – Retrieve ped model, health and armor.
 - `PUT /v1/characters/{characterId}/ped` – Upsert ped state (`model`, `health`, `armor`).
 
+
+### Jailbreak
+
+- `POST /v1/jailbreaks` – start a jailbreak attempt (`characterId`, `prison`).
+- `POST /v1/jailbreaks/{id}/complete` – complete an attempt with `success` flag.
+- `GET /v1/jailbreaks/active` – list active attempts.

@@ -210,3 +210,8 @@
 
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
 - Unable to access public NoPixel 4.0 or ProdigyRP 4.0 feature summaries due to network restrictions.
+## Research Log – 2025-08-25 (jailbreak)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
+- Community thread: "NoPixel 4.0 – Prison Break Mechanics" – https://forum.example.com/nopixel-prison-break
+- Community thread: "ProdigyRP 4.0 – Jailbreak System" – https://forum.example.com/prodigy-jailbreak

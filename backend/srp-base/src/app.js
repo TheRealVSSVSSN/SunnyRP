@@ -119,6 +119,9 @@ const wiseWheelsRoutes = require('./routes/wiseWheels.routes');
 // diamond blackjack domain route
 const diamondBlackjackRoutes = require('./routes/diamondBlackjack.routes');
 
+// jailbreak domain route
+const jailbreakRoutes = require('./routes/jailbreak.routes');
+
 // secondary jobs domain route
 const secondaryJobsRoutes = require('./routes/secondaryJobs.routes');
 const taxiRoutes = require('./routes/taxi.routes');
@@ -258,6 +261,9 @@ app.use(wiseWheelsRoutes);
 
 // mount diamond blackjack routes
 app.use(diamondBlackjackRoutes);
+
+// mount jailbreak routes
+app.use(jailbreakRoutes);
 
 // mount secondary jobs routes
 app.use(secondaryJobsRoutes);

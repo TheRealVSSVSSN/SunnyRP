@@ -37,3 +37,4 @@
 - Ensure the `heli_flights` table exists for helicopter flight logs.
 - Ensure the `import_pack_orders` table includes `price` and `canceled_at` columns for import package tracking.
 - Ensure the `character_peds` table exists for ped state tracking.
+- Ensure the `jailbreak_attempts` table exists for jailbreak tracking.
