@@ -561,3 +561,9 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
 - `POST /v1/heli/flights` – start a flight
 - `POST /v1/heli/flights/{id}/end` – end a flight
 - `GET /v1/characters/{characterId}/heli/flights` – list flights for a character
+
+### Peds
+
+- `GET /v1/characters/{characterId}/ped` – Retrieve ped model, health and armor.
+- `PUT /v1/characters/{characterId}/ped` – Upsert ped state (`model`, `health`, `armor`).
+

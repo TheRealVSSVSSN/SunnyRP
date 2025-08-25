@@ -1080,3 +1080,21 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Remove new endpoints and drop `price` and `canceled_at` columns from `import_pack_orders`.
+
+## 2025-08-25 – isPed
+
+### Added
+
+* Ped state endpoints: `/v1/characters/{characterId}/ped` GET and PUT.
+
+### Migrations
+
+* `054_add_character_peds.sql` creates `character_peds` table.
+
+### Risks
+
+* Inconsistent ped data may misrepresent character states if client updates are lost.
+
+### Rollback
+
+* Drop `character_peds` table and remove ped routes and repository.

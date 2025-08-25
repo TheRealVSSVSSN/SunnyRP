@@ -328,4 +328,12 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: imp2' \
 curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: imp3' -H 'Content-Type: application/json' \
   -d '{"characterId":1}' \
   http://localhost:3010/v1/import-pack/orders/1/cancel
+
+Manually verify the peds endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/characters/1/ped
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: ped1' -H 'Content-Type: application/json' \
+  -d '{"model":"mp_m_freemode_01","health":200,"armor":50}' \
+  http://localhost:3010/v1/characters/1/ped
 ```

@@ -34,3 +34,4 @@
 - Hardcap routes inherit the same authentication, idempotency and rate limiting requirements.
 - Heli routes inherit the same authentication and idempotency requirements.
 - Import pack routes inherit the same authentication and idempotency requirements.
+- Peds routes inherit the same authentication and idempotency requirements.

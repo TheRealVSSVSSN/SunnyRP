@@ -426,3 +426,14 @@
 | created_at | BIGINT | Milliseconds timestamp |
 | delivered_at | BIGINT | Delivery timestamp, null if not delivered |
 | canceled_at | BIGINT | Cancellation timestamp, null if not canceled |
+
+## character_peds
+
+| Column | Type | Notes |
+|---|---|---|
+| character_id | BIGINT PRIMARY KEY | FK to characters.id |
+| model | VARCHAR(60) | Ped model name |
+| health | INT | Last known health |
+| armor | INT | Last known armor |
+| updated_at | TIMESTAMP | Update timestamp |
+

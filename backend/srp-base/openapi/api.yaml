@@ -1585,6 +1585,33 @@ components:
         type: integer
       purpose:
         type: string
+  PedState:
+    type: object
+    properties:
+      characterId:
+        type: integer
+      model:
+        type: string
+      health:
+        type: integer
+      armor:
+        type: integer
+      updatedAt:
+        type: string
+        format: date-time
+  PedStateUpdateRequest:
+    type: object
+    required:
+      - model
+      - health
+      - armor
+    properties:
+      model:
+        type: string
+      health:
+        type: integer
+      armor:
+        type: integer
 security:
   - ApiToken: []
 paths:
@@ -5241,6 +5268,68 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HudPreferences'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/characters/{characterId}/ped:
+    get:
+      summary: Get ped state
+      operationId: getPedState
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Ped state
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/PedState'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    put:
+      summary: Upsert ped state
+      operationId: upsertPedState
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PedStateUpdateRequest'
+      responses:
+        '200':
+          description: Updated ped state
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/PedState'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
         '400':
           $ref: '#/components/responses/BadRequest'
 
