@@ -41,7 +41,7 @@ practice is supported by citations.
 
 | **Interact Sound module** | Sound play logging endpoints follow the same patterns with validation and repository abstractions. |
 | **PolicePack module** | Evidence custody chain and character selection endpoints respect layered design, authentication and idempotency. |
-| **Zones module** | Zone definition endpoints follow the established layered pattern with authentication and idempotency. |
+| **Zones module** | Zone endpoints now support expiration with scheduled purges and broadcast create/delete events over WebSocket and webhooks. |
 | **Wise Audio module** | Audio track storage endpoints follow the established layered pattern with authentication and idempotency. |
 | **Wise Imports module** | Import order endpoints follow the established layered pattern with authentication and idempotency. |
 | **Wise UC module** | Undercover profile endpoints follow the established layered pattern with authentication and idempotency. |

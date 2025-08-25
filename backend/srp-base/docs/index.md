@@ -370,3 +370,12 @@ Consolidated police dispatch responsibilities with real-time push and retention.
 * Broadcast and webhook `dispatchAlert` and `dispatchAck` events.
 * Scheduler purges `dispatch_alerts` older than `DISPATCH_ALERT_RETENTION_MS`.
 * Documented dispatch APIs in OpenAPI and module docs.
+
+## Update – 2025-02-14
+
+Extended parity for the **PolyZone** resource with expiration and real-time pushes.
+
+* Zones may specify `expiresAt`; a scheduler purges expired entries hourly.
+* Zone creation and deletion events broadcast via WebSocket and webhook dispatcher.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/zones.md`.

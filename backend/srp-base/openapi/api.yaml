@@ -911,6 +911,10 @@ components:
         createdAt:
           type: string
           format: date-time
+        expiresAt:
+          type: string
+          format: date-time
+          nullable: true
     ZoneCreateRequest:
       type: object
       required:
@@ -926,6 +930,10 @@ components:
           type: object
         createdBy:
           type: integer
+          nullable: true
+        expiresAt:
+          type: string
+          format: date-time
           nullable: true
     Apartment:
       type: object

@@ -11,6 +11,7 @@
 - Manage the Node.js process with tools like `pm2` for restarts and monitoring.
 - Ensure the `evidence_chain` and `character_selections` tables exist after deploying this sprint.
 - Ensure the `zones` table exists for polygonal zone definitions.
+- Ensure `zones` table includes `expires_at`; expired zones are purged hourly by `zone-expiry-purge` scheduler.
 - Ensure the `wise_audio_tracks` table exists for character audio tracks.
 - Ensure the `wise_import_orders` table exists for vehicle import orders.
 - Ensure the `wise_uc_profiles` table exists for undercover aliases.

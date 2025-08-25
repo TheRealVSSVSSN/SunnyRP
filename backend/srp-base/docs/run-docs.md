@@ -1,12 +1,10 @@
-# Run Summary – 2025-08-25
+# Run Summary – 2025-02-14
 
 ## Modules
-- InteractSound broadcast & retention
-- Hooks webhook endpoint management
-- Dispatch alert broadcasting & retention
+- Zones expiration + real-time pushes
 
 ## Migrations
-- Renamed `059_add_world_timecycle.sql` to `060_add_world_timecycle.sql`
+- 062_add_zone_expiry.sql
 
 ## Documentation Updated
 - index.md
@@ -17,7 +15,6 @@
 - db-schema.md
 - migrations.md
 - admin-ops.md
-- modules/interactSound.md
-- modules/hooks.md
-- modules/dispatch.md
+- testing.md
+- modules/zones.md
 - research-log.md

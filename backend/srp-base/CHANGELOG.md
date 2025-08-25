@@ -1229,3 +1229,18 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Remove dispatch routes, repository changes and scheduler; drop index `idx_dispatch_alerts_created_at`.
+
+## 2025-02-14 – PolyZone expiration
+
+### Added
+* Zone expiration support with optional `expires_at` column and scheduler purge.
+* WebSocket and webhook broadcasts for `zone.created` and `zone.deleted`.
+
+### Migrations
+* `062_add_zone_expiry.sql`
+
+### Risks
+* Misconfigured expiry times could delete active zones.
+
+### Rollback
+* Drop `expires_at` column from `zones` and remove zone scheduler/broadcast logic.

@@ -467,9 +467,9 @@ To support all features present in the original server resources at the framewor
   - `GET /v1/apartments/{apartmentId}/interior?characterId={cid}` – Retrieve interior layout.
   - `POST /v1/apartments/{apartmentId}/interior` – Save interior layout (`characterId`, `template`).
 - **srp-zones** – Stores polygonal zone definitions for world interactions.
-  - `GET /v1/zones` – List zones.
-  - `POST /v1/zones` – Create a zone with `name`, `type`, and `data`.
-  - `DELETE /v1/zones/{id}` – Remove a zone.
+  - `GET /v1/zones` – List active zones.
+  - `POST /v1/zones` – Create a zone with `name`, `type`, `data` and optional `expiresAt`; pushes `zone.created`.
+  - `DELETE /v1/zones/{id}` – Remove a zone and push `zone.deleted`.
 - **srp-diamond-blackjack** – Records casino blackjack hand history.
   - `GET /v1/diamond-blackjack/hands/:characterId` – List recent hands for a character.
   - `POST /v1/diamond-blackjack/hands` – Record a hand result with `characterId`, `tableId`, `bet`, `payout`, `dealerHand`, `playerHand` and optional `playedAt`.

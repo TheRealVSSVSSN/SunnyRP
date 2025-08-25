@@ -58,7 +58,7 @@ Manually verify the zones endpoints:
 ```sh
 curl -H 'X-API-Token: <token>' http://localhost:3010/v1/zones
 curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: z1' -H 'Content-Type: application/json' \
-  -d '{"name":"prison","type":"poly","data":{}}' \
+  -d '{"name":"prison","type":"poly","data":{},"expiresAt":"2025-12-31T00:00:00Z"}' \
   http://localhost:3010/v1/zones
 curl -H 'X-API-Token: <token>' -X DELETE http://localhost:3010/v1/zones/1
 ```

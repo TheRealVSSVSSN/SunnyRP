@@ -5,6 +5,8 @@ const {
   createZone,
   deleteZone,
 } = require('../repositories/zonesRepository');
+const websocket = require('../realtime/websocket');
+const hooks = require('../hooks/dispatcher');
 
 const router = express.Router();
 
@@ -26,7 +28,16 @@ router.get('/v1/zones', async (req, res) => {
 
 // POST /v1/zones - create a new zone
 router.post('/v1/zones', async (req, res) => {
-  const { name, type, data, createdBy } = req.body;
+  if (!req.headers['x-idempotency-key']) {
+    return sendError(
+      res,
+      { code: 'MISSING_IDEMPOTENCY_KEY', message: 'X-Idempotency-Key header required' },
+      400,
+      res.locals.requestId,
+      res.locals.traceId,
+    );
+  }
+  const { name, type, data, createdBy, expiresAt } = req.body;
   if (!name || !type || !data) {
     return sendError(
       res,
@@ -37,7 +48,9 @@ router.post('/v1/zones', async (req, res) => {
     );
   }
   try {
-    const zone = await createZone(name, type, data, createdBy || null);
+    const zone = await createZone(name, type, data, createdBy || null, expiresAt || null);
+    websocket.broadcast('world', 'zone.created', { zone });
+    hooks.dispatch('zone.created', zone);
     sendOk(res, { zone }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(
@@ -52,9 +65,20 @@ router.post('/v1/zones', async (req, res) => {
 
 // DELETE /v1/zones/:id - remove a zone
 router.delete('/v1/zones/:id', async (req, res) => {
+  if (!req.headers['x-idempotency-key']) {
+    return sendError(
+      res,
+      { code: 'MISSING_IDEMPOTENCY_KEY', message: 'X-Idempotency-Key header required' },
+      400,
+      res.locals.requestId,
+      res.locals.traceId,
+    );
+  }
   const { id } = req.params;
   try {
     await deleteZone(id);
+    websocket.broadcast('world', 'zone.deleted', { id: parseInt(id, 10) });
+    hooks.dispatch('zone.deleted', { id: parseInt(id, 10) });
     sendOk(res, {}, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(

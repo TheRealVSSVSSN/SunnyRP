@@ -5,7 +5,7 @@
 | DiamondCasino | Resource emits events for casino games such as blackjack, slots and horse racing | `POST /v1/diamond-casino/games` creates a game; bets via `POST /v1/diamond-casino/games/{gameId}/bets` and history via `GET /v1/diamond-casino/games/{gameId}` |
 | PolicePack | Resource emits events for evidence custody updates and character selections | Custody via `GET/POST /v1/evidence/items/{id}/custody`; selection via `POST /v1/accounts/{accountId}/characters/{characterId}:select` |
 | InteractSound | Resource triggers audio playback events specifying sound name and volume to target clients | `POST /v1/interact-sound/plays` logs and broadcasts; history via `GET /v1/interact-sound/plays/:characterId` |
-| PolyZone | Resource defines polygonal zones for triggers | `GET /v1/zones`, `POST /v1/zones`, `DELETE /v1/zones/:id` manage zone records |
+| PolyZone | Resource defines polygonal zones for triggers | `GET /v1/zones`, `POST /v1/zones`, `DELETE /v1/zones/:id` manage zone records; `zone.created` and `zone.deleted` pushed via WebSocket/webhooks |
 | Wise Audio | Resource manages character soundboard tracks | `GET /v1/wise-audio/tracks/:characterId`, `POST /v1/wise-audio/tracks` |
 | Wise Imports | Resource manages vehicle import orders | `GET /v1/wise-imports/orders/:characterId`, `POST /v1/wise-imports/orders` |
 | import-Pack2 | Resource manages vehicle import packages with pricing and cancellation | `GET /v1/import-pack/orders/character/{characterId}`, `GET /v1/import-pack/orders/{id}`, `POST /v1/import-pack/orders`, `POST /v1/import-pack/orders/{id}/deliver`, `POST /v1/import-pack/orders/{id}/cancel` |
