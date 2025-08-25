@@ -33,7 +33,8 @@ async function logEvent({ accountId, characterId, eventType, metadata }) {
  */
 async function listEvents({ limit }) {
   const [rows] = await db.query(
-    'SELECT id, account_id AS accountId, character_id AS characterId, event_type AS eventType, metadata, UNIX_TIMESTAMP(created_at) * 1000 AS createdAt FROM base_event_logs ORDER BY id DESC LIMIT ?',[limit],
+    'SELECT id, account_id AS accountId, character_id AS characterId, event_type AS eventType, metadata, UNIX_TIMESTAMP(created_at) * 1000 AS createdAt FROM base_event_logs ORDER BY id DESC LIMIT ?',
+    [limit],
   );
   return rows.map((row) => ({
     id: row.id,
@@ -45,7 +46,18 @@ async function listEvents({ limit }) {
   }));
 }
 
+/**
+ * Delete base event logs older than the provided cutoff timestamp.
+ *
+ * @param {number} cutoffMs - Epoch milliseconds; records older than this are removed
+ * @returns {Promise<void>}
+ */
+async function deleteOlderThan(cutoffMs) {
+  await db.query('DELETE FROM base_event_logs WHERE created_at < FROM_UNIXTIME(?)', [Math.floor(cutoffMs / 1000)]);
+}
+
 module.exports = {
   logEvent,
   listEvents,
+  deleteOlderThan,
 };

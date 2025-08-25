@@ -13,3 +13,5 @@
 | apartments | properties |
 | garages | properties |
 | banking | economy |
+| baseevents | base-events |
+| np-base | base-events |

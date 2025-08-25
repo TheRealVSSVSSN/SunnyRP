@@ -25,7 +25,7 @@
 - Ensure the `properties` table exists with indexes `idx_properties_owner` and `idx_properties_expires_at`; expired leases are released hourly by the `properties-expire` scheduler.
 - Ensure the `invoices` table exists for character billing. Settled invoices older than `INVOICE_RETENTION_MS` are purged by `invoice-purge` scheduler.
 - Ensure the `cron_jobs` table exists for scheduled tasks.
-- Ensure the `base_event_logs` table exists for base event history.
+- Ensure the `base_event_logs` table exists for base event history; tune `BASE_EVENT_RETENTION_MS` for the purge scheduler.
 - Ensure the `boatshop_boats` table exists for boat catalog data.
 - Ensure the `camera_photos` table exists for stored photos.
 - Ensure the `character_hud_preferences` table exists for HUD settings.

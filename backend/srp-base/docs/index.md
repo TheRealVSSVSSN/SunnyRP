@@ -423,3 +423,12 @@ Extended parity for the **banking** resource with invoice support and real-time 
 * Hourly scheduler purges settled invoices.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/economy.md`.
+
+## Update – 2025-08-25
+
+Enhanced base event logging with WebSocket pushes and retention.
+
+* `POST /v1/base-events` now broadcasts `base-events.logged` via WebSocket.
+* Hourly `base-events-purge` scheduler removes logs older than `BASE_EVENT_RETENTION_MS`.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/baseevents.md`.

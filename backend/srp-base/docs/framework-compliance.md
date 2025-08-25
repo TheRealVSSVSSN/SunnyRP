@@ -67,7 +67,7 @@ practice is supported by citations.
 * **Base API documentation:** update global API docs for new realtime components.
 * **Dispatch workflow:** implement call assignment and unit tracking.
 * **Wise Imports:** add order cancellation and ownership integration.
-| **baseevents module** | Base event logging endpoints follow the established layered pattern with authentication and idempotency. |
+| **baseevents module** | Base event logging endpoints follow the established layered pattern with authentication, idempotency, WebSocket broadcast and hourly purge scheduler. |
 | **boatshop module** | Boatshop endpoints follow the established layered pattern with authentication and idempotency. |
 | **camera module** | Photo storage endpoints follow the established layered pattern with authentication and idempotency. |
 | **hud module** | HUD preference endpoints follow the established layered pattern with authentication and idempotency. |

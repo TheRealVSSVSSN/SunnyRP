@@ -1321,3 +1321,18 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Drop `invoices` table and remove invoice routes and scheduler.
+
+## 2025-08-25 – Base events realtime
+
+### Added
+* WebSocket broadcast `base-events.logged` on event creation.
+* Hourly `base-events-purge` scheduler removes old logs.
+
+### Config
+* `BASE_EVENT_RETENTION_MS` controls log retention.
+
+### Risks
+* Misconfigured retention may delete recent logs.
+
+### Rollback
+* Remove scheduler registration and `BASE_EVENT_RETENTION_MS` config.

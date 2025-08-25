@@ -73,6 +73,7 @@ const config = {
   },
   interactSound: { retentionMs: parseInt(process.env.INTERACT_SOUND_RETENTION_MS || '604800000', 10) },
   dispatch: { retentionMs: parseInt(process.env.DISPATCH_ALERT_RETENTION_MS || '86400000', 10) },
+  baseEvents: { retentionMs: parseInt(process.env.BASE_EVENT_RETENTION_MS || '2592000000', 10) },
   assets: { retentionMs: parseInt(process.env.ASSET_RETENTION_MS || '2592000000', 10) },
   invoiceRetentionMs: parseInt(process.env.INVOICE_RETENTION_MS || '2592000000', 10),
 

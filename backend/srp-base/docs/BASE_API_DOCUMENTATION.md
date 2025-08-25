@@ -499,7 +499,7 @@ To support all features present in the original server resources at the framewor
 All routes require `X-API-Token` authentication. Idempotency keys are supported on POST requests and standard rate limits apply.
 - **srp-base-events** – Records player lifecycle and combat events.
   - `GET /v1/base-events?limit={n}` – List recent events.
-  - `POST /v1/base-events` – Log an event (`accountId`, `characterId`, `eventType`, optional `metadata`).
+  - `POST /v1/base-events` – Log an event (`accountId`, `characterId`, `eventType`, optional `metadata`). Broadcasts `base-events.logged` over WebSocket.
 - **srp-boatshop** – Lists and sells boats to characters.
   - `GET /v1/boatshop` – List boats available for purchase.
   - `POST /v1/boatshop/purchase` – Purchase a boat with `characterId`, `boatId`, `plate` and optional `properties`.

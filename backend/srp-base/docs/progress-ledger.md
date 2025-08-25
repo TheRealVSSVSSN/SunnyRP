@@ -66,3 +66,4 @@
 | 60 | assets realtime | Asset create/delete pushes and cleanup scheduler | Extend | Broadcast events and hourly purge |
 | 61 | properties | Unified apartments, garages and rentals backend | Create | Added properties API and lease expiry scheduler |
 | 62 | banking | Invoices and realtime events | Extend | Added invoice APIs, WS/webhook pushes and purge scheduler |
+| 63 | baseevents | Base event logging with realtime and retention | Extend | Broadcast log events and purge stale records |
