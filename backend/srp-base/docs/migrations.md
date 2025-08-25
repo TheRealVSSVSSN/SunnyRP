@@ -42,3 +42,4 @@
 | 042_add_cron_jobs.sql | Cron jobs table |
 | 043_add_interiors.sql | Apartment interior layouts |
 | 044_add_character_emotes.sql | Character emote favorites table |
+| 045_add_ems_shift_logs.sql | EMS shift logs table |

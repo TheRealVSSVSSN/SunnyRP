@@ -74,3 +74,4 @@ practice is supported by citations.
 | **coordsaver module** | Coordinate endpoints follow the established layered pattern with authentication and idempotency. |
 | **interiors module** | Interior endpoints follow the established layered pattern with authentication and idempotency. |
 | **emotes module** | Favorite emote endpoints follow the established layered pattern with authentication and idempotency. |
+| **ems module** | EMS record and shift endpoints follow the established layered pattern with authentication and idempotency. |

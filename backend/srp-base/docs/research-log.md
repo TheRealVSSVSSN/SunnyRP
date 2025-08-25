@@ -150,3 +150,8 @@
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
 - Community note: "NoPixel 4.0 – Emote Wheel Favorites" – https://forum.example.com/nopixel-emotes
 - Community note: "ProdigyRP 4.0 – Custom Emote System" – https://forum.example.com/prodigy-emotes
+## Research Log – 2025-08-25 (emspack)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
+- GitHub API search results for "NoPixel 4.0" – https://api.github.com/search/repositories?q=nopixel+4.0
+- GitHub API search results for "ProdigyRP 4.0" – https://api.github.com/search/repositories?q=ProdigyRP+4.0

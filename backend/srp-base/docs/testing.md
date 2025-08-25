@@ -241,3 +241,15 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: emo1' -H 'Content-Type: ap
 curl -H 'X-API-Token: <token>' -X DELETE -H 'X-Idempotency-Key: emo2' \\
   http://localhost:3010/v1/characters/1/emotes/wave
 ```
+Manually verify the EMS endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/ems/records
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: ems1' -H 'Content-Type: application/json' \\
+  -d '{"patient_id":"1","doctor_id":"2","treatment":"bandaged"}' \\
+  http://localhost:3010/v1/ems/records
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/ems/shifts/active
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: ems2' -H 'Content-Type: application/json' \\
+  -d '{"characterId":1}' http://localhost:3010/v1/ems/shifts
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: ems3' http://localhost:3010/v1/ems/shifts/1/end
+```

@@ -201,3 +201,11 @@ Introduced favorite emote persistence to support the **emotes** resource.
 * Added Emotes module with `GET /v1/characters/{characterId}/emotes`, `POST /v1/characters/{characterId}/emotes` and `DELETE /v1/characters/{characterId}/emotes/{emote}` endpoints.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/emotes.md`.
+
+## Update – 2025-08-25
+
+Introduced duty shift logging and documented medical record endpoints to support the **emspack** resource.
+
+* Added EMS module with `/v1/ems/records` and `/v1/ems/shifts` endpoints.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/ems.md`.

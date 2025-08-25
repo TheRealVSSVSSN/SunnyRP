@@ -67,4 +67,71 @@ router.delete('/v1/ems/records/:id', async (req, res) => {
   }
 });
 
+// GET /v1/ems/shifts/active
+router.get('/v1/ems/shifts/active', async (req, res) => {
+  try {
+    const shifts = await emsRepo.getActiveShifts();
+    sendOk(res, shifts, res.locals.requestId, res.locals.traceId);
+  } catch (err) {
+    sendError(
+      res,
+      { code: 'INTERNAL_ERROR', message: 'Failed to fetch active shifts' },
+      500,
+      res.locals.requestId,
+      res.locals.traceId,
+    );
+  }
+});
+
+// POST /v1/ems/shifts
+router.post('/v1/ems/shifts', express.json(), async (req, res) => {
+  const { characterId } = req.body || {};
+  if (!characterId) {
+    return sendError(
+      res,
+      { code: 'INVALID_INPUT', message: 'characterId is required' },
+      400,
+      res.locals.requestId,
+      res.locals.traceId,
+    );
+  }
+  try {
+    const shift = await emsRepo.startShift(characterId);
+    sendOk(res, shift, res.locals.requestId, res.locals.traceId);
+  } catch (err) {
+    sendError(
+      res,
+      { code: 'INTERNAL_ERROR', message: 'Failed to start shift' },
+      500,
+      res.locals.requestId,
+      res.locals.traceId,
+    );
+  }
+});
+
+// POST /v1/ems/shifts/:id/end
+router.post('/v1/ems/shifts/:id/end', async (req, res) => {
+  try {
+    const shift = await emsRepo.endShift(req.params.id);
+    if (!shift) {
+      return sendError(
+        res,
+        { code: 'NOT_FOUND', message: 'Shift not found' },
+        404,
+        res.locals.requestId,
+        res.locals.traceId,
+      );
+    }
+    sendOk(res, shift, res.locals.requestId, res.locals.traceId);
+  } catch (err) {
+    sendError(
+      res,
+      { code: 'INTERNAL_ERROR', message: 'Failed to end shift' },
+      500,
+      res.locals.requestId,
+      res.locals.traceId,
+    );
+  }
+});
+
 module.exports = router;

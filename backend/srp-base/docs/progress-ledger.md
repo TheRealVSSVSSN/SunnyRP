@@ -35,3 +35,4 @@
 | 31 | coordsaver | Save and recall world coordinates per character | Create | Added coordinate storage APIs |
 | 32 | drz_interiors | Interior layout persistence per apartment | Create | Added interior storage API |
 | 33 | emotes | Character favorite emote persistence | Create | Added emote favorite APIs |
+| 34 | emspack | EMS medical records and duty shift tracking | Extend | Documented record APIs and added shift logs |

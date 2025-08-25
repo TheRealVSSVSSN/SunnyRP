@@ -1269,6 +1269,63 @@ components:
         emote:
           type: string
           description: Emote command name
+    EmsRecord:
+      type: object
+      properties:
+        id:
+          type: integer
+        patientId:
+          type: string
+        doctorId:
+          type: string
+        treatment:
+          type: string
+        status:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    EmsRecordCreateRequest:
+      type: object
+      required:
+        - patientId
+        - doctorId
+        - treatment
+      properties:
+        patientId:
+          type: string
+        doctorId:
+          type: string
+        treatment:
+          type: string
+        status:
+          type: string
+          enum: [open, closed]
+          nullable: true
+    EmsShift:
+      type: object
+      properties:
+        id:
+          type: integer
+        characterId:
+          type: integer
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+          nullable: true
+    EmsShiftStartRequest:
+      type: object
+      required:
+        - characterId
+      properties:
+        characterId:
+          type: integer
 security:
   - ApiToken: []
 paths:
@@ -1796,6 +1853,218 @@ paths:
                     type: string
         '400':
           $ref: '#/components/responses/BadRequest'
+
+  /v1/ems/records:
+    get:
+      summary: List recent EMS records
+      responses:
+        '200':
+          description: List of records
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EmsRecord'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+    post:
+      summary: Create an EMS record
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmsRecordCreateRequest'
+      responses:
+        '200':
+          description: Created record
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/EmsRecord'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/ems/records/{id}:
+    get:
+      summary: Fetch an EMS record
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: EMS record
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/EmsRecord'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '404':
+          description: Not found
+    patch:
+      summary: Update an EMS record
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmsRecordCreateRequest'
+      responses:
+        '200':
+          description: Updated record
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/EmsRecord'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '404':
+          description: Not found
+    delete:
+      summary: Delete an EMS record
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Record deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '404':
+          description: Not found
+
+  /v1/ems/shifts/active:
+    get:
+      summary: List active EMS shifts
+      responses:
+        '200':
+          description: Active shifts
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EmsShift'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+
+  /v1/ems/shifts:
+    post:
+      summary: Start an EMS shift
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmsShiftStartRequest'
+      responses:
+        '200':
+          description: Shift started
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/EmsShift'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/ems/shifts/{id}/end:
+    post:
+      summary: End an EMS shift
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Shift ended
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/EmsShift'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '404':
+          description: Not found
   /v1/characters/{characterId}/coords:
     get:
       summary: List saved coordinates for a character
@@ -4646,3 +4915,4 @@ paths:
                     type: string
         '400':
           $ref: '#/components/responses/BadRequest'
+

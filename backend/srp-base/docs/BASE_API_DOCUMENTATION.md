@@ -400,6 +400,9 @@ To support all features present in the original server resources at the framewor
   - `POST /v1/ems/records` – Create a record (fields: `patient_id`, `doctor_id`, `treatment`, optional `status`).
   - `PATCH /v1/ems/records/:id` – Update a record’s treatment or status.
   - `DELETE /v1/ems/records/:id` – Remove a record when permitted by policy.
+  - `GET /v1/ems/shifts/active` – List active EMS shifts.
+  - `POST /v1/ems/shifts` – Start a shift (`characterId`).
+  - `POST /v1/ems/shifts/{id}/end` – End a shift.
 
 - **srp-keys** – Assign and manage keys for players.  Keys may represent vehicle keys, property keys or any other access tokens.  Endpoints are:
   - `POST /v1/keys` – Assign a new key (requires `player_id`, `key_type` and `target_id`; optional `metadata`).
@@ -509,3 +512,4 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
   - `GET /v1/characters/{characterId}/emotes` – List favorite emotes.
   - `POST /v1/characters/{characterId}/emotes` – Add a favorite emote (`emote`).
   - `DELETE /v1/characters/{characterId}/emotes/{emote}` – Remove a favorite emote.
+
