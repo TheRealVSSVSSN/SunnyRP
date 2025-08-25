@@ -1044,3 +1044,21 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Drop `heli_flights` table and remove heli routes.
+
+## 2025-08-25 – import-Pack
+
+### Added
+
+* Import Pack module with `/v1/import-pack/orders/{characterId}`, `/v1/import-pack/orders` and `/v1/import-pack/orders/{id}/deliver` endpoints.
+
+### Migrations
+
+* `052_add_import_pack_orders.sql`
+
+### Risks
+
+* Misdelivery tracking may leave orders in pending state.
+
+### Rollback
+
+* Drop `import_pack_orders` table and remove import pack routes.

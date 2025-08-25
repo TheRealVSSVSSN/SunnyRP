@@ -104,6 +104,9 @@ const wiseAudioRoutes = require('./routes/wiseAudio.routes');
 // wise imports domain route
 const wiseImportsRoutes = require('./routes/wiseImports.routes');
 
+// import pack domain route
+const importPackRoutes = require('./routes/importPack.routes');
+
 // wise uc domain route
 const wiseUCRoutes = require('./routes/wiseUC.routes');
 
@@ -237,6 +240,9 @@ app.use(wiseAudioRoutes);
 
 // mount wise imports routes
 app.use(wiseImportsRoutes);
+
+// mount import pack routes
+app.use(importPackRoutes);
 
 // mount wise uc routes
 app.use(wiseUCRoutes);

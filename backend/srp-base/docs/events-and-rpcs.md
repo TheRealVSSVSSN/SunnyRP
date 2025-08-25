@@ -9,6 +9,7 @@
 | PolyZone | Resource defines polygonal zones for triggers | `GET /v1/zones`, `POST /v1/zones`, `DELETE /v1/zones/:id` manage zone records |
 | Wise Audio | Resource manages character soundboard tracks | `GET /v1/wise-audio/tracks/:characterId`, `POST /v1/wise-audio/tracks` |
 | Wise Imports | Resource manages vehicle import orders | `GET /v1/wise-imports/orders/:characterId`, `POST /v1/wise-imports/orders` |
+| import-Pack | Resource manages vehicle import packages | `GET /v1/import-pack/orders/:characterId`, `POST /v1/import-pack/orders`, `POST /v1/import-pack/orders/{id}/deliver` |
 | WiseGuy-Vanilla | Base resource using account-scoped character management | `GET/POST/DELETE/POST select/GET selected /v1/accounts/{accountId}/characters` |
 | Wise-UC | Resource manages undercover aliases for characters | `GET /v1/wise-uc/profiles/:characterId`, `POST /v1/wise-uc/profiles` |
 | WiseGuy-Wheels | Resource records wheel spin outcomes per character | `GET /v1/wise-wheels/spins/:characterId`, `POST /v1/wise-wheels/spins` |

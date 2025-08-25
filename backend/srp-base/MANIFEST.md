@@ -8,6 +8,7 @@
 - Added hospital admission APIs.
 - Added hardcap configuration and session tracking APIs.
 - Added heli flight logging APIs.
+- Added import pack order APIs.
 
 ## File Changes
 
@@ -106,9 +107,24 @@
 | `docs/testing.md` | M | Added heli curl examples |
 | `docs/modules/heli.md` | A | Module documentation |
 | `docs/research-log.md` | M | Logged heli research attempt |
+| `src/repositories/importPackRepository.js` | A | Persistence for import package orders |
+| `src/routes/importPack.routes.js` | A | REST endpoints for import package orders |
+| `src/migrations/052_add_import_pack_orders.sql` | A | Create `import_pack_orders` table |
+| `src/app.js` | M | Mounted import pack routes |
+| `openapi/api.yaml` | M | Documented import pack schemas and paths |
+| `docs/index.md` | M | Logged import pack update |
+| `docs/progress-ledger.md` | M | Added import-pack entry |
+| `docs/framework-compliance.md` | M | Noted import pack module compliance |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented import pack endpoints |
+| `docs/events-and-rpcs.md` | M | Mapped import pack events |
+| `docs/db-schema.md` | M | Documented `import_pack_orders` table |
+| `docs/migrations.md` | M | Listed migration 052 |
+| `docs/modules/import-pack.md` | A | Module documentation |
+| `docs/research-log.md` | M | Logged import-pack research |
 
 ## Startup Notes
 
 - Run `node src/bootstrap/migrate.js` to apply migration `046_add_taxi_rides.sql`.
 - Run `node src/bootstrap/migrate.js` to apply migration `048_add_hospital_admissions.sql`.
 - Run `node src/bootstrap/migrate.js` to apply migration `051_add_heli_flights.sql`.
+- Run `node src/bootstrap/migrate.js` to apply migration `052_add_import_pack_orders.sql`.

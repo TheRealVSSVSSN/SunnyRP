@@ -413,3 +413,14 @@
 | end_time | TIMESTAMP | Flight end time; null if active |
 | created_at | TIMESTAMP | Creation time |
 | updated_at | TIMESTAMP | Update time |
+
+## import_pack_orders
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| character_id | BIGINT | FK to characters.id |
+| package | VARCHAR(64) | Package identifier |
+| status | VARCHAR(32) | pending or delivered |
+| created_at | BIGINT | Milliseconds timestamp |
+| delivered_at | BIGINT | Delivery timestamp, null if pending |

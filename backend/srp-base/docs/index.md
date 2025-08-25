@@ -273,3 +273,11 @@ Introduced helicopter flight logging to support the **heli** resource.
 * Added Heli module with `/v1/heli/flights`, `/v1/heli/flights/{id}/end` and `/v1/characters/{characterId}/heli/flights` endpoints.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/heli.md`.
+
+## Update – 2025-08-25
+
+Introduced import package tracking to support the **import-Pack** resource.
+
+* Added Import Pack module with `/v1/import-pack/orders/{characterId}`, `/v1/import-pack/orders` and `/v1/import-pack/orders/{id}/deliver` endpoints.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/import-pack.md`.

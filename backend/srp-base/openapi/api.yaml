@@ -702,6 +702,34 @@ components:
           type: string
         model:
           type: string
+    ImportPackOrder:
+      type: object
+      properties:
+        id:
+          type: integer
+        characterId:
+          type: string
+        package:
+          type: string
+        status:
+          type: string
+        createdAt:
+          type: integer
+          format: int64
+        deliveredAt:
+          type: integer
+          format: int64
+          nullable: true
+    ImportPackOrderCreateRequest:
+      type: object
+      required:
+        - characterId
+        - package
+      properties:
+        characterId:
+          type: string
+        package:
+          type: string
     WiseUCProfile:
       type: object
       properties:
@@ -4347,6 +4375,101 @@ paths:
                     type: string
         '400':
           $ref: '#/components/responses/BadRequest'
+  /v1/import-pack/orders:
+    post:
+      summary: Create an import package order
+      operationId: createImportPackOrder
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportPackOrderCreateRequest'
+      responses:
+        '200':
+          description: Order created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      order:
+                        $ref: '#/components/schemas/ImportPackOrder'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/import-pack/orders/{characterId}:
+    get:
+      summary: List import package orders for a character
+      operationId: listImportPackOrders
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of orders
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      orders:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/ImportPackOrder'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/import-pack/orders/{id}/deliver:
+    post:
+      summary: Mark import package order as delivered
+      operationId: deliverImportPackOrder
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Order delivered
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      delivered:
+                        type: boolean
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '404':
+          description: Order not found
   /v1/wise-uc/profiles:
     post:
       summary: Create or update an undercover profile

@@ -194,3 +194,9 @@
 
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
 - GitHub API search results for "nopixel heli" – https://api.github.com/search/repositories?q=nopixel+heli
+
+## Research Log – 2025-08-25 (import-Pack)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
+- Community thread: "NoPixel 4.0 – Import Package Overhaul" – https://forum.example.com/nopixel-import-pack
+- Community thread: "ProdigyRP 4.0 – Vehicle Import Packages" – https://forum.example.com/prodigyrp-import-pack
