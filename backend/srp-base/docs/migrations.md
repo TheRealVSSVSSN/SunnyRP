@@ -51,3 +51,4 @@
 | 051_add_heli_flights.sql | Helicopter flight logging table |
 | 052_add_import_pack_orders.sql | Import pack orders table |
 | 053_add_import_pack_order_price_cancel.sql | Add price and canceled_at columns to import pack orders |
+| 054_add_character_peds.sql | Ped state table |

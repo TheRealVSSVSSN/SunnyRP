@@ -206,3 +206,7 @@
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
 - Community video: "NoPixel 4.0 Update – Import Overhaul" – https://www.youtube.com/watch?v=import4
 - Community forum: "ProdigyRP 4.0 Import System" – https://forum.example.com/prodigyrp-import-system
+## Research Log – 2025-08-25 (isPed)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
+- Unable to access public NoPixel 4.0 or ProdigyRP 4.0 feature summaries due to network restrictions.

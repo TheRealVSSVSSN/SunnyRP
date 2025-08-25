@@ -46,3 +46,4 @@
 | 42 | heli | Helicopter flight logging and tracking | Create | Added flight tracking API |
 | 43 | import-Pack | Vehicle import package tracking per character | Create | Added import package API |
 | 44 | import-Pack2 | Enhanced import package management with pricing and cancellation | Extend | Added order retrieval and cancel endpoints |
+| 45 | isPed | Character ped model and state persistence | Create | Added ped state APIs |

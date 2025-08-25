@@ -289,3 +289,11 @@ Extended import package tracking to support the **import-Pack2** resource.
 * Added order retrieval and cancellation with pricing via `/v1/import-pack/orders`, `/v1/import-pack/orders/{id}`, `/v1/import-pack/orders/{id}/cancel`, `/v1/import-pack/orders/{id}/deliver` and `/v1/import-pack/orders/character/{characterId}` endpoints.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/import-pack.md`.
+
+## Update – 2025-08-25
+
+Introduced ped state persistence to support the **isPed** resource.
+
+* Added Peds module with `GET /v1/characters/{characterId}/ped` and `PUT /v1/characters/{characterId}/ped` endpoints.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/peds.md`.

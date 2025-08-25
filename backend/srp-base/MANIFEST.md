@@ -10,6 +10,7 @@
 - Added heli flight logging APIs.
 - Added import pack order APIs.
 - Extended import pack order APIs with pricing, retrieval and cancellation.
+- Added ped state APIs.
 
 ## File Changes
 
@@ -139,9 +140,28 @@
 | `docs/modules/import-pack.md` | A | Module documentation |
 | `docs/research-log.md` | M | Logged import-pack research |
 
+| `src/repositories/pedsRepository.js` | A | Persistence for character ped state |
+| `src/routes/peds.routes.js` | A | REST endpoints for ped state |
+| `src/migrations/054_add_character_peds.sql` | A | Create `character_peds` table |
+| `src/app.js` | M | Mounted peds routes |
+| `openapi/api.yaml` | M | Documented ped schemas and paths |
+| `docs/index.md` | M | Logged isPed update |
+| `docs/progress-ledger.md` | M | Added isPed entry |
+| `docs/events-and-rpcs.md` | M | Mapped isPed events |
+| `docs/db-schema.md` | M | Documented `character_peds` table |
+| `docs/migrations.md` | M | Listed migration 054 |
+| `docs/admin-ops.md` | M | Added character_peds table check |
+| `docs/security.md` | M | Added peds security note |
+| `docs/testing.md` | M | Added peds curl examples |
+| `docs/modules/peds.md` | A | Module documentation |
+| `docs/research-log.md` | M | Logged isPed research |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented peds endpoints |
+| `docs/framework-compliance.md` | M | Noted peds module compliance |
+
 ## Startup Notes
 
 - Run `node src/bootstrap/migrate.js` to apply migration `046_add_taxi_rides.sql`.
 - Run `node src/bootstrap/migrate.js` to apply migration `048_add_hospital_admissions.sql`.
 - Run `node src/bootstrap/migrate.js` to apply migration `051_add_heli_flights.sql`.
 - Run `node src/bootstrap/migrate.js` to apply migration `052_add_import_pack_orders.sql`.
+- Run `node src/bootstrap/migrate.js` to apply migration `054_add_character_peds.sql`.
