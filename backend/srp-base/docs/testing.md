@@ -161,6 +161,17 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: b3' -H 'Content-Type: appl
 curl -H 'X-API-Token: <token>' http://localhost:3010/v1/characters/char123/transactions
 ```
 
+Manually verify the invoice endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: inv1' -H 'Content-Type: application/json' \
+  -d '{"fromCharacterId":"char123","toCharacterId":"char456","amount":75}' \
+  http://localhost:3010/v1/invoices
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/characters/char456/invoices
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: inv2' -H 'Content-Type: application/json' \
+  -d '{"characterId":"char456"}' http://localhost:3010/v1/invoices/1:pay
+```
+
 Manually verify the base events endpoints:
 
 ```sh
@@ -377,8 +388,6 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: k92' -H 'Content-Type: app
 curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: k93' -X DELETE \
   http://localhost:3010/v1/characters/1/k9s/1
 Manually verify the jobs endpoints:
-=======
-=Manually verify the jobs endpoints:
 
 ```sh
 curl -H 'X-API-Token: <token>' http://localhost:3010/v1/jobs

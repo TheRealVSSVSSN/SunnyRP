@@ -1093,6 +1093,50 @@ components:
         reason:
           type: string
           nullable: true
+    Invoice:
+      type: object
+      properties:
+        id:
+          type: integer
+        from_character_id:
+          type: string
+        to_character_id:
+          type: string
+        amount:
+          type: integer
+        reason:
+          type: string
+          nullable: true
+        status:
+          type: string
+        due_at:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    InvoiceCreateRequest:
+      type: object
+      required:
+        - fromCharacterId
+        - toCharacterId
+        - amount
+      properties:
+        fromCharacterId:
+          type: string
+        toCharacterId:
+          type: string
+        amount:
+          type: integer
+        reason:
+          type: string
+          nullable: true
+        dueAt:
+          type: string
+          format: date-time
         created_at:
           type: string
           format: date-time
@@ -2105,6 +2149,96 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Transaction'
+  /v1/invoices:
+    post:
+      summary: Create invoice
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvoiceCreateRequest'
+      responses:
+        '200':
+          description: Invoice created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+  /v1/characters/{characterId}/invoices:
+    get:
+      summary: List invoices for a character
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: status
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Invoice list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invoices:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Invoice'
+  /v1/invoices/{id}:pay:
+    post:
+      summary: Pay an invoice
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - characterId
+              properties:
+                characterId:
+                  type: string
+      responses:
+        '200':
+          description: Invoice paid
+  /v1/invoices/{id}:cancel:
+    post:
+      summary: Cancel an invoice
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - characterId
+              properties:
+                characterId:
+                  type: string
+      responses:
+        '200':
+          description: Invoice cancelled
   /v1/ready:
     get:
       summary: Readiness probe

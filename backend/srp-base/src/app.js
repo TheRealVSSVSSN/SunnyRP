@@ -1,4 +1,7 @@
 const express = require('express');
+const path = require('path');
+const OpenApiValidator = require('express-openapi-validator');
+const cors = require('cors');
 const config = require('./config/env');
 const logger = require('./utils/logger');
 const requestId = require('./middleware/requestId');
@@ -138,6 +141,9 @@ const heliRoutes = require('./routes/heli.routes');
 
 const app = express();
 
+// CORS support
+app.use(cors());
+
 // Capture raw body for HMAC signature verification
 app.use(
   express.json({
@@ -155,6 +161,15 @@ app.use(authMiddleware);
 
 // Idempotency (must run before body is consumed in routes)
 app.use(idempotencyMiddleware);
+
+// OpenAPI request validation
+app.use(
+  OpenApiValidator.middleware({
+    apiSpec: path.join(__dirname, '../openapi/api.yaml'),
+    validateRequests: true,
+    validateResponses: false,
+  }),
+);
 
 // Health and metrics (public)
 app.use(healthRoutes);
