@@ -102,6 +102,40 @@ async function saveCoordinates(entry) {
   );
 }
 
+/**
+ * Retrieve the latest timecycle override. Returns null if no override
+ * has been set.
+ *
+ * @returns {Promise<object|null>}
+ */
+async function getTimecycleOverride() {
+  const rows = await db.query(
+    'SELECT id, preset, expires_at AS expiresAt, created_at AS createdAt FROM world_timecycle ORDER BY id DESC LIMIT 1',
+    [],
+  );
+  return rows[0] || null;
+}
+
+/**
+ * Set a new timecycle override.
+ *
+ * @param {{preset: string, expiresAt?: string}} override
+ */
+async function setTimecycleOverride(override) {
+  const { preset, expiresAt = null } = override;
+  await db.query(
+    'INSERT INTO world_timecycle (preset, expires_at) VALUES (?, ?)',
+    [preset, expiresAt],
+  );
+}
+
+/**
+ * Clear any active timecycle override.
+ */
+async function clearTimecycleOverride() {
+  await db.query('DELETE FROM world_timecycle');
+}
+
 module.exports = {
   getWorldState,
   updateWorldState,
@@ -109,4 +143,7 @@ module.exports = {
   updateForecast,
   recordEvent,
   saveCoordinates,
+  getTimecycleOverride,
+  setTimecycleOverride,
+  clearTimecycleOverride,
 };

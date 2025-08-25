@@ -345,3 +345,12 @@ Replaced the standalone DiamondBlackjack module with a unified **Diamond Casino*
 * Added drift-aware scheduler to resolve casino games server-side.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/diamondCasino.md`.
+
+## Update – 2025-08-25
+
+Extended world module with timecycle override support for the **climate-overrides** resource (formerly koillove).
+
+* Added world timecycle endpoints and repository functions.
+* Migration `059_add_world_timecycle.sql` creates `world_timecycle` table.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/world.md`.

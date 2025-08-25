@@ -597,3 +597,11 @@ Introduced K9 unit management for police characters.
 * `DELETE /v1/characters/{characterId}/k9s/{k9Id}` – retire a K9 unit (requires `X-Idempotency-Key`).
 
 All endpoints require standard authentication headers.
+
+## Update – 2025-08-25 (climate-overrides)
+
+Added world timecycle management endpoints.
+
+- `GET /v1/world/timecycle` – retrieve current timecycle override.
+- `POST /v1/world/timecycle` – set override with `preset` and optional `expiresAt`.
+- `DELETE /v1/world/timecycle` – clear override.

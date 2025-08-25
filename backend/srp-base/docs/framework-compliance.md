@@ -95,3 +95,4 @@ practice is supported by citations.
 | **WebSocket gateway** | Provides authenticated connections with heartbeat and at-least-once broadcast semantics. |
 | **Scheduler** | Jittered task runner replaces client loops for casino resolutions. |
 | **Webhook dispatcher** | HMAC-signed webhook publisher with retries and dead-letter logging. |
+| **world module** | World state, forecast and timecycle endpoints follow the established layered pattern with authentication and idempotency. |

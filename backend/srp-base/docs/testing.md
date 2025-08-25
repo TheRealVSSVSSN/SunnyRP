@@ -372,6 +372,8 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: k92' -H 'Content-Type: app
 curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: k93' -X DELETE \
   http://localhost:3010/v1/characters/1/k9s/1
 Manually verify the jobs endpoints:
+=======
+=Manually verify the jobs endpoints:
 
 ```sh
 curl -H 'X-API-Token: <token>' http://localhost:3010/v1/jobs
@@ -409,4 +411,14 @@ curl -H 'X-API-Token: <token>' http://localhost:3010/v1/world/forecast
 curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: 2' -H 'Content-Type: application/json' \
   -d '{"forecast":[{"weather":"RAIN","duration":30}]}' \
   http://localhost:3010/v1/world/forecast
+```
+
+Manually verify the world timecycle endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/world/timecycle
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: tc1' -H 'Content-Type: application/json' \
+  -d '{"preset":"w_xmas"}' \
+  http://localhost:3010/v1/world/timecycle
+curl -H 'X-API-Token: <token>' -X DELETE http://localhost:3010/v1/world/timecycle
 ```

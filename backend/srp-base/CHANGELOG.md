@@ -1179,3 +1179,17 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Drop `world_forecast` table and remove world forecast routes.
+
+## 2025-08-25 – climate-overrides
+
+### Added
+* Timecycle override endpoints `/v1/world/timecycle` and repository helpers.
+
+### Migrations
+* `059_add_world_timecycle.sql` creates `world_timecycle` table.
+
+### Risks
+* Incorrect preset names could cause inconsistent visuals.
+
+### Rollback
+* Drop `world_timecycle` table and remove timecycle routes and repository.

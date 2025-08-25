@@ -52,3 +52,4 @@
 | broadcaster | Event to attempt joining the broadcaster job | `POST /v1/broadcast/attempt` |
 | srp-debug | Developer requests for runtime diagnostics | `GET /v1/debug/status` returns server metrics |
 | srp-weathersync | Resource broadcasts weather and time updates to clients | `GET /v1/world/state`, `POST /v1/world/state`, `GET /v1/world/forecast`, `POST /v1/world/forecast` |
+| climate-overrides | Resource applies custom timecycle XMLs | `/v1/world/timecycle` to set or clear presets |

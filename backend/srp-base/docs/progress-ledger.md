@@ -56,3 +56,4 @@
 | 51 | WebSocketGateway | Real-time push notifications | Create | Added WS gateway with heartbeat and auth |
 | 52 | WebhookDispatcher | External webhook delivery | Create | Added HMAC-signed dispatcher |
 | 53 | Scheduler | Server-side loop migration | Create | Added jittered task scheduler |
+| 50 | climate-overrides | Timecycle overrides and weather preset controls | Extend | Added world timecycle API |

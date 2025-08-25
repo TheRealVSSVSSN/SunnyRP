@@ -42,3 +42,4 @@
 - Ensure the `k9_units` table exists after applying migration 057.
 - Ensure the `world_forecast` table exists for weather scheduling.
 - Configure webhook sinks via environment variables. Discord sink is scaffolded but disabled unless `WEBHOOK_DISCORD_ENABLED=1` and `WEBHOOK_DISCORD_URL` are set.
+- Ensure the `world_timecycle` table exists for timecycle overrides.
