@@ -42,3 +42,4 @@
 | gabz_pillbox_hospital | Resource handles hospital admissions and bed management | `GET /v1/hospital/admissions/active`, `POST /v1/hospital/admissions`, `POST /v1/hospital/admissions/{id}/discharge` |
 | garages | Resource emits events when vehicles are stored or retrieved from garages | `/v1/garages` CRUD, `/v1/garages/{garageId}/store`, `/v1/garages/{garageId}/retrieve`, `/v1/characters/{characterId}/garages/{garageId}/vehicles` |
 | ghmattimysql | Exports `execute`, `scalar` and `transaction` for MySQL queries | Core `db` repository offers `query`, `scalar` and `transaction` helpers with named parameters |
+| hardcap | Connection attempts and slot checks | `GET /v1/hardcap/status`, `POST /v1/hardcap/sessions`, `DELETE /v1/hardcap/sessions/{id}` |

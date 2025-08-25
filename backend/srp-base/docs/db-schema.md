@@ -382,3 +382,22 @@
 | character_id | BIGINT | Character storing the vehicle |
 | stored_at | TIMESTAMP | Storage time |
 | retrieved_at | TIMESTAMP | Retrieval time |
+
+## hardcap_config
+
+| Column | Type | Notes |
+|---|---|---|
+| id | TINYINT | Always 1 |
+| max_players | INT | Maximum allowed concurrent players |
+| reserved_slots | INT | Slots reserved for priority |
+| updated_at | TIMESTAMP | Update time |
+
+## hardcap_sessions
+
+| Column | Type | Notes |
+|---|---|---|
+| id | BIGINT AUTO_INCREMENT | Primary key |
+| account_id | BIGINT | FK to accounts.id |
+| character_id | BIGINT | FK to characters.id |
+| connected_at | TIMESTAMP | Connection time |
+| disconnected_at | TIMESTAMP | Disconnection time; null if active |

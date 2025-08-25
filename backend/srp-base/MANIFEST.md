@@ -6,6 +6,7 @@
 - Added furniture placement APIs.
 - Added endpoint to retrieve the active character for multi-character support.
 - Added hospital admission APIs.
+- Added hardcap configuration and session tracking APIs.
 
 ## File Changes
 
@@ -70,6 +71,23 @@
 | `docs/BASE_API_DOCUMENTATION.md` | M | Documented hospital endpoints |
 | `docs/framework-compliance.md` | M | Noted hospital module compliance |
 | `docs/research-log.md` | M | Logged gabz_pillbox_hospital research |
+| `src/repositories/hardcapRepository.js` | A | Persistence for hardcap configuration and sessions |
+| `src/routes/hardcap.routes.js` | A | REST endpoints for hardcap operations |
+| `src/migrations/050_add_hardcap.sql` | A | Create hardcap tables |
+| `src/app.js` | M | Mounted hardcap routes |
+| `openapi/api.yaml` | M | Documented hardcap schemas and paths |
+| `docs/index.md` | M | Logged hardcap update |
+| `docs/progress-ledger.md` | M | Added hardcap entry |
+| `docs/framework-compliance.md` | M | Noted hardcap module compliance |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented hardcap endpoints |
+| `docs/events-and-rpcs.md` | M | Mapped hardcap events |
+| `docs/db-schema.md` | M | Documented hardcap tables |
+| `docs/migrations.md` | M | Listed migration 050 |
+| `docs/admin-ops.md` | M | Added hardcap table check |
+| `docs/security.md` | M | Added hardcap security note |
+| `docs/testing.md` | M | Added hardcap curl examples |
+| `docs/modules/hardcap.md` | A | Module documentation |
+| `docs/research-log.md` | M | Logged hardcap research attempt |
 
 ## Startup Notes
 

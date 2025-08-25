@@ -183,3 +183,9 @@
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
 - GitHub repository "vecchiotom/ghmattimysql" – middleware overview. https://github.com/vecchiotom/ghmattimysql
 - GitHub repository "imahdiy/qb-target-nopixel4.0" – notes on NoPixel 4.0 interaction style. https://github.com/imahdiy/qb-target-nopixel4.0
+
+## Research Log – 2025-08-25 (hardcap)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
+- GitHub API search results for "NoPixel 4.0" – https://api.github.com/search/repositories?q=NoPixel+4.0
+- GitHub API search results for "ProdigyRP 4.0" – https://api.github.com/search/repositories?q=ProdigyRP+4.0
