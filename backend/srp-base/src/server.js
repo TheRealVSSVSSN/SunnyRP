@@ -7,6 +7,7 @@ const casinoTasks = require('./tasks/diamondCasino');
 const interactSoundTasks = require('./tasks/interactSound');
 const dispatchTasks = require('./tasks/dispatch');
 const zoneTasks = require('./tasks/zones');
+const wiseImportsTasks = require('./tasks/wiseImports');
 
 // Register Prometheus metrics if enabled.  This must be done before
 // the server starts so that middleware can increment counters.
@@ -26,6 +27,12 @@ scheduler.register('casino-resolver', () => casinoTasks.resolvePending(wss), 300
 scheduler.register('interact-sound-purge', () => interactSoundTasks.purgeOld(), 3600000, { jitter: 60000 });
 scheduler.register('dispatch-alert-purge', () => dispatchTasks.purgeOld(), 3600000, { jitter: 60000 });
 scheduler.register('zone-expiry-purge', () => zoneTasks.pruneExpired(), 60000, { jitter: 5000 });
+scheduler.register(
+  wiseImportsTasks.JOB_NAME,
+  () => wiseImportsTasks.notifyReady(),
+  wiseImportsTasks.INTERVAL_MS,
+  { jitter: 60000, persistName: wiseImportsTasks.JOB_NAME },
+);
 
 // Handle graceful shutdown
 function shutdown() {

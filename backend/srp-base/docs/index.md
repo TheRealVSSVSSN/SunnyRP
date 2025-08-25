@@ -118,6 +118,15 @@ Introduced base event logging to support the **baseevents** resource.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/baseevents.md`.
 
+## Update – 2025-03-15
+
+Enhanced the Wise Imports module with scheduler-driven order readiness and delivery confirmation.
+
+* Added background task promoting pending orders to ready status with real-time pushes.
+* Added `POST /v1/wise-imports/orders/{id}/deliver` endpoint to finalize deliveries.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/wise-imports.md`.
+
 ## Update – 2025-08-24
 
 Introduced boat catalog and purchase endpoints to support the **boatshop** resource.

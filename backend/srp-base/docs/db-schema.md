@@ -133,7 +133,8 @@ Added `world_forecast` table for weather scheduling. K9 migration renamed to 057
 | character_id | BIGINT | Owning character |
 | model | VARCHAR(64) | Vehicle model identifier |
 | status | VARCHAR(32) | Order status |
-| created_at | BIGINT | Epoch milliseconds |
+| created_at | BIGINT | Created timestamp (ms) |
+| updated_at | BIGINT | Last status update timestamp (ms) |
 
 ## wise_uc_profiles
 

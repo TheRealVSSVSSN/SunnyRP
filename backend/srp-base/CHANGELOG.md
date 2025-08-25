@@ -1244,3 +1244,18 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Drop `expires_at` column from `zones` and remove zone scheduler/broadcast logic.
+
+## 2025-03-15 – Wise Imports scheduler & delivery
+
+### Added
+* Scheduler task to promote pending import orders to `ready` with WebSocket and webhook pushes.
+* `POST /v1/wise-imports/orders/{id}/deliver` endpoint to finalize deliveries.
+
+### Migrations
+* `063_update_wise_import_orders.sql`
+
+### Risks
+* Misconfigured interval may spam readiness events.
+
+### Rollback
+* Remove wise imports scheduler registration and delivery route; drop `updated_at` column and status index from `wise_import_orders`.

@@ -78,6 +78,11 @@
 # Research Log – 2025-08-24 (apartments)
 
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
+
+# Research Log – 2025-03-15 (Wise Imports ready notifier)
+
+- Cloned `https://github.com/h04X-2K/NoPixelServer` and inspected `resources/WiseGuy-Imports` for vehicle import context.
+- Reviewed vehicle import order flows in ESX (`es_extended`) and ND (`ND_Core`) for status transition patterns.
 # Research Log – 2025-08-24 (Boatshop)
 
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.

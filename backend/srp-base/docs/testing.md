@@ -79,6 +79,9 @@ curl -H 'X-API-Token: <token>' http://localhost:3010/v1/wise-imports/orders/char
 curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: wi1' -H 'Content-Type: application/json' \
   -d '{"characterId":"char123","model":"sultan"}' \
   http://localhost:3010/v1/wise-imports/orders
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: wi2' -H 'Content-Type: application/json' \
+  -d '{"characterId":"char123"}' \
+  http://localhost:3010/v1/wise-imports/orders/1/deliver
 ```
 
 Manually verify the wise uc endpoints:
