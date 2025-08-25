@@ -78,3 +78,4 @@ practice is supported by citations.
 | **taxi module** | Taxi ride endpoints follow the established layered pattern with authentication and idempotency. |
 | **furniture module** | Furniture endpoints follow the established layered pattern with authentication and idempotency. |
 | **characters module** | Added endpoint to retrieve the active character, maintaining layered design and validation. |
+| **hospital module** | Hospital admission endpoints follow the established layered pattern with authentication and idempotency. |

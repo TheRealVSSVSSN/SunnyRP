@@ -526,3 +526,9 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
 - `POST /v1/taxi/requests/{id}/accept` – accept a request
 - `POST /v1/taxi/requests/{id}/complete` – complete a ride
 - `GET /v1/characters/{characterId}/taxi/rides` – ride history
+
+### Hospital
+
+- `GET /v1/hospital/admissions/active` – list current admissions
+- `POST /v1/hospital/admissions` – admit a character
+- `POST /v1/hospital/admissions/{id}/discharge` – discharge an admission

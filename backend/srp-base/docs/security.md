@@ -30,3 +30,4 @@
 - EMS routes inherit the same authentication and idempotency requirements.
 - Taxi routes inherit the same authentication and idempotency requirements.
 - Furniture routes inherit the same authentication and idempotency requirements.
+- Hospital routes inherit the same authentication and idempotency requirements.

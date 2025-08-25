@@ -278,3 +278,14 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: furn1' -H 'Content-Type: a
 curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: furn2' -X DELETE \
   http://localhost:3010/v1/characters/1/furniture/1
 ```
+
+Manually verify the hospital admission endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/hospital/admissions/active
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: hosp1' -H 'Content-Type: application/json' \
+  -d '{"characterId":1,"reason":"injury"}' \
+  http://localhost:3010/v1/hospital/admissions
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: hosp2' \
+  http://localhost:3010/v1/hospital/admissions/1/discharge
+```

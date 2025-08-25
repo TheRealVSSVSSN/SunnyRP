@@ -5,6 +5,7 @@
 - Added taxi dispatch and ride logging APIs.
 - Added furniture placement APIs.
 - Added endpoint to retrieve the active character for multi-character support.
+- Added hospital admission APIs.
 
 ## File Changes
 
@@ -52,7 +53,25 @@
 | `docs/events-and-rpcs.md` | M | Mapped gabz_mrpd resource |
 | `docs/framework-compliance.md` | M | Noted characters module update |
 | `docs/research-log.md` | M | Logged gabz_mrpd research |
+| `src/repositories/hospitalRepository.js` | A | Persistence for hospital admissions |
+| `src/routes/hospital.routes.js` | A | REST endpoints for hospital admissions |
+| `src/migrations/048_add_hospital_admissions.sql` | A | Create `hospital_admissions` table |
+| `src/app.js` | M | Mounted hospital routes |
+| `openapi/api.yaml` | M | Documented hospital schemas and paths |
+| `docs/index.md` | M | Logged gabz_pillbox_hospital update |
+| `docs/progress-ledger.md` | M | Added gabz_pillbox_hospital entry |
+| `docs/events-and-rpcs.md` | M | Mapped gabz_pillbox_hospital resource |
+| `docs/db-schema.md` | M | Documented `hospital_admissions` table |
+| `docs/migrations.md` | M | Listed migration 048 |
+| `docs/admin-ops.md` | M | Added hospital table check |
+| `docs/security.md` | M | Added hospital security note |
+| `docs/testing.md` | M | Added hospital curl examples |
+| `docs/modules/hospital.md` | A | Module documentation |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented hospital endpoints |
+| `docs/framework-compliance.md` | M | Noted hospital module compliance |
+| `docs/research-log.md` | M | Logged gabz_pillbox_hospital research |
 
 ## Startup Notes
 
 - Run `node src/bootstrap/migrate.js` to apply migration `046_add_taxi_rides.sql`.
+- Run `node src/bootstrap/migrate.js` to apply migration `048_add_hospital_admissions.sql`.

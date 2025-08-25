@@ -348,3 +348,15 @@
 | heading | DOUBLE | Optional heading |
 | created_at | TIMESTAMP | Creation time |
 | updated_at | TIMESTAMP | Update time |
+
+## hospital_admissions
+
+| Column | Type | Notes |
+|---|---|---|
+| id | BIGINT AUTO_INCREMENT | Primary key |
+| character_id | BIGINT | Owning character |
+| reason | VARCHAR(255) | Admission reason |
+| bed | VARCHAR(50) | Assigned bed |
+| admitted_at | TIMESTAMP | Admission time |
+| discharged_at | TIMESTAMP | Discharge time |
+| notes | TEXT | Additional notes |

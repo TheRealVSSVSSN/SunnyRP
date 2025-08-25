@@ -233,3 +233,11 @@ For resource decisions see `progress-ledger.md`. Module details are documented i
 Reviewed **gabz_mrpd** mapping resource; no server responsibilities identified. Added `GET /v1/accounts/{accountId}/characters/selected` to retrieve the currently active character, strengthening multi-character session handling.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/characters.md`.
+
+## Update – 2025-08-25
+
+Introduced patient admission tracking to support the **gabz_pillbox_hospital** resource.
+
+* Added Hospital module with `/v1/hospital/admissions` endpoints and migration.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/hospital.md`.
