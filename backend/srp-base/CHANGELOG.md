@@ -916,3 +916,21 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Remove EMS routes and drop `ems_shift_logs` table.
+
+## 2025-08-25 – es_taxi
+
+### Added
+
+* Taxi module with ride request lifecycle endpoints.
+
+### Migrations
+
+* `046_add_taxi_rides.sql`
+
+### Risks
+
+* Unprocessed requests may accumulate; monitor table size.
+
+### Rollback
+
+* Remove taxi routes and drop `taxi_rides` table.

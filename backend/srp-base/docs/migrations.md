@@ -43,3 +43,4 @@
 | 043_add_interiors.sql | Apartment interior layouts |
 | 044_add_character_emotes.sql | Character emote favorites table |
 | 045_add_ems_shift_logs.sql | EMS shift logs table |
+| 046_add_taxi_rides.sql | Taxi ride request table |

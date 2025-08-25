@@ -209,3 +209,12 @@ Introduced duty shift logging and documented medical record endpoints to support
 * Added EMS module with `/v1/ems/records` and `/v1/ems/shifts` endpoints.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/ems.md`.
+
+## Update – 2025-08-25
+
+Introduced taxi dispatch backend to support the **es_taxi** resource.
+
+* Added Taxi module with `/v1/taxi/requests` and ride completion endpoints.
+* Migration `046_add_taxi_rides.sql` creates the `taxi_rides` table.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/taxi.md`.
