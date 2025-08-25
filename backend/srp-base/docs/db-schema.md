@@ -172,6 +172,11 @@ Indexes:
 | name | VARCHAR(255) | Optional name |
 | created_at | TIMESTAMP | Creation time |
 
+Indexes:
+
+* `idx_assets_owner` on `owner_id`
+* `idx_assets_created_at` on `created_at`
+
 ## clothes
 
 | Column | Type | Notes |
@@ -214,6 +219,20 @@ Indexes:
 | amount | BIGINT | Transfer amount |
 | reason | VARCHAR(255) | Optional memo |
 | created_at | TIMESTAMP | Creation time |
+
+## invoices
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| from_character_id | VARCHAR(64) | Issuing character |
+| to_character_id | VARCHAR(64) | Receiving character |
+| amount | BIGINT | Amount in cents |
+| reason | VARCHAR(255) | Optional memo |
+| status | ENUM('pending','paid','cancelled') | Current state |
+| due_at | TIMESTAMP | Optional due date |
+| created_at | TIMESTAMP | Creation time |
+| updated_at | TIMESTAMP | Update time |
 
 ## interiors
 
@@ -535,3 +554,17 @@ Indexes:
 | expires_at | TIMESTAMP | Optional expiration time |
 | created_at | TIMESTAMP | Creation time |
 Retention of sound play logs is controlled by `INTERACT_SOUND_RETENTION_MS`; older rows are purged by a scheduled task.
+
+## properties
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| type | ENUM(APARTMENT, GARAGE, HOTEL_ROOM) | Property type |
+| name | VARCHAR(255) | Property label |
+| location | JSON | Optional coordinates |
+| price | INT | Purchase or rental price |
+| owner_character_id | INT | FK to characters.id |
+| expires_at | DATETIME | Lease expiration |
+| created_at | DATETIME | Creation time |
+| updated_at | DATETIME | Update time |

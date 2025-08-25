@@ -198,6 +198,15 @@ Introduced cron job scheduling to support the **Cron** resource.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/cron.md`.
 
+## Update – 2025-08-25
+
+Extended realtime support for the **assets** resource.
+
+* Asset creation and deletion broadcast `assets.assetCreated` and `assets.assetDeleted` over WebSockets and webhooks.
+* Hourly `assets-prune` scheduler removes entries older than `ASSET_RETENTION_MS` (default 30 days).
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/assets.md`.
+
 Introduced coordinate saving to support the **coordsaver** resource.
 
 * Added Coordsaver module with `GET /v1/characters/{characterId}/coords`, `POST /v1/characters/{characterId}/coords` and `DELETE /v1/characters/{characterId}/coords/{id}` endpoints.
@@ -396,3 +405,21 @@ Extended parity for the **PolyZone** resource with expiration and real-time push
 * Zone creation and deletion events broadcast via WebSocket and webhook dispatcher.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/zones.md`.
+
+## Update – 2025-08-25
+
+Introduced unified properties backend to consolidate apartments, garages and hotel rentals.
+
+* Added `/v1/properties` CRUD endpoints with WebSocket and webhook events.
+* Hourly `properties-expire` scheduler releases leases past `expires_at`.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/properties.md`.
+
+## Update – 2025-08-25
+
+Extended parity for the **banking** resource with invoice support and real-time notifications.
+
+* Added invoice endpoints with WebSocket and webhook events.
+* Hourly scheduler purges settled invoices.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/economy.md`.

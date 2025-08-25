@@ -105,6 +105,7 @@ The service reads configuration from environment variables or a `.env` file.  Th
 | `REDIS_URL` | No | Redis connection string for rate limiting, idempotency and outbox【67730289104851†L204-L206】. |
 | `ENABLE_OUTBOX_WORKER` | No | Set to `1` to run the outbox worker (requires PM2 or another process manager)【67730289104851†L222-L223】. |
 | `OUTBOX_BATCH_SIZE`, `OUTBOX_INTERVAL_MS`, `OUTBOX_CLAIM_TIMEOUT_SEC`, `OUTBOX_DELIVERY_URL`, `OUTBOX_REDIS_CHANNEL_PREFIX` | No | Outbox worker tuning parameters【67730289104851†L294-L307】. |
+| `ASSET_RETENTION_MS` | No | Milliseconds to retain assets before purge (default `2592000000`). |
 
 ### Setup Steps
 
@@ -468,6 +469,12 @@ To support all features present in the original server resources at the framewor
 - **drz_interiors** – Stores interior layouts per apartment.
   - `GET /v1/apartments/{apartmentId}/interior?characterId={cid}` – Retrieve interior layout.
   - `POST /v1/apartments/{apartmentId}/interior` – Save interior layout (`characterId`, `template`).
+- **srp-properties** – Unified housing (apartments, garages, hotel rooms).
+  - `GET /v1/properties?type=&ownerCharacterId=` – List properties.
+  - `POST /v1/properties` – Create a property.
+  - `GET /v1/properties/{propertyId}` – Retrieve a property.
+  - `PATCH /v1/properties/{propertyId}` – Update a property.
+  - `DELETE /v1/properties/{propertyId}` – Delete a property.
 - **srp-zones** – Stores polygonal zone definitions for world interactions.
   - `GET /v1/zones` – List active zones.
   - `POST /v1/zones` – Create a zone with `name`, `type`, `data` and optional `expiresAt`; pushes `zone.created`.

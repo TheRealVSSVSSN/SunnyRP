@@ -47,7 +47,7 @@ practice is supported by citations.
 | **Wise UC module** | Undercover profile endpoints follow the established layered pattern with authentication and idempotency. |
 | **Wise Wheels module** | Wheel spin endpoints follow the established layered pattern with authentication and idempotency. Scheduler purges spins older than 30 days with expiry events. |
 | **Wise cluster realtime** | Wise Audio/Imports/UC/Wheels broadcast create events over WebSockets and webhooks, reducing client polling. |
-| **assets module** | Asset endpoints follow the established layered pattern with authentication, rate limiting and idempotency. |
+| **assets module** | Asset endpoints follow the established layered pattern with authentication, rate limiting and idempotency. Create/delete events broadcast over WebSocket/webhooks and an hourly scheduler prunes stale records. |
 | **clothes module** | Clothing endpoints follow the established layered pattern with authentication, rate limiting and idempotency. |
 | **economy module** | Banking endpoints follow the established layered pattern with authentication and idempotency. |
 | **apartments module** | Apartment endpoints follow the established layered pattern with authentication and idempotency. |
@@ -100,3 +100,10 @@ practice is supported by citations.
 | **Webhook dispatcher** | HMAC-signed webhook publisher with retries and dead-letter logging. |
 | **world module** | World state, forecast and timecycle endpoints follow the established layered pattern with authentication and idempotency. |
 | **dispatch module** | Dispatch alert endpoints follow the established layered pattern with authentication and idempotency. |
+| **properties module** | Property endpoints consolidate apartments, garages and rentals with layered design, rate limiting, idempotency, WebSocket/webhook events and lease expiry scheduler. |
+
+## Outstanding Items
+
+- Integrate OpenAPI validation middleware for all routes.
+- Add unit test coverage.
+- Migrate legacy apartments and garages routes to `/v1/properties`.

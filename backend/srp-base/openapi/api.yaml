@@ -971,6 +971,60 @@ components:
         price:
           type: number
           format: float
+    Property:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+          enum: [APARTMENT, GARAGE, HOTEL_ROOM]
+        name:
+          type: string
+        location:
+          type: object
+          nullable: true
+        price:
+          type: number
+          format: float
+        ownerCharacterId:
+          type: integer
+          nullable: true
+        expiresAt:
+          type: string
+          format: date-time
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+          nullable: true
+    PropertyCreateRequest:
+      type: object
+      required:
+        - type
+        - name
+      properties:
+        type:
+          type: string
+          enum: [APARTMENT, GARAGE, HOTEL_ROOM]
+        name:
+          type: string
+        location:
+          type: object
+          nullable: true
+        price:
+          type: number
+          format: float
+        ownerCharacterId:
+          type: integer
+          nullable: true
+        expiresAt:
+          type: string
+          format: date-time
+          nullable: true
     ApartmentResident:
       type: object
       properties:
@@ -1039,6 +1093,50 @@ components:
         reason:
           type: string
           nullable: true
+    Invoice:
+      type: object
+      properties:
+        id:
+          type: integer
+        from_character_id:
+          type: string
+        to_character_id:
+          type: string
+        amount:
+          type: integer
+        reason:
+          type: string
+          nullable: true
+        status:
+          type: string
+        due_at:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    InvoiceCreateRequest:
+      type: object
+      required:
+        - fromCharacterId
+        - toCharacterId
+        - amount
+      properties:
+        fromCharacterId:
+          type: string
+        toCharacterId:
+          type: string
+        amount:
+          type: integer
+        reason:
+          type: string
+          nullable: true
+        dueAt:
+          type: string
+          format: date-time
         created_at:
           type: string
           format: date-time
@@ -2051,6 +2149,96 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Transaction'
+  /v1/invoices:
+    post:
+      summary: Create invoice
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvoiceCreateRequest'
+      responses:
+        '200':
+          description: Invoice created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+  /v1/characters/{characterId}/invoices:
+    get:
+      summary: List invoices for a character
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: status
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Invoice list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invoices:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Invoice'
+  /v1/invoices/{id}:pay:
+    post:
+      summary: Pay an invoice
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - characterId
+              properties:
+                characterId:
+                  type: string
+      responses:
+        '200':
+          description: Invoice paid
+  /v1/invoices/{id}:cancel:
+    post:
+      summary: Cancel an invoice
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - characterId
+              properties:
+                characterId:
+                  type: string
+      responses:
+        '200':
+          description: Invoice cancelled
   /v1/ready:
     get:
       summary: Readiness probe
@@ -7548,3 +7736,163 @@ paths:
                     type: string
         '400':
           $ref: '#/components/responses/BadRequest'
+  /v1/properties:
+    get:
+      summary: List properties
+      parameters:
+        - in: query
+          name: type
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: ownerCharacterId
+          schema:
+            type: integer
+          required: false
+      responses:
+        '200':
+          description: Properties list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      properties:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Property'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    post:
+      summary: Create property
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PropertyCreateRequest'
+      responses:
+        '200':
+          description: Property created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      property:
+                        $ref: '#/components/schemas/Property'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/properties/{propertyId}:
+    get:
+      summary: Get property
+      parameters:
+        - in: path
+          name: propertyId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Property found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      property:
+                        $ref: '#/components/schemas/Property'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '404':
+          description: Not found
+    patch:
+      summary: Update property
+      parameters:
+        - in: path
+          name: propertyId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PropertyCreateRequest'
+      responses:
+        '200':
+          description: Property updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      property:
+                        $ref: '#/components/schemas/Property'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '404':
+          description: Not found
+    delete:
+      summary: Delete property
+      parameters:
+        - in: path
+          name: propertyId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Property deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      deleted:
+                        type: boolean
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '404':
+          description: Not found

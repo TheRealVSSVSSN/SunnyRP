@@ -1274,3 +1274,50 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Remove scheduler registration, delete `src/tasks/wiseWheels.js`, and drop index `idx_wise_wheels_created`.
+
+## 2025-08-25 – Assets realtime & retention
+
+### Added
+* WebSocket and webhook events for asset creation and deletion.
+* Hourly `assets-prune` scheduler purges assets older than `ASSET_RETENTION_MS`.
+* `ASSET_RETENTION_MS` config for retention window.
+
+### Migrations
+* `065_add_assets_created_index.sql`
+
+### Risks
+* Misconfigured retention may delete recent assets.
+
+### Rollback
+* Remove scheduler registration and event broadcasts; drop index `idx_assets_created_at`.
+
+## 2025-08-25 – Properties module
+
+### Added
+* Unified properties API consolidating apartments, garages and rentals.
+* WebSocket and webhook events for property create/update/delete.
+* Hourly `properties-expire` scheduler releasing leases past `expires_at`.
+
+### Migrations
+* `066_add_properties.sql`
+
+### Risks
+* Incorrect scheduler interval may release active leases prematurely.
+
+### Rollback
+* Remove properties routes and scheduler; drop `properties` table.
+
+## 2025-08-25 – Banking invoices
+
+### Added
+* Invoice API with WebSocket and webhook events.
+* Hourly `invoice-purge` scheduler removing settled invoices.
+
+### Migrations
+* `067_add_invoices.sql`
+
+### Risks
+* Incorrect invoice payments may transfer funds unexpectedly.
+
+### Rollback
+* Drop `invoices` table and remove invoice routes and scheduler.

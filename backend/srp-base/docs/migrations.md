@@ -62,3 +62,6 @@
 | 062_add_zone_expiry.sql | Add expires_at to zones |
 | 063_update_wise_import_orders.sql | Add updated_at column and status index to wise_import_orders |
 | 064_add_wise_wheels_created_index.sql | Index wise_wheels_spins created_at column |
+| 065_add_assets_created_index.sql | Index assets created_at column |
+| 066_add_properties.sql | Unified properties table for housing and rentals |
+| 067_add_invoices.sql | Invoices table for character billing |

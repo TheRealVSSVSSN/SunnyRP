@@ -9,6 +9,9 @@ const dispatchTasks = require('./tasks/dispatch');
 const zoneTasks = require('./tasks/zones');
 const wiseImportsTasks = require('./tasks/wiseImports');
 const wiseWheelsTasks = require('./tasks/wiseWheels');
+const assetsTasks = require('./tasks/assets');
+const propertiesTasks = require('./tasks/properties');
+const economyTasks = require('./tasks/economy');
 
 // Register Prometheus metrics if enabled.  This must be done before
 // the server starts so that middleware can increment counters.
@@ -38,6 +41,24 @@ scheduler.register(
   wiseWheelsTasks.JOB_NAME,
   () => wiseWheelsTasks.purgeOld(),
   wiseWheelsTasks.INTERVAL_MS,
+  { jitter: 60000 },
+);
+scheduler.register(
+  assetsTasks.JOB_NAME,
+  () => assetsTasks.pruneOld(),
+  assetsTasks.INTERVAL_MS,
+  { jitter: 60000 },
+);
+scheduler.register(
+  propertiesTasks.JOB_NAME,
+  () => propertiesTasks.releaseExpired(),
+  propertiesTasks.INTERVAL_MS,
+  { jitter: 60000 },
+);
+scheduler.register(
+  economyTasks.JOB_NAME,
+  () => economyTasks.purgeOld(),
+  economyTasks.INTERVAL_MS,
   { jitter: 60000 },
 );
 

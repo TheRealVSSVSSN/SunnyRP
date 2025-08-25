@@ -2,6 +2,8 @@ const express = require('express');
 const { sendOk, sendError } = require('../utils/respond');
 const AssetsRepository = require('../repositories/assetsRepository');
 const { createRateLimiter } = require('../middleware/rateLimit');
+const websocket = require('../realtime/websocket');
+const hooks = require('../hooks/dispatcher');
 
 const router = express.Router();
 
@@ -78,6 +80,8 @@ router.post('/v1/assets', async (req, res) => {
   try {
     const asset = await AssetsRepository.createAsset({ ownerId: owner, url, type, name });
     sendOk(res, { asset }, res.locals.requestId, res.locals.traceId);
+    websocket.broadcast('assets', 'assetCreated', { asset });
+    hooks.dispatch('assets.created', asset);
   } catch (err) {
     sendError(res, { code: 'ASSET_CREATE_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);
   }
@@ -89,6 +93,8 @@ router.delete('/v1/assets/:id', async (req, res) => {
     const { id } = req.params;
     await AssetsRepository.deleteAsset(id);
     sendOk(res, { deleted: true }, res.locals.requestId, res.locals.traceId);
+    websocket.broadcast('assets', 'assetDeleted', { id });
+    hooks.dispatch('assets.deleted', { id });
   } catch (err) {
     sendError(res, { code: 'ASSET_DELETE_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);
   }

@@ -12,10 +12,10 @@
 | WiseGuy-Vanilla | Base resource using account-scoped character management | `GET/POST/DELETE/POST select/GET selected /v1/accounts/{accountId}/characters` |
 | Wise-UC | Resource manages undercover aliases for characters | `GET /v1/wise-uc/profiles/:characterId`, `POST /v1/wise-uc/profiles` → pushes `wise-uc.profile.upserted` |
 | WiseGuy-Wheels | Resource records wheel spin outcomes per character | `GET /v1/wise-wheels/spins/:characterId`, `POST /v1/wise-wheels/spins` → pushes `wise-wheels.spin.created`; scheduler emits `wise-wheels.spin.expired` |
-| assets | Resource stores media or item assets linked to characters | `GET /v1/assets`, `GET /v1/assets/{id}`, `POST /v1/assets`, `DELETE /v1/assets/{id}` |
+| assets | Resource stores media or item assets linked to characters | `GET /v1/assets`, `GET /v1/assets/{id}`, `POST /v1/assets`, `DELETE /v1/assets/{id}` → pushes `assets.assetCreated`/`assets.assetDeleted` |
 | assets_clothes | Resource saves and retrieves character outfits | `GET /v1/clothes`, `POST /v1/clothes`, `DELETE /v1/clothes/{id}` |
-| apartments | Resource triggers events when characters claim or vacate apartments | `GET /v1/apartments` with optional `characterId` filter and resident assignment endpoints |
-| banking | Resource processes deposits, withdrawals and transfers between characters | `POST /v1/characters/{characterId}/account:deposit`, `POST /v1/characters/{characterId}/account:withdraw`, `POST /v1/transactions` |
+| properties | Resource manages apartments, garages and rentals with ownership and lease events | `GET/POST/PATCH/DELETE /v1/properties`; broadcasts `properties.propertyCreated`/`properties.propertyUpdated`/`properties.propertyDeleted` |
+| banking | Resource processes deposits, withdrawals, transfers and invoices | `POST /v1/characters/{characterId}/account:deposit`, `POST /v1/characters/{characterId}/account:withdraw`, `POST /v1/transactions`, `POST /v1/invoices` |
 | maps | No server events; world mapping assets | N/A |
 | furnished-shells | No server events; interior shell assets | N/A |
 | Cron | Resource triggers scheduled events for maintenance and gameplay loops | `GET /v1/cron/jobs`, `POST /v1/cron/jobs` |
