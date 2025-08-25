@@ -303,3 +303,14 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: hard2' -H 'Content-Type: a
 curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: hard3' -X DELETE \
   http://localhost:3010/v1/hardcap/sessions/1
 ```
+
+Manually verify the heli flight endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: heli1' -H 'Content-Type: application/json' \
+  -d '{"characterId":1,"purpose":"patrol"}' \
+  http://localhost:3010/v1/heli/flights
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: heli2' \
+  http://localhost:3010/v1/heli/flights/1/end
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/characters/1/heli/flights
+```

@@ -43,3 +43,4 @@
 | garages | Resource emits events when vehicles are stored or retrieved from garages | `/v1/garages` CRUD, `/v1/garages/{garageId}/store`, `/v1/garages/{garageId}/retrieve`, `/v1/characters/{characterId}/garages/{garageId}/vehicles` |
 | ghmattimysql | Exports `execute`, `scalar` and `transaction` for MySQL queries | Core `db` repository offers `query`, `scalar` and `transaction` helpers with named parameters |
 | hardcap | Connection attempts and slot checks | `GET /v1/hardcap/status`, `POST /v1/hardcap/sessions`, `DELETE /v1/hardcap/sessions/{id}` |
+| heli | Resource logs helicopter flight start and end events | `POST /v1/heli/flights`, `POST /v1/heli/flights/{id}/end`, `GET /v1/characters/{characterId}/heli/flights` |

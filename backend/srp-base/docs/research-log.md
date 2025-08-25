@@ -189,3 +189,8 @@
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
 - GitHub API search results for "NoPixel 4.0" – https://api.github.com/search/repositories?q=NoPixel+4.0
 - GitHub API search results for "ProdigyRP 4.0" – https://api.github.com/search/repositories?q=ProdigyRP+4.0
+
+## Research Log – 2025-08-25 (heli)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
+- GitHub API search results for "nopixel heli" – https://api.github.com/search/repositories?q=nopixel+heli
