@@ -1,29 +1,25 @@
 # Manifest
 
-- Added ready notifier scheduler and delivery endpoint for Wise Imports.
-- Introduced `updated_at` column and status index for import orders.
-- Documented new endpoints and database changes across docs.
+- Added hourly purge and expiry events for Wise Wheels spins.
+- Indexed `wise_wheels_spins.created_at` for efficient retention cleanup.
 
 | File | Action | Note |
 |---|---|---|
-| src/tasks/wiseImports.js | A | Periodically marks pending orders ready |
-| src/repositories/wiseImportsRepository.js | M | Status transitions and delivery logic |
-| src/routes/wiseImports.routes.js | M | Delivery endpoint & pushes |
-| src/bootstrap/scheduler.js | M | Persist last run via cron jobs |
-| src/repositories/cronRepository.js | M | Added `updateLastRun` helper |
-| src/migrations/063_update_wise_import_orders.sql | A | Adds `updated_at` column & status index |
-| src/server.js | M | Registers Wise Imports scheduler |
-| openapi/api.yaml | M | Schemas and deliver path |
-| docs/modules/wise-imports.md | M | Documented scheduler and delivery |
-| docs/progress-ledger.md | M | Logged Wise Imports ready notifier |
-| docs/index.md | M | Run summary for Wise Imports update |
-| docs/BASE_API_DOCUMENTATION.md | M | Added deliver endpoint |
-| docs/db-schema.md | M | Documented updated_at column |
-| docs/migrations.md | M | Listed new migration |
-| docs/admin-ops.md | M | Note on status index |
-| docs/events-and-rpcs.md | M | Updated event mapping |
-| docs/framework-compliance.md | M | Outstanding work for Wise Imports |
-| docs/testing.md | M | Curl example for delivery |
+| src/tasks/wiseWheels.js | A | Purges expired spins and emits events |
+| src/repositories/wiseWheelsRepository.js | M | Added `purgeOldSpins` helper |
+| src/server.js | M | Registers `wise-wheels-expire` scheduler |
+| src/migrations/064_add_wise_wheels_created_index.sql | A | Indexes `created_at` |
+| openapi/api.yaml | M | Documented spin expiry events |
+| docs/modules/wise-wheels.md | M | Described purge scheduler |
+| docs/progress-ledger.md | M | Logged spin retention update |
+| docs/index.md | M | Run summary for Wise Wheels expiry |
+| docs/BASE_API_DOCUMENTATION.md | M | Added expiry note |
+| docs/db-schema.md | M | Documented new index |
+| docs/migrations.md | M | Listed migration |
+| docs/admin-ops.md | M | Index and scheduler notes |
+| docs/events-and-rpcs.md | M | Added `spin.expired` mapping |
+| docs/framework-compliance.md | M | Updated evaluation |
+| docs/testing.md | M | Added purge test note |
 | docs/research-log.md | M | Logged reference sources |
 | docs/run-docs.md | M | Summary of this run |
-| CHANGELOG.md | M | Release notes for scheduler & delivery |
+| CHANGELOG.md | M | Release notes for spin expiry |

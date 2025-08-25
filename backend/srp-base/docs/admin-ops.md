@@ -17,6 +17,7 @@
   - Ensure `wise_import_orders` includes `updated_at` column and index `idx_wise_import_orders_status`.
 - Ensure the `wise_uc_profiles` table exists for undercover aliases.
 - Ensure the `wise_wheels_spins` table exists for wheel spin history.
+  - Ensure index `idx_wise_wheels_created` exists; spins older than 30 days are purged hourly by `wise-wheels-expire` scheduler.
 - Ensure the `assets` table exists for character asset records.
 - Ensure the `clothes` table exists for character outfit records.
 - Ensure the `apartments` and `apartment_residents` tables exist and include the `character_id` column after deploying this sprint.

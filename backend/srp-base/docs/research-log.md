@@ -269,3 +269,9 @@
 
 - Reviewed `ws` WebSocket library documentation for broadcast patterns: https://github.com/websockets/ws
 - Reference resources unavailable; proceeding with internal consistency only.
+
+## Research Log – 2025-08-25 (Wise Wheels expiry)
+
+- Scanned `resources/WiseGuy-Wheels` from `https://github.com/h04X-2K/NoPixelServer` for spin logging behavior.
+- Reviewed ESX gambling scripts for spin reward retention patterns: https://github.com/ESX-Official/esx_drpbar
+- Reference resources unavailable; proceeding with internal consistency only.
