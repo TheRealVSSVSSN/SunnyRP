@@ -46,6 +46,7 @@ practice is supported by citations.
 | **Wise Imports module** | Import order endpoints follow the established layered pattern with authentication and idempotency. |
 | **Wise UC module** | Undercover profile endpoints follow the established layered pattern with authentication and idempotency. |
 | **Wise Wheels module** | Wheel spin endpoints follow the established layered pattern with authentication and idempotency. |
+| **Wise cluster realtime** | Wise Audio/Imports/UC/Wheels broadcast create events over WebSockets and webhooks, reducing client polling. |
 | **assets module** | Asset endpoints follow the established layered pattern with authentication, rate limiting and idempotency. |
 | **clothes module** | Clothing endpoints follow the established layered pattern with authentication, rate limiting and idempotency. |
 | **economy module** | Banking endpoints follow the established layered pattern with authentication and idempotency. |

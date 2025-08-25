@@ -259,3 +259,8 @@
 
 - Cloned `https://github.com/h04X-2K/NoPixelServer` and reviewed `resources/PolyZone` for zone definition patterns.
 - Reviewed ND Core and ESX zone handling to align naming and expiration flows.
+
+## Research Log – 2025-08-25 (Wise cluster realtime)
+
+- Reviewed `ws` WebSocket library documentation for broadcast patterns: https://github.com/websockets/ws
+- Reference resources unavailable; proceeding with internal consistency only.

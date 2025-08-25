@@ -1,6 +1,8 @@
 const express = require('express');
 const { sendOk, sendError } = require('../utils/respond');
 const repo = require('../repositories/wiseUCRepository');
+const websocket = require('../realtime/websocket');
+const hooks = require('../hooks/dispatcher');
 
 const router = express.Router();
 
@@ -51,6 +53,8 @@ router.post('/v1/wise-uc/profiles', async (req, res) => {
   }
   try {
     const profile = await repo.upsertProfile({ characterId, alias, active });
+    websocket.broadcast('wise-uc', 'profile-upserted', { profile });
+    hooks.dispatch('wise-uc.profile.upserted', profile);
     sendOk(res, { profile }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(

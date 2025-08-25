@@ -60,3 +60,4 @@
 | 54 | InteractSound cluster | Sound play logging with WS/webhooks and retention scheduler | Extend | Broadcast plays and purge stale records |
 | 55 | Police dispatch | Alert broadcasting and retention | Extend | WS/webhook push and hourly purge |
 | 56 | PolyZone expiry & pushes | Zone expiration and real-time broadcasts | Extend | Added expiresAt field and scheduler |
+| 57 | Wise cluster realtime | WebSocket/webhook pushes for Wise Audio/Imports/UC/Wheels | Extend | Broadcast create events |

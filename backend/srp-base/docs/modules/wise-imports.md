@@ -11,7 +11,7 @@ There is no feature flag for this module; it is always enabled.
 | Method & Path | Description | Rate Limit | Auth | Idempotent | Request Body | Response |
 |---|---|---|---|---|---|---|
 | **GET `/v1/wise-imports/orders/:characterId`** | Retrieve up to 50 import orders for the specified character. | n/a | Required | Yes | None | `200 { ok, data: { orders: WiseImportOrder[] }, requestId, traceId }` |
-| **POST `/v1/wise-imports/orders`** | Store a new vehicle import order. | n/a | Required | Yes (use `X-Idempotency-Key`) | `WiseImportOrderCreateRequest` | `200 { ok, data: { order: WiseImportOrder }, requestId, traceId }` |
+| **POST `/v1/wise-imports/orders`** | Store a new vehicle import order and broadcast `wise-imports.order.created` via WebSocket and webhook. | n/a | Required | Yes (use `X-Idempotency-Key`) | `WiseImportOrderCreateRequest` | `200 { ok, data: { order: WiseImportOrder }, requestId, traceId }` |
 
 ### Schemas
 
@@ -34,7 +34,7 @@ There is no feature flag for this module; it is always enabled.
 
 * **Repository:** `src/repositories/wiseImportsRepository.js` provides `createOrder` and `listOrdersByCharacter`.
 * **Migration:** `src/migrations/027_add_wise_imports.sql` creates the `wise_import_orders` table.
-* **Routes:** `src/routes/wiseImports.routes.js` defines the HTTP endpoints and validation.
+* **Routes:** `src/routes/wiseImports.routes.js` defines the HTTP endpoints, pushes WebSocket events and dispatches webhooks.
 * **OpenAPI:** `openapi/api.yaml` documents the schemas and `/v1/wise-imports/orders` paths.
 
 ## Future work
