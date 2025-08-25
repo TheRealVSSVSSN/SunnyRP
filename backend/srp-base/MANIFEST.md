@@ -4,6 +4,7 @@
 
 - Added taxi dispatch and ride logging APIs.
 - Added furniture placement APIs.
+- Added endpoint to retrieve the active character for multi-character support.
 
 ## File Changes
 
@@ -42,6 +43,15 @@
 | `docs/modules/furniture.md` | A | Module documentation |
 | `docs/BASE_API_DOCUMENTATION.md` | M | Documented furniture endpoints |
 | `docs/research-log.md` | M | Logged furniture research attempt |
+| `src/routes/accountCharacters.routes.js` | M | Added selected character retrieval |
+| `openapi/api.yaml` | M | Documented selected character path |
+| `docs/modules/characters.md` | M | Documented selected character endpoint |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented selected character endpoint |
+| `docs/index.md` | M | Logged gabz_mrpd update |
+| `docs/progress-ledger.md` | M | Added gabz_mrpd entry |
+| `docs/events-and-rpcs.md` | M | Mapped gabz_mrpd resource |
+| `docs/framework-compliance.md` | M | Noted characters module update |
+| `docs/research-log.md` | M | Logged gabz_mrpd research |
 
 ## Startup Notes
 

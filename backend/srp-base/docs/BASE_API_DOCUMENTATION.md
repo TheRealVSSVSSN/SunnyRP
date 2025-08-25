@@ -473,6 +473,7 @@ To support all features present in the original server resources at the framewor
 - `GET /v1/accounts/{accountId}/characters` – List characters for an account.
 - `POST /v1/accounts/{accountId}/characters` – Create a character for an account.
 - `POST /v1/accounts/{accountId}/characters/{characterId}:select` – Select the active character.
+- `GET /v1/accounts/{accountId}/characters/selected` – Retrieve the active character for an account.
 - `DELETE /v1/accounts/{accountId}/characters/{characterId}` – Remove a character and clear selection if active.
 
 All routes require `X-API-Token` authentication. Idempotency keys are supported on POST requests and standard rate limits apply.

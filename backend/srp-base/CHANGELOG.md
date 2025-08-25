@@ -952,3 +952,21 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Remove furniture routes and drop `furniture` table.
+
+## 2025-08-25 – gabz_mrpd
+
+### Added
+
+* `GET /v1/accounts/{accountId}/characters/selected` endpoint to retrieve the active character for an account.
+
+### Migrations
+
+* None.
+
+### Risks
+
+* If selection records become stale the endpoint may return 404 until clients reselect a character.
+
+### Rollback
+
+* Remove the selected character route and associated documentation updates.

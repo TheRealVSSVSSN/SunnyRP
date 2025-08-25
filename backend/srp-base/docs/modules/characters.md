@@ -8,6 +8,7 @@ Supports multi-character accounts. Provides endpoints to list, create, select an
 |---|---|---|---|
 | **GET `/v1/accounts/{accountId}/characters`** | List characters owned by an account | Required | Yes |
 | **POST `/v1/accounts/{accountId}/characters`** | Create a new character for the account | Required | Yes |
+| **GET `/v1/accounts/{accountId}/characters/selected`** | Retrieve the active character for the account | Required | Yes |
 | **POST `/v1/accounts/{accountId}/characters/{characterId}:select`** | Select the active character for the session | Required | Yes |
 | **DELETE `/v1/accounts/{accountId}/characters/{characterId}`** | Delete a character and clear selection if active | Required | Yes |
 

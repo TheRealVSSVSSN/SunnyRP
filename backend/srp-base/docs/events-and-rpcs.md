@@ -9,7 +9,7 @@
 | PolyZone | Resource defines polygonal zones for triggers | `GET /v1/zones`, `POST /v1/zones`, `DELETE /v1/zones/:id` manage zone records |
 | Wise Audio | Resource manages character soundboard tracks | `GET /v1/wise-audio/tracks/:characterId`, `POST /v1/wise-audio/tracks` |
 | Wise Imports | Resource manages vehicle import orders | `GET /v1/wise-imports/orders/:characterId`, `POST /v1/wise-imports/orders` |
-| WiseGuy-Vanilla | Base resource using account-scoped character management | `GET/POST/DELETE/POST select /v1/accounts/{accountId}/characters` |
+| WiseGuy-Vanilla | Base resource using account-scoped character management | `GET/POST/DELETE/POST select/GET selected /v1/accounts/{accountId}/characters` |
 | Wise-UC | Resource manages undercover aliases for characters | `GET /v1/wise-uc/profiles/:characterId`, `POST /v1/wise-uc/profiles` |
 | WiseGuy-Wheels | Resource records wheel spin outcomes per character | `GET /v1/wise-wheels/spins/:characterId`, `POST /v1/wise-wheels/spins` |
 | assets | Resource stores media or item assets linked to characters | `GET /v1/assets`, `GET /v1/assets/{id}`, `POST /v1/assets`, `DELETE /v1/assets/{id}` |
@@ -38,3 +38,4 @@
 | emspack | Resource emits duty start/end and treatment events | `GET/POST/PATCH/DELETE /v1/ems/records`, `GET /v1/ems/shifts/active`, `POST /v1/ems/shifts`, `POST /v1/ems/shifts/{id}/end` |
 | es_taxi | Players request taxi rides and drivers accept/complete them | `POST /v1/taxi/requests`, `POST /v1/taxi/requests/{id}/accept`, `POST /v1/taxi/requests/{id}/complete` |
 | furniture | Resource lets players place or remove furniture items | `GET /v1/characters/{characterId}/furniture`, `POST /v1/characters/{characterId}/furniture`, `DELETE /v1/characters/{characterId}/furniture/{id}` |
+| gabz_mrpd | Map resource for Mission Row PD building; no events | N/A |

@@ -227,3 +227,9 @@ Introduced furniture placement storage to support the **furniture** resource.
 * Migration `047_add_furniture.sql` creates the `furniture` table.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/furniture.md`.
+
+## Update – 2025-08-25
+
+Reviewed **gabz_mrpd** mapping resource; no server responsibilities identified. Added `GET /v1/accounts/{accountId}/characters/selected` to retrieve the currently active character, strengthening multi-character session handling.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/characters.md`.
