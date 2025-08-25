@@ -11,10 +11,14 @@ async function recordPlay({ characterId, sound, volume, playedAt }) {
 
 async function listPlaysByCharacter(characterId, limit = 50) {
   const [rows] = await db.query(
-    'SELECT sound, volume, played_at AS playedAt FROM interact_sound_plays WHERE character_id = ? ORDER BY played_at DESC LIMIT ?'
-    , [characterId, limit],
+    'SELECT sound, volume, played_at AS playedAt FROM interact_sound_plays WHERE character_id = ? ORDER BY played_at DESC LIMIT ?',
+    [characterId, limit],
   );
   return rows;
 }
 
-module.exports = { recordPlay, listPlaysByCharacter };
+async function deleteOlderThan(cutoffTs) {
+  await db.query('DELETE FROM interact_sound_plays WHERE played_at < ?', [cutoffTs]);
+}
+
+module.exports = { recordPlay, listPlaysByCharacter, deleteOlderThan };

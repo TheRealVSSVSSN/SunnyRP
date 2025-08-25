@@ -56,4 +56,5 @@
 | 056_add_character_jobs.sql | Character job assignments table |
 | 057_add_k9_units.sql | Police K9 unit table |
 | 058_add_world_forecast.sql | Weather forecast schedule table |
-| 059_add_world_timecycle.sql | Timecycle override table |
+| 059_add_diamond_casino.sql | Casino game and bet tables |
+| 060_add_world_timecycle.sql | Timecycle override table |

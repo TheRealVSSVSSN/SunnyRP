@@ -1,6 +1,8 @@
 const express = require('express');
 const { sendOk, sendError } = require('../utils/respond');
 const repo = require('../repositories/interactSoundRepository');
+const websocket = require('../realtime/websocket');
+const hooks = require('../hooks/dispatcher');
 
 const router = express.Router();
 
@@ -27,6 +29,8 @@ router.post('/v1/interact-sound/plays', async (req, res) => {
   }
   try {
     const play = await repo.recordPlay({ characterId, sound, volume, playedAt });
+    websocket.broadcast('audio', 'play', play);
+    hooks.dispatch('interactSound.play', play);
     sendOk(res, { play }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'INTERACT_SOUND_RECORD_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);

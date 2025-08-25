@@ -52,4 +52,9 @@
 | 47 | jobsystem | Manage job definitions, assignments and duty status | Create | Added character-scoped jobs API |
 | 48 | srp-debug | Developer diagnostics endpoints | Create | Added server status API |
 | 49 | srp-weathersync | Global weather synchronization with forecast scheduling | Extend | Added world state documentation and forecast API |
+| 50 | DiamondCasino | Unified casino games (blackjack, slots, horse racing) | Create | Added casino game and bet APIs, removed legacy blackjack module |
+| 51 | WebSocketGateway | Real-time push notifications | Create | Added WS gateway with heartbeat and auth |
+| 52 | WebhookDispatcher | External webhook delivery | Create | Added HMAC-signed dispatcher |
+| 53 | Scheduler | Server-side loop migration | Create | Added jittered task scheduler |
 | 50 | climate-overrides | Timecycle overrides and weather preset controls | Extend | Added world timecycle API |
+| 54 | InteractSound cluster | Sound play logging with WS/webhooks and retention scheduler | Extend | Broadcast plays and purge stale records |

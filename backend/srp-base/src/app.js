@@ -16,6 +16,7 @@ const permissionsRoutes = require('./routes/permissions.routes');
 const playersRoutes = require('./routes/players.routes');
 const outboxRoutes = require('./routes/outbox.routes');
 const adminRoutes = require('./routes/admin.routes');
+const hooksRoutes = require('./routes/hooks.routes');
 
 // extended domain routes merged from former microservices
 const dispatchRoutes = require('./routes/dispatch.routes');
@@ -122,8 +123,8 @@ const wiseUCRoutes = require('./routes/wiseUC.routes');
 // wise wheels domain route
 const wiseWheelsRoutes = require('./routes/wiseWheels.routes');
 
-// diamond blackjack domain route
-const diamondBlackjackRoutes = require('./routes/diamondBlackjack.routes');
+// diamond casino domain route (blackjack, slots, horse racing, etc.)
+const diamondCasinoRoutes = require('./routes/diamondCasino.routes');
 
 // jailbreak domain route
 const jailbreakRoutes = require('./routes/jailbreak.routes');
@@ -167,6 +168,7 @@ app.use(permissionsRoutes);
 app.use(playersRoutes);
 app.use(outboxRoutes);
 app.use(adminRoutes);
+app.use(hooksRoutes);
 
 // mount extended domain routes
 app.use(dispatchRoutes);
@@ -272,7 +274,7 @@ app.use(wiseUCRoutes);
 app.use(wiseWheelsRoutes);
 
 // mount diamond blackjack routes
-app.use(diamondBlackjackRoutes);
+app.use(diamondCasinoRoutes);
 
 // mount jailbreak routes
 app.use(jailbreakRoutes);

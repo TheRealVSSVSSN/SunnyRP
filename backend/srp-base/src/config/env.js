@@ -56,6 +56,23 @@ const config = {
    */
   enableMetrics: process.env.ENABLE_METRICS === '1',
 
+  /** WebSocket heartbeat interval in milliseconds. */
+  wsHeartbeatIntervalMs: parseInt(process.env.WS_HEARTBEAT_INTERVAL_MS || '30000', 10),
+
+  /**
+   * Webhook dispatch configuration.
+   */
+  webhook: {
+    retryBaseMs: parseInt(process.env.WEBHOOK_RETRY_BASE_MS || '500', 10),
+    maxRetries: parseInt(process.env.WEBHOOK_MAX_RETRIES || '5', 10),
+    discord: {
+      enabled: process.env.WEBHOOK_DISCORD_ENABLED === '1',
+      url: process.env.WEBHOOK_DISCORD_URL || '',
+      secret: process.env.WEBHOOK_DISCORD_SECRET || '',
+    },
+  },
+  interactSound: { retentionMs: parseInt(process.env.INTERACT_SOUND_RETENTION_MS || '604800000', 10) },
+
   /**
    * Feature flags for core modules.  Lua consumers still drive
    * behaviour via /v1/config/live, but these flags provide a safe

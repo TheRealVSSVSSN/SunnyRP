@@ -335,6 +335,17 @@ Introduced world weather forecast tracking to support the **srp-weathersync** re
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/world.md`.
 
+## Update – 2025-03-02
+
+Replaced the standalone DiamondBlackjack module with a unified **Diamond Casino** backend and introduced core realtime infrastructure.
+
+* Added Diamond Casino module with `/v1/diamond-casino/games` and `/v1/diamond-casino/games/{gameId}/bets` endpoints.
+* Added WebSocket gateway with heartbeat and authenticated connections.
+* Added webhook dispatcher scaffolding with HMAC signatures and retry.
+* Added drift-aware scheduler to resolve casino games server-side.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/diamondCasino.md`.
+
 ## Update – 2025-08-25
 
 Extended world module with timecycle override support for the **climate-overrides** resource (formerly koillove).
@@ -343,3 +354,11 @@ Extended world module with timecycle override support for the **climate-override
 * Migration `059_add_world_timecycle.sql` creates `world_timecycle` table.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/world.md`.
+
+## Update – 2025-08-25
+
+Expanded parity for the **InteractSound** cluster by pushing sound play events over WebSockets and webhooks while purging stale logs.
+
+* Broadcast `interactSound.play` events to connected clients.
+* Added admin webhook endpoint management at `/v1/hooks/endpoints`.
+* Scheduler task removes plays older than `INTERACT_SOUND_RETENTION_MS`.

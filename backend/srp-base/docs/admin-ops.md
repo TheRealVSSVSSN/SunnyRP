@@ -4,7 +4,7 @@
   ```sh
   node src/bootstrap/migrate.js
   ```
-- Ensure the `diamond_blackjack_hands` table exists after deploying this sprint.
+- Ensure the `diamond_casino_games` and `diamond_casino_bets` tables exist after deploying this sprint.
 - Ensure the `interact_sound_plays` table exists after deploying this sprint.
 - Ensure the `doors` table exists to track door states.
 - Manage the Node.js process with tools like `pm2` for restarts and monitoring.
@@ -41,4 +41,5 @@
 - Ensure the `jobs` and `character_jobs` tables exist for job management.
 - Ensure the `k9_units` table exists after applying migration 057.
 - Ensure the `world_forecast` table exists for weather scheduling.
-- Ensure the `world_timecycle` table exists for timecycle overrides.
+- Configure webhook sinks via environment variables. Discord sink is scaffolded but disabled unless `WEBHOOK_DISCORD_ENABLED=1` and `WEBHOOK_DISCORD_URL` are set.
+- Ensure the `world_timecycle` table exists for timecycle overrides.- Runtime sinks can be managed with `GET/POST/DELETE /v1/hooks/endpoints` (admin only). Rotate secrets by re-registering endpoints and removing old entries.
