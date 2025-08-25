@@ -102,6 +102,8 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: ww1' -H 'Content-Type: app
   http://localhost:3010/v1/wise-wheels/spins
 ```
 
+To test spin expiry, manually backdate a record in `wise_wheels_spins` by more than 30 days and wait for the `wise-wheels-expire` scheduler to emit a `wise-wheels.spin.expired` event.
+
 Manually verify the boatshop endpoints:
 
 ```sh

@@ -5232,7 +5232,7 @@ paths:
   /v1/wise-wheels/spins:
     post:
       summary: Record a wheel spin result
-      description: Stores a spin result and broadcasts `wise-wheels.spin.created` via WebSocket and webhooks.
+      description: Stores a spin result and broadcasts `wise-wheels.spin.created` via WebSocket and webhooks. Spins older than 30 days are purged hourly with `wise-wheels.spin.expired` events.
       operationId: createWiseWheelsSpin
       requestBody:
         required: true

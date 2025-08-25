@@ -1259,3 +1259,18 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Remove wise imports scheduler registration and delivery route; drop `updated_at` column and status index from `wise_import_orders`.
+
+## 2025-08-25 – Wise Wheels spin expiry
+
+### Added
+* Hourly scheduler purges `wise_wheels_spins` older than 30 days and emits `wise-wheels.spin.expired` via WebSocket and webhooks.
+* WebSocket/webhook event `wise-wheels.spin.expired` for spin removal.
+
+### Migrations
+* `064_add_wise_wheels_created_index.sql`
+
+### Risks
+* Incorrect system time or misconfigured retention may delete recent spins.
+
+### Rollback
+* Remove scheduler registration, delete `src/tasks/wiseWheels.js`, and drop index `idx_wise_wheels_created`.

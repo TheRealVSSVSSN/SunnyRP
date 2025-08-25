@@ -450,6 +450,7 @@ To support all features present in the original server resources at the framewor
 - **srp-wise-wheels** – Records wheel spin results.
   - `GET /v1/wise-wheels/spins/{characterId}` – List spins for a character.
   - `POST /v1/wise-wheels/spins` – Record a spin with `characterId` and `prize`.
+  - Spins older than 30 days are purged hourly, emitting `wise-wheels.spin.expired`.
 - **srp-assets** – Stores references to character-bound assets such as images or media.
   - `GET /v1/assets?ownerId={cid}` – List assets for a character.
   - `GET /v1/assets/{id}` – Retrieve an asset by id.

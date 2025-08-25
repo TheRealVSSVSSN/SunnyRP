@@ -32,6 +32,14 @@ Introduced basic zone management to support the **PolyZone** resource.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/zones.md`.
 
+## Update – 2025-08-25
+
+Extended parity for the **Wise Wheels** resource by introducing spin retention and expiry events.
+
+* Spins older than 30 days are purged hourly, broadcasting `wise-wheels.spin.expired` via WebSocket and webhooks.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/wise-wheels.md`.
+
 ## Update – 2025-08-24
 
 Introduced audio track storage to support the **Wise Audio** resource.

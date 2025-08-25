@@ -156,6 +156,11 @@ Added `world_forecast` table for weather scheduling. K9 migration renamed to 057
 | prize | VARCHAR(255) | Prize description |
 | created_at | BIGINT | Epoch milliseconds |
 
+Indexes:
+
+* `idx_wise_wheels_character` on `character_id`
+* `idx_wise_wheels_created` on `created_at`
+
 ## assets
 
 | Column | Type | Notes |

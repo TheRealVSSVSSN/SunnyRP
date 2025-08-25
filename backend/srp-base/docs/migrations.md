@@ -61,3 +61,4 @@
 | 061_add_dispatch_alert_index.sql | Index dispatch_alerts created_at |
 | 062_add_zone_expiry.sql | Add expires_at to zones |
 | 063_update_wise_import_orders.sql | Add updated_at column and status index to wise_import_orders |
+| 064_add_wise_wheels_created_index.sql | Index wise_wheels_spins created_at column |
