@@ -1193,3 +1193,21 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Drop `world_timecycle` table and remove timecycle routes and repository.
+
+## 2025-08-25 – InteractSound hooks
+
+### Added
+* WebSocket broadcast and webhook dispatch for sound plays.
+* Admin webhook endpoint management `/v1/hooks/endpoints`.
+
+### Changed
+* Scheduler drift-correction with retention purge for sound play logs.
+
+### Migrations
+* `060_add_world_timecycle.sql` (renamed from `059_add_world_timecycle.sql`).
+
+### Risks
+* Misconfigured webhook sinks may accumulate in-memory dead letters.
+
+### Rollback
+* Remove hooks routes, dispatcher updates and scheduler task; rename migration back to `059_add_world_timecycle.sql`.

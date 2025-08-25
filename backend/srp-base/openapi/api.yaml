@@ -7196,3 +7196,125 @@ paths:
                     type: string
         '400':
           $ref: '#/components/responses/BadRequest'
+  /v1/hooks/endpoints:
+    get:
+      summary: List webhook endpoints
+      tags: [admin]
+      security:
+        - ApiToken: []
+      responses:
+        '200':
+          description: List of endpoints
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      endpoints:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            type:
+                              type: string
+                            url:
+                              type: string
+                            enabled:
+                              type: boolean
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    post:
+      summary: Register webhook endpoint
+      tags: [admin]
+      security:
+        - ApiToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [type, url]
+              properties:
+                type:
+                  type: string
+                url:
+                  type: string
+                secret:
+                  type: string
+                enabled:
+                  type: boolean
+      responses:
+        '200':
+          description: Endpoint registered
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      endpoint:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          type:
+                            type: string
+                          url:
+                            type: string
+                          enabled:
+                            type: boolean
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/hooks/endpoints/{id}:
+    delete:
+      summary: Remove webhook endpoint
+      tags: [admin]
+      security:
+        - ApiToken: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Endpoint removed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      removed:
+                        type: integer
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'

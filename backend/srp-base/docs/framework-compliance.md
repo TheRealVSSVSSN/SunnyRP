@@ -62,7 +62,7 @@ practice is supported by citations.
 * **Event bus:** implement an internal event emitter or message queue to decouple complex workflows if required by future features.
 * **Enhanced Metrics:** expand Prometheus metrics to include domain‑specific counters and error rates.
 * **Casino logic:** implement full payout rules for all casino game types.
-* **Webhook endpoints:** add admin CRUD for webhook sinks and secret rotation.
+* **Webhook endpoints:** admin CRUD added; implement secret rotation.
 * **Base API documentation:** update global API docs for new realtime components.
 | **baseevents module** | Base event logging endpoints follow the established layered pattern with authentication and idempotency. |
 | **boatshop module** | Boatshop endpoints follow the established layered pattern with authentication and idempotency. |
