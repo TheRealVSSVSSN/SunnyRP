@@ -1,6 +1,8 @@
 const express = require('express');
 const { sendOk, sendError } = require('../utils/respond');
 const repo = require('../repositories/wiseAudioRepository');
+const websocket = require('../realtime/websocket');
+const hooks = require('../hooks/dispatcher');
 
 const router = express.Router();
 
@@ -27,6 +29,8 @@ router.post('/v1/wise-audio/tracks', async (req, res) => {
   }
   try {
     const track = await repo.createTrack({ characterId, label, url });
+    websocket.broadcast('wise-audio', 'track-created', { track });
+    hooks.dispatch('wise-audio.track.created', track);
     sendOk(res, { track }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'WISE_AUDIO_CREATE_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);

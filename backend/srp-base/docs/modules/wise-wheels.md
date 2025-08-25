@@ -11,7 +11,7 @@ There is no feature flag for this module; it is always enabled.
 | Method & Path | Description | Rate Limit | Auth | Idempotent | Request Body | Response |
 |---|---|---|---|---|---|---|
 | **GET `/v1/wise-wheels/spins/:characterId`** | Retrieve up to 50 wheel spins for the specified character. | n/a | Required | Yes | None | `200 { ok, data: { spins: WiseWheelsSpin[] }, requestId, traceId }` |
-| **POST `/v1/wise-wheels/spins`** | Record a wheel spin result. | n/a | Required | Yes (use `X-Idempotency-Key`) | `WiseWheelsSpinCreateRequest` | `200 { ok, data: { spin: WiseWheelsSpin }, requestId, traceId }` |
+| **POST `/v1/wise-wheels/spins`** | Record a wheel spin result and broadcast `wise-wheels.spin.created` via WebSocket and webhook. | n/a | Required | Yes (use `X-Idempotency-Key`) | `WiseWheelsSpinCreateRequest` | `200 { ok, data: { spin: WiseWheelsSpin }, requestId, traceId }` |
 
 ### Schemas
 
@@ -33,7 +33,7 @@ There is no feature flag for this module; it is always enabled.
 
 * **Repository:** `src/repositories/wiseWheelsRepository.js` provides `createSpin` and `listSpinsByCharacter`.
 * **Migration:** `src/migrations/029_add_wise_wheels.sql` creates the `wise_wheels_spins` table.
-* **Routes:** `src/routes/wiseWheels.routes.js` defines the HTTP endpoints and validation.
+* **Routes:** `src/routes/wiseWheels.routes.js` defines the HTTP endpoints, pushes WebSocket events and dispatches webhooks.
 * **OpenAPI:** `openapi/api.yaml` documents the schemas and `/v1/wise-wheels/spins` paths.
 
 ## Future work

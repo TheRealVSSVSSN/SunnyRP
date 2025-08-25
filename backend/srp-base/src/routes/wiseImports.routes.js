@@ -1,6 +1,8 @@
 const express = require('express');
 const { sendOk, sendError } = require('../utils/respond');
 const repo = require('../repositories/wiseImportsRepository');
+const websocket = require('../realtime/websocket');
+const hooks = require('../hooks/dispatcher');
 
 const router = express.Router();
 
@@ -27,6 +29,8 @@ router.post('/v1/wise-imports/orders', async (req, res) => {
   }
   try {
     const order = await repo.createOrder({ characterId, model });
+    websocket.broadcast('wise-imports', 'order-created', { order });
+    hooks.dispatch('wise-imports.order.created', order);
     sendOk(res, { order }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'WISE_IMPORTS_CREATE_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);
