@@ -126,6 +126,28 @@ Introduced base event logging to support the **baseevents** resource.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/baseevents.md`.
 
+## Update – 2025-08-25
+
+Extended parity for the **boatshop** resource with realtime catalog and purchase events.
+
+* Scheduler broadcasts `boatshop.catalog` every five minutes.
+* Successful purchases emit `boatshop.purchase` via WebSocket and webhooks.
+
+Reference resources unavailable; proceeding with internal consistency only.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/boatshop.md`.
+
+## Update – 2025-08-25
+
+Extended parity for the **boatshop** resource with realtime catalog and purchase events.
+
+* Scheduler broadcasts `boatshop.catalog` every five minutes.
+* Successful purchases emit `boatshop.purchase` via WebSocket and webhooks.
+
+Reference resources unavailable; proceeding with internal consistency only.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/boatshop.md`.
+
 ## Update – 2025-03-15
 
 Enhanced the Wise Imports module with scheduler-driven order readiness and delivery confirmation.

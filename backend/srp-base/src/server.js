@@ -13,6 +13,7 @@ const assetsTasks = require('./tasks/assets');
 const propertiesTasks = require('./tasks/properties');
 const economyTasks = require('./tasks/economy');
 const baseEventTasks = require('./tasks/baseEvents');
+const boatshopTasks = require('./tasks/boatshop');
 
 // Register Prometheus metrics if enabled.  This must be done before
 // the server starts so that middleware can increment counters.
@@ -66,6 +67,12 @@ scheduler.register(
   baseEventTasks.JOB_NAME,
   () => baseEventTasks.purgeOld(),
   baseEventTasks.INTERVAL_MS,
+  { jitter: 60000 },
+);
+scheduler.register(
+  boatshopTasks.JOB_NAME,
+  () => boatshopTasks.broadcastCatalog(wss),
+  boatshopTasks.INTERVAL_MS,
   { jitter: 60000 },
 );
 

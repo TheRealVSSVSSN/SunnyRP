@@ -1,6 +1,8 @@
 const express = require('express');
 const { sendOk, sendError } = require('../utils/respond');
 const boatshopRepo = require('../repositories/boatshopRepository');
+const websocket = require('../realtime/websocket');
+const dispatcher = require('../hooks/dispatcher');
 
 const router = express.Router();
 
@@ -22,6 +24,8 @@ router.post('/v1/boatshop/purchase', async (req, res, next) => {
     if (!purchase) {
       return sendError(res, { code: 'NOT_FOUND', message: 'Boat not found' }, 404, res.locals.requestId, res.locals.traceId);
     }
+    websocket.broadcast('boatshop', 'purchase', { characterId, boatId, plate, vehicleId: purchase.id });
+    dispatcher.dispatch('boatshop.purchase', { characterId, boatId, plate, vehicleId: purchase.id });
     sendOk(res, purchase, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     next(err);
