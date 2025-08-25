@@ -54,3 +54,4 @@
 | 054_add_character_peds.sql | Ped state table |
 | 055_add_jailbreak_attempts.sql | Jailbreak attempt logging table |
 | 056_add_k9_units.sql | Police K9 unit table |
+| 056_add_character_jobs.sql | Character job assignments table |

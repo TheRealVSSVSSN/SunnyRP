@@ -529,8 +529,16 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
 - **srp-furniture** – Stores custom furniture placements per character.
   - `GET /v1/characters/{characterId}/furniture` – List furniture items for a character.
   - `POST /v1/characters/{characterId}/furniture` – Place a furniture item with `item`, `x`, `y`, `z` and optional `heading`.
-  - `DELETE /v1/characters/{characterId}/furniture/{id}` – Remove a furniture item.
+- `DELETE /v1/characters/{characterId}/furniture/{id}` – Remove a furniture item.
+### Jobs
 
+- `GET /v1/jobs` – list defined jobs
+- `POST /v1/jobs` – create a job
+- `GET /v1/jobs/{id}` – retrieve job details
+- `POST /v1/jobs/assign` – assign a job to a character (`characterId`, `jobId`, optional `grade`)
+- `POST /v1/jobs/duty` – set job duty status (`characterId`, `jobId`, `onDuty`)
+- `GET /v1/jobs/{characterId}/assignments` – list assignments for a character
+- `POST /v1/broadcast/attempt` – attempt to become a broadcaster
 
 ### Taxi
 

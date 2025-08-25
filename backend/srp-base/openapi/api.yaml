@@ -442,13 +442,41 @@ components:
         z:
           type: number
           description: Z coordinate where the note is placed
-    # Job assignment returned when a broadcaster job is granted
+    # Job definition
+    Job:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        label:
+          type: string
+        description:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+    JobCreateRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        label:
+          type: string
+        description:
+          type: string
+    # Job assignment returned when a job is granted
     JobAssignment:
       type: object
       properties:
-        playerId:
-          type: string
+        characterId:
+          type: integer
         jobId:
+          type: integer
+        grade:
           type: integer
         onDuty:
           type: boolean
@@ -2897,10 +2925,10 @@ paths:
             schema:
               type: object
               required:
-                - playerId
+                - characterId
               properties:
-                playerId:
-                  type: string
+                characterId:
+                  type: integer
       responses:
         '200':
           description: Broadcaster job assigned
@@ -2928,6 +2956,202 @@ paths:
           description: Broadcaster limit reached
         '429':
           description: Rate limit exceeded
+  /v1/jobs:
+    get:
+      summary: List jobs
+      operationId: listJobs
+      security:
+        - ApiToken: []
+      responses:
+        '200':
+          description: List of jobs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Job'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+    post:
+      summary: Create job
+      operationId: createJob
+      security:
+        - ApiToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobCreateRequest'
+      responses:
+        '200':
+          description: Job created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/Job'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/jobs/{id}:
+    get:
+      summary: Get job
+      operationId: getJob
+      security:
+        - ApiToken: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Job details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/Job'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '404':
+          description: Job not found
+  /v1/jobs/assign:
+    post:
+      summary: Assign job to character
+      operationId: assignJob
+      security:
+        - ApiToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - characterId
+                - jobId
+              properties:
+                characterId:
+                  type: integer
+                jobId:
+                  type: integer
+                grade:
+                  type: integer
+      responses:
+        '200':
+          description: Assignment stored
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/JobAssignment'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/jobs/duty:
+    post:
+      summary: Set job duty status
+      operationId: setJobDuty
+      security:
+        - ApiToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - characterId
+                - jobId
+                - onDuty
+              properties:
+                characterId:
+                  type: integer
+                jobId:
+                  type: integer
+                onDuty:
+                  type: boolean
+      responses:
+        '200':
+          description: Duty status updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/JobAssignment'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/jobs/{characterId}/assignments:
+    get:
+      summary: List character job assignments
+      operationId: listCharacterJobs
+      security:
+        - ApiToken: []
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Job assignments
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/JobAssignment'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '404':
+          description: Character not found
   # Contracts API
   /v1/contracts:
     get:

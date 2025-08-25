@@ -362,4 +362,24 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: k92' -H 'Content-Type: app
   http://localhost:3010/v1/characters/1/k9s/1/active
 curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: k93' -X DELETE \
   http://localhost:3010/v1/characters/1/k9s/1
+=======
+Manually verify the jobs endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/jobs
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: job1' -H 'Content-Type: application/json' \
+  -d '{"name":"police","label":"Police"}' \
+  http://localhost:3010/v1/jobs
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: job2' -H 'Content-Type: application/json' \
+  -d '{"characterId":1,"jobId":1,"grade":0}' \
+  http://localhost:3010/v1/jobs/assign
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/jobs/1/assignments
+```
+
+Manually verify the broadcaster endpoint:
+
+```sh
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: bc1' -H 'Content-Type: application/json' \
+  -d '{"characterId":1}' \
+  http://localhost:3010/v1/broadcast/attempt
 ```

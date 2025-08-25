@@ -39,3 +39,4 @@
 - Ensure the `character_peds` table exists for ped state tracking.
 - Ensure the `jailbreak_attempts` table exists for jailbreak tracking.
 - Ensure the `k9_units` table exists for police dog assignments.
+- Ensure the `jobs` and `character_jobs` tables exist for job management.

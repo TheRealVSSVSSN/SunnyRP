@@ -1117,3 +1117,22 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Drop `k9_units` table and remove K9 routes and repository.
+
+## 2025-08-25 – jobsystem
+
+### Added
+
+* Jobs module with `/v1/jobs` CRUD and character assignments.
+* Broadcaster updates to use character-based assignments.
+
+### Migrations
+
+* `056_add_character_jobs.sql`
+
+### Risks
+
+* Incorrect character scoping could misassign jobs or duty status.
+
+### Rollback
+
+* Drop `character_jobs` table and remove job and broadcaster changes.

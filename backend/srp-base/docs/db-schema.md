@@ -23,6 +23,26 @@
 | volume | FLOAT | Playback volume |
 | played_at | BIGINT | Epoch milliseconds |
 
+## jobs
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| name | VARCHAR(64) | Unique job name |
+| label | VARCHAR(100) | Display label |
+| description | TEXT | Optional description |
+| created_at | TIMESTAMP | Creation time |
+
+## character_jobs
+
+| Column | Type | Notes |
+|---|---|---|
+| character_id | BIGINT | FK to characters.id |
+| job_id | INT | FK to jobs.id |
+| grade | INT | Job grade or rank |
+| on_duty | TINYINT(1) | 1 on duty, 0 off |
+| hired_at | TIMESTAMP | Assignment time |
+
 ## doors
 
 | Column | Type | Notes |
