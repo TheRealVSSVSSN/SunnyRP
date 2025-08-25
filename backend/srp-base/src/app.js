@@ -83,6 +83,8 @@ const phoneRoutes = require('./routes/phone.routes');
 const chatRoutes = require('./routes/chat.routes');
 // connect queue domain route
 const connectqueueRoutes = require('./routes/connectqueue.routes');
+// hardcap domain route
+const hardcapRoutes = require('./routes/hardcap.routes');
 
 // camera domain route
 const cameraRoutes = require('./routes/camera.routes');
@@ -214,6 +216,8 @@ app.use(chatRoutes);
 
 // mount connect queue routes
 app.use(connectqueueRoutes);
+// mount hardcap routes
+app.use(hardcapRoutes);
 
 // mount camera routes
 app.use(cameraRoutes);

@@ -257,3 +257,11 @@ Enhanced core database utilities to align with the **ghmattimysql** resource.
 
 * Added named parameter handling, scalar queries and transaction helper functions in `src/repositories/db.js`.
 
+
+## Update – 2025-08-25
+
+Introduced server capacity tracking to support the **hardcap** resource.
+
+* Added Hardcap module with `/v1/hardcap/status`, `/v1/hardcap/config` and `/v1/hardcap/sessions` endpoints.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/hardcap.md`.

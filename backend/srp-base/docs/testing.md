@@ -289,3 +289,17 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: hosp1' -H 'Content-Type: a
 curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: hosp2' \
   http://localhost:3010/v1/hospital/admissions/1/discharge
 ```
+
+Manually verify the hardcap endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/hardcap/status
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: hard1' -H 'Content-Type: application/json' \
+  -d '{"maxPlayers":64,"reservedSlots":0}' \
+  http://localhost:3010/v1/hardcap/config
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: hard2' -H 'Content-Type: application/json' \
+  -d '{"accountId":1,"characterId":1}' \
+  http://localhost:3010/v1/hardcap/sessions
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: hard3' -X DELETE \
+  http://localhost:3010/v1/hardcap/sessions/1
+```

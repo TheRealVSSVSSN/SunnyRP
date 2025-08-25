@@ -1475,6 +1475,51 @@ components:
         type: string
         format: date-time
         nullable: true
+  HardcapStatus:
+    type: object
+    properties:
+      maxPlayers:
+        type: integer
+      reservedSlots:
+        type: integer
+      currentPlayers:
+        type: integer
+  HardcapConfigRequest:
+    type: object
+    required:
+      - maxPlayers
+    properties:
+      maxPlayers:
+        type: integer
+      reservedSlots:
+        type: integer
+        default: 0
+  HardcapSession:
+    type: object
+    properties:
+      id:
+        type: integer
+      accountId:
+        type: integer
+      characterId:
+        type: integer
+      connectedAt:
+        type: string
+        format: date-time
+      disconnectedAt:
+        type: string
+        format: date-time
+        nullable: true
+  HardcapSessionCreateRequest:
+    type: object
+    required:
+      - accountId
+      - characterId
+    properties:
+      accountId:
+        type: integer
+      characterId:
+        type: integer
 security:
   - ApiToken: []
 paths:
@@ -5699,3 +5744,112 @@ paths:
                   traceId:
                     type: string
 
+  /v1/hardcap/status:
+    get:
+      summary: Get hardcap status
+      operationId: getHardcapStatus
+      responses:
+        '200':
+          description: Hardcap status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/HardcapStatus'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/hardcap/config:
+    post:
+      summary: Update hardcap configuration
+      operationId: updateHardcapConfig
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HardcapConfigRequest'
+      responses:
+        '200':
+          description: Updated hardcap configuration
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/HardcapStatus'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/hardcap/sessions:
+    post:
+      summary: Register an active session
+      operationId: createHardcapSession
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HardcapSessionCreateRequest'
+      responses:
+        '200':
+          description: Hardcap session created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/HardcapSession'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/hardcap/sessions/{id}:
+    delete:
+      summary: End an active session
+      operationId: deleteHardcapSession
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Session ended
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      deleted:
+                        type: boolean
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'

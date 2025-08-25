@@ -81,3 +81,4 @@ practice is supported by citations.
 | **hospital module** | Hospital admission endpoints follow the established layered pattern with authentication and idempotency. |
 | **garages module** | Garage endpoints follow the established layered pattern with authentication, rate limiting and idempotency. |
 | **database helpers** | Core MySQL adapter now supports named parameters, scalar queries and transaction wrappers for safer, more flexible persistence. |
+| **hardcap module** | Hardcap endpoints follow the established layered pattern with authentication, rate limiting and idempotency. |

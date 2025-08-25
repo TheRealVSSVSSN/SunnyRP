@@ -42,3 +42,4 @@
 | 38 | gabz_pillbox_hospital | Pillbox hospital admissions and bed tracking | Create | Added patient admission API |
 | 39 | garages | Vehicle storage per character with garage definitions | Extend | Added character-scoped storage API |
 | 40 | ghmattimysql | MySQL middleware offering execute, scalar and transaction utilities | Extend | Added named parameters, scalar and transaction helpers |
+| 41 | hardcap | Enforce player slot limits and track active sessions | Create | Added config and session APIs |

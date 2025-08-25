@@ -33,3 +33,4 @@
 - Ensure the `taxi_rides` table exists for taxi dispatch.
 - Ensure the `furniture` table exists for stored furniture placements.
 - Ensure the `hospital_admissions` table exists for patient tracking.
+- Ensure the `hardcap_config` and `hardcap_sessions` tables exist for player capacity tracking.

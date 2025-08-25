@@ -1008,3 +1008,21 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 * Remove garage routes and repository changes.
 * Drop `character_id` column from `garage_vehicles`.
+
+## 2025-08-25 – hardcap
+
+### Added
+
+* Hardcap module with `/v1/hardcap/status`, `/v1/hardcap/config` and `/v1/hardcap/sessions` endpoints.
+
+### Migrations
+
+* `050_add_hardcap.sql`
+
+### Risks
+
+* Misreported session counts could block valid connections.
+
+### Rollback
+
+* Drop `hardcap_config` and `hardcap_sessions` tables and remove hardcap routes.
