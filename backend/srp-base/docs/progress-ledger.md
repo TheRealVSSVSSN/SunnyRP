@@ -48,4 +48,5 @@
 | 44 | import-Pack2 | Enhanced import package management with pricing and cancellation | Extend | Added order retrieval and cancel endpoints |
 | 45 | isPed | Character ped model and state persistence | Create | Added ped state APIs |
 | 46 | jailbreak | Track jailbreak attempts and outcomes | Create | Added attempt logging API |
+| 47 | k9 | Police K9 unit assignments and status tracking | Create | Added K9 unit APIs |
 | 47 | jobsystem | Manage job definitions, assignments and duty status | Create | Added character-scoped jobs API |

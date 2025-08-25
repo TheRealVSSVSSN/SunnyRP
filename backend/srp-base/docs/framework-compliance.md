@@ -64,7 +64,6 @@ practice is supported by citations.
 * **Enhanced Metrics:** expand Prometheus metrics to include domain‑specific counters and error rates.
 | **baseevents module** | Base event logging endpoints follow the established layered pattern with authentication and idempotency. |
 | **boatshop module** | Boatshop endpoints follow the established layered pattern with authentication and idempotency. |
-
 | **camera module** | Photo storage endpoints follow the established layered pattern with authentication and idempotency. |
 | **hud module** | HUD preference endpoints follow the established layered pattern with authentication and idempotency. |
 | **carwash module** | Carwash endpoints follow the established layered pattern with authentication and idempotency. |
@@ -86,5 +85,6 @@ practice is supported by citations.
 | **import-pack module** | Order pricing, retrieval and cancellation endpoints follow the established layered pattern with authentication and idempotency. |
 | **peds module** | Ped state endpoints follow the established layered pattern with authentication and idempotency. |
 | **jailbreak module** | Jailbreak endpoints follow the established layered pattern with authentication and idempotency. |
+| **k9 module** | K9 unit endpoints follow the established layered pattern with authentication and idempotency. |
 | **jobs module** | Job CRUD and assignment endpoints follow the established layered pattern with authentication and idempotency. |
 | **broadcaster module** | Broadcaster assignment uses character-scoped job logic and follows the established layered pattern. |

@@ -36,5 +36,6 @@
 - Import pack routes inherit the same authentication and idempotency requirements.
 - Peds routes inherit the same authentication and idempotency requirements.
 - Jailbreak routes inherit the same authentication and idempotency requirements.
+- K9 routes inherit the same authentication and idempotency requirements.
 - Jobs routes inherit the same authentication and idempotency requirements.
 - Broadcaster routes inherit the same authentication and idempotency requirements.

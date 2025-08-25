@@ -1678,6 +1678,39 @@ components:
     properties:
       success:
         type: boolean
+  K9Unit:
+    type: object
+    properties:
+      id:
+        type: integer
+      characterId:
+        type: integer
+      name:
+        type: string
+      breed:
+        type: string
+      active:
+        type: boolean
+      createdAt:
+        type: string
+        format: date-time
+  K9CreateRequest:
+    type: object
+    required:
+      - name
+      - breed
+    properties:
+      name:
+        type: string
+      breed:
+        type: string
+  K9ActiveUpdateRequest:
+    type: object
+    required:
+      - active
+    properties:
+      active:
+        type: boolean
 security:
   - ApiToken: []
 paths:
@@ -6654,3 +6687,164 @@ paths:
                     type: string
                   traceId:
                     type: string
+
+  /v1/characters/{characterId}/k9s:
+    get:
+      summary: List K9 units for a character
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: K9 units
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      k9s:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/K9Unit'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    post:
+      summary: Create a K9 unit
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+        - in: header
+          name: X-Idempotency-Key
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/K9CreateRequest'
+      responses:
+        '200':
+          description: K9 created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      k9:
+                        $ref: '#/components/schemas/K9Unit'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/characters/{characterId}/k9s/{k9Id}/active:
+    patch:
+      summary: Update K9 active state
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+        - in: path
+          name: k9Id
+          required: true
+          schema:
+            type: integer
+        - in: header
+          name: X-Idempotency-Key
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/K9ActiveUpdateRequest'
+      responses:
+        '200':
+          description: Update result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      updated:
+                        type: integer
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/characters/{characterId}/k9s/{k9Id}:
+    delete:
+      summary: Retire a K9 unit
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+        - in: path
+          name: k9Id
+          required: true
+          schema:
+            type: integer
+        - in: header
+          name: X-Idempotency-Key
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Removal result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      removed:
+                        type: integer
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'

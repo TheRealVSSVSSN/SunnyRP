@@ -307,6 +307,11 @@ For resource decisions see `progress-ledger.md`. Module details are documented i
 
 ## Update – 2025-08-25
 
+Introduced police K9 unit tracking to support the **k9** resource.
+
+* Added K9 module with `GET /v1/characters/{characterId}/k9s`, `POST /v1/characters/{characterId}/k9s`, `PATCH /v1/characters/{characterId}/k9s/{k9Id}/active` and `DELETE /v1/characters/{characterId}/k9s/{k9Id}` endpoints.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/k9.md`.
 Introduced character-scoped job assignments to support the **jobsystem** resource.
 
 * Added Jobs module with `/v1/jobs` CRUD and assignment endpoints plus migration and OpenAPI documentation.

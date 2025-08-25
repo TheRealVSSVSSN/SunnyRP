@@ -350,6 +350,19 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: jb2' -H 'Content-Type: app
 curl -H 'X-API-Token: <token>' http://localhost:3010/v1/jailbreaks/active
 ```
 
+Manually verify the k9 endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/characters/1/k9s
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: k91' -H 'Content-Type: application/json' \
+  -d '{"name":"Rex","breed":"German Shepherd"}' \
+  http://localhost:3010/v1/characters/1/k9s
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: k92' -H 'Content-Type: application/json' \
+  -d '{"active":true}' \
+  http://localhost:3010/v1/characters/1/k9s/1/active
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: k93' -X DELETE \
+  http://localhost:3010/v1/characters/1/k9s/1
+=======
 Manually verify the jobs endpoints:
 
 ```sh
