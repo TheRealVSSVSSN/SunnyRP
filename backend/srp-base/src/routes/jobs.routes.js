@@ -3,10 +3,10 @@ const { sendOk } = require('../utils/respond');
 const jobsRepo = require('../repositories/jobsRepository');
 
 // Routes for job management.  These endpoints expose CRUD for
-// job definitions and allow players to be assigned to jobs and
-// toggle duty status.  They do not enforce gameplay logic like
-// paychecks or rank restrictions – that belongs in Lua or higher
-// level services.
+// job definitions and allow characters to be assigned to jobs and
+// toggle duty status with optional grade tracking.  They do not
+// enforce gameplay logic like paychecks or rank restrictions –
+// that belongs in Lua or higher level services.
 const router = express.Router();
 
 // List all jobs
@@ -41,35 +41,43 @@ router.get('/v1/jobs/:id', async (req, res, next) => {
   }
 });
 
-// Assign a job to a player.  If the assignment already exists it
+// Assign a job to a character.  If the assignment already exists it
 // will be updated.  on_duty is set to false by default.
 router.post('/v1/jobs/assign', async (req, res, next) => {
   try {
-    const { playerId, jobId } = req.body || {};
-    const assignment = await jobsRepo.assignJob(playerId, parseInt(jobId, 10));
+    const { characterId, jobId, grade } = req.body || {};
+    const assignment = await jobsRepo.assignJob(
+      parseInt(characterId, 10),
+      parseInt(jobId, 10),
+      grade !== undefined ? parseInt(grade, 10) : 0,
+    );
     sendOk(res, assignment, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     next(err);
   }
 });
 
-// Toggle a player's duty status for a job.  Expects playerId,
+// Toggle a character's duty status for a job.  Expects characterId,
 // jobId and onDuty (boolean).  Creates the assignment if needed.
 router.post('/v1/jobs/duty', async (req, res, next) => {
   try {
-    const { playerId, jobId, onDuty } = req.body || {};
-    const assignment = await jobsRepo.setDuty(playerId, parseInt(jobId, 10), Boolean(onDuty));
+    const { characterId, jobId, onDuty } = req.body || {};
+    const assignment = await jobsRepo.setDuty(
+      parseInt(characterId, 10),
+      parseInt(jobId, 10),
+      Boolean(onDuty),
+    );
     sendOk(res, assignment, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     next(err);
   }
 });
 
-// Get a player's job assignments
-router.get('/v1/jobs/:playerId/assignments', async (req, res, next) => {
+// Get a character's job assignments
+router.get('/v1/jobs/:characterId/assignments', async (req, res, next) => {
   try {
-    const { playerId } = req.params;
-    const assignments = await jobsRepo.getPlayerJobs(playerId);
+    const { characterId } = req.params;
+    const assignments = await jobsRepo.getCharacterJobs(parseInt(characterId, 10));
     sendOk(res, assignments, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     next(err);

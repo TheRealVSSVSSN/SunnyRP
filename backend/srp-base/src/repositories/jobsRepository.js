@@ -2,10 +2,10 @@ const db = require('./db');
 
 /**
  * Jobs repository.  Handles persistence of job definitions and
- * player job assignments.  Jobs represent organisations or roles
- * that players can join, such as police, EMS, mechanic, etc.
- * Assignments track which players belong to which jobs and
- * whether they are on duty.
+ * character job assignments.  Jobs represent organisations or roles
+ * that characters can join, such as police, EMS, mechanic, etc.
+ * Assignments track which characters belong to which jobs, their
+ * grade within the job and whether they are on duty.
  */
 
 /**
@@ -65,63 +65,63 @@ async function getJobByName(name) {
 }
 
 /**
- * Assign a job to a player.  Inserts or updates the player_jobs
+ * Assign a job to a character.  Inserts or updates the character_jobs
  * record with on_duty set to 0.  Returns the assigned record.
  *
- * @param {string} playerId
+ * @param {number} characterId
  * @param {number} jobId
- * @returns {Promise<{player_id: string, job_id: number, on_duty: boolean, hired_at: Date}>}
+ * @param {number} [grade]
+ * @returns {Promise<{characterId: number, jobId: number, grade: number, onDuty: boolean, hiredAt: Date}>}
  */
-async function assignJob(playerId, jobId) {
-  // Upsert assignment; MySQL 5.7 syntax using ON DUPLICATE KEY UPDATE
+async function assignJob(characterId, jobId, grade = 0) {
   await db.query(
-    'INSERT INTO player_jobs (player_id, job_id, on_duty) VALUES (?, ?, 0) ON DUPLICATE KEY UPDATE on_duty = VALUES(on_duty)',
-    [playerId, jobId],
+    'INSERT INTO character_jobs (character_id, job_id, grade, on_duty) VALUES (?, ?, ?, 0) ON DUPLICATE KEY UPDATE grade = VALUES(grade)',
+    [characterId, jobId, grade],
   );
   const rows = await db.query(
-    'SELECT player_id AS playerId, job_id AS jobId, on_duty AS onDuty, hired_at AS hiredAt FROM player_jobs WHERE player_id = ? AND job_id = ?',
-    [playerId, jobId],
+    'SELECT character_id AS characterId, job_id AS jobId, grade, on_duty AS onDuty, hired_at AS hiredAt FROM character_jobs WHERE character_id = ? AND job_id = ?',
+    [characterId, jobId],
   );
   return rows[0];
 }
 
 /**
- * Set a player's on_duty status for a given job.  Creates the
+ * Set a character's on_duty status for a given job.  Creates the
  * assignment if it does not already exist.  Returns the updated
  * record.
  *
- * @param {string} playerId
+ * @param {number} characterId
  * @param {number} jobId
  * @param {boolean} onDuty
  * @returns {Promise<object>}
  */
-async function setDuty(playerId, jobId, onDuty) {
+async function setDuty(characterId, jobId, onDuty) {
   await db.query(
-    'INSERT INTO player_jobs (player_id, job_id, on_duty) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE on_duty = VALUES(on_duty)',
-    [playerId, jobId, onDuty ? 1 : 0],
+    'INSERT INTO character_jobs (character_id, job_id, on_duty) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE on_duty = VALUES(on_duty)',
+    [characterId, jobId, onDuty ? 1 : 0],
   );
   const rows = await db.query(
-    'SELECT player_id AS playerId, job_id AS jobId, on_duty AS onDuty, hired_at AS hiredAt FROM player_jobs WHERE player_id = ? AND job_id = ?',
-    [playerId, jobId],
+    'SELECT character_id AS characterId, job_id AS jobId, grade, on_duty AS onDuty, hired_at AS hiredAt FROM character_jobs WHERE character_id = ? AND job_id = ?',
+    [characterId, jobId],
   );
   return rows[0];
 }
 
 /**
- * Retrieve a player's job assignments.  Returns an array of
+ * Retrieve a character's job assignments.  Returns an array of
  * assignments with job details and duty status.
  *
- * @param {string} playerId
+ * @param {number} characterId
  * @returns {Promise<object[]>}
  */
-async function getPlayerJobs(playerId) {
+async function getCharacterJobs(characterId) {
   return db.query(
-    `SELECT pj.player_id AS playerId, pj.job_id AS jobId, pj.on_duty AS onDuty, pj.hired_at AS hiredAt,
+    `SELECT cj.character_id AS characterId, cj.job_id AS jobId, cj.grade, cj.on_duty AS onDuty, cj.hired_at AS hiredAt,
             j.name, j.label, j.description
-     FROM player_jobs pj
-     JOIN jobs j ON pj.job_id = j.id
-     WHERE pj.player_id = ?`,
-    [playerId],
+     FROM character_jobs cj
+     JOIN jobs j ON cj.job_id = j.id
+     WHERE cj.character_id = ?`,
+    [characterId],
   );
 }
 
@@ -132,23 +132,23 @@ module.exports = {
   getJobByName,
   assignJob,
   setDuty,
-  getPlayerJobs,
+  getCharacterJobs,
   /**
-   * Count the number of players currently assigned to a given job.  This
+   * Count the number of characters currently assigned to a given job.  This
    * helper is used by modules like broadcaster to enforce limits on how
-   * many players can hold a particular role at one time.  It joins the
-   * jobs table on player_jobs to look up by job name.  The on_duty
+   * many characters can hold a particular role at one time.  It joins the
+   * jobs table on character_jobs to look up by job name.  The on_duty
    * status is ignored so that both off and on duty assignments are
    * counted.  Returns a numeric count.
    *
    * @param {string} name Name of the job (e.g. 'broadcaster').
    * @returns {Promise<number>}
    */
-  async countPlayersForJob(name) {
+  async countCharactersForJob(name) {
     const rows = await db.query(
       `SELECT COUNT(*) AS count
-         FROM player_jobs pj
-         JOIN jobs j ON pj.job_id = j.id
+         FROM character_jobs cj
+         JOIN jobs j ON cj.job_id = j.id
         WHERE j.name = ?`,
       [name],
     );

@@ -12,6 +12,8 @@
 - Extended import pack order APIs with pricing, retrieval and cancellation.
 - Added ped state APIs.
 - Added jailbreak attempt tracking APIs.
+- Added job definition and assignment APIs with character scoping.
+- Updated broadcaster endpoint to use character-based job assignments.
 
 ## File Changes
 
@@ -175,6 +177,21 @@
 | `docs/research-log.md` | M | Logged isPed research |
 | `docs/BASE_API_DOCUMENTATION.md` | M | Documented peds endpoints |
 | `docs/framework-compliance.md` | M | Noted peds module compliance |
+| `src/repositories/jobsRepository.js` | M | Character-scoped job assignments |
+| `src/routes/jobs.routes.js` | M | CharacterId and grade support |
+| `src/routes/broadcaster.routes.js` | M | Character-based broadcaster attempts |
+| `src/migrations/056_add_character_jobs.sql` | A | Create `character_jobs` table |
+| `openapi/api.yaml` | M | Documented jobs and broadcaster paths |
+| `docs/index.md` | M | Logged jobsystem update |
+| `docs/progress-ledger.md` | M | Added jobsystem entry |
+| `docs/framework-compliance.md` | M | Noted jobs and broadcaster module compliance |
+| `docs/BASE_API_DOCUMENTATION.md` | M | Documented jobs and broadcaster endpoints |
+| `docs/events-and-rpcs.md` | M | Mapped jobsystem and broadcaster events |
+| `docs/db-schema.md` | M | Documented jobs and character_jobs tables |
+| `docs/migrations.md` | M | Listed migration 056 |
+| `docs/modules/jobs.md` | A | Module documentation |
+| `docs/modules/broadcaster.md` | M | Updated for characterId |
+| `docs/research-log.md` | M | Logged jobsystem research |
 
 ## Startup Notes
 
@@ -184,3 +201,4 @@
 - Run `node src/bootstrap/migrate.js` to apply migration `052_add_import_pack_orders.sql`.
 - Run `node src/bootstrap/migrate.js` to apply migration `054_add_character_peds.sql`.
 - Run `node src/bootstrap/migrate.js` to apply migration `055_add_jailbreak_attempts.sql`.
+- Run `node src/bootstrap/migrate.js` to apply migration `056_add_character_jobs.sql`.

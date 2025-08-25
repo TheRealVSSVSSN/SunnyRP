@@ -86,3 +86,5 @@ practice is supported by citations.
 | **import-pack module** | Order pricing, retrieval and cancellation endpoints follow the established layered pattern with authentication and idempotency. |
 | **peds module** | Ped state endpoints follow the established layered pattern with authentication and idempotency. |
 | **jailbreak module** | Jailbreak endpoints follow the established layered pattern with authentication and idempotency. |
+| **jobs module** | Job CRUD and assignment endpoints follow the established layered pattern with authentication and idempotency. |
+| **broadcaster module** | Broadcaster assignment uses character-scoped job logic and follows the established layered pattern. |
