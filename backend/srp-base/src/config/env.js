@@ -72,6 +72,7 @@ const config = {
     },
   },
   interactSound: { retentionMs: parseInt(process.env.INTERACT_SOUND_RETENTION_MS || '604800000', 10) },
+  dispatch: { retentionMs: parseInt(process.env.DISPATCH_ALERT_RETENTION_MS || '86400000', 10) },
 
   /**
    * Feature flags for core modules.  Lua consumers still drive

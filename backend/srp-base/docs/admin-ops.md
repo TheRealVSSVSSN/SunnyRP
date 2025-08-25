@@ -6,6 +6,7 @@
   ```
 - Ensure the `diamond_casino_games` and `diamond_casino_bets` tables exist after deploying this sprint.
 - Ensure the `interact_sound_plays` table exists after deploying this sprint.
+- Ensure the `dispatch_alerts` table has index `idx_dispatch_alerts_created_at`; tune `DISPATCH_ALERT_RETENTION_MS` for purge interval.
 - Ensure the `doors` table exists to track door states.
 - Manage the Node.js process with tools like `pm2` for restarts and monitoring.
 - Ensure the `evidence_chain` and `character_selections` tables exist after deploying this sprint.

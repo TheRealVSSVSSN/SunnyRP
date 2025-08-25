@@ -38,6 +38,20 @@ Added `world_forecast` table for weather scheduling. K9 migration renamed to 057
 | volume | FLOAT | Playback volume |
 | played_at | BIGINT | Epoch milliseconds |
 
+## dispatch_alerts
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| code | VARCHAR(10) | Alert code |
+| title | VARCHAR(255) | Short description |
+| description | TEXT | Detailed info |
+| sender | VARCHAR(255) | Originating unit |
+| coords | JSON | Location data |
+| status | ENUM('new','acknowledged') | Default 'new' |
+| created_at | TIMESTAMP | Indexed by `idx_dispatch_alerts_created_at` |
+| updated_at | TIMESTAMP | Auto updated |
+
 ## jobs
 
 | Column | Type | Notes |

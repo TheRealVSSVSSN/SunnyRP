@@ -612,3 +612,16 @@ Added world timecycle management endpoints.
 - `GET /v1/hooks/endpoints` – list registered webhook sinks (admin).
 - `POST /v1/hooks/endpoints` – register a webhook sink (admin).
 - `DELETE /v1/hooks/endpoints/{id}` – remove a webhook sink (admin).
+
+## Update – 2025-08-25 (police dispatch)
+
+Added dispatch alert APIs with WebSocket and webhook push.
+
+### Endpoints
+
+- `GET /v1/dispatch/alerts` – list recent dispatch alerts.
+- `POST /v1/dispatch/alerts` – create a dispatch alert (requires `X-Idempotency-Key`).
+- `PATCH /v1/dispatch/alerts/{id}/ack` – acknowledge an alert (requires `X-Idempotency-Key`).
+- `GET /v1/dispatch/codes` – list configured dispatch codes.
+
+All endpoints require standard authentication headers.

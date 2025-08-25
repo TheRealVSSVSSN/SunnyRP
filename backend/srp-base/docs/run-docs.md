@@ -3,6 +3,7 @@
 ## Modules
 - InteractSound broadcast & retention
 - Hooks webhook endpoint management
+- Dispatch alert broadcasting & retention
 
 ## Migrations
 - Renamed `059_add_world_timecycle.sql` to `060_add_world_timecycle.sql`
@@ -18,4 +19,5 @@
 - admin-ops.md
 - modules/interactSound.md
 - modules/hooks.md
+- modules/dispatch.md
 - research-log.md

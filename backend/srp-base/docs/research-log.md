@@ -249,3 +249,8 @@
 - GitHub repository "ImConsKrypt/SK-Hud" – ProdigyRP-inspired HUD concepts. https://github.com/ImConsKrypt/SK-Hud
 - Reference resources unavailable; proceeding with internal consistency only.
 - InteractSound resource events – https://github.com/h04X-2K/NoPixelServer/blob/main/resources/InteractSound/server/main.lua
+
+## Research Log – 2025-08-25 (Police dispatch)
+
+- Sparse checkout of `resources/PolicePack` from `https://github.com/h04X-2K/NoPixelServer` for police asset naming.
+- ESX police job dispatch flow – https://github.com/ESX-Official/esx_policejob

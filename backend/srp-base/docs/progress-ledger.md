@@ -58,3 +58,4 @@
 | 53 | Scheduler | Server-side loop migration | Create | Added jittered task scheduler |
 | 50 | climate-overrides | Timecycle overrides and weather preset controls | Extend | Added world timecycle API |
 | 54 | InteractSound cluster | Sound play logging with WS/webhooks and retention scheduler | Extend | Broadcast plays and purge stale records |
+| 55 | Police dispatch | Alert broadcasting and retention | Extend | WS/webhook push and hourly purge |
