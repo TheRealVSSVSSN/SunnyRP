@@ -1423,6 +1423,28 @@ components:
         type: number
       pickupZ:
         type: number
+  HospitalAdmission:
+    type: object
+    properties:
+      id:
+        type: integer
+      characterId:
+        type: integer
+      reason:
+        type: string
+      bed:
+        type: string
+        nullable: true
+      admittedAt:
+        type: string
+        format: date-time
+      dischargedAt:
+        type: string
+        format: date-time
+        nullable: true
+      notes:
+        type: string
+        nullable: true
 security:
   - ApiToken: []
 paths:
@@ -5335,6 +5357,101 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/TaxiRequest'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/hospital/admissions/active:
+    get:
+      summary: List active hospital admissions
+      responses:
+        '200':
+          description: Active admissions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      admissions:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/HospitalAdmission'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/hospital/admissions:
+    post:
+      summary: Admit a patient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - characterId
+                - reason
+              properties:
+                characterId:
+                  type: integer
+                reason:
+                  type: string
+                bed:
+                  type: string
+                notes:
+                  type: string
+      responses:
+        '200':
+          description: Admission created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/HospitalAdmission'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/hospital/admissions/{id}/discharge:
+    post:
+      summary: Discharge a patient
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Admission discharged
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/HospitalAdmission'
                   requestId:
                     type: string
                   traceId:

@@ -21,6 +21,7 @@ const adminRoutes = require('./routes/admin.routes');
 const dispatchRoutes = require('./routes/dispatch.routes');
 const evidenceRoutes = require('./routes/evidence.routes');
 const emsRoutes = require('./routes/ems.routes');
+const hospitalRoutes = require('./routes/hospital.routes');
 const keysRoutes = require('./routes/keys.routes');
 const lootRoutes = require('./routes/loot.routes');
 
@@ -153,6 +154,7 @@ app.use(adminRoutes);
 app.use(dispatchRoutes);
 app.use(evidenceRoutes);
 app.use(emsRoutes);
+app.use(hospitalRoutes);
 app.use(keysRoutes);
 app.use(lootRoutes);
 

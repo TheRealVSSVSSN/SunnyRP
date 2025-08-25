@@ -970,3 +970,21 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Remove the selected character route and associated documentation updates.
+
+## 2025-08-25 – gabz_pillbox_hospital
+
+### Added
+
+* Hospital admission endpoints: `/v1/hospital/admissions`, `/v1/hospital/admissions/active`, `/v1/hospital/admissions/{id}/discharge`.
+
+### Migrations
+
+* `048_add_hospital_admissions.sql` creates `hospital_admissions` table.
+
+### Risks
+
+* Mismanaged admissions could leave records active indefinitely.
+
+### Rollback
+
+* Drop `hospital_admissions` table and remove hospital routes and documentation.

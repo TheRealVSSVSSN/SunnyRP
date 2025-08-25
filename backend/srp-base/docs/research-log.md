@@ -168,3 +168,8 @@
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
 - GitHub repository "rohKane/progressbar" – QBCore progress bar inspired by NoPixel 4.0. https://github.com/rohKane/progressbar
 - GitHub repository "ImConsKrypt/SK-Hud" – ProdigyRP-inspired HUD concepts. https://github.com/ImConsKrypt/SK-Hud
+
+## Research Log – 2025-08-25 (gabz_pillbox_hospital)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403.
+- Attempted to access ProdigyRP 4.0 repository `https://github.com/ProdigyRP/ProdigyRP-4.0` but received HTTP 404.
