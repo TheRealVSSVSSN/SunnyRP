@@ -67,3 +67,4 @@
 | 067_add_invoices.sql | Invoices table for character billing |
 | 068_add_ipls.sql | IPL state table |
 | 069_add_camera_photos_created_index.sql | Index camera_photos created_at |
+| 070_add_character_vehicle_status.sql | Vehicle HUD state table |

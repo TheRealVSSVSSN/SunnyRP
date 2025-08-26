@@ -1263,6 +1263,26 @@ components:
         hudTheme:
           type: string
           nullable: true
+    VehicleState:
+      type: object
+      properties:
+        characterId:
+          type: integer
+        seatbelt:
+          type: boolean
+        harness:
+          type: boolean
+        nitrous:
+          type: integer
+    VehicleStateInput:
+      type: object
+      properties:
+        seatbelt:
+          type: boolean
+        harness:
+          type: boolean
+        nitrous:
+          type: integer
     CarwashTransaction:
       type: object
       properties:
@@ -6044,6 +6064,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HudPreferences'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/characters/{characterId}/vehicle-state:
+    get:
+      summary: Get vehicle HUD state
+      operationId: getVehicleState
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Vehicle HUD state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VehicleState'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    put:
+      summary: Update vehicle HUD state
+      operationId: updateVehicleState
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VehicleStateInput'
+      responses:
+        '200':
+          description: Updated vehicle HUD state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VehicleState'
         '400':
           $ref: '#/components/responses/BadRequest'
 

@@ -70,7 +70,7 @@ practice is supported by citations.
 | **baseevents module** | Base event logging endpoints follow the established layered pattern with authentication, idempotency, WebSocket broadcast and hourly purge scheduler. |
 | **boatshop module** | Boatshop endpoints follow the established layered pattern with authentication and idempotency. |
 | **camera module** | Photo storage endpoints follow the established layered pattern with authentication and idempotency. |
-| **hud module** | HUD preference endpoints follow the established layered pattern with authentication and idempotency. |
+| **hud module** | HUD preference and vehicle state endpoints follow the established layered pattern with authentication, idempotency and WebSocket broadcasts. |
 | **carwash module** | Carwash endpoints follow the established layered pattern with authentication and idempotency. |
 | **chat module** | Chat message endpoints follow the established layered pattern with authentication and idempotency. |
 | **connectqueue module** | Queue priority endpoints follow the established layered pattern with authentication, idempotency and rate limiting. |
@@ -109,3 +109,4 @@ practice is supported by citations.
 - Add unit test coverage.
 - Migrate legacy apartments and garages routes to `/v1/properties`.
 - Document world event endpoints in OpenAPI.
+- Integrate player vitals (hunger, thirst, stress) into HUD module.

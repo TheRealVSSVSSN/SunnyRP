@@ -38,6 +38,16 @@ Added `world_forecast` table for weather scheduling. K9 migration renamed to 057
 | volume | FLOAT | Playback volume |
 | played_at | BIGINT | Epoch milliseconds |
 
+## character_vehicle_status
+
+| Column | Type | Notes |
+|---|---|---|
+| character_id | INT | PK, FK to characters.id |
+| seatbelt | TINYINT(1) | 1 if seatbelt engaged |
+| harness | TINYINT(1) | 1 if harness engaged |
+| nitrous | INT | Remaining nitrous amount |
+| updated_at | DATETIME | Last update timestamp |
+
 ## dispatch_alerts
 
 | Column | Type | Notes |

@@ -1379,3 +1379,19 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Remove camera scheduler registration and drop index `idx_camera_photos_created_at`.
+
+## 2025-08-26 – HUD vehicle state
+
+### Added
+* Vehicle HUD state persistence (seatbelt, harness, nitrous).
+* WebSocket broadcasts on vehicle state changes.
+* Hourly scheduler purges stale vehicle state.
+
+### Migrations
+* `070_add_character_vehicle_status.sql` creates `character_vehicle_status` table.
+
+### Risks
+* Missing DB grants could prevent state writes.
+
+### Rollback
+* Drop `character_vehicle_status` table and remove HUD scheduler registration.

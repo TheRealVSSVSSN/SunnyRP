@@ -16,6 +16,7 @@ const baseEventTasks = require('./tasks/baseEvents');
 const boatshopTasks = require('./tasks/boatshop');
 const worldTasks = require('./tasks/world');
 const cameraTasks = require('./tasks/camera');
+const hudTasks = require('./tasks/hud');
 
 // Register Prometheus metrics if enabled.  This must be done before
 // the server starts so that middleware can increment counters.
@@ -87,6 +88,12 @@ scheduler.register(
   cameraTasks.JOB_NAME,
   () => cameraTasks.purgeOld(),
   cameraTasks.INTERVAL_MS,
+  { jitter: 60000 },
+);
+scheduler.register(
+  hudTasks.JOB_NAME,
+  () => hudTasks.pruneOld(),
+  hudTasks.INTERVAL_MS,
   { jitter: 60000 },
 );
 
