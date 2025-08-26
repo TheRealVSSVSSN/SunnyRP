@@ -1,17 +1,19 @@
 # Run Summary – 2025-08-26
 
 ## Modules
-- Carwash module: mounted routes, WebSocket/webhook dirt updates and scheduler tick.
+- Chat module: WebSocket/webhook broadcast on message create and hourly retention purge.
 
 ## Documentation Updated
 - docs/progress-ledger.md
 - docs/events-and-rpcs.md
 - docs/migrations.md
-- docs/modules/carwash.md
-- docs/naming-map.md
-- docs/run-docs.md
+- docs/modules/chat.md
 - docs/admin-ops.md
+- docs/db-schema.md
 - docs/framework-compliance.md
+- docs/naming-map.md
+- docs/research-log.md
+- docs/run-docs.md
 
 ## Outstanding TODO/Gaps
 - Migrate existing apartment and garage consumers to new properties API

@@ -338,6 +338,8 @@ Rows older than `BASE_EVENT_RETENTION_MS` are purged hourly by the `base-events-
 | message | TEXT | Message content |
 | created_at | TIMESTAMP | Creation time |
 
+**Indexes**: `idx_chat_character` on `character_id`, `idx_chat_messages_created_at` on `created_at`
+
 ## queue_priorities
 
 | Column | Type | Notes |

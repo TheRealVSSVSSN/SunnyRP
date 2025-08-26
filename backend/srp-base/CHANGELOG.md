@@ -1408,3 +1408,19 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Remove carwash scheduler registration and drop index `idx_vehicle_cleanliness_dirt`.
+
+## 2025-08-26 – Chat realtime & retention
+
+### Added
+* WebSocket and webhook broadcasts on `POST /v1/chat/messages`.
+* Hourly `chat-purge` scheduler removes messages older than `CHAT_RETENTION_MS`.
+* Config `CHAT_RETENTION_MS` with default 7 days.
+* `072_add_chat_messages_created_index.sql` adds `created_at` index.
+
+### Risks
+* Misconfigured retention could delete chat history too aggressively.
+* Additional broadcast traffic may impact clients if unsubscribed.
+
+### Rollback
+* Remove chat scheduler registration and broadcasts.
+* Drop index `idx_chat_messages_created_at`.

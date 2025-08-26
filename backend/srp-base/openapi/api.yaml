@@ -6215,6 +6215,8 @@ paths:
   /v1/chat/messages:
     post:
       summary: Create chat message
+      description: |
+        Creates a chat message record and pushes it to WebSocket and webhook subscribers.
       operationId: createChatMessage
       requestBody:
         required: true

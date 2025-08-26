@@ -1,6 +1,8 @@
 const express = require('express');
 const { sendOk, sendError } = require('../utils/respond');
 const { listMessagesByCharacter, createMessage } = require('../repositories/chatRepository');
+const websocket = require('../realtime/websocket');
+const hooks = require('../hooks/dispatcher');
 
 const router = express.Router();
 
@@ -42,6 +44,8 @@ router.post('/v1/chat/messages', async (req, res) => {
   try {
     const msg = await createMessage({ characterId: idNum, channel, message });
     sendOk(res, { message: msg }, res.locals.requestId, res.locals.traceId);
+    websocket.broadcast('chat', 'message', { message: msg });
+    hooks.dispatch('chat.message', msg);
   } catch (err) {
     sendError(res, { code: 'CHAT_CREATE_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);
   }

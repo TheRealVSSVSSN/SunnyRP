@@ -32,7 +32,7 @@
 - Ensure the `character_hud_preferences` table exists for HUD settings.
 - Ensure the `character_vehicle_status` table exists for vehicle HUD state.
 - Ensure the `carwash_transactions` and `vehicle_cleanliness` tables exist for carwash tracking.
-- Ensure the `chat_messages` table exists for chat logging.
+- Ensure the `chat_messages` table exists for chat logging. Messages older than `CHAT_RETENTION_MS` are purged hourly by the `chat-purge` scheduler.
 - Ensure the `queue_priorities` table exists for connection queue priority management.
 - Ensure the `character_coords` table exists for saved coordinates.
 - Ensure the `interiors` table exists for apartment interior layouts.

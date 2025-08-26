@@ -22,3 +22,4 @@
 | carwash:checkmoney | POST /v1/carwash |
 | carwash:success | vehicles.dirt.update |
 | notenoughmoney | error: INSUFFICIENT_FUNDS |
+| chat | chat |
