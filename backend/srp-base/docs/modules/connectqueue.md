@@ -37,7 +37,8 @@ There is no feature flag for connectqueue; the module is always enabled.
 
 * **Repository:** `src/repositories/connectqueueRepository.js` stores priority entries.
 * **Migration:** `src/migrations/040_add_queue_priorities.sql` creates the `queue_priorities` table.
-* **Routes:** `src/routes/connectqueue.routes.js` defines the REST API.
+* **Routes:** `src/routes/connectqueue.routes.js` defines the REST API and emits WebSocket and webhook events `priority.upserted` and `priority.removed`.
+* **Scheduler:** `src/tasks/connectqueue.js` purges expired priorities every minute and broadcasts `priority.expired` events.
 * **OpenAPI:** `openapi/api.yaml` documents schemas and paths.
 
 ## Future work

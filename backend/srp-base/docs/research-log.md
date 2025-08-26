@@ -321,3 +321,8 @@
 
 - Attempted to clone `https://github.com/h04X-2K/NoPixelServer` for chat resource but download was interrupted due to size. Reference resources unavailable; proceeding with internal consistency only.
 - Reviewed chat/message implementations in EssentialMode, ESX, ND Core, FSN Framework, QB-Core, vRP and vORP to align naming and real-time patterns.
+
+## Research Log – 2025-08-26 (connectqueue)
+
+- Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed connection queue patterns in ESX, QB-Core and ND Core for priority and expiry handling.

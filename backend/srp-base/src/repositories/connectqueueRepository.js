@@ -51,8 +51,23 @@ async function removePriority(accountId) {
   await db.query('DELETE FROM queue_priorities WHERE account_id = ?', [accountId]);
 }
 
+/**
+ * Purge expired queue priorities and return affected account IDs.
+ * @returns {Promise<number[]>}
+ */
+async function purgeExpired() {
+  const rows = await db.query(
+    'SELECT account_id FROM queue_priorities WHERE expires_at IS NOT NULL AND expires_at < NOW()',
+  );
+  if (rows.length) {
+    await db.query('DELETE FROM queue_priorities WHERE expires_at IS NOT NULL AND expires_at < NOW()');
+  }
+  return rows.map((r) => r.account_id);
+}
+
 module.exports = {
   listPriorities,
   upsertPriority,
   removePriority,
+  purgeExpired,
 };

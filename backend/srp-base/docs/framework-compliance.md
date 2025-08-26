@@ -73,7 +73,7 @@ practice is supported by citations.
 | **hud module** | HUD preference and vehicle state endpoints follow the established layered pattern with authentication, idempotency and WebSocket broadcasts. |
 | **carwash module** | Carwash endpoints follow the established layered pattern with authentication and idempotency; dirt ticks broadcast via WebSocket and webhooks. |
 | **chat module** | Chat endpoints follow the layered pattern with authentication, idempotency, WebSocket/webhook broadcasts and hourly purge scheduler. |
-| **connectqueue module** | Queue priority endpoints follow the established layered pattern with authentication, idempotency and rate limiting. |
+| **connectqueue module** | Queue priority endpoints follow the established layered pattern with authentication, idempotency and rate limiting; updates broadcast via WebSocket/webhooks and expired priorities purged by scheduler. |
 | **cron module** | Cron job endpoints follow the established layered pattern with authentication and idempotency. |
 | **coordsaver module** | Coordinate endpoints follow the established layered pattern with authentication and idempotency. |
 | **interiors module** | Interior endpoints follow the established layered pattern with authentication and idempotency. |

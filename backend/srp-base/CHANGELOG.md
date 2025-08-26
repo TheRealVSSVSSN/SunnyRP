@@ -1424,3 +1424,15 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 * Remove chat scheduler registration and broadcasts.
 * Drop index `idx_chat_messages_created_at`.
+
+## 2025-08-26 – Connect queue realtime & expiry
+
+### Added
+* WebSocket and webhook events on queue priority upsert, remove and expiry.
+* Minute scheduler `connectqueue-expiry` purges expired priorities.
+
+### Risks
+* Misconfigured expiry may drop active priorities unexpectedly.
+
+### Rollback
+* Remove connectqueue scheduler registration and event broadcasts.

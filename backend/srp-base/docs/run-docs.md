@@ -1,18 +1,19 @@
 # Run Summary – 2025-08-26
 
 ## Modules
-- Chat module: WebSocket/webhook broadcast on message create and hourly retention purge.
+- Connect Queue: WebSocket/webhook priority events and minute-based expiry purge.
 
 ## Documentation Updated
 - docs/progress-ledger.md
 - docs/events-and-rpcs.md
-- docs/migrations.md
-- docs/modules/chat.md
+- docs/modules/connectqueue.md
 - docs/admin-ops.md
-- docs/db-schema.md
+- docs/BASE_API_DOCUMENTATION.md
 - docs/framework-compliance.md
 - docs/naming-map.md
+- docs/index.md
 - docs/research-log.md
+- docs/todo-gaps.md
 - docs/run-docs.md
 
 ## Outstanding TODO/Gaps
@@ -22,3 +23,4 @@
 - Paginate and search property listings
 - Document world event endpoints in OpenAPI
 - Integrate player vitals (hunger, thirst, stress) into HUD module
+- Add admin bulk adjustment endpoints for queue priorities

@@ -19,6 +19,7 @@ const cameraTasks = require('./tasks/camera');
 const hudTasks = require('./tasks/hud');
 const carwashTasks = require('./tasks/carwash');
 const chatTasks = require('./tasks/chat');
+const connectqueueTasks = require('./tasks/connectqueue');
 
 // Register Prometheus metrics if enabled.  This must be done before
 // the server starts so that middleware can increment counters.
@@ -109,6 +110,12 @@ scheduler.register(
   () => chatTasks.purgeOld(),
   chatTasks.INTERVAL_MS,
   { jitter: 60000 },
+);
+scheduler.register(
+  connectqueueTasks.JOB_NAME,
+  () => connectqueueTasks.purgeExpired(),
+  connectqueueTasks.INTERVAL_MS,
+  { jitter: 5000, persistName: connectqueueTasks.JOB_NAME },
 );
 
 // Handle graceful shutdown

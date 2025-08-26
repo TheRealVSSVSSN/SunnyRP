@@ -8,3 +8,4 @@
 | Paginate and search property listings | backend | low | none |
 | Document world event endpoints in OpenAPI | backend | medium | spec alignment |
 | Integrate player vitals (hunger, thirst, stress) into HUD module | backend | medium | gameplay design |
+| Add admin bulk adjustment endpoints for queue priorities | backend | low | none |
