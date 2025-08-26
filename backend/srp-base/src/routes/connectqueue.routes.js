@@ -2,6 +2,8 @@ const express = require('express');
 const { sendOk, sendError } = require('../utils/respond');
 const { listPriorities, upsertPriority, removePriority } = require('../repositories/connectqueueRepository');
 const { createRateLimiter } = require('../middleware/rateLimit');
+const websocket = require('../realtime/websocket');
+const dispatcher = require('../hooks/dispatcher');
 
 const router = express.Router();
 
@@ -64,6 +66,8 @@ router.post('/v1/connectqueue/priorities', async (req, res) => {
   }
   try {
     const priorityRow = await upsertPriority({ accountId: accountNum, priority: priorityNum, reason, expiresAt: expiresDate });
+    websocket.broadcast('connectqueue', 'priority.upserted', priorityRow);
+    dispatcher.dispatch('connectqueue.priority.upserted', priorityRow);
     sendOk(res, { priority: priorityRow }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'QUEUE_PRIORITY_UPSERT_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);
@@ -85,6 +89,9 @@ router.delete('/v1/connectqueue/priorities/:accountId', async (req, res) => {
   }
   try {
     await removePriority(accountNum);
+    const payload = { accountId: accountNum };
+    websocket.broadcast('connectqueue', 'priority.removed', payload);
+    dispatcher.dispatch('connectqueue.priority.removed', payload);
     sendOk(res, { deleted: true }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'QUEUE_PRIORITY_DELETE_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);

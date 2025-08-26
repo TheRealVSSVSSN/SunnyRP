@@ -470,3 +470,7 @@ Extended camera module with WebSocket and webhook pushes plus scheduled retentio
 ## Update – 2025-08-26
 
 Extended HUD module with vehicle state tracking, WebSocket broadcasts and scheduled cleanup.
+
+## Update – 2025-08-26
+
+Extended connect queue module with WebSocket/webhook priority events and scheduled expiry purge.

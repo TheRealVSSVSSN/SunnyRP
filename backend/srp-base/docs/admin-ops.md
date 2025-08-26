@@ -34,6 +34,7 @@
 - Ensure the `carwash_transactions` and `vehicle_cleanliness` tables exist for carwash tracking.
 - Ensure the `chat_messages` table exists for chat logging. Messages older than `CHAT_RETENTION_MS` are purged hourly by the `chat-purge` scheduler.
 - Ensure the `queue_priorities` table exists for connection queue priority management.
+- Monitor `connectqueue-expiry` scheduler purging expired priorities; priority updates emit `connectqueue.priority.*` webhooks.
 - Ensure the `character_coords` table exists for saved coordinates.
 - Ensure the `interiors` table exists for apartment interior layouts.
 - Ensure the `character_emotes` table exists for favorite emotes.

@@ -73,3 +73,4 @@
 | 67 | carandplayerhud | Vehicle and player HUD status sync | Extend | Added vehicle-state API with WebSocket broadcast and cleanup scheduler |
 | 68 | carwash realtime | Vehicle dirt ticks and broadcasts | Extend | Mounted routes, added scheduler, WS & webhook pushes |
 | 69 | chat realtime | In-game chat WS/webhook push and retention purge | Extend | Broadcast `chat.message` and purge old entries |
+| 70 | connectqueue realtime | Queue priority pushes and expiry purge | Extend | Broadcast `priority.*` events and scheduler cleanup |

@@ -529,6 +529,7 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
   - `GET /v1/connectqueue/priorities` – List queue priorities optionally filtered by `accountId`.
   - `POST /v1/connectqueue/priorities` – Upsert a priority with `accountId`, `priority`, optional `reason` and `expiresAt`.
   - `DELETE /v1/connectqueue/priorities/{accountId}` – Remove priority for an account.
+  - Emits WebSocket/webhook events `priority.upserted`, `priority.removed` and `priority.expired`; `connectqueue-expiry` scheduler purges expired entries.
 - **srp-hardcap** – Manages server connection limits and active sessions.
   - `GET /v1/hardcap/status` – Current max players, reserved slots and active count.
   - `POST /v1/hardcap/config` – Update max player and reserved slot settings.
