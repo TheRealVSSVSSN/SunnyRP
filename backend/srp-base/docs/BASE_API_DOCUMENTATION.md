@@ -513,8 +513,10 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
     - `DELETE /v1/camera/photos/{id}` – Remove a photo record; broadcasts `camera.photo.deleted`.
     - Scheduler purges photos older than `CAMERA_RETENTION_MS` at `CAMERA_CLEANUP_INTERVAL_MS`.
   - **srp-hud** – Stores per-character HUD settings.
-  - `GET /v1/characters/{characterId}/hud` – Retrieve HUD preferences.
-  - `PUT /v1/characters/{characterId}/hud` – Update HUD preferences.
+- `GET /v1/characters/{characterId}/hud` – Retrieve HUD preferences.
+- `PUT /v1/characters/{characterId}/hud` – Update HUD preferences.
+- `GET /v1/characters/{characterId}/vehicle-state` – Retrieve vehicle HUD state.
+- `PUT /v1/characters/{characterId}/vehicle-state` – Update vehicle HUD state (broadcasts `hud.vehicleState`).
 - **srp-carwash** – Records vehicle washes and dirt levels.
   - `POST /v1/carwash` – Record a car wash (`characterId`, `plate`, `location`, `cost`).
   - `GET /v1/carwash/history/{characterId}` – List recent washes for a character.

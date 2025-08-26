@@ -30,6 +30,7 @@
 - Scheduler `boatshop-catalog-broadcast` pushes catalog updates; monitor logs for successful runs.
 - Ensure the `camera_photos` table exists for stored photos.
 - Ensure the `character_hud_preferences` table exists for HUD settings.
+- Ensure the `character_vehicle_status` table exists for vehicle HUD state.
 - Ensure the `carwash_transactions` and `vehicle_cleanliness` tables exist for carwash tracking.
 - Ensure the `chat_messages` table exists for chat logging.
 - Ensure the `queue_priorities` table exists for connection queue priority management.

@@ -18,3 +18,4 @@
 | boatshop | boatshop |
 | bob74_ipl | ipl |
 | np-camera | camera |
+| carandplayerhud | hud |

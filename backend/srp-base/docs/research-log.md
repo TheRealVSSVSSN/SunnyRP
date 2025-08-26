@@ -311,3 +311,8 @@
 ## Research Log – 2025-08-26 (camera)
 
 - Attempted to clone reference repository `https://github.com/h04X-2K/NoPixelServer` for camera resource but download size was prohibitive. Reference resources unavailable; proceeding with internal consistency only.
+
+## Research Log – 2025-08-26 (carandplayerhud)
+
+- Attempted to clone `https://github.com/h04X-2K/NoPixelServer` for carandplayerhud but checkout failed due to repository size. Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed EssentialMode, ESX, ND Core, FSN, QB-Core, vRP and vORP naming around seatbelt and vehicle status features.

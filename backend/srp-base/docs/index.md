@@ -466,3 +466,7 @@ For resource decisions see `progress-ledger.md`. Module details are documented i
 ## Update – 2025-08-26
 
 Extended camera module with WebSocket and webhook pushes plus scheduled retention cleanup.
+
+## Update – 2025-08-26
+
+Extended HUD module with vehicle state tracking, WebSocket broadcasts and scheduled cleanup.
