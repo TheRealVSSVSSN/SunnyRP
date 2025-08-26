@@ -15,6 +15,7 @@ const economyTasks = require('./tasks/economy');
 const baseEventTasks = require('./tasks/baseEvents');
 const boatshopTasks = require('./tasks/boatshop');
 const worldTasks = require('./tasks/world');
+const cameraTasks = require('./tasks/camera');
 
 // Register Prometheus metrics if enabled.  This must be done before
 // the server starts so that middleware can increment counters.
@@ -81,6 +82,12 @@ scheduler.register(
   () => worldTasks.broadcastIpls(wss),
   worldTasks.INTERVAL_MS,
   { jitter: 5000, persistName: worldTasks.JOB_NAME },
+);
+scheduler.register(
+  cameraTasks.JOB_NAME,
+  () => cameraTasks.purgeOld(),
+  cameraTasks.INTERVAL_MS,
+  { jitter: 60000 },
 );
 
 // Handle graceful shutdown

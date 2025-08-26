@@ -84,6 +84,7 @@ Added `world_forecast` table for weather scheduling. K9 migration renamed to 057
 | heading | FLOAT | Orientation |
 | created_at | TIMESTAMP | Creation time |
 | updated_at | TIMESTAMP | Update time |
+| indexes | - | `idx_camera_photos_character_id` on `character_id`, `idx_camera_photos_created_at` on `created_at` |
 ## evidence_chain
 
 | Column | Type | Notes |

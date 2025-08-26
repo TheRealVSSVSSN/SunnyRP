@@ -69,3 +69,4 @@
 | 63 | baseevents | Base event logging with realtime and retention | Extend | Broadcast log events and purge stale records |
 | 64 | boatshop realtime | Catalog broadcasts and purchase pushes | Extend | WebSocket/webhook events and scheduler |
 | 65 | bob74_ipl | Interior proxy toggle persistence and broadcast | Create | Added IPL state API and scheduler |
+| 66 | camera realtime | Photo create/delete push events and retention purge | Extend | Broadcast events and purge old photos |

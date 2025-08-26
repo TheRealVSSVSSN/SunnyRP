@@ -1364,3 +1364,18 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Drop `ipl_states` table and remove IPL scheduler registration.
+
+## 2025-08-26 – Camera realtime
+
+### Added
+* WebSocket and webhook events for camera photo creation and deletion.
+* Scheduler purges photos older than `CAMERA_RETENTION_MS`.
+
+### Migrations
+* `069_add_camera_photos_created_index.sql` adds index on `camera_photos.created_at`.
+
+### Risks
+* Misconfigured retention may delete photos prematurely.
+
+### Rollback
+* Remove camera scheduler registration and drop index `idx_camera_photos_created_at`.
