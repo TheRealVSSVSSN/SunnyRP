@@ -16,6 +16,7 @@
 | assets_clothes | Resource saves and retrieves character outfits | `GET /v1/clothes`, `POST /v1/clothes`, `DELETE /v1/clothes/{id}` |
 | properties | Resource manages apartments, garages and rentals with ownership and lease events | `GET/POST/PATCH/DELETE /v1/properties`; broadcasts `properties.propertyCreated`/`properties.propertyUpdated`/`properties.propertyDeleted` |
 | banking | Resource processes deposits, withdrawals, transfers and invoices | `POST /v1/characters/{characterId}/account:deposit`, `POST /v1/characters/{characterId}/account:withdraw`, `POST /v1/transactions`, `POST /v1/invoices` |
+| bob74_ipl | Resource toggles interior proxies (IPLs) for world interiors | `GET/POST/DELETE /v1/world/ipls` → pushes `world.ipl.updated`; scheduler broadcasts `world.ipl.sync` |
 | maps | No server events; world mapping assets | N/A |
 | furnished-shells | No server events; interior shell assets | N/A |
 | Cron | Resource triggers scheduled events for maintenance and gameplay loops | `GET /v1/cron/jobs`, `POST /v1/cron/jobs` |
@@ -26,7 +27,6 @@
 | yuzler | No server events; clothing assets | N/A |
 | baseevents | Emits player join, drop and kill events | `POST /v1/base-events` logs events and broadcasts `base-events.logged`; `GET /v1/base-events` lists history |
 | boatshop | Resource sends purchase requests for boats | `GET /v1/boatshop`, `POST /v1/boatshop/purchase` → broadcasts `boatshop.catalog` (scheduled) and `boatshop.purchase` |
-| bob74_ipl | Loads interior proxies; no server events | N/A |
 | camera | Resource captures photos and uploads metadata | `GET /v1/camera/photos/{characterId}`, `POST /v1/camera/photos`, `DELETE /v1/camera/photos/{id}` |
 | carandplayerhud | Resource broadcasts HUD updates when preferences change | `GET /v1/characters/{characterId}/hud`, `PUT /v1/characters/{characterId}/hud` |
 | carwash | Resource triggers wash events with plate and cost | `POST /v1/carwash`, `GET /v1/carwash/history/{characterId}`, `GET/PATCH /v1/vehicles/{plate}/dirt` |

@@ -1348,3 +1348,19 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Remove boatshop scheduler registration and event broadcasts.
+
+## 2025-08-25 – World IPL states
+
+### Added
+* `/v1/world/ipls` endpoints for listing, upserting and removing interior proxy states.
+* WebSocket events `world.ipl.updated` and `world.ipl.sync`.
+* Scheduler `world-ipl-sync` broadcasts active states.
+
+### Migrations
+* `068_add_ipls.sql` creates `ipl_states` table.
+
+### Risks
+* Misconfigured IPL names may desync interiors.
+
+### Rollback
+* Drop `ipl_states` table and remove IPL scheduler registration.

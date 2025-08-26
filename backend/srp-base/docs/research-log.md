@@ -302,3 +302,8 @@
 - Attempted to clone `https://github.com/h04X-2K/NoPixelServer` boatshop resource but repository size was prohibitive. Reference resources unavailable; proceeding with internal consistency only.
 - Community thread: "NoPixel 4.0 – Maritime Commerce" – https://forum.example.com/nopixel-maritime-commerce
 - Community thread: "ProdigyRP 4.0 – Boat Dealerships" – https://forum.example.com/prodigy-boat-dealerships
+
+## Research Log – 2025-08-25 (bob74_ipl)
+
+- Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed EssentialMode, ESX, ND_Core, FSN, QB-Core, vRP and vORP frameworks for world interior toggle patterns (names/flows only).
