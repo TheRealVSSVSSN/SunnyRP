@@ -5968,6 +5968,8 @@ paths:
     post:
       summary: Create a photo
       operationId: createCameraPhoto
+      x-websocket-event: camera.photo.created
+      x-webhook-event: camera.photo.created
       requestBody:
         required: true
         content:
@@ -5999,6 +6001,8 @@ paths:
     delete:
       summary: Delete a photo
       operationId: deleteCameraPhoto
+      x-websocket-event: camera.photo.deleted
+      x-webhook-event: camera.photo.deleted
       parameters:
         - in: path
           name: id

@@ -507,11 +507,12 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
   - `GET /v1/boatshop` – List boats available for purchase.
   - `POST /v1/boatshop/purchase` – Purchase a boat with `characterId`, `boatId`, `plate` and optional `properties`.
   - Scheduler broadcasts `boatshop.catalog` every 5 minutes; purchases emit `boatshop.purchase` over WebSocket and webhooks.
-- **srp-camera** – Stores character photos.
-  - `GET /v1/camera/photos/{characterId}` – List photos for a character.
-  - `POST /v1/camera/photos` – Save a photo with `characterId`, `imageUrl` and optional `description`.
-  - `DELETE /v1/camera/photos/{id}` – Remove a photo record.
-- **srp-hud** – Stores per-character HUD settings.
+  - **srp-camera** – Stores character photos and broadcasts changes.
+    - `GET /v1/camera/photos/{characterId}` – List photos for a character.
+    - `POST /v1/camera/photos` – Save a photo with `characterId`, `imageUrl` and optional `description`; broadcasts `camera.photo.created` over WebSocket and webhooks.
+    - `DELETE /v1/camera/photos/{id}` – Remove a photo record; broadcasts `camera.photo.deleted`.
+    - Scheduler purges photos older than `CAMERA_RETENTION_MS` at `CAMERA_CLEANUP_INTERVAL_MS`.
+  - **srp-hud** – Stores per-character HUD settings.
   - `GET /v1/characters/{characterId}/hud` – Retrieve HUD preferences.
   - `PUT /v1/characters/{characterId}/hud` – Update HUD preferences.
 - **srp-carwash** – Records vehicle washes and dirt levels.

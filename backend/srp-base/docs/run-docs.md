@@ -1,21 +1,16 @@
-# Run Summary – 2025-08-25
+# Run Summary – 2025-08-26
 
 ## Modules
-- World module: added IPL state management with WebSocket broadcasts and scheduler sync.
+- Camera module: added WebSocket and webhook pushes plus scheduled retention cleanup.
 
 ## Documentation Updated
 - docs/index.md
 - docs/progress-ledger.md
-- docs/framework-compliance.md
-- docs/BASE_API_DOCUMENTATION.md
 - docs/events-and-rpcs.md
 - docs/db-schema.md
 - docs/migrations.md
-- docs/admin-ops.md
-- docs/modules/world.md
-- docs/research-log.md
+- docs/modules/camera.md
 - docs/naming-map.md
-- docs/todo-gaps.md
 - docs/run-docs.md
 
 ## Outstanding TODO/Gaps

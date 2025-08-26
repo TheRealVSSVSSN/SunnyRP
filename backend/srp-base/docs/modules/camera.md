@@ -16,6 +16,15 @@ There is no feature flag for camera; the module is always enabled.
 | **POST `/v1/camera/photos`** | Create a new photo. Requires `characterId` and `imageUrl`. | 30/min per IP | Required | Yes | `CameraPhotoCreateRequest` | `{ ok, data: { photo: CameraPhoto }, requestId, traceId }` |
 | **DELETE `/v1/camera/photos/{id}`** | Delete a photo by ID. | 30/min per IP | Required | Yes | None | `{ ok, data: {}, requestId, traceId }` |
 
+### Real-time events
+
+| Channel | Event | Payload |
+|---|---|---|
+| `camera` | `photo.created` | `{ photo }` |
+| `camera` | `photo.deleted` | `{ id }` |
+
+Both events are also dispatched through the webhook dispatcher using event types `camera.photo.created` and `camera.photo.deleted`.
+
 ### Schemas
 
 * **CameraPhoto** –
@@ -41,7 +50,10 @@ There is no feature flag for camera; the module is always enabled.
 * **Migration:** `src/migrations/036_add_camera_photos.sql` creates the
   `camera_photos` table with foreign key to characters.
 * **Routes:** `src/routes/camera.routes.js` defines the REST API.
+  Photo creation and deletion broadcast over WebSocket and webhook dispatcher.
 * **OpenAPI:** `openapi/api.yaml` documents schemas and paths.
+* **Scheduler:** `src/tasks/camera.js` purges photos older than `CAMERA_RETENTION_MS` at `CAMERA_CLEANUP_INTERVAL_MS`.
+* **Config:** Set `CAMERA_RETENTION_MS` and `CAMERA_CLEANUP_INTERVAL_MS` in environment variables to adjust retention and purge interval.
 
 ## Future work
 

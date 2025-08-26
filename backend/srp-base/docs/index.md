@@ -462,3 +462,7 @@ Introduced interior proxy state management to support the **bob74_ipl** resource
 * Added world IPL endpoints `/v1/world/ipls` and `/v1/world/ipls/{name}` with WebSocket broadcasts and scheduled sync.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/world.md`.
+
+## Update – 2025-08-26
+
+Extended camera module with WebSocket and webhook pushes plus scheduled retention cleanup.

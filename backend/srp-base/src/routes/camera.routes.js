@@ -5,6 +5,8 @@ const {
   createPhoto,
   deletePhoto,
 } = require('../repositories/cameraRepository');
+const websocket = require('../realtime/websocket');
+const dispatcher = require('../hooks/dispatcher');
 
 const router = express.Router();
 
@@ -44,6 +46,8 @@ router.post('/v1/camera/photos', async (req, res) => {
   }
   try {
     const photo = await createPhoto({ characterId: idNum, imageUrl, description });
+    websocket.broadcast('camera', 'photo.created', { photo });
+    dispatcher.dispatch('camera.photo.created', photo);
     sendOk(res, { photo }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'CAMERA_CREATE_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);
@@ -65,6 +69,8 @@ router.delete('/v1/camera/photos/:id', async (req, res) => {
   }
   try {
     await deletePhoto(idNum);
+    websocket.broadcast('camera', 'photo.deleted', { id: idNum });
+    dispatcher.dispatch('camera.photo.deleted', { id: idNum });
     sendOk(res, {}, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'CAMERA_DELETE_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);

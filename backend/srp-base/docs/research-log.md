@@ -307,3 +307,7 @@
 
 - Reference resources unavailable; proceeding with internal consistency only.
 - Reviewed EssentialMode, ESX, ND_Core, FSN, QB-Core, vRP and vORP frameworks for world interior toggle patterns (names/flows only).
+
+## Research Log – 2025-08-26 (camera)
+
+- Attempted to clone reference repository `https://github.com/h04X-2K/NoPixelServer` for camera resource but download size was prohibitive. Reference resources unavailable; proceeding with internal consistency only.
