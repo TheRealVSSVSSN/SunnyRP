@@ -65,3 +65,4 @@
 | 065_add_assets_created_index.sql | Index assets created_at column |
 | 066_add_properties.sql | Unified properties table for housing and rentals |
 | 067_add_invoices.sql | Invoices table for character billing |
+| 068_add_ipls.sql | IPL state table |

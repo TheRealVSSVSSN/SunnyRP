@@ -454,3 +454,11 @@ Enhanced base event logging with WebSocket pushes and retention.
 * Hourly `base-events-purge` scheduler removes logs older than `BASE_EVENT_RETENTION_MS`.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/baseevents.md`.
+
+## Update – 2025-08-25
+
+Introduced interior proxy state management to support the **bob74_ipl** resource.
+
+* Added world IPL endpoints `/v1/world/ipls` and `/v1/world/ipls/{name}` with WebSocket broadcasts and scheduled sync.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/world.md`.

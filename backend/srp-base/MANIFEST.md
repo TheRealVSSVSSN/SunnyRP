@@ -1,25 +1,25 @@
 # Manifest
 
-- Boatshop module gains realtime WebSocket/webhook events and scheduled catalog broadcasts.
-- Express middleware reordered with global rate limiting.
-- Removed legacy duplicate `app.js` and `server.js` at repository root.
+- Added world IPL state management with WebSocket broadcasts and scheduler sync.
 
 | File | Action | Note |
 |---|---|---|
-| src/app.js | M | Order middleware and add global rate limiter |
-| src/routes/boatshop.routes.js | M | Broadcast purchase events |
-| src/tasks/boatshop.js | A | Scheduler to push catalog |
-| src/server.js | M | Register boatshop scheduler |
-| openapi/api.yaml | M | Document boatshop realtime behaviour |
-| docs/modules/boatshop.md | M | Note scheduler and events |
-| docs/events-and-rpcs.md | M | Map boatshop events |
-| docs/BASE_API_DOCUMENTATION.md | M | Describe boatshop pushes |
-| docs/testing.md | M | Add WebSocket verification step |
-| docs/admin-ops.md | M | Mention catalog scheduler |
-| docs/progress-ledger.md | M | Log boatshop realtime extension |
-| docs/index.md | M | Update run summary |
-| docs/naming-map.md | M | Map boatshop name |
-| docs/research-log.md | M | Record boatshop research |
-| docs/run-docs.md | A | Consolidated run notes |
-| app.js | D | Remove duplicate root file |
-| server.js | D | Remove duplicate root file |
+| src/repositories/iplRepository.js | A | Persist interior proxy states |
+| src/routes/world.routes.js | M | Expose IPL endpoints and broadcasts |
+| src/tasks/world.js | A | Scheduler to broadcast IPL state |
+| src/server.js | M | Register world IPL scheduler |
+| src/migrations/068_add_ipls.sql | A | Create `ipl_states` table |
+| openapi/api.yaml | M | Document IPL schemas and endpoints |
+| docs/BASE_API_DOCUMENTATION.md | M | Describe IPL APIs |
+| docs/events-and-rpcs.md | M | Map bob74_ipl events |
+| docs/db-schema.md | M | Add `ipl_states` table |
+| docs/migrations.md | M | Log migration 068 |
+| docs/admin-ops.md | M | Note `ipl_states` table requirement |
+| docs/modules/world.md | M | Document IPL routes and repository |
+| docs/index.md | M | Summarize bob74_ipl support |
+| docs/progress-ledger.md | M | Record bob74_ipl decision |
+| docs/framework-compliance.md | M | Add world IPL module evaluation |
+| docs/naming-map.md | M | Map bob74_ipl → ipl |
+| docs/research-log.md | M | Log bob74_ipl research |
+| docs/todo-gaps.md | M | Note OpenAPI world events gap |
+| docs/run-docs.md | M | Consolidated run notes |

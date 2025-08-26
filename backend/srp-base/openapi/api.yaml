@@ -39,6 +39,26 @@ components:
   # referenced elsewhere in the spec via $ref.  Adding contract here
   # enables clients to understand the structure of contract objects.
   schemas:
+    IplState:
+      type: object
+      properties:
+        name:
+          type: string
+        enabled:
+          type: boolean
+        updatedAt:
+          type: string
+          format: date-time
+    IplStateInput:
+      type: object
+      required:
+        - name
+        - enabled
+      properties:
+        name:
+          type: string
+        enabled:
+          type: boolean
     Contract:
       type: object
       properties:
@@ -7486,6 +7506,91 @@ paths:
       responses:
         '200':
           description: Clear acknowledgement
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/world/ipls:
+    get:
+      summary: List interior proxy states
+      responses:
+        '200':
+          description: List of IPL states
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      ipls:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/IplState'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    post:
+      summary: Upsert an interior proxy state
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IplStateInput'
+      responses:
+        '200':
+          description: Update acknowledgement
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/world/ipls/{name}:
+    delete:
+      summary: Remove an interior proxy state
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Removal acknowledgement
           content:
             application/json:
               schema:

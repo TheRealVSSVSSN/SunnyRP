@@ -101,9 +101,11 @@ practice is supported by citations.
 | **world module** | World state, forecast and timecycle endpoints follow the established layered pattern with authentication and idempotency. |
 | **dispatch module** | Dispatch alert endpoints follow the established layered pattern with authentication and idempotency. |
 | **properties module** | Property endpoints consolidate apartments, garages and rentals with layered design, rate limiting, idempotency, WebSocket/webhook events and lease expiry scheduler. |
+| **world IPL module** | Interior proxy endpoints follow layered design with WebSocket sync and scheduler broadcast. |
 
 ## Outstanding Items
 
 - Integrate OpenAPI validation middleware for all routes.
 - Add unit test coverage.
 - Migrate legacy apartments and garages routes to `/v1/properties`.
+- Document world event endpoints in OpenAPI.

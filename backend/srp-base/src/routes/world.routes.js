@@ -1,6 +1,8 @@
 const express = require('express');
 const { sendOk } = require('../utils/respond');
 const worldRepo = require('../repositories/worldRepository');
+const iplRepo = require('../repositories/iplRepository');
+const websocket = require('../realtime/websocket');
 
 // Routes for world state and events.  These endpoints provide a
 // foundation for FiveM resources that need to fetch or update
@@ -85,6 +87,41 @@ router.delete('/v1/world/timecycle', async (req, res, next) => {
   try {
     await worldRepo.clearTimecycleOverride();
     sendOk(res, { message: 'Timecycle override cleared' }, res.locals.requestId, res.locals.traceId);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// List all interior proxy states.
+router.get('/v1/world/ipls', async (req, res, next) => {
+  try {
+    const ipls = await iplRepo.list();
+    sendOk(res, { ipls }, res.locals.requestId, res.locals.traceId);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Upsert an interior proxy state. Clients should include idempotency and
+// HMAC headers for authentication and dedupe.
+router.post('/v1/world/ipls', async (req, res, next) => {
+  try {
+    const { name, enabled } = req.body || {};
+    await iplRepo.set(name, !!enabled);
+    websocket.broadcast('world', 'ipl.updated', { name, enabled: !!enabled });
+    sendOk(res, { message: 'IPL state updated' }, res.locals.requestId, res.locals.traceId);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Remove an interior proxy state.
+router.delete('/v1/world/ipls/:name', async (req, res, next) => {
+  try {
+    const { name } = req.params;
+    await iplRepo.remove(name);
+    websocket.broadcast('world', 'ipl.removed', { name });
+    sendOk(res, { message: 'IPL state removed' }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     next(err);
   }

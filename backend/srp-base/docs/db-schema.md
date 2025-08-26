@@ -570,3 +570,12 @@ Retention of sound play logs is controlled by `INTERACT_SOUND_RETENTION_MS`; old
 | expires_at | DATETIME | Lease expiration |
 | created_at | DATETIME | Creation time |
 | updated_at | DATETIME | Update time |
+
+## ipl_states
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| name | VARCHAR(100) | Unique IPL name |
+| enabled | TINYINT(1) | 1 when active |
+| updated_at | TIMESTAMP | Last update timestamp |
