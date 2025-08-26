@@ -1,23 +1,17 @@
 # Run Summary – 2025-08-26
 
 ## Modules
-- Camera module: added WebSocket and webhook pushes plus scheduled retention cleanup.
-- HUD module: added vehicle state API, WebSocket broadcast and cleanup scheduler.
+- Carwash module: mounted routes, WebSocket/webhook dirt updates and scheduler tick.
 
 ## Documentation Updated
-- docs/index.md
 - docs/progress-ledger.md
 - docs/events-and-rpcs.md
-- docs/db-schema.md
 - docs/migrations.md
-- docs/modules/camera.md
-- docs/modules/hud.md
+- docs/modules/carwash.md
 - docs/naming-map.md
 - docs/run-docs.md
 - docs/admin-ops.md
 - docs/framework-compliance.md
-- docs/todo-gaps.md
-- docs/research-log.md
 
 ## Outstanding TODO/Gaps
 - Migrate existing apartment and garage consumers to new properties API

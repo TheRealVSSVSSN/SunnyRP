@@ -50,6 +50,7 @@
 - Ensure the `k9_units` table exists after applying migration 057.
 - Ensure the `world_forecast` table exists for weather scheduling.
 - Configure webhook sinks via environment variables. Discord sink is scaffolded but disabled unless `WEBHOOK_DISCORD_ENABLED=1` and `WEBHOOK_DISCORD_URL` are set.
+- Carwash dirt updates are dispatched via webhook; register sinks if external systems require notifications.
 - Ensure the `world_timecycle` table exists for timecycle overrides.
 - Ensure the `ipl_states` table exists for interior proxy toggles.
 - Runtime sinks can be managed with `GET/POST/DELETE /v1/hooks/endpoints` (admin only). Rotate secrets by re-registering endpoints and removing old entries.

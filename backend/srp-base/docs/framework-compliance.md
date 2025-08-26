@@ -71,7 +71,7 @@ practice is supported by citations.
 | **boatshop module** | Boatshop endpoints follow the established layered pattern with authentication and idempotency. |
 | **camera module** | Photo storage endpoints follow the established layered pattern with authentication and idempotency. |
 | **hud module** | HUD preference and vehicle state endpoints follow the established layered pattern with authentication, idempotency and WebSocket broadcasts. |
-| **carwash module** | Carwash endpoints follow the established layered pattern with authentication and idempotency. |
+| **carwash module** | Carwash endpoints follow the established layered pattern with authentication and idempotency; dirt ticks broadcast via WebSocket and webhooks. |
 | **chat module** | Chat message endpoints follow the established layered pattern with authentication and idempotency. |
 | **connectqueue module** | Queue priority endpoints follow the established layered pattern with authentication, idempotency and rate limiting. |
 | **cron module** | Cron job endpoints follow the established layered pattern with authentication and idempotency. |

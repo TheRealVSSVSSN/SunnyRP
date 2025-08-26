@@ -1,6 +1,8 @@
 const express = require('express');
 const { sendOk, sendError } = require('../utils/respond');
 const carwashRepo = require('../repositories/carwashRepository');
+const websocket = require('../realtime/websocket');
+const hooks = require('../hooks/dispatcher');
 
 // Routes for vehicle car washes and dirt tracking.
 const router = express.Router();
@@ -19,6 +21,13 @@ router.post('/v1/carwash', async (req, res, next) => {
       );
     }
     const { id } = await carwashRepo.recordWash({
+      characterId: Number(characterId),
+      plate,
+      location,
+      cost: Number(cost),
+    });
+    websocket.broadcast('vehicles', 'dirt.update', { plate, dirt: 0 });
+    hooks.dispatch('carwash.wash', {
       characterId: Number(characterId),
       plate,
       location,
@@ -67,6 +76,8 @@ router.patch('/v1/vehicles/:plate/dirt', async (req, res, next) => {
       );
     }
     const updated = await carwashRepo.setDirtByPlate(plate, Number(dirt));
+    websocket.broadcast('vehicles', 'dirt.update', { plate, dirt: Number(dirt) });
+    hooks.dispatch('carwash.dirt.set', { plate, dirt: Number(dirt) });
     sendOk(res, { updated }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     next(err);

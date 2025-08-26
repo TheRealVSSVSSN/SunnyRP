@@ -19,3 +19,6 @@
 | bob74_ipl | ipl |
 | np-camera | camera |
 | carandplayerhud | hud |
+| carwash:checkmoney | POST /v1/carwash |
+| carwash:success | vehicles.dirt.update |
+| notenoughmoney | error: INSUFFICIENT_FUNDS |

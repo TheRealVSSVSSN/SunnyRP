@@ -33,6 +33,7 @@ const lootRoutes = require('./routes/loot.routes');
 const inventoryRoutes = require('./routes/inventory.routes');
 const economyRoutes = require('./routes/economy.routes');
 const vehiclesRoutes = require('./routes/vehicles.routes');
+const carwashRoutes = require('./routes/carwash.routes');
 const worldRoutes = require('./routes/world.routes');
 const jobsRoutes = require('./routes/jobs.routes');
 
@@ -202,6 +203,7 @@ app.use(lootRoutes);
 app.use(inventoryRoutes);
 app.use(economyRoutes);
 app.use(vehiclesRoutes);
+app.use(carwashRoutes);
 app.use(worldRoutes);
 app.use(jobsRoutes);
 
