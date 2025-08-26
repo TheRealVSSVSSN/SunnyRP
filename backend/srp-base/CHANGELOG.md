@@ -1395,3 +1395,16 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Drop `character_vehicle_status` table and remove HUD scheduler registration.
+
+## 2025-08-26 – Carwash realtime dirt
+
+### Added
+* Mounted carwash routes and broadcast dirt updates via WebSocket and webhooks.
+* Scheduler `carwash-dirt-tick` increments dirt levels.
+* `071_add_vehicle_cleanliness_dirt_index.sql` adds dirt_level index.
+
+### Risks
+* Misconfigured scheduler interval may flood notifications.
+
+### Rollback
+* Remove carwash scheduler registration and drop index `idx_vehicle_cleanliness_dirt`.

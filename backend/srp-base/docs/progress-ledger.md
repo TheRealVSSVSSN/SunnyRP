@@ -71,3 +71,4 @@
 | 65 | bob74_ipl | Interior proxy toggle persistence and broadcast | Create | Added IPL state API and scheduler |
 | 66 | camera realtime | Photo create/delete push events and retention purge | Extend | Broadcast events and purge old photos |
 | 67 | carandplayerhud | Vehicle and player HUD status sync | Extend | Added vehicle-state API with WebSocket broadcast and cleanup scheduler |
+| 68 | carwash realtime | Vehicle dirt ticks and broadcasts | Extend | Mounted routes, added scheduler, WS & webhook pushes |

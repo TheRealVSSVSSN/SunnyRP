@@ -64,9 +64,27 @@ async function setDirtByPlate(plate, dirt) {
   return result.affectedRows;
 }
 
+/**
+ * Increment dirt level for all tracked vehicles up to a maximum.
+ * Returns list of updated plates and new dirt levels.
+ * @param {number} delta
+ * @param {number} max
+ * @returns {Promise<Array<{plate:string,dirt_level:number}>>}
+ */
+async function incrementDirt(delta, max) {
+  const rows = await db.query('SELECT plate, dirt_level FROM vehicle_cleanliness WHERE dirt_level < ?', [max]);
+  if (!rows.length) return [];
+  await db.query(
+    'UPDATE vehicle_cleanliness SET dirt_level = LEAST(dirt_level + ?, ?) WHERE dirt_level < ?'
+      , [delta, max, max],
+  );
+  return rows.map((r) => ({ plate: r.plate, dirt_level: Math.min(r.dirt_level + delta, max) }));
+}
+
 module.exports = {
   recordWash,
   getHistory,
   getDirtByPlate,
   setDirtByPlate,
+  incrementDirt,
 };

@@ -29,7 +29,7 @@
 | boatshop | Resource sends purchase requests for boats | `GET /v1/boatshop`, `POST /v1/boatshop/purchase` → broadcasts `boatshop.catalog` (scheduled) and `boatshop.purchase` |
 | camera | Resource captures photos and uploads metadata | `GET /v1/camera/photos/{characterId}`, `POST /v1/camera/photos`, `DELETE /v1/camera/photos/{id}` → pushes `camera.photo.created`/`camera.photo.deleted` |
 | carandplayerhud | Resource broadcasts HUD updates and vehicle state changes | `GET /v1/characters/{characterId}/hud`, `PUT /v1/characters/{characterId}/hud`, `GET /v1/characters/{characterId}/vehicle-state`, `PUT /v1/characters/{characterId}/vehicle-state` → WebSocket `hud.vehicleState` |
-| carwash | Resource triggers wash events with plate and cost | `POST /v1/carwash`, `GET /v1/carwash/history/{characterId}`, `GET/PATCH /v1/vehicles/{plate}/dirt` |
+| carwash | `carwash:checkmoney`, `carwash:success`, `notenoughmoney` | `POST /v1/carwash`, `GET /v1/carwash/history/{characterId}`, `GET/PATCH /v1/vehicles/{plate}/dirt`; dirt changes push `vehicles.dirt.update` |
 | chat | Resource broadcasts chat messages | `POST /v1/chat/messages` logs message; history via `GET /v1/chat/messages/{characterId}` |
 | connectqueue | Resource uses exports `AddPriority` and `RemovePriority` with account identifiers | `GET/POST/DELETE /v1/connectqueue/priorities` manage backend priority records |
 | coordsaver | Resource lets players save named coordinates | `GET /v1/characters/{characterId}/coords`, `POST /v1/characters/{characterId}/coords`, `DELETE /v1/characters/{characterId}/coords/{id}` |
