@@ -316,3 +316,8 @@
 
 - Attempted to clone `https://github.com/h04X-2K/NoPixelServer` for carandplayerhud but checkout failed due to repository size. Reference resources unavailable; proceeding with internal consistency only.
 - Reviewed EssentialMode, ESX, ND Core, FSN, QB-Core, vRP and vORP naming around seatbelt and vehicle status features.
+
+## Research Log – 2025-08-26 (chat)
+
+- Attempted to clone `https://github.com/h04X-2K/NoPixelServer` for chat resource but download was interrupted due to size. Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed chat/message implementations in EssentialMode, ESX, ND Core, FSN Framework, QB-Core, vRP and vORP to align naming and real-time patterns.

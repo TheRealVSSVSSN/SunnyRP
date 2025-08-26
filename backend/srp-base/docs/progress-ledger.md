@@ -72,3 +72,4 @@
 | 66 | camera realtime | Photo create/delete push events and retention purge | Extend | Broadcast events and purge old photos |
 | 67 | carandplayerhud | Vehicle and player HUD status sync | Extend | Added vehicle-state API with WebSocket broadcast and cleanup scheduler |
 | 68 | carwash realtime | Vehicle dirt ticks and broadcasts | Extend | Mounted routes, added scheduler, WS & webhook pushes |
+| 69 | chat realtime | In-game chat WS/webhook push and retention purge | Extend | Broadcast `chat.message` and purge old entries |

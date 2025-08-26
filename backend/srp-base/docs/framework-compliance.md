@@ -72,7 +72,7 @@ practice is supported by citations.
 | **camera module** | Photo storage endpoints follow the established layered pattern with authentication and idempotency. |
 | **hud module** | HUD preference and vehicle state endpoints follow the established layered pattern with authentication, idempotency and WebSocket broadcasts. |
 | **carwash module** | Carwash endpoints follow the established layered pattern with authentication and idempotency; dirt ticks broadcast via WebSocket and webhooks. |
-| **chat module** | Chat message endpoints follow the established layered pattern with authentication and idempotency. |
+| **chat module** | Chat endpoints follow the layered pattern with authentication, idempotency, WebSocket/webhook broadcasts and hourly purge scheduler. |
 | **connectqueue module** | Queue priority endpoints follow the established layered pattern with authentication, idempotency and rate limiting. |
 | **cron module** | Cron job endpoints follow the established layered pattern with authentication and idempotency. |
 | **coordsaver module** | Coordinate endpoints follow the established layered pattern with authentication and idempotency. |

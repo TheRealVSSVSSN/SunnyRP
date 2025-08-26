@@ -69,3 +69,4 @@
 | 069_add_camera_photos_created_index.sql | Index camera_photos created_at |
 | 070_add_character_vehicle_status.sql | Vehicle HUD state table |
 | 071_add_vehicle_cleanliness_dirt_index.sql | Index dirt_level for vehicle_cleanliness |
+| 072_add_chat_messages_created_index.sql | Index chat_messages created_at column |

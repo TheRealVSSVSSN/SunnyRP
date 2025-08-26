@@ -1,6 +1,8 @@
 # Chat Module
 
 The chat module records text messages sent in game. Each message is tied to a character and includes the channel and timestamp.
+New messages are broadcast to connected clients via WebSocket and to external sinks via the webhook dispatcher. A scheduler
+purges messages older than `CHAT_RETENTION_MS` (default 7 days).
 
 ## Feature flag
 
@@ -33,9 +35,11 @@ There is no feature flag for chat; the module is always enabled.
 ## Implementation details
 
 * **Repository:** `src/repositories/chatRepository.js` stores and retrieves messages.
-* **Migration:** `src/migrations/039_add_chat_messages.sql` creates the `chat_messages` table.
-* **Routes:** `src/routes/chat.routes.js` defines the REST API.
-* **OpenAPI:** `openapi/api.yaml` documents schemas and paths.
+* **Migration:** `src/migrations/039_add_chat_messages.sql` creates the `chat_messages` table. Index `idx_chat_messages_created_at`
+  is added in `072_add_chat_messages_created_index.sql` for retention cleanup.
+* **Routes:** `src/routes/chat.routes.js` defines the REST API and emits `chat.message` events over WebSocket and webhooks.
+* **Task:** `src/tasks/chat.js` purges messages older than `config.chat.retentionMs`.
+* **OpenAPI:** `openapi/api.yaml` documents schemas and paths including event notes.
 
 ## Future work
 
