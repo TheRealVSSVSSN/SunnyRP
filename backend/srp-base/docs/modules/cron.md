@@ -42,11 +42,12 @@ There is no feature flag for cron; the module is always enabled.
 
 ## Implementation details
 
-* **Repository:** `src/repositories/cronRepository.js` manages job persistence.
-* **Migration:** `src/migrations/041_add_cron_jobs.sql` creates the `cron_jobs` table.
+* **Repository:** `src/repositories/cronRepository.js` manages job persistence and rescheduling.
+* **Migration:** `src/migrations/042_add_cron_jobs.sql` creates the `cron_jobs` table.
 * **Routes:** `src/routes/cron.routes.js` exposes REST endpoints.
+* **Scheduler:** `src/tasks/cron.js` polls due jobs, broadcasts `cron.execute` over WebSocket and dispatches webhooks.
 * **OpenAPI:** `openapi/api.yaml` documents schemas and paths.
 
 ## Future work
 
-Cron execution workers could consume this schedule to trigger server events.
+Additional job types and administrative endpoints could further expand scheduling capabilities.

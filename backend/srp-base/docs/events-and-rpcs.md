@@ -19,7 +19,7 @@
 | bob74_ipl | Resource toggles interior proxies (IPLs) for world interiors | `GET/POST/DELETE /v1/world/ipls` → pushes `world.ipl.updated`; scheduler broadcasts `world.ipl.sync` |
 | maps | No server events; world mapping assets | N/A |
 | furnished-shells | No server events; interior shell assets | N/A |
-| Cron | Resource triggers scheduled events for maintenance and gameplay loops | `GET /v1/cron/jobs`, `POST /v1/cron/jobs` |
+| Cron | Resource triggers scheduled events for maintenance and gameplay loops | `GET /v1/cron/jobs`, `POST /v1/cron/jobs`; scheduler broadcasts `cron.execute` |
 | hair-pack | No server events; cosmetic hair assets | N/A |
 | mh65c | No server events; vehicle model asset | N/A |
 | motel | No server events; building interior asset | N/A |

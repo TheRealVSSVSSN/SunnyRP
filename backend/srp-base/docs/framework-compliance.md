@@ -74,7 +74,7 @@ practice is supported by citations.
 | **carwash module** | Carwash endpoints follow the established layered pattern with authentication and idempotency; dirt ticks broadcast via WebSocket and webhooks. |
 | **chat module** | Chat endpoints follow the layered pattern with authentication, idempotency, WebSocket/webhook broadcasts and hourly purge scheduler. |
 | **connectqueue module** | Queue priority endpoints follow the established layered pattern with authentication, idempotency and rate limiting; updates broadcast via WebSocket/webhooks and expired priorities purged by scheduler. |
-| **cron module** | Cron job endpoints follow the established layered pattern with authentication and idempotency. |
+| **cron module** | Cron job endpoints follow the layered pattern with authentication and idempotency; a scheduler now executes due jobs and pushes `cron.execute` over WebSocket/webhooks. |
 | **coordinates module** | Coordinate endpoints follow the established layered pattern with authentication, idempotency, WebSocket/webhook events and scheduled cleanup. |
 | **interiors module** | Interior endpoints follow the established layered pattern with authentication and idempotency. |
 | **emotes module** | Favorite emote endpoints follow the established layered pattern with authentication and idempotency. |

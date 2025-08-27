@@ -21,6 +21,7 @@ const carwashTasks = require('./tasks/carwash');
 const chatTasks = require('./tasks/chat');
 const connectqueueTasks = require('./tasks/connectqueue');
 const coordinatesTasks = require('./tasks/coordinates');
+const cronTasks = require('./tasks/cron');
 
 // Register Prometheus metrics if enabled.  This must be done before
 // the server starts so that middleware can increment counters.
@@ -123,6 +124,12 @@ scheduler.register(
   () => coordinatesTasks.purgeOld(),
   coordinatesTasks.INTERVAL_MS,
   { jitter: 60000, persistName: coordinatesTasks.JOB_NAME },
+);
+scheduler.register(
+  cronTasks.JOB_NAME,
+  () => cronTasks.runDue(),
+  cronTasks.INTERVAL_MS,
+  { jitter: 5000, persistName: cronTasks.JOB_NAME },
 );
 
 // Handle graceful shutdown
