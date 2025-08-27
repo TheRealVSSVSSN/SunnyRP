@@ -1,6 +1,8 @@
 const express = require('express');
 const { sendOk, sendError } = require('../utils/respond');
 const { getCharacterPed, upsertCharacterPed } = require('../repositories/pedsRepository');
+const websocket = require('../realtime/websocket');
+const hooks = require('../hooks/dispatcher');
 
 const router = express.Router();
 
@@ -59,6 +61,8 @@ router.put('/v1/characters/:characterId/ped', async (req, res, next) => {
       );
     }
     const ped = await upsertCharacterPed({ characterId: id, model, health: h, armor: a });
+    websocket.broadcast('peds', 'pedUpdated', ped);
+    hooks.dispatch('peds.updated', ped);
     sendOk(res, { ped }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     next(err);

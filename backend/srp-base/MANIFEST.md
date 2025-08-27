@@ -1,27 +1,22 @@
 # Manifest
 
-- Added import package expiry with WebSocket and webhook notifications.
+- Added ped WebSocket and webhook broadcasts with health regeneration scheduler.
 
 | File | Action | Note |
 |---|---|---|
-| src/config/env.js | M | Added import pack expiry configuration |
-| src/repositories/importPackRepository.js | M | Added expiresAt handling and expiry helper |
-| src/routes/importPack.routes.js | M | Broadcast order lifecycle events |
-| src/tasks/importPack.js | A | Scheduler to expire pending orders |
-| src/server.js | M | Registered import-pack expiry scheduler |
-| src/migrations/078_add_import_pack_expiry.sql | A | Add expires_at/expired_at columns and index |
-| openapi/api.yaml | M | Documented expiry fields and event descriptions |
-| docs/modules/import-pack.md | M | Documented realtime events and expiry |
-| docs/BASE_API_DOCUMENTATION.md | M | Added import pack endpoint summary |
-| docs/events-and-rpcs.md | M | Mapped import-pack events |
-| docs/db-schema.md | M | Added expires_at/expired_at columns |
-| docs/migrations.md | M | Logged import pack expiry migration |
-| docs/admin-ops.md | M | Added import pack expiry operations |
-| docs/index.md | M | Added import pack update summary |
-| docs/progress-ledger.md | M | Logged import pack expiry entry |
-| docs/framework-compliance.md | M | Noted import pack module compliance |
-| docs/naming-map.md | M | Added import-Pack mappings |
-| docs/research-log.md | M | Logged import pack expiry research |
-| docs/testing.md | M | Added import pack expiry test notes |
-| docs/todo-gaps.md | M | Added gap for editing import pack orders |
-| docs/run-docs.md | M | Run summary and outstanding tasks |
+| src/repositories/pedsRepository.js | M | Added health regeneration helper |
+| src/routes/peds.routes.js | M | Broadcast ped updates via WebSocket and webhooks |
+| src/realtime/websocket.js | M | Introduced namespaces and typed envelopes |
+| src/tasks/peds.js | A | Scheduler task for ped health regeneration |
+| src/server.js | M | Registered peds-health-regen scheduler |
+| docs/modules/peds.md | M | Documented realtime events and scheduler |
+| docs/BASE_API_DOCUMENTATION.md | M | Added peds WebSocket info |
+| docs/events-and-rpcs.md | M | Mapped isPed events to SRP API |
+| docs/admin-ops.md | M | Listed character_peds table and regen task |
+| docs/index.md | M | Logged isPed update summary |
+| docs/progress-ledger.md | M | Recorded isPed realtime entry |
+| docs/framework-compliance.md | M | Added peds module compliance note |
+| docs/naming-map.md | M | Mapped isPed → peds |
+| docs/research-log.md | M | Logged isPed resource research |
+| docs/todo-gaps.md | M | Added ped attributes outstanding item |
+| docs/run-docs.md | M | Consolidated documentation for this run |

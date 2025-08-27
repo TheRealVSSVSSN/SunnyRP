@@ -3,16 +3,13 @@
 ## Changed Docs
 - docs/admin-ops.md
 - docs/BASE_API_DOCUMENTATION.md
-- docs/db-schema.md
 - docs/events-and-rpcs.md
 - docs/framework-compliance.md
 - docs/index.md
-- docs/migrations.md
-- docs/modules/import-pack.md
+- docs/modules/peds.md
 - docs/naming-map.md
 - docs/progress-ledger.md
 - docs/research-log.md
-- docs/testing.md
 - docs/todo-gaps.md
 - docs/run-docs.md
 
@@ -21,16 +18,13 @@
 ### Docs Touched
 - docs/admin-ops.md
 - docs/BASE_API_DOCUMENTATION.md
-- docs/db-schema.md
 - docs/events-and-rpcs.md
 - docs/framework-compliance.md
 - docs/index.md
-- docs/migrations.md
-- docs/modules/import-pack.md
+- docs/modules/peds.md
 - docs/naming-map.md
 - docs/progress-ledger.md
 - docs/research-log.md
-- docs/testing.md
 - docs/todo-gaps.md
 - docs/run-docs.md
 
@@ -50,3 +44,4 @@
 | Implement call-sign management for police officers | backend | medium | design |
 | Add altitude and location tracking for helicopter flights | backend | low | design |
 | Support editing existing import pack orders | backend | low | design |
+| Persist additional ped attributes such as position and appearance | backend | low | none |

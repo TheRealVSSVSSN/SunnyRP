@@ -1610,3 +1610,20 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 * Drop columns `expires_at` and `expired_at` and index `idx_import_pack_orders_status_expires`.
 * Remove scheduler registration and related config keys.
+
+## 2025-08-27 (peds realtime)
+
+### Added
+* WebSocket namespaces with typed envelopes.
+* Ped update route broadcasts and webhook dispatch.
+* Scheduler `peds-health-regen` regenerates stored ped health.
+
+### Migrations
+* None
+
+### Risks
+* Increased database writes from periodic health ticks.
+
+### Rollback
+* Remove peds-health-regen scheduler and delete `src/tasks/peds.js`.
+* Revert websocket namespace changes in `src/realtime/websocket.js`.

@@ -603,6 +603,7 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
 
 - `GET /v1/characters/{characterId}/ped` – Retrieve ped model, health and armor.
 - `PUT /v1/characters/{characterId}/ped` – Upsert ped state (`model`, `health`, `armor`).
+- WebSocket topic `peds` publishes `peds.pedUpdated` and periodic `peds.healthRegen` events.
 
 
 ### Jailbreak

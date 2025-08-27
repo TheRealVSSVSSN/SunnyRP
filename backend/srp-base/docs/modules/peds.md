@@ -13,6 +13,16 @@ There is no feature flag for peds; the module is always enabled.
 | **GET `/v1/characters/{characterId}/ped`** | Retrieve ped state for a character. | 60/min per IP | Required | Yes | None | `{ ok, data: { ped: PedState|null }, requestId, traceId }` |
 | **PUT `/v1/characters/{characterId}/ped`** | Upsert ped state with `model`, `health` and `armor`. | 30/min per IP | Required | Yes | `PedStateUpdateRequest` | `{ ok, data: { ped: PedState }, requestId, traceId }` |
 
+## Realtime
+
+- **WebSocket topic:** `peds`
+  - `peds.pedUpdated` – emitted when a character's ped state is stored.
+  - `peds.healthRegen` – broadcast from scheduler with `{ amount, count }` when health regeneration runs.
+
+## Scheduler
+
+The `peds-health-regen` task runs every minute to regenerate ped health server-side and emits `peds.healthRegen` events.
+
 ### Schemas
 
 * **PedState** –
