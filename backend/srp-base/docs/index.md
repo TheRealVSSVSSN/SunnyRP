@@ -484,3 +484,9 @@ Renamed coordsaver to **coordinates** with real-time pushes and retention.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/coordinates.md`.
 Reference resources unavailable; proceeding with internal consistency only.
+
+## Update – 2025-08-27
+
+Added cron execution worker that polls due jobs and pushes `cron.execute` over WebSocket and webhooks.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/cron.md`.

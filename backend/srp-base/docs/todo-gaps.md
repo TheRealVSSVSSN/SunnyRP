@@ -9,3 +9,4 @@
 | Document world event endpoints in OpenAPI | backend | medium | spec alignment |
 | Integrate player vitals (hunger, thirst, stress) into HUD module | backend | medium | gameplay design |
 | Add admin bulk adjustment endpoints for queue priorities | backend | low | none |
+| Add admin endpoints for cron job management | backend | low | none |

@@ -1451,3 +1451,16 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 * Remove `coordinates-purge` scheduler registration and broadcast hooks.
 * Restore previous route and repository names if needed.
+
+## 2025-08-27 – Cron execution worker
+
+### Added
+* Scheduler task `cron-executor` broadcasting `cron.execute` via WebSocket and webhooks.
+* Repository helpers for due job queries and rescheduling.
+* Documentation for cron realtime events.
+
+### Risks
+* Misconfigured cron expressions may schedule jobs too frequently.
+
+### Rollback
+* Remove cron executor registration and repository helpers.

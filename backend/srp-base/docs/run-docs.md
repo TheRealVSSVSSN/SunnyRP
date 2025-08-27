@@ -1,21 +1,18 @@
-# Run Summary – 2025-08-26
+# Run Summary – 2025-08-27
 
 ## Modules
-- Coordinates: renamed from coordsaver with WebSocket/webhook events and daily purge scheduler.
+- Cron: added execution worker with WebSocket and webhook pushes.
 
 ## Documentation Updated
 - docs/progress-ledger.md
 - docs/events-and-rpcs.md
-- docs/modules/coordinates.md
-- docs/admin-ops.md
+- docs/modules/cron.md
 - docs/BASE_API_DOCUMENTATION.md
 - docs/framework-compliance.md
-- docs/naming-map.md
 - docs/index.md
-- docs/testing.md
 - docs/research-log.md
-- docs/migrations.md
 - docs/run-docs.md
+- docs/todo-gaps.md
 
 ## Outstanding TODO/Gaps
 | Item | Owner | Priority | Blockers |
@@ -27,3 +24,4 @@
 | Document world event endpoints in OpenAPI | backend | medium | spec alignment |
 | Integrate player vitals (hunger, thirst, stress) into HUD module | backend | medium | gameplay design |
 | Add admin bulk adjustment endpoints for queue priorities | backend | low | none |
+| Add admin endpoints for cron job management | backend | low | none |

@@ -75,3 +75,4 @@
 | 69 | chat realtime | In-game chat WS/webhook push and retention purge | Extend | Broadcast `chat.message` and purge old entries |
 | 70 | connectqueue realtime | Queue priority pushes and expiry purge | Extend | Broadcast `priority.*` events and scheduler cleanup |
 | 71 | coordsaver → coordinates | Rename with realtime events and retention | Extend | Broadcast saves/deletes, daily purge task |
+| 72 | cron | Scheduled job execution pushes | Extend | Added cron executor with WebSocket/webhook dispatch |

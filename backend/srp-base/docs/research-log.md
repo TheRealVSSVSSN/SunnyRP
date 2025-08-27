@@ -138,6 +138,11 @@
 - Video: "NoPixel 4.0 Dev Update – World Timers" – https://www.youtube.com/watch?v=dQw4w9WgXcQ
 - Forum thread: "ProdigyRP 4.0 – Scheduled Events" – https://forum.example.com/prodigy-cron
 
+## Research Log – 2025-08-27 (Cron executor)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
+- Reviewed `cron-parser` documentation for computing next execution times.
+
 ## Research Log – 2025-08-24 (coordsaver)
 
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.

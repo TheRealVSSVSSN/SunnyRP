@@ -67,8 +67,47 @@ async function updateLastRun(name, lastRun) {
   await db.query('UPDATE cron_jobs SET last_run = ? WHERE name = ?', [lastRun, name]);
 }
 
+/**
+ * Fetch cron jobs that are due to run.
+ * Jobs are ordered by priority (desc) then next_run.
+ *
+ * @param {number} [limit=50] maximum number of jobs to return
+ * @returns {Promise<Array>} due cron jobs
+ */
+async function getDueJobs(limit = 50) {
+  const rows = await db.query(
+    'SELECT id, name, schedule, payload, account_id AS accountId, character_id AS characterId, priority, next_run AS nextRun, last_run AS lastRun, created_at AS createdAt, updated_at AS updatedAt FROM cron_jobs WHERE next_run <= NOW() ORDER BY priority DESC, next_run ASC LIMIT ?',
+    [limit],
+  );
+  return rows.map((row) => ({
+    id: row.id,
+    name: row.name,
+    schedule: row.schedule,
+    payload: row.payload ? JSON.parse(row.payload) : null,
+    accountId: row.accountId,
+    characterId: row.characterId,
+    priority: row.priority,
+    nextRun: row.nextRun,
+    lastRun: row.lastRun,
+    createdAt: row.createdAt,
+    updatedAt: row.updatedAt,
+  }));
+}
+
+/**
+ * Update job next_run and last_run after execution.
+ *
+ * @param {number} id cron job id
+ * @param {string} nextRun ISO datetime for next execution
+ */
+async function markRan(id, nextRun) {
+  await db.query('UPDATE cron_jobs SET last_run = NOW(), next_run = ? WHERE id = ?', [nextRun, id]);
+}
+
 module.exports = {
   getAllJobs,
   createJob,
   updateLastRun,
+  getDueJobs,
+  markRan,
 };
