@@ -1,18 +1,20 @@
 # Run Summary – 2025-08-27
 
 ## Modules
-- Cron: added execution worker with WebSocket and webhook pushes.
+- interiors: broadcast apartment interior updates and enforce per-character uniqueness.
 
 ## Documentation Updated
 - docs/progress-ledger.md
 - docs/events-and-rpcs.md
-- docs/modules/cron.md
+- docs/modules/interiors.md
 - docs/BASE_API_DOCUMENTATION.md
 - docs/framework-compliance.md
 - docs/index.md
 - docs/research-log.md
+- docs/naming-map.md
+- docs/db-schema.md
+- docs/migrations.md
 - docs/run-docs.md
-- docs/todo-gaps.md
 
 ## Outstanding TODO/Gaps
 | Item | Owner | Priority | Blockers |

@@ -490,3 +490,12 @@ Reference resources unavailable; proceeding with internal consistency only.
 Added cron execution worker that polls due jobs and pushes `cron.execute` over WebSocket and webhooks.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/cron.md`.
+
+## Update – 2025-08-27
+
+Extended **drz_interiors** by broadcasting apartment interior changes and enforcing per-character uniqueness.
+
+* `POST /v1/apartments/{apartmentId}/interior` now emits `interiors.apartment.updated` via WebSocket and webhooks.
+* Migration `073_update_interiors_unique_key.sql` ensures apartment templates are unique per character.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/interiors.md`.

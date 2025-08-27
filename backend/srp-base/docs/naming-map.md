@@ -25,3 +25,4 @@
 | chat | chat |
 | connectqueue | connectqueue |
 | coordsaver | coordinates |
+| drz_interiors | interiors |

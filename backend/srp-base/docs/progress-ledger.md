@@ -76,3 +76,4 @@
 | 70 | connectqueue realtime | Queue priority pushes and expiry purge | Extend | Broadcast `priority.*` events and scheduler cleanup |
 | 71 | coordsaver → coordinates | Rename with realtime events and retention | Extend | Broadcast saves/deletes, daily purge task |
 | 72 | cron | Scheduled job execution pushes | Extend | Added cron executor with WebSocket/webhook dispatch |
+| 73 | drz_interiors | Broadcast interior updates with per-character uniqueness | Extend | WebSocket/webhook events and unique index migration |

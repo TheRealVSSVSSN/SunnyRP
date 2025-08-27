@@ -76,7 +76,7 @@ practice is supported by citations.
 | **connectqueue module** | Queue priority endpoints follow the established layered pattern with authentication, idempotency and rate limiting; updates broadcast via WebSocket/webhooks and expired priorities purged by scheduler. |
 | **cron module** | Cron job endpoints follow the layered pattern with authentication and idempotency; a scheduler now executes due jobs and pushes `cron.execute` over WebSocket/webhooks. |
 | **coordinates module** | Coordinate endpoints follow the established layered pattern with authentication, idempotency, WebSocket/webhook events and scheduled cleanup. |
-| **interiors module** | Interior endpoints follow the established layered pattern with authentication and idempotency. |
+| **interiors module** | Interior endpoints follow the layered pattern with authentication, idempotency, WebSocket/webhook broadcasts and per-character uniqueness. |
 | **emotes module** | Favorite emote endpoints follow the established layered pattern with authentication and idempotency. |
 | **ems module** | EMS record and shift endpoints follow the established layered pattern with authentication and idempotency. |
 | **taxi module** | Taxi ride endpoints follow the established layered pattern with authentication and idempotency. |

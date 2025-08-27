@@ -335,3 +335,7 @@
 
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` for coordsaver but checkout failed due to repository size. Reference resources unavailable; proceeding with internal consistency only.
 - Reviewed coordinate-saving patterns in ESX and vRP frameworks conceptually to align naming and cleanup strategies.
+## Research Log – 2025-08-27 (drz_interiors)
+
+- Attempted to clone reference repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed interior persistence patterns in ESX, QB-Core and ND Core documentation for conceptual parity.
