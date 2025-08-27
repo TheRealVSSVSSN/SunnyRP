@@ -10,3 +10,5 @@
 | Integrate player vitals (hunger, thirst, stress) into HUD module | backend | medium | gameplay design |
 | Add admin bulk adjustment endpoints for queue priorities | backend | low | none |
 | Add admin endpoints for cron job management | backend | low | none |
+| Bulk sync endpoint for favorite emotes | backend | low | design | 
+| Allow labeling/ordering of favorite emotes | backend | low | design |

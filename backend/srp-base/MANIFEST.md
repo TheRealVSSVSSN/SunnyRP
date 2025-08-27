@@ -1,22 +1,26 @@
 # Manifest
 
-- Added cron execution worker broadcasting `cron.execute` via WebSocket and webhooks.
+- Added emotes realtime sync with WebSocket/webhook events and retention purge.
 
 | File | Action | Note |
 |---|---|---|
-| src/tasks/cron.js | A | Executes due cron jobs and emits events |
-| src/repositories/cronRepository.js | M | Added due job queries and rescheduling |
-| src/server.js | M | Registered cron executor task |
-| package.json | M | Added cron-parser dependency |
-| docs/modules/cron.md | M | Document cron scheduler |
-| docs/events-and-rpcs.md | M | Added cron.execute event |
-| docs/BASE_API_DOCUMENTATION.md | M | Listed cron.execute push |
-| docs/framework-compliance.md | M | Noted cron scheduler compliance |
-| docs/index.md | M | Updated run summary |
-| docs/progress-ledger.md | M | Logged cron execution worker |
-| docs/research-log.md | M | Added cron executor research |
+| src/config/env.js | M | Added `EMOTE_RETENTION_MS` setting |
+| src/repositories/emotesRepository.js | M | Purge helper returning expired favorites |
+| src/routes/emotes.routes.js | M | Broadcast/dispatch favorite add/remove |
+| src/tasks/emotes.js | A | Hourly purge broadcasts `favoriteExpired` |
+| src/server.js | M | Registered `emotes-purge` scheduler |
+| openapi/api.yaml | M | Documented realtime events and retention purge |
+| docs/modules/emotes.md | M | Added scheduler and event notes |
+| docs/index.md | M | Logged emotes realtime update |
+| docs/progress-ledger.md | M | Recorded emotes realtime entry |
+| docs/framework-compliance.md | M | Updated compliance and outstanding items |
+| docs/events-and-rpcs.md | M | Listed emote event mappings |
+| docs/BASE_API_DOCUMENTATION.md | M | Noted emote push events |
+| docs/admin-ops.md | M | Documented `emotes-purge` scheduler |
+| docs/naming-map.md | M | Added emotes mapping |
+| docs/research-log.md | M | Logged emotes research attempt |
 | docs/run-docs.md | M | Consolidated run summary |
-| docs/todo-gaps.md | M | Added cron management TODO |
-| CHANGELOG.md | M | Added cron execution entry |
+| docs/todo-gaps.md | M | Added emotes TODO items |
+| CHANGELOG.md | M | Added emotes realtime entry |
 
-**Startup Notes:** install dependencies with `npm install` (may require resolving express-openapi-validator version).
+**Startup Notes:** install dependencies with `npm install` (fails: express-openapi-validator@^4.18.3 not found).

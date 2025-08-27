@@ -22,6 +22,7 @@ const chatTasks = require('./tasks/chat');
 const connectqueueTasks = require('./tasks/connectqueue');
 const coordinatesTasks = require('./tasks/coordinates');
 const cronTasks = require('./tasks/cron');
+const emotesTasks = require('./tasks/emotes');
 
 // Register Prometheus metrics if enabled.  This must be done before
 // the server starts so that middleware can increment counters.
@@ -130,6 +131,12 @@ scheduler.register(
   () => cronTasks.runDue(),
   cronTasks.INTERVAL_MS,
   { jitter: 5000, persistName: cronTasks.JOB_NAME },
+);
+scheduler.register(
+  emotesTasks.JOB_NAME,
+  () => emotesTasks.purgeOld(),
+  emotesTasks.INTERVAL_MS,
+  { jitter: 60000 },
 );
 
 // Handle graceful shutdown

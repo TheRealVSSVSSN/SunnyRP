@@ -77,7 +77,7 @@ practice is supported by citations.
 | **cron module** | Cron job endpoints follow the layered pattern with authentication and idempotency; a scheduler now executes due jobs and pushes `cron.execute` over WebSocket/webhooks. |
 | **coordinates module** | Coordinate endpoints follow the established layered pattern with authentication, idempotency, WebSocket/webhook events and scheduled cleanup. |
 | **interiors module** | Interior endpoints follow the layered pattern with authentication, idempotency, WebSocket/webhook broadcasts and per-character uniqueness. |
-| **emotes module** | Favorite emote endpoints follow the established layered pattern with authentication and idempotency. |
+| **emotes module** | Favorite emote endpoints follow the established layered pattern with authentication, idempotency, realtime pushes and retention purge. |
 | **ems module** | EMS record and shift endpoints follow the established layered pattern with authentication and idempotency. |
 | **taxi module** | Taxi ride endpoints follow the established layered pattern with authentication and idempotency. |
 | **furniture module** | Furniture endpoints follow the established layered pattern with authentication and idempotency. |
@@ -110,3 +110,4 @@ practice is supported by citations.
 - Migrate legacy apartments and garages routes to `/v1/properties`.
 - Document world event endpoints in OpenAPI.
 - Integrate player vitals (hunger, thirst, stress) into HUD module.
+- Implement bulk emote sync endpoint and labeling/ordering support.

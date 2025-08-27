@@ -499,3 +499,11 @@ Extended **drz_interiors** by broadcasting apartment interior changes and enforc
 * Migration `073_update_interiors_unique_key.sql` ensures apartment templates are unique per character.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/interiors.md`.
+## Update – 2025-08-27
+
+Extended parity for the **emotes** resource with real-time sync and retention.
+
+* `POST/DELETE /v1/characters/{characterId}/emotes` now broadcast `emotes.favoriteAdded` and `emotes.favoriteRemoved` over WebSocket and webhooks.
+* Scheduler purges favorites older than `EMOTE_RETENTION_MS`, emitting `emotes.favoriteExpired`.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/emotes.md`.
