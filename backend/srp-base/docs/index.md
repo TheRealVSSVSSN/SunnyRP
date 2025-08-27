@@ -268,6 +268,15 @@ Introduced taxi dispatch backend to support the **es_taxi** resource.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/taxi.md`.
 
+## Update – 2025-08-27
+
+Extended furniture module with realtime push and retention cleanup.
+
+* Furniture placement/removal events broadcast via WebSockets and webhooks.
+* Daily job `furniture-purge` removes stale entries beyond `FURNITURE_RETENTION_MS`.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/furniture.md`.
+
 ## Update – 2025-08-25
 
 Introduced furniture placement storage to support the **furniture** resource.

@@ -80,3 +80,4 @@
 | 74 | emotes realtime | Favorite emote sync and retention | Extend | Added WS/webhook pushes and hourly purge |
 | 75 | emspack realtime | EMS shift sync and record events over WS/webhooks | Extend | Broadcast events and scheduler end stale shifts |
 | 76 | es_taxi realtime | Taxi dispatch pushes and expiry scheduler | Extend | Broadcast request events; cancel stale requests |
+| 77 | furniture realtime | Furniture place/remove pushes and retention purge | Extend | Broadcast events and daily purge |

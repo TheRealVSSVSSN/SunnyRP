@@ -43,6 +43,7 @@
 - Ensure the `ems_records` and `ems_shift_logs` tables exist for EMS operations.
 - Ensure the `taxi_rides` table exists for taxi dispatch.
 - Ensure the `furniture` table exists for stored furniture placements.
+  - Set `FURNITURE_RETENTION_MS` if different retention is required; `furniture-purge` task runs daily.
 - Ensure the `hospital_admissions` table exists for patient tracking.
 - Ensure the `hardcap_config` and `hardcap_sessions` tables exist for player capacity tracking.
 - Ensure the `heli_flights` table exists for helicopter flight logs.

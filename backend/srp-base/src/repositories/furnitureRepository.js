@@ -55,8 +55,20 @@ async function deleteFurniture(characterId, id) {
   await db.query('DELETE FROM furniture WHERE id = ? AND character_id = ?', [id, characterId]);
 }
 
+/**
+ * Delete furniture entries older than the provided cutoff timestamp.
+ *
+ * @param {Date} cutoff
+ * @returns {Promise<number>} number of rows removed
+ */
+async function deleteOlderThan(cutoff) {
+  const result = await db.query('DELETE FROM furniture WHERE updated_at < ?', [cutoff]);
+  return result.affectedRows || 0;
+}
+
 module.exports = {
   listFurniture,
   createFurniture,
   deleteFurniture,
+  deleteOlderThan,
 };
