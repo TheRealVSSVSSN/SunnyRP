@@ -82,7 +82,7 @@ practice is supported by citations.
 | **taxi module** | Taxi ride endpoints follow the established layered pattern with authentication and idempotency. |
 | **furniture module** | Furniture endpoints follow the established layered pattern with authentication and idempotency. |
 | **characters module** | Added endpoint to retrieve the active character, maintaining layered design and validation. |
-| **hospital module** | Hospital admission endpoints follow the established layered pattern with authentication and idempotency. |
+| **hospital module** | Hospital admission endpoints follow the layered pattern with auth/idempotency, broadcast WS/webhook events and a scheduler auto-discharges stale admissions. |
 | **garages module** | Garage endpoints follow the established layered pattern with authentication, rate limiting and idempotency. |
 | **database helpers** | Core MySQL adapter now supports named parameters, scalar queries and transaction wrappers for safer, more flexible persistence. |
 | **hardcap module** | Hardcap endpoints follow the established layered pattern with authentication, rate limiting and idempotency. |

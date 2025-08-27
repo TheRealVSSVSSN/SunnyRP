@@ -456,6 +456,8 @@ Rows older than `BASE_EVENT_RETENTION_MS` are purged hourly by the `base-events-
 | discharged_at | TIMESTAMP | Discharge time |
 | notes | TEXT | Additional notes |
 
+Indexes: `idx_hospital_admissions_character` (character_id), `idx_hospital_admissions_active` (character_id, discharged_at)
+
 ## garages
 
 | Column | Type | Notes |

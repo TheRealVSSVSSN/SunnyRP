@@ -31,5 +31,6 @@
 | es_taxi | taxi |
 | np-furniture | furniture |
 | gabz_mrpd | police |
+| gabz_pillbox_hospital | hospital |
 | police_officers | police roster |
 | player_id | character_id |

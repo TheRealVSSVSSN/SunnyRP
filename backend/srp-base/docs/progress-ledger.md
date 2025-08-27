@@ -82,3 +82,4 @@
 | 76 | es_taxi realtime | Taxi dispatch pushes and expiry scheduler | Extend | Broadcast request events; cancel stale requests |
 | 77 | furniture realtime | Furniture place/remove pushes and retention purge | Extend | Broadcast events and daily purge |
 | 78 | gabz_mrpd | Mission Row PD duty roster with realtime pushes and stale-duty scheduler | Create | Added roster API, WS/webhook events and cleanup task |
+| 79 | gabz_pillbox_hospital | Pillbox hospital admissions realtime and auto-discharge | Extend | Added WS/webhook pushes and scheduler |

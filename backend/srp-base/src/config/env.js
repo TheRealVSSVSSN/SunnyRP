@@ -90,6 +90,13 @@ const config = {
       10,
     ),
   },
+  hospital: {
+    broadcastIntervalMs: parseInt(process.env.HOSPITAL_BROADCAST_INTERVAL_MS || '60000', 10),
+    maxAdmissionDurationMs: parseInt(
+      process.env.HOSPITAL_MAX_ADMISSION_DURATION_MS || String(6 * 60 * 60 * 1000),
+      10,
+    ),
+  },
   taxi: {
     requestTtlMs: parseInt(process.env.TAXI_REQUEST_TTL_MS || '300000', 10),
   },

@@ -542,3 +542,12 @@ For resource decisions see `progress-ledger.md`. Module details are documented i
 Introduced police duty roster management to support the **gabz_mrpd** cluster with WebSocket and webhook pushes plus stale-duty cleanup.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/police.md`.
+
+## Update – 2025-08-27
+
+Extended Pillbox hospital admissions with real-time push and scheduled cleanup.
+
+* Admission create/discharge pushes `hospital.admission.*`.
+* Scheduler `hospital-admissions-sync` auto-discharges long stays and broadcasts `hospital.admissions.active`.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/hospital.md`.

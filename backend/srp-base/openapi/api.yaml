@@ -6949,6 +6949,8 @@ paths:
                     type: string
         '400':
           $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
   /v1/garages:
     get:
       summary: List all garages
