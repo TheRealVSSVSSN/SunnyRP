@@ -1518,3 +1518,17 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Remove taxi scheduler registration, revert taxi route broadcasts and drop added index.
+
+## 2025-08-27 – Furniture realtime & retention
+
+### Added
+* WebSocket/webhook events `furniture.placed` and `furniture.removed`.
+* Scheduler task `furniture-purge` removing records older than `FURNITURE_RETENTION_MS`.
+* Config `FURNITURE_RETENTION_MS` with 180-day default.
+
+### Risks
+* Misconfigured retention may delete active furniture.
+* Clients must handle push events to remain synced.
+
+### Rollback
+* Remove furniture scheduler registration and event broadcasts; unset `FURNITURE_RETENTION_MS`.

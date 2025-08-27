@@ -29,3 +29,4 @@
 | emotes | emotes |
 | emspack | ems |
 | es_taxi | taxi |
+| np-furniture | furniture |

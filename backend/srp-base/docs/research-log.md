@@ -355,3 +355,8 @@
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Reference resources unavailable; proceeding with internal consistency only.
 - Reviewed ESX taxi job design (https://github.com/ESX-Official/es_extended) to confirm request/accept/complete flow.
 - Reviewed QB-Core taxi job notes (https://github.com/qbcore-framework/qb-core) for expiry handling and payouts.
+
+## Research Log – 2025-08-27 (furniture)
+
+- Attempted to clone reference repository `https://github.com/h04X-2K/NoPixelServer` for furniture but received HTTP 403. Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed furniture/property placement patterns in ESX and QB-Core to inform retention and event naming.

@@ -3226,6 +3226,8 @@ paths:
           $ref: '#/components/responses/BadRequest'
     post:
       summary: Place a furniture item for a character
+      x-websocket-event: furniture.placed
+      x-webhook-event: furniture.placed
       parameters:
         - in: path
           name: characterId
@@ -3263,6 +3265,8 @@ paths:
   /v1/characters/{characterId}/furniture/{id}:
     delete:
       summary: Delete a furniture item
+      x-websocket-event: furniture.removed
+      x-webhook-event: furniture.removed
       parameters:
         - in: path
           name: characterId

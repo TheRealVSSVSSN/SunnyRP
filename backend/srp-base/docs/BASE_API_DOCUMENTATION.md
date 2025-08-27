@@ -550,7 +550,9 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
 - **srp-furniture** – Stores custom furniture placements per character.
   - `GET /v1/characters/{characterId}/furniture` – List furniture items for a character.
   - `POST /v1/characters/{characterId}/furniture` – Place a furniture item with `item`, `x`, `y`, `z` and optional `heading`.
-- `DELETE /v1/characters/{characterId}/furniture/{id}` – Remove a furniture item.
+  - `DELETE /v1/characters/{characterId}/furniture/{id}` – Remove a furniture item.
+  - Realtime events: `furniture.placed`, `furniture.removed` (WebSocket & webhook).
+  - Daily purge of entries older than `FURNITURE_RETENTION_MS` via scheduler.
 ### Jobs
 
 - `GET /v1/jobs` – list defined jobs

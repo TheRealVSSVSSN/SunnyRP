@@ -306,6 +306,8 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: furn2' -X DELETE \
   http://localhost:3010/v1/characters/1/furniture/1
 ```
 
+Connect a WebSocket client to `ws://localhost:3010/ws?token=<token>` and confirm `furniture.placed` and `furniture.removed` events fire for the create/delete calls above.
+
 Manually verify the hospital admission endpoints:
 
 ```sh

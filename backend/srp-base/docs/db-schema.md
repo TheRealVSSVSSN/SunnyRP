@@ -442,7 +442,7 @@ Rows older than `BASE_EVENT_RETENTION_MS` are purged hourly by the `base-events-
 | z | DOUBLE | Z coordinate |
 | heading | DOUBLE | Optional heading |
 | created_at | TIMESTAMP | Creation time |
-| updated_at | TIMESTAMP | Update time |
+| updated_at | TIMESTAMP | Update time (purged after `FURNITURE_RETENTION_MS`) |
 
 ## hospital_admissions
 

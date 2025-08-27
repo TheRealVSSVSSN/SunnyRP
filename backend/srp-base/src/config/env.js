@@ -80,6 +80,7 @@ const config = {
     retentionMs: parseInt(process.env.CAMERA_RETENTION_MS || '2592000000', 10),
     cleanupIntervalMs: parseInt(process.env.CAMERA_CLEANUP_INTERVAL_MS || '3600000', 10),
   },
+  furniture: { retentionMs: parseInt(process.env.FURNITURE_RETENTION_MS || '15552000000', 10) },
   invoiceRetentionMs: parseInt(process.env.INVOICE_RETENTION_MS || '2592000000', 10),
   emotes: { retentionMs: parseInt(process.env.EMOTE_RETENTION_MS || '15552000000', 10) },
   ems: {

@@ -5,13 +5,12 @@
 - docs/BASE_API_DOCUMENTATION.md
 - docs/db-schema.md
 - docs/events-and-rpcs.md
-- docs/framework-compliance.md
 - docs/index.md
-- docs/modules/taxi.md
-- docs/migrations.md
+- docs/modules/furniture.md
 - docs/naming-map.md
 - docs/progress-ledger.md
 - docs/research-log.md
+- docs/testing.md
 - docs/run-docs.md
 
 ## Outstanding TODO/Gaps
@@ -27,4 +26,3 @@
 | Add admin endpoints for cron job management | backend | low | none |
 | Bulk sync endpoint for favorite emotes | backend | low | design |
 | Allow labeling/ordering of favorite emotes | backend | low | design |
-| Provide passenger cancellation endpoint for taxi requests | backend | medium | client work |

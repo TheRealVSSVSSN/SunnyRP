@@ -5,6 +5,8 @@ const {
   createFurniture,
   deleteFurniture,
 } = require('../repositories/furnitureRepository');
+const websocket = require('../realtime/websocket');
+const dispatcher = require('../hooks/dispatcher');
 
 const router = express.Router();
 
@@ -64,6 +66,8 @@ router.post('/v1/characters/:characterId/furniture', async (req, res) => {
   try {
     const furniture = await createFurniture({ characterId: charId, item, x, y, z, heading });
     sendOk(res, { furniture }, res.locals.requestId, res.locals.traceId);
+    websocket.broadcast('furniture', 'furniture.placed', { characterId: charId, furniture });
+    dispatcher.dispatch('furniture.placed', { characterId: charId, furniture });
   } catch (err) {
     sendError(res, { code: 'FURNITURE_CREATE_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);
   }
@@ -86,6 +90,8 @@ router.delete('/v1/characters/:characterId/furniture/:id', async (req, res) => {
   try {
     await deleteFurniture(charId, furnId);
     sendOk(res, {}, res.locals.requestId, res.locals.traceId);
+    websocket.broadcast('furniture', 'furniture.removed', { characterId: charId, id: furnId });
+    dispatcher.dispatch('furniture.removed', { characterId: charId, id: furnId });
   } catch (err) {
     sendError(res, { code: 'FURNITURE_DELETE_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);
   }
