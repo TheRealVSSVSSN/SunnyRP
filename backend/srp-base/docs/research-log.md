@@ -370,3 +370,8 @@
 
 - Attempted to clone reference repository `https://github.com/h04X-2K/NoPixelServer` for gabz_pillbox_hospital but received HTTP 403. Reference resources unavailable; proceeding with internal consistency only.
 - Reviewed EMS/hospital flows in ESX and ND Core for admission tracking (conceptual only).
+
+## Research Log – 2025-08-27 (garages realtime)
+
+- Attempted to clone reference repository `https://github.com/h04X-2K/NoPixelServer` garages resource but received HTTP 403. Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed vehicle storage flows in ESX and QB-Core frameworks for naming and retention concepts.

@@ -1,6 +1,8 @@
 const express = require('express');
 const { sendOk, sendError } = require('../utils/respond');
 const { createRateLimiter } = require('../middleware/rateLimit');
+const websocket = require('../realtime/websocket');
+const hooks = require('../hooks/dispatcher');
 const {
   listGarages,
   createGarage,
@@ -73,6 +75,16 @@ router.post('/v1/garages/:garageId/store', storeLimiter, async (req, res) => {
   }
   try {
     const record = await storeVehicle(Number(garageId), Number(vehicleId), Number(characterId));
+    websocket.broadcast('vehicles', 'garage.vehicleStored', {
+      garageId: Number(garageId),
+      vehicleId: Number(vehicleId),
+      characterId: Number(characterId),
+    });
+    hooks.dispatch('garage.vehicleStored', {
+      garageId: Number(garageId),
+      vehicleId: Number(vehicleId),
+      characterId: Number(characterId),
+    });
     sendOk(res, { record }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'GARAGE_STORE_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);
@@ -89,6 +101,16 @@ router.post('/v1/garages/:garageId/retrieve', retrieveLimiter, async (req, res) 
   }
   try {
     await retrieveVehicle(Number(garageId), Number(vehicleId), Number(characterId));
+    websocket.broadcast('vehicles', 'garage.vehicleRetrieved', {
+      garageId: Number(garageId),
+      vehicleId: Number(vehicleId),
+      characterId: Number(characterId),
+    });
+    hooks.dispatch('garage.vehicleRetrieved', {
+      garageId: Number(garageId),
+      vehicleId: Number(vehicleId),
+      characterId: Number(characterId),
+    });
     sendOk(res, {}, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'GARAGE_RETRIEVE_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);
@@ -105,5 +127,5 @@ router.get('/v1/characters/:characterId/garages/:garageId/vehicles', async (req,
     sendError(res, { code: 'GARAGE_VEHICLES_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);
   }
 });
-
 module.exports = router;
+

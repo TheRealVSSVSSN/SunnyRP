@@ -479,6 +479,7 @@ Indexes: `idx_hospital_admissions_character` (character_id), `idx_hospital_admis
 | character_id | BIGINT | Character storing the vehicle |
 | stored_at | TIMESTAMP | Storage time |
 | retrieved_at | TIMESTAMP | Retrieval time |
+| indexes | - | `idx_garage_vehicles_character` on `character_id`, `idx_garage_vehicles_retrieved` on `retrieved_at` |
 
 ## hardcap_config
 

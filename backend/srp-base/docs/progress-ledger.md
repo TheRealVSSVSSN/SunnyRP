@@ -83,3 +83,4 @@
 | 77 | furniture realtime | Furniture place/remove pushes and retention purge | Extend | Broadcast events and daily purge |
 | 78 | gabz_mrpd | Mission Row PD duty roster with realtime pushes and stale-duty scheduler | Create | Added roster API, WS/webhook events and cleanup task |
 | 79 | gabz_pillbox_hospital | Pillbox hospital admissions realtime and auto-discharge | Extend | Added WS/webhook pushes and scheduler |
+| 80 | garages realtime | Vehicle store/retrieve pushes with retention purge | Extend | Added WS/webhook events and cleanup scheduler |

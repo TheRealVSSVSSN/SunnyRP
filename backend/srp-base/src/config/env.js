@@ -101,6 +101,10 @@ const config = {
     requestTtlMs: parseInt(process.env.TAXI_REQUEST_TTL_MS || '300000', 10),
   },
 
+  garages: {
+    retentionMs: parseInt(process.env.GARAGE_VEHICLE_RETENTION_MS || '2592000000', 10),
+  },
+
   police: {
     dutyTimeoutMs: parseInt(process.env.POLICE_DUTY_TIMEOUT_MS || '3600000', 10),
     checkIntervalMs: parseInt(process.env.POLICE_CHECK_INTERVAL_MS || '300000', 10),

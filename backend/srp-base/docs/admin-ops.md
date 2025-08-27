@@ -19,6 +19,7 @@
 - Ensure the `wise_wheels_spins` table exists for wheel spin history.
   - Ensure index `idx_wise_wheels_created` exists; spins older than 30 days are purged hourly by `wise-wheels-expire` scheduler.
 - Ensure the `taxi_rides` table has index `idx_taxi_status_created_at`; tune `TAXI_REQUEST_TTL_MS` to control stale request expiry.
+- Ensure the `garage_vehicles` table has index `idx_garage_vehicles_retrieved`; tune `GARAGE_VEHICLE_RETENTION_MS` for purge retention.
  - Ensure the `assets` table exists with indexes `idx_assets_owner` and `idx_assets_created_at`; tune `ASSET_RETENTION_MS` for the `assets-prune` scheduler.
 - Ensure the `clothes` table exists for character outfit records.
 - Ensure the `apartments` and `apartment_residents` tables exist and include the `character_id` column after deploying this sprint.
