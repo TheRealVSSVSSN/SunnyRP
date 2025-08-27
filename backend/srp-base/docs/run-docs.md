@@ -1,15 +1,17 @@
-# Run Summary – 2025-08-27
+# Run Documentation – 2025-08-27
 
-## Modules
-- ems: realtime shift & record events with scheduled shift sync.
-
-## Documentation Updated
-- docs/progress-ledger.md
+## Changed Docs
+- docs/admin-ops.md
+- docs/BASE_API_DOCUMENTATION.md
+- docs/db-schema.md
 - docs/events-and-rpcs.md
-- docs/modules/ems.md
+- docs/framework-compliance.md
 - docs/index.md
-- docs/research-log.md
+- docs/modules/taxi.md
+- docs/migrations.md
 - docs/naming-map.md
+- docs/progress-ledger.md
+- docs/research-log.md
 - docs/run-docs.md
 
 ## Outstanding TODO/Gaps
@@ -25,3 +27,4 @@
 | Add admin endpoints for cron job management | backend | low | none |
 | Bulk sync endpoint for favorite emotes | backend | low | design |
 | Allow labeling/ordering of favorite emotes | backend | low | design |
+| Provide passenger cancellation endpoint for taxi requests | backend | medium | client work |

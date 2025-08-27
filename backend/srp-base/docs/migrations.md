@@ -71,3 +71,4 @@
 | 071_add_vehicle_cleanliness_dirt_index.sql | Index dirt_level for vehicle_cleanliness |
 | 072_add_chat_messages_created_index.sql | Index chat_messages created_at column |
 | 073_update_interiors_unique_key.sql | Ensure apartment interiors unique per character |
+| 074_add_taxi_rides_status_created_index.sql | Index taxi_rides on status and created_at |

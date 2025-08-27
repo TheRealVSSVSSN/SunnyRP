@@ -102,6 +102,7 @@ practice is supported by citations.
 | **dispatch module** | Dispatch alert endpoints follow the established layered pattern with authentication and idempotency. |
 | **properties module** | Property endpoints consolidate apartments, garages and rentals with layered design, rate limiting, idempotency, WebSocket/webhook events and lease expiry scheduler. |
 | **world IPL module** | Interior proxy endpoints follow layered design with WebSocket sync and scheduler broadcast. |
+| **taxi module** | Taxi request endpoints follow layered design with WebSocket/webhook events and expiry scheduler. |
 
 ## Outstanding Items
 
@@ -111,3 +112,4 @@ practice is supported by citations.
 - Document world event endpoints in OpenAPI.
 - Integrate player vitals (hunger, thirst, stress) into HUD module.
 - Implement bulk emote sync endpoint and labeling/ordering support.
+- Provide passenger cancellation endpoint for taxi requests.

@@ -349,3 +349,9 @@
 
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Reference resources unavailable; proceeding with internal consistency only.
 - Reviewed EMS duty scheduling patterns in ESX and ND Core frameworks for conceptual parity.
+
+## Research Log – 2025-08-27 (es_taxi)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed ESX taxi job design (https://github.com/ESX-Official/es_extended) to confirm request/accept/complete flow.
+- Reviewed QB-Core taxi job notes (https://github.com/qbcore-framework/qb-core) for expiry handling and payouts.

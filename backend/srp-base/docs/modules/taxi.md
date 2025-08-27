@@ -47,9 +47,12 @@ No feature flag; module is always enabled.
 
 * **Repository:** `src/repositories/taxiRepository.js` persists requests and rides.
 * **Migration:** `src/migrations/046_add_taxi_rides.sql` creates the `taxi_rides` table.
+* **Migration:** `src/migrations/074_add_taxi_rides_status_created_index.sql` adds `(status, created_at)` index for expiry checks.
 * **Routes:** `src/routes/taxi.routes.js` defines the REST API.
 * **OpenAPI:** `openapi/api.yaml` documents schemas and paths.
+* **Scheduler:** `src/tasks/taxi.js` cancels stale requests based on `TAXI_REQUEST_TTL_MS`.
+* **Realtime:** `taxi.request.created`, `taxi.request.accepted`, `taxi.request.completed`, `taxi.request.expired` via WebSocket and webhooks.
 
 ## Future work
 
-Add ride cancellation and pricing configuration.
+Add manual ride cancellation and pricing configuration.

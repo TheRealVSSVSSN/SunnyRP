@@ -24,6 +24,7 @@ const coordinatesTasks = require('./tasks/coordinates');
 const cronTasks = require('./tasks/cron');
 const emotesTasks = require('./tasks/emotes');
 const emsTasks = require('./tasks/ems');
+const taxiTasks = require('./tasks/taxi');
 
 // Register Prometheus metrics if enabled.  This must be done before
 // the server starts so that middleware can increment counters.
@@ -145,6 +146,13 @@ scheduler.register(
   () => emsTasks.syncShifts(wss),
   emsTasks.INTERVAL_MS,
   { jitter: 5000, persistName: emsTasks.JOB_NAME },
+);
+
+scheduler.register(
+  taxiTasks.JOB_NAME,
+  () => taxiTasks.expireRequests(),
+  taxiTasks.INTERVAL_MS,
+  { jitter: 5000, persistName: taxiTasks.JOB_NAME },
 );
 
 // Handle graceful shutdown

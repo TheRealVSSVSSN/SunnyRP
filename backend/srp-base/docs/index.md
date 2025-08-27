@@ -518,3 +518,12 @@ Extended EMS module with realtime shift and record events plus scheduled shift s
 * Job `ems-shift-sync` ends overlong shifts.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/ems.md`.
+
+## Update – 2025-08-27
+
+Extended taxi dispatch with real-time events and stale request cleanup.
+
+* Taxi request create/accept/complete events broadcast via WebSocket and webhooks.
+* Scheduler `taxi-request-expiry` cancels requests older than `TAXI_REQUEST_TTL_MS`.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/taxi.md`.

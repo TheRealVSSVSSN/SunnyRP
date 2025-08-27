@@ -28,3 +28,4 @@
 | drz_interiors | interiors |
 | emotes | emotes |
 | emspack | ems |
+| es_taxi | taxi |
