@@ -110,6 +110,11 @@ const config = {
     checkIntervalMs: parseInt(process.env.POLICE_CHECK_INTERVAL_MS || '300000', 10),
   },
 
+  heli: {
+    maxFlightHours: parseInt(process.env.HELI_MAX_FLIGHT_HOURS || '6', 10),
+    checkIntervalMs: parseInt(process.env.HELI_CHECK_INTERVAL_MS || '300000', 10),
+  },
+
   hardcap: {
     sessionTimeoutMs: parseInt(process.env.HARDCAP_SESSION_TIMEOUT_MS || '600000', 10),
   },

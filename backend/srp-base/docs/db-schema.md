@@ -513,6 +513,8 @@ Indexes: `idx_hospital_admissions_character` (character_id), `idx_hospital_admis
 | created_at | TIMESTAMP | Creation time |
 | updated_at | TIMESTAMP | Update time |
 
+Index: `idx_heli_flights_character` on `character_id`
+
 ## import_pack_orders
 
 | Column | Type | Notes |

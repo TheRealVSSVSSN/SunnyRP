@@ -1,6 +1,6 @@
 # Heli Module
 
-The heli module records helicopter flights for characters.
+The heli module records helicopter flights for characters and broadcasts flight events.
 
 ## Feature flag
 
@@ -32,9 +32,10 @@ No feature flag; module is always enabled.
 
 ## Implementation details
 
-* **Repository:** `src/repositories/heliRepository.js` persists flight records.
+* **Repository:** `src/repositories/heliRepository.js` persists flight records and expires stale flights.
+* **Routes:** `src/routes/heli.routes.js` defines the REST API and broadcasts `heli.flightStarted` and `heli.flightEnded` via WebSocket and webhooks.
+* **Scheduler:** `src/tasks/heli.js` ends flights exceeding `HELI_MAX_FLIGHT_HOURS`, emitting `heli.flightExpired`.
 * **Migration:** `src/migrations/051_add_heli_flights.sql` creates the `heli_flights` table.
-* **Routes:** `src/routes/heli.routes.js` defines the REST API.
 * **OpenAPI:** `openapi/api.yaml` documents schemas and paths.
 
 ## Future work

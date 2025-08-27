@@ -51,6 +51,7 @@
  - Ensure the `hardcap_config` and `hardcap_sessions` tables exist for player capacity tracking.
  - Ensure index `idx_hardcap_sessions_disconnected_connected` exists; scheduler `hardcap-session-expiry` purges stale sessions after `HARDCAP_SESSION_TIMEOUT_MS`.
 - Ensure the `heli_flights` table exists for helicopter flight logs.
+- Configure `HELI_MAX_FLIGHT_HOURS` and `HELI_CHECK_INTERVAL_MS` to control automatic flight expiry.
 - Ensure the `import_pack_orders` table includes `price` and `canceled_at` columns for import package tracking.
 - Ensure the `character_peds` table exists for ped state tracking.
 - Ensure the `jailbreak_attempts` table exists for jailbreak tracking.

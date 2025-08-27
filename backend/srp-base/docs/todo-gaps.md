@@ -13,3 +13,4 @@
 | Bulk sync endpoint for favorite emotes | backend | low | design |
 | Allow labeling/ordering of favorite emotes | backend | low | design |
 | Implement call-sign management for police officers | backend | medium | design |
+| Add altitude and location tracking for helicopter flights | backend | low | design |

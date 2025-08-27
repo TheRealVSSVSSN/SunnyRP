@@ -85,3 +85,4 @@
 | 79 | gabz_pillbox_hospital | Pillbox hospital admissions realtime and auto-discharge | Extend | Added WS/webhook pushes and scheduler |
 | 80 | garages realtime | Vehicle store/retrieve pushes with retention purge | Extend | Added WS/webhook events and cleanup scheduler |
 | 81 | hardcap realtime | Session WS/webhook pushes and stale session purge | Extend | Broadcast config/session events; cleanup job |
+| 82 | heli realtime | Helicopter flight events with stale-flight auto end | Extend | Broadcast start/end/expired and scheduler `heli-expire-flights` |

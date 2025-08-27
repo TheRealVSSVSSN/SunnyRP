@@ -7,8 +7,7 @@
 - docs/events-and-rpcs.md
 - docs/framework-compliance.md
 - docs/index.md
-- docs/migrations.md
-- docs/modules/hardcap.md
+- docs/modules/heli.md
 - docs/naming-map.md
 - docs/progress-ledger.md
 - docs/research-log.md
@@ -23,8 +22,7 @@
 - docs/events-and-rpcs.md
 - docs/framework-compliance.md
 - docs/index.md
-- docs/migrations.md
-- docs/modules/hardcap.md
+- docs/modules/heli.md
 - docs/naming-map.md
 - docs/progress-ledger.md
 - docs/research-log.md
@@ -44,3 +42,4 @@
 | Bulk sync endpoint for favorite emotes | backend | low | design |
 | Allow labeling/ordering of favorite emotes | backend | low | design |
 | Implement call-sign management for police officers | backend | medium | design |
+| Add altitude and location tracking for helicopter flights | backend | low | design |

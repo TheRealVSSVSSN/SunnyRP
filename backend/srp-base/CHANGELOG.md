@@ -1577,3 +1577,18 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Drop index `idx_hardcap_sessions_disconnected_connected` and remove hardcap scheduler registration.
+
+## 2025-08-27 (heli realtime)
+
+### Changed
+* Heli flight start/end broadcasts over WebSocket and webhooks.
+* Scheduler `heli-expire-flights` auto-ends flights beyond `HELI_MAX_FLIGHT_HOURS`.
+
+### Migrations
+* None
+
+### Risks
+* Misconfigured expiry may terminate active flights.
+
+### Rollback
+* Remove `heli-expire-flights` scheduler registration and related config keys.

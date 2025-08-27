@@ -379,3 +379,8 @@
 ## Research Log – 2025-08-27 (hardcap realtime)
 
 - Attempted to clone `https://github.com/h04X-2K/NoPixelServer` hardcap resource but received HTTP 403. Reference resources unavailable; proceeding with internal consistency only.
+
+## Research Log – 2025-08-27 (heli)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed helicopter job/vehicle flows in EssentialMode, ESX, ND Core, FSN Framework, QB-Core, vRP and vORP conceptually to align naming and event patterns.
