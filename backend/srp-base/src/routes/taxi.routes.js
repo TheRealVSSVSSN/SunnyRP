@@ -1,6 +1,8 @@
 const express = require('express');
 const { sendOk, sendError } = require('../utils/respond');
 const taxiRepo = require('../repositories/taxiRepository');
+const websocket = require('../realtime/websocket');
+const dispatcher = require('../hooks/dispatcher');
 
 const router = express.Router();
 
@@ -52,6 +54,8 @@ router.post('/v1/taxi/requests', async (req, res) => {
       pickupY,
       pickupZ,
     });
+    websocket.broadcast('taxi', 'request.created', request);
+    dispatcher.dispatch('taxi.request.created', request);
     sendOk(res, { request }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'TAXI_CREATE_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);
@@ -91,6 +95,8 @@ router.post('/v1/taxi/requests/:id/accept', async (req, res) => {
         res.locals.traceId,
       );
     }
+    websocket.broadcast('taxi', 'request.accepted', request);
+    dispatcher.dispatch('taxi.request.accepted', request);
     sendOk(res, { request }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'TAXI_ACCEPT_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);
@@ -141,6 +147,8 @@ router.post('/v1/taxi/requests/:id/complete', async (req, res) => {
         res.locals.traceId,
       );
     }
+    websocket.broadcast('taxi', 'request.completed', request);
+    dispatcher.dispatch('taxi.request.completed', request);
     sendOk(res, { request }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'TAXI_COMPLETE_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);

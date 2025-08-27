@@ -89,6 +89,9 @@ const config = {
       10,
     ),
   },
+  taxi: {
+    requestTtlMs: parseInt(process.env.TAXI_REQUEST_TTL_MS || '300000', 10),
+  },
 
   /**
    * Feature flags for core modules.  Lua consumers still drive

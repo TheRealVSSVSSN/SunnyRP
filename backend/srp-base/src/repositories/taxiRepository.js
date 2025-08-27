@@ -97,10 +97,25 @@ async function listRidesByCharacter(characterId, role = 'passenger') {
   return rows;
 }
 
+/**
+ * Cancel ride requests older than the provided TTL.
+ * @param {number} ttlMs
+ * @returns {Promise<number>} number of rows updated
+ */
+async function cancelStaleRequests(ttlMs) {
+  const cutoff = new Date(Date.now() - ttlMs);
+  const [result] = await db.query(
+    "UPDATE taxi_rides SET status = 'cancelled' WHERE status IN ('requested','accepted') AND created_at < ?",
+    [cutoff],
+  );
+  return result.affectedRows || 0;
+}
+
 module.exports = {
   createRequest,
   listRequestsByStatus,
   acceptRequest,
   completeRequest,
   listRidesByCharacter,
+  cancelStaleRequests,
 };

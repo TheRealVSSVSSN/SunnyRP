@@ -1504,3 +1504,17 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Remove EMS scheduler registration and revert EMS route broadcasts.
+
+## 2025-08-27 – Taxi request realtime & expiry
+
+### Added
+* WebSocket/webhook events for taxi request create/accept/complete/expire.
+* Scheduler `taxi-request-expiry` cancels stale requests using `TAXI_REQUEST_TTL_MS`.
+* Config `TAXI_REQUEST_TTL_MS` to control request lifespan.
+* Migration `074_add_taxi_rides_status_created_index.sql` adds `(status, created_at)` index.
+
+### Risks
+* Misconfigured TTL may cancel active rides prematurely.
+
+### Rollback
+* Remove taxi scheduler registration, revert taxi route broadcasts and drop added index.

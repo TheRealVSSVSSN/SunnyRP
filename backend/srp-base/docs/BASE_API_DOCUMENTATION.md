@@ -568,6 +568,7 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
 - `POST /v1/taxi/requests/{id}/accept` – accept a request
 - `POST /v1/taxi/requests/{id}/complete` – complete a ride
 - `GET /v1/characters/{characterId}/taxi/rides` – ride history
+  - WebSocket: `taxi.request.created`, `taxi.request.accepted`, `taxi.request.completed`, `taxi.request.expired`
 
 ### Hospital
 

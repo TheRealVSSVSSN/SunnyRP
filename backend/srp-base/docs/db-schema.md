@@ -428,6 +428,7 @@ Rows older than `BASE_EVENT_RETENTION_MS` are purged hourly by the `base-events-
 | created_at | TIMESTAMP | Creation time |
 | accepted_at | TIMESTAMP | Driver accepted time |
 | completed_at | TIMESTAMP | Completion time |
+| indexes | - | `idx_taxi_status_created_at` on `(status, created_at)` |
 
 ## furniture
 
