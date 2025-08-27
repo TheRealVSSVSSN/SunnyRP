@@ -7188,6 +7188,12 @@ paths:
     post:
       summary: Update hardcap configuration
       operationId: updateHardcapConfig
+      parameters:
+        - in: header
+          name: X-Idempotency-Key
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -7216,6 +7222,12 @@ paths:
     post:
       summary: Register an active session
       operationId: createHardcapSession
+      parameters:
+        - in: header
+          name: X-Idempotency-Key
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -7250,6 +7262,11 @@ paths:
           required: true
           schema:
             type: integer
+        - in: header
+          name: X-Idempotency-Key
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: Session ended

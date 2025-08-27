@@ -110,6 +110,10 @@ const config = {
     checkIntervalMs: parseInt(process.env.POLICE_CHECK_INTERVAL_MS || '300000', 10),
   },
 
+  hardcap: {
+    sessionTimeoutMs: parseInt(process.env.HARDCAP_SESSION_TIMEOUT_MS || '600000', 10),
+  },
+
   /**
    * Feature flags for core modules.  Lua consumers still drive
    * behaviour via /v1/config/live, but these flags provide a safe

@@ -46,8 +46,19 @@ There is no feature flag for hardcap; the module is always enabled.
 
 * **Repository:** `src/repositories/hardcapRepository.js` handles configuration and session persistence.
 * **Migration:** `src/migrations/050_add_hardcap.sql` creates the `hardcap_config` and `hardcap_sessions` tables.
-* **Routes:** `src/routes/hardcap.routes.js` exposes the REST API.
+* **Migration:** `src/migrations/077_add_hardcap_session_index.sql` adds composite index for cleanup.
+* **Routes:** `src/routes/hardcap.routes.js` exposes the REST API and emits WebSocket/webhook events.
+* **Scheduler:** `src/tasks/hardcap.js` ends sessions older than `HARDCAP_SESSION_TIMEOUT_MS` and broadcasts `hardcap.session.expired`.
 * **OpenAPI:** `openapi/api.yaml` documents schemas and paths.
+
+## Realtime
+
+WebSocket topic `hardcap` and webhooks dispatch:
+
+* `hardcap.config.updated`
+* `hardcap.session.created`
+* `hardcap.session.ended`
+* `hardcap.session.expired`
 
 ## Future work
 

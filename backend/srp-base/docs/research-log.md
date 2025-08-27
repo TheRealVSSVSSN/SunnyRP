@@ -375,3 +375,7 @@
 
 - Attempted to clone reference repository `https://github.com/h04X-2K/NoPixelServer` garages resource but received HTTP 403. Reference resources unavailable; proceeding with internal consistency only.
 - Reviewed vehicle storage flows in ESX and QB-Core frameworks for naming and retention concepts.
+
+## Research Log – 2025-08-27 (hardcap realtime)
+
+- Attempted to clone `https://github.com/h04X-2K/NoPixelServer` hardcap resource but received HTTP 403. Reference resources unavailable; proceeding with internal consistency only.

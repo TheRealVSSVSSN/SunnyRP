@@ -48,6 +48,8 @@
 - Ensure the `hospital_admissions` table exists for patient tracking.
 - Tune `HOSPITAL_BROADCAST_INTERVAL_MS` and `HOSPITAL_MAX_ADMISSION_DURATION_MS` for admission sync and auto-discharge.
 - Ensure the `hardcap_config` and `hardcap_sessions` tables exist for player capacity tracking.
+ - Ensure the `hardcap_config` and `hardcap_sessions` tables exist for player capacity tracking.
+ - Ensure index `idx_hardcap_sessions_disconnected_connected` exists; scheduler `hardcap-session-expiry` purges stale sessions after `HARDCAP_SESSION_TIMEOUT_MS`.
 - Ensure the `heli_flights` table exists for helicopter flight logs.
 - Ensure the `import_pack_orders` table includes `price` and `canceled_at` columns for import package tracking.
 - Ensure the `character_peds` table exists for ped state tracking.

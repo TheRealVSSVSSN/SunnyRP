@@ -29,6 +29,7 @@ const taxiTasks = require('./tasks/taxi');
 const furnitureTasks = require('./tasks/furniture');
 const policeTasks = require('./tasks/police');
 const garageTasks = require('./tasks/garages');
+const hardcapTasks = require('./tasks/hardcap');
 
 // Register Prometheus metrics if enabled.  This must be done before
 // the server starts so that middleware can increment counters.
@@ -125,6 +126,12 @@ scheduler.register(
   () => connectqueueTasks.purgeExpired(),
   connectqueueTasks.INTERVAL_MS,
   { jitter: 5000, persistName: connectqueueTasks.JOB_NAME },
+);
+scheduler.register(
+  hardcapTasks.JOB_NAME,
+  () => hardcapTasks.purgeStale(),
+  hardcapTasks.INTERVAL_MS,
+  { jitter: 5000, persistName: hardcapTasks.JOB_NAME },
 );
 scheduler.register(
   coordinatesTasks.JOB_NAME,

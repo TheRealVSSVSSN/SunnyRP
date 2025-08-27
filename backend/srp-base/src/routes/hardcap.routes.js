@@ -2,6 +2,8 @@ const express = require('express');
 const { sendOk, sendError } = require('../utils/respond');
 const { getStatus, updateConfig, createSession, endSession } = require('../repositories/hardcapRepository');
 const { createRateLimiter } = require('../middleware/rateLimit');
+const websocket = require('../realtime/websocket');
+const dispatcher = require('../hooks/dispatcher');
 
 const router = express.Router();
 
@@ -44,6 +46,8 @@ router.post('/v1/hardcap/config', async (req, res) => {
   }
   try {
     const cfg = await updateConfig({ maxPlayers: maxNum, reservedSlots: reserveNum });
+    websocket.broadcast('hardcap', 'config.updated', cfg);
+    dispatcher.dispatch('hardcap.config.updated', cfg);
     sendOk(res, { config: cfg }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'HARDCAP_CONFIG_UPDATE_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);
@@ -75,6 +79,8 @@ router.post('/v1/hardcap/sessions', async (req, res) => {
   }
   try {
     const session = await createSession({ accountId: accountNum, characterId: charNum });
+    websocket.broadcast('hardcap', 'session.created', session);
+    dispatcher.dispatch('hardcap.session.created', session);
     sendOk(res, { session }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     let code = 'HARDCAP_SESSION_CREATE_FAILED';
@@ -111,6 +117,11 @@ router.delete('/v1/hardcap/sessions/:id', async (req, res) => {
   }
   try {
     const deleted = await endSession(sessionId);
+    if (deleted) {
+      const payload = { id: sessionId };
+      websocket.broadcast('hardcap', 'session.ended', payload);
+      dispatcher.dispatch('hardcap.session.ended', payload);
+    }
     sendOk(res, { deleted }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'HARDCAP_SESSION_DELETE_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);

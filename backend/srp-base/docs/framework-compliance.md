@@ -85,7 +85,7 @@ practice is supported by citations.
 | **hospital module** | Hospital admission endpoints follow the layered pattern with auth/idempotency, broadcast WS/webhook events and a scheduler auto-discharges stale admissions. |
 | **garages module** | Garage endpoints follow the layered pattern with authentication, rate limiting and idempotency; store/retrieve actions emit WebSocket/webhook events and hourly purge removes old records. |
 | **database helpers** | Core MySQL adapter now supports named parameters, scalar queries and transaction wrappers for safer, more flexible persistence. |
-| **hardcap module** | Hardcap endpoints follow the established layered pattern with authentication, rate limiting and idempotency. |
+| **hardcap module** | Hardcap endpoints follow the layered pattern with auth, rate limiting and idempotency; now emit `hardcap.*` events and scheduler purges stale sessions. |
 | **heli module** | Heli flight endpoints follow the established layered pattern with authentication and idempotency. |
 | **import-pack module** | Order pricing, retrieval and cancellation endpoints follow the established layered pattern with authentication and idempotency. |
 | **peds module** | Ped state endpoints follow the established layered pattern with authentication and idempotency. |

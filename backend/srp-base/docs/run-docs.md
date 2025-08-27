@@ -8,7 +8,8 @@
 - docs/framework-compliance.md
 - docs/index.md
 - docs/migrations.md
-- docs/modules/garages.md
+- docs/modules/hardcap.md
+- docs/naming-map.md
 - docs/progress-ledger.md
 - docs/research-log.md
 - docs/run-docs.md
@@ -23,7 +24,8 @@
 - docs/framework-compliance.md
 - docs/index.md
 - docs/migrations.md
-- docs/modules/garages.md
+- docs/modules/hardcap.md
+- docs/naming-map.md
 - docs/progress-ledger.md
 - docs/research-log.md
 - docs/run-docs.md

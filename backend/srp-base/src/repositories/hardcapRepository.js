@@ -72,9 +72,31 @@ async function endSession(id) {
   return result.affectedRows > 0;
 }
 
+/**
+ * Mark sessions as disconnected if they have been active longer than the timeout.
+ * @param {number} timeoutMs
+ * @returns {Promise<Array<{id:number,accountId:number,characterId:number}>>}
+ */
+async function purgeStale(timeoutMs) {
+  const seconds = Math.floor(timeoutMs / 1000);
+  const rows = await db.query(
+    'SELECT id, account_id AS accountId, character_id AS characterId FROM hardcap_sessions WHERE disconnected_at IS NULL AND connected_at < DATE_SUB(NOW(), INTERVAL ? SECOND)',
+    [seconds],
+  );
+  if (rows.length) {
+    const ids = rows.map((r) => r.id);
+    await db.query(
+      'UPDATE hardcap_sessions SET disconnected_at = CURRENT_TIMESTAMP WHERE id IN (?)',
+      [ids],
+    );
+  }
+  return rows;
+}
+
 module.exports = {
   getStatus,
   updateConfig,
   createSession,
   endSession,
+  purgeStale,
 };

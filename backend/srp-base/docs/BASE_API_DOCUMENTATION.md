@@ -532,9 +532,10 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
   - Emits WebSocket/webhook events `priority.upserted`, `priority.removed` and `priority.expired`; `connectqueue-expiry` scheduler purges expired entries.
 - **srp-hardcap** – Manages server connection limits and active sessions.
   - `GET /v1/hardcap/status` – Current max players, reserved slots and active count.
-  - `POST /v1/hardcap/config` – Update max player and reserved slot settings.
-  - `POST /v1/hardcap/sessions` – Register an active session.
-  - `DELETE /v1/hardcap/sessions/{id}` – End an active session.
+  - `POST /v1/hardcap/config` – Update max player and reserved slot settings (broadcasts `hardcap.config.updated`).
+  - `POST /v1/hardcap/sessions` – Register an active session (broadcasts `hardcap.session.created`).
+  - `DELETE /v1/hardcap/sessions/{id}` – End an active session (broadcasts `hardcap.session.ended`).
+  - Scheduler `hardcap-session-expiry` ends stale sessions and emits `hardcap.session.expired`.
 - **srp-cron** – Schedules timed server tasks.
   - `GET /v1/cron/jobs` – List registered cron jobs.
   - `POST /v1/cron/jobs` – Create or replace a cron job with `name`, `schedule`, optional `payload`, `accountId`, `characterId`, `priority` and `nextRun`.

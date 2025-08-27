@@ -24,6 +24,7 @@
 | notenoughmoney | error: INSUFFICIENT_FUNDS |
 | chat | chat |
 | connectqueue | connectqueue |
+| hardcap | hardcap |
 | coordsaver | coordinates |
 | drz_interiors | interiors |
 | emotes | emotes |
