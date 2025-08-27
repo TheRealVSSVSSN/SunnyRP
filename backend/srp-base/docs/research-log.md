@@ -326,3 +326,7 @@
 
 - Reference resources unavailable; proceeding with internal consistency only.
 - Reviewed connection queue patterns in ESX, QB-Core and ND Core for priority and expiry handling.
+## Research Log – 2025-08-26 (coordinates)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` for coordsaver but checkout failed due to repository size. Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed coordinate-saving patterns in ESX and vRP frameworks conceptually to align naming and cleanup strategies.

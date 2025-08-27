@@ -238,15 +238,15 @@ curl -H 'X-API-Token: <token>' http://localhost:3010/v1/cron/jobs
 curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: cron1' -H 'Content-Type: application/json' \
   -d '{"name":"paycheck","schedule":"0 * * * *","nextRun":"2025-08-24T00:00:00Z"}' \
   http://localhost:3010/v1/cron/jobs
-Manually verify the coordsaver endpoints:
+Manually verify the coordinates endpoints:
 
 ```sh
-curl -H 'X-API-Token: <token>' http://localhost:3010/v1/characters/1/coords
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/characters/1/coordinates
 curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: coord1' -H 'Content-Type: application/json' \\
   -d '{"name":"stash","x":1.0,"y":2.0,"z":3.0,"heading":90}' \\
-  http://localhost:3010/v1/characters/1/coords
+  http://localhost:3010/v1/characters/1/coordinates
 curl -H 'X-API-Token: <token>' -X DELETE -H 'X-Idempotency-Key: coord2' \\
-  http://localhost:3010/v1/characters/1/coords/1
+  http://localhost:3010/v1/characters/1/coordinates/1
 ```
 
 Manually verify the interiors endpoints:

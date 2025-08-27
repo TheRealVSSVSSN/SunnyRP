@@ -1,10 +1,15 @@
 const express = require('express');
 const { sendOk, sendError } = require('../utils/respond');
-const { listCoords, saveCoord, deleteCoord } = require('../repositories/coordsaverRepository');
+const { broadcast } = require('../realtime/websocket');
+const { dispatch } = require('../hooks/dispatcher');
+const { listCoords, saveCoord, deleteCoord } = require('../repositories/coordinatesRepository');
 
 const router = express.Router();
 
-router.get('/v1/characters/:characterId/coords', async (req, res) => {
+router.get([
+  '/v1/characters/:characterId/coordinates',
+  '/v1/characters/:characterId/coords', // deprecated alias
+], async (req, res) => {
   const { characterId } = req.params;
   const id = parseInt(characterId, 10);
   if (Number.isNaN(id)) {
@@ -17,14 +22,17 @@ router.get('/v1/characters/:characterId/coords', async (req, res) => {
     );
   }
   try {
-    const coords = await listCoords(id);
-    sendOk(res, { coords }, res.locals.requestId, res.locals.traceId);
+    const coordinates = await listCoords(id);
+    sendOk(res, { coordinates }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'COORD_LIST_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);
   }
 });
 
-router.post('/v1/characters/:characterId/coords', async (req, res) => {
+router.post([
+  '/v1/characters/:characterId/coordinates',
+  '/v1/characters/:characterId/coords', // deprecated alias
+], async (req, res) => {
   if (!req.headers['x-idempotency-key']) {
     return sendError(
       res,
@@ -65,14 +73,19 @@ router.post('/v1/characters/:characterId/coords', async (req, res) => {
     );
   }
   try {
-    const coord = await saveCoord({ characterId: id, name, x, y, z, heading });
-    sendOk(res, { coord }, res.locals.requestId, res.locals.traceId);
+    const coordinate = await saveCoord({ characterId: id, name, x, y, z, heading });
+    broadcast('coordinates', 'coordinate.saved', { characterId: id, coordinate });
+    dispatch('coordinates.saved', { characterId: id, coordinate });
+    sendOk(res, { coordinate }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'COORD_SAVE_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);
   }
 });
 
-router.delete('/v1/characters/:characterId/coords/:id', async (req, res) => {
+router.delete([
+  '/v1/characters/:characterId/coordinates/:id',
+  '/v1/characters/:characterId/coords/:id', // deprecated alias
+], async (req, res) => {
   if (!req.headers['x-idempotency-key']) {
     return sendError(
       res,
@@ -96,6 +109,8 @@ router.delete('/v1/characters/:characterId/coords/:id', async (req, res) => {
   }
   try {
     await deleteCoord(characterNum, coordNum);
+    broadcast('coordinates', 'coordinate.deleted', { characterId: characterNum, coordId: coordNum });
+    dispatch('coordinates.deleted', { characterId: characterNum, coordId: coordNum });
     sendOk(res, { deleted: true }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'COORD_DELETE_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);

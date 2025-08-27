@@ -61,8 +61,19 @@ async function deleteCoord(characterId, id) {
   await db.query('DELETE FROM character_coords WHERE character_id = ? AND id = ?', [characterId, id]);
 }
 
+/**
+ * Purge coordinates older than the specified number of days.
+ *
+ * @param {number} maxAgeDays
+ * @returns {Promise<void>}
+ */
+async function purgeOldCoords(maxAgeDays) {
+  await db.query('DELETE FROM character_coords WHERE updated_at < DATE_SUB(NOW(), INTERVAL ? DAY)', [maxAgeDays]);
+}
+
 module.exports = {
   listCoords,
   saveCoord,
   deleteCoord,
+  purgeOldCoords,
 };

@@ -32,7 +32,7 @@
 | carwash | `carwash:checkmoney`, `carwash:success`, `notenoughmoney` | `POST /v1/carwash`, `GET /v1/carwash/history/{characterId}`, `GET/PATCH /v1/vehicles/{plate}/dirt`; dirt changes push `vehicles.dirt.update` |
 | chat | Resource broadcasts chat messages | `POST /v1/chat/messages` logs and pushes `chat.message`; history via `GET /v1/chat/messages/{characterId}`; scheduler `chat-purge` removes old logs |
 | connectqueue | Resource uses exports `AddPriority` and `RemovePriority` with account identifiers and now pushes `priority.upserted`, `priority.removed` and `priority.expired` over WebSocket and webhooks | `GET/POST/DELETE /v1/connectqueue/priorities` manage backend priority records |
-| coordsaver | Resource lets players save named coordinates | `GET /v1/characters/{characterId}/coords`, `POST /v1/characters/{characterId}/coords`, `DELETE /v1/characters/{characterId}/coords/{id}` |
+| coordinates | Resource lets players save named coordinates. Events broadcast on WebSocket topic `coordinates` and dispatcher events `coordinates.saved`/`coordinates.deleted`. | `GET /v1/characters/{characterId}/coordinates`, `POST /v1/characters/{characterId}/coordinates`, `DELETE /v1/characters/{characterId}/coordinates/{id}` |
 | drz_interiors | Resource triggers save/load events for apartment interior templates | `GET /v1/apartments/{apartmentId}/interior`, `POST /v1/apartments/{apartmentId}/interior` |
 | emotes | Resource lets players mark favorite emote commands for quick selection | `GET/POST/DELETE /v1/characters/{characterId}/emotes` |
 | emspack | Resource emits duty start/end and treatment events | `GET/POST/PATCH/DELETE /v1/ems/records`, `GET /v1/ems/shifts/active`, `POST /v1/ems/shifts`, `POST /v1/ems/shifts/{id}/end` |

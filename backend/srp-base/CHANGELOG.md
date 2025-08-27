@@ -1436,3 +1436,18 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Remove connectqueue scheduler registration and event broadcasts.
+
+## 2025-08-26 – Coordinates rename and realtime
+
+### Added
+* Renamed coordsaver module to coordinates.
+* WebSocket topic `coordinates` and webhook events on save/delete.
+* Daily `coordinates-purge` scheduler removes coordinates older than 30 days.
+
+### Risks
+* Purge interval misconfiguration may remove active coordinates.
+* Clients using deprecated `/coords` paths must migrate to `/coordinates`.
+
+### Rollback
+* Remove `coordinates-purge` scheduler registration and broadcast hooks.
+* Restore previous route and repository names if needed.

@@ -474,3 +474,13 @@ Extended HUD module with vehicle state tracking, WebSocket broadcasts and schedu
 ## Update – 2025-08-26
 
 Extended connect queue module with WebSocket/webhook priority events and scheduled expiry purge.
+
+## Update – 2025-08-26
+
+Renamed coordsaver to **coordinates** with real-time pushes and retention.
+
+* Added WebSocket topic `coordinates` and dispatcher events for saves/deletes.
+* Scheduled `coordinates-purge` task removes entries older than 30 days.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/coordinates.md`.
+Reference resources unavailable; proceeding with internal consistency only.
