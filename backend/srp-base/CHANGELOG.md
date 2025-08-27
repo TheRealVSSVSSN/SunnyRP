@@ -1562,3 +1562,18 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Remove scheduler registration and hospital config keys.
+
+## 2025-08-27 (hardcap realtime)
+
+### Changed
+* Hardcap configuration and session routes now emit WebSocket and webhook events.
+* Scheduler `hardcap-session-expiry` purges sessions older than `HARDCAP_SESSION_TIMEOUT_MS`.
+
+### Migrations
+* `077_add_hardcap_session_index.sql` adds composite index for session cleanup.
+
+### Risks
+* Misconfigured timeout may prematurely end active sessions.
+
+### Rollback
+* Drop index `idx_hardcap_sessions_disconnected_connected` and remove hardcap scheduler registration.

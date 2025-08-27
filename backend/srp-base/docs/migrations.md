@@ -74,3 +74,4 @@
 | 074_add_taxi_rides_status_created_index.sql | Index taxi_rides on status and created_at |
 | 075_police_officers_character.sql | Rename police_officers player_id to character_id and add index |
 | 076_add_garage_vehicle_retrieved_index.sql | Index garage_vehicles retrieved_at column |
+| 077_add_hardcap_session_index.sql | Index hardcap_sessions disconnected_at & connected_at |

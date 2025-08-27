@@ -499,6 +499,7 @@ Indexes: `idx_hospital_admissions_character` (character_id), `idx_hospital_admis
 | character_id | BIGINT | FK to characters.id |
 | connected_at | TIMESTAMP | Connection time |
 | disconnected_at | TIMESTAMP | Disconnection time; null if active |
+| indexes | - | `idx_hardcap_sessions_disconnected_connected` on `(disconnected_at, connected_at)` |
 
 ## heli_flights
 

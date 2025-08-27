@@ -309,6 +309,15 @@ Extended parity for the **garages** resource by scoping stored vehicles to chara
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/garages.md`.
 
+## Update – 2025-08-27
+
+Extended parity for the **hardcap** resource with realtime session notifications and automatic cleanup.
+
+* Configuration and session endpoints now broadcast `hardcap.*` events via WebSocket and webhooks.
+* Scheduler `hardcap-session-expiry` ends stale sessions older than `HARDCAP_SESSION_TIMEOUT_MS`.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/hardcap.md`.
+
 ## Update – 2025-08-25
 
 Enhanced core database utilities to align with the **ghmattimysql** resource.

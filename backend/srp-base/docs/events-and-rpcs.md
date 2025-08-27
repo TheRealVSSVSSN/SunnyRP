@@ -44,7 +44,7 @@
 | gabz_pillbox_hospital | Resource handles hospital admissions and bed management | `GET /v1/hospital/admissions/active`, `POST /v1/hospital/admissions`, `POST /v1/hospital/admissions/{id}/discharge` – WS `hospital.*`, webhook mirrors |
 | garages | Store and retrieve vehicle events | `/v1/garages` CRUD, `/v1/garages/{garageId}/store`, `/v1/garages/{garageId}/retrieve`, `/v1/characters/{characterId}/garages/{garageId}/vehicles` → pushes `garage.vehicleStored`/`garage.vehicleRetrieved` |
 | ghmattimysql | Exports `execute`, `scalar` and `transaction` for MySQL queries | Core `db` repository offers `query`, `scalar` and `transaction` helpers with named parameters |
-| hardcap | Connection attempts and slot checks | `GET /v1/hardcap/status`, `POST /v1/hardcap/sessions`, `DELETE /v1/hardcap/sessions/{id}` |
+| hardcap | Connection limits and session tracking; broadcasts `hardcap.config.updated`, `hardcap.session.created`, `hardcap.session.ended`, `hardcap.session.expired` | `GET /v1/hardcap/status`, `POST /v1/hardcap/config`, `POST /v1/hardcap/sessions`, `DELETE /v1/hardcap/sessions/{id}` |
 | heli | Resource logs helicopter flight start and end events | `POST /v1/heli/flights`, `POST /v1/heli/flights/{id}/end`, `GET /v1/characters/{characterId}/heli/flights` |
 | isPed | Resource manages ped state updates like model, health and armor | `GET/PUT /v1/characters/{characterId}/ped` |
 | jailbreak | Resource triggers jailbreak start and completion events with character and prison info | `POST /v1/jailbreaks`, `POST /v1/jailbreaks/{id}/complete`, `GET /v1/jailbreaks/active` |
