@@ -1,25 +1,26 @@
 # Manifest
 
-- Added world IPL state management with WebSocket broadcasts and scheduler sync.
+- Added taxi request realtime events with expiry scheduler and config TTL.
 
 | File | Action | Note |
 |---|---|---|
-| src/repositories/iplRepository.js | A | Persist interior proxy states |
-| src/routes/world.routes.js | M | Expose IPL endpoints and broadcasts |
-| src/tasks/world.js | A | Scheduler to broadcast IPL state |
-| src/server.js | M | Register world IPL scheduler |
-| src/migrations/068_add_ipls.sql | A | Create `ipl_states` table |
-| openapi/api.yaml | M | Document IPL schemas and endpoints |
-| docs/BASE_API_DOCUMENTATION.md | M | Describe IPL APIs |
-| docs/events-and-rpcs.md | M | Map bob74_ipl events |
-| docs/db-schema.md | M | Add `ipl_states` table |
-| docs/migrations.md | M | Log migration 068 |
-| docs/admin-ops.md | M | Note `ipl_states` table requirement |
-| docs/modules/world.md | M | Document IPL routes and repository |
-| docs/index.md | M | Summarize bob74_ipl support |
-| docs/progress-ledger.md | M | Record bob74_ipl decision |
-| docs/framework-compliance.md | M | Add world IPL module evaluation |
-| docs/naming-map.md | M | Map bob74_ipl → ipl |
-| docs/research-log.md | M | Log bob74_ipl research |
-| docs/todo-gaps.md | M | Note OpenAPI world events gap |
-| docs/run-docs.md | M | Consolidated run notes |
+| src/config/env.js | M | Introduced `taxi.requestTtlMs` configuration |
+| src/repositories/taxiRepository.js | M | Added stale request cancellation |
+| src/tasks/taxi.js | A | Scheduler to expire taxi requests |
+| src/server.js | M | Registered taxi expiry scheduler |
+| src/routes/taxi.routes.js | M | Broadcast and webhook taxi events |
+| src/migrations/074_add_taxi_rides_status_created_index.sql | A | Index on `(status, created_at)` |
+| docs/modules/taxi.md | M | Documented scheduler and realtime events |
+| docs/events-and-rpcs.md | M | Mapped taxi events |
+| docs/BASE_API_DOCUMENTATION.md | M | Listed taxi WebSocket events |
+| docs/progress-ledger.md | M | Logged taxi realtime entry |
+| docs/framework-compliance.md | M | Noted taxi module compliance |
+| docs/admin-ops.md | M | Added taxi index and TTL note |
+| docs/db-schema.md | M | Recorded taxi index |
+| docs/migrations.md | M | Added migration entry |
+| docs/naming-map.md | M | Added es_taxi → taxi mapping |
+| docs/index.md | M | Added taxi update summary |
+| docs/research-log.md | M | Logged taxi research |
+| docs/run-docs.md | M | Run summary and outstanding tasks |
+
+**Startup Notes:** install dependencies with `npm install` (fails: express-openapi-validator@^4.18.3 not found).

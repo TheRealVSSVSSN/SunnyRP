@@ -19,7 +19,7 @@
 | bob74_ipl | Resource toggles interior proxies (IPLs) for world interiors | `GET/POST/DELETE /v1/world/ipls` → pushes `world.ipl.updated`; scheduler broadcasts `world.ipl.sync` |
 | maps | No server events; world mapping assets | N/A |
 | furnished-shells | No server events; interior shell assets | N/A |
-| Cron | Resource triggers scheduled events for maintenance and gameplay loops | `GET /v1/cron/jobs`, `POST /v1/cron/jobs` |
+| Cron | Resource triggers scheduled events for maintenance and gameplay loops | `GET /v1/cron/jobs`, `POST /v1/cron/jobs`; scheduler broadcasts `cron.execute` |
 | hair-pack | No server events; cosmetic hair assets | N/A |
 | mh65c | No server events; vehicle model asset | N/A |
 | motel | No server events; building interior asset | N/A |
@@ -27,20 +27,20 @@
 | yuzler | No server events; clothing assets | N/A |
 | baseevents | Emits player join, drop and kill events | `POST /v1/base-events` logs events and broadcasts `base-events.logged`; `GET /v1/base-events` lists history |
 | boatshop | Resource sends purchase requests for boats | `GET /v1/boatshop`, `POST /v1/boatshop/purchase` → broadcasts `boatshop.catalog` (scheduled) and `boatshop.purchase` |
-| camera | Resource captures photos and uploads metadata | `GET /v1/camera/photos/{characterId}`, `POST /v1/camera/photos`, `DELETE /v1/camera/photos/{id}` |
-| carandplayerhud | Resource broadcasts HUD updates when preferences change | `GET /v1/characters/{characterId}/hud`, `PUT /v1/characters/{characterId}/hud` |
-| carwash | Resource triggers wash events with plate and cost | `POST /v1/carwash`, `GET /v1/carwash/history/{characterId}`, `GET/PATCH /v1/vehicles/{plate}/dirt` |
-| chat | Resource broadcasts chat messages | `POST /v1/chat/messages` logs message; history via `GET /v1/chat/messages/{characterId}` |
-| connectqueue | Resource uses exports `AddPriority` and `RemovePriority` with account identifiers | `GET/POST/DELETE /v1/connectqueue/priorities` manage backend priority records |
-| coordsaver | Resource lets players save named coordinates | `GET /v1/characters/{characterId}/coords`, `POST /v1/characters/{characterId}/coords`, `DELETE /v1/characters/{characterId}/coords/{id}` |
-| drz_interiors | Resource triggers save/load events for apartment interior templates | `GET /v1/apartments/{apartmentId}/interior`, `POST /v1/apartments/{apartmentId}/interior` |
-| emotes | Resource lets players mark favorite emote commands for quick selection | `GET/POST/DELETE /v1/characters/{characterId}/emotes` |
-| emspack | Resource emits duty start/end and treatment events | `GET/POST/PATCH/DELETE /v1/ems/records`, `GET /v1/ems/shifts/active`, `POST /v1/ems/shifts`, `POST /v1/ems/shifts/{id}/end` |
-| es_taxi | Players request taxi rides and drivers accept/complete them | `POST /v1/taxi/requests`, `POST /v1/taxi/requests/{id}/accept`, `POST /v1/taxi/requests/{id}/complete` |
+| camera | Resource captures photos and uploads metadata | `GET /v1/camera/photos/{characterId}`, `POST /v1/camera/photos`, `DELETE /v1/camera/photos/{id}` → pushes `camera.photo.created`/`camera.photo.deleted` |
+| carandplayerhud | Resource broadcasts HUD updates and vehicle state changes | `GET /v1/characters/{characterId}/hud`, `PUT /v1/characters/{characterId}/hud`, `GET /v1/characters/{characterId}/vehicle-state`, `PUT /v1/characters/{characterId}/vehicle-state` → WebSocket `hud.vehicleState` |
+| carwash | `carwash:checkmoney`, `carwash:success`, `notenoughmoney` | `POST /v1/carwash`, `GET /v1/carwash/history/{characterId}`, `GET/PATCH /v1/vehicles/{plate}/dirt`; dirt changes push `vehicles.dirt.update` |
+| chat | Resource broadcasts chat messages | `POST /v1/chat/messages` logs and pushes `chat.message`; history via `GET /v1/chat/messages/{characterId}`; scheduler `chat-purge` removes old logs |
+| connectqueue | Resource uses exports `AddPriority` and `RemovePriority` with account identifiers and now pushes `priority.upserted`, `priority.removed` and `priority.expired` over WebSocket and webhooks | `GET/POST/DELETE /v1/connectqueue/priorities` manage backend priority records |
+| coordinates | Resource lets players save named coordinates. Events broadcast on WebSocket topic `coordinates` and dispatcher events `coordinates.saved`/`coordinates.deleted`. | `GET /v1/characters/{characterId}/coordinates`, `POST /v1/characters/{characterId}/coordinates`, `DELETE /v1/characters/{characterId}/coordinates/{id}` |
+| drz_interiors | Resource triggers save/load events for apartment interior templates | `GET /v1/apartments/{apartmentId}/interior`, `POST /v1/apartments/{apartmentId}/interior` → `interiors.apartment.updated` |
+| emotes | Resource lets players mark favorite emote commands for quick selection and sync updates via `emotes.favoriteAdded`/`emotes.favoriteRemoved`/`emotes.favoriteExpired` | `GET/POST/DELETE /v1/characters/{characterId}/emotes` |
+| emspack | Duty start/end and treatment events | `GET/POST/PATCH/DELETE /v1/ems/records`, `GET /v1/ems/shifts/active`, `POST /v1/ems/shifts`, `POST /v1/ems/shifts/{id}/end` → broadcasts `ems.record.*`, `ems.shift.started`, `ems.shift.ended`, `ems.shifts.active` |
+| es_taxi | Players request taxi rides and drivers accept/complete them | `POST /v1/taxi/requests`, `POST /v1/taxi/requests/{id}/accept`, `POST /v1/taxi/requests/{id}/complete` | `taxi.request.created`, `taxi.request.accepted`, `taxi.request.completed`, `taxi.request.expired` |
 | k9 | Police dog deployment and status commands | `GET/POST /v1/characters/{characterId}/k9s`, `PATCH /v1/characters/{characterId}/k9s/{k9Id}/active`, `DELETE /v1/characters/{characterId}/k9s/{k9Id}` |
 | dispatch | Police dispatch alerts and code lists | `GET/POST /v1/dispatch/alerts`, `PATCH /v1/dispatch/alerts/{id}/ack`, `GET /v1/dispatch/codes` |
-| furniture | Resource lets players place or remove furniture items | `GET /v1/characters/{characterId}/furniture`, `POST /v1/characters/{characterId}/furniture`, `DELETE /v1/characters/{characterId}/furniture/{id}` |
-| gabz_mrpd | Map resource for Mission Row PD building; no events | N/A |
+| furniture | Resource lets players place or remove furniture items | `GET /v1/characters/{characterId}/furniture`, `POST /v1/characters/{characterId}/furniture`, `DELETE /v1/characters/{characterId}/furniture/{id}` (WS/webhook: `furniture.placed`, `furniture.removed`) |
+| gabz_mrpd | Mission Row PD duty roster with push updates | `/v1/police/roster`, `/v1/police/roster/{characterId}:duty` → `police.duty` |
 | gabz_pillbox_hospital | Resource handles hospital admissions and bed management | `GET /v1/hospital/admissions/active`, `POST /v1/hospital/admissions`, `POST /v1/hospital/admissions/{id}/discharge` |
 | garages | Resource emits events when vehicles are stored or retrieved from garages | `/v1/garages` CRUD, `/v1/garages/{garageId}/store`, `/v1/garages/{garageId}/retrieve`, `/v1/characters/{characterId}/garages/{garageId}/vehicles` |
 | ghmattimysql | Exports `execute`, `scalar` and `transaction` for MySQL queries | Core `db` repository offers `query`, `scalar` and `transaction` helpers with named parameters |

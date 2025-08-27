@@ -138,6 +138,11 @@
 - Video: "NoPixel 4.0 Dev Update – World Timers" – https://www.youtube.com/watch?v=dQw4w9WgXcQ
 - Forum thread: "ProdigyRP 4.0 – Scheduled Events" – https://forum.example.com/prodigy-cron
 
+## Research Log – 2025-08-27 (Cron executor)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
+- Reviewed `cron-parser` documentation for computing next execution times.
+
 ## Research Log – 2025-08-24 (coordsaver)
 
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Proceeded with internal consistency only.
@@ -307,3 +312,57 @@
 
 - Reference resources unavailable; proceeding with internal consistency only.
 - Reviewed EssentialMode, ESX, ND_Core, FSN, QB-Core, vRP and vORP frameworks for world interior toggle patterns (names/flows only).
+
+## Research Log – 2025-08-26 (camera)
+
+- Attempted to clone reference repository `https://github.com/h04X-2K/NoPixelServer` for camera resource but download size was prohibitive. Reference resources unavailable; proceeding with internal consistency only.
+
+## Research Log – 2025-08-26 (carandplayerhud)
+
+- Attempted to clone `https://github.com/h04X-2K/NoPixelServer` for carandplayerhud but checkout failed due to repository size. Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed EssentialMode, ESX, ND Core, FSN, QB-Core, vRP and vORP naming around seatbelt and vehicle status features.
+
+## Research Log – 2025-08-26 (chat)
+
+- Attempted to clone `https://github.com/h04X-2K/NoPixelServer` for chat resource but download was interrupted due to size. Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed chat/message implementations in EssentialMode, ESX, ND Core, FSN Framework, QB-Core, vRP and vORP to align naming and real-time patterns.
+
+## Research Log – 2025-08-26 (connectqueue)
+
+- Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed connection queue patterns in ESX, QB-Core and ND Core for priority and expiry handling.
+## Research Log – 2025-08-26 (coordinates)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` for coordsaver but checkout failed due to repository size. Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed coordinate-saving patterns in ESX and vRP frameworks conceptually to align naming and cleanup strategies.
+## Research Log – 2025-08-27 (drz_interiors)
+
+- Attempted to clone reference repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed interior persistence patterns in ESX, QB-Core and ND Core documentation for conceptual parity.
+
+## Research Log – 2025-08-27 (emotes)
+
+- Attempted to clone `https://github.com/h04X-2K/NoPixelServer` for emotes but received HTTP 403. Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed emote favorite systems in ESX and QB-Core to align naming and retention ideas.
+
+## Research Log – 2025-08-27 (emspack realtime)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed EMS duty scheduling patterns in ESX and ND Core frameworks for conceptual parity.
+
+## Research Log – 2025-08-27 (es_taxi)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed ESX taxi job design (https://github.com/ESX-Official/es_extended) to confirm request/accept/complete flow.
+- Reviewed QB-Core taxi job notes (https://github.com/qbcore-framework/qb-core) for expiry handling and payouts.
+
+## Research Log – 2025-08-27 (furniture)
+
+- Attempted to clone reference repository `https://github.com/h04X-2K/NoPixelServer` for furniture but received HTTP 403. Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed furniture/property placement patterns in ESX and QB-Core to inform retention and event naming.
+
+## Research Log – 2025-08-27 (gabz_mrpd)
+
+- Attempted to clone `https://github.com/h04X-2K/NoPixelServer` for gabz_mrpd but received HTTP 403. Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed EssentialMode, ESX, ND Core, FSN Framework, QB-Core, vRP and vORP for police duty and job grade patterns (names/flows only).
+- Reviewed public NoPixel 4.0 summaries for economy reset and policing overhauls.

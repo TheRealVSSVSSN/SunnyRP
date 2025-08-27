@@ -37,7 +37,18 @@ async function createMessage({ characterId, channel, message }) {
   return { id, characterId, channel, message };
 }
 
+/**
+ * Delete chat messages older than the provided cutoff date.
+ * @param {Date} cutoff
+ * @returns {Promise<number>} number of rows removed
+ */
+async function deleteOlderThan(cutoff) {
+  const [result] = await db.query('DELETE FROM chat_messages WHERE created_at < ?', [cutoff]);
+  return result.affectedRows || 0;
+}
+
 module.exports = {
   listMessagesByCharacter,
   createMessage,
+  deleteOlderThan,
 };

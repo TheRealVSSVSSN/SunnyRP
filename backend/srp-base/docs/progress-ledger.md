@@ -69,3 +69,16 @@
 | 63 | baseevents | Base event logging with realtime and retention | Extend | Broadcast log events and purge stale records |
 | 64 | boatshop realtime | Catalog broadcasts and purchase pushes | Extend | WebSocket/webhook events and scheduler |
 | 65 | bob74_ipl | Interior proxy toggle persistence and broadcast | Create | Added IPL state API and scheduler |
+| 66 | camera realtime | Photo create/delete push events and retention purge | Extend | Broadcast events and purge old photos |
+| 67 | carandplayerhud | Vehicle and player HUD status sync | Extend | Added vehicle-state API with WebSocket broadcast and cleanup scheduler |
+| 68 | carwash realtime | Vehicle dirt ticks and broadcasts | Extend | Mounted routes, added scheduler, WS & webhook pushes |
+| 69 | chat realtime | In-game chat WS/webhook push and retention purge | Extend | Broadcast `chat.message` and purge old entries |
+| 70 | connectqueue realtime | Queue priority pushes and expiry purge | Extend | Broadcast `priority.*` events and scheduler cleanup |
+| 71 | coordsaver → coordinates | Rename with realtime events and retention | Extend | Broadcast saves/deletes, daily purge task |
+| 72 | cron | Scheduled job execution pushes | Extend | Added cron executor with WebSocket/webhook dispatch |
+| 73 | drz_interiors | Broadcast interior updates with per-character uniqueness | Extend | WebSocket/webhook events and unique index migration |
+| 74 | emotes realtime | Favorite emote sync and retention | Extend | Added WS/webhook pushes and hourly purge |
+| 75 | emspack realtime | EMS shift sync and record events over WS/webhooks | Extend | Broadcast events and scheduler end stale shifts |
+| 76 | es_taxi realtime | Taxi dispatch pushes and expiry scheduler | Extend | Broadcast request events; cancel stale requests |
+| 77 | furniture realtime | Furniture place/remove pushes and retention purge | Extend | Broadcast events and daily purge |
+| 78 | gabz_mrpd | Mission Row PD duty roster with realtime pushes and stale-duty scheduler | Create | Added roster API, WS/webhook events and cleanup task |

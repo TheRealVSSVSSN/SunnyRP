@@ -471,7 +471,7 @@ To support all features present in the original server resources at the framewor
   - `DELETE /v1/apartments/{apartmentId}/residents/{characterId}` – Remove a resident.
 - **drz_interiors** – Stores interior layouts per apartment.
   - `GET /v1/apartments/{apartmentId}/interior?characterId={cid}` – Retrieve interior layout.
-  - `POST /v1/apartments/{apartmentId}/interior` – Save interior layout (`characterId`, `template`).
+  - `POST /v1/apartments/{apartmentId}/interior` – Save interior layout (`characterId`, `template`) and broadcast `interiors.apartment.updated`.
 - **srp-properties** – Unified housing (apartments, garages, hotel rooms).
   - `GET /v1/properties?type=&ownerCharacterId=` – List properties.
   - `POST /v1/properties` – Create a property.
@@ -507,13 +507,16 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
   - `GET /v1/boatshop` – List boats available for purchase.
   - `POST /v1/boatshop/purchase` – Purchase a boat with `characterId`, `boatId`, `plate` and optional `properties`.
   - Scheduler broadcasts `boatshop.catalog` every 5 minutes; purchases emit `boatshop.purchase` over WebSocket and webhooks.
-- **srp-camera** – Stores character photos.
-  - `GET /v1/camera/photos/{characterId}` – List photos for a character.
-  - `POST /v1/camera/photos` – Save a photo with `characterId`, `imageUrl` and optional `description`.
-  - `DELETE /v1/camera/photos/{id}` – Remove a photo record.
-- **srp-hud** – Stores per-character HUD settings.
-  - `GET /v1/characters/{characterId}/hud` – Retrieve HUD preferences.
-  - `PUT /v1/characters/{characterId}/hud` – Update HUD preferences.
+  - **srp-camera** – Stores character photos and broadcasts changes.
+    - `GET /v1/camera/photos/{characterId}` – List photos for a character.
+    - `POST /v1/camera/photos` – Save a photo with `characterId`, `imageUrl` and optional `description`; broadcasts `camera.photo.created` over WebSocket and webhooks.
+    - `DELETE /v1/camera/photos/{id}` – Remove a photo record; broadcasts `camera.photo.deleted`.
+    - Scheduler purges photos older than `CAMERA_RETENTION_MS` at `CAMERA_CLEANUP_INTERVAL_MS`.
+  - **srp-hud** – Stores per-character HUD settings.
+- `GET /v1/characters/{characterId}/hud` – Retrieve HUD preferences.
+- `PUT /v1/characters/{characterId}/hud` – Update HUD preferences.
+- `GET /v1/characters/{characterId}/vehicle-state` – Retrieve vehicle HUD state.
+- `PUT /v1/characters/{characterId}/vehicle-state` – Update vehicle HUD state (broadcasts `hud.vehicleState`).
 - **srp-carwash** – Records vehicle washes and dirt levels.
   - `POST /v1/carwash` – Record a car wash (`characterId`, `plate`, `location`, `cost`).
   - `GET /v1/carwash/history/{characterId}` – List recent washes for a character.
@@ -526,6 +529,7 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
   - `GET /v1/connectqueue/priorities` – List queue priorities optionally filtered by `accountId`.
   - `POST /v1/connectqueue/priorities` – Upsert a priority with `accountId`, `priority`, optional `reason` and `expiresAt`.
   - `DELETE /v1/connectqueue/priorities/{accountId}` – Remove priority for an account.
+  - Emits WebSocket/webhook events `priority.upserted`, `priority.removed` and `priority.expired`; `connectqueue-expiry` scheduler purges expired entries.
 - **srp-hardcap** – Manages server connection limits and active sessions.
   - `GET /v1/hardcap/status` – Current max players, reserved slots and active count.
   - `POST /v1/hardcap/config` – Update max player and reserved slot settings.
@@ -534,18 +538,21 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
 - **srp-cron** – Schedules timed server tasks.
   - `GET /v1/cron/jobs` – List registered cron jobs.
   - `POST /v1/cron/jobs` – Create or replace a cron job with `name`, `schedule`, optional `payload`, `accountId`, `characterId`, `priority` and `nextRun`.
-- **srp-coordsaver** – Stores character-specific saved coordinates.
-  - `GET /v1/characters/{characterId}/coords` – List saved coordinates.
-  - `POST /v1/characters/{characterId}/coords` – Save or update a coordinate (`name`, `x`, `y`, `z`, optional `heading`).
-  - `DELETE /v1/characters/{characterId}/coords/{id}` – Remove a coordinate.
+  - Scheduler emits WebSocket event `cron.execute` and dispatches webhooks when jobs run.
+- **srp-coordinates** – Stores character-specific saved coordinates.
+  - `GET /v1/characters/{characterId}/coordinates` – List saved coordinates.
+  - `POST /v1/characters/{characterId}/coordinates` – Save or update a coordinate (`name`, `x`, `y`, `z`, optional `heading`).
+  - `DELETE /v1/characters/{characterId}/coordinates/{id}` – Remove a coordinate.
 - **srp-emotes** – Stores per-character favorite emotes.
   - `GET /v1/characters/{characterId}/emotes` – List favorite emotes.
-  - `POST /v1/characters/{characterId}/emotes` – Add a favorite emote (`emote`).
-  - `DELETE /v1/characters/{characterId}/emotes/{emote}` – Remove a favorite emote.
+  - `POST /v1/characters/{characterId}/emotes` – Add a favorite emote (`emote`), pushing `emotes.favoriteAdded`.
+  - `DELETE /v1/characters/{characterId}/emotes/{emote}` – Remove a favorite emote, pushing `emotes.favoriteRemoved`.
 - **srp-furniture** – Stores custom furniture placements per character.
   - `GET /v1/characters/{characterId}/furniture` – List furniture items for a character.
   - `POST /v1/characters/{characterId}/furniture` – Place a furniture item with `item`, `x`, `y`, `z` and optional `heading`.
-- `DELETE /v1/characters/{characterId}/furniture/{id}` – Remove a furniture item.
+  - `DELETE /v1/characters/{characterId}/furniture/{id}` – Remove a furniture item.
+  - Realtime events: `furniture.placed`, `furniture.removed` (WebSocket & webhook).
+  - Daily purge of entries older than `FURNITURE_RETENTION_MS` via scheduler.
 ### Jobs
 
 - `GET /v1/jobs` – list defined jobs
@@ -563,6 +570,7 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
 - `POST /v1/taxi/requests/{id}/accept` – accept a request
 - `POST /v1/taxi/requests/{id}/complete` – complete a ride
 - `GET /v1/characters/{characterId}/taxi/rides` – ride history
+  - WebSocket: `taxi.request.created`, `taxi.request.accepted`, `taxi.request.completed`, `taxi.request.expired`
 
 ### Hospital
 
@@ -638,3 +646,14 @@ Added dispatch alert APIs with WebSocket and webhook push.
 - `GET /v1/dispatch/codes` – list configured dispatch codes.
 
 All endpoints require standard authentication headers.
+
+## Update – 2025-08-27 (police duty roster)
+
+Added police roster endpoints with WebSocket and webhook push plus stale-duty cleanup.
+
+### Endpoints
+
+- `GET /v1/police/roster` – list police officers.
+- `POST /v1/police/roster` – assign an officer (requires `X-Idempotency-Key`).
+- `PUT /v1/police/roster/{id}` – update officer rank (requires `X-Idempotency-Key`).
+- `POST /v1/police/roster/{characterId}:duty` – set duty status (requires `X-Idempotency-Key`).

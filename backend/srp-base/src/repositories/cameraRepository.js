@@ -51,8 +51,23 @@ async function deletePhoto(id) {
   await db.query('DELETE FROM camera_photos WHERE id = ?', [id]);
 }
 
+/**
+ * Delete photos older than the given retention in days.
+ * @param {number} maxAgeMs
+ * @returns {Promise<number>} number of rows deleted
+ */
+async function deletePhotosOlderThan(maxAgeMs) {
+  const seconds = Math.floor(maxAgeMs / 1000);
+  const [res] = await db.query(
+    'DELETE FROM camera_photos WHERE created_at < (NOW() - INTERVAL ? SECOND)',
+    [seconds],
+  );
+  return res.affectedRows || 0;
+}
+
 module.exports = {
   listPhotosByCharacter,
   createPhoto,
   deletePhoto,
+  deletePhotosOlderThan,
 };

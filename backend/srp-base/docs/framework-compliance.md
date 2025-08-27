@@ -70,14 +70,14 @@ practice is supported by citations.
 | **baseevents module** | Base event logging endpoints follow the established layered pattern with authentication, idempotency, WebSocket broadcast and hourly purge scheduler. |
 | **boatshop module** | Boatshop endpoints follow the established layered pattern with authentication and idempotency. |
 | **camera module** | Photo storage endpoints follow the established layered pattern with authentication and idempotency. |
-| **hud module** | HUD preference endpoints follow the established layered pattern with authentication and idempotency. |
-| **carwash module** | Carwash endpoints follow the established layered pattern with authentication and idempotency. |
-| **chat module** | Chat message endpoints follow the established layered pattern with authentication and idempotency. |
-| **connectqueue module** | Queue priority endpoints follow the established layered pattern with authentication, idempotency and rate limiting. |
-| **cron module** | Cron job endpoints follow the established layered pattern with authentication and idempotency. |
-| **coordsaver module** | Coordinate endpoints follow the established layered pattern with authentication and idempotency. |
-| **interiors module** | Interior endpoints follow the established layered pattern with authentication and idempotency. |
-| **emotes module** | Favorite emote endpoints follow the established layered pattern with authentication and idempotency. |
+| **hud module** | HUD preference and vehicle state endpoints follow the established layered pattern with authentication, idempotency and WebSocket broadcasts. |
+| **carwash module** | Carwash endpoints follow the established layered pattern with authentication and idempotency; dirt ticks broadcast via WebSocket and webhooks. |
+| **chat module** | Chat endpoints follow the layered pattern with authentication, idempotency, WebSocket/webhook broadcasts and hourly purge scheduler. |
+| **connectqueue module** | Queue priority endpoints follow the established layered pattern with authentication, idempotency and rate limiting; updates broadcast via WebSocket/webhooks and expired priorities purged by scheduler. |
+| **cron module** | Cron job endpoints follow the layered pattern with authentication and idempotency; a scheduler now executes due jobs and pushes `cron.execute` over WebSocket/webhooks. |
+| **coordinates module** | Coordinate endpoints follow the established layered pattern with authentication, idempotency, WebSocket/webhook events and scheduled cleanup. |
+| **interiors module** | Interior endpoints follow the layered pattern with authentication, idempotency, WebSocket/webhook broadcasts and per-character uniqueness. |
+| **emotes module** | Favorite emote endpoints follow the established layered pattern with authentication, idempotency, realtime pushes and retention purge. |
 | **ems module** | EMS record and shift endpoints follow the established layered pattern with authentication and idempotency. |
 | **taxi module** | Taxi ride endpoints follow the established layered pattern with authentication and idempotency. |
 | **furniture module** | Furniture endpoints follow the established layered pattern with authentication and idempotency. |
@@ -102,6 +102,8 @@ practice is supported by citations.
 | **dispatch module** | Dispatch alert endpoints follow the established layered pattern with authentication and idempotency. |
 | **properties module** | Property endpoints consolidate apartments, garages and rentals with layered design, rate limiting, idempotency, WebSocket/webhook events and lease expiry scheduler. |
 | **world IPL module** | Interior proxy endpoints follow layered design with WebSocket sync and scheduler broadcast. |
+| **taxi module** | Taxi request endpoints follow layered design with WebSocket/webhook events and expiry scheduler. |
+| **police module** | Duty roster endpoints follow layered design with authentication, idempotency, WebSocket/webhook pushes and stale-duty scheduler. |
 
 ## Outstanding Items
 
@@ -109,3 +111,7 @@ practice is supported by citations.
 - Add unit test coverage.
 - Migrate legacy apartments and garages routes to `/v1/properties`.
 - Document world event endpoints in OpenAPI.
+- Integrate player vitals (hunger, thirst, stress) into HUD module.
+- Implement bulk emote sync endpoint and labeling/ordering support.
+- Provide passenger cancellation endpoint for taxi requests.
+- Implement call-sign management for police officers.

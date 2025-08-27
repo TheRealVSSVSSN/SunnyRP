@@ -38,6 +38,16 @@ Added `world_forecast` table for weather scheduling. K9 migration renamed to 057
 | volume | FLOAT | Playback volume |
 | played_at | BIGINT | Epoch milliseconds |
 
+## character_vehicle_status
+
+| Column | Type | Notes |
+|---|---|---|
+| character_id | INT | PK, FK to characters.id |
+| seatbelt | TINYINT(1) | 1 if seatbelt engaged |
+| harness | TINYINT(1) | 1 if harness engaged |
+| nitrous | INT | Remaining nitrous amount |
+| updated_at | DATETIME | Last update timestamp |
+
 ## dispatch_alerts
 
 | Column | Type | Notes |
@@ -84,6 +94,7 @@ Added `world_forecast` table for weather scheduling. K9 migration renamed to 057
 | heading | FLOAT | Orientation |
 | created_at | TIMESTAMP | Creation time |
 | updated_at | TIMESTAMP | Update time |
+| indexes | - | `idx_camera_photos_character_id` on `character_id`, `idx_camera_photos_created_at` on `created_at` |
 ## evidence_chain
 
 | Column | Type | Notes |
@@ -244,6 +255,10 @@ Indexes:
 | template | JSON | Serialized layout |
 | updated_at | TIMESTAMP | Last update |
 
+**Indexes**
+- `uniq_apartment_character` UNIQUE (`apartment_id`, `character_id`)
+- `idx_character` (`character_id`)
+
 ## carwash_transactions
 
 | Column | Type | Notes |
@@ -326,6 +341,8 @@ Rows older than `BASE_EVENT_RETENTION_MS` are purged hourly by the `base-events-
 | channel | VARCHAR(32) | Message channel |
 | message | TEXT | Message content |
 | created_at | TIMESTAMP | Creation time |
+
+**Indexes**: `idx_chat_character` on `character_id`, `idx_chat_messages_created_at` on `created_at`
 
 ## queue_priorities
 
@@ -411,6 +428,7 @@ Rows older than `BASE_EVENT_RETENTION_MS` are purged hourly by the `base-events-
 | created_at | TIMESTAMP | Creation time |
 | accepted_at | TIMESTAMP | Driver accepted time |
 | completed_at | TIMESTAMP | Completion time |
+| indexes | - | `idx_taxi_status_created_at` on `(status, created_at)` |
 
 ## furniture
 
@@ -424,7 +442,7 @@ Rows older than `BASE_EVENT_RETENTION_MS` are purged hourly by the `base-events-
 | z | DOUBLE | Z coordinate |
 | heading | DOUBLE | Optional heading |
 | created_at | TIMESTAMP | Creation time |
-| updated_at | TIMESTAMP | Update time |
+| updated_at | TIMESTAMP | Update time (purged after `FURNITURE_RETENTION_MS`) |
 
 ## hospital_admissions
 
@@ -579,3 +597,14 @@ Retention of sound play logs is controlled by `INTERACT_SOUND_RETENTION_MS`; old
 | name | VARCHAR(100) | Unique IPL name |
 | enabled | TINYINT(1) | 1 when active |
 | updated_at | TIMESTAMP | Last update timestamp |
+
+## police_officers
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| character_id | INT | FK to characters.id |
+| rank | VARCHAR(50) | Officer rank |
+| on_duty | TINYINT(1) | 1 when on duty |
+| created_at | TIMESTAMP | Creation time |
+| updated_at | TIMESTAMP | Last update |

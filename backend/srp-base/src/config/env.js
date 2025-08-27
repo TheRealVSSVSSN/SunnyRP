@@ -75,7 +75,29 @@ const config = {
   dispatch: { retentionMs: parseInt(process.env.DISPATCH_ALERT_RETENTION_MS || '86400000', 10) },
   baseEvents: { retentionMs: parseInt(process.env.BASE_EVENT_RETENTION_MS || '2592000000', 10) },
   assets: { retentionMs: parseInt(process.env.ASSET_RETENTION_MS || '2592000000', 10) },
+  chat: { retentionMs: parseInt(process.env.CHAT_RETENTION_MS || '604800000', 10) },
+  camera: {
+    retentionMs: parseInt(process.env.CAMERA_RETENTION_MS || '2592000000', 10),
+    cleanupIntervalMs: parseInt(process.env.CAMERA_CLEANUP_INTERVAL_MS || '3600000', 10),
+  },
+  furniture: { retentionMs: parseInt(process.env.FURNITURE_RETENTION_MS || '15552000000', 10) },
   invoiceRetentionMs: parseInt(process.env.INVOICE_RETENTION_MS || '2592000000', 10),
+  emotes: { retentionMs: parseInt(process.env.EMOTE_RETENTION_MS || '15552000000', 10) },
+  ems: {
+    broadcastIntervalMs: parseInt(process.env.EMS_BROADCAST_INTERVAL_MS || '60000', 10),
+    maxShiftDurationMs: parseInt(
+      process.env.EMS_MAX_SHIFT_DURATION_MS || String(12 * 60 * 60 * 1000),
+      10,
+    ),
+  },
+  taxi: {
+    requestTtlMs: parseInt(process.env.TAXI_REQUEST_TTL_MS || '300000', 10),
+  },
+
+  police: {
+    dutyTimeoutMs: parseInt(process.env.POLICE_DUTY_TIMEOUT_MS || '3600000', 10),
+    checkIntervalMs: parseInt(process.env.POLICE_CHECK_INTERVAL_MS || '300000', 10),
+  },
 
   /**
    * Feature flags for core modules.  Lua consumers still drive

@@ -1,6 +1,8 @@
 const express = require('express');
 const { sendOk, sendError } = require('../utils/respond');
 const { getInterior, setInterior } = require('../repositories/interiorsRepository');
+const websocket = require('../realtime/websocket');
+const hooks = require('../hooks/dispatcher');
 
 const router = express.Router();
 
@@ -47,6 +49,8 @@ router.post('/v1/apartments/:apartmentId/interior', async (req, res) => {
   }
   try {
     const interior = await setInterior(aid, cid, template);
+    websocket.broadcast('interiors', 'apartment.updated', { apartmentId: aid, characterId: cid });
+    hooks.dispatch('interiors.apartment.updated', { apartmentId: aid, characterId: cid });
     sendOk(res, { interior }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'INTERIOR_SAVE_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);

@@ -5,6 +5,8 @@ const {
   addCharacterEmote,
   removeCharacterEmote,
 } = require('../repositories/emotesRepository');
+const websocket = require('../realtime/websocket');
+const hooks = require('../hooks/dispatcher');
 
 const router = express.Router();
 
@@ -60,6 +62,8 @@ router.post('/v1/characters/:characterId/emotes', async (req, res) => {
   }
   try {
     const record = await addCharacterEmote({ characterId: idNum, emote });
+    websocket.broadcast('emotes', 'favoriteAdded', { characterId: idNum, emote });
+    hooks.dispatch('emotes.favoriteAdded', { characterId: idNum, emote });
     sendOk(res, { emote: record }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(
@@ -96,6 +100,8 @@ router.delete('/v1/characters/:characterId/emotes/:emote', async (req, res) => {
   }
   try {
     await removeCharacterEmote({ characterId: idNum, emote });
+    websocket.broadcast('emotes', 'favoriteRemoved', { characterId: idNum, emote });
+    hooks.dispatch('emotes.favoriteRemoved', { characterId: idNum, emote });
     sendOk(res, {}, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(

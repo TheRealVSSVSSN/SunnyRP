@@ -33,6 +33,7 @@ const lootRoutes = require('./routes/loot.routes');
 const inventoryRoutes = require('./routes/inventory.routes');
 const economyRoutes = require('./routes/economy.routes');
 const vehiclesRoutes = require('./routes/vehicles.routes');
+const carwashRoutes = require('./routes/carwash.routes');
 const worldRoutes = require('./routes/world.routes');
 const jobsRoutes = require('./routes/jobs.routes');
 
@@ -78,8 +79,8 @@ const furnitureRoutes = require('./routes/furniture.routes');
 const baseEventsRoutes = require('./routes/baseEvents.routes');
 // cron domain route
 const cronRoutes = require('./routes/cron.routes');
-// coordsaver domain route
-const coordsaverRoutes = require('./routes/coordsaver.routes');
+// coordinates domain route (formerly coordsaver)
+const coordinatesRoutes = require('./routes/coordinates.routes');
 
 // phone domain route
 const phoneRoutes = require('./routes/phone.routes');
@@ -202,6 +203,7 @@ app.use(lootRoutes);
 app.use(inventoryRoutes);
 app.use(economyRoutes);
 app.use(vehiclesRoutes);
+app.use(carwashRoutes);
 app.use(worldRoutes);
 app.use(jobsRoutes);
 
@@ -240,8 +242,8 @@ app.use(clothesRoutes);
 app.use(notesRoutes);
 // mount furniture routes
 app.use(furnitureRoutes);
-// mount coordsaver routes
-app.use(coordsaverRoutes);
+// mount coordinates routes
+app.use(coordinatesRoutes);
 // mount base events routes
 app.use(baseEventsRoutes);
 // mount cron routes

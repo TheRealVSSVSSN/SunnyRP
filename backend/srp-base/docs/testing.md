@@ -238,15 +238,15 @@ curl -H 'X-API-Token: <token>' http://localhost:3010/v1/cron/jobs
 curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: cron1' -H 'Content-Type: application/json' \
   -d '{"name":"paycheck","schedule":"0 * * * *","nextRun":"2025-08-24T00:00:00Z"}' \
   http://localhost:3010/v1/cron/jobs
-Manually verify the coordsaver endpoints:
+Manually verify the coordinates endpoints:
 
 ```sh
-curl -H 'X-API-Token: <token>' http://localhost:3010/v1/characters/1/coords
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/characters/1/coordinates
 curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: coord1' -H 'Content-Type: application/json' \\
   -d '{"name":"stash","x":1.0,"y":2.0,"z":3.0,"heading":90}' \\
-  http://localhost:3010/v1/characters/1/coords
+  http://localhost:3010/v1/characters/1/coordinates
 curl -H 'X-API-Token: <token>' -X DELETE -H 'X-Idempotency-Key: coord2' \\
-  http://localhost:3010/v1/characters/1/coords/1
+  http://localhost:3010/v1/characters/1/coordinates/1
 ```
 
 Manually verify the interiors endpoints:
@@ -305,6 +305,8 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: furn1' -H 'Content-Type: a
 curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: furn2' -X DELETE \
   http://localhost:3010/v1/characters/1/furniture/1
 ```
+
+Connect a WebSocket client to `ws://localhost:3010/ws?token=<token>` and confirm `furniture.placed` and `furniture.removed` events fire for the create/delete calls above.
 
 Manually verify the hospital admission endpoints:
 
@@ -437,4 +439,16 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: tc1' -H 'Content-Type: app
   -d '{"preset":"w_xmas"}' \
   http://localhost:3010/v1/world/timecycle
 curl -H 'X-API-Token: <token>' -X DELETE http://localhost:3010/v1/world/timecycle
+```
+
+Verify police roster endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/police/roster
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: pd1' -H 'Content-Type: application/json' \
+  -d '{"characterId":1,"rank":"officer","onDuty":true}' \
+  http://localhost:3010/v1/police/roster
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: pd2' -H 'Content-Type: application/json' \
+  -d '{"onDuty":false}' \
+  http://localhost:3010/v1/police/roster/1:duty
 ```

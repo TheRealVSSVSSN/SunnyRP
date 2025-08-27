@@ -1364,3 +1364,188 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Drop `ipl_states` table and remove IPL scheduler registration.
+
+## 2025-08-26 – Camera realtime
+
+### Added
+* WebSocket and webhook events for camera photo creation and deletion.
+* Scheduler purges photos older than `CAMERA_RETENTION_MS`.
+
+### Migrations
+* `069_add_camera_photos_created_index.sql` adds index on `camera_photos.created_at`.
+
+### Risks
+* Misconfigured retention may delete photos prematurely.
+
+### Rollback
+* Remove camera scheduler registration and drop index `idx_camera_photos_created_at`.
+
+## 2025-08-26 – HUD vehicle state
+
+### Added
+* Vehicle HUD state persistence (seatbelt, harness, nitrous).
+* WebSocket broadcasts on vehicle state changes.
+* Hourly scheduler purges stale vehicle state.
+
+### Migrations
+* `070_add_character_vehicle_status.sql` creates `character_vehicle_status` table.
+
+### Risks
+* Missing DB grants could prevent state writes.
+
+### Rollback
+* Drop `character_vehicle_status` table and remove HUD scheduler registration.
+
+## 2025-08-26 – Carwash realtime dirt
+
+### Added
+* Mounted carwash routes and broadcast dirt updates via WebSocket and webhooks.
+* Scheduler `carwash-dirt-tick` increments dirt levels.
+* `071_add_vehicle_cleanliness_dirt_index.sql` adds dirt_level index.
+
+### Risks
+* Misconfigured scheduler interval may flood notifications.
+
+### Rollback
+* Remove carwash scheduler registration and drop index `idx_vehicle_cleanliness_dirt`.
+
+## 2025-08-26 – Chat realtime & retention
+
+### Added
+* WebSocket and webhook broadcasts on `POST /v1/chat/messages`.
+* Hourly `chat-purge` scheduler removes messages older than `CHAT_RETENTION_MS`.
+* Config `CHAT_RETENTION_MS` with default 7 days.
+* `072_add_chat_messages_created_index.sql` adds `created_at` index.
+
+### Risks
+* Misconfigured retention could delete chat history too aggressively.
+* Additional broadcast traffic may impact clients if unsubscribed.
+
+### Rollback
+* Remove chat scheduler registration and broadcasts.
+* Drop index `idx_chat_messages_created_at`.
+
+## 2025-08-26 – Connect queue realtime & expiry
+
+### Added
+* WebSocket and webhook events on queue priority upsert, remove and expiry.
+* Minute scheduler `connectqueue-expiry` purges expired priorities.
+
+### Risks
+* Misconfigured expiry may drop active priorities unexpectedly.
+
+### Rollback
+* Remove connectqueue scheduler registration and event broadcasts.
+
+## 2025-08-26 – Coordinates rename and realtime
+
+### Added
+* Renamed coordsaver module to coordinates.
+* WebSocket topic `coordinates` and webhook events on save/delete.
+* Daily `coordinates-purge` scheduler removes coordinates older than 30 days.
+
+### Risks
+* Purge interval misconfiguration may remove active coordinates.
+* Clients using deprecated `/coords` paths must migrate to `/coordinates`.
+
+### Rollback
+* Remove `coordinates-purge` scheduler registration and broadcast hooks.
+* Restore previous route and repository names if needed.
+
+## 2025-08-27 – Cron execution worker
+
+### Added
+* Scheduler task `cron-executor` broadcasting `cron.execute` via WebSocket and webhooks.
+* Repository helpers for due job queries and rescheduling.
+* Documentation for cron realtime events.
+
+### Risks
+* Misconfigured cron expressions may schedule jobs too frequently.
+
+### Rollback
+* Remove cron executor registration and repository helpers.
+
+## 2025-08-27 – drz_interiors broadcast and uniqueness
+
+### Added
+* WebSocket/webhook event `interiors.apartment.updated` when saving apartment interiors.
+* Migration `073_update_interiors_unique_key.sql` enforcing apartment/character uniqueness.
+
+### Risks
+* Existing data with duplicate interiors per apartment may cause migration errors.
+
+### Rollback
+* Drop `uniq_apartment_character` index and restore previous `uniq_apartment` unique key.
+
+## 2025-08-27 – emotes realtime sync and retention
+
+### Added
+* WebSocket/webhook events `emotes.favoriteAdded`, `emotes.favoriteRemoved` and `emotes.favoriteExpired`.
+* Scheduler task `emotes-purge` with `EMOTE_RETENTION_MS` config.
+
+### Risks
+* Misconfigured retention may remove desired favorites prematurely.
+
+### Rollback
+* Remove scheduler registration and revert emote route changes.
+
+## 2025-08-27 – EMS realtime shift sync
+
+### Added
+* WebSocket/webhook events for EMS record lifecycle and shift start/end.
+* Scheduler `ems-shift-sync` ends stale shifts and broadcasts active list.
+* Config settings `EMS_BROADCAST_INTERVAL_MS` and `EMS_MAX_SHIFT_DURATION_MS`.
+
+### Migrations
+* None.
+
+### Risks
+* Misconfigured duration may terminate active shifts prematurely.
+
+### Rollback
+* Remove EMS scheduler registration and revert EMS route broadcasts.
+
+## 2025-08-27 – Taxi request realtime & expiry
+
+### Added
+* WebSocket/webhook events for taxi request create/accept/complete/expire.
+* Scheduler `taxi-request-expiry` cancels stale requests using `TAXI_REQUEST_TTL_MS`.
+* Config `TAXI_REQUEST_TTL_MS` to control request lifespan.
+* Migration `074_add_taxi_rides_status_created_index.sql` adds `(status, created_at)` index.
+
+### Risks
+* Misconfigured TTL may cancel active rides prematurely.
+
+### Rollback
+* Remove taxi scheduler registration, revert taxi route broadcasts and drop added index.
+
+## 2025-08-27 – Furniture realtime & retention
+
+### Added
+* WebSocket/webhook events `furniture.placed` and `furniture.removed`.
+* Scheduler task `furniture-purge` removing records older than `FURNITURE_RETENTION_MS`.
+* Config `FURNITURE_RETENTION_MS` with 180-day default.
+
+### Risks
+* Misconfigured retention may delete active furniture.
+* Clients must handle push events to remain synced.
+
+### Rollback
+* Remove furniture scheduler registration and event broadcasts; unset `FURNITURE_RETENTION_MS`.
+
+## 2025-08-27 – Police duty roster
+
+### Added
+* Police roster endpoints (`GET/POST /v1/police/roster`, `PUT /v1/police/roster/{id}`, `POST /v1/police/roster/{characterId}:duty`).
+* WebSocket topic `police` and webhook event `police.duty`.
+* Scheduler task `police-duty-check` cleaning stale duty records.
+* Config `POLICE_DUTY_TIMEOUT_MS` and `POLICE_CHECK_INTERVAL_MS`.
+* Migration `075_police_officers_character.sql` renaming `player_id` to `character_id` with index.
+
+### Risks
+* Misconfigured timeouts may prematurely set officers off duty.
+
+### Rollback
+* Revert routes, repository and config changes.
+* Drop `075_police_officers_character.sql` migration.
+* Remove scheduler registration and disable duty cleanup.

@@ -1263,6 +1263,26 @@ components:
         hudTheme:
           type: string
           nullable: true
+    VehicleState:
+      type: object
+      properties:
+        characterId:
+          type: integer
+        seatbelt:
+          type: boolean
+        harness:
+          type: boolean
+        nitrous:
+          type: integer
+    VehicleStateInput:
+      type: object
+      properties:
+        seatbelt:
+          type: boolean
+        harness:
+          type: boolean
+        nitrous:
+          type: integer
     CarwashTransaction:
       type: object
       properties:
@@ -1971,6 +1991,23 @@ components:
         type: string
       description:
         type: string
+  PoliceOfficer:
+    type: object
+    properties:
+      id:
+        type: integer
+      characterId:
+        type: integer
+      rank:
+        type: string
+      onDuty:
+        type: boolean
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
 security:
   - ApiToken: []
 paths:
@@ -2964,7 +3001,7 @@ paths:
                     type: string
         '404':
           description: Not found
-  /v1/characters/{characterId}/coords:
+  /v1/characters/{characterId}/coordinates:
     get:
       summary: List saved coordinates for a character
       parameters:
@@ -2986,7 +3023,7 @@ paths:
                   data:
                     type: object
                     properties:
-                      coords:
+                      coordinates:
                         type: array
                         items:
                           $ref: '#/components/schemas/Coordinate'
@@ -3023,7 +3060,111 @@ paths:
                   data:
                     type: object
                     properties:
-                      coord:
+                      coordinate:
+                        $ref: '#/components/schemas/Coordinate'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/characters/{characterId}/coordinates/{coordId}:
+    delete:
+      summary: Delete a saved coordinate
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+        - in: path
+          name: coordId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Coordinate deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      deleted:
+                        type: boolean
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/characters/{characterId}/coords:
+    get:
+      deprecated: true
+      summary: List saved coordinates for a character (deprecated)
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of coordinates
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      coordinates:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Coordinate'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    post:
+      deprecated: true
+      summary: Save a coordinate for a character (deprecated)
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CoordinateCreateRequest'
+      responses:
+        '200':
+          description: Coordinate saved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      coordinate:
                         $ref: '#/components/schemas/Coordinate'
                   requestId:
                     type: string
@@ -3033,7 +3174,8 @@ paths:
           $ref: '#/components/responses/BadRequest'
   /v1/characters/{characterId}/coords/{coordId}:
     delete:
-      summary: Delete a saved coordinate
+      deprecated: true
+      summary: Delete a saved coordinate (deprecated)
       parameters:
         - in: path
           name: characterId
@@ -3101,6 +3243,8 @@ paths:
           $ref: '#/components/responses/BadRequest'
     post:
       summary: Place a furniture item for a character
+      x-websocket-event: furniture.placed
+      x-webhook-event: furniture.placed
       parameters:
         - in: path
           name: characterId
@@ -3138,6 +3282,8 @@ paths:
   /v1/characters/{characterId}/furniture/{id}:
     delete:
       summary: Delete a furniture item
+      x-websocket-event: furniture.removed
+      x-webhook-event: furniture.removed
       parameters:
         - in: path
           name: characterId
@@ -5785,6 +5931,8 @@ paths:
                     $ref: '#/components/schemas/Interior'
     post:
       summary: Save interior for an apartment
+      x-websocket-event: interiors.apartment.updated
+      x-webhook-event: interiors.apartment.updated
       parameters:
         - in: path
           name: apartmentId
@@ -5968,6 +6116,8 @@ paths:
     post:
       summary: Create a photo
       operationId: createCameraPhoto
+      x-websocket-event: camera.photo.created
+      x-webhook-event: camera.photo.created
       requestBody:
         required: true
         content:
@@ -5999,6 +6149,8 @@ paths:
     delete:
       summary: Delete a photo
       operationId: deleteCameraPhoto
+      x-websocket-event: camera.photo.deleted
+      x-webhook-event: camera.photo.deleted
       parameters:
         - in: path
           name: id
@@ -6040,6 +6192,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HudPreferences'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/characters/{characterId}/vehicle-state:
+    get:
+      summary: Get vehicle HUD state
+      operationId: getVehicleState
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Vehicle HUD state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VehicleState'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    put:
+      summary: Update vehicle HUD state
+      operationId: updateVehicleState
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VehicleStateInput'
+      responses:
+        '200':
+          description: Updated vehicle HUD state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VehicleState'
         '400':
           $ref: '#/components/responses/BadRequest'
 
@@ -6147,6 +6343,8 @@ paths:
   /v1/chat/messages:
     post:
       summary: Create chat message
+      description: |
+        Creates a chat message record and pushes it to WebSocket and webhook subscribers.
       operationId: createChatMessage
       requestBody:
         required: true
@@ -6392,6 +6590,7 @@ paths:
           $ref: '#/components/responses/BadRequest'
     post:
       summary: Add a favorite emote for a character
+      description: Stores a favorite and broadcasts `emotes.favoriteAdded` via WebSocket and webhooks.
       parameters:
         - in: path
           name: characterId
@@ -6429,6 +6628,7 @@ paths:
   /v1/characters/{characterId}/emotes/{emote}:
     delete:
       summary: Remove a favorite emote from a character
+      description: Deletes a favorite and broadcasts `emotes.favoriteRemoved` via WebSocket and webhooks. Favorites older than `EMOTE_RETENTION_MS` are purged hourly with `emotes.favoriteExpired` events.
       parameters:
         - in: path
           name: characterId
@@ -7943,6 +8143,152 @@ paths:
                     type: string
         '404':
           description: Not found
+  /v1/police/roster:
+    get:
+      summary: List police officers
+      security:
+        - ApiToken: []
+      responses:
+        '200':
+          description: Officers listed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      officers:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/PoliceOfficer'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+    post:
+      summary: Assign police officer
+      security:
+        - ApiToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - characterId
+              properties:
+                characterId:
+                  type: integer
+                rank:
+                  type: string
+                onDuty:
+                  type: boolean
+      responses:
+        '200':
+          description: Officer created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      officer:
+                        $ref: '#/components/schemas/PoliceOfficer'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+  /v1/police/roster/{id}:
+    put:
+      summary: Update officer rank
+      security:
+        - ApiToken: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - rank
+              properties:
+                rank:
+                  type: string
+      responses:
+        '200':
+          description: Officer updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      officer:
+                        $ref: '#/components/schemas/PoliceOfficer'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+  /v1/police/roster/{characterId}:duty:
+    post:
+      summary: Set duty status
+      security:
+        - ApiToken: []
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - onDuty
+              properties:
+                onDuty:
+                  type: boolean
+      responses:
+        '200':
+          description: Duty updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      officer:
+                        $ref: '#/components/schemas/PoliceOfficer'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
     patch:
       summary: Update property
       parameters:

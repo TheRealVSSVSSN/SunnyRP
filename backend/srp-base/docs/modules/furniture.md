@@ -43,6 +43,14 @@ There is no feature flag for furniture; the module is always enabled.
 * **Migration:** `src/migrations/047_add_furniture.sql` creates the `furniture` table.
 * **Routes:** `src/routes/furniture.routes.js` defines the HTTP endpoints.
 * **OpenAPI:** `openapi/api.yaml` documents schemas and paths.
+* **Realtime:** `furniture.placed` and `furniture.removed` broadcast over WebSocket and webhook dispatcher.
+* **Scheduler:** `src/tasks/furniture.js` purges furniture older than `FURNITURE_RETENTION_MS` daily.
+
+## Configuration
+
+| Key | Default | Notes |
+|---|---|---|
+| `FURNITURE_RETENTION_MS` | `15552000000` | Milliseconds to retain furniture before purge (180 days). |
 
 ## Future work
 

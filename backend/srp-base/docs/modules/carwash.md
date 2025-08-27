@@ -42,7 +42,9 @@ There is no feature flag for the carwash module; it is always enabled.
 
 * **Repository:** `src/repositories/carwashRepository.js`
 * **Routes:** `src/routes/carwash.routes.js`
-* **Migration:** `src/migrations/038_add_carwash.sql`
+* **Migrations:** `src/migrations/038_add_carwash.sql`, `src/migrations/071_add_vehicle_cleanliness_dirt_index.sql`
+* **Task:** `src/tasks/carwash.js` – increments dirt levels every 15 minutes
+* **Realtime:** WebSocket topic `vehicles` with event `dirt.update`; webhook events `carwash.wash` and `carwash.dirt.set`
 * **OpenAPI:** `openapi/api.yaml`
 
 ## Future work

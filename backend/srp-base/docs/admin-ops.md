@@ -18,6 +18,7 @@
 - Ensure the `wise_uc_profiles` table exists for undercover aliases.
 - Ensure the `wise_wheels_spins` table exists for wheel spin history.
   - Ensure index `idx_wise_wheels_created` exists; spins older than 30 days are purged hourly by `wise-wheels-expire` scheduler.
+- Ensure the `taxi_rides` table has index `idx_taxi_status_created_at`; tune `TAXI_REQUEST_TTL_MS` to control stale request expiry.
  - Ensure the `assets` table exists with indexes `idx_assets_owner` and `idx_assets_created_at`; tune `ASSET_RETENTION_MS` for the `assets-prune` scheduler.
 - Ensure the `clothes` table exists for character outfit records.
 - Ensure the `apartments` and `apartment_residents` tables exist and include the `character_id` column after deploying this sprint.
@@ -30,15 +31,19 @@
 - Scheduler `boatshop-catalog-broadcast` pushes catalog updates; monitor logs for successful runs.
 - Ensure the `camera_photos` table exists for stored photos.
 - Ensure the `character_hud_preferences` table exists for HUD settings.
+- Ensure the `character_vehicle_status` table exists for vehicle HUD state.
 - Ensure the `carwash_transactions` and `vehicle_cleanliness` tables exist for carwash tracking.
-- Ensure the `chat_messages` table exists for chat logging.
+- Ensure the `chat_messages` table exists for chat logging. Messages older than `CHAT_RETENTION_MS` are purged hourly by the `chat-purge` scheduler.
 - Ensure the `queue_priorities` table exists for connection queue priority management.
-- Ensure the `character_coords` table exists for saved coordinates.
+- Monitor `connectqueue-expiry` scheduler purging expired priorities; priority updates emit `connectqueue.priority.*` webhooks.
+- Ensure the `character_coords` table exists for saved coordinates. The `coordinates-purge` scheduler removes rows older than 30 days.
 - Ensure the `interiors` table exists for apartment interior layouts.
 - Ensure the `character_emotes` table exists for favorite emotes.
+  - Favorites older than `EMOTE_RETENTION_MS` (default 180 days) are purged hourly by `emotes-purge` scheduler.
 - Ensure the `ems_records` and `ems_shift_logs` tables exist for EMS operations.
 - Ensure the `taxi_rides` table exists for taxi dispatch.
 - Ensure the `furniture` table exists for stored furniture placements.
+  - Set `FURNITURE_RETENTION_MS` if different retention is required; `furniture-purge` task runs daily.
 - Ensure the `hospital_admissions` table exists for patient tracking.
 - Ensure the `hardcap_config` and `hardcap_sessions` tables exist for player capacity tracking.
 - Ensure the `heli_flights` table exists for helicopter flight logs.
@@ -47,8 +52,10 @@
 - Ensure the `jailbreak_attempts` table exists for jailbreak tracking.
 - Ensure the `jobs` and `character_jobs` tables exist for job management.
 - Ensure the `k9_units` table exists after applying migration 057.
+- Ensure the `police_officers` table has `character_id` column and index after migration 075.
 - Ensure the `world_forecast` table exists for weather scheduling.
 - Configure webhook sinks via environment variables. Discord sink is scaffolded but disabled unless `WEBHOOK_DISCORD_ENABLED=1` and `WEBHOOK_DISCORD_URL` are set.
+- Carwash dirt updates are dispatched via webhook; register sinks if external systems require notifications.
 - Ensure the `world_timecycle` table exists for timecycle overrides.
 - Ensure the `ipl_states` table exists for interior proxy toggles.
 - Runtime sinks can be managed with `GET/POST/DELETE /v1/hooks/endpoints` (admin only). Rotate secrets by re-registering endpoints and removing old entries.

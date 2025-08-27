@@ -250,6 +250,7 @@ Introduced favorite emote persistence to support the **emotes** resource.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/emotes.md`.
 
+
 ## Update – 2025-08-25
 
 Introduced duty shift logging and documented medical record endpoints to support the **emspack** resource.
@@ -266,6 +267,15 @@ Introduced taxi dispatch backend to support the **es_taxi** resource.
 * Migration `046_add_taxi_rides.sql` creates the `taxi_rides` table.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/taxi.md`.
+
+## Update – 2025-08-27
+
+Extended furniture module with realtime push and retention cleanup.
+
+* Furniture placement/removal events broadcast via WebSockets and webhooks.
+* Daily job `furniture-purge` removes stale entries beyond `FURNITURE_RETENTION_MS`.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/furniture.md`.
 
 ## Update – 2025-08-25
 
@@ -462,3 +472,73 @@ Introduced interior proxy state management to support the **bob74_ipl** resource
 * Added world IPL endpoints `/v1/world/ipls` and `/v1/world/ipls/{name}` with WebSocket broadcasts and scheduled sync.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/world.md`.
+
+## Update – 2025-08-26
+
+Extended camera module with WebSocket and webhook pushes plus scheduled retention cleanup.
+
+## Update – 2025-08-26
+
+Extended HUD module with vehicle state tracking, WebSocket broadcasts and scheduled cleanup.
+
+## Update – 2025-08-26
+
+Extended connect queue module with WebSocket/webhook priority events and scheduled expiry purge.
+
+## Update – 2025-08-26
+
+Renamed coordsaver to **coordinates** with real-time pushes and retention.
+
+* Added WebSocket topic `coordinates` and dispatcher events for saves/deletes.
+* Scheduled `coordinates-purge` task removes entries older than 30 days.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/coordinates.md`.
+Reference resources unavailable; proceeding with internal consistency only.
+
+## Update – 2025-08-27
+
+Added cron execution worker that polls due jobs and pushes `cron.execute` over WebSocket and webhooks.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/cron.md`.
+
+## Update – 2025-08-27
+
+Extended **drz_interiors** by broadcasting apartment interior changes and enforcing per-character uniqueness.
+
+* `POST /v1/apartments/{apartmentId}/interior` now emits `interiors.apartment.updated` via WebSocket and webhooks.
+* Migration `073_update_interiors_unique_key.sql` ensures apartment templates are unique per character.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/interiors.md`.
+## Update – 2025-08-27
+
+Extended parity for the **emotes** resource with real-time sync and retention.
+
+* `POST/DELETE /v1/characters/{characterId}/emotes` now broadcast `emotes.favoriteAdded` and `emotes.favoriteRemoved` over WebSocket and webhooks.
+* Scheduler purges favorites older than `EMOTE_RETENTION_MS`, emitting `emotes.favoriteExpired`.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/emotes.md`.
+
+## Update – 2025-08-27
+
+Extended EMS module with realtime shift and record events plus scheduled shift sync.
+
+* EMS record creation and updates push `ems.record.*`.
+* Shift start/end broadcasts `ems.shift.*` and scheduler emits `ems.shifts.active`.
+* Job `ems-shift-sync` ends overlong shifts.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/ems.md`.
+
+## Update – 2025-08-27
+
+Extended taxi dispatch with real-time events and stale request cleanup.
+
+* Taxi request create/accept/complete events broadcast via WebSocket and webhooks.
+* Scheduler `taxi-request-expiry` cancels requests older than `TAXI_REQUEST_TTL_MS`.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/taxi.md`.
+
+## Update – 2025-08-27
+
+Introduced police duty roster management to support the **gabz_mrpd** cluster with WebSocket and webhook pushes plus stale-duty cleanup.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/police.md`.

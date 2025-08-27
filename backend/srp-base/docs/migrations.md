@@ -38,7 +38,7 @@
 | 038_add_carwash.sql | Carwash transactions and vehicle cleanliness tables |
 | 039_add_chat_messages.sql | Chat messages table |
 | 040_add_queue_priorities.sql | Queue priority table |
-| 041_add_character_coords.sql | Coordinate storage table |
+| 041_add_character_coords.sql | Saved coordinate storage table |
 | 042_add_cron_jobs.sql | Cron jobs table |
 | 043_add_interiors.sql | Apartment interior layouts |
 | 044_add_character_emotes.sql | Character emote favorites table |
@@ -66,3 +66,10 @@
 | 066_add_properties.sql | Unified properties table for housing and rentals |
 | 067_add_invoices.sql | Invoices table for character billing |
 | 068_add_ipls.sql | IPL state table |
+| 069_add_camera_photos_created_index.sql | Index camera_photos created_at |
+| 070_add_character_vehicle_status.sql | Vehicle HUD state table |
+| 071_add_vehicle_cleanliness_dirt_index.sql | Index dirt_level for vehicle_cleanliness |
+| 072_add_chat_messages_created_index.sql | Index chat_messages created_at column |
+| 073_update_interiors_unique_key.sql | Ensure apartment interiors unique per character |
+| 074_add_taxi_rides_status_created_index.sql | Index taxi_rides on status and created_at |
+| 075_police_officers_character.sql | Rename police_officers player_id to character_id and add index |

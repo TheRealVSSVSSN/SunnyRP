@@ -48,8 +48,27 @@ async function removeCharacterEmote({ characterId, emote }) {
   await db.query('DELETE FROM character_emotes WHERE character_id = ? AND emote = ?', [characterId, emote]);
 }
 
+/**
+ * Purge emote favorites older than the provided cutoff.
+ * Returns the removed records for downstream broadcasting.
+ *
+ * @param {number} cutoffMs - Unix epoch in milliseconds
+ * @returns {Promise<Array<{characterId:number, emote:string}>>}
+ */
+async function purgeOldEmotes(cutoffMs) {
+  const [rows] = await db.query(
+    'SELECT character_id AS characterId, emote FROM character_emotes WHERE created_at < ?',
+    [cutoffMs],
+  );
+  if (rows.length > 0) {
+    await db.query('DELETE FROM character_emotes WHERE created_at < ?', [cutoffMs]);
+  }
+  return rows;
+}
+
 module.exports = {
   listCharacterEmotes,
   addCharacterEmote,
   removeCharacterEmote,
+  purgeOldEmotes,
 };
