@@ -5910,6 +5910,8 @@ paths:
                     $ref: '#/components/schemas/Interior'
     post:
       summary: Save interior for an apartment
+      x-websocket-event: interiors.apartment.updated
+      x-webhook-event: interiors.apartment.updated
       parameters:
         - in: path
           name: apartmentId

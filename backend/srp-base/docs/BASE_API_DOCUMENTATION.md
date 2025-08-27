@@ -471,7 +471,7 @@ To support all features present in the original server resources at the framewor
   - `DELETE /v1/apartments/{apartmentId}/residents/{characterId}` – Remove a resident.
 - **drz_interiors** – Stores interior layouts per apartment.
   - `GET /v1/apartments/{apartmentId}/interior?characterId={cid}` – Retrieve interior layout.
-  - `POST /v1/apartments/{apartmentId}/interior` – Save interior layout (`characterId`, `template`).
+  - `POST /v1/apartments/{apartmentId}/interior` – Save interior layout (`characterId`, `template`) and broadcast `interiors.apartment.updated`.
 - **srp-properties** – Unified housing (apartments, garages, hotel rooms).
   - `GET /v1/properties?type=&ownerCharacterId=` – List properties.
   - `POST /v1/properties` – Create a property.

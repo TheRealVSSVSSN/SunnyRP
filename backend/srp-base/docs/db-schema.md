@@ -255,6 +255,10 @@ Indexes:
 | template | JSON | Serialized layout |
 | updated_at | TIMESTAMP | Last update |
 
+**Indexes**
+- `uniq_apartment_character` UNIQUE (`apartment_id`, `character_id`)
+- `idx_character` (`character_id`)
+
 ## carwash_transactions
 
 | Column | Type | Notes |

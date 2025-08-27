@@ -33,7 +33,7 @@
 | chat | Resource broadcasts chat messages | `POST /v1/chat/messages` logs and pushes `chat.message`; history via `GET /v1/chat/messages/{characterId}`; scheduler `chat-purge` removes old logs |
 | connectqueue | Resource uses exports `AddPriority` and `RemovePriority` with account identifiers and now pushes `priority.upserted`, `priority.removed` and `priority.expired` over WebSocket and webhooks | `GET/POST/DELETE /v1/connectqueue/priorities` manage backend priority records |
 | coordinates | Resource lets players save named coordinates. Events broadcast on WebSocket topic `coordinates` and dispatcher events `coordinates.saved`/`coordinates.deleted`. | `GET /v1/characters/{characterId}/coordinates`, `POST /v1/characters/{characterId}/coordinates`, `DELETE /v1/characters/{characterId}/coordinates/{id}` |
-| drz_interiors | Resource triggers save/load events for apartment interior templates | `GET /v1/apartments/{apartmentId}/interior`, `POST /v1/apartments/{apartmentId}/interior` |
+| drz_interiors | Resource triggers save/load events for apartment interior templates | `GET /v1/apartments/{apartmentId}/interior`, `POST /v1/apartments/{apartmentId}/interior` → `interiors.apartment.updated` |
 | emotes | Resource lets players mark favorite emote commands for quick selection | `GET/POST/DELETE /v1/characters/{characterId}/emotes` |
 | emspack | Resource emits duty start/end and treatment events | `GET/POST/PATCH/DELETE /v1/ems/records`, `GET /v1/ems/shifts/active`, `POST /v1/ems/shifts`, `POST /v1/ems/shifts/{id}/end` |
 | es_taxi | Players request taxi rides and drivers accept/complete them | `POST /v1/taxi/requests`, `POST /v1/taxi/requests/{id}/accept`, `POST /v1/taxi/requests/{id}/complete` |

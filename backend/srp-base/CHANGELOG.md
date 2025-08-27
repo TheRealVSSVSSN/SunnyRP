@@ -1464,3 +1464,15 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Remove cron executor registration and repository helpers.
+
+## 2025-08-27 – drz_interiors broadcast and uniqueness
+
+### Added
+* WebSocket/webhook event `interiors.apartment.updated` when saving apartment interiors.
+* Migration `073_update_interiors_unique_key.sql` enforcing apartment/character uniqueness.
+
+### Risks
+* Existing data with duplicate interiors per apartment may cause migration errors.
+
+### Rollback
+* Drop `uniq_apartment_character` index and restore previous `uniq_apartment` unique key.
