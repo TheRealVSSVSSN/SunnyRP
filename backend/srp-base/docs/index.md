@@ -250,6 +250,7 @@ Introduced favorite emote persistence to support the **emotes** resource.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/emotes.md`.
 
+
 ## Update – 2025-08-25
 
 Introduced duty shift logging and documented medical record endpoints to support the **emspack** resource.
@@ -507,3 +508,13 @@ Extended parity for the **emotes** resource with real-time sync and retention.
 * Scheduler purges favorites older than `EMOTE_RETENTION_MS`, emitting `emotes.favoriteExpired`.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/emotes.md`.
+
+## Update – 2025-08-27
+
+Extended EMS module with realtime shift and record events plus scheduled shift sync.
+
+* EMS record creation and updates push `ems.record.*`.
+* Shift start/end broadcasts `ems.shift.*` and scheduler emits `ems.shifts.active`.
+* Job `ems-shift-sync` ends overlong shifts.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/ems.md`.

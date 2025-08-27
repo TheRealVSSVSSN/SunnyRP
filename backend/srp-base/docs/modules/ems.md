@@ -13,6 +13,18 @@ Logs medical treatment records and tracks EMS duty shifts.
 - `POST /v1/ems/shifts` – Start a shift (`characterId`).
 - `POST /v1/ems/shifts/{id}/end` – End a shift.
 
+## Realtime
+- WebSocket topic `ems` broadcasts:
+  - `record.created`, `record.updated`, `record.deleted`
+  - `shift.started`, `shift.ended`
+  - `shifts.active` snapshot of all active shifts
+- Webhook dispatcher mirrors these events for external sinks.
+
+## Scheduler
+- Job `ems-shift-sync` runs every `EMS_BROADCAST_INTERVAL_MS`.
+  - Ends shifts exceeding `EMS_MAX_SHIFT_DURATION_MS`.
+  - Broadcasts `shifts.active` after cleanup.
+
 ## Repository Contracts
 - `getRecords()` → Array of records.
 - `getRecord(id)` → Record or `null`.

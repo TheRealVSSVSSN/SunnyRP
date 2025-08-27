@@ -1488,3 +1488,19 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Remove scheduler registration and revert emote route changes.
+
+## 2025-08-27 – EMS realtime shift sync
+
+### Added
+* WebSocket/webhook events for EMS record lifecycle and shift start/end.
+* Scheduler `ems-shift-sync` ends stale shifts and broadcasts active list.
+* Config settings `EMS_BROADCAST_INTERVAL_MS` and `EMS_MAX_SHIFT_DURATION_MS`.
+
+### Migrations
+* None.
+
+### Risks
+* Misconfigured duration may terminate active shifts prematurely.
+
+### Rollback
+* Remove EMS scheduler registration and revert EMS route broadcasts.

@@ -1,6 +1,8 @@
 const express = require('express');
 const emsRepo = require('../repositories/emsRepository');
 const { sendOk, sendError } = require('../utils/respond');
+const websocket = require('../realtime/websocket');
+const dispatcher = require('../hooks/dispatcher');
 
 const router = express.Router();
 
@@ -35,6 +37,8 @@ router.post('/v1/ems/records', express.json(), async (req, res) => {
   }
   try {
     const record = await emsRepo.createRecord({ patient_id, doctor_id, treatment, status });
+    if (websocket) websocket.broadcast('ems', 'record.created', record);
+    dispatcher.dispatch('ems.record.created', record);
     sendOk(res, record, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'INTERNAL_ERROR', message: 'Failed to create record' }, 500, res.locals.requestId, res.locals.traceId);
@@ -48,6 +52,8 @@ router.patch('/v1/ems/records/:id', express.json(), async (req, res) => {
     if (!record) {
       return sendError(res, { code: 'NOT_FOUND', message: 'Record not found' }, 404, res.locals.requestId, res.locals.traceId);
     }
+    if (websocket) websocket.broadcast('ems', 'record.updated', record);
+    dispatcher.dispatch('ems.record.updated', record);
     sendOk(res, record, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'INTERNAL_ERROR', message: 'Failed to update record' }, 500, res.locals.requestId, res.locals.traceId);
@@ -61,6 +67,8 @@ router.delete('/v1/ems/records/:id', async (req, res) => {
     if (!ok) {
       return sendError(res, { code: 'NOT_FOUND', message: 'Record not found' }, 404, res.locals.requestId, res.locals.traceId);
     }
+    if (websocket) websocket.broadcast('ems', 'record.deleted', { id: req.params.id });
+    dispatcher.dispatch('ems.record.deleted', { id: req.params.id });
     sendOk(res, { deleted: true }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'INTERNAL_ERROR', message: 'Failed to delete record' }, 500, res.locals.requestId, res.locals.traceId);
@@ -97,6 +105,11 @@ router.post('/v1/ems/shifts', express.json(), async (req, res) => {
   }
   try {
     const shift = await emsRepo.startShift(characterId);
+    if (websocket) websocket.broadcast('ems', 'shift.started', shift);
+    dispatcher.dispatch('ems.shift.started', shift);
+    const active = await emsRepo.getActiveShifts();
+    if (websocket) websocket.broadcast('ems', 'shifts.active', active);
+    dispatcher.dispatch('ems.shifts.active', active);
     sendOk(res, shift, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(
@@ -122,6 +135,11 @@ router.post('/v1/ems/shifts/:id/end', async (req, res) => {
         res.locals.traceId,
       );
     }
+    if (websocket) websocket.broadcast('ems', 'shift.ended', shift);
+    dispatcher.dispatch('ems.shift.ended', shift);
+    const active = await emsRepo.getActiveShifts();
+    if (websocket) websocket.broadcast('ems', 'shifts.active', active);
+    dispatcher.dispatch('ems.shifts.active', active);
     sendOk(res, shift, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(
