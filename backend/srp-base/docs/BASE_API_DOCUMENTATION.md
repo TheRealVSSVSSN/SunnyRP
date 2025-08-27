@@ -538,10 +538,10 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
 - **srp-cron** – Schedules timed server tasks.
   - `GET /v1/cron/jobs` – List registered cron jobs.
   - `POST /v1/cron/jobs` – Create or replace a cron job with `name`, `schedule`, optional `payload`, `accountId`, `characterId`, `priority` and `nextRun`.
-- **srp-coordsaver** – Stores character-specific saved coordinates.
-  - `GET /v1/characters/{characterId}/coords` – List saved coordinates.
-  - `POST /v1/characters/{characterId}/coords` – Save or update a coordinate (`name`, `x`, `y`, `z`, optional `heading`).
-  - `DELETE /v1/characters/{characterId}/coords/{id}` – Remove a coordinate.
+- **srp-coordinates** – Stores character-specific saved coordinates.
+  - `GET /v1/characters/{characterId}/coordinates` – List saved coordinates.
+  - `POST /v1/characters/{characterId}/coordinates` – Save or update a coordinate (`name`, `x`, `y`, `z`, optional `heading`).
+  - `DELETE /v1/characters/{characterId}/coordinates/{id}` – Remove a coordinate.
 - **srp-emotes** – Stores per-character favorite emotes.
   - `GET /v1/characters/{characterId}/emotes` – List favorite emotes.
   - `POST /v1/characters/{characterId}/emotes` – Add a favorite emote (`emote`).

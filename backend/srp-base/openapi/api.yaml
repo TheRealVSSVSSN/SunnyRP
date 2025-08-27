@@ -2984,7 +2984,7 @@ paths:
                     type: string
         '404':
           description: Not found
-  /v1/characters/{characterId}/coords:
+  /v1/characters/{characterId}/coordinates:
     get:
       summary: List saved coordinates for a character
       parameters:
@@ -3006,7 +3006,7 @@ paths:
                   data:
                     type: object
                     properties:
-                      coords:
+                      coordinates:
                         type: array
                         items:
                           $ref: '#/components/schemas/Coordinate'
@@ -3043,7 +3043,111 @@ paths:
                   data:
                     type: object
                     properties:
-                      coord:
+                      coordinate:
+                        $ref: '#/components/schemas/Coordinate'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/characters/{characterId}/coordinates/{coordId}:
+    delete:
+      summary: Delete a saved coordinate
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+        - in: path
+          name: coordId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Coordinate deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      deleted:
+                        type: boolean
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/characters/{characterId}/coords:
+    get:
+      deprecated: true
+      summary: List saved coordinates for a character (deprecated)
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of coordinates
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      coordinates:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Coordinate'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    post:
+      deprecated: true
+      summary: Save a coordinate for a character (deprecated)
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CoordinateCreateRequest'
+      responses:
+        '200':
+          description: Coordinate saved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      coordinate:
                         $ref: '#/components/schemas/Coordinate'
                   requestId:
                     type: string
@@ -3053,7 +3157,8 @@ paths:
           $ref: '#/components/responses/BadRequest'
   /v1/characters/{characterId}/coords/{coordId}:
     delete:
-      summary: Delete a saved coordinate
+      deprecated: true
+      summary: Delete a saved coordinate (deprecated)
       parameters:
         - in: path
           name: characterId

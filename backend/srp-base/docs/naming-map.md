@@ -24,3 +24,4 @@
 | notenoughmoney | error: INSUFFICIENT_FUNDS |
 | chat | chat |
 | connectqueue | connectqueue |
+| coordsaver | coordinates |
