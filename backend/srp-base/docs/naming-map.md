@@ -26,3 +26,4 @@
 | connectqueue | connectqueue |
 | coordsaver | coordinates |
 | drz_interiors | interiors |
+| emotes | emotes |

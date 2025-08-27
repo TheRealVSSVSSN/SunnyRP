@@ -1476,3 +1476,15 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Drop `uniq_apartment_character` index and restore previous `uniq_apartment` unique key.
+
+## 2025-08-27 – emotes realtime sync and retention
+
+### Added
+* WebSocket/webhook events `emotes.favoriteAdded`, `emotes.favoriteRemoved` and `emotes.favoriteExpired`.
+* Scheduler task `emotes-purge` with `EMOTE_RETENTION_MS` config.
+
+### Risks
+* Misconfigured retention may remove desired favorites prematurely.
+
+### Rollback
+* Remove scheduler registration and revert emote route changes.

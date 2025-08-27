@@ -38,6 +38,7 @@
 - Ensure the `character_coords` table exists for saved coordinates. The `coordinates-purge` scheduler removes rows older than 30 days.
 - Ensure the `interiors` table exists for apartment interior layouts.
 - Ensure the `character_emotes` table exists for favorite emotes.
+  - Favorites older than `EMOTE_RETENTION_MS` (default 180 days) are purged hourly by `emotes-purge` scheduler.
 - Ensure the `ems_records` and `ems_shift_logs` tables exist for EMS operations.
 - Ensure the `taxi_rides` table exists for taxi dispatch.
 - Ensure the `furniture` table exists for stored furniture placements.

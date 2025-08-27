@@ -339,3 +339,8 @@
 
 - Attempted to clone reference repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Reference resources unavailable; proceeding with internal consistency only.
 - Reviewed interior persistence patterns in ESX, QB-Core and ND Core documentation for conceptual parity.
+
+## Research Log – 2025-08-27 (emotes)
+
+- Attempted to clone `https://github.com/h04X-2K/NoPixelServer` for emotes but received HTTP 403. Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed emote favorite systems in ESX and QB-Core to align naming and retention ideas.

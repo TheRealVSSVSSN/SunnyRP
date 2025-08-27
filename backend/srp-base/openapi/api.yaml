@@ -6569,6 +6569,7 @@ paths:
           $ref: '#/components/responses/BadRequest'
     post:
       summary: Add a favorite emote for a character
+      description: Stores a favorite and broadcasts `emotes.favoriteAdded` via WebSocket and webhooks.
       parameters:
         - in: path
           name: characterId
@@ -6606,6 +6607,7 @@ paths:
   /v1/characters/{characterId}/emotes/{emote}:
     delete:
       summary: Remove a favorite emote from a character
+      description: Deletes a favorite and broadcasts `emotes.favoriteRemoved` via WebSocket and webhooks. Favorites older than `EMOTE_RETENTION_MS` are purged hourly with `emotes.favoriteExpired` events.
       parameters:
         - in: path
           name: characterId
