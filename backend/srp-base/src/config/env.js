@@ -101,6 +101,11 @@ const config = {
     requestTtlMs: parseInt(process.env.TAXI_REQUEST_TTL_MS || '300000', 10),
   },
 
+  importPack: {
+    expiryMs: parseInt(process.env.IMPORT_PACK_EXPIRY_MS || '86400000', 10),
+    cleanupIntervalMs: parseInt(process.env.IMPORT_PACK_CLEANUP_INTERVAL_MS || '60000', 10),
+  },
+
   garages: {
     retentionMs: parseInt(process.env.GARAGE_VEHICLE_RETENTION_MS || '2592000000', 10),
   },

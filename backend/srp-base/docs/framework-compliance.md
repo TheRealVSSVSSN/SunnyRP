@@ -87,7 +87,7 @@ practice is supported by citations.
 | **database helpers** | Core MySQL adapter now supports named parameters, scalar queries and transaction wrappers for safer, more flexible persistence. |
 | **hardcap module** | Hardcap endpoints follow the layered pattern with auth, rate limiting and idempotency; now emit `hardcap.*` events and scheduler purges stale sessions. |
 | **heli module** | Heli flight endpoints follow the established layered pattern with authentication and idempotency; broadcasts start/end events and scheduler auto-ends stale flights. |
-| **import-pack module** | Order pricing, retrieval and cancellation endpoints follow the established layered pattern with authentication and idempotency. |
+| **import-pack module** | Order pricing, retrieval, cancellation and expiry endpoints follow the established layered pattern with authentication, idempotency, WebSocket/webhook events and an expiry scheduler. |
 | **peds module** | Ped state endpoints follow the established layered pattern with authentication and idempotency. |
 | **jailbreak module** | Jailbreak endpoints follow the established layered pattern with authentication and idempotency. |
 | **k9 module** | K9 unit endpoints follow the established layered pattern with authentication and idempotency. |

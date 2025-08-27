@@ -10,6 +10,13 @@ Provides persistence for vehicle import packages requested by characters, includ
 - `POST /v1/import-pack/orders/{id}/deliver` – mark an order as delivered.
 - `POST /v1/import-pack/orders/{id}/cancel` – cancel a pending order.
 
+WebSocket topic `import-pack` broadcasts:
+
+- `order.created`
+- `order.delivered`
+- `order.canceled`
+- `order.expired`
+
 ## Repository Contracts
 
 - `createOrder({ characterId, packageName, price })`
@@ -17,6 +24,7 @@ Provides persistence for vehicle import packages requested by characters, includ
 - `getOrder(id, characterId)`
 - `markDelivered(id)`
 - `cancelOrder(id, characterId)`
+- `expireOrders(now)`
 
 ## Edge Cases
 
@@ -24,3 +32,4 @@ Provides persistence for vehicle import packages requested by characters, includ
 - Fetch and cancel endpoints require `characterId` to match the order owner.
 - Cancel endpoint returns `404` when the order is missing or not pending.
 - Deliver endpoint returns `404` when the order is missing.
+- Orders expire after `IMPORT_PACK_EXPIRY_MS`; expired orders broadcast `order.expired` and cannot be delivered.

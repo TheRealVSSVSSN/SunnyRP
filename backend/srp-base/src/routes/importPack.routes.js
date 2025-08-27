@@ -1,6 +1,8 @@
 const express = require('express');
 const { sendOk, sendError } = require('../utils/respond');
 const repo = require('../repositories/importPackRepository');
+const websocket = require('../realtime/websocket');
+const hooks = require('../hooks/dispatcher');
 
 const router = express.Router();
 
@@ -65,6 +67,8 @@ router.post('/v1/import-pack/orders', async (req, res) => {
   }
   try {
     const order = await repo.createOrder({ characterId, packageName, price });
+    websocket.broadcast('import-pack', 'order.created', order);
+    hooks.dispatch('import-pack.order.created', order);
     sendOk(res, { order }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'IMPORT_PACK_CREATE_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);
@@ -93,6 +97,8 @@ router.post('/v1/import-pack/orders/:id/deliver', async (req, res) => {
         res.locals.traceId,
       );
     }
+    websocket.broadcast('import-pack', 'order.delivered', { id: Number(id) });
+    hooks.dispatch('import-pack.order.delivered', { id: Number(id) });
     sendOk(res, { delivered: true }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'IMPORT_PACK_DELIVER_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);
@@ -131,6 +137,8 @@ router.post('/v1/import-pack/orders/:id/cancel', async (req, res) => {
         res.locals.traceId,
       );
     }
+    websocket.broadcast('import-pack', 'order.canceled', { id: Number(id), characterId });
+    hooks.dispatch('import-pack.order.canceled', { id: Number(id), characterId });
     sendOk(res, { canceled: true }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'IMPORT_PACK_CANCEL_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);

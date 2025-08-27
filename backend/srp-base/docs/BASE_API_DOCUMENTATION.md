@@ -662,3 +662,17 @@ Added police roster endpoints with WebSocket and webhook push plus stale-duty cl
 - `POST /v1/police/roster` – assign an officer (requires `X-Idempotency-Key`).
 - `PUT /v1/police/roster/{id}` – update officer rank (requires `X-Idempotency-Key`).
 - `POST /v1/police/roster/{characterId}:duty` – set duty status (requires `X-Idempotency-Key`).
+
+## Update – 2025-08-27 (import-pack expiry)
+
+Introduced import package expiry with real-time notifications.
+
+### Endpoints
+
+- `POST /v1/import-pack/orders` – create an import package order (requires `X-Idempotency-Key`).
+- `POST /v1/import-pack/orders/{id}/deliver` – mark an order delivered (requires `X-Idempotency-Key`).
+- `POST /v1/import-pack/orders/{id}/cancel` – cancel a pending order (requires `X-Idempotency-Key`).
+
+WebSocket topic `import-pack` broadcasts `order.created`, `order.delivered`, `order.canceled` and `order.expired`.
+
+Scheduler `import-pack-expiry` marks orders past `IMPORT_PACK_EXPIRY_MS` as expired and emits `order.expired`.

@@ -1,36 +1,27 @@
 # Manifest
 
-- Added hospital admission realtime events with cleanup scheduler.
-- Added taxi request realtime events with expiry scheduler and config TTL.
-- Added garage vehicle store/retrieve events with retention scheduler.
+- Added import package expiry with WebSocket and webhook notifications.
 
 | File | Action | Note |
 |---|---|---|
-| src/config/env.js | M | Added hospital broadcast settings, `taxi.requestTtlMs` and `garages.retentionMs` configuration |
-| src/repositories/taxiRepository.js | M | Added stale request cancellation |
-| src/tasks/taxi.js | A | Scheduler to expire taxi requests |
-| src/server.js | M | Registered taxi expiry scheduler, hospital sync and garage purge |
-| src/routes/taxi.routes.js | M | Broadcast and webhook taxi events |
-| src/migrations/074_add_taxi_rides_status_created_index.sql | A | Index on `(status, created_at)` |
-| docs/modules/taxi.md | M | Documented scheduler and realtime events |
-| docs/events-and-rpcs.md | M | Mapped taxi, hospital and garage events |
-| docs/BASE_API_DOCUMENTATION.md | M | Listed taxi, hospital and garage WebSocket events |
-| docs/progress-ledger.md | M | Logged taxi, hospital and garage realtime entries |
-| docs/framework-compliance.md | M | Noted taxi module compliance, hospital and garage realtime purge |
-| docs/admin-ops.md | M | Added taxi index/TTL, hospital env tuning and garage retention/index note |
-| docs/db-schema.md | M | Recorded taxi, hospital and garage indexes |
-| docs/migrations.md | M | Added migration entries |
-| docs/naming-map.md | M | Added es_taxi → taxi mapping |
-| docs/index.md | M | Added taxi, hospital and garage update summaries |
-| docs/research-log.md | M | Logged taxi, hospital and garage research |
+| src/config/env.js | M | Added import pack expiry configuration |
+| src/repositories/importPackRepository.js | M | Added expiresAt handling and expiry helper |
+| src/routes/importPack.routes.js | M | Broadcast order lifecycle events |
+| src/tasks/importPack.js | A | Scheduler to expire pending orders |
+| src/server.js | M | Registered import-pack expiry scheduler |
+| src/migrations/078_add_import_pack_expiry.sql | A | Add expires_at/expired_at columns and index |
+| openapi/api.yaml | M | Documented expiry fields and event descriptions |
+| docs/modules/import-pack.md | M | Documented realtime events and expiry |
+| docs/BASE_API_DOCUMENTATION.md | M | Added import pack endpoint summary |
+| docs/events-and-rpcs.md | M | Mapped import-pack events |
+| docs/db-schema.md | M | Added expires_at/expired_at columns |
+| docs/migrations.md | M | Logged import pack expiry migration |
+| docs/admin-ops.md | M | Added import pack expiry operations |
+| docs/index.md | M | Added import pack update summary |
+| docs/progress-ledger.md | M | Logged import pack expiry entry |
+| docs/framework-compliance.md | M | Noted import pack module compliance |
+| docs/naming-map.md | M | Added import-Pack mappings |
+| docs/research-log.md | M | Logged import pack expiry research |
+| docs/testing.md | M | Added import pack expiry test notes |
+| docs/todo-gaps.md | M | Added gap for editing import pack orders |
 | docs/run-docs.md | M | Run summary and outstanding tasks |
-| src/routes/hospital.routes.js | M | Broadcast admission events |
-| src/tasks/hospital.js | A | Scheduler to sync and auto-discharge admissions |
-| openapi/api.yaml | M | Added 404 response for discharge |
-| docs/modules/hospital.md | M | Documented realtime and scheduler |
-| src/routes/garages.routes.js | M | Broadcast store/retrieve events and dispatch webhooks |
-| src/repositories/garagesRepository.js | M | Added purge helper for retrieved vehicles |
-| src/tasks/garages.js | A | Scheduler to purge retrieved vehicles |
-| src/migrations/076_add_garage_vehicle_retrieved_index.sql | A | Index on `retrieved_at` |
-
-**Startup Notes:** install dependencies with `npm install` (fails: express-openapi-validator@^4.18.3 not found).

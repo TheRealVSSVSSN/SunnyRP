@@ -358,6 +358,8 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: imp3' -H 'Content-Type: ap
   -d '{"characterId":1}' \
   http://localhost:3010/v1/import-pack/orders/1/cancel
 
+# To exercise expiry, set `IMPORT_PACK_EXPIRY_MS=1000`, create an order, and wait for `import-pack.order.expired` via WebSocket.
+
 Manually verify the peds endpoints:
 
 ```sh

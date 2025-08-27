@@ -7,10 +7,13 @@
 - docs/events-and-rpcs.md
 - docs/framework-compliance.md
 - docs/index.md
-- docs/modules/heli.md
+- docs/migrations.md
+- docs/modules/import-pack.md
 - docs/naming-map.md
 - docs/progress-ledger.md
 - docs/research-log.md
+- docs/testing.md
+- docs/todo-gaps.md
 - docs/run-docs.md
 
 ## Run – 2025-08-27
@@ -22,10 +25,13 @@
 - docs/events-and-rpcs.md
 - docs/framework-compliance.md
 - docs/index.md
-- docs/modules/heli.md
+- docs/migrations.md
+- docs/modules/import-pack.md
 - docs/naming-map.md
 - docs/progress-ledger.md
 - docs/research-log.md
+- docs/testing.md
+- docs/todo-gaps.md
 - docs/run-docs.md
 
 ## Outstanding TODO/Gaps
@@ -43,3 +49,4 @@
 | Allow labeling/ordering of favorite emotes | backend | low | design |
 | Implement call-sign management for police officers | backend | medium | design |
 | Add altitude and location tracking for helicopter flights | backend | low | design |
+| Support editing existing import pack orders | backend | low | design |

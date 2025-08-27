@@ -525,8 +525,12 @@ Index: `idx_heli_flights_character` on `character_id`
 | price | DECIMAL(10,2) | Order cost |
 | status | VARCHAR(32) | pending, delivered or canceled |
 | created_at | BIGINT | Milliseconds timestamp |
+| expires_at | BIGINT | Expiry timestamp |
+| expired_at | BIGINT | Expired timestamp, null if not expired |
 | delivered_at | BIGINT | Delivery timestamp, null if not delivered |
 | canceled_at | BIGINT | Cancellation timestamp, null if not canceled |
+
+Index `idx_import_pack_orders_status_expires` on `(status, expires_at)` accelerates expiry scans.
 
 ## character_peds
 

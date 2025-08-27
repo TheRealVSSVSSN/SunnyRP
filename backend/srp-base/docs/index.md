@@ -311,6 +311,14 @@ For resource decisions see `progress-ledger.md`. Module details are documented i
 
 ## Update – 2025-08-27
 
+Added import package expiry with realtime push and scheduled cleanup.
+
+* Orders gain `expiresAt` and `expiredAt`; scheduler `import-pack-expiry` marks overdue orders.
+* WebSocket and webhooks emit `import-pack.order.created`, `import-pack.order.delivered`, `import-pack.order.canceled` and `import-pack.order.expired`.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/import-pack.md`.
+## Update – 2025-08-27
+
 Extended heli flight tracking with realtime events and stale-flight cleanup.
 
 * Flight start/end emits `heli.flightStarted` and `heli.flightEnded` via WebSocket/webhooks.
