@@ -36,3 +36,5 @@
 | police_officers | police roster |
 | player_id | character_id |
 | heli | heli |
+| import-Pack | import-pack |
+| import-Pack2 | import-pack |

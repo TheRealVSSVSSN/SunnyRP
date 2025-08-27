@@ -384,3 +384,8 @@
 
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Reference resources unavailable; proceeding with internal consistency only.
 - Reviewed helicopter job/vehicle flows in EssentialMode, ESX, ND Core, FSN Framework, QB-Core, vRP and vORP conceptually to align naming and event patterns.
+
+## Research Log – 2025-08-27 (import-pack expiry)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed vehicle import expiration patterns in ESX and QB-Core frameworks conceptually for scheduler design.

@@ -52,7 +52,7 @@
  - Ensure index `idx_hardcap_sessions_disconnected_connected` exists; scheduler `hardcap-session-expiry` purges stale sessions after `HARDCAP_SESSION_TIMEOUT_MS`.
 - Ensure the `heli_flights` table exists for helicopter flight logs.
 - Configure `HELI_MAX_FLIGHT_HOURS` and `HELI_CHECK_INTERVAL_MS` to control automatic flight expiry.
-- Ensure the `import_pack_orders` table includes `price` and `canceled_at` columns for import package tracking.
+- Ensure the `import_pack_orders` table includes `price`, `canceled_at`, `expires_at` and `expired_at` columns with index `idx_import_pack_orders_status_expires`. Scheduler `import-pack-expiry` uses these to mark and broadcast expired orders based on `IMPORT_PACK_EXPIRY_MS`.
 - Ensure the `character_peds` table exists for ped state tracking.
 - Ensure the `jailbreak_attempts` table exists for jailbreak tracking.
 - Ensure the `jobs` and `character_jobs` tables exist for job management.

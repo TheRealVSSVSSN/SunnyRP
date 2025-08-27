@@ -1592,3 +1592,21 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Remove `heli-expire-flights` scheduler registration and related config keys.
+
+## 2025-08-27 (import-pack expiry)
+
+### Changed
+* Import pack orders now include `expires_at` and `expired_at` fields.
+* WebSocket/webhook events for order lifecycle including `order.expired`.
+* Scheduler `import-pack-expiry` marks overdue orders.
+
+### Migrations
+* 078_add_import_pack_expiry.sql
+
+### Risks
+* Misconfigured expiry may close valid orders.
+* Large numbers of expired orders could flood notifications.
+
+### Rollback
+* Drop columns `expires_at` and `expired_at` and index `idx_import_pack_orders_status_expires`.
+* Remove scheduler registration and related config keys.

@@ -75,3 +75,4 @@
 | 075_police_officers_character.sql | Rename police_officers player_id to character_id and add index |
 | 076_add_garage_vehicle_retrieved_index.sql | Index garage_vehicles retrieved_at column |
 | 077_add_hardcap_session_index.sql | Index hardcap_sessions disconnected_at & connected_at |
+| 078_add_import_pack_expiry.sql | Add expires_at/expired_at columns and index to import_pack_orders |

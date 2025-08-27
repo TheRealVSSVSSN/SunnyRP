@@ -793,6 +793,13 @@ components:
         createdAt:
           type: integer
           format: int64
+        expiresAt:
+          type: integer
+          format: int64
+        expiredAt:
+          type: integer
+          format: int64
+          nullable: true
         deliveredAt:
           type: integer
           format: int64
@@ -5326,6 +5333,7 @@ paths:
   /v1/import-pack/orders:
     post:
       summary: Create an import package order
+      description: Stores an order and broadcasts `import-pack.order.created` via WebSocket and webhooks.
       operationId: createImportPackOrder
       parameters:
         - in: header
@@ -5435,6 +5443,7 @@ paths:
   /v1/import-pack/orders/{id}/deliver:
     post:
       summary: Mark import package order as delivered
+      description: Updates status to delivered and broadcasts `import-pack.order.delivered`.
       operationId: deliverImportPackOrder
       parameters:
         - in: path
@@ -5472,6 +5481,7 @@ paths:
   /v1/import-pack/orders/{id}/cancel:
     post:
       summary: Cancel import package order
+      description: Cancels a pending order and broadcasts `import-pack.order.canceled`.
       operationId: cancelImportPackOrder
       parameters:
         - in: path

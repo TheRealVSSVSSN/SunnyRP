@@ -12,6 +12,7 @@ const wiseWheelsTasks = require('./tasks/wiseWheels');
 const assetsTasks = require('./tasks/assets');
 const propertiesTasks = require('./tasks/properties');
 const economyTasks = require('./tasks/economy');
+const importPackTasks = require('./tasks/importPack');
 const baseEventTasks = require('./tasks/baseEvents');
 const boatshopTasks = require('./tasks/boatshop');
 const worldTasks = require('./tasks/world');
@@ -61,6 +62,12 @@ scheduler.register(
   () => wiseWheelsTasks.purgeOld(),
   wiseWheelsTasks.INTERVAL_MS,
   { jitter: 60000 },
+);
+scheduler.register(
+  importPackTasks.JOB_NAME,
+  () => importPackTasks.expireStale(),
+  importPackTasks.INTERVAL_MS,
+  { jitter: 5000, persistName: importPackTasks.JOB_NAME },
 );
 scheduler.register(
   assetsTasks.JOB_NAME,
