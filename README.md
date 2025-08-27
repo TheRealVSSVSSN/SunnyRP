@@ -1,84 +1,5 @@
-# SunnyRoleplay Server
+|  |  | Ban a player.  Body .  Persists to the bans table and returns ban status. |# SunnyRP Base API (srp-base) Documentation
 
-> **Status:** Work in progress
-
-## Overview
-This document outlines the evolving structure for the Sunny Roleplay (Sunny RP / SRP) server. SunnyRoleplay runs on a custom framework designed for clarity, modularity, and long-term maintainability.
-
-### Server duel environment:
-
-```
-Client: Lua (For client scripts)
-Client: HTML (For NUI)
-Client: CSS (For NUI)
-Client: Javascript (For NUI)
-Server: Node.JS (For data handling and services that can be handled outside of the game environment to help maintain performance)
-Server: Lua (To make calls via PerformHTTPRequest to the Node.JS api and as a backup with the same functionality of the Node.JS server incase the Node.JS server is unavailable or backed up.)
-Server: Javascript (Another backup to help ensure stability.)
-```
-
-#### Note to developers:
-Backup server code within Lua and Javascript will function exactly as the Node.JS server. Consistency is important here. If Node.JS gets an update then server backups in Lua and Javascript will also need to mirror the update before the new version final release or the code will likey break.
-
-## Repository Layout (simplified)
-The structure below is illustrative and may change over time.
-
-```
-├── LICENSE
-├── README.md
-├── backend
-│   └── srp-base
-│       ├── CHANGELOG.md
-│       ├── MANIFEST.md
-│       ├── README.md
-│       ├── app.js
-│       ├── docs
-│       ├── openapi
-│       ├── package.json
-│       ├── postman
-│       ├── scripts
-│       ├── server.js
-│       └── src
-│           ├── app.js
-│           ├── bootstrap
-│           │   └── files
-│           ├── config
-│           │   └── files
-│           ├── middleware
-│           │   └── files
-│           ├── migrations
-│           │   └── files
-│           ├── openapi
-│           │   └── files
-│           ├── repositories
-│           │   └── files
-│           ├── routes
-│           │   └── files
-│           ├── server.js
-│           ├── services
-│           ├── utils
-│           │   └── files
-│           └── workers
-├── logs
-├── resources
-│   └── [sunnyroleplay]
-│       └── sunnyrp-base
-│       │   ├── client
-│       │   │   └── files
-│       │   ├── server
-│       │   │   └── files
-│       │   ├── sshared
-│       │   │   └── files
-│       │   ├── ui (if the resource has a UI)
-│       │   │   └── files
-│       │   ├── assets (if the resource has assets)
-│       │   │   └── files
-│       │   └── fxmanifest.lua
-│       └── (More Suunny Roleplay resources. Example: sunnyrp-resource-name)
-└── server.cfg
-```
-
-## SunnyRP Base API (srp-base) [Framework] Documentation (Current microservice in progress.)
 This document provides a comprehensive overview of the `srp-base` microservice—the authoritative backend for the SunnyRP FiveM server.  It covers the service’s purpose, architecture, configuration, database schema, security model and endpoints, along with guidance for installation, deployment and integration with FiveM Lua resources.
 
 ## Purpose and Overview
@@ -156,8 +77,6 @@ Error codes include `INVALID_INPUT`, `UNAUTHENTICATED`, `FORBIDDEN`, `NOT_FOUND`
 
 ## Installation and Setup
 
-#### This server is not ready for use but the installation and setup docs are currently useful to understand the server. Everything here is subject to change and likely will change
-
 ### Prerequisites
 
 - **Node.js** LTS (≥18) and **npm**【67730289104851†L170-L174】.
@@ -186,6 +105,7 @@ The service reads configuration from environment variables or a `.env` file.  Th
 | `REDIS_URL` | No | Redis connection string for rate limiting, idempotency and outbox【67730289104851†L204-L206】. |
 | `ENABLE_OUTBOX_WORKER` | No | Set to `1` to run the outbox worker (requires PM2 or another process manager)【67730289104851†L222-L223】. |
 | `OUTBOX_BATCH_SIZE`, `OUTBOX_INTERVAL_MS`, `OUTBOX_CLAIM_TIMEOUT_SEC`, `OUTBOX_DELIVERY_URL`, `OUTBOX_REDIS_CHANNEL_PREFIX` | No | Outbox worker tuning parameters【67730289104851†L294-L307】. |
+| `ASSET_RETENTION_MS` | No | Milliseconds to retain assets before purge (default `2592000000`). |
 
 ### Setup Steps
 
@@ -267,6 +187,7 @@ Below is a summary of the core routes.  For full request/response schemas, consu
 |-------|-----|-------------|---------|
 | `GET` | `/v1/healthz` | Liveness probe; returns `{ ok: true, data: { status: 'ok' } }` | `200 OK`【67730289104851†L51-L55】 |
 | `GET` | `/v1/ready` | Readiness probe; checks DB connectivity; returns `503` if dependencies are down【67730289104851†L52-L54】 | `200 OK`/`503` |
+| `GET` | `/v1/debug/status` | Retrieve server diagnostics (uptime, memory, load averages). | `200 OK` |
 | `GET` | `/metrics` | Prometheus metrics; enabled when `ENABLE_METRICS=1`【67730289104851†L51-L55】 | plaintext metrics |
 
 ### Configuration
@@ -321,11 +242,12 @@ In addition to the core identity, permissions, characters and admin APIs describ
 
 | Method | Path | Description |
 |-------|-----|-------------|
-| `GET` | `/v1/accounts/:playerId` | Get (or lazily create) a player’s account; returns balance. |
-| `POST` | `/v1/accounts/:playerId/deposit` | Deposit funds into a player’s account (body: `{ amount }`). |
-| `POST` | `/v1/accounts/:playerId/withdraw` | Withdraw funds from a player’s account (body: `{ amount }`, clamped to zero). |
-| `POST` | `/v1/transactions` | Transfer funds between two players (body: `{ fromPlayerId, toPlayerId, amount, reason? }`). Returns transaction ID and sender balance. |
-| `GET` | `/v1/transactions/:id` | Retrieve a transaction by ID. |
+| `GET` | `/v1/characters/{characterId}/account` | Retrieve or create the character's bank account. |
+| `POST` | `/v1/characters/{characterId}/account:deposit` | Deposit funds into the account. |
+| `POST` | `/v1/characters/{characterId}/account:withdraw` | Withdraw funds from the account. |
+| `GET` | `/v1/characters/{characterId}/transactions` | List recent transactions for the character. |
+| `POST` | `/v1/transactions` | Transfer funds between characters. |
+| `GET` | `/v1/transactions/{id}` | Retrieve a transaction by ID. |
 
 #### Vehicles (Ownership & Registration)
 
@@ -342,6 +264,11 @@ In addition to the core identity, permissions, characters and admin APIs describ
 |-------|-----|-------------|
 | `GET` | `/v1/world/state` | Fetch the most recent world state (time, weather, density). |
 | `POST` | `/v1/world/state` | Set a new world state (body: `{ time, weather, density }`). |
+| `GET` | `/v1/world/forecast` | Fetch the latest weather forecast schedule. |
+| `POST` | `/v1/world/forecast` | Set a new forecast (body: `{ forecast: [{ weather, duration }] }`). |
+| `GET` | `/v1/world/ipls` | List interior proxy states. |
+| `POST` | `/v1/world/ipls` | Upsert interior proxy state. |
+| `DELETE` | `/v1/world/ipls/{name}` | Remove interior proxy state. |
 | `POST` | `/v1/world/events/death` | Record a death event (body: `{ playerId, killerId?, weapon?, coords?, meta? }`). |
 | `POST` | `/v1/world/events/kill` | Record a kill event (same structure as death). |
 | `POST` | `/v1/world/coords/save` | Save arbitrary labelled coordinates (body: `{ playerId, label, coords }`). |
@@ -364,6 +291,13 @@ In addition to the core identity, permissions, characters and admin APIs describ
 | `GET` | `/v1/players/{playerId}/ammo` | Retrieve a player’s ammunition counts as an object keyed by weapon type. |
 | `PATCH` | `/v1/players/{playerId}/ammo` | Update the ammunition count for a specific weapon type (body: `{ weaponType, ammo }`). |
 
+#### Phone (Tweets)
+
+| Method | Path | Description |
+|-------|-----|-------------|
+| `GET` | `/v1/phone/tweets` | Retrieve up to the 50 most recent tweets. Returns `400 INVALID_INPUT` on malformed query. |
+| `POST` | `/v1/phone/tweets` | Create a new tweet with a handle and message. Returns `400 INVALID_INPUT` on validation errors. |
+
 These endpoints round out the foundation of `srp-base`.  Together with the previously documented identity, permissions, config and outbox APIs they provide a **complete backend** capable of supporting all future gameplay modules.  Lua resources can rely on these endpoints to persist and retrieve state while implementing their own behaviour.
 
 ### Identity & Permissions
@@ -382,15 +316,16 @@ These endpoints round out the foundation of `srp-base`.  Together with the previ
 | `GET` | `/v1/users/exists?hex_id=…` | Return `{ exists: true/false }` if a user exists【67730289104851†L63-L67】. |
 | `POST` | `/v1/users` | Create a user with `hex_id`, `name` and `identifiers` array; atomic【67730289104851†L64-L67】. |
 | `GET` | `/v1/users/:hex_id` | Fetch user profile by hex ID【67730289104851†L64-L67】. |
-
 ### Characters
 
 | Method | Path | Description |
 |-------|-----|-------------|
-| `GET` | `/v1/characters?owner_hex=…` | List all characters owned by the given user【67730289104851†L68-L71】. |
-| `POST` | `/v1/characters` | Create a character.  Body must include `owner_hex`, `first_name` and `last_name`; server enforces unique name and phone number【67730289104851†L69-L72】. |
-| `GET` | `/v1/characters/:id` | Fetch a character by ID【67730289104851†L69-L72】. |
-| `PATCH` | `/v1/characters/:id` | Update a character (e.g. changing story).  Only provided fields are modified【67730289104851†L69-L72】. |
+| `GET` | `/v1/accounts/{accountId}/characters` | List characters owned by an account. |
+| `POST` | `/v1/accounts/{accountId}/characters` | Create a character for an account. Body must include `first_name` and `last_name`; server enforces unique name and phone. |
+| `POST` | `/v1/accounts/{accountId}/characters/{characterId}:select` | Select the active character for the account. Idempotent. |
+| `DELETE` | `/v1/accounts/{accountId}/characters/{characterId}` | Delete a character and clear selection if active. |
+
+
 
 ### Outbox
 
@@ -402,9 +337,16 @@ These endpoints round out the foundation of `srp-base`.  Together with the previ
 
 | Method | Path | Description |
 |-------|-----|-------------|
-| `POST` | `/v1/admin/ban` | Ban a player.  Body `{ playerId, reason, until? }`.  Returns the new ban status. |
+| `POST` | `/v1/admin/ban` | Ban a player.  Body `{ playerId, reason, until? }`.  Persists to the bans table and returns ban status. |
 | `POST` | `/v1/admin/kick` | Kick a player (future extension). |
 | `GET` | `/v1/admin/audit` | Fetch audit logs (future extension). |
+
+
+### Broadcaster
+
+| Method | Path | Description |
+|-------|-----|-------------|
+| `POST` | `/v1/broadcast/attempt` | Assign the `broadcaster` job if below the configured limit; returns `400 INVALID_INPUT`, `404 NOT_FOUND` or `409 LIMIT_REACHED` on error. |
 
 ## Feature Flags
 
@@ -444,7 +386,7 @@ By adhering to this documentation and the provided templates, you can build out 
 
 ## Additional Domain Services (Dispatch, Evidence, EMS, Keys, Loot)
 
-To support all features present in the original NoPixelServer resources at the framework level without introducing gameplay logic, the SunnyRP repository includes several **additional microservices** under `backend/services`: `srp-dispatch`, `srp-evidence`, `srp-ems`, `srp-keys` and `srp-loot`.  Each service mirrors the patterns used in `srp-base`—Express routing, MySQL persistence, token/HMAC authentication, idempotency and rate limiting—and maintains its own database schema and migrations.  These services act as the scaffolding for high‑level gameplay modules that will be written in Lua later.
+To support all features present in the original server resources at the framework level without introducing gameplay logic, the SunnyRP repository includes several **additional microservices** under `backend/services`: `srp-dispatch`, `srp-evidence`, `srp-ems`, `srp-keys` and `srp-loot`.  Each service mirrors the patterns used in `srp-base`—Express routing, MySQL persistence, token/HMAC authentication, idempotency and rate limiting—and maintains its own database schema and migrations.  These services act as the scaffolding for high‑level gameplay modules that will be written in Lua later.
 
 - **srp-dispatch** – Centralised storage and management of dispatch alerts (e.g. 911 calls, panic buttons).  It exposes:
   - `GET /v1/dispatch/alerts` – List recent dispatch alerts.
@@ -465,6 +407,9 @@ To support all features present in the original NoPixelServer resources at the f
   - `POST /v1/ems/records` – Create a record (fields: `patient_id`, `doctor_id`, `treatment`, optional `status`).
   - `PATCH /v1/ems/records/:id` – Update a record’s treatment or status.
   - `DELETE /v1/ems/records/:id` – Remove a record when permitted by policy.
+  - `GET /v1/ems/shifts/active` – List active EMS shifts.
+  - `POST /v1/ems/shifts` – Start a shift (`characterId`).
+  - `POST /v1/ems/shifts/{id}/end` – End a shift.
 
 - **srp-keys** – Assign and manage keys for players.  Keys may represent vehicle keys, property keys or any other access tokens.  Endpoints are:
   - `POST /v1/keys` – Assign a new key (requires `player_id`, `key_type` and `target_id`; optional `metadata`).
@@ -477,5 +422,219 @@ To support all features present in the original NoPixelServer resources at the f
   - `POST /v1/loot/items` – Create a loot drop (requires `owner_id` and `item_type`; optional `value`, `coordinates`, `metadata`).
   - `PATCH /v1/loot/items/:id` – Update fields on a loot item.
   - `DELETE /v1/loot/items/:id` – Remove a loot item after it is collected or expired.
+  - 
+- **srp-doors** – Manages door definitions and locked state.
+  - `GET /v1/doors` – List all doors.
+  - `POST /v1/doors` – Create or update a door.
+  - `PATCH /v1/doors/{doorId}/state` – Set locked state.
+- **srp-diamond-blackjack** – Records casino blackjack hand history.
+  - `GET /v1/diamond-blackjack/hands/:characterId` – List recent hands for a character.
+  - `POST /v1/diamond-blackjack/hands` – Record a hand result with `characterId`, `tableId`, `bet`, `payout`, `dealerHand`, `playerHand` and optional `playedAt`.
+- **srp-interact-sound** – Logs sound play events.
+  - `GET /v1/interact-sound/plays/:characterId` – Retrieve recent sound plays for a character.
+  - `POST /v1/interact-sound/plays` – Record a sound play with `characterId`, `sound`, `volume` and optional `playedAt`.
+- **srp-wise-audio** – Stores custom audio tracks.
+  - `GET /v1/wise-audio/tracks/{characterId}` – List tracks for a character.
+  - `POST /v1/wise-audio/tracks` – Create a track with `characterId`, `label` and `url`.
+- **srp-wise-imports** – Manages vehicle import orders.
+  - `GET /v1/wise-imports/orders/{characterId}` – List import orders for a character.
+  - `POST /v1/wise-imports/orders` – Create an order with `characterId` and `model`.
+  - `POST /v1/wise-imports/orders/{id}/deliver` – Mark a ready order as delivered.
+- **srp-import-pack** – Tracks vehicle import packages.
+  - `GET /v1/import-pack/orders/character/{characterId}` – List import package orders for a character.
+  - `GET /v1/import-pack/orders/{id}?characterId={characterId}` – Fetch a specific order.
+  - `POST /v1/import-pack/orders` – Create a new import package order.
+  - `POST /v1/import-pack/orders/{id}/deliver` – Mark an order as delivered.
+  - `POST /v1/import-pack/orders/{id}/cancel` – Cancel a pending order.
+  - `POST /v1/import-pack/orders` – Create an order with `characterId` and `package`.
+  - `POST /v1/import-pack/orders/{id}/deliver` – Mark an order as delivered.
+- **srp-wise-uc** – Manages undercover profiles.
+  - `GET /v1/wise-uc/profiles/{characterId}` – Retrieve undercover profile for a character.
+  - `POST /v1/wise-uc/profiles` – Create or update a profile with `characterId`, `alias` and optional `active`.
+- **srp-wise-wheels** – Records wheel spin results.
+  - `GET /v1/wise-wheels/spins/{characterId}` – List spins for a character.
+  - `POST /v1/wise-wheels/spins` – Record a spin with `characterId` and `prize`.
+  - Spins older than 30 days are purged hourly, emitting `wise-wheels.spin.expired`.
+- **srp-assets** – Stores references to character-bound assets such as images or media.
+  - `GET /v1/assets?ownerId={cid}` – List assets for a character.
+  - `GET /v1/assets/{id}` – Retrieve an asset by id.
+  - `POST /v1/assets` – Create an asset with `ownerId`, `url` and `type` (requires `Idempotency-Key`).
+  - `DELETE /v1/assets/{id}` – Remove an asset record.
+- **srp-clothes** – Stores character outfit data.
+  - `GET /v1/clothes?characterId={cid}` – List outfits for a character.
+  - `POST /v1/clothes` – Save an outfit (`characterId`, `slot`, `data`) (requires `Idempotency-Key`).
+  - `DELETE /v1/clothes/{id}` – Remove an outfit.
+- **srp-apartments** – Manages apartments and residents.
+  - `GET /v1/apartments?characterId={cid}` – List apartments, optionally filtered by resident.
+  - `POST /v1/apartments` – Create an apartment (`name`, optional `location`, optional `price`).
+  - `POST /v1/apartments/{apartmentId}/residents` – Assign a character to an apartment.
+  - `DELETE /v1/apartments/{apartmentId}/residents/{characterId}` – Remove a resident.
+- **drz_interiors** – Stores interior layouts per apartment.
+  - `GET /v1/apartments/{apartmentId}/interior?characterId={cid}` – Retrieve interior layout.
+  - `POST /v1/apartments/{apartmentId}/interior` – Save interior layout (`characterId`, `template`).
+- **srp-properties** – Unified housing (apartments, garages, hotel rooms).
+  - `GET /v1/properties?type=&ownerCharacterId=` – List properties.
+  - `POST /v1/properties` – Create a property.
+  - `GET /v1/properties/{propertyId}` – Retrieve a property.
+  - `PATCH /v1/properties/{propertyId}` – Update a property.
+  - `DELETE /v1/properties/{propertyId}` – Delete a property.
+- **srp-zones** – Stores polygonal zone definitions for world interactions.
+  - `GET /v1/zones` – List active zones.
+  - `POST /v1/zones` – Create a zone with `name`, `type`, `data` and optional `expiresAt`; pushes `zone.created`.
+  - `DELETE /v1/zones/{id}` – Remove a zone and push `zone.deleted`.
+- **srp-diamond-blackjack** – Records casino blackjack hand history.
+  - `GET /v1/diamond-blackjack/hands/:characterId` – List recent hands for a character.
+  - `POST /v1/diamond-blackjack/hands` – Record a hand result with `characterId`, `tableId`, `bet`, `payout`, `dealerHand`, `playerHand` and optional `playedAt`.
+  - 
+- **srp-interact-sound** – Logs sound play events.
+  - `GET /v1/interact-sound/plays/:characterId` – Retrieve recent sound plays for a character.
+  - `POST /v1/interact-sound/plays` – Record a sound play with `characterId`, `sound`, `volume` and optional `playedAt`.
+### PolicePack Extensions
 
-These services run on separate ports (3080 for dispatch, 3090 for evidence, 3100 for EMS, 3110 for keys and 3120 for loot) and require their own environment variables (database credentials, API token, HMAC secret, etc.).  By providing them now, the backend offers a **complete foundation** for every NoPixel resource.  Future Lua resources will call these APIs to create and retrieve alerts, evidence, medical records, keys or loot, but no gameplay logic exists on the backend; it merely stores and retrieves data.
+- `GET /v1/evidence/items/{id}/custody` – List custody chain entries for an evidence item.
+- `POST /v1/evidence/items/{id}/custody` – Add a custody entry.
+- `GET /v1/accounts/{accountId}/characters` – List characters for an account.
+- `POST /v1/accounts/{accountId}/characters` – Create a character for an account.
+- `POST /v1/accounts/{accountId}/characters/{characterId}:select` – Select the active character.
+- `GET /v1/accounts/{accountId}/characters/selected` – Retrieve the active character for an account.
+- `DELETE /v1/accounts/{accountId}/characters/{characterId}` – Remove a character and clear selection if active.
+
+All routes require `X-API-Token` authentication. Idempotency keys are supported on POST requests and standard rate limits apply.
+- **srp-base-events** – Records player lifecycle and combat events.
+  - `GET /v1/base-events?limit={n}` – List recent events.
+  - `POST /v1/base-events` – Log an event (`accountId`, `characterId`, `eventType`, optional `metadata`). Broadcasts `base-events.logged` over WebSocket.
+- **srp-boatshop** – Lists and sells boats to characters.
+  - `GET /v1/boatshop` – List boats available for purchase.
+  - `POST /v1/boatshop/purchase` – Purchase a boat with `characterId`, `boatId`, `plate` and optional `properties`.
+  - Scheduler broadcasts `boatshop.catalog` every 5 minutes; purchases emit `boatshop.purchase` over WebSocket and webhooks.
+- **srp-camera** – Stores character photos.
+  - `GET /v1/camera/photos/{characterId}` – List photos for a character.
+  - `POST /v1/camera/photos` – Save a photo with `characterId`, `imageUrl` and optional `description`.
+  - `DELETE /v1/camera/photos/{id}` – Remove a photo record.
+- **srp-hud** – Stores per-character HUD settings.
+  - `GET /v1/characters/{characterId}/hud` – Retrieve HUD preferences.
+  - `PUT /v1/characters/{characterId}/hud` – Update HUD preferences.
+- **srp-carwash** – Records vehicle washes and dirt levels.
+  - `POST /v1/carwash` – Record a car wash (`characterId`, `plate`, `location`, `cost`).
+  - `GET /v1/carwash/history/{characterId}` – List recent washes for a character.
+  - `GET /v1/vehicles/{plate}/dirt` – Fetch vehicle dirt level.
+  - `PATCH /v1/vehicles/{plate}/dirt` – Update vehicle dirt level.
+- **srp-chat** – Stores chat messages for moderation.
+  - `GET /v1/chat/messages/{characterId}` – List recent chat messages for a character.
+  - `POST /v1/chat/messages` – Record a chat message (`characterId`, `channel`, `message`).
+- **srp-connectqueue** – Manages account queue priorities.
+  - `GET /v1/connectqueue/priorities` – List queue priorities optionally filtered by `accountId`.
+  - `POST /v1/connectqueue/priorities` – Upsert a priority with `accountId`, `priority`, optional `reason` and `expiresAt`.
+  - `DELETE /v1/connectqueue/priorities/{accountId}` – Remove priority for an account.
+- **srp-hardcap** – Manages server connection limits and active sessions.
+  - `GET /v1/hardcap/status` – Current max players, reserved slots and active count.
+  - `POST /v1/hardcap/config` – Update max player and reserved slot settings.
+  - `POST /v1/hardcap/sessions` – Register an active session.
+  - `DELETE /v1/hardcap/sessions/{id}` – End an active session.
+- **srp-cron** – Schedules timed server tasks.
+  - `GET /v1/cron/jobs` – List registered cron jobs.
+  - `POST /v1/cron/jobs` – Create or replace a cron job with `name`, `schedule`, optional `payload`, `accountId`, `characterId`, `priority` and `nextRun`.
+- **srp-coordsaver** – Stores character-specific saved coordinates.
+  - `GET /v1/characters/{characterId}/coords` – List saved coordinates.
+  - `POST /v1/characters/{characterId}/coords` – Save or update a coordinate (`name`, `x`, `y`, `z`, optional `heading`).
+  - `DELETE /v1/characters/{characterId}/coords/{id}` – Remove a coordinate.
+- **srp-emotes** – Stores per-character favorite emotes.
+  - `GET /v1/characters/{characterId}/emotes` – List favorite emotes.
+  - `POST /v1/characters/{characterId}/emotes` – Add a favorite emote (`emote`).
+  - `DELETE /v1/characters/{characterId}/emotes/{emote}` – Remove a favorite emote.
+- **srp-furniture** – Stores custom furniture placements per character.
+  - `GET /v1/characters/{characterId}/furniture` – List furniture items for a character.
+  - `POST /v1/characters/{characterId}/furniture` – Place a furniture item with `item`, `x`, `y`, `z` and optional `heading`.
+- `DELETE /v1/characters/{characterId}/furniture/{id}` – Remove a furniture item.
+### Jobs
+
+- `GET /v1/jobs` – list defined jobs
+- `POST /v1/jobs` – create a job
+- `GET /v1/jobs/{id}` – retrieve job details
+- `POST /v1/jobs/assign` – assign a job to a character (`characterId`, `jobId`, optional `grade`)
+- `POST /v1/jobs/duty` – set job duty status (`characterId`, `jobId`, `onDuty`)
+- `GET /v1/jobs/{characterId}/assignments` – list assignments for a character
+- `POST /v1/broadcast/attempt` – attempt to become a broadcaster
+
+### Taxi
+
+- `GET /v1/taxi/requests` – list requests by status
+- `POST /v1/taxi/requests` – create a taxi request
+- `POST /v1/taxi/requests/{id}/accept` – accept a request
+- `POST /v1/taxi/requests/{id}/complete` – complete a ride
+- `GET /v1/characters/{characterId}/taxi/rides` – ride history
+
+### Hospital
+
+- `GET /v1/hospital/admissions/active` – list current admissions
+- `POST /v1/hospital/admissions` – admit a character
+- `POST /v1/hospital/admissions/{id}/discharge` – discharge an admission
+
+### Garages
+
+- `GET /v1/garages` – list all garages
+- `POST /v1/garages` – create a garage
+- `PUT /v1/garages/{id}` – update a garage
+- `DELETE /v1/garages/{id}` – delete a garage
+- `POST /v1/garages/{garageId}/store` – store a vehicle for a character
+- `POST /v1/garages/{garageId}/retrieve` – retrieve a stored vehicle
+- `GET /v1/characters/{characterId}/garages/{garageId}/vehicles` – list character vehicles in a garage
+
+### Heli
+
+- `POST /v1/heli/flights` – start a flight
+- `POST /v1/heli/flights/{id}/end` – end a flight
+- `GET /v1/characters/{characterId}/heli/flights` – list flights for a character
+
+### Peds
+
+- `GET /v1/characters/{characterId}/ped` – Retrieve ped model, health and armor.
+- `PUT /v1/characters/{characterId}/ped` – Upsert ped state (`model`, `health`, `armor`).
+
+
+### Jailbreak
+
+- `POST /v1/jailbreaks` – start a jailbreak attempt (`characterId`, `prison`).
+- `POST /v1/jailbreaks/{id}/complete` – complete an attempt with `success` flag.
+- `GET /v1/jailbreaks/active` – list active attempts.
+
+## Update – 2025-08-25 (k9)
+
+Introduced K9 unit management for police characters.
+
+### Endpoints
+
+* `GET /v1/characters/{characterId}/k9s` – list K9 units for a character.
+* `POST /v1/characters/{characterId}/k9s` – create a K9 unit (requires `X-Idempotency-Key`).
+* `PATCH /v1/characters/{characterId}/k9s/{k9Id}/active` – update active state (requires `X-Idempotency-Key`).
+* `DELETE /v1/characters/{characterId}/k9s/{k9Id}` – retire a K9 unit (requires `X-Idempotency-Key`).
+
+All endpoints require standard authentication headers.
+
+## Update – 2025-08-25 (climate-overrides)
+
+Added world timecycle management endpoints.
+
+- `GET /v1/world/timecycle` – retrieve current timecycle override.
+- `POST /v1/world/timecycle` – set override with `preset` and optional `expiresAt`.
+- `DELETE /v1/world/timecycle` – clear override.
+
+## Update – 2025-08-25 (interactSound hooks)
+
+- `POST /v1/interact-sound/plays` – record a sound play and push to clients via WebSocket and webhooks.
+- `GET /v1/hooks/endpoints` – list registered webhook sinks (admin).
+- `POST /v1/hooks/endpoints` – register a webhook sink (admin).
+- `DELETE /v1/hooks/endpoints/{id}` – remove a webhook sink (admin).
+
+## Update – 2025-08-25 (police dispatch)
+
+Added dispatch alert APIs with WebSocket and webhook push.
+
+### Endpoints
+
+- `GET /v1/dispatch/alerts` – list recent dispatch alerts.
+- `POST /v1/dispatch/alerts` – create a dispatch alert (requires `X-Idempotency-Key`).
+- `PATCH /v1/dispatch/alerts/{id}/ack` – acknowledge an alert (requires `X-Idempotency-Key`).
+- `GET /v1/dispatch/codes` – list configured dispatch codes.
+
+All endpoints require standard authentication headers.
