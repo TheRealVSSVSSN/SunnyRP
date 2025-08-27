@@ -4,18 +4,20 @@ const config = require('../config/env');
 const logger = require('../utils/logger');
 
 let wssInstance;
+let namespaces = new Map();
 
-function broadcast(topic, event, data) {
+function broadcast(namespace, event, data) {
   if (!wssInstance) return;
   const payload = JSON.stringify({
     eventId: uuidv4(),
     createdAt: Date.now(),
     ttl: config.wsHeartbeatIntervalMs || 30000,
-    topic,
-    event,
-    data,
+    type: `${namespace}.${event}`,
+    payload: data,
   });
-  wssInstance.clients.forEach((client) => {
+  const clients = namespaces.get(namespace);
+  if (!clients) return;
+  clients.forEach((client) => {
     if (client.readyState === WebSocket.OPEN && client.bufferedAmount < 1e6) {
       client.send(payload);
     }
@@ -33,11 +35,19 @@ function init(server) {
         ws.close();
         return;
       }
+      const ns = url.searchParams.get('ns') || 'global';
+      ws.namespace = ns;
+      if (!namespaces.has(ns)) namespaces.set(ns, new Set());
+      namespaces.get(ns).add(ws);
     } catch (err) {
       ws.close();
       return;
     }
     ws.isAlive = true;
+    ws.on('close', () => {
+      const set = namespaces.get(ws.namespace);
+      if (set) set.delete(ws);
+    });
     ws.on('pong', () => {
       ws.isAlive = true;
     });
@@ -54,7 +64,10 @@ function init(server) {
   }, config.wsHeartbeatIntervalMs || 30000);
 
   wssInstance.broadcast = broadcast;
-  wssInstance.on('close', () => clearInterval(interval));
+  wssInstance.on('close', () => {
+    clearInterval(interval);
+    namespaces = new Map();
+  });
   logger.info('WebSocket gateway initialised');
   return wssInstance;
 }

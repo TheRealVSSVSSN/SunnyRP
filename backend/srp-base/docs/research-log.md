@@ -389,3 +389,7 @@
 
 - Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Reference resources unavailable; proceeding with internal consistency only.
 - Reviewed vehicle import expiration patterns in ESX and QB-Core frameworks conceptually for scheduler design.
+
+## Research Log – 2025-08-27 (isPed)
+- Reviewed `isPed` resource in NoPixel reference for ped model/health persistence.
+- Compared ped health regeneration patterns in EssentialMode, ESX, ND_Core, FSN, QB-Core, vRP and vORP frameworks.

@@ -30,7 +30,21 @@ async function upsertCharacterPed({ characterId, model, health, armor }) {
   return getCharacterPed(characterId);
 }
 
+/**
+ * Regenerate health for all peds by a fixed amount.
+ * @param {number} amount
+ * @returns {Promise<number>} number of rows affected
+ */
+async function regenAll(amount) {
+  const [result] = await db.query(
+    'UPDATE character_peds SET health = LEAST(health + ?, 200), updated_at = CURRENT_TIMESTAMP WHERE health < 200',
+    [amount],
+  );
+  return result.affectedRows || 0;
+}
+
 module.exports = {
   getCharacterPed,
   upsertCharacterPed,
+  regenAll,
 };

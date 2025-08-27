@@ -87,3 +87,4 @@
 | 81 | hardcap realtime | Session WS/webhook pushes and stale session purge | Extend | Broadcast config/session events; cleanup job |
 | 82 | heli realtime | Helicopter flight events with stale-flight auto end | Extend | Broadcast start/end/expired and scheduler `heli-expire-flights` |
 | 83 | import-Pack expiry | Import package auto-expiry with WS/webhook notifications | Extend | Added expiresAt columns, expiry scheduler and broadcasts |
+| 84 | isPed realtime | Ped state persistence with regen pushes | Extend | Added WS/webhook events and health regen scheduler |

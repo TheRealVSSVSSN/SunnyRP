@@ -15,3 +15,4 @@
 | Implement call-sign management for police officers | backend | medium | design |
 | Add altitude and location tracking for helicopter flights | backend | low | design |
 | Support editing existing import pack orders | backend | low | design |
+| Persist additional ped attributes such as position and appearance | backend | low | none |
