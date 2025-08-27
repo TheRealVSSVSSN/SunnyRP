@@ -21,8 +21,19 @@ Provides CRUD for garages and per-character vehicle storage.
 - `storeVehicle(garageId, vehicleId, characterId)` records storage
 - `retrieveVehicle(garageId, vehicleId, characterId)` marks retrieval
 - `listGarageVehicles(garageId, characterId)` lists stored vehicles for a character
+- `deleteRetrievedBefore(cutoff)` purges retrieved records older than `cutoff`
 
 ## Edge Cases
 
 - Storing the same vehicle multiple times creates separate records
 - Retrieval is idempotent; repeated calls on the same record succeed
+
+## Realtime
+
+- WebSocket topic `vehicles` emits `garage.vehicleStored` and `garage.vehicleRetrieved`
+- Webhook dispatcher mirrors the above events
+
+## Scheduler
+
+- Hourly `garage-vehicle-purge` removes entries with `retrieved_at` older than `GARAGE_VEHICLE_RETENTION_MS`
+

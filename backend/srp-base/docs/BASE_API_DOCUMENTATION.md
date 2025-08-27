@@ -588,6 +588,7 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
 - `POST /v1/garages/{garageId}/store` – store a vehicle for a character
 - `POST /v1/garages/{garageId}/retrieve` – retrieve a stored vehicle
 - `GET /v1/characters/{characterId}/garages/{garageId}/vehicles` – list character vehicles in a garage
+  - WebSocket: `garage.vehicleStored`, `garage.vehicleRetrieved` on topic `vehicles`
 
 ### Heli
 

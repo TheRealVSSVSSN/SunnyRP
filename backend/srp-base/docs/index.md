@@ -551,3 +551,12 @@ Extended Pillbox hospital admissions with real-time push and scheduled cleanup.
 * Scheduler `hospital-admissions-sync` auto-discharges long stays and broadcasts `hospital.admissions.active`.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/hospital.md`.
+
+## Update – 2025-08-27
+
+Extended parity for the **garages** resource with realtime push and retention cleanup.
+
+* Vehicle store/retrieve operations broadcast `garage.vehicleStored` and `garage.vehicleRetrieved` over WebSocket and webhooks.
+* Hourly `garage-vehicle-purge` scheduler removes records with `retrieved_at` older than `GARAGE_VEHICLE_RETENTION_MS`.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/garages.md`.

@@ -107,6 +107,15 @@ async function listGarageVehicles(garageId, characterId) {
   return rows;
 }
 
+/**
+ * Remove retrieved vehicle records older than the provided cutoff.
+ * @param {Date} cutoff - Records with retrieved_at before this date are deleted
+ * @returns {Promise<void>}
+ */
+async function deleteRetrievedBefore(cutoff) {
+  await db.query('DELETE FROM garage_vehicles WHERE retrieved_at IS NOT NULL AND retrieved_at < ?', [cutoff]);
+}
+
 module.exports = {
   listGarages,
   createGarage,
@@ -115,4 +124,5 @@ module.exports = {
   storeVehicle,
   retrieveVehicle,
   listGarageVehicles,
+  deleteRetrievedBefore,
 };

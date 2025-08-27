@@ -7,8 +7,8 @@
 - docs/events-and-rpcs.md
 - docs/framework-compliance.md
 - docs/index.md
-- docs/modules/hospital.md
-- docs/naming-map.md
+- docs/migrations.md
+- docs/modules/garages.md
 - docs/progress-ledger.md
 - docs/research-log.md
 - docs/run-docs.md
@@ -16,15 +16,15 @@
 ## Run – 2025-08-27
 
 ### Docs Touched
-- docs/index.md
-- docs/progress-ledger.md
-- docs/framework-compliance.md
-- docs/BASE_API_DOCUMENTATION.md
-- docs/events-and-rpcs.md
-- docs/db-schema.md
 - docs/admin-ops.md
-- docs/modules/hospital.md
-- docs/naming-map.md
+- docs/BASE_API_DOCUMENTATION.md
+- docs/db-schema.md
+- docs/events-and-rpcs.md
+- docs/framework-compliance.md
+- docs/index.md
+- docs/migrations.md
+- docs/modules/garages.md
+- docs/progress-ledger.md
 - docs/research-log.md
 - docs/run-docs.md
 
