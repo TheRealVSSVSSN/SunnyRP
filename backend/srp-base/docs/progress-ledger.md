@@ -78,3 +78,4 @@
 | 72 | cron | Scheduled job execution pushes | Extend | Added cron executor with WebSocket/webhook dispatch |
 | 73 | drz_interiors | Broadcast interior updates with per-character uniqueness | Extend | WebSocket/webhook events and unique index migration |
 | 74 | emotes realtime | Favorite emote sync and retention | Extend | Added WS/webhook pushes and hourly purge |
+| 75 | emspack realtime | EMS shift sync and record events over WS/webhooks | Extend | Broadcast events and scheduler end stale shifts |

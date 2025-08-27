@@ -344,3 +344,8 @@
 
 - Attempted to clone `https://github.com/h04X-2K/NoPixelServer` for emotes but received HTTP 403. Reference resources unavailable; proceeding with internal consistency only.
 - Reviewed emote favorite systems in ESX and QB-Core to align naming and retention ideas.
+
+## Research Log – 2025-08-27 (emspack realtime)
+
+- Attempted to clone reference resources repository `https://github.com/h04X-2K/NoPixelServer` but received HTTP 403. Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed EMS duty scheduling patterns in ESX and ND Core frameworks for conceptual parity.

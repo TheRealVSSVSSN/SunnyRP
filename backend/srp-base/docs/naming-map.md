@@ -27,3 +27,4 @@
 | coordsaver | coordinates |
 | drz_interiors | interiors |
 | emotes | emotes |
+| emspack | ems |

@@ -35,7 +35,7 @@
 | coordinates | Resource lets players save named coordinates. Events broadcast on WebSocket topic `coordinates` and dispatcher events `coordinates.saved`/`coordinates.deleted`. | `GET /v1/characters/{characterId}/coordinates`, `POST /v1/characters/{characterId}/coordinates`, `DELETE /v1/characters/{characterId}/coordinates/{id}` |
 | drz_interiors | Resource triggers save/load events for apartment interior templates | `GET /v1/apartments/{apartmentId}/interior`, `POST /v1/apartments/{apartmentId}/interior` → `interiors.apartment.updated` |
 | emotes | Resource lets players mark favorite emote commands for quick selection and sync updates via `emotes.favoriteAdded`/`emotes.favoriteRemoved`/`emotes.favoriteExpired` | `GET/POST/DELETE /v1/characters/{characterId}/emotes` |
-| emspack | Resource emits duty start/end and treatment events | `GET/POST/PATCH/DELETE /v1/ems/records`, `GET /v1/ems/shifts/active`, `POST /v1/ems/shifts`, `POST /v1/ems/shifts/{id}/end` |
+| emspack | Duty start/end and treatment events | `GET/POST/PATCH/DELETE /v1/ems/records`, `GET /v1/ems/shifts/active`, `POST /v1/ems/shifts`, `POST /v1/ems/shifts/{id}/end` → broadcasts `ems.record.*`, `ems.shift.started`, `ems.shift.ended`, `ems.shifts.active` |
 | es_taxi | Players request taxi rides and drivers accept/complete them | `POST /v1/taxi/requests`, `POST /v1/taxi/requests/{id}/accept`, `POST /v1/taxi/requests/{id}/complete` |
 | k9 | Police dog deployment and status commands | `GET/POST /v1/characters/{characterId}/k9s`, `PATCH /v1/characters/{characterId}/k9s/{k9Id}/active`, `DELETE /v1/characters/{characterId}/k9s/{k9Id}` |
 | dispatch | Police dispatch alerts and code lists | `GET/POST /v1/dispatch/alerts`, `PATCH /v1/dispatch/alerts/{id}/ack`, `GET /v1/dispatch/codes` |
