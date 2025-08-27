@@ -24,6 +24,7 @@ const coordinatesTasks = require('./tasks/coordinates');
 const cronTasks = require('./tasks/cron');
 const emotesTasks = require('./tasks/emotes');
 const emsTasks = require('./tasks/ems');
+const hospitalTasks = require('./tasks/hospital');
 const taxiTasks = require('./tasks/taxi');
 const furnitureTasks = require('./tasks/furniture');
 const policeTasks = require('./tasks/police');
@@ -148,6 +149,13 @@ scheduler.register(
   () => emsTasks.syncShifts(wss),
   emsTasks.INTERVAL_MS,
   { jitter: 5000, persistName: emsTasks.JOB_NAME },
+);
+
+scheduler.register(
+  hospitalTasks.JOB_NAME,
+  () => hospitalTasks.syncAdmissions(wss),
+  hospitalTasks.INTERVAL_MS,
+  { jitter: 5000, persistName: hospitalTasks.JOB_NAME },
 );
 
 scheduler.register(

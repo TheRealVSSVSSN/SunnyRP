@@ -1549,3 +1549,16 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 * Revert routes, repository and config changes.
 * Drop `075_police_officers_character.sql` migration.
 * Remove scheduler registration and disable duty cleanup.
+
+## 2025-08-27 – Hospital admissions realtime
+
+### Added
+* WebSocket topic `hospital` broadcasting admission create/discharge and active snapshots.
+* Scheduler task `hospital-admissions-sync` to auto-discharge long stays.
+* Config `HOSPITAL_BROADCAST_INTERVAL_MS` and `HOSPITAL_MAX_ADMISSION_DURATION_MS`.
+
+### Risks
+* Misconfigured intervals may delay or prematurely discharge patients.
+
+### Rollback
+* Remove scheduler registration and hospital config keys.

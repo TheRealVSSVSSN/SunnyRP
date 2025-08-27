@@ -577,6 +577,7 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
 - `GET /v1/hospital/admissions/active` – list current admissions
 - `POST /v1/hospital/admissions` – admit a character
 - `POST /v1/hospital/admissions/{id}/discharge` – discharge an admission
+- WebSocket `hospital` topic pushes `admission.created`, `admission.discharged`, and periodic `admissions.active`
 
 ### Garages
 

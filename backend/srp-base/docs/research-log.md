@@ -366,3 +366,7 @@
 - Attempted to clone `https://github.com/h04X-2K/NoPixelServer` for gabz_mrpd but received HTTP 403. Reference resources unavailable; proceeding with internal consistency only.
 - Reviewed EssentialMode, ESX, ND Core, FSN Framework, QB-Core, vRP and vORP for police duty and job grade patterns (names/flows only).
 - Reviewed public NoPixel 4.0 summaries for economy reset and policing overhauls.
+## Research Log – 2025-08-27 (gabz_pillbox_hospital)
+
+- Attempted to clone reference repository `https://github.com/h04X-2K/NoPixelServer` for gabz_pillbox_hospital but received HTTP 403. Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed EMS/hospital flows in ESX and ND Core for admission tracking (conceptual only).

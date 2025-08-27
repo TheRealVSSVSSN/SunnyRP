@@ -45,6 +45,7 @@
 - Ensure the `furniture` table exists for stored furniture placements.
   - Set `FURNITURE_RETENTION_MS` if different retention is required; `furniture-purge` task runs daily.
 - Ensure the `hospital_admissions` table exists for patient tracking.
+- Tune `HOSPITAL_BROADCAST_INTERVAL_MS` and `HOSPITAL_MAX_ADMISSION_DURATION_MS` for admission sync and auto-discharge.
 - Ensure the `hardcap_config` and `hardcap_sessions` tables exist for player capacity tracking.
 - Ensure the `heli_flights` table exists for helicopter flight logs.
 - Ensure the `import_pack_orders` table includes `price` and `canceled_at` columns for import package tracking.
