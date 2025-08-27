@@ -39,6 +39,7 @@
 - Jailbreak routes inherit the same authentication and idempotency requirements.
 - K9 routes inherit the same authentication and idempotency requirements.
 - Jobs routes inherit the same authentication and idempotency requirements.
+- Police routes inherit the same authentication and idempotency requirements.
 - WebSocket connections require a `token` query parameter matching the `X-API-Token` and drop clients missing heartbeats.
 - Webhook dispatcher signs payloads with HMAC and retries failed deliveries.
 - Broadcaster routes inherit the same authentication and idempotency requirements.

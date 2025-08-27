@@ -94,6 +94,11 @@ const config = {
     requestTtlMs: parseInt(process.env.TAXI_REQUEST_TTL_MS || '300000', 10),
   },
 
+  police: {
+    dutyTimeoutMs: parseInt(process.env.POLICE_DUTY_TIMEOUT_MS || '3600000', 10),
+    checkIntervalMs: parseInt(process.env.POLICE_CHECK_INTERVAL_MS || '300000', 10),
+  },
+
   /**
    * Feature flags for core modules.  Lua consumers still drive
    * behaviour via /v1/config/live, but these flags provide a safe

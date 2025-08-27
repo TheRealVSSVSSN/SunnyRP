@@ -30,3 +30,6 @@
 | emspack | ems |
 | es_taxi | taxi |
 | np-furniture | furniture |
+| gabz_mrpd | police |
+| police_officers | police roster |
+| player_id | character_id |

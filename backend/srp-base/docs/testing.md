@@ -440,3 +440,15 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: tc1' -H 'Content-Type: app
   http://localhost:3010/v1/world/timecycle
 curl -H 'X-API-Token: <token>' -X DELETE http://localhost:3010/v1/world/timecycle
 ```
+
+Verify police roster endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/police/roster
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: pd1' -H 'Content-Type: application/json' \
+  -d '{"characterId":1,"rank":"officer","onDuty":true}' \
+  http://localhost:3010/v1/police/roster
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: pd2' -H 'Content-Type: application/json' \
+  -d '{"onDuty":false}' \
+  http://localhost:3010/v1/police/roster/1:duty
+```
