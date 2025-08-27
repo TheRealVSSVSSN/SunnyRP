@@ -103,6 +103,7 @@ practice is supported by citations.
 | **properties module** | Property endpoints consolidate apartments, garages and rentals with layered design, rate limiting, idempotency, WebSocket/webhook events and lease expiry scheduler. |
 | **world IPL module** | Interior proxy endpoints follow layered design with WebSocket sync and scheduler broadcast. |
 | **taxi module** | Taxi request endpoints follow layered design with WebSocket/webhook events and expiry scheduler. |
+| **police module** | Duty roster endpoints follow layered design with authentication, idempotency, WebSocket/webhook pushes and stale-duty scheduler. |
 
 ## Outstanding Items
 
@@ -113,3 +114,4 @@ practice is supported by citations.
 - Integrate player vitals (hunger, thirst, stress) into HUD module.
 - Implement bulk emote sync endpoint and labeling/ordering support.
 - Provide passenger cancellation endpoint for taxi requests.
+- Implement call-sign management for police officers.

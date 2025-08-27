@@ -52,6 +52,7 @@
 - Ensure the `jailbreak_attempts` table exists for jailbreak tracking.
 - Ensure the `jobs` and `character_jobs` tables exist for job management.
 - Ensure the `k9_units` table exists after applying migration 057.
+- Ensure the `police_officers` table has `character_id` column and index after migration 075.
 - Ensure the `world_forecast` table exists for weather scheduling.
 - Configure webhook sinks via environment variables. Discord sink is scaffolded but disabled unless `WEBHOOK_DISCORD_ENABLED=1` and `WEBHOOK_DISCORD_URL` are set.
 - Carwash dirt updates are dispatched via webhook; register sinks if external systems require notifications.

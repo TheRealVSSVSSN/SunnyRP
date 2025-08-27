@@ -1991,6 +1991,23 @@ components:
         type: string
       description:
         type: string
+  PoliceOfficer:
+    type: object
+    properties:
+      id:
+        type: integer
+      characterId:
+        type: integer
+      rank:
+        type: string
+      onDuty:
+        type: boolean
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
 security:
   - ApiToken: []
 paths:
@@ -8126,6 +8143,152 @@ paths:
                     type: string
         '404':
           description: Not found
+  /v1/police/roster:
+    get:
+      summary: List police officers
+      security:
+        - ApiToken: []
+      responses:
+        '200':
+          description: Officers listed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      officers:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/PoliceOfficer'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+    post:
+      summary: Assign police officer
+      security:
+        - ApiToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - characterId
+              properties:
+                characterId:
+                  type: integer
+                rank:
+                  type: string
+                onDuty:
+                  type: boolean
+      responses:
+        '200':
+          description: Officer created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      officer:
+                        $ref: '#/components/schemas/PoliceOfficer'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+  /v1/police/roster/{id}:
+    put:
+      summary: Update officer rank
+      security:
+        - ApiToken: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - rank
+              properties:
+                rank:
+                  type: string
+      responses:
+        '200':
+          description: Officer updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      officer:
+                        $ref: '#/components/schemas/PoliceOfficer'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+  /v1/police/roster/{characterId}:duty:
+    post:
+      summary: Set duty status
+      security:
+        - ApiToken: []
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - onDuty
+              properties:
+                onDuty:
+                  type: boolean
+      responses:
+        '200':
+          description: Duty updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      officer:
+                        $ref: '#/components/schemas/PoliceOfficer'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
     patch:
       summary: Update property
       parameters:

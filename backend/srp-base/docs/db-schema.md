@@ -597,3 +597,14 @@ Retention of sound play logs is controlled by `INTERACT_SOUND_RETENTION_MS`; old
 | name | VARCHAR(100) | Unique IPL name |
 | enabled | TINYINT(1) | 1 when active |
 | updated_at | TIMESTAMP | Last update timestamp |
+
+## police_officers
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| character_id | INT | FK to characters.id |
+| rank | VARCHAR(50) | Officer rank |
+| on_duty | TINYINT(1) | 1 when on duty |
+| created_at | TIMESTAMP | Creation time |
+| updated_at | TIMESTAMP | Last update |

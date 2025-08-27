@@ -360,3 +360,9 @@
 
 - Attempted to clone reference repository `https://github.com/h04X-2K/NoPixelServer` for furniture but received HTTP 403. Reference resources unavailable; proceeding with internal consistency only.
 - Reviewed furniture/property placement patterns in ESX and QB-Core to inform retention and event naming.
+
+## Research Log – 2025-08-27 (gabz_mrpd)
+
+- Attempted to clone `https://github.com/h04X-2K/NoPixelServer` for gabz_mrpd but received HTTP 403. Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed EssentialMode, ESX, ND Core, FSN Framework, QB-Core, vRP and vORP for police duty and job grade patterns (names/flows only).
+- Reviewed public NoPixel 4.0 summaries for economy reset and policing overhauls.

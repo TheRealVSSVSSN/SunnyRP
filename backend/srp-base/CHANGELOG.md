@@ -1532,3 +1532,20 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Remove furniture scheduler registration and event broadcasts; unset `FURNITURE_RETENTION_MS`.
+
+## 2025-08-27 – Police duty roster
+
+### Added
+* Police roster endpoints (`GET/POST /v1/police/roster`, `PUT /v1/police/roster/{id}`, `POST /v1/police/roster/{characterId}:duty`).
+* WebSocket topic `police` and webhook event `police.duty`.
+* Scheduler task `police-duty-check` cleaning stale duty records.
+* Config `POLICE_DUTY_TIMEOUT_MS` and `POLICE_CHECK_INTERVAL_MS`.
+* Migration `075_police_officers_character.sql` renaming `player_id` to `character_id` with index.
+
+### Risks
+* Misconfigured timeouts may prematurely set officers off duty.
+
+### Rollback
+* Revert routes, repository and config changes.
+* Drop `075_police_officers_character.sql` migration.
+* Remove scheduler registration and disable duty cleanup.

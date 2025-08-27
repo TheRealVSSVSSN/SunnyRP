@@ -40,7 +40,7 @@
 | k9 | Police dog deployment and status commands | `GET/POST /v1/characters/{characterId}/k9s`, `PATCH /v1/characters/{characterId}/k9s/{k9Id}/active`, `DELETE /v1/characters/{characterId}/k9s/{k9Id}` |
 | dispatch | Police dispatch alerts and code lists | `GET/POST /v1/dispatch/alerts`, `PATCH /v1/dispatch/alerts/{id}/ack`, `GET /v1/dispatch/codes` |
 | furniture | Resource lets players place or remove furniture items | `GET /v1/characters/{characterId}/furniture`, `POST /v1/characters/{characterId}/furniture`, `DELETE /v1/characters/{characterId}/furniture/{id}` (WS/webhook: `furniture.placed`, `furniture.removed`) |
-| gabz_mrpd | Map resource for Mission Row PD building; no events | N/A |
+| gabz_mrpd | Mission Row PD duty roster with push updates | `/v1/police/roster`, `/v1/police/roster/{characterId}:duty` → `police.duty` |
 | gabz_pillbox_hospital | Resource handles hospital admissions and bed management | `GET /v1/hospital/admissions/active`, `POST /v1/hospital/admissions`, `POST /v1/hospital/admissions/{id}/discharge` |
 | garages | Resource emits events when vehicles are stored or retrieved from garages | `/v1/garages` CRUD, `/v1/garages/{garageId}/store`, `/v1/garages/{garageId}/retrieve`, `/v1/characters/{characterId}/garages/{garageId}/vehicles` |
 | ghmattimysql | Exports `execute`, `scalar` and `transaction` for MySQL queries | Core `db` repository offers `query`, `scalar` and `transaction` helpers with named parameters |

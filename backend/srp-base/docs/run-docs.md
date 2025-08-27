@@ -13,6 +13,25 @@
 - docs/testing.md
 - docs/run-docs.md
 
+## Run – 2025-08-27
+
+### Docs Touched
+- docs/index.md
+- docs/progress-ledger.md
+- docs/framework-compliance.md
+- docs/BASE_API_DOCUMENTATION.md
+- docs/events-and-rpcs.md
+- docs/db-schema.md
+- docs/migrations.md
+- docs/admin-ops.md
+- docs/security.md
+- docs/testing.md
+- docs/modules/police.md
+- docs/research-log.md
+- docs/naming-map.md
+- docs/todo-gaps.md
+- docs/run-docs.md
+
 ## Outstanding TODO/Gaps
 | Item | Owner | Priority | Blockers |
 |---|---|---|---|
@@ -26,3 +45,4 @@
 | Add admin endpoints for cron job management | backend | low | none |
 | Bulk sync endpoint for favorite emotes | backend | low | design |
 | Allow labeling/ordering of favorite emotes | backend | low | design |
+| Implement call-sign management for police officers | backend | medium | design |

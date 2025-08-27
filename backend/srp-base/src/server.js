@@ -26,6 +26,7 @@ const emotesTasks = require('./tasks/emotes');
 const emsTasks = require('./tasks/ems');
 const taxiTasks = require('./tasks/taxi');
 const furnitureTasks = require('./tasks/furniture');
+const policeTasks = require('./tasks/police');
 
 // Register Prometheus metrics if enabled.  This must be done before
 // the server starts so that middleware can increment counters.
@@ -161,6 +162,13 @@ scheduler.register(
   () => furnitureTasks.purgeOld(),
   furnitureTasks.INTERVAL_MS,
   { jitter: 60000, persistName: furnitureTasks.JOB_NAME },
+);
+
+scheduler.register(
+  policeTasks.JOB_NAME,
+  () => policeTasks.clearStale(),
+  policeTasks.INTERVAL_MS,
+  { jitter: 5000, persistName: policeTasks.JOB_NAME },
 );
 
 // Handle graceful shutdown

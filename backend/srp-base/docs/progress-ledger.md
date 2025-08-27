@@ -81,3 +81,4 @@
 | 75 | emspack realtime | EMS shift sync and record events over WS/webhooks | Extend | Broadcast events and scheduler end stale shifts |
 | 76 | es_taxi realtime | Taxi dispatch pushes and expiry scheduler | Extend | Broadcast request events; cancel stale requests |
 | 77 | furniture realtime | Furniture place/remove pushes and retention purge | Extend | Broadcast events and daily purge |
+| 78 | gabz_mrpd | Mission Row PD duty roster with realtime pushes and stale-duty scheduler | Create | Added roster API, WS/webhook events and cleanup task |

@@ -536,3 +536,9 @@ Extended taxi dispatch with real-time events and stale request cleanup.
 * Scheduler `taxi-request-expiry` cancels requests older than `TAXI_REQUEST_TTL_MS`.
 
 For resource decisions see `progress-ledger.md`. Module details are documented in `modules/taxi.md`.
+
+## Update – 2025-08-27
+
+Introduced police duty roster management to support the **gabz_mrpd** cluster with WebSocket and webhook pushes plus stale-duty cleanup.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/police.md`.

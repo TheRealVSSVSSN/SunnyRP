@@ -10,49 +10,65 @@ async function listOfficers() {
 }
 
 /**
- * Assign a player as a police officer.
- * @param {number} playerId - Player ID
+ * Assign a character as a police officer.
+ * @param {number} characterId - Character ID
  * @param {string} rank - Officer rank
  * @param {number} onDuty - Whether the officer is on duty (1 or 0)
  * @returns {Promise<Object>} created officer record
  */
-async function assignOfficer(playerId, rank = 'officer', onDuty = 0) {
+async function assignOfficer(characterId, rank = 'officer', onDuty = 0) {
   const [result] = await db.query(
-    'INSERT INTO police_officers (player_id, rank, on_duty) VALUES (?, ?, ?)',
-    [playerId, rank, onDuty],
+    'INSERT INTO police_officers (character_id, rank, on_duty) VALUES (?, ?, ?)',
+    [characterId, rank, onDuty],
   );
-  return { id: result.insertId, playerId, rank, onDuty };
+  return { id: result.insertId, characterId, rank, onDuty };
 }
 
 /**
- * Update a police officer's rank or duty status.
+ * Update a police officer's rank.
  * @param {number} id - Officer record ID
- * @param {Object} data - Fields to update
- * @returns {Promise<Object>} updated officer record
+ * @param {string} rank - New rank
  */
-async function updateOfficer(id, data) {
-  const fields = [];
-  const values = [];
-  if (data.rank) {
-    fields.push('rank = ?');
-    values.push(data.rank);
-  }
-  if (data.onDuty !== undefined) {
-    fields.push('on_duty = ?');
-    values.push(data.onDuty);
-  }
-  if (fields.length === 0) {
-    const [rows] = await db.query('SELECT * FROM police_officers WHERE id = ?', [id]);
-    return rows[0];
-  }
-  values.push(id);
-  await db.query(`UPDATE police_officers SET ${fields.join(', ')} WHERE id = ?`, values);
+async function updateOfficer(id, rank) {
+  await db.query('UPDATE police_officers SET rank = ? WHERE id = ?', [rank, id]);
   const [rows] = await db.query('SELECT * FROM police_officers WHERE id = ?', [id]);
   return rows[0];
+}
+
+/**
+ * Set on-duty status for a character.
+ * @param {number} characterId
+ * @param {number} onDuty (1 or 0)
+ */
+async function setDuty(characterId, onDuty) {
+  await db.query(
+    'UPDATE police_officers SET on_duty = ?, updated_at = CURRENT_TIMESTAMP WHERE character_id = ?',
+    [onDuty, characterId],
+  );
+  const [rows] = await db.query('SELECT * FROM police_officers WHERE character_id = ?', [characterId]);
+  return rows[0];
+}
+
+/**
+ * Set officers off duty if their updated_at is older than cutoff.
+ * Returns affected officers.
+ */
+async function setOffDutyOlderThan(cutoff) {
+  const [rows] = await db.query(
+    'SELECT id, character_id FROM police_officers WHERE on_duty = 1 AND updated_at < ?',
+    [cutoff],
+  );
+  if (rows.length) {
+    const ids = rows.map((r) => r.id);
+    await db.query(`UPDATE police_officers SET on_duty = 0 WHERE id IN (${ids.map(() => '?').join(',')})`, ids);
+  }
+  return rows;
 }
 
 module.exports = {
   listOfficers,
   assignOfficer,
   updateOfficer,
+  setDuty,
+  setOffDutyOlderThan,
 };

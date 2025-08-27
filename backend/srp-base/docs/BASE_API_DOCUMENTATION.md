@@ -646,3 +646,14 @@ Added dispatch alert APIs with WebSocket and webhook push.
 - `GET /v1/dispatch/codes` – list configured dispatch codes.
 
 All endpoints require standard authentication headers.
+
+## Update – 2025-08-27 (police duty roster)
+
+Added police roster endpoints with WebSocket and webhook push plus stale-duty cleanup.
+
+### Endpoints
+
+- `GET /v1/police/roster` – list police officers.
+- `POST /v1/police/roster` – assign an officer (requires `X-Idempotency-Key`).
+- `PUT /v1/police/roster/{id}` – update officer rank (requires `X-Idempotency-Key`).
+- `POST /v1/police/roster/{characterId}:duty` – set duty status (requires `X-Idempotency-Key`).
