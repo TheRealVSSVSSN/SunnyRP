@@ -34,4 +34,16 @@ async function listFlightsByCharacter(characterId, limit = 50) {
   return rows;
 }
 
-module.exports = { createFlight, endFlight, listFlightsByCharacter };
+async function endStaleFlights(maxAgeHours) {
+  const [rows] = await db.query(
+    'SELECT id, character_id AS characterId, purpose, start_time AS startTime FROM heli_flights WHERE end_time IS NULL AND start_time < DATE_SUB(NOW(), INTERVAL ? HOUR)',
+    [maxAgeHours],
+  );
+  if (rows.length === 0) return [];
+  const ids = rows.map((r) => r.id);
+  await db.query('UPDATE heli_flights SET end_time = NOW() WHERE id IN (?)', [ids]);
+  const ended = rows.map((r) => ({ ...r, endTime: new Date().toISOString() }));
+  return ended;
+}
+
+module.exports = { createFlight, endFlight, listFlightsByCharacter, endStaleFlights };

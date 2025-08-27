@@ -1,6 +1,8 @@
 const express = require('express');
 const { sendOk, sendError } = require('../utils/respond');
 const heliRepo = require('../repositories/heliRepository');
+const websocket = require('../realtime/websocket');
+const dispatcher = require('../hooks/dispatcher');
 
 const router = express.Router();
 
@@ -27,6 +29,8 @@ router.post('/v1/heli/flights', async (req, res) => {
   }
   try {
     const flight = await heliRepo.createFlight({ characterId, purpose });
+    websocket.broadcast('heli', 'heli.flightStarted', flight);
+    dispatcher.dispatch('heli.flightStarted', flight);
     sendOk(res, { flight }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'HELI_CREATE_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);
@@ -65,6 +69,8 @@ router.post('/v1/heli/flights/:id/end', async (req, res) => {
         res.locals.traceId,
       );
     }
+    websocket.broadcast('heli', 'heli.flightEnded', flight);
+    dispatcher.dispatch('heli.flightEnded', flight);
     sendOk(res, { flight }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'HELI_END_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);

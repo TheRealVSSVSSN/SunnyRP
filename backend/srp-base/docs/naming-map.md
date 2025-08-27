@@ -35,3 +35,4 @@
 | gabz_pillbox_hospital | hospital |
 | police_officers | police roster |
 | player_id | character_id |
+| heli | heli |

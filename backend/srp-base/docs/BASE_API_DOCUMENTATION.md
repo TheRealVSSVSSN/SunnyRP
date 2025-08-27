@@ -596,6 +596,8 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
 - `POST /v1/heli/flights` – start a flight
 - `POST /v1/heli/flights/{id}/end` – end a flight
 - `GET /v1/characters/{characterId}/heli/flights` – list flights for a character
+  - WebSocket: `heli.flightStarted`, `heli.flightEnded`, `heli.flightExpired` on topic `heli`
+  - Scheduler `heli-expire-flights` ends flights older than `HELI_MAX_FLIGHT_HOURS`
 
 ### Peds
 

@@ -311,6 +311,15 @@ For resource decisions see `progress-ledger.md`. Module details are documented i
 
 ## Update – 2025-08-27
 
+Extended heli flight tracking with realtime events and stale-flight cleanup.
+
+* Flight start/end emits `heli.flightStarted` and `heli.flightEnded` via WebSocket/webhooks.
+* Scheduler `heli-expire-flights` auto-ends flights past `HELI_MAX_FLIGHT_HOURS`, broadcasting `heli.flightExpired`.
+
+For resource decisions see `progress-ledger.md`. Module details are documented in `modules/heli.md`.
+
+## Update – 2025-08-27
+
 Extended parity for the **hardcap** resource with realtime session notifications and automatic cleanup.
 
 * Configuration and session endpoints now broadcast `hardcap.*` events via WebSocket and webhooks.
