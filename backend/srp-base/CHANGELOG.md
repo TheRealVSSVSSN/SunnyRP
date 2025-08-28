@@ -623,6 +623,31 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Drop `clothes` table and remove related routes and repository.
+## 2025-08-28 (koil-debug)
+
+### Added
+
+* Debug domain extensions: structured logs and ephemeral markers with persistence and realtime pushes.
+  - `POST /v1/debug/logs`, `GET /v1/debug/logs` to create/list structured debug logs.
+  - `POST /v1/debug/markers`, `GET /v1/debug/markers`, `DELETE /v1/debug/markers/{id}` to manage ephemeral client-side markers.
+  - WebSocket broadcasts on namespace `debug` for `log.created`, `marker.created`, `marker.deleted`, and `marker.expired`.
+  - Webhook events `debug.log`, `debug.marker.created`, `debug.marker.deleted`, `debug.marker.expired`.
+* Scheduler task `debug-maintenance` purges expired markers and old logs.
+* Migration `080_add_debug.sql` adds `debug_logs` and `debug_markers` tables with indexes.
+
+### Changed
+
+* `openapi/api.yaml` – Added DebugLog/DebugMarker schemas and new paths under `/v1/debug`.
+* `src/config/env.js` – Added `debug` retention and marker cleanup interval.
+* `docs` – Updated module docs; added DB schema and migrations entries.
+
+### Risks
+
+* High-volume logging can increase DB writes; use rate limits and consider sharding or retention tuning in production.
+
+### Rollback
+
+* Drop `debug_logs` and `debug_markers` tables; remove debug routes and scheduler registration; revert OpenAPI and docs.
 ## 2025-08-24 (maps, furnished-shells, hair-pack, mh65c, motel, shoes-pack, yuzler)
 
 ### Notes
