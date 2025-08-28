@@ -56,6 +56,7 @@
 - Ensure the `import_pack_orders` table includes `price`, `canceled_at`, `expires_at` and `expired_at` columns with index `idx_import_pack_orders_status_expires`. Scheduler `import-pack-expiry` uses these to mark and broadcast expired orders based on `IMPORT_PACK_EXPIRY_MS`.
 - Ensure the `character_peds` table exists for ped state tracking.
 - Ensure the `jailbreak_attempts` table exists for jailbreak tracking.
+- Ensure index `idx_jailbreak_attempts_started_at` exists; stale attempts older than `JAILBREAK_MAX_ACTIVE_MS` are failed by scheduler `jailbreak-expire`.
 - Ensure the `jobs` and `character_jobs` tables exist for job management.
 - Ensure the `k9_units` table exists after applying migration 057.
 - Ensure the `police_officers` table has `character_id` column and index after migration 075.

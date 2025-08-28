@@ -8,3 +8,10 @@ Extended ped persistence for the **isPed** resource with realtime pushes and ser
 
 * `PUT /v1/characters/{characterId}/ped` now dispatches WebSocket `peds.pedUpdated` and webhooks.
 * Scheduler `peds-health-regen` increments stored health and broadcasts `peds.healthRegen`.
+
+## Update – 2025-08-27 (jailbreak)
+
+Auto-expiring jailbreak attempts with realtime notifications.
+
+* `POST /v1/jailbreaks` and `POST /v1/jailbreaks/{id}/complete` emit WebSocket `jailbreaks.*` and webhooks.
+* Scheduler `jailbreak-expire` marks stale attempts failed after `JAILBREAK_MAX_ACTIVE_MS`.

@@ -1627,3 +1627,18 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 * Remove peds-health-regen scheduler and delete `src/tasks/peds.js`.
 * Revert websocket namespace changes in `src/realtime/websocket.js`.
+
+## 2025-08-27 (jailbreak realtime)
+
+### Added
+* WebSocket and webhook events for jailbreak attempts.
+* Scheduler `jailbreak-expire` marks stale attempts failed.
+
+### Migrations
+* 079_add_jailbreak_started_index.sql
+
+### Risks
+* Misconfigured `JAILBREAK_MAX_ACTIVE_MS` may prematurely fail attempts.
+
+### Rollback
+* Drop index `idx_jailbreak_attempts_started_at` and remove scheduler registration.

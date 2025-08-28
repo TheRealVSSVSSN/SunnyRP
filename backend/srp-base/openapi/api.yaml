@@ -7302,6 +7302,8 @@ paths:
   /v1/jailbreaks:
     post:
       summary: Start a jailbreak attempt
+      x-websocket-event: jailbreaks.attempt
+      x-webhook-event: jailbreak.attempt
       requestBody:
         required: true
         content:
@@ -7333,6 +7335,8 @@ paths:
   /v1/jailbreaks/{id}/complete:
     post:
       summary: Complete a jailbreak attempt
+      x-websocket-event: jailbreaks.completed
+      x-webhook-event: jailbreak.completed
       parameters:
         - name: id
           in: path

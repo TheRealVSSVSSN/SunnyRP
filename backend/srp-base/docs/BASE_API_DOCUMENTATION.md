@@ -611,6 +611,7 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
 - `POST /v1/jailbreaks` – start a jailbreak attempt (`characterId`, `prison`).
 - `POST /v1/jailbreaks/{id}/complete` – complete an attempt with `success` flag.
 - `GET /v1/jailbreaks/active` – list active attempts.
+- Scheduler `jailbreak-expire` marks attempts older than `JAILBREAK_MAX_ACTIVE_MS` as failed and emits WebSocket `jailbreaks.expired` and webhook `jailbreak.expired`.
 
 ## Update – 2025-08-25 (k9)
 

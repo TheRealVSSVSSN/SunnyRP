@@ -1,6 +1,8 @@
 const express = require('express');
 const { sendOk, sendError } = require('../utils/respond');
 const jailbreakRepo = require('../repositories/jailbreakRepository');
+const websocket = require('../realtime/websocket');
+const dispatcher = require('../hooks/dispatcher');
 
 const router = express.Router();
 
@@ -18,6 +20,8 @@ router.post('/v1/jailbreaks', async (req, res, next) => {
       );
     }
     const attempt = await jailbreakRepo.createAttempt({ characterId, prison });
+    websocket.broadcast('jailbreaks', 'attempt', { attempt });
+    dispatcher.dispatch('jailbreak.attempt', { attempt });
     sendOk(res, { attempt }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     next(err);
@@ -48,6 +52,8 @@ router.post('/v1/jailbreaks/:id/complete', async (req, res, next) => {
         res.locals.traceId,
       );
     }
+    websocket.broadcast('jailbreaks', 'completed', { attempt });
+    dispatcher.dispatch('jailbreak.completed', { attempt });
     sendOk(res, { attempt }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     next(err);

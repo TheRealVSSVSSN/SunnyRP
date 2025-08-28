@@ -48,8 +48,33 @@ async function listActiveAttempts() {
   );
 }
 
+/**
+ * Mark active attempts older than the provided age as failed.
+ * @param {number} maxAgeMs
+ * @returns {Promise<object[]>} expired attempts
+ */
+async function expireStale(maxAgeMs) {
+  const seconds = Math.floor(maxAgeMs / 1000);
+  const [result] = await db.pool.query(
+    `UPDATE jailbreak_attempts
+     SET status = 'failed', ended_at = CURRENT_TIMESTAMP, success = 0
+     WHERE status = 'active' AND started_at < (CURRENT_TIMESTAMP - INTERVAL ? SECOND)`,
+    [seconds],
+  );
+  if (result.affectedRows === 0) return [];
+  return db.query(
+    `SELECT id, character_id AS characterId, prison, status,
+            started_at AS startedAt, ended_at AS endedAt, success
+       FROM jailbreak_attempts
+      WHERE status = 'failed'
+        AND ended_at >= (CURRENT_TIMESTAMP - INTERVAL ? SECOND)`,
+    [seconds],
+  );
+}
+
 module.exports = {
   createAttempt,
   completeAttempt,
   listActiveAttempts,
+  expireStale,
 };

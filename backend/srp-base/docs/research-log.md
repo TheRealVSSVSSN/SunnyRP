@@ -393,3 +393,7 @@
 ## Research Log – 2025-08-27 (isPed)
 - Reviewed `isPed` resource in NoPixel reference for ped model/health persistence.
 - Compared ped health regeneration patterns in EssentialMode, ESX, ND_Core, FSN, QB-Core, vRP and vORP frameworks.
+
+## Research Log – 2025-08-27 (jailbreak)
+- Cloned `https://github.com/h04X-2K/NoPixelServer` and scanned for a `jailbreak` resource; none found, proceeded with internal design.
+- Reviewed jail break flows conceptually across EssentialMode, ESX, ND_Core, FSN, QB-Core, vRP and vORP frameworks for naming and expiry patterns.
