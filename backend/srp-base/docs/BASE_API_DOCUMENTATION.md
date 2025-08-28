@@ -624,6 +624,9 @@ Introduced K9 unit management for police characters.
 * `POST /v1/characters/{characterId}/k9s` – create a K9 unit (requires `X-Idempotency-Key`).
 * `PATCH /v1/characters/{characterId}/k9s/{k9Id}/active` – update active state (requires `X-Idempotency-Key`).
 * `DELETE /v1/characters/{characterId}/k9s/{k9Id}` – retire a K9 unit (requires `X-Idempotency-Key`).
+* `GET /v1/k9s/active` – list all active K9 units.
+* WebSocket `k9.created`, `k9.updated`, `k9.retired`, `k9.activeList` and matching webhooks.
+* Scheduler `k9-active-broadcast` emits periodic `k9.activeList`.
 
 All endpoints require standard authentication headers.
 

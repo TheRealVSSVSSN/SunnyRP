@@ -22,3 +22,11 @@ Realtime job assignments and roster broadcast.
 
 * `POST /v1/jobs/assign` and `POST /v1/jobs/duty` emit `jobs.*` events over WebSocket and webhooks.
 * Scheduler `jobs-roster-sync` broadcasts on-duty rosters every minute.
+
+## Update – 2025-08-28 (k9)
+
+Active K9 roster push model.
+
+* `GET /v1/k9s/active` lists active units.
+* `POST /v1/characters/{characterId}/k9s`, `PATCH /v1/characters/{characterId}/k9s/{k9Id}/active`, and `DELETE /v1/characters/{characterId}/k9s/{k9Id}` emit `k9.*` events via WebSocket and webhooks.
+* Scheduler `k9-active-broadcast` broadcasts active units periodically.

@@ -5,7 +5,7 @@
 - docs/events-and-rpcs.md
 - docs/framework-compliance.md
 - docs/index.md
-- docs/modules/jobs.md
+- docs/modules/k9.md
 - docs/naming-map.md
 - docs/progress-ledger.md
 - docs/research-log.md
@@ -18,7 +18,7 @@
 - events-and-rpcs
 - framework-compliance
 - index
-- modules/jobs
+- modules/k9
 - naming-map
 - progress-ledger
 - research-log
@@ -42,3 +42,4 @@
 | Support editing existing import pack orders | backend | low | design |
 | Persist additional ped attributes such as position and appearance | backend | low | none |
 | Implement paycheck and grade progression logic for jobs | backend | medium | design |
+| Allow assigning handlers via K9 API | backend | low | design |

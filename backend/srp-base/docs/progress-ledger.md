@@ -90,3 +90,4 @@
 | 84 | isPed realtime | Ped state persistence with regen pushes | Extend | Added WS/webhook events and health regen scheduler |
 | 85 | jailbreak realtime | Auto-expire attempts with WS/webhook pushes | Extend | Added expiry scheduler, events, index |
 | 86 | jobsystem realtime | Job assignment pushes and roster scheduler | Extend | Broadcast `jobs.*` events and minute roster sync |
+| 87 | k9 realtime | Active K9 roster push and webhook events | Extend | Added active list route, WS/webhook events, scheduler broadcast |
