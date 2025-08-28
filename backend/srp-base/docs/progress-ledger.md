@@ -100,7 +100,17 @@
 - SKIP: Client-only overlay rendering; handled in FiveM resources.
 | 87 | k9 realtime | Active K9 roster push and webhook events | Extend | Added active list route, WS/webhook events, scheduler broadcast |
 | 88 | koilWeatherSync | Proxy api.weather.gov and periodic forecast sync | Extend | Added weathersync routes and scheduler |
+| 89 | climate-overrides realtime | Timecycle override events and expiry scheduler | Extend | Broadcast set/clear events and auto-clear expired overrides |
+| 90 | lmfao → recycling | Recycling deliveries logging with purge scheduler | Create | Added delivery endpoints and cleanup task |
 
 ## 2025-08-28 — koilWeatherSync
 
 - EXTEND: Added weather.gov proxy endpoints and forecast scheduler.
+
+## 2025-08-28 — climate-overrides realtime
+
+- EXTEND: Timecycle override endpoints now broadcast WebSocket and webhook events and auto-expire via scheduler.
+
+## 2025-08-29 — recycling
+
+- CREATE: Recycling deliveries API with WebSocket/webhook push and hourly purge scheduler.

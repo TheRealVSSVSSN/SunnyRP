@@ -17,6 +17,7 @@ const baseEventTasks = require('./tasks/baseEvents');
 const boatshopTasks = require('./tasks/boatshop');
 const worldTasks = require('./tasks/world');
 const weathersyncTasks = require('./tasks/weathersync');
+const timecycleTasks = require('./tasks/timecycle');
 const cameraTasks = require('./tasks/camera');
 const hudTasks = require('./tasks/hud');
 const carwashTasks = require('./tasks/carwash');
@@ -38,6 +39,7 @@ const jailbreakTasks = require('./tasks/jailbreak');
 const jobsTasks = require('./tasks/jobs');
 const debugTasks = require('./tasks/debug');
 const k9Tasks = require('./tasks/k9');
+const recyclingTasks = require('./tasks/recycling');
 
 // Register Prometheus metrics if enabled.  This must be done before
 // the server starts so that middleware can increment counters.
@@ -116,6 +118,12 @@ scheduler.register(
   () => weathersyncTasks.syncForecast(),
   weathersyncTasks.INTERVAL_MS,
   { jitter: 5000, persistName: weathersyncTasks.JOB_NAME },
+);
+scheduler.register(
+  timecycleTasks.JOB_NAME,
+  () => timecycleTasks.expireAndBroadcast(wss),
+  timecycleTasks.INTERVAL_MS,
+  { jitter: 5000, persistName: timecycleTasks.JOB_NAME },
 );
 scheduler.register(
   cameraTasks.JOB_NAME,
@@ -247,6 +255,13 @@ scheduler.register(
   () => jobsTasks.syncRoster(wss),
   jobsTasks.INTERVAL_MS,
   { jitter: 5000, persistName: jobsTasks.JOB_NAME },
+);
+
+scheduler.register(
+  recyclingTasks.JOB_NAME,
+  () => recyclingTasks.purgeOld(),
+  recyclingTasks.INTERVAL_MS,
+  { jitter: 60000, persistName: recyclingTasks.JOB_NAME },
 );
 
 // Debug domain maintenance (purge expired markers/logs)

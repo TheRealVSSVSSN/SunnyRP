@@ -1722,3 +1722,50 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Remove weathersync routes, task and config block.
+
+## 2025-08-28 (climate-overrides realtime)
+
+### Added
+
+* WebSocket and webhook broadcasts for timecycle override set/clear.
+* Scheduler `timecycle-expiry` to clear expired overrides.
+
+### Changed
+
+* None
+
+### Migrations
+
+* None
+
+### Risks
+
+* Misconfigured intervals could leave expired overrides active.
+
+### Rollback
+
+* Remove timecycle scheduler registration and broadcast hooks.
+
+## 2025-08-29 (recycling)
+
+### Added
+
+* Recycling delivery endpoints `/v1/recycling/deliveries` and `/v1/recycling/deliveries/{characterId}`.
+* Scheduler `recycling-purge` removing stale runs.
+* WebSocket and webhook broadcasts for delivery creation.
+
+### Changed
+
+* `package.json` bumps `express-openapi-validator` to `^5.5.8`.
+
+### Migrations
+
+* `081_add_recycling_runs.sql`
+
+### Risks
+
+* High-volume submissions may grow `recycling_runs` table without cleanup.
+
+### Rollback
+
+* Drop `recycling_runs` table and remove recycling routes and scheduler.

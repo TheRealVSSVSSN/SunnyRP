@@ -39,6 +39,26 @@ components:
   # referenced elsewhere in the spec via $ref.  Adding contract here
   # enables clients to understand the structure of contract objects.
   schemas:
+    RecyclingDelivery:
+      type: object
+      properties:
+        id:
+          type: integer
+        characterId:
+          type: integer
+        materials:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+    RecyclingDeliveryCreateRequest:
+      type: object
+      required: [characterId, materials]
+      properties:
+        characterId:
+          type: integer
+        materials:
+          type: integer
     DebugLog:
       type: object
       properties:
@@ -8725,3 +8745,60 @@ paths:
                     type: string
         '404':
           description: Not found
+  /v1/recycling/deliveries:
+    post:
+      summary: Record recycling delivery
+      tags: [recycling]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecyclingDeliveryCreateRequest'
+      responses:
+        '200':
+          description: Delivery recorded
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/RecyclingDelivery'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+  /v1/recycling/deliveries/{characterId}:
+    get:
+      summary: List recycling deliveries for a character
+      tags: [recycling]
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of deliveries
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      deliveries:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/RecyclingDelivery'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
