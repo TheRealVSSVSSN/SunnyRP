@@ -643,3 +643,13 @@ Retention of sound play logs is controlled by `INTERACT_SOUND_RETENTION_MS`; old
 | on_duty | TINYINT(1) | 1 when on duty |
 | created_at | TIMESTAMP | Creation time |
 | updated_at | TIMESTAMP | Last update |
+
+## recycling_runs
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| character_id | INT | FK to characters.id |
+| materials | INT | Amount of material delivered |
+| created_at | TIMESTAMP | Creation time |
+| INDEX idx_recycling_runs_character_created | (character_id, created_at) |

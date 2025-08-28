@@ -53,3 +53,10 @@ Timecycle overrides now broadcast set/clear events and expire automatically.
 
 * `POST /v1/world/timecycle` and `DELETE /v1/world/timecycle` emit `world.timecycle.*` over WebSocket and webhooks.
 * Scheduler `timecycle-expiry` clears overrides past `expiresAt`.
+
+## Update – 2025-08-29 (recycling)
+
+Tracked recycling job deliveries with realtime pushes.
+
+* `POST /v1/recycling/deliveries` logs a delivery and emits `recycling.delivery.created` via WebSocket and webhooks.
+* Scheduler `recycling-purge` removes deliveries older than `RECYCLING_RETENTION_MS`.

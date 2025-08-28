@@ -1745,3 +1745,27 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Remove timecycle scheduler registration and broadcast hooks.
+
+## 2025-08-29 (recycling)
+
+### Added
+
+* Recycling delivery endpoints `/v1/recycling/deliveries` and `/v1/recycling/deliveries/{characterId}`.
+* Scheduler `recycling-purge` removing stale runs.
+* WebSocket and webhook broadcasts for delivery creation.
+
+### Changed
+
+* `package.json` bumps `express-openapi-validator` to `^5.5.8`.
+
+### Migrations
+
+* `081_add_recycling_runs.sql`
+
+### Risks
+
+* High-volume submissions may grow `recycling_runs` table without cleanup.
+
+### Rollback
+
+* Drop `recycling_runs` table and remove recycling routes and scheduler.

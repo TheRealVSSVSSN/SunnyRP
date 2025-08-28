@@ -48,3 +48,4 @@ Upstream name → SRP name mapping for this run.
 | k9 | k9 |
 | koilWeatherSync | weathersync |
 | koillove | climate-overrides |
+| lmfao | recycling |

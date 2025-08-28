@@ -111,6 +111,9 @@ const pedsRoutes = require('./routes/peds.routes');
 // k9 domain route
 const k9Routes = require('./routes/k9.routes');
 
+// recycling domain route
+const recyclingRoutes = require('./routes/recycling.routes');
+
 // interact sound domain route
 const interactSoundRoutes = require('./routes/interactSound.routes');
 
@@ -276,6 +279,9 @@ app.use(pedsRoutes);
 
 // mount k9 routes
 app.use(k9Routes);
+
+// mount recycling routes
+app.use(recyclingRoutes);
 
 // mount emotes routes
 app.use(emotesRoutes);

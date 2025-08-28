@@ -418,3 +418,8 @@
 
 - GitHub API listing for `resources/koillove` – timecycle mod files. https://api.github.com/repos/h04X-2K/NoPixelServer/contents/resources/koillove
 - Attempted to review `ESX-Official/esx_weather` for broadcast patterns but resource unavailable (404). Reference resources unavailable; proceeding with internal consistency only.
+
+## Research Log – 2025-08-29 (recycling)
+
+- Reviewed `resources/lmfao` in NoPixelServer; identified recycling mission events awarding money and materials.
+- Consulted `qbcore-framework/qb-recyclejob` and `ESX-Official/esx_jobs` for recycling job naming patterns.

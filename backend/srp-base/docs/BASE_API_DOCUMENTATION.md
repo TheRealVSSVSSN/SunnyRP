@@ -694,3 +694,14 @@ Introduced weather.gov integration and proxy.
 - `GET /v1/weathersync/weather.gov` – proxy to api.weather.gov
 
 Scheduler `weathersync-forecast` pulls forecasts and broadcasts `world.forecast.updated`.
+
+## Update – 2025-08-29 (recycling)
+
+### Endpoints
+
+- `GET /v1/recycling/deliveries/{characterId}`
+- `POST /v1/recycling/deliveries` – requires `X-Idempotency-Key`
+
+WebSocket topic `recycling` broadcasts `delivery.created`.
+
+Scheduler `recycling-purge` removes records older than `RECYCLING_RETENTION_MS`.

@@ -1,3 +1,20 @@
+# Run Summary — 2025-08-29 (recycling)
+
+- Added recycling deliveries logging with purge scheduler.
+
+## API Changes
+
+- `POST /v1/recycling/deliveries`
+- `GET /v1/recycling/deliveries/{characterId}`
+
+## Realtime & Webhooks
+
+- WebSocket namespace `recycling` broadcasts `delivery.created` on delivery creation.
+
+## Migrations
+
+- `081_add_recycling_runs.sql` — creates `recycling_runs` table.
+
 # Run Summary — 2025-08-28 (weathersync)
 
 - Added weather.gov proxy and forecast scheduler.

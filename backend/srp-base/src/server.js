@@ -39,6 +39,7 @@ const jailbreakTasks = require('./tasks/jailbreak');
 const jobsTasks = require('./tasks/jobs');
 const debugTasks = require('./tasks/debug');
 const k9Tasks = require('./tasks/k9');
+const recyclingTasks = require('./tasks/recycling');
 
 // Register Prometheus metrics if enabled.  This must be done before
 // the server starts so that middleware can increment counters.
@@ -254,6 +255,13 @@ scheduler.register(
   () => jobsTasks.syncRoster(wss),
   jobsTasks.INTERVAL_MS,
   { jitter: 5000, persistName: jobsTasks.JOB_NAME },
+);
+
+scheduler.register(
+  recyclingTasks.JOB_NAME,
+  () => recyclingTasks.purgeOld(),
+  recyclingTasks.INTERVAL_MS,
+  { jitter: 60000, persistName: recyclingTasks.JOB_NAME },
 );
 
 // Debug domain maintenance (purge expired markers/logs)
