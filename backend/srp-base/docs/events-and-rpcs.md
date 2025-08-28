@@ -16,7 +16,7 @@
 | assets_clothes | Resource saves and retrieves character outfits | `GET /v1/clothes`, `POST /v1/clothes`, `DELETE /v1/clothes/{id}` |
 | properties | Resource manages apartments, garages and rentals with ownership and lease events | `GET/POST/PATCH/DELETE /v1/properties`; broadcasts `properties.propertyCreated`/`properties.propertyUpdated`/`properties.propertyDeleted` |
 | banking | Resource processes deposits, withdrawals, transfers and invoices | `POST /v1/characters/{characterId}/account:deposit`, `POST /v1/characters/{characterId}/account:withdraw`, `POST /v1/transactions`, `POST /v1/invoices` |
-| bob74_ipl | Resource toggles interior proxies (IPLs) for world interiors | `GET/POST/DELETE /v1/world/ipls` → pushes `world.ipl.updated`; scheduler broadcasts `world.ipl.sync` |
+| bob74_ipl | Resource toggles interior proxies (IPLs) for world interiors | `GET/POST/DELETE /v1/world/ipls` → pushes `world.ipl.updated` via WebSocket/webhooks; scheduler broadcasts `world.ipl.sync` |
 | maps | No server events; world mapping assets | N/A |
 | furnished-shells | No server events; interior shell assets | N/A |
 | Cron | Resource triggers scheduled events for maintenance and gameplay loops | `GET /v1/cron/jobs`, `POST /v1/cron/jobs`; scheduler broadcasts `cron.execute` |

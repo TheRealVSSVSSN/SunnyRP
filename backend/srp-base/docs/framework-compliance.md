@@ -101,7 +101,7 @@ practice is supported by citations.
 | **world module** | World state, forecast and timecycle endpoints follow the established layered pattern with authentication and idempotency. |
 | **dispatch module** | Dispatch alert endpoints follow the established layered pattern with authentication and idempotency. |
 | **properties module** | Property endpoints consolidate apartments, garages and rentals with layered design, rate limiting, idempotency, WebSocket/webhook events and lease expiry scheduler. |
-| **world IPL module** | Interior proxy endpoints follow layered design with WebSocket sync and scheduler broadcast. |
+| **world IPL module** | Interior proxy endpoints follow layered design with WebSocket/webhook sync and scheduler broadcast. |
 | **taxi module** | Taxi request endpoints follow layered design with WebSocket/webhook events and expiry scheduler. |
 | **police module** | Duty roster endpoints follow layered design with authentication, idempotency, WebSocket/webhook pushes and stale-duty scheduler. |
 | **peds module** | Ped endpoints follow layered design with WebSocket/webhook events and health regeneration scheduler. |

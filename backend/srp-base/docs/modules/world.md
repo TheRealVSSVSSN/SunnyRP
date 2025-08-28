@@ -17,7 +17,7 @@ Provides APIs to read and update global world state, manage weather forecasts an
 
 ## Realtime & Scheduler
 
-- WebSocket `world.timecycle.set` and `world.timecycle.clear` plus matching webhooks.
+- WebSocket `world.timecycle.set`, `world.timecycle.clear`, `world.ipl.updated` and `world.ipl.removed` with matching webhooks.
 - Scheduler `timecycle-expiry` clears overrides past `expiresAt`.
 
 ## Repository Contracts

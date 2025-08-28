@@ -8213,6 +8213,7 @@ paths:
   /v1/world/ipls:
     get:
       summary: List interior proxy states
+      description: Retrieve stored interior proxy states for dynamic map loading.
       responses:
         '200':
           description: List of IPL states
@@ -8238,6 +8239,9 @@ paths:
           $ref: '#/components/responses/BadRequest'
     post:
       summary: Upsert an interior proxy state
+      description: |
+        Enables or disables an interior proxy (IPL) and broadcasts
+        `world.ipl.updated` via WebSocket and webhooks.
       requestBody:
         required: true
         content:
@@ -8268,6 +8272,9 @@ paths:
   /v1/world/ipls/{name}:
     delete:
       summary: Remove an interior proxy state
+      description: |
+        Deletes an interior proxy (IPL) state and broadcasts
+        `world.ipl.removed` via WebSocket and webhooks.
       parameters:
         - name: name
           in: path
