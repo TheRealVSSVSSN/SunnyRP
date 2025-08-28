@@ -76,3 +76,10 @@ Persist and broadcast vehicle siren/indicator state.
 Webhooks added for interior proxy updates.
 
 * `POST /v1/world/ipls` and `DELETE /v1/world/ipls/{name}` now emit `world.ipl.updated` and `world.ipl.removed` via WebSocket and webhooks.
+
+## Update – 2025-02-14 (ems vehicles)
+
+Logged EMS vehicle spawns with realtime push and retention purge.
+
+* `POST /v1/ems/vehicles` records spawns and emits `ems.vehicle.spawn`.
+* Scheduler `ems-vehicle-spawn-purge` removes old spawn logs.

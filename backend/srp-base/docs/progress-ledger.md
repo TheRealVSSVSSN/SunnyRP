@@ -110,6 +110,7 @@
 | 90 | lmfao → recycling | Recycling deliveries logging with purge scheduler | Create | Added delivery endpoints and cleanup task |
 | 91 | lux_vehcontrol → vehicles control | Siren and indicator state persistence with realtime push | Extend | Added control state API and purge scheduler |
 | 92 | mapmanager | Map/gametype discovery and interior proxy updates | Extend | Added webhook dispatch for IPL state changes |
+| 93 | medicgarage | EMS vehicle spawn logging and push | Create | Added spawn API and purge task |
 
 ## 2025-08-28 — koilWeatherSync
 

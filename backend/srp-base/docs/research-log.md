@@ -433,3 +433,6 @@
 
 - Cloned `https://github.com/h04X-2K/NoPixelServer` and inspected `resources/lux_vehcontrol` for siren and indicator toggle events.
 - Compared vehicle siren handling in ESX and QB-Core vehicle scripts for naming parity.
+## Research Log – 2025-02-14 (medicgarage)
+- Cloned `https://github.com/h04X-2K/NoPixelServer` and inspected `resources/medicgarage` for EMS vehicle spawn events.
+- Reviewed job assignment handling in ESX (`es_extended`) and QB-Core (`qb-core`) for EMS role checks.

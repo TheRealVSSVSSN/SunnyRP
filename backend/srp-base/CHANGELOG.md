@@ -1806,3 +1806,18 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Remove webhook dispatch calls in `world.routes.js`.
+
+## 2025-02-14 (medicgarage)
+
+### Added
+* EMS vehicle spawn logging via `POST /v1/ems/vehicles` with job validation and realtime push.
+* Scheduler `ems-vehicle-spawn-purge` removes old spawn records.
+
+### Migrations
+* `083_add_ems_vehicle_spawns.sql` – create table for EMS vehicle spawn logs.
+
+### Risks
+* Excessive spawn requests could flood logs; rate limiter enforced.
+
+### Rollback
+* Drop `ems_vehicle_spawns` table and remove EMS vehicle routes and tasks.
