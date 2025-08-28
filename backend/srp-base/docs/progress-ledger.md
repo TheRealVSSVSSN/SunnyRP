@@ -99,3 +99,8 @@
 - EXTEND: OpenAPI spec and module docs for debug domain.
 - SKIP: Client-only overlay rendering; handled in FiveM resources.
 | 87 | k9 realtime | Active K9 roster push and webhook events | Extend | Added active list route, WS/webhook events, scheduler broadcast |
+| 88 | koilWeatherSync | Proxy api.weather.gov and periodic forecast sync | Extend | Added weathersync routes and scheduler |
+
+## 2025-08-28 — koilWeatherSync
+
+- EXTEND: Added weather.gov proxy endpoints and forecast scheduler.

@@ -6,8 +6,8 @@ Provides APIs to read and update global world state, manage weather forecasts an
 
 - `GET /v1/world/state`
 - `POST /v1/world/state`
-- `GET /v1/world/forecast`
-- `POST /v1/world/forecast`
+- `GET /v1/world/forecast` *(deprecated – use `/v1/weathersync/forecast`)*
+- `POST /v1/world/forecast` *(deprecated – use `/v1/weathersync/forecast`)*
 - `GET /v1/world/timecycle`
 - `POST /v1/world/timecycle`
 - `DELETE /v1/world/timecycle`

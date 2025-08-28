@@ -16,6 +16,7 @@ const importPackTasks = require('./tasks/importPack');
 const baseEventTasks = require('./tasks/baseEvents');
 const boatshopTasks = require('./tasks/boatshop');
 const worldTasks = require('./tasks/world');
+const weathersyncTasks = require('./tasks/weathersync');
 const cameraTasks = require('./tasks/camera');
 const hudTasks = require('./tasks/hud');
 const carwashTasks = require('./tasks/carwash');
@@ -109,6 +110,12 @@ scheduler.register(
   () => worldTasks.broadcastIpls(wss),
   worldTasks.INTERVAL_MS,
   { jitter: 5000, persistName: worldTasks.JOB_NAME },
+);
+scheduler.register(
+  weathersyncTasks.JOB_NAME,
+  () => weathersyncTasks.syncForecast(),
+  weathersyncTasks.INTERVAL_MS,
+  { jitter: 5000, persistName: weathersyncTasks.JOB_NAME },
 );
 scheduler.register(
   cameraTasks.JOB_NAME,

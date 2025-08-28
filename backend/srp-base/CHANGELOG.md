@@ -1698,3 +1698,27 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Remove `src/tasks/k9.js`, scheduler registration and `/v1/k9s/active` route.
+
+## 2025-08-28 (weathersync)
+
+### Added
+
+* Weather.gov proxy endpoints `/v1/weathersync/forecast` and `/v1/weathersync/weather.gov`.
+* Scheduler `weathersync-forecast` pulling forecasts and broadcasting `world.forecast.updated`.
+
+### Changed
+
+* `src/config/env.js` adds `WEATHERSYNC_*` config block.
+* `openapi/api.yaml` documents weathersync paths.
+
+### Migrations
+
+* None
+
+### Risks
+
+* Upstream api.weather.gov outages may yield stale forecasts.
+
+### Rollback
+
+* Remove weathersync routes, task and config block.

@@ -1,3 +1,20 @@
+# Run Summary — 2025-08-28 (weathersync)
+
+- Added weather.gov proxy and forecast scheduler.
+
+## API Changes
+
+- `GET/POST /v1/weathersync/forecast` — manage weather forecast.
+- `GET /v1/weathersync/weather.gov` — proxy to api.weather.gov.
+
+## Realtime & Webhooks
+
+- WebSocket topic `world` broadcasts `forecast.updated` on changes.
+
+## Migrations
+
+- None.
+
 # Run Summary — 2025-08-28 (koil-debug)
 
 - Extended Debug domain to support structured logs and ephemeral markers.
