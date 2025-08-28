@@ -60,3 +60,10 @@ Tracked recycling job deliveries with realtime pushes.
 
 * `POST /v1/recycling/deliveries` logs a delivery and emits `recycling.delivery.created` via WebSocket and webhooks.
 * Scheduler `recycling-purge` removes deliveries older than `RECYCLING_RETENTION_MS`.
+
+## Update – 2025-08-29 (vehicle control)
+
+Persist and broadcast vehicle siren/indicator state.
+
+* `GET/POST /v1/vehicles/{plate}/control` manage siren and indicator state.
+* Scheduler `vehicle-control-prune` removes stale control records.

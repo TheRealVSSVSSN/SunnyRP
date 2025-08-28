@@ -79,3 +79,4 @@
 | 079_add_jailbreak_started_index.sql | Index jailbreak_attempts started_at column |
 | 080_add_debug.sql | Debug logs and markers tables |
 | 081_add_recycling_runs.sql | Table for recycling job delivery records |
+| 082_add_vehicle_control_states.sql | Vehicle siren/indicator state table |

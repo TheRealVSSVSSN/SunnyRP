@@ -54,3 +54,4 @@
 | srp-weathersync | Resource broadcasts weather and time updates; proxies api.weather.gov | `GET/POST /v1/weathersync/forecast`, `GET /v1/weathersync/weather.gov`, legacy `/v1/world/forecast` (deprecated) |
 | climate-overrides | Resource applies custom timecycle XMLs; emits `world.timecycle.set`/`world.timecycle.clear` | `/v1/world/timecycle` to set or clear presets; scheduler auto-clears expired |
 | lmfao | Recycling job mission events giving money and materials | `POST /v1/recycling/deliveries`, `GET /v1/recycling/deliveries/{characterId}` |
+| lux_vehcontrol | Siren/powercall/indicator toggle events | `GET/POST /v1/vehicles/{plate}/control` → pushes `vehicles.control.update` |

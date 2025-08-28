@@ -1426,6 +1426,42 @@ components:
         dirt:
           type: integer
           nullable: true
+    VehicleControlState:
+      type: object
+      properties:
+        plate:
+          type: string
+        sirenMuted:
+          type: boolean
+          nullable: true
+        lxSirenState:
+          type: integer
+          nullable: true
+        powercallState:
+          type: integer
+          nullable: true
+        airManuState:
+          type: integer
+          nullable: true
+        indicatorState:
+          type: integer
+          nullable: true
+        updatedAt:
+          type: string
+          format: date-time
+    VehicleControlUpdate:
+      type: object
+      properties:
+        sirenMuted:
+          type: boolean
+        lxSirenState:
+          type: integer
+        powercallState:
+          type: integer
+        airManuState:
+          type: integer
+        indicatorState:
+          type: integer
     ChatMessage:
       type: object
       properties:
@@ -5058,6 +5094,64 @@ paths:
       responses:
         '200':
           description: Plate updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      updated:
+                        type: integer
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+  /v1/vehicles/{plate}/control:
+    get:
+      summary: Get vehicle control state
+      parameters:
+        - in: path
+          name: plate
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Control state
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/VehicleControlState'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+    post:
+      summary: Update vehicle control state
+      parameters:
+        - in: path
+          name: plate
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VehicleControlUpdate'
+      responses:
+        '200':
+          description: Update result
           content:
             application/json:
               schema:

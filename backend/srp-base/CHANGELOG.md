@@ -1769,3 +1769,22 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Drop `recycling_runs` table and remove recycling routes and scheduler.
+
+## 2025-08-29 (vehicle control)
+
+### Added
+
+* Vehicle control state endpoints `/v1/vehicles/{plate}/control` with WebSocket and webhook broadcasts.
+* Scheduler `vehicle-control-prune` removes stale control records.
+
+### Migrations
+
+* `082_add_vehicle_control_states.sql`
+
+### Risks
+
+* Incorrect cleanup interval may leave stale control states.
+
+### Rollback
+
+* Drop `vehicle_control_states` table and remove control routes and task.

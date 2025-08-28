@@ -1,3 +1,20 @@
+# Run Summary — 2025-08-29 (vehicle control)
+
+- Persist and broadcast vehicle siren/indicator state with cleanup scheduler.
+
+## API Changes
+
+- `GET /v1/vehicles/{plate}/control`
+- `POST /v1/vehicles/{plate}/control`
+
+## Realtime & Webhooks
+
+- WebSocket namespace `vehicles` emits `control.update` and webhook mirror.
+
+## Migrations
+
+- `082_add_vehicle_control_states.sql` — creates `vehicle_control_states` table.
+
 # Run Summary — 2025-08-29 (recycling)
 
 - Added recycling deliveries logging with purge scheduler.

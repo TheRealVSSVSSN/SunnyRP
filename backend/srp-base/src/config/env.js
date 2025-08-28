@@ -141,6 +141,10 @@ const config = {
     fetchIntervalMs: parseInt(process.env.WEATHER_GOV_FETCH_INTERVAL_MS || '300000', 10),
   },
 
+  vehicleControl: {
+    retentionMs: parseInt(process.env.VEHICLE_CONTROL_RETENTION_MS || '3600000', 10),
+  },
+
   /**
    * Feature flags for core modules.  Lua consumers still drive
    * behaviour via /v1/config/live, but these flags provide a safe

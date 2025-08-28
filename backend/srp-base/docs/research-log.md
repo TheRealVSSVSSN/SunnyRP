@@ -423,3 +423,8 @@
 
 - Reviewed `resources/lmfao` in NoPixelServer; identified recycling mission events awarding money and materials.
 - Consulted `qbcore-framework/qb-recyclejob` and `ESX-Official/esx_jobs` for recycling job naming patterns.
+
+## Research Log – 2025-08-29 (lux_vehcontrol)
+
+- Cloned `https://github.com/h04X-2K/NoPixelServer` and inspected `resources/lux_vehcontrol` for siren and indicator toggle events.
+- Compared vehicle siren handling in ESX and QB-Core vehicle scripts for naming parity.
