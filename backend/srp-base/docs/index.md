@@ -38,3 +38,11 @@ Active K9 roster push model.
 * `GET /v1/k9s/active` lists active units.
 * `POST /v1/characters/{characterId}/k9s`, `PATCH /v1/characters/{characterId}/k9s/{k9Id}/active`, and `DELETE /v1/characters/{characterId}/k9s/{k9Id}` emit `k9.*` events via WebSocket and webhooks.
 * Scheduler `k9-active-broadcast` broadcasts active units periodically.
+
+## Update – 2025-08-28 (weathersync)
+
+Weather.gov integration with forecast proxy and scheduler.
+
+* `GET/POST /v1/weathersync/forecast` manage forecasts.
+* `GET /v1/weathersync/weather.gov` proxies api.weather.gov.
+* Scheduler `weathersync-forecast` pulls forecasts and broadcasts.

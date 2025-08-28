@@ -134,6 +134,12 @@ const config = {
     maxActiveMs: parseInt(process.env.JAILBREAK_MAX_ACTIVE_MS || '300000', 10),
   },
 
+  weathersync: {
+    enabled: process.env.WEATHERSYNC_ENABLED === '1',
+    point: process.env.WEATHER_GOV_POINT || '',
+    fetchIntervalMs: parseInt(process.env.WEATHER_GOV_FETCH_INTERVAL_MS || '300000', 10),
+  },
+
   /**
    * Feature flags for core modules.  Lua consumers still drive
    * behaviour via /v1/config/live, but these flags provide a safe

@@ -1,46 +1,21 @@
 # Manifest
 
-- Added active K9 roster push with WebSocket/webhook events and scheduler.
+- Added weather.gov proxy endpoints and periodic forecast sync.
 
 | File | Action | Note |
 |---|---|---|
-| src/repositories/jobsRepository.js | M | Added on-duty roster query |
-| src/routes/jobs.routes.js | M | Broadcast/dispatch `jobs.assigned` and `jobs.duty` |
-| src/tasks/jobs.js | A | Scheduler broadcasting `jobs.roster` |
-| src/server.js | M | Registered jobs roster sync task |
-| openapi/api.yaml | M | Documented job webhook events |
-| docs/modules/jobs.md | M | Added WS/webhook and scheduler notes |
-| docs/BASE_API_DOCUMENTATION.md | M | Documented job events |
-| docs/events-and-rpcs.md | M | Mapped `jobs.*` events |
-| docs/framework-compliance.md | M | Updated jobs module compliance |
-| docs/index.md | M | Logged jobs update |
-| docs/naming-map.md | M | Added jobsystem mapping |
-| docs/progress-ledger.md | M | Recorded jobs realtime entry |
-| docs/research-log.md | M | Logged jobs research |
-| docs/todo-gaps.md | M | Added job progression TODO |
-| docs/run-docs.md | A | Consolidated doc summary for this run |
-| src/config/env.js | M | Added debug retention and cleanup interval |
-| src/repositories/debugRepository.js | M | Added logs/markers persistence helpers |
-| src/routes/debug.routes.js | M | Added /v1/debug/logs and /v1/debug/markers APIs |
-| src/tasks/debug.js | A | Scheduler purge for markers/logs with WS/webhook emits |
-| src/server.js | M | Registered debug maintenance task |
-| src/migrations/080_add_debug.sql | A | Created debug_logs and debug_markers tables |
-| openapi/api.yaml | M | Added DebugLog/Marker schemas and paths |
-| docs/modules/debug.md | M | Expanded debug module docs |
-| docs/db-schema.md | M | Documented debug tables |
-| docs/migrations.md | M | Logged 080_add_debug.sql |
-| src/repositories/k9Repository.js | M | Added `listActive` helper |
-| src/routes/k9.routes.js | M | Active list route + events/webhooks |
-| src/tasks/k9.js | A | Scheduler broadcasting active roster |
-| src/server.js | M | Registered k9 broadcast task |
-| openapi/api.yaml | M | Documented `GET /v1/k9s/active` |
-| docs/modules/k9.md | M | Documented new endpoint/events |
-| docs/BASE_API_DOCUMENTATION.md | M | Added K9 active roster notes |
-| docs/events-and-rpcs.md | M | Mapped K9 events and route |
-| docs/framework-compliance.md | M | Updated K9 module compliance |
-| docs/index.md | M | Logged K9 update |
-| docs/naming-map.md | M | Added k9 mapping |
-| docs/progress-ledger.md | M | Recorded K9 realtime entry |
-| docs/research-log.md | M | Logged k9 resource research |
-| docs/todo-gaps.md | M | Added K9 handler assignment TODO |
-| docs/run-docs.md | M | Consolidated documentation |
+| src/config/env.js | M | Added weathersync config block |
+| src/routes/weathersync.routes.js | A | Forecast routes and weather.gov proxy |
+| src/tasks/weathersync.js | A | Scheduler pulling api.weather.gov forecast |
+| src/app.js | M | Mounted weathersync routes |
+| src/server.js | M | Registered weathersync scheduler |
+| openapi/api.yaml | M | Documented weathersync paths |
+| docs/modules/weathersync.md | A | Module guide |
+| docs/modules/world.md | M | Marked world forecast endpoints deprecated |
+| docs/index.md | M | Logged weathersync update |
+| docs/progress-ledger.md | M | Recorded koilWeatherSync entry |
+| docs/naming-map.md | M | Added koilWeatherSync mapping |
+| docs/events-and-rpcs.md | M | Mapped weathersync API |
+| docs/BASE_API_DOCUMENTATION.md | M | Documented weathersync endpoints |
+| docs/run-docs.md | M | Run summary |
+| docs/research-log.md | M | Logged weather.gov research |

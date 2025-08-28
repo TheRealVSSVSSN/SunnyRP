@@ -7918,6 +7918,28 @@ paths:
                     type: string
         '400':
           $ref: '#/components/responses/BadRequest'
+
+  /v1/weathersync/forecast:
+    get:
+      summary: Get weather forecast
+      responses:
+        '200':
+          description: Current forecast
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/WorldForecast'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
     post:
       summary: Update weather forecast
       requestBody:
@@ -7952,6 +7974,46 @@ paths:
                     type: string
         '400':
           $ref: '#/components/responses/BadRequest'
+
+  /v1/weathersync/weather.gov:
+    get:
+      summary: Proxy to api.weather.gov
+      parameters:
+        - in: query
+          name: endpoint
+          required: true
+          schema:
+            type: string
+          description: Path appended to https://api.weather.gov/
+      responses:
+        '200':
+          description: Proxied response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '502':
+          description: Upstream error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
   /v1/world/timecycle:
     get:
       summary: Get timecycle override
