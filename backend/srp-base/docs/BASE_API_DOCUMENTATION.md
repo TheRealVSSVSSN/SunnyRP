@@ -280,9 +280,9 @@ In addition to the core identity, permissions, characters and admin APIs describ
 | `GET` | `/v1/jobs` | List all defined jobs. |
 | `POST` | `/v1/jobs` | Create a new job (body: `{ name, label?, description? }`). |
 | `GET` | `/v1/jobs/:id` | Retrieve a job by ID. |
-| `POST` | `/v1/jobs/assign` | Assign a player to a job (body: `{ playerId, jobId }`). |
-| `POST` | `/v1/jobs/duty` | Toggle a player’s duty status for a job (body: `{ playerId, jobId, onDuty }`). |
-| `GET` | `/v1/jobs/:playerId/assignments` | List all job assignments for a player with duty status. |
+| `POST` | `/v1/jobs/assign` | Assign a character to a job (body: `{ characterId, jobId, grade? }`) — broadcasts `jobs.assigned`. |
+| `POST` | `/v1/jobs/duty` | Toggle a character’s duty status (body: `{ characterId, jobId, onDuty }`) — broadcasts `jobs.duty`. |
+| `GET` | `/v1/jobs/:characterId/assignments` | List all job assignments for a character with duty status. |
 
 #### Weapons & Ammo
 
@@ -562,6 +562,7 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
 - `POST /v1/jobs/assign` – assign a job to a character (`characterId`, `jobId`, optional `grade`)
 - `POST /v1/jobs/duty` – set job duty status (`characterId`, `jobId`, `onDuty`)
 - `GET /v1/jobs/{characterId}/assignments` – list assignments for a character
+- WebSocket: `jobs.assigned`, `jobs.duty`, `jobs.roster`
 - `POST /v1/broadcast/attempt` – attempt to become a broadcaster
 
 ### Taxi

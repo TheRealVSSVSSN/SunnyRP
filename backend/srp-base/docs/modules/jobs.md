@@ -2,7 +2,9 @@
 
 The Jobs module provides REST endpoints for defining jobs and assigning them to characters.
 It mirrors the responsibilities of the original `jobsystem` resource while enforcing
-character-based ownership and optional grade tracking.
+character-based ownership and optional grade tracking. Job changes are
+pushed to clients via WebSocket and external systems via webhooks so
+they no longer need to poll for updates.
 
 ## Endpoints
 
@@ -26,6 +28,7 @@ Body:
 }
 ```
 Returns the stored assignment.
+Broadcasts `jobs.assigned` over WebSocket and webhooks.
 
 ### `POST /v1/jobs/duty`
 Toggle duty status for a character and job.
@@ -37,9 +40,14 @@ Body:
   "onDuty": true
 }
 ```
+Broadcasts `jobs.duty` over WebSocket and webhooks.
 
 ### `GET /v1/jobs/{characterId}/assignments`
 List all job assignments for a character.
+
+### Scheduler
+`jobs-roster-sync` runs every minute to broadcast on-duty rosters via
+WebSocket `jobs.roster` and matching webhooks.
 
 ## Database Schema
 
@@ -54,3 +62,4 @@ Jobs are stored in the `jobs` table and character assignments in `character_jobs
 
 * Assignments are scoped by `character_id`; `grade` defaults to `0`.
 * All endpoints require an `X-API-Token` header. Mutating requests honor idempotency and rate limits.
+* WebSocket namespace: `/jobs`.

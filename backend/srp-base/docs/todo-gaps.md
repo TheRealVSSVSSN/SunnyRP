@@ -16,3 +16,4 @@
 | Add altitude and location tracking for helicopter flights | backend | low | design |
 | Support editing existing import pack orders | backend | low | design |
 | Persist additional ped attributes such as position and appearance | backend | low | none |
+| Implement paycheck and grade progression logic for jobs | backend | medium | design |

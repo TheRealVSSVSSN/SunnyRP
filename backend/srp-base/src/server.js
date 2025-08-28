@@ -34,6 +34,7 @@ const hardcapTasks = require('./tasks/hardcap');
 const heliTasks = require('./tasks/heli');
 const pedsTasks = require('./tasks/peds');
 const jailbreakTasks = require('./tasks/jailbreak');
+const jobsTasks = require('./tasks/jobs');
 
 // Register Prometheus metrics if enabled.  This must be done before
 // the server starts so that middleware can increment counters.
@@ -223,6 +224,13 @@ scheduler.register(
   () => jailbreakTasks.expireStale(),
   jailbreakTasks.INTERVAL_MS,
   { jitter: 5000, persistName: jailbreakTasks.JOB_NAME },
+);
+
+scheduler.register(
+  jobsTasks.JOB_NAME,
+  () => jobsTasks.syncRoster(wss),
+  jobsTasks.INTERVAL_MS,
+  { jitter: 5000, persistName: jobsTasks.JOB_NAME },
 );
 
 // Handle graceful shutdown

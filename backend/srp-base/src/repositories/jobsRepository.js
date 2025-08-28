@@ -125,6 +125,23 @@ async function getCharacterJobs(characterId) {
   );
 }
 
+/**
+ * List all on-duty characters grouped by job name. Returns an array
+ * of objects like `{ job: 'police', characterId: 123 }` for each
+ * active duty assignment. Used by the scheduler to broadcast duty
+ * rosters so clients do not need to poll.
+ *
+ * @returns {Promise<Array<{job: string, characterId: number}>>}
+ */
+async function listOnDutyRoster() {
+  return db.query(
+    `SELECT j.name AS job, cj.character_id AS characterId
+       FROM character_jobs cj
+       JOIN jobs j ON cj.job_id = j.id
+      WHERE cj.on_duty = 1`,
+  );
+}
+
 module.exports = {
   listJobs,
   createJob,
@@ -133,6 +150,7 @@ module.exports = {
   assignJob,
   setDuty,
   getCharacterJobs,
+  listOnDutyRoster,
   /**
    * Count the number of characters currently assigned to a given job.  This
    * helper is used by modules like broadcaster to enforce limits on how
