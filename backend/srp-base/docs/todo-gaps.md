@@ -18,3 +18,6 @@
 | Persist additional ped attributes such as position and appearance | backend | low | none |
 | Implement paycheck and grade progression logic for jobs | backend | medium | design |
 | Allow assigning handlers via K9 API | backend | low | design |
+| Document hacking endpoints in BASE_API_DOCUMENTATION and events-and-rpcs | backend | medium | time |
+| Add db-schema entry for hacking_attempts table | backend | medium | time |
+| Record mhacking research sources in research-log.md | backend | low | reference access |

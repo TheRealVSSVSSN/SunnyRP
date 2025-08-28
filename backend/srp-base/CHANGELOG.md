@@ -1806,7 +1806,24 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Remove webhook dispatch calls in `world.routes.js`.
+## 2025-08-29 (mhacking)
 
+### Added
+
+* Hacking attempt API with WebSocket/webhook push and purge scheduler.
+
+### Migrations
+
+* `083_add_hacking_attempts.sql` — create `hacking_attempts` table.
+
+### Risks
+
+* Incorrect retention configuration could purge attempts too aggressively.
+
+### Rollback
+
+* Drop `hacking_attempts` table and remove routes, scheduler and config entries.
+=======
 ## 2025-02-14 (medicgarage)
 
 ### Added

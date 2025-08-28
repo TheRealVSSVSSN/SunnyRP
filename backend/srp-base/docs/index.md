@@ -77,6 +77,13 @@ Webhooks added for interior proxy updates.
 
 * `POST /v1/world/ipls` and `DELETE /v1/world/ipls/{name}` now emit `world.ipl.updated` and `world.ipl.removed` via WebSocket and webhooks.
 
+## Update – 2025-08-29 (mhacking)
+
+Logged hacking attempts with realtime pushes and scheduled cleanup.
+
+* `POST /v1/hacking/attempts` records an attempt and emits `hacking.attempt.created` via WebSocket and webhooks.
+* Scheduler `hacking-purge` removes attempts older than `HACKING_RETENTION_MS`.
+
 ## Update – 2025-02-14 (ems vehicles)
 
 Logged EMS vehicle spawns with realtime push and retention purge.

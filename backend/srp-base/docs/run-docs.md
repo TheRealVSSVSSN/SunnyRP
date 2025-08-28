@@ -127,7 +127,28 @@
 ## API Changes
 
 - None.
+# Run Summary — 2025-08-29 (mhacking)
 
+- Logged hacking attempts with realtime push and purge scheduler.
+
+## API Changes
+
+- `GET /v1/hacking/attempts`
+- `POST /v1/hacking/attempts`
+
+## Realtime & Webhooks
+
+- WebSocket namespace `hacking` emits `attempt.created` and `attempts.purged` with webhook mirror.
+
+## Migrations
+
+- `083_add_hacking_attempts.sql` — creates `hacking_attempts` table.
+
+## Outstanding
+
+- Document hacking endpoints in BASE_API_DOCUMENTATION and events-and-rpcs.
+- Add db-schema entry for hacking_attempts table.
+- Record mhacking research sources in research-log.md.
 ## Realtime & Webhooks
 
 - WebSocket `world.timecycle.set` and `world.timecycle.clear` with matching webhooks.
