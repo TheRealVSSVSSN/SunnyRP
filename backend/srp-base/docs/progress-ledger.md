@@ -110,6 +110,7 @@
 | 90 | lmfao → recycling | Recycling deliveries logging with purge scheduler | Create | Added delivery endpoints and cleanup task |
 | 91 | lux_vehcontrol → vehicles control | Siren and indicator state persistence with realtime push | Extend | Added control state API and purge scheduler |
 | 92 | mapmanager | Map/gametype discovery and interior proxy updates | Extend | Added webhook dispatch for IPL state changes |
+| 93 | mhacking → hacking | Hacking attempt logging with realtime push and purge scheduler | Create | Added attempt API and cleanup task |
 
 ## 2025-08-28 — koilWeatherSync
 
@@ -122,3 +123,7 @@
 ## 2025-08-29 — recycling
 
 - CREATE: Recycling deliveries API with WebSocket/webhook push and hourly purge scheduler.
+
+## 2025-08-29 — mhacking
+
+- CREATE: Hacking attempt API with WebSocket/webhook push and hourly purge scheduler.

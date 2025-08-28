@@ -137,6 +137,30 @@ components:
           type: integer
         createdBy:
           type: integer
+    HackingAttempt:
+      type: object
+      properties:
+        id:
+          type: integer
+        characterId:
+          type: integer
+        target:
+          type: string
+        success:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+    HackingAttemptCreateRequest:
+      type: object
+      required: [characterId, target, success]
+      properties:
+        characterId:
+          type: integer
+        target:
+          type: string
+        success:
+          type: boolean
     IplState:
       type: object
       properties:
@@ -8899,6 +8923,69 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/RecyclingDelivery'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+
+  /v1/hacking/attempts:
+    get:
+      summary: List hacking attempts for a character
+      parameters:
+        - in: query
+          name: characterId
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: List of attempts
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      attempts:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/HackingAttempt'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+    post:
+      summary: Record hacking attempt
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HackingAttemptCreateRequest'
+      responses:
+        '200':
+          description: Attempt recorded
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      attempt:
+                        $ref: '#/components/schemas/HackingAttempt'
                   requestId:
                     type: string
                   traceId:

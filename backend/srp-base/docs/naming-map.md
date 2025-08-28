@@ -51,3 +51,4 @@ Upstream name → SRP name mapping for this run.
 | lmfao | recycling |
 | lux_vehcontrol | vehicle-control |
 | mapmanager | world.ipls |
+| mhacking | hacking |

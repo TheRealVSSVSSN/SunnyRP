@@ -87,6 +87,7 @@ const config = {
     // Marker cleanup cadence (ms)
     markerCleanupIntervalMs: parseInt(process.env.DEBUG_MARKER_CLEANUP_INTERVAL_MS || '60000', 10),
   },
+  hacking: { retentionMs: parseInt(process.env.HACKING_RETENTION_MS || '2592000000', 10) },
   furniture: { retentionMs: parseInt(process.env.FURNITURE_RETENTION_MS || '15552000000', 10) },
   invoiceRetentionMs: parseInt(process.env.INVOICE_RETENTION_MS || '2592000000', 10),
   emotes: { retentionMs: parseInt(process.env.EMOTE_RETENTION_MS || '15552000000', 10) },

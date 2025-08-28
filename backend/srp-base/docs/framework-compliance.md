@@ -108,6 +108,7 @@ practice is supported by citations.
 | **climate-overrides realtime** | Timecycle override endpoints emit WebSocket/webhook events and a scheduler clears expired overrides. |
 | **recycling module** | Recycling delivery endpoints follow layered design with authentication, idempotency and realtime push plus retention purge. |
 | **vehicle control module** | Vehicle control state endpoints follow layered design with authentication, idempotency, WebSocket/webhook events and hourly cleanup scheduler. |
+| **hacking module** | Hacking attempt endpoints follow layered design with authentication, idempotency, WebSocket/webhook events and retention purge scheduler. |
 
 ## Outstanding Items
 
@@ -125,3 +126,5 @@ practice is supported by citations.
 \- Add RBAC for admin-only access to debug endpoints beyond token/HMAC.
 \- Consider Redis-backed idempotency/rate limiting for high-volume debug ingestion.
 \- Add pagination/cursors for `/v1/debug/logs`.
+- Document hacking endpoints in BASE_API_DOCUMENTATION and events-and-rpcs.
+- Add db-schema entry for hacking_attempts table.

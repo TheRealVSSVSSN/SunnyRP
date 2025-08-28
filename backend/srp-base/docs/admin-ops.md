@@ -38,6 +38,7 @@
 - Ensure the `chat_messages` table exists for chat logging. Messages older than `CHAT_RETENTION_MS` are purged hourly by the `chat-purge` scheduler.
 - Ensure the `queue_priorities` table exists for connection queue priority management.
 - Monitor `connectqueue-expiry` scheduler purging expired priorities; priority updates emit `connectqueue.priority.*` webhooks.
+- Ensure the `hacking_attempts` table exists for hacking logs; tune `HACKING_RETENTION_MS` for purge interval managed by `hacking-purge` scheduler.
 - Ensure the `character_coords` table exists for saved coordinates. The `coordinates-purge` scheduler removes rows older than 30 days.
 - Ensure the `interiors` table exists for apartment interior layouts.
 - Ensure the `character_emotes` table exists for favorite emotes.
