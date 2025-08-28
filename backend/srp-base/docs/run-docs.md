@@ -1,44 +1,34 @@
-# Run Documentation – 2025-08-28
+# Run Summary — 2025-08-28 (koil-debug)
 
-## Changed Docs
-- docs/BASE_API_DOCUMENTATION.md
-- docs/events-and-rpcs.md
-- docs/framework-compliance.md
-- docs/index.md
-- docs/modules/jobs.md
-- docs/naming-map.md
-- docs/progress-ledger.md
-- docs/research-log.md
-- docs/todo-gaps.md
+- Extended Debug domain to support structured logs and ephemeral markers.
+- Added WebSocket and webhook broadcasts for debug events.
+- Introduced a scheduler job to purge expired markers and old logs.
 
-## Run – 2025-08-28
+## API Changes
 
-### Docs Touched
-- BASE_API_DOCUMENTATION
-- events-and-rpcs
-- framework-compliance
-- index
-- modules/jobs
-- naming-map
-- progress-ledger
-- research-log
-- todo-gaps
+- `POST /v1/debug/logs` — create a log entry (level, message, context, source, account/character scope).
+- `GET /v1/debug/logs` — list logs with filters (level, since, limit, accountId, characterId).
+- `POST /v1/debug/markers` — create marker (type, data, ttlMs, createdBy) with realtime push.
+- `GET /v1/debug/markers` — list active markers.
+- `DELETE /v1/debug/markers/{id}` — remove marker and broadcast deletion.
+
+## Realtime & Webhooks
+
+- WebSocket namespace `debug` events: `log.created`, `marker.created`, `marker.deleted`, `marker.expired`.
+- Webhook events mirror WS topics with HMAC-signed payloads and retry.
+
+## Migrations
+
+- `080_add_debug.sql` — tables `debug_logs` and `debug_markers` with indexes.
+
+## Configuration
+
+- `DEBUG_RETENTION_MS` — defaults to 7 days.
+- `DEBUG_MARKER_CLEANUP_INTERVAL_MS` — defaults to 60s.
 
 ## Outstanding TODO/Gaps
-| Item | Owner | Priority | Blockers |
-|---|---|---|---|
-| Migrate existing apartment and garage consumers to new properties API | backend | high | client updates |
-| Link interior templates and garage capacity to properties | backend | medium | design of interior data |
-| Dispatch property events to external webhooks | backend | medium | webhook endpoint adoption |
-| Paginate and search property listings | backend | low | none |
-| Document world event endpoints in OpenAPI | backend | medium | spec alignment |
-| Integrate player vitals (hunger, thirst, stress) into HUD module | backend | medium | gameplay design |
-| Add admin bulk adjustment endpoints for queue priorities | backend | low | none |
-| Add admin endpoints for cron job management | backend | low | none |
-| Bulk sync endpoint for favorite emotes | backend | low | design |
-| Allow labeling/ordering of favorite emotes | backend | low | design |
-| Implement call-sign management for police officers | backend | medium | design |
-| Add altitude and location tracking for helicopter flights | backend | low | design |
-| Support editing existing import pack orders | backend | low | design |
-| Persist additional ped attributes such as position and appearance | backend | low | none |
-| Implement paycheck and grade progression logic for jobs | backend | medium | design |
+
+- Add role-based admin gating for debug endpoints beyond token auth.
+- Consider pagination for `/v1/debug/logs` beyond `limit` cap.
+- Optional: query endpoints for expired markers/logs for audit purposes.
+- Optional: Redis-backed idempotency and rate limiting for high-volume debug sessions.

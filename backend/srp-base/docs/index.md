@@ -22,3 +22,11 @@ Realtime job assignments and roster broadcast.
 
 * `POST /v1/jobs/assign` and `POST /v1/jobs/duty` emit `jobs.*` events over WebSocket and webhooks.
 * Scheduler `jobs-roster-sync` broadcasts on-duty rosters every minute.
+
+## Update – 2025-08-28 (koil-debug)
+
+Debug domain extended with structured logs and ephemeral markers.
+
+* `POST /v1/debug/logs` and `GET /v1/debug/logs` store and retrieve logs.
+* `POST /v1/debug/markers`, `GET /v1/debug/markers`, `DELETE /v1/debug/markers/{id}` manage markers.
+* WebSocket `debug.*` and webhook events mirror lifecycle; scheduler purges expired markers and old logs.

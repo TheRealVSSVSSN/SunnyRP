@@ -35,6 +35,7 @@ const heliTasks = require('./tasks/heli');
 const pedsTasks = require('./tasks/peds');
 const jailbreakTasks = require('./tasks/jailbreak');
 const jobsTasks = require('./tasks/jobs');
+const debugTasks = require('./tasks/debug');
 
 // Register Prometheus metrics if enabled.  This must be done before
 // the server starts so that middleware can increment counters.
@@ -231,6 +232,14 @@ scheduler.register(
   () => jobsTasks.syncRoster(wss),
   jobsTasks.INTERVAL_MS,
   { jitter: 5000, persistName: jobsTasks.JOB_NAME },
+);
+
+// Debug domain maintenance (purge expired markers/logs)
+scheduler.register(
+  debugTasks.JOB_NAME,
+  () => debugTasks.purgeOld(),
+  debugTasks.INTERVAL_MS,
+  { jitter: 5000, persistName: debugTasks.JOB_NAME },
 );
 
 // Handle graceful shutdown

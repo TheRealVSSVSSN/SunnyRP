@@ -77,3 +77,4 @@
 | 077_add_hardcap_session_index.sql | Index hardcap_sessions disconnected_at & connected_at |
 | 078_add_import_pack_expiry.sql | Add expires_at/expired_at columns and index to import_pack_orders |
 | 079_add_jailbreak_started_index.sql | Index jailbreak_attempts started_at column |
+| 080_add_debug.sql | Debug logs and markers tables |

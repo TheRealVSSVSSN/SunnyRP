@@ -39,6 +39,84 @@ components:
   # referenced elsewhere in the spec via $ref.  Adding contract here
   # enables clients to understand the structure of contract objects.
   schemas:
+    DebugLog:
+      type: object
+      properties:
+        id:
+          type: integer
+        level:
+          type: string
+        message:
+          type: string
+        context:
+          type: object
+          nullable: true
+          additionalProperties: true
+        accountId:
+          type: string
+          nullable: true
+        characterId:
+          type: integer
+          nullable: true
+        source:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+    DebugLogCreateRequest:
+      type: object
+      required: [level, message]
+      properties:
+        level:
+          type: string
+          description: e.g. info, warn, error, trace
+        message:
+          type: string
+        context:
+          type: object
+          additionalProperties: true
+        accountId:
+          type: string
+        characterId:
+          type: integer
+        source:
+          type: string
+          description: client, server, resource name, etc.
+    DebugMarker:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+          description: e.g. text, line, marker, sphere
+        data:
+          type: object
+          additionalProperties: true
+        createdBy:
+          type: integer
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        expiresAt:
+          type: string
+          format: date-time
+          nullable: true
+    DebugMarkerCreateRequest:
+      type: object
+      required: [type]
+      properties:
+        type:
+          type: string
+        data:
+          type: object
+          additionalProperties: true
+        ttlMs:
+          type: integer
+        createdBy:
+          type: integer
     IplState:
       type: object
       properties:
@@ -2058,6 +2136,176 @@ paths:
                         type: array
                         items:
                           type: number
+  /v1/debug/logs:
+    get:
+      summary: List debug logs
+      operationId: listDebugLogs
+      parameters:
+        - in: query
+          name: level
+          schema:
+            type: string
+        - in: query
+          name: since
+          schema:
+            type: string
+            format: date-time
+        - in: query
+          name: limit
+          schema:
+            type: integer
+        - in: query
+          name: accountId
+          schema:
+            type: string
+        - in: query
+          name: characterId
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Logs list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      logs:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/DebugLog'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    post:
+      summary: Create debug log
+      operationId: createDebugLog
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DebugLogCreateRequest'
+      responses:
+        '200':
+          description: Log created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      log:
+                        $ref: '#/components/schemas/DebugLog'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+      x-webhook-event: debug.log
+  /v1/debug/markers:
+    get:
+      summary: List active debug markers
+      operationId: listDebugMarkers
+      parameters:
+        - in: query
+          name: type
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Markers list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      markers:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/DebugMarker'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    post:
+      summary: Create a debug marker
+      operationId: createDebugMarker
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DebugMarkerCreateRequest'
+      responses:
+        '200':
+          description: Marker created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      marker:
+                        $ref: '#/components/schemas/DebugMarker'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+      x-webhook-event: debug.marker.created
+  /v1/debug/markers/{id}:
+    delete:
+      summary: Delete a debug marker
+      operationId: deleteDebugMarker
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Deletion status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      deleted:
+                        type: boolean
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
                   requestId:
                     type: string
                   traceId:

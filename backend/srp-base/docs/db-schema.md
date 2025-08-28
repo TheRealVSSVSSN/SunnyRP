@@ -199,6 +199,30 @@ Indexes:
 | data | TEXT | JSON outfit data |
 | created_at | TIMESTAMP | Creation time |
 
+## debug_logs
+
+| Column | Type | Notes |
+|---|---|---|
+| id | BIGINT AUTO_INCREMENT | Primary key |
+| level | VARCHAR(16) | info, warn, error, trace |
+| message | TEXT | Log text |
+| context | JSON | Optional structured data |
+| account_id | VARCHAR(64) | Optional account scope |
+| character_id | BIGINT | Optional character scope |
+| source | VARCHAR(32) | client/server/resource |
+| created_at | TIMESTAMP | Indexed by `idx_debug_logs_created_at` |
+
+## debug_markers
+
+| Column | Type | Notes |
+|---|---|---|
+| id | BIGINT AUTO_INCREMENT | Primary key |
+| type | VARCHAR(32) | text, line, marker, sphere, etc. |
+| data | JSON | Marker payload (coords, color, text) |
+| created_by | BIGINT | Optional character who created it |
+| created_at | TIMESTAMP | Creation time |
+| expires_at | TIMESTAMP | Null or expiry timestamp; indexed |
+
 ## apartments
 
 | Column | Type | Notes |
