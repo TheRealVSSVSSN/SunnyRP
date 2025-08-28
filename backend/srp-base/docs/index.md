@@ -30,13 +30,14 @@ Debug domain extended with structured logs and ephemeral markers.
 * `POST /v1/debug/logs` and `GET /v1/debug/logs` store and retrieve logs.
 * `POST /v1/debug/markers`, `GET /v1/debug/markers`, `DELETE /v1/debug/markers/{id}` manage markers.
 * WebSocket `debug.*` and webhook events mirror lifecycle; scheduler purges expired markers and old logs.
-
 ## Update – 2025-08-28 (k9)
 
 Active K9 roster push model.
 
 * `GET /v1/k9s/active` lists active units.
 * `POST /v1/characters/{characterId}/k9s`, `PATCH /v1/characters/{characterId}/k9s/{k9Id}/active`, and `DELETE /v1/characters/{characterId}/k9s/{k9Id}` emit `k9.*` events via WebSocket and webhooks.
+
+* Scheduler `k9-active-broadcast` broadcasts active units periodically.
 * Scheduler `k9-active-broadcast` broadcasts active units periodically.
 
 ## Update – 2025-08-28 (weathersync)
@@ -59,6 +60,7 @@ Timecycle overrides now broadcast set/clear events and expire automatically.
 Tracked recycling job deliveries with realtime pushes.
 
 * `POST /v1/recycling/deliveries` logs a delivery and emits `recycling.delivery.created` via WebSocket and webhooks.
+* 
 * Scheduler `recycling-purge` removes deliveries older than `RECYCLING_RETENTION_MS`.
 
 ## Update – 2025-08-29 (vehicle control)
@@ -67,3 +69,4 @@ Persist and broadcast vehicle siren/indicator state.
 
 * `GET/POST /v1/vehicles/{plate}/control` manage siren and indicator state.
 * Scheduler `vehicle-control-prune` removes stale control records.
+* Scheduler `recycling-purge` removes deliveries older than `RECYCLING_RETENTION_MS`.
