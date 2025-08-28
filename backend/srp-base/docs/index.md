@@ -30,7 +30,7 @@ Debug domain extended with structured logs and ephemeral markers.
 * `POST /v1/debug/logs` and `GET /v1/debug/logs` store and retrieve logs.
 * `POST /v1/debug/markers`, `GET /v1/debug/markers`, `DELETE /v1/debug/markers/{id}` manage markers.
 * WebSocket `debug.*` and webhook events mirror lifecycle; scheduler purges expired markers and old logs.
-=======
+
 ## Update – 2025-08-28 (k9)
 
 Active K9 roster push model.
@@ -45,4 +45,11 @@ Weather.gov integration with forecast proxy and scheduler.
 
 * `GET/POST /v1/weathersync/forecast` manage forecasts.
 * `GET /v1/weathersync/weather.gov` proxies api.weather.gov.
-* Scheduler `weathersync-forecast` pulls forecasts and broadcasts.
+* Scheduler `weathersync-forecast` pulls forecasts and broadcasts `world.forecast.updated`.
+
+## Update – 2025-08-28 (climate-overrides realtime)
+
+Timecycle overrides now broadcast set/clear events and expire automatically.
+
+* `POST /v1/world/timecycle` and `DELETE /v1/world/timecycle` emit `world.timecycle.*` over WebSocket and webhooks.
+* Scheduler `timecycle-expiry` clears overrides past `expiresAt`.

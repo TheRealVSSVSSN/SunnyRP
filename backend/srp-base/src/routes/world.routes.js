@@ -3,6 +3,7 @@ const { sendOk } = require('../utils/respond');
 const worldRepo = require('../repositories/worldRepository');
 const iplRepo = require('../repositories/iplRepository');
 const websocket = require('../realtime/websocket');
+const hooks = require('../hooks/dispatcher');
 
 // Routes for world state and events.  These endpoints provide a
 // foundation for FiveM resources that need to fetch or update
@@ -76,6 +77,8 @@ router.post('/v1/world/timecycle', async (req, res, next) => {
   try {
     const { preset, expiresAt } = req.body || {};
     await worldRepo.setTimecycleOverride({ preset, expiresAt });
+    websocket.broadcast('world', 'timecycle.set', { preset, expiresAt: expiresAt || null });
+    hooks.dispatch('world.timecycle.set', { preset, expiresAt: expiresAt || null });
     sendOk(res, { message: 'Timecycle override set' }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     next(err);
@@ -86,6 +89,8 @@ router.post('/v1/world/timecycle', async (req, res, next) => {
 router.delete('/v1/world/timecycle', async (req, res, next) => {
   try {
     await worldRepo.clearTimecycleOverride();
+    websocket.broadcast('world', 'timecycle.clear', {});
+    hooks.dispatch('world.timecycle.clear', {});
     sendOk(res, { message: 'Timecycle override cleared' }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     next(err);

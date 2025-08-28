@@ -15,6 +15,11 @@ Provides APIs to read and update global world state, manage weather forecasts an
 - `POST /v1/world/ipls`
 - `DELETE /v1/world/ipls/{name}`
 
+## Realtime & Scheduler
+
+- WebSocket `world.timecycle.set` and `world.timecycle.clear` plus matching webhooks.
+- Scheduler `timecycle-expiry` clears overrides past `expiresAt`.
+
 ## Repository Contracts
 
 - `getWorldState()` – fetch latest world state.

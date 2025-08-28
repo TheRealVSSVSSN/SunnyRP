@@ -50,14 +50,31 @@
 - Optional: query endpoints for expired markers/logs for audit purposes.
 - Optional: Redis-backed idempotency and rate limiting for high-volume debug sessions.
 
+# Run Summary — 2025-08-28 (climate-overrides realtime)
+
+- Broadcast timecycle override set/clear events and clear expired overrides.
+
+## API Changes
+
+- None.
+
+## Realtime & Webhooks
+
+- WebSocket `world.timecycle.set` and `world.timecycle.clear` with matching webhooks.
+- Scheduler `timecycle-expiry` removes expired overrides.
+
+## Migrations
+
+- None.
+
 # Run Documentation – 2025-08-28
 
 ## Changed Docs
-- docs/BASE_API_DOCUMENTATION.md
 - docs/events-and-rpcs.md
 - docs/framework-compliance.md
 - docs/index.md
 - docs/modules/k9.md
+- docs/modules/world.md
 - docs/naming-map.md
 - docs/progress-ledger.md
 - docs/research-log.md
@@ -66,11 +83,11 @@
 ## Run – 2025-08-28
 
 ### Docs Touched
-- BASE_API_DOCUMENTATION
 - events-and-rpcs
 - framework-compliance
 - index
 - modules/k9
+- modules/world
 - naming-map
 - progress-ledger
 - research-log

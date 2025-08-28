@@ -1722,3 +1722,26 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Remove weathersync routes, task and config block.
+
+## 2025-08-28 (climate-overrides realtime)
+
+### Added
+
+* WebSocket and webhook broadcasts for timecycle override set/clear.
+* Scheduler `timecycle-expiry` to clear expired overrides.
+
+### Changed
+
+* None
+
+### Migrations
+
+* None
+
+### Risks
+
+* Misconfigured intervals could leave expired overrides active.
+
+### Rollback
+
+* Remove timecycle scheduler registration and broadcast hooks.

@@ -47,3 +47,4 @@ Upstream name → SRP name mapping for this run.
 | jobsystem | jobs |
 | k9 | k9 |
 | koilWeatherSync | weathersync |
+| koillove | climate-overrides |

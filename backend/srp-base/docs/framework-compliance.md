@@ -105,6 +105,7 @@ practice is supported by citations.
 | **taxi module** | Taxi request endpoints follow layered design with WebSocket/webhook events and expiry scheduler. |
 | **police module** | Duty roster endpoints follow layered design with authentication, idempotency, WebSocket/webhook pushes and stale-duty scheduler. |
 | **peds module** | Ped endpoints follow layered design with WebSocket/webhook events and health regeneration scheduler. |
+| **climate-overrides realtime** | Timecycle override endpoints emit WebSocket/webhook events and a scheduler clears expired overrides. |
 
 ## Outstanding Items
 

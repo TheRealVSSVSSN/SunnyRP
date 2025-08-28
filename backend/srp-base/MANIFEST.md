@@ -1,21 +1,18 @@
 # Manifest
 
-- Added weather.gov proxy endpoints and periodic forecast sync.
+- Broadcast timecycle overrides and auto-expire expired presets.
 
 | File | Action | Note |
 |---|---|---|
-| src/config/env.js | M | Added weathersync config block |
-| src/routes/weathersync.routes.js | A | Forecast routes and weather.gov proxy |
-| src/tasks/weathersync.js | A | Scheduler pulling api.weather.gov forecast |
-| src/app.js | M | Mounted weathersync routes |
-| src/server.js | M | Registered weathersync scheduler |
-| openapi/api.yaml | M | Documented weathersync paths |
-| docs/modules/weathersync.md | A | Module guide |
-| docs/modules/world.md | M | Marked world forecast endpoints deprecated |
-| docs/index.md | M | Logged weathersync update |
-| docs/progress-ledger.md | M | Recorded koilWeatherSync entry |
-| docs/naming-map.md | M | Added koilWeatherSync mapping |
-| docs/events-and-rpcs.md | M | Mapped weathersync API |
-| docs/BASE_API_DOCUMENTATION.md | M | Documented weathersync endpoints |
+| src/routes/world.routes.js | M | Emit timecycle set/clear events |
+| src/tasks/timecycle.js | A | Scheduler clearing expired overrides |
+| src/server.js | M | Register timecycle-expiry task |
+| docs/naming-map.md | M | Map koillove → climate-overrides |
+| docs/events-and-rpcs.md | M | Document world.timecycle.* events |
+| docs/modules/world.md | M | Add realtime and scheduler notes |
+| docs/index.md | M | Log climate-overrides update |
+| docs/progress-ledger.md | M | Record climate-overrides realtime entry |
+| docs/framework-compliance.md | M | Noted timecycle realtime compliance |
+| docs/research-log.md | M | Added koillove reference |
 | docs/run-docs.md | M | Run summary |
-| docs/research-log.md | M | Logged weather.gov research |
+| CHANGELOG.md | M | Added climate-overrides entry |
