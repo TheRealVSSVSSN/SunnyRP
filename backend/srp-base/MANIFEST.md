@@ -1,5 +1,6 @@
 # Manifest
 
+- EMS vehicle spawn logging with realtime push and purge scheduler.
 - Track recycling job deliveries with realtime push and cleanup scheduler.
 - Update OpenAPI validator dependency for install success.
 - Persist and broadcast vehicle control state with cleanup scheduler.
@@ -95,3 +96,23 @@
 | docs/research-log.md | M | Logged mapmanager research |
 | docs/run-docs.md | M | Added mapmanager run summary |
 | CHANGELOG.md | M | Document IPL webhook addition |
+| src/repositories/emsVehiclesRepository.js | A | Log EMS vehicle spawns |
+| src/tasks/emsVehicles.js | A | Purge old EMS vehicle spawns |
+| src/config/env.js | M | Add emsVehicles retention config |
+| src/migrations/083_add_ems_vehicle_spawns.sql | A | Table for EMS vehicle spawn logs |
+| src/routes/ems.routes.js | M | Add vehicle spawn route |
+| src/server.js | M | Register EMS vehicle purge task |
+| openapi/api.yaml | M | Document EMS vehicle spawn endpoint |
+| docs/modules/ems.md | M | Document spawn route and event |
+| docs/index.md | M | Log EMS vehicles update |
+| docs/progress-ledger.md | M | Add medicgarage entry |
+| docs/framework-compliance.md | M | Note EMS vehicle spawn compliance |
+| docs/BASE_API_DOCUMENTATION.md | M | Describe EMS vehicle spawn API |
+| docs/events-and-rpcs.md | M | Map medicgarage events |
+| docs/db-schema.md | M | Document ems_vehicle_spawns table |
+| docs/migrations.md | M | List migration 083 |
+| docs/admin-ops.md | M | Add ems_vehicle_spawns operational notes |
+| docs/testing.md | M | Add EMS vehicle spawn test |
+| docs/naming-map.md | M | Map medicgarage → ems-vehicles |
+| docs/research-log.md | M | Log medicgarage research |
+| docs/run-docs.md | M | Summarize medicgarage run |

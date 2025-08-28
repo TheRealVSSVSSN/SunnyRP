@@ -117,6 +117,11 @@ const config = {
     retentionMs: parseInt(process.env.GARAGE_VEHICLE_RETENTION_MS || '2592000000', 10),
   },
 
+  emsVehicles: {
+    retentionMs: parseInt(process.env.EMS_VEHICLE_SPAWN_RETENTION_MS || '2592000000', 10),
+    purgeIntervalMs: parseInt(process.env.EMS_VEHICLE_SPAWN_PURGE_INTERVAL_MS || '3600000', 10),
+  },
+
   police: {
     dutyTimeoutMs: parseInt(process.env.POLICE_DUTY_TIMEOUT_MS || '3600000', 10),
     checkIntervalMs: parseInt(process.env.POLICE_CHECK_INTERVAL_MS || '300000', 10),

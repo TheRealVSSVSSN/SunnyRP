@@ -3,6 +3,7 @@
 | Resource | In-Game Events/RPCs | SRP Base API Mapping |
 |---|---|---|
 | DiamondCasino | Resource emits events for casino games such as blackjack, slots and horse racing | `POST /v1/diamond-casino/games` creates a game; bets via `POST /v1/diamond-casino/games/{gameId}/bets` and history via `GET /v1/diamond-casino/games/{gameId}` |
+| medicgarage | Events `medicg:s_classic*`, `medicg:s_helico`, `medicg:firetruk` spawn EMS vehicles | `POST /v1/ems/vehicles` (vehicleType) → WebSocket `ems.vehicle.spawn` |
 | PolicePack | Resource emits events for evidence custody updates and character selections | Custody via `GET/POST /v1/evidence/items/{id}/custody`; selection via `POST /v1/accounts/{accountId}/characters/{characterId}:select` |
 | InteractSound | Resource triggers audio playback events specifying sound name and volume to target clients | `POST /v1/interact-sound/plays` logs and broadcasts; history via `GET /v1/interact-sound/plays/:characterId` |
 | PolyZone | Resource defines polygonal zones for triggers | `GET /v1/zones`, `POST /v1/zones`, `DELETE /v1/zones/:id` manage zone records; `zone.created` and `zone.deleted` pushed via WebSocket/webhooks |

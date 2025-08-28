@@ -452,3 +452,10 @@ curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: jb2' -H 'Content-Type: app
 curl -H 'X-API-Token: <token>' http://localhost:3010/v1/jailbreaks/active
 ```
 
+
+# Manually verify EMS vehicle spawn:
+
+```sh
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: ems1' -H 'Content-Type: application/json' \
+  -d '{"characterId":1,"vehicleType":"classic"}' http://localhost:3010/v1/ems/vehicles
+```

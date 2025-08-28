@@ -1747,6 +1747,27 @@ components:
       properties:
         characterId:
           type: integer
+
+    EmsVehicleSpawn:
+      type: object
+      properties:
+        id:
+          type: integer
+        characterId:
+          type: integer
+        vehicleType:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+    EmsVehicleSpawnRequest:
+      type: object
+      required: [characterId, vehicleType]
+      properties:
+        characterId:
+          type: integer
+        vehicleType:
+          type: string
   TaxiRequest:
     type: object
     properties:
@@ -8903,3 +8924,32 @@ paths:
                     type: string
                   traceId:
                     type: string
+  /v1/ems/vehicles:
+    post:
+      summary: Spawn EMS vehicle
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmsVehicleSpawnRequest'
+      responses:
+        '200':
+          description: Spawn logged
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/EmsVehicleSpawn'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '403':
+          description: Character not permitted
+        '400':
+          $ref: '#/components/responses/BadRequest'
