@@ -119,3 +119,6 @@ practice is supported by citations.
 - Add altitude and location tracking for helicopter flights.
 - Persist additional ped attributes such as position and appearance customization.
 - Implement paycheck and grade progression logic for jobs.
+\- Add RBAC for admin-only access to debug endpoints beyond token/HMAC.
+\- Consider Redis-backed idempotency/rate limiting for high-volume debug ingestion.
+\- Add pagination/cursors for `/v1/debug/logs`.
