@@ -412,6 +412,7 @@ To support all features present in the original server resources at the framewor
   - `GET /v1/ems/shifts/active` – List active EMS shifts.
   - `POST /v1/ems/shifts` – Start a shift (`characterId`).
   - `POST /v1/ems/shifts/{id}/end` – End a shift.
+  - `POST /v1/ems/vehicles` – Spawn an EMS vehicle (requires EMS job).
 
 - **srp-keys** – Assign and manage keys for players.  Keys may represent vehicle keys, property keys or any other access tokens.  Endpoints are:
   - `POST /v1/keys` – Assign a new key (requires `player_id`, `key_type` and `target_id`; optional `metadata`).

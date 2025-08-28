@@ -1771,6 +1771,27 @@ components:
       properties:
         characterId:
           type: integer
+
+    EmsVehicleSpawn:
+      type: object
+      properties:
+        id:
+          type: integer
+        characterId:
+          type: integer
+        vehicleType:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+    EmsVehicleSpawnRequest:
+      type: object
+      required: [characterId, vehicleType]
+      properties:
+        characterId:
+          type: integer
+        vehicleType:
+          type: string
   TaxiRequest:
     type: object
     properties:
@@ -8927,7 +8948,6 @@ paths:
                     type: string
                   traceId:
                     type: string
-
   /v1/hacking/attempts:
     get:
       summary: List hacking attempts for a character
@@ -8965,6 +8985,9 @@ paths:
                     type: string
     post:
       summary: Record hacking attempt
+  /v1/ems/vehicles:
+    post:
+      summary: Spawn EMS vehicle
       requestBody:
         required: true
         content:
@@ -8974,6 +8997,10 @@ paths:
       responses:
         '200':
           description: Attempt recorded
+              $ref: '#/components/schemas/EmsVehicleSpawnRequest'
+      responses:
+        '200':
+          description: Spawn logged
           content:
             application/json:
               schema:
@@ -8986,7 +9013,12 @@ paths:
                     properties:
                       attempt:
                         $ref: '#/components/schemas/HackingAttempt'
+                    $ref: '#/components/schemas/EmsVehicleSpawn'
                   requestId:
                     type: string
                   traceId:
                     type: string
+        '403':
+          description: Character not permitted
+        '400':
+          $ref: '#/components/responses/BadRequest'

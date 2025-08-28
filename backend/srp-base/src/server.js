@@ -40,6 +40,7 @@ const jobsTasks = require('./tasks/jobs');
 const debugTasks = require('./tasks/debug');
 const k9Tasks = require('./tasks/k9');
 const recyclingTasks = require('./tasks/recycling');
+const emsVehicleTasks = require('./tasks/emsVehicles');
 const vehicleControlTasks = require('./tasks/vehicleControl');
 const hackingTasks = require('./tasks/hacking');
 
@@ -271,6 +272,10 @@ scheduler.register(
   () => hackingTasks.purgeOld(),
   hackingTasks.INTERVAL_MS,
   { jitter: 60000, persistName: hackingTasks.JOB_NAME },
+  emsVehicleTasks.JOB_NAME,
+  () => emsVehicleTasks.purgeOld(),
+  emsVehicleTasks.INTERVAL_MS,
+  { jitter: 60000, persistName: emsVehicleTasks.JOB_NAME },
 );
 
 // Vehicle control state cleanup

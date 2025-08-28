@@ -111,6 +111,7 @@
 | 91 | lux_vehcontrol → vehicles control | Siren and indicator state persistence with realtime push | Extend | Added control state API and purge scheduler |
 | 92 | mapmanager | Map/gametype discovery and interior proxy updates | Extend | Added webhook dispatch for IPL state changes |
 | 93 | mhacking → hacking | Hacking attempt logging with realtime push and purge scheduler | Create | Added attempt API and cleanup task |
+| 93 | medicgarage | EMS vehicle spawn logging and push | Create | Added spawn API and purge task |
 
 ## 2025-08-28 — koilWeatherSync
 

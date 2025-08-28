@@ -1,3 +1,23 @@
+# Run Summary — 2025-02-14 (medicgarage)
+
+- Added EMS vehicle spawn endpoint with realtime push and purge scheduler.
+
+## API Changes
+
+- `POST /v1/ems/vehicles`
+
+## Realtime & Webhooks
+
+- WebSocket `ems.vehicle.spawn` and webhook mirror.
+
+## Migrations
+
+- `083_add_ems_vehicle_spawns.sql` — logs EMS vehicle spawns.
+
+## Outstanding TODO/Gaps
+
+- None.
+
 # Run Summary — 2025-08-29 (mapmanager)
 
 - Added webhook dispatch for interior proxy (IPL) updates and removals.

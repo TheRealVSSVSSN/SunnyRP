@@ -83,3 +83,10 @@ Logged hacking attempts with realtime pushes and scheduled cleanup.
 
 * `POST /v1/hacking/attempts` records an attempt and emits `hacking.attempt.created` via WebSocket and webhooks.
 * Scheduler `hacking-purge` removes attempts older than `HACKING_RETENTION_MS`.
+
+## Update – 2025-02-14 (ems vehicles)
+
+Logged EMS vehicle spawns with realtime push and retention purge.
+
+* `POST /v1/ems/vehicles` records spawns and emits `ems.vehicle.spawn`.
+* Scheduler `ems-vehicle-spawn-purge` removes old spawn logs.

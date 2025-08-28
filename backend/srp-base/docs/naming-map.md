@@ -52,3 +52,4 @@ Upstream name → SRP name mapping for this run.
 | lux_vehcontrol | vehicle-control |
 | mapmanager | world.ipls |
 | mhacking | hacking |
+| medicgarage | ems-vehicles |

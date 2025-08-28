@@ -152,4 +152,23 @@ router.post('/v1/ems/shifts/:id/end', async (req, res) => {
   }
 });
 
+const spawnLimiter = createRateLimiter({ windowMs: 60000, max: 5, errorCode: 'RATE_LIMIT', message: 'Too many spawns' });
+router.post('/v1/ems/vehicles', spawnLimiter, express.json(), async (req, res) => {
+  const { characterId, vehicleType } = req.body || {};
+  if (!characterId || !vehicleType) {
+    return sendError(res, { code: 'INVALID_INPUT', message: 'characterId and vehicleType are required' }, 400, res.locals.requestId, res.locals.traceId);
+  }
+  try {
+    const assignments = await jobsRepo.getCharacterJobs(characterId);
+    if (!assignments.some((j) => j.name === 'ems')) {
+      return sendError(res, { code: 'FORBIDDEN', message: 'Character not assigned to EMS' }, 403, res.locals.requestId, res.locals.traceId);
+    }
+    const record = await emsVehiclesRepo.logSpawn(characterId, vehicleType);
+    if (websocket) websocket.broadcast('ems', 'vehicle.spawn', record);
+    dispatcher.dispatch('ems.vehicle.spawn', record);
+    sendOk(res, record, res.locals.requestId, res.locals.traceId);
+  } catch (err) {
+    sendError(res, { code: 'INTERNAL_ERROR', message: 'Failed to spawn vehicle' }, 500, res.locals.requestId, res.locals.traceId);
+  }
+});
 module.exports = router;

@@ -665,3 +665,11 @@ Retention of sound play logs is controlled by `INTERACT_SOUND_RETENTION_MS`; old
 | materials | INT | Amount of material delivered |
 | created_at | TIMESTAMP | Creation time |
 | INDEX idx_recycling_runs_character_created | (character_id, created_at) |
+
+### ems_vehicle_spawns
+Records EMS vehicle spawn requests.
+- `id` INT PK
+- `character_id` INT FK -> characters.id
+- `vehicle_type` VARCHAR(50)
+- `created_at` TIMESTAMP default CURRENT_TIMESTAMP
+- Index `idx_ems_vehicle_spawns_character_id` on `character_id`
