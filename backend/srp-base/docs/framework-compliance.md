@@ -89,7 +89,7 @@ practice is supported by citations.
 | **heli module** | Heli flight endpoints follow the established layered pattern with authentication and idempotency; broadcasts start/end events and scheduler auto-ends stale flights. |
 | **import-pack module** | Order pricing, retrieval, cancellation and expiry endpoints follow the established layered pattern with authentication, idempotency, WebSocket/webhook events and an expiry scheduler. |
 | **peds module** | Ped state endpoints follow the established layered pattern with authentication and idempotency. |
-| **jailbreak module** | Jailbreak endpoints follow the established layered pattern with authentication and idempotency. |
+| **jailbreak module** | Jailbreak endpoints follow the layered pattern with auth/idempotency and now emit WebSocket/webhook events with an expiry scheduler. |
 | **k9 module** | K9 unit endpoints follow the established layered pattern with authentication and idempotency. |
 | **jobs module** | Job CRUD and assignment endpoints follow the established layered pattern with authentication and idempotency. |
 | **broadcaster module** | Broadcaster assignment uses character-scoped job logic and follows the established layered pattern. || **debug module** | Debug status endpoint follows the established layered pattern with authentication and rate limiting. |

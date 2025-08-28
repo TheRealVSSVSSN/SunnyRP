@@ -3,30 +3,34 @@
 ## Changed Docs
 - docs/admin-ops.md
 - docs/BASE_API_DOCUMENTATION.md
+- docs/db-schema.md
 - docs/events-and-rpcs.md
 - docs/framework-compliance.md
 - docs/index.md
-- docs/modules/peds.md
+- docs/modules/jailbreak.md
+- docs/migrations.md
 - docs/naming-map.md
 - docs/progress-ledger.md
 - docs/research-log.md
-- docs/todo-gaps.md
 - docs/run-docs.md
+- docs/testing.md
 
 ## Run – 2025-08-27
 
 ### Docs Touched
 - docs/admin-ops.md
 - docs/BASE_API_DOCUMENTATION.md
+- docs/db-schema.md
 - docs/events-and-rpcs.md
 - docs/framework-compliance.md
 - docs/index.md
-- docs/modules/peds.md
+- docs/modules/jailbreak.md
+- docs/migrations.md
 - docs/naming-map.md
 - docs/progress-ledger.md
 - docs/research-log.md
-- docs/todo-gaps.md
 - docs/run-docs.md
+- docs/testing.md
 
 ## Outstanding TODO/Gaps
 | Item | Owner | Priority | Blockers |

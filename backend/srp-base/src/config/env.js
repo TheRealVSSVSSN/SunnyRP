@@ -124,6 +124,10 @@ const config = {
     sessionTimeoutMs: parseInt(process.env.HARDCAP_SESSION_TIMEOUT_MS || '600000', 10),
   },
 
+  jailbreak: {
+    maxActiveMs: parseInt(process.env.JAILBREAK_MAX_ACTIVE_MS || '300000', 10),
+  },
+
   /**
    * Feature flags for core modules.  Lua consumers still drive
    * behaviour via /v1/config/live, but these flags provide a safe

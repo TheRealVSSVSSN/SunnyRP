@@ -554,6 +554,7 @@ Index `idx_import_pack_orders_status_expires` on `(status, expires_at)` accelera
 | started_at | TIMESTAMP | Start time |
 | ended_at | TIMESTAMP | Completion time |
 | success | TINYINT(1) | 1 success, 0 failure |
+| idx_jailbreak_attempts_started_at | INDEX | Index on started_at for expiry scans |
 
 ## k9_units
 
