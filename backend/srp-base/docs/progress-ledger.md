@@ -51,6 +51,12 @@
 | 47 | k9 | Police K9 unit assignments and status tracking | Create | Added K9 unit APIs |
 | 47 | jobsystem | Manage job definitions, assignments and duty status | Create | Added character-scoped jobs API |
 | 48 | srp-debug | Developer diagnostics endpoints | Create | Added server status API |
+
+## 2025-08-28 — koil-debug
+
+- CREATE: Debug logs and markers API (`/v1/debug/logs`, `/v1/debug/markers`) with WS/webhook push and scheduler cleanup.
+- EXTEND: OpenAPI spec and module docs for debug domain.
+- SKIP: Client-only overlay rendering; handled in FiveM resources.
 | 49 | srp-weathersync | Global weather synchronization with forecast scheduling | Extend | Added world state documentation and forecast API |
 | 50 | DiamondCasino | Unified casino games (blackjack, slots, horse racing) | Create | Added casino game and bet APIs, removed legacy blackjack module |
 | 51 | WebSocketGateway | Real-time push notifications | Create | Added WS gateway with heartbeat and auth |
