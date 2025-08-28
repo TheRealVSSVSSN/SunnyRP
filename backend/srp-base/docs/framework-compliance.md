@@ -107,6 +107,7 @@ practice is supported by citations.
 | **peds module** | Ped endpoints follow layered design with WebSocket/webhook events and health regeneration scheduler. |
 | **climate-overrides realtime** | Timecycle override endpoints emit WebSocket/webhook events and a scheduler clears expired overrides. |
 | **recycling module** | Recycling delivery endpoints follow layered design with authentication, idempotency and realtime push plus retention purge. |
+| **vehicle control module** | Vehicle control state endpoints follow layered design with authentication, idempotency, WebSocket/webhook events and hourly cleanup scheduler. |
 
 ## Outstanding Items
 

@@ -1,6 +1,9 @@
 const express = require('express');
-const { sendOk } = require('../utils/respond');
+const { sendOk, sendError } = require('../utils/respond');
 const vehiclesRepo = require('../repositories/vehiclesRepository');
+const vehicleControlRepo = require('../repositories/vehicleControlRepository');
+const websocket = require('../realtime/websocket');
+const hooks = require('../hooks/dispatcher');
 
 // Routes for vehicle ownership and registration.  These endpoints
 // persist data about player vehicles and expose basic CRUD
@@ -133,6 +136,63 @@ router.patch('/v1/vehicles/:plate/degradation', async (req, res, next) => {
     const { plate } = req.params;
     const { degradation } = req.body || {};
     const updated = await vehiclesRepo.updateVehicleDegradationByPlate(plate, degradation);
+    sendOk(res, { updated }, res.locals.requestId, res.locals.traceId);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// -----------------------------------------------------------------------------
+// Vehicle control state
+//
+// Retrieve current control state for a vehicle (siren, indicator, etc.).
+router.get('/v1/vehicles/:plate/control', async (req, res, next) => {
+  try {
+    const { plate } = req.params;
+    const state = await vehicleControlRepo.getByPlate(plate);
+    sendOk(res, state, res.locals.requestId, res.locals.traceId);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Update control state for a vehicle. Any provided fields overwrite existing values.
+router.post('/v1/vehicles/:plate/control', async (req, res, next) => {
+  try {
+    const { plate } = req.params;
+    const { sirenMuted, lxSirenState, powercallState, airManuState, indicatorState } = req.body || {};
+    if (
+      sirenMuted === undefined &&
+      lxSirenState === undefined &&
+      powercallState === undefined &&
+      airManuState === undefined &&
+      indicatorState === undefined
+    ) {
+      return sendError(
+        res,
+        { code: 'INVALID_INPUT', message: 'at least one control field must be provided' },
+        400,
+        res.locals.requestId,
+        res.locals.traceId,
+      );
+    }
+    const updated = await vehicleControlRepo.upsert(plate, {
+      sirenMuted,
+      lxSirenState,
+      powercallState,
+      airManuState,
+      indicatorState,
+    });
+    const payload = {
+      plate,
+      sirenMuted: sirenMuted ?? undefined,
+      lxSirenState: lxSirenState ?? undefined,
+      powercallState: powercallState ?? undefined,
+      airManuState: airManuState ?? undefined,
+      indicatorState: indicatorState ?? undefined,
+    };
+    websocket.broadcast('vehicles', 'control.update', payload);
+    hooks.dispatch('vehicles.control.update', payload);
     sendOk(res, { updated }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     next(err);

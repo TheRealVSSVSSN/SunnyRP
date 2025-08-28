@@ -48,6 +48,18 @@ Added `world_forecast` table for weather scheduling. K9 migration renamed to 057
 | nitrous | INT | Remaining nitrous amount |
 | updated_at | DATETIME | Last update timestamp |
 
+## vehicle_control_states
+
+| Column | Type | Notes |
+|---|---|---|
+| plate | VARCHAR(8) | Primary key; vehicle plate |
+| siren_muted | TINYINT(1) | 1 if default siren muted |
+| lx_siren_state | TINYINT | Luxart siren state |
+| powercall_state | TINYINT | Powercall state |
+| air_manu_state | TINYINT | Airhorn/manual state |
+| indicator_state | TINYINT | Indicator toggle state |
+| updated_at | DATETIME | Last update timestamp |
+
 ## dispatch_alerts
 
 | Column | Type | Notes |

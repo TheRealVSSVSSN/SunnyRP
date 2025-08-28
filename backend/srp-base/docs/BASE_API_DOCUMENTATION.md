@@ -257,6 +257,8 @@ In addition to the core identity, permissions, characters and admin APIs describ
 | `POST` | `/v1/vehicles` | Register a new vehicle (body: `{ playerId, model, plate, properties? }`). Returns vehicle ID. |
 | `POST` | `/v1/vehicles/:id/update` | Update an existing vehicle (body: partial). |
 | `GET` | `/v1/vehicles/shop` | Placeholder endpoint to list vehicles available for purchase. Returns an empty array by default. |
+| `GET` | `/v1/vehicles/{plate}/control` | Retrieve siren/powercall/indicator state for a vehicle. |
+| `POST` | `/v1/vehicles/{plate}/control` | Update control state fields; broadcasts `vehicles.control.update`. |
 
 #### World (Global State & Events)
 

@@ -22,6 +22,8 @@ consistent source of truth.
 | `GET` | `/v1/vehicles/harness/{plate}` | Retrieve the harness durability for a vehicle.  Returns `null` if no harness value is stored. |
 | `PATCH` | `/v1/vehicles/harness/{plate}` | Update the harness durability for a vehicle.  Returns the number of rows updated. |
 | `POST` | `/v1/vehicles/plate-change` | Change a vehicle’s license plate.  Expects `{ oldPlate, newPlate }` in the body and returns the number of rows updated. |
+| `GET` | `/v1/vehicles/{plate}/control` | Retrieve siren, powercall, airhorn and indicator state for a vehicle. |
+| `POST` | `/v1/vehicles/{plate}/control` | Update control state fields. Broadcasts `vehicles.control.update` over WebSocket and webhooks. |
 
 All endpoints require authentication via `X-API-Token` and optional HMAC
 headers.  Mutating operations (`POST`, `PATCH`) also support
@@ -47,6 +49,7 @@ for this module.  Important methods include:
   update engine/body/fuel fields.  Ignores undefined fields.
 * `updateVehicleDegradationByPlate(plate, degradation)` – update the
   degradation array (stored as comma‑separated string).
+* `vehicleControlRepository.js` – upserts and retrieves siren/powercall/indicator state in `vehicle_control_states`.
 
 ### Database Schema
 
@@ -59,6 +62,7 @@ The `vehicles` table is created in `migration 003` with columns for
   columns.  `degradation` is stored as a `VARCHAR(255)` containing
   comma‑separated integers.  Future migrations may normalise this to a
   separate table if needed.
+* **082_add_vehicle_control_states.sql** – creates `vehicle_control_states` table storing siren and indicator state per plate.
 
 ### Feature Flags
 
