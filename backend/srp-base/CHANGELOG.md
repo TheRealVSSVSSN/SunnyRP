@@ -1682,3 +1682,19 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Remove `src/tasks/jobs.js` and related scheduler registration.
+
+## 2025-08-28 (k9 realtime)
+
+### Added
+* `GET /v1/k9s/active` endpoint.
+* WebSocket/webhook events for K9 create/update/retire and active roster.
+* Scheduler `k9-active-broadcast` broadcasting active units.
+
+### Migrations
+* None.
+
+### Risks
+* Frequent broadcasts may increase network usage.
+
+### Rollback
+* Remove `src/tasks/k9.js`, scheduler registration and `/v1/k9s/active` route.

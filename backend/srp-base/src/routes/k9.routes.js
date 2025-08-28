@@ -1,8 +1,20 @@
 const express = require('express');
 const { sendOk, sendError } = require('../utils/respond');
 const k9Repo = require('../repositories/k9Repository');
+const websocket = require('../realtime/websocket');
+const hooks = require('../hooks/dispatcher');
 
 const router = express.Router();
+
+// List all active K9 units
+router.get('/v1/k9s/active', async (req, res, next) => {
+  try {
+    const k9s = await k9Repo.listActive();
+    sendOk(res, { k9s }, res.locals.requestId, res.locals.traceId);
+  } catch (err) {
+    next(err);
+  }
+});
 
 // List K9 units for a character
 router.get('/v1/characters/:characterId/k9s', async (req, res, next) => {
@@ -57,6 +69,8 @@ router.post('/v1/characters/:characterId/k9s', async (req, res, next) => {
       );
     }
     const k9 = await k9Repo.createK9({ characterId, name, breed });
+    websocket.broadcast('police', 'k9.created', { k9 });
+    hooks.dispatch('k9.created', { k9 });
     sendOk(res, { k9 }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     next(err);
@@ -88,6 +102,10 @@ router.patch('/v1/characters/:characterId/k9s/:k9Id/active', async (req, res, ne
     }
     const { active } = req.body || {};
     const updated = await k9Repo.setActive(characterId, k9Id, active ? 1 : 0);
+    if (updated) {
+      websocket.broadcast('police', 'k9.updated', { characterId, k9Id, active: !!active });
+      hooks.dispatch('k9.updated', { characterId, k9Id, active: !!active });
+    }
     sendOk(res, { updated }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     next(err);
@@ -118,6 +136,10 @@ router.delete('/v1/characters/:characterId/k9s/:k9Id', async (req, res, next) =>
       );
     }
     const removed = await k9Repo.retireK9(characterId, k9Id);
+    if (removed) {
+      websocket.broadcast('police', 'k9.retired', { characterId, k9Id });
+      hooks.dispatch('k9.retired', { characterId, k9Id });
+    }
     sendOk(res, { removed }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     next(err);
