@@ -402,3 +402,8 @@
 
 - Attempted to clone `https://github.com/h04X-2K/NoPixelServer` jobsystem resource but checkout failed (repository too large). Reference resources unavailable; proceeding with internal consistency only.
 - Reviewed job and duty flow patterns across EssentialMode, ESX, ND Core, FSN Framework, QB-Core, vRP and vORP to align terminology and roster broadcast concepts.
+
+## Research Log – 2025-08-28 (k9 realtime)
+
+- Cloned `https://github.com/h04X-2K/NoPixelServer` and scanned `resources/k9` for dog spawn and restriction flows.
+- Reviewed police dog handling in ESX and QB-Core repositories for naming patterns.

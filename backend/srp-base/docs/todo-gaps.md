@@ -17,3 +17,4 @@
 | Support editing existing import pack orders | backend | low | design |
 | Persist additional ped attributes such as position and appearance | backend | low | none |
 | Implement paycheck and grade progression logic for jobs | backend | medium | design |
+| Allow assigning handlers via K9 API | backend | low | design |

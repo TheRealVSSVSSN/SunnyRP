@@ -35,6 +35,7 @@ const heliTasks = require('./tasks/heli');
 const pedsTasks = require('./tasks/peds');
 const jailbreakTasks = require('./tasks/jailbreak');
 const jobsTasks = require('./tasks/jobs');
+const k9Tasks = require('./tasks/k9');
 
 // Register Prometheus metrics if enabled.  This must be done before
 // the server starts so that middleware can increment counters.
@@ -203,6 +204,13 @@ scheduler.register(
   () => policeTasks.clearStale(),
   policeTasks.INTERVAL_MS,
   { jitter: 5000, persistName: policeTasks.JOB_NAME },
+);
+
+scheduler.register(
+  k9Tasks.JOB_NAME,
+  () => k9Tasks.broadcastActive(wss),
+  k9Tasks.INTERVAL_MS,
+  { jitter: 5000, persistName: k9Tasks.JOB_NAME },
 );
 
 scheduler.register(

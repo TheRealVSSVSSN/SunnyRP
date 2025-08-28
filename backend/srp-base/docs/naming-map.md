@@ -41,3 +41,4 @@
 | isPed | peds |
 | np-jailbreak | jailbreak |
 | jobsystem | jobs |
+| k9 | k9 |

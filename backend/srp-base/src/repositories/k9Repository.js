@@ -8,6 +8,13 @@ async function listByCharacter(characterId) {
   return rows;
 }
 
+async function listActive() {
+  const [rows] = await db.query(
+    'SELECT id, character_id AS characterId, name, breed, active, created_at AS createdAt FROM k9_units WHERE active = 1 AND retired_at IS NULL',
+  );
+  return rows;
+}
+
 async function createK9({ characterId, name, breed }) {
   const [result] = await db.query(
     'INSERT INTO k9_units (character_id, name, breed) VALUES (?, ?, ?)',
@@ -40,6 +47,7 @@ async function retireK9(characterId, k9Id) {
 
 module.exports = {
   listByCharacter,
+  listActive,
   createK9,
   setActive,
   retireK9,
