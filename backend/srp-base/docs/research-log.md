@@ -397,3 +397,8 @@
 ## Research Log – 2025-08-27 (jailbreak)
 - Cloned `https://github.com/h04X-2K/NoPixelServer` and scanned for a `jailbreak` resource; none found, proceeded with internal design.
 - Reviewed jail break flows conceptually across EssentialMode, ESX, ND_Core, FSN, QB-Core, vRP and vORP frameworks for naming and expiry patterns.
+
+## Research Log – 2025-08-28 (jobs)
+
+- Attempted to clone `https://github.com/h04X-2K/NoPixelServer` jobsystem resource but checkout failed (repository too large). Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed job and duty flow patterns across EssentialMode, ESX, ND Core, FSN Framework, QB-Core, vRP and vORP to align terminology and roster broadcast concepts.

@@ -3583,6 +3583,8 @@ paths:
     post:
       summary: Assign job to character
       operationId: assignJob
+      description: Stores the assignment and broadcasts `jobs.assigned` via WebSocket and webhooks.
+      x-webhook-event: jobs.assigned
       security:
         - ApiToken: []
       requestBody:
@@ -3623,6 +3625,8 @@ paths:
     post:
       summary: Set job duty status
       operationId: setJobDuty
+      description: Updates duty status and broadcasts `jobs.duty` via WebSocket and webhooks.
+      x-webhook-event: jobs.duty
       security:
         - ApiToken: []
       requestBody:

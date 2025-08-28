@@ -1,6 +1,8 @@
 const express = require('express');
 const { sendOk } = require('../utils/respond');
 const jobsRepo = require('../repositories/jobsRepository');
+const websocket = require('../realtime/websocket');
+const hooks = require('../hooks/dispatcher');
 
 // Routes for job management.  These endpoints expose CRUD for
 // job definitions and allow characters to be assigned to jobs and
@@ -51,6 +53,8 @@ router.post('/v1/jobs/assign', async (req, res, next) => {
       parseInt(jobId, 10),
       grade !== undefined ? parseInt(grade, 10) : 0,
     );
+    websocket.broadcast('jobs', 'jobs.assigned', assignment);
+    hooks.dispatch('jobs.assigned', assignment);
     sendOk(res, assignment, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     next(err);
@@ -67,6 +71,8 @@ router.post('/v1/jobs/duty', async (req, res, next) => {
       parseInt(jobId, 10),
       Boolean(onDuty),
     );
+    websocket.broadcast('jobs', 'jobs.duty', assignment);
+    hooks.dispatch('jobs.duty', assignment);
     sendOk(res, assignment, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     next(err);

@@ -40,3 +40,4 @@
 | import-Pack2 | import-pack |
 | isPed | peds |
 | np-jailbreak | jailbreak |
+| jobsystem | jobs |

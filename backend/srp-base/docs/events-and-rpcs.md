@@ -48,7 +48,7 @@
 | hardcap | Connection limits and session tracking; broadcasts `hardcap.config.updated`, `hardcap.session.created`, `hardcap.session.ended`, `hardcap.session.expired` | `GET /v1/hardcap/status`, `POST /v1/hardcap/config`, `POST /v1/hardcap/sessions`, `DELETE /v1/hardcap/sessions/{id}` |
 | heli | Resource logs helicopter flight start and end events | `POST /v1/heli/flights`, `POST /v1/heli/flights/{id}/end`, `GET /v1/characters/{characterId}/heli/flights` → `heli.flightStarted`, `heli.flightEnded`, `heli.flightExpired` |
 | jailbreak | Resource triggers jailbreak start/completion and auto-expiry events with character and prison info | `POST /v1/jailbreaks`, `POST /v1/jailbreaks/{id}/complete`, `GET /v1/jailbreaks/active` → WS `jailbreaks.attempt`, `jailbreaks.completed`, `jailbreaks.expired`; webhooks mirror `jailbreak.*` |
-| jobsystem | Resource manages job definitions and assignments | `GET /v1/jobs`, `POST /v1/jobs`, `GET /v1/jobs/{id}`, `POST /v1/jobs/assign`, `POST /v1/jobs/duty`, `GET /v1/jobs/{characterId}/assignments` |
+| jobsystem | Resource manages job definitions and assignments | `GET /v1/jobs`, `POST /v1/jobs`, `GET /v1/jobs/{id}`, `POST /v1/jobs/assign`, `POST /v1/jobs/duty`, `GET /v1/jobs/{characterId}/assignments`; WS `jobs.assigned`, `jobs.duty`, `jobs.roster` |
 | broadcaster | Event to attempt joining the broadcaster job | `POST /v1/broadcast/attempt` |
 | srp-debug | Developer requests for runtime diagnostics | `GET /v1/debug/status` returns server metrics |
 | srp-weathersync | Resource broadcasts weather and time updates to clients | `GET /v1/world/state`, `POST /v1/world/state`, `GET /v1/world/forecast`, `POST /v1/world/forecast` |

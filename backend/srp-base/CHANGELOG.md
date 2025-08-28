@@ -1642,3 +1642,18 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Drop index `idx_jailbreak_attempts_started_at` and remove scheduler registration.
+
+## 2025-08-28 (jobsystem realtime)
+
+### Added
+* WebSocket and webhook events for job assignments and duty changes.
+* Scheduler `jobs-roster-sync` broadcasts on-duty rosters.
+
+### Migrations
+* None
+
+### Risks
+* Frequent roster broadcasts may increase bandwidth for large crews.
+
+### Rollback
+* Remove `src/tasks/jobs.js` and related scheduler registration.

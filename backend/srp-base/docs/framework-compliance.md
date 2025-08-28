@@ -91,7 +91,7 @@ practice is supported by citations.
 | **peds module** | Ped state endpoints follow the established layered pattern with authentication and idempotency. |
 | **jailbreak module** | Jailbreak endpoints follow the layered pattern with auth/idempotency and now emit WebSocket/webhook events with an expiry scheduler. |
 | **k9 module** | K9 unit endpoints follow the established layered pattern with authentication and idempotency. |
-| **jobs module** | Job CRUD and assignment endpoints follow the established layered pattern with authentication and idempotency. |
+| **jobs module** | Job CRUD and assignment endpoints follow the layered pattern with authentication, idempotency, WebSocket/webhook events and roster scheduler. |
 | **broadcaster module** | Broadcaster assignment uses character-scoped job logic and follows the established layered pattern. || **debug module** | Debug status endpoint follows the established layered pattern with authentication and rate limiting. |
 | **world module** | World state and forecast endpoints follow the established layered pattern with authentication and idempotency. |
 | **diamondCasino module** | Casino game endpoints follow the established layered pattern with authentication and idempotency. |
@@ -118,3 +118,4 @@ practice is supported by citations.
 - Implement call-sign management for police officers.
 - Add altitude and location tracking for helicopter flights.
 - Persist additional ped attributes such as position and appearance customization.
+- Implement paycheck and grade progression logic for jobs.

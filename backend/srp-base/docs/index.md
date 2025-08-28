@@ -15,3 +15,10 @@ Auto-expiring jailbreak attempts with realtime notifications.
 
 * `POST /v1/jailbreaks` and `POST /v1/jailbreaks/{id}/complete` emit WebSocket `jailbreaks.*` and webhooks.
 * Scheduler `jailbreak-expire` marks stale attempts failed after `JAILBREAK_MAX_ACTIVE_MS`.
+
+## Update – 2025-08-28
+
+Realtime job assignments and roster broadcast.
+
+* `POST /v1/jobs/assign` and `POST /v1/jobs/duty` emit `jobs.*` events over WebSocket and webhooks.
+* Scheduler `jobs-roster-sync` broadcasts on-duty rosters every minute.

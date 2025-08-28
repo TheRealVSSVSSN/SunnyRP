@@ -1,36 +1,28 @@
-# Run Documentation – 2025-08-27
+# Run Documentation – 2025-08-28
 
 ## Changed Docs
-- docs/admin-ops.md
 - docs/BASE_API_DOCUMENTATION.md
-- docs/db-schema.md
 - docs/events-and-rpcs.md
 - docs/framework-compliance.md
 - docs/index.md
-- docs/modules/jailbreak.md
-- docs/migrations.md
+- docs/modules/jobs.md
 - docs/naming-map.md
 - docs/progress-ledger.md
 - docs/research-log.md
-- docs/run-docs.md
-- docs/testing.md
+- docs/todo-gaps.md
 
-## Run – 2025-08-27
+## Run – 2025-08-28
 
 ### Docs Touched
-- docs/admin-ops.md
-- docs/BASE_API_DOCUMENTATION.md
-- docs/db-schema.md
-- docs/events-and-rpcs.md
-- docs/framework-compliance.md
-- docs/index.md
-- docs/modules/jailbreak.md
-- docs/migrations.md
-- docs/naming-map.md
-- docs/progress-ledger.md
-- docs/research-log.md
-- docs/run-docs.md
-- docs/testing.md
+- BASE_API_DOCUMENTATION
+- events-and-rpcs
+- framework-compliance
+- index
+- modules/jobs
+- naming-map
+- progress-ledger
+- research-log
+- todo-gaps
 
 ## Outstanding TODO/Gaps
 | Item | Owner | Priority | Blockers |
@@ -49,3 +41,4 @@
 | Add altitude and location tracking for helicopter flights | backend | low | design |
 | Support editing existing import pack orders | backend | low | design |
 | Persist additional ped attributes such as position and appearance | backend | low | none |
+| Implement paycheck and grade progression logic for jobs | backend | medium | design |
