@@ -3,6 +3,7 @@
 - Track recycling job deliveries with realtime push and cleanup scheduler.
 - Update OpenAPI validator dependency for install success.
 - Persist and broadcast vehicle control state with cleanup scheduler.
+- Webhook dispatch for interior proxy updates.
 
 | File | Action | Note |
 |---|---|---|
@@ -84,3 +85,13 @@
 | docs/research-log.md | M | Log lux_vehcontrol research |
 | docs/run-docs.md | M | Summarize vehicle control run |
 | openapi/api.yaml | M | Define vehicle control schemas and paths |
+| src/routes/world.routes.js | M | Dispatch webhooks for IPL set/remove |
+| openapi/api.yaml | M | Document IPL webhook behaviour |
+| docs/modules/world.md | M | Note `world.ipl.*` events |
+| docs/events-and-rpcs.md | M | Map bob74_ipl to `world.ipl.updated` via webhooks |
+| docs/index.md | M | Logged mapmanager update |
+| docs/naming-map.md | M | Added mapmanager mapping |
+| docs/progress-ledger.md | M | Recorded mapmanager entry |
+| docs/research-log.md | M | Logged mapmanager research |
+| docs/run-docs.md | M | Added mapmanager run summary |
+| CHANGELOG.md | M | Document IPL webhook addition |

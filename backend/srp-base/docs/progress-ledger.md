@@ -109,6 +109,7 @@
 | 89 | climate-overrides realtime | Timecycle override events and expiry scheduler | Extend | Broadcast set/clear events and auto-clear expired overrides |
 | 90 | lmfao → recycling | Recycling deliveries logging with purge scheduler | Create | Added delivery endpoints and cleanup task |
 | 91 | lux_vehcontrol → vehicles control | Siren and indicator state persistence with realtime push | Extend | Added control state API and purge scheduler |
+| 92 | mapmanager | Map/gametype discovery and interior proxy updates | Extend | Added webhook dispatch for IPL state changes |
 
 ## 2025-08-28 — koilWeatherSync
 

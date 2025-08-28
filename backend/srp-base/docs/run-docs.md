@@ -1,3 +1,19 @@
+# Run Summary — 2025-08-29 (mapmanager)
+
+- Added webhook dispatch for interior proxy (IPL) updates and removals.
+
+## API Changes
+
+- None.
+
+## Realtime & Webhooks
+
+- `world.ipl.updated` and `world.ipl.removed` broadcast via WebSocket and webhooks.
+
+## Migrations
+
+- None.
+
 # Run Summary — 2025-08-29 (vehicle control)
 
 - Persist and broadcast vehicle siren/indicator state with cleanup scheduler.

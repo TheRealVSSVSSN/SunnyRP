@@ -70,3 +70,9 @@ Persist and broadcast vehicle siren/indicator state.
 * `GET/POST /v1/vehicles/{plate}/control` manage siren and indicator state.
 * Scheduler `vehicle-control-prune` removes stale control records.
 * Scheduler `recycling-purge` removes deliveries older than `RECYCLING_RETENTION_MS`.
+
+## Update – 2025-08-29 (mapmanager)
+
+Webhooks added for interior proxy updates.
+
+* `POST /v1/world/ipls` and `DELETE /v1/world/ipls/{name}` now emit `world.ipl.updated` and `world.ipl.removed` via WebSocket and webhooks.

@@ -1788,3 +1788,21 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Drop `vehicle_control_states` table and remove control routes and task.
+
+## 2025-08-29 (mapmanager)
+
+### Added
+
+* Webhook dispatch for interior proxy (IPL) updates and removals.
+
+### Migrations
+
+* None.
+
+### Risks
+
+* External webhook endpoints may receive additional traffic.
+
+### Rollback
+
+* Remove webhook dispatch calls in `world.routes.js`.

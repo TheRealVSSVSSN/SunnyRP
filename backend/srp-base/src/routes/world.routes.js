@@ -114,6 +114,7 @@ router.post('/v1/world/ipls', async (req, res, next) => {
     const { name, enabled } = req.body || {};
     await iplRepo.set(name, !!enabled);
     websocket.broadcast('world', 'ipl.updated', { name, enabled: !!enabled });
+    hooks.dispatch('world.ipl.updated', { name, enabled: !!enabled });
     sendOk(res, { message: 'IPL state updated' }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     next(err);
@@ -126,6 +127,7 @@ router.delete('/v1/world/ipls/:name', async (req, res, next) => {
     const { name } = req.params;
     await iplRepo.remove(name);
     websocket.broadcast('world', 'ipl.removed', { name });
+    hooks.dispatch('world.ipl.removed', { name });
     sendOk(res, { message: 'IPL state removed' }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     next(err);
