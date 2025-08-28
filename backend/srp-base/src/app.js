@@ -35,6 +35,7 @@ const economyRoutes = require('./routes/economy.routes');
 const vehiclesRoutes = require('./routes/vehicles.routes');
 const carwashRoutes = require('./routes/carwash.routes');
 const worldRoutes = require('./routes/world.routes');
+const weathersyncRoutes = require('./routes/weathersync.routes');
 const jobsRoutes = require('./routes/jobs.routes');
 
 // new domain routes for doors, error logging, weapons and shops
@@ -109,6 +110,9 @@ const pedsRoutes = require('./routes/peds.routes');
 
 // k9 domain route
 const k9Routes = require('./routes/k9.routes');
+
+// recycling domain route
+const recyclingRoutes = require('./routes/recycling.routes');
 
 // interact sound domain route
 const interactSoundRoutes = require('./routes/interactSound.routes');
@@ -205,6 +209,7 @@ app.use(economyRoutes);
 app.use(vehiclesRoutes);
 app.use(carwashRoutes);
 app.use(worldRoutes);
+app.use(weathersyncRoutes);
 app.use(jobsRoutes);
 
 // mount new domain routes
@@ -274,6 +279,9 @@ app.use(pedsRoutes);
 
 // mount k9 routes
 app.use(k9Routes);
+
+// mount recycling routes
+app.use(recyclingRoutes);
 
 // mount emotes routes
 app.use(emotesRoutes);

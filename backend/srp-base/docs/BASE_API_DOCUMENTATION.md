@@ -682,3 +682,26 @@ Introduced import package expiry with real-time notifications.
 WebSocket topic `import-pack` broadcasts `order.created`, `order.delivered`, `order.canceled` and `order.expired`.
 
 Scheduler `import-pack-expiry` marks orders past `IMPORT_PACK_EXPIRY_MS` as expired and emits `order.expired`.
+
+## Update – 2025-08-28 (weathersync)
+
+Introduced weather.gov integration and proxy.
+
+### Endpoints
+
+- `GET /v1/weathersync/forecast`
+- `POST /v1/weathersync/forecast` – requires `X-Idempotency-Key`
+- `GET /v1/weathersync/weather.gov` – proxy to api.weather.gov
+
+Scheduler `weathersync-forecast` pulls forecasts and broadcasts `world.forecast.updated`.
+
+## Update – 2025-08-29 (recycling)
+
+### Endpoints
+
+- `GET /v1/recycling/deliveries/{characterId}`
+- `POST /v1/recycling/deliveries` – requires `X-Idempotency-Key`
+
+WebSocket topic `recycling` broadcasts `delivery.created`.
+
+Scheduler `recycling-purge` removes records older than `RECYCLING_RETENTION_MS`.

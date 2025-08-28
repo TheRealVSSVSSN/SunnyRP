@@ -51,5 +51,6 @@
 | jobsystem | Resource manages job definitions and assignments | `GET /v1/jobs`, `POST /v1/jobs`, `GET /v1/jobs/{id}`, `POST /v1/jobs/assign`, `POST /v1/jobs/duty`, `GET /v1/jobs/{characterId}/assignments`; WS `jobs.assigned`, `jobs.duty`, `jobs.roster` |
 | broadcaster | Event to attempt joining the broadcaster job | `POST /v1/broadcast/attempt` |
 | srp-debug | Developer requests for runtime diagnostics | `GET /v1/debug/status` returns server metrics |
-| srp-weathersync | Resource broadcasts weather and time updates to clients | `GET /v1/world/state`, `POST /v1/world/state`, `GET /v1/world/forecast`, `POST /v1/world/forecast` |
-| climate-overrides | Resource applies custom timecycle XMLs | `/v1/world/timecycle` to set or clear presets |
+| srp-weathersync | Resource broadcasts weather and time updates; proxies api.weather.gov | `GET/POST /v1/weathersync/forecast`, `GET /v1/weathersync/weather.gov`, legacy `/v1/world/forecast` (deprecated) |
+| climate-overrides | Resource applies custom timecycle XMLs; emits `world.timecycle.set`/`world.timecycle.clear` | `/v1/world/timecycle` to set or clear presets; scheduler auto-clears expired |
+| lmfao | Recycling job mission events giving money and materials | `POST /v1/recycling/deliveries`, `GET /v1/recycling/deliveries/{characterId}` |

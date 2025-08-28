@@ -76,6 +76,7 @@ const config = {
   baseEvents: { retentionMs: parseInt(process.env.BASE_EVENT_RETENTION_MS || '2592000000', 10) },
   assets: { retentionMs: parseInt(process.env.ASSET_RETENTION_MS || '2592000000', 10) },
   chat: { retentionMs: parseInt(process.env.CHAT_RETENTION_MS || '604800000', 10) },
+  recycling: { retentionMs: parseInt(process.env.RECYCLING_RETENTION_MS || '2592000000', 10) },
   camera: {
     retentionMs: parseInt(process.env.CAMERA_RETENTION_MS || '2592000000', 10),
     cleanupIntervalMs: parseInt(process.env.CAMERA_CLEANUP_INTERVAL_MS || '3600000', 10),
@@ -132,6 +133,12 @@ const config = {
 
   jailbreak: {
     maxActiveMs: parseInt(process.env.JAILBREAK_MAX_ACTIVE_MS || '300000', 10),
+  },
+
+  weathersync: {
+    enabled: process.env.WEATHERSYNC_ENABLED === '1',
+    point: process.env.WEATHER_GOV_POINT || '',
+    fetchIntervalMs: parseInt(process.env.WEATHER_GOV_FETCH_INTERVAL_MS || '300000', 10),
   },
 
   /**

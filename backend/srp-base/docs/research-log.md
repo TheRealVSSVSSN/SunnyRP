@@ -407,3 +407,19 @@
 
 - Cloned `https://github.com/h04X-2K/NoPixelServer` and scanned `resources/k9` for dog spawn and restriction flows.
 - Reviewed police dog handling in ESX and QB-Core repositories for naming patterns.
+
+## Research Log – 2025-08-28 (weathersync)
+
+- Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed api.weather.gov service documentation – https://www.weather.gov/documentation/services-web-api
+- Compared weather sync approaches in ESX and QB-Core frameworks conceptually.
+
+## Research Log – 2025-08-28 (climate-overrides realtime)
+
+- GitHub API listing for `resources/koillove` – timecycle mod files. https://api.github.com/repos/h04X-2K/NoPixelServer/contents/resources/koillove
+- Attempted to review `ESX-Official/esx_weather` for broadcast patterns but resource unavailable (404). Reference resources unavailable; proceeding with internal consistency only.
+
+## Research Log – 2025-08-29 (recycling)
+
+- Reviewed `resources/lmfao` in NoPixelServer; identified recycling mission events awarding money and materials.
+- Consulted `qbcore-framework/qb-recyclejob` and `ESX-Official/esx_jobs` for recycling job naming patterns.
