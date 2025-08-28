@@ -7650,6 +7650,31 @@ paths:
                   traceId:
                     type: string
 
+  /v1/k9s/active:
+    get:
+      summary: List all active K9 units
+      responses:
+        '200':
+          description: Active K9 units
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      k9s:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/K9Unit'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+
   /v1/characters/{characterId}/k9s:
     get:
       summary: List K9 units for a character

@@ -96,6 +96,7 @@
 | 84 | isPed realtime | Ped state persistence with regen pushes | Extend | Added WS/webhook events and health regen scheduler |
 | 85 | jailbreak realtime | Auto-expire attempts with WS/webhook pushes | Extend | Added expiry scheduler, events, index |
 | 86 | jobsystem realtime | Job assignment pushes and roster scheduler | Extend | Broadcast `jobs.*` events and minute roster sync |
+
 # Progress Ledger
 
 ## 2025-08-28 — koil-debug
@@ -103,3 +104,4 @@
 - CREATE: Debug logs and markers API (`/v1/debug/logs`, `/v1/debug/markers`) with WS/webhook push and scheduler cleanup.
 - EXTEND: OpenAPI spec and module docs for debug domain.
 - SKIP: Client-only overlay rendering; handled in FiveM resources.
+| 87 | k9 realtime | Active K9 roster push and webhook events | Extend | Added active list route, WS/webhook events, scheduler broadcast |
