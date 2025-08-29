@@ -149,6 +149,27 @@
 - Document hacking endpoints in BASE_API_DOCUMENTATION and events-and-rpcs.
 - Add db-schema entry for hacking_attempts table.
 - Record mhacking research sources in research-log.md.
+# Run Summary — 2025-08-29 (minimap)
+
+- Added minimap blip endpoints and broadcast scheduler.
+
+## API Changes
+
+- `GET /v1/minimap/blips`
+- `POST /v1/minimap/blips`
+- `DELETE /v1/minimap/blips/{id}`
+
+## Realtime & Webhooks
+
+- WebSocket namespace `world` emits `minimap.blips`.
+
+## Migrations
+
+- `085_add_minimap_blips.sql` — creates `minimap_blips` table.
+
+## Outstanding TODO/Gaps
+
+- Pagination for `/v1/minimap/blips`.
 ## Realtime & Webhooks
 
 - WebSocket `world.timecycle.set` and `world.timecycle.clear` with matching webhooks.

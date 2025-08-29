@@ -436,3 +436,8 @@
 ## Research Log – 2025-02-14 (medicgarage)
 - Cloned `https://github.com/h04X-2K/NoPixelServer` and inspected `resources/medicgarage` for EMS vehicle spawn events.
 - Reviewed job assignment handling in ESX (`es_extended`) and QB-Core (`qb-core`) for EMS role checks.
+
+## Research Log – 2025-08-29 (minimap)
+
+- Cloned `https://github.com/h04X-2K/NoPixelServer` and inspected `resources/minimap` for radar zoom behavior.
+- Reviewed map blip systems conceptually in ESX, ND Core, FSN Framework, QB-Core, vRP and vORP for naming and push patterns.

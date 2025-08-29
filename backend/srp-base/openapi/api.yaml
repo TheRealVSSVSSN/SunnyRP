@@ -31,6 +31,30 @@ components:
                     type: string
                   message:
                     type: string
+  schemas:
+    MinimapBlip:
+      type: object
+      properties:
+        id:
+          type: integer
+        x:
+          type: number
+        y:
+          type: number
+        z:
+          type: number
+        sprite:
+          type: integer
+        color:
+          type: integer
+        label:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
               requestId:
                 type: string
               traceId:
@@ -9020,5 +9044,105 @@ paths:
                     type: string
         '403':
           description: Character not permitted
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/minimap/blips:
+    get:
+      summary: List minimap blips
+      responses:
+        '200':
+          description: List of blips
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      blips:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/MinimapBlip'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+    post:
+      summary: Create minimap blip
+      security:
+        - ApiToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [x, y, z, sprite, color, label]
+              properties:
+                x:
+                  type: number
+                y:
+                  type: number
+                z:
+                  type: number
+                sprite:
+                  type: integer
+                color:
+                  type: integer
+                label:
+                  type: string
+      responses:
+        '200':
+          description: Created blip
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      blip:
+                        $ref: '#/components/schemas/MinimapBlip'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/minimap/blips/{blipId}:
+    delete:
+      summary: Delete minimap blip
+      security:
+        - ApiToken: []
+      parameters:
+        - in: path
+          name: blipId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Blip deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
         '400':
           $ref: '#/components/responses/BadRequest'

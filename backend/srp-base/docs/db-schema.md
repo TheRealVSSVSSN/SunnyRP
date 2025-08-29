@@ -673,3 +673,18 @@ Records EMS vehicle spawn requests.
 - `vehicle_type` VARCHAR(50)
 - `created_at` TIMESTAMP default CURRENT_TIMESTAMP
 - Index `idx_ems_vehicle_spawns_character_id` on `character_id`
+
+## minimap_blips
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| x | FLOAT | X coordinate |
+| y | FLOAT | Y coordinate |
+| z | FLOAT | Z coordinate |
+| sprite | INT | Blip sprite id |
+| color | INT | Blip color |
+| label | VARCHAR(255) | Blip label |
+| created_at | DATETIME | Creation time |
+| updated_at | DATETIME | Update time |
+| INDEX idx_minimap_blips_created | (created_at) |

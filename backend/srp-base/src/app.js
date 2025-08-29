@@ -101,6 +101,8 @@ const cameraRoutes = require('./routes/camera.routes');
 
 // hud domain route
 const hudRoutes = require('./routes/hud.routes');
+// minimap domain route
+const minimapRoutes = require('./routes/minimap.routes');
 
 // emotes domain route
 const emotesRoutes = require('./routes/emotes.routes');
@@ -276,6 +278,8 @@ app.use(cameraRoutes);
 
 // mount hud routes
 app.use(hudRoutes);
+// mount minimap routes
+app.use(minimapRoutes);
 
 // mount peds routes
 app.use(pedsRoutes);
