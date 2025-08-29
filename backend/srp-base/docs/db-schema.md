@@ -688,3 +688,15 @@ Records EMS vehicle spawn requests.
 | created_at | DATETIME | Creation time |
 | updated_at | DATETIME | Update time |
 | INDEX idx_minimap_blips_created | (created_at) |
+
+## noclip_events
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| player_id | VARCHAR(64) | Target player identifier |
+| actor_id | VARCHAR(64) | Admin/developer who toggled |
+| enabled | TINYINT(1) | 1 when enabled |
+| created_at | TIMESTAMP | Creation time |
+| INDEX idx_noclip_player | (player_id) |
+| INDEX idx_noclip_created | (created_at) |

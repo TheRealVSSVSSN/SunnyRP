@@ -97,3 +97,9 @@ Dynamic minimap blip service.
 
 * `GET /v1/minimap/blips`, `POST /v1/minimap/blips`, and `DELETE /v1/minimap/blips/{id}` manage blips.
 * Scheduler `minimap-blips-broadcast` pushes `world.minimap.blips` events over WebSocket.
+
+## Update – 2025-08-29 (noclip)
+
+Admin noclip control with permission enforcement and realtime signal.
+
+* `POST /v1/admin/noclip` emits `admin.noclip` to the targeted player's namespace.

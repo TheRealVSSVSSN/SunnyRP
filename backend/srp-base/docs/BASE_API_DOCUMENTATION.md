@@ -340,6 +340,7 @@ These endpoints round out the foundation of `srp-base`.  Together with the previ
 | Method | Path | Description |
 |-------|-----|-------------|
 | `POST` | `/v1/admin/ban` | Ban a player.  Body `{ playerId, reason, until? }`.  Persists to the bans table and returns ban status. |
+| `POST` | `/v1/admin/noclip` | Enable or disable noclip for a player. Body `{ playerId, actorId, enabled }`. Emits `admin.noclip` WS event. |
 | `POST` | `/v1/admin/kick` | Kick a player (future extension). |
 | `GET` | `/v1/admin/audit` | Fetch audit logs (future extension). |
 

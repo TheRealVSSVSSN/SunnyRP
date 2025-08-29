@@ -113,6 +113,7 @@
 | 93 | mhacking → hacking | Hacking attempt logging with realtime push and purge scheduler | Create | Added attempt API and cleanup task |
 | 93 | medicgarage | EMS vehicle spawn logging and push | Create | Added spawn API and purge task |
 | 94 | minimap | Dynamic minimap blip service | Create | Added blip APIs and broadcast task |
+| 95 | noclip | Admin noclip toggle with realtime push | Create | Added noclip API and audit table |
 
 ## 2025-08-28 — koilWeatherSync
 

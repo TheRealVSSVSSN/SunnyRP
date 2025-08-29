@@ -83,3 +83,4 @@
 | 083_add_ems_vehicle_spawns.sql | EMS vehicle spawn log table |
 | 084_add_hacking_attempts.sql | Table for hacking attempt logs |
 | 085_add_minimap_blips.sql | Minimap blips table |
+| 086_add_noclip_events.sql | Table for noclip enable/disable logs |

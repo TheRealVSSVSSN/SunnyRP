@@ -110,6 +110,7 @@ practice is supported by citations.
 | **vehicle control module** | Vehicle control state endpoints follow layered design with authentication, idempotency, WebSocket/webhook events and hourly cleanup scheduler. |
 | **hacking module** | Hacking attempt endpoints follow layered design with authentication, idempotency, WebSocket/webhook events and retention purge scheduler. |
 | **minimap module** | Minimap blip endpoints follow layered design with authentication, idempotency and WebSocket broadcasts. |
+| **admin module** | Ban and noclip endpoints follow layered design with authentication and realtime push. |
 
 ## Outstanding Items
 
