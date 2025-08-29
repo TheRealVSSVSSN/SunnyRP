@@ -58,3 +58,4 @@ Upstream name → SRP name mapping for this run.
 | noclip | admin noclip |
 | np-admin:noclipsway | admin.noclip.enable |
 | np-admin:nofc | admin.noclip.disable |
+| np-actionbar | action-bar |

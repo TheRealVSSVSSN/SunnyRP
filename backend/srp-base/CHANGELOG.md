@@ -1865,3 +1865,17 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Delete `noclip_events` table and remove noclip route and broadcasts.
+
+## 2025-08-30 (action bar)
+
+### Added
+* Action bar slots endpoints `GET/PUT /v1/characters/{characterId}/action-bar` broadcasting `hud.actionBar.updated`.
+
+### Migrations
+* `087_add_action_bar_slots.sql` – table for character quick action slots.
+
+### Risks
+* Slots currently limited to five and no server-side item validation.
+
+### Rollback
+* Drop `action_bar_slots` table and remove action bar routes.

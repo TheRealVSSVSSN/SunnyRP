@@ -700,3 +700,12 @@ Records EMS vehicle spawn requests.
 | created_at | TIMESTAMP | Creation time |
 | INDEX idx_noclip_player | (player_id) |
 | INDEX idx_noclip_created | (created_at) |
+
+## action_bar_slots
+
+| Column | Type | Notes |
+|---|---|---|
+| character_id | INT | FK to characters(id) |
+| slot | TINYINT | Slot number |
+| item | VARCHAR(64) | Item name or null |
+| PRIMARY KEY | (character_id, slot) |
