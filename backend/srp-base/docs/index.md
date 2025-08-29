@@ -103,3 +103,9 @@ Dynamic minimap blip service.
 Admin noclip control with permission enforcement and realtime signal.
 
 * `POST /v1/admin/noclip` emits `admin.noclip` to the targeted player's namespace.
+
+## Update – 2025-08-30 (action bar)
+
+Persisted per-character quick action slots with realtime push.
+
+* `GET /v1/characters/{characterId}/action-bar`, `PUT /v1/characters/{characterId}/action-bar` manage slots and emit `hud.actionBar.updated`.

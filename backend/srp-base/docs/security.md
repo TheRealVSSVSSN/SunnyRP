@@ -18,6 +18,7 @@
 - Economy routes inherit the same authentication and idempotency requirements.
 - Invoice routes inherit the same authentication and idempotency requirements.
 - Base events routes inherit the same authentication and idempotency requirements.
+- Action bar routes inherit the same authentication, idempotency and rate limiting requirements.
 - Boatshop routes inherit the same authentication and idempotency requirements.
 - Camera routes inherit the same authentication and idempotency requirements.
 - HUD routes inherit the same authentication and idempotency requirements.

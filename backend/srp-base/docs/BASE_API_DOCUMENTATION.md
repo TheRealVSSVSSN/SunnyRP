@@ -521,6 +521,9 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
 - `PUT /v1/characters/{characterId}/hud` – Update HUD preferences.
 - `GET /v1/characters/{characterId}/vehicle-state` – Retrieve vehicle HUD state.
 - `PUT /v1/characters/{characterId}/vehicle-state` – Update vehicle HUD state (broadcasts `hud.vehicleState`).
+- **srp-action-bar** – Stores per-character quick action slots.
+- `GET /v1/characters/{characterId}/action-bar` – Retrieve action bar slots.
+- `PUT /v1/characters/{characterId}/action-bar` – Update action bar slots (broadcasts `hud.actionBar.updated`).
 - **srp-carwash** – Records vehicle washes and dirt levels.
   - `POST /v1/carwash` – Record a car wash (`characterId`, `plate`, `location`, `cost`).
   - `GET /v1/carwash/history/{characterId}` – List recent washes for a character.

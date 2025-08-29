@@ -445,3 +445,8 @@
 ## Research Log – 2025-08-29 (noclip)
 
 - Cloned `https://github.com/h04X-2K/NoPixelServer` and inspected `resources/noclip` to map events `np-admin:noclipsway` and `np-admin:nofc` to SRP `admin.noclip`.
+
+## Research Log – 2025-08-30 (np-actionbar)
+
+- Cloned `https://github.com/h04X-2K/NoPixelServer` and inspected `resources/np-actionbar` for quick slot and holster flows.
+- Reviewed quick slot handling in ESX and QB-Core inventories to align naming.

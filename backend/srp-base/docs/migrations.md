@@ -84,3 +84,4 @@
 | 084_add_hacking_attempts.sql | Table for hacking attempt logs |
 | 085_add_minimap_blips.sql | Minimap blips table |
 | 086_add_noclip_events.sql | Table for noclip enable/disable logs |
+| 087_add_action_bar_slots.sql | Action bar slots per character |

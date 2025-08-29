@@ -103,6 +103,8 @@ const cameraRoutes = require('./routes/camera.routes');
 const hudRoutes = require('./routes/hud.routes');
 // minimap domain route
 const minimapRoutes = require('./routes/minimap.routes');
+// action bar domain route
+const actionBarRoutes = require('./routes/actionBar.routes');
 
 // emotes domain route
 const emotesRoutes = require('./routes/emotes.routes');
@@ -280,6 +282,8 @@ app.use(cameraRoutes);
 app.use(hudRoutes);
 // mount minimap routes
 app.use(minimapRoutes);
+// mount action bar routes
+app.use(actionBarRoutes);
 
 // mount peds routes
 app.use(pedsRoutes);

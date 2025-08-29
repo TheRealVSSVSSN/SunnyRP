@@ -471,3 +471,11 @@ curl -H 'X-API-Token: <token>' -X DELETE http://localhost:3010/v1/minimap/blips/
 ```
 
 Connect a WebSocket client to `ws://localhost:3010/ws?token=<token>&ns=world` and verify receipt of `minimap.blips` events.
+
+# Manually verify action bar endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/characters/1/action-bar
+curl -H 'X-API-Token: <token>' -H 'Content-Type: application/json' -H 'X-Idempotency-Key: ab1' \
+  -d '{"slots":[{"slot":1,"item":"WEAPON_PISTOL"}]}' http://localhost:3010/v1/characters/1/action-bar
+```

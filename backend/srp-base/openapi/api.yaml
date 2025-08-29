@@ -1432,6 +1432,21 @@ components:
         hudTheme:
           type: string
           nullable: true
+    ActionBarSlot:
+      type: object
+      properties:
+        slot:
+          type: integer
+        item:
+          type: string
+          nullable: true
+    ActionBarUpdate:
+      type: object
+      properties:
+        slots:
+          type: array
+          items:
+            $ref: '#/components/schemas/ActionBarSlot'
     VehicleState:
       type: object
       properties:
@@ -6702,6 +6717,54 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HudPreferences'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/characters/{characterId}/action-bar:
+    get:
+      summary: Get action bar slots
+      operationId: getActionBar
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Action bar slots
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ActionBarSlot'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    put:
+      summary: Update action bar slots
+      operationId: updateActionBar
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActionBarUpdate'
+      responses:
+        '200':
+          description: Updated action bar slots
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ActionBarSlot'
         '400':
           $ref: '#/components/responses/BadRequest'
 

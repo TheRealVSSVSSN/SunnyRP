@@ -130,3 +130,7 @@
 ## 2025-08-29 — mhacking
 
 - CREATE: Hacking attempt API with WebSocket/webhook push and hourly purge scheduler.
+
+## 2025-08-30 — actionbar
+
+- CREATE: Action bar slots API with WebSocket/webhook push for quick actions.
