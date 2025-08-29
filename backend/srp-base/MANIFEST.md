@@ -6,6 +6,7 @@
 - Persist and broadcast vehicle control state with cleanup scheduler.
 - Webhook dispatch for interior proxy updates.
 - Dynamic minimap blip service with scheduler and WS broadcasts.
+- Admin noclip toggle with audit log and realtime broadcast.
 
 | File | Action | Note |
 |---|---|---|
@@ -138,3 +139,20 @@
 | docs/naming-map.md | M | Map minimap → minimap |
 | docs/research-log.md | M | Log minimap research |
 | docs/run-docs.md | M | Summarize minimap run |
+| src/repositories/adminRepository.js | M | Add noclip logging helper |
+| src/routes/admin.routes.js | M | Add `/v1/admin/noclip` endpoint |
+| src/migrations/086_add_noclip_events.sql | A | Noclip audit table |
+| openapi/api.yaml | M | Document noclip endpoint |
+| docs/modules/admin.md | M | Document ban and noclip APIs |
+| docs/index.md | M | Log noclip update |
+| docs/progress-ledger.md | M | Record noclip entry |
+| docs/naming-map.md | M | Map noclip events |
+| docs/events-and-rpcs.md | M | Map noclip resource |
+| docs/db-schema.md | M | Describe `noclip_events` table |
+| docs/migrations.md | M | List migration 086 |
+| docs/admin-ops.md | M | Add noclip operational note |
+| docs/security.md | M | Note scope check for noclip |
+| docs/framework-compliance.md | M | Add admin module compliance |
+| docs/BASE_API_DOCUMENTATION.md | M | Document noclip API |
+| docs/research-log.md | M | Log noclip research |
+| docs/run-docs.md | M | Summarize noclip run |

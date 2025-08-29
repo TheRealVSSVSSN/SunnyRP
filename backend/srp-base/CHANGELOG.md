@@ -1851,3 +1851,17 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Drop `minimap_blips` table and remove minimap routes and scheduler registration.
+
+## 2025-08-29 (noclip)
+
+### Added
+* Admin noclip toggle via `POST /v1/admin/noclip` with WebSocket `admin.noclip` broadcast.
+
+### Migrations
+* `086_add_noclip_events.sql` – audit table for noclip actions.
+
+### Risks
+* Misuse if permission scopes misconfigured.
+
+### Rollback
+* Delete `noclip_events` table and remove noclip route and broadcasts.

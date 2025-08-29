@@ -441,3 +441,7 @@
 
 - Cloned `https://github.com/h04X-2K/NoPixelServer` and inspected `resources/minimap` for radar zoom behavior.
 - Reviewed map blip systems conceptually in ESX, ND Core, FSN Framework, QB-Core, vRP and vORP for naming and push patterns.
+
+## Research Log – 2025-08-29 (noclip)
+
+- Cloned `https://github.com/h04X-2K/NoPixelServer` and inspected `resources/noclip` to map events `np-admin:noclipsway` and `np-admin:nofc` to SRP `admin.noclip`.

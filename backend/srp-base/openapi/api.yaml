@@ -31,6 +31,22 @@ components:
                     type: string
                   message:
                     type: string
+    Forbidden:
+      description: Action not allowed
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              ok:
+                type: boolean
+              error:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
   schemas:
     MinimapBlip:
       type: object
@@ -3074,6 +3090,55 @@ paths:
                     type: string
         '400':
           $ref: '#/components/responses/BadRequest'
+
+  /v1/admin/noclip:
+    post:
+      summary: Toggle noclip for a player
+      operationId: toggleNoclip
+      security:
+        - ApiToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - playerId
+                - actorId
+                - enabled
+              properties:
+                playerId:
+                  type: string
+                actorId:
+                  type: string
+                enabled:
+                  type: boolean
+      responses:
+        '200':
+          description: Noclip toggled
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      playerId:
+                        type: string
+                      enabled:
+                        type: boolean
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
 
   /v1/heli/flights:
     post:

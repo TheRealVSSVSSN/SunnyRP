@@ -1,3 +1,23 @@
+# Run Summary — 2025-08-29 (noclip)
+
+- Added admin noclip endpoint with permission checks and realtime signal.
+
+## API Changes
+
+- `POST /v1/admin/noclip`
+
+## Realtime & Webhooks
+
+- WebSocket `admin.noclip` broadcast to player namespace.
+
+## Migrations
+
+- `086_add_noclip_events.sql` — records noclip toggle actions.
+
+## Outstanding TODO/Gaps
+
+- None.
+
 # Run Summary — 2025-02-14 (medicgarage)
 
 - Added EMS vehicle spawn endpoint with realtime push and purge scheduler.

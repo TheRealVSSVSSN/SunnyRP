@@ -35,22 +35,44 @@ Successful responses use the standard envelope and return the ban details:
 }
 ```
 
+
+### `POST /v1/admin/noclip`
+
+Enables or disables noclip for a player. Body must include `playerId`, `actorId`, and `enabled` boolean. Only players with the `admin` or `dev` scope may receive noclip.
+
+Example request body:
+
+```json
+{
+  "playerId": "steam:110000100000001",
+  "actorId": "steam:110000100000002",
+  "enabled": true
+}
+```
+
+On success the service records the action and emits a WebSocket event:
+
+```json
+{
+  "ok": true,
+  "data": { "playerId": "steam:110000100000001", "enabled": true },
+  "requestId": "uuid",
+  "traceId": "trace"
+}
+```
+
 ## Repository
 
-`adminRepository.js` provides the `banPlayer` function which inserts a row into the `bans` table using parameterised queries:
+`adminRepository.js` exposes helper functions:
 
-- **banPlayer(playerId, reason, until)** – Persists a ban for the specified player. `until` may be `null` for permanent bans.
+- **banPlayer(playerId, reason, until)** – Insert a ban record; `until` may be `null`.
+- **setNoclip(playerId, actorId, enabled)** – Log a noclip toggle event.
 
 ## Database Migration
 
-`020_add_bans.sql` creates the `bans` table with columns:
+`020_add_bans.sql` creates the `bans` table.
 
-- **player_id** (`VARCHAR(64)`) – Identifier for the banned player.
-- **reason** (`VARCHAR(255)`) – Reason for the ban.
-- **until** (`DATETIME`, nullable) – When present, the ban expires at this time.
-- **created_at** (`TIMESTAMP`) – Creation timestamp.
-
-An index on `player_id` accelerates lookups.
+`086_add_noclip_events.sql` creates the `noclip_events` table with indexes on `player_id` and `created_at`.
 
 ## Notes
 
