@@ -21,3 +21,4 @@
 | Document hacking endpoints in BASE_API_DOCUMENTATION and events-and-rpcs | backend | medium | time |
 | Add db-schema entry for hacking_attempts table | backend | medium | time |
 | Record mhacking research sources in research-log.md | backend | low | reference access |
+| Add pagination for `/v1/minimap/blips` | backend | low | none |

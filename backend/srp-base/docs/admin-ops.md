@@ -67,4 +67,5 @@
 - Ensure the `world_timecycle` table exists for timecycle overrides.
 - Ensure the `ipl_states` table exists for interior proxy toggles.
 - Ensure the `ems_vehicle_spawns` table exists; tune `EMS_VEHICLE_SPAWN_RETENTION_MS` and `EMS_VEHICLE_SPAWN_PURGE_INTERVAL_MS` for spawn log cleanup.
+- Ensure the `minimap_blips` table exists; scheduler `minimap-blips-broadcast` pushes updates every 30s.
 - Runtime sinks can be managed with `GET/POST/DELETE /v1/hooks/endpoints` (admin only). Rotate secrets by re-registering endpoints and removing old entries.

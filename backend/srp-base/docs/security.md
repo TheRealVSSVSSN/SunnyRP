@@ -45,3 +45,4 @@
 - Broadcaster routes inherit the same authentication and idempotency requirements.
 - Debug routes inherit the same authentication and rate limiting requirements.
 - World routes (state, forecast and timecycle) inherit the same authentication and idempotency requirements.
+- Minimap routes inherit the same authentication and idempotency requirements.

@@ -459,3 +459,15 @@ curl -H 'X-API-Token: <token>' http://localhost:3010/v1/jailbreaks/active
 curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: ems1' -H 'Content-Type: application/json' \
   -d '{"characterId":1,"vehicleType":"classic"}' http://localhost:3010/v1/ems/vehicles
 ```
+
+# Manually verify minimap blip endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/minimap/blips
+curl -H 'X-API-Token: <token>' -H 'X-Idempotency-Key: mm1' -H 'Content-Type: application/json' \
+  -d '{"x":0,"y":0,"z":0,"sprite":1,"color":0,"label":"Test"}' \
+  http://localhost:3010/v1/minimap/blips
+curl -H 'X-API-Token: <token>' -X DELETE http://localhost:3010/v1/minimap/blips/1
+```
+
+Connect a WebSocket client to `ws://localhost:3010/ws?token=<token>&ns=world` and verify receipt of `minimap.blips` events.

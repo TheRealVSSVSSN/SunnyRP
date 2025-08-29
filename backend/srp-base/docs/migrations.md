@@ -80,5 +80,6 @@
 | 080_add_debug.sql | Debug logs and markers tables |
 | 081_add_recycling_runs.sql | Table for recycling job delivery records |
 | 082_add_vehicle_control_states.sql | Vehicle siren/indicator state table |
-| 083_add_hacking_attempts.sql | Table for hacking attempt logs |
 | 083_add_ems_vehicle_spawns.sql | EMS vehicle spawn log table |
+| 084_add_hacking_attempts.sql | Table for hacking attempt logs |
+| 085_add_minimap_blips.sql | Minimap blips table |

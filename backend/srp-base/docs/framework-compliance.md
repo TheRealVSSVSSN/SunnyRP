@@ -109,6 +109,7 @@ practice is supported by citations.
 | **recycling module** | Recycling delivery endpoints follow layered design with authentication, idempotency and realtime push plus retention purge. |
 | **vehicle control module** | Vehicle control state endpoints follow layered design with authentication, idempotency, WebSocket/webhook events and hourly cleanup scheduler. |
 | **hacking module** | Hacking attempt endpoints follow layered design with authentication, idempotency, WebSocket/webhook events and retention purge scheduler. |
+| **minimap module** | Minimap blip endpoints follow layered design with authentication, idempotency and WebSocket broadcasts. |
 
 ## Outstanding Items
 

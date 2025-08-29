@@ -90,3 +90,10 @@ Logged EMS vehicle spawns with realtime push and retention purge.
 
 * `POST /v1/ems/vehicles` records spawns and emits `ems.vehicle.spawn`.
 * Scheduler `ems-vehicle-spawn-purge` removes old spawn logs.
+
+## Update – 2025-08-29 (minimap)
+
+Dynamic minimap blip service.
+
+* `GET /v1/minimap/blips`, `POST /v1/minimap/blips`, and `DELETE /v1/minimap/blips/{id}` manage blips.
+* Scheduler `minimap-blips-broadcast` pushes `world.minimap.blips` events over WebSocket.

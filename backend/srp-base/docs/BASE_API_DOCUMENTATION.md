@@ -708,3 +708,13 @@ Scheduler `weathersync-forecast` pulls forecasts and broadcasts `world.forecast.
 WebSocket topic `recycling` broadcasts `delivery.created`.
 
 Scheduler `recycling-purge` removes records older than `RECYCLING_RETENTION_MS`.
+
+## Update – 2025-08-29 (minimap)
+
+### Endpoints
+- `GET /v1/minimap/blips`
+- `POST /v1/minimap/blips`
+- `DELETE /v1/minimap/blips/{id}`
+
+WebSocket namespace `world` emits `minimap.blips`.
+Scheduler `minimap-blips-broadcast` pushes periodic updates.

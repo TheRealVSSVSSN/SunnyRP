@@ -5,6 +5,7 @@
 - Update OpenAPI validator dependency for install success.
 - Persist and broadcast vehicle control state with cleanup scheduler.
 - Webhook dispatch for interior proxy updates.
+- Dynamic minimap blip service with scheduler and WS broadcasts.
 
 | File | Action | Note |
 |---|---|---|
@@ -116,3 +117,24 @@
 | docs/naming-map.md | M | Map medicgarage → ems-vehicles |
 | docs/research-log.md | M | Log medicgarage research |
 | docs/run-docs.md | M | Summarize medicgarage run |
+| src/repositories/minimapRepository.js | A | Persist minimap blips |
+| src/routes/minimap.routes.js | A | Minimap blip CRUD endpoints |
+| src/tasks/minimap.js | A | Broadcast blip list over WebSocket |
+| src/server.js | M | Register minimap broadcast task |
+| src/app.js | M | Mount minimap routes |
+| src/migrations/084_add_hacking_attempts.sql | R | Renumber migration |
+| src/migrations/085_add_minimap_blips.sql | A | Create minimap_blips table |
+| openapi/api.yaml | M | Document minimap endpoints |
+| docs/modules/minimap.md | A | Module documentation |
+| docs/BASE_API_DOCUMENTATION.md | M | Document minimap endpoints |
+| docs/events-and-rpcs.md | M | Map minimap events |
+| docs/db-schema.md | M | Document minimap_blips table |
+| docs/migrations.md | M | List migrations 084 and 085 |
+| docs/admin-ops.md | M | Operational notes for minimap_blips |
+| docs/security.md | M | Minimap auth notes |
+| docs/testing.md | M | Minimap endpoint tests |
+| docs/index.md | M | Log minimap update |
+| docs/progress-ledger.md | M | Record minimap entry |
+| docs/naming-map.md | M | Map minimap → minimap |
+| docs/research-log.md | M | Log minimap research |
+| docs/run-docs.md | M | Summarize minimap run |

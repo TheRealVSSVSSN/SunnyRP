@@ -53,3 +53,5 @@ Upstream name → SRP name mapping for this run.
 | mapmanager | world.ipls |
 | mhacking | hacking |
 | medicgarage | ems-vehicles |
+
+| minimap | minimap |

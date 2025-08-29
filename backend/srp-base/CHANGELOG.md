@@ -1823,7 +1823,6 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Drop `hacking_attempts` table and remove routes, scheduler and config entries.
-=======
 ## 2025-02-14 (medicgarage)
 
 ### Added
@@ -1838,3 +1837,17 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Drop `ems_vehicle_spawns` table and remove EMS vehicle routes and tasks.
+## 2025-08-29 (minimap)
+
+### Added
+* Minimap blip management via `GET/POST/DELETE /v1/minimap/blips` with WebSocket push.
+* Scheduler `minimap-blips-broadcast` sends periodic blip lists.
+
+### Migrations
+* `085_add_minimap_blips.sql` – create `minimap_blips` table.
+
+### Risks
+* High blip counts may enlarge payloads; pagination not yet implemented.
+
+### Rollback
+* Drop `minimap_blips` table and remove minimap routes and scheduler registration.

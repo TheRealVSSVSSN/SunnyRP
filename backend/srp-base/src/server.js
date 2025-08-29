@@ -20,6 +20,7 @@ const weathersyncTasks = require('./tasks/weathersync');
 const timecycleTasks = require('./tasks/timecycle');
 const cameraTasks = require('./tasks/camera');
 const hudTasks = require('./tasks/hud');
+const minimapTasks = require('./tasks/minimap');
 const carwashTasks = require('./tasks/carwash');
 const chatTasks = require('./tasks/chat');
 const connectqueueTasks = require('./tasks/connectqueue');
@@ -139,6 +140,12 @@ scheduler.register(
   () => hudTasks.pruneOld(),
   hudTasks.INTERVAL_MS,
   { jitter: 60000 },
+);
+scheduler.register(
+  minimapTasks.JOB_NAME,
+  () => minimapTasks.broadcastBlips(wss),
+  minimapTasks.INTERVAL_MS,
+  { jitter: 5000, persistName: minimapTasks.JOB_NAME },
 );
 scheduler.register(
   carwashTasks.JOB_NAME,
