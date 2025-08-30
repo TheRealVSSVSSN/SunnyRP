@@ -125,6 +125,12 @@ scheduler.register(
   { jitter: 5000, persistName: worldTasks.JOB_NAME },
 );
 scheduler.register(
+  worldTasks.STATE_JOB_NAME,
+  () => worldTasks.broadcastState(wss),
+  worldTasks.STATE_INTERVAL_MS,
+  { jitter: 5000, persistName: worldTasks.STATE_JOB_NAME },
+);
+scheduler.register(
   barriersTasks.JOB_NAME,
   () => barriersTasks.resetExpired(wss),
   barriersTasks.INTERVAL_MS,

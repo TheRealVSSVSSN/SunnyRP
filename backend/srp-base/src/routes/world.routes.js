@@ -31,7 +31,25 @@ router.post('/v1/world/state', async (req, res, next) => {
   try {
     const { time, weather, density } = req.body || {};
     await worldRepo.updateWorldState({ time, weather, density });
+    const payload = { time: time || null, weather: weather || null, density: density || null };
+    websocket.broadcast('world', 'state.updated', payload);
+    hooks.dispatch('world.state.updated', payload);
     sendOk(res, { message: 'World state updated' }, res.locals.requestId, res.locals.traceId);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Broadcast rogue peds to clients for cleanup. Accepts an array of
+// entity ids in `toDelete`. Uses websocket/webhook push only; no
+// persistence is performed.
+router.post('/v1/world/peds/rogue', async (req, res, next) => {
+  try {
+    const { toDelete = [] } = req.body || {};
+    const payload = { toDelete };
+    websocket.broadcast('world', 'peds.rogue', payload);
+    hooks.dispatch('world.peds.rogue', payload);
+    sendOk(res, { message: 'Rogue peds broadcast' }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     next(err);
   }

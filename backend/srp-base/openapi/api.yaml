@@ -8733,6 +8733,7 @@ paths:
           $ref: '#/components/responses/BadRequest'
     post:
       summary: Update world state
+      description: Updates time/weather/density and pushes `world.state.updated` via WebSocket and webhook.
       requestBody:
         required: true
         content:
@@ -8752,6 +8753,42 @@ paths:
       responses:
         '200':
           description: Update acknowledgement
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/world/peds/rogue:
+    post:
+      summary: Broadcast rogue peds for deletion
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                toDelete:
+                  type: array
+                  items:
+                    type: integer
+      responses:
+        '200':
+          description: Broadcast acknowledgement
           content:
             application/json:
               schema:

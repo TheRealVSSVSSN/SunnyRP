@@ -19,6 +19,7 @@
 - Dance animation definitions with realtime push and purge scheduler.
 
 - Dealer offers backend with realtime push and purge scheduler.
+- World state push and rogue ped cleanup with scheduler.
 
 | File | Action | Note |
 |---|---|---|
@@ -359,3 +360,18 @@
 | docs/naming-map.md | M | Map np-dances |
 | MANIFEST.md | M | Update manifest |
 | CHANGELOG.md | M | Log dances module |
+| src/routes/world.routes.js | M | Broadcast state updates and rogue peds |
+| src/tasks/world.js | M | Added world state sync task |
+| src/server.js | M | Register world state sync scheduler |
+| openapi/api.yaml | M | Document world state push and rogue ped route |
+| docs/modules/world.md | M | Describe new realtime events and scheduler |
+| docs/BASE_API_DOCUMENTATION.md | M | Add world.peds.rogue and state push note |
+| docs/events-and-rpcs.md | M | Map np-density to world.peds.rogue |
+| docs/index.md | M | Record world density update |
+| docs/progress-ledger.md | M | Log np-density entry |
+| docs/framework-compliance.md | M | Remove world OpenAPI TODO |
+| docs/migrations.md | M | Renumber dealer offers migration |
+| docs/admin-ops.md | M | Note world_state table and scheduler |
+| docs/research-log.md | M | Log np-density research |
+| docs/naming-map.md | M | Map np-density |
+| docs/run-docs.md | M | Summarize np-density run |

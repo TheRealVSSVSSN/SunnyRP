@@ -265,7 +265,8 @@ In addition to the core identity, permissions, characters and admin APIs describ
 | Method | Path | Description |
 |-------|-----|-------------|
 | `GET` | `/v1/world/state` | Fetch the most recent world state (time, weather, density). |
-| `POST` | `/v1/world/state` | Set a new world state (body: `{ time, weather, density }`). |
+| `POST` | `/v1/world/state` | Set a new world state (body: `{ time, weather, density }`) and push `world.state.updated`. |
+| `POST` | `/v1/world/peds/rogue` | Broadcast rogue ped entity ids for deletion (`{ toDelete: [] }`). |
 | `GET` | `/v1/world/forecast` | Fetch the latest weather forecast schedule. |
 | `POST` | `/v1/world/forecast` | Set a new forecast (body: `{ forecast: [{ weather, duration }] }`). |
 | `GET` | `/v1/world/ipls` | List interior proxy states. |
