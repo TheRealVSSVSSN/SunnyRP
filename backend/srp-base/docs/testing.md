@@ -489,3 +489,15 @@ curl -H 'X-API-Token: <token>' -H 'Content-Type: application/json' -H 'X-Idempot
 ```
 
 Connect a WebSocket client to `ws://localhost:3010/ws?token=<token>&ns=broadcast` to receive `broadcast.message` events.
+
+# Manually verify contract endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' 'http://localhost:3010/v1/contracts?playerId=1'
+curl -H 'X-API-Token: <token>' -H 'Content-Type: application/json' -H 'X-Idempotency-Key: ct1' \
+  -d '{"senderId":"1","receiverId":"2","amount":500}' http://localhost:3010/v1/contracts
+curl -H 'X-API-Token: <token>' -H 'Content-Type: application/json' -H 'X-Idempotency-Key: ct2' \
+  -d '{"playerId":"2"}' http://localhost:3010/v1/contracts/1/accept
+```
+
+Connect a WebSocket client to `ws://localhost:3010/ws?token=<token>&ns=contracts` to observe `contracts.created` and `contracts.accepted` events.

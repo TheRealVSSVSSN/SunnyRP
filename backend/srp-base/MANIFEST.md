@@ -10,6 +10,7 @@
 - Admin unban endpoints with ban status query and audit log.
 - Base event filter and composite index for targeted analytics.
 - Mechanic work orders backend with realtime push and scheduler.
+- Player contract notifications via WebSocket/webhooks with expiry scheduler.
 
 - Broadcast messages API with realtime push and purge scheduler.
 - Allow photo description updates with realtime push.
@@ -263,3 +264,25 @@
 | docs/run-docs.md | M | Summarize commands run |
 | openapi/api.yaml | M | Document command endpoints |
 | docs/BASE_API_DOCUMENTATION.md | M | Document commands API |
+| src/repositories/contractsRepository.js | M | Add purgeExpired helper |
+| src/tasks/contracts.js | A | Purge expired contracts task |
+| src/config/env.js | M | Add contract retention config |
+| src/server.js | M | Register contracts purge task |
+| src/routes/contracts.routes.js | M | Broadcast contract events |
+| src/migrations/094_add_contracts_created_index.sql | A | Index on contracts.created_at |
+| docs/modules/contracts.md | M | Document realtime and scheduler |
+| docs/index.md | M | Log contracts update |
+| docs/progress-ledger.md | M | Record np-contracts entry |
+| docs/framework-compliance.md | M | Add contracts module compliance |
+| docs/BASE_API_DOCUMENTATION.md | M | Document contract endpoints |
+| docs/events-and-rpcs.md | M | Map np-contracts events |
+| docs/db-schema.md | M | Document contracts table |
+| docs/migrations.md | M | List migration 094 |
+| docs/admin-ops.md | M | Note contract retention config |
+| docs/security.md | M | Note contract route auth |
+| docs/testing.md | M | Add contract tests |
+| docs/naming-map.md | M | Map np-contracts |
+| docs/research-log.md | M | Log np-contracts research |
+| docs/run-docs.md | M | Summarize contracts run |
+| CHANGELOG.md | M | Log contract realtime/purge |
+| MANIFEST.md | M | Update manifest |

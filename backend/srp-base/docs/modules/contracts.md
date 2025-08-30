@@ -41,6 +41,20 @@ marked as resolved without moving any funds.
 - **getContract(id)** – retrieves a single contract by id.
 - **markAccepted(id)** – sets `paid` to 1 and `accepted` to 1.
 - **markDeclined(id)** – sets `accepted` to 0 for unresolved contracts.
+- **purgeExpired(cutoff)** – deletes contracts older than `cutoff` that remain unresolved.
+
+## Realtime
+
+Events are broadcast over WebSocket namespace `contracts` and mirrored to webhook sinks:
+
+- `contracts.created` – new contract awaiting response.
+- `contracts.accepted` – receiver accepted and funds transferred.
+- `contracts.declined` – receiver declined the offer.
+
+## Scheduler
+
+Task `contracts-purge` runs hourly and removes contracts with `accepted IS NULL`
+older than `CONTRACT_RETENTION_MS`.
 
 ## Database Migration
 

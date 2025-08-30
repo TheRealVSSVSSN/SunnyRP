@@ -8,6 +8,8 @@ const {
   markDeclined,
 } = require('../repositories/contractsRepository');
 const { createTransaction } = require('../repositories/economyRepository');
+const { broadcast } = require('../realtime/websocket');
+const hooks = require('../hooks/dispatcher');
 
 const router = express.Router();
 
@@ -53,6 +55,9 @@ router.post('/v1/contracts', async (req, res) => {
   }
   try {
     const { id } = await createContract({ senderId, receiverId, amount: amt, info: info || null });
+    const payload = { id, senderId, receiverId, amount: amt, info: info || null };
+    broadcast('contracts', 'created', payload);
+    hooks.dispatch('contracts.created', payload);
     sendOk(res, { id }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'CONTRACT_CREATE_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);
@@ -102,6 +107,9 @@ router.post('/v1/contracts/:id/accept', async (req, res) => {
     }
     await createTransaction({ fromPlayerId: playerId, toPlayerId: contract.sender_id, amount: contract.amount, reason: 'contract' });
     await markAccepted(contractId);
+    const payload = { id: contractId, senderId: contract.sender_id, receiverId: contract.receiver_id, amount: contract.amount };
+    broadcast('contracts', 'accepted', payload);
+    hooks.dispatch('contracts.accepted', payload);
     sendOk(res, { id: contractId }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'CONTRACT_ACCEPT_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);
@@ -140,6 +148,9 @@ router.post('/v1/contracts/:id/decline', async (req, res) => {
       );
     }
     await markDeclined(contractId);
+    const payload = { id: contractId, senderId: contract.sender_id, receiverId: contract.receiver_id, amount: contract.amount };
+    broadcast('contracts', 'declined', payload);
+    hooks.dispatch('contracts.declined', payload);
     sendOk(res, { id: contractId }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(res, { code: 'CONTRACT_DECLINE_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);

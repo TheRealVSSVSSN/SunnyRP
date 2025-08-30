@@ -78,6 +78,7 @@ const config = {
   chat: { retentionMs: parseInt(process.env.CHAT_RETENTION_MS || '604800000', 10) },
   broadcast: { retentionMs: parseInt(process.env.BROADCAST_RETENTION_MS || '86400000', 10) },
   recycling: { retentionMs: parseInt(process.env.RECYCLING_RETENTION_MS || '2592000000', 10) },
+  contracts: { retentionMs: parseInt(process.env.CONTRACT_RETENTION_MS || '86400000', 10) },
   camera: {
     retentionMs: parseInt(process.env.CAMERA_RETENTION_MS || '2592000000', 10),
     cleanupIntervalMs: parseInt(process.env.CAMERA_CLEANUP_INTERVAL_MS || '3600000', 10),

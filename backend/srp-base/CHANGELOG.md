@@ -1974,3 +1974,23 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Drop `commands` table and remove command routes and repository.
+
+## 2025-08-30 (np-contracts)
+
+### Added
+
+* WebSocket/webhook notifications for contract creation, acceptance and decline.
+* Hourly `contracts-purge` scheduler with `CONTRACT_RETENTION_MS` configuration.
+
+### Migrations
+
+* `094_add_contracts_created_index.sql` – index on `contracts.created_at`.
+
+### Risks
+
+* Misconfigured retention may delete active contracts prematurely.
+* Clients not listening on `contracts` namespace may miss lifecycle events.
+
+### Rollback
+
+* Drop `idx_contracts_created_at` index and remove contract event broadcasts and scheduler registration.

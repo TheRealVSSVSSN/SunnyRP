@@ -771,3 +771,14 @@ WebSocket namespace `broadcast` emits `broadcast.message`. Scheduler `broadcast-
 | GET | /v1/commands | List command definitions |
 | POST | /v1/commands | Create a command (idempotent via X-Idempotency-Key) |
 | DELETE | /v1/commands/{id} | Delete a command |
+
+## Update – 2025-08-30 (np-contracts)
+
+### Endpoints
+
+- `GET /v1/contracts?playerId=` – list contracts involving a player.
+- `POST /v1/contracts` – create a contract (requires `X-Idempotency-Key`).
+- `POST /v1/contracts/{id}/accept` – accept a contract (requires `X-Idempotency-Key`).
+- `POST /v1/contracts/{id}/decline` – decline a contract (requires `X-Idempotency-Key`).
+
+WebSocket namespace `contracts` emits `contracts.created`, `contracts.accepted` and `contracts.declined`. Scheduler `contracts-purge` removes unresolved contracts after `CONTRACT_RETENTION_MS`.
