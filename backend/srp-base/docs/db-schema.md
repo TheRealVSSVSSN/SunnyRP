@@ -765,3 +765,13 @@ Indexes:
 | completed_at | TIMESTAMP NULL | Completion time |
 | INDEX idx_mechanic_orders_plate | (vehicle_plate) |
 | INDEX idx_mechanic_orders_status | (status) |
+
+## broadcast_messages
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| character_id | INT | FK to characters.id |
+| message | VARCHAR(255) | Message text |
+| created_at | TIMESTAMP | Creation time |
+| INDEX idx_broadcast_messages_created_at | (created_at) |

@@ -1,11 +1,13 @@
-# Broadcaster Module
+# Broadcast Module
 
-The broadcaster module implements the server‑side logic of the
-legacy `np-broadcaster` resource in the unified `srp‑base`
-backend.  In the original Lua resource, characters trigger an
-`attemptBroadcast` event to become a broadcaster.  The server
-counts how many broadcasters are currently active and, if below a
-hard-coded limit, assigns the broadcaster job using the job manager.
+The broadcast module implements the server-side logic of the legacy
+`np-broadcaster` resource in the unified `srp-base` backend.  In the
+original Lua resource, characters triggered an `attemptBroadcast`
+event to become a broadcaster.  The server counts how many
+broadcasters are currently active and, if below a hard-coded limit,
+assigns the broadcaster job using the job manager.  The module also
+stores free-form broadcast messages and pushes them to connected
+clients via WebSocket and configured webhook sinks.
 
 ## Endpoints
 
@@ -73,3 +75,16 @@ change the limit without code changes.
   duty status.
 * Rate limiting, authentication and idempotency policies are
   inherited from the global middleware in `src/app.js`.
+
+### `GET /v1/broadcast/messages`
+
+Returns recent broadcast messages ordered from newest to oldest.
+Optional query parameter `limit` caps results (default 50, max 100).
+
+### `POST /v1/broadcast/messages`
+
+Creates a new broadcast message.  Body requires `characterId` and
+`message` fields.  The stored record is broadcast via WebSocket
+namespace `broadcast` using event type `broadcast.message` and also
+dispatched to registered webhooks.  Scheduler `broadcast-purge`
+removes messages older than `BROADCAST_RETENTION_MS`.

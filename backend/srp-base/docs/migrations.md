@@ -89,3 +89,4 @@
 | 089_add_barriers.sql | Create barriers table for world barrier definitions |
 | 090_add_base_event_logs_type_index.sql | Index base_event_logs on event_type and created_at |
 | 091_add_mechanic_orders.sql | Mechanic work orders table |
+| 092_add_broadcast_messages.sql | Broadcast message log table |

@@ -19,5 +19,26 @@
 - `CHANGELOG.md`
 - `MANIFEST.md`
 
+## Update – 2025-08-30 (broadcast)
+
+- Added broadcast messages backend with WebSocket/webhook push and hourly purge scheduler.
+
+### Updated Documentation
+- `docs/modules/broadcast.md`
+- `docs/db-schema.md`
+- `docs/migrations.md`
+- `docs/index.md`
+- `docs/progress-ledger.md`
+- `docs/framework-compliance.md`
+- `docs/BASE_API_DOCUMENTATION.md`
+- `docs/events-and-rpcs.md`
+- `docs/admin-ops.md`
+- `docs/security.md`
+- `docs/testing.md`
+- `docs/research-log.md`
+- `docs/naming-map.md`
+- `CHANGELOG.md`
+- `MANIFEST.md`
+
 ## Outstanding Items
 - None

@@ -750,3 +750,15 @@ Vehicle upgrade and repair work orders backed by mechanic service.
 - `GET /v1/mechanic/orders/{id}`
 
 WebSocket namespace `mechanic` broadcasts `orders.created` and `orders.completed`. Scheduler `mechanic-process` finalises pending orders.
+
+## Update – 2025-08-30 (broadcast)
+
+Broadcast job assignment and message endpoints.
+
+### Endpoints
+
+- `POST /v1/broadcast/attempt`
+- `GET /v1/broadcast/messages`
+- `POST /v1/broadcast/messages` – requires `X-Idempotency-Key`
+
+WebSocket namespace `broadcast` emits `broadcast.message`. Scheduler `broadcast-purge` removes old messages.

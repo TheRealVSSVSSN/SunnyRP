@@ -1927,3 +1927,22 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Drop `mechanic_orders` table and remove mechanic routes and scheduler registration.
+
+## 2025-08-30 (broadcast)
+
+### Added
+
+* Broadcast message API (`GET /v1/broadcast/messages`, `POST /v1/broadcast/messages`, `POST /v1/broadcast/attempt`) with WebSocket/webhook push.
+* Scheduler `broadcast-purge` removes expired messages.
+
+### Migrations
+
+* `092_add_broadcast_messages.sql` – table for broadcast messages.
+
+### Risks
+
+* Misconfigured retention may allow unbounded growth or premature deletion of messages.
+
+### Rollback
+
+* Drop `broadcast_messages` table and remove broadcast routes, config and scheduler registration.

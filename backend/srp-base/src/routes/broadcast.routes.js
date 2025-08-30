@@ -1,5 +1,8 @@
 const express = require('express');
 const jobsRepo = require('../repositories/jobsRepository');
+const broadcastRepo = require('../repositories/broadcastRepository');
+const websocket = require('../realtime/websocket');
+const hooks = require('../hooks/dispatcher');
 const { sendOk, sendError } = require('../utils/respond');
 
 // Maximum number of characters allowed to hold the broadcaster job at the
@@ -27,7 +30,7 @@ const router = express.Router();
  * the maximum number of broadcasters has been reached, an error is
  * returned.  On success the assigned job record is returned.
  */
-router.post('/v1/broadcast/attempt', express.json(), async (req, res, next) => {
+router.post('/attempt', async (req, res, next) => {
   try {
     const { characterId } = req.body || {};
     if (characterId === undefined) {
@@ -65,6 +68,57 @@ router.post('/v1/broadcast/attempt', express.json(), async (req, res, next) => {
     // assignment already exists it will update the record.
     const assignment = await jobsRepo.assignJob(parseInt(characterId, 10), job.id);
     sendOk(res, assignment, res.locals.requestId, res.locals.traceId);
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
+ * GET /v1/broadcast/messages
+ *
+ * Query: ?limit=50
+ *
+ * Lists recent broadcast messages ordered from newest to oldest.  The
+ * limit parameter caps the number of returned records (default 50,
+ * maximum 100).
+ */
+router.get('/messages', async (req, res, next) => {
+  try {
+    const limit = Math.max(1, Math.min(100, parseInt(req.query.limit, 10) || 50));
+    const messages = await broadcastRepo.getRecentMessages(limit);
+    sendOk(res, { messages }, res.locals.requestId, res.locals.traceId);
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
+ * POST /v1/broadcast/messages
+ *
+ * Body: { characterId: number, message: string }
+ *
+ * Persists a broadcast message and pushes it via WebSocket and webhook
+ * sinks.  Clients must supply an idempotency key.
+ */
+router.post('/messages', async (req, res, next) => {
+  try {
+    const { characterId, message } = req.body || {};
+    if (characterId === undefined || typeof message !== 'string' || message.length === 0) {
+      return sendError(
+        res,
+        { code: 'INVALID_INPUT', message: 'characterId and message are required' },
+        400,
+        res.locals.requestId,
+        res.locals.traceId,
+      );
+    }
+    const record = await broadcastRepo.createMessage({
+    characterId: parseInt(characterId, 10),
+    message: message.slice(0, 255),
+    });
+    websocket.broadcast('broadcast', 'message', record);
+    hooks.dispatch('broadcast.message', record);
+    sendOk(res, record, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     next(err);
   }

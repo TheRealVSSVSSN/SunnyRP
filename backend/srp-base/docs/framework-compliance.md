@@ -92,7 +92,8 @@ practice is supported by citations.
 | **jailbreak module** | Jailbreak endpoints follow the layered pattern with auth/idempotency and now emit WebSocket/webhook events with an expiry scheduler. |
 | **k9 module** | K9 unit endpoints follow the layered pattern with auth/idempotency; active roster broadcasts via WebSocket, webhooks and scheduler. |
 | **jobs module** | Job CRUD and assignment endpoints follow the layered pattern with authentication, idempotency, WebSocket/webhook events and roster scheduler. |
-| **broadcaster module** | Broadcaster assignment uses character-scoped job logic and follows the established layered pattern. || **debug module** | Debug status endpoint follows the established layered pattern with authentication and rate limiting. |
+| **broadcast module** | Broadcast job assignment and message endpoints follow the layered pattern with auth, idempotency, WebSocket/webhook events and retention scheduler. |
+| **debug module** | Debug status endpoint follows the established layered pattern with authentication and rate limiting. |
 | **world module** | World state and forecast endpoints follow the established layered pattern with authentication and idempotency. |
 | **diamondCasino module** | Casino game endpoints follow the established layered pattern with authentication and idempotency. |
 | **WebSocket gateway** | Provides authenticated connections with heartbeat and at-least-once broadcast semantics. |
