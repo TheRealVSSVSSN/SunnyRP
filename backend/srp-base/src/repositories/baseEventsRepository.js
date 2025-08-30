@@ -25,17 +25,24 @@ async function logEvent({ accountId, characterId, eventType, metadata }) {
 }
 
 /**
- * Retrieve recent base event logs.
+ * Retrieve recent base event logs, optionally filtered by event type.
  *
  * @param {Object} params
  * @param {number} params.limit - Max number of events to fetch
+ * @param {string} [params.eventType] - Optional event type filter
  * @returns {Promise<Array>} Array of event records
  */
-async function listEvents({ limit }) {
-  const [rows] = await db.query(
-    'SELECT id, account_id AS accountId, character_id AS characterId, event_type AS eventType, metadata, UNIX_TIMESTAMP(created_at) * 1000 AS createdAt FROM base_event_logs ORDER BY id DESC LIMIT ?',
-    [limit],
-  );
+async function listEvents({ limit, eventType }) {
+  let sql =
+    'SELECT id, account_id AS accountId, character_id AS characterId, event_type AS eventType, metadata, UNIX_TIMESTAMP(created_at) * 1000 AS createdAt FROM base_event_logs';
+  const params = [];
+  if (eventType) {
+    sql += ' WHERE event_type = ?';
+    params.push(eventType);
+  }
+  sql += ' ORDER BY created_at DESC LIMIT ?';
+  params.push(limit);
+  const [rows] = await db.query(sql, params);
   return rows.map((row) => ({
     id: row.id,
     accountId: row.accountId,

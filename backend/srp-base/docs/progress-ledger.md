@@ -115,6 +115,7 @@
 | 94 | minimap | Dynamic minimap blip service | Create | Added blip APIs and broadcast task |
 | 95 | noclip | Admin noclip toggle with realtime push | Create | Added noclip API and audit table |
 | 96 | np-barriers → barriers | Road barrier definitions and state | Create | Added barrier API with WS/webhook and auto-reset |
+| 97 | np-base → base-events | Base event filtering and indexing | Extend | Added `eventType` filter and composite index |
 
 ## 2025-08-28 — koilWeatherSync
 
@@ -139,3 +140,7 @@
 ## 2025-08-30 — admin unban
 
 - EXTEND: Admin moderation with ban status check and unban logging.
+
+## 2025-08-30 — np-base
+
+- EXTEND: Base event listing supports `eventType` filter and adds `(event_type, created_at)` index.

@@ -122,3 +122,9 @@ Persistent world barriers with realtime sync.
 
 * `GET /v1/barriers`, `POST /v1/barriers`, `PATCH /v1/barriers/{barrierId}/state` manage barrier definitions and state.
 * Scheduler `barriers-reset` closes expired barriers and broadcasts `barriers.state`.
+
+## Update – 2025-08-30 (np-base)
+
+Base event logs now support filtering by type for targeted retrieval.
+
+* `GET /v1/base-events?eventType=` returns only matching events using new `(event_type, created_at)` index.

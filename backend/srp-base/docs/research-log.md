@@ -460,3 +460,9 @@
 
 - GitHub API listing for `resources/np-barriers` to derive barrier placement and toggle flows.
 - Reviewed door and zone management patterns in ESX (`es_extended`) and QB-Core (`qb-core`) for naming alignment.
+
+## Research Log – 2025-08-30 (np-base)
+
+- Attempted to clone `https://github.com/h04X-2K/NoPixelServer` for `resources/np-base` but repository fetch was aborted due to size.
+- Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed base event logging concepts in ESX and QB-Core to align terminology.

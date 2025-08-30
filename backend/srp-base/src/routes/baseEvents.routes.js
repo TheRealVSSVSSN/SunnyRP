@@ -9,8 +9,9 @@ const router = express.Router();
 router.get('/v1/base-events', async (req, res) => {
   const limitParam = req.query.limit;
   const limit = Number.parseInt(limitParam, 10) || 50;
+  const { eventType } = req.query;
   try {
-    const events = await listEvents({ limit });
+    const events = await listEvents({ limit, eventType });
     sendOk(res, { events }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
     sendError(
