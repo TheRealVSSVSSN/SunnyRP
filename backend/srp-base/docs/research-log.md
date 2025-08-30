@@ -508,3 +508,8 @@
 
 - Cloned `https://github.com/h04X-2K/NoPixelServer` and inspected `resources/np-dances` for animation lists.
 - Reviewed dance/emote handling in ESX, QB-Core and ND Core for naming alignment.
+## Research Log – 2025-08-30 (np-density)
+
+- Inspected https://github.com/h04X-2K/NoPixelServer resources/np-density for rogue ped event naming.
+- Cross-referenced ped cleanup patterns in ESX and QB-Core for parity.
+

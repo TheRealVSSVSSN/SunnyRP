@@ -187,3 +187,11 @@ Dynamic dance animation definitions with realtime sync.
 * `GET /v1/dances/animations` lists animations.
 * `POST /v1/dances/animations` and `DELETE /v1/dances/animations/{id}` emit `dances.*` events over WebSocket and webhooks.
 * Scheduler `dances-purge` removes disabled animations older than `DANCE_RETENTION_MS`.
+
+## Update – 2025-08-30 (world density)
+
+World state pushes and rogue ped cleanup.
+
+* `POST /v1/world/state` now broadcasts `world.state.updated` and webhooks.
+* `POST /v1/world/peds/rogue` emits `world.peds.rogue` to remove entities.
+* Scheduler `world-state-sync` broadcasts latest world state.

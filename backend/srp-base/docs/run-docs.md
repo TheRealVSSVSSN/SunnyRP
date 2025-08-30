@@ -161,12 +161,30 @@
 - `MANIFEST.md`
 - `CHANGELOG.md`
 
+## Update – 2025-08-30 (np-density)
+
+- Extended world state pushes and rogue ped cleanup.
+
+### Updated Documentation
+- `docs/modules/world.md`
+- `docs/index.md`
+- `docs/progress-ledger.md`
+- `docs/framework-compliance.md`
+- `docs/BASE_API_DOCUMENTATION.md`
+- `docs/events-and-rpcs.md`
+- `docs/migrations.md`
+- `docs/admin-ops.md`
+- `docs/naming-map.md`
+- `docs/research-log.md`
+- `openapi/api.yaml`
+- `MANIFEST.md`
+- `CHANGELOG.md`
+
 ## Outstanding Items
 - Migrate existing apartment and garage consumers to new properties API
 - Link interior templates and garage capacity to properties
 - Dispatch property events to external webhooks
 - Paginate and search property listings
-- Document world event endpoints in OpenAPI
 - Integrate player vitals (hunger, thirst, stress) into HUD module
 - Add admin bulk adjustment endpoints for queue priorities
 - Add admin endpoints for cron job management

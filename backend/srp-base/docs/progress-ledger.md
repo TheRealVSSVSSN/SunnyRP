@@ -177,3 +177,7 @@
 ## 2025-08-30 — np-dances
 
 - CREATE: Dance animation API with WebSocket/webhook pushes and hourly purge scheduler.
+## 2025-08-30 — np-density
+
+- EXTEND: World state updates now broadcast via WebSocket/webhook; added rogue ped cleanup route and scheduler.
+

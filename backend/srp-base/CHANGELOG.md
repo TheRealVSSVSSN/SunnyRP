@@ -2048,3 +2048,23 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Drop `dance_animations` table and remove routes, scheduler and realtime broadcasts.
+
+## 2025-08-30 (np-density)
+
+### Added
+
+* `POST /v1/world/peds/rogue` broadcasts rogue ped deletions via WebSocket and webhooks.
+* Scheduler `world-state-sync` broadcasts latest world state.
+
+### Changed
+
+* `POST /v1/world/state` now emits `world.state.updated` over WebSocket/webhooks.
+* Renamed migration `096_add_dealer_offers.sql` to `097_add_dealer_offers.sql`.
+
+### Risks
+
+* Misuse of rogue ped broadcast could remove unintended entities.
+
+### Rollback
+
+* Delete rogue ped route and scheduler registration; rename migration back to `096_add_dealer_offers.sql`.

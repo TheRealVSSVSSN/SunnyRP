@@ -70,3 +70,4 @@ Upstream name → SRP name mapping for this run.
 | np-crimeschool | crime-school |
 | np-dealer | dealers |
 | np-dances | dances |
+| np-density | world (peds rogue) |
