@@ -9,17 +9,18 @@
     "migrate": "node src/bootstrap/migrate.js"
   },
   "dependencies": {
+    "cors": "^2.8.5",
+    "cron-parser": "^4.8.1",
     "dotenv": "^16.3.1",
     "express": "^4.19.2",
-    "express-rate-limit": "^7.0.0",
     "express-openapi-validator": "^5.5.8",
-    "cors": "^2.8.5",
+    "express-rate-limit": "^7.0.0",
+    "js-yaml": "^4.1.0",
     "mysql2": "^3.5.2",
     "pino": "^8.15.0",
     "prom-client": "^14.1.1",
     "uuid": "^9.0.1",
-    "ws": "^8.17.0",
-    "cron-parser": "^4.8.1"
+    "ws": "^8.17.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

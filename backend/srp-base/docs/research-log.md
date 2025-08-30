@@ -455,3 +455,8 @@
 
 - Cloned `https://github.com/h04X-2K/NoPixelServer` and inspected `resources/np-admin` for ban/unban flows.
 - Reviewed ban management in EssentialMode, ESX, QB-Core, ND Core, FSN, vRP and vORP to align naming and audit practices.
+
+## Research Log – 2025-08-30 (np-barriers)
+
+- GitHub API listing for `resources/np-barriers` to derive barrier placement and toggle flows.
+- Reviewed door and zone management patterns in ESX (`es_extended`) and QB-Core (`qb-core`) for naming alignment.

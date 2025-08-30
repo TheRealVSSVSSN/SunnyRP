@@ -1,0 +1,13 @@
+CREATE TABLE IF NOT EXISTS barriers (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  model VARCHAR(60) NOT NULL,
+  position JSON NOT NULL,
+  heading FLOAT DEFAULT 0,
+  state TINYINT(1) NOT NULL DEFAULT 0,
+  expires_at DATETIME NULL,
+  placed_by INT NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  INDEX idx_barriers_expires_at (expires_at),
+  INDEX idx_barriers_placed_by (placed_by)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

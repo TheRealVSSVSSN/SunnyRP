@@ -39,3 +39,26 @@
 ## Outstanding TODO/Gaps
 
 - None.
+
+# Run Summary — 2025-08-30 (np-barriers)
+
+- Added barrier persistence and state API with realtime pushes.
+
+## API Changes
+
+- `GET /v1/barriers`
+- `POST /v1/barriers`
+- `PATCH /v1/barriers/{barrierId}/state`
+
+## Realtime & Webhooks
+
+- WebSocket namespace `barriers` emits `barriers.created` and `barriers.state`.
+- Webhook dispatcher mirrors barrier events.
+
+## Migrations
+
+- `089_add_barriers.sql` — barriers table.
+
+## Outstanding TODO/Gaps
+
+- None.

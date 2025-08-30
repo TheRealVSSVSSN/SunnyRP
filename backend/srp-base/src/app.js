@@ -40,6 +40,7 @@ const jobsRoutes = require('./routes/jobs.routes');
 
 // new domain routes for doors, error logging, weapons and shops
 const doorsRoutes = require('./routes/doors.routes');
+const barriersRoutes = require('./routes/barriers.routes');
 const errorRoutes = require('./routes/error.routes');
 const weaponsRoutes = require('./routes/weapons.routes');
 const shopsRoutes = require('./routes/shops.routes');
@@ -221,6 +222,7 @@ app.use(jobsRoutes);
 
 // mount new domain routes
 app.use(doorsRoutes);
+app.use(barriersRoutes);
 app.use(errorRoutes);
 app.use(weaponsRoutes);
 app.use(shopsRoutes);

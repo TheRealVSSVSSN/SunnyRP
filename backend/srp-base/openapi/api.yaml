@@ -2249,6 +2249,58 @@ components:
       updatedAt:
         type: string
         format: date-time
+    Barrier:
+      type: object
+      properties:
+        id:
+          type: integer
+        model:
+          type: string
+        position:
+          type: object
+          additionalProperties: true
+        heading:
+          type: number
+        state:
+          type: boolean
+        expiresAt:
+          type: string
+          format: date-time
+          nullable: true
+        placedBy:
+          type: integer
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    BarrierCreateRequest:
+      type: object
+      required:
+        - model
+        - position
+      properties:
+        model:
+          type: string
+        position:
+          type: object
+          additionalProperties: true
+        heading:
+          type: number
+          nullable: true
+    BarrierStateUpdateRequest:
+      type: object
+      required:
+        - state
+      properties:
+        state:
+          type: boolean
+        ttl:
+          type: integer
+          nullable: true
+          description: Seconds until automatic close
 security:
   - ApiToken: []
 paths:
@@ -9354,6 +9406,101 @@ paths:
                     type: boolean
                   data:
                     type: object
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/barriers:
+    get:
+      summary: List barriers
+      operationId: listBarriers
+      responses:
+        '200':
+          description: List of barriers
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      barriers:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Barrier'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    post:
+      summary: Create barrier
+      operationId: createBarrier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BarrierCreateRequest'
+      responses:
+        '200':
+          description: Barrier created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      barrier:
+                        $ref: '#/components/schemas/Barrier'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/barriers/{barrierId}/state:
+    patch:
+      summary: Set barrier state
+      operationId: setBarrierState
+      parameters:
+        - in: path
+          name: barrierId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BarrierStateUpdateRequest'
+      responses:
+        '200':
+          description: Barrier state updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      barrier:
+                        $ref: '#/components/schemas/Barrier'
                   requestId:
                     type: string
                   traceId:

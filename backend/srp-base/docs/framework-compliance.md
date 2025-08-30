@@ -112,6 +112,7 @@ practice is supported by citations.
 | **minimap module** | Minimap blip endpoints follow layered design with authentication, idempotency and WebSocket broadcasts. |
 | **admin module** | Ban/unban and noclip endpoints follow layered design with authentication and realtime push. |
 | **action bar module** | Quick slot endpoints use repository pattern and realtime dispatch. |
+| **barriers module** | Barrier endpoints follow the established layered pattern with authentication, idempotency, WebSocket/webhook broadcasts and auto-reset scheduler. |
 
 ## Outstanding Items
 
