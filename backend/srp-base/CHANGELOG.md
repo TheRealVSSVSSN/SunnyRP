@@ -1894,3 +1894,17 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Delete `unban_events` rows and remove new endpoints.
+
+## 2025-08-30 (np-base)
+
+### Added
+* `GET /v1/base-events` accepts optional `eventType` query to filter logs.
+
+### Migrations
+* `090_add_base_event_logs_type_index.sql` – composite index on `(event_type, created_at)`.
+
+### Risks
+* Excessive unique event types could bloat the index.
+
+### Rollback
+* Drop index `idx_base_event_logs_type_created_at` and remove query filter.

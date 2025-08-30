@@ -10,7 +10,7 @@ There is no feature flag; the module is always enabled.
 
 | Method & Path | Description | Rate Limit | Auth | Idempotent | Request Body | Response |
 |---|---|---|---|---|---|---|
-| **GET `/v1/base-events?limit=n`** | List recent base events. | 60/min per IP | Required | Yes | None | `{ ok, data: { events: BaseEventLog[] }, requestId, traceId }` |
+| **GET `/v1/base-events?limit=n&eventType=type`** | List recent base events, optionally filtered by `eventType`. | 60/min per IP | Required | Yes | None | `{ ok, data: { events: BaseEventLog[] }, requestId, traceId }` |
 | **POST `/v1/base-events`** | Record an event. Requires `accountId`, `characterId`, `eventType`; optional `metadata`. Broadcasts `base-events.logged` over WebSocket. | 60/min per IP | Required | Yes | `BaseEventLogCreateRequest` | `{ ok, data: { event: BaseEventLog }, requestId, traceId }` |
 
 ### Schemas
@@ -37,6 +37,7 @@ There is no feature flag; the module is always enabled.
 
 * **Repository:** `src/repositories/baseEventsRepository.js`
 * **Migration:** `src/migrations/034_add_base_event_logs.sql`
+* **Index Migration:** `src/migrations/090_add_base_event_logs_type_index.sql` adds `(event_type, created_at)` index
 * **Routes:** `src/routes/baseEvents.routes.js`
 * **OpenAPI:** `openapi/api.yaml` includes schemas and `/v1/base-events` paths.
 * **Scheduler:** `src/tasks/baseEvents.js` purges events older than `BASE_EVENT_RETENTION_MS` (default 30 days).

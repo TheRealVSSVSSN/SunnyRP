@@ -8,6 +8,7 @@
 - Dynamic minimap blip service with scheduler and WS broadcasts.
 - Admin noclip toggle with audit log and realtime broadcast.
 - Admin unban endpoints with ban status query and audit log.
+- Base event filter and composite index for targeted analytics.
 
 | File | Action | Note |
 |---|---|---|
@@ -26,6 +27,15 @@
 | docs/research-log.md | M | Logged jobs research |
 | docs/todo-gaps.md | M | Added job progression TODO |
 | docs/run-docs.md | A | Consolidated doc summary for this run |
+| src/repositories/baseEventsRepository.js | M | Optional event type filter |
+| src/routes/baseEvents.routes.js | M | Added `eventType` query param |
+| src/migrations/090_add_base_event_logs_type_index.sql | A | Index on `(event_type, created_at)` |
+| docs/modules/baseevents.md | M | Documented filter and index |
+| docs/db-schema.md | M | Noted base_event_logs index |
+| docs/migrations.md | M | Logged 090_add_base_event_logs_type_index.sql |
+| docs/progress-ledger.md | M | Recorded np-base extension |
+| docs/index.md | M | Logged base event filter update |
+| docs/research-log.md | M | Noted np-base research attempt |
 | src/config/env.js | M | Added debug retention and cleanup interval |
 | src/repositories/debugRepository.js | M | Added logs/markers persistence helpers |
 | src/routes/debug.routes.js | M | Added /v1/debug/logs and /v1/debug/markers APIs |

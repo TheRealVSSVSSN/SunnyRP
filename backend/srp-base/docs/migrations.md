@@ -86,4 +86,5 @@
 | 086_add_noclip_events.sql | Table for noclip enable/disable logs |
 | 087_add_action_bar_slots.sql | Action bar slots per character |
 | 088_add_unban_events.sql | Table for unban audit logs |
-- `089_add_barriers.sql` – create barriers table for world barrier definitions.
+| 089_add_barriers.sql | Create barriers table for world barrier definitions |
+| 090_add_base_event_logs_type_index.sql | Index base_event_logs on event_type and created_at |

@@ -6658,6 +6658,10 @@ paths:
           schema:
             type: integer
             default: 50
+        - in: query
+          name: eventType
+          schema:
+            type: string
       responses:
         '200':
           description: List of events

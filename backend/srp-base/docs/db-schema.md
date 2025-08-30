@@ -11,6 +11,7 @@ Added `world_forecast` table for weather scheduling. K9 migration renamed to 057
 | reason | VARCHAR(255) | Ban reason |
 | until | DATETIME NULL | Expiration timestamp |
 | created_at | TIMESTAMP | Creation time |
+| INDEX idx_base_event_logs_type_created | (event_type, created_at) |
 | INDEX idx_bans_player | (player_id) |
 
 ## unban_events
