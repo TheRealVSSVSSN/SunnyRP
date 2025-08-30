@@ -22,3 +22,4 @@
 | Add db-schema entry for hacking_attempts table | backend | medium | time |
 | Record mhacking research sources in research-log.md | backend | low | reference access |
 | Add pagination for `/v1/minimap/blips` | backend | low | none |
+| Develop crime school curriculum and reward logic | backend | low | design |

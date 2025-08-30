@@ -79,6 +79,10 @@ const config = {
   broadcast: { retentionMs: parseInt(process.env.BROADCAST_RETENTION_MS || '86400000', 10) },
   recycling: { retentionMs: parseInt(process.env.RECYCLING_RETENTION_MS || '2592000000', 10) },
   contracts: { retentionMs: parseInt(process.env.CONTRACT_RETENTION_MS || '86400000', 10) },
+  crimeSchool: {
+    retentionDays: parseInt(process.env.CRIME_SCHOOL_RETENTION_DAYS || '30', 10),
+    purgeIntervalMs: parseInt(process.env.CRIME_SCHOOL_PURGE_INTERVAL_MS || '3600000', 10),
+  },
   camera: {
     retentionMs: parseInt(process.env.CAMERA_RETENTION_MS || '2592000000', 10),
     cleanupIntervalMs: parseInt(process.env.CAMERA_CLEANUP_INTERVAL_MS || '3600000', 10),

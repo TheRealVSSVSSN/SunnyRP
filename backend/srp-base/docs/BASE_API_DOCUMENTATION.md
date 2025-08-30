@@ -782,3 +782,12 @@ WebSocket namespace `broadcast` emits `broadcast.message`. Scheduler `broadcast-
 - `POST /v1/contracts/{id}/decline` – decline a contract (requires `X-Idempotency-Key`).
 
 WebSocket namespace `contracts` emits `contracts.created`, `contracts.accepted` and `contracts.declined`. Scheduler `contracts-purge` removes unresolved contracts after `CONTRACT_RETENTION_MS`.
+
+## Update – 2025-08-30 (crime school)
+
+### Endpoints
+
+- `GET /v1/crime-school/{characterId}`
+- `POST /v1/crime-school/{characterId}` – requires `X-Idempotency-Key`
+
+WebSocket namespace `crime-school` emits `progress.updated`. Scheduler `crime-school-expiry` removes records older than `CRIME_SCHOOL_RETENTION_DAYS`.

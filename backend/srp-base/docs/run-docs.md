@@ -98,6 +98,28 @@
 - `CHANGELOG.md`
 - `MANIFEST.md`
 
+## Update – 2025-08-30 (np-crimeschool)
+
+- Added crime school progress backend with realtime push and purge scheduler.
+
+### Updated Documentation
+- `docs/modules/crime-school.md`
+- `docs/index.md`
+- `docs/progress-ledger.md`
+- `docs/framework-compliance.md`
+- `docs/BASE_API_DOCUMENTATION.md`
+- `docs/events-and-rpcs.md`
+- `docs/db-schema.md`
+- `docs/migrations.md`
+- `docs/admin-ops.md`
+- `docs/security.md`
+- `docs/testing.md`
+- `docs/naming-map.md`
+- `docs/research-log.md`
+- `openapi/api.yaml`
+- `MANIFEST.md`
+- `CHANGELOG.md`
+
 ## Outstanding Items
 - Migrate existing apartment and garage consumers to new properties API
 - Link interior templates and garage capacity to properties
@@ -119,3 +141,4 @@
 - Add db-schema entry for hacking_attempts table
 - Record mhacking research sources in research-log.md
 - Add pagination for `/v1/minimap/blips`
+- Develop crime school curriculum and reward logic

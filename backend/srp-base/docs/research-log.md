@@ -492,3 +492,9 @@
 
 - Cloned `https://github.com/h04X-2K/NoPixelServer` with sparse checkout for `resources/np-contracts` to study contract send/accept flows.
 - Reviewed contract/payment patterns conceptually across EssentialMode, ESX, ND Core, FSN Framework, QB-Core, vRP and vORP to align naming and expiry practices.
+
+## Research Log – 2025-08-30 (np-crimeschool)
+
+- Cloned `https://github.com/h04X-2K/NoPixelServer` and searched for `np-crimeschool` resource; none found.
+- Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed skill training systems in EssentialMode, ESX, ND Core, FSN Framework, QB-Core, vRP and vORP for naming patterns.

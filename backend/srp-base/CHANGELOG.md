@@ -1994,3 +1994,23 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Drop `idx_contracts_created_at` index and remove contract event broadcasts and scheduler registration.
+
+## 2025-08-30 (crime school)
+
+### Added
+
+* Crime school progress API (`GET /v1/crime-school/{characterId}`, `POST /v1/crime-school/{characterId}`) with WebSocket/webhook `crime-school.progress.updated` events.
+* Scheduler `crime-school-expiry` purges records older than `CRIME_SCHOOL_RETENTION_DAYS`.
+
+### Migrations
+
+* `095_update_crime_school_character_fk.sql` – rename column to `character_id` and add foreign key/index.
+
+### Risks
+
+* Misconfigured retention may delete active progress.
+* Clients not subscribed to the `crime-school` namespace may miss updates.
+
+### Rollback
+
+* Revert migration, drop index and foreign key, and remove routes, scheduler, and realtime broadcasts.

@@ -1,35 +1,37 @@
 const express = require('express');
-const { sendOk, sendError } = require('../utils/respond');
-const {
-  getProgress,
-  updateProgress,
-} = require('../repositories/crimeSchoolRepository');
+const { sendOk } = require('../utils/respond');
+const crimeSchoolRepo = require('../repositories/crimeSchoolRepository');
+const websocket = require('../realtime/websocket');
+const hooks = require('../hooks/dispatcher');
 
 const router = express.Router();
 
-// GET /v1/crimeschool/:playerId - get progress for a player
-router.get('/v1/crimeschool/:playerId', async (req, res) => {
-  const { playerId } = req.params;
+// GET /v1/crime-school/:characterId - get progress for a character
+router.get('/v1/crime-school/:characterId', async (req, res, next) => {
   try {
-    const progress = await getProgress(playerId);
+    const { characterId } = req.params;
+    const progress = await crimeSchoolRepo.getProgress(parseInt(characterId, 10));
     sendOk(res, { progress }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
-    sendError(res, { code: 'CRIMESCHOOL_FETCH_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);
+    next(err);
   }
 });
 
-// POST /v1/crimeschool/:playerId - update progress for a player
-router.post('/v1/crimeschool/:playerId', async (req, res) => {
-  const { playerId } = req.params;
-  const { stage } = req.body;
-  if (!stage) {
-    return sendError(res, { code: 'INVALID_INPUT', message: 'stage is required' }, 400, res.locals.requestId, res.locals.traceId);
-  }
+// POST /v1/crime-school/:characterId - update progress for a character
+router.post('/v1/crime-school/:characterId', async (req, res, next) => {
   try {
-    const record = await updateProgress(playerId, stage);
+    const { characterId } = req.params;
+    const { stage } = req.body || {};
+    if (!stage) {
+      return res.status(400).json({ ok: false, error: { code: 'INVALID_INPUT', message: 'stage is required' }, requestId: res.locals.requestId, traceId: res.locals.traceId });
+    }
+    const record = await crimeSchoolRepo.updateProgress(parseInt(characterId, 10), stage);
+    const payload = { characterId: parseInt(characterId, 10), stage: record.stage };
+    websocket.broadcast('crime-school', 'progress.updated', payload);
+    hooks.dispatch('crime-school.progress.updated', payload);
     sendOk(res, { progress: record }, res.locals.requestId, res.locals.traceId);
   } catch (err) {
-    sendError(res, { code: 'CRIMESCHOOL_UPDATE_FAILED', message: err.message }, 500, res.locals.requestId, res.locals.traceId);
+    next(err);
   }
 });
 
