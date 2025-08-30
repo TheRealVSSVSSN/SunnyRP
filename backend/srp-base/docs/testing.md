@@ -511,3 +511,15 @@ curl -H 'X-API-Token: <token>' -H 'Content-Type: application/json' -H 'X-Idempot
 ```
 
 Connect a WebSocket client to `ws://localhost:3010/ws?token=<token>&ns=crime-school` to observe `crime-school.progress.updated` events.
+
+# Manually verify dances endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/dances/animations
+curl -H 'X-API-Token: <token>' -H 'Content-Type: application/json' -H 'X-Idempotency-Key: dn1' \
+  -d '{"name":"wave","dict":"anim@mp_player_intcelebrationfemale@wave","animation":"wave"}' \
+  http://localhost:3010/v1/dances/animations
+curl -H 'X-API-Token: <token>' -X DELETE http://localhost:3010/v1/dances/animations/1
+```
+
+Connect a WebSocket client to `ws://localhost:3010/ws?token=<token>&ns=dances` to observe `dances.animationAdded` and `dances.animationRemoved` events. Disabled animations older than retention emit `dances.animationExpired` when purged.

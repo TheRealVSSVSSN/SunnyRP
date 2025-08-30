@@ -28,6 +28,7 @@ const connectqueueTasks = require('./tasks/connectqueue');
 const coordinatesTasks = require('./tasks/coordinates');
 const cronTasks = require('./tasks/cron');
 const emotesTasks = require('./tasks/emotes');
+const dancesTasks = require('./tasks/dances');
 const emsTasks = require('./tasks/ems');
 const hospitalTasks = require('./tasks/hospital');
 const taxiTasks = require('./tasks/taxi');
@@ -199,6 +200,13 @@ scheduler.register(
   emotesTasks.JOB_NAME,
   () => emotesTasks.purgeOld(),
   emotesTasks.INTERVAL_MS,
+  { jitter: 60000 },
+);
+
+scheduler.register(
+  dancesTasks.JOB_NAME,
+  () => dancesTasks.purgeOld(),
+  dancesTasks.INTERVAL_MS,
   { jitter: 60000 },
 );
 

@@ -120,6 +120,7 @@
 | 99 | np-camera | Photo metadata updates with realtime push | Extend | Added PATCH endpoint and events |
 | 100 | np-contracts | Player payment contracts with realtime updates and purge scheduler | Extend | Added WS/webhook events and expiry cleanup |
 | 101 | np-crimeschool | Track criminal training stages per character with realtime updates and purge scheduler | Create | Added progress API and retention task |
+| 102 | np-dances | Dance animation definitions with realtime sync and retention purge | Create | Added animation APIs |
 
 ## 2025-08-28 — koilWeatherSync
 
@@ -168,3 +169,7 @@
 ## 2025-08-30 — np-crimeschool
 
 - CREATE: Crime school progress API with WebSocket/webhook updates and hourly purge scheduler.
+
+## 2025-08-30 — np-dances
+
+- CREATE: Dance animation API with WebSocket/webhook pushes and hourly purge scheduler.

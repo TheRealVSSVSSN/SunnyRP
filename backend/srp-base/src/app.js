@@ -113,6 +113,9 @@ const actionBarRoutes = require('./routes/actionBar.routes');
 // emotes domain route
 const emotesRoutes = require('./routes/emotes.routes');
 
+// dances domain route
+const dancesRoutes = require('./routes/dances.routes');
+
 // peds domain route
 const pedsRoutes = require('./routes/peds.routes');
 
@@ -304,6 +307,9 @@ app.use(recyclingRoutes);
 
 // mount hacking routes
 app.use(hackingRoutes);
+
+// mount dances routes
+app.use(dancesRoutes);
 
 // mount emotes routes
 app.use(emotesRoutes);

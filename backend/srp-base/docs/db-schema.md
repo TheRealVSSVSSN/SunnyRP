@@ -817,3 +817,17 @@ Indexes:
 | created_at | TIMESTAMP | Creation time |
 | updated_at | TIMESTAMP | Update time |
 | INDEX idx_crime_school_character | (character_id) |
+
+## dance_animations
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| name | VARCHAR(64) | Animation name |
+| dict | VARCHAR(128) | Animation dictionary |
+| animation | VARCHAR(128) | Animation clip |
+| disabled | TINYINT(1) | 1 if disabled |
+| created_at | TIMESTAMP | Creation time |
+| updated_at | TIMESTAMP | Update time |
+| UNIQUE KEY unique_dance (name, dict, animation) |
+| INDEX idx_dance_animations_disabled_updated_at (disabled, updated_at) |

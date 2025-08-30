@@ -2014,3 +2014,22 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Revert migration, drop index and foreign key, and remove routes, scheduler, and realtime broadcasts.
+
+## 2025-08-30 (np-dances)
+
+### Added
+
+* Dance animation definitions API (`GET/POST/DELETE /v1/dances/animations`) with WebSocket/webhook `dances.animationAdded`, `dances.animationRemoved` and `dances.animationExpired` events.
+* Scheduler `dances-purge` removes disabled animations after `DANCE_RETENTION_MS`.
+
+### Migrations
+
+* `096_add_dance_animations.sql` – table for dance animations.
+
+### Risks
+
+* Misconfigured retention may remove animations unexpectedly.
+
+### Rollback
+
+* Drop `dance_animations` table and remove routes, scheduler and realtime broadcasts.

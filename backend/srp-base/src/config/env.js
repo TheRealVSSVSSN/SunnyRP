@@ -97,6 +97,7 @@ const config = {
   furniture: { retentionMs: parseInt(process.env.FURNITURE_RETENTION_MS || '15552000000', 10) },
   invoiceRetentionMs: parseInt(process.env.INVOICE_RETENTION_MS || '2592000000', 10),
   emotes: { retentionMs: parseInt(process.env.EMOTE_RETENTION_MS || '15552000000', 10) },
+  dances: { retentionMs: parseInt(process.env.DANCE_RETENTION_MS || '15552000000', 10) },
   ems: {
     broadcastIntervalMs: parseInt(process.env.EMS_BROADCAST_INTERVAL_MS || '60000', 10),
     maxShiftDurationMs: parseInt(
