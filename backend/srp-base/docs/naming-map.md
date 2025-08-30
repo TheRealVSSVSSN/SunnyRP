@@ -22,6 +22,7 @@ Upstream name → SRP name mapping for this run.
 | boatshop | boatshop |
 | bob74_ipl | ipl |
 | np-camera | camera |
+| camera:Activate2 | camera.photo.created |
 | carandplayerhud | hud |
 | carwash:checkmoney | POST /v1/carwash |
 | carwash:success | vehicles.dirt.update |

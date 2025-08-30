@@ -515,6 +515,7 @@ All routes require `X-API-Token` authentication. Idempotency keys are supported 
     - `GET /v1/camera/photos/{characterId}` – List photos for a character.
     - `POST /v1/camera/photos` – Save a photo with `characterId`, `imageUrl` and optional `description`; broadcasts `camera.photo.created` over WebSocket and webhooks.
     - `DELETE /v1/camera/photos/{id}` – Remove a photo record; broadcasts `camera.photo.deleted`.
+    - `PATCH /v1/camera/photos/{id}` – Update a photo description; broadcasts `camera.photo.updated`.
     - Scheduler purges photos older than `CAMERA_RETENTION_MS` at `CAMERA_CLEANUP_INTERVAL_MS`.
   - **srp-hud** – Stores per-character HUD settings.
 - `GET /v1/characters/{characterId}/hud` – Retrieve HUD preferences.

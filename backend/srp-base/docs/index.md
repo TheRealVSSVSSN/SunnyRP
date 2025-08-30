@@ -144,3 +144,9 @@ Broadcast messages API with realtime push and hourly retention purge.
 * `POST /v1/broadcast/attempt` assigns broadcaster job.
 * `GET /v1/broadcast/messages` lists recent messages.
 * `POST /v1/broadcast/messages` creates a message and emits `broadcast.message` via WebSocket and webhooks.
+
+## Update – 2025-08-30 (camera metadata)
+
+Photo descriptions can now be updated with realtime notifications.
+
+* `PATCH /v1/camera/photos/{id}` updates description and emits `camera.photo.updated` via WebSocket and webhooks.

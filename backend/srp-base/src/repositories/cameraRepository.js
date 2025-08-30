@@ -65,9 +65,30 @@ async function deletePhotosOlderThan(maxAgeMs) {
   return res.affectedRows || 0;
 }
 
+/**
+ * Update photo metadata such as description.
+ * @param {number} id
+ * @param {Object} params
+ * @param {string} params.description
+ * @returns {Promise<Object|null>} Updated photo or null if not found
+ */
+async function updatePhoto(id, { description }) {
+  const [res] = await db.query(
+    'UPDATE camera_photos SET description = ?, updated_at = NOW() WHERE id = ?',
+    [description, id],
+  );
+  if (!res.affectedRows) return null;
+  const [rows] = await db.query(
+    'SELECT id, character_id AS characterId, image_url AS imageUrl, description, created_at AS createdAt, updated_at AS updatedAt FROM camera_photos WHERE id = ?',
+    [id],
+  );
+  return rows[0] || null;
+}
+
 module.exports = {
   listPhotosByCharacter,
   createPhoto,
   deletePhoto,
   deletePhotosOlderThan,
+  updatePhoto,
 };

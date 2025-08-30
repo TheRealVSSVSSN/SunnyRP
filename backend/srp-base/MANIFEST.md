@@ -12,6 +12,7 @@
 - Mechanic work orders backend with realtime push and scheduler.
 
 - Broadcast messages API with realtime push and purge scheduler.
+- Allow photo description updates with realtime push.
 
 | File | Action | Note |
 |---|---|---|
@@ -232,3 +233,16 @@
 | docs/run-docs.md | M | Summarize mechanic run |
 | CHANGELOG.md | M | Log mechanic module |
 | MANIFEST.md | M | Update manifest |
+| src/repositories/cameraRepository.js | M | Update photo metadata |
+| src/routes/camera.routes.js | M | Add PATCH endpoint |
+| openapi/api.yaml | M | Document photo update |
+| docs/modules/camera.md | M | Document photo update |
+| docs/index.md | M | Log camera metadata update |
+| docs/progress-ledger.md | M | Record camera extension |
+| docs/BASE_API_DOCUMENTATION.md | M | Add camera PATCH endpoint |
+| docs/events-and-rpcs.md | M | Map photo.updated event |
+| docs/naming-map.md | M | Map camera:Activate2 |
+| docs/research-log.md | M | Log np-camera research |
+| docs/run-docs.md | M | Summarize camera run |
+| MANIFEST.md | M | Update manifest |
+| CHANGELOG.md | M | Record camera metadata update |
