@@ -477,3 +477,8 @@
 
 - Attempted to clone `https://github.com/h04X-2K/NoPixelServer` resource `np-broadcaster` but clone aborted due to repository size. Reference resources unavailable; proceeding with internal consistency only.
 - Reviewed chat and announcement flows in EssentialMode, ESX, ND Core, FSN, QB-Core, vRP and vORP for naming alignment.
+
+## Research Log – 2025-08-30 (np-camera)
+
+- Cloned `https://github.com/h04X-2K/NoPixelServer` with sparse checkout for `resources/np-camera` to examine camera activation flows.
+- Reviewed photo/gallery update patterns across EssentialMode, ESX, ND Core, FSN Framework, QB-Core, vRP and vORP for naming consistency.

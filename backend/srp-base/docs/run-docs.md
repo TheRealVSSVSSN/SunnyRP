@@ -42,3 +42,17 @@
 
 ## Outstanding Items
 - None
+
+## Update – 2025-08-30 (np-camera)
+
+- Added photo description update endpoint with realtime WebSocket/webhook events.
+
+### Updated Documentation
+- `docs/modules/camera.md`
+- `docs/index.md`
+- `docs/progress-ledger.md`
+- `docs/BASE_API_DOCUMENTATION.md`
+- `docs/events-and-rpcs.md`
+- `docs/naming-map.md`
+- `docs/research-log.md`
+- `openapi/api.yaml`

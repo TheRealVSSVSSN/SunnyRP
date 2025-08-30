@@ -1416,6 +1416,13 @@ components:
         description:
           type: string
           nullable: true
+    CameraPhotoUpdateRequest:
+      type: object
+      required:
+        - description
+      properties:
+        description:
+          type: string
     HudPreferences:
       type: object
       properties:
@@ -6946,6 +6953,46 @@ paths:
                     type: string
         '400':
           $ref: '#/components/responses/BadRequest'
+    patch:
+      summary: Update a photo
+      operationId: updateCameraPhoto
+      x-websocket-event: camera.photo.updated
+      x-webhook-event: camera.photo.updated
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CameraPhotoUpdateRequest'
+      responses:
+        '200':
+          description: Photo updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      photo:
+                        $ref: '#/components/schemas/CameraPhoto'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
   /v1/characters/{characterId}/hud:
     get:
       summary: Get HUD preferences

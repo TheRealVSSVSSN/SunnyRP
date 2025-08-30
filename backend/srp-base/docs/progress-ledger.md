@@ -117,6 +117,7 @@
 | 96 | np-barriers → barriers | Road barrier definitions and state | Create | Added barrier API with WS/webhook and auto-reset |
 | 97 | np-base → base-events | Base event filtering and indexing | Extend | Added `eventType` filter and composite index |
 | 98 | np-bennys → mechanic | Vehicle upgrade work orders with realtime push | Create | Added mechanic orders API and scheduler |
+| 99 | np-camera | Photo metadata updates with realtime push | Extend | Added PATCH endpoint and events |
 
 ## 2025-08-28 — koilWeatherSync
 
@@ -149,3 +150,7 @@
 ## 2025-08-30 — np-broadcaster
 
 - EXTEND: Broadcast messages API with WebSocket/webhook push and hourly purge scheduler.
+
+## 2025-08-30 — np-camera
+
+- EXTEND: Photo description update endpoint with WebSocket/webhook pushes.

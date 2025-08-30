@@ -1946,3 +1946,17 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Drop `broadcast_messages` table and remove broadcast routes, config and scheduler registration.
+
+## 2025-08-30 (camera)
+
+### Added
+
+* Photo metadata update endpoint (`PATCH /v1/camera/photos/{id}`) with WebSocket/webhook push `camera.photo.updated`.
+
+### Risks
+
+* Clients not handling `camera.photo.updated` may show stale descriptions.
+
+### Rollback
+
+* Revert `PATCH /v1/camera/photos/{id}` route and remove associated repository function and documentation.

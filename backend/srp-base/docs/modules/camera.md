@@ -15,6 +15,7 @@ There is no feature flag for camera; the module is always enabled.
 | **GET `/v1/camera/photos/{characterId}`** | List photos for a character. | 60/min per IP | Required | Yes | None | `{ ok, data: { photos: CameraPhoto[] }, requestId, traceId }` |
 | **POST `/v1/camera/photos`** | Create a new photo. Requires `characterId` and `imageUrl`. | 30/min per IP | Required | Yes | `CameraPhotoCreateRequest` | `{ ok, data: { photo: CameraPhoto }, requestId, traceId }` |
 | **DELETE `/v1/camera/photos/{id}`** | Delete a photo by ID. | 30/min per IP | Required | Yes | None | `{ ok, data: {}, requestId, traceId }` |
+| **PATCH `/v1/camera/photos/{id}`** | Update photo description. | 30/min per IP | Required | Yes | `CameraPhotoUpdateRequest` | `{ ok, data: { photo: CameraPhoto }, requestId, traceId }` |
 
 ### Real-time events
 
@@ -22,8 +23,9 @@ There is no feature flag for camera; the module is always enabled.
 |---|---|---|
 | `camera` | `photo.created` | `{ photo }` |
 | `camera` | `photo.deleted` | `{ id }` |
+| `camera` | `photo.updated` | `{ photo }` |
 
-Both events are also dispatched through the webhook dispatcher using event types `camera.photo.created` and `camera.photo.deleted`.
+All events are also dispatched through the webhook dispatcher using event types `camera.photo.created`, `camera.photo.deleted` and `camera.photo.updated`.
 
 ### Schemas
 

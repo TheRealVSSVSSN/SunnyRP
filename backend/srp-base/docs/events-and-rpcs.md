@@ -28,7 +28,7 @@
 | yuzler | No server events; clothing assets | N/A |
 | baseevents | Emits player join, drop and kill events | `POST /v1/base-events` logs events and broadcasts `base-events.logged`; `GET /v1/base-events` lists history |
 | boatshop | Resource sends purchase requests for boats | `GET /v1/boatshop`, `POST /v1/boatshop/purchase` → broadcasts `boatshop.catalog` (scheduled) and `boatshop.purchase` |
-| camera | Resource captures photos and uploads metadata | `GET /v1/camera/photos/{characterId}`, `POST /v1/camera/photos`, `DELETE /v1/camera/photos/{id}` → pushes `camera.photo.created`/`camera.photo.deleted` |
+| camera | Resource captures photos and uploads metadata | `GET /v1/camera/photos/{characterId}`, `POST /v1/camera/photos`, `DELETE /v1/camera/photos/{id}`, `PATCH /v1/camera/photos/{id}` → pushes `camera.photo.created`/`camera.photo.deleted`/`camera.photo.updated` |
 | carandplayerhud | Resource broadcasts HUD updates and vehicle state changes | `GET /v1/characters/{characterId}/hud`, `PUT /v1/characters/{characterId}/hud`, `GET /v1/characters/{characterId}/vehicle-state`, `PUT /v1/characters/{characterId}/vehicle-state` → WebSocket `hud.vehicleState` |
 | np-actionbar | Client manages quick action slots and holster events | `GET/PUT /v1/characters/{characterId}/action-bar` → WebSocket `hud.actionBar.updated` |
 | carwash | `carwash:checkmoney`, `carwash:success`, `notenoughmoney` | `POST /v1/carwash`, `GET /v1/carwash/history/{characterId}`, `GET/PATCH /v1/vehicles/{plate}/dirt`; dirt changes push `vehicles.dirt.update` |
