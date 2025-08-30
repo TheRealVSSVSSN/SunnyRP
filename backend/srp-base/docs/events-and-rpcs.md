@@ -52,7 +52,7 @@
 | heli | Resource logs helicopter flight start and end events | `POST /v1/heli/flights`, `POST /v1/heli/flights/{id}/end`, `GET /v1/characters/{characterId}/heli/flights` → `heli.flightStarted`, `heli.flightEnded`, `heli.flightExpired` |
 | jailbreak | Resource triggers jailbreak start/completion and auto-expiry events with character and prison info | `POST /v1/jailbreaks`, `POST /v1/jailbreaks/{id}/complete`, `GET /v1/jailbreaks/active` → WS `jailbreaks.attempt`, `jailbreaks.completed`, `jailbreaks.expired`; webhooks mirror `jailbreak.*` |
 | jobsystem | Resource manages job definitions and assignments | `GET /v1/jobs`, `POST /v1/jobs`, `GET /v1/jobs/{id}`, `POST /v1/jobs/assign`, `POST /v1/jobs/duty`, `GET /v1/jobs/{characterId}/assignments`; WS `jobs.assigned`, `jobs.duty`, `jobs.roster` |
-| broadcaster | Event to attempt joining the broadcaster job | `POST /v1/broadcast/attempt` |
+| broadcast | Assign broadcaster job and push messages | `POST /v1/broadcast/attempt`, `POST /v1/broadcast/messages` → WS `broadcast.message` |
 | srp-debug | Developer requests for runtime diagnostics | `GET /v1/debug/status` returns server metrics |
 | srp-weathersync | Resource broadcasts weather and time updates; proxies api.weather.gov | `GET/POST /v1/weathersync/forecast`, `GET /v1/weathersync/weather.gov`, legacy `/v1/world/forecast` (deprecated) |
 | climate-overrides | Resource applies custom timecycle XMLs; emits `world.timecycle.set`/`world.timecycle.clear` | `/v1/world/timecycle` to set or clear presets; scheduler auto-clears expired |

@@ -665,6 +665,18 @@ components:
         hiredAt:
           type: string
           format: date-time
+    BroadcastMessage:
+      type: object
+      properties:
+        id:
+          type: integer
+        characterId:
+          type: integer
+        message:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
     Tweet:
       type: object
       properties:
@@ -4109,6 +4121,76 @@ paths:
           description: Broadcaster limit reached
         '429':
           description: Rate limit exceeded
+  /v1/broadcast/messages:
+    get:
+      summary: List recent broadcast messages
+      operationId: listBroadcastMessages
+      security:
+        - ApiToken: []
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+      responses:
+        '200':
+          description: List of messages
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      messages:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/BroadcastMessage'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+    post:
+      summary: Create broadcast message
+      operationId: createBroadcastMessage
+      security:
+        - ApiToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - characterId
+                - message
+              properties:
+                characterId:
+                  type: integer
+                message:
+                  type: string
+      responses:
+        '200':
+          description: Broadcast message created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/BroadcastMessage'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+      description: Stores a message and broadcasts `broadcast.message` via WebSocket and webhooks.
   /v1/jobs:
     get:
       summary: List jobs

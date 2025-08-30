@@ -136,3 +136,11 @@ Mechanic orders API with realtime completion events.
 * `POST /v1/mechanic/orders` creates work orders.
 * `GET /v1/mechanic/orders/{id}` retrieves status.
 * Scheduler `mechanic-process` marks orders complete and broadcasts `mechanic.orders.completed`.
+
+## Update – 2025-08-30 (broadcast)
+
+Broadcast messages API with realtime push and hourly retention purge.
+
+* `POST /v1/broadcast/attempt` assigns broadcaster job.
+* `GET /v1/broadcast/messages` lists recent messages.
+* `POST /v1/broadcast/messages` creates a message and emits `broadcast.message` via WebSocket and webhooks.

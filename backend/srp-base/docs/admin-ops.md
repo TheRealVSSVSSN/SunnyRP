@@ -73,3 +73,4 @@
 - Ensure the `noclip_events` table exists for auditing admin/dev noclip usage.
 - Ensure the `bans` and `unban_events` tables exist; WebSocket namespace `admin` emits `ban.added` and `ban.removed` for moderation actions.
 - Ensure the `mechanic_orders` table exists for vehicle work orders; scheduler `mechanic-process` completes pending orders.
+- Ensure the `broadcast_messages` table exists; set `BROADCAST_RETENTION_MS` to control message retention. Scheduler `broadcast-purge` prunes old entries.

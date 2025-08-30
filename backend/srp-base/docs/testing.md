@@ -479,3 +479,13 @@ curl -H 'X-API-Token: <token>' http://localhost:3010/v1/characters/1/action-bar
 curl -H 'X-API-Token: <token>' -H 'Content-Type: application/json' -H 'X-Idempotency-Key: ab1' \
   -d '{"slots":[{"slot":1,"item":"WEAPON_PISTOL"}]}' http://localhost:3010/v1/characters/1/action-bar
 ```
+
+Manually verify broadcast message endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/broadcast/messages
+curl -H 'X-API-Token: <token>' -H 'Content-Type: application/json' -H 'X-Idempotency-Key: bc1' \
+  -d '{"characterId":1,"message":"Hello"}' http://localhost:3010/v1/broadcast/messages
+```
+
+Connect a WebSocket client to `ws://localhost:3010/ws?token=<token>&ns=broadcast` to receive `broadcast.message` events.

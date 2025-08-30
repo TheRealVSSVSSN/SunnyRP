@@ -58,8 +58,8 @@ const driftSchoolRoutes = require('./routes/driftschool.routes');
 // boatshop domain route
 const boatshopRoutes = require('./routes/boatshop.routes');
 
-// broadcaster domain route
-const broadcasterRoutes = require('./routes/broadcaster.routes');
+// broadcast domain routes
+const broadcastRoutes = require('./routes/broadcast.routes');
 
 // new domain routes for gangs, garages, apartments, police
 const gangsRoutes = require('./routes/gangs.routes');
@@ -236,8 +236,8 @@ app.use(drivingTestsRoutes);
 app.use(driftSchoolRoutes);
 app.use(boatshopRoutes);
 
-// mount broadcaster route
-app.use(broadcasterRoutes);
+// mount broadcast routes
+app.use('/v1/broadcast', broadcastRoutes);
 
 // mount gang, garage, apartment and police routes
 app.use(gangsRoutes);

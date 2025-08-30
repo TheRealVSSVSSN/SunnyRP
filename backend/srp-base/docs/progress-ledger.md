@@ -145,3 +145,7 @@
 ## 2025-08-30 — np-base
 
 - EXTEND: Base event listing supports `eventType` filter and adds `(event_type, created_at)` index.
+
+## 2025-08-30 — np-broadcaster
+
+- EXTEND: Broadcast messages API with WebSocket/webhook push and hourly purge scheduler.

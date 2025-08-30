@@ -76,6 +76,7 @@ const config = {
   baseEvents: { retentionMs: parseInt(process.env.BASE_EVENT_RETENTION_MS || '2592000000', 10) },
   assets: { retentionMs: parseInt(process.env.ASSET_RETENTION_MS || '2592000000', 10) },
   chat: { retentionMs: parseInt(process.env.CHAT_RETENTION_MS || '604800000', 10) },
+  broadcast: { retentionMs: parseInt(process.env.BROADCAST_RETENTION_MS || '86400000', 10) },
   recycling: { retentionMs: parseInt(process.env.RECYCLING_RETENTION_MS || '2592000000', 10) },
   camera: {
     retentionMs: parseInt(process.env.CAMERA_RETENTION_MS || '2592000000', 10),

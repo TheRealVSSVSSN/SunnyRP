@@ -43,7 +43,7 @@
 - Police routes inherit the same authentication and idempotency requirements.
 - WebSocket connections require a `token` query parameter matching the `X-API-Token` and drop clients missing heartbeats.
 - Webhook dispatcher signs payloads with HMAC and retries failed deliveries.
-- Broadcaster routes inherit the same authentication and idempotency requirements.
+- Broadcast routes inherit the same authentication and idempotency requirements.
 - Debug routes inherit the same authentication and rate limiting requirements.
 - World routes (state, forecast and timecycle) inherit the same authentication and idempotency requirements.
 - Minimap routes inherit the same authentication and idempotency requirements.

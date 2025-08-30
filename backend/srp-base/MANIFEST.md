@@ -11,8 +11,34 @@
 - Base event filter and composite index for targeted analytics.
 - Mechanic work orders backend with realtime push and scheduler.
 
+- Broadcast messages API with realtime push and purge scheduler.
+
 | File | Action | Note |
 |---|---|---|
+| src/routes/broadcast.routes.js | R | Rename broadcaster to broadcast with message endpoints |
+| src/repositories/broadcastRepository.js | A | Store and list broadcast messages |
+| src/tasks/broadcast.js | A | Purge old broadcast messages |
+| src/server.js | M | Register broadcast purge task |
+| src/app.js | M | Mount broadcast routes |
+| src/config/env.js | M | Add broadcast retention config |
+| src/migrations/092_add_broadcast_messages.sql | A | Broadcast messages table |
+| openapi/api.yaml | M | Document broadcast endpoints |
+| docs/modules/broadcast.md | R | Document broadcast module |
+| docs/index.md | M | Log broadcast update |
+| docs/progress-ledger.md | M | Record np-broadcaster entry |
+| docs/framework-compliance.md | M | Rename broadcast module compliance |
+| docs/BASE_API_DOCUMENTATION.md | M | Add broadcast API mapping |
+| docs/events-and-rpcs.md | M | Map broadcast events |
+| docs/admin-ops.md | M | Broadcast operations note |
+| docs/security.md | M | Update broadcast auth note |
+| docs/testing.md | M | Broadcast endpoint tests |
+| docs/research-log.md | M | Log broadcast research |
+| docs/naming-map.md | M | Map np-broadcaster |
+| docs/db-schema.md | M | Document broadcast_messages table |
+| docs/migrations.md | M | List migration 092 |
+| docs/run-docs.md | M | Summarize broadcast run |
+| MANIFEST.md | M | Update manifest |
+| CHANGELOG.md | M | Log broadcast feature |
 | src/repositories/jobsRepository.js | M | Added on-duty roster query |
 | src/routes/jobs.routes.js | M | Broadcast/dispatch `jobs.assigned` and `jobs.duty` |
 | src/tasks/jobs.js | A | Scheduler broadcasting `jobs.roster` |
