@@ -513,3 +513,7 @@
 - Inspected https://github.com/h04X-2K/NoPixelServer resources/np-density for rogue ped event naming.
 - Cross-referenced ped cleanup patterns in ESX and QB-Core for parity.
 
+
+## Research Log – 2025-08-30 (np-dirtymoney)
+- Cloned `https://github.com/h04X-2K/NoPixelServer` and inspected `resources/np-dirtymoney` for marked bill drop flows.
+- Reviewed dirty money handling in ESX (`black_money`) and QB-Core (`markedbills`) for naming alignment.

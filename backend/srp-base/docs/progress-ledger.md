@@ -181,3 +181,7 @@
 
 - EXTEND: World state updates now broadcast via WebSocket/webhook; added rogue ped cleanup route and scheduler.
 
+
+## 2025-08-30 — np-dirtymoney
+
+- CREATE: marked bills API with WebSocket/webhook events.

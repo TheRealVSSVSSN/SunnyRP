@@ -32,6 +32,7 @@ const lootRoutes = require('./routes/loot.routes');
 // additional domain routes merged from other microservices
 const inventoryRoutes = require('./routes/inventory.routes');
 const economyRoutes = require('./routes/economy.routes');
+const markedBillsRoutes = require("./routes/markedBills.routes");
 const vehiclesRoutes = require('./routes/vehicles.routes');
 const carwashRoutes = require('./routes/carwash.routes');
 const worldRoutes = require('./routes/world.routes');
@@ -219,6 +220,7 @@ app.use(keysRoutes);
 app.use(lootRoutes);
 
 // mount additional domain routes
+app.use(markedBillsRoutes);
 app.use(inventoryRoutes);
 app.use(economyRoutes);
 app.use(vehiclesRoutes);

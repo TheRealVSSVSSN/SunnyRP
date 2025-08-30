@@ -248,6 +248,9 @@ In addition to the core identity, permissions, characters and admin APIs describ
 | `GET` | `/v1/characters/{characterId}/transactions` | List recent transactions for the character. |
 | `POST` | `/v1/transactions` | Transfer funds between characters. |
 | `GET` | `/v1/transactions/{id}` | Retrieve a transaction by ID. |
+| `GET` | `/v1/characters/{characterId}/marked-bills` | Get character's marked bills balance. |
+| `POST` | `/v1/characters/{characterId}/marked-bills:alter` | Add or subtract marked bills. |
+| `POST` | `/v1/characters/{characterId}/marked-bills:pickup` | Convert marked bills to clean money. |
 
 #### Vehicles (Ownership & Registration)
 

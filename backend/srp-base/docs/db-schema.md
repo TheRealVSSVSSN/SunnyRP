@@ -842,3 +842,10 @@ Indexes:
 | updated_at | TIMESTAMP | Update time |
 | UNIQUE KEY unique_dance (name, dict, animation) |
 | INDEX idx_dance_animations_disabled_updated_at (disabled, updated_at) |
+## character_marked_bills
+
+| Column | Type | Notes |
+|---|---|---|
+| character_id | BIGINT | Primary key, references `characters.id` |
+| amount | INT | Marked bills balance |
+| updated_at | TIMESTAMP | Auto-updated timestamp |

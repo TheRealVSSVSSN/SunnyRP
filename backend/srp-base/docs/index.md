@@ -195,3 +195,10 @@ World state pushes and rogue ped cleanup.
 * `POST /v1/world/state` now broadcasts `world.state.updated` and webhooks.
 * `POST /v1/world/peds/rogue` emits `world.peds.rogue` to remove entities.
 * Scheduler `world-state-sync` broadcasts latest world state.
+## Update – 2025-08-30 (marked bills)
+
+Dirty money handling moved server-side with realtime push.
+
+* `GET /v1/characters/{characterId}/marked-bills`
+* `POST /v1/characters/{characterId}/marked-bills:alter`
+* `POST /v1/characters/{characterId}/marked-bills:pickup`

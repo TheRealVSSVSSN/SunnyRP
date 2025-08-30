@@ -95,3 +95,4 @@
 | 095_update_crime_school_character_fk.sql | Rename player_id to character_id with FK and index |
 | 097_add_dealer_offers.sql | Dealer offers table with expiry index |
 | 096_add_dance_animations.sql | Dance animation definitions table |
+| 098_add_marked_bills.sql | Marked bills balance per character |

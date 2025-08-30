@@ -2899,6 +2899,89 @@ paths:
       responses:
         '200':
           description: Invoice cancelled
+  /v1/characters/{characterId}/marked-bills:
+    get:
+      summary: Get marked bills balance for a character
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Marked bills balance
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  characterId:
+                    type: string
+                  amount:
+                    type: integer
+  /v1/characters/{characterId}/marked-bills:alter:
+    post:
+      summary: Adjust marked bills for a character
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - amount
+              properties:
+                amount:
+                  type: integer
+                reason:
+                  type: string
+      responses:
+        '200':
+          description: New marked bills balance
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  amount:
+                    type: integer
+  /v1/characters/{characterId}/marked-bills:pickup:
+    post:
+      summary: Convert marked bills to clean money
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - amount
+              properties:
+                amount:
+                  type: integer
+      responses:
+        '200':
+          description: New account balance
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  balance:
+                    type: integer
   /v1/ready:
     get:
       summary: Readiness probe
