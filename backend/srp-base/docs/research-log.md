@@ -503,3 +503,8 @@
 
 - Cloned `https://github.com/h04X-2K/NoPixelServer` and inspected `resources/np-dealer` for drug dealing animations and prop attachments.
 - Reviewed contraband/dealer systems in ESX and QB-Core conceptually for naming patterns.
+
+## Research Log – 2025-08-30 (np-dances)
+
+- Cloned `https://github.com/h04X-2K/NoPixelServer` and inspected `resources/np-dances` for animation lists.
+- Reviewed dance/emote handling in ESX, QB-Core and ND Core for naming alignment.

@@ -71,14 +71,6 @@ components:
         updatedAt:
           type: string
           format: date-time
-              requestId:
-                type: string
-              traceId:
-                type: string
-  # Schema definitions for reusable data objects.  These types can be
-  # referenced elsewhere in the spec via $ref.  Adding contract here
-  # enables clients to understand the structure of contract objects.
-  schemas:
     RecyclingDelivery:
       type: object
       properties:
@@ -1809,6 +1801,38 @@ components:
         emote:
           type: string
           description: Emote command name
+    DanceAnimation:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        dict:
+          type: string
+        animation:
+          type: string
+        disabled:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    DanceAnimationCreateRequest:
+      type: object
+      required:
+        - name
+        - dict
+        - animation
+      properties:
+        name:
+          type: string
+        dict:
+          type: string
+        animation:
+          type: string
     EmsRecord:
       type: object
       properties:
@@ -2630,12 +2654,6 @@ paths:
                     properties:
                       deleted:
                         type: boolean
-                  requestId:
-                    type: string
-                  traceId:
-                    type: string
-        '400':
-          $ref: '#/components/responses/BadRequest'
                   requestId:
                     type: string
                   traceId:
@@ -6023,8 +6041,6 @@ paths:
                     type: string
         '400':
           $ref: '#/components/responses/BadRequest'
-        '400':
-          $ref: '#/components/responses/BadRequest'
   /v1/interact-sound/plays:
     post:
       summary: Record a sound play
@@ -7677,6 +7693,92 @@ paths:
       responses:
         '200':
           description: Emote removed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/dances/animations:
+    get:
+      summary: List dance animations
+      responses:
+        '200':
+          description: List of dance animations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      animations:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/DanceAnimation'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    post:
+      summary: Create dance animation
+      description: Stores a dance animation and broadcasts `dances.animationAdded` via WebSocket and webhooks.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DanceAnimationCreateRequest'
+      responses:
+        '200':
+          description: Dance animation stored
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      animation:
+                        $ref: '#/components/schemas/DanceAnimation'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/dances/animations/{id}:
+    delete:
+      summary: Disable a dance animation
+      description: Marks an animation as disabled and broadcasts `dances.animationRemoved` via WebSocket and webhooks. Disabled animations older than `DANCE_RETENTION_MS` are purged hourly with `dances.animationExpired` events.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Animation disabled
           content:
             application/json:
               schema:

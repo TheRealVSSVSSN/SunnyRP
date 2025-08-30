@@ -180,3 +180,10 @@ Dealer offers tracked with realtime push and expiry cleanup.
 * `GET /v1/dealers/offers` lists active offers.
 * `POST /v1/dealers/offers` emits `dealers.offer.created` and webhooks.
 * Scheduler `dealer-offer-purge` broadcasts `dealers.offer.expired`.
+## Update – 2025-08-30 (dances)
+
+Dynamic dance animation definitions with realtime sync.
+
+* `GET /v1/dances/animations` lists animations.
+* `POST /v1/dances/animations` and `DELETE /v1/dances/animations/{id}` emit `dances.*` events over WebSocket and webhooks.
+* Scheduler `dances-purge` removes disabled animations older than `DANCE_RETENTION_MS`.

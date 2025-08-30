@@ -45,6 +45,8 @@
 - Ensure the `interiors` table exists for apartment interior layouts.
 - Ensure the `character_emotes` table exists for favorite emotes.
   - Favorites older than `EMOTE_RETENTION_MS` (default 180 days) are purged hourly by `emotes-purge` scheduler.
+- Ensure the `dance_animations` table exists for dance animation definitions.
+  - Disabled animations older than `DANCE_RETENTION_MS` are purged hourly by `dances-purge` scheduler.
 - Ensure the `ems_records` and `ems_shift_logs` tables exist for EMS operations.
 - Ensure the `taxi_rides` table exists for taxi dispatch.
 - Ensure the `furniture` table exists for stored furniture placements.

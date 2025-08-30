@@ -69,3 +69,4 @@ Upstream name → SRP name mapping for this run.
 | np-contracts | contracts |
 | np-crimeschool | crime-school |
 | np-dealer | dealers |
+| np-dances | dances |

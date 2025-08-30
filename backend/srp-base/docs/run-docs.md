@@ -139,6 +139,28 @@
 - `MANIFEST.md`
 - `CHANGELOG.md`
 
+## Update – 2025-08-30 (np-dances)
+
+- Added dance animation definitions backend with realtime push and purge scheduler.
+
+### Updated Documentation
+- `docs/modules/dances.md`
+- `docs/index.md`
+- `docs/progress-ledger.md`
+- `docs/framework-compliance.md`
+- `docs/BASE_API_DOCUMENTATION.md`
+- `docs/events-and-rpcs.md`
+- `docs/db-schema.md`
+- `docs/migrations.md`
+- `docs/admin-ops.md`
+- `docs/security.md`
+- `docs/testing.md`
+- `docs/research-log.md`
+- `docs/naming-map.md`
+- `openapi/api.yaml`
+- `MANIFEST.md`
+- `CHANGELOG.md`
+
 ## Outstanding Items
 - Migrate existing apartment and garage consumers to new properties API
 - Link interior templates and garage capacity to properties

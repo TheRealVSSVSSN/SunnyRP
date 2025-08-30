@@ -800,3 +800,13 @@ WebSocket namespace `crime-school` emits `progress.updated`. Scheduler `crime-sc
 - `POST /v1/dealers/offers` – requires `X-Idempotency-Key`
 
 WebSocket namespace `dealers` emits `offer.created` and `offer.expired`. Scheduler `dealer-offer-purge` removes expired offers.
+
+## Update – 2025-08-30 (dances)
+
+### Endpoints
+
+- `GET /v1/dances/animations`
+- `POST /v1/dances/animations` – requires `X-Idempotency-Key`
+- `DELETE /v1/dances/animations/{id}` – requires `X-Idempotency-Key`
+
+WebSocket namespace `dances` emits `animationAdded`, `animationRemoved`, and `animationExpired`. Scheduler `dances-purge` prunes disabled animations older than `DANCE_RETENTION_MS`.
