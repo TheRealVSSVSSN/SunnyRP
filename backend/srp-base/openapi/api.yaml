@@ -3152,6 +3152,92 @@ paths:
                     type: string
         '400':
           $ref: '#/components/responses/BadRequest'
+
+  /v1/admin/unban:
+    post:
+      summary: Unban a player
+      operationId: unbanPlayer
+      security:
+        - ApiToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - playerId
+                - actorId
+                - reason
+              properties:
+                playerId:
+                  type: string
+                actorId:
+                  type: string
+                reason:
+                  type: string
+      responses:
+        '200':
+          description: Player unbanned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      unbanned:
+                        type: boolean
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/admin/bans/{playerId}:
+    get:
+      summary: Check ban status for a player
+      operationId: getBanStatus
+      security:
+        - ApiToken: []
+      parameters:
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ban status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      banned:
+                        type: boolean
+                      reason:
+                        type: string
+                        nullable: true
+                      until:
+                        type: string
+                        format: date-time
+                        nullable: true
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '403':
           $ref: '#/components/responses/Forbidden'
 

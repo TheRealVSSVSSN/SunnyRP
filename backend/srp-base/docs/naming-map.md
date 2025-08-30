@@ -59,3 +59,5 @@ Upstream name → SRP name mapping for this run.
 | np-admin:noclipsway | admin.noclip.enable |
 | np-admin:nofc | admin.noclip.disable |
 | np-actionbar | action-bar |
+| np-admin:UnbanSteamId | admin.unban |
+| np-admin:IsPlayerBanned | admin.ban.status |

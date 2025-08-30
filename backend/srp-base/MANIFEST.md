@@ -7,6 +7,7 @@
 - Webhook dispatch for interior proxy updates.
 - Dynamic minimap blip service with scheduler and WS broadcasts.
 - Admin noclip toggle with audit log and realtime broadcast.
+- Admin unban endpoints with ban status query and audit log.
 
 | File | Action | Note |
 |---|---|---|
@@ -156,3 +157,20 @@
 | docs/BASE_API_DOCUMENTATION.md | M | Document noclip API |
 | docs/research-log.md | M | Log noclip research |
 | docs/run-docs.md | M | Summarize noclip run |
+| src/repositories/adminRepository.js | M | Unban and ban status helpers |
+| src/routes/admin.routes.js | M | Unban/ban status endpoints & WS broadcasts |
+| src/migrations/088_add_unban_events.sql | A | Unban audit table |
+| openapi/api.yaml | M | Document unban and ban status endpoints |
+| docs/modules/admin.md | M | Describe unban features |
+| docs/BASE_API_DOCUMENTATION.md | M | Document admin unban API |
+| docs/events-and-rpcs.md | M | Map admin ban events |
+| docs/naming-map.md | M | Map np-admin unban & status |
+| docs/admin-ops.md | M | Add unban audit note |
+| docs/db-schema.md | M | Document bans and unban_events tables |
+| docs/migrations.md | M | Log migration 088 |
+| docs/index.md | M | Add admin unban update |
+| docs/progress-ledger.md | M | Record admin unban entry |
+| docs/research-log.md | M | Log np-admin research |
+| docs/framework-compliance.md | M | Update admin module compliance |
+| docs/run-docs.md | M | Summarize admin unban run |
+| CHANGELOG.md | M | Log admin unban features |

@@ -1879,3 +1879,18 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Drop `action_bar_slots` table and remove action bar routes.
+
+## 2025-08-30 (admin unban)
+
+### Added
+* Ban status query `GET /v1/admin/bans/{playerId}`.
+* Unban endpoint `POST /v1/admin/unban` broadcasting `admin.ban.removed`.
+
+### Migrations
+* `088_add_unban_events.sql` – audit table for unban actions.
+
+### Risks
+* Missing ban records could allow unauthorized access if misused.
+
+### Rollback
+* Delete `unban_events` rows and remove new endpoints.

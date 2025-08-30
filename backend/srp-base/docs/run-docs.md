@@ -18,3 +18,24 @@
 ## Outstanding TODO/Gaps
 
 - None.
+
+# Run Summary — 2025-08-30 (np-admin)
+
+- Extended admin module with ban status query and unban logging.
+
+## API Changes
+
+- `POST /v1/admin/unban`
+- `GET /v1/admin/bans/{playerId}`
+
+## Realtime & Webhooks
+
+- WebSocket namespace `admin` emits `ban.added` and `ban.removed`.
+
+## Migrations
+
+- `088_add_unban_events.sql` — audit log for unban actions.
+
+## Outstanding TODO/Gaps
+
+- None.

@@ -722,3 +722,12 @@ Scheduler `recycling-purge` removes records older than `RECYCLING_RETENTION_MS`.
 
 WebSocket namespace `world` emits `minimap.blips`.
 Scheduler `minimap-blips-broadcast` pushes periodic updates.
+
+## Update – 2025-08-30 (admin unban)
+
+### Endpoints
+
+- `POST /v1/admin/unban` – requires `X-Idempotency-Key`
+- `GET /v1/admin/bans/{playerId}`
+
+WebSocket namespace `admin` emits `ban.added` and `ban.removed`.

@@ -58,4 +58,4 @@
 | lmfao | Recycling job mission events giving money and materials | `POST /v1/recycling/deliveries`, `GET /v1/recycling/deliveries/{characterId}` |
 | lux_vehcontrol | Siren/powercall/indicator toggle events | `GET/POST /v1/vehicles/{plate}/control` → pushes `vehicles.control.update` |
 | minimap | Minimap zoom/blip configuration | `GET/POST/DELETE /v1/minimap/blips` → WS `minimap.blips` |
-| noclip | Admin/dev noclip toggles | `POST /v1/admin/noclip` | `admin.noclip` (player namespace) |
+| admin | Ban management and noclip toggles | `POST /v1/admin/ban`, `POST /v1/admin/unban`, `GET /v1/admin/bans/{playerId}`, `POST /v1/admin/noclip` | WS `admin.ban.added`, `admin.ban.removed`, `admin.noclip` |

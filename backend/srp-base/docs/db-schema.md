@@ -2,6 +2,29 @@
 Added `world_forecast` table for weather scheduling. K9 migration renamed to 057_add_k9_units.sql.
 
 
+## bans
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| player_id | VARCHAR(64) | Target player identifier |
+| reason | VARCHAR(255) | Ban reason |
+| until | DATETIME NULL | Expiration timestamp |
+| created_at | TIMESTAMP | Creation time |
+| INDEX idx_bans_player | (player_id) |
+
+## unban_events
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| player_id | VARCHAR(64) | Unbanned player identifier |
+| actor_id | VARCHAR(64) | Admin who unbanned |
+| reason | VARCHAR(255) | Reason provided |
+| created_at | TIMESTAMP | Creation time |
+| INDEX idx_unban_player | (player_id) |
+| INDEX idx_unban_created | (created_at) |
+
 ## diamond_casino_games
 
 | Column | Type | Notes |

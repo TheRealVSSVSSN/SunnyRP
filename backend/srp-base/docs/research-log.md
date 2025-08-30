@@ -450,3 +450,8 @@
 
 - Cloned `https://github.com/h04X-2K/NoPixelServer` and inspected `resources/np-actionbar` for quick slot and holster flows.
 - Reviewed quick slot handling in ESX and QB-Core inventories to align naming.
+
+## Research Log – 2025-08-30 (np-admin)
+
+- Cloned `https://github.com/h04X-2K/NoPixelServer` and inspected `resources/np-admin` for ban/unban flows.
+- Reviewed ban management in EssentialMode, ESX, QB-Core, ND Core, FSN, vRP and vORP to align naming and audit practices.
