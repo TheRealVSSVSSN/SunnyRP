@@ -2400,6 +2400,29 @@ components:
           type: boolean
         judge:
           type: boolean
+  DealerOffer:
+    type: object
+    properties:
+      id:
+        type: integer
+      item:
+        type: string
+      price:
+        type: integer
+      expiresAt:
+        type: string
+        format: date-time
+  DealerOfferCreateRequest:
+    type: object
+    required: [item, price, expiresAt]
+    properties:
+      item:
+        type: string
+      price:
+        type: integer
+      expiresAt:
+        type: string
+        format: date-time
 security:
   - ApiToken: []
 paths:
@@ -9902,6 +9925,56 @@ paths:
                     type: boolean
                   data:
                     $ref: '#/components/schemas/CrimeSchoolProgress'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+  /v1/dealers/offers:
+    get:
+      summary: List active dealer offers
+      tags: [dealers]
+      responses:
+        '200':
+          description: Active offers
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      offers:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/DealerOffer'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+    post:
+      summary: Create dealer offer
+      tags: [dealers]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DealerOfferCreateRequest'
+      responses:
+        '200':
+          description: Offer created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/DealerOffer'
                   requestId:
                     type: string
                   traceId:

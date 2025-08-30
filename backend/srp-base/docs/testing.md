@@ -511,3 +511,13 @@ curl -H 'X-API-Token: <token>' -H 'Content-Type: application/json' -H 'X-Idempot
 ```
 
 Connect a WebSocket client to `ws://localhost:3010/ws?token=<token>&ns=crime-school` to observe `crime-school.progress.updated` events.
+
+# Manually verify dealer offers:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/dealers/offers
+curl -H 'X-API-Token: <token>' -H 'Content-Type: application/json' -H 'X-Idempotency-Key: do1' \
+  -d '{"item":"weed","price":100,"expiresAt":"2025-09-01T00:00:00Z"}' http://localhost:3010/v1/dealers/offers
+```
+
+Connect a WebSocket client to `ws://localhost:3010/ws?token=<token>&ns=dealers` to observe `dealers.offer.created` and `dealers.offer.expired` events.

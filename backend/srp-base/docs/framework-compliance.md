@@ -139,3 +139,4 @@ practice is supported by citations.
 - Document hacking endpoints in BASE_API_DOCUMENTATION and events-and-rpcs.
 - Add db-schema entry for hacking_attempts table.
 - Develop crime school curriculum and reward logic.
+- Support dealer offer purchase flow and stock management.

@@ -23,3 +23,4 @@
 | Record mhacking research sources in research-log.md | backend | low | reference access |
 | Add pagination for `/v1/minimap/blips` | backend | low | none |
 | Develop crime school curriculum and reward logic | backend | low | design |
+| Support dealer offer purchase flow and stock management | backend | medium | design |

@@ -168,3 +168,6 @@
 ## 2025-08-30 — np-crimeschool
 
 - CREATE: Crime school progress API with WebSocket/webhook updates and hourly purge scheduler.
+## 2025-08-30 — np-dealer
+
+- CREATE: Dealer offers API with WebSocket/webhook push and minute purge scheduler.

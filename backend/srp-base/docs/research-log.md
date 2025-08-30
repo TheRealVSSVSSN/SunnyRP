@@ -498,3 +498,8 @@
 - Cloned `https://github.com/h04X-2K/NoPixelServer` and searched for `np-crimeschool` resource; none found.
 - Reference resources unavailable; proceeding with internal consistency only.
 - Reviewed skill training systems in EssentialMode, ESX, ND Core, FSN Framework, QB-Core, vRP and vORP for naming patterns.
+
+## Research Log – 2025-08-30 (np-dealer)
+
+- Cloned `https://github.com/h04X-2K/NoPixelServer` and inspected `resources/np-dealer` for drug dealing animations and prop attachments.
+- Reviewed contraband/dealer systems in ESX and QB-Core conceptually for naming patterns.

@@ -817,3 +817,14 @@ Indexes:
 | created_at | TIMESTAMP | Creation time |
 | updated_at | TIMESTAMP | Update time |
 | INDEX idx_crime_school_character | (character_id) |
+
+## dealer_offers
+
+| Column | Type | Notes |
+|---|---|---|
+| id | BIGINT UNSIGNED AUTO_INCREMENT | Primary key |
+| item | VARCHAR(100) | Item name |
+| price | INT | Price in dollars |
+| expires_at | DATETIME | Expiration time |
+| created_at | DATETIME | Creation time |
+| INDEX idx_dealer_offers_expires_at | (expires_at) | |

@@ -93,3 +93,4 @@
 | 093_add_commands.sql | Command definitions table |
 | 094_add_contracts_created_index.sql | Index contracts created_at column |
 | 095_update_crime_school_character_fk.sql | Rename player_id to character_id with FK and index |
+| 096_add_dealer_offers.sql | Dealer offers table with expiry index |

@@ -791,3 +791,12 @@ WebSocket namespace `contracts` emits `contracts.created`, `contracts.accepted` 
 - `POST /v1/crime-school/{characterId}` – requires `X-Idempotency-Key`
 
 WebSocket namespace `crime-school` emits `progress.updated`. Scheduler `crime-school-expiry` removes records older than `CRIME_SCHOOL_RETENTION_DAYS`.
+
+## Update – 2025-08-30 (np-dealer)
+
+### Endpoints
+
+- `GET /v1/dealers/offers`
+- `POST /v1/dealers/offers` – requires `X-Idempotency-Key`
+
+WebSocket namespace `dealers` emits `offer.created` and `offer.expired`. Scheduler `dealer-offer-purge` removes expired offers.

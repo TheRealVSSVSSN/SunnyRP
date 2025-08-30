@@ -68,3 +68,4 @@ Upstream name → SRP name mapping for this run.
 | np-commands | commands |
 | np-contracts | contracts |
 | np-crimeschool | crime-school |
+| np-dealer | dealers |

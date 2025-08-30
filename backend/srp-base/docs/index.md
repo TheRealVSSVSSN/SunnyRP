@@ -172,3 +172,11 @@ Persisted crime training progress with realtime updates.
 
 * `GET /v1/crime-school/{characterId}` and `POST /v1/crime-school/{characterId}` emit `crime-school.progress.updated`.
 * Scheduler `crime-school-expiry` purges records older than `CRIME_SCHOOL_RETENTION_DAYS`.
+
+## Update – 2025-08-30 (np-dealer)
+
+Dealer offers tracked with realtime push and expiry cleanup.
+
+* `GET /v1/dealers/offers` lists active offers.
+* `POST /v1/dealers/offers` emits `dealers.offer.created` and webhooks.
+* Scheduler `dealer-offer-purge` broadcasts `dealers.offer.expired`.

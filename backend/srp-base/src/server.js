@@ -49,6 +49,7 @@ const mechanicTasks = require('./tasks/mechanic');
 const broadcastTasks = require('./tasks/broadcast');
 const contractsTasks = require('./tasks/contracts');
 const crimeSchoolTasks = require('./tasks/crimeSchool');
+const dealersTasks = require('./tasks/dealers');
 
 // Register Prometheus metrics if enabled.  This must be done before
 // the server starts so that middleware can increment counters.
@@ -315,6 +316,12 @@ scheduler.register(
   () => crimeSchoolTasks.purgeOld(),
   crimeSchoolTasks.INTERVAL_MS,
   { jitter: 60000, persistName: crimeSchoolTasks.JOB_NAME },
+scheduler.register(
+  dealersTasks.JOB_NAME,
+  () => dealersTasks.purgeExpired(wss),
+  dealersTasks.INTERVAL_MS,
+  { jitter: 60000, persistName: dealersTasks.JOB_NAME },
+);
 );
 
 scheduler.register(
