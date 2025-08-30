@@ -92,3 +92,4 @@
 | 092_add_broadcast_messages.sql | Broadcast message log table |
 | 093_add_commands.sql | Command definitions table |
 | 094_add_contracts_created_index.sql | Index contracts created_at column |
+| 095_update_crime_school_character_fk.sql | Rename player_id to character_id with FK and index |

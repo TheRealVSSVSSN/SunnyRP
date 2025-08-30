@@ -165,3 +165,10 @@ Realtime contract notifications and expiry cleanup.
 * `POST /v1/contracts/{id}/accept` emits `contracts.accepted` and transfers funds.
 * `POST /v1/contracts/{id}/decline` emits `contracts.declined`.
 * Scheduler `contracts-purge` removes stale pending contracts after `CONTRACT_RETENTION_MS`.
+
+## Update – 2025-08-30 (crime school)
+
+Persisted crime training progress with realtime updates.
+
+* `GET /v1/crime-school/{characterId}` and `POST /v1/crime-school/{characterId}` emit `crime-school.progress.updated`.
+* Scheduler `crime-school-expiry` purges records older than `CRIME_SCHOOL_RETENTION_DAYS`.

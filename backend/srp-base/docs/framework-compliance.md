@@ -116,6 +116,7 @@ practice is supported by citations.
 | **barriers module** | Barrier endpoints follow the established layered pattern with authentication, idempotency, WebSocket/webhook broadcasts and auto-reset scheduler. |
 
 | **contracts module** | Contract endpoints follow the layered pattern with authentication, idempotency, WebSocket/webhook events and hourly purge scheduler. |
+| **crime-school module** | Crime school progress endpoints follow the layered pattern with authentication, idempotency, WebSocket/webhook events and expiry scheduler. |
 
 | **commands module** | Command definition endpoints follow the layered pattern with authentication, idempotency, WebSocket/webhook events. |
 
@@ -137,3 +138,4 @@ practice is supported by citations.
 \- Add pagination/cursors for `/v1/debug/logs`.
 - Document hacking endpoints in BASE_API_DOCUMENTATION and events-and-rpcs.
 - Add db-schema entry for hacking_attempts table.
+- Develop crime school curriculum and reward logic.

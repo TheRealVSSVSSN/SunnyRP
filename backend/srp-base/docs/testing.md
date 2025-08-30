@@ -501,3 +501,13 @@ curl -H 'X-API-Token: <token>' -H 'Content-Type: application/json' -H 'X-Idempot
 ```
 
 Connect a WebSocket client to `ws://localhost:3010/ws?token=<token>&ns=contracts` to observe `contracts.created` and `contracts.accepted` events.
+
+# Manually verify crime school endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/crime-school/1
+curl -H 'X-API-Token: <token>' -H 'Content-Type: application/json' -H 'X-Idempotency-Key: cs1' \
+  -d '{"stage":"intro"}' http://localhost:3010/v1/crime-school/1
+```
+
+Connect a WebSocket client to `ws://localhost:3010/ws?token=<token>&ns=crime-school` to observe `crime-school.progress.updated` events.

@@ -160,6 +160,27 @@ components:
         createdAt:
           type: string
           format: date-time
+    CrimeSchoolProgress:
+      type: object
+      properties:
+        id:
+          type: integer
+        characterId:
+          type: integer
+        stage:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    CrimeSchoolUpdateRequest:
+      type: object
+      required: [stage]
+      properties:
+        stage:
+          type: string
         expiresAt:
           type: string
           format: date-time
@@ -9828,3 +9849,60 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MechanicOrder'
+  /v1/crime-school/{characterId}:
+    get:
+      summary: Get crime school progress
+      tags: [crime-school]
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Progress record
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/CrimeSchoolProgress'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+    post:
+      summary: Update crime school progress
+      tags: [crime-school]
+      parameters:
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CrimeSchoolUpdateRequest'
+      responses:
+        '200':
+          description: Updated progress
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/CrimeSchoolProgress'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string

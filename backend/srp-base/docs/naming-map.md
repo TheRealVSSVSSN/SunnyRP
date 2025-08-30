@@ -67,3 +67,4 @@ Upstream name → SRP name mapping for this run.
 | np-broadcaster | broadcast |
 | np-commands | commands |
 | np-contracts | contracts |
+| np-crimeschool | crime-school |

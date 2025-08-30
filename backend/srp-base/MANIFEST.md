@@ -15,6 +15,7 @@
 - Broadcast messages API with realtime push and purge scheduler.
 - Allow photo description updates with realtime push.
 - Command definitions API with realtime push.
+- Crime school progress tracking with realtime push and retention scheduler.
 
 | File | Action | Note |
 |---|---|---|
@@ -286,3 +287,25 @@
 | docs/run-docs.md | M | Summarize contracts run |
 | CHANGELOG.md | M | Log contract realtime/purge |
 | MANIFEST.md | M | Update manifest |
+| src/repositories/crimeSchoolRepository.js | M | Character-scoped progress persistence |
+| src/routes/crimeSchool.routes.js | A | Crime school progress endpoints |
+| src/tasks/crimeSchool.js | A | Purge expired progress entries |
+| src/config/env.js | M | Crime school retention settings |
+| src/server.js | M | Register crime school purge task |
+| src/migrations/095_update_crime_school_character_fk.sql | A | Rename column and add FK/index |
+| openapi/api.yaml | M | Document crime school endpoints |
+| docs/modules/crime-school.md | A | Document crime school module |
+| docs/index.md | M | Log crime school update |
+| docs/progress-ledger.md | M | Record np-crimeschool entry |
+| docs/framework-compliance.md | M | Add crime school compliance note |
+| docs/BASE_API_DOCUMENTATION.md | M | Document crime school API |
+| docs/events-and-rpcs.md | M | Map np-crimeschool events |
+| docs/db-schema.md | M | Describe crime_school table |
+| docs/migrations.md | M | List migration 095 |
+| docs/admin-ops.md | M | Add crime school operational note |
+| docs/security.md | M | Crime school auth note |
+| docs/testing.md | M | Crime school endpoint tests |
+| docs/naming-map.md | M | Map np-crimeschool |
+| docs/research-log.md | M | Log np-crimeschool research |
+| docs/run-docs.md | M | Summarize crimeschool run |
+| docs/todo-gaps.md | M | Add crime school TODO |

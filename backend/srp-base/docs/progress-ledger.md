@@ -119,6 +119,7 @@
 | 98 | np-bennys → mechanic | Vehicle upgrade work orders with realtime push | Create | Added mechanic orders API and scheduler |
 | 99 | np-camera | Photo metadata updates with realtime push | Extend | Added PATCH endpoint and events |
 | 100 | np-contracts | Player payment contracts with realtime updates and purge scheduler | Extend | Added WS/webhook events and expiry cleanup |
+| 101 | np-crimeschool | Track criminal training stages per character with realtime updates and purge scheduler | Create | Added progress API and retention task |
 
 ## 2025-08-28 — koilWeatherSync
 
@@ -163,3 +164,7 @@
 ## 2025-08-30 — np-contracts
 
 - EXTEND: Added WebSocket/webhook events for contract lifecycle and hourly purge scheduler.
+
+## 2025-08-30 — np-crimeschool
+
+- CREATE: Crime school progress API with WebSocket/webhook updates and hourly purge scheduler.

@@ -806,3 +806,14 @@ Indexes:
 | INDEX idx_contracts_sender | (sender_id) |
 | INDEX idx_contracts_receiver | (receiver_id) |
 | INDEX idx_contracts_created_at | (created_at) |
+
+## crime_school
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| character_id | INT | FK to characters.id |
+| stage | VARCHAR(50) | Current progress stage |
+| created_at | TIMESTAMP | Creation time |
+| updated_at | TIMESTAMP | Update time |
+| INDEX idx_crime_school_character | (character_id) |
