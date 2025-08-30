@@ -71,3 +71,6 @@ Upstream name → SRP name mapping for this run.
 | np-dealer | dealers |
 | np-dances | dances |
 | np-density | world (peds rogue) |
+| np-dirtymoney | marked-bills |
+| black_money (ESX) | marked-bills |
+| markedbills (QB) | marked-bills |

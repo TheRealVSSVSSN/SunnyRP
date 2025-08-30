@@ -17,6 +17,7 @@
 - Command definitions API with realtime push.
 - Crime school progress tracking with realtime push and retention scheduler.
 - Dance animation definitions with realtime push and purge scheduler.
+- Marked bills API with realtime push and bank conversion.
 
 - Dealer offers backend with realtime push and purge scheduler.
 - World state push and rogue ped cleanup with scheduler.
@@ -375,3 +376,23 @@
 | docs/research-log.md | M | Log np-density research |
 | docs/naming-map.md | M | Map np-density |
 | docs/run-docs.md | M | Summarize np-density run |
+| src/routes/markedBills.routes.js | A | Marked bills endpoints |
+| src/repositories/markedBillsRepository.js | A | Marked bills persistence |
+| src/migrations/098_add_marked_bills.sql | A | Marked bills table |
+| openapi/api.yaml | M | Document marked bills endpoints |
+| docs/modules/marked-bills.md | A | Document marked bills module |
+| docs/index.md | M | Log marked bills update |
+| docs/progress-ledger.md | M | Record np-dirtymoney entry |
+| docs/framework-compliance.md | M | Add marked-bills compliance note |
+| docs/BASE_API_DOCUMENTATION.md | M | Document marked bills API |
+| docs/events-and-rpcs.md | M | Map np-dirtymoney events |
+| docs/db-schema.md | M | Describe character_marked_bills table |
+| docs/migrations.md | M | List migration 098 |
+| docs/admin-ops.md | M | Note marked bills table |
+| docs/security.md | M | Marked bills auth note |
+| docs/testing.md | M | Marked bills test commands |
+| docs/research-log.md | M | Log np-dirtymoney research |
+| docs/naming-map.md | M | Map np-dirtymoney and cross-framework names |
+| docs/run-docs.md | M | Summarize dirtymoney run |
+| MANIFEST.md | M | Update manifest |
+| CHANGELOG.md | M | Log marked bills feature |

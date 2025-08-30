@@ -2068,3 +2068,15 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Delete rogue ped route and scheduler registration; rename migration back to `096_add_dealer_offers.sql`.
+## 2025-08-30 (np-dirtymoney)
+
+### Added
+* `GET /v1/characters/{characterId}/marked-bills` fetches marked bills balance.
+* `POST /v1/characters/{characterId}/marked-bills:alter` adjusts marked bills and broadcasts events.
+* `POST /v1/characters/{characterId}/marked-bills:pickup` converts marked bills to clean money.
+
+### Risks
+* Incorrect balance adjustments could allow duplication or loss.
+
+### Rollback
+* Drop `character_marked_bills` table and remove marked bills routes, repository and OpenAPI definitions.

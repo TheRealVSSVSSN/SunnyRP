@@ -533,3 +533,14 @@ curl -H 'X-API-Token: <token>' -X DELETE http://localhost:3010/v1/dances/animati
 ```
 
 Connect a WebSocket client to `ws://localhost:3010/ws?token=<token>&ns=dances` to observe `dances.animationAdded` and `dances.animationRemoved` events. Disabled animations older than retention emit `dances.animationExpired` when purged.
+# Manually verify marked bills endpoints:
+
+```sh
+curl -H 'X-API-Token: <token>' http://localhost:3010/v1/characters/1/marked-bills
+curl -H 'X-API-Token: <token>' -H 'Content-Type: application/json' -H 'X-Idempotency-Key: mb1' \
+  -d '{"amount":500,"reason":"ItemDrop"}' http://localhost:3010/v1/characters/1/marked-bills:alter
+curl -H 'X-API-Token: <token>' -H 'Content-Type: application/json' -H 'X-Idempotency-Key: mb2' \
+  -d '{"amount":500}' http://localhost:3010/v1/characters/1/marked-bills:pickup
+```
+
+Connect a WebSocket client to `ws://localhost:3010/ws?token=<token>&ns=economy` to observe `markedBills.*` events.

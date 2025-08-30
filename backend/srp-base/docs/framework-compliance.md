@@ -50,6 +50,7 @@ practice is supported by citations.
 | **assets module** | Asset endpoints follow the established layered pattern with authentication, rate limiting and idempotency. Create/delete events broadcast over WebSocket/webhooks and an hourly scheduler prunes stale records. |
 | **clothes module** | Clothing endpoints follow the established layered pattern with authentication, rate limiting and idempotency. |
 | **economy module** | Banking endpoints follow the established layered pattern with authentication and idempotency. |
+| **marked-bills module** | Dirty money endpoints follow the established layered pattern with authentication, idempotency, WebSocket/webhook events. |
 | **apartments module** | Apartment endpoints follow the established layered pattern with authentication and idempotency. |
 | **Characters module** | Legacy unscoped endpoints removed, ensuring account-scoped character access only. |
 
