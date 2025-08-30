@@ -791,3 +791,13 @@ WebSocket namespace `contracts` emits `contracts.created`, `contracts.accepted` 
 - `POST /v1/crime-school/{characterId}` – requires `X-Idempotency-Key`
 
 WebSocket namespace `crime-school` emits `progress.updated`. Scheduler `crime-school-expiry` removes records older than `CRIME_SCHOOL_RETENTION_DAYS`.
+
+## Update – 2025-08-30 (dances)
+
+### Endpoints
+
+- `GET /v1/dances/animations`
+- `POST /v1/dances/animations` – requires `X-Idempotency-Key`
+- `DELETE /v1/dances/animations/{id}` – requires `X-Idempotency-Key`
+
+WebSocket namespace `dances` emits `animationAdded`, `animationRemoved`, and `animationExpired`. Scheduler `dances-purge` prunes disabled animations older than `DANCE_RETENTION_MS`.

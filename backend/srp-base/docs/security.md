@@ -29,6 +29,7 @@
 - Coordsaver routes inherit the same authentication and idempotency requirements.
 - Interiors routes inherit the same authentication and idempotency requirements.
 - Emotes routes inherit the same authentication and idempotency requirements.
+- Dances routes inherit the same authentication and idempotency requirements.
 - EMS routes inherit the same authentication and idempotency requirements.
 - Taxi routes inherit the same authentication and idempotency requirements.
 - Furniture routes inherit the same authentication and idempotency requirements.

@@ -78,6 +78,7 @@ practice is supported by citations.
 | **coordinates module** | Coordinate endpoints follow the established layered pattern with authentication, idempotency, WebSocket/webhook events and scheduled cleanup. |
 | **interiors module** | Interior endpoints follow the layered pattern with authentication, idempotency, WebSocket/webhook broadcasts and per-character uniqueness. |
 | **emotes module** | Favorite emote endpoints follow the established layered pattern with authentication, idempotency, realtime pushes and retention purge. |
+| **dances module** | Dance animation endpoints follow the layered pattern with authentication, idempotency, WebSocket/webhook broadcasts and retention purge. |
 | **ems module** | EMS record, shift, and vehicle spawn endpoints follow the established layered pattern with authentication and idempotency. |
 | **taxi module** | Taxi ride endpoints follow the established layered pattern with authentication and idempotency. |
 | **furniture module** | Furniture endpoints follow the established layered pattern with authentication and idempotency. |

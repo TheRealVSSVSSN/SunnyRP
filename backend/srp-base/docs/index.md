@@ -172,3 +172,11 @@ Persisted crime training progress with realtime updates.
 
 * `GET /v1/crime-school/{characterId}` and `POST /v1/crime-school/{characterId}` emit `crime-school.progress.updated`.
 * Scheduler `crime-school-expiry` purges records older than `CRIME_SCHOOL_RETENTION_DAYS`.
+
+## Update – 2025-08-30 (dances)
+
+Dynamic dance animation definitions with realtime sync.
+
+* `GET /v1/dances/animations` lists animations.
+* `POST /v1/dances/animations` and `DELETE /v1/dances/animations/{id}` emit `dances.*` events over WebSocket and webhooks.
+* Scheduler `dances-purge` removes disabled animations older than `DANCE_RETENTION_MS`.

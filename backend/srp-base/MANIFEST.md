@@ -16,6 +16,7 @@
 - Allow photo description updates with realtime push.
 - Command definitions API with realtime push.
 - Crime school progress tracking with realtime push and retention scheduler.
+- Dance animation definitions with realtime push and purge scheduler.
 
 | File | Action | Note |
 |---|---|---|
@@ -309,3 +310,27 @@
 | docs/research-log.md | M | Log np-crimeschool research |
 | docs/run-docs.md | M | Summarize crimeschool run |
 | docs/todo-gaps.md | M | Add crime school TODO |
+| src/routes/dances.routes.js | A | Manage dance animations |
+| src/repositories/dancesRepository.js | A | Persist dance animations |
+| src/tasks/dances.js | A | Purge disabled animations |
+| src/config/env.js | M | Add dances retention config |
+| src/server.js | M | Register dances purge task |
+| src/app.js | M | Mount dances routes |
+| src/migrations/096_add_dance_animations.sql | A | Dance animations table |
+| openapi/api.yaml | M | Document dance animation endpoints |
+| docs/modules/dances.md | A | Module documentation |
+| docs/index.md | M | Note dances update |
+| docs/progress-ledger.md | M | Record np-dances entry |
+| docs/framework-compliance.md | M | Add dances module compliance |
+| docs/BASE_API_DOCUMENTATION.md | M | Document dances API |
+| docs/events-and-rpcs.md | M | Map np-dances events |
+| docs/db-schema.md | M | Describe dance_animations table |
+| docs/migrations.md | M | List migration 096 |
+| docs/admin-ops.md | M | Add dance animations operational note |
+| docs/security.md | M | Include dances route auth |
+| docs/testing.md | M | Dances endpoint tests |
+| docs/research-log.md | M | Log np-dances research |
+| docs/run-docs.md | M | Summarize dances run |
+| docs/naming-map.md | M | Map np-dances |
+| MANIFEST.md | M | Update manifest |
+| CHANGELOG.md | M | Log dances module |
