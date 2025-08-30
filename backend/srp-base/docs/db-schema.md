@@ -2,6 +2,20 @@
 Added `world_forecast` table for weather scheduling. K9 migration renamed to 057_add_k9_units.sql.
 
 
+## commands
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| name | VARCHAR(64) | Unique command name |
+| description | TEXT | Optional description |
+| restricted_police | TINYINT(1) | 1 if police-only |
+| restricted_ems | TINYINT(1) | 1 if EMS-only |
+| restricted_judge | TINYINT(1) | 1 if judge-only |
+| created_at | TIMESTAMP | Creation time |
+| updated_at | TIMESTAMP | Update time |
+| INDEX idx_commands_name | (name) |
+
 ## bans
 
 | Column | Type | Notes |

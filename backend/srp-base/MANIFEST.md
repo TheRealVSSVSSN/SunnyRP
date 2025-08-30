@@ -13,6 +13,7 @@
 
 - Broadcast messages API with realtime push and purge scheduler.
 - Allow photo description updates with realtime push.
+- Command definitions API with realtime push.
 
 | File | Action | Note |
 |---|---|---|
@@ -246,3 +247,19 @@
 | docs/run-docs.md | M | Summarize camera run |
 | MANIFEST.md | M | Update manifest |
 | CHANGELOG.md | M | Record camera metadata update |
+| src/routes/commands.routes.js | A | Command definition routes |
+| src/repositories/commandsRepository.js | A | Command persistence |
+| src/migrations/093_add_commands.sql | A | Command definitions table |
+| docs/modules/commands.md | A | Document commands module |
+| docs/index.md | M | Log commands update |
+| docs/progress-ledger.md | M | Record np-commands entry |
+| docs/framework-compliance.md | M | Add commands module compliance |
+| docs/events-and-rpcs.md | M | Map np-commands resource |
+| docs/admin-ops.md | M | Add commands table note |
+| docs/naming-map.md | M | Map np-commands |
+| docs/research-log.md | M | Log np-commands research |
+| docs/db-schema.md | M | Document commands table |
+| docs/migrations.md | M | List migration 093 |
+| docs/run-docs.md | M | Summarize commands run |
+| openapi/api.yaml | M | Document command endpoints |
+| docs/BASE_API_DOCUMENTATION.md | M | Document commands API |

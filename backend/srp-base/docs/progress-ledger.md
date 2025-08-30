@@ -154,3 +154,7 @@
 ## 2025-08-30 — np-camera
 
 - EXTEND: Photo description update endpoint with WebSocket/webhook pushes.
+
+## 2025-08-30 — np-commands
+
+- CREATE: Command definition API with WebSocket/webhook pushes.

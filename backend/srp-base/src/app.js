@@ -84,6 +84,8 @@ const baseEventsRoutes = require('./routes/baseEvents.routes');
 const cronRoutes = require('./routes/cron.routes');
 // coordinates domain route (formerly coordsaver)
 const coordinatesRoutes = require('./routes/coordinates.routes');
+// commands domain route
+const commandsRoutes = require('./routes/commands.routes');
 
 // phone domain route
 const phoneRoutes = require('./routes/phone.routes');
@@ -256,6 +258,8 @@ app.use(clothesRoutes);
 
 // mount notes routes
 app.use(notesRoutes);
+// mount commands routes
+app.use(commandsRoutes);
 // mount furniture routes
 app.use(furnitureRoutes);
 // mount coordinates routes

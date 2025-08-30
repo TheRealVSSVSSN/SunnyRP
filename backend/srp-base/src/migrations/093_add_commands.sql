@@ -1,0 +1,13 @@
+-- Adds commands table
+CREATE TABLE IF NOT EXISTS commands (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(64) NOT NULL UNIQUE,
+  description TEXT,
+  restricted_police TINYINT(1) NOT NULL DEFAULT 0,
+  restricted_ems TINYINT(1) NOT NULL DEFAULT 0,
+  restricted_judge TINYINT(1) NOT NULL DEFAULT 0,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_commands_name ON commands (name);

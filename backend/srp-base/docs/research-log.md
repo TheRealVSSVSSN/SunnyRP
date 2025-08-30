@@ -482,3 +482,8 @@
 
 - Cloned `https://github.com/h04X-2K/NoPixelServer` with sparse checkout for `resources/np-camera` to examine camera activation flows.
 - Reviewed photo/gallery update patterns across EssentialMode, ESX, ND Core, FSN Framework, QB-Core, vRP and vORP for naming consistency.
+
+## Research Log – 2025-08-30 (np-commands)
+
+- Cloned `https://github.com/h04X-2K/NoPixelServer` and inspected `resources/np-commands` for command whitelist flows.
+- Reviewed command handling in EssentialMode, ESX, ND Core, FSN Framework, QB-Core, vRP and vORP for naming parity.
