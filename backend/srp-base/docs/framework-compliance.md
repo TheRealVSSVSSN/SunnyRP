@@ -115,6 +115,8 @@ practice is supported by citations.
 | **action bar module** | Quick slot endpoints use repository pattern and realtime dispatch. |
 | **barriers module** | Barrier endpoints follow the established layered pattern with authentication, idempotency, WebSocket/webhook broadcasts and auto-reset scheduler. |
 
+| **contracts module** | Contract endpoints follow the layered pattern with authentication, idempotency, WebSocket/webhook events and hourly purge scheduler. |
+
 | **commands module** | Command definition endpoints follow the layered pattern with authentication, idempotency, WebSocket/webhook events. |
 
 ## Outstanding Items

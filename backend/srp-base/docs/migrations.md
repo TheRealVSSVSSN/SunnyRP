@@ -91,3 +91,4 @@
 | 091_add_mechanic_orders.sql | Mechanic work orders table |
 | 092_add_broadcast_messages.sql | Broadcast message log table |
 | 093_add_commands.sql | Command definitions table |
+| 094_add_contracts_created_index.sql | Index contracts created_at column |

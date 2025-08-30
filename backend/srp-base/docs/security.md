@@ -48,3 +48,4 @@
 - World routes (state, forecast and timecycle) inherit the same authentication and idempotency requirements.
 - Minimap routes inherit the same authentication and idempotency requirements.
 - Admin noclip endpoint verifies target player has `admin` or `dev` scope before broadcasting.
+- Contracts routes inherit the same authentication and idempotency requirements.

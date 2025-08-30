@@ -118,6 +118,7 @@
 | 97 | np-base → base-events | Base event filtering and indexing | Extend | Added `eventType` filter and composite index |
 | 98 | np-bennys → mechanic | Vehicle upgrade work orders with realtime push | Create | Added mechanic orders API and scheduler |
 | 99 | np-camera | Photo metadata updates with realtime push | Extend | Added PATCH endpoint and events |
+| 100 | np-contracts | Player payment contracts with realtime updates and purge scheduler | Extend | Added WS/webhook events and expiry cleanup |
 
 ## 2025-08-28 — koilWeatherSync
 
@@ -158,3 +159,7 @@
 ## 2025-08-30 — np-commands
 
 - CREATE: Command definition API with WebSocket/webhook pushes.
+
+## 2025-08-30 — np-contracts
+
+- EXTEND: Added WebSocket/webhook events for contract lifecycle and hourly purge scheduler.

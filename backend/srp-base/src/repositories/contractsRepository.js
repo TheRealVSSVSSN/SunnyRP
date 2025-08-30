@@ -42,10 +42,15 @@ async function markDeclined(id) {
   await db.query('UPDATE contracts SET accepted = 0, updated_at = CURRENT_TIMESTAMP WHERE id = ?', [id]);
 }
 
+async function purgeExpired(cutoff) {
+  await db.query('DELETE FROM contracts WHERE accepted IS NULL AND created_at < ?', [cutoff]);
+}
+
 module.exports = {
   listContractsForPlayer,
   createContract,
   getContract,
   markAccepted,
   markDeclined,
+  purgeExpired,
 };

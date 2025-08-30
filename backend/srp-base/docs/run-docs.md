@@ -76,3 +76,46 @@
 - `CHANGELOG.md`
 - `MANIFEST.md`
 - `docs/BASE_API_DOCUMENTATION.md`
+
+## Update – 2025-08-30 (np-contracts)
+
+- Added contract lifecycle WebSocket/webhook events and hourly purge scheduler.
+
+### Updated Documentation
+- `docs/modules/contracts.md`
+- `docs/index.md`
+- `docs/progress-ledger.md`
+- `docs/framework-compliance.md`
+- `docs/BASE_API_DOCUMENTATION.md`
+- `docs/events-and-rpcs.md`
+- `docs/db-schema.md`
+- `docs/migrations.md`
+- `docs/admin-ops.md`
+- `docs/security.md`
+- `docs/testing.md`
+- `docs/naming-map.md`
+- `docs/research-log.md`
+- `CHANGELOG.md`
+- `MANIFEST.md`
+
+## Outstanding Items
+- Migrate existing apartment and garage consumers to new properties API
+- Link interior templates and garage capacity to properties
+- Dispatch property events to external webhooks
+- Paginate and search property listings
+- Document world event endpoints in OpenAPI
+- Integrate player vitals (hunger, thirst, stress) into HUD module
+- Add admin bulk adjustment endpoints for queue priorities
+- Add admin endpoints for cron job management
+- Bulk sync endpoint for favorite emotes
+- Allow labeling/ordering of favorite emotes
+- Implement call-sign management for police officers
+- Add altitude and location tracking for helicopter flights
+- Support editing existing import pack orders
+- Persist additional ped attributes such as position and appearance
+- Implement paycheck and grade progression logic for jobs
+- Allow assigning handlers via K9 API
+- Document hacking endpoints in BASE_API_DOCUMENTATION and events-and-rpcs
+- Add db-schema entry for hacking_attempts table
+- Record mhacking research sources in research-log.md
+- Add pagination for `/v1/minimap/blips`

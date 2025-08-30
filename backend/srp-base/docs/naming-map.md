@@ -66,3 +66,4 @@ Upstream name → SRP name mapping for this run.
 | np-bennys | mechanic |
 | np-broadcaster | broadcast |
 | np-commands | commands |
+| np-contracts | contracts |

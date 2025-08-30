@@ -789,3 +789,20 @@ Indexes:
 | message | VARCHAR(255) | Message text |
 | created_at | TIMESTAMP | Creation time |
 | INDEX idx_broadcast_messages_created_at | (created_at) |
+
+## contracts
+
+| Column | Type | Notes |
+|---|---|---|
+| id | BIGINT AUTO_INCREMENT | Primary key |
+| sender_id | VARCHAR(64) | Sender character ID |
+| receiver_id | VARCHAR(64) | Receiver character ID |
+| amount | BIGINT | Amount in cents |
+| info | TEXT | Optional description |
+| paid | TINYINT(1) | 1 if funds transferred |
+| accepted | TINYINT(1) NULL | 1 accepted, 0 declined |
+| created_at | TIMESTAMP | Creation time |
+| updated_at | TIMESTAMP | Update time |
+| INDEX idx_contracts_sender | (sender_id) |
+| INDEX idx_contracts_receiver | (receiver_id) |
+| INDEX idx_contracts_created_at | (created_at) |

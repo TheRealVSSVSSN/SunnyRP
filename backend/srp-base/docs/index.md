@@ -156,3 +156,12 @@ Photo descriptions can now be updated with realtime notifications.
 Managed server command definitions with realtime push.
 
 * `GET /v1/commands`, `POST /v1/commands`, `DELETE /v1/commands/{id}` emit `commands.*` over WebSocket and webhooks.
+
+## Update – 2025-08-30 (np-contracts)
+
+Realtime contract notifications and expiry cleanup.
+
+* `POST /v1/contracts` emits `contracts.created`.
+* `POST /v1/contracts/{id}/accept` emits `contracts.accepted` and transfers funds.
+* `POST /v1/contracts/{id}/decline` emits `contracts.declined`.
+* Scheduler `contracts-purge` removes stale pending contracts after `CONTRACT_RETENTION_MS`.
