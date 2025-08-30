@@ -134,3 +134,7 @@
 ## 2025-08-30 — actionbar
 
 - CREATE: Action bar slots API with WebSocket/webhook push for quick actions.
+
+## 2025-08-30 — admin unban
+
+- EXTEND: Admin moderation with ban status check and unban logging.

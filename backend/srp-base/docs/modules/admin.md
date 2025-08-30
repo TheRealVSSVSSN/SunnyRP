@@ -4,7 +4,7 @@
 
 The **admin** module provides basic moderation capabilities for the SunnyRP platform. It exposes an API for banning players with an optional expiration time so that bans persist across server restarts.
 
-## Endpoint
+## Endpoints
 
 ### `POST /v1/admin/ban`
 
@@ -61,18 +61,40 @@ On success the service records the action and emits a WebSocket event:
 }
 ```
 
+### `POST /v1/admin/unban`
+
+Removes all active bans for a player. Body must include `playerId`, `actorId`, and `reason`.
+
+```json
+{
+  "playerId": "steam:110000100000001",
+  "actorId": "steam:110000100000002",
+  "reason": "Appeal approved"
+}
+```
+
+On success a WebSocket event `admin.ban.removed` broadcasts to the `admin` namespace.
+
+### `GET /v1/admin/bans/{playerId}`
+
+Returns ban status for a player including reason and expiry when present.
+
 ## Repository
 
 `adminRepository.js` exposes helper functions:
 
 - **banPlayer(playerId, reason, until)** – Insert a ban record; `until` may be `null`.
 - **setNoclip(playerId, actorId, enabled)** – Log a noclip toggle event.
+- **unbanPlayer(playerId, actorId, reason)** – Delete ban records and log the action.
+- **isPlayerBanned(playerId)** – Fetch ban status and details.
 
 ## Database Migration
 
 `020_add_bans.sql` creates the `bans` table.
 
 `086_add_noclip_events.sql` creates the `noclip_events` table with indexes on `player_id` and `created_at`.
+
+`088_add_unban_events.sql` creates the `unban_events` table with indexes on `player_id` and `created_at`.
 
 ## Notes
 

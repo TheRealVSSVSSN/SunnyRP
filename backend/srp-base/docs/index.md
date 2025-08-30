@@ -109,3 +109,10 @@ Admin noclip control with permission enforcement and realtime signal.
 Persisted per-character quick action slots with realtime push.
 
 * `GET /v1/characters/{characterId}/action-bar`, `PUT /v1/characters/{characterId}/action-bar` manage slots and emit `hud.actionBar.updated`.
+
+## Update – 2025-08-30 (admin unban)
+
+Logged unban actions with audit trail and WebSocket push.
+
+* `POST /v1/admin/unban` logs and broadcasts ban removals.
+* `GET /v1/admin/bans/{playerId}` exposes ban status.
