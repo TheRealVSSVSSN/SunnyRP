@@ -88,3 +88,4 @@
 | 088_add_unban_events.sql | Table for unban audit logs |
 | 089_add_barriers.sql | Create barriers table for world barrier definitions |
 | 090_add_base_event_logs_type_index.sql | Index base_event_logs on event_type and created_at |
+| 091_add_mechanic_orders.sql | Mechanic work orders table |

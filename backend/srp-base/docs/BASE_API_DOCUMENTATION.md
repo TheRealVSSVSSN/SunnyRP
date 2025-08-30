@@ -739,3 +739,14 @@ Manage world road barriers and their open/closed state.
 - `GET /v1/barriers`
 - `POST /v1/barriers`
 - `PATCH /v1/barriers/{barrierId}/state`
+
+## Update – 2025-08-30 (mechanic)
+
+Vehicle upgrade and repair work orders backed by mechanic service.
+
+### Endpoints
+
+- `POST /v1/mechanic/orders` – requires `X-Idempotency-Key`
+- `GET /v1/mechanic/orders/{id}`
+
+WebSocket namespace `mechanic` broadcasts `orders.created` and `orders.completed`. Scheduler `mechanic-process` finalises pending orders.

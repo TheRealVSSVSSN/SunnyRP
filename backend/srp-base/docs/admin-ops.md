@@ -72,3 +72,4 @@
 - Runtime sinks can be managed with `GET/POST/DELETE /v1/hooks/endpoints` (admin only). Rotate secrets by re-registering endpoints and removing old entries.
 - Ensure the `noclip_events` table exists for auditing admin/dev noclip usage.
 - Ensure the `bans` and `unban_events` tables exist; WebSocket namespace `admin` emits `ban.added` and `ban.removed` for moderation actions.
+- Ensure the `mechanic_orders` table exists for vehicle work orders; scheduler `mechanic-process` completes pending orders.

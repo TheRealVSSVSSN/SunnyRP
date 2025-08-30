@@ -60,3 +60,4 @@
 | lux_vehcontrol | Siren/powercall/indicator toggle events | `GET/POST /v1/vehicles/{plate}/control` → pushes `vehicles.control.update` |
 | minimap | Minimap zoom/blip configuration | `GET/POST/DELETE /v1/minimap/blips` → WS `minimap.blips` |
 | admin | Ban management and noclip toggles | `POST /v1/admin/ban`, `POST /v1/admin/unban`, `GET /v1/admin/bans/{playerId}`, `POST /v1/admin/noclip` | WS `admin.ban.added`, `admin.ban.removed`, `admin.noclip` |
+| np-bennys | Vehicle upgrade orders and completion events | `POST /v1/mechanic/orders`, `GET /v1/mechanic/orders/{id}` → WS `mechanic.orders.*` |

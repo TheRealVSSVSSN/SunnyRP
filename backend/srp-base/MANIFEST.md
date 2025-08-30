@@ -9,6 +9,7 @@
 - Admin noclip toggle with audit log and realtime broadcast.
 - Admin unban endpoints with ban status query and audit log.
 - Base event filter and composite index for targeted analytics.
+- Mechanic work orders backend with realtime push and scheduler.
 
 | File | Action | Note |
 |---|---|---|
@@ -184,3 +185,24 @@
 | docs/framework-compliance.md | M | Update admin module compliance |
 | docs/run-docs.md | M | Summarize admin unban run |
 | CHANGELOG.md | M | Log admin unban features |
+| src/repositories/mechanicRepository.js | A | Persist mechanic work orders |
+| src/routes/mechanic.routes.js | A | Mechanic order endpoints |
+| src/tasks/mechanic.js | A | Scheduler to complete orders |
+| src/server.js | M | Register mechanic task |
+| src/app.js | M | Mount mechanic routes |
+| src/migrations/091_add_mechanic_orders.sql | A | Mechanic orders table |
+| openapi/api.yaml | M | Document mechanic endpoints |
+| docs/modules/mechanic.md | A | Module documentation |
+| docs/index.md | M | Note mechanic update |
+| docs/progress-ledger.md | M | Record mechanic entry |
+| docs/framework-compliance.md | M | Rename repository reference |
+| docs/BASE_API_DOCUMENTATION.md | M | Document mechanic API |
+| docs/events-and-rpcs.md | M | Map np-bennys events |
+| docs/db-schema.md | M | Document mechanic_orders table |
+| docs/migrations.md | M | List migration 091 |
+| docs/admin-ops.md | M | Operational note for mechanic orders |
+| docs/research-log.md | M | Log np-bennys research |
+| docs/naming-map.md | M | Map np-bennys → mechanic |
+| docs/run-docs.md | M | Summarize mechanic run |
+| CHANGELOG.md | M | Log mechanic module |
+| MANIFEST.md | M | Update manifest |

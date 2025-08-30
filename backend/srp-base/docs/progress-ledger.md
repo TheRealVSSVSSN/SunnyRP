@@ -116,6 +116,7 @@
 | 95 | noclip | Admin noclip toggle with realtime push | Create | Added noclip API and audit table |
 | 96 | np-barriers → barriers | Road barrier definitions and state | Create | Added barrier API with WS/webhook and auto-reset |
 | 97 | np-base → base-events | Base event filtering and indexing | Extend | Added `eventType` filter and composite index |
+| 98 | np-bennys → mechanic | Vehicle upgrade work orders with realtime push | Create | Added mechanic orders API and scheduler |
 
 ## 2025-08-28 — koilWeatherSync
 

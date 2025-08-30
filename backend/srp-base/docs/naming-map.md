@@ -62,3 +62,4 @@ Upstream name → SRP name mapping for this run.
 | np-admin:UnbanSteamId | admin.unban |
 | np-admin:IsPlayerBanned | admin.ban.status |
 | np-barriers | barriers |
+| np-bennys | mechanic |
