@@ -2342,6 +2342,43 @@ components:
           type: string
           format: date-time
           nullable: true
+    Command:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        police:
+          type: boolean
+        ems:
+          type: boolean
+        judge:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    CommandCreateRequest:
+      type: object
+      required: [name]
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        police:
+          type: boolean
+        ems:
+          type: boolean
+        judge:
+          type: boolean
 security:
   - ApiToken: []
 paths:
@@ -5414,6 +5451,93 @@ paths:
                     properties:
                       note:
                         $ref: '#/components/schemas/Note'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+  /v1/commands:
+    get:
+      summary: List registered commands
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 50
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: List of commands
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      commands:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Command'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+    post:
+      summary: Create a command
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandCreateRequest'
+      responses:
+        '200':
+          description: Command created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      command:
+                        $ref: '#/components/schemas/Command'
+                  requestId:
+                    type: string
+                  traceId:
+                    type: string
+  /v1/commands/{id}:
+    delete:
+      summary: Delete a command
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Command deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
                   requestId:
                     type: string
                   traceId:

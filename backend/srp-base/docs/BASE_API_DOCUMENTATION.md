@@ -763,3 +763,11 @@ Broadcast job assignment and message endpoints.
 - `POST /v1/broadcast/messages` – requires `X-Idempotency-Key`
 
 WebSocket namespace `broadcast` emits `broadcast.message`. Scheduler `broadcast-purge` removes old messages.
+
+### Commands
+
+| Method | Path | Description |
+|---|---|---|
+| GET | /v1/commands | List command definitions |
+| POST | /v1/commands | Create a command (idempotent via X-Idempotency-Key) |
+| DELETE | /v1/commands/{id} | Delete a command |

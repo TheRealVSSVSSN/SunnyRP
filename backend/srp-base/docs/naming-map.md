@@ -65,3 +65,4 @@ Upstream name → SRP name mapping for this run.
 | np-barriers | barriers |
 | np-bennys | mechanic |
 | np-broadcaster | broadcast |
+| np-commands | commands |

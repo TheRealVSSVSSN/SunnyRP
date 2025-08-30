@@ -1960,3 +1960,17 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 ### Rollback
 
 * Revert `PATCH /v1/camera/photos/{id}` route and remove associated repository function and documentation.
+
+## 2025-08-30 (np-commands)
+
+### Added
+
+* Command definition endpoints (`GET/POST /v1/commands`, `DELETE /v1/commands/{id}`) with WebSocket/webhook `commands.*` events.
+
+### Risks
+
+* Misconfigured role flags may expose admin-only commands.
+
+### Rollback
+
+* Drop `commands` table and remove command routes and repository.

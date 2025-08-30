@@ -56,3 +56,23 @@
 - `docs/naming-map.md`
 - `docs/research-log.md`
 - `openapi/api.yaml`
+
+## Update – 2025-08-30 (np-commands)
+
+- Added command definition backend with realtime WebSocket/webhook events.
+
+### Updated Documentation
+- `docs/modules/commands.md`
+- `docs/db-schema.md`
+- `docs/migrations.md`
+- `docs/index.md`
+- `docs/progress-ledger.md`
+- `docs/framework-compliance.md`
+- `docs/events-and-rpcs.md`
+- `docs/admin-ops.md`
+- `docs/naming-map.md`
+- `docs/research-log.md`
+- `openapi/api.yaml`
+- `CHANGELOG.md`
+- `MANIFEST.md`
+- `docs/BASE_API_DOCUMENTATION.md`
