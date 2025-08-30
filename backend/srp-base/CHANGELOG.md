@@ -2015,6 +2015,21 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 * Revert migration, drop index and foreign key, and remove routes, scheduler, and realtime broadcasts.
 
+## 2025-08-30 (np-dealer)
+
+### Added
+- Dealer offer API (`GET/POST /v1/dealers/offers`) with WebSocket/webhook events.
+- Scheduler `dealer-offer-purge` cleans expired offers.
+
+### Migrations
+- `096_add_dealer_offers.sql` – table for dealer offers.
+
+### Risks
+- Misconfigured expiry may remove active offers or keep stale ones.
+
+### Rollback
+- Drop `dealer_offers` table and remove dealer routes and scheduler.
+
 ## 2025-08-30 (np-dances)
 
 ### Added

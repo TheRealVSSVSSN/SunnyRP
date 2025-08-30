@@ -51,6 +51,7 @@ const zonesRoutes = require('./routes/zones.routes');
 
 // contracts domain route
 const contractsRoutes = require('./routes/contracts.routes');
+const dealersRoutes = require('./routes/dealers.routes');
 
 // driving tests and drift school domain routes
 const drivingTestsRoutes = require('./routes/drivingTests.routes');
@@ -237,6 +238,7 @@ app.use(blipsRoutes);
 app.use(crimeSchoolRoutes);
 app.use(zonesRoutes);
 app.use(contractsRoutes);
+app.use(dealersRoutes);
 app.use(drivingTestsRoutes);
 app.use(driftSchoolRoutes);
 app.use(boatshopRoutes);

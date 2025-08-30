@@ -18,6 +18,8 @@
 - Crime school progress tracking with realtime push and retention scheduler.
 - Dance animation definitions with realtime push and purge scheduler.
 
+- Dealer offers backend with realtime push and purge scheduler.
+
 | File | Action | Note |
 |---|---|---|
 | src/routes/broadcast.routes.js | R | Rename broadcaster to broadcast with message endpoints |
@@ -310,6 +312,29 @@
 | docs/research-log.md | M | Log np-crimeschool research |
 | docs/run-docs.md | M | Summarize crimeschool run |
 | docs/todo-gaps.md | M | Add crime school TODO |
+| src/repositories/dealersRepository.js | A | Persist dealer offers |
+| src/routes/dealers.routes.js | A | Dealer offer endpoints |
+| src/tasks/dealers.js | A | Purge expired dealer offers |
+| src/server.js | M | Register dealer purge task |
+| src/app.js | M | Mount dealer routes |
+| src/migrations/096_add_dealer_offers.sql | A | Dealer offers table |
+| openapi/api.yaml | M | Document dealer offer paths |
+| docs/modules/dealers.md | A | Dealer module doc |
+| docs/index.md | M | Log np-dealer update |
+| docs/progress-ledger.md | M | Record np-dealer entry |
+| docs/naming-map.md | M | Map np-dealer |
+| docs/events-and-rpcs.md | M | Map dealer events |
+| docs/db-schema.md | M | Document dealer_offers table |
+| docs/migrations.md | M | List migration 096 |
+| docs/admin-ops.md | M | Add dealer-offer operational note |
+| docs/testing.md | M | Dealer offer tests |
+| docs/framework-compliance.md | M | Add dealer outstanding item |
+| docs/BASE_API_DOCUMENTATION.md | M | Document dealer endpoints |
+| docs/research-log.md | M | Log np-dealer research |
+| docs/run-docs.md | M | Summarize np-dealer run |
+| docs/todo-gaps.md | M | Add dealer purchase TODO |
+| CHANGELOG.md | M | Log dealer offer feature |
+| MANIFEST.md | M | Update manifest |
 | src/routes/dances.routes.js | A | Manage dance animations |
 | src/repositories/dancesRepository.js | A | Persist dance animations |
 | src/tasks/dances.js | A | Purge disabled animations |

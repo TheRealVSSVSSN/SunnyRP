@@ -40,8 +40,27 @@
 - `CHANGELOG.md`
 - `MANIFEST.md`
 
-## Outstanding Items
-- None
+## Update – 2025-08-30 (np-dealer)
+
+- Added dealer offer backend with WebSocket/webhook events and minute purge scheduler.
+
+### Updated Documentation
+- `docs/modules/dealers.md`
+- `docs/index.md`
+- `docs/progress-ledger.md`
+- `docs/framework-compliance.md`
+- `docs/BASE_API_DOCUMENTATION.md`
+- `docs/events-and-rpcs.md`
+- `docs/db-schema.md`
+- `docs/migrations.md`
+- `docs/admin-ops.md`
+- `docs/testing.md`
+- `docs/naming-map.md`
+- `docs/research-log.md`
+- `openapi/api.yaml`
+- `CHANGELOG.md`
+- `MANIFEST.md`
+
 
 ## Update – 2025-08-30 (np-camera)
 
@@ -164,3 +183,4 @@
 - Record mhacking research sources in research-log.md
 - Add pagination for `/v1/minimap/blips`
 - Develop crime school curriculum and reward logic
+- Support dealer offer purchase flow and stock management

@@ -170,6 +170,10 @@
 
 - CREATE: Crime school progress API with WebSocket/webhook updates and hourly purge scheduler.
 
+## 2025-08-30 — np-dealer
+
+- CREATE: Dealer offers API with WebSocket/webhook push and minute purge scheduler.
+
 ## 2025-08-30 — np-dances
 
 - CREATE: Dance animation API with WebSocket/webhook pushes and hourly purge scheduler.

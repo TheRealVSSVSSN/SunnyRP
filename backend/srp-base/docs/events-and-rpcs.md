@@ -65,3 +65,4 @@
 | np-bennys | Vehicle upgrade orders and completion events | `POST /v1/mechanic/orders`, `GET /v1/mechanic/orders/{id}` → WS `mechanic.orders.*` |
 | np-contracts | `server:contractsend`, `contract:accept` | `POST /v1/contracts`, `POST /v1/contracts/{id}/accept`, `POST /v1/contracts/{id}/decline` → WS `contracts.*` |
 | np-crimeschool | Crime training stages and completion events | `GET/POST /v1/crime-school/{characterId}` → WS `crime-school.progress.updated` |
+| np-dealer | Drug dealing animations and offers | `GET /v1/dealers/offers`, `POST /v1/dealers/offers` → `dealers.offer.created`, `dealers.offer.expired` |

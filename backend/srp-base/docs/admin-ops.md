@@ -79,3 +79,4 @@
 - Ensure the `broadcast_messages` table exists; set `BROADCAST_RETENTION_MS` to control message retention. Scheduler `broadcast-purge` prunes old entries.
 - Ensure the `commands` table exists for command definitions.
 - Ensure the `contracts` table exists with index `idx_contracts_created_at`; adjust `CONTRACT_RETENTION_MS` for purge interval handled by `contracts-purge` scheduler.
+- Ensure the `dealer_offers` table exists; scheduler `dealer-offer-purge` removes expired offers.
