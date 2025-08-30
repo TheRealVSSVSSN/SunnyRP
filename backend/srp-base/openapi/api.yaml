@@ -2301,6 +2301,28 @@ components:
           type: integer
           nullable: true
           description: Seconds until automatic close
+    MechanicOrder:
+      type: object
+      properties:
+        id:
+          type: integer
+        vehiclePlate:
+          type: string
+        characterId:
+          type: integer
+        description:
+          type: string
+          nullable: true
+        status:
+          type: string
+          enum: [pending, completed]
+        createdAt:
+          type: string
+          format: date-time
+        completedAt:
+          type: string
+          format: date-time
+          nullable: true
 security:
   - ApiToken: []
 paths:
@@ -9511,3 +9533,45 @@ paths:
                     type: string
         '400':
           $ref: '#/components/responses/BadRequest'
+  /v1/mechanic/orders:
+    post:
+      summary: Create mechanic order
+      tags: [mechanic]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [vehiclePlate, characterId]
+              properties:
+                vehiclePlate:
+                  type: string
+                characterId:
+                  type: integer
+                description:
+                  type: string
+      responses:
+        '200':
+          description: Order created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MechanicOrder'
+  /v1/mechanic/orders/{id}:
+    get:
+      summary: Get mechanic order
+      tags: [mechanic]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Mechanic order
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MechanicOrder'

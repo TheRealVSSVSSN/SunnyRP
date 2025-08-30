@@ -1908,3 +1908,22 @@ Documentation cleanup to ensure OpenAPI validation passes. No runtime behaviour 
 
 ### Rollback
 * Drop index `idx_base_event_logs_type_created_at` and remove query filter.
+
+## 2025-08-30 (mechanic)
+
+### Added
+
+* Mechanic work order API (`POST /v1/mechanic/orders`, `GET /v1/mechanic/orders/{id}`) with WebSocket/webhook events.
+* Scheduler `mechanic-process` finalises pending orders.
+
+### Migrations
+
+* `091_add_mechanic_orders.sql` – table for mechanic work orders.
+
+### Risks
+
+* Completion scheduler uses fixed delay; misconfiguration may delay or prematurely finish orders.
+
+### Rollback
+
+* Drop `mechanic_orders` table and remove mechanic routes and scheduler registration.

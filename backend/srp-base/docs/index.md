@@ -128,3 +128,11 @@ Persistent world barriers with realtime sync.
 Base event logs now support filtering by type for targeted retrieval.
 
 * `GET /v1/base-events?eventType=` returns only matching events using new `(event_type, created_at)` index.
+
+## Update – 2025-08-30 (mechanic)
+
+Mechanic orders API with realtime completion events.
+
+* `POST /v1/mechanic/orders` creates work orders.
+* `GET /v1/mechanic/orders/{id}` retrieves status.
+* Scheduler `mechanic-process` marks orders complete and broadcasts `mechanic.orders.completed`.

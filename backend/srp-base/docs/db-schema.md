@@ -751,3 +751,17 @@ Records EMS vehicle spawn requests.
 Indexes:
 - `idx_barriers_expires_at` on `expires_at`
 - `idx_barriers_placed_by` on `placed_by`
+
+## mechanic_orders
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT AUTO_INCREMENT | Primary key |
+| vehicle_plate | VARCHAR(16) | Vehicle plate |
+| character_id | INT | FK to characters.id |
+| description | VARCHAR(255) | Optional description |
+| status | ENUM('pending','completed') | Order state |
+| created_at | TIMESTAMP | Creation time |
+| completed_at | TIMESTAMP NULL | Completion time |
+| INDEX idx_mechanic_orders_plate | (vehicle_plate) |
+| INDEX idx_mechanic_orders_status | (status) |

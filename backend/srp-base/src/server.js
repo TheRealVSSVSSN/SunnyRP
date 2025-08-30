@@ -45,6 +45,7 @@ const recyclingTasks = require('./tasks/recycling');
 const emsVehicleTasks = require('./tasks/emsVehicles');
 const vehicleControlTasks = require('./tasks/vehicleControl');
 const hackingTasks = require('./tasks/hacking');
+const mechanicTasks = require('./tasks/mechanic');
 
 // Register Prometheus metrics if enabled.  This must be done before
 // the server starts so that middleware can increment counters.
@@ -291,6 +292,13 @@ scheduler.register(
   () => emsVehicleTasks.purgeOld(),
   emsVehicleTasks.INTERVAL_MS,
   { jitter: 60000, persistName: emsVehicleTasks.JOB_NAME },
+);
+
+scheduler.register(
+  mechanicTasks.JOB_NAME,
+  () => mechanicTasks.processOrders(),
+  mechanicTasks.INTERVAL_MS,
+  { jitter: 5000, persistName: mechanicTasks.JOB_NAME },
 );
 
 // Vehicle control state cleanup

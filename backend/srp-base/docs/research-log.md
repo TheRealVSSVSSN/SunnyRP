@@ -466,3 +466,9 @@
 - Attempted to clone `https://github.com/h04X-2K/NoPixelServer` for `resources/np-base` but repository fetch was aborted due to size.
 - Reference resources unavailable; proceeding with internal consistency only.
 - Reviewed base event logging concepts in ESX and QB-Core to align terminology.
+
+## Research Log – 2025-08-30 (np-bennys)
+
+- Attempted to clone `https://github.com/h04X-2K/NoPixelServer` resource `np-bennys` but clone aborted due to repository size. Reference resources unavailable; proceeding with internal consistency only.
+- Reviewed mechanic and vehicle upgrade flows conceptually across EssentialMode, ESX, ND Core, FSN Framework, QB-Core, vRP and vORP to align naming.
+- Reviewed public NoPixel 4.0 and ProdigyRP 4.0 notes on mechanic shops and vehicle customization for feature parity (names/flows only).

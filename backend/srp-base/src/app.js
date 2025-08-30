@@ -37,6 +37,7 @@ const carwashRoutes = require('./routes/carwash.routes');
 const worldRoutes = require('./routes/world.routes');
 const weathersyncRoutes = require('./routes/weathersync.routes');
 const jobsRoutes = require('./routes/jobs.routes');
+const mechanicRoutes = require('./routes/mechanic.routes');
 
 // new domain routes for doors, error logging, weapons and shops
 const doorsRoutes = require('./routes/doors.routes');
@@ -215,6 +216,7 @@ app.use(lootRoutes);
 app.use(inventoryRoutes);
 app.use(economyRoutes);
 app.use(vehiclesRoutes);
+app.use(mechanicRoutes);
 app.use(carwashRoutes);
 app.use(worldRoutes);
 app.use(weathersyncRoutes);
