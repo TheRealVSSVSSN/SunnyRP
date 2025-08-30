@@ -732,3 +732,21 @@ Records EMS vehicle spawn requests.
 | slot | TINYINT | Slot number |
 | item | VARCHAR(64) | Item name or null |
 | PRIMARY KEY | (character_id, slot) |
+
+### barriers
+
+| Column | Type | Notes |
+|---|---|---|
+| id | INT | Primary key |
+| model | VARCHAR(60) | Barrier model name |
+| position | JSON | World coordinates and metadata |
+| heading | FLOAT | Heading of the barrier |
+| state | TINYINT(1) | 0 = closed, 1 = open |
+| expires_at | DATETIME | Null when persistent |
+| placed_by | INT | Character who placed the barrier |
+| created_at | DATETIME | Creation timestamp |
+| updated_at | DATETIME | Last update timestamp |
+
+Indexes:
+- `idx_barriers_expires_at` on `expires_at`
+- `idx_barriers_placed_by` on `placed_by`

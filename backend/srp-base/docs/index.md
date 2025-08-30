@@ -116,3 +116,9 @@ Logged unban actions with audit trail and WebSocket push.
 
 * `POST /v1/admin/unban` logs and broadcasts ban removals.
 * `GET /v1/admin/bans/{playerId}` exposes ban status.
+## Update – 2025-08-30 (barriers)
+
+Persistent world barriers with realtime sync.
+
+* `GET /v1/barriers`, `POST /v1/barriers`, `PATCH /v1/barriers/{barrierId}/state` manage barrier definitions and state.
+* Scheduler `barriers-reset` closes expired barriers and broadcasts `barriers.state`.

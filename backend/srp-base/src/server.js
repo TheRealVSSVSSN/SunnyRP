@@ -17,6 +17,7 @@ const baseEventTasks = require('./tasks/baseEvents');
 const boatshopTasks = require('./tasks/boatshop');
 const worldTasks = require('./tasks/world');
 const weathersyncTasks = require('./tasks/weathersync');
+const barriersTasks = require('./tasks/barriers');
 const timecycleTasks = require('./tasks/timecycle');
 const cameraTasks = require('./tasks/camera');
 const hudTasks = require('./tasks/hud');
@@ -117,6 +118,13 @@ scheduler.register(
   worldTasks.INTERVAL_MS,
   { jitter: 5000, persistName: worldTasks.JOB_NAME },
 );
+scheduler.register(
+  barriersTasks.JOB_NAME,
+  () => barriersTasks.resetExpired(wss),
+  barriersTasks.INTERVAL_MS,
+  { jitter: 5000, persistName: barriersTasks.JOB_NAME },
+);
+
 scheduler.register(
   weathersyncTasks.JOB_NAME,
   () => weathersyncTasks.syncForecast(),

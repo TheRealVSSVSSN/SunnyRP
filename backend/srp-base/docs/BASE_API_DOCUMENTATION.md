@@ -731,3 +731,11 @@ Scheduler `minimap-blips-broadcast` pushes periodic updates.
 - `GET /v1/admin/bans/{playerId}`
 
 WebSocket namespace `admin` emits `ban.added` and `ban.removed`.
+
+### Barriers
+
+Manage world road barriers and their open/closed state.
+
+- `GET /v1/barriers`
+- `POST /v1/barriers`
+- `PATCH /v1/barriers/{barrierId}/state`
