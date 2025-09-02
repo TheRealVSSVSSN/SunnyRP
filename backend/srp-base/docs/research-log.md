@@ -1,0 +1,67 @@
+# Research Log
+
+- NoPixel 3.0 `np-base`: https://github.com/h04X-2K/NoPixelServer
+- QBCore Framework: https://github.com/qbcore-framework/qb-core
+- ESX: https://github.com/ESX-Official/es_extended (webhook patterns)
+- CitizenFX resources: https://github.com/citizenfx/cfx-server-data
+- NoPixel 3.0 time sync: https://github.com/h04X-2K/NoPixelServer/tree/main/resources/np-base
+- QBCore permissions: groups and ACL patterns
+- ESX player groups and permission levels
+- CitizenFX cron resource for scheduled tasks: https://github.com/citizenfx/cfx-server-data/tree/master/resources/%5Bsystem%5D/cron
+- NoPixel logging webhooks: https://github.com/h04X-2K/NoPixelServer/tree/main/resources/np-log
+- NoPixel error logging: https://github.com/h04X-2K/NoPixelServer/tree/main/resources/np-errorlog
+- Prometheus metrics for Node.js: https://github.com/siimon/prom-client
+- NoPixel voice channels: https://github.com/h04X-2K/NoPixelServer/tree/main/resources/np-voice
+
+- NoPixel 3.0 `np-scoreboard`: https://github.com/h04X-2K/NoPixelServer/tree/main/resources/np-scoreboard
+- QBCore scoreboard: https://github.com/qbcore-framework/qb-scoreboard
+- NoPixel scoreboard job tags: https://github.com/h04X-2K/NoPixelServer/tree/main/resources/np-scoreboard
+- Additional NoPixel resources (voice, infinity, whitelist, etc.) returned 404 when accessed via GitHub raw URLs.
+- NoPixel connection queue: https://github.com/h04X-2K/NoPixelServer/tree/main/resources/connectqueue
+- NoPixel hardcap queue limit: https://github.com/h04X-2K/NoPixelServer/tree/main/resources/hardcap
+
+- Node.js test runner: https://nodejs.org/api/test.html
+
+- Node.js test runner mocking: https://nodejs.org/api/test.html#testmockmethod
+- NoPixel baseevents: https://github.com/h04X-2K/NoPixelServer/tree/main/baseevents
+- NoPixel np-infinity: https://github.com/h04X-2K/NoPixelServer/tree/main/np-infinity
+- NoPixel np-votesystem: https://github.com/h04X-2K/NoPixelServer/tree/main/np-votesystem
+- NoPixel np-whitelist: https://github.com/h04X-2K/NoPixelServer/tree/main/np-whitelist
+- NoPixel rconlog: https://github.com/h04X-2K/NoPixelServer/tree/main/rconlog
+- NoPixel runcode: https://github.com/h04X-2K/NoPixelServer/tree/main/runcode
+- NoPixel sessionmanager: https://github.com/h04X-2K/NoPixelServer/tree/main/sessionmanager
+- NoPixel spawnmanager: https://github.com/h04X-2K/NoPixelServer/tree/main/spawnmanager
+- NoPixel webpack toolchain: https://github.com/h04X-2K/NoPixelServer/tree/main/webpack
+- NoPixel yarn manager: https://github.com/h04X-2K/NoPixelServer/tree/main/yarn
+- NoPixel PolyZone: https://github.com/h04X-2K/NoPixelServer/tree/main/PolyZone
+- NoPixel chat: https://github.com/h04X-2K/NoPixelServer/tree/main/chat
+- NoPixel coordsaver: https://github.com/h04X-2K/NoPixelServer/tree/main/coordsaver
+- NoPixel cron: https://github.com/h04X-2K/NoPixelServer/tree/main/cron
+- NoPixel jobsystem: https://github.com/h04X-2K/NoPixelServer/tree/main/jobsystem
+- NoPixel np-broadcaster: https://github.com/h04X-2K/NoPixelServer/tree/main/np-broadcaster
+- np-infinity streaming: np-infinity/server/sv_lib.lua
+- np-broadcaster job limit: np-broadcaster/sv_broadcast.lua
+- NoPixel np-taskbarskill: https://github.com/h04X-2K/NoPixelServer/tree/main/np-taskbarskill
+- NoPixel np-taskbarthreat: https://github.com/h04X-2K/NoPixelServer/tree/main/np-taskbarthreat
+- NoPixel np-tasknotify: https://github.com/h04X-2K/NoPixelServer/tree/main/np-tasknotify
+- NoPixel pNotify: https://github.com/h04X-2K/NoPixelServer/tree/main/pNotify
+- NoPixel koil-debug: https://github.com/h04X-2K/NoPixelServer/tree/main/koil-debug
+- NoPixel koilWeatherSync: https://github.com/h04X-2K/NoPixelServer/tree/main/koilWeatherSync
+- NoPixel koillove: https://github.com/h04X-2K/NoPixelServer/tree/main/koillove
+- NoPixel mapmanager: https://github.com/h04X-2K/NoPixelServer/tree/main/mapmanager
+- NoPixel minimap: https://github.com/h04X-2K/NoPixelServer/tree/main/minimap
+- NoPixel np-barriers: https://github.com/h04X-2K/NoPixelServer/tree/main/np-barriers
+- NoPixel np-broadcaster: https://github.com/h04X-2K/NoPixelServer/tree/main/np-broadcaster
+- NoPixel np-cid: https://github.com/h04X-2K/NoPixelServer/tree/main/np-cid
+- NoPixel np-hospitalization: https://github.com/h04X-2K/NoPixelServer/tree/main/np-hospitalization
+- NoPixel np-login: https://github.com/h04X-2K/NoPixelServer/tree/main/np-login
+- NoPixel np-restart: https://github.com/h04X-2K/NoPixelServer/tree/main/np-restart
+- NoPixel np-secondaryjobs: https://github.com/h04X-2K/NoPixelServer/tree/main/np-secondaryjobs
+- NoPixel np-taskbar: https://github.com/h04X-2K/NoPixelServer/tree/main/np-taskbar
+- NoPixel np-taskbarskill: https://github.com/h04X-2K/NoPixelServer/tree/main/np-taskbarskill
+- NoPixel np-taskbarthreat: https://github.com/h04X-2K/NoPixelServer/tree/main/np-taskbarthreat
+- NoPixel np-tasknotify: https://github.com/h04X-2K/NoPixelServer/tree/main/np-tasknotify
+- NoPixel pNotify: https://github.com/h04X-2K/NoPixelServer/tree/main/pNotify
+- NoPixel pPassword: https://github.com/h04X-2K/NoPixelServer/tree/main/pPassword
+- NoPixel whitelist enforcement details: np-whitelist/sv_whitelist.lua
+- NoPixel player limit script: hardcap/server.lua

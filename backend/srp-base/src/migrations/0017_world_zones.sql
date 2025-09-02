@@ -1,0 +1,12 @@
+CREATE TABLE IF NOT EXISTS world_zones (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(64) NOT NULL,
+  data JSON NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS world_barriers (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  zone_id INT NOT NULL,
+  data JSON NOT NULL,
+  FOREIGN KEY (zone_id) REFERENCES world_zones(id)
+);

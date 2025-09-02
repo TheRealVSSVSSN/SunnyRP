@@ -1,0 +1,23 @@
+# Migrations
+
+- `0001_initial.sql` – create accounts, characters, account_selected_character tables.
+- `0002_idempotency_and_hooks.sql` – add idempotency_keys and webhook_endpoints tables.
+- `0003_auth_tokens.sql` – add auth_tokens table.
+- `0004_banking.sql` – add bank_accounts and bank_transactions tables.
+- `0005_inventory.sql` – add items and character_inventory tables.
+- `0006_roles.sql` – add roles, role_permissions, and account_roles tables.
+- `0007_scheduler_runs.sql` – track last run timestamps for scheduler tasks.
+- `0008_scoreboard.sql` – track active players for scoreboard listings.
+- `0009_scoreboard_job.sql` – add job metadata column for scoreboard players.
+- `0010_telemetry_errors.sql` – store service error logs and index creation time.
+- `0011_connection_queue.sql` – manage login order for connections.
+- `0012_voice_channels.sql` – track voice channel memberships.
+- `0013_sessions.sql` – add users_whitelist and session_limits tables.
+- `0014_jobs.sql` – add jobs and character_jobs tables.
+- `0015_weather.sql` – persist weather state.
+- `0016_session_lifecycle.sql` – add session_password, character_cids, and hospitalizations tables.
+- `0017_world_zones.sql` – add world_zones and world_barriers tables.
+- `0018_ux.sql` – add chat_messages, votes, vote_options, and vote_responses tables.
+- `0019_telemetry_extended.sql` – add rcon_logs, exec_logs, restart_schedule, and debug_logs tables.
+- `0020_world_coords_voice_broadcast.sql` – add character_coords, character_spawns, and voice_broadcast tables.
+- `0021_infinity_entities.sql` – track coordinates for streamed entities.

@@ -1,0 +1,76 @@
+# === OS junk ===
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# === Logs ===
+logs/*
+!logs/.gitkeep
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.pid
+*.pid.lock
+
+# === Environment files ===
+.env
+.env.*
+*.env
+**/.env
+**/.env.*
+# Keep example env files
+!.env.example
+!**/.env.example
+
+# === Dependencies ===
+node_modules/
+jspm_packages/
+
+# === Build outputs / caches ===
+dist/
+build/
+.cache/
+.tmp/
+temp/
+tmp/
+coverage/
+.nyc_output/
+*.tsbuildinfo
+
+# === Bundlers / frameworks (add/remove as needed) ===
+.next/
+.nuxt/
+.svelte-kit/
+.vite/
+.angular/
+out/
+.storybook-out/
+
+# === Lint / tools ===
+.eslintcache
+
+# === Editors ===
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
+.idea/
+*.iml
+
+# === FiveM / CFX artifacts ===
+cache/
+crashes/
+data/server-cache/
+data/server-cache-priv/
+*.luac
+
+# === Package managers (advanced) ===
+.pnpm-store/
+.pnp.*
+.yarn/*
+!.yarn/releases/**
+!.yarn/plugins/**
+!.yarn/sdks/**
+!.yarn/versions/**

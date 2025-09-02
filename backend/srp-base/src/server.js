@@ -1,0 +1,36 @@
+import http from 'http';
+import { app } from './app.js';
+import { initGateway, emitEvent } from './websockets/gateway.js';
+import { scheduler, registerTask } from './bootstrap/scheduler.js';
+import { logger } from './util/logger.js';
+import { purgeExpired } from './repositories/idempotency.js';
+import { purgeStalePlayers } from './repositories/scoreboard.js';
+import { purgeStaleQueue } from './repositories/queue.js';
+import { purgeStaleChannels } from './repositories/voice.js';
+import { purgeStaleEntities } from './repositories/world.js';
+import { refreshEndpoints } from './webhooks/dispatcher.js';
+import { getCurrentTime } from './util/time.js';
+
+const port = process.env.PORT || 3000;
+const server = http.createServer(app);
+
+registerTask('idempotency_purge', 60_000, purgeExpired);
+const timeInterval = Number(process.env.TIME_BROADCAST_INTERVAL_MS) || 60_000;
+registerTask('system_time_broadcast', timeInterval, () => {
+  emitEvent('system', 'time', '*', { time: getCurrentTime() });
+});
+const scoreboardStale = Number(process.env.SCOREBOARD_STALE_MS) || 30_000;
+registerTask('scoreboard_purge', scoreboardStale, () => purgeStalePlayers(scoreboardStale));
+const queueStale = Number(process.env.QUEUE_STALE_MS) || 300_000;
+registerTask('queue_purge', 60_000, () => purgeStaleQueue(queueStale));
+const voiceStale = Number(process.env.VOICE_STALE_MS) || 300_000;
+registerTask('voice_purge', 60_000, () => purgeStaleChannels(voiceStale));
+const infinityStale = Number(process.env.INFINITY_STALE_MS) || 300_000;
+registerTask('infinity_entity_purge', 60_000, () => purgeStaleEntities(infinityStale));
+refreshEndpoints();
+initGateway(server);
+scheduler.start();
+
+server.listen(port, () => {
+  logger.info({ port }, 'srp-base listening');
+});

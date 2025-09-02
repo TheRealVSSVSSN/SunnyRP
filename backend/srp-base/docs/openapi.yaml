@@ -1,0 +1,207 @@
+openapi: 3.0.0
+info:
+  title: SRP Base API
+  version: 0.1.0
+security:
+  - hmacAuth: []
+components:
+  securitySchemes:
+    hmacAuth:
+      type: apiKey
+      in: header
+      name: x-srp-signature
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      schema:
+        type: string
+      description: Idempotency key for safely retrying requests
+paths:
+  /v1/accounts/{accountId}/characters:
+    get:
+      summary: List characters for an account
+      tags:
+        - Accounts
+      security:
+        - hmacAuth: []
+          bearerAuth:
+            - accounts:read
+      parameters:
+        - in: path
+          name: accountId
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Successful response
+    post:
+      summary: Create a character
+      tags:
+        - Accounts
+      security:
+        - hmacAuth: []
+          bearerAuth:
+            - accounts:write
+      parameters:
+        - in: path
+          name: accountId
+          required: true
+          schema:
+            type: integer
+        - $ref: "#/components/parameters/IdempotencyKey"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - firstName
+                - lastName
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+      responses:
+        "201":
+          description: Character created
+  /v1/accounts/{accountId}/characters/{characterId}:select:
+    post:
+      summary: Select active character
+      tags:
+        - Accounts
+      security:
+        - hmacAuth: []
+          bearerAuth:
+            - accounts:write
+      parameters:
+        - in: path
+          name: accountId
+          required: true
+          schema:
+            type: integer
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+        - $ref: "#/components/parameters/IdempotencyKey"
+      responses:
+        "204":
+          description: Selection saved
+  /v1/accounts/{accountId}/characters/{characterId}:
+    delete:
+      summary: Delete a character
+      tags:
+        - Accounts
+      security:
+        - hmacAuth: []
+          bearerAuth:
+            - accounts:write
+      parameters:
+        - in: path
+          name: accountId
+          required: true
+          schema:
+            type: integer
+        - in: path
+          name: characterId
+          required: true
+          schema:
+            type: integer
+        - $ref: "#/components/parameters/IdempotencyKey"
+      responses:
+        "204":
+          description: Character deleted
+  /v1/hooks/endpoints:
+    get:
+      summary: List webhook endpoints
+      tags:
+        - Hooks
+      security:
+        - hmacAuth: []
+          bearerAuth:
+            - hooks:read
+      responses:
+        "200":
+          description: Endpoint list
+    post:
+      summary: Create webhook endpoint
+      tags:
+        - Hooks
+      security:
+        - hmacAuth: []
+          bearerAuth:
+            - hooks:write
+      parameters:
+        - $ref: "#/components/parameters/IdempotencyKey"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - url
+                - secret
+              properties:
+                url:
+                  type: string
+                  format: uri
+                secret:
+                  type: string
+      responses:
+        "201":
+          description: Endpoint created
+  /v1/hooks/endpoints/{id}:
+    delete:
+      summary: Delete webhook endpoint
+      tags:
+        - Hooks
+      security:
+        - hmacAuth: []
+          bearerAuth:
+            - hooks:write
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+        - $ref: "#/components/parameters/IdempotencyKey"
+      responses:
+        "204":
+          description: Endpoint deleted
+  /v1/health:
+    get:
+      summary: Service health
+      tags:
+        - System
+      responses:
+        "200":
+          description: OK
+  /v1/ready:
+    get:
+      summary: Readiness check
+      tags:
+        - System
+      responses:
+        "200":
+          description: Ready state
+  /v1/info:
+    get:
+      summary: Service info
+      tags:
+        - System
+      responses:
+        "200":
+          description: Info response
+tags: []
