@@ -1,0 +1,482 @@
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono');
+
+/*
+	MAIN INTERFACE
+*/
+.atm_main {
+	width: 920px;
+	height: 595px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #878787;
+	border: 1px solid black;
+	border-radius: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 10px;
+	margin-top: 10%;
+	
+	display: none;
+}
+
+/*
+	ATM SCREEN
+*/
+.atm_screen {
+	background-color: #0011ff;
+	float: left;
+	width: 790px;
+	height: 500px;
+	margin-left: 5px;
+	margin-right: 5px;
+	border-radius: 1px;
+}
+
+
+.menu_title {
+	width: 100%;
+	height: 30px;
+	font-family: 'IBM Plex Mono', monospace;
+	text-align: center;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	font-size: 23px;
+	color: white;
+	border-bottom: 4px solid #fff;
+}
+
+.balance_area {
+	position: relative;
+	width: 100%;
+	border-top: 3px solid #fff;
+	height: 60px;
+}
+
+.balance_descriptions {
+	width: 40%;
+	height: 100%;
+	float: left;
+}
+
+.balance_descriptions span {
+	height: 30px;
+	width: 100%;
+	color: #fff;
+	line-height: 25px;
+	font-family: 'IBM Plex Mono', monospace;
+	text-align: left;
+	padding: 2px;
+}
+
+.balance_descriptions span:first-of-type {
+	line-height: 30px;
+}
+
+.balance_balances {
+	width: 40%;
+	height: 100%;
+	float: right;
+}
+
+.balance_balances span {
+	height: auto;
+	width: 100%;
+	color: #fff;
+	line-height: 20px;
+	font-family: 'IBM Plex Mono', monospace;
+	padding: 2px;
+	text-align: right; 
+	float: right;
+}
+
+.balance_balances span:first-of-type {
+	line-height: 25px;
+}
+
+.atm_logo {
+	float: right;
+	padding: 10px;
+}
+
+/*
+	SIDE BUTTONS
+*/
+.buttons_left {
+	width: 60px;
+	height: 500px;
+	float: left;
+}
+
+.buttons_right {
+	width: 60px;
+	height: 500px;
+	float: left;
+}
+
+.buttons_left button, .buttons_right button {
+	width: 100%;
+	border-radius: 10px;
+	height: 60px;
+	margin-top: 50px;
+}
+
+.buttons_left button:hover, .buttons_right button:hover {
+	background-color: #a8a8a8;
+}
+
+.buttons_left button:first-of-type, .buttons_right button:first-of-type {
+	margin-top: 10px;
+}
+
+#button_1, #button_5 {
+	background-color: rgba(0,0,0,0);
+	border: none;
+}
+
+/*
+	WITHDRAW SCREEN
+*/
+.withdraw_screen {
+	width: 100%;
+	height: 440px;
+	display: none;
+}
+.withdraw_text {
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 40px;
+	color: #fff;
+	text-align: center;
+	width: 100%;
+	margin-top: 130px;
+}
+
+.withdraw_area {
+	position: relative;
+	width: 90%;
+	height: 50px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.withdraw_area input {
+	width: 100%;
+	height: 100%;
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 40px;
+}
+
+.withdraw_options {
+	width: 100%;
+	height: 60px;
+	margin-top: 80px;
+}
+
+/*
+	DEPOSIT SCREEN
+*/
+.deposit_screen {
+	width: 100%;
+	height: 440px;
+	display: none
+}
+.deposit_text {
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 40px;
+	color: #fff;
+	text-align: center;
+	width: 100%;
+	margin-top: 130px;
+}
+
+.deposit_area {
+	position: relative;
+	width: 90%;
+	height: 50px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.deposit_area input {
+	width: 100%;
+	height: 100%;
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 40px;
+}
+
+.deposit_options {
+	width: 100%;
+	height: 60px;
+	margin-top: 80px;
+}
+
+/*
+	GROUP SCREEN
+*/
+.group_screen {
+	width: 100%;
+	height: 440px;
+	display: none
+}
+.group_text {
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 20px;
+	color: #fff;
+	text-align: center;
+	width: 100%;
+	margin-top: 60px;
+}
+
+.group_area {
+	position: relative;
+	width: 90%;
+	height: 50px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.group_area input {
+	width: 100%;
+	height: 100%;
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 40px;
+}
+
+.group_options {
+	width: 100%;
+	height: 60px;
+	margin-top: 80px;
+}
+
+/*
+	TRANSFER SCREEN
+*/
+.transfer_screen {
+	width: 100%;
+	height: 440px;
+	display: none;
+}
+.transfer_text {
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 40px;
+	color: #fff;
+	text-align: center;
+	width: 100%;
+	margin-top: 20px;
+}
+
+.transfer_area {
+	position: relative;
+	width: 90%;
+	height: 50px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.transfer_area input {
+	width: 100%;
+	height: 100%;
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 40px;
+}
+
+#transfer_input_to {
+	
+}
+
+.transfer_options {
+	width: 100%;
+	height: 60px;
+	margin-top: 70px;
+}
+
+/*
+	MAIN OPTIONS SCREEN
+*/
+.option_cancel {
+	width: 49%;
+	height: 100%;
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 20px;
+	float: left;
+	color: #fff;
+	padding-left: 3px;
+}
+
+.option_accept {
+	width: 49%;
+	height: 100%;
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 20px;
+	float: right;
+	text-align: right;
+	color: #fff;
+	padding-right: 3px;
+}
+
+.options_screen {
+	width: 100%;
+	height: 440px;
+}
+
+.options_area {
+	padding-top: 95px;
+}
+
+.option_1 {
+	width: 49%;
+	height: 40px;
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 20px;
+	float: left;
+	text-align: left;
+	color: #fff;
+	padding-left: 3px;
+}
+
+.option_2 {
+	width: 49%;
+	height: 40px;
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 20px;
+	float: right;
+	text-align: right;
+	color: #fff;
+	padding-right: 3px;
+}
+
+.option_3 {
+	width: 49%;
+	height: 40px;
+	margin-top: 70px;
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 20px;
+	float: left;
+	text-align: left;
+	color: #fff;
+	padding-left: 3px;
+}
+
+.option_4 {
+	width: 49%;
+	height: 40px;
+	margin-top: 70px;
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 20px;
+	float: right;
+	text-align: right;
+	color: #fff;
+	padding-right: 3px;
+}
+
+.option_5 {
+	width: 48%;
+	height: 40px;
+	margin-top: 70px;
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 20px;
+	float: left;
+	text-align: left;
+	color: #fff;
+	padding-left: 3px;
+}
+
+.option_6 {
+	width: 48%;
+	height: 40px;
+	margin-top: 70px;
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 20px;
+	float: right;
+	text-align: right;
+	color: #fff;
+	padding-right: 3px;
+}
+
+
+#loan-main * { 
+    -moz-box-sizing: border-box; 
+    -webkit-box-sizing: border-box; 
+     box-sizing: border-box; 
+}
+
+#loan-main {
+	width: 40%;
+	padding-top:20px;
+	max-height: 80%;
+	background-color: white;
+	float:right;
+	margin-right: 10%;
+	margin-top: 5%;
+	padding-bottom: 30px;
+	display: none;
+}
+.loan_header {
+	width: 100%;
+	font-weight: bold;
+	font-size: 24px;
+	padding: 10px;
+	text-align: center;
+}
+.loan_first {
+	width: 50%;
+	max-width: 50%;
+	float:left;
+	display: block;
+	padding: 10px;
+	font-weight: bold;
+	padding-left: 20px;
+}
+.loan_second {
+	width: 40%;
+	max-width: 40%;
+	float:left;
+	display: block;
+	padding: 10px;
+	text-align: center;
+	padding-right: 20px;
+	border-bottom: 2px dotted black;
+}
+.loan_center {
+	width: 100%;
+	max-width: 100%;
+	float:left;
+	display: block;
+	padding: 30px;
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.loan_agreement {
+	margin-top: 100px;
+}
+.loan_agree {
+	position: fixed;
+	right: 10%;
+	bottom: 8%;
+	width: 40%;
+}
+.loan_agree button {
+	margin-top: 10px;
+}
+
+.loan_button {
+  display: block;
+  width: 80%;
+  border-radius: 6px;
+  border: none;
+  background-color: #04AA6D;
+  padding: 14px 28px;
+  font-size: 14px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.loan_button_agree {
+  background-color: #04AA6D;
+}
+.loan_button_disagree {
+	background-color: red;
+}
