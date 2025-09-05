@@ -32,3 +32,4 @@
 - 2025-09-13: Extended telemetry with RCON logging, remote code execution, restart scheduling, and debug hooks.
 - 2025-09-11: Implemented sessions whitelist and hardcap management with REST endpoints and WebSocket events.
 - 2025-09-15: Added infinity entity streaming and broadcast limit enforcement.
+- 2025-09-16: Refactored WebSocket gateway with domain namespaces, handshake validation, and broadcast rate limiting.
