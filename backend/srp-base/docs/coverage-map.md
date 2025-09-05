@@ -54,6 +54,7 @@
 
 ## Notes & Mapping
 - `np-errorlog` informed the **telemetry** module for error log storage and broadcasting.
+- Gateway now uses per-domain namespaces with validated handshakes.
 - Source to SRP module mapping:
   - np-base → sessions
   - baseevents → telemetry

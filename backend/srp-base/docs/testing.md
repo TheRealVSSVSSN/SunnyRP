@@ -5,6 +5,7 @@
 - Automated tests run with `npm test` covering health, voice, system, metrics, scheduler persistence, and sessions, jobs, and weather auth enforcement.
 - Automated tests run with `npm test` covering health, voice, system, metrics, scheduler persistence, and sessions auth enforcement.
 - Automated tests run with `npm test` covering coordinate saving, spawn logging, broadcaster state, and notification endpoints.
+- Automated tests run with `npm test` covering gateway namespaces and handshake validation.
 
 ## Token Authentication Examples
 

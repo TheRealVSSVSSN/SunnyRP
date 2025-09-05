@@ -28,3 +28,11 @@ export async function deleteCharacter(accountId, characterId) {
     [characterId, accountId]
   );
 }
+
+export async function ownsCharacter(accountId, characterId) {
+  const rows = await query(
+    'SELECT 1 FROM characters WHERE id = ? AND account_id = ? AND deleted_at IS NULL',
+    [characterId, accountId]
+  );
+  return rows.length > 0;
+}

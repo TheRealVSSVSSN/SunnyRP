@@ -42,3 +42,4 @@
 | np-restart | restart | scheduled restarts |
 | koil-debug | debug | debug hooks |
 | koilWeatherSync | weather | environmental sync |
+| socket namespace | domain namespace | per-domain WebSocket channel |

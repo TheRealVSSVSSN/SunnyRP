@@ -3,12 +3,13 @@
 ## SRP-BASE Compatibility
 - Implements required `/v1/health`, `/v1/ready`, and `/v1/info` endpoints.
 - Provides multi-character APIs under `/v1/accounts`.
-- WebSocket handshake accepts `sid`, `accountId`, `characterId`.
+- WebSocket handshake validates `sid`, `accountId`, and `characterId` and rejects unauthorized clients.
 - Issues and refreshes JWT tokens with scoped access.
 - Inventory and banking modules expose REST endpoints with scope enforcement.
 - JWT auth middleware logs verification errors and differentiates missing, malformed, expired, and invalid tokens.
 - Scheduler broadcasts system time to clients via WebSocket.
 - Scheduler persists last run state in MySQL for idempotency.
+- WebSocket gateway serves per-domain namespaces under `/ws/<domain>` with broadcast rate limiting.
 - Scheduler administration endpoints expose task runs and manual triggers with scope enforcement.
 - WebSocket events mirror to webhook dispatcher for external systems.
 - Scoreboard module exposes REST endpoints and WebSocket updates for active players.

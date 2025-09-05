@@ -86,3 +86,6 @@
 - Track infinity entity coordinates with REST endpoints and scheduled purge.
 - Enforce broadcast participation limits and expose active broadcaster list.
 
+## 2025-09-16
+- Refactor WebSocket gateway with per-domain namespaces, account and character validation, and broadcast rate limiting.
+
