@@ -11,6 +11,8 @@
 - Added coordinate saving, spawn logging, population metrics, broadcaster role management, and expanded notification endpoints.
 - Added infinity entity streaming with REST endpoints and scheduler purge, and enforced broadcast participation limits.
 
+- Refactored WebSocket gateway with per-domain namespaces, handshake validation, and broadcast rate limiting.
+
 ## Files
 | Path | Type | Notes |
 |------|------|-------|
@@ -131,3 +133,15 @@
 | docs/modules/voice.md | M | document broadcast endpoints |
 | docs/modules/world.md | A | world module doc |
 | README.md | A | service overview |
+| src/repositories/characters.js | M | validate character ownership |
+| src/websockets/gateway.js | M | domain namespaces, validation, rate limiting |
+| src/server.js | M | mount domain namespaces |
+| docs/events-and-rpcs.md | M | document namespace paths |
+| docs/index.md | M | note gateway refactor |
+| docs/run-docs.md | M | log gateway refactor |
+| docs/framework-compliance.md | M | note handshake validation and namespaces |
+| docs/naming-map.md | M | map socket namespace term |
+| docs/coverage-map.md | M | mention namespace change |
+| docs/gap-closure-report.md | M | mark gateway gap closed |
+| docs/progress-ledger.md | M | record gateway work |
+| docs/testing.md | M | note gateway tests |

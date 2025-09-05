@@ -20,6 +20,7 @@ if (!process.env.JWT_SECRET) {
 
 const port = process.env.PORT || 3000;
 const server = http.createServer(app);
+const wsDomains = ['jobs','queue','scheduler','scoreboard','sessions','system','telemetry','ux','voice','world'];
 
 registerTask('idempotency_purge', 60_000, purgeExpired);
 const timeInterval = Number(process.env.TIME_BROADCAST_INTERVAL_MS) || 60_000;
@@ -35,7 +36,7 @@ registerTask('voice_purge', 60_000, () => purgeStaleChannels(voiceStale));
 const infinityStale = Number(process.env.INFINITY_STALE_MS) || 300_000;
 registerTask('infinity_entity_purge', 60_000, () => purgeStaleEntities(infinityStale));
 refreshEndpoints();
-initGateway(server);
+initGateway(server, wsDomains);
 scheduler.start();
 
 server.listen(port, () => {

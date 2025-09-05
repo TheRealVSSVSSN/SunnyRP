@@ -26,3 +26,4 @@ Added scheduler persistence tests verifying task run time storage.
 Reviewed NoPixel base resources and documented outstanding modules such as session lifecycle, world zones, and chat/vote UI.
 Added coordinate saving, spawn logging, broadcaster role management, population metrics, and expanded notification endpoints.
 Implemented infinity entity streaming with REST APIs and scheduled purge, and enforced broadcast participation limits.
+Refactored WebSocket gateway with domain-specific namespaces, account/character validation, and broadcast rate limiting.

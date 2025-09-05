@@ -14,6 +14,7 @@ Added infinity entity coordinate tracking with scheduled purge based on `np-infi
 Added weather synchronization guided by `koilWeatherSync` with REST control and real-time broadcast.
 Added tests ensuring sessions, jobs, and weather endpoints enforce authentication.
 Added test ensuring sessions whitelist endpoints enforce authentication.
+Refactored WebSocket gateway with domain namespaces, account and character validation, and broadcast rate limiting.
 
 ## Testing
 - `npm test`

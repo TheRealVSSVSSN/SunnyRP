@@ -1,7 +1,7 @@
 # Events and RPCs
 
 ## WebSocket Events
-- Namespace: default
+- Namespaces: `/ws/<domain>`
 - Envelope fields: `id`, `type`, `source`, `subject`, `time`, `specversion`, `data`
 - Built-in: `ping` -> `pong`
 - `srp.system.time` -> server time tick honoring `TIMEZONE`
