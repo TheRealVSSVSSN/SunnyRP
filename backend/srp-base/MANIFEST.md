@@ -1,6 +1,7 @@
 # Manifest
 
 ## Summary
+- Refreshed documentation and coverage map after new resource scan; no backend changes.
 - Implemented session lifecycle with login password, CID assignment, and hospitalization flows.
 - Added world zone and barrier management.
 - Introduced UX module for chat, voting, taskbar progress, and broadcast messaging.
@@ -17,6 +18,14 @@
 ## Files
 | Path | Type | Notes |
 |------|------|-------|
+| docs/index.md | M | reset documentation |
+| docs/progress-ledger.md | M | log new run |
+| docs/run-docs.md | M | summarize scan |
+| docs/framework-compliance.md | M | reaffirm compatibility |
+| docs/research-log.md | M | list scanned resources |
+| docs/research-summary.md | M | summarize findings |
+| docs/coverage-map.md | M | include backend_impl_found column |
+| docs/gap-closure-report.md | M | no gaps identified |
 | docs/index.md | M | summarize new modules |
 | src/repositories/sessions.js | M | add login, CID, hospital functions |
 | src/routes/sessions.js | M | add login, CID, hospital endpoints |
