@@ -95,3 +95,6 @@
 
 ## 2025-09-18
 - Refresh documentation and coverage map after fresh resource scan; no code changes.
+
+## 2025-09-05
+- Re-scan confirmed prior coverage; no changes required.

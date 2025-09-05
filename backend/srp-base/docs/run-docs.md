@@ -1,7 +1,7 @@
 # Run Documentation
 
 ## Summary
-Performed fresh traversal of NoPixelServer and core resource paths along with backend/srp-base to verify coverage. No new evidence-backed gaps were found.
+On 2025-09-05, performed a fresh traversal of NoPixelServer and core resource paths along with backend/srp-base. Coverage remains complete with no new evidence-backed gaps discovered.
 
 ## Testing
-- `npm test`
+- `npm test` *(failing: HMAC key missing)*
