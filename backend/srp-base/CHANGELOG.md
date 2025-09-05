@@ -92,3 +92,6 @@
 ## 2025-09-17
 - Parallelize webhook dispatch, persist failed deliveries, and schedule retries with exponential backoff.
 
+
+## 2025-09-18
+- Refresh documentation and coverage map after fresh resource scan; no code changes.
