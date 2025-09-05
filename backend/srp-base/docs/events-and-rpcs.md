@@ -4,7 +4,7 @@
 - Namespaces: `/ws/<domain>`
 - Envelope fields: `id`, `type`, `source`, `subject`, `time`, `specversion`, `data`
 - Built-in: `ping` -> `pong`
-- `srp.system.time` -> server time tick honoring `TIMEZONE`
+- `srp.system.time` -> server time tick in ISO 8601 format honoring `TIMEZONE`
 - `srp.scoreboard.update` -> player ping, name, or job update
 - `srp.scoreboard.remove` -> player removed/timeout
 - `srp.telemetry.error` -> error log created

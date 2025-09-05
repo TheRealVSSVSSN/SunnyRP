@@ -16,7 +16,7 @@
 
 ## System Time
 - Configure timezone and broadcast interval via environment:
-  - `TIMEZONE` (default `UTC`)
+  - `TIMEZONE` (IANA zone or `+HH:MM` offset, default `UTC`)
   - `TIME_BROADCAST_INTERVAL_MS` (default `60000`)
 
 ## Scoreboard
