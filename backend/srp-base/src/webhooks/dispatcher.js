@@ -1,6 +1,12 @@
 import crypto from 'crypto';
 import { logger } from '../util/logger.js';
 import { listEndpointsWithSecrets } from '../repositories/hooks.js';
+import {
+  insertDeadLetter,
+  listDueDeadLetters,
+  deleteDeadLetter,
+  rescheduleDeadLetter
+} from '../repositories/webhookDeadLetters.js';
 
 let endpoints = [];
 
@@ -16,24 +22,40 @@ export async function refreshEndpoints() {
   }
 }
 
-async function send(url, secret, event, attempt = 0) {
+async function send(url, secret, event) {
   const body = JSON.stringify(event);
   const sig = crypto.createHmac('sha256', secret).update(body).digest('hex');
-  try {
-    const res = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json', 'x-srp-signature': sig }, body });
-    if (!res.ok) throw new Error(`status ${res.status}`);
-  } catch (err) {
-    if (attempt < 3) {
-      const delay = Math.pow(2, attempt) * 1000 + Math.random() * 1000;
-      await new Promise(r => setTimeout(r, delay));
-      return send(url, secret, event, attempt + 1);
-    }
-    logger.error({ err, url }, 'webhook failed');
-  }
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', 'x-srp-signature': sig },
+    body
+  });
+  if (!res.ok) throw new Error(`status ${res.status}`);
 }
 
 export async function dispatch(event) {
-  for (const { url, secret } of endpoints) {
-    await send(url, secret, event);
-  }
+  const jobs = endpoints.map(({ url, secret }) =>
+    send(url, secret, event).catch(async err => {
+      logger.error({ err, url }, 'webhook failed');
+      await insertDeadLetter({ url, secret, payload: event });
+    })
+  );
+  await Promise.allSettled(jobs);
+}
+
+export async function retryDeadLetters() {
+  const letters = await listDueDeadLetters(10);
+  await Promise.allSettled(
+    letters.map(async letter => {
+      const payload = JSON.parse(letter.payload);
+      try {
+        await send(letter.url, letter.secret, payload);
+        await deleteDeadLetter(letter.id);
+      } catch {
+        const attempts = letter.attempts + 1;
+        const delay = Math.pow(2, attempts) * 60;
+        await rescheduleDeadLetter(letter.id, attempts, delay);
+      }
+    })
+  );
 }

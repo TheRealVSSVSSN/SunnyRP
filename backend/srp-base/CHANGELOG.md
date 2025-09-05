@@ -89,3 +89,6 @@
 ## 2025-09-16
 - Refactor WebSocket gateway with per-domain namespaces, account and character validation, and broadcast rate limiting.
 
+## 2025-09-17
+- Parallelize webhook dispatch, persist failed deliveries, and schedule retries with exponential backoff.
+
