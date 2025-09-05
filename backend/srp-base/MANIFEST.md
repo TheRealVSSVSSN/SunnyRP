@@ -10,6 +10,7 @@
 - Added sessions whitelist and hardcap management with persistence, REST routes, WebSocket events, and tests.
 - Added coordinate saving, spawn logging, population metrics, broadcaster role management, and expanded notification endpoints.
 - Added infinity entity streaming with REST endpoints and scheduler purge, and enforced broadcast participation limits.
+- Added webhook dead-letter queue with parallel dispatch and retry scheduler.
 
 - Refactored WebSocket gateway with per-domain namespaces, handshake validation, and broadcast rate limiting.
 
@@ -145,3 +146,8 @@
 | docs/gap-closure-report.md | M | mark gateway gap closed |
 | docs/progress-ledger.md | M | record gateway work |
 | docs/testing.md | M | note gateway tests |
+| src/repositories/webhookDeadLetters.js | A | persist failed webhook deliveries |
+| src/webhooks/dispatcher.js | M | parallel dispatch with dead-letter logging |
+| src/migrations/0022_webhook_dead_letter.sql | A | webhook_dead_letter table |
+| src/server.js | M | retry dead-letter scheduler task |
+| test/webhook-dead-letter.test.js | A | dead-letter repository tests |

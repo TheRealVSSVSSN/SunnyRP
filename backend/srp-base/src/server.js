@@ -8,7 +8,7 @@ import { purgeStalePlayers } from './repositories/scoreboard.js';
 import { purgeStaleQueue } from './repositories/queue.js';
 import { purgeStaleChannels } from './repositories/voice.js';
 import { purgeStaleEntities } from './repositories/world.js';
-import { refreshEndpoints } from './webhooks/dispatcher.js';
+import { refreshEndpoints, retryDeadLetters } from './webhooks/dispatcher.js';
 import { getCurrentTime } from './util/time.js';
 
 if (!process.env.SRP_HMAC_SECRET) {
@@ -35,6 +35,7 @@ const voiceStale = Number(process.env.VOICE_STALE_MS) || 300_000;
 registerTask('voice_purge', 60_000, () => purgeStaleChannels(voiceStale));
 const infinityStale = Number(process.env.INFINITY_STALE_MS) || 300_000;
 registerTask('infinity_entity_purge', 60_000, () => purgeStaleEntities(infinityStale));
+registerTask('webhook_dead_letter_retry', 60_000, retryDeadLetters);
 refreshEndpoints();
 initGateway(server, wsDomains);
 scheduler.start();
