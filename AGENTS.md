@@ -1,217 +1,184 @@
-# SRP Suite Microservice Builder — `agents.md` (Codex‑Optimized, **Resource‑Independent**, Adaptive Coverage, Zero‑TODO)
+# SRP Suite Microservice Builder — `agents.md` (Codex-Optimized, **Code-First Fresh Scan**, Evidence-Only, Zero-TODO)
 
 **Purpose:** Operational handbook for the agent that consumes the **Unified Microservice Builder prompt** and turns it into concrete, consistent changes inside `backend/<Microservice>`.
+
 **Scope:** Work **only** in `backend/<Microservice>` for the current run. Never touch `resources/*` or any `fxmanifest.lua`.
+
 **Compatibility:** Everything you build must remain **compatible with `srp-base`** (HTTP/WS shapes, headers, and multi-character APIs), even if the target microservice is not `srp-base`.
 
-> This version is **resource‑independent**: repository paths are treated as **hints**, not truth. The agent auto‑discovers renamed/moved modules and infers domain responsibilities from **signals** (events, RPCs, loops, persistence), not specific folder names. Missing/renamed paths do **not** hard‑fail the run; they are recorded and substituted with discovered equivalents when possible.
+> **Hard Rule 0 — Code-First Gap Verification (Every Run).** A “no gaps” claim in any docs/logs is **non-authoritative**. On **every** run you **must** freshly scan:
+> 1) all declared **and discovered** resource code, and  
+> 2) our own `backend/<Microservice>` code,  
+> then derive gaps strictly from **code signals**. Do not short-circuit based on prior docs/logs.
+
+> **Hard Rule 1 — Evidence-Only.** Do **not** invent features or gaps. Open gaps only when concrete signals in the code imply a backend counterpart that is missing or partial in `backend/<Microservice>`.
 
 ---
 
-## 0) Parameter Guards & Normalization (pre‑flight)
+## 0) Parameter Guards & Normalization (pre-flight)
 
-Before doing anything, **validate and normalize** prompt parameters:
+Validate and normalize prompt parameters before doing anything:
 
 - `Reset Ledger` → boolean only.
 - `Microservice` → **string**. If an array is provided (e.g., `["srp-base"]`), take the first element.
-- `Target Platforms` → subset of `{"FiveM","RedM"}`; default `["Both"]` if omitted.
+- `Target Platforms` → subset of `{"FiveM","RedM"}`; default `["FiveM"]` if omitted.
 - `Primary Domains` → non-empty array of domain keys (e.g., `["base"]`).
-- `Main Framework.repo` and `Other Frameworks[].repo` → valid Git URLs.
-- `paths` values should be **repo-relative** (e.g., `"resources/base"`), not GitHub UI paths (❌ `/tree/master/resources`). If a UI path is provided, **normalize** to repo-relative (`"resources"`).
-- **De‑dupe** all repos/paths; preserve order.
+- `Main Framework.repo` and `Other Frameworks[].repo` → treat as local checkout identifiers (do not fetch). If missing locally, continue best-effort.
+- `paths[]` must be **repo-relative** (e.g., `"resources/base"`), not GitHub UI paths (❌ `/tree/master/resources`). If a UI path is provided, **normalize** to repo-relative (`"resources"`).
+- **De-dupe** all repos/paths; preserve order.
 
-On validation failure, **fix automatically** when safe (e.g., array→string, UI path→repo-relative). Otherwise, log once:
-`Parameter normalization failed for <field>; proceeding with best‑effort defaults.`
+If validation fails and cannot be auto-fixed (array→string, UI→repo-relative), log once:
+`Parameter normalization failed for <field>; proceeding with best-effort defaults.`
 
 ---
 
-## 1) How to read the prompt (semantics)
+## 1) Prompt semantics
 
 - **Reset Ledger**
-  - `true`: start fresh run docs; truncate `docs/progress-ledger.md` and `docs/index.md` headers/content, but do **not** erase `CHANGELOG.md`.
+  - `true`: start fresh run docs; truncate `docs/progress-ledger.md` and `docs/index.md` scaffolds; preserve `CHANGELOG.md`.
   - `false`: append to existing docs; preserve history.
 
 - **Microservice**
-  - Folder under `backend/` where you operate. If absent, create a standard scaffold (see §6).
+  - Operate under `backend/<Microservice>`. If absent, create the standard scaffold (see §6).
 
 - **Target Platforms**
-  - `FiveM`, `RedM`, or `Both`. When `RedM` present, enable RedM toggles (horses, Dead Eye, RDR2 weapon sets) and keep the same HTTP/WS contracts. No divergent APIs.
+  - `FiveM`, `RedM`, or both. When `RedM` present, enable RedM toggles; HTTP/WS contracts remain identical.
 
 - **Primary Domains**
-  - Areas to build/extend **this run** (e.g., `base`, `vehicles`, `banking`, `inventory`, `police`, `jobs`, `phone`, …). Use them to scope discovery and clustering (see §4).
+  - Use as anchors for clustering (§4).
 
-- **Main Framework / Other Frameworks / Resource Sources**
-  - Use these repositories for **names/flows only** (events, RPCs, timers, persistence). **Never copy code.**
-  - If `Resource Sources` pins a domain to repo subpaths, prefer those during discovery (but still discover around them if missing).
+- **Main/Other Frameworks & Resource Sources**
+  - Use as **evidence sources** (events, RPCs, loops, persistence). **Never copy code.**
 
 - **Feature Priorities**
-  - `performance: "maximize"` → migrate loops to scheduler, push via WS/webhooks, avoid N+1, add indexes, batch I/O.
-  - `maintainability: "maximize"` → strict module boundaries, SRP naming, repository pattern, clear docs.
-  - `parity_targets` are **guidance only** (NoPixel 4.0/Prodigy 4.0 features); do not copy code.
-
-- **Use Research Summary**
-  - If `true`, leverage cross‑framework analysis (concepts, flows, field names) to inform design.
+  - `performance: "maximize"` → migrate evidenced loops to scheduler, push via WS/webhooks, avoid N+1, add indexes, batch I/O.
+  - `maintainability: "maximize"` → SRP naming, repository pattern, clear docs.
+  - `parity_targets` are advisory; never open gaps from parity alone.
 
 ---
 
-## 2) **Adaptive, Resource‑Independent Coverage** & Gap‑Closure Mode (ENFORCED)
+## 2) Code-First Coverage & Gap-Closure (ENFORCED)
 
-**Goal:** Traverse declared repos/paths **and** auto‑discover adjacent or renamed modules, guided by **domain signals** rather than fixed folder names; build a **coverage map**, identify **all gaps**, and **close them with working code** — **no placeholders, no TODOs**.
+**Goal:** Freshly traverse the **resource code** and our **backend code** each run; extract **signals**; emit a **coverage map**; derive **evidence-backed** gaps; then close them end-to-end — **no placeholders, no TODOs**.
 
-### 2.1 Traversal Strategy (Adaptive)
-1. **Declared Pass** — Enumerate each provided `paths[]` (normalized). If a path is missing:
-   - Add a `MOVED_OR_MISSING` row in `coverage-map.md`.
-2. **Discovery Pass** — For each missing path, **search the repo** using tokenized fuzzy matching on:
-   - **Domain anchors** (concepts): `base`, `core`, `session`, `spawn`, `identity`, `queue`, `priority`, `whitelist`, `voice`, `voip`, `radio`, `comms`, `streaming`, `population`, `instance`, `log`, `telemetry`, `error`, `audit`, `rcon`, `restart`, `scheduler`, `cron`, `chat`, `ui`, `notify`, `taskbar`, `progress`, `skill`, `threat`, `scoreboard`, `vote`, `zone`, `poly`, `polygon`, `blip`, `map`, `minimap`, `door`, `lock`, `weather`, `world`, `barrier`, `prop`, `job`, `grade`, `duty`, `dispatch`, `evidence`, `bank`, `finance`, `wallet`, `invoice`, `fine`, `business`, `property`, `interior`, `phone`, `message`, `contact`, `mail`, `app`.
-   - **Common framework tokens** (as hints only): `esx`, `qb`, `vrp`, `nd`, `essential`, `fsn`, `vorp`.
-   - File types: `.lua`, `.js`, `.ts`, `.json`, `.sql`, `.yml`, `.yaml`, `.md`.
-   - Prefer matches under `resources/` or typical server roots; otherwise accept repo‑wide matches.
-3. **Neighbor Pass** — When a candidate folder is identified, also index **neighbors** with similar names (to capture splits/merges).
-4. **External Pass** — If `Other Frameworks` are present, scan their roots for **analogous behaviors** (names/flows only) to enrich parity analysis.
+### Authoritative Source Order (must follow)
+1) **Code** (resources + `backend/<Microservice>`) — **always** scanned fresh each run.  
+2) **Manifests/Migrations** (`fxmanifest.lua`, `.sql`).  
+3) **Docs/logs** — advisory only; never a reason to claim “no gaps”.
 
-> **No hardcoded resource names** are required; discovery is driven by **concepts and signals**.
+### 2.1 Traversal (resource + backend)
+- **External scan (resources):** Declared + discovered paths; file globs **.lua, .js, .ts, .json, .sql, .yml, .yaml, .md** (exclude `node_modules`, `.git`, `dist/build`). Missing declared paths → `MISSING` with a concrete reason; attempt liftover discovery (fxmanifest siblings, common renames).
+- **Internal scan (backend):** `backend/<Microservice>` for **.js/.ts/.sql/.json/.yml/.yaml** to build a map of **implemented capabilities**.
+- **No short-circuit:** Perform both scans even if docs/logs claim “no gaps”.
 
-### 2.2 Signal Extraction (names/flows only)
-- Events: `RegisterNetEvent`, `TriggerEvent`, `TriggerClientEvent`, `AddEventHandler`.
-- RPC/callbacks: `RPC.register|execute`, `exports("...")`, `Callbacks:Server`, `lib.callback.register|await`, NUI `postMessage`/`SendNUIMessage` patterns.
-- Citizen loops: `Citizen.CreateThread`, timers, `while true do` with waits.
-- Persistence: table/collection names in code or `.sql`.
-- Security/roles/grades, queues, identity/session, scoreboard/whitelist/login.
-- Voice/streaming/population/queue/spawn/session hand‑offs.
+### 2.2 Signal Extraction (names/flows only; never copy upstream code)
+- Events: `RegisterNetEvent`, `TriggerEvent`, `TriggerClientEvent`, `AddEventHandler`
+- RPC/Callbacks: `RPC.register|execute`, `exports("...")`, `Callbacks:Server`, `lib.callback.register|await`, NUI message patterns
+- Loops: `Citizen.CreateThread`, `SetTimeout`, `while true do`
+- Persistence: `.sql` tables, migrations, JSON stores
+- Identity/session/queue/whitelist/login/scoreboard/voice/infinity/spawn hand-offs
+- Telemetry: logger hooks, rconlog, restart, cron
+- World/UX: PolyZone, map/minimap, barriers, weather sync, chat/taskbar/taskbarskill/taskbarthreat/notify/votesystem
 
 ### 2.3 Coverage Map (MUST EMIT)
-Create **`docs/coverage-map.md`** with two sections:
+Create **`docs/coverage-map.md`** with:
 
-**A. Summary Table**
-| repo | path | files | events | rpcs | loops | persistence | cluster | status | liftover_from? |
-|------|------|-------|--------|------|-------|-------------|---------|--------|----------------|
+**A. Summary Table**  
+| repo | path | files | events | rpcs | loops | persistence | cluster | status | backend_impl_found | doc_no_gap_claim? |
+|------|------|-------|--------|------|-------|-------------|---------|--------|--------------------|-------------------|
 
-Statuses:
-- `SCANNED` — path scanned successfully.
-- `MOVED_OR_MISSING` — declared path absent.
-- `DISCOVERED` — path found by discovery as a probable successor.
-- `BLOCKED` — repo unreachable.
+Statuses: `SCANNED`, `MISSING`, `DISCOVERED`, `BLOCKED`.
 
-**B. Notes & Mapping**
-- Per‑path notes; **Source → SRP module(s)** matrix; and **Liftover mapping**: declared path → discovered path (if applicable).
+**B. Notes & Mapping** — Per-path notes; **Source → SRP module(s)** matrix; **liftover mapping** (declared → discovered).
 
-### 2.4 Gap Definitions
-- **SKIP** — implemented & correct in `backend/<Microservice>`.
-- **EXTEND** — partially implemented; needs endpoints/repo functions/scheduler tasks.
-- **CREATE** — missing vertical slice (router + repo + migration + realtime + validation + docs).
+### 2.4 Gap Mapping (Evidence tests)
+Open a gap **only if both** hold:
+- **E1 (Local Evidence):** Specific code signals from §2.2 exist in the resources.
+- **E2 (Missing/Partial Backend):** The counterpart is missing or partial in `backend/<Microservice>`.
 
-### 2.5 Gap Queue (Execution Order)
-1) Dependencies → 2) Performance wins → 3) Player‑visible value.
-Implement each item **end‑to‑end** (route→repo→migrations→realtime→validation→docs). Migrate loops to **Scheduler** and push via **WS/Webhooks** where implied.
+Classify: **SKIP** (present), **EXTEND** (partial), **CREATE** (missing vertical slice: router + repo + migration + realtime + validation + docs).  
+Do **not** open parity/wishlist items.
 
-### 2.6 Zero‑TODO Policy (HARD)
-- **Do not leave** `TODO`, `FIXME`, `TBD`, `TBA` in code or docs.
-- No placeholder comments/sections. Fully implement functionality or scope down to a closed, minimal coherent slice.
-- If a feature is **externally blocked**, document the precise blocker in `docs/gap-closure-report.md` and **exclude** TODO text from code.
+### 2.5 Execution Order + Anti-Repeat Fair Queue
+
+**Order:** dependencies → performance wins → player-visible value.  
+Implement each item **end-to-end** (routes → repositories → idempotent migrations → WS/webhooks → runtime validation → docs).  
+Migrate polling loops to **Scheduler** only where such loops are evidenced.
+
+**Fair Queue (no tunneling):**
+- Global TODO list entries: `{domain, path, type, deps, weight, evidence_refs}`.
+- Round-robin across `(domain, path)` buckets with:
+  - `max_consecutive_per_bucket = 1`
+  - `cooldown_span = 2`
+- Dependencies may force minimal reordering; resume round-robin immediately after.
+- Do not re-open closed items; add new ones only if **missed in initial traversal** or from the **DISCOVERED** set.
+- **Stop:** all evidence-backed `CREATE/EXTEND` closed; only `SKIP` remain.
+
+### 2.6 Zero-TODO (HARD)
+- No `TODO|FIXME|TBD|TBA` in code or docs.
+- If externally blocked, list the precise blocker in `docs/gap-closure-report.md` (no stubs in code).
 
 ---
 
-## 3) SRP‑BASE compatibility requirements (enforced)
+## 3) SRP-BASE Compatibility (MANDATORY)
 
-Apply to **every** microservice.
-
-### 3.1 Mandatory HTTP endpoints
+### 3.1 HTTP endpoints
 - `GET /v1/health` → `{ status: "ok", service, time }`
 - `GET /v1/ready`  → `{ ready: true|false, deps: [...] }`
 - `GET /v1/info`   → `{ service, version, compat: { baseline: "srp-base" } }`
 
-### 3.2 Multi‑character APIs (code‑level)
+### 3.2 Multi-character APIs
 - `GET /v1/accounts/{accountId}/characters`
 - `POST /v1/accounts/{accountId}/characters`
 - `POST /v1/accounts/{accountId}/characters/{characterId}:select`
 - `DELETE /v1/accounts/{accountId}/characters/{characterId}`
-Scope gameplay state by the **active character** once selected.
+Scope gameplay state by **active character** post-selection.
 
 ### 3.3 WebSocket handshake & envelope
-- Handshake accepts: `sid`, `accountId`, `characterId` (nullable).
-- Envelope (CloudEvents‑like):
+- Handshake accepts: `sid`, `accountId`, `characterId?`
+- Envelope (CloudEvents-like):
 ```json
-{
-  "id": "evt_<uuid>",
-  "type": "srp.<domain>.<action>",
-  "source": "<microservice>",
-  "subject": "<characterId|accountId|entityId|*>",
-  "time": "<ISO-8601>",
-  "specversion": "1.0",
-  "data": { }
-}
+{ "id":"evt_<uuid>", "type":"srp.<domain>.<action>", "source":"<Microservice>", "subject":"<characterId|accountId|entityId|*>", "time":"<ISO-8601>", "specversion":"1.0", "data":{} }
 ```
 
 ---
 
-## 4) Clustering rules (domain consolidation)
+## 4) Domain Clustering (use only where evidenced)
 
-Use `Primary Domains` as anchors, then include related responsibilities.
+For `Primary Domains: ["base"]`, capability buckets:
+- **sessions** — allowlist/login/session lifecycle/spawn/cid
+- **queue** — connection queue/hardcap
+- **voice** — voip/broadcaster
+- **telemetry** — log/errorlog/rconlog/restart/cron
+- **ux** — chat/taskbar/taskbarskill/taskbarthreat/notify/scoreboard/votesystem
+- **world** — zones/map/minimap/barriers/weather sync
+- **jobs** — jobsystem/secondaryjobs
+- **tooling** — build chain (names/flows only)
 
-- **Vehicles** → registry, tuning/handling, garages/impounds, fuel, keys, damage/condition, tests/school, dispatch flags.
-- **Ped/Identity** → identity creation, clothing/cosmetics/tattoos, emotes, health/medical.
-- **Bank/Finance** → accounts/wallets, ATMs, invoices/billing/fines, businesses/ledgers, economy resets.
-- **Jobs** → police/EMS/mechanic/taxi/trucker, licenses/grades, duty/roster, dispatch/callsigns, evidence chain.
-- **Comms/Phone** → phone, messages, contacts, mail/outbox, apps.
-- **World/Zones** → doors/locks, blips, poly‑zones, shops/loot, properties/interiors, underground hubs.
-
-**Consolidate** overlaps into **SRP‑named** modules. Temporary aliases only if essential; mark **deprecated** in docs.
-
-### 4.1 Base Cluster Map (when `Primary Domains` includes `base`)
-**Capability buckets** (no resource names):
-- **Core session & identity**: authentication, whitelist/allowlist, session lifecycle, spawn/respawn, character ID generation.
-- **Concurrency & scale**: instance/population management, streaming range management, connection queue/priority, hard limits per tick.
-- **Voice & comms**: VoIP transport, radio channels, proximity rules, broadcast relays.
-- **State & telemetry**: structured logs, error reporting, RCON hooks, restart windows, scheduled tasks.
-- **UX & input**: chat transport, progress/task bars, skill/threat meters, notifications, scoreboard, voting.
-- **World infra**: polygonal zones, blips/markers, map overlays, environmental sync, barriers/props.
-- **Jobs foundation**: job registry, grades/roles, primary/secondary job selection.
-- **Tooling**: build/runtime toolchain references (names/flows only).
-
-> Treat buckets as **anchors**. If directories rename or split, discovery still attaches modules to these buckets via **signals** and keywords (§2).
+Consolidate overlaps into **SRP-named** modules where evidence exists. Temporary aliases only if essential (mark **deprecated** in docs).
 
 ---
 
-## 5) Implementation principles
+## 5) Implementation Principles
 
-### 5.1 Express‑first (no OpenAPI files)
-- Single `express()` app via `http.createServer(app)`.
-- Middleware order: `requestId` → JSON parser → CORS → **rateLimit** → **HMAC/Auth** → **Idempotency** (mutations) → **Runtime validation** (Zod/Joi/AJV) → error handler.
-- One router per domain under `/v1/<domain>`.
-- **Do not** create or edit `openapi.yaml`. Document the API in `docs/BASE_API_DOCUMENTATION.md`.
-
-### 5.2 Realtime
-- **WS Gateway** under `/ws/<domain>`; heartbeat, backpressure, exp‑backoff reconnect, dedupe by `id`.
-- **Webhooks** dispatcher with HMAC signing, retries (exp‑backoff + jitter), dead‑letter logs; disabled Discord sink scaffold; admin CRUD optional.
-
-### 5.3 Scheduler (Node “thread” replacement)
-- `src/bootstrap/scheduler.js` with drift correction + persisted cursors.
-- Register per‑module tasks (fuel ticks, dispatch sweeps, rollovers).
-- Use `worker_threads` only for CPU‑heavy work.
-
-### 5.4 Persistence
-- Repository pattern (parameterized queries).
-- Migrations are **idempotent** (`IF NOT EXISTS`), forward‑only, with indexes/FKs.
-- Avoid N+1; paginate; consider small TTL caches for hot reads.
-
-### 5.5 Security & Ops
-- `X-API-Token` + optional HMAC signature for sensitive routes.
-- Rate limits on all public endpoints.
-- Idempotency keys on POST/PUT/PATCH/DELETE.
-- Logs: pino (with `requestId`); metrics: `prom-client` at `/metrics`.
-
-### 5.6 RedM compatibility
-- Feature flags for RDR2 specifics; HTTP/WS contracts remain identical.
+- **Express-first**, single app via `http.createServer(app)`.
+- Middleware: `requestId` → JSON parser → CORS → **rateLimit** → **HMAC/Auth** → **Idempotency** → **Runtime validation** (Zod/Joi/AJV) → error handler.
+- Routers per domain under `/v1/<domain>`.
+- **OpenAPI deferred**: document contracts in `docs/BASE_API_DOCUMENTATION.md`; do not write OpenAPI files.
+- **WS Gateway:** `/ws/<domain>`, heartbeat, backpressure, exp-backoff reconnect, message dedupe by id.
+- **Webhooks:** HMAC signing, retries (exp-backoff + jitter), dead-letter logs; Discord sink scaffold disabled by default.
+- **Scheduler:** `src/bootstrap/scheduler.js` with drift correction + persisted cursors; register tasks **only** for evidenced loops.
+- **Persistence:** repository pattern; forward-only idempotent migrations with indexes/FKs; avoid N+1; paginate; small TTL caches.
 
 ---
 
-## 6) Directory layout (create if missing)
+## 6) Directory Layout (create if missing)
 
 ```
 backend/<Microservice>/
   src/
     app.js
-    server.js                 # export createHttpServer({ env })
+    server.js                 # export createHttpServer({ env }) → { app, httpServer, io? }
     middleware/
       requestId.js
       rateLimit.js
@@ -231,13 +198,13 @@ backend/<Microservice>/
       <domain>Repository.js
   src/migrations/
     001_init.sql
-    ...
   docs/
     index.md
     progress-ledger.md
     framework-compliance.md
     run-docs.md
     research-log.md
+    research-summary.md
     naming-map.md
     admin-ops.md
     BASE_API_DOCUMENTATION.md
@@ -246,106 +213,97 @@ backend/<Microservice>/
     migrations.md
     security.md
     testing.md
-    todo-gaps.md
-    coverage-map.md              # REQUIRED
-    gap-closure-report.md        # REQUIRED
-    resource-hints.json          # OPTIONAL cache of last discovered paths
+    coverage-map.md          # REQUIRED
+    gap-closure-report.md    # REQUIRED
   CHANGELOG.md
   MANIFEST.md
 ```
 
 ---
 
-## 7) Git & PR behavior
+## 7) Git & PR Behavior
 
-- Detect default branch (`origin` HEAD → current branch → prefer `main` → `master` → single remote).
+- Detect default branch (origin HEAD → current → prefer `main`, else `master`, else single remote).
 - Working branch: `codex/<Microservice>-gap-<YYYYMMDD-HHmm-AZ>` (reuse if exists).
-- **Stage only changes** inside `backend/<Microservice>/`.
-- Commit title:
-  - `<Microservice>(<domains>): cluster consolidation + ws/webhooks + scheduler + express`
-- One PR per run. If push is denied by platform, skip the push and still emit deliverables.
+- Stage **only** changes under `backend/<Microservice>/`.
+- Commit title: `<Microservice>(<domains>): cluster consolidation + ws/webhooks + scheduler + express`.
+- Create one PR per run. If push is denied by platform, skip push but still emit deliverables.
 
 ---
 
-## 8) Auto‑repairs & “no‑ops”
+## 8) Auto-Repairs & No-Ops
 
-- **Duplicate migrations**: renumber later duplicate prefix to next free number (keep zero‑padding).
-- **Merge markers**: replace any `<<<<<<<`/`=======`/`>>>>>>>` with resolved content.
-- **Tests/Lint**: don’t add placeholders unless required by changed files.
-- **No Base64/ZIP** outputs.
-- **OpenAPI**: do **not** create, edit, or remove any OpenAPI files this run.
+- Duplicate migrations → renumber later duplicate prefix to next free number (preserve zero-padding); keep idempotent.
+- Merge markers → replace any `<<<<<<<`/`=======`/`>>>>>>>` with resolved content.
+- No tests/lint placeholders unless required by changed files.
+- No base64/zip outputs.
+- OpenAPI: do **not** create/edit/remove any OpenAPI files.
 
-If after gap mapping nothing needs changes, print exactly:
+If nothing changes after **fresh code traversal**, print exactly:
 `No changes required this run.`
 
 ---
 
-## 9) Documentation duties
+## 9) Documentation Duties
 
-- **If Reset Ledger = true**: re‑init `docs/index.md` and `docs/progress-ledger.md`.
-- Update or create (changed docs only; full contents in deliverables):
-  - `docs/run-docs.md` — consolidated narrative of the run.
-  - `docs/framework-compliance.md` — SRP‑BASE compatibility & deviations.
-  - `docs/research-log.md` — titles/links used.
-  - `docs/naming-map.md` — upstream term → SRP term.
-  - `docs/todo-gaps.md` — authoritative, prioritized list (**no TODOs in code**). Also append the same list to end of `docs/run-docs.md`.
-  - `docs/coverage-map.md` — **mandatory**: include declared, discovered, neighbor entries; liftover mapping.
-  - `docs/gap-closure-report.md` — **mandatory**: detected gaps → implemented actions; list **external blockers** precisely.
-  - Module docs under `docs/modules/` as needed.
-  - `docs/resource-hints.json` — OPTIONAL cache of discovered paths for the next run (non‑blocking).
-
----
-
-## 10) Deliverables format (stdout)
-
-Output **only changed/new files** (no ellipses).
-
-1. **DIFF SUMMARY** (A/M/D/R lines under `backend/<Microservice>/`).
-2. **PATCHES** (full contents):
-   ```
-   === FILE: backend/<Microservice>/<path> (A|M|R) ===
-   <entire final file>
-   ```
-   *Do not* print deleted file contents; list them as `D` in the diff.
-3. **MANIFEST.md** (full): summary bullets; A/M/D/R table; startup/env notes; any compatibility aliases.
-4. **CHANGELOG.md**: append a new entry (print the new entry in full).
-5. **SQL migrations**: full content for each new/changed migration under `src/migrations/`.
-6. **Docs Pack**: full contents for changed docs only.
-7. Completion line:
-   `DONE — <Microservice> microservice baseline complete.`
-   —or—
-   `No changes required this run.`
+- If `Reset Ledger = true`, re-init `docs/index.md` and `docs/progress-ledger.md`.
+- Update/create (changed docs only; print full contents):
+  - `docs/run-docs.md` — narrative of this run
+  - `docs/framework-compliance.md` — SRP-BASE compatibility & deviations
+  - `docs/research-log.md` — titles/paths only (no code)
+  - `docs/research-summary.md` — distilled findings
+  - `docs/naming-map.md` — upstream term → SRP term
+  - `docs/coverage-map.md` — **REQUIRED**: include `backend_impl_found` + `doc_no_gap_claim?` flags
+  - `docs/gap-closure-report.md` — **REQUIRED**: only evidence-backed EXTEND/CREATE items; precise external blockers if any
+  - Module docs under `docs/modules/` as needed
 
 ---
 
-## 11) Quality gates (hard fail if not met)
+## 10) Deliverables (stdout format)
 
-- **Coverage map present** with **Declared/Discovered/Neighbor** rows and liftover mapping where relevant.
-- **Zero‑TODO**: no `TODO|FIXME|TBD|TBA` anywhere in code or docs.
+1) **DIFF SUMMARY** (A/M/D/R lines under `backend/<Microservice>/`).  
+2) **PATCHES** (full contents per changed/new file):
+```
+=== FILE: backend/<Microservice>/<path> (A|M|R) ===
+<entire final file>
+```
+*Do not* print deleted file contents; list them as `D` in the diff.
+
+3) **MANIFEST.md** (full): summary bullets; A/M/D/R table; startup/env; compatibility aliases if any.  
+4) **CHANGELOG.md**: append new entry (print it in full).  
+5) **SQL migrations**: print full content for each new/changed file under `src/migrations/`.  
+6) **Docs Pack**: full contents for changed docs only.  
+7) **Completion line**:
+- Success: `DONE — <Microservice> microservice baseline complete.`
+- No-op: `No changes required this run.`
+
+---
+
+## 11) Quality Gates (HARD FAIL)
+
+- Fresh external + internal traversal artifacts exist and are reflected in `docs/coverage-map.md`.
+- `docs/gap-closure-report.md` exists; every EXTEND/CREATE item is **evidence-backed** (E1/E2) with implemented artifacts and locations.
+- Zero-TODO: no `TODO|FIXME|TBD|TBA` anywhere in code or docs.
 - Mandatory `health|ready|info` endpoints present.
-- Multi‑character endpoints present when character scope used.
 - Runtime validators on all mutating endpoints (OpenAPI deferred).
-- Migrations idempotent; indexes/FKs defined; no destructive ops without safeguards.
-- WS handshake & envelope correct; backpressure protections included.
-- Scheduler tasks registered for every migrated loop detected in traversal.
-- SRP naming; aliases only if strictly required (marked deprecated in docs).
-- Docs updated: `run-docs.md`, `framework-compliance.md`, `naming-map.md`, `coverage-map.md`, `gap-closure-report.md`, `progress-ledger.md`.
-
-> **Adaptive rule:** Missing declared paths **do not fail** the run **if** suitable discovered replacements are listed and used. Only fail if coverage output is missing altogether or lacks an attempt to discover/record liftover.
+- Migrations idempotent; indexes/FKs; no unsafe destructive ops.
+- WS handshake/envelope per §3.3; backpressure protections present.
+- Scheduler tasks registered **only** when loops are evidenced by traversal.
+- SRP naming (no upstream prefixes); temporary aliases marked deprecated in docs.
+- **Explicitly disallow**: concluding “no gaps” based solely on prior docs/logs **without fresh scans**.
 
 ---
 
-## 12) Minimal conflict resolution strategy
+## 12) Minimal Conflict Strategy
 
-Prefer the **smallest** coherent change set that achieves parity + compatibility.
-If frameworks differ, choose the approach that:
-1) fits SRP naming/contracts,
-2) reduces client polling (favor WS/Webhooks),
-3) simplifies maintenance (clear schemas, fewer cross‑module dependencies).
+Prefer the **smallest coherent** change set that meets compatibility and closes evidenced gaps:
+1) Maintain SRP contracts,
+2) Replace polling with WS/Webhooks when evidence shows polling loops,
+3) Favor maintainability (clear schemas, fewer cross-module deps).
 
 ---
 
-## 13) Safety notes
+## 13) Safety Notes
 
 - Never echo secrets/tokens.
 - Never embed upstream code verbatim (names/flows only).
@@ -353,41 +311,28 @@ If frameworks differ, choose the approach that:
 
 ---
 
-## 14) Execution loop (mental model)
+## 14) Execution Loop (deterministic)
 
 ```
-read_prompt()
-normalize_parameters()         // §0
+read_prompt_and_run_config()
+normalize_parameters()
 inventory_service()
 
-traversal = traverse_refs_adaptive() // Declared → Discovery → Neighbor → External (§2.1)
-signals = extract_signals()          // §2.2
-emit_coverage_map(traversal, signals)  // §2.3 (Declared/Discovered/Neighbor + liftover)
+traversal = traverse(declared_paths + discovered_paths)        // fresh external scan (resources)
+internal  = traverse_backend("backend/<Microservice>")         // fresh internal scan (our code)
+signals   = extract_behaviors(traversal)                       // §2.2
+emit_coverage_map(traversal, signals, internal)                // §2.3
 
-clusters = build_clusters(primary_domains)   // §4 + §4.1
-plan = gap_map(clusters, signals)            // SKIP | EXTEND | CREATE
+clusters  = cluster_from_primary_domains()                     // §4
+plan      = gap_map(clusters, signals)                         // SKIP | EXTEND | CREATE (evidence-only)
+queue     = prioritize(plan)                                   // deps → perf wins → player value
+queue     = enforce_fairness(queue)                            // round-robin; no tunneling
 
-for item in prioritized(plan):               // §2.5
-  implement_vertical_slice(item)             // routes → repos → migrations
-  wire_realtime_and_scheduler_if_implied()
-  add_runtime_validation()
-  update_docs_and_reports()                  // run-docs, framework-compliance, naming-map, gap-closure
+for item in queue:
+  implement_vertical_slice(item)                               // routes → repos → migrations → WS/webhooks → validation → docs
+  mark_closed_in_ledger(item)
+  update_docs_and_reports(item)
 
-run_quality_gates()                          // §11
-emit_deliverables()                          // §10
+assert_quality_gates()                                         // §11
+emit_deliverables()                                            // §10
 ```
-
----
-
-## 15) Base Cluster Quick Reference (for `Primary Domains: ["base"]`)
-
-**Capability buckets** (resource‑independent):
-- **sessions**: authentication, allowlist, session lifecycle, spawn/respawn, character ID generation
-- **queue**: connection queue/priority, concurrency limits
-- **voice**: VoIP transport, proximity/radio channels, broadcast relays
-- **telemetry**: logs, error reporting, RCON hooks, restart windows, scheduled tasks
-- **ux**: chat, progress/task bars, skill/threat meters, notifications, scoreboard, voting
-- **world**: zones/polygons, blips/markers, map overlays, environmental sync, barriers/props
-- **jobs**: job registry, grades/roles, primary/secondary job selection
-
-Each responsibility must be classified SKIP/EXTEND/CREATE and, when CREATE/EXTEND, implemented fully with **no TODOs** — using **discovered** paths and signals rather than fixed resource names.
