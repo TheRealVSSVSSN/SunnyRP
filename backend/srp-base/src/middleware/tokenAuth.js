@@ -10,7 +10,7 @@ export async function authToken(req, res, next) {
     return res.status(401).json({ error: 'Malformed Authorization header' });
   }
   try {
-    const secret = process.env.JWT_SECRET || 'changeme';
+    const secret = process.env.JWT_SECRET;
     const payload = jwt.verify(token, secret);
     const [dbScopes, dbRoles] = await Promise.all([
       getAccountScopes(payload.accountId),

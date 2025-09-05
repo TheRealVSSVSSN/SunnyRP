@@ -55,10 +55,12 @@ Configure the service with environment variables or a `.env` file.
 | -------- | ------- |
 | `PORT` | HTTP listen port (default `3000`). |
 | `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASS` | MySQL connection settings. |
-| `SRP_HMAC_SECRET` | Shared secret used to validate the `X-SRP-Signature` header. |
-| `JWT_SECRET` | Secret for signing access tokens. |
+| `SRP_HMAC_SECRET` | **Required** secret used to validate the `X-SRP-Signature` header. |
+| `JWT_SECRET` | **Required** secret for signing access tokens. |
 | `TIME_BROADCAST_INTERVAL_MS` | Frequency for system time WebSocket broadcasts. |
 | `SCOREBOARD_STALE_MS` | Age threshold for purging stale scoreboard entries. |
+
+`SRP_HMAC_SECRET` and `JWT_SECRET` must be defined; the service exits on startup if either is missing.
 
 #### Running Locally
 
