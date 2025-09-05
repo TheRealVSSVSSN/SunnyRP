@@ -30,4 +30,4 @@
 - UX module now supports notifications, skill and threat meters, and task notifications.
 
 ## Outstanding Items
-- None.
+- Scan for gaps

@@ -21,4 +21,4 @@ Refactored WebSocket gateway with domain namespaces, account and character valid
 
 ## Outstanding
 
-None.
+- Scan for gaps

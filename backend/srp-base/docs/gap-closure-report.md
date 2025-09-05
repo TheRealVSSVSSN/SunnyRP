@@ -25,4 +25,4 @@
 - Introduced domain-scoped WebSocket namespaces with handshake validation and broadcast rate limiting.
 
 ## Remaining Gaps
-- None.
+- scan for more gaps

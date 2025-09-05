@@ -1,3 +1,3 @@
 # Outstanding Gaps
 
-None.
+- Scan for gaps
