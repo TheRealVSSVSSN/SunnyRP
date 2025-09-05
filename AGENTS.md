@@ -1,338 +1,282 @@
-# SRP Suite Microservice Builder — `agents.md` (Codex-Optimized, **Code-First Fresh Scan**, Evidence-Only, Zero-TODO)
+# agents.md — **Generic, Resource‑Agnostic Build Agent** (Ultrathink, Research‑First, Evidence‑Only)
 
-**Purpose:** Operational handbook for the agent that consumes the **Unified Microservice Builder prompt** and turns it into concrete, consistent changes inside `backend/<Microservice>`.
-
-**Scope:** Work **only** in `backend/<Microservice>` for the current run. Never touch `resources/*` or any `fxmanifest.lua`.
-
-**Compatibility:** Everything you build must remain **compatible with `srp-base`** (HTTP/WS shapes, headers, and multi-character APIs), even if the target microservice is not `srp-base`.
-
-> **Hard Rule 0 — Code-First Gap Verification (Every Run).** A “no gaps” claim in any docs/logs is **non-authoritative**. On **every** run you **must** freshly scan:
-> 1) all declared **and discovered** resource code, and  
-> 2) our own `backend/<Microservice>` code,  
-> then derive gaps strictly from **code signals**. Do not short-circuit based on prior docs/logs.
-
-> **Hard Rule 1 — Evidence-Only.** Do **not** invent features or gaps. Open gaps only when concrete signals in the code imply a backend counterpart that is missing or partial in `backend/<Microservice>`.
+> **Mission:** A single agent spec that works for **any resource or code type** (Lua, Node.js, JS/TS, HTML/CSS, Go, Python, C#, SQL, etc.), yet **prioritizes integration with `srp-base`** whenever `srp-base` is part of the prompt or present in the repo.  
+> **Mindset:** Treat the user’s prompt as the **canonical contract**. Follow it *like the bible*. Do not drift, do not speculate, do not invent requirements absent in the prompt or evidence.  
+> **Discipline:** **Plan → Research → Freeze Plan → Implement**. Never implement before research is complete across declared references.  
+> **Reasoning level:** Always **Ultrathink**.  
+> **Run budget:** Maximize each run; **do not stop if work remains until 25 minutes have elapsed** or the evidenced queue is empty.
 
 ---
 
-## 0) Parameter Guards & Normalization (pre-flight)
+## 0) Scope, Inputs, and Write Permissions
 
-Validate and normalize prompt parameters before doing anything:
+- **Inputs (from the run prompt):**
+  - `Reset Ledger` (bool)
+  - `reasoning_effort` (must be `Ultrathinking`)
+  - `Microservice` or `Resource` (e.g., `srp-base`, `np-police`, `ui/chat`)
+  - `Target Platforms` (e.g., `FiveM`, `Web`, `CLI`, `RedM`)
+  - `Primary Domains` (e.g., `[base]`, `[inventory, jobs]`)
+  - `Main Framework` (name, repo, `paths: [...]`)
+  - `Other Frameworks` (optional list)
+  - `Resource Sources` (e.g., cfx server data)
+  - `Feature Priorities` (performance/maintainability, parity targets)
+  - `Use Research Summary` (bool)
 
-- `Reset Ledger` → boolean only.
-- `Microservice` → **string**. If an array is provided (e.g., `["srp-base"]`), take the first element.
-- `Target Platforms` → subset of `{"FiveM","RedM"}`; default `["FiveM"]` if omitted.
-- `Primary Domains` → non-empty array of domain keys (e.g., `["base"]`).
-- `Main Framework.repo` and `Other Frameworks[].repo` → treat as local checkout identifiers (do not fetch). If missing locally, continue best-effort.
-- `paths[]` must be **repo-relative** (e.g., `"resources/base"`), not GitHub UI paths (❌ `/tree/master/resources`). If a UI path is provided, **normalize** to repo-relative (`"resources"`).
-- **De-dupe** all repos/paths; preserve order.
+- **Write Scope (generic and safe by default):**
+  - **Only write inside the paths explicitly allowed by the run prompt.**
+  - If not specified, default to **creating or updating a single component** under a clearly named path:  
+    - Backend service: `backend/<microservice>/**`  
+    - Game resource: `resources/<resourceName>/**`  
+    - Web app/site: `web/<appName>/**`  
+    - Library/tooling: `lib/<packageName>/**`
+  - **Never** modify files outside the declared write scope(s). If the prompt needs a broader scope, **explicitly expand** the scope in the plan and confirm by logging it in the docs.
 
-If validation fails and cannot be auto-fixed (array→string, UI→repo-relative), log once:
-`Parameter normalization failed for <field>; proceeding with best-effort defaults.`
-
----
-
-## 1) Prompt semantics
-
-- **Reset Ledger**
-  - `true`: start fresh run docs; truncate `docs/progress-ledger.md` and `docs/index.md` scaffolds; preserve `CHANGELOG.md`.
-  - `false`: append to existing docs; preserve history.
-
-- **Microservice**
-  - Operate under `backend/<Microservice>`. If absent, create the standard scaffold (see §6).
-
-- **Target Platforms**
-  - `FiveM`, `RedM`, or both. When `RedM` present, enable RedM toggles; HTTP/WS contracts remain identical.
-
-- **Primary Domains**
-  - Use as anchors for clustering (§4).
-
-- **Main/Other Frameworks & Resource Sources**
-  - Use as **evidence sources** (events, RPCs, loops, persistence). **Never copy code.**
-
-- **Feature Priorities**
-  - `performance: "maximize"` → migrate evidenced loops to scheduler, push via WS/webhooks, avoid N+1, add indexes, batch I/O.
-  - `maintainability: "maximize"` → SRP naming, repository pattern, clear docs.
-  - `parity_targets` are advisory; never open gaps from parity alone.
+- **srp-base First (when applicable):**
+  - When `srp-base` is the focus or present in the repo, treat it as the **base/framework contract**.
+  - If working in another resource, **integrate with `srp-base` APIs & code** as much as possible (HTTP, WS, events, exports, shared schemas).  
+  - If `srp-base` is not present, proceed generically; keep interfaces **compatible** for later adoption.
 
 ---
 
-## 2) Code-First Coverage & Gap-Closure (ENFORCED)
+## 1) Core Principles (Non-Negotiable)
 
-**Goal:** Freshly traverse the **resource code** and our **backend code** each run; extract **signals**; emit a **coverage map**; derive **evidence-backed** gaps; then close them end-to-end — **no placeholders, no TODOs**.
-
-### Authoritative Source Order (must follow)
-1) **Code** (resources + `backend/<Microservice>`) — **always** scanned fresh each run.  
-2) **Manifests/Migrations** (`fxmanifest.lua`, `.sql`).  
-3) **Docs/logs** — advisory only; never a reason to claim “no gaps”.
-
-### 2.1 Traversal (resource + backend)
-- **External scan (resources):** Declared + discovered paths; file globs **.lua, .js, .ts, .json, .sql, .yml, .yaml, .md** (exclude `node_modules`, `.git`, `dist/build`). Missing declared paths → `MISSING` with a concrete reason; attempt liftover discovery (fxmanifest siblings, common renames).
-- **Internal scan (backend):** `backend/<Microservice>` for **.js/.ts/.sql/.json/.yml/.yaml** to build a map of **implemented capabilities**.
-- **No short-circuit:** Perform both scans even if docs/logs claim “no gaps”.
-
-### 2.2 Signal Extraction (names/flows only; never copy upstream code)
-- Events: `RegisterNetEvent`, `TriggerEvent`, `TriggerClientEvent`, `AddEventHandler`
-- RPC/Callbacks: `RPC.register|execute`, `exports("...")`, `Callbacks:Server`, `lib.callback.register|await`, NUI message patterns
-- Loops: `Citizen.CreateThread`, `SetTimeout`, `while true do`
-- Persistence: `.sql` tables, migrations, JSON stores
-- Identity/session/queue/whitelist/login/scoreboard/voice/infinity/spawn hand-offs
-- Telemetry: logger hooks, rconlog, restart, cron
-- World/UX: PolyZone, map/minimap, barriers, weather sync, chat/taskbar/taskbarskill/taskbarthreat/notify/votesystem
-
-### 2.3 Coverage Map (MUST EMIT)
-Create **`docs/coverage-map.md`** with:
-
-**A. Summary Table**  
-| repo | path | files | events | rpcs | loops | persistence | cluster | status | backend_impl_found | doc_no_gap_claim? |
-|------|------|-------|--------|------|-------|-------------|---------|--------|--------------------|-------------------|
-
-Statuses: `SCANNED`, `MISSING`, `DISCOVERED`, `BLOCKED`.
-
-**B. Notes & Mapping** — Per-path notes; **Source → SRP module(s)** matrix; **liftover mapping** (declared → discovered).
-
-### 2.4 Gap Mapping (Evidence tests)
-Open a gap **only if both** hold:
-- **E1 (Local Evidence):** Specific code signals from §2.2 exist in the resources.
-- **E2 (Missing/Partial Backend):** The counterpart is missing or partial in `backend/<Microservice>`.
-
-Classify: **SKIP** (present), **EXTEND** (partial), **CREATE** (missing vertical slice: router + repo + migration + realtime + validation + docs).  
-Do **not** open parity/wishlist items.
-
-### 2.5 Execution Order + Anti-Repeat Fair Queue
-
-**Order:** dependencies → performance wins → player-visible value.  
-Implement each item **end-to-end** (routes → repositories → idempotent migrations → WS/webhooks → runtime validation → docs).  
-Migrate polling loops to **Scheduler** only where such loops are evidenced.
-
-**Fair Queue (no tunneling):**
-- Global TODO list entries: `{domain, path, type, deps, weight, evidence_refs}`.
-- Round-robin across `(domain, path)` buckets with:
-  - `max_consecutive_per_bucket = 1`
-  - `cooldown_span = 2`
-- Dependencies may force minimal reordering; resume round-robin immediately after.
-- Do not re-open closed items; add new ones only if **missed in initial traversal** or from the **DISCOVERED** set.
-- **Stop:** all evidence-backed `CREATE/EXTEND` closed; only `SKIP` remain.
-
-### 2.6 Zero-TODO (HARD)
-- No `TODO|FIXME|TBD|TBA` in code or docs.
-- If externally blocked, list the precise blocker in `docs/gap-closure-report.md` (no stubs in code).
+1. **Prompt Supremacy:** The run prompt is law. Resolve ambiguity by *researching the referenced sources*, not by guessing.  
+2. **Evidence‑Only:** Open a gap only if:  
+   - **E1:** Evidence exists in referenced repos/paths (signals, docs, migrations, events, exports, handlers, APIs, schemas), **and**  
+   - **E2:** The counterpart is missing or partial within the allowed write scope.  
+   No wishlist features; no parity unless corroborated by E1.  
+3. **Research → Plan → Implement:** No code until all required references are researched; freeze the plan; then implement the **evidenced** items end‑to‑end.  
+4. **Zero‑TODO:** No `TODO/FIXME/TBD`. If blocked, record **exact blockers** with actionable next steps and citations.  
+5. **Idempotent, Minimal, Modular:** Small, composable units; forward‑only migrations; safe retries; explicit boundaries.  
+6. **Deterministic Outputs:** Always emit docs & diffs that prove coverage and correctness.  
+7. **Maximize Each Run:** Continue until the evidenced queue is empty or **25 minutes** elapse, whichever comes first.
 
 ---
 
-## 3) SRP-BASE Compatibility (MANDATORY)
+## 2) Research Stage (Mandatory & Exhaustive)
 
-### 3.1 HTTP endpoints
-- `GET /v1/health` → `{ status: "ok", service, time }`
-- `GET /v1/ready`  → `{ ready: true|false, deps: [...] }`
-- `GET /v1/info`   → `{ service, version, compat: { baseline: "srp-base" } }`
+**Goal:** Build a complete picture of upstream behaviors before writing any code.
 
-### 3.2 Multi-character APIs
-- `GET /v1/accounts/{accountId}/characters`
-- `POST /v1/accounts/{accountId}/characters`
-- `POST /v1/accounts/{accountId}/characters/{characterId}:select`
-- `DELETE /v1/accounts/{accountId}/characters/{characterId}`
-Scope gameplay state by **active character** post-selection.
+### 2.1 Traversal
+- Scan files: `.lua, .js, .ts, .jsx, .tsx, .json, .sql, .yml, .yaml, .md, .py, .go, .cs, .html, .css`  
+- Exclude: `node_modules, .venv, dist, build, .git, out, coverage`  
+- If a declared path doesn’t exist: log a coverage row with `status=BLOCKED`, `files_scanned=0`, and a precise `blocked_reason`.
+- **Discovery:** If likely renames/siblings are found (e.g., `fxmanifest.lua` neighbors, “core/base” aliases), include them as **DISCOVERED** with mapping notes.
 
-### 3.3 WebSocket handshake & envelope
-- Handshake accepts: `sid`, `accountId`, `characterId?`
-- Envelope (CloudEvents-like):
-```json
-{ "id":"evt_<uuid>", "type":"srp.<domain>.<action>", "source":"<Microservice>", "subject":"<characterId|accountId|entityId|*>", "time":"<ISO-8601>", "specversion":"1.0", "data":{} }
-```
+### 2.2 Signal Extraction (names/flows only; never copy code)
+- **FiveM / Game Scripting (Lua/JS):** `RegisterNetEvent`, `TriggerEvent`, `TriggerClientEvent`, `AddEventHandler`, `exports(...)`, `SetHttpHandler`, `PerformHttpRequest*`, callbacks, `Citizen.CreateThread`, NUI (`RegisterNUICallback`, `SendNUIMessage`), DB adapters.
+- **Web/Service:** HTTP routes, OpenAPI specs, auth middlewares, WS topics, schedulers/cron, queue consumers, migrations, repository patterns.
+- **UI/Frontend:** UI routes, state stores, events, DOM/NUI bridges, postMessage contracts.
+- **Persistence:** Schemas/tables/migrations, indexes/FKs, JSON stores, cache keys.
+- **Telemetry & Ops:** Loggers, metrics, error handlers, restart scripts, health checks.
 
----
-
-## 4) Domain Clustering (use only where evidenced)
-
-For `Primary Domains: ["base"]`, capability buckets:
-- **sessions** — allowlist/login/session lifecycle/spawn/cid
-- **queue** — connection queue/hardcap
-- **voice** — voip/broadcaster
-- **telemetry** — log/errorlog/rconlog/restart/cron
-- **ux** — chat/taskbar/taskbarskill/taskbarthreat/notify/scoreboard/votesystem
-- **world** — zones/map/minimap/barriers/weather sync
-- **jobs** — jobsystem/secondaryjobs
-- **tooling** — build chain (names/flows only)
-
-Consolidate overlaps into **SRP-named** modules where evidence exists. Temporary aliases only if essential (mark **deprecated** in docs).
-
----
-
-## 5) Implementation Principles
-
-- **Express-first**, single app via `http.createServer(app)`.
-- Middleware: `requestId` → JSON parser → CORS → **rateLimit** → **HMAC/Auth** → **Idempotency** → **Runtime validation** (Zod/Joi/AJV) → error handler.
-- Routers per domain under `/v1/<domain>`.
-- **OpenAPI deferred**: document contracts in `docs/BASE_API_DOCUMENTATION.md`; do not write OpenAPI files.
-- **WS Gateway:** `/ws/<domain>`, heartbeat, backpressure, exp-backoff reconnect, message dedupe by id.
-- **Webhooks:** HMAC signing, retries (exp-backoff + jitter), dead-letter logs; Discord sink scaffold disabled by default.
-- **Scheduler:** `src/bootstrap/scheduler.js` with drift correction + persisted cursors; register tasks **only** for evidenced loops.
-- **Persistence:** repository pattern; forward-only idempotent migrations with indexes/FKs; avoid N+1; paginate; small TTL caches.
-
----
-
-## 6) Directory Layout (create if missing)
+### 2.3 Coverage Map (Required)
+Emit `docs/coverage-map.md` with a table:
 
 ```
-backend/<Microservice>/
-  src/
-    app.js
-    server.js                 # export createHttpServer({ env }) → { app, httpServer, io? }
-    middleware/
-      requestId.js
-      rateLimit.js
-      hmacAuth.js
-      idempotency.js
-      validate.js
-      errorHandler.js
-    realtime/
-      websocket.js
-    hooks/
-      dispatcher.js
-    bootstrap/
-      scheduler.js
-    routes/
-      <domain>.routes.js
-    repositories/
-      <domain>Repository.js
-  src/migrations/
-    001_init.sql
-  docs/
-    index.md
-    progress-ledger.md
-    framework-compliance.md
-    run-docs.md
-    research-log.md
-    research-summary.md
-    naming-map.md
-    admin-ops.md
-    BASE_API_DOCUMENTATION.md
-    events-and-rpcs.md
-    db-schema.md
-    migrations.md
-    security.md
-    testing.md
-    coverage-map.md          # REQUIRED
-    gap-closure-report.md    # REQUIRED
-  CHANGELOG.md
-  MANIFEST.md
+repo | path | files | events | rpcs | loops | persistence | cluster | status | notes
 ```
 
----
+Include per-path notes and mapping to **agent modules** in this run.
 
-## 7) Git & PR Behavior
+### 2.4 Gap Mapping (Evidence‑Only)
+For each evidenced counterpart that is missing/partial in our write scope, classify as:
+- **SKIP** — already satisfied
+- **EXTEND** — partial; needs endpoints/handlers/repos/schedulers/tests/docs
+- **CREATE** — missing vertical slice (router/handler + repo + migration + realtime + validation + docs)
 
-- Detect default branch (origin HEAD → current → prefer `main`, else `master`, else single remote).
-- Working branch: `codex/<Microservice>-gap-<YYYYMMDD-HHmm-AZ>` (reuse if exists).
-- Stage **only** changes under `backend/<Microservice>/`.
-- Commit title: `<Microservice>(<domains>): cluster consolidation + ws/webhooks + scheduler + express`.
-- Create one PR per run. If push is denied by platform, skip push but still emit deliverables.
-
----
-
-## 8) Auto-Repairs & No-Ops
-
-- Duplicate migrations → renumber later duplicate prefix to next free number (preserve zero-padding); keep idempotent.
-- Merge markers → replace any `<<<<<<<`/`=======`/`>>>>>>>` with resolved content.
-- No tests/lint placeholders unless required by changed files.
-- No base64/zip outputs.
-- OpenAPI: do **not** create/edit/remove any OpenAPI files.
-
-If nothing changes after **fresh code traversal**, print exactly:
-`No changes required this run.`
+Emit `docs/gap-closure-report.md` listing: type, evidence refs, artifacts to create/modify, dependencies.
 
 ---
 
-## 9) Documentation Duties
+## 3) Planning Stage (Freeze Before Coding)
 
-- If `Reset Ledger = true`, re-init `docs/index.md` and `docs/progress-ledger.md`.
-- Update/create (changed docs only; print full contents):
-  - `docs/run-docs.md` — narrative of this run
-  - `docs/framework-compliance.md` — SRP-BASE compatibility & deviations
-  - `docs/research-log.md` — titles/paths only (no code)
-  - `docs/research-summary.md` — distilled findings
-  - `docs/naming-map.md` — upstream term → SRP term
-  - `docs/coverage-map.md` — **REQUIRED**: include `backend_impl_found` + `doc_no_gap_claim?` flags
-  - `docs/gap-closure-report.md` — **REQUIRED**: only evidence-backed EXTEND/CREATE items; precise external blockers if any
-  - Module docs under `docs/modules/` as needed
+Using the research artifacts, create a concrete plan:
 
----
+- **Interfaces & Contracts (resource‑agnostic):**
+  - **Events/RPCs:** define names, envelopes, reliability, idempotency, auth.
+  - **HTTP/WS:** path shapes, verbs, payload schemas, headers (e.g., `X-Request-Id`, HMAC/HMAC-like signatures), error taxonomy.
+  - **NUI/UI Contracts:** channel names, payloads, lifecycle, error displays.
+  - **Persistence:** tables/collections/indexes, forward‑only migrations.
+- **Integration with `srp-base` (when applicable):**
+  - Reuse `srp-base` schemas, exports, HTTP/WS endpoints, and validation where feasible.
+  - Provide **compat layers** if upstream uses different names (document in `docs/naming-map.md`).
 
-## 10) Deliverables (stdout format)
-
-1) **DIFF SUMMARY** (A/M/D/R lines under `backend/<Microservice>/`).  
-2) **PATCHES** (full contents per changed/new file):
-```
-=== FILE: backend/<Microservice>/<path> (A|M|R) ===
-<entire final file>
-```
-*Do not* print deleted file contents; list them as `D` in the diff.
-
-3) **MANIFEST.md** (full): summary bullets; A/M/D/R table; startup/env; compatibility aliases if any.  
-4) **CHANGELOG.md**: append new entry (print it in full).  
-5) **SQL migrations**: print full content for each new/changed file under `src/migrations/`.  
-6) **Docs Pack**: full contents for changed docs only.  
-7) **Completion line**:
-- Success: `DONE — <Microservice> microservice baseline complete.`
-- No-op: `No changes required this run.`
+Freeze the plan by writing:
+- `docs/research-summary.md` (findings distilled)
+- `docs/naming-map.md` (upstream term → this run’s term)
+- `docs/run-docs.md` (execution narrative, topology, assumptions)
+- Update `docs/framework-compliance.md` for `srp-base` compatibility notes.
 
 ---
 
-## 11) Quality Gates (HARD FAIL)
+## 4) Implementation Stage (Vertical Slices Only)
 
-- Fresh external + internal traversal artifacts exist and are reflected in `docs/coverage-map.md`.
-- `docs/gap-closure-report.md` exists; every EXTEND/CREATE item is **evidence-backed** (E1/E2) with implemented artifacts and locations.
-- Zero-TODO: no `TODO|FIXME|TBD|TBA` anywhere in code or docs.
-- Mandatory `health|ready|info` endpoints present.
-- Runtime validators on all mutating endpoints (OpenAPI deferred).
-- Migrations idempotent; indexes/FKs; no unsafe destructive ops.
-- WS handshake/envelope per §3.3; backpressure protections present.
-- Scheduler tasks registered **only** when loops are evidenced by traversal.
-- SRP naming (no upstream prefixes); temporary aliases marked deprecated in docs.
-- **Explicitly disallow**: concluding “no gaps” based solely on prior docs/logs **without fresh scans**.
+Implement only the **CREATE/EXTEND** items in the gap queue, end‑to‑end, with the smallest coherent diff per item.
 
----
+### 4.1 Multi‑Language Guidance (generic)
+- **Lua (server/client):** modules under `server/**`, `client/**`, exports via `exports('Fn', Fn)`, shared globals via `MyNS = MyNS or {}`; prefer `lua54 'yes'` in `fxmanifest.lua` when applicable.
+- **Node.js/Express:** single `http.createServer(app)`; middleware chain: `requestId → json → cors → rateLimit → auth/HMAC → idempotency → validation → errorHandler`.
+- **TypeScript:** strict mode, `zod` or `joi` for runtime validation, `tsup`/`esbuild` for bundling if needed.
+- **Web/UI:** componentized structure, clear state stores, runtime guards, `postMessage` contracts for NUI, accessibility minded.
+- **SQL:** MySQL 8+ (InnoDB, utf8mb4, UTC), forward‑only migrations, sane indexes/FKs; **no destructive ops**.
+- **Testing (when touched):** lightweight tests for validation and critical repos; avoid heavyweight scaffolds unless required by edits.
 
-## 12) Minimal Conflict Strategy
+### 4.2 Realtime & Schedulers (only when evidenced)
+- WS namespaces by domain; heartbeat, backpressure, dedupe by `message.id`.
+- Scheduler with drift correction and persisted cursors if loops found in research.
 
-Prefer the **smallest coherent** change set that meets compatibility and closes evidenced gaps:
-1) Maintain SRP contracts,
-2) Replace polling with WS/Webhooks when evidence shows polling loops,
-3) Favor maintainability (clear schemas, fewer cross-module deps).
+### 4.3 Security & Ops
+- Request IDs everywhere; structured logs (pino‑like); HMAC or shared secret headers for internal calls; rate limit mutating routes; CORS for UI endpoints.
+- Admin docs: `docs/admin-ops.md` for env vars, ports, health checks, basic dashboards.
 
 ---
 
-## 13) Safety Notes
+## 5) Git, Branching, and PRs
 
-- Never echo secrets/tokens.
-- Never embed upstream code verbatim (names/flows only).
-- Keep runs atomic and reversible (idempotent migrations; clear CHANGELOG).
+- Detect default branch (`origin` → `HEAD` → prefer `main` else `master` else only remote).
+- Use a run‑scoped working branch: `codex/<component>-gap-<YYYYMMDD-HHmm-AZ>` (reuse if present).
+- Stage **only** files within allowed write scope(s).
+- Commit title pattern: `<component>(<domains>): <summary>`.
+- Open **one PR per run**. If push is not possible, **still emit deliverables** as docs/diffs.
 
 ---
 
-## 14) Execution Loop (deterministic)
+## 6) Deliverables & Output Format (Deterministic)
+
+Always output the following (changed/added only unless otherwise noted):
+
+1. **DIFF SUMMARY** (A/M/D/R lines) scoped to allowed write paths.  
+2. **PATCHES** — full contents of each new/changed file:  
+   ```
+   === FILE: <path> (A|M|R) ===
+   <entire file content>
+   ```
+3. **MANIFEST.md** — summary, A/M/D/R table, env/startup, compatibility notes.  
+4. **CHANGELOG.md** — append latest entry (print fully).  
+5. **SQL Migrations** — print full content for each new/changed migration.  
+6. **Docs Pack** — print full contents of updated docs:  
+   - `docs/index.md` (when Reset Ledger)  
+   - `docs/progress-ledger.md`  
+   - `docs/framework-compliance.md`  
+   - `docs/research-log.md`  
+   - `docs/research-summary.md`  
+   - `docs/naming-map.md`  
+   - `docs/coverage-map.md` (**REQUIRED**)  
+   - `docs/gap-closure-report.md` (**REQUIRED**)  
+   - `docs/run-docs.md`  
+7. **Completion Line (choose one, never claim “done” prematurely):**
+   - `RESEARCH COMPLETE — Plan frozen; proceeding to implementation.`
+   - `BASELINE READY — Planning complete; implementation per plan follows.`
+   - `EXECUTION COMPLETE — All evidenced CREATE/EXTEND items implemented for this run.`
+
+---
+
+## 7) Quality Gates (Hard Fail)
+
+- `docs/coverage-map.md` present and includes **all declared/discovered paths** with counts.
+- `docs/gap-closure-report.md` present; every CREATE/EXTEND is **evidence‑backed** (E1/E2) and lists artifacts + file locations.
+- Health/Ready/Info endpoints present for services touched (or equivalent diagnostics for libraries/UI).
+- **All mutating endpoints validated** at runtime.
+- Migrations idempotent with indexes/FKs; **no destructive** defaults.
+- WS handshakes/envelopes per plan; backpressure + dedupe implemented if WS added/modified.
+- Schedulers only if evidenced; include drift correction where applicable.
+- Namespacing consistent; compatibility layers documented (`docs/naming-map.md`).
+- **Zero `TODO|FIXME|TBD|TBA`** in changed code/docs.
+
+---
+
+## 8) Time & Fairness Policy
+
+- **Do not stop early:** Keep working the queue until **25 minutes** have elapsed or the evidenced queue is empty.  
+- **Anti‑repeat (No tunneling):** Round‑robin across `(domain, path)` buckets with caps:  
+  - `max_consecutive_per_bucket = 1`  
+  - `cooldown_span = 2` buckets before revisiting the same bucket  
+- Order by `dependencies → perf wins → player/user value`.  
+- Never re‑open closed items; only expand if missed during initial DISCOVERED traversal.
+
+---
+
+## 9) srp-base Compatibility Rules (When srp-base is Relevant)
+
+- Prefer `srp-base` contracts for identity, sessions, characters, events, and telemetry.  
+- If working in another resource, **reuse** `srp-base` handlers/exports/HTTP/WS where feasible.  
+- When upstream naming differs, add a **compat alias** (and mark deprecated) with mapping documented in `docs/naming-map.md`.  
+- Maintain **non‑breaking** integration: do not change external SRP contracts without explicit prompt instruction.
+
+---
+
+## 10) Safety, Privacy, and Compliance
+
+- Do not include secrets in code or docs. Use env vars and `.env.example`.  
+- Respect content policies and platform rules (e.g., no discriminatory features, no PII leaks).  
+- Logs: avoid sensitive payloads; include requestId, route, status, latency, actor identifiers only when necessary.  
+- Follow license obligations of referenced sources; no code copying from upstream — **behavioral extraction only**.
+
+---
+
+## 11) Run Loop (Deterministic Pseudocode)
 
 ```
 read_prompt_and_run_config()
+assert reasoning_effort == Ultrathinking
+establish_write_scope_from_prompt_or_defaults()
+
 normalize_parameters()
-inventory_service()
+inventory_component()
+traversal = traverse(declared_paths + discovered_paths)
+signals   = extract_behaviors(traversal)
+emit_coverage_map(traversal, signals)
 
-traversal = traverse(declared_paths + discovered_paths)        // fresh external scan (resources)
-internal  = traverse_backend("backend/<Microservice>")         // fresh internal scan (our code)
-signals   = extract_behaviors(traversal)                       // §2.2
-emit_coverage_map(traversal, signals, internal)                // §2.3
+plan  = gap_map_from_evidence(signals)   // SKIP | EXTEND | CREATE
+queue = prioritize(plan)                 // deps → perf → value
+queue = enforce_fairness(queue)          // round‑robin
 
-clusters  = cluster_from_primary_domains()                     // §4
-plan      = gap_map(clusters, signals)                         // SKIP | EXTEND | CREATE (evidence-only)
-queue     = prioritize(plan)                                   // deps → perf wins → player value
-queue     = enforce_fairness(queue)                            // round-robin; no tunneling
+freeze_plan_docs()                        // research-summary, naming-map, run-docs, compliance
 
-for item in queue:
-  implement_vertical_slice(item)                               // routes → repos → migrations → WS/webhooks → validation → docs
-  mark_closed_in_ledger(item)
-  update_docs_and_reports(item)
+start_timer()
+for item in queue until time_elapsed < 25min:
+  implement_vertical_slice(item)         // handlers/routes → repos → migrations → WS/schedulers → validation → docs
+  update_ledgers_and_reports(item)
 
-assert_quality_gates()                                         // §11
-emit_deliverables()                                            // §10
+assert_quality_gates()
+emit_deliverables()
 ```
+
+---
+
+## 12) Quick Integration Patterns (Optional, Use Only if Relevant)
+
+- **HTTP Internal Calls:** `X-Internal-Key`, optional `HMAC sha256=...`, `X-Request-Id`, JSON bodies.
+- **WS Envelope (CloudEvents‑like):**
+  ```json
+  { "id":"evt_<uuid>","type":"<ns>.<domain>.<action>","source":"<component>","subject":"<entityId|*>","time":"<ISO-8601>","specversion":"1.0","data":{} }
+  ```
+- **NUI PostMessage Contract:** `type`, `payload`, `requestId`; UI sends ACK/ERR; timeouts with user‑friendly notices.
+- **DB Access:** repository layer, parameterized queries, pagination, indexes, and strict error translation.
+
+---
+
+## 13) File/Tree Conventions (Generic)
+
+- **Backends:** `src/{server|app}.(js|ts)`, `src/routes`, `src/repositories`, `src/migrations`, `src/middleware`, `src/realtime`, `src/bootstrap`  
+- **Resources (FiveM or similar):** `fxmanifest.lua`, `server/**`, `client/**`, `shared/**`, `ui/**`, `files/**`  
+- **Web/UI:** `src/components`, `src/pages`, `src/state`, `public/`, build script(s)  
+- **Docs:** `docs/*.md` including required coverage/gap/summary/run docs  
+- **Ops:** `ops/*.conf`, `Dockerfile`, `compose.yaml` (only if prompt allows)
+
+---
+
+## 14) What Not To Do
+
+- Don’t implement features without **E1/E2 evidence**.  
+- Don’t touch files outside allowed write scope(s).  
+- Don’t leave placeholders or TODOs.  
+- Don’t break `srp-base` contracts when it’s in scope.  
+- Don’t skip docs/diffs — outputs must be auditable.
+
+---
+
+**Use this agents.md verbatim for any stack.**  
+If `srp-base` is in play, treat it as the baseline framework and integrate accordingly.  
+Otherwise, proceed generically while keeping interfaces compatible for later `srp-base` adoption.
