@@ -11,6 +11,13 @@ import { purgeStaleEntities } from './repositories/world.js';
 import { refreshEndpoints } from './webhooks/dispatcher.js';
 import { getCurrentTime } from './util/time.js';
 
+if (!process.env.SRP_HMAC_SECRET) {
+  throw new Error('SRP_HMAC_SECRET environment variable is required');
+}
+if (!process.env.JWT_SECRET) {
+  throw new Error('JWT_SECRET environment variable is required');
+}
+
 const port = process.env.PORT || 3000;
 const server = http.createServer(app);
 
