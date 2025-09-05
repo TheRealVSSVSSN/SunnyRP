@@ -42,3 +42,14 @@ scheduler.start();
 server.listen(port, () => {
   logger.info({ port }, 'srp-base listening');
 });
+
+function shutdown() {
+  scheduler.stop();
+  server.close(() => {
+    logger.info('srp-base shutting down');
+    process.exit(0);
+  });
+}
+
+process.on('SIGTERM', shutdown);
+process.on('SIGINT', shutdown);

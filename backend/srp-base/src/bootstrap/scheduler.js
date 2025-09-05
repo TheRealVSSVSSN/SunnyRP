@@ -6,13 +6,14 @@ import { purgeErrors, getRestartSchedule, clearRestartSchedule } from '../reposi
 import { emitEvent } from '../websockets/gateway.js';
 
 const tasks = [];
+const controllers = new Set();
 
 export function registerTask(name, intervalMs, handler) {
   tasks.push({ name, intervalMs, handler, lastRun: 0 });
 }
 
-async function runTask(task) {
-  while (true) {
+async function runTask(task, signal) {
+  while (!signal.aborted) {
     const start = Date.now();
     try {
       await task.handler(task.lastRun);
@@ -23,7 +24,12 @@ async function runTask(task) {
     }
     const elapsed = Date.now() - start;
     const wait = Math.max(0, task.intervalMs - elapsed) + randomInt(0, 500);
-    await delay(wait);
+    try {
+      await delay(wait, null, { signal });
+    } catch (err) {
+      if (err.name === 'AbortError') break;
+      throw err;
+    }
   }
 }
 
@@ -41,7 +47,14 @@ export const scheduler = {
     for (const task of tasks) {
       const last = await getSchedulerRun(task.name);
       if (last) task.lastRun = new Date(last).getTime();
-      runTask(task); // no await
+      const controller = new AbortController();
+      controllers.add(controller);
+      runTask(task, controller.signal).finally(() => controllers.delete(controller));
+    }
+  },
+  stop() {
+    for (const controller of controllers) {
+      controller.abort();
     }
   }
 };
