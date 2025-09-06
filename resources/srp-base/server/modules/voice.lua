@@ -1,15 +1,19 @@
 --[[
     -- Type: Module
-    -- Name: voice
-    -- Use: Stub handlers for voice domain
-    -- Created: 2025-02-14
+    -- Name: Voice Stub
+    -- Use: Placeholder for voice actions
+    -- Created: 2024-06-02
     -- By: VSSVSSN
 --]]
 
 local M = {}
 
-function M.handle()
+function M.default()
     return { status = 501, message = 'Not implemented in failover path' }
 end
 
-return M
+return setmetatable(M, {
+    __index = function()
+        return M.default
+    end
+})

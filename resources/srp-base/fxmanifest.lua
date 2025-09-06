@@ -1,13 +1,12 @@
--- 2025-02-14
 fx_version 'cerulean'
 game 'gta5'
 
 lua54 'yes'
 
 server_scripts {
-    'server/**/*.lua'
+  'server/**/*.lua'
 }
 
 shared_scripts {
-    'shared/**/*.lua'
+  'shared/**/*.lua'
 }

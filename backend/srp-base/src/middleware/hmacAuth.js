@@ -1,21 +1,12 @@
-// 2025-02-14
-import crypto from 'crypto';
+const crypto = require('crypto');
 
-/**
- * Factory returning middleware validating X-SRP-Internal-Key header.
- */
-export function hmacAuth(env) {
-  const secret = env.SRP_INTERNAL_KEY || 'change_me';
-  return function (req, res, next) {
-    const key = req.get('X-SRP-Internal-Key') || '';
-    const keyBuf = Buffer.from(key);
-    const secretBuf = Buffer.from(secret);
-    const valid = keyBuf.length === secretBuf.length && crypto.timingSafeEqual(keyBuf, secretBuf);
-    if (!valid) {
-      const err = new Error('unauthorized');
-      err.status = 401;
-      return next(err);
-    }
-    next();
-  };
-}
+module.exports = function hmacAuth(req, res, next) {
+  const key = process.env.SRP_INTERNAL_KEY || 'change_me';
+  const header = req.headers['x-srp-internal-key'] || '';
+  const a = Buffer.from(header);
+  const b = Buffer.from(key);
+  if (a.length !== b.length || !crypto.timingSafeEqual(a, b)) {
+    return res.status(401).json({ error: 'unauthorized' });
+  }
+  next();
+};

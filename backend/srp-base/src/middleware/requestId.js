@@ -1,12 +1,20 @@
-// 2025-02-14
-import { randomUUID } from 'crypto';
+const { randomUUID } = require('crypto');
 
-/**
- * Express middleware that assigns a request identifier.
- */
-export function requestId(req, res, next) {
-  const id = req.get('X-Request-Id') || randomUUID();
+module.exports = function requestId(req, res, next) {
+  const id = req.headers['x-request-id'] || randomUUID();
   req.id = id;
-  res.set('X-Request-Id', id);
+  res.setHeader('X-Request-Id', id);
+  const start = process.hrtime.bigint();
+  res.on('finish', () => {
+    const ms = Number(process.hrtime.bigint() - start) / 1e6;
+    const log = {
+      route: req.originalUrl,
+      status: res.statusCode,
+      method: req.method,
+      requestId: id,
+      ms: Math.round(ms)
+    };
+    console.log(JSON.stringify(log));
+  });
   next();
-}
+};

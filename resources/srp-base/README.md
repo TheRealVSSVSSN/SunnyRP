@@ -1,10 +1,10 @@
-# srp-base Resource
+# srp-base (Lua)
 
-Provides HTTP handler, RPC dispatch, and failover logic for SRP when the Node backend is degraded.
+Failover glue for SunnyRP. Proxies to Node by default and stores data via GHMattiMySQL when Node is overloaded.
 
-## Convars
-- `srp_node_base_url` – Node service URL (default `http://127.0.0.1:4000`)
-- `srp_internal_key` – Shared secret for internal calls
+## ConVars
+- `srp_internal_key` shared secret for Node↔Lua
+- `srp_node_base_url` Node base URL (default http://127.0.0.1:4000)
 
 ## Failover
-The circuit breaker opens when the Node service is overloaded or unreachable. While open, mutations are queued and persisted via GHMattiMySQL (if available). Once the Node service recovers, queued mutations replay sequentially.
+The circuit breaker opens when Node signals overload or becomes unreachable. During this time, writes queue and persist through GHMattiMySQL if present.

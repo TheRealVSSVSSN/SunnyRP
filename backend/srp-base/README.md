@@ -1,19 +1,21 @@
-# srp-base Backend
+# srp-base
 
-Express-based Node.js service providing REST, internal RPC, and WebSocket endpoints for SRP.
+Node.js service providing core SunnyRP APIs and realtime gateway.
 
 ## Run
-
-```sh
-cd backend/srp-base
-cp .env.example .env
-npm install
-npm start
-```
+1. `cp .env.example .env`
+2. `npm install`
+3. `npm start`
 
 ## Endpoints
 - `GET /v1/health`
 - `GET /v1/ready`
 - `GET /v1/info`
+- `POST /v1/accounts/:accountId/characters`
+- `GET /v1/accounts/:accountId/characters`
+- `POST /v1/accounts/:accountId/characters/:characterId:select`
+- `DELETE /v1/accounts/:accountId/characters/:characterId`
 - `POST /internal/srp/rpc`
-- `GET|POST|DELETE /v1/accounts/:accountId/characters`
+
+## Environment
+See `.env.example` for tunables.
