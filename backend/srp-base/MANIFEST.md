@@ -1,6 +1,6 @@
 # MANIFEST
 
-- `src/server.js` – HTTP server with health, ready, info, and RPC endpoints.
+- `src/server.js` – Express HTTP server with health, ready, info, and RPC endpoints.
 - `src/routes/base.routes.js` – account character routes.
 - `src/repositories/baseRepository.js` – in-memory data store.
 - `src/middleware/*` – request handling utilities.

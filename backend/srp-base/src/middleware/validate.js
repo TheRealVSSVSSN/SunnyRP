@@ -1,3 +1,6 @@
+/**
+ * Minimal schema validator for plain objects.
+ */
 export function validate(schema, data) {
   for (const [key, rule] of Object.entries(schema)) {
     if (rule.required && data[key] === undefined) {

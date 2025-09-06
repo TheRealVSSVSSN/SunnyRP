@@ -1,47 +1,67 @@
-import { listCharacters, createCharacter, selectCharacter, deleteCharacter } from '../repositories/baseRepository.js';
+import { Router } from 'express';
+import {
+  listCharacters,
+  createCharacter,
+  selectCharacter,
+  deleteCharacter,
+} from '../repositories/baseRepository.js';
 import { idempotency, saveIdempotency } from '../middleware/idempotency.js';
 import { assertValid } from '../middleware/validate.js';
 
-export async function handleBaseRoutes(req, res, url) {
-  const parts = url.pathname.split('/').filter(Boolean); // ['v1','accounts','123',...] 
-  if (parts[0] !== 'v1' || parts[1] !== 'accounts') return false;
-  const accountId = Number(parts[2]);
-  if (!accountId) {
-    throw Object.assign(new Error('invalid_account'), { status: 400 });
-  }
-  if (parts.length === 4 && parts[3] === 'characters' && req.method === 'GET') {
+/**
+ * Router: /v1/accounts
+ */
+const router = Router();
+
+router.get('/:accountId/characters', async (req, res, next) => {
+  try {
+    const accountId = Number(req.params.accountId);
+    if (!accountId) throw Object.assign(new Error('invalid_account'), { status: 400 });
     const chars = await listCharacters(accountId);
-    const body = JSON.stringify(chars);
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(body);
-    return true;
+    res.json(chars);
+  } catch (e) {
+    next(e);
   }
-  if (parts.length === 4 && parts[3] === 'characters' && req.method === 'POST') {
-    if (!idempotency(req, res)) return true;
-    assertValid({ firstName: { type: 'string', required: true }, lastName: { type: 'string', required: true } }, req.body || {});
+});
+
+router.post('/:accountId/characters', idempotency, async (req, res, next) => {
+  try {
+    const accountId = Number(req.params.accountId);
+    if (!accountId) throw Object.assign(new Error('invalid_account'), { status: 400 });
+    assertValid(
+      { firstName: { type: 'string', required: true }, lastName: { type: 'string', required: true } },
+      req.body || {}
+    );
     const character = await createCharacter(accountId, req.body);
     const body = JSON.stringify(character);
-    res.writeHead(201, { 'Content-Type': 'application/json' });
-    res.end(body);
+    res.status(201).type('application/json').send(body);
     saveIdempotency(req, res, body);
-    return true;
+  } catch (e) {
+    next(e);
   }
-  if (parts.length === 6 && parts[3] === 'characters' && parts[5] === 'select' && req.method === 'POST') {
-    const characterId = Number(parts[4]);
+});
+
+router.post('/:accountId/characters/:characterId/select', async (req, res, next) => {
+  try {
+    const accountId = Number(req.params.accountId);
+    const characterId = Number(req.params.characterId);
     const character = await selectCharacter(accountId, characterId);
-    if (!character) {
-      throw Object.assign(new Error('not_found'), { status: 404 });
-    }
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ ok: true }));
-    return true;
+    if (!character) throw Object.assign(new Error('not_found'), { status: 404 });
+    res.json({ ok: true });
+  } catch (e) {
+    next(e);
   }
-  if (parts.length === 5 && parts[3] === 'characters' && req.method === 'DELETE') {
-    const characterId = Number(parts[4]);
+});
+
+router.delete('/:accountId/characters/:characterId', async (req, res, next) => {
+  try {
+    const accountId = Number(req.params.accountId);
+    const characterId = Number(req.params.characterId);
     const deleted = await deleteCharacter(accountId, characterId);
-    res.writeHead(deleted ? 200 : 404, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ ok: deleted }));
-    return true;
+    res.status(deleted ? 200 : 404).json({ ok: deleted });
+  } catch (e) {
+    next(e);
   }
-  return false;
-}
+});
+
+export default router;

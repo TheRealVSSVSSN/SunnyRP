@@ -1,7 +1,11 @@
 import { randomUUID } from 'crypto';
 
-export async function requestId(req, res) {
-  const id = req.headers['x-request-id'] || randomUUID();
+/**
+ * Express middleware that assigns a request identifier.
+ */
+export function requestId(req, res, next) {
+  const id = req.get('X-Request-Id') || randomUUID();
   req.id = id;
-  res.setHeader('X-Request-Id', id);
+  res.set('X-Request-Id', id);
+  next();
 }

@@ -1,70 +1,62 @@
-import http from 'http';
+import express from 'express';
+import cors from 'cors';
 import { requestId } from './middleware/requestId.js';
 import { rateLimit } from './middleware/rateLimit.js';
 import { hmacAuth } from './middleware/hmacAuth.js';
 import { errorHandler } from './middleware/errorHandler.js';
-import { handleBaseRoutes } from './routes/base.routes.js';
+import baseRoutes from './routes/base.routes.js';
+import pkg from '../package.json' assert { type: 'json' };
 
-function parseJson(req) {
-  return new Promise((resolve, reject) => {
-    let data = '';
-    req.on('data', chunk => { data += chunk; });
-    req.on('end', () => {
-      if (!data) return resolve(undefined);
-      try { resolve(JSON.parse(data)); } catch (e) { reject(Object.assign(new Error('invalid_json'), { status:400 })); }
-    });
-    req.on('error', reject);
-  });
-}
-
+/**
+ * Name: server
+ * Description: Express HTTP server exposing health, info, and RPC endpoints.
+ * Created: 2024-11-27
+ * By: VSSVSSN
+ */
 export function createHttpServer({ env = process.env } = {}) {
+  const app = express();
   const port = Number(env.PORT) || 4000;
-  const server = http.createServer(async (req, res) => {
+
+  app.use(requestId);
+  app.use((req, res, next) => {
     const start = Date.now();
-    try {
-      await requestId(req, res);
-      await rateLimit(req, res);
-      // CORS headers
-      res.setHeader('Access-Control-Allow-Origin', '*');
-      res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-Request-Id, X-SRP-Internal-Key, Idempotency-Key');
-      if (req.method === 'OPTIONS') { res.writeHead(204); res.end(); return; }
-      if (req.method === 'POST' || req.method === 'PUT' || req.method === 'PATCH') {
-        req.body = await parseJson(req);
-      }
-      const url = new URL(req.url, `http://${req.headers.host}`);
-      if (req.method === 'GET' && url.pathname === '/v1/health') {
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ status: 'ok', service: 'srp-base', time: new Date().toISOString() }));
-      } else if (req.method === 'GET' && url.pathname === '/v1/ready') {
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ ready: true, deps: [] }));
-      } else if (req.method === 'GET' && url.pathname === '/v1/info') {
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ service: 'srp-base', version: '0.1.0', compat: { baseline: 'srp-base' } }));
-      } else if (req.method === 'POST' && url.pathname === '/internal/srp/rpc') {
-        hmacAuth(req, env);
-        const envelope = req.body;
-        if (!envelope || typeof envelope !== 'object') {
-          throw Object.assign(new Error('invalid_envelope'), { status: 400 });
-        }
-        // echo back for now
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ ok: true, result: envelope.data }));
-      } else if (await handleBaseRoutes(req, res, url)) {
-        // handled
-      } else {
-        res.writeHead(404, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ error: 'not_found' }));
-      }
-    } catch (err) {
-      errorHandler(err, req, res);
-    } finally {
+    res.on('finish', () => {
       const latency = Date.now() - start;
-      const log = { route: req.url, status: res.statusCode, latency, requestId: req.id };
-      console.log(JSON.stringify(log));
-    }
+      console.log(JSON.stringify({ route: req.originalUrl, status: res.statusCode, latency, requestId: req.id }));
+    });
+    next();
   });
-  server.listen(port, () => {
+  app.use(rateLimit);
+  app.use(cors());
+  app.use(express.json());
+
+  app.get('/v1/health', (req, res) => {
+    res.json({ status: 'ok', service: 'srp-base', time: new Date().toISOString() });
+  });
+  app.get('/v1/ready', (req, res) => {
+    res.json({ ready: true, deps: [] });
+  });
+  app.get('/v1/info', (req, res) => {
+    res.json({ service: 'srp-base', version: pkg.version, compat: { baseline: 'srp-base' } });
+  });
+
+  app.post('/internal/srp/rpc', hmacAuth(env), (req, res) => {
+    const envelope = req.body;
+    if (!envelope || typeof envelope !== 'object') {
+      return res.status(400).json({ error: 'invalid_envelope' });
+    }
+    res.json({ ok: true, result: envelope.data });
+  });
+
+  app.use('/v1/accounts', baseRoutes);
+
+  app.use((req, res) => {
+    res.status(404).json({ error: 'not_found' });
+  });
+
+  app.use(errorHandler);
+
+  const server = app.listen(port, () => {
     console.log(`srp-base listening on ${port}`);
   });
   return server;

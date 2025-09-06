@@ -4,6 +4,7 @@
     -- Use: Declares srp-base resource scripts
     -- Created: 2024-11-26
     -- By: VSSVSSN
+    -- Updated: 2024-11-27
 --]]
 
 fx_version 'cerulean'

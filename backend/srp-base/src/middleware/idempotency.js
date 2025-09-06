@@ -1,20 +1,27 @@
 const store = new Map();
 
-export function idempotency(req, res) {
-  const key = req.headers['idempotency-key'];
-  if (!key) return true;
+/**
+ * Handles Idempotency-Key for POST requests.
+ */
+export function idempotency(req, res, next) {
+  const key = req.get('Idempotency-Key');
+  if (!key) return next();
   if (store.has(key)) {
     const cached = store.get(key);
-    res.writeHead(cached.status, { 'Content-Type': 'application/json' });
-    res.end(cached.body);
-    return false;
+    res.set(cached.headers);
+    res.status(cached.status).send(cached.body);
+    return;
   }
   req.idempotencyKey = key;
-  return true;
+  next();
 }
 
 export function saveIdempotency(req, res, body) {
   if (req.idempotencyKey) {
-    store.set(req.idempotencyKey, { status: res.statusCode, body });
+    store.set(req.idempotencyKey, {
+      status: res.statusCode,
+      body,
+      headers: res.getHeaders(),
+    });
   }
 }

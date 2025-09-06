@@ -6,5 +6,9 @@
   "scripts": {
     "start": "node src/server.js",
     "test": "node --version"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
   }
 }
