@@ -2,44 +2,44 @@
     -- Type: Module
     -- Name: rpc
     -- Use: Dispatches RPC envelopes to domain modules
-    -- Created: 2025-09-06
+    -- Created: 2024-11-26
     -- By: VSSVSSN
 --]]
 
 local SRP = SRP or require('resources/srp-base/shared/srp.lua')
 
-SRP.RPC = SRP.RPC or {}
-
-local handlers = {
-    sessions   = require('resources/srp-base/server/modules/sessions'),
-    queue      = require('resources/srp-base/server/modules/queue'),
-    voice      = require('resources/srp-base/server/modules/voice'),
-    telemetry  = require('resources/srp-base/server/modules/telemetry'),
-    ux         = require('resources/srp-base/server/modules/ux'),
-    world      = require('resources/srp-base/server/modules/world'),
-    jobs       = require('resources/srp-base/server/modules/jobs')
+local modules = {
+    base = require('resources/srp-base/server/modules/base.lua'),
+    sessions = require('resources/srp-base/server/modules/sessions.lua'),
+    voice = require('resources/srp-base/server/modules/voice.lua'),
+    ux = require('resources/srp-base/server/modules/ux.lua'),
+    world = require('resources/srp-base/server/modules/world.lua'),
+    jobs = require('resources/srp-base/server/modules/jobs.lua')
 }
+
+SRP.RPC = {}
 
 --[[
     -- Type: Function
-    -- Name: SRP.RPC.handle
-    -- Use: Routes payload based on type field
-    -- Created: 2025-09-06
+    -- Name: handle
+    -- Use: Routes envelopes based on type field
+    -- Created: 2024-11-26
     -- By: VSSVSSN
 --]]
-function SRP.RPC.handle(payload)
-    if type(payload) ~= "table" or type(payload.type) ~= "string" then
-        return nil, "invalid_payload"
+function SRP.RPC.handle(envelope)
+    if type(envelope) ~= 'table' or type(envelope.type) ~= 'string' then
+        return { error = 'invalid_envelope' }
     end
-    local domain = payload.type:match("^srp%.([^.]+)")
-    if not domain then
-        return nil, "unknown_domain"
+    local domain = envelope.type:match('^srp%.([^.]+)%.')
+    local mod = modules[domain]
+    if not mod or type(mod.handle) ~= 'function' then
+        return { error = 'not_implemented' }
     end
-    local mod = handlers[domain]
-    if not mod or type(mod.handle) ~= "function" then
-        return nil, "no_handler"
+    local ok, result = pcall(mod.handle, envelope)
+    if not ok then
+        return { error = 'handler_error' }
     end
-    return mod.handle(payload)
+    return { result = result }
 end
 
 return SRP.RPC

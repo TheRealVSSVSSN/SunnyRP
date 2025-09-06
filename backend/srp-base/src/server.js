@@ -1,56 +1,75 @@
 import http from 'http';
-import { app } from './app.js';
-import { initGateway, emitEvent } from './websockets/gateway.js';
-import { scheduler, registerTask } from './bootstrap/scheduler.js';
-import { logger } from './util/logger.js';
-import { purgeExpired } from './repositories/idempotency.js';
-import { purgeStalePlayers } from './repositories/scoreboard.js';
-import { purgeStaleQueue } from './repositories/queue.js';
-import { purgeStaleChannels } from './repositories/voice.js';
-import { purgeStaleEntities } from './repositories/world.js';
-import { refreshEndpoints, retryDeadLetters } from './webhooks/dispatcher.js';
-import { getCurrentTime } from './util/time.js';
+import { requestId } from './middleware/requestId.js';
+import { rateLimit } from './middleware/rateLimit.js';
+import { hmacAuth } from './middleware/hmacAuth.js';
+import { errorHandler } from './middleware/errorHandler.js';
+import { handleBaseRoutes } from './routes/base.routes.js';
 
-if (!process.env.SRP_HMAC_SECRET) {
-  throw new Error('SRP_HMAC_SECRET environment variable is required');
-}
-if (!process.env.JWT_SECRET) {
-  throw new Error('JWT_SECRET environment variable is required');
-}
-
-const port = process.env.PORT || 3000;
-const server = http.createServer(app);
-const wsDomains = ['jobs','queue','scheduler','scoreboard','sessions','system','telemetry','ux','voice','world'];
-
-registerTask('idempotency_purge', 60_000, purgeExpired);
-const timeInterval = Number(process.env.TIME_BROADCAST_INTERVAL_MS) || 60_000;
-registerTask('system_time_broadcast', timeInterval, () => {
-  emitEvent('system', 'time', '*', { time: getCurrentTime() });
-});
-const scoreboardStale = Number(process.env.SCOREBOARD_STALE_MS) || 30_000;
-registerTask('scoreboard_purge', scoreboardStale, () => purgeStalePlayers(scoreboardStale));
-const queueStale = Number(process.env.QUEUE_STALE_MS) || 300_000;
-registerTask('queue_purge', 60_000, () => purgeStaleQueue(queueStale));
-const voiceStale = Number(process.env.VOICE_STALE_MS) || 300_000;
-registerTask('voice_purge', 60_000, () => purgeStaleChannels(voiceStale));
-const infinityStale = Number(process.env.INFINITY_STALE_MS) || 300_000;
-registerTask('infinity_entity_purge', 60_000, () => purgeStaleEntities(infinityStale));
-registerTask('webhook_dead_letter_retry', 60_000, retryDeadLetters);
-refreshEndpoints();
-initGateway(server, wsDomains);
-scheduler.start();
-
-server.listen(port, () => {
-  logger.info({ port }, 'srp-base listening');
-});
-
-function shutdown() {
-  scheduler.stop();
-  server.close(() => {
-    logger.info('srp-base shutting down');
-    process.exit(0);
+function parseJson(req) {
+  return new Promise((resolve, reject) => {
+    let data = '';
+    req.on('data', chunk => { data += chunk; });
+    req.on('end', () => {
+      if (!data) return resolve(undefined);
+      try { resolve(JSON.parse(data)); } catch (e) { reject(Object.assign(new Error('invalid_json'), { status:400 })); }
+    });
+    req.on('error', reject);
   });
 }
 
-process.on('SIGTERM', shutdown);
-process.on('SIGINT', shutdown);
+export function createHttpServer({ env = process.env } = {}) {
+  const port = Number(env.PORT) || 4000;
+  const server = http.createServer(async (req, res) => {
+    const start = Date.now();
+    try {
+      await requestId(req, res);
+      await rateLimit(req, res);
+      // CORS headers
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-Request-Id, X-SRP-Internal-Key, Idempotency-Key');
+      if (req.method === 'OPTIONS') { res.writeHead(204); res.end(); return; }
+      if (req.method === 'POST' || req.method === 'PUT' || req.method === 'PATCH') {
+        req.body = await parseJson(req);
+      }
+      const url = new URL(req.url, `http://${req.headers.host}`);
+      if (req.method === 'GET' && url.pathname === '/v1/health') {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ status: 'ok', service: 'srp-base', time: new Date().toISOString() }));
+      } else if (req.method === 'GET' && url.pathname === '/v1/ready') {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ ready: true, deps: [] }));
+      } else if (req.method === 'GET' && url.pathname === '/v1/info') {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ service: 'srp-base', version: '0.1.0', compat: { baseline: 'srp-base' } }));
+      } else if (req.method === 'POST' && url.pathname === '/internal/srp/rpc') {
+        hmacAuth(req, env);
+        const envelope = req.body;
+        if (!envelope || typeof envelope !== 'object') {
+          throw Object.assign(new Error('invalid_envelope'), { status: 400 });
+        }
+        // echo back for now
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ ok: true, result: envelope.data }));
+      } else if (await handleBaseRoutes(req, res, url)) {
+        // handled
+      } else {
+        res.writeHead(404, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'not_found' }));
+      }
+    } catch (err) {
+      errorHandler(err, req, res);
+    } finally {
+      const latency = Date.now() - start;
+      const log = { route: req.url, status: res.statusCode, latency, requestId: req.id };
+      console.log(JSON.stringify(log));
+    }
+  });
+  server.listen(port, () => {
+    console.log(`srp-base listening on ${port}`);
+  });
+  return server;
+}
+
+if (import.meta.url === `file://${process.argv[1]}`) {
+  createHttpServer({ env: process.env });
+}

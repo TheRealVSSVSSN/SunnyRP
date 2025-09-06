@@ -2,7 +2,7 @@
     -- Type: Module
     -- Name: srp
     -- Use: Provides global SRP table and export helper
-    -- Created: 2025-09-06
+    -- Created: 2024-11-26
     -- By: VSSVSSN
 --]]
 
@@ -12,7 +12,7 @@ SRP = rawget(_G, 'SRP') or {}
     -- Type: Function
     -- Name: export
     -- Use: Registers functions to the SRP namespace and exports them
-    -- Created: 2025-09-06
+    -- Created: 2024-11-26
     -- By: VSSVSSN
 --]]
 local function export(name, fn)

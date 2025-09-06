@@ -1,22 +1,15 @@
 --[[
     -- Type: Module
     -- Name: world
-    -- Use: Handles world related RPC calls
-    -- Created: 2025-09-06
+    -- Use: Stub handlers for world domain
+    -- Created: 2024-11-26
     -- By: VSSVSSN
 --]]
 
 local M = {}
 
---[[
-    -- Type: Function
-    -- Name: handle
-    -- Use: Processes world envelope
-    -- Created: 2025-09-06
-    -- By: VSSVSSN
---]]
 function M.handle()
-    return nil, "not_implemented"
+    return { status = 501 }
 end
 
 return M

@@ -1,116 +1,64 @@
 --[[
     -- Type: Module
     -- Name: failover
-    -- Use: Implements circuit breaker and request queue for Node failover
-    -- Created: 2025-09-06
+    -- Use: Implements a simple circuit breaker with retry queue
+    -- Created: 2024-11-26
     -- By: VSSVSSN
 --]]
 
 local SRP = SRP or require('resources/srp-base/shared/srp.lua')
-SRP.Failover = SRP.Failover or { state = "CLOSED", q = {}, retryAt = 0, backoff = 1000 }
 
-local NODE_URL = GetConvar("srp_node_base_url", "http://127.0.0.1:4000")
-local HEALTH    = NODE_URL .. "/v1/health"
+local state = 'CLOSED'
+local nextTry = 0
+local delay = 1000
+local queue = {}
 
---[[
-    -- Type: Function
-    -- Name: nowMs
-    -- Use: Provides current game time in milliseconds
-    -- Created: 2025-09-06
-    -- By: VSSVSSN
---]]
-local function nowMs() return GetGameTimer() end
-
---[[
-    -- Type: Function
-    -- Name: enqueue
-    -- Use: Adds tasks to the failover queue
-    -- Created: 2025-09-06
-    -- By: VSSVSSN
---]]
-local function enqueue(task) SRP.Failover.q[#SRP.Failover.q + 1] = task end
-
---[[
-    -- Type: Function
-    -- Name: healthcheck
-    -- Use: Checks Node server health
-    -- Created: 2025-09-06
-    -- By: VSSVSSN
---]]
-local function healthcheck()
-    local res = SRP.Http.requestExSync({ url = HEALTH, method = "GET", timeout = 1500 })
-    return res and res.status == 200
+local function active()
+    return state ~= 'CLOSED'
 end
 
---[[
-    -- Type: Function
-    -- Name: setState
-    -- Use: Updates circuit breaker state
-    -- Created: 2025-09-06
-    -- By: VSSVSSN
---]]
-local function setState(s) SRP.Failover.state = s end
+local function queueSize()
+    return #queue
+end
 
---[[
-    -- Type: Thread
-    -- Name: CircuitBreaker
-    -- Use: Manages circuit state transitions based on health checks
-    -- Created: 2025-09-06
-    -- By: VSSVSSN
---]]
+local function enqueue(fn)
+    if state == 'OPEN' then
+        queue[#queue+1] = fn
+        return true
+    end
+    return false
+end
+
+local function recordFailure()
+    state = 'OPEN'
+    nextTry = GetGameTimer() + delay
+end
+
 Citizen.CreateThread(function()
     while true do
-        if SRP.Failover.state == "CLOSED" then
-            if not healthcheck() then setState("OPEN"); SRP.Failover.retryAt = nowMs() + SRP.Failover.backoff end
-        elseif SRP.Failover.state == "OPEN" then
-            if nowMs() >= SRP.Failover.retryAt then setState("HALF_OPEN") end
-        elseif SRP.Failover.state == "HALF_OPEN" then
-            if healthcheck() then
-                setState("CLOSED"); SRP.Failover.backoff = 1000
+        if state == 'OPEN' and GetGameTimer() > nextTry then
+            state = 'HALF_OPEN'
+            local res = SRP.Http.requestAwait('GET', (GetConvar('srp_node_base_url', 'http://127.0.0.1:4000'))..'/v1/health')
+            if res and res.status == 200 then
+                state = 'CLOSED'
+                for _, cb in ipairs(queue) do pcall(cb) end
+                queue = {}
+                delay = 1000
             else
-                setState("OPEN")
-                SRP.Failover.backoff = math.min(SRP.Failover.backoff * 2, 30000)
-                SRP.Failover.retryAt = nowMs() + SRP.Failover.backoff
+                state = 'OPEN'
+                delay = math.min(delay * 2, 30000)
+                nextTry = GetGameTimer() + delay
             end
         end
         Citizen.Wait(1000)
     end
 end)
 
---[[
-    -- Type: Function
-    -- Name: SRP.Failover.proxy
-    -- Use: Proxies requests to Node or queues them on failure
-    -- Created: 2025-09-06
-    -- By: VSSVSSN
---]]
-function SRP.Failover.proxy(method, path, payload, headers, mirrorFn)
-    if SRP.Failover.state ~= "CLOSED" then
-        if method == "GET" and mirrorFn then return mirrorFn(payload) end
-        enqueue({ method = method, path = path, payload = payload, headers = headers, mirror = mirrorFn })
-        return { status = 202, body = '{"queued":true}' }
-    end
-    return SRP.Http.requestExSync({ url = NODE_URL .. path, method = method, body = payload and json.encode(payload) or "", headers = headers or {} })
-end
-
---[[
-    -- Type: Function
-    -- Name: SRP.Failover.active
-    -- Use: Indicates if failover is active
-    -- Created: 2025-09-06
-    -- By: VSSVSSN
---]]
-SRP.Failover.active    = function() return SRP.Failover.state ~= "CLOSED" end
-
---[[
-    -- Type: Function
-    -- Name: SRP.Failover.queueSize
-    -- Use: Returns queued task count
-    -- Created: 2025-09-06
-    -- By: VSSVSSN
---]]
-SRP.Failover.queueSize = function() return #SRP.Failover.q end
-
-SRP.Export('FailoverActive', SRP.Failover.active)
+SRP.Failover = {
+    active = active,
+    queueSize = queueSize,
+    enqueue = enqueue,
+    recordFailure = recordFailure
+}
 
 return SRP.Failover

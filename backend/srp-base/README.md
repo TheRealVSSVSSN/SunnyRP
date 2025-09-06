@@ -1,5 +1,11 @@
-# srp-base
+# srp-base Backend
 
-Node.js microservice providing core session, world, voice, and UX functionality for SRP servers. Implements REST APIs, WebSocket events, and scheduler tasks with MySQL persistence.
+Minimal Node.js service.
 
-See [docs/index.md](docs/index.md) for full documentation.
+## Run
+
+```sh
+cp .env.example .env
+npm install
+npm start
+```
