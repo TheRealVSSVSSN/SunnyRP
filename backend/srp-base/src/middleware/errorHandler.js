@@ -1,4 +1,4 @@
-// Updated: 2024-11-28
+// 2025-02-14
 /**
  * Express error handler emitting JSON responses.
  */

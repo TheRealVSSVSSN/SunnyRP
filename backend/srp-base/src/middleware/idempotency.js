@@ -1,8 +1,8 @@
-// Updated: 2024-11-28
+// 2025-02-14
 const store = new Map();
 
 /**
- * Handles Idempotency-Key for POST requests.
+ * Handles Idempotency-Key for POST/DELETE requests.
  */
 export function idempotency(req, res, next) {
   const key = req.get('Idempotency-Key');

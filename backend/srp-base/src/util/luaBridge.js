@@ -1,4 +1,4 @@
-// Updated: 2024-11-28
+// 2025-02-14
 import http from 'http';
 
 /**
@@ -24,11 +24,30 @@ export function callLua(path, { method = 'POST', body = {}, headers = {} } = {})
       const chunks = [];
       res.on('data', (c) => chunks.push(c));
       res.on('end', () => {
-        resolve({ status: res.statusCode, body: Buffer.concat(chunks).toString() });
+        resolve({ status: res.statusCode, body: Buffer.concat(chunks).toString(), headers: res.headers });
       });
     });
     req.on('error', reject);
     req.write(data);
     req.end();
+  });
+}
+
+export async function isOverloaded() {
+  const port = process.env.PORT || 4000;
+  return new Promise((resolve, reject) => {
+    http
+      .get({ host: '127.0.0.1', port, path: '/v1/ready' }, (res) => {
+        const chunks = [];
+        res.on('data', (c) => chunks.push(c));
+        res.on('end', () => {
+          let body = {};
+          try {
+            body = JSON.parse(Buffer.concat(chunks).toString() || '{}');
+          } catch {}
+          resolve({ overloaded: res.headers['x-srp-node-overloaded'] === 'true', body });
+        });
+      })
+      .on('error', reject);
   });
 }

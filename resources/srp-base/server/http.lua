@@ -1,11 +1,9 @@
--- Updated: 2024-11-28
 --[[
     -- Type: Module
     -- Name: http
     -- Use: Provides HTTP wrappers for inter-process communication
-    -- Created: 2024-11-26
+    -- Created: 2025-02-14
     -- By: VSSVSSN
-    -- Updated: 2024-11-27
 --]]
 
 local SRP = SRP or require('resources/srp-base/shared/srp.lua')
@@ -15,43 +13,40 @@ local function _headers(extra)
     extra = extra or {}
     extra["Content-Type"] = extra["Content-Type"] or "application/json"
     extra["X-SRP-Internal-Key"] = GetConvar("srp_internal_key", "change_me")
+    extra["X-Request-Id"] = extra["X-Request-Id"] or tostring(math.random(1, 1e9))
     return extra
 end
 
 SRP.Http = SRP.Http or {}
 
---[[
-    -- Type: Function
-    -- Name: requestAsync
-    -- Use: Performs asynchronous HTTP requests
-    -- Created: 2024-11-26
-    -- By: VSSVSSN
-    -- Updated: 2024-11-27
---]]
-SRP.Http.requestAsync = function(method, url, body, cb)
+SRP.Http.requestAsync = function(method, url, body, cb, headers)
     local fn = PerformHttpRequest
     if type(PerformHttpRequestInternal) == "function" then fn = PerformHttpRequestInternal end
-    fn(url, function(status, resp, headers)
-        cb(status, resp, headers or {})
-    end, method, body or "", _headers())
+    fn(url, function(status, resp, respHeaders)
+        cb(status, resp, respHeaders or {})
+    end, method, body or "", _headers(headers))
 end
 
---[[
-    -- Type: Function
-    -- Name: requestAwait
-    -- Use: Performs synchronous HTTP requests
-    -- Created: 2024-11-26
-    -- By: VSSVSSN
-    -- Updated: 2024-11-27
---]]
-SRP.Http.requestAwait = function(method, url, body)
+SRP.Http.requestAwait = function(method, url, body, headers)
     if type(PerformHttpRequestAwait) == "function" then
-        local status, resp, headers = PerformHttpRequestAwait(url, method, body or "", _headers())
-        return { status = status, body = resp, headers = headers or {} }
+        local status, resp, respHeaders = PerformHttpRequestAwait(url, method, body or "", _headers(headers))
+        return { status = status, body = resp, headers = respHeaders or {} }
     end
     local p = promise.new()
-    SRP.Http.requestAsync(method, url, body, function(st, b, h) p:resolve({ status = st, body = b, headers = h }) end)
+    SRP.Http.requestAsync(method, url, body, function(st, b, h) p:resolve({ status = st, body = b, headers = h }) end, headers)
     return Citizen.Await(p)
+end
+
+SRP.Http.get = function(url, headers)
+    return SRP.Http.requestAwait('GET', url, nil, headers)
+end
+
+SRP.Http.post = function(url, body, headers)
+    return SRP.Http.requestAwait('POST', url, JSON.encode(body or {}), headers)
+end
+
+SRP.Http.requestExSync = function(opts)
+    return SRP.Http.requestAwait(opts.method or 'GET', opts.url, opts.body or '', opts.headers)
 end
 
 return SRP.Http

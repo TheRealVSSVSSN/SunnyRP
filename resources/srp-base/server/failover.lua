@@ -1,19 +1,21 @@
--- Updated: 2024-11-28
 --[[
     -- Type: Module
     -- Name: failover
-    -- Use: Implements a simple circuit breaker with retry queue
-    -- Created: 2024-11-26
+    -- Use: Circuit breaker and mutation queue for Node overload
+    -- Created: 2025-02-14
     -- By: VSSVSSN
-    -- Updated: 2024-11-27
 --]]
 
 local SRP = SRP or require('resources/srp-base/shared/srp.lua')
-
 local state = 'CLOSED'
+local failures = 0
 local nextTry = 0
-local delay = 1000
+local backoff = 1000
 local queue = {}
+
+local function metrics()
+    return { state = state, failures = failures, nextTry = nextTry, queue = #queue }
+end
 
 local function active()
     return state ~= 'CLOSED'
@@ -23,36 +25,49 @@ local function queueSize()
     return #queue
 end
 
-local function enqueue(fn)
-    if state == 'OPEN' then
-        queue[#queue+1] = fn
-        return true
-    end
-    return false
+local function enqueue(envelope)
+    queue[#queue+1] = envelope
+end
+
+local function open()
+    state = 'OPEN'
+    nextTry = GetGameTimer() + backoff
 end
 
 local function recordFailure()
-    state = 'OPEN'
-    nextTry = GetGameTimer() + delay
+    failures = failures + 1
+    if failures >= 3 then
+        open()
+    end
 end
 
 Citizen.CreateThread(function()
     while true do
-        if state == 'OPEN' and GetGameTimer() > nextTry then
+        if state == 'CLOSED' then
+            local res = SRP.Http.get((GetConvar('srp_node_base_url', 'http://127.0.0.1:4000'))..'/v1/ready')
+            if not res or res.status ~= 200 or res.headers['x-srp-node-overloaded'] == 'true' then
+                failures = 3
+                open()
+            end
+        elseif state == 'OPEN' and GetGameTimer() >= nextTry then
             state = 'HALF_OPEN'
-            local res = SRP.Http.requestAwait('GET', (GetConvar('srp_node_base_url', 'http://127.0.0.1:4000'))..'/v1/health')
-            if res and res.status == 200 then
-                state = 'CLOSED'
-                for _, cb in ipairs(queue) do pcall(cb) end
+            local res = SRP.Http.get((GetConvar('srp_node_base_url', 'http://127.0.0.1:4000'))..'/v1/ready')
+            if res and res.status == 200 and res.headers['x-srp-node-overloaded'] ~= 'true' then
+                for _, env in ipairs(queue) do
+                    SRP.Http.post((GetConvar('srp_node_base_url', 'http://127.0.0.1:4000'))..'/internal/srp/rpc', env)
+                    Citizen.Wait(50)
+                end
                 queue = {}
-                delay = 1000
+                failures = 0
+                backoff = 1000
+                state = 'CLOSED'
             else
                 state = 'OPEN'
-                delay = math.min(delay * 2, 30000)
-                nextTry = GetGameTimer() + delay
+                backoff = math.min(backoff * 2, 30000)
+                nextTry = GetGameTimer() + backoff
             end
         end
-        Citizen.Wait(1000)
+        Citizen.Wait(5000)
     end
 end)
 
@@ -60,7 +75,8 @@ SRP.Failover = {
     active = active,
     queueSize = queueSize,
     enqueue = enqueue,
-    recordFailure = recordFailure
+    recordFailure = recordFailure,
+    metrics = metrics
 }
 
 return SRP.Failover

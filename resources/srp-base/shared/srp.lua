@@ -1,23 +1,13 @@
--- Updated: 2024-11-28
 --[[
     -- Type: Module
     -- Name: srp
     -- Use: Provides global SRP table and export helper
-    -- Created: 2024-11-26
+    -- Created: 2025-02-14
     -- By: VSSVSSN
-    -- Updated: 2024-11-27
 --]]
 
 SRP = rawget(_G, 'SRP') or {}
 
---[[
-    -- Type: Function
-    -- Name: export
-    -- Use: Registers functions to the SRP namespace and exports them
-    -- Created: 2024-11-26
-    -- By: VSSVSSN
-    -- Updated: 2024-11-27
---]]
 local function export(name, fn)
     SRP[name] = fn
     exports(name, fn)

@@ -1,17 +1,15 @@
--- Updated: 2024-11-28
 --[[
     -- Type: Module
     -- Name: ux
     -- Use: Stub handlers for ux domain
-    -- Created: 2024-11-26
+    -- Created: 2025-02-14
     -- By: VSSVSSN
-    -- Updated: 2024-11-27
 --]]
 
 local M = {}
 
 function M.handle()
-    return { status = 501 }
+    return { status = 501, message = 'Not implemented in failover path' }
 end
 
 return M
