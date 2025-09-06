@@ -1,255 +1,225 @@
-# agents.md — **Generic, Resource‑Agnostic Build Agent** (Ultrathink, **Markdown‑Only**, **Research‑Aware**, Evidence‑Only)
+# agents.md — **Generic, Resource‑Agnostic Build Agent** (Ultrathink, **Markdown‑Only**, **Research‑Aware**, Evidence‑Only) — *Codex‑Aligned for “SRP‑BASE — Code‑First Prompt”*
 
-> **Use case:** Runs in the **Codex website** (not a Node runtime).  
-> **Absolute rule:** **All outputs are Markdown (`.md`) files**. No scripts, no shell commands, no external tooling assumptions.  
-> **Behavior:** Attempt deep research first; **auto‑advance to implementation** as soon as the research checkpoint is satisfied or its budget is exceeded. Implementation emits **full code as fenced blocks inside Markdown “patch” files**.
-
----
-
-## 0) Scope, Inputs, and Write Permissions
-
-- **Inputs (from the run prompt):**
-  - `Reset Ledger` (bool)
-  - `reasoning_effort` (**must** be `Ultrathinking`)
-  - `Microservice` or `Resource` (e.g., `srp-base`, `np-police`, `ui/chat`)
-  - `Target Platforms` (e.g., `FiveM`, `Web`, `CLI`, `RedM`)
-  - `Primary Domains` (e.g., `[base]`, `[inventory, jobs]`)
-  - `Main Framework` (name, repo, `paths: [...]`)
-  - `Other Frameworks` (optional list)
-  - `Resource Sources` (e.g., cfx server data)
-  - `Feature Priorities` (performance/maintainability, parity targets)
-  - `Use Research Summary` (bool)
-
-- **Write Scope (Markdown‑only delivery):**
-  - **Research** → under `backend/<component>/docs/research/**.md`
-  - **Implementation “patches”** → under `backend/<component>/docs/patches/**.md`
-  - **Indexes/Manifests/Changelogs** → under `backend/<component>/docs/**.md`
-  - Never claim to create code files on disk; **print full file contents** inside Markdown patches.
-
-- **`srp-base` First (when applicable):**
-  - If `srp-base` is in scope or present, treat it as the **framework contract**.
-  - If editing another resource, **integrate with `srp-base`** (HTTP/WS/events/exports/schemas).
-  - If `srp-base` is absent, proceed generically but **keep interfaces compatible** for later adoption.
-
-- **Run budget:** Continue work until the evidenced queue is empty **or 25 minutes** have elapsed.
+> **Runtime:** Runs on the **Codex website** (no shell/FS access).  
+> **Absolute rule:** **All output is a single Markdown response**. No side effects, no external scripts.  
+> **Goal:** Produce a **full, working base/framework** (Lua + Node.js) when directed by the prompt—never a minimal snippet.  
+> **Method:** Research briefly → **auto‑freeze** → emit **complete file contents** as fenced code under the required sections.
 
 ---
 
-## 1) Authoritative Sources (consult during research)
+## 0) Compatibility Contract — *Detect and Match the Prompt’s Output Format*
 
-- **FiveM Lua server functions:** https://docs.fivem.net/docs/scripting-reference/runtimes/lua/server-functions/  
-- **FiveM Natives (UI):** https://docs.fivem.net/natives/  
-- **Framework corpora to mine for signals (events/RPC/exports/loops):**
-  - **NoPixel 3.0** (local mirror in repo): `Example_Frameworks/NoPixelServer` + the declared `paths[]`
-  - **EssentialMode**: `Example_Frameworks/essentialmode`
-  - **ESX**: `Example_Frameworks/es_extended`
-  - **ND**: `Example_Frameworks/ND_Core-main`
-  - **FSN**: `Example_Frameworks/FiveM-FSN-Framework`
-  - **QB**: `Example_Frameworks/qb-core`
-  - **vRP**: `Example_Frameworks/vRP`
-  - **vORP**: `Example_Frameworks/vorp_core-lua`
+This agent adapts to **two output modes**:
 
-> Treat these as **evidence**: extract names, signatures, flags, and behaviors. **Never** invent parameters or flows absent in evidence.
+### **Mode A — SRP‑BASE Code‑First Prompt Contract (STRICT)**
+Trigger when the run prompt contains either:
+- The heading `# SRP-BASE — Code-First Prompt (Lua + Node.js)` **or**
+- The line `**Output sections (in this exact order):**`
 
----
+**Then you MUST emit output in this exact order and format** (no extra prose, no trailing lines):
 
-## 2) Run Mode — **Research‑Aware, Markdown‑Only, Auto‑Advance**
+1. `RESEARCH SUMMARY` (≤10 lines; concise, single block)  
+2. Print **exactly** this line once:  
+   `RESEARCH CHECKPOINT COMPLETE — Plan auto-frozen. Continuing implementation.`  
+3. `DIFF SUMMARY` — list A/M/D/R by path (logical repo paths)  
+4. `PATCHES` — For each file, print:
+   - Header line: `--- FILE: <path>`  
+   - Then a fenced code block with the **entire file contents** using a correct language fence (```js, ```lua, ```json, ```md, ```yaml, etc.)  
+   - No diff hunks; full bodies only; LF endings assumed.
+5. **`backend/srp-base/MANIFEST.md`** — full contents as a fenced ```md block  
+6. **`backend/srp-base/README.md`** — full contents as a fenced ```md block  
+7. **`resources/srp-base/README.md`** — full contents as a fenced ```md block
 
-### Research Checkpoint (non‑blocking; emits `.md` only)
-- **Budget:** **≤ 5 minutes** or **≤ 1,500 files/pages** total (whichever comes first).  
-- **Scope:**  
-  1) Enumerate **FiveM server functions** and build a local **server‑functions index**.  
-  2) Build/refresh a **Natives index** (namespaces, availability, signatures) sufficient to document **every native you USE this run**.  
-  3) Traverse declared framework `paths[]` to discover **signals** (events/RPC/exports/NUI/loops/persistence) without copying large code blocks.
-- **Freeze & Continue:** When the budget ends **or** enough signals exist to proceed, **freeze research** and continue to implementation.
+> **Do not** print any other sections (no extra indexes, no completion line) in Mode A. Obey the prompt’s **Implementation Order** and “**Complete code, no TODOs**” rule.
 
-**Inline summary block (print once):**
-```
-RESEARCH SUMMARY (inline, md-only)
-state=<FULL|PARTIAL|SKIPPED>; scanned=<N>; server_funcs=<count>
-frameworks_scanned=[NoPixel, ESX, QB, vRP, ...]; paths_ok=<k>/<total>
-events=[e1,e2,...]; rpcs=[r1,...]; nui=[n1,...]; loops=[l1,...]; tables=[t1,...]
-notes=<one-liners>; sources=[<urls or local paths>]
-RESEARCH CHECKPOINT COMPLETE — Continuing implementation.
-```
+### **Mode B — Generic Markdown‑Only Patches (Fallback)**
+If the run prompt does **not** match Mode A, use the generic, research‑aware flow in this file (Markdown only) and write:
+- Research pack under `docs/research/**` (as Markdown sections in the single response)
+- Patches under `docs/patches/**` (as Markdown sections with fenced code)
+- Top‑level `docs/index.md`, `MANIFEST.md`, `CHANGELOG.md` (as fenced ```md blocks)
 
-**States**
-- **FULL** — FiveM server functions & natives index summarized; framework signals mapped across all declared paths.  
-- **PARTIAL** — Subset mapped; missing areas stubbed.  
-- **SKIPPED** — Networking blocked or insufficient time; proceed with conservative defaults.
+> **Never** claim to write files to disk. Always emit contents inline in Markdown.
 
 ---
 
-## 3) Where to Write Research (Markdown only)
+## 1) Inputs & Scope
 
-Create/append the following **Markdown** files (tables and lists, no raw JSON dumps):
+**Inputs (from the run prompt):**
+- `Reset Ledger` (bool)  
+- `reasoning_effort` (**must** be `Ultrathinking`)  
+- `Microservice` or `Resource` (e.g., `srp-base`, `np-police`, `ui/chat`)  
+- `Target Platforms` (e.g., `FiveM`, `Web`, `CLI`, `RedM`)  
+- `Primary Domains` (e.g., `[base]`, `[inventory, jobs]`)  
+- `Main Framework` (name, repo, `paths: [...]`)  
+- `Other Frameworks` (optional list)  
+- `Resource Sources` (e.g., cfx server data)  
+- `Feature Priorities` (performance/maintainability, parity targets)  
+- `Use Research Summary` (bool)
 
-```
-backend/<component>/docs/research/
-  index.md                                # links to all below
-  fivem-server-functions.md               # summarized server function catalog (+ official doc links)
-  fivem-natives-index.md                  # alphabetical index with namespace, availability, brief summary
-  natives/
-    <NAMESPACE>/<NATIVE>.md               # one per native you USE or TOUCH this run (append more over time)
-  frameworks/
-    NoPixel/overview.md                   # high-level; versions, folder map
-    NoPixel/signals.md                    # tables of events/RPC/exports/NUI/loops
-    ESX/{overview.md,signals.md}
-    ND/{overview.md,signals.md}
-    FSN/{overview.md,signals.md}
-    QB/{overview.md,signals.md}
-    vRP/{overview.md,signals.md}
-    vORP/{overview.md,signals.md}
-  coverage-map.md                         # repo|path|files|events|rpcs|loops|persistence|status|notes
-  gap-closure-report.md                   # SKIP|EXTEND|CREATE with evidence refs
-  research-log.md                         # append-only log per scan target
-```
+**Write Scope (Markdown response only):**
+- You **only** print Markdown in the response. All code must be inside fenced blocks.  
+- When in **Mode A**, follow its **Output sections** exactly and omit everything else.  
+- When in **Mode B**, use the directories described in §5 as **logical paths** inside headings.
 
-### Per‑native page template (`docs/research/natives/<NAMESPACE>/<NATIVE>.md`)
-```md
-# <NATIVE_NAME> — <namespace>
+**`srp-base` precedence:**
+- If `srp-base` is in scope or present, treat it as the **framework contract**.  
+- When touching other resources, **integrate with `srp-base`** (HTTP/WS/events/exports/schemas).  
+- If `srp-base` is absent, keep interfaces **compatible** for future adoption.
 
-**Sets:** <server|client|both>  
-**Signature (Lua):**
-```lua
-<lua_signature_here>
-```
-**Parameters**  
-- `<name>: <type>` — <desc>
-
-**Returns** `<type>` — <desc>
-
-**Summary** <1–3 lines distilled from official docs>  
-**Caveats** <threading/timing/security>  
-**Example (Lua)**
-```lua
--- minimal example
-```
-
-**References**  
-- FiveM Natives UI: <link>
-- Scraped: `<ISO>`
-```
-
-> **Scope Control:** Always document every native you **use** this run. You may append more in deterministic order across runs. **Do not block implementation** waiting to finish the entire corpus.
+**Run budget:** Work until the evidenced queue is empty **or 25 minutes** elapse (no early stopping).
 
 ---
 
-## 4) Planning (Tiny & Non‑Blocking)
+## 2) Research Checkpoint (Non‑Blocking)
 
-- Keep planning **inside research Markdown** (no separate tooling).  
-- Convert research into a brief, frozen plan inside `docs/research/run-plan.md` with: contracts (events/RPC/HTTP/WS), payload schemas, headers (`X-Request-Id`, optional HMAC), error taxonomy, persistence sketch.  
-- **Auto‑freeze** the moment the research checkpoint completes. Then continue.
+**Budget:** **≤ 60 seconds** or **≤ 200 files** for Mode A (per SRP‑BASE prompt); otherwise ≤ 5 minutes/≤ 1,500 files in Mode B.  
+**Scope:**  
+1) Skim **declared framework `paths[]`** for signals (events/RPC/exports/NUI/loops).  
+2) Record only names/signatures/behaviors—not large code copies.  
+3) Identify the natives you will use and confirm server vs client context.
+
+**Inline Summary (Mode A exact wording):**
+- Print a section titled `RESEARCH SUMMARY` with ≤10 lines.  
+- Immediately print the line:  
+  `RESEARCH CHECKPOINT COMPLETE — Plan auto-frozen. Continuing implementation.`
+
+**States:** `FULL` | `PARTIAL` | `SKIPPED` (briefly indicated in the 10 lines, optional).
+
+**Primary references (evidence only):**
+- FiveM Lua (server): https://docs.fivem.net/docs/scripting-reference/runtimes/lua/server-functions/  
+- FiveM Natives (UI): https://docs.fivem.net/natives/  
+- Framework mirrors: `Example_Frameworks/NoPixelServer` and other listed frameworks in the prompt.
 
 ---
 
-## 5) Implementation — **Emit Code as Markdown Patches**
+## 3) Implementation Rules (Both Modes)
 
-All implementation must be printed as fenced code blocks inside Markdown files under `docs/patches/**`. Provide **complete file contents** (no TODOs).
+- **No TODO/FIXME** — produce runnable code or return a **501** JSON response where semantics are unknown.  
+- **Validation/Auth** — schema‑check mutations; protect internal routes via `X-SRP-Internal-Key` (or HMAC).  
+- **Idempotency** — support an idempotency key for mutations where needed.  
+- **Logging** — structured JSON with route, status, latency, and `X-Request-Id`.  
+- **Server vs Client** — do not call client‑only natives on the server; guard with `IsDuplicityVersion()` if relevant.  
+- **Naming** — adopt discovered signal names; normalize to REST at HTTP boundaries; provide **compat aliases** where needed.  
+- **Security** — Lua bridge loopback only; never echo secrets; use `.env.example` content in patches instead.
 
-Create these **Markdown** patch files (names fixed; contents vary by run):
+---
+
+## 4) Deliverables (Mode A — STRICT to match SRP‑BASE Prompt)
+
+You **must** produce all deliverables enumerated by the **SRP‑BASE Code‑First Prompt** in its **exact** section order:
+
+- `RESEARCH SUMMARY` (≤10 lines)  
+- Checkpoint line (exact text)  
+- `DIFF SUMMARY` for `backend/srp-base/**` and `resources/srp-base/**` (A/M/D/R)  
+- `PATCHES` with **full contents** for:
+  - `backend/srp-base/src/server.js`
+  - `backend/srp-base/src/util/luaBridge.js`
+  - `backend/srp-base/src/middleware/{requestId.js,rateLimit.js,hmacAuth.js,idempotency.js,validate.js,errorHandler.js}`
+  - `backend/srp-base/src/routes/base.routes.js`
+  - `backend/srp-base/src/repositories/baseRepository.js`
+  - `backend/srp-base/package.json`
+  - `backend/srp-base/.env.example`
+  - *(optional)* `backend/srp-base/src/realtime/websocket.js`
+  - `resources/srp-base/fxmanifest.lua`
+  - `resources/srp-base/shared/srp.lua`
+  - `resources/srp-base/server/http.lua`
+  - `resources/srp-base/server/http_handler.lua`
+  - `resources/srp-base/server/failover.lua`
+  - `resources/srp-base/server/rpc.lua`
+  - `resources/srp-base/server/modules/{base.lua,sessions.lua,voice.lua,ux.lua,world.lua,jobs.lua}`
+- `backend/srp-base/MANIFEST.md` (fenced ```md)
+- `backend/srp-base/README.md` (fenced ```md)
+- `resources/srp-base/README.md` (fenced ```md)
+
+> **Formatting of each patch:** Precede the code with `--- FILE: <path>` and then a single fenced block with the **entire** file body. Use correct language fences.
+
+---
+
+## 5) Deliverables (Mode B — Generic Markdown‑Only)
+
+If Mode A is not triggered, emit the following **Markdown sections** in this single response:
 
 ```
-backend/<component>/docs/patches/
-  001-node-server.md         # full code for src/server.js + middleware + routes + repositories + util
-  002-lua-resource.md        # fxmanifest.lua + shared/srp.lua + server/http.lua + http_handler.lua + failover.lua + rpc.lua
-  003-domain-stubs.md        # modules/base.lua (+ stubs for sessions.lua, voice.lua, ux.lua, world.lua, jobs.lua) with safe 501s
-  004-readme-manifest.md     # minimal run instructions & manifest as Markdown
+## RESEARCH SUMMARY
+## docs/research/index.md (md)
+## docs/research/fivem-server-functions.md (md)
+## docs/research/fivem-natives-index.md (md)
+## docs/research/frameworks/NoPixel/{overview.md,signals.md} (md)
+## docs/research/frameworks/{ESX,ND,FSN,QB,vRP,vORP}/{overview.md,signals.md} (md)
+## docs/research/coverage-map.md (md)
+## docs/research/gap-closure-report.md (md)
+## docs/research/research-log.md (md)
+## docs/research/run-plan.md (md)
+
+## docs/patches/001-node-server.md (md with fenced code blocks for each file)
+## docs/patches/002-lua-resource.md (md with fenced code blocks for each file)
+## docs/patches/003-domain-stubs.md (md with fenced code blocks)
+## docs/patches/004-readme-manifest.md (md with fenced code blocks)
+
+## docs/index.md (md)
+## MANIFEST.md (md)
+## CHANGELOG.md (md)
 ```
 
-Each patch file must begin with a small **Diff Summary** table listing A/M/D/R for logical paths (informational).
+**Inside each “patches” section**, include subsections like:
+```
+--- FILE: backend/srp-base/src/server.js
+```js
+// full contents
+```
+(Repeat for every file.)
+```
 
 ---
 
-## 6) Research‑Guided Coding Rules
+## 6) Quality Gates
 
-- **Name adoption:** Prefer discovered signal names (normalize to REST on HTTP boundaries).  
-- **Server vs client safety:** Never call client‑only natives on the server and vice versa. Guard with `IsDuplicityVersion()` if needed.  
-- **Evidence gating:** If semantics are missing, emit a **501 stub** returning structured error JSON.  
-- **Validation/Auth:** Apply request schema checks; secure internal routes with `X-SRP-Internal-Key` (or HMAC).  
-- **Idempotency:** Support an idempotency key header for mutations where semantics are inferred but not fully evidenced.
-
----
-
-## 7) Deliverables (Deterministic, Markdown‑only)
-
-1. **Inline Research Summary** block (per §2).  
-2. **Research Pack** under `docs/research/**`: `index.md`, `fivem-server-functions.md`, `fivem-natives-index.md`, `frameworks/**`, `coverage-map.md`, `gap-closure-report.md`, `research-log.md`, `run-plan.md`.  
-3. **Implementation Patches** under `docs/patches/**`: `001-node-server.md`, `002-lua-resource.md`, `003-domain-stubs.md`, `004-readme-manifest.md`.  
-4. **Top‑level Index** `docs/index.md` linking to everything generated this run.  
-5. **CHANGELOG.md** (append full entry for this run) and **MANIFEST.md** (summary, env, compatibility).
-
-**Completion line (print once):**  
-`EXECUTION COMPLETE — Research frozen; evidence‑guided patches emitted as Markdown.`
+- All **mutating** endpoints validated.  
+- Health/Ready/Info endpoints present when services are involved.  
+- **Zero `TODO|FIXME|TBD|TBA`**.  
+- Deterministic, idempotent output — re‑running yields the same logical paths with updated content.  
+- Compatibility notes and aliases recorded (in Mode B: within `run-plan.md`; in Mode A: within `README.md` or code comments).
 
 ---
 
-## 8) Quality Gates (Hard)
+## 7) Time & Fairness
 
-- `docs/research/coverage-map.md` includes **all declared + discovered paths** with counts.  
-- `docs/research/gap-closure-report.md` lists every CREATE/EXTEND with **evidence refs** and planned artifacts.  
-- Health/Ready/Info endpoints present in patches when services are touched (or equivalent diagnostics for libs/UI).  
-- All **mutating** endpoints validated in patches.  
-- **Zero `TODO|FIXME|TBD|TBA`** anywhere.  
-- Consistent namespacing; compatibility and aliases recorded in `docs/research/frameworks/*/signals.md` or `run-plan.md`.
-
----
-
-## 9) Time & Fairness Policy
-
+- **Ultrathinking** throughout.  
 - Work until the queue is empty or **25 minutes** elapse.  
-- Round‑robin domains/paths to avoid tunneling: `max_consecutive_per_bucket = 1`, `cooldown_span = 2`.  
-- Prioritize: **dependencies → performance → user value**.
+- Round‑robin domains/paths to avoid tunneling: `max_consecutive_per_bucket = 1`, `cooldown_span = 2`.
 
 ---
 
-## 10) `srp-base` Compatibility Rules (when relevant)
+## 8) Safety, Privacy, Compliance
 
-- Prefer `srp-base` contracts for identity/sessions/characters/events/telemetry.  
-- Reuse `srp-base` handlers/exports/HTTP/WS where feasible.  
-- Add **compat aliases** for upstream naming diffs; note deprecations; capture in `docs/research/run-plan.md`.
-
----
-
-## 11) Safety, Privacy, Compliance
-
-- No secrets in code blocks; use env var placeholders and `.env.example` text in patches.  
+- No secrets in code; only `.env.example` placeholders.  
 - Respect licenses; copy **behaviors**, not full source.  
-- Logs: avoid sensitive payloads; include requestId, route, status, latency, and only necessary actor identifiers.
+- Logs avoid sensitive payloads; include requestId, route, status, latency, minimal actor identifiers.
 
 ---
 
-## 12) Mandatory Doc Templates (copy verbatim)
+## 9) Minimal Reference Snippets (for consistent shape)
 
-### 12.1 `docs/research-log.md` (append‑only)
-```md
-### [<timestamp UTC>] <repo>:<path>
-- files_scanned: <n>
-- signals:
-  - events: [list]
-  - rpcs: [list]
-  - loops: [list]
-  - persistence: [tables/migrations]
-- notes: <freeform, concise>
+**CloudEvents‑like envelope (shared):**
+```json
+{
+  "id": "evt_<uuid>",
+  "type": "srp.<domain>.<action>",
+  "source": "srp-base",
+  "subject": "<characterId|accountId|entityId|*>",
+  "time": "<ISO-8601>",
+  "specversion": "1.0",
+  "data": {}
+}
 ```
 
-### 12.2 `docs/research/coverage-map.md` (header row)
-```md
-repo | path | files | events | rpcs | loops | persistence | cluster | status | notes
----|---|---:|---:|---:|---:|---|---|---|---
-```
-
-### 12.3 `docs/research/gap-closure-report.md` (per‑gap block)
-```md
-### [<type: SKIP|EXTEND|CREATE>] <name>
-- evidence_refs: ["repo:path#Lstart-Lend", ...]
-- artifacts_planned:
-  - A/M: <logical file path>
-- risk: <short>
-- fallback: <mirror/queue/none>
-```
+**Required headers:** `X-SRP-Internal-Key`, `X-Request-Id`, `Content-Type: application/json`  
+**HTTP codes:** 2xx success; 4xx validation/auth; 5xx server; optional `Retry-After`.
 
 ---
 
-**Use this `agents.md` verbatim for Codex.**  
-It is stack‑agnostic, favors `srp-base` when present, performs **deep FiveM + Natives + NoPixel/other framework research**, writes research into **Markdown only**, then **auto‑advances** to emit complete implementation patches in Markdown.
+### Operative Summary
+
+- If the run prompt is the **SRP‑BASE Code‑First Prompt**, obey its **Mode A** contract exactly (sections, order, and patch formatting).  
+- Otherwise, operate in **Mode B** and emit a complete research pack + patch set as Markdown.  
+- In all cases, deliver **full file bodies**, enforce security & validation, and avoid placeholders.
