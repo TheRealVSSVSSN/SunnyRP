@@ -1,28 +1,20 @@
-// 2025-02-14
 const store = new Map();
 
-/**
- * Handles Idempotency-Key for POST/DELETE requests.
- */
-export function idempotency(req, res, next) {
-  const key = req.get('Idempotency-Key');
-  if (!key) return next();
+module.exports = function idempotency(req, res, next) {
+  if (!['POST', 'DELETE'].includes(req.method)) return next();
+  const key = req.headers['idempotency-key'];
+  if (!key) return res.status(400).json({ error: 'missing_idempotency_key' });
   if (store.has(key)) {
     const cached = store.get(key);
-    res.set(cached.headers);
-    res.status(cached.status).send(cached.body);
-    return;
+    res.status(cached.status);
+    for (const [h, v] of Object.entries(cached.headers)) res.setHeader(h, v);
+    return res.json(cached.body);
   }
-  req.idempotencyKey = key;
+  res.locals.idempotencyKey = key;
+  const original = res.json.bind(res);
+  res.json = (body) => {
+    store.set(key, { status: res.statusCode, body, headers: res.getHeaders() });
+    return original(body);
+  };
   next();
-}
-
-export function saveIdempotency(req, res, body) {
-  if (req.idempotencyKey) {
-    store.set(req.idempotencyKey, {
-      status: res.statusCode,
-      body,
-      headers: res.getHeaders(),
-    });
-  }
-}
+};

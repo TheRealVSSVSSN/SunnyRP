@@ -1,75 +1,50 @@
-// 2025-02-14
-import { Router } from 'express';
-import {
-  listCharacters,
-  createCharacter,
-  selectCharacter,
-  deleteCharacter,
-} from '../repositories/baseRepository.js';
-import { idempotency } from '../middleware/idempotency.js';
-import { assertValid } from '../middleware/validate.js';
+const express = require('express');
+const repo = require('../repositories/baseRepository');
+const validate = require('../middleware/validate');
+const idempotency = require('../middleware/idempotency');
 
-/**
- * Router: /v1/accounts
- */
-const router = Router();
+const router = express.Router();
 
-router.get('/:accountId/characters', async (req, res, next) => {
-  try {
-    const accountId = Number(req.params.accountId);
-    if (!accountId) throw Object.assign(new Error('invalid_account'), { status: 400 });
-    const chars = await listCharacters(accountId);
-    res.json(chars);
-  } catch (e) {
-    next(e);
-  }
+router.get('/v1/accounts/:accountId/characters', (req, res) => {
+  const chars = repo.listCharacters(req.params.accountId);
+  res.json({ characters: chars });
 });
 
-router.post('/:accountId/characters', idempotency, async (req, res, next) => {
-  try {
-    const accountId = Number(req.params.accountId);
-    if (!accountId) throw Object.assign(new Error('invalid_account'), { status: 400 });
-    assertValid(
-      { firstName: { type: 'string', required: true }, lastName: { type: 'string', required: true } },
-      req.body || {}
-    );
-    const character = await createCharacter(accountId, req.body);
-    const body = JSON.stringify(character);
-    res.locals.body = body;
-    res.status(201).type('application/json').send(body);
-    req.app.get('ws')?.emit('characters:updated', { accountId });
-  } catch (e) {
-    next(e);
+router.post(
+  '/v1/accounts/:accountId/characters',
+  idempotency,
+  validate((req) => {
+    if (!req.body || typeof req.body.name !== 'string' || !req.body.name.trim()) {
+      throw new Error('name_required');
+    }
+  }),
+  (req, res) => {
+    const character = repo.createCharacter(req.params.accountId, { name: req.body.name });
+    res.status(201).json({ character });
   }
-});
+);
 
-router.post('/:accountId/characters/:characterId/select', idempotency, async (req, res, next) => {
-  try {
-    const accountId = Number(req.params.accountId);
-    const characterId = Number(req.params.characterId);
-    const character = await selectCharacter(accountId, characterId);
-    if (!character) throw Object.assign(new Error('not_found'), { status: 404 });
-    const body = JSON.stringify({ ok: true });
-    res.locals.body = body;
-    res.type('application/json').send(body);
-    req.app.get('ws')?.emit('characters:selected', { accountId, characterId });
-  } catch (e) {
-    next(e);
+router.post(
+  '/v1/accounts/:accountId/characters/:characterId:select',
+  idempotency,
+  (req, res, next) => {
+    try {
+      const character = repo.selectCharacter(req.params.accountId, req.params.characterId);
+      res.json({ character });
+    } catch (e) {
+      next(e);
+    }
   }
-});
+);
 
-router.delete('/:accountId/characters/:characterId', idempotency, async (req, res, next) => {
-  try {
-    const accountId = Number(req.params.accountId);
-    const characterId = Number(req.params.characterId);
-    const deleted = await deleteCharacter(accountId, characterId);
-    const body = JSON.stringify({ ok: deleted });
-    res.locals.body = body;
-    res.status(deleted ? 200 : 404).type('application/json').send(body);
-    if (deleted) req.app.get('ws')?.emit('characters:updated', { accountId });
-  } catch (e) {
-    next(e);
+router.delete(
+  '/v1/accounts/:accountId/characters/:characterId',
+  idempotency,
+  (req, res) => {
+    const deleted = repo.deleteCharacter(req.params.accountId, req.params.characterId);
+    if (!deleted) return res.status(404).json({ error: 'not_found' });
+    res.status(204).end();
   }
-});
+);
 
-export default router;
+module.exports = router;

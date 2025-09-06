@@ -1,38 +1,39 @@
 --[[
     -- Type: Module
-    -- Name: rpc
-    -- Use: Dispatches RPC envelopes to domain modules
-    -- Created: 2025-02-14
+    -- Name: RPC Dispatcher
+    -- Use: Routes envelopes to modules
+    -- Created: 2024-06-02
     -- By: VSSVSSN
 --]]
 
-local SRP = SRP or require('resources/srp-base/shared/srp.lua')
-
-local modules = {
-    base = require('resources/srp-base/server/modules/base.lua'),
-    sessions = require('resources/srp-base/server/modules/sessions.lua'),
-    voice = require('resources/srp-base/server/modules/voice.lua'),
-    ux = require('resources/srp-base/server/modules/ux.lua'),
-    world = require('resources/srp-base/server/modules/world.lua'),
-    jobs = require('resources/srp-base/server/modules/jobs.lua')
-}
-
 SRP.RPC = {}
+SRP.Modules = {}
 
+SRP.Modules.base = require('server/modules/base')
+SRP.Modules.sessions = require('server/modules/sessions')
+SRP.Modules.voice = require('server/modules/voice')
+SRP.Modules.ux = require('server/modules/ux')
+SRP.Modules.world = require('server/modules/world')
+SRP.Modules.jobs = require('server/modules/jobs')
+
+--[[
+    -- Type: Function
+    -- Name: handle
+    -- Use: Dispatches envelope to appropriate handler
+    -- Created: 2024-06-02
+    -- By: VSSVSSN
+--]]
 function SRP.RPC.handle(envelope)
-    if type(envelope) ~= 'table' or type(envelope.type) ~= 'string' then
-        return { error = 'invalid_envelope' }
+    local typ = envelope.type or ''
+    local domain, action = typ:match('srp%.([^.]+)%.(.+)')
+    local mod = domain and SRP.Modules[domain] or nil
+    if mod and mod[action] then
+        local ok, result = pcall(mod[action], envelope)
+        if ok then
+            return { ok = true, result = result }
+        else
+            return { ok = false, error = result }
+        end
     end
-    local domain = envelope.type:match('^srp%.([^.]+)%.')
-    local mod = modules[domain]
-    if not mod or type(mod.handle) ~= 'function' then
-        return { error = 'not_implemented' }
-    end
-    local ok, result = pcall(mod.handle, envelope)
-    if not ok then
-        return { error = 'handler_error' }
-    end
-    return result
+    return { ok = false, error = 'unknown_action' }
 end
-
-return SRP.RPC

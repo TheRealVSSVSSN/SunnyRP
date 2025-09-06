@@ -1,18 +1,27 @@
 --[[
     -- Type: Module
-    -- Name: srp
-    -- Use: Provides global SRP table and export helper
-    -- Created: 2025-02-14
+    -- Name: SRP Shared Table
+    -- Use: Provides export helpers for resources
+    -- Created: 2024-06-02
     -- By: VSSVSSN
 --]]
 
-SRP = rawget(_G, 'SRP') or {}
+SRP = {}
 
-local function export(name, fn)
-    SRP[name] = fn
-    exports(name, fn)
+--[[
+    -- Type: Function
+    -- Name: Export
+    -- Use: Registers a function for external use
+    -- Created: 2024-06-02
+    -- By: VSSVSSN
+--]]
+function SRP.Export(name, fn)
+    _G[name] = fn
+    if type(exports) == 'function' then
+        exports(name, fn)
+    end
 end
 
-SRP.Export = export
-
-return SRP
+function exports(name, fn)
+    SRP.Export(name, fn)
+end

@@ -1,15 +1,14 @@
 {
   "name": "srp-base",
-  "version": "0.2.0",
-  "type": "module",
+  "version": "1.0.0",
+  "description": "SunnyRP base service",
   "main": "src/server.js",
   "scripts": {
-    "start": "node src/server.js",
-    "test": "node --version"
+    "start": "node src/server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2",
-    "socket.io": "^4.7.2"
+    "socket.io": "^4.7.5"
   }
 }
