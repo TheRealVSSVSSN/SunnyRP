@@ -5,6 +5,7 @@ import { rateLimit } from './middleware/rateLimit.js';
 import { hmacAuth } from './middleware/hmacAuth.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import baseRoutes from './routes/base.routes.js';
+import { assertValid } from './middleware/validate.js';
 import pkg from '../package.json' assert { type: 'json' };
 
 /**
@@ -40,12 +41,24 @@ export function createHttpServer({ env = process.env } = {}) {
     res.json({ service: 'srp-base', version: pkg.version, compat: { baseline: 'srp-base' } });
   });
 
+  const envelopeSchema = {
+    id: { type: 'string', required: true },
+    type: { type: 'string', required: true },
+    source: { type: 'string', required: true },
+    subject: { type: 'string', required: true },
+    time: { type: 'string', required: true },
+    specversion: { type: 'string', required: true },
+    data: { type: 'object', required: true },
+  };
+
   app.post('/internal/srp/rpc', hmacAuth(env), (req, res) => {
-    const envelope = req.body;
-    if (!envelope || typeof envelope !== 'object') {
-      return res.status(400).json({ error: 'invalid_envelope' });
+    try {
+      assertValid(envelopeSchema, req.body || {});
+      const envelope = req.body;
+      res.json({ ok: true, result: envelope.data });
+    } catch (e) {
+      res.status(e.status || 400).json({ error: e.message || 'invalid_envelope' });
     }
-    res.json({ ok: true, result: envelope.data });
   });
 
   app.use('/v1/accounts', baseRoutes);
