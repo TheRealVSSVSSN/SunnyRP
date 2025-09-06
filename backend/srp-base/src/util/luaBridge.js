@@ -1,4 +1,4 @@
-const http = require('node:http');
+const http = require('http');
 
 function callLua(path, { method = 'POST', body = {}, headers = {} } = {}) {
   const port = process.env.FX_HTTP_PORT || 30120;
@@ -17,7 +17,7 @@ function callLua(path, { method = 'POST', body = {}, headers = {} } = {}) {
       }
     }, (res) => {
       const chunks = [];
-      res.on('data', (c) => chunks.push(c));
+      res.on('data', c => chunks.push(c));
       res.on('end', () => {
         resolve({ status: res.statusCode, body: Buffer.concat(chunks).toString(), headers: res.headers });
       });
@@ -28,16 +28,17 @@ function callLua(path, { method = 'POST', body = {}, headers = {} } = {}) {
   });
 }
 
-async function isOverloaded() {
+function isOverloaded() {
   const port = process.env.PORT || 4000;
   return new Promise((resolve, reject) => {
     http.get({ host: '127.0.0.1', port, path: '/v1/ready' }, (res) => {
       const chunks = [];
-      res.on('data', (c) => chunks.push(c));
+      res.on('data', c => chunks.push(c));
       res.on('end', () => {
+        const overloaded = res.headers['x-srp-node-overloaded'] === 'true';
         let body = {};
-        try { body = JSON.parse(Buffer.concat(chunks).toString() || '{}'); } catch {}
-        resolve({ overloaded: res.headers['x-srp-node-overloaded'] === 'true', body });
+        try { body = JSON.parse(Buffer.concat(chunks).toString() || '{}'); } catch (e) {}
+        resolve({ overloaded, body });
       });
     }).on('error', reject);
   });

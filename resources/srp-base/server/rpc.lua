@@ -1,39 +1,20 @@
---[[
-    -- Type: Module
-    -- Name: RPC Dispatcher
-    -- Use: Routes envelopes to modules
-    -- Created: 2024-06-02
-    -- By: VSSVSSN
---]]
-
+SRP = SRP or {}
+SRP.Modules = SRP.Modules or {}
 SRP.RPC = {}
-SRP.Modules = {}
 
-SRP.Modules.base = require('server/modules/base')
-SRP.Modules.sessions = require('server/modules/sessions')
-SRP.Modules.voice = require('server/modules/voice')
-SRP.Modules.ux = require('server/modules/ux')
-SRP.Modules.world = require('server/modules/world')
-SRP.Modules.jobs = require('server/modules/jobs')
-
---[[
-    -- Type: Function
-    -- Name: handle
-    -- Use: Dispatches envelope to appropriate handler
-    -- Created: 2024-06-02
-    -- By: VSSVSSN
---]]
-function SRP.RPC.handle(envelope)
-    local typ = envelope.type or ''
-    local domain, action = typ:match('srp%.([^.]+)%.(.+)')
-    local mod = domain and SRP.Modules[domain] or nil
-    if mod and mod[action] then
-        local ok, result = pcall(mod[action], envelope)
-        if ok then
-            return { ok = true, result = result }
-        else
-            return { ok = false, error = result }
-        end
-    end
-    return { ok = false, error = 'unknown_action' }
+function SRP.RPC.handle(env)
+  if not env or not env.type then
+    return { ok = false, error = 'invalid_envelope' }
+  end
+  local t = env.type
+  if t == 'srp.base.characters.list' then
+    return { ok = true, result = SRP.Modules.Base.charactersList(env.data.accountId) }
+  elseif t == 'srp.base.characters.create' then
+    return { ok = true, result = SRP.Modules.Base.charactersCreate(env.data.accountId, env.data.data, env.id) }
+  elseif t == 'srp.base.characters.select' then
+    return { ok = true, result = SRP.Modules.Base.charactersSelect(env.data.accountId, env.data.characterId) }
+  elseif t == 'srp.base.characters.delete' then
+    return { ok = true, result = SRP.Modules.Base.charactersDelete(env.data.accountId, env.data.characterId) }
+  end
+  return { ok = false, error = 'not_implemented' }
 end

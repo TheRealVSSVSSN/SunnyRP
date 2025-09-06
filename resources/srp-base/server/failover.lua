@@ -1,121 +1,72 @@
---[[
-    -- Type: Module
-    -- Name: Failover Circuit Breaker
-    -- Use: Handles Node overload and queueing
-    -- Created: 2024-06-02
-    -- By: VSSVSSN
---]]
+SRP = SRP or {}
+SRP.Failover = {}
 
-SRP.Failover = { state = 'CLOSED', failures = 0, queue = {}, backoff = 1000, nextRetry = 0 }
+local state = 'CLOSED'
+local failures = 0
+local queue = {}
 
-local function setState(new)
-    SRP.Failover.state = new
-    SRP.Failover.failures = 0
-    if new == 'OPEN' then
-        SRP.Failover.nextRetry = GetGameTimer() + SRP.Failover.backoff
-        SRP.Failover.backoff = math.min(SRP.Failover.backoff * 2, 30000)
-    elseif new == 'CLOSED' then
-        SRP.Failover.backoff = 1000
-        SRP.Failover.queue = {}
-    end
+local function setState(s)
+  state = s
+  if s == 'CLOSED' then failures = 0 end
 end
 
---[[
-    -- Type: Function
-    -- Name: active
-    -- Use: Returns true when circuit is not CLOSED
-    -- Created: 2024-06-02
-    -- By: VSSVSSN
---]]
 function SRP.Failover.active()
-    return SRP.Failover.state ~= 'CLOSED'
+  return state ~= 'CLOSED'
 end
 
---[[
-    -- Type: Function
-    -- Name: queueSize
-    -- Use: Returns queued mutation count
-    -- Created: 2024-06-02
-    -- By: VSSVSSN
---]]
 function SRP.Failover.queueSize()
-    return #SRP.Failover.queue
+  return #queue
 end
 
---[[
-    -- Type: Function
-    -- Name: metrics
-    -- Use: Provides failover stats
-    -- Created: 2024-06-02
-    -- By: VSSVSSN
---]]
 function SRP.Failover.metrics()
-    return { state = SRP.Failover.state, failures = SRP.Failover.failures, queued = #SRP.Failover.queue }
+  return { state = state, failures = failures, queue = #queue }
 end
 
-function SRP.Failover.enqueue(evt)
-    table.insert(SRP.Failover.queue, evt)
+function SRP.Failover.enqueue(fn)
+  queue[#queue + 1] = fn
 end
 
-function SRP.Failover.recordFailure(code)
-    SRP.Failover.failures = SRP.Failover.failures + 1
-    if code == 429 or code == 503 or SRP.Failover.failures >= 3 then
-        setState('OPEN')
+local function checkNode()
+  local port = GetConvar('srp_node_port', '4000')
+  local url = ('http://127.0.0.1:%s/v1/ready'):format(port)
+  local res = SRP.Http.get(url)
+  if res.status == 200 then
+    failures = 0
+    local overloaded = res.headers['x-srp-node-overloaded'] == 'true'
+    if overloaded and state == 'CLOSED' then
+      setState('OPEN')
+    elseif not overloaded and state ~= 'CLOSED' then
+      setState('HALF_OPEN')
     end
+  else
+    failures = failures + 1
+    if failures >= 3 then setState('OPEN') end
+  end
 end
 
-function SRP.Failover.recordSuccess()
-    SRP.Failover.failures = 0
-    if SRP.Failover.state == 'HALF_OPEN' then
-        setState('CLOSED')
-    end
-end
-
-local function pollNode()
-    local url = GetConvar('srp_node_base_url', 'http://127.0.0.1:4000')
-    local status, _, headers = SRP.Http.get(url .. '/v1/ready')
-    if headers and headers['x-srp-node-overloaded'] == 'true' then
-        SRP.Failover.recordFailure(503)
-        return
-    end
-    if status ~= 200 then
-        SRP.Failover.recordFailure(status)
+local function flushQueue()
+  if #queue == 0 then return end
+  local success, total = 0, #queue
+  for i = 1, #queue do
+    local ok = queue[i]()
+    if ok then success = success + 1 end
+  end
+  queue = {}
+  if state == 'HALF_OPEN' then
+    if success / total >= 0.9 then
+      setState('CLOSED')
     else
-        SRP.Failover.recordSuccess()
+      setState('OPEN')
     end
+  end
 end
 
-Citizen.CreateThread(function()
-    while true do
-        pollNode()
-        Wait(5000)
+CreateThread(function()
+  while true do
+    checkNode()
+    if state == 'HALF_OPEN' then
+      flushQueue()
     end
-end)
-
-local function replayQueue()
-    if SRP.Failover.state ~= 'HALF_OPEN' and SRP.Failover.state ~= 'CLOSED' then return end
-    local url = GetConvar('srp_node_base_url', 'http://127.0.0.1:4000')
-    local total = #SRP.Failover.queue
-    for i = 1, total do
-        local evt = table.remove(SRP.Failover.queue, 1)
-        local status = SRP.Http.post(url .. '/internal/srp/rpc', evt.body, evt.headers)
-        if status ~= 200 then
-            SRP.Failover.recordFailure(status)
-            table.insert(SRP.Failover.queue, 1, evt)
-            break
-        else
-            SRP.Failover.recordSuccess()
-        end
-        Wait(100)
-    end
-end
-
-Citizen.CreateThread(function()
-    while true do
-        if SRP.Failover.state == 'OPEN' and GetGameTimer() >= SRP.Failover.nextRetry then
-            setState('HALF_OPEN')
-        end
-        replayQueue()
-        Wait(1000)
-    end
+    Wait(5000)
+  end
 end)

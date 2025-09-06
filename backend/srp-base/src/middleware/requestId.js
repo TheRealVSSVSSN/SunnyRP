@@ -1,19 +1,13 @@
 const { randomUUID } = require('crypto');
 
-module.exports = function requestId(req, res, next) {
+module.exports = (req, res, next) => {
   const id = req.headers['x-request-id'] || randomUUID();
   req.id = id;
   res.setHeader('X-Request-Id', id);
   const start = process.hrtime.bigint();
   res.on('finish', () => {
-    const ms = Number(process.hrtime.bigint() - start) / 1e6;
-    const log = {
-      route: req.originalUrl,
-      status: res.statusCode,
-      method: req.method,
-      requestId: id,
-      ms: Math.round(ms)
-    };
+    const diff = Number(process.hrtime.bigint() - start) / 1e6;
+    const log = { requestId: id, method: req.method, path: req.originalUrl, status: res.statusCode, latencyMs: +diff.toFixed(2) };
     console.log(JSON.stringify(log));
   });
   next();
