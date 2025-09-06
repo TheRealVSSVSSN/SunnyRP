@@ -15,3 +15,45 @@
 - rationale: Reset docs and scripts for research stage
 - linked_evidence: [ "Example_Frameworks/NoPixelServer/np-base/core/sv_core.lua#L33-L45" ]
 - notes: 
+## [2025-09-06T04:47:15Z] srpbase-20250906T044714Z RESEARCH
+- scope: Example_Frameworks/NoPixelServer
+- artifacts:
+  - M:backend/srp-base/scripts/research-log-append.js
+  - M:backend/srp-base/docs/research-log.md
+  - M:backend/srp-base/docs/research-summary.md
+  - M:backend/srp-base/docs/run-docs.md
+  - M:backend/srp-base/docs/index.md
+- rationale: Append detailed research entries and update docs
+- linked_evidence: [ "Example_Frameworks/NoPixelServer/np-base/core/sv_core.lua#L33-L45" ]
+- notes: 
+## [2025-09-06T04:52:29Z] srpbase-20250906T045224Z CODE
+- scope: resources/srp-base/**
+- artifacts:
+  - A:resources/srp-base/fxmanifest.lua
+  - A:resources/srp-base/shared/srp.lua
+  - A:resources/srp-base/server/http.lua
+  - A:resources/srp-base/server/http_handler.lua
+  - A:resources/srp-base/server/failover.lua
+  - A:resources/srp-base/server/rpc.lua
+  - A:resources/srp-base/server/modules/sessions.lua
+  - A:resources/srp-base/server/modules/queue.lua
+  - A:resources/srp-base/server/modules/voice.lua
+  - A:resources/srp-base/server/modules/telemetry.lua
+  - A:resources/srp-base/server/modules/ux.lua
+  - A:resources/srp-base/server/modules/world.lua
+  - A:resources/srp-base/server/modules/jobs.lua
+- rationale: scaffold srp-base resource with HTTP bridge and failover
+- linked_evidence: []
+- notes:
+## [2025-09-06T04:55:51Z] srpbase-20250906T045521Z CODE
+- scope: backend/srp-base/src/**
+- artifacts:
+  - A:backend/srp-base/src/routes/internal.js
+  - A:backend/srp-base/src/util/luaBridge.js
+  - M:backend/srp-base/src/app.js
+  - M:backend/srp-base/CHANGELOG.md
+  - M:backend/srp-base/MANIFEST.md
+  - M:backend/srp-base/docs/framework-compliance.md
+- rationale: add internal rpc and lua bridge
+- linked_evidence: [ "backend/srp-base/docs/plan.json#L1-L1" ]
+- notes: 

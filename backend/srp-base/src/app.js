@@ -5,6 +5,7 @@ import { requestId } from './middleware/requestId.js';
 import { httpMetrics } from './middleware/httpMetrics.js';
 import { verifySignature } from './middleware/auth.js';
 import { errorHandler } from './middleware/errorHandler.js';
+import internalRouter from './routes/internal.js';
 import systemRouter from './routes/system.js';
 import accountsRouter from './routes/accounts.js';
 import hooksRouter from './routes/hooks.js';
@@ -34,6 +35,7 @@ app.use(express.json({
 app.use(cors());
 app.use(rateLimit({ windowMs: 60_000, max: 100 }));
 app.use(httpMetrics);
+app.use('/internal/srp', internalRouter);
 app.use(verifySignature);
 app.use('/v1', systemRouter);
 app.use('/v1/auth', authRouter);

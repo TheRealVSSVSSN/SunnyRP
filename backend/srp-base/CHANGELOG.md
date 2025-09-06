@@ -101,3 +101,12 @@
 
 ## 2025-09-05
 - Reset research documentation, added automation scripts, and regenerated coverage and gap reports.
+
+## 2025-09-06
+- Append detailed research logs for core resources and update summary docs.
+
+## 2025-09-06
+- Introduce srp-base resource skeleton with HTTP wrappers, failover, and RPC dispatcher.
+
+## 2025-09-06
+- Add internal RPC endpoint and Lua bridge for Node-Lua communication.
