@@ -64,3 +64,10 @@
 - rationale: Appended research log for np-base
 - linked_evidence: [ "Example_Frameworks/NoPixelServer/np-base/core/sv_core.lua#L33-L34" ]
 - notes: 
+## [2025-09-06T05:06:10Z] srpbase-20250906T050556Z RESEARCH
+- scope: Example_Frameworks/NoPixelServer
+- artifacts:
+  - M:backend/srp-base/docs/progress-ledger.md
+- rationale: Verified coverage and docs via scripts
+- linked_evidence: [ "SunnyRP:backend/srp-base/docs/coverage-map.md#L1-L30" ]
+- notes: 
