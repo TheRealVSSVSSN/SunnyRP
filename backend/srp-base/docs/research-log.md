@@ -759,3 +759,11 @@
   - loops: []
   - persistence: []
 - notes: 
+### [2025-09-06T05:03:18Z] Example_Frameworks/NoPixelServer:np-base
+- files_scanned: 26
+- signals:
+  - events: [np-base:waitForExports, customNotification, np-base:consoleLog, np-base:playerSessionStarted, np-commands:meCommand, np-base:networkVar, np-base:cl:player_settings, np-base:cl:player_reset, np-base:cl:player_control, np-base:setcontrols, event:control:cid, np-events:listenEvent, robbery:aids, np-base:newCharacterSpawned, np-base:clearStates]
+  - rpcs: []
+  - loops: [Citizen.CreateThread]
+  - persistence: []
+- notes: core session start
