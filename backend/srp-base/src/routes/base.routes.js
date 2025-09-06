@@ -1,3 +1,4 @@
+// Updated: 2024-11-28
 import { Router } from 'express';
 import {
   listCharacters,
