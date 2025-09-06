@@ -1,12 +1,22 @@
 fx_version 'cerulean'
-game 'gta5'
-
 lua54 'yes'
 
-server_scripts {
-  'server/**/*.lua'
-}
+description 'SRP Base Failover'
 
 shared_scripts {
-  'shared/**/*.lua'
+  'shared/srp.lua'
+}
+
+server_scripts {
+  'server/http.lua',
+  'server/failover.lua',
+  'server/sql.lua',
+  'server/rpc.lua',
+  'server/http_handler.lua',
+  'server/modules/base.lua',
+  'server/modules/sessions.lua',
+  'server/modules/voice.lua',
+  'server/modules/ux.lua',
+  'server/modules/world.lua',
+  'server/modules/jobs.lua'
 }

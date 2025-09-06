@@ -1,20 +1,22 @@
 const buckets = new Map();
 
-module.exports = function rateLimit({ windowMs = 1000, limit = 60 } = {}) {
+module.exports = function rateLimit(options = {}) {
+  const windowMs = options.windowMs || 60 * 1000;
+  const max = options.max || 60;
   return (req, res, next) => {
-    const ip = req.ip || req.connection.remoteAddress || 'global';
     const now = Date.now();
+    const ip = req.ip || req.connection.remoteAddress;
     let bucket = buckets.get(ip);
-    if (!bucket || now - bucket.start >= windowMs) {
-      bucket = { start: now, count: 0 };
+    if (!bucket || now - bucket.ts >= windowMs) {
+      bucket = { tokens: max - 1, ts: now };
       buckets.set(ip, bucket);
+      return next();
     }
-    bucket.count += 1;
-    if (bucket.count > limit) {
-      const retry = Math.ceil((bucket.start + windowMs - now) / 1000);
-      res.setHeader('Retry-After', retry);
-      return res.status(429).json({ error: 'rate_limited' });
+    if (bucket.tokens <= 0) {
+      res.status(429).json({ error: 'rate limit exceeded' });
+      return;
     }
+    bucket.tokens--;
     next();
   };
 };

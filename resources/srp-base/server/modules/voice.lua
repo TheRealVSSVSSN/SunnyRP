@@ -1,19 +1,7 @@
---[[
-    -- Type: Module
-    -- Name: Voice Stub
-    -- Use: Placeholder for voice actions
-    -- Created: 2024-06-02
-    -- By: VSSVSSN
---]]
+SRP = SRP or {}
+SRP.Modules = SRP.Modules or {}
+SRP.Modules.Voice = {}
 
-local M = {}
-
-function M.default()
-    return { status = 501, message = 'Not implemented in failover path' }
+SRP.Modules.Voice.stub = function()
+  return { status = 501, message = 'Not implemented in failover path' }
 end
-
-return setmetatable(M, {
-    __index = function()
-        return M.default
-    end
-})

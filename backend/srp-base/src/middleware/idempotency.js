@@ -1,20 +1,21 @@
 const store = new Map();
+const ttl = 10 * 60 * 1000;
 
-module.exports = function idempotency(req, res, next) {
-  if (!['POST', 'DELETE'].includes(req.method)) return next();
-  const key = req.headers['idempotency-key'];
-  if (!key) return res.status(400).json({ error: 'missing_idempotency_key' });
-  if (store.has(key)) {
+module.exports = function idempotency() {
+  return (req, res, next) => {
+    const key = req.headers['idempotency-key'];
+    if (!key) return next();
     const cached = store.get(key);
-    res.status(cached.status);
-    for (const [h, v] of Object.entries(cached.headers)) res.setHeader(h, v);
-    return res.json(cached.body);
-  }
-  res.locals.idempotencyKey = key;
-  const original = res.json.bind(res);
-  res.json = (body) => {
-    store.set(key, { status: res.statusCode, body, headers: res.getHeaders() });
-    return original(body);
+    if (cached && Date.now() - cached.ts < ttl) {
+      res.set(cached.headers);
+      res.status(cached.status).send(cached.body);
+      return;
+    }
+    const originalSend = res.send.bind(res);
+    res.send = (body) => {
+      store.set(key, { status: res.statusCode, headers: res.getHeaders(), body, ts: Date.now() });
+      originalSend(body);
+    };
+    next();
   };
-  next();
 };

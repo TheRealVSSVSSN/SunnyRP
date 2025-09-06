@@ -6,38 +6,36 @@ const { monitorEventLoopDelay } = require('perf_hooks');
 const requestId = require('./middleware/requestId');
 const rateLimit = require('./middleware/rateLimit');
 const hmacAuth = require('./middleware/hmacAuth');
-const validate = require('./middleware/validate');
+const idempotency = require('./middleware/idempotency');
 const errorHandler = require('./middleware/errorHandler');
 const baseRoutes = require('./routes/base.routes');
-const websocket = require('./realtime/websocket');
+const repository = require('./repositories/baseRepository');
 
 function createHttpServer({ env = process.env } = {}) {
   const app = express();
-  const server = http.createServer(app);
-  websocket.init(server);
-  const elMonitor = monitorEventLoopDelay();
-  elMonitor.enable();
+  const port = env.PORT || 4000;
+  const monitor = monitorEventLoopDelay({ resolution: 20 });
+  monitor.enable();
   let inflight = 0;
 
   app.use(requestId);
-  app.use((req, res, next) => { inflight++; res.on('finish', () => inflight--); next(); });
   app.use(express.json());
   app.use(cors());
   app.use(rateLimit());
+  app.use((req, res, next) => { inflight++; res.on('finish', () => inflight--); next(); });
 
   app.get('/v1/health', (req, res) => {
     res.json({ status: 'ok', service: 'srp-base', time: new Date().toISOString() });
   });
 
   app.get('/v1/ready', (req, res) => {
+    const lag = monitor.mean / 1e6;
     const cpu = (os.loadavg()[0] / os.cpus().length) * 100;
-    const lag = elMonitor.mean / 1e6;
-    const overload =
+    const overloaded = lag > Number(env.SRP_OVERLOAD_EL_LAG_MS || 75) ||
       cpu > Number(env.SRP_OVERLOAD_CPU_PCT || 85) ||
-      lag > Number(env.SRP_OVERLOAD_EL_LAG_MS || 75) ||
       inflight > Number(env.SRP_OVERLOAD_INFLIGHT || 200);
-    res.setHeader('X-SRP-Node-Overloaded', overload ? 'true' : 'false');
-    res.json({ ready: true, deps: [], load: { cpu: Math.round(cpu), eventLoopLagMs: Math.round(lag), pending: { inflightRequests: inflight } } });
+    res.set('X-SRP-Node-Overloaded', overloaded ? 'true' : 'false');
+    res.json({ ready: true, deps: [], load: { cpu: +cpu.toFixed(2), eventLoopLagMs: +lag.toFixed(2), pending: { inflightRequests: inflight } } });
   });
 
   app.get('/v1/info', (req, res) => {
@@ -45,30 +43,53 @@ function createHttpServer({ env = process.env } = {}) {
     res.json({ service: 'srp-base', version: pkg.version, compat: { baseline: 'srp-base' } });
   });
 
-  app.post(
-    '/internal/srp/rpc',
-    hmacAuth,
-    validate((req) => {
-      const body = req.body || {};
-      if (!body.id || !body.type || !body.time || !body.specversion) {
-        throw new Error('invalid_envelope');
+  const rpc = express.Router();
+  rpc.use(hmacAuth);
+  rpc.post('/', (req, res) => {
+    const envlp = req.body;
+    if (!envlp || typeof envlp !== 'object') return res.status(400).json({ error: 'invalid_envelope' });
+    switch (envlp.type) {
+      case 'srp.base.characters.create': {
+        const { accountId, data } = envlp.data || {};
+        const char = repository.createCharacter(accountId, data || {});
+        return res.json({ ok: true, result: char });
       }
-    }),
-    (req, res) => {
-      res.json({ ok: true, result: null });
+      case 'srp.base.characters.list': {
+        const { accountId } = envlp.data || {};
+        return res.json({ ok: true, result: repository.listCharacters(accountId) });
+      }
+      case 'srp.base.characters.select': {
+        const { accountId, characterId } = envlp.data || {};
+        return res.json({ ok: true, result: repository.selectCharacter(accountId, characterId) });
+      }
+      case 'srp.base.characters.delete': {
+        const { accountId, characterId } = envlp.data || {};
+        return res.json({ ok: true, result: repository.deleteCharacter(accountId, characterId) });
+      }
+      default:
+        return res.status(501).json({ error: 'not_implemented' });
     }
-  );
+  });
+  app.use('/internal/srp/rpc', rpc);
 
   app.use(baseRoutes);
+
   app.use(errorHandler);
 
-  const port = env.PORT || 4000;
-  server.listen(port, () => console.log(`srp-base listening on ${port}`));
-  return { app, server };
+  const server = http.createServer(app);
+  require('./realtime/websocket')(server);
+
+  return {
+    app,
+    server,
+    start: () => new Promise((resolve) => server.listen(port, resolve)),
+    stop: () => new Promise((resolve) => server.close(resolve))
+  };
 }
 
 module.exports = { createHttpServer };
 
 if (require.main === module) {
-  createHttpServer({});
+  const { start } = createHttpServer({ env: process.env });
+  start().then(() => console.log('srp-base listening'));
 }

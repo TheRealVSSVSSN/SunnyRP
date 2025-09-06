@@ -1,4 +1,4 @@
-module.exports = function errorHandler(err, req, res, next) {
+module.exports = (err, req, res, next) => {
   console.error(err);
   if (res.headersSent) return next(err);
   res.status(err.status || 500).json({ error: err.message || 'internal_error' });

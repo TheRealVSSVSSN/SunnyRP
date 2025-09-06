@@ -1,39 +1,39 @@
 class BaseRepository {
   constructor() {
     this.accounts = new Map();
-    this.seq = 1;
   }
 
   listCharacters(accountId) {
     const acc = this.accounts.get(accountId);
-    if (!acc) return [];
-    return Array.from(acc.characters.values());
+    return acc ? acc.characters : [];
   }
 
   createCharacter(accountId, data) {
-    const id = String(this.seq++);
-    const acc = this.accounts.get(accountId) || { characters: new Map(), selected: null };
-    const character = { id, name: data.name };
-    acc.characters.set(id, character);
+    const acc = this.accounts.get(accountId) || { characters: [], seq: 1, selected: null };
+    const id = String(acc.seq++);
+    const character = { id, firstName: data.firstName, lastName: data.lastName };
+    acc.characters.push(character);
     this.accounts.set(accountId, acc);
     return character;
+  }
+
+  selectCharacter(accountId, characterId) {
+    const acc = this.accounts.get(accountId);
+    if (!acc) return null;
+    const char = acc.characters.find(c => c.id === characterId);
+    if (!char) return null;
+    acc.selected = characterId;
+    return char;
   }
 
   deleteCharacter(accountId, characterId) {
     const acc = this.accounts.get(accountId);
     if (!acc) return false;
-    const existed = acc.characters.delete(characterId);
+    const idx = acc.characters.findIndex(c => c.id === characterId);
+    if (idx === -1) return false;
+    acc.characters.splice(idx, 1);
     if (acc.selected === characterId) acc.selected = null;
-    return existed;
-  }
-
-  selectCharacter(accountId, characterId) {
-    const acc = this.accounts.get(accountId);
-    if (!acc) throw new Error('account_not_found');
-    const char = acc.characters.get(characterId);
-    if (!char) throw new Error('character_not_found');
-    acc.selected = characterId;
-    return char;
+    return true;
   }
 }
 
