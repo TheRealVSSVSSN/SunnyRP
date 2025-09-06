@@ -1,13 +1,4 @@
--- Updated: 2024-11-28
---[[
-    -- Type: Manifest
-    -- Name: fxmanifest
-    -- Use: Declares srp-base resource scripts
-    -- Created: 2024-11-26
-    -- By: VSSVSSN
-    -- Updated: 2024-11-27
---]]
-
+-- 2025-02-14
 fx_version 'cerulean'
 game 'gta5'
 

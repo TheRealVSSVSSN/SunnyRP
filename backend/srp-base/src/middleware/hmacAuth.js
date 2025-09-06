@@ -1,4 +1,4 @@
-// Updated: 2024-11-28
+// 2025-02-14
 import crypto from 'crypto';
 
 /**
@@ -10,8 +10,7 @@ export function hmacAuth(env) {
     const key = req.get('X-SRP-Internal-Key') || '';
     const keyBuf = Buffer.from(key);
     const secretBuf = Buffer.from(secret);
-    const valid =
-      keyBuf.length === secretBuf.length && crypto.timingSafeEqual(keyBuf, secretBuf);
+    const valid = keyBuf.length === secretBuf.length && crypto.timingSafeEqual(keyBuf, secretBuf);
     if (!valid) {
       const err = new Error('unauthorized');
       err.status = 401;

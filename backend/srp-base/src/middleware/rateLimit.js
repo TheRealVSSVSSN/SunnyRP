@@ -1,4 +1,4 @@
-// Updated: 2024-11-28
+// 2025-02-14
 const hits = new Map();
 const WINDOW = 60_000;
 const LIMIT = 100;

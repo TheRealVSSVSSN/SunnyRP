@@ -1,11 +1,9 @@
--- Updated: 2024-11-28
 --[[
     -- Type: Module
     -- Name: rpc
     -- Use: Dispatches RPC envelopes to domain modules
-    -- Created: 2024-11-26
+    -- Created: 2025-02-14
     -- By: VSSVSSN
-    -- Updated: 2024-11-27
 --]]
 
 local SRP = SRP or require('resources/srp-base/shared/srp.lua')
@@ -21,14 +19,6 @@ local modules = {
 
 SRP.RPC = {}
 
---[[
-    -- Type: Function
-    -- Name: handle
-    -- Use: Routes envelopes based on type field
-    -- Created: 2024-11-26
-    -- By: VSSVSSN
-    -- Updated: 2024-11-27
---]]
 function SRP.RPC.handle(envelope)
     if type(envelope) ~= 'table' or type(envelope.type) ~= 'string' then
         return { error = 'invalid_envelope' }
@@ -42,7 +32,7 @@ function SRP.RPC.handle(envelope)
     if not ok then
         return { error = 'handler_error' }
     end
-    return { result = result }
+    return result
 end
 
 return SRP.RPC

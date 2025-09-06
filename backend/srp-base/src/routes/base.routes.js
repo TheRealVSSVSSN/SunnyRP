@@ -1,4 +1,4 @@
-// Updated: 2024-11-28
+// 2025-02-14
 import { Router } from 'express';
 import {
   listCharacters,
@@ -6,7 +6,7 @@ import {
   selectCharacter,
   deleteCharacter,
 } from '../repositories/baseRepository.js';
-import { idempotency, saveIdempotency } from '../middleware/idempotency.js';
+import { idempotency } from '../middleware/idempotency.js';
 import { assertValid } from '../middleware/validate.js';
 
 /**
@@ -35,31 +35,38 @@ router.post('/:accountId/characters', idempotency, async (req, res, next) => {
     );
     const character = await createCharacter(accountId, req.body);
     const body = JSON.stringify(character);
+    res.locals.body = body;
     res.status(201).type('application/json').send(body);
-    saveIdempotency(req, res, body);
+    req.app.get('ws')?.emit('characters:updated', { accountId });
   } catch (e) {
     next(e);
   }
 });
 
-router.post('/:accountId/characters/:characterId/select', async (req, res, next) => {
+router.post('/:accountId/characters/:characterId/select', idempotency, async (req, res, next) => {
   try {
     const accountId = Number(req.params.accountId);
     const characterId = Number(req.params.characterId);
     const character = await selectCharacter(accountId, characterId);
     if (!character) throw Object.assign(new Error('not_found'), { status: 404 });
-    res.json({ ok: true });
+    const body = JSON.stringify({ ok: true });
+    res.locals.body = body;
+    res.type('application/json').send(body);
+    req.app.get('ws')?.emit('characters:selected', { accountId, characterId });
   } catch (e) {
     next(e);
   }
 });
 
-router.delete('/:accountId/characters/:characterId', async (req, res, next) => {
+router.delete('/:accountId/characters/:characterId', idempotency, async (req, res, next) => {
   try {
     const accountId = Number(req.params.accountId);
     const characterId = Number(req.params.characterId);
     const deleted = await deleteCharacter(accountId, characterId);
-    res.status(deleted ? 200 : 404).json({ ok: deleted });
+    const body = JSON.stringify({ ok: deleted });
+    res.locals.body = body;
+    res.status(deleted ? 200 : 404).type('application/json').send(body);
+    if (deleted) req.app.get('ws')?.emit('characters:updated', { accountId });
   } catch (e) {
     next(e);
   }
