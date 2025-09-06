@@ -1,5 +1,17 @@
-# srp-base Service
+# srp-base Docs
 
-Baseline Node.js microservice providing session, world, voice, telemetry, queue, and UX APIs for SRP.
-
-Documentation reset on 2025-09-05.
+- [BASE_API_DOCUMENTATION.md](BASE_API_DOCUMENTATION.md)
+- [admin-ops.md](admin-ops.md)
+- [coverage-map.md](coverage-map.md)
+- [db-schema.md](db-schema.md)
+- [events-and-rpcs.md](events-and-rpcs.md)
+- [framework-compliance.md](framework-compliance.md)
+- [gap-closure-report.md](gap-closure-report.md)
+- [migrations.md](migrations.md)
+- [naming-map.md](naming-map.md)
+- [progress-ledger.md](progress-ledger.md)
+- [research-log.md](research-log.md)
+- [research-summary.md](research-summary.md)
+- [run-docs.md](run-docs.md)
+- [security.md](security.md)
+- [testing.md](testing.md)
