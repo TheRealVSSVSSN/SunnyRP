@@ -98,3 +98,6 @@
 
 ## 2025-09-05
 - Re-scan confirmed prior coverage; no changes required.
+
+## 2025-09-05
+- Reset research documentation, added automation scripts, and regenerated coverage and gap reports.
