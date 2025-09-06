@@ -1,22 +1,15 @@
 --[[
     -- Type: Module
     -- Name: voice
-    -- Use: Handles voice related RPC calls
-    -- Created: 2025-09-06
+    -- Use: Stub handlers for voice domain
+    -- Created: 2024-11-26
     -- By: VSSVSSN
 --]]
 
 local M = {}
 
---[[
-    -- Type: Function
-    -- Name: handle
-    -- Use: Processes voice envelope
-    -- Created: 2025-09-06
-    -- By: VSSVSSN
---]]
 function M.handle()
-    return nil, "not_implemented"
+    return { status = 501 }
 end
 
 return M

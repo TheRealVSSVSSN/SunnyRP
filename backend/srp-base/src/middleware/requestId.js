@@ -1,7 +1,7 @@
-import { v4 as uuidv4 } from 'uuid';
+import { randomUUID } from 'crypto';
 
-export function requestId(req, res, next) {
-  req.id = req.headers['x-request-id'] || uuidv4();
-  res.set('X-Request-Id', req.id);
-  next();
+export async function requestId(req, res) {
+  const id = req.headers['x-request-id'] || randomUUID();
+  req.id = id;
+  res.setHeader('X-Request-Id', id);
 }

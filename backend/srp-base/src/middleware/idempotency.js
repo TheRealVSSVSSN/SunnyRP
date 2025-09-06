@@ -1,14 +1,20 @@
-import { claimKey } from '../repositories/idempotency.js';
+const store = new Map();
 
-export async function idempotency(req, res, next) {
-  if (req.method === 'GET') return next();
-  const key = req.get('Idempotency-Key');
-  if (!key) return res.status(400).json({ error: 'Missing Idempotency-Key' });
-  try {
-    const ok = await claimKey(key);
-    if (!ok) return res.status(409).json({ error: 'Duplicate request' });
-    next();
-  } catch (err) {
-    next(err);
+export function idempotency(req, res) {
+  const key = req.headers['idempotency-key'];
+  if (!key) return true;
+  if (store.has(key)) {
+    const cached = store.get(key);
+    res.writeHead(cached.status, { 'Content-Type': 'application/json' });
+    res.end(cached.body);
+    return false;
+  }
+  req.idempotencyKey = key;
+  return true;
+}
+
+export function saveIdempotency(req, res, body) {
+  if (req.idempotencyKey) {
+    store.set(req.idempotencyKey, { status: res.statusCode, body });
   }
 }

@@ -2,7 +2,7 @@
     -- Type: Manifest
     -- Name: fxmanifest
     -- Use: Declares srp-base resource scripts
-    -- Created: 2025-09-06
+    -- Created: 2024-11-26
     -- By: VSSVSSN
 --]]
 
@@ -18,4 +18,3 @@ server_scripts {
 shared_scripts {
     'shared/**/*.lua'
 }
-

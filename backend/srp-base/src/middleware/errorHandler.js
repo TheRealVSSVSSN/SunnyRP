@@ -1,7 +1,9 @@
-import { logger } from '../util/logger.js';
-
-export function errorHandler(err, req, res, next) {
-  logger.error({ err, reqId: req.id }, 'request error');
+export function errorHandler(err, req, res) {
   const status = err.status || 500;
-  res.status(status).json({ error: err.message || 'Internal error' });
+  if (!res.headersSent) {
+    const headers = { 'Content-Type': 'application/json' };
+    if (err.retryAfter) headers['Retry-After'] = err.retryAfter;
+    res.writeHead(status, headers);
+  }
+  res.end(JSON.stringify({ error: err.message || 'internal_error' }));
 }
