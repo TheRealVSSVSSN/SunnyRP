@@ -4,6 +4,7 @@
     -- Use: Provides global SRP table and export helper
     -- Created: 2024-11-26
     -- By: VSSVSSN
+    -- Updated: 2024-11-27
 --]]
 
 SRP = rawget(_G, 'SRP') or {}
@@ -14,6 +15,7 @@ SRP = rawget(_G, 'SRP') or {}
     -- Use: Registers functions to the SRP namespace and exports them
     -- Created: 2024-11-26
     -- By: VSSVSSN
+    -- Updated: 2024-11-27
 --]]
 local function export(name, fn)
     SRP[name] = fn

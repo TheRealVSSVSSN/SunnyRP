@@ -4,6 +4,7 @@
     -- Use: Provides HTTP wrappers for inter-process communication
     -- Created: 2024-11-26
     -- By: VSSVSSN
+    -- Updated: 2024-11-27
 --]]
 
 local SRP = SRP or require('resources/srp-base/shared/srp.lua')
@@ -24,6 +25,7 @@ SRP.Http = SRP.Http or {}
     -- Use: Performs asynchronous HTTP requests
     -- Created: 2024-11-26
     -- By: VSSVSSN
+    -- Updated: 2024-11-27
 --]]
 SRP.Http.requestAsync = function(method, url, body, cb)
     local fn = PerformHttpRequest
@@ -39,6 +41,7 @@ end
     -- Use: Performs synchronous HTTP requests
     -- Created: 2024-11-26
     -- By: VSSVSSN
+    -- Updated: 2024-11-27
 --]]
 SRP.Http.requestAwait = function(method, url, body)
     if type(PerformHttpRequestAwait) == "function" then

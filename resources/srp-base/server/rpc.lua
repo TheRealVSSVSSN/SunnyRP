@@ -4,6 +4,7 @@
     -- Use: Dispatches RPC envelopes to domain modules
     -- Created: 2024-11-26
     -- By: VSSVSSN
+    -- Updated: 2024-11-27
 --]]
 
 local SRP = SRP or require('resources/srp-base/shared/srp.lua')
@@ -25,6 +26,7 @@ SRP.RPC = {}
     -- Use: Routes envelopes based on type field
     -- Created: 2024-11-26
     -- By: VSSVSSN
+    -- Updated: 2024-11-27
 --]]
 function SRP.RPC.handle(envelope)
     if type(envelope) ~= 'table' or type(envelope.type) ~= 'string' then

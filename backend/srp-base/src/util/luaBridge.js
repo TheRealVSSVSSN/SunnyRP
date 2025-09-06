@@ -1,5 +1,8 @@
 import http from 'http';
 
+/**
+ * Sends requests to the FiveM HTTP handler on loopback.
+ */
 export function callLua(path, { method = 'POST', body = {}, headers = {} } = {}) {
   const port = process.env.FX_HTTP_PORT || 30120;
   const data = Buffer.from(JSON.stringify(body));
@@ -16,9 +19,9 @@ export function callLua(path, { method = 'POST', body = {}, headers = {} } = {})
     },
   };
   return new Promise((resolve, reject) => {
-    const req = http.request(options, res => {
+    const req = http.request(options, (res) => {
       const chunks = [];
-      res.on('data', c => chunks.push(c));
+      res.on('data', (c) => chunks.push(c));
       res.on('end', () => {
         resolve({ status: res.statusCode, body: Buffer.concat(chunks).toString() });
       });

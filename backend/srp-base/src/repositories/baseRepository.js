@@ -1,3 +1,6 @@
+/**
+ * In-memory repository for accounts and characters.
+ */
 const accounts = new Map();
 let nextId = 1;
 
@@ -15,13 +18,12 @@ export async function createCharacter(accountId, data) {
 
 export async function selectCharacter(accountId, characterId) {
   const chars = accounts.get(accountId) || [];
-  const exists = chars.find(c => c.id === characterId);
-  return exists || null;
+  return chars.find((c) => c.id === characterId) || null;
 }
 
 export async function deleteCharacter(accountId, characterId) {
   const chars = accounts.get(accountId) || [];
-  const idx = chars.findIndex(c => c.id === characterId);
+  const idx = chars.findIndex((c) => c.id === characterId);
   if (idx !== -1) {
     chars.splice(idx, 1);
     accounts.set(accountId, chars);

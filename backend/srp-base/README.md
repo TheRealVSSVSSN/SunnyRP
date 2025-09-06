@@ -1,6 +1,6 @@
 # srp-base Backend
 
-Minimal Node.js service.
+Express-based Node.js service exposing health and RPC endpoints.
 
 ## Run
 
