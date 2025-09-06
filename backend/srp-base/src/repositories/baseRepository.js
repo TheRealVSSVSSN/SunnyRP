@@ -1,3 +1,4 @@
+// Updated: 2024-11-28
 /**
  * In-memory repository for accounts and characters.
  */

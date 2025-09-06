@@ -1,3 +1,5 @@
+Updated: 2024-11-28
+
 # MANIFEST
 
 - `src/server.js` – Express HTTP server with health, ready, info, and RPC endpoints.

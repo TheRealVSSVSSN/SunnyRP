@@ -1,3 +1,5 @@
+Updated: 2024-11-28
+
 # srp-base Resource
 
 Provides HTTP surface and RPC dispatch for server components.
