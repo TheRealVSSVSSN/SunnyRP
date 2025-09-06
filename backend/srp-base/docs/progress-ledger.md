@@ -57,3 +57,10 @@
 - rationale: add internal rpc and lua bridge
 - linked_evidence: [ "backend/srp-base/docs/plan.json#L1-L1" ]
 - notes: 
+## [2025-09-06T05:03:26Z] srpbase-20250906T050324Z RESEARCH
+- scope: Example_Frameworks/NoPixelServer/np-base
+- artifacts:
+  - M:backend/srp-base/docs/research-log.md
+- rationale: Appended research log for np-base
+- linked_evidence: [ "Example_Frameworks/NoPixelServer/np-base/core/sv_core.lua#L33-L34" ]
+- notes: 
