@@ -5,6 +5,7 @@
 - `src/repositories/baseRepository.js` – in-memory data store.
 - `src/middleware/*` – request handling utilities.
 - `src/util/luaBridge.js` – bridge to FX loopback.
+- `src/realtime/websocket.js` – minimal WebSocket server with heartbeat.
 
 ## Environment
 - `PORT` – HTTP port (default 4000)
