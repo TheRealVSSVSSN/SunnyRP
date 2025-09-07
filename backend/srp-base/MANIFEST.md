@@ -1,6 +1,6 @@
 # srp-base Manifest
 
-Version: 1.0.1
+Version: 1.0.2
 
 ## Files
 - src/server.js
