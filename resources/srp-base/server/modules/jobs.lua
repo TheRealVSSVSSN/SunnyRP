@@ -4,11 +4,11 @@ SRP.Modules.Jobs = {}
 
 --[[
     -- Type: Function
-    -- Name: SRP.Modules.Jobs.stub
-    -- Use: Stub during failover
+    -- Name: SRP.Modules.Jobs.handle
+    -- Use: Stub module for failover
     -- Created: 2025-02-14
     -- By: VSSVSSN
 --]]
-SRP.Modules.Jobs.stub = function()
-  return { status = 501, message = 'Not implemented in failover path' }
+function SRP.Modules.Jobs.handle()
+  return { status = 501, message = "Not implemented in failover path" }
 end

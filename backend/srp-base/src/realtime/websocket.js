@@ -4,20 +4,22 @@
  * Author: VSSVSSN
  */
 
-const { Server } = require('socket.io');
+const { WebSocketServer } = require('ws');
 
 module.exports = (httpServer) => {
-  const io = new Server(httpServer, { path: '/ws/base' });
-  io.use((socket, next) => {
-    const { sid, accountId } = socket.handshake.query;
-    if (!sid || !accountId) return next(new Error('invalid_handshake'));
-    socket.data.sid = sid;
-    socket.data.accountId = accountId;
-    socket.data.characterId = socket.handshake.query.characterId;
-    next();
+  const wss = new WebSocketServer({ server: httpServer, path: '/ws/base' });
+  wss.on('connection', (ws, req) => {
+    const url = new URL(req.url, 'http://localhost');
+    const sid = url.searchParams.get('sid');
+    const accountId = url.searchParams.get('accountId');
+    if (!sid || !accountId) {
+      ws.close(1008, 'invalid_handshake');
+      return;
+    }
+    ws.sid = sid;
+    ws.accountId = accountId;
+    ws.characterId = url.searchParams.get('characterId');
+    ws.send(JSON.stringify({ event: 'ready' }));
   });
-  io.on('connection', (socket) => {
-    socket.emit('ready');
-  });
-  return io;
+  return wss;
 };

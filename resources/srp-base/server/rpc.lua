@@ -19,9 +19,9 @@ function SRP.RPC.handle(env)
   elseif t == 'srp.base.characters.create' then
     return { ok = true, result = SRP.Modules.Base.charactersCreate(env.data.accountId, env.data.data, env.id) }
   elseif t == 'srp.base.characters.select' then
-    return { ok = true, result = SRP.Modules.Base.charactersSelect(env.data.accountId, env.data.characterId) }
+    return { ok = true, result = SRP.Modules.Base.charactersSelect(env.data.accountId, env.data.characterId, env.id) }
   elseif t == 'srp.base.characters.delete' then
-    return { ok = true, result = SRP.Modules.Base.charactersDelete(env.data.accountId, env.data.characterId) }
+    return { ok = true, result = SRP.Modules.Base.charactersDelete(env.data.accountId, env.data.characterId, env.id) }
   end
   return { ok = false, error = 'not_implemented' }
 end

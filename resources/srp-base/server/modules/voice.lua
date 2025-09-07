@@ -4,11 +4,11 @@ SRP.Modules.Voice = {}
 
 --[[
     -- Type: Function
-    -- Name: SRP.Modules.Voice.stub
-    -- Use: Stub during failover
+    -- Name: SRP.Modules.Voice.handle
+    -- Use: Stub module for failover
     -- Created: 2025-02-14
     -- By: VSSVSSN
 --]]
-SRP.Modules.Voice.stub = function()
-  return { status = 501, message = 'Not implemented in failover path' }
+function SRP.Modules.Voice.handle()
+  return { status = 501, message = "Not implemented in failover path" }
 end

@@ -4,8 +4,8 @@
  * Author: VSSVSSN
  */
 
-module.exports = (err, req, res, next) => {
+module.exports = (err, req, res) => {
   console.error(err);
-  if (res.headersSent) return next(err);
+  if (res.headersSent) return;
   res.status(err.status || 500).json({ error: err.message || 'internal_error' });
 };

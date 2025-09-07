@@ -13,7 +13,7 @@ module.exports = (req, res, next) => {
   const start = process.hrtime.bigint();
   res.on('finish', () => {
     const diff = Number(process.hrtime.bigint() - start) / 1e6;
-    const log = { requestId: id, method: req.method, path: req.originalUrl, status: res.statusCode, latencyMs: +diff.toFixed(2) };
+    const log = { requestId: id, method: req.method, path: req.url, status: res.statusCode, latencyMs: +diff.toFixed(2) };
     console.log(JSON.stringify(log));
   });
   next();

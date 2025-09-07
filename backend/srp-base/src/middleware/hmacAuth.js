@@ -10,5 +10,5 @@ module.exports = (req, res, next) => {
   if (key && key === expected) {
     return next();
   }
-  res.status(401).json({ error: 'unauthorized' });
+  return res.status(401).json({ error: 'unauthorized' });
 };

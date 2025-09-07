@@ -13,7 +13,9 @@ module.exports = function idempotency() {
     if (!key) return next();
     const cached = store.get(key);
     if (cached && Date.now() - cached.ts < ttl) {
-      res.set(cached.headers);
+      for (const [k, v] of Object.entries(cached.headers)) {
+        res.setHeader(k, v);
+      }
       res.status(cached.status).send(cached.body);
       return;
     }

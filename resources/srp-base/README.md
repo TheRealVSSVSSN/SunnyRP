@@ -2,7 +2,7 @@
 
 Glue and failover layer for the SRP base service.
 
-Version: 1.0.2
+Version: 1.0.3
 
 ## ConVars
 - `srp_internal_key` – shared secret with Node service
