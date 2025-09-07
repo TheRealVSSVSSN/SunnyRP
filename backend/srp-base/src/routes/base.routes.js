@@ -1,3 +1,9 @@
+/**
+ * SRP Base
+ * Created: 2025-02-14
+ * Author: VSSVSSN
+ */
+
 const express = require('express');
 const { z } = require('zod');
 const repository = require('../repositories/baseRepository');

@@ -1,3 +1,4 @@
+-- SRP Base Resource
 fx_version 'cerulean'
 lua54 'yes'
 

@@ -1,3 +1,9 @@
+/**
+ * SRP Base
+ * Created: 2025-02-14
+ * Author: VSSVSSN
+ */
+
 const buckets = new Map();
 
 module.exports = function rateLimit(options = {}) {

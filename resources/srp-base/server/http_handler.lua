@@ -1,3 +1,10 @@
+--[[
+    -- Type: Function
+    -- Name: handler
+    -- Use: HTTP entrypoint for Lua resource
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
 local function handler(req, res)
   if not req.path or not req.path:find('^/srp%-base') then return end
   local path = req.path:sub(string.len('/srp-base') + 1)

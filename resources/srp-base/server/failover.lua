@@ -10,22 +10,57 @@ local function setState(s)
   if s == 'CLOSED' then failures = 0 end
 end
 
+--[[
+    -- Type: Function
+    -- Name: SRP.Failover.active
+    -- Use: Whether circuit breaker is active
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
 function SRP.Failover.active()
   return state ~= 'CLOSED'
 end
 
+--[[
+    -- Type: Function
+    -- Name: SRP.Failover.queueSize
+    -- Use: Size of queued mutations
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
 function SRP.Failover.queueSize()
   return #queue
 end
 
+--[[
+    -- Type: Function
+    -- Name: SRP.Failover.metrics
+    -- Use: Returns current circuit metrics
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
 function SRP.Failover.metrics()
   return { state = state, failures = failures, queue = #queue }
 end
 
+--[[
+    -- Type: Function
+    -- Name: SRP.Failover.enqueue
+    -- Use: Queue a function for later replay
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
 function SRP.Failover.enqueue(fn)
   queue[#queue + 1] = fn
 end
 
+--[[
+    -- Type: Function
+    -- Name: checkNode
+    -- Use: Poll Node service readiness
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
 local function checkNode()
   local port = GetConvar('srp_node_port', '4000')
   local url = ('http://127.0.0.1:%s/v1/ready'):format(port)
@@ -44,6 +79,13 @@ local function checkNode()
   end
 end
 
+--[[
+    -- Type: Function
+    -- Name: flushQueue
+    -- Use: Replay queued mutations
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
 local function flushQueue()
   if #queue == 0 then return end
   local success, total = 0, #queue
