@@ -1,6 +1,13 @@
 SRP = SRP or {}
 SRP.Http = {}
 
+--[[
+    -- Type: Function
+    -- Name: baseHeaders
+    -- Use: Prepares default headers for HTTP requests
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
 local function baseHeaders(headers)
   headers = headers or {}
   headers["Content-Type"] = "application/json"
@@ -9,6 +16,13 @@ local function baseHeaders(headers)
   return headers
 end
 
+--[[
+    -- Type: Function
+    -- Name: SRP.Http.requestExSync
+    -- Use: Perform HTTP request synchronously
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
 function SRP.Http.requestExSync(opts)
   local url = opts.url
   local method = opts.method or "GET"
@@ -26,10 +40,24 @@ function SRP.Http.requestExSync(opts)
   end
 end
 
+--[[
+    -- Type: Function
+    -- Name: SRP.Http.get
+    -- Use: Issue a GET request
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
 function SRP.Http.get(url, headers)
   return SRP.Http.requestExSync({ url = url, method = "GET", headers = headers })
 end
 
+--[[
+    -- Type: Function
+    -- Name: SRP.Http.post
+    -- Use: Issue a POST request
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
 function SRP.Http.post(url, body, headers)
   return SRP.Http.requestExSync({ url = url, method = "POST", body = json.encode(body or {}), headers = headers })
 end

@@ -1,3 +1,9 @@
+/**
+ * SRP Base
+ * Created: 2025-02-14
+ * Author: VSSVSSN
+ */
+
 const store = new Map();
 const ttl = 10 * 60 * 1000;
 

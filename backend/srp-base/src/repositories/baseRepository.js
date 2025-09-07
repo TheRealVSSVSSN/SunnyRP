@@ -1,3 +1,9 @@
+/**
+ * SRP Base
+ * Created: 2025-02-14
+ * Author: VSSVSSN
+ */
+
 class BaseRepository {
   constructor() {
     this.accounts = new Map();
