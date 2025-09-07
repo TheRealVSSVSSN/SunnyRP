@@ -1,173 +1,211 @@
-# AGENTS.md — SRP Build Agent (Resource‑Independent, Node.js + Lua, Failover-Ready)
+# agents.md — **Generic, Resource‑Agnostic Build Agent** (Ultrathink, **Markdown‑Only**, **Research‑Aware**, Evidence‑Only) — *Codex‑Aligned for “SRP‑BASE — Code‑First Prompt”*
 
-**Runtime:** Container with shell, filesystem, and git access  
-**Output:** Single Markdown response; all code in fenced blocks; **no external side effects**
+> **Runtime:** Runs on the **Codex website** (no shell/FS access).  
+> **Absolute rule:** **All output is a single Markdown response**. No side effects, no external scripts.  
+> **Goal:** Produce a **full, working base/framework** (Lua + Node.js) when directed by the prompt—never a minimal snippet.  
+> **Method:** Research briefly → **auto‑freeze** → emit **complete file contents** as fenced code under the required sections.
 
 ---
 
-## 0) Compatibility Contract (Two Modes)
+## 0) Compatibility Contract — *Detect and Match the Prompt’s Output Format*
 
-**Mode A — Code‑First Prompt (STRICT)**  
-Triggered if the run prompt contains either of these markers:
-- `# SRP — Code-First Prompt` (or `# SRP-BASE — Code-First Prompt`), **or**
-- the literal line `Output sections (in this exact order):`
+This agent adapts to **two output modes**:
 
-When triggered, emit sections **in this exact order** (no extra prose before/after):
-1. `RESEARCH SUMMARY` (≤10 lines)  
-2. `RESEARCH CHECKPOINT COMPLETE — Plan auto-frozen. Continuing implementation.`  
-3. `DIFF SUMMARY` (A/M/D/R by path)  
-4. `PATCHES` — for each file:  
-   `--- FILE: <path>` then a fenced block with the **full file body** (LF endings)  
-5. `<backend/{SERVICE}/MANIFEST.md>` (fenced ```md)  
-6. `<backend/{SERVICE}/README.md>` (fenced ```md)  
-7. `<resources/{RESOURCE}/README.md>` (fenced ```md)
+### **Mode A — SRP‑BASE Code‑First Prompt Contract (STRICT)**
+Trigger when the run prompt contains either:
+- The heading `# SRP-BASE — Code-First Prompt (Lua + Node.js)` **or**
+- The line `**Output sections (in this exact order):**`
 
-**Mode B — Generic Markdown Patches (Fallback)**  
-If Mode A is **not** triggered, produce:
-- Research pack under `docs/research/**`
-- Patches under `docs/patches/**`
-- `docs/index.md`, top‑level `MANIFEST.md`, `CHANGELOG.md`  
-_All content remains inline in the single Markdown response._
+**Then you MUST emit output in this exact order and format** (no extra prose, no trailing lines):
 
-> This agent is **resource‑independent**. Use **tokens** instead of hardcoded names:  
-> `{SERVICE}` for the Node microservice folder under `backend/`, and `{RESOURCE}` for the FiveM Lua resource under `resources/`. Defaults if omitted: `{SERVICE}=srp-base`, `{RESOURCE}=srp-base`.
+1. `RESEARCH SUMMARY` (≤10 lines; concise, single block)  
+2. Print **exactly** this line once:  
+   `RESEARCH CHECKPOINT COMPLETE — Plan auto-frozen. Continuing implementation.`  
+3. `DIFF SUMMARY` — list A/M/D/R by path (logical repo paths)  
+4. `PATCHES` — For each file, print:
+   - Header line: `--- FILE: <path>`  
+   - Then a fenced code block with the **entire file contents** using a correct language fence (```js, ```lua, ```json, ```md, ```yaml, etc.)  
+   - No diff hunks; full bodies only; LF endings assumed.
+5. **`backend/srp-base/MANIFEST.md`** — full contents as a fenced ```md block  
+6. **`backend/srp-base/README.md`** — full contents as a fenced ```md block  
+7. **`resources/srp-base/README.md`** — full contents as a fenced ```md block
+
+> **Do not** print any other sections (no extra indexes, no completion line) in Mode A. Obey the prompt’s **Implementation Order** and “**Complete code, no TODOs**” rule.
+
+### **Mode B — Generic Markdown‑Only Patches (Fallback)**
+If the run prompt does **not** match Mode A, use the generic, research‑aware flow in this file (Markdown only) and write:
+- Research pack under `docs/research/**` (as Markdown sections in the single response)
+- Patches under `docs/patches/**` (as Markdown sections with fenced code)
+- Top‑level `docs/index.md`, `MANIFEST.md`, `CHANGELOG.md` (as fenced ```md blocks)
+
+> **Never** claim to write files to disk. Always emit contents inline in Markdown.
 
 ---
 
 ## 1) Inputs & Scope
 
-The prompt supplies (directly or by convention):
-- `Reset Ledger` (bool), `reasoning_effort` (`Ultrathinking` expected)  
-- `{SERVICE}` (Node service name), `{RESOURCE}` (Lua resource name)  
-- `Target Platforms`, `Primary Domains`  
-- Optional **framework hints** (paths/references). Treat as **hints**, not truth.
+**Inputs (from the run prompt):**
+- `Reset Ledger` (bool)  
+- `reasoning_effort` (**must** be `Ultrathinking`)  
+- `Microservice` or `Resource` (e.g., `srp-base`, `np-police`, `ui/chat`)  
+- `Target Platforms` (e.g., `FiveM`, `Web`, `CLI`, `RedM`)  
+- `Primary Domains` (e.g., `[base]`, `[inventory, jobs]`)  
+- `Main Framework` (name, repo, `paths: [...]`)  
+- `Other Frameworks` (optional list)  
+- `Resource Sources` (e.g., cfx server data)  
+- `Feature Priorities` (performance/maintainability, parity targets)  
+- `Use Research Summary` (bool)
 
-**Write scope (Mode A):**
-- `backend/{SERVICE}/**`
-- `resources/{RESOURCE}/**` (and only this resource’s `fxmanifest.lua`)
+**Write Scope (Markdown response only):**
+- You **only** print Markdown in the response. All code must be inside fenced blocks.  
+- When in **Mode A**, follow its **Output sections** exactly and omit everything else.  
+- When in **Mode B**, use the directories described in §5 as **logical paths** inside headings.
 
-**Write scope (Mode B):**
-- `docs/**` only (no runtime code required in fallback).
+**`srp-base` precedence:**
+- If `srp-base` is in scope or present, treat it as the **framework contract**.  
+- When touching other resources, **integrate with `srp-base`** (HTTP/WS/events/exports/schemas).  
+- If `srp-base` is absent, keep interfaces **compatible** for future adoption.
 
-If multiple services/resources are present, `{SERVICE}`/`{RESOURCE}` from the prompt take precedence.
-
----
-
-## 2) Discovery & Signals (Adaptive, Resource‑Independent)
-
-**Timebox:** Mode A ≤60 s or ≤200 files; Mode B ≤5 min or ≤1,500 files.  
-Scan the repo for **signals** (names/flows only; no code copying):
-- Event wiring: `RegisterNetEvent`, `TriggerEvent`, `TriggerClientEvent`, `AddEventHandler`
-- RPC/callbacks: `RPC.register|execute`, `exports("…")`, `lib.callback.register|await`, `Callbacks:Server`
-- NUI: `RegisterNUICallback`, `SendNUIMessage`, postMessage patterns
-- Loops: `Citizen.CreateThread`, `SetTimeout`, `while true do`
-- Persistence mentions: `.sql` tables, JSON stores
-- Identity/session/queue/whitelist/login/scoreboard/voice/streaming/spawn hand‑offs
-- Error/telemetry: logger hooks, rcon/restart/cron
-
-**Files included:** `**/*.{lua,js,ts,json,sql,yml,yaml,md}`  
-**Exclude:** `node_modules/.git/.github/dist/build`
-
-Summarize top findings in **≤10 lines** under **RESEARCH SUMMARY**, then immediately print the checkpoint line (Mode A).
+**Run budget:** Work until the evidenced queue is empty **or 25 minutes** elapse (no early stopping).
 
 ---
 
-## 3) Global Constraints
+## 2) Research Checkpoint (Non‑Blocking)
 
-- **No `TODO`/`FIXME`/`TBD`/`TBA`.**  
-- Idempotent output; re‑runs overwrite the same paths predictably.  
-- Validate **all mutating endpoints**.  
-- Internal calls require `X-SRP-Internal-Key`.  
-- Structured logs with `X-Request-Id`, route, status, latency.  
-- Server‑only natives guarded with `IsDuplicityVersion()`.  
-- No secrets; provide `.env.example` placeholders.  
-- Lua shared functions use: `SRP.FunctionName = function(...) ... end`.
+**Budget:** **≤ 60 seconds** or **≤ 200 files** for Mode A (per SRP‑BASE prompt); otherwise ≤ 5 minutes/≤ 1,500 files in Mode B.  
+**Scope:**  
+1) Skim **declared framework `paths[]`** for signals (events/RPC/exports/NUI/loops).  
+2) Record only names/signatures/behaviors—not large code copies.  
+3) Identify the natives you will use and confirm server vs client context.
 
----
+**Inline Summary (Mode A exact wording):**
+- Print a section titled `RESEARCH SUMMARY` with ≤10 lines.  
+- Immediately print the line:  
+  `RESEARCH CHECKPOINT COMPLETE — Plan auto-frozen. Continuing implementation.`
 
-## 4) Technology Baseline
+**States:** `FULL` | `PARTIAL` | `SKIPPED` (briefly indicated in the 10 lines, optional).
 
-- **Node.js ≥ 18** (Express allowed).  
-- **WebSockets** (native or socket.io).  
-- **Lua 5.4** for FiveM server scripts.  
-- **GHMattiMySQL** used **only** for **failover mode** (when Node is overloaded/down).  
-- **Primary DB:** optional; start with **in‑memory** repositories by default.  
-- **NUI:** pure HTML/CSS/JS if needed (not required for base wiring).
+**Primary references (evidence only):**
+- FiveM Lua (server): https://docs.fivem.net/docs/scripting-reference/runtimes/lua/server-functions/  
+- FiveM Natives (UI): https://docs.fivem.net/natives/  
+- Framework mirrors: `Example_Frameworks/NoPixelServer` and other listed frameworks in the prompt.
 
 ---
 
-## 5) Required Deliverables (Mode A — Code‑First)
+## 3) Implementation Rules (Both Modes)
 
-> Use **tokens** instead of fixed names. Replace `{SERVICE}` and `{RESOURCE}` when emitting files.
+- **No TODO/FIXME** — produce runnable code or return a **501** JSON response where semantics are unknown.  
+- **Validation/Auth** — schema‑check mutations; protect internal routes via `X-SRP-Internal-Key` (or HMAC).  
+- **Idempotency** — support an idempotency key for mutations where needed.  
+- **Logging** — structured JSON with route, status, latency, and `X-Request-Id`.  
+- **Server vs Client** — do not call client‑only natives on the server; guard with `IsDuplicityVersion()` if relevant.  
+- **Naming** — adopt discovered signal names; normalize to REST at HTTP boundaries; provide **compat aliases** where needed.  
+- **Security** — Lua bridge loopback only; never echo secrets; use `.env.example` content in patches instead.
 
-### A. Node.js service — `backend/{SERVICE}`
-- `src/server.js` — Express app via `http.createServer(app)`; middleware chain (requestId → JSON → CORS → rateLimit → HMAC/Auth → Idempotency → Validation → error handler).  
-  Endpoints:  
-  - `GET /v1/health` → `{status:"ok",service, time}`  
-  - `GET /v1/ready`  → `{ready:true, deps:[]}`  
-  - `GET /v1/info`   → `{service, version, compat:{baseline:"srp-base"}}`  
-  - `POST /internal/srp/rpc` (auth via `X-SRP-Internal-Key`) → CloudEvents‑like envelope; returns `{ok:true,result}`
-- `src/routes/*.routes.js` — per‑domain routers (e.g., `base`, `sessions`, `ux`, `world`, `voice`, `jobs` as applicable to the prompt).  
-- `src/repositories/*Repository.js` — **in‑memory** async repos (swap‑ready for SQL).  
-- `src/middleware/{requestId.js,rateLimit.js,hmacAuth.js,idempotency.js,validate.js,errorHandler.js}` — minimal, working.  
-- `src/util/luaBridge.js` — HTTP client to FiveM loopback (`http://127.0.0.1:${FX_HTTP_PORT}/{RESOURCE}<path>`).  
-- `src/realtime/websocket.js` (optional) — heartbeat, backpressure.  
-- `package.json` + `.env.example` + `README.md` + `MANIFEST.md`.
+---
 
-### B. Lua resource — `resources/{RESOURCE}`
-- `fxmanifest.lua` — `lua54 'yes'`; `server_scripts { "server/**/*.lua" }`; `shared_scripts { "shared/**/*.lua" }`
-- `shared/srp.lua` — global `SRP` table; simple export helper.  
-- `server/http.lua` — robust HTTP wrappers: try `PerformHttpRequestAwait` → promise/Await → `PerformHttpRequest` fallback.  
-- `server/http_handler.lua` — `SetHttpHandler` multiplexer; routes:  
-  - `GET /v1/health` (ok JSON)  
-  - `POST /internal/srp/rpc` (auth header; decode body; dispatch to `SRP.RPC.handle`)
-- `server/failover.lua` — circuit breaker (`CLOSED/OPEN/HALF_OPEN`), exponential backoff (max 30s), queue idempotent mutations during OPEN, replay on recovery.
-- `server/sql.lua` — **failover‑only** persistence via **GHMattiMySQL** (guard all calls; no hard dependency if not installed).
-- `server/rpc.lua` — `SRP.RPC.handle(envelope)`; dispatch by `type` (`srp.<domain>.<action>`); return `{result}` or `{error}`.
-- `server/modules/*.lua` — minimal per‑domain handlers (e.g., `base.lua`, `sessions.lua`, `voice.lua`, `ux.lua`, `world.lua`, `jobs.lua`). Should be **safe** (return 501 JSON where unimplemented).  
-- `README.md` (usage + convars).
+## 4) Deliverables (Mode A — STRICT to match SRP‑BASE Prompt)
 
-### C. Docs (tiny, but useful)
-- `backend/{SERVICE}/MANIFEST.md` (what was added; env vars; how to run).  
-- `backend/{SERVICE}/.env.example` (e.g., `PORT`, `FX_HTTP_PORT`, `SRP_INTERNAL_KEY`).
+You **must** produce all deliverables enumerated by the **SRP‑BASE Code‑First Prompt** in its **exact** section order:
+
+- `RESEARCH SUMMARY` (≤10 lines)  
+- Checkpoint line (exact text)  
+- `DIFF SUMMARY` for `backend/srp-base/**` and `resources/srp-base/**` (A/M/D/R)  
+- `PATCHES` with **full contents** for:
+  - `backend/srp-base/src/server.js`
+  - `backend/srp-base/src/util/luaBridge.js`
+  - `backend/srp-base/src/middleware/{requestId.js,rateLimit.js,hmacAuth.js,idempotency.js,validate.js,errorHandler.js}`
+  - `backend/srp-base/src/routes/base.routes.js`
+  - `backend/srp-base/src/repositories/baseRepository.js`
+  - `backend/srp-base/package.json`
+  - `backend/srp-base/.env.example`
+  - *(optional)* `backend/srp-base/src/realtime/websocket.js`
+  - `resources/srp-base/fxmanifest.lua`
+  - `resources/srp-base/shared/srp.lua`
+  - `resources/srp-base/server/http.lua`
+  - `resources/srp-base/server/http_handler.lua`
+  - `resources/srp-base/server/failover.lua`
+  - `resources/srp-base/server/rpc.lua`
+  - `resources/srp-base/server/modules/{base.lua,sessions.lua,voice.lua,ux.lua,world.lua,jobs.lua}`
+- `backend/srp-base/MANIFEST.md` (fenced ```md)
+- `backend/srp-base/README.md` (fenced ```md)
+- `resources/srp-base/README.md` (fenced ```md)
+
+> **Formatting of each patch:** Precede the code with `--- FILE: <path>` and then a single fenced block with the **entire** file body. Use correct language fences.
+
+---
+
+## 5) Deliverables (Mode B — Generic Markdown‑Only)
+
+If Mode A is not triggered, emit the following **Markdown sections** in this single response:
+
+```
+## RESEARCH SUMMARY
+## docs/research/index.md (md)
+## docs/research/fivem-server-functions.md (md)
+## docs/research/fivem-natives-index.md (md)
+## docs/research/frameworks/NoPixel/{overview.md,signals.md} (md)
+## docs/research/frameworks/{ESX,ND,FSN,QB,vRP,vORP}/{overview.md,signals.md} (md)
+## docs/research/coverage-map.md (md)
+## docs/research/gap-closure-report.md (md)
+## docs/research/research-log.md (md)
+## docs/research/run-plan.md (md)
+
+## docs/patches/001-node-server.md (md with fenced code blocks for each file)
+## docs/patches/002-lua-resource.md (md with fenced code blocks for each file)
+## docs/patches/003-domain-stubs.md (md with fenced code blocks)
+## docs/patches/004-readme-manifest.md (md with fenced code blocks)
+
+## docs/index.md (md)
+## MANIFEST.md (md)
+## CHANGELOG.md (md)
+```
+
+**Inside each “patches” section**, include subsections like:
+```
+--- FILE: backend/srp-base/src/server.js
+```js
+// full contents
+```
+(Repeat for every file.)
+```
 
 ---
 
 ## 6) Quality Gates
 
-- Health/Ready/Info present.  
-- Mutating endpoints validated; idempotency supported.  
-- Internal RPC secured with `X-SRP-Internal-Key`.  
-- Deterministic, idempotent output.  
-- Compatibility notes/aliases recorded in README/MANIFEST.  
-- Server logs exclude sensitive payloads.  
-- Lua failover path **works without** MySQL being present (no‑ops with clear warnings).
+- All **mutating** endpoints validated.  
+- Health/Ready/Info endpoints present when services are involved.  
+- **Zero `TODO|FIXME|TBD|TBA`**.  
+- Deterministic, idempotent output — re‑running yields the same logical paths with updated content.  
+- Compatibility notes and aliases recorded (in Mode B: within `run-plan.md`; in Mode A: within `README.md` or code comments).
 
 ---
 
 ## 7) Time & Fairness
 
-- `Ultrathinking` throughout.  
-- Work until queue empty or 25 min elapsed.  
-- Round‑robin: max 1 consecutive task per bucket; cooldown span = 2 buckets.
+- **Ultrathinking** throughout.  
+- Work until the queue is empty or **25 minutes** elapse.  
+- Round‑robin domains/paths to avoid tunneling: `max_consecutive_per_bucket = 1`, `cooldown_span = 2`.
 
 ---
 
-## 8) Safety & Compliance
+## 8) Safety, Privacy, Compliance
 
-- No secrets or license violations.  
-- Respect **resource‑independent** discovery; treat external paths as hints, never as requirements.  
-- Never copy external code verbatim; extract **names/flows** only.
+- No secrets in code; only `.env.example` placeholders.  
+- Respect licenses; copy **behaviors**, not full source.  
+- Logs avoid sensitive payloads; include requestId, route, status, latency, minimal actor identifiers.
 
 ---
 
-## 9) CloudEvents Envelope (reference)
+## 9) Minimal Reference Snippets (for consistent shape)
 
+**CloudEvents‑like envelope (shared):**
 ```json
 {
   "id": "evt_<uuid>",
   "type": "srp.<domain>.<action>",
-  "source": "{SERVICE}",
+  "source": "srp-base",
   "subject": "<characterId|accountId|entityId|*>",
   "time": "<ISO-8601>",
   "specversion": "1.0",
@@ -176,13 +214,12 @@ Summarize top findings in **≤10 lines** under **RESEARCH SUMMARY**, then immed
 ```
 
 **Required headers:** `X-SRP-Internal-Key`, `X-Request-Id`, `Content-Type: application/json`  
-**HTTP codes:** 2xx success · 4xx validation/auth · 5xx server · optional `Retry-After`
+**HTTP codes:** 2xx success; 4xx validation/auth; 5xx server; optional `Retry-After`.
 
 ---
 
-### Quick Notes for Implementers
+### Operative Summary
 
-- **Loopback only** for Node↔Lua bridge; never expose publicly.  
-- If `SetHttpHandler` already in use, compose: try ours first then delegate on 404.  
-- Without DB, repositories remain in‑memory; failover SQL file **must not crash** when GHMattiMySQL is missing.  
-- Keep module names **generic** and **SRP‑named**; don’t hardcode upstream prefixes.
+- If the run prompt is the **SRP‑BASE Code‑First Prompt**, obey its **Mode A** contract exactly (sections, order, and patch formatting).  
+- Otherwise, operate in **Mode B** and emit a complete research pack + patch set as Markdown.  
+- In all cases, deliver **full file bodies**, enforce security & validation, and avoid placeholders.

@@ -1,9 +1,3 @@
-/**
- * SRP Base
- * Created: 2025-02-14
- * Author: VSSVSSN
- */
-
 const { Server } = require('socket.io');
 
 module.exports = (httpServer) => {

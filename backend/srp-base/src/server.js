@@ -1,15 +1,8 @@
-/**
- * SRP Base HTTP Server
- * Created: 2025-02-14
- * Author: VSSVSSN
- */
-
 const express = require('express');
 const cors = require('cors');
 const http = require('http');
 const os = require('os');
 const { monitorEventLoopDelay } = require('perf_hooks');
-const { z } = require('zod');
 const requestId = require('./middleware/requestId');
 const rateLimit = require('./middleware/rateLimit');
 const hmacAuth = require('./middleware/hmacAuth');
@@ -50,48 +43,32 @@ function createHttpServer({ env = process.env } = {}) {
     res.json({ service: 'srp-base', version: pkg.version, compat: { baseline: 'srp-base' } });
   });
 
-  const envelopeSchema = z.object({
-    id: z.string(),
-    type: z.string(),
-    source: z.string(),
-    subject: z.string().optional(),
-    time: z.string().optional(),
-    specversion: z.string().optional(),
-    data: z.any()
-  });
-
   const rpc = express.Router();
   rpc.use(hmacAuth);
-  rpc.post('/', express.json(), (req, res, next) => {
-    const parse = envelopeSchema.safeParse(req.body);
-    if (!parse.success) return res.status(400).json({ error: 'invalid_envelope' });
-    const envlp = parse.data;
-    let result;
+  rpc.post('/', (req, res) => {
+    const envlp = req.body;
+    if (!envlp || typeof envlp !== 'object') return res.status(400).json({ error: 'invalid_envelope' });
     switch (envlp.type) {
       case 'srp.base.characters.create': {
         const { accountId, data } = envlp.data || {};
-        result = repository.createCharacter(accountId, data || {});
-        break;
+        const char = repository.createCharacter(accountId, data || {});
+        return res.json({ ok: true, result: char });
       }
       case 'srp.base.characters.list': {
         const { accountId } = envlp.data || {};
-        result = repository.listCharacters(accountId);
-        break;
+        return res.json({ ok: true, result: repository.listCharacters(accountId) });
       }
       case 'srp.base.characters.select': {
         const { accountId, characterId } = envlp.data || {};
-        result = repository.selectCharacter(accountId, characterId);
-        break;
+        return res.json({ ok: true, result: repository.selectCharacter(accountId, characterId) });
       }
       case 'srp.base.characters.delete': {
         const { accountId, characterId } = envlp.data || {};
-        result = repository.deleteCharacter(accountId, characterId);
-        break;
+        return res.json({ ok: true, result: repository.deleteCharacter(accountId, characterId) });
       }
       default:
         return res.status(501).json({ error: 'not_implemented' });
     }
-    return res.json({ ok: true, result });
   });
   app.use('/internal/srp/rpc', rpc);
 

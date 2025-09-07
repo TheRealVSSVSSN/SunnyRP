@@ -1,9 +1,3 @@
-/**
- * Lua Bridge Utility
- * Created: 2025-02-14
- * Author: VSSVSSN
- */
-
 const http = require('http');
 
 function callLua(path, { method = 'POST', body = {}, headers = {} } = {}) {

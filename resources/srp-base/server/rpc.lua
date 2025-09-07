@@ -2,13 +2,6 @@ SRP = SRP or {}
 SRP.Modules = SRP.Modules or {}
 SRP.RPC = {}
 
---[[
-    -- Type: Function
-    -- Name: SRP.RPC.handle
-    -- Use: Dispatch RPC envelopes
-    -- Created: 2025-02-14
-    -- By: VSSVSSN
---]]
 function SRP.RPC.handle(env)
   if not env or not env.type then
     return { ok = false, error = 'invalid_envelope' }

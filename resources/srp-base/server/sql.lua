@@ -10,13 +10,6 @@ AddEventHandler('onResourceStart', function(res)
   end
 end)
 
---[[
-    -- Type: Function
-    -- Name: SRP.SQL.fetchAll
-    -- Use: Run a SELECT query during failover
-    -- Created: 2025-02-14
-    -- By: VSSVSSN
---]]
 function SRP.SQL.fetchAll(query, params, cb)
   if SRP.SQL.db and SRP.Failover.active() then
     SRP.SQL.db:execute(query, params, function(result)
@@ -28,13 +21,6 @@ function SRP.SQL.fetchAll(query, params, cb)
   end
 end
 
---[[
-    -- Type: Function
-    -- Name: SRP.SQL.execute
-    -- Use: Run a mutation query during failover
-    -- Created: 2025-02-14
-    -- By: VSSVSSN
---]]
 function SRP.SQL.execute(query, params, cb)
   if SRP.SQL.db and SRP.Failover.active() then
     SRP.SQL.db:execute(query, params, function(result)
