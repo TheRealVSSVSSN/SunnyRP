@@ -2,7 +2,7 @@
 
 Node.js service providing base account and character management for SRP.
 
-Version: 1.0.1
+Version: 1.0.2
 
 ## Running
 

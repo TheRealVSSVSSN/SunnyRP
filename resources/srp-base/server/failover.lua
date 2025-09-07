@@ -4,10 +4,19 @@ SRP.Failover = {}
 local state = 'CLOSED'
 local failures = 0
 local queue = {}
+local backoff = 5000
+local nextTry = 0
 
 local function setState(s)
   state = s
-  if s == 'CLOSED' then failures = 0 end
+  if s == 'CLOSED' then
+    failures = 0
+    backoff = 5000
+    nextTry = 0
+  elseif s == 'OPEN' then
+    nextTry = GetGameTimer() + backoff
+    backoff = math.min(backoff * 2, 30000)
+  end
 end
 
 --[[
@@ -62,17 +71,21 @@ end
     -- By: VSSVSSN
 --]]
 local function checkNode()
+  local now = GetGameTimer()
+  if state == 'OPEN' and now < nextTry then return end
   local port = GetConvar('srp_node_port', '4000')
   local url = ('http://127.0.0.1:%s/v1/ready'):format(port)
   local res = SRP.Http.get(url)
   if res.status == 200 then
     failures = 0
     local overloaded = res.headers['x-srp-node-overloaded'] == 'true'
-    if overloaded and state == 'CLOSED' then
+    if overloaded then
       setState('OPEN')
-    elseif not overloaded and state ~= 'CLOSED' then
+    elseif state ~= 'CLOSED' then
       setState('HALF_OPEN')
     end
+  elseif res.status == 429 or res.status == 503 then
+    setState('OPEN')
   else
     failures = failures + 1
     if failures >= 3 then setState('OPEN') end
@@ -109,6 +122,7 @@ CreateThread(function()
     if state == 'HALF_OPEN' then
       flushQueue()
     end
-    Wait(5000)
+    local wait = state == 'OPEN' and math.max(1000, nextTry - GetGameTimer()) or 5000
+    Wait(wait)
   end
 end)
