@@ -34,6 +34,7 @@ ES Extended is a legacy roleplay framework for FiveM that manages players, inven
 - **NUI**
   - `html/ui.html`
   - `html/js/app.js`
+  - `html/js/mustache.min.js`
   - `html/js/wrapper.js`
   - `html/css/app.css`
   - `html/fonts/*`, `html/img/accounts/*`
@@ -141,11 +142,20 @@ Base HTML page including HUD container, inventory notifications, and JS/CSS asse
 ### html/js/app.js
 NUI logic handling HUD element insertion, updates, deletions, and inventory notifications based on messages posted from Lua. Listens for message events and dispatches actions.
 
+### html/js/mustache.min.js
+Minified Mustache templating library used for client-side rendering of HUD fragments. It does not expose custom interfaces within the resource.
+
 ### html/js/wrapper.js
 Provides `SendMessage(namespace, type, msg)` which chunks JSON payloads and posts them to the `__chunk` callback.
 
 ### html/css/app.css
 Styles for HUD text, fonts, inventory notifications, and menu elements.
+
+### html/fonts/*.ttf
+BankGothic and Pdown font files supplying typefaces for HUD elements.
+
+### html/img/accounts/*.png
+Icon images representing bank, cash, and black money accounts used in HUD notifications.
 
 ## Control Flow Overview
 1. **Player join** – Client notifies the server (`esx:onPlayerJoined`); server loads or creates the player then emits `esx:playerLoaded`, leading the client to spawn, restore loadout, and set up HUD.
@@ -187,6 +197,7 @@ Styles for HUD text, fonts, inventory notifications, and menu elements.
 | esx:addWeaponComponent / esx:removeWeaponComponent | server→client | Modify weapon components. |
 | esx:setWeaponAmmo | server→client | Set ammo count. |
 | esx:setWeaponTint | server→client | Apply weapon tint. |
+| esx:loadingScreenOff | client (local) | Close client loading screen after spawn. |
 | esx:teleport | server→client | Move the player to specific coordinates. |
 | esx:setJob | server→client | Update job and HUD label. |
 | esx:spawnVehicle / esx:deleteVehicle | server→client | Spawn or remove vehicles for a player. |
@@ -203,6 +214,8 @@ Styles for HUD text, fonts, inventory notifications, and menu elements.
 | esx:onPickup | client→server | Notify server that a pickup was collected. |
 | esx:serverCallback / esx:triggerServerCallback | bidirectional | RPC request/response mechanism. |
 | esx:clientLog | client→server | Forward debug trace messages when `Config.EnableDebug` is true. |
+| esx:playerDropped | server | Notify other resources that a player disconnected. |
+| esx:onAddInventoryItem / esx:onRemoveInventoryItem | server (local) | Hooks for other resources when inventory changes. |
 | esx:tpm | client | Teleport to map marker (admin). |
 | esx:noclip | client | Toggle noclip movement (admin). |
 | esx:killPlayer | client | Force player death (admin). |
@@ -268,5 +281,6 @@ Styles for HUD text, fonts, inventory notifications, and menu elements.
 - NUI wrapper emits `<resource>:message:<type>` events but no listeners are included; presumed to be consumed by other scripts (Inferred Medium).
 - Inventory hooks (`esx:onAddInventoryItem` / `esx:onRemoveInventoryItem`) are defined without local handlers, suggesting external resources listen for them (Inferred High).
 - `esx:loadingScreenOff` is triggered client-side to close a loading screen, but no server counterpart is present (Inferred Low).
+- Server emits `esx:playerDropped` with no local listener, implying cleanup is handled by external resources (Inferred Medium).
 
 TODO: Additional external resources are required for society accounts, skinchanger, and inventory UI beyond the minimal default.
