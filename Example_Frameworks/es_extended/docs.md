@@ -80,7 +80,7 @@ Orchestrates player loading/saving and network events.
 - Tracks players joining/leaving (`esx:onPlayerJoined`, `playerConnecting`, `playerDropped`) and triggers `esx:onPlayerLogout` on disconnect.
 - Handles coordinate and ammo updates from clients (`esx:updateCoords`, `esx:updateWeaponAmmo`) and inventory transfers (`esx:giveInventoryItem`, `esx:removeInventoryItem`, `esx:onPickup`).
 - Exposes callbacks `esx:getPlayerData`, `esx:getOtherPlayerData`, and `esx:getPlayerNames` for external resources.
-- Saves all players before a txAdmin scheduled restart.
+- Saves all players before a txAdmin scheduled restart via `txAdmin:events:scheduledRestart`.
 
 ### server/functions.lua
 Core server utilities and persistence helpers.
@@ -220,6 +220,21 @@ Icon images representing bank, cash, and black money accounts used in HUD notifi
 | esx:noclip | client | Toggle noclip movement (admin). |
 | esx:killPlayer | client | Force player death (admin). |
 | esx:freezePlayer | client | Freeze or unfreeze entity (admin). |
+| chat:addSuggestion | both | Manage chat command hints. |
+| chat:removeSuggestion | server→client | Remove chat command hint. |
+| chat:clear | server→client | Wipe chat history for recipients. |
+| chat:addMessage | both | Display chat messages to players. |
+| chatMessage | server | Intercept chat text before dispatching. |
+| playerConnecting | server | Pre-connection hook to validate identifiers. |
+| playerDropped | server | Native event fired when a player disconnects. |
+| playerSpawned | client (local) | Compatibility event after spawn. |
+| skinchanger:loadDefaultModel / skinchanger:loadSkin | client | Apply default or saved skin models (Inferred Medium). |
+| skinchanger:modelLoaded | client | Signal that skinchanger finished applying model. |
+| esx_society:getSociety | server (local) | Retrieve society data during paycheck processing. |
+| esx_addonaccount:getSharedAccount | server (local) | Fetch society account balance for payouts. |
+| esx_ambulancejob:revive | server→client | Revive players through ambulance job integration. |
+| txAdmin:events:scheduledRestart | server | Emitted by txAdmin before restart so players are saved. |
+| <resource>:message:<type> | client | Forward chunked NUI messages to Lua handlers (Inferred Medium). |
 
 ### ESX Callbacks
 | Name | Description |
@@ -282,5 +297,6 @@ Icon images representing bank, cash, and black money accounts used in HUD notifi
 - Inventory hooks (`esx:onAddInventoryItem` / `esx:onRemoveInventoryItem`) are defined without local handlers, suggesting external resources listen for them (Inferred High).
 - `esx:loadingScreenOff` is triggered client-side to close a loading screen, but no server counterpart is present (Inferred Low).
 - Server emits `esx:playerDropped` with no local listener, implying cleanup is handled by external resources (Inferred Medium).
+- Chat helpers (`chat:addSuggestion`, `chat:removeSuggestion`, `chat:clear`, `chat:addMessage`) rely on the default chat resource (Inferred Low).
 
 TODO: Additional external resources are required for society accounts, skinchanger, and inventory UI beyond the minimal default.
