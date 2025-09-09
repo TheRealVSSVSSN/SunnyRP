@@ -1,157 +1,211 @@
 # ND_Core Documentation
 
 ## Overview
-ND_Core provides the core gameplay framework for SunnyRP. It handles player session management, character data, vehicle ownership and keys, integration with Discord and ox_lib, and optional compatibility layers for ESX/QB and legacy ND interfaces. Configuration relies on server convars and MySQL tables `nd_characters` and `nd_vehicles`.
+ND_Core is the primary gameplay framework for SunnyRP. It manages player and vehicle state, permissions, and cross-resource integration. Runtime configuration is driven by server convars and data persisted in the MySQL tables `nd_characters` and `nd_vehicles`.
 
-## File Inventory
-- [fxmanifest.lua](#fxmanifestlua)
-- [init.lua](#initlua)
-- [shared/functions.lua](#sharedfunctions)
-- [client/main.lua](#clientmainlua)
-- [client/events.lua](#clienteventslua)
-- [client/functions.lua](#clientfunctionslua)
-- [client/peds.lua](#clientpedslua)
-- [client/death.lua](#clientdeathlua)
-- [client/vehicle/main.lua](#clientvehiclemainlua)
-- [client/vehicle/garages.lua](#clientvehiclegarageslua)
-- [client/vehicle/data.lua](#clientvehicledata)
-- [server/main.lua](#servermainlua)
-- [server/player.lua](#serverplayerlua)
-- [server/vehicle.lua](#servervehiclelua)
-- [server/functions.lua](#serverfunctionslua)
-- [server/commands.lua](#servercommandslua)
-- [compatibility/esx](#compatibilityesx)
-- [compatibility/qb](#compatibilityqb)
-- [compatibility/backwards](#compatibilitybackwards)
-- [database/sql](#databasesql)
-- [locales](#locales)
+## Table of Contents
+- [Client Files](#client-files)
+  - [client/main.lua](#clientmainlua)
+  - [client/events.lua](#clienteventslua)
+  - [client/functions.lua](#clientfunctionslua)
+  - [client/peds.lua](#clientpedslua)
+  - [client/death.lua](#clientdeathlua)
+  - [client/vehicle/main.lua](#clientvehiclemainlua)
+  - [client/vehicle/garages.lua](#clientvehiclegarageslua)
+  - [client/vehicle/data.lua](#clientvehicledata)
+- [Server Files](#server-files)
+  - [server/main.lua](#servermainlua)
+  - [server/player.lua](#serverplayerlua)
+  - [server/vehicle.lua](#servervehiclelua)
+  - [server/functions.lua](#serverfunctionslua)
+  - [server/commands.lua](#servercommandslua)
+- [Shared Files](#shared-files)
+  - [shared/functions.lua](#sharedfunctionslua)
+  - [init.lua](#initlua)
+- [Compatibility Files](#compatibility-files)
+  - [compatibility/backwards/client.lua](#compatibilitybackwardsclientlua)
+  - [compatibility/backwards/server.lua](#compatibilitybackwardsserverlua)
+  - [compatibility/esx/client.lua](#compatibilityesxclientlua)
+  - [compatibility/esx/server.lua](#compatibilityesxserverlua)
+  - [compatibility/esx/locale.lua](#compatibilityesxlocalelua)
+  - [compatibility/qb/client.lua](#compatibilityqbclientlua)
+  - [compatibility/qb/server.lua](#compatibilityqbserverlua)
+- [Database](#database)
+  - [database/characters.sql](#databasecharacterssql)
+  - [database/vehicles.sql](#databasevehiclessql)
+- [Locales](#locales)
+- [Other Files](#other-files)
+  - [fxmanifest.lua](#fxmanifestlua)
+  - [README.md](#readmemd)
+  - [LICENSE](#license)
+  - [.github/ISSUE_TEMPLATE/bug_report.md](#githubissuetemplatebug_reportmd)
+  - [.github/ISSUE_TEMPLATE/feature_request.md](#githubissuetemplatefeature_requestmd)
+  - [agents.md](#agentsmd)
 
-## fxmanifest.lua
-Declares resource metadata, dependencies (`ox_lib`, `oxmysql`), shared scripts, and lists client/server files. It exposes convars and disables legacy provides.
+## Client Files
+### client/main.lua
+Initialises client configuration from replicated convars, sets Discord rich presence, and updates the pause menu with player information. It enables friendly fire after spawn and on resource start to ease testing.
 
-## init.lua
-Creates a global `NDCore` object that proxies exports from this resource for convenient access.
+### client/events.lua
+Registers client-side listeners for money, character state and clothing changes. Events update cached player data, revive the player, open the clothing menu and record last location (origin unresolved).
 
-## shared/functions.lua
-Utility for detecting resource start/stop. `NDCore.isResourceStarted(name, cb)` checks current state and optionally tracks callbacks for state changes【F:Example_Frameworks/ND_Core-main/shared/functions.lua†L20-L29】.
+### client/functions.lua
+Exposes helper functions `getPlayer`, `getCharacters`, `getPlayersFromCoords`, `getConfig`, and `notify`, exporting each for other resources to call【F:client/functions.lua†L1-L44】.
 
-## client/main.lua
-Initialises client configuration from replicated convars, sets Discord rich presence, and augments pause menu information. On spawn or resource start it enables friendly fire for testing.【F:Example_Frameworks/ND_Core-main/client/main.lua†L4-L72】
+### client/peds.lua
+Spawns interactive NPCs with optional blips and ox_target options. Provides `NDCore.createAiPed`/`NDCore.removeAiPed`, updates blips when character groups change and offers command `getclothing` that copies current ped attire to the clipboard【F:client/peds.lua†L208-L243】.
 
-## client/events.lua
-Handles network updates:
-- `ND:updateMoney` updates cached cash/bank values.【F:Example_Frameworks/ND_Core-main/client/events.lua†L1-L6】
-- `ND:characterLoaded`, `ND:updateCharacter` track the active character.【F:Example_Frameworks/ND_Core-main/client/events.lua†L8-L16】
-- `ND:updateLastLocation` stores last position; no server source found (Inference Low).【F:Example_Frameworks/ND_Core-main/client/events.lua†L18-L22】
-- `ND:revivePlayer` resurrects the player and restores state.【F:Example_Frameworks/ND_Core-main/client/events.lua†L24-L54】
-- `ND:characterUnloaded` signals character removal.
-- `ND:clothingMenu` opens the `fivem-appearance` UI and sends chosen outfit to the server.【F:Example_Frameworks/ND_Core-main/client/events.lua†L56-L74】
+### client/death.lua
+Monitors `gameEventTriggered` to detect player deaths. Compiles kill information and sends `ND:playerEliminated` to both client and server, optionally integrating ND_Ambulance for body damage data.
 
-## client/functions.lua
-Exposes helper functions `getPlayer`, `getCharacters`, `getPlayersFromCoords`, `getConfig`, and `notify`, exporting each via `exports(name, func)` for other resources.【F:Example_Frameworks/ND_Core-main/client/functions.lua†L1-L44】
+### client/vehicle/main.lua
+Handles vehicle ownership, locking, alarms and key fob effects. Registers callbacks for vehicle properties and model labels【F:client/vehicle/main.lua†L376-L386】, listens for blip and alarm sync events, and exports inventory handlers `lockpick`, `hotwire` and `keyControl`【F:client/vehicle/main.lua†L630-L680】. Keybinds provide locking, cruise control and seat shuffling.
 
-## client/peds.lua
-Creates interactive NPCs with optional blips, clothing and ox_target options. Provides `NDCore.createAiPed` and `NDCore.removeAiPed`. Updates blips when character groups change and removes peds on resource stop. Command `getclothing` copies current ped outfit to clipboard.【F:Example_Frameworks/ND_Core-main/client/peds.lua†L208-L243】
+### client/vehicle/garages.lua
+Uses location data to create garage attendants via `NDCore.createAiPed`. Menu selections trigger `ND_Vehicles:storeVehicle` and `ND_Vehicles:takeVehicle` on the server and fetch owned vehicles through a callback.
 
-## client/death.lua
-Detects player death via `gameEventTriggered`, gathers killer and body damage data, then fires `ND:playerEliminated` to both client and server. Integrates with `ND_Ambulance` if present and disables spawnmanager auto-spawn after first spawn.
+### client/vehicle/data.lua
+Defines garage and impound locations with ped positions and vehicle spawn points consumed by `garages.lua`.
 
-## client/vehicle/main.lua
-Large module covering vehicle ownership mechanics, key fob effects, property synchronisation and keybinds. Registers events:
-- `ND_Vehicles:blip` adds or removes a blip for personal vehicles.【F:Example_Frameworks/ND_Core-main/client/vehicle/main.lua†L252-L268】
-- `ND_Vehicles:syncAlarm` triggers alarm sound/flash.【F:Example_Frameworks/ND_Core-main/client/vehicle/main.lua†L271-L278】
-- `ND_VehicleSystem:setOwnedIfNot` marks vehicles as owned and locked.【F:Example_Frameworks/ND_Core-main/client/vehicle/main.lua†L279-L283】
-- `ND_Vehicles:keyFob` plays remote lock animation.【F:Example_Frameworks/ND_Core-main/client/vehicle/main.lua†L332-L335】
-Exports inventory item handlers `lockpick`, `hotwire`, and `keyControl` for ox_inventory integration.【F:Example_Frameworks/ND_Core-main/client/vehicle/main.lua†L630-L680】
-Adds keybinds for cruise control and seat shuffle, and maintains vehicle property synchronisation through state bags.
+## Server Files
+### server/main.lua
+Loads server configuration from convars, tracks player identifiers and Discord details, and prepares MySQL schema on startup. Handles `playerJoining`, `playerConnecting`, `playerDropped`, and resource start/stop. Network events flag player elimination and update clothing metadata.
 
-## client/vehicle/garages.lua
-Uses location data to spawn garage attendants via `NDCore.createAiPed`. Menu options allow parking and retrieving vehicles; selections call `ND_Vehicles:takeVehicle` on the server.【F:Example_Frameworks/ND_Core-main/client/vehicle/garages.lua†L120-L170】
+### server/player.lua
+Implements the core character object with money management, metadata storage, job/group assignment and Discord info. Money operations trigger client updates and emit `ND:moneyChange`. The `revive` method sends `ND:revivePlayer` to the client and clears death metadata; loading/unloading characters emits corresponding events and `ND:groupRemoved` when groups are removed【F:server/player.lua†L34-L59】【F:server/player.lua†L292-L298】【F:server/player.lua†L396-L398】.
 
-## client/vehicle/data.lua
-Defines garage and impound locations with ped coords and spawn points; consumed by `garages.lua`.
+### server/vehicle.lua
+Manages vehicle records, key sharing and spawn/despawn logic. Exports an inventory handler `keys` for ox_inventory【F:server/vehicle.lua†L580-L595】, registers callbacks for owned vehicle lists【F:server/vehicle.lua†L788-L792】 and processes events for locking, alarm sync, hotwiring and garage interactions. Commands `getkeys` and `givekeys` allow key generation and transfer【F:server/vehicle.lua†L598-L635】.
 
-## server/main.lua
-Initialises server configuration from convars, tracks player identifiers and Discord info, and auto-selects a character on first join. Loads database schema on MySQL ready. Responds to:
-- `ND:playerEliminated` to flag characters as dead.【F:Example_Frameworks/ND_Core-main/server/main.lua†L175-L183】
-- `ND:updateClothing` to persist outfit metadata.【F:Example_Frameworks/ND_Core-main/server/main.lua†L185-L190】
+### server/functions.lua
+General utilities for identifier lookup, player retrieval, configuration access, SQL file execution and Discord role queries. Every function in `NDCore` is exported for external resources【F:server/functions.lua†L1-L114】.
 
-## server/player.lua
-Core character abstraction providing money management, metadata storage, job/group assignment, and persistence to MySQL. Money operations trigger `ND:updateMoney` on the client and emit `ND:moneyChange` server events.【F:Example_Frameworks/ND_Core-main/server/player.lua†L34-L59】The `revive` method fires `ND:revivePlayer` to the client and clears death metadata.【F:Example_Frameworks/ND_Core-main/server/player.lua†L272-L279】Character loading/unloading fires `ND:characterUnloaded` and `ND:characterLoaded` events.
+### server/commands.lua
+Defines administrative commands via `lib.addCommand` for money, jobs, groups, clothing, character selection, teleportation, freezing and vehicle management. Command security relies on `group.admin` restrictions【F:server/commands.lua†L17-L443】. Events `ND:clothingMenu` and `ND:characterMenu` are sent to targets, but no handlers exist in this resource for the latter【F:server/commands.lua†L170-L191】.
 
-## server/vehicle.lua
-Manages vehicle database records, key sharing, and spawn/despawn logic. Provides export `keys` to handle ox_inventory key items.【F:Example_Frameworks/ND_Core-main/server/vehicle.lua†L580-L595】Commands `getkeys` and `givekeys` create or transfer keys.【F:Example_Frameworks/ND_Core-main/server/vehicle.lua†L597-L635】Network events cover locking, alarms, hotwiring and storage retrieval.【F:Example_Frameworks/ND_Core-main/server/vehicle.lua†L638-L766】Database helpers expose `NDCore.getVehicleById`, `NDCore.spawnOwnedVehicle`, and callbacks for owned vehicle lists.
+## Shared Files
+### shared/functions.lua
+Provides `NDCore.isResourceStarted`, allowing scripts to detect start/stop of other resources and register callbacks.【F:shared/functions.lua†L12-L29】
 
-## server/functions.lua
-Utility exports including `getPlayerIdentifierByType`, `getPlayers` filters, `loadSQL` file executor, Discord role lookup, and `enableMultiCharacter`. All NDCore functions are exported for other resources.【F:Example_Frameworks/ND_Core-main/server/functions.lua†L1-L114】
+### init.lua
+Returns a proxy `NDCore` object that invokes exported server functions for external resources.【F:init.lua†L1-L12】
 
-## server/commands.lua
-Administrative commands registered via `lib.addCommand`:
-- `setmoney`, `setjob`, `setgroup`, `skin`, `character`, `pay`, `unlock`, `revive`, `dv`, `goto`, `bring`, `freeze`, `unfreeze`, `vehicle`, `claim-veh`. Each is restricted to `group.admin` and uses NDCore.player helpers to apply effects.【F:Example_Frameworks/ND_Core-main/server/commands.lua†L17-L443】
+## Compatibility Files
+### compatibility/backwards/client.lua
+Enables legacy ND_Functions APIs and exports `GetCoreObject`. Listens for `ND:returnCharacters` and `ND:setCharacter` to maintain backwards compatibility【F:compatibility/backwards/client.lua†L8-L17】.
 
-## compatibility/esx
-If `Config.compatibility` includes `"esx"`, provides an ESX-like API. Exports `es_extended`'s `getSharedObject`, wraps player data in ESX format, defines `NDCore.RegisterServerCallback`/`NDCore.GetPlayerData`, and maps numerous ESX utility stubs.【F:Example_Frameworks/ND_Core-main/compatibility/esx/client.lua†L27-L35】【F:Example_Frameworks/ND_Core-main/compatibility/esx/server.lua†L213-L214】
+### compatibility/backwards/server.lua
+Provides legacy exports and events (`ND:GetCharacters`, `ND:newCharacter`, `ND:editCharacter`, `ND:deleteCharacter`, `ND:setCharacterOnline`, `ND:updateClothes`) for older resources【F:compatibility/backwards/server.lua†L224-L276】. Also fires `ND:jobChanged` when jobs are updated【F:compatibility/backwards/server.lua†L191-L192】.
 
-## compatibility/qb
-Placeholder files that early-return unless `"qb"` is enabled; no functions defined.
+### compatibility/esx/client.lua
+Implements an ESX-like client API, wrapping functions such as `GetPlayerData`, `Progressbar`, inventory checks and ESX streaming helpers. Updates ESX-style player data when characters load or change.
 
-## compatibility/backwards
-Provides legacy ND_Functions API and events for older resources, including character management events (`ND:GetCharacters`, `ND:newCharacter`, etc.) and compatibility exports `GetCoreObject`.【F:Example_Frameworks/ND_Core-main/compatibility/backwards/server.lua†L228-L276】
+### compatibility/esx/server.lua
+Adds ESX compatibility by mapping player methods, registering commands and exposing `NDCore.RegisterServerCallback` for ESX callbacks【F:compatibility/esx/server.lua†L213】. It also triggers `esx:playerLoaded`/`esx:playerDropped` events for other ESX resources【F:compatibility/esx/server.lua†L368-L372】.
 
-## database/sql
-- `characters.sql` defines `nd_characters` table storing personal data, groups, metadata and inventory.【F:Example_Frameworks/ND_Core-main/database/characters.sql†L1-L15】
-- `vehicles.sql` defines `nd_vehicles` table with ownership, storage, impound and metadata fields linked to characters.【F:Example_Frameworks/ND_Core-main/database/vehicles.sql†L1-L12】
+### compatibility/esx/locale.lua
+Provides translation helpers mirroring ESX's locale system.
 
-## locales
-JSON locale files supply translations used by `lib.locale()`. They can be extended or replaced per language (ar, da, de, en, es, fi, fr, it, nl, no, ru, sv).
+### compatibility/qb/client.lua & compatibility/qb/server.lua
+Placeholders that only activate if the `qb` compatibility flag is set; no functions are defined otherwise.
 
-## Cross‑Indexes
+## Database
+### database/characters.sql
+Schema for `nd_characters` storing personal data, groups, metadata and inventory【F:database/characters.sql†L1-L15】.
+
+### database/vehicles.sql
+Schema for `nd_vehicles` linking owned vehicles to characters with storage, impound and metadata fields【F:database/vehicles.sql†L1-L14】.
+
+## Locales
+JSON locale files (ar, da, de, en, es, fi, fr, it, nl, no, ru, sv) supply translations consumed via `lib.locale()`.
+
+## Other Files
+### fxmanifest.lua
+Declares resource metadata, dependencies (`ox_lib`, `oxmysql`), scripts for client/server/shared sides and configuration files【F:fxmanifest.lua†L1-L39】.
+
+### README.md
+Summarises dependencies and related add-on resources and links to external documentation.
+
+### LICENSE
+Distributed under the GNU GPLv3 license.
+
+### .github/ISSUE_TEMPLATE/bug_report.md
+GitHub issue template prompting for bug details and reproduction steps.
+
+### .github/ISSUE_TEMPLATE/feature_request.md
+Template for suggesting enhancements.
+
+### agents.md
+Contributor instructions describing documentation expectations for this resource.
+
+## Cross-Indexes
 ### Events
 | Name | Direction | Payload | Location |
 |------|-----------|---------|----------|
 | `ND:updateMoney` | Server→Client | `cash`, `bank` numbers | client/events.lua; server/player.lua |
-| `ND:characterLoaded` | Server→Client | character object | client/events.lua |
-| `ND:updateCharacter` | Server→Client | updated character or field | client/events.lua; server/player.lua |
-| `ND:updateLastLocation` | Server→Client? | coords vector | client/events.lua (no server source) |
+| `ND:characterLoaded` | Server→Client | character object | client/events.lua; server/player.lua |
+| `ND:updateCharacter` | Server→Client | character or field name | client/events.lua; server/player.lua |
+| `ND:updateLastLocation` | Server→Client? | position vector | client/events.lua (no server source) |
 | `ND:revivePlayer` | Server→Client | none | client/events.lua; server/player.lua |
 | `ND:characterUnloaded` | Server→Client | none | client/events.lua; server/player.lua |
 | `ND:clothingMenu` | Server→Client | none | client/events.lua; server/commands.lua |
+| `ND:characterMenu` | Server→Client | none (no handler) | server/commands.lua |
 | `ND:playerEliminated` | Client→Server | death info table | client/death.lua; server/main.lua |
+| `ND:updateClothing` | Client→Server | appearance table | client/events.lua; server/main.lua |
+| `ND:returnCharacters` | Server→Client | character list | compatibility/backwards/server.lua; compatibility/backwards/client.lua |
+| `ND:setCharacter` | Server→Client | character object (no source) | compatibility/backwards/client.lua |
+| `ND:GetCharacters` | Client→Server | none | compatibility/backwards/server.lua |
+| `ND:newCharacter` | Client→Server | character data | compatibility/backwards/server.lua |
+| `ND:editCharacter` | Client→Server | updated character data | compatibility/backwards/server.lua |
+| `ND:deleteCharacter` | Client→Server | character id | compatibility/backwards/server.lua |
+| `ND:setCharacterOnline` | Client→Server | character id | compatibility/backwards/server.lua |
+| `ND:updateClothes` | Client→Server | clothing table | compatibility/backwards/server.lua |
+| `ND:jobChanged` | Server→Client | new & old job info | compatibility/backwards/server.lua |
+| `ND:moneyChange` | Server Event | src, account, amount, action | server/player.lua |
+| `ND:groupRemoved` | Server Event | character, group | server/player.lua |
 | `ND_Vehicles:blip` | Server↔Client | vehicle netId & status | client/vehicle/main.lua; server/vehicle.lua |
 | `ND_Vehicles:syncAlarm` | Server↔Client | vehicle netId | client/vehicle/main.lua; server/vehicle.lua |
 | `ND_VehicleSystem:setOwnedIfNot` | Server→Client | vehicle netId | client/vehicle/main.lua |
 | `ND_Vehicles:keyFob` | Server→Client | vehicle netId | client/vehicle/main.lua |
-| `ND_Vehicles:toggleVehicleLock` | Client→Server | vehicle netId | client/vehicle/main.lua; server/vehicle.lua |
+| `ND_Vehicles:toggleVehicleLock` | Client→Server | netId | client/vehicle/main.lua; server/vehicle.lua |
 | `ND_Vehicles:disableKey` | Client→Server | inventory slot | client/vehicle/main.lua; server/vehicle.lua |
 | `ND_Vehicles:lockpick` | Client→Server | netId, success flag | client/vehicle/main.lua; server/vehicle.lua |
 | `ND_Vehicles:hotwire` | Client→Server | netId | client/vehicle/main.lua; server/vehicle.lua |
 | `ND_Vehicles:storeVehicle` | Client→Server | netId | client/vehicle/garages.lua; server/vehicle.lua |
-| `ND_Vehicles:takeVehicle` | Client→Server | vehicle id, spawn list | client/vehicle/garages.lua; server/vehicle.lua |
-| `ND:GetCharacters` etc. | Client↔Server | character data | compatibility/backwards |
+| `ND_Vehicles:takeVehicle` | Client→Server | vehicle id, spawn options | client/vehicle/garages.lua; server/vehicle.lua |
 
 ### ESX Callbacks
-Compatibility layer exposes `NDCore.RegisterServerCallback`/`lib.callback.register` and `NDCore.Progressbar`, `NDCore.SearchInventory`, among others, enabling ESX-style interactions.【F:Example_Frameworks/ND_Core-main/compatibility/esx/server.lua†L213-L214】【F:Example_Frameworks/ND_Core-main/compatibility/esx/client.lua†L37-L74】
+| Name | Side | Parameters | Location |
+|------|------|------------|----------|
+| `ND_Vehicles:getProps` | Client | `netId` | client/vehicle/main.lua |
+| `ND_Vehicles:getPropsFromCurrentVeh` | Client | none | client/vehicle/main.lua |
+| `ND_Vehicles:getVehicleModelMakeLabel` | Client | `model` hash | client/vehicle/main.lua |
+| `ND_Vehicles:getOwnedVehicles` | Server | `src` | server/vehicle.lua |
 
 ### Exports
-| Name | Side | Purpose |
-|------|------|---------|
-| NDCore functions (various) | Client & Server | General framework API (player data, config, utilities)【F:Example_Frameworks/ND_Core-main/client/functions.lua†L40-L44】【F:Example_Frameworks/ND_Core-main/server/functions.lua†L108-L114】 |
-| `keys` | Server | ox_inventory handler for vehicle key items【F:Example_Frameworks/ND_Core-main/server/vehicle.lua†L580-L595】 |
-| `lockpick`, `hotwire`, `keyControl` | Client | Inventory callbacks for vehicle actions【F:Example_Frameworks/ND_Core-main/client/vehicle/main.lua†L630-L680】 |
-| `GetCoreObject` | Compatibility | Legacy access to NDCore object【F:Example_Frameworks/ND_Core-main/compatibility/backwards/server.lua†L1-L8】 |
+| Name | Side | Purpose | Location |
+|------|------|---------|----------|
+| `getPlayer`, `getCharacters`, `getPlayersFromCoords`, `getConfig`, `notify` | Client | Framework utilities | client/functions.lua |
+| `lockpick`, `hotwire`, `keyControl` | Client | ox_inventory item handlers | client/vehicle/main.lua |
+| `keys` | Server | ox_inventory vehicle key handler | server/vehicle.lua |
+| `GetCoreObject` | Client & Server | Legacy NDCore access | compatibility/backwards/client.lua; compatibility/backwards/server.lua |
+| NDCore functions (various) | Client & Server | General framework API | client/functions.lua; server/functions.lua |
 
 ### Commands
-| Command | Side | Description |
-|---------|------|-------------|
-| `getclothing` | Client | Copies current ped clothing data【F:Example_Frameworks/ND_Core-main/client/peds.lua†L234-L243】 |
-| `getkeys`, `givekeys` | Server | Generate or share vehicle keys【F:Example_Frameworks/ND_Core-main/server/vehicle.lua†L597-L635】 |
-| Admin commands (`setmoney`, `setjob`, `setgroup`, `skin`, `character`, `pay`, `unlock`, `revive`, `dv`, `goto`, `bring`, `freeze`, `unfreeze`, `vehicle`, `claim-veh`) | Server | Staff utilities for economy, teleportation and vehicle management【F:Example_Frameworks/ND_Core-main/server/commands.lua†L17-L443】 |
+| Command | Side | Description | Location |
+|---------|------|-------------|----------|
+| `getclothing` | Client | Copies current ped clothing to clipboard | client/peds.lua |
+| `getkeys` | Server | Create key item for current vehicle | server/vehicle.lua |
+| `givekeys` | Server | Share vehicle keys with another player | server/vehicle.lua |
+| Admin commands (`setmoney`, `setjob`, `setgroup`, `skin`, `character`, `pay`, `unlock`, `revive`, `dv`, `goto`, `bring`, `freeze`, `unfreeze`, `vehicle`, `claim-veh`) | Server | Staff utilities for economy, teleportation and vehicle management | server/commands.lua |
 
 ## Configuration & Integration
-- Convars (`core:*`) define server name, Discord settings, vehicle key behaviour, group definitions, plate patterns and compatibility flags on both client and server.【F:Example_Frameworks/ND_Core-main/client/main.lua†L4-L20】【F:Example_Frameworks/ND_Core-main/server/main.lua†L8-L32】
-- Requires `ox_lib` and `oxmysql` and optionally integrates with `ox_inventory`, `ox_target`, `fivem-appearance`, and `ND_Ambulance`.
+- Convars prefixed `core:` control server name, Discord settings, key usage, groups, compatibility flags and plate patterns on both client and server.
+- Depends on `ox_lib` and `oxmysql`; optionally integrates with `ox_inventory`, `ox_target`, `fivem-appearance`, and `ND_Ambulance`.
+- Discord integration can enforce guild membership and populate rich presence.
 
 ## Gaps & Inferences
-- `ND:updateLastLocation` is defined client-side but no origin found; presumed server broadcast when character position updates (Inference Low).【F:Example_Frameworks/ND_Core-main/client/events.lua†L18-L22】
+- `ND:updateLastLocation` is registered client-side but no server source found; presumed broadcast when character position updates (Inference Low)【F:client/events.lua†L18-L22】.
+- `ND:characterMenu` is triggered by admin command but lacks a handler in this resource (Inference Low)【F:server/commands.lua†L170-L191】.
 
 DOCS COMPLETE
