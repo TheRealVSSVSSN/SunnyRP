@@ -285,6 +285,15 @@ Shared utilities used by both client and server.
 | request | client/gui.lua | Receives accept/decline for server requests. |
 | init | client/gui.lua | Signals NUI ready state. |
 
+### ESX Callbacks
+None present; the framework uses its own module system.
+
+### Exports
+No FiveM exports are defined. Remote interactions rely on the Proxy/Tunnel RPC layer.
+
+### Commands
+No `RegisterCommand` usage was found. User actions are triggered through menus and events.
+
 ### DB Usage
 `vRP.lua` defines a pluggable database driver system with `prepare` and `query` helpers. Modules use `vRP:execute` and related functions to persist data through whichever driver is configured.
 
