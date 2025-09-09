@@ -118,6 +118,14 @@ Font file referenced by `ui.html` for the money display.
 | es:getPlayers | server → server | callback | Returns user map |
 | es:setPlayerData / es:setPlayerDataId | server → server | id, key, value, cb | Updates DB fields |
 | es:getPlayerFromId / es:getPlayerFromIdentifier / es:getAllPlayers | server → server | identifiers, cb | Fetches user records |
+| es:playerLoaded | server → server | source, user | Announces account data ready |
+| es:newPlayerLoaded | server → server | source, user | Fires for first-time users |
+| es:adminCommandRan | server → server | source, command | Hook for admin command logging |
+| es:userCommandRan | server → server | source, command | Hook for non-admin command logging |
+| es:commandRan | server → server | source, command | Fired after any command executes |
+| es:adminCommandFailed | server → server | source, command | Fired when permissions are insufficient |
+| es:invalidCommandHandler | server → server | source, command | Triggered on unknown command |
+| es:chatMessage | server → server | source, message, user | Forwarded non-command chat |
 | es:setPlayerDecorator | server → client | key, value, doNow | Applies ped decorators |
 | playerSpawned | CFX → client | — | Reapplies decorators |
 | es:activateMoney | server → client | amount | Sets cash display |
