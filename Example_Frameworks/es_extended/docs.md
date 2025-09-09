@@ -52,7 +52,7 @@ Creates the ESX client object and utility methods.
 - Manages HUD elements through `SendNUIMessage` actions such as `setHUDDisplay`, `insertHUDElement`, and `inventoryNotification`.
 - Provides notification helpers and a generic `ESX.TriggerServerCallback` RPC using `esx:triggerServerCallback`/`esx:serverCallback` events.
 - `ESX.SetPlayerData` broadcasts changes through `esx:setPlayerData` so imports.lua can mirror PlayerData.
-- Registers network events to update inventory, weapons, accounts, job, and to display notifications from the server.
+- Registers network events to update inventory, weapons, accounts, job, and to display `esx:showNotification`, `esx:showAdvancedNotification`, and `esx:showHelpNotification` messages from the server.
 
 ### client/common.lua
 Registers `esx:getSharedObject` so other client resources can retrieve the ESX object.
@@ -89,7 +89,7 @@ Core server utilities and persistence helpers.
 - Provides player lookup helpers (`GetExtendedPlayers`, `GetPlayerFromId`, etc.) and inventory/weapon handlers.
 
 ### server/common.lua
-Initializes ESX tables and loads DB data on startup using `MySQL.Async.fetchAll` for items, jobs, and grades. Exposes `esx:getSharedObject` and routes RPC requests from `esx:triggerServerCallback`.
+Initializes ESX tables and loads DB data on startup using `MySQL.Async.fetchAll` for items, jobs, and grades. Exposes `esx:getSharedObject`, logs client traces via `esx:clientLog`, and routes RPC requests from `esx:triggerServerCallback`.
 
 ### server/commands.lua
 Declares admin and user commands using `ESX.RegisterCommand`. Commands cover teleportation (`setcoords`, `tpm`, `goto`, `bring`), job/permission management (`setjob`, `setgroup`), economy tools (`setaccountmoney`, `giveaccountmoney`, `giveitem`, `giveweapon`), chat utilities (`clear`, `clearall`), player control (`kill`, `freeze`, `noclip`), and persistence (`save`, `saveall`).
@@ -193,12 +193,16 @@ Styles for HUD text, fonts, inventory notifications, and menu elements.
 | esx:createPickup / esx:removePickup | both | Manage world pickup objects. |
 | esx:createMissingPickups | server→client | Re‑create pickups after reconnect. |
 | esx:registerSuggestions | server→client | Populate chat suggestions for commands. |
+| esx:showNotification | server→client | Display a simple toast message. |
+| esx:showAdvancedNotification | server→client | Display styled notification with icons. |
+| esx:showHelpNotification | server→client | Show help text at top-left. |
 | esx:updateWeaponAmmo | client→server | Persist weapon ammo when firing. |
 | esx:updateCoords | client→server | Persist player position periodically. |
 | esx:giveInventoryItem | client→server | Transfer items, accounts, weapons or ammo to another player. |
 | esx:useItem | client→server | Use a registered item. |
 | esx:onPickup | client→server | Notify server that a pickup was collected. |
 | esx:serverCallback / esx:triggerServerCallback | bidirectional | RPC request/response mechanism. |
+| esx:clientLog | client→server | Forward debug trace messages when `Config.EnableDebug` is true. |
 | esx:tpm | client | Teleport to map marker (admin). |
 | esx:noclip | client | Toggle noclip movement (admin). |
 | esx:killPlayer | client | Force player death (admin). |
