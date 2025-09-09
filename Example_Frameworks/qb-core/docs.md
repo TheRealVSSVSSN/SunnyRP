@@ -127,7 +127,7 @@ The `qb-core` resource provides the foundational framework for QBCore-based Five
 - `GetOfflinePlayer`/`GetPlayerByLicense` fetch players from DB for offline operations.
 - `CheckPlayerData` applies default fields and metadata and tracks buckets.
 - Methods on the Player object handle setting job/gang, money transactions, metadata and item management, and call `Save` to write back using MySQL `INSERT ... ON DUPLICATE KEY UPDATE` queries.
-- Triggers client events when jobs, gangs or money change.
+- Emits lifecycle events (`QBCore:Server:PlayerLoaded`, `QBCore:Server:OnPlayerUnload`) and syncs job, gang and money changes via `QBCore:Client:OnJobUpdate`, `QBCore:Client:OnGangUpdate`, `QBCore:Client:OnMoneyChange` and corresponding server events.
 
 ### server/events.lua
 **Role:** Network event handlers and connection management.
@@ -136,15 +136,15 @@ The `qb-core` resource provides the foundational framework for QBCore-based Five
 - On resource stop, cleans up registered usable items.
 - `playerConnecting` defers connection while checking whitelist, duplicate licenses, database connectivity and bans (MySQL queries).
 - `QBCore:Server:CloseServer` / `OpenServer` toggle join access and optionally kick players lacking permissions.
-- Callback relays: `TriggerClientCallback` and `TriggerCallback` implement the client/server callback protocol.
-- `QBCore:UpdatePlayer` reduces hunger/thirst, updates HUD (`hud:client:UpdateNeeds`) and saves data.
-- `QBCore:ToggleDuty` flips job duty status with notifications and emits `QBCore:Client:SetDuty`.
-- Baseevents mirror vehicle seat changes to clients via `QBCore:Client:VehicleInfo`.
-- Deprecated item events (`Server:UseItem`, `RemoveItem`, `AddItem`) only log potential exploitation.
-- `QBCore:CallCommand` executes a command programmatically with permission checks.
-- Callbacks `QBCore:Server:SpawnVehicle` and `QBCore:Server:CreateVehicle` spawn vehicles server-side and return network IDs.
+ - Callback relays: `TriggerClientCallback` and `TriggerCallback` implement the client/server callback protocol.
+ - `QBCore:UpdatePlayer` reduces hunger/thirst, updates HUD (`hud:client:UpdateNeeds`) and saves data.
+ - `QBCore:ToggleDuty` flips job duty status with notifications, firing `QBCore:Client:SetDuty` and server event `QBCore:Server:SetDuty`.
+ - Baseevents mirror vehicle seat changes to clients via `QBCore:Client:VehicleInfo` and issue `QBCore:Client:AbortVehicleEntering` when entry is cancelled.
+ - Deprecated item events (`Server:UseItem`, `RemoveItem`, `AddItem`) only log potential exploitation.
+ - `QBCore:CallCommand` executes a command programmatically with permission checks.
+ - Callbacks `QBCore:Server:SpawnVehicle` and `QBCore:Server:CreateVehicle` spawn vehicles server-side and return network IDs.
 
-### server/commands.lua
+ ### server/commands.lua
 **Role:** Command registration and built‑in administrative/user commands.
 - `QBCore.Commands.Add` registers commands, sets ACE permissions and supports additional custom permissions per command.
 - `Refresh` builds chat suggestions for the invoking player based on ACE privileges.
@@ -309,6 +309,21 @@ Contains instructions for generating comprehensive documentation; not used at ru
 | `QBCore:Server:RemoveItem` | server/events.lua | Net | Deprecated removal logging |
 | `QBCore:Server:AddItem` | server/events.lua | Net | Deprecated addition logging |
 | `QBCore:CallCommand` | server/events.lua | Net | Execute command programmatically |
+| `QBCore:Client:SetDuty` | server/events.lua | Net | Update duty state on client (Inferred‑Low) |
+| `QBCore:Client:AbortVehicleEntering` | server/events.lua | Net | Cancel vehicle entry prompt (Inferred‑Low) |
+| `hud:client:UpdateNeeds` | server/events.lua | Net | Refresh hunger/thirst HUD |
+| `QBCore:Server:SetDuty` | server/events.lua | Local | Notify server listeners of duty change |
+| `QBCore:Server:PlayerDropped` | server/events.lua | Local | Fired when player disconnects |
+| `QBCore:Server:PlayerLoaded` | server/player.lua | Local | Fired when player data is ready |
+| `QBCore:Server:OnPlayerUnload` | server/player.lua | Local | Notify unload to other resources |
+| `QBCore:Server:OnJobUpdate` | server/player.lua | Local | Job changed |
+| `QBCore:Client:OnJobUpdate` | server/player.lua | Net | Sync job change to client |
+| `QBCore:Server:OnGangUpdate` | server/player.lua | Local | Gang changed |
+| `QBCore:Client:OnGangUpdate` | server/player.lua | Net | Sync gang change to client |
+| `QBCore:Server:OnMoneyChange` | server/player.lua | Local | Money balance changed |
+| `QBCore:Client:OnMoneyChange` | server/player.lua | Net | Update money UI |
+| `hud:client:OnMoneyChange` | server/player.lua | Net | Update HUD balance |
+| `qb-phone:client:RemoveBankMoney` | server/player.lua | Net | Remove bank money in phone UI |
 | `QBCore:DebugSomething` | server/debug.lua | Net | Print structured debug info |
 
 ### Callbacks
@@ -367,5 +382,7 @@ Contains instructions for generating comprehensive documentation; not used at ru
 - **SpawnVehicle keys grant (Inferred‑Medium):** `QBCore:Command:SpawnVehicle` triggers `vehiclekeys:client:SetOwner`; ownership behaviour assumes the `qb-vehiclekeys` resource supplies that event.
 - **HUD needs update (Inferred‑Low):** `QBCore:UpdatePlayer` emits `hud:client:UpdateNeeds`; the exact HUD implementation is external.
 - Deprecated item events (`QBCore:Client:UseItem`, `QBCore:Server:AddItem`, etc.) log usage but should be replaced with inventory functions for security.
+- **Duty & vehicle abort events (Inferred‑Low):** `QBCore:Client:SetDuty` and `QBCore:Client:AbortVehicleEntering` are triggered but have no handlers in this resource, implying external consumers.
+- **Job/Gang/Money sync (Inferred‑Medium):** `QBCore:Client:OnJobUpdate`, `QBCore:Client:OnGangUpdate` and `QBCore:Client:OnMoneyChange` are fired from the server yet lack local listeners, suggesting other resources update UI and state.
 
 DOCS COMPLETE
