@@ -114,6 +114,7 @@ Server‑side administrative addon:
 - Receives client positions via `es_admin:givePos` and appends them to `positions.txt`.
 - Defines console (RCON) commands to adjust permissions, groups, money, and bans.
 - Listens for `es:adminCommandRan` for potential logging but leaves the handler empty.
+- Includes an unused `stringsplit` helper that calls an undefined `Split` method.
 
 ## Client
 ### essentialmode/client/main.lua
@@ -253,6 +254,7 @@ None.
 - `isLoggedIn` in `login.lua` never sets or reads a valid flag and appears unused. **TODO**
 - `Player` class uses typed variables (e.g. `: double`) that cause Lua compilation errors under `luac`. *(Info)*
 - `sv_admin.lua` defines an unused `permission` table. *(Info)*
+- `sv_admin.lua` includes an unused `stringsplit` function that references an undefined `Split` method. *(Info)*
 - `ban` command’s `if not tonumber(time) > 0` test misuses operator precedence; should be `if not (tonumber(time) > 0)`. *(Inferred High)*
 - RCON `ban` handler sends a message using undefined variable `player`; likely meant to use the provided id. *(Inferred High)*
 - RCON `unban` command is stubbed with no database update. **TODO**
