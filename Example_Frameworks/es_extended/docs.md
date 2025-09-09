@@ -290,6 +290,7 @@ Icon images representing bank, cash, and black money accounts used in HUD notifi
 ## Configuration & Integration
 - Include `shared_script '@es_extended/imports.lua'` in other resources to fetch the ESX object automatically.
 - Optional resources such as `esx_society`, `esx_addonaccount`, `esx_ambulancejob`, and `skinchanger` integrate through the events referenced above.
+- Resource manifest lists dependencies on `mysql-async`, `async`, and `spawnmanager`.
 - MySQL server must have the schema from `es_extended.sql` and support prepared statements.
 
 ## Gaps & Inferences
@@ -300,3 +301,4 @@ Icon images representing bank, cash, and black money accounts used in HUD notifi
 - Chat helpers (`chat:addSuggestion`, `chat:removeSuggestion`, `chat:clear`, `chat:addMessage`) rely on the default chat resource (Inferred Low).
 
 TODO: Additional external resources are required for society accounts, skinchanger, and inventory UI beyond the minimal default.
+DOCS COMPLETE — gaps scanned, filled where possible.
