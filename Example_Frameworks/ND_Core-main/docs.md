@@ -72,7 +72,7 @@ Defines garage and impound locations with ped positions and vehicle spawn points
 Loads server configuration from convars, tracks player identifiers and Discord details, and prepares MySQL schema on startup. Handles `playerJoining`, `playerConnecting`, `playerDropped`, and resource start/stop. Network events flag player elimination and update clothing metadata【F:server/main.lua†L59-L165】【F:server/main.lua†L167-L179】【F:server/main.lua†L181-L187】.
 
 ### server/player.lua
-Implements the core character object with money management, metadata storage, job/group assignment and Discord info. Money operations trigger client updates and emit `ND:moneyChange`. The `revive` method sends `ND:revivePlayer` to the client and clears death metadata; loading/unloading characters emits corresponding events and `ND:groupRemoved` when groups are removed【F:server/player.lua†L34-L59】【F:server/player.lua†L292-L298】【F:server/player.lua†L396-L398】.
+Implements the core character object with money management, metadata storage, job/group assignment and Discord info. Money operations trigger client updates and emit `ND:moneyChange`. The `notify` helper relays messages via `ox_lib:notify`. The `revive` method sends `ND:revivePlayer` to the client and clears death metadata; loading/unloading characters emits corresponding events and `ND:groupRemoved` when groups are removed【F:server/player.lua†L34-L59】【F:server/player.lua†L285-L288】【F:server/player.lua†L292-L298】【F:server/player.lua†L396-L398】.
 
 ### server/vehicle.lua
 Manages vehicle records, key sharing and spawn/despawn logic. Exports an inventory handler `keys` for ox_inventory【F:server/vehicle.lua†L581-L595】, registers callbacks for owned vehicle lists【F:server/vehicle.lua†L788-L792】 and processes events for locking, alarm sync, hotwiring, garage interactions and key disabling. Commands `getkeys` and `givekeys` allow key generation and transfer. The `entityCreated` handler locks ambient vehicles based on random chance【F:server/vehicle.lua†L598-L678】.
@@ -81,7 +81,7 @@ Manages vehicle records, key sharing and spawn/despawn logic. Exports an invento
 General utilities for identifier lookup, player retrieval, configuration access, SQL file execution and Discord role queries. Every function in `NDCore` is exported for external resources【F:server/functions.lua†L1-L112】.
 
 ### server/commands.lua
-Defines administrative commands via `lib.addCommand` for money, jobs, groups, clothing, character selection, teleportation, freezing and vehicle management. Command security relies on `group.admin` restrictions. Events `ND:clothingMenu` and `ND:characterMenu` are sent to targets, but no handlers exist in this resource for the latter【F:server/commands.lua†L17-L443】.
+Defines administrative commands via `lib.addCommand` for money, jobs, groups, clothing, character selection, teleportation, freezing and vehicle management. Command security relies on `group.admin` restrictions and actions are echoed to staff through `chat:addMessage`. Events `ND:clothingMenu` and `ND:characterMenu` are sent to targets, but no handlers exist in this resource for the latter【F:server/commands.lua†L17-L443】【F:server/commands.lua†L57-L62】.
 
 ## Shared Files
 ### shared/functions.lua
@@ -101,7 +101,7 @@ Mirrors older ND_Core APIs, exporting `GetCoreObject` and translating legacy eve
 Mocks ESX client globals and supplies minimal implementations for progress bars, inventory queries and asset loading. Provides an export `es_extended:getSharedObject` that returns the NDCore table【F:compatibility/esx/client.lua†L24-L32】【F:compatibility/esx/client.lua†L95-L111】.
 
 ### compatibility/esx/server.lua
-Adds ESX compatibility by mapping player methods, registering callbacks and exposing `NDCore.RegisterServerCallback` for ESX-style callbacks【F:compatibility/esx/server.lua†L213】. It also triggers `esx:playerLoaded`/`esx:playerDropped` events for other ESX resources【F:compatibility/esx/server.lua†L368-L372】.
+Adds ESX compatibility by mapping player methods, exporting `es_extended:getSharedObject`, and exposing `NDCore.RegisterServerCallback` for ESX-style callbacks【F:compatibility/esx/server.lua†L213-L224】. It also triggers `esx:playerLoaded`/`esx:playerDropped` events for other ESX resources【F:compatibility/esx/server.lua†L368-L372】.
 
 ### compatibility/esx/locale.lua
 Provides translation helpers mirroring ESX's locale system.
@@ -175,6 +175,8 @@ Contributor instructions describing documentation expectations for this resource
 | `ND_Vehicles:takeVehicle` | Client→Server | vehicle id, spawn options | client/vehicle/garages.lua; server/vehicle.lua |
 | `esx:playerDropped` | Server Event | src, reason | compatibility/esx/server.lua |
 | `esx:playerLoaded` | Server Event | src, player object | compatibility/esx/server.lua |
+| `chat:addMessage` | Server→Client | color, args table | server/commands.lua |
+| `ox_lib:notify` | Server→Client | notification data | server/player.lua |
 
 ### Local Events
 | Name | Side | Payload | Location |
@@ -217,6 +219,7 @@ Contributor instructions describing documentation expectations for this resource
 | `enableMultiCharacter` | Server | Toggle multi-character mode | server/functions.lua |
 | `keys` | Server | ox_inventory vehicle key handler | server/vehicle.lua |
 | `GetCoreObject` | Client & Server | Legacy NDCore access | compatibility/backwards/client.lua; compatibility/backwards/server.lua |
+| `es_extended:getSharedObject` | Client & Server | Return NDCore table for ESX scripts | compatibility/esx/client.lua; compatibility/esx/server.lua |
 
 ### Commands
 | Command | Side | Description | Location |
