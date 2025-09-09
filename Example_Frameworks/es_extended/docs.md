@@ -133,7 +133,7 @@ Localization loaders for Lua and JS. `locale.lua` exposes `_` and `_U` for trans
 Database schema with tables for users, items, and job grades. The server uses `MySQL.Async` queries to populate ESX tables and save player state.
 
 ### README.md / LICENSE / version.json
-General project information, license details, and version metadata.
+General project information and license details. `version.json` lists the framework version, commit identifier, and changelog for update checks.
 
 ## NUI Files
 ### html/ui.html
@@ -301,4 +301,5 @@ Icon images representing bank, cash, and black money accounts used in HUD notifi
 - Chat helpers (`chat:addSuggestion`, `chat:removeSuggestion`, `chat:clear`, `chat:addMessage`) rely on the default chat resource (Inferred Low).
 
 TODO: Additional external resources are required for society accounts, skinchanger, and inventory UI beyond the minimal default.
-DOCS COMPLETE — gaps scanned, filled where possible.
+
+DOCS COMPLETE.
