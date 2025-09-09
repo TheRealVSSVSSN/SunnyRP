@@ -81,7 +81,7 @@ Primary server runtime responsible for:
 - Checking bans during `playerConnecting` and saving money on `playerDropped`.
 - Handling first join flow via `es:firstJoinProper`, enabling PvP when configured, and raising `es:firstSpawn` on first spawn.
 - Managing session settings through `es:setSessionSetting` and `es:getSessionSetting`.
-- Parsing chat messages that begin with `/` to resolve registered commands. It enforces permission levels or group membership, triggers audit events, and denies access with a configured message when appropriate.
+- Parsing chat messages that begin with `/` to resolve registered commands. It enforces permission levels or group membership, triggers audit hooks (`es:adminCommandRan`, `es:userCommandRan`, `es:commandRan`, `es:adminCommandFailed`, `es:invalidCommandHandler`, `es:chatMessage`), and denies access with a configured message when appropriate.
 - Providing APIs for other resources to register commands (`es:addCommand`, `es:addAdminCommand`, `es:addGroupCommand`). A built‑in `info` command reports the essentialmode version and command count.
 - Receiving periodic coordinate updates (`es:updatePositions`) to track player positions.
 
@@ -167,6 +167,14 @@ Additional library required by the MySQL integration.
 | es:getPlayers | server → server | callback | Returns user map |
 | es:setPlayerData / es:setPlayerDataId | server → server | id, key, value, cb | Updates DB fields |
 | es:getPlayerFromId / es:getPlayerFromIdentifier / es:getAllPlayers | server → server | identifiers, cb | Fetches user records |
+| es:playerLoaded | server → server | source, user | Announces account data ready |
+| es:newPlayerLoaded | server → server | source, user | Fires for first-time users |
+| es:adminCommandRan | server → server | source, command | Hook for admin command logging |
+| es:userCommandRan | server → server | source, command | Hook for non-admin command logging |
+| es:commandRan | server → server | source, command | Fired after any command executes |
+| es:adminCommandFailed | server → server | source, command | Fired when permissions are insufficient |
+| es:invalidCommandHandler | server → server | source, command | Triggered on unknown command |
+| es:chatMessage | server → server | source, message, user | Forwarded non-command chat |
 | es:setPlayerDecorator | server → client | key, value, doNow | Applies ped decorators |
 | playerSpawned | CFX → client | — | Reapplies decorators |
 | es:activateMoney | server → client | amount | Sets cash display |
@@ -181,7 +189,6 @@ Additional library required by the MySQL integration.
 | es_admin:givePos | client → server | coord string | Appends position to file |
 | es_admin:kill | server → client | — | Sets player health to zero |
 | es_admin:crash | server → client | — | Forces client into infinite loop |
-| es:adminCommandRan | server → server | source, command | Hook for logging (unused) |
 
 ### ESX Callbacks
 None.
@@ -241,7 +248,7 @@ None.
 ## Gaps & Inferences
 - `essentialmode/__resource.lua` references a missing `client/player.lua`. **TODO**
 - `playerConnecting` reads `settings.defaultSettings.banreason` while defaults define `banReason`; treated as the same key. *(Inferred High)*
-- Permission denial message uses `defaultSettings.permissionDenied` without the `settings` prefix. *(Inferred High)*
+- Permission denial message uses `defaultSettings.permissionDenied` without the `settings` prefix and defaults to a boolean even though a string or function is expected. *(Inferred High)*
 - `LoadUser` contains unconditional `if(true)` blocks, likely meant to check decorator and new-player flags. *(Inferred High)*
 - `isLoggedIn` in `login.lua` never sets or reads a valid flag and appears unused. **TODO**
 - `Player` class uses typed variables (e.g. `: double`) that cause Lua compilation errors under `luac`. *(Info)*
@@ -250,5 +257,7 @@ None.
 - RCON `ban` handler sends a message using undefined variable `player`; likely meant to use the provided id. *(Inferred High)*
 - RCON `unban` command is stubbed with no database update. **TODO**
 - Event handler for `es:adminCommandRan` is empty, so admin command logging is not implemented. **TODO**
+- Audit events `es:userCommandRan`, `es:commandRan`, `es:adminCommandFailed`, and `es:invalidCommandHandler` are emitted without default handlers. *(Info)*
+- Event `es:chatMessage` has no handler in this resource; non-command chat relies on external listeners. **TODO**
 
 DOCS COMPLETE
