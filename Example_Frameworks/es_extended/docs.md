@@ -243,5 +243,3 @@ Style and assets for the HUD.
 - `esx:loadingScreenOff` hides the HUD after spawn but no server counterpart is defined here (Inferred Low).
 
 TODO: Additional external resources are required for society accounts, skinchanger, and inventory UI beyond the minimal default.
-
-DOCS COMPLETE — gaps scanned, filled where possible.
