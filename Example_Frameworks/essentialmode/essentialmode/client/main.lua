@@ -12,7 +12,6 @@ CreateThread(function()
     TriggerServerEvent('es:firstJoinProper')
 end)
 
-local loaded = false
 local cash = 0
 local oldPos
 local decorators = {}
@@ -20,7 +19,7 @@ local decorators = {}
 --[[
     -- Type: Thread
     -- Name: PositionReporter
-    -- Use: Sends position updates and refreshes money UI
+    -- Use: Sends position updates
     -- Created: 09/10/2025
     -- By: VSSVSSN
 --]]
@@ -30,13 +29,6 @@ CreateThread(function()
         local pos = GetEntityCoords(PlayerPedId())
         if not oldPos or pos.x ~= oldPos.x or pos.y ~= oldPos.y or pos.z ~= oldPos.z then
             TriggerServerEvent('es:updatePositions', pos.x, pos.y, pos.z)
-            if loaded then
-                SendNUIMessage({
-                    setmoney = true,
-                    money = cash
-                })
-                loaded = false
-            end
             oldPos = pos
         end
     end

@@ -15,6 +15,7 @@ This package bundles the core **essentialmode** framework and the accompanying *
   - [[essential]/es_admin/positions.txt](#essentiales_adminpositionstxt)
 - [Server](#server)
   - [essentialmode/server/util.lua](#essentialmodeserverutillua)
+  - [essentialmode/server/config.lua](#essentialmodeserverconfiglua)
   - [essentialmode/server/main.lua](#essentialmodeservermainlua)
   - [essentialmode/server/player/login.lua](#essentialmodeserverplayerloginlua)
   - [essentialmode/server/classes/player.lua](#essentialmodeserverclassesplayerlua)
@@ -68,12 +69,17 @@ Helper functions shared by server scripts:
 - `stringsplit`, `startswith`, and `returnIndexesInTable` offer basic string and table helpers and are exported globally for reuse.
 - `debugMsg` emits tagged debug output when debugging is enabled and is callable through the `es:debugMsg` event.
 
+### essentialmode/server/config.lua
+Centralised globals and defaults:
+- Declares shared tables `Users`, `commands`, and `settings` so other server scripts operate on the same state.
+- `settings.defaultSettings` holds ban messages, PvP toggle, permission text, debug flag, starting cash, and decorator support.
+
 ### essentialmode/server/main.lua
 Primary server runtime responsible for:
-- Initialising local registries for users, commands and configuration defaults.
-- Checking bans during `playerConnecting` with deferrals and saving money asynchronously on `playerDropped`.
-- Handling first join flow via `es:firstJoinProper`, enabling PvP when configured, and raising `es:firstSpawn` on first spawn.
-- Managing session settings through `es:setSessionSetting` and `es:getSessionSetting`.
+ - Utilising global registries from `server/config.lua`.
+ - Checking bans during `playerConnecting` with deferrals and saving money asynchronously on `playerDropped`.
+ - Handling first join flow via `es:firstJoinProper`, enabling PvP when configured, and raising `es:firstSpawn` on first spawn.
+ - Managing session settings through `es:setSessionSetting` and `es:getSessionSetting`.
 - Parsing chat messages that begin with `/` to resolve registered commands. It enforces permission levels or group membership, triggers audit hooks (`es:adminCommandRan`, `es:userCommandRan`, `es:commandRan`, `es:adminCommandFailed`, `es:invalidCommandHandler`, `es:chatMessage`), and denies access with a configured message when appropriate.
 - Providing APIs for other resources to register commands (`es:addCommand`, `es:addAdminCommand`, `es:addGroupCommand`). A built‑in `info` command reports the essentialmode version and command count.
 - Receiving periodic coordinate updates (`es:updatePositions`) to track player positions.
@@ -83,7 +89,7 @@ Database integration and account lifecycle:
 - Uses asynchronous `MySQL` helpers to query the `users` table and construct `Player` objects.
 - Fires `es:playerLoaded`, applies rank decorators when enabled, and marks brand new accounts via `es:newPlayerLoaded`.
 - Provides functions to check bans (including expiry), test for existing accounts, register default records, and expose events like `es:setPlayerData`, `es:setPlayerDataId`, `es:getPlayerFromId`, `es:getPlayerFromIdentifier`, `es:getAllPlayers`, and `es:getPlayers`.
-- Periodically persists all players’ money every minute.
+ - Defaults to the `user` group when the stored group is missing and runs a `MoneySaver` thread that persists player money every minute using awaiting queries.
 
 ### essentialmode/server/classes/player.lua
 Defines the `Player` object representing a connected user:
@@ -111,7 +117,7 @@ Server‑side administrative addon:
 ### essentialmode/client/main.lua
 Client runtime coordinating with the server:
 - On session start, triggers `es:firstJoinProper` to initialise the account.
-- Every second sends `es:updatePositions` when the player's coordinates change and refreshes the NUI money display when awaiting data.
+- Sends `es:updatePositions` once per second when coordinates change.
 - Manages decorators set via `es:setPlayerDecorator`, registering keys only once and reapplying them on `playerSpawned`.
 - Handles money events (`es:activateMoney`, `es:addedMoney`, `es:removedMoney`) and opacity changes (`es:setMoneyDisplay`) by relaying to the NUI while keeping a local cash tally.
 - When `es:enablePvp` arrives, enables friendly fire for the local player.
@@ -126,7 +132,7 @@ Client counterpart for administrative commands:
 ### essentialmode/ui.html
 Browser UI used to display the player’s cash:
 - Listens for messages from scripts to update money, show temporary add/remove animations, hide the startup window, and adjust opacity.
-- Uses a custom font (`pdown.ttf`) and minimal styling to render the overlay.
+- Rewritten without jQuery; uses vanilla JavaScript and CSS transitions alongside the custom `pdown.ttf` font.
 
 ### essentialmode/pdown.ttf
 Font file referenced by the NUI for rendering the money display.

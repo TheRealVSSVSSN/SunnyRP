@@ -1,6 +1,8 @@
 fx_version 'cerulean'
 game 'gta5'
 
+lua54 'yes'
+
 description 'EssentialMode by Kanersps.'
 
 ui_page 'ui.html'
@@ -12,6 +14,7 @@ files {
 
 server_scripts {
     '@oxmysql/lib/MySQL.lua',
+    'server/config.lua',
     'server/util.lua',
     'server/classes/player.lua',
     'server/classes/groups.lua',

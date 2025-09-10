@@ -6,19 +6,7 @@
     -- By: VSSVSSN
 --]]
 
-local Users = {}
-local commands = {}
-local settings = {
-    defaultSettings = {
-        banReason = 'You are currently banned. Please go to: insertsite.com/bans',
-        pvpEnabled = false,
-        permissionDenied = false,
-        debugInformation = false,
-        startingCash = 0,
-        enableRankDecorators = false
-    },
-    sessionSettings = {}
-}
+-- Globals `Users`, `commands` and `settings` are defined in server/config.lua
 
 --[[
     -- Type: Event
@@ -58,7 +46,7 @@ AddEventHandler('playerDropped', function()
     local src = source
     local user = Users[src]
     if user then
-        MySQL.update('UPDATE users SET money = ? WHERE identifier = ?', {
+        MySQL.update.await('UPDATE users SET money = ? WHERE identifier = ?', {
             user.money,
             user.identifier
         })
