@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"  type="text/javascript"></script>
+<!--
+  mhacking hack.html
+  Updated: 2025-09-10 by VSSVSSN
+-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
 <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:700" rel="stylesheet">
 <script type="text/javascript">
 	var hex = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'];
@@ -76,7 +80,13 @@
 
 				var timeleft = ((endTime - (new Date()).getTime())/1000.0).toFixed(2)
 
-				setTimeout(function(){$.post('http://mhacking/callback', JSON.stringify({'success': true, 'timeremaining' : timeleft, 'locationID' : locationID}));}, 2000);
+                                setTimeout(function(){
+                                        fetch('https://mhacking/callback', {
+                                                method: 'POST',
+                                                headers: { 'Content-Type': 'application/json' },
+                                                body: JSON.stringify({ success: true, timeremaining: timeleft, locationID: locationID })
+                                        });
+                                }, 2000);
 			}, 2000);
 			resetGameState();
 		}
