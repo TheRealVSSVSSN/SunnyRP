@@ -1,19 +1,37 @@
-RegisterServerEvent('stress:illnesslevel')
-AddEventHandler('stress:illnesslevel', function(newval)
+--[[
+    -- Type: Event
+    -- Name: stress:illnesslevel
+    -- Use: Updates patient illness level
+    -- Created: 2024-06-01
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent('stress:illnesslevel')
+AddEventHandler('stress:illnesslevel', function(level)
     local src = source
-    local user = exports["np-base"]:getModule("Player"):GetUser(src)
+    local user = exports['np-base']:getModule('Player'):GetUser(src)
     local char = user:getCurrentCharacter()
-    local newval = tonumber(newval)
-    exports.ghmattimysql:execute("UPDATE hospital_patients SET level = @newval  WHERE cid = @id",{['newval'] = newval, ['id'] = char.id})
+    local levelNum = tonumber(level) or 0
+    exports.ghmattimysql:execute(
+        "UPDATE hospital_patients SET level = @level WHERE cid = @cid",
+        { ['level'] = levelNum, ['cid'] = char.id }
+    )
 end)
 
-RegisterServerEvent('stress:illnesslevel:new')
-AddEventHandler('stress:illnesslevel:new', function(injury,lenghtofinjury)
+--[[
+    -- Type: Event
+    -- Name: stress:illnesslevel:new
+    -- Use: Inserts or updates patient illness details
+--]]
+RegisterNetEvent('stress:illnesslevel:new')
+AddEventHandler('stress:illnesslevel:new', function(injury, lengthOfInjury)
     local src = source
-    local user = exports["np-base"]:getModule("Player"):GetUser(src)
+    local user = exports['np-base']:getModule('Player'):GetUser(src)
     local char = user:getCurrentCharacter()
-    local newval = tonumber(newval)
-    exports.ghmattimysql:execute("UPDATE hospital_patients SET level = @lenghtofinjury, illness = @injury, time = @time  WHERE cid = @id",{['time'] = 60, ['injury'] = injury, ['id'] = char.id, ['lenghtofinjury'] = lenghtofinjury})
+    local lengthNum = tonumber(lengthOfInjury) or 0
+    exports.ghmattimysql:execute(
+        "UPDATE hospital_patients SET level = @length, illness = @injury, time = @time WHERE cid = @cid",
+        { ['length'] = lengthNum, ['injury'] = injury, ['time'] = 60, ['cid'] = char.id }
+    )
 end)
 
 local isNancyEnabled = false
