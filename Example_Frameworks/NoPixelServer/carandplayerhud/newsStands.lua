@@ -36,7 +36,7 @@ function checkForNewsStand()
 	for i = 1, #newsStands do
 		local objFound = GetClosestObjectOfType( GetEntityCoords(PlayerPedId()), 3.0, newsStands[i], 0, 0, 0)
 		if DoesEntityExist(objFound) then
-			Citizen.Trace("News Stand Found")
+			print("News Stand Found")
 			return true
 		end
 	end
@@ -52,7 +52,7 @@ function StartNews(scaleform,tableContents)
     local scaleform = RequestScaleformMovie(scaleform)
 
     while not HasScaleformMovieLoaded(scaleform) do
-        Citizen.Wait(0)
+        Wait(0)
     end
     PushScaleformMovieFunction(scaleform, "SHOW_SHARD_WASTED_MP_MESSAGE")
     PushScaleformMovieFunctionParameterString("<br><br> <br>Los Santos News")

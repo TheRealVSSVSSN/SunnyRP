@@ -1,11 +1,11 @@
-RegisterServerEvent('chat:init')
-RegisterServerEvent('chat:addTemplate')
-RegisterServerEvent('chat:addMessage')
-RegisterServerEvent('chat:addSuggestion')
-RegisterServerEvent('chat:removeSuggestion')
-RegisterServerEvent('_chat:messageEntered')
-RegisterServerEvent('chat:clear')
-RegisterServerEvent('__cfx_internal:commandFallback')
+RegisterNetEvent('chat:init')
+RegisterNetEvent('chat:addTemplate')
+RegisterNetEvent('chat:addMessage')
+RegisterNetEvent('chat:addSuggestion')
+RegisterNetEvent('chat:removeSuggestion')
+RegisterNetEvent('_chat:messageEntered')
+RegisterNetEvent('chat:clear')
+RegisterNetEvent('__cfx_internal:commandFallback')
  
 AddEventHandler('_chat:messageEntered', function(author, color, message)
     if not message or not author then
@@ -13,12 +13,12 @@ AddEventHandler('_chat:messageEntered', function(author, color, message)
     end
  
     TriggerEvent('chatMessage', source, author, message)
- 
+
     if not WasEventCanceled() then
-        TriggerClientEvent('chatMessage', -1, author,  { 255, 255, 255 }, message)
+        TriggerClientEvent('chatMessage', -1, author, color or { 255, 255, 255 }, message)
     end
- 
-    print(author .. '^7: ' .. message .. '^7')
+
+    print(('%s^7: %s^7'):format(author, message))
 end)
 
 AddEventHandler("chatMessage", function(source, args, raw)
@@ -34,7 +34,7 @@ AddEventHandler('__cfx_internal:commandFallback', function(command)
     TriggerEvent('chatMessage', source, name, '/' .. command)
 
     if not WasEventCanceled() then
-        TriggerClientEvent('chatMessage', -1, name, { 255, 255, 255 }, '/' .. command) 
+        TriggerClientEvent('chatMessage', -1, name, { 255, 255, 255 }, '/' .. command)
     end
 
     CancelEvent()
@@ -42,6 +42,13 @@ end)
 
 -- command suggestions for clients
 
+--[[
+    -- Type: Function
+    -- Name: refreshCommands
+    -- Use: Sends available command suggestions to the specified player
+    -- Created: 2024-06-07
+    -- By: VSSVSSN
+--]]
 local function refreshCommands(player)
     if GetRegisteredCommands then
         local registeredCommands = GetRegisteredCommands()

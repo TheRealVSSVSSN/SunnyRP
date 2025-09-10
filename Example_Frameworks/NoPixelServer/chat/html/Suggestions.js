@@ -36,14 +36,13 @@ Vue.component('suggestions', {
           const regex = new RegExp(`${s.name} (?:\\w+ ){${index}}(?:${wType}*)$`, 'g');
 
           // eslint-disable-next-line no-param-reassign
-          p.disabled = this.message.match(regex) == null;
+          p.disabled = this.message.match(regex) === null;
         });
       });
-      if (currentSuggestions.length == 1) {
-        return tempSug
-      }
-      else {
-        tempSug = currentSuggestions
+      if (currentSuggestions.length === 1) {
+        return this.tempSug;
+      } else {
+        this.tempSug = currentSuggestions;
         return currentSuggestions;
       }
     },
