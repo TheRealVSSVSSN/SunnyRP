@@ -144,11 +144,11 @@ function QBCore.Functions.GetPlayersByJob(job, checkOnDuty)
             if checkOnDuty then
                 if playerData.job.onduty then
                     players[#players + 1] = src
-                    count += 1
+                    count = count + 1
                 end
             else
                 players[#players + 1] = src
-                count += 1
+                count = count + 1
             end
         end
     end

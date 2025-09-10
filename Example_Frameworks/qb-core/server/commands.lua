@@ -34,7 +34,7 @@ function QBCore.Commands.Add(name, help, arguments, argsrequired, callback, perm
     local extraPerms = ... and table.pack(...) or nil
     if extraPerms then
         extraPerms[extraPerms.n + 1] = permission -- The `n` field is the number of arguments in the packed table
-        extraPerms.n += 1
+        extraPerms.n = extraPerms.n + 1
         permission = extraPerms
         for i = 1, permission.n do
             if not QBCore.Commands.IgnoreList[permission[i]] then -- only create aces for extra perm levels
