@@ -6,3 +6,9 @@
 - Added radius constant to blackjack table locator and corrected prop name outputs.
 - Moved animation dictionary cleanup outside the dealer creation loop to prevent missing animation issues.
 - Converted global state to local variables and tightened betting validation on the server.
+
+## Carandplayerhud
+- Switched to `fxmanifest.lua` with `cerulean` `fx_version` and enabled Lua 5.4.
+- Modernized scripts by replacing legacy `Citizen` helpers with `CreateThread` and `Wait` and removing `Citizen.Trace` calls.
+- Added working session desync auto-kick using `GetActivePlayers` and a server-side check.
+- Fixed server money check typo and removed unused variables for cleaner logic.
