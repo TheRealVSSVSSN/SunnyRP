@@ -55,9 +55,9 @@ function updateNUI(tempData)
       SetNuiFocus(true,false)
       SendNUIMessage({show = true, data = tempData, readonly = true})
 
-      Citizen.CreateThread(function()
+      CreateThread(function()
         while usingClipboard do
-          Citizen.Wait(1)
+          Wait(1)
           if IsControlJustPressed(1, 322) then
             SendNUIMessage({close = true})
           end
@@ -82,16 +82,16 @@ function updateInstructor()
   TriggerEvent("drivingInstructor:update", isInstructorMode) -- Sets isPed("drivingInstructor") value
 end
 
-function isVehicleAllowed(vehhicle) -- Check if the vehicle is one we allow instructor controls for
-  local vehicleClass = GetVehicleClass(vehhicle)
-  --  8: Motorcycles, 13: Cycles, 15: Helicopters, 16: Planes, 17: Service, 18: Emergency, 19: Military, 21: Trains  
-  return (vehicleClass ~= 8 and vehicleClass ~= 13 and vehicleClass ~= 15 and vehicleClass ~= 16 and vehicleClass ~= 17 and vehicleClass ~= 18 and vehicleClass ~= 19 and vehicleClass ~= 21)
+function isVehicleAllowed(vehicle) -- Check if the vehicle is one we allow instructor controls for
+  local vehicleClass = GetVehicleClass(vehicle)
+  --  8: Motorcycles, 13: Cycles, 15: Helicopters, 16: Planes, 17: Service, 18: Emergency, 19: Military, 21: Trains
+  return vehicleClass ~= 8 and vehicleClass ~= 13 and vehicleClass ~= 15 and vehicleClass ~= 16 and vehicleClass ~= 17 and vehicleClass ~= 18 and vehicleClass ~= 19 and vehicleClass ~= 21
 end
 
 function checkForVehicle()
   isInVehicle = false -- Reset value until we check for new status
 
-  Citizen.CreateThread(function()
+  CreateThread(function()
     local playerPed = PlayerPedId()
     while isInstructorMode do
       local playerVeh = GetVehiclePedIsIn(playerPed, false)
@@ -113,7 +113,7 @@ function checkForVehicle()
 end
 
 function instructorControls(playerPed, veh)
-  Citizen.CreateThread(function()
+  CreateThread(function()
     local isBraking = false
 
     -- These functions are checked on tick so only check when we in Instructor Mode and in a vehicle
@@ -147,25 +147,23 @@ function sendActionToDriver(vehicle, action)
 end
 
 function isNearDrivingSchool()
-  for i = 1, #drivingSchools do
-    local drivingSchool = drivingSchools[i]
-		local ply = PlayerPedId()
-		local plyCoords = GetEntityCoords(ply, 0)
-		local distance = #(drivingSchool - plyCoords)
-		if(distance < 3.0) then
-			DrawText3Ds(drivingSchool["x"], drivingSchool["y"], drivingSchool["z"], "[Y] Toggle Driving Instructor Mode" )
-		end
-		if(distance < 3.0) then
-			return true
-		end
-	end
+  local ply = PlayerPedId()
+  local plyCoords = GetEntityCoords(ply)
+  for _, drivingSchool in ipairs(drivingSchools) do
+    local distance = #(drivingSchool - plyCoords)
+    if distance < 3.0 then
+      DrawText3Ds(drivingSchool.x, drivingSchool.y, drivingSchool.z, "[Y] Toggle Driving Instructor Mode")
+      return true
+    end
+  end
+  return false
 end
 
 function checkForDrivingSchool()
   -- Check for instructor toggle
-  Citizen.CreateThread(function()
+  CreateThread(function()
     while (myJob == "driving instructor") do
-      Citizen.Wait(0)
+      Wait(0)
 
       if isNearDrivingSchool() then
         if IsControlJustPressed(1, 246) then -- [Y] key
@@ -265,12 +263,12 @@ AddEventHandler("drivingInstructor:vehicleAction", function(action)
 
   if action == 1 then -- Brake
     actions.isBraking = true
-    Citizen.CreateThread(function()
+    CreateThread(function()
       local veh = actions.vehicle -- Localize here incase vehicle changes at some point before turning brakes back off
       local ped = PlayerPedId()
       while actions.isBraking do
         TaskVehicleTempAction(ped, veh, 24, 1)
-        Citizen.Wait(0)
+        Wait(0)
       end
     end)
   elseif action == 2 then -- Release Brake
@@ -302,7 +300,7 @@ AddEventHandler("drivingInstructor:clipboard", function(isWriting)
 
   RequestAnimDict(anim)
   while not HasAnimDictLoaded(anim) do
-    Citizen.Wait(0)
+    Wait(0)
   end
 
   if usingClipboard then
@@ -310,10 +308,10 @@ AddEventHandler("drivingInstructor:clipboard", function(isWriting)
     if not intrunk then
       TaskPlayAnim(ped, anim, "base", 2.0, 3.0, -1, 49, 0, 0, 0, 0)
     end
-    Citizen.Wait(450)
+    Wait(450)
 
     TriggerEvent("attachItem",board)
-    Citizen.Wait(150)
+    Wait(150)
 
     while usingClipboard do
       local dead = exports["isPed"]:isPed("dead")
@@ -325,7 +323,7 @@ AddEventHandler("drivingInstructor:clipboard", function(isWriting)
       if not intrunk and not IsEntityPlayingAnim(ped, anim, "base", 3) then
         TaskPlayAnim(ped, anim, "base", 2.0, 3.0, -1, 49, 0, 0, 0, 0)
       end
-      Citizen.Wait(1)
+      Wait(1)
     end
 
     intrunk = exports["isPed"]:isPed("intrunk")
@@ -338,9 +336,9 @@ AddEventHandler("drivingInstructor:clipboard", function(isWriting)
     intrunk = exports["isPed"]:isPed("intrunk")
     if not intrunk then
       ClearPedTasks(ped)
-      Citizen.Wait(400)
+      Wait(400)
       TaskPlayAnim(ped, anim, "exit", 2.0, 1.0, 5.0, 49, 0, 0, 0, 0)
-      Citizen.Wait(400)
+      Wait(400)
       ClearPedTasks(ped)
     end
   end
