@@ -1,3 +1,6 @@
+<3.1.1>
+- improved PVP toggling to respect friendly fire flags and reduced loop CPU usage
+
 <3.1>
 - fixed character creation instance 
 - fixed skills new level up 
