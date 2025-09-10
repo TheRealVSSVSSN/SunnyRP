@@ -6,12 +6,13 @@ author 'Cfx.re <root@cfx.re>'
 description 'Handles Social Club conductor session API for RedM. Do not disable.'
 repository 'https://github.com/citizenfx/cfx-server-data'
 
-fx_version 'adamant'
+fx_version 'cerulean'
+lua54 'yes'
 game 'rdr3'
 rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aware my resources *will* become incompatible once RedM ships.'
 
 dependencies {
-	'yarn'
+        'yarn'
 }
 
 server_script 'sm_server.js'
