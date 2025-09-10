@@ -94,29 +94,23 @@ function NPX.DB.PlayerExistsDB(self, src, callback)
     end)
 end
 
-function NPX.DB.PhoneNumberExists(self, src, phone_number, callback)
-    local user = exports["np-base"]:getModule("Player"):GetUser(src)
+function NPX.DB.PhoneNumberExists(self, src, phoneNumber, callback)
+    callback = callback or function() end
+    local user = exports['np-base']:getModule('Player'):GetUser(src)
+    if not user then return callback(false, true) end
 
-    callback = callback and callback or function() return end
-
-    if not user then callback(false, true) print("error error EXORTS SOSIS addition: scan's best friend is jamerson") return end
-
-    local hexId = user:getVar("hexid")
-
-    if not hexId or hexid == "" then callback(false, true) print('another error') return end
+    local hexId = user:getVar('hexid')
+    if not hexId or hexId == '' then return callback(false, true) end
 
     local q = [[SELECT phone_number FROM characters WHERE owner = @id;]]
     local v = {
-        ["id"] = hexid,
-        ["phone_number"] = phone_number
+        ['id'] = hexId,
+        ['phone_number'] = phoneNumber
     }
 
-
     exports.ghmattimysql:execute(q, v, function(results)
-        if not results then callback(false, true) print('error error EXORTS') return end
-
-
-        local exists = (results and results[1]) and true or false
+        if not results then return callback(false, true) end
+        local exists = results[1] ~= nil
         callback(exists)
     end)
 end
@@ -148,9 +142,8 @@ function NPX.DB.FetchCharacterData(self, user, callback)
 
     if not user then callback(false, true) return end
 
-    local hexId = user:getVar("hexid")
-
-    if not hexId or hexid == "" then callback(false, true) return end
+    local hexId = user:getVar('hexid')
+    if not hexId or hexId == '' then return callback(false, true) end
 
     local q = [[SELECT id, owner, first_name, last_name, date_created,  cash, bank, phone_number, dob, story, gender, new, deleted, jail_time, dirty_money, gang_type, jail_time_mobster, stress_level, judge_type, iswjob FROM characters WHERE owner = @owner]]
     local v = {["owner"] = hexId}
@@ -328,23 +321,21 @@ end
 
 
 function NPX.DB.GetControls(self, src, callback)
-    callback = callback and callback or function() return end
-    local user = exports["np-base"]:getModule("Player"):GetUser(src)
-        Citizen.Wait(3000)
-        if not user then callback(false, true) return end
+    callback = callback or function() end
+    local user = exports['np-base']:getModule('Player'):GetUser(src)
+    if not user then return callback(false, true) end
 
-        local hexId = user:getVar("hexid")
+    local hexId = user:getVar('hexid')
+    if not hexId or hexId == '' then return callback(false, true) end
 
-        if not hexId or hexid == "" then callback(false, true) return end
+    local q = [[SELECT controls FROM users WHERE hex_id = @hexid;]]
+    local v = { ['hexid'] = hexId }
 
-        local q = [[SELECT controls FROM users WHERE hex_id = @hex_id;]]
-        local v = {["hex_id"] = hexid}
-
-        exports.ghmattimysql:execute(q,v, function(results)
-            if not user then callback(false, true) return end
-            results = results[1] and results or {}
-            callback(results)
-        end)
+    exports.ghmattimysql:execute(q, v, function(results)
+        if not results then return callback(false, true) end
+        results = results[1] and results or {}
+        callback(results)
+    end)
 end
 
     
@@ -370,19 +361,18 @@ end
 
 
 function NPX.DB.GetSettings(self, src, callback)
-    callback = callback and callback or function() return end
-    local user = exports["np-base"]:getModule("Player"):GetUser(src)
-    if not user then callback(false, true) return end
+    callback = callback or function() end
+    local user = exports['np-base']:getModule('Player'):GetUser(src)
+    if not user then return callback(false, true) end
 
-    local hexId = user:getVar("hexid")
+    local hexId = user:getVar('hexid')
+    if not hexId or hexId == '' then return callback(false, true) end
 
-    if not hexId or hexid == "" then callback(false, true) return end
+    local q = [[SELECT settings FROM users WHERE hex_id = @hexid;]]
+    local v = { ['hexid'] = hexId }
 
-    local q = [[SELECT settings FROM users WHERE hex_id =@id;]]
-    local v = {["id"] = hexid}
-
-    exports.ghmattimysql:execute(q,v, function(results)
-        if not user then callback(false, true) return end
+    exports.ghmattimysql:execute(q, v, function(results)
+        if not results then return callback(false, true) end
         results = results[1] and results or {}
         callback(results)
     end)
@@ -403,20 +393,20 @@ function NPX.DB.Something(self, src, callback)
     local q = [[
         SELECT characters.id, characters.owner, characters.first_name, characters.last_name, characters.date_created,
         characters.cash, characters.bank, _character_phone_number.phone_number as 'phone_number', characters.dob, characters.story,
-        characters.gender, characters.new, characters.jail_time, characters.dirty_money, characters.gang_type, 
+        characters.gender, characters.new, characters.jail_time, characters.dirty_money, characters.gang_type,
         characters.jail_time_mobster, characters.judge_type, characters.stress_level, characters.jail_life,
         characters.rehab FROM characters
-        LEFT JOIN _character_phone_number ON characters.id = _chharacter_phone_number.cid AND is_burner = false
+        LEFT JOIN _character_phone_number ON characters.id = _character_phone_number.cid AND _character_phone_number.is_burner = false
         WHERE owner = @id AND deleted = 0 LIMIT 8;
     ]]
 
-        local v = {["id"] = hexId}
-        exports.ghmattimysql:execute(q, v, function(results)
-        if not results then callback(false, true) return end
-            results = results[1] and results or {}
-            for i,v in ipairs(results) do
-                v.RealJailTime = (v.jail_time - os.time()) / 60
-                -- there is more but mussing for now ((sway))
-            end
-        end)
+    local v = { ['id'] = hexId }
+    exports.ghmattimysql:execute(q, v, function(results)
+        if not results then return callback(false, true) end
+        results = results[1] and results or {}
+        for _, data in ipairs(results) do
+            data.RealJailTime = (data.jail_time - os.time()) / 60
+        end
+        callback(results)
+    end)
 end
