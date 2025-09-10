@@ -25,9 +25,9 @@ function Garage:__construct()
   self.out_vehicles = {} -- map of vehicle model => {cstate, position, rotation}, unloaded out vehicles to spawn
 
   -- task: save vehicle states
-  Citizen.CreateThread(function()
+  CreateThread(function()
     while true do
-      Citizen.Wait(self.update_interval*1000)
+      Wait(self.update_interval*1000)
 
       if self.state_ready then
         local states = {}
@@ -53,9 +53,9 @@ function Garage:__construct()
   end)
 
   -- task: vehicles check
-  Citizen.CreateThread(function()
+  CreateThread(function()
     while true do
-      Citizen.Wait(self.check_interval*1000)
+      Wait(self.check_interval*1000)
 
       if self.state_ready then
         self:cleanupVehicles()
@@ -95,13 +95,13 @@ function Garage:spawnVehicle(model, state, position, rotation)
   local i = 0
   while not HasModelLoaded(mhash) and i < 10000 do
     RequestModel(mhash)
-    Citizen.Wait(10)
+    Wait(10)
     i = i+1
   end
 
   -- spawn car
   if HasModelLoaded(mhash) then
-    local ped = GetPlayerPed(-1)
+    local ped = PlayerPedId()
 
     local x,y,z
     if position then
@@ -154,8 +154,8 @@ function Garage:despawnVehicle(model)
     -- remove vehicle
     SetVehicleHasBeenOwnedByPlayer(veh,false)
     SetEntityAsMissionEntity(veh, false, true)
-    SetVehicleAsNoLongerNeeded(Citizen.PointerValueIntInitialized(veh))
-    Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(veh))
+    SetVehicleAsNoLongerNeeded(veh)
+    DeleteVehicle(veh)
     self.vehicles[model] = nil
 
     return true
@@ -227,8 +227,8 @@ function Garage:tryOwnVehicles()
         if old_veh ~= veh then -- remove this new one
           SetVehicleHasBeenOwnedByPlayer(veh,false)
           SetEntityAsMissionEntity(veh, false, true)
-          SetVehicleAsNoLongerNeeded(Citizen.PointerValueIntInitialized(veh))
-          Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(veh))
+          SetVehicleAsNoLongerNeeded(veh)
+          DeleteVehicle(veh)
         end
       else -- no valid old veh
         self.vehicles[model] = veh -- re-own
@@ -328,13 +328,13 @@ end
 function Garage:putInOwnedVehicle(model)
   local veh = self.vehicles[model]
   if veh then
-    SetPedIntoVehicle(GetPlayerPed(-1),veh,-1) -- put player inside
+    SetPedIntoVehicle(PlayerPedId(),veh,-1) -- put player inside
   end
 end
 
 -- eject the ped from the vehicle
 function Garage:ejectVehicle()
-  local ped = GetPlayerPed(-1)
+  local ped = PlayerPedId()
   if IsPedSittingInAnyVehicle(ped) then
     local veh = GetVehiclePedIsIn(ped,false)
     TaskLeaveVehicle(ped, veh, 4160)
@@ -342,13 +342,13 @@ function Garage:ejectVehicle()
 end
 
 function Garage:isInVehicle()
-  local ped = GetPlayerPed(-1)
+  local ped = PlayerPedId()
   return IsPedSittingInAnyVehicle(ped) 
 end
 
 -- return model or nil if not in owned vehicle
 function Garage:getInOwnedVehicleModel()
-  local veh = GetVehiclePedIsIn(GetPlayerPed(-1),false)
+  local veh = GetVehiclePedIsIn(PlayerPedId(),false)
   local cid, model = self:getVehicleInfo(veh)
   if cid and cid == vRP.EXT.Base.cid then
     return model
@@ -388,7 +388,7 @@ end
 -- partial update per property
 function Garage:setVehicleCustomization(veh, custom)
   if not veh or veh == nil then
-	veh = GetVehiclePedIsIn(GetPlayerPed(-1),false)
+	veh = GetVehiclePedIsIn(PlayerPedId(),false)
   end
   SetVehicleModKit(veh, 0)
 
@@ -598,7 +598,7 @@ end
 function Garage:vc_toggleEngine(model)
   local vehicle = self.vehicles[model]
   if vehicle then
-    local running = Citizen.InvokeNative(0xAE31E7DF9B5B132E,vehicle) -- GetIsVehicleEngineRunning
+    local running = GetIsVehicleEngineRunning(vehicle)
     SetVehicleEngineOn(vehicle,not running,true,true)
     if running then
       SetVehicleUndriveable(vehicle,true)

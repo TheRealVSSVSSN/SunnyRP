@@ -278,9 +278,9 @@ function Group:__construct()
 
   -- task: group count display
   if next(self.cfg.count_display_permissions) then
-    Citizen.CreateThread(function()
+    CreateThread(function()
       while true do
-        Citizen.Wait(self.cfg.count_display_interval*1000)
+        Wait(self.cfg.count_display_interval*1000)
 
         -- display
         local content = ""

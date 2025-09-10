@@ -80,10 +80,10 @@ function vRP:__construct()
   end
 
   -- DB driver check thread
-  Citizen.CreateThread(function()
+  CreateThread(function()
     while not self.db_initialized do
       self:log("DB driver \""..self.cfg.db.driver.."\" not initialized yet ("..#self.cached_prepares.." prepares cached, "..#self.cached_queries.." queries cached).")
-      Citizen.Wait(5000)
+      Wait(5000)
     end
   end)
 

@@ -66,11 +66,11 @@ local function areturn(self, ...)
   self.p:resolve(self.r)
 end
 
--- create an async returner or a thread (Citizen.CreateThreadNow)
+-- create an async returner or a thread (CreateThreadNow)
 -- func: if passed, will create a thread, otherwise will return an async returner
 function async(func)
   if func then
-    Citizen.CreateThreadNow(func)
+    CreateThreadNow(func)
   else
     return setmetatable({ wait = wait, p = promise.new() }, { __call = areturn })
   end
@@ -106,7 +106,7 @@ if cfg_modules.profiler then
     if not running and (not next(options.resources) or options.resources[rsc_name]) then
       running = true -- guard
       ELProfiler.start(options.period, options.stack_depth)
-      Citizen.Wait(options.duration*1000)
+      Wait(options.duration*1000)
       local trigger = CLIENT and TriggerServerEvent or TriggerEvent
       trigger("vRP:profile:res", id, rsc_name, ELProfiler.stop())
       running = false

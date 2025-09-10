@@ -78,7 +78,7 @@ function Profiler:__construct()
           profiles[rsc_name] = profile
         end
         TriggerEvent("vRP:profile", id, options)
-        Citizen.Wait((options.duration+5)*1000) -- wait profiles
+        Wait((options.duration+5)*1000) -- wait profiles
         menu.user:prompt(lang.profiler.prompt_report(), process_data(options, profiles))
         self.profile_tasks[id] = nil
       end)
@@ -97,7 +97,7 @@ function Profiler:__construct()
           profiles[rsc_name] = profile
         end
         TriggerClientEvent("vRP:profile", user.source, id, options)
-        Citizen.Wait((options.duration+5)*1000) -- wait profiles
+        Wait((options.duration+5)*1000) -- wait profiles
         user:prompt(lang.profiler.prompt_report(), process_data(options, profiles))
         self.profile_tasks[id] = nil
       end)

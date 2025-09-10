@@ -15,13 +15,13 @@ function Admin:__construct()
   self.noclip_speed = 1.0
 
   -- noclip task
-  Citizen.CreateThread(function()
+  CreateThread(function()
     local Base = vRP.EXT.Base
 
     while true do
-      Citizen.Wait(0)
+      Wait(0)
       if self.noclip then
-        local ped = GetPlayerPed(-1)
+        local ped = PlayerPedId()
         local x,y,z = Base:getPosition(self.noclipEntity)
         local dx,dy,dz = Base:getCamDirection(self.noclipEntity)
         local speed = self.noclip_speed
@@ -52,7 +52,7 @@ end
 function Admin:toggleNoclip()
   self.noclip = not self.noclip
 
-  local ped = GetPlayerPed(-1)
+  local ped = PlayerPedId()
   
   if IsPedInAnyVehicle(ped, false) then
       self.noclipEntity = GetVehiclePedIsIn(ped, false)
@@ -64,17 +64,22 @@ function Admin:toggleNoclip()
   SetEntityInvincible(self.noclipEntity, self.noclip)
   SetEntityVisible(self.noclipEntity, not self.noclip, false)
   
-  -- rotate entity
-  vx,vy,vz = GetGameplayCamRot(2)
-  SetEntityRotation(self.noclipEntity, vx, nil, nil, 0, false)
+  -- rotate entity to match camera heading
+  local vx, vy, vz = table.unpack(GetGameplayCamRot(2))
+  SetEntityRotation(self.noclipEntity, vx, vy, vz, 0, false)
 end
 
--- ref: https://github.com/citizenfx/project-lambdamenu/blob/master/LambdaMenu/teleportation.cpp#L301
+--[[
+    -- Type: Function
+    -- Name: teleportToMarker
+    -- Use: Teleports the player to the first waypoint on the map
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 function Admin:teleportToMarker()
-  local ped = GetPlayerPed(-1)
+  local ped = PlayerPedId()
 
   -- find GPS blip
-
   local it = GetBlipInfoIdIterator()
   local blip = GetFirstBlipInfoId(it)
   local ok, done
@@ -91,19 +96,19 @@ function Admin:teleportToMarker()
   until not ok
 
   if done then
-    local x,y = table.unpack(Citizen.InvokeNative(0xFA7C7F0AADF25D09, blip, Citizen.ResultAsVector())) -- GetBlipInfoIdCoord fix
+    local x, y, z = table.unpack(GetBlipInfoIdCoord(blip))
 
-    local gz, ground = 0, false
-    for z=0,800,50 do
-      SetEntityCoordsNoOffset(ped, x+0.001, y+0.001, z+0.001, 0, 0, 1);
-      ground, gz = GetGroundZFor_3dCoord(x,y,z+0.001)
+    local gz, ground = 0.0, false
+    for zz = 0.0, 800.0, 50.0 do
+      SetEntityCoordsNoOffset(ped, x, y, zz, 0, 0, 1)
+      ground, gz = GetGroundZFor_3dCoord(x, y, zz)
       if ground then break end
     end
 
     if ground then
-      vRP.EXT.Base:teleport(x,y,gz+3)
+      vRP.EXT.Base:teleport(x, y, gz + 3.0)
     else
-      vRP.EXT.Base:teleport(x,y,1000)
+      vRP.EXT.Base:teleport(x, y, 1000.0)
       GiveDelayedWeaponToPed(ped, 0xFBAB5776, 1, 0)
     end
   end

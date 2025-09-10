@@ -11,9 +11,9 @@ function GUI:__construct()
   self.paused = false
 
   -- task: gui controls (from cellphone)
-  Citizen.CreateThread(function()
+  CreateThread(function()
     while true do
-      Citizen.Wait(0)
+      Wait(0)
 
       if not self.paused then
         -- menu controls
@@ -64,9 +64,9 @@ function GUI:__construct()
   end)
 
   -- task: GUI resolution data
-  Citizen.CreateThread(function()
+  CreateThread(function()
     while true do
-      Citizen.Wait(10000)
+      Wait(10000)
 
       self:updateGUIData()
     end

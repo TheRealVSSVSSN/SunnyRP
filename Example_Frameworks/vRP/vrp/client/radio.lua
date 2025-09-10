@@ -13,9 +13,9 @@ function Radio:__construct()
   self.players = {} -- radio players, map of player server id => {.group, .group_title, .title, .map_entity}
 
   -- task: radio push to talk
-  Citizen.CreateThread(function()
+  CreateThread(function()
     while true do
-      Citizen.Wait(0)
+      Wait(0)
 
       local old_talking = self.talking
       self.talking = IsControlPressed(table.unpack(vRP.cfg.controls.radio))

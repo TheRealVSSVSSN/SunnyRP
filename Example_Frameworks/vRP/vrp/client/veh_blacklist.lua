@@ -14,9 +14,9 @@ function VehBlacklist:__construct()
   self.interval = 10000
 
   -- task: remove vehicles
-  Citizen.CreateThread(function()
+  CreateThread(function()
     while true do 
-      Citizen.Wait(self.interval)
+      Wait(self.interval)
 
       local vehicles = {}
 

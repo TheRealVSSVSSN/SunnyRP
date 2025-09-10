@@ -195,9 +195,9 @@ function Map:__construct()
   self:registerEntity(PlayerMark)
 
   -- task: entities active check
-  Citizen.CreateThread(function()
+  CreateThread(function()
     while true do
-      Citizen.Wait(100)
+      Wait(100)
 
       local px,py,pz = vRP.EXT.Base:getPosition()
       self.frame_entities = {}
@@ -211,11 +211,11 @@ function Map:__construct()
   end)
 
   -- task: entities frame
-  Citizen.CreateThread(function()
+  CreateThread(function()
     local last_time = GetGameTimer()
 
     while true do
-      Citizen.Wait(0)
+      Wait(0)
 
       local time = GetGameTimer()
       local elapsed = (last_time-time)*0.001
@@ -228,9 +228,9 @@ function Map:__construct()
   end)
 
   -- task: areas triggers detections
-  Citizen.CreateThread(function()
+  CreateThread(function()
     while true do
-      Citizen.Wait(250)
+      Wait(250)
 
       local px,py,pz = vRP.EXT.Base:getPosition()
 
