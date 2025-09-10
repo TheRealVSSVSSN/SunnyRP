@@ -37,7 +37,13 @@ end)
 -- Metal Harvest
 -----------------------------
 isRunningCrate = false
-
+--[[
+    -- Type: Function
+    -- Name: runRecycle
+    -- Use: Handles recycle crate drop-off mini-mission
+    -- Created: 2024-05-30
+    -- By: VSSVSSN
+--]]
 function runRecycle()
 	local daytime = exports["isPed"]:isPed("daytime")
 	if not daytime then
@@ -49,40 +55,40 @@ function runRecycle()
 
 	TriggerEvent("attachItem","crate01")
     RequestAnimDict("anim@heists@box_carry@")
-    TaskPlayAnim(GetPlayerPed(-1),"anim@heists@box_carry@","idle",2.0, -8, 180, 49, 0, 0, 0, 0)
+    TaskPlayAnim(PlayerPedId(),"anim@heists@box_carry@","idle",2.0, -8, 180, 49, 0, 0, 0, 0)
     Wait(1000)
-    TaskPlayAnim(GetPlayerPed(-1),"anim@heists@box_carry@","idle",2.0, -8, 180000000, 49, 0, 0, 0, 0)
+    TaskPlayAnim(PlayerPedId(),"anim@heists@box_carry@","idle",2.0, -8, 180000000, 49, 0, 0, 0, 0)
     
     isHolding = true
     local rnd = math.random(1,4)
 
     while isHolding do
     	Wait(0)
-    	if GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)),dropPoints[rnd][1],dropPoints[rnd][2],dropPoints[rnd][3], true) <= 40 then
+    	if GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()),dropPoints[rnd][1],dropPoints[rnd][2],dropPoints[rnd][3], true) <= 40 then
     		DrawText3Ds(dropPoints[rnd][1],dropPoints[rnd][2],dropPoints[rnd][3], "Drop Material")
-    		if IsControlJustPressed(1, 38) and IsPedInAnyVehicle(GetPlayerPed(-1), false) ~= 1 then
-	    		if GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)),dropPoints[rnd][1],dropPoints[rnd][2],dropPoints[rnd][3], true) <= 3 then
+    		if IsControlJustPressed(1, 38) and IsPedInAnyVehicle(PlayerPedId(), false) ~= 1 then
+	    		if GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()),dropPoints[rnd][1],dropPoints[rnd][2],dropPoints[rnd][3], true) <= 3 then
 	    			isHolding = false
 	    		end
 			end
 			if IsPedRunning(PlayerPedId()) then
 				SetPedToRagdoll(PlayerPedId(),2000,2000, 3, 0, 0, 0)
 				Wait(2100)
-				TaskPlayAnim(GetPlayerPed(-1),"anim@heists@box_carry@","idle",2.0, -8, 180000000, 49, 0, 0, 0, 0)
+				TaskPlayAnim(PlayerPedId(),"anim@heists@box_carry@","idle",2.0, -8, 180000000, 49, 0, 0, 0, 0)
 			end
     	end
     end
 
-    ClearPedTasks(GetPlayerPed(-1))
+    ClearPedTasks(PlayerPedId())
     TriggerEvent("destroyProp")
-    FreezeEntityPosition(GetPlayerPed(-1),true)
+    FreezeEntityPosition(PlayerPedId(),true)
     RequestAnimDict("mp_car_bomb")
-    TaskPlayAnim(GetPlayerPed(-1),"mp_car_bomb","car_bomb_mechanic",2.0, -8, 180,49, 0, 0, 0, 0)
+    TaskPlayAnim(PlayerPedId(),"mp_car_bomb","car_bomb_mechanic",2.0, -8, 180,49, 0, 0, 0, 0)
     Wait(100)
-    TaskPlayAnim(GetPlayerPed(-1),"mp_car_bomb","car_bomb_mechanic",2.0, -8, 1800000,49, 0, 0, 0, 0)
+    TaskPlayAnim(PlayerPedId(),"mp_car_bomb","car_bomb_mechanic",2.0, -8, 1800000,49, 0, 0, 0, 0)
     Wait(3000)
-    ClearPedTasks(GetPlayerPed(-1))
-    FreezeEntityPosition(GetPlayerPed(-1),false)
+    ClearPedTasks(PlayerPedId())
+    FreezeEntityPosition(PlayerPedId(),false)
 
     if math.random(3) == 3 then
     	TriggerEvent('player:receiveItem',"recyclablematerial", math.random(5,15))
@@ -124,7 +130,7 @@ AddEventHandler('weed:spam-prevent', function(prevent)
 	end
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
 listOn = false
 	while true do
 
@@ -151,12 +157,12 @@ listOn = false
 			DrawText3Ds(5.87, -1601.48, 29.3, "Sell Meat x5")
 		end		
 
-		if IsControlJustPressed(1, 38) and IsPedInAnyVehicle(GetPlayerPed(-1), false) ~= 1 then
+		if IsControlJustPressed(1, 38) and IsPedInAnyVehicle(PlayerPedId(), false) ~= 1 then
 
 
 		--	if not playing_femote and getIsOnBoat(PlayerPos) then
 		--		if GetDistanceBetweenCoords(PlayerPos,1429.06,4048.65,30.02) < 350 then
-		--			local targetspeed = GetEntitySpeed(GetPlayerPed(-1)) * 3.6
+		--			local targetspeed = GetEntitySpeed(PlayerPedId()) * 3.6
 		--			if targetspeed < 7 then			
 		--				fishingStart()	
 		--			end	
@@ -420,36 +426,43 @@ playing_femote = false
 function loadAnimDict( dict )
     while ( not HasAnimDictLoaded( dict ) ) do
         RequestAnimDict( dict )
-        Citizen.Wait( 5 )
+        Wait( 5 )
     end
 end 
 
 
+--[[
+    -- Type: Function
+    -- Name: fishingStart
+    -- Use: Initiates fishing mini-game and reward logic
+    -- Created: 2024-05-30
+    -- By: VSSVSSN
+--]]
 function fishingStart()
 	
 	isFishing = true
 	playing_femote = true
-	local lPed = GetPlayerPed(-1)
+	local lPed = PlayerPedId()
 
 	RequestAnimDict("amb@world_human_stand_fishing@idle_a")
 	while not HasAnimDictLoaded("amb@world_human_stand_fishing@idle_a") do
-		Citizen.Wait(0)
+		Wait(0)
 	end
 
 	attachModel = GetHashKey('prop_fishing_rod_01')
 
-	SetCurrentPedWeapon(GetPlayerPed(-1), 0xA2719263) 
-	local bone = GetPedBoneIndex(GetPlayerPed(-1), 60309)
+	SetCurrentPedWeapon(PlayerPedId(), 0xA2719263) 
+	local bone = GetPedBoneIndex(PlayerPedId(), 60309)
 
 	RequestModel(attachModel)
 	while not HasModelLoaded(attachModel) do
-		Citizen.Wait(100)
+		Wait(100)
 	end
 
 
 	FishRod = CreateObject(attachModel, 1.0, 1.0, 1.0, 1, 1, 0)
 
-	AttachEntityToEntity(FishRod, GetPlayerPed(-1), bone, 0,0,0, 0,0,0, 1, 1, 0, 0, 2, 1)
+	AttachEntityToEntity(FishRod, PlayerPedId(), bone, 0,0,0, 0,0,0, 1, 1, 0, 0, 2, 1)
 
 
 	local leftFishing = false
@@ -461,7 +474,7 @@ function fishingStart()
 	local zseccount = math.random(2500)
 
 	while zseccount > 0 do
-		Citizen.Wait(1)
+		Wait(1)
 		zseccount = zseccount - 1
 		if IsControlJustPressed(1, 38) then
 			zseccount = 0
@@ -479,7 +492,7 @@ function fishingStart()
 
 			drawTxt('You got a bite, press ~g~E~s~ to catch the ~b~ fish!',0,1,0.5,0.8,0.3,255,255,255,255)
 
-			Citizen.Wait(1)
+			Wait(1)
 			dicks = dicks - 1
 			if IsControlJustPressed(1, 38) then
 				dicks = 0
@@ -495,12 +508,12 @@ function fishingStart()
 					TriggerEvent("DoLongHudText","You just pulled up a bag full of materials.",1)
 					for i,v in ipairs(materialsTable) do
 						local rnd = math.random(1,5)
-						TriggerEvent('player:receiveItem',recyclablematerial, rnd)
+						TriggerEvent('player:receiveItem','recyclablematerial', rnd)
 					end
 				elseif itemRandom < 55 then
 					TriggerEvent("DoLongHudText","Gah! Fish snapped the line and you cut yourself.",1)
-					local health = GetEntityHealth(GetPlayerPed(-1))
-					SetEntityHealth(GetPlayerPed(-1),(health-15))
+					local health = GetEntityHealth(PlayerPedId())
+					SetEntityHealth(PlayerPedId(),(health-15))
 					TriggerEvent("Evidence:StateSet",22,1200)
 				elseif itemRandom < 70 then
 					TriggerEvent("DoLongHudText","You found a sealed bag of cash, how odd.",1)
@@ -557,7 +570,7 @@ local noFish = {
 
 function isInNoFish()
 	for i,v in ipairs(noFish) do
-		if GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)),v[1],v[2],v[3]) <= v[4] then return true end
+		if GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()),v[1],v[2],v[3]) <= v[4] then return true end
 	end
 	return false
 end
@@ -565,10 +578,10 @@ end
 RegisterNetEvent('playFishing')
 AddEventHandler('playFishing', function()
 
-	local lPed = GetPlayerPed(-1)
+	local lPed = PlayerPedId()
 	loadAnimDict( "amb@world_human_stand_fishing@base" )
 	loadAnimDict( "amb@world_human_stand_fishing@idle_a" )
-	ClearPedTasksImmediately(IPed)
+	ClearPedTasksImmediately(lPed)
 	while playing_femote do
 		TaskPlayAnim(lPed, "amb@world_human_stand_fishing@idle_a", "idle_c", 20.0, -8, -1, 16, 0, 0, 0, 0)
 		Wait(8200)
@@ -588,10 +601,10 @@ RegisterNetEvent('animation:farm')
 AddEventHandler('animation:farm', function()
 
 		inanimation = true
-		local lPed = GetPlayerPed(-1)
+		local lPed = PlayerPedId()
 		RequestAnimDict("amb@world_human_gardener_plant@male@base")
 		while not HasAnimDictLoaded("amb@world_human_gardener_plant@male@base") do
-			Citizen.Wait(0)
+			Wait(0)
 		end
 		
 		if IsEntityPlayingAnim(lPed, "amb@world_human_gardener_plant@male@base", "base", 3) then
@@ -600,7 +613,7 @@ AddEventHandler('animation:farm', function()
 			TaskPlayAnim(lPed, "amb@world_human_gardener_plant@male@base", "base", 8.0, -8, -1, 49, 0, 0, 0, 0)
 			seccount = 4
 			while seccount > 0 do
-				Citizen.Wait(1000)
+				Wait(1000)
 				seccount = seccount - 1
 			end
 			ClearPedSecondaryTask(lPed)

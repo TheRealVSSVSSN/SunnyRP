@@ -162,9 +162,9 @@ end
 
 ---------------------------------------------------------------------
 function TogMuteDfltSrnForVeh(veh, toggle)
-	if DoesEntityExist(veh) and not IsEntityDead(veh) then
-		DisableVehicleImpactExplosionActivation(veh, toggle)
-	end
+        if DoesEntityExist(veh) and not IsEntityDead(veh) then
+                SetVehicleHasMutedSirens(veh, toggle)
+        end
 end
 
 ---------------------------------------------------------------------
@@ -272,89 +272,84 @@ end
 ---------------------------------------------------------------------
 RegisterNetEvent("lvc_TogIndicState_c")
 AddEventHandler("lvc_TogIndicState_c", function(sender, newstate)
-	local player_s = GetPlayerFromServerId(sender)
-	local ped_s = GetPlayerPed(player_s)
-	if DoesEntityExist(ped_s) and not IsEntityDead(ped_s) then
-		if ped_s ~= GetPlayerPed(-1) then
-			if IsPedInAnyVehicle(ped_s, false) then
-				local veh = GetVehiclePedIsUsing(ped_s)
-				TogIndicStateForVeh(veh, newstate)
-			end
-		end
-	end
+        local player_s = GetPlayerFromServerId(sender)
+        local ped_s = GetPlayerPed(player_s)
+        local myPed = PlayerPedId()
+        if DoesEntityExist(ped_s) and not IsEntityDead(ped_s) and ped_s ~= myPed then
+                if IsPedInAnyVehicle(ped_s, false) then
+                        local veh = GetVehiclePedIsUsing(ped_s)
+                        TogIndicStateForVeh(veh, newstate)
+                end
+        end
 end)
 
 ---------------------------------------------------------------------
 RegisterNetEvent("lvc_TogDfltSrnMuted_c")
 AddEventHandler("lvc_TogDfltSrnMuted_c", function(sender, toggle)
-	local player_s = GetPlayerFromServerId(sender)
-	local ped_s = GetPlayerPed(player_s)
-	if DoesEntityExist(ped_s) and not IsEntityDead(ped_s) then
-		if ped_s ~= GetPlayerPed(-1) then
-			if IsPedInAnyVehicle(ped_s, false) then
-				local veh = GetVehiclePedIsUsing(ped_s)
-				TogMuteDfltSrnForVeh(veh, toggle)
-			end
-		end
-	end
+        local player_s = GetPlayerFromServerId(sender)
+        local ped_s = GetPlayerPed(player_s)
+        local myPed = PlayerPedId()
+        if DoesEntityExist(ped_s) and not IsEntityDead(ped_s) and ped_s ~= myPed then
+                if IsPedInAnyVehicle(ped_s, false) then
+                        local veh = GetVehiclePedIsUsing(ped_s)
+                        TogMuteDfltSrnForVeh(veh, toggle)
+                end
+        end
 end)
 
 ---------------------------------------------------------------------
 RegisterNetEvent("lvc_SetLxSirenState_c")
 AddEventHandler("lvc_SetLxSirenState_c", function(sender, newstate)
-	local player_s = GetPlayerFromServerId(sender)
-	local ped_s = GetPlayerPed(player_s)
-	if DoesEntityExist(ped_s) and not IsEntityDead(ped_s) then
-		if ped_s ~= GetPlayerPed(-1) then
-			if IsPedInAnyVehicle(ped_s, false) then
-				local veh = GetVehiclePedIsUsing(ped_s)
-				SetLxSirenStateForVeh(veh, newstate)
-			end
-		end
-	end
+        local player_s = GetPlayerFromServerId(sender)
+        local ped_s = GetPlayerPed(player_s)
+        local myPed = PlayerPedId()
+        if DoesEntityExist(ped_s) and not IsEntityDead(ped_s) and ped_s ~= myPed then
+                if IsPedInAnyVehicle(ped_s, false) then
+                        local veh = GetVehiclePedIsUsing(ped_s)
+                        SetLxSirenStateForVeh(veh, newstate)
+                end
+        end
 end)
 
 ---------------------------------------------------------------------
 RegisterNetEvent("lvc_TogPwrcallState_c")
 AddEventHandler("lvc_TogPwrcallState_c", function(sender, toggle)
-	local player_s = GetPlayerFromServerId(sender)
-	local ped_s = GetPlayerPed(player_s)
-	if DoesEntityExist(ped_s) and not IsEntityDead(ped_s) then
-		if ped_s ~= GetPlayerPed(-1) then
-			if IsPedInAnyVehicle(ped_s, false) then
-				local veh = GetVehiclePedIsUsing(ped_s)
-				TogPowercallStateForVeh(veh, toggle)
-			end
-		end
-	end
+        local player_s = GetPlayerFromServerId(sender)
+        local ped_s = GetPlayerPed(player_s)
+        local myPed = PlayerPedId()
+        if DoesEntityExist(ped_s) and not IsEntityDead(ped_s) and ped_s ~= myPed then
+                if IsPedInAnyVehicle(ped_s, false) then
+                        local veh = GetVehiclePedIsUsing(ped_s)
+                        TogPowercallStateForVeh(veh, toggle)
+                end
+        end
 end)
 
 ---------------------------------------------------------------------
 RegisterNetEvent("lvc_SetAirManuState_c")
 AddEventHandler("lvc_SetAirManuState_c", function(sender, newstate)
-	local player_s = GetPlayerFromServerId(sender)
-	local ped_s = GetPlayerPed(player_s)
-	if DoesEntityExist(ped_s) and not IsEntityDead(ped_s) then
-		if ped_s ~= GetPlayerPed(-1) then
-			if IsPedInAnyVehicle(ped_s, false) then
-				local veh = GetVehiclePedIsUsing(ped_s)
-				SetAirManuStateForVeh(veh, newstate)
-			end
-		end
-	end
+        local player_s = GetPlayerFromServerId(sender)
+        local ped_s = GetPlayerPed(player_s)
+        local myPed = PlayerPedId()
+        if DoesEntityExist(ped_s) and not IsEntityDead(ped_s) and ped_s ~= myPed then
+                if IsPedInAnyVehicle(ped_s, false) then
+                        local veh = GetVehiclePedIsUsing(ped_s)
+                        SetAirManuStateForVeh(veh, newstate)
+                end
+        end
 end)
 
 
 
 ---------------------------------------------------------------------
-Citizen.CreateThread(function()
-	while true do
-			
-			CleanupSounds()
-			
-			----- IS IN VEHICLE -----
-			local playerped = GetPlayerPed(-1)		
-			if IsPedInAnyVehicle(playerped, false) then	
+CreateThread(function()
+        while true do
+
+                        CleanupSounds()
+
+                        ----- IS IN VEHICLE -----
+                        local playerped = PlayerPedId()
+                        if IsPedInAnyVehicle(playerped, false) then
 			
 				----- IS DRIVER -----
 				local veh = GetVehiclePedIsUsing(playerped)	
@@ -632,6 +627,6 @@ Citizen.CreateThread(function()
 				end
 			end
 			
-		Citizen.Wait(0)
-	end
+                Wait(0)
+        end
 end)
