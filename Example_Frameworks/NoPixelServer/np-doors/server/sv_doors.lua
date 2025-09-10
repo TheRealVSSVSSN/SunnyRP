@@ -1,60 +1,79 @@
 local steamIds = {
-    ["steam:11000013218ef32"] = true, --syd
-    ["steam:1100001113b37ba"] = true, --syd
+    ["steam:11000013218ef32"] = true, -- syd
+    ["steam:1100001113b37ba"] = true, -- syd
 }
 
-RegisterServerEvent('np-doors:alterlockstate2')
-AddEventHandler('np-doors:alterlockstate2', function()
-    NPX.DoorCoords[10]["lock"] = 0
-    NPX.DoorCoords[11]["lock"] = 0
-    NPX.DoorCoords[12]["lock"] = 0
-    NPX.DoorCoords[39]["lock"] = 0
-    NPX.DoorCoords[40]["lock"] = 0
-    NPX.DoorCoords[41]["lock"] = 0
-    NPX.DoorCoords[42]["lock"] = 0
-    NPX.DoorCoords[44]["lock"] = 0
-    NPX.DoorCoords[45]["lock"] = 0
-    NPX.DoorCoords[46]["lock"] = 0
-    NPX.DoorCoords[47]["lock"] = 0
-    NPX.DoorCoords[48]["lock"] = 0
-    NPX.DoorCoords[49]["lock"] = 0
-    NPX.DoorCoords[50]["lock"] = 0
-    NPX.DoorCoords[51]["lock"] = 0
-    NPX.DoorCoords[52]["lock"] = 0
-    NPX.DoorCoords[53]["lock"] = 0
-    NPX.DoorCoords[54]["lock"] = 0
-    NPX.DoorCoords[55]["lock"] = 0
-    NPX.DoorCoords[56]["lock"] = 0
+local jailDoors = {}
+for i = 10, 56 do
+    jailDoors[#jailDoors + 1] = i
+end
 
-    TriggerClientEvent('np-doors:alterlockstateclient', source, NPX.DoorCoords)
-
+--[[ 
+    -- Type: Event
+    -- Name: np-doors:alterlockstate2
+    -- Use: Unlocks predefined jail doors and syncs state with the client
+    -- Created: 2024-10-27
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent('np-doors:alterlockstate2', function()
+    for _, id in ipairs(jailDoors) do
+        if NPX.DoorCoords[id] then
+            NPX.DoorCoords[id].lock = 0
+        end
+    end
+    TriggerClientEvent('np-doors:sync', source, NPX.DoorCoords)
 end)
 
-RegisterServerEvent('np-doors:alterlockstate')
-AddEventHandler('np-doors:alterlockstate', function(alterNum)
-    NPX.alterState(alterNum)
+--[[ 
+    -- Type: Event
+    -- Name: np-doors:alterlockstate
+    -- Use: Toggles a door's lock state and broadcasts the update
+    -- Created: 2024-10-27
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent('np-doors:alterlockstate', function(alterNum)
+    if NPX.DoorCoords[alterNum] then
+        NPX.alterState(alterNum)
+    end
 end)
 
-RegisterServerEvent('np-doors:ForceLockState')
-AddEventHandler('np-doors:ForceLockState', function(alterNum, state)
-    NPX.DoorCoords[alterNum]["lock"] = state
-    TriggerClientEvent('NPX:Door:alterState', -1, alterNum, state)
+--[[ 
+    -- Type: Event
+    -- Name: np-doors:ForceLockState
+    -- Use: Forces a specific lock state for a door and syncs to all clients
+    -- Created: 2024-10-27
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent('np-doors:ForceLockState', function(alterNum, state)
+    if NPX.DoorCoords[alterNum] then
+        NPX.DoorCoords[alterNum].lock = state
+        TriggerClientEvent('NPX:Door:alterState', -1, alterNum, state)
+    end
 end)
 
-RegisterServerEvent('np-doors:requestlatest')
-AddEventHandler('np-doors:requestlatest', function()
-    local src = source 
-    local steamcheck = GetPlayerIdentifiers(source)[1]
+--[[ 
+    -- Type: Event
+    -- Name: np-doors:requestlatest
+    -- Use: Sends the latest door state table to the requesting client
+    -- Created: 2024-10-27
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent('np-doors:requestlatest', function()
+    local src = source
+    local steamcheck = GetPlayerIdentifiers(src)[1]
     if steamIds[steamcheck] then
-        TriggerClientEvent('doors:HasKeys',src,true)
+        TriggerClientEvent('doors:HasKeys', src, true)
     end
-    TriggerClientEvent('np-doors:alterlockstateclient', source,NPX.DoorCoords)
+    TriggerClientEvent('np-doors:sync', src, NPX.DoorCoords)
 end)
 
+--[[ 
+    -- Type: Function
+    -- Name: isDoorLocked
+    -- Use: Returns the lock state of the requested door for external resources
+    -- Created: 2024-10-27
+    -- By: VSSVSSN
+--]]
 function isDoorLocked(door)
-    if NPX.DoorCoords[door].lock == 1 then
-        return true
-    else
-        return false
-    end
+    return NPX.DoorCoords[door] and NPX.DoorCoords[door].lock == 1
 end

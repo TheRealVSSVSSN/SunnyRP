@@ -556,24 +556,44 @@ NPX.rankCheck = {
     },
 }
 
+--[[
+    -- Type: Function
+    -- Name: NPX.alterState
+    -- Use: Toggles a door's lock state and broadcasts the change
+    -- Created: 2024-10-27
+    -- By: VSSVSSN
+--]]
 function NPX.alterState(alterNum)
-
-    if NPX.DoorCoords[alterNum]["lock"] == 0 then 
-        NPX.DoorCoords[alterNum]["lock"] = 1 
-    else 
-        NPX.DoorCoords[alterNum]["lock"] = 0 
+    if not NPX.DoorCoords[alterNum] then return end
+    if NPX.DoorCoords[alterNum].lock == 0 then
+        NPX.DoorCoords[alterNum].lock = 1
+    else
+        NPX.DoorCoords[alterNum].lock = 0
     end
-    TriggerClientEvent("NPX:Door:alterState",-1,alterNum,NPX.DoorCoords[alterNum]["lock"])
-
+    TriggerClientEvent('NPX:Door:alterState', -1, alterNum, NPX.DoorCoords[alterNum].lock)
 end
 
-RegisterNetEvent( 'NPX:Door:alterState' )
-AddEventHandler( 'NPX:Door:alterState', function(alterNum,num)
-	NPX.DoorCoords[alterNum]["lock"] = num
+--[[
+    -- Type: Event
+    -- Name: NPX:Door:alterState
+    -- Use: Updates a single door state on the client
+    -- Created: 2024-10-27
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent('NPX:Door:alterState', function(alterNum, num)
+    if NPX.DoorCoords[alterNum] then
+        NPX.DoorCoords[alterNum].lock = num
+    end
 end)
 
-RegisterNetEvent("np-doors:alterlockstateclient")
-AddEventHandler("np-doors:alterlockstateclient", function(doorCoords)
+--[[
+    -- Type: Event
+    -- Name: np-doors:sync
+    -- Use: Replaces local door table with latest data from the server
+    -- Created: 2024-10-27
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent('np-doors:sync', function(doorCoords)
     NPX.DoorCoords = doorCoords
 end)
 
