@@ -1,5 +1,6 @@
 isCop = false
 isInService = false
+
 local blips = {
 
   {name = "Police Station 1", id = 60, x = 425.130, y = -979.558, z = 30.711},
@@ -12,7 +13,7 @@ local blips = {
   {name = "Hospital", id=61, x= 357.43, y= -593.36, z= 28.79},
 }
 
-Citizen.CreateThread(function()
+CreateThread(function()
   for _, item in pairs(blips) do
     item.blip = AddBlipForCoord(item.x, item.y, item.z)
     SetBlipSprite(item.blip, item.id)
@@ -24,25 +25,6 @@ Citizen.CreateThread(function()
     EndTextCommandSetBlipName(item.blip)
   end
 end)
-
-function LocalPed()
-	return PlayerPedId()
-end
-
-function drawTxt(text, font, centre, x, y, scale, r, g, b, a)
-	SetTextFont(font)
-	SetTextProportional(0)
-	SetTextScale(scale, scale)
-	SetTextColour(r, g, b, a)
-	SetTextDropShadow(0, 0, 0, 0, 255)
-	SetTextEdge(1, 0, 0, 0, 255)
-	SetTextDropShadow()
-	SetTextOutline()
-	SetTextCentre(centre)
-	SetTextEntry("STRING")
-	AddTextComponentString(text)
-	DrawText(x, y)
-end
 
 RegisterNetEvent("notworked")
 AddEventHandler("notworked", function()
@@ -66,8 +48,9 @@ AddEventHandler('nowCopGarage', function()
 		TriggerEvent('nowCopDeath')
 		TriggerEvent('nowCopSpawn')
 		TriggerEvent('nowMedic')
-		SetPedRelationshipGroupDefaultHash(PlayerPedId(),`MISSION2`)
-		SetPedRelationshipGroupHash(PlayerPedId(),`MISSION2`)
+                local missionHash = GetHashKey('MISSION2')
+                SetPedRelationshipGroupDefaultHash(PlayerPedId(), missionHash)
+                SetPedRelationshipGroupHash(PlayerPedId(), missionHash)
 		SetPoliceIgnorePlayer(PlayerPedId(),true)
 		TriggerEvent("armory:ammo")
 end)
@@ -88,16 +71,12 @@ local Keys = {
 
 -- NEW VERSION
 local cmd = {
-	["classic"] = { event = 'policeg:s_classic' },
-	["moto"] = { event = 'policeg:s_moto' },
-	["fila"] = { event = 'policeg:s_fila' },
-	["helico"] = { event = 'policeg:s_helico' },
+        ["classic"] = { event = 'policeg:s_classic' },
+        ["moto"] = { event = 'policeg:s_moto' },
+        ["fila"] = { event = 'policeg:s_fila' },
+        ["helico"] = { event = 'policeg:s_helico' }
 }
-function DisplayHelpText(str)
-	SetTextComponentFormat("STRING")
-	AddTextComponentString(str)
-	DisplayHelpTextFromStringLabel(0, 0, 1, -1)
-end
+
 
 function InitMenuVehicules()
 	if isCop then
@@ -116,15 +95,9 @@ function InitMenuHelico()
 end
 
 function callSE(evt)
-	Menu.hidden = not Menu.hidden
-	Menu.renderGUI()
-	TriggerServerEvent(evt)
-end
-
-function ShowRadarMessage(message)
-	SetNotificationTextEntry("STRING")
-	AddTextComponentString(message)
-	DrawNotification(0,1)
+        Menu.hidden = not Menu.hidden
+        Menu.renderGUI()
+        TriggerServerEvent(evt)
 end
 
 --Citizen.Trace(GetEntityModel(PlayerPedId()))
@@ -143,10 +116,10 @@ local takingService = {
 }
 
 
-function DrawText3Ds(x,y,z, text)
-    local onScreen,_x,_y=World3dToScreen2d(x,y,z)
-    local px,py,pz=table.unpack(GetGameplayCamCoords())
-    
+local function DrawText3Ds(x,y,z, text)
+    local onScreen,_x,_y = World3dToScreen2d(x,y,z)
+    local px,py,pz = table.unpack(GetGameplayCamCoords())
+
     SetTextScale(0.35, 0.35)
     SetTextFont(4)
     SetTextProportional(1)
@@ -156,23 +129,22 @@ function DrawText3Ds(x,y,z, text)
     SetTextCentre(1)
     AddTextComponentString(text)
     DrawText(_x,_y)
-    local factor = (string.len(text)) / 370
-    DrawRect(_x,_y+0.0125, 0.015+ factor, 0.03, 41, 11, 41, 68)
+    local factor = string.len(text) / 370
+    DrawRect(_x,_y+0.0125, 0.015 + factor, 0.03, 41, 11, 41, 68)
 end
 
 
-function isNearTakeService()
-	for i = 1, #takingService do
-		local ply = PlayerPedId()
-		local plyCoords = GetEntityCoords(ply, 0)
-		local distance = #(vector3(takingService[i].x, takingService[i].y, takingService[i].z) - vector3(plyCoords["x"], plyCoords["y"], plyCoords["z"]))
-		if(distance < 3.0) then
-			DrawText3Ds(takingService[i].x, takingService[i].y, takingService[i].z, "[E] On Duty [G] Off Duty" )
-		end
-		if(distance < 3.0) then
-			return true
-		end
-	end
+local function isNearTakeService()
+        local plyCoords = GetEntityCoords(PlayerPedId())
+        for i = 1, #takingService do
+                local loc = takingService[i]
+                local distance = #(vector3(loc.x, loc.y, loc.z) - plyCoords)
+                if distance < 3.0 then
+                        DrawText3Ds(loc.x, loc.y, loc.z, "[E] On Duty [G] Off Duty")
+                        return true
+                end
+        end
+        return false
 end
 
 
@@ -201,36 +173,36 @@ AddEventHandler('event:control:policeGarage', function(useID)
 		    TriggerEvent('nowMedicOff')
 		    TriggerServerEvent("TokoVoip:clientHasSelecterCharecter")
 
-		    SetPedRelationshipGroupHash(PlayerPedId(),`PLAYER`)
-		    SetPedRelationshipGroupDefaultHash(PlayerPedId(),`PLAYER`)
+                    local playerHash = GetHashKey('PLAYER')
+                    SetPedRelationshipGroupHash(PlayerPedId(), playerHash)
+                    SetPedRelationshipGroupDefaultHash(PlayerPedId(), playerHash)
 		    SetPoliceIgnorePlayer(PlayerPedId(),false)
-		    TriggerEvent("DoLongHudText",'Signed off Duty!',1)
-	    end		
-	end
+                    TriggerEvent("DoLongHudText",'Signed off Duty!',1)
+            end
+        end
 end)
 
-local inttrack = 0;
-Citizen.CreateThread(function()
-	SetScenarioTypeEnabled( "WORLD_VEHICLE_STREETRACE", false )
-	SetScenarioTypeEnabled( "WORLD_VEHICLE_SALTON_DIRT_BIKE", false )
-	SetScenarioTypeEnabled( "WORLD_VEHICLE_SALTON", false )
-	SetScenarioTypeEnabled( "WORLD_VEHICLE_POLICE_NEXT_TO_CAR", false )
-	SetScenarioTypeEnabled( "WORLD_VEHICLE_POLICE_CAR", false )
-	SetScenarioTypeEnabled( "WORLD_VEHICLE_POLICE_BIKE", false )
-	SetScenarioTypeEnabled( "WORLD_VEHICLE_MILITARY_PLANES_SMALL", false )
-	SetScenarioTypeEnabled( "WORLD_VEHICLE_MILITARY_PLANES_BIG", false )
-	SetScenarioTypeEnabled( "WORLD_VEHICLE_MECHANIC", false )
-	SetScenarioTypeEnabled( "WORLD_VEHICLE_EMPTY", false )
-	SetScenarioTypeEnabled( "WORLD_VEHICLE_BUSINESSMEN", false )
-	SetScenarioTypeEnabled( "WORLD_VEHICLE_BIKE_OFF_ROAD_RACE", false )
+CreateThread(function()
+        SetScenarioTypeEnabled("WORLD_VEHICLE_STREETRACE", false)
+        SetScenarioTypeEnabled("WORLD_VEHICLE_SALTON_DIRT_BIKE", false)
+        SetScenarioTypeEnabled("WORLD_VEHICLE_SALTON", false)
+        SetScenarioTypeEnabled("WORLD_VEHICLE_POLICE_NEXT_TO_CAR", false)
+        SetScenarioTypeEnabled("WORLD_VEHICLE_POLICE_CAR", false)
+        SetScenarioTypeEnabled("WORLD_VEHICLE_POLICE_BIKE", false)
+        SetScenarioTypeEnabled("WORLD_VEHICLE_MILITARY_PLANES_SMALL", false)
+        SetScenarioTypeEnabled("WORLD_VEHICLE_MILITARY_PLANES_BIG", false)
+        SetScenarioTypeEnabled("WORLD_VEHICLE_MECHANIC", false)
+        SetScenarioTypeEnabled("WORLD_VEHICLE_EMPTY", false)
+        SetScenarioTypeEnabled("WORLD_VEHICLE_BUSINESSMEN", false)
+        SetScenarioTypeEnabled("WORLD_VEHICLE_BIKE_OFF_ROAD_RACE", false)
 
-	while true do
-		Citizen.Wait(0)
-		if isNearTakeService() then		
-		else
-			Wait(1200)
-		end
-	end
+        while true do
+                if not isNearTakeService() then
+                        Wait(1200)
+                else
+                        Wait(0)
+                end
+        end
 end)
 
 
