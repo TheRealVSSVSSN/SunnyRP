@@ -6,3 +6,7 @@
 - Added radius constant to blackjack table locator and corrected prop name outputs.
 - Moved animation dictionary cleanup outside the dealer creation loop to prevent missing animation issues.
 - Converted global state to local variables and tightened betting validation on the server.
+
+## [map]/maps
+- Replaced deprecated `__resource.lua` with modern `fxmanifest.lua` using the `cerulean` fx_version.
+- Removed references to missing `def_props.ytyp` and `v_int_16.ytyp` files, retaining only existing `traphouse_shell` assets.
