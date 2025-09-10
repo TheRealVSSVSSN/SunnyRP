@@ -6,3 +6,8 @@
 - Added radius constant to blackjack table locator and corrected prop name outputs.
 - Moved animation dictionary cleanup outside the dealer creation loop to prevent missing animation issues.
 - Converted global state to local variables and tightened betting validation on the server.
+
+## WiseGuy-Wheels
+- Migrated to `fxmanifest.lua` with `cerulean` `fx_version` and enabled Lua 5.4.
+- Refactored wheel name registration into a table-driven thread using `AddTextEntryByHash`.
+- Added structured header comments and modern `CreateThread` usage for clarity.
