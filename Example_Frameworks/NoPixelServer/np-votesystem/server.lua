@@ -1,9 +1,13 @@
 local recentconvictions = {}
 votingEnabled = false
-mayorid = 0
-mayortax = 0
-FundsToAdd = 0
-CurrentFunds = 0
+local mayorid = 0
+local mayortax = 0
+local fundsToAdd = 0
+local currentFunds = 0
+
+local updateCurrentTax
+local updateMayorId
+local updateCoords
 
 RegisterServerEvent('showbusinesses')
 AddEventHandler('showbusinesses', function(businessString)
@@ -14,16 +18,12 @@ end)
 
 RegisterServerEvent('votesystem:removefunds')
 AddEventHandler('votesystem:removefunds', function(amount)
-  FundsToAdd = FundsToAdd - amount
-  FundsToAdd = math.floor(FundsToAdd)
+  fundsToAdd = math.floor(fundsToAdd - amount)
 end)
 
-FundsToAdd = 0
-CurrentFunds = 0
 RegisterServerEvent('votesystem:addfunds')
-AddEventHandler('votesystem:removefunds', function(amount)
-  FundsToAdd = FundsToAdd + amount
-  FundsToAdd = math.floor(FundsToAdd)
+AddEventHandler('votesystem:addfunds', function(amount)
+  fundsToAdd = math.floor(fundsToAdd + amount)
 end)
 
 RegisterServerEvent('getLatestPayBonus')
@@ -34,7 +34,14 @@ AddEventHandler('getLatestPayBonus', function()
   TriggerEvent("updatePays",policebonus,emsbonus,civbonus)
 end)
 
-function runPaySystem()
+--[[
+    -- Type: Function
+    -- Name: runPaySystem
+    -- Use: Refreshes tax and financial data for the voting system
+    -- Created: 09/10/2025
+    -- By: VSSVSSN
+--]]
+local function runPaySystem()
   TriggerEvent("getLatestPayBonus")
   --checkmayor()
   updateCurrentTax()
@@ -62,7 +69,14 @@ end)
 local notDone = true
 local startTime = os.time()
 
-function RandomizeHotSpots()
+--[[
+    -- Type: Function
+    -- Name: RandomizeHotSpots
+    -- Use: Randomizes drug hot spot data for distribution calculations
+    -- Created: 09/10/2025
+    -- By: VSSVSSN
+--]]
+local function RandomizeHotSpots()
   startTime = os.time()
   notDone = false
   hotSpots = {
@@ -99,7 +113,14 @@ function RandomizeHotSpots()
   end
 end
 
-function gangCoords(gangType,src)
+--[[
+    -- Type: Function
+    -- Name: gangCoords
+    -- Use: Sends gang location coordinates to all clients
+    -- Created: 09/10/2025
+    -- By: VSSVSSN
+--]]
+local function gangCoords(gangType,src)
   src = tonumber(src)
   gangType = tonumber(gangType)
   if gangType == 1 then
@@ -109,7 +130,7 @@ function gangCoords(gangType,src)
   elseif gangType == 3 then
     gangtable = "launder_farming"
   end
-  exports.ghmattimysql.execute("SELECT coords FROM " .. gangtable .. "HERE id = @id", {['id'] = 1}, function(result)
+  exports.ghmattimysql:execute("SELECT coords FROM " .. gangtable .. " WHERE id = @id", {['id'] = 1}, function(result)
     if result[1] ~= nil then
       local gcoords = result[1].coords
       if gcoords ~= nil then
@@ -121,7 +142,14 @@ function gangCoords(gangType,src)
   end)
 end
 
-function updateHotSpotPrices()
+--[[
+    -- Type: Function
+    -- Name: updateHotSpotPrices
+    -- Use: Periodically updates hot spot pricing information
+    -- Created: 09/10/2025
+    -- By: VSSVSSN
+--]]
+local function updateHotSpotPrices()
 
   if notDone then
     RandomizeHotSpots()
@@ -171,7 +199,14 @@ end)
 
 -- guns meth launder weed
 -- gunrunner_farming meth_farming launder_farming weed_farming
-function updateCoords(gangType,newCoords)
+--[[
+    -- Type: Function
+    -- Name: updateCoords
+    -- Use: Saves gang coordinates and notifies clients
+    -- Created: 09/10/2025
+    -- By: VSSVSSN
+--]]
+local function updateCoords(gangType,newCoords)
   src = tonumber(src)
   gangType = tonumber(gangType)
   if gangType == 1 then
@@ -181,18 +216,32 @@ function updateCoords(gangType,newCoords)
   elseif gangType == 3 then
     gangtable = "launder_farming"
   end
-  exports.ghmattimysql.execute("UPDATE" .. gangtable .. " SET coords = @newCoords WHERE id = @id",{['newCoords'] = newCoords,['id'] = 1})
+  exports.ghmattimysql:execute("UPDATE " .. gangtable .. " SET coords = @newCoords WHERE id = @id", {['newCoords'] = newCoords, ['id'] = 1})
   TriggerClientEvent("gang:setcoords",-1,newCoords,gangType)
 
 end
 
-function updateMayorId()
+--[[
+    -- Type: Function
+    -- Name: updateMayorId
+    -- Use: Caches the current mayor's character ID
+    -- Created: 09/10/2025
+    -- By: VSSVSSN
+--]]
+local function updateMayorId()
   exports.ghmattimysql:execute("SELECT value FROM general_variables WHERE id = @id", {['id'] = 2}, function(result)
     mayorid = result[1].value
   end)
 end
 
-function updateCurrentTax()
+--[[
+    -- Type: Function
+    -- Name: updateCurrentTax
+    -- Use: Updates the cached mayor tax percentage
+    -- Created: 09/10/2025
+    -- By: VSSVSSN
+--]]
+local function updateCurrentTax()
   exports.ghmattimysql:execute("SELECT value FROM general_variables WHERE id = @id", {['id'] = 4}, function(result)
     mayortax = result[1].value
   end)
@@ -638,7 +687,7 @@ AddEventHandler('server:PayStoreOwner', function(cid,cashamount)
       curPaycheck = curPaycheck + (cashamount - (taxWithheld))
       exports.ghmattimysql:execute("UPDATE characters SET paycheck = @curPayCheck WHERE id = @cid",{['cid'] = cid,['curPayCheck'] = curPaycheck})
       TriggerEvent('votesystem:addfunds' ,taxWithheld)
-      exports["np-log"]:AddLog("Job Payment", cid, "Amount " .. torstring(cashamount), {cid = cid, cashamount = cashamount, job = job})
+      exports["np-log"]:AddLog("Job Payment", cid, "Amount " .. tostring(cashamount), {cid = cid, cashamount = cashamount, job = job})
     end
   end)
 end)
