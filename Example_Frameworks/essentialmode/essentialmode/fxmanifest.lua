@@ -11,6 +11,7 @@ files {
 }
 
 server_scripts {
+    '@mysql-async/lib/MySQL.lua',
     'server/classes/player.lua',
     'server/classes/groups.lua',
     'server/player/login.lua',
@@ -21,3 +22,4 @@ server_scripts {
 client_scripts {
     'client/main.lua'
 }
+

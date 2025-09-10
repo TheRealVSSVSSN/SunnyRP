@@ -3,40 +3,35 @@
 -- NO TOUCHY, IF SOMETHING IS WRONG CONTACT KANERSPS! --
 -- NO TOUCHY, IF SOMETHING IS WRONG CONTACT KANERSPS! --
 
-Citizen.CreateThread(function()
-	while true do
-		Citizen.Wait(0)
-
-		if NetworkIsSessionStarted() then
-			TriggerServerEvent('es:firstJoinProper')
-			return
-		end
-	end
+CreateThread(function()
+        while not NetworkIsSessionStarted() do
+                Wait(0)
+        end
+        TriggerServerEvent('es:firstJoinProper')
 end)
 
 local loaded = false
 local cashy = 0
 local oldPos
 
-Citizen.CreateThread(function()
-	while true do
-		Citizen.Wait(1000)
+CreateThread(function()
+        while true do
+                Wait(1000)
                 local pos = GetEntityCoords(PlayerPedId())
 
-		if(oldPos ~= pos)then
-			TriggerServerEvent('es:updatePositions', pos.x, pos.y, pos.z)
+                if not oldPos or oldPos.x ~= pos.x or oldPos.y ~= pos.y or oldPos.z ~= pos.z then
+                        TriggerServerEvent('es:updatePositions', pos.x, pos.y, pos.z)
 
-			if(loaded)then
-				SendNUIMessage({
-					setmoney = true,
-					money = cashy
-				})
-
-				loaded = false
-			end
-			oldPos = pos
-		end
-	end
+                        if loaded then
+                                SendNUIMessage({
+                                        setmoney = true,
+                                        money = cashy
+                                })
+                                loaded = false
+                        end
+                        oldPos = pos
+                end
+        end
 end)
 
 local myDecorators = {}
@@ -92,15 +87,7 @@ end)
 
 RegisterNetEvent("es:enablePvp")
 AddEventHandler("es:enablePvp", function()
-	Citizen.CreateThread(function()
-		while true do
-			Citizen.Wait(0)
-                        for _, i in ipairs(GetActivePlayers()) do
-                                if NetworkIsPlayerConnected(i) and GetPlayerPed(i) ~= nil then
-                                        SetCanAttackFriendly(GetPlayerPed(i), true, true)
-                                        NetworkSetFriendlyFireOption(true)
-                                end
-                        end
-		end
-	end)
+        SetCanAttackFriendly(PlayerPedId(), true, true)
+        NetworkSetFriendlyFireOption(true)
 end)
+
