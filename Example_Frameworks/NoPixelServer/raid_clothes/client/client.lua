@@ -377,7 +377,7 @@ end)
 
 
 function GetCurrentPed()
-    player = GetPlayerPed(-1)
+    player = PlayerPedId()
     return {
         model = GetEntityModel(PlayerPedId()),
         hairColor = GetPedHair(),
@@ -416,7 +416,7 @@ function SetSkin(model, setDefault)
         end
         SetPlayerModel(PlayerId(), model)
         SetModelAsNoLongerNeeded(model)
-        player = GetPlayerPed(-1)
+        player = PlayerPedId()
         FreezePedCameraRotation(player, true)
         SetPedDefaultComponentVariation(player)
         if setDefault and model ~= nil and not isCustomSkin(model) and (model == `mp_f_freemode_01` or model == `mp_m_freemode_01`) then
@@ -829,7 +829,7 @@ end)
 -- Main menu
 
 function OpenMenu(name)
-    player = GetPlayerPed(-1)
+    player = PlayerPedId()
     oldPed = GetCurrentPed()
     local isAllowed = false
     if(oldPed.model == 1885233650 or oldPed.model == -1667301416) then isAllowed = true end
@@ -870,7 +870,7 @@ end
 
 function IsNearShop(shops)
     local dstchecked = 1000
-    local plyPos = GetEntityCoords(GetPlayerPed(PlayerId()), false)
+    local plyPos = GetEntityCoords(PlayerPedId(), false)
 	for i = 1, #shops do
 		shop = shops[i]
 		local comparedst = Vdist(plyPos.x, plyPos.y, plyPos.z,shop[1], shop[2], shop[3])
@@ -923,7 +923,7 @@ Citizen.CreateThread(function()
         local nearheal = IsNearShop(healingShops)
         local neartat = IsNearShop(tattoosShops)
         local nearbarber = IsNearShop(barberShops)
-        local jailcheck = GetInteriorFromEntity(GetPlayerPed(PlayerId()))
+        local jailcheck = GetInteriorFromEntity(PlayerPedId())
 
         local StoreCost = 400;
 
@@ -1020,7 +1020,7 @@ end)
 
 RegisterNetEvent("raid_clothes:setclothes")
 AddEventHandler("raid_clothes:setclothes", function(data,alreadyExist)
-    player = GetPlayerPed(-1)
+    player = PlayerPedId()
     local function setDefault()
         Citizen.CreateThread(function()
             firstChar = true
@@ -1112,7 +1112,7 @@ end)
 
 RegisterNetEvent("raid_clothes:setpedfeatures")
 AddEventHandler("raid_clothes:setpedfeatures", function(data)
-    player = GetPlayerPed(-1)
+    player = PlayerPedId()
     if data == false then
         SetSkin(GetEntityModel(PlayerPedId()), true)
         return

@@ -1,18 +1,32 @@
+--[[
+    -- Type: Function
+    -- Name: checkExistenceClothes
+    -- Use: Verifies if a character has clothing data stored
+    -- Created: 2024-10-30
+    -- By: VSSVSSN
+--]]
 local function checkExistenceClothes(cid, cb)
-    exports.ghmattimysql:execute("SELECT cid FROM character_current WHERE cid = @cid LIMIT 1;", {["cid"] = cid}, function(result)
+    exports.ghmattimysql:execute("SELECT cid FROM character_current WHERE cid = @cid LIMIT 1;", { cid = cid }, function(result)
         local exists = result and result[1] and true or false
         cb(exists)
     end)
 end
 
+--[[
+    -- Type: Function
+    -- Name: checkExistenceFace
+    -- Use: Verifies if a character has facial data stored
+    -- Created: 2024-10-30
+    -- By: VSSVSSN
+--]]
 local function checkExistenceFace(cid, cb)
-    exports.ghmattimysql:execute("SELECT cid FROM character_face WHERE cid = @cid LIMIT 1;", {["cid"] = cid}, function(result)
+    exports.ghmattimysql:execute("SELECT cid FROM character_face WHERE cid = @cid LIMIT 1;", { cid = cid }, function(result)
         local exists = result and result[1] and true or false
         cb(exists)
     end)
 end
 
-RegisterServerEvent("raid_clothes:insert_character_current")
+RegisterNetEvent("raid_clothes:insert_character_current")
 AddEventHandler("raid_clothes:insert_character_current",function(data)
     if not data then return end
     local src = source
@@ -43,7 +57,7 @@ AddEventHandler("raid_clothes:insert_character_current",function(data)
     end)
 end)
 
-RegisterServerEvent("raid_clothes:insert_character_face")
+RegisterNetEvent("raid_clothes:insert_character_face")
 AddEventHandler("raid_clothes:insert_character_face",function(data)
     if not data then return end
     local src = source
@@ -81,7 +95,7 @@ AddEventHandler("raid_clothes:insert_character_face",function(data)
     end)
 end)
 
-RegisterServerEvent("raid_clothes:get_character_face")
+RegisterNetEvent("raid_clothes:get_character_face")
 AddEventHandler("raid_clothes:get_character_face",function(pSrc)
     local src = (not pSrc and source or pSrc)
     local user = exports["np-base"]:getModule("Player"):GetUser(src)
@@ -107,7 +121,7 @@ AddEventHandler("raid_clothes:get_character_face",function(pSrc)
 	end)
 end)
 
-RegisterServerEvent("raid_clothes:get_character_current")
+RegisterNetEvent("raid_clothes:get_character_current")
 AddEventHandler("raid_clothes:get_character_current",function(pSrc)
     local src = (not pSrc and source or pSrc)
     local user = exports["np-base"]:getModule("Player"):GetUser(src)
@@ -127,7 +141,7 @@ AddEventHandler("raid_clothes:get_character_current",function(pSrc)
 	end)
 end)
 
-RegisterServerEvent("raid_clothes:retrieve_tats")
+RegisterNetEvent("raid_clothes:retrieve_tats")
 AddEventHandler("raid_clothes:retrieve_tats", function(pSrc)
     local src = (not pSrc and source or pSrc)
 	local user = exports["np-base"]:getModule("Player"):GetUser(src)
@@ -143,7 +157,7 @@ AddEventHandler("raid_clothes:retrieve_tats", function(pSrc)
 	end)
 end)
 
-RegisterServerEvent("raid_clothes:set_tats")
+RegisterNetEvent("raid_clothes:set_tats")
 AddEventHandler("raid_clothes:set_tats", function(tattoosList)
 	local src = source
 	local user = exports["np-base"]:getModule("Player"):GetUser(src)
@@ -152,7 +166,7 @@ AddEventHandler("raid_clothes:set_tats", function(tattoosList)
 end)
 
 
-RegisterServerEvent("raid_clothes:get_outfit")
+RegisterNetEvent("raid_clothes:get_outfit")
 AddEventHandler("raid_clothes:get_outfit",function(slot)
     if not slot then return end
     local src = source
@@ -201,7 +215,7 @@ AddEventHandler("raid_clothes:get_outfit",function(slot)
 	end)
 end)
 
-RegisterServerEvent("raid_clothes:set_outfit")
+RegisterNetEvent("raid_clothes:set_outfit")
 AddEventHandler("raid_clothes:set_outfit",function(slot, name, data)
     if not slot then return end
     local src = source
@@ -254,37 +268,34 @@ AddEventHandler("raid_clothes:set_outfit",function(slot, name, data)
 end)
 
 
-RegisterServerEvent("raid_clothes:remove_outfit")
-AddEventHandler("raid_clothes:remove_outfit",function(slot)
-
+RegisterNetEvent("raid_clothes:remove_outfit")
+AddEventHandler("raid_clothes:remove_outfit", function(slot)
     local src = source
     local user = exports["np-base"]:getModule("Player"):GetUser(src)
     local cid = user:getCurrentCharacter().id
-    local slot = slot
+    local outfitSlot = tonumber(slot)
 
-    if not cid then return end
+    if not cid or not outfitSlot then return end
 
-    exports.ghmattimysql:execute( "DELETE FROM character_outfits WHERE cid = @cid AND slot = @slot", { ['cid'] = cid,  ["slot"] = slot } )
-    TriggerClientEvent("DoLongHudText", src,"Removed slot " .. slot .. ".",1)
+    exports.ghmattimysql:execute("DELETE FROM character_outfits WHERE cid = @cid AND slot = @slot", { cid = cid, slot = outfitSlot })
+    TriggerClientEvent("DoLongHudText", src, "Removed slot " .. outfitSlot .. ".",1)
 end)
 
-RegisterServerEvent("raid_clothes:list_outfits")
-AddEventHandler("raid_clothes:list_outfits",function()
+RegisterNetEvent("raid_clothes:list_outfits")
+AddEventHandler("raid_clothes:list_outfits", function()
     local src = source
     local user = exports["np-base"]:getModule("Player"):GetUser(src)
     local cid = user:getCurrentCharacter().id
-    local slot = slot
-    local name = name
 
     if not cid then return end
 
-    exports.ghmattimysql:execute("SELECT slot, name FROM character_outfits WHERE cid = @cid", {['cid'] = cid}, function(skincheck)
-    	TriggerClientEvent("hotel:listSKINSFORCYRTHESICKFUCK",src, skincheck)
-	end)
+    exports.ghmattimysql:execute("SELECT slot, name FROM character_outfits WHERE cid = @cid", { cid = cid }, function(skincheck)
+        TriggerClientEvent("hotel:listSKINSFORCYRTHESICKFUCK", src, skincheck)
+    end)
 end)
 
 
-RegisterServerEvent("clothing:checkIfNew")
+RegisterNetEvent("clothing:checkIfNew")
 AddEventHandler("clothing:checkIfNew", function()
     local src = source
     local user = exports["np-base"]:getModule("Player"):GetUser(src)
@@ -308,7 +319,7 @@ AddEventHandler("clothing:checkIfNew", function()
                 end)
                 return
             else
-                exports.ghmattimysql:execute("SELECT * FROM characters where id = @cid", {['@cid'] = cid}, function(data)
+                exports.ghmattimysql:execute("SELECT * FROM characters where id = @cid", { cid = cid }, function(data)
                     if data[1].jail_time >= 1 then
                         print('in jail')
                         TriggerClientEvent("hotel:createRoom", src, false, false)
@@ -324,7 +335,7 @@ AddEventHandler("clothing:checkIfNew", function()
     end)
 end)
 
-RegisterServerEvent("clothing:checkMoney")
+RegisterNetEvent("clothing:checkMoney")
 AddEventHandler("clothing:checkMoney", function(menu,askingPrice)
     local src = source
     local target = exports["np-base"]:getModule("Player"):GetUser(src)
