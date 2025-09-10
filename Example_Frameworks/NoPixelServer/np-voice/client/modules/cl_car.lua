@@ -18,10 +18,10 @@ function LoadCarModule()
     AddEventHandler('baseevents:leftVehicle',function(leftVehicle, netId)
 
         --if _inVeh then
-            Citizen.Wait(1100)
+            Wait(1100)
             local count = 0
             while not targetSet and count < 50 do
-                Citizen.Wait(100)
+                Wait(100)
                 count = count + 1
             end
 
@@ -101,7 +101,7 @@ function startVehThread()
             end
         end
         targetSet = true
-        Citizen.Wait(500)
+        Wait(500)
     end
 end
 

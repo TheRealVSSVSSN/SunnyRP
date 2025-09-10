@@ -97,7 +97,6 @@ function DumpTable(table, nb)
 
 		return s .. '}'
 	else
-		return tostring(table)
-	end
+        return tostring(table)
+    end
 end
--- koil sucks

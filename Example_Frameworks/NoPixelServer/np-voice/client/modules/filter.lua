@@ -108,21 +108,21 @@ function CreateFilterChain(serverID, data)
         Wait(200)
         if node then
             if index == 1 then
-                Citizen.Wait(0)
+                Wait(0)
                 AudiocontextDisconnect(audio.context, audio.destination, audio.source, 0, 0)
-                Citizen.Wait(0)
+                Wait(0)
                 AudiocontextConnect(audio.context, node, audio.source, 0, 0)
-                Citizen.Wait(0)
+                Wait(0)
                 AudiocontextConnect(audio.context, audio.destination, node, 0, 0)
-                Citizen.Wait(0)
+                Wait(0)
             else
-                Citizen.Wait(0)
+                Wait(0)
                 AudiocontextDisconnect(audio.context, audio.destination, audio.node, 0, 0)
-                Citizen.Wait(0)
+                Wait(0)
                 AudiocontextConnect(audio.context, node, audio.node, 0, 0)
-                Citizen.Wait(0)
+                Wait(0)
                 AudiocontextConnect(audio.context, audio.destination, node, 0, 0)
-                Citizen.Wait(0)
+                Wait(0)
             end
 
             audio.node = node
@@ -160,9 +160,9 @@ function DeleteFilterChain(serverID)
         Debug("[Filter] Chain Deleted | Player: %s ", serverID)
         if audio.active then
             AudiocontextDisconnect(audio.context, audio.destination, audio.node, 0, 0)
-            Citizen.Wait(0)
+            Wait(0)
             AudiocontextConnect(audio.context, audio.destination, audio.source, 0, 0)
-            Citizen.Wait(100)
+            Wait(100)
         end
 
         for _, filter in pairs(audio.filters) do
@@ -178,7 +178,7 @@ end
 function ConnectFilterChain(audio)
     AudiocontextDisconnect(audio.context, audio.destination, audio.source, 0, 0)
 
-    Citizen.Wait(50) -- 100
+    Wait(50) -- 100
 
     for index, filter in ipairs(audio.filters) do
         if index == 1 then
@@ -187,12 +187,12 @@ function ConnectFilterChain(audio)
             AudiocontextConnect(audio.context, filter.node, audio.filters[index - 1]["node"], 0, 0)
         end
 
-        Citizen.Wait(50) --200
+        Wait(50) --200
     end
 
     AudiocontextConnect(audio.context, audio.destination, audio.filters[#audio.filters]["node"], 0, 0)
 
-    Citizen.Wait(50) --100
+    Wait(50) --100
     
     audio.active = true
 end
@@ -202,7 +202,7 @@ function DisconnectFilterChain(audio)
 
     if node then
       AudiocontextDisconnect(audio.context, audio.destination, node, 0, 0)
-      Citizen.Wait(100)
+      Wait(100)
       AudiocontextConnect(audio.context, audio.destination, audio.source, 0, 0)
     end
 

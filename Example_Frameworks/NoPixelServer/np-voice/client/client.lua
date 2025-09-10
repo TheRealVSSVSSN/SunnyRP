@@ -1,53 +1,16 @@
 Transmissions, Targets, Channels, Settings = Context:new(), Context:new(), Context:new(), {}
-CurrentTarget, CurrentInstance, CurrentProximity, CurrentVoiceChannel, Player, PlayerCoords, PreviousCoords, VoiceEnabled = 2, 0, 1, 0
+CurrentTarget, CurrentInstance, CurrentProximity, CurrentVoiceChannel, Player, PlayerCoords, PreviousCoords, VoiceEnabled = 2, 0, 1, 0, nil, nil, nil, false
 _myServerId = nil
 _isDead = false
 isVoiceActive = false
 
-
-AddEventHandler("syd:isdead",function(isdead)
+RegisterNetEvent('syd:isdead')
+AddEventHandler('syd:isdead', function(isDead)
     _isDead = isDead
 end)
 
-Citizen.CreateThread(function()
-    RegisterKeyMapping('+cycleProximity', "Cambia Volume Voce", 'keyboard', Config.cycleProximityHotkey)
-    RegisterCommand('+cycleProximity', CycleVoiceProximity, false)
-    RegisterCommand('-cycleProximity', function() end, false)
-
-    -- while not exports['es_extended']:hasPlayerLoaded() do
-    --     Wait(1000)
-    -- end
-
-    for i = 1, 4 do
-        MumbleClearVoiceTarget(i)
-    end
-
-    if Config.enableGrids then
-        LoadGridModule()
-    end
-
-    if Config.enableRadio then
-        LoadRadioModule()
-    end
-
-    if Config.enablePhone then
-        LoadPhoneModule()
-    end
-
-    if Config.enableCar then
-        LoadCarModule()
-    end
-
-    SetVoiceProximity(2)
-    TriggerEvent("np:voice:ready")
-
-    _myServerId = GetPlayerServerId(PlayerId())
-    voiceCheck()
-    voiceThread()
-end)
-
 function voiceCheck()
-    Citizen.CreateThread(function()
+    CreateThread(function()
         local toggle = false
         while true do
             local idle = 500
@@ -64,7 +27,7 @@ function voiceCheck()
                 toggle = true
             end
     
-            Citizen.Wait(idle)
+            Wait(idle)
         end
     end)
 end
@@ -73,7 +36,7 @@ end
 function voiceThread()
     --local id = PlayerId()
     local toggle = false
-    Citizen.CreateThread(function()
+    CreateThread(function()
         while true do
             local idle = 250
 
@@ -87,12 +50,13 @@ function voiceThread()
                 TriggerEvent('yeahlol:ofc', false)
             end
     
-            Citizen.Wait(idle)
+            Wait(idle)
         end
     end)
 end
 
 
+RegisterNetEvent('np:voice:state')
 AddEventHandler('np:voice:state', function(state)
     VoiceEnabled = state
 
@@ -104,7 +68,7 @@ AddEventHandler('np:voice:state', function(state)
         _myServerId = GetPlayerServerId(PlayerId())
         while MumbleGetVoiceChannelFromServerId(_myServerId) == 0 do
             NetworkSetVoiceChannel(CurrentVoiceChannel)
-            Citizen.Wait(100)
+            Wait(100)
         end
 
         SetVoiceProximity(2)
@@ -384,7 +348,7 @@ AddEventHandler("np:voice:transmission:state", function(serverID, context, trans
 
     if not transmitting then
         MumbleSetVolumeOverrideByServerId(serverID, data.volume)
-        Citizen.Wait(0)
+        Wait(0)
     end
 
     if context == "radio" and IsRadioOn then
@@ -392,7 +356,7 @@ AddEventHandler("np:voice:transmission:state", function(serverID, context, trans
     end
 
     if transmitting then
-        Citizen.Wait(0)
+        Wait(0)
         MumbleSetVolumeOverrideByServerId(serverID, data.volume)
     end
 
@@ -409,7 +373,7 @@ AddEventHandler('np:voice:targets:player:add', AddPlayerToTargetList)
 RegisterNetEvent('np:voice:targets:player:remove')
 AddEventHandler('np:voice:targets:player:remove', RemovePlayerFromTargetList)
 
-Citizen.CreateThread(function()
+CreateThread(function()
     RegisterKeyMapping('+cycleProximity', "Cycle Proximity Range", 'keyboard', Config.cycleProximityHotkey)
     RegisterCommand('+cycleProximity', CycleVoiceProximity, false)
     RegisterCommand('-cycleProximity', function() end, false)
@@ -440,9 +404,17 @@ Citizen.CreateThread(function()
         LoadPhoneModule()
     end
 
+    if Config.enableCar then
+        LoadCarModule()
+    end
+
     SetVoiceProximity(2)
 
     TriggerEvent("np:voice:ready")
+
+    _myServerId = GetPlayerServerId(PlayerId())
+    voiceCheck()
+    voiceThread()
 
     SetSettings(exports["np-base"]:getModule("SettingsData"):getSettingsTable())
 end)
