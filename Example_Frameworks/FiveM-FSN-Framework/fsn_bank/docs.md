@@ -3,7 +3,14 @@
 ## Overview and Runtime Context
 The `fsn_bank` resource equips the FiveM-FSN framework with ATM and bank branch interactions. It presents map blips for branches, opens a browser-based ATM UI, and relays balance changes to the framework's core money system and database.
 
+## File Inventory
+- **Client:** `client.lua`
+- **Server:** `server.lua`
+- **Shared/Config:** `fxmanifest.lua`
+- **NUI:** `gui/index.html`, `gui/index.css`, `gui/index.js`, and image/sound assets
+
 ## Table of Contents
+- [File Inventory](#file-inventory)
 - [Client](#client)
   - [client.lua](#clientlua)
 - [Server](#server)
@@ -21,6 +28,7 @@ The `fsn_bank` resource equips the FiveM-FSN framework with ATM and bank branch 
   - [Commands](#commands)
   - [NUI Callbacks](#nui-callbacks)
   - [NUI Messages](#nui-messages)
+  - [DB Calls](#db-calls)
 - [Configuration & Integration](#configuration--integration)
 - [Gaps & Inferences](#gaps--inferences)
 
@@ -99,7 +107,7 @@ Styles layout, buttons, and fonts for the ATM interface.
 | `fsn_bank:update:both` | Server → client | wallet, bank | Syncs balances and updates NUI. |
 | `fsn_main:displayBankandMoney` | Client local | none | Restores HUD after closing ATM. |
 | `fsn_notify:displayNotification` | Both | message, position, duration, type | Shows on-screen notifications. |
-| `fsn_phones:SYS:addTransaction` | Client local | transaction table | Records activity in the phone app. |
+| `fsn_phones:SYS:addTransaction` | Client local | {title, trantype, systype, tranamt} | Records activity in the phone app. |
 | `fsn_main:logging:addLog` | Client → server | player ID, category, text | Stores money logs. |
 | `fsn_bank:transfer` | Client → server | receive, amount | Moves funds to another player. |
 | `fsn_bank:database:update` | Client → server | charid, wallet, bank | Persists balances to database. |
@@ -128,6 +136,12 @@ Styles layout, buttons, and fonts for the ATM interface.
 | `displayATM` | bank, enable | Toggles ATM UI and notes if at a bank branch. |
 | `update` (`wallet&bank`) | wallet, bank | Refreshes displayed balances. |
 
+### DB Calls
+| Call Site | Query | Description |
+|-----------|-------|-------------|
+| `fsn_bank:database:update` | `UPDATE fsn_characters SET char_bank=@bank WHERE char_id=@char_id` | Saves new bank balance when provided. |
+| `fsn_bank:database:update` | `UPDATE fsn_characters SET char_money=@wallet WHERE char_id=@char_id` | Saves new wallet amount when provided. |
+
 ## Configuration & Integration
 - Depends on `@fsn_main` for utilities, settings, HUD updates, and character identification.
 - Requires `mysql-async` for database operations.
@@ -137,7 +151,8 @@ Styles layout, buttons, and fonts for the ATM interface.
 - `fsn_bank:change:bankandwallet` is emitted but unhandled within this resource; the core money module likely listens *(Inferred: High).* 
 - `fsn_bank:request:both` lacks a handler here; assumed to be processed by the core system *(Inferred: Medium).* 
 - `fsn_bank:change:bankAdd` and `fsn_bank:change:bankMinus` have no handlers in this resource *(Inferred: High).* 
-- `fsn_closeATM` assigns `atmDisplay = falses`, leaving the flag true and potentially blocking reopening *(Inferred: High – probable typo).* 
+- `fsn_closeATM` assigns `atmDisplay = falses`, leaving the flag true and potentially blocking reopening *(Inferred: High – probable typo).*
 - Transfers rely on external listeners to persist updated balances via `fsn_bank:database:update` *(Inferred: Medium).* 
+- NUI group and loan screens are present but lack callbacks or server logic *(Inferred: High).* 
 
 DOCS COMPLETE
