@@ -59,14 +59,25 @@ CreateThread(function()
     end
 end)
 
+--[[
+    -- Type: Function
+    -- Name: enableFriendlyFire
+    -- Use: Allows players to attack each other in the session
+    -- Created: 2024-10-18
+    -- By: VSSVSSN
+--]]
+local function enableFriendlyFire()
+    local playerPed = PlayerPedId()
+    SetCanAttackFriendly(playerPed, true, false)
+    NetworkSetFriendlyFireOption(true)
+end
+
 AddEventHandler("playerSpawned", function()
     print("^0ND Framework support discord: ^5https://discord.gg/Z9Mxu72zZ6")
-    SetCanAttackFriendly(PlayerPedId(), true, false)
-    NetworkSetFriendlyFireOption(true)
+    enableFriendlyFire()
 end)
 
 AddEventHandler("onResourceStart", function(resourceName)
     if resourceName ~= GetCurrentResourceName() then return end
-    SetCanAttackFriendly(PlayerPedId(), true, false)
-    NetworkSetFriendlyFireOption(true)
+    enableFriendlyFire()
 end)
