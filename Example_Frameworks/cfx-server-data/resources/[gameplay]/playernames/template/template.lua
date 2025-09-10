@@ -1,8 +1,23 @@
 local setmetatable = setmetatable
-local loadstring = loadstring
+local loadstring = loadstring or load
 local loadchunk
 local tostring = tostring
-local setfenv = setfenv
+local debug = debug
+local setfenv = setfenv or function(fn, env)
+    local i = 1
+    while true do
+        local name = debug.getupvalue(fn, i)
+        if not name then break end
+        if name == '_ENV' then
+            debug.upvaluejoin(fn, i, (function()
+                return env
+            end), 1)
+            break
+        end
+        i = i + 1
+    end
+    return fn
+end
 local require = require
 local capture
 local concat = table.concat
@@ -476,3 +491,4 @@ function template.render(view, context, key, plain)
 end
 
 return template
+
