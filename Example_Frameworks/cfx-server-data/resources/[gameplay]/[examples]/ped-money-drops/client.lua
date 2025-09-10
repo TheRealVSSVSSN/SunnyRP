@@ -1,41 +1,63 @@
-AddEventHandler('gameEventTriggered', function(eventName, args)
-    if eventName == 'CEventNetworkEntityDamage' then
-        local victim = args[1]
-        local culprit = args[2]
-        local isDead = args[4] == 1
+--[[
+    -- Type: Client Script
+    -- Name: ped-money-drops client
+    -- Use: Spawns money pickups from dead NPCs
+    -- Created: 2024-04-27
+    -- By: VSSVSSN
+--]]
 
-        if isDead then
-            local origCoords = GetEntityCoords(victim)
-            local pickup = CreatePickupRotate(`PICKUP_MONEY_VARIABLE`, origCoords.x, origCoords.y, origCoords.z - 0.7, 0.0, 0.0, 0.0, 512, 0, false, 0)
-            local netId = PedToNet(victim)
+local function spawnMoneyPickup(victim)
+    local coords = GetEntityCoords(victim)
+    coords = vec3(coords.x, coords.y, coords.z - 0.7)
 
-            local undoStuff = { false }
+    local pickup = CreatePickupRotate(`PICKUP_MONEY_VARIABLE`, coords.x, coords.y, coords.z, 0.0, 0.0, 0.0, 512, 0, false, 0)
+    local netId = NetworkGetNetworkIdFromEntity(victim)
+    local collected = false
 
-            CreateThread(function()
-                local self = PlayerPedId()
-
-                while not undoStuff[1] do
-                    Wait(50)
-
-                    if #(GetEntityCoords(self) - origCoords) < 2.5 and HasPickupBeenCollected(pickup) then
-                        TriggerServerEvent('money:tryPickup', netId)
-
-                        RemovePickup(pickup)
-                        break
-                    end
-                end
-
-                undoStuff[1] = true
-            end)
-
-            SetTimeout(15000, function()
-                if not undoStuff[1] then
-                    RemovePickup(pickup)
-                    undoStuff[1] = true
-                end
-            end)
-
-            TriggerServerEvent('money:allowPickupNear', netId)
+    CreateThread(function()
+        local playerPed = PlayerPedId()
+        while not collected do
+            Wait(50)
+            if #(GetEntityCoords(playerPed) - coords) < 2.5 and HasPickupBeenCollected(pickup) then
+                TriggerServerEvent('money:tryPickup', netId)
+                RemovePickup(pickup)
+                collected = true
+            end
         end
+    end)
+
+    SetTimeout(15000, function()
+        if not collected then
+            RemovePickup(pickup)
+            collected = true
+        end
+    end)
+
+    TriggerServerEvent('money:allowPickupNear', netId)
+end
+
+AddEventHandler('gameEventTriggered', function(eventName, args)
+    if eventName ~= 'CEventNetworkEntityDamage' then
+        return
     end
+
+    local victim, attacker, _, fatal = table.unpack(args)
+    if fatal ~= 1 then
+        return
+    end
+
+    if attacker ~= PlayerPedId() then
+        return
+    end
+
+    if not IsEntityAPed(victim) or IsPedAPlayer(victim) then
+        return
+    end
+
+    if not NetworkGetEntityIsNetworked(victim) then
+        return
+    end
+
+    spawnMoneyPickup(victim)
 end)
+

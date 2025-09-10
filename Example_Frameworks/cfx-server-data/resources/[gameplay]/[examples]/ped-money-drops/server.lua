@@ -1,10 +1,15 @@
+--[[
+    -- Type: Server Script
+    -- Name: ped-money-drops server
+    -- Use: Validates pickup locations and rewards players
+    -- Created: 2024-04-27
+    -- By: VSSVSSN
+--]]
+
 local safePositions = {}
 
-RegisterNetEvent('money:allowPickupNear')
-
-AddEventHandler('money:allowPickupNear', function(pedId)
-    local entity = NetworkGetEntityFromNetworkId(pedId)
-
+RegisterNetEvent('money:allowPickupNear', function(netId)
+    local entity = NetworkGetEntityFromNetworkId(netId)
     Wait(250)
 
     if not DoesEntityExist(entity) then
@@ -15,28 +20,27 @@ AddEventHandler('money:allowPickupNear', function(pedId)
         return
     end
 
-    local coords = GetEntityCoords(entity)
-    safePositions[pedId] = coords
+    safePositions[netId] = GetEntityCoords(entity)
 end)
 
-RegisterNetEvent('money:tryPickup')
-
-AddEventHandler('money:tryPickup', function(entity)
-    if not safePositions[entity] then
+RegisterNetEvent('money:tryPickup', function(netId)
+    local coords = safePositions[netId]
+    if not coords then
         return
     end
 
-    local source = source
-    local playerPed = GetPlayerPed(source)
-    local coords = GetEntityCoords(playerPed)
+    local src = source
+    local playerPed = GetPlayerPed(src)
+    local playerCoords = GetEntityCoords(playerPed)
 
-    if #(safePositions[entity] - coords) < 2.5 then
-        exports['money']:addMoney(source, 'cash', 40)
+    if #(coords - playerCoords) < 2.5 then
+        exports.money:addMoney(src, 'cash', 40)
     end
 
-    safePositions[entity] = nil
+    safePositions[netId] = nil
 end)
 
-AddEventHandler('entityRemoved', function(entity)
-    safePositions[entity] = nil
+AddEventHandler('entityRemoved', function(netId)
+    safePositions[netId] = nil
 end)
+
