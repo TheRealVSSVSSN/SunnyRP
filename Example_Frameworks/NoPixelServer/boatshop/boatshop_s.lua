@@ -4,17 +4,9 @@ RegisterServerEvent('ply_docks:Lang')
 
 
 
---[[Function]]--
-
-function getIdentifiant(id)
-    for _, v in ipairs(id) do
-        return v
-    end
-end
-
-
-
 --[[Events]]--
+
+local state_in, state_out = "In", "Out"
 
 --Langage
 AddEventHandler('ply_docks:Lang', function(lang)
@@ -62,7 +54,19 @@ AddEventHandler('ply_docks:BuyForBoat', function(name, boat, price, plate, prima
     local pearlescentcolor = pearlescentcolor
     local wheelcolor = wheelcolor
 
-    exports.ghmattimysql:execute("INSERT INTO user_boat (identifier,boat_name,boat_model,boat_price,boat_plate,boat_state,boat_colorprimary,boat_colorsecondary,boat_pearlescentcolor,boat_wheelcolor) VALUES (@username,@name,@boat,@price,@plate,@state,@primarycolor,@secondarycolor,@pearlescentcolor,@wheelcolor)",
-    {['@username'] = char.id, ['@name'] = name, ['@boat'] = boat, ['@price'] = price, ['@plate'] = plate, ['@state'] = state, ['@primarycolor'] = primarycolor, ['@secondarycolor'] = secondarycolor, ['@pearlescentcolor'] = pearlescentcolor, ['@wheelcolor'] = wheelcolor}, function(data)
-    end)
+    exports.ghmattimysql:execute(
+        "INSERT INTO user_boat (identifier,boat_name,boat_model,boat_price,boat_plate,boat_state,boat_colorprimary,boat_colorsecondary,boat_pearlescentcolor,boat_wheelcolor) VALUES (@username,@name,@boat,@price,@plate,@state,@primarycolor,@secondarycolor,@pearlescentcolor,@wheelcolor)",
+        {
+            ['@username'] = char.id,
+            ['@name'] = name,
+            ['@boat'] = boat,
+            ['@price'] = price,
+            ['@plate'] = plate,
+            ['@state'] = state,
+            ['@primarycolor'] = primarycolor,
+            ['@secondarycolor'] = secondarycolor,
+            ['@pearlescentcolor'] = pearlescentcolor,
+            ['@wheelcolor'] = wheelcolor
+        }
+    )
 end)
