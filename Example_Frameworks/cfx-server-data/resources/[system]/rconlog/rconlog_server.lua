@@ -1,11 +1,21 @@
-RconLog({ msgType = 'serverStart', hostname = 'lovely', maxplayers = 32 })
+RconLog({
+    msgType = 'serverStart',
+    hostname = GetConvar('sv_hostname', 'unknown'),
+    maxplayers = GetConvarInt('sv_maxclients', 32)
+})
 
-RegisterServerEvent('rlPlayerActivated')
+RegisterNetEvent('rlPlayerActivated')
 
 local names = {}
 
 AddEventHandler('rlPlayerActivated', function()
-    RconLog({ msgType = 'playerActivated', netID = source, name = GetPlayerName(source), guid = GetPlayerIdentifiers(source)[1], ip = GetPlayerEP(source) })
+    RconLog({
+        msgType = 'playerActivated',
+        netID = source,
+        name = GetPlayerName(source),
+        guid = GetPlayerIdentifiers(source)[1],
+        ip = GetPlayerEndpoint(source)
+    })
 
     names[source] = { name = GetPlayerName(source), id = source }
 
@@ -14,7 +24,7 @@ AddEventHandler('rlPlayerActivated', function()
 	end
 end)
 
-RegisterServerEvent('rlUpdateNamesResult')
+RegisterNetEvent('rlUpdateNamesResult')
 
 AddEventHandler('rlUpdateNamesResult', function(res)
     if source ~= tonumber(GetHostId()) then
@@ -61,7 +71,7 @@ AddEventHandler('rconCommand', function(commandName, args)
             if guid and guid[1] and data then
                 local ping = GetPlayerPing(netid)
 
-                RconPrint(netid .. ' ' .. guid[1] .. ' ' .. data.name .. ' ' .. GetPlayerEP(netid) .. ' ' .. ping .. "\n")
+                RconPrint(netid .. ' ' .. guid[1] .. ' ' .. data.name .. ' ' .. GetPlayerEndpoint(netid) .. ' ' .. ping .. "\n")
             end
         end
 
