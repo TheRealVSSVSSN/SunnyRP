@@ -1,55 +1,84 @@
-local ids = {}
+--[[
+    -- Type: Module
+    -- Name: playernames_api
+    -- Use: Provides shared utilities to manage player name tags
+    -- Created: 2024-02-14
+    -- By: VSSVSSN
+--]]
 
-local function getTriggerFunction(key)
+local playerConfig = {}
+
+--[[
+    -- Type: Function
+    -- Name: createTriggerFunction
+    -- Use: Builds server/client aware triggers for updating player tags
+    -- Created: 2024-02-14
+    -- By: VSSVSSN
+--]]
+local function createTriggerFunction(key)
     return function(id, ...)
-        -- if on the client, it's easy
         if not IsDuplicityVersion() then
             TriggerEvent('playernames:configure', GetPlayerServerId(id), key, ...)
-        else
-            -- if on the server, save configuration
-            if not ids[id] then
-                ids[id] = {}
-            end
-
-            -- save the setting
-            ids[id][key] = table.pack(...)
-
-            -- broadcast to clients
-            TriggerClientEvent('playernames:configure', -1, id, key, ...)
+            return
         end
+
+        if not playerConfig[id] then
+            playerConfig[id] = {}
+        end
+
+        playerConfig[id][key] = table.pack(...)
+
+        TriggerClientEvent('playernames:configure', -1, id, key, ...)
     end
 end
 
 if IsDuplicityVersion() then
-    function reconfigure(source)
-        for id, data in pairs(ids) do
+    --[[
+        -- Type: Function
+        -- Name: reconfigure
+        -- Use: Sends stored player configuration back to a joining client
+        -- Created: 2024-02-14
+        -- By: VSSVSSN
+    --]]
+    function reconfigure(src)
+        for id, data in pairs(playerConfig) do
             for key, args in pairs(data) do
-                TriggerClientEvent('playernames:configure', source, id, key, table.unpack(args))
+                TriggerClientEvent('playernames:configure', src, id, key, table.unpack(args))
             end
         end
     end
 
     AddEventHandler('playerDropped', function()
-        ids[source] = nil
+        playerConfig[source] = nil
     end)
 end
 
-setComponentColor = getTriggerFunction('setc')
-setComponentAlpha = getTriggerFunction('seta')
-setComponentVisibility = getTriggerFunction('tglc')
-setWantedLevel = getTriggerFunction('setw')
-setHealthBarColor = getTriggerFunction('sehc')
-setNameTemplate = getTriggerFunction('tpl')
-setName = getTriggerFunction('name')
+setComponentColor = createTriggerFunction('setc')
+setComponentAlpha = createTriggerFunction('seta')
+setComponentVisibility = createTriggerFunction('tglc')
+setWantedLevel = createTriggerFunction('setw')
+setHealthBarColor = createTriggerFunction('sehc')
+setNameTemplate = createTriggerFunction('tpl')
+setName = createTriggerFunction('name')
 
 if not io then
     io = { write = nil, open = nil }
 end
 
-local template = load(LoadResourceFile(GetCurrentResourceName(), 'template/template.lua'))()
+local resourceName = GetCurrentResourceName()
+local templateCode = LoadResourceFile(resourceName, 'template/template.lua')
+assert(templateCode, 'playernames template missing')
+local template = load(templateCode, '@template.lua')()
 
+--[[
+    -- Type: Function
+    -- Name: formatPlayerNameTag
+    -- Use: Renders a player name using a template string
+    -- Created: 2024-02-14
+    -- By: VSSVSSN
+--]]
 function formatPlayerNameTag(i, templateStr)
-    --return ('%s &lt;%d&gt;'):format(GetPlayerName(i), GetPlayerServerId(i))
+    local originalPrint = template.print
     local str = ''
 
     template.print = function(txt)
@@ -62,11 +91,7 @@ function formatPlayerNameTag(i, templateStr)
         global = _G
     }
 
-    if IsDuplicityVersion() then
-        context.id = i
-    else
-        context.id = GetPlayerServerId(i)
-    end
+    context.id = IsDuplicityVersion() and i or GetPlayerServerId(i)
 
     TriggerEvent('playernames:extendContext', i, function(k, v)
         context[k] = v
@@ -74,7 +99,7 @@ function formatPlayerNameTag(i, templateStr)
 
     template.render(templateStr, context, nil, true)
 
-    template.print = print
+    template.print = originalPrint
 
     return str
 end

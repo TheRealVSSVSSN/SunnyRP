@@ -6,12 +6,15 @@ author 'Cfx.re <root@cfx.re>'
 description 'A basic resource for displaying player names.'
 repository 'https://github.com/citizenfx/cfx-server-data'
 
--- add scripts
-client_script 'playernames_api.lua'
-server_script 'playernames_api.lua'
+shared_script 'playernames_api.lua'
 
-client_script 'playernames_cl.lua'
-server_script 'playernames_sv.lua'
+client_scripts {
+    'playernames_cl.lua'
+}
+
+server_scripts {
+    'playernames_sv.lua'
+}
 
 -- make exports
 local exportList = {
@@ -34,3 +37,4 @@ files {
 -- support the latest resource manifest
 fx_version 'adamant'
 game 'gta5'
+lua54 'yes'

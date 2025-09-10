@@ -21,6 +21,13 @@ local gtComponent = {
     MP_TYPING = 16
 }
 
+--[[
+    -- Type: Function
+    -- Name: makeSettings
+    -- Use: Creates a settings table for a player tag
+    -- Created: 2024-02-14
+    -- By: VSSVSSN
+--]]
 local function makeSettings()
     return {
         alphas = {},
@@ -33,62 +40,51 @@ end
 
 local templateStr
 
-function updatePlayerNames()
-    -- re-run this function the next frame
-    SetTimeout(0, updatePlayerNames)
-
-    -- return if no template string is set
+--[[
+    -- Type: Function
+    -- Name: updatePlayerNames
+    -- Use: Refreshes name tags for all active players each frame
+    -- Created: 2024-02-14
+    -- By: VSSVSSN
+--]]
+local function updatePlayerNames()
     if not templateStr then
         return
     end
 
-    -- get local coordinates to compare to
     local localCoords = GetEntityCoords(PlayerPedId())
 
-    -- for each valid player index
     for _, i in ipairs(GetActivePlayers()) do
-        -- if the player exists
         if i ~= PlayerId() then
-            -- get their ped
             local ped = GetPlayerPed(i)
             local pedCoords = GetEntityCoords(ped)
 
-            -- make a new settings list if needed
             if not mpGamerTagSettings[i] then
                 mpGamerTagSettings[i] = makeSettings()
             end
 
-            -- check the ped, because changing player models may recreate the ped
-            -- also check gamer tag activity in case the game deleted the gamer tag
             if not mpGamerTags[i] or mpGamerTags[i].ped ~= ped or not IsMpGamerTagActive(mpGamerTags[i].tag) then
                 local nameTag = formatPlayerNameTag(i, templateStr)
 
-                -- remove any existing tag
                 if mpGamerTags[i] then
                     RemoveMpGamerTag(mpGamerTags[i].tag)
                 end
 
-                -- store the new tag
                 mpGamerTags[i] = {
                     tag = CreateMpGamerTag(GetPlayerPed(i), nameTag, false, false, '', 0),
                     ped = ped
                 }
             end
 
-            -- store the tag in a local
             local tag = mpGamerTags[i].tag
 
-            -- should the player be renamed? this is set by events
             if mpGamerTagSettings[i].rename then
                 SetMpGamerTagName(tag, formatPlayerNameTag(i, templateStr))
                 mpGamerTagSettings[i].rename = nil
             end
 
-            -- check distance
             local distance = #(pedCoords - localCoords)
 
-            -- show/hide based on nearbyness/line-of-sight
-            -- nearby checks are primarily to prevent a lot of LOS checks
             if distance < 250 and HasEntityClearLosToEntity(PlayerPedId(), ped, 17) then
                 SetMpGamerTagVisibility(tag, gtComponent.GAMER_NAME, true)
                 SetMpGamerTagVisibility(tag, gtComponent.healthArmour, IsPlayerTargettingEntity(PlayerId(), ped))
@@ -97,7 +93,6 @@ function updatePlayerNames()
                 SetMpGamerTagAlpha(tag, gtComponent.AUDIO_ICON, 255)
                 SetMpGamerTagAlpha(tag, gtComponent.healthArmour, 255)
 
-                -- override settings
                 local settings = mpGamerTagSettings[i]
 
                 for k, v in pairs(settings.toggles) do
@@ -126,12 +121,18 @@ function updatePlayerNames()
             end
         elseif mpGamerTags[i] then
             RemoveMpGamerTag(mpGamerTags[i].tag)
-
             mpGamerTags[i] = nil
         end
     end
 end
 
+--[[
+    -- Type: Function
+    -- Name: getSettings
+    -- Use: Retrieves or creates settings for a specific server id
+    -- Created: 2024-02-14
+    -- By: VSSVSSN
+--]]
 local function getSettings(id)
     local i = GetPlayerFromServerId(tonumber(id))
 
@@ -183,9 +184,11 @@ AddEventHandler('onResourceStop', function(name)
     end
 end)
 
-SetTimeout(0, function()
+CreateThread(function()
     TriggerServerEvent('playernames:init')
+    while true do
+        Wait(0)
+        updatePlayerNames()
+    end
 end)
 
--- run this function every frame
-SetTimeout(0, updatePlayerNames)
