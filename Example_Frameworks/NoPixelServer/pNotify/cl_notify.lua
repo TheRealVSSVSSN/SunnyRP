@@ -96,85 +96,67 @@ killer: -- will close all visible notifications and show only this one
 visit the creators website http://ned.im/noty/options.html for more information
 --]]
 
-function SetQueueMax(queue, max)
-    local tmp = {
-        queue = tostring(queue),
-        max = tonumber(max)
-    }
+local hudStage = 1
 
-    SendNUIMessage({maxNotifications = tmp})
+local function setQueueMax(queue, max)
+    SendNUIMessage({
+        maxNotifications = {
+            queue = tostring(queue),
+            max = tonumber(max)
+        }
+    })
 end
+exports('SetQueueMax', setQueueMax)
 
-function SendNotification(options)
-    options.animation = options.animation or {}
-    options.sounds = options.sounds or {}
-    options.docTitle = options.docTitle or {}
+local function sendNotification(opts)
+    opts.animation = opts.animation or {}
+    opts.sounds = opts.sounds or {}
+    opts.docTitle = opts.docTitle or {}
 
     local options = {
-        type = options.type or "success",
-        layout = options.layout or "topRight",
-        theme = options.theme or "gta",
-        text = options.text or "Empty Notification",
-        timeout = options.timeout or 5000,
-        progressBar = options.progressBar ~= false and true or false,
-        closeWith = options.closeWith or {},
+        type = opts.type or 'success',
+        layout = opts.layout or 'topRight',
+        theme = opts.theme or 'gta',
+        text = opts.text or 'Empty Notification',
+        timeout = opts.timeout or 5000,
+        progressBar = opts.progressBar ~= false,
+        closeWith = opts.closeWith or {},
         animation = {
-            open = options.animation.open or "gta_effects_open",
-            close = options.animation.close or "gta_effects_close"
+            open = opts.animation.open or 'gta_effects_open',
+            close = opts.animation.close or 'gta_effects_close'
         },
         sounds = {
-            volume = options.sounds.volume or 1,
-            conditions = options.sounds.conditions or {},
-            sources = options.sounds.sources or {}
+            volume = opts.sounds.volume or 1,
+            conditions = opts.sounds.conditions or {},
+            sources = opts.sounds.sources or {}
         },
         docTitle = {
-            conditions = options.docTitle.conditions or {}
+            conditions = opts.docTitle.conditions or {}
         },
-        modal = options.modal or false,
-        id = options.id or false,
-        force = options.force or false,
-        queue = options.queue or "global",
-        killer = options.killer or false,
-        container = options.container or false,
-        buttons = options.button or false
+        modal = opts.modal or false,
+        id = opts.id or false,
+        force = opts.force or false,
+        queue = opts.queue or 'global',
+        killer = opts.killer or false,
+        container = opts.container or false,
+        buttons = opts.buttons or false
     }
 
-    SendNUIMessage({options = options})
+    SendNUIMessage({ options = options })
 end
+exports('SendNotification', sendNotification)
 
-
-
-HudStage = 1
-RegisterNetEvent("disableHUD")
-AddEventHandler("disableHUD", function(passedinfo)
-  HudStage = passedinfo
+RegisterNetEvent('disableHUD', function(passedinfo)
+    hudStage = passedinfo
 end)
 
-
-RegisterNetEvent("pNotify:SendNotification")
-AddEventHandler("pNotify:SendNotification", function(options)
-    if HudStage < 3 then
-        SendNotification(options)
+RegisterNetEvent('pNotify:SendNotification', function(opts)
+    if hudStage < 3 then
+        sendNotification(opts)
     end
 end)
 
-
-RegisterNetEvent("pNotify:SetQueueMax")
-AddEventHandler("pNotify:SetQueueMax", function(queue, max)
-    SetQueueMax(queue, max)
+RegisterNetEvent('pNotify:SetQueueMax', function(queue, max)
+    setQueueMax(queue, max)
 end)
 
---[[ RegisterNetEvent("chatMessage")
-AddEventHandler("chatMessage", function(author, color, text)
-    TriggerEvent("pNotify:SendNotification", {
-        text = text,
-        layout = "centerRight",
-        timeout = 2000,
-        progressBar = false,
-        type = "info",
-        animation = {
-            open = "gta_effects_open",
-            close = "gta_effects_close"
-        }
-    })
-end)  ]]
