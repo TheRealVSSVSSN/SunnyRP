@@ -108,9 +108,9 @@ function ShowboatshopBlips(bool)
 			SetBlipAsMissionCreatorBlip(blip,true)
 			boatshop_blips[#boatshop_blips+1]= {blip = blip, pos = loc}
 		end
-		Citizen.CreateThread(function()
+		CreateThread(function()
 			while #boatshop_blips > 0 do
-				Citizen.Wait(1)
+				Wait(1)
 				local inrange = false
 				local dstchecked = 1000
 				for i,b in ipairs(boatshop_blips) do
@@ -130,14 +130,14 @@ function ShowboatshopBlips(bool)
 						if boatshop.opened then
 							DisplayHelpText('~g~E~s~ Accepts ~g~Arrows~s~ Move ~g~Backspace~s~ Exit')
 						else
-							Citizen.Wait(100)
+							Wait(100)
 						end
 						
 					end
 				end
 				
 				if dstchecked > 250 then
-					Citizen.Wait(math.ceil(dstchecked * 10))
+					Wait(math.ceil(dstchecked * 10))
 				end
 				inrangeofboatshop = inrange
 			end
@@ -145,8 +145,8 @@ function ShowboatshopBlips(bool)
 	elseif bool == false and #boatshop_blips > 0 then
 		for i,b in ipairs(boatshop_blips) do
 			if DoesBlipExist(b.blip) then
-				SetBlipAsMissionCreatorBlip(b.blip,false)
-				Citizen.InvokeNative(0x86A652570E5F25DD, Citizen.PointerValueIntInitialized(b.blip))
+                                SetBlipAsMissionCreatorBlip(b.blip,false)
+                                RemoveBlip(b.blip)
 			end
 		end
 		boatshop_blips = {}
@@ -186,7 +186,7 @@ function OpenCreator()
 end
 
 function CloseCreator(name, boat, price)
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		local ped = LocalPed()
 		if not boughtboat then
 			local pos = currentlocation.pos.entering
@@ -206,13 +206,13 @@ function CloseCreator(name, boat, price)
 			for i = 0,24 do
 				mods[i] = GetVehicleMod(veh,i)
 			end
-			Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(veh))
+                        DeleteEntity(veh)
 			local pos = currentlocation.pos.outside
 
 			FreezeEntityPosition(ped,false)
 			RequestModel(model)
 			while not HasModelLoaded(model) do
-				Citizen.Wait(0)
+				Wait(0)
 			end
 			personalboat = CreateVehicle(model,pos[1],pos[2],pos[3],pos[4],true,false)
 			SetModelAsNoLongerNeeded(model)
@@ -225,7 +225,7 @@ function CloseCreator(name, boat, price)
 			SetVehicleHasBeenOwnedByPlayer(personalboat,true)
 			local id = NetworkGetNetworkIdFromEntity(personalboat)
 			SetNetworkIdCanMigrate(id, true)
-			Citizen.InvokeNative(0x629BFA74418D6239,Citizen.PointerValueIntInitialized(personalboat))
+                        SetEntityAsMissionEntity(personalboat, true, true)
 			SetVehicleColours(personalboat,colors[1],colors[2])
 			SetVehicleExtraColours(personalboat,extra_colors[1],extra_colors[2])
 			TaskWarpPedIntoVehicle(PlayerPedId(),personalboat,-1)
@@ -394,9 +394,9 @@ function Back()
 		CloseCreator()
 	--elseif boatshop.currentmenu == "Pneumatique" or boatshop.currentmenu == "Voiles" or boatshop.currentmenu == "Jetski" or boatshop.currentmenu == "submersibles" or boatshop.currentmenu == "Chalutier" then
 	elseif boatshop.currentmenu == "Pneumatique" or boatshop.currentmenu == "Voiles" or boatshop.currentmenu == "Jetski" or boatshop.currentmenu == "Chalutier" or boatshop.currentmenu == "Boats" then
-		if DoesEntityExist(fakeboat.car) then
-			Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(fakeboat.car))
-		end
+                        if DoesEntityExist(fakeboat.car) then
+                                DeleteEntity(fakeboat.car)
+                        end
 		fakeboat = {model = '', car = nil}
 		OpenMenu(boatshop.lastmenu)
 	else
@@ -411,12 +411,12 @@ end
 
 
 
---[[Citizen]]--
 
-Citizen.CreateThread(function()
+
+CreateThread(function()
 	while true do
 
-		Citizen.Wait(1)
+		Wait(1)
 
 		local nearBoat = IsPlayerInRangeOfboatshop();
 
@@ -460,14 +460,14 @@ Citizen.CreateThread(function()
 					if boatshop.currentmenu == "Pneumatique" or boatshop.currentmenu == "Voiles" or boatshop.currentmenu == "Jetski" or boatshop.currentmenu == "Chalutier" or boatshop.currentmenu == "Boats" then
 						if selected then
 							if fakeboat.model ~= button.model then
-								if DoesEntityExist(fakeboat.car) then
-									Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(fakeboat.car))
-								end
+                                                                if DoesEntityExist(fakeboat.car) then
+                                                                        DeleteEntity(fakeboat.car)
+                                                                end
 								local pos = currentlocation.pos.inside
 								local hash = GetHashKey(button.model)
 								RequestModel(hash)
 								while not HasModelLoaded(hash) do
-									Citizen.Wait(0)
+									Wait(0)
 									drawTxt("~b~Chargement...",0,1,0.5,0.5,1.5,255,255,255,255)
 
 								end
@@ -476,7 +476,7 @@ Citizen.CreateThread(function()
 								local timer = 9000
 								while not DoesEntityExist(veh) and timer > 0 do
 									timer = timer - 1
-									Citizen.Wait(1)
+									Wait(1)
 								end
 								TriggerEvent("vehsearch:disable",veh)
 								FreezeEntityPosition(veh,true)

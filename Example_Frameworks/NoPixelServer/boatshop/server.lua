@@ -9,44 +9,14 @@ RegisterServerEvent('ply_docks:Lang')
 
 --[[Function]]--
 
-function getIdentifiant(id)
-    for _, v in ipairs(id) do
-        return v
-    end
-end
-
-function boatPlate(plate)
-    local plate = plate
-    local src = source
-    local user = exports["np-base"]:getModule("Player"):GetUser(src)
-    local char = user:getCurrentCharacter()
-    exports.ghmattimysql:execute("SELECT boat_plate FROM user_boat WHERE identifier=@identifier AND boat_plate=@plate", { ['@identifier'] = char.id, ['@plate'] = plate }, function(result)
-        if result[1].boat_plate == plate then
-            return true
-        else
-            return false
-        end
-    end)
-end
-
-function boatPrice(plate)
-    local plate = plate
-    local src = source
-    local user = exports["np-base"]:getModule("Player"):GetUser(src)
-    local char = user:getCurrentCharacter()
-    exports.ghmattimysql:execute("SELECT boat_price FROM user_boat WHERE identifier=@identifier AND boat_plate=@plate", { ['@identifier'] = char.id, ['@plate'] = plate }, function(result)
-        if result[1] ~= nil then
-            return result[1]
-        end
-        return nil
-    end)
-end
+-- Removed legacy helpers in favor of inline database lookups.
 
 
 
 --[[Local/Global]]--
 
-boats = {}
+local state_in, state_out = "In", "Out"
+local boats = {}
 
 
 
@@ -79,20 +49,26 @@ AddEventHandler('ply_docks:CheckForSpawnBoat', function(boat_id)
 end)
 
 AddEventHandler('ply_docks:CheckForBoat', function(plate)
-    local plate = plate
-    local state = state_out
     local src = source
     local user = exports["np-base"]:getModule("Player"):GetUser(src)
     local char = user:getCurrentCharacter()
-    local boat_plate = boatPlate(plate)
-    if boat_plate == plate then
-        local state = state_in
-        exports.ghmattimysql:execute("UPDATE user_boat SET boat_state=@state WHERE identifier=@identifier AND boat_plate=@plate", { ['@identifier'] = char.id, ['@state'] = state, ['@plate'] = plate })
-        TriggerClientEvent('ply_docks:StoreBoatTrue', source)
-    else
-        TriggerClientEvent('ply_docks:StoreBoatFalse', source)
-    end
+    exports.ghmattimysql:scalar(
+        "SELECT boat_plate FROM user_boat WHERE identifier=@identifier AND boat_plate=@plate",
+        { ['@identifier'] = char.id, ['@plate'] = plate },
+        function(result)
+            if result then
+                exports.ghmattimysql:execute(
+                    "UPDATE user_boat SET boat_state=@state WHERE identifier=@identifier AND boat_plate=@plate",
+                    { ['@identifier'] = char.id, ['@state'] = state_in, ['@plate'] = plate }
+                )
+                TriggerClientEvent('ply_docks:StoreBoatTrue', src)
+            else
+                TriggerClientEvent('ply_docks:StoreBoatFalse', src)
+            end
+        end
+    )
 end)
+
 
 AddEventHandler('ply_docks:SetBoatOut', function(boat, plate)
     local src = source
@@ -105,21 +81,27 @@ AddEventHandler('ply_docks:SetBoatOut', function(boat, plate)
 end)
 
 AddEventHandler('ply_docks:CheckForSelBoat', function(plate)
-    local plate = plate
-    local state = state_out
     local src = source
     local user = exports["np-base"]:getModule("Player"):GetUser(src)
     local char = user:getCurrentCharacter()
-    local boat_plate = tostring(boatPlate(plate))
-    local boat_price = boatPrice(plate)
-    if boat_plate == plate then
-        local boat_price = boat_price / 2
-            user:addMoney((boat_price))
-        exports.ghmattimysql:execute("DELETE from user_boat WHERE identifier=@identifier AND boat_plate=@plate", { ['@identifier'] = char.id, ['@plate'] = plate })
-        TriggerClientEvent('ply_docks:SelBoatTrue', source)
-    else
-        TriggerClientEvent('ply_docks:SelBoatFalse', source)
-    end
+    exports.ghmattimysql:execute(
+        "SELECT boat_price FROM user_boat WHERE identifier=@identifier AND boat_plate=@plate",
+        { ['@identifier'] = char.id, ['@plate'] = plate },
+        function(result)
+            local row = result[1]
+            if row then
+                local salePrice = row.boat_price / 2
+                user:addMoney(salePrice)
+                exports.ghmattimysql:execute(
+                    "DELETE from user_boat WHERE identifier=@identifier AND boat_plate=@plate",
+                    { ['@identifier'] = char.id, ['@plate'] = plate }
+                )
+                TriggerClientEvent('ply_docks:SelBoatTrue', src)
+            else
+                TriggerClientEvent('ply_docks:SelBoatFalse', src)
+            end
+        end
+    )
 end)
 
 
@@ -130,18 +112,23 @@ AddEventHandler('ply_docks:GetBoats', function()
     local src = source
     local user = exports["np-base"]:getModule("Player"):GetUser(src)
     local char = user:getCurrentCharacter()
-    exports.ghmattimysql:execute("SELECT * FROM user_boat WHERE identifier=@identifier", { ['@identifier'] = char.id }, function(data)
-        for _, v in ipairs(data) do
-            t = { ["id"] = v.id, ["boat_model"] = v.boat_model, ["boat_name"] = v.boat_name, ["boat_state"] = v.boat_state }
-            table.insert(boats, tonumber(v.id), t)
+    exports.ghmattimysql:execute(
+        "SELECT * FROM user_boat WHERE identifier=@identifier",
+        { ['@identifier'] = char.id },
+        function(data)
+            for _, v in ipairs(data) do
+                local t = { id = v.id, boat_model = v.boat_model, boat_name = v.boat_name, boat_state = v.boat_state }
+                table.insert(boats, tonumber(v.id), t)
+            end
+            TriggerClientEvent('ply_docks:getBoat', src, boats)
         end
-        TriggerClientEvent('ply_docks:getBoat', source, boats)
-    end)
+    )
 end)
 
 --
 AddEventHandler('playerConnecting', function()
-    local old_state = state_out
-    local state = state_in
-    exports.ghmattimysql.execute("UPDATE user_boat SET boat_state=@state WHERE boat_state=@old_state", { ['@old_state'] = old_state, ['@state'] = state })
+    exports.ghmattimysql:execute(
+        "UPDATE user_boat SET boat_state=@state WHERE boat_state=@old_state",
+        { ['@old_state'] = state_out, ['@state'] = state_in }
+    )
 end)
