@@ -1,8 +1,25 @@
--- loosely based on MTA's https://code.google.com/p/mtasa-resources/source/browse/trunk/%5Bmanagers%5D/mapmanager/mapmanager_main.lua
+--[[
+    -- Type: Module
+    -- Name: mapmanager_server
+    -- Use: Server-side management for map and gametype resources
+    -- Created: 2024-07-20
+    -- By: VSSVSSN
+--]]
 
 local maps = {}
 local gametypes = {}
 
+-- forward declarations for exported functions
+local getCurrentGameType, getCurrentMap, getMaps
+local changeGameType, changeMap, doesMapSupportGameType, roundEnded
+
+--[[
+    -- Type: Function
+    -- Name: refreshResources
+    -- Use: Scans all resources and populates map and gametype metadata
+    -- Created: 2024-07-20
+    -- By: VSSVSSN
+--]]
 local function refreshResources()
     local numResources = GetNumResources()
 
@@ -10,29 +27,37 @@ local function refreshResources()
         local resource = GetResourceByFindIndex(i)
 
         if GetNumResourceMetadata(resource, 'resource_type') > 0 then
-            local type = GetResourceMetadata(resource, 'resource_type', 0)
-            local params = json.decode(GetResourceMetadata(resource, 'resource_type_extra', 0))
-            
-            local valid = false
-            
-            local games = GetNumResourceMetadata(resource, 'game')
-            if games > 0 then
-				for j = 0, games - 1 do
-					local game = GetResourceMetadata(resource, 'game', j)
-				
-					if game == GetConvar('gamename', 'gta5') or game == 'common' then
-						valid = true
-					end
-				end
+            local resourceType = GetResourceMetadata(resource, 'resource_type', 0)
+            local paramsStr = GetResourceMetadata(resource, 'resource_type_extra', 0)
+            local params = {}
+
+            if paramsStr and paramsStr ~= '' then
+                local ok, decoded = pcall(json.decode, paramsStr)
+                if ok and decoded then
+                    params = decoded
+                end
             end
 
-			if valid then
-				if type == 'map' then
-					maps[resource] = params
-				elseif type == 'gametype' then
-					gametypes[resource] = params
-				end
-			end
+            local valid = false
+            local games = GetNumResourceMetadata(resource, 'game')
+
+            if games > 0 then
+                for j = 0, games - 1 do
+                    local game = GetResourceMetadata(resource, 'game', j)
+
+                    if game == GetConvar('gamename', 'gta5') or game == 'common' then
+                        valid = true
+                    end
+                end
+            end
+
+            if valid then
+                if resourceType == 'map' then
+                    maps[resource] = params
+                elseif resourceType == 'gametype' then
+                    gametypes[resource] = params
+                end
+            end
         end
     end
 end
@@ -46,8 +71,8 @@ refreshResources()
 AddEventHandler('onResourceStarting', function(resource)
     local num = GetNumResourceMetadata(resource, 'map')
 
-    if num then
-        for i = 0, num-1 do
+    if num and num > 0 then
+        for i = 0, num - 1 do
             local file = GetResourceMetadata(resource, 'map', i)
 
             if file then
@@ -64,14 +89,13 @@ AddEventHandler('onResourceStarting', function(resource)
                 changeMap(resource)
             else
                 -- check if there's only one possible game type for the map
-                local map = maps[resource]
-                local count = 0
-                local gt
+                local mapData = maps[resource]
+                local count, gt = 0, nil
 
-                for type, flag in pairs(map.gameTypes) do
+                for gType, flag in pairs(mapData.gameTypes) do
                     if flag then
                         count = count + 1
-                        gt = type
+                        gt = gType
                     end
                 end
 
@@ -190,9 +214,16 @@ end
 
 AddEventHandler('mapmanager:roundEnded', function()
     -- set a timeout as we don't want to return to a dead environment
-    SetTimeout(50, handleRoundEnd) -- not a closure as to work around some issue in neolua?
+    SetTimeout(50, handleRoundEnd)
 end)
 
+--[[
+    -- Type: Function
+    -- Name: roundEnded
+    -- Use: Exposed API to cycle to a new map at the end of a round
+    -- Created: 2024-07-20
+    -- By: VSSVSSN
+--]]
 function roundEnded()
     SetTimeout(50, handleRoundEnd)
 end
@@ -282,18 +313,46 @@ AddEventHandler('rconCommand', function(commandName, args)
     end
 end)
 
+--[[
+    -- Type: Function
+    -- Name: getCurrentGameType
+    -- Use: Retrieves the active gametype resource
+    -- Created: 2024-07-20
+    -- By: VSSVSSN
+--]]
 function getCurrentGameType()
     return currentGameType
 end
 
+--[[
+    -- Type: Function
+    -- Name: getCurrentMap
+    -- Use: Retrieves the active map resource
+    -- Created: 2024-07-20
+    -- By: VSSVSSN
+--]]
 function getCurrentMap()
     return currentMap
 end
 
+--[[
+    -- Type: Function
+    -- Name: getMaps
+    -- Use: Returns the map metadata table
+    -- Created: 2024-07-20
+    -- By: VSSVSSN
+--]]
 function getMaps()
     return maps
 end
 
+--[[
+    -- Type: Function
+    -- Name: changeGameType
+    -- Use: Switches the active gametype, ensuring map compatibility
+    -- Created: 2024-07-20
+    -- By: VSSVSSN
+--]]
 function changeGameType(gameType)
     if currentMap and not doesMapSupportGameType(gameType, currentMap) then
         StopResource(currentMap)
@@ -306,6 +365,13 @@ function changeGameType(gameType)
     StartResource(gameType)
 end
 
+--[[
+    -- Type: Function
+    -- Name: changeMap
+    -- Use: Starts a new map resource, stopping the previous one
+    -- Created: 2024-07-20
+    -- By: VSSVSSN
+--]]
 function changeMap(map)
     if currentMap then
         StopResource(currentMap)
@@ -314,6 +380,13 @@ function changeMap(map)
     StartResource(map)
 end
 
+--[[
+    -- Type: Function
+    -- Name: doesMapSupportGameType
+    -- Use: Checks if a map is compatible with a given gametype
+    -- Created: 2024-07-20
+    -- By: VSSVSSN
+--]]
 function doesMapSupportGameType(gameType, map)
     if not gametypes[gameType] then
         return false
@@ -329,3 +402,11 @@ function doesMapSupportGameType(gameType, map)
 
     return maps[map].gameTypes[gameType]
 end
+
+exports('getCurrentGameType', getCurrentGameType)
+exports('getCurrentMap', getCurrentMap)
+exports('changeGameType', changeGameType)
+exports('changeMap', changeMap)
+exports('doesMapSupportGameType', doesMapSupportGameType)
+exports('getMaps', getMaps)
+exports('roundEnded', roundEnded)

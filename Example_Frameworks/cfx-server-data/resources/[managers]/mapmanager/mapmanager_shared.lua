@@ -1,6 +1,15 @@
 -- shared logic file for map manager - don't call any subsystem-specific functions here
-mapFiles = {}
 
+local mapFiles = {}
+local undoCallbacks = {}
+
+--[[
+    -- Type: Function
+    -- Name: addMap
+    -- Use: Registers a map file for a resource
+    -- Created: 2024-07-20
+    -- By: VSSVSSN
+--]]
 function addMap(file, owningResource)
     if not mapFiles[owningResource] then
         mapFiles[owningResource] = {}
@@ -9,8 +18,13 @@ function addMap(file, owningResource)
     table.insert(mapFiles[owningResource], file)
 end
 
-undoCallbacks = {}
-
+--[[
+    -- Type: Function
+    -- Name: loadMap
+    -- Use: Loads all map files for a resource
+    -- Created: 2024-07-20
+    -- By: VSSVSSN
+--]]
 function loadMap(res)
     if mapFiles[res] then
         for _, file in ipairs(mapFiles[res]) do
@@ -19,6 +33,13 @@ function loadMap(res)
     end
 end
 
+--[[
+    -- Type: Function
+    -- Name: unloadMap
+    -- Use: Executes undo callbacks for a resource's map files
+    -- Created: 2024-07-20
+    -- By: VSSVSSN
+--]]
 function unloadMap(res)
     if undoCallbacks[res] then
         for _, cb in ipairs(undoCallbacks[res]) do
@@ -30,16 +51,36 @@ function unloadMap(res)
     end
 end
 
+--[[
+    -- Type: Function
+    -- Name: parseMap
+    -- Use: Executes map definition files within a sandboxed environment
+    -- Created: 2024-07-20
+    -- By: VSSVSSN
+--]]
 function parseMap(file, owningResource)
     if not undoCallbacks[owningResource] then
         undoCallbacks[owningResource] = {}
     end
 
     local env = {
-        math = math, pairs = pairs, ipairs = ipairs, next = next, tonumber = tonumber, tostring = tostring,
-        type = type, table = table, string = string, _G = env,
-        vector3 = vector3, quat = quat, vec = vec, vector2 = vector2
+        math = math,
+        pairs = pairs,
+        ipairs = ipairs,
+        next = next,
+        tonumber = tonumber,
+        tostring = tostring,
+        type = type,
+        table = table,
+        string = string,
+        vector3 = vector3,
+        quat = quat,
+        vec = vec,
+        vector2 = vector2
     }
+
+    -- expose environment as _G after table creation
+    env._G = env
 
     TriggerEvent('getMapDirectives', function(key, cb, undocb)
         env[key] = function(...)

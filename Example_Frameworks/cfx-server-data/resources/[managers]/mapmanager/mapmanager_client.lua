@@ -1,3 +1,11 @@
+--[[
+    -- Type: Module
+    -- Name: mapmanager_client
+    -- Use: Client-side handling for map and gametype resources
+    -- Created: 2024-07-20
+    -- By: VSSVSSN
+--]]
+
 local maps = {}
 local gametypes = {}
 
@@ -18,20 +26,22 @@ AddEventHandler('onClientResourceStart', function(res)
     end
 
     -- resource type data
-    local type = GetResourceMetadata(res, 'resource_type', 0)
+    local resourceType = GetResourceMetadata(res, 'resource_type', 0)
 
-    if type then
-        local extraData = GetResourceMetadata(res, 'resource_type_extra', 0)
+    if resourceType then
+        local extraDataStr = GetResourceMetadata(res, 'resource_type_extra', 0)
+        local extraData = {}
 
-        if extraData then
-            extraData = json.decode(extraData)
-        else
-            extraData = {}
+        if extraDataStr and extraDataStr ~= '' then
+            local ok, decoded = pcall(json.decode, extraDataStr)
+            if ok and decoded then
+                extraData = decoded
+            end
         end
 
-        if type == 'map' then
+        if resourceType == 'map' then
             maps[res] = extraData
-        elseif type == 'gametype' then
+        elseif resourceType == 'gametype' then
             gametypes[res] = extraData
         end
     end
@@ -40,8 +50,8 @@ AddEventHandler('onClientResourceStart', function(res)
     loadMap(res)
 
     -- defer this to the next game tick to work around a lack of dependencies
-    Citizen.CreateThread(function()
-        Citizen.Wait(15)
+    CreateThread(function()
+        Wait(15)
 
         if maps[res] then
             TriggerEvent('onClientMapStart', res)
@@ -51,7 +61,7 @@ AddEventHandler('onClientResourceStart', function(res)
     end)
 end)
 
-AddEventHandler('onResourceStop', function(res)
+AddEventHandler('onClientResourceStop', function(res)
     if maps[res] then
         TriggerEvent('onClientMapStop', res)
     elseif gametypes[res] then
@@ -62,9 +72,9 @@ AddEventHandler('onResourceStop', function(res)
 end)
 
 AddEventHandler('getMapDirectives', function(add)
-	if not CreateScriptVehicleGenerator then
-		return
-	end
+    if not CreateScriptVehicleGenerator then
+        return
+    end
 
     add('vehicle_generator', function(state, name)
         return function(opts)
@@ -100,9 +110,8 @@ AddEventHandler('getMapDirectives', function(add)
                 state.add('cargen', carGen)
             end)
         end
-    end, function(state, arg)
-        Citizen.Trace("deleting car gen " .. tostring(state.cargen) .. "\n")
-
+    end, function(state)
+        print("deleting car gen " .. tostring(state.cargen))
         DeleteScriptVehicleGenerator(state.cargen)
     end)
 end)
