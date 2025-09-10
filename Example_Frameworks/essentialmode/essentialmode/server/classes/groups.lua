@@ -69,5 +69,5 @@ end)
 
 -- Get all groups
 AddEventHandler("es:getAllGroups", function(cb)
-	cb(groups)
+        cb(groups)
 end)

@@ -18,36 +18,29 @@ settings.defaultSettings = {
 }
 settings.sessionSettings = {}
 
-require "resources/essentialmode/lib/MySQL"
-
-AddEventHandler('playerConnecting', function(name, setCallback)
-	local identifiers = GetPlayerIdentifiers(source)
-
-	for i = 1, #identifiers do
-		local identifier = identifiers[i]
-		debugMsg('Checking user ban: ' .. identifier .. " (" .. name .. ")")
-
-                local banned = isIdentifierBanned(identifier)
-                if banned then
-                        if type(settings.defaultSettings.banReason) == "string" then
-                                setCallback(settings.defaultSettings.banReason)
-                        elseif type(settings.defaultSettings.banReason) == "function" then
-                                setCallback(settings.defaultSettings.banReason(identifier, name))
-                        else
-                                setCallback("Default ban reason error")
+AddEventHandler('playerConnecting', function(name, setKickReason, deferrals)
+        local identifiers = GetPlayerIdentifiers(source)
+        for i = 1, #identifiers do
+                local identifier = identifiers[i]
+                debugMsg('Checking user ban: ' .. identifier .. " (" .. name .. ")")
+                if isIdentifierBanned(identifier) then
+                        local reason = settings.defaultSettings.banReason
+                        if type(reason) == 'function' then
+                                reason = reason(identifier, name)
                         end
+                        deferrals.defer()
+                        deferrals.done(reason or 'You are banned from this server')
                         CancelEvent()
+                        return
                 end
-	end
+        end
 end)
 
 AddEventHandler('playerDropped', function()
-	if(Users[source])then
-		MySQL:executeQuery("UPDATE users SET `money`='@value' WHERE identifier = '@identifier'",
-		{['@value'] = Users[source].money, ['@identifier'] = Users[source].identifier})
-
-		Users[source] = nil
-	end
+        if Users[source] then
+                MySQL.Sync.execute("UPDATE users SET `money`=@value WHERE identifier=@identifier", {['@value'] = Users[source].money, ['@identifier'] = Users[source].identifier})
+                Users[source] = nil
+        end
 end)
 
 local justJoined = {}
@@ -180,6 +173,7 @@ end)
 commands['info'] = {}
 commands['info'].perm = 0
 commands['info'].cmd = function(source, args, user)
-	TriggerClientEvent('chatMessage', source, 'SYSTEM', {255, 0, 0}, "^2[^3EssentialMode^2]^0 Version: ^22.0.0")
-	TriggerClientEvent('chatMessage', source, 'SYSTEM', {255, 0, 0}, "^2[^3EssentialMode^2]^0 Commands loaded: ^2" .. (returnIndexesInTable(commands) - 1))
+        TriggerClientEvent('chatMessage', source, 'SYSTEM', {255, 0, 0}, "^2[^3EssentialMode^2]^0 Version: ^22.0.0")
+        TriggerClientEvent('chatMessage', source, 'SYSTEM', {255, 0, 0}, "^2[^3EssentialMode^2]^0 Commands loaded: ^2" .. (returnIndexesInTable(commands) - 1))
 end
+

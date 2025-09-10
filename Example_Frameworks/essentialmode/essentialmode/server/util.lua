@@ -3,14 +3,12 @@
 -- NO TOUCHY, IF SOMETHING IS WRONG CONTACT KANERSPS! --
 -- NO TOUCHY, IF SOMETHING IS WRONG CONTACT KANERSPS! --
 
-function stringsplit(self, delimiter)
-  local a = self:Split(delimiter)
+function stringsplit(input, sep)
   local t = {}
-
-  for i = 0, #a - 1 do
-     table.insert(t, a[i])
+  if sep == nil or sep == '' then sep = '%s' end
+  for str in string.gmatch(input, '([^' .. sep .. ']+)') do
+    t[#t + 1] = str
   end
-
   return t
 end
 

@@ -10,5 +10,6 @@ client_scripts {
 }
 
 server_scripts {
+    '@mysql-async/lib/MySQL.lua',
     'sv_admin.lua'
 }

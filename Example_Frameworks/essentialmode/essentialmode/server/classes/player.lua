@@ -48,12 +48,12 @@ end
 
 -- Sets the player money (required to call this from now)
 function Player:setMoney(m)
-	local prevMoney = self.money
-	local newMoney : double = m
+        local prevMoney = self.money
+        local newMoney = m
 
-	self.money = m
+        self.money = m
 
-	if((prevMoney - newMoney) < 0)then
+        if (prevMoney - newMoney) < 0 then
 		TriggerClientEvent("es:addedMoney", self.source, math.abs(prevMoney - newMoney))
 	else
 		TriggerClientEvent("es:removedMoney", self.source, math.abs(prevMoney - newMoney))
@@ -64,22 +64,22 @@ end
 
 -- Adds to player money (required to call this from now)
 function Player:addMoney(m)
-	local newMoney : double = self.money + m
+        local newMoney = self.money + m
 
-	self.money = newMoney
+        self.money = newMoney
 
-	TriggerClientEvent("es:addedMoney", self.source, m)
-	TriggerClientEvent('es:activateMoney', self.source , self.money)
+        TriggerClientEvent("es:addedMoney", self.source, m)
+        TriggerClientEvent('es:activateMoney', self.source , self.money)
 end
 
 -- Removes from player money (required to call this from now)
 function Player:removeMoney(m)
-	local newMoney : double = self.money - m
+        local newMoney = self.money - m
 
-	self.money = newMoney
+        self.money = newMoney
 
-	TriggerClientEvent("es:removedMoney", self.source, m)
-	TriggerClientEvent('es:activateMoney', self.source , self.money)
+        TriggerClientEvent("es:removedMoney", self.source, m)
+        TriggerClientEvent('es:activateMoney', self.source , self.money)
 end
 
 -- Player session variables
@@ -88,5 +88,5 @@ function Player:setSessionVar(key, value)
 end
 
 function Player:getSessionVar(key)
-	return self.session[key]
+        return self.session[key]
 end

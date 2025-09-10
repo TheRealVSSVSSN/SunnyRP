@@ -1,13 +1,4 @@
--- Loading MySQL Class
-require "resources/essentialmode/lib/MySQL"
-
--- Database connection using configurable convars
-MySQL:open(
-    GetConvar('essentialmode_db_host', '127.0.0.1'),
-    GetConvar('essentialmode_db_name', 'gta5_gamemode_essential'),
-    GetConvar('essentialmode_db_user', 'root'),
-    GetConvar('essentialmode_db_password', '')
-)
+-- MySQL handled by external resource via fxmanifest inclusion
 
 -- Adding custom groups called owner, inhereting from superadmin. (It's higher then superadmin). And moderator, higher then user but lower then admin
 TriggerEvent("es:addGroup", "owner", "superadmin", function(group) end)
@@ -143,8 +134,8 @@ TriggerEvent('es:addGroupCommand', 'ban', "admin", function(source, args, user)
 				local tstamp = os.date("*t", time)
 				local tstamp2 = os.date("*t", os.time())
 
-				MySQL:executeQuery("INSERT INTO bans (`banned`, `reason`, `expires`, `banner`, `timestamp`) VALUES ('@username', '@reason', '@expires', '@banner', '@now')",
-				{['@username'] = target.identifier, ['@reason'] = reason, ['@expires'] = os.date(tstamp.year .. "-" .. tstamp.month .. "-" .. tstamp.day .. " " .. tstamp.hour .. ":" .. tstamp.min .. ":" .. tstamp.sec), ['@banner'] = user.identifier, ['@now'] = os.date(tstamp2.year .. "-" .. tstamp2.month .. "-" .. tstamp2.day .. " " .. tstamp2.hour .. ":" .. tstamp2.min .. ":" .. tstamp2.sec)})
+                                  MySQL.Async.execute("INSERT INTO bans (`banned`, `reason`, `expires`, `banner`, `timestamp`) VALUES (@username, @reason, @expires, @banner, @now)",
+                                  {['@username'] = target.identifier, ['@reason'] = reason, ['@expires'] = os.date(tstamp.year .. "-" .. tstamp.month .. "-" .. tstamp.day .. " " .. tstamp.hour .. ":" .. tstamp.min .. ":" .. tstamp.sec), ['@banner'] = user.identifier, ['@now'] = os.date(tstamp2.year .. "-" .. tstamp2.month .. "-" .. tstamp2.day .. " " .. tstamp2.hour .. ":" .. tstamp2.min .. ":" .. tstamp2.sec)})
 			end)
 		else
 			TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Incorrect player ID!")
