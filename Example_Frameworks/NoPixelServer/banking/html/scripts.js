@@ -24,8 +24,6 @@ function addCommas(nStr) {
 
 $(document).ready(function(){
   // Mouse Controls
-  var documentWidth = document.documentElement.clientWidth;
-  var documentHeight = document.documentElement.clientHeight;
 
   // Partial Functions
   function closeMain() {
@@ -34,10 +32,7 @@ $(document).ready(function(){
   function openMain() {
     $(".home").css("display", "block");
   }
-  function openMain() {
-    $(".home").css("display", "block");
-  }
-  function closeAll() {
+    function closeAll() {
     $(".body").css("display", "none");
   }
   function openBalance() {
