@@ -35,31 +35,6 @@ local jobs = {
 	{name="Live Streamer"},
 }
 
-local lastnane = 
-{
-	[1] = "Conda",
-	[2] = "Stain",
-	[3] = "Francis",
-	[4] = "Cockburn",
-	[5] = "West",
-	[6] = "Brown",
-	[7] = "Shields",
-	[8] = "Muldoon",
-	[9] = "Greyson",
-	[10] = "Black",
-	[11] = "Dick",
-	[12] = "Wong",
-	[13] = "Wang",
-	[14] = "Swallows",
-	[15] = "Ali",
-	[16] = "Zechschof",
-	[17] = "Focker",
-	[18] = "McGee",
-	[19] = "Fox",
-	[20] = "Tacohashi",
-	[21] = "Li",
-	[22] = "Dehhed",
-}
 
 local platesStore = {}
 local curJobPlates = {}
@@ -460,10 +435,10 @@ local values = {
 	[2] = { ["text"] = "Suspension Parts", ["factor"] = "fSuspensionForce", ["min"] = 0, ["max"] = 5, ["sales"] = 0, ["item"] = 'SuspensionPart' },
 	[3] = { ["text"] = "Dampener Parts", ["factor"] = "fSuspensionCompDamp", ["min"] = 0, ["max"] = 2, ["sales"] = 0, ["item"] = 'DampenerPart' },
 	[4] = { ["text"] = "Tyre Parts", ["factor"] = "fSteeringLock", ["min"] = 0, ["max"] = 40, ["sales"] = 0, ["item"] = 'TyrePart' },
-	[5] = { ["text"] = "Metal Parts", ["factor"] = "fMas", ["min"] = 0, ["max"] = 3300, ["sales"] = 0, ["item"] = 'MetalPart' },
-	[6] = { ["text"] = "Aerodynamics", ["factor"] = "fDownforceMultipier", ["min"] = 0, ["max"] = 2, ["sales"] = 0, ["item"] = 'AerodynamicsPart' },
-	[7] = { ["text"] = "Braking Parts", ["factor"] = "fBrakeForce", ["min"] = 0, ["max"] = 1, ["sales"] = 0, ["item"] = 'BrakingPart' },
-	[1] = { ["text"] = "Gearbox Parts", ["factor"] = "fClutchChangeRateScaleUpShift", ["min"] = 0, ["max"] = 7, ["sales"] = 0, ["item"] = 'GearboxPart' },
+        [5] = { ["text"] = "Metal Parts", ["factor"] = "fMass", ["min"] = 0, ["max"] = 3300, ["sales"] = 0, ["item"] = 'MetalPart' },
+        [6] = { ["text"] = "Aerodynamics", ["factor"] = "fDownforceModifier", ["min"] = 0, ["max"] = 2, ["sales"] = 0, ["item"] = 'AerodynamicsPart' },
+        [7] = { ["text"] = "Braking Parts", ["factor"] = "fBrakeForce", ["min"] = 0, ["max"] = 1, ["sales"] = 0, ["item"] = 'BrakingPart' },
+        [8] = { ["text"] = "Gearbox Parts", ["factor"] = "fClutchChangeRateScaleUpShift", ["min"] = 0, ["max"] = 7, ["sales"] = 0, ["item"] = 'GearboxPart' },
 }
 
 RegisterServerEvent("request:illegal:upgrades")
