@@ -1,5 +1,5 @@
 local function init_core()
-    local IsLinux = false
+    local isLinux = package.config:sub(1,1) == '/'
 
     print("###############################################################################\n" ..
         "\n^1----- ^3#RedM ^1----------------------------------------------------------------------^0\n" ..
@@ -13,7 +13,7 @@ local function init_core()
         "    |_/     |______/ |__/  |__/|__/       |______/  |______/ |__/  |__/|________/\n" ..
         "^1----------------------------------------------------^3VORPcore Framework ^2Lua^0 ^1-----^0\n")
 
-    if IsLinux then
+    if isLinux then
         print("\nVORP CORE Running on Linux, thanks for using VorpCore");
     end
 end
@@ -34,11 +34,14 @@ if oneSyncConvar == 'off' then
 end
 
 
-ScriptList = {}
-Changelogs = 0
+local ScriptList = {}
+local Changelogs = 0
 
-VorpInitialized = false
---
+local VorpInitialized = false
+-- forward declarations
+local UpdateChecker
+local Checker
+local Changelog
 CreateThread(function()
     local Resources = GetNumResources()
 
@@ -54,7 +57,7 @@ CreateThread(function()
     end
 end)
 
-function UpdateChecker(resource)
+UpdateChecker = function(resource)
     if resource and GetResourceState(resource) == 'started' then
         if GetResourceMetadata(resource, 'vorp_checker', 0) == 'yes' then
             local Name = GetResourceMetadata(resource, 'vorp_name', 0)
@@ -139,7 +142,7 @@ function UpdateChecker(resource)
     end
 end
 
-function Checker()
+Checker = function()
     print("^3VORPcore Version check ")
     print("^2Resources found\n")
 
@@ -182,7 +185,7 @@ function Checker()
     end
 end
 
-function Changelog()
+Changelog = function()
     print('')
     for _, v in pairs(ScriptList) do
         local isNewVersion = v.Version ~= v.NewestVersion
