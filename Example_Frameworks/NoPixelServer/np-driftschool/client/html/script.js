@@ -1,30 +1,31 @@
-var open = false;
-$(function () {
-    window.addEventListener('message', function (event) {
-        if (event.data.type == "enabletestdrive") {
-            open = event.data.enable;
-            if (open) {
-                document.body.style.display = "block";
-                $("#testdrive").attr("style", "display: block");
-            } else {
-                document.body.style.display = "none";
-                $("#testdrive").attr("style", "display: none");
-            }
-        }
-    })
+let open = false;
 
-    function closeMenu() {
-        document.body.style.display = "none";
-        $("#testdrive").attr("display", "none");
-    }
+const send = (endpoint, data = {}) => {
+  fetch(`https://np-driftschool/${endpoint}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  });
+};
 
-    $('.secondary-content').on('click', function() {
-        closeMenu();
-        $.post('http://np-driftschool/spawntestdrive', JSON.stringify({model: $(this).parents('li').attr('value')}));
-    })
+const closeMenu = () => {
+  open = false;
+  document.getElementById('testdrive').style.display = 'none';
+  send('closemenu');
+};
 
-    $('#close').on('click', function() {
-        closeMenu();
-        $.post('http://np-driftschool/closemenu', JSON.stringify({}));
-    })
-})
+window.addEventListener('message', (event) => {
+  if (event.data.type === 'enabletestdrive') {
+    open = event.data.enable;
+    document.getElementById('testdrive').style.display = open ? 'block' : 'none';
+  }
+});
+
+document.getElementById('car-list').addEventListener('click', (e) => {
+  const item = e.target.closest('li');
+  if (!item) return;
+  send('spawntestdrive', { model: item.dataset.model });
+  closeMenu();
+});
+
+document.getElementById('close').addEventListener('click', closeMenu);

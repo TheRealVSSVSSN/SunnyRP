@@ -14,6 +14,7 @@ local myspawnedvehs = {}
 local rank = 0
 local insideDriftSchool = false
 local isExportReady = false
+local HEAD_BONE = 31086
 
 function DrawText3D(x,y,z, text) -- some useful function, use it if you want!
     local onScreen,_x,_y=World3dToScreen2d(x,y,z)
@@ -40,17 +41,17 @@ function DrawText3D(x,y,z, text) -- some useful function, use it if you want!
     end
 end
 
-function distCheck(points)
-    local origin = GetEntityCoords(GetPlayerPed(PlayerId()), false)
-    local dist = {1000, vector3(0.0,0.0,0.0)}
-    for i=1, #points do
-        local point = points[i]
-        local tempDist = Vdist(point.x, point.y, point.z, origin.x, origin.y, origin.z)
-        if tempDist < dist[1] then
-            dist = {tempDist, point}
+local function distCheck(points)
+    local origin = GetEntityCoords(PlayerPedId())
+    local closest = {math.huge, vector3(0, 0, 0)}
+    for _, point in ipairs(points) do
+        local target = vector3(point.x, point.y, point.z)
+        local distance = #(origin - target)
+        if distance < closest[1] then
+            closest = {distance, point}
         end
     end
-    return dist
+    return closest
 end
 
 function repairCost(veh, health)
@@ -88,17 +89,11 @@ function openGui(enable)
     })
 end
 
-function disableControls()
-    DisableControlAction(1, 38, true) --Key: E
-    DisableControlAction(1, 172, true) --Key: Up Arrow
-    DisableControlAction(1, 173, true) --Key: Down Arrow
-    DisableControlAction(1, 177, true) --Key: Backspace
-    DisableControlAction(1, 176, true) --Key: Enter
-    DisableControlAction(1, 71, true) --Key: W (veh_accelerate)
-    DisableControlAction(1, 72, true) --Key: S (veh_brake)
-    DisableControlAction(1, 34, true) --Key: A
-    DisableControlAction(1, 35, true) --Key: D
-    DisableControlAction(1, 75, true) --Key: F (veh_exit)
+local disabledControls = {38, 172, 173, 177, 176, 71, 72, 34, 35, 75}
+local function disableControls()
+    for _, control in ipairs(disabledControls) do
+        DisableControlAction(0, control, true)
+    end
 end
 
 
@@ -115,11 +110,12 @@ Citizen.CreateThread(function()
             if repairDist[1] < 5 and health < 1000.0 and veh ~= 0 and rank >= 1 then
                 DrawText3D(repairDist[2].x, repairDist[2].y, repairDist[2].z, "[E] Repair Vehicle $"..repairCost(veh, health))
                 DrawMarker(27, repairDist[2].x, repairDist[2].y, repairDist[2].z - 1.0, 0, 0, 0, 0, 0, 0, 1.001, 1.0001, 1.0001, 0, 55, 240, 20, 0, 0, 0, 0)
-                if IsControlJustPressed(1, 38) then
+                if IsControlJustPressed(0, 38) then
                     TriggerServerEvent("np-driftschool:takemoney", repairCost(veh, health))
                     attemptingPurchase = true
+                    isPurchaseSuccessful = false
                     while attemptingPurchase do
-                        Citizen.Wait(1)
+                        Citizen.Wait(0)
                     end
                     if not isPurchaseSuccessful then
                         PlaySoundFrontend(-1, "ERROR", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
@@ -127,12 +123,12 @@ Citizen.CreateThread(function()
                         local running = true
                         Citizen.CreateThread(function()
                             while running do
-                                Citizen.Wait(1)
+                                Citizen.Wait(0)
                                 disableControls()
                             end
                         end)
-                        local finished = exports["np-taskbar"]:taskBar(15000,"Fixing Vehicle",true)
-                        if (finished == 100) then
+                        local finished = exports["np-taskbar"]:taskBar(15000, "Fixing Vehicle", true)
+                        if finished == 100 then
                             running = false
                             repairVehicle(veh)
                         end
@@ -146,16 +142,16 @@ Citizen.CreateThread(function()
                 else
                     DrawText3D(point.x, point.y, point.z, "[E] Put away Test Drive")
                 end
-                DrawMarker(27, point.x, point.y, point.z - 1.0, 0, 0, 0, 0, 0, 0, 1.001, 1.0001, 1.0001, 0, 55, 240, 20, 0, 0, 0, 0)
+            DrawMarker(27, point.x, point.y, point.z - 1.0, 0, 0, 0, 0, 0, 0, 1.001, 1.0001, 1.0001, 0, 55, 240, 20, 0, 0, 0, 0)
 
-                if IsControlJustPressed(1, 38) and not testDriveMenuOpen then
-                    if veh ~= 0 and checkPlate(GetVehicleNumberPlateText(veh)) then
-                        Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(veh))
-                    elseif veh == 0 then
-                        -- open menu
-                        openGui(true)
-                    end
+            if IsControlJustPressed(0, 38) and not testDriveMenuOpen then
+                if veh ~= 0 and checkPlate(GetVehicleNumberPlateText(veh)) then
+                    SetEntityAsMissionEntity(veh, true, true)
+                    DeleteVehicle(veh)
+                elseif veh == 0 then
+                    openGui(true)
                 end
+            end
             elseif repairDist[1] > 10 and testDriveDist[1] > 10 then
                 Citizen.Wait(math.ceil(math.min(repairDist[1], testDriveDist[1]) * 10))
             end
@@ -275,7 +271,7 @@ local driftschoolLoc = PolyZone:Create({
 Citizen.CreateThread(function()
     while true do
         local plyPed = PlayerPedId()
-        local coord = GetPedBoneCoords(plyPed, HeadBone)
+        local coord = GetPedBoneCoords(plyPed, HEAD_BONE)
         local inPoly = driftschoolLoc:isPointInside(coord)
         if inPoly and not insideDriftSchool then
             insideDriftSchool = true
