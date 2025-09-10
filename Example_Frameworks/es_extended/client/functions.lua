@@ -4,6 +4,7 @@ ESX.PlayerLoaded              = false
 ESX.CurrentRequestId          = 0
 ESX.ServerCallbacks           = {}
 ESX.TimeoutCallbacks          = {}
+ESX.TimeoutCount              = -1
 
 ESX.UI                        = {}
 ESX.UI.HUD                    = {}
@@ -21,15 +22,17 @@ ESX.Scaleform.Utils           = {}
 ESX.Streaming                 = {}
 
 ESX.SetTimeout = function(msec, cb)
-	table.insert(ESX.TimeoutCallbacks, {
-		time = GetGameTimer() + msec,
-		cb   = cb
-	})
-	return #ESX.TimeoutCallbacks
+        ESX.TimeoutCount = ESX.TimeoutCount + 1
+        local id = ESX.TimeoutCount
+        ESX.TimeoutCallbacks[id] = {
+                time = GetGameTimer() + msec,
+                cb   = cb
+        }
+        return id
 end
 
-ESX.ClearTimeout = function(i)
-	ESX.TimeoutCallbacks[i] = nil
+ESX.ClearTimeout = function(id)
+        ESX.TimeoutCallbacks[id] = nil
 end
 
 ESX.IsPlayerLoaded = function()
@@ -51,9 +54,9 @@ ESX.SetPlayerData = function(key, val)
 end
 
 ESX.ShowNotification = function(msg)
-	SetNotificationTextEntry('STRING')
-	AddTextComponentString(msg)
-	DrawNotification(0,1)
+        SetNotificationTextEntry('STRING')
+        AddTextComponentString(msg)
+        DrawNotification(false, true)
 end
 
 ESX.ShowAdvancedNotification = function(sender, subject, msg, textureDict, iconType, flash, saveToBrief, hudColorIndex)
@@ -1010,18 +1013,18 @@ end)
 
 -- SetTimeout
 CreateThread(function()
-	while true do
-		local sleep = 100
-		if #ESX.TimeoutCallbacks > 0 then
-			local currTime = GetGameTimer()
-			sleep = 0
-			for i=1, #ESX.TimeoutCallbacks, 1 do
-				if currTime >= ESX.TimeoutCallbacks[i].time then
-					ESX.TimeoutCallbacks[i].cb()
-					ESX.TimeoutCallbacks[i] = nil
-				end
-			end
-		end
-		Wait(sleep)
-	end
+        while true do
+                local sleep = 100
+                if next(ESX.TimeoutCallbacks) ~= nil then
+                        local currTime = GetGameTimer()
+                        sleep = 0
+                        for id, data in pairs(ESX.TimeoutCallbacks) do
+                                if currTime >= data.time then
+                                        data.cb()
+                                        ESX.TimeoutCallbacks[id] = nil
+                                end
+                        end
+                end
+                Wait(sleep)
+        end
 end)

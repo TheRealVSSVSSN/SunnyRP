@@ -19,10 +19,12 @@ function getSharedObject()
 end
 
 local function StartDBSync()
-	CreateThread(function()
-		Wait(10 * 60 * 1000)
-		ESX.SavePlayers()
-	end)
+        CreateThread(function()
+                while true do
+                        Wait(10 * 60 * 1000)
+                        ESX.SavePlayers()
+                end
+        end)
 end
 
 MySQL.ready(function()
@@ -67,14 +69,14 @@ MySQL.ready(function()
 	end)
 end)
 
-RegisterServerEvent('esx:clientLog')
+RegisterNetEvent('esx:clientLog')
 AddEventHandler('esx:clientLog', function(msg)
 	if Config.EnableDebug then
 		print(('[^2TRACE^7] %s^7'):format(msg))
 	end
 end)
 
-RegisterServerEvent('esx:triggerServerCallback')
+RegisterNetEvent('esx:triggerServerCallback')
 AddEventHandler('esx:triggerServerCallback', function(name, requestId, ...)
 	local playerId = source
 

@@ -54,6 +54,8 @@ Creates the ESX client object and utility methods.
 - Provides notification helpers and a generic `ESX.TriggerServerCallback` RPC using `esx:triggerServerCallback`/`esx:serverCallback` events.
 - `ESX.SetPlayerData` broadcasts changes through `esx:setPlayerData` so imports.lua can mirror PlayerData.
 - Registers network events to update inventory, weapons, accounts, job, and to display `esx:showNotification`, `esx:showAdvancedNotification`, and `esx:showHelpNotification` messages from the server.
+- Implements a robust `ESX.SetTimeout` scheduler using unique identifiers and pair iteration to prevent skipped callbacks.
+- `ESX.ShowNotification` now passes boolean parameters to `DrawNotification` per current native recommendations.
 
 ### client/common.lua
 Registers `esx:getSharedObject` so other client resources can retrieve the ESX object.
@@ -91,7 +93,7 @@ Core server utilities and persistence helpers.
 - Provides player lookup helpers (`GetExtendedPlayers`, `GetPlayerFromId`, etc.) and inventory/weapon handlers.
 
 ### server/common.lua
-Initializes ESX tables and loads DB data on startup using `MySQL.Async.fetchAll` for items, jobs, and grades. Exposes `esx:getSharedObject`, logs client traces via `esx:clientLog`, and routes RPC requests from `esx:triggerServerCallback`.
+Initializes ESX tables and loads DB data on startup using `MySQL.Async.fetchAll` for items, jobs, and grades. Periodically saves player data every ten minutes via a looping `StartDBSync` thread. Exposes `esx:getSharedObject`, logs client traces via `esx:clientLog`, and routes RPC requests from `esx:triggerServerCallback` with events registered through `RegisterNetEvent`.
 
 ### server/commands.lua
 Declares admin and user commands using `ESX.RegisterCommand`. Commands cover teleportation (`setcoords`, `tpm`, `goto`, `bring`), job/permission management (`setjob`, `setgroup`), economy tools (`setaccountmoney`, `giveaccountmoney`, `giveitem`, `giveweapon`), chat utilities (`clear`, `clearall`), player control (`kill`, `freeze`, `noclip`), and persistence (`save`, `saveall`).
