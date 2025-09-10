@@ -244,7 +244,7 @@ Contributor instructions describing documentation expectations for this resource
 | `claim-veh` | Server | Add current vehicle to target's garage | server/commands.lua |
 
 ## Configuration & Integration
-- Convars prefixed `core:` control server name, Discord settings, key usage, groups, compatibility flags and plate patterns on both client and server.
+- Convars prefixed `core:` control server name, Discord settings, key usage, groups, compatibility flags and plate patterns on both client and server. Discord options include `core:discordMemberRequired` to require guild membership and `core:discordActionLink` for rich‑presence actions.
 - Depends on `ox_lib` and `oxmysql`; optionally integrates with `ox_inventory`, `ox_target`, `fivem-appearance`, and `ND_Ambulance`.
 - Discord integration can enforce guild membership and populate rich presence.
 
