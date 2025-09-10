@@ -1,4 +1,4 @@
-local vehicle_colours = {
+local VehicleColors = {
 	'Black',
 	'Graphite',
 	'Black Steel',
@@ -181,23 +181,41 @@ local doors = {
 		z = 38.206
 	}
 }
-RegisterNetEvent('fsn_commands:police:lock')
-AddEventHandler('fsn_commands:police:lock', function()
-	if GetDistanceBetweenCoords(doors[1].x, doors[1].y, doors[1].z, GetEntityCoords(PlayerPedId()), true) < 3 or GetDistanceBetweenCoords(doors[2].x, doors[2].y, doors[2].z, GetEntityCoords(PlayerPedId()), true) < 3 then
-		print 'you can lock/unlock the door at jewellerystore'
-		TriggerServerEvent('fsn_jewellerystore:doors:toggle')
-	end
+--[[
+    -- Type: Event
+    -- Name: fsn_commands:police:lock
+    -- Use: Allows police to toggle main door locks
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent('fsn_commands:police:lock', function()
+    if GetDistanceBetweenCoords(doors[1].x, doors[1].y, doors[1].z, GetEntityCoords(PlayerPedId()), true) < 3 or GetDistanceBetweenCoords(doors[2].x, doors[2].y, doors[2].z, GetEntityCoords(PlayerPedId()), true) < 3 then
+        print 'you can lock/unlock the door at jewellerystore'
+        TriggerServerEvent('fsn_jewellerystore:doors:toggle')
+    end
 end)
-RegisterNetEvent('fsn_jewellerystore:doors:State')
-AddEventHandler('fsn_jewellerystore:doors:State', function(state)
-	amilocked = state
+--[[
+    -- Type: Event
+    -- Name: fsn_jewellerystore:doors:State
+    -- Use: Updates lock state for main doors
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent('fsn_jewellerystore:doors:State', function(state)
+    amilocked = state
 end)
 
 local isgasdoorLocked = false
 local gasdoor = {mdl= 161378502, loc = {x=3557.660, y=3669.192, z=27.118}, txt={x = 3557.6176757813, y = 3669.7663574219, z = 28.121891021729}}
-RegisterNetEvent('fsn_jewellerystore:gasDoor:toggle')
-AddEventHandler('fsn_jewellerystore:gasDoor:toggle', function()
-	isgasdoorLocked = not isgasdoorLocked
+--[[
+    -- Type: Event
+    -- Name: fsn_jewellerystore:gasDoor:toggle
+    -- Use: Toggles the gas door lock state
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent('fsn_jewellerystore:gasDoor:toggle', function()
+    isgasdoorLocked = not isgasdoorLocked
 end)
 local gasuse = {x = -628.78393554688, y = -226.52185058594, z = 55.901119232178}
 
@@ -213,6 +231,14 @@ local guardlocs = {
 	--[6] = {x = -621.15222167969, y = -235.51699829102, z = 38.057048797607, h = 339.47375488281, ped=false, tenthirteen=false},
 }
 local guards = false
+
+--[[
+    -- Type: Function
+    -- Name: TriggerGuardAttack
+    -- Use: Orders guards to engage the player
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
 function TriggerGuardAttack()
 	for key, guard in pairs(guardlocs) do
 		if guard.ped then
@@ -251,40 +277,51 @@ local cases = {
 	{-624.8832, -227.8645, 38.05, blip=false, robbed=false},
 	{-623.6746, -227.0025, 38.05, blip=false, robbed=false},
 }
-RegisterNetEvent('fsn_jewellerystore:cases:update')
-AddEventHandler('fsn_jewellerystore:cases:update', function(tbl)
-	cases = tbl
+--[[
+    -- Type: Event
+    -- Name: fsn_jewellerystore:cases:update
+    -- Use: Receives updated case state from server
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent('fsn_jewellerystore:cases:update', function(tbl)
+    cases = tbl
 end)
 
-RegisterNetEvent('fsn_jewellerystore:case:startrob')
-AddEventHandler('fsn_jewellerystore:case:startrob', function(caseid)
-	if not HasAnimDictLoaded('missheist_jewel') then
-		exports['mythic_notify']:DoHudText('error', 'Try again')
-		RequestAnimDict('missheist_jewel')
-		return
-	end
-	local pos = GetEntityCoords(PlayerPedId())
-	local coords = {
-		x = pos.x,
-		y = pos.y,
-		z = pos.z
-	}
-	TriggerServerEvent('fsn_police:dispatch', coords, 7)
-		
-	local anims = {'smash_case', 'smash_case_b', 'smash_case_c', 'smash_case_d'}
-	RequestAnimDict('missheist_jewel')
-	while not HasAnimDictLoaded('missheist_jewel') do
-		Citizen.Wait(1)
-	end
-	TaskPlayAnim(PlayerPedId(), "missheist_jewel", anims[math.random(1,#anims)], 4.0, -4, -1, 1, 0, 0, 0, 0)
-	robbing = true
-	Citizen.Wait(7500)
-	ClearPedTasks(PlayerPedId())
-	robbing = false
-	TriggerEvent('fsn_inventory:item:add', 'dirty_money', math.random(400,1000))
-	FreezeEntityPosition(PlayerPedId(), false)
+--[[
+    -- Type: Event
+    -- Name: fsn_jewellerystore:case:startrob
+    -- Use: Plays robbery animation and rewards player
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent('fsn_jewellerystore:case:startrob', function(caseid)
+    RequestAnimDict('missheist_jewel')
+    while not HasAnimDictLoaded('missheist_jewel') do
+        Wait(10)
+    end
+
+    local pos = GetEntityCoords(PlayerPedId())
+    local coords = { x = pos.x, y = pos.y, z = pos.z }
+    TriggerServerEvent('fsn_police:dispatch', coords, 7)
+
+    local anims = { 'smash_case', 'smash_case_b', 'smash_case_c', 'smash_case_d' }
+    TaskPlayAnim(PlayerPedId(), 'missheist_jewel', anims[math.random(1, #anims)], 4.0, -4, -1, 1, 0, 0, 0, 0)
+    robbing = true
+    Wait(7500)
+    ClearPedTasks(PlayerPedId())
+    robbing = false
+    TriggerEvent('fsn_inventory:item:add', 'dirty_money', math.random(400, 1000))
+    FreezeEntityPosition(PlayerPedId(), false)
 end)
 
+--[[
+    -- Type: Function
+    -- Name: fsn_drawText3D
+    -- Use: Renders 3D text at given coordinates
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
 function fsn_drawText3D(x,y,z, text)
     local onScreen,_x,_y=World3dToScreen2d(x,y,z)
     local px,py,pz=table.unpack(GetGameplayCamCoords())
@@ -304,6 +341,13 @@ function fsn_drawText3D(x,y,z, text)
     end
 end
 
+--[[
+    -- Type: Function
+    -- Name: IsPedDriving
+    -- Use: Checks if the player is the driver of a vehicle
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
 function IsPedDriving()
 	if IsPedInAnyVehicle(PlayerPedId()) and GetPedInVehicleSeat(GetVehiclePedIsIn(PlayerPedId(), false), -1) == PlayerPedId() then
 		return true
@@ -312,9 +356,16 @@ function IsPedDriving()
 	end
 end
 
-Citizen.CreateThread(function()
+--[[
+    -- Type: Thread
+    -- Name: suspiciousVehicleWatcher
+    -- Use: Alerts police of suspicious vehicles near the store
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
+CreateThread(function()
 	while true do
-		Citizen.Wait(0)
+                Wait(0)
 		if GetDistanceBetweenCoords(outside.x, outside.y, outside.z, GetEntityCoords(PlayerPedId()), true) < 10 then
 			if not exports["fsn_police"]:fsn_PDDuty() and IsPedDriving() then
 				local pos = GetEntityCoords(PlayerPedId())
@@ -326,19 +377,26 @@ Citizen.CreateThread(function()
 				local holdingcar = GetVehiclePedIsIn(PlayerPedId())
 				local colour = table.pack(GetVehicleColours(holdingcar))
 				colour = colour[1]
-				colour = vehicle_colours[colour+1]
+                                colour = VehicleColors[colour+1]
 				local vehicle = GetDisplayNameFromVehicleModel(GetEntityModel(holdingcar))
 				local plate = GetVehicleNumberPlateText(holdingcar)
 				TriggerServerEvent('fsn_police:dispatch', coords, 13, '10-37 (SUS VEH) | Vehicle: '..vehicle..' | Plate: '..plate..' | Color: '..colour)
-				Citizen.Wait(10000)
+                                Wait(10000)
 			end
 		end
 	end
 end)
 
-Citizen.CreateThread(function()
+--[[
+    -- Type: Thread
+    -- Name: storeLoop
+    -- Use: Handles door states and case interactions
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
+CreateThread(function()
 	while true do
-		Citizen.Wait(0)
+                Wait(0)
 		if GetDistanceBetweenCoords(doors[1].x, doors[1].y, doors[1].z, GetEntityCoords(PlayerPedId()), true) < 10 or GetDistanceBetweenCoords(doors[2].x, doors[2].y, doors[2].z, GetEntityCoords(PlayerPedId()), true) < 10 then
 			if amilocked then
 				for k, v in pairs(doors) do
@@ -527,3 +585,4 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
+
