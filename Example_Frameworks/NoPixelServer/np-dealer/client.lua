@@ -1,28 +1,16 @@
-RegisterNetEvent( 'cult:weed' )
-AddEventHandler( 'cult:weed', function()
-    local player = GetPlayerPed( -1 )
-    if ( DoesEntityExist( player ) and not IsEntityDead( player )) then 
-        loadAnimDict( "pickup_object" )
-        if ( IsEntityPlayingAnim( PlayerPedId(), "pickup_object", "putdown_low", 3 ) ) then 
-            TaskPlayAnim( player, "pickup_object", "putdown_low", 8.0, 1.0, -1, 16, 0, 0, 0, 0 )
-        else
-            TaskPlayAnim( player, "pickup_object", "putdown_low", 8.0, 1.0, -1, 16, 0, 0, 0, 0 )
-        end     
+RegisterNetEvent('cult:weed')
+AddEventHandler('cult:weed', function()
+    if DoesEntityExist(PlayerPedId()) and not IsEntityDead(PlayerPedId()) then
+        playAnim('pickup_object', 'putdown_low')
     end
-end )
+end)
 
 
 
-RegisterNetEvent( 'farm:weed' )
-AddEventHandler( 'farm:weed', function()
-    local player = GetPlayerPed( -1 )
-    if ( DoesEntityExist( player ) and not IsEntityDead( player )) then 
-        loadAnimDict( "pickup_object" )
-        if ( IsEntityPlayingAnim( PlayerPedId(), "pickup_object", "pickup_low", 3 ) ) then 
-            TaskPlayAnim( player, "pickup_object", "pickup_low", 8.0, 1.0, -1, 16, 0, 0, 0, 0 )
-        else
-            TaskPlayAnim( player, "pickup_object", "pickup_low", 8.0, 1.0, -1, 16, 0, 0, 0, 0 )
-        end     
+RegisterNetEvent('farm:weed')
+AddEventHandler('farm:weed', function()
+    if DoesEntityExist(PlayerPedId()) and not IsEntityDead(PlayerPedId()) then
+        playAnim('pickup_object', 'pickup_low')
     end
 end)
 
@@ -32,43 +20,53 @@ end)
 
 
 
-function loadAnimDict( dict )
-    while ( not HasAnimDictLoaded( dict ) ) do
-        RequestAnimDict( dict )
-        Citizen.Wait( 5 )
+local function loadAnimDict(dict)
+    if not HasAnimDictLoaded(dict) then
+        RequestAnimDict(dict)
+        while not HasAnimDictLoaded(dict) do
+            Wait(0)
+        end
     end
-end 
+end
+
+local function playAnim(dict, anim, flag)
+    loadAnimDict(dict)
+    TaskPlayAnim(PlayerPedId(), dict, anim, 8.0, 1.0, -1, flag or 16, 0, false, false, false)
+end
 
 
-inanim = false
-cancelled = false
-RegisterNetEvent( 'drugGiveAnim' )
-AddEventHandler( 'drugGiveAnim', function()
-    local player = GetPlayerPed( -1 )
-    if ( DoesEntityExist( player ) and not IsEntityDead( player )) then 
-        loadAnimDict( "mp_safehouselost@" )
-        if ( IsEntityPlayingAnim( PlayerPedId(), "mp_safehouselost@", "package_dropoff", 3 ) ) then 
-            TaskPlayAnim( player, "mp_safehouselost@", "package_dropoff", 8.0, 1.0, -1, 16, 0, 0, 0, 0 )
-        else
-            TaskPlayAnim( player, "mp_safehouselost@", "package_dropoff", 8.0, 1.0, -1, 16, 0, 0, 0, 0 )
-        end     
+RegisterNetEvent('drugGiveAnim')
+AddEventHandler('drugGiveAnim', function()
+    if DoesEntityExist(PlayerPedId()) and not IsEntityDead(PlayerPedId()) then
+        playAnim('mp_safehouselost@', 'package_dropoff')
     end
-end )
+end)
 
-attachedProp = 0
-function removeAttachedProp()
+local attachedProp = 0
+
+local function removeAttachedProp()
     DeleteEntity(attachedProp)
     attachedProp = 0
 end
 
---missfinale_c2mcs_2_b mcs_2_b_takeout_phone_peda
-function runAnimation()
-    RequestAnimDict("mp_character_creation@lineup@male_a")
-    while not HasAnimDictLoaded("mp_character_creation@lineup@male_a") do
-    Citizen.Wait(0)
+local function createAttachedProp(model, bone, x, y, z, xR, yR, zR)
+    local ped = PlayerPedId()
+    local boneIndex = GetPedBoneIndex(ped, bone)
+    RequestModel(model)
+    while not HasModelLoaded(model) do
+        Wait(100)
     end
-    if not IsEntityPlayingAnim(PlayerPedId(), "mp_character_creation@lineup@male_a", "loop_raised", 3) then
-        TaskPlayAnim(PlayerPedId(), "mp_character_creation@lineup@male_a", "loop_raised", 8.0, -8, -1, 49, 0, 0, 0, 0)
+    attachedProp = CreateObject(model, 1.0, 1.0, 1.0, true, true, false)
+    exports['isPed']:GlobalObject(attachedProp)
+    AttachEntityToEntity(attachedProp, ped, boneIndex, x, y, z, xR, yR, zR, true, true, false, true, 2, true)
+end
+
+--missfinale_c2mcs_2_b mcs_2_b_takeout_phone_peda
+local function runAnimation()
+    local dict = 'mp_character_creation@lineup@male_a'
+    loadAnimDict(dict)
+    if not IsEntityPlayingAnim(PlayerPedId(), dict, 'loop_raised', 3) then
+        TaskPlayAnim(PlayerPedId(), dict, 'loop_raised', 8.0, -8, -1, 49, 0, 0, 0, 0)
     end
 end
 
@@ -108,12 +106,12 @@ local count = 0
 RegisterNetEvent('drawScaleformJail')
 AddEventHandler('drawScaleformJail', function(years,name,cid,date)
 
-    Citizen.Wait(3000)
+    Wait(3000)
     if (#(GetEntityCoords(PlayerPedId()) - vector3(466.99, -1005.86, 24.47)) < 10.0) then
         if count > 0 then
             count = 0
         end
-        Citizen.Wait(1)
+        Wait(1)
         local scaleform = RequestScaleformMovie("mugshot_board_01")
         while not HasScaleformMovieLoaded(scaleform) do
           Wait(1)
@@ -121,128 +119,67 @@ AddEventHandler('drawScaleformJail', function(years,name,cid,date)
         count = 10000
         while count > 0 do
             count = count - 1
-            local objFound = GetClosestObjectOfType(GetEntityCoords(PlayerPedId()), 10.0, `prop_police_id_board`, 0, 0, 0)
+            local objFound = GetClosestObjectOfType(GetEntityCoords(PlayerPedId()), 10.0, GetHashKey('prop_police_id_board'), 0, 0, 0)
             if objFound then
                 scaleformPaste(scaleform,objFound,name,years,cid,date)
             end
-            Citizen.Wait(1)
+            Wait(1)
         end
     end
  end)
 
 RegisterNetEvent('attachPropCon')
-AddEventHandler('attachPropCon', function(attachModelSent,boneNumberSent,x,y,z,xR,yR,zR)
+AddEventHandler('attachPropCon', function(model, bone, x, y, z, xR, yR, zR)
     runAnimation()
     removeAttachedProp()
-    attachModel = GetHashKey(attachModelSent)
-    boneNumber = boneNumberSent
-    SetCurrentPedWeapon(PlayerPedId(), 0xA2719263) 
-    local bone = GetPedBoneIndex(PlayerPedId(), boneNumberSent)
-    --local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(), true))
-    RequestModel(attachModel)
-    while not HasModelLoaded(attachModel) do
-        Citizen.Wait(100)
+    SetCurrentPedWeapon(PlayerPedId(), 0xA2719263)
+    createAttachedProp(GetHashKey(model), bone, x, y, z, xR, yR, zR)
+    local ped = PlayerPedId()
+    local start = GetEntityCoords(ped)
+    while IsEntityPlayingAnim(ped, 'mp_character_creation@lineup@male_a', 'loop_raised', 3) and (#(GetEntityCoords(ped) - start) <= 1.5) do
+        Wait(1)
     end
-    attachedProp = CreateObject(attachModel, 1.0, 1.0, 1.0, 1, 1, 0)
-    exports["isPed"]:GlobalObject(attachedProp)
-    AttachEntityToEntity(attachedProp, PlayerPedId(), bone, x, y, z, xR, yR, zR, 1, 1, 0, 0, 2, 1)
-    exit = false
-    local plyCoords = GetEntityCoords(PlayerPedId())
-    while not exit do
-        
-        Citizen.Wait(1)
-        plyCoords2 = GetEntityCoords(PlayerPedId())
-        if not IsEntityPlayingAnim(PlayerPedId(), "mp_character_creation@lineup@male_a", "loop_raised", 3) then
-            exit = true
-        end
-        if (#(plyCoords2 - plyCoords) > 1.5) then
-            exit = true
-        end
-    end
-    ClearPedTasksImmediately(PlayerPedId())
+    ClearPedTasksImmediately(ped)
     removeAttachedProp()
 end)
 
 RegisterNetEvent('attachPropDrugsObjectnoanim')
-AddEventHandler('attachPropDrugsObjectnoanim', function(attachModelSent,boneNumberSent,x,y,z,xR,yR,zR)
+AddEventHandler('attachPropDrugsObjectnoanim', function(model, bone, x, y, z, xR, yR, zR)
     removeAttachedProp()
-
-    attachModel = GetHashKey(attachModelSent)
-    boneNumber = boneNumberSent
-    SetCurrentPedWeapon(PlayerPedId(), 0xA2719263) 
-    local bone = GetPedBoneIndex(PlayerPedId(), boneNumberSent)
-    --local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(), true))
-    RequestModel(attachModel)
-    while not HasModelLoaded(attachModel) do
-        Citizen.Wait(100)
-    end
-    attachedProp = CreateObject(attachModel, 1.0, 1.0, 1.0, 1, 1, 0)
-    exports["isPed"]:GlobalObject(attachedProp)
-    AttachEntityToEntity(attachedProp, PlayerPedId(), bone, x, y, z, xR, yR, zR, 1, 1, 0, 0, 2, 1)
-    Citizen.Wait(5000)
+    SetCurrentPedWeapon(PlayerPedId(), 0xA2719263)
+    createAttachedProp(GetHashKey(model), bone, x, y, z, xR, yR, zR)
+    Wait(5000)
     removeAttachedProp()
 end)
 RegisterNetEvent('attachPropDrugsObject')
-AddEventHandler('attachPropDrugsObject', function(attachModelSent,boneNumberSent,x,y,z,xR,yR,zR)
+AddEventHandler('attachPropDrugsObject', function(model, bone, x, y, z, xR, yR, zR)
     removeAttachedProp()
-    TriggerEvent("drugGiveAnim")
-    attachModel = GetHashKey(attachModelSent)
-    boneNumber = boneNumberSent
-    SetCurrentPedWeapon(PlayerPedId(), 0xA2719263) 
-    local bone = GetPedBoneIndex(PlayerPedId(), boneNumberSent)
-    --local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(), true))
-    RequestModel(attachModel)
-    while not HasModelLoaded(attachModel) do
-        Citizen.Wait(100)
-    end
-    attachedProp = CreateObject(attachModel, 1.0, 1.0, 1.0, 1, 1, 0)
-    exports["isPed"]:GlobalObject(attachedProp)
-    AttachEntityToEntity(attachedProp, PlayerPedId(), bone, x, y, z, xR, yR, zR, 1, 1, 0, 0, 2, 1)
-    Citizen.Wait(5000)
+    TriggerEvent('drugGiveAnim')
+    SetCurrentPedWeapon(PlayerPedId(), 0xA2719263)
+    createAttachedProp(GetHashKey(model), bone, x, y, z, xR, yR, zR)
+    Wait(5000)
     removeAttachedProp()
 end)
 
 
 RegisterNetEvent('attachPropHObject')
-AddEventHandler('attachPropHObject', function(attachModelSent,boneNumberSent,x,y,z,xR,yR,zR)
+AddEventHandler('attachPropHObject', function(model, bone, x, y, z, xR, yR, zR)
     removeAttachedProp()
-
-    attachModel = GetHashKey(attachModelSent)
-    boneNumber = boneNumberSent
-    SetCurrentPedWeapon(PlayerPedId(), 0xA2719263) 
-    local bone = GetPedBoneIndex(PlayerPedId(), boneNumberSent)
-    --local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(), true))
-    RequestModel(attachModel)
-    while not HasModelLoaded(attachModel) do
-        Citizen.Wait(100)
-    end
-    attachedProp = CreateObject(attachModel, 1.0, 1.0, 1.0, 1, 1, 0)
-    exports["isPed"]:GlobalObject(attachedProp)
-    AttachEntityToEntity(attachedProp, PlayerPedId(), bone, x, y, z, xR, yR, zR, 1, 1, 0, 0, 2, 1)
-    Citizen.Wait(10000)
+    SetCurrentPedWeapon(PlayerPedId(), 0xA2719263)
+    createAttachedProp(GetHashKey(model), bone, x, y, z, xR, yR, zR)
+    Wait(10000)
     removeAttachedProp()
 end)
 
 
 
 RegisterNetEvent('attachPropDrugs2')
-AddEventHandler('attachPropDrugs2', function(attachModelSent,boneNumberSent,x,y,z,xR,yR,zR)
+AddEventHandler('attachPropDrugs2', function(model, bone, x, y, z, xR, yR, zR)
     removeAttachedProp()
-    TriggerEvent("drugGiveAnim")
-    attachModel = GetHashKey(attachModelSent)
-    boneNumber = boneNumberSent
-    SetCurrentPedWeapon(PlayerPedId(), 0xA2719263) 
-    local bone = GetPedBoneIndex(PlayerPedId(), boneNumberSent)
-    --local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(), true))
-    RequestModel(attachModel)
-    while not HasModelLoaded(attachModel) do
-        Citizen.Wait(100)
-    end
-
-    attachedProp = CreateObject(attachModel, 1.0, 1.0, 1.0, 1, 1, 0)
-    exports["isPed"]:GlobalObject(attachedProp)
-    AttachEntityToEntity(attachedProp, PlayerPedId(), bone, x, y, z, xR, yR, zR, 1, 1, 0, 0, 2, 1)
-    Citizen.Wait(4000)
+    TriggerEvent('drugGiveAnim')
+    SetCurrentPedWeapon(PlayerPedId(), 0xA2719263)
+    createAttachedProp(GetHashKey(model), bone, x, y, z, xR, yR, zR)
+    Wait(4000)
     removeAttachedProp()
 end)
 
@@ -252,66 +189,33 @@ AddEventHandler('attachRemoveChopShop', function()
 end)
 
 RegisterNetEvent('attachPropChopShop')
-AddEventHandler('attachPropChopShop', function(attachModelSent,boneNumberSent,x,y,z,xR,yR,zR)
+AddEventHandler('attachPropChopShop', function(model, bone, x, y, z, xR, yR, zR)
     removeAttachedProp()
-    attachModel = GetHashKey(attachModelSent)
-    boneNumber = boneNumberSent
-    SetCurrentPedWeapon(PlayerPedId(), 0xA2719263) 
-    local bone = GetPedBoneIndex(PlayerPedId(), boneNumberSent)
-    --local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(), true))
-    RequestModel(attachModel)
-    while not HasModelLoaded(attachModel) do
-        Citizen.Wait(100)
-    end
-
-    attachedProp = CreateObject(attachModel, 1.0, 1.0, 1.0, 1, 1, 0)
-    exports["isPed"]:GlobalObject(attachedProp)
-    AttachEntityToEntity(attachedProp, PlayerPedId(), bone, x, y, z, xR, yR, zR, 1, 1, 0, 0, 2, 1)
-
+    SetCurrentPedWeapon(PlayerPedId(), 0xA2719263)
+    createAttachedProp(GetHashKey(model), bone, x, y, z, xR, yR, zR)
 end)
 
 RegisterNetEvent('attachPropDrugs')
-AddEventHandler('attachPropDrugs', function(attachModelSent,boneNumberSent,x,y,z,xR,yR,zR)
+AddEventHandler('attachPropDrugs', function(model, bone, x, y, z, xR, yR, zR)
     removeAttachedProp()
-    TriggerEvent("drugGiveAnim")
-    attachModel = GetHashKey(attachModelSent)
-    boneNumber = boneNumberSent
-    SetCurrentPedWeapon(PlayerPedId(), 0xA2719263) 
-    local bone = GetPedBoneIndex(PlayerPedId(), boneNumberSent)
-    --local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(), true))
-    RequestModel(attachModel)
-    while not HasModelLoaded(attachModel) do
-        Citizen.Wait(100)
-    end
-    attachedProp = CreateObject(attachModel, 1.0, 1.0, 1.0, 1, 1, 0)
-    exports["isPed"]:GlobalObject(attachedProp)
-    AttachEntityToEntity(attachedProp, PlayerPedId(), bone, x, y, z, xR, yR, zR, 1, 1, 0, 0, 2, 1)
-    Citizen.Wait(4000)
+    TriggerEvent('drugGiveAnim')
+    SetCurrentPedWeapon(PlayerPedId(), 0xA2719263)
+    createAttachedProp(GetHashKey(model), bone, x, y, z, xR, yR, zR)
+    Wait(4000)
     removeAttachedProp()
 end)
 
 
 
-function attachPropCash(attachModelSent,boneNumberSent,x,y,z,xR,yR,zR)
+local function attachPropCash(model, bone, x, y, z, xR, yR, zR)
     removeAttachedProp()
-    attachModel = GetHashKey(attachModelSent)
-    boneNumber = boneNumberSent
-    SetCurrentPedWeapon(PlayerPedId(), 0xA2719263) 
-    local bone = GetPedBoneIndex(PlayerPedId(), boneNumberSent)
-    --local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(), true))
-    RequestModel(attachModel)
-    while not HasModelLoaded(attachModel) do
-        Citizen.Wait(100)
-    end
-    attachedProp = CreateObject(attachModel, 1.0, 1.0, 1.0, 1, 1, 0)
-    exports["isPed"]:GlobalObject(attachedProp)
-    AttachEntityToEntity(attachedProp, PlayerPedId(), bone, x, y, z, xR, yR, zR, 1, 1, 0, 0, 2, 1)
-    Citizen.Wait(2500)
-    
+    SetCurrentPedWeapon(PlayerPedId(), 0xA2719263)
+    createAttachedProp(GetHashKey(model), bone, x, y, z, xR, yR, zR)
+    Wait(2500)
     removeAttachedProp()
 end
 
-attachPropList = {
+local attachPropList = {
 
     ["crackpipe01"] = { 
         ["model"] = "prop_cs_crackpipe", ["bone"] = 28422, ["x"] = 0.0,["y"] = 0.05,["z"] = 0.0,["xR"] = 135.0,["yR"] = -100.0, ["zR"] = 0.0 
@@ -492,41 +396,22 @@ AddEventHandler('imfat', function()
     TriggerEvent("attachItemCONLOL","con1")
 end)
 
-RegisterNetEvent('attachItemCONLOL')
-AddEventHandler('attachItemCONLOL', function(item)
-    TriggerEvent("attachPropCon",attachPropList[item]["model"], attachPropList[item]["bone"], attachPropList[item]["x"], attachPropList[item]["y"], attachPropList[item]["z"], attachPropList[item]["xR"], attachPropList[item]["yR"], attachPropList[item]["zR"])
-end)
+local attachItemEvents = {
+    attachItemCONLOL = 'attachPropCon',
+    attachItemObjectH = 'attachPropHObject',
+    attachItemObject = 'attachPropDrugsObject',
+    attachItemObjectnoanim = 'attachPropDrugsObjectnoanim',
+    attachItemDrugs = 'attachPropDrugs',
+    attachItemDrugs2 = 'attachPropDrugs2',
+    attachItemChop = 'attachPropChopShop'
+}
 
-RegisterNetEvent('attachItemObjectH')
-AddEventHandler('attachItemObjectH', function(item)
-    TriggerEvent("attachPropHObject",attachPropList[item]["model"], attachPropList[item]["bone"], attachPropList[item]["x"], attachPropList[item]["y"], attachPropList[item]["z"], attachPropList[item]["xR"], attachPropList[item]["yR"], attachPropList[item]["zR"])
-end)
-
-
-RegisterNetEvent('attachItemObject')
-AddEventHandler('attachItemObject', function(item)
-    TriggerEvent("attachPropDrugsObject",attachPropList[item]["model"], attachPropList[item]["bone"], attachPropList[item]["x"], attachPropList[item]["y"], attachPropList[item]["z"], attachPropList[item]["xR"], attachPropList[item]["yR"], attachPropList[item]["zR"])
-end)
-
-RegisterNetEvent('attachItemObjectnoanim')
-AddEventHandler('attachItemObjectnoanim', function(item)
-    TriggerEvent("attachPropDrugsObjectnoanim",attachPropList[item]["model"], attachPropList[item]["bone"], attachPropList[item]["x"], attachPropList[item]["y"], attachPropList[item]["z"], attachPropList[item]["xR"], attachPropList[item]["yR"], attachPropList[item]["zR"])
-end)
-
-
-
-RegisterNetEvent('attachItemDrugs')
-AddEventHandler('attachItemDrugs', function(item)
-    TriggerEvent("attachPropDrugs",attachPropList[item]["model"], attachPropList[item]["bone"], attachPropList[item]["x"], attachPropList[item]["y"], attachPropList[item]["z"], attachPropList[item]["xR"], attachPropList[item]["yR"], attachPropList[item]["zR"])
-end)
-
-
-RegisterNetEvent('attachItemDrugs2')
-AddEventHandler('attachItemDrugs2', function(item)
-    TriggerEvent("attachPropDrugs2",attachPropList[item]["model"], attachPropList[item]["bone"], attachPropList[item]["x"], attachPropList[item]["y"], attachPropList[item]["z"], attachPropList[item]["xR"], attachPropList[item]["yR"], attachPropList[item]["zR"])
-end)
-
-RegisterNetEvent('attachItemChop')
-AddEventHandler('attachItemChop', function(item)
-    TriggerEvent("attachPropChopShop",attachPropList[item]["model"], attachPropList[item]["bone"], attachPropList[item]["x"], attachPropList[item]["y"], attachPropList[item]["z"], attachPropList[item]["xR"], attachPropList[item]["yR"], attachPropList[item]["zR"])
-end)
+for eventName, targetEvent in pairs(attachItemEvents) do
+    RegisterNetEvent(eventName)
+    AddEventHandler(eventName, function(item)
+        local cfg = attachPropList[item]
+        if cfg then
+            TriggerEvent(targetEvent, cfg.model, cfg.bone, cfg.x, cfg.y, cfg.z, cfg.xR, cfg.yR, cfg.zR)
+        end
+    end)
+end
