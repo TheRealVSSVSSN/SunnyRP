@@ -12,13 +12,9 @@ unholsteringactive = false
 local prevupdate = 0
 local gunEquipped = false
 local armed = false
-local sleeploop = false
 local policeweapons = {}
-local droppedweapons = {}
 local currentInformation = 0
-local CurrentID = 0
 local CurrentSqlID = 0
-local TIME_REMOVED_FOR_DEG = 1000 * 60 * 5 -- 5 mins
 local focusTaken = false
 
 local weaponTypes = {
@@ -41,61 +37,43 @@ local weaponTypes = {
     ["1548507267"] =  "Thrown", 
     ["1595662460"] =  "PetrolCan", 
 }
-pullfromback = {
-	[1] = "WEAPON_MicroSMG",
-	[2] = "WEAPON_SMG",
-	[3] = "WEAPON_AssaultSMG",
-	[4] = "WEAPON_Gusenberg",
-	[5] = "WEAPON_AssaultShotgun",
-	[6] = "WEAPON_BullpupShotgun",
-	[7] = "WEAPON_HeavyShotgun",
-	[8] = "WEAPON_Autoshotgun",
-	[9] = "WEAPON_SawnoffShotgun",
-	[10] = "WEAPON_AssaultRifle",
-	[11] = "WEAPON_CarbineRifle",
-	[12] = "WEAPON_AdvancedRifle",
-	[13] = "WEAPON_SpecialCarbine",
-	[14] = "WEAPON_BullpupRifle",
-	[15] = "WEAPON_SniperRifle",
-	[16] = "WEAPON_HeavySniper",
-	[17] = "WEAPON_MarksmanRifle",
-	[18] = "WEAPON_Firework",
-	[19] = "WEAPON_PetrolCan",
-	[20] = "WEAPON_Bat",
-	[21] = "WEAPON_Crowbar",
-	[22] = "WEAPON_Golfclub",
-	[23] = "WEAPON_Hatchet",
-	[24] = "WEAPON_Machete",
-	[25] = "WEAPON_Poolcue",
-	[26] = "WEAPON_Wrench",
-	[27] = "WEAPON_PUMPSHOTGUN",
-	[28] = "WEAPON_COMBATPDW",
+local throwableWeapons = {
+    ["741814745"] = true,
+    ["615608432"] = true,
+    ["1233104067"] = true,
+    ["2874559379"] = true,
+    ["126349499"] = true,
+    ["3125143736"] = true,
+    ["-73270376"] = true
 }
 
 
-local throwableWeapons = {}
-throwableWeapons["741814745"] = true  
-throwableWeapons["741814745"] = true   
-throwableWeapons["615608432"] = true   
-throwableWeapons["1233104067"] = true  
-throwableWeapons["2874559379"] = true  
-throwableWeapons["126349499"] = true 
-throwableWeapons["3125143736"] = true  
-throwableWeapons["-73270376"] = true  
-
-
-RegisterNUICallback('dropweapon', function(data, cb)
-
+--[[
+    -- Type: Function
+    -- Name: dropweapon (NUI Callback)
+    -- Use: Handles requests from the UI to drop a weapon
+    -- Created: 2024-12-05
+    -- By: VSSVSSN
+--]]
+RegisterNUICallback('dropweapon', function(_, cb)
+    cb('ok')
 end)
 
-function loadAnimDict( dict )
-    while ( not HasAnimDictLoaded( dict ) ) do
-        RequestAnimDict( dict )
-        Citizen.Wait( 5 )
+--[[
+    -- Type: Function
+    -- Name: loadAnimDict
+    -- Use: Loads an animation dictionary into memory
+    -- Created: 2024-12-05
+    -- By: VSSVSSN
+--]]
+local function loadAnimDict(dict)
+    while not HasAnimDictLoaded(dict) do
+        RequestAnimDict(dict)
+        Wait(5)
     end
 end
 
-isCop = false
+local isCop = false
  
 RegisterNetEvent('nowCopSpawn')
 AddEventHandler('nowCopSpawn', function()
@@ -108,19 +86,19 @@ AddEventHandler('nowCopSpawnOff', function()
 end)
 
 
-function DrawText3D(x,y,z, text) -- some useful function, use it if you want!
-    local onScreen,_x,_y=World3dToScreen2d(x,y,z)
-    local px,py,pz=table.unpack(GetGameplayCamCoords())
-    local dist = #(vector3(px,py,pz) - vector3(x,y,z))
-
-
-    local fov = (1/GetGameplayCamFov())*100
-    
+--[[
+    -- Type: Function
+    -- Name: DrawText3D
+    -- Use: Renders 3D text at specified world coordinates
+    -- Created: 2024-12-05
+    -- By: VSSVSSN
+--]]
+local function DrawText3D(x, y, z, text)
+    local onScreen, _x, _y = World3dToScreen2d(x, y, z)
     if onScreen then
-        SetTextScale(0.2,0.2)
+        SetTextScale(0.2, 0.2)
         SetTextFont(0)
         SetTextProportional(1)
-        -- SetTextScale(0.0, 0.55)
         SetTextColour(255, 255, 255, 255)
         SetTextDropshadow(0, 0, 0, 0, 55)
         SetTextEdge(2, 0, 0, 0, 150)
@@ -129,7 +107,7 @@ function DrawText3D(x,y,z, text) -- some useful function, use it if you want!
         SetTextEntry("STRING")
         SetTextCentre(1)
         AddTextComponentString(text)
-        DrawText(_x,_y)
+        DrawText(_x, _y)
     end
 end
 
@@ -468,17 +446,10 @@ AddEventHandler('brokenWeapon', function()
 
 end)
 
-function loadAnimDict( dict )
-    while ( not HasAnimDictLoaded( dict ) ) do
-        RequestAnimDict( dict )
-        Citizen.Wait( 5 )
-    end
-end
-
 function ammoTypeCheck(atype)
-	if type(atype) == "number" then
-		if ammoTable["" .. atype .. ""] == nil then
-			ammoTable["" .. atype .. ""] = {}
+        if type(atype) == "number" then
+                if ammoTable["" .. atype .. ""] == nil then
+                        ammoTable["" .. atype .. ""] = {}
 			ammoTable["" .. atype .. ""]["ammo"] = 0
 			ammoTable["" .. atype .. ""]["type"] = atype
 		end
