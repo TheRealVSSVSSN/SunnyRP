@@ -1,78 +1,85 @@
 # fsn_bennys Documentation
 
 ## Overview
-Client-only resource that turns a specific location into a Benny's-style workshop where players can preview and buy vehicle upgrades through a custom menu system.
+fsn_bennys provides a client-only vehicle modification garage. Players can approach a configured location and open a menu to preview upgrades and compute costs. Payment and persistence must be handled by other resources.
 
 ## Runtime Context
-- Runs exclusively on the client; no internal server scripts.
-- Activation occurs when a player approaches configured coordinates and presses Enter.
-- Depends on `fsn_main` utility exports for drawing screen text and verifying player funds.
-- Uses `mythic_notify` to show success or error HUD messages.
-- Manifest lists MySQL support but the scripts themselves never query the database.
+- Client side only; no internal server scripts.
+- Activated when the player is near `Config.XYZ` and presses Enter.
+- Depends on `fsn_main` for drawing utilities and a `fsn_CanAfford` export, and `mythic_notify` for HUD messages.
+- Manifest declares server utilities and MySQL library but the scripts never issue DB calls.
 
-## Client Scripts
+## File Inventory
+- **Client:** `menu.lua`, `cl_config.lua`, `cl_bennys.lua`
+- **Meta:** `fxmanifest.lua`, `agents.md`, `docs.md`
+- No server or shared scripts.
+
+## Client Files
 ### menu.lua
-*Role:* Generic menu framework bundled with the resource.
+Role: Generic menu framework used by the garage.
 
-- **Instantiation** – `Menu.new` builds a menu object with default layout and control bindings.
-- **Rendering helpers** – `drawMenuText`, `drawInfo`, and `drawRightMenuText` format text and panels each frame.
-- **Lifecycle callbacks** – optional handlers `OnMenuOpen`, `OnMenuChange`, and `OnMenuClose` fire on open, submenu navigation, and closure respectively.
-- **Interaction callbacks** – `onButtonSelected`, `onSelectedIndexChanged`, `onCheckboxChange`, and `OnButtonListChange` let consumers react to button presses, list cycling, and checkbox toggles.
-- **Button builders** – `addButton`, `addPurchase`, `addList`, `addCheckbox`, and `addSubMenu` create selectable entries, prices, and nested menus.
-- **Exposure** – `SetMenu` returns the `Menu` table so other scripts can create instances.
+Responsibilities:
+- Constructor `Menu.new` creates menu instances with default layout.
+- `Menu:showNotification` displays timed messages.
+- `Menu:setMaxButtons` and `Menu:setColors` adjust layout.
+- `Menu:Open`, `Menu:ChangeMenu`, and `Menu:Close` control menu visibility and navigation.
+- Button builders (`addButton`, `addPurchase`, `addList`, `addCheckbox`, `addSubMenu`, `removeButton`) populate menus.
+- `Menu:draw` handles per-frame input, selection movement, and optional callbacks:
+  - `OnMenuOpen`, `OnMenuChange`, `OnMenuClose`, `onSelectedIndexChanged`, `onCheckboxChange`, `OnButtonListChange`.
 
-*Performance:* `Menu:Open` spawns a frame loop that draws until closed; excessive usage may reduce FPS.
+Performance: `Menu:draw` runs every frame while a menu is open; heavy menus may affect FPS.
 
 ### cl_config.lua
-*Role:* Defines garage coordinates, pricing tables, and menu appearance.
+Role: Defines garage coordinates, price tables, and menu settings.
 
-- **Location** – `Config.XYZ` pinpoints the workshop entry in the world.
-- **Price structure** – `Config.prices` contains nested tables for window tint, resprays, neon, plates, wheel styles, and mod categories; each entry lists fixed prices or a base price plus per-level increments.
-- **Mod cost rules** – `Config.prices.mods` maps GTA mod IDs to `startprice` and `increaseby` values that `AddMod` uses when populating menus.
-- **Restrictions** – `Config.ModelBlacklist` blocks specific vehicle models from accessing the garage.
-- **Behaviour toggles** – `Config.lock` enables single-user access; `Config.oldenter` switches to a legacy interaction mode.
-- **Menu options** – `Config.menu` exposes control bindings, theme, max button count, and menu dimensions.
+Responsibilities:
+- Color palettes (`colors`, `metalcolors`, `mattecolors`) for respray options.
+- `Config.XYZ` sets the entry coordinates.
+- `Config.prices` covers window tint, respray categories (chrome, classic, matte, metallic, metal), neon, plates, wheels, and individual mod categories.
+  - Each mod category either specifies a base price plus incremental cost or explicit button list with prices.
+- `Config.ModelBlacklist` lists disallowed vehicles.
+- `Config.lock` prevents multiple users; `Config.oldenter` toggles legacy entry.
+- `Config.menu` sets control bindings, position/theme, max button count, and dimensions.
 
 ### cl_bennys.lua
-*Role:* Drives player interaction with the garage and leverages the menu library to display upgrade options.
+Role: Orchestrates garage interaction and menu logic.
 
-- **Categories table** – a list of mod categories, some including a `requires` field meant to check for existing parts before showing options.
-- **State handling** – `ingarage` prevents re-entry; `BennysMenu:OnMenuClose` resets it when the menu closes.
-- **Affordability check** – `BennysMenu:onButtonSelected` calls `fsn_main:fsn_CanAfford` and reports via `mythic_notify:DoHudText`.
-- **Proximity thread** – continuous loop uses `Util.DrawText` to prompt entry when within 10 units of `Config.XYZ`.
-- **Garage entry** – `EnterGarage` disables player control and radar, computes repair cost, and builds category submenus by calling `AddMod` with pricing data from `Config.prices.mods`.
-- **Mod builder** – `AddMod` inspects available vehicle modifications, inserts stock and upgrade buttons, and applies incremental pricing.
+Responsibilities:
+- `categories` table lists mod groups; some have a `requires` flag for prerequisite parts (unused).
+- State variable `ingarage` blocks re-entry; `BennysMenu:OnMenuClose` resets it.
+- `BennysMenu:onButtonSelected` checks affordability via `fsn_main:fsn_CanAfford` and reports with `mythic_notify:DoHudText`.
+- Proximity thread prompts entry and calls `EnterGarage` when the player presses Enter near `Config.XYZ`.
+- `EnterGarage` freezes controls, calculates repair price, configures menu appearance, adds a repair button, builds category submenus using `AddMod`, then opens the menu.
+- `AddMod` inspects available vehicle modifications, adds stock and upgrade options, and computes incremental pricing from `Config.prices.mods`.
 
-*Security:* All purchase validation is local; a separate server process must deduct funds and apply chosen mods.
+Security/Permissions: Purchase validation is purely client-side; another resource must deduct money and apply vehicle mods.
 
-*Performance:* The proximity loop and menu drawing run every frame; multiple nearby players may affect client performance.
-
-## Server Scripts
-None included. The manifest loads utility scripts from `fsn_main` and `mysql-async`, but this resource does not provide its own server code.
-
-## Shared Files
-None.
+Performance: The proximity loop and menu drawing run every frame; multiple players may lower FPS. Debug line `SetPlayerControl(PlayerId(),true,256)` left enabled.
 
 ## Meta Files
 ### fxmanifest.lua
-*Role:* Declares game version, external dependencies, and client script list.
-- Loads client utilities and settings from `fsn_main` and registers `menu.lua`, `cl_config.lua`, and `cl_bennys.lua`.
-- Includes server utilities and MySQL library references even though no server script is present.
+- Declares game version.
+- Preloads utilities from `fsn_main` and `mysql-async`.
+- Registers client scripts `menu.lua`, `cl_config.lua`, `cl_bennys.lua`.
+- References server utilities although no server scripts are included.
 
 ### agents.md
-Internal contributor guidelines.
+Contributor guidelines for this resource.
+
+### docs.md
+This documentation.
 
 ## Cross-Index
 | Type | Symbol | Notes |
 |------|--------|-------|
-| Events (Local) | `BennysMenu:OnMenuClose` | Clears garage flag when menu closes |
+| Events (Local) | `BennysMenu:OnMenuClose` | Clears garage state when menu closes |
 |  | `BennysMenu:onButtonSelected` | Runs affordability check and shows HUD messages |
-|  | `Menu:OnMenuOpen` | Optional callback before a menu starts drawing |
-|  | `Menu:OnMenuChange` | Fires when switching between menus or submenus |
-|  | `Menu:OnMenuClose` | Optional callback after a menu closes |
+|  | `Menu:OnMenuOpen` | Optional callback before menu drawing starts |
+|  | `Menu:OnMenuChange` | Fires when switching menus or submenus |
+|  | `Menu:OnMenuClose` | Optional callback after menu closes |
 |  | `Menu:onSelectedIndexChanged` | Invoked when highlighted option changes |
-|  | `Menu:onCheckboxChange` | Triggered when a checkbox button toggles |
-|  | `Menu:OnButtonListChange` | Runs when cycling through list options |
+|  | `Menu:onCheckboxChange` | Triggered when a checkbox toggles |
+|  | `Menu:OnButtonListChange` | Runs when cycling through list choices |
 | ESX Callbacks | – | None |
 | Exports (used) | `fsn_main:fsn_CanAfford` | Determines if player can afford an upgrade |
 |  | `mythic_notify:DoHudText` | Displays success or error notifications |
@@ -81,16 +88,16 @@ Internal contributor guidelines.
 | DB Calls | – | None |
 
 ## Configuration & Integration Points
-- Adjust coordinates, prices, and menu theme through `cl_config.lua` settings.
-- Utilizes `fsn_main` utility functions such as `Util.DrawText` and the `fsn_CanAfford` export.
-- `mythic_notify` handles user-facing HUD notifications.
-- Manifest references MySQL and fsn_main server utilities, implying integration with a broader framework for economic and upgrade processing.
+- Adjust coordinates, prices, and menu appearance through `cl_config.lua`.
+- Relies on `fsn_main` for `Util.DrawText` and affordability checks.
+- Uses `mythic_notify` for HUD notifications.
+- Manifest includes MySQL and server utility references, implying integration with a broader economy/modification system.
 
 ## Gaps & Inferences
-- `Util.DrawText` originates from `@fsn_main/cl_utils.lua`; this dependency is assumed to exist. *Inferred (High).* 
-- No server event deducts money or applies upgrades, indicating another resource finalizes transactions. *Inferred (Medium).* **TODO:** Identify the server-side handler responsible.
-- `@mysql-async/lib/MySQL.lua` is declared in `fxmanifest.lua` despite no database usage in this resource. *Inferred (High).* Likely a residual dependency.
-- `SetPlayerControl(PlayerId(),true,256)` at the file tail appears to be leftover debug code. *Inferred (Low).* 
-- The `requires` field in the categories list is never checked, suggesting incomplete conditional logic. *Inferred (Low).* 
+- `Util.DrawText` is provided by `@fsn_main/cl_utils.lua`; no direct reference within this resource. *Inferred (High).*
+- No server-side handler deducts funds or applies chosen mods, suggesting responsibility lies elsewhere. *Inferred (Medium).* **TODO:** Identify the server resource managing purchases.
+- `fxmanifest.lua` lists server utilities and MySQL despite absence of server code, likely a framework convention. *Inferred (High).*
+- Debug call `SetPlayerControl(PlayerId(),true,256)` appears leftover and may re-enable controls unexpectedly. *Inferred (Low).*
+- The `requires` field in the `categories` list is unused, implying incomplete prerequisite logic. *Inferred (Low).*
 
 DOCS COMPLETE
