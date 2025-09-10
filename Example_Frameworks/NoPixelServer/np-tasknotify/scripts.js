@@ -1,41 +1,41 @@
-$(document).ready(function(){
-  
-  var documentWidth = document.documentElement.clientWidth;
-  var documentHeight = document.documentElement.clientHeight;
-  var curTask = 0;
-  var processed = []
+document.addEventListener('DOMContentLoaded', () => {
+  const notifyWrap = document.querySelector('.notify-wrap');
 
+  window.addEventListener('message', (event) => {
+    const data = event.data;
 
-  window.addEventListener('message', function(event){
+    if (data.runProgress) {
+      const fade = Number(data.fadesent) || 5000;
+      const colorId = `colorsent${data.colorsent}`;
+      const existing = document.getElementById(colorId);
+      if (existing) existing.remove();
 
-    var item = event.data;
-    if (item.runProgress === true) {
+      const element = document.createElement('div');
+      element.id = colorId;
+      element.classList.add('notification-bg');
 
-      var message = item.textsent
-      var fadetimer = item.fadesent
-      var element
-      $('#colorsent' + item.colorsent).css('display', 'none');
-      if (item.colorsent == 2) {
-        element = $('<div id="colorsent' + item.colorsent + '" class="notification-bg red" style="display:none">' + message + '</div>'); 
-      } else if (item.colorsent == 69) {
-        element = $('<div id="colorsent' + item.colorsent + '" class="notification-bg taxi" style="display:none">' + message + '</div>');
-      } else if (item.colorsent == 155) {
-        element = $('<div id="colorsent' + item.colorsent + '" class="notification-bg medical" style="display:none">' + message + '</div>');
-      } else {
-        element = $('<div id="colorsent' + item.colorsent + '" class="notification-bg normal" style="display:none">' + message + '</div>'); 
+      switch (Number(data.colorsent)) {
+        case 2:
+          element.classList.add('red');
+          break;
+        case 69:
+          element.classList.add('taxi');
+          break;
+        case 155:
+          element.classList.add('medical');
+          break;
+        default:
+          break;
       }
 
-      
-      $('.notify-wrap').prepend(element);
-      $(element).fadeIn(500);
-      setTimeout(function(){
-         $(element).fadeOut(fadetimer-(fadetimer / 2));
-      }, fadetimer / 2);
+      element.textContent = data.textsent || '';
+      notifyWrap.prepend(element);
 
-      setTimeout(function(){
-        $(element).css('display', 'none');
-      }, fadetimer);
+      requestAnimationFrame(() => element.classList.add('show'));
+      setTimeout(() => element.classList.add('hide'), fade / 2);
+      setTimeout(() => element.remove(), fade);
+    } else if (data.closeProgress) {
+      notifyWrap.innerHTML = '';
     }
   });
-
 });
