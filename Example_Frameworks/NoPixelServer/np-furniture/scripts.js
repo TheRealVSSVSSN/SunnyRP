@@ -1,19 +1,13 @@
 $(document).ready(function(){
-  
-  var documentWidth = document.documentElement.clientWidth;
-  var documentHeight = document.documentElement.clientHeight;
-  var curTask = 0;
-  var processed = []
-  var spaceHeld = false;
-  var moveType = "cam"
+  'use strict';
 
   function openMain() {
     $(".furnitureMenu").fadeIn(10);
     $(".Help").fadeIn(10);
-    
+
   }
 
-  var help = false
+  let help = false
 
   function closeMain() {
     

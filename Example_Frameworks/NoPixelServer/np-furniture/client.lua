@@ -1,22 +1,13 @@
 local curObject = 0
-local obj = {}
 local curObjectName = "None"
 local modifiedObjects = {}
-obj.x = 0.0
-obj.y = 1.0
-obj.z = 0.0
+local obj = { x = 0.0, y = 1.0, z = 0.0 }
 local rot = true
 local cam = 0
-local camX = 0
-local camY = 0
-local camZ = 0
-local objX = 0
-local objY = 0
-local objZ = 0
-local camCrds = { ["x"] = 0.0, ["y"] = 0.0, ["z"] = 0.0 }
 local camball = 0
 local house_id = 0
 local house_model = 0
+local guiEnabled = false
 function ResetVars()
     curObjectName = "None"
     curObject = 0
@@ -83,76 +74,40 @@ objectCategories = {
 --[1] = { ["object"] = "v_res_d_coffeetable", ["price"] = 50, ["name"] = "Coffee Table 1" },
 
 function GenerateObjectLists()
-
     SendNUIMessage({wipeCategories = true})
 
     for i = 1, #objectCategories do
         SendNUIMessage({newCategory = true, category = objectCategories[i]["category"], categoryname = objectCategories[i]["name"] })
     end
-    
-    for i = 1, #sofas do
-        SendNUIMessage({newOption = true, category = "sofas", objectvar = sofas[i]["object"], objectname = sofas[i]["name"] })
-    end
 
-    for i = 1, #beds do
-        SendNUIMessage({newOption = true, category = "beds", objectvar = beds[i]["object"], objectname = beds[i]["name"] })
-    end
+    local lists = {
+        sofas = sofas,
+        beds = beds,
+        chairs = chairs,
+        general = general,
+        general2 = general2,
+        general3 = general3,
+        general4 = general4,
+        small = small,
+        storage = storage,
+        electronics = electronics,
+        lighting = lighting,
+        tables = tables,
+        plants = plants,
+        kitchen = kitchen,
+        bathroom = bathroom,
+        medical = medical
+    }
 
-    for i = 1, #chairs do
-        SendNUIMessage({newOption = true, category = "chairs", objectvar = chairs[i]["object"], objectname = chairs[i]["name"] })
-    end
-
-    for i = 1, #general do
-        SendNUIMessage({newOption = true, category = "general", objectvar = general[i]["object"], objectname = general[i]["name"] })
-    end
-
-    for i = 1, #general2 do
-        SendNUIMessage({newOption = true, category = "general2", objectvar = general2[i]["object"], objectname = general2[i]["name"] })
-    end
-
-    for i = 1, #general3 do
-        SendNUIMessage({newOption = true, category = "general3", objectvar = general3[i]["object"], objectname = general3[i]["name"] })
-    end
-
-    for i = 1, #general4 do
-        SendNUIMessage({newOption = true, category = "general4", objectvar = general4[i]["object"], objectname = general4[i]["name"] })
-    end
-
-
-    for i = 1, #small do
-        SendNUIMessage({newOption = true, category = "small", objectvar = small[i]["object"], objectname = small[i]["name"] })
-    end
-
-    for i = 1, #storage do
-        SendNUIMessage({newOption = true, category = "storage", objectvar = storage[i]["object"], objectname = storage[i]["name"] })
-    end
-
-    for i = 1, #electronics do
-        SendNUIMessage({newOption = true, category = "electronics", objectvar = electronics[i]["object"], objectname = electronics[i]["name"] })
-    end
-
-    for i = 1, #lighting do
-        SendNUIMessage({newOption = true, category = "lighting", objectvar = lighting[i]["object"], objectname = lighting[i]["name"] })
-    end
-
-    for i = 1, #tables do
-        SendNUIMessage({newOption = true, category = "tables", objectvar = tables[i]["object"], objectname = tables[i]["name"] })
-    end
-
-    for i = 1, #plants do
-        SendNUIMessage({newOption = true, category = "plants", objectvar = plants[i]["object"], objectname = plants[i]["name"] })
-    end
-
-    for i = 1, #kitchen do
-        SendNUIMessage({newOption = true, category = "kitchen", objectvar = kitchen[i]["object"], objectname = kitchen[i]["name"] })
-    end
-
-    for i = 1, #bathroom do
-        SendNUIMessage({newOption = true, category = "bathroom", objectvar = bathroom[i]["object"], objectname = bathroom[i]["name"] })
-    end
-
-    for i = 1, #medical do
-        --SendNUIMessage({newOption = true, category = "medical", objectvar = medical[i]["object"], objectname = medical[i]["name"] })
+    for category, items in pairs(lists) do
+        for i = 1, #items do
+            SendNUIMessage({
+                newOption = true,
+                category = category,
+                objectvar = items[i]["object"],
+                objectname = items[i]["name"]
+            })
+        end
     end
 
     SendNUIMessage({ redoCSS = true })
@@ -276,7 +231,7 @@ function DoRotation()
     local defhead = GetEntityHeading(curObject)
     local reshead = GetEntityHeading(curObject)
     while rot do
-        Citizen.Wait(1)
+        Wait(1)
         defhead = defhead + 1.0
         if defhead > 360.0 then
             defhead = 0.0
@@ -372,7 +327,7 @@ function createNewObject(objType)
     SetNuiFocus(false,false)
     TriggerEvent("DoLongHudText","Loading Model - please wait.",2)
     while not HasModelLoaded(objTypeKey) do
-        Citizen.Wait(0)
+        Wait(0)
     end
     TriggerEvent("DoLongHudText","Loaded",2)  
     SetNuiFocus(true,true)
@@ -398,7 +353,8 @@ function createCam()
         crds = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, -2.0, 0.5)
     end
     
-    camball = CreateObject(`prop_golf_ball`, crds, true, true, true)
+    local golfHash = GetHashKey('prop_golf_ball')
+    camball = CreateObject(golfHash, crds["x"], crds["y"], crds["z"], true, true, true)
     FreezeEntityPosition(camball,true)
     cam = CreateCam('DEFAULT_SCRIPTED_CAMERA', true)
     SetCamActive(cam,  true)
@@ -419,16 +375,16 @@ function CamFocusObject()
     
 end
 
-Citizen.CreateThread(function()
-    Citizen.Wait(3000)
+CreateThread(function()
+    Wait(3000)
     
     while true do
-        Citizen.Wait(1)
+        Wait(1)
         if guiEnabled then
             TaskStandStill(PlayerPedId(),1.0)
             CamControls()
         else
-            Citizen.Wait(1000)
+            Wait(1000)
         end
     end
 end)
@@ -600,15 +556,16 @@ function RestackFurniture(oldobjects)
     for i = 1, #modifiedObjects do
         if oldobjects[i] ~= nil then
             SetEntityAsNoLongerNeeded(oldobjects[i]["object"])
-            SetEntityCoords(oldobjects[i]["object"],0.0,0.0,-20.0)
+            DeleteObject(oldobjects[i]["object"])
         end
         RequestModel(modifiedObjects[i]["hash"])
         local count = 10000
         while not HasModelLoaded(modifiedObjects[i]["hash"]) and count > 0 do
             count = count - 1
-            Citizen.Wait(1)
-        end  
+            Wait(1)
+        end
         modifiedObjects[i]["object"] = CreateObject(modifiedObjects[i]["hash"],modifiedObjects[i]["x"],modifiedObjects[i]["y"],modifiedObjects[i]["z"],false,false,false)
+        SetModelAsNoLongerNeeded(modifiedObjects[i]["hash"])
         FreezeEntityPosition(modifiedObjects[i]["object"],true)
         SetEntityCoords(modifiedObjects[i]["object"],modifiedObjects[i]["x"],modifiedObjects[i]["y"],modifiedObjects[i]["z"])
         SetEntityHeading(modifiedObjects[i]["object"],modifiedObjects[i]["heading"])
