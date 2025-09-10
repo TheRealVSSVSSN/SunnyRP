@@ -48,6 +48,7 @@ Maintains client‑side instancing:
 ## Server
 ### server.lua
 Provides persistence and chat command handling:
+- Defines a fixed apartment table for IDs 1–51, notably skipping 6, to track occupation status in memory【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/server.lua†L1-L52】.
 - **Apartment Lookup**: `fsn_apartments:getApartment` searches the `fsn_apartments` table for the character ID and either sends existing data or initiates character creation. An in‑memory table tracks which unit numbers are occupied【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/server.lua†L71-L86】.
 - **Creation**: `fsn_apartments:createApartment` inserts a new row then assigns the first free unit to the caller, returning the details to the client【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/server.lua†L97-L123】.
 - **Saving**: `fsn_apartments:saveApartment` updates inventory, cash, outfits and utilities using a parameterised synchronous query; delays in the database thread will block gameplay【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/server.lua†L126-L136】.
@@ -133,7 +134,7 @@ None.
 | Command | Effect |
 |---|---|
 | `/stash add {amount}` | Adds money to stash after client-side checks【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/server.lua†L152-L158】. |
-| `/stash take {amount}` | Withdraws money from stash【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/server.lua†L152-L166】. |
+| `/stash take {amount}` | Withdraws money from stash after balance check【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/server.lua†L152-L166】. |
 | `/outfit add {name}` | Saves current outfit under a name【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/server.lua†L170-L174】. |
 | `/outfit use {name}` | Equips a stored outfit【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/server.lua†L176-L179】. |
 | `/outfit remove {name}` | Deletes a stored outfit【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/server.lua†L181-L182】. |
@@ -147,6 +148,12 @@ None.
 | `ButtonClick` | NUI → Client | Handles menu actions like storing weapons or opening inventory【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/client.lua†L316-L342】. |
 | `inventoryTake` | NUI → Client | Posted by UI but lacks a matching Lua handler (see Gaps). |
 | `escape` | NUI → Client | Closes the menu when ESC is pressed【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/client.lua†L489-L490】. |
+
+### NUI Messages
+| Message | Direction | Notes |
+|---|---|---|
+| `showmenu` | Client → NUI | Opens the menu and passes encoded weapon data【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/client.lua†L274-L279】. |
+| `hidemenu` | Client → NUI | Requests the UI to hide the menu【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/client.lua†L280-L284】. |
 
 ### Database
 | Operation | Query | Purpose |
@@ -165,5 +172,6 @@ None.
 - **Unimplemented `inventoryTake` channel**: UI posts to `inventoryTake` yet no `RegisterNUICallback` exists, suggesting intended item removal from storage (Inference: Medium)【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/gui/ui.js†L98-L100】.
 - **`instanceMe` stub**: Client instancing helper logs `thiswasremoved`; server instancing now handles isolation (Inference: Low)【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/cl_instancing.lua†L8-L10】.
 - **Server trusts client data**: `/stash` and `/outfit` commands forward directly to clients, and `saveApartment` accepts full apartment objects without ownership checks; malicious clients could tamper with cash or inventory (Inference: Medium)【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/server.lua†L126-L136】【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/server.lua†L152-L187】.
+- **Missing apartment slot**: server apartment list skips index 6, potentially reducing available units (Inference: Low)【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/server.lua†L1-L52】.
 
 DOCS COMPLETE
