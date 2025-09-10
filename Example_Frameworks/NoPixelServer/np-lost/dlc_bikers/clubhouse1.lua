@@ -1,6 +1,13 @@
 
 -- Clubhouse1: 1107.04, -3157.399, -37.51859
 
+--[[
+    -- Type: Function
+    -- Name: GetBikerClubhouse1Object
+    -- Use: Exposes the clubhouse configuration for external scripts
+    -- Created: 2023-09-10
+    -- By: VSSVSSN
+]]
 exports('GetBikerClubhouse1Object', function()
     return BikerClubhouse1
 end)
@@ -190,9 +197,16 @@ BikerClubhouse1 = {
         end
     },
 
+    --[[
+        -- Type: Function
+        -- Name: LoadDefault
+        -- Use: Applies the default interior configuration for the clubhouse
+        -- Created: 2023-09-10
+        -- By: VSSVSSN
+    ]]
     LoadDefault = function()
         BikerClubhouse1.Ipl.Interior.Load()
-        
+
         BikerClubhouse1.Walls.Set(BikerClubhouse1.Walls.brick, BikerClubhouse1.Walls.Color.lightGray)
 
         BikerClubhouse1.Furnitures.Set(BikerClubhouse1.Furnitures.A, 3)

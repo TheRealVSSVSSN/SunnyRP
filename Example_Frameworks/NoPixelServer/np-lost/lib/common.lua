@@ -7,7 +7,13 @@ exports('GetPedheadshotTexture', function(ped)
     return GetPedheadshotTexture(ped)
 end)
 
--- Load or remove IPL(s)
+--[[
+    -- Type: Function
+    -- Name: EnableIpl
+    -- Use: Loads or removes interior IPLs based on activation flag
+    -- Created: 2023-09-10
+    -- By: VSSVSSN
+--]]
 function EnableIpl(ipl, activate)
     if IsTable(ipl) then
         for key, value in pairs(ipl) do
@@ -22,7 +28,13 @@ function EnableIpl(ipl, activate)
     end
 end
 
--- Enable or disable the specified props in an interior
+--[[
+    -- Type: Function
+    -- Name: SetIplPropState
+    -- Use: Toggles props inside an interior and optionally refreshes it
+    -- Created: 2023-09-10
+    -- By: VSSVSSN
+--]]
 function SetIplPropState(interiorId, props, state, refresh)
     if refresh == nil then refresh = false end
     if IsTable(interiorId) then
@@ -45,6 +57,13 @@ function SetIplPropState(interiorId, props, state, refresh)
     end
 end
 
+--[[
+    -- Type: Function
+    -- Name: CreateNamedRenderTargetForModel
+    -- Use: Links a render target to a model and returns its handle
+    -- Created: 2023-09-10
+    -- By: VSSVSSN
+--]]
 function CreateNamedRenderTargetForModel(name, model)
     local handle = 0
     if not IsNamedRendertargetRegistered(name) then
@@ -60,6 +79,13 @@ function CreateNamedRenderTargetForModel(name, model)
     return handle
 end
 
+--[[
+    -- Type: Function
+    -- Name: DrawEmptyRect
+    -- Use: Renders a transparent rectangle on a model's render target
+    -- Created: 2023-09-10
+    -- By: VSSVSSN
+--]]
 function DrawEmptyRect(name, model)
     local step = 250
     local timeout = 5 * 1000
@@ -67,7 +93,7 @@ function DrawEmptyRect(name, model)
     local renderId = CreateNamedRenderTargetForModel(name, model)
 
     while (not IsNamedRendertargetRegistered(name)) do
-        Citizen.Wait(step)
+        Wait(step)
         currentTime = currentTime + step
         if (currentTime >= timeout) then return false end
     end
@@ -86,6 +112,13 @@ end
 --[[
     TO REMOVE
 ]]--
+--[[
+    -- Type: Function
+    -- Name: LoadEmptyScaleform
+    -- Use: Deprecated helper for initializing empty scaleforms
+    -- Created: 2023-09-10
+    -- By: VSSVSSN
+--]]
 function LoadEmptyScaleform(renderTarget, prop, scaleform, sfFunction)
     local renderId = CreateNamedRenderTargetForModel(renderTarget, prop)
     local gfxHandle = -1
@@ -104,9 +137,15 @@ function LoadEmptyScaleform(renderTarget, prop, scaleform, sfFunction)
     end
 end
 
+--[[
+    -- Type: Function
+    -- Name: SetupScaleform
+    -- Use: Builds a scaleform movie with supplied parameters
+    -- Created: 2023-09-10
+    -- By: VSSVSSN
+--]]
 function SetupScaleform(movieId, scaleformFunction, parameters)
     BeginScaleformMovieMethod(movieId, scaleformFunction)
-    N_0x77fe3402004cd1b0(name)
     if (IsTable(parameters)) then
         for i = 0, Tablelength(parameters) - 1 do
             local p = parameters["p" .. tostring(i)]
@@ -127,6 +166,13 @@ function SetupScaleform(movieId, scaleformFunction, parameters)
     N_0x32f34ff7f617643b(movieId, 1)
 end
 
+--[[
+    -- Type: Function
+    -- Name: LoadStreamedTextureDict
+    -- Use: Requests and waits for a texture dictionary to load
+    -- Created: 2023-09-10
+    -- By: VSSVSSN
+--]]
 function LoadStreamedTextureDict(texturesDict)
     local step = 1000
     local timeout = 5 * 1000
@@ -134,13 +180,20 @@ function LoadStreamedTextureDict(texturesDict)
 
     RequestStreamedTextureDict(texturesDict, 0)
     while not HasStreamedTextureDictLoaded(texturesDict) do
-        Citizen.Wait(step)
+        Wait(step)
         currentTime = currentTime + step
         if (currentTime >= timeout) then return false end
     end
     return true
 end
 
+--[[
+    -- Type: Function
+    -- Name: LoadScaleform
+    -- Use: Loads a scaleform movie and returns its handle
+    -- Created: 2023-09-10
+    -- By: VSSVSSN
+--]]
 function LoadScaleform(scaleform)
     local step = 1000
     local timeout = 5 * 1000
@@ -148,7 +201,7 @@ function LoadScaleform(scaleform)
     local handle = RequestScaleformMovie(scaleform)
 
     while (not HasScaleformMovieLoaded(handle)) do
-        Citizen.Wait(step)
+        Wait(step)
         currentTime = currentTime + step
         if (currentTime >= timeout) then return -1 end
     end
@@ -156,6 +209,13 @@ function LoadScaleform(scaleform)
     return handle
 end
 
+--[[
+    -- Type: Function
+    -- Name: GetPedheadshot
+    -- Use: Creates a headshot for a ped and waits until ready
+    -- Created: 2023-09-10
+    -- By: VSSVSSN
+--]]
 function GetPedheadshot(ped)
     local step = 1000
     local timeout = 5 * 1000
@@ -163,7 +223,7 @@ function GetPedheadshot(ped)
     local pedheadshot = RegisterPedheadshot(ped)
 
     while not IsPedheadshotReady(pedheadshot) do
-        Citizen.Wait(step)
+        Wait(step)
         currentTime = currentTime + step
         if (currentTime >= timeout) then return -1 end
     end
@@ -171,6 +231,13 @@ function GetPedheadshot(ped)
     return pedheadshot
 end
 
+--[[
+    -- Type: Function
+    -- Name: GetPedheadshotTexture
+    -- Use: Returns the texture dictionary for a ped headshot
+    -- Created: 2023-09-10
+    -- By: VSSVSSN
+--]]
 function GetPedheadshotTexture(ped)
     local textureDict = nil
     local pedheadshot = GetPedheadshot(ped)
@@ -179,20 +246,32 @@ function GetPedheadshotTexture(ped)
         textureDict = GetPedheadshotTxdString(pedheadshot)
         local IsTextureDictLoaded = LoadStreamedTextureDict(textureDict)
         if (not IsTextureDictLoaded) then
-            Citizen.Trace("ERROR: BikerClubhouseDrawMembers - Textures dictionnary \"" .. tostring(textureDict) .. "\" cannot be loaded.")
+            print("ERROR: BikerClubhouseDrawMembers - Textures dictionary \"" .. tostring(textureDict) .. "\" cannot be loaded.")
         end
     else
-        Citizen.Trace("ERROR: BikerClubhouseDrawMembers - PedHeadShot not ready.")
+        print("ERROR: BikerClubhouseDrawMembers - PedHeadShot not ready.")
     end
 
     return textureDict
 end
 
--- Check if a variable is a table
+--[[ 
+    -- Type: Function
+    -- Name: IsTable
+    -- Use: Checks if the provided value is a table
+    -- Created: 2023-09-10
+    -- By: VSSVSSN
+--]]
 function IsTable(T)
     return type(T) == 'table'
 end
--- Return the number of elements of the table
+--[[ 
+    -- Type: Function
+    -- Name: Tablelength
+    -- Use: Counts the number of elements in a table
+    -- Created: 2023-09-10
+    -- By: VSSVSSN
+--]]
 function Tablelength(T)
     local count = 0
     for _ in pairs(T) do count = count + 1 end
