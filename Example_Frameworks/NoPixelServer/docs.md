@@ -6,6 +6,12 @@
 - Added radius constant to blackjack table locator and corrected prop name outputs.
 - Moved animation dictionary cleanup outside the dealer creation loop to prevent missing animation issues.
 - Converted global state to local variables and tightened betting validation on the server.
+
+## InteractSound
+- Migrated to `fxmanifest.lua` with `cerulean` fx_version and Lua 5.4 support.
+- Replaced invalid player checks with `NetworkIsPlayerActive` and added volume clamping.
+- Removed jQuery dependency and refined NUI audio logic.
+- Added server helpers for coordinated sound playback including distance and flash effects.
 - Removed unused teleporter script and cleaned manifest ordering.
 - Renamed internal variables for clarity and consolidated dealer helper functions.
 - Improved server RNG seeding and scoped chip helpers locally for safety.
