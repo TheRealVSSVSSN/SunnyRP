@@ -21,3 +21,9 @@
 - Removed unused teleporter script and cleaned manifest ordering.
 - Renamed internal variables for clarity and consolidated dealer helper functions.
 - Improved server RNG seeding and scoped chip helpers locally for safety.
+
+## ghmattimysql
+- Upgraded manifest to `cerulean` fx_version and enabled Lua 5.4.
+- Replaced synchronous wait loops with promise-based helpers to avoid blocking the server thread.
+- Simplified NUI activation logic and fixed periodic refresh to run continuously.
+- Reimplemented the Node.js backend using `mysql2` with pooled connections and environment variable support.
