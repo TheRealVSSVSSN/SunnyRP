@@ -1,53 +1,55 @@
 
--- This manages recoil and crouch / prone
 local stresslevel = 0
-function RecoilFactor(stress,stance)
-    if stance == nil then
-        stance = 0
-    end
+local firstPersonActive = false
+local movFwd = true
+local ctrlStage = 0
+local crouchCam = 0
+local fixprone = false
+local myWep = 0
+local runningMovement = false
+local timelimit = 0
+local isHolding = false
+local isFlying = false
+local incrouch = true
+local handCuffed = false
+local handCuffedWalking = false
+
+local isDead = false
+local beingDragged, dragging = false, false
+
+local function RecoilFactor(stress, stance)
+    stance = stance or 0
     if stance == 3 then
         stance = 1
     end
-    sendFactor = ((math.ceil(stress) / 1000)) - stance
 
-
-    TriggerEvent("recoil:updateposition",sendFactor)
-
+    local sendFactor = math.max((math.ceil(stress) / 1000) - stance, 0)
+    TriggerEvent("recoil:updateposition", sendFactor)
 end
 
 RegisterNetEvent("client:updateStress")
-AddEventHandler("client:updateStress",function(newStress)
+AddEventHandler("client:updateStress", function(newStress)
     stresslevel = newStress
-    if dstamina == 0 then
+    if stresslevel <= 0 then
         RevertToStressMultiplier()
     end
 end)
 
-
-local prone = true
-local movFwd = true
-
-local ctrlStage = 0
-local camon = false
-local shitcam = 0
-
-
-imdead = 0
 RegisterNetEvent('pd:deathcheck')
 AddEventHandler('pd:deathcheck', function()
-    if imdead == 0 then 
-        imdead = 1
+    if not isDead then
+        isDead = true
     else
         beingDragged = false
         dragging = false
-        imdead = 0
+        isDead = false
     end
 end)
 
 function crouchMovement()
     RequestAnimSet("move_ped_crouched")
     while not HasAnimSetLoaded("move_ped_crouched") do
-        Citizen.Wait(0)
+        Wait(0)
     end
 
     SetPedMovementClipset(PlayerPedId(), "move_ped_crouched",1.0)    
@@ -67,37 +69,35 @@ end)
 
 
 RegisterNetEvent("fuckthis")
-AddEventHandler("fuckthis",function()
-
+AddEventHandler("fuckthis", function()
     while firstPersonActive do
-        Citizen.Wait(1)
-        local crouchpos = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.127,-0.29,0.801)
-        if (not DoesCamExist(shitcam)) then
-            shitcam = CreateCam('DEFAULT_SCRIPTED_CAMERA', true)
-            SetCamCoord(shitcam, crouchpos)
-            SetCamRot(shitcam, 0.0, 0.0, GetEntityHeading(PlayerPedId()))
-            SetCamActive(shitcam,  true)
-            RenderScriptCams(true,  false,  0,  true,  true)
-            SetCamCoord(shitcam, crouchpos)
-            SetCamFov(shitcam, 60.0)
+        Wait(1)
+        local crouchpos = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.127, -0.29, 0.801)
+        if not DoesCamExist(crouchCam) then
+            crouchCam = CreateCam('DEFAULT_SCRIPTED_CAMERA', true)
+            SetCamCoord(crouchCam, crouchpos)
+            SetCamRot(crouchCam, 0.0, 0.0, GetEntityHeading(PlayerPedId()))
+            SetCamActive(crouchCam, true)
+            RenderScriptCams(true, false, 0, true, true)
+            SetCamCoord(crouchCam, crouchpos)
+            SetCamFov(crouchCam, 60.0)
         end
 
-        SetCamCoord(shitcam, crouchpos)
-        SetCamRot(shitcam, GetGameplayCamRelativePitch(), 0.0, GetEntityHeading(PlayerPedId()) + GetGameplayCamRelativeHeading())
-         if IsControlJustReleased(0, INPUT_AIM) then
+        SetCamCoord(crouchCam, crouchpos)
+        SetCamRot(crouchCam, GetGameplayCamRelativePitch(), 0.0, GetEntityHeading(PlayerPedId()) + GetGameplayCamRelativeHeading())
+        if IsControlJustReleased(0, 25) then
             firstPersonActive = false
-         end
+        end
     end
 
-    if (DoesCamExist(shitcam)) then
+    if DoesCamExist(crouchCam) then
         RenderScriptCams(false, false, 0, 1, 0)
-        DestroyCam(shitcam, false)
+        DestroyCam(crouchCam, false)
     end
-
 end)
-local fixprone = false
+
 RegisterNetEvent("fixprone")
-AddEventHandler("fixprone",function()
+AddEventHandler("fixprone", function()
     if ctrlStage == 2 then
         fixprone = true
     end
@@ -105,20 +105,8 @@ end)
 
 
 function doCrouchIn()
-
---  RequestAnimDict("swimming@swim")
---  while not HasAnimDictLoaded("swimming@swim") do
---      Citizen.Wait(0)
---  end
-
---  TaskPlayAnim(PlayerPedId(), "swimming@swim", "recover_down_to_idle", 0.8, 0.8, 1.0, 49, 0, 0, 0, 0)
-
---  Citizen.Wait(420)
     crouchMovement()
 end
-
-myWep = 0
-local runningMovement = false
 RegisterNetEvent("proneMovement")
 AddEventHandler("proneMovement",function()
     if runningMovement then
@@ -131,15 +119,15 @@ AddEventHandler("proneMovement",function()
         movFwd = true
         SetPedMoveAnimsBlendOut(PlayerPedId())
         local pronepos = GetEntityCoords(PlayerPedId())
-        TaskPlayAnimAdvanced(PlayerPedId(), "move_crawl", "onfront_fwd", pronepos["x"],pronepos["y"],pronepos["z"]+0.1, 0.0, 0.0, GetEntityHeading(PlayerPedId()), 100.0, 0.4, 1.0, 7, 2.0, 1, 1) 
-        Citizen.Wait(500)
+        TaskPlayAnimAdvanced(PlayerPedId(), "move_crawl", "onfront_fwd", pronepos["x"], pronepos["y"], pronepos["z"] + 0.1, 0.0, 0.0, GetEntityHeading(PlayerPedId()), 100.0, 0.4, 1.0, 7, 2.0, 1, 1)
+        Wait(500)
     elseif ( not (IsControlPressed(1,32)) and movFwd) or (fixprone and not (IsControlPressed(1,32))) then -- W
         fixprone = false
         curWep = GetSelectedPedWeapon(PlayerPedId())
         myWep =  GetSelectedPedWeapon(PlayerPedId())
         local pronepos = GetEntityCoords(PlayerPedId())
-        TaskPlayAnimAdvanced(PlayerPedId(), "move_crawl", "onfront_fwd", pronepos["x"],pronepos["y"],pronepos["z"]+0.1, 0.0, 0.0, GetEntityHeading(PlayerPedId()), 100.0, 0.4, 1.0, 6, 2.0, 1, 1)
-        Citizen.Wait(500)
+        TaskPlayAnimAdvanced(PlayerPedId(), "move_crawl", "onfront_fwd", pronepos["x"], pronepos["y"], pronepos["z"] + 0.1, 0.0, 0.0, GetEntityHeading(PlayerPedId()), 100.0, 0.4, 1.0, 6, 2.0, 1, 1)
+        Wait(500)
         movFwd = false
     end     
     runningMovement = false
@@ -147,14 +135,7 @@ AddEventHandler("proneMovement",function()
 end)
 
 
-local foreskin = false
-local timelimit = 0
-local isHolding = false
-local isFlying = false
--- 0 = default, 1 = crouch, 2 = prone
-incrouch = true
-
-Citizen.CreateThread(function()
+CreateThread(function()
 
     local Triggered1 = false
     local Triggered2 = false
@@ -179,20 +160,20 @@ Citizen.CreateThread(function()
                     crouchMovement()
 
                 else
-                    if IsControlJustReleased(1,Controlkey["movementCrouch"][1]) then -- X
+                    if IsControlJustReleased(1, Controlkey["movementCrouch"][1]) then -- X
                         SetPedStealthMovement(PlayerPedId(),true,"")
                         firstPersonActive = false
                         ctrlStage = 0
 
                         TriggerEvent("AnimSet:Set")
 
-                        Citizen.Wait(100)  
+                        Wait(100)
                         ClearPedTasks(PlayerPedId())
 
                         jumpDisabled = false
                         
                         RecoilFactor(stresslevel,0)
-                        Citizen.Wait(500)
+                        Wait(500)
                         SetPedStealthMovement(PlayerPedId(),false,"")
                         Triggered3 = false
 
@@ -219,26 +200,22 @@ Citizen.CreateThread(function()
             timelimit = timelimit - 1
         end
 
-
-
         if IsControlJustPressed(0, 142) or IsDisabledControlJustPressed(0, 142) then
             if ctrlStage == 2 then
                 ctrlStage = 3
             end
         end
-
-        if IsControlJustReleased(1,Controlkey["movementCrouch"][1]) and not isFlying and not isHolding and not ( IsPedSittingInAnyVehicle( GetPlayerPed( -1 ) ) ) and not (handCuffed or handCuffedWalking or imdead == 1) then
-
+        
+        if IsControlJustReleased(1, Controlkey["movementCrouch"][1]) and not isFlying and not isHolding and not IsPedSittingInAnyVehicle(PlayerPedId()) and not (handCuffed or handCuffedWalking or isDead) then
             ctrlStage = 3
             if GetPedStealthMovement(PlayerPedId()) then
                 SetPedStealthMovement(PlayerPedId(),0,0)
-            end             
+            end
             RecoilFactor(stresslevel,ctrlStage)
             firstPersonActive = false
         end
 
-        if IsPedJacking(PlayerPedId()) or IsPedInMeleeCombat(PlayerPedId()) or IsControlJustReleased(1,22) or IsPedRagdoll(PlayerPedId()) or handCuffed or handCuffedWalking or imdead == 1 or ( IsPedSittingInAnyVehicle( GetPlayerPed( -1 ) ) ) then
-
+        if IsPedJacking(PlayerPedId()) or IsPedInMeleeCombat(PlayerPedId()) or IsControlJustReleased(1,22) or IsPedRagdoll(PlayerPedId()) or handCuffed or handCuffedWalking or isDead or IsPedSittingInAnyVehicle(PlayerPedId()) then
             if ctrlStage ~= 0 then
                 ClearPedTasks(PlayerPedId())
                 firstPersonActive = false
@@ -247,32 +224,29 @@ Citizen.CreateThread(function()
                 jumpDisabled = false
                 SetPedStealthMovement(PlayerPedId(),0,0)
                 RecoilFactor(stresslevel,0)
-                Triggered1 = false  
+                Triggered1 = false
                 Triggered2 = false
                 Triggered3 = false
             end
-
         end
 
         --TaskPlayAnim(PlayerPedId(), "move_crawl", "onfront_fwd", GetEntityCoords(PlayerPedId()), 1.0, 1.0, 999, 16, 1.0, 2, 2, 2);
     --  TASK_PLAY_ANIM_ADVANCED(Ped ped, char* animDict, char* animName, float posX, float posY, float posZ, float rotX, float rotY, float rotZ, float speed, float speedMultiplier, int duration, Any flag, float animTime, Any p14, Any p15);
         --TaskPlayAnimAdvanced(ped, animDict, animName, posX, posY, posZ, rotX, rotY, rotZ, speed, speedMultiplier, duration, flag, animTime, p14, p15)
-        --TaskPlayAnimAdvanced(PlayerPedId(), "move_crawl", "onfront_fwd", GetEntityCoords(PlayerPedId()), 0.0, 0.0, GetEntityHeading(PlayerPedId()), 1.0, 1.0, -1, 47, 1.0, 0, 0) 
+        --TaskPlayAnimAdvanced(PlayerPedId(), "move_crawl", "onfront_fwd", GetEntityCoords(PlayerPedId()), 0.0, 0.0, GetEntityHeading(PlayerPedId()), 1.0, 1.0, -1, 47, 1.0, 0, 0)
 
-        --TaskPlayAnimAdvanced(PlayerPedId(), "move_crawl", "onfront_fwd", GetEntityCoords(PlayerPedId()), 0.0, 0.0, GetEntityHeading(PlayerPedId()), 1.0, 1.0, -1, 1, 1.0, 0, 0)  
+        --TaskPlayAnimAdvanced(PlayerPedId(), "move_crawl", "onfront_fwd", GetEntityCoords(PlayerPedId()), 0.0, 0.0, GetEntityHeading(PlayerPedId()), 1.0, 1.0, -1, 1, 1.0, 0, 0)
 
         --TaskPlayAnim(ped, animDictionary, animationName, speed, speedMultiplier, duration, flag, playbackRate, lockX, lockY, lockZ)
-        Citizen.Wait(1)
+        Wait(1)
 
-        if IsPedSittingInAnyVehicle( GetPlayerPed( -1 ) ) then
-            Citizen.Wait(1000)
+        if IsPedSittingInAnyVehicle(PlayerPedId()) then
+            Wait(1000)
         end
 
     end
 --  DeleteEntity(proneball)
 end)
-handCuffed = false
-handCuffedWalking = false
 
 
 RegisterNetEvent('police:currentHandCuffedState')
@@ -292,9 +266,9 @@ AddEventHandler("admin:isFlying", function(state)
 end)
 
 
-Citizen.CreateThread( function()
+CreateThread(function()
     while true do
-        playerPed = PlayerPedId() 
+        local playerPed = PlayerPedId()
         if IsPedArmed(playerPed, 6) then
             if IsPedDoingDriveby(playerPed) then
                 if GetFollowPedCamViewMode() == 0 or GetFollowVehicleCamViewMode() == 0 then
