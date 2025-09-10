@@ -1,3 +1,11 @@
+--[[
+    -- Type: Module
+    -- Name: sv_list
+    -- Use: Defines command permissions and handlers
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+
 local ALL = {F = true}
 local EMS = {E = true}
 local NEMS = {P = true, E = true, NE = true, D = true}
@@ -18,9 +26,7 @@ local DI_JD_PL = {DI = true, J = true, P = true}
 local POLICE_Judge = {P = true, J = true}
 local TOW = {T = true}
 
-
-
-commands = {
+local commands = {
 
     {"/wing", "Toggle Lock for hospital WING", EMERGENCY_Judge, function(src, args)
       TriggerClientEvent('inter:wing', src)
@@ -95,7 +101,7 @@ commands = {
     end},
     
     {"/remove", "Remove character ID's whitelist (/remove job CharID)", EMERGENCY_Judge, function(src, args)
-      TriggerClientEvent('police:chatCommand', src, args, 'remove', false, fals)
+      TriggerClientEvent('police:chatCommand', src, args, 'remove', false, false)
     end},
     
     {"/jail", "/jail [player id] [length]", POLICE_Judge, function(src, args)
@@ -312,10 +318,6 @@ commands = {
     end},
 
     {"/help", "Shows commands list", POLICE, function(src, args)
-      TriggerClientEvent('pixerium:check', src, 3, 'trycpr', false)
-    end},
-
-    {"/help", "Shows commands list", POLICE, function(src, args)
       TriggerClientEvent('commands:help', src)
     end},
 
@@ -343,10 +345,6 @@ commands = {
     
     {"/trunk", "Toggle's hood", ALL, function(src, args)
       TriggerClientEvent('ped:forceTrunkSelf', src)
-    end},
-
-    {"/cpr", "Toggle's hood", ALL, function(src, args)
-      TriggerClientEvent('client:cpr', src)
     end},
 
     {"/use", "idk that", ALL, function(src, args)
@@ -378,11 +376,7 @@ commands = {
     end},
 
     {"/selfie", "Toggle's selfie cam on", ALL, function(src, args)
-      TriggerClientEvent('selfiePhone', src) 
-    end},
-
-    {"/selfie", "Toggle's selfie cam on", ALL, function(src, args)
-      TriggerClientEvent('selfiePhone', src) 
+      TriggerClientEvent('selfiePhone', src)
     end},
 
     {"/showid", "Show your ID card", ALL, function(src, args)
@@ -421,14 +415,14 @@ commands = {
       TriggerClientEvent( "chatMessage",-1 , "OOC " .. name .. " [".. src .. "]", 2 , msg)
       exports["np-log"]:AddLog("OOC Chat [".. src .."]", user, name .. ": " .. msg, {})
     end},
-    
-    }
 
-    RegisterCommand('sport', function(source, args)
-      local src = source
-    local user = exports["np-base"]:getModule("Player"):GetUser(src)
-
+    {"/sport", "Toggle sport mode for police", POLICE, function(src, args)
+      local user = exports["np-base"]:getModule("Player"):GetUser(src)
       if user:getVar("job") == 'police' then
         TriggerClientEvent('police:sport', src)
-  end
-end)
+      end
+    end},
+
+}
+
+return commands
