@@ -1,110 +1,137 @@
 
-attachedPropPerm = 0
-function removeAttachedPropPerm()
-	if DoesEntityExist(attachedPropPerm) then
-		DeleteEntity(attachedPropPerm)
-		attachedPropPerm = 0
-	end
+--[[
+    -- Type: Variable
+    -- Name: attachedPropPerm
+    -- Use: Stores entity handle for a permanent prop attachment
+    -- Created: Wed Sep 10 20:36:12 UTC 2025
+    -- By: VSSVSSN
+--]]
+local attachedPropPerm = 0
+
+--[[
+    -- Type: Function
+    -- Name: removeAttachedPropPerm
+    -- Use: Deletes the permanently attached prop entity
+    -- Created: Wed Sep 10 20:36:12 UTC 2025
+    -- By: VSSVSSN
+--]]
+local function removeAttachedPropPerm()
+        if DoesEntityExist(attachedPropPerm) then
+                DeleteEntity(attachedPropPerm)
+                attachedPropPerm = 0
+        end
 end
 
 RegisterNetEvent('destroyPropPerm')
 AddEventHandler('destroyPropPerm', function()
-	removeAttachedPropPerm()
+        removeAttachedPropPerm()
 end)
 
-local APPbone = 0
-local APPx = 0.0
-local APPy = 0.0
-local APPz = 0.0
-local APPxR = 0.0
-local APPyR = 0.0
-local APPzR = 0.0
+--[[
+    -- Type: Function
+    -- Name: loadModel
+    -- Use: Requests and loads a model into memory
+    -- Created: Wed Sep 10 20:36:12 UTC 2025
+    -- By: VSSVSSN
+--]]
+local function loadModel(model)
+        if type(model) == 'string' then
+                model = GetHashKey(model)
+        end
+        RequestModel(model)
+        while not HasModelLoaded(model) do
+                Wait(5)
+        end
+        return model
+end
+
+local APPbone, APPx, APPy, APPz = 0, 0.0, 0.0, 0.0
+local APPxR, APPyR, APPzR = 0.0, 0.0, 0.0
 
 local holdingPackage = false
 
+--[[
+    -- Type: Event
+    -- Name: attachPropPerm
+    -- Use: Attaches a prop to the player until explicitly removed
+    -- Created: Wed Sep 10 20:36:12 UTC 2025
+    -- By: VSSVSSN
+--]]
 RegisterNetEvent('attachPropPerm')
-AddEventHandler('attachPropPerm', function(attachModelSent,boneNumberSent,x,y,z,xR,yR,zR)
+AddEventHandler('attachPropPerm', function(attachModelSent, boneNumberSent, x, y, z, xR, yR, zR)
 
-	if attachedPropPerm ~= 0 then
-		removeAttachedPropPerm()
-		return
-	end
-	TriggerEvent("DoLongHudText","Press 7 to drop or pickup the object.",37)
-	
-	holdingPackage = true
-	attachModel = GetHashKey(attachModelSent)
-	boneNumber = boneNumberSent
-	SetCurrentPedWeapon(PlayerPedId(), 0xA2719263)
-	local bone = GetPedBoneIndex(PlayerPedId(), boneNumberSent)
-	--local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(), true))
-	RequestModel(attachModel)
-	while not HasModelLoaded(attachModel) do
-		Citizen.Wait(100)
-	end
-	attachedPropPerm = CreateObject(attachModel, 1.0, 1.0, 1.0, 1, 1, 0)
-	exports["isPed"]:GlobalObject(attachedPropPerm)
+        if attachedPropPerm ~= 0 then
+                removeAttachedPropPerm()
+                return
+        end
+        TriggerEvent("DoLongHudText", "Press 7 to drop or pickup the object.", 37)
 
-	AttachEntityToEntity(attachedPropPerm, PlayerPedId(), bone, x, y, z, xR, yR, zR, 1, 1, 0, 0, 2, 1)
+        holdingPackage = true
+        local attachModel = loadModel(attachModelSent)
+        SetCurrentPedWeapon(PlayerPedId(), GetHashKey('WEAPON_UNARMED'))
+        local bone = GetPedBoneIndex(PlayerPedId(), boneNumberSent)
 
-	APPbone = bone
-	APPx = x
-	APPy = y
-	APPz = z
-	APPxR = xR
-	APPyR = yR
-	APPzR = zR
+        attachedPropPerm = CreateObject(attachModel, 1.0, 1.0, 1.0, true, true, false)
+        exports["isPed"]:GlobalObject(attachedPropPerm)
 
+        AttachEntityToEntity(attachedPropPerm, PlayerPedId(), bone, x, y, z, xR, yR, zR, false, false, false, false, 2, true)
+
+        APPbone = bone
+        APPx, APPy, APPz = x, y, z
+        APPxR, APPyR, APPzR = xR, yR, zR
+        SetModelAsNoLongerNeeded(attachModel)
 end)
-function loadAnimDict( dict )
-    while ( not HasAnimDictLoaded( dict ) ) do
-        RequestAnimDict( dict )
-        Citizen.Wait( 5 )
+--[[
+    -- Type: Function
+    -- Name: loadAnimDict
+    -- Use: Loads an animation dictionary into memory
+    -- Created: Wed Sep 10 20:36:12 UTC 2025
+    -- By: VSSVSSN
+--]]
+local function loadAnimDict(dict)
+    while not HasAnimDictLoaded(dict) do
+        RequestAnimDict(dict)
+        Wait(5)
     end
 end
 
-function randPickupAnim()
-  local randAnim = math.random(7)
-
-
+--[[
+    -- Type: Function
+    -- Name: randPickupAnim
+    -- Use: Plays a pickup animation when toggling a carried prop
+    -- Created: Wed Sep 10 20:36:12 UTC 2025
+    -- By: VSSVSSN
+--]]
+local function randPickupAnim()
     loadAnimDict('random@domestic')
-    TaskPlayAnim(PlayerPedId(),'random@domestic', 'pickup_low',5.0, 1.0, 1.0, 48, 0.0, 0, 0, 0)
-
+    TaskPlayAnim(PlayerPedId(), 'random@domestic', 'pickup_low', 5.0, 1.0, 1.0, 48, 0.0, 0, 0, 0)
 end
 
 RegisterNetEvent('event:control:propAttach')
-AddEventHandler('event:control:propAttach', function(useID)
+AddEventHandler('event:control:propAttach', function()
+        if attachedPropPerm == 0 then return end
 
-	if attachedPropPerm ~= 0 then
-
-		if (`WEAPON_UNARMED` ~= GetSelectedPedWeapon(PlayerPedId()) and holdingPackage) then
-
-			if not holdingPackage then
-
-				local dst = #(GetEntityCoords(attachedPropPerm) - GetEntityCoords(PlayerPedId()))
-
-				if dst < 2 then
-				--	TaskTurnPedToFaceEntity(PlayerPedId(), attachedPropPerm, 1.0)
-					holdingPackage = not holdingPackage
-					randPickupAnim()
-					Citizen.Wait(1000)
-					PropCarryAnim()
-					ClearPedTasks(PlayerPedId())
-					ClearPedSecondaryTask(PlayerPedId())
-					AttachEntityToEntity(attachedPropPerm, PlayerPedId(), APPbone, APPx, APPy, APPz, APPxR, APPyR, APPzR, 1, 1, 0, 0, 2, 1)
-				end
-
-			else
-				holdingPackage = not holdingPackage
-				ClearPedTasks(PlayerPedId())
-				ClearPedSecondaryTask(PlayerPedId())
-				randPickupAnim()
-				Citizen.Wait(500)
-				DetachEntity(attachedPropPerm)
-			end
-
-		end
-	end
-
+        if GetSelectedPedWeapon(PlayerPedId()) == GetHashKey('WEAPON_UNARMED') then
+                if not holdingPackage then
+                        local dst = #(GetEntityCoords(attachedPropPerm) - GetEntityCoords(PlayerPedId()))
+                        if dst < 2.0 then
+                                holdingPackage = true
+                                randPickupAnim()
+                                Wait(1000)
+                                PropCarryAnim()
+                                ClearPedTasks(PlayerPedId())
+                                ClearPedSecondaryTask(PlayerPedId())
+                                AttachEntityToEntity(attachedPropPerm, PlayerPedId(), APPbone, APPx, APPy, APPz, APPxR, APPyR, APPzR, false, false, false, false, 2, true)
+                        end
+                else
+                        holdingPackage = false
+                        ClearPedTasks(PlayerPedId())
+                        ClearPedSecondaryTask(PlayerPedId())
+                        randPickupAnim()
+                        Wait(500)
+                        DetachEntity(attachedPropPerm)
+                end
+        end
 end)
 
 
@@ -112,131 +139,125 @@ function PropCarryAnim()
 	-- anims for specific carrying props.
 end
 
-attachedProp = 0
-function removeAttachedProp()
-	if DoesEntityExist(attachedProp) then
-		DeleteEntity(attachedProp)
-		attachedProp = 0
-	end
+--[[
+    -- Type: Variable
+    -- Name: attachedProp
+    -- Use: Handle for a temporary prop attachment
+    -- Created: Wed Sep 10 20:36:12 UTC 2025
+    -- By: VSSVSSN
+--]]
+local attachedProp = 0
+
+--[[
+    -- Type: Function
+    -- Name: removeAttachedProp
+    -- Use: Deletes the temporary attached prop entity
+    -- Created: Wed Sep 10 20:36:12 UTC 2025
+    -- By: VSSVSSN
+--]]
+local function removeAttachedProp()
+        if DoesEntityExist(attachedProp) then
+                DeleteEntity(attachedProp)
+                attachedProp = 0
+        end
 end
 
 RegisterNetEvent('destroyProp')
 AddEventHandler('destroyProp', function()
-	removeAttachedProp()
+        removeAttachedProp()
 end)
 
 RegisterNetEvent('attachProp')
-AddEventHandler('attachProp', function(attachModelSent,boneNumberSent,x,y,z,xR,yR,zR)
-	removeAttachedProp()
-	attachModel = GetHashKey(attachModelSent)
-	boneNumber = boneNumberSent
-	SetCurrentPedWeapon(PlayerPedId(), 0xA2719263)
-	local bone = GetPedBoneIndex(PlayerPedId(), boneNumberSent)
-	--local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(), true))
-	RequestModel(attachModel)
-	while not HasModelLoaded(attachModel) do
-		Citizen.Wait(100)
-	end
-	attachedProp = CreateObject(attachModel, 1.0, 1.0, 1.0, 1, 1, 0)
-	exports["isPed"]:GlobalObject(attachedProp)
-	SetModelAsNoLongerNeeded(attachModel)
-	AttachEntityToEntity(attachedProp, PlayerPedId(), bone, x, y, z, xR, yR, zR, 1, 1, 0, 0, 2, 1)
+AddEventHandler('attachProp', function(attachModelSent, boneNumberSent, x, y, z, xR, yR, zR)
+        removeAttachedProp()
+        local attachModel = loadModel(attachModelSent)
+        SetCurrentPedWeapon(PlayerPedId(), GetHashKey('WEAPON_UNARMED'))
+        local bone = GetPedBoneIndex(PlayerPedId(), boneNumberSent)
+        attachedProp = CreateObject(attachModel, 1.0, 1.0, 1.0, true, true, false)
+        exports["isPed"]:GlobalObject(attachedProp)
+        SetModelAsNoLongerNeeded(attachModel)
+        AttachEntityToEntity(attachedProp, PlayerPedId(), bone, x, y, z, xR, yR, zR, false, false, false, false, 2, true)
 end)
 
 -- Phone
-attachedPropPhone = 0
-function removeAttachedPropPhone()
-	if DoesEntityExist(attachedPropPhone) then
-		DeleteEntity(attachedPropPhone)
-		attachedPropPhone = 0
-	end
+local attachedPropPhone = 0
+local function removeAttachedPropPhone()
+        if DoesEntityExist(attachedPropPhone) then
+                DeleteEntity(attachedPropPhone)
+                attachedPropPhone = 0
+        end
 end
 
 RegisterNetEvent('destroyPropPhone')
 AddEventHandler('destroyPropPhone', function()
-	removeAttachedPropPhone()
+        removeAttachedPropPhone()
 end)
 
 RegisterNetEvent('attachPropPhone')
-AddEventHandler('attachPropPhone', function(attachModelSent,boneNumberSent,x,y,z,xR,yR,zR)
-	removeAttachedPropPhone()
-	attachModelPhone = GetHashKey(attachModelSent)
-	boneNumber = boneNumberSent
-	SetCurrentPedWeapon(PlayerPedId(), 0xA2719263)
-	local bone = GetPedBoneIndex(PlayerPedId(), boneNumberSent)
-	--local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(), true))
-	RequestModel(attachModelPhone)
-	while not HasModelLoaded(attachModelPhone) do
-		Citizen.Wait(100)
-	end
-	attachedPropPhone = CreateObject(attachModelPhone, 1.0, 1.0, 1.0, 1, 1, 0)
-	exports["isPed"]:GlobalObject(attachedPropPhone)
-	AttachEntityToEntity(attachedPropPhone, PlayerPedId(), bone, x, y, z, xR, yR, zR, 1, 0, 0, 0, 2, 1)
+AddEventHandler('attachPropPhone', function(attachModelSent, boneNumberSent, x, y, z, xR, yR, zR)
+        removeAttachedPropPhone()
+        local attachModelPhone = loadModel(attachModelSent)
+        SetCurrentPedWeapon(PlayerPedId(), GetHashKey('WEAPON_UNARMED'))
+        local bone = GetPedBoneIndex(PlayerPedId(), boneNumberSent)
+        attachedPropPhone = CreateObject(attachModelPhone, 1.0, 1.0, 1.0, true, true, false)
+        exports["isPed"]:GlobalObject(attachedPropPhone)
+        AttachEntityToEntity(attachedPropPhone, PlayerPedId(), bone, x, y, z, xR, yR, zR, true, false, false, false, 2, true)
+        SetModelAsNoLongerNeeded(attachModelPhone)
 end)
 
 -- Radio
-attachedPropRadio = 0
-function removeAttachedPropRadio()
-	if DoesEntityExist(attachedPropRadio) then
-		DeleteEntity(attachedPropRadio)
-		attachedPropRadio = 0
-	end
+local attachedPropRadio = 0
+local function removeAttachedPropRadio()
+        if DoesEntityExist(attachedPropRadio) then
+                DeleteEntity(attachedPropRadio)
+                attachedPropRadio = 0
+        end
 end
 
 RegisterNetEvent('destroyPropRadio')
 AddEventHandler('destroyPropRadio', function()
-	removeAttachedPropRadio()
+        removeAttachedPropRadio()
 end)
 
 RegisterNetEvent('attachPropRadio')
-AddEventHandler('attachPropRadio', function(attachModelSent,boneNumberSent,x,y,z,xR,yR,zR)
-	removeAttachedPropRadio()
-	attachModelRadio = GetHashKey(attachModelSent)
-	boneNumber = boneNumberSent
-	SetCurrentPedWeapon(PlayerPedId(), 0xA2719263)
-	local bone = GetPedBoneIndex(PlayerPedId(), boneNumberSent)
-	--local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(), true))
-	RequestModel(attachModelRadio)
-	while not HasModelLoaded(attachModelRadio) do
-		Citizen.Wait(100)
-	end
-	attachedPropRadio = CreateObject(attachModelRadio, 1.0, 1.0, 1.0, 1, 1, 0)
-	AttachEntityToEntity(attachedPropRadio, PlayerPedId(), bone, x, y, z, xR, yR, zR, 1, 0, 0, 0, 2, 1)
+AddEventHandler('attachPropRadio', function(attachModelSent, boneNumberSent, x, y, z, xR, yR, zR)
+        removeAttachedPropRadio()
+        local attachModelRadio = loadModel(attachModelSent)
+        SetCurrentPedWeapon(PlayerPedId(), GetHashKey('WEAPON_UNARMED'))
+        local bone = GetPedBoneIndex(PlayerPedId(), boneNumberSent)
+        attachedPropRadio = CreateObject(attachModelRadio, 1.0, 1.0, 1.0, true, true, false)
+        AttachEntityToEntity(attachedPropRadio, PlayerPedId(), bone, x, y, z, xR, yR, zR, true, false, false, false, 2, true)
+        SetModelAsNoLongerNeeded(attachModelRadio)
 end)
 
 
-attachedProp69 = 0
-function removeAttachedProp69()
-	if DoesEntityExist(attachedProp69) then
-		DeleteEntity(attachedProp69)
-		attachedProp69 = 0
-	end
+local attachedProp69 = 0
+local function removeAttachedProp69()
+        if DoesEntityExist(attachedProp69) then
+                DeleteEntity(attachedProp69)
+                attachedProp69 = 0
+        end
 end
-
 
 RegisterNetEvent('destroyProp69')
 AddEventHandler('destroyProp69', function()
-	removeAttachedProp69()
+        removeAttachedProp69()
 end)
+
 RegisterNetEvent('attachProp69')
-AddEventHandler('attachProp69', function(attachModelSent,boneNumberSent,x,y,z,xR,yR,zR)
-	removeAttachedProp69()
-	attachModel69 = GetHashKey(attachModelSent)
-	boneNumber = boneNumberSent
-	SetCurrentPedWeapon(PlayerPedId(), 0xA2719263)
-	local bone = GetPedBoneIndex(PlayerPedId(), boneNumberSent)
-	--local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(), true))
-	RequestModel(attachModel69)
-	while not HasModelLoaded(attachModel69) do
-		Citizen.Wait(100)
-	end
-	attachedProp69 = CreateObject(attachModel69, 1.0, 1.0, 1.0, 1, 1, 0)
-	exports["isPed"]:GlobalObject(attachedProp69)
-	AttachEntityToEntity(attachedProp69, PlayerPedId(), bone, x, y, z, xR, yR, zR, 1, 0, 0, 0, 2, 1)
+AddEventHandler('attachProp69', function(attachModelSent, boneNumberSent, x, y, z, xR, yR, zR)
+        removeAttachedProp69()
+        local attachModel69 = loadModel(attachModelSent)
+        SetCurrentPedWeapon(PlayerPedId(), GetHashKey('WEAPON_UNARMED'))
+        local bone = GetPedBoneIndex(PlayerPedId(), boneNumberSent)
+        attachedProp69 = CreateObject(attachModel69, 1.0, 1.0, 1.0, true, true, false)
+        exports["isPed"]:GlobalObject(attachedProp69)
+        AttachEntityToEntity(attachedProp69, PlayerPedId(), bone, x, y, z, xR, yR, zR, true, false, false, false, 2, true)
+        SetModelAsNoLongerNeeded(attachModel69)
 end)
 
 
-attachPropList = {
+local attachPropList = {
 
 	["test"] = {
 		["model"] = "prop_cs_brain_chunk", ["bone"] = 28422, ["x"] = 0.062,["y"] = 0.02,["z"] = 0.0,["xR"] = 0.0,["yR"] = 0.0, ["zR"] = 0.0
@@ -709,12 +730,12 @@ AddEventHandler('attachcarryObject', function(attachModelSent,boneNumberSent,x,y
 	removeAttachedcarryObject()
 	attachModel = GetHashKey(attachModelSent)
 	boneNumber = boneNumberSent
-	SetCurrentPedWeapon(PlayerPedId(), 0xA2719263)
+	SetCurrentPedWeapon(PlayerPedId(), GetHashKey('WEAPON_UNARMED'))
 	local bone = GetPedBoneIndex(PlayerPedId(), boneNumberSent)
 	--local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(), true))
 	RequestModel(attachModel)
 	while not HasModelLoaded(attachModel) do
-		Citizen.Wait(100)
+		Wait(100)
 	end
 	carryObject = CreateObject(attachModel, 1.0, 1.0, 1.0, 1, 1, 0)
 	AttachEntityToEntity(carryObject, PlayerPedId(), bone, x, y, z, xR, yR, zR, 1, 1, 0, 0, 2, 1)
@@ -730,7 +751,7 @@ RegisterNetEvent('animation:carryshort');
 AddEventHandler('animation:carryshort', function()
 	carryAnimType = 16
 	carryingObject = true
-	Citizen.Wait(5000)
+	Wait(5000)
 	carryingObject = false
 	carryAnimType = 49
 end)
@@ -746,7 +767,7 @@ AddEventHandler('animation:carry', function(item)
 		if(item["model"] ~= nil) then
 			RequestModel(item["model"])
 			while not HasModelLoaded(item["model"]) do
-				Citizen.Wait(1)
+				Wait(1)
 			end
 		end
 		carryAnimType = 49
@@ -762,13 +783,13 @@ AddEventHandler('animation:carry', function(item)
 	end
 end)
 local canceled = false
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
-		Citizen.Wait(1)
+		Wait(1)
 		if carryingObject then
 			RequestAnimDict('anim@heists@box_carry@')
 			while not HasAnimDictLoaded("anim@heists@box_carry@") do
-				Citizen.Wait(0)
+				Wait(0)
 				ClearPedTasksImmediately(PlayerPedId())
 			end
 			if not IsEntityPlayingAnim(PlayerPedId(), "anim@heists@box_carry@", "idle", 3) then
@@ -797,7 +818,7 @@ end)
 
 
 
-InjuryIndexList = {
+local InjuryIndexList = {
 	{ "Pelvis","4103","11816" },
 	{ "Left Thigh","4103","58271" },
 	{ "Left Calf","4103","63931" },
