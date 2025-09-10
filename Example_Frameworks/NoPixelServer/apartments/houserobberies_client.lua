@@ -129,7 +129,7 @@ AddEventHandler("ai:store:remove:nikez:sucks", function(key,id)
 	end
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
     local playerped = GetPlayerPed(-1)
     local playerCoords = GetEntityCoords(playerped)
  	while true do
@@ -165,7 +165,7 @@ function CreatePedFunction(id)
     RequestModel(hashKey)
     while not HasModelLoaded(hashKey) do
         RequestModel(hashKey)
-        Citizen.Wait(100)
+        Wait(100)
     end
 
 	local Ped = CreatePed(pedType, hashKey, rentedOffices[id]["location"]["x"], rentedOffices[id]["location"]["y"], rentedOffices[id]["location"]["z"], 270.0, 1, 1)
@@ -222,7 +222,7 @@ AddEventHandler("houserobberies:enterhouse", function(id,firstin,isFlashbang)
 	DoScreenFadeOut(100)
 
 	while IsScreenFadingOut() do
-		Citizen.Wait(10)
+		Wait(10)
 	end
 	myhouseid = id
 	CreateRobberyApartment(id,false,isFlashbang)
@@ -262,7 +262,7 @@ AddEventHandler("houserobberies:createhouse", function(id,firstin,isFlashbang)
 	DoScreenFadeOut(1000)
 
 	while IsScreenFadingOut() do
-		Citizen.Wait(100)
+		Wait(100)
 	end
 
 	myhouseid = id
@@ -331,7 +331,7 @@ AddEventHandler("houserobberies:delete", function(id,owner,backdoor)
 		SetEntityCoords(doge,curHouseCoords["x"] , curHouseCoords["y"], curHouseCoords["z"])
 	end
 	
-	Citizen.Wait(8000)
+	Wait(8000)
 	DeleteSpawnedHouse(id,owner)
 	TriggerEvent("robbery:guiclose")
 	agrodone = false
@@ -347,7 +347,7 @@ AddEventHandler("lucky:house", function()
 		if robberycoordsMansions[CorrectHouse]["office"] == 2 then
 			return
 		end
-		Citizen.Wait(100)
+		Wait(100)
 	end
 	
 	local houseAddresss = robberycoordsMansions[CorrectHouse]["info"]
@@ -499,7 +499,7 @@ AddEventHandler("breach", function(isFlashbang)
 
 	TriggerEvent("client:newStress",true,math.random(100))
     TriggerEvent("doAnim","kickindoor")
-    Citizen.Wait(1000)
+    Wait(1000)
    	TriggerServerEvent("houserobberies:enter",robNum,mansion,isFlashbang) 
 
     myhousetype = 1
@@ -635,7 +635,7 @@ AddEventHandler("house:entersuccessbackdoor", function(house_id,house_model,furn
 	DoScreenFadeOut(2000)
 
 	while IsScreenFadingOut() do
-		Citizen.Wait(100)
+		Wait(100)
 	end
 
 	TriggerEvent("house:entering")
@@ -682,7 +682,7 @@ AddEventHandler("house:entersuccessbackdoor", function(house_id,house_model,furn
 	SetEntityHeading(PlayerPedId(),h)
 	TriggerEvent("inhouse",true)
 	TriggerEvent("placefurniture",furniture)
-	Citizen.Wait(1000)
+	Wait(1000)
 	DoScreenFadeIn(1000)
 	TriggerEvent("attachWeapons")
 
@@ -707,7 +707,7 @@ AddEventHandler("house:entersuccess", function(house_id,house_model,furniture)
 	DoScreenFadeOut(1000)
 
 	while IsScreenFadingOut() do
-		Citizen.Wait(100)
+		Wait(100)
 	end
 
 	if rentedOffices[tonumber(house_id)] then
@@ -805,14 +805,14 @@ AddEventHandler("house:entersuccess", function(house_id,house_model,furniture)
 	then
 		trailer = true
 		buildTrailer()
-		Citizen.Wait(1000)
+		Wait(1000)
 		DoScreenFadeIn(1000)
 	end
 
 	TriggerEvent("inhouse",true)
 	TriggerEvent("placefurniture",furniture)
 
-	Citizen.Wait(1000)
+	Wait(1000)
 	DoScreenFadeIn(1000)
 
 
@@ -850,7 +850,7 @@ AddEventHandler("traphouse:open",function(house_id,pin)
 	DoScreenFadeOut(2000)
 
 	while IsScreenFadingOut() do
-		Citizen.Wait(100)
+		Wait(100)
 	end
 
 	if (rentedOffices[tonumber(house_id)]["trap"] ~= nil) then
@@ -867,7 +867,7 @@ AddEventHandler("traphouse:open",function(house_id,pin)
 	TriggerEvent("inhouse",true)
 	TriggerEvent("placefurniture",furniture)
 
-	Citizen.Wait(1000)
+	Wait(1000)
 	DoScreenFadeIn(1000)
 	TriggerEvent("attachWeapons")
 
@@ -1271,7 +1271,7 @@ AddEventHandler('housing:findsalecid', function(checkcid,price)
 		else
 			TriggerEvent("DoLongHudText","Your Agreement is a lease-purchase with the Real Estate Company.  Half of total purchase price as down payment must be made upon closing with 5 percent of remaining balance paid per week for a total of 24 weeks.  After fully paid, an HOA of $1,500.00 will be due every week for the entirety of the occupation.  If the client causes any harm to any employee of the Real Estate Company or does not make proper payment for 14 days, this agreement is revoked, and property surrendered.  This clause will be in perpetuity of the leaseholder’s occupation of the property. Type /confirm to confirm.",91)
 		end
-		Citizen.Wait(5000)
+		Wait(5000)
 		buying = buying - 1
 
 	end
@@ -1603,7 +1603,7 @@ function CreateSafe(x,y,z)
 	local safemodel = `prop_ld_int_safe_01`
 	RequestModel(safemodel)
 	while not HasModelLoaded(safemodel) do
-		Citizen.Wait(100)
+		Wait(100)
 	end
 	safe = CreateObject(safemodel,x,y,z,true,false,false)
 
@@ -1683,16 +1683,16 @@ AddEventHandler('animation:lockpickhouse', function()
     local lPed = PlayerPedId()
     RequestAnimDict("veh@break_in@0h@p_m_one@")
     while not HasAnimDictLoaded("veh@break_in@0h@p_m_one@") do
-        Citizen.Wait(0)
+        Wait(0)
     end
     while Lockpicking do
         if not IsEntityPlayingAnim(lPed, "veh@break_in@0h@p_m_one@", "low_force_entry_ds", 3) then
             TaskPlayAnim(lPed, "veh@break_in@0h@p_m_one@", "low_force_entry_ds", 1.0, 1.0, 1.0, 1, 0.0, 0, 0, 0)
             --TaskPlayAnim(ped, animDictionary, animationName, speedIN, speedOUT, duration, flag, Animation Start, lockX, lockY, lockZ)
-            Citizen.Wait(1500)
+            Wait(1500)
             ClearPedTasks(PlayerPedId())
         end
-        Citizen.Wait(1)
+        Wait(1)
     end
     ClearPedTasks(lPed)
 end)
@@ -1786,7 +1786,7 @@ function DropItemPed()
 	    end
     end
 
-	Citizen.Wait(100)
+	Wait(100)
     if math.random(100) > 92 and not itemrec then
 		TriggerServerEvent('loot:useItem', 'houserobbery')
 		TriggerServerEvent('loot:useItem', 'houserobbery')
@@ -1887,24 +1887,24 @@ AddEventHandler('event:control:houserobberies', function(useID)
 		buildOfficeCentre()
 		SetEntityHeading(PlayerPedId(),180.0)
 		DoScreenFadeIn(1000)
-		Citizen.Wait(1000)
+		Wait(1000)
 	elseif useID == 2 then
 		DoScreenFadeOut(1)
-		Citizen.Wait(100)
+		Wait(100)
 		TriggerEvent("inhouse",false)
 		CleanUpArea()
 		SetEntityCoords(PlayerPedId(),172.78, -26.89, 68.35)
 		SetEntityHeading(PlayerPedId(),180.0)
 		DoScreenFadeIn(1000)
-		Citizen.Wait(1000)
+		Wait(1000)
 	end
 end)
 
 -- #MarkedForMarker
-Citizen.CreateThread(function()
+CreateThread(function()
 
  	while true do
-		Citizen.Wait(1)
+		Wait(1)
 		local plyId = PlayerPedId()
 		local plyCoords = GetEntityCoords(plyId)
 		local dstOffice = #(plyCoords - vector3(172.78, -26.89, 68.35))
@@ -1916,7 +1916,7 @@ Citizen.CreateThread(function()
 			DrawText3Ds( -1389.412, -475.6651, 72.04217, '[E] Exit Job Centre' )
 		else
 			if dstOffice > 100.0 then
-				Citizen.Wait(2000)
+				Wait(2000)
 			end
 		end
 	end
@@ -1940,11 +1940,11 @@ shoprobbales = {
 	[13] = { ["x"] = 5.85982700, ["y"] = -0.15874100, ["z"] = -10.19625800, ["name"] = "Jackets 3" },
 }
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	Wait(300)
 	local updatetime = 0
  	while true do
-		Citizen.Wait(1)
+		Wait(1)
 
 		if modifying then
 
@@ -1976,7 +1976,7 @@ Citizen.CreateThread(function()
 		
 		if myhouseid == 0 then
 			if not modifying then
-				Citizen.Wait(1000)
+				Wait(1000)
 			end
 		else
 			local plyId = PlayerPedId()
@@ -2102,7 +2102,7 @@ Citizen.CreateThread(function()
 				if myhouseid ~= 0 then
 					if (#(vector3(curHouseCoords["x"] , curHouseCoords["y"], curHouseCoords["z"]) - playerCoords) < 1.2 ) then
 						TriggerServerEvent("houserobberies:exit",myhouseid,mansion)
-						Citizen.Wait(5000)
+						Wait(5000)
 					end
 				end
 
@@ -2114,7 +2114,7 @@ Citizen.CreateThread(function()
 							DrawText3Ds( curHouseCoords["x"]-5.5793,curHouseCoords["y"]+5.100,curHouseCoords["z"]-32.82, '~g~'..Controlkey["housingMain"][2]..'~s~ front door' )
 							if IsControlJustReleased(1, Controlkey["housingMain"][1]) then
 								TriggerServerEvent("houserobberies:exit",myhouseid,mansion,false)
-								Citizen.Wait(5000)
+								Wait(5000)
 							end
 						end
 
@@ -2126,7 +2126,7 @@ Citizen.CreateThread(function()
 									DrawText3Ds( curHouseCoords["x"]+14.1793,curHouseCoords["y"]+1.900,curHouseCoords["z"]-32.82, '~g~'..Controlkey["housingMain"][2]..'~s~ back door' )
 									if IsControlJustReleased(1, Controlkey["housingMain"][1]) then
 										TriggerServerEvent("houserobberies:exit",myhouseid,mansion,true)
-										Citizen.Wait(5000)
+										Wait(5000)
 									end
 								end
 							end
@@ -2137,7 +2137,7 @@ Citizen.CreateThread(function()
 							DrawText3Ds( curHouseCoords["x"]+7.5793,curHouseCoords["y"]+6.400,curHouseCoords["z"]-19.42, '~g~'..Controlkey["housingMain"][2]..'~s~ front door' )
 							if IsControlJustReleased(1, Controlkey["housingMain"][1]) then
 								TriggerServerEvent("houserobberies:exit",myhouseid,mansion,false)
-								Citizen.Wait(5000)
+								Wait(5000)
 							end
 						end	
 					elseif shopshit then
@@ -2146,7 +2146,7 @@ Citizen.CreateThread(function()
 							DrawText3Ds( (curHouseCoords["x"]+3),(curHouseCoords["y"]-5),(curHouseCoords["z"]-34.0), '~g~'..Controlkey["housingMain"][2]..'~s~ to leave' )
 							if IsControlJustReleased(1, Controlkey["housingMain"][1]) then
 								ExitHouse()
-								Citizen.Wait(5000)
+								Wait(5000)
 							end
 						end
 
@@ -2156,7 +2156,7 @@ Citizen.CreateThread(function()
 							DrawText3Ds( (curHouseCoords["x"]-1.443),(curHouseCoords["y"]-1.892),(curHouseCoords["z"]-74.0), '~g~'..Controlkey["housingMain"][2]..'~s~ to leave' )
 							if IsControlJustReleased(1, Controlkey["housingMain"][1]) then
 								ExitHouse()
-								Citizen.Wait(5000)
+								Wait(5000)
 							end
 						end
 					else
@@ -2164,7 +2164,7 @@ Citizen.CreateThread(function()
 							DrawText3Ds( (curHouseCoords["x"] + 4.3),(curHouseCoords["y"] - 15.95),(curHouseCoords["z"]-21.42), '~g~'..Controlkey["housingMain"][2]..'~s~ front door' )
 							if IsControlJustReleased(1, Controlkey["housingMain"][1]) then
 								TriggerServerEvent("houserobberies:exit",myhouseid,mansion,false)
-								Citizen.Wait(5000)
+								Wait(5000)
 							end
 						end
 
@@ -2174,7 +2174,7 @@ Citizen.CreateThread(function()
 									DrawText3Ds( (curHouseCoords["x"] - 3.8),(curHouseCoords["y"] + 5.25),(curHouseCoords["z"]-21.42), '~g~'..Controlkey["housingMain"][2]..'~s~ back door' )
 									if IsControlJustReleased(1, Controlkey["housingMain"][1]) then
 										TriggerServerEvent("houserobberies:exit",myhouseid,mansion,true)
-										Citizen.Wait(5000)
+										Wait(5000)
 									end
 								end
 							end
@@ -2187,7 +2187,7 @@ Citizen.CreateThread(function()
 						DrawText3Ds( curHouseCoords["x"]-5.5793,curHouseCoords["y"]+5.100,curHouseCoords["z"]-32.82, '~g~'..Controlkey["housingMain"][2]..'~s~ to leave' )
 						if IsControlJustReleased(1, Controlkey["housingMain"][1]) then
 							ExitHouse()
-							Citizen.Wait(5000)
+							Wait(5000)
 						end
 					end
 				elseif rentedShop then
@@ -2195,7 +2195,7 @@ Citizen.CreateThread(function()
 						DrawText3Ds( curHouseCoords["x"]-1.4,curHouseCoords["y"]-4.47,curHouseCoords["z"]-32.2, '~g~'..Controlkey["housingMain"][2]..'~s~ to leave' )
 						if IsControlJustReleased(1, Controlkey["housingMain"][1]) then
 							ExitHouse()
-							Citizen.Wait(5000)
+							Wait(5000)
 						end
 					end
 
@@ -2206,12 +2206,12 @@ Citizen.CreateThread(function()
 							DrawText3Ds( curHouseCoords["x"]-1.4,curHouseCoords["y"]-1.47,curHouseCoords["z"]-32.2, '~g~'..Controlkey["housingMain"][2]..'~s~ to Browse' )
 							if IsControlJustReleased(1, Controlkey["housingMain"][1]) then
 								TriggerEvent("server-inventory-open", "1", PlayerStoreIdentifier)
-								Citizen.Wait(5000)
+								Wait(5000)
 							end
 							DrawText3Ds( curHouseCoords["x"]-1.4,curHouseCoords["y"]-1.47,curHouseCoords["z"]-32.8, '~g~F~s~ to see reputation' )
 							if IsControlJustReleased(1, 23) then
 								TriggerEvent("DoShortHudText","Reputation: " .. rentedOffices[myhouseid]["reputation"])
-								Citizen.Wait(5000)
+								Wait(5000)
 							end
 						else
 
@@ -2224,7 +2224,7 @@ Citizen.CreateThread(function()
 									if finished == 100 then
 										TriggerServerEvent("traps:take",myhouseid,mycid)
 									end
-									Citizen.Wait(5000)
+									Wait(5000)
 								end
 							else
 								DrawText3Ds( curHouseCoords["x"]-1.4,curHouseCoords["y"]-1.47,curHouseCoords["z"]-32.5, '~g~'..Controlkey["generalUse"][2]..'~s~ Take Cash' )
@@ -2233,20 +2233,20 @@ Citizen.CreateThread(function()
 									if finished == 100 then
 										TriggerServerEvent("traps:cashout",myhouseid)
 									end
-									Citizen.Wait(5000)
+									Wait(5000)
 								end
 							end
 
 							DrawText3Ds( curHouseCoords["x"]-1.4,curHouseCoords["y"]-1.47,curHouseCoords["z"]-32.8, '~g~F~s~ to see pincode/reputation' )
 							if IsControlJustReleased(1, 23) then
 								TriggerEvent("DoShortHudText","Pincode: " .. rentedOffices[myhouseid]["pincode"] .. " | Reputation: " .. rentedOffices[myhouseid]["reputation"])
-								Citizen.Wait(5000)
+								Wait(5000)
 							end
 
 							DrawText3Ds( curHouseCoords["x"]-1.4,curHouseCoords["y"]-1.47,curHouseCoords["z"]-32.2, '~g~'..Controlkey["housingMain"][2]..'~s~ to Browse' )
 							if IsControlJustReleased(1, Controlkey["housingMain"][1]) then
 								TriggerEvent("server-inventory-open", "1", PlayerStoreIdentifier)
-								Citizen.Wait(5000)
+								Wait(5000)
 							end
 
 						end
@@ -2257,7 +2257,7 @@ Citizen.CreateThread(function()
 						DrawText3Ds( curHouseCoords["x"]+9,curHouseCoords["y"]+0.52,curHouseCoords["z"]-33.99, '~g~'..Controlkey["housingMain"][2]..'~s~ to leave' )
 						if IsControlJustReleased(1, Controlkey["housingMain"][1]) then
 							ExitHouse()
-							Citizen.Wait(5000)
+							Wait(5000)
 						end
 					end
 				elseif mansion2 then
@@ -2265,7 +2265,7 @@ Citizen.CreateThread(function()
 							DrawText3Ds( curHouseCoords["x"]+7.5793,curHouseCoords["y"]+6.400,curHouseCoords["z"]-19.42, '~g~'..Controlkey["housingMain"][2]..'~s~ to leave' )
 						if IsControlJustReleased(1, Controlkey["housingMain"][1]) then
 							ExitHouse()
-							Citizen.Wait(5000)
+							Wait(5000)
 						end
 					end
 				elseif office then
@@ -2273,7 +2273,7 @@ Citizen.CreateThread(function()
 						DrawText3Ds( curHouseCoords["x"]-3.5793,curHouseCoords["y"]+3.100,curHouseCoords["z"]-22.82, '~g~'..Controlkey["housingMain"][2]..'~s~ to leave' )
 						if IsControlJustReleased(1, Controlkey["housingMain"][1]) then
 							ExitHouse()
-							Citizen.Wait(5000)
+							Wait(5000)
 						end
 					end
 				elseif trailer
@@ -2282,7 +2282,7 @@ Citizen.CreateThread(function()
 						DrawText3Ds( (curHouseCoords["x"]-1.343),(curHouseCoords["y"]-2.292),(curHouseCoords["z"]-71.75), '~g~'..Controlkey["housingMain"][2]..'~s~ to leave' )
 						if IsControlJustReleased(1, Controlkey["housingMain"][1]) then
 							ExitHouse()
-							Citizen.Wait(5000)
+							Wait(5000)
 						end
 					end
 				else
@@ -2291,7 +2291,7 @@ Citizen.CreateThread(function()
 							DrawText3Ds(curHouseCoords["x"] - 1.15,curHouseCoords["y"] - 4.2,curHouseCoords["z"]-26.90, '~g~'..Controlkey["housingMain"][2]..'~s~ to leave')
 							if IsControlJustReleased(1, Controlkey["housingMain"][1]) then
 								ExitHouse()
-								Citizen.Wait(5000)
+								Wait(5000)
 							end
 						end
 					elseif shithouse then
@@ -2299,7 +2299,7 @@ Citizen.CreateThread(function()
 							DrawText3Ds( curHouseCoords["x"]+5.3,curHouseCoords["y"]-5.5,curHouseCoords["z"]-24.2, '~g~'..Controlkey["housingMain"][2]..'~s~ to leave' )
 							if IsControlJustReleased(1, Controlkey["housingMain"][1]) then
 								ExitHouse()
-								Citizen.Wait(5000)
+								Wait(5000)
 							end
 						end					
 					elseif beachhouse then
@@ -2308,7 +2308,7 @@ Citizen.CreateThread(function()
 							DrawText3Ds( (curHouseCoords["x"]),(curHouseCoords["y"] - 4),(curHouseCoords["z"]-32.42), '~g~'..Controlkey["housingMain"][2]..'~s~ to leave' )
 							if IsControlJustReleased(1, Controlkey["housingMain"][1]) then
 								ExitHouse()
-								Citizen.Wait(5000)
+								Wait(5000)
 							end
 						end
 					elseif shopshit then
@@ -2316,7 +2316,7 @@ Citizen.CreateThread(function()
 							DrawText3Ds( (curHouseCoords["x"]+3),(curHouseCoords["y"]-5),(curHouseCoords["z"]-34.0), '~g~'..Controlkey["housingMain"][2]..'~s~ to leave' )
 							if IsControlJustReleased(1, Controlkey["housingMain"][1]) then
 								ExitHouse()
-								Citizen.Wait(5000)
+								Wait(5000)
 							end
 						end
 					else
@@ -2324,7 +2324,7 @@ Citizen.CreateThread(function()
 							DrawText3Ds( (curHouseCoords["x"] + 4.3),(curHouseCoords["y"] - 15.95),(curHouseCoords["z"]-25.42), '~g~'..Controlkey["housingMain"][2]..'~s~ to leave' )
 							if IsControlJustReleased(1, Controlkey["housingMain"][1]) then
 								ExitHouse()
-								Citizen.Wait(5000)
+								Wait(5000)
 							end
 						end
 					end
@@ -2405,7 +2405,7 @@ function FloatTilSafeR(buildingsent)
 	local building = buildingsent
 	
 	while processing == 3 do
-		Citizen.Wait(100)
+		Wait(100)
 		if DoesEntityExist(building) then
 
 			processing = 2
@@ -2424,7 +2424,7 @@ function FloatTilSafeR(buildingsent)
 		TriggerEvent("DoLongHudText","Failed to load property.",2)
 	end
 
-	Citizen.Wait(1000)
+	Wait(1000)
 	SetEntityInvincible(PlayerPedId(),false)
 end
 
@@ -2470,13 +2470,13 @@ AddEventHandler("UpdateCurrentHouseSpawns", function(id,data)
 
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
 
 	while true do
 
 
 
-			Citizen.Wait(6)
+			Wait(6)
 			local plyId = LocalPed()
 			local plyCoords = GetEntityCoords(plyId)
 
@@ -2502,7 +2502,7 @@ Citizen.CreateThread(function()
 							
 					-- 		if IsControlJustReleased(2, 38) then
 					-- 			-- TriggerServerEvent("house:enterhousebackdoor",house_poi["house_id"],house_poi["house_model"],false,backdoorinside["x"],backdoorinside["y"],backdoorinside["z"],backdoorinside["h"])
-					-- 			Citizen.Wait(3000)
+					-- 			Wait(3000)
 					-- 		end
 					-- 	end	
 					-- end
@@ -2515,7 +2515,7 @@ Citizen.CreateThread(function()
 							DrawText3Ds( backdoorinside["x"],backdoorinside["y"],backdoorinside["z"] , '~g~E~s~ to leave house.')
 							if IsControlJustReleased(2, 38) then
 								TriggerEvent("housing:exit:backdoor",backdooroutside["x"],backdooroutside["y"],backdooroutside["z"],backdooroutside["h"])
-								Citizen.Wait(3000)
+								Wait(3000)
 							end
 						end	
 					end
@@ -2612,15 +2612,15 @@ AddEventHandler("ruhroh", function()
 		RequestModel(model)
 		while not HasModelLoaded(model) do
 			RequestModel(model)
-			Citizen.Wait(100)
+			Wait(100)
 		end	
 
 		doge = CreatePed(GetPedType(model), model, plypos.x, plypos.y, plypos.z, plyhead, 1, 0)
-		Citizen.Wait(1500)
+		Wait(1500)
 		TaskCombatPed(doge, PlayerPedId(), 0, 16)
 	    SetPedKeepTask(doge, true)
 	    SetEntityInvincible(doge,false)
-	    Citizen.Wait(45000)
+	    Wait(45000)
 	    SetEntityAsNoLongerNeeded(doge)
 	    doge = 0
 	end
@@ -2714,7 +2714,7 @@ function CreateRobberyApartment(id,firstin,isFlashbang)
 		DoScreenFadeOut(1000)
 	end
 
-	Citizen.Wait(1000)
+	Wait(1000)
 end
 
 function buildShop(house_id)
@@ -2723,13 +2723,13 @@ function buildShop(house_id)
 
     SetEntityCoords(PlayerPedId(),9000.0,0.0,110.0)
     
-    Citizen.Wait(1000)
+    Wait(1000)
 
 	local generator = { x = curHouseCoords["x"] , y = curHouseCoords["y"], z = curHouseCoords["z"] - 124.0}
 
 	SetEntityCoords(PlayerPedId(),generator.x+3, generator.y-4, generator.z+90.0)
 	FreezeEntityPosition(PlayerPedId(),true)
-	Citizen.Wait(1000)
+	Wait(1000)
     local building = CreateObject(`v_shop_gc_shell`, generator.x, generator.y, generator.z, network and network or false, false, false)
     local wall = CreateObject(`v_shop_gcpartwall`, generator.x, generator.y, generator.z, network and network or false, false, false)
     local stuff = CreateObject(`v_shop_backrmstuff`, generator.x, generator.y, generator.z, network and network or false, false, false)
@@ -2764,7 +2764,7 @@ function buildShop(house_id)
     local wallhooks = CreateObject(`v_shop_wallhooks`, generator.x, generator.y, generator.z, network and network or false, false, false)
 
      FreezeEntityPosition(building,true)
-   	 Citizen.Wait(100)
+   	 Wait(100)
      SetEntityCoords(PlayerPedId(),generator.x+3, generator.y-4, generator.z+90.0)
      FreezeEntityPosition(PlayerPedId(),false)
      SetEntityHeading(PlayerPedId(),0.0)
@@ -2776,9 +2776,9 @@ end
 
 function buildShop1()
 	SetEntityCoords(PlayerPedId(),1212.77,-472.43,66.21) -- Default
-	Citizen.Wait(1000)
+	Wait(1000)
 	rentedShop = true
-	Citizen.Wait(2000)
+	Wait(2000)
 	local generator = { x = curHouseCoords["x"] , y = curHouseCoords["y"], z = curHouseCoords["z"] - 35.0}
   	SetEntityCoords(PlayerPedId(),generator.x,generator.y,generator.z)
 
@@ -2839,7 +2839,7 @@ end
 function buildlowOffice(x,y,z) 
 rentedOffice = true
 SetEntityCoords(PlayerPedId(),1165.09,-3191.71,-39.0)
-Citizen.Wait(2000)
+Wait(2000)
 	
 local generator = { x = curHouseCoords["x"] , y = curHouseCoords["y"], z = curHouseCoords["z"] - 35.0}
 
@@ -3316,12 +3316,12 @@ function buildApartment(heading)
 	Wait(1300)
 	local generator = { x = curHouseCoords["x"] , y = curHouseCoords["y"], z = curHouseCoords["z"] - 28.0}
 
-	Citizen.Wait(1500)
+	Wait(1500)
 
 	local building = CreateObject(`furnitured_motel`,generator.x,generator.y,generator.z,false,false,false)
 
 	FreezeEntityPosition(building,true)
-	Citizen.Wait(100)
+	Wait(100)
 
 	local a = CreateObject(`v_49_motelmp_winframe`,generator.x+0.74,generator.y-4.26,generator.z+1.11,false,false,false)
 	local b = CreateObject(`v_49_motelmp_glass`,generator.x+0.74,generator.y-4.26,generator.z+1.13,false,false,false)
@@ -3329,7 +3329,7 @@ function buildApartment(heading)
 	FreezeEntityPosition(a,true)
 	FreezeEntityPosition(b,true)
 	FreezeEntityPosition(c,true)
-	Citizen.Wait(500)
+	Wait(500)
 	SetEntityCoords(PlayerPedId(), generator.x-1, generator.y-4, generator.z+1.8)
 
 
@@ -3345,7 +3345,7 @@ function buildHouse()
 
 	local building = CreateObject(`furnitured_midapart`,generator.x+2.29760700,generator.y-1.33191200,generator.z+1.26253700,false,false,false)
 	FreezeEntityPosition(building,true)
-	Citizen.Wait(100)
+	Wait(100)
 
 	local glow = CreateObject(`V_16_treeglow`,generator.x-1.37408500,generator.y-0.95420070,generator.z+1.135,false,false,false)
 	local curtins = CreateObject(`V_16_midapt_curts`,generator.x-1.96423300,generator.y-0.95958710,generator.z+1.280,false,false,false)
@@ -3360,7 +3360,7 @@ function buildHouse()
 	FreezeEntityPosition(mpmid13,true)
 	FreezeEntityPosition(mpdelta,true)
 
-	Citizen.Wait(1500)
+	Wait(1500)
 	SetEntityCoords(PlayerPedId(), generator.x+4.5 , generator.y-14, generator.z+2.9)
 	SetEntityHeading(PlayerPedId(),267.0)
 	SetGameplayCamRelativeHeading(0.0)
@@ -3370,7 +3370,7 @@ end
 
 function buildMansion()
 	SetEntityCoords(PlayerPedId(),-801.5,178.69,72.84) -- Default Garage location
-	Citizen.Wait(1000)
+	Wait(1000)
 
 	Wait(1200)
 	
@@ -3504,7 +3504,7 @@ function buildMansion()
 	FreezeEntityPosition(shelf,true)
 
 	FreezeEntityPosition(building,true)
-	Citizen.Wait(1500)
+	Wait(1500)
 
 
 	SetEntityCoords(PlayerPedId(), generator.x-5.5793 , generator.y+5.100, generator.z)
@@ -3522,7 +3522,7 @@ end
 function buildOfficeCentre()
 
 	SetEntityCoords(PlayerPedId(),-1389.412, -475.6651, 72.04217)
-  	Citizen.Wait(1000)
+  	Wait(1000)
 	local generator = { x = -1389.412 , y = -475.6651, z = 72.04217 }
 	
 
@@ -3536,7 +3536,7 @@ end
 function buildOffice2()
 
 	SetEntityCoords(PlayerPedId(),-139.53950000,-629.07570000,167.82040000)
-	Citizen.Wait(2000)
+	Wait(2000)
 
 	local generator = { x = curHouseCoords["x"] , y = curHouseCoords["y"], z = curHouseCoords["z"] - 24.0}
 	SetEntityCoords(PlayerPedId(), generator.x-3.5793 , generator.y+3.100, generator.z)
@@ -3692,7 +3692,7 @@ function buildMansionRob(id,firstin)
 	SetEntityCoords(PlayerPedId(),-801.5,178.69,72.84) -- Default Garage location
   	
 	FreezeEntityPosition(PlayerPedId(),true)
-	Citizen.Wait(3000)
+	Wait(3000)
 
 	local generator = { x = curHouseCoords["x"] , y = curHouseCoords["y"], z = curHouseCoords["z"] - 34.0}
 
@@ -4198,13 +4198,13 @@ function buildShopRob(id,firstin)
 
     SetEntityCoords(PlayerPedId(),9000.0,0.0,110.0)
     
-    Citizen.Wait(1000)
+    Wait(1000)
 
 	local generator = { x = curHouseCoords["x"] , y = curHouseCoords["y"], z = curHouseCoords["z"] - 124.0}
 
 	SetEntityCoords(PlayerPedId(),generator.x+3, generator.y-4, generator.z+90.0)
 	FreezeEntityPosition(PlayerPedId(),true)
-	Citizen.Wait(1000)
+	Wait(1000)
     local building = CreateObject(`v_shop_gc_shell`, generator.x, generator.y, generator.z, network and network or false, false, false)
     local wall = CreateObject(`v_shop_gcpartwall`, generator.x, generator.y, generator.z, network and network or false, false, false)
     local stuff = CreateObject(`v_shop_backrmstuff`, generator.x, generator.y, generator.z, network and network or false, false, false)
@@ -4239,7 +4239,7 @@ function buildShopRob(id,firstin)
     local wallhooks = CreateObject(`v_shop_wallhooks`, generator.x, generator.y, generator.z, network and network or false, false, false)
 
      FreezeEntityPosition(building,true)
-   	 Citizen.Wait(100)
+   	 Wait(100)
      SetEntityCoords(PlayerPedId(),generator.x+3, generator.y-4, generator.z+90.0)
      FreezeEntityPosition(PlayerPedId(),false)
      SetEntityHeading(PlayerPedId(),0.0)
@@ -4253,7 +4253,7 @@ function buildHouseRob(id,firstin)
 
 	SetEntityCoords(PlayerPedId(),347.04724121094,-1000.2844848633,-99.194671630859)
 	FreezeEntityPosition(PlayerPedId(),true)
-	Citizen.Wait(3000)
+	Wait(3000)
 
 	local generator = { x = curHouseCoords["x"] , y = curHouseCoords["y"], z = curHouseCoords["z"] - 24.0}
 
@@ -4267,9 +4267,9 @@ function buildHouseRob(id,firstin)
 	local shelves = CreateObject(`v_16_midapttex`,generator.x+3.04164100,generator.y+0.31671810,generator.z+3.58363900,false,false,false)
 	local building = CreateObject(`playerhouse_tier1`,generator.x-0.01854400,generator.y-0.01389600,generator.z+-0.08068600,false,false,false)
 	FreezeEntityPosition(building,true)
-	Citizen.Wait(100)
+	Wait(100)
 	FloatTilSafeR(building)
-	Citizen.Wait(500)
+	Wait(500)
 	SetEntityCoords(PlayerPedId(), generator.x+4.5 , generator.y-14, generator.z+2.9)
 
 	local dt = CreateObject(`V_16_DT`,generator.x-1.21854400,generator.y-1.04389600,generator.z+1.39068600,false,false,false)
@@ -4444,7 +4444,7 @@ function buildHouseRob(id,firstin)
 	FreezeEntityPosition(PlayerPedId(),false)
 	SetBlackout(true)
 	if firstin then
-		Citizen.Wait(1000)
+		Wait(1000)
 		randomAI()
 	end
 	SetEntityHeading(PlayerPedId(),0.0)
@@ -4457,7 +4457,7 @@ function buildTrailer()
 	DoScreenFadeOut(100)
 
 	while IsScreenFadingOut() do
-		Citizen.Wait(10)
+		Wait(10)
 	end
 
 	SetEntityCoords(PlayerPedId(), 1040.64, 2676.53, -150.61)
@@ -4466,7 +4466,7 @@ function buildTrailer()
 	RequestModel(`nopixel_trailer`)
 	while not HasModelLoaded(`nopixel_trailer`)
 	do
-		Citizen.Wait(100)
+		Wait(100)
 	end
 
 	local generator = { x = curHouseCoords["x"] , y = curHouseCoords["y"], z = curHouseCoords["z"] - 75.0}
@@ -4481,14 +4481,14 @@ function buildTrailer()
 	DoScreenFadeIn(100)
 	while IsScreenFadingIn()
 	do
-		Citizen.Wait(100)
+		Wait(100)
 	end
 end
 
 function loadAnimDict( dict )
     while ( not HasAnimDictLoaded( dict ) ) do
         RequestAnimDict( dict )
-        Citizen.Wait( 5 )
+        Wait( 5 )
     end
 end
 
@@ -4510,7 +4510,7 @@ function randomAI()
     RequestModel(modelhash)
 
     while not HasModelLoaded(modelhash) do
-        Citizen.Wait(0)
+        Wait(0)
     end
 
 	local crafting = false
