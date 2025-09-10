@@ -5,9 +5,27 @@ const cfg = require("./config.js");
 const WebSocket = require("ws");
 const wrtc = require("wrtc");
 
+// --- constants -----------------------------------------------------------------
+const HEARTBEAT_INTERVAL = 30000; // ms
+
 // create websocket server
 const wss = new WebSocket.Server({ port: cfg.ports.websocket });
 const players = new Map(); // map of id => {ws, peer, dchannel, channels}
+
+const errorHandler = e => {
+  console.log("error", e);
+};
+
+// heartbeat to detect stale connections
+const heartbeatInterval = setInterval(() => {
+  wss.clients.forEach(ws => {
+    if (ws.isAlive === false) return ws.terminate();
+    ws.isAlive = false;
+    try { ws.ping(); } catch (err) { errorHandler(err); }
+  });
+}, HEARTBEAT_INTERVAL);
+
+wss.on("close", () => clearInterval(heartbeatInterval));
 
 // return true if player 1 and player 2 are connected by at least one channel
 const checkConnected = (p1, p2, channels) => {
@@ -19,15 +37,15 @@ const checkConnected = (p1, p2, channels) => {
   return false;
 };
 
-const errorHandler = e => {
-  console.log("error", e);
-};
-
 console.log("Server started.");
 console.log("config = ", cfg);
 
 wss.on("connection", (ws, req) => {
   console.log("connection from " + req.socket.remoteAddress);
+
+  ws.isAlive = true;
+  ws.on("pong", () => { ws.isAlive = true; });
+  ws.on("error", errorHandler);
 
   // create peer
   const peer = new wrtc.RTCPeerConnection({ iceServers: cfg.iceServers, portRange: { min: cfg.ports.webrtc_range[0], max: cfg.ports.webrtc_range[1] } });
@@ -80,16 +98,23 @@ wss.on("connection", (ws, req) => {
     }
   };
 
-  ws.on("message", data => {
-    data = JSON.parse(data);
+  ws.on("message", message => {
+    let data;
+    try {
+      data = JSON.parse(message);
+    } catch (err) {
+      return errorHandler(err);
+    }
 
-    if (data.act === "answer")
+    if (data.act === "answer") {
       peer.setRemoteDescription(data.data).catch(errorHandler);
-    else if (data.act === "candidate" && data.data != null)
+    }
+    else if (data.act === "candidate" && data.data != null) {
       peer.addIceCandidate(data.data).catch(errorHandler);
+    }
     else if (data.act === "identification" && data.id != null) {
       if (!players.has(data.id)) {
-        const player = { ws: ws, peer: peer, dchannel: dchannel, id: data.id, channels: {} };
+        const player = { ws, peer, dchannel, id: data.id, channels: {} };
         players.set(data.id, player);
         ws.player = player;
         console.log("identification for " + req.socket.remoteAddress + " player id " + data.id);
@@ -99,7 +124,7 @@ wss.on("connection", (ws, req) => {
       const player = ws.player;
       if (player) {
         let channel = player.channels[data.channel];
-        if (!channel) { // create channel
+        if (!channel) {
           channel = {};
           player.channels[data.channel] = channel;
         }
@@ -112,9 +137,9 @@ wss.on("connection", (ws, req) => {
       if (player) {
         const channel = player.channels[data.channel];
         if (channel) {
-          delete channel[data.player]; // remove player
+          delete channel[data.player];
 
-          if (Object.keys(channel).length === 0) // empty, remove channel
+          if (Object.keys(channel).length === 0)
             delete player.channels[data.channel];
         }
       }
