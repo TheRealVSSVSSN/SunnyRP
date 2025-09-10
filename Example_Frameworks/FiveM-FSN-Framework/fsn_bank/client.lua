@@ -1,7 +1,6 @@
 local atms = {
   {name="ATM", id=207, x=-386.733, y=6045.953, z=31.501,bank=false},
   {name="ATM", id=207, x=-284.037, y=6224.385, z=31.187,bank=false},
-  {name="ATM", id=207, x=-284.037, y=6224.385, z=31.187,bank=false},
   {name="ATM", id=207, x=-135.165, y=6365.738, z=31.101,bank=false},
   {name="BANK", id=207,x=-113.681, y=6469.424, z=31.626,bank=true},
   {name="ATM", id=207, x=-94.9690, y=6455.301, z=31.784,bank=false},
@@ -85,6 +84,9 @@ local banks = 0
 RegisterNetEvent('fsn_bank:change:bankandwallet')
 RegisterNetEvent('fsn_bank:request:both')
 RegisterNetEvent('fsn_bank:update:both')
+RegisterNetEvent('fsn_bank:change:bankAdd')
+RegisterNetEvent('fsn_bank:change:bankMinus')
+
 AddEventHandler('fsn_bank:update:both', function(wallet, bank)
   moneys = wallet
   banks = bank
@@ -93,6 +95,26 @@ AddEventHandler('fsn_bank:update:both', function(wallet, bank)
     updateType = 'wallet&bank',
     wallet = wallet,
     bank = bank
+  })
+end)
+
+AddEventHandler('fsn_bank:change:bankAdd', function(amount)
+  banks = banks + amount
+  SendNUIMessage({
+    type = 'update',
+    updateType = 'wallet&bank',
+    wallet = moneys,
+    bank = banks
+  })
+end)
+
+AddEventHandler('fsn_bank:change:bankMinus', function(amount)
+  banks = banks - amount
+  SendNUIMessage({
+    type = 'update',
+    updateType = 'wallet&bank',
+    wallet = moneys,
+    bank = banks
   })
 end)
 
@@ -110,26 +132,28 @@ Citizen.CreateThread(function()
   end
   while true do
     Citizen.Wait(0)
-    for k, atm in pairs(atms) do
-      if GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()).x, GetEntityCoords(PlayerPedId()).y, GetEntityCoords(PlayerPedId()).z, atm.x, atm.y, atm.z) < 1 then
+    local ply = PlayerPedId()
+    local coords = GetEntityCoords(ply)
+    for _, atm in pairs(atms) do
+      if #(coords - vector3(atm.x, atm.y, atm.z)) < 1.0 then
         if not atmDisplay then
           SetTextComponentFormat("STRING")
           AddTextComponentString("Press ~INPUT_PICKUP~ to access the "..atm.name)
           DisplayHelpTextFromStringLabel(0, 0, 1, -1)
-          if IsControlJustPressed(0,38) then
+          if IsControlJustPressed(0, 38) then
             TriggerEvent('fsn_bank:request:both')
             while not HasAnimDictLoaded('amb@prop_human_atm@male@base') do
               RequestAnimDict('amb@prop_human_atm@male@base')
               Citizen.Wait(5)
             end
-            if not IsEntityPlayingAnim(PlayerPedId(), 'amb@prop_human_atm@male@base', 'base', 3) then
-              FreezeEntityPosition(PlayerPedId(), 1)
-              TaskPlayAnim(PlayerPedId(), 'amb@prop_human_atm@male@base', 'base', 8.0, 1.0, -1, 49, 1.0, 0, 0, 0)
+            if not IsEntityPlayingAnim(ply, 'amb@prop_human_atm@male@base', 'base', 3) then
+              FreezeEntityPosition(ply, true)
+              TaskPlayAnim(ply, 'amb@prop_human_atm@male@base', 'base', 8.0, 1.0, -1, 49, 1.0, false, false, false)
             end
-            SetNuiFocus(true,true)
+            SetNuiFocus(true, true)
             SendNUIMessage({
               type = 'displayATM',
-			  bank = atm.bank,
+              bank = atm.bank,
               enable = true
             })
             atmDisplay = true
@@ -140,109 +164,106 @@ Citizen.CreateThread(function()
   end
 end)
 local function fsn_closeATM()
-  FreezeEntityPosition(PlayerPedId(), 0)
-  SetEntityCollision(PlayerPedId(), 1, 1)
-	ClearPedTasks(PlayerPedId())
-  SetNuiFocus(false,false)
+  local ply = PlayerPedId()
+  FreezeEntityPosition(ply, false)
+  SetEntityCollision(ply, true, true)
+  ClearPedTasks(ply)
+  SetNuiFocus(false, false)
   TriggerEvent('fsn_main:displayBankandMoney')
   SendNUIMessage({
     type = 'displayATM',
     enable = false
   })
-  atmDisplay = falses
+  atmDisplay = false
 end
 RegisterNUICallback('depositMoney', function(tbl)
   if tbl.atbank == 'false' or tbl.atbank == false then
-	fsn_closeATM()
-	TriggerEvent('fsn_notify:displayNotification', 'You cannot deposit money at an ATM!', 'centerRight', 4000, 'error')
-	return
+    fsn_closeATM()
+    TriggerEvent('fsn_notify:displayNotification', 'You cannot deposit money at an ATM!', 'centerRight', 4000, 'error')
+    return
   end
-  if not tonumber(tbl.deposit) or tonumber(tbl.deposit) < 1 then
-	fsn_closeATM()
-	TriggerEvent('fsn_notify:displayNotification', 'There was an issue with your input!', 'centerRight', 4000, 'error')
-	return
+  local deposit = tonumber(tbl.deposit)
+  if not deposit or deposit < 1 then
+    fsn_closeATM()
+    TriggerEvent('fsn_notify:displayNotification', 'There was an issue with your input!', 'centerRight', 4000, 'error')
+    return
   end
-  if tonumber(tbl.deposit) > 500000 then
-	fsn_closeATM()
-	TriggerEvent('fsn_notify:displayNotification', 'Maximum deposit of $500,000', 'centerRight', 4000, 'error')
-	return
+  if deposit > 500000 then
+    fsn_closeATM()
+    TriggerEvent('fsn_notify:displayNotification', 'Maximum deposit of $500,000', 'centerRight', 4000, 'error')
+    return
   end
-  if tonumber(moneys) >= tonumber(tbl.deposit) then
-    local new_wallet = moneys - tbl.deposit
-    local new_bank = banks + tbl.deposit
-    moneys = moneys - tbl.deposit
-    banks = banks + tbl.deposit
-	TriggerEvent('fsn_phones:SYS:addTransaction', {
-		title = 'Bank Deposit',
-		trantype = 'CREDIT',
-		systype = 'credit',
-		tranamt = tbl.deposit
-	})
+  if moneys >= deposit then
+    local new_wallet = moneys - deposit
+    local new_bank = banks + deposit
+    moneys = new_wallet
+    banks = new_bank
+    TriggerEvent('fsn_phones:SYS:addTransaction', {
+      title = 'Bank Deposit',
+      trantype = 'CREDIT',
+      systype = 'credit',
+      tranamt = deposit
+    })
     TriggerEvent('fsn_bank:change:bankandwallet', new_wallet, new_bank)
-	TriggerServerEvent('fsn_main:logging:addLog', GetPlayerServerId(PlayerId()), 'money', 'Character('..exports["fsn_main"]:fsn_CharID(GetPlayerServerId(PlayerId()))..') deposited $'..tbl.deposit)
+    TriggerServerEvent('fsn_main:logging:addLog', GetPlayerServerId(PlayerId()), 'money', 'Character('..exports["fsn_main"]:fsn_CharID(GetPlayerServerId(PlayerId()))..') deposited $'..deposit)
   else
-	TriggerEvent('fsn_notify:displayNotification', 'You don\'t have enough money!', 'centerRight', 4000, 'error')
+    TriggerEvent('fsn_notify:displayNotification', 'You don\'t have enough money!', 'centerRight', 4000, 'error')
   end
   fsn_closeATM()
 end)
 
 RegisterNUICallback('withdrawMoney', function(tbl)
-  if not tonumber(tbl.withdraw) or tonumber(tbl.withdraw) < 1 then
-	fsn_closeATM()
-	TriggerEvent('fsn_notify:displayNotification', 'There was an issue with your input!', 'centerRight', 4000, 'error')
-	return
+  local withdraw = tonumber(tbl.withdraw)
+  if not withdraw or withdraw < 1 then
+    fsn_closeATM()
+    TriggerEvent('fsn_notify:displayNotification', 'There was an issue with your input!', 'centerRight', 4000, 'error')
+    return
   end
-  if tonumber(tbl.withdraw) > 500000 then
-	fsn_closeATM()
-	TriggerEvent('fsn_notify:displayNotification', 'Maximum withdraw of $500,000', 'centerRight', 4000, 'error')
-	return
+  if withdraw > 500000 then
+    fsn_closeATM()
+    TriggerEvent('fsn_notify:displayNotification', 'Maximum withdraw of $500,000', 'centerRight', 4000, 'error')
+    return
   end
-  if tonumber(tbl.withdraw) then
-    if tonumber(banks) >= tonumber(tbl.withdraw) then
-      local new_wallet = moneys + tbl.withdraw
-      local new_bank = banks - tbl.withdraw
-      moneys = moneys + tbl.withdraw
-      banks = banks - tbl.withdraw
-	  local title = 'ATM Withdraw'
-	  if tbl.atbank then
-		title = 'Bank Withdraw'
-	  end
-	  TriggerEvent('fsn_phones:SYS:addTransaction', {
-		title = title,
-		trantype = 'DEBIT',
-		systype = 'debit',
-		tranamt = tbl.withdraw
-	})
-      TriggerEvent('fsn_bank:change:bankandwallet', new_wallet, new_bank)
-	  TriggerServerEvent('fsn_main:logging:addLog', GetPlayerServerId(PlayerId()), 'money', 'Character('..exports["fsn_main"]:fsn_CharID(GetPlayerServerId(PlayerId()))..') withdrew $'..tbl.withdraw)
-    else
-  		TriggerEvent('fsn_notify:displayNotification', 'There isn\'t enough in the account!', 'centerRight', 4000, 'error')
+  if banks >= withdraw then
+    local new_wallet = moneys + withdraw
+    local new_bank = banks - withdraw
+    moneys = new_wallet
+    banks = new_bank
+    local title = 'ATM Withdraw'
+    if tbl.atbank then
+      title = 'Bank Withdraw'
     end
+    TriggerEvent('fsn_phones:SYS:addTransaction', {
+      title = title,
+      trantype = 'DEBIT',
+      systype = 'debit',
+      tranamt = withdraw
+    })
+    TriggerEvent('fsn_bank:change:bankandwallet', new_wallet, new_bank)
+    TriggerServerEvent('fsn_main:logging:addLog', GetPlayerServerId(PlayerId()), 'money', 'Character('..exports["fsn_main"]:fsn_CharID(GetPlayerServerId(PlayerId()))..') withdrew $'..withdraw)
   else
-    TriggerEvent('fsn_notify:displayNotification', 'There\'s an issue with what you entered', 'centerRight', 4000, 'error')
+    TriggerEvent('fsn_notify:displayNotification', 'There isn\'t enough in the account!', 'centerRight', 4000, 'error')
   end
   fsn_closeATM()
 end)
 
 RegisterNUICallback('transferMoney', function(tbl)
-	if not tonumber(tbl.transferAmount) or tonumber(tbl.transferAmount) < 1 then
-	fsn_closeATM()
-	TriggerEvent('fsn_notify:displayNotification', 'There was an issue with your input!', 'centerRight', 4000, 'error')
-	return
+  local amount = tonumber(tbl.transferAmount)
+  local target = tonumber(tbl.transferTo)
+  if not amount or amount < 1 or not target then
+    fsn_closeATM()
+    TriggerEvent('fsn_notify:displayNotification', 'There was an issue with your input!', 'centerRight', 4000, 'error')
+    return
   end
-  if tonumber(tbl.transferAmount) > 500000 then
-	fsn_closeATM()
-	TriggerEvent('fsn_notify:displayNotification', 'Maximum transfer of $500,000', 'centerRight', 4000, 'error')
-	return
+  if amount > 500000 then
+    fsn_closeATM()
+    TriggerEvent('fsn_notify:displayNotification', 'Maximum transfer of $500,000', 'centerRight', 4000, 'error')
+    return
   end
-  if tonumber(tbl.transferAmount) and tonumber(tbl.transferTo) then
-    if tonumber(banks) >= tonumber(tbl.transferAmount) then
-      TriggerServerEvent('fsn_bank:transfer', tbl.transferTo, tbl.transferAmount)
-    else
-      TriggerEvent('fsn_notify:displayNotification', 'There isn\'t enough in the account!', 'centerRight', 4000, 'error')
-    end
+  if banks >= amount then
+    TriggerServerEvent('fsn_bank:transfer', target, amount)
   else
-    TriggerEvent('fsn_notify:displayNotification', 'There\'s an issue with what you entered', 'centerRight', 4000, 'error')
+    TriggerEvent('fsn_notify:displayNotification', 'There isn\'t enough in the account!', 'centerRight', 4000, 'error')
   end
   fsn_closeATM()
 end)
