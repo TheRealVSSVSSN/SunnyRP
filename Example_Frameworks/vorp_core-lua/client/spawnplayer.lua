@@ -12,6 +12,8 @@ end
 
 function CoreAction.Utils.setPVP()
     local playerHash = joaat("PLAYER")
+    -- Ensure friendly fire flag mirrors PVP setting and allow player targeting
+    SetCanAttackFriendly(PlayerPedId(), pvp, false)
     NetworkSetFriendlyFireOption(pvp)
 
     if not active then
@@ -195,18 +197,19 @@ CreateThread(function()
     while true do
 
         local pped = PlayerPedId()
-        local sleep = 0
+        local sleep = 1000
 
         if IsControlPressed(0, 0xCEFD9220) then
             active = true
             CoreAction.Utils.setPVP()
             Wait(4000)
+            sleep = 0
         end
 
         if not IsPedOnMount(pped) and not IsPedInAnyVehicle(pped, false) and active then
             active = false
             CoreAction.Utils.setPVP()
-        elseif active and IsPedOnMount(pped) or IsPedInAnyVehicle(pped, false) then
+        elseif active and (IsPedOnMount(pped) or IsPedInAnyVehicle(pped, false)) then
             if IsPedInAnyVehicle(pped, false) then
 
             elseif GetPedInVehicleSeat(GetMount(pped), -1) == pped then
