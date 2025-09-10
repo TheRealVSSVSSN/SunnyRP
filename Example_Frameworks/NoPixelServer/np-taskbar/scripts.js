@@ -1,46 +1,45 @@
-$(document).ready(function(){
-  
-  var documentWidth = document.documentElement.clientWidth;
-  var documentHeight = document.documentElement.clientHeight;
-  var curTask = 0;
-  var processed = []
-  function openMain() {
-    $(".divwrap").fadeIn(10);
-  }
+document.addEventListener('DOMContentLoaded', () => {
+    const wrapper = document.querySelector('.divwrap');
+    const progressBar = document.getElementById('progress-bar');
+    const label = document.querySelector('.nicesexytext');
+    let curTask = null;
 
-  function closeMain() {
-    $(".divwrap").css("display", "none");
-  }  
+    const openMain = (taskName, taskId) => {
+        wrapper.style.display = 'block';
+        progressBar.style.width = '0%';
+        label.textContent = taskName;
+        curTask = taskId;
+    };
 
-  window.addEventListener('message', function(event){
+    const closeMain = () => {
+        wrapper.style.display = 'none';
+    };
 
-    var item = event.data;
-    if(item.runProgress === true) {
-      openMain();
+    window.addEventListener('message', (event) => {
+        const item = event.data;
 
-      $('#progress-bar').css("width","0%");
-      $(".nicesexytext").empty();
-      $('.nicesexytext').append(item.name);
-    }
+        if (item.runProgress) {
+            openMain(item.name, item.Task);
+        }
 
-    if(item.runUpdate === true) {
+        if (item.runUpdate) {
+            progressBar.style.width = `${item.Length}%`;
+            label.textContent = item.name;
+            curTask = item.Task;
+        }
 
-      var percent = "" + item.Length + "%"
-      $('#progress-bar').css("width",percent);
+        if (item.closeFail) {
+            closeMain();
+            fetch('https://np-taskbar/taskCancel', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ tasknum: curTask })
+            });
+        }
 
-      $(".nicesexytext").empty();
-      $('.nicesexytext').append(item.name);
-    }
-
-    if(item.closeFail === true) {
-      closeMain()
-      $.post('http://np-taskbar/taskCancel', JSON.stringify({tasknum: curTask}));
-    }
-
-    if(item.closeProgress === true) {
-      closeMain();
-    }
-
-  });
-
+        if (item.closeProgress) {
+            closeMain();
+        }
+    });
 });
+
