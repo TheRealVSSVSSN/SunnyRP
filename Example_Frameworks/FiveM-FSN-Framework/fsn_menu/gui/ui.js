@@ -1,137 +1,90 @@
 /*--------------------------------------------------------------------------
 
-    ActionMenu 
-    Created by WolfKnight
-    Additional help from lowheartrate, TheStonedTurtle, and Briglair.  
+    ActionMenu - Vanilla JS rewrite
+    Original by WolfKnight
 
 --------------------------------------------------------------------------*/
-var atstorage = false
-$( function() {
-    // Adds all of the correct button actions 
-    //init();
+let atstorage = false;
 
-    // Gets the actionmenu div container 
-    var actionContainer = $( "#actionmenu" );
+document.addEventListener('DOMContentLoaded', () => {
+    const actionContainer = document.getElementById('actionmenu');
 
-    // Listens for NUI messages from Lua 
-    window.addEventListener( 'message', function( event ) {
-        var item = event.data;
-        // Show the menu 
-        if ( item.showmenu ) {
-            ResetMenu()
-            actionContainer.show();
-			if (item.atstorage) {
-				atstorage = true
-			} else {
-				atstorage = false
-			}
-			if (item.vehicle) {
-				$('#vehiclebutton').show()
-			} else {
-				$('#vehiclebutton').hide()
-			}
-			if (item.police) {
-				$('#policebutton').show()
-				if (item.pdcommand) {
-					$('#pdcommandbutton').show()					
-				} else {
-					$('#pdcommandbutton').hide()
-				}
-			} else {
-				$('#policebutton').hide()
-				$('#pdcommandbutton').hide()
-			}
-			if (item.ems) {
-				$('#emsbutton').show()
-				if (item.emscommand) {
-					$('#emscommandbutton').show()					
-				} else {
-					$('#emscommandbutton').hide()
-				}
-			} else {
-				$('#emsbutton').hide()
-				$('#emscommandbutton').hide()
-			}
-			
-			if (item.dead) {
-				$('#phonebutton').hide()
-				$('#licensebutton').hide()
-				$('#inventorybutton').hide()
-				$('#vehiclebutton').hide()
-				$('#policebutton').hide()
-				$('#pdcommandbutton').hide()
-				$('#emsbutton').hide()
-				$('#emscommandbutton').hide()
-			} else {
-				$('#phonebutton').show()
-				$('#licensebutton').show()
-				$('#inventorybutton').show()
-			}
+    window.addEventListener('message', (event) => {
+        const item = event.data;
+        if (item.showmenu) {
+            resetMenu();
+            actionContainer.style.display = 'block';
+            atstorage = !!item.atstorage;
+
+            toggle('vehiclebutton', item.vehicle);
+            toggle('policebutton', item.police);
+            toggle('pdcommandbutton', item.pdcommand && item.police);
+            toggle('emsbutton', item.ems);
+            toggle('emscommandbutton', item.emscommand && item.ems);
+
+            if (item.dead) {
+                ['phonebutton','licensebutton','inventorybutton','vehiclebutton','policebutton','pdcommandbutton','emsbutton','emscommandbutton'].forEach(id => toggle(id,false));
+            } else {
+                ['phonebutton','licensebutton','inventorybutton'].forEach(id => toggle(id,true));
+            }
         }
-		
-        // Hide the menu 
-        if ( item.hidemenu ) {
-            actionContainer.hide(); 
+
+        if (item.hidemenu) {
+            actionContainer.style.display = 'none';
         }
-		init()
-    } );
-} )
+        init();
+    });
+});
 
-// Hides all div elements that contain a data-parent, in
-// other words, hide all buttons in submenus. 
-function ResetMenu() {
-    $( "div" ).each( function( i, obj ) {
-        var element = $( this );
+function toggle(id, state) {
+    const el = document.getElementById(id);
+    if (el) { el.style.display = state ? 'block' : 'none'; }
+}
 
-        if ( element.attr( "data-parent" ) ) {
-            element.hide();
+function resetMenu() {
+    document.querySelectorAll('div').forEach(el => {
+        if (el.dataset.parent) {
+            el.style.display = 'none';
         } else {
-            element.show();
+            el.style.display = 'block';
         }
-    } );
+    });
 }
 
-// Configures every button click to use its data-action, or data-sub
-// to open a submenu. 
 function init() {
-    // Loops through every button that has the class of "menuoption"
-    $( ".menuoption" ).each( function( i, obj ) {
-		
-        // If the button has a data-action, then we set it up so when it is 
-        // pressed, we send the data to the lua side. 
-        if ( $( this ).attr( "data-action" ) ) {
-            $( this ).click( function() { 
-                var data = $( this ).data( "action" ); 
-
-                sendData( "ButtonClick", data ); 
-            } )
+    document.querySelectorAll('.menuoption').forEach(el => {
+        if (!el.dataset.bound) {
+            if (el.dataset.action) {
+                el.addEventListener('click', () => sendData('ButtonClick', el.dataset.action));
+            }
+            if (el.dataset.sub) {
+                el.addEventListener('click', () => {
+                    const menu = document.getElementById(el.dataset.sub);
+                    if (menu) {
+                        menu.style.display = 'block';
+                        el.parentElement.style.display = 'none';
+                    }
+                });
+            }
+            el.dataset.bound = 'true';
         }
-
-        // If the button has a data-sub, then we set it up so when it is 
-        // pressed, we show the submenu buttons, and hide all of the others.
-        if ( $( this ).attr( "data-sub" ) ) {
-            $( this ).click( function() {
-                var menu = $( this ).data( "sub" );
-                var element = $( "#" + menu ); 
-                element.show();
-                $( this ).parent().hide();  
-            } )
-        }
-    } );
+    });
 }
 
-// Send data to lua for processing.
-function sendData( name, data ) {
-    $.post( "http://fsn_menu/" + name, JSON.stringify( data ), function( datab ) {
-        if ( datab != "ok" ) {
-            console.log( datab );
-        }            
-    } );
+function sendData(name, data) {
+    fetch(`https://fsn_menu/${name}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+        body: JSON.stringify(data)
+    }).catch(e => console.log(e));
 }
 
-// Close menu on ESCAPE key pressed
-document.onkeyup = function (data) {
-	if (data.which == 27) { // Escape key
-		$.post('http://fsn_menu/escape', JSON.stringify({}));
-	}
-};
+document.addEventListener('keyup', (data) => {
+    if (data.key === 'Escape') {
+        fetch('https://fsn_menu/escape', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+            body: '{}'
+        });
+    }
+});

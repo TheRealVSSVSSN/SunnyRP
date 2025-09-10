@@ -1,5 +1,22 @@
+--[[
+    -- Type: Flags
+    -- Name: menuEnabled, windows, last_click, hdccommand
+    -- Use: Track menu state, window status and last click time
+    -- Created: 2024-06-05
+    -- By: VSSVSSN
+--]]
 local menuEnabled = false
+local windows = {false, false, false, false}
+local last_click = 0
+local hdccommand = nil
 
+--[[
+    -- Type: Function
+    -- Name: fsn_SplitString
+    -- Use: Splits a string by a separator
+    -- Created: 2024-06-05
+    -- By: VSSVSSN
+--]]
 function fsn_SplitString(inputstr, sep)
     if sep == nil then
         sep = "%s"
@@ -12,25 +29,39 @@ function fsn_SplitString(inputstr, sep)
     return t
 end
 
+--[[
+    -- Type: Function
+    -- Name: drawTxt
+    -- Use: Renders 2D text on screen
+    -- Created: 2024-06-05
+    -- By: VSSVSSN
+--]]
 function drawTxt(text,font,centre,x,y,scale,r,g,b,a)
-  SetTextFont(font)
-  SetTextProportional(0)
-  SetTextScale(scale, scale)
-  SetTextColour(r, g, b, a)
-  SetTextDropShadow(0, 0, 0, 0,255)
-  SetTextEdge(1, 0, 0, 0, 255)
-  SetTextDropShadow()
-  SetTextOutline()
-  SetTextCentre(centre)
-  SetTextEntry("STRING")
-  AddTextComponentString(text)
-  DrawText(x , y)
+    SetTextFont(font)
+    SetTextProportional(0)
+    SetTextScale(scale, scale)
+    SetTextColour(r, g, b, a)
+    SetTextDropShadow(0, 0, 0, 0,255)
+    SetTextEdge(1, 0, 0, 0, 255)
+    SetTextDropShadow()
+    SetTextOutline()
+    SetTextCentre(centre)
+    SetTextEntry("STRING")
+    AddTextComponentString(text)
+    DrawText(x , y)
 end
 
+--[[
+    -- Type: Function
+    -- Name: getVehicleInDirection
+    -- Use: Casts a ray to find a vehicle in a direction
+    -- Created: 2024-06-05
+    -- By: VSSVSSN
+--]]
 function getVehicleInDirection(coordFrom, coordTo)
-	local rayHandle = CastRayPointToPoint(coordFrom.x, coordFrom.y, coordFrom.z, coordTo.x, coordTo.y, coordTo.z, 10, PlayerPedId(), 0)
-	local a, b, c, d, vehicle = GetRaycastResult(rayHandle)
-	return vehicle
+        local rayHandle = CastRayPointToPoint(coordFrom.x, coordFrom.y, coordFrom.z, coordTo.x, coordTo.y, coordTo.z, 10, PlayerPedId(), 0)
+        local _, _, _, _, vehicle = GetRaycastResult(rayHandle)
+        return vehicle
 end
 function fsn_lookingAt()
 	local targetVehicle = false
@@ -42,18 +73,26 @@ function fsn_lookingAt()
 	return targetVehicle
 end
 
+--[[
+    -- Type: Function
+    -- Name: ToggleActionMenu
+    -- Use: Toggles the NUI menu and manages focus
+    -- Created: 2024-06-05
+    -- By: VSSVSSN
+--]]
 function ToggleActionMenu()
-	menuEnabled = not menuEnabled
-	if ( menuEnabled ) then
-		if not IsPedInAnyVehicle(PlayerPedId()) then
-			if not IsPedGettingIntoAVehicle(PlayerPedId()) then
-				--FreezeEntityPosition(PlayerPedId(), 0)
-				--SetEntityCollision(PlayerPedId(), 1, 1)
-				--ClearPedTasks(PlayerPedId())
-			end
-		end
+        menuEnabled = not menuEnabled
+        if ( menuEnabled ) then
+                if not IsPedInAnyVehicle(PlayerPedId()) then
+                        if not IsPedGettingIntoAVehicle(PlayerPedId()) then
+                                --FreezeEntityPosition(PlayerPedId(), 0)
+                                --SetEntityCollision(PlayerPedId(), 1, 1)
+                                --ClearPedTasks(PlayerPedId())
+                        end
+                end
 
-		SetNuiFocus( true, true )
+                SetNuiFocus(true, true)
+                SetNuiFocusKeepInput(true)
 		if exports.fsn_police:fsn_PDDuty() then
 			if exports.fsn_police:fsn_getPDLevel() > 6 then
 				pdcommand = true
@@ -99,40 +138,136 @@ function ToggleActionMenu()
 			emscommand = emscommand,
 			atstorage = exports["fsn_apartments"]:isNearStorage(),
 		})
-	else
-		SetNuiFocus( false )
-		SendNUIMessage({
-			hidemenu = true
-		})
-	end
+        else
+                SetNuiFocus(false)
+                SetNuiFocusKeepInput(false)
+                SendNUIMessage({
+                        hidemenu = true
+                })
+        end
+end
+
+--[[
+    -- Type: Function
+    -- Name: ToggleActionMenuBackx
+    -- Use: Sends message to NUI to navigate back
+    -- Created: 2024-06-05
+    -- By: VSSVSSN
+--]]
+function ToggleActionMenuBackx()
+    SendNUIMessage({ back = true })
 end
 
 function fsn_NearestPlayersS(x, y, z, radius)
-	local players = {}
-	for id = 0, 128 do
-		local ppos = GetEntityCoords(GetPlayerPed(id))
-    if GetPlayerPed(id) ~= PlayerPedId() then
-  		if GetDistanceBetweenCoords(ppos.x, ppos.y, ppos.z, x, y, z) < radius then
-  			table.insert(players, #players+1, GetPlayerServerId(id))
-  		end
-    end
-	end
-	return players
+        local players = {}
+        local origin = vector3(x, y, z)
+        for _, id in ipairs(GetActivePlayers()) do
+                local ped = GetPlayerPed(id)
+                if ped ~= PlayerPedId() then
+                        local ppos = GetEntityCoords(ped)
+                        if #(ppos - origin) < radius then
+                                table.insert(players, GetPlayerServerId(id))
+                        end
+                end
+        end
+        return players
 end
 
+--[[
+    -- Type: Function
+    -- Name: toggleWindow
+    -- Use: Toggles a vehicle window
+    -- Created: 2024-06-05
+    -- By: VSSVSSN
+--]]
+local function toggleWindow(index)
+    local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+    if veh == 0 then return end
+    if windows[index] then
+        RollUpWindow(veh, index-1)
+        TriggerEvent('fsn_notify:displayNotification', 'Window closed', 'centerLeft', 3000, 'info')
+    else
+        RollDownWindow(veh, index-1)
+        TriggerEvent('fsn_notify:displayNotification', 'Window open', 'centerLeft', 3000, 'info')
+    end
+    windows[index] = not windows[index]
+end
 
-local windows = {
-  [1] = false,
-  [2] = false,
-  [3] = false,
-  [4] = false
+--[[
+    -- Type: Function
+    -- Name: toggleAllWindows
+    -- Use: Toggles all vehicle windows
+    -- Created: 2024-06-05
+    -- By: VSSVSSN
+--]]
+local function toggleAllWindows()
+    for i=1,4 do toggleWindow(i) end
+end
+
+local doorMap = { ['1']=4, ['2']=0, ['3']=1, ['4']=2, ['5']=3, ['6']=5 }
+
+--[[
+    -- Type: Function
+    -- Name: toggleDoor
+    -- Use: Toggles vehicle doors using a key map
+    -- Created: 2024-06-05
+    -- By: VSSVSSN
+--]]
+local function toggleDoor(key)
+    local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+    if key == '*' then
+        SetVehicleDoorsShut(veh, false)
+        return
+    end
+    local door = doorMap[key]
+    if door then
+        if not IsVehicleDoorFullyOpen(veh, door) then
+            SetVehicleDoorOpen(veh, door, false, false)
+        else
+            SetVehicleDoorShut(veh, door, false)
+        end
+    end
+end
+
+local seatMap = {
+    ['1'] = {-1, 'shuffles to the driver seat.'},
+    ['2'] = {0, 'shuffles to the passenger seat.'},
+    ['3'] = {1, 'shuffles to the rear left seat.'},
+    ['4'] = {2, 'shuffles to the rear right seat.'}
 }
-local last_click = 0
+
+--[[
+    -- Type: Function
+    -- Name: changeSeat
+    -- Use: Moves player to a specified seat
+    -- Created: 2024-06-05
+    -- By: VSSVSSN
+--]]
+local function changeSeat(key)
+    local info = seatMap[key]
+    if not info then return end
+    local seat, msg = info[1], info[2]
+    local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+    if IsVehicleSeatFree(veh, seat) then
+        SetPedIntoVehicle(PlayerPedId(), veh, seat)
+        TriggerEvent('fsn_commands:me', msg)
+    elseif GetPedInVehicleSeat(veh, seat) ~= PlayerPedId() then
+        TriggerEvent('fsn_notify:displayNotification', 'Somebody is already there!', 'centerLeft', 3000, 'error')
+    end
+end
+
 RegisterNetEvent('fsn_commands:getHDC')
 AddEventHandler('fsn_commands:getHDC', function(hdc)
 	hdccommand = hdc
 end)
 
+--[[
+    -- Type: Callback
+    -- Name: ButtonClick
+    -- Use: Handles menu button actions
+    -- Created: 2024-06-05
+    -- By: VSSVSSN
+--]]
 RegisterNUICallback( "ButtonClick", function( data, cb )
   if last_click + 1000 > GetNetworkTime() then print('toosoon') return end
   last_click = GetNetworkTime()
@@ -470,222 +605,64 @@ RegisterNUICallback( "ButtonClick", function( data, cb )
 		  TriggerEvent('fsn_vehiclecontrol:giveKeys')
 		  CancelEvent()
 		end
-		if split[2] == 'window' then
-		  if split[3] == '*' then
-			if not windows[1] then
-			  RollDownWindow(GetVehiclePedIsIn(PlayerPedId(), false), 0)
-			  windows[1] = true
-			  TriggerEvent('fsn_notify:displayNotification', 'Window open', 'centerLeft', 3000, 'info')
-			else
-			  RollUpWindow(GetVehiclePedIsIn(PlayerPedId(), false), 0)
-			  windows[1] = false
-			  TriggerEvent('fsn_notify:displayNotification', 'Window closed', 'centerLeft', 3000, 'info')
-			end
-			if not windows[2] then
-			  RollDownWindow(GetVehiclePedIsIn(PlayerPedId(), false), 1)
-			  windows[2] = true
-			  TriggerEvent('fsn_notify:displayNotification', 'Window open', 'centerLeft', 3000, 'info')
-			else
-			  RollUpWindow(GetVehiclePedIsIn(PlayerPedId(), false), 1)
-			  windows[2] = false
-			  TriggerEvent('fsn_notify:displayNotification', 'Window closed', 'centerLeft', 3000, 'info')
-			end
-			if not windows[3] then
-			  RollDownWindow(GetVehiclePedIsIn(PlayerPedId(), false), 2)
-			  windows[3] = true
-			  TriggerEvent('fsn_notify:displayNotification', 'Window open', 'centerLeft', 3000, 'info')
-			else
-			  RollUpWindow(GetVehiclePedIsIn(PlayerPedId(), false), 2)
-			  windows[3] = false
-			  TriggerEvent('fsn_notify:displayNotification', 'Window closed', 'centerLeft', 3000, 'info')
-			end
-			if not windows[4] then
-			  RollDownWindow(GetVehiclePedIsIn(PlayerPedId(), false), 3)
-			  windows[4] = true
-			  TriggerEvent('fsn_notify:displayNotification', 'Window open', 'centerLeft', 3000, 'info')
-			else
-			  RollUpWindow(GetVehiclePedIsIn(PlayerPedId(), false), 3)
-			  windows[4] = false
-			  TriggerEvent('fsn_notify:displayNotification', 'Window closed', 'centerLeft', 3000, 'info')
-			end
-		  end
-		  if split[3] == '1' then
-			if not windows[1] then
-			  RollDownWindow(GetVehiclePedIsIn(PlayerPedId(), false), 0)
-			  windows[1] = true
-			  TriggerEvent('fsn_notify:displayNotification', 'Window open', 'centerLeft', 3000, 'info')
-			else
-			  RollUpWindow(GetVehiclePedIsIn(PlayerPedId(), false), 0)
-			  windows[1] = false
-			  TriggerEvent('fsn_notify:displayNotification', 'Window closed', 'centerLeft', 3000, 'info')
-			end
-		  end
-		  if split[3] == '2' then
-			if not windows[2] then
-			  RollDownWindow(GetVehiclePedIsIn(PlayerPedId(), false), 1)
-			  windows[2] = true
-			  TriggerEvent('fsn_notify:displayNotification', 'Window open', 'centerLeft', 3000, 'info')
-			else
-			  RollUpWindow(GetVehiclePedIsIn(PlayerPedId(), false), 1)
-			  windows[2] = false
-			  TriggerEvent('fsn_notify:displayNotification', 'Window closed', 'centerLeft', 3000, 'info')
-			end
-		  end
-		  if split[3] == '3' then
-			if not windows[3] then
-			  RollDownWindow(GetVehiclePedIsIn(PlayerPedId(), false), 2)
-			  windows[3] = true
-			  TriggerEvent('fsn_notify:displayNotification', 'Window open', 'centerLeft', 3000, 'info')
-			else
-			  RollUpWindow(GetVehiclePedIsIn(PlayerPedId(), false), 2)
-			  windows[3] = false
-			  TriggerEvent('fsn_notify:displayNotification', 'Window closed', 'centerLeft', 3000, 'info')
-			end
-		  end
-		  if split[3] == '4' then
-			if not windows[4] then
-			  RollDownWindow(GetVehiclePedIsIn(PlayerPedId(), false), 3)
-			  windows[4] = true
-			  TriggerEvent('fsn_notify:displayNotification', 'Window open', 'centerLeft', 3000, 'info')
-			else
-			  RollUpWindow(GetVehiclePedIsIn(PlayerPedId(), false), 3)
-			  windows[4] = false
-			  TriggerEvent('fsn_notify:displayNotification', 'Window closed', 'centerLeft', 3000, 'info')
-			end
-		  end
-		end
-		if split[2] == 'door' then
-		  if GetPedInVehicleSeat(GetVehiclePedIsIn(PlayerPedId(), false), -1) == PlayerPedId() then
-			if split[3] == '*' then
-			  SetVehicleDoorsShut(GetVehiclePedIsIn(PlayerPedId(), false), false)
-			end
-			if split[3] == '1' then
-			  if not IsVehicleDoorFullyOpen(GetVehiclePedIsIn(PlayerPedId(), false), 4) then
-				print('opened')
-				SetVehicleDoorOpen(GetVehiclePedIsIn(PlayerPedId(), false), 4, false, false)
-			  else
-				print('closed')
-				SetVehicleDoorShut(GetVehiclePedIsIn(PlayerPedId(), false), 4, false)
-			  end
-			end
-			if split[3] == '2' then
-			  if not IsVehicleDoorFullyOpen(GetVehiclePedIsIn(PlayerPedId(), false), 0) then
-				SetVehicleDoorOpen(GetVehiclePedIsIn(PlayerPedId(), false), 0, false, false)
-			  else
-				SetVehicleDoorShut(GetVehiclePedIsIn(PlayerPedId(), false), 0, false)
-			  end
-			end
-			if split[3] == '3' then
-			  if not IsVehicleDoorFullyOpen(GetVehiclePedIsIn(PlayerPedId(), false), 1) then
-				SetVehicleDoorOpen(GetVehiclePedIsIn(PlayerPedId(), false), 1, false, false)
-			  else
-				SetVehicleDoorShut(GetVehiclePedIsIn(PlayerPedId(), false), 1, false)
-			  end
-			end
-			if split[3] == '4' then
-			  if not IsVehicleDoorFullyOpen(GetVehiclePedIsIn(PlayerPedId(), false), 2) then
-				SetVehicleDoorOpen(GetVehiclePedIsIn(PlayerPedId(), false), 2, false, false)
-			  else
-				SetVehicleDoorShut(GetVehiclePedIsIn(PlayerPedId(), false), 2, false)
-			  end
-			end
-			if split[3] == '5' then
-			  if not IsVehicleDoorFullyOpen(GetVehiclePedIsIn(PlayerPedId(), false), 3) then
-				SetVehicleDoorOpen(GetVehiclePedIsIn(PlayerPedId(), false), 3, false, false)
-			  else
-				SetVehicleDoorShut(GetVehiclePedIsIn(PlayerPedId(), false), 3, false)
-			  end
-			end
-			if split[3] == '6' then
-			  if not IsVehicleDoorFullyOpen(GetVehiclePedIsIn(PlayerPedId(), false), 5) then
-				SetVehicleDoorOpen(GetVehiclePedIsIn(PlayerPedId(), false), 5, false, false)
-			  else
-				SetVehicleDoorShut(GetVehiclePedIsIn(PlayerPedId(), false), 5, false)
-			  end
-			end
-		  else
-			TriggerEvent('fsn_notify:displayNotification', 'You need to be in the driver seat!', 'centerLeft', 3000, 'error')
-		  end
-		end
-		if split[2] == 'engine' then
-			TriggerEvent('EngineToggle:Engine')
-			CancelEvent()
-		end
-		if split[2] == 'seat' then
-			if split[3] == '1' then
-				if IsVehicleSeatFree(GetVehiclePedIsIn(PlayerPedId()), -1) then
-					SetPedIntoVehicle(PlayerPedId(), GetVehiclePedIsIn(PlayerPedId(), false), -1)
-					TriggerEvent('fsn_commands:me', 'shuffles to the driver seat.')
-				elseif GetPedInVehicleSeat(GetVehiclePedIsIn(PlayerPedId(), false), -1) ~= PlayerPedId() then
-					TriggerEvent('fsn_notify:displayNotification', 'Somebody is already there!', 'centerLeft', 3000, 'error')
-				end
-			elseif split[3] == '2' then
-				if IsVehicleSeatFree(GetVehiclePedIsIn(PlayerPedId()), 0) then
-					SetPedIntoVehicle(PlayerPedId(), GetVehiclePedIsIn(PlayerPedId(), false), 0)
-					TriggerEvent('fsn_commands:me', 'shuffles to the passenger seat.')
-				elseif GetPedInVehicleSeat(GetVehiclePedIsIn(PlayerPedId(), false), 0) ~= PlayerPedId() then
-					TriggerEvent('fsn_notify:displayNotification', 'Somebody is already there!', 'centerLeft', 3000, 'error')
-				end
-			elseif split[3] == '3' then
-				if IsVehicleSeatFree(GetVehiclePedIsIn(PlayerPedId()), 1) then
-					SetPedIntoVehicle(PlayerPedId(), GetVehiclePedIsIn(PlayerPedId(), false), 1)
-					TriggerEvent('fsn_commands:me', 'shuffles to the rear left seat.')
-				elseif GetPedInVehicleSeat(GetVehiclePedIsIn(PlayerPedId(), false), 1) ~= PlayerPedId() then
-					TriggerEvent('fsn_notify:displayNotification', 'Somebody is already there!', 'centerLeft', 3000, 'error')
-				end
-			elseif split[3] == '4' then
-				if IsVehicleSeatFree(GetVehiclePedIsIn(PlayerPedId()), 2) then
-					SetPedIntoVehicle(PlayerPedId(), GetVehiclePedIsIn(PlayerPedId(), false), 2)
-					TriggerEvent('fsn_commands:me', 'shuffles to the rear right seat.')
-				elseif GetPedInVehicleSeat(GetVehiclePedIsIn(PlayerPedId(), false), 2) ~= PlayerPedId() then
-			 	 	TriggerEvent('fsn_notify:displayNotification', 'Somebody is already there!', 'centerLeft', 3000, 'error')
-				end
-			end
-		end
-	elseif ( data == "exit" ) then
-		ToggleActionMenu()
+                if split[2] == 'window' then
+                    if split[3] == '*' then
+                        toggleAllWindows()
+                    else
+                        toggleWindow(tonumber(split[3]))
+                    end
+                end
+                if split[2] == 'door' then
+                    if GetPedInVehicleSeat(GetVehiclePedIsIn(PlayerPedId(), false), -1) == PlayerPedId() then
+                        toggleDoor(split[3])
+                    else
+                        TriggerEvent('fsn_notify:displayNotification', 'You need to be in the driver seat!', 'centerLeft', 3000, 'error')
+                    end
+                end
+                if split[2] == 'engine' then
+                        TriggerEvent('EngineToggle:Engine')
+                        CancelEvent()
+                end
+                if split[2] == 'seat' then
+                        changeSeat(split[3])
+                end
+        elseif ( data == "exit" ) then
+                ToggleActionMenu()
     return
   elseif ( data == "back" ) then
     ToggleActionMenuBackx()
-	end
-
-end )
-
-function drawTxt(text,font,centre,x,y,scale,r,g,b,a)
-  SetTextFont(font)
-  SetTextProportional(0)
-  SetTextScale(scale, scale)
-  SetTextColour(r, g, b, a)
-  SetTextDropShadow(0, 0, 0, 0,255)
-  SetTextEdge(1, 0, 0, 0, 255)
-  SetTextDropShadow()
-  SetTextOutline()
-  SetTextCentre(centre)
-  SetTextEntry("STRING")
-  AddTextComponentString(text)
-  DrawText(x , y)
-end
-
-
-Citizen.CreateThread( function()
-  SetNuiFocus( false )
-  while true do
-		  if IsControlJustPressed( 0,  288 ) and GetLastInputMethod( 0 ) then --Disables Controller Conflict
-			  ToggleActionMenu()
-      end
-	    if ( menuEnabled ) then
-            local ped = GetPlayerPed( -1 )
-           -- DisableControlAction( 0, 1, true )
-            --DisableControlAction( 0, 2, true )
-            --DisableControlAction( 0, 24, true )
-            DisablePlayerFiring( ped, true )
-            --DisableControlAction( 0, 142, true )
-            --DisableControlAction( 0, 106, true )
         end
-		Citizen.Wait( 0 )
-	end
+
 end )
 
-RegisterNUICallback('escape', function(data, cb) -- NUI to close menu on ESCAPE key pressed.
-  ToggleActionMenu()
+--[[
+    -- Type: Thread
+    -- Name: MenuControlThread
+    -- Use: Handles keybind and disables controls when menu open
+    -- Created: 2024-06-05
+    -- By: VSSVSSN
+--]]
+Citizen.CreateThread(function()
+    SetNuiFocus(false)
+    while true do
+        if IsControlJustPressed(0, 288) and GetLastInputMethod(0) then -- F1 key
+            ToggleActionMenu()
+        end
+        if menuEnabled then
+            local ped = PlayerPedId()
+            DisablePlayerFiring(ped, true)
+        end
+        Citizen.Wait(0)
+    end
+end)
+
+--[[
+    -- Type: Callback
+    -- Name: escape
+    -- Use: Closes menu on ESC key
+    -- Created: 2024-06-05
+    -- By: VSSVSSN
+--]]
+RegisterNUICallback('escape', function(data, cb)
+    ToggleActionMenu()
 end)
