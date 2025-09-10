@@ -74,11 +74,11 @@ local callBackId = 0
 local TriggeredCalls = {}
 
 function ServerRPC:TriggerRpcAsync(source, ...)
-    if not self.name and type(self.name) ~= "string" then
+    if not self.name or type(self.name) ~= "string" then
         return error("Callback name must be a string!", 1)
     end
 
-    if not source and type(source) ~= "number" then
+    if not source or type(source) ~= "number" then
         return error("Callback source must exist and be a number!", 1)
     end
 
@@ -96,9 +96,21 @@ function ServerRPC:TriggerRpcAsync(source, ...)
 end
 
 function ServerRPC:TriggerRpcAwait(source, ...)
-    if not self.name and type(self.name) ~= "string" then
+    if not self.name or type(self.name) ~= "string" then
         return error("Callback name must be a string!", 1)
     end
+
+    if not source or type(source) ~= "number" then
+        return error("Callback source must exist and be a number!", 1)
+    end
+
+    local args = { ... }
+    local timeout = 5000
+    if type(args[1]) == "number" then
+        timeout = args[1]
+        table.remove(args, 1)
+    end
+
     callBackId = callBackId + 1
     if callBackId >= 65565 then
         callBackId = 0
@@ -106,10 +118,17 @@ function ServerRPC:TriggerRpcAwait(source, ...)
     end
 
     self.uniqueId = self.name .. tostring(callBackId)
-    TriggerClientEvent("vorp:TriggerServerCallback", source, self.name, self.uniqueId, true, ...)
+    TriggerClientEvent("vorp:TriggerServerCallback", source, self.name, self.uniqueId, true, table.unpack(args))
 
     local promise = promise.new()
     TriggeredCalls[self.uniqueId] = promise
+
+    SetTimeout(timeout, function()
+        if TriggeredCalls[self.uniqueId] then
+            TriggeredCalls[self.uniqueId]:resolve(nil)
+            TriggeredCalls[self.uniqueId] = nil
+        end
+    end)
 
     local result = Citizen.Await(promise)
     return result

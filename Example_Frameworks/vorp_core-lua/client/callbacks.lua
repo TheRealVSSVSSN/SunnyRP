@@ -22,7 +22,7 @@ function ClientRPC:New(name, callback)
 end
 
 function ClientRPC:TriggerRpcAsync(...)
-    if not self.name and type(self.name) ~= "string" then
+    if not self.name or type(self.name) ~= "string" then
         return error("Callback name must be a string!", 1)
     end
 
@@ -40,8 +40,15 @@ function ClientRPC:TriggerRpcAsync(...)
 end
 
 function ClientRPC:TriggerRpcAwait(...)
-    if not self.name and type(self.name) ~= "string" then
+    if not self.name or type(self.name) ~= "string" then
         return error("Callback name must be a string!", 1)
+    end
+
+    local args = { ... }
+    local timeout = 5000
+    if type(args[1]) == "number" then
+        timeout = args[1]
+        table.remove(args, 1)
     end
 
     callBackId = callBackId + 1
@@ -52,10 +59,17 @@ function ClientRPC:TriggerRpcAwait(...)
 
     self.uniqueId = self.name .. tostring(callBackId)
 
-    TriggerServerEvent("vorp:TriggerServerCallback", self.name, self.uniqueId, true, ...)
+    TriggerServerEvent("vorp:TriggerServerCallback", self.name, self.uniqueId, true, table.unpack(args))
 
     local promise = promise.new()
     TriggeredCalls[self.uniqueId] = promise
+
+    SetTimeout(timeout, function()
+        if TriggeredCalls[self.uniqueId] then
+            TriggeredCalls[self.uniqueId]:resolve(nil)
+            TriggeredCalls[self.uniqueId] = nil
+        end
+    end)
 
     local result = Citizen.Await(promise)
     return result
@@ -124,7 +138,7 @@ end)
 ---@param name string callback name
 ---@param callback fun( func:fun(any),any) callback function
 function ClientRPC.Callback.Register(name, callback)
-    if not name and type(name) ~= "string" then
+    if not name or type(name) ~= "string" then
         return error("Callback name must be a string!", 1)
     end
 
