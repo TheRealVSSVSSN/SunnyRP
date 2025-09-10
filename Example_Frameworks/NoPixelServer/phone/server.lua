@@ -40,10 +40,10 @@ end)
 RegisterNetEvent('Server:GetHandle')
 AddEventHandler('Server:GetHandle', function()
     local src = source
-	local user = exports["np-base"]:getModule("Player"):GetUser(src)
-	local char = user:getCurrentCharacter()
-    fal = "@" .. char.first_name .. "_" .. char.last_name
-    local handle = fal
+    local user = exports["np-base"]:getModule("Player"):GetUser(src)
+    if not user then return end
+    local char = user:getCurrentCharacter()
+    local handle = "@" .. char.first_name .. "_" .. char.last_name
     TriggerClientEvent('givemethehandle', src, handle)
     TriggerClientEvent('updateNameClient', src, char.first_name, char.last_name)
 end)
@@ -53,16 +53,16 @@ end)
 RegisterNetEvent('phone:addContact')
 AddEventHandler('phone:addContact', function(name, number)
     local src = source
-	local user = exports["np-base"]:getModule("Player"):GetUser(src)
-    local char = user:getCurrentCharacter()
+    if type(name) ~= "string" or type(number) ~= "string" then return end
+    local user = exports["np-base"]:getModule("Player"):GetUser(src)
+    if not user then return end
     local characterId = user:getVar("character").id
-    local handle = handle
 
     exports.ghmattimysql:execute('INSERT INTO user_contacts (identifier, name, number) VALUES (@identifier, @name, @number)', {
         ['identifier'] = characterId,
         ['name'] = name,
         ['number'] = number
-    }, function(result)
+    }, function()
         TriggerEvent('getContacts', true, src)
         TriggerClientEvent('refreshContacts', src)
         TriggerClientEvent('phone:newContact', src, name, number)
@@ -89,21 +89,15 @@ end)
 RegisterNetEvent('phone:getContacts')
 AddEventHandler('phone:getContacts', function()
     local src = source
-	local user = exports["np-base"]:getModule("Player"):GetUser(src)
-    local char = user:getCurrentCharacter()
-    local characterId = user:getVar("character").id
-
-    if (user == nil) then
+    local user = exports["np-base"]:getModule("Player"):GetUser(src)
+    if not user then
         TriggerClientEvent('phone:loadContacts', src, json.encode({}))
-    else
-        local contacts = getContacts(characterId, function(contacts)
-            if (contacts) then
-                TriggerClientEvent('phone:loadContacts', src, contacts)
-            else
-                TriggerClientEvent('phone:loadContacts', src, {})
-            end
-        end)
+        return
     end
+    local characterId = user:getVar("character").id
+    getContacts(characterId, function(contacts)
+        TriggerClientEvent('phone:loadContacts', src, contacts or {})
+    end)
 end)
 
 function getMessagesBetweenUsers(sender, recipient, callback)
@@ -122,9 +116,13 @@ function saveSMS(receiver, sender, message, callback)
 end
 
 function getContacts(identifier, callback)
-    exports.ghmattimysql:execute("SELECT name,number FROM user_contacts WHERE identifier = @identifier ORDER BY name ASC", {
-        ['identifier'] = identifier
-    }, function(result) callback(result) end)
+    exports.ghmattimysql:execute(
+        "SELECT name,number FROM user_contacts WHERE identifier = @identifier ORDER BY name ASC",
+        { ['identifier'] = identifier },
+        function(result)
+            if callback then callback(result or {}) end
+        end
+    )
 end
 
 RegisterNetEvent('getNM')
