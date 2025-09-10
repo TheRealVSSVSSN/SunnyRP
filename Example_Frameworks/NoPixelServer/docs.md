@@ -6,3 +6,9 @@
 - Added radius constant to blackjack table locator and corrected prop name outputs.
 - Moved animation dictionary cleanup outside the dealer creation loop to prevent missing animation issues.
 - Converted global state to local variables and tightened betting validation on the server.
+
+## camera
+- Migrated resource to `fxmanifest.lua` using the `cerulean` fx_version and enabled Lua 5.4.
+- Localized camera control natives and state variables to prevent global pollution.
+- Added wrapper for selfie mode native and swapped to the `Wait` helper for smoother loops.
+
