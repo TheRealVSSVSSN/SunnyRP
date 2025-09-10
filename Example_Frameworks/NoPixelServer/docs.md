@@ -6,3 +6,9 @@
 - Added radius constant to blackjack table locator and corrected prop name outputs.
 - Moved animation dictionary cleanup outside the dealer creation loop to prevent missing animation issues.
 - Converted global state to local variables and tightened betting validation on the server.
+
+## emotes
+- Converted legacy `__resource.lua` to `fxmanifest.lua` with `cerulean` fx_version and Lua 5.4 support.
+- Updated scripts to use `CreateThread`, `Wait`, and `PlayerPedId()` in place of deprecated APIs.
+- Reworked finger-point raycast to use `StartShapeTestRay`/`GetShapeTestResult` for reliable blocking detection.
+- Standardized ped handling and cleaned up unused variables across client scripts.
