@@ -1,31 +1,38 @@
-local playerCount = 0
-local list = {}
+--[[
+    -- Type: Server Script
+    -- Name: hardcap server.lua
+    -- Use: Enforces player limit defined by sv_maxclients
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 
-RegisterServerEvent('hardcap:playerActivated')
+local activePlayers = {}
 
-AddEventHandler('hardcap:playerActivated', function()
-  if not list[source] then
-    playerCount = playerCount + 1
-    list[source] = true
-  end
+-- seed active players in case of resource restart
+for _, id in ipairs(GetPlayers()) do
+    activePlayers[tonumber(id)] = true
+end
+
+local function countPlayers()
+    local count = 0
+    for _ in pairs(activePlayers) do
+        count = count + 1
+    end
+    return count
+end
+
+AddEventHandler('playerConnecting', function(name, setReason, deferrals)
+    local maxPlayers = GetConvarInt('sv_maxclients', 32)
+    if countPlayers() >= maxPlayers then
+        setReason(('This server is full (past %d players).'):format(maxPlayers))
+        CancelEvent()
+        return
+    end
+
+    activePlayers[source] = true
 end)
 
 AddEventHandler('playerDropped', function()
-  if list[source] then
-    playerCount = playerCount - 1
-    list[source] = nil
-  end
+    activePlayers[source] = nil
 end)
 
-AddEventHandler('playerConnecting', function(name, setReason)
-  local cv = GetConvarInt('sv_maxclients', 32)
-
-  print('Connecting: ' .. name .. '^7')
-
-  if playerCount >= cv then
-    print('Full. :(')
-
-    setReason('This server is full (past ' .. tostring(cv) .. ' players).')
-    CancelEvent()
-  end
-end)
