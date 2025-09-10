@@ -6,3 +6,7 @@
 - Added radius constant to blackjack table locator and corrected prop name outputs.
 - Moved animation dictionary cleanup outside the dealer creation loop to prevent missing animation issues.
 - Converted global state to local variables and tightened betting validation on the server.
+
+## gabz_mrpd
+- Updated manifest to `cerulean`, enabled Lua 5.4, and corrected client script declaration.
+- Refactored entity loader using `CreateThread`, local state, and a loop to activate interior props cleanly.
