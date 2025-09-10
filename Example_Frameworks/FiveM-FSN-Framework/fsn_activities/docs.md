@@ -1,13 +1,13 @@
 # fsn_activities Documentation
 
 ## Overview and Runtime Context
-`fsn_activities` provides leisure mini‑games for the FiveM server. Currently only a yoga activity is implemented and runs entirely on the client. Fishing and hunting scripts exist only as placeholders. Client logic depends on utilities from `@fsn_main` and uses `mythic_notify` for on‑screen messages.
+`fsn_activities` hosts leisure mini‑games for the FiveM server. At present only a client‑side yoga routine is implemented; fishing and hunting files are stubs. The resource relies on shared utilities from `@fsn_main` and displays notifications via `mythic_notify`.
 
 ## File Inventory
 | Path | Role | Classification |
 |------|------|----------------|
 | `fxmanifest.lua` | Resource manifest declaring dependencies and scripts | shared |
-| `yoga/client.lua` | Functional yoga mini‑game | client |
+| `yoga/client.lua` | Yoga mini‑game | client |
 | `fishing/client.lua` | Placeholder for future fishing activity | client |
 | `hunting/client.lua` | Placeholder for future hunting activity | client |
 
@@ -15,24 +15,26 @@
 
 ### yoga/client.lua
 **Responsibilities**
-- Defines three yoga spots near Del Perro and stores the area center for range checks.
+- Reads key codes for start (`E`) and cancel (`DELETE`) actions and tracks session state via `doingYoga`.
+- Declares three yoga spots near Del Perro along with a central location for range checks.
 - Maps a “Yoga Bliss” blip on resource start.
-- Monitors player proximity to prompt starting (`E`) or cancelling (`DELETE`) yoga.
-- Implements `DoYoga`, `PositionCheck`, and `cancelledYoga` helpers along with a local stress‑check event.
+- Polls player proximity to prompt starting or cancelling yoga.
+- Provides helpers `DoYoga`, `PositionCheck`, and `cancelledYoga` plus a local `fsn_yoga:checkStress` event.
 
 **Control Flow**
 1. **Blip Setup** – A thread iterates `Blips` and places each marker when the resource loads.【F:yoga/client.lua†L16-L45】
-2. **Start Prompt** – A continuous loop checks distance to the yoga area; within range it draws 3D text and calls `DoYoga` when the start key is pressed.【F:yoga/client.lua†L47-L69】
-3. **Cancellation** – A parallel loop listens for the cancel key while `doingYoga`; pressing it calls `cancelledYoga` and stops the animation.【F:yoga/client.lua†L71-L95】
-4. **Yoga Sequence** – `DoYoga` shows a preparation message, plays the built‑in yoga scenario for 15 seconds, fires `fsn_yoga:checkStress`, then clears the ped tasks.【F:yoga/client.lua†L123-L135】
-5. **Stress Handling** – The local handler for `fsn_yoga:checkStress` verifies the session and emits `fsn_needs:stress:remove` with an amount of `10` to reduce stress.【F:yoga/client.lua†L137-L144】
+2. **Start Prompt** – A loop monitors distance to the yoga area; within range it draws 3D text and calls `DoYoga` when `E` is pressed.【F:yoga/client.lua†L47-L69】
+3. **Cancellation** – A parallel loop listens for the cancel key while `doingYoga`; pressing it invokes `cancelledYoga` and stops the animation.【F:yoga/client.lua†L71-L95】
+4. **PositionCheck** – Finds the nearest yoga spot by computing distances to `yogaSpots` and returning the smallest value.【F:yoga/client.lua†L106-L121】
+5. **Yoga Sequence** – `DoYoga` displays a prep message, plays the yoga scenario for 15 seconds, triggers `fsn_yoga:checkStress`, then clears tasks.【F:yoga/client.lua†L123-L135】
+6. **Stress Handling** – The handler for `fsn_yoga:checkStress` validates `doingYoga` and fires `fsn_needs:stress:remove` with `10` to reduce stress.【F:yoga/client.lua†L137-L144】
 
 **Security & Performance Notes**
 - Stress reduction is client‑side only; spoofed events could remove stress without validation.
 - Two frame‑based loops (`Citizen.Wait(0)`) continuously poll proximity and cancellation, which may impact performance on low‑end clients.
 
 **Integration Points**
-- Uses utility functions from `@fsn_main` such as key mapping and distance calculation.
+- Uses `@fsn_main` helpers for key mapping, distance checks, and 3D text drawing.
 - Calls `exports['mythic_notify']:DoCustomHudText(type, message, duration)` for notifications *(Inferred: High).*【F:yoga/client.lua†L97-L103】【F:yoga/client.lua†L123-L129】
 - Triggers `fsn_needs:stress:remove(amount)` to adjust player stress *(Inferred: High).*【F:yoga/client.lua†L137-L144】
 
