@@ -1,22 +1,25 @@
+--[[
+    -- Type: Server
+    -- Name: Light manager
+    -- Use: Handles placement and removal of news lights
+    -- Created: 2024-05-06
+    -- By: VSSVSSN
+--]]
 
-local currentArray = {}
+local lights = {}
 
-RegisterServerEvent('light:addNews')
-AddEventHandler('light:addNews', function(rgb,id,coordx,coordy,coordz)
-local src = source
-local array = {
-    pos = {x = coordx, y = coordy, z = coordz},
-    Object = id,
-    rgb = rgb
-}
-currentArray = array
-TriggerClientEvent('news:updateLights', -1, array)
+RegisterNetEvent('light:addNews')
+AddEventHandler('light:addNews', function(rgb, id, pos)
+    local light = {pos = pos, Object = id, rgb = rgb}
+    lights[#lights + 1] = light
+    TriggerClientEvent('news:updateLights', -1, lights)
 end)
 
-RegisterServerEvent('news:removeLight')
+RegisterNetEvent('news:removeLight')
 AddEventHandler('news:removeLight', function()
-local src = source
-for i,v in ipairs(currentArray) do
-TriggerClientEvent('light:removeLight', -1, v.Object)
+    for _, v in ipairs(lights) do
+        TriggerClientEvent('light:removeLight', -1, v.Object)
     end
+    lights = {}
 end)
+

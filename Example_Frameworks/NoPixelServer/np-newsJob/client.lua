@@ -1,122 +1,161 @@
+--[[
+    -- Type: Module
+    -- Name: News Job Client
+    -- Use: Handles client-side logic for news equipment and cameras
+    -- Created: 2024-05-06
+    -- By: VSSVSSN
+--]]
+
+local camModel, micModel = "prop_v_cam_01", "p_ing_microphonel_01"
+local camAnim = {dict = "missfinale_c2mcs_1", name = "fin_c2_mcs_1_camman"}
+local micAnim = {dict = "missheistdocksprep1hold_cellphone", name = "hold_cellphone"}
+local boomAnim = {dict = "missfra1", name = "mcs2_crew_idle_m_boom"}
+
 local holdingCam = false
-local usingCam = false
 local holdingMic = false
-local usingMic = false
-local camModel = "prop_v_cam_01"
-local camanimDict = "missfinale_c2mcs_1"
-local camanimName = "fin_c2_mcs_1_camman"
-local micModel = "p_ing_microphonel_01"
-local micanimDict = "missheistdocksprep1hold_cellphone"
-local micanimName = "hold_cellphone"
-local mic_object = nil
+local holdingBoom = false
+
 local cam_object = nil
-local UI = { 
-	x =  0.000 ,
-	y = -0.001 ,
-}
 
 local currentHolding = "camera"
-local newscamera = false
-local movcamera = false
+local newscamera, movcamera = false, false
 
-local holdingBoom = false
-local usingBoom = false
+local removeCamera, removeMic, removeBoom
+
+local function loadModel(model)
+    if type(model) == "string" then
+        model = GetHashKey(model)
+    end
+    RequestModel(model)
+    while not HasModelLoaded(model) do
+        Wait(0)
+    end
+    return model
+end
+
+local function loadAnimDict(dict)
+    RequestAnimDict(dict)
+    while not HasAnimDictLoaded(dict) do
+        Wait(0)
+    end
+end
+
+--[[
+    -- Type: Function
+    -- Name: DisplayNotification
+    -- Use: Shows a help text notification
+    -- Created: 2024-05-06
+    -- By: VSSVSSN
+--]]
+local function DisplayNotification(str)
+    SetTextComponentFormat("STRING")
+    AddTextComponentString(str)
+    DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+end
+
 
 ---------------------------------------------------------------------------
 -- Toggling Cam --
 ---------------------------------------------------------------------------
-function ToggleCam()
-    if not holdingCam then
-    	TriggerEvent("phone:currentNewsState",true)
-        RequestModel(GetHashKey(camModel))
-        while not HasModelLoaded(GetHashKey(camModel)) do
-            Citizen.Wait(100)
-        end
-		
-        local plyCoords = GetOffsetFromEntityInWorldCoords(GetPlayerPed(PlayerId()), 0.0, 0.0, -5.0)
-        local camspawned = CreateObject(GetHashKey(camModel), plyCoords.x, plyCoords.y, plyCoords.z, 1, 1, 1)
-        cam_object = camspawned
-        AttachEntityToEntity(camspawned, GetPlayerPed(PlayerId()), GetPedBoneIndex(GetPlayerPed(PlayerId()), 28422), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1, 1, 0, 1, 0, 1)
-		while not HasAnimDictLoaded(camanimDict) do
-			RequestAnimDict(camanimDict)
-			Citizen.Wait(100)
-		end
-		--SetEntityAsMissionEntity(camspawned,false,true)
-        TaskPlayAnim(GetPlayerPed(PlayerId()), 1.0, -1, -1, 50, 0, 0, 0, 0) -- 50 = 32 + 16 + 2
-        TaskPlayAnim(GetPlayerPed(PlayerId()), camanimDict, camanimName, 1.0, -1, -1, 50, 0, 0, 0, 0)
-        holdingCam = true
-		DisplayNotification("To enter News cam press ~INPUT_PICKUP~ \nTo Enter Movie Cam press ~INPUT_INTERACTION_MENU~")
-    else
+--[[
+    -- Type: Function
+    -- Name: ToggleCam
+    -- Use: Equips or removes the handheld camera
+    -- Created: 2024-05-06
+    -- By: VSSVSSN
+--]]
+local function ToggleCam()
+    if holdingCam then
         removeCamera()
+        return
     end
+
+    TriggerEvent("phone:currentNewsState", true)
+    local model = loadModel(camModel)
+    local ped = PlayerPedId()
+    local plyCoords = GetOffsetFromEntityInWorldCoords(ped, 0.0, 0.0, -5.0)
+    cam_object = CreateObject(model, plyCoords.x, plyCoords.y, plyCoords.z, true, true, true)
+    AttachEntityToEntity(cam_object, ped, GetPedBoneIndex(ped, 28422), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, true, true, false, true, 1, true)
+
+    loadAnimDict(camAnim.dict)
+    TaskPlayAnim(ped, camAnim.dict, camAnim.name, 1.0, -1.0, -1, 50, 0, false, false, false)
+    holdingCam = true
+    SetModelAsNoLongerNeeded(model)
+    DisplayNotification("To enter News cam press ~INPUT_PICKUP~ \nTo Enter Movie Cam press ~INPUT_INTERACTION_MENU~")
 end
 
-Citizen.CreateThread(function()
+CreateThread(function()
+    loadAnimDict(camAnim.dict)
+    while true do
+        local hold = false
+        Wait(0)
+        if holdingCam then
+            hold = true
+            if not IsEntityPlayingAnim(PlayerPedId(), camAnim.dict, camAnim.name, 3) then
+                loadAnimDict(camAnim.dict)
+                TaskPlayAnim(PlayerPedId(), camAnim.dict, camAnim.name, 1.0, -1.0, -1, 50, 0, false, false, false)
+            end
 
-	while not HasAnimDictLoaded(camanimDict) do
-		RequestAnimDict(camanimDict)
-		Citizen.Wait(100)
-	end
-
-	while true do
-		local hold = false
-		Citizen.Wait(0)
-		if holdingCam then
-			hold = true
-			if not IsEntityPlayingAnim(PlayerPedId(), camanimDict, camanimName, 3) then
-				while not HasAnimDictLoaded(camanimDict) do
-					RequestAnimDict(camanimDict)
-					Citizen.Wait(100)
-				end
-				TaskPlayAnim(GetPlayerPed(PlayerId()), 1.0, -1, -1, 50, 0, 0, 0, 0) -- 50 = 32 + 16 + 2
-				TaskPlayAnim(GetPlayerPed(PlayerId()), camanimDict, camanimName, 1.0, -1, -1, 50, 0, 0, 0, 0)
-			end
-				
-			DisablePlayerFiring(PlayerId(), true)
-			DisableControlAction(0,25,true) -- disable aim
-			DisableControlAction(0, 44,  true) -- INPUT_COVER
-			DisableControlAction(0,37,true) -- INPUT_SELECT_WEAPON
-			TriggerEvent("actionbar:setEmptyHanded")
-		end
-		if not hold then
-			Wait(900)
-		end
-	end
-	
+            DisablePlayerFiring(PlayerId(), true)
+            DisableControlAction(0, 25, true)
+            DisableControlAction(0, 44, true)
+            DisableControlAction(0, 37, true)
+            TriggerEvent("actionbar:setEmptyHanded")
+        end
+        if not hold then
+            Wait(900)
+        end
+    end
 end)
 
-function removeCamera()
-	ClearPedSecondaryTask(GetPlayerPed(PlayerId()))
-    DetachEntity(cam_object, 1, 1)
-    DeleteEntity(cam_object)
-    cam_object = nil
-    holdingCam = false
-    usingCam = false
-    newscamera = false
-	movcamera = false
-    TriggerEvent("phone:currentNewsState",false)
-
+--[[
+    -- Type: Function
+    -- Name: removeCamera
+    -- Use: Removes the handheld camera and resets state
+    -- Created: 2024-05-06
+    -- By: VSSVSSN
+--]]
+removeCamera = function()
+    ClearPedSecondaryTask(PlayerPedId())
+    if cam_object then
+        DetachEntity(cam_object, true, true)
+        DeleteEntity(cam_object)
+        cam_object = nil
+    end
+    holdingCam, newscamera, movcamera = false, false, false
+    TriggerEvent("phone:currentNewsState", false)
 end
 
-function removeMic()
-	TriggerEvent("disabledWeapons",false)
-    TriggerEvent('news:HoldingState',false)
+--[[
+    -- Type: Function
+    -- Name: removeMic
+    -- Use: Detaches microphone and clears state
+    -- Created: 2024-05-06
+    -- By: VSSVSSN
+--]]
+removeMic = function()
+    TriggerEvent("disabledWeapons", false)
+    TriggerEvent('news:HoldingState', false)
     ClearPedTasks(PlayerPedId())
     TriggerEvent("destroyProp")
     holdingMic = false
-    usingMic = false
-    TriggerEvent("phone:currentNewsState",false)
+    TriggerEvent("phone:currentNewsState", false)
 end
 
-function removeBoom()
-
-	TriggerEvent("disabledWeapons",false)
-    TriggerEvent('news:HoldingState',false)
+--[[
+    -- Type: Function
+    -- Name: removeBoom
+    -- Use: Detaches boom mic and clears state
+    -- Created: 2024-05-06
+    -- By: VSSVSSN
+--]]
+removeBoom = function()
+    TriggerEvent("disabledWeapons", false)
+    TriggerEvent('news:HoldingState', false)
     ClearPedTasks(PlayerPedId())
     TriggerEvent("destroyProp")
     holdingBoom = false
-    usingBoom = false
-    TriggerEvent("phone:currentNewsState",false)
+    TriggerEvent("phone:currentNewsState", false)
 end
 
 
@@ -177,14 +216,14 @@ end)
 local myJob = ""
 Citizen.CreateThread(function()
 	while true do
-		myJob = exports["np-base"]:getModule("LocalPlayer"):getVar("job")
-		Citizen.Wait(50000)
+                myJob = exports["np-base"]:getModule("LocalPlayer"):getVar("job")
+                Wait(50000)
 	end
 end)
 
 Citizen.CreateThread(function()
 	while true do
-		Citizen.Wait(1)
+                Wait(1)
 		local isInVeh = IsPedInAnyVehicle(PlayerPedId(), false)
 		if isInVeh then
 			if holdingCam then
@@ -195,15 +234,15 @@ Citizen.CreateThread(function()
 	  			removeBoom()
 	  		end
 	  	end
-		if not myJob == "news" then
-	    	Citizen.Wait(5000)
-	    	if currentHolding == "camera" or currentHolding == "handMic" or currentHolding == "boomarm" then
-				removeCamera()
-				removeMic()
-				removeBoom()
-				currentHolding = "none"
-			end
-	    end
+                if myJob ~= "news" then
+                Wait(5000)
+                if currentHolding == "camera" or currentHolding == "handMic" or currentHolding == "boomarm" then
+                                removeCamera()
+                                removeMic()
+                                removeBoom()
+                                currentHolding = "none"
+                        end
+            end
 	end
 end)
 
@@ -226,149 +265,137 @@ local fov = (fov_max+fov_min)*0.5
 ---------------------------------------------------------------------------
 -- News Cam --
 ---------------------------------------------------------------------------
-function MovieCam()
+--[[
+    -- Type: Function
+    -- Name: MovieCam
+    -- Use: Activates cinematic camera view
+    -- Created: 2024-05-06
+    -- By: VSSVSSN
+--]]
+local function MovieCam()
+    movcamera = true
+    SetTimecycleModifier("default")
+    SetTimecycleModifierStrength(0.3)
 
-	movcamera = true
-	SetTimecycleModifier("default")
+    local scaleform = RequestScaleformMovie("security_camera")
+    while not HasScaleformMovieLoaded(scaleform) do
+        Wait(10)
+    end
 
-	SetTimecycleModifierStrength(0.3)
-	
-	local scaleform = RequestScaleformMovie("security_camera")
+    local ped = PlayerPedId()
+    local vehicle = GetVehiclePedIsIn(ped)
+    local cam1 = CreateCam("DEFAULT_SCRIPTED_FLY_CAMERA", true)
+    AttachCamToEntity(cam1, ped, 0.0, 0.6, 0.75, true)
+    SetCamRot(cam1, 2.0, 1.0, GetEntityHeading(ped))
+    SetCamFov(cam1, fov)
+    RenderScriptCams(true, false, 0, true, false)
+    PushScaleformMovieFunction(scaleform, "security_camera")
+    PopScaleformMovieFunctionVoid()
 
-	while not HasScaleformMovieLoaded(scaleform) do
-		Citizen.Wait(10)
-	end
+    while movcamera and not IsEntityDead(ped) and GetVehiclePedIsIn(ped) == vehicle do
+        local zoomvalue = (1.0 / (fov_max - fov_min)) * (fov - fov_min)
+        local newZ = CheckInputRotation(cam1, zoomvalue)
+        SetEntityRotation(ped, 0, 0, newZ, 2, true)
+        HandleZoom(cam1)
+        HideHUDThisFrame()
 
+        local camHeading = GetGameplayCamRelativeHeading()
+        local camPitch = GetGameplayCamRelativePitch()
+        if camPitch < -70.0 then
+            camPitch = -70.0
+        elseif camPitch > 42.0 then
+            camPitch = 42.0
+        end
+        camPitch = (camPitch + 70.0) / 112.0
 
-	local lPed = PlayerPedId()
-	local vehicle = GetVehiclePedIsIn(lPed)
-	local cam1 = CreateCam("DEFAULT_SCRIPTED_FLY_CAMERA", true)
+        if camHeading < -180.0 then
+            camHeading = -180.0
+        elseif camHeading > 180.0 then
+            camHeading = 180.0
+        end
+        camHeading = (camHeading + 180.0) / 360.0
 
-	AttachCamToEntity(cam1, lPed, 0.0,0.6,0.75, true)
-	SetCamRot(cam1, 2.0,1.0,GetEntityHeading(lPed))
-	SetCamFov(cam1, fov)
-	RenderScriptCams(true, false, 0, 1, 0)
-	PushScaleformMovieFunction(scaleform, "security_camera")
-	PopScaleformMovieFunctionVoid()
+        Citizen.InvokeNative(0xD5BB4025AE449A4E, ped, "Pitch", camPitch)
+        Citizen.InvokeNative(0xD5BB4025AE449A4E, ped, "Heading", camHeading * -1.0 + 1.0)
+        Wait(1)
+    end
 
-	while movcamera and not IsEntityDead(lPed) and (GetVehiclePedIsIn(lPed) == vehicle) and true do
-		SetEntityRotation(lPed, 0, 0, new_z,2, true)
-
-		local zoomvalue = (1.0/(fov_max-fov_min))*(fov-fov_min)
-		CheckInputRotation(cam1, zoomvalue)
-
-		HandleZoom(cam1)
-		HideHUDThisFrame()
-		
-		local camHeading = GetGameplayCamRelativeHeading()
-		local camPitch = GetGameplayCamRelativePitch()
-		if camPitch < -70.0 then
-			camPitch = -70.0
-		elseif camPitch > 42.0 then
-			camPitch = 42.0
-		end
-		camPitch = (camPitch + 70.0) / 112.0
-		
-		if camHeading < -180.0 then
-			camHeading = -180.0
-		elseif camHeading > 180.0 then
-			camHeading = 180.0
-		end
-		camHeading = (camHeading + 180.0) / 360.0
-		
-		Citizen.InvokeNative(0xD5BB4025AE449A4E, PlayerPedId(), "Pitch", camPitch)
-		Citizen.InvokeNative(0xD5BB4025AE449A4E, PlayerPedId(), "Heading", camHeading * -1.0 + 1.0)
-		
-		Citizen.Wait(1)
-	end
-
-	movcamera = false
-	ClearTimecycleModifier()
-	fov = (fov_max+fov_min)*0.5
-	RenderScriptCams(false, false, 0, 1, 0)
-	SetScaleformMovieAsNoLongerNeeded(scaleform)
-	DestroyCam(cam1, false)
-	SetNightvision(false)
-	SetSeethrough(false)
+    movcamera = false
+    ClearTimecycleModifier()
+    fov = (fov_max + fov_min) * 0.5
+    RenderScriptCams(false, false, 0, true, false)
+    SetScaleformMovieAsNoLongerNeeded(scaleform)
+    DestroyCam(cam1, false)
+    SetNightvision(false)
+    SetSeethrough(false)
 end
 
 
-function newsCam()
+--[[
+    -- Type: Function
+    -- Name: newsCam
+    -- Use: Activates news camera with breaking news overlay
+    -- Created: 2024-05-06
+    -- By: VSSVSSN
+--]]
+local function newsCam()
+    newscamera = true
+    SetTimecycleModifier("default")
+    SetTimecycleModifierStrength(0.3)
 
-	newscamera = true
-	SetTimecycleModifier("default")
+    local scaleform = RequestScaleformMovie("security_camera")
+    local scaleform2 = RequestScaleformMovie("breaking_news")
+    while not HasScaleformMovieLoaded(scaleform) or not HasScaleformMovieLoaded(scaleform2) do
+        Wait(10)
+    end
 
-	SetTimecycleModifierStrength(0.3)
-	
-	local scaleform = RequestScaleformMovie("security_camera")
-	local scaleform2 = RequestScaleformMovie("breaking_news")
+    local ped = PlayerPedId()
+    local vehicle = GetVehiclePedIsIn(ped)
+    local cam2 = CreateCam("DEFAULT_SCRIPTED_FLY_CAMERA", true)
+    AttachCamToEntity(cam2, ped, 0.0, 0.6, 0.75, true)
+    SetCamRot(cam2, 2.0, 1.0, GetEntityHeading(ped))
+    SetCamFov(cam2, fov)
+    RenderScriptCams(true, false, 0, true, false)
+    PushScaleformMovieFunction(scaleform2, "breaking_news")
+    PopScaleformMovieFunctionVoid()
 
+    while newscamera and not IsEntityDead(ped) and GetVehiclePedIsIn(ped) == vehicle do
+        local zoomvalue = (1.0 / (fov_max - fov_min)) * (fov - fov_min)
+        local newZ = CheckInputRotation(cam2, zoomvalue)
+        SetEntityRotation(ped, 0, 0, newZ, 2, true)
+        HandleZoom(cam2)
+        HideHUDThisFrame()
+        DrawScaleformMovie(scaleform2, 0.5, 0.63, 1.0, 1.0, 255, 255, 255, 255)
 
-	while not HasScaleformMovieLoaded(scaleform) do
-		Citizen.Wait(10)
-	end
-	while not HasScaleformMovieLoaded(scaleform2) do
-		Citizen.Wait(10)
-	end
+        local camHeading = GetGameplayCamRelativeHeading()
+        local camPitch = GetGameplayCamRelativePitch()
+        if camPitch < -70.0 then
+            camPitch = -70.0
+        elseif camPitch > 42.0 then
+            camPitch = 42.0
+        end
+        camPitch = (camPitch + 70.0) / 112.0
 
+        if camHeading < -180.0 then
+            camHeading = -180.0
+        elseif camHeading > 180.0 then
+            camHeading = 180.0
+        end
+        camHeading = (camHeading + 180.0) / 360.0
 
-	local lPed = PlayerPedId()
-	local vehicle = GetVehiclePedIsIn(lPed)
-	local cam2 = CreateCam("DEFAULT_SCRIPTED_FLY_CAMERA", true)
+        Citizen.InvokeNative(0xD5BB4025AE449A4E, ped, "Pitch", camPitch)
+        Citizen.InvokeNative(0xD5BB4025AE449A4E, ped, "Heading", camHeading * -1.0 + 1.0)
+        Wait(1)
+    end
 
-	AttachCamToEntity(cam2, lPed, 0.0,0.6,0.75, true)
-	SetCamRot(cam2, 2.0,1.0,GetEntityHeading(lPed))
-	SetCamFov(cam2, fov)
-	RenderScriptCams(true, false, 0, 1, 0)
-	--PushScaleformMovieFunction(scaleform, "SET_CAM_LOGO")
-	PushScaleformMovieFunction(scaleform2, "breaking_news")
-	PopScaleformMovieFunctionVoid()
-
-	while newscamera and not IsEntityDead(lPed) and (GetVehiclePedIsIn(lPed) == vehicle) and true do
-		
-		SetEntityRotation(lPed, 0, 0, new_z,2, true)
-			
-		local zoomvalue = (1.0/(fov_max-fov_min))*(fov-fov_min)
-		CheckInputRotation(cam2, zoomvalue)
-
-		HandleZoom(cam2)
-		HideHUDThisFrame()
-
-
-		DrawScaleformMovie(scaleform2, 0.5, 0.63, 1.0, 1.0, 255, 255, 255, 255)
-
-		
-		local camHeading = GetGameplayCamRelativeHeading()
-		local camPitch = GetGameplayCamRelativePitch()
-		if camPitch < -70.0 then
-			camPitch = -70.0
-		elseif camPitch > 42.0 then
-			camPitch = 42.0
-		end
-		camPitch = (camPitch + 70.0) / 112.0
-		
-		if camHeading < -180.0 then
-			camHeading = -180.0
-		elseif camHeading > 180.0 then
-			camHeading = 180.0
-		end
-		camHeading = (camHeading + 180.0) / 360.0
-		
-		Citizen.InvokeNative(0xD5BB4025AE449A4E, PlayerPedId(), "Pitch", camPitch)
-		Citizen.InvokeNative(0xD5BB4025AE449A4E, PlayerPedId(), "Heading", camHeading * -1.0 + 1.0)
-		
-		Citizen.Wait(1)
-	end
-
-	newscamera = false
-	ClearTimecycleModifier()
-	fov = (fov_max+fov_min)*0.5
-	RenderScriptCams(false, false, 0, 1, 0)
-	SetScaleformMovieAsNoLongerNeeded(scaleform)
-	DestroyCam(cam2, false)
-	SetNightvision(false)
-	SetSeethrough(false)
-
+    newscamera = false
+    ClearTimecycleModifier()
+    fov = (fov_max + fov_min) * 0.5
+    RenderScriptCams(false, false, 0, true, false)
+    SetScaleformMovieAsNoLongerNeeded(scaleform)
+    DestroyCam(cam2, false)
+    SetNightvision(false)
+    SetSeethrough(false)
 end
 
 
@@ -383,100 +410,124 @@ AddEventHandler('camera:Activate', function()
 end)
 
 --FUNCTIONS--
-function HideHUDThisFrame()
-	HideHelpTextThisFrame()
-	HideHudAndRadarThisFrame()
-	HideHudComponentThisFrame(1)
-	HideHudComponentThisFrame(2)
-	HideHudComponentThisFrame(3)
-	HideHudComponentThisFrame(4)
-	HideHudComponentThisFrame(6)
-	HideHudComponentThisFrame(7)
-	HideHudComponentThisFrame(8)
-	HideHudComponentThisFrame(9)
-	HideHudComponentThisFrame(13)
-	HideHudComponentThisFrame(11)
-	HideHudComponentThisFrame(12)
-	HideHudComponentThisFrame(15)
-	HideHudComponentThisFrame(18)
-	HideHudComponentThisFrame(19)
+--[[
+    -- Type: Function
+    -- Name: HideHUDThisFrame
+    -- Use: Hides HUD elements during camera usage
+    -- Created: 2024-05-06
+    -- By: VSSVSSN
+--]]
+local function HideHUDThisFrame()
+    HideHelpTextThisFrame()
+    HideHudAndRadarThisFrame()
+    HideHudComponentThisFrame(1)
+    HideHudComponentThisFrame(2)
+    HideHudComponentThisFrame(3)
+    HideHudComponentThisFrame(4)
+    HideHudComponentThisFrame(6)
+    HideHudComponentThisFrame(7)
+    HideHudComponentThisFrame(8)
+    HideHudComponentThisFrame(9)
+    HideHudComponentThisFrame(13)
+    HideHudComponentThisFrame(11)
+    HideHudComponentThisFrame(12)
+    HideHudComponentThisFrame(15)
+    HideHudComponentThisFrame(18)
+    HideHudComponentThisFrame(19)
 end
 
-function CheckInputRotation(cam, zoomvalue)
-	local rightAxisX = GetDisabledControlNormal(0, 220)
-	local rightAxisY = GetDisabledControlNormal(0, 221)
-	local rotation = GetCamRot(cam, 2)
-	if rightAxisX ~= 0.0 or rightAxisY ~= 0.0 then
-		new_z = rotation.z + rightAxisX*-1.0*(speed_ud)*(zoomvalue+0.1)
-		new_x = math.max(math.min(20.0, rotation.x + rightAxisY*-1.0*(speed_lr)*(zoomvalue+0.1)), -89.5)
-		SetCamRot(cam, new_x, 0.0, new_z, 2)
-	end
-end
-
-function HandleZoom(cam)
-	local lPed = PlayerPedId()
-	if not ( IsPedSittingInAnyVehicle( lPed ) ) then
-
-		if IsControlJustPressed(0,241) then
-			fov = math.max(fov - zoomspeed, fov_min)
-		end
-		if IsControlJustPressed(0,242) then
-			fov = math.min(fov + zoomspeed, fov_max)
-		end
-		local current_fov = GetCamFov(cam)
-		if math.abs(fov-current_fov) < 0.1 then
-			fov = current_fov
-		end
-		SetCamFov(cam, current_fov + (fov - current_fov)*0.05)
-	else
-		if IsControlJustPressed(0,17) then
-			fov = math.max(fov - zoomspeed, fov_min)
-		end
-		if IsControlJustPressed(0,16) then
-			fov = math.min(fov + zoomspeed, fov_max)
-		end
-		local current_fov = GetCamFov(cam)
-		if math.abs(fov-current_fov) < 0.1 then
-			fov = current_fov
-		end
-		SetCamFov(cam, current_fov + (fov - current_fov)*0.05)
-	end
-end
-
---
----------------------------------------------------------------------------
--- Toggling Mic --
----------------------------------------------------------------------------
-function ToggleMic()
-    if not holdingMic then
-    	TriggerEvent("phone:currentNewsState",true)
-        TriggerEvent("disabledWeapons",true)
-        TriggerEvent('news:HoldingState',true)
-        TriggerEvent("attachItem","tvmic01")
-        RequestAnimDict("move_weapon@pistol@copc")
-        TaskPlayAnim(PlayerPedId(),"move_weapon@pistol@copc","idle",2.0, -8, 180,49, 0, 0, 0, 0)
-        Wait(100)
-        TaskPlayAnim(PlayerPedId(),"move_weapon@pistol@copc","idle",2.0, -8, 1800000,49, 0, 0, 0, 0)
-        holdingMic = true
-    else
-    	removeMic()
+--[[
+    -- Type: Function
+    -- Name: CheckInputRotation
+    -- Use: Adjusts camera rotation based on player input
+    -- Created: 2024-05-06
+    -- By: VSSVSSN
+--]]
+local function CheckInputRotation(cam, zoomvalue)
+    local rightAxisX = GetDisabledControlNormal(0, 220)
+    local rightAxisY = GetDisabledControlNormal(0, 221)
+    local rotation = GetCamRot(cam, 2)
+    if rightAxisX ~= 0.0 or rightAxisY ~= 0.0 then
+        local newZ = rotation.z + rightAxisX * -1.0 * speed_ud * (zoomvalue + 0.1)
+        local newX = math.max(math.min(20.0, rotation.x + rightAxisY * -1.0 * speed_lr * (zoomvalue + 0.1)), -89.5)
+        SetCamRot(cam, newX, 0.0, newZ, 2)
+        return newZ
     end
+    return rotation.z
 end
 
-function ToggleBoom()
-    if not holdingBoom then
-    	TriggerEvent("phone:currentNewsState",true)
-        TriggerEvent("disabledWeapons",true)
-        TriggerEvent('news:HoldingState',true)
-        TriggerEvent("attachItem","boomMIKE01")
-        RequestAnimDict("missfra1")
-        TaskPlayAnim(PlayerPedId(),"missfra1","mcs2_crew_idle_m_boom",2.0, -8, 180,49, 0, 0, 0, 0)
-        Wait(100)
-        TaskPlayAnim(PlayerPedId(),"missfra1","mcs2_crew_idle_m_boom",2.0, -8, 1800000,49, 0, 0, 0, 0)
-        holdingBoom = true
+--[[
+    -- Type: Function
+    -- Name: HandleZoom
+    -- Use: Manages camera zoom based on player input
+    -- Created: 2024-05-06
+    -- By: VSSVSSN
+--]]
+local function HandleZoom(cam)
+    local lPed = PlayerPedId()
+    if not IsPedSittingInAnyVehicle(lPed) then
+        if IsControlJustPressed(0, 241) then
+            fov = math.max(fov - zoomspeed, fov_min)
+        end
+        if IsControlJustPressed(0, 242) then
+            fov = math.min(fov + zoomspeed, fov_max)
+        end
     else
-    	removeBoom()
+        if IsControlJustPressed(0, 17) then
+            fov = math.max(fov - zoomspeed, fov_min)
+        end
+        if IsControlJustPressed(0, 16) then
+            fov = math.min(fov + zoomspeed, fov_max)
+        end
     end
+
+    local current_fov = GetCamFov(cam)
+    if math.abs(fov - current_fov) < 0.1 then
+        fov = current_fov
+    end
+    SetCamFov(cam, current_fov + (fov - current_fov) * 0.05)
+end
+
+--[[
+    -- Type: Function
+    -- Name: ToggleMic
+    -- Use: Equips or removes the handheld microphone
+    -- Created: 2024-05-06
+    -- By: VSSVSSN
+--]]
+local function ToggleMic()
+    if holdingMic then
+        removeMic()
+        return
+    end
+    TriggerEvent("phone:currentNewsState", true)
+    TriggerEvent("disabledWeapons", true)
+    TriggerEvent('news:HoldingState', true)
+    TriggerEvent("attachItem", "tvmic01")
+    loadAnimDict(micAnim.dict)
+    TaskPlayAnim(PlayerPedId(), micAnim.dict, micAnim.name, 2.0, -8.0, -1, 49, 0, false, false, false)
+    holdingMic = true
+end
+
+--[[
+    -- Type: Function
+    -- Name: ToggleBoom
+    -- Use: Equips or removes the boom microphone
+    -- Created: 2024-05-06
+    -- By: VSSVSSN
+--]]
+local function ToggleBoom()
+    if holdingBoom then
+        removeBoom()
+        return
+    end
+    TriggerEvent("phone:currentNewsState", true)
+    TriggerEvent("disabledWeapons", true)
+    TriggerEvent('news:HoldingState', true)
+    TriggerEvent("attachItem", "boomMIKE01")
+    loadAnimDict(boomAnim.dict)
+    TaskPlayAnim(PlayerPedId(), boomAnim.dict, boomAnim.name, 2.0, -8.0, -1, 49, 0, false, false, false)
+    holdingBoom = true
 end
 
 
@@ -497,17 +548,6 @@ function Breaking(text)
 		DrawText(0.2, 0.85)
 end
 
-function Notification(message)
-	SetNotificationTextEntry("STRING")
-	AddTextComponentString(message)
-	DrawNotification(0, 1)
-end
-
-function DisplayNotification(string)
-	SetTextComponentFormat("STRING")
-	AddTextComponentString(string)
-    DisplayHelpTextFromStringLabel(0, 0, 1, -1)
-end
 
 ---------------------------------------------------------------------------
 -- Lighting --
@@ -520,8 +560,8 @@ RegisterNetEvent("news:light")
 AddEventHandler("news:light", function(r,g,b)
   local pos = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 1.15, -1.0)
   local heading = GetEntityHeading(PlayerPedId())
-  currentLight = CreateObject(`prop_studio_light_02`,pos,true,false,false)
-  SetEntityHeading(currentLight,heading+180)
+  currentLight = CreateObject(GetHashKey('prop_studio_light_02'), pos.x, pos.y, pos.z, true, false, false)
+  SetEntityHeading(currentLight, heading + 180)
   Wait(900)
   local id = ObjToNet(currentLight)
 
@@ -559,7 +599,7 @@ Citizen.CreateThread(function()
   local hit = true
     while true do
     	local hasFound = false
-	    Citizen.Wait(0)
+        Wait(0)
 	    if currentArray ~= nil and currentLight ~= nil then
 		    if #(GetEntityCoords(PlayerPedId()) - GetEntityCoords(currentLight)) > 100 then
 		      TriggerServerEvent('light:removeLight')
