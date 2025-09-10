@@ -1,16 +1,10 @@
--- local JobCount = {}
-
--- RegisterNetEvent('np-numbers:setjobs')
--- AddEventHandler('np-numbers:setjobs', function(jobslist)
---   JobCount = jobslist
---     if JobCount['cops'] ~= nil then
--- 	  CopsOnline = JobCount['cops']
--- 	  print('adding cop')
---     else
---       CopsOnline = 0
---     end
-    
--- end)
+--[[
+    -- Type: Client Script
+    -- Name: storeRobbery_client.lua
+    -- Use: Handles store robbery logic and security cameras
+    -- Created: 2024-10-10
+    -- By: VSSVSSN
+--]]
 
 RegisterNetEvent("np-jobmanager:playerBecameJob")
 AddEventHandler("np-jobmanager:playerBecameJob", function(job, name, notify)
@@ -26,7 +20,7 @@ end)
 
 RegisterNetEvent("Animation:typeforrob")
 AddEventHandler("Animation:typeforrob", function()
-	local ped = GetPlayerPed(-1)
+        local ped = PlayerPedId()
 	local animDict = "anim@heists@prison_heiststation@cop_reactions"
 	local animation = "cop_b_idle"
 	if IsPedArmed(ped, 7) then
@@ -47,7 +41,7 @@ end)
 function loadAnimDict(dict)
     while (not HasAnimDictLoaded(dict)) do
         RequestAnimDict(dict)
-        Citizen.Wait(5)
+        Wait(5)
     end
 end
 
@@ -357,7 +351,7 @@ AddEventHandler("security:startcamera", function(camNumber)
 	SetTimecycleModifierStrength(1.0)
 	local scaleform = RequestScaleformMovie("TRAFFIC_CAM")
 	while not HasScaleformMovieLoaded(scaleform) do
-		Citizen.Wait(0)
+            Wait(0)
 	end
 
 	local lPed = PlayerPedId()
@@ -379,7 +373,7 @@ AddEventHandler("security:startcamera", function(camNumber)
 		PushScaleformMovieFunctionParameterFloat(GetCamRot(securityCam, 2).z)
 		PopScaleformMovieFunctionVoid()
 		DrawScaleformMovieFullscreen(scaleform, 255, 255, 255, 255)
-		Citizen.Wait(1)
+            Wait(1)
 	end
 	ClearFocus()
 	ClearTimecycleModifier()
@@ -409,7 +403,7 @@ function isStoreRobbery()
 end
 
 local recentSpawn = false
-Citizen.CreateThread(function()
+CreateThread(function()
 	--SafeCheck()
     while true do
 
@@ -464,7 +458,7 @@ function SpawnPed(i)
     RequestModel(pedType)
 
     while not HasModelLoaded(pedType) do
-        Citizen.Wait(0)
+        Wait(0)
     end
 
     local IsPedNearCoords = exports["isPed"]:IsPedNearCoords(x,y,z)
@@ -481,7 +475,7 @@ function SpawnPed(i)
 	        SetPedAlertness(shopPed, 0.0)
 		end
 	end
-	Citizen.Wait(10000)
+    Wait(10000)
 	recentSpawn = false
 end
 

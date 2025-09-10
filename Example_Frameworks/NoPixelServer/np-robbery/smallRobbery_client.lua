@@ -1,3 +1,11 @@
+--[[
+    -- Type: Client Script
+    -- Name: smallRobbery_client.lua
+    -- Use: Controls small bank robbery interactions and door states
+    -- Created: 2024-10-10
+    -- By: VSSVSSN
+--]]
+
 local shouldBeOpen = false
 local shouldSquareOpen = false
 
@@ -189,7 +197,7 @@ AddEventHandler('animation:fuckyou', function()
     local lPed = PlayerPedId()
     RequestAnimDict("mini@repair")
     while not HasAnimDictLoaded("mini@repair") do
-        Citizen.Wait(0)
+        Wait(0)
     end
     while lockpicking do
 
@@ -197,7 +205,7 @@ AddEventHandler('animation:fuckyou', function()
             ClearPedSecondaryTask(lPed)
             TaskPlayAnim(lPed, "mini@repair", "fixing_a_player", 8.0, -8, -1, 16, 0, 0, 0, 0)
         end
-        Citizen.Wait(1)
+        Wait(1)
     end
     ClearPedTasks(lPed)
 end)
