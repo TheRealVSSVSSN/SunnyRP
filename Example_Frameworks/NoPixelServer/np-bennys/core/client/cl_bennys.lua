@@ -11,17 +11,17 @@ isPlyInBennys = false
 local plyFirstJoin = false
 
 
-local nearDefault = false
-local nearImport = false
-local nearTuner = false
+  local nearImport = false
+  local nearTuner = false
+  local nearDefault = false
+  local nearBridge = false
+  local nearPaleto = false
 
 local bennyLocationTuner = vector3(938.37, -970.82, 39.76)
 local bennyLocationImport = vector3(-772.92,-234.92,37.08)
 local bennyLocation = vector3(-211.55, -1324.55, 30.90)
 local bennyLocationBridge = vector3(727.74, -1088.95, 22.17)
 local billyLocationPaleto = vector3(110.8, 6626.46, 31.89)
-
-
 
 
 
@@ -53,11 +53,8 @@ local attemptingPurchase = false
 local isPurchaseSuccessful = false
 
 --#[Local Functions]#--
-local function isNear(pos1, pos2, distMustBe)
-    local diff = pos2 - pos1
-	local dist = (diff.x * diff.x) + (diff.y * diff.y)
-
-	return (dist < (distMustBe * distMustBe))
+local function isNear(pos1, pos2, dist)
+    return #(pos1 - pos2) < dist
 end
 
 local function saveVehicle()
@@ -134,7 +131,7 @@ function AttemptPurchase(type, upgradeLevel)
     attemptingPurchase = true
 
     while attemptingPurchase do
-        Citizen.Wait(1)
+        Wait(1)
     end
 
     if not isPurchaseSuccessful then
@@ -848,7 +845,7 @@ end
 
 -- #MarkedForMarker
 --#[Citizen Threads]#--
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do 
         local plyPed = PlayerPedId()
 
@@ -938,7 +935,7 @@ Citizen.CreateThread(function()
             Wait(2000)
         end
 
-        Citizen.Wait(1)
+        Wait(1)
     end
 end)
 
