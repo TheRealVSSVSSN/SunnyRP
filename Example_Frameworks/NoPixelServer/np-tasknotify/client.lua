@@ -1,19 +1,52 @@
-function openGui(clr,msg,time)
+local guiEnabled = false
+
+--[[
+    -- Type: Function
+    -- Name: openGui
+    -- Use: Sends NUI message to display task notification
+    -- Created: 2024-05-09
+    -- By: VSSVSSN
+--]]
+local function openGui(color, msg, time)
     guiEnabled = true
-    SendNUIMessage({runProgress = true, colorsent = clr, textsent = msg, fadesent = time})
+    SendNUIMessage({
+        runProgress = true,
+        colorsent = color,
+        textsent = msg,
+        fadesent = time
+    })
 end
 
-function closeGui()
+--[[
+    -- Type: Function
+    -- Name: closeGui
+    -- Use: Sends NUI message to hide task notifications
+    -- Created: 2024-05-09
+    -- By: VSSVSSN
+--]]
+local function closeGui()
     guiEnabled = false
-    SendNUIMessage({closeProgress = true})
+    SendNUIMessage({ closeProgress = true })
 end
 
-RegisterNetEvent("tasknotify:guiupdate")
-AddEventHandler("tasknotify:guiupdate", function(color,message,time)
-    openGui(color,message,time)
+--[[
+    -- Type: Event
+    -- Name: tasknotify:guiupdate
+    -- Use: Triggered to display a new notification
+    -- Created: 2024-05-09
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent('tasknotify:guiupdate', function(color, message, time)
+    openGui(color, message, time)
 end)
 
-RegisterNetEvent("tasknotify:guiclose")
-AddEventHandler("tasknotify:guiclose", function()
+--[[
+    -- Type: Event
+    -- Name: tasknotify:guiclose
+    -- Use: Triggered to clear all notifications
+    -- Created: 2024-05-09
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent('tasknotify:guiclose', function()
     closeGui()
 end)
