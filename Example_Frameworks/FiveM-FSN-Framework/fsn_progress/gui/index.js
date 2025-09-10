@@ -1,48 +1,49 @@
-function updateEllipsis() {
-	var elem = $('#fsn_ellipsis')
-	if (!elem.text()) {
-		elem.text('.');
-	}
-	setTimeout(function() {
-		if (elem.text() == '.') {
-			elem.text('..');
-		}
-	}, 1000)
-	setTimeout(function() {
-		if (elem.text() == '..') {
-			elem.text('...')
-		}
-	}, 2000)
-	setTimeout(function() {
-		if (elem.text() == '...') {
-			elem.remove()
-			$('#fsn_progressbar_title').append('<span id="fsn_ellipsis"></span>')
-		}
-	}, 3000)
-	setTimeout(updateEllipsis, 10)
-}
-setTimeout(updateEllipsis, 500)
+let progressInterval = null;
+let ellipsisInterval = null;
 
-function updateProgress(updaate) {
-	var newup = $('#progress').width() + updaate
-	console.log('setting width to '+newup)
-	$('#progress').css('width', newup+'px')
-	setTimeout(function(){
-		updateProgress(updaate)
-	}, 1000)
-}
+window.addEventListener('message', (event) => {
+    const data = event.data;
+    if (data.type !== 'progressBar') return;
 
-$(function() {
-  window.addEventListener('message', function(event) {
-	if (event.data.type == 'progressBar') {
-		document.body.style.display = event.data.enable ? "block" : "none";
-		var timeout = event.data.timeout
-		var title = event.data.title
-		$('#fsn_title').text(title);
-		var update = timeout / 100
-		setTimeout(function() {
-			updateProgress(update)
-		}, 1000)
-	}
-  });
+    const body = document.body;
+    const bar = document.getElementById('progress');
+    const title = document.getElementById('fsn_title');
+    const ellipsis = document.getElementById('fsn_ellipsis');
+
+    if (data.display) {
+        body.style.display = 'block';
+        bar.style.width = '0%';
+        bar.style.backgroundColor = `rgb(${data.color.r}, ${data.color.g}, ${data.color.b})`;
+        title.textContent = data.title;
+        ellipsis.textContent = '';
+
+        let elapsed = 0;
+        const duration = data.duration;
+
+        if (progressInterval) clearInterval(progressInterval);
+        progressInterval = setInterval(() => {
+            elapsed += 50;
+            const pct = Math.min((elapsed / duration) * 100, 100);
+            bar.style.width = pct + '%';
+            if (pct >= 100) {
+                clearInterval(progressInterval);
+                clearInterval(ellipsisInterval);
+                body.style.display = 'none';
+                bar.style.width = '0%';
+                ellipsis.textContent = '';
+            }
+        }, 50);
+
+        if (ellipsisInterval) clearInterval(ellipsisInterval);
+        ellipsisInterval = setInterval(() => {
+            ellipsis.textContent = ellipsis.textContent.length >= 3 ? '' : ellipsis.textContent + '.';
+        }, 500);
+    } else {
+        if (progressInterval) clearInterval(progressInterval);
+        if (ellipsisInterval) clearInterval(ellipsisInterval);
+        body.style.display = 'none';
+        bar.style.width = '0%';
+        ellipsis.textContent = '';
+    }
 });
+
