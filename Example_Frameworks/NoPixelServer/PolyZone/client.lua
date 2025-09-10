@@ -4,6 +4,13 @@ local defaultColorGrid = {255, 255, 255}
 
 PolyZone = {}
 
+-- Cache frequently used natives for performance
+local GetEntityCoords = GetEntityCoords
+local PlayerPedId = PlayerPedId
+local GetPedBoneCoords = GetPedBoneCoords
+
+local HEAD_BONE = 0x796E
+
 -- Utility functions
 local abs = math.abs
 local function _isLeft(p0, p1, p2)
@@ -30,7 +37,7 @@ local function _wn_inner_loop(p0, p1, p2, wn)
   return wn
 end
 
-function addBlip(pos)
+local function addBlip(pos)
   local blip = AddBlipForCoord(pos.x, pos.y, 0.0)
   SetBlipColour(blip, 7)
   SetBlipDisplay(blip, 8)
@@ -39,20 +46,28 @@ function addBlip(pos)
   return blip
 end
 
-function clearTbl(tbl)
-  -- Only works with contiguous (array-like) tables
-  if tbl == nil then return end
-  for i=1, #tbl do
+--[[
+    -- Type: Function
+    -- Name: clearTable
+    -- Use: Removes all array-style entries from a table
+--]]
+function PolyZone.clearTable(tbl)
+  if not tbl then return end
+  for i = 1, #tbl do
     tbl[i] = nil
   end
   return tbl
 end
 
-function copyTbl(tbl)
-  -- Only a shallow copy, and only works with contiguous (array-like) tables
-  if tbl == nil then return end
+--[[
+    -- Type: Function
+    -- Name: copyTable
+    -- Use: Creates a shallow copy of an array-style table
+--]]
+function PolyZone.copyTable(tbl)
+  if not tbl then return end
   local ret = {}
-  for i=1, #tbl do
+  for i = 1, #tbl do
     ret[i] = tbl[i]
   end
   return ret
@@ -340,12 +355,12 @@ end
 
 -- Calculate for each grid cell whether it is entirely inside the polygon, and store if true
 local function _createGrid(poly, options)
-  Citizen.CreateThread(function()
+  CreateThread(function()
     -- Calculate all grid cells that are entirely inside the polygon
     local isInside = {}
     local gridCellArea = poly.gridCellWidth * poly.gridCellHeight
     for y=1, poly.gridDivisions do
-      Citizen.Wait(0)
+      Wait(0)
       isInside[y] = {}
       for x=1, poly.gridDivisions do
         if _isGridCellInsidePoly(x-1, y-1, poly) then
@@ -364,7 +379,7 @@ local function _createGrid(poly, options)
       print("[PolyZone] Debug: Grid Coverage at " .. coverage .. "% with " .. poly.gridDivisions
       .. " divisions. Optimal coverage for memory usage and startup time is 80-90%")
 
-      Citizen.CreateThread(function()
+      CreateThread(function()
         poly.lines = _calculateLinesForDrawingGrid(poly)
         -- A lot of memory is used by this pre-calc. Force a gc collect after to clear it out
         collectgarbage("collect")
@@ -412,13 +427,13 @@ local function _initDebug(poly, options)
     return
   end
   
-  Citizen.CreateThread(function()
+  CreateThread(function()
     while not poly.destroyed do
       poly:draw()
       if options.debugGrid and poly.lines then
         _drawGrid(poly)
       end
-      Citizen.Wait(0)
+      Wait(0)
     end
   end)
 end
@@ -485,9 +500,13 @@ function PolyZone.getPlayerPosition()
   return GetEntityCoords(PlayerPedId())
 end
 
-HeadBone = 0x796e;
+--[[
+    -- Type: Function
+    -- Name: getPlayerHeadPosition
+    -- Use: Retrieves the world coordinates of the player's head bone
+--]]
 function PolyZone.getPlayerHeadPosition()
-  return GetPedBoneCoords(PlayerPedId(), HeadBone);
+  return GetPedBoneCoords(PlayerPedId(), HEAD_BONE)
 end
 
 function PolyZone.ensureMetatable(zone)
@@ -509,7 +528,7 @@ function PolyZone:onPointInOut(getPointCb, onPointInOutCb, waitInMS)
   local _waitInMS = 500
   if waitInMS ~= nil then _waitInMS = waitInMS end
 
-  Citizen.CreateThread(function()
+  CreateThread(function()
     local isInside = nil
     while not self.destroyed do
       if not self.paused then
@@ -520,7 +539,7 @@ function PolyZone:onPointInOut(getPointCb, onPointInOutCb, waitInMS)
           isInside = newIsInside
         end
       end
-      Citizen.Wait(_waitInMS)
+      Wait(_waitInMS)
     end
   end)
 end
