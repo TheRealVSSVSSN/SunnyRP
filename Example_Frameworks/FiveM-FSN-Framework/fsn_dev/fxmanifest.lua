@@ -2,8 +2,10 @@
 --  BEGIN:         FiveM Manifest
 --  -----------------------------
 
-fx_version  'cerulean'
-games       { 'gta5' }
+fx_version 'cerulean'
+games { 'gta5' }
+
+lua54 'yes'
 
 author      'Crutchie'
 description 'FSN Developer'
@@ -24,10 +26,6 @@ client_scripts {
 
 }
 
-exports {
-
-}
-
 --  -----------------------------
 --  END:   Client Scripts/Exports
 --  -----------------------------
@@ -38,15 +36,10 @@ exports {
 
 server_scripts {
 
-    '@mysql-async/lib/MySQL.lua',
+    '@oxmysql/lib/MySQL.lua',
 
     'config.lua',
     'server/server.lua',
-
-}
-
-server_exports {
-
 
 }
 
