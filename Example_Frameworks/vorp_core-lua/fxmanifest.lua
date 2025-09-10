@@ -15,10 +15,7 @@ shared_scripts {
 }
 
 client_scripts {
-    'client/ref/*.lua',
-    'client/exports/*.lua',
-    'client/coreactions.lua',
-    'client/*.lua',
+    'client/*.lua'
 }
 
 server_scripts {
@@ -26,8 +23,8 @@ server_scripts {
     '@oxmysql/lib/MySQL.lua',
     'server/class/*.lua',
     'config/commands.lua',
-    'server/*lua',
-    'server/services/dbupdater/*.lua',
+    'server/*.lua',
+    'server/services/dbupdater/*.lua'
 }
 
 files {

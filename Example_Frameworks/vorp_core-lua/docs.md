@@ -6,6 +6,7 @@ Provides the core utilities for RedM servers built on VORP. This resource handle
 ## Table of Contents
 - [client/spawnplayer.lua](#clientspawnplayerlua)
 - [fxmanifest.lua](#fxmanifestlua)
+- [server/init.lua](#serverinitlua)
 - [version](#version)
 
 ## client/spawnplayer.lua
@@ -14,7 +15,11 @@ Provides the core utilities for RedM servers built on VORP. This resource handle
 - Adds parentheses around mount and vehicle checks to ensure proper logic when evaluating active PVP state.
 
 ## fxmanifest.lua
-- Bumps resource version to `3.1.1` to reflect latest fixes and improvements.
+- Removes references to non-existent script folders and corrects the server script glob, ensuring all runtime files load properly.
+
+## server/init.lua
+- Detects the host operating system at runtime to surface helpful Linux-specific messaging.
+- Localizes internal state variables and helper functions to reduce global namespace pollution.
 
 ## version
 - Notes new entry for `3.1.1` describing PVP modernization and loop optimisation.
