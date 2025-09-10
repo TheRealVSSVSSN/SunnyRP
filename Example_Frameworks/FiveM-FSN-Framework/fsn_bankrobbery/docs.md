@@ -56,6 +56,7 @@ Authoritative bank vault management.
 - A second‑based timer enforces a 30‑minute global cooldown and broadcasts `fsn_bankrobbery:timer` to clients.
 - Handles `fsn_bankrobbery:vault:open/close` requests, relaying door state changes to all clients.
 - `fsn_bankrobbery:payout` deducts a random share of the bank’s pool, grants dirty money, notifies the player, and adds stress.
+- Trusts clients for eligibility; no server-side validation of required items or police presence (Inferred Med).
 
 ### sv_frontdesks.lua
 Server side for front‑desk hacks.
@@ -105,6 +106,7 @@ Server side for front‑desk hacks.
 | `fsn_bank:change:bankAdd` | Client | Server → Client | amount | Deposits funds after hack. |
 | `mythic_notify:client:SendAlert` | Client | Server → Client | `{type,text}` | Displays Mythic notifications. |
 | `fsn_phone:recieveMessage` | Client | Client → Client | message table | Sends phone message about trucks. |
+| `chatMessage` | Client | Client → External | prefix, color, text | Shows drill failure chat lines. |
 | `mhacking:show/start/hide` | Client | Client ↔ External | varies | Handles hacking UI lifecycle. |
 | `DoLongHudText` | Client | External → Client | message, type | Displays safe‑cracking HUD text. |
 
@@ -133,6 +135,7 @@ None.
 - `safecracking:loop` receives an argument that is unused (Inferred High).
 - `fsn_bankrobbery:desks:doorUnlock` is registered server‑side but has no in‑resource caller (Inferred Med).
 - `fsn_bankrobbery:LostMC:spawn` contains only commented code; purpose undetermined (Inferred Low).
+- `fsn_needs:stress:add` is triggered server-side without specifying a target, so stress may not apply (Inferred High).
 - `trucks.lua` is not referenced by `fxmanifest.lua`, so the armored truck feature appears disabled (Inferred High).
 
 DOCS COMPLETE
