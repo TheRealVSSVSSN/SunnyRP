@@ -26,7 +26,7 @@ local hookIdx = 1
 
 exports('registerMessageHook', function(hook)
     local resource = GetInvokingResource()
-    hooks[hookIdx + 1] = {
+    hooks[hookIdx] = {
         fn = hook,
         resource = resource
     }
