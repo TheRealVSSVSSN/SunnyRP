@@ -1,149 +1,119 @@
-var open = false;
-$('#carmenu').fadeOut(0);
+let open = false;
+const carmenu = document.getElementById('carmenu');
+carmenu.style.display = 'none';
 
-function checkElement(settings, element, settingName) {
-    if (settings[settingName] == true) {
-        $(element).parent().addClass('active');
-    }
-    else {
-        $(element).parent().removeClass('active');
-    }
-}
-
-function checkSeat(settings, element, settingName) {
-    var parent = $(element).parent();
-    parent.removeClass('disabled');
-    parent.removeClass('active');
-    if (settings[settingName] === parseInt($(element).attr('value'))) {
-        parent.addClass('active');
-    }
-    else if (settings[settingName] === true) {
-        return;
-    }
-    else {
-        parent.addClass('active');
-        parent.addClass('disabled');
+function checkElement(settings, element, key) {
+    const parent = element.parentElement;
+    if (settings[key]) {
+        parent.classList.add('active');
+    } else {
+        parent.classList.remove('active');
     }
 }
 
-$(function () {
-    window.addEventListener('message', function (event) {
-        if (event.data.type == "enablecarmenu") {
-            open = event.data.enable;
-            if (open) {
-                document.body.style.display = "block";
-                setTimeout(function(){
-                    $('#carmenu').fadeIn(500);
-                }, 1);
-            }
-            else {
-                $('#carmenu').fadeOut(500);
-                setTimeout(function(){
-                    document.body.style.display = "none";
-                }, 500);
-            }
-        }
-        if (event.data.type == "refreshcarmenu") {
-            settings = event.data.settings
-            $('.seat').each(function(i, v) {
-                var val = parseInt($(v).attr('value'));
-                if (val == -1)
-                    checkSeat(settings, $(v), 'seat1');
-                if (val == 0)
-                    checkSeat(settings, $(v), 'seat2');
-                if (val == 1)
-                    checkSeat(settings, $(v), 'seat3');
-                if (val == 2)
-                    checkSeat(settings, $(v), 'seat4');
-            });
-            $('.door').each(function(i, v) {
-                if (!settings.doorAccess) {
-                    $(v).parent().addClass('disabled');
-                }
-                else {
-                    $(v).parent().removeClass('disabled');
-                }
-                var val = parseInt($(v).attr('value'));
-                if (val == 0)
-                    checkElement(settings, $(v), 'door0');
-                if (val == 1)
-                    checkElement(settings, $(v), 'door1');
-                if (val == 2)
-                    checkElement(settings, $(v), 'door2');
-                if (val == 3)
-                    checkElement(settings, $(v), 'door3');
-                if (val == 4)
-                    checkElement(settings, $(v), 'hood');
-                if (val == 5)
-                    checkElement(settings, $(v), 'trunk');
-            });
-            $('.window').each(function(i, v) {
-                var val = parseInt($(v).attr('value'));
-                if (val == 0)
-                    checkElement(settings, $(v), 'windowr1');
-                if (val == 1)
-                    checkElement(settings, $(v), 'windowl1');
-                if (val == 2)
-                    checkElement(settings, $(v), 'windowr2');
-                if (val == 3)
-                    checkElement(settings, $(v), 'windowl2');
-            });
+function checkSeat(settings, element, key) {
+    const parent = element.parentElement;
+    parent.classList.remove('disabled', 'active');
+    if (settings[key] === parseInt(element.getAttribute('value'), 10)) {
+        parent.classList.add('active');
+    } else if (settings[key] !== true) {
+        parent.classList.add('active', 'disabled');
+    }
+}
 
-
-            // setup engine
-            // $('.engine').parent().addClass('disabled');
-            $('.engine').parent().removeClass('active');
-
-            if (settings['engine'] === true) {
-                $('.engine').parent().addClass('active');
-            }
-            // if (settings['engineAccess'] === true) {
-            //     $('.engine').parent().removeClass('disabled');
-            // }
-            // end engine
-        }
-    });
-
-    $('.door').on('click', function() {
-        if ($(this).parent().hasClass('disabled')) return;
-        var doorIndex = $(this).attr('value');
-        $.post('http://raid_carmenu/openDoor', JSON.stringify({
-                doorIndex: doorIndex
-            })
-        );
-    });
-
-    $('.seat').on('click', function() {
-        var seatIndex = $(this).attr('value');
-        $.post('http://raid_carmenu/switchSeat', JSON.stringify({
-                seatIndex: seatIndex
-            })
-        );
-    });
-
-    $('.window').on('click', function() {
-        var windowIndex = $(this).attr('value');
-        $.post('http://raid_carmenu/togglewindow', JSON.stringify({
-                windowIndex: windowIndex
-            })
-        );
-    });
-
-    $('.engine').on('click', function() {
-        if ($(this).parent().hasClass('disabled')) return;
-        $.post('http://raid_carmenu/toggleengine', JSON.stringify({}));
-    });
-
-    document.onkeyup = function (data) {
+window.addEventListener('message', (event) => {
+    if (event.data.type === 'enablecarmenu') {
+        open = event.data.enable;
         if (open) {
-            // data.getModifierState("Shift") &&
-            if ((
-                data.which == 90) ||
-                data.which == 27
-            ) {
-                // Z or Esc
-                $.post('http://raid_carmenu/escape', JSON.stringify({}));
-            }
+            document.body.style.display = 'block';
+            carmenu.style.display = 'block';
+            setTimeout(() => {
+                carmenu.style.opacity = '1';
+            }, 1);
+        } else {
+            carmenu.style.opacity = '0';
+            setTimeout(() => {
+                carmenu.style.display = 'none';
+                document.body.style.display = 'none';
+            }, 500);
         }
-    };
+    }
+
+    if (event.data.type === 'refreshcarmenu') {
+        const settings = event.data.settings;
+        document.querySelectorAll('.seat').forEach((el) => {
+            const val = parseInt(el.getAttribute('value'), 10);
+            if (val === -1) checkSeat(settings, el, 'seat1');
+            if (val === 0) checkSeat(settings, el, 'seat2');
+            if (val === 1) checkSeat(settings, el, 'seat3');
+            if (val === 2) checkSeat(settings, el, 'seat4');
+        });
+
+        document.querySelectorAll('.door').forEach((el) => {
+            const parent = el.parentElement;
+            if (!settings.doorAccess) {
+                parent.classList.add('disabled');
+            } else {
+                parent.classList.remove('disabled');
+            }
+            const val = parseInt(el.getAttribute('value'), 10);
+            if (val === 0) checkElement(settings, el, 'door0');
+            if (val === 1) checkElement(settings, el, 'door1');
+            if (val === 2) checkElement(settings, el, 'door2');
+            if (val === 3) checkElement(settings, el, 'door3');
+            if (val === 4) checkElement(settings, el, 'hood');
+            if (val === 5) checkElement(settings, el, 'trunk');
+        });
+
+        document.querySelectorAll('.window').forEach((el) => {
+            const val = parseInt(el.getAttribute('value'), 10);
+            if (val === 0) checkElement(settings, el, 'windowr1');
+            if (val === 1) checkElement(settings, el, 'windowl1');
+            if (val === 2) checkElement(settings, el, 'windowr2');
+            if (val === 3) checkElement(settings, el, 'windowl2');
+        });
+
+        const engineParent = document.querySelector('.engine').parentElement;
+        engineParent.classList.toggle('active', settings.engine === true);
+    }
+});
+
+function post(url, data) {
+    fetch(`https://raid_carmenu/${url}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+        body: JSON.stringify(data || {})
+    });
+}
+
+document.querySelectorAll('.door').forEach((el) => {
+    el.addEventListener('click', () => {
+        if (el.parentElement.classList.contains('disabled')) return;
+        post('openDoor', { doorIndex: el.getAttribute('value') });
+    });
+});
+
+document.querySelectorAll('.seat').forEach((el) => {
+    el.addEventListener('click', () => {
+        post('switchSeat', { seatIndex: el.getAttribute('value') });
+    });
+});
+
+document.querySelectorAll('.window').forEach((el) => {
+    el.addEventListener('click', () => {
+        post('togglewindow', { windowIndex: el.getAttribute('value') });
+    });
+});
+
+document.querySelectorAll('.engine').forEach((el) => {
+    el.addEventListener('click', () => {
+        if (el.parentElement.classList.contains('disabled')) return;
+        post('toggleengine');
+    });
+});
+
+document.addEventListener('keyup', (data) => {
+    if (open && (data.which === 90 || data.which === 27)) {
+        post('escape');
+    }
 });
