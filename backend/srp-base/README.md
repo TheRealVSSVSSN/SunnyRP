@@ -24,3 +24,13 @@ Internal RPC:
 - `POST /internal/srp/rpc`
 
 WebSocket namespace `/ws/base` requires `sid` and `accountId` query params.
+
+## Testing
+
+```
+cd backend/srp-base
+npm install
+npm test
+```
+
+Sample tests cover the in-memory repository and selected middleware (auth and idempotency). Add new tests under `tests/` with the `*.test.js` suffix.
