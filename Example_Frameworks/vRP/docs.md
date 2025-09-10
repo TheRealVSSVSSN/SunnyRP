@@ -69,7 +69,7 @@ Shared logic used by both client and server, including data structures and helpe
 Defines the server-side User class managing player state, identifiers, and data persistence.
 
 #### base.lua
-Server bootstrap registering spawn/death events and delegating to vRP handlers.
+Server bootstrap registering spawn/death events and delegating to vRP handlers. Event handlers now cache the player `source` locally and pass along disconnect reasons to ensure reliable processing.
 
 ### Client Scripts
 All client scripts use `CreateThread`, `Wait`, and `PlayerPedId()` to align with current FiveM best practices.
@@ -260,7 +260,7 @@ Shared utilities used by both client and server.
 | playerSpawned | client event | client/base.lua forwards spawn to server. |
 | vRPcli:playerSpawned | server event | base.lua calls `onPlayerSpawned`. |
 | vRPcli:playerDied | server event | base.lua calls `onPlayerDied`. |
-| playerDropped | server event | base.lua cleans up user data. |
+| playerDropped | server event | base.lua cleans up user data and forwards the disconnect reason. |
 | playerConnecting | server raw event | login.lua performs authentication and whitelist checks. |
 | vRP:profile | network event | utils.lua registers; profiler.lua triggers to start profiling. |
 | vRP:profile:res | network event | profiler.lua handles profiling results. |
@@ -268,7 +268,7 @@ Shared utilities used by both client and server.
 | playerDeath | local event | Money, PlayerState, Survival, Phone, Inventory, Home modules respond. |
 | characterLoad | local event | Aptitude, Garage, Group, Home, Identity, Inventory, Money, Phone, PlayerState, Police, Survival modules load character data. |
 | characterUnload | local event | Garage, GUI, Home, PlayerState modules save or cleanup. |
-| playerLeave | local event | GUI, Home, Map, Police modules handle disconnect. |
+| playerLeave | local event | GUI, Home, Map, Police modules handle disconnect; now receives an optional reason. |
 | playerMoneyUpdate | local event | Money module notifies of balance changes. |
 | playerStateLoaded | local event | Garage prepares owned vehicles. |
 | playerMissionStart/Step/Stop | local event | Mission module tracks mission progress. |
