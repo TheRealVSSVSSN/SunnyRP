@@ -1,25 +1,18 @@
-fx_version 'bodacious'
-games { 'gta5' }
+-- luacheck: globals fx_version game author description version shared_scripts client_scripts
+fx_version 'cerulean'
+game 'gta5'
 
 author 'iTzCrutchie'
 description 'Activities for the server'
-version '0.0.1'
+version '0.1.0'
 
---[[/	:FSN:	\]]--
-client_scripts { 
-    '@fsn_main/cl_utils.lua',
+shared_scripts {
     '@fsn_main/server_settings/sh_settings.lua'
 }
-server_scripts { 
-    '@fsn_main/sv_utils.lua',
-    '@fsn_main/server_settings/sh_settings.lua',
-    '@mysql-async/lib/MySQL.lua'
-}
---[[/	:FSN:	\]]--
 
 client_scripts {
-
-    -- Yoga
+    '@fsn_main/cl_utils.lua',
     'yoga/client.lua',
-
+    'fishing/client.lua',
+    'hunting/client.lua'
 }
