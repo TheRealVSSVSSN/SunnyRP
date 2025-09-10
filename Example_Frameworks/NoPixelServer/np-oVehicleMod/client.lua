@@ -32,7 +32,6 @@ local offroadVehicles = {
     "trophytruck",
     "sanchez",
     "sanchez2",
-    "blazer",
     "enduro",
     "pol9",
     "police3", -- police SUV
@@ -72,6 +71,33 @@ local nosCar = nil
 local nosTimeInSeconds = 10
 
 DecorRegister("vehicleHarnessDur", 1) -- who knows if this works :)
+
+--[[
+    -- Type: Function
+    -- Name: refreshPlayerContext
+    -- Use: Updates cached player and vehicle references
+    -- Created: 2023-10-11
+    -- By: VSSVSSN
+--]]
+local function refreshPlayerContext()
+    playerPed = PlayerPedId()
+    if IsPedInAnyVehicle(playerPed, false) then
+        currentVehicle = GetVehiclePedIsIn(playerPed, false)
+        driverPed = GetPedInVehicleSeat(currentVehicle, -1)
+        veloc = GetEntityVelocity(currentVehicle)
+    else
+        currentVehicle = nil
+        driverPed = nil
+        veloc = vector3(0.0, 0.0, 0.0)
+    end
+end
+
+CreateThread(function()
+    while true do
+        refreshPlayerContext()
+        Wait(500)
+    end
+end)
 
 local NosVehicles = {}
 local nosMods = {}
@@ -156,7 +182,7 @@ function ejectionLUL()
     local veh = GetVehiclePedIsIn(playerPed,false)
     local coords = GetOffsetFromEntityInWorldCoords(veh, 1.0, 0.0, 1.0)
     SetEntityCoords(playerPed,coords)
-    Citizen.Wait(1)
+    Wait(1)
     SetPedToRagdoll(playerPed, 5511, 5511, 0, 0, 0, 0)
     SetEntityVelocity(playerPed, veloc.x*4,veloc.y*4,veloc.z*4)
     local ejectspeed = math.ceil(GetEntitySpeed(playerPed) * 8)
@@ -175,7 +201,7 @@ function ejectionLUL()
 end
 
 function preventVehicleExit()
-    Citizen.CreateThread(function()
+    CreateThread(function()
         local options = {1000,2000,3000}
         disableControl = true
         disableTurning()
@@ -194,10 +220,10 @@ function disableTurning()
     local tempVeh = currentVehicle
     if carsEnabled["" .. tempVeh .. ""] ~= nil then
         local defaultHandling = carsEnabled["" .. tempVeh .. ""]["fSteeringLock"]
-        Citizen.CreateThread(function()
+        CreateThread(function()
             while disableControl do
                 SetVehicleHandlingFloat(tempVeh, 'CHandlingData', 'fSteeringLock', defaultHandling / 4)
-                Citizen.Wait(10)
+                Wait(10)
                 -- DisableControlAction(0, 59, 1)
             end
             SetVehicleHandlingFloat(tempVeh, 'CHandlingData', 'fSteeringLock', defaultHandling)
@@ -222,7 +248,7 @@ end
 function nosInit()
     nosCar = GetVehiclePedIsIn(playerPed, false)
     if nosCar ~= 0 and nosCar ~= false and nosCar ~= nil then
-        Citizen.CreateThread(function()
+        CreateThread(function()
             startNos()
             sendServerEventForPassengers("NetworkNos")
 
@@ -263,18 +289,18 @@ function nosParticles()
     local particleCar = GetVehiclePedIsIn(playerPed, false)
     RequestNamedPtfxAsset(particleDict)
     while not HasNamedPtfxAssetLoaded(particleDict) do
-        Citizen.Wait(0)
+        Wait(0)
     end
     UseParticleFxAssetNextCall(particleDict)
 
     local particles = {}
 
     function removeParticles()
-        Citizen.CreateThread(function()
+        CreateThread(function()
             for i,v in pairs(particles) do
                 RemoveParticleFx(v)
             end
-            Citizen.Wait(2000)
+            Wait(2000)
             for i,v in pairs(particles) do
                 RemoveParticleFx(v)
                 particles[i] = nil
@@ -342,7 +368,7 @@ function nosParticles()
             end
         end
 
-        Citizen.Wait(1000)
+        Wait(1000)
 
         for i,v in pairs(exhausts) do
             local bone = GetEntityBoneIndexByName(particleCar, v)
@@ -355,7 +381,7 @@ function nosParticles()
     end
 
     -- while count > 0 and disablenos do
-    --     Citizen.Wait(1)
+    --     Wait(1)
     --     if particleCar ~= 0 and particleCar ~= false and particleCar ~= nil then
     --         if GetEntitySpeed(particleCar) > 113 then -- 250mph
     --             count = 0
@@ -368,7 +394,7 @@ function nosParticles()
 
     -- removeParticles()
     -- endNos()
-    Citizen.SetTimeout(1000 * nosTimeInSeconds, function()
+    SetTimeout(1000 * nosTimeInSeconds, function()
         removeParticles()
         endNos()
     end)
@@ -382,15 +408,15 @@ function startNos(veh)
         SetVehicleBoostActive(veh, 1)
     end
 
-    Citizen.CreateThread(function()
+    CreateThread(function()
         local active = true
 
-        Citizen.SetTimeout(1000 * math.ceil(nosTimeInSeconds / 3), function()
+        SetTimeout(1000 * math.ceil(nosTimeInSeconds / 3), function()
             active = false
         end)
 
         while active do
-            Citizen.Wait(0)
+            Wait(0)
             -- StartScreenEffect("RaceTurbo", 30.0, 0)
             StartScreenEffect("ExplosionJosh3", 30.0, 0)
         end
@@ -652,11 +678,11 @@ AddEventHandler("client:illegal:upgrades",function(Extractors,Filter,Suspension,
 end)
 
 
-Citizen.CreateThread(function()
+CreateThread(function()
     local firstDrop = GetEntityVelocity(PlayerPedId())
     local lastentSpeed = 0
     while true do
-        Citizen.Wait(1)
+        Wait(1)
 
         if (IsPedInAnyVehicle(PlayerPedId(), false)) then
 
@@ -816,7 +842,7 @@ Citizen.CreateThread(function()
                 elseif airtime > 0 then
 
                     if airtime > 110 then
-                        Citizen.Wait(333)
+                        Wait(333)
                         local landingCoords = GetEntityCoords(veh)
                         local landingfactor = landingCoords.z - airtimeCoords.z
                         local momentum = GetEntityVelocity(veh)
@@ -923,15 +949,15 @@ Citizen.CreateThread(function()
                 seatbelt = false
                 TriggerEvent("seatbelt",false)
             end
-            Citizen.Wait(1500)
+            Wait(1500)
         end
     end
 end)
 
 -- CurrentVehicle and DriverPed Updater --
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
-        Citizen.Wait(1000)
+        Wait(1000)
         playerPed = PlayerPedId()
         local tempVehicle = GetVehiclePedIsIn(playerPed, false)
         local tempDriver = GetPedInVehicleSeat(tempVehicle, -1)
@@ -981,9 +1007,9 @@ Citizen.CreateThread(function()
     end
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
-        Citizen.Wait(2)
+        Wait(2)
         if currentVehicle ~= nil and currentVehicle ~= false and currentVehicle ~= 0 then
             if harness then
                 DisableControlAction(1, 75, true)
@@ -993,17 +1019,17 @@ Citizen.CreateThread(function()
             elseif IsControlJustPressed(1, 75) then
                 endNos()
             else
-                Citizen.Wait(1000)
+                Wait(1000)
             end
         else
-            Citizen.Wait(5000)
+            Wait(5000)
         end
     end
 end)
 
 -- Collision Thread --
-Citizen.CreateThread(function()
-    Citizen.Wait(1000)
+CreateThread(function()
+    Wait(1000)
     local lastCurrentVehicleBodyHealth = 0
     local lastCurrentVehicleSpeed = 0
 
@@ -1017,7 +1043,7 @@ Citizen.CreateThread(function()
     end
 
     while true do
-        Citizen.Wait(1)
+        Wait(1)
         if currentVehicle ~= nil and currentVehicle ~= false and currentVehicle ~= 0 then
             SetPedHelmet(playerPed, false)
             if driverPed == playerPed then
@@ -1034,10 +1060,10 @@ Citizen.CreateThread(function()
                     veloc = GetEntityVelocity(currentVehicle)
                     if currentEngineHealth > 10.0 and (currentEngineHealth < 175.0 or lastCurrentVehicleBodyHealth < 50.0) then
                         carCrash()
-                        Citizen.Wait(1000)
+                        Wait(1000)
                     end
                 else
-                    Citizen.Wait(100)
+                    Wait(100)
                     local currentVehicleBodyHealth = GetVehicleBodyHealth(currentVehicle)
                     local currentVehicleSpeed = GetEntitySpeed(currentVehicle)
                     if currentEngineHealth > 0.0 and lastCurrentVehicleBodyHealth - currentVehicleBodyHealth > 15 then
@@ -1062,13 +1088,13 @@ Citizen.CreateThread(function()
                                     eject(33.0, lastCurrentVehicleSpeed, false)
                                 end
                                 -- Buffer after crash
-                                Citizen.Wait(1000)
+                                Wait(1000)
                                 lastCurrentVehicleSpeed = 0.0
                                 lastCurrentVehicleBodyHealth = currentVehicleBodyHealth
                             else
                                 -- IsBike
                                 carCrash()
-                                Citizen.Wait(1000)
+                                Wait(1000)
                                 lastCurrentVehicleSpeed = 0.0
                                 lastCurrentVehicleBodyHealth = currentVehicleBodyHealth
                             end
@@ -1076,7 +1102,7 @@ Citizen.CreateThread(function()
                     else
                         if currentEngineHealth > 10.0 and (currentEngineHealth < 195.0 or currentVehicleBodyHealth < 50.0) then
                             carCrash()
-                            Citizen.Wait(1000)
+                            Wait(1000)
                         end
                         lastCurrentVehicleSpeed = currentVehicleSpeed
                         lastCurrentVehicleBodyHealth = currentVehicleBodyHealth
@@ -1084,23 +1110,23 @@ Citizen.CreateThread(function()
                 end
             else
                 -- Not driver
-                Citizen.Wait(1000)
+                Wait(1000)
             end
         else
             -- Not in veh
             currentVehicleSpeed = 0
             lastCurrentVehicleSpeed = 0
             lastCurrentVehicleBodyHealth = 0
-            Citizen.Wait(4000)
+            Wait(4000)
         end
     end
 end)
 
 -- NOS Thread --
-Citizen.CreateThread(function()
+CreateThread(function()
     -- Handle NOS
     while true do
-        Citizen.Wait(200)
+        Wait(200)
         if currentVehicle ~= nil and currentVehicle ~= false and currentVehicle ~= 0 and driverPed == playerPed then
             if NosVehicles[currentVehicle] == nil then
                 NosVehicles[currentVehicle] = 0
@@ -1121,7 +1147,7 @@ Citizen.CreateThread(function()
                 end
             end
         else
-            Citizen.Wait(5000)
+            Wait(5000)
         end
     end
 end)
@@ -1143,7 +1169,7 @@ function DrawText3DTest(x,y,z, text)
     DrawRect(_x,_y+0.0125, 0.015+ factor, 0.03, 41, 11, 41, 68)
 
 end
--- Citizen.CreateThread(function()
+-- CreateThread(function()
 --     while true do
 --         Wait(1)
 
