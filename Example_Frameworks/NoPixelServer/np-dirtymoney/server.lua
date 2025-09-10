@@ -1,43 +1,68 @@
-RegisterServerEvent("np-dirtymoney:attemptDirtyMoneyDrops")
-AddEventHandler("np-dirtymoney:attemptDirtyMoneyDrops", function()
-	local src = source
-	local user = exports["np-base"]:getModule("Player"):GetUser(src)
-	local DirtyMoney = user:getDirtyMoney()
+--[[
+    -- Type: Server Event
+    -- Name: np-dirtymoney:attemptDirtyMoneyDrops
+    -- Use: Handles a player's attempt to drop dirty money by charging a fee and starting the dropoff process.
+    -- Created: 2024-06-08
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent("np-dirtymoney:attemptDirtyMoneyDrops", function()
+    local src = source
+    local user = exports["np-base"]:getModule("Player"):GetUser(src)
+    if not user then return end
 
-	if DirtyMoney > 500 then
-		TriggerClientEvent("np-dirtymoney:attemptDirtyMoneyDrops",source)
-		DirtyMoney = DirtyMoney - 500
-		user:alterDirtyMoney(DirtyMoney)
-
-		TriggerClientEvent('UPV',src,500)
-	else
-		TriggerClientEvent("DoLongHudText",source,"You need $500 in Marked Bills.",2)
-	end
-
+    local dirtyMoney = user:getDirtyMoney()
+    if dirtyMoney >= 500 then
+        TriggerClientEvent("np-dirtymoney:attemptDirtyMoneyDrops", src)
+        user:alterDirtyMoney(dirtyMoney - 500)
+        TriggerClientEvent("UPV", src, 500)
+    else
+        TriggerClientEvent("DoLongHudText", src, "You need $500 in Marked Bills.", 2)
+    end
 end)
 
-RegisterServerEvent("np-dirtymoney:alterDirtyMoney")
-AddEventHandler("np-dirtymoney:alterDirtyMoney", function(reason, amount)
-	local src = source
-	local user = exports["np-base"]:getModule("Player"):GetUser(src)
-	local DirtyMoney = user:getDirtyMoney()
+--[[
+    -- Type: Server Event
+    -- Name: np-dirtymoney:alterDirtyMoney
+    -- Use: Adjusts a player's dirty money based on the provided reason and amount.
+    -- Created: 2024-06-08
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent("np-dirtymoney:alterDirtyMoney", function(reason, amount)
+    local src = source
+    local user = exports["np-base"]:getModule("Player"):GetUser(src)
+    if not user then return end
 
-	if reason == "ItemDrop" then
-		TriggerClientEvent("np-dirtymoney:attemptDirtyMoneyDrops",source)
-		DirtyMoney = DirtyMoney - amount
-		user:alterDirtyMoney(DirtyMoney)
+    local amt = tonumber(amount) or 0
+    if amt <= 0 then return end
 
-		TriggerClientEvent('UPV',src,amount)
-	else
-		DirtyMoney = DirtyMoney + amount
-		user:alterDirtyMoney(DirtyMoney)
-	end
-
+    local dirtyMoney = user:getDirtyMoney()
+    if reason == "ItemDrop" then
+        if dirtyMoney >= amt then
+            TriggerClientEvent("np-dirtymoney:attemptDirtyMoneyDrops", src)
+            user:alterDirtyMoney(dirtyMoney - amt)
+            TriggerClientEvent("UPV", src, amt)
+        else
+            TriggerClientEvent("DoLongHudText", src, "Insufficient Marked Bills.", 2)
+        end
+    else
+        user:alterDirtyMoney(dirtyMoney + amt)
+    end
 end)
 
-RegisterServerEvent("np-dirtymoney:moneyPickup")
-AddEventHandler("np-dirtymoney:moneyPickup", function(amount)
-	local src = source
-	local user = exports["np-base"]:getModule("Player"):GetUser(src)
-	user:addMoney((amount))
+--[[
+    -- Type: Server Event
+    -- Name: np-dirtymoney:moneyPickup
+    -- Use: Converts collected dirty money into clean cash for the player.
+    -- Created: 2024-06-08
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent("np-dirtymoney:moneyPickup", function(amount)
+    local src = source
+    local user = exports["np-base"]:getModule("Player"):GetUser(src)
+    if not user then return end
+
+    local amt = tonumber(amount) or 0
+    if amt <= 0 then return end
+
+    user:addMoney(amt)
 end)
