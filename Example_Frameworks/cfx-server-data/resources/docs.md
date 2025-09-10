@@ -12,6 +12,7 @@ This document consolidates the provided documentation for multiple resources int
 - [basic-gamemode](#basic-gamemode)
 - [money](#money)
 - [money-fountain](#money-fountain)
+- [money-fountain-example-map](#money-fountain-example-map)
 - [ped-money-drops](#ped-money-drops)
 - [chat](#chat)
 - [chat-theme-gtao](#chat-theme-gtao)
@@ -314,6 +315,30 @@ Interactive gameplay example where players can deposit or withdraw cash from mar
 
 ### Conclusion
 `fxmanifest.lua` ties the resource together and declares dependencies. `mapdata.lua` registers a `money_fountain` map directive and maintains fountain definitions. `client.lua` renders fountain markers, guides player interactions, and triggers deposit/withdraw events. `server.lua` validates proximity, enforces cooldowns, updates fountain balances, and integrates with the money resource. Together, these files create a synchronized, map-driven money fountain system.
+
+---
+
+## money-fountain-example-map
+
+**Overview**
+Map resource that defines a sample fountain location for the `money-fountain` system. It supplies coordinates and payout using a map directive so the main resource can spawn the fountain and manage its cash reserve.
+
+### Table of Contents
+- fxmanifest.lua
+- map.lua
+- Conclusion
+
+### fxmanifest.lua — Role: Shared / Meta
+- Declares version `1.1.0`, author, description, and repository link.
+- Targets the **cerulean** FX build for GTA V and enables Lua 5.4.
+- Registers `map.lua` and depends on `money-fountain`.
+
+### map.lua — Role: Map
+- Sets fountain coordinates at `vec3(97.334, -973.621, 29.36)`.
+- Calls `money_fountain 'test_fountain'` with a payout of `amount = 75`.
+
+### Conclusion
+`fxmanifest.lua` links the map to the money-fountain system, and `map.lua` declares a single fountain definition with location and payout for testing purposes.
 
 ---
 
