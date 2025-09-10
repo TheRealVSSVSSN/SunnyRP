@@ -1,75 +1,82 @@
-function ButtonMessage(text)
+--[[
+    -- Type: Function
+    -- Name: setupScaleform
+    -- Use: Builds and returns an instructional buttons scaleform
+    -- Created: 2024-05-14
+    -- By: VSSVSSN
+--]]
+local function buttonMessage(text)
     BeginTextCommandScaleformString("STRING")
-    AddTextComponentScaleform(text)
+    AddTextComponentSubstringPlayerName(text)
     EndTextCommandScaleformString()
 end
 
-function Button(ControlButton)
-    N_0xe83a3e3557a56640(ControlButton)
+local function button(controlButton)
+    PushScaleformMovieFunctionParameterButtonName(controlButton)
 end
 
-function setupScaleform(scaleform)
-
-    local scaleform = RequestScaleformMovie(scaleform)
+function setupScaleform(scaleformName, cfg, speedIndex)
+    local scaleform = RequestScaleformMovie(scaleformName)
 
     while not HasScaleformMovieLoaded(scaleform) do
-        Citizen.Wait(1)
+        Wait(0)
     end
 
     PushScaleformMovieFunction(scaleform, "CLEAR_ALL")
     PopScaleformMovieFunctionVoid()
-    
+
     PushScaleformMovieFunction(scaleform, "SET_CLEAR_SPACE")
     PushScaleformMovieFunctionParameterInt(200)
     PopScaleformMovieFunctionVoid()
 
     PushScaleformMovieFunction(scaleform, "SET_DATA_SLOT")
     PushScaleformMovieFunctionParameterInt(5)
-    Button(GetControlInstructionalButton(2, config.controls.openKey, true))
-    ButtonMessage("Noclip off")
+    button(GetControlInstructionalButton(2, cfg.controls.openKey, true))
+    buttonMessage("Noclip off")
     PopScaleformMovieFunctionVoid()
 
     PushScaleformMovieFunction(scaleform, "SET_DATA_SLOT")
     PushScaleformMovieFunctionParameterInt(4)
-    Button(GetControlInstructionalButton(2, config.controls.goUp, true))
-    ButtonMessage("Up")
+    button(GetControlInstructionalButton(2, cfg.controls.goUp, true))
+    buttonMessage("Up")
     PopScaleformMovieFunctionVoid()
 
     PushScaleformMovieFunction(scaleform, "SET_DATA_SLOT")
     PushScaleformMovieFunctionParameterInt(3)
-    Button(GetControlInstructionalButton(2, config.controls.goDown, true))
-    ButtonMessage("Down")
+    button(GetControlInstructionalButton(2, cfg.controls.goDown, true))
+    buttonMessage("Down")
     PopScaleformMovieFunctionVoid()
 
     PushScaleformMovieFunction(scaleform, "SET_DATA_SLOT")
     PushScaleformMovieFunctionParameterInt(2)
-    Button(GetControlInstructionalButton(1, config.controls.turnRight, true))
-    Button(GetControlInstructionalButton(1, config.controls.turnLeft, true))
-    ButtonMessage("Turn Right / Left")
+    button(GetControlInstructionalButton(1, cfg.controls.turnRight, true))
+    button(GetControlInstructionalButton(1, cfg.controls.turnLeft, true))
+    buttonMessage("Turn Right / Left")
     PopScaleformMovieFunctionVoid()
 
     PushScaleformMovieFunction(scaleform, "SET_DATA_SLOT")
     PushScaleformMovieFunctionParameterInt(1)
-    Button(GetControlInstructionalButton(1, config.controls.goBackward, true))
-    Button(GetControlInstructionalButton(1, config.controls.goForward, true))
-    ButtonMessage("Go Forward / Back")
+    button(GetControlInstructionalButton(1, cfg.controls.goBackward, true))
+    button(GetControlInstructionalButton(1, cfg.controls.goForward, true))
+    buttonMessage("Go Forward / Back")
     PopScaleformMovieFunctionVoid()
 
     PushScaleformMovieFunction(scaleform, "SET_DATA_SLOT")
     PushScaleformMovieFunctionParameterInt(0)
-    Button(GetControlInstructionalButton(2, config.controls.changeSpeed, true))
-    ButtonMessage(""..config.speeds[index].label.." ")
+    button(GetControlInstructionalButton(2, cfg.controls.changeSpeed, true))
+    buttonMessage(cfg.speeds[speedIndex].label .. " ")
     PopScaleformMovieFunctionVoid()
 
     PushScaleformMovieFunction(scaleform, "DRAW_INSTRUCTIONAL_BUTTONS")
     PopScaleformMovieFunctionVoid()
 
     PushScaleformMovieFunction(scaleform, "SET_BACKGROUND_COLOUR")
-    PushScaleformMovieFunctionParameterInt(config.bgR)
-    PushScaleformMovieFunctionParameterInt(config.bgG)
-    PushScaleformMovieFunctionParameterInt(config.bgB)
-    PushScaleformMovieFunctionParameterInt(config.bgA)
+    PushScaleformMovieFunctionParameterInt(cfg.bgR)
+    PushScaleformMovieFunctionParameterInt(cfg.bgG)
+    PushScaleformMovieFunctionParameterInt(cfg.bgB)
+    PushScaleformMovieFunctionParameterInt(cfg.bgA)
     PopScaleformMovieFunctionVoid()
 
     return scaleform
 end
+
