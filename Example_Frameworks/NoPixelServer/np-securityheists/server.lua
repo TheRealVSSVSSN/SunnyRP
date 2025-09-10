@@ -1,22 +1,26 @@
-local license = 0
+--[[
+    -- Type: Script
+    -- Name: server.lua
+    -- Use: Handles validation for security truck heists
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 
-local licenseArray = {}
+local robbedLicenses = {}
 
-RegisterServerEvent('sec:checkRobbed')
+--[[
+    -- Type: Event
+    -- Name: sec:checkRobbed
+    -- Use: Prevents a truck from being robbed more than once
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent('sec:checkRobbed')
 AddEventHandler('sec:checkRobbed', function(license)
-
-local _source = source
-
-if licenseArray[#licenseArray] ~= nil then
-    for k, v in pairs(licenseArray) do
-        if v == license then
-        print('Bitch')
+    local src = source
+    if robbedLicenses[license] then
         return
-        end
     end
-end
-
-licenseArray[#licenseArray+1] = license
-
-    TriggerClientEvent('sec:AllowHeist', _source)
+    robbedLicenses[license] = true
+    TriggerClientEvent('sec:AllowHeist', src)
 end)
