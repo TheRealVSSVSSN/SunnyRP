@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const workerFarm = require('worker-farm');
-const async = require('async');
+const { Worker } = require('worker_threads');
 let buildingInProgress = false;
 let currentBuildingModule = '';
 let currentBuildingScript = '';
@@ -11,7 +10,7 @@ const webpackBuildTask = {
 
         if (numMetaData > 0) {
             for (let i = 0; i < numMetaData; i++) {
-                const configName = GetResourceMetadata(resourceName, 'webpack_config');
+                const configName = GetResourceMetadata(resourceName, 'webpack_config', i);
 
                 if (shouldBuild(configName)) {
                     return true;
@@ -82,13 +81,11 @@ const webpackBuildTask = {
                 const cachePath = `cache/${resourceName}/${configName.replace(/\//g, '_')}.json`;
 
                 try {
-                    fs.mkdirSync(path.dirname(cachePath));
+                    fs.mkdirSync(path.dirname(cachePath), { recursive: true });
                 } catch {
                 }
 
                 const config = require(configPath);
-
-                const workers = workerFarm(require.resolve('./webpack_runner'));
 
                 if (config) {
                     const resourcePath = path.resolve(GetResourcePath(resourceName));
@@ -100,52 +97,44 @@ const webpackBuildTask = {
                     buildingInProgress = true;
                     currentBuildingModule = resourceName;
                     currentBuildingScript = configName;
-                    workers({
-                        configPath,
-                        resourcePath,
-                        cachePath
-                    }, (err, outp) => {
-                        workerFarm.end(workers);
 
-                        if (err) {
-                            console.error(err.stack || err);
-                            if (err.details) {
-                                console.error(err.details);
-                            }
-
-                            buildingInProgress = false;
-                            currentBuildingModule = '';
-                            currentBuildingScript = '';
-                            error = "worker farm webpack errored out";
-                            console.error("worker farm webpack errored out");
-                            return;
-                        }
+                    try {
+                        const outp = await runWorker(path.resolve(__dirname, 'webpack_runner.js'), {
+                            configPath,
+                            resourcePath,
+                            cachePath,
+                        });
 
                         if (outp.errors) {
-                            for (const error of outp.errors) {
-                                console.log(error);
+                            for (const err of outp.errors) {
+                                console.log(err);
                             }
-                            buildingInProgress = false;
-                            currentBuildingModule = '';
-                            currentBuildingScript = '';
-                            error = "webpack got an error";
-                            console.error("webpack got an error");
+                            error = 'webpack got an error';
+                            console.error('webpack got an error');
                             return;
                         }
 
                         console.log(`${resourceName}: built ${configName}`);
-
+                    } catch (err) {
+                        console.error(err.stack || err);
+                        error = 'worker thread webpack errored out';
+                        console.error('worker thread webpack errored out');
+                        return;
+                    } finally {
                         buildingInProgress = false;
                         currentBuildingModule = '';
                         currentBuildingScript = '';
-                    });
+                    }
                 }
             }
             if (error) {
                 cb(false, error);
             } else cb(true);
         };
-        buildWebpack().then();
+        buildWebpack().catch((err) => {
+            console.error(err);
+            cb(false, err.message);
+        });
     }
 };
 
@@ -154,3 +143,17 @@ function sleep(ms) {
 }
 
 RegisterResourceBuildTaskFactory('z_webpack', () => webpackBuildTask);
+
+function runWorker(workerPath, workerData) {
+    return new Promise((resolve, reject) => {
+        const worker = new Worker(workerPath, { workerData });
+
+        worker.once('message', resolve);
+        worker.once('error', reject);
+        worker.once('exit', (code) => {
+            if (code !== 0) {
+                reject(new Error(`Worker stopped with exit code ${code}`));
+            }
+        });
+    });
+}

@@ -1,75 +1,73 @@
-const weebpack = require('webpack');
+const { parentPort, workerData } = require('worker_threads');
+const webpack = require('webpack');
 const path = require('path');
 const fs = require('fs');
 
-function getStat(path) {
-	try {
-		const stat = fs.statSync(path);
-
-		return stat ? {
-			mtime: stat.mtimeMs,
-			size: stat.size,
-			inode: stat.ino,
-		} : null;
-	} catch {
-		return null;
-	}
+function getStat(filePath) {
+    try {
+        const stat = fs.statSync(filePath);
+        return stat
+            ? {
+                  mtime: stat.mtimeMs,
+                  size: stat.size,
+                  inode: stat.ino,
+              }
+            : null;
+    } catch {
+        return null;
+    }
 }
 
 class SaveStatePlugin {
-	constructor(inp) {
-		this.cache = [];
-		this.cachePath = inp.cachePath;
-	}
+    constructor(inp) {
+        this.cache = [];
+        this.cachePath = inp.cachePath;
+    }
 
-	apply(compiler) {
-		compiler.hooks.afterCompile.tap('SaveStatePlugin', (compilation) => {
-			for (const file of compilation.fileDependencies) {
-				this.cache.push({
-					name: file,
-					stats: getStat(file)
-				});
-			}
-		});
+    apply(compiler) {
+        compiler.hooks.afterCompile.tap('SaveStatePlugin', (compilation) => {
+            for (const file of compilation.fileDependencies) {
+                this.cache.push({ name: file, stats: getStat(file) });
+            }
+        });
 
-		compiler.hooks.done.tap('SaveStatePlugin', (stats) => {
-			if (stats.hasErrors()) {
-				return;
-			}
+        compiler.hooks.done.tap('SaveStatePlugin', async (stats) => {
+            if (stats.hasErrors()) {
+                return;
+            }
 
-			fs.writeFile(this.cachePath, JSON.stringify(this.cache), () => {
-
-			});
-		});
-	}
+            try {
+                await fs.promises.writeFile(this.cachePath, JSON.stringify(this.cache));
+            } catch {
+                // ignore write errors
+            }
+        });
+    }
 }
 
-module.exports = (inp, callback) => {
-	const config = require(inp.configPath);
-	
-	config.context = inp.resourcePath;
-	
-	if (config.output && config.output.path) {
-		config.output.path = path.resolve(inp.resourcePath, config.output.path);
-	}
+const { configPath, resourcePath, cachePath } = workerData;
+const config = require(configPath);
 
-	if (!config.plugins) {
-		config.plugins = [];
-	}
+config.context = resourcePath;
 
-	config.plugins.push(new SaveStatePlugin(inp));
-	
-	weebpack(config, (err, stats) => {
-		if (err) {
-			callback(err);
-			return;
-		}
-		
-		if (stats.hasErrors()) {
-			callback(null, stats.toJson());
-			return;
-		}
-		
-		callback(null, {});
-	});
-};
+if (config.output && config.output.path) {
+    config.output.path = path.resolve(resourcePath, config.output.path);
+}
+
+config.plugins = config.plugins || [];
+config.plugins.push(new SaveStatePlugin({ cachePath }));
+
+webpack(config, (err, stats) => {
+    if (err) {
+        parentPort.postMessage({ error: err.stack || err });
+        return;
+    }
+
+    if (stats.hasErrors()) {
+        parentPort.postMessage({ errors: stats.toJson().errors });
+        return;
+    }
+
+    parentPort.postMessage({});
+});
+
