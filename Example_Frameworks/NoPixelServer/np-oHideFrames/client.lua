@@ -1,46 +1,40 @@
+--[[
+    -- Type: Thread
+    -- Name: HideFramesLoop
+    -- Use: Continuously hides HUD elements and adjusts player settings
+    -- Created: 2024-06-09
+    -- By: VSSVSSN
+--]]
 
+local hiddenComponents = {
+    1, -- Weapon icon
+    6, -- Vehicle name
+    7, -- Area name
+    9  -- Street name
+}
 
-
-Citizen.CreateThread(function()
+CreateThread(function()
+    SetPlayerHealthRechargeMultiplier(PlayerId(), 0.0)
+    SetPedMinGroundTimeForStungun(PlayerPedId(), 6000)
 
     while true do
+        Wait(0)
 
-        Citizen.Wait(1)
+        local ped = PlayerPedId()
 
-        if not IsAimCamActive() or not IsFirstPersonAimCamActive() then
+        if not IsAimCamActive() and not IsFirstPersonAimCamActive() then
             HideHudComponentThisFrame(14)
         end
 
-        if IsHudComponentActive(1) then 
-            HideHudComponentThisFrame(1)
+        for _, component in ipairs(hiddenComponents) do
+            HideHudComponentThisFrame(component)
         end
 
-        if IsHudComponentActive(6) then 
-            HideHudComponentThisFrame(6)
-        end
-
-        if IsHudComponentActive(7) then 
-            HideHudComponentThisFrame(7)
-        end
-
-        if IsHudComponentActive(9) then 
-            HideHudComponentThisFrame(9)
-        end
-
-        if IsHudComponentActive(0) and not IsPedInAnyVehicle(GetPlayerPed( -1 ), true) then 
+        if not IsPedInAnyVehicle(ped, true) then
             HideHudComponentThisFrame(0)
         end
 
-
-        if IsControlPressed(0,44) then
-            DisplayHud(1)
-        else
-            DisplayHud(0)
-        end
-
-
-        SetPlayerHealthRechargeMultiplier(PlayerId(), 0.0)
-
-        SetPedMinGroundTimeForStungun(PlayerPedId(), 6000)
+        DisplayHud(IsControlPressed(0, 44))
     end
 end)
+
