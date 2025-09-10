@@ -1,50 +1,76 @@
+--[[
+    -- Type: Server
+    -- Name: server.lua
+    -- Use: Handles global time and weather synchronization
+    -- Created: 2024-11-21
+    -- By: VSSVSSN
+--]]
 
-local currentweather = "CLEAR"
-local currenttime = 130000
+local currentWeather = 'CLEAR'
+local currentTime = 130000
 
+--[[
+    -- Type: Function
+    -- Name: syncClient
+    -- Use: Sends current weather and time to a client
+    -- Created: 2024-11-21
+    -- By: VSSVSSN
+--]]
+local function syncClient(src)
+    TriggerClientEvent('kWeatherSync', src, currentWeather)
+    TriggerClientEvent('kTimeSync', src, currentTime)
+end
 
-RegisterServerEvent('kGetWeather')
-AddEventHandler('kGetWeather', function()
-    print('Set Weather', source, currentweather)
-    print('Set Time', source, currenttime)
-    TriggerClientEvent('kWeatherSync', source, currentweather)
-    TriggerClientEvent('kTimeSync', source, currenttime)
+RegisterNetEvent('kGetWeather', function()
+    syncClient(source)
 end)
 
-RegisterServerEvent('kTimeSync')
-AddEventHandler("kTimeSync", function(data)
-    currenttime = data
-    TriggerClientEvent('kTimeSync', -1, data)
+--[[
+    -- Type: Function
+    -- Name: setTime
+    -- Use: Updates and broadcasts the current time
+    -- Created: 2024-11-21
+    -- By: VSSVSSN
+--]]
+local function setTime(time)
+    currentTime = time
+    TriggerClientEvent('kTimeSync', -1, currentTime)
+end
+
+RegisterNetEvent('kTimeSync', function(time)
+    setTime(time)
 end)
 
-RegisterServerEvent('kWeatherSync')
-AddEventHandler("kWeatherSync", function(wfer)
-    currentweather = wfer
-    TriggerClientEvent('kWeatherSync', -1, wfer)
-end)
+--[[
+    -- Type: Function
+    -- Name: setWeather
+    -- Use: Updates and broadcasts the current weather
+    -- Created: 2024-11-21
+    -- By: VSSVSSN
+--]]
+local function setWeather(weather)
+    currentWeather = weather
+    TriggerClientEvent('kWeatherSync', -1, currentWeather)
+end
 
-RegisterServerEvent('weather:time')
-AddEventHandler('weather:time', function(src, time)
-    currenttime = tonumber(time)
-    TriggerClientEvent('kTimeSync', -1, time)
-    TriggerClientEvent("timeheader", time)
+RegisterNetEvent('kWeatherSync', function(weather)
+    setWeather(weather)
 end)
-
-RegisterServerEvent('weather:setWeather')
-AddEventHandler('weather:setWeather', function(src, weather)
-    currentweather = tostring(weather)
-    TriggerClientEvent('kWeatherSync', -1, weather)
-end)
-
 
 RegisterCommand('syncallweather', function()
-    TriggerClientEvent('kWeatherSync', -1, currentweather)
-    TriggerClientEvent('kTimeSync', -1, currenttime)
+    syncClient(-1)
 end, false)
 
+RegisterNetEvent('weather:time', function(_, time)
+    setTime(tonumber(time) or currentTime)
+    TriggerClientEvent('timeheader', -1, currentTime)
+end)
 
-RegisterServerEvent('weather:receivefromcl')
-AddEventHandler('weather:receivefromcl', function(secondsofday)
-currenttime = secondsofday
+RegisterNetEvent('weather:setWeather', function(_, weather)
+    setWeather(tostring(weather or currentWeather))
+end)
+
+RegisterNetEvent('weather:receivefromcl', function(secondOfDay)
+    currentTime = secondOfDay
 end)
 
