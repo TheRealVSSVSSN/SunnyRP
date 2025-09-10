@@ -1,379 +1,245 @@
--- in-memory spawnpoint array for this script execution instance
-local spawnPoints = {}
+--[[
+    Spawn Manager
+    Modernized player spawning logic for FiveM.
+    Handles spawn points, automatic respawn and model loading.
+    Refactored for maintainability and updated natives usage.
+--]]
 
--- auto-spawn enabled flag
-local autoSpawnEnabled = false
-local autoSpawnCallback
+local SpawnManager = {
+    points = {},
+    autoEnabled = false,
+    autoCallback = nil,
+    spawnLock = false,
+    nextId = 1,
+    respawnForced = false,
+    diedAt = nil
+}
 
--- support for mapmanager maps
+-- Support mapmanager map directives
 AddEventHandler('getMapDirectives', function(add)
-    -- call the remote callback
     add('spawnpoint', function(state, model)
-        -- return another callback to pass coordinates and so on (as such syntax would be [spawnpoint 'model' { options/coords }])
         return function(opts)
-            local x, y, z, heading
+            local x = opts.x or opts[1]
+            local y = opts.y or opts[2]
+            local z = opts.z or opts[3]
+            local heading = opts.heading or 0.0
 
-            local s, e = pcall(function()
-                -- is this a map or an array?
-                if opts.x then
-                    x = opts.x
-                    y = opts.y
-                    z = opts.z
-                else
-                    x = opts[1]
-                    y = opts[2]
-                    z = opts[3]
-                end
+            -- slight offsets to avoid zero vector issues
+            x, y, z = x + 0.0001, y + 0.0001, z + 0.0001
+            heading = heading + 0.01
 
-                x = x + 0.0001
-                y = y + 0.0001
-                z = z + 0.0001
+            local id = SpawnManager:addSpawnPoint({
+                x = x,
+                y = y,
+                z = z,
+                heading = heading,
+                model = model
+            })
 
-                -- get a heading and force it to a float, or just default to null
-                heading = opts.heading and (opts.heading + 0.01) or 0
-
-                -- add the spawnpoint
-                addSpawnPoint({
-                    x = x, y = y, z = z,
-                    heading = heading,
-                    model = model
-                })
-
-                -- recalculate the model for storage
-                if not tonumber(model) then
-                    model = GetHashKey(model, _r)
-                end
-
-                -- store the spawn data in the state so we can erase it later on
-                state.add('xyz', { x, y, z })
-                state.add('model', model)
-            end)
-
-            if not s then
-                Citizen.Trace(e .. "\n")
+            if not tonumber(model) then
+                model = GetHashKey(model)
             end
+
+            state.add('xyz', { x, y, z })
+            state.add('model', model)
+            state.add('idx', id)
         end
-        -- delete callback follows on the next line
-    end, function(state, arg)
-        -- loop through all spawn points to find one with our state
-        for i, sp in ipairs(spawnPoints) do
-            -- if it matches...
+    end, function(state)
+        for i, sp in ipairs(SpawnManager.points) do
             if sp.x == state.xyz[1] and sp.y == state.xyz[2] and sp.z == state.xyz[3] and sp.model == state.model then
-                -- remove it.
-                table.remove(spawnPoints, i)
+                table.remove(SpawnManager.points, i)
                 return
             end
         end
     end)
 end)
 
+-- Validate and register a spawn point
+function SpawnManager:addSpawnPoint(spawn)
+    assert(tonumber(spawn.x) and tonumber(spawn.y) and tonumber(spawn.z), 'invalid spawn position')
+    assert(tonumber(spawn.heading), 'invalid spawn heading')
 
--- loads a set of spawn points from a JSON string
-function loadSpawns(spawnString)
-    -- decode the JSON string
-    local data = json.decode(spawnString)
+    local model = tonumber(spawn.model) or GetHashKey(spawn.model)
+    assert(IsModelInCdimage(model), 'invalid spawn model')
 
-    -- do we have a 'spawns' field?
-    if not data.spawns then
-        error("no 'spawns' in JSON data")
-    end
-
-    -- loop through the spawns
-    for i, spawn in ipairs(data.spawns) do
-        -- and add it to the list (validating as we go)
-        addSpawnPoint(spawn)
-    end
-end
-
-local spawnNum = 1
-
-function addSpawnPoint(spawn)
-    -- validate the spawn (position)
-    if not tonumber(spawn.x) or not tonumber(spawn.y) or not tonumber(spawn.z) then
-        error("invalid spawn position")
-    end
-
-    -- heading
-    if not tonumber(spawn.heading) then
-        error("invalid spawn heading")
-    end
-
-    -- model (try integer first, if not, hash it)
-    local model = spawn.model
-
-    if not tonumber(spawn.model) then
-        model = GetHashKey(spawn.model)
-    end
-
-    -- is the model actually a model?
-    if not IsModelInCdimage(model) then
-        error("invalid spawn model")
-    end
-
-    -- is is even a ped?
-    -- not in V?
-    --[[if not IsThisModelAPed(model) then
-        error("this model ain't a ped!")
-    end]]
-
-    -- overwrite the model in case we hashed it
     spawn.model = model
-
-    -- add an index
-    spawn.idx = spawnNum
-    spawnNum = spawnNum + 1
-
-    -- all OK, add the spawn entry to the list
-    table.insert(spawnPoints, spawn)
-
+    spawn.idx = self.nextId
+    self.nextId = self.nextId + 1
+    table.insert(self.points, spawn)
     return spawn.idx
 end
 
--- removes a spawn point
-function removeSpawnPoint(spawn)
-    for i = 1, #spawnPoints do
-        if spawnPoints[i].idx == spawn then
-            table.remove(spawnPoints, i)
+function SpawnManager:removeSpawnPoint(idx)
+    for i = 1, #self.points do
+        if self.points[i].idx == idx then
+            table.remove(self.points, i)
             return
         end
     end
 end
 
--- changes the auto-spawn flag
-function setAutoSpawn(enabled)
-    autoSpawnEnabled = enabled
+function SpawnManager:loadSpawns(jsonString)
+    local data = json.decode(jsonString)
+    assert(data and data.spawns, "no 'spawns' in JSON data")
+    for _, spawn in ipairs(data.spawns) do
+        self:addSpawnPoint(spawn)
+    end
 end
 
--- sets a callback to execute instead of 'native' spawning when trying to auto-spawn
-function setAutoSpawnCallback(cb)
-    autoSpawnCallback = cb
-    autoSpawnEnabled = true
+function SpawnManager:setAutoSpawn(enabled)
+    self.autoEnabled = enabled
 end
 
--- function as existing in original R* scripts
+function SpawnManager:setAutoSpawnCallback(cb)
+    self.autoCallback = cb
+    self.autoEnabled = true
+end
+
 local function freezePlayer(id, freeze)
-    local player = id
-    SetPlayerControl(player, not freeze, false)
+    local ped = GetPlayerPed(id)
+    SetPlayerControl(id, not freeze, 0)
 
-    local ped = GetPlayerPed(player)
-
-    if not freeze then
-        if not IsEntityVisible(ped) then
-            SetEntityVisible(ped, true)
-        end
-
-        if not IsPedInAnyVehicle(ped) then
-            SetEntityCollision(ped, true)
-        end
-
-        FreezeEntityPosition(ped, false)
-        --SetCharNeverTargetted(ped, false)
-        SetPlayerInvincible(player, false)
-    else
-        if IsEntityVisible(ped) then
-            SetEntityVisible(ped, false)
-        end
-
-        SetEntityCollision(ped, false)
+    if freeze then
+        SetEntityVisible(ped, false, false)
+        SetEntityCollision(ped, false, false)
         FreezeEntityPosition(ped, true)
-        --SetCharNeverTargetted(ped, true)
-        SetPlayerInvincible(player, true)
-        --RemovePtfxFromPed(ped)
-
+        SetPlayerInvincible(id, true)
         if not IsPedFatallyInjured(ped) then
             ClearPedTasksImmediately(ped)
         end
+    else
+        SetEntityVisible(ped, true, false)
+        SetEntityCollision(ped, true, true)
+        FreezeEntityPosition(ped, false)
+        SetPlayerInvincible(id, false)
     end
 end
 
-function loadScene(x, y, z)
-	if not NewLoadSceneStart then
-		return
-	end
-
+local function loadScene(x, y, z)
+    if not NewLoadSceneStart then return end
     NewLoadSceneStart(x, y, z, 0.0, 0.0, 0.0, 20.0, 0)
-
     while IsNewLoadSceneActive() do
-        networkTimer = GetNetworkTimer()
-
         NetworkUpdateLoadScene()
+        Wait(0)
     end
 end
 
--- to prevent trying to spawn multiple times
-local spawnLock = false
+function SpawnManager:spawnPlayer(spawnIdx, cb)
+    if self.spawnLock then return end
+    self.spawnLock = true
 
--- spawns the current player at a certain spawn point index (or a random one, for that matter)
-function spawnPlayer(spawnIdx, cb)
-    if spawnLock then
-        return
-    end
-
-    spawnLock = true
-
-    Citizen.CreateThread(function()
-        -- if the spawn isn't set, select a random one
+    CreateThread(function()
         if not spawnIdx then
-            spawnIdx = GetRandomIntInRange(1, #spawnPoints + 1)
+            local count = #SpawnManager.points
+            if count == 0 then
+                print('[spawnmanager] no spawn points available')
+                SpawnManager.spawnLock = false
+                return
+            end
+            spawnIdx = math.random(1, count)
         end
 
-        -- get the spawn from the array
-        local spawn
-
-        if type(spawnIdx) == 'table' then
-            spawn = spawnIdx
-        else
-            spawn = spawnPoints[spawnIdx]
+        local spawn = type(spawnIdx) == 'table' and spawnIdx or SpawnManager.points[spawnIdx]
+        if not spawn then
+            print('[spawnmanager] invalid spawn index')
+            SpawnManager.spawnLock = false
+            return
         end
 
         if not spawn.skipFade then
             DoScreenFadeOut(500)
-
             while not IsScreenFadedOut() do
-                Citizen.Wait(0)
-            end
-        end
-
-        -- validate the index
-        if not spawn then
-            Citizen.Trace("tried to spawn at an invalid spawn index\n")
-
-            spawnLock = false
-
-            return
-        end
-
-        -- freeze the local player
-        freezePlayer(PlayerId(), true)
-
-        -- if the spawn has a model set
-        if spawn.model then
-            RequestModel(spawn.model)
-
-            -- load the model for this spawn
-            while not HasModelLoaded(spawn.model) do
-                RequestModel(spawn.model)
-
                 Wait(0)
             end
+        end
 
-            -- change the player model
+        freezePlayer(PlayerId(), true)
+
+        if spawn.model then
+            RequestModel(spawn.model)
+            while not HasModelLoaded(spawn.model) do
+                RequestModel(spawn.model)
+                Wait(0)
+            end
             SetPlayerModel(PlayerId(), spawn.model)
-
-            -- release the player model
             SetModelAsNoLongerNeeded(spawn.model)
-            
-            -- RDR3 player model bits
             if N_0x283978a15512b2fe then
-				N_0x283978a15512b2fe(PlayerPedId(), true)
+                N_0x283978a15512b2fe(PlayerPedId(), true)
             end
         end
 
-        -- preload collisions for the spawnpoint
         RequestCollisionAtCoord(spawn.x, spawn.y, spawn.z)
 
-        -- spawn the player
         local ped = PlayerPedId()
-
-        -- V requires setting coords as well
         SetEntityCoordsNoOffset(ped, spawn.x, spawn.y, spawn.z, false, false, false, true)
-
         NetworkResurrectLocalPlayer(spawn.x, spawn.y, spawn.z, spawn.heading, true, true, false)
 
-        -- gamelogic-style cleanup stuff
         ClearPedTasksImmediately(ped)
-        --SetEntityHealth(ped, 300) -- TODO: allow configuration of this?
-        RemoveAllPedWeapons(ped) -- TODO: make configurable (V behavior?)
+        RemoveAllPedWeapons(ped)
         ClearPlayerWantedLevel(PlayerId())
 
-        -- why is this even a flag?
-        --SetCharWillFlyThroughWindscreen(ped, false)
-
-        -- set primary camera heading
-        --SetGameCamHeading(spawn.heading)
-        --CamRestoreJumpcut(GetGameCam())
-
-        -- load the scene; streaming expects us to do it
-        --ForceLoadingScreen(true)
-        --loadScene(spawn.x, spawn.y, spawn.z)
-        --ForceLoadingScreen(false)
-
         local time = GetGameTimer()
-
-        while (not HasCollisionLoadedAroundEntity(ped) and (GetGameTimer() - time) < 5000) do
-            Citizen.Wait(0)
+        while not HasCollisionLoadedAroundEntity(ped) and (GetGameTimer() - time) < 5000 do
+            Wait(0)
         end
 
         ShutdownLoadingScreen()
 
         if IsScreenFadedOut() then
             DoScreenFadeIn(500)
-
             while not IsScreenFadedIn() do
-                Citizen.Wait(0)
+                Wait(0)
             end
         end
 
-        -- and unfreeze the player
         freezePlayer(PlayerId(), false)
-
         TriggerEvent('playerSpawned', spawn)
 
         if cb then
             cb(spawn)
         end
 
-        spawnLock = false
+        SpawnManager.spawnLock = false
     end)
 end
 
--- automatic spawning monitor thread, too
-local respawnForced
-local diedAt
+function SpawnManager:forceRespawn()
+    self.spawnLock = false
+    self.respawnForced = true
+end
 
-Citizen.CreateThread(function()
-    -- main loop thing
+-- Automatic spawning monitor thread
+CreateThread(function()
     while true do
-        Citizen.Wait(50)
-
-        local playerPed = PlayerPedId()
-
-        if playerPed and playerPed ~= -1 then
-            -- check if we want to autospawn
-            if autoSpawnEnabled then
-                if NetworkIsPlayerActive(PlayerId()) then
-                    if (diedAt and (math.abs(GetTimeDifference(GetGameTimer(), diedAt)) > 2000)) or respawnForced then
-                        if autoSpawnCallback then
-                            autoSpawnCallback()
-                        else
-                            spawnPlayer()
-                        end
-
-                        respawnForced = false
+        Wait(50)
+        local ped = PlayerPedId()
+        if ped and ped ~= -1 then
+            if SpawnManager.autoEnabled and NetworkIsPlayerActive(PlayerId()) then
+                if (SpawnManager.diedAt and GetGameTimer() - SpawnManager.diedAt > 2000) or SpawnManager.respawnForced then
+                    if SpawnManager.autoCallback then
+                        SpawnManager.autoCallback()
+                    else
+                        SpawnManager:spawnPlayer()
                     end
+                    SpawnManager.respawnForced = false
                 end
             end
 
-            if IsEntityDead(playerPed) then
-                if not diedAt then
-                    diedAt = GetGameTimer()
-                end
+            if IsEntityDead(ped) then
+                SpawnManager.diedAt = SpawnManager.diedAt or GetGameTimer()
             else
-                diedAt = nil
+                SpawnManager.diedAt = nil
             end
         end
     end
 end)
 
-function forceRespawn()
-    spawnLock = false
-    respawnForced = true
-end
+-- Exports
+exports('spawnPlayer', function(...) SpawnManager:spawnPlayer(...) end)
+exports('addSpawnPoint', function(...) return SpawnManager:addSpawnPoint(...) end)
+exports('removeSpawnPoint', function(...) SpawnManager:removeSpawnPoint(...) end)
+exports('loadSpawns', function(...) SpawnManager:loadSpawns(...) end)
+exports('setAutoSpawn', function(...) SpawnManager:setAutoSpawn(...) end)
+exports('setAutoSpawnCallback', function(...) SpawnManager:setAutoSpawnCallback(...) end)
+exports('forceRespawn', function(...) SpawnManager:forceRespawn(...) end)
 
-exports('spawnPlayer', spawnPlayer)
-exports('addSpawnPoint', addSpawnPoint)
-exports('removeSpawnPoint', removeSpawnPoint)
-exports('loadSpawns', loadSpawns)
-exports('setAutoSpawn', setAutoSpawn)
-exports('setAutoSpawnCallback', setAutoSpawnCallback)
-exports('forceRespawn', forceRespawn)
