@@ -3956,14 +3956,8 @@
 
       </Infos>
     </Item>
-    <Item>
-      <Infos />
-    </Item>
-    <Item>
-      <Infos />
-    </Item>
   </Infos>
   <VehicleWeaponInfos />
   <WeaponGroupDamageForArmouredVehicleGlass />
-  <Name>DLC - PENIS</Name>
+  <Name>DLC - Gunmeta</Name>
 </CWeaponInfoBlob>
