@@ -19,6 +19,7 @@ AddEventHandler('playerConnecting', function(name, setKickReason, deferrals)
     local src = source
     deferrals.defer()
     Wait(0)
+    deferrals.update('Checking ban status...')
     local identifiers = GetPlayerIdentifiers(src)
     for _, identifier in ipairs(identifiers) do
         debugMsg(('Checking user ban: %s (%s)'):format(identifier, name))
@@ -46,10 +47,12 @@ AddEventHandler('playerDropped', function()
     local src = source
     local user = Users[src]
     if user then
-        MySQL.update.await('UPDATE users SET money = ? WHERE identifier = ?', {
-            user.money,
-            user.identifier
-        })
+        local ok, err = pcall(function()
+            MySQL.update.await('UPDATE users SET money = ? WHERE identifier = ?', {user.money, user.identifier})
+        end)
+        if not ok then
+            print(('[ES] Failed to save money for %s: %s'):format(GetPlayerName(src), err))
+        end
         Users[src] = nil
     end
 end)
@@ -97,11 +100,11 @@ AddEventHandler('es:setDefaultSettings', function(tbl)
     debugMsg('Default settings edited.')
 end)
 
-AddEventHandler('chatMessage', function(src, n, message)
-    if startswith(message, '/') then
+AddEventHandler('chatMessage', function(src, _, message)
+    if message:sub(1, 1) == '/' then
         local command_args = stringsplit(message, ' ')
-        command_args[1] = command_args[1]:gsub('/', '')
-        local command = commands[command_args[1]]
+        command_args[1] = command_args[1]:sub(2)
+        local command = commands[command_args[1]:lower()]
         if command then
             CancelEvent()
             if command.perm > 0 then
