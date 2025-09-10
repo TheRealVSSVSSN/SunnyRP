@@ -1,61 +1,64 @@
-$(document).ready(function(){
-  
-  var documentWidth = document.documentElement.clientWidth;
-  var documentHeight = document.documentElement.clientHeight;
-  var curTask = 0;
-  var processed = []
-  var percent = 0;
+let percent = 0;
 
-  document.onkeydown = function (data) {
-      // 69 = E btw lol rofl heh 
-      if (data.which == 69) {
-        closeMain()
-        $.post('http://np-taskbarskill/taskEnd', JSON.stringify({taskResult: percent}));
-      }
+const progressBar = document.getElementById('progress-bar');
+const skillProgress = document.querySelector('.skillprogress');
+const wrapper = document.querySelector('.divwrap');
+
+// Handle key press for ending the task
+// E key submits the current progress to the client
+window.addEventListener('keydown', (event) => {
+  if (event.key === 'e' || event.key === 'E') {
+    closeMain();
+    fetch(`https://np-taskbarskill/taskEnd`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+      body: JSON.stringify({ taskResult: percent })
+    });
+  }
+});
+
+function openMain() {
+  wrapper.style.display = 'block';
+}
+
+function closeMain() {
+  wrapper.style.display = 'none';
+}
+
+// Listen for messages from Lua
+window.addEventListener('message', (event) => {
+  const item = event.data;
+
+  if (item.runProgress) {
+    percent = 0;
+    openMain();
+    progressBar.style.width = '0%';
+    skillProgress.style.left = `${item.chance}%`;
+    skillProgress.style.width = `${item.skillGap}%`;
+    skillProgress.style.backgroundColor = 'rgba(255,250,250,0.4)';
   }
 
+  if (item.runUpdate) {
+    percent = item.Length;
+    progressBar.style.width = `${item.Length}%`;
 
-  function openMain() {
-    $(".divwrap").fadeIn(10);
+    if (item.Length < (item.chance + item.skillGap) && item.Length > item.chance) {
+      skillProgress.style.backgroundColor = 'rgba(120,50,50,0.9)';
+    } else {
+      skillProgress.style.backgroundColor = 'rgba(255,250,250,0.4)';
+    }
   }
 
-  function closeMain() {
-    $(".divwrap").css("display", "none");
-  }  
+  if (item.closeFail) {
+    closeMain();
+    fetch(`https://np-taskbarskill/taskCancel`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+      body: JSON.stringify({})
+    });
+  }
 
-  window.addEventListener('message', function(event){
-
-    var item = event.data;
-    if(item.runProgress === true) {
-      percent = 0;
-      openMain();
-      $('#progress-bar').css("width","0%");
-      $('.skillprogress').css("left",item.chance + "%")
-      $('.skillprogress').css("width",item.skillGap + "%");
-    }
-
-    if(item.runUpdate === true) {
-      percent = item.Length
-      $('#progress-bar').css("width",item.Length + "%");
-
-      if (item.Length < (item.chance + item.skillGap) && item.Length > (item.chance)) {
-        $('.skillprogress').css("background-color","rgba(120,50,50,0.9)");
-
-      } else {
-        $('.skillprogress').css("background-color","rgba(255,250,250,0.4)");
-      }
-
-    }
-
-    if(item.closeFail === true) {
-      closeMain()
-      $.post('http://np-taskbarskill/taskCancel', JSON.stringify({tasknum: curTask}));
-    }
-
-    if(item.closeProgress === true) {
-      closeMain();
-    }
-
-  });
-
+  if (item.closeProgress) {
+    closeMain();
+  }
 });
