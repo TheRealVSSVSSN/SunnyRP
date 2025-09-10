@@ -1,124 +1,96 @@
-$(document).ready(function(){
-  // Mouse Controls
-  var documentWidth = document.documentElement.clientWidth;
-  var documentHeight = document.documentElement.clientHeight;
-  var cursor = $('#cursor');
-  var cursorX = documentWidth / 2;
-  var cursorY = documentHeight / 2;
+document.addEventListener('DOMContentLoaded', () => {
+  const cursor = document.getElementById('cursor');
+  const contractContainer = document.querySelector('.contract-container');
+  const contractContainer2 = document.querySelector('.contract-container2');
+  const contractContainer3 = document.querySelector('.contract-container3');
+  const home = document.querySelector('.home');
+  const fullScreen = document.querySelector('.full-screen');
 
-  function UpdateCursorPos() {
-      $('#cursor').css('left', cursorX+2);
-      $('#cursor').css('top', cursorY+2);
-  }
-
-  function triggerClick(x, y) {
-      var element = $(document.elementFromPoint(x, y));
-      element.focus().click();
-      return true;
-  }
-
-  // Partial Functions
-  function closeMain() {
-    $(".body").fadeOut(100); 
-    $(".home").fadeOut(100); 
-  }
-
-  function closeAll() {
-    $(".body").fadeOut(100); 
-    $(".home").fadeOut(100); 
-  }
-
-  function openContracts() {
-    $(".contract-container").fadeIn(100); 
-  }
-
-  $(".btnPrev").click(function(){
-      $.post('http://np-contracts/previousID', JSON.stringify({}));
+  const post = (path, data = {}) => fetch(`https://np-contracts/${path}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+    body: JSON.stringify(data)
   });
 
-  $(".btnNext").click(function(){
-      $.post('http://np-contracts/nextID', JSON.stringify({}));
+  const show = el => el.style.display = 'block';
+  const hide = el => el.style.display = 'none';
+
+  document.querySelector('.btnPrev').addEventListener('click', e => {
+    e.preventDefault();
+    post('previousID');
   });
 
-  $(".btnPay").click(function(){
-      $.post('http://np-contracts/payID', JSON.stringify({}));
+  document.querySelector('.btnNext').addEventListener('click', e => {
+    e.preventDefault();
+    post('nextID');
   });
 
-  $(".btnGive").click(function(){
-      $.post('http://np-contracts/giveID', JSON.stringify({ target: $("#contractID2").val(), conamount: $("#contractAmount2").val(), coninformation: $("#contractInfo2").val()}));
+  document.querySelector('.btnPay').addEventListener('click', e => {
+    e.preventDefault();
+    post('payID');
   });
 
-  // Listen for NUI Events
-  window.addEventListener('message', function(event){
-    var item = event.data;
-    // Trigger adding a new warrant to the log and create its display
-    if (item.type == "click") {
-     // triggerClick(cursorX - 1, cursorY - 1);
-    }
-    // Open sub-windows / partials
-    if(item.openSection == "contractUpdate") {
-      $(".home").fadeIn(10);
-      $(".contract-container").fadeIn(10);
-      $(".full-screen").fadeIn(10);
-      $(".contractID").empty();
-      $(".contractAmount").empty();
-      $(".contractInfo").empty();
-
-      $("#cursor").css("display", "block");
-      $('.contractID').append(item.NUIcontractID);
-      $('.contractAmount').append(item.NUIcontractAmount);
-      $('.contractInfo').append(item.NUIcontractInfo);
-    }
-
-    if(item.openSection == "openContractDummy") {
-      $(".home").fadeIn(100); 
-      $(".contract-container3").fadeIn(100); 
-      $("#cursor").css("display", "Block");
-
-     $('.contractID3').append("Sign Here");
-      $('.contractAmount3').append(item.price);
-      $('.contractInfo3').append(item.strg);
-
-    }
-
-    if(item.openSection == "openContracts") {
-      $(".home").fadeIn(100); 
-      $(".contract-container").fadeIn(100); 
-      $("#cursor").css("display", "Block");
-    }
-
-    if(item.openSection == "openContractStart") {
-      $(".home").fadeIn(100); 
-      $(".contract-container2").fadeIn(100); 
-      $("#cursor").css("display", "Block");
-    }
-
-    if(item.openSection == "close") {
-      $(".home").css("display", "none");
-      $(".contract-container").css("display", "none");
-      $(".contract-container2").css("display", "none");
-      $(".contract-container3").css("display", "none");
-      $("#cursor").css("display", "none");
-    }
-
+  document.querySelector('.btnGive').addEventListener('click', e => {
+    e.preventDefault();
+    post('giveID', {
+      target: document.getElementById('contractID2').value,
+      conamount: document.getElementById('contractAmount2').value,
+      coninformation: document.getElementById('contractInfo2').value
+    });
   });
 
-  $(document).mousemove(function(event) {
-    cursorX = event.pageX;
-    cursorY = event.pageY;
-    UpdateCursorPos();
+  window.addEventListener('message', ({ data }) => {
+    switch (data.openSection) {
+      case 'contractUpdate':
+        show(home);
+        show(contractContainer);
+        show(fullScreen);
+        cursor.style.display = 'block';
+        document.querySelector('.contractID').innerHTML = data.NUIcontractID;
+        document.querySelector('.contractAmount').innerHTML = data.NUIcontractAmount;
+        document.querySelector('.contractInfo').innerHTML = data.NUIcontractInfo;
+        break;
+      case 'openContractDummy':
+        show(home);
+        show(contractContainer3);
+        cursor.style.display = 'block';
+        document.querySelector('.contractID3').textContent = 'Sign Here';
+        document.querySelector('.contractAmount3').textContent = data.price;
+        document.querySelector('.contractInfo3').textContent = data.strg;
+        break;
+      case 'openContracts':
+        show(home);
+        show(contractContainer);
+        cursor.style.display = 'block';
+        break;
+      case 'openContractStart':
+        show(home);
+        show(contractContainer2);
+        cursor.style.display = 'block';
+        break;
+      case 'close':
+        hide(home);
+        hide(contractContainer);
+        hide(contractContainer2);
+        hide(contractContainer3);
+        cursor.style.display = 'none';
+        break;
+    }
   });
 
-  // On 'Esc' call close method
-  document.onkeyup = function (data) {
-    if ( data.which == 27 ) {
-      $.post('http://np-contracts/close', JSON.stringify({}));
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = `${e.pageX}px`;
+    cursor.style.top = `${e.pageY}px`;
+  });
+
+  document.addEventListener('keyup', e => {
+    if (e.key === 'Escape') {
+      post('close');
+    } else if (e.key === 'ArrowLeft') {
+      post('previousID');
+    } else if (e.key === 'ArrowRight') {
+      post('nextID');
     }
-    if ( data.which == 37 ) {
-      $.post('http://np-contracts/previousID', JSON.stringify({}));
-    }
-    if ( data.which == 39 ) {
-      $.post('http://np-contracts/nextID', JSON.stringify({}));
-    }
-  };
+  });
 });
+
