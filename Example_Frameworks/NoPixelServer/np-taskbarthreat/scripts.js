@@ -1,54 +1,42 @@
-$(document).ready(function(){
-  
-  var documentWidth = document.documentElement.clientWidth;
-  var documentHeight = document.documentElement.clientHeight;
-  var curTask = 0;
-  var lastTrigger = 0;
-  var processed = [];
+$(function () {
+  let lastTrigger = 0;
 
-  function closeMain() {
+  const closeMain = () => {
     lastTrigger = 0;
-    $(".divwrap").fadeOut(10);
-    $(".divwrap").css("display", "none");
-  }  
+    $('.divwrap').fadeOut(10);
+  };
 
-  window.addEventListener('message', function(event){
+  window.addEventListener('message', (event) => {
+    const data = event.data;
 
-    var item = event.data;
-    if (item.runProgress === true) {
+    if (data.runProgress) {
+      const percent = data.Length;
 
-      var percent = item.Length;
-
-      if ( percent == 80 && lastTrigger != 3 ) {
+      if (percent >= 80 && lastTrigger !== 3) {
         lastTrigger = 3;
-        $(".divwrap").fadeIn(10);
-        $(".divwrap").fadeOut(5000);
-      }
-
-      if ( percent == 60 && lastTrigger != 2 ) {
+        $('.divwrap').fadeIn(10).fadeOut(5000);
+      } else if (percent >= 60 && lastTrigger !== 2) {
         lastTrigger = 2;
-        $(".divwrap").fadeIn(10);
-        $(".divwrap").fadeOut(5000);
+        $('.divwrap').fadeIn(10).fadeOut(5000);
+      } else if (percent > 30 && lastTrigger !== 1) {
+        lastTrigger = 1;
+        $('.divwrap').fadeIn(10).fadeOut(5000);
       }
 
-      if ( percent > 30 && lastTrigger != 1 ) {
-        lastTrigger = 1;
-        $(".divwrap").fadeIn(10);
-        $(".divwrap").fadeOut(5000);
-      }      
+      const red = Math.min(255, 100 + percent);
+      const green = Math.max(0, 200 - percent * 2);
 
-      var red = 100 + item.Length
-      var green = 200 - item.Length * 2
-      $('.progress-bar').css('background', "rgba(" + red + "," + green + ",0,0.6)");
-      $('.progress-bar').css('width', item.Length + "%");
-      $(".nicesexytext").empty();
-      $('.nicesexytext').append(item.Task);
+      $('.progress-bar').css({
+        background: `rgba(${red},${green},0,0.6)`,
+        width: `${percent}%`,
+      });
+
+      $('.nicesexytext').text(data.Task);
     }
 
-    if(item.closeProgress === true) {
+    if (data.closeProgress) {
       closeMain();
     }
-
   });
-
 });
+
