@@ -1,776 +1,607 @@
-myKeys = {}
-latestveh = nil
-whatthefuckisthisdoing = 0
+--[[
+    -- Type: Resource
+    -- Name: np-keys
+    -- Use: Handles vehicle key ownership, transfer, and access logic on the client
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 
+--[[
+    -- Type: Table
+    -- Name: Keys
+    -- Use: Stores owned plates and state for searches or hotwires
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local Keys = {
+    owned = {},
+    searched = {},
+    hotwired = {},
+    inAction = false,
+    engineLockTimer = 0,
+    towEnabled = false
+}
 
+--[[
+    -- Type: Table
+    -- Name: Controls
+    -- Use: Holds key bindings for search and hotwire actions
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local Controls = {
+    vehicleSearch = {47, "G"},
+    vehicleHotwire = {74, "H"}
+}
 
-local searchedVehs = {}
-local hotwiredVehs = {}
-local fuckingRETARDED = false
+--[[
+    -- Type: Function
+    -- Name: addKey
+    -- Use: Adds a vehicle plate to the player's owned keys
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function addKey(plate)
+    if plate and plate ~= "" then
+        Keys.owned[plate] = true
+    end
+end
+
+--[[
+    -- Type: Function
+    -- Name: removeKey
+    -- Use: Removes a vehicle plate from the player's owned keys
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function removeKey(plate)
+    Keys.owned[plate] = nil
+end
+
+--[[
+    -- Type: Function
+    -- Name: hasKey
+    -- Use: Checks if the player owns a key for the provided plate
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function hasKey(plate)
+    return Keys.owned[plate] == true
+end
+exports('hasKey', hasKey)
+
+--[[
+    -- Type: Function
+    -- Name: resetState
+    -- Use: Clears all stored key and interaction data
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function resetState()
+    Keys.owned = {}
+    Keys.searched = {}
+    Keys.hotwired = {}
+    Keys.inAction = false
+    Keys.engineLockTimer = 0
+end
+
+--[[
+    -- Type: Function
+    -- Name: getVehicleInDirection
+    -- Use: Casts a ray to find the first vehicle in the player's direction
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function getVehicleInDirection(coordFrom, coordTo)
+    local offset = 0
+    local rayHandle
+    local vehicle
+    for i = 0, 100 do
+        rayHandle = CastRayPointToPoint(coordFrom.x, coordFrom.y, coordFrom.z, coordTo.x, coordTo.y, coordTo.z + offset, 10, PlayerPedId(), 0)
+        local _, _, _, _, veh = GetRaycastResult(rayHandle)
+        vehicle = veh
+        if vehicle ~= 0 then break end
+        offset = offset - 1
+    end
+    if vehicle ~= 0 then
+        local distance = #(coordFrom - GetEntityCoords(vehicle))
+        if distance < 5.0 then return vehicle end
+    end
+    return nil
+end
+
+--[[
+    -- Type: Function
+    -- Name: drawText3D
+    -- Use: Renders 3D text at a world coordinate
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function drawText3D(x, y, z, text)
+    local onScreen, _x, _y = World3dToScreen2d(x, y, z)
+    if onScreen then
+        SetTextScale(0.35, 0.35)
+        SetTextFont(4)
+        SetTextProportional(1)
+        SetTextColour(255, 255, 255, 215)
+        SetTextEntry("STRING")
+        SetTextCentre(1)
+        AddTextComponentString(text)
+        DrawText(_x, _y)
+        local factor = (string.len(text)) / 370
+        DrawRect(_x, _y + 0.0125, 0.015 + factor, 0.03, 41, 11, 41, 68)
+    end
+end
+
+--[[
+    -- Type: Function
+    -- Name: giveKeyToClosest
+    -- Use: Gives keys of the current vehicle to the closest player
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function giveKeyToClosest()
+    local ped = PlayerPedId()
+    local coordA = GetEntityCoords(ped)
+    local coordB = GetOffsetFromEntityInWorldCoords(ped, 0.0, 5.0, 0.0)
+    local veh = getVehicleInDirection(coordA, coordB)
+    if not veh or veh == 0 then
+        TriggerEvent("DoLongHudText", "Vehicle not found!", 2)
+        return
+    end
+    local plate = GetVehicleNumberPlateText(veh)
+    if not hasKey(plate) then
+        TriggerEvent("DoLongHudText", "No keys for target vehicle!", 2)
+        return
+    end
+    local closestPlayer, distance = GetClosestPlayer()
+    if distance ~= -1 and distance < 5.0 then
+        TriggerServerEvent('keys:send', GetPlayerServerId(closestPlayer), plate)
+        TriggerEvent("DoLongHudText", "You just gave keys to your vehicle!", 1)
+    else
+        TriggerEvent("DoLongHudText", "No player near you!", 2)
+    end
+end
+
+--[[
+    -- Type: Function
+    -- Name: giveKeysToPassengers
+    -- Use: Gives keys of the current vehicle to all passengers
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function giveKeysToPassengers()
+    local ped = PlayerPedId()
+    local veh = GetVehiclePedIsIn(ped, false)
+    if veh == 0 then
+        TriggerEvent("DoLongHudText", "You are not in a vehicle!", 2)
+        return
+    end
+    local plate = GetVehicleNumberPlateText(veh)
+    if not hasKey(plate) then
+        TriggerEvent("DoLongHudText", "No keys for target vehicle!", 2)
+        return
+    end
+    for seat = -1, GetVehicleMaxNumberOfPassengers(veh) - 1 do
+        local passenger = GetPedInVehicleSeat(veh, seat)
+        if passenger ~= ped and passenger ~= 0 then
+            for _, player in pairs(GetActivePlayers()) do
+                if GetPlayerPed(player) == passenger then
+                    TriggerServerEvent('keys:send', GetPlayerServerId(player), plate)
+                end
+            end
+        end
+    end
+    TriggerEvent("DoLongHudText", "You just gave keys to your vehicle!", 1)
+end
+
+--[[
+    -- Type: Function
+    -- Name: searchVehicle
+    -- Use: Attempts to find keys inside the current vehicle
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function searchVehicle()
+    local ped = PlayerPedId()
+    local veh = GetVehiclePedIsUsing(ped)
+    if Keys.searched[veh] then return end
+    Keys.searched[veh] = true
+    Keys.inAction = true
+    TriggerEvent("keys:shutoffengine")
+    local finished = exports["np-taskbar"]:taskBar(5000, "Searching")
+    if finished == 100 then
+        if math.random(100) > 50 then
+            local plate = GetVehicleNumberPlateText(veh)
+            addKey(plate)
+            TriggerEvent("DoLongHudText", "You found the keys.", 1)
+        else
+            TriggerEvent("DoLongHudText", "Nothing was found.", 2)
+        end
+    end
+    Keys.inAction = false
+end
+
+--[[
+    -- Type: Function
+    -- Name: hotwireVehicle
+    -- Use: Attempts to start the vehicle without keys
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function hotwireVehicle()
+    local ped = PlayerPedId()
+    local veh = GetVehiclePedIsUsing(ped)
+    if Keys.hotwired[veh] then
+        TriggerEvent("DoLongHudText", "You cannot work out this hotwire.", 2)
+        return
+    end
+    Keys.hotwired[veh] = true
+    Keys.inAction = true
+    TriggerEvent("keys:shutoffengine")
+    local carTimer = math.random(45000, 120000)
+    local finished = exports["np-taskbar"]:taskBar(carTimer, "Attempting Hotwire")
+    if finished == 100 and math.random(100) > 60 then
+        SetVehicleEngineOn(veh, true, false, true)
+        SetVehicleUndriveable(veh, false)
+        addKey(GetVehicleNumberPlateText(veh))
+        TriggerEvent("DoLongHudText", "You successfully hotwired the vehicle.", 1)
+    else
+        TriggerEvent("DoLongHudText", "You cannot work out this hotwire.", 2)
+    end
+    Keys.inAction = false
+end
+
+--[[
+    -- Type: Function
+    -- Name: engineControlLoop
+    -- Use: Manages engine state based on key ownership
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function engineControlLoop()
+    while true do
+        Citizen.Wait(500)
+        local ped = PlayerPedId()
+        if IsPedInAnyVehicle(ped, false) then
+            local veh = GetVehiclePedIsUsing(ped)
+            local plate = GetVehicleNumberPlateText(veh)
+            if GetPedInVehicleSeat(veh, -1) == ped then
+                if not hasKey(plate) then
+                    SetVehicleEngineOn(veh, false, true, true)
+                elseif Keys.engineLockTimer <= 0 then
+                    SetVehicleEngineOn(veh, true, true, true)
+                    SetVehicleUndriveable(veh, false)
+                end
+            end
+            if Keys.engineLockTimer > 0 then
+                Keys.engineLockTimer = Keys.engineLockTimer - 500
+                SetVehicleEngineOn(veh, false, true, true)
+            end
+        end
+    end
+end
+Citizen.CreateThread(engineControlLoop)
+
+--[[
+    -- Type: Event
+    -- Name: garages:giveLoginKeys
+    -- Use: Loads all keys owned by the player on login
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent('garages:giveLoginKeys')
+AddEventHandler('garages:giveLoginKeys', function(keys)
+    for _, plate in ipairs(keys) do
+        addKey(plate)
+    end
+end)
+
+--[[
+    -- Type: Event
+    -- Name: keys:addNew
+    -- Use: Adds a key for the provided vehicle
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 RegisterNetEvent('keys:addNew')
 AddEventHandler('keys:addNew', function(veh, plate)
-  if veh == nil then
-    return
-  end
-
-  plate = plate or GetVehicleNumberPlateText(veh)
-  if not hasKey(plate) then
-    myKeys[#myKeys+1]= plate
-  end
-
-  SetVehRadioStation(veh, "OFF")
-  SetVehicleDoorsLocked(veh, 1)
-end)
-
-
-
-
-RegisterNetEvent('garages:giveLoginKeys')
-AddEventHandler("garages:giveLoginKeys", function(myDCKeys)
-  for i = 1, #myDCKeys do
-    if not hasKey(myDCKeys[i]) then
-      table.insert(myKeys,myDCKeys[i])
+    plate = plate or (DoesEntityExist(veh) and GetVehicleNumberPlateText(veh))
+    if plate then addKey(plate) end
+    if veh and veh ~= 0 then
+        SetVehRadioStation(veh, "OFF")
+        SetVehicleDoorsLocked(veh, 1)
     end
-
-  end
 end)
 
+--[[
+    -- Type: Event
+    -- Name: keys:loadKey
+    -- Use: Adds a key if not already owned
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 RegisterNetEvent('keys:loadKey')
 AddEventHandler('keys:loadKey', function(plate)
-  if plate == nil then
-    return
-  end
-  if not hasKey(plate) then
-    myKeys[#myKeys+1]= plate
-  end
+    addKey(plate)
 end)
 
+--[[
+    -- Type: Event
+    -- Name: keys:remove
+    -- Use: Removes a key for the provided plate
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 RegisterNetEvent('keys:remove')
 AddEventHandler('keys:remove', function(plate)
-  if plate == nil then
-    return
-  end
-
-  if hasKey(plate) then
-    table.remove(myKeys, tablefind(myKeys, plate))
-  end
+    removeKey(plate)
 end)
 
+--[[
+    -- Type: Event
+    -- Name: keys:reset
+    -- Use: Resets key and interaction state
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 RegisterNetEvent('keys:reset')
 AddEventHandler('keys:reset', function()
-  myKeys = {}
-  latestveh = nil
-  whatthefuckisthisdoing = 0
-  searchedVehs = {}
-  hotwiredVehs = {}
-  fuckingRETARDED = false
+    resetState()
 end)
 
+--[[
+    -- Type: Event
+    -- Name: keys:give
+    -- Use: Gives keys of the closest vehicle to the nearest player
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 RegisterNetEvent('keys:give')
-AddEventHandler('keys:give', function()
-  if #myKeys == 0 then
-    TriggerEvent("DoLongHudText", "You have no keys to give!",2)
-    return
-  end
+AddEventHandler('keys:give', giveKeyToClosest)
 
-  local coordA = GetEntityCoords(PlayerPedId(), 1)
-  local coordB = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 100.0, 0.0)
-  local latestveh = getVehicleInDirection(coordA, coordB)
-
-
-
-
-  if latestveh == nil or not DoesEntityExist(latestveh) then
-    TriggerEvent("DoLongHudText", "Vehicle not found!",2)
-    return
-  end
-
-  if not hasKey(GetVehicleNumberPlateText(latestveh)) then
-      TriggerEvent("DoLongHudText", "No keys for target vehicle!",2)
-      return
-  end
-
-  if #(GetEntityCoords(latestveh) - GetEntityCoords(PlayerPedId(), 0)) > 5 then
-    TriggerEvent("DoLongHudText", "You are to far away from the vehicle!",2)
-    return
-  end
-
-  t, distance = GetClosestPlayer()
-  if(distance ~= -1 and distance < 5) then
-    TriggerServerEvent('keys:send', GetPlayerServerId(t), GetVehicleNumberPlateText(latestveh))
-
-    TriggerEvent("DoLongHudText", "You just gave keys to your vehicles!",1)
-  else
-    TriggerEvent("DoLongHudText", "No player near you!",2)
-  end
-end)
-
+--[[
+    -- Type: Event
+    -- Name: keys:gives
+    -- Use: Gives keys of the current vehicle to all passengers
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 RegisterNetEvent('keys:gives')
-AddEventHandler('keys:gives', function()
-  if #myKeys == 0 then
-    TriggerEvent("DoLongHudText", "You have no keys to give!",2)
-    return
-  end
+AddEventHandler('keys:gives', giveKeysToPassengers)
 
-  local player = PlayerPedId()
-  local veh = GetVehiclePedIsIn(player, false)
-  if veh == nil then
-    TriggerEvent("DoLongHudText", "You are not in a car!",2)
-    return
-  end
-
-  if not hasKey(GetVehicleNumberPlateText(veh)) then
-      TriggerEvent("DoLongHudText", "No keys for target vehicle!",2)
-      return
-  end
-
-  for i=-1, GetVehicleMaxNumberOfPassengers(veh)-1 do
-    local ped = GetPedInVehicleSeat(veh, i)
-    if ped ~= player then
-      for j,v in pairs(GetActivePlayers()) do
-        if GetPlayerPed(v) == ped then
-          TriggerServerEvent('keys:send',GetPlayerServerId(v), GetVehicleNumberPlateText(veh))
-          TriggerEvent("DoLongHudText", "You just gave keys to your vehicles!",1)
-        end
-      end
-    end
-  end
-end)
-
+--[[
+    -- Type: Event
+    -- Name: keys:received
+    -- Use: Adds a key when received from another player
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 RegisterNetEvent('keys:received')
 AddEventHandler('keys:received', function(plate)
-  if plate == nil then
-    return
-  end
-
-  if not hasKey(plate) then
-    myKeys[#myKeys+1]= plate
-    TriggerEvent("DoLongHudText", "You just received keys to a vehicle!",1)
-  else
-    TriggerEvent("DoLongHudText", "You already have keys to that vehicle!",2)
-  end
+    if not hasKey(plate) then
+        addKey(plate)
+        TriggerEvent("DoLongHudText", "You just received keys to a vehicle!", 1)
+    else
+        TriggerEvent("DoLongHudText", "You already have keys to that vehicle!", 2)
+    end
 end)
 
-
+--[[
+    -- Type: Event
+    -- Name: keys:checkandgive
+    -- Use: Copies key ownership from one plate to another
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 RegisterNetEvent('keys:checkandgive')
-AddEventHandler('keys:checkandgive', function(newplate,oldplate)
-  if hasKey(oldplate) then
-    myKeys[#myKeys+1]= newplate
-  end
+AddEventHandler('keys:checkandgive', function(newplate, oldplate)
+    if hasKey(oldplate) then addKey(newplate) end
 end)
 
-towavail = false
-
-RegisterNetEvent("np-jobmanager:playerBecameJob")
-AddEventHandler("np-jobmanager:playerBecameJob", function(job)
-
-  if job == "towtruck" or job == "police" or job == "ems" then 
-    towavail = true 
-  else
-    towavail = false 
-  end
+--[[
+    -- Type: Event
+    -- Name: np-jobmanager:playerBecameJob
+    -- Use: Enables key features for specific jobs
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent('np-jobmanager:playerBecameJob')
+AddEventHandler('np-jobmanager:playerBecameJob', function(job)
+    if job == "towtruck" or job == "police" or job == "ems" then
+        Keys.towEnabled = true
+    else
+        Keys.towEnabled = false
+    end
 end)
 
+--[[
+    -- Type: Event
+    -- Name: keys:hasKeys
+    -- Use: Returns whether the player has keys for a vehicle
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 RegisterNetEvent('keys:hasKeys')
 AddEventHandler('keys:hasKeys', function(from, veh)
-  if veh == nil then
-    if from == 'engine' then
-        TriggerEvent("car:engineHasKeys", veh, false)
-    elseif from == 'doors' then
-        TriggerEvent("keys:unlockDoor", veh, false)
+    if not veh or veh == 0 then
+        if from == 'engine' then
+            TriggerEvent("car:engineHasKeys", veh, false)
+        elseif from == 'doors' then
+            TriggerEvent("keys:unlockDoor", veh, false)
+        end
+        return
     end
-    return
-  end
-
-  local plate = GetVehicleNumberPlateText(veh)
-  local allow = hasKey(plate)
-
-  if from == 'engine' then
-      TriggerEvent("car:engineHasKeys", veh, allow)
-  elseif from == 'doors' then
-      TriggerEvent("keys:unlockDoor", veh, allow)
-  end
+    local plate = GetVehicleNumberPlateText(veh)
+    local allow = hasKey(plate)
+    if from == 'engine' then
+        TriggerEvent("car:engineHasKeys", veh, allow)
+    elseif from == 'doors' then
+        TriggerEvent("keys:unlockDoor", veh, allow)
+    end
 end)
 
-
-function getVehicleInDirection(coordFrom, coordTo)
-  local offset = 0
-  local rayHandle
-  local vehicle
-
-  for i = 0, 100 do
-    rayHandle = CastRayPointToPoint(coordFrom.x, coordFrom.y, coordFrom.z, coordTo.x, coordTo.y, coordTo.z + offset, 10, PlayerPedId(), 0) 
-    a, b, c, d, vehicle = GetRaycastResult(rayHandle)
-    
-    offset = offset - 1
-
-    if vehicle ~= 0 then break end
-  end
-  
-  local distance = Vdist2(coordFrom, GetEntityCoords(vehicle))
-  
-  if distance > 25 then vehicle = nil end
-
-    return vehicle ~= nil and vehicle or 0
-end
-
-
+--[[
+    -- Type: Event
+    -- Name: unseatPlayerCiv
+    -- Use: Removes the closest player from the nearby vehicle if the caller has keys
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 RegisterNetEvent('unseatPlayerCiv')
 AddEventHandler('unseatPlayerCiv', function()
-    local playerped = PlayerPedId()
-    coordA = GetEntityCoords(playerped, 1)
-    coordB = GetOffsetFromEntityInWorldCoords(playerped, 0.0, 20.0, 0.0)
-        
-    targetVehicle = getVehicleInDirection(coordA, coordB)
-    if(targetVehicle ~= nil) then
-
-      local plate = GetVehicleNumberPlateText(targetVehicle)
-      local allow = hasKey(plate)
-
-      t, distance = GetClosestPlayer()
-      if(distance ~= -1 and distance < 10 and allow ) then
-          TriggerServerEvent('unseatAccepted',GetPlayerServerId(t))
-          TriggerEvent("DoLongHudText", 'Unseating',1)
-      else
-          TriggerEvent("DoLongHudText", 'No Player Found or you have No Keys',2)
-      end
-
+    local ped = PlayerPedId()
+    local coordA = GetEntityCoords(ped)
+    local coordB = GetOffsetFromEntityInWorldCoords(ped, 0.0, 5.0, 0.0)
+    local veh = getVehicleInDirection(coordA, coordB)
+    if veh and veh ~= 0 then
+        local plate = GetVehicleNumberPlateText(veh)
+        if hasKey(plate) then
+            local target, distance = GetClosestPlayer()
+            if distance ~= -1 and distance < 10.0 then
+                TriggerServerEvent('unseatAccepted', GetPlayerServerId(target))
+            else
+                TriggerEvent("DoLongHudText", 'No Player Found', 2)
+            end
+        else
+            TriggerEvent("DoLongHudText", 'No Keys', 2)
+        end
     else
-        TriggerEvent("DoLongHudText", 'Car doesnt exist',2)
+        TriggerEvent("DoLongHudText", 'Car does not exist', 2)
     end
-
 end)
 
-
-function DrawText3Ds(x,y,z, text)
-    local onScreen,_x,_y=World3dToScreen2d(x,y,z)
-    local px,py,pz=table.unpack(GetGameplayCamCoords())
-    SetTextScale(0.35, 0.35)
-    SetTextFont(4)
-    SetTextProportional(1)
-    SetTextColour(255, 255, 255, 215)
-    SetTextEntry("STRING")
-    SetTextCentre(1)
-    AddTextComponentString(text)
-    DrawText(_x,_y)
-    local factor = (string.len(text)) / 370
-    DrawRect(_x,_y+0.0125, 0.015+ factor, 0.03, 41, 11, 41, 68)
-end
-
-
-local deadzones = {
-  [1] = { ["x"] = -43.59, ["y"] = -1099.08, ["z"] = 26.43, ["h"] = 107.89 },
-  [2] = { ["x"] = -83.51,["y"] = 80.27,["z"] = 71.55,["h"] = 335.08 },
-  [3] =  { ['x'] = -47.84,['y'] = -1682.12,['z'] = 29.45,['h'] = 311.95 },
-
-}
-RegisterNetEvent("vehsearch:disable")
-AddEventHandler("vehsearch:disable", function(veh)
-    searchedVehs[veh] = true
+--[[
+    -- Type: Event
+    -- Name: vehsearch:disable
+    -- Use: Marks a vehicle as already searched
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent('vehsearch:disable')
+AddEventHandler('vehsearch:disable', function(veh)
+    Keys.searched[veh] = true
 end)
 
+--[[
+    -- Type: Event
+    -- Name: event:control:npkeys
+    -- Use: Handles search and hotwire control actions
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 RegisterNetEvent('event:control:npkeys')
 AddEventHandler('event:control:npkeys', function(useID)
-    local playerped = PlayerPedId()      
-    if IsPedInAnyVehicle(playerped, false) then
-      local veh = GetVehiclePedIsUsing(playerped)
-      local plate = GetVehicleNumberPlateText(veh)    
-      if not searchedVehs[veh] and not hasKey(plate) and GetPedInVehicleSeat(veh, -1) == playerped  then  
-        if useID == 1 then
-          Citizen.Wait(1000)
-          TriggerEvent("civilian:alertPolice",10.0,"lockpick",targetVehicle)
-          shutoffenginesearch()
-        elseif useID == 2 then
-          Citizen.Wait(1000)
-          shutoffenginehotwire()
+    if Keys.inAction then return end
+    local ped = PlayerPedId()
+    if IsPedInAnyVehicle(ped, false) then
+        local veh = GetVehiclePedIsUsing(ped)
+        local plate = GetVehicleNumberPlateText(veh)
+        if GetPedInVehicleSeat(veh, -1) == ped and not hasKey(plate) and not Keys.searched[veh] then
+            if useID == 1 then
+                searchVehicle()
+            elseif useID == 2 then
+                hotwireVehicle()
+            end
         end
-      end
     end
 end)
 
-Controlkey = {["vehicleSearch"] = {47,"G"},["vehicleHotwire"] = {74,"H"}} 
+--[[
+    -- Type: Event
+    -- Name: event:control:update
+    -- Use: Updates control bindings
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 RegisterNetEvent('event:control:update')
-AddEventHandler('event:control:update', function(table)
-  Controlkey["vehicleSearch"] = table["vehicleSearch"]
-  Controlkey["vehicleHotwire"] = table["vehicleHotwire"]
+AddEventHandler('event:control:update', function(tbl)
+    Controls.vehicleSearch = tbl["vehicleSearch"] or Controls.vehicleSearch
+    Controls.vehicleHotwire = tbl["vehicleHotwire"] or Controls.vehicleHotwire
 end)
 
-
-local disableF = false
-Citizen.CreateThread( function()
-  local latestveh = 0
-  while true do
-    Citizen.Wait(1)
-    if disableF then
-      DisableControlAction(0,23,true)
-    end
-    ----- IS IN VEHICLE -----
-      local playerped = PlayerPedId()      
-      if IsPedInAnyVehicle(playerped, false) then        
-          ----- IS DRIVER -----
-          local veh = GetVehiclePedIsUsing(playerped) 
-          local plate = GetVehicleNumberPlateText(veh)
-          if GetPedInVehicleSeat(veh, -1) == playerped then           
-              -- if (latestveh ~= veh) then
-              --   TriggerEvent("tuner:setDriver")
-              -- Moved to np-oVehicleMod
-              -- end
-              if (latestveh ~= veh and not hasKey(plate)) or not hasKey(plate) then
-                TriggerEvent("keys:shutoffengine")
-              end
-
-              if not searchedVehs[veh] and not hasKey(plate) then
-
-                if whatthefuckisthisdoing > 0 then
-                  local d1 = #(vector3(deadzones[1]["x"], deadzones[1]["y"], deadzones[1]["z"]) - GetEntityCoords(PlayerPedId()))
-                  local d2 = #(vector3(deadzones[2]["x"], deadzones[2]["y"], deadzones[2]["z"]) - GetEntityCoords(PlayerPedId()))
-                  local d3 = #(vector3(deadzones[3]["x"], deadzones[3]["y"], deadzones[3]["z"]) - GetEntityCoords(PlayerPedId()))
-                  if d1 > 10.0 and d2 > 10.0 and d2 > 25.0 then
-                    local pos = GetOffsetFromEntityInWorldCoords(veh, 0.0, 2.0, 1.0)
-                    DrawText3Ds(pos["x"],pos["y"],pos["z"], "["..Controlkey["vehicleSearch"][2].."] Search / ["..Controlkey["vehicleHotwire"][2].."] Hotwire" )
-                  end
-                end
-              end
-
-              latestveh = veh
-          end
-      else
-        Wait(100)
-      end
-  end
-end)
-
-
-
-function DropItemPed()
-
-    local veh = GetVehiclePedIsUsing(PlayerPedId())
-    local d1,d2 = GetModelDimensions(GetEntityModel(veh))
-    local pos = GetOffsetFromEntityInWorldCoords(veh, 0.0,d1["y"]-0.5,0.0)
-    local chance = math.random(150)
-    if chance == 2 then
-        SetVehicleDoorOpen(veh, 5, 0, 0)
-    elseif chance == 3 then
-        SetVehicleDoorOpen(veh, 5, 0, 0)
-    else
-      
-        TriggerServerEvent('mission:completed', math.random(30))
-    end
-
-end
-
-function shutoffenginesearch()
-     local veh = GetVehiclePedIsUsing(PlayerPedId())
-
-    if not fuckingRETARDED then
-       
-        searchedVehs[veh] = true
-       fuckingRETARDED = true
-       
-        TriggerEvent("keys:shutoffengine")
-
-        if not IsPedInAnyVehicle(PlayerPedId(), false) then
-          fuckingRETARDED = false
-          return
-        end
-        local finished = exports["np-taskbar"]:taskBar(5000,"Searching")
-        Citizen.Wait(100)
-
-        local luck = math.random(50,69)
-
-        if not IsPedInAnyVehicle(PlayerPedId(), false) then
-          fuckingRETARDED = false
-          return
-        end
-        if luck == 69 and finished == 100 then
-          local finished = exports["np-taskbar"]:taskBar(2000,"Found and Using Keys")
-          SetVehicleEngineOn(veh,0,1,1)
-          SetVehicleUndriveable(veh,false)
-          TriggerEvent("keys:addNew",veh,GetVehicleNumberPlateText(veh))
-        end
-        if not IsPedInAnyVehicle(PlayerPedId(), false) then
-          fuckingRETARDED = false
-          return
-        end        
-        luck = math.random(100)
-        local finished = exports["np-taskbar"]:taskBar(5000,"Searching Backseat")
-        if luck > 75 and finished then
-          if not IsPedInAnyVehicle(PlayerPedId(), false) then
-            fuckingRETARDED = false
-            return
-          end
-          local finished = exports["np-taskbar"]:taskBar(2000,"Found Content")
-          DropItemPed()
-        end
-
-        fuckingRETARDED = false
-
-
-    end
- end
-
-
-
-function shutoffenginehotwire()
-
-    local veh = GetVehiclePedIsUsing(PlayerPedId())
-    if hotwiredVehs[veh] then
-      TriggerEvent("DoLongHudText","You can not work out this hotwire.",2)
-      return
-    end
-
-    if not fuckingRETARDED then
-        TriggerEvent("animation:lockpickinvtest",true)
-        TriggerEvent("civilian:alertPolice",10.0,"lockpick",veh)
-        hotwiredVehs[veh] = true
-        fuckingRETARDED = true
-        TriggerEvent("keys:shutoffengine")
-        Citizen.Wait(100)
-
-        if not IsPedInAnyVehicle(PlayerPedId(), false) then
-          fuckingRETARDED = false
-          whatthefuckisthisdoing = 0
-          TriggerEvent("animation:lockpickinvtest",false)
-          return
-        end
-        local carTimer = GetVehicleHandlingFloat(veh, 'CHandlingData', 'nMonetaryValue')
-        if carTimer > 120000 then
-          carTimer = 120000
-        end
-        if carTimer < 45000 then
-          carTimer = 45000
-        end
-        
-        carTimer = math.random(math.ceil(carTimer/2),math.ceil(carTimer))
-        whatthefuckisthisdoing = carTimer
-        
-        local finished = exports["np-taskbar"]:taskBar(carTimer,"Attempting Hotwire")
-        Citizen.Wait(100)
-
-        local luck = math.random(50,70)
-        if carTimer > 50000 then
-          luck = luck - 3
-        end
-        if not IsPedInAnyVehicle(PlayerPedId(), false) then
-          fuckingRETARDED = false
-          whatthefuckisthisdoing = 0
-          TriggerEvent("animation:lockpickinvtest",false)
-          return
-        end
-        if luck > 63 and finished == 100 then
-          SetVehicleEngineOn(veh,0,1,1)
-          SetVehicleUndriveable(veh,false)
-          TriggerEvent("keys:addNew",veh,GetVehicleNumberPlateText(veh))
-          TriggerEvent("DoLongHudText","You successfully hotwired the vehicle.",1)
-        else
-          TriggerEvent("DoLongHudText","You can not work out this hotwire.",2)
-        end
-        if not IsPedInAnyVehicle(PlayerPedId(), false) then
-          fuckingRETARDED = false
-          whatthefuckisthisdoing = 0
-          TriggerEvent("animation:lockpickinvtest",false)
-          return
-        end        
-        whatthefuckisthisdoing = 0
-        fuckingRETARDED = false
-
-        TriggerEvent("animation:lockpickinvtest",false)
-    end
- end
-
-
-
-function dolater()
-      local veh = GetVehiclePedIsUsing(PlayerPedId())
-    local plate = GetVehicleNumberPlateText(veh)
-    local model = GetEntityModel(veh)
-    local otherped = GetPedInVehicleSeat(veh, -1)
-
-    if PlayerPedId() ~= otherped then
-
-      TaskVehicleDriveToCoord(GetPedInVehicleSeat(veh, -1), veh, 0.0,0.0,0.0, 40.0, 1074528293, model, 2883621, 0, -1)
-      return
-    end
-end
-
-RegisterNetEvent("timer:stolenvehicle")
-AddEventHandler("timer:stolenvehicle", function(plate)
-    Citizen.Wait(math.random(10000000))
-    TriggerServerEvent("timer:addplate",plate)
-end)
-
-
-
-
-
-domsgnow = 0
-Citizen.CreateThread( function()
-    while true do
-        Citizen.Wait(1)
-        local doingsomething = false
-        if GetVehiclePedIsTryingToEnter(PlayerPedId()) ~= nil and GetVehiclePedIsTryingToEnter(PlayerPedId()) ~= 0 then
-          doingsomething = true
-          local curveh = GetVehiclePedIsTryingToEnter(PlayerPedId())
-          local plate1 = GetVehicleNumberPlateText(curveh)
-
-          -- temporary fix for segway on / off to prevent desync and anim bugs.
-          if GetEntityModel(curveh) == `POLFEGWAY` then
-              local targetCoords = GetEntityCoords(curveh, 0)
-              local ply = PlayerPedId()
-              local plyCoords = GetEntityCoords(ply, 0)
-              local distance = #(vector3(targetCoords["x"], targetCoords["y"], targetCoords["z"]) - vector3(plyCoords["x"], plyCoords["y"], plyCoords["z"]))
-              if distance < 2.5 then
-                ClearPedTasksImmediately(PlayerPedId())
-                SetPedIntoVehicle(PlayerPedId(), curveh, 0)
-                SetPedIntoVehicle(PlayerPedId(), curveh, -1)
-              end
-          end
-
-          if not hasKey(plate1) then
-
-            local pedDriver = GetPedInVehicleSeat(curveh, -1)
-            if pedDriver ~= 0 and (not IsPedAPlayer(pedDriver) or IsEntityDead(pedDriver)) then
-
-              if IsEntityDead(pedDriver) then
-
-                TriggerEvent("civilian:alertPolice",20.0,"lockpick",targetVehicle)
-                local finished = exports["np-taskbar"]:taskBar(3000,"Taking Keys",false)
-                if finished == 100 then
-                 -- SetEntityAsMissionEntity(curveh,false,true)
-                  TriggerEvent("keys:addNew",curveh,plate1)
-                  TriggerEvent("timer:stolenvehicle",plate1)
-                else
-                  ClearPedTasksImmediately(PlayerPedId())
-                end
-              else
-                local pedOwner = NetworkGetEntityOwner(pedDriver)
-
-                if pedOwner == PlayerId() then
-                    DecorSetBool(pedDriver, 'ScriptedPed', true)
-                else
-                    TriggerServerEvent('np:peds:decor', GetPlayerServerId(pedOwner), PedToNet(pedDriver))
-                end
-
-                if GetEntityModel(curveh) ~= `taxi` then
-                  
-                  if math.random(100) > 95 then
-
-                      TriggerEvent("civilian:alertPolice",20.0,"lockpick",targetVehicle)
-                      local finished = exports["np-taskbar"]:taskBar(3000,"Taking Keys")
-                      if finished == 100 then
-                       -- SetEntityAsMissionEntity(curveh,false,true)
-                        TriggerEvent("keys:addNew",curveh,plate1)
-                      else
-                        ClearPedTasksImmediately(PlayerPedId())
-                      end
-
-                  else
-                    SetVehicleDoorsLocked(curveh, 2)
-
-                    Citizen.Wait(1000)
-                    TriggerEvent("civilian:alertPolice",20.0,"lockpick",targetVehicle)
-                    TaskReactAndFleePed(pedDriver, PlayerPedId())
-                    SetPedKeepTask(pedDriver, true)
-                    ClearPedTasksImmediately(PlayerPedId())
-                    disableF = true
-                    Citizen.Wait(2000)
-                    disableF = false
-                  end
-                  
-                else
-                  TriggerEvent("startAITaxi",true)
-                  
-                  
-                  SetPedIntoVehicle(PlayerPedId(), curveh, 2)
-                  SetPedIntoVehicle(PlayerPedId(), curveh, 1)
-
-                end
-              end
-            end
-          end
-        end
-
-        if IsPedJacking(PlayerPedId()) then
-          doingsomething = true
-            local veh = GetVehiclePedIsUsing(PlayerPedId())
-            local plate = GetVehicleNumberPlateText(veh)
-            local stayhere = true
-
-           while stayhere do
-
-                local inCar = IsPedInAnyVehicle(PlayerPedId(), false)
-                if not inCar then
-                    stayhere = false
-                end
-
-                if IsVehicleEngineOn(veh) and not hasKey(plate) then
-                    TriggerEvent("keys:shutoffengine")
-                    stayhere = false
-                end
-                Citizen.Wait(1)
-            end
-        end   
-
-        if domsgnow > 0 then
-          domsgnow = domsgnow - 1
-        end
-        if not doingsomething then
-          Wait(100)
-        end
-    end
-end)
-
-local bypass = false
-local enforce = 0
-local dele = 0
-
-local function runningTick()
-  local playerPed = PlayerPedId()
-  local playerVehicle = GetVehiclePedIsUsing(playerPed)
-  local isPlayerDriving = GetPedInVehicleSeat(playerVehicle, -1) == playerPed
-  local plate = GetVehicleNumberPlateText(playerVehicle)
-
-  if IsPedGettingIntoAVehicle(playerPed) then return 0 end
-
-  if playerVehicle and isPlayerDriving then
-
-    if IsControlJustReleased(1,96) and not IsThisModelAHeli(GetEntityModel(playerVehicle)) then
-        TriggerEvent("car:engine")
-    end
-    
-    CanShuffleSeat(playerPed, false)
-    if (IsControlPressed(2, 75) or bypass) and IsVehicleDriveable(playerVehicle) then
-      if enforce < 10 and hasKey(plate) then
-        bypass = true
-        SetVehicleEngineOn(playerVehicle, true, true)
-        enforce = enforce + 1
-        return 0
-      end 
-
-      if dele < 200 then
-        dele = dele + 1
-        return 0
-      end
-
-      if IsControlPressed(2, 75) and hasKey(plate) then
-        SetVehicleEngineOn(playerVehicle, false, true)
-      elseif IsVehicleDriveable(playerVehicle) then
-        SetVehicleEngineOn(playerVehicle, true, true)
-      end
-
-      bypass = false
-      dele = 0
-      enforce = 0
-    end
-  else
-    bypass = false
-    dele = 0
-    enforce = 0
-    Wait(100)
-  end
-end
-
-Citizen.CreateThread(function()
-  while true do
-    Citizen.Wait(1)
-    runningTick()
-  end
-end)
-
-
-
+--[[
+    -- Type: Event
+    -- Name: keys:startvehicle
+    -- Use: Starts the engine if the vehicle is in good condition
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 RegisterNetEvent('keys:startvehicle')
 AddEventHandler('keys:startvehicle', function()
-  local veh = GetVehiclePedIsUsing(PlayerPedId())
-    if GetVehicleEngineHealth(veh) > 199 then
-      whatthefuckisthisdoing = 0
-      SetVehicleEngineOn(veh,0,1,1)
-      Citizen.Wait(100)
-
-      SetVehicleUndriveable(veh,false)
-      SetVehicleEngineOn(veh,1,0,1)
-      Citizen.Wait(100) 
-      
-      if not Citizen.InvokeNative(0xAE31E7DF9B5B132E, veh) then
-        SetVehicleEngineOn(veh,1,1,1)
-      end
+    local veh = GetVehiclePedIsUsing(PlayerPedId())
+    if veh ~= 0 and GetVehicleEngineHealth(veh) > 199.0 then
+        Keys.engineLockTimer = 0
+        SetVehicleEngineOn(veh, true, false, true)
+        SetVehicleUndriveable(veh, false)
     else
-       SetVehicleEngineOn(veh,0,0,1)
-       SetVehicleUndriveable(veh,true)
+        SetVehicleEngineOn(veh, false, true, true)
+        SetVehicleUndriveable(veh, true)
     end
 end)
-local runningshutoff = false
- RegisterNetEvent('keys:shutoffengine')
- AddEventHandler('keys:shutoffengine', function()
 
-      whatthefuckisthisdoing = 1000
-      if runningshutoff then
-        return
-      end
-      runningshutoff = true
-      while whatthefuckisthisdoing > 0 do
-          local veh = GetVehiclePedIsUsing(PlayerPedId())
-           Citizen.Wait(1)
-           SetVehicleEngineOn(veh,0,1,1)
-          whatthefuckisthisdoing = whatthefuckisthisdoing - 1  
-       end
-
-       whatthefuckisthisdoing = 0
-       runningshutoff = false
- end)
-
-
-
-
-function tablefind(tab,el)
-  for index, value in pairs(tab) do
-    if value == el then
-      return index
+--[[
+    -- Type: Event
+    -- Name: keys:shutoffengine
+    -- Use: Temporarily disables the engine while performing actions
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local runningShutdown = false
+RegisterNetEvent('keys:shutoffengine')
+AddEventHandler('keys:shutoffengine', function()
+    Keys.engineLockTimer = 1000
+    if runningShutdown then return end
+    runningShutdown = true
+    while Keys.engineLockTimer > 0 do
+        Citizen.Wait(1)
+        local veh = GetVehiclePedIsUsing(PlayerPedId())
+        SetVehicleEngineOn(veh, false, true, true)
+        Keys.engineLockTimer = Keys.engineLockTimer - 1
     end
-  end
-end
+    runningShutdown = false
+end)
 
-function hasKey(plate)
-  local has = false
-    for _,v in pairs(myKeys) do
-    if v ~= nil and v == plate then
-        has = true
-    end
-  end
-  return has
-end
-exports('hasKey', hasKey);
-
-function GetPlayers()
+--[[
+    -- Type: Function
+    -- Name: GetPlayers
+    -- Use: Returns a list of active players
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function GetPlayers()
     local players = {}
-
     for i = 0, 255 do
         if NetworkIsPlayerActive(i) then
-            players[#players+1]= i
+            players[#players+1] = i
         end
     end
-
     return players
 end
 
+--[[
+    -- Type: Function
+    -- Name: GetClosestPlayer
+    -- Use: Finds the closest player to the caller
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 function GetClosestPlayer()
     local players = GetPlayers()
     local closestDistance = -1
     local closestPlayer = -1
     local ply = PlayerPedId()
-    local plyCoords = GetEntityCoords(ply, 0)
-    
-    for index,value in ipairs(players) do
+    local plyCoords = GetEntityCoords(ply)
+    for _, value in ipairs(players) do
         local target = GetPlayerPed(value)
-        if(target ~= ply) then
-            local targetCoords = GetEntityCoords(GetPlayerPed(value), 0)
-            local distance = #(vector3(targetCoords["x"], targetCoords["y"], targetCoords["z"]) - vector3(plyCoords["x"], plyCoords["y"], plyCoords["z"]))
-            if(closestDistance == -1 or closestDistance > distance) then
+        if target ~= ply then
+            local targetCoords = GetEntityCoords(target)
+            local distance = #(targetCoords - plyCoords)
+            if closestDistance == -1 or closestDistance > distance then
                 closestPlayer = value
                 closestDistance = distance
             end
         end
     end
-    
     return closestPlayer, closestDistance
 end
