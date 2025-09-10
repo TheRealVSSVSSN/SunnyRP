@@ -1,11 +1,11 @@
-  // Mouse Controls
-  var documentWidth = document.documentElement.clientWidth;
-  var documentHeight = document.documentElement.clientHeight;
-  var audioPlayer = null
+let documentWidth = document.documentElement.clientWidth;
+let documentHeight = document.documentElement.clientHeight;
+let audioPlayer = null;
+const resource = typeof GetParentResourceName === 'function' ? GetParentResourceName() : 'np-lockpicking';
 
-  var minRot = -90,
+let minRot = -90,
     maxRot = 90,
-    solveDeg = ( Math.random() * 180 ) - 90,
+    solveDeg = Math.random() * 180 - 90,
     solvePadding = 1,
     maxDistFromSolve = 25,
     pinRot = 0,
@@ -21,338 +21,297 @@
     userPushingCyl = false,
     gameOver = false,
     gamePaused = false,
-    pin, cyl, driver, cylRotationInterval, pinLastDamaged;
+    pin,
+    cyl,
+    driver,
+    cylRotationInterval,
+    pinLastDamaged;
 
+document.addEventListener('DOMContentLoaded', () => {
+    pin = document.getElementById('pin');
+    cyl = document.getElementById('cylinder');
+    driver = document.getElementById('driver');
 
-$(document).ready(function(){
-  
-  //pop vars
-  pin = $('#pin');
-  cyl = $('#cylinder');
-  driver = $('#driver');
-  
-  $('body').on('mousemove', function(e){
+    document.body.addEventListener('mousemove', e => {
+        if (lastMousePos && !gameOver && !gamePaused) {
+            const pinRotChange = (e.clientX - lastMousePos) / mouseSmoothing;
+            pinRot += pinRotChange / 2;
+            pinRot = Util.clamp(pinRot, maxRot, minRot);
+            pin.style.transform = `rotateZ(${pinRot}deg)`;
+        }
+        lastMousePos = e.clientX;
+    });
 
-    if (lastMousePos && !gameOver && !gamePaused) {
-      var pinRotChange = (e.clientX - lastMousePos)/mouseSmoothing;
-      pinRot += pinRotChange/2;
-      pinRot = Util.clamp(pinRot,maxRot,minRot);
-      pin.css({
-        transform: "rotateZ("+pinRot+"deg)"
-      })
-    }
-    lastMousePos = e.clientX;
-  });
-  $('body').on('mouseleave', function(e){
-    lastMousePos = 0;
-  });
+    document.body.addEventListener('mouseleave', () => {
+        lastMousePos = 0;
+    });
 
- 
+    document.body.addEventListener('keydown', e => {
+        if ((e.keyCode === 87 || e.keyCode === 65 || e.keyCode === 83 || e.keyCode === 68) && !userPushingCyl && !gameOver && !gamePaused) {
+            pushCyl();
+        }
+        if (e.keyCode === 39 && !userPushingCyl && !gameOver && !gamePaused) {
+            pinUpdate(1);
+        }
+        if (e.keyCode === 37 && !userPushingCyl && !gameOver && !gamePaused) {
+            pinUpdate(2);
+        }
+    });
 
-  $('body').on('keydown', function(e){  
+    document.body.addEventListener('keyup', e => {
+        pinUpdate(0);
 
-    if ( (e.keyCode == 87 || e.keyCode == 65 || e.keyCode == 83 || e.keyCode == 68 ) && !userPushingCyl && !gameOver && !gamePaused) {
-      pushCyl();
-    }
-    if ( (e.keyCode == 39) && !userPushingCyl && !gameOver && !gamePaused) {
-      pinUpdate(1)
-    }
-    
-    if ( (e.keyCode == 37 ) && !userPushingCyl && !gameOver && !gamePaused) {
-      pinUpdate(2)
-    }
+        if ((e.keyCode === 87 || e.keyCode === 65 || e.keyCode === 83 || e.keyCode === 68) && !gameOver) {
+            unpushCyl();
+        }
 
-  });
-  
-  $('body').on('keyup', function(e){
-     pinUpdate(0)
+        if (e.keyCode === 27) {
+            fetch(`https://${resource}/close`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: '{}'
+            });
+        }
+    });
 
-    if ( (e.keyCode == 87 || e.keyCode == 65 || e.keyCode == 83 || e.keyCode == 68 ) && !gameOver) {
-      unpushCyl();
-    }
-  });
-  
-  //TOUCH HANDLERS
-  $('body').on('touchstart', function(e){
-    console.log('touchStart',e)
-    if ( !e.touchList ) {
-    }
-    else if (e.touchList) {
-    }
-  })
-}); //docready
+    document.body.addEventListener('touchstart', e => {
+        console.log('touchStart', e);
+    });
+});
 
 let updating = 0;
-let penis = false;
+let pinUpdating = false;
 function pinUpdate(set) {
-  updating = set
-  if (set == 0 || penis) {
-    return
-  }
-  penis = true
-  if (set == 1) {
-    pinRot = pinRot + 1
-  } else {
-    pinRot = pinRot - 1
-  }
-  pin = $('#pin');
-  pin.css({
-    transform: "rotateZ("+pinRot+"deg)"
-  })
+    updating = set;
+    if (set === 0 || pinUpdating) return;
 
+    pinUpdating = true;
+    pinRot = set === 1 ? pinRot + 1 : pinRot - 1;
+    pin.style.transform = `rotateZ(${pinRot}deg)`;
 
-  if (updating != 0 && !userPushingCyl && !gameOver && !gamePaused) {
-    setTimeout(() => {
-      pinUpdate(updating);
-      penis = false;
-    },1)
-  }
+    if (updating !== 0 && !userPushingCyl && !gameOver && !gamePaused) {
+        setTimeout(() => {
+            pinUpdating = false;
+            pinUpdate(updating);
+        }, 1);
+    } else {
+        pinUpdating = false;
+    }
 }
 
-
-
-//CYL INTERACTIVITY EVENTS
+// CYL INTERACTIVITY EVENTS
 function pushCyl() {
-  var distFromSolve, cylRotationAllowance;
-      clearInterval(cylRotationInterval);
-      userPushingCyl = true;
-      //set an interval based on keyrepeat that will rotate the cyl forward, and if cyl is at or past maxCylRotation based on pick distance from solve, display "bounce" anim and do damage to pick. If pick is within sweet spot params, allow pick to rotate to maxRot and trigger solve functionality
-      
-      //SO...to calculate max rotation, we need to create a linear scale from solveDeg+padding to maxDistFromSolve - if the user is more than X degrees away from solve zone, they are maximally distant and the cylinder cannot travel at all. Let's start with 45deg. So...we need to create a scale and do a linear conversion. If user is at or beyond max, return 0. If user is within padding zone, return 100. Cyl may travel that percentage of maxRot before hitting the damage zone.
-      
-      distFromSolve = Math.abs(pinRot - solveDeg) - solvePadding;
-      distFromSolve = Util.clamp(distFromSolve, maxDistFromSolve, 0);
-     
-      cylRotationAllowance = Util.convertRanges(distFromSolve, 0, maxDistFromSolve, 1, 0.02); //oldval is distfromsolve, oldmin is....0? oldMax is maxDistFromSolve, newMin is 100 (we are at solve, so cyl may travel 100% of maxRot), newMax is 0 (we are at or beyond max dist from solve, so cyl may not travel at all - UPDATE - must give cyl just a teensy bit of travel so user isn't hammered);
-      cylRotationAllowance = cylRotationAllowance * maxRot;
-      
-      cylRotationInterval = setInterval(function(){
+    let distFromSolve, cylRotationAllowance;
+    clearInterval(cylRotationInterval);
+    userPushingCyl = true;
+
+    distFromSolve = Math.abs(pinRot - solveDeg) - solvePadding;
+    distFromSolve = Util.clamp(distFromSolve, maxDistFromSolve, 0);
+
+    cylRotationAllowance = Util.convertRanges(distFromSolve, 0, maxDistFromSolve, 1, 0.02);
+    cylRotationAllowance = cylRotationAllowance * maxRot;
+
+    cylRotationInterval = setInterval(() => {
         cylRot += cylRotSpeed;
         if (cylRot >= maxRot) {
-          cylRot = maxRot;
-          // do happy solvey stuff
-          clearInterval(cylRotationInterval);
-          unlock();
+            cylRot = maxRot;
+            clearInterval(cylRotationInterval);
+            unlock();
+        } else if (cylRot >= cylRotationAllowance) {
+            cylRot = cylRotationAllowance;
+            damagePin();
         }
-        else if (cylRot >= cylRotationAllowance) {
-          cylRot = cylRotationAllowance;
-          // do sad pin-hurty stuff
-          damagePin();
-        }
-        
-        cyl.css({
-          transform: "rotateZ("+cylRot+"deg)"
-        });
-        driver.css({
-          transform: "rotateZ("+cylRot+"deg)"
-        });
-      },keyRepeatRate);
+
+        cyl.style.transform = `rotateZ(${cylRot}deg)`;
+        driver.style.transform = `rotateZ(${cylRot}deg)`;
+    }, keyRepeatRate);
 }
 
-function unpushCyl(){
-  userPushingCyl = false;
-      //set an interval based on keyrepeat that will rotate the cyl backward, and if cyl is at or past origin, set to origin and stop.
-      clearInterval(cylRotationInterval);
-      cylRotationInterval = setInterval(function(){
+function unpushCyl() {
+    userPushingCyl = false;
+    clearInterval(cylRotationInterval);
+    cylRotationInterval = setInterval(() => {
         cylRot -= cylRotSpeed;
-        cylRot = Math.max(cylRot,0);
-        cyl.css({
-          transform: "rotateZ("+cylRot+"deg)"
-        })
-        driver.css({
-          transform: "rotateZ("+cylRot+"deg)"
-        })
+        cylRot = Math.max(cylRot, 0);
+        cyl.style.transform = `rotateZ(${cylRot}deg)`;
+        driver.style.transform = `rotateZ(${cylRot}deg)`;
         if (cylRot <= 0) {
-          cylRot = 0;
-          clearInterval(cylRotationInterval);
+            cylRot = 0;
+            clearInterval(cylRotationInterval);
         }
-      },keyRepeatRate);
+    }, keyRepeatRate);
 }
 
-//PIN AND SOLVE EVENTS
-
+// PIN AND SOLVE EVENTS
 function damagePin() {
-  if ( !pinLastDamaged || Date.now() - pinLastDamaged > pinDamageInterval) {
-    var tl = new TimelineLite();
-    pinHealth -= pinDamage;
-    pinLastDamaged = Date.now()
-    
-    //pin damage/lock jiggle animation
-    tl.to(pin, (pinDamageInterval/4)/1000, {
-      rotationZ: pinRot - 2
-    });
-    tl.to(pin, (pinDamageInterval/4)/1000, {
-      rotationZ: pinRot
-    });
-    if (pinHealth <= 0) {
-      breakPin();
+    if (!pinLastDamaged || Date.now() - pinLastDamaged > pinDamageInterval) {
+        const tl = new TimelineLite();
+        pinHealth -= pinDamage;
+        pinLastDamaged = Date.now();
+
+        tl.to(pin, (pinDamageInterval / 4) / 1000, {
+            rotationZ: pinRot - 2
+        });
+        tl.to(pin, (pinDamageInterval / 4) / 1000, {
+            rotationZ: pinRot
+        });
+        if (pinHealth <= 0) {
+            breakPin();
+        }
     }
-  }
 }
 
 function breakPin() {
-  playSound("pinbreak",0.3)
-      var tl, pinTop,pinBott;
-      gamePaused = true;
-      clearInterval(cylRotationInterval);
-      numPins--;
-  $('span').text(numPins)
-      pinTop = pin.find('.top');
-      pinBott = pin.find('.bott');
-      tl = new TimelineLite();
-      tl.to(pinTop, 0.7, {
-              rotationZ: -400,
-              x: -200,
-              y: -100,
-              opacity: 0
-            });
-      tl.to(pinBott, 0.7, {
+    playSound('pinbreak', 0.3);
+    let tl, pinTop, pinBott;
+    gamePaused = true;
+    clearInterval(cylRotationInterval);
+    numPins--;
+    const span = document.querySelector('span');
+    if (span) span.textContent = numPins;
+    pinTop = pin.querySelector('.top');
+    pinBott = pin.querySelector('.bott');
+    tl = new TimelineLite();
+    tl.to(pinTop, 0.7, {
+        rotationZ: -400,
+        x: -200,
+        y: -100,
+        opacity: 0
+    });
+    tl.to(pinBott, 0.7, {
         rotationZ: 400,
         x: 200,
         y: 100,
         opacity: 0,
-        onComplete: function(){
-          if (numPins > 0) {
-            gamePaused = false; 
-            reset();
-          }
-          else {
-            outOfPins();
-          }
+        onComplete: () => {
+            if (numPins > 0) {
+                gamePaused = false;
+                reset();
+            } else {
+                outOfPins();
+            }
         }
-      }, 0)
-      tl.play();       
+    }, 0);
+    tl.play();
 }
 
 function reset() {
-      //solveDeg = ( Math.random() * 180 ) - 90;
-      cylRot = 0;
-      pinHealth = 100;
-      pinRot = 0;
-      pin.css({
-        transform: "rotateZ("+pinRot+"deg)"
-      })  
-      cyl.css({
-        transform: "rotateZ("+cylRot+"deg)"
-      })  
-      driver.css({
-        transform: "rotateZ("+cylRot+"deg)"
-      })  
-      TweenLite.to(pin.find('.top'),0,{
+    cylRot = 0;
+    pinHealth = 100;
+    pinRot = 0;
+    pin.style.transform = `rotateZ(${pinRot}deg)`;
+    cyl.style.transform = `rotateZ(${cylRot}deg)`;
+    driver.style.transform = `rotateZ(${cylRot}deg)`;
+    TweenLite.to(pin.querySelector('.top'), 0, {
         rotationZ: 0,
         x: 0,
         y: 0,
         opacity: 1
-      });
-      TweenLite.to(pin.find('.bott'),0,{
+    });
+    TweenLite.to(pin.querySelector('.bott'), 0, {
         rotationZ: 0,
         x: 0,
         y: 0,
         opacity: 1
-      });
+    });
 }
 
-function playSound(file,volume)
-{
-  if (audioPlayer != null) {
-    audioPlayer.pause();
-  }
-
-  audioPlayer = new Audio("./sounds/" + file + ".ogg");
-  audioPlayer.volume = volume;
-  audioPlayer.play();
-
+function playSound(file, volume) {
+    if (audioPlayer != null) {
+        audioPlayer.pause();
+    }
+    audioPlayer = new Audio(`./sounds/${file}.ogg`);
+    audioPlayer.volume = volume;
+    audioPlayer.play();
 }
 
 function outOfPins() {
-  $.post('http://np-lockpicking/failure', JSON.stringify({}));
-  gameOver = true;
-  $('#lose').css('display','inline-block');
-  $('#modal').fadeIn();
+    fetch(`https://${resource}/failure`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: '{}'
+    });
+    gameOver = true;
+    const lose = document.getElementById('lose');
+    const modal = document.getElementById('modal');
+    if (lose) lose.style.display = 'inline-block';
+    if (modal) modal.style.display = 'block';
 }
 
 function unlock() {
-  $.post('http://np-lockpicking/complete', JSON.stringify({}));
-  playSound("lockUnlocked",0.6)
-  gameOver = true;
-  $('#win').css('display','inline-block');
-  $('#modal').fadeIn();
+    fetch(`https://${resource}/complete`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: '{}'
+    });
+    playSound('lockUnlocked', 0.6);
+    gameOver = true;
+    const win = document.getElementById('win');
+    const modal = document.getElementById('modal');
+    if (win) win.style.display = 'inline-block';
+    if (modal) modal.style.display = 'block';
 }
 
-//UTIL
-Util = {};
-Util.clamp = function(val,max,min) {
-  return Math.min(Math.max(val, min), max);
-}
-Util.convertRanges = function(OldValue, OldMin, OldMax, NewMin, NewMax) {
-  return (((OldValue - OldMin) * (NewMax - NewMin)) / (OldMax - OldMin)) + NewMin
-}
+// UTIL
+const Util = {};
+Util.clamp = function (val, max, min) {
+    return Math.min(Math.max(val, min), max);
+};
+Util.convertRanges = function (OldValue, OldMin, OldMax, NewMin, NewMax) {
+    return (((OldValue - OldMin) * (NewMax - NewMin)) / (OldMax - OldMin)) + NewMin;
+};
 
+let gameObject = null;
 
-
-var gameObject = null
-
-function openContainer()
-{
-  $("#wrap").css("display", "block");
-   document.body.style.backgroundColor = "rgba(190,190,190,0.2)";
+function openContainer() {
+    document.getElementById('wrap').style.display = 'block';
+    document.body.style.backgroundColor = 'rgba(190,190,190,0.2)';
 }
 
-function closeContainer()
-{
-  $("#wrap").css("display", "none");
-  document.body.style.backgroundColor = "rgba(190,190,190,0.0)";
+function closeContainer() {
+    document.getElementById('wrap').style.display = 'none';
+    document.body.style.backgroundColor = 'rgba(190,190,190,0.0)';
 }
 
 // Listen for NUI Events
-window.addEventListener('message', function(event){
-  var item = event.data;
+window.addEventListener('message', event => {
+    const item = event.data;
 
-  if(item.openPhone === true) {
-    openContainer();
-  }
+    if (item.openPhone === true) {
+        openContainer();
+    }
 
-  if(item.openSection == "playgame") {
-    
-    solveDeg = ( Math.random() * 180 ) - 90
-    solvePadding = item.padding
-    maxDistFromSolve = item.solveDist
-    pinDamage = item.damage
-    pinHealth = item.health
+    if (item.openSection === 'playgame') {
+        solveDeg = Math.random() * 180 - 90;
+        solvePadding = item.padding;
+        maxDistFromSolve = item.solveDist;
+        pinDamage = item.damage;
+        pinHealth = item.health;
 
-    minRot = -90
-    maxRot = 90
-    pinRot = 0,
-    cylRot = 0,
-    lastMousePos = 0,
-    mouseSmoothing = 2,
-    keyRepeatRate = 25,
-    cylRotSpeed = 3,
-    pinDamageInterval = 150,
-    numPins = 1,
-    userPushingCyl = false,
-    gameOver = false,
-    gamePaused = false,
-    pin = $('#pin');
-    cyl = $('#cylinder');
-    driver = $('#driver');
-    cylRotationInterval = null 
-    pinLastDamaged = null 
+        minRot = -90;
+        maxRot = 90;
+        pinRot = 0;
+        cylRot = 0;
+        lastMousePos = 0;
+        mouseSmoothing = 2;
+        keyRepeatRate = 25;
+        cylRotSpeed = 3;
+        pinDamageInterval = 150;
+        numPins = 1;
+        userPushingCyl = false;
+        gameOver = false;
+        gamePaused = false;
+        pin = document.getElementById('pin');
+        cyl = document.getElementById('cylinder');
+        driver = document.getElementById('driver');
+        cylRotationInterval = null;
+        pinLastDamaged = null;
 
+        reset();
+    }
 
-
-    reset()
-  }
-
-  if(item.openPhone === false) {
-    closeContainer();
-  }
+    if (item.openPhone === false) {
+        closeContainer();
+    }
 });
-
-
-document.onkeyup = function (data) {
-  if (data.which == 27 ) {
-    $.post('http://np-lockpicking/close', JSON.stringify({}));
-  }
-};
 
