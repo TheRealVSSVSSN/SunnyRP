@@ -6,3 +6,9 @@
 - Added radius constant to blackjack table locator and corrected prop name outputs.
 - Moved animation dictionary cleanup outside the dealer creation loop to prevent missing animation issues.
 - Converted global state to local variables and tightened betting validation on the server.
+
+## LockDoors
+- Replaced legacy `__resource.lua` with modern `fxmanifest.lua` and enabled Lua 5.4.
+- Updated vehicle detection to use `StartShapeTestRay` and vector math for reliability.
+- Refactored locking logic into helper functions and localized variables to remove globals.
+- Consolidated light flashing into a single function and switched to `Wait` helper.
