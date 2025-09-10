@@ -1,13 +1,17 @@
--- This resource is part of the default Cfx.re asset pack (cfx-server-data)
--- Altering or recreating for local use only is strongly discouraged.
+-- Modernized test resource for FiveM
 
-version '1.0.0'
+fx_version 'cerulean'
+lua54 'yes'
+
+game 'gta5'
+
+name 'fivem-test'
 author 'Cfx.re <root@cfx.re>'
-description 'A compatibility resource to load basic-gamemode.'
+version '1.1.0'
+description 'Compatibility resource to load basic-gamemode with join notifications.'
 repository 'https://github.com/citizenfx/cfx-server-data'
 
--- compatibility wrapper
-fx_version 'adamant'
-game 'common'
+client_script 'client.lua'
+server_script 'server.lua'
 
 dependency 'basic-gamemode'
