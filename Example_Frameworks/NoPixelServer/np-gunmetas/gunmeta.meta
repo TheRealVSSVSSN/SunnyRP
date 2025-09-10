@@ -2729,7 +2729,7 @@
           <FirstPersonAsThirdPersonRNGOffset x="-0.025" y="-0.025" z="-0.040" />
           <FirstPersonAsThirdPersonLTOffset x="0.050" y="0.060" z="-0.0250" />
           <FirstPersonAsThirdPersonScopeOffset x="0.070" y="0.000000" z="-0.020" />
-          <FirstPersonAsThirdPersonWeaponBlockedOffset x="000000" y="0.000000" z="000000" />
+          <FirstPersonAsThirdPersonWeaponBlockedOffset x="0.000000" y="0.000000" z="0.000000" />
           <FirstPersonDofSubjectMagnificationPowerFactorNear value="1.025000" />
           <FirstPersonDofMaxNearInFocusDistance value="0.000000" />
           <FirstPersonDofMaxNearInFocusDistanceBlendLevel value="0.300000" />
@@ -3022,7 +3022,7 @@
           <FirstPersonAsThirdPersonRNGOffset x="-0.025" y="-0.025" z="-0.040" />
           <FirstPersonAsThirdPersonLTOffset x="0.050" y="0.060" z="-0.0250" />
           <FirstPersonAsThirdPersonScopeOffset x="0.070" y="0.000000" z="-0.020" />
-          <FirstPersonAsThirdPersonWeaponBlockedOffset x="000000" y="0.000000" z="00000" />
+          <FirstPersonAsThirdPersonWeaponBlockedOffset x="0.000000" y="0.000000" z="0.000000" />
           <FirstPersonDofSubjectMagnificationPowerFactorNear value="1.025000" />
           <FirstPersonDofMaxNearInFocusDistance value="0.000000" />
           <FirstPersonDofMaxNearInFocusDistanceBlendLevel value="0.300000" />
@@ -3317,7 +3317,7 @@
           <FirstPersonAsThirdPersonRNGOffset x="-0.025" y="-0.025" z="-0.040" />
           <FirstPersonAsThirdPersonLTOffset x="0.050" y="0.060" z="-0.0250" />
           <FirstPersonAsThirdPersonScopeOffset x="0.070" y="0.000000" z="-0.020" />
-          <FirstPersonAsThirdPersonWeaponBlockedOffset x="0.000000" y="0.000000" z="0.00000" />
+          <FirstPersonAsThirdPersonWeaponBlockedOffset x="0.000000" y="0.000000" z="0.000000" />
           <FirstPersonDofSubjectMagnificationPowerFactorNear value="1.025000" />
           <FirstPersonDofMaxNearInFocusDistance value="0.000000" />
           <FirstPersonDofMaxNearInFocusDistanceBlendLevel value="0.300000" />
@@ -3646,14 +3646,9 @@
         </Item>
       </Infos>
     </Item>
-    <Item>
-      <Infos />
-    </Item>
-    <Item>
-      <Infos />
-    </Item>
   </Infos>
   <VehicleWeaponInfos />
   <WeaponGroupDamageForArmouredVehicleGlass />
-  <Name>DLC - PENIS</Name>
+  <Name>Custom Weapon Metadata</Name>
 </CWeaponInfoBlob>
+
