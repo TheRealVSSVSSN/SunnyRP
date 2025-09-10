@@ -179,7 +179,7 @@ function DrawText3Ds(x,y,z, text)
 
 end
 
-Citizen.CreateThread(function()
+CreateThread(function()
     local c = 0
     local page = 1
 
@@ -200,7 +200,7 @@ Citizen.CreateThread(function()
     until not key
 
     while true do
-        Citizen.Wait(1)
+        Wait(1)
         if WarMenu.IsMenuOpened("emotes") then
             DrawMenu()
 
@@ -259,7 +259,7 @@ Citizen.CreateThread(function()
                 end
             end
         else
-            Citizen.Wait(500)
+            Wait(500)
         end
     end
 end)
@@ -283,9 +283,9 @@ AddEventHandler("np-admin:currentDevmode", function(devmode)
     dToggle = devmode
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
-        Citizen.Wait(1)
+        Wait(1)
         if not dToggle then
             local model = GetEntityModel(PlayerPedId())
 

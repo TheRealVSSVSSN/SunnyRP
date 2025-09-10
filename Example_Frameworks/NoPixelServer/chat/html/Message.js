@@ -8,50 +8,47 @@ Vue.component('message', {
       let s = this.template ? this.template : this.templates[this.templateId];
 
       //This hack is required to preserve backwards compatability
-      if (this.templateId == CONFIG.defaultTemplateId
-          && this.args.length == 1) {
+      if (this.templateId === CONFIG.defaultTemplateId
+          && this.args.length === 1) {
         s = this.templates[CONFIG.defaultAltTemplateId] //Swap out default template :/
       }
 
       s = s.replace(/{(\d+)}/g, (match, number) => {
-        const argEscaped = this.args[number] != undefined ? this.escape(this.args[number]) : match
-        if (number == 0 && this.color) {
-          if (this.color == 1) {
+        const argEscaped = this.args[number] !== undefined ? this.escape(this.args[number]) : match;
+        if (number === 0 && this.color) {
+          if (this.color === 1) {
             return `<div class=stategained> <b>${argEscaped}</b> ` ;
           }
-          if (this.color == 2) {
+          if (this.color === 2) {
             return `<div class=tweet> <b>${argEscaped}</b> ` ;
           }
-          if (this.color == 3) {
+          if (this.color === 3) {
             return `<div class=emergency> <b>${argEscaped}</b> ` ;
-          }  
-          if (this.color == 4) {
+          }
+          if (this.color === 4) {
             return `<div class=system> <b>${argEscaped}</b> ` ;
-          }  
-          if (this.color == 5) {
+          }
+          if (this.color === 5) {
             return `<div class=smsfrom> <b>${argEscaped}</b> ` ;
-          }  
-          if (this.color == 6) {
+          }
+          if (this.color === 6) {
             return `<div class=smsto> <b>${argEscaped}</b> ` ;
-          }  
-          if (this.color == 7) {
+          }
+          if (this.color === 7) {
             return `<div class=action> <b>${argEscaped}</b> ` ;
-          } 
-          if (this.color == 8) {
+          }
+          if (this.color === 8) {
             return `<div class=pager> <b>${argEscaped}</b> ` ;
           }
-
-          if (this.color == 9) {
-            var now = new Date();
-            var dob = new Date(this.args.DOB);
-            var Fname = this.args.Name;
-            var Lname = this.args.Surname;
-            var sex = this.args.Sex;
-            var identifier = this.args.Identifier;
-            var pref = this.args.pref;
-            console.log(Fname + Lname)
-            // console.log(this.args.Name)
-            // console.log(this.args.DOB)
+          if (this.color === 9) {
+            const now = new Date();
+            const dob = new Date(this.args.DOB);
+            const Fname = this.args.Name;
+            const Lname = this.args.Surname;
+            const sex = this.args.Sex;
+            const identifier = this.args.Identifier;
+            const pref = this.args.pref;
+            console.log(Fname + Lname);
 
             return `<div class="license">
             <div class="license__state">San Andreas</div>
