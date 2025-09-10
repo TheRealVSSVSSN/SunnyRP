@@ -17,6 +17,8 @@ Provides the core utilities for RedM servers built on VORP. This resource handle
 - Introduces `SetCanAttackFriendly` alongside `NetworkSetFriendlyFireOption` to fully respect the player's PVP choice.
 - Fixes a high CPU usage bug by defaulting the main loop to a one-second wait, only running every frame when necessary.
 - Adds parentheses around mount and vehicle checks to ensure proper logic when evaluating active PVP state.
+- Caches minimap state to avoid redundant `SetMinimapType` calls and uses corrected mount detection.
+- Merges periodic health and stamina persistence into a single thread with a configurable save interval.
 
 ## client/callbacks.lua
 - Validates callback names using proper logical checks to avoid accepting non-string identifiers.
