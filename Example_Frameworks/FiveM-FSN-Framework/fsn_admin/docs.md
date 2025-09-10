@@ -87,6 +87,7 @@ Historical manifest that loaded legacy scripts (`client.lua`, `server.lua`, `ser
 | `onResourceStart` | Server event | `resourceName` | Pre-registers admin commands. |
 | `chat:addMessage` | Server → Client | template, args | Sends staff chat and feedback messages. |
 | `chat:addSuggestion` | Server → Client | command, help, args | Populates chat suggestions. |
+| `fsn:getFsnObject` | Server event | callback | Retrieves shared FSN API; loop lacks wait (Inferred High). |
 | `fsn_cargarage:makeMine` | Client event | vehicle, model, plate | Claims spawned vehicle. |
 | `fsn_notify:displayNotification` | Client event | message, position, duration, type | Displays notifications. |
 | `fsn_admin:spawnCar` | Net event (legacy) | `car` (model name) | Spawns vehicle using client natives in server script (Inferred High). |
