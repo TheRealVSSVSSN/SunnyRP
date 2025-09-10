@@ -1,98 +1,111 @@
+/*
+  Type: Script
+  Name: scripts.js
+  Use: Renders keypad UI and communicates with the Lua client
+  Created: 2024-02-16
+  By: VSSVSSN
+*/
 
+const wrap = document.getElementById('wrap');
+const pinCode = document.getElementById('PINcode');
 
+function buildKeypad() {
+  const form = document.createElement('form');
+  form.id = 'PINform';
+  form.autocomplete = 'off';
 
+  const box = document.createElement('input');
+  box.id = 'PINbox';
+  box.type = 'password';
+  box.disabled = true;
+  form.appendChild(box);
+  form.appendChild(document.createElement('br'));
 
+  const layout = [
+    ['1', '2', '3'],
+    ['4', '5', '6'],
+    ['7', '8', '9'],
+    ['clear', '0', 'enter']
+  ];
 
-function openContainer()
-{
+  layout.forEach(row => {
+    row.forEach(val => {
+      const btn = document.createElement('input');
+      btn.type = 'button';
+      btn.className = 'PINbutton';
+      btn.value = val;
 
-  $("#wrap").css("display", "block");
-$( "#PINcode" ).html(
-  "<form action='' method='' name='PINform' id='PINform' autocomplete='off' draggable='true'>" +
-    "<input id='PINbox' type='password' value='' name='PINbox' disabled />" +
-    "<br/>" +
-    "<input type='button' class='PINbutton' name='1' value='1' id='1' onClick=addNumber(this); />" +
-    "<input type='button' class='PINbutton' name='2' value='2' id='2' onClick=addNumber(this); />" +
-    "<input type='button' class='PINbutton' name='3' value='3' id='3' onClick=addNumber(this); />" +
-    "<br>" +
-    "<input type='button' class='PINbutton' name='4' value='4' id='4' onClick=addNumber(this); />" +
-    "<input type='button' class='PINbutton' name='5' value='5' id='5' onClick=addNumber(this); />" +
-    "<input type='button' class='PINbutton' name='6' value='6' id='6' onClick=addNumber(this); />" +
-    "<br>" +
-    "<input type='button' class='PINbutton' name='7' value='7' id='7' onClick=addNumber(this); />" +
-    "<input type='button' class='PINbutton' name='8' value='8' id='8' onClick=addNumber(this); />" +
-    "<input type='button' class='PINbutton' name='9' value='9' id='9' onClick=addNumber(this); />" +
-    "<br>" +
-    "<input type='button' class='PINbutton clear' name='-' value='clear' id='-' onClick=clearForm(this); />" +
-    "<input type='button' class='PINbutton' name='0' value='0' id='0' onClick=addNumber(this); />" +
-    "<input type='button' class='PINbutton enter' name='+' value='enter' id='+' onClick=submitForm(PINbox); />" +
-  "</form>"
-);
+      if (val === 'clear' || val === 'enter') {
+        btn.classList.add(val);
+      }
 
+      btn.addEventListener('click', () => {
+        if (val === 'clear') {
+          box.value = '';
+        } else if (val === 'enter') {
+          submitPin(box.value);
+        } else {
+          box.value += val;
+        }
+      });
+
+      form.appendChild(btn);
+    });
+    form.appendChild(document.createElement('br'));
+  });
+
+  pinCode.appendChild(form);
 }
 
-function closeContainer()
-{
-  $("#wrap").css("display", "none");
+function openContainer() {
+  wrap.style.display = 'block';
+  const box = document.getElementById('PINbox');
+  if (box) box.value = '';
 }
 
-window.addEventListener('message', function(event){
-  var item = event.data;
+function closeContainer() {
+  wrap.style.display = 'none';
+  const box = document.getElementById('PINbox');
+  if (box) box.value = '';
+}
 
-  if(item.open === true) {
-    openContainer()
+function sendNui(name, data = {}) {
+  fetch(`https://np-keypad/${name}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+    body: JSON.stringify(data)
+  });
+}
+
+function submitPin(value) {
+  if (value) {
+    sendNui('complete', { pin: value });
+    document.getElementById('PINbox').value = '';
   }
-  if(item.close === true) {
-    closeContainer()
+}
+
+window.addEventListener('message', event => {
+  const item = event.data;
+  if (item.open) {
+    openContainer();
   }
-
-
+  if (item.close) {
+    closeContainer();
+  }
 });
 
-let keys = [1,2,3,4,5,6,7,8,9,0]
+document.addEventListener('keydown', e => {
+  const box = document.getElementById('PINbox');
+  if (wrap.style.display !== 'block') return;
 
-document.onkeyup = function (data) {
-  if (data.which == 27 ) {
-    $.post('http://np-keypad/close', JSON.stringify({}));
-  } else if (data.which == 13 ) {
-    $.post('http://np-keypad/complete', JSON.stringify({ pin: $( "#PINbox" ).val() }));
-  } else {
-    if ( !isNaN(data.key) ) {
-      var v = $( "#PINbox" ).val();
-      $( "#PINbox" ).val( v + data.key );
-    }
+  if (e.key === 'Escape') {
+    sendNui('close');
+  } else if (e.key === 'Enter') {
+    submitPin(box.value);
+  } else if (/^[0-9]$/.test(e.key)) {
+    box.value += e.key;
   }
-};
+});
 
-
-function addNumber(e){
-  //document.getElementById('PINbox').value = document.getElementById('PINbox').value+element.value;
-  var v = $( "#PINbox" ).val();
-  $( "#PINbox" ).val( v + e.value );
-}
-function clearForm(e){
-  //document.getElementById('PINbox').value = "";
-  $( "#PINbox" ).val( "" );
-}
-function submitForm(e) {
-  if (e.value == "") {
-
-  } else {
-     $.post('http://np-keypad/complete', JSON.stringify({ pin:e.value }));
-    data = {
-      pin: e.value
-    }
-    /*    
-    apiCall( data, function( r ) {
-      $( "#logo" ).attr( "src", r.site_logo );
-      $( ".title-msg" ).text( r.site_msg );
-      accent = r.accent;
-      $( ".accent-bg" ).css( "background-color", accent );
-    });
-    */
-    
-    //document.getElementById('PINbox').value = "";
-    $( "#PINbox" ).val( "" );
-  };
-};
+document.addEventListener('DOMContentLoaded', buildKeypad);
 
