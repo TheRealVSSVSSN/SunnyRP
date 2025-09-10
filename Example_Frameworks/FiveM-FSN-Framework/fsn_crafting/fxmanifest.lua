@@ -1,21 +1,29 @@
---[[/	:FSN:	\]]--
-fx_version 'adamant'
+--[[/   :FSN:   \]]--
+fx_version 'cerulean'
 game 'gta5'
+lua54 'yes'
 
-client_script '@fsn_main/cl_utils.lua'
-server_script '@fsn_main/sv_utils.lua'
-client_script '@fsn_main/server_settings/sh_settings.lua'
-server_script '@fsn_main/server_settings/sh_settings.lua'
-server_script '@mysql-async/lib/MySQL.lua'
---[[/	:FSN:	\]]--
-
-ui_page "nui/index.html"
-files {
-	"nui/index.html",
-	"nui/index.css",
-	"nui/index.js",
+shared_scripts {
+    '@fsn_main/server_settings/sh_settings.lua'
 }
 
+client_scripts {
+    '@fsn_main/cl_utils.lua',
+    'client.lua'
+}
 
-client_script 'client.lua'
-server_script 'server.lua'
+server_scripts {
+    '@fsn_main/sv_utils.lua',
+    '@mysql-async/lib/MySQL.lua',
+    'server.lua'
+}
+
+--[[/   :FSN:   \]]--
+
+ui_page 'nui/index.html'
+files {
+    'nui/index.html',
+    'nui/index.css',
+    'nui/index.js'
+}
+
