@@ -1,3 +1,11 @@
+--[[
+    -- Type: Client Script
+    -- Name: client.lua
+    -- Use: Core client logic for bank robbery
+    -- Created: 2024-04-XX
+    -- By: VSSVSSN
+--]]
+
 local current_time = 0
 local cracking = false
 local start_time = 0
@@ -50,100 +58,100 @@ function round(num, numDecimalPlaces)
 end
 function resultDisplay(accepted)
   if not accepted then
-    Citizen.CreateThread(function()
+    CreateThread(function()
       while true do
-        Citizen.Wait(0)
+        Wait(0)
           drawTxt('~r~CODE REJECTED',4,1,0.5,0.25,0.6,255,255,255,255)
           PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
-        Citizen.Wait(20)
+        Wait(20)
           drawTxt('~r~CODE REJECTED',4,1,0.5,0.25,0.6,255,255,255,255)
           PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
-        Citizen.Wait(20)
+        Wait(20)
           drawTxt('~r~CODE REJECTED',4,1,0.5,0.25,0.6,255,255,255,255)
           PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
-        Citizen.Wait(20)
+        Wait(20)
           drawTxt('~r~CODE REJECTED',4,1,0.5,0.25,0.6,255,255,255,255)
           PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
-        Citizen.Wait(20)
+        Wait(20)
           drawTxt('~r~CODE REJECTED',4,1,0.5,0.25,0.6,255,255,255,255)
           PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
-        Citizen.Wait(20)
+        Wait(20)
           drawTxt('~r~CODE REJECTED',4,1,0.5,0.25,0.6,255,255,255,255)
           PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
-        Citizen.Wait(20)
+        Wait(20)
           drawTxt('~r~CODE REJECTED',4,1,0.5,0.25,0.6,255,255,255,255)
           PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
-        Citizen.Wait(20)
+        Wait(20)
           drawTxt('~r~CODE REJECTED',4,1,0.5,0.25,0.6,255,255,255,255)
           PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
-        Citizen.Wait(20)
+        Wait(20)
           drawTxt('~r~CODE REJECTED',4,1,0.5,0.25,0.6,255,255,255,255)
           PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
-        Citizen.Wait(20)
+        Wait(20)
           drawTxt('~r~CODE REJECTED',4,1,0.5,0.25,0.6,255,255,255,255)
           PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
-        Citizen.Wait(20)
+        Wait(20)
           drawTxt('~r~CODE REJECTED',4,1,0.5,0.25,0.6,255,255,255,255)
           PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
-        Citizen.Wait(20)
+        Wait(20)
           drawTxt('~r~CODE REJECTED',4,1,0.5,0.25,0.6,255,255,255,255)
           PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
-        Citizen.Wait(20)
+        Wait(20)
           drawTxt('~r~CODE REJECTED',4,1,0.5,0.25,0.6,255,255,255,255)
           PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
-        Citizen.Wait(20)
+        Wait(20)
           drawTxt('~r~CODE REJECTED',4,1,0.5,0.25,0.6,255,255,255,255)
           PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
-        Citizen.Wait(20)
+        Wait(20)
           drawTxt('~r~CODE REJECTED',4,1,0.5,0.25,0.6,255,255,255,255)
           PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
-        Citizen.Wait(20)
+        Wait(20)
           drawTxt('~r~CODE REJECTED',4,1,0.5,0.25,0.6,255,255,255,255)
           PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
-        Citizen.Wait(20)
+        Wait(20)
           drawTxt('~r~CODE REJECTED',4,1,0.5,0.25,0.6,255,255,255,255)
           PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
-        Citizen.Wait(20)
+        Wait(20)
           drawTxt('~r~CODE REJECTED',4,1,0.5,0.25,0.6,255,255,255,255)
           PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
-        Citizen.Wait(20)
+        Wait(20)
           drawTxt('~r~CODE REJECTED',4,1,0.5,0.25,0.6,255,255,255,255)
           PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
-        Citizen.Wait(20)
+        Wait(20)
           drawTxt('~r~CODE REJECTED',4,1,0.5,0.25,0.6,255,255,255,255)
           PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
-        Citizen.Wait(20)
+        Wait(20)
           drawTxt('~r~CODE REJECTED',4,1,0.5,0.25,0.6,255,255,255,255)
           PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
-        Citizen.Wait(20)
+        Wait(20)
           drawTxt('~r~CODE REJECTED',4,1,0.5,0.25,0.6,255,255,255,255)
           PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
-        Citizen.Wait(20)
+        Wait(20)
           drawTxt('~r~CODE REJECTED',4,1,0.5,0.25,0.6,255,255,255,255)
           PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
-        Citizen.Wait(20)
+        Wait(20)
           drawTxt('~r~CODE REJECTED',4,1,0.5,0.25,0.6,255,255,255,255)
           PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
-        Citizen.Wait(20)
+        Wait(20)
           drawTxt('~r~CODE REJECTED',4,1,0.5,0.25,0.6,255,255,255,255)
           PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
-        Citizen.Wait(20)
+        Wait(20)
           drawTxt('~r~CODE REJECTED',4,1,0.5,0.25,0.6,255,255,255,255)
           PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
-        Citizen.Wait(20)
+        Wait(20)
           drawTxt('~r~CODE REJECTED',4,1,0.5,0.25,0.6,255,255,255,255)
           PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
-        Citizen.Wait(20)
+        Wait(20)
           drawTxt('~r~CODE REJECTED',4,1,0.5,0.25,0.6,255,255,255,255)
           PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
         break
       end
     end)
   else
-    Citizen.CreateThread(function()
+    CreateThread(function()
       local time = current_time
       while true do
-        Citizen.Wait(0)
+        Wait(0)
         if current_time > time + 10000 then
           drawTxt('~g~CODE ACCEPTED',4,1,0.5,0.25,0.6,255,255,255,255)
         end
@@ -272,7 +280,7 @@ AddEventHandler('fsn_bankrobbery:closeDoor', function(id)
   door.status.status = 'closed'
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
   for k, v in pairs(bankdoors) do
     local blip = AddBlipForCoord(v.keypad.x, v.keypad.y, v.keypad.z)
     SetBlipSprite(blip, 277)
@@ -283,7 +291,7 @@ Citizen.CreateThread(function()
     EndTextCommandSetBlipName(blip)
   end
   while true do
-    Citizen.Wait(0)
+    Wait(0)
     if cracking then
       local rem = start_time + 750
       if rem < current_time then
@@ -481,16 +489,16 @@ Citizen.CreateThread(function()
 					TriggerServerEvent('fsn_bankrobbery:start')
                 while not HasAnimDictLoaded('mp_heists@keypad@') do
                   RequestAnimDict('mp_heists@keypad@')
-                  Citizen.Wait(5)
+                  Wait(5)
                 end
                 RequestAnimSet( "move_ped_crouched" )
                 while ( not HasAnimSetLoaded( "move_ped_crouched" ) ) do
-                    Citizen.Wait( 100 )
+                    Wait( 100 )
                 end
                 SetPedMovementClipset( PlayerPedId(), "move_ped_crouched", 0.25 )
                 FreezeEntityPosition(PlayerPedId(), true)
                 TaskPlayAnim(PlayerPedId(), 'mp_heists@keypad@', 'enter', 8.0, 1.0, -1, 0, 1.0, 0, 0, 0)
-                Citizen.Wait(1)
+                Wait(1)
                 TaskPlayAnim(PlayerPedId(), 'mp_heists@keypad@', 'idle_a', 8.0, 1.0, -1, 49, 1.0, 0, 0, 0)
                 start_time = current_time
                 cracking_id = k
@@ -520,9 +528,9 @@ Citizen.CreateThread(function()
     end
   end
 end)
-Citizen.CreateThread(function()
+CreateThread(function()
   while true do
-    Citizen.Wait(1000)
+    Wait(1000)
     current_time = current_time + 1
   end
 end)
@@ -537,9 +545,9 @@ end)
 -- LostMC Robbery
 -----------------------
 local safe = {x = 977.23968505859, y = -104.10308074951, z = 74.845184326172}
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
-		Citizen.Wait(0)
+		Wait(0)
 		if GetDistanceBetweenCoords(safe.x, safe.y, safe.z, GetEntityCoords(PlayerPedId())) < 2 then
 			SetTextComponentFormat("STRING")
             AddTextComponentString("HINT: Use your lockpick")
@@ -597,7 +605,7 @@ AddEventHandler('fsn_bankrobbery:LostMC:spawn', function()
 	end
 	start = current_time
 	while true do
-		Citizen.Wait(0)
+		Wait(0)
 		local ped = exports["fsn_entfinder"]:getPedNearCoords(LostMC.x, LostMC.y, LostMC.z, 100)
 		ClearPedTasksImmediately(ped)
 		TaskCombatPed(ped, PlayerPedId(), 0, 16)
@@ -615,46 +623,25 @@ end)
 -----------------------
 -- Hardware Robbery
 -----------------------
-local function EnumerateEntities(initFunc, moveFunc, disposeFunc)
-  return coroutine.wrap(function()
-    local iter, id = initFunc()
-    if not id or id == 0 then
-      disposeFunc(iter)
-      return
-    end
-
-    local enum = {handle = iter, destructor = disposeFunc}
-    setmetatable(enum, entityEnumerator)
-
-    local next = true
-    repeat
-      coroutine.yield(id)
-      next, id = moveFunc(iter)
-    until not next
-
-    enum.destructor, enum.handle = nil, nil
-    disposeFunc(iter)
-  end)
-end
 function EnumerateVehicles()
-  return EnumerateEntities(FindFirstVehicle, FindNextVehicle, EndFindVehicle)
+  return GetGamePool('CVehicle')
 end
 
 local hardware_loc = {x = 2701.7890625, y = 3454.84375, z = 55.907398223877, h = 294.06103515625}
 local exploded_truck = false
 local truck = 'mule3'
 local lockpicked = false
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
-		Citizen.Wait(0)
+		Wait(0)
 		if GetDistanceBetweenCoords(hardware_loc.x, hardware_loc.y, hardware_loc.z, GetEntityCoords(PlayerPedId())) < 50 then
-			for obj in EnumerateVehicles() do
-				if GetDistanceBetweenCoords(hardware_loc.x, hardware_loc.y, hardware_loc.z, GetEntityCoords(obj)) < 5 then
-					if GetEntityModel(obj) == GetHashKey(truck) then
-						exploded_truck = obj
-					end
-				end
-			end
+                        for _, obj in ipairs(EnumerateVehicles()) do
+                                if GetDistanceBetweenCoords(hardware_loc.x, hardware_loc.y, hardware_loc.z, GetEntityCoords(obj)) < 5 then
+                                        if GetEntityModel(obj) == GetHashKey(truck) then
+                                                exploded_truck = obj
+                                        end
+                                end
+                        end
 			if exploded_truck then
 				if DoesEntityExist(exploded_truck) then
 					if GetDistanceBetweenCoords(2698.2124023438, 3453.1557617188, 56.79305267334, GetEntityCoords(PlayerPedId())) < 0.5 then
@@ -666,11 +653,11 @@ Citizen.CreateThread(function()
 						if IsControlJustPressed(0, 38) then
 							while ( not HasAnimDictLoaded( "mini@safe_cracking" ) ) do
 								RequestAnimDict( "mini@safe_cracking" )
-								Citizen.Wait( 5 )
+								Wait( 5 )
 							end
 							TaskPlayAnim(PlayerPedId(), "mini@safe_cracking", "idle_base", 8.0, 1.0, 12000, 2, 0, 0, 1, 1 )
 							FreezeEntityPosition(PlayerPedId(), true)
-							Citizen.Wait(12000)
+							Wait(12000)
 							FreezeEntityPosition(PlayerPedId(), false)
 							SetVehicleDoorOpen(exploded_truck, 2, false, false)
 							SetVehicleDoorOpen(exploded_truck, 3, false, false)
@@ -684,11 +671,11 @@ Citizen.CreateThread(function()
 						if IsControlJustPressed(0, 38) then
 							while not HasAnimDictLoaded('pickup_object') do
 								RequestAnimDict('pickup_object')
-								Citizen.Wait(5)
+								Wait(5)
 							end
 							TaskPlayAnim(PlayerPedId(), 'pickup_object', 'pickup_low', 8.0, 1.0, -1, 49, 1.0, 0, 0, 0)
 							DeleteObject(obj)
-							Citizen.Wait(1000)
+							Wait(1000)
 							ClearPedTasks(PlayerPedId())
 							TriggerEvent('fsn_inventory:item:add', 'drill', 1)
 						end
@@ -697,7 +684,7 @@ Citizen.CreateThread(function()
 					exploded_truck = false
 				end
 			else
-				Citizen.Wait(500)
+				Wait(500)
 				RequestModel(GetHashKey(truck))
 				while not HasModelLoaded(GetHashKey(truck)) do
 					Wait(1)
@@ -741,9 +728,9 @@ end)
 -----------------------
 -- Timer, I really need to confine all these to 1 in fsn_main - todo
 -----------------------
-Citizen.CreateThread(function()
+CreateThread(function()
   while true do
-    Citizen.Wait(1000)
+    Wait(1000)
     current_time = current_time + 1
   end
 end)

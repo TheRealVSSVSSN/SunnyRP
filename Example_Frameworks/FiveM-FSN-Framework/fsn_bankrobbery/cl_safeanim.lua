@@ -1,3 +1,11 @@
+--[[
+    -- Type: Client Script
+    -- Name: cl_safeanim.lua
+    -- Use: Safe cracking mini-game
+    -- Created: 2024-04-XX
+    -- By: VSSVSSN
+--]]
+
 RegisterNetEvent("safecracking:start")
 AddEventHandler("safecracking:start", function()
 	TriggerEvent("DoLongHudText", "Cracking safe!",1)
@@ -56,7 +64,7 @@ AddEventHandler("safecracking:loop", function()
 		end
 
 		dicks = dicks + 0.2
-		Citizen.Wait(1)
+		Wait(1)
 
 		if i < 0.0 then i = 360.0 end
 		if i > 360.0 then i = 0.0 end
@@ -68,7 +76,7 @@ AddEventHandler("safecracking:loop", function()
 		end
 
 		if IsDisabledControlPressed(1, 74) and safelock ~= desirednum then
-			Citizen.Wait(1000)
+			Wait(1000)
 		end
 
 		if safelock == desirednum then
@@ -146,7 +154,7 @@ animsSucceed[4] = "dial_turn_succeed_4"
 function loadAnimDict( dict )
     while ( not HasAnimDictLoaded( dict ) ) do
         RequestAnimDict( dict )
-        Citizen.Wait( 5 )
+        Wait( 5 )
     end
 end 
 
@@ -188,7 +196,7 @@ end
 function loadSafeTexture()
 	RequestStreamedTextureDict( "MPSafeCracking", false );
 	while not HasStreamedTextureDictLoaded( "MPSafeCracking" ) do
-		Citizen.Wait(0)
+		Wait(0)
 	end
 end
 
@@ -196,6 +204,6 @@ function loadSafeAudio()
 	RequestAmbientAudioBank( "SAFE_CRACK", false )
 end
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	--TriggerEvent("safecracking:start")
 end)
