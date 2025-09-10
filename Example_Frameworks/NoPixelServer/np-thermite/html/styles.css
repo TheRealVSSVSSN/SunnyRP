@@ -1,73 +1,75 @@
-$light: #eee;
-$dark: #252627;
-$bar: #aa6657;
+:root {
+  --light: #eee;
+  --dark: #252627;
+  --bar: #aa6657;
+}
 
 body {
   height: 100vh;
-  background: $dark;
+  background: var(--dark);
   overflow: hidden;
   display: flex;
   align-items: stretch;
   flex-direction: column;
-  color: $light;
-  font-family: -apple-system, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
-  font-family: monospace;
+  color: var(--light);
+  font-family: -apple-system, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif, monospace;
   font-size: 5vh;
   position: relative;
 }
+
 main {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  
-
 }
+
 header,
 footer {
   height: 5%;
   line-height: 5vh;
   font-size: 3vh;
-  background: $bar;
+  background: var(--bar);
   text-align: right;
   text-transform: uppercase;
   padding: 0 2.5vh;
 }
+
 footer {
   display: flex;
   justify-content: space-between;
- 
 }
- ul {
+
+ul {
   position: static;
   margin-top: 205%;
   margin-right: 33%;
-    display: flex;
-    flex-direction: row-reverse; 
-    list-style: none;
-  }
+  display: flex;
+  flex-direction: row-reverse;
+  list-style: none;
+}
 
-  .bullshit {
-    height: 5%;
-    line-height: 5vh;
-    font-size: 3vh;
-    text-align: center;
-    text-transform: uppercase;
-    padding: 0 2.5vh;
-    display: block;
-    justify-content: space-between;
-  }
+.bullshit {
+  height: 5%;
+  line-height: 5vh;
+  font-size: 3vh;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 0 2.5vh;
+  display: block;
+  justify-content: space-between;
+}
 
-  .misses {
-    padding: .5vh;
-    transition: all .225s ease-out;
-  }
+.misses {
+  padding: .5vh;
+  transition: all .225s ease-out;
+}
 
-  .misses.missed {
-    opacity: .4;
-    transform: rotate(-45deg);
-  }
+.misses.missed {
+  opacity: .4;
+  transform: rotate(-45deg);
+}
 
 main > div {
   position: absolute;
@@ -78,36 +80,40 @@ main > div {
   transition: opacity .7s ease-in;
   font-size: 4.2vh;
   opacity: 0.65;
-  > span {
-    position: absolute;
-    display: block;
-    perspective: 300px;
-    b {
-      display: block;
-      padding: 2.5vh;
-      transition: opacity .25s linear;
-    }
-  }
+}
+
+main > div > span {
+  position: absolute;
+  display: block;
+  perspective: 300px;
+}
+
+main > div > span b {
+  display: block;
+  padding: 2.5vh;
+  transition: opacity .25s linear;
 }
 
 main > div.popped {
-    opacity: 0;
-    > span {
-      b {
-        opacity: 0;
-      }
-      animation-play-state: paused;
-    }
-  }
+  opacity: 0;
+}
 
+main > div.popped > span {
+  animation-play-state: paused;
+}
 
- main > div.missed {
-    opacity: 0;
-    > span {
-      //  transform: scaleY(0);
-      animation-play-state: paused;
-    }
-  }
+main > div.popped > span b {
+  opacity: 0;
+}
+
+main > div.missed {
+  opacity: 0;
+}
+
+main > div.missed > span {
+  /* transform: scaleY(0); */
+  animation-play-state: paused;
+}
 
 @keyframes waver {
   100% {
@@ -119,69 +125,67 @@ main > div.popped {
   opacity: 100;
   pointer-events: none;
   transition: opacity .75s ease-out;
-  background: rgba(0,120,90,.75);
-  
+  background: rgba(0, 120, 90, .75);
   position: absolute;
   top: 80%;
   right: 0;
   bottom: 13%;
   left: 0;
   width: 10%;
-  
   display: block;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  
   text-transform: uppercase;
-  
-  &.indeed {
-    opacity: 1;
-    pointer-events: auto;
-  }
+}
+
+#game-border.indeed {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 button {
   appearance: none;
   border-radius: 0;
-  border: .3rem solid $light;
-  color: $light;
+  border: .3rem solid var(--light);
+  color: var(--light);
   font-size: 3vh;
   padding: 1.5vh 2vh;
   background: transparent;
   margin-top: 5vh;
   font-family: monospace;
-  
-  &:hover {
-    border-color: $bar;
-  }
+}
+
+button:hover {
+  border-color: var(--bar);
 }
 
 .phone-container {
   background-image: url("nui://np-thermite/html/backgroundwhite.png");
-  background-repeat:no-repeat;
-  background-size:100% 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   width: 300px;
   height: 610px;
   border-radius: 10px;
-  margin-left:82%;
-  margin-top:20%;
+  margin-left: 82%;
+  margin-top: 20%;
   opacity: 1;
   overflow: hidden;
   display: none;
   z-index: 9999999;
-  padding-top:4%;
-  padding-left:5px;
+  padding-top: 4%;
+  padding-left: 5px;
 }
 
 @-webkit-keyframes twist {
-    from { -webkit-transform: scaleX(0.98); }
-    to { -webkit-transform: scaleX(1.0); }
-    from { -webkit-transform: scaleY(0.99); }
-    to { -webkit-transform: scaleY(1.0); }
+  from { -webkit-transform: scaleX(0.98); }
+  to { -webkit-transform: scaleX(1.0); }
+  from { -webkit-transform: scaleY(0.99); }
+  to { -webkit-transform: scaleY(1.0); }
 }
 
 .twist {
   -webkit-animation: twist 3s ease-in-out infinite;
   -webkit-animation-direction: alternate;
 }
+

@@ -1,4 +1,4 @@
-$(document).ready(function(){
+document.addEventListener('DOMContentLoaded', function() {
   //loadGame();
   //polyfillKey(); 
 
@@ -116,7 +116,7 @@ $(document).ready(function(){
 
     function gameOver() {
       playSound("failure",0.5)
-      $.post('http://np-thermite/failure', JSON.stringify({}));
+      fetch('https://np-thermite/failure', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: '{}'});
       gameOn = false;
       clearInterval(cleanupInterval);
       getAllAnimations().forEach(function(anim) {
@@ -198,7 +198,7 @@ $(document).ready(function(){
       {
         soundSet = true
         playSound("success",0.9)
-        $.post('http://np-thermite/complete', JSON.stringify({}));
+        fetch('https://np-thermite/complete', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: '{}'});
       }
     }
     setupNextLetter();
@@ -238,12 +238,12 @@ $(document).ready(function(){
 
   function openContainer()
   {
-    $(".phone-container").css("display", "block");
+    document.querySelector('.phone-container').style.display = 'block';
   }
 
   function closeContainer()
   {
-     $(".phone-container").css("display", "none");
+     document.querySelector('.phone-container').style.display = 'none';
     gameObject.gameOn = false;
     gameObject.misses = 0;
     gameObject.gameOver()
@@ -282,11 +282,11 @@ $(document).ready(function(){
   });
 
 
-  document.onkeyup = function (data) {
+  document.addEventListener('keyup', function (data) {
       if (data.which == 27 ) {
-        $.post('http://np-thermite/close', JSON.stringify({}));
+        fetch('https://np-thermite/close', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: '{}'});
       }
-    };
+    });
 
 
 });
