@@ -105,7 +105,7 @@ Removes blacklisted pedestrian models on spawn based on server-provided configur
 Implements phone UI interactions and SMS sending via server tunnels.
 
 #### client/player_state.lua
-Tracks player vitals, weapons and state transitions for survival and respawn logic, resolving ammunition types through `GetPedAmmoTypeFromWeapon`.
+Tracks player vitals, weapons and state transitions for survival and respawn logic, resolving ammunition types through `GetPedAmmoTypeFromWeapon`. The weapon grant routine now calls the five-argument `GiveWeaponToPed` and the model-loading loop increments properly to avoid hanging when requesting models.
 
 #### client/police.lua
 Provides client-side police functions such as handcuffing and wanted level display.
