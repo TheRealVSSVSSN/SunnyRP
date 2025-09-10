@@ -26,6 +26,7 @@ Main vault logic.
 - Vault looting: requires `drill` and optionally `modified_drillbit`. Sends `fsn_bankrobbery:payout` with door id and a drill‑bit flag that the server ignores (Inferred High). Looting adds dirty money and stress, while failing may destroy the drill.
 - Exiting range resets local access and notifies the server via `fsn_bankrobbery:vault:close`.
 - Includes an inactive `fsn_bankrobbery:LostMC:spawn` event stub (Inferred Low).
+- Enumerates nearby vehicles and checks door/vault distances every frame, which could affect client performance (Inferred Low).
 
 ### cl_safeanim.lua
 Safe‑cracking minigame.
@@ -64,6 +65,7 @@ Server side for front‑desk hacks.
 - Stores door status and keyboard definitions with random payouts per location.
 - Exposes `fsn_bankrobbery:desks:doorUnlock`, `:request`, `:startHack`, and `:endHack` to manage hacking lifecycle. A successful hack deposits funds via `fsn_bank:change:bankAdd`; failures either allow a retry or mark the keyboard as unusable.
 - Every 15 minutes resets all desks and payouts.
+- Relies on clients to report hacking success; no server-side validation of required devices or results (Inferred Med).
 
 ## Configuration
 
@@ -107,7 +109,9 @@ Server side for front‑desk hacks.
 | `mythic_notify:client:SendAlert` | Client | Server → Client | `{type,text}` | Displays Mythic notifications. |
 | `fsn_phone:recieveMessage` | Client | Client → Client | message table | Sends phone message about trucks. |
 | `chatMessage` | Client | Client → External | prefix, color, text | Shows drill failure chat lines. |
-| `mhacking:show/start/hide` | Client | Client ↔ External | varies | Handles hacking UI lifecycle. |
+| `mhacking:show` | Client | Client → External | none | Displays hacking UI. |
+| `mhacking:start` | Client | Client → External | `digits`, `time`, `callback` | Begins hacking minigame. |
+| `mhacking:hide` | Client | Client → External | none | Closes hacking UI. |
 | `DoLongHudText` | Client | External → Client | message, type | Displays safe‑cracking HUD text. |
 
 ### ESX Callbacks
@@ -137,6 +141,8 @@ None.
 - `fsn_bankrobbery:LostMC:spawn` contains only commented code; purpose undetermined (Inferred Low).
 - `fsn_needs:stress:add` is triggered server-side without specifying a target, so stress may not apply (Inferred High).
 - `trucks.lua` is not referenced by `fxmanifest.lua`, so the armored truck feature appears disabled (Inferred High).
+- Front‑desk hack outcomes rely on the client’s report; server does not verify success or item possession (Inferred Med).
+- Vault access and payouts are accepted without server-side checks for police presence or required tools (Inferred Med).
 
 DOCS COMPLETE
 
