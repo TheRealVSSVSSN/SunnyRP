@@ -1,31 +1,38 @@
-local playerCount = 0
-local list = {}
+--[[
+    -- Type: Function
+    -- Name: isServerFull
+    -- Use: Checks if the number of active players meets or exceeds sv_maxclients.
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function isServerFull()
+    local maxClients = GetConvarInt('sv_maxclients', 32)
+    local players = GetPlayers()
+    return #players >= maxClients, maxClients
+end
 
-RegisterServerEvent('hardcap:playerActivated')
+--[[
+    -- Type: Event Handler
+    -- Name: playerConnecting
+    -- Use: Enforces the player limit and rejects connections when the server is full.
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+AddEventHandler('playerConnecting', function(name, setKickReason, deferrals)
+    print(('Connecting: %s^7'):format(name))
 
-AddEventHandler('hardcap:playerActivated', function()
-  if not list[source] then
-    playerCount = playerCount + 1
-    list[source] = true
-  end
-end)
+    local full, limit = isServerFull()
+    if not full then
+        return
+    end
 
-AddEventHandler('playerDropped', function()
-  if list[source] then
-    playerCount = playerCount - 1
-    list[source] = nil
-  end
-end)
+    local message = ('This server is full (past %d players).'):format(limit)
 
-AddEventHandler('playerConnecting', function(name, setReason)
-  local cv = GetConvarInt('sv_maxclients', 32)
+    if deferrals then
+        deferrals.done(message)
+    else
+        setKickReason(message)
+    end
 
-  print('Connecting: ' .. name .. '^7')
-
-  if playerCount >= cv then
-    print('Full. :(')
-
-    setReason('This server is full (past ' .. tostring(cv) .. ' players).')
     CancelEvent()
-  end
 end)
