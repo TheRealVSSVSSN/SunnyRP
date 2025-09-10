@@ -6,3 +6,7 @@
 - Added radius constant to blackjack table locator and corrected prop name outputs.
 - Moved animation dictionary cleanup outside the dealer creation loop to prevent missing animation issues.
 - Converted global state to local variables and tightened betting validation on the server.
+
+## WiseGuy-UC
+- Replaced legacy `__resource.lua` with a modern `fxmanifest.lua` using the `cerulean` fx_version and Lua 5.4.
+- Refactored vehicle name registration into a table-driven script and swapped `Citizen.CreateThread` for `CreateThread`.
