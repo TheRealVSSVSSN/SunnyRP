@@ -6,3 +6,9 @@
 - Added radius constant to blackjack table locator and corrected prop name outputs.
 - Moved animation dictionary cleanup outside the dealer creation loop to prevent missing animation issues.
 - Converted global state to local variables and tightened betting validation on the server.
+
+## isPed
+- Replaced legacy `__resource.lua` with an `fxmanifest.lua` using the `cerulean` fx_version and Lua 5.4.
+- Modernized ped utilities by switching to `GetGamePool` and `GetActivePlayers` natives.
+- Consolidated `isPed` checks into a lookup table and added structured exports.
+- Added documentation-style comments for maintainability.
