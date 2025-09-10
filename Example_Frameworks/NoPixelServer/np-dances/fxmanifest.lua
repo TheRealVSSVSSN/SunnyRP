@@ -1,7 +1,8 @@
-fx_version "cerulean"
+fx_version 'cerulean'
+game 'gta5'
 
-games { "gta5" }
+lua54 'yes'
 
-this_is_a_map "yes"
-
-client_script 'cl_main.lua'
+client_scripts {
+    'cl_main.lua'
+}
