@@ -1,28 +1,36 @@
---[[/	:FSN:	\]]--
-fx_version 'adamant'
+--[[/   :FSN:   \]]--
+fx_version 'cerulean'
 game 'gta5'
 
-client_script '@fsn_main/cl_utils.lua'
-server_script '@fsn_main/sv_utils.lua'
-client_script '@fsn_main/server_settings/sh_settings.lua'
-server_script '@fsn_main/server_settings/sh_settings.lua'
-server_script '@mysql-async/lib/MySQL.lua'
---[[/	:FSN:	\]]--
+lua54 'yes'
 
-client_script '__descriptions-male.lua'
-client_script '__descriptions-female.lua'
-client_script '__descriptions.lua'
+shared_scripts {
+    '@fsn_main/server_settings/sh_settings.lua'
+}
+
+client_scripts {
+    '@fsn_main/cl_utils.lua',
+    '__descriptions-male.lua',
+    '__descriptions-female.lua',
+    '__descriptions.lua',
+    'cl_evidence.lua',
+    'casings/cl_casings.lua',
+    -- 'bleeding/cl_bleeding.lua',
+    'ped/cl_ped.lua'
+}
+
+server_scripts {
+    '@fsn_main/sv_utils.lua',
+    '@mysql-async/lib/MySQL.lua',
+    'sv_evidence.lua',
+    'ped/sv_ped.lua'
+}
+
 exports({
-	'getSex',
-	'getJacket',
-	'getTop',
-	'getPants',
+        'getSex',
+        'getJacket',
+        'getTop',
+        'getPants'
 })
+--[[/   :FSN:   \]]--
 
-client_script 'cl_evidence.lua'
-server_script 'sv_evidence.lua'
-
-client_script 'casings/cl_casings.lua'
---client_script 'bleeding/cl_bleeding.lua'
-client_script 'ped/cl_ped.lua'
-server_script 'ped/sv_ped.lua'
