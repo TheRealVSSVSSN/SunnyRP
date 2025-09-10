@@ -945,8 +945,9 @@ cmd = {
 function cmd.RunCommand(caller, args)
     if not args.message then return end
     local src = caller:getVar("source")
-    TriggerClientEvent("np-admin:runSpawnCommand",src,args.message)
-    exports["np-log"]:AddLog("Admin", caller, "Spawned car", {car = tostring(args.message)}) 
+    TriggerClientEvent("np-admin:runSpawnCommand", src, args.message)
+    local log = string.format("%s [%s] spawned car %s", caller:getVar("name"), caller:getVar("steamid"), tostring(args.message))
+    exports["np-log"]:AddLog("Admin", caller, "Spawned car", {car = tostring(args.message)})
     NPX.Admin:Log(log, caller)
 end
 
@@ -982,11 +983,9 @@ cmd = {
 }
 
 function cmd.RunCommand(caller, args)
-    if not args.message then return end
-    local src = caller:getVar("source")
-    
-    NPX.Admin.DB:giveCar(args.message,args.reciver)
-
+    if not args.message or not args.reciver then return end
+    NPX.Admin.DB.giveCar(caller:getVar("hexid"), args.reciver, args.message)
+    local log = string.format("%s [%s] gave car %s to cid %s", caller:getVar("name"), caller:getVar("steamid"), tostring(args.message), tostring(args.reciver))
     NPX.Admin:Log(log, caller)
 end
 

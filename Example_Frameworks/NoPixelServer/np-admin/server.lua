@@ -4,99 +4,89 @@ NPX._Admin = NPX._Admin or {}
 NPX._Admin.Players = {}
 NPX._Admin.DiscPlayers = {}
 
-local Players = {}
+local function extractIdentifiers(src)
+    local identifiers = GetPlayerIdentifiers(src)
+    local steam, license
+    for _, v in ipairs(identifiers) do
+        if v:sub(1,6) == 'steam:' then
+            steam = v
+        elseif v:sub(1,8) == 'license:' then
+            license = v
+        end
+    end
+    return steam, license
+end
 
-RegisterServerEvent('np-admin:Disconnect')
+RegisterNetEvent('np-admin:Disconnect')
 AddEventHandler('np-admin:Disconnect', function(reason)
     DropPlayer(source, reason)
 end)
 
-RegisterServerEvent('admin:noclipFromClient')
-AddEventHandler('admin:noclipFromClient', function()
-
+RegisterNetEvent('admin:noclipFromClient')
+AddEventHandler('admin:noclipFromClient', function(enabled)
+    local src = source
+    exports['np-log']:AddLog('Admin', GetPlayerName(src), 'Noclip', {state = enabled and 'enabled' or 'disabled'})
 end)
 
-RegisterServerEvent('admin:isFlying')
+RegisterNetEvent('admin:isFlying')
 AddEventHandler('admin:isFlying', function(data)
-TriggerEvent('np-admin:NoclipState', data)
+    TriggerEvent('np-admin:NoclipState', data)
 end)
 
-RegisterServerEvent('np-admin:bringPlayerServer')
+RegisterNetEvent('np-admin:bringPlayerServer')
 AddEventHandler('np-admin:bringPlayerServer', function(data, playerID)
-TriggerClientEvent('np-admin:bringPlayer', playerID, data)
+    TriggerClientEvent('np-admin:bringPlayer', playerID, data)
 end)
 
-RegisterServerEvent('np-admin:setcloak')
+RegisterNetEvent('np-admin:setcloak')
 AddEventHandler('np-admin:setcloak', function(args)
     TriggerClientEvent('cloak', source, args)
 end)
 
-RegisterServerEvent('np-admin:kick')
+RegisterNetEvent('np-admin:kick')
 AddEventHandler('np-admin:kick', function(kickid, reason)
     DropPlayer(kickid, reason)
 end)
 
-
-RegisterServerEvent('np-admin:AddPlayer')
-AddEventHandler("np-admin:AddPlayer", function()
+RegisterNetEvent('np-admin:AddPlayer')
+AddEventHandler('np-admin:AddPlayer', function()
     local src = source
-    local user = exports["np-base"]:getModule("Player"):GetUser(src)
-    local licenses
-    local identifiers, steamIdentifier = GetPlayerIdentifiers(source)
-    for _, v in pairs(identifiers) do
-        if string.find(v, "steam") then
-            steamIdentifier = v
-            break
-        end
-    end
-    for _, v in pairs(identifiers) do
-        if string.find(v, "license") then
-            licenses = v
-            break
-        end
-    end
+    local user = exports['np-base']:getModule('Player'):GetUser(src)
+    local steamIdentifier, license = extractIdentifiers(src)
+    if not user or not steamIdentifier or not license then return end
 
-    local stid = HexIdToSteamId(steamIdentifier)
-    local ply = GetPlayerName(source)
-    local ip = GetPlayerEndpoint(source)
-    local scomid = steamIdentifier:gsub("steam:", "")
-    local licenseid = licenses:gsub("license:", "")
-    local ping = GetPlayerPing(source)
-    local data = { source = source, steamid = stid, comid = scomid, name = ply, hexid = user:getVar("hexid"), ip = ip, rank = NPX.Admin:GetPlayerRank(user), license = licenseid, ping = ping}
-    table.insert(Players, source)
-    TriggerClientEvent("np-admin:AddPlayer", -1, data )
-    NPX.Admin.AddAllPlayers()
+    local data = {
+        source = src,
+        steamid = HexIdToSteamId(steamIdentifier),
+        comid = steamIdentifier:gsub('steam:', ''),
+        name = GetPlayerName(src),
+        hexid = user:getVar('hexid'),
+        ip = GetPlayerEndpoint(src),
+        rank = NPX.Admin:GetPlayerRank(user),
+        license = license:gsub('license:', ''),
+        ping = GetPlayerPing(src)
+    }
+
+    NPX._Admin.Players[src] = data
+    TriggerClientEvent('np-admin:AddPlayer', -1, data)
+    NPX.Admin.AddAllPlayers(src)
 end)
 
-function NPX.Admin.AddAllPlayers(self)
-    --local Players = GetPlayers()
-
-    for i, _PlayerId in pairs(GetPlayers()) do
-        
-        local licenses
-        local identifiers, steamIdentifier = GetPlayerIdentifiers(_PlayerId)
-        for _, v in pairs(identifiers) do
-            if string.find(v, "steam") then
-                steamIdentifier = v
-                break
-            end
+function NPX.Admin.AddAllPlayers(src)
+    for _, playerId in ipairs(GetPlayers()) do
+        local steamIdentifier, license = extractIdentifiers(playerId)
+        if steamIdentifier and license then
+            local info = {
+                src = tonumber(playerId),
+                steamid = HexIdToSteamId(steamIdentifier),
+                comid = steamIdentifier:gsub('steam:', ''),
+                name = GetPlayerName(playerId),
+                ip = GetPlayerEndpoint(playerId),
+                license = license:gsub('license:', ''),
+                ping = GetPlayerPing(playerId)
+            }
+            TriggerClientEvent('np-admin:AddAllPlayers', src, info)
         end
-        for _, v in pairs(identifiers) do
-            if string.find(v, "license") then
-                licenses = v
-                break
-            end
-        end
-        local ip = GetPlayerEndpoint(_PlayerId)
-        local licenseid = licenses:gsub("license:", "")
-        local ping = GetPlayerPing(_PlayerId)
-        local stid = HexIdToSteamId(steamIdentifier)
-        local ply = GetPlayerName(_PlayerId)
-        local scomid = steamIdentifier:gsub("steam:", "")
-        local data = { src = tonumber(_PlayerId), steamid = stid, comid = scomid, name = ply, ip = ip, license = licenseid, ping = ping }
-
-        TriggerClientEvent("np-admin:AddAllPlayers", source, data)
-
     end
 end
 
@@ -104,33 +94,25 @@ function NPX.Admin.AddPlayerS(self, data)
     NPX._Admin.Players[data.src] = data
 end
 
-AddEventHandler("playerDropped", function()
-	local licenses
-    local identifiers, steamIdentifier = GetPlayerIdentifiers(source)
-    for _, v in pairs(identifiers) do
-        if string.find(v, "steam") then
-            steamIdentifier = v
-            break
-        end
-    end
-    for _, v in pairs(identifiers) do
-        if string.find(v, "license") then
-            licenses = v
-            break
-        end
-    end
+AddEventHandler('playerDropped', function()
+    local src = source
+    local steamIdentifier, license = extractIdentifiers(src)
+    if not steamIdentifier or not license then return end
+    local data = {
+        src = src,
+        steamid = HexIdToSteamId(steamIdentifier),
+        comid = steamIdentifier:gsub('steam:', ''),
+        name = GetPlayerName(src),
+        ip = GetPlayerEndpoint(src),
+        license = license:gsub('license:', ''),
+        ping = GetPlayerPing(src)
+    }
 
-    local stid = HexIdToSteamId(steamIdentifier)
-    local ply = GetPlayerName(source)
-    local ip = GetPlayerEndpoint(source)
-    local scomid = steamIdentifier:gsub("steam:", "")
-    local licenseid = licenses:gsub("license:", "")
-    local ping = GetPlayerPing(source)
-    local data = { src = source, steamid = stid, comid = scomid, name = ply, ip = ip, license = licenseid, ping = ping}
-
-    TriggerClientEvent("np-admin:RemovePlayer", -1, data )
-    Wait(600000)
-    TriggerClientEvent("np-admin:RemoveRecent", -1, data)
+    TriggerClientEvent('np-admin:RemovePlayer', -1, data)
+    Citizen.CreateThread(function()
+        Wait(600000)
+        TriggerClientEvent('np-admin:RemoveRecent', -1, data)
+    end)
 end)
 
 function HexIdToSteamId(hexId)
@@ -147,8 +129,8 @@ end
     
 -- }
 
-RegisterServerEvent("server:enablehuddebug")
-AddEventHandler("server:enablehuddebug", function(enable)
+RegisterNetEvent('server:enablehuddebug')
+AddEventHandler('server:enablehuddebug', function(enable)
         debug = not debug
         local src = source
         if debug then
@@ -161,25 +143,26 @@ AddEventHandler("server:enablehuddebug", function(enable)
 end)
 
 
-RegisterServerEvent('np-admin:runCommand')
+RegisterNetEvent('np-admin:runCommand')
 AddEventHandler('np-admin:runCommand', function(data)
     --print("triggered me dudeed - server")
     local src = source
 
     TriggerClientEvent('np-admin:RunClCommand', src, data.command, data)
 
-    if NPX._Admin.Commands[data.command].runcommand then
+    local cmd = NPX._Admin.Commands[data.command]
+    if cmd and cmd.runcommand then
         local caller = {
             source = src,
             name = GetPlayerName(src),
             steamid = GetPlayerIdentifiers(src)[1],
             getVar = function(self, key) return self[key] end,
         }
-        NPX._Admin.Commands[data.command].runcommand(caller, data)
+        cmd.runcommand(caller, data)
     end
 end)
 
-RegisterServerEvent('admin:dumpCurrentPlayers')
+RegisterNetEvent('admin:dumpCurrentPlayers')
 AddEventHandler('admin:dumpCurrentPlayers', function()
 
 end)
