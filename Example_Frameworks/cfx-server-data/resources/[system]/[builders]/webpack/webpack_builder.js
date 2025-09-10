@@ -1,12 +1,11 @@
 const fs = require('fs');
 const path = require('path');
 const workerFarm = require('worker-farm');
-const async = require('async');
 let buildingInProgress = false;
 let currentBuildingModule = '';
 
 // some modules will not like the custom stack trace logic
-const ops = Error.prepareStackTrace;
+const originalPrepareStackTrace = Error.prepareStackTrace;
 Error.prepareStackTrace = undefined;
 
 const webpackBuildTask = {
@@ -15,7 +14,7 @@ const webpackBuildTask = {
 
         if (numMetaData > 0) {
             for (let i = 0; i < numMetaData; i++) {
-                const configName = GetResourceMetadata(resourceName, 'webpack_config');
+                const configName = GetResourceMetadata(resourceName, 'webpack_config', i);
 
                 if (shouldBuild(configName)) {
                     return true;
@@ -125,7 +124,6 @@ const webpackBuildTask = {
 
                                 buildingInProgress = false;
                                 currentBuildingModule = '';
-                                currentBuildingScript = '';
                                 reject("worker farm webpack errored out");
                                 return;
                             }
@@ -136,7 +134,6 @@ const webpackBuildTask = {
                                 }
                                 buildingInProgress = false;
                                 currentBuildingModule = '';
-                                currentBuildingScript = '';
                                 reject("webpack got an error");
                                 return;
                             }
@@ -157,12 +154,20 @@ const webpackBuildTask = {
 
             buildingInProgress = false;
             currentBuildingModule = '';
+            Error.prepareStackTrace = originalPrepareStackTrace;
 
             if (error) {
                 cb(false, error);
-            } else cb(true);
+            } else {
+                cb(true);
+            }
         };
-        buildWebpack().then();
+        buildWebpack().catch((e) => {
+            buildingInProgress = false;
+            currentBuildingModule = '';
+            Error.prepareStackTrace = originalPrepareStackTrace;
+            cb(false, e.toString());
+        });
     }
 };
 
