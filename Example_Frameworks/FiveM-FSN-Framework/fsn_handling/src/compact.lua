@@ -31,7 +31,7 @@ return {
 		TractionCurveLateral	 = 16.9,
 		TractionSpringDeltaMax   = 0.133,
 		LowSpeedTractionLossMult = 1.11,
-		CamberStiffnesss		 = 0,
+		CamberStiffness		 = 0,
 		TractionBiasFront        = 0.4769,
 		TractionLossMult         = 1.26,
 
@@ -106,7 +106,7 @@ return {
 		TractionCurveLateral	 = 16.8,
 		TractionSpringDeltaMax   = 0.131,
 		LowSpeedTractionLossMult = 0.0,
-		CamberStiffnesss		 = 0,
+		CamberStiffness		 = 0,
 		TractionBiasFront        = 0.4778,
 		TractionLossMult         = 0.0,
 		
@@ -181,7 +181,7 @@ return {
 		TractionCurveLateral	 = 16.6,
 		TractionSpringDeltaMax   = 0.127,
 		LowSpeedTractionLossMult = 1.08,
-		CamberStiffnesss		 = 0,
+		CamberStiffness		 = 0,
 		TractionBiasFront        = 0.481,
 		TractionLossMult         = 1.27,
 
@@ -254,7 +254,7 @@ return {
 		TractionCurveLateral	 = 18.5,
 		TractionSpringDeltaMax   = 0.15,
 		LowSpeedTractionLossMult = 0.8,
-		CamberStiffnesss		 = 0,
+		CamberStiffness		 = 0,
 		TractionBiasFront        = 0.48,
 		TractionLossMult         = 1,
 
@@ -328,7 +328,7 @@ return {
 		TractionCurveLateral	 = 15.1,
 		TractionSpringDeltaMax   = 0.105,
 		LowSpeedTractionLossMult = 1.01,
-		CamberStiffnesss		 = 0,
+		CamberStiffness		 = 0,
 		TractionBiasFront        = 0.4768,
 		TractionLossMult         = 1.17,
 
@@ -402,7 +402,7 @@ return {
 		TractionCurveLateral	 = 15,
 		TractionSpringDeltaMax   = 0.09,
 		LowSpeedTractionLossMult = 1.09,
-		CamberStiffnesss		 = 0,
+		CamberStiffness		 = 0,
 		TractionBiasFront        = 0.47001,
 		TractionLossMult         = 1.14,
 
@@ -476,7 +476,7 @@ return {
 		TractionCurveLateral	 = 16.8,
 		TractionSpringDeltaMax   = 0.1387,
 		LowSpeedTractionLossMult = 1.11,
-		CamberStiffnesss		 = 0,
+		CamberStiffness		 = 0,
 		TractionBiasFront        = 0.4765,
 		TractionLossMult         = 1.24,
 
@@ -551,7 +551,7 @@ return {
 		TractionCurveLateral	 = 14.8,
 		TractionSpringDeltaMax   = 0.11,
 		LowSpeedTractionLossMult = 1.01,
-		CamberStiffnesss		 = 0,
+		CamberStiffness		 = 0,
 		TractionBiasFront        = 0.4818,
 		TractionLossMult         = 1.22,
 

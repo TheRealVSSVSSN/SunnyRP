@@ -24,7 +24,7 @@
       <fTractionCurveLateral value="11.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.450000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="4.000000" />
@@ -81,7 +81,7 @@
       <fTractionCurveLateral value="15.000000" />
       <fTractionSpringDeltaMax value="0.130000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.475000" />
       <fTractionLossMult value="0.900000" />
       <fSuspensionForce value="2.000000" />
@@ -138,7 +138,7 @@
       <fTractionCurveLateral value="15.400000" />
       <fTractionSpringDeltaMax value="0.120000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.483600" />
       <fTractionLossMult value="0.950000" />
       <fSuspensionForce value="1.770000" />
@@ -195,7 +195,7 @@
       <fTractionCurveLateral value="18.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.480000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.000000" />
@@ -252,7 +252,7 @@
       <fTractionCurveLateral value="18.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.440000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.800000" />
@@ -309,7 +309,7 @@
       <fTractionCurveLateral value="16.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.485000" />
       <fTractionLossMult value="0.500000" />
       <fSuspensionForce value="2.000000" />
@@ -366,7 +366,7 @@
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.134000" />
       <fLowSpeedTractionLossMult value="0.190000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.485100" />
       <fTractionLossMult value="1.100000" />
       <fSuspensionForce value="2.240000" />
@@ -427,7 +427,7 @@
       <fTractionCurveLateral value="19.000000" />
       <fTractionSpringDeltaMax value="0.130000" />
       <fLowSpeedTractionLossMult value="0.500000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.475000" />
       <fTractionLossMult value="0.900000" />
       <fSuspensionForce value="2.200000" />
@@ -484,7 +484,7 @@
       <fTractionCurveLateral value="16.200000" />
       <fTractionSpringDeltaMax value="0.160000" />
       <fLowSpeedTractionLossMult value="0.040000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.462800" />
       <fTractionLossMult value="0.490000" />
       <fSuspensionForce value="3.70000" />
@@ -545,7 +545,7 @@
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.110000" />
       <fLowSpeedTractionLossMult value="0.080000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.455000" />
       <fTractionLossMult value="0.450000" />
       <fSuspensionForce value="2.800000" />
@@ -623,7 +623,7 @@
       <fTractionCurveLateral value="16.900000" />
       <fTractionSpringDeltaMax value="0.139000" />
       <fLowSpeedTractionLossMult value="1.160000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.4875000" />
       <fTractionLossMult value="0.760000" />
       <fSuspensionForce value="2.110000" />
@@ -684,7 +684,7 @@
       <fTractionCurveLateral value="15.100000" />
       <fTractionSpringDeltaMax value="0.120000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.490100" />
       <fTractionLossMult value="0.900000" />
       <fSuspensionForce value="1.910000" />
@@ -741,7 +741,7 @@
       <fTractionCurveLateral value="14.800000" />
       <fTractionSpringDeltaMax value="0.120000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.484600" />
       <fTractionLossMult value="1.100000" />
       <fSuspensionForce value="1.460000" />
@@ -798,7 +798,7 @@
       <fTractionCurveLateral value="15.000000" />
       <fTractionSpringDeltaMax value="0.130000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.475000" />
       <fTractionLossMult value="0.900000" />
       <fSuspensionForce value="2.000000" />
@@ -859,7 +859,7 @@
       <fTractionCurveLateral value="11.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.480000" />
       <fTractionLossMult value="0.500000" />
       <fSuspensionForce value="4.000000" />
@@ -916,7 +916,7 @@
       <fTractionCurveLateral value="11.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.480000" />
       <fTractionLossMult value="0.500000" />
       <fSuspensionForce value="4.000000" />
@@ -974,7 +974,7 @@
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.129000" />
       <fLowSpeedTractionLossMult value="1.050000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.483200" />
       <fTractionLossMult value="1.260000" />
       <fSuspensionForce value="2.810000" />
@@ -1035,7 +1035,7 @@
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.139000" />
       <fLowSpeedTractionLossMult value="1.190000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.482700" />
       <fTractionLossMult value="1.160000" />
       <fSuspensionForce value="2.140000" />
@@ -1096,7 +1096,7 @@
       <fTractionCurveLateral value="15.000000" />
       <fTractionSpringDeltaMax value="0.130000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.475000" />
       <fTractionLossMult value="0.700000" />
       <fSuspensionForce value="1.700000" />
@@ -1153,7 +1153,7 @@
       <fTractionCurveLateral value="16.300000" />
       <fTractionSpringDeltaMax value="0.130000" />
       <fLowSpeedTractionLossMult value="0.100000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.482600" />
       <fTractionLossMult value="0.850000" />
       <fSuspensionForce value="1.800000" />
@@ -1214,7 +1214,7 @@
       <fTractionCurveLateral value="15.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="4.000000" />
@@ -1271,7 +1271,7 @@
       <fTractionCurveLateral value="16.700000" />
       <fTractionSpringDeltaMax value="0.130000" />
       <fLowSpeedTractionLossMult value="0.100000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.484500" />
       <fTractionLossMult value="0.500000" />
       <fSuspensionForce value="1.600000" />
@@ -1328,7 +1328,7 @@
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.134000" />
       <fLowSpeedTractionLossMult value="1.190000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.485100" />
       <fTractionLossMult value="1.040000" />
       <fSuspensionForce value="2.210000" />
@@ -1389,7 +1389,7 @@
       <fTractionCurveLateral value="15.200000" />
       <fTractionSpringDeltaMax value="0.110000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.478000" />
       <fTractionLossMult value="0.910000" />
       <fSuspensionForce value="3.600000" />
@@ -1447,7 +1447,7 @@
       <fTractionCurveLateral value="16.600000" />
       <fTractionSpringDeltaMax value="0.130000" />
       <fLowSpeedTractionLossMult value="0.180000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.477500" />
       <fTractionLossMult value="1.230000" />
       <fSuspensionForce value="1.650000" />
@@ -1508,7 +1508,7 @@
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.125000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.475500" />
       <fTractionLossMult value="1.100000" />
       <fSuspensionForce value="2.100000" />
@@ -1569,7 +1569,7 @@
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.130000" />
       <fLowSpeedTractionLossMult value="0.400000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.483900" />
       <fTractionLossMult value="0.870000" />
       <fSuspensionForce value="2.000000" />
@@ -1630,7 +1630,7 @@
       <fTractionCurveLateral value="22.500000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="1.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.490000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.800000" />
@@ -1691,7 +1691,7 @@
       <fTractionCurveLateral value="18.000000" />
       <fTractionSpringDeltaMax value="0.130000" />
       <fLowSpeedTractionLossMult value="0.500000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.485000" />
       <fTractionLossMult value="0.900000" />
       <fSuspensionForce value="2.200000" />
@@ -1748,7 +1748,7 @@
       <fTractionCurveLateral value="14.800000" />
       <fTractionSpringDeltaMax value="0.120000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.489200" />
       <fTractionLossMult value="0.780000" />
       <fSuspensionForce value="1.940000" />
@@ -1847,7 +1847,7 @@
       <fTractionCurveLateral value="10.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.400000" />
       <fTractionLossMult value="0.500000" />
       <fSuspensionForce value="4.500000" />
@@ -1904,7 +1904,7 @@
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.134000" />
       <fLowSpeedTractionLossMult value="0.190000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.479400" />
       <fTractionLossMult value="0.980000" />
       <fSuspensionForce value="2.090000" />
@@ -1966,7 +1966,7 @@
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.141000" />
       <fLowSpeedTractionLossMult value="0.190000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.485200" />
       <fTractionLossMult value="1.140000" />
       <fSuspensionForce value="2.320000" />
@@ -2027,7 +2027,7 @@
       <fTractionCurveLateral value="10.500000" />
       <fTractionSpringDeltaMax value="0.030000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.400000" />
       <fTractionLossMult value="0.500000" />
       <fSuspensionForce value="2.100000" />
@@ -2084,7 +2084,7 @@
       <fTractionCurveLateral value="18.500000" />
       <fTractionSpringDeltaMax value="0.030000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.450000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.400000" />
@@ -2142,7 +2142,7 @@
       <fTractionCurveLateral value="16.600000" />
       <fTractionSpringDeltaMax value="0.126000" />
       <fLowSpeedTractionLossMult value="1.205000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.484100" />
       <fTractionLossMult value="1.330000" />
       <fSuspensionForce value="3.110000" />
@@ -2204,7 +2204,7 @@
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.129000" />
       <fLowSpeedTractionLossMult value="0.240000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.484500" />
       <fTractionLossMult value="1.250000" />
       <fSuspensionForce value="2.410000" />
@@ -2265,7 +2265,7 @@
       <fTractionCurveLateral value="14.200000" />
       <fTractionSpringDeltaMax value="0.130000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.485600" />
       <fTractionLossMult value="1.100000" />
       <fSuspensionForce value="1.800000" />
@@ -2326,7 +2326,7 @@
       <fTractionCurveLateral value="14.600000" />
       <fTractionSpringDeltaMax value="0.120000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.478000" />
       <fTractionLossMult value="1.040000" />
       <fSuspensionForce value="1.600000" />
@@ -2387,7 +2387,7 @@
       <fTractionCurveLateral value="16.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.480000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.400000" />
@@ -2444,7 +2444,7 @@
       <fTractionCurveLateral value="16.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.480000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.400000" />
@@ -2501,7 +2501,7 @@
       <fTractionCurveLateral value="16.600000" />
       <fTractionSpringDeltaMax value="0.132000" />
       <fLowSpeedTractionLossMult value="1.190000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.483100" />
       <fTractionLossMult value="0.650000" />
       <fSuspensionForce value="1.910000" />
@@ -2562,7 +2562,7 @@
       <fTractionCurveLateral value="16.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.460000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.400000" />
@@ -2620,7 +2620,7 @@
       <fTractionCurveLateral value="14.200000" />
       <fTractionSpringDeltaMax value="0.120000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.476500" />
       <fTractionLossMult value="1.170000" />
       <fSuspensionForce value="2.180000" />
@@ -2681,7 +2681,7 @@
       <fTractionCurveLateral value="11.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.450000" />
       <fTractionLossMult value="0.000000" />
       <fSuspensionForce value="4.000000" />
@@ -2738,7 +2738,7 @@
       <fTractionCurveLateral value="18.500000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.450000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.400000" />
@@ -2795,7 +2795,7 @@
       <fTractionCurveLateral value="20.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.485000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.800000" />
@@ -2852,7 +2852,7 @@
       <fTractionCurveLateral value="14.300000" />
       <fTractionSpringDeltaMax value="0.130000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.476500" />
       <fTractionLossMult value="1.130000" />
       <fSuspensionForce value="1.550000" />
@@ -2914,7 +2914,7 @@
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.130000" />
       <fLowSpeedTractionLossMult value="0.190000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.483800" />
       <fTractionLossMult value="0.980000" />
       <fSuspensionForce value="1.900000" />
@@ -2976,7 +2976,7 @@
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.131000" />
       <fLowSpeedTractionLossMult value="0.820000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.483100" />
       <fTractionLossMult value="1.090000" />
       <fSuspensionForce value="2.660000" />
@@ -3038,7 +3038,7 @@
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.137000" />
       <fLowSpeedTractionLossMult value="0.890000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.484600" />
       <fTractionLossMult value="0.740000" />
       <fSuspensionForce value="2.280000" />
@@ -3100,7 +3100,7 @@
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.130000" />
       <fLowSpeedTractionLossMult value="1.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.483900" />
       <fTractionLossMult value="0.800000" />
       <fSuspensionForce value="2.000000" />
@@ -3161,7 +3161,7 @@
       <fTractionCurveLateral value="18.500000" />
       <fTractionSpringDeltaMax value="0.130000" />
       <fLowSpeedTractionLossMult value="1.700000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.490000" />
       <fTractionLossMult value="0.800000" />
       <fSuspensionForce value="2.800000" />
@@ -3222,7 +3222,7 @@
       <fTractionCurveLateral value="14.500000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.488000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.700000" />
@@ -3284,7 +3284,7 @@
       <fTractionCurveLateral value="14.800000" />
       <fTractionSpringDeltaMax value="0.120000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.485100" />
       <fTractionLossMult value="1.100000" />
       <fSuspensionForce value="1.420000" />
@@ -3341,7 +3341,7 @@
       <fTractionCurveLateral value="17.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.500000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.475000" />
       <fTractionLossMult value="0.900000" />
       <fSuspensionForce value="2.200000" />
@@ -3398,7 +3398,7 @@
       <fTractionCurveLateral value="14.900000" />
       <fTractionSpringDeltaMax value="0.120000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.485600" />
       <fTractionLossMult value="0.900000" />
       <fSuspensionForce value="1.950000" />
@@ -3460,7 +3460,7 @@
       <fTractionCurveLateral value="15.300000" />
       <fTractionSpringDeltaMax value="0.130000" />
       <fLowSpeedTractionLossMult value="1.100000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.481000" />
       <fTractionLossMult value="1.040000" />
       <fSuspensionForce value="1.900000" />
@@ -3521,7 +3521,7 @@
       <fTractionCurveLateral value="15.400000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.486500" />
       <fTractionLossMult value="0.680000" />
       <fSuspensionForce value="1.480000" />
@@ -3578,7 +3578,7 @@
       <fTractionCurveLateral value="16.000000" />
       <fTractionSpringDeltaMax value="0.130000" />
       <fLowSpeedTractionLossMult value="1.220000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.483700" />
       <fTractionLossMult value="0.790000" />
       <fSuspensionForce value="2.470000" />
@@ -3635,7 +3635,7 @@
       <fTractionCurveLateral value="19.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.480000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.400000" />
@@ -3692,7 +3692,7 @@
       <fTractionCurveLateral value="14.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="2.500000" />
@@ -3750,7 +3750,7 @@
       <fTractionCurveLateral value="16.800000" />
       <fTractionSpringDeltaMax value="0.131000" />
       <fLowSpeedTractionLossMult value="0.190000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.482500" />
       <fTractionLossMult value="1.260000" />
       <fSuspensionForce value="1.650000" />
@@ -3811,7 +3811,7 @@
       <fTractionCurveLateral value="16.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.475000" />
       <fTractionLossMult value="0.500000" />
       <fSuspensionForce value="1.400000" />
@@ -3869,7 +3869,7 @@
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.133000" />
       <fLowSpeedTractionLossMult value="1.210000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.484100" />
       <fTractionLossMult value="1.290000" />
       <fSuspensionForce value="2.630000" />
@@ -3930,7 +3930,7 @@
       <fTractionCurveLateral value="22.500000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.480000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.900000" />
@@ -3988,7 +3988,7 @@
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.141000" />
       <fLowSpeedTractionLossMult value="0.190000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.479800" />
       <fTractionLossMult value="1.140000" />
       <fSuspensionForce value="2.380000" />
@@ -4050,7 +4050,7 @@
       <fTractionCurveLateral value="17.500000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.240000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.485100" />
       <fTractionLossMult value="1.040000" />
       <fSuspensionForce value="2.310000" />
@@ -4112,7 +4112,7 @@
       <fTractionCurveLateral value="16.600000" />
       <fTractionSpringDeltaMax value="0.134000" />
       <fLowSpeedTractionLossMult value="0.0100000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.483100" />
       <fTractionLossMult value="1.140000" />
       <fSuspensionForce value="1.950000" />
@@ -4169,7 +4169,7 @@
       <fTractionCurveLateral value="19.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.480000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.400000" />
@@ -4226,7 +4226,7 @@
       <fTractionCurveLateral value="15.100000" />
       <fTractionSpringDeltaMax value="0.120000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.490600" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.910000" />
@@ -4284,7 +4284,7 @@
       <fTractionCurveLateral value="16.600000" />
       <fTractionSpringDeltaMax value="0.132000" />
       <fLowSpeedTractionLossMult value="1.010000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.482960" />
       <fTractionLossMult value="1.300000" />
       <fSuspensionForce value="2.520000" />
@@ -4345,7 +4345,7 @@
       <fTractionCurveLateral value="16.600000" />
       <fTractionSpringDeltaMax value="0.139000" />
       <fLowSpeedTractionLossMult value="0.290000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.483700" />
       <fTractionLossMult value="1.190000" />
       <fSuspensionForce value="1.800000" />
@@ -4406,7 +4406,7 @@
       <fTractionCurveLateral value="17.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.460000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.400000" />
@@ -4463,7 +4463,7 @@
       <fTractionCurveLateral value="17.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.460000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.400000" />
@@ -4520,7 +4520,7 @@
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.120000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.483600" />
       <fTractionLossMult value="0.980000" />
       <fSuspensionForce value="1.540000" />
@@ -4577,7 +4577,7 @@
       <fTractionCurveLateral value="18.500000" />
       <fTractionSpringDeltaMax value="0.130000" />
       <fLowSpeedTractionLossMult value="0.500000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.480000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.900000" />
@@ -4634,7 +4634,7 @@
       <fTractionCurveLateral value="17.500000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.500000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.480000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.900000" />
@@ -4691,7 +4691,7 @@
       <fTractionCurveLateral value="17.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.480000" />
       <fTractionLossMult value="0.500000" />
       <fSuspensionForce value="1.000000" />
@@ -4748,7 +4748,7 @@
       <fTractionCurveLateral value="15.000000" />
       <fTractionSpringDeltaMax value="0.130000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.440000" />
       <fTractionLossMult value="0.000000" />
       <fSuspensionForce value="2.200000" />
@@ -4805,7 +4805,7 @@
       <fTractionCurveLateral value="17.000000" />
       <fTractionSpringDeltaMax value="0.130000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.440000" />
       <fTractionLossMult value="0.000000" />
       <fSuspensionForce value="2.100000" />
@@ -4862,7 +4862,7 @@
       <fTractionCurveLateral value="17.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.460000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.400000" />
@@ -4919,7 +4919,7 @@
       <fTractionCurveLateral value="17.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.460000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.400000" />
@@ -4976,7 +4976,7 @@
       <fTractionCurveLateral value="14.900000" />
       <fTractionSpringDeltaMax value="0.120000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.484400" />
       <fTractionLossMult value="0.900000" />
       <fSuspensionForce value="1.780000" />
@@ -5033,7 +5033,7 @@
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.132000" />
       <fLowSpeedTractionLossMult value="0.210000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.477000" />
       <fTractionLossMult value="1.160000" />
       <fSuspensionForce value="1.570000" />
@@ -5094,7 +5094,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.700000" />
+      <fCamberStiffness value="0.700000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="2.000000" />
       <fSuspensionForce value="7.600000" />
@@ -5172,7 +5172,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.550000" />
+      <fCamberStiffness value="0.550000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="1.560000" />
       <fSuspensionForce value="6.500000" />
@@ -5250,7 +5250,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.700000" />
+      <fCamberStiffness value="0.700000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="4.620000" />
       <fSuspensionForce value="7.800000" />
@@ -5328,7 +5328,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.700000" />
+      <fCamberStiffness value="0.700000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="4.620000" />
       <fSuspensionForce value="7.800000" />
@@ -5406,7 +5406,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.700000" />
+      <fCamberStiffness value="0.700000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="1.620000" />
       <fSuspensionForce value="7.800000" />
@@ -5484,7 +5484,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.500000" />
+      <fCamberStiffness value="0.500000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="1.580000" />
       <fSuspensionForce value="7.200000" />
@@ -5562,7 +5562,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.700000" />
+      <fCamberStiffness value="0.700000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="1.620000" />
       <fSuspensionForce value="7.700000" />
@@ -5640,7 +5640,7 @@
       <fTractionCurveLateral value="28.000000" />
       <fTractionSpringDeltaMax value="0.060000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.200000" />
+      <fCamberStiffness value="0.200000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="2.300000" />
       <fSuspensionForce value="6.100000" />
@@ -5718,7 +5718,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.500000" />
+      <fCamberStiffness value="0.500000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="1.980000" />
       <fSuspensionForce value="7.500000" />
@@ -5796,7 +5796,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.700000" />
+      <fCamberStiffness value="0.700000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="1.900000" />
       <fSuspensionForce value="8.200000" />
@@ -5874,7 +5874,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.700000" />
+      <fCamberStiffness value="0.700000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="1.880000" />
       <fSuspensionForce value="7.400000" />
@@ -5952,7 +5952,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.700000" />
+      <fCamberStiffness value="0.700000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="1.980000" />
       <fSuspensionForce value="7.300000" />
@@ -6030,7 +6030,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.310000" />
+      <fCamberStiffness value="0.310000" />
       <fTractionBiasFront value="0.390000" />
       <fTractionLossMult value="1.530000" />
       <fSuspensionForce value="7.000000" />
@@ -6108,7 +6108,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.550000" />
+      <fCamberStiffness value="0.550000" />
       <fTractionBiasFront value="0.360000" />
       <fTractionLossMult value="3.220000" />
       <fSuspensionForce value="6.700000" />
@@ -6186,7 +6186,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.700000" />
+      <fCamberStiffness value="0.700000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="1.830000" />
       <fSuspensionForce value="7.300000" />
@@ -6264,7 +6264,7 @@
       <fTractionCurveLateral value="20.000000" />
       <fTractionSpringDeltaMax value="0.030000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.470000" />
       <fTractionLossMult value="0.000000" />
       <fSuspensionForce value="8.500000" />
@@ -6342,7 +6342,7 @@
       <fTractionCurveLateral value="20.000000" />
       <fTractionSpringDeltaMax value="0.030000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.470000" />
       <fTractionLossMult value="0.300000" />
       <fSuspensionForce value="8.500000" />
@@ -6420,7 +6420,7 @@
       <fTractionCurveLateral value="20.500000" />
       <fTractionSpringDeltaMax value="0.030000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.470000" />
       <fTractionLossMult value="0.400000" />
       <fSuspensionForce value="8.500000" />
@@ -6498,7 +6498,7 @@
       <fTractionCurveLateral value="22.500000" />
       <fTractionSpringDeltaMax value="0.030000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.430000" />
       <fTractionLossMult value="0.200000" />
       <fSuspensionForce value="5.000000" />
@@ -6576,7 +6576,7 @@
       <fTractionCurveLateral value="19.500000" />
       <fTractionSpringDeltaMax value="0.030000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.470000" />
       <fTractionLossMult value="0.400000" />
       <fSuspensionForce value="8.500000" />
@@ -6654,7 +6654,7 @@
       <fTractionCurveLateral value="12.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.500000" />
@@ -6745,7 +6745,7 @@
       <fTractionCurveLateral value="12.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="0.000000" />
       <fSuspensionForce value="8.500000" />
@@ -6836,7 +6836,7 @@
       <fTractionCurveLateral value="12.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="4.500000" />
@@ -6927,7 +6927,7 @@
       <fTractionCurveLateral value="12.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="2.500000" />
@@ -7018,7 +7018,7 @@
       <fTractionCurveLateral value="18.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.500000" />
@@ -7109,7 +7109,7 @@
       <fTractionCurveLateral value="12.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="6.500000" />
@@ -7242,7 +7242,7 @@
       <fTractionCurveLateral value="22.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="4.500000" />
@@ -7333,7 +7333,7 @@
       <fTractionCurveLateral value="12.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.500000" />
@@ -7424,7 +7424,7 @@
       <fTractionCurveLateral value="12.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="2.500000" />
@@ -7515,7 +7515,7 @@
       <fTractionCurveLateral value="12.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.500000" />
@@ -7648,7 +7648,7 @@
       <fTractionCurveLateral value="12.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.500000" />
@@ -7781,7 +7781,7 @@
       <fTractionCurveLateral value="12.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="6.500000" />
@@ -7872,7 +7872,7 @@
       <fTractionCurveLateral value="12.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="0.000000" />
       <fSuspensionForce value="6.500000" />
@@ -7963,7 +7963,7 @@
       <fTractionCurveLateral value="12.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="2.500000" />
@@ -8054,7 +8054,7 @@
       <fTractionCurveLateral value="16.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="3.200000" />
@@ -8145,7 +8145,7 @@
       <fTractionCurveLateral value="12.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="6.500000" />
@@ -8239,7 +8239,7 @@
       <fTractionCurveLateral value="12.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="3.500000" />
@@ -8372,7 +8372,7 @@
       <fTractionCurveLateral value="8.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="0.400000" />
@@ -8429,7 +8429,7 @@
       <fTractionCurveLateral value="8.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="0.400000" />
@@ -8486,7 +8486,7 @@
       <fTractionCurveLateral value="8.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="0.400000" />
@@ -8543,7 +8543,7 @@
       <fTractionCurveLateral value="20.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.200000" />
@@ -8610,7 +8610,7 @@
       <fTractionCurveLateral value="20.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.200000" />
@@ -8677,7 +8677,7 @@
       <fTractionCurveLateral value="20.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="2.200000" />
@@ -8744,7 +8744,7 @@
       <fTractionCurveLateral value="20.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.200000" />
@@ -8811,7 +8811,7 @@
       <fTractionCurveLateral value="20.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.200000" />
@@ -8878,7 +8878,7 @@
       <fTractionCurveLateral value="20.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.200000" />
@@ -8945,7 +8945,7 @@
       <fTractionCurveLateral value="20.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="0.500000" />
@@ -9012,7 +9012,7 @@
       <fTractionCurveLateral value="20.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.450000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.400000" />
@@ -9079,7 +9079,7 @@
       <fTractionCurveLateral value="20.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.450000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.400000" />
@@ -9146,7 +9146,7 @@
       <fTractionCurveLateral value="20.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.200000" />
@@ -9213,7 +9213,7 @@
       <fTractionCurveLateral value="20.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.200000" />
@@ -9280,7 +9280,7 @@
       <fTractionCurveLateral value="20.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.450000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.800000" />
@@ -9347,7 +9347,7 @@
       <fTractionCurveLateral value="20.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.450000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.400000" />
@@ -9414,7 +9414,7 @@
       <fTractionCurveLateral value="20.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.200000" />
@@ -9481,7 +9481,7 @@
       <fTractionCurveLateral value="13.000000" />
       <fTractionSpringDeltaMax value="0.120000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="3.000000" />
@@ -9548,7 +9548,7 @@
       <fTractionCurveLateral value="10.500000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.450000" />
       <fTractionLossMult value="0.000000" />
       <fSuspensionForce value="2.000000" />
@@ -9647,7 +9647,7 @@
       <fTractionCurveLateral value="15.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.450000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="2.200000" />
@@ -9704,7 +9704,7 @@
       <fTractionCurveLateral value="13.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.480000" />
       <fTractionLossMult value="0.500000" />
       <fSuspensionForce value="2.000000" />
@@ -9761,7 +9761,7 @@
       <fTractionCurveLateral value="13.000000" />
       <fTractionSpringDeltaMax value="0.140000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.491100" />
       <fTractionLossMult value="0.000000" />
       <fSuspensionForce value="1.870000" />
@@ -9861,7 +9861,7 @@
       <fTractionCurveLateral value="6.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.950000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.000000" />
@@ -9928,7 +9928,7 @@
       <fTractionCurveLateral value="6.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.950000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.000000" />
@@ -10054,7 +10054,7 @@
       <fTractionCurveLateral value="6.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.950000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.000000" />
@@ -10180,7 +10180,7 @@
       <fTractionCurveLateral value="8.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.950000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="3.000000" />
@@ -10264,7 +10264,7 @@
       <fTractionCurveLateral value="2.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.950000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.000000" />
@@ -10390,7 +10390,7 @@
       <fTractionCurveLateral value="6.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.950000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.000000" />
@@ -10475,7 +10475,7 @@
       <fTractionCurveLateral value="1.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.950000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.000000" />
@@ -10560,7 +10560,7 @@
       <fTractionCurveLateral value="1.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.950000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.000000" />
@@ -10644,7 +10644,7 @@
       <fTractionCurveLateral value="120.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.950000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="0.000000" />
@@ -10749,7 +10749,7 @@
       <fTractionCurveLateral value="6.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.950000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.000000" />
@@ -10834,7 +10834,7 @@
       <fTractionCurveLateral value="12.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="2.000000" />
@@ -10967,7 +10967,7 @@
       <fTractionCurveLateral value="12.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="3.000000" />
@@ -11100,7 +11100,7 @@
       <fTractionCurveLateral value="12.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="3.000000" />
@@ -11233,7 +11233,7 @@
       <fTractionCurveLateral value="12.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="2.000000" />
@@ -11325,7 +11325,7 @@
       <fTractionCurveLateral value="12.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="5.000000" />
@@ -11459,7 +11459,7 @@
       <fTractionCurveLateral value="12.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="3.000000" />
@@ -11593,7 +11593,7 @@
       <fTractionCurveLateral value="12.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="3.500000" />
@@ -11727,7 +11727,7 @@
       <fTractionCurveLateral value="12.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.000000" />
@@ -11818,7 +11818,7 @@
       <fTractionCurveLateral value="8.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="3.000000" />
@@ -11909,7 +11909,7 @@
       <fTractionCurveLateral value="8.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="3.000000" />
@@ -12000,7 +12000,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.550000" />
+      <fCamberStiffness value="0.550000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="1.980000" />
       <fSuspensionForce value="7.800000" />
@@ -12079,7 +12079,7 @@
       <fTractionCurveLateral value="16.600000" />
       <fTractionSpringDeltaMax value="0.130000" />
       <fLowSpeedTractionLossMult value="0.210000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.482400" />
       <fTractionLossMult value="0.980000" />
       <fSuspensionForce value="1.950000" />
@@ -12140,7 +12140,7 @@
       <fTractionCurveLateral value="6.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.950000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.000000" />
@@ -12226,7 +12226,7 @@
       <fTractionCurveLateral value="14.200000" />
       <fTractionSpringDeltaMax value="0.090000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.484000" />
       <fTractionLossMult value="1.020000" />
       <fSuspensionForce value="1.950000" />
@@ -12288,7 +12288,7 @@
       <fTractionCurveLateral value="16.400000" />
       <fTractionSpringDeltaMax value="0.124000" />
       <fLowSpeedTractionLossMult value="1.210000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.486600" />
       <fTractionLossMult value="1.330000" />
       <fSuspensionForce value="3.040000" />
@@ -12350,7 +12350,7 @@
       <fTractionCurveLateral value="14.500000" />
       <fTractionSpringDeltaMax value="0.120000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.479100" />
       <fTractionLossMult value="0.960000" />
       <fSuspensionForce value="1.400000" />
@@ -12411,7 +12411,7 @@
       <fTractionCurveLateral value="16.000000" />
       <fTractionSpringDeltaMax value="0.130000" />
       <fLowSpeedTractionLossMult value="0.100000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.486500" />
       <fTractionLossMult value="0.580000" />
       <fSuspensionForce value="1.600000" />
@@ -12510,7 +12510,7 @@
       <fTractionCurveLateral value="16.000000" />
       <fTractionSpringDeltaMax value="0.130000" />
       <fLowSpeedTractionLossMult value="0.100000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.485500" />
       <fTractionLossMult value="0.580000" />
       <fSuspensionForce value="1.550000" />
@@ -12609,7 +12609,7 @@
       <fTractionCurveLateral value="12.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.100000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="3.7500000" />
@@ -12777,7 +12777,7 @@
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.139000" />
       <fLowSpeedTractionLossMult value="0.190000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.486700" />
       <fTractionLossMult value="1.140000" />
       <fSuspensionForce value="2.150000" />
@@ -12838,7 +12838,7 @@
       <fTractionCurveLateral value="16.900000" />
       <fTractionSpringDeltaMax value="0.130000" />
       <fLowSpeedTractionLossMult value="0.100000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.479500" />
       <fTractionLossMult value="0.350000" />
       <fSuspensionForce value="2.350000" />
@@ -12895,7 +12895,7 @@
       <fTractionCurveLateral value="16.900000" />
       <fTractionSpringDeltaMax value="0.130000" />
       <fLowSpeedTractionLossMult value="0.100000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.479500" />
       <fTractionLossMult value="0.350000" />
       <fSuspensionForce value="2.350000" />
@@ -12952,7 +12952,7 @@
       <fTractionCurveLateral value="15.500000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="1.110000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.485100" />
       <fTractionLossMult value="1.290000" />
       <fSuspensionForce value="1.500000" />
@@ -13009,7 +13009,7 @@
       <fTractionCurveLateral value="16.900000" />
       <fTractionSpringDeltaMax value="0.143000" />
       <fLowSpeedTractionLossMult value="1.210000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.482100" />
       <fTractionLossMult value="1.210000" />
       <fSuspensionForce value="1.500000" />
@@ -13066,7 +13066,7 @@
       <fTractionCurveLateral value="16.000000" />
       <fTractionSpringDeltaMax value="0.130000" />
       <fLowSpeedTractionLossMult value="0.100000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.483500" />
       <fTractionLossMult value="0.580000" />
       <fSuspensionForce value="2.260000" />
@@ -13165,7 +13165,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.310000" />
+      <fCamberStiffness value="0.310000" />
       <fTractionBiasFront value="0.390000" />
       <fTractionLossMult value="1.430000" />
       <fSuspensionForce value="7.000000" />
@@ -13243,7 +13243,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.700000" />
+      <fCamberStiffness value="0.700000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="2.050000" />
       <fSuspensionForce value="8.300000" />
@@ -13321,7 +13321,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.700000" />
+      <fCamberStiffness value="0.700000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="1.960000" />
       <fSuspensionForce value="7.900000" />
@@ -13399,7 +13399,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.530000" />
+      <fCamberStiffness value="0.530000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="1.960000" />
       <fSuspensionForce value="6.500000" />
@@ -13477,7 +13477,7 @@
       <fTractionCurveLateral value="12.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="2.500000" />
@@ -13568,7 +13568,7 @@
       <fTractionCurveLateral value="12.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="3.500000" />
@@ -13701,7 +13701,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.590000" />
+      <fCamberStiffness value="0.590000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="1.960000" />
       <fSuspensionForce value="6.700000" />
@@ -13779,7 +13779,7 @@
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.481900" />
       <fTractionLossMult value="1.050000" />
       <fSuspensionForce value="2.050000" />
@@ -13841,7 +13841,7 @@
       <fTractionCurveLateral value="14.600000" />
       <fTractionSpringDeltaMax value="0.120000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.482400" />
       <fTractionLossMult value="1.050000" />
       <fSuspensionForce value="2.050000" />
@@ -13902,7 +13902,7 @@
       <fTractionCurveLateral value="14.900000" />
       <fTractionSpringDeltaMax value="0.110000" />
       <fLowSpeedTractionLossMult value="0.090000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.481100" />
       <fTractionLossMult value="0.950000" />
       <fSuspensionForce value="1.740000" />
@@ -13963,7 +13963,7 @@
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.130000" />
       <fLowSpeedTractionLossMult value="0.210000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.475500" />
       <fTractionLossMult value="1.160000" />
       <fSuspensionForce value="1.800000" />
@@ -14024,7 +14024,7 @@
       <fTractionCurveLateral value="14.700000" />
       <fTractionSpringDeltaMax value="0.120000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.475900" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.650000" />
@@ -14085,7 +14085,7 @@
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.141000" />
       <fLowSpeedTractionLossMult value="0.170000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.485300" />
       <fTractionLossMult value="1.040000" />
       <fSuspensionForce value="1.940000" />
@@ -14145,7 +14145,7 @@
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.141000" />
       <fLowSpeedTractionLossMult value="0.170000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.485300" />
       <fTractionLossMult value="1.040000" />
       <fSuspensionForce value="1.880000" />
@@ -14207,7 +14207,7 @@
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.143000" />
       <fLowSpeedTractionLossMult value="0.220000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.483100" />
       <fTractionLossMult value="1.270000" />
       <fSuspensionForce value="2.0500000" />
@@ -14269,7 +14269,7 @@
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.143000" />
       <fLowSpeedTractionLossMult value="0.220000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.484100" />
       <fTractionLossMult value="1.210000" />
       <fSuspensionForce value="2.010000" />
@@ -14330,7 +14330,7 @@
       <fTractionCurveLateral value="16.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.220000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.481100" />
       <fTractionLossMult value="1.100000" />
       <fSuspensionForce value="1.550000" />
@@ -14430,7 +14430,7 @@
       <fTractionCurveLateral value="16.600000" />
       <fTractionSpringDeltaMax value="0.130000" />
       <fLowSpeedTractionLossMult value="1.100000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.480900" />
       <fTractionLossMult value="1.200000" />
       <fSuspensionForce value="2.080000" />
@@ -14492,7 +14492,7 @@
       <fTractionCurveLateral value="16.400000" />
       <fTractionSpringDeltaMax value="0.137000" />
       <fLowSpeedTractionLossMult value="0.220000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.484300" />
       <fTractionLossMult value="1.220000" />
       <fSuspensionForce value="2.120000" />
@@ -14554,7 +14554,7 @@
       <fTractionCurveLateral value="16.400000" />
       <fTractionSpringDeltaMax value="0.138000" />
       <fLowSpeedTractionLossMult value="0.210000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.484100" />
       <fTractionLossMult value="1.210000" />
       <fSuspensionForce value="2.020000" />
@@ -14615,7 +14615,7 @@
       <fTractionCurveLateral value="12.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="3.500000" />
@@ -14749,7 +14749,7 @@
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.126000" />
       <fLowSpeedTractionLossMult value="0.210000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.485100" />
       <fTractionLossMult value="1.320000" />
       <fSuspensionForce value="3.260000" />
@@ -14810,7 +14810,7 @@
       <fTractionCurveLateral value="16.900000" />
       <fTractionSpringDeltaMax value="0.141000" />
       <fLowSpeedTractionLossMult value="0.210000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.482100" />
       <fTractionLossMult value="0.910000" />
       <fSuspensionForce value="1.540000" />
@@ -14868,7 +14868,7 @@
       <fTractionCurveLateral value="16.800000" />
       <fTractionSpringDeltaMax value="0.139000" />
       <fLowSpeedTractionLossMult value="0.350000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.484800" />
       <fTractionLossMult value="1.210000" />
       <fSuspensionForce value="2.350000" />
@@ -14930,7 +14930,7 @@
       <fTractionCurveLateral value="16.800000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.330000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.485500" />
       <fTractionLossMult value="1.230000" />
       <fSuspensionForce value="1.750000" />
@@ -14992,7 +14992,7 @@
       <fTractionCurveLateral value="16.900000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.310000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.485500" />
       <fTractionLossMult value="1.230000" />
       <fSuspensionForce value="1.750000" />
@@ -15053,7 +15053,7 @@
       <fTractionCurveLateral value="20.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.400000" />
       <fTractionLossMult value="0.500000" />
       <fSuspensionForce value="2.500000" />
@@ -15110,7 +15110,7 @@
       <fTractionCurveLateral value="8.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.950000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="3.000000" />
@@ -15195,7 +15195,7 @@
       <fTractionCurveLateral value="12.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="3.500000" />
@@ -15329,7 +15329,7 @@
       <fTractionCurveLateral value="16.600000" />
       <fTractionSpringDeltaMax value="0.145000" />
       <fLowSpeedTractionLossMult value="0.190000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.487500" />
       <fTractionLossMult value="1.050000" />
       <fSuspensionForce value="2.110000" />
@@ -15390,7 +15390,7 @@
       <fTractionCurveLateral value="12.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="2.500000" />
@@ -15481,7 +15481,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.310000" />
+      <fCamberStiffness value="0.310000" />
       <fTractionBiasFront value="0.390000" />
       <fTractionLossMult value="1.400000" />
       <fSuspensionForce value="7.000000" />
@@ -15559,7 +15559,7 @@
       <fTractionCurveLateral value="22.500000" />
       <fTractionSpringDeltaMax value="0.060000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="1.000000" />
+      <fCamberStiffness value="1.000000" />
       <fTractionBiasFront value="0.470000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="7.000000" />
@@ -15637,7 +15637,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.060000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.450000" />
+      <fCamberStiffness value="0.450000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="1.580000" />
       <fSuspensionForce value="8.000000" />
@@ -15716,7 +15716,7 @@
       <fTractionCurveLateral value="16.900000" />
       <fTractionSpringDeltaMax value="0.145000" />
       <fLowSpeedTractionLossMult value="0.030000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.491600" />
       <fTractionLossMult value="0.8700000" />
       <fSuspensionForce value="2.830000" />
@@ -15778,7 +15778,7 @@
       <fTractionCurveLateral value="16.300000" />
       <fTractionSpringDeltaMax value="0.111000" />
       <fLowSpeedTractionLossMult value="0.190000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.484800" />
       <fTractionLossMult value="1.400000" />
       <fSuspensionForce value="3.530000" />
@@ -15835,7 +15835,7 @@
       <fTractionCurveLateral value="22.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.510000" />
       <fTractionLossMult value="0.500000" />
       <fSuspensionForce value="2.2500000" />
@@ -15892,7 +15892,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.450000" />
+      <fCamberStiffness value="0.450000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="1.370000" />
       <fSuspensionForce value="8.000000" />
@@ -15970,7 +15970,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.500000" />
+      <fCamberStiffness value="0.500000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="1.280000" />
       <fSuspensionForce value="7.300000" />
@@ -16048,7 +16048,7 @@
       <fTractionCurveLateral value="15.300000" />
       <fTractionSpringDeltaMax value="0.109000" />
       <fLowSpeedTractionLossMult value="0.401000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.483500" />
       <fTractionLossMult value="0.920000" />
       <fSuspensionForce value="3.800000" />
@@ -16126,7 +16126,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.700000" />
+      <fCamberStiffness value="0.700000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="1.380000" />
       <fSuspensionForce value="7.500000" />
@@ -16204,7 +16204,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.700000" />
+      <fCamberStiffness value="0.700000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="1.460000" />
       <fSuspensionForce value="7.400000" />
@@ -16282,7 +16282,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.500000" />
+      <fCamberStiffness value="0.500000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="1.280000" />
       <fSuspensionForce value="6.000000" />
@@ -16360,7 +16360,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.500000" />
+      <fCamberStiffness value="0.500000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="1.280000" />
       <fSuspensionForce value="7.400000" />
@@ -16439,7 +16439,7 @@
       <fTractionCurveLateral value="20.000000" />
       <fTractionSpringDeltaMax value="0.060000" />
       <fLowSpeedTractionLossMult value="0.800000" />
-      <fCamberStiffnesss value="0.700000" />
+      <fCamberStiffness value="0.700000" />
       <fTractionBiasFront value="0.470000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="7.000000" />
@@ -16517,7 +16517,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.500000" />
+      <fCamberStiffness value="0.500000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="1.280000" />
       <fSuspensionForce value="7.300000" />
@@ -16595,7 +16595,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.310000" />
+      <fCamberStiffness value="0.310000" />
       <fTractionBiasFront value="0.390000" />
       <fTractionLossMult value="1.090000" />
       <fSuspensionForce value="6.700000" />
@@ -16673,7 +16673,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.310000" />
+      <fCamberStiffness value="0.310000" />
       <fTractionBiasFront value="0.390000" />
       <fTractionLossMult value="0.530000" />
       <fSuspensionForce value="7.000000" />
@@ -16751,7 +16751,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.550000" />
+      <fCamberStiffness value="0.550000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="1.320000" />
       <fSuspensionForce value="7.500000" />
@@ -16829,7 +16829,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.450000" />
+      <fCamberStiffness value="0.450000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="1.280000" />
       <fSuspensionForce value="6.500000" />
@@ -16907,7 +16907,7 @@
       <fTractionCurveLateral value="26.00000" />
       <fTractionSpringDeltaMax value="0.040000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.700000" />
+      <fCamberStiffness value="0.700000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="1.400000" />
       <fSuspensionForce value="7.000000" />
@@ -16985,7 +16985,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.700000" />
+      <fCamberStiffness value="0.700000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="1.400000" />
       <fSuspensionForce value="7.200000" />
@@ -17064,7 +17064,7 @@
       <fTractionCurveLateral value="15.000000" />
       <fTractionSpringDeltaMax value="0.119000" />
       <fLowSpeedTractionLossMult value="0.330000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.488720" />
       <fTractionLossMult value="1.130000" />
       <fSuspensionForce value="4.200000" />
@@ -17116,7 +17116,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.500000" />
+      <fCamberStiffness value="0.500000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="1.280000" />
       <fSuspensionForce value="7.300000" />
@@ -17194,7 +17194,7 @@
       <fTractionCurveLateral value="20.500000" />
       <fTractionSpringDeltaMax value="0.090000" />
       <fLowSpeedTractionLossMult value="1.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.430000" />
       <fTractionLossMult value="0.100000" />
       <fSuspensionForce value="3.800000" />
@@ -17272,7 +17272,7 @@
       <fTractionCurveLateral value="20.000000" />
       <fTractionSpringDeltaMax value="0.060000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.200000" />
+      <fCamberStiffness value="0.200000" />
       <fTractionBiasFront value="0.490000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="4.100000" />
@@ -17350,7 +17350,7 @@
       <fTractionCurveLateral value="20.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="1.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.470000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.800000" />
@@ -17407,7 +17407,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.500000" />
+      <fCamberStiffness value="0.500000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="1.280000" />
       <fSuspensionForce value="7.500000" />
@@ -17485,7 +17485,7 @@
       <fTractionCurveLateral value="20.000000" />
       <fTractionSpringDeltaMax value="0.060000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.200000" />
+      <fCamberStiffness value="0.200000" />
       <fTractionBiasFront value="0.480000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="4.100000" />
@@ -17563,7 +17563,7 @@
       <fTractionCurveLateral value="22.500000" />
       <fTractionSpringDeltaMax value="0.130000" />
       <fLowSpeedTractionLossMult value="1.600000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.50000" />
       <fTractionLossMult value="0.000000" />
       <fSuspensionForce value="2.500000" />
@@ -17691,7 +17691,7 @@
       <fTractionCurveLateral value="20.500000" />
       <fTractionSpringDeltaMax value="0.090000" />
       <fLowSpeedTractionLossMult value="1.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.410000" />
       <fTractionLossMult value="0.100000" />
       <fSuspensionForce value="3.800000" />
@@ -17841,7 +17841,7 @@
       <fTractionCurveLateral value="20.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.470000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="2.400000" />
@@ -17945,7 +17945,7 @@
       <fTractionCurveLateral value="16.800000" />
       <fTractionSpringDeltaMax value="0.146000" />
       <fLowSpeedTractionLossMult value="0.250000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.483400" />
       <fTractionLossMult value="1.220000" />
       <fSuspensionForce value="3.290000" />
@@ -18002,7 +18002,7 @@
       <fTractionCurveLateral value="20.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.487500" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.800000" />
@@ -18060,7 +18060,7 @@
       <fTractionCurveLateral value="22.500000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="1.300000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.487500" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="2.650000" />
@@ -18117,7 +18117,7 @@
       <fTractionCurveLateral value="22.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.510000" />
       <fTractionLossMult value="0.500000" />
       <fSuspensionForce value="1.00000" />
@@ -18174,7 +18174,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.670000" />
+      <fCamberStiffness value="0.670000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="1.350000" />
       <fSuspensionForce value="7.900000" />
@@ -18252,7 +18252,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.670000" />
+      <fCamberStiffness value="0.670000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="1.370000" />
       <fSuspensionForce value="7.900000" />
@@ -18331,7 +18331,7 @@
       <fTractionCurveLateral value="16.600000" />
       <fTractionSpringDeltaMax value="0.148000" />
       <fLowSpeedTractionLossMult value="0.210000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.482700" />
       <fTractionLossMult value="1.350000" />
       <fSuspensionForce value="3.310000" />
@@ -18393,7 +18393,7 @@
       <fTractionCurveLateral value="16.450000" />
       <fTractionSpringDeltaMax value="0.139000" />
       <fLowSpeedTractionLossMult value="0.220000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.483900" />
       <fTractionLossMult value="1.390000" />
       <fSuspensionForce value="3.540000" />
@@ -18454,7 +18454,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.700000" />
+      <fCamberStiffness value="0.700000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="1.350000" />
       <fSuspensionForce value="7.600000" />
@@ -18532,7 +18532,7 @@
       <fTractionCurveLateral value="26.000000" />
       <fTractionSpringDeltaMax value="0.050000" />
       <fLowSpeedTractionLossMult value="0.010000" />
-      <fCamberStiffnesss value="0.700000" />
+      <fCamberStiffness value="0.700000" />
       <fTractionBiasFront value="0.350000" />
       <fTractionLossMult value="1.350000" />
       <fSuspensionForce value="7.800000" />
@@ -18611,7 +18611,7 @@
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.142000" />
       <fLowSpeedTractionLossMult value="0.190000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.482300" />
       <fTractionLossMult value="1.310000" />
       <fSuspensionForce value="3.140000" />
@@ -18669,7 +18669,7 @@
       <fTractionCurveLateral value="16.700000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.270000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.483700" />
       <fTractionLossMult value="1.110000" />
       <fSuspensionForce value="2.430000" />
@@ -18773,7 +18773,7 @@
       <fTractionCurveLateral value="16.600000" />
       <fTractionSpringDeltaMax value="0.143000" />
       <fLowSpeedTractionLossMult value="0.220000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.487700" />
       <fTractionLossMult value="1.210000" />
       <fSuspensionForce value="2.740000" />
@@ -18835,7 +18835,7 @@
       <fTractionCurveLateral value="16.600000" />
       <fTractionSpringDeltaMax value="0.144000" />
       <fLowSpeedTractionLossMult value="0.280000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.485550" />
       <fTractionLossMult value="1.280000" />
       <fSuspensionForce value="3.390000" />
@@ -18893,7 +18893,7 @@
       <fTractionCurveLateral value="16.700000" />
       <fTractionSpringDeltaMax value="0.142000" />
       <fLowSpeedTractionLossMult value="0.350000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.487600" />
       <fTractionLossMult value="1.310000" />
       <fSuspensionForce value="3.280000" />
@@ -18955,7 +18955,7 @@
       <fTractionCurveLateral value="22.500000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.700000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.478000" />
       <fTractionLossMult value="0.000000" />
       <fSuspensionForce value="2.200000" />
@@ -19074,7 +19074,7 @@
       <fTractionCurveLateral value="16.600000" />
       <fTractionSpringDeltaMax value="0.140000" />
       <fLowSpeedTractionLossMult value="1.030000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.481300" />
       <fTractionLossMult value="1.180000" />
       <fSuspensionForce value="1.830000" />
@@ -19180,7 +19180,7 @@
       <fTractionCurveLateral value="35.500000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.325000" />
       <fTractionLossMult value="0.000000" />
       <fSuspensionForce value="2.000000" />
@@ -19306,7 +19306,7 @@
       <fTractionCurveLateral value="22.500000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.405000" />
       <fTractionLossMult value="0.000000" />
       <fSuspensionForce value="2.000000" />
@@ -19442,7 +19442,7 @@
       <fTractionCurveLateral value="16.700000" />
       <fTractionSpringDeltaMax value="0.142000" />
       <fLowSpeedTractionLossMult value="0.340000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.482100" />
       <fTractionLossMult value="1.270000" />
       <fSuspensionForce value="2.760000" />
@@ -19505,7 +19505,7 @@
       <fTractionCurveLateral value="16.800000" />
       <fTractionSpringDeltaMax value="0.148000" />
       <fLowSpeedTractionLossMult value="0.340000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.483500" />
       <fTractionLossMult value="1.280000" />
       <fSuspensionForce value="3.110000" />
@@ -19618,7 +19618,7 @@
       <fTractionCurveLateral value="16.700000" />
       <fTractionSpringDeltaMax value="0.145000" />
       <fLowSpeedTractionLossMult value="0.330000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.479700" />
       <fTractionLossMult value="1.270000" />
       <fSuspensionForce value="3.160000" />
@@ -19680,7 +19680,7 @@
       <fTractionCurveLateral value="22.500000" />
       <fTractionSpringDeltaMax value="0.130000" />
       <fLowSpeedTractionLossMult value="1.600000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.50000" />
       <fTractionLossMult value="0.000000" />
       <fSuspensionForce value="2.500000" />
@@ -19794,7 +19794,7 @@
       <fTractionCurveLateral value="18.000000" />
       <fTractionSpringDeltaMax value="0.130000" />
       <fLowSpeedTractionLossMult value="0.850000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="0.000000" />
       <fSuspensionForce value="1.400000" />
@@ -19908,7 +19908,7 @@
       <fTractionCurveLateral value="20.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="0.500000" />
       <fSuspensionForce value="2.200000" />
@@ -20033,7 +20033,7 @@
       <fTractionCurveLateral value="16.250000" />
       <fTractionSpringDeltaMax value="0.141000" />
       <fLowSpeedTractionLossMult value="0.220000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.476900" />
       <fTractionLossMult value="1.440000" />
       <fSuspensionForce value="3.810000" />
@@ -20090,7 +20090,7 @@
       <fTractionCurveLateral value="11.000000" />
       <fTractionSpringDeltaMax value="0.100000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.495000" />
       <fTractionLossMult value="0.000000" />
       <fSuspensionForce value="4.000000" />
@@ -20147,7 +20147,7 @@
       <fTractionCurveLateral value="18.500000" />
       <fTractionSpringDeltaMax value="0.030000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.475000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.400000" />
@@ -20204,7 +20204,7 @@
       <fTractionCurveLateral value="20.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.45000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.800000" />
@@ -20261,7 +20261,7 @@
       <fTractionCurveLateral value="18.000000" />
       <fTractionSpringDeltaMax value="0.130000" />
       <fLowSpeedTractionLossMult value="1.00000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="0.000000" />
       <fSuspensionForce value="2.800000" />
@@ -20368,7 +20368,7 @@
       <fTractionCurveLateral value="22.500000" />
       <fTractionSpringDeltaMax value="0.060000" />
       <fLowSpeedTractionLossMult value="0.800000" />
-      <fCamberStiffnesss value="0.900000" />
+      <fCamberStiffness value="0.900000" />
       <fTractionBiasFront value="0.390000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="5.2500000" />
@@ -20497,7 +20497,7 @@
       <fTractionCurveLateral value="16.250000" />
       <fTractionSpringDeltaMax value="0.146000" />
       <fLowSpeedTractionLossMult value="0.260000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.480800" />
       <fTractionLossMult value="1.370000" />
       <fSuspensionForce value="3.410000" />
@@ -20554,7 +20554,7 @@
       <fTractionCurveLateral value="20.000000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="0.000000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.500000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="1.200000" />
@@ -20679,7 +20679,7 @@
       <fTractionCurveLateral value="16.250000" />
       <fTractionSpringDeltaMax value="0.141000" />
       <fLowSpeedTractionLossMult value="0.280000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.480600" />
       <fTractionLossMult value="1.390000" />
       <fSuspensionForce value="3.490000" />
@@ -20737,7 +20737,7 @@
       <fTractionCurveLateral value="16.900000" />
       <fTractionSpringDeltaMax value="0.133000" />
       <fLowSpeedTractionLossMult value="0.170000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.483800" />
       <fTractionLossMult value="1.360000" />
       <fSuspensionForce value="3.210000" />
@@ -20794,7 +20794,7 @@
       <fTractionCurveLateral value="22.500000" />
       <fTractionSpringDeltaMax value="0.150000" />
       <fLowSpeedTractionLossMult value="1.00000" />
-      <fCamberStiffnesss value="0.000000" />
+      <fCamberStiffness value="0.000000" />
       <fTractionBiasFront value="0.485000" />
       <fTractionLossMult value="1.000000" />
       <fSuspensionForce value="2.250000" />
@@ -20879,3 +20879,4 @@
     </Item>
   </HandlingData>
 </CHandlingDataMgr>
+
