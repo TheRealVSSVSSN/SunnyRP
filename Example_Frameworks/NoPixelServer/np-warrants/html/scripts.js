@@ -1,69 +1,68 @@
-$(document).ready(function() {
+document.addEventListener('DOMContentLoaded', () => {
+  const body = document.querySelector('.body');
+  const warrantsContainer = document.querySelector('.warrants-container');
+  const publicContainer = document.querySelector('.public-container');
+  const doctorContainer = document.querySelector('.doctor-container');
+
+  const containers = [warrantsContainer, publicContainer, doctorContainer];
+
   function closeAll() {
-    $(".public-container").css('opacity', 0).fadeOut(200);
-    $(".warrants-container").css('opacity', 0).fadeOut(200);
-    $(".doctor-container").css('opacity', 0).fadeOut(200);
-    $(".body").css('opacity', 0).fadeOut(200);
+    containers.forEach(el => {
+      el.style.opacity = 0;
+      el.style.display = 'none';
+    });
+    body.style.opacity = 0;
+    body.style.display = 'none';
   }
 
-  function openContainer() {
-    $(".body").css('opacity', 1).fadeIn(200);
-    $(".warrants-container").css('opacity', 1).fadeIn(200);
-    $(".warrants-container").css('top', '5%');
-    $(".public-container").css('top', '105%');
-    $(".doctor-container").css('top', '105%');
-  } 
-
-  function openDoctorContainer() {
-    $(".body").css('opacity', 1).fadeIn(200);
-    $(".doctor-container").css('opacity', 1).fadeIn(200);
-    $(".doctor-container").css('top', '5%');
-    $(".public-container").css('top', '105%');
-    $(".warrants-container").css('top', '105%');
-  } 
-
-  function openPublicRecords() {
-    $(".body").css('opacity', 1).fadeIn(200);
-    $(".public-container").css('opacity', 1).fadeIn(200);
-    $(".warrants-container").css('top', '105%');
-    $(".public-container").css('top', '5%');
-    $(".doctor-container").css('top', '105%');
+  function openContainer(target) {
+    body.style.display = 'block';
+    body.style.opacity = 1;
+    containers.forEach(el => {
+      if (el === target) {
+        el.style.display = 'block';
+        el.style.opacity = 1;
+        el.style.top = '5%';
+      } else {
+        el.style.top = '105%';
+        el.style.display = 'none';
+        el.style.opacity = 0;
+      }
+    });
   }
 
-  window.addEventListener('message', function(event){
-    var item = event.data;
-
-    if(item.openWarrants === true) {
+  window.addEventListener('message', (event) => {
+    const item = event.data;
+    if (item.openWarrants) {
       closeAll();
-      openContainer();
-    }
-
-    if(item.openDoctors === true) {
+      openContainer(warrantsContainer);
+    } else if (item.openDoctors) {
       closeAll();
-      openDoctorContainer();
-    }
-
-    if(item.openSection == "publicrecords") {
+      openContainer(doctorContainer);
+    } else if (item.openSection === 'publicrecords') {
       closeAll();
-      openPublicRecords();
-    }
-
-    if(item.closeGUI) {
+      openContainer(publicContainer);
+    } else if (item.closeGUI) {
       closeAll();
     }
-    
   });
 
-  function _keyup(e) {
-    if (e.which == 27){
-      $.post('http://np-warrants/close', JSON.stringify({}));
+  function handleKeyUp(e) {
+    if (e.key === 'Escape') {
+      fetch('https://np-warrants/close', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+        body: '{}'
+      }).catch(() => {});
       closeAll();
     }
   }
 
-  document.onkeyup = _keyup;
+  document.addEventListener('keyup', handleKeyUp);
 
-  $(".warrants-container iframe, .public-container iframe").load(function(){
-    $(this).contents().keyup(_keyup);
+  document.querySelectorAll('.warrants-container iframe, .public-container iframe, .doctor-container iframe').forEach((iframe) => {
+    iframe.addEventListener('load', () => {
+      iframe.contentWindow.addEventListener('keyup', handleKeyUp);
+    });
   });
 });
