@@ -27,17 +27,17 @@ AddEventHandler('playerConnecting', function(name, setCallback)
 		local identifier = identifiers[i]
 		debugMsg('Checking user ban: ' .. identifier .. " (" .. name .. ")")
 
-		local banned = isIdentifierBanned(identifier)
-		if(banned)then
-			if(type(settings.defaultSettings.banreason) == "string")then
-				setCallback(settings.defaultSettings.banreason)
-			elseif(type(settings.defaultSettings.banreason) == "function")then
-				setCallback(settings.defaultSettings.banreason(identifier, name))
-			else
-				setCallback("Default ban reason error")
-			end
-			CancelEvent()
-		end
+                local banned = isIdentifierBanned(identifier)
+                if banned then
+                        if type(settings.defaultSettings.banReason) == "string" then
+                                setCallback(settings.defaultSettings.banReason)
+                        elseif type(settings.defaultSettings.banReason) == "function" then
+                                setCallback(settings.defaultSettings.banReason(identifier, name))
+                        else
+                                setCallback("Default ban reason error")
+                        end
+                        CancelEvent()
+                end
 	end
 end)
 
@@ -113,12 +113,12 @@ AddEventHandler('chatMessage', function(source, n, message)
 					command.cmd(source, command_args, Users[source])
 					TriggerEvent("es:adminCommandRan", source, command_args, Users[source])
 				else
-					command.callbackfailed(source, command_args, Users[source])
-					TriggerEvent("es:adminCommandFailed", source, command_args, Users[source])
+                                        command.callbackfailed(source, command_args, Users[source])
+                                        TriggerEvent("es:adminCommandFailed", source, command_args, Users[source])
 
-					if(type(settings.defaultSettings.permissionDenied) == "string" and not WasEventCanceled())then
-						TriggerClientEvent('chatMessage', source, "", {0,0,0}, defaultSettings.permissionDenied)
-					end
+                                        if type(settings.defaultSettings.permissionDenied) == "string" and not WasEventCanceled() then
+                                                TriggerClientEvent('chatMessage', source, "", {0,0,0}, settings.defaultSettings.permissionDenied)
+                                        end
 
 					debugMsg("Non admin (" .. GetPlayerName(source) .. ") attempted to run admin command: " .. command_args[1])
 				end

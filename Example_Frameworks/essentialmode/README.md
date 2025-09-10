@@ -11,7 +11,11 @@ Warning: We do not provide support regarding installation/bug reports for Essent
 1. Download
 2. Extract the package
 3. Place all the folders in your resources folder
-4. Edit your database settings in **resources/essentialmode/server/player/login.lua**
+4. Configure database credentials using server convars:
+   - `set essentialmode_db_host "127.0.0.1"`
+   - `set essentialmode_db_name "gta5_gamemode_essential"`
+   - `set essentialmode_db_user "root"`
+   - `set essentialmode_db_password ""`
 5. Import the **.sql** file to your database.
 6. Add essentialmode to your AutoStartResources in citmp-server.yml
 

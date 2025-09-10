@@ -1,13 +1,13 @@
-local permission = {
-	kick = 1,
-	ban = 4
-}
-
 -- Loading MySQL Class
 require "resources/essentialmode/lib/MySQL"
 
--- MySQL:open("IP", "databasname", "user", "password")
-MySQL:open("127.0.0.1", "gta5_gamemode_essential", "root", "1202")
+-- Database connection using configurable convars
+MySQL:open(
+    GetConvar('essentialmode_db_host', '127.0.0.1'),
+    GetConvar('essentialmode_db_name', 'gta5_gamemode_essential'),
+    GetConvar('essentialmode_db_user', 'root'),
+    GetConvar('essentialmode_db_password', '')
+)
 
 -- Adding custom groups called owner, inhereting from superadmin. (It's higher then superadmin). And moderator, higher then user but lower then admin
 TriggerEvent("es:addGroup", "owner", "superadmin", function(group) end)
@@ -119,10 +119,10 @@ TriggerEvent('es:addGroupCommand', 'ban', "admin", function(source, args, user)
 					message = time .. " second(s)"
 				end
 
-				if not tonumber(time) > 0 then
-					time = os.time() + 999999999999
-					message = 'very long'
-				end
+                                if tonumber(time) <= 0 then
+                                        time = os.time() + 999999999999
+                                        message = 'very long'
+                                end
 
 				local reason = args
 				table.remove(reason, 1)
@@ -153,16 +153,6 @@ end, function(source, args, user)
 	TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Insufficienct permissions!")
 end)
 
-function stringsplit(self, delimiter)
-  local a = self:Split(delimiter)
-  local t = {}
-
-  for i = 0, #a - 1 do
-     table.insert(t, a[i])
-  end
-
-  return t
-end
 
 -- Announcing
 TriggerEvent('es:addGroupCommand', 'announce', "admin", function(source, args, user)
@@ -447,9 +437,9 @@ AddEventHandler('rconCommand', function(commandName, args)
 				return
 			end
 
-			TriggerEvent("es:setPlayerData", tonumber(args[1]), "banned", 1, function(response, success)
-				TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, "Player ^2" .. GetPlayerName(player) .. "^0 has been banned(^2Banned: You have been banned by console.^0)")
-			end)
+                        TriggerEvent("es:setPlayerData", tonumber(args[1]), "banned", 1, function(response, success)
+                                TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, "Player ^2" .. GetPlayerName(tonumber(args[1])) .. "^0 has been banned(^2Banned: You have been banned by console.^0)")
+                        end)
 
 			CancelEvent()
 		end
