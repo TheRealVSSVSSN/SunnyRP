@@ -91,7 +91,7 @@ The `qb-core` resource provides the foundational framework for QBCore-based Five
 **Role:** Handles network events and commands.
 - Login state: `QBCore:Client:OnPlayerLoaded` sets `isLoggedIn`, enables PVP if configured; `OnPlayerUnload` clears state.
 - Server-controlled PVP toggle: `QBCore:Client:PvpHasToggled` applies friendly fire settings.
-- Teleport commands: `QBCore:Command:TeleportToPlayer`, `TeleportToCoords`, and `GoToMarker` move the player or show errors via notifications.
+ - Teleport commands: `QBCore:Command:TeleportToPlayer`, `TeleportToCoords`, and `GoToMarker` relocate the player's ped or current vehicle to target coordinates while preserving proper heading and provide error feedback when needed.
 - Vehicle control: `QBCore:Command:SpawnVehicle` spawns a vehicle and grants keys (inferred, medium — depends on `vehiclekeys:client:SetOwner`); `DeleteVehicle` removes the current or nearby vehicle.
 - Baseevents relay: `QBCore:Client:VehicleInfo` receives vehicle seat events from the server.
 - Data maintenance: `QBCore:Player:SetPlayerData` and `UpdatePlayerData` synchronize player data; `QBCore:Notify` displays NUI notifications.
