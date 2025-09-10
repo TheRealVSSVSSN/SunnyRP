@@ -7,6 +7,12 @@
 - Moved animation dictionary cleanup outside the dealer creation loop to prevent missing animation issues.
 - Converted global state to local variables and tightened betting validation on the server.
 
+## PolicePack
+- Replaced legacy `__resource.lua` with modern `fxmanifest.lua` using `cerulean` fx_version and `gta5` game target.
+- Removed invalid `vehiclelayouts.meta` references to prevent load errors.
+- Cleaned up manifest to only include `vehicles`, `carvariations`, `carcols`, and `handling` meta files.
+- Added missing newlines to meta files for improved compatibility.
+
 ## LockDoors
 - Replaced legacy `__resource.lua` with modern `fxmanifest.lua` and enabled Lua 5.4.
 - Updated vehicle detection to use `StartShapeTestRay` and vector math for reliability.
