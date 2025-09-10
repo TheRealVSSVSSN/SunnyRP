@@ -1,47 +1,65 @@
-local particleEffects = {}
+local activeEffects = {}
 
 local particleList = {
-    ["vehExhaust"] = {["dic"] = "core",["name"] = "veh_exhaust_truck_rig",["loopAmount"] = 25,["timeCheck"] = 12000},
-    ["lavaPour"] = {["dic"] = "core",["name"] = "ent_amb_foundry_molten_pour",["loopAmount"] = 1,["timeCheck"] = 12000},
-    ["lavaSteam"] = {["dic"] = "core",["name"] = "ent_amb_steam_pipe_hvy",["loopAmount"] = 1,["timeCheck"] = 12000},
-    ["spark"] = {["dic"] = "core",["name"] = "ent_amb_sparking_wires",["loopAmount"] = 1,["timeCheck"] = 12000},
-    ["smoke"] = {["dic"] = "core",["name"] = "exp_grd_grenade_smoke",["loopAmount"] = 1,["timeCheck"] = 12000},
-    ["test"] = {["dic"] = "core",["name"] = "ent_amb_steam_pipe_hvy",["loopAmount"] = 1,["timeCheck"] = 12000}
+    ["vehExhaust"] = { dic = "core", name = "veh_exhaust_truck_rig", loopAmount = 25, timeCheck = 12000 },
+    ["lavaPour"]   = { dic = "core", name = "ent_amb_foundry_molten_pour", loopAmount = 1,  timeCheck = 12000 },
+    ["lavaSteam"]  = { dic = "core", name = "ent_amb_steam_pipe_hvy",       loopAmount = 1,  timeCheck = 12000 },
+    ["spark"]      = { dic = "core", name = "ent_amb_sparking_wires",       loopAmount = 1,  timeCheck = 12000 },
+    ["smoke"]      = { dic = "core", name = "exp_grd_grenade_smoke",        loopAmount = 1,  timeCheck = 12000 },
+    ["test"]       = { dic = "core", name = "ent_amb_steam_pipe_hvy",       loopAmount = 1,  timeCheck = 12000 }
 }
 
-RegisterNetEvent("particle:StartClientParticle")
-AddEventHandler("particle:StartClientParticle", function(x,y,z,particleId,allocatedID,rX,rY,rZ)
-  if #(vector3(x,y,z) - GetEntityCoords(PlayerPedId())) < 100 then
+--[[
+    -- Type: Event
+    -- Name: particle:StartClientParticle
+    -- Use: Starts a particle effect on the client when triggered by the server
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent("particle:StartClientParticle", function(x, y, z, particleId, allocatedID, rX, rY, rZ)
+    local data = particleList[particleId]
+    if not data then return end
 
-    local particleDictionary = particleList[particleId].dic
-    local particleName = particleList[particleId].name
-    local loopAmount = particleList[particleId].loopAmount
+    local playerCoords = GetEntityCoords(PlayerPedId())
+    if #(playerCoords - vector3(x, y, z)) > 100.0 then return end
 
-   if not HasNamedPtfxAssetLoaded(particleDictionary) then
-        RequestNamedPtfxAsset(particleDictionary)
-        while not HasNamedPtfxAssetLoaded(particleDictionary) do
-            Wait(1)
+    if not HasNamedPtfxAssetLoaded(data.dic) then
+        RequestNamedPtfxAsset(data.dic)
+        while not HasNamedPtfxAssetLoaded(data.dic) do
+            Wait(0)
         end
     end
 
-    for i=0,loopAmount do
-        --UseParticleFxAssetNextCall(particleDictionary)
-        SetPtfxAssetNextCall(particleDictionary)
-       local particle =  StartParticleFxLoopedAtCoord(particleName, x, y, z, rX,rY,rZ, 1.0, false, false, false, false)
+    UseParticleFxAssetNextCall(data.dic)
+    activeEffects[allocatedID] = activeEffects[allocatedID] or {}
 
-        local object = {["particle"] = particle,["id"] = allocatedID}
-        particleEffects[#particleEffects+1]=object
-        Citizen.Wait(0)
+    for _ = 1, data.loopAmount do
+        local particle = StartParticleFxLoopedAtCoord(data.name, x, y, z, rX or 0.0, rY or 0.0, rZ or 0.0, 1.0, false, false, false, false)
+        table.insert(activeEffects[allocatedID], particle)
+        Wait(0)
     end
-  
-  end
+
+    if data.timeCheck and data.timeCheck > 0 then
+        SetTimeout(data.timeCheck, function()
+            TriggerEvent("particle:StopParticleClient", allocatedID)
+            TriggerServerEvent("particle:StopParticle", allocatedID)
+        end)
+    end
 end)
 
-RegisterNetEvent("particle:StopParticleClient")
-AddEventHandler("particle:StopParticleClient", function(allocatedID)
-   for j,particle in pairs(particleEffects) do
-        if allocatedID == particle.id then
-            RemoveParticleFx(particle.particle, true)
-        end
+--[[
+    -- Type: Event
+    -- Name: particle:StopParticleClient
+    -- Use: Stops a running particle effect on the client
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent("particle:StopParticleClient", function(allocatedID)
+    local effects = activeEffects[allocatedID]
+    if not effects then return end
+
+    for _, particle in ipairs(effects) do
+        StopParticleFxLooped(particle, true)
     end
+    activeEffects[allocatedID] = nil
 end)
