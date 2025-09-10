@@ -1,14 +1,16 @@
-fx_version "cerulean"
+fx_version 'cerulean'
 
-games {"gta5"}
+game 'gta5'
 
-description "NoPixel Interior"
+description 'NoPixel Interior'
+
+lua54 'yes'
 
 server_scripts {
-  "server/sv_*.js"
+    'server/main.js'
 }
 
 client_scripts {
-  "client/cl_*.js",
-  "client/cl_*.lua"
+    'client/main.lua'
 }
+
