@@ -1,29 +1,16 @@
 fx_version 'cerulean'
-games { 'gta5' }
+lua54 'yes'
+game 'gta5'
 
---[[ dependencies {
-  "np-lib",
-  "PolyZone",
-  "np-ui"
-} ]]--
-
-client_script "@np-sync/client/lib.lua"
-client_script "@np-lib/client/cl_ui.lua"
+--[[
+    Resource: np-hunting
+    Modernized manifest generated on 2024-06-10 by VSSVSSN
+--]]
 
 client_scripts {
-  '@np-lib/client/cl_rpc.lua',
-  'client/cl_*.lua',
-  "@PolyZone/client.lua",
-}
-
-shared_script {
-  '@np-lib/shared/sh_util.lua',
-  'shared/sh_*.*',
-}
-
-server_scripts {
-  '@np-lib/server/sv_rpc.lua',
-  '@np-lib/server/sv_sql.lua',
-  'server/sv_*.lua',
-  'server/sv_*.js',
+    '@np-sync/client/lib.lua',
+    '@np-lib/client/cl_ui.lua',
+    '@np-lib/client/cl_rpc.lua',
+    '@PolyZone/client.lua',
+    'client/cl_*.lua'
 }

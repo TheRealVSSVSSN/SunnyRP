@@ -6,6 +6,13 @@ local carcasses = {
 }
 local nightTime = false
 
+--[[
+    -- Type: Function
+    -- Name: sellAnimals
+    -- Use: Sells animal carcasses from the player's inventory
+    -- Created: 2024-06-10
+    -- By: VSSVSSN
+--]]
 local function sellAnimals()
     local totalCash = 0
     local totalBMarketCash = 0
@@ -27,7 +34,7 @@ local function sellAnimals()
     if totalCash == 0 and totalBMarketCash == 0 then
         TriggerEvent("DoLongHudText", "Nothing to sell, dummy.", 2)
     end
-    
+
     if totalCash > 0 then
         TriggerServerEvent("complete:job", totalCash)
     end
@@ -38,9 +45,16 @@ local function sellAnimals()
 end
 
 local listening = false
+--[[
+    -- Type: Function
+    -- Name: listenForKeypress
+    -- Use: Waits for the player to press E to sell carcasses
+    -- Created: 2024-06-10
+    -- By: VSSVSSN
+--]]
 local function listenForKeypress()
     listening = true
-    Citizen.CreateThread(function()
+    CreateThread(function()
         while listening do
             if IsControlJustReleased(0, 38) then
                 listening = false
@@ -57,13 +71,15 @@ AddEventHandler("np-polyzone:enter", function(name)
     exports["np-ui"]:showInteraction("[E] Sell Animal Carcass")
     listenForKeypress()
 end)
+
 AddEventHandler("np-polyzone:exit", function(name)
     if name ~= "huntingsales" then return end
     exports["np-ui"]:hideInteraction()
     listening = false
 end)
+
 RegisterNetEvent("timeheader")
-AddEventHandler("timeheader", function(pHour, pMinutes)
+AddEventHandler("timeheader", function(pHour, _)
     if pHour > 19 or pHour < 5 then
         nightTime = true
     else

@@ -10,7 +10,14 @@ local targetedEntity = nil
 DecorRegister("HuntingMySpawn", 2)
 DecorRegister("HuntingIllegal", 2)
 
-Citizen.CreateThread(function()
+--[[
+    -- Type: Function
+    -- Name: loadHuntingSettings
+    -- Use: Fetches hunting configuration from the server
+    -- Created: 2024-06-10
+    -- By: VSSVSSN
+--]]
+CreateThread(function()
     local result = RPC.execute("np-hunting:getSettings")
     animals = result.animals
     baitDistanceInUnits = result.baitDistanceInUnits
@@ -22,10 +29,24 @@ AddEventHandler("np:target:changed", function(pEntity)
     targetedEntity = pEntity
 end)
 
+--[[
+    -- Type: Function
+    -- Name: isValidZone
+    -- Use: Determines if the player is within a valid hunting zone
+    -- Created: 2024-06-10
+    -- By: VSSVSSN
+--]]
 local function isValidZone()
     return validHuntingZones[GetLabelText(GetNameOfZone(GetEntityCoords(PlayerPedId())))] == true
 end
 
+--[[
+    -- Type: Function
+    -- Name: getSpawnLoc
+    -- Use: Calculates a valid spawn location around the placed bait
+    -- Created: 2024-06-10
+    -- By: VSSVSSN
+--]]
 local function getSpawnLoc()
     local playerCoords = GetEntityCoords(PlayerPedId())
     local spawnCoords = nil
@@ -38,39 +59,58 @@ local function getSpawnLoc()
             spawnCoords = vec
         end
     end
-    local worked, groundZ, normal = GetGroundZAndNormalFor_3dCoord(spawnCoords.x, spawnCoords.y, 1023.9)
+    local _, groundZ = GetGroundZAndNormalFor_3dCoord(spawnCoords.x, spawnCoords.y, 1023.9)
     spawnCoords = vector3(spawnCoords.x, spawnCoords.y, groundZ)
     return spawnCoords
 end
 
-local function spawnAnimal(loc)
-    local chance = math.random()
-    local foundAnimal = false
-    for _, animal in pairs(animals) do
-        if foundAnimal == false and animal.chance > chance then
-            foundAnimal = animal
+--[[
+    -- Type: Function
+    -- Name: chooseAnimal
+    -- Use: Selects an animal based on weighted chances
+    -- Created: 2024-06-10
+    -- By: VSSVSSN
+--]]
+local function chooseAnimal()
+    local rnd = math.random()
+    local cumulative = 0
+    for _, animal in ipairs(animals) do
+        cumulative = cumulative + animal.chance
+        if rnd <= cumulative then
+            return animal
         end
     end
-    local modelName = foundAnimal.model
-    RequestModel(modelName)
-    while not HasModelLoaded(modelName) do
-        Citizen.Wait(0)
+    return animals[#animals]
+end
+
+--[[
+    -- Type: Function
+    -- Name: spawnAnimal
+    -- Use: Spawns an animal and manages its behaviour
+    -- Created: 2024-06-10
+    -- By: VSSVSSN
+--]]
+local function spawnAnimal(loc)
+    local foundAnimal = chooseAnimal()
+    RequestModel(foundAnimal.model)
+    while not HasModelLoaded(foundAnimal.model) do
+        Wait(0)
     end
     local spawnLoc = getSpawnLoc()
     local spawnedAnimal = CreatePed(28, foundAnimal.hash, spawnLoc, true, true, true)
     DecorSetBool(spawnedAnimal, "HuntingMySpawn", true)
     DecorSetBool(spawnedAnimal, "HuntingIllegal", foundAnimal.illegal)
-    SetModelAsNoLongerNeeded(modelName)
+    SetModelAsNoLongerNeeded(foundAnimal.model)
     TaskGoStraightToCoord(spawnedAnimal, loc, 1.0, -1, 0.0, 0.0)
-    Citizen.CreateThread(function()
+    CreateThread(function()
         local finished = false
         while not IsPedDeadOrDying(spawnedAnimal) and not finished do
             local spawnedAnimalCoords = GetEntityCoords(spawnedAnimal)
             if #(loc - spawnedAnimalCoords) < 0.5 then
                 ClearPedTasks(spawnedAnimal)
-                Citizen.Wait(1500)
+                Wait(1500)
                 TaskStartScenarioInPlace(spawnedAnimal, "WORLD_DEER_GRAZING", 0, true)
-                Citizen.SetTimeout(7500, function()
+                SetTimeout(7500, function()
                     finished = true
                 end)
             end
@@ -79,7 +119,7 @@ local function spawnAnimal(loc)
                 TaskSmartFleePed(spawnedAnimal, PlayerPedId(), 600.0, -1)
                 finished = true
             end
-            Citizen.Wait(1000)
+            Wait(1000)
         end
         if not IsPedDeadOrDying(spawnedAnimal) then
             TaskSmartFleePed(spawnedAnimal, PlayerPedId(), 600.0, -1)
@@ -87,8 +127,15 @@ local function spawnAnimal(loc)
     end)
 end
 
+--[[
+    -- Type: Function
+    -- Name: baitDown
+    -- Use: Handles the bait lifecycle and possible animal spawn
+    -- Created: 2024-06-10
+    -- By: VSSVSSN
+--]]
 local function baitDown()
-    Citizen.CreateThread(function()
+    CreateThread(function()
         while baitLocation ~= nil do
             local coords = GetEntityCoords(PlayerPedId())
             if #(baitLocation - coords) > baitDistanceInUnits then
@@ -97,7 +144,7 @@ local function baitDown()
                     baitLocation = nil
                 end
             end
-            Citizen.Wait(5000)
+            Wait(5000)
         end
     end)
 end
@@ -124,15 +171,14 @@ AddEventHandler("np-inventory:itemUsed", function(item)
         TriggerEvent("DoLongHudText", "Wew, pungenty...", 1)
         TriggerEvent("inventory:removeItem", item, 1)
         baitDown()
-    end
-    if item == "huntingknife" then
-        if GetPedType(targetedEntity) ~= 28 or not IsPedDeadOrDying(targetedEntity) then
+    elseif item == "huntingknife" then
+        if not targetedEntity or GetPedType(targetedEntity) ~= 28 or not IsPedDeadOrDying(targetedEntity) then
             TriggerEvent("DoLongHudText", "No animal found", 2)
             return
         end
         local myAnimal = targetedEntity
         TaskTurnPedToFaceEntity(PlayerPedId(), myAnimal, -1)
-        Citizen.Wait(1500)
+        Wait(1500)
         ClearPedTasksImmediately(PlayerPedId())
         TaskStartScenarioInPlace(PlayerPedId(), "WORLD_HUMAN_GARDENER_PLANT", 0, true)
         local finished = exports["np-taskbar"]:taskBar(30000, "Preparing Animal")
