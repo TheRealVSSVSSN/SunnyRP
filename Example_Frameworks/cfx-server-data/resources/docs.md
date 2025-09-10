@@ -1031,23 +1031,24 @@ Provides foundational death and vehicle events for other resources to consume. C
 
 ### Table of Contents
 - fxmanifest.lua
-- deathevents.lua
-- vehiclechecker.lua
-- server.lua
+- client/deathevents.lua
+- client/vehiclechecker.lua
+- client/utils.lua
+- server/main.lua
 
 ### fxmanifest.lua — Role: Shared / Meta
 - Declares version, author, description, and repository for the resource.
-- Registers client scripts (`deathevents.lua`, `vehiclechecker.lua`) and the server script (`server.lua`).
+- Registers client scripts (`client/utils.lua`, `client/vehiclechecker.lua`, `client/deathevents.lua`) and the server script (`server/main.lua`).
 - Targets the adamant FX build for GTA V, making the events available to other resources through standard FiveM mechanisms.
 
-### deathevents.lua — Role: Client
+### client/deathevents.lua — Role: Client
 Continuously monitors the local player to broadcast death-related events.
 
 **Main Thread**  
 - Runs every frame to detect when the player becomes fatally injured or recovers.
 - Tracks the time of death to distinguish between **killed by someone** and **died on own** events.
 - When death is detected:
-  - Determines the killer’s entity, weapon, vehicle involvement, and seat information.
+  - Determines the killer’s entity, weapon, vehicle involvement, and seat information (using `GetPedVehicleSeat` from `client/utils.lua`).
   - Calls `baseevents:onPlayerKilled` if another player caused the death, passing attacker ID, weapon hash, vehicle name, seat, and kill position.
   - Calls `baseevents:onPlayerDied` when the player dies without another player’s involvement (e.g., suicide or environment), supplying the player’s position and killer type.
   - Emits `baseevents:onPlayerWasted` if a death occurs without explicitly being marked as killed (useful for respawn logic).
@@ -1057,7 +1058,7 @@ Continuously monitors the local player to broadcast death-related events.
 
 These client events are mirrored to the server with `TriggerServerEvent`, allowing server-side scripts to respond or forward them.
 
-### vehiclechecker.lua — Role: Client
+### client/vehiclechecker.lua — Role: Client
 Watches the local player’s interaction with vehicles and sends standardized events to the server.
 
 **Main Thread**  
@@ -1067,12 +1068,14 @@ Watches the local player’s interaction with vehicles and sends standardized ev
 - When the player successfully appears inside a vehicle (including teleports), sends `baseevents:enteredVehicle` with vehicle details and the seat occupied.
 - On exit or death while in a vehicle, triggers `baseevents:leftVehicle` with the vehicle info and seat.
 
-**Utility Function: `GetPedVehicleSeat`**  
-- Loops through possible seats in the current vehicle to find which seat the player occupies; used to include seat index in the events.
+Uses `GetPedVehicleSeat` from `client/utils.lua` to determine which seat the player occupies.
 
 These messages allow server-side logic to react to vehicle entry/exit without each resource implementing its own polling.
 
-### server.lua — Role: Server
+### client/utils.lua — Role: Client
+Defines `GetPedVehicleSeat(ped)`, returning the seat index occupied by the given ped or `-2` if not in a vehicle. Shared utility used by the death and vehicle checker threads.
+
+### server/main.lua — Role: Server
 Registers the base event channels and provides basic logging for death events.
 
 **Registered Events**
@@ -1090,7 +1093,7 @@ Registers the base event channels and provides basic logging for death events.
 - The remaining registered events are made available for other resources to attach handlers to; they are not processed further by this file, keeping the server script lightweight and extensible.
 
 ### Conclusion
-The baseevents resource centralizes player death and vehicle interaction detection. Client scripts (`deathevents.lua` and `vehiclechecker.lua`) watch local state and send uniform event messages. `server.lua` registers these events for use across the server and provides minimal logging hooks, while `fxmanifest.lua` ties the components together. Other resources can listen to these events to implement game logic without re‑implementing death or vehicle checks.
+The baseevents resource centralizes player death and vehicle interaction detection. Client scripts (`client/deathevents.lua`, `client/vehiclechecker.lua`, `client/utils.lua`) watch local state and send uniform event messages. `server/main.lua` registers these events for use across the server and provides minimal logging hooks, while `fxmanifest.lua` ties the components together. Other resources can listen to these events to implement game logic without re‑implementing death or vehicle checks.
 
 ---
 
