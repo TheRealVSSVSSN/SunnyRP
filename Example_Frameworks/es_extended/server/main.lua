@@ -1,5 +1,5 @@
 local NewPlayer, LoadPlayer = -1, -1
-Citizen.CreateThread(function()
+CreateThread(function()
 	SetMapName('San Andreas')
 	SetGameType('ESX Legacy')
 	
@@ -62,19 +62,28 @@ function onPlayerJoined(playerId)
 	end
 end
 
+--[[
+    -- Type: Function
+    -- Name: createESXPlayer
+    -- Use: Initializes a player's database record and loads them into ESX
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 function createESXPlayer(identifier, playerId, data)
-	local accounts = {}
+       local accounts = {}
 
-	for account,money in pairs(Config.StartingAccountMoney) do
-		accounts[account] = money
-	end
+       for account,money in pairs(Config.StartingAccountMoney) do
+               accounts[account] = money
+       end
 
-	if IsPlayerAceAllowed(playerId, "command") then
-		print(('^2[INFO] ^0 Player ^5%s ^0Has been granted admin permissions via ^5Ace Perms.^7'):format(playerId))
-		defaultGroup = "admin"
-	else
-		defaultGroup = "user"
-	end
+       local defaultGroup
+
+       if IsPlayerAceAllowed(playerId, "command") then
+               print(('^2[INFO] ^0 Player ^5%s ^0Has been granted admin permissions via ^5Ace Perms.^7'):format(playerId))
+               defaultGroup = "admin"
+       else
+               defaultGroup = "user"
+       end
 
 	if not Config.Multichar then
 		MySQL.Async.execute(NewPlayer, {
@@ -104,7 +113,7 @@ AddEventHandler('playerConnecting', function(name, setCallback, deferrals)
 	deferrals.defer()
 	local playerId = source
 	local identifier = ESX.GetIdentifier(playerId)
-	Citizen.Wait(100)
+	Wait(100)
 
 	if identifier then
 		if ESX.GetPlayerFromIdentifier(identifier) then
@@ -590,8 +599,8 @@ end)
 
 AddEventHandler('txAdmin:events:scheduledRestart', function(eventData)
 	if eventData.secondsRemaining == 60 then
-		Citizen.CreateThread(function()
-			Citizen.Wait(50000)
+		CreateThread(function()
+			Wait(50000)
 			ESX.SavePlayers()
 		end)
 	end
