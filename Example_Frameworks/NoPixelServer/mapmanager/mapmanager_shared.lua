@@ -1,6 +1,20 @@
--- shared logic file for map manager - don't call any subsystem-specific functions here
+--[[
+    -- Type: Module
+    -- Name: mapmanager_shared
+    -- Use: Shared helpers for loading and unloading map directives
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
+
 mapFiles = {}
 
+--[[
+    -- Type: Function
+    -- Name: addMap
+    -- Use: Registers a map file for later loading
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
 function addMap(file, owningResource)
     if not mapFiles[owningResource] then
         mapFiles[owningResource] = {}
@@ -11,6 +25,13 @@ end
 
 undoCallbacks = {}
 
+--[[
+    -- Type: Function
+    -- Name: loadMap
+    -- Use: Parses all map files for a resource
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
 function loadMap(res)
     if mapFiles[res] then
         for _, file in ipairs(mapFiles[res]) do
@@ -19,6 +40,13 @@ function loadMap(res)
     end
 end
 
+--[[
+    -- Type: Function
+    -- Name: unloadMap
+    -- Use: Reverts map directives registered by a resource
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
 function unloadMap(res)
     if undoCallbacks[res] then
         for _, cb in ipairs(undoCallbacks[res]) do
@@ -30,6 +58,13 @@ function unloadMap(res)
     end
 end
 
+--[[
+    -- Type: Function
+    -- Name: parseMap
+    -- Use: Executes a map file within a sandboxed environment
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
 function parseMap(file, owningResource)
     if not undoCallbacks[owningResource] then
         undoCallbacks[owningResource] = {}
@@ -37,9 +72,11 @@ function parseMap(file, owningResource)
 
     local env = {
         math = math, pairs = pairs, ipairs = ipairs, next = next, tonumber = tonumber, tostring = tostring,
-        type = type, table = table, string = string, _G = env,
+        type = type, table = table, string = string,
         vector3 = vector3, quat = quat, vec = vec, vector2 = vector2
     }
+
+    env._G = env
 
     TriggerEvent('getMapDirectives', function(key, cb, undocb)
         env[key] = function(...)
@@ -79,9 +116,12 @@ function parseMap(file, owningResource)
     local mapFunction, err = load(fileData, file, 't', env)
 
     if not mapFunction then
-        Citizen.Trace("Couldn't load map " .. file .. ": " .. err .. " (type of fileData: " .. type(fileData) .. ")\n")
+        print("Couldn't load map " .. file .. ": " .. err .. " (type of fileData: " .. type(fileData) .. ")")
         return
     end
 
-    mapFunction()
+    local ok, execErr = pcall(mapFunction)
+    if not ok then
+        print("Error executing map " .. file .. ": " .. tostring(execErr))
+    end
 end

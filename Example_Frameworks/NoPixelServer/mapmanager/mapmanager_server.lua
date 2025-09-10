@@ -1,38 +1,70 @@
--- loosely based on MTA's https://code.google.com/p/mtasa-resources/source/browse/trunk/%5Bmanagers%5D/mapmanager/mapmanager_main.lua
+--[[
+    -- Type: Module
+    -- Name: mapmanager_server
+    -- Use: Manages server-side map and gametype resources
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
 
 local maps = {}
 local gametypes = {}
 
+--[[
+    -- Type: Function
+    -- Name: decodeExtraData
+    -- Use: Safely decodes JSON metadata values
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
+local function decodeExtraData(data)
+    if not data or data == '' then
+        return {}
+    end
+
+    local ok, decoded = pcall(json.decode, data)
+    return ok and decoded or {}
+end
+
+--[[
+    -- Type: Function
+    -- Name: refreshResources
+    -- Use: Builds lookup tables of available maps and gametypes
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
 local function refreshResources()
     local numResources = GetNumResources()
+    local gameName = GetConvar('gamename', 'gta5')
 
     for i = 0, numResources - 1 do
         local resource = GetResourceByFindIndex(i)
 
         if GetNumResourceMetadata(resource, 'resource_type') > 0 then
-            local type = GetResourceMetadata(resource, 'resource_type', 0)
-            local params = json.decode(GetResourceMetadata(resource, 'resource_type_extra', 0))
-            
+            local resType = GetResourceMetadata(resource, 'resource_type', 0)
+            local params = decodeExtraData(GetResourceMetadata(resource, 'resource_type_extra', 0))
+
             local valid = false
-            
             local games = GetNumResourceMetadata(resource, 'game')
+
             if games > 0 then
-				for j = 0, games - 1 do
-					local game = GetResourceMetadata(resource, 'game', j)
-				
-					if game == GetConvar('gamename', 'gta5') or game == 'common' then
-						valid = true
-					end
-				end
+                for j = 0, games - 1 do
+                    local game = GetResourceMetadata(resource, 'game', j)
+                    if game == gameName or game == 'common' then
+                        valid = true
+                        break
+                    end
+                end
+            else
+                valid = true
             end
 
-			if valid then
-				if type == 'map' then
-					maps[resource] = params
-				elseif type == 'gametype' then
-					gametypes[resource] = params
-				end
-			end
+            if valid then
+                if resType == 'map' then
+                    maps[resource] = params
+                elseif resType == 'gametype' then
+                    gametypes[resource] = params
+                end
+            end
         end
     end
 end
@@ -43,13 +75,19 @@ end)
 
 refreshResources()
 
-AddEventHandler('onResourceStarting', function(resource)
+--[[
+    -- Type: Function
+    -- Name: onResourceStarting
+    -- Use: Handles resources registering before they fully start
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
+local function onResourceStarting(resource)
     local num = GetNumResourceMetadata(resource, 'map')
 
-    if num then
-        for i = 0, num-1 do
+    if num and num > 0 then
+        for i = 0, num - 1 do
             local file = GetResourceMetadata(resource, 'map', i)
-
             if file then
                 addMap(file, resource)
             end
@@ -60,10 +98,8 @@ AddEventHandler('onResourceStarting', function(resource)
         if getCurrentMap() and getCurrentMap() ~= resource then
             if doesMapSupportGameType(getCurrentGameType(), resource) then
                 print("Changing map from " .. getCurrentMap() .. " to " .. resource)
-
                 changeMap(resource)
             else
-                -- check if there's only one possible game type for the map
                 local map = maps[resource]
                 local count = 0
                 local gt
@@ -77,7 +113,6 @@ AddEventHandler('onResourceStarting', function(resource)
 
                 if count == 1 then
                     print("Changing map from " .. getCurrentMap() .. " to " .. resource .. " (gt " .. gt .. ")")
-
                     changeGameType(gt)
                     changeMap(resource)
                 end
@@ -88,20 +123,27 @@ AddEventHandler('onResourceStarting', function(resource)
     elseif gametypes[resource] then
         if getCurrentGameType() and getCurrentGameType() ~= resource then
             print("Changing gametype from " .. getCurrentGameType() .. " to " .. resource)
-
             changeGameType(resource)
-
             CancelEvent()
         end
     end
-end)
+end
 
-math.randomseed(GetInstanceId())
+AddEventHandler('onResourceStarting', onResourceStarting)
+
+math.randomseed(os.time())
 
 local currentGameType = nil
 local currentMap = nil
 
-AddEventHandler('onResourceStart', function(resource)
+--[[
+    -- Type: Function
+    -- Name: onResourceStart
+    -- Use: Handles resources after they start
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
+local function onResourceStart(resource)
     if maps[resource] then
         if not getCurrentGameType() then
             for gt, _ in pairs(maps[resource].gameTypes) do
@@ -110,38 +152,28 @@ AddEventHandler('onResourceStart', function(resource)
             end
         end
 
-        if getCurrentGameType() and not getCurrentMap() then
-            if doesMapSupportGameType(currentGameType, resource) then
-                if TriggerEvent('onMapStart', resource, maps[resource]) then
-                    if maps[resource].name then
-                        print('Started map ' .. maps[resource].name)
-                        SetMapName(maps[resource].name)
-                    else
-                        print('Started map ' .. resource)
-                        SetMapName(resource)
-                    end
-
-                    currentMap = resource
-                else
-                    currentMap = nil
-                end
+        if getCurrentGameType() and not getCurrentMap() and doesMapSupportGameType(currentGameType, resource) then
+            if TriggerEvent('onMapStart', resource, maps[resource]) then
+                local mapName = maps[resource].name or resource
+                print('Started map ' .. mapName)
+                SetMapName(mapName)
+                currentMap = resource
+            else
+                currentMap = nil
             end
         end
     elseif gametypes[resource] then
         if not getCurrentGameType() then
             if TriggerEvent('onGameTypeStart', resource, gametypes[resource]) then
                 currentGameType = resource
-
                 local gtName = gametypes[resource].name or resource
 
                 SetGameType(gtName)
-
                 print('Started gametype ' .. gtName)
 
                 SetTimeout(50, function()
                     if not currentMap then
                         local possibleMaps = {}
-
                         for map, data in pairs(maps) do
                             if data.gameTypes[currentGameType] then
                                 table.insert(possibleMaps, map)
@@ -160,47 +192,51 @@ AddEventHandler('onResourceStart', function(resource)
         end
     end
 
-    -- handle starting
     loadMap(resource)
-end)
+end
+
+AddEventHandler('onResourceStart', onResourceStart)
 
 local function handleRoundEnd()
-	local possibleMaps = {}
+    local possibleMaps = {}
 
-	for map, data in pairs(maps) do
-		if data.gameTypes[currentGameType] then
-			table.insert(possibleMaps, map)
-		end
+    for map, data in pairs(maps) do
+        if data.gameTypes[currentGameType] then
+            table.insert(possibleMaps, map)
+        end
     end
 
     if #possibleMaps > 1 then
-        local mapname = currentMap
-
-        while mapname == currentMap do
+        local mapName = currentMap
+        while mapName == currentMap do
             local rnd = math.random(#possibleMaps)
-            mapname = possibleMaps[rnd]
+            mapName = possibleMaps[rnd]
         end
-
-        changeMap(mapname)
+        changeMap(mapName)
     elseif #possibleMaps > 0 then
         local rnd = math.random(#possibleMaps)
         changeMap(possibleMaps[rnd])
-	end
+    end
 end
 
 AddEventHandler('mapmanager:roundEnded', function()
-    -- set a timeout as we don't want to return to a dead environment
-    SetTimeout(50, handleRoundEnd) -- not a closure as to work around some issue in neolua?
+    SetTimeout(50, handleRoundEnd)
 end)
 
 function roundEnded()
     SetTimeout(50, handleRoundEnd)
 end
 
-AddEventHandler('onResourceStop', function(resource)
+--[[
+    -- Type: Function
+    -- Name: onResourceStop
+    -- Use: Cleans up when a resource stops
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
+local function onResourceStop(resource)
     if resource == currentGameType then
         TriggerEvent('onGameTypeStop', resource)
-
         currentGameType = nil
 
         if currentMap then
@@ -208,15 +244,22 @@ AddEventHandler('onResourceStop', function(resource)
         end
     elseif resource == currentMap then
         TriggerEvent('onMapStop', resource)
-
         currentMap = nil
     end
 
-    -- unload the map
     unloadMap(resource)
-end)
+end
 
-AddEventHandler('rconCommand', function(commandName, args)
+AddEventHandler('onResourceStop', onResourceStop)
+
+--[[
+    -- Type: Function
+    -- Name: handleRconCommand
+    -- Use: Processes map and gametype rcon commands
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
+local function handleRconCommand(commandName, args)
     if commandName == 'map' then
         if #args ~= 1 then
             RconPrint("usage: map [mapname]\n")
@@ -225,7 +268,6 @@ AddEventHandler('rconCommand', function(commandName, args)
         if not maps[args[1]] then
             RconPrint('no such map ' .. args[1] .. "\n")
             CancelEvent()
-
             return
         end
 
@@ -234,33 +276,28 @@ AddEventHandler('rconCommand', function(commandName, args)
             local count = 0
             local gt
 
-            for type, flag in pairs(map.gameTypes) do
+            for t, flag in pairs(map.gameTypes) do
                 if flag then
                     count = count + 1
-                    gt = type
+                    gt = t
                 end
             end
 
             if count == 1 then
                 print("Changing map from " .. getCurrentMap() .. " to " .. args[1] .. " (gt " .. gt .. ")")
-
                 changeGameType(gt)
                 changeMap(args[1])
-
                 RconPrint('map ' .. args[1] .. "\n")
             else
-                RconPrint('map ' .. args[1] .. ' does not support ' .. currentGameType .. "\n")
+                RconPrint('map ' .. args[1] .. ' does not support ' .. tostring(currentGameType) .. "\n")
             end
 
             CancelEvent()
-
             return
         end
 
         changeMap(args[1])
-
         RconPrint('map ' .. args[1] .. "\n")
-
         CancelEvent()
     elseif commandName == 'gametype' then
         if #args ~= 1 then
@@ -270,30 +307,57 @@ AddEventHandler('rconCommand', function(commandName, args)
         if not gametypes[args[1]] then
             RconPrint('no such gametype ' .. args[1] .. "\n")
             CancelEvent()
-
             return
         end
 
         changeGameType(args[1])
-
         RconPrint('gametype ' .. args[1] .. "\n")
-
         CancelEvent()
     end
-end)
+end
 
+AddEventHandler('rconCommand', handleRconCommand)
+
+--[[
+    -- Type: Function
+    -- Name: getCurrentGameType
+    -- Use: Returns the active gametype resource name
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
 function getCurrentGameType()
     return currentGameType
 end
 
+--[[
+    -- Type: Function
+    -- Name: getCurrentMap
+    -- Use: Returns the active map resource name
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
 function getCurrentMap()
     return currentMap
 end
 
+--[[
+    -- Type: Function
+    -- Name: getMaps
+    -- Use: Provides the internal map registry
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
 function getMaps()
     return maps
 end
 
+--[[
+    -- Type: Function
+    -- Name: changeGameType
+    -- Use: Switches the active gametype
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
 function changeGameType(gameType)
     if currentMap and not doesMapSupportGameType(gameType, currentMap) then
         StopResource(currentMap)
@@ -306,6 +370,13 @@ function changeGameType(gameType)
     StartResource(gameType)
 end
 
+--[[
+    -- Type: Function
+    -- Name: changeMap
+    -- Use: Switches the active map
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
 function changeMap(map)
     if currentMap then
         StopResource(currentMap)
@@ -314,6 +385,13 @@ function changeMap(map)
     StartResource(map)
 end
 
+--[[
+    -- Type: Function
+    -- Name: doesMapSupportGameType
+    -- Use: Checks if a map supports a gametype
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
 function doesMapSupportGameType(gameType, map)
     if not gametypes[gameType] then
         return false
