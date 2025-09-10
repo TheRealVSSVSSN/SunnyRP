@@ -53,39 +53,85 @@ local dog_name = "Bob"
 
 local other_ped_attacked = nil
 
-function lerp(x1, y1, z1, x2, y2, z2, t) 
-      local x = x1 + (x2 - x1) * t
-      local y = y1 + (y2 - y1) * t
-      local z = z1 + (z2 - z1) * t
-     return x, y, z
+--[[
+    -- Type: Function
+    -- Name: lerp
+    -- Use: Linear interpolation helper for RGB calculations
+    -- Created: 2024-04-08
+    -- By: VSSVSSN
+--]]
+local function lerp(x1, y1, z1, x2, y2, z2, t)
+    local x = x1 + (x2 - x1) * t
+    local y = y1 + (y2 - y1) * t
+    local z = z1 + (z2 - z1) * t
+    return x, y, z
 end
 
-function onRender()
-    --if IsControlPressed(1, 38) then
-        aiming, ent = GetEntityPlayerIsFreeAimingAt(PlayerId())
-        if aiming and ent and IsEntityAPed(ent) then
-            health=GetEntityHealth(ent) or 0.0
-            maxHealth=GetEntityMaxHealth(ent)-100 or 0.0
-            val=(health/2)/maxHealth
-            if IsPedDeadOrDying(ent, 1) then
-                r,g,b=0,0,0
-            else
-                r,g,b=lerp(255,0,0,0,255,0,val)
-            end
-            --r,g,b=lerp(255,0,0,0,255,0,0.5)
+--[[
+    -- Type: Function
+    -- Name: spawnDog
+    -- Use: Creates and configures a K9 entity for the player
+    -- Created: 2024-04-08
+    -- By: VSSVSSN
+--]]
+local function spawnDog(dogType)
+    local model = `a_c_chop`
+    RequestModel(model)
+    while not HasModelLoaded(model) do
+        RequestModel(model)
+        Wait(100)
+    end
 
-            x1,y1,z1 = table.unpack(GetWorldPositionOfEntityBone(ent, i))
+    local plyPos = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 2.0, 0.0)
+    local plyHeading = GetEntityHeading(PlayerPedId())
+    local dog = CreatePed(28, model, plyPos.x, plyPos.y, plyPos.z, plyHeading, true, false)
+    SetBlockingOfNonTemporaryEvents(dog, true)
+    SetPedFleeAttributes(dog, 0, false)
+    SetEntityAsMissionEntity(dog, true, true)
+    SetPedMaxHealth(dog, 9000)
+    SetEntityHealth(dog, 9000)
+    SetPedDiesWhenInjured(dog, true)
+    SetPedComponentVariation(dog, 3, 1, tonumber(dogType) - 1, 0)
 
-            DrawMarker(0,x1,y1,z1+1.0, 0.0, 0.0, 0.0, 0, 0, 0, 2.0, 2.0, -0.1, r,g,b , 50, false, true, false, false)
+    local blip = AddBlipForEntity(dog)
+    SetBlipAsFriendly(blip, true)
+    SetBlipSprite(blip, 442)
+    BeginTextCommandSetBlipName("STRING")
+    AddTextComponentString("K9")
+    EndTextCommandSetBlipName(blip)
+
+    return dog
+end
+
+--[[
+    -- Type: Function
+    -- Name: onRender
+    -- Use: Renders health markers over aimed peds
+    -- Created: 2024-04-08
+    -- By: VSSVSSN
+--]]
+local function onRender()
+    local aiming, ent = GetEntityPlayerIsFreeAimingAt(PlayerId())
+    if aiming and ent and IsEntityAPed(ent) then
+        local health = GetEntityHealth(ent) or 0.0
+        local maxHealth = GetEntityMaxHealth(ent) - 100 or 0.0
+        local val = (health / 2) / maxHealth
+        local r, g, b = 0, 0, 0
+        if not IsPedDeadOrDying(ent, true) then
+            r, g, b = lerp(255, 0, 0, 0, 255, 0, val)
         end
-    --end
+
+        local boneIndex = GetPedBoneIndex(ent, 0)
+        local x1, y1, z1 = table.unpack(GetWorldPositionOfEntityBone(ent, boneIndex))
+        DrawMarker(0, x1, y1, z1 + 1.0, 0.0, 0.0, 0.0, 0, 0, 0, 2.0, 2.0, -0.1, r, g, b, 50, false, true, false, false)
+    end
 end
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	RequestModel("a_c_coyote")
 	while not HasModelLoaded("a_c_coyote") do
 		RequestModel("a_c_coyote")
-		Citizen.Wait(100)
+		Wait(100)
 	end	
 
     while true do
@@ -108,68 +154,19 @@ end
 
 RegisterNetEvent("K9:Create")
 AddEventHandler("K9:Create", function(dogType)
-		dogTypeG = dogType
-		if (current_dog ~= 0) then
-			TriggerEvent("K9:Delete")
-		end
-		local model
+    dogTypeG = tonumber(dogType) or 1
+    if current_dog ~= 0 then
+        TriggerEvent("K9:Delete")
+    end
 
-		model = `a_c_chop`
-		
-		RequestModel(model)
-		while not HasModelLoaded(model) do
-			RequestModel(model)
-			Citizen.Wait(100)
-		end		
+    current_dog = spawnDog(dogTypeG)
+    local netid = NetworkGetNetworkIdFromEntity(current_dog)
+    SetNetworkIdCanMigrate(netid, false)
 
-
-
-
-		local plypos = GetOffsetFromEntityInWorldCoords(GetPlayerPed(PlayerId()), 0.0, 2.0, 0.0)
-		local plyhead = GetEntityHeading(GetPlayerPed(PlayerId()))
-		local spawned_entity = CreatePed(GetPedType(model), model, plypos.x, plypos.y, plypos.z, plyhead, 1, 0)
-		SetBlockingOfNonTemporaryEvents(spawned_entity, true)
-		SetPedFleeAttributes(spawned_entity, 0, 0)
-		current_dog = spawned_entity
-		SetEntityAsMissionEntity(current_dog,false,true)
-		SetPedMaxHealth(current_dog, 9000) 
-		SetEntityHealth(current_dog, 9000)
-		SetPedDiesWhenInjured(current_dog, true)
-
-		SetPedComponentVariation(current_dog,3,1,0,0)
-
-		if tonumber(dogType)  == 2 then
-			SetPedComponentVariation(current_dog,3,1,1,0)
-		end
-
-		if tonumber(dogType)  == 3 then
-			SetPedComponentVariation(current_dog,3,1,2,0)
-		end
-
-		-- coyote
-		local blip = AddBlipForEntity(current_dog)
-		SetBlipAsFriendly(blip, true)
-		SetBlipSprite(blip, 442)
-		BeginTextCommandSetBlipName("STRING");
-		AddTextComponentString(tostring("K9"))
-		EndTextCommandSetBlipName(blip)
-
-
-		local netid = NetworkGetNetworkIdFromEntity(current_dog)
-
-		Citizen.Wait(1000)
-		Citizen.Trace(netid)
-
-
-		SetNetworkIdCanMigrate(netid, false)
-
-		TaskGoToEntity(current_dog,PlayerPedId(),-1,1.0,2.0,1073741824,0)
-		hunting = false
-		attacking = false
-		animation_played = nil
-
-		TriggerEvent("DoLongHudText","K9: Now in service")
-end)
+    TaskGoToEntity(current_dog, PlayerPedId(), -1, 1.0, 2.0, 1073741824, 0)
+    hunting, attacking, animation_played = false, false, nil
+    TriggerEvent("DoLongHudText", "K9: Now in service")
+end
 
 
 RegisterNetEvent("K9:Delete")
@@ -202,12 +199,12 @@ AddEventHandler("K9:Vehicle", function()
 
 		local plyPos = GetEntityCoords(PlayerPedId(), false)
 		local vehicle = GetVehiclePedIsIn(PlayerPedId(),false)
-		if CheckVehicleRestriction(vehicle) == true and imDead == 0 then
-			attacking = falses
+                if CheckVehicleRestriction(vehicle) == true and imDead == 0 then
+                        attacking = false
 		    for i=1,GetVehicleMaxNumberOfPassengers(vehicle) do
 		      if IsVehicleSeatFree(vehicle,i) then
 		      	RequestAnimDict("creatures@rottweiler@in_vehicle@std_car")
-				Citizen.Wait(100)
+				Wait(100)
 				TaskPlayAnim(current_dog, "creatures@rottweiler@in_vehicle@std_car", "sit", 1.0, -1, -1, 2, 0, 0, 0, 0)
 		        SetPedIntoVehicle(current_dog,vehicle,0)
 				dogvehicled = true	
@@ -228,7 +225,7 @@ AddEventHandler("K9:Follow", function()
 	if current_dog ~= 0 then
 		if following == false then
 			ClearPedTasks(current_dog)
-			Citizen.Wait(200)
+			Wait(200)
 			following = true
 			currentState = "F"
 			TriggerEvent("DoLongHudText","K9: Follow")
@@ -260,63 +257,42 @@ local dogvehicled = false
 -- 1 means we are inside a vehicle, though, not a police car
 -- 2 means we are inside a pd vehicle.
 local invehiclecheck = 0
-Citizen.CreateThread(function()
-	while true do
-		local dick = PlayerPedId()
+CreateThread(function()
+        while true do
+                local playerPed = PlayerPedId()
 
-		--if current_dog ~= nil then
-		--	SetPedMaxHealth(current_dog, 100000) 
-		--	SetEntityHealth(current_dog, 100000)
-		--end
-		-- Follow Key --
-		if current_dog == 0 then
-			Wait(3000)
-		else
+                if current_dog == 0 then
+                        Wait(3000)
+                else
+                        Wait(1)
+                        if IsControlJustPressed(1, 243) and not IsPlayerFreeAiming(PlayerId()) and not IsControlPressed(1, 19) then
+                                TriggerEvent("K9:Follow")
+                        end
 
-			Citizen.Wait(1)
-			if IsControlJustPressed(1, 243) and not IsPlayerFreeAiming(PlayerId()) and not IsControlPressed(1, 19) then
-				TriggerEvent("K9:Follow")
-			end
+                        -- Attacking Key --
+                        if IsPlayerFreeAiming(PlayerId()) and IsControlJustPressed(1, 10) and not IsPedSittingInAnyVehicle(playerPed) then
+                                TriggerEvent("K9:Attack")
+                        end
 
-			-- Attacking Key --
-			if IsPlayerFreeAiming(PlayerId()) and IsControlJustPressed(1, 10) and not IsPedSittingInAnyVehicle(PlayerPedId()) then
-				TriggerEvent("K9:Attack")
-			end
+                        if IsControlPressed(0, 47) and not IsPedSittingInAnyVehicle(playerPed) then
+                                TriggerEvent("K9:Huntfind")
+                        end
 
-			--[[
-			if IsPedSittingInAnyVehicle(PlayerPedId()) and not dogvehicled then
-				print("FUCK KOIL")
-				TriggerEvent("K9:Vehicle")
-			end
+                        -- If other ped attacking dies it stops attacking --
+                        if attacking == true then
+                                if IsPedDeadOrDying(other_ped_attacked, 1) then
+                                        TriggerEvent("K9:Attack")
+                                end
+                        end
 
-			if not IsPedSittingInAnyVehicle(PlayerPedId()) and dogvehicled then
-				print("FUCK KOIL2")
-				TriggerEvent("K9:Vehicle")
-			end ]]--
-
-			if IsControlPressed(0, 47) and not IsPedSittingInAnyVehicle(PlayerPedId()) then
-				TriggerEvent("K9:Huntfind")
-			end
-
-			-- If other ped attacking dies it stops attacking --
-			if attacking == true then
-				if IsPedDeadOrDying(other_ped_attacked, 1) then
-					TriggerEvent("K9:Attack")
-				end
-			end
-
-			if current_dog ~= 0 then
-				local color = {32, 126, 188}
-				if currentState == "A" or currentState == "H" or currentState == "D" then color = {188, 39, 32} end
-				drawTxt(0.657, 1.4680, 1.0,1.0,0.33 , ""..currentState.."", 32, 126, 188, 255)
-			end
-
-		
-			
-		end
-
-	end
-end)
+                        if current_dog ~= 0 then
+                                local color = {32, 126, 188}
+                                if currentState == "A" or currentState == "H" or currentState == "D" then color = {188, 39, 32} end
+                                drawTxt(0.657, 1.4680, 1.0,1.0,0.33 , ""..currentState.."", 32, 126, 188, 255)
+                        end
+                end
+        end
+end
 
 --TaskGoStraightToCoord(current_dog, x, y, z, speed, timeout, targetHeading, distanceToSlide)
 
@@ -325,11 +301,11 @@ local lastCommandTime = 0
 local lastDogCoords = {}
 local huntedPed = nil
 --[[
-Citizen.CreateThread(function()
+CreateThread(function()
 
 	while true do
 
-		Citizen.Wait(3)
+		Wait(3)
 		if IsPedInMeleeCombat(PlayerPedId()) and current_dog ~= 0 and imDead == 0 and not attacking then
 			k9message(tostring("Dog, Attack!")) -- Attack
 			attackClosest()
@@ -460,14 +436,14 @@ end
 
 local hasRagdolled = 0 
 
-Citizen.CreateThread(function()
+CreateThread(function()
 
 	while true do
 
 		if current_dog == 0 then
 			Wait(1200)
 		else
-			Citizen.Wait(1)
+			Wait(1)
 			pedcoords = GetEntityCoords(PlayerPedId())
 			dogcoords = GetEntityCoords(current_dog)
 			distancecheck = #(pedcoords - dogcoords)
@@ -475,7 +451,7 @@ Citizen.CreateThread(function()
 				SetEntityInvincible(current_dog, true)
 				tp =  GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 1.0, 0.0)
 				SetEntityCoords(current_dog,tp)
-				Citizen.Wait(1000)
+				Wait(1000)
 				SetEntityInvincible(current_dog, false)
 				TaskGoToEntity(current_dog,PlayerPedId(),-1,1.0,2.0,1073741824,0)
 			end
@@ -503,7 +479,7 @@ Citizen.CreateThread(function()
 end)
 local timer = 0 
 
-Citizen.CreateThread(function()
+CreateThread(function()
 
 	while true do
 
@@ -512,7 +488,7 @@ Citizen.CreateThread(function()
 		else
 
 
-			Citizen.Wait(300)
+			Wait(300)
 			pedcoords = GetEntityCoords(PlayerPedId())
 			dogcoords = GetEntityCoords(current_dog)
 			distancecheck = #(pedcoords - dogcoords)
@@ -526,7 +502,7 @@ Citizen.CreateThread(function()
 							SetEntityInvincible(current_dog, true)
 							tp =  GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 0.0, 0.0)
 							SetEntityCoords(current_dog,tp)
-							Citizen.Wait(1000)
+							Wait(1000)
 							SetEntityInvincible(current_dog, false)
 							TaskGoToEntity(current_dog,PlayerPedId(),-1,1.0,2.0,1073741824,0)
 						end
@@ -552,7 +528,7 @@ function VehicleInFront()
     return b
 end
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	
 
 	while true do
@@ -561,7 +537,7 @@ Citizen.CreateThread(function()
 			Wait(1200)
 		else
 
-			Citizen.Wait(100)
+			Wait(100)
 			local localPed = PlayerPedId()
 			pedcoords = GetEntityCoords(localPed)
 			dogcoords = GetEntityCoords(current_dog)
@@ -597,7 +573,7 @@ Citizen.CreateThread(function()
 				SetEntityInvincible(current_dog, true)
 				tp =  GetOffsetFromEntityInWorldCoords(localPed, 1.0, 1.0, -1.0)
 				SetEntityCoords(current_dog,tp)
-				Citizen.Wait(1000)
+				Wait(1000)
 				SetEntityInvincible(current_dog, false)
 				TaskGoToEntity(current_dog,localPed,-1,1.0,2.0,1073741824,0)
 			end
@@ -802,7 +778,7 @@ AddEventHandler("judge:cm", function()
 	while not HasModelLoaded(model) do
 		RequestModel(model)
 
-		Citizen.Wait(0)
+		Wait(0)
 	end
 	SetPlayerModel(PlayerId(), model)
 end)
@@ -832,7 +808,7 @@ function failed(entity)
 	local animdicend = "creatures@coyote@amb@world_coyote_howl@exit"
 	local animnameend = "exit"
 	RequestAnimDict(animdicstart)
-	Citizen.Wait(100)
+	Wait(100)
 	TaskPlayAnim(current_dog, animdicstart, animnamestart, 1.0, -1, -1, 2, 0, 0, 0, 0)
 	animation_played = "intimidate"
 
@@ -855,7 +831,7 @@ function intimidate(entity)
 	animnameend = "taunt_01"
 
 	RequestAnimDict(animdicstart)
-	Citizen.Wait(100)
+	Wait(100)
 	TaskPlayAnim(current_dog, animdicstart, animnamestart, 1.0, -1, -1, 2, 0, 0, 0, 0)
 	animation_played = "intimidate"
 
@@ -868,7 +844,7 @@ function intimidate(entity)
 	animnameend = "sit_exit"
 
 	RequestAnimDict(animdicstart)
-	Citizen.Wait(100)
+	Wait(100)
 	TaskPlayAnim(current_dog, animdicstart, animnamestart, 1.0, -1, -1, 2, 0, 0, 0, 0)
 	animation_played = "sit"
 
@@ -892,7 +868,7 @@ function sit(entity)
 
 	if IsEntityPlayingAnim(entity, animdicstart, animnamestart, 3) then
 		RequestAnimDict(animdicend)
-		Citizen.Wait(100)
+		Wait(100)
 		TaskPlayAnim(current_dog, animdicend, animnameend, 1.0, -1, -1, 2, 0, 0, 0, 0)
 		if HasEntityAnimFinished(current_dog, animdicend, animnameend, 3) then
 			ClearPedSecondaryTask(current_dog)
@@ -901,7 +877,7 @@ function sit(entity)
 		TriggerEvent("DoLongHudText","K9: Dog, Stehen!")
 	else
 		RequestAnimDict(animdicstart)
-		Citizen.Wait(100)
+		Wait(100)
 		TaskPlayAnim(current_dog, animdicstart, animnamestart, 1.0, -1, -1, 2, 0, 0, 0, 0)
 		animation_played = "sit"
 		TriggerEvent("DoLongHudText","K9: Dog, Sit!")
@@ -923,7 +899,7 @@ function laydown(entity)
 
 	if IsEntityPlayingAnim(entity, animdicstart, animnamestart, 3) then
 			RequestAnimDict(animdicend)
-			Citizen.Wait(100)
+			Wait(100)
 		TaskPlayAnim(current_dog, animdicend, animnameend, 1.0, -1, -1, 2, 0, 0, 0, 0)
 		if HasEntityAnimFinished(current_dog, animdicend, animnameend, 3) then
 			ClearPedSecondaryTask(current_dog)
@@ -932,7 +908,7 @@ function laydown(entity)
 		TriggerEvent("DoLongHudText","K9: Dog, Up!")
 	else
 		RequestAnimDict(animdicstart)
-		Citizen.Wait(100)
+		Wait(100)
 		TaskPlayAnim(current_dog, animdicstart, animnamestart, 1.0, -1, -1, 2, 0, 0, 0, 0)
 		animation_played = "laydown"
 		TriggerEvent("DoLongHudText","K9: Dog, Lay!")
@@ -967,7 +943,7 @@ end
 -------------------- K9 Death -----------------------------
 
 
-Citizen.CreateThread(function()
+CreateThread(function()
     imDead = 0
     ragdol = 0
     while true do
@@ -989,7 +965,7 @@ Citizen.CreateThread(function()
                 deathTimer()
             end
         elseif current_dog == 0 then
-        	Citizen.Wait(3000)
+        	Wait(3000)
         end
     end
 end)
@@ -998,10 +974,10 @@ end)
 RegisterNetEvent('K9:disableAllActions')
 AddEventHandler('K9:disableAllActions', function()
     SetPedToRagdoll(current_dog, 5000, 5000, 0, 0, 0, 0)
-    Citizen.Wait(5000)
+    Wait(5000)
 
     while imDead == 1 do
-        Citizen.Wait(1000)    
+        Wait(1000)    
         SetPedToRagdoll(current_dog, 5000, 5000, 0, 0, 0, 0)
 
     end
@@ -1011,7 +987,7 @@ end)
 RegisterNetEvent('k9:doTimer')
 AddEventHandler('k9:doTimer', function()
     while imDead == 1 do
-        Citizen.Wait(0)
+        Wait(0)
 
     	pedcoords = GetEntityCoords(PlayerPedId())
 		dogcoords = GetEntityCoords(current_dog)
@@ -1048,7 +1024,7 @@ function deathTimer()
     TriggerEvent('k9:doTimer')
     while imDead == 1 and current_dog ~= 0 do
     	currentState = "D"
-        Citizen.Wait(100)
+        Wait(100)
         TriggerEvent('K9:disableAllActions')
         thecount = thecount - 0.1
 
@@ -1057,7 +1033,7 @@ function deathTimer()
         end
         --SetEntityHealth(current_dog, GetEntityMaxHealth(current_dog))
         if thecount < 0 then
-            Citizen.Wait(0)    
+            Wait(0)    
 
 			SetEntityAsMissionEntity(current_dog,false,true)
 			DeleteEntity(current_dog)
@@ -1081,7 +1057,7 @@ function releaseBody()
 	RequestModel(model)
 	while not HasModelLoaded(model) do
 		RequestModel(model)
-		Citizen.Wait(100)
+		Wait(100)
 	end	
 
 	local plypos = GetOffsetFromEntityInWorldCoords(current_dog, 0.0, 0.0, 0.0)
