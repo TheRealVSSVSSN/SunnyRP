@@ -78,7 +78,7 @@ RegisterNetEvent('AnimSet:Set');
 AddEventHandler('AnimSet:Set', function()
     if tempenabled then
         RequestAnimSet(tempset)
-        while not HasAnimSetLoaded(tempset) do Citizen.Wait(0) end
+        while not HasAnimSetLoaded(tempset) do Wait(0) end
         SetPedMovementClipset(PlayerPedId(), tempset)
         SetPedWeaponMovementClipset(PlayerPedId(), tempset)
         ResetPedStrafeClipset(PlayerPedId())
@@ -89,7 +89,7 @@ AddEventHandler('AnimSet:Set', function()
             ResetPedStrafeClipset(PlayerPedId())
         else
             RequestAnimSet(AnimSet)
-            while not HasAnimSetLoaded(AnimSet) do Citizen.Wait(0) end
+            while not HasAnimSetLoaded(AnimSet) do Wait(0) end
             SetPedMovementClipset(PlayerPedId(), AnimSet)
             ResetPedWeaponMovementClipset(PlayerPedId())
             ResetPedStrafeClipset(PlayerPedId())
@@ -104,7 +104,7 @@ AddEventHandler("emote:setAnimsFromDB", function(anim)
         ResetPedMovementClipset(PlayerPedId(), 0)
     else
         RequestAnimSet(anim)
-        while not HasAnimSetLoaded(anim) do Citizen.Wait(0) end
+        while not HasAnimSetLoaded(anim) do Wait(0) end
         SetPedMovementClipset(PlayerPedId(), anim, true)
     end
 
@@ -115,7 +115,7 @@ AnimSet = "default";
 
 local function SwitchAnimSet(animation)
     RequestAnimSet(animation)
-    while not HasAnimSetLoaded(animation) do Citizen.Wait(1) end
+    while not HasAnimSetLoaded(animation) do Wait(1) end
     SetPedMovementClipset(PlayerPedId(), animation, 0.2)
     AnimSet = animation;
     TriggerServerEvent("police:setAnimData", AnimSet)
@@ -372,7 +372,7 @@ end)
 function loadAnimDict(dict)
     while (not HasAnimDictLoaded(dict)) do
         RequestAnimDict(dict)
-        Citizen.Wait(5)
+        Wait(5)
     end
 end
 
@@ -482,7 +482,7 @@ anims = {
 
     ["holster"] = function(ped)
 
-        local ped = GetPlayerPed(-1)
+        local ped = PlayerPedId()
         if not holstered then
             holstered = true
             loadAnimDict("reaction@intimidation@cop@unarmed")
@@ -501,7 +501,7 @@ anims = {
     ["piss"] = function(ped)
         RequestAnimDict("missbigscore1switch_trevor_piss")
         while not HasAnimDictLoaded("missbigscore1switch_trevor_piss") do
-            Citizen.Wait(0)
+            Wait(0)
         end
         if IsEntityPlayingAnim(ped, "missbigscore1switch_trevor_piss",
                                "piss_loop", 3) then
@@ -521,7 +521,7 @@ anims = {
   
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
   
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -536,7 +536,7 @@ anims = {
     ["shower"] = function(ped)
         RequestAnimDict("mp_safehouseshower@male@")
         while not HasAnimDictLoaded("mp_safehouseshower@male@") do
-            Citizen.Wait(0)
+            Wait(0)
         end
         if IsEntityPlayingAnim(ped, "mp_safehouseshower@male@",
                                "male_shower_idle_a", 3) then
@@ -552,7 +552,7 @@ anims = {
             "amb@world_human_leaning@male@wall@back@legs_crossed@base")
         while not HasAnimDictLoaded(
             "amb@world_human_leaning@male@wall@back@legs_crossed@base") do
-            Citizen.Wait(0)
+            Wait(0)
         end
         if IsEntityPlayingAnim(ped,
                                "amb@world_human_leaning@male@wall@back@legs_crossed@base",
@@ -569,7 +569,7 @@ anims = {
     ["chinups"] = function(ped)
         RequestAnimDict("amb@prop_human_muscle_chin_ups@male@base")
         while not HasAnimDictLoaded("amb@prop_human_muscle_chin_ups@male@base") do
-            Citizen.Wait(0)
+            Wait(0)
         end
         if IsEntityPlayingAnim(ped, "amb@prop_human_muscle_chin_ups@male@base",
                                "base", 3) then
@@ -586,7 +586,7 @@ anims = {
         RequestAnimDict("amb@world_human_sit_ups@male@idle_a")
 
         while not HasAnimDictLoaded("amb@world_human_sit_ups@male@idle_a") do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, "amb@world_human_sit_ups@male@idle_a",
@@ -604,7 +604,7 @@ anims = {
     ["shrug3"] = function(ped)
         RequestAnimDict("oddjobs@bailbond_hobohang_out_street_b")
         while not HasAnimDictLoaded("oddjobs@bailbond_hobohang_out_street_b") do
-            Citizen.Wait(0)
+            Wait(0)
         end
         if IsEntityPlayingAnim(ped, "oddjobs@bailbond_hobohang_out_street_b",
                                "idle_b", 3) then
@@ -628,7 +628,7 @@ anims = {
         RequestAnimDict(testdic)
 
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -653,7 +653,7 @@ anims = {
         RequestAnimDict(testdic)
 
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -677,7 +677,7 @@ anims = {
         RequestAnimDict(testdic)
 
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -702,7 +702,7 @@ anims = {
         RequestAnimDict(testdic)
 
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -723,7 +723,7 @@ anims = {
         RequestAnimDict(testdic)
 
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -733,7 +733,7 @@ anims = {
             TaskPlayAnim(ped, testdic, testanim, 1.0, 1.0, animLength, 1, -1, 0,
                          0, 0)
         end
-        Citizen.Wait(1500)
+        Wait(1500)
         ClearPedTasks(PlayerPedId())
         playing_emote = false
     end,
@@ -750,7 +750,7 @@ anims = {
         RequestAnimDict(testdic)
 
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -764,14 +764,14 @@ anims = {
     end,
 
     ["pill"] = function(ped)
-        Citizen.Wait(200)
+        Wait(200)
         local pos = GetOffsetFromEntityInWorldCoords(ped, 0.1, 0.1, 1.0)
 
         RequestAnimDict("mp_suicide")
-        while not HasAnimDictLoaded("mp_suicide") do Citizen.Wait(0) end
+        while not HasAnimDictLoaded("mp_suicide") do Wait(0) end
 
         TaskPlayAnim(ped, "mp_suicide", "pill", 8.0, 8.0, 1.0, 48, -1, 0, 0, 0)
-        Citizen.Wait(2800)
+        Wait(2800)
         ClearPedTasks(PlayerPedId())
 
         playing_emote = false
@@ -789,7 +789,7 @@ anims = {
         RequestAnimDict(testdic)
 
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -814,7 +814,7 @@ anims = {
         RequestAnimDict(testdic)
 
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -843,7 +843,7 @@ anims = {
         RequestAnimDict(testdic)
 
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -867,12 +867,12 @@ anims = {
         RequestAnimDict(testdic)
 
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         local animLength = GetAnimDuration(testdic, testanim)
         TaskPlayAnim(ped, testdic, testanim, 3.0, 3.0, -1, 48, -1, 0, 0, 0)
-        Citizen.Wait(500)
+        Wait(500)
         ClearPedSecondaryTask(ped)
 
         playing_emote = false
@@ -890,7 +890,7 @@ anims = {
         RequestAnimDict(testdic)
 
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -914,7 +914,7 @@ anims = {
         RequestAnimDict(testdic)
 
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -938,7 +938,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -961,7 +961,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -986,7 +986,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1002,7 +1002,7 @@ anims = {
     ["cop"] = function(ped)
         RequestAnimDict("amb@world_human_cop_idles@male@idle_a")
         while not HasAnimDictLoaded("amb@world_human_cop_idles@male@idle_a") do
-            Citizen.Wait(0)
+            Wait(0)
         end
         if IsEntityPlayingAnim(ped, "amb@world_human_cop_idles@male@idle_a",
                                "idle_b", 3) then
@@ -1019,7 +1019,7 @@ anims = {
             "amb@world_human_hang_out_street@female_arms_crossed@base")
         while not HasAnimDictLoaded(
             "amb@world_human_hang_out_street@female_arms_crossed@base") do
-            Citizen.Wait(0)
+            Wait(0)
         end
         if IsEntityPlayingAnim(ped,
                                "amb@world_human_hang_out_street@female_arms_crossed@base",
@@ -1036,7 +1036,7 @@ anims = {
     ["cowerlow"] = function(ped)
         RequestAnimDict("amb@code_human_cower@male@base")
         while not HasAnimDictLoaded("amb@code_human_cower@male@base") do
-            Citizen.Wait(0)
+            Wait(0)
         end
         if IsEntityPlayingAnim(ped, "amb@code_human_cower@male@base", "base", 3) then
             ClearPedTasks(ped)
@@ -1050,7 +1050,7 @@ anims = {
     ["cower"] = function(ped)
         RequestAnimDict("amb@code_human_cower_stand@male@base")
         while not HasAnimDictLoaded("amb@code_human_cower_stand@male@base") do
-            Citizen.Wait(0)
+            Wait(0)
         end
         if IsEntityPlayingAnim(ped, "amb@code_human_cower_stand@male@base",
                                "base", 3) then
@@ -1072,7 +1072,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1087,7 +1087,7 @@ anims = {
     ["aware"] = function(ped)
         RequestAnimDict("amb@code_human_cross_road@male@base")
         while not HasAnimDictLoaded("amb@code_human_cross_road@male@base") do
-            Citizen.Wait(0)
+            Wait(0)
         end
         if IsEntityPlayingAnim(ped, "amb@code_human_cross_road@male@base",
                                "base", 3) then
@@ -1110,7 +1110,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1159,7 +1159,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1181,7 +1181,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1203,7 +1203,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1225,7 +1225,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1247,7 +1247,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1269,7 +1269,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1290,7 +1290,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1311,7 +1311,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1332,7 +1332,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1353,7 +1353,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1374,7 +1374,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1395,7 +1395,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1416,7 +1416,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1437,7 +1437,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1458,7 +1458,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1479,7 +1479,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1500,7 +1500,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1521,7 +1521,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1542,7 +1542,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1563,7 +1563,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1584,7 +1584,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1605,7 +1605,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1626,7 +1626,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1647,7 +1647,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1668,7 +1668,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1689,7 +1689,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1710,7 +1710,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1731,7 +1731,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1752,7 +1752,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1773,7 +1773,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1794,7 +1794,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1815,7 +1815,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1836,7 +1836,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1857,7 +1857,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1882,7 +1882,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1907,7 +1907,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1932,7 +1932,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1955,7 +1955,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -1978,7 +1978,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -2002,7 +2002,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -2024,7 +2024,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -2046,7 +2046,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -2068,7 +2068,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -2090,7 +2090,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -2183,7 +2183,7 @@ anims = {
         TaskPlayAnim(PlayerPedId(), "anim@mp_player_intuppershush", "idle_a_fp",
                      2.0, 2.0, -1, 49, 0, 0, 0, 0)
 
-        Citizen.Wait(2000)
+        Wait(2000)
         ClearPedSecondaryTask(ped)
         playing_emote = false
     end,
@@ -2203,7 +2203,7 @@ anims = {
 
         RequestAnimDict("anim@mp_player_intselfiewank")
         while not HasAnimDictLoaded("anim@mp_player_intselfiewank") and
-            not handCuffed do Citizen.Wait(0) end
+            not handCuffed do Wait(0) end
 
         if IsEntityPlayingAnim(ped, "anim@mp_player_intselfiewank", "idle_a", 3) then
             -- TaskPlayAnim(ped, "anim@mp_player_intselfiewank", "idle_a", 1.0, 1.0, 1.0, 49, 0, 0, 0, 0)
@@ -2352,10 +2352,10 @@ anims = {
             local anim = shocked[emote]["anim"]
 
             RequestAnimDict(dict)
-            while not HasAnimDictLoaded(dict) do Citizen.Wait(0) end
+            while not HasAnimDictLoaded(dict) do Wait(0) end
 
             TaskPlayAnim(ped, dict, anim, 1.0, 1.0, -1, 49, 0, 0, 0, 0)
-            Citizen.Wait(10000)
+            Wait(10000)
 
         end
 
@@ -2371,7 +2371,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -2393,7 +2393,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -2415,7 +2415,7 @@ anims = {
 
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, testdic, testanim, 3) then
@@ -2434,7 +2434,7 @@ anims = {
 
         RequestAnimDict("random@hitch_lift")
         while not HasAnimDictLoaded("random@hitch_lift") and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, "random@hitch_lift", "idle_f", 3) then
@@ -2453,7 +2453,7 @@ anims = {
 
         RequestAnimDict("missfbi5ig_22")
         while not HasAnimDictLoaded("missfbi5ig_22") and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, "missfbi5ig_22",
@@ -2475,7 +2475,7 @@ anims = {
 
         RequestAnimDict("missfbi5ig_22")
         while not HasAnimDictLoaded("missfbi5ig_22") and not handCuffed do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         if IsEntityPlayingAnim(ped, "missfbi5ig_22", "hands_up_loop_scientist",
@@ -2495,7 +2495,7 @@ anims = {
         else
             RequestAnimDict("random@arrests@busted")
             while not HasAnimDictLoaded("random@arrests@busted") and
-                not handCuffed do Citizen.Wait(0) end
+                not handCuffed do Wait(0) end
             local animLength =
                 GetAnimDuration("random@arrests@busted", "idle_a")
             TaskPlayAnim(ped, "random@arrests@busted", "idle_a", 1.0, 4.0,
@@ -2509,7 +2509,7 @@ anims = {
         else
             RequestAnimDict("random@arrests@busted")
             while not HasAnimDictLoaded("random@arrests@busted") and
-                not handCuffed do Citizen.Wait(0) end
+                not handCuffed do Wait(0) end
             local animLength =
                 GetAnimDuration("random@arrests@busted", "idle_a")
             TaskPlayAnim(ped, "random@arrests@busted", "idle_a", 1.0, 4.0,
@@ -2523,7 +2523,7 @@ anims = {
 
         RequestAnimDict("switch@trevor@mocks_lapdance")
         while not HasAnimDictLoaded("switch@trevor@mocks_lapdance") and
-            not handCuffed do Citizen.Wait(0) end
+            not handCuffed do Wait(0) end
 
         if IsEntityPlayingAnim(ped, "switch@trevor@mocks_lapdance",
                                "001443_01_trvs_28_idle_stripper", 3) then
@@ -2586,13 +2586,13 @@ anims = {
             GetOffsetFromEntityInWorldCoords(ped, 0.1, 0.1, -1.0)
 
         RequestAnimDict("mp_suicide")
-        while not HasAnimDictLoaded("mp_suicide") do Citizen.Wait(0) end
+        while not HasAnimDictLoaded("mp_suicide") do Wait(0) end
 
         if IsEntityPlayingAnim(ped, "mp_suicide", "pill", 3) then
             ClearPedSecondaryTask(ped)
         else
             TaskPlayAnim(ped, "mp_suicide", "pill", 8.0, -8, -1, 9, 0, 0, 0, 0)
-            Citizen.Wait(4500)
+            Wait(4500)
             SetEntityHealth(PlayerPedId(), 0.0)
         end
 
@@ -7587,7 +7587,7 @@ local function PlayAnim2(ped, anim, dict, exit)
     if stuckincar then return end
     RequestAnimDict(dict)
 
-    while not HasAnimDictLoaded(dict) do Citizen.Wait(0) end
+    while not HasAnimDictLoaded(dict) do Wait(0) end
 
     if IsEntityPlayingAnim(ped, dict, anim, 3) then
         ClearPedSecondaryTask(ped)
@@ -7603,7 +7603,7 @@ function EndAnim(dict, anim)
 
     RequestAnimDict(dict)
 
-    while not HasAnimDictLoaded(dict) do Citizen.Wait(0) end
+    while not HasAnimDictLoaded(dict) do Wait(0) end
     animlength = GetAnimDuration(dict, anim) * 1000
 
     TaskPlayAnim(PlayerPedId(), dict, anim, 999999.0, 1.0, animlength, 48, 0, 0,
@@ -7721,7 +7721,7 @@ RegisterNetEvent('umbrellaLoop')
 AddEventHandler('umbrellaLoop', function()
 
     while obj ~= 0 do
-        Citizen.Wait(1)
+        Wait(1)
 
         local dead = exports["isPed"]:isPed("dead")
         if dead then TriggerEvent("animation:PlayAnimation", "umbrella") end
@@ -7772,25 +7772,25 @@ AddEventHandler('notepad', function()
 
         RequestAnimDict("amb@medic@standing@timeofdeath@base")
         while not HasAnimDictLoaded("amb@medic@standing@timeofdeath@base") do
-            Citizen.Wait(0)
+            Wait(0)
         end
         TriggerEvent("attachItem", "notepad01")
         TriggerEvent("attachItem69", "pencil01")
         TaskPlayAnim(PlayerPedId(), "amb@medic@standing@timeofdeath@base",
                      "base", 8.0, 0.01, -1, 49, 0, 0, 0, 0)
-        Citizen.Wait(1000)
+        Wait(1000)
         while IsEntityPlayingAnim(PlayerPedId(),
                                   "amb@medic@standing@timeofdeath@base", "base",
-                                  3) do Citizen.Wait(1) end
+                                  3) do Wait(1) end
 
         RequestAnimDict("amb@medic@standing@timeofdeath@exit")
         while not HasAnimDictLoaded("amb@medic@standing@timeofdeath@exit") do
-            Citizen.Wait(0)
+            Wait(0)
         end
         TaskPlayAnim(PlayerPedId(), "amb@medic@standing@timeofdeath@exit",
                      "exit", 0.1, 1.0, 1.0, 48, 0, 0, 0, 0)
 
-        Citizen.Wait(5000)
+        Wait(5000)
         TriggerEvent("destroyProp")
         TriggerEvent("destroyProp69")
 

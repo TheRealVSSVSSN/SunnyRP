@@ -2,18 +2,19 @@ lastTaxi = false
 taskveh = 0
 ped = 0
 
+--[[
+    -- Type: Function
+    -- Name: SetTaxiExtras
+    -- Use: Toggles taxi extras so roof sign lights remain enabled while the rest stay disabled
+    -- Created: 2024-06-04
+    -- By: VSSVSSN
+--]]
 function SetTaxiExtras(veh)
-	SetVehicleExtra(entity, 1, 1)
-	SetVehicleExtra(entity, 2, 1)
-	SetVehicleExtra(entity, 3, 1)
-	SetVehicleExtra(entity, 4, 1)
-	SetVehicleExtra(entity, 5, 1)
-	SetVehicleExtra(entity, 6, 1)
-	SetVehicleExtra(entity, 7, 1)
-	SetVehicleExtra(entity, 7, 1)
-	SetVehicleExtra(entity, 7, 1)
-	SetVehicleExtra(entity, 8, 0)
-	SetVehicleExtra(entity, 9, 0)
+    for i = 1, 9 do
+        -- extras 1-7 off, 8-9 on
+        local state = (i < 8) and 1 or 0
+        SetVehicleExtra(veh, i, state)
+    end
 end
 
 function FindEndPointCar2(x,y) 
@@ -38,7 +39,7 @@ function FindEndPointCar2(x,y)
 
         roadtest, vehSpawnResult, outHeading = GetClosestVehicleNode(vehSpawnResult["x"], vehSpawnResult["y"], vehSpawnResult["z"],  0, 999.0, 999.0)
 
-        Citizen.Wait(1000)   
+        Wait(1000)   
 
         if vehSpawnResult["z"] ~= 0.0 then
             local caisseo = GetClosestVehicle(vehSpawnResult["x"], vehSpawnResult["y"], vehSpawnResult["z"], 20.000, 0, 70)
@@ -71,7 +72,7 @@ function FindEndPointCar(x,y)
         vehSpawnResult["y"] = y + math.random(randomPool - (randomPool * 2),randomPool) + 1.0  
         roadtest, vehSpawnResult, outHeading = GetClosestVehicleNode(vehSpawnResult["x"], vehSpawnResult["y"], vehSpawnResult["z"],  0, 55.0, 55.0)
 
-        Citizen.Wait(1000)        
+        Wait(1000)        
         if vehSpawnResult["z"] ~= 0.0 then
             local caisseo = GetClosestVehicle(vehSpawnResult["x"], vehSpawnResult["y"], vehSpawnResult["z"], 20.000, 0, 70)
             if not DoesEntityExist(caisseo) then
@@ -118,10 +119,10 @@ AddEventHandler("taxi:slownearest", function()
     if taxi ~= nil then
 
         TaskVehicleTempAction(GetPedInVehicleSeat(taxi, -1), taxi, 27, 25.0)
-        Citizen.Wait(1500)
+        Wait(1500)
         local timer = 15000
         while timer > 0 do
-            Citizen.Wait(1)
+            Wait(1)
             SetVehicleForwardSpeed(taxi, math.ceil(GetEntitySpeed(taxi)*0.9 ))
             timer = timer - 1
             if IsPedInAnyVehicle(PlayerPedId(), true) then
@@ -130,7 +131,7 @@ AddEventHandler("taxi:slownearest", function()
             end
         end
     end
-    Citizen.Wait(1000)
+    Wait(1000)
 
     hailing = false
 end)
@@ -174,7 +175,7 @@ AddEventHandler("startAITaxi", function(passedInside)
         RequestModel(car)
 
         while not HasModelLoaded(car) do
-            Citizen.Wait(0)
+            Wait(0)
         end
         plycoords = GetEntityCoords(PlayerPedId())
         vehSpawnResult = {}    
@@ -192,7 +193,7 @@ AddEventHandler("startAITaxi", function(passedInside)
         RequestModel(pedmodel)
         while not HasModelLoaded(pedmodel) do
             RequestModel(pedmodel)
-            Citizen.Wait(100)
+            Wait(100)
         end
         ped = CreatePedInsideVehicle(taskveh, 4, pedmodel, -1, 1, 0.0)
         DecorSetBool(ped, 'ScriptedPed', true)
@@ -211,7 +212,7 @@ AddEventHandler("startAITaxi", function(passedInside)
 
     count = 400000
     enroute = false
-    Citizen.Wait(1000)
+    Wait(1000)
     SetEntityInvincible(taskveh, false) 
     SetWaypointOff()
     local dropoff = {}
@@ -220,7 +221,7 @@ AddEventHandler("startAITaxi", function(passedInside)
     local speedCity = true
 
     while count > 0 and not IsPedDeadOrDying(ped, true) and DoesEntityExist(ped) do
-        Citizen.Wait(1)
+        Wait(1)
 	    local coords = GetEntityCoords(ped)
 	    local mycoords = GetEntityCoords(PlayerPedId())
         local cityDistance = #(vector3(-241.29,-1039.44,28.06) - vector3(mycoords["x"],mycoords["y"],mycoords["z"]))
@@ -250,7 +251,7 @@ AddEventHandler("startAITaxi", function(passedInside)
        
         if GetVehiclePedIsIn(PlayerPedId(), false) == taskveh then
             local ownerped = GetPedInVehicleSeat(taskveh, 1)
-            Citizen.Wait(1200)
+            Wait(1200)
             if not IsControlPressed(0,23) and not IsControlJustReleased(0,23) and enteredtaxi then
                   SetPedIntoVehicle(PlayerPedId(), taskveh, 2)
                   SetPedIntoVehicle(PlayerPedId(), taskveh, 1)  
@@ -313,7 +314,7 @@ AddEventHandler("startAITaxi", function(passedInside)
 
                     while GetEntitySpeed(taskveh) > 1.0 and endDist > 10.0 do
                         endDist = #(vector3(coords["x"], coords["y"],coords["z"]) - vector3(dropoff["x"], dropoff["y"], dropoff["z"]))
-				       Citizen.Wait(1000)
+				       Wait(1000)
                         if not IsControlPressed(0,23) and not IsControlJustReleased(0,23) then
                               SetPedIntoVehicle(PlayerPedId(), taskveh, 2)
                               SetPedIntoVehicle(PlayerPedId(), taskveh, 1)  
@@ -325,7 +326,7 @@ AddEventHandler("startAITaxi", function(passedInside)
                     while GetEntitySpeed(taskveh) > 1.0 do
                         SetVehicleForwardSpeed(taskveh, math.ceil(GetEntitySpeed(taskveh)*0.75 ))
                         TaskVehicleTempAction(GetPedInVehicleSeat(taskveh, -1), taskveh, 27, 25.0)
-                       Citizen.Wait(1)
+                       Wait(1)
                    end
 
                     SetPedKeepTask(GetPedInVehicleSeat(taskveh, -1), false)
@@ -334,7 +335,7 @@ AddEventHandler("startAITaxi", function(passedInside)
                     FreezeEntityPosition(taskveh,true)
                     local plt = GetVehicleNumberPlateText(taskveh)
                     TriggerServerEvent("taskleavetaxi", plt)
-                    Citizen.Wait(1000)
+                    Wait(1000)
 
                     SetBlockingOfNonTemporaryEvents(ped, true)        
                     SetPedSeeingRange(ped, 0.0)       
