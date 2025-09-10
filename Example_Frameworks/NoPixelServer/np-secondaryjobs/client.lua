@@ -1377,17 +1377,30 @@ local canchangejob = false
 
 local pagerON = false
 
+--[[
+    -- Type: Event
+    -- Name: togglePager
+    -- Use: Toggles pager state and notifies the player
+    -- Created: 2024-04-18
+    -- By: VSSVSSN
+--]]
 RegisterNetEvent('togglePager')
 AddEventHandler('togglePager', function()
-    local extra = "OFF"
     pagerON = not pagerON
-    if pagerON then extra = "ON" else extra = "OFF" end
+    local extra = pagerON and "ON" or "OFF"
     TriggerEvent("DoLongHudText", "Your email is now switched: " .. extra, 18)
-    TriggerEvent("pagerStatus",pagerON)
+    TriggerEvent("pagerStatus", pagerON)
 end)
 
+--[[
+    -- Type: Function
+    -- Name: DisplayPagerStatus
+    -- Use: Shows current pager status to the player
+    -- Created: 2024-04-18
+    -- By: VSSVSSN
+--]]
 function DisplayPagerStatus()
-    if pagerON then extra = "ON" else extra = "OFF" end
+    local extra = pagerON and "ON" or "OFF"
     TriggerEvent("DoLongHudText", "Your email filter settings are: " .. extra, 18)
     remBlips()
 end
@@ -1397,150 +1410,45 @@ AddEventHandler('secondaryjob:ClientReturnDate', function(varPassed)
     canchangejob = varPassed
 end)
 
-RegisterNetEvent('secondaryjob:weedStreet')
-AddEventHandler('secondaryjob:weedStreet', function()
+--[[
+    -- Type: Function
+    -- Name: updateSecondaryJob
+    -- Use: Validates job change and updates server/client state
+    -- Created: 2024-04-18
+    -- By: VSSVSSN
+--]]
+local function updateSecondaryJob(job, message)
     if not canchangejob then
-        TriggerEvent("DoLongHudText", "You can not change your job yet.",20)
-        return 
-    else
-        mysecondaryjob = "weed"
-        TriggerEvent("DoLongHudText", "You have updated your email filter Weed Street Dealer.",20)
-        DisplayPagerStatus()
+        TriggerEvent("DoLongHudText", "You can not change your job yet.", 20)
+        return
     end
-    TriggerServerEvent("secondary:NewJobServer",mysecondaryjob)
-    TriggerEvent("SecondaryJobUpdate",mysecondaryjob)
-end)
+    mysecondaryjob = job
+    TriggerEvent("DoLongHudText", message, 20)
+    DisplayPagerStatus()
+    TriggerServerEvent("secondary:NewJobServer", mysecondaryjob)
+    TriggerEvent("SecondaryJobUpdate", mysecondaryjob)
+end
 
-RegisterNetEvent('secondaryjob:weedHigh')
-AddEventHandler('secondaryjob:weedHigh', function()
-    if not canchangejob then
-        TriggerEvent("DoLongHudText", "You can not change your job yet.",20)
-        return 
-    else
-        mysecondaryjob = "weedh"
-        TriggerEvent("DoLongHudText", "You have updated your email filter Weed Distributor.",20)
-        DisplayPagerStatus()
-    end
-    TriggerServerEvent("secondary:NewJobServer",mysecondaryjob)
-    TriggerEvent("SecondaryJobUpdate",mysecondaryjob)
-end)
+-- Map events to job identifiers and messages
+local secondaryJobEvents = {
+    weedStreet = { job = "weed", message = "You have updated your email filter Weed Street Dealer." },
+    weedHigh = { job = "weedh", message = "You have updated your email filter Weed Distributor." },
+    cocaineStreet = { job = "cocaine", message = "You have updated your email filter to Cocaine Street Dealer." },
+    cocaineHigh = { job = "cocaineh", message = "You have updated your email filter to Cocaine Distributor." },
+    gunStreet = { job = "guns", message = "You have updated your email filter to Gun Street Dealer." },
+    gunHigh = { job = "gunsh", message = "You have updated your email filter to Gun Distributor." },
+    gunSmith = { job = "gunsmith", message = "You have updated your email filter to Gun Crafter." },
+    moneyStreet = { job = "launder", message = "You have updated your email filter to Money Street Dealer." },
+    moneyHigh = { job = "launderh", message = "You have updated your email filter to Money Distributor." },
+    moneyCleaner = { job = "moneyCleaner", message = "You have updated your email filter to Money Launderer." }
+}
 
-RegisterNetEvent('secondaryjob:cocaineStreet')
-AddEventHandler('secondaryjob:cocaineStreet', function()
-    if not canchangejob then
-        TriggerEvent("DoLongHudText", "You can not change your job yet.",20)
-        return 
-    else
-        mysecondaryjob = "cocaine"
-        TriggerEvent("DoLongHudText", "You have updated your email filter to Cocaine Street Dealer.",20)
-        DisplayPagerStatus()
-    end
-    TriggerServerEvent("secondary:NewJobServer",mysecondaryjob)
-    TriggerEvent("SecondaryJobUpdate",mysecondaryjob)
-end)
-
-RegisterNetEvent('secondaryjob:cocaineHigh')
-AddEventHandler('secondaryjob:cocaineHigh', function()
-    if not canchangejob then
-        TriggerEvent("DoLongHudText", "You can not change your job yet.",20)
-        return 
-    else
-        mysecondaryjob = "cocaineh"
-        TriggerEvent("DoLongHudText", "You have updated your email filter to Cocaine Distributor.",20)
-        DisplayPagerStatus()
-    end
-    TriggerServerEvent("secondary:NewJobServer",mysecondaryjob)
-    TriggerEvent("SecondaryJobUpdate",mysecondaryjob)
-end)
-
-RegisterNetEvent('secondaryjob:gunStreet')
-AddEventHandler('secondaryjob:gunStreet', function()
-    if not canchangejob then
-        TriggerEvent("DoLongHudText", "You can not change your job yet.",20)
-        return 
-    else
-        mysecondaryjob = "guns"
-        TriggerEvent("DoLongHudText", "You have updated your email filter to Gun Street Dealer.",20)
-        DisplayPagerStatus()
-    end
-    TriggerServerEvent("secondary:NewJobServer",mysecondaryjob)
-    TriggerEvent("SecondaryJobUpdate",mysecondaryjob)
-end)
-
-RegisterNetEvent('secondaryjob:gunHigh')
-AddEventHandler('secondaryjob:gunHigh', function()
-    if not canchangejob then
-        TriggerEvent("DoLongHudText", "You can not change your job yet.",20)
-        return 
-    else
-        mysecondaryjob = "gunsh"
-        TriggerEvent("DoLongHudText", "You have updated your email filter to Gun Distributor.",20)
-        DisplayPagerStatus()
-    end
-    TriggerServerEvent("secondary:NewJobServer",mysecondaryjob)
-    TriggerEvent("SecondaryJobUpdate",mysecondaryjob)
-end)
-
-
-
-
-RegisterNetEvent('secondaryjob:gunSmith')
-AddEventHandler('secondaryjob:gunSmith', function()
-    if not canchangejob then
-        TriggerEvent("DoLongHudText", "You can not change your job yet.",20)
-        return 
-    else
-        mysecondaryjob = "gunsmith"
-        TriggerEvent("DoLongHudText", "You have updated your email filter to Gun Crafter.",20)
-        DisplayPagerStatus()
-    end
-    TriggerServerEvent("secondary:NewJobServer",mysecondaryjob)
-    TriggerEvent("SecondaryJobUpdate",mysecondaryjob)
-end)
-
-RegisterNetEvent('secondaryjob:moneyStreet')
-AddEventHandler('secondaryjob:moneyStreet', function()
-    if not canchangejob then
-        TriggerEvent("DoLongHudText", "You can not change your job yet.",20)
-        return 
-    else
-        mysecondaryjob = "launder"
-        TriggerEvent("DoLongHudText", "You have updated your email filter to Money Street Dealer.",20)
-        DisplayPagerStatus()
-    end
-    TriggerServerEvent("secondary:NewJobServer",mysecondaryjob)
-    TriggerEvent("SecondaryJobUpdate",mysecondaryjob)
-end)
-
-RegisterNetEvent('secondaryjob:moneyHigh')
-AddEventHandler('secondaryjob:moneyHigh', function()
-    if not canchangejob then
-        TriggerEvent("DoLongHudText", "You can not change your job yet.",20)
-        return 
-    else
-        mysecondaryjob = "launderh"
-        TriggerEvent("DoLongHudText", "You have updated your email filter to Money Distributor.",20)
-        DisplayPagerStatus()
-    end
-    TriggerServerEvent("secondary:NewJobServer",mysecondaryjob)
-    TriggerEvent("SecondaryJobUpdate",mysecondaryjob)
-end)
-
-
-RegisterNetEvent('secondaryjob:moneyCleaner')
-AddEventHandler('secondaryjob:moneyCleaner', function()
-    if not canchangejob then
-        TriggerEvent("DoLongHudText", "You can not change your job yet.",20)
-        return 
-    else
-        mysecondaryjob = "moneyCleaner"
-        TriggerEvent("DoLongHudText", "You have updated your email filter to Money Launderer.",20)
-        DisplayPagerStatus()
-    end
-    TriggerServerEvent("secondary:NewJobServer",mysecondaryjob)
-    TriggerEvent("SecondaryJobUpdate",mysecondaryjob)
-end)
-
+for eventName, data in pairs(secondaryJobEvents) do
+    RegisterNetEvent('secondaryjob:' .. eventName)
+    AddEventHandler('secondaryjob:' .. eventName, function()
+        updateSecondaryJob(data.job, data.message)
+    end)
+end
 
 
 
