@@ -8,12 +8,12 @@ local tempPlayersInfo = {}
 Config = {
     serverName = GetConvar("core:serverName", "Unconfigured ND-Core Server"),
     discordInvite = GetConvar("core:discordInvite", "https://discord.gg/Z9Mxu72zZ6"),
-    discordMemeberRequired = GetConvarInt("core:discordMemeberRequired", 1) == 1,
+    discordMemberRequired = GetConvarInt("core:discordMemberRequired", GetConvarInt("core:discordMemeberRequired", 1)) == 1,
     discordAppId = GetConvar("core:discordAppId", "858146067018416128"),
     discordAsset = GetConvar("core:discordAsset", "andyyy"),
     discordAssetSmall = GetConvar("core:discordAssetSmall", "andyyy"),
     discordActionText = GetConvar("core:discordActionText", "DISCORD"),
-    discordActionLink = GetConvar("discordActionLink", "https://discord.gg/Z9Mxu72zZ6"),
+    discordActionLink = GetConvar("core:discordActionLink", "https://discord.gg/Z9Mxu72zZ6"),
     discordActionText2 = GetConvar("core:discordActionText2", "STORE"),
     discordActionLink2 = GetConvar("core:discordActionLink2", "https://andyyy.tebex.io/category/fivem-scripts"),
     characterIdentifier = GetConvar("core:characterIdentifier", "license"),
@@ -40,7 +40,7 @@ lib.versionCheck('ND-Framework/ND_Core')
 
 local function getIdentifierList(src)
     local list = {}
-    for i=0, GetNumPlayerIdentifiers(src) do
+    for i=0, GetNumPlayerIdentifiers(src) - 1 do
         local identifier = GetPlayerIdentifier(src, i)
         if identifier then
             local colon = identifier:find(":")
@@ -117,7 +117,7 @@ AddEventHandler("playerConnecting", function(name, setKickReason, deferrals)
 
     if mainIdentifier and Config.discordBotToken ~= "false" and Config.discordGuildId ~= "false" then
         discordInfo = checkDiscordIdentifier(identifiers)
-        if not discordInfo and Config.discordMemeberRequired and not Config.sv_lan then
+        if not discordInfo and Config.discordMemberRequired and not Config.sv_lan then
             deferrals.done(locale("not_in_discord", Config.discordInvite))
             Wait(0)
         end
