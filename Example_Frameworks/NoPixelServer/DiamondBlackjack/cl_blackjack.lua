@@ -3,11 +3,11 @@
 local closeToCasino = false
 local closestChair = -1
 local closestChairDist = 1000 
-local Local_198f_247 = -1 --this is just closestChair pretty sure 
+local currentChairId = -1 -- tracks the currently occupied chair 
 local closestDealerPed = nil 
 local closestDealerPedDist = 1000
 local dealerPeds = {}
-local Local_198f_255 = nil
+local currentSceneId = nil -- active synchronized scene ID
 local waitingForBetState = false
 local waitingForSitDownState = false
 local waitingForStandOrHitState = false
@@ -115,15 +115,15 @@ CreateThread(function()
     local femaleCasinoDealer = GetHashKey("S_F_Y_Casino_01")
     math.randomseed(GetGameTimer())
    
-    dealerAnimDict = "anim_casino_b@amb@casino@games@shared@dealer@"
+    local dealerAnimDict = "anim_casino_b@amb@casino@games@shared@dealer@"
     RequestAnimDict(dealerAnimDict)
     while not HasAnimDictLoaded(dealerAnimDict) do
         Wait(0)
     end
     for i=0,#cfg.blackjackTables,1 do
         math.random() math.random() math.random()
-        randomBlackShit = math.random(1,13)
-        if randomBlackShit < 7 then 
+        local dealerVariant = math.random(1,13)
+        if dealerVariant < 7 then 
             dealerModel = maleCasinoDealer 
         else 
             dealerModel = femaleCasinoDealer 
@@ -145,8 +145,8 @@ CreateThread(function()
         SetPedCanEvasiveDive(dealerEntity, 0)
         SetPedCanRagdollFromPlayerImpact(dealerEntity, 0)
         SetPedConfigFlag(dealerEntity, 208, true)       
-        setBlackjackDealerPedVoiceGroup(randomBlackShit,dealerEntity)
-        setBlackjackDealerClothes(randomBlackShit,dealerEntity)
+        setBlackjackDealerPedVoiceGroup(dealerVariant,dealerEntity)
+        setBlackjackDealerClothes(dealerVariant,dealerEntity)
         SetEntityCoordsNoOffset(dealerEntity, cfg.blackjackTables[i].dealerPos.x,cfg.blackjackTables[i].dealerPos.y,cfg.blackjackTables[i].dealerPos.z, 0,0,1)
         SetEntityHeading(dealerEntity, cfg.blackjackTables[i].dealerHeading)
         if dealerModel == maleCasinoDealer then
@@ -327,7 +327,7 @@ CreateThread(function()
                 end
                 --FreezeEntityPosition(GetPlayerPed(-1),false)
                 --SetEntityCollision(GetPlayerPed(-1),true,true)
-                NetworkStopSynchronisedScene(Local_198f_255)
+                NetworkStopSynchronisedScene(currentSceneId)
                 TaskPlayAnim(GetPlayerPed(-1), blackjackAnimDictToLoad, "sit_exit_left", 1.0, 1.0, 2500, 0)              
                 --SetPlayerControl(PlayerId(),1,256,0)
                 sittingAtBlackjackTable = false
@@ -676,11 +676,11 @@ function goToBlackjackSeat(blackjackSeatID)
       end
     end
     --print("[CMG Casino] blackjack anims loaded") 
-    Local_198f_247 = blackjackSeatID
+    currentChairId = blackjackSeatID
     --print("blackjackSeatID: " .. blackjackSeatID)
-    fVar3 = blackjack_func_217(PlayerPedId(),blackjack_func_218(Local_198f_247, 0), 1)
-    fVar4 = blackjack_func_217(PlayerPedId(),blackjack_func_218(Local_198f_247, 1), 1)
-    fVar5 = blackjack_func_217(PlayerPedId(),blackjack_func_218(Local_198f_247, 2), 1)
+    fVar3 = blackjack_func_217(PlayerPedId(),blackjack_func_218(currentChairId, 0), 1)
+    fVar4 = blackjack_func_217(PlayerPedId(),blackjack_func_218(currentChairId, 1), 1)
+    fVar5 = blackjack_func_217(PlayerPedId(),blackjack_func_218(currentChairId, 2), 1)
     --print("[CMG Casino] fVars passed")
     if (fVar4 < fVar5 and fVar4 < fVar3) then 
       Local_198f_251 = 1
@@ -691,18 +691,18 @@ function goToBlackjackSeat(blackjackSeatID)
     end
     --blackjack_func_218 is get_anim_offset
     --param0 is 0-3 && param1 is 0-15? (OF blackjack_func_218)
-    local walkToVector = blackjack_func_218(Local_198f_247, Local_198f_251)
-    local targetHeading = blackjack_func_216(Local_198f_247, Local_198f_251)
+    local walkToVector = blackjack_func_218(currentChairId, Local_198f_251)
+    local targetHeading = blackjack_func_216(currentChairId, Local_198f_251)
     --print("[CMG Casino] walking to seat, x: " .. tostring(walkToVector.x) .. " y: " .. tostring(walkToVector.y) .. " z: " .. tostring(walkToVector.z))
     TaskGoStraightToCoord(PlayerPedId(), walkToVector.x, walkToVector.y, walkToVector.z, 1.0, 5000, targetHeading, 0.01)
 
-    local goToVector = blackjack_func_348(Local_198f_247)
-    local xRot,yRot,zRot = blackjack_func_215(Local_198f_247)
+    local goToVector = blackjack_func_348(currentChairId)
+    local xRot,yRot,zRot = blackjack_func_215(currentChairId)
     --print("[CMG Casino] Blackjack sit at table net scene starting")
     --print("[CMG Casino] creating Scene at, x: " .. tostring(goToVector.x) .. " y: " .. tostring(goToVector.y) .. " z: " .. tostring(goToVector.z))
-    Local_198f_255 = NetworkCreateSynchronisedScene(goToVector.x, goToVector.y, goToVector.z, xRot, yRot, zRot, 2, 1, 0, 1065353216, 0, 1065353216)
-    NetworkAddPedToSynchronisedScene(PlayerPedId(), Local_198f_255, "anim_casino_b@amb@casino@games@shared@player@", blackjack_func_213(Local_198f_251), 2.0, -2.0, 13, 16, 2.0, 0) -- 8.0, -1.5, 157, 16, 1148846080, 0) ?
-    NetworkStartSynchronisedScene(Local_198f_255)
+    currentSceneId = NetworkCreateSynchronisedScene(goToVector.x, goToVector.y, goToVector.z, xRot, yRot, zRot, 2, 1, 0, 1065353216, 0, 1065353216)
+    NetworkAddPedToSynchronisedScene(PlayerPedId(), currentSceneId, "anim_casino_b@amb@casino@games@shared@player@", blackjack_func_213(Local_198f_251), 2.0, -2.0, 13, 16, 2.0, 0) -- 8.0, -1.5, 157, 16, 1148846080, 0) ?
+    NetworkStartSynchronisedScene(currentSceneId)
     --print("[CMG Casino] Blackjack sit at table net scene started")
     --Local_198.f_255 = NETWORK::NETWORK_CREATE_SYNCHRONISED_SCENE(func_348(Local_198.f_247), func_215(Local_198.f_247), 2, 1, 0, 1065353216, 0, 1065353216)
     --NETWORK::NETWORK_ADD_PED_TO_SYNCHRONISED_SCENE(PLAYER::PLAYER_PED_ID(), Local_198.f_255, "anim_casino_b@amb@casino@games@shared@player@", blackjack_func_213(Local_198f_251), 2f, -2f, 13, 16, 2f, 0)
@@ -2748,40 +2748,40 @@ function getDealerIdFromEntity(dealerEntity)
     return closestID
 end
 
-function setBlackjackDealerPedVoiceGroup(randomNumber,dealerPed)
-    if randomNumber == 0 then
+function setBlackjackDealerPedVoiceGroup(variant,dealerPed)
+    if variant == 0 then
         SetPedVoiceGroup(dealerPed,GetHashKey("S_M_Y_Casino_01_WHITE_01"))
-	elseif randomNumber == 1 then
+	elseif variant == 1 then
 		SetPedVoiceGroup(dealerPed,GetHashKey("S_M_Y_Casino_01_ASIAN_01"))
-    elseif randomNumber == 2 then
+    elseif variant == 2 then
 		SetPedVoiceGroup(dealerPed,GetHashKey("S_M_Y_Casino_01_ASIAN_02"))
-    elseif randomNumber == 3 then
+    elseif variant == 3 then
 		SetPedVoiceGroup(dealerPed,GetHashKey("S_M_Y_Casino_01_ASIAN_01"))
-    elseif randomNumber == 4 then
+    elseif variant == 4 then
 		SetPedVoiceGroup(dealerPed,GetHashKey("S_M_Y_Casino_01_WHITE_01"))
-	elseif randomNumber == 5 then
+	elseif variant == 5 then
 		SetPedVoiceGroup(dealerPed,GetHashKey("S_M_Y_Casino_01_WHITE_02"))
-    elseif randomNumber == 6 then
+    elseif variant == 6 then
 		SetPedVoiceGroup(dealerPed,GetHashKey("S_M_Y_Casino_01_WHITE_01"))	
-    elseif randomNumber == 7 then
+    elseif variant == 7 then
 		SetPedVoiceGroup(dealerPed,GetHashKey("S_F_Y_Casino_01_ASIAN_01"))	
-    elseif randomNumber == 8 then
+    elseif variant == 8 then
 		SetPedVoiceGroup(dealerPed,GetHashKey("S_F_Y_Casino_01_ASIAN_02"))
-    elseif randomNumber == 9 then
+    elseif variant == 9 then
 		SetPedVoiceGroup(dealerPed,GetHashKey("S_F_Y_Casino_01_ASIAN_01"))
-    elseif randomNumber == 10 then
+    elseif variant == 10 then
 		SetPedVoiceGroup(dealerPed,GetHashKey("S_F_Y_Casino_01_ASIAN_02"))
-    elseif randomNumber == 11 then
+    elseif variant == 11 then
 		SetPedVoiceGroup(dealerPed,GetHashKey("S_F_Y_Casino_01_LATINA_01"))
-    elseif randomNumber == 12 then
+    elseif variant == 12 then
 		SetPedVoiceGroup(dealerPed,GetHashKey("S_F_Y_Casino_01_LATINA_02"))
-    elseif randomNumber == 13 then
+    elseif variant == 13 then
 		SetPedVoiceGroup(dealerPed,GetHashKey("S_F_Y_Casino_01_LATINA_01"))
     end
 end
 
-function setBlackjackDealerClothes(randomNumber,dealerPed)
-    if randomNumber == 0 then 
+function setBlackjackDealerClothes(variant,dealerPed)
+    if variant == 0 then 
         SetPedDefaultComponentVariation(dealerPed)
         SetPedComponentVariation(dealerPed, 0, 3, 0, 0)
         SetPedComponentVariation(dealerPed, 1, 1, 0, 0)
@@ -2793,7 +2793,7 @@ function setBlackjackDealerClothes(randomNumber,dealerPed)
         SetPedComponentVariation(dealerPed, 8, 3, 0, 0)
         SetPedComponentVariation(dealerPed, 10, 1, 0, 0)
         SetPedComponentVariation(dealerPed, 11, 1, 0, 0)
-    elseif randomNumber == 1 then
+    elseif variant == 1 then
         SetPedDefaultComponentVariation(dealerPed)
         SetPedComponentVariation(dealerPed, 0, 2, 2, 0)
         SetPedComponentVariation(dealerPed, 1, 1, 0, 0)
@@ -2805,7 +2805,7 @@ function setBlackjackDealerClothes(randomNumber,dealerPed)
         SetPedComponentVariation(dealerPed, 8, 1, 0, 0)
         SetPedComponentVariation(dealerPed, 10, 1, 0, 0)
         SetPedComponentVariation(dealerPed, 11, 1, 0, 0)
-    elseif randomNumber == 2 then
+    elseif variant == 2 then
         SetPedDefaultComponentVariation(dealerPed)
         SetPedComponentVariation(dealerPed, 0, 2, 1, 0)
         SetPedComponentVariation(dealerPed, 1, 1, 0, 0)
@@ -2817,7 +2817,7 @@ function setBlackjackDealerClothes(randomNumber,dealerPed)
         SetPedComponentVariation(dealerPed, 8, 1, 0, 0)
         SetPedComponentVariation(dealerPed, 10, 1, 0, 0)
         SetPedComponentVariation(dealerPed, 11, 1, 0, 0)
-    elseif randomNumber == 3 then
+    elseif variant == 3 then
         SetPedDefaultComponentVariation(dealerPed)
         SetPedComponentVariation(dealerPed, 0, 2, 0, 0)
         SetPedComponentVariation(dealerPed, 1, 1, 0, 0)
@@ -2829,7 +2829,7 @@ function setBlackjackDealerClothes(randomNumber,dealerPed)
         SetPedComponentVariation(dealerPed, 8, 3, 0, 0)
         SetPedComponentVariation(dealerPed, 10, 1, 0, 0)
         SetPedComponentVariation(dealerPed, 11, 1, 0, 0)
-    elseif randomNumber == 4 then
+    elseif variant == 4 then
         SetPedDefaultComponentVariation(dealerPed)
         SetPedComponentVariation(dealerPed, 0, 4, 2, 0)
         SetPedComponentVariation(dealerPed, 1, 1, 0, 0)
@@ -2841,7 +2841,7 @@ function setBlackjackDealerClothes(randomNumber,dealerPed)
         SetPedComponentVariation(dealerPed, 8, 1, 0, 0)
         SetPedComponentVariation(dealerPed, 10, 1, 0, 0)
         SetPedComponentVariation(dealerPed, 11, 1, 0, 0)
-    elseif randomNumber == 5 then
+    elseif variant == 5 then
         SetPedDefaultComponentVariation(dealerPed)
         SetPedComponentVariation(dealerPed, 0, 4, 0, 0)
         SetPedComponentVariation(dealerPed, 1, 1, 0, 0)
@@ -2853,7 +2853,7 @@ function setBlackjackDealerClothes(randomNumber,dealerPed)
         SetPedComponentVariation(dealerPed, 8, 1, 0, 0)
         SetPedComponentVariation(dealerPed, 10, 1, 0, 0)
         SetPedComponentVariation(dealerPed, 11, 1, 0, 0)
-    elseif randomNumber == 6 then
+    elseif variant == 6 then
         SetPedDefaultComponentVariation(dealerPed)
         SetPedComponentVariation(dealerPed, 0, 4, 1, 0)
         SetPedComponentVariation(dealerPed, 1, 1, 0, 0)
@@ -2865,7 +2865,7 @@ function setBlackjackDealerClothes(randomNumber,dealerPed)
         SetPedComponentVariation(dealerPed, 8, 3, 0, 0)
         SetPedComponentVariation(dealerPed, 10, 1, 0, 0)
         SetPedComponentVariation(dealerPed, 11, 1, 0, 0)
-    elseif randomNumber == 7 then
+    elseif variant == 7 then
         SetPedDefaultComponentVariation(dealerPed)
         SetPedComponentVariation(dealerPed, 0, 1, 1, 0)
         SetPedComponentVariation(dealerPed, 1, 0, 0, 0)
@@ -2877,7 +2877,7 @@ function setBlackjackDealerClothes(randomNumber,dealerPed)
         SetPedComponentVariation(dealerPed, 8, 0, 0, 0)
         SetPedComponentVariation(dealerPed, 10, 0, 0, 0)
         SetPedComponentVariation(dealerPed, 11, 0, 0, 0)
-    elseif randomNumber == 8 then
+    elseif variant == 8 then
         SetPedDefaultComponentVariation(dealerPed)
         SetPedComponentVariation(dealerPed, 0, 1, 1, 0)
         SetPedComponentVariation(dealerPed, 1, 0, 0, 0)
@@ -2889,7 +2889,7 @@ function setBlackjackDealerClothes(randomNumber,dealerPed)
         SetPedComponentVariation(dealerPed, 8, 1, 0, 0)
         SetPedComponentVariation(dealerPed, 10, 0, 0, 0)
         SetPedComponentVariation(dealerPed, 11, 0, 0, 0)
-    elseif randomNumber == 9 then
+    elseif variant == 9 then
         SetPedDefaultComponentVariation(dealerPed)
         SetPedComponentVariation(dealerPed, 0, 2, 0, 0)
         SetPedComponentVariation(dealerPed, 1, 0, 0, 0)
@@ -2901,7 +2901,7 @@ function setBlackjackDealerClothes(randomNumber,dealerPed)
         SetPedComponentVariation(dealerPed, 8, 2, 0, 0)
         SetPedComponentVariation(dealerPed, 10, 0, 0, 0)
         SetPedComponentVariation(dealerPed, 11, 0, 0, 0)
-    elseif randomNumber == 10 then
+    elseif variant == 10 then
         SetPedDefaultComponentVariation(dealerPed)
         SetPedComponentVariation(dealerPed, 0, 2, 1, 0)
         SetPedComponentVariation(dealerPed, 1, 0, 0, 0)
@@ -2913,7 +2913,7 @@ function setBlackjackDealerClothes(randomNumber,dealerPed)
         SetPedComponentVariation(dealerPed, 8, 3, 0, 0)
         SetPedComponentVariation(dealerPed, 10, 0, 0, 0)
         SetPedComponentVariation(dealerPed, 11, 0, 0, 0)
-    elseif randomNumber == 11 then
+    elseif variant == 11 then
         SetPedDefaultComponentVariation(dealerPed)
         SetPedComponentVariation(dealerPed, 0, 3, 0, 0)
         SetPedComponentVariation(dealerPed, 1, 0, 0, 0)
@@ -2926,7 +2926,7 @@ function setBlackjackDealerClothes(randomNumber,dealerPed)
         SetPedComponentVariation(dealerPed, 10, 0, 0, 0)
         SetPedComponentVariation(dealerPed, 11, 0, 0, 0)
             SetPedPropIndex(dealerPed, 1, 0, 0, false)
-    elseif randomNumber == 12 then
+    elseif variant == 12 then
         SetPedDefaultComponentVariation(dealerPed)
         SetPedComponentVariation(dealerPed, 0, 3, 1, 0)
         SetPedComponentVariation(dealerPed, 1, 0, 0, 0)
@@ -2938,7 +2938,7 @@ function setBlackjackDealerClothes(randomNumber,dealerPed)
         SetPedComponentVariation(dealerPed, 8, 1, 0, 0)
         SetPedComponentVariation(dealerPed, 10, 0, 0, 0)
         SetPedComponentVariation(dealerPed, 11, 0, 0, 0)
-    elseif randomNumber == 13 then
+    elseif variant == 13 then
         SetPedDefaultComponentVariation(dealerPed)
         SetPedComponentVariation(dealerPed, 0, 4, 0, 0)
         SetPedComponentVariation(dealerPed, 1, 0, 0, 0)

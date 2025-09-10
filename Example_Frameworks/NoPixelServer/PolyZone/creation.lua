@@ -1,6 +1,9 @@
 local createdShape
 local drawShape = false
 
+local GetEntityCoords = GetEntityCoords
+local PlayerPedId = PlayerPedId
+
 RegisterNetEvent("pz_startshape")
 AddEventHandler("pz_startshape", function(pName)
   if createdShape ~= nil then
@@ -38,10 +41,10 @@ end)
 
 -- Drawing
 function drawThread()
-  Citizen.CreateThread(function()
+  CreateThread(function()
     while drawShape do
       PolyZone.drawPoly(createdShape, {drawPoints=true})
-      Citizen.Wait(1)
+      Wait(1)
     end
   end)
 end

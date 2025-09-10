@@ -9,13 +9,13 @@ local spinningObject = nil
 local spinningCar = nil
 
 -- CAR FOR WINS
-function drawCarForWins()
+local function drawCarForWins()
   if DoesEntityExist(spinningCar) then
     DeleteEntity(spinningCar)
   end
   RequestModel(carOnShow)
-	while not HasModelLoaded(carOnShow) do
-		Citizen.Wait(0)
+  while not HasModelLoaded(carOnShow) do
+    Wait(0)
   end
   SetModelAsNoLongerNeeded(carOnShow)
   spinningCar = CreateVehicle(carOnShow, 1100.0, 220.0, -51.0 + 0.05, 0.0, 0, 0)
@@ -23,13 +23,13 @@ function drawCarForWins()
   SetVehicleDirtLevel(spinningCar, 0.0)
   SetVehicleOnGroundProperly(spinningCar)
   Wait(0)
-  FreezeEntityPosition(spinningCar, 1)
+  FreezeEntityPosition(spinningCar, true)
 end
 
 
 
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	RequestIpl("ferris_finale_anim")
 	RequestIpl("ferris_finale_anim_lod")
     -- ====================================================================
@@ -164,32 +164,34 @@ Citizen.CreateThread(function()
     AfterHoursNightclubs.LoadDefault()          -- -1604.664, -3012.583, -78.000
 
 end)
-function IsTable(T)
-    return type(T) == 'table'
-  end
-  function SetIplPropState(interiorId, props, state, refresh)
-    if refresh == nil then refresh = false end
-    if IsTable(interiorId) then
-        for key, value in pairs(interiorId) do
-            SetIplPropState(value, props, state, refresh)
-        end
-    else
-        if IsTable(props) then
-            for key, value in pairs(props) do
-                SetIplPropState(interiorId, value, state, refresh)
-            end
-        else
-            if state then
-                if not IsInteriorPropEnabled(interiorId, props) then EnableInteriorProp(interiorId, props) end
-            else
-                if IsInteriorPropEnabled(interiorId, props) then DisableInteriorProp(interiorId, props) end
-            end
-        end
-        if refresh == true then RefreshInterior(interiorId) end
+
+local function isTable(value)
+  return type(value) == 'table'
+end
+
+function SetIplPropState(interiorId, props, state, refresh)
+  if refresh == nil then refresh = false end
+  if isTable(interiorId) then
+    for _, value in pairs(interiorId) do
+      SetIplPropState(value, props, state, refresh)
     end
+  else
+    if isTable(props) then
+      for _, value in pairs(props) do
+        SetIplPropState(interiorId, value, state, refresh)
+      end
+    else
+      if state then
+        if not IsInteriorPropEnabled(interiorId, props) then EnableInteriorProp(interiorId, props) end
+      else
+        if IsInteriorPropEnabled(interiorId, props) then DisableInteriorProp(interiorId, props) end
+      end
+    end
+    if refresh == true then RefreshInterior(interiorId) end
   end
+end
   
-  Citizen.CreateThread(function()
+  CreateThread(function()
     Wait(10000)
     RequestIpl('vw_casino_main')
     RequestIpl('vw_dlc_casino_door')
@@ -222,30 +224,30 @@ function IsTable(T)
       RefreshInterior(interiorID)
     end
 
-function spinMeRightRoundBaby()
-    Citizen.CreateThread(function()
-      while inCasino do
-        if not spinningObject or spinningObject == 0 or not DoesEntityExist(spinningObject) then
-          spinningObject = GetClosestObjectOfType(1100.0, 220.0, -51.0, 10.0, -1561087446, 0, 0, 0)
-          drawCarForWins()
-        end
-        if spinningObject ~= nil and spinningObject ~= 0 then
-          local curHeading = GetEntityHeading(spinningObject)
-          local curHeadingCar = GetEntityHeading(spinningCar)
-          if curHeading >= 360 then
-            curHeading = 0.0
-            curHeadingCar = 0.0
-          elseif curHeading ~= curHeadingCar then
-            curHeadingCar = curHeading
-          end
-          SetEntityHeading(spinningObject, curHeading + 0.075)
-          SetEntityHeading(spinningCar, curHeadingCar + 0.075)
-        end
-        Wait(0)
+local function spinMeRightRoundBaby()
+  CreateThread(function()
+    while inCasino do
+      if not spinningObject or spinningObject == 0 or not DoesEntityExist(spinningObject) then
+        spinningObject = GetClosestObjectOfType(1100.0, 220.0, -51.0, 10.0, -1561087446, 0, 0, 0)
+        drawCarForWins()
       end
-      spinningObject = nil
-    end)
-  end
+      if spinningObject ~= nil and spinningObject ~= 0 then
+        local curHeading = GetEntityHeading(spinningObject)
+        local curHeadingCar = GetEntityHeading(spinningCar)
+        if curHeading >= 360 then
+          curHeading = 0.0
+          curHeadingCar = 0.0
+        elseif curHeading ~= curHeadingCar then
+          curHeadingCar = curHeading
+        end
+        SetEntityHeading(spinningObject, curHeading + 0.075)
+        SetEntityHeading(spinningCar, curHeadingCar + 0.075)
+      end
+      Wait(0)
+    end
+    spinningObject = nil
+  end)
+end
   
   -- Casino Screens
   local Playlists = {
@@ -255,7 +257,7 @@ function spinMeRightRoundBaby()
     "CASINO_HLW_PL", -- skull
   }
   -- Render
-  function CreateNamedRenderTargetForModel(name, model)
+  local function CreateNamedRenderTargetForModel(name, model)
     local handle = 0
     if not IsNamedRendertargetRegistered(name) then
         RegisterNamedRendertarget(name, 0)
@@ -270,8 +272,8 @@ function spinMeRightRoundBaby()
     return handle
   end
   -- render tv stuff
-  function showDiamondsOnScreenBaby()
-    Citizen.CreateThread(function()
+  local function showDiamondsOnScreenBaby()
+    CreateThread(function()
       local model = GetHashKey("vw_vwint01_video_overlay")
       local timeout = 21085 -- 5000 / 255
   
@@ -285,21 +287,21 @@ function spinMeRightRoundBaby()
       SetTvChannel(2)
       EnableMovieSubtitles(1)
   
-      function doAlpha()
-        Citizen.SetTimeout(timeout, function()
+      local function doAlpha()
+        SetTimeout(timeout, function()
           SetTvChannelPlaylist(2, "CASINO_DIA_PL", 0)
           SetTvChannel(2)
           doAlpha()
         end)
       end
       doAlpha()
-  
-      Citizen.CreateThread(function()
+
+      CreateThread(function()
         while inCasino do
           SetTextRenderId(handle)
           DrawTvChannel(0.5, 0.5, 1.0, 1.0, 0.0, 255, 255, 255, 255)
           SetTextRenderId(GetDefaultScriptRendertargetRenderId())
-          Citizen.Wait(0)
+          Wait(0)
         end
         SetTvChannel(-1)
         ReleaseNamedRendertarget(GetHashKey("CasinoScreen_01"))
@@ -308,20 +310,20 @@ function spinMeRightRoundBaby()
     end)
   end
   
-  function playSomeBackgroundAudioBaby()
-    Citizen.CreateThread(function()
+  local function playSomeBackgroundAudioBaby()
+    CreateThread(function()
       local function audioBanks()
         while not RequestScriptAudioBank("DLC_VINEWOOD/CASINO_GENERAL", false, -1) do
-          Citizen.Wait(0)
+          Wait(0)
         end
         while not RequestScriptAudioBank("DLC_VINEWOOD/CASINO_SLOT_MACHINES_01", false, -1) do
-          Citizen.Wait(0)
+          Wait(0)
         end
         while not RequestScriptAudioBank("DLC_VINEWOOD/CASINO_SLOT_MACHINES_02", false, -1) do
-          Citizen.Wait(0)
+          Wait(0)
         end
         while not RequestScriptAudioBank("DLC_VINEWOOD/CASINO_SLOT_MACHINES_03", false, -1) do
-          Citizen.Wait(0)
+          Wait(0)
         end
         -- while not RequestScriptAudioBank("DLC_VINEWOOD/CASINO_INTERIOR_STEMS", false, -1) do
         --   print('load 5')
@@ -336,7 +338,7 @@ function spinMeRightRoundBaby()
         if IsStreamPlaying() and not IsAudioSceneActive("DLC_VW_Casino_General") then
           StartAudioScene("DLC_VW_Casino_General")
         end
-        Citizen.Wait(1000)
+        Wait(1000)
       end
       if IsStreamPlaying() then
         StopStream()
