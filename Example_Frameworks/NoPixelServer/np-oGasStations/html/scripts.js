@@ -1,105 +1,87 @@
-$(document).ready(function(){
-   // Listen for NUI Events
-  window.addEventListener('message', function(event){
-    var item = event.data;
-    // Trigger adding a new message to the log and create its display
-    if (item.open === 2) {
-     // console.log(3)
-     // update(item.info);
+document.addEventListener('DOMContentLoaded', () => {
+  window.addEventListener('message', (event) => {
+    const item = event.data;
 
+    if (item.open === 2) {
       if (item.direction) {
-        $(".direction").find(".image").attr('style', 'transform: translate3d(' + item.direction + 'px, 0px, 0px)');
+        const dirImage = document.querySelector('.direction .image');
+        if (dirImage) dirImage.style.transform = `translate3d(${item.direction}px, 0px, 0px)`;
         return;
       }
 
+      const atlAmount = document.querySelector('.atlamount');
+      const atlText = document.querySelector('.atlamounttxt');
       if (item.atl === false) {
-        $(".atlamount").attr("style", "display: none");
-        $(".atlamounttxt").attr("style", "display: none");
-      }
-      else {
-        $(".atlamount").attr("style", "display: block");
-        $(".atlamounttxt").attr("style", "display: block");
-        $(".atlamount").empty();
-        $(".atlamount").append(item.atl);
-      }
-
-      $(".vehicle").removeClass("hide");
-      $(".wrap").removeClass("lower");
-      $(".time").removeClass("timelower");
-
-      $(".fuelamount").empty();
-      $(".fuelamount").append(item.fuel);
-
-      $(".speedamount").empty();
-      $(".speedamount").append(item.mph);
-
-      $(".street-txt").empty();
-      $(".street-txt").append(item.street);
-      
-      $(".time").empty();
-      $(".time").append(item.time); 
-
-
-      if (item.belt == true || item.harnessDur > 0) {
-        $(".belt").fadeOut(1000);
+        atlAmount.style.display = 'none';
+        atlText.style.display = 'none';
       } else {
-        $(".belt").fadeIn(1000);
+        atlAmount.style.display = 'block';
+        atlText.style.display = 'block';
+        atlAmount.textContent = item.atl;
       }
 
-      if (item.engine === true) {
-        $(".ENGINE").fadeIn(1000);
+      document.querySelector('.vehicle').classList.remove('hide');
+      document.querySelector('.wrap').classList.remove('lower');
+      document.querySelector('.time').classList.remove('timelower');
+
+      document.querySelector('.fuelamount').textContent = item.fuel;
+      document.querySelector('.speedamount').textContent = item.mph;
+      document.querySelector('.street-txt').textContent = item.street;
+      document.querySelector('.time').textContent = item.time;
+
+      const beltEl = document.querySelector('.belt');
+      if (item.belt || item.harnessDur > 0) {
+        beltEl.style.display = 'none';
       } else {
-        $(".ENGINE").fadeOut(1000);
+        beltEl.style.display = 'block';
       }
 
-      if (item.GasTank === true) {
-        $(".FUEL").fadeIn(1000);
-      } else {
-        $(".FUEL").fadeOut(1000);
-      }
+      document.querySelector('.ENGINE').style.display = item.engine ? 'block' : 'none';
+      document.querySelector('.FUEL').style.display = item.GasTank ? 'block' : 'none';
 
-      $(".harness").empty();
+      const harnessEl = document.querySelector('.harness');
+      harnessEl.innerHTML = '';
       if (item.harnessDur > 0) {
-        if (item.harness === true) {
-          let colorOn = (item.colorblind) ? 'blue' : 'green';
-          $(".harness").append(`<div class='${colorOn}'> HARNESS </div>`);
+        if (item.harness) {
+          const colorOn = item.colorblind ? 'blue' : 'green';
+          harnessEl.innerHTML = `<div class="${colorOn}"> HARNESS </div>`;
         } else {
-          let colorOff = (item.colorblind) ? 'yellow' : 'red';
-          $(".harness").append(`<div class='${colorOff}'> HARNESS </div>`);
+          const colorOff = item.colorblind ? 'yellow' : 'red';
+          harnessEl.innerHTML = `<div class="${colorOff}"> HARNESS </div>`;
         }
       }
 
-      $(".nos").empty();
+      const nosEl = document.querySelector('.nos');
+      nosEl.innerHTML = '';
       if (item.nos > 0) {
-        if (item.nosEnabled === false) {
-          let colorOn = (item.colorblind) ? 'blue' : 'green';
-          $(".nos").append(`<div class='${colorOn}'> ${item.nos} </div>`);
+        if (!item.nosEnabled) {
+          const colorOn = item.colorblind ? 'blue' : 'green';
+          nosEl.innerHTML = `<div class="${colorOn}"> ${item.nos} </div>`;
         } else {
-          let colorOff = (item.colorblind) ? 'yellow' : 'yellow';
-          $(".nos").append(`<div class='${colorOff}'> ${item.nos} </div>`);
+          const colorOff = item.colorblind ? 'yellow' : 'yellow';
+          nosEl.innerHTML = `<div class="${colorOff}"> ${item.nos} </div>`;
         }
       }
     }
 
     if (item.open === 4) {
-      $(".vehicle").addClass("hide");
-      $(".wrap").addClass("lower");
-      $(".time").addClass("timelower");
-      $(".fuelamount").empty();
-      $(".speedamount").empty();
-      $(".street-txt").empty();
-
-      $(".time").empty();
-      $(".time").append(item.time); 
-      $(".direction").find(".image").attr('style', 'transform: translate3d(' + item.direction + 'px, 0px, 0px)');
+      document.querySelector('.vehicle').classList.add('hide');
+      document.querySelector('.wrap').classList.add('lower');
+      document.querySelector('.time').classList.add('timelower');
+      document.querySelector('.fuelamount').textContent = '';
+      document.querySelector('.speedamount').textContent = '';
+      document.querySelector('.street-txt').textContent = '';
+      document.querySelector('.time').textContent = item.time;
+      const dirImage = document.querySelector('.direction .image');
+      if (dirImage) dirImage.style.transform = `translate3d(${item.direction}px, 0px, 0px)`;
     }
 
     if (item.open === 3) {
-      $(".full-screen").fadeOut(100);    
-    }    
+      document.querySelector('.full-screen').style.display = 'none';
+    }
+
     if (item.open === 1) {
-      //console.log(1)
-      $(".full-screen").fadeIn(100);    
-    }    
+      document.querySelector('.full-screen').style.display = 'block';
+    }
   });
 });
