@@ -1,4 +1,4 @@
-Keys = {
+local Keys = {
 	["ESC"] = 322, ["F1"] = 288, ["F2"] = 289, ["F3"] = 170, ["F5"] = 166, ["F6"] = 167, ["F7"] = 168, ["F8"] = 169, ["F9"] = 56, ["F10"] = 57, 
 	["~"] = 243, ["1"] = 157, ["2"] = 158, ["3"] = 160, ["4"] = 164, ["5"] = 165, ["6"] = 159, ["7"] = 161, ["8"] = 162, ["9"] = 163, ["-"] = 84, ["="] = 83, ["BACKSPACE"] = 177, 
 	["TAB"] = 37, ["Q"] = 44, ["W"] = 32, ["E"] = 38, ["R"] = 45, ["T"] = 245, ["Y"] = 246, ["U"] = 303, ["P"] = 199, ["["] = 39, ["]"] = 40, ["ENTER"] = 18,
@@ -17,7 +17,7 @@ Menu.selection = 0
 Menu.hidden = true
 MenuTitle = "Menu"
 
-function Menu.addButton(name, func,args)
+function Menu.addButton(name, func, args)
 	local yoffset = 0.3
 	local xoffset = 0
 	local xmin = 0.0
@@ -26,8 +26,8 @@ function Menu.addButton(name, func,args)
 	local ymax = 0.05
 	Menu.GUI[Menu.buttonCount+1] = {}
 	Menu.GUI[Menu.buttonCount+1]["name"] = name
-	Menu.GUI[Menu.buttonCount+1]["func"] = func
-	Menu.GUI[Menu.buttonCount+1]["args"] = args
+        Menu.GUI[Menu.buttonCount+1]["func"] = func
+        Menu.GUI[Menu.buttonCount+1]["args"] = args
 	Menu.GUI[Menu.buttonCount+1]["active"] = false
 	Menu.GUI[Menu.buttonCount+1]["xmin"] = xmin + xoffset
 	Menu.GUI[Menu.buttonCount+1]["ymin"] = ymin * (Menu.buttonCount + 0.01) +yoffset
@@ -50,9 +50,12 @@ function Menu.updateSelection()
 		else
 			Menu.selection = Menu.buttonCount-1
 		end
-	elseif IsControlJustPressed(1, Keys["NENTER"])  then
-			MenuCallFunction(Menu.GUI[Menu.selection +1]["func"], Menu.GUI[Menu.selection +1]["args"])
-			Menu.hidden = not Menu.hidden 
+        elseif IsControlJustPressed(1, Keys["NENTER"])  then
+                local button = Menu.GUI[Menu.selection +1]
+                if button and button.func then
+                        button.func(button.args)
+                end
+                Menu.hidden = not Menu.hidden
 	end
 	local iterator = 0
 	for id, settings in ipairs(Menu.GUI) do
@@ -122,10 +125,6 @@ function ClearMenu()
 	Menu.GUI = {}
 	Menu.buttonCount = 0
 	Menu.selection = 0
-end
-
-function MenuCallFunction(fnc, arg)
-	_G[fnc](arg)
 end
 
 --------------------------------------------------------------------------------------------------------------------
