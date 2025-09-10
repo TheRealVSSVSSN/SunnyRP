@@ -1,51 +1,86 @@
+--[[
+    -- Type: Module
+    -- Name: common.lua
+    -- Use: Shared utilities for IPL, rendering and texture handling
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 
-exports('EnableIpl', function(ipl, activate)
-    EnableIpl(ipl, activate)
-end)
+TunerLib = {}
 
-exports('GetPedheadshotTexture', function(ped)
-    return GetPedheadshotTexture(ped)
-end)
+--[[
+    -- Type: Function
+    -- Name: EnableIpl
+    -- Use: Loads or removes IPLs
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function isTable(value)
+    return type(value) == 'table'
+end
 
--- Load or remove IPL(s)
-function EnableIpl(ipl, activate)
-    if IsTable(ipl) then
-        for key, value in pairs(ipl) do
-            EnableIpl(value, activate)
+function TunerLib.EnableIpl(ipl, activate)
+    if isTable(ipl) then
+        for _, value in pairs(ipl) do
+            TunerLib.EnableIpl(value, activate)
         end
     else
         if activate then
-            if not IsIplActive(ipl) then RequestIpl(ipl) end
+            if not IsIplActive(ipl) then
+                RequestIpl(ipl)
+            end
         else
-            if IsIplActive(ipl) then RemoveIpl(ipl) end
+            if IsIplActive(ipl) then
+                RemoveIpl(ipl)
+            end
         end
     end
 end
+exports('EnableIpl', TunerLib.EnableIpl)
 
--- Enable or disable the specified props in an interior
-function SetIplPropState(interiorId, props, state, refresh)
-    if refresh == nil then refresh = false end
-    if IsTable(interiorId) then
-        for key, value in pairs(interiorId) do
-            SetIplPropState(value, props, state, refresh)
+--[[
+    -- Type: Function
+    -- Name: SetIplPropState
+    -- Use: Toggles interior props on an interior
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+function TunerLib.SetIplPropState(interiorId, props, state, refresh)
+    refresh = refresh or false
+    if isTable(interiorId) then
+        for _, id in pairs(interiorId) do
+            TunerLib.SetIplPropState(id, props, state, refresh)
         end
     else
-        if IsTable(props) then
-            for key, value in pairs(props) do
-                SetIplPropState(interiorId, value, state, refresh)
+        if isTable(props) then
+            for _, prop in pairs(props) do
+                TunerLib.SetIplPropState(interiorId, prop, state, refresh)
             end
         else
             if state then
-                if not IsInteriorPropEnabled(interiorId, props) then EnableInteriorProp(interiorId, props) end
+                if not IsInteriorPropEnabled(interiorId, props) then
+                    EnableInteriorProp(interiorId, props)
+                end
             else
-                if IsInteriorPropEnabled(interiorId, props) then DisableInteriorProp(interiorId, props) end
+                if IsInteriorPropEnabled(interiorId, props) then
+                    DisableInteriorProp(interiorId, props)
+                end
             end
         end
-        if refresh == true then RefreshInterior(interiorId) end
+        if refresh then
+            RefreshInterior(interiorId)
+        end
     end
 end
 
-function CreateNamedRenderTargetForModel(name, model)
+--[[
+    -- Type: Function
+    -- Name: CreateNamedRenderTargetForModel
+    -- Use: Creates render target and links to a model
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+function TunerLib.CreateNamedRenderTargetForModel(name, model)
     local handle = 0
     if not IsNamedRendertargetRegistered(name) then
         RegisterNamedRendertarget(name, false)
@@ -56,27 +91,33 @@ function CreateNamedRenderTargetForModel(name, model)
     if IsNamedRendertargetRegistered(name) then
         handle = GetNamedRendertargetRenderId(name)
     end
-
     return handle
 end
 
-function DrawEmptyRect(name, model)
+--[[
+    -- Type: Function
+    -- Name: DrawEmptyRect
+    -- Use: Draws an empty rectangle on a render target
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+function TunerLib.DrawEmptyRect(name, model)
     local step = 250
     local timeout = 5 * 1000
     local currentTime = 0
-    local renderId = CreateNamedRenderTargetForModel(name, model)
+    local renderId = TunerLib.CreateNamedRenderTargetForModel(name, model)
 
-    while (not IsNamedRendertargetRegistered(name)) do
-        Citizen.Wait(step)
+    while not IsNamedRendertargetRegistered(name) do
+        Wait(step)
         currentTime = currentTime + step
-        if (currentTime >= timeout) then return false end
+        if currentTime >= timeout then return false end
     end
-    if (IsNamedRendertargetRegistered(name)) then
+
+    if IsNamedRendertargetRegistered(name) then
         SetTextRenderId(renderId)
         SetUiLayer(4)
         DrawRect(0.5, 0.5, 1.0, 1.0, 0, 0, 0, 0)
         SetTextRenderId(GetDefaultScriptRendertargetRenderId())
-
         ReleaseNamedRendertarget(0, name)
     end
 
@@ -84,118 +125,92 @@ function DrawEmptyRect(name, model)
 end
 
 --[[
-    TO REMOVE
-]]--
-function LoadEmptyScaleform(renderTarget, prop, scaleform, sfFunction)
-    local renderId = CreateNamedRenderTargetForModel(renderTarget, prop)
-    local gfxHandle = -1
-
-    SetTextRenderId(renderId)
-    SetTextRenderId(GetDefaultScriptRendertargetRenderId())
-
-    if (scaleform ~= nil) then
-        gfxHandle = RequestScaleformMovie(scaleform)
-    end
-
-    if (sfFunction ~= nil) then
-        BeginScaleformMovieMethod(gfxHandle, sfFunction)
-        PushScaleformMovieMethodParameterInt(-1)
-        EndScaleformMovieMethod()
-    end
-end
-
-function SetupScaleform(movieId, scaleformFunction, parameters)
-    BeginScaleformMovieMethod(movieId, scaleformFunction)
-    N_0x77fe3402004cd1b0(name)
-    if (IsTable(parameters)) then
-        for i = 0, Tablelength(parameters) - 1 do
-            local p = parameters["p" .. tostring(i)]
-            if (p.type == "bool") then
-                PushScaleformMovieMethodParameterBool(p.value)
-            elseif (p.type == "int") then
-                PushScaleformMovieMethodParameterInt(p.value)
-            elseif (p.type == "float") then
-                PushScaleformMovieMethodParameterFloat(p.value)
-            elseif (p.type == "string") then
-                PushScaleformMovieMethodParameterString(p.value)
-            elseif (p.type == "buttonName") then
-                PushScaleformMovieMethodParameterButtonName(p.value)
-            end
-        end
-    end
-    EndScaleformMovieMethod()
-    N_0x32f34ff7f617643b(movieId, 1)
-end
-
-function LoadStreamedTextureDict(texturesDict)
+    -- Type: Function
+    -- Name: LoadStreamedTextureDict
+    -- Use: Loads texture dictionary with timeout safety
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+function TunerLib.LoadStreamedTextureDict(texturesDict)
     local step = 1000
     local timeout = 5 * 1000
     local currentTime = 0
 
     RequestStreamedTextureDict(texturesDict, 0)
     while not HasStreamedTextureDictLoaded(texturesDict) do
-        Citizen.Wait(step)
+        Wait(step)
         currentTime = currentTime + step
-        if (currentTime >= timeout) then return false end
+        if currentTime >= timeout then return false end
     end
     return true
 end
 
-function LoadScaleform(scaleform)
+--[[
+    -- Type: Function
+    -- Name: LoadScaleform
+    -- Use: Requests a scaleform movie with timeout safety
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+function TunerLib.LoadScaleform(scaleform)
     local step = 1000
     local timeout = 5 * 1000
     local currentTime = 0
     local handle = RequestScaleformMovie(scaleform)
 
-    while (not HasScaleformMovieLoaded(handle)) do
-        Citizen.Wait(step)
+    while not HasScaleformMovieLoaded(handle) do
+        Wait(step)
         currentTime = currentTime + step
-        if (currentTime >= timeout) then return -1 end
+        if currentTime >= timeout then return -1 end
     end
 
     return handle
 end
 
-function GetPedheadshot(ped)
+--[[
+    -- Type: Function
+    -- Name: GetPedheadshot
+    -- Use: Registers ped headshot and waits until ready
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+function TunerLib.GetPedheadshot(ped)
     local step = 1000
     local timeout = 5 * 1000
     local currentTime = 0
     local pedheadshot = RegisterPedheadshot(ped)
 
     while not IsPedheadshotReady(pedheadshot) do
-        Citizen.Wait(step)
+        Wait(step)
         currentTime = currentTime + step
-        if (currentTime >= timeout) then return -1 end
+        if currentTime >= timeout then return -1 end
     end
 
     return pedheadshot
 end
 
-function GetPedheadshotTexture(ped)
+--[[
+    -- Type: Function
+    -- Name: GetPedheadshotTexture
+    -- Use: Retrieves texture dictionary name for a ped headshot
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+function TunerLib.GetPedheadshotTexture(ped)
     local textureDict = nil
-    local pedheadshot = GetPedheadshot(ped)
+    local pedheadshot = TunerLib.GetPedheadshot(ped)
 
-    if (pedheadshot ~= -1) then
+    if pedheadshot ~= -1 then
         textureDict = GetPedheadshotTxdString(pedheadshot)
-        local IsTextureDictLoaded = LoadStreamedTextureDict(textureDict)
-        if (not IsTextureDictLoaded) then
-            Citizen.Trace("ERROR: BikerClubhouseDrawMembers - Textures dictionnary \"" .. tostring(textureDict) .. "\" cannot be loaded.")
+        local loaded = TunerLib.LoadStreamedTextureDict(textureDict)
+        if not loaded then
+            print(string.format('ERROR: Texture dictionary "%s" failed to load.', tostring(textureDict)))
         end
     else
-        Citizen.Trace("ERROR: BikerClubhouseDrawMembers - PedHeadShot not ready.")
+        print('ERROR: Ped headshot not ready.')
     end
 
     return textureDict
 end
-
--- Check if a variable is a table
-function IsTable(T)
-    return type(T) == 'table'
-end
--- Return the number of elements of the table
-function Tablelength(T)
-    local count = 0
-    for _ in pairs(T) do count = count + 1 end
-    return count
-end
+exports('GetPedheadshotTexture', TunerLib.GetPedheadshotTexture)
 
