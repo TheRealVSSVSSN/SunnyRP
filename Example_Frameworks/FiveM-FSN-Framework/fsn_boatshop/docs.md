@@ -16,6 +16,8 @@ The **fsn_boatshop** resource manages boat sales and rentals at the Los Santos M
   - [ESX Callbacks](#esx-callbacks)
   - [Exports Used](#exports-used)
   - [Commands](#commands)
+  - [NUI Channels](#nui-channels)
+  - [Database Calls](#database-calls)
 - [Configuration & Integration Points](#configuration--integration-points)
 - [Gaps & Inferences](#gaps--inferences)
 
@@ -95,6 +97,12 @@ None.
 | `/color2 <0-159>` | Boat shop employee | Set secondary colour for nearest slot. |
 | `/testdrive [end]` | Boat shop employee | Start or end a test-drive sequence. |
 
+### NUI Channels
+None.
+
+### Database Calls
+None.
+
 ## Configuration & Integration Points
 - Depends on **fsn_main**, **fsn_jobs**, **fsn_bank**, **fsn_cargarage** and **mythic_notify** through the manifest.
 - MySQL library is loaded but unused; persistence is deferred to external garage systems.
@@ -104,6 +112,7 @@ None.
 ## Gaps & Inferences
 - **Test Drive Flow**: `fsn_boatshop:testdrive:start` and `:end` lack handlers in this resource; presumed to spawn and clean up a temporary boat elsewhere. *(Inferred: Low)*
 - **External Economy & Garage**: `fsn_cargarage:buyVehicle`, `fsn_cargarage:makeMine`, `fsn_bank:change:walletMinus` and `fsn_bank:change:walletAdd` are assumed to manage ownership and money transfer. *(Inferred: High)*
+- **Color Update Bug**: `fsn_boatshop:floor:color:Two` on the server writes the primary colour index instead of the secondary one, so secondary colour changes may not apply. *(Inferred: Low)*
 - **Ownership Check**: `DoesPlayerHaveVehicle` in `cl_menu.lua` contains a TODO for verifying if the player already owns the selected boat.
 
 DOCS COMPLETE
