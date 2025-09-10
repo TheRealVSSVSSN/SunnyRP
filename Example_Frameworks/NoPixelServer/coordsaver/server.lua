@@ -1,37 +1,40 @@
+local resourceName = GetCurrentResourceName()
 
-AddEventHandler('chatMessage', function(source, name, msg)
-    sm = stringsplit(msg, " ");
-    local sex = ""
-	if sm[1] == "/pos" then
-		CancelEvent()
-        TriggerClientEvent("SaveCommand", source)
-    elseif sm[1] == "/menu" then
-        TriggerClientEvent("np-admin:openMenu", source)
-    elseif sm[1] == "/me" then
-        for i = 2,#sm do
-            sex = sex .. ' ' .. sm[i]
-        end
-        TriggerClientEvent("np-commands:meCommand", -1, tonumber(source), sex)
-	end
-end)
-
-function stringsplit(inputstr, sep)
-    if sep == nil then
-        sep = "%s"
-    end
-    local t={} ; i=1
-    for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
-        t[i] = str
-        i = i + 1
-    end
-    return t
+--[[
+    -- Type: Function
+    -- Name: sanitizeName
+    -- Use: Replaces non-alphanumeric characters in a string with underscores
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function sanitizeName(name)
+    return name:gsub('[^%w]', '_')
 end
 
-RegisterServerEvent("SaveCoords")
-AddEventHandler("SaveCoords", function(x , y , z )
- file = io.open(GetPlayerName(source) .. "-Coords.txt", "a")
-    if file then
-        file:write("{" .. x .. "," .. y .. "," .. z .. "}, \n")
-    end
-    file:close()
+--[[
+    -- Type: Command
+    -- Name: /pos
+    -- Use: Requests the client to send its current coordinates
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+RegisterCommand('pos', function(source)
+    TriggerClientEvent('coordsaver:savePosition', source)
+end, false)
+
+--[[
+    -- Type: Event
+    -- Name: coordsaver:save
+    -- Use: Writes player coordinates to a per-player file within the resource
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent('coordsaver:save', function(x, y, z)
+    local playerName = sanitizeName(GetPlayerName(source) or 'unknown')
+    local fileName = playerName .. '-Coords.txt'
+    local existing = LoadResourceFile(resourceName, fileName) or ''
+    local line = string.format('{%.2f, %.2f, %.2f},\n', x, y, z)
+    local data = existing .. line
+    SaveResourceFile(resourceName, fileName, data, #data)
 end)
+
