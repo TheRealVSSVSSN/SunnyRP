@@ -1,7 +1,7 @@
 'use strict';
 
-var DEFAULT_SIZE = 100;
-var MIN_SECTORS  = 3;
+const DEFAULT_SIZE = 100;
+const MIN_SECTORS  = 3;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function RadialMenu(params) {
@@ -578,7 +578,7 @@ RadialMenu.setClassAndWaitForTransition = function (node, newClass) {
 RadialMenu.prototype.destroy = function() {
     document.removeEventListener('wheel', this.wheelBind);
     document.removeEventListener('keydown', this.keyDownBind);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 RadialMenu.nextTick = function (fn) {

@@ -8,84 +8,81 @@ local keybindControls = {
 
 local MAX_MENU_ITEMS = 7
 
+--[[
+    -- Type: Function
+    -- Name: buildSubMenus
+    -- Use: Generates nested radial menu pages when submenu count exceeds MAX_MENU_ITEMS
+    -- Created: 2024-06-14
+    -- By: VSSVSSN
+--]]
+local function buildSubMenus(menuConfig)
+    local elements, target = {}, nil
+    target = elements
+
+    for i, subId in ipairs(menuConfig.subMenus) do
+        local subMenu = newSubMenus[subId]
+        subMenu.id = subId
+        subMenu.enableMenu = nil
+        target[#target + 1] = subMenu
+
+        if i % MAX_MENU_ITEMS == 0 and i < #menuConfig.subMenus then
+            local nextContainer = {}
+            target[MAX_MENU_ITEMS + 1] = {
+                id = "_more",
+                title = "More",
+                icon = "#more",
+                items = nextContainer
+            }
+            target = nextContainer
+        end
+    end
+
+    return elements
+end
+
 -- Main thread
-Citizen.CreateThread(function()
+CreateThread(function()
     local keyBind = "F1"
     while true do
-        Citizen.Wait(0)
-        if IsControlPressed(1, keybindControls[keyBind]) and GetLastInputMethod(2) and showMenu then
-            showMenu = false
-            SetCustomNuiFocus(false, false)
-        end
-        if IsControlPressed(1, keybindControls[keyBind]) and GetLastInputMethod(2) then
-            showMenu = true
-            local enabledMenus = {}
-            for _, menuConfig in ipairs(rootMenuConfig) do
-                if menuConfig:enableMenu() then
-                    local dataElements = {}
-                    local hasSubMenus = false
-                    if menuConfig.subMenus ~= nil and #menuConfig.subMenus > 0 then
-                        hasSubMenus = true
-                        local previousMenu = dataElements
-                        local currentElement = {}
-                        for i = 1, #menuConfig.subMenus do
-                            -- if newSubMenus[menuConfig.subMenus[i]] ~= nil and newSubMenus[menuConfig.subMenus[i]].enableMenu ~= nil and not newSubMenus[menuConfig.subMenus[i]]:enableMenu() then
-                            --     goto continue
-                            -- end
-                            currentElement[#currentElement+1] = newSubMenus[menuConfig.subMenus[i]]
-                            currentElement[#currentElement].id = menuConfig.subMenus[i]
-                            currentElement[#currentElement].enableMenu = nil
+        Wait(0)
+        if IsControlJustPressed(0, keybindControls[keyBind]) and GetLastInputMethod(2) then
+            showMenu = not showMenu
 
-                            if i % MAX_MENU_ITEMS == 0 and i < (#menuConfig.subMenus - 1) then
-                                previousMenu[MAX_MENU_ITEMS + 1] = {
-                                    id = "_more",
-                                    title = "More",
-                                    icon = "#more",
-                                    items = currentElement
-                                }
-                                previousMenu = currentElement
-                                currentElement = {}
-                            end
-                            --::continue::
-                        end
-                        if #currentElement > 0 then
-                            previousMenu[MAX_MENU_ITEMS + 1] = {
-                                id = "_more",
-                                title = "More",
-                                icon = "#more",
-                                items = currentElement
-                            }
-                        end
-                        dataElements = dataElements[MAX_MENU_ITEMS + 1].items
+            if showMenu then
+                local enabledMenus = {}
+                for _, menuConfig in ipairs(rootMenuConfig) do
+                    if menuConfig:enableMenu() then
+                        local hasSubMenus = menuConfig.subMenus ~= nil and #menuConfig.subMenus > 0
+                        local dataElements = hasSubMenus and buildSubMenus(menuConfig) or nil
 
-                    end
-                    enabledMenus[#enabledMenus+1] = {
-                        id = menuConfig.id,
-                        title = menuConfig.displayName,
-                        functionName = menuConfig.functionName,
-                        icon = menuConfig.icon,
-                    }
-                    if hasSubMenus then
-                        enabledMenus[#enabledMenus].items = dataElements
+                        enabledMenus[#enabledMenus + 1] = {
+                            id = menuConfig.id,
+                            title = menuConfig.displayName,
+                            functionName = menuConfig.functionName,
+                            icon = menuConfig.icon,
+                            items = dataElements
+                        }
                     end
                 end
+
+                SendNUIMessage({
+                    state = "show",
+                    resourceName = GetCurrentResourceName(),
+                    data = enabledMenus,
+                    menuKeyBind = keyBind
+                })
+
+                SetCursorLocation(0.5, 0.5)
+                SetCustomNuiFocus(true, true)
+                PlaySoundFrontend(-1, "NAV", "HUD_AMMO_SHOP_SOUNDSET", 1)
+            else
+                SetCustomNuiFocus(false, false)
+                SendNUIMessage({ state = 'destroy' })
             end
-            SendNUIMessage({
-                state = "show",
-                resourceName = GetCurrentResourceName(),
-                data = enabledMenus,
-                menuKeyBind = keyBind
-            })
-            SetCursorLocation(0.5, 0.5)
-            SetCustomNuiFocus(true, true)
+        end
 
-            -- Play sound
-            PlaySoundFrontend(-1, "NAV", "HUD_AMMO_SHOP_SOUNDSET", 1)
-
-
-            while showMenu == true do Citizen.Wait(100) end
-            Citizen.Wait(100)
-            while IsControlPressed(1, keybindControls[keyBind]) and GetLastInputMethod(2) do Citizen.Wait(100) end
+        if showMenu then
+            DisableControlAction(0, keybindControls[keyBind], true)
         end
     end
 end)
@@ -133,13 +130,19 @@ AddEventHandler("menu:menuexit", function()
         state = 'destroy'
     })
 end)
-
-
+--[[
+    -- Type: Function
+    -- Name: SetCustomNuiFocus
+    -- Use: Handles focus for NUI and keeps input when necessary
+    -- Created: 2024-06-14
+    -- By: VSSVSSN
+--]]
+local hasNuiFocus = false
 function SetCustomNuiFocus(hasKeyboard, hasMouse)
-  HasNuiFocus = hasKeyboard or hasMouse
+    hasNuiFocus = hasKeyboard or hasMouse
 
-  SetNuiFocus(hasKeyboard, hasMouse)
-  SetNuiFocusKeepInput(HasNuiFocus)
+    SetNuiFocus(hasKeyboard, hasMouse)
+    SetNuiFocusKeepInput(hasNuiFocus)
 
-  TriggerEvent("np:voice:focus:set", HasNuiFocus, hasKeyboard, hasMouse)
+    TriggerEvent("np:voice:focus:set", hasNuiFocus, hasKeyboard, hasMouse)
 end
