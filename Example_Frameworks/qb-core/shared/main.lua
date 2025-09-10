@@ -14,13 +14,19 @@ for i = 65, 90 do StringCharset[#StringCharset + 1] = string.char(i) end
 for i = 97, 122 do StringCharset[#StringCharset + 1] = string.char(i) end
 
 function QBShared.RandomStr(length)
-    if length <= 0 then return '' end
-    return QBShared.RandomStr(length - 1) .. StringCharset[math.random(1, #StringCharset)]
+    local result = ''
+    for i = 1, length do
+        result = result .. StringCharset[math.random(1, #StringCharset)]
+    end
+    return result
 end
 
 function QBShared.RandomInt(length)
-    if length <= 0 then return '' end
-    return QBShared.RandomInt(length - 1) .. NumberCharset[math.random(1, #NumberCharset)]
+    local result = ''
+    for i = 1, length do
+        result = result .. NumberCharset[math.random(1, #NumberCharset)]
+    end
+    return result
 end
 
 function QBShared.SplitStr(str, delimiter)
@@ -53,18 +59,18 @@ function QBShared.Round(value, numDecimalPlaces)
 end
 
 function QBShared.ChangeVehicleExtra(vehicle, extra, enable)
-    if DoesExtraExist(vehicle, extra) then
-        if enable then
-            SetVehicleExtra(vehicle, extra, false)
-            if not IsVehicleExtraTurnedOn(vehicle, extra) then
-                QBShared.ChangeVehicleExtra(vehicle, extra, enable)
-            end
-        else
-            SetVehicleExtra(vehicle, extra, true)
-            if IsVehicleExtraTurnedOn(vehicle, extra) then
-                QBShared.ChangeVehicleExtra(vehicle, extra, enable)
-            end
+    if not DoesExtraExist(vehicle, extra) then return end
+
+    local expected = enable and true or false
+    local attempts = 0
+    while attempts < 5 do
+        attempts = attempts + 1
+        SetVehicleExtra(vehicle, extra, not enable)
+        local state = IsVehicleExtraTurnedOn(vehicle, extra)
+        if state == expected then
+            break
         end
+        Wait(0)
     end
 end
 
