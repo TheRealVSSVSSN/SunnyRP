@@ -9,7 +9,7 @@ end
 local blackjackGameInProgress = {}
 local blackjackGameData = {}
 
-function tryTakeChips(source, amount)
+local function tryTakeChips(source, amount)
     local src = source
     local user = exports["np-base"]:getModule("Player"):GetUser(src)
 
@@ -28,7 +28,7 @@ function tryTakeChips(source, amount)
     return true
 end
 
-function giveChips(source,amount)
+local function giveChips(source,amount)
     local src = source
     local user = exports["np-base"]:getModule("Player"):GetUser(src)
     user:addMoney(amount)
@@ -130,16 +130,16 @@ AddEventHandler("Blackjack:standBlackjack",function(gameId,nextCardCount)
     blackjackGameData[gameId][source][2][nextCardCount] = false
 end)
 
-for i=0,31,1 do
+for i=0,31 do
     CreateThread(function()
-        math.randomseed(os.clock()*100000000000)
+        local tableId = i
+        math.randomseed(os.time() + tableId)
         while true do  --blackjack game management thread
             math.random() 
             math.random()
             math.random()
             local game_ready = false
             local players_ready = {}
-            local tableId = i
             local chairIdInitial = i*4 --0-3,4-7,8-11,12-15
             local chairIdFinal = (i*4)+3
             for chairID=chairIdInitial,chairIdFinal do

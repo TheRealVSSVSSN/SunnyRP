@@ -36,12 +36,19 @@ activeTasks = {
 --local handcuffed = exports["isPed"]:isPed("handcuffed")
 --local NearNPC = exports["isPed"]:GetRandomNPC()
 
-function GlobalObject(object)
+--[[
+    -- Type: Function
+    -- Name: GlobalObject
+    -- Use: Marks an object as networked for all clients
+    -- Created: 2024-06-12
+    -- By: VSSVSSN
+]]
+local function GlobalObject(object)
   --  NetworkRegisterEntityAsNetworked(object)
- --   local netid = ObjToNet(object)
+  --  local netid = ObjToNet(object)
   --  SetNetworkIdExistsOnAllMachines(netid, true)
   --  NetworkSetNetworkIdDynamic(netid, true)
-  --  SetNetworkIdCanMigrate(netid, false) 
+  --  SetNetworkIdCanMigrate(netid, false)
   --  for i = 1, 32 do
   --    SetNetworkIdSyncToPlayer(netid, i, true)
   --  end
@@ -51,25 +58,28 @@ local pedsused = {}
 
 
 
-function GetClosestNPC()
-    local playerped = PlayerPedId()
-    local playerCoords = GetEntityCoords(playerped)
-    local handle, ped = FindFirstPed()
-    local success
-    local rped = nil
-    local distanceFrom
-    repeat
-        local pos = GetEntityCoords(ped)
-        local distance = #(playerCoords - pos)
-        if canPedBeUsed(ped) and distance < 5.0 and (distanceFrom == nil or distance < distanceFrom) then
+--[[
+    -- Type: Function
+    -- Name: GetClosestNPC
+    -- Use: Returns the nearest usable NPC within 5 units using modern natives
+    -- Created: 2024-06-12
+    -- By: VSSVSSN
+]]
+local function GetClosestNPC()
+    local playerPed = PlayerPedId()
+    local playerCoords = GetEntityCoords(playerPed)
+    local closestPed, distanceFrom
+
+    for _, ped in ipairs(GetGamePool('CPed')) do
+        local distance = #(playerCoords - GetEntityCoords(ped))
+        if canPedBeUsed(ped) and distance < 5.0 and (not distanceFrom or distance < distanceFrom) then
             distanceFrom = distance
-            rped = ped
-            pedsused["conf"..rped] = true
+            closestPed = ped
+            pedsused["conf" .. ped] = true
         end
-        success, ped = FindNextPed(handle)
-    until not success
-    EndFindPed(handle)
-    return rped
+    end
+
+    return closestPed
 end
 
 function canPedBeUsed(ped)
@@ -139,180 +149,91 @@ function canPedBeUsed(ped)
     return true
 end
 
-function IsPedNearCoords(x,y,z)
-    local handle, ped = FindFirstPed()
-    local pedfound = false
-    local success
-    repeat
-        local pos = GetEntityCoords(ped)
-        local distance = #(vector3(x,y,z) - pos)
-
-        if distance < 5.0 then
-          pedfound = true
+--[[
+    -- Type: Function
+    -- Name: IsPedNearCoords
+    -- Use: Checks if any usable ped is within 5 units of the given coords
+    -- Created: 2024-06-12
+    -- By: VSSVSSN
+]]
+local function IsPedNearCoords(x, y, z)
+    for _, ped in ipairs(GetGamePool('CPed')) do
+        if canPedBeUsed(ped) then
+            local distance = #(vector3(x, y, z) - GetEntityCoords(ped))
+            if distance < 5.0 then
+                return true
+            end
         end
-        success, ped = FindNextPed(handle)
-    until not success
-    EndFindPed(handle)
-    return pedfound
+    end
+    return false
 end
 
 
-function GroupRank(groupid)
-  local rank = 0
-  for i=1, #passes do
-    
-    if passes[i]["pass_type"] == groupid then
-
-      rank = passes[i]["rank"]
-    end 
-  end
-  return rank
+--[[
+    -- Type: Function
+    -- Name: GroupRank
+    -- Use: Retrieves the rank for the given pass type from the passes table
+    -- Created: 2024-06-12
+    -- By: VSSVSSN
+]]
+local function GroupRank(groupid)
+    for i = 1, #passes do
+        if passes[i]["pass_type"] == groupid then
+            return passes[i]["rank"]
+        end
+    end
+    return 0
 end
 
 
-function isPed(checkType)
-	local checkType = string.lower(checkType)
-	local pass = false
+--[[
+    -- Type: Function
+    -- Name: isPed
+    -- Use: Returns character state information based on the provided key
+    -- Created: 2024-06-12
+    -- By: VSSVSSN
+]]
+local pedChecks = {
+    femaleclothes = function() return femaleclothes end,
+    maleclothes = function() return maleclothes end,
+    countpolice = function() return curPolice end,
+    countems = function() return curEms end,
+    counttaxi = function() return curTaxi end,
+    counttow = function() return curTow end,
+    countdoctors = function() return curDoctors end,
+    intrunk = function() return intrunk end,
+    robbing = function() return robbing end,
+    passes = function() return passes end,
+    myhousekeys = function() return myhousekeys end,
+    dead = function() return dead end,
+    gang = function() return gang end,
+    cid = function() return cid end,
+    incall = function() return incall end,
+    handcuffed = function() return handcuffedwalking or handcuffed end,
+    phoneopen = function() return phoneopen end,
+    twitterhandle = function() return "@" .. Firstname .. "_" .. Lastname end,
+    fullname = function() return Firstname .. " " .. Lastname end,
+    myjob = function() return job end,
+    mybank = function() return bank end,
+    mycash = function() return cash end,
+    weaponslicence = function() return weaponsLicence == 1 end,
+    licensestring = function() return licenses end,
+    pagerstatus = function() return PagerStatus end,
+    hud = function() return HudStage end,
+    secondaryjob = function() return myCurrentSecondaryJob end,
+    tasks = function() return activeTasks end,
+    daytime = function() return daytime end,
+    disabled = function() return handcuffed or dead end,
+    corner = function() return gangType end,
+    drivinginstructor = function() return drivingInstructor end
+}
 
-    if checkType == "femaleclothes" then
-        pass = femaleclothes
+local function isPed(checkType)
+    local handler = pedChecks[string.lower(checkType)]
+    if handler then
+        return handler()
     end
-    if checkType == "maleclothes" then
-        pass = maleclothes
-    end
-
-    if checkType == "countpolice" then
-        pass = curPolice
-    end
-
-    if checkType == "countems" then
-        pass = curEms
-    end
-
-    if checkType == "counttaxi" then
-        pass = curTaxi
-    end
-
-    if checkType == "counttow" then
-        pass = curTow
-    end
-
-    if checkType == "countdoctors" then
-        pass = curDoctors
-    end
-
-    if checkType == "intrunk" then
-        pass = intrunk
-    end
-
-    if checkType == "robbing" then
-        pass = robbing
-    end
-
-    if checkType == "passes" then
-        pass = passes
-    end
-
-    if checkType == "myhousekeys" then
-        pass = myhousekeys
-    end
-
-    if checkType == "dead" then
-        pass = dead
-    end
-
-    if checkType == "gang" then
-        pass = gang
-    end
-
-    if checkType == "cid" then
-        pass = cid
-    end
-
-    if checkType == "incall" then
-        pass = incall
-    end
-
-    if checkType == "handcuffed" then
-        if handcuffedwalking or handcuffed then
-            pass = true
-        else
-            pass = false
-        end
-    end
-
-    if checkType == "phoneopen" then
-        pass = phoneopen
-    end
-
-    if checkType == "twitterhandle" then
-        pass = "@" .. Firstname .. "_" .. Lastname
-    end
-
-    if checkType == "fullname" then
-      pass = Firstname .. " " .. Lastname
-    end
-
-    if checkType == "myjob" then
-	    pass = job
-    end
-
-    if checkType == "mybank" then
-	    pass = bank
-    end
-
-    if checkType == "mycash" then
-	    pass = cash
-    end
-
-    if checkType == "weaponslicence" then
-      if weaponsLicence == 1 then
-        pass = true
-      else
-        pass = false
-      end
-    end
-  
-    if checkType == "licensestring" then
-        pass = licenses
-    end
-
-    if checkType == "pagerstatus" then
-        pass = PagerStatus
-    end
-
-    if checkType == "hud" then
-        pass = HudStage
-    end
-
-    if checkType == "secondaryjob" then
-        pass = myCurrentSecondaryJob
-    end
-
-    if checkType == "tasks" then
-        pass = activeTasks
-    end
-
-    if checkType == "daytime" then
-        pass = daytime
-    end
-
-    if checkType == "disabled" then
-        if handcuffed or dead then
-        	pass = true
-        end
-    end
-
-    if checkType == "corner" then
-        pass = gangType
-    end
-
-    if checkType == "drivinginstructor" then
-      pass = drivingInstructor
-    end
-
-    return pass
-    
+    return false
 end
 
 
@@ -378,24 +299,34 @@ local BusinessNames = {
   ['drift_school'] = "Overboost Drift",
 }
 
-function retreiveBusinesses()
+--[[
+    -- Type: Function
+    -- Name: retreiveBusinesses
+    -- Use: Builds a formatted string listing partnered businesses
+    -- Created: 2024-06-12
+    -- By: VSSVSSN
+]]
+local function retreiveBusinesses()
   local businesses = "Partnered to"
   for i = 1, #passes do
     if passes[i]["rank"] > 0 then
-      businesses =  businesses .. " | " .. BusinessNames[passes[i]["pass_type"]] .. "("..passes[i]["rank"]..")"
+      businesses = businesses .. " | " .. BusinessNames[passes[i]["pass_type"]] .. "(" .. passes[i]["rank"] .. ")"
     end
   end
   return businesses
 end
-function GetPlayers()
+--[[
+    -- Type: Function
+    -- Name: GetPlayers
+    -- Use: Retrieves a table of all active player IDs
+    -- Created: 2024-06-12
+    -- By: VSSVSSN
+]]
+local function GetPlayers()
     local players = {}
-
-    for i = 0, 255 do
-        if NetworkIsPlayerActive(i) then
-            players[#players+1]= i
-        end
+    for _, player in ipairs(GetActivePlayers()) do
+        players[#players + 1] = player
     end
-
     return players
 end
 function GetClosestPlayer()
@@ -425,6 +356,13 @@ function GetClosestPlayer()
   end
 
 end
+
+exports('GetClosestNPC', GetClosestNPC)
+exports('IsPedNearCoords', IsPedNearCoords)
+exports('isPed', isPed)
+exports('GroupRank', GroupRank)
+exports('GlobalObject', GlobalObject)
+exports('retreiveBusinesses', retreiveBusinesses)
 
 RegisterNetEvent("job:counts")
 AddEventHandler("job:counts", function(activePolice,activeEms,activeTaxi,activeTow, activeDoctors)
