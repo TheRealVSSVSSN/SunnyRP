@@ -11,3 +11,39 @@
 - Replaced legacy `__resource.lua` with modern `fxmanifest.lua` using `cerulean` `fx_version` and enabled Lua 5.4.
 - Refactored `vehicle_names.lua` into a table-driven registry using `CreateThread` for clarity and efficiency.
 - Removed duplicate entry calls by consolidating labels in a single structure.
+
+## WiseGuy-UC
+- Replaced legacy `__resource.lua` with a modern `fxmanifest.lua` using the `cerulean` fx_version and Lua 5.4.
+- Refactored vehicle name registration into a table-driven script and swapped `Citizen.CreateThread` for `CreateThread`.
+
+## WiseGuy-Audio
+- Migrated `__resource.lua` to modern `fxmanifest.lua` with Lua 5.4 support.
+- Added placeholder `vehicle_names.lua` to resolve missing client script errors.
+- Grouped audio data entries by vehicle for clearer maintenance.
+
+## PolyZone
+- Removed legacy `__resource.lua` and stray debug file, relying solely on a modern `fxmanifest.lua` with `lua54` enabled.
+- Eliminated unused server script references to prevent missing file errors.
+- Refactored threading to use `CreateThread` and `Wait` helpers throughout the library and creation utilities.
+- Added namespace table utilities and cached native calls for improved performance and reduced global pollution.
+
+## PolicePack
+- Replaced legacy `__resource.lua` with modern `fxmanifest.lua` using `cerulean` fx_version and `gta5` game target.
+- Removed invalid `vehiclelayouts.meta` references to prevent load errors.
+- Cleaned up manifest to only include `vehicles`, `carvariations`, `carcols`, and `handling` meta files.
+- Added missing newlines to meta files for improved compatibility.
+
+## LockDoors
+- Replaced legacy `__resource.lua` with modern `fxmanifest.lua` and enabled Lua 5.4.
+- Updated vehicle detection to use `StartShapeTestRay` and vector math for reliability.
+- Refactored locking logic into helper functions and localized variables to remove globals.
+- Consolidated light flashing into a single function and switched to `Wait` helper.
+
+## InteractSound
+- Migrated to `fxmanifest.lua` with `cerulean` fx_version and Lua 5.4 support.
+- Replaced invalid player checks with `NetworkIsPlayerActive` and added volume clamping.
+- Removed jQuery dependency and refined NUI audio logic.
+- Added server helpers for coordinated sound playback including distance and flash effects.
+- Removed unused teleporter script and cleaned manifest ordering.
+- Renamed internal variables for clarity and consolidated dealer helper functions.
+- Improved server RNG seeding and scoped chip helpers locally for safety.
