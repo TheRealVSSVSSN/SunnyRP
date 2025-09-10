@@ -1,77 +1,63 @@
-$(document).ready(function(){
-  // Mouse Controls
-  var documentWidth = document.documentElement.clientWidth;
-  var documentHeight = document.documentElement.clientHeight;
-  var cursor = $('#cursor');
-  var cursorX = documentWidth / 2;
-  var cursorY = documentHeight / 2;
+document.addEventListener('DOMContentLoaded', () => {
+  const cursor = document.getElementById('cursor');
+  const notepad = document.querySelector('.notepad-container');
+  const writeForm = document.getElementById('Ticket-form-Jail');
+  const readForm = document.getElementById('Ticket-form-JailRead');
+  const noteInput = document.getElementById('notepadInfof');
+  const noteRead = document.getElementById('notepadInfofRead');
+  let cursorX = document.documentElement.clientWidth / 2;
+  let cursorY = document.documentElement.clientHeight / 2;
 
-  function UpdateCursorPos() {
-      $('#cursor').css('left', cursorX+2);
-      $('#cursor').css('top', cursorY+2);
+  const entityMap = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;', '/': '&#x2F;', '`': '&#x60;', '=': '&#x3D;' };
+  const escapeHtml = str => String(str).replace(/[&<>"'`=\/]/g, s => entityMap[s]);
+
+  function updateCursor() {
+    cursor.style.left = (cursorX + 2) + 'px';
+    cursor.style.top = (cursorY + 2) + 'px';
   }
 
-
-  var entityMap = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#39;',
-    '/': '&#x2F;',
-    '`': '&#x60;',
-    '=': '&#x3D;'
-  };
-
-  function escapeHtml (string) {
-    return String(string).replace(/[&<>"'`=\/]/g, function (s) {
-      return entityMap[s];
+  document.querySelector('.btnDrop').addEventListener('click', e => {
+    e.preventDefault();
+    fetch('https://np-notepad/drop', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ noteText: escapeHtml(noteInput.value) })
     });
-  }
-
-
-  $(".btnDrop").click(function(){
-      $.post('http://np-notepad/drop', JSON.stringify({ noteText: escapeHtml($("#notepadInfof").val()) }));
   });
 
-  // Listen for NUI Events
-  window.addEventListener('message', function(event){
-    var item = event.data;
+  window.addEventListener('message', event => {
+    const item = event.data;
 
-    // Open sub-windows / partials
-
-    if(item.openSection == "openNotepadRead") {
-      $(".notepad-container").fadeIn(100); 
-      $("#Ticket-form-Jail").css("display", "none");
-      $("#Ticket-form-JailRead").fadeIn(100); 
-      $("#cursor").css("display", "Block");
-      $("#notepadInfofRead").val(item.TextRead);
+    if (item.openSection === 'openNotepadRead') {
+      notepad.style.display = 'block';
+      writeForm.style.display = 'none';
+      readForm.style.display = 'block';
+      cursor.style.display = 'block';
+      noteRead.value = item.TextRead;
     }
 
-    if(item.openSection == "openNotepad") {
-      $(".notepad-container").fadeIn(100); 
-      $("#Ticket-form-JailRead").css("display", "none");
-      $("#Ticket-form-Jail").fadeIn(100); 
-      $("#cursor").css("display", "Block");
+    if (item.openSection === 'openNotepad') {
+      notepad.style.display = 'block';
+      readForm.style.display = 'none';
+      writeForm.style.display = 'block';
+      cursor.style.display = 'block';
     }
 
-    if(item.openSection == "close") {
-      $(".notepad-container").fadeOut(100)
-      $("#cursor").css("display", "none");
+    if (item.openSection === 'close') {
+      notepad.style.display = 'none';
+      cursor.style.display = 'none';
     }
-
   });
 
-  $(document).mousemove(function(event) {
+  document.addEventListener('mousemove', event => {
     cursorX = event.pageX;
     cursorY = event.pageY;
-    UpdateCursorPos();
+    updateCursor();
   });
 
-  // On 'Esc' call close method
-  document.onkeyup = function (data) {
-    if ( data.which == 27 ) {
-      $.post('http://np-notepad/close', JSON.stringify({}));
+  document.addEventListener('keyup', e => {
+    if (e.key === 'Escape') {
+      fetch('https://np-notepad/close', { method: 'POST', body: '{}' });
     }
-  };
+  });
 });
