@@ -121,6 +121,7 @@ The `qb-core` resource provides the foundational framework for QBCore-based Five
 - Hunger/thirst saving, job/gang setters, permission checks (`HasPermission`, `IsGod`, `IsOptin`).
 - `HasItem` delegates to `qb-inventory` if present; `Notify` sends client notification events.
 - Proximity helpers `GetClosestPlayer`, `GetClosestVehicle`, and `GetClosestPed` search nearby players, vehicles, and peds.
+- `GetClosestPlayer` and `IsLicenseInUse` now rely on `QBCore.Functions.GetPlayers()` instead of the global `GetPlayers` for consistent player enumeration.
 - `PrepForSQL` validates strings against patterns to deter SQL injection.
 
 ### server/player.lua

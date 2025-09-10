@@ -177,7 +177,7 @@ end
 --- @return number closestDistance - The distance to the closest Player. Returns -1 if no Players are found.
 function QBCore.Functions.GetClosestPlayer(source, coords)
     local ped = GetPlayerPed(source)
-    local players = GetPlayers()
+    local players = QBCore.Functions.GetPlayers()
     local closestDistance, closestPlayer = -1, -1
     if coords then coords = type(coords) == 'table' and vector3(coords.x, coords.y, coords.z) or coords end
     if not coords then coords = GetEntityCoords(ped) end
@@ -689,7 +689,7 @@ end
 ---@param license any
 ---@return boolean
 function QBCore.Functions.IsLicenseInUse(license)
-    local players = GetPlayers()
+    local players = QBCore.Functions.GetPlayers()
     for _, player in pairs(players) do
         local playerLicense = QBCore.Functions.GetIdentifier(player, 'license')
         if playerLicense == license then return true end
