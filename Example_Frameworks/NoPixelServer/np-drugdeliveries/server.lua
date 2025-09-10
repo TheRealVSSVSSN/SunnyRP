@@ -1,7 +1,7 @@
-RegisterServerEvent('oxydelivery:server')
+RegisterNetEvent('oxydelivery:server')
 AddEventHandler('oxydelivery:server', function(money)
-    local src = source
     local user = exports["np-base"]:getModule("Player"):GetUser(source)
+    money = tonumber(money) or 0
 
 	if user:getCash() >= money then
         user:removeMoney(money)
@@ -12,10 +12,10 @@ AddEventHandler('oxydelivery:server', function(money)
 	end
 end)
 
-RegisterServerEvent('drugdelivery:server')
+RegisterNetEvent('drugdelivery:server')
 AddEventHandler('drugdelivery:server', function(money)
-    local src = source
     local user = exports["np-base"]:getModule("Player"):GetUser(source)
+    money = tonumber(money) or 0
 
 	if user:getCash() >= money then
         user:removeMoney(money)
@@ -27,7 +27,7 @@ AddEventHandler('drugdelivery:server', function(money)
 end)
 
 local counter = 0
-RegisterServerEvent('delivery:status')
+RegisterNetEvent('delivery:status')
 AddEventHandler('delivery:status', function(status)
     if status == -1 then
         counter = 0
@@ -42,6 +42,13 @@ end)
 local activechop = {}
 local newList = {}
 
+--[[
+    -- Type: Function
+    -- Name: makenewlist
+    -- Use: Builds a list of random vehicles for the chop shop
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 function makenewlist()
     for i = 1, 5 do
         table.insert(newList, {["id"] = math.random(1, 118), ["rarity"] = math.random(1, 15), ["resolved"] = false})
@@ -50,6 +57,13 @@ end
 
 local timer = 60
 
+--[[
+    -- Type: Function
+    -- Name: updatetimer
+    -- Use: Updates and broadcasts chop shop timer
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 function updatetimer()
     if timer > 0 then
         timer = timer - 1
@@ -62,12 +76,12 @@ function updatetimer()
     end
 end
 
-RegisterServerEvent('request:chopshop')
+RegisterNetEvent('request:chopshop')
 AddEventHandler('request:chopshop', function()
     TriggerClientEvent("chop:CurrentCarList", -1, newList, timer)
 end)
 
-RegisterServerEvent('chopshop:removevehicle')
+RegisterNetEvent('chopshop:removevehicle')
 AddEventHandler('chopshop:removevehicle', function(vehicleid, plate, value)
     newList[vehicleid]["resolved"] = true
     TriggerClientEvent("chop:CurrentCarListRemove", -1, vehicleid)
@@ -83,9 +97,9 @@ AddEventHandler('onResourceStart', function(resourceName)
     --print('The resource ' .. resourceName .. ' has been started.')
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
-        Citizen.Wait(60000)
+        Wait(60000)
         updatetimer()
     end
 end)
