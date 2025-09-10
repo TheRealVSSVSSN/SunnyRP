@@ -10,16 +10,22 @@ The **fsn_apartments** resource grants characters a personal apartment with inst
 - NUI menu communicates with the client via custom channels served from `gui/ui.html`.
 
 ## File Inventory
-| File | Role |
-|---|---|
-| `fxmanifest.lua` | Resource manifest listing scripts, UI files and exports. |
-| `client.lua` | Client logic for apartment entry, storage, outfits and NUI. |
-| `cl_instancing.lua` | Client helper for hiding other players while inside an instance. |
-| `server.lua` | Server-side persistence, chat commands and stash management. |
-| `sv_instancing.lua` | Server controller for instance creation and membership. |
-| `gui/ui.html` | NUI page hosting the action menu. |
-| `gui/ui.js` | Menu behaviour and NUI channel posts. |
-| `gui/ui.css` | Styling for the action menu. |
+| File | Type | Role |
+|---|---|---|
+| `fxmanifest.lua` | Shared | Resource manifest listing scripts, UI files, exports and MySQL dependency. |
+| `client.lua` | Client | Logic for apartment entry, storage, outfits and NUI. |
+| `cl_instancing.lua` | Client | Helper for hiding other players while inside an instance. |
+| `server.lua` | Server | Persistence, chat commands and stash management. |
+| `sv_instancing.lua` | Server | Controller for instance creation and membership. |
+| `gui/ui.html` | NUI | Page hosting the action menu. |
+| `gui/ui.js` | NUI | Menu behaviour and NUI channel posts. |
+| `gui/ui.css` | NUI | Styling for the action menu. |
+| `agents.md` | Docs | Documentation instructions for this resource. |
+| `docs.md` | Docs | Generated resource documentation (this file). |
+
+## Shared
+### fxmanifest.lua
+Defines the resource for FiveM, declaring required utility scripts, the MySQL library and the Lua files that run on each side. It lists NUI assets and exports `inInstance`, `isNearStorage` and `EnterMyApartment` for external use【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/fxmanifest.lua†L1-L45】.
 
 ## Client
 ### client.lua
@@ -67,6 +73,10 @@ Implements the action menu:
 
 ### gui/ui.css
 Styles the menu with centred positioning and white buttons that turn blue on hover【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/gui/ui.css†L3-L25】.
+
+## Documentation
+### agents.md
+Holds guidelines for generating this documentation; it does not influence runtime behavior.
 
 ## Cross-Indexes
 ### Events
