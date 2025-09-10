@@ -97,13 +97,11 @@ AddEventHandler("playerDropped",function(reason)
   vRP:onPlayerDropped(source)
 end)
 
-RegisterServerEvent("vRPcli:playerSpawned")
-AddEventHandler("vRPcli:playerSpawned", function()
+RegisterNetEvent("vRPcli:playerSpawned", function()
   vRP:onPlayerSpawned(source)
 end)
 
-RegisterServerEvent("vRPcli:playerDied")
-AddEventHandler("vRPcli:playerDied", function()
+RegisterNetEvent("vRPcli:playerDied", function()
   vRP:onPlayerDied(source)
 end)
 

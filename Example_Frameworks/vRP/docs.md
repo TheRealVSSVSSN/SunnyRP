@@ -56,8 +56,8 @@ Modernized WebSocket/WebRTC relay that tracks players with a `Map`, forwards voi
 
 ## vrp Framework
 ### Core Files
-#### fxmanifest.lua / __resource.lua
-Resource manifests defining script loading order and metadata for FiveM.
+#### fxmanifest.lua
+Modern resource manifest targeting the `cerulean` fx version with Lua 5.4 enabled. Defines script loading order and metadata for FiveM.
 
 #### vRP.lua
 Server-side core class that loads configuration, handles database drivers, dispatches events, and manages users.
@@ -73,7 +73,7 @@ Server bootstrap registering spawn/death events and delegating to vRP handlers.
 
 ### Client Scripts
 #### client/base.lua
-Initialises the client context, bridges to server via Tunnel/Proxy, and forwards spawn/death events to the server.
+Initialises the client context, bridges to server via Tunnel/Proxy, and forwards spawn/death events to the server. Utilises `CreateThread`, `Wait`, and `PlayerPedId()` for modern thread and entity handling.
 
 #### client/admin.lua
 Implements client admin tools such as noclip and spectating controls.
@@ -298,7 +298,7 @@ No `RegisterCommand` usage was found. User actions are triggered through menus a
 `vRP.lua` defines a pluggable database driver system with `prepare` and `query` helpers. Modules use `vRP:execute` and related functions to persist data through whichever driver is configured.
 
 ## Configuration & Integration Points
-- `fxmanifest.lua`/`__resource.lua` integrate the resource into FiveM.
+- `fxmanifest.lua` integrates the resource into FiveM using the modern manifest format.
 - `cfg/base.lua` selects database drivers and logging options.
 - `cfg/modules.lua` toggles which modules load, enabling custom server compositions.
 - `voip_server` scripts integrate with external Node.js process for positional voice.

@@ -25,11 +25,11 @@ AddEventHandler("playerSpawned",function()
 end)
 
 -- dead event task
-Citizen.CreateThread(function()
+CreateThread(function()
   local was_dead = false
 
   while true do
-    Citizen.Wait(0)
+    Wait(0)
 
     local player = PlayerId()
     if NetworkIsPlayerActive(player) then
@@ -65,11 +65,11 @@ function Base:__construct()
   self.ragdoll = false -- flag
 
   -- ragdoll thread
-  Citizen.CreateThread(function()
+  CreateThread(function()
     while true do
-      Citizen.Wait(10)
+      Wait(10)
       if self.ragdoll then
-        SetPedToRagdoll(GetPlayerPed(-1), 1000, 1000, 0, 0, 0, 0)
+        SetPedToRagdoll(PlayerPedId(), 1000, 1000, 0, 0, 0, 0)
       end
     end
   end)
@@ -86,8 +86,8 @@ end
 
 -- heading: (optional) entity heading
 function Base:teleport(x,y,z,heading)
-  local ped = GetPlayerPed(-1)
-  SetEntityCoords(ped, x+0.0001, y+0.0001, z+0.0001, 1,0,0,1)
+  local ped = PlayerPedId()
+  SetEntityCoordsNoOffset(ped, x+0.0001, y+0.0001, z+0.0001, false, false, false)
   if heading then SetEntityHeading(ped, heading) end
   vRP:triggerEvent("playerTeleport")
 end
@@ -95,10 +95,10 @@ end
 -- teleport vehicle when inside one (placed on ground)
 -- heading: (optional) entity heading
 function Base:vehicleTeleport(x,y,z,heading)
-  local ped = GetPlayerPed(-1)
+  local ped = PlayerPedId()
   local veh = GetVehiclePedIsIn(ped,false)
 
-  SetEntityCoords(veh, x+0.0001, y+0.0001, z+0.0001, 1,0,0,1)
+  SetEntityCoordsNoOffset(veh, x+0.0001, y+0.0001, z+0.0001, false, false, false)
   if heading then SetEntityHeading(veh, heading) end
   SetVehicleOnGroundProperly(veh)
   vRP:triggerEvent("playerTeleport")
@@ -106,8 +106,8 @@ end
 
 -- return x,y,z
 function Base:getPosition(entity)
-  if not entity then entity = GetPlayerPed(-1) end
-  local x,y,z = table.unpack(GetEntityCoords(entity,true))
+  if not entity then entity = PlayerPedId() end
+  local x,y,z = table.unpack(GetEntityCoords(entity))
   return x,y,z
 end
 
@@ -119,13 +119,13 @@ end
 
 -- return ped speed (based on velocity)
 function Base:getSpeed()
-  local vx,vy,vz = table.unpack(GetEntityVelocity(GetPlayerPed(-1)))
+  local vx,vy,vz = table.unpack(GetEntityVelocity(PlayerPedId()))
   return math.sqrt(vx*vx+vy*vy+vz*vz)
 end
 
 -- return dx,dy,dz
 function Base:getCamDirection(entity)
-  if not entity then entity = GetPlayerPed(-1) end
+  if not entity then entity = PlayerPedId() end
   local heading = GetGameplayCamRelativeHeading()+GetEntityHeading(entity)
   local pitch = GetGameplayCamRelativePitch()
 
@@ -157,7 +157,7 @@ function Base:getNearestPlayers(radius)
     if i ~= pid then
       local oped = GetPlayerPed(i)
 
-      local x,y,z = table.unpack(GetEntityCoords(oped,true))
+      local x,y,z = table.unpack(GetEntityCoords(oped))
       local distance = GetDistanceBetweenCoords(x,y,z,px,py,pz,true)
       if distance <= radius then
         r[GetPlayerServerId(i)] = distance
@@ -171,7 +171,7 @@ function Base:getNearestPlayers(radius)
 
     if player ~= pid and NetworkIsPlayerConnected(player) then
       local oped = GetPlayerPed(player)
-      local x,y,z = table.unpack(GetEntityCoords(oped,true))
+      local x,y,z = table.unpack(GetEntityCoords(oped))
       local distance = GetDistanceBetweenCoords(x,y,z,px,py,pz,true)
       if distance <= radius then
         r[GetPlayerServerId(player)] = distance
@@ -224,8 +224,8 @@ function Base:playScreenEffect(name, duration)
   else
     StartScreenEffect(name, 0, true)
 
-    Citizen.CreateThread(function() -- force stop the screen effect after duration+1 seconds
-      Citizen.Wait(math.floor((duration+1)*1000))
+    CreateThread(function() -- force stop the screen effect after duration+1 seconds
+      Wait(math.floor((duration+1)*1000))
       StopScreenEffect(name)
     end)
   end
@@ -249,7 +249,7 @@ function Base:playAnim(upper, seq, looping)
   if seq.task then -- is a task (cf https://github.com/ImagicTheCat/vRP/pull/118)
     self:stopAnim(true)
 
-    local ped = GetPlayerPed(-1)
+    local ped = PlayerPedId()
     if seq.task == "PROP_HUMAN_SEAT_CHAIR_MP_PLAYER" then -- special case, sit in a chair
       local x,y,z = self:getPosition()
       TaskStartScenarioAtPosition(ped, seq.task, x, y, z-1, GetEntityHeading(ped), 0, 0, false)
@@ -263,7 +263,7 @@ function Base:playAnim(upper, seq, looping)
     if upper then flags = flags+48 end
     if looping then flags = flags+1 end
 
-    Citizen.CreateThread(function()
+    CreateThread(function()
       -- prepare unique id to stop sequence when needed
       local id = self.anim_ids:gen()
       self.anims[id] = true
@@ -282,7 +282,7 @@ function Base:playAnim(upper, seq, looping)
             RequestAnimDict(dict)
             local i = 0
             while not HasAnimDictLoaded(dict) and i < 1000 do -- max time, 10 seconds
-              Citizen.Wait(10)
+              Wait(10)
               RequestAnimDict(dict)
               i = i+1
             end
@@ -294,12 +294,12 @@ function Base:playAnim(upper, seq, looping)
               if not first then inspeed = 2.0001 end
               if not last then outspeed = 2.0001 end
 
-              TaskPlayAnim(GetPlayerPed(-1),dict,name,inspeed,outspeed,-1,flags,0,0,0,0)
+              TaskPlayAnim(PlayerPedId(),dict,name,inspeed,outspeed,-1,flags,0,0,0,0)
             end
 
-            Citizen.Wait(0)
-            while GetEntityAnimCurrentTime(GetPlayerPed(-1),dict,name) <= 0.95 and IsEntityPlayingAnim(GetPlayerPed(-1),dict,name,3) and self.anims[id] do
-              Citizen.Wait(0)
+            Wait(0)
+            while GetEntityAnimCurrentTime(PlayerPedId(),dict,name) <= 0.95 and IsEntityPlayingAnim(PlayerPedId(),dict,name,3) and self.anims[id] do
+              Wait(0)
             end
           end
         end
@@ -317,9 +317,9 @@ end
 function Base:stopAnim(upper)
   self.anims = {} -- stop all sequences
   if upper then
-    ClearPedSecondaryTask(GetPlayerPed(-1))
+    ClearPedSecondaryTask(PlayerPedId())
   else
-    ClearPedTasks(GetPlayerPed(-1))
+    ClearPedTasks(PlayerPedId())
   end
 end
 
@@ -385,9 +385,9 @@ Base.tunnel.playSound = Base.playSound
 -- not working
 function tvRP.setMovement(dict)
   if dict then
-    SetPedMovementClipset(GetPlayerPed(-1),dict,true)
+    SetPedMovementClipset(PlayerPedId(),dict,true)
   else
-    ResetPedMovementClipset(GetPlayerPed(-1),true)
+    ResetPedMovementClipset(PlayerPedId(),true)
   end
 end
 --]]
