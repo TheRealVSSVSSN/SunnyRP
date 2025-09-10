@@ -6,3 +6,9 @@
 - Added radius constant to blackjack table locator and corrected prop name outputs.
 - Moved animation dictionary cleanup outside the dealer creation loop to prevent missing animation issues.
 - Converted global state to local variables and tightened betting validation on the server.
+
+## furniture
+- Replaced legacy `__resource.lua` with modern `fxmanifest.lua` and enabled `lua54` for newer language features.
+- Standardized thread helpers to `CreateThread`/`Wait` and swapped deprecated native calls for `ScaleformMovieMethodAddParamButtonName`.
+- Fixed naming errors (Rotate, Forward) and function typos (`stopFurniture`, `placeCurrentObjects`).
+- Added structured comment blocks and refreshed the server script placeholder.
