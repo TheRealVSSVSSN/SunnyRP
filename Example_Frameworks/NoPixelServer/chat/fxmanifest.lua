@@ -1,9 +1,17 @@
-description 'chat management stuff'
+fx_version 'cerulean'
+game 'gta5'
+
+description 'Chat management stuff'
 
 ui_page 'html/index.html'
 
-client_script 'cl_chat.lua'
-server_script 'sv_chat.lua'
+client_scripts {
+    'cl_chat.lua'
+}
+
+server_scripts {
+    'sv_chat.lua'
+}
 
 files {
     'html/index.html',
@@ -25,5 +33,5 @@ files {
     'html/vendor/fonts/LatoBold2.woff2',
     'html/image/CID.png',
     'html/image/F.png',
-    'html/image/M.png',
-  }
+    'html/image/M.png'
+}
