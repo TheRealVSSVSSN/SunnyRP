@@ -1,3 +1,11 @@
+--[[
+    -- Type: Client Script
+    -- Name: np-firedepartment/client.lua
+    -- Use: Controls fire department saw interactions and effects
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+
 local holdingSaw = false
 local usingSaw = false
 local sawModel = "prop_tool_consaw"
@@ -18,37 +26,66 @@ local doors = {
     {bone = "door_dside_r", label = "Back Left Door", index = 2}
 }
 
+--[[
+    -- Type: Function
+    -- Name: GetClosestDoorIndex
+    -- Use: Returns the index of the closest vehicle door to the player
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function GetClosestDoorIndex(vehicle)
+    local ped = PlayerPedId()
+    local pedPos = GetEntityCoords(ped)
+    local closestIndex, closestDist
+    local doorCount = GetNumberOfVehicleDoors(vehicle)
+    local distCheck = doorCount > 4 and 2.0 or 2.7
+
+    for i, door in ipairs(doors) do
+        local boneIndex = GetEntityBoneIndexByName(vehicle, door.bone)
+        if boneIndex ~= -1 then
+            local doorPos = GetWorldPositionOfEntityBone(vehicle, boneIndex)
+            local dist = #(doorPos - pedPos)
+            if dist < distCheck and (not closestDist or dist < closestDist) then
+                closestIndex = i
+                closestDist = dist
+            end
+        end
+    end
+
+    return closestIndex
+end
+
 ---------------------------------------------------------------------------
 -- Toggling Saw --
 ---------------------------------------------------------------------------
 RegisterNetEvent("Saw:ToggleSaw")
 AddEventHandler("Saw:ToggleSaw", function()
+    local ped = PlayerPedId()
     if not holdingSaw then
         RequestModel(GetHashKey(sawModel))
         while not HasModelLoaded(GetHashKey(sawModel)) do
-            Citizen.Wait(100)
+            Wait(100)
         end
 
         RequestAnimDict(animDict)
         while not HasAnimDictLoaded(animDict) do
-            Citizen.Wait(100)
+            Wait(100)
         end
 
-        local plyCoords = GetOffsetFromEntityInWorldCoords(GetPlayerPed(PlayerId()), 0.0, 0.0, -5.0)
-        local sawspawned = CreateObject(GetHashKey(sawModel), plyCoords.x, plyCoords.y, plyCoords.z, 1, 1, 1)
-        Citizen.Wait(1000)
-        local netid = ObjToNet(sawspawned)
-        SetNetworkIdExistsOnAllMachines(netid, true)
-        NetworkSetNetworkIdDynamic(netid, true)
-        SetNetworkIdCanMigrate(netid, false)
-        AttachEntityToEntity(sawspawned, GetPlayerPed(PlayerId()), GetPedBoneIndex(GetPlayerPed(PlayerId()), 28422), 0.095, 0.0, 0.0, 270.0, 170.0, 0.0, 1, 1, 0, 1, 0, 1)
-        TaskPlayAnim(GetPlayerPed(PlayerId()), 1.0, -1, -1, 50, 0, 0, 0, 0) -- 50 = 32 + 16 + 2
-        TaskPlayAnim(GetPlayerPed(PlayerId()), animDict, animName, 1.0, -1, -1, 50, 0, 0, 0, 0)
-        saw_net = netid
+        local plyCoords = GetOffsetFromEntityInWorldCoords(ped, 0.0, 0.0, -5.0)
+        local sawspawned = CreateObject(GetHashKey(sawModel), plyCoords.x, plyCoords.y, plyCoords.z, true, true, true)
+        Wait(1000)
+        local netId = ObjToNet(sawspawned)
+        SetNetworkIdExistsOnAllMachines(netId, true)
+        NetworkSetNetworkIdDynamic(netId, true)
+        SetNetworkIdCanMigrate(netId, false)
+        AttachEntityToEntity(sawspawned, ped, GetPedBoneIndex(ped, 28422), 0.095, 0.0, 0.0, 270.0, 170.0, 0.0, true, true, false, true, 0, true)
+        TaskPlayAnim(ped, animDict, animName, 1.0, -1.0, -1, 50, 0, false, false, false)
+        saw_net = netId
         holdingSaw = true
     else
-        ClearPedSecondaryTask(GetPlayerPed(PlayerId()))
-        DetachEntity(NetToObj(saw_net), 1, 1)
+        ClearPedSecondaryTask(ped)
+        DetachEntity(NetToObj(saw_net), true, true)
         DeleteEntity(NetToObj(saw_net))
         saw_net = nil
         holdingSaw = false
@@ -65,7 +102,7 @@ AddEventHandler("Saw:StartParticles", function(sawid)
 
     RequestNamedPtfxAsset(particleDict)
     while not HasNamedPtfxAssetLoaded(particleDict) do
-        Citizen.Wait(100)
+        Wait(100)
     end
 
     UseParticleFxAssetNextCall(particleDict)
@@ -84,55 +121,22 @@ end)
 ---------------------------------------------------------------------------
 -- Get Vehicle Closest Door --
 ---------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
         if holdingSaw then
-
             local vehicle = GetVehicleInFront()
             if vehicle ~= 0 then
-                local boneDistances = {}
-            
-                for a = 1, #doors do
-                    local plyPos = GetEntityCoords(GetPlayerPed(PlayerId()), false)
-                    local doorPos = GetWorldPositionOfEntityBone(vehicle, GetEntityBoneIndexByName(vehicle, doors[a].bone))
-                    local distance = Vdist(plyPos.x, plyPos.y, plyPos.z, doorPos.x, doorPos.y, doorPos.z)
-                    local doorNumbers = GetNumberOfVehicleDoors(vehicle)
-                    local distCheck = 2.7
-                    if doorNumbers > 4 then distCheck = 2.0 end
-
-                    if distance < distCheck then
-                        boneDistances[#boneDistances+1]= {index = a, distance = distance}
-                    end
-                end
-
-                local lowest = nil
-                local lowestDistanceIndex = nil
-
-                if #boneDistances > 1 then
-                    for b = 1, #boneDistances do
-                        if lowest == nil then
-                            lowest = boneDistances[b].index
-                            lowestDistanceIndex = b
-                        else
-                            if boneDistances[b].distance < boneDistances[lowestDistanceIndex].distance then
-                                lowest = boneDistances[b].index
-                            end
-                        end
-                    end
-
-                    if IsVehicleDoorDamaged(vehicle, doors[lowest].index) == false then
-                        local drawCoord = GetWorldPositionOfEntityBone(vehicle, GetEntityBoneIndexByName(vehicle, doors[lowest].bone))
-                        DrawText3DTest(drawCoord.x, drawCoord.y, drawCoord.z, tostring("Press E to cut " .. doors[lowest].label))
-
-                        if IsControlJustPressed(1, 38) and not usingSaw then
-                            Timer(vehicle, lowest)
-                        end
+                local closest = GetClosestDoorIndex(vehicle)
+                if closest and not IsVehicleDoorDamaged(vehicle, doors[closest].index) then
+                    local drawCoord = GetWorldPositionOfEntityBone(vehicle, GetEntityBoneIndexByName(vehicle, doors[closest].bone))
+                    DrawText3D(drawCoord.x, drawCoord.y, drawCoord.z, "Press E to cut " .. doors[closest].label)
+                    if IsControlJustPressed(0, 38) and not usingSaw then
+                        Timer(vehicle, closest)
                     end
                 end
             end
         end
-
-        Citizen.Wait(0)
+        Wait(0)
     end
 end)
 
@@ -141,14 +145,14 @@ local stuckInCar = false
 RegisterNetEvent("firedepartment:forceStop")
 AddEventHandler("firedepartment:forceStop", function()
     holdingSaw = false
-    ClearPedSecondaryTask(GetPlayerPed(PlayerId()))
-    if saw_net ~= nil then
-        DetachEntity(NetToObj(saw_net), 1, 1)
-        DeleteEntity(NetToObj(saw_net))
-    end
-    saw_net = nil
-    holdingSaw = false
     usingSaw = false
+    local ped = PlayerPedId()
+    ClearPedSecondaryTask(ped)
+    if saw_net ~= nil then
+        DetachEntity(NetToObj(saw_net), true, true)
+        DeleteEntity(NetToObj(saw_net))
+        saw_net = nil
+    end
 end)
 
 RegisterNetEvent("firedepartment:stuckincar")
@@ -156,19 +160,19 @@ AddEventHandler("firedepartment:stuckincar", function(isStuck)
     stuckInCar = isStuck
     TriggerEvent("DoLongHudText","You have had a bad accident, the door's are broken and your legs appear to be stuck.",1)
     TriggerEvent("breaklegs")
-    TriggerEvent("stuckincar",true)
+    TriggerEvent("stuckincar", true)
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
-        Citizen.Wait(50)
+        Wait(50)
 
         local ped = PlayerPedId()
         if stuckInCar then
             Wait(900)
         else
             if DoesEntityExist(ped) and IsPedInAnyVehicle(ped, false) and IsControlPressed(2, 75) and not IsEntityDead(ped) and not IsPauseMenuActive() then
-                Citizen.Wait(100)
+                Wait(100)
                 if DoesEntityExist(ped) and IsPedInAnyVehicle(ped, false) and IsControlPressed(2, 75) and not IsEntityDead(ped) and not IsPauseMenuActive() then
                     local veh = GetVehiclePedIsIn(ped, false)
                     TaskLeaveVehicle(ped, veh, 256)
@@ -180,128 +184,110 @@ end)
 
 local lastCar = nil
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
-        Citizen.Wait(1)
-        local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
-        if not IsPedInVehicle(PlayerPedId(),vehicle,false) and stuckInCar then
+        Wait(1)
+        local ped = PlayerPedId()
+        local vehicle = GetVehiclePedIsIn(ped, false)
+        if not IsPedInVehicle(ped, vehicle, false) and stuckInCar then
             stuckInCar = false
-            TriggerEvent("stuckincar",false)
+            TriggerEvent("stuckincar", false)
         end
 
-        if stuckInCar then
-            local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
-            if IsPedInVehicle(PlayerPedId(),vehicle,false) then
-                local boneDistances = {}
-                for a = 1, #doors do
-                    local doorNumber = 0
-                    if GetPedInVehicleSeat(vehicle, -1) == PlayerPedId()  then doorNumber = 2
-                    elseif GetPedInVehicleSeat(vehicle, 0) == PlayerPedId() then doorNumber = 1
-                    elseif GetPedInVehicleSeat(vehicle, 1) == PlayerPedId() then doorNumber = 4
-                    elseif GetPedInVehicleSeat(vehicle, 2) == PlayerPedId() then doorNumber = 3 end
-
-                    local plyPos = GetEntityCoords(GetPlayerPed(PlayerId()), false)
-                    local doorPos = GetWorldPositionOfEntityBone(vehicle, GetEntityBoneIndexByName(vehicle, doors[doorNumber].bone))
-                    local distance = Vdist(plyPos.x, plyPos.y, plyPos.z, doorPos.x, doorPos.y, doorPos.z)
-
-                    if distance < 2 then
-                        boneDistances[#boneDistances+1]= {index = doorNumber, distance = distance}
-                    end
-                end
-
-                local lowest = nil
-                local lowestDistanceIndex = nil
-
-                if #boneDistances > 1 then
-                    for b = 1, #boneDistances do
-                        if lowest == nil then
-                            lowest = boneDistances[b].index
-                            lowestDistanceIndex = b
-                        else
-                            if boneDistances[b].distance < boneDistances[lowestDistanceIndex].distance then
-                                lowest = boneDistances[b].index
-                            end
-                        end
-                    end
-
-                    if IsVehicleDoorDamaged(vehicle, doors[lowest].index) == false then
-                        local drawCoord = GetWorldPositionOfEntityBone(vehicle, GetEntityBoneIndexByName(vehicle, doors[lowest].bone))
-                        if vehicle ~= nil then
-                            lastCar = vehicle
-                        end
-                        SetVehicleDoorsLocked(vehicle,4)
-                    else
-                        SetVehicleDoorsLocked(vehicle,0)
-                        SetVehicleDoorsLocked(lastCar,0)
-                    end
+        if stuckInCar and IsPedInVehicle(ped, vehicle, false) then
+            local closest = GetClosestDoorIndex(vehicle)
+            if closest then
+                if not IsVehicleDoorDamaged(vehicle, doors[closest].index) then
+                    lastCar = vehicle
+                    SetVehicleDoorsLocked(vehicle, 4)
+                else
+                    SetVehicleDoorsLocked(vehicle, 0)
+                    if lastCar then SetVehicleDoorsLocked(lastCar, 0) end
                 end
             end
         else
-            Citizen.Wait(300)
+            Wait(300)
         end
     end
 end)
 
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
         if usingSaw then
             TriggerServerEvent("Saw:SyncStartParticles", saw_net)
         end
-        Citizen.Wait(100)
+        Wait(100)
     end
 end)
 
 RegisterNetEvent("firedepartment:removeDoor")
-AddEventHandler("firedepartment:removeDoor", function(vehNetId,index)
-    repeat
+AddEventHandler("firedepartment:removeDoor", function(vehNetId, index)
+    while not NetworkDoesEntityExistWithNetworkId(vehNetId) do
         Wait(500)
-    until NetworkGetEntityFromNetworkId(vehNetId) > 0
+    end
     local currentVeh = NetworkGetEntityFromNetworkId(vehNetId)
-    SetVehicleDoorBroken(currentVeh,index, false)
+    SetVehicleDoorBroken(currentVeh, index, false)
 end)
 
+--[[
+    -- Type: Function
+    -- Name: Timer
+    -- Use: Handles the timed cutting action for vehicle doors
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 function Timer(vehicle, index)
-    Citizen.CreateThread(function()
+    CreateThread(function()
         Notification("~r~You are cutting off the door. Please wait...")
         usingSaw = true
         local time = actionTime
         while time > 0 do
-
             if not holdingSaw or GetVehicleInFront() ~= vehicle then
                 usingSaw = false
                 TriggerServerEvent("Saw:SyncStopParticles", saw_net)
                 Notification("~r~Cutting has been canceled.")
                 return
             end
-            
-            Citizen.Wait(1000)
+            Wait(1000)
             time = time - 1
         end
-        netid = NetworkGetNetworkIdFromEntity(vehicle)
-
+        local netId = NetworkGetNetworkIdFromEntity(vehicle)
         SetVehicleDoorBroken(vehicle, doors[index].index, false)
-        TriggerServerEvent("Saw:SyncDoorFall",netid,doors[index].index)
+        TriggerServerEvent("Saw:SyncDoorFall", netId, doors[index].index)
         TriggerServerEvent("Saw:SyncStopParticles", saw_net)
         Notification("~g~The vehicles door has been cut off.")
         usingSaw = false
     end)
 end
 
+--[[
+    -- Type: Function
+    -- Name: GetVehicleInFront
+    -- Use: Returns the vehicle directly in front of the player
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 function GetVehicleInFront()
-    local plyCoords = GetEntityCoords(GetPlayerPed(PlayerId()), false)
-    local plyOffset = GetOffsetFromEntityInWorldCoords(GetPlayerPed(PlayerId()), 0.0, 1.2, 0.0)
-    --local rayHandle = StartShapeTestRay(plyCoords.x, plyCoords.y, plyCoords.z, plyOffset.x, plyOffset.y, plyOffset.z, 2, GetPlayerPed(PlayerId()), 1)
-    local rayHandle = StartShapeTestCapsule(plyCoords.x, plyCoords.y, plyCoords.z, plyOffset.x, plyOffset.y, plyOffset.z, 0.3, 10, GetPlayerPed(PlayerId()), 7)
+    local ped = PlayerPedId()
+    local plyCoords = GetEntityCoords(ped)
+    local plyOffset = GetOffsetFromEntityInWorldCoords(ped, 0.0, 1.2, 0.0)
+    local rayHandle = StartShapeTestCapsule(plyCoords.x, plyCoords.y, plyCoords.z, plyOffset.x, plyOffset.y, plyOffset.z, 0.3, 10, ped, 7)
     local _, _, _, _, vehicle = GetShapeTestResult(rayHandle)
-
     return vehicle
 end
 
-function DrawText3DTest(x,y,z, text)
+--[[
+    -- Type: Function
+    -- Name: DrawText3D
+    -- Use: Renders 3D text at the specified world coordinates
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+function DrawText3D(x, y, z, text)
     local onScreen,_x,_y=World3dToScreen2d(x,y,z)
     local px,py,pz=table.unpack(GetGameplayCamCoords())
-    
+
     SetTextScale(0.35, 0.35)
     SetTextFont(4)
     SetTextProportional(1)
@@ -315,8 +301,16 @@ function DrawText3DTest(x,y,z, text)
     DrawRect(_x,_y+0.0125, 0.015+ factor, 0.03, 41, 11, 41, 68)
 end
 
+--[[
+    -- Type: Function
+    -- Name: Notification
+    -- Use: Displays a simple notification on the player's screen
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 function Notification(message)
-	SetNotificationTextEntry("STRING")
-	AddTextComponentString(message)
-	DrawNotification(0, 1)
+    SetNotificationTextEntry("STRING")
+    AddTextComponentString(message)
+    DrawNotification(false, true)
 end
+
