@@ -1,4 +1,4 @@
-local function GetPrivs(source)
+function GetPrivs(source)
     return {
         canServer = IsPlayerAceAllowed(source, 'command.run'),
         canClient = IsPlayerAceAllowed(source, 'command.crun'),
