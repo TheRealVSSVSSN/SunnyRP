@@ -12,7 +12,8 @@ html {
 }
 @font-face {
   font-family: 'pricedown';
-  src: url(pricedown.ttf);
+  src: url('pricedown.ttf') format('truetype');
+  font-display: swap;
 }
 #cursor {
     position: absolute;
