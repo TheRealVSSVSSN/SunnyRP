@@ -1,18 +1,21 @@
---[[/	:FSN:	\]]--
-fx_version 'adamant'
+--[[/   :FSN:   \]]--
+fx_version 'cerulean'
 game 'gta5'
+lua54 'yes'
 
-client_script '@fsn_main/cl_utils.lua'
-server_script '@fsn_main/sv_utils.lua'
-client_script '@fsn_main/server_settings/sh_settings.lua'
-server_script '@fsn_main/server_settings/sh_settings.lua'
-server_script '@mysql-async/lib/MySQL.lua'
---[[/	:FSN:	\]]--
+ui_page 'gui/index.html'
+
+files {
+    'gui/index.html',
+    'gui/index.js'
+}
 
 client_script 'client.lua'
 
--- exports
 exports {
-	"fsn_ProgressBar",
-	"removeBar"
+    'fsn_ProgressBar',
+    'removeBar'
 }
+
+--[[/   :FSN:   \]]--
+

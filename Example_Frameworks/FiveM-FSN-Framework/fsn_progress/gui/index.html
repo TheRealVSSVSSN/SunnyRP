@@ -1,51 +1,48 @@
 <html>
-    <head>
-        <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
-		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-        <!--<link href="style.css" rel="stylesheet" type="text/css" />-->
-		<style>
-			body {
-				width: 100%;
-				height: 100%;
-				overflow: hidden;
-				display: none;
-			}
-			* {
-				font-family: 'Roboto', sans-serif;
-			}
-			.fsn_progressbar_area {
-				width: 40%;
-				height: 30px;
-				background-color: rgba(255,255,255,0.3);
-				margin-left: auto;
-				margin-right: auto; 
-				margin-top: 10%;
-			}
-			.fsn_progress {
-				width: 0%;
-				background-color: #7de07d;
-				height: 100%;
-				z-index: -1;
-			}
-			.fsn_progressbar_area h1 {
-				color: white;
-				font-size: 20px;
-				line-height: 30px;
-				width: 100%;
-				text-align: center;
-				z-index: 100;
-				position: relative;
-				margin-top: -30px;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="fsn_progressbar_area">
-			<div id="progress" class="fsn_progress">
-				
-			</div>
-			<h1 id="fsn_progressbar_title"><span id="fsn_title"></span><span id="fsn_ellipsis"></span></h1>
-		</div>
-        <script src="index.js" type="text/javascript"></script>
-    </body>
+  <head>
+    <meta charset="utf-8" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <style>
+      body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        display: none;
+      }
+      * {
+        font-family: 'Roboto', sans-serif;
+      }
+      .progress-container {
+        width: 40%;
+        height: 30px;
+        background-color: rgba(255, 255, 255, 0.3);
+        margin: 10% auto;
+        position: relative;
+      }
+      .progress-bar {
+        width: 0%;
+        height: 100%;
+        background-color: #7de07d;
+      }
+      .progress-title {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        line-height: 30px;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="progress-container">
+      <div id="progress" class="progress-bar"></div>
+      <div class="progress-title">
+        <span id="fsn_title"></span><span id="fsn_ellipsis"></span>
+      </div>
+    </div>
+    <script src="index.js" type="text/javascript"></script>
+  </body>
 </html>
+
