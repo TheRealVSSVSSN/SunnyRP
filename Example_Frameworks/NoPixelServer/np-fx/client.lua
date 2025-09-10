@@ -698,7 +698,7 @@ Citizen.CreateThread(function()
       end
     end
 
-    if currentLevel == 0 and newDrunklevel then
+    if currentLevel == 0 and newDrunkLevel then
       newDrunkLevel = false
     elseif currentLevel == 1 and newDrunkLevel then
       SetPedMovementClipset(PlayerPedId(), "move_m@drunk@slightlydrunk", 1.0)
