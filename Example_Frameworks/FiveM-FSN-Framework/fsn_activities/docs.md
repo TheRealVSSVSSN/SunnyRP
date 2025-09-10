@@ -1,71 +1,71 @@
 # fsn_activities Documentation
 
 ## Overview and Runtime Context
-`fsn_activities` bundles small client‑side leisure features for the FiveM server. At present only a yoga mini‑game is functional; fishing and hunting are placeholders awaiting future development. All logic executes on the client and relies on utilities provided by `fsn_main` along with notifications from `mythic_notify`.
+`fsn_activities` provides leisure mini‑games for the FiveM server. Currently only a yoga activity is implemented and runs entirely on the client. Fishing and hunting scripts exist only as placeholders. Client logic depends on utilities from `@fsn_main` and uses `mythic_notify` for on‑screen messages.
 
 ## File Inventory
 | Path | Role | Classification |
 |------|------|----------------|
-| `fxmanifest.lua` | Resource manifest and dependency declarations | shared |
-| `yoga/client.lua` | Yoga activity implementation | client |
-| `fishing/client.lua` | Placeholder for fishing activity | client |
-| `hunting/client.lua` | Placeholder for hunting activity | client |
+| `fxmanifest.lua` | Resource manifest declaring dependencies and scripts | shared |
+| `yoga/client.lua` | Functional yoga mini‑game | client |
+| `fishing/client.lua` | Placeholder for future fishing activity | client |
+| `hunting/client.lua` | Placeholder for future hunting activity | client |
 
-## Client
+## Client Scripts
 
 ### yoga/client.lua
-*Responsibilities*
-- Maps three yoga spots near Del Perro and draws a "Yoga Bliss" blip at the area entrance.
-- Binds start (`E`) and cancel (`DELETE`) controls using utility helpers.
-- Hosts three perpetual threads: one to prompt starting yoga, one to handle cancellation, and one to spawn blips on load.
-- Provides helper functions `PositionCheck`, `DoYoga`, and `cancelledYoga` to manage activity flow.
+**Responsibilities**
+- Defines three yoga spots near Del Perro and stores the area center for range checks.
+- Maps a “Yoga Bliss” blip on resource start.
+- Monitors player proximity to prompt starting (`E`) or cancelling (`DELETE`) yoga.
+- Implements `DoYoga`, `PositionCheck`, and `cancelledYoga` helpers along with a local stress‑check event.
 
-*Control Flow*
-1. **Blip Setup** – When the resource starts, a thread iterates configured blips and places them on the map.
-2. **Start Prompt** – Each frame the main loop checks distance to the yoga zone; within range it shows 3D text and starts `DoYoga` if the start key is pressed.
-3. **Cancellation** – A parallel loop monitors the cancel key while `doingYoga` is true; pressing the key triggers `cancelledYoga`.
-4. **Yoga Sequence** – `DoYoga` displays a preparation message, plays the built‑in yoga scenario for 15 seconds, emits `fsn_yoga:checkStress`, then clears the animation.
-5. **Stress Handling** – The local handler for `fsn_yoga:checkStress` verifies the session and triggers `fsn_needs:stress:remove` with an amount of 10 to lower stress.
+**Control Flow**
+1. **Blip Setup** – A thread iterates `Blips` and places each marker when the resource loads.【F:yoga/client.lua†L16-L45】
+2. **Start Prompt** – A continuous loop checks distance to the yoga area; within range it draws 3D text and calls `DoYoga` when the start key is pressed.【F:yoga/client.lua†L47-L69】
+3. **Cancellation** – A parallel loop listens for the cancel key while `doingYoga`; pressing it calls `cancelledYoga` and stops the animation.【F:yoga/client.lua†L71-L95】
+4. **Yoga Sequence** – `DoYoga` shows a preparation message, plays the built‑in yoga scenario for 15 seconds, fires `fsn_yoga:checkStress`, then clears the ped tasks.【F:yoga/client.lua†L123-L135】
+5. **Stress Handling** – The local handler for `fsn_yoga:checkStress` verifies the session and emits `fsn_needs:stress:remove` with an amount of `10` to reduce stress.【F:yoga/client.lua†L137-L144】
 
-*Security & Performance Notes*
-- Stress reduction is handled entirely client‑side; no server validation prevents spoofed events.
-- Both main loops run every frame (`Citizen.Wait(0)`), which may be tuned if performance is a concern.
+**Security & Performance Notes**
+- Stress reduction is client‑side only; spoofed events could remove stress without validation.
+- Two frame‑based loops (`Citizen.Wait(0)`) continuously poll proximity and cancellation, which may impact performance on low‑end clients.
 
-*Integration Points*
-- Uses utility exports from `@fsn_main` such as `Util.GetKeyNumber`, `Util.GetVecDist`, and `Util.DrawText3D`.
-- Invokes `exports['mythic_notify']:DoCustomHudText` for on‑screen messages *(Inferred: High)*.
-- Emits `fsn_needs:stress:remove` to interact with the needs system *(Inferred: High)*.
+**Integration Points**
+- Uses utility functions from `@fsn_main` such as key mapping and distance calculation.
+- Calls `exports['mythic_notify']:DoCustomHudText(type, message, duration)` for notifications *(Inferred: High).*【F:yoga/client.lua†L97-L103】【F:yoga/client.lua†L123-L129】
+- Triggers `fsn_needs:stress:remove(amount)` to adjust player stress *(Inferred: High).*【F:yoga/client.lua†L137-L144】
 
 ### fishing/client.lua
-*Status*: Contains only a TODO comment; no functional code and not referenced in the manifest.
+Contains only a placeholder comment; no logic and not referenced by the manifest.【F:fishing/client.lua†L1-L1】
 
 ### hunting/client.lua
-*Status*: Contains only a TODO comment suggesting a possible move from `fsn_jobs`; no functional code and not referenced in the manifest.
+Contains only a placeholder comment noting a potential move from `fsn_jobs`; not referenced by the manifest.【F:hunting/client.lua†L1-L1】
 
 ## Shared Configuration
 
 ### fxmanifest.lua
-*Responsibilities*
-- Declares `bodacious` FX version, author, description, and version metadata.
-- Loads shared utility scripts from `fsn_main` for both client and server.
-- Includes `@mysql-async/lib/MySQL.lua` even though the resource currently has no server logic, implying planned database usage *(Inferred: Low).* 
-- Registers `yoga/client.lua` as the sole client script; fishing and hunting scripts are omitted.
+**Responsibilities**
+- Declares the `bodacious` FX version, metadata, and dependency blocks.
+- Loads shared utility scripts from `@fsn_main` on both client and server sides.
+- Includes `@mysql-async/lib/MySQL.lua` despite no server logic, suggesting future database use *(Inferred: Low).*【F:fxmanifest.lua†L13-L17】
+- Registers `yoga/client.lua` as the only client script; fishing and hunting scripts are absent.【F:fxmanifest.lua†L20-L25】
 
 ## Cross-Indexes
 
 ### Events
-| Name | Direction | Arguments | Notes |
-|------|-----------|-----------|-------|
-| `fsn_yoga:checkStress` | handles (client) | none | Fired after yoga completes to adjust stress. |
-| `fsn_needs:stress:remove` | emits (client) | `amount:number` | Requests stress reduction from needs system *(Inferred: High).* |
+| Name | Direction | Type | Arguments | Notes |
+|------|-----------|------|-----------|-------|
+| `fsn_yoga:checkStress` | emits & handles (client) | local | none | Fired after yoga to verify session before adjusting stress. |
+| `fsn_needs:stress:remove` | emits (client) | local | `amount:number` | Requests stress reduction of 10 from needs system *(Inferred: High).* |
 
 ### ESX Callbacks
 - None.
 
 ### Exports
-| Name | Usage | Notes |
-|------|-------|-------|
-| `mythic_notify:DoCustomHudText` | called (client) | Displays custom HUD messages *(Inferred: High).* |
+| Name | Usage | Arguments | Notes |
+|------|-------|-----------|-------|
+| `mythic_notify:DoCustomHudText` | called (client) | `type:string`, `message:string`, `duration:number` | Displays HUD notifications *(Inferred: High).*【F:yoga/client.lua†L97-L103】【F:yoga/client.lua†L123-L129】|
 
 ### Commands
 - None.
@@ -74,18 +74,20 @@
 - None.
 
 ### Database Calls
-- None, though `mysql-async` is listed in the manifest *(Inferred: Low).* 
+- None, though `mysql-async` is loaded in the manifest *(Inferred: Low).*【F:fxmanifest.lua†L13-L17】
 
 ## Configuration & Integration Points
-- Relies on `@fsn_main/server_settings/sh_settings.lua` for shared settings.
-- Future server‑side features may use `@mysql-async/lib/MySQL.lua` for persistence *(Inferred: Low).* 
+- Depends on `@fsn_main/cl_utils.lua`, `@fsn_main/sv_utils.lua`, and shared settings from `@fsn_main/server_settings/sh_settings.lua` via the manifest.
+- Integrates with `mythic_notify` for user feedback and with the `fsn_needs` system for stress management.
 
 ## Gaps & Inferences
-- Fishing and hunting modules are empty stubs awaiting implementation. **TODO:** add activities and register them in the manifest when ready.
-- Inclusion of `mysql-async` without server scripts suggests planned database features *(Inferred: Low).* 
-- Stress removal and notification behaviours are deduced from naming conventions *(Inferred: High).* 
+- `mythic_notify:DoCustomHudText` argument structure inferred from local calls *(Inferred: High).*【F:yoga/client.lua†L97-L103】
+- `fsn_needs:stress:remove` expects an `amount` parameter; value `10` is used during yoga *(Inferred: High).*【F:yoga/client.lua†L137-L144】
+- Inclusion of `@mysql-async/lib/MySQL.lua` implies planned persistence despite missing server scripts *(Inferred: Low).*【F:fxmanifest.lua†L13-L17】
+- Fishing and hunting scripts are stubs requiring implementation and manifest registration. **TODO.**【F:fishing/client.lua†L1-L1】【F:hunting/client.lua†L1-L1】
 
 ## Conclusion
-The resource currently provides a single client‑side yoga mini‑game that reduces player stress. Additional activities are scaffolded but inactive. Future work may involve implementing fishing and hunting, adding server‑side verification, and utilising database support.
+The resource currently offers a single client‑side yoga mini‑game that reduces player stress after a timed animation. Other activities are scaffolds awaiting development. Future work should add server‑side validation, implement remaining activities, and leverage the declared database dependency.
 
 DOCS COMPLETE
+
