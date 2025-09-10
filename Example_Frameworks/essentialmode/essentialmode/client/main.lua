@@ -27,7 +27,7 @@ CreateThread(function()
     while true do
         Wait(1000)
         local pos = GetEntityCoords(PlayerPedId())
-        if not oldPos or pos.x ~= oldPos.x or pos.y ~= oldPos.y or pos.z ~= oldPos.z then
+        if not oldPos or #(pos - oldPos) > 1.0 then
             TriggerServerEvent('es:updatePositions', pos.x, pos.y, pos.z)
             oldPos = pos
         end
@@ -49,33 +49,32 @@ AddEventHandler('playerSpawned', function()
     for k, v in pairs(decorators) do
         DecorSetInt(PlayerPedId(), k, v)
     end
+    TriggerServerEvent('es:playerSpawned')
 end)
+
+local function updateCash(action, amount)
+    SendNUIMessage({
+        [action] = true,
+        money = amount
+    })
+end
 
 RegisterNetEvent('es:activateMoney')
 AddEventHandler('es:activateMoney', function(amount)
-    SendNUIMessage({
-        setmoney = true,
-        money = amount
-    })
     cash = amount
+    updateCash('setmoney', amount)
 end)
 
 RegisterNetEvent('es:addedMoney')
 AddEventHandler('es:addedMoney', function(amount)
     cash = cash + amount
-    SendNUIMessage({
-        addcash = true,
-        money = amount
-    })
+    updateCash('addcash', amount)
 end)
 
 RegisterNetEvent('es:removedMoney')
 AddEventHandler('es:removedMoney', function(amount)
     cash = cash - amount
-    SendNUIMessage({
-        removecash = true,
-        money = amount
-    })
+    updateCash('removecash', amount)
 end)
 
 RegisterNetEvent('es:setMoneyDisplay')

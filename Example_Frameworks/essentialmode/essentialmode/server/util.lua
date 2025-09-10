@@ -67,8 +67,13 @@ end
 
 AddEventHandler('es:debugMsg', debugMsg)
 
--- Export helpers globally
+-- Export helpers globally and via exports for modern usage
 _G.stringsplit = stringsplit
 _G.startswith = startswith
 _G.returnIndexesInTable = returnIndexesInTable
 _G.debugMsg = debugMsg
+
+exports('stringsplit', stringsplit)
+exports('startswith', startswith)
+exports('returnIndexesInTable', returnIndexesInTable)
+exports('debugMsg', debugMsg)

@@ -12,8 +12,8 @@ Group = {}
 Group.__index = Group
 
 setmetatable(Group, {
-    __eq = function(self)
-        return self.group
+    __eq = function(a, b)
+        return a.group == b.group
     end,
     __tostring = function(self)
         return self.group

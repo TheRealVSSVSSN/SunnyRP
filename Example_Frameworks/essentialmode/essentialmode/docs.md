@@ -39,15 +39,16 @@ Lightweight wrapper around a .NET MySql.Data driver. Opens connections, executes
 Utility helpers available server-side:
 - `stringsplit`, `startswith`, `returnIndexesInTable` provide basic string and table operations.
 - `debugMsg` prints tagged output when `settings.defaultSettings.debugInformation` is true and is exposed via event `es:debugMsg`.
+- Functions are available globally and as server exports for other resources.
 
 ### server/main.lua
 Core server runtime:
 - Initializes player registry (`Users`), command store, and default settings (ban text, PvP toggle, permission message, debug flag, starting cash, rank decorators).
 - On `playerConnecting` runs `isIdentifierBanned`; kicks with configured message when banned.
-- On `playerDropped` saves player money to the database.
+- On `playerDropped` saves player money to the database and clears any pending first-spawn flag.
 - `es:firstJoinProper` loads or registers user data then fires `es:initialized`; optionally enables PvP and marks player for first spawn.
 - Session setting events (`es:setSessionSetting`/`es:getSessionSetting`).
-- `playerSpawn` detects first spawn and emits `es:firstSpawn`.
+- `es:playerSpawned` (triggered from the client) detects first spawn and emits `es:firstSpawn`.
 - `es:setDefaultSettings` merges new defaults into `settings.defaultSettings`.
 - Chat command handler parses slash-prefixed input, resolves against registered commands, checks permissions and group inheritance, and triggers audit events (`es:adminCommandRan`, `es:userCommandRan`, `es:commandRan`, etc.). Permission denial attempts send a message to the player.
 - Events allow other resources to register commands: `es:addCommand`, `es:addAdminCommand`, `es:addGroupCommand`. A built-in `info` command reports version and command count.
@@ -57,11 +58,11 @@ Core server runtime:
 Account and persistence logic:
 - Loads MySQL wrapper and opens a connection using hard-coded credentials.
 - `LoadUser` retrieves user row, instantiates a `Player` object, triggers `es:playerLoaded`, optionally sets a rank decorator and fires `es:newPlayerLoaded` for fresh accounts.
-- `isIdentifierBanned` queries `bans` table to check active bans.
+- `isIdentifierBanned` performs a single filtered query against the `bans` table to check active bans.
 - `hasAccount` tests for an existing user record.
 - `registerUser` inserts default record when necessary then loads the account.
 - Data access events (`es:setPlayerData`, `es:setPlayerDataId`, `es:getPlayerFromId`, `es:getPlayerFromIdentifier`, `es:getAllPlayers`, `es:getPlayers`) provide CRUD helpers for other resources.
-- Background `savePlayerMoney` timer persists all players’ money every 60 seconds.
+- Background `savePlayerMoney` timer persists all players’ money every 60 seconds with error protection.
 
 ### server/classes/player.lua
 Represents a connected player:
@@ -69,7 +70,7 @@ Represents a connected player:
 - `getPermissions`/`setPermissions` manage permission level and persist changes via `es:setPlayerData`.
 - `setCoords` updates session position.
 - `kick` disconnects a player.
-- `setMoney`, `addMoney`, and `removeMoney` adjust balance and broadcast `es:addedMoney`, `es:removedMoney`, and `es:activateMoney` accordingly.
+- `setMoney`, `addMoney`, and `removeMoney` adjust balance and broadcast `es:addedMoney`, `es:removedMoney`, and `es:activateMoney` via a shared refresh helper.
 - `setSessionVar`/`getSessionVar` manage arbitrary session data.
 
 ### server/classes/groups.lua
@@ -82,9 +83,9 @@ Implements permission groups:
 ### client/main.lua
 Client runtime:
 - On session start triggers `es:firstJoinProper` to let the server initialize the user.
-- Periodically sends `es:updatePositions` with current coordinates and refreshes the cash display when awaiting data.
-- Maintains decorator values received via `es:setPlayerDecorator`; reapplies them on `playerSpawned`.
-- Handles money events (`es:activateMoney`, `es:addedMoney`, `es:removedMoney`) by forwarding messages to the NUI.
+- Periodically sends `es:updatePositions` with current coordinates, avoiding redundant transmissions by checking vector distance.
+- Maintains decorator values received via `es:setPlayerDecorator`; reapplies them on `playerSpawned` and informs the server via `es:playerSpawned`.
+- Handles money events (`es:activateMoney`, `es:addedMoney`, `es:removedMoney`) through a shared `updateCash` helper that forwards messages to the NUI.
 - `es:setMoneyDisplay` adjusts UI opacity.
 - `es:enablePvp` continuously enables friendly fire among connected players.
 
@@ -107,7 +108,7 @@ Font file referenced by `ui.html` for the money display.
 | es:initialized | server → server | source | Signals user data ready |
 | es:enablePvp | server → client | — | Enables friendly fire |
 | es:setSessionSetting / es:getSessionSetting | server ↔ server | key[, value/callback] | Session-level config |
-| playerSpawn | CFX → server | — | Triggers `es:firstSpawn` on first spawn |
+| es:playerSpawned | client → server | — | Triggers `es:firstSpawn` on first spawn |
 | es:firstSpawn | server → server | source | Hook for spawn initialization |
 | es:setDefaultSettings | server → server | table | Overrides default config |
 | chatMessage | CFX → server | source, author, message | Slash commands parser |
@@ -136,7 +137,12 @@ Font file referenced by `ui.html` for the money display.
 None
 
 ### Exports
-None
+| Name | Direction | Notes |
+|------|-----------|-------|
+| stringsplit | server | Splits strings by separator |
+| startswith | server | Checks string prefix |
+| returnIndexesInTable | server | Counts table entries |
+| debugMsg | server | Prints debug output when enabled |
 
 ### Commands
 | Command | Description |

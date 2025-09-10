@@ -24,6 +24,10 @@ setmetatable(Player, {
     end
 })
 
+local function refreshMoney(self)
+    TriggerClientEvent('es:activateMoney', self.source, self.money)
+end
+
 --[[
     -- Type: Function
     -- Name: getPermissions
@@ -85,7 +89,7 @@ function Player:setMoney(m)
     else
         TriggerClientEvent('es:removedMoney', self.source, prev - m)
     end
-    TriggerClientEvent('es:activateMoney', self.source, self.money)
+    refreshMoney(self)
 end
 
 --[[
@@ -98,7 +102,7 @@ end
 function Player:addMoney(m)
     self.money = self.money + m
     TriggerClientEvent('es:addedMoney', self.source, m)
-    TriggerClientEvent('es:activateMoney', self.source, self.money)
+    refreshMoney(self)
 end
 
 --[[
@@ -111,7 +115,7 @@ end
 function Player:removeMoney(m)
     self.money = self.money - m
     TriggerClientEvent('es:removedMoney', self.source, m)
-    TriggerClientEvent('es:activateMoney', self.source, self.money)
+    refreshMoney(self)
 end
 
 --[[

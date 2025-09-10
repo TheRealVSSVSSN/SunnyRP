@@ -29,13 +29,8 @@ end
     -- By: VSSVSSN
 --]]
 function isIdentifierBanned(id)
-    local result = MySQL.query.await('SELECT expires FROM bans WHERE banned = ?', {id})
-    for _, v in ipairs(result) do
-        if v.expires == -1 or v.expires > os.time() then
-            return true
-        end
-    end
-    return false
+    local expires = MySQL.scalar.await('SELECT expires FROM bans WHERE banned = ? AND (expires = -1 OR expires > UNIX_TIMESTAMP()) LIMIT 1', {id})
+    return expires ~= nil
 end
 
 AddEventHandler('es:getPlayers', function(cb)
@@ -111,7 +106,9 @@ CreateThread(function()
     while true do
         Wait(60000)
         for _, v in pairs(Users) do
-            MySQL.update.await('UPDATE users SET money = ? WHERE identifier = ?', {v.money, v.identifier})
+            pcall(function()
+                MySQL.update.await('UPDATE users SET money = ? WHERE identifier = ?', {v.money, v.identifier})
+            end)
         end
     end
 end)

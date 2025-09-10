@@ -22,6 +22,13 @@ server_scripts {
     'server/main.lua'
 }
 
+server_exports {
+    'stringsplit',
+    'startswith',
+    'returnIndexesInTable',
+    'debugMsg'
+}
+
 client_scripts {
     'client/main.lua'
 }
