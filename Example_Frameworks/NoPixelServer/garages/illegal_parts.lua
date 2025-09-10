@@ -68,12 +68,12 @@ function SelectUpgrade()
 end
 
 function GrabParts()
-	Citizen.Trace("Grabbing Parts")
+	print("Grabbing Parts")
 
 	local curplate = GetVehicleNumberPlateText(enteredcar)
 	if carsUpgrades[curplate] == nil then
 		TriggerEvent("DoShortHudText", "Invalid Vehicle Registration.",2)
-		Citizen.Trace("AI car")
+		print("AI car")
 		return
 	end
 
@@ -83,7 +83,7 @@ function GrabParts()
 	end
 	RequestAnimDict('anim@heists@box_carry@')
 	while not HasAnimDictLoaded("anim@heists@box_carry@") do
-		Citizen.Wait(0)
+		Wait(0)
 	end
 
 	TriggerEvent("attachItemChop",'MetalPart')
@@ -124,7 +124,7 @@ function GrabParts()
 		local dst10 = #(vector3(carloc9["x"],carloc9["y"],carloc9["z"]) - pos)
 		local dst11 = #(vector3(carloc10["x"],carloc10["y"],carloc10["z"]) - pos)
 
-		Citizen.Wait(1)
+		Wait(1)
 
 		if dst7 < 1.5 then
 
@@ -307,21 +307,21 @@ function GrabParts()
 end
 
 function animCarz()
-	Citizen.Trace("anim car")
+	print("anim car")
 	RequestAnimDict('mp_car_bomb')
 	while not HasAnimDictLoaded("mp_car_bomb") do
-		Citizen.Wait(0)
+		Wait(0)
 	end
 	if not IsEntityPlayingAnim(PlayerPedId(), "mp_car_bomb", "car_bomb_mechanic", 3) then
 		TaskPlayAnim(PlayerPedId(), "mp_car_bomb", "car_bomb_mechanic", 8.0, -8, -1, 49, 0, 0, 0, 0)
 	end
-	Citizen.Wait(2200)
+	Wait(2200)
 	ClearPedTasks(PlayerPedId())
 end
 
 function playDrillz()
 	FreezeEntityPosition(PlayerPedId(),true)
-	Citizen.Trace("drilling")
+	print("drilling")
 	animCarz()
 	TriggerServerEvent('InteractSound_SV:PlayWithinDistance', 2.0, 'impactdrill', 0.5)
 	animCarz()
@@ -357,13 +357,13 @@ AddEventHandler('chopshop:leave', function()
 
 	if distance2 < 30.0 and PlayerPedId() ~= driverPed then
 		TaskLeaveVehicle(PlayerPedId(), veh, 0)
-		Citizen.Wait(100)
+		Wait(100)
 	end
 end)
 
 
 
-Citizen.CreateThread(function()
+CreateThread(function()
 
 	while true do
 
@@ -386,7 +386,7 @@ Citizen.CreateThread(function()
 
 				SetEntityCoords(veh,-338.37,-137.28,38.25)
 				SetEntityHeading(veh,68.75)
-				Citizen.Wait(1000)
+				Wait(1000)
 				FreezeEntityPosition(veh,true)
 			end
 			DrawText3DTest(mechanicshop["x"],mechanicshop["y"],mechanicshop["z"], "["..Controlkey["generalUse"][2].."] to enter Mechanic Shop!", 255,true)
@@ -408,7 +408,7 @@ Citizen.CreateThread(function()
 					--SetEntityHeading(PlayerPedId(),353.25765991211)
 					FreezeEntityPosition(veh,false)
 					enteredcar = 0
-					Citizen.Wait(1000)
+					Wait(1000)
 				end
 				DrawText3DTest(-338.37,-137.28,38.25, "["..Controlkey["generalUse"][2].."] to leave!", 255,true)
 			end
@@ -418,7 +418,7 @@ Citizen.CreateThread(function()
 			if distance3 < 1.5 and enteredcar ~= 0 and rank > 3 then
 				if IsControlJustReleased(2, Controlkey["generalUseThird"][1]) and not usingpart then
 					GrabParts()
-					Citizen.Wait(1000)
+					Wait(1000)
 				end
 				DrawText3DTest(partloc["x"],partloc["y"],partloc["z"], "["..Controlkey["generalUseThird"][2].."] to grab upgrade parts!", 255,true)
 			end
@@ -439,8 +439,8 @@ end)
 RegisterNetEvent('illegal_carshop:SpawnVehicle')
 AddEventHandler('illegal_carshop:SpawnVehicle', function(vehicle, plate, customized, state, Fuel)
 	local customized = json.decode(customized)
-	Citizen.CreateThread(function()
-		Citizen.Wait(100)
+	CreateThread(function()
+		Wait(100)
 
 		if Fuel < 5 then
 			Fuel = 5

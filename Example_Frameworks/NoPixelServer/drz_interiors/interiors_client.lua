@@ -1504,32 +1504,36 @@ function buildWineOffice()
 end
 
 
+--[[
+    -- Type: Function
+    -- Name: CleanUpArea
+    -- Use: Removes nearby non-player entities to free resources
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 function CleanUpArea()
 
     local playerped = PlayerPedId()
     local plycoords = GetEntityCoords(playerped)
-    local handle, ObjectFound = FindFirstObject()
+    local handle, entity = FindFirstObject()
     local success
     repeat
-        local pos = GetEntityCoords(ObjectFound)
+        local pos = GetEntityCoords(entity)
         local distance = #(plycoords - pos)
-        if distance < 50.0 and ObjectFound ~= playerped then
-        	if IsEntityAPed(ObjectFound) then
-        		if IsPedAPlayer(ObjectFound) then
-        		else
-        			SetEntityAsNoLongerNeeded(Objectfound)
-        			DeleteObject(ObjectFound)
-
-        		end
-        	else
-        		if not IsEntityAVehicle(ObjectFound) and not IsEntityAttached(ObjectFound) then
-	        		DeleteObject(ObjectFound)
-	        	end
-        	end            
+        if distance < 50.0 and entity ~= playerped then
+            if IsEntityAPed(entity) then
+                if not IsPedAPlayer(entity) then
+                    SetEntityAsNoLongerNeeded(entity)
+                    DeleteEntity(entity)
+                end
+            elseif not IsEntityAVehicle(entity) and not IsEntityAttached(entity) then
+                SetEntityAsNoLongerNeeded(entity)
+                DeleteEntity(entity)
+            end
         end
-        success, ObjectFound = FindNextObject(handle)
+        success, entity = FindNextObject(handle)
     until not success
     EndFindObject(handle)
-    TriggerEvent("DensityModifierEnable",true)
-	TriggerEvent("inhotel",false)
+    TriggerEvent("DensityModifierEnable", true)
+    TriggerEvent("inhotel", false)
 end
