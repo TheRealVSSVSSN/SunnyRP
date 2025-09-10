@@ -1,145 +1,144 @@
-local stringType = type("")
-local intType = math.type(1)
-local floatType = math.type(1.0)
-local vector2Type = type(vector2(11.11,11.11))
-local vector3Type = type(vector3(11.11,11.11,11.11))
-local vector4Type = type(vector4(11.11,11.11,11.11,11.11))
-local tableT = {}
-local tableType = type(tableT)
+local vector2Type = type(vector2(0.0, 0.0))
+local vector3Type = type(vector3(0.0, 0.0, 0.0))
+local vector4Type = type(vector4(0.0, 0.0, 0.0, 0.0))
 
-function getStorage(storageType,key)
-
-    local typeUsed = type(storageType)
-    local ignoreString = false
-    if storageType == "vector2" or storageType == "vector3" or storageType == "vector4" or storageType == "table" then ignoreString = true end
-
-    if typeUsed == "number" then
-        -- Interger
-        if math.type(storageType) == intType then
-            return GetResourceKvpInt(key)
-
-        -- Float
-        elseif math.type(storageType) == floatType then
-            return GetResourceKvpFloat(key)
-
-        else
-            print("[Storage] - [Error] - [Failed to find data type] - x1")
+local TYPES = {
+    int = function(key)
+        return GetResourceKvpInt(key)
+    end,
+    float = function(key)
+        return GetResourceKvpFloat(key)
+    end,
+    string = function(key)
+        return GetResourceKvpString(key)
+    end,
+    vector2 = function(key)
+        return vector2(
+            GetResourceKvpFloat(("Vec2_[%s]_X"):format(key)),
+            GetResourceKvpFloat(("Vec2_[%s]_Y"):format(key))
+        )
+    end,
+    vector3 = function(key)
+        return vector3(
+            GetResourceKvpFloat(("Vec3_[%s]_X"):format(key)),
+            GetResourceKvpFloat(("Vec3_[%s]_Y"):format(key)),
+            GetResourceKvpFloat(("Vec3_[%s]_Z"):format(key))
+        )
+    end,
+    vector4 = function(key)
+        return vector4(
+            GetResourceKvpFloat(("Vec4_[%s]_X"):format(key)),
+            GetResourceKvpFloat(("Vec4_[%s]_Y"):format(key)),
+            GetResourceKvpFloat(("Vec4_[%s]_Z"):format(key)),
+            GetResourceKvpFloat(("Vec4_[%s]_W"):format(key))
+        )
+    end,
+    table = function(key)
+        local result = GetResourceKvpString("Json_" .. key)
+        if result then
+            return json.decode(result)
         end
-    else
-        -- String
-        if typeUsed == stringType and not ignoreString then
-            return GetResourceKvpString(key)
-
-        -- Vector 2
-        elseif typeUsed == vector2Type or storageType == "vector2" then
-            local vec2 = vector2(
-                GetResourceKvpFloat("Vec2_["..key.."]_X"),
-                GetResourceKvpFloat("Vec2_["..key.."]_Y")
-            )
-            return vec2
-
-        -- Vector 3 
-        elseif typeUsed == vector3Type or storageType == "vector3" then
-            local vec3 = vector3(
-                GetResourceKvpFloat("Vec3_["..key.."]_X"),
-                GetResourceKvpFloat("Vec3_["..key.."]_Y"),
-                GetResourceKvpFloat("Vec3_["..key.."]_Z")
-            )
-            return 
-
-        -- Vector 4 
-        elseif typeUsed == vector4Type or storageType == "vector4" then
-            local vec4 = vector4(
-                GetResourceKvpFloat("Vec4_["..key.."]_X"),
-                GetResourceKvpFloat("Vec4_["..key.."]_Y"),
-                GetResourceKvpFloat("Vec4_["..key.."]_Z"),
-                GetResourceKvpFloat("Vec4_["..key.."]_W")
-            )
-            return vec4
-
-        -- Tables
-        elseif typeUsed == tableType or storageType == "table" then
-            local result = json.decode(GetResourceKvpString("Json_"..key))
-            return result
-
-
-        else
-            print("[Storage] - [Error] - [Failed to find data type] - x2")
-        end
+        return nil
     end
+}
 
+--[[
+    -- Type: Function
+    -- Name: getStorage
+    -- Use: Internal helper to pull data by type from KVP storage
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function getStorage(storageType, key)
+    local reader = TYPES[storageType]
+    if reader then
+        return reader(key)
+    end
+    print("[Storage] - [Error] - [Failed to find data type] - x1")
+    return nil
 end
 
+--[[
+    -- Type: Function
+    -- Name: set
+    -- Use: Stores value under key using appropriate KVP native
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+function set(value, key)
+    local valueType = type(value)
 
-function set(value,key)
-
-    local typeUsed = type(value)
-    local ignoreString = false
-
-    if typeUsed == "number" then
-        -- Interger
-        if math.type(value) == intType then
-            SetResourceKvpInt("IsSet_"..key,1)
-            SetResourceKvpInt(key,value)
-
-        -- Float
-        elseif math.type(value) == floatType then
-            SetResourceKvpInt("IsSet_"..key,1)
+    if valueType == "number" then
+        if math.type(value) == "integer" then
+            SetResourceKvpInt("IsSet_" .. key, 1)
+            SetResourceKvpInt(key, value)
+        elseif math.type(value) == "float" then
+            SetResourceKvpInt("IsSet_" .. key, 1)
             SetResourceKvpFloat(key, value)
-
         else
             print("[Storage] - [Error] - [Failed to find data type] - x3")
         end
+        return
+    end
+
+    if valueType == "string" then
+        SetResourceKvpInt("IsSet_" .. key, 1)
+        SetResourceKvp(key, value)
+    elseif valueType == vector2Type then
+        SetResourceKvpInt("IsSet_" .. key, 1)
+        SetResourceKvpFloat(("Vec2_[%s]_X"):format(key), value.x)
+        SetResourceKvpFloat(("Vec2_[%s]_Y"):format(key), value.y)
+    elseif valueType == vector3Type then
+        SetResourceKvpInt("IsSet_" .. key, 1)
+        SetResourceKvpFloat(("Vec3_[%s]_X"):format(key), value.x)
+        SetResourceKvpFloat(("Vec3_[%s]_Y"):format(key), value.y)
+        SetResourceKvpFloat(("Vec3_[%s]_Z"):format(key), value.z)
+    elseif valueType == vector4Type then
+        SetResourceKvpInt("IsSet_" .. key, 1)
+        SetResourceKvpFloat(("Vec4_[%s]_X"):format(key), value.x)
+        SetResourceKvpFloat(("Vec4_[%s]_Y"):format(key), value.y)
+        SetResourceKvpFloat(("Vec4_[%s]_Z"):format(key), value.z)
+        SetResourceKvpFloat(("Vec4_[%s]_W"):format(key), value.w)
+    elseif valueType == "table" then
+        SetResourceKvpInt("IsSet_" .. key, 1)
+        SetResourceKvp("Json_" .. key, json.encode(value))
     else
-        -- String
-        if typeUsed == stringType then
-            SetResourceKvpInt("IsSet_"..key,1)
-            SetResourceKvp(key, value)
-
-        -- Vector 2
-        elseif typeUsed == vector2Type then
-            SetResourceKvpInt("IsSet_"..key,1)
-            SetResourceKvpFloat("Vec2_["..key.."]_X", value.x)
-            SetResourceKvpFloat("Vec2_["..key.."]_Y", value.y)
-
-        -- Vector 3
-        elseif typeUsed == vector3Type then
-            SetResourceKvpInt("IsSet_"..key,1)
-            SetResourceKvpFloat("Vec3_["..key.."]_X", value.x)
-            SetResourceKvpFloat("Vec3_["..key.."]_Y", value.y)
-            SetResourceKvpFloat("Vec3_["..key.."]_Z", value.z)
-
-        -- Vector 4
-        elseif typeUsed == vector4Type then
-            SetResourceKvpInt("IsSet_"..key,1)
-            SetResourceKvpFloat("Vec4_["..key.."]_X", value.x)
-            SetResourceKvpFloat("Vec4_["..key.."]_Y", value.y)
-            SetResourceKvpFloat("Vec4_["..key.."]_Z", value.z)
-            SetResourceKvpFloat("Vec4_["..key.."]_W", value.w)
-
-        -- Table
-        elseif typeUsed == tableType then
-            local jsonValue = json.encode(value)
-            SetResourceKvpInt("IsSet_"..key,1)
-            SetResourceKvp("Json_"..key, jsonValue)
-
-        else
-            print("[Storage] - [Error] - [Failed to find data type] - x4")
-        end
+        print("[Storage] - [Error] - [Failed to find data type] - x4")
     end
-
 end
 
-
+--[[
+    -- Type: Function
+    -- Name: remove
+    -- Use: Deletes stored value and associated keys
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 function remove(key)
-    DeleteResourceKvp(key)
+    local entries = {
+        key,
+        ("IsSet_%s"):format(key),
+        ("Vec2_[%s]_X"):format(key), ("Vec2_[%s]_Y"):format(key),
+        ("Vec3_[%s]_X"):format(key), ("Vec3_[%s]_Y"):format(key), ("Vec3_[%s]_Z"):format(key),
+        ("Vec4_[%s]_X"):format(key), ("Vec4_[%s]_Y"):format(key), ("Vec4_[%s]_Z"):format(key), ("Vec4_[%s]_W"):format(key),
+        ("Json_%s"):format(key)
+    }
+
+    for _, entry in ipairs(entries) do
+        DeleteResourceKvp(entry)
+    end
 end
 
-function tryGet(storageType,key)
-
-    if getStorage(1,"IsSet_"..key) ~= 0 then
-        return getStorage(storageType,key)
+--[[
+    -- Type: Function
+    -- Name: tryGet
+    -- Use: Retrieves stored value if it exists, else false
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+function tryGet(storageType, key)
+    if GetResourceKvpInt("IsSet_" .. key) ~= 0 then
+        return getStorage(storageType, key)
     end
-
     return false
 end
