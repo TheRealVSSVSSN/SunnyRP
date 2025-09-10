@@ -89,6 +89,25 @@ Styles the menu with centred positioning and white buttons that turn blue on hov
 | `fsn_apartments:getApartment` | Server handler | `char_id` number | Fetch apartment record. |
 | `fsn_apartments:createApartment` | Server handler | `char_id` number | Insert new apartment row. |
 | `fsn_apartments:saveApartment` | Server handler | apartment object | Persist apartment state. |
+| `playerDropped` | Server handler | `reason` string | Free occupied apartment when a player disconnects. |
+| `chatMessage` | Server handler | `source`, `auth`, `msg` | Parse `/stash` and `/outfit` chat commands. |
+
+### External Events Triggered
+| Event | Side | Payload | Purpose |
+|---|---|---|---|
+| `fsn_bank:change:walletMinus` | Client trigger | `amt` number | Deduct money when depositing to the stash. |
+| `fsn_bank:change:walletAdd` | Client trigger | `amt` number | Credit player wallet when withdrawing from stash. |
+| `fsn_notify:displayNotification` | Client trigger | message parameters | Show success or error notifications. |
+| `chatMessage` | Client trigger | `text` string | Display informational chat lines. |
+| `clothes:spawn` | Client trigger | outfit table | Apply a saved outfit on the player. |
+| `fsn_criminalmisc:weapons:add:tbl` | Client trigger | weapon data | Give weapon back to the player when equipped. |
+| `fsn_criminalmisc:weapons:destroy` | Client trigger | none | Remove weapon entity after storing it. |
+| `fsn_inventory:apt:recieve` | Client trigger | apartment ID, slot table | Open apartment inventory in shared inventory UI. |
+| `fsn_clothing:menu` | Client trigger | none | Open clothing selection during character creation. |
+| `fsn_spawnmanager:start` | Client trigger | boolean | Resume normal spawn flow after creation. |
+
+### ESX Callbacks
+None.
 
 ### Exports
 | Name | Description |
