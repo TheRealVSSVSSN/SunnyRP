@@ -1,59 +1,59 @@
-local hidden = {}
-local showPlayerBlips = false
-local ignorePlayerNameDistance = false
+--[[
+    -- Type: Script
+    -- Name: client.lua
+    -- Use: Displays player server IDs above heads when the scoreboard key is held.
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+
+local hiddenPlayers = {}
 local disPlayerNames = 50
-local playerSource = 0
+local headBone = 0x796e
 
+local controlKey = {
+    generalScoreboard = {303, "U"}
+}
 
-function DrawText3D(x,y,z, text, textColor) -- some useful function, use it if you want!
-    local color = { r = 255, g = 255, b = 255, alpha = 255 } -- Color of the text 
-    if textColor ~= nil then 
-        color = {r = textColor[1] or 255, g = textColor[2] or 255, b = textColor[3] or 255, alpha = textColor[4] or 255}
-    end
-    
-    local onScreen,_x,_y=World3dToScreen2d(x,y,z)
-    local px,py,pz=table.unpack(GetGameplayCamCoords())
-    local dist = #(vector3(px,py,pz) - vector3(x,y,z))
-
-    local scale = (1/dist)*2
-    local fov = (1/GetGameplayCamFov())*100
-    local scale = scale*fov
-    
-    if onScreen then
-        SetTextScale(0.3,0.3)
-        SetTextFont(0)
-        SetTextProportional(1)
-        SetTextColour(color.r, color.g, color.b, color.alpha)
-        SetTextDropshadow(0, 0, 0, 0, 55)
-        SetTextEdge(2, 0, 0, 0, 150)
-        SetTextDropShadow()
-        SetTextOutline()
-        SetTextEntry("STRING")
-        SetTextCentre(1)
-        AddTextComponentString(text)
-        DrawText(_x,_y)
-    end
+--[[
+    -- Type: Function
+    -- Name: doesPlayerExist
+    -- Use: Checks if a player with the given server ID is active.
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function doesPlayerExist(serverId)
+    local player = GetPlayerFromServerId(serverId)
+    return player ~= -1 and NetworkIsPlayerActive(player)
 end
 
-function DrawText3DTalking(x,y,z, text, textColor) -- some useful function, use it if you want!
-    local color = { r = 220, g = 220, b = 220, alpha = 255 } -- Color of the text 
-    if textColor ~= nil then 
-        color = {r = textColor[1] or 22, g = textColor[2] or 55, b = textColor[3] or 155, alpha = textColor[4] or 255}
+--[[
+    -- Type: Function
+    -- Name: drawText3D
+    -- Use: Renders 3D text at the specified world coordinates.
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function drawText3D(x, y, z, text, color)
+    local col = { r = 255, g = 255, b = 255, a = 255 }
+    if color then
+        col.r = color[1] or col.r
+        col.g = color[2] or col.g
+        col.b = color[3] or col.b
+        col.a = color[4] or col.a
     end
 
-    local onScreen,_x,_y=World3dToScreen2d(x,y,z)
-    local px,py,pz=table.unpack(GetGameplayCamCoords())
-    local dist = #(vector3(px,py,pz) - vector3(x,y,z))
+    local onScreen, _x, _y = World3dToScreen2d(x, y, z)
+    local px, py, pz = table.unpack(GetGameplayCamCoords())
+    local dist = #(vector3(px, py, pz) - vector3(x, y, z))
+    local scale = (1 / dist) * 2
+    local fov = (1 / GetGameplayCamFov()) * 100
+    scale = scale * fov
 
-    local scale = (1/dist)*2
-    local fov = (1/GetGameplayCamFov())*100
-    local scale = scale*fov
-    
     if onScreen then
-        SetTextScale(0.0*scale, 0.75*scale)
+        SetTextScale(0.0 * scale, 0.55 * scale)
         SetTextFont(0)
         SetTextProportional(1)
-        SetTextColour(color.r, color.g, color.b, color.alpha)
+        SetTextColour(col.r, col.g, col.b, col.a)
         SetTextDropshadow(0, 0, 0, 0, 55)
         SetTextEdge(2, 0, 0, 0, 150)
         SetTextDropShadow()
@@ -61,97 +61,71 @@ function DrawText3DTalking(x,y,z, text, textColor) -- some useful function, use 
         SetTextEntry("STRING")
         SetTextCentre(1)
         AddTextComponentString(text)
-        DrawText(_x,_y)
+        DrawText(_x, _y)
     end
 end
 
 RegisterNetEvent("hud:HidePlayer")
 AddEventHandler("hud:HidePlayer", function(player, toggle)
     if type(player) == "table" then
-        for k,v in pairs(player) do
-            if DoesPlayerExist(k) then
-                local id = GetPlayerFromServerId(k)
-                hidden[id] = k
+        for serverId, _ in pairs(player) do
+            if doesPlayerExist(serverId) then
+                hiddenPlayers[GetPlayerFromServerId(serverId)] = serverId
             end
         end
         return
     end
-    if DoesPlayerExist(player) then
+
+    if doesPlayerExist(player) then
         local id = GetPlayerFromServerId(player)
-        if toggle == true then
-            hidden[id] = player
+        if toggle then
+            hiddenPlayers[id] = player
         else
-            for k,v in pairs(hidden) do
-                if v == player then hidden[k] = nil end
-            end
+            hiddenPlayers[id] = nil
         end
     end
 end)
 
-Controlkey = {["generalScoreboard"] = {303,"U"}} 
 RegisterNetEvent('event:control:update')
-AddEventHandler('event:control:update', function(table)
-    Controlkey["generalScoreboard"] = table["generalScoreboard"]
+AddEventHandler('event:control:update', function(tbl)
+    controlKey.generalScoreboard = tbl.generalScoreboard
 end)
 
-
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
-        if IsControlPressed(0, Controlkey["generalScoreboard"][1]) then
-
-            for i=0,255 do
-                N_0x31698aa80e0223f8(i)
+        if IsControlPressed(0, controlKey.generalScoreboard[1]) then
+            for _, id in ipairs(GetActivePlayers()) do
+                N_0x31698aa80e0223f8(id)
             end
 
-            local playerped = PlayerPedId()
-            local HeadBone = 0x796e
+            local playerPed = PlayerPedId()
+            local myCoords = GetPedBoneCoords(playerPed, headBone)
 
-            for id = 0, 255 do
-                if NetworkIsPlayerActive(id) then
-                    local ped = GetPlayerPed(id)
+            for _, id in ipairs(GetActivePlayers()) do
+                local ped = GetPlayerPed(id)
+                local serverId = GetPlayerServerId(id)
 
-                    local playerCoords = GetPedBoneCoords(playerped, HeadBone)
+                if ped == playerPed then
+                    drawText3D(myCoords.x, myCoords.y, myCoords.z + 0.5, (' %s '):format(serverId), {152, 251, 152, 255})
+                else
+                    local pedCoords = GetPedBoneCoords(ped, headBone)
+                    local distance = #(myCoords - pedCoords)
 
-                    if ped == playerped then
-                        DrawText3DTalking(playerCoords.x, playerCoords.y, playerCoords.z+0.5, " ".. GetPlayerServerId(id) .. " ", {152, 251, 152, 255})
-                    else
-                        local pedCoords = GetPedBoneCoords(ped, HeadBone)
-
-                        local distance = math.floor(#(playerCoords - pedCoords))
-
-                        local isDucking = IsPedDucking(ped)
-                        local cansee = HasEntityClearLosToEntity(playerped, ped, 17 )
-                        local isReadyToShoot = IsPedWeaponReadyToShoot(ped)
-                        local isStealth = GetPedStealthMovement(ped)
-                        local isDriveBy = IsPedDoingDriveby(ped)
-                        local isInCover = IsPedInCover(ped,true)
-                        if isStealth == nil then
-                            isStealth = 0
+                    if distance < disPlayerNames and not hiddenPlayers[id] then
+                        local canSee = HasEntityClearLosToEntity(playerPed, ped, 17)
+                        local isHidden = IsPedDucking(ped) or IsPedDoingDriveby(ped) or IsPedInCover(ped, true) or (GetPedStealthMovement(ped) == 1)
+                        if not isHidden and canSee then
+                            local color = NetworkIsPlayerTalking(id) and {22, 55, 155, 255} or {255, 255, 255, 255}
+                            drawText3D(pedCoords.x, pedCoords.y, pedCoords.z + 0.5, (' %s '):format(serverId), color)
                         end
-
-                        if isDucking or isStealth == 1 or isDriveBy or isInCover then
-                            cansee = false
-                        end
-
-                        if hidden[id] then cansee = false end
-
-                        if (distance < disPlayerNames) then
-                            if(NetworkIsPlayerTalking(id)) then                            
-                                if cansee then
-                                    DrawText3DTalking(pedCoords.x, pedCoords.y, pedCoords.z+0.5, " ".. GetPlayerServerId(id) .. " ", {22, 55, 155, 255})
-                                end
-                            else
-                                if cansee then
-                                    DrawText3D(pedCoords.x, pedCoords.y, pedCoords.z+0.5, " ".. GetPlayerServerId(id) .. " ", {255, 255, 255, 255})
-                                end
-                            end
-                        end
-                    end                        
+                    end
                 end
             end
-            Citizen.Wait(1)
+
+            Wait(0)
         else
-            Citizen.Wait(2000)
-        end        
+            Wait(1000)
+        end
     end
 end)
+
