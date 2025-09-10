@@ -59,11 +59,11 @@ The `fsn_bank` resource equips the FiveM-FSN framework with ATM and bank branch 
 **Role:** Persists balance changes and executes inter‑player transfers.
 
 **Key Responsibilities:**
-- `fsn_bank:database:update` receives `charid`, `wallet`, and `bank`, updating `fsn_characters` table columns individually when values are provided.
+- `fsn_bank:database:update` receives `charid`, `wallet`, and `bank`; passing `false` for a field skips that column and the server updates each column separately.
 - `fsn_bank:transfer` verifies the recipient player is online, then triggers `fsn_bank:change:bankAdd` for the receiver and `fsn_bank:change:bankMinus` for the sender. If the recipient is missing, the source gets a notification.
 
 **Security/Permission Notes:**
-- Amounts and balance sufficiency are not validated server side.
+- Amounts, sign, and balance sufficiency are not validated server side.
 - Transfers do not persist automatically; another system must call `fsn_bank:database:update`.
 
 **DB Usage & Performance:**
@@ -90,7 +90,8 @@ Styles layout, buttons, and fonts for the ATM interface.
 - Listens for messages:
   - `displayATM` – Shows or hides the interface and notes if the player is at a bank branch.
   - `update` with `updateType` `wallet&bank` – Updates on-screen cash and bank values.
-- Plays a button-click sound on main button interaction.
+- Tracks if the player is at a branch (`amiatbank`), which gates deposits.
+- Maps side buttons to screens using jQuery and plays a click sound when any main button is released.
 - Posts callbacks back to Lua:
   - `depositMoney`, `withdrawMoney`, `transferMoney`, `toggleGUI`.
 
