@@ -1,117 +1,118 @@
--- NO TOUCHY, IF SOMETHING IS WRONG CONTACT KANERSPS! --
--- NO TOUCHY, IF SOMETHING IS WRONG CONTACT KANERSPS! --
--- NO TOUCHY, IF SOMETHING IS WRONG CONTACT KANERSPS! --
--- NO TOUCHY, IF SOMETHING IS WRONG CONTACT KANERSPS! --
+--[[
+    -- Type: Server
+    -- Name: PlayerLogin
+    -- Use: Handles player authentication and data persistence
+    -- Created: 09/10/2025
+    -- By: VSSVSSN
+--]]
 
-function LoadUser(identifier, source, new)
-        local result = MySQL.Sync.fetchAll("SELECT permission_level, money, identifier, `group` FROM users WHERE identifier = @name", {['@name'] = identifier})
-
-	local group = groups[result[1].group]
-	Users[source] = Player(source, result[1].permission_level, result[1].money, result[1].identifier, group)
-
-        TriggerEvent('es:playerLoaded', source, Users[source])
-
-        if settings.defaultSettings.enableRankDecorators then
-                TriggerClientEvent('es:setPlayerDecorator', source, 'rank', Users[source]:getPermissions())
-        end
-
-        if new then
-                TriggerEvent('es:newPlayerLoaded', source, Users[source])
-        end
+local function LoadUser(identifier, source, isNew)
+    local result = MySQL.query.await('SELECT permission_level, money, identifier, `group` FROM users WHERE identifier = ?', {identifier})
+    if not result[1] then return end
+    local group = groups[result[1].group]
+    Users[source] = Player(source, result[1].permission_level, result[1].money, result[1].identifier, group)
+    TriggerEvent('es:playerLoaded', source, Users[source])
+    if settings.defaultSettings.enableRankDecorators then
+        TriggerClientEvent('es:setPlayerDecorator', source, 'rank', Users[source]:getPermissions(), true)
+    end
+    if isNew then
+        TriggerEvent('es:newPlayerLoaded', source, Users[source])
+    end
 end
 
+--[[
+    -- Type: Function
+    -- Name: isIdentifierBanned
+    -- Use: Checks if identifier currently has an active ban
+    -- Created: 09/10/2025
+    -- By: VSSVSSN
+--]]
 function isIdentifierBanned(id)
-        local result = MySQL.Sync.fetchAll("SELECT expires, reason, timestamp FROM bans WHERE banned = @name", {['@name'] = id})
-        for _,v in ipairs(result) do
-                if v.expires > v.timestamp then
-                        return true
-                end
+    local result = MySQL.query.await('SELECT expires FROM bans WHERE banned = ?', {id})
+    for _, v in ipairs(result) do
+        if v.expires == -1 or v.expires > os.time() then
+            return true
         end
-        return false
+    end
+    return false
 end
 
 AddEventHandler('es:getPlayers', function(cb)
-        cb(Users)
+    cb(Users)
 end)
 
-function hasAccount(identifier)
-        local exists = MySQL.Sync.fetchScalar("SELECT 1 FROM users WHERE identifier = @name", {['@name'] = identifier})
-        return exists ~= nil
+local function hasAccount(identifier)
+    local exists = MySQL.scalar.await('SELECT 1 FROM users WHERE identifier = ?', {identifier})
+    return exists ~= nil
 end
 
+local function registerUser(identifier, source)
+    if not hasAccount(identifier) then
+        MySQL.insert.await('INSERT INTO users (`identifier`, `permission_level`, `money`, `group`) VALUES (?, 0, ?, "user")', {
+            identifier,
+            settings.defaultSettings.startingCash
+        })
+        LoadUser(identifier, source, true)
+    else
+        LoadUser(identifier, source, false)
+    end
+end
 
+_G.registerUser = registerUser
 
-function registerUser(identifier, source)
-        if not hasAccount(identifier) then
-                MySQL.Sync.execute("INSERT INTO users (`identifier`, `permission_level`, `money`, `group`) VALUES (@username, 0, @money, 'user')",
-                {['@username'] = identifier, ['@money'] = settings.defaultSettings.startingCash})
-                LoadUser(identifier, source, true)
-        else
-                LoadUser(identifier, source)
+RegisterNetEvent('es:setPlayerData')
+AddEventHandler('es:setPlayerData', function(user, k, v, cb)
+    if Users[user] and Users[user][k] then
+        if k ~= 'money' then
+            Users[user][k] = v
+            MySQL.update.await(('UPDATE users SET `%s` = ? WHERE identifier = ?'):format(k), {v, Users[user].identifier})
+            if k == 'group' then
+                Users[user].group = groups[v]
+            end
         end
-end
-
-AddEventHandler("es:setPlayerData", function(user, k, v, cb)
-	if(Users[user])then
-		if(Users[user][k])then
-
-                        if(k ~= "money") then
-                                Users[user][k] = v
-                                MySQL.Sync.execute("UPDATE users SET `"..k.."`=@value WHERE identifier=@identifier", {['@value'] = v, ['@identifier'] = Users[user]['identifier']})
-                        end
-
-			if(k == "group")then
-				Users[user].group = groups[v]
-			end
-
-			cb("Player data edited.", true)
-		else
-			cb("Column does not exist!", false)
-		end
-	else
-		cb("User could not be found!", false)
-	end
+        cb('Player data edited.', true)
+    else
+        cb('Column does not exist!', false)
+    end
 end)
 
-AddEventHandler("es:setPlayerDataId", function(user, k, v, cb)
-        MySQL.Sync.execute("UPDATE users SET `"..k.."`=@value WHERE identifier=@identifier", {['@value'] = v, ['@identifier'] = user})
-        cb("Player data edited.", true)
+RegisterNetEvent('es:setPlayerDataId')
+AddEventHandler('es:setPlayerDataId', function(user, k, v, cb)
+    MySQL.update.await(('UPDATE users SET `%s` = ? WHERE identifier = ?'):format(k), {v, user})
+    cb('Player data edited.', true)
 end)
 
-AddEventHandler("es:getPlayerFromId", function(user, cb)
-	if(Users)then
-		if(Users[user])then
-			cb(Users[user])
-		else
-			cb(nil)
-		end
-	else
-		cb(nil)
-	end
+RegisterNetEvent('es:getPlayerFromId')
+AddEventHandler('es:getPlayerFromId', function(user, cb)
+    cb(Users and Users[user])
 end)
 
-AddEventHandler("es:getPlayerFromIdentifier", function(identifier, cb)
-        local result = MySQL.Sync.fetchAll("SELECT permission_level, money, identifier, `group` FROM users WHERE identifier = @name", {['@name'] = identifier})
-        cb(result[1])
+RegisterNetEvent('es:getPlayerFromIdentifier')
+AddEventHandler('es:getPlayerFromIdentifier', function(identifier, cb)
+    local result = MySQL.query.await('SELECT permission_level, money, identifier, `group` FROM users WHERE identifier = ?', {identifier})
+    cb(result[1])
 end)
 
-AddEventHandler("es:getAllPlayers", function(cb)
-        local result = MySQL.Sync.fetchAll("SELECT permission_level, money, identifier, `group` FROM users", {})
-        cb(result)
+RegisterNetEvent('es:getAllPlayers')
+AddEventHandler('es:getAllPlayers', function(cb)
+    local result = MySQL.query.await('SELECT permission_level, money, identifier, `group` FROM users', {})
+    cb(result)
 end)
 
--- Function to update player money every 60 seconds.
+--[[
+    -- Type: Function
+    -- Name: savePlayerMoney
+    -- Use: Periodically writes player money to the database
+    -- Created: 09/10/2025
+    -- By: VSSVSSN
+--]]
 local function savePlayerMoney()
-	SetTimeout(60000, function()
-		TriggerEvent("es:getPlayers", function(users)
-			for k,v in pairs(users)do
-                                MySQL.Sync.execute("UPDATE users SET `money`=@value WHERE identifier=@identifier", {['@value'] = v.money, ['@identifier'] = v.identifier})
-			end
-		end)
-
-		savePlayerMoney()
-	end)
+    SetTimeout(60000, function()
+        for _, v in pairs(Users) do
+            MySQL.update('UPDATE users SET money = ? WHERE identifier = ?', {v.money, v.identifier})
+        end
+        savePlayerMoney()
+    end)
 end
 
 savePlayerMoney()
-

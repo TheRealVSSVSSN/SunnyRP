@@ -11,12 +11,12 @@ files {
 }
 
 server_scripts {
-    '@mysql-async/lib/MySQL.lua',
+    '@oxmysql/lib/MySQL.lua',
+    'server/util.lua',
     'server/classes/player.lua',
     'server/classes/groups.lua',
     'server/player/login.lua',
-    'server/main.lua',
-    'server/util.lua'
+    'server/main.lua'
 }
 
 client_scripts {
