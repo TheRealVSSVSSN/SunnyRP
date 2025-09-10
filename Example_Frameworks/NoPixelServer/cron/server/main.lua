@@ -1,53 +1,81 @@
-local Jobs     = {}
-local LastTime = nil
+--[[ 
+    -- Type: Table
+    -- Name: jobs
+    -- Use: Stores scheduled callbacks with hour and minute
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local jobs = {}
 
-function RunAt(h, m, cb)
+--[[ 
+    -- Type: Variable
+    -- Name: lastTick
+    -- Use: Tracks the last processed Unix minute
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local lastTick = os.time() - (os.time() % 60)
 
-	table.insert(Jobs, {
-		h  = h,
-		m  = m,
-		cb = cb
-	})
-
+--[[ 
+    -- Type: Function
+    -- Name: runAt
+    -- Use: Registers a callback to run at a specific hour and minute
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function runAt(h, m, cb)
+    jobs[#jobs + 1] = { h = h, m = m, cb = cb }
 end
 
-function GetTime()
-
-	local timestamp = os.time()
-	local d         = os.date('*t', timestamp).wday
-	local h         = tonumber(os.date('%H', timestamp))
-	local m         = tonumber(os.date('%M', timestamp))
-
-	return {d = d, h = h, m = m}
-
+--[[ 
+    -- Type: Function
+    -- Name: triggerJobs
+    -- Use: Executes jobs matching provided time parameters
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function triggerJobs(d, h, m)
+    for i = 1, #jobs do
+        local job = jobs[i]
+        if job.h == h and job.m == m then
+            job.cb(d, h, m)
+        end
+    end
 end
 
-function OnTime(d, h, m)
-
-	for i=1, #Jobs, 1 do
-		if Jobs[i].h == h and Jobs[i].m == m then
-			Jobs[i].cb(d, h, m)
-		end
-	end
-
+--[[ 
+    -- Type: Function
+    -- Name: tick
+    -- Use: Internal loop that checks the time and runs pending jobs
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function tick()
+    CreateThread(function()
+        while true do
+            local now = os.time()
+            while now - lastTick >= 60 do
+                lastTick = lastTick + 60
+                local t = os.date('*t', lastTick)
+                triggerJobs(t.wday, t.hour, t.min)
+            end
+            local waitSeconds = 60 - tonumber(os.date('%S', now))
+            Wait(waitSeconds * 1000)
+        end
+    end)
 end
 
-function Tick()
+tick()
 
-	local time = GetTime()
-
-	if time.h ~= LastTime.h or time.m ~= LastTime.m then
-		OnTime(time.d, time.h, time.m)
-		LastTime = time
-	end
-
-	SetTimeout(60000, Tick)
-end
-
-LastTime = GetTime()
-
-Tick()
-
-AddEventHandler('cron:runAt', function(h, m, cb)
-	RunAt(h, m, cb)
+--[[ 
+    -- Type: Event
+    -- Name: cron:runAt
+    -- Use: Registers a scheduled callback from other resources
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent('cron:runAt', function(h, m, cb)
+    runAt(h, m, cb)
 end)
+
+exports('RunAt', runAt)
