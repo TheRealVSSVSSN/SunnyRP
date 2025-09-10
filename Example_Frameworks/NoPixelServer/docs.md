@@ -6,3 +6,8 @@
 - Added radius constant to blackjack table locator and corrected prop name outputs.
 - Moved animation dictionary cleanup outside the dealer creation loop to prevent missing animation issues.
 - Converted global state to local variables and tightened betting validation on the server.
+
+## carwash
+- Migrated from legacy `__resource.lua` to `fxmanifest.lua` using `cerulean` and modern script declarations.
+- Refactored client script to use local constants, optimized thread sleep logic, and modern text display natives.
+- Fixed server event typo, ensured price data is sent to clients, and validated user existence before charging.
