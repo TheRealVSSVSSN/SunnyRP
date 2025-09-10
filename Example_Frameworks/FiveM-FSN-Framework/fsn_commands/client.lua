@@ -1,42 +1,43 @@
-function getVehicleInDirection(coordFrom, coordTo)
-	local rayHandle = CastRayPointToPoint(coordFrom.x, coordFrom.y, coordFrom.z, coordTo.x, coordTo.y, coordTo.z, 10, PlayerPedId(), 0)
-	local a, b, c, d, vehicle = GetRaycastResult(rayHandle)
-	return vehicle
-end
-function fsn_lookingAt()
-	local targetVehicle = false
-
-	local coordA = GetEntityCoords(PlayerPedId(), 1)
-	local coordB = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 20.0, -1.0)
-	targetVehicle = getVehicleInDirection(coordA, coordB)
-
-	return targetVehicle
+local function getVehicleInDirection(coordFrom, coordTo)
+    local handle = StartShapeTestRay(coordFrom.x, coordFrom.y, coordFrom.z, coordTo.x, coordTo.y, coordTo.z, 10, PlayerPedId(), 0)
+    local _, _, _, _, vehicle = GetShapeTestResult(handle)
+    return vehicle
 end
 
-function fsn_NearestPlayersC(x, y, z, radius)
-	local players = {}
-	for _, id in ipairs(GetActivePlayers()) do --for id = 0, 128 do
-		local ppos = GetEntityCoords(GetPlayerPed(id))
-		if GetDistanceBetweenCoords(ppos.x, ppos.y, ppos.z, x, y, z) < radius then
-			table.insert(players, #players+1, id)
-		end
-	end
+local function fsn_lookingAt()
+    local coordA = GetEntityCoords(PlayerPedId())
+    local coordB = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 20.0, -1.0)
+    return getVehicleInDirection(coordA, coordB)
 end
 
-function fsn_NearestPlayersS(x, y, z, radius)
-	local players = {}
-	for id = 0, 128 do
-		local ppos = GetEntityCoords(GetPlayerPed(id))
-		if GetDistanceBetweenCoords(ppos.x, ppos.y, ppos.z, x, y, z) < radius then
-			table.insert(players, #players+1, GetPlayerServerId(id))
-		end
-	end
-	return players
+local function fsn_NearestPlayersC(x, y, z, radius)
+    local players = {}
+    local origin = vector3(x, y, z)
+    for _, id in ipairs(GetActivePlayers()) do
+        local ppos = GetEntityCoords(GetPlayerPed(id))
+        if #(ppos - origin) < radius then
+            players[#players + 1] = id
+        end
+    end
+    return players
 end
-function loadAnim( dict )
-    while ( not HasAnimDictLoaded( dict ) ) do
-        RequestAnimDict( dict )
-        Citizen.Wait( 5 )
+
+local function fsn_NearestPlayersS(x, y, z, radius)
+    local players = {}
+    local origin = vector3(x, y, z)
+    for _, id in ipairs(GetActivePlayers()) do
+        local ppos = GetEntityCoords(GetPlayerPed(id))
+        if #(ppos - origin) < radius then
+            players[#players + 1] = GetPlayerServerId(id)
+        end
+    end
+    return players
+end
+
+local function loadAnim(dict)
+    while not HasAnimDictLoaded(dict) do
+        RequestAnimDict(dict)
+        Wait(5)
     end
 end
 -------------------------------------------------------------------------------------------------------------------------------------------------
@@ -149,7 +150,7 @@ AddEventHandler('fsn_commands:vehdoor:open', function(id)
 		while not NetworkHasControlOfEntity(veh) do
 			print'requestingcontrol'
 			NetworkRequestControlOfEntity(veh)
-			Citizen.Wait(1)
+			Wait(1)
 		end
 		print'gotcontrol'
 		SetVehicleDoorOpen(veh, id, false, false)
@@ -166,7 +167,7 @@ AddEventHandler('fsn_commands:vehdoor:close', function(id)
 		while not NetworkHasControlOfEntity(veh) do
 			print'requestingcontrol'
 			NetworkRequestControlOfEntity(veh)
-			Citizen.Wait(1)
+			Wait(1)
 		end
 		print'gotcontrol'
 		--SetVehicleDoorOpen(car, id, false, false)
@@ -253,21 +254,21 @@ function fsn_drawTextMe3D(x,y,z, text)
     end
 end
 RegisterNetEvent('fsn_commands:me:3d')
-AddEventHandler('fsn_commands:me:3d', function(player, action)
-	Citizen.CreateThread(function()
-		local mestarttime = exports["fsn_main"]:fsn_GetTime()
-		while true do
-			Citizen.Wait(0)
-			local ped = GetPlayerPed(GetPlayerFromServerId(player))
-			local pos = GetEntityCoords(ped)
-			if mestarttime+8 > exports["fsn_main"]:fsn_GetTime() then
-				fsn_drawTextMe3D(pos.x,pos.y,pos.z, action)
-			else
-				break
-			end
-		end
-	end)
-end)
+    AddEventHandler('fsn_commands:me:3d', function(player, action)
+        CreateThread(function()
+            local mestarttime = exports['fsn_main']:fsn_GetTime()
+            while true do
+                Wait(0)
+                local ped = GetPlayerPed(GetPlayerFromServerId(player))
+                local pos = GetEntityCoords(ped)
+                if mestarttime + 8 > exports['fsn_main']:fsn_GetTime() then
+                    fsn_drawTextMe3D(pos.x, pos.y, pos.z, action)
+                else
+                    break
+                end
+            end
+        end)
+    end)
 
 RegisterNetEvent('fsn_commands:sendxyz')
 AddEventHandler('fsn_commands:sendxyz', function()
@@ -376,7 +377,7 @@ AddEventHandler('fsn_commands:police:shotgun', function()
 			--TaskOpenVehicleDoor(PlayerPedId(), car, 6000, 5, 8.0)
 			SetVehicleDoorOpen(car, 5, false, false)
 			FreezeEntityPosition(PlayerPedId(), true)
-			Citizen.Wait(6000)
+			Wait(6000)
 			FreezeEntityPosition(PlayerPedId(), false)
 			SetVehicleDoorShut(car, 5, false)
 			TriggerEvent('fsn_criminalmisc:weapons:add:police', GetHashKey('WEAPON_PUMPSHOTGUN'), 250)
@@ -394,7 +395,7 @@ AddEventHandler('fsn_commands:police:shotgun', function()
 			--TaskOpenVehicleDoor(PlayerPedId(), car, 6000, 5, 8.0)
 			SetVehicleDoorOpen(car, 5, false, false)
 			FreezeEntityPosition(PlayerPedId(), true)
-			Citizen.Wait(6000)
+			Wait(6000)
 			FreezeEntityPosition(PlayerPedId(), false)
 			SetVehicleDoorShut(car, 5, false)
 			--TriggerEvent('fsn_criminalmisc:weapons:add:police', GetHashKey('WEAPON_PUMPSHOTGUN'), 250)
@@ -426,7 +427,7 @@ AddEventHandler('fsn_commands:police:rifle', function()
 			--TaskOpenVehicleDoor(PlayerPedId(), car, 6000, 5, 8.0)
 			SetVehicleDoorOpen(car, 5, false, false)
 			FreezeEntityPosition(PlayerPedId(), true)
-			Citizen.Wait(6000)
+			Wait(6000)
 			FreezeEntityPosition(PlayerPedId(), false)
 			SetVehicleDoorShut(car, 5, false)
 			TriggerEvent('fsn_criminalmisc:weapons:add:police', GetHashKey('WEAPON_CARBINERIFLE'), 250)
@@ -445,7 +446,7 @@ AddEventHandler('fsn_commands:police:rifle', function()
 				--TaskOpenVehicleDoor(PlayerPedId(), car, 6000, 5, 8.0)
 				SetVehicleDoorOpen(car, 5, false, false)
 				FreezeEntityPosition(PlayerPedId(), true)
-				Citizen.Wait(6000)
+				Wait(6000)
 				FreezeEntityPosition(PlayerPedId(), false)
 				SetVehicleDoorShut(car, 5, false)
 				--TriggerEvent('fsn_criminalmisc:weapons:add:police', GetHashKey('WEAPON_CARBINERIFLE'), 250)
@@ -512,7 +513,7 @@ AddEventHandler('fsn_commands:police:pedcarry', function()
 		local holdingBody = true
 		ClearPedTasksImmediately(PlayerPedId())
 		while (holdingBody) do
-			Citizen.Wait(1)
+			Wait(1)
 			if not IsEntityPlayingAnim(PlayerPedId(), "missfinale_c2mcs_1", "fin_c2_mcs_1_camman", 3) then
 				loadAnim( "missfinale_c2mcs_1" ) 
 				TaskPlayAnim(PlayerPedId(), "missfinale_c2mcs_1", "fin_c2_mcs_1_camman", 1.0, 1.0, -1, 50, 0, 0, 0, 0)
@@ -710,10 +711,10 @@ AddEventHandler('fsn_commands:police:updateBoot', function(plate, mdl, toggle)
 end)
 
 local boot_test = false
-Citizen.CreateThread(function()
-	while true do
-		Citizen.Wait(0)
-		if IsPedInAnyVehicle(PlayerPedId(), false) then
+CreateThread(function()
+        while true do
+                Wait(0)
+                if IsPedInAnyVehicle(PlayerPedId(), false) then
 			local car = GetVehiclePedIsIn(PlayerPedId(), false)
 			for k, v in pairs(booted_cars) do
 				if v.plate == GetVehicleNumberPlateText(car) and v.mdl == GetEntityModel(car) then
