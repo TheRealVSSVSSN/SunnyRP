@@ -1,27 +1,33 @@
-$(document).ready(function(){
-  // Listen for NUI Events
-  window.addEventListener('message', function(event){
+'use strict';
 
-    var item = event.data;
+document.addEventListener('DOMContentLoaded', () => {
+  const calculator = document.querySelector('.calculator');
+  const iframe = document.querySelector('iframe');
 
-    if(item.openSection == "calculator") {
-      $(".calculator").css("opacity", 1.0);
-    }
-
-    if(item.openSection == "close") {
-      $(".calculator").css("opacity", 0.0);
+  window.addEventListener('message', (event) => {
+    const { openSection } = event.data || {};
+    if (openSection === 'calculator') {
+      calculator.style.opacity = '1';
+    } else if (openSection === 'close') {
+      calculator.style.opacity = '0';
     }
   });
 
-  function _keyup(e) {
-    if (e.which == 27) {
-      $.post('http://np-webpages/close', JSON.stringify({}));
+  const close = () => {
+    fetch('https://np-webpages/close', {
+      method: 'POST',
+      body: JSON.stringify({})
+    });
+  };
+
+  const keyHandler = (e) => {
+    if (e.key === 'Escape') {
+      close();
     }
-  }
+  };
 
-  document.onkeyup = _keyup;
-
-  $("iframe").load(function () {
-    $(this).contents().keyup(_keyup);
+  document.addEventListener('keyup', keyHandler);
+  iframe.addEventListener('load', () => {
+    iframe.contentWindow.addEventListener('keyup', keyHandler);
   });
 });
