@@ -22,7 +22,7 @@ AddEventHandler('es_admin:spawnVehicle', function(v)
                 end
                 local playerCoords = GetEntityCoords(playerPed)
                 local heading = GetEntityHeading(playerPed)
-                local veh = CreateVehicle(carid, playerCoords, heading, true, false)
+                local veh = CreateVehicle(carid, playerCoords.x, playerCoords.y, playerCoords.z, heading, true, false)
                 TaskWarpPedIntoVehicle(playerPed, veh, -1)
                 SetEntityInvincible(veh, true)
         end
@@ -85,9 +85,9 @@ end)
 RegisterNetEvent('es_admin:givePosition')
 AddEventHandler('es_admin:givePosition', function()
         local pos = GetEntityCoords(PlayerPedId())
-	local string = "{ ['x'] = " .. pos.x .. ", ['y'] = " .. pos.y .. ", ['z'] = " .. pos.z .. " },\n"
-	TriggerServerEvent('es_admin:givePos', string)
-	TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0}, 'Position saved to file.')
+        local posString = "{ ['x'] = " .. pos.x .. ", ['y'] = " .. pos.y .. ", ['z'] = " .. pos.z .. " },\n"
+        TriggerServerEvent('es_admin:givePos', posString)
+        TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0}, 'Position saved to file.')
 end)
 
 RegisterNetEvent('es_admin:kill')
@@ -102,6 +102,7 @@ AddEventHandler('es_admin:crash', function()
 end)
 
 local noclip = false
+local noclip_pos
 
 RegisterNetEvent("es_admin:noclip")
 AddEventHandler("es_admin:noclip", function(t)
@@ -121,10 +122,12 @@ end)
 
 CreateThread(function()
         while true do
-                Wait(10)
                 if states.frozen then
                         ClearPedTasksImmediately(PlayerPedId())
                         SetEntityCoords(PlayerPedId(), states.frozenPos)
+                        Wait(10)
+                else
+                        Wait(500)
                 end
         end
 end)
@@ -133,37 +136,39 @@ local heading = 0
 
 CreateThread(function()
         while true do
-                Wait(0)
                 if noclip then
-                        SetEntityCoordsNoOffset(PlayerPedId(),  noclip_pos.x,  noclip_pos.y,  noclip_pos.z,  0, 0, 0)
+                        SetEntityCoordsNoOffset(PlayerPedId(), noclip_pos.x, noclip_pos.y, noclip_pos.z, 0, 0, 0)
 
-			if(IsControlPressed(1,  34))then
+                        if IsControlPressed(1, 34) then
                                 heading = heading + 1.5
-                if heading > 360 then
-                        heading = 0
-                end
-                SetEntityHeading(PlayerPedId(), heading)
-			end
-			if(IsControlPressed(1,  9))then
+                                if heading > 360 then
+                                        heading = 0
+                                end
+                                SetEntityHeading(PlayerPedId(), heading)
+                        end
+                        if IsControlPressed(1, 9) then
                                 heading = heading - 1.5
-                if heading < 0 then
-                        heading = 360
-                end
-                SetEntityHeading(PlayerPedId(), heading)
-			end
-			if(IsControlPressed(1,  8))then
+                                if heading < 0 then
+                                        heading = 360
+                                end
+                                SetEntityHeading(PlayerPedId(), heading)
+                        end
+                        if IsControlPressed(1, 8) then
                                 noclip_pos = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 1.0, 0.0)
-			end
-			if(IsControlPressed(1,  32))then
+                        end
+                        if IsControlPressed(1, 32) then
                                 noclip_pos = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, -1.0, 0.0)
-			end
+                        end
 
-			if(IsControlPressed(1,  27))then
+                        if IsControlPressed(1, 27) then
                                 noclip_pos = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 0.0, 1.0)
-			end
-			if(IsControlPressed(1,  173))then
+                        end
+                        if IsControlPressed(1, 173) then
                                 noclip_pos = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 0.0, -1.0)
-			end
-		end
-	end
+                        end
+                        Wait(0)
+                else
+                        Wait(500)
+                end
+        end
 end)

@@ -7,7 +7,7 @@
 --]]
 CreateThread(function()
     while not NetworkIsSessionStarted() do
-        Wait(0)
+        Wait(500)
     end
     TriggerServerEvent('es:firstJoinProper')
 end)

@@ -66,7 +66,7 @@ Data file where the “pos” command appends coordinate tables for later refere
 ## Server
 ### essentialmode/server/util.lua
 Helper functions shared by server scripts:
-- `stringsplit`, `startswith`, and `returnIndexesInTable` offer basic string and table helpers and are exported globally for reuse.
+- `stringsplit` now safely escapes literal separators before splitting, alongside the existing `startswith` and `returnIndexesInTable` helpers exported globally for reuse.
 - `debugMsg` emits tagged debug output when debugging is enabled and is callable through the `es:debugMsg` event.
 
 ### essentialmode/server/config.lua
@@ -76,11 +76,11 @@ Centralised globals and defaults:
 
 ### essentialmode/server/main.lua
 Primary server runtime responsible for:
- - Utilising global registries from `server/config.lua`.
- - Checking bans during `playerConnecting` with deferrals and saving money asynchronously on `playerDropped`.
- - Handling first join flow via `es:firstJoinProper`, enabling PvP when configured, and raising `es:firstSpawn` on first spawn.
- - Managing session settings through `es:setSessionSetting` and `es:getSessionSetting`.
-- Parsing chat messages that begin with `/` to resolve registered commands. It enforces permission levels or group membership, triggers audit hooks (`es:adminCommandRan`, `es:userCommandRan`, `es:commandRan`, `es:adminCommandFailed`, `es:invalidCommandHandler`, `es:chatMessage`), and denies access with a configured message when appropriate.
+- Utilising global registries from `server/config.lua`.
+- Checking bans during `playerConnecting` with deferral status messages and saving money asynchronously on `playerDropped` with error handling.
+- Handling first join flow via `es:firstJoinProper`, enabling PvP when configured, and raising `es:firstSpawn` on first spawn.
+- Managing session settings through `es:setSessionSetting` and `es:getSessionSetting`.
+- Parsing chat messages that begin with `/` to resolve registered commands case‑insensitively. It enforces permission levels or group membership, triggers audit hooks (`es:adminCommandRan`, `es:userCommandRan`, `es:commandRan`, `es:adminCommandFailed`, `es:invalidCommandHandler`, `es:chatMessage`), and denies access with a configured message when appropriate.
 - Providing APIs for other resources to register commands (`es:addCommand`, `es:addAdminCommand`, `es:addGroupCommand`). A built‑in `info` command reports the essentialmode version and command count.
 - Receiving periodic coordinate updates (`es:updatePositions`) to track player positions.
 
@@ -116,7 +116,7 @@ Server‑side administrative addon:
 ## Client
 ### essentialmode/client/main.lua
 Client runtime coordinating with the server:
-- On session start, triggers `es:firstJoinProper` to initialise the account.
+- On session start, triggers `es:firstJoinProper` after waiting for the network session in half‑second intervals to reduce idle CPU usage.
 - Sends `es:updatePositions` once per second when coordinates change.
 - Manages decorators set via `es:setPlayerDecorator`, registering keys only once and reapplying them on `playerSpawned`.
 - Handles money events (`es:activateMoney`, `es:addedMoney`, `es:removedMoney`) and opacity changes (`es:setMoneyDisplay`) by relaying to the NUI while keeping a local cash tally.
@@ -124,9 +124,9 @@ Client runtime coordinating with the server:
 
 ### [essential]/es_admin/cl_admin.lua
 Client counterpart for administrative commands:
-- Spawns vehicles, toggles noclip, teleports players, applies slaps or kills on demand, and enforces freeze positions when told by the server.
+- Spawns vehicles at the player’s position using explicit coordinates, toggles noclip, teleports players, applies slaps or kills on demand, and enforces freeze positions when told by the server.
 - The `pos` command sends formatted coordinates back to the server for logging.
-- Maintains loops to keep frozen players stationary and to move the player when noclip mode is active.
+- Maintains loops to keep frozen players stationary and to move the player when noclip mode is active, sleeping when idle to minimise CPU usage.
 
 ## NUI
 ### essentialmode/ui.html

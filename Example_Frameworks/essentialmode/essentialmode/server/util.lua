@@ -15,7 +15,11 @@
 --]]
 local function stringsplit(input, sep)
     local t = {}
-    if not sep or sep == '' then sep = '%s' end
+    if not sep or sep == '' then
+        sep = '%s'
+    else
+        sep = sep:gsub('(%W)', '%%%1')
+    end
     for str in string.gmatch(input, '([^' .. sep .. ']+)') do
         t[#t + 1] = str
     end
