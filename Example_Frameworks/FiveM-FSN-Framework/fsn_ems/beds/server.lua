@@ -51,30 +51,25 @@ local beds = {
 	},
 }
 
-RegisterNetEvent('fsn_ems:bed:occupy')
-RegisterNetEvent('fsn_ems:bed:leave')
-RegisterNetEvent('fsn_ems:bed:restraintoggle')
-RegisterNetEvent('fsn_ems:bed:health')
-
-AddEventHandler('fsn_ems:bed:health', function(bed, current, maximum)
-	beds[bed].occupied[4][1] = current
-	beds[bed].occupied[4][2] = maximum
-	TriggerClientEvent('fsn_ems:bed:update', -1, bed, beds[bed])
+RegisterNetEvent('fsn_ems:bed:health', function(bed, current, maximum)
+    beds[bed].occupied[4][1] = current
+    beds[bed].occupied[4][2] = maximum
+    TriggerClientEvent('fsn_ems:bed:update', -1, bed, beds[bed])
 end)
 
-AddEventHandler('fsn_ems:bed:restraintoggle', function(bed)
-	beds[bed].occupied[3] = not beds[bed].occupied[3]
-	TriggerClientEvent('fsn_ems:bed:update', -1, bed, beds[bed])
+RegisterNetEvent('fsn_ems:bed:restraintoggle', function(bed)
+    beds[bed].occupied[3] = not beds[bed].occupied[3]
+    TriggerClientEvent('fsn_ems:bed:update', -1, bed, beds[bed])
 end)
 
-AddEventHandler('fsn_ems:bed:occupy', function(bed)
-	beds[bed].occupied[1] = not beds[bed].occupied[1]
-	beds[bed].occupied[2] = source
-	TriggerClientEvent('fsn_ems:bed:update', -1, bed, beds[bed])
+RegisterNetEvent('fsn_ems:bed:occupy', function(bed)
+    beds[bed].occupied[1] = not beds[bed].occupied[1]
+    beds[bed].occupied[2] = source
+    TriggerClientEvent('fsn_ems:bed:update', -1, bed, beds[bed])
 end)
 
-AddEventHandler('fsn_ems:bed:leave', function(bed)
-	beds[bed].occupied[1] = not beds[bed].occupied[1]
-	beds[bed].occupied[2] = 0
-	TriggerClientEvent('fsn_ems:bed:update', -1, bed, beds[bed])
+RegisterNetEvent('fsn_ems:bed:leave', function(bed)
+    beds[bed].occupied[1] = not beds[bed].occupied[1]
+    beds[bed].occupied[2] = 0
+    TriggerClientEvent('fsn_ems:bed:update', -1, bed, beds[bed])
 end)

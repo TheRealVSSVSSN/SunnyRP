@@ -1,21 +1,18 @@
-local carrycarried = {}
-RegisterServerEvent('fsn_ems:carry:start')
-AddEventHandler('fsn_ems:carry:start', function(deaded)
-	print(source..' is trying to carry '..deaded)
-	if carrycarried[source] or carrycarried[deaded] then return end -- already being carried/carrying
-	print('carrying')
-	carrycarried[source] = true
-	carrycarried[deaded] = true
-	TriggerClientEvent('fsn_ems:carry:start', source, deaded)
-	TriggerClientEvent('fsn_ems:carried:start', deaded, source)
+local carryState = {}
+
+RegisterNetEvent('fsn_ems:carry:start', function(target)
+    if carryState[source] or carryState[target] then return end
+    carryState[source] = true
+    carryState[target] = true
+    TriggerClientEvent('fsn_ems:carry:start', source, target)
+    TriggerClientEvent('fsn_ems:carried:start', target, source)
 end)
 
-RegisterServerEvent('fsn_ems:carry:end')
-AddEventHandler('fsn_ems:carry:end', function(deaded)
-	if not carrycarried[source] or not carrycarried[deaded] then return end -- not being carried/carrying
-	carrycarried[source] = nil
-	carrycarried[deaded] = nil
-	TriggerClientEvent('fsn_ems:carry:end', source, deaded)
-	TriggerClientEvent('fsn_ems:carried:end', deaded, source)
+RegisterNetEvent('fsn_ems:carry:end', function(target)
+    if not carryState[source] or not carryState[target] then return end
+    carryState[source] = nil
+    carryState[target] = nil
+    TriggerClientEvent('fsn_ems:carry:end', source, target)
+    TriggerClientEvent('fsn_ems:carried:end', target, source)
 end)
-print'ass'
+

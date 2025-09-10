@@ -1,41 +1,40 @@
- local onduty_ems = {}
+local ondutyEMS = {}
 
- RegisterServerEvent('fsn_ems:update')
- RegisterServerEvent('fsn_ems:onDuty')
- AddEventHandler('fsn_ems:onDuty', function(emslevel)
-   if emslevel > 2 then
-     table.insert(onduty_ems, {ply_id = source, ply_lvl = emslevel})
-     TriggerClientEvent('fsn_ems:update', -1, onduty_ems)
-     TriggerEvent('fsn_ems:update', onduty_ems)
-     print(':fsn_ems: '..source..' has clocked on duty at level '..emslevel)
-   else
-     print(':fsn_ems: '..source..' has clocked in as police, but is not high enough level to contribute.')
-   end
- end)
+RegisterNetEvent('fsn_ems:onDuty', function(level)
+    if level > 2 then
+        table.insert(ondutyEMS, {ply_id = source, ply_lvl = level})
+        TriggerClientEvent('fsn_ems:update', -1, ondutyEMS)
+        TriggerEvent('fsn_ems:update', ondutyEMS)
+        print((':fsn_ems: %s has clocked on duty at level %s'):format(source, level))
+    else
+        print((':fsn_ems: %s has clocked in as police, but is not high enough level to contribute.'):format(source))
+    end
+end)
 
- RegisterServerEvent('fsn_ems:offDuty')
- AddEventHandler('fsn_ems:offDuty', function()
-   for k, v in pairs(onduty_ems) do
-     if v.ply_id == source then
-       table.remove(onduty_ems, k)
-       print(':fsn_ems: '..source..' has clocked out.')
-     end
-   end
-   TriggerClientEvent('fsn_ems:update', -1, onduty_ems)
-   TriggerEvent('fsn_ems:update', onduty_ems)
- end)
+RegisterNetEvent('fsn_ems:offDuty', function()
+    for k, v in pairs(ondutyEMS) do
+        if v.ply_id == source then
+            table.remove(ondutyEMS, k)
+            print((':fsn_ems: %s has clocked out.'):format(source))
+            break
+        end
+    end
+    TriggerClientEvent('fsn_ems:update', -1, ondutyEMS)
+    TriggerEvent('fsn_ems:update', ondutyEMS)
+end)
 
- AddEventHandler('playerDropped', function()
-   for k, v in pairs(onduty_ems) do
-     if v.ply_id == source then
-       table.remove(onduty_ems, k)
-       print(':fsn_ems: '..source..' has clocked out and disconnected.')
-     end
-   end
-   TriggerClientEvent('fsn_ems:update', -1, onduty_ems)
- end)
+AddEventHandler('playerDropped', function()
+    for k, v in pairs(ondutyEMS) do
+        if v.ply_id == source then
+            table.remove(ondutyEMS, k)
+            print((':fsn_ems: %s has clocked out and disconnected.'):format(source))
+            break
+        end
+    end
+    TriggerClientEvent('fsn_ems:update', -1, ondutyEMS)
+end)
 
- RegisterServerEvent('fsn_ems:requestUpdate')
- AddEventHandler('fsn_ems:requestUpdate', function()
-   TriggerClientEvent('fsn_ems:update', source, onduty_ems)
- end)
+RegisterNetEvent('fsn_ems:requestUpdate', function()
+    TriggerClientEvent('fsn_ems:update', source, ondutyEMS)
+end)
+

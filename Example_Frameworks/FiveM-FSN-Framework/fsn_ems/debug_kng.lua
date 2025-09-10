@@ -1,15 +1,19 @@
-local realWait = Citizen.Wait
+local realWait = Wait
 
-function newWait(msec)
-    local info = debug.getinfo(2,"nSl")
+local function debugWait(msec)
+    local info = debug.getinfo(2, 'nSl')
     local msg = ("%s:%d (%s[%d-%d])"):format(
-        info.source, info.currentline, info.name,
-        info.linedefined, info.lastlinedefined
+        info.source,
+        info.currentline,
+        info.name,
+        info.linedefined,
+        info.lastlinedefined
     )
-    print("Yielding @ "..msg)
+    print("Yielding @ " .. msg)
     realWait(msec)
-    print("Resuming @ "..msg)
+    print("Resuming @ " .. msg)
 end
 
-Citizen.Wait = newWait
-Wait = newWait
+Wait = debugWait
+Citizen.Wait = debugWait
+
