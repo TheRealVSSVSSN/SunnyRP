@@ -1,6 +1,19 @@
+--[[
+    -- Type: Variables
+    -- Name: isHandcuffed, isSoftCuffed
+    -- Use: Track player's handcuff state
+    -- Created: 2024-05-23
+    -- By: VSSVSSN
+--]]
 local isHandcuffed, isSoftCuffed = false, false
 
-
+--[[
+    -- Type: Table
+    -- Name: animations
+    -- Use: Repository of available dance animations
+    -- Created: 2024-05-23
+    -- By: VSSVSSN
+--]]
 local animations = {
     { dict = "anim@amb@nightclub@dancers@crowddance_facedj@hi_intensity", anim = "hi_dance_facedj_15_v1_male^6"},
     { dict = "anim@amb@nightclub@dancers@crowddance_facedj@hi_intensity", anim = "hi_dance_facedj_17_v1_flats_female^3", disabled = true},
@@ -3893,46 +3906,95 @@ local animations = {
     { dict = "anim@amb@nightclub_island@dancers@crowddance_single_props_transitions@", anim = "trans_dance_prop_li_to_mi_11_v1_male^1"},
 }
 
-RegisterNetEvent("police:currentHandCuffedState")
-AddEventHandler("police:currentHandCuffedState", function(pIsHandcuffed, pIsHandcuffedAndWalking)
+--[[
+    -- Type: Event
+    -- Name: police:currentHandCuffedState
+    -- Use: Updates player handcuff states
+    -- Created: 2024-05-23
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent("police:currentHandCuffedState", function(pIsHandcuffed, pIsHandcuffedAndWalking)
     isHandcuffed = pIsHandcuffed
     isSoftCuffed = pIsHandcuffedAndWalking
 end)
 
 
-function LoadAnimationDic(dict)
+--[[
+    -- Type: Function
+    -- Name: loadAnimDict
+    -- Use: Requests and waits for an animation dictionary
+    -- Created: 2024-05-23
+    -- By: VSSVSSN
+--]]
+local function loadAnimDict(dict)
     if not HasAnimDictLoaded(dict) then
         RequestAnimDict(dict)
-        
         while not HasAnimDictLoaded(dict) do
-            Citizen.Wait(0)
+            Wait(0)
         end
     end
 end
 
-
-
-RegisterNetEvent('np:dances:dance')
-AddEventHandler('np:dances:dance', function(pDance)
-    if not isHandcuffed and not isSoftCuffed then
-        local noAnimations = #animations
-
-        if pDance == -1 then
-            pDance = math.random(noAnimations)
-            print(("You randomly selected dance %s"):format(pDance))
-        end
-
-        if pDance > noAnimations or pDance <= 0 then
-            TriggerEvent('DoLongHudText', ("There are only %s dances, select a number inbetween or random (no input)"):format(noAnimations))
-            return
-        end
-
-        if animations[pDance] and animations[pDance].disabled then
-            TriggerEvent('DoLongHudText', "This dance is disabled")
-            return
-        end
-
-        LoadAnimationDic(animations[pDance].dict)
-        TaskPlayAnim(PlayerPedId(), animations[pDance].dict, animations[pDance].anim, 3.0, 3.0, -1, 1, 0, 0, 0, 0)
+--[[
+    -- Type: Function
+    -- Name: playDance
+    -- Use: Plays or stops the given dance animation
+    -- Created: 2024-05-23
+    -- By: VSSVSSN
+--]]
+local function playDance(index)
+    local data = animations[index]
+    if not data or data.disabled then
+        TriggerEvent('DoLongHudText', "This dance is disabled or invalid")
+        return
     end
+
+    loadAnimDict(data.dict)
+    local ped = PlayerPedId()
+
+    if IsEntityPlayingAnim(ped, data.dict, data.anim, 3) then
+        StopAnimTask(ped, data.dict, data.anim, 3.0)
+        return
+    end
+
+    TaskPlayAnim(ped, data.dict, data.anim, 3.0, 3.0, -1, 1, 0.0, false, false, false)
+end
+
+
+
+--[[
+    -- Type: Event
+    -- Name: np:dances:dance
+    -- Use: Plays a dance by index or randomly
+    -- Created: 2024-05-23
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent('np:dances:dance', function(pDance)
+    if isHandcuffed or isSoftCuffed then return end
+
+    local totalAnimations = #animations
+    local index = tonumber(pDance)
+
+    if not index or index == -1 then
+        index = math.random(totalAnimations)
+        print(("You randomly selected dance %s"):format(index))
+    end
+
+    if index < 1 or index > totalAnimations then
+        TriggerEvent('DoLongHudText', ("There are only %s dances, select a number between 1 and %s or random (no input)"):format(totalAnimations, totalAnimations))
+        return
+    end
+
+    playDance(index)
+end)
+
+--[[
+    -- Type: Command
+    -- Name: dance
+    -- Use: Client command wrapper for the dance event
+    -- Created: 2024-05-23
+    -- By: VSSVSSN
+--]]
+RegisterCommand('dance', function(_, args)
+    TriggerEvent('np:dances:dance', tonumber(args[1]) or -1)
 end)
