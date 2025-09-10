@@ -32,7 +32,6 @@ PlayerState.weapon_types = {
   "WEAPON_SAWNOFFSHOTGUN",
   "WEAPON_ASSAULTSHOTGUN",
   "WEAPON_BULLPUPSHOTGUN",
-  "WEAPON_STUNGUN",
   "WEAPON_SNIPERRIFLE",
   "WEAPON_HEAVYSNIPER",
   "WEAPON_REMOTESNIPER",
@@ -141,7 +140,7 @@ function PlayerState:giveWeapons(weapons, clear_before)
     local hash = GetHashKey(k)
     local ammo = weapon.ammo or 0
 
-    GiveWeaponToPed(player, hash, ammo, false)
+    GiveWeaponToPed(player, hash, ammo, false, false)
   end
 end
 
@@ -256,6 +255,7 @@ function PlayerState:setCustomization(custom)
         while not HasModelLoaded(mhash) and i < 10000 do
           RequestModel(mhash)
           Wait(10)
+          i = i + 1
         end
 
         if HasModelLoaded(mhash) then
