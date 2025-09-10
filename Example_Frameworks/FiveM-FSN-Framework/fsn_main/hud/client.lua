@@ -1,7 +1,7 @@
-Citizen.CreateThread(function()
+CreateThread(function()
   while true do
-    Citizen.Wait( 0 )
-    HideHudComponentThisFrame( 14 ) -- Crosshair
+    Wait(0)
+    HideHudComponentThisFrame(14)
   end
 end)
 
