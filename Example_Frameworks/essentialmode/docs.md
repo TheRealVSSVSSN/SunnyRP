@@ -51,13 +51,13 @@ Contributor instructions for documenting the essentialmode resource. It carries 
 Existing documentation detailing the essentialmode internals and event surface. The current document supersedes it by adding es_admin coverage.
 
 ### essentialmode/fxmanifest.lua
-Modern manifest declaring NUI files, integrating `mysql-async`, and listing server/client scripts.
+Modern manifest declaring NUI files, integrating `oxmysql`, and listing server/client scripts.
 
 ### [essential]/es_admin/agents.md
 Documentation instructions specific to the es_admin addon.
 
 ### [essential]/es_admin/fxmanifest.lua
-Manifest converted to `fxmanifest.lua` syntax, declares dependency on essentialmode, integrates `mysql-async`, and registers the addon scripts.
+Manifest converted to `fxmanifest.lua` syntax, declares dependency on essentialmode, integrates `oxmysql`, and registers the addon scripts.
 
 ### [essential]/es_admin/positions.txt
 Data file where the “pos” command appends coordinate tables for later reference.
@@ -65,14 +65,13 @@ Data file where the “pos” command appends coordinate tables for later refere
 ## Server
 ### essentialmode/server/util.lua
 Helper functions shared by server scripts:
-- `stringsplit` now splits strings using Lua patterns for compatibility.
-- `startswith` and `returnIndexesInTable` implement basic utilities.
+- `stringsplit`, `startswith`, and `returnIndexesInTable` offer basic string and table helpers and are exported globally for reuse.
 - `debugMsg` emits tagged debug output when debugging is enabled and is callable through the `es:debugMsg` event.
 
 ### essentialmode/server/main.lua
 Primary server runtime responsible for:
-- Initialising global tables for users, commands and configuration defaults.
-- Checking bans during `playerConnecting` with deferrals and saving money on `playerDropped`.
+- Initialising local registries for users, commands and configuration defaults.
+- Checking bans during `playerConnecting` with deferrals and saving money asynchronously on `playerDropped`.
 - Handling first join flow via `es:firstJoinProper`, enabling PvP when configured, and raising `es:firstSpawn` on first spawn.
 - Managing session settings through `es:setSessionSetting` and `es:getSessionSetting`.
 - Parsing chat messages that begin with `/` to resolve registered commands. It enforces permission levels or group membership, triggers audit hooks (`es:adminCommandRan`, `es:userCommandRan`, `es:commandRan`, `es:adminCommandFailed`, `es:invalidCommandHandler`, `es:chatMessage`), and denies access with a configured message when appropriate.
@@ -81,15 +80,15 @@ Primary server runtime responsible for:
 
 ### essentialmode/server/player/login.lua
 Database integration and account lifecycle:
-- Uses `mysql-async` for querying the `users` table and constructing `Player` objects.
-- Fires `es:playerLoaded`, sets rank decorators, and marks brand new accounts via `es:newPlayerLoaded`.
-- Provides functions to check bans, test for existing accounts, register default records, and expose events like `es:setPlayerData`, `es:setPlayerDataId`, `es:getPlayerFromId`, `es:getPlayerFromIdentifier`, `es:getAllPlayers`, and `es:getPlayers`.
+- Uses asynchronous `MySQL` helpers to query the `users` table and construct `Player` objects.
+- Fires `es:playerLoaded`, applies rank decorators when enabled, and marks brand new accounts via `es:newPlayerLoaded`.
+- Provides functions to check bans (including expiry), test for existing accounts, register default records, and expose events like `es:setPlayerData`, `es:setPlayerDataId`, `es:getPlayerFromId`, `es:getPlayerFromIdentifier`, `es:getAllPlayers`, and `es:getPlayers`.
 - Periodically persists all players’ money every minute.
 
 ### essentialmode/server/classes/player.lua
 Defines the `Player` object representing a connected user:
 - Stores identifiers, permission level, cash balance, group, last known coordinates and arbitrary session variables.
-- Methods `getPermissions` and `setPermissions` read or modify permission level; `kick` disconnects a player.
+- Methods `getPermissions` and `setPermissions` read or modify permission level via `es:setPlayerData`; `kick` disconnects a player.
 - Money helpers `setMoney`, `addMoney`, and `removeMoney` adjust balance and emit corresponding client events (`es:activateMoney`, `es:addedMoney`, `es:removedMoney`).
 - `setCoords`, `setSessionVar`, and `getSessionVar` update position and custom session state.
 
@@ -102,7 +101,7 @@ Implements hierarchical permission groups:
 ### [essential]/es_admin/sv_admin.lua
 Server‑side administrative addon:
 - Registers custom groups `owner` and `mod` and provides chat commands for moderators and admins: vehicle spawning, reports, noclip, kick, timed bans (with database inserts), announcements, freezing, teleportation (`bring`/`goto`), slap, self‑kill, targeted kill, crash, and position capture.
-- Persists bans using `mysql-async`.
+- Persists bans using `oxmysql`.
 - Each sensitive command verifies that the caller’s permission level or group outranks the target.
 - Receives client positions via `es_admin:givePos` and appends them to `positions.txt`.
 - Defines console (RCON) commands to adjust permissions, groups, money, and bans.
@@ -113,8 +112,8 @@ Server‑side administrative addon:
 Client runtime coordinating with the server:
 - On session start, triggers `es:firstJoinProper` to initialise the account.
 - Every second sends `es:updatePositions` when the player's coordinates change and refreshes the NUI money display when awaiting data.
-- Manages decorators set via `es:setPlayerDecorator` and reapplies them on `playerSpawned`.
-- Handles money events (`es:activateMoney`, `es:addedMoney`, `es:removedMoney`) and opacity changes (`es:setMoneyDisplay`) by relaying to the NUI.
+- Manages decorators set via `es:setPlayerDecorator`, registering keys only once and reapplying them on `playerSpawned`.
+- Handles money events (`es:activateMoney`, `es:addedMoney`, `es:removedMoney`) and opacity changes (`es:setMoneyDisplay`) by relaying to the NUI while keeping a local cash tally.
 - When `es:enablePvp` arrives, enables friendly fire for the local player.
 
 ### [essential]/es_admin/cl_admin.lua
@@ -232,7 +231,7 @@ None.
 - Other resources can register commands or groups by triggering the events exposed in `server/main.lua`.
 
 ## Gaps & Inferences
-- Bundled MySQL libraries were removed in favour of `mysql-async`.
+- Bundled MySQL libraries were removed in favour of `oxmysql`.
 - `playerConnecting` now uses deferrals for ban checks.
 - `stringsplit` util was rewritten to use Lua pattern matching.
 - PVP enabling only adjusts the local player instead of looping through all players.

@@ -1,6 +1,15 @@
-local states = {}
-states.frozen = false
-states.frozenPos = nil
+--[[
+    -- Type: Client
+    -- Name: es_admin
+    -- Use: Handles client-side admin features
+    -- Created: 09/10/2025
+    -- By: VSSVSSN
+--]]
+
+local states = {
+    frozen = false,
+    frozenPos = nil
+}
 
 RegisterNetEvent('es_admin:spawnVehicle')
 AddEventHandler('es_admin:spawnVehicle', function(v)

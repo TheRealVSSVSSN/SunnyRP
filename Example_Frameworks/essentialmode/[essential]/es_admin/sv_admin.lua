@@ -1,3 +1,11 @@
+--[[
+    -- Type: Server
+    -- Name: es_admin
+    -- Use: Administrative commands and utilities
+    -- Created: 09/10/2025
+    -- By: VSSVSSN
+--]]
+
 -- MySQL handled by external resource via fxmanifest inclusion
 
 -- Adding custom groups called owner, inhereting from superadmin. (It's higher then superadmin). And moderator, higher then user but lower then admin
@@ -40,7 +48,7 @@ function appendNewPos(msg)
 end
 
 
-RegisterServerEvent('es_admin:givePos')
+RegisterNetEvent('es_admin:givePos')
 AddEventHandler('es_admin:givePos', function(str)
 	appendNewPos(str)
 end)
@@ -134,8 +142,8 @@ TriggerEvent('es:addGroupCommand', 'ban', "admin", function(source, args, user)
 				local tstamp = os.date("*t", time)
 				local tstamp2 = os.date("*t", os.time())
 
-                                  MySQL.Async.execute("INSERT INTO bans (`banned`, `reason`, `expires`, `banner`, `timestamp`) VALUES (@username, @reason, @expires, @banner, @now)",
-                                  {['@username'] = target.identifier, ['@reason'] = reason, ['@expires'] = os.date(tstamp.year .. "-" .. tstamp.month .. "-" .. tstamp.day .. " " .. tstamp.hour .. ":" .. tstamp.min .. ":" .. tstamp.sec), ['@banner'] = user.identifier, ['@now'] = os.date(tstamp2.year .. "-" .. tstamp2.month .. "-" .. tstamp2.day .. " " .. tstamp2.hour .. ":" .. tstamp2.min .. ":" .. tstamp2.sec)})
+                                  MySQL.insert('INSERT INTO bans (`banned`, `reason`, `expires`, `banner`, `timestamp`) VALUES (?, ?, ?, ?, ?)',
+                                  {target.identifier, reason, os.date(tstamp.year .. '-' .. tstamp.month .. '-' .. tstamp.day .. ' ' .. tstamp.hour .. ':' .. tstamp.min .. ':' .. tstamp.sec), user.identifier, os.date(tstamp2.year .. '-' .. tstamp2.month .. '-' .. tstamp2.day .. ' ' .. tstamp2.hour .. ':' .. tstamp2.min .. ':' .. tstamp2.sec)})
 			end)
 		else
 			TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Incorrect player ID!")
