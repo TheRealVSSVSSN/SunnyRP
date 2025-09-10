@@ -36,15 +36,14 @@ AddEventHandler('bank:checkATM', function()
 end)
 
 function IsNearATM()
+  local coords = GetEntityCoords(PlayerPedId())
   for i = 1, #atms do
-    local objFound = GetClosestObjectOfType( GetEntityCoords(PlayerPedId()), 0.75, atms[i], 0, 0, 0)
-
+    local objFound = GetClosestObjectOfType(coords, 0.75, atms[i], false, false, false)
     if DoesEntityExist(objFound) then
       TaskTurnPedToFaceEntity(PlayerPedId(), objFound, 3.0)
       return true
     end
   end
-
   return false
 end
 -- Banks
@@ -76,7 +75,7 @@ AddEventHandler('robbery:shutdownBank', function(bankid,status)
 end)
 
 -- Display Map Blips
-Citizen.CreateThread(function()
+CreateThread(function()
   if (displayBankBlips == true) then
     for _, item in pairs(banks) do
       item.blip = AddBlipForCoord(item.x, item.y, item.z)
@@ -100,7 +99,7 @@ function openGui()
   TriggerServerEvent("police:multipledenominators",false)
   TriggerEvent("denoms",false)
   bankanimation()
-  Citizen.Wait(1400)
+  Wait(1400)
   SetCustomNuiFocus(true, true)
   SendNUIMessage({openBank = true})
   TriggerEvent("banking:viewCash")
@@ -117,15 +116,15 @@ function closeGui()
 end
 
 
-atmuse = false
+local atmuse = false
 function loadAnimDict( dict )
     while ( not HasAnimDictLoaded( dict ) ) do
         RequestAnimDict( dict )
-        Citizen.Wait( 5 )
+        Wait( 5 )
     end
 end 
 function bankanimation()
-    local player = GetPlayerPed( -1 )
+    local player = PlayerPedId()
     if IsNearATM() then
       if ( DoesEntityExist( player ) and not IsEntityDead( player )) then 
 
@@ -158,7 +157,7 @@ function bankanimation()
             else
                 atmuse = true
                 TaskPlayAnim( player, "mp_common", "givetake1_a", 1.0, 1.0, -1, 49, 0, 0, 0, 0 )
-                Citizen.Wait(1000)
+                Wait(1000)
                 ClearPedTasks(PlayerPedId())
             end
         end
@@ -192,9 +191,9 @@ end)
 -- If GUI setting turned on, listen for INPUT_PICKUP keypress
 local lastTrigger = 0
 if enableBankingGui then
-  Citizen.CreateThread(function()
+  CreateThread(function()
     while true do
-      Citizen.Wait(1)
+      Wait(1)
 
       local ply = PlayerPedId()
       local plyCoords = GetEntityCoords(ply, 0)
@@ -222,7 +221,7 @@ if enableBankingGui then
 
           local cdst = closestbank
           while cdst < 1.5 do
-            Citizen.Wait(1)
+            Wait(1)
 
             local plyCoords = GetEntityCoords(ply, 0)
             cdst = #(vector3(banks[scanid].x, banks[scanid].y, banks[scanid].z) -  vector3(plyCoords["x"], plyCoords["y"], plyCoords["z"]))
@@ -240,7 +239,7 @@ if enableBankingGui then
                     bankOpen = true
                 end
                 if bankOpen then
-                  Citizen.Wait(1000)
+                  Wait(1000)
                 end
               end
 
@@ -259,7 +258,7 @@ if enableBankingGui then
           TriggerEvent("robbery:disablescans")
           lastTrigger = 0
         end
-        Citizen.Wait(math.ceil(closestbank*5))
+        Wait(math.ceil(closestbank*5))
       end
     end
   end)
@@ -339,17 +338,17 @@ function IsNearBank()
 end
 
 -- Check if player is near another player
-function IsNearPlayer(player)
-  if DoesPlayerExist(player) then
-    local ply = PlayerPedId()
-    local plyCoords = GetEntityCoords(ply, 0)
-    local ply2 = GetPlayerPed(GetPlayerFromServerId(player))
-    local ply2Coords = GetEntityCoords(ply2, 0)
-    local distance = Vdist2(plyCoords, ply2Coords)
-    if(distance <= 5) then
-      return true
-    end
+function IsNearPlayer(serverId)
+  local player = GetPlayerFromServerId(serverId)
+  if player == -1 then return false end
+  local plyCoords = GetEntityCoords(PlayerPedId())
+  local targetPed = GetPlayerPed(player)
+  if not DoesEntityExist(targetPed) then return false end
+  local targetCoords = GetEntityCoords(targetPed)
+  if #(plyCoords - targetCoords) <= 5.0 then
+    return true
   end
+  return false
 end
 
 -- Process deposit if conditions met
@@ -395,7 +394,7 @@ AddEventHandler('dirtyMoney:givedm', function(toPlayer, amount)
   end
 
   local player2 = GetPlayerFromServerId(tonumber(toPlayer))
-  local playing = IsPlayerPlaying(player2)
+  local playing = NetworkIsPlayerActive(player2)
   
   if (playing ~= false) then
     TriggerServerEvent("dirtyMoney:givedm", toPlayer, tonumber(amount))
@@ -423,7 +422,7 @@ AddEventHandler('bank:givecash', function(toPlayer, amount)
 
 
   local player2 = GetPlayerFromServerId(tonumber(toPlayer))
-  local playing = IsPlayerPlaying(player2)
+  local playing = NetworkIsPlayerActive(player2)
   
   if (playing ~= false) then
     TriggerServerEvent("bank:givecash", toPlayer, tonumber(amount))
@@ -435,13 +434,12 @@ end)
 
 -- Process bank transfer if player is online
 RegisterNetEvent('bank:transfer')
-AddEventHandler('bank:transfer', function(fromPlayer, toPlayer, amount)
-  local isActive = IsPlayerActive(toPlayer)
-
-  if (isActive ~= false) then
-    TriggerServerEvent("bank:transfer", toPlayer, tonumber(amount))
+AddEventHandler('bank:transfer', function(_, toPlayer, amount)
+  local playerId = GetPlayerFromServerId(toPlayer)
+  if playerId ~= -1 and NetworkIsPlayerActive(playerId) then
+    TriggerServerEvent('bank:transfer', toPlayer, tonumber(amount))
   else
-    TriggerEvent('chatMessage', "", {255, 0, 0}, "^1This player is not online!");
+    TriggerEvent('chatMessage', '', {255, 0, 0}, '^1This player is not online!')
   end
 end)
 

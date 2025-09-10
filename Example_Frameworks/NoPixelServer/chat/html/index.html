@@ -91,12 +91,11 @@
 
   <!-- Main Entry -->
   <script type="text/javascript">
-  window.post = (url, data) => {
-    var request = new XMLHttpRequest();
-    request.open('POST', url, true);
-    request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-    request.send(data);
-  }
+  window.post = (url, data) => fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+    body: data
+  });
 
   const instance = new Vue({
     el: '#app',

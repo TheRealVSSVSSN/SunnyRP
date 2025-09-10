@@ -132,7 +132,7 @@ function DrawAdvancedText(x,y ,w,h,sc, text, r,g,b,a,font,jus)
     SetTextFont(font)
     SetTextProportional(0)
     SetTextScale(sc, sc)
-        N_0x4e096588b13ffeca(jus)
+        SetTextJustification(jus)
     SetTextColour(r, g, b, a)
     SetTextDropShadow(0, 0, 0, 0,255)
     SetTextEdge(1, 0, 0, 0, 255)
@@ -247,7 +247,7 @@ function MenuAppartement()
 
                     SetEntityCoords(PlayerPedId(),interiors[i].xe,interiors[i].ye,interiors[i].ze)
                     FreezeEntityPosition(PlayerPedId(),true)
-                    Citizen.Wait(2000)
+                    Wait(2000)
                     FreezeEntityPosition(PlayerPedId(),false)
                 else
                     TriggerEvent("DoLongHudText","Already someone here.",2)
@@ -302,7 +302,7 @@ function CloseMenu()
 end
 
 function Sonner()
-    drawNotification(txt[lang]['You do not own this!'])
+    drawNotification('You do not own this!')
 end
 
 RegisterNetEvent('Appartment:StashCash')
@@ -500,7 +500,7 @@ AddEventHandler('Appartment:Visiter2', function()
         if #(GetEntityCoords(PlayerPedId()) - vector3(interiors[i].xo,interiors[i].yo,interiors[i].zo)) < 1.599 then
             DoScreenFadeOut(50)
             timer = 20
-            while IsScreenFadingOut() do Citizen.Wait(0) end
+            while IsScreenFadingOut() do Wait(0) end
             --NetworkFadeOutEntity(PlayerPedId(), true, false)
             Wait(50)
             SetEntityCoords(PlayerPedId(), interiors[currentApartment].xe,interiors[currentApartment].ye,interiors[currentApartment].ze)
@@ -513,7 +513,7 @@ AddEventHandler('Appartment:Visiter2', function()
             current_int = i
             SimulatePlayerInputGait(PlayerId(), 1.0, 100, 1.0, 1, 0)
             DoScreenFadeIn(50)
-            while IsScreenFadingIn() do Citizen.Wait(0) end
+            while IsScreenFadingIn() do Wait(0) end
         end
     end
 end)
@@ -526,7 +526,7 @@ AddEventHandler('Appartment:Visiter', function()
         if #(GetEntityCoords(PlayerPedId()) - vector3(interiors[i].xe,interiors[i].ye,interiors[i].ze)) < 1.599  then
             DoScreenFadeOut(50)
             timer = 20
-            while IsScreenFadingOut() do Citizen.Wait(0) end
+            while IsScreenFadingOut() do Wait(0) end
             --NetworkFadeOutEntity(PlayerPedId(), true, false)
             Wait(50)
             SetEntityCoords(PlayerPedId(), interiors[currentApartment].xo,interiors[currentApartment].yo,interiors[currentApartment].zo)
@@ -538,7 +538,7 @@ AddEventHandler('Appartment:Visiter', function()
             current_int = i
             SimulatePlayerInputGait(PlayerId(), 1.0, 100, 1.0, 1, 0)
             DoScreenFadeIn(50)
-            while IsScreenFadingIn() do Citizen.Wait(0) end
+            while IsScreenFadingIn() do Wait(0) end
         end
     end
 end)
@@ -581,7 +581,7 @@ AddEventHandler('Appartment:ToggleHouses', function()
     end
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
 
     if displayApartBlips == true then
         showMainAppartment = true
@@ -1290,7 +1290,7 @@ RegisterNetEvent('AppRobberies:currentlyrobbing')
 AddEventHandler('AppRobberies:currentlyrobbing', function()
     if exports["np-inventory"]:hasEnoughOfItem("lockpick",1) then
         checkRobbedStore()
-        Citizen.Wait(1500)
+        Wait(1500)
         TriggerServerEvent("AppRobberies:rob",store,currentlyrobbing.xe, currentlyrobbing.ye, currentlyrobbing.ze,storetype)
     end
 end)
