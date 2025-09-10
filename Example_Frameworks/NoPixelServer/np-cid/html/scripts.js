@@ -1,105 +1,65 @@
-  // Mouse Controls
-  var documentWidth = document.documentElement.clientWidth;
-  var documentHeight = document.documentElement.clientHeight;
-  var audioPlayer = null
+/*
+    -- Type: Script
+    -- Name: scripts.js
+    -- Use: Handles NUI interactions for CID creation
+    -- Created: 2024-09-10
+    -- By: VSSVSSN
+*/
 
-  
-$(document).ready(function(){
- 
-  function playSound(file,volume)
-  {
-    if (audioPlayer != null) {
-      audioPlayer.pause();
-    }
+(() => {
+    const resourceName = typeof GetParentResourceName === 'function' ? GetParentResourceName() : 'np-cid';
+    const container = document.querySelector('.phone-container');
+    const submitBtn = document.getElementById('sigh');
 
-    audioPlayer = new Audio("./sounds/" + file + ".ogg");
-    audioPlayer.volume = volume;
-    audioPlayer.play();
+    const post = (endpoint, data) => {
+        fetch(`https://${resourceName}/${endpoint}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+            body: JSON.stringify(data)
+        });
+    };
 
-  }
+    const openContainer = () => {
+        container.style.display = 'block';
+    };
 
-  document.getElementById("sigh").onclick = AttemptComplition;
+    const closeContainer = () => {
+        container.style.display = 'none';
+    };
 
-  function AttemptComplition() {
-    var isFailed = false
-    var failureMessage = ""
+    const attemptCompletion = () => {
+        const first = document.getElementById('first').value.trim();
+        const last = document.getElementById('last').value.trim();
+        const job = document.getElementById('job').value.trim();
+        const sex = document.getElementById('sex').value.trim();
+        const dob = document.getElementById('dob').value.trim();
 
-    var first = document.getElementById("first").value;
-    var Last = document.getElementById("last").value;
-    var Job = document.getElementById("job").value;
-    var Sex = document.getElementById("sex").value;
-    var DOB = document.getElementById("dob").value;
+        let failureMessage = '';
 
-    if(first == null || first == "")
-    {
-      if(failureMessage != ""){failureMessage = "You Have Multipul field error's"}else{failureMessage = "You Must Input a First Name"}
-      isFailed = true
-    }
+        if (!first) failureMessage = 'You must input a first name';
+        else if (!last) failureMessage = 'You must input a last name';
+        else if (!job) failureMessage = 'You must input a job';
+        else if (!sex) failureMessage = 'You must input sex';
+        else if (!dob) failureMessage = 'You must input a DOB';
 
-    if(Last == null || Last == "")
-    {
-      if(failureMessage != ""){failureMessage = "You Have Multipul field error's"}else{failureMessage = "You Must Input a Last Name"}
-      isFailed = true
-    }
+        if (failureMessage) {
+            post('error', { message: failureMessage });
+        } else {
+            post('create', { first, last, job, sex, dob });
+        }
+    };
 
-    if(Job == null || Job == "")
-    {
-      if(failureMessage != ""){failureMessage = "You Have Multipul field error's"}else{failureMessage = "You Must Input a Job"}
-      isFailed = true
-    }
+    submitBtn.addEventListener('click', attemptCompletion);
 
-    if(Sex == null || Sex == "")
-    {
-      if(failureMessage != ""){failureMessage = "You Have Multipul field error's"}else{failureMessage = "You Must Input Sex"}
-      isFailed = true
-    }
+    window.addEventListener('message', (event) => {
+        const item = event.data;
+        if (item.openPhone === true) openContainer();
+        if (item.openPhone === false) closeContainer();
+    });
 
-    if(DOB == null || DOB == "")
-    {
-      if(failureMessage != ""){failureMessage = "You Have Multipul field error's"}else{failureMessage = "You Must Input a DOB"}
-      isFailed = true
-    }
-
-    if(isFailed)
-    {
-      $.post('http://np-cid/error', JSON.stringify({  message: failureMessage}));
-    }
-    else
-    {
-      $.post('http://np-cid/create', JSON.stringify({first: first, last: Last,job: Job,sex: Sex,dob: DOB }));
-    }
-     
-  }
-
-
-  function openContainer()
-  {
-    $(".phone-container").css("display", "block");
-  }
-
-  function closeContainer()
-  {
-     $(".phone-container").css("display", "none");
-  }
-
-  // Listen for NUI Events
-  window.addEventListener('message', function(event){
-    var item = event.data;
-
-    if(item.openPhone === true) {
-      openContainer();
-    }
-
-
-    if(item.openPhone === false) {
-      closeContainer();
-    }
-
-     document.onkeyup = function (data) {
-      if (data.which == 27 ) {
-        $.post('http://np-cid/close', JSON.stringify({}));
-      }
-    }
-  });
-
-});
+    document.addEventListener('keyup', (e) => {
+        if (e.key === 'Escape') {
+            post('close', {});
+        }
+    });
+})();
