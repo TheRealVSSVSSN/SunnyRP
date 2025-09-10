@@ -1,8 +1,7 @@
-fx_version 'adamant'
-
+fx_version "cerulean"
 game "gta5"
 
-description "DiamondBlackjack "
+description "DiamondBlackjack"
 
 client_scripts {
 	"src/RMenu.lua",
@@ -12,8 +11,7 @@ client_scripts {
 	"src/components/*.lua",
 	"src/menu/elements/*.lua",
 	"src/menu/items/*.lua",
-	"src/menu/panels/*.lua",
-	"src/menu/panels/*.lua",
+        "src/menu/panels/*.lua",
 	"src/menu/windows/*.lua",
 	"cl_blackjack.lua",
 	"cl_casinoteleporter.lua",
