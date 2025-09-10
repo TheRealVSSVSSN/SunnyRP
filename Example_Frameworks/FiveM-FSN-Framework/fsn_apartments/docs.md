@@ -1,7 +1,7 @@
 # fsn_apartments Documentation
 
 ## Overview and Runtime Context
-Implements apartment interiors for players. Each character receives a room instance that supports cash storage, outfit management, weapon storage and an item stash. Data persists through the `fsn_apartments` MySQL table and the resource coordinates with other FSN systems for banking, clothing, inventory and weapon handling. A browser-based NUI provides in-apartment actions. Client exports allow other scripts to query storage proximity and instance status.
+Provides instanced apartment interiors for characters. Each player receives a private room supporting cash deposits, wardrobe presets, weapon storage, and an item stash. Persistence lives in the `fsn_apartments` MySQL table, while the resource coordinates with banking, clothing, inventory and weapon systems. A browser-based NUI drives in-apartment actions, and exports allow other scripts to query storage proximity or instance state.
 
 ## Table of Contents
 - [Client](#client)
@@ -17,6 +17,7 @@ Implements apartment interiors for players. Each character receives a room insta
   - [fxmanifest.lua](#fxmanifestlua)
 - [Cross References](#cross-references)
   - [Events](#events)
+  - [ESX Callbacks](#esx-callbacks)
   - [Exports](#exports)
   - [Commands](#commands)
   - [NUI Channels](#nui-channels)
@@ -25,85 +26,80 @@ Implements apartment interiors for players. Each character receives a room insta
 
 ## Client
 ### client.lua
-*Role:* Manages apartment interiors and player interaction within them.
+*Role:* Handles apartment interior entry, storage interactions and NUI communication.
 
-- **State:** tracks room number, apartment details, and whether the player is inside an apartment or wardrobe. Inventory utilities are converted from JSON on arrival.
+- **State:** tracks current room number, wardrobe proximity (`inWardrobe`), storage proximity (`instorage` via `isNearStorage` export), and full apartment details loaded from server.
 - **Events handled:**
-  - `fsn_apartments:stash:add` / `stash:take`: moves wallet cash into or out of the apartment stash after validating amount and balance.
-  - `fsn_apartments:sendApartment`: receives `{ number, apptinfo }`; decodes outfit, inventory and utility tables and initialises default storage slots when missing.
-  - `fsn_apartments:outfit:add|use|remove|list`: saves, equips, deletes or lists clothing presets when near the wardrobe marker.
-  - `fsn_apartments:inv:update`: replaces the cached inventory grid from another resource.
-  - `fsn_apartments:characterCreation`: teleports new characters to a creator interior, opens clothing menu and on completion asks the server to create an apartment.
+  - `fsn_apartments:stash:add` / `stash:take` move wallet cash into or out of the apartment stash with limit checks【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/client.lua†L28-L63】
+  - `fsn_apartments:sendApartment` delivers `{number, apptinfo}` and bootstraps decoded outfit, inventory and utility tables, creating default grids when missing【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/client.lua†L70-L137】
+  - `fsn_apartments:outfit:add|use|remove|list` manage wardrobe presets when `inWardrobe` is true【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/client.lua†L139-L196】
+  - `fsn_apartments:inv:update` replaces the cached inventory grid from another resource【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/client.lua†L290-L293】
+  - `fsn_apartments:characterCreation` teleports new characters to a creator interior, opens clothing UI and on completion requests apartment creation【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/client.lua†L445-L476】
 - **Functions:**
-  - `EnterRoom(id)` and `EnterMyApartment()` move the player into the interior and request a new instance from the server.
-  - `ToggleActionMenu()` opens the NUI, packing weapon and inventory data for display.
-  - `isNearStorage()` exposes whether the player is within the storage marker (exported).
-  - `saveApartment()` pushes the entire `apptdetails` table to the server for persistence and runs periodically every ten minutes.
-- **Control flow:** a main loop draws markers for storage, cash, wardrobe and exit when inside. Leaving the exit returns the player outside and leaves the instance; venturing too far also forces exit.
-- **External events:** uses `fsn_bank:change:walletAdd/Minus`, `fsn_clothing:menu`, `clothes:spawn`, `fsn_inventory:apt:recieve`, `fsn_notify:displayNotification`, and `fsn_criminalmisc` weapon helpers.
-- **NUI callbacks:** `weaponInfo`, `weaponEquip`, `ButtonClick` (values `weapon-putaway`, `inventory`, `exit`), and `escape` for menu closure.
-- **Security notes:** server trusts client-provided `apptdetails` during saves; stash/outfit commands rely on chat without permission checks.
-- **Performance:** runs continuous loops when the player owns an apartment and hides other players when inside an instance.
+  - `EnterRoom(id)` warps the player into the interior and requests a fresh instance from the server【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/client.lua†L430-L440】
+  - `EnterMyApartment()` convenience wrapper calling `EnterRoom` with `myRoomNumber`.
+  - `ToggleActionMenu()` sets NUI focus and sends either `showmenu` (with JSON weapon list) or `hidemenu` messages to the browser【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/client.lua†L263-L285】
+  - `isNearStorage()` export exposing `instorage` flag for other scripts【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/client.lua†L343-L346】
+  - `saveApartment()` pushes current `apptdetails` to the server every ten minutes【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/client.lua†L478-L487】
+- **NUI callbacks:** `weaponInfo`, `weaponEquip`, `ButtonClick` (values `weapon-putaway`, `inventory`, `exit`), and `escape` for menu closure【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/client.lua†L295-L342】【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/client.lua†L489-L491】
+- **Control flow:** a tight loop draws markers for storage, cash, wardrobe and exit when inside an apartment; moving too far or interacting with the exit triggers instance leave and teleports the player outside.
+- **Security notes:** server trusts entire `apptdetails` payload on save; stash/outfit commands are chat-based with no permission checks.
+- **Performance considerations:** continuous polling occurs whenever `inappt` is true. Weapon and inventory actions debounce clicks to mitigate spam.
 
 ### cl_instancing.lua
-*Role:* Client-side instance isolation.*
+*Role:* Hides non-instance players and suppresses traffic density while inside apartment instances.
 
-- Maintains `instanced` flag and `myinstance` information.
-- Each frame, hides non-members and reduces vehicle density when inside an instance. Optional debug text shows instance details.
-- **Events handled:**
-  - `fsn_apartments:instance:join`: marks the player as instanced and records roster.
-  - `fsn_apartments:instance:update`: refreshes roster list.
-  - `fsn_apartments:instance:leave`: clears state and restores visibility.
-  - `fsn_apartments:instance:debug`: toggles debug overlay.
-- **Exports:** `inInstance()` reports whether the player is currently instanced.
+- Maintains `instanced` status, roster (`myinstance`), and optional debug overlay.
+- Each frame adjusts vehicle density and player visibility based on membership【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/cl_instancing.lua†L14-L52】
+- **Events handled:** join/update/leave/debug to manage instance membership or toggle diagnostics【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/cl_instancing.lua†L55-L74】
+- **Export:** `inInstance()` returns current instanced flag, backing the manifest export.
 
 ### gui/ui.html
-*Role:* Defines the NUI structure containing a main menu, weapons submenu and placeholder for inventory/other actions. Loads jQuery, `ui.js` and styling.*
+*Role:* Static HTML structure for the action menu. Contains main menu buttons for weapons, inventory and other actions, and an exit button.
 
 ### gui/ui.js
-*Role:* Browser script for the NUI action menu.*
+*Role:* Browser script that manages menu navigation and forwards actions to Lua.
 
-- Listens for messages from Lua to show or hide the menu; `showmenu` additionally carries a JSON-encoded weapon list.
-- Dynamically builds weapon submenus (`parseWeapons`) and is set up to parse inventory via an undefined `parseItems` function.
-- Button interactions call back to Lua using `weaponInfo`, `weaponEquip`, `ButtonClick` or `inventoryTake` (when selecting an item), enabling weapon storage/equip actions.
-- `document.onkeyup` posts to `escape` when the ESC key is pressed.
+- Receives `showmenu`/`hidemenu` messages from Lua to display or hide the menu, carrying a JSON weapon list when shown【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/gui/ui.js†L17-L31】
+- Builds weapon submenus via `parseWeapons` and references an undefined `parseItems` for inventory rendering【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/gui/ui.js†L55-L75】【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/gui/ui.js†L115-L120】
+- Button clicks send `weaponInfo`, `weaponEquip`, `ButtonClick` or `inventoryTake` NUI callbacks to Lua【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/gui/ui.js†L83-L104】
+- ESC key posts `escape` to close the menu【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/gui/ui.js†L135-L140】
 
 ### gui/ui.css
-*Role:* Provides positioning and styling for the action menu, using Roboto and simple button states.*
+*Role:* Basic styling for the menu using Roboto font, with hover colours for buttons.
 
 ## Server
 ### server.lua
-*Role:* Maintains apartment ownership and persistence while translating chat commands into client events.*
+*Role:* Tracks apartment slots, persists state, and proxies chat commands to clients.
 
-- **State:** `apartments` table tracks slots, occupants and instance IDs.
+- **State:** `apartments` table records occupancy and instance IDs (index `6` missing in declaration)【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/server.lua†L1-L52】
 - **Events:**
-  - `fsn_apartments:getApartment` (net): lookup by `char_id`; if found, assigns a free slot and sends details with `fsn_apartments:sendApartment`, otherwise triggers `fsn_apartments:characterCreation`.
-  - `fsn_apartments:createApartment` (net): inserts a new row then responds with the apartment data.
-  - `fsn_apartments:saveApartment` (net): updates inventory, cash, outfits and utilities in the database using prepared parameters.
-  - `playerDropped` (local): releases occupancy when an owner disconnects.
-- **Commands via `chatMessage`:**
-  - `/stash add|take {amt}` → triggers corresponding stash events on the client.
-  - `/outfit add|use|remove|list {name}` → forwards to outfit events on the client.
-- **Database:** uses `MySQL.Sync.fetchAll` and `MySQL.Sync.execute` against table `fsn_apartments` (`apt_id`, `apt_owner`, `apt_inventory`, `apt_cash`, `apt_outfits`, `apt_utils`).
-- **Security:** commands have no role checks; server persists whatever `apptdetails` client supplies.
+  - `fsn_apartments:getApartment` looks up ownership by `char_id`, assigns a free slot and sends details, otherwise starts character creation【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/server.lua†L71-L86】
+  - `fsn_apartments:createApartment` inserts a new row then responds with basic apartment data【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/server.lua†L97-L124】
+  - `fsn_apartments:saveApartment` writes inventory, cash, outfits and utilities back to the database using prepared parameters【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/server.lua†L126-L137】
+  - `playerDropped` frees the occupied slot when an owner disconnects【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/server.lua†L88-L95】
+- **Commands:** parsed via `chatMessage` and routed to client events for stash and outfit operations【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/server.lua†L152-L187】
+- **Database:** relies on synchronous `MySQL.Sync.fetchAll`/`execute` calls against table `fsn_apartments` (`apt_id`, `apt_owner`, `apt_inventory`, `apt_cash`, `apt_outfits`, `apt_utils`)【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/server.lua†L74-L76】【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/server.lua†L130-L136】
+- **Security:** no validation of client-supplied `apptdetails`; chat commands lack role checks.
+- **Performance considerations:** synchronous MySQL calls block the server thread; large `apartments` table scanning occurs on each slot request.
 
 ### sv_instancing.lua
-*Role:* Server-side instance manager for apartment interiors.*
+*Role:* Maintains server-side instance roster and relays membership updates to clients.
 
-- Maintains a list of active instances `{ id, players, created }`.
+- Keeps list of instances `{id, players, created}`.
 - **Events:**
-  - `fsn_apartments:instance:new`: creates a new instance for the requester after ensuring they aren't already in one, then triggers `fsn_apartments:instance:join` back to that player.
-  - `fsn_apartments:instance:join`: adds the caller to an existing instance and broadcasts `fsn_apartments:instance:update` to all members; notifies on invalid IDs.
-  - `fsn_apartments:instance:leave`: removes the caller from any instance they are in and informs remaining players via `instance:update` and the leaver via `instance:leave`.
-- Utilises a helper `table.contains` to search arrays and prevents multiple membership.
+  - `fsn_apartments:instance:new` ensures caller is not already in an instance, creates a new entry, and notifies the player【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/sv_instancing.lua†L24-L40】
+  - `fsn_apartments:instance:join` adds the player to an existing instance and broadcasts roster updates; warns on invalid IDs【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/sv_instancing.lua†L42-L61】
+  - `fsn_apartments:instance:leave` removes a player from whatever instance they occupy and notifies remaining members【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/sv_instancing.lua†L9-L22】
+- Utilises local `table.contains` helper to check membership【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/sv_instancing.lua†L63-L70】
 
 ## Shared
 ### fxmanifest.lua
-*Role:* Resource manifest defining scripts, dependencies and exports.*
+*Role:* Manifest declaring scripts, dependencies, NUI resources and exports.*
 
-- Requires `fsn_main` and `mysql-async` and lists client/server script files.
-- Specifies NUI page and files (`gui/ui.*`).
-- Declares exports `inInstance`, `isNearStorage`, and `EnterMyApartment` for other resources.
+- Lists required client/server utils and MySQL library, then includes this resource’s client and server scripts【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/fxmanifest.lua†L8-L29】
+- Defines NUI page and related files【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/fxmanifest.lua†L31-L37】
+- Exposes `inInstance`, `isNearStorage`, and `EnterMyApartment` for external use【F:Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/fxmanifest.lua†L40-L45】
 
 ## Cross References
 ### Events
@@ -127,6 +123,9 @@ Implements apartment interiors for players. Each character receives a room insta
 | fsn_apartments:instance:leave | Client & Server | Leave instance / acknowledge exit. |
 | fsn_apartments:instance:debug | Client | Toggle instance debug overlay. |
 
+### ESX Callbacks
+None.
+
 ### Exports
 | Function | Description |
 |----------|-------------|
@@ -145,24 +144,30 @@ Implements apartment interiors for players. Each character receives a room insta
 | /outfit list | List all saved outfit keys. |
 
 ### NUI Channels
-| Channel | Payload | Purpose |
-|---------|---------|---------|
-| weaponInfo | weapon object | Display weapon registration info in chat. |
-| weaponEquip | weapon object | Move stored weapon back to player. |
-| ButtonClick | string (weapon-putaway/inventory/exit) | Act on menu selection. |
-| escape | none | Close action menu on ESC key. |
-| inventoryTake | item identifier | Intended to remove item from stash (Lua handler missing). |
+| Channel | Direction | Payload | Purpose |
+|---------|-----------|---------|---------|
+| showmenu | Lua→JS | `{ weapons: json }` | Display action menu with weapon list. |
+| hidemenu | Lua→JS | none | Hide the action menu. |
+| weaponInfo | JS→Lua | weapon object | Display weapon registration info in chat. |
+| weaponEquip | JS→Lua | weapon object | Move stored weapon back to player. |
+| ButtonClick | JS→Lua | string (`weapon-putaway`/`inventory`/`exit`) | Act on menu selection. |
+| inventoryTake | JS→Lua | item identifier | Intended to remove item from stash (handler missing). |
+| escape | JS→Lua | none | Close action menu on ESC key. |
 
 ## Configuration & Integration
-- **Database:** relies on `mysql-async`; the table `fsn_apartments` must exist with fields for inventory (JSON), cash, outfits (JSON) and utilities (JSON).
-- **Dependencies:** many behaviours depend on external FSN resources: `fsn_main`, `fsn_bank`, `fsn_clothing`, `fsn_inventory`, `fsn_criminalmisc`, and `fsn_notify`.
+- **Database:** depends on `mysql-async`; table `fsn_apartments` must include `apt_id`, `apt_owner`, `apt_inventory` (JSON), `apt_cash`, `apt_outfits` (JSON) and `apt_utils` (JSON).
+- **Dependencies:** integrates with `fsn_main`, `fsn_bank`, `fsn_clothing`, `fsn_inventory`, `fsn_criminalmisc`, and `fsn_notify`.
 - **Exports:** other resources can call `inInstance`, `isNearStorage`, and `EnterMyApartment` as declared in the manifest.
 
 ## Gaps & Inferences
-- `inventoryTake` NUI channel has no corresponding Lua `RegisterNUICallback`; inferred to remove items from apartment storage (**Inferred – Low**, TODO confirm/implement).
-- `parseItems` referenced in `ui.js` is missing; inferred to populate the inventory submenu (**Inferred – Low**, TODO implement or remove call).
-- `instanceMe` function in `cl_instancing.lua` prints a placeholder message and is unused (**Inferred – Low**, leftover from earlier system).
-- Client decodes `apt_inventory` but never uses it, favouring `apt_utils.inventory`; behaviour suggests legacy support (**Inferred – Medium**, confirm data model).
-- Server accepts entire `apptdetails` table from client without verification, enabling potential tampering (**Inferred – High**, validate on server).
+- `inventoryTake` channel lacks a Lua `RegisterNUICallback`; presumed to remove items from storage (**Inferred – Low**, TODO implement).
+- `parseItems` referenced in `ui.js` has no definition, likely intended to render the inventory submenu (**Inferred – Low**, TODO implement or remove).
+- `instanceMe` placeholder in `cl_instancing.lua` prints a message but is unused (**Inferred – Low**, leftover from earlier system).
+- Client decodes `apt_inventory` yet never uses it, favouring `apt_utils.inventory` (**Inferred – Medium**, legacy structure).
+- `apartments` table omits slot index `6`; appears to be an oversight (**Inferred – Low**, verify slot list).
+- Variables `building` and `init` are defined but never toggled, suggesting vestigial logic (**Inferred – Low**).
+- Server trusts client-provided `apptdetails` when saving, enabling tampering (**Inferred – High**, validate server-side).
+- Synchronous `MySQL.Sync` calls may block the server during database operations (**Inferred – Medium**, consider async queries).
+- Chat commands execute without permission checks, allowing any player to manipulate stash/outfit data (**Inferred – Medium**, enforce roles).
 
 DOCS COMPLETE
