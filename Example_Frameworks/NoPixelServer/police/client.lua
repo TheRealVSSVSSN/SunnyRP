@@ -84,7 +84,7 @@ AddEventHandler('uiTest:setRank', function(result)
 end)
 
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	local refreshed = false
 
 	while true do
@@ -107,7 +107,7 @@ Citizen.CreateThread(function()
 end)
 
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local coords = GetEntityCoords(PlayerPedId())
 		TriggerServerEvent("np-base:updatecoords",coords.x,coords.y,coords.z)
@@ -160,10 +160,10 @@ local personalLockers = {
 }
 
 
-Citizen.CreateThread(function()
-    Citizen.Wait(1000)
+CreateThread(function()
+    Wait(1000)
     while true do
-    local ped = GetPlayerPed(-1)
+    local ped = PlayerPedId()
     local pos = GetEntityCoords(ped)
     local distance = GetDistanceBetweenCoords(pos.x,pos.y,pos.z,481.0489, -995.2978, 30.68964,false)
         if distance <= 1.2 then
@@ -171,22 +171,22 @@ Citizen.CreateThread(function()
 			if IsControlJustReleased(0, 86) then
 			if isCop then
 				print(isCop)
-                Citizen.Wait(1)
+                Wait(1)
                 TriggerEvent("server-inventory-open", "10", "Shop");	
             
             end
         
 		end
 	end
-        Citizen.Wait(5)
+        Wait(5)
     end
 end)
 
 
 -- #MarkedForMarker
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
-		Citizen.Wait(1)
+		Wait(1)
 		local shouldWait = true
 		for i,v in ipairs(lawSignOn) do
 			local distCheck = #(v - GetEntityCoords(PlayerPedId()))
@@ -202,16 +202,16 @@ Citizen.CreateThread(function()
 			end
 		end
 		if shouldWait then
-			Citizen.Wait(9000)
+			Wait(9000)
 		end
 	end
 end)
 
 -- #MarkedForMarker
-Citizen.CreateThread(function()
+CreateThread(function()
 	local dstCheck = 100.0
 	while true do
-		Citizen.Wait(1)
+		Wait(1)
 		if isCop then
 			
 			local nearby = false
@@ -277,10 +277,10 @@ Citizen.CreateThread(function()
 			end
 
 			if not nearby then
-				Citizen.Wait(dstCheck)
+				Wait(dstCheck)
 			end
 		else
-			Citizen.Wait(10000)
+			Wait(10000)
 		end
 	end
 end)
@@ -375,17 +375,17 @@ function KeyboardInput(TextEntry, ExampleText, MaxStringLenght)
   blockinput = true
 
   while UpdateOnscreenKeyboard() ~= 1 and UpdateOnscreenKeyboard() ~= 2 do 
-    Citizen.Wait(0)
+    Wait(0)
   end
     
   if UpdateOnscreenKeyboard() ~= 2 then
     local result = GetOnscreenKeyboardResult()
-    Citizen.Wait(500)
+    Wait(500)
     blockinput = false
     TriggerEvent("hud:insidePrompt",false)
     return result
   else
-    Citizen.Wait(500)
+    Wait(500)
     blockinput = false
     TriggerEvent("hud:insidePrompt",false)
     return nil 
@@ -446,7 +446,7 @@ function ChangeToSkinNoUpdatePolice(skin)
 	if IsModelInCdimage(model) and IsModelValid(model) then
 		RequestModel(model)
 		while not HasModelLoaded(model) do
-			Citizen.Wait(1)
+			Wait(1)
 		end
 		SetPlayerModel(PlayerId(), model)
 		SetPedRandomComponentVariation(PlayerPedId(), true)
@@ -460,11 +460,11 @@ local scansuccess = false
 
 local recentsearch = 0
 
-Citizen.CreateThread( function()
+CreateThread( function()
 
 	while true do 
 
-		Citizen.Wait(100)
+		Wait(100)
 		if recentsearch == 0 then
 			endDistance = #(vector3(1842.7,2585.9,45.89) - GetEntityCoords(PlayerPedId()))
 			endDistance2 = #(vector3(253.04049682617,-367.97076416016,-44.063812255859) - GetEntityCoords(PlayerPedId()))
@@ -491,7 +491,7 @@ Citizen.CreateThread( function()
 				recentsearch = recentsearch - 1
 			end
 			if endDistance > 100.0 and endDistance2 > 100.0 then
-				Citizen.Wait(10000)
+				Wait(10000)
 			end
 			endDistance3 = #(vector3(2128.45703125,2921.1318359375,-61.901893615723) - GetEntityCoords(PlayerPedId()))
 			if endDistance3 < 2.0 then
@@ -521,9 +521,9 @@ end)
 
 local lastDamageTrigger = 0
 
-Citizen.CreateThread( function()
+CreateThread( function()
 	while true do 
-		Citizen.Wait(1)
+		Wait(1)
 		if IsPedShooting(PlayerPedId()) then
 			local name = GetSelectedPedWeapon(PlayerPedId())
         	if name == `WEAPON_FIREEXTINGUISHER` then
@@ -551,9 +551,9 @@ end)
 
 local hasBeenOnFire = 0
 local ShouldBeOnFire = 0 
-Citizen.CreateThread( function()
+CreateThread( function()
 	while true do 
-		Citizen.Wait(600)
+		Wait(600)
 		local player = PlayerPedId()
 		local playerPos = GetEntityCoords(player)
 		local isInVeh = IsPedInVehicle(player,GetVehiclePedIsIn(player, false),false)
@@ -737,7 +737,7 @@ AddEventHandler("police:rob", function()
 	if not exports["isPed"]:isPed("dead") then
 		RequestAnimDict("random@shop_robbery")
 		while not HasAnimDictLoaded("random@shop_robbery") do
-			Citizen.Wait(0)
+			Wait(0)
 		end
 
 		local lPed = PlayerPedId()
@@ -791,7 +791,7 @@ end)
 function loadAnimDict( dict )
     while ( not HasAnimDictLoaded( dict ) ) do
         RequestAnimDict( dict )
-        Citizen.Wait( 5 )
+        Wait( 5 )
     end
 end 
 
@@ -932,7 +932,7 @@ AddEventHandler('police:wshotgun', function()
 
         while dist > 1.0 and count > 0 do
             dist = #(vector3(moveto["x"],moveto["y"],moveto["z"]) - GetEntityCoords(PlayerPedId()))
-            Citizen.Wait(1)
+            Wait(1)
             count = count - 1
             DrawText3DVehicle(moveto["x"],moveto["y"],moveto["z"],"Move here to unrack.")
         end
@@ -969,7 +969,7 @@ AddEventHandler('police:wrifle', function()
 
         while dist > 1.0 and count > 0 do
             dist = #(vector3(moveto["x"],moveto["y"],moveto["z"]) - GetEntityCoords(PlayerPedId()))
-            Citizen.Wait(1)
+            Wait(1)
             count = count - 1
             DrawText3DVehicle(moveto["x"],moveto["y"],moveto["z"],"Move here to unrack.")
         end
@@ -1050,7 +1050,7 @@ AddEventHandler('swatcopLoadout', function()
 
         while dist > 1.0 and count > 0 do
             dist = #(vector3(moveto["x"],moveto["y"],moveto["z"]) - GetEntityCoords(PlayerPedId()))
-            Citizen.Wait(1)
+            Wait(1)
             count = count - 1
             DrawText3DVehicle(moveto["x"],moveto["y"],moveto["z"],"Move here to equip Shield.")
         end
@@ -1140,7 +1140,7 @@ AddEventHandler('police:remmask', function(t)
 			AnimationOff = "stand_cash_in_bag_intro"
 			loadAnimDict( AnimSet )
 			TaskPlayAnim( PlayerPedId(), AnimSet, AnimationOn, 8.0, -8, -1, 49, 0, 0, 0, 0 )
-			Citizen.Wait(500)
+			Wait(500)
 			ClearPedTasks(PlayerPedId())						
 		end
 	else
@@ -1168,7 +1168,7 @@ AddEventHandler('police:cuff2', function(t,softcuff)
 
 		t, distance, ped = GetClosestPlayer()
 
-		Citizen.Wait(1500)
+		Wait(1500)
 		if(distance ~= -1 and #(GetEntityCoords(ped) - GetEntityCoords(PlayerPedId())) < 2.5 and GetEntitySpeed(ped) < 1.0) then
 			TriggerEvent('police:cuff2')
 			TriggerServerEvent("police:cuffGranted2", GetPlayerServerId(t), softcuff)
@@ -1245,11 +1245,11 @@ end)
 
 local shotRecently = false
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	local lastShot = 0
 	
 	while true do
-		Citizen.Wait(1)
+		Wait(1)
 
 		if IsPedShooting(PlayerPedId()) then
 			local name = GetSelectedPedWeapon(PlayerPedId())
@@ -1343,7 +1343,7 @@ function CuffAnimation(cuffer)
 	local dir = GetEntityHeading(cuffer)
 	--TriggerEvent('police:cuffAttach',cuffer)
 	SetEntityCoords(PlayerPedId(), GetOffsetFromEntityInWorldCoords(cuffer, 0.0, 0.45, 0.0))
-	Citizen.Wait(100)
+	Wait(100)
 	SetEntityHeading(PlayerPedId(),dir)
 	TaskPlayAnim(PlayerPedId(), "mp_arrest_paired", "crook_p2_back_right", 8.0, -8, -1, 32, 0, 0, 0, 0)
 end
@@ -1352,7 +1352,7 @@ RegisterNetEvent('police:cuffAttach')
 AddEventHandler('police:cuffAttach', function(cuffer)
 	local count = 350
 	while count > 0 do
-		Citizen.Wait(1)
+		Wait(1)
 		count = count - 1
 		AttachEntityToEntity(PlayerPedId(), cuffer, 11816, 0.0, 0.45, 0.0, 0.0, 0.0, 0.0, false, false, false, false, 2, true)
 	end
@@ -1362,9 +1362,9 @@ end)
 RegisterNetEvent('police:cuffTransition')
 AddEventHandler('police:cuffTransition', function()
 	loadAnimDict("mp_arrest_paired")
-	Citizen.Wait(100)
+	Wait(100)
 	TaskPlayAnim(PlayerPedId(), "mp_arrest_paired", "cop_p2_back_right", 8.0, -8, -1, 48, 0, 0, 0, 0)
-	Citizen.Wait(3500)
+	Wait(3500)
 	ClearPedTasksImmediately(PlayerPedId())
 end)
 
@@ -1372,7 +1372,7 @@ RegisterNetEvent('police:getArrested')
 AddEventHandler('police:getArrested', function(cuffer)
 
 		if(handCuffed) then
-			Citizen.Wait(3500)
+			Wait(3500)
 			ClearPedTasksImmediately(PlayerPedId())
 			handCuffed = false
 			handcuffType = 49
@@ -1383,15 +1383,17 @@ AddEventHandler('police:getArrested', function(cuffer)
 			ClearPedTasksImmediately(PlayerPedId())
 			CuffAnimation(cuffer) 
 
-			local cuffPed = GetPlayerPed(GetPlayerFromServerId(tonumber(cuffer)))
-			if Vdist2( GetEntityCoords( GetPlayerPed(-1) , GetEntityCoords(cuffPed) ) ) < 1.5 then
-				handcuffType = 49
-				handCuffed = true
-				TriggerEvent("police:currentHandCuffedState",handCuffed,handCuffedWalking)
-				TriggerEvent("handcuffed",false)
-				TriggerEvent("DensityModifierEnable",false)
-			end
-		end
+                        local cuffPed = GetPlayerPed(GetPlayerFromServerId(tonumber(cuffer)))
+                        local playerCoords = GetEntityCoords(PlayerPedId())
+                        local cuffCoords = GetEntityCoords(cuffPed)
+                        if #(playerCoords - cuffCoords) < 1.5 then
+                                handcuffType = 49
+                                handCuffed = true
+                                TriggerEvent("police:currentHandCuffedState",handCuffed,handCuffedWalking)
+                                TriggerEvent("handcuffed",false)
+                                TriggerEvent("DensityModifierEnable",false)
+                        end
+                end
 end)
 
 
@@ -1455,12 +1457,12 @@ AddEventHandler('police:forcedEnteringVeh', function(sender)
         Citizen.Trace("22")
       if IsEntityAVehicle(vehicleHandle) then
       	TriggerEvent("respawn:sleepanims")
-      	Citizen.Wait(1000)
+      	Wait(1000)
         for i=1,GetVehicleMaxNumberOfPassengers(vehicleHandle) do
             Citizen.Trace("33")
           if IsVehicleSeatFree(vehicleHandle,i) then
 		 	TriggerEvent("unEscortPlayer")
-			Citizen.Wait(100)
+			Wait(100)
             SetPedIntoVehicle(PlayerPedId(),vehicleHandle,i)
             
             Citizen.Trace("whatsasdsass")
@@ -1469,7 +1471,7 @@ AddEventHandler('police:forcedEnteringVeh', function(sender)
         end
 	    if IsVehicleSeatFree(vehicleHandle,0) then
 	    	TriggerEvent("unEscortPlayer") 
-			Citizen.Wait(100)
+			Wait(100)
 	        SetPedIntoVehicle(PlayerPedId(),vehicleHandle,0)
 	        
 	    end
@@ -1738,9 +1740,9 @@ function drawTxt(text,font,centre,x,y,scale,r,g,b,a)
 	DrawText(x , y)
 end
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
-		Citizen.Wait(600000)
+		Wait(600000)
 		if isJudge and exports["isPed"]:isPed("myjob") == "judge" then
 			TriggerServerEvent("server:givepayJob", "Judge Payment", 100)
 		end
@@ -1863,9 +1865,9 @@ AddEventHandler("weaponcheck:scanner", function()
 		TriggerServerEvent('InteractSound_SV:PlayWithinDistance', 5.0, 'metaldetected', 0.2)
 	end	
 end)
-Citizen.CreateThread( function()
+CreateThread( function()
 	while true do 
-		Citizen.Wait(1)
+		Wait(1)
 		endDistance5 = #(vector3(2136.6552734375,2922.3020019531,-61.901927947998) - GetEntityCoords(PlayerPedId()))
 		if endDistance5 < 5.0 then
 			if not disabledWeapons then
@@ -1896,7 +1898,7 @@ AddEventHandler("checkifcop:scanner", function(notificationNumber)
 
 	if notificationNumber == 2 then
 		TriggerEvent('gangs:setHatredFull')
-		Citizen.Wait(20000)
+		Wait(20000)
 		return
 	end
 
@@ -1905,18 +1907,18 @@ AddEventHandler("checkifcop:scanner", function(notificationNumber)
 	end
 	notified = true
 	TriggerEvent("DoLongHudText",'You must drop off your weapons and be scanned - stop or be shot!',2) 
-	Citizen.Wait(10000)
+	Wait(10000)
 	notified = false
 
 end)
 
 
 
-Citizen.CreateThread(function() 
+CreateThread(function() 
 
   while true do
 
-	Citizen.Wait(1)
+	Wait(1)
 	
 
     if disabledWeapons then
@@ -1969,12 +1971,12 @@ Citizen.CreateThread(function()
 		if (not IsEntityPlayingAnim(PlayerPedId(), "mp_arresting", "idle", 3) and not dead and not intrunk) or (IsPedRagdoll(PlayerPedId()) and not dead and not intrunk) then
 	    	RequestAnimDict('mp_arresting')
 			while not HasAnimDictLoaded("mp_arresting") do
-				Citizen.Wait(1)
+				Wait(1)
 			end
 			TaskPlayAnim(PlayerPedId(), "mp_arresting", "idle", 8.0, -8, -1, number, 0, 0, 0, 0)
 		end
 		if dead or intrunk then
-			Citizen.Wait(1000)
+			Wait(1000)
 		end
 
     end
@@ -2000,7 +2002,7 @@ end)
 function loadAnimDict( dict )
     while ( not HasAnimDictLoaded( dict ) ) do
         RequestAnimDict( dict )
-        Citizen.Wait( 5 )
+        Wait( 5 )
     end
 end
 
@@ -2097,9 +2099,9 @@ AddEventHandler('inmenu', function(change)
 end)
 
 
-Citizen.CreateThread(function()
+CreateThread(function()
  	while true do
-    Citizen.Wait(10)
+    Wait(10)
 
   	-- Run cuff script if police is targeting someone with a weapon and pressed E
 
@@ -2111,44 +2113,44 @@ Citizen.CreateThread(function()
 
 				if IsControlJustReleased(0,172) or IsDisabledControlJustReleased(0,172) then
 					TriggerEvent("platecheck:frontradar")
-					Citizen.Wait(400)
+					Wait(400)
 				end
 
 				if IsControlJustReleased(0,173) then
 					TriggerEvent("platecheck:rearradar")
-					Citizen.Wait(400)
+					Wait(400)
 				end
 
 				if IsControlJustReleased(0,174) then
 					TriggerEvent("startSpeedo")
-					Citizen.Wait(400)
+					Wait(400)
 				end
 																			
 			else
 
 				if IsControlJustReleased(2,172) and not IsControlPressed(0,19) then
 					TriggerEvent("police:cuffFromMenu",false)
-					Citizen.Wait(400)
+					Wait(400)
 				end
 
 				if IsControlJustReleased(2,172) and IsControlPressed(0,19) then
 					TriggerEvent("police:cuffFromMenu",true)
-					Citizen.Wait(400)
+					Wait(400)
 				end
 
 				if IsControlJustReleased(2,173) then
 					TriggerEvent("police:uncuffMenu")
-					Citizen.Wait(400)
+					Wait(400)
 				end
 				-- left arrow
 				if IsControlJustReleased(2,174) then
 					TriggerEvent("escortPlayer")
-					Citizen.Wait(400)
+					Wait(400)
 				end
 				-- right arrow
 				if IsControlJustReleased(2,175) then
 					TriggerEvent("police:forceEnter")
-					Citizen.Wait(400)
+					Wait(400)
 				end
 
 			-- end
@@ -2158,44 +2160,44 @@ Citizen.CreateThread(function()
 			-- up arrow
 			if IsControlJustReleased(2,172) then
 				TriggerEvent("revive")
-				Citizen.Wait(400)
+				Wait(400)
 			end
 			-- down arrow
 			if IsControlJustReleased(2,173) then
 				TriggerEvent("ems:heal")
-				Citizen.Wait(400)
+				Wait(400)
 			end
 			-- left arrow
 			if IsControlJustReleased(2,174) then
 				TriggerEvent("escortPlayer")
-				Citizen.Wait(400)
+				Wait(400)
 			end
 			-- right arrow
 			if IsControlJustReleased(2,175) then
 				TriggerEvent("police:forceEnter")
-				Citizen.Wait(400)
+				Wait(400)
 			end
 		end
 		if isDoctor and not inmenus then
 			-- left arrow
 			if IsControlJustReleased(2,174) then
 				TriggerEvent("escortPlayer")
-				Citizen.Wait(400)
+				Wait(400)
 			end
 			-- up arrow
 			if IsControlJustReleased(2,172) then
 				TriggerEvent("ems:heal")
-				Citizen.Wait(400)
+				Wait(400)
 			end
 			-- down arrow
 			if IsControlJustReleased(2,173) then
 				TriggerEvent("revive")
-				Citizen.Wait(400)
+				Wait(400)
 			end
 			-- right arrow
 			if IsControlJustReleased(2,175) then
 				TriggerEvent("requestWounds")
-				Citizen.Wait(400)
+				Wait(400)
 			end
 		end
 	end
@@ -2271,7 +2273,7 @@ AddEventHandler("ems:stomachpump", function()
 				local particleDict = "scr_familyscenem"
 				local particleName = "scr_trev_amb_puke"
 				RequestNamedPtfxAsset(particleDict)
-				while not HasNamedPtfxAssetLoaded(particleDict) do Citizen.Wait(0) end
+				while not HasNamedPtfxAssetLoaded(particleDict) do Wait(0) end
 				local endTime = GetCloudTimeAsInt() + 5
 				local particleFxHandle = 0
 				SetPtfxAssetNextCall(particleDict)
@@ -2497,7 +2499,7 @@ AddEventHandler('animation:throw', function()
 
 			RequestAnimDict("anim@amb@prop_human_atm@interior@male@base")
 			while not HasAnimDictLoaded("anim@amb@prop_human_atm@interior@male@base") do
-				Citizen.Wait(0)
+				Wait(0)
 			end
 			
 			if IsEntityPlayingAnim(lPed, "anim@amb@prop_human_atm@interior@male@base", "base", 3) then
@@ -2507,7 +2509,7 @@ AddEventHandler('animation:throw', function()
 				TaskPlayAnim(lPed, "anim@amb@prop_human_atm@interior@male@base", "base", 8.0, -8, -1, 49, 0, 0, 0, 0)
 				seccount = 3
 				while seccount > 0 do
-					Citizen.Wait(550)
+					Wait(550)
 					seccount = seccount - 0.5
 
 				end
@@ -2531,7 +2533,7 @@ inanimation = true
 
 			RequestAnimDict("amb@world_human_gardener_plant@male@base")
 			while not HasAnimDictLoaded("amb@world_human_gardener_plant@male@base") do
-				Citizen.Wait(0)
+				Wait(0)
 			end
 			
 			if IsEntityPlayingAnim(lPed, "amb@world_human_gardener_plant@male@base", "base", 3) then
@@ -2541,7 +2543,7 @@ inanimation = true
 				TaskPlayAnim(lPed, "amb@world_human_gardener_plant@male@base", "base", 8.0, -8, -1, 49, 0, 0, 0, 0)
 				seccount = 4
 				while seccount > 0 do
-					Citizen.Wait(1000)
+					Wait(1000)
 					seccount = seccount - 1
 
 				end
@@ -2561,7 +2563,7 @@ function createSawProp()
 	local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(), true))
 	RequestModel(sawModel)
 	while not HasModelLoaded(sawModel) do
-		Citizen.Wait(100)
+		Wait(100)
 	end
 	return CreateObject(sawModel, 1.0, 1.0, 1.0, 1, 1, 0)
 end
@@ -2583,7 +2585,7 @@ inanimation = true
 
 			RequestAnimDict("amb@world_human_hammering@male@base")
 			while not HasAnimDictLoaded("amb@world_human_hammering@male@base") do
-				Citizen.Wait(0)
+				Wait(0)
 			end
 			
 			if IsEntityPlayingAnim(lPed, "amb@world_human_hammering@male@base", "base", 3) then
@@ -2592,12 +2594,12 @@ inanimation = true
 			else
       	removeSawProp()
 				TaskPlayAnim(lPed, "amb@world_human_hammering@male@base", "base", 8.0, -8, -1, 49, 0, 0, 0, 0)
-	      Citizen.Wait(157)
+	      Wait(157)
 	      sawProp = createSawProp() 
 	      AttachEntityToEntity(sawProp, lPed, bone, 0.0, 0.0, -0.6, 0.0, 0.0, 0.0, 1, 1, 0, 0, 2, 1)
 				seccount = 4
 				while seccount > 0 do
-					Citizen.Wait(1000)
+					Wait(1000)
 					seccount = seccount - 1
 				end
 				ClearPedSecondaryTask(lPed)
@@ -2619,7 +2621,7 @@ AddEventHandler('animation:point', function()
 
 			RequestAnimDict("gestures@f@standing@casual")
 			while not HasAnimDictLoaded("gestures@f@standing@casual") do
-				Citizen.Wait(1)
+				Wait(1)
 			end
 			
 			if IsEntityPlayingAnim(lPed, "gestures@f@standing@casual", "gesture_point", 3) then
@@ -2629,7 +2631,7 @@ AddEventHandler('animation:point', function()
 				TaskPlayAnim(lPed, "gestures@f@standing@casual", "gesture_point", 8.0, -8, -1, 49, 0, 0, 0, 0)
 				seccount = 1
 				while seccount > 0 do
-					Citizen.Wait(1200)
+					Wait(1200)
 					seccount = seccount - 1
 
 				end
@@ -2685,7 +2687,7 @@ AddEventHandler('animation:tacklelol', function()
 
 			RequestAnimDict("swimming@first_person@diving")
 			while not HasAnimDictLoaded("swimming@first_person@diving") do
-				Citizen.Wait(1)
+				Wait(1)
 			end
 			
 			if IsEntityPlayingAnim(lPed, "swimming@first_person@diving", "dive_run_fwd_-45_loop", 3) then
@@ -2695,7 +2697,7 @@ AddEventHandler('animation:tacklelol', function()
 				TaskPlayAnim(lPed, "swimming@first_person@diving", "dive_run_fwd_-45_loop", 8.0, -8, -1, 49, 0, 0, 0, 0)
 				seccount = 3
 				while seccount > 0 do
-					Citizen.Wait(100)
+					Wait(100)
 					seccount = seccount - 1
 
 				end
@@ -2717,7 +2719,7 @@ AddEventHandler('animation:wave', function()
 
 			RequestAnimDict("friends@frj@ig_1")
 			while not HasAnimDictLoaded("friends@frj@ig_1") do
-				Citizen.Wait(0)
+				Wait(0)
 			end
 			
 			if IsEntityPlayingAnim(lPed, "friends@frj@ig_1", "wave_a", 3) then
@@ -2727,7 +2729,7 @@ AddEventHandler('animation:wave', function()
 				TaskPlayAnim(lPed, "friends@frj@ig_1", "wave_a", 8.0, -8, -1, 49, 0, 0, 0, 0)
 				seccount = 5
 				while seccount > 0 do
-					Citizen.Wait(1000)
+					Wait(1000)
 					seccount = seccount - 1
 
 				end
@@ -2749,7 +2751,7 @@ AddEventHandler('animation:nod', function()
 
 			RequestAnimDict("random@getawaydriver")
 			while not HasAnimDictLoaded("random@getawaydriver") do
-				Citizen.Wait(0)
+				Wait(0)
 			end
 			
 			if IsEntityPlayingAnim(lPed, "random@getawaydriver", "gesture_nod_yes_hard", 3) then
@@ -2759,7 +2761,7 @@ AddEventHandler('animation:nod', function()
 				TaskPlayAnim(lPed, "random@getawaydriver", "gesture_nod_yes_hard", 8.0, -8, -1, 49, 0, 0, 0, 0)
 				seccount = 10
 				while seccount > 0 do
-					Citizen.Wait(1000)
+					Wait(1000)
 					seccount = seccount - 1
 
 				end
@@ -2782,7 +2784,7 @@ AddEventHandler('animation:lockpickcar', function()
 
 		RequestAnimDict("mini@repair")
 		while not HasAnimDictLoaded("mini@repair") do
-			Citizen.Wait(0)
+			Wait(0)
 		end
 		
 		if IsEntityPlayingAnim(lPed, "mini@repair", "fixing_a_player", 3) then
@@ -2810,7 +2812,7 @@ inanimation = true
 
 			RequestAnimDict("mini@repair")
 			while not HasAnimDictLoaded("mini@repair") do
-				Citizen.Wait(0)
+				Wait(0)
 			end
 			
 			if IsEntityPlayingAnim(lPed, "mini@repair", "fixing_a_player", 3) then
@@ -2821,7 +2823,7 @@ inanimation = true
 				TaskPlayAnim(lPed, "mini@repair", "fixing_a_player", 8.0, -8, -1, 16, 0, 0, 0, 0)
 				seccount = 20
 				while seccount > 0 do
-					Citizen.Wait(1000)
+					Wait(1000)
 					seccount = seccount - 1
 
 				end
@@ -2844,7 +2846,7 @@ inanimation = true
 
 			RequestAnimDict("random@arrests")
 			while not HasAnimDictLoaded("random@arrests") do
-				Citizen.Wait(0)
+				Wait(0)
 			end
 			
 			if IsEntityPlayingAnim(lPed, "random@arrests", "idle_c", 3) then
@@ -2854,7 +2856,7 @@ inanimation = true
 				TaskPlayAnim(lPed, "random@arrests", "idle_c", 8.0, -8, -1, 49, 0, 0, 0, 0)
 				seccount = 10
 				while seccount > 0 do
-					Citizen.Wait(1000)
+					Wait(1000)
 					seccount = seccount - 1
 
 				end
@@ -2875,7 +2877,7 @@ AddEventHandler('animation:facepalm', function()
 
 			RequestAnimDict("random@car_thief@agitated@idle_a")
 			while not HasAnimDictLoaded("random@car_thief@agitated@idle_a") do
-				Citizen.Wait(0)
+				Wait(0)
 			end
 			
 			if IsEntityPlayingAnim(lPed, "random@car_thief@agitated@idle_a", "agitated_idle_a", 3) then
@@ -2885,7 +2887,7 @@ AddEventHandler('animation:facepalm', function()
 				TaskPlayAnim(lPed, "random@car_thief@agitated@idle_a", "agitated_idle_a", 8.0, -8, -1, 49, 0, 0, 0, 0)
 				seccount = 6
 				while seccount > 0 do
-					Citizen.Wait(1000)
+					Wait(1000)
 					seccount = seccount - 1
 
 				end
@@ -2926,7 +2928,7 @@ AddEventHandler('unseatPlayer', function()
 		pos = GetEntityCoords(ped,  true)
 
 		TriggerServerEvent('unseatAccepted',GetPlayerServerId(t),pos["x"], pos["y"], pos["z"])
-		Citizen.Wait(1000)
+		Wait(1000)
 		TriggerServerEvent("police:escortAsk", GetPlayerServerId(t))
 	else
 		TriggerEvent("DoLongHudText", 'No Player Found',1)
@@ -2975,12 +2977,12 @@ function TryTackle()
 				TriggerEvent("animation:tacklelol") 
 
 				TimerEnabled = true
-				Citizen.Wait(4500)
+				Wait(4500)
 				TimerEnabled = false
 
 			else
 				TimerEnabled = true
-				Citizen.Wait(1000)
+				Wait(1000)
 				TimerEnabled = false
 
 			end
@@ -2994,7 +2996,7 @@ AddEventHandler('playerTackled', function()
 	SetPedToRagdoll(PlayerPedId(), math.random(8500), math.random(8500), 0, 0, 0, 0) 
 
 	TimerEnabled = true
-	Citizen.Wait(1500)
+	Wait(1500)
 	TimerEnabled = false
 end)
 
@@ -3026,7 +3028,7 @@ AddEventHandler('robPlayer', function()
 
 		RequestAnimDict("random@shop_robbery")
 		while not HasAnimDictLoaded("random@shop_robbery") do
-			Citizen.Wait(0)
+			Wait(0)
 		end
 		
 		if IsEntityPlayingAnim(lPed, "random@shop_robbery", "robbery_action_b", 3) then
@@ -3037,7 +3039,7 @@ AddEventHandler('robPlayer', function()
 			TaskPlayAnim(lPed, "random@shop_robbery", "robbery_action_b", 8.0, -8, -1, 16, 0, 0, 0, 0)
 			local seccount = 7
 			while seccount > 0 do
-				Citizen.Wait(1200)
+				Wait(1200)
 				seccount = seccount - 1
 
 			end
@@ -3073,7 +3075,7 @@ end)
 function LoadAnimationDictionary(animationD) -- Simple way to load animation dictionaries to save lines.
 	while(not HasAnimDictLoaded(animationD)) do
 		RequestAnimDict(animationD)
-		Citizen.Wait(1)
+		Wait(1)
 	end
 end
 
@@ -3206,7 +3208,7 @@ AddEventHandler('dr:drag', function(pl)
 	if beingDragged then
 		SetEntityCoords(PlayerPedId(),GetEntityCoords(GetPlayerPed(GetPlayerFromServerId(otherid))))
 	end
-	Citizen.Wait(1000)
+	Wait(1000)
 	TriggerEvent("deathdrop",beingDragged)
 end)
 
@@ -3224,23 +3226,23 @@ end)
 
 --GetEntityAttachedTo(PlayerPedId())
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		if escorting or dragging then
 			if IsPedRunning(PlayerPedId()) or IsPedSprinting(PlayerPedId()) then
 				SetPlayerControl(PlayerId(), 0, 0)
-				Citizen.Wait(1000)
+				Wait(1000)
 				SetPlayerControl(PlayerId(), 1, 1)
 			end
 		else
-			Citizen.Wait(1000)
+			Wait(1000)
 		end
-		Citizen.Wait(1)
+		Wait(1)
 	end
 end)
 
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 
 		if IsEntityDead(GetPlayerPed(GetPlayerFromServerId(otherid))) and (escort) then 
@@ -3298,7 +3300,7 @@ Citizen.CreateThread(function()
 				TaskPlayAnim(PlayerPedId(), "amb@world_human_bum_slumped@male@laying_on_left_side@base", "base", 8.0, 8.0, -1, 1, 999.0, 0, 0, 0)
 			end
 		end
-		Citizen.Wait(1)
+		Wait(1)
 	end
 end)
 
@@ -3493,7 +3495,7 @@ local function serviceVehicle(arg, livery, isEmsWhiteListed, cb)
 	end
 
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		
 		if not pullout then
 			pullout = true
@@ -3863,7 +3865,7 @@ function SkinNoUpdate(arg)
 		if IsModelInCdimage(model) and IsModelValid(model) then
 			RequestModel(model)
 			while not HasModelLoaded(model) do
-				Citizen.Wait(0)
+				Wait(0)
 			end
 			local head = GetPedDrawableVariation(PlayerPedId(),0)
 			local hair = GetPedDrawableVariation(PlayerPedId(),2)

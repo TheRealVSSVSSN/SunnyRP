@@ -115,7 +115,7 @@ function PutInTrunk(veh)
         local testanim = "cs_devin_dual-7"
         RequestAnimDict(testdic)
         while not HasAnimDictLoaded(testdic) do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         SetBlockingOfNonTemporaryEvents(Player, true)      
@@ -142,10 +142,10 @@ function PutInTrunk(veh)
             HandCuffed = exports["isPed"]:isPed("HandCuffed")
             CamTrunk()
             if HandCuffed then
-                Citizen.Wait(1)
+                Wait(1)
             else
 
-                Citizen.Wait(1)
+                Wait(1)
                 local DropPosition = GetOffsetFromEntityInWorldCoords(veh, 0.0,d1["y"]-0.2,0.0)
 
                 DrawText3DTest(DropPosition["x"],DropPosition["y"],DropPosition["z"],"[G] Open/Close | [F] Climb Out")
@@ -178,7 +178,7 @@ function PutInTrunk(veh)
 
         end
         DoScreenFadeOut(10)
-        Citizen.Wait(1000)
+        Wait(1000)
         CamDisable()
 
         DetachEntity(Player)

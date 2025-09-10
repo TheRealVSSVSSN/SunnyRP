@@ -114,10 +114,10 @@ heavybleed = false
 lightbleed = false
 lightestbleed = false
 initialbleed = false
-Citizen.CreateThread(function()
+CreateThread(function()
 
     while true do
-        Citizen.Wait(10000)
+        Wait(10000)
         for i = 1, #Currentstates do
         	if Currentstates[i]["timer"] > 0 then
         		Currentstates[i]["timer"] = Currentstates[i]["timer"] - 10
@@ -269,7 +269,7 @@ function HealSlow()
     
     local count = 30
     while count > 0 do
-        Citizen.Wait(1000)
+        Wait(1000)
         count = count - 1
         SetEntityHealth(PlayerPedId(), GetEntityHealth(PlayerPedId()) + 1) 
     end
@@ -297,7 +297,7 @@ function myBleeds()
         for i = 1, 7 do
              if lightbleed or heavybleed or lightestbleed then
                 SetEntityHealth(PlayerPedId(), GetEntityHealth(PlayerPedId()) - bleedmulti)
-                Citizen.Wait(350)
+                Wait(350)
             end
         end
     end
@@ -369,7 +369,7 @@ AddEventHandler("healed:minors", function()
 end)
 
 
-Citizen.CreateThread(function()
+CreateThread(function()
 
     while true do
         Wait(5000)
@@ -380,7 +380,7 @@ Citizen.CreateThread(function()
 end)
 
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	local firstspawn = false
     local lastbone = 0
     local saveHealth = GetEntityHealth(PlayerPedId())
@@ -450,7 +450,7 @@ AddEventHandler("blood", function(x,y,z)
     local particleName = "blood_stab"
     RequestNamedPtfxAsset(particleDictionary)
     while not HasNamedPtfxAssetLoaded(particleDictionary) do
-        Citizen.Wait(0)
+        Wait(0)
     end
     SetPtfxAssetNextCall(particleDictionary)
     local particle = StartParticleFxLoopedAtCoord(particleName, x, y, z-0.9, 0.0, 0.0, 0.0, 1.0, 0, 0, 0, 0)
@@ -485,7 +485,7 @@ local target
 local targetLastHealth
 local bodySweat = 0
 local sweatTriggered = false
-Citizen.CreateThread(function()
+CreateThread(function()
 
     while true do
         Wait(300)
@@ -901,7 +901,7 @@ AddEventHandler('sleepinjuryanim', function()
     sleepanim = 500
     while sleepanim > 0 do
         sleepanim = sleepanim - 1
-        Citizen.Wait(1)
+        Wait(1)
     end
     sleepanim = 0
 end)
@@ -995,7 +995,7 @@ AddEventHandler("DoDamageFunction",function(InjuryType,CurrentHitCount,boneIndex
 		end
         bleeddamage = false
 	end
-	Citizen.Wait(5000)
+	Wait(5000)
 	indamagefunction = false
 
 end)
@@ -1061,7 +1061,7 @@ function DoScreenFade(length,todark)
 				opacity = opacity - 1
 
 			end
-			Citizen.Wait(1)
+			Wait(1)
 			if opacity < 0 then
 				opacity = 0
 			end
@@ -1091,7 +1091,7 @@ function DoScreenFade(length,todark)
 				opacity = math.random(253,255)
 			end
 			length = length - 1
-			Citizen.Wait(1)
+			Wait(1)
 
 		end
 		local distcheckhsp2 = #(vector3(304.77590942383,-589.34625244141,43.29186630249) - GetEntityCoords(PlayerPedId()))
@@ -1126,7 +1126,7 @@ local function HealInjuries()
 				count = count + bones[i]["hitcount"]
 				bones[i]["hitcount"] = 0
 				bones[i]["applied"] = false
-				Citizen.Wait(1000)
+				Wait(1000)
 
 				injury = bones[i]["part"] .. " Injury"
 			end
@@ -1165,7 +1165,7 @@ function findBed(fadein)
 		myinjury = injury or myinjury
 		injurycount = count and count + injurycount or injurycount
 
-		Citizen.Wait(5000)
+		Wait(5000)
         -- add a diff system for hospital fees.
 		--TriggerServerEvent("hospital:ticketUser","Hospital Fees",(injurycount*50))
 		if not bonesUpdatingServer then
@@ -1189,7 +1189,7 @@ function findBed(fadein)
 
 		TriggerServerEvent("government:bill",injurycount*30)
 		SetEntityHealth(PlayerPedId(),200)
-		Citizen.Wait(1000)
+		Wait(1000)
 		inbed = false
 		injurycount = 0
         TriggerEvent( "DoShortHudText" , "Press [E] to leave the bed!" , 1)
@@ -1216,7 +1216,7 @@ AddEventHandler("inbedrect",function(fadein)
 			opacityc = opacityc + 1
 		end
 		DrawRect(0, 0, 10.0, 10.0, 1, 1, 1, opacityc)
-		Citizen.Wait(1)
+		Wait(1)
 	end
 end)
 
@@ -1224,7 +1224,7 @@ function redflash(enable)
     if enable then
         StartScreenEffect("SuccessTrevor", 1.0, 0)
         StopScreenEffect("SuccessTrevor")   
-        Citizen.Wait(50)     
+        Wait(50)     
         StartScreenEffect("SuccessTrevor", 1.0, 0)
     else
         StartScreenEffect("SuccessTrevor", 1.0, 0)
@@ -1344,7 +1344,7 @@ function myPains()
 
 		if passingout then
 			while passingout do
-				Citizen.Wait(1)
+				Wait(1)
 			end
 			lasthealth2 = GetEntityHealth(PlayerPedId())
 		end
@@ -1390,7 +1390,7 @@ function myPains()
 			lastarmor = 100
 		end
 
-        Citizen.Wait(10)
+        Wait(10)
 	end
 
 end
@@ -1428,7 +1428,7 @@ end)
 RegisterNetEvent("bones:client:updateServer")
 AddEventHandler("bones:client:updateServer",function()
 	bonesUpdatingServer = true
-	Citizen.Wait(30000)
+	Wait(30000)
 	TriggerServerEvent("bones:server:updateServer",bones)
 	bonesUpdatingServer = false
 end)
@@ -1495,7 +1495,7 @@ local disKeys = {
 	[3] = 142,
 	[4] = 37,
 }
-Citizen.CreateThread(function()
+CreateThread(function()
 
     while true do
         Wait(1000)
@@ -1505,7 +1505,7 @@ Citizen.CreateThread(function()
     end
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
         if legsdisabled or armsdisabled then
             if armsdisabled then
@@ -1517,15 +1517,15 @@ Citizen.CreateThread(function()
             if legsdisabled then
                 DisableControlAction( 0, 21, true ) -- sprint
             end
-            Citizen.Wait(1)
+            Wait(1)
         else
-            Citizen.Wait(1000)
+            Wait(1000)
         end
     end
 end)
 
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
         Wait(500)
         myPains()
@@ -1609,20 +1609,20 @@ AddEventHandler("myboneIssuesTarget",function()
 
 	end
 
-    Citizen.Wait(15000)
+    Wait(15000)
     myboneActive = false
 
 end)
 
 function boneIssuesTarget(bt,targetid)
 	active = false
-	Citizen.Wait(100)
+	Wait(100)
 	bonesTarget = bt
 	targetidsend = targetid
 	targetChar = GetPlayerPed(GetPlayerFromServerId(targetid))
 	active = true
 	while active do
-		Citizen.Wait(1)
+		Wait(1)
 		
 		if not healing then
 			healTargetBoneId = 0
@@ -1670,30 +1670,30 @@ AddEventHandler("DoHealthFading",function()
 	--Citizen.Trace(maxfade)
 
 	while curfading < maxfade and not passingout do
-		Citizen.Wait(1)
+		Wait(1)
 		DrawRect(0,0, 10.0, 10.0, 1, 1, 1, curfading)
 		curfading = curfading + 1
 	end
 
 	while curfading > 5 and not passingout do
-		Citizen.Wait(1)
+		Wait(1)
 		DrawRect(0,0, 10.0, 10.0, 1, 1, 1, curfading)
 		curfading = curfading - 1
 	end
 
 	while curfading < maxfade and not passingout do
-		Citizen.Wait(1)
+		Wait(1)
 		DrawRect(0,0, 10.0, 10.0, 1, 1, 1, curfading)
 		curfading = curfading + 1
 	end
 
 	while curfading > 5 and not passingout do
-		Citizen.Wait(1)
+		Wait(1)
 		DrawRect(0,0, 10.0, 10.0, 1, 1, 1, curfading)
 		curfading = curfading - 1
 	end
 
-	Citizen.Wait(30000)
+	Wait(30000)
 	curfading = 0
 	fading = false
 end)
@@ -1710,7 +1710,7 @@ RegisterNetEvent("healTargetsBoneId")
 AddEventHandler("healTargetsBoneId",function()
 	healing = true
 	runHealAnim()
-	Citizen.Wait(2000)
+	Wait(2000)
 	ClearPedTasks(PlayerPedId())
 	bonesTarget[healTargetBoneId]["hitcount"] = bonesTarget[healTargetBoneId]["hitcount"] - 1
 	if bonesTarget[healTargetBoneId]["hitcount"] == 0 then
