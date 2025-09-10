@@ -228,7 +228,7 @@ rootMenuConfig =  {
         icon = "#general-ask-for-train",
         functionName = "AskForTrain",
         enableMenu = function()
-            for _,d in ipairs(trainstations) do
+            for _, d in ipairs(trainStations) do
                 if #(vector3(d[1],d[2],d[3]) - GetEntityCoords(PlayerPedId())) < 25 and not isDead then
                     return true
                 end
@@ -311,7 +311,7 @@ newSubMenus = {
         icon = "#general-ask-for-train",
         functionName = "AskForTrain",
         -- enableMenu = function()
-        --     for _,d in ipairs(trainstations) do
+        --     for _, d in ipairs(trainStations) do
         --         if #(vector3(d[1],d[2],d[3]) - GetEntityCoords(PlayerPedId())) < 25 then
         --             return true
         --         else
@@ -1098,43 +1098,14 @@ AddEventHandler('enablegangmember', function(pGangNum)
     gangNum = pGangNum
 end)
 
-function GetPlayers()
-    local players = {}
-
-    for i = 0, 255 do
-        if NetworkIsPlayerActive(i) then
-            players[#players+1]= i
-        end
-    end
-
-    return players
-end
-
-function GetClosestPlayer()
-    local players = GetPlayers()
-    local closestDistance = -1
-    local closestPlayer = -1
-    local closestPed = -1
-    local ply = PlayerPedId()
-    local plyCoords = GetEntityCoords(ply, 0)
-    if not IsPedInAnyVehicle(PlayerPedId(), false) then
-        for index,value in ipairs(players) do
-            local target = GetPlayerPed(value)
-            if(target ~= ply) then
-                local targetCoords = GetEntityCoords(GetPlayerPed(value), 0)
-                local distance = #(vector3(targetCoords["x"], targetCoords["y"], targetCoords["z"]) - vector3(plyCoords["x"], plyCoords["y"], plyCoords["z"]))
-                if(closestDistance == -1 or closestDistance > distance) and not IsPedInAnyVehicle(target, false) then
-                    closestPlayer = value
-                    closestPed = target
-                    closestDistance = distance
-                end
-            end
-        end
-        return closestPlayer, closestDistance, closestPed
-    end
-end
-
-trainstations = {
+--[[
+    -- Type: Table
+    -- Name: trainStations
+    -- Use: World coordinates for available train request points
+    -- Created: 2024-06-14
+    -- By: VSSVSSN
+--]]
+local trainStations = {
     {-547.34057617188,-1286.1752929688,25.3059978411511},
     {-892.66284179688,-2322.5168457031,-13.246466636658},
     {-1100.2299804688,-2724.037109375,-8.3086919784546},
@@ -1165,3 +1136,45 @@ trainstations = {
     {2002.3624267578,3619.8029785156,38.568252563477},
     {2609.7016601563,2937.11328125,39.418235778809}
 }
+
+--[[
+    -- Type: Function
+    -- Name: GetPlayers
+    -- Use: Returns a list of active players
+    -- Created: 2024-06-14
+    -- By: VSSVSSN
+--]]
+local function GetPlayers()
+    return GetActivePlayers()
+end
+
+--[[
+    -- Type: Function
+    -- Name: GetClosestPlayer
+    -- Use: Finds closest player to the local player when not in a vehicle
+    -- Created: 2024-06-14
+    -- By: VSSVSSN
+--]]
+function GetClosestPlayer()
+    local players = GetPlayers()
+    local closestDistance, closestPlayer, closestPed = -1, -1, -1
+    local ply = PlayerPedId()
+    local plyCoords = GetEntityCoords(ply)
+
+    if not IsPedInAnyVehicle(ply, false) then
+        for _, playerId in ipairs(players) do
+            local target = GetPlayerPed(playerId)
+            if target ~= ply and not IsPedInAnyVehicle(target, false) then
+                local targetCoords = GetEntityCoords(target)
+                local distance = #(targetCoords - plyCoords)
+                if closestDistance == -1 or distance < closestDistance then
+                    closestPlayer = playerId
+                    closestPed = target
+                    closestDistance = distance
+                end
+            end
+        end
+    end
+
+    return closestPlayer, closestDistance, closestPed
+end
