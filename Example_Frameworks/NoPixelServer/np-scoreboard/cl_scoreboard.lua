@@ -10,6 +10,13 @@ NPX._Scoreboard.SelectedPlayer = nil
 NPX._Scoreboard.MenuOpen = false
 NPX._Scoreboard.Menus = {}
 
+--[[
+    -- Type: Function
+    -- Name: spairs
+    -- Use: Iterates table keys in sorted order
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 local function spairs(t, order)
     local keys = {}
     for k in pairs(t) do keys[#keys+1] = k end
@@ -29,24 +36,47 @@ local function spairs(t, order)
     end
 end
 
+--[[
+    -- Type: Function
+    -- Name: AddPlayer
+    -- Use: Adds a player to the local scoreboard cache
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 function NPX.Scoreboard.AddPlayer(self, data)
     NPX._Scoreboard.Players[data.src] = data
 end
 
+--[[
+    -- Type: Function
+    -- Name: RemovePlayer
+    -- Use: Moves a player from active list to recent list
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 function NPX.Scoreboard.RemovePlayer(self, data)
     NPX._Scoreboard.Players[data.src] = nil
     NPX._Scoreboard.Recent[data.src] = data
 end
 
+--[[
+    -- Type: Function
+    -- Name: RemoveRecent
+    -- Use: Removes a player from the recent disconnects list
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 function NPX.Scoreboard.RemoveRecent(self, src)
     NPX._Scoreboard.Recent[src] = nil
 end
 
-function NPX.Scoreboard.AddAllPlayers(self, data, recentData)
-    NPX._Scoreboard.Players[data.src] = data
-    NPX._Scoreboard.Recent[recentData.src] = recentData
-end
-
+--[[
+    -- Type: Function
+    -- Name: GetPlayerCount
+    -- Use: Returns number of active players on the network
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 function NPX.Scoreboard.GetPlayerCount(self)
     local count = 0
 
@@ -124,16 +154,11 @@ Citizen.CreateThread(function()
     end
 
     Init()
-    timed = 0
     while true do
-        for k,v in pairs(NPX._Scoreboard.Menus) do
+        for k, v in pairs(NPX._Scoreboard.Menus) do
             if WarMenu.IsMenuOpened(k) then
                 v()
                 WarMenu.Display()
-            else
-                if timed > 0 then
-                    timed = timed - 1
-                end
             end
         end
 
@@ -143,17 +168,34 @@ Citizen.CreateThread(function()
 
 end)
 
+--[[
+    -- Type: Function
+    -- Name: Menu.Open
+    -- Use: Displays the scoreboard menu
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 function NPX.Scoreboard.Menu.Open(self)
     NPX._Scoreboard.SelectedPlayer = nil
+    NPX._Scoreboard.MenuOpen = true
     WarMenu.OpenMenu("scoreboard")
 end
 
+--[[
+    -- Type: Function
+    -- Name: Menu.Close
+    -- Use: Closes all scoreboard menus and resets state
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 function NPX.Scoreboard.Menu.Close(self)
-    for k,v in pairs(NPX._Scoreboard.Menus) do
-        WarMenu.CloseMenu(K)        shouldDraw =false    end
+    for k, _ in pairs(NPX._Scoreboard.Menus) do
+        WarMenu.CloseMenu(k)
+    end
+    NPX._Scoreboard.MenuOpen = false
 end
 
-Controlkey = {["generalScoreboard"] = {303,"U"}} 
+local Controlkey = { ["generalScoreboard"] = {303, "U"} }
 RegisterNetEvent('event:control:update')
 AddEventHandler('event:control:update', function(table)
     Controlkey["generalScoreboard"] = table["generalScoreboard"]
@@ -170,13 +212,12 @@ Citizen.CreateThread(function()
 
     while true do
         Citizen.Wait(0)
-        if IsControlPressed(0, Controlkey["generalScoreboard"][1]) then
-            if not IsAnyMenuOpen() then
+        if IsControlJustPressed(0, Controlkey["generalScoreboard"][1]) then
+            if IsAnyMenuOpen() then
+                NPX.Scoreboard.Menu:Close()
+            else
                 NPX.Scoreboard.Menu:Open()
             end
-        else
-            if IsAnyMenuOpen() then NPX.Scoreboard.Menu:Close() end
-            Citizen.Wait(100)
         end
     end
 end)
@@ -196,7 +237,15 @@ AddEventHandler("np-scoreboard:RemoveRecent", function(src)
     NPX.Scoreboard:RemoveRecent(src)
 end)
 
-RegisterNetEvent("np-scoreboard:AddAllPlayers")
-AddEventHandler("np-scoreboard:AddAllPlayers", function(data, recentData)
-    NPX.Scoreboard:AddAllPlayers(data, recentData)
+--[[
+    -- Type: Event
+    -- Name: np-scoreboard:Sync
+    -- Use: Receives full scoreboard state from server
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent("np-scoreboard:Sync")
+AddEventHandler("np-scoreboard:Sync", function(players, recent)
+    NPX._Scoreboard.Players = players or {}
+    NPX._Scoreboard.Recent = recent or {}
 end)
