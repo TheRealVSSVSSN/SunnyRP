@@ -96,10 +96,10 @@ function ScanJailContainers() {
 
 RegisterNetEvent('np-base:playerSpawned')
 on('np-base:playerSpawned', (broughtData) => {
-	let cid = exports.isPed.isPed("cid")
-	emitNet("server-request-update",cid)
-	SendNuiMessage(JSON.stringify({ response: "SendItemList", list: itemList}))
-})
+        cid = exports.isPed.isPed("cid");
+        emitNet("server-request-update", cid);
+        SendNuiMessage(JSON.stringify({ response: "SendItemList", list: itemList }));
+});
 
 RegisterNuiCallbackType("Weight");
 on("__cfx_nui:Weight", (data, cb) => {
@@ -914,16 +914,8 @@ on('toggle-animation', (toggleAnimation) => {
 });
 
 let HasNuiFocus = false;
-let EndingFocus = false;
-let ControlThread;
 function SetCustomNuiFocus(hasKeyboard, hasMouse) {
+  HasNuiFocus = hasKeyboard || hasMouse;
   SetNuiFocus(hasKeyboard, hasMouse);
-//   HasNuiFocus = hasKeyboard || hasMouse;
-//   SetNuiFocus(hasKeyboard, hasMouse);
-//   SetNuiFocusKeepInput(HasNuiFocus);
-//   if (HasNuiFocus === true) {
-//   	emit("np:voice:focus:set", HasNuiFocus, hasKeyboard, hasMouse);
-//   } else {
-// 	  setTimeout(() => {if (HasNuiFocus !== true) emit("np:voice:focus:set", false, false, false);}, 1000)
-//   }
+  SetNuiFocusKeepInput(HasNuiFocus);
 }
