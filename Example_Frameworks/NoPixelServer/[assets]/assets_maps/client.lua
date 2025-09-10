@@ -1,4 +1,4 @@
-Citizen.CreateThread(function()
+CreateThread(function()
 	-- Heist Union Depository: 2.69689322, -667.0166, 16.1306286 // huge bank/gang vault
 	--Heist Carrier: 3082.3117 -4717.1191 15.2622
 	
@@ -646,7 +646,7 @@ Citizen.CreateThread(function()
 	
 	end)
 	
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		local paletoBank = {
 		CreateObject("hei_prop_yah_glass_05",-115.1,6464.25,29.7, true, true, true),
 		CreateObject("hei_prop_yah_glass_05",-116.85,6466.0,29.7, true, true, true),
@@ -690,7 +690,7 @@ Citizen.CreateThread(function()
 	
 	end)
 	
-	-- Citizen.CreateThread(function()
+	-- CreateThread(function()
 	-- 	RequestIpl("np_int_placement_ch_interior_6_dlc_casino_vault_milo_")	
 	
 	-- 	local interiorid = GetInteriorAtCoords(259.2812, 203.5071, 96.77954)
@@ -702,7 +702,7 @@ Citizen.CreateThread(function()
 		
 	-- end)
 	
-	-- Citizen.CreateThread(function()
+	-- CreateThread(function()
 	-- 	RequestIpl("prologue06_int_np")	
 	
 	-- 	local interiorid = GetInteriorAtCoords(883.4142, -2282.372, 31.44168)
@@ -717,7 +717,7 @@ Citizen.CreateThread(function()
 	
 
 	
-Citizen.CreateThread(function() 
+CreateThread(function() 
     RequestAllIpls() 
 end) 
 
@@ -1209,11 +1209,9 @@ function RequestAllIpls()
 end
 
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		Wait(0)
-		Citizen.InvokeNative(0xC54A08C85AE4D410, 0.5)
+		SetRainFxIntensity(0.5)
 	end
 end)
-
---0xB96B00E976BE977F
