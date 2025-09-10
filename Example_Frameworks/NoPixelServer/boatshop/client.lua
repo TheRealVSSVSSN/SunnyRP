@@ -13,7 +13,7 @@ RegisterNetEvent('ply_docks:SelBoatFalse')
 
 --[[Local/Global]]--
 
-BOATS = {}
+local BOATS = {}
 
 local vente_location = {-774.553, -1425.26, 1.000}
 local ventenamefr = "Sell"
@@ -22,7 +22,7 @@ local docks = {
 	{name="Dock", colour=3, id=356, x=-794.352, y=-1501.18, z=1.000, axe = 120.000},
 }
 
-dockSelected = { {x=nil, y=nil, z=nil}, }
+local dockSelected = { {x=nil, y=nil, z=nil}, }
 
 --[[Functions]]--
 
@@ -114,7 +114,7 @@ function MenuDock()
 end
 
 function RentrerBateau()
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		local caissei = GetClosestVehicle(-794.352, -1501.18, 1.000, 15.000, 0, 12294)
 
 		local plate = GetVehicleNumberPlateText(caissei)
@@ -189,10 +189,10 @@ function drawTxt(text,font,centre,x,y,scale,r,g,b,a)
 	DrawText(x , y)
 end
 
---[[Citizen]]--
+
 
 --dock
-Citizen.CreateThread(function()
+CreateThread(function()
 
 	for _, item in pairs(docks) do
 		item.blip = AddBlipForCoord(item.x, item.y, item.z)
@@ -220,7 +220,7 @@ Citizen.CreateThread(function()
 
 
 	while true do
-		Citizen.Wait(1)
+		Wait(1)
 
 		local near = false
 
@@ -264,7 +264,7 @@ Citizen.CreateThread(function()
 		end
 
 		if comparedst2 > 20 and comparedst > 20 then
-			Citizen.Wait(5000)
+			Wait(5000)
 		end
 	end
 
@@ -300,8 +300,8 @@ AddEventHandler('ply_docks:SpawnBoat', function(boat, plate, state, primarycolor
 	local secondarycolor = tonumber(secondarycolor)
 	local pearlescentcolor = tonumber(pearlescentcolor)
 	local wheelcolor = tonumber(wheelcolor)
-	Citizen.CreateThread(function()
-		Citizen.Wait(1000)
+	CreateThread(function()
+		Wait(1000)
 		local caisseo = GetClosestVehicle(-794.352, -1501.18, 1.000, 3.000, 0, 12294)
 		if DoesEntityExist(caisseo) then
 			drawNotification(lang_string.text2) 
@@ -315,14 +315,14 @@ AddEventHandler('ply_docks:SpawnBoat', function(boat, plate, state, primarycolor
 				end
 				RequestModel(car)
 				while not HasModelLoaded(car) do
-				Citizen.Wait(0)
+				Wait(0)
 				end
 				veh = CreateVehicle(car, -794.352, -1501.18, 1.000, 90.0, true, false)
 				SetModelAsNoLongerNeeded(car)
 				local timer = 9000
 				while not DoesEntityExist(veh) and timer > 0 do
 					timer = timer - 1
-					Citizen.Wait(1)
+					Wait(1)
 				end
 
 
@@ -352,47 +352,47 @@ AddEventHandler('ply_docks:SpawnBoat', function(boat, plate, state, primarycolor
 end)
 
 AddEventHandler('ply_docks:StoreBoatTrue', function()
-	Citizen.Trace("Store Success")
-	Citizen.CreateThread(function()
-		Citizen.Wait(1000)
+	print("Store Success")
+	CreateThread(function()
+		Wait(1000)
 		local caissei = GetClosestVehicle(-794.352, -1501.18, 1.000, 15.000, 0, 12294)
 
-		Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(caissei))
+                DeleteEntity(caissei)
 		drawNotification(lang_string.text6)
 		TriggerServerEvent("ply_docks:GetBoats")
 	end)
 end)
 
 AddEventHandler('ply_docks:StoreBoatFalse', function()
-	Citizen.Trace("Store False")
+	print("Store False")
 	drawNotification(lang_string.text5)
 end)
 
 AddEventHandler('ply_docks:SelBoatTrue', function()
-	Citizen.Trace("Sell Boat True")
-	Citizen.CreateThread(function()
-		Citizen.Wait(0)
+	print("Sell Boat True")
+	CreateThread(function()
+		Wait(0)
 		local caissei = GetClosestVehicle(vente_location[1],vente_location[2],vente_location[3], 15.000, 0, 12294)
 
-		Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(caissei))
+                DeleteEntity(caissei)
 		drawNotification(lang_string.text9)
 		TriggerServerEvent("ply_docks:GetBoats")
 	end)
 end)
 
 AddEventHandler('ply_docks:SelBoatFalse', function()
-	Citizen.Trace("Sell Boat False")
+	print("Sell Boat False")
 	drawNotification(lang_string.text5)
 end)
 
 AddEventHandler('ply_docks:BuyTrue', function()
-	Citizen.Trace("Buy Success")
+	print("Buy Success")
 	drawNotification(lang_string.text7)
     TriggerServerEvent("ply_docks:GetBoats")
 end)
 
 AddEventHandler('ply_docks:BuyFalse', function()
-	Citizen.Trace("Buy False")
+	print("Buy False")
 	drawNotification(lang_string.text8)
 end)
 

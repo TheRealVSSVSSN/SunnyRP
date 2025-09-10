@@ -46,12 +46,12 @@ window.APP = {
   },
   methods: {
     HUD_CHANGE({ hudtype }) {
-      if ( hudtype == 2 ) {
-         $(".chat-messages").css("height", "115px");
-         $(".chat-messages").css("width", "700px");
-         $(".chat-input").css("top", "135px");
-         $(".chat-input").css("opacity", "1.0");
-      } else if ( hudtype == 1 ) {
+      if (hudtype === 2) {
+        $(".chat-messages").css("height", "115px");
+        $(".chat-messages").css("width", "700px");
+        $(".chat-input").css("top", "135px");
+        $(".chat-input").css("opacity", "1.0");
+      } else if (hudtype === 1) {
         $(".chat-messages").css("height", "340px");
         $(".chat-messages").css("width", "480px");
         $(".chat-input").css("top", "360px");
@@ -130,23 +130,23 @@ window.APP = {
         this.moveOldMessageIndex(e.which === 38);
         this.currentSug = this.currentSuggestions(true);
         this.resize();
-      } else if (e.which == 33) {
-        var buf = document.getElementsByClassName('chat-messages')[0];
-        buf.scrollTop = buf.scrollTop - 100;
-      } else if (e.which == 34) {
-        var buf = document.getElementsByClassName('chat-messages')[0];
-        buf.scrollTop = buf.scrollTop + 100;
-      } else if (e.which == 27) {
+      } else if (e.which === 33) {
+        const buf = document.getElementsByClassName('chat-messages')[0];
+        buf.scrollTop -= 100;
+      } else if (e.which === 34) {
+        const buf = document.getElementsByClassName('chat-messages')[0];
+        buf.scrollTop += 100;
+      } else if (e.which === 27) {
         this.resetShowWindowTimer();
-      } else if (e.which == 9) {
+      } else if (e.which === 9) {
 
         this.currentSug = this.currentSuggestions();
-        if (this.currentSugIndex > this.currentSug.length-1) {
+        if (this.currentSugIndex > this.currentSug.length - 1) {
           this.currentSugIndex = 0;
         }
         if (this.currentSug.length > 0) {
-          this.message = this.currentSug[this.currentSugIndex].name
-          this.currentSugIndex++;
+          this.message = this.currentSug[this.currentSugIndex].name;
+          this.currentSugIndex += 1;
         }
       }
     },
@@ -222,7 +222,7 @@ window.APP = {
           const regex = new RegExp(`${s.name} (?:\\w+ ){${index}}(?:${wType}*)$`, 'g');
 
           // eslint-disable-next-line no-param-reassign
-          p.disabled = this.message.match(regex) == null;
+          p.disabled = this.message.match(regex) === null;
         });
       });
       if (clear === true) {
@@ -230,7 +230,7 @@ window.APP = {
         this.tempSug = currentSuggestions;
         return currentSuggestions;
       }
-      if (currentSuggestions.length == 1) {
+      if (currentSuggestions.length === 1) {
         return this.tempSug
       }
       else {
