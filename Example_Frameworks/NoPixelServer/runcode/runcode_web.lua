@@ -1,21 +1,29 @@
 local cachedFiles = {}
+local resourceName = GetCurrentResourceName()
 
+--[[
+    -- Type: Function
+    -- Name: sendFile
+    -- Use: Serves cached or disk files from the resource web folder.
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 local function sendFile(res, fileName)
-	if cachedFiles[fileName] then
-		res.send(cachedFiles[fileName])
-		return
-	end
+    if cachedFiles[fileName] then
+        res.send(cachedFiles[fileName])
+        return
+    end
 
-	local fileData = LoadResourceFile(GetCurrentResourceName(), 'web/' .. fileName)
+    local fileData = LoadResourceFile(resourceName, 'web/' .. fileName)
 
-	if not fileData then
-		res.writeHead(404)
-		res.send('Not found.')
-		return
-	end
+    if not fileData then
+        res.writeHead(404)
+        res.send('Not found.')
+        return
+    end
 
-	cachedFiles[fileName] = fileData
-	res.send(fileData)
+    cachedFiles[fileName] = fileData
+    res.send(fileData)
 end
 
 local codeId = 1
@@ -24,135 +32,160 @@ local codes = {}
 local attempts = 0
 local lastAttempt
 
+--[[
+    -- Type: Function
+    -- Name: handleRunCode
+    -- Use: Executes code on server or forwards to a client.
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 local function handleRunCode(data, res)
-	if not data.lang then
-		data.lang = 'lua'
-	end
+    if not data.lang then
+        data.lang = 'lua'
+    end
 
-	if not data.client or data.client == '' then
-		CreateThread(function()
-			local result, err = RunCode(data.lang, data.code)
+    if not data.client or data.client == '' then
+        CreateThread(function()
+            local result, err = RunCode(data.lang, data.code)
+            res.send(json.encode({
+                result = result,
+                error = err
+            }))
+        end)
+    else
+        codes[codeId] = {
+            timeout = GetGameTimer() + 1000,
+            res = res
+        }
 
-			res.send(json.encode({
-				result = result,
-				error = err
-			}))
-		end)
-	else
-		codes[codeId] = {
-			timeout = GetGameTimer() + 1000,
-			res = res
-		}
-
-		TriggerClientEvent('runcode:gotSnippet', tonumber(data.client), codeId, data.lang, data.code)
-
-		codeId = codeId + 1
-	end
+        TriggerClientEvent('runcode:gotSnippet', tonumber(data.client), codeId, data.lang, data.code)
+        codeId = codeId + 1
+    end
 end
 
 RegisterNetEvent('runcode:runInBand')
 
+--[[
+    -- Type: Event
+    -- Name: runcode:runInBand
+    -- Use: Handles in-band execution requests from the NUI.
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 AddEventHandler('runcode:runInBand', function(id, data)
-	local s = source
-	local privs = GetPrivs(s)
+    local s = source
+    local privs = GetPrivs(s)
 
-	local res = {
-		send = function(str)
-			TriggerClientEvent('runcode:inBandResult', s, id, str)
-		end
-	}
+    local res = {
+        send = function(str)
+            TriggerClientEvent('runcode:inBandResult', s, id, str)
+        end
+    }
 
-	if (not data.client or data.client == '') and not privs.canServer then
-		res.send(json.encode({ error = 'Insufficient permissions.'}))
-		return
-	end
+    if (not data.client or data.client == '') and not privs.canServer then
+        res.send(json.encode({ error = 'Insufficient permissions.'}))
+        return
+    end
 
-	if (data.client and data.client ~= '') and not privs.canClient then
-		if privs.canSelf then
-			data.client = s
-		else
-			res.send(json.encode({ error = 'Insufficient permissions.'}))
-			return
-		end
-	end
+    if (data.client and data.client ~= '') and not privs.canClient then
+        if privs.canSelf then
+            data.client = s
+        else
+            res.send(json.encode({ error = 'Insufficient permissions.'}))
+            return
+        end
+    end
 
-	SaveResourceFile(GetCurrentResourceName(), 'data.json', json.encode({
-		lastSnippet = data.code,
-		lastLang = data.lang or 'lua'
-	}), -1)
+    SaveResourceFile(resourceName, 'data.json', json.encode({
+        lastSnippet = data.code,
+        lastLang = data.lang or 'lua'
+    }), -1)
 
-	handleRunCode(data, res)
+    handleRunCode(data, res)
 end)
 
+--[[
+    -- Type: Function
+    -- Name: handlePost
+    -- Use: Processes HTTP POST requests for code execution.
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 local function handlePost(req, res)
-	req.setDataHandler(function(body)
-		local data = json.decode(body)
+    req.setDataHandler(function(body)
+        local data = json.decode(body)
 
-		if not data or not data.password or not data.code then
-			res.send(json.encode({ error = 'Bad request.'}))
-			return
-		end
+        if not data or not data.password or not data.code then
+            res.send(json.encode({ error = 'Bad request.'}))
+            return
+        end
 
-		if GetConvar('rcon_password', '') == '' then
-			res.send(json.encode({ error = 'The server has an empty rcon_password.'}))
-			return
-		end
+        if GetConvar('rcon_password', '') == '' then
+            res.send(json.encode({ error = 'The server has an empty rcon_password.'}))
+            return
+        end
 
-		if attempts > 5 or data.password ~= GetConvar('rcon_password', '') then
-			attempts = attempts + 1
-			lastAttempt = GetGameTimer()
+        if attempts > 5 or data.password ~= GetConvar('rcon_password', '') then
+            attempts = attempts + 1
+            lastAttempt = GetGameTimer()
+            res.send(json.encode({ error = 'Bad password.'}))
+            return
+        end
 
-			res.send(json.encode({ error = 'Bad password.'}))
-			return
-		end
-
-		handleRunCode(data, res)
-	end)
+        handleRunCode(data, res)
+    end)
 end
 
 CreateThread(function()
-	while true do
-		Wait(1000)
-		
-		if attempts > 0 and (GetGameTimer() - lastAttempt) > 5000 then
-			attempts = 0
-			lastAttempt = 0
-		end
-	end
+    while true do
+        Wait(1000)
+
+        if attempts > 0 and (GetGameTimer() - lastAttempt) > 5000 then
+            attempts = 0
+            lastAttempt = 0
+        end
+    end
 end)
 
+--[[
+    -- Type: Function
+    -- Name: returnCode
+    -- Use: Returns execution results to the original requester.
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 local function returnCode(id, res, err)
-	if not codes[id] then
-		return
-	end
+    if not codes[id] then
+        return
+    end
 
-	local code = codes[id]
-	codes[id] = nil
+    local code = codes[id]
+    codes[id] = nil
 
-	local gotFrom
+    local gotFrom
 
-	if source then
-		gotFrom = GetPlayerName(source) .. ' [' .. tostring(source) .. ']'
-	end
+    if source then
+        gotFrom = GetPlayerName(source) .. ' [' .. tostring(source) .. ']'
+    end
 
-	code.res.send(json.encode({
-		result = res,
-		error = err,
-		from = gotFrom
-	}))
+    code.res.send(json.encode({
+        result = res,
+        error = err,
+        from = gotFrom
+    }))
 end
 
 CreateThread(function()
-	while true do
-		Wait(100)
+    while true do
+        Wait(100)
 
-		for k, v in ipairs(codes) do
-			if GetGameTimer() > v.timeout then
-				source = nil
-				returnCode(k, '', 'Timed out waiting on the target client.')
-			end
-		end
-	end
+        for k, v in pairs(codes) do
+            if GetGameTimer() > v.timeout then
+                source = nil
+                returnCode(k, '', 'Timed out waiting on the target client.')
+            end
+        end
+    end
 end)
 
 RegisterNetEvent('runcode:gotResult')
