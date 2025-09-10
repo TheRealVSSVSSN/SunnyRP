@@ -2,7 +2,7 @@ body {
     font-family: sans-serif;
     overflow: hidden;
     display: none;
-    color : white;
+    color: white;
 }
 
 #cursor {
@@ -12,18 +12,20 @@ body {
 }
 
 .dialog {
- width:100%;
- position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-  /*  background-color: rgba(0, 0, 0, 0); */
+    width: 100%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 form {
     margin: 0 auto;
-    vertical-align:center;
-    height:100%;
+    vertical-align: center;
+    height: 100%;
 }
 
-#login-form{
+#login-form {
     background-color: transparent;
     padding: 10px;
 }
@@ -38,32 +40,29 @@ form {
     font-weight: lighter;
     font-size: 10px;
     height: 45px;
-    display:block;
+    display: block;
     vertical-align: middle;
     text-decoration: none;
-    letter-spacing: 1px;      
-    
+    letter-spacing: 1px;
     opacity: 1.0;
     color: #ffffff;
     font-size: 0.8em;
     text-decoration: none;
-    text-transform:uppercase;
+    text-transform: uppercase;
     background-color: transparent;
-    background-image:url("nui://uitest/client/html/menuButton.png");
-    background-repeat:no-repeat;
-    background-size:100% 100%;
+    background-image: url("nui://uitest/client/html/menuButton.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 
-.button2{
-    float:left;
-    width:28.5%;
-    margin-left: .5%;
+.button2 {
+    float: left;
+    width: 28.5%;
+    margin-left: 0.5%;
     background-color: rgba(80, 19, 19, 0.95);
 }
 
-.button:hover, .selected { 
-    
-}
-.button1:hover{
-    
+.button.selected,
+.button:hover {
+    outline: 2px solid #ffffff;
 }
