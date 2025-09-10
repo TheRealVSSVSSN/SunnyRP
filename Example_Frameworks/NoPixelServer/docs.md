@@ -6,3 +6,6 @@
 - Added radius constant to blackjack table locator and corrected prop name outputs.
 - Moved animation dictionary cleanup outside the dealer creation loop to prevent missing animation issues.
 - Converted global state to local variables and tightened betting validation on the server.
+- Removed unused teleporter script and cleaned manifest ordering.
+- Renamed internal variables for clarity and consolidated dealer helper functions.
+- Improved server RNG seeding and scoped chip helpers locally for safety.
