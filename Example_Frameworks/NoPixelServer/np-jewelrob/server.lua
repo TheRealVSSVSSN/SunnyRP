@@ -1,38 +1,50 @@
-RegisterServerEvent("jewel:hasrobbed")
-AddEventHandler("jewel:hasrobbed", function(num)
-    hasrobbed[num] = true
-    TriggerClientEvent("jewel:robbed",-1,hasrobbed)
-end)
+--[[
+    -- Type: Function
+    -- Name: resetJewels
+    -- Use: Resets jewel case state and schedules next reset
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local TOTAL_CASES = 20
+local hasRobbed = {}
 
-RegisterServerEvent("jewel:request")
-AddEventHandler("jewel:request", function()
-    resetJewels()
-end)
-
-function resetJewels()
-    hasrobbed = {}
-    hasrobbed[1] = false
-    hasrobbed[2] = false
-    hasrobbed[3] = false
-    hasrobbed[4] = false
-    hasrobbed[5] = false
-    hasrobbed[6] = false
-    hasrobbed[7] = false
-    hasrobbed[8] = false
-    hasrobbed[9] = false
-    hasrobbed[10] = false
-    hasrobbed[11] = false
-    hasrobbed[12] = false
-    hasrobbed[13] = false
-    hasrobbed[14] = false
-    hasrobbed[15] = false
-    hasrobbed[16] = false
-    hasrobbed[17] = false
-    hasrobbed[18] = false
-    hasrobbed[19] = false
-    hasrobbed[20] = false
-    TriggerClientEvent("jewel:robbed",-1,hasrobbed)
+local function resetJewels()
+    for i = 1, TOTAL_CASES do
+        hasRobbed[i] = false
+    end
+    TriggerClientEvent("jewel:robbed", -1, hasRobbed)
     SetTimeout(4800000, resetJewels)
 end
 
+--[[
+    -- Type: Function
+    -- Name: sendJewelStatus
+    -- Use: Sends current jewel state to requesting client
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function sendJewelStatus(src)
+    TriggerClientEvent("jewel:robbed", src, hasRobbed)
+end
+
+CreateThread(function()
+    resetJewels()
+end)
+
+RegisterNetEvent("jewel:hasrobbed")
+AddEventHandler("jewel:hasrobbed", function(num)
+    hasRobbed[num] = true
+    TriggerClientEvent("jewel:robbed", -1, hasRobbed)
+end)
+
+RegisterNetEvent("jewel:request")
+AddEventHandler("jewel:request", function()
+    local src = source
+    sendJewelStatus(src)
+end)
+
+RegisterNetEvent("jewel:reset")
+AddEventHandler("jewel:reset", function()
+    resetJewels()
+end)
 
