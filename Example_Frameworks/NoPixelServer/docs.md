@@ -12,3 +12,6 @@
 - Replaced invalid player checks with `NetworkIsPlayerActive` and added volume clamping.
 - Removed jQuery dependency and refined NUI audio logic.
 - Added server helpers for coordinated sound playback including distance and flash effects.
+- Removed unused teleporter script and cleaned manifest ordering.
+- Renamed internal variables for clarity and consolidated dealer helper functions.
+- Improved server RNG seeding and scoped chip helpers locally for safety.
