@@ -1,21 +1,42 @@
-function W2H(info)
-	returnItem = weaponNameToHash.info
-	return returnItem
+--[[
+    -- Type: Client
+    -- Name: np-weapons client
+    -- Use: Handles weapon drop mechanics and provides weapon lookup utilities
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+
+local modelCache = {}
+
+local function toHash(name)
+    return weaponNameToHash[name]
 end
 
-function D2N(info)
-	info = decimalToName[info]
-	return info
+local function toName(hash)
+    return decimalToName[tostring(hash)]
+end
+exports('toName', toName)
+
+local function toPickup(name)
+    return name:gsub('WEAPON_', 'PICKUP_WEAPON_')
 end
 
-function N2P(info)
-	info = info:gsub("WEAPON_","PICKUP_WEAPON_")
-	return info
+local function findModel(name)
+    if modelCache[name] then
+        return modelCache[name]
+    end
+    for _, v in ipairs(weaponList) do
+        if v.name == name then
+            modelCache[name] = v.model
+            return v.model
+        end
+    end
 end
+exports('findModel', findModel)
 
 -- pickup hashes seem to not return so this doesnt work.
-function doPickup(PickupHash, etype, unk, x, y, z, ModelHash)
-	CreatePickup(PickupHash, x, y, z, 23, 23, 23, ModelHash)
+local function doPickup(pickupHash, etype, unk, x, y, z, modelHash)
+    CreatePickup(pickupHash, x, y, z, 23, 23, 23, modelHash)
 end
 
 function IsNearPlayer(player)
@@ -62,13 +83,13 @@ AddEventHandler('np-weapons:dropweapon', function(AmountOfCurrentWeapon,weaponMo
 
 	RequestModel(model)
 	while not HasModelLoaded(model) do
-		Citizen.Wait(1)
+		Wait(1)
 	end	
 
 	local posDrop = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 1.0, -0.3)
 
 
-	weapon = CreateObject(GetHashKey(model),posDrop.x,posDrop.y,posDrop.z, 1, 0, 0)
+        weapon = CreateObject(GetHashKey(model), posDrop.x, posDrop.y, posDrop.z, true, true, false)
 	ActivatePhysics(weapon)
 
 	local vel = GetOffsetFromEntityInWorldCoords(weapon, 0.0, 0.0, 0.0)
@@ -80,7 +101,7 @@ AddEventHandler('np-weapons:dropweapon', function(AmountOfCurrentWeapon,weaponMo
 		if vel.x == curvel.x and vel.y == curvel.y and vel.z == curvel.z then stoppedMoving = false end
 		
 		vel = GetOffsetFromEntityInWorldCoords(weapon, 0.0, 0.0, 0.0)
-        Citizen.Wait(100)
+        Wait(100)
     end    
 
     local pos = GetOffsetFromEntityInWorldCoords(weapon, 0.0, 0.0, 0.0) 
@@ -95,7 +116,7 @@ AddEventHandler('np-weapons:dropweapon', function(AmountOfCurrentWeapon,weaponMo
 
 	TriggerServerEvent("weaponshop:removeSingleWeapon",rowID)
 
-	Citizen.Wait(1000)
+	Wait(1000)
 	
 	GiveWeaponToPed(PlayerPedId(), 0xA2719263, 0, 0, 1)
 	TriggerEvent("attachWeapons")
@@ -172,9 +193,9 @@ Citizen.CreateThread(function()
         Wait(0)
         	
         if IsPedClimbing(PlayerPedId()) or IsPedJumping(PlayerPedId()) then
-        	Citizen.Wait(100)
+        	Wait(100)
         	TriggerEvent("AnimSet:Set")
-        	Citizen.Wait(1000)
+        	Wait(1000)
         end
     end
 end)
@@ -198,7 +219,7 @@ Citizen.CreateThread(function()
         if not invehicle and IsPedInAnyVehicle(PlayerPedId(), false) then
         	print("entered vehicle")
 
-        	if GetEntityModel(GetVehiclePedIsUsing(PlayerPedId())) == `taxi` then
+                if GetEntityModel(GetVehiclePedIsUsing(PlayerPedId())) == GetHashKey('taxi') then
         		print("entered taxi boro")
         		TriggerEvent("taximeter:EnteredTaxi")
         	end
@@ -267,12 +288,12 @@ AddEventHandler('attachWeapon1', function(attachModelSent,boneNumberSent,x,y,z,x
 	--local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(), true))
 	RequestModel(attachModel)
 	while not HasModelLoaded(attachModel) do
-		Citizen.Wait(100)
+		Wait(100)
 	end
 
-	attachedProp1 = CreateObject(attachModel, 1.0, 1.0, 1.0, 1, 1, 0)
-	--attachWeapon1exports["isPed"]:GlobalObject(attachedProp1)
-	AttachEntityToEntity(attachedProp1, PlayerPedId(), bone, x, y, z, xR, yR, zR, 1, 0, 0, 0, 2, 1)
+        attachedProp1 = CreateObject(attachModel, 1.0, 1.0, 1.0, true, true, false)
+        -- exports['isPed']:GlobalObject(attachedProp1)
+        AttachEntityToEntity(attachedProp1, PlayerPedId(), bone, x, y, z, xR, yR, zR, true, false, false, false, 2, true)
 end)
 
 RegisterNetEvent('attachWeapon2')
@@ -283,11 +304,11 @@ AddEventHandler('attachWeapon2', function(attachModelSent,boneNumberSent,x,y,z,x
 	--local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(), true))
 	RequestModel(attachModel)
 	while not HasModelLoaded(attachModel) do
-		Citizen.Wait(100)
+		Wait(100)
 	end
-	attachedProp2 = CreateObject(attachModel, 1.0, 1.0, 1.0, 1, 1, 0)
-	--attachWeapon1exports["isPed"]:GlobalObject(attachedProp2)
-	AttachEntityToEntity(attachedProp2, PlayerPedId(), bone, x, y, z, xR, yR, zR, 1, 0, 0, 0, 2, 1)
+        attachedProp2 = CreateObject(attachModel, 1.0, 1.0, 1.0, true, true, false)
+        -- exports['isPed']:GlobalObject(attachedProp2)
+        AttachEntityToEntity(attachedProp2, PlayerPedId(), bone, x, y, z, xR, yR, zR, true, false, false, false, 2, true)
 end)
 
 
@@ -299,11 +320,11 @@ AddEventHandler('attachWeapon3', function(attachModelSent,boneNumberSent,x,y,z,x
 	--local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(), true))
 	RequestModel(attachModel)
 	while not HasModelLoaded(attachModel) do
-		Citizen.Wait(100)
+		Wait(100)
 	end
-	attachedProp3 = CreateObject(attachModel, 1.0, 1.0, 1.0, 1, 1, 0)
-	--attachWeapon1exports["isPed"]:GlobalObject(attachedProp3)
-	AttachEntityToEntity(attachedProp3, PlayerPedId(), bone, x, y, z, xR, yR, zR, 1, 0, 0, 0, 2, 1)
+    attachedProp3 = CreateObject(attachModel, 1.0, 1.0, 1.0, true, true, false)
+    -- exports['isPed']:GlobalObject(attachedProp3)
+    AttachEntityToEntity(attachedProp3, PlayerPedId(), bone, x, y, z, xR, yR, zR, true, false, false, false, 2, true)
 end)
 
 RegisterNetEvent('attachWeapon4')
@@ -314,12 +335,12 @@ AddEventHandler('attachWeapon4', function(attachModelSent,boneNumberSent,x,y,z,x
 	--local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(), true))
 	RequestModel(attachModel)
 	while not HasModelLoaded(attachModel) do
-		Citizen.Wait(100)
+		Wait(100)
 	end
 
-	attachedProp4 = CreateObject(attachModel, 1.0, 1.0, 1.0, 1, 1, 0)
-	--attachWeapon1exports["isPed"]:GlobalObject(attachedProp4)
-	AttachEntityToEntity(attachedProp4, PlayerPedId(), bone, x, y, z, xR, yR, zR, 1, 0, 0, 0, 2, 1)
+    attachedProp4 = CreateObject(attachModel, 1.0, 1.0, 1.0, true, true, false)
+    -- exports['isPed']:GlobalObject(attachedProp4)
+    AttachEntityToEntity(attachedProp4, PlayerPedId(), bone, x, y, z, xR, yR, zR, true, false, false, false, 2, true)
 end)
 
 RegisterNetEvent('attachWeapon5')
@@ -330,11 +351,11 @@ AddEventHandler('attachWeapon5', function(attachModelSent,boneNumberSent,x,y,z,x
 	--local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(), true))
 	RequestModel(attachModel)
 	while not HasModelLoaded(attachModel) do
-		Citizen.Wait(100)
+		Wait(100)
 	end
-	attachedProp5 = CreateObject(attachModel, 1.0, 1.0, 1.0, 1, 1, 0)
-	--attachWeapon1exports["isPed"]:GlobalObject(attachedProp5)
-	AttachEntityToEntity(attachedProp5, PlayerPedId(), bone, x, y, z, xR, yR, zR, 1, 0, 0, 0, 2, 1)
+    attachedProp5 = CreateObject(attachModel, 1.0, 1.0, 1.0, true, true, false)
+    -- exports['isPed']:GlobalObject(attachedProp5)
+    AttachEntityToEntity(attachedProp5, PlayerPedId(), bone, x, y, z, xR, yR, zR, true, false, false, false, 2, true)
 end)
 
 
@@ -346,11 +367,11 @@ AddEventHandler('attachWeapon6', function(attachModelSent,boneNumberSent,x,y,z,x
 	--local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(), true))
 	RequestModel(attachModel)
 	while not HasModelLoaded(attachModel) do
-		Citizen.Wait(100)
+		Wait(100)
 	end
-	attachedProp6 = CreateObject(attachModel, 1.0, 1.0, 1.0, 1, 1, 0)
-	--attachWeapon1exports["isPed"]:GlobalObject(attachedProp6)
-	AttachEntityToEntity(attachedProp6, PlayerPedId(), bone, x, y, z, xR, yR, zR, 1, 0, 0, 0, 2, 1)
+    attachedProp6 = CreateObject(attachModel, 1.0, 1.0, 1.0, true, true, false)
+    -- exports['isPed']:GlobalObject(attachedProp6)
+    AttachEntityToEntity(attachedProp6, PlayerPedId(), bone, x, y, z, xR, yR, zR, true, false, false, false, 2, true)
 end)
 
 
@@ -500,14 +521,14 @@ AddEventHandler('attachWeaponHand', function(attachModelSent,boneNumberSent,x,y,
 	--local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(), true))
 	RequestModel(attachModel)
 	while not HasModelLoaded(attachModel) do
-		Citizen.Wait(100)
+		Wait(100)
 	end
 
-	attachedDrawProp1 = CreateObject(attachModel, 1.0, 1.0, 1.0, 1, 1, 0)
-	AttachEntityToEntity(attachedDrawProp1, PlayerPedId(), bone, x, y, z, xR, yR, zR, 1, 0, 0, 0, 2, 1)
-	Citizen.Wait(800)
+        attachedDrawProp1 = CreateObject(attachModel, 1.0, 1.0, 1.0, true, true, false)
+        AttachEntityToEntity(attachedDrawProp1, PlayerPedId(), bone, x, y, z, xR, yR, zR, true, false, false, false, 2, true)
+	Wait(800)
 	if longer then
-		Citizen.Wait(600)
+		Wait(600)
 	end
 	removeAttachedDrawProp()
 	tempdisable = 0
@@ -1444,21 +1465,4 @@ decimalToName = {
 
 
 
-
-function toName(hash)
-	local name = decimalToName[tostring(hash)]
-	return tostring(name)
-end
-
-
-
--- All Functions based on names , Use To name function to have the hash converted to name 
-
-function findModel(name)
-	for i,v in ipairs(weaponList) do
-		if name == v.name then
-			return v.model
-		end
-	end
-end
 
