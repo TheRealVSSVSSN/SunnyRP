@@ -116,9 +116,11 @@ The `qb-core` resource provides the foundational framework for QBCore-based Five
 - Player lookup functions: by source, citizen ID, license, phone number or account; utility `GetPlayers` returns active sources.
 - Identifier helpers, bucket management, and offline player retrieval using MySQL queries.
 - Callback system: `CreateCallback`, `TriggerClientCallback`, `TriggerCallback` allow asynchronous request/response between client and server.
+- Job queries: `GetPlayersByJob` returns list and count for a job or job type, while `GetPlayersOnDuty` and `GetDutyCount` provide on-duty filtering.
 - Money and item helpers, vehicle spawning (`SpawnVehicle`, `CreateAutomobile`), and webhook-friendly `Kick`.
 - Hunger/thirst saving, job/gang setters, permission checks (`HasPermission`, `IsGod`, `IsOptin`).
 - `HasItem` delegates to `qb-inventory` if present; `Notify` sends client notification events.
+- Proximity helpers `GetClosestPlayer`, `GetClosestVehicle`, and `GetClosestPed` search nearby players, vehicles, and peds.
 - `PrepForSQL` validates strings against patterns to deter SQL injection.
 
 ### server/player.lua
