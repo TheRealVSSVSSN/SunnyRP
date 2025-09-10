@@ -8,6 +8,8 @@
 
 -- Globals `Users`, `commands` and `settings` are defined in server/config.lua
 
+local justJoined = {}
+
 --[[
     -- Type: Event
     -- Name: playerConnecting
@@ -55,9 +57,8 @@ AddEventHandler('playerDropped', function()
         end
         Users[src] = nil
     end
+    justJoined[src] = nil
 end)
-
-local justJoined = {}
 
 RegisterNetEvent('es:firstJoinProper')
 AddEventHandler('es:firstJoinProper', function()
@@ -83,7 +84,8 @@ AddEventHandler('es:getSessionSetting', function(k, cb)
     cb(settings.sessionSettings[k])
 end)
 
-AddEventHandler('playerSpawn', function()
+RegisterNetEvent('es:playerSpawned')
+AddEventHandler('es:playerSpawned', function()
     local src = source
     if justJoined[src] then
         TriggerEvent('es:firstSpawn', src)
