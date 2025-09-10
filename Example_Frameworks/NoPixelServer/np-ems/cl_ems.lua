@@ -1,326 +1,260 @@
-onJob = 0
-isSignedIn = false
-mypayambulance = 0
-local lastPatient = nil
+--[[
+    -- Type: Client Script
+    -- Name: cl_ems.lua
+    -- Use: Handles EMS job workflow for patient pickup and hospital delivery
+    -- Created: 2024-10-06
+    -- By: VSSVSSN
+--]]
+
+local onJob = false
+local isSignedIn = false
+local myPay = 0
+local lastPatient = 0
+
+local jobs = {
+    peds = {},
+    blips = {},
+    vehicle = 0,
+    stage = 0,
+    destination = 0,
+    coords = {
+        vector3(363.92, -586.94, 28.68),
+        vector3(-453.97, -339.53, 34.36),
+        vector3(1843.39, 3667.17, 33.70),
+        vector3(-239.13, 6334.14, 32.35),
+        vector3(297.44, -1441.96, 29.80),
+        vector3(-677.92, 295.53, 82.10),
+        vector3(1153.57, -1512.72, 34.69),
+        vector3(-876.66, -295.43, 39.77)
+    }
+}
+
+--[[
+    -- Type: Function
+    -- Name: loadModel
+    -- Use: Requests and loads a model into memory
+--]]
+local function loadModel(model)
+    local hash = type(model) == "number" and model or GetHashKey(model)
+    RequestModel(hash)
+    while not HasModelLoaded(hash) do
+        Citizen.Wait(0)
+    end
+    return hash
+end
+
+--[[
+    -- Type: Function
+    -- Name: drawMissionText
+    -- Use: Displays temporary mission text on screen
+--]]
+local function drawMissionText(text, time)
+    ClearPrints()
+    BeginTextCommandPrint("STRING")
+    AddTextComponentSubstringPlayerName(text)
+    EndTextCommandPrint(time or 5000, true)
+end
+
+--[[
+    -- Type: Function
+    -- Name: showLoadingPrompt
+    -- Use: Shows a loading spinner with text for a given time
+--]]
+local function showLoadingPrompt(text, time, spinner)
+    Citizen.CreateThread(function()
+        BeginTextCommandBusyString("STRING")
+        AddTextComponentSubstringPlayerName(text)
+        EndTextCommandBusyString(spinner or 3)
+        Citizen.Wait(time or 1000)
+        RemoveLoadingPrompt()
+    end)
+end
+
+--[[
+    -- Type: Function
+    -- Name: stopJob
+    -- Use: Cleans up current mission and resets state
+--]]
+local function stopJob()
+    if jobs.peds[1] and DoesEntityExist(jobs.peds[1]) then
+        if jobs.blips[1] and DoesBlipExist(jobs.blips[1]) then
+            RemoveBlip(jobs.blips[1])
+        end
+        ClearPedTasksImmediately(jobs.peds[1])
+        SetEntityAsNoLongerNeeded(jobs.peds[1])
+        DeletePed(jobs.peds[1])
+        jobs.peds[1] = nil
+    end
+    if jobs.blips[1] and DoesBlipExist(jobs.blips[1]) then
+        RemoveBlip(jobs.blips[1])
+        jobs.blips[1] = nil
+    end
+    jobs.vehicle = 0
+    jobs.stage = 0
+    onJob = false
+end
+
+--[[
+    -- Type: Function
+    -- Name: beginTransport
+    -- Use: Sets a hospital destination and guides player there
+--]]
+local function beginTransport()
+    jobs.stage = 3
+    jobs.destination = math.random(#jobs.coords)
+    local dest = jobs.coords[jobs.destination]
+    jobs.blips[1] = AddBlipForCoord(dest.x, dest.y, dest.z)
+    BeginTextCommandSetBlipName("STRING")
+    AddTextComponentSubstringPlayerName("Hospital")
+    EndTextCommandSetBlipName(jobs.blips[1])
+    SetBlipRoute(jobs.blips[1], true)
+    local playerPos = GetEntityCoords(PlayerPedId())
+    myPay = CalculateTravelDistanceBetweenPoints(playerPos, dest.x, dest.y, dest.z)
+    myPay = math.min(250, math.ceil(myPay * 0.25))
+end
+
+--[[
+    -- Type: Function
+    -- Name: spawnPatient
+    -- Use: Finds a nearby random pedestrian to act as a patient
+--]]
+local function spawnPatient()
+    local pos = GetEntityCoords(PlayerPedId())
+    local randX = GetRandomIntInRange(35, 155)
+    local randY = GetRandomIntInRange(35, 155)
+    local randZ = GetRandomIntInRange(35, 55)
+    local ped = GetRandomPedAtCoord(pos.x, pos.y, pos.z, randX + 0.001, randY + 0.001, randZ + 0.001, 6)
+    if DoesEntityExist(ped) and GetPedType(ped) ~= 28 and ped ~= lastPatient then
+        jobs.peds[1] = ped
+        SetEntityHealth(ped, math.floor(GetEntityMaxHealth(ped) / 2))
+        ClearPedTasksImmediately(ped)
+        TaskStartScenarioInPlace(ped, "WORLD_HUMAN_BUM_STANDING", 0, true)
+        SetBlockingOfNonTemporaryEvents(ped, true)
+        jobs.blips[1] = AddBlipForEntity(ped)
+        SetBlipAsFriendly(jobs.blips[1], true)
+        SetBlipColour(jobs.blips[1], 2)
+        drawMissionText("The ~g~patient~w~ is waiting for you. Drive nearby", 5000)
+        jobs.stage = 1
+    else
+        jobs.stage = 0
+    end
+end
+
+--[[
+    -- Type: Function
+    -- Name: startJob
+    -- Use: Initializes EMS job when player enters ambulance
+--]]
+local function startJob()
+    showLoadingPrompt("Loading EMS mission", 2000, 3)
+    jobs.vehicle = GetVehiclePedIsUsing(PlayerPedId())
+    jobs.stage = 0
+    onJob = true
+    drawMissionText("Drive around until you get a ~y~call~w~.", 10000)
+end
+
+-- Event Handlers
 
 RegisterNetEvent("np-jobmanager:playerBecameJob")
-AddEventHandler("np-jobmanager:playerBecameJob", function(job, name, notify)
-	if job == "ems" then
-		isSignedIn = true
-	else
-		isSignedIn = false
-		StopJob()
-	end
+AddEventHandler("np-jobmanager:playerBecameJob", function(job)
+    isSignedIn = job == "ems"
+    if not isSignedIn then
+        stopJob()
+    end
 end)
 
 AddEventHandler('np-base:playerSessionStarted', function()
-	RequestModel(0xC703DB5F)
-	while not HasModelLoaded(0xC703DB5F) do
-		Wait(1)
-	end
-
-	RequestModel(0xe52e126c)
-	while not HasModelLoaded(0xe52e126c) do
-		Wait(1)
-	end
+    loadModel('s_m_m_paramedic_01')
+    loadModel('ambulance')
 end)
-
-jobs = {peds = {}, flag = {}, blip = {}, cars = {}, coords = {cx={}, cy={}, cz={}}}
-
-function StartJob(jobid)
-	if jobid == 1 then -- ambulance
-		showLoadingPromt("Loading EMS mission", 2000, 3)
-		-- Hospital heal points
-		jobs.coords.cx[1],jobs.coords.cy[1],jobs.coords.cz[1] = 363.92,-586.94,28.68
-		jobs.coords.cx[2],jobs.coords.cy[2],jobs.coords.cz[2] = -453.97,-339.53,34.36
-		jobs.coords.cx[3],jobs.coords.cy[3],jobs.coords.cz[3] = 1843.39,3667.17,33.70
-		jobs.coords.cx[4],jobs.coords.cy[4],jobs.coords.cz[4] = -239.13,6334.14,32.35
-		jobs.coords.cx[5],jobs.coords.cy[5],jobs.coords.cz[5] = 297.44,-1441.96,29.80
-		jobs.coords.cx[6],jobs.coords.cy[6],jobs.coords.cz[6] = -677.92,295.53,82.10
-		jobs.coords.cx[7],jobs.coords.cy[7],jobs.coords.cz[7] = 1153.57,-1512.72,34.69
-		jobs.coords.cx[8],jobs.coords.cy[8],jobs.coords.cz[8] = -876.66,-295.43,39.77
-
-		--jobs.coords.cx[3],jobs.coords.cy[3],jobs.coords.cz[3] = -449.67, 6331.23, 34.50
-
-
-		jobs.cars[1] = GetVehiclePedIsUsing(PlayerPedId())
-		jobs.flag[1] = 0
-		jobs.flag[2] = 259+GetRandomIntInRange(1, 61)
-		Wait(2000)
-		DrawMissionText("Drive around until you get a ~h~~y~call~w~.", 10000)
-		onJob = jobid
-	end
-end
-
-function drawTxt(x,y ,width,height,scale, text, r,g,b,a)
-    SetTextFont(0)
-    SetTextProportional(0)
-    SetTextScale(scale, scale)
-    SetTextColour(r, g, b, a)
-    SetTextDropShadow(0, 0, 0, 0,255)
-    SetTextEdge(1, 0, 0, 0, 255)
-    SetTextDropShadow()
-    SetTextOutline()
-    SetTextEntry("STRING")
-    AddTextComponentString(text)
-    DrawText(x - width/2, y - height/2 + 0.005)
-end
-
-function DrawMissionText(m_text, showtime)
-  ClearPrints()
-	SetTextEntry_2("STRING")
-	AddTextComponentString(m_text)
-	DrawSubtitleTimed(showtime, 1)
-end
-
-function showLoadingPromt(showText, showTime, showType)
-	Citizen.CreateThread(function()
-		Citizen.Wait(0)
-		N_0xaba17d7ce615adbf("STRING") -- set type
-		AddTextComponentString(showText) -- sets the text
-		N_0xbd12f8228410d9b4(showType) -- show promt (types = 3)
-		Citizen.Wait(showTime) -- show time
-		N_0x10d373323e5b9c0d() -- remove promt
-	end)
-end
-
-function StopJob(jobid)
-	if jobid == 1 then
-		if DoesEntityExist(jobs.peds[1]) then
-			lastPatient = jobs.peds[1]
-			local pedb = GetBlipFromEntity(jobs.peds[1])
-			if pedb ~= nil and DoesBlipExist(pedb) then
-				SetBlipSprite(pedb, 2)
-				SetBlipDisplay(pedb, 3)
-			end
-			SetEntityHealth(jobs.peds[1], GetEntityMaxHealth(jobs.peds[1]))
-			ClearPedTasksImmediately(jobs.peds[1])
-			if DoesEntityExist(jobs.cars[1]) and IsVehicleDriveable(jobs.cars[1], 0) then
-				if IsPedSittingInVehicle(jobs.peds[1], jobs.cars[1]) then
-					TaskLeaveVehicle(jobs.peds[1], jobs.cars[1], 0)
-				end
-			end
-			Citizen.InvokeNative(0xB736A491E64A32CF,Citizen.PointerValueIntInitialized(jobs.peds[1]))
-		end
-		if jobs.blip[1] ~= nil and DoesBlipExist(jobs.blip[1]) then
-			Citizen.InvokeNative(0x86A652570E5F25DD,Citizen.PointerValueIntInitialized(jobs.blip[1]))
-			jobs.blip[1] = nil
-		end
-		onJob = 0
-		jobs.cars[1] = nil
-		jobs.peds[1] = nil
-		jobs.flag[1] = nil
-		jobs.flag[2] = nil
-	end
-end
 
 RegisterNetEvent('nowIsEMS')
 AddEventHandler('nowIsEMS', function(cb)
-  cb(onJob > 0)
+    cb(onJob)
 end)
 
-RegisterNetEvent("nowUnemployed")
-AddEventHandler("nowUnemployed", function()
-	onJob = 0
+RegisterNetEvent('nowUnemployed')
+AddEventHandler('nowUnemployed', function()
+    stopJob()
 end)
 
+--[[
+    -- Type: Function
+    -- Name: jobTick
+    -- Use: Main loop handling mission states
+--]]
+local function jobTick()
+    if not DoesEntityExist(jobs.vehicle) or not IsVehicleDriveable(jobs.vehicle, false) then
+        drawMissionText("The ambulance is ~r~destroyed~w~.", 5000)
+        stopJob()
+        return
+    end
+
+    if jobs.stage == 0 then
+        if IsVehicleSeatFree(jobs.vehicle, -1) then
+            stopJob()
+            return
+        end
+        if math.random(0, 100) > 75 then
+            spawnPatient()
+        end
+        Citizen.Wait(20000)
+    elseif jobs.stage == 1 then
+        if DoesEntityExist(jobs.peds[1]) then
+            local playerPos = GetEntityCoords(PlayerPedId())
+            local pedPos = GetEntityCoords(jobs.peds[1])
+            if #(playerPos - pedPos) < 15.0 and IsPedSittingInVehicle(PlayerPedId(), jobs.vehicle) then
+                TaskEnterVehicle(jobs.peds[1], jobs.vehicle, -1, 2, 2.0, 1)
+                jobs.stage = 2
+            end
+        else
+            jobs.stage = 0
+        end
+        Citizen.Wait(0)
+    elseif jobs.stage == 2 then
+        if IsPedSittingInVehicle(jobs.peds[1], jobs.vehicle) then
+            beginTransport()
+        else
+            jobs.stage = 1
+        end
+        Citizen.Wait(0)
+    elseif jobs.stage == 3 then
+        local dest = jobs.coords[jobs.destination]
+        DrawMarker(27, dest.x, dest.y, dest.z - 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.0, 5.0, 2.0, 178, 236, 93, 155, false, false, 2, false, nil, nil, false)
+        if #(GetEntityCoords(PlayerPedId()) - dest) < 5.0 then
+            if jobs.blips[1] and DoesBlipExist(jobs.blips[1]) then
+                RemoveBlip(jobs.blips[1])
+                jobs.blips[1] = nil
+            end
+            TaskLeaveVehicle(jobs.peds[1], jobs.vehicle, 0)
+            Citizen.Wait(1000)
+            ClearPedTasksImmediately(jobs.peds[1])
+            DeletePed(jobs.peds[1])
+            jobs.peds[1] = nil
+            TriggerServerEvent('mission:completed', myPay)
+            local util = exports['np-base']:getModule('Util')
+            util:MissionText('You gained ~g~$'..myPay..'~w~', 5000)
+            drawMissionText('~g~You have delivered the patient!~w~', 5000)
+            jobs.stage = 0
+            Citizen.Wait(2000)
+            drawMissionText('Drive around until you get another ~y~request~w~.', 10000)
+        end
+        Citizen.Wait(0)
+    end
+end
+
+-- Main Loop
 Citizen.CreateThread(function()
-	while true do
-		Wait(0)
-		if onJob == 0 and isSignedIn == true then
-			if IsPedSittingInAnyVehicle(PlayerPedId()) then
-				if IsVehicleModel(GetVehiclePedIsUsing(PlayerPedId()), GetHashKey("ambulance", _r)) then
-					StartJob(1)
-				end
-			end
-		elseif onJob == 1 then
-			if DoesEntityExist(jobs.cars[1]) and IsVehicleDriveable(jobs.cars[1], 0) then
-				if IsPedSittingInVehicle(PlayerPedId(), jobs.cars[1]) then
-					if DoesEntityExist(jobs.peds[1]) then
-						lastPatient = jobs.peds[1]
-						if IsPedFatallyInjured(jobs.peds[1]) then
-							Citizen.InvokeNative(0xB736A491E64A32CF,Citizen.PointerValueIntInitialized(jobs.peds[1]))
-							local pedb = GetBlipFromEntity(jobs.peds[1])
-							if pedb ~= nil and DoesBlipExist(pedb) then
-								SetBlipSprite(pedb, 2)
-								SetBlipDisplay(pedb, 3)
-							end
-							jobs.peds[1] = nil
-							jobs.flag[1] = 0
-							jobs.flag[2] = 59+GetRandomIntInRange(1, 90)
-							if jobs.blip[1] ~= nil and DoesBlipExist(jobs.blip[1]) then
-								Citizen.InvokeNative(0x86A652570E5F25DD,Citizen.PointerValueIntInitialized(jobs.blip[1]))
-								jobs.blip[1] = nil
-							end
-							DrawMissionText("The patient ~r~passed away~w~. Drive around until you get another call.", 5000)
-						else
-							if jobs.flag[1] == 1 and jobs.flag[2] > 0 then
-								Wait(2000)
-								jobs.flag[2] = jobs.flag[2]-1
-								if jobs.flag[2] == 0 then
-									lastPatient = jobs.peds[1]
-									local pedb = GetBlipFromEntity(jobs.peds[1])
-									if pedb ~= nil and DoesBlipExist(pedb) then
-										SetBlipSprite(pedb, 2)
-										SetBlipDisplay(pedb, 3)
-									end
-									SetEntityHealth(jobs.peds[1], 0)
-									ClearPedTasksImmediately(jobs.peds[1])
-									Citizen.InvokeNative(0xB736A491E64A32CF,Citizen.PointerValueIntInitialized(jobs.peds[1]))
-									jobs.peds[1] = nil
-									DrawMissionText("The patient ~r~passed away~w~ while on route. Drive around until you get another ~h~~y~request~w~.", 5000)
-									jobs.flag[1] = 0
-									jobs.flag[2] = 259+GetRandomIntInRange(1, 61)
-								else
-									if IsPedSittingInVehicle(PlayerPedId(), jobs.cars[1]) then
-										if #(GetEntityCoords(PlayerPedId()) - GetEntityCoords(jobs.peds[1])) < 15.0001 then
-											local offs = GetOffsetFromEntityInWorldCoords(GetVehiclePedIsUsing(PlayerPedId()), 1.5, 0.0, 0.0)
-											local offs2 = GetOffsetFromEntityInWorldCoords(GetVehiclePedIsUsing(PlayerPedId()), -1.5, 0.0, 0.0)
-											if #(vector3(offs['x'], offs['y'], offs['z']) - GetEntityCoords(jobs.peds[1])) < #(vector3(offs2['x'], offs2['y'], offs2['z']) - GetEntityCoords(jobs.peds[1])) then
-												TaskEnterVehicle(jobs.peds[1], jobs.cars[1], -1, 2, 2.0001, 1)
-											else
-												TaskEnterVehicle(jobs.peds[1], jobs.cars[1], -1, 1, 2.0001, 1)
-											end
-											jobs.flag[1] = 2
-											jobs.flag[2] = 30
-										end
-									end
-								end
-							end
-							if jobs.flag[1] == 2 and jobs.flag[2] > 0 then
-								Wait(2000)
-								jobs.flag[2] = jobs.flag[2]-1
-								if jobs.flag[2] == 0 then
-									lastPatient = jobs.peds[1]
-									local pedb = GetBlipFromEntity(jobs.peds[1])
-									if pedb ~= nil and DoesBlipExist(pedb) then
-										SetBlipSprite(pedb, 2)
-										SetBlipDisplay(pedb, 3)
-									end
-									SetEntityHealth(jobs.peds[1], GetEntityMaxHealth(jobs.peds[1]))
-									ClearPedTasksImmediately(jobs.peds[1])
-									Citizen.InvokeNative(0xB736A491E64A32CF,Citizen.PointerValueIntInitialized(jobs.peds[1]))
-									jobs.peds[1] = nil
-									DrawMissionText("~r~The patient is not going with you~w~. Drive around until you get another ~h~~y~request~w~.", 5000)
-									jobs.flag[1] = 0
-									jobs.flag[2] = 259+GetRandomIntInRange(1, 61)
-								else
-									if IsPedSittingInVehicle(jobs.peds[1], jobs.cars[1]) then
-										local pedb = GetBlipFromEntity(jobs.peds[1])
-										lastPatient = jobs.peds[1]					
-
-										if pedb ~= nil and DoesBlipExist(pedb) then
-											SetBlipSprite(pedb, 2)
-											SetBlipDisplay(pedb, 3)
-										end
-										jobs.flag[1] = 3
-										jobs.flag[2] = GetRandomIntInRange(1, 8)
-										local street = table.pack(GetStreetNameAtCoord(jobs.coords.cx[jobs.flag[2]],jobs.coords.cy[jobs.flag[2]],jobs.coords.cz[jobs.flag[2]]))
-										if street[2] ~= 0 and street[2] ~= nil then
-											local streetname = string.format("~w~Take me to~y~ %s~w~, nearby~y~ %s", GetStreetNameFromHashKey(street[1]),GetStreetNameFromHashKey(street[2]))
-											DrawMissionText(streetname, 5000)
-										else
-											local streetname = string.format("~w~Take me to the~y~ %s", GetStreetNameFromHashKey(street[1]))
-											DrawMissionText(streetname, 5000)
-										end
-										local location = GetEntityCoords(PlayerPedId(), 0)
-										mypayambulance = CalculateTravelDistanceBetweenPoints( location, jobs.coords.cx[jobs.flag[2]], jobs.coords.cy[jobs.flag[2]], jobs.coords.cz[jobs.flag[2]] )
-										mypayambulance = mypayambulance * 0.25
-										mypayambulance = math.ceil(mypayambulance)
-
-										if mypayambulance > 250 then
-											mypayambulance = 250
-										end
-
-										jobs.blip[1] = AddBlipForCoord(jobs.coords.cx[jobs.flag[2]],jobs.coords.cy[jobs.flag[2]],jobs.coords.cz[jobs.flag[2]])
-
-										AddTextComponentString(GetStreetNameFromHashKey(street[1]))
-										N_0x80ead8e2e1d5d52e(jobs.blip[1])
-										SetBlipRoute(jobs.blip[1], 1)
-									end
-								end
-							end
-							if jobs.flag[1] == 3 then
-								if #(GetEntityCoords(PlayerPedId()) - vector3(jobs.coords.cx[jobs.flag[2]],jobs.coords.cy[jobs.flag[2]],jobs.coords.cz[jobs.flag[2]])) > 2.0001 then
-									DrawMarker(27, jobs.coords.cx[jobs.flag[2]],jobs.coords.cy[jobs.flag[2]],jobs.coords.cz[jobs.flag[2]]-1.0001, 0, 0, 0, 0, 0, 0, 5.0, 5.0, 2.0, 178, 236, 93, 155, 0, 0, 2, 0, 0, 0, 0)
-								else
-									Wait(500)
-									lastPatient = jobs.peds[1]
-									if jobs.blip[1] ~= nil and DoesBlipExist(jobs.blip[1]) then
-										Citizen.InvokeNative(0x86A652570E5F25DD,Citizen.PointerValueIntInitialized(jobs.blip[1]))
-										jobs.blip[1] = nil
-									end
-
-									SetEntityHealth(jobs.peds[1], GetEntityMaxHealth(jobs.peds[1]))
-									ClearPedTasksImmediately(jobs.peds[1])
-									if DoesEntityExist(jobs.cars[1]) then
-										if IsPedSittingInVehicle(jobs.peds[1], jobs.cars[1]) then
-											TaskLeaveVehicle(jobs.peds[1], jobs.cars[1], 0)
-										end
-									end
-									Citizen.InvokeNative(0xB736A491E64A32CF,Citizen.PointerValueIntInitialized(jobs.peds[1]))
-
-									jobs.peds[1] = nil
-									Wait(2000)
-
-	                DrawMissionText("~g~You have delivered the patient!", 5000)								    
-									local util = exports["np-base"]:getModule("Util")
-									util:MissionText("You gained ~g~$"..mypayambulance.."~w~", 5000)
-									TriggerServerEvent('mission:completed', mypayambulance)
-									Wait(2000)
-									DrawMissionText("Drive around until you get another ~h~~y~request~w~.", 10000)
-									jobs.flag[1] = 0
-									jobs.flag[2] = 59+GetRandomIntInRange(1, 90)
-								end
-							end
-						end
-					else
-						Wait(20000)
-						-- Don't look for jobs if we already have someone in the back
-						if isSignedIn == true and (IsVehicleSeatFree(jobs.cars[1], 1) and IsVehicleSeatFree(jobs.cars[1], 2)) and GetRandomIntInRange(0, 100) > 75 then							
-							local pos = GetEntityCoords(PlayerPedId())
-							local randX = GetRandomIntInRange(35, 155)
-							local randY = GetRandomIntInRange(35, 155)
-							local randZ = GetRandomIntInRange(35, 55)
-							local rped = GetRandomPedAtCoord(pos['x'], pos['y'], pos['z'], randX + .001, randY + .001, randZ + .001, 6, _r)
-							if DoesEntityExist(rped) and GetPedType(rped) ~= 28 and lastPatient ~= rped then
-								jobs.peds[1] = rped
-								jobs.flag[1] = 1
-								SetEntityHealth(jobs.peds[1], GetEntityMaxHealth(jobs.peds[1])/2)
-								jobs.flag[2] = 19+GetRandomIntInRange(1, 21)
-								ClearPedTasksImmediately(jobs.peds[1])
-								local randAnim = GetRandomIntInRange(1, 3)
-								if randAnim == 1 then
-									TaskStartScenarioInPlace(jobs.peds[1], "WORLD_HUMAN_BUM_STANDING", 0, true);
-								elseif randAnim == 2 then
-									TaskStartScenarioInPlace(jobs.peds[1], "WORLD_HUMAN_BUM_SLUMPED", 0, true);
-								elseif randAnim == 3 then
-									TaskStartScenarioInPlace(jobs.peds[1], "PROP_HUMAN_STAND_IMPATIENT", 0, true);
-								end
-								SetBlockingOfNonTemporaryEvents(jobs.peds[1], 1)
-								DrawMissionText("The ~g~patient~w~ is waiting for you. Drive nearby", 5000)
-								local lblip = AddBlipForEntity(jobs.peds[1])
-								SetBlipAsFriendly(lblip, 1)
-								SetBlipColour(lblip, 2)
-								SetBlipCategory(lblip, 3)
-							else
-								jobs.flag[1] = 0
-								jobs.flag[2] = 59+GetRandomIntInRange(1, 90)
-								DrawMissionText("Drive around until you get another ~h~~y~request~w~.", 10000)
-							end
-						end
-					end
-				else
-					if #(GetEntityCoords(PlayerPedId()) - GetEntityCoords(jobs.cars[1])) > 30.0001 then
-						StopJob(1)
-					else
-						DrawMissionText("Get back in your car to ~y~continue~w~. Or go away from the ambulance to ~r~stop~ the mission.", 1)
-					end
-				end
-			else
-				StopJob(1)
-				DrawMissionText("The ambulance is ~h~~r~destroyed~w~.", 5000)
-			end
-		end
-	end
+    while true do
+        Citizen.Wait(0)
+        if not onJob and isSignedIn and IsPedSittingInAnyVehicle(PlayerPedId()) then
+            local veh = GetVehiclePedIsUsing(PlayerPedId())
+            if GetEntityModel(veh) == GetHashKey('ambulance') then
+                startJob()
+            end
+        elseif onJob then
+            jobTick()
+        end
+    end
 end)
+
