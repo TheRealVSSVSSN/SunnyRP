@@ -49,10 +49,10 @@ Per-module descriptive documents explaining behaviour and configuration of each 
 
 ## VoIP Server
 ### voip_server/config.js
-Node configuration enabling WebSocket voice channels.
+Immutable Node configuration defining WebSocket signalling port, WebRTC port range, and optional STUN servers.
 
 ### voip_server/main.js
-Node.js WebSocket server relaying positional audio data for the Audio module.
+Modernized WebSocket/WebRTC relay that tracks players with a `Map`, forwards voice packets between shared channels, and cleans up channel membership on disconnect.
 
 ## vrp Framework
 ### Core Files
