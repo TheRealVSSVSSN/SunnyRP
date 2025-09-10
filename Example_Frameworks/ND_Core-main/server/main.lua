@@ -90,7 +90,7 @@ local function checkDiscordIdentifier(identifiers)
     local discordIdentifier = identifiers["discord"]
     if not discordIdentifier then return end
 
-    return NDCore.getDiscordInfo(discordIdentifier:gsub("discord:", ""))
+    return NDCore.getDiscordInfo(discordIdentifier)
 end
 
 AddEventHandler("onResourceStart", function(name)

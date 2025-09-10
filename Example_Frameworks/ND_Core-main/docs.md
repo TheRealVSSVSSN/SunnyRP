@@ -44,7 +44,7 @@ ND_Core is the primary gameplay framework for SunnyRP. It manages player and veh
 
 ## Client Files
 ### client/main.lua
-Initialises client configuration from replicated convars, sets Discord rich presence, and updates the pause menu with player information. It enables friendly fire after spawn and on resource start to ease testing【F:client/main.lua†L62-L72】.
+Initialises client configuration from replicated convars, sets Discord rich presence, and updates the pause menu with player information. Friendly fire is now enabled through the `enableFriendlyFire` helper, which runs after spawn and on resource start for ease of testing【F:client/main.lua†L62-L83】.
 
 ### client/events.lua
 Registers client-side listeners for money, character state and clothing changes. Events update cached player data, revive the player, open the clothing menu and record last location (origin unresolved)【F:client/events.lua†L1-L56】【F:client/events.lua†L58-L86】.
@@ -78,7 +78,7 @@ Implements the core character object with money management, metadata storage, jo
 Manages vehicle records, key sharing and spawn/despawn logic. Exports an inventory handler `keys` for ox_inventory【F:server/vehicle.lua†L581-L595】, registers callbacks for owned vehicle lists【F:server/vehicle.lua†L788-L792】 and processes events for locking, alarm sync, hotwiring, garage interactions and key disabling. Commands `getkeys` and `givekeys` allow key generation and transfer. The `entityCreated` handler locks ambient vehicles based on random chance【F:server/vehicle.lua†L598-L678】.
 
 ### server/functions.lua
-General utilities for identifier lookup, player retrieval, configuration access, SQL file execution and Discord role queries. Every function in `NDCore` is exported for external resources【F:server/functions.lua†L1-L112】.
+General utilities for identifier lookup, player retrieval, configuration access, SQL execution and Discord role queries. SQL files run synchronously via `MySQL.query.await`, and `getDiscordInfo` sanitises the identifier before querying Discord's API. Every function in `NDCore` is exported for external resources【F:server/functions.lua†L1-L120】.
 
 ### server/commands.lua
 Defines administrative commands via `lib.addCommand` for money, jobs, groups, clothing, character selection, teleportation, freezing and vehicle management. Command security relies on `group.admin` restrictions and actions are echoed to staff through `chat:addMessage`. Events `ND:clothingMenu` and `ND:characterMenu` are sent to targets, but no handlers exist in this resource for the latter【F:server/commands.lua†L17-L443】【F:server/commands.lua†L57-L62】.

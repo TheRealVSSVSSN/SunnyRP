@@ -1,8 +1,15 @@
-function NDCore.getPlayerIdentifierByType(src, indentifierType)
+--[[
+    -- Type: Function
+    -- Name: getPlayerIdentifierByType
+    -- Use: Returns a player's identifier of a specific type
+    -- Created: 2024-10-18
+    -- By: VSSVSSN
+--]]
+function NDCore.getPlayerIdentifierByType(src, identifierType)
     if Config.sv_lan then
-        return ("%s:sv_lan"):format(indentifierType)
+        return ("%s:sv_lan"):format(identifierType)
     end
-    return GetPlayerIdentifierByType(src, indentifierType)
+    return GetPlayerIdentifierByType(src, identifierType)
 end
 
 ---@param src number
@@ -11,8 +18,9 @@ function NDCore.getPlayer(src)
     return NDCore.players[src]
 end
 
----@param metadata string
----@param data any
+---@param key string
+---@param value any
+---@param returnArray boolean
 ---@return table
 function NDCore.getPlayers(key, value, returnArray)
     if not key or not value then return NDCore.players end 
@@ -41,6 +49,8 @@ function NDCore.getPlayerServerInfo(source)
     return PlayersInfo[source]
 end
 
+---@param info string
+---@return any
 function NDCore.getConfig(info)
     if not info then
         return Config
@@ -48,7 +58,7 @@ function NDCore.getConfig(info)
     return Config[info]
 end
 
----@param fileLocation string|tabale
+---@param fileLocation string|table
 ---@return boolean
 function NDCore.loadSQL(fileLocation, resource)
     local resourceName = resource or GetInvokingResource() or  GetCurrentResourceName()
@@ -56,20 +66,26 @@ function NDCore.loadSQL(fileLocation, resource)
     if type(fileLocation) == "string" then
         local file = LoadResourceFile(resourceName, fileLocation)
         if not file then return end
-        MySQL.query(file)
+        MySQL.query.await(file)
         return true
     end
-    
+
     for i=1, #fileLocation do
         local file = LoadResourceFile(resourceName, fileLocation[i])
         if file then
-            MySQL.query(file)
-            Wait(100)
+            MySQL.query.await(file)
         end
     end
     return true
 end
 
+--[[
+    -- Type: Function
+    -- Name: getDiscordInfo
+    -- Use: Queries Discord's guild API for a member's information
+    -- Created: 2024-10-18
+    -- By: VSSVSSN
+--]]
 function NDCore.getDiscordInfo(discordUserId)
     if not discordUserId or not Config.discordBotToken or not Config.discordGuildId then return end
     local done = false
@@ -81,9 +97,11 @@ function NDCore.getDiscordInfo(discordUserId)
         [429] = "Discord bot rate limited"
     }
 
-    if type(discordUserId) == "string" and discordUserId:find("discord:") then discordUserId:gsub("discord:", "") end
+    if type(discordUserId) == "string" and discordUserId:find("discord:") then
+        discordUserId = discordUserId:gsub("discord:", "")
+    end
 
-    PerformHttpRequest(("https://discordapp.com/api/guilds/%s/members/%s"):format(Config.discordGuildId, discordUserId), function(errorCode, resultData, resultHeaders)
+    PerformHttpRequest(("https://discord.com/api/guilds/%s/members/%s"):format(Config.discordGuildId, discordUserId), function(errorCode, resultData, resultHeaders)
         if errorCode ~= 200 then
             done = true
             return print(("^3Warning: %d %s"):format(errorCode, discordErrors[errorCode]))
