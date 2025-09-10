@@ -93,16 +93,21 @@ async(function() vRP:execute("vRP/base_tables") end)
 
 -- handlers
 
-AddEventHandler("playerDropped",function(reason)
-  vRP:onPlayerDropped(source)
+AddEventHandler("playerDropped", function(reason)
+  local src = source
+  vRP:onPlayerDropped(src, reason)
 end)
 
-RegisterNetEvent("vRPcli:playerSpawned", function()
-  vRP:onPlayerSpawned(source)
+RegisterNetEvent("vRPcli:playerSpawned")
+AddEventHandler("vRPcli:playerSpawned", function()
+  local src = source
+  vRP:onPlayerSpawned(src)
 end)
 
-RegisterNetEvent("vRPcli:playerDied", function()
-  vRP:onPlayerDied(source)
+RegisterNetEvent("vRPcli:playerDied")
+AddEventHandler("vRPcli:playerDied", function()
+  local src = source
+  vRP:onPlayerDied(src)
 end)
 
 local lang = vRP.lang

@@ -269,19 +269,23 @@ function vRP:connectUser(source)
   return user
 end
 
-function vRP:disconnectUser(source)
+function vRP:disconnectUser(source, reason)
   local user = self.users_by_source[source]
   if user then
     -- remove player from connected clients
     self.EXT.Base.remote._removePlayer(-1, user.source)
     self:triggerEventSync("characterUnload", user)
-    self:triggerEventSync("playerLeave", user)
+    self:triggerEventSync("playerLeave", user, reason)
     -- save user
     user:save()
     -- unreference
     self.users[user.id] = nil
     self.users_by_source[user.source] = nil
-    self:log(user.name.." ("..user.endpoint..") disconnected (user_id = "..user.id..")")
+    local msg = string.format("%s (%s) disconnected (user_id = %s)", user.name, user.endpoint, user.id)
+    if reason and reason ~= "" then
+      msg = msg .. " [reason: " .. reason .. "]"
+    end
+    self:log(msg)
   end
 end
 
@@ -374,8 +378,8 @@ function vRP:onPlayerSpawned(source)
   end
 end
 
-function vRP:onPlayerDropped(source)
-  self:disconnectUser(source)
+function vRP:onPlayerDropped(source, reason)
+  self:disconnectUser(source, reason)
 end
 
 function vRP:onPlayerDied(source)
