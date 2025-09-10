@@ -7,6 +7,10 @@
 - Moved animation dictionary cleanup outside the dealer creation loop to prevent missing animation issues.
 - Converted global state to local variables and tightened betting validation on the server.
 
+## WiseGuy-UC
+- Replaced legacy `__resource.lua` with a modern `fxmanifest.lua` using the `cerulean` fx_version and Lua 5.4.
+- Refactored vehicle name registration into a table-driven script and swapped `Citizen.CreateThread` for `CreateThread`.
+
 ## WiseGuy-Audio
 - Migrated `__resource.lua` to modern `fxmanifest.lua` with Lua 5.4 support.
 - Added placeholder `vehicle_names.lua` to resolve missing client script errors.
