@@ -1,22 +1,45 @@
-local xhairActive = false
+--[[
+    -- Type: Command
+    -- Name: togglexhair
+    -- Use: Toggles the crosshair visibility override
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+
+local crosshairActive = false
 local disableXhair = false
 
-RegisterCommand("togglexhair", function()
+RegisterCommand('togglexhair', function()
     disableXhair = not disableXhair
+
+    if disableXhair and crosshairActive then
+        crosshairActive = false
+        SendNUIMessage({ action = 'hide' })
+    end
 end)
 
-Citizen.CreateThread(function()
+--[[
+    -- Type: Thread
+    -- Name: CrosshairControl
+    -- Use: Manages crosshair visibility based on player state
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+CreateThread(function()
     while true do
-        Citizen.Wait(500)
-        local get_ped = PlayerPedId()
-        local get_ped_veh = GetVehiclePedIsIn(get_ped, false)
+        Wait(500)
 
-        if not disableXhair and not xhairActive and IsPedArmed(get_ped, 7) then
-            xhairActive = true
-            SendNUIMessage("xhairShow")
-        elseif not IsPedArmed(PlayerPedId(), 7) and xhairActive then
-            xhairActive = false
-            SendNUIMessage("xhairHide")
+        local ped = PlayerPedId()
+
+        if not disableXhair and not IsPedInAnyVehicle(ped, false) and IsPedArmed(ped, 6) then
+            if not crosshairActive then
+                crosshairActive = true
+                SendNUIMessage({ action = 'show' })
+            end
+        elseif crosshairActive then
+            crosshairActive = false
+            SendNUIMessage({ action = 'hide' })
         end
     end
 end)
+
