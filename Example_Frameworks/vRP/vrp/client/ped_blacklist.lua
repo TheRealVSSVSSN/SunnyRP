@@ -14,9 +14,9 @@ function PedBlacklist:__construct()
   self.interval = 10000
 
   -- task: remove peds
-  Citizen.CreateThread(function()
+  CreateThread(function()
     while true do 
-      Citizen.Wait(self.interval)
+      Wait(self.interval)
 
       local peds = {}
 
@@ -35,7 +35,7 @@ function PedBlacklist:__construct()
 
       for _, ped in ipairs(peds) do
         if not IsPedAPlayer(ped) and self.ped_models[GetEntityModel(ped)] then
-          DeletePed(Citizen.PointerValueIntInitialized(ped))
+          DeletePed(ped)
         end
       end
     end

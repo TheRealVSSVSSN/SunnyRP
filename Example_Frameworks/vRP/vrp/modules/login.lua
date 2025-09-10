@@ -145,7 +145,7 @@ AddEventHandler("playerConnecting", function(name, setMessage, deferrals)
   local source = source
   local self = vRP.EXT.Login
   deferrals.defer()
-  Citizen.Wait(0)
+  Wait(0)
   deferrals.update("Authentication...")
   local user_id = vRP:authUser(source)
   if user_id then
@@ -156,21 +156,21 @@ AddEventHandler("playerConnecting", function(name, setMessage, deferrals)
       deferrals.update("Checking whitelisted...")
       if not self.cfg.whitelist or self:isWhitelisted(user_id) then
         -- allowed
-        Citizen.Wait(0)
+        Wait(0)
         deferrals.done()
       else
         self:log(name.." ("..vRP.getPlayerEndpoint(source)..") rejected: not whitelisted (user_id = "..user_id..")")
-        Citizen.Wait(0)
+        Wait(0)
         deferrals.done("Not whitelisted (user_id = "..user_id..").")
       end
     else
       self:log(name.." ("..vRP.getPlayerEndpoint(source)..") rejected: banned (user_id = "..user_id..")")
-      Citizen.Wait(0)
+      Wait(0)
       deferrals.done("Banned (user_id = "..user_id..", until "..os.date("!%d/%m/%Y %H:%M", end_timestamp).." UTC): "..reason)
     end
   else
     self:log(name.." ("..vRP.getPlayerEndpoint(source)..") rejected: identification error")
-    Citizen.Wait(0)
+    Wait(0)
     deferrals.done("Authentication failed.")
   end
 end)

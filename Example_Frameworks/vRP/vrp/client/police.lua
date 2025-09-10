@@ -15,9 +15,9 @@ function Police:__construct()
   self.wanted_level = 0
 
   -- task: keep handcuffed animation
-  Citizen.CreateThread(function()
+  CreateThread(function()
     while true do
-      Citizen.Wait(15000)
+      Wait(15000)
       if self.handcuffed then
         vRP.EXT.Base:playAnim(true,{{"mp_arresting","idle",1}},true)
       end
@@ -25,11 +25,11 @@ function Police:__construct()
   end)
 
   -- task: force stealth movement while handcuffed (prevent use of fist and slow the player)
-  Citizen.CreateThread(function()
+  CreateThread(function()
     while true do
-      Citizen.Wait(0)
+      Wait(0)
       if self.handcuffed then
-        SetPedStealthMovement(GetPlayerPed(-1),true,"")
+        SetPedStealthMovement(PlayerPedId(),true,"")
         DisableControlAction(0,21,true) -- disable sprint
         DisableControlAction(0,24,true) -- disable attack
         DisableControlAction(0,25,true) -- disable aim
@@ -58,12 +58,12 @@ function Police:__construct()
   end)
 
   -- task: follow 
-  Citizen.CreateThread(function()
+  CreateThread(function()
     while true do
-      Citizen.Wait(5000)
+      Wait(5000)
       if self.follow_player then
         local tplayer = GetPlayerFromServerId(self.follow_player)
-        local ped = GetPlayerPed(-1)
+        local ped = PlayerPedId()
         if NetworkIsPlayerConnected(tplayer) then
           local tped = GetPlayerPed(tplayer)
           TaskGoToEntity(ped, tped, -1, 1.0, 10.0, 1073741824.0, 0)
@@ -74,9 +74,9 @@ function Police:__construct()
   end)
 
   -- task: jail
-  Citizen.CreateThread(function()
+  CreateThread(function()
     while true do
-      Citizen.Wait(5)
+      Wait(5)
       if self.current_jail then
         local x,y,z = vRP.EXT.Base:getPosition()
 
@@ -85,7 +85,7 @@ function Police:__construct()
         local dist = math.sqrt(dx*dx+dy*dy)
 
         if dist >= self.current_jail[4] then
-          local ped = GetPlayerPed(-1)
+          local ped = PlayerPedId()
           SetEntityVelocity(ped, 0.0001, 0.0001, 0.0001) -- stop player
 
           -- normalize + push to the edge + add origin
@@ -100,9 +100,9 @@ function Police:__construct()
   end)
 
   -- task: update wanted level
-  Citizen.CreateThread(function()
+  CreateThread(function()
     while true do
-      Citizen.Wait(5000)
+      Wait(5000)
 
       -- if cop, reset wanted level
       if self.cop then
@@ -120,20 +120,20 @@ function Police:__construct()
   end)
 
   -- task: detect vehicle stealing
-  Citizen.CreateThread(function()
+  CreateThread(function()
     while true do
-      Citizen.Wait(1)
-      local ped = GetPlayerPed(-1)
+      Wait(1)
+      local ped = PlayerPedId()
       if IsPedTryingToEnterALockedVehicle(ped) or IsPedJacking(ped) then
-        Citizen.Wait(2000) -- wait x seconds before setting wanted
+        Wait(2000) -- wait x seconds before setting wanted
         local model = vRP.EXT.Garage:getNearestOwnedVehicle(5)
         if not model then -- prevent stealing detection on owned vehicle
           for i=0,4 do -- keep wanted for 1 minutes 30 seconds
             self:applyWantedLevel(2)
-            Citizen.Wait(15000)
+            Wait(15000)
           end
         end
-        Citizen.Wait(15000) -- wait 15 seconds before checking again
+        Wait(15000) -- wait 15 seconds before checking again
       end
     end
   end)
@@ -142,7 +142,7 @@ end
 -- set player as cop (true or false)
 function Police:setCop(flag)
   self.cop = flag
-  SetPedAsCop(GetPlayerPed(-1),flag)
+  SetPedAsCop(PlayerPedId(),flag)
 end
 
 -- HANDCUFF
@@ -150,12 +150,12 @@ end
 function Police:toggleHandcuff()
   self.handcuffed = not self.handcuffed
 
-  SetEnableHandcuffs(GetPlayerPed(-1), self.handcuffed)
+  SetEnableHandcuffs(PlayerPedId(), self.handcuffed)
   if self.handcuffed then
     vRP.EXT.Base:playAnim(true,{{"mp_arresting","idle",1}},true)
   else
     vRP.EXT.Base:stopAnim(true)
-    SetPedStealthMovement(GetPlayerPed(-1),false,"") 
+    SetPedStealthMovement(PlayerPedId(),false,"") 
   end
 end
 
@@ -175,7 +175,7 @@ function Police:putInNearestVehicleAsPassenger(radius)
   if IsEntityAVehicle(veh) then
     for i=1,math.max(GetVehicleMaxNumberOfPassengers(veh),3) do
       if IsVehicleSeatFree(veh,i) then
-        SetPedIntoVehicle(GetPlayerPed(-1),veh,i)
+        SetPedIntoVehicle(PlayerPedId(),veh,i)
         return true
       end
     end
@@ -192,7 +192,7 @@ function Police:followPlayer(player)
   self.follow_player = player
 
   if not player then -- unfollow
-    ClearPedTasks(GetPlayerPed(-1))
+    ClearPedTasks(PlayerPedId())
   end
 end
 
@@ -221,12 +221,12 @@ end
 -- WANTED
 
 function Police:applyWantedLevel(new_wanted)
-  Citizen.CreateThread(function()
+  CreateThread(function()
     local old_wanted = GetPlayerWantedLevel(PlayerId())
     local wanted = math.max(old_wanted,new_wanted)
     ClearPlayerWantedLevel(PlayerId())
     SetPlayerWantedLevelNow(PlayerId(),false)
-    Citizen.Wait(10)
+    Wait(10)
     SetPlayerWantedLevel(PlayerId(),wanted,false)
     SetPlayerWantedLevelNow(PlayerId(),false)
   end)

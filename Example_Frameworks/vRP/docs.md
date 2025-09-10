@@ -72,17 +72,19 @@ Defines the server-side User class managing player state, identifiers, and data 
 Server bootstrap registering spawn/death events and delegating to vRP handlers.
 
 ### Client Scripts
+All client scripts use `CreateThread`, `Wait`, and `PlayerPedId()` to align with current FiveM best practices.
+
 #### client/base.lua
-Initialises the client context, bridges to server via Tunnel/Proxy, and forwards spawn/death events to the server. Utilises `CreateThread`, `Wait`, and `PlayerPedId()` for modern thread and entity handling.
+Initialises the client context, bridges to server via Tunnel/Proxy, and forwards spawn/death events to the server.
 
 #### client/admin.lua
-Implements client admin tools such as noclip and spectating controls.
+Implements client admin tools such as noclip, spectating controls and waypoint teleports using `GetBlipInfoIdCoord`.
 
 #### client/audio.lua
 Client half of Audio extension managing voice channels and forwarding NUI audio events.
 
 #### client/garage.lua
-Handles spawning and tracking owned vehicles, updating decorators and network ownership.
+Handles spawning and tracking owned vehicles, updating decorators and network ownership. Utilises `DeleteVehicle` and `GetIsVehicleEngineRunning` natives.
 
 #### client/gui.lua
 Client GUI management: keyboard controls, menu navigation, prompts, and request handling through NUI.
@@ -97,13 +99,13 @@ Loads world IPLs (interior placement objects) for map customisation.
 Manages map areas, blips, entity commands, and remote positioning utilities.
 
 #### client/ped_blacklist.lua
-Removes blacklisted pedestrian models on spawn based on server-provided configuration.
+Removes blacklisted pedestrian models on spawn based on server-provided configuration via `DeletePed`.
 
 #### client/phone.lua
 Implements phone UI interactions and SMS sending via server tunnels.
 
 #### client/player_state.lua
-Tracks player vitals, weapons and state transitions for survival and respawn logic.
+Tracks player vitals, weapons and state transitions for survival and respawn logic, resolving ammunition types through `GetPedAmmoTypeFromWeapon`.
 
 #### client/police.lua
 Provides client-side police functions such as handcuffing and wanted level display.

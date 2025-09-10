@@ -483,9 +483,9 @@ function Garage:__construct()
       end)
 
       -- task: close menu if not next to the vehicle
-      Citizen.CreateThread(function()
+      CreateThread(function()
         while running do
-          Citizen.Wait(8000)
+          Wait(8000)
           local check_model = self.remote.getNearestOwnedVehicle(user.source, 7)
           if model ~= check_model then
             user:closeMenu(menu)
@@ -539,9 +539,9 @@ function Garage:__construct()
           end)
 
           -- task: close menu if not next to the vehicle
-          Citizen.CreateThread(function()
+          CreateThread(function()
             while running do
-              Citizen.Wait(8000)
+              Wait(8000)
               local check_model = self.remote.getNearestOwnedVehicle(user.source, 7)
               if model ~= check_model then
                 user:closeMenu(menu)

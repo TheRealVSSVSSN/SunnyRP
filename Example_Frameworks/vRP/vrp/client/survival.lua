@@ -17,7 +17,7 @@ function Survival:__construct()
   self.lang = self.luang.lang
 
   -- task: impact water and food when the player is running, etc (every 5 seconds)
-  Citizen.CreateThread(function()
+  CreateThread(function()
     local it = 0
 
     -- consumption for one minute
@@ -25,10 +25,10 @@ function Survival:__construct()
     local tfood = 0
 
     while true do
-      Citizen.Wait(5000)
+      Wait(5000)
 
       if IsPlayerPlaying(PlayerId()) then
-        local ped = GetPlayerPed(-1)
+        local ped = PlayerPedId()
 
         local water = 0
         local food = 0
@@ -68,12 +68,12 @@ function Survival:__construct()
   end)
 
   -- task: coma
-  Citizen.CreateThread(function() 
+  CreateThread(function() 
     local PlayerState = vRP.EXT.PlayerState
 
     while true do
-      Citizen.Wait(0)
-      local ped = GetPlayerPed(-1)
+      Wait(0)
+      local ped = PlayerPedId()
       
       local health = GetEntityHealth(ped)
       if health <= vRP.cfg.coma_threshold and self.coma_left > 0 then
@@ -81,7 +81,7 @@ function Survival:__construct()
           if IsEntityDead(ped) then -- if dead, resurrect
             local x,y,z = vRP.EXT.Base:getPosition()
             NetworkResurrectLocalPlayer(x, y, z, true, true, false)
-            Citizen.Wait(0)
+            Wait(0)
           end
 
           -- coma state
@@ -124,9 +124,9 @@ function Survival:__construct()
   end)
 
  -- task: coma decrease
-  Citizen.CreateThread(function()
+  CreateThread(function()
     while true do 
-      Citizen.Wait(1000)
+      Wait(1000)
       if self.in_coma then
         self.coma_left = self.coma_left-1
       end
@@ -134,9 +134,9 @@ function Survival:__construct()
   end)
 
   -- task: disable health regen, conflicts with coma system
-  Citizen.CreateThread(function() 
+  CreateThread(function() 
     while true do
-      Citizen.Wait(100)
+      Wait(100)
 
       -- prevent health regen
       SetPlayerHealthRechargeMultiplier(PlayerId(), 0)
@@ -144,9 +144,9 @@ function Survival:__construct()
   end)
 
   -- task: controls
-  Citizen.CreateThread(function()
+  CreateThread(function()
     while true do
-      Citizen.Wait(0)
+      Wait(0)
       -- coma controls
       if IsControlJustPressed(table.unpack(vRP.cfg.controls.survival.leave_coma))
         and self.coma_left <= (vRP.cfg.coma_max_duration-vRP.cfg.coma_min_duration)*60 then -- min check
@@ -157,7 +157,7 @@ function Survival:__construct()
 end
 
 function Survival:varyHealth(variation)
-  local ped = GetPlayerPed(-1)
+  local ped = PlayerPedId()
 
   local n = math.floor(GetEntityHealth(ped)+variation)
   SetEntityHealth(ped,n)
@@ -165,7 +165,7 @@ end
 
 function Survival:setFriendlyFire(flag)
   NetworkSetFriendlyFireOption(flag)
-  SetCanAttackFriendly(GetPlayerPed(-1), flag, flag)
+  SetCanAttackFriendly(PlayerPedId(), flag, flag)
 end
 
 function Survival:setPolice(flag)

@@ -24,9 +24,9 @@ function Audio:__construct()
   -- listener task
   self.listener_wait = math.ceil(1/vRP.cfg.audio_listener_rate*1000)
 
-  Citizen.CreateThread(function()
+  CreateThread(function()
     while true do
-      Citizen.Wait(self.listener_wait)
+      Wait(self.listener_wait)
 
       local x,y,z
       if vRP.cfg.audio_listener_on_player then
@@ -42,13 +42,13 @@ function Audio:__construct()
   end)
 
   -- task: detect players near, give positions to AudioEngine
-  Citizen.CreateThread(function()
+  CreateThread(function()
     local n = 0
     local ns = math.ceil(self.voip_interval/self.listener_wait) -- connect/disconnect every x milliseconds
     local connections = {}
 
     while true do
-      Citizen.Wait(self.listener_wait)
+      Wait(self.listener_wait)
 
       n = n+1
       local voip_check = (n >= ns)
@@ -89,9 +89,9 @@ function Audio:__construct()
   end)
 
   -- task: voice controls 
-  Citizen.CreateThread(function()
+  CreateThread(function()
     while true do
-      Citizen.Wait(0)
+      Wait(0)
 
       -- voip/speaking
       local old_speaking = self.speaking
@@ -116,13 +116,13 @@ function Audio:__construct()
   end)
 
   -- task: voice proximity
-  Citizen.CreateThread(function()
+  CreateThread(function()
     while true do
-      Citizen.Wait(500)
+      Wait(500)
       if self.vrp_voip then -- vRP voip
         NetworkSetTalkerProximity(self.voip_proximity) -- disable voice chat
       else -- regular voice chat
-        local ped = GetPlayerPed(-1)
+        local ped = PlayerPedId()
         local proximity = vRP.cfg.voice_proximity
 
         if IsPedSittingInAnyVehicle(ped) then
