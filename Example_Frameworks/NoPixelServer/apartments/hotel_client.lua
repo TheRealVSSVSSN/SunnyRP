@@ -21,7 +21,7 @@ RegisterNetEvent('Relog')
 AddEventHandler('Relog', function()
 	currentselection = 1
 	TriggerServerEvent('isVip')
-	TriggerEvent('rehab:changeCharecter')
+        TriggerEvent('rehab:changeCharacter')
 	TriggerServerEvent('checkTypes')
 	TriggerEvent("resetinhouse")
 	TriggerEvent("fx:clear")
