@@ -27,11 +27,5 @@ Everything you need is in `config.json`
 }
 ```
 
-# Building
-```
-npm install
-npm run build
-```
-
 # Preview
 ![preview](https://i.imgur.com/fJH1y9m.png)
