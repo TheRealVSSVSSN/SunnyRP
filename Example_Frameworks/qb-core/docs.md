@@ -177,8 +177,8 @@ The `qb-core` resource provides the foundational framework for QBCore-based Five
 ## shared
 ### shared/main.lua
 **Role:** Common helper functions and constants.
-- Generates random strings or numbers, splits and trims text, capitalises strings and rounds numbers.
-- Vehicle extra management (`ChangeVehicleExtra`, `SetDefaultVehicleExtras`).
+- Generates random strings or numbers using iterative loops, splits and trims text, capitalises strings and rounds numbers.
+- Vehicle extra management (`ChangeVehicleExtra`, `SetDefaultVehicleExtras`) with retry logic instead of recursion.
 - Detects if a value is a function (supporting cfx function references).
 - Lists male and female clothing indexes considered "no gloves" for fingerprint logic.
 
