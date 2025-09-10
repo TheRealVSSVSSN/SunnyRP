@@ -12,10 +12,10 @@ local commissionbuy = 0
 local insideVehShop = false
 local rank = 0
 
-function DisplayHelpText(str)
-	SetTextComponentFormat("STRING")
-	AddTextComponentString(str)
-	DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+local function DisplayHelpText(str)
+        BeginTextCommandDisplayHelp("STRING")
+        AddTextComponentSubstringPlayerName(str)
+        EndTextCommandDisplayHelp(0, false, true, -1)
 end
 local currentCarSpawnLocation = 0
 local ownerMenu = false
@@ -1607,26 +1607,28 @@ AddEventHandler(
 	end
 )
 
-AddEventHandler(
-	"vehshop:spawnVehicle",
-	function(v)
-		local car = GetHashKey(v)
-		local playerPed = PlayerPedId()
-		if playerPed and playerPed ~= -1 then
-			RequestModel(car)
-			while not HasModelLoaded(car) do
-				Citizen.Wait(0)
-			end
-			local playerCoords = GetEntityCoords(playerPed)
-			veh = CreateVehicle(car, playerCoords, 0.0, true, false)
-			local plate = GetVehicleNumberPlateText(veh)
-			SetModelAsNoLongerNeeded(car)
-			TaskWarpPedIntoVehicle(playerPed, veh, -1)
-			SetEntityInvincible(veh, true)
-			TriggerEvent("veh_shop:setPlate", veh, plate)
-		end
-	end
-)
+local function spawnPurchasedVehicle(model)
+        local modelHash = GetHashKey(model)
+        local playerPed = PlayerPedId()
+        if not DoesEntityExist(playerPed) then return end
+        RequestModel(modelHash)
+        while not HasModelLoaded(modelHash) do
+                Wait(0)
+        end
+        local coords = GetEntityCoords(playerPed)
+        local heading = GetEntityHeading(playerPed)
+        local veh = CreateVehicle(modelHash, coords.x, coords.y, coords.z, heading, true, false)
+        SetModelAsNoLongerNeeded(modelHash)
+        SetVehicleOnGroundProperly(veh)
+        TaskWarpPedIntoVehicle(playerPed, veh, -1)
+        SetEntityInvincible(veh, true)
+        local plate = GetVehicleNumberPlateText(veh)
+        TriggerEvent("veh_shop:setPlate", veh, plate)
+end
+
+AddEventHandler("vehshop:spawnVehicle", function(model)
+        spawnPurchasedVehicle(model)
+end)
 
 local firstspawn = 0
 AddEventHandler(
