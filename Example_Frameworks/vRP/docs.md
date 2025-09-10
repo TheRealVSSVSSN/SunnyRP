@@ -52,7 +52,7 @@ Per-module descriptive documents explaining behaviour and configuration of each 
 Immutable Node configuration defining WebSocket signalling port, WebRTC port range, and optional STUN servers.
 
 ### voip_server/main.js
-Modernized WebSocket/WebRTC relay that tracks players with a `Map`, forwards voice packets between shared channels, and cleans up channel membership on disconnect.
+WebSocket/WebRTC relay that tracks players with a `Map`, forwards voice packets between shared channels, and cleans up channel membership on disconnect. The server now pings clients every 30s to remove stale connections and parses incoming messages defensively to avoid crashes from malformed data.
 
 ## vrp Framework
 ### Core Files
