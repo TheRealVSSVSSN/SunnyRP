@@ -7,24 +7,29 @@ var debug = false;
 var hoverClick = null;
 var charId = null;
 
-$(function()
-{
+$(function () {
     listen();
 
-    if (debug){
+    if (debug) {
         $("body").css("background", "url('https://images6.alphacoders.com/553/553248.jpg')")
 
         openMenu();
         $("*").css("cursor", "auto")
-        
+
         //$("#main").css("display", "block")
         //showCharacterSelect(true);
         //$("#newCharacter").css("display", "block");
     }
-})
+});
 
-function sendNuiMessage(data){
-    $.post("http://np-login/nuiMessage", JSON.stringify(data));
+function sendNuiMessage(data) {
+    fetch('https://np-login/nuiMessage', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify(data)
+    });
 }
 
 function receivedNuiMessage(event){
