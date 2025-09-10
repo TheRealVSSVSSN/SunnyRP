@@ -19,7 +19,8 @@ AddEventHandler('playerDropped', function(reason)
 end)
 
 AddEventHandler("onResourceStop", function(resName)
-    for i,v in pairs(QBCore.UsableItems) do
+    if not QBCore.UsableItems then return end
+    for i, v in pairs(QBCore.UsableItems) do
         if v.resource == resName then
             QBCore.UsableItems[i] = nil
         end
@@ -185,7 +186,7 @@ end)
 -- BaseEvents
 
 -- Vehicles
-RegisterServerEvent('baseevents:enteringVehicle', function(veh, seat, modelName)
+RegisterNetEvent('baseevents:enteringVehicle', function(veh, seat, modelName)
     local src = source
     local data = {
         vehicle = veh,
@@ -196,7 +197,7 @@ RegisterServerEvent('baseevents:enteringVehicle', function(veh, seat, modelName)
     TriggerClientEvent('QBCore:Client:VehicleInfo', src, data)
 end)
 
-RegisterServerEvent('baseevents:enteredVehicle', function(veh, seat, modelName)
+RegisterNetEvent('baseevents:enteredVehicle', function(veh, seat, modelName)
     local src = source
     local data = {
         vehicle = veh,
@@ -207,12 +208,12 @@ RegisterServerEvent('baseevents:enteredVehicle', function(veh, seat, modelName)
     TriggerClientEvent('QBCore:Client:VehicleInfo', src, data)
 end)
 
-RegisterServerEvent('baseevents:enteringAborted', function()
+RegisterNetEvent('baseevents:enteringAborted', function()
     local src = source
     TriggerClientEvent('QBCore:Client:AbortVehicleEntering', src)
 end)
 
-RegisterServerEvent('baseevents:leftVehicle', function(veh, seat, modelName)
+RegisterNetEvent('baseevents:leftVehicle', function(veh, seat, modelName)
     local src = source
     local data = {
         vehicle = veh,

@@ -136,13 +136,13 @@ The `qb-core` resource provides the foundational framework for QBCore-based Five
 **Role:** Network event handlers and connection management.
 - Suppresses chat messages starting with `/` to route through command system.
 - `playerDropped` saves character and logs departure, clearing bucket tracking.
-- On resource stop, cleans up registered usable items.
+- On resource stop, cleans up registered usable items and skips processing when none exist to prevent errors.
 - `playerConnecting` defers connection while checking whitelist, duplicate licenses, database connectivity and bans (MySQL queries).
 - `QBCore:Server:CloseServer` / `OpenServer` toggle join access and optionally kick players lacking permissions.
  - Callback relays: `TriggerClientCallback` and `TriggerCallback` implement the client/server callback protocol.
  - `QBCore:UpdatePlayer` reduces hunger/thirst, updates HUD (`hud:client:UpdateNeeds`) and saves data.
  - `QBCore:ToggleDuty` flips job duty status with notifications, firing `QBCore:Client:SetDuty` and server event `QBCore:Server:SetDuty`.
- - Baseevents mirror vehicle seat changes to clients via `QBCore:Client:VehicleInfo` and issue `QBCore:Client:AbortVehicleEntering` when entry is cancelled.
+ - Baseevents use `RegisterNetEvent` and mirror vehicle seat changes to clients via `QBCore:Client:VehicleInfo`, issuing `QBCore:Client:AbortVehicleEntering` when entry is cancelled.
  - Deprecated item events (`Server:UseItem`, `RemoveItem`, `AddItem`) only log potential exploitation.
  - `QBCore:CallCommand` executes a command programmatically with permission checks.
  - Callbacks `QBCore:Server:SpawnVehicle` and `QBCore:Server:CreateVehicle` spawn vehicles server-side and return network IDs.
@@ -171,7 +171,7 @@ The `qb-core` resource provides the foundational framework for QBCore-based Five
 ### server/debug.lua
 **Role:** Debug and logging utilities.
 - `tPrint` recursively prints tables with colour coding.
-- Event `QBCore:DebugSomething` receives data to print; `QBCore.Debug` triggers it with the invoking resource name.
+- Event `QBCore:DebugSomething` (registered via `RegisterNetEvent`) receives data to print; `QBCore.Debug` triggers it with the invoking resource name.
 - `ShowError` and `ShowSuccess` output coloured console messages.
 
 ## shared
