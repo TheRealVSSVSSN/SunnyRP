@@ -119,7 +119,7 @@ AddEventHandler('GPSTrack:Accepted', function(x,y,z,srcid,stage)
 	    SetBlipColour(blipgps.srcid,1)
 	    SetBlipAlpha(blipgps.srcid,80)
 		SetBlipSprite(blipgps.srcid,9)
-		Citizen.Wait(55000)
+		Wait(55000)
 		RemoveBlip(blipgps.srcid)
 	end
 end)
@@ -131,13 +131,13 @@ AddEventHandler('GPSTrack:Create', function()
 		lastping = 1
 		x,y,z = GPSTrack(1)
 		TriggerServerEvent("GPSTrack:Accepted",x,y,z,1)
-		Citizen.Wait(60000)
+		Wait(60000)
 		x,y,z = GPSTrack(2)
 		TriggerServerEvent("GPSTrack:Accepted",x,y,z,2)
-		Citizen.Wait(60000)
+		Wait(60000)
 		x,y,z = GPSTrack(3)
 		TriggerServerEvent("GPSTrack:Accepted",x,y,z,3)
-		Citizen.Wait(120000)
+		Wait(120000)
 		lastping = 0
 	end
 
@@ -277,7 +277,7 @@ AddEventHandler('car:doors', function(closeType,door)
             local count = 1000
             while dist > 1.0 and count > 0 do
                 dist = #(vector3(drawInfo["x"],drawInfo["y"],drawInfo["z"]) - lastPlayerPos)
-                Citizen.Wait(1)
+                Wait(1)
                 count = count - 1
                 DrawText3D(drawInfo["x"],drawInfo["y"],drawInfo["z"],"Move here to " .. closeType .. ".")
             end
@@ -289,7 +289,7 @@ AddEventHandler('car:doors', function(closeType,door)
             loadAnimDict('anim@narcotics@trash')
             TaskPlayAnim(PlayerPedId(),'anim@narcotics@trash', 'drop_front',0.9, -8, 1500, 49, 3.0, 0, 0, 0)
             TaskTurnPedToFaceEntity(PlayerPedId(), veh, 1.0)
-    		Citizen.Wait(1600)
+    		Wait(1600)
     		ClearPedTasks(PlayerPedId())
 	    end
 	end
@@ -354,7 +354,7 @@ function carryPed(ped)
 	ClearPedTasksImmediately(PlayerPedId())
 	while (holdingBody) do
 
-		Citizen.Wait(1)
+		Wait(1)
 
 
 		if not IsEntityPlayingAnim(PlayerPedId(), "missfinale_c2mcs_1", "fin_c2_mcs_1_camman", 3) then
@@ -447,7 +447,7 @@ function revivePeds()
             SetEntityCoords(ped,crds["x"],crds["y"],crds["z"]+1.2)
 
             TaskWanderStandard(ped, 10.0, 10)
-            Citizen.Wait(1000)
+            Wait(1000)
             SetEntityCoords(ped,crds["x"],crds["y"],crds["z"]+1.2)
          --   SetEntityAsNoLongerNeeded(ped)
         end
@@ -629,7 +629,7 @@ hashDeathToText = {
 function loadAnim( dict )
     while ( not HasAnimDictLoaded( dict ) ) do
         RequestAnimDict( dict )
-        Citizen.Wait( 5 )
+        Wait( 5 )
     end
 end
 
@@ -686,12 +686,12 @@ function disabledPeds(dstscan)
 			local carh = GetEntityHeading(veh) 
 			if (myh - carh) > -45 and (myh - carh) < 45 then
 			
-				Citizen.Wait(1)
+				Wait(1)
 				TaskVehicleTempAction(GetPedInVehicleSeat(veh, -1), veh, 27, 25.0)
 			end
 		end
 	else
-		Citizen.Wait(15)
+		Wait(15)
 		disabledPeds(25.0)
 	end
 end
@@ -715,7 +715,7 @@ function disabledPeds2()
 				DeleteEntity(veh)
 
     		end 
-    		Citizen.Wait(50)
+    		Wait(50)
         end
         success, veh = FindNextVehicle(handle)
     until not success
@@ -727,10 +727,10 @@ function createObjectTest()
 	local x,y,z = table.unpack(GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 0.5, -1.0))
 	RequestModel(prop)
 	while not HasModelLoaded(prop) do
-		Citizen.Wait(100)
+		Wait(100)
 	end
 	local propobject = CreateObject(prop, x,y,z, true, false, false)
-	Citizen.Wait(3000)
+	Wait(3000)
 	SetEntityAsNoLongerNeeded(prop)
 	DeleteEntity(propobject)
 end
@@ -758,17 +758,17 @@ end)
 
 function rollAnim()
     loadAnimDict( "anim@mp_player_intcelebrationmale@wank" ) 
-    Citizen.Wait(500)
+    Wait(500)
     TaskPlayAnim( PlayerPedId(), "anim@mp_player_intcelebrationmale@wank", "wank", 8.0, 1.0, -1, 49, 0, 0, 0, 0 )
-    Citizen.Wait(1500)
+    Wait(1500)
     TriggerServerEvent('InteractSound_SV:PlayWithinDistance', 2.0, 'dice', 0.1)
     ClearPedTasks(PlayerPedId())
-    Citizen.Wait(500)
+    Wait(500)
 end
 
 
 local lastPlayerPos = GetEntityCoords(PlayerPedId())
-Citizen.CreateThread(function() 
+CreateThread(function() 
 	while true do
 		lastPlayerPos = GetEntityCoords(PlayerPedId())
 		Wait(300)
@@ -803,7 +803,7 @@ deathanimations = {
 function loadAnimDict( dict )
     while ( not HasAnimDictLoaded( dict ) ) do
         RequestAnimDict( dict )
-        Citizen.Wait( 5 )
+        Wait( 5 )
     end
 end
 
@@ -916,7 +916,7 @@ AddEventHandler("facewear:adjust",function(faceType,remove)
 	end
 	if remove then
 		TaskPlayAnim( PlayerPedId(), AnimSet, AnimationOff, 4.0, 3.0, -1, 49, 1.0, 0, 0, 0 )
-		Citizen.Wait(500)
+		Wait(500)
 		if faceType ~= 5 then
 			if faceType == 4 then
 				SetPedComponentVariation(PlayerPedId(), PropIndex, -1, -1, -1)
@@ -928,7 +928,7 @@ AddEventHandler("facewear:adjust",function(faceType,remove)
 		end
 	else
 		TaskPlayAnim( PlayerPedId(), AnimSet, AnimationOn, 4.0, 3.0, -1, 49, 1.0, 0, 0, 0 )
-		Citizen.Wait(500)
+		Wait(500)
 		if faceType ~= 5 and faceType ~= 2 then
 			if faceType == 4 then
 				SetPedComponentVariation(PlayerPedId(), PropIndex, facialWear[faceType]["Prop"], facialWear[faceType]["Texture"], facialWear[faceType]["Palette"])
@@ -944,21 +944,21 @@ AddEventHandler("facewear:adjust",function(faceType,remove)
 		else
 			SetPedComponentVariation(PlayerPedId(), PropIndex, -1, -1, -1)
 		end
-		Citizen.Wait(1800)
+		Wait(1800)
 	end
 	if faceType == 2 then
-		Citizen.Wait(600)
+		Wait(600)
 		if remove then
 			ClearPedProp(PlayerPedId(), tonumber(PropIndex))
 		end
 
 		if not remove then
-			Citizen.Wait(140)
+			Wait(140)
 			SetPedPropIndex( PlayerPedId(), tonumber(PropIndex), tonumber(facialWear[PropIndex+1]["Prop"]), tonumber(facialWear[PropIndex+1]["Texture"]), false)
 		end
 	end
 	if faceType == 4 and remove then
-		Citizen.Wait(1200)
+		Wait(1200)
 	end
 	ClearPedTasks(PlayerPedId())
 end)
@@ -995,9 +995,9 @@ end)
 
 function Drugs1()
 	StartScreenEffect("DrugsMichaelAliensFightIn", 3.0, 0)
-	Citizen.Wait(8000)
+	Wait(8000)
 	StartScreenEffect("DrugsMichaelAliensFight", 3.0, 0)
-	Citizen.Wait(8000)
+	Wait(8000)
 	StartScreenEffect("DrugsMichaelAliensFightOut", 3.0, 0)
 	StopScreenEffect("DrugsMichaelAliensFightIn")
 	StopScreenEffect("DrugsMichaelAliensFight")
@@ -1007,9 +1007,9 @@ end
 
 function Drugs2()
 	StartScreenEffect("DrugsTrevorClownsFightIn", 3.0, 0)
-	Citizen.Wait(8000)
+	Wait(8000)
 	StartScreenEffect("DrugsTrevorClownsFight", 3.0, 0)
-	Citizen.Wait(8000)
+	Wait(8000)
 	StartScreenEffect("DrugsTrevorClownsFightOut", 3.0, 0)
 	StopScreenEffect("DrugsTrevorClownsFight")
 	StopScreenEffect("DrugsTrevorClownsFightIn")
@@ -1028,7 +1028,7 @@ function testAnim()
 	if not IsEntityPlayingAnim(lPed, dic, anim, 3) then
 		TaskPlayAnim(lPed, dic, anim, 1.0, 1.0, -1, 16, 1, 0, 0, 0 )
 	end
-	Citizen.Wait(1500)
+	Wait(1500)
 	--ClearPedTasks(PlayerPedId())
 end
 
@@ -1262,7 +1262,7 @@ function attachProp2(attachModelSent,boneNumberSent,x,y,z,xR,yR,zR)
 	--local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(), true))
 	RequestModel(attachModel)
 	while not HasModelLoaded(attachModel) do
-		Citizen.Wait(100)
+		Wait(100)
 	end
 	attachedProp2 = CreateObject(attachModel, 1.0, 1.0, 1.0, 1, 1, 0)
 	exports["isPed"]:GlobalObject(attachedProp2)
@@ -1277,7 +1277,7 @@ function attachProp(attachModelSent,boneNumberSent,x,y,z,xR,yR,zR)
 	--local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(), true))
 	RequestModel(attachModel)
 	while not HasModelLoaded(attachModel) do
-		Citizen.Wait(100)
+		Wait(100)
 	end
 	attachedProp = CreateObject(attachModel, 1.0, 1.0, 1.0, 1, 1, 0)
 	exports["isPed"]:GlobalObject(attachedProp)
@@ -1371,7 +1371,7 @@ AddEventHandler('hadtreat', function(arg1,arg2,arg3)
 
     while dstamina > 0 do
 
-        Citizen.Wait(1000)
+        Wait(1000)
         RestorePlayerStamina(PlayerId(), 1.0)
         dstamina = dstamina - 1
 
@@ -1410,7 +1410,7 @@ AddEventHandler('hadcocaine', function(arg1,arg2,arg3)
 
     while dstamina > 0 do
 
-        Citizen.Wait(1000)
+        Wait(1000)
         RestorePlayerStamina(PlayerId(), 1.0)
         dstamina = dstamina - 1
 
@@ -1433,7 +1433,7 @@ AddEventHandler('hadcocaine', function(arg1,arg2,arg3)
               else
                   Drugs2()
               end
-              Citizen.Wait(math.random(30000))
+              Wait(math.random(30000))
         end
 
         if math.random(100) > 91 and IsPedRunning(PlayerPedId()) then
@@ -1456,7 +1456,7 @@ end)
 RegisterNetEvent('hadcrack')
 AddEventHandler('hadcrack', function(arg1,arg2,arg3)
     dstamina = 0
-    Citizen.Wait(1000)
+    Wait(1000)
 
 	if math.random(100) > 50 then
 		Drugs1()
@@ -1476,7 +1476,7 @@ AddEventHandler('hadcrack', function(arg1,arg2,arg3)
 
     while dstamina > 0 do
 
-        Citizen.Wait(1000)
+        Wait(1000)
         RestorePlayerStamina(PlayerId(), 1.0)
         dstamina = dstamina - 1
 
@@ -1490,7 +1490,7 @@ AddEventHandler('hadcrack', function(arg1,arg2,arg3)
 	  		else
 	  			Drugs2()
 	  		end
-		  	Citizen.Wait(math.random(30000))
+		  	Wait(math.random(30000))
 		end
 
         if math.random(100) > 91 and IsPedRunning(PlayerPedId()) then
@@ -1540,7 +1540,7 @@ AddEventHandler('food:FishTaco', function()
 		if (IsPedSwimmingUnderWater(PlayerPedId()) or IsPedSwimming(PlayerPedId())) then
 			RestorePlayerStamina(PlayerId(), 1.0)
 		end
-        Citizen.Wait(1000)
+        Wait(1000)
         dstamina = dstamina - 1
     end
 
@@ -1560,7 +1560,7 @@ end)
 RegisterNetEvent('food:Condiment')
 AddEventHandler('food:Condiment', function()
 	dstamina = 0
-	Citizen.Wait(1000)
+	Wait(1000)
 
 	currentValues["hunger"] = currentValues["hunger"] + 40
 
@@ -1582,7 +1582,7 @@ AddEventHandler('food:Condiment', function()
 
     while dstamina > 0 do
 
-        Citizen.Wait(1000)
+        Wait(1000)
         RestorePlayerStamina(PlayerId(), 1.0)
         dstamina = dstamina - 1
 
@@ -1611,7 +1611,7 @@ RegisterNetEvent('hadenergy')
 AddEventHandler('hadenergy', function(arg1,arg2,arg3)
 
     dstamina = 0
-    Citizen.Wait(1000)
+    Wait(1000)
 
     SetRunSprintMultiplierForPlayer(PlayerId(), 1.005)
     dstamina = 30
@@ -1627,7 +1627,7 @@ AddEventHandler('hadenergy', function(arg1,arg2,arg3)
 	TriggerEvent("client:newStress",true,math.ceil(40))
 
     while dstamina > 0 do
-        Citizen.Wait(1000)
+        Wait(1000)
         RestorePlayerStamina(PlayerId(), 1.0)
         dstamina = dstamina - 1
         if IsPedRagdoll(PlayerPedId()) then
@@ -1656,7 +1656,7 @@ AddEventHandler("client:stressHandler",function(reduction)
 	end
 	relaxing = true
 	while relaxing do
-		Citizen.Wait(30000)
+		Wait(30000)
 		TriggerServerEvent("server:alterStress",false,reduction)
 	end
 end)
@@ -1671,12 +1671,12 @@ function GetInWheelChair()
 	local chair = CreateObject( `prop_wheelchair_01_s`, pos.x, pos.y, pos.z, true, true, true)
 
 	SetEntityCoords(chair, pos.x, pos.y, pos.z-0.85)
-	Citizen.Wait(1000)
+	Wait(1000)
 	TaskStartScenarioAtPosition(ped, 'PROP_HUMAN_SEAT_BENCH', pos.x, pos.y, pos.z, GetEntityHeading(ped), 0, true, true)
 	sitting = true
 	while sitting do
 		AttachEntityToEntity(chair, ped, 11816, 0.0, 0.0, -0.6, 0.0, 0.0, 180.0, true, true, true, true, 1, true)
-		Citizen.Wait(1)
+		Wait(1)
 	end
 end
 
@@ -1730,7 +1730,7 @@ AddEventHandler("client:bed",function()
 	if DoesEntityExist(objFound) then
 		TriggerEvent("DoLongHudText","Press [E] to leave the bed at any time.",1)
 	    loadAnimDict( "missfinale_c1@" ) 
-	    Citizen.Wait(500)
+	    Wait(500)
 
 	    sleeping = true
 
@@ -1745,7 +1745,7 @@ AddEventHandler("client:bed",function()
 	    while sleeping do
 	    	AttachEntityToEntity(ped, objFound, 1, bedOffset.x, bedOffset.y, bedOffset.z, 0.0, 0.0, 180.0, true, true, true, true, 1, true)
 	    	camOn()
-	    	Citizen.Wait(1)
+	    	Wait(1)
 	    	SetCamCoord(cam, GetOffsetFromEntityInWorldCoords(objFound, 0.0, -0.8, bedOffset.z + 0.1))
 	    	SetCamRot(cam, -30.0, 0.0, GetEntityHeading(objFound))
 		end
@@ -1763,7 +1763,7 @@ AddEventHandler("client:bed",function()
 	    	else
 	    		AttachEntityToEntity(ped, objFound, 1, bedOffset.x, bedOffset.y, bedOffset.z / 2.0, 0.0, 0.0, -90.0, false, false, false, false, 0, false)
 	    	end
-	    	Citizen.Wait(1)
+	    	Wait(1)
 	    end
 
 	    
@@ -1838,7 +1838,7 @@ AddEventHandler("stress:timed",function(alteredValue,scenario)
 				break
 			end
 		end
-		Citizen.Wait(1000)
+		Wait(1000)
 	end
 	TriggerServerEvent("server:alterStress",false,removedStress)
 end)
@@ -1875,7 +1875,7 @@ AddEventHandler('np:voice:focus:set', function(hasFocus, hasKeyboard, hasMouse)
 	HasNuiFocus = hasFocus
 
 	if HasNuiFocus and not IsFocusThreadRunning then
-		Citizen.CreateThread(function ()
+		CreateThread(function ()
             while HasNuiFocus do
                 if hasKeyboard then
                     DisableAllControlActions(0)
@@ -1890,7 +1890,7 @@ AddEventHandler('np:voice:focus:set', function(hasFocus, hasKeyboard, hasMouse)
                     EnableControlAction(0, 2, true)
                 end
 
-                Citizen.Wait(0)
+                Wait(0)
 			end
         end)
     end
@@ -2015,7 +2015,7 @@ end)
 
 
 
-Citizen.CreateThread(function()
+CreateThread(function()
 
 	while true do
 		Wait(1)
@@ -2068,7 +2068,7 @@ Citizen.CreateThread(function()
 	end
 end)
 
-Citizen.CreateThread(function ()
+CreateThread(function ()
 	while true do
 		local isTalking = NetworkIsPlayerTalking(PlayerId())
 
@@ -2080,7 +2080,7 @@ Citizen.CreateThread(function ()
 
 		currentValues["is_talking"] = isTalking
 
-		Citizen.Wait(100)
+		Wait(100)
 	end
 end)
 
@@ -2111,7 +2111,7 @@ AddEventHandler("np-hud:changeRange", function(pRange)
 end)
 
 -- this should just use nui instead of drawrect - it literally ass fucks usage.
-Citizen.CreateThread(function()
+CreateThread(function()
 	local minimap = RequestScaleformMovie("minimap")
     SetRadarBigmapEnabled(false, false)
     Wait(0)
@@ -2140,7 +2140,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(1)
+		Wait(1)
 		
 
 		if counter == 0 then
@@ -2242,7 +2242,7 @@ end)
 
 
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
     	if currentValues["hunger"] > 0 then
     		currentValues["hunger"] = currentValues["hunger"] - math.random(3)
@@ -2255,7 +2255,7 @@ Citizen.CreateThread(function()
 		if GodEnabled then currentValues["thirst"] = 100 end
 
     	TriggerServerEvent("police:setServerMeta",GetEntityHealth(PlayerPedId()),GetPedArmour(PlayerPedId()),currentValues["thirst"],currentValues["hunger"])
-		Citizen.Wait(300000)
+		Wait(300000)
 
 		if currentValues["thirst"] < 20 or currentValues["hunger"] < 20 then
 
@@ -2271,42 +2271,42 @@ end)
 
 
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
-		Citizen.Wait(500)
+		Wait(500)
 		ped = PlayerPedId()
 		if not IsPedInAnyVehicle(plyr, false) then 
 			if IsPedUsingActionMode(ped) then
 				SetPedUsingActionMode(ped, -1, -1, 1)
 			end
 		else
-			Citizen.Wait(3000)
+			Wait(3000)
 		end
     end
 end)
 
--- Citizen.CreateThread( function()
+-- CreateThread( function()
 
 -- 	while true do 
 -- 		local dst = gateCheck()
 -- 		if dst < 55.0 then
 -- 			rotateGates()
 -- 		else
--- 			Citizen.Wait(tonumber(math.ceil(dst)))
+-- 			Wait(tonumber(math.ceil(dst)))
 -- 		end
--- 		Citizen.Wait(1)
+-- 		Wait(1)
 -- 	end
 -- end)
 
 
 
-Citizen.CreateThread( function()
+CreateThread( function()
 
 	local resetcounter = 0
 	local jumpDisabled = false
   	
   	while true do 
-    Citizen.Wait(100)
+    Wait(100)
 
   --  if IsRecording() then
   --      StopRecordingAndDiscardClip()
@@ -2323,7 +2323,7 @@ Citizen.CreateThread( function()
 
 			jumpDisabled = true
 			resetcounter = 10
-			Citizen.Wait(1200)
+			Wait(1200)
 		end
 
 		if resetcounter > 0 then
@@ -2342,15 +2342,15 @@ end)
 
 
 
-Citizen.CreateThread( function()
+CreateThread( function()
 
 	
 	while true do 
 
 		 if IsPedArmed(PlayerPedId(), 6) then
-		 	Citizen.Wait(1)
+		 	Wait(1)
 		 else
-		 	Citizen.Wait(1500)
+		 	Wait(1500)
 		 end  
 
 	    if IsPedShooting(PlayerPedId()) then
@@ -2460,13 +2460,5 @@ end
 
 
 function GetPlayers()
-    local players = {}
-
-    for i = 0, 255 do
-        if NetworkIsPlayerActive(i) then
-            players[#players+1]= i
-        end
-    end
-
-    return players
+    return GetActivePlayers()
 end

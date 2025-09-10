@@ -1,14 +1,27 @@
+--[[
+    -- Type: Table
+    -- Name: inside
+    -- Use: Tracks players who requested spawn
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 local inside = {}
-local spawnedxd = false
+local spawned = false
 
-RegisterServerEvent('request:spawn')
-AddEventHandler('request:spawn', function()
+--[[
+    -- Type: Event
+    -- Name: request:spawn
+    -- Use: Handles interior spawn logic
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent('request:spawn', function()
     local src = source
-    if not spawnedxd then
-        spawnedxd = true
-        TriggerClientEvent("accept:vinewoodspawn",src,true)
+    if not spawned then
+        spawned = true
+        TriggerClientEvent('accept:vinewoodspawn', src, true)
     else
-        TriggerClientEvent("accept:vinewoodspawn",src,false)
+        TriggerClientEvent('accept:vinewoodspawn', src, false)
     end
-    inside[#inside+1] = src
+    table.insert(inside, src)
 end)
