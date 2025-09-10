@@ -1,50 +1,87 @@
--- Settings
+--[[
+    -- Type: Client Script
+    -- Name: client.lua
+    -- Use: Handles client-side NUI for fishing records
+    -- Created: 2024-06-29
+    -- By: VSSVSSN
+--]]
+
 local guiEnabled = false
-local hasOpened = false
 
-local endloop = false
--- Open Gui and Focus NUI
-function openGui()
-  SetPlayerControl(PlayerId(), 0, 0)
+--[[
+    -- Type: Function
+    -- Name: openGui
+    -- Use: Enables NUI focus and shows fishing UI
+    -- Created: 2024-06-29
+    -- By: VSSVSSN
+--]]
+local function openGui()
+  SetPlayerControl(PlayerId(), false, 0)
+  SetNuiFocus(true, true)
   guiEnabled = true
-  SetNuiFocus(true)
-  SendNUIMessage({openContracts = true})
 end
 
--- Close Gui and disable NUI
-function closeGui()
-  endloop = true
-  SetNuiFocus(false)
-  SendNUIMessage({openSection = "close"})
+--[[
+    -- Type: Function
+    -- Name: closeGui
+    -- Use: Disables NUI focus and hides fishing UI
+    -- Created: 2024-06-29
+    -- By: VSSVSSN
+--]]
+local function closeGui()
+  SetNuiFocus(false, false)
+  SendNUIMessage({ openSection = "close" })
+  SetPlayerControl(PlayerId(), true, 0)
   guiEnabled = false
-  SetPlayerControl(PlayerId(), 1, 0)
 end
 
--- Disable controls while GUI open
-Citizen.CreateThread(function()
-  closeGui()
+--[[
+    -- Type: Thread
+    -- Name: inputHandler
+    -- Use: Disables player controls while GUI is open
+    -- Created: 2024-06-29
+    -- By: VSSVSSN
+--]]
+CreateThread(function()
   while true do
     if guiEnabled then
-      if IsDisabledControlJustReleased(0, 142) then -- MeleeAttackAlternate
-        SendNUIMessage({type = "click"})
+      DisableControlAction(0, 1, true) -- LookLeftRight
+      DisableControlAction(0, 2, true) -- LookUpDown
+      DisableControlAction(0, 18, true) -- Enter/Exit vehicle
+      DisableControlAction(0, 142, true) -- MeleeAttackAlternate
+      if IsControlJustReleased(0, 142) then
+        SendNUIMessage({ type = "click" })
       end
+      Wait(0)
+    else
+      Wait(500)
     end
-    Citizen.Wait(0)
   end
 end)
 
--- NUI Callback Methods
-RegisterNUICallback('close', function(data, cb)
+--[[
+    -- Type: Callback
+    -- Name: close
+    -- Use: Handles closing from NUI
+    -- Created: 2024-06-29
+    -- By: VSSVSSN
+--]]
+RegisterNUICallback("close", function(_, cb)
   closeGui()
-  cb('ok')
+  cb("ok")
 end)
 
-
-RegisterNetEvent('FishList')
-AddEventHandler('FishList', function(metaData)
+--[[
+    -- Type: Event
+    -- Name: FishList
+    -- Use: Opens GUI and populates fish list
+    -- Created: 2024-06-29
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent("FishList", function(metaData)
   openGui()
-  SendNUIMessage({openSection = "fishOpen", NUICaseId = metaData.caseId})
-  for i,v in ipairs(metaData.data) do
-      SendNUIMessage({openSection = "fishUpdate",  name = v.name, size = v.size})
-  end  
+  SendNUIMessage({ openSection = "fishOpen", NUICaseId = metaData.caseId })
+  for _, v in ipairs(metaData.data) do
+    SendNUIMessage({ openSection = "fishUpdate", name = v.name, size = v.size })
+  end
 end)
