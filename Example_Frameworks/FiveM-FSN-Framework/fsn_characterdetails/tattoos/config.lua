@@ -1,4 +1,6 @@
-TattooLocations = {
+Config = {}
+
+Config.TattooLocations = {
 	{X = 1322.645, Y = -1651.976, Z = 52.275},
 	{X = -1153.676, Y = -1425.68, Z = 4.954},
 	{X = 322.139, Y = 180.467, Z = 103.587},
@@ -7,13 +9,13 @@ TattooLocations = {
 	{X = -293.713, Y = 6200.04, Z = 31.487}
 }
 
-TattooCategories = {
+Config.TattooCategories = {
 	{Name = 'Beach Tattoos', Value = 'mpbeach_overlays'},
 	{Name = 'Business Tattoos', Value = 'mpbusiness_overlays'},
 	{Name = 'Hipster Tattoos', Value = 'mphipster_overlays'}
 }
 
-TattooList = {
+Config.TattooList = {
 	['mpbeach_overlays'] = {
 		{NameHash = 'MP_Bea_M_Head_000', Part = 'head', AddedX = 0.5, AddedY = 0.4, AddedZ = 0.7, RotZ = 136.4, Price = 500},
 		{NameHash = 'MP_Bea_M_Head_001', Part = 'head', AddedX = -0.1, AddedY = 0.4, AddedZ = 0.7, RotZ = 195.0, Price = 500},
