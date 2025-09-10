@@ -14,6 +14,7 @@ local myGangReputation = {
     ["robbery"] = 200,           
 }
 local oxyVehicle = 0
+local OxyRun = false
 
 local lunchtime = false
 
@@ -21,6 +22,21 @@ RegisterNetEvent('lunchtime')
 AddEventHandler('lunchtime', function(pass)
 	lunchtime = pass
 end)
+
+--[[
+    -- Type: Function
+    -- Name: loadModel
+    -- Use: Requests and loads a model into memory
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function loadModel(model)
+    RequestModel(model)
+    while not HasModelLoaded(model) do
+        Wait(10)
+        RequestModel(model)
+    end
+end
 
 
 
@@ -108,7 +124,7 @@ function buildDrugShop()
 	DoScreenFadeOut(1)
 	SetEntityCoords(PlayerPedId(),1212.77,-472.43,66.21) -- Default
 	FreezeEntityPosition(PlayerPedId(),true)
-	Citizen.Wait(1000)
+	Wait(1000)
 
 	local generator = { x = pillStore["x"] , y = pillStore["y"], z = pillStore["z"] - 35.0}
   	SetEntityCoords(PlayerPedId(),generator.x,generator.y,generator.z+2)
@@ -162,7 +178,7 @@ function buildDrugShop()
 
 	-- FreezeEntityPosition(coordsofbuilding,true)
 	SetEntityCoords(PlayerPedId(), 592.26, 2745.01, 15.22)
-	Citizen.Wait(500)
+	Wait(500)
 	SetEntityHeading(PlayerPedId(),0.0)
 	FreezeEntityPosition(PlayerPedId(),false)
 	DoScreenFadeIn(1)
@@ -220,19 +236,22 @@ local oxyPeds = {
 	'a_m_y_stwhi_01'
 }
 
+--[[
+    -- Type: Function
+    -- Name: CreateDrugStorePed
+    -- Use: Spawns the pill store NPC with proper configuration
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 function CreateDrugStorePed()
 
 	if DoesEntityExist(drugStorePed) then
 		return
 	end
 	local hashKey = `a_m_y_stwhi_02`
-	local pedType = GetPedType(hashKey)
-    RequestModel(hashKey)
-    while not HasModelLoaded(hashKey) do
-        RequestModel(hashKey)
-        Citizen.Wait(100)
-    end
-	drugStorePed = CreatePed(pedType, hashKey, pillWorker["x"],pillWorker["y"],pillWorker["z"], 270.0, 1, 1)
+        loadModel(hashKey)
+        local pedType = GetPedType(hashKey)
+        drugStorePed = CreatePed(pedType, hashKey, pillWorker["x"],pillWorker["y"],pillWorker["z"], 270.0, true, true)
 	SetEntityHeading(drugStorePed, 180.24)
 	DecorSetBool(drugStorePed, 'ScriptedPed', true)
     ClearPedTasks(drugStorePed)
@@ -269,6 +288,13 @@ local carspawns = {
 }
 
 
+--[[
+    -- Type: Function
+    -- Name: CreateOxyVehicle
+    -- Use: Spawns a random delivery vehicle for oxy runs
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 function CreateOxyVehicle()
 
 	if DoesEntityExist(oxyVehicle) then
@@ -279,10 +305,7 @@ function CreateOxyVehicle()
 	end
 
     local car = GetHashKey(carpick[math.random(#carpick)])
-    RequestModel(car)
-    while not HasModelLoaded(car) do
-        Citizen.Wait(0)
-    end
+    loadModel(car)
 
     local spawnpoint = 1
     for i = 1, #carspawns do
@@ -300,7 +323,7 @@ function CreateOxyVehicle()
 
 
     while true do
-    	Citizen.Wait(1)
+    	Wait(1)
     	 DrawText3Ds(carspawns[spawnpoint]["x"], carspawns[spawnpoint]["y"], carspawns[spawnpoint]["z"], "Your Delivery Car (Stolen).")
     	 if #(GetEntityCoords(PlayerPedId()) - vector3(carspawns[spawnpoint]["x"], carspawns[spawnpoint]["y"], carspawns[spawnpoint]["z"])) < 8.0 then
     	 	return
@@ -309,20 +332,20 @@ function CreateOxyVehicle()
 
 end
 
+--[[
+    -- Type: Function
+    -- Name: CreateOxyPed
+    -- Use: Spawns the customer for oxy deliveries
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 function CreateOxyPed()
 
     local hashKey = `a_m_y_stwhi_01`
-
+    loadModel(hashKey)
     local pedType = 5
 
-    RequestModel(hashKey)
-    while not HasModelLoaded(hashKey) do
-        RequestModel(hashKey)
-        Citizen.Wait(100)
-    end
-
-
-	deliveryPed = CreatePed(pedType, hashKey, OxyDropOffs[rnd]["x"],OxyDropOffs[rnd]["y"],OxyDropOffs[rnd]["z"], OxyDropOffs[rnd]["h"], 0, 0)
+	deliveryPed = CreatePed(pedType, hashKey, OxyDropOffs[rnd]["x"],OxyDropOffs[rnd]["y"],OxyDropOffs[rnd]["z"], OxyDropOffs[rnd]["h"], false, false)
 	
 	DecorSetBool(deliveryPed, 'ScriptedPed', true)
     ClearPedTasks(deliveryPed)
@@ -341,21 +364,22 @@ end
 
 
 
+--[[
+    -- Type: Function
+    -- Name: CreateDrugPed
+    -- Use: Spawns the drop-off NPC for drug deliveries
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 function CreateDrugPed()
-	
 
     local hashKey = `g_m_y_salvagoon_01`
+    loadModel(hashKey)
 
     local pedType = 5
 
-    RequestModel(hashKey)
-    while not HasModelLoaded(hashKey) do
-        RequestModel(hashKey)
-        Citizen.Wait(100)
-    end
+    deliveryPed = CreatePed(pedType, hashKey, dropoffpoints[rnd]["x"],dropoffpoints[rnd]["y"],dropoffpoints[rnd]["z"], dropoffpoints[rnd]["h"], true, true)
 
-
-	deliveryPed = CreatePed(pedType, hashKey, dropoffpoints[rnd]["x"],dropoffpoints[rnd]["y"],dropoffpoints[rnd]["z"], dropoffpoints[rnd]["h"], 1, 1)
 	DecorSetBool(deliveryPed, 'ScriptedPed', true)
     ClearPedTasks(deliveryPed)
     ClearPedSecondaryTask(deliveryPed)
@@ -379,7 +403,7 @@ function DeleteCreatedPed()
 		SetPedAsNoLongerNeeded(deliveryPed)
 		DecorSetBool(deliveryPed, 'ScriptedPed', false)
 
-		Citizen.Wait(20000)
+		Wait(20000)
 		DeletePed(deliveryPed)
 	end
 end
@@ -409,7 +433,7 @@ end
 function loadAnimDict( dict )
     while ( not HasAnimDictLoaded( dict ) ) do
         RequestAnimDict( dict )
-        Citizen.Wait( 5 )
+        Wait( 5 )
     end
 end 
 
@@ -550,7 +574,7 @@ function DoDropOff(requestMoney)
 	while counter > 0 do
 		local crds = GetEntityCoords(deliveryPed)
 		counter = counter - 1
-		Citizen.Wait(1)
+		Wait(1)
 	end
 
 	if success then
@@ -559,7 +583,7 @@ function DoDropOff(requestMoney)
 		while counter > 0 do
 			local crds = GetEntityCoords(deliveryPed)
 			counter = counter - 1
-			Citizen.Wait(1)
+			Wait(1)
 		end
 		giveAnim()
 	end
@@ -594,7 +618,7 @@ function DoDropOff(requestMoney)
 	
 	DeleteBlip()
 	if success then
-		Citizen.Wait(2000)
+		Wait(2000)
 		TriggerEvent("DoLongHudText", "I got the call in, delivery was on point, go await the next one! ",2)
 	else
 		TriggerEvent("DoLongHudText","The drop off failed - you need stolen items.",2)
@@ -614,10 +638,10 @@ function startAiFight()
     fighting = 10000
 
     TaskCombatPed(deliveryPed, PlayerPedId(), 0, 16) 
-    Citizen.Wait(700) 
+    Wait(700) 
 
     while fighting > 0 do
-        Citizen.Wait(1)
+        Wait(1)
         fighting = fighting - 1
         if IsEntityDead(killerPed) then          
             SearchPockets(killerPed)
@@ -625,7 +649,7 @@ function startAiFight()
         end
         if not DoesEntityExist(killerPed) or IsEntityDead(PlayerPedId()) or fighting < 10 then
             ClearPedTasks(killerPed)
-            Citizen.Wait(10000)
+            Wait(10000)
             fighting = 0
         end
     end
@@ -662,7 +686,7 @@ function SearchPockets(ai)
     while timer > 0 do
         timer = timer - 1
         local pos = GetEntityCoords(ai)
-        Citizen.Wait(1)
+        Wait(1)
 
         if not searching then
             DrawText3Ds(pos["x"], pos["y"],pos["z"], "Press E to search person.")
@@ -736,7 +760,7 @@ AddEventHandler("oxydelivery:client", function()
 	local toolong = 600000
 	while tasking do
 
-		Citizen.Wait(1)
+		Wait(1)
 		local plycoords = GetEntityCoords(PlayerPedId())
 		local dstcheck = #(plycoords - vector3(OxyDropOffs[rnd]["x"],OxyDropOffs[rnd]["y"],OxyDropOffs[rnd]["z"])) 
 		local oxyVehCoords = GetEntityCoords(oxyVehicle)
@@ -765,7 +789,7 @@ AddEventHandler("oxydelivery:client", function()
 
 			if IsControlJustReleased(0,38) then
 				TaskTurnPedToFaceEntity(deliveryPed, PlayerPedId(), 1.0)
-				Citizen.Wait(1500)
+				Wait(1500)
 				PlayAmbientSpeech1(deliveryPed, "Generic_Hi", "Speech_Params_Force")
 				DoDropOff()
 				tasking = false
@@ -803,7 +827,7 @@ AddEventHandler("drugdelivery:client", function()
 	local timer = 120000
 	while tasking and timer > 0 do
 		timer = timer - 1
-		Citizen.Wait(1)
+		Wait(1)
 		local plycoords = GetEntityCoords(PlayerPedId())
 		local dstcheck = #(plycoords - vector3(dropoffpoints[rnd]["x"],dropoffpoints[rnd]["y"],dropoffpoints[rnd]["z"])) 
 		if dstcheck < 40.0 and not pedCreated then
@@ -820,7 +844,7 @@ AddEventHandler("drugdelivery:client", function()
 
 			if IsControlJustReleased(0,38) then
 				TaskTurnPedToFaceEntity(deliveryPed, PlayerPedId(), 1.0)
-				Citizen.Wait(1500)
+				Wait(1500)
 				PlayAmbientSpeech1(deliveryPed, "Generic_Hi", "Speech_Params_Force")
 				DoDropOff()
 				tasking = false
@@ -1077,7 +1101,7 @@ AddEventHandler('chopshoppub:leave', function(plate)
 	local myplate = GetVehicleNumberPlateText(veh)
 	if plate == myplate then
 		TaskLeaveVehicle(PlayerPedId(), veh, 0)
-		Citizen.Wait(100)
+		Wait(100)
 		SetEntityCoords(PlayerPedId(),GetEntityCoords(PlayerPedId()))
 	end
 
@@ -1104,7 +1128,7 @@ function CompleteScrapping(vehicle, originalVehicleLocation)
 
 	RequestAnimDict('mp_car_bomb')
 	while not HasAnimDictLoaded("mp_car_bomb") do
-		Citizen.Wait(0)
+		Wait(0)
 	end
 
 	TaskPlayAnim(PlayerPedId(), "mp_car_bomb", "car_bomb_mechanic", 8.0, -8, -1, 49, 0, 0, 0, 0)
@@ -1119,7 +1143,7 @@ function CompleteScrapping(vehicle, originalVehicleLocation)
 				local plate = GetVehicleNumberPlateText(veh)
 				TriggerServerEvent('InteractSound_SV:PlayWithinDistance', 2.0, 'impactdrill', 0.5)
 				TriggerServerEvent("chopshop:removevehicle",vehResponse,plate,50)
-				Citizen.Wait(2500)
+				Wait(2500)
 				TriggerServerEvent('InteractSound_SV:PlayWithinDistance', 2.0, 'impactdrill', 0.5)
 				SetEntityAsNoLongerNeeded(veh,true)
 				DeleteEntity(veh)
@@ -1198,11 +1222,11 @@ AddEventHandler('goldtrade', function()
 end)
 
 
-Citizen.CreateThread(function()
+CreateThread(function()
 
     while true do
 
-	    Citizen.Wait(1)
+	    Wait(1)
 	    local dropOff = #(vector3(GetEntityCoords(PlayerPedId())) - vector3(chopinfo[1]["x"],chopinfo[1]["y"],chopinfo[1]["z"]))
 
 	    local dropOff2 = #(vector3(GetEntityCoords(PlayerPedId())) - vector3(chopinfo[2]["x"],chopinfo[2]["y"],chopinfo[2]["z"]))
@@ -1227,7 +1251,7 @@ Citizen.CreateThread(function()
 							TriggerEvent("pixerium:check",5,"goldtrade",false)
 						end
 					end
-					Citizen.Wait(1000)
+					Wait(1000)
 				end
 
 			else
@@ -1243,7 +1267,7 @@ Citizen.CreateThread(function()
 			if IsControlJustReleased(0,38) then
 				CleanUpArea()
 				SetEntityCoords(PlayerPedId(),pillStore["x"],pillStore["y"],pillStore["z"])
-				Citizen.Wait(1000)
+				Wait(1000)
 			end
 		end
 		if dropOff5 < 1.5 then
@@ -1261,7 +1285,7 @@ Citizen.CreateThread(function()
 			DrawText3Ds(pillWorker["x"],pillWorker["y"],pillWorker["z"], "[E] $1500 - Delivery Job (Payment Cash + Oxy)") 
 			if IsControlJustReleased(0,38) then
 				TriggerServerEvent("oxydelivery:server",1500)
-				Citizen.Wait(1000)
+				Wait(1000)
 			end
 
 
@@ -1284,7 +1308,7 @@ Citizen.CreateThread(function()
     				if IsControlJustReleased(0,38) then
     					if #currentVehicleList == 0 then
     						TriggerServerEvent("request:chopshop")
-    						Citizen.Wait(2000)
+    						Wait(2000)
 						end
     					local message = "Required List:"
 						for i = 1, #currentVehicleList do 
@@ -1313,7 +1337,7 @@ Citizen.CreateThread(function()
 	    else
 
 	    	if dropOff2 > 2.0 and dropOff4 > 2.0 and dropOff5 > 2.0 and dropOff6 > 2.0 and GoldBars > 2.0 then
-		    	Citizen.Wait(1000)
+		    	Wait(1000)
 		    end
 
 	    end
@@ -1352,7 +1376,7 @@ RegisterNetEvent('chop:commandrequest')
 AddEventHandler('chop:commandrequest', function()
 	if #currentVehicleList == 0 then
 		TriggerServerEvent("request:chopshop")
-		Citizen.Wait(2000)
+		Wait(2000)
 	end
 	local message = "Chop List: (" .. currentTimer .. " mins remaining) <br>"
 	for i = 1, #currentVehicleList do 
@@ -1411,28 +1435,28 @@ end)
 --mexican
 
 local firstdeal = false
-Citizen.CreateThread(function()
+CreateThread(function()
 
 
     while true do
 
         if drugdealer then
 
-	        Citizen.Wait(1000)
+	        Wait(1000)
 
 	        if firstdeal then
-	        	Citizen.Wait(10000)
+	        	Wait(10000)
 	        end
 
 	        TriggerEvent("drugdelivery:client")  
 
 		    salecount = salecount + 1
 		    if salecount == 7 then
-		    	Citizen.Wait(1200000)
+		    	Wait(1200000)
 		    	drugdealer = false
 		    end
 
-		    Citizen.Wait(150000)
+		    Wait(150000)
 		    firstdeal = false
 
 		elseif OxyRun then
@@ -1443,12 +1467,12 @@ Citizen.CreateThread(function()
 				TriggerEvent("chatMessage", "EMAIL - Drug Deliveries", 8, "Dude! You fucked the car up, I canceled your run, asshole! ")
 			else
 				if tasking then
-			        Citizen.Wait(30000)
+			        Wait(30000)
 			    else
 			        TriggerEvent("oxydelivery:client")  
 				    salecount = salecount + 1
 				    if salecount == 6 then
-				    	Citizen.Wait(1200000)
+				    	Wait(1200000)
 				    	OxyRun = false
 				    end
 				end
@@ -1488,25 +1512,25 @@ Citizen.CreateThread(function()
 		            		else
 		            			mygang = drugLocs[i]["gang"]
 					    		TriggerServerEvent("drugdelivery:server",price)
-					    		Citizen.Wait(1500)
+					    		Wait(1500)
 					    	end
 
 				    	end
 
 			    	else
 
-			    		Citizen.Wait(60000)
+			    		Wait(60000)
 
 			    	end
 
-			    	Citizen.Wait(1)
+			    	Wait(1)
 
 			    end
 
 			end
 
 			if not close then
-				Citizen.Wait(2000)
+				Wait(2000)
 			end
 
 	    end
