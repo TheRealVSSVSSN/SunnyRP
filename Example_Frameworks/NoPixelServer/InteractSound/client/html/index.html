@@ -1,55 +1,38 @@
+<!DOCTYPE html>
 <html>
     <head>
-        <!-- Need to include jQuery! -->
-        <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+        <meta charset="UTF-8" />
         <script>
-            var audioPlayer = null;
-            // Listen for NUI Messages.
-            window.addEventListener('message', function(event) {
-                // Check for playSound transaction
-                if (event.data.transactionType == "playSound") {
-				
-                  if (audioPlayer != null) {
-                    audioPlayer.pause();
-                  }
+            let audioPlayer = null;
 
-                  audioPlayer = new Audio("./sounds/" + event.data.transactionFile + ".ogg");
-                  audioPlayer.volume = event.data.transactionVolume;
-                  audioPlayer.play();
+            window.addEventListener('message', (event) => {
+                const data = event.data;
+                if (data.transactionType === 'playSound') {
+                    if (audioPlayer) { audioPlayer.pause(); }
+                    audioPlayer = new Audio(`./sounds/${data.transactionFile}.ogg`);
+                    audioPlayer.volume = data.transactionVolume;
+                    audioPlayer.onended = () => { audioPlayer = null; };
+                    audioPlayer.play();
+                } else if (data.transactionType === 'playSoundFlash') {
+                    if (audioPlayer) { audioPlayer.pause(); }
+                    audioPlayer = new Audio(`./sounds/${data.transactionFile}.ogg`);
+                    audioPlayer.volume = data.transactionVolume;
+                    audioPlayer.play();
 
-                }
-
-                if (event.data.transactionType == "playSoundFlash") {
-        
-                  if (audioPlayer != null) {
-                    audioPlayer.pause();
-                  }
-
-                  audioPlayer = new Audio("./sounds/" + event.data.transactionFile + ".ogg");
-                  audioPlayer.play();
-                  audioPlayer.volume = event.data.transactionVolume;
-
-                  var start = (event.data.transactionVolume*100)
-                  setTimeout(() => {
-                    var vol = event.data.transactionVolume
-                    var i = start;
-                    var interval = setInterval(function() { 
-                       if (i > 0) { 
-                          if(vol <= 0.1){
-                            vol = 0.1
-                          }
-                          else
-                          {
-                            vol -=0.01
-                          }
-                          audioPlayer.volume = vol
-                          i--;
-                       }
-                       else { 
-                          clearInterval(interval);
-                       }
-                    }, event.data.transactionTime);
-                  }, event.data.transactionHold)
+                    const start = data.transactionVolume * 100;
+                    setTimeout(() => {
+                        let vol = data.transactionVolume;
+                        let i = start;
+                        const interval = setInterval(() => {
+                            if (i > 0) {
+                                vol = Math.max(0.1, vol - 0.01);
+                                audioPlayer.volume = vol;
+                                i--;
+                            } else {
+                                clearInterval(interval);
+                            }
+                        }, data.transactionTime);
+                    }, data.transactionHold);
                 }
             });
         </script>
