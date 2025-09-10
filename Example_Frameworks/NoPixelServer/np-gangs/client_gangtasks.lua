@@ -1,42 +1,42 @@
-
---	[2] = "prop_cs_package_01",
-
--- delivery / dump start.
+--[[
+    -- Type: Client Script
+    -- Name: client_gangtasks
+    -- Use: Handles gang hotspot tracking and hostile NPC logic
+    -- Created: 2024-08-18
+    -- By: VSSVSSN
+--]]
 
 local hotSpots = {
-	["Strawberry"] = { ["ratio"] = 0, ["zone"] = 1 },
-	["Rancho"] = { ["ratio"] = 0, ["zone"] = 1 },
-	["Chamberlain Hills"] = { ["ratio"] = 0, ["zone"] = 1 },
-	["Davis"] = { ["ratio"] = 0, ["zone"] = 1 },
-	["West Vinewood"] = { ["ratio"] = 0, ["zone"] = 2 },
-	["Downtown Vinewood"] = { ["ratio"] = 0, ["zone"] = 2 },
+    Strawberry = { ratio = 0, zone = 1 },
+    Rancho = { ratio = 0, zone = 1 },
+    ['Chamberlain Hills'] = { ratio = 0, zone = 1 },
+    Davis = { ratio = 0, zone = 1 },
+    ['West Vinewood'] = { ratio = 0, zone = 2 },
+    ['Downtown Vinewood'] = { ratio = 0, zone = 2 }
 }
 
-local plyId;
-local plyCoords;
-local blnPlySpawned = false
+local plyId = 0
+local plyCoords = vector3(0, 0, 0)
+local playerSpawned = false
 
-Citizen.CreateThread( function()
-	while not blnPlySpawned
-	do
-		Citizen.Wait(100)
-	end
-	while true do 
-		plyId = PlayerPedId()
-		plyCoords = GetEntityCoords(plyId)
-		Citizen.Wait(200)
-	end
+CreateThread(function()
+    while not playerSpawned do
+        Wait(100)
+    end
+    while true do
+        plyId = PlayerPedId()
+        plyCoords = GetEntityCoords(plyId)
+        Wait(200)
+    end
 end)
 
-
-RegisterNetEvent('drugs:hotSpots')
-AddEventHandler('drugs:hotSpots', function(newhotSpots)
-	hotSpots = newhotSpots
+RegisterNetEvent('drugs:hotSpots', function(newHotSpots)
+    hotSpots = newHotSpots
 end)
-RegisterNetEvent('playerSpawned')
-AddEventHandler('playerSpawned', function(newhotSpots)
-	TriggerServerEvent("weed:requestTable")
-	blnPlySpawned = true
+
+AddEventHandler('playerSpawned', function()
+    TriggerServerEvent('weed:requestTable')
+    playerSpawned = true
 end)
 --Strawberry
 --Rancho
@@ -49,11 +49,13 @@ local cracktime = false
 local sellingcocaine = false
 local sellingcrack = false
 local sellingweed = false
-function EndSelling()
-	cooldown = false
-	sellingweed = false
-	sellingcocaine = false
-	sellingcrack = false
+local cooldown = false
+
+local function EndSelling()
+    cooldown = false
+    sellingweed = false
+    sellingcocaine = false
+    sellingcrack = false
 end
 
 
@@ -399,13 +401,13 @@ local gangSpots = {
 
 
 
-Citizen.CreateThread( function()
+CreateThread( function()
 
 	while true do 
 
 		while not plyCoords
 		do
-			Citizen.Wait(10)
+			Wait(10)
 		end
 		
 		local storagedist = #(vector3(83.31, -1635.9, 28.93) - plyCoords)
@@ -456,9 +458,9 @@ Citizen.CreateThread( function()
 		end			
 
 		if storagedist > 1000 then
-			Citizen.Wait(math.ceil(storagedist*30))
+			Wait(math.ceil(storagedist*30))
 		else
-			Citizen.Wait(1000)
+			Wait(1000)
 		end
 
 	end
@@ -654,7 +656,7 @@ AddEventHandler("MovePed",function(p)
       toolong = toolong + 1
       TaskGoStraightToCoord(usingped, moveto, 1.0, 30.0, 0.0, 0.0)
       dist = #(moveto - GetEntityCoords(usingped))
-      Citizen.Wait(1000)
+      Wait(1000)
       lastcheck = #(GetEntityCoords(usingped) - plyCoords)
     end
 
@@ -741,7 +743,7 @@ end)
 function loadAnimDict( dict )
     while ( not HasAnimDictLoaded( dict ) ) do
         RequestAnimDict( dict )
-        Citizen.Wait( 5 )
+        Wait( 5 )
     end
 end 
 
@@ -767,7 +769,7 @@ function SellDrugs(NPC,saleprice, amount)
 
 	local success = true
 
-	Citizen.Wait(500)
+	Wait(500)
 
 	PlayAmbientSpeech1(NPC, "Chat_State", "Speech_Params_Force")
 	giveAnim(NPC)
@@ -775,7 +777,7 @@ function SellDrugs(NPC,saleprice, amount)
 	local counter = math.random(100,300)
 	while counter > 0 do
 		counter = counter - 1
-		Citizen.Wait(1)
+		Wait(1)
 	end
 
 	local crds = GetEntityCoords(NPC)
@@ -983,7 +985,7 @@ function workvehicle()
 	local car = `BLAZER`
 	RequestModel(car)
 	while not HasModelLoaded(car) do
-		Citizen.Wait(1)
+		Wait(1)
 	end						
 	local veh = CreateVehicle(car, center["x"],center["y"],center["z"], 0.0, true, false)
 	DecorSetInt(veh, "CurrentFuel", 100)
@@ -993,7 +995,7 @@ function workvehicle()
     SetVehicleOnGroundProperly(veh)
 	local plate = "wine" .. math.random(111,999)
 	SetVehicleNumberPlateText(veh, plate)
-	Citizen.Wait(100)
+	Wait(100)
 	plate = GetVehicleNumberPlateText(veh)
     TriggerEvent("keys:addNew",veh,plate)
     TriggerServerEvent('garges:addJobPlate', plate)
@@ -1022,7 +1024,7 @@ end)
 RegisterNetEvent("weed:currenttask")
 AddEventHandler("weed:currenttask", function(workNumber,amountRequired)
 	currentWorkNumber = 0 
-	Citizen.Wait(1000)
+	Wait(1000)
 	currentWorkNumber = workNumber
 	--print(currentWorkNumber)
 	while currentWorkNumber ~= 0 do
@@ -1038,9 +1040,9 @@ AddEventHandler("weed:currenttask", function(workNumber,amountRequired)
 				CheckAcceptWeed(workNumber,amountRequired)
 			end
 		elseif dstCheck > 50.0 then
-			Citizen.Wait(1000)
+			Wait(1000)
 		end
-		Citizen.Wait(1)
+		Wait(1)
 	end
 end)
 
@@ -1055,7 +1057,7 @@ function CheckAcceptWeed(workNumber,amountRequired)
 	else
 		TriggerEvent("DoLongHudText","You do not have the required materials.",2)
 	end
-	Citizen.Wait(2000)
+	Wait(2000)
 end
 
 
@@ -1068,7 +1070,7 @@ end)
 RegisterNetEvent("COKENEW:currenttask")
 AddEventHandler("COKENEW:currenttask", function(workNumber,amountRequired)
 	currentWorkNumberCOKE = 0 
-	Citizen.Wait(1000)
+	Wait(1000)
 	currentWorkNumberCOKE = workNumber
 	--print(currentWorkNumberCOKE)
 	while currentWorkNumberCOKE ~= 0 do
@@ -1084,9 +1086,9 @@ AddEventHandler("COKENEW:currenttask", function(workNumber,amountRequired)
 				CheckAcceptCOKENEW(workNumber,amountRequired)
 			end
 		elseif dstCheck > 50.0 then
-			Citizen.Wait(1000)
+			Wait(1000)
 		end
-		Citizen.Wait(1)
+		Wait(1)
 	end
 end)
 
@@ -1096,12 +1098,12 @@ function CheckAcceptCOKENEW(workNumber,amountRequired)
 	currentWorkNumberCOKE = 0
 	TriggerEvent("animation:PlayAnimation","clipboard")
 
-	Citizen.Wait(10000)
+	Wait(10000)
 	TriggerEvent("DoLongHudText","You have fixed the problems.",1)
 	TriggerServerEvent("cocaine:updatePercent")
 
 
-	Citizen.Wait(2000)
+	Wait(2000)
 	TriggerEvent("animation:PlayAnimation","cancel")
 end
 
@@ -1127,7 +1129,7 @@ AddEventHandler("gangTasks:GroupWineryTask", function(cidsent,TaskNumber)
 	local pass = false
 	--print("fgirst loop")
 	while failure > 0 and not pass do
-		Citizen.Wait(1)
+		Wait(1)
 		local myCrds = plyCoords
 		dst = #(vector3(center["x"],center["y"],center["z"]) - myCrds)
 
@@ -1139,7 +1141,7 @@ AddEventHandler("gangTasks:GroupWineryTask", function(cidsent,TaskNumber)
 			local caisseo = GetClosestVehicle(center["x"],center["y"],center["z"], 7.000, 0, 70)
 			if DoesEntityExist(caisseo) then
 				TriggerEvent("DoLongHudText", "ATV spawn is crowded, waiting for safe spawn.",2)
-				Citizen.Wait(5000)
+				Wait(5000)
 			else
 				pass = true
 				--print("trued")
@@ -1158,7 +1160,7 @@ AddEventHandler("gangTasks:GroupWineryTask", function(cidsent,TaskNumber)
 	end
 	local processing = true
 	while dst < 250.0 and failures > 0 and processing do
-		Citizen.Wait(1)
+		Wait(1)
 		if math.random(10000) > 9009 and not inminitask then
 			--print("got lucky")
 			inminitask = true
@@ -1178,7 +1180,7 @@ AddEventHandler("gangTasks:GroupWineryTask", function(cidsent,TaskNumber)
 	if failures > 0 then
 
 		while GetEntitySpeed(workvehicles) > 1.0 and workvehicles ~= 0 do
-			Citizen.Wait(1)
+			Wait(1)
 		end
 
 		local bonus = 500
@@ -1223,7 +1225,7 @@ function doGrapeMiniTask()
 	--print(GetEntityHeightAboveGround(obj))
 	SetEntityCoords(obj,minitask["x"],minitask["y"],minitask["z"] - GetEntityHeightAboveGround(obj))
 
-	Citizen.Wait(1000)
+	Wait(1000)
 	--print(GetEntityHeightAboveGround(obj))
 	PlaceObjectOnGroundProperly(obj)
 
@@ -1233,14 +1235,14 @@ function doGrapeMiniTask()
 	local success = false
 	while timer > 0 and not success do
 		timer = timer - 1
-		Citizen.Wait(1)
+		Wait(1)
 		local myCrds = plyCoords
 		local grapesCrds = GetEntityCoords(obj)
 		local dst = #(vector3(grapesCrds["x"],grapesCrds["y"],grapesCrds["z"]) - myCrds)
 		DrawText3DTest(grapesCrds["x"],grapesCrds["y"],grapesCrds["z"], "["..Controlkey["generalUse"][2].."] pick up the grapes! (" .. math.ceil(timer / 100) .. ")")
 		if IsControlJustPressed(0, Controlkey["generalUse"][1]) and dst < 2.0 then
 			CarryBoxAnim()
-			Citizen.Wait(500)
+			Wait(500)
 			attachObjPedVeh(obj)
 			success = true
 		end
@@ -1254,12 +1256,12 @@ function doGrapeMiniTask()
 	local success = false
 	while timer > 0 and not success do	
 		timer = timer - 1
-		Citizen.Wait(1)
+		Wait(1)
 		if IsControlJustPressed(0, Controlkey["generalUse"][1]) or (`WEAPON_UNARMED` ~= GetSelectedPedWeapon(plyId) and holdingPackage) then
 			holdingPackage = not holdingPackage
 			if holdingPackage then
 				CarryBoxAnim()
-				Citizen.Wait(500)
+				Wait(500)
 				attachObjPedVeh(obj)
 			else
 				ClearPedTasks(plyId)
@@ -1287,12 +1289,12 @@ function doGrapeMiniTask()
 	local success = false
 	while timer > 0 and not success do	
 		timer = timer - 1
-		Citizen.Wait(1)
+		Wait(1)
 		if IsControlJustPressed(0, Controlkey["generalUse"][1]) or (`WEAPON_UNARMED` ~= GetSelectedPedWeapon(plyId) and holdingPackage) then
 			holdingPackage = not holdingPackage
 			if holdingPackage then
 				CarryBoxAnim()
-				Citizen.Wait(500)
+				Wait(500)
 				attachObjPedVeh(obj)
 			else
 				ClearPedTasks(plyId)
@@ -1336,7 +1338,7 @@ AddEventHandler("gangTasks:GroupDeliveryTask", function(cidsent,TaskNumber)
 	myCrds = plyCoords
 	--print("starting task")
 
-	Citizen.Wait(1000)
+	Wait(1000)
 	TriggerEvent("DoLongHudText", activeTasks[TaskNumber]["TaskInfo"])
 
 	local deliveryType = activeTasks[TaskNumber]["ObjectType"]
@@ -1349,14 +1351,14 @@ AddEventHandler("gangTasks:GroupDeliveryTask", function(cidsent,TaskNumber)
 	local pass = false
 
 	while dst > 15.0 and failure > 0 and not pass do
-		Citizen.Wait(1)
+		Wait(1)
 		local myCrds = plyCoords
 		dst = #(vector3(activeTasks[TaskNumber]["Location"]["x"],activeTasks[TaskNumber]["Location"]["y"],activeTasks[TaskNumber]["Location"]["z"]) - myCrds)
 		failure = failure - 1
 		local caisseo = GetClosestVehicle(activeTasks[TaskNumber]["Location"]["x"],activeTasks[TaskNumber]["Location"]["y"],activeTasks[TaskNumber]["Location"]["z"], 7.000, 0, 70)
 		if DoesEntityExist(caisseo) then
 			TriggerEvent("DoLongHudText", "Van spawn is crowded, waiting for safe spawn.",2)
-			Citizen.Wait(5000)
+			Wait(5000)
 		else
 			pass = true
 		end
@@ -1407,7 +1409,7 @@ AddEventHandler("gangTasks:GroupDeliveryTask", function(cidsent,TaskNumber)
 
 	TriggerServerEvent("gangTasks:newCoords",TaskNumber,activeTasks)
 	
-	Citizen.Wait(1000)
+	Wait(1000)
 
 	local myCrdsend = plyCoords
 	local dstend = #(vector3(returnpoint["x"],returnpoint["y"],returnpoint["z"]) - myCrdsend)
@@ -1415,7 +1417,7 @@ AddEventHandler("gangTasks:GroupDeliveryTask", function(cidsent,TaskNumber)
 	SetGps(TaskNumber)
 	TriggerEvent("DoLongHudText","Return the van!",99)
 	while dstend > 10.0 and failure > 0 do
-		Citizen.Wait(1)
+		Wait(1)
 		myCrdsend = plyCoords
 
 		dstend = #(vector3(returnpoint["x"],returnpoint["y"],returnpoint["z"]) - myCrdsend)
@@ -1423,7 +1425,7 @@ AddEventHandler("gangTasks:GroupDeliveryTask", function(cidsent,TaskNumber)
 	end
 
 	while GetEntitySpeed(taskveh) > 1.0 and taskveh ~= 0 do
-		Citizen.Wait(1)
+		Wait(1)
 	end
 	local bonus = 1800
 	local engHealth = GetVehicleEngineHealth(taskveh)
@@ -1465,7 +1467,7 @@ AddEventHandler("gangTasks:deliveryTask", function(cidsent, TaskNumber)
 		return
 	end
 
-	Citizen.Wait(1000)
+	Wait(1000)
 	TriggerEvent("DoLongHudText", activeTasks[TaskNumber]["TaskInfo"])
 	local deliveryType = activeTasks[TaskNumber]["ObjectType"]
 
@@ -1474,7 +1476,7 @@ AddEventHandler("gangTasks:deliveryTask", function(cidsent, TaskNumber)
 	SetGps(TaskNumber)
 	local failure = 180000
 	while dst > 15.0 and failure > 0 do
-		Citizen.Wait(1)
+		Wait(1)
 		local myCrds = plyCoords
 		dst = #(vector3(activeTasks[TaskNumber]["Location"]["x"],activeTasks[TaskNumber]["Location"]["y"],activeTasks[TaskNumber]["Location"]["z"]) - myCrds)
 		failure = failure - 1
@@ -1553,18 +1555,18 @@ AddEventHandler("gangTasks:deliveryTask", function(cidsent, TaskNumber)
 	local myCrds = plyCoords
 	local dst = #(vector3(returnpoint["x"],returnpoint["y"],returnpoint["z"]) - myCrds)
 	
-	Citizen.Wait(1000)
+	Wait(1000)
 	SetGps(TaskNumber)
 	TriggerEvent("DoLongHudText","Return the van!",1)
 	while dst > 100.0 and failure > 0 do
-		Citizen.Wait(1)
+		Wait(1)
 		local myCrds = plyCoords
 		dst = #(vector3(returnpoint["x"],returnpoint["y"],returnpoint["z"]) - myCrds)
 		failure = failure - 1
 	end
 	
 	while GetEntitySpeed(taskveh) > 1.0 and taskveh ~= 0 do
-		Citizen.Wait(1)
+		Wait(1)
 	end
 	local bonus = 420
 	local engHealth = GetVehicleEngineHealth(taskveh)
@@ -1608,12 +1610,12 @@ function DoObjectTaskInside(TaskNumber,failure,taskveh,obj)
 
 
 
-	Citizen.Wait(1000)
+	Wait(1000)
 	SetGps(TaskNumber)
 
 
 	while dst > 50.0 and failure > 0 do
-		Citizen.Wait(1)
+		Wait(1)
 		local myCrds = plyCoords
 		dst = #(vector3(DeliveryLocation["x"],DeliveryLocation["y"],DeliveryLocation["z"]) - myCrds)
 		failure = failure - 1
@@ -1621,7 +1623,7 @@ function DoObjectTaskInside(TaskNumber,failure,taskveh,obj)
 
 	local pickedup = false
 	while not pickedup and failure > 0 do
-		Citizen.Wait(1)
+		Wait(1)
 		local d1,d2 = GetModelDimensions(GetEntityModel(taskveh))
 		local myCrds = GetOffsetFromEntityInWorldCoords(taskveh, 0.0,d1["y"]-0.5,0.0)
 		dst = #(plyCoords - myCrds)
@@ -1632,10 +1634,10 @@ function DoObjectTaskInside(TaskNumber,failure,taskveh,obj)
 			SetVehicleDoorOpen(taskveh, 2, 1, 1)
 			SetVehicleDoorOpen(taskveh, 3, 1, 1) 
 			TaskTurnPedToFaceEntity(plyId, taskveh, 1.0)
-			Citizen.Wait(500)
+			Wait(500)
 
 
-			Citizen.Wait(500)
+			Wait(500)
 			DetachEntity(obj)
 			attachObjPed(obj)
 			ClearPedTasks(plyId)
@@ -1650,7 +1652,7 @@ function DoObjectTaskInside(TaskNumber,failure,taskveh,obj)
 	local holdingPackage = true
 	dst = #(vector3(DeliveryLocation["x"],DeliveryLocation["y"],DeliveryLocation["z"]) - myCrds)
 	while dst > 0.8 and failure > 0 do
-		Citizen.Wait(1)
+		Wait(1)
 
 		local myCrds = plyCoords
 		dst = #(vector3(DeliveryLocation["x"],DeliveryLocation["y"],DeliveryLocation["z"]) - myCrds)
@@ -1670,7 +1672,7 @@ function DoObjectTaskInside(TaskNumber,failure,taskveh,obj)
 			holdingPackage = not holdingPackage
 			if holdingPackage then
 				CarryBoxAnim()
-				Citizen.Wait(500)
+				Wait(500)
 				attachObjPed(obj)
 			else
 				ClearPedTasks(plyId)
@@ -1690,7 +1692,7 @@ function DoObjectTaskInside(TaskNumber,failure,taskveh,obj)
 	local myCrds = plyCoords
 	dst = #(vector3(DeliveryLocation["x"]+1.9,DeliveryLocation["y"]-3.8,DeliveryLocation["z"]-23) - myCrds)
 	while failure > 0 and not plantedBox do
-		Citizen.Wait(1)
+		Wait(1)
 		
 		local myCrds = plyCoords
 		dst = #(vector3(DeliveryLocation["x"]+1.1,DeliveryLocation["y"]-3.8,DeliveryLocation["z"] - 23) - myCrds)
@@ -1699,7 +1701,7 @@ function DoObjectTaskInside(TaskNumber,failure,taskveh,obj)
 			holdingPackage = not holdingPackage
 			if holdingPackage then
 				CarryBoxAnim()
-				Citizen.Wait(500)
+				Wait(500)
 				attachObjPed(obj)
 			else
 				ClearPedTasks(plyId)
@@ -1731,7 +1733,7 @@ function DoObjectTaskInside(TaskNumber,failure,taskveh,obj)
 
 	local hasLeft = false
 	while failure > 0 and not hasLeft do
-		Citizen.Wait(1)
+		Wait(1)
 		local myCrds = plyCoords
 		dst = #(vector3(DeliveryLocation["x"],DeliveryLocation["y"],DeliveryLocation["z"]) - myCrds)
 		failure = failure - 1
@@ -1740,7 +1742,7 @@ function DoObjectTaskInside(TaskNumber,failure,taskveh,obj)
 			DrawText3DTest( (DeliveryLocation["x"] + 4.3),(DeliveryLocation["y"] - 15.95),(DeliveryLocation["z"]-21.42), 'RUN - ITS GONNA BLOW!' )
 			if (#(vector3(DeliveryLocation["x"] + 4.3,DeliveryLocation["y"] - 15.95,DeliveryLocation["z"]-24.42) - plyCoords) < 3.0 ) then
 				SetEntityCoords(plyId,DeliveryLocation["x"],DeliveryLocation["y"],DeliveryLocation["z"])
-				Citizen.Wait(10000)
+				Wait(10000)
 				hasLeft = true
 			end
 		end
@@ -1762,11 +1764,11 @@ function DoObjectTaskGroup(TaskNumber,failure,taskveh,obj)
 
 
 	TriggerServerEvent("gangTasks:newCoords",TaskNumber,activeTasks)
-	Citizen.Wait(1000)
+	Wait(1000)
 	SetGps(TaskNumber)
 
 	while dst > 50.0 and failure > 0 do
-		Citizen.Wait(1)
+		Wait(1)
 		local myCrds = plyCoords
 		dst = #(vector3(DeliveryLocation["x"],DeliveryLocation["y"],DeliveryLocation["z"]) - myCrds)
 		failure = failure - 1
@@ -1774,7 +1776,7 @@ function DoObjectTaskGroup(TaskNumber,failure,taskveh,obj)
 
 	local pickedup = false
 	while not pickedup and failure > 0 do
-		Citizen.Wait(1)
+		Wait(1)
 		local d1,d2 = GetModelDimensions(GetEntityModel(taskveh))
 		local myCrds = GetOffsetFromEntityInWorldCoords(taskveh, 0.0,d1["y"]-0.5,0.0)
 		dst = #(plyCoords - myCrds)
@@ -1785,10 +1787,10 @@ function DoObjectTaskGroup(TaskNumber,failure,taskveh,obj)
 			SetVehicleDoorOpen(taskveh, 2, 1, 1)
 			SetVehicleDoorOpen(taskveh, 3, 1, 1) 
 			TaskTurnPedToFaceEntity(plyId, taskveh, 1.0)
-			Citizen.Wait(500)
+			Wait(500)
 
 
-			Citizen.Wait(500)
+			Wait(500)
 			DetachEntity(obj)
 			attachObjPed(obj)
 			ClearPedTasks(plyId)
@@ -1804,7 +1806,7 @@ function DoObjectTaskGroup(TaskNumber,failure,taskveh,obj)
 	local holdingPackage = true
 	dst = #(vector3(DeliveryLocation["x"],DeliveryLocation["y"],DeliveryLocation["z"]) - myCrds)
 	while dst > 0.8 and failure > 0 do
-		Citizen.Wait(1)
+		Wait(1)
 
 		local myCrds = plyCoords
 		dst = #(vector3(DeliveryLocation["x"],DeliveryLocation["y"],DeliveryLocation["z"]) - myCrds)
@@ -1824,7 +1826,7 @@ function DoObjectTaskGroup(TaskNumber,failure,taskveh,obj)
 			holdingPackage = not holdingPackage
 			if holdingPackage then
 				CarryBoxAnim()
-				Citizen.Wait(500)
+				Wait(500)
 				attachObjPed(obj)
 			else
 				ClearPedTasks(plyId)
@@ -1839,7 +1841,7 @@ function DoObjectTaskGroup(TaskNumber,failure,taskveh,obj)
 	ClearPedTasks(plyId)
 	ClearPedSecondaryTask(plyId)
 	while dst < 20.0 and failure > 0 do
-		Citizen.Wait(1)
+		Wait(1)
 		DrawText3DTest(DeliveryLocation["x"],DeliveryLocation["y"],DeliveryLocation["z"], "Leave the Area.")
 		local myCrds = plyCoords
 		dst = #(vector3(DeliveryLocation["x"],DeliveryLocation["y"],DeliveryLocation["z"]) - myCrds)
@@ -1869,11 +1871,11 @@ function DoObjectTask(TaskNumber,failure,taskveh,obj)
 
 	TriggerServerEvent("gangTasks:newCoords",TaskNumber,activeTasks)
 
-	Citizen.Wait(1000)
+	Wait(1000)
 	SetGps(TaskNumber)
 
 	while dst > 50.0 and failure > 0 do
-		Citizen.Wait(1)
+		Wait(1)
 		local myCrds = plyCoords
 		dst = #(vector3(DeliveryLocation["x"],DeliveryLocation["y"],DeliveryLocation["z"]) - myCrds)
 		failure = failure - 1
@@ -1881,7 +1883,7 @@ function DoObjectTask(TaskNumber,failure,taskveh,obj)
 
 	local pickedup = false
 	while not pickedup and failure > 0 do
-		Citizen.Wait(1)
+		Wait(1)
 		local d1,d2 = GetModelDimensions(GetEntityModel(taskveh))
 		local myCrds = GetOffsetFromEntityInWorldCoords(taskveh, 0.0,d1["y"]-0.5,0.0)
 		dst = #(plyCoords - myCrds)
@@ -1892,10 +1894,10 @@ function DoObjectTask(TaskNumber,failure,taskveh,obj)
 			SetVehicleDoorOpen(taskveh, 2, 1, 1)
 			SetVehicleDoorOpen(taskveh, 3, 1, 1) 
 			TaskTurnPedToFaceEntity(plyId, taskveh, 1.0)
-			Citizen.Wait(500)
+			Wait(500)
 
 
-			Citizen.Wait(500)
+			Wait(500)
 			DetachEntity(obj)
 			attachObjPed(obj)
 			ClearPedTasks(plyId)
@@ -1911,7 +1913,7 @@ function DoObjectTask(TaskNumber,failure,taskveh,obj)
 	local holdingPackage = true
 	dst = #(vector3(DeliveryLocation["x"],DeliveryLocation["y"],DeliveryLocation["z"]) - myCrds)
 	while dst > 0.8 and failure > 0 do
-		Citizen.Wait(1)
+		Wait(1)
 
 		local myCrds = plyCoords
 		dst = #(vector3(DeliveryLocation["x"],DeliveryLocation["y"],DeliveryLocation["z"]) - myCrds)
@@ -1931,7 +1933,7 @@ function DoObjectTask(TaskNumber,failure,taskveh,obj)
 			holdingPackage = not holdingPackage
 			if holdingPackage then
 				CarryBoxAnim()
-				Citizen.Wait(500)
+				Wait(500)
 				attachObjPed(obj)
 			else
 				ClearPedTasks(plyId)
@@ -1946,7 +1948,7 @@ function DoObjectTask(TaskNumber,failure,taskveh,obj)
 	ClearPedTasks(plyId)
 	ClearPedSecondaryTask(plyId)
 	while dst < 20.0 and failure > 0 do
-		Citizen.Wait(1)
+		Wait(1)
 		DrawText3DTest(DeliveryLocation["x"],DeliveryLocation["y"],DeliveryLocation["z"], "Leave the Area.")
 		local myCrds = plyCoords
 		dst = #(vector3(DeliveryLocation["x"],DeliveryLocation["y"],DeliveryLocation["z"]) - myCrds)
@@ -2009,7 +2011,7 @@ function DoBodyTask(TaskNumber,failure,taskveh,ped)
 
 	local taskcomplete = false
 	while dst > 15.0 and failure > 0 do
-		Citizen.Wait(1)
+		Wait(1)
 		local myCrds = plyCoords
 		dst = #(tskCrds - myCrds)
 		tskCrds = GetEntityCoords(taskveh)
@@ -2032,7 +2034,7 @@ function DoBodyTask(TaskNumber,failure,taskveh,ped)
 	while dst > 5.0 and failure > 0 do
 		local myCrds = plyCoords
 		dst = #(vector3(954.92,-2184.58,30.56) - myCrds)
-		Citizen.Wait(1)
+		Wait(1)
 	end
 
 	local bodyTaken = false
@@ -2042,14 +2044,14 @@ function DoBodyTask(TaskNumber,failure,taskveh,ped)
 		local myCrds = GetOffsetFromEntityInWorldCoords(taskveh, 0.0,d1["y"]-0.5,0.0)
 		dst = #(plyCoords - myCrds)
 		DrawText3DTest(myCrds["x"],myCrds["y"],myCrds["z"], "["..Controlkey["generalUse"][2].."] Take The Body")
-		Citizen.Wait(1)		
+		Wait(1)		
 	    if IsControlJustPressed(0, Controlkey["generalUse"][1]) and dst < 1.5 then
 			loadAnim('anim@narcotics@trash')
 			TaskPlayAnim(plyId,'anim@narcotics@trash', 'drop_front',0.9, -8, 1500, 49, 3.0, 0, 0, 0) 
 			TaskTurnPedToFaceEntity(plyId, taskveh, 1.0)
 			SetVehicleDoorOpen(taskveh, 2, 1, 1)
 			SetVehicleDoorOpen(taskveh, 3, 1, 1)   
-			Citizen.Wait(1600)
+			Wait(1600)
 			ClearPedTasks(plyId)	  
 			bodyTaken = true 
 
@@ -2079,7 +2081,7 @@ function DoBodyTask(TaskNumber,failure,taskveh,ped)
 	SetGps(TaskNumber)
 	while (dst > 2.0 or not holdingBody) and failure > 0 do
 
-		Citizen.Wait(1)
+		Wait(1)
 
 		if holdingBody then
 			DrawText3DTest(975.0, -2165.9, 29.47, "Dispose of Body")
@@ -2144,7 +2146,7 @@ AddEventHandler("gangTasks:killTask", function(cidsent,TaskNumber)
 		return
 	end
 
-	Citizen.Wait(1000)
+	Wait(1000)
 	TriggerEvent("DoLongHudText", activeTasks[TaskNumber]["TaskInfo"])
 
 	local dst = #(vector3(activeTasks[TaskNumber]["Location"]["x"],activeTasks[TaskNumber]["Location"]["y"],activeTasks[TaskNumber]["Location"]["z"]) - myCrds)
@@ -2153,7 +2155,7 @@ AddEventHandler("gangTasks:killTask", function(cidsent,TaskNumber)
 
 	local failure = 180000
 	while dst > 150.0 and failure > 0 do
-		Citizen.Wait(1)
+		Wait(1)
 		local myCrds = plyCoords
 		dst = #(vector3(activeTasks[TaskNumber]["Location"]["x"],activeTasks[TaskNumber]["Location"]["y"],activeTasks[TaskNumber]["Location"]["z"]) - myCrds)
 		failure = failure - 1
@@ -2172,7 +2174,7 @@ AddEventHandler("gangTasks:killTask", function(cidsent,TaskNumber)
 	while failure > 0 and not IsEntityDead(ped) do
 		local crds = GetEntityCoords(ped)
 		DrawText3DTest(crds["x"],crds["y"],crds["z"], "Target")
-		Citizen.Wait(1)
+		Wait(1)
 	end
 
 	if IsEntityDead(ped) and failure > 0 then
@@ -2224,10 +2226,10 @@ local storageCoords = {
 	[14] =  { ["groupid"] = "sahara_int", ['x'] = 883.26,['y'] = -3202.7,['z'] = -98.2,['h'] = 231.69, ['info'] = ' Sahara Stash' },
 }
 
-Citizen.CreateThread( function()
+CreateThread( function()
 	while not plyCoords
 	do
-		Citizen.Wait(2000)
+		Wait(2000)
 		plyId = PlayerPedId()
 		plyCoords = GetEntityCoords(plyId)
 	end
@@ -2255,9 +2257,9 @@ Citizen.CreateThread( function()
 			end
 		end
 		if dst > 5.0 then
-			Citizen.Wait(3000)
+			Wait(3000)
 		else
-			Citizen.Wait(1)
+			Wait(1)
 		end
 	end
 end)
@@ -2335,7 +2337,7 @@ function createTreeObject(num)
 
 	RequestModel(treeModel)
 	while not HasModelLoaded(treeModel) do
-		Citizen.Wait(100)
+		Wait(100)
 
 	end
 
@@ -2506,7 +2508,7 @@ AddEventHandler("weed:giveitems", function(strain)
 			TriggerEvent( "player:receiveItem","weedq",math.random(3,8))
 		else
 
-			Citizen.Wait(500)
+			Wait(500)
 			TriggerEvent( "player:receiveItem","weedq",math.random(10,25))
 		end
 	end
@@ -2519,14 +2521,14 @@ AddEventHandler("inhouse", function(status)
 	inhouse = status
 end)
 
-Citizen.CreateThread( function()
+CreateThread( function()
 	local counter = 0
 	while true do 
 
 		if not inhouse then
-			Citizen.Wait(3000)
+			Wait(3000)
 		else
-			Citizen.Wait(1)
+			Wait(1)
 			local close = 0
 			local dst = 1000.0
 			for i = 1, #crops do
@@ -2558,7 +2560,7 @@ Citizen.CreateThread( function()
 				if counter > 0 or counter < 0 then
 					counter = 0
 				end
-				Citizen.Wait(math.ceil(dst*3))
+				Wait(math.ceil(dst*3))
 			else
 				if #(vector3(crops[close]["x"],crops[close]["y"],crops[close]["z"]-0.3) - plyCoords) < 10.0 then
 					local num = tonumber(crops[close]["status"])
