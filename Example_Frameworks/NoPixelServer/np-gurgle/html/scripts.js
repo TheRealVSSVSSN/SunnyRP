@@ -1,79 +1,59 @@
-$(document).ready(function(){
-  // Mouse Controls
-  var documentWidth = document.documentElement.clientWidth;
-  var documentHeight = document.documentElement.clientHeight;
-  var cursor = $('#cursor');
-  var cursorX = documentWidth / 2;
-  var cursorY = documentHeight / 2;
+document.addEventListener('DOMContentLoaded', () => {
+    const cursor = document.getElementById('cursor');
+    let cursorX = document.documentElement.clientWidth / 2;
+    let cursorY = document.documentElement.clientHeight / 2;
 
-  function UpdateCursorPos() {
-      $('#cursor').css('left', cursorX+2);
-      $('#cursor').css('top', cursorY+2);
-  }
-
-  function triggerClick(x, y) {
-      var element = $(document.elementFromPoint(x, y));
-      element.focus().click();
-      return true;
-  }
-
-  // Partial Functions
-  function closeMain() {
-    $(".body").fadeOut(100); 
-    $(".home").fadeOut(100); 
-  }
-
-  function closeAll() {
-    $(".body").fadeOut(100); 
-    $(".home").fadeOut(100); 
-  }
-
-  function openContracts() {
-    $(".contract-container").fadeIn(100); 
-  }
-  $(".btnSubmit").click(function(){
-
-      $.post('http://np-gurgle/btnSubmit', JSON.stringify({
-          websiteName: $(".contractID").val(),
-          websiteKeywords: $(".contractAmount").val(),
-          websiteDescription: $(".contractInfo").val()
-      }));
-
-  });
-
-  // Listen for NUI Events
-  window.addEventListener('message', function(event){
-    var item = event.data;
-    // Trigger adding a new warrant to the log and create its display
- 
-    // Open sub-windows / partials
-
-
-    if(item.openSection == "openGurgle") {
-      $(".home").fadeIn(100); 
-      $(".contract-container").fadeIn(100); 
-      $("#cursor").css("display", "Block");
+    function updateCursorPos() {
+        cursor.style.left = `${cursorX + 2}px`;
+        cursor.style.top = `${cursorY + 2}px`;
     }
 
-    if(item.openSection == "closeGurgle") {
-      $(".home").css("display", "none");
-      $(".contract-container").css("display", "none");
-      $("#cursor").css("display", "none");
+    function openMain() {
+        document.querySelector('.home').style.display = 'block';
+        document.querySelector('.contract-container').style.display = 'block';
+        cursor.style.display = 'block';
     }
 
-
-  });
-
-  $(document).mousemove(function(event) {
-    cursorX = event.pageX;
-    cursorY = event.pageY;
-    UpdateCursorPos();
-  });
-
-  // On 'Esc' call close method
-  document.onkeyup = function (data) {
-    if ( data.which == 27 ) {
-      $.post('http://np-gurgle/close', JSON.stringify({}));
+    function closeMain() {
+        document.querySelector('.home').style.display = 'none';
+        document.querySelector('.contract-container').style.display = 'none';
+        cursor.style.display = 'none';
     }
-  };
+
+    document.querySelector('.btnSubmit').addEventListener('click', () => {
+        fetch('https://np-gurgle/btnSubmit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+            body: JSON.stringify({
+                websiteName: document.querySelector('.contractID').value,
+                websiteKeywords: document.querySelector('.contractAmount').value,
+                websiteDescription: document.querySelector('.contractInfo').value
+            })
+        });
+    });
+
+    window.addEventListener('message', (event) => {
+        const item = event.data;
+        if (item.openSection === 'openGurgle') {
+            openMain();
+        } else if (item.openSection === 'closeGurgle') {
+            closeMain();
+        }
+    });
+
+    document.addEventListener('mousemove', (event) => {
+        cursorX = event.pageX;
+        cursorY = event.pageY;
+        updateCursorPos();
+    });
+
+    document.addEventListener('keyup', (event) => {
+        if (event.key === 'Escape') {
+            fetch('https://np-gurgle/close', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+                body: '{}'
+            });
+        }
+    });
 });
