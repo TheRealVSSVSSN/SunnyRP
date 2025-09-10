@@ -1,19 +1,25 @@
--- This resource is part of the default Cfx.re asset pack (cfx-server-data)
--- Altering or recreating for local use only is strongly discouraged.
+--[[
+    -- Type: Resource Manifest
+    -- Name: example-loadscreen
+    -- Use: Provides a simple loading screen for the server
+    -- Created: 2024-02-14
+    -- By: VSSVSSN
+--]]
 
-version '1.0.0'
-author 'Cfx.re <root@cfx.re>'
+fx_version 'cerulean'
+game 'gta5'
+
+author 'Cfx.re <root@cfx.re> / Updated by VSSVSSN'
 description 'Example loading screen.'
+version '1.1.0'
 repository 'https://github.com/citizenfx/cfx-server-data'
 
 files {
     'index.html',
     'keks.css',
+    'loadscreen.js',
     'bankgothic.ttf',
     'loadscreen.jpg'
 }
 
 loadscreen 'index.html'
-
-fx_version 'bodacious'
-game 'gta5'
