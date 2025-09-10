@@ -1,10 +1,12 @@
 fx_version 'cerulean'
-games {'gta5'}
+game 'gta5'
 
-description 'bitch'
+author 'SunnyRP'
+description 'Weapon metadata definitions for custom gameplay tweaks.'
+version '1.0.0'
 
 files {
-	'gunmeta.meta'
+    'gunmeta.meta'
 }
 
 data_file 'WEAPONINFO_FILE' 'gunmeta.meta'
