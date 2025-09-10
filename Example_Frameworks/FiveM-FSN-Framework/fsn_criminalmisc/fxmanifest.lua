@@ -1,5 +1,5 @@
 --[[/	:FSN:	\]]--
-fx_version 'adamant'
+fx_version 'cerulean'
 game 'gta5'
 
 client_script '@fsn_main/cl_utils.lua'
@@ -39,10 +39,8 @@ client_script 'weaponinfo/weapon_list.lua'
 server_script 'weaponinfo/server.lua'
 
 -- drugs
-client_script 'drugs/client.lua'
 client_script 'drugs/_streetselling/client.lua'
 server_script 'drugs/_streetselling/server.lua'
-client_script 'drugs/_weedprocess/client.lua'
 client_script 'drugs/_effects/client.lua'
 
 -- pawnstore
@@ -51,6 +49,6 @@ client_script 'pawnstore/cl_pawnstore.lua'
 exports {
 	"GetWeapons",
 	"weaponInfo",
-	"HoldingWeapon",
-	"GetWeaponInfo"
+        "HoldingWeapon",
+        "GetWeaponInfo"
 }
