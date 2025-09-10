@@ -1,3 +1,11 @@
+--[[
+    -- Type: Client Script
+    -- Name: chostility
+    -- Use: Configures NPC relationship groups and hostility
+    -- Created: 2024-08-18
+    -- By: VSSVSSN
+--]]
+
 local curWatchingPeds = {}
 local relationshipTypes = {
   "PLAYER",
@@ -13,17 +21,18 @@ local relationshipTypes = {
 
 
 --- Utility generate UUID for Event
+math.randomseed(GetGameTimer())
+
 local function uuid()
-  math.randomseed(GetCloudTimeAsInt())
-  local template ='xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
-  return string.gsub(template, '[xy]', function (c)
+  local template = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
+  return string.gsub(template, '[xy]', function(c)
       local v = (c == 'x') and math.random(0, 0xf) or math.random(8, 0xb)
       return string.format('%x', v)
   end)
 end
 
 
-colors = {
+local colors = {
 --[0] = "Metallic Black",
 [1] = "Metallic Graphite Black",
 [2] = "Metallic Black Steel",
@@ -331,7 +340,7 @@ colors = {
  --   SetPedRelationshipGroupDefaultHash(PlayerPedId(),`MISSION8`)
 
 
-Citizen.CreateThread(function()
+CreateThread(function()
   while true do
   Wait(600)
       for _, group in ipairs(relationshipTypes) do
@@ -462,7 +471,7 @@ end)
 
 RegisterNetEvent('gangs:setDefaultRelations')
 AddEventHandler("gangs:setDefaultRelations",function() 
-    Citizen.Wait(1000)
+    Wait(1000)
     for _, group in ipairs(relationshipTypes) do
       SetRelationshipBetweenGroups(0, `PLAYER`,GetHashKey(group))
       SetRelationshipBetweenGroups(0, GetHashKey(group), `PLAYER`)
@@ -512,7 +521,7 @@ AddEventHandler("gangs:setHatredFull",function()
       if #(curcoords - startcoords) > 25.0 or IsPedFatallyInjured(PlayerPedId()) then
         timer = 0
       end
-      Citizen.Wait(1)
+      Wait(1)
     end
     TriggerEvent("ressurection:relationships:norevive")
     TriggerEvent("gangs:setDefaultRelations")
@@ -557,7 +566,7 @@ end)
 function LoadAnimationDictionary(animationD) -- Simple way to load animation dictionaries to save lines.
   while(not HasAnimDictLoaded(animationD)) do
     RequestAnimDict(animationD)
-    Citizen.Wait(1)
+    Wait(1)
   end
 end
 
@@ -623,9 +632,9 @@ AddEventHandler("civilian:alertPolice",function(basedistance,alertType,objPassed
       if not isSpeeder and alertType ~= "robberyhouse" then
         RequestAnimDict("amb@code_human_wander_texting@male@base")
         while not HasAnimDictLoaded("amb@code_human_wander_texting@male@base") do
-          Citizen.Wait(0)
+          Wait(0)
         end
-        Citizen.Wait(1000)
+        Wait(1000)
         if GetEntityHealth(nearNPC) < GetEntityMaxHealth(nearNPC) then
           return
         end
@@ -649,7 +658,7 @@ AddEventHandler("civilian:alertPolice",function(basedistance,alertType,objPassed
         underground = true
     end        
 
-    Citizen.Wait(math.random(5000))
+    Wait(math.random(5000))
 
     if alertType == "drugsale" and not underground and not pd then
       if dst > 12.0 and dst < 18.0 then
@@ -1463,7 +1472,7 @@ function AlertVault()
   end
 
 function AlertGunShot()
-  Citizen.CreateThread(function() 
+  CreateThread(function() 
     local street1 = GetStreetAndZone()
     local gender = IsPedMale(PlayerPedId())
     local plyPos = GetEntityCoords(PlayerPedId())
@@ -1830,7 +1839,7 @@ AddEventHandler("TriggerAIRunning",function(p)
     while dist > 3.5 and (imdead == 1 or imcollapsed == 1) do
       TaskGoStraightToCoord(usingped, moveto, 2.5, -1, 0.0, 0.0)
       dist = #(moveto - GetEntityCoords(usingped))
-      Citizen.Wait(100)
+      Wait(100)
     end
 
     ClearPedTasksImmediately(ped)
@@ -1839,7 +1848,7 @@ AddEventHandler("TriggerAIRunning",function(p)
 
     TaskTurnPedToFaceEntity(usingped, PlayerPedId(), 5500)
 
-    Citizen.Wait(3000)
+    Wait(3000)
 
     if math.random(3) == 2 then
       TaskStartScenarioInPlace(usingped, tasksIdle[2], 0, 1)
@@ -1853,12 +1862,12 @@ AddEventHandler("TriggerAIRunning",function(p)
     SetPedKeepTask(usingped, true) 
 
     while imdead == 1 or imcollapsed == 1 do
-      Citizen.Wait(1)
+      Wait(1)
       if not IsPedFacingPed(usingped, PlayerPedId(), 15.0) then
           ClearPedTasksImmediately(ped)
           TaskLookAtEntity(usingped, PlayerPedId(), 5500.0, 2048, 3)
           TaskTurnPedToFaceEntity(usingped, PlayerPedId(), 5500)
-          Citizen.Wait(3000)
+          Wait(3000)
       end
     end
 

@@ -1,6 +1,14 @@
-activeTasks = {}
+--[[
+    -- Type: Client Script
+    -- Name: taskconfig
+    -- Use: Configures task locations and handles status events
+    -- Created: 2024-08-18
+    -- By: VSSVSSN
+--]]
 
-workArray = {
+local activeTasks = {}
+
+local workArray = {
     [1] =  { ['x'] = 1062.82,['y'] = -3193.71,['z'] = -39.1,['h'] = 90.73, ['info'] = ' Replace Rubber Connectors', ["itemid"] = 33, ["name"] = "Rubber" },
     [2] =  { ['x'] = 1051.63,['y'] = -3190.59,['z'] = -39.13,['h'] = 218.47, ['info'] = ' Replace Rubber Connectors', ["itemid"] = 33, ["name"] = "Rubber" },
     [3] =  { ['x'] = 1057.61,['y'] = -3200.09,['z'] = -39.1,['h'] = 86.26, ['info'] = ' Replace Rubber Connectors', ["itemid"] = 33, ["name"] = "Rubber" },
@@ -15,7 +23,7 @@ workArray = {
 }
 
 
-workArray2 = {
+local workArray2 = {
     [1] =  { ['x'] = 1089.95,['y'] = -3198.86,['z'] = -38.99,['h'] = 184.41, ['info'] = ' Check Product', ["itemid"] = 33, ["name"] = "Rubber" },
     [2] =  { ['x'] = 1093.53,['y'] = -3199.12,['z'] = -38.99,['h'] = 178.7, ['info'] = ' Check Product', ["itemid"] = 33, ["name"] = "Rubber" },
     [3] =  { ['x'] = 1100.16,['y'] = -3198.62,['z'] = -38.99,['h'] = 196.58, ['info'] = ' Check Product', ["itemid"] = 33, ["name"] = "Rubber" },
@@ -24,7 +32,7 @@ workArray2 = {
 }
 
 
-clientstockamount = {
+local clientstockamount = {
   [1] = { ["value"] = 3.00 },
   [2] = { ["value"] = 0.00 },
   [3] = { ["value"] = 0.00 },
@@ -32,87 +40,71 @@ clientstockamount = {
   [5] = { ["value"] = 0.00 },
   [6] = { ["value"] = 0.00 },
 }
-RegisterNetEvent('stocks:clientvalueupdate');
-AddEventHandler('stocks:clientvalueupdate', function(sentvalues)
+RegisterNetEvent('stocks:clientvalueupdate', function(sentvalues)
     clientstockamount = sentvalues
-    print(json.encode(clientstockamount))
 end)
 
-RegisterCommand('fuckyoubitch', function(source, args)
-TriggerServerEvent('stocks:retrieve')
+RegisterCommand('gangtasks_retrieve', function()
+    TriggerServerEvent('stocks:retrieve')
 end)
 
-RegisterNetEvent('weed:currentStatus')
-AddEventHandler('weed:currentStatus', function(weed_level,weed_percent,weed_status,weed_amount)
-    TriggerEvent("chatMessage", "TASK ", { 195, 255, 255 }, "Current Batch: " .. weed_percent .. "% | Crates Available: " .. weed_amount)
+RegisterNetEvent('weed:currentStatus', function(level, percent, status, amount)
+    TriggerEvent('chatMessage', 'TASK', {195, 255, 255}, ('Current Batch: %s%% | Crates Available: %s'):format(percent, amount))
 end)
 
-RegisterNetEvent('weed:currentStatusServer')
-AddEventHandler('weed:currentStatusServer', function()
-    TriggerServerEvent("weed:currentStatus")
+RegisterNetEvent('weed:currentStatusServer', function()
+    TriggerServerEvent('weed:currentStatus')
 end)
 
-RegisterNetEvent('weed:weedCrate')
-AddEventHandler('weed:weedCrate', function()
-    TriggerServerEvent("weed:takeCrateServer")
+RegisterNetEvent('weed:weedCrate', function()
+    TriggerServerEvent('weed:takeCrateServer')
 end)
 
-RegisterNetEvent('gunrunner:currentStatus')
-AddEventHandler('gunrunner:currentStatus', function(gunrunner_level,gunrunner_percent,gunrunner_status,gunrunner_amount)
-    if gunrunner_status == 0 then gunrunner_status = "No Task Being Done" else gunrunner_status = "Task In Process" end
-    TriggerEvent("chatMessage", "TASK ", { 195, 255, 255 }, "Current Batch: " .. gunrunner_percent .. "% | Crates Available: " .. gunrunner_amount)
+RegisterNetEvent('gunrunner:currentStatus', function(level, percent, status, amount)
+    local state = status == 0 and 'No Task Being Done' or 'Task In Process'
+    TriggerEvent('chatMessage', 'TASK', {195, 255, 255}, ('Current Batch: %s%% | Crates Available: %s'):format(percent, amount))
 end)
 
-RegisterNetEvent('gunrunner:currentStatusServer')
-AddEventHandler('gunrunner:currentStatusServer', function()
-    TriggerServerEvent("gunrunner:currentStatus")
+RegisterNetEvent('gunrunner:currentStatusServer', function()
+    TriggerServerEvent('gunrunner:currentStatus')
 end)
 
-RegisterNetEvent('gunrunner:takeCrate')
-AddEventHandler('gunrunner:takeCrate', function()
-    TriggerServerEvent("gunrunner:takeCrateServer")
-
+RegisterNetEvent('gunrunner:takeCrate', function()
+    TriggerServerEvent('gunrunner:takeCrateServer')
 end)
 
 
 
 
 
-RegisterNetEvent('launder:currentStatus')
-AddEventHandler('launder:currentStatus', function(launder_level,launder_percent,launder_status,launder_amount)
-    if launder_status == 0 then launder_status = "No Task Being Done" else launder_status = "Task In Process" end
-    TriggerEvent("chatMessage", "TASK ", { 195, 255, 255 }, "Current Batch: " .. launder_percent .. "% | Crates Available: " .. launder_amount)
+RegisterNetEvent('launder:currentStatus', function(level, percent, status, amount)
+    local state = status == 0 and 'No Task Being Done' or 'Task In Process'
+    TriggerEvent('chatMessage', 'TASK', {195, 255, 255}, ('Current Batch: %s%% | Crates Available: %s'):format(percent, amount))
 end)
 
-RegisterNetEvent('launder:currentStatusServer')
-AddEventHandler('launder:currentStatusServer', function()
-    TriggerServerEvent("launder:currentStatus")
+RegisterNetEvent('launder:currentStatusServer', function()
+    TriggerServerEvent('launder:currentStatus')
 end)
 
-RegisterNetEvent('launder:launderCrate')
-AddEventHandler('launder:launderCrate', function()
-    TriggerServerEvent("launder:launderCrateServer")
+RegisterNetEvent('launder:launderCrate', function()
+    TriggerServerEvent('launder:launderCrateServer')
 end)
 
 
 
 
 
-RegisterNetEvent('cocaine:currentStatus')
-AddEventHandler('cocaine:currentStatus', function(cocaine_level,cocaine_percent,cocaine_status,cocaine_amount)
-    if cocaine_status == 0 then cocaine_status = "No Task Being Done" else cocaine_status = "Task In Process" end
-    TriggerEvent("chatMessage", "TASK ", { 195, 255, 255 }, "Current Batch: " .. cocaine_percent .. "% | Crates Available: " .. cocaine_amount)
+RegisterNetEvent('cocaine:currentStatus', function(level, percent, status, amount)
+    local state = status == 0 and 'No Task Being Done' or 'Task In Process'
+    TriggerEvent('chatMessage', 'TASK', {195, 255, 255}, ('Current Batch: %s%% | Crates Available: %s'):format(percent, amount))
 end)
 
-RegisterNetEvent('cocaine:currentStatusServer')
-AddEventHandler('cocaine:currentStatusServer', function()
-   
-    TriggerServerEvent("cocaine:currentStatus")
+RegisterNetEvent('cocaine:currentStatusServer', function()
+    TriggerServerEvent('cocaine:currentStatus')
 end)
 
-RegisterNetEvent('cocaine:methCrate')
-AddEventHandler('cocaine:methCrate', function()
-    TriggerEvent("pixerium:check",15,"cocaine:takeCrateServer",true)
+RegisterNetEvent('cocaine:methCrate', function()
+    TriggerEvent('pixerium:check', 15, 'cocaine:takeCrateServer', true)
 end)
 
 
@@ -140,9 +132,8 @@ end)
 
 
 
-RegisterNetEvent("gangTasks:updateClients")
-AddEventHandler("gangTasks:updateClients", function(newTasks)
-	activeTasks = newTasks
+RegisterNetEvent('gangTasks:updateClients', function(newTasks)
+    activeTasks = newTasks
 end)
 
 function DrawText3DTest(x,y,z, text)
@@ -165,14 +156,14 @@ function loadModel(modelName)
     RequestModel(GetHashKey(modelName))
     while not HasModelLoaded(GetHashKey(modelName)) do
         RequestModel(GetHashKey(modelName))
-        Citizen.Wait(1)
+        Wait(1)
     end
 end
 
 function loadAnim( dict )
     while ( not HasAnimDictLoaded( dict ) ) do
         RequestAnimDict( dict )
-        Citizen.Wait( 5 )
+        Wait( 5 )
     end
 end 
 

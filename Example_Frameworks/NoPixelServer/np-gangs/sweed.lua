@@ -1,41 +1,46 @@
-local crops = {}
+--[[
+    -- Type: Server Script
+    -- Name: sweed
+    -- Use: Manages weed plant lifecycle and persistence
+    -- Created: 2024-08-18
+    -- By: VSSVSSN
+--]]
 
-RegisterServerEvent("weed:createplant")
-AddEventHandler("weed:createplant", function(x,y,z, seed)
+RegisterNetEvent("weed:createplant")
+AddEventHandler("weed:createplant", function(x, y, z, seed)
     local src = source
     local user = exports["np-base"]:getModule("Player"):GetUser(src)
+    if not user then return end
     local character = user:getCurrentCharacter()
-    local xyz = x,y,z
+    local coords = { x = x, y = y, z = z }
 
-    exports.ghmattimysql:execute("INSERT INTO weed_plants (coords, seed, owner) VALUE (@coord, @seed, @owner)", {
-        ['@coord'] = json.encode(xyz),
-        ['@seed'] = seed,
-        ['@owner'] = char.id,
-    })
-    crops[#crops+1] = json.encode(xyz), seed
-
+    exports.ghmattimysql:execute(
+        "INSERT INTO weed_plants (coords, seed, owner) VALUES (@coord, @seed, @owner)",
+        {
+            ['@coord'] = json.encode(coords),
+            ['@seed'] = seed,
+            ['@owner'] = character.id
+        }
+    )
 end)
 
-RegisterServerEvent("weed:killplant")
+RegisterNetEvent("weed:killplant")
 AddEventHandler("weed:killplant", function(dbId)
-    exports.ghmattimysql:execute("DELETE FROM weed_plants WHERE id = @id", {
-        ['@id'] = dbId,
-    })
-    -- need to remove from table at here
+    exports.ghmattimysql:execute("DELETE FROM weed_plants WHERE id = @id", { ['@id'] = dbId })
 end)
 
-RegisterServerEvent("weed:UpdateWeedGrowth")
-AddEventHandler("weed:UpdateWeedGrowth", function(dbId, new)
-	exports.ghmattimysql:Execute("UPDATE weed_plants SET growth = @new WHERE id = @db",{
-        ['growth'] = new, 
-        ['db'] = dbId
-    })
+RegisterNetEvent("weed:UpdateWeedGrowth")
+AddEventHandler("weed:UpdateWeedGrowth", function(dbId, growth)
+    exports.ghmattimysql:execute(
+        "UPDATE weed_plants SET growth = @growth WHERE id = @id",
+        { ['@growth'] = growth, ['@id'] = dbId }
+    )
 end)
 
-RegisterServerEvent("weed:requestTable")
+RegisterNetEvent("weed:requestTable")
 AddEventHandler("weed:requestTable", function()
-    exports.ghmattimysql:execute('SELECT * FROM weed_plants', {}, function(result)
-        crops[#crops+1] = result
-        TriggerClientEvent("weed:currentcrops", -1, result)
+    local src = source
+    exports.ghmattimysql:execute("SELECT * FROM weed_plants", {}, function(result)
+        TriggerClientEvent("weed:currentcrops", src, result or {})
     end)
 end)
