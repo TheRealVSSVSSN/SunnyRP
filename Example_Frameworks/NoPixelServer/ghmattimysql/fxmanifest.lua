@@ -1,5 +1,6 @@
-fx_version 'adamant'
-game 'common'
+fx_version 'cerulean'
+game 'gta5'
+lua54 'yes'
 
 name 'ghmattimysql'
 description 'MySQL Middleware for fivem using mysql.js.'

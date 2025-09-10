@@ -1,14 +1,24 @@
-RegisterServerEvent('carwash:checkmoney')
-AddEventHandler('carwash:checkmoney', function()
-	local src = source
-	local player = exports["np-base"]:getModule("Player"):GetUser(src)
-	local costs = 70
+--[[
+    Type: Server Script
+    Name: carwash_server.lua
+    Use: Validates player funds and processes carwash payments.
+    Created: 2024-06-05
+    By: VSSVSSN
+]]
 
-	if player:getCash() >= costs then
-		TriggerClientEvent("carwash:success", src)
-		player:removeMoney(costs)
-	else
-		moneyleft = costs - player:getCash()
-		TrigerClientEvent('notenoughmoney', src, moneyleft)
-	end
+local PRICE = 70
+
+RegisterNetEvent('carwash:checkmoney', function()
+    local src = source
+    local user = exports['np-base']:getModule('Player'):GetUser(src)
+
+    if not user then return end
+
+    if user:getCash() >= PRICE then
+        user:removeMoney(PRICE)
+        TriggerClientEvent('carwash:success', src, PRICE)
+    else
+        local short = PRICE - user:getCash()
+        TriggerClientEvent('carwash:notenoughmoney', src, short)
+    end
 end)

@@ -109,25 +109,33 @@ finishCleanTask = {
     ["z"] = 45.67
 }
 
+--[[ 
+    -- Type: Function
+    -- Name: deleteClosestTray
+    -- Use: Removes the nearest food tray prop within a small radius
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 function deleteClosestTray()
---foodTrays
-
-    local closestDist = 9999.9
     local ped = PlayerPedId()
-    local closesttray
-    local obj
-    local curDist
-    for i=1,#foodTrays do
-        obj = GetClosestObjectOfType(GetEntityCoords(ped).x, GetEntityCoords(ped).y, GetEntityCoords(ped).z, 3.0, GetHashKey(foodTrays[i]), false, true ,true)
-        curDist = #(GetEntityCoords(PlayerPedId(), 0) - GetEntityCoords(obj))
-        if curDist < closestDist then
-            closestDist = curDist
-            closesttray = obj
-        
+    local pedCoords = GetEntityCoords(ped)
+    local closest, closestDist = nil, 3.0
+
+    for i = 1, #foodTrays do
+        local obj = GetClosestObjectOfType(pedCoords.x, pedCoords.y, pedCoords.z, closestDist, GetHashKey(foodTrays[i]), false, true, true)
+        if obj ~= 0 then
+            local dist = #(pedCoords - GetEntityCoords(obj))
+            if dist < closestDist then
+                closestDist = dist
+                closest = obj
+            end
         end
     end
-    SetEntityVisible(closesttray, false)
- 
+
+    if closest and closest ~= 0 then
+        SetEntityAsMissionEntity(closest, true, true)
+        DeleteObject(closest)
+    end
 end
 
 
@@ -144,7 +152,7 @@ end)
 
 local RECLAIM_COORDS = vector3(1841.66, 2580.5, 45.02)
 local playerCoords = GetEntityCoords(PlayerPedId())
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
         local waitCheck = #(playerCoords - RECLAIM_COORDS)
         if waitCheck < 15 then
@@ -163,10 +171,10 @@ Citizen.CreateThread(function()
     end
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
         playerCoords = GetEntityCoords(PlayerPedId())
-        Citizen.Wait(1000)
+        Wait(1000)
     end
 end)
 
@@ -176,7 +184,7 @@ function drink()
     loadAnimDict( "mp_player_intdrink" ) 
 
     TaskPlayAnim( PlayerPedId(), "mp_player_intdrink", "loop_bottle", 8.0, 1.0, -1, 49, 0, 0, 0, 0 )
-    Citizen.Wait(5000)
+    Wait(5000)
 
     endanimation()
 end
@@ -188,7 +196,7 @@ end
 function loadAnimDict( dict )
     while ( not HasAnimDictLoaded( dict ) ) do
         RequestAnimDict( dict )
-        Citizen.Wait( 5 )
+        Wait( 5 )
     end
 end
 
@@ -353,7 +361,7 @@ AddEventHandler('ai:isJailBreak', function()
 end)
 
 function runEscape()
-    Citizen.CreateThread(function()
+    CreateThread(function()
       local timer = 0
       local teleported = false
       while jailbreak do 
@@ -505,12 +513,12 @@ function JailIntro(name,years,cid,date)
     
     TriggerEvent("police:remmaskAccepted")
     TriggerServerEvent("request:vinewooddel")
-    Citizen.Wait(1000)
+    Wait(1000)
 
     local timer = 0
     while timer ~= -1 do
         timer = timer + 1
-        Citizen.Wait(1)
+        Wait(1)
 
         SetEntityCoords(PlayerPedId(),475.2691,-1003.725,25.47)
         if IsInteriorReady(GetInteriorAtCoords(475.2691,-1003.725,25.47)) or timer > 1000 then
@@ -522,31 +530,31 @@ function JailIntro(name,years,cid,date)
 
     SetEntityCoords(PlayerPedId(),475.2691,-1003.725,25.47)
     SetEntityHeading(PlayerPedId(),356.0)
-    Citizen.Wait(1500) 
+    Wait(1500) 
     DoScreenFadeIn(500)
     TriggerEvent("attachItemCONLOL","con1",name,years,cid,date)
     TriggerEvent('InteractSound_CL:PlayOnOne', 'photo', 0.4)
-    Citizen.Wait(3000) 
+    Wait(3000) 
     TriggerEvent('InteractSound_CL:PlayOnOne', 'photo', 0.4)
-    Citizen.Wait(3000)     
+    Wait(3000)     
     SetEntityHeading(PlayerPedId(),-355.74) 
 
     TriggerEvent('InteractSound_CL:PlayOnOne', 'photo', 0.4)
-    Citizen.Wait(3000)  
+    Wait(3000)  
     TriggerEvent('InteractSound_CL:PlayOnOne', 'photo', 0.4)
-    Citizen.Wait(3000)         
+    Wait(3000)         
     SetEntityHeading(PlayerPedId(),170.74) 
 
     TriggerEvent('InteractSound_CL:PlayOnOne', 'photo', 0.4)
-    Citizen.Wait(3000) 
+    Wait(3000) 
      TriggerEvent('InteractSound_CL:PlayOnOne', 'photo', 0.4)
-    Citizen.Wait(3000)       
+    Wait(3000)       
 
     SetEntityHeading(PlayerPedId(),270.0)
 
-    Citizen.Wait(2000)
+    Wait(2000)
     DoScreenFadeOut(1100)   
-    Citizen.Wait(2000)
+    Wait(2000)
     TriggerEvent('InteractSound_CL:PlayOnOne', 'jaildoor', 1.0)
 
 end
@@ -636,7 +644,7 @@ function InmateCreate()
     RequestModel(hashKey)
     while not HasModelLoaded(hashKey) do
         RequestModel(hashKey)
-        Citizen.Wait(100)
+        Wait(100)
     end
     inmate = CreatePed(pedType, hashKey, 1642.08, 2522.16, 45.57, 43.62, false, false)
     DecorSetBool(inmate, 'ScriptedPed', true)
@@ -704,7 +712,7 @@ AddEventHandler('beginJail', function(skipintake,time,name,cid,date)
     end
 
 
-    Citizen.Wait(500)
+    Wait(500)
     TriggerEvent("doors:resetTimer")
     FreezeEntityPosition(playerPed, false)
     DoScreenFadeIn(1500)
@@ -717,7 +725,7 @@ AddEventHandler('beginJail', function(skipintake,time,name,cid,date)
     TriggerEvent("DoLongHudText", "You have been jailed. You can pick up your shit when you leave.")
     TriggerEvent("inhotel",false)
         while imjailed do
-            Citizen.Wait(1)
+            Wait(1)
 
             if minCalc == 0 then
                 playerPed = PlayerPedId()
@@ -731,7 +739,7 @@ AddEventHandler('beginJail', function(skipintake,time,name,cid,date)
                 drawTxt(0.90, 1.40, 1.0,1.0,0.25, "Inmates looking like he wants something..?", 255, 255, 255, 255)
                 if IsControlJustPressed(1, Controlkey["generalUse"][1]) then
                     TriggerEvent("server-inventory-open", "997", "Craft");                   
-                    Citizen.Wait(5000)
+                    Wait(5000)
                 end
             end
 
@@ -763,7 +771,7 @@ end)
 
 
 
-Citizen.CreateThread(function()
+CreateThread(function()
     Wait(6000)
     while true do
         Wait(1)
@@ -773,7 +781,7 @@ Citizen.CreateThread(function()
             if IsControlJustPressed(1, Controlkey["generalUse"][1]) and not SwappingCharacters then
                 
                 TriggerServerEvent("checkJailTime",true)
-                Citizen.Wait(5000)
+                Wait(5000)
             end
             if IsControlJustPressed(1, Controlkey["generalUseThird"][1]) and not SwappingCharacters then
                 
@@ -783,7 +791,7 @@ Citizen.CreateThread(function()
             end
              if IsControlJustPressed(1, Controlkey["housingMain"][1]) and not SwappingCharacters then
                 TriggerEvent("yellowPages:retrieveLawyersOnline")
-                Citizen.Wait(5000)
+                Wait(5000)
             end     
 
             if SwappingCharacters then
@@ -811,12 +819,12 @@ end)
 
 RegisterNetEvent('swappingCharsLoop')
 AddEventHandler('swappingCharsLoop', function()
-    Citizen.Wait(15000)
+    Wait(15000)
 
     if SwappingCharacters and not outofrange then
         TransitionToBlurred(500)
         DoScreenFadeOut(500)
-        Citizen.Wait(1000)
+        Wait(1000)
         TriggerEvent("np-base:clearStates")
         exports["np-base"]:getModule("SpawnManager"):Initialize()
         relogging = true
@@ -869,14 +877,14 @@ AddEventHandler('beginJailMobster', function(time)
     minutes = tonumber(minutes) >= 120 and 120 or tonumber(minutes)
     TriggerEvent("DoLongHudText", "You were dumped here.. weird.",1)
     minCalc = 60
-    Citizen.Wait(1000)
+    Wait(1000)
     SetEntityCoords(PlayerPedId(), 143.79208374023,-2201.6572265625,4.6880202293396) 
     TriggerServerEvent("updateJailTimeMobster",minutes)
     TriggerEvent("falseCuffs")  
 
 
         while imjailedmobster do
-            Citizen.Wait(1000)
+            Wait(1000)
             RemoveAllPedWeapons(PlayerPedId())
             TriggerEvent("attachWeapons")
             if minCalc < 1 then
@@ -926,13 +934,13 @@ AddEventHandler('beginJailLife', function(imjailedLife)
     selectedCell = rnd
     TriggerEvent("DensityModifierEnable",false)
     TriggerEvent("DoLongHudText", "You are on Life Sentence.",1)
-    Citizen.Wait(1000)
+    Wait(1000)
     SetEntityCoords(PlayerPedId(),lifeCellCoords[selectedCell][1],lifeCellCoords[selectedCell][2],lifeCellCoords[selectedCell][3]) 
     TriggerEvent("falseCuffs")  
     DoScreenFadeIn(1500)
     if imjailedLife then
         while imjailedLife do
-            Citizen.Wait(1000)
+            Wait(1000)
             RemoveAllPedWeapons(PlayerPedId())
             TriggerEvent("attachWeapons")
 
