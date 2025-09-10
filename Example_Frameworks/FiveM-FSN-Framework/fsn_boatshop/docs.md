@@ -13,6 +13,7 @@ The **fsn_boatshop** resource provides purchasing and rental services for boats 
   - [sv_boatshop.lua](#sv_boatshoplua)
 - [Cross Indexes](#cross-indexes)
   - [Events](#events)
+  - [ESX Callbacks](#esx-callbacks)
   - [Commands](#commands)
   - [Exports Used](#exports-used)
 - [Configuration & Integration Points](#configuration--integration-points)
@@ -65,10 +66,15 @@ Maintains showroom state and employee commands.
 | `fsn_boatshop:floor:ChangeBoat` | Client → Server | `index`, `model` | Replace showroom boat. |
 | `fsn_boatshop:testdrive:start` | Server → Client | None | Inferred: begins temporary test drive. *(Low)* |
 | `fsn_boatshop:testdrive:end` | Server → Client | None | Inferred: ends test drive. *(Low)* |
+| `mythic_notify:client:SendAlert` | Server → Client | `type`, `text` | Display notification messages. |
+| `chatMessage` | System → Server | `source`, `author`, `text` | Intercepts chat to parse commands. |
 | `fsn_cargarage:buyVehicle` | Client → Server | `charId`, `name`, `model`, `plate`, `details`, `finance`, `type`, `slot` | External garage registration. *(High)* |
 | `fsn_cargarage:makeMine` | Client → Server | `vehicle`, `model`, `plate` | External ownership tagging. *(High)* |
 | `fsn_bank:change:walletMinus` | Client → Server | `amount` | Deducts funds. *(High)* |
 | `fsn_bank:change:walletAdd` | Client → Server | `amount` | Refunds funds. *(High)* |
+
+### ESX Callbacks
+None.
 
 ### Commands
 | Command | Permission | Description |
@@ -84,7 +90,7 @@ Maintains showroom state and employee commands.
 | `fsn_main:fsn_CharID` | `fsn_main` | Retrieve player character ID. |
 | `fsn_main:fsn_CanAfford` | `fsn_main` | Check player affordability. |
 | `fsn_jobs:isWhitelistClockedIn` / `isPlayerClockedInWhitelist` | `fsn_jobs` | Restrict features to employees. |
-| `mythic_notify:DoCustomHudText` / `mythic_notify:client:SendAlert` | `mythic_notify` | Display notifications. |
+| `mythic_notify:DoCustomHudText` | `mythic_notify` | Display HUD notifications. |
 
 ## Configuration & Integration Points
 - Depends on FSN utilities and MySQL libraries through the manifest.
