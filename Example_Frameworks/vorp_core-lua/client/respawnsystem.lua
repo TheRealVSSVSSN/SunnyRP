@@ -49,7 +49,7 @@ end
 local function ProcessNewPosition()
     local mouseX = 0.0
     local mouseY = 0.0
-    if (IsInputDisabled(0)) then -- THIS DOESNT EXIST ?
+    if IsInputDisabled(0) then
         mouseX = GetDisabledControlNormal(1, 0x4D8FB4C1) * 1.5
         mouseY = GetDisabledControlNormal(1, 0xFDA83190) * 1.5
     else
@@ -70,8 +70,8 @@ local function ProcessNewPosition()
     local hitBool, hitCoords = GetShapeTestResult(rayHandle)
 
     local maxRadius = 3.0
-    if (hitBool and Vdist(pCoords.x, pCoords.y, pCoords.z + 0.5, hitCoords, 0, 0) < 3.0 + 0.5) then
-        maxRadius = Vdist(pCoords.x, pCoords.y, pCoords.z + 0.5, hitCoords, 0, 0)
+    if hitBool and Vdist(pCoords.x, pCoords.y, pCoords.z + 0.5, hitCoords.x, hitCoords.y, hitCoords.z) < 3.5 then
+        maxRadius = Vdist(pCoords.x, pCoords.y, pCoords.z + 0.5, hitCoords.x, hitCoords.y, hitCoords.z)
     end
 
     local offset = {
@@ -127,9 +127,16 @@ local function EndDeathCam()
     DestroyAllCams(true)
 end
 
+--[[
+    -- Type: Function
+    -- Name: ResurrectPlayer
+    -- Use: Revives the player and positions them at the nearest hospital
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
 function CoreAction.Player.ResurrectPlayer(currentHospital, currentHospitalName, justrevive)
     local player = PlayerPedId()
-    Citizen.InvokeNative(0xCE7A90B160F75046, false) --SET_CINEMATIC_MODE_ACTIVE
+    SetCinematicModeActive(false)
     TriggerEvent("vorp:showUi", not Config.HideUi)
     ResurrectPed(player)
     Wait(200)
@@ -144,8 +151,8 @@ function CoreAction.Player.ResurrectPlayer(currentHospital, currentHospitalName,
     CoreAction.Utils.setPVP()
     TriggerEvent("vorpcharacter:reloadafterdeath")
     Wait(500)
-    if currentHospital and currentHospital then
-        Citizen.InvokeNative(0x203BEFFDBE12E96A, player, currentHospital, false, false, false) -- _SET_ENTITY_COORDS_AND_HEADING
+    if currentHospital then
+        SetEntityCoordsAndHeading(player, currentHospital.x, currentHospital.y, currentHospital.z, currentHospital.w, false, false, false)
     end
     Wait(2000)
     CoreAction.Admin.HealPlayer()

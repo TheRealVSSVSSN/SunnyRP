@@ -6,7 +6,13 @@ CoreAction.Player = {}
 
 local T = Translation[Lang].MessageOfSystem
 
-
+--[[
+    -- Type: Function
+    -- Name: HealPlayer
+    -- Use: Restores player health and stamina while ensuring damage settings are reset
+    -- Created: 2025-02-14
+    -- By: VSSVSSN
+--]]
 function CoreAction.Admin.HealPlayer()
     local player = PlayerPedId()
     local isPlayerDead = IsEntityDead(player)
@@ -14,9 +20,9 @@ function CoreAction.Admin.HealPlayer()
         print("cannot heal a dead player, revive player first")
         return
     end
-    Citizen.InvokeNative(0xC6258F41D86676E0, player, 0, 100) -- _SET_ATTRIBUTE_CORE_VALUE HEALTH
+    SetAttributeCoreValue(player, 0, 100) -- HEALTH core
     SetEntityHealth(player, 600, 1)
-    Citizen.InvokeNative(0xC6258F41D86676E0, player, 1, 100) --_SET_ATTRIBUTE_CORE_VALUE STAMINA
+    SetAttributeCoreValue(player, 1, 100) -- STAMINA core
     Citizen.InvokeNative(0x675680D089BFA21F, player, 1065330373)
     -- not sure why but player will be invincible from this point, only when max chars is to 1, makes no sense. so we gotta invoke these natives after healing.
     FreezeEntityPosition(player, false)
