@@ -62,17 +62,13 @@ end)
 
 RegisterNetEvent('fsn_admin:requestXYZ')
 AddEventHandler('fsn_admin:requestXYZ', function(sendto)
-
-  local coords = {x=GetEntityCoords(PlayerPedId()).x, y=GetEntityCoords(PlayerPedId()).y, z=GetEntityCoords(PlayerPedId()).z}
+  local coords = GetEntityCoords(PlayerPedId())
   TriggerServerEvent('fsn_admin:sendXYZ', sendto, coords)
-
 end)
 
-RegisterNetEvent('fsn_admin:recieveXYZ')
-AddEventHandler('fsn_admin:recieveXYZ', function(xyz)
-
-  SetEntityCoords(PlayerPedId(), xyz.x, xyz.y, xyz.z, 1, 0, 0, 1)
-
+RegisterNetEvent('fsn_admin:receiveXYZ')
+AddEventHandler('fsn_admin:receiveXYZ', function(coords)
+  SetEntityCoords(PlayerPedId(), coords.x, coords.y, coords.z, false, false, false, true)
 end)
 
 RegisterNetEvent('fsn_admin:FreezeMe')
@@ -83,15 +79,17 @@ AddEventHandler('fsn_admin:FreezeMe', function(adminName)
       template = '^1^*:fsn_admin:^r^0 You have been unfrozen by admin: '..adminName,
       args = {}
     })
+    FreezeEntityPosition(PlayerPedId(), false)
     frozen = false
   else
     TriggerEvent('chat:addMessage', {
       template = '^1^*:fsn_admin:^r^0 You have been frozen by admin: '..adminName,
       args = {}
     })
+    FreezeEntityPosition(PlayerPedId(), true)
     frozen = true
   end
-  
+
 end)
 
 --  -------------------
