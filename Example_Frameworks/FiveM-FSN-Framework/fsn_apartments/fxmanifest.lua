@@ -1,45 +1,35 @@
-fx_version 'bodacious'
-games { 'gta5' }
-
+fx_version 'cerulean'
+game 'gta5'
+lua54 'yes'
 
 description 'Apartments for the server'
 
---[[/	:FSN:	\]]--
-client_scripts { 
-    '@fsn_main/cl_utils.lua',
-    '@fsn_main/server_settings/sh_settings.lua'
-}
-server_scripts { 
-    '@fsn_main/sv_utils.lua',
-    '@fsn_main/server_settings/sh_settings.lua',
-    '@mysql-async/lib/MySQL.lua'
-}
---[[/	:FSN:	\]]--
-
 client_scripts {
+    '@fsn_main/cl_utils.lua',
+    '@fsn_main/server_settings/sh_settings.lua',
     'client.lua',
-    'cl_instancing.lua',	
-
+    'cl_instancing.lua'
 }
 
 server_scripts {
+    '@fsn_main/sv_utils.lua',
+    '@fsn_main/server_settings/sh_settings.lua',
+    '@mysql-async/lib/MySQL.lua',
     'server.lua',
-    'sv_instancing.lua',	
-
+    'sv_instancing.lua'
 }
 
-ui_page "gui/ui.html"
+ui_page 'gui/ui.html'
 
 files {
-	"gui/ui.html",
-	"gui/ui.js",
-	"gui/ui.css"
+    'gui/ui.html',
+    'gui/ui.js',
+    'gui/ui.css'
 }
 
-
--- exports
 exports {
-	"inInstance",
-	"isNearStorage",
-	"EnterMyApartment"
+    'inInstance',
+    'isNearStorage',
+    'EnterMyApartment'
 }
+
