@@ -4,24 +4,32 @@ local showDispatchLog = false
 local isDead = false
 local disableNotifications = false
 local disableNotificationSounds = false
-local recipientList = {
-    "police", "ambulance"
-}
 
+--[[
+    -- Type: Function
+    -- Name: randomizeBlipLocation
+    -- Use: Adds slight randomization to a blip's coordinates
+    -- Created: 2024-05-15
+    -- By: VSSVSSN
+--]]
 local function randomizeBlipLocation(pOrigin)
-    local x = pOrigin.x
-    local y = pOrigin.y
-    local z = pOrigin.z
+    local x, y, z = pOrigin.x, pOrigin.y, pOrigin.z
     local luck = math.random(2)
-    y = math.random(25) + y
+    y = y + math.random(25)
     if luck == 1 then
-        x = math.random(25) + x
+        x = x + math.random(25)
     end
-    return {x = x, y = y, z = z}
+    return { x = x, y = y, z = z }
 end
 
+--[[
+    -- Type: Function
+    -- Name: sendNewsBlip
+    -- Use: Registers blip data with phone system for dispatch alerts
+    -- Created: 2024-05-15
+    -- By: VSSVSSN
+--]]
 local function sendNewsBlip(pNotificationData)
-  print("SENDING NEW BLIP?", currentJob, pNotificationData.isImportant)
     TriggerEvent("phone:registerBlip", {
         currentJob = currentJob,
         isImportant = pNotificationData.isImportant,
@@ -46,13 +54,11 @@ RegisterNetEvent('dispatch:clNotify')
 AddEventHandler('dispatch:clNotify', function(pNotificationData)
     if pNotificationData ~= nil then
         if pNotificationData.recipientList then
-            for key, value in pairs(pNotificationData.recipientList) do
-                if key == currentJob and value and not disableNotifications then
-                    if pNotificationData.origin ~= nil then
-                        if pNotificationData.originStatic == nil or not pNotificationData.originStatic then
+            for job, enabled in pairs(pNotificationData.recipientList) do
+                if job == currentJob and enabled and not disableNotifications then
+                    if pNotificationData.origin then
+                        if not pNotificationData.originStatic then
                             pNotificationData.origin = randomizeBlipLocation(pNotificationData.origin)
-                        else
-                            pNotificationData.origin = pNotificationData.origin
                         end
                     end
 
@@ -62,24 +68,18 @@ AddEventHandler('dispatch:clNotify', function(pNotificationData)
                             eData = pNotificationData
                         })
                         sendNewsBlip(pNotificationData)
-                    elseif currentJob == "news" then
-                        if exports["np-inventory"]:getQuantity("scanner") > 0 then
-                            local newsObject = {}
-                            newsObject.dispatchMessage = "A 911 call has been picked up on your radio scanner!"
-                            newsObject.displayCode = nil
-                            newsObject.isImportant = false
-                            newsObject.priority = 1
-
-                            SendNUIMessage({
-                                mId = "notification",
-                                eData = newsObject
-                            })
-
-                            sendNewsBlip(pNotificationData)
-                        end
+                    elseif currentJob == "news" and exports["np-inventory"]:getQuantity("scanner") > 0 then
+                        local newsObject = {
+                            dispatchMessage = "A 911 call has been picked up on your radio scanner!",
+                            displayCode = nil,
+                            isImportant = false,
+                            priority = 1
+                        }
+                        SendNUIMessage({ mId = "notification", eData = newsObject })
+                        sendNewsBlip(pNotificationData)
                     end
 
-                    if(pNotificationData.playSound and currentJob ~= "news" and not disableNotificationSounds) then
+                    if pNotificationData.playSound and currentJob ~= "news" and not disableNotificationSounds then
                         TriggerServerEvent('InteractSound_SV:PlayWithinDistance', 3.0, pNotificationData.soundName, 0.3)
                     end
                 end
@@ -314,15 +314,19 @@ function addBlip(data)
     end
   end)
 
-  function GetStreetAndZone()
-    local plyPos = GetEntityCoords(PlayerPedId(),  true)
-    local s1, s2 = Citizen.InvokeNative( 0x2EB41072B4C1E4C0, plyPos.x, plyPos.y, plyPos.z, Citizen.PointerValueInt(), Citizen.PointerValueInt() )
-    local street1 = GetStreetNameFromHashKey(s1)
-    local street2 = GetStreetNameFromHashKey(s2)
-    zone = tostring(GetNameOfZone(plyPos.x, plyPos.y, plyPos.z))
-    local playerStreetsLocation = GetLabelText(zone)
-    local street = street1 .. ", " .. playerStreetsLocation
-    return street
+--[[
+    -- Type: Function
+    -- Name: GetStreetAndZone
+    -- Use: Returns player's current street and zone using modern natives
+    -- Created: 2024-05-15
+    -- By: VSSVSSN
+--]]
+local function GetStreetAndZone()
+    local plyPos = GetEntityCoords(PlayerPedId())
+    local streetHash, crossHash = GetStreetNameAtCoord(plyPos.x, plyPos.y, plyPos.z)
+    local street1 = GetStreetNameFromHashKey(streetHash)
+    local zone = GetLabelText(GetNameOfZone(plyPos.x, plyPos.y, plyPos.z))
+    return (street1 .. ", " .. zone)
 end
 
 RegisterCommand('death', function(source, args)
@@ -376,7 +380,7 @@ RegisterCommand('policedown', function(source,args)
     firstStreet = GetStreetAndZone(),
     callSign = 'Officer',
     recipientList = {
-      police = "police"
+      police = true
     },
     playSound = true,
     isImportant = true,
