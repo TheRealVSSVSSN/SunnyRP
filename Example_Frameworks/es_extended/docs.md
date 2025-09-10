@@ -1,7 +1,7 @@
 # es_extended Documentation
 
 ## Overview and Runtime Context
-ES Extended is a legacy roleplay framework for FiveM that manages players, inventory, jobs, accounts and a minimal HUD. The resource ships both client and server Lua scripts, shared utility modules, an HTML based NUI, and interacts with a MySQL database via `mysql-async`. It exports a `getSharedObject` method so other resources can access the ESX API.
+ES Extended is a legacy roleplay framework for FiveM that manages players, inventory, jobs, accounts and a minimal HUD. The resource ships both client and server Lua scripts, shared utility modules, an HTML based NUI, and interacts with a MySQL database via `mysql-async`. It exports a `getSharedObject` method so other resources can access the ESX API. The codebase now targets the modern `cerulean` fxmanifest with Lua 5.4 enabled and uses the streamlined `CreateThread`/`Wait` primitives for asynchronous logic.
 
 ## File Inventory
 - **Client**
@@ -21,7 +21,7 @@ ES Extended is a legacy roleplay framework for FiveM that manages players, inven
   - `server/classes/player.lua`
   - `server/paycheck.lua`
 - **Shared**
-  - `fxmanifest.lua`
+  - `fxmanifest.lua` (`cerulean`, `lua54`)
   - `config.lua`
   - `config.weapons.lua`
   - `imports.lua`
@@ -81,6 +81,7 @@ Orchestrates player loading/saving and network events.
 - Handles coordinate and ammo updates from clients (`esx:updateCoords`, `esx:updateWeaponAmmo`) and inventory transfers (`esx:giveInventoryItem`, `esx:removeInventoryItem`, `esx:onPickup`).
 - Exposes callbacks `esx:getPlayerData`, `esx:getOtherPlayerData`, and `esx:getPlayerNames` for external resources.
 - Saves all players before a txAdmin scheduled restart via `txAdmin:events:scheduledRestart`.
+- Determines a player's default permission group locally to avoid creating unintended global variables when setting ACE-based admin rights.
 
 ### server/functions.lua
 Core server utilities and persistence helpers.
