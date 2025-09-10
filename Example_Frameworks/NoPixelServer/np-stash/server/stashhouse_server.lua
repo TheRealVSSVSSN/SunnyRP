@@ -1,46 +1,48 @@
-RegisterNetEvent('np-stash:fetchInitialState')
-AddEventHandler('np-stash:fetchInitialState', function()
-	local source = source
-	  TriggerClientEvent('np-stash:setInitialState', source, Config.Stash)
+local AUTHORIZED_STEAM_IDS = {
+    ['steam:11000013bd84d46'] = true,
+    ['steam:11000011c3fe668'] = true,
+    ['steam:110000139236a0a'] = true
+}
+
+--[[
+    -- Type: Event
+    -- Name: np-stash:fetchInitialState
+    -- Use: Sends current stash configuration to the client
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+]]
+RegisterNetEvent('np-stash:fetchInitialState', function()
+    local src = source
+    TriggerClientEvent('np-stash:setInitialState', src, Config.Stash)
 end)
 
+--[[
+    -- Type: Event
+    -- Name: stashesaddtoconfig
+    -- Use: Appends a new stash definition to the server config file
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+]]
+RegisterNetEvent('stashesaddtoconfig', function(coords, pin, id, distance)
+    local src = source
+    local identifier = GetPlayerIdentifier(src, 0)
+    if not AUTHORIZED_STEAM_IDS[identifier] then
+        TriggerClientEvent('DoLongHudText', src, 'Cannot Do This Action', 2)
+        return
+    end
 
-RegisterServerEvent('stashesaddtoconfig')
-AddEventHandler('stashesaddtoconfig', function(coords, pin, id, distance)
-    local source = source
-    if GetPlayerIdentifier(source) == 'steam:11000013bd84d46' or 'steam:11000011c3fe668' or 'steam:110000139236a0a' then
-        TriggerClientEvent('DoLongHudText', source, 'StashHouse Added', 2)
-        
-        local path = GetResourcePath(GetCurrentResourceName())
-        local file = io.open(path.."/server/svstashes.lua", "a") -- Append mode
+    TriggerClientEvent('DoLongHudText', src, 'StashHouse Added', 2)
+
+    local path = GetResourcePath(GetCurrentResourceName())
+    local file = io.open(path .. '/server/svstashes.lua', 'a')
+    if file then
         file:write("\n    Config.Stash[#Config.Stash + 1] = {")
-        file:write("\n        StashEntry = "..coords..",")
-        file:write("\n        RequiredPin = "..pin..",")
-        file:write("\n        ID = "..id..",")
-        file:write("\n        distance = "..distance..",")
+        file:write("\n        StashEntry = " .. coords .. ",")
+        file:write("\n        RequiredPin = " .. pin .. ",")
+        file:write("\n        ID = " .. id .. ",")
+        file:write("\n        distance = " .. distance .. ",")
         file:write("\n}")
         file:close()
-
-    else
-        TriggerClientEvent('DoLongHudText', source, 'Cannot Do This Action', 2)
     end
 end)
 
-function round2(num, numDecimalPlaces)
-	return tonumber(string.format("%." .. (numDecimalPlaces or 0) .. "f", num))
-end
-
-function DeleteString(path, before)
-    local inf = assert(io.open(path, "r+"), "Failed to open input file")
-    local lines = ""
-    while true do
-        local line = inf:read("*line")
-		if not line then break end
-		
-		if line ~= before then lines = lines .. line .. "\n" end
-    end
-    inf:close()
-    file = io.open(path, "w")
-    file:write(lines)
-    file:close()
-end
