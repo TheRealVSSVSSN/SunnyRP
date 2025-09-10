@@ -1,93 +1,81 @@
-local x = "The server will restart in 15 minutes!"
-local xx = "The server will restart in 10 minutes!"
-local xxx = "The server will restart in 5 minutes!"
-local xxxx = "The server will begin its restart process now!"
+--[[
+    -- Type: Server Script
+    -- Name: Restart Scheduler
+    -- Use: Handles automated restart warnings and exposes tax retrieval
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 
-local TAX_LIST = {}
+local restartHours = {0, 6, 12, 18}
+local warning15 = "The server will restart in 15 minutes!"
+local warning10 = "The server will restart in 10 minutes!"
+local warning5  = "The server will restart in 5 minutes!"
+local finalWarning = "The server will begin its restart process now!"
 
-RegisterServerEvent("np-restart:checkRebootTime")
-AddEventHandler('np-restart:checkRebootTime', function()
-	ddd = os.date('%H:%M:%S', os.time())
-	local dddd = ddd
-	if dddd == '05:46:00' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, x)
-	elseif dddd == '05:51:00' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, xx)
-	elseif dddd == '05:56:00' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, xxx)
-	elseif dddd == '05:59:10' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, xxxx)
-	elseif dddd == '05:59:20' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, xxxx)
-	elseif dddd == '05:59:30' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, xxxx)
-	elseif dddd == '05:59:40' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, xxxx)
-	elseif dddd == '05:59:50' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, xxxx)
-	elseif dddd == '06:00:00' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, xxxx)
-	elseif dddd == '11:46:00' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, x)
-	elseif dddd == '11:51:00' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, xx)
-	elseif dddd == '11:56:00' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, xxx)
-	elseif dddd == '11:59:10' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, xxxx)
-	elseif dddd == '11:59:20' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, xxxx)
-	elseif dddd == '11:59:30' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, xxxx)
-	elseif dddd == '11:59:40' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, xxxx)
-	elseif dddd == '11:59:50' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, xxxx)
-	elseif dddd == '12:00:00' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, xxxx)
-	elseif dddd == '17:46:00' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, x)
-	elseif dddd == '17:51:00' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, xx)
-	elseif dddd == '17:56:00' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, xxx)
-	elseif dddd == '17:59:10' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, xxxx)
-	elseif dddd == '17:59:20' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, xxxx)
-	elseif dddd == '17:59:30' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, xxxx)
-	elseif dddd == '17:59:40' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, xxxx)
-	elseif dddd == '17:59:50' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, xxxx)
-	elseif dddd == '18:00:00' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, xxxx)
-	elseif dddd == '23:46:00' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, x)
-	elseif dddd == '23:51:00' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, xx)
-	elseif dddd == '23:56:00' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, xxx)
-	elseif dddd == '23:59:10' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, xxxx)
-	elseif dddd == '23:59:20' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, xxxx)
-	elseif dddd == '23:59:30' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, xxxx)
-	elseif dddd == '23:59:40' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, xxxx)
-	elseif dddd == '23:59:50' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, xxxx)
-	elseif dddd == '00:00:00' then
-		TriggerClientEvent('chatMessage', -1, "SYSTEM", {255, 0, 0}, xxxx)
-	end
-end)
+--[[
+    -- Type: Function
+    -- Name: buildSchedule
+    -- Use: Generates a lookup table of times mapped to warning messages
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function buildSchedule()
+    local schedule = {}
+    for _, hour in ipairs(restartHours) do
+        local prevHour = (hour + 23) % 24
 
-function restartNow() SetTimeout(1000, function() TriggerEvent('np-restart:checkRebootTime') restartNow() end) end
-restartNow()
+        schedule[("%02d:%02d:%02d"):format(prevHour, 45, 0)] = warning15
+        schedule[("%02d:%02d:%02d"):format(prevHour, 50, 0)] = warning10
+        schedule[("%02d:%02d:%02d"):format(prevHour, 55, 0)] = warning5
 
-function getTax()
-    local taxes = exports["np-votesystem"]:getTaxes()
-    TAX_LIST[#TAX_LIST+1] = taxes
+        for sec = 10, 50, 10 do
+            schedule[("%02d:%02d:%02d"):format(prevHour, 59, sec)] = finalWarning
+        end
+
+        schedule[("%02d:%02d:%02d"):format(hour, 0, 0)] = finalWarning
+    end
+    return schedule
 end
+
+local restartSchedule = buildSchedule()
+
+--[[
+    -- Type: Function
+    -- Name: startRestartLoop
+    -- Use: Checks the current time each second and broadcasts restart messages
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function startRestartLoop()
+    CreateThread(function()
+        while true do
+            local timeStr = os.date("%H:%M:%S")
+            local msg = restartSchedule[timeStr]
+            if msg then
+                TriggerClientEvent('chat:addMessage', -1, {
+                    color = {255, 0, 0},
+                    multiline = false,
+                    args = {'SYSTEM', msg}
+                })
+            end
+            Wait(1000)
+        end
+    end)
+end
+
+startRestartLoop()
+
+local lastTaxes = nil
+
+--[[
+    -- Type: Function
+    -- Name: getTax
+    -- Use: Retrieves current tax data from the voting system
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+function getTax()
+    lastTaxes = exports['np-votesystem']:getTaxes()
+    return lastTaxes
+end
+
