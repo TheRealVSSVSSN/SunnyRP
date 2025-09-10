@@ -1,11 +1,13 @@
 exports('runJS', (snippet) => {
     if (IsDuplicityVersion() && GetInvokingResource() !== GetCurrentResourceName()) {
-        return [ 'Invalid caller.', false ];
+        return ['Invalid caller.', false];
     }
 
     try {
-        return [ new Function(snippet)(), false ];
+        // eslint-disable-next-line no-new-func
+        return [new Function(snippet)(), false];
     } catch (e) {
-        return [ false, e.toString() ];
+        return [false, e.toString()];
     }
 });
+

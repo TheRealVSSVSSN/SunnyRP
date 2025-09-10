@@ -7,18 +7,27 @@ description 'Allows server owners to execute arbitrary server-side or client-sid
 repository 'https://github.com/citizenfx/cfx-server-data'
 
 game 'common'
-fx_version 'bodacious'
+fx_version 'cerulean'
+lua54 'yes'
 
-client_script 'runcode_cl.lua'
-server_script 'runcode_sv.lua'
-server_script 'runcode_web.lua'
+client_scripts {
+    'runcode_cl.lua',
+    'runcode_ui.lua'
+}
 
-shared_script 'runcode_shared.lua'
-shared_script 'runcode.js'
+server_scripts {
+    'runcode_sv.lua',
+    'runcode_web.lua'
+}
 
-client_script 'runcode_ui.lua'
+shared_scripts {
+    'runcode_shared.lua',
+    'runcode.js'
+}
 
 ui_page 'web/nui.html'
+
 files {
     'web/nui.html'
 }
+

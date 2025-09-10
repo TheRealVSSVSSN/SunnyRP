@@ -1,21 +1,23 @@
 local cachedFiles = {}
 
 local function sendFile(res, fileName)
-	if cachedFiles[fileName] then
-		res.send(cachedFiles[fileName])
-		return
-	end
+    fileName = fileName:gsub('^/', '')
 
-	local fileData = LoadResourceFile(GetCurrentResourceName(), 'web/' .. fileName)
+    if cachedFiles[fileName] then
+        res.send(cachedFiles[fileName])
+        return
+    end
 
-	if not fileData then
-		res.writeHead(404)
-		res.send('Not found.')
-		return
-	end
+    local fileData = LoadResourceFile(GetCurrentResourceName(), 'web/' .. fileName)
 
-	cachedFiles[fileName] = fileData
-	res.send(fileData)
+    if not fileData then
+        res.writeHead(404)
+        res.send('Not found.')
+        return
+    end
+
+    cachedFiles[fileName] = fileData
+    res.send(fileData)
 end
 
 local codeId = 1
@@ -146,12 +148,12 @@ CreateThread(function()
 	while true do
 		Wait(100)
 
-		for k, v in ipairs(codes) do
-			if GetGameTimer() > v.timeout then
-				source = nil
-				returnCode(k, '', 'Timed out waiting on the target client.')
-			end
-		end
+                for k, v in pairs(codes) do
+                        if GetGameTimer() > v.timeout then
+                                source = nil
+                                returnCode(k, '', 'Timed out waiting on the target client.')
+                        end
+                end
 	end
 end)
 
@@ -159,34 +161,35 @@ RegisterNetEvent('runcode:gotResult')
 AddEventHandler('runcode:gotResult', returnCode)
 
 SetHttpHandler(function(req, res)
-	local path = req.path
+        local path = req.path
 
-	if req.method == 'POST' then
-		return handlePost(req, res)
-	end
+        if req.method == 'POST' then
+                return handlePost(req, res)
+        end
 
-	-- client shortcuts
-	if req.path == '/clients' then
-		local clientList = {}
+        -- client shortcuts
+        if req.path == '/clients' then
+                local clientList = {}
 
-		for _, id in ipairs(GetPlayers()) do
-			table.insert(clientList, { GetPlayerName(id), id })
-		end
+                for _, id in ipairs(GetPlayers()) do
+                        table.insert(clientList, { GetPlayerName(id), id })
+                end
 
-		res.send(json.encode({
-			clients = clientList
-		}))
+                res.send(json.encode({
+                        clients = clientList
+                }))
 
-		return
-	end
+                return
+        end
 
-	-- should this be the index?
-	if req.path == '/' then
-		path = 'index.html'
-	end
+        -- should this be the index?
+        if path == '/' then
+                path = 'index.html'
+        end
 
-	-- remove any '..' from the path
-	path = path:gsub("%.%.", "")
+        -- remove any '..' from the path and leading slash
+        path = path:gsub('%.%.', ''):gsub('^/', '')
 
-	return sendFile(res, path)
+        return sendFile(res, path)
 end)
+
