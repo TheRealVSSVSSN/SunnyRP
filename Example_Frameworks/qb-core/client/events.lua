@@ -21,13 +21,15 @@ end)
 
 RegisterNetEvent('QBCore:Command:TeleportToPlayer', function(coords)
     local ped = PlayerPedId()
-    SetPedCoordsKeepVehicle(ped, coords.x, coords.y, coords.z)
+    local entity = IsPedInAnyVehicle(ped, false) and GetVehiclePedIsUsing(ped) or ped
+    SetEntityCoords(entity, coords.x, coords.y, coords.z, false, false, false, false)
 end)
 
 RegisterNetEvent('QBCore:Command:TeleportToCoords', function(x, y, z, h)
     local ped = PlayerPedId()
-    SetPedCoordsKeepVehicle(ped, x, y, z)
-    SetEntityHeading(ped, h or GetEntityHeading(ped))
+    local entity = IsPedInAnyVehicle(ped, false) and GetVehiclePedIsUsing(ped) or ped
+    SetEntityCoords(entity, x, y, z, false, false, false, false)
+    SetEntityHeading(entity, h or GetEntityHeading(entity))
 end)
 
 RegisterNetEvent('QBCore:Command:GoToMarker', function()
