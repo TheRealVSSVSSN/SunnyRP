@@ -1,3 +1,11 @@
+--[[
+    -- Type: Client
+    -- Name: GUI module
+    -- Use: Provides basic menu rendering for clothing system
+    -- Created: 2024-09-10
+    -- By: VSSVSSN
+--]]
+
 GUI = {}
 Menu = {}
 
@@ -406,12 +414,12 @@ function Menu.updateSelection()
   elseif IsControlJustPressed(1, 176)  then
     selectPressed = true
   elseif IsControlJustPressed(1, 177) then
-    if (prevMenu == nil) then
+        if (prevMenu == nil) then
       Menu.Switch(nil, "")
       menuOpen = false
       if clothing_menu then
-      	save()
-      	clothing_menu = false
+        save()
+        clothing_menu = false
       end
       currentOption = 1
     end
@@ -419,7 +427,7 @@ function Menu.updateSelection()
       if not Menus[prevMenu].previous == nil then
         currentOption = 1
         Menu.Switch(nil, prevMenu)
-        Citizen.Trace("IS NOT NIL BUT NIL? "..prevMenu)
+        print("IS NOT NIL BUT NIL? "..prevMenu)
       else
         if Menus[prevMenu].optionCount < currentOption then
           currentOption = Menus[prevMenu].optionCount
