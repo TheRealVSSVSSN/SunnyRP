@@ -35,15 +35,16 @@ function CoreAction.Player.TeleportToCoords(coords, heading)
 end
 
 function CoreAction.Player.MapCheck()
+    local lastType
     while Config.enableTypeRadar do
         Wait(3000)
         local player = PlayerPedId()
-        local playerOnMout = IsPedOnMount(player)
-        local playerOnVeh = IsPedInAnyVehicle(player, false)
-        if not playerOnMout and not playerOnVeh then
-            SetMinimapType(Config.mapTypeOnFoot)
-        elseif playerOnMout or playerOnVeh then
-            SetMinimapType(Config.mapTypeOnMount)
+        local onMount = IsPedOnMount(player)
+        local onVeh = IsPedInAnyVehicle(player, false)
+        local mapType = (onMount or onVeh) and Config.mapTypeOnMount or Config.mapTypeOnFoot
+        if mapType ~= lastType then
+            SetMinimapType(mapType)
+            lastType = mapType
         end
     end
 end
@@ -242,30 +243,22 @@ end)
 
 CreateThread(function()
     repeat Wait(5000) until LocalPlayer.state.IsInSession
+    local elapsed = 0
+    local saveInterval = 300 -- seconds
     while Config.SavePlayersStatus do
         Wait(1000)
         local player = PlayerPedId()
         local innerCoreHealth = Citizen.InvokeNative(0x36731AC041289BB1, player, 0)
         local outerCoreStamina = Citizen.InvokeNative(0x22F2A386D43048A9, player)
         local innerCoreStamina = Citizen.InvokeNative(0x36731AC041289BB1, player, 1)
-        local getHealth = GetEntityHealth(player)
-        TriggerServerEvent("vorp:HealthCached", getHealth, innerCoreHealth, outerCoreStamina, innerCoreStamina)
-    end
-end)
-
-CreateThread(function()
-    repeat Wait(5000) until LocalPlayer.state.IsInSession
-    while Config.SavePlayersStatus do
-        local player = PlayerPedId()
-        Wait(300000) -- wont be accurate as it waits for too long
-        local innerCoreHealth = Citizen.InvokeNative(0x36731AC041289BB1, player, 0, Citizen.ResultAsInteger())
-        local outerCoreStamina = Citizen.InvokeNative(0x22F2A386D43048A9, player)
-        local innerCoreStamina = Citizen.InvokeNative(0x36731AC041289BB1, player, 1, Citizen.ResultAsInteger())
-        local getHealth = GetEntityHealth(player)
-        local innerHealth = tonumber(innerCoreHealth)
-        local innerStamina = tonumber(innerCoreStamina)
-        TriggerServerEvent("vorp:SaveHealth", getHealth, innerHealth)
-        TriggerServerEvent("vorp:SaveStamina", outerCoreStamina, innerStamina)
+        local health = GetEntityHealth(player)
+        TriggerServerEvent("vorp:HealthCached", health, innerCoreHealth, outerCoreStamina, innerCoreStamina)
+        elapsed = elapsed + 1
+        if elapsed >= saveInterval then
+            TriggerServerEvent("vorp:SaveHealth", health, tonumber(innerCoreHealth))
+            TriggerServerEvent("vorp:SaveStamina", outerCoreStamina, tonumber(innerCoreStamina))
+            elapsed = 0
+        end
     end
 end)
 
