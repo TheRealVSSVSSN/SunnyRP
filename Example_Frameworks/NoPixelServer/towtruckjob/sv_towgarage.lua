@@ -28,7 +28,7 @@ AddEventHandler("paytheuglytowpeople",function ()
     user:addMoney(amount)
 end)
 
-RegisterServerEvent('towgarage:flatbed')
+RegisterNetEvent('towgarage:flatbed')
 AddEventHandler('towgarage:flatbed', function(model)
 	local src = source
 	local user = exports["np-base"]:getModule("Player"):GetUser(src)
@@ -44,13 +44,13 @@ AddEventHandler('towgarage:flatbed', function(model)
 	end
 end)
 
-RegisterServerEvent('garage:Update')
+RegisterNetEvent('garage:Update')
 AddEventHandler('garage:Update', function()
 	local src = source
 	TriggerClientEvent('towgarage:ClientUpdate',src,garage)
 end)
 
-RegisterServerEvent('towtruck:pay')
+RegisterNetEvent('towtruck:pay')
 AddEventHandler('towtruck:pay', function()
 	local src = source
 	local user = exports["np-base"]:getModule("Player"):GetUser(src)
@@ -71,7 +71,7 @@ AddEventHandler('towtruck:pay', function()
 end) 
 
 
-RegisterServerEvent('judge:pay')
+RegisterNetEvent('judge:pay')
 AddEventHandler('judge:pay', function()
 	local src = source
 	local user = exports["np-base"]:getModule("Player"):GetUser(src)
@@ -81,7 +81,7 @@ AddEventHandler('judge:pay', function()
 	TriggerClientEvent("DoLongHudText",src,"You got paid by a judge, the sum of $" ..amount)
 end)
 
-RegisterServerEvent('towtruck:pay2')
+RegisterNetEvent('towtruck:pay2')
 AddEventHandler('towtruck:pay2', function()
 	local src = source
 	local user = exports["np-base"]:getModule("Player"):GetUser(src)
@@ -101,7 +101,7 @@ AddEventHandler('towtruck:pay2', function()
 	end
 end) 
 
-RegisterServerEvent('towtruck:dropEnd')
+RegisterNetEvent('towtruck:dropEnd')
 AddEventHandler('towtruck:dropEnd', function()
 	request = false
 	
@@ -115,7 +115,7 @@ AddEventHandler('towtruck:dropEnd', function()
 	end)
 end)
 
-RegisterServerEvent('towgarage:checkJobBounce')
+RegisterNetEvent('towgarage:checkJobBounce')
 AddEventHandler('towgarage:checkJobBounce', function(button)
     local src = source
     local user = exports["np-base"]:getModule("Player"):GetUser(src)
@@ -133,7 +133,7 @@ AddEventHandler('towgarage:checkJobBounce', function(button)
     end
 end)
 
-RegisterServerEvent("mech:remove:materials")
+RegisterNetEvent("mech:remove:materials")
 AddEventHandler("mech:remove:materials", function(materials, amount, garage)
     local src = source
     local addMaterials = 0
@@ -355,7 +355,7 @@ local matAmount = amount
             TriggerEvent('mech:remove:materials',itemname,matAmount, garagename)
 end)
 
-RegisterServerEvent('requestmechanicmaterials')
+RegisterNetEvent('requestmechanicmaterials')
 AddEventHandler('requestmechanicmaterials', function(garage)
     local src = source
 
@@ -369,7 +369,7 @@ AddEventHandler('requestmechanicmaterials', function(garage)
     end)
 end)
 
-RegisterServerEvent('scrap:processPayment')
+RegisterNetEvent('scrap:processPayment')
 AddEventHandler('scrap:processPayment', function(amount, garage, material)
 -- adding material to garage's sql table ill make it ((sway))
     local src = source
@@ -386,7 +386,7 @@ AddEventHandler('scrap:processPayment', function(amount, garage, material)
     TriggerClientEvent('DoLongHudText', src, "Updated Material: " .. koil, 2)
 end)
 
-RegisterServerEvent("Towgarage:InUse")
+RegisterNetEvent("Towgarage:InUse")
 AddEventHandler("Towgarage:InUse", function(using,num)
     local src = source
 

@@ -12,9 +12,9 @@ local towVehicles = {
 }
 
 local function deleteVehicle(vehicle)
-	if IsAnEntity(vehicle) and IsEntityAVehicle(vehicle) then
-		Citizen.CreateThread(function()
-			Citizen.Wait(5000)
+	if DoesEntityExist(vehicle) and IsEntityAVehicle(vehicle) then
+		CreateThread(function()
+			Wait(5000)
 			SetEntityAsMissionEntity(vehicle,false,true)
 			DeleteVehicle(vehicle)
 			SetEntityAsNoLongerNeeded(vehicle)
@@ -30,26 +30,6 @@ local function isTowVehicle(vehicle)
 	return false
 end
 
-local function getVehicleInDirection(coordFrom, coordTo)
-	local offset = 0
-	local rayHandle
-	local vehicle
-
-	for i = 0, 100 do
-		rayHandle = CastRayPointToPoint(coordFrom.x, coordFrom.y, coordFrom.z, coordTo.x, coordTo.y, coordTo.z + offset, 10, PlayerPedId(), 0)	
-		a, b, c, d, vehicle = GetRaycastResult(rayHandle)
-		
-		offset = offset - 1
-
-		if vehicle ~= 0 then break end
-	end
-	
-	local distance = Vdist2(coordFrom, GetEntityCoords(vehicle))
-	
-	if distance > 25 then vehicle = nil end
-
-    return vehicle ~= nil and vehicle or 0
-end
 
 
 function CleanDetachedVehicles()
@@ -79,11 +59,11 @@ end
 
 
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	--TriggerEvent("pv:tow")
 	CleanDetachedVehicles()
 	while true do
-		Citizen.Wait(0)
+		Wait(0)
 		local ped = PlayerPedId()
 		local vehicle = GetVehiclePedIsIn(ped, true)
 		local pay = true
@@ -135,7 +115,7 @@ AddEventHandler('animation:tow', function()
     local lPed = PlayerPedId()
     RequestAnimDict("mini@repair")
     while not HasAnimDictLoaded("mini@repair") do
-        Citizen.Wait(0)
+        Wait(0)
     end
     while towingProcess do
 
@@ -143,7 +123,7 @@ AddEventHandler('animation:tow', function()
             ClearPedSecondaryTask(lPed)
             TaskPlayAnim(lPed, "mini@repair", "fixing_a_player", 8.0, -8, -1, 16, 0, 0, 0, 0)
         end
-        Citizen.Wait(1)
+        Wait(1)
     end
     ClearPedTasks(lPed)
 end)
@@ -157,14 +137,14 @@ AddEventHandler('pv:tow', function()
 	local playerped = PlayerPedId()
 	local vehicle = GetVehiclePedIsIn(playerped, true)
 	
-	local towmodel = `towtruck`
+	local towmodel = GetHashKey("towtruck")
 	local isVehicleTow = isTowVehicle(vehicle)
 			
 	if isVehicleTow then
 	
 		local coordA = GetEntityCoords(playerped, 1)
 		local coordB = GetOffsetFromEntityInWorldCoords(playerped, 0.0, 5.0, 0.0)
-		local targetVehicle = getVehicleInDirection(coordA, coordB)
+		local targetVehicle = GetVehicleInDirection(coordA, coordB)
 
 		if not currentlyTowedVehicle then
 			CleanDetachedVehicles()
@@ -176,7 +156,7 @@ AddEventHandler('pv:tow', function()
 	        if aDist > 3.5 then
 	        	local count = 1000
 		        while count > 0 do
-		            Citizen.Wait(1)
+		            Wait(1)
 		            count = count - 1
 		            DrawText3Ds(back["x"],back["y"],back["z"],"Vehicle must be here to tow.")
 		        end
@@ -187,7 +167,7 @@ AddEventHandler('pv:tow', function()
 
 		    TriggerServerEvent('InteractSound_SV:PlayWithinDistance', 10.0, 'towtruck', 0.5)
 		    TaskTurnPedToFaceEntity(PlayerPedId(), vehicle, 1.0)
-		    Citizen.Wait(1000)
+		    Wait(1000)
 		    TriggerEvent("animation:tow")
 		    local finished = exports["np-taskbar"]:taskBar(15000,"Hooking up vehicle.")
         	if finished == 100 and aDist < 5.0 then
@@ -207,7 +187,7 @@ AddEventHandler('pv:tow', function()
 							while timeout < 1000 and not NetworkHasControlOfEntity(targetVehicle) do
 								timeout = timeout + 100
 								NetworkRequestControlOfEntity(targetVehicle)
-								Citizen.Wait(100)
+								Wait(100)
 							end
 		
 							if isVehicleTow == "flatbed3" then
@@ -274,7 +254,7 @@ AddEventHandler('pv:tow', function()
 		        while count > 0 and aDist > 1.5 do
 		        	back = GetOffsetFromEntityInWorldCoords(vehicle, 1.5,d1["y"]-0.5,0.0)
 		        	aDist = #(GetEntityCoords(PlayerPedId()) - back)
-		            Citizen.Wait(1)
+		            Wait(1)
 		            count = count - 1
 		            DrawText3Ds(back["x"],back["y"],back["z"]," Move here to untow the vehicle.")
 		        end
@@ -284,7 +264,7 @@ AddEventHandler('pv:tow', function()
 		    end
 		    
 		    TaskTurnPedToFaceEntity(PlayerPedId(), vehicle, 1.0)
-		    Citizen.Wait(1000)
+		    Wait(1000)
 		    TriggerEvent("animation:tow")
 		    TriggerServerEvent('InteractSound_SV:PlayWithinDistance', 10.0, 'towtruck', 0.5)
 		    local finished = exports["np-taskbar"]:taskBar(7000,"Untowing Vehicle")

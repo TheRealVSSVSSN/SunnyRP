@@ -12,7 +12,7 @@ end
 function loadAnimDict( dict )
     while ( not HasAnimDictLoaded( dict ) ) do
         RequestAnimDict( dict )
-        Citizen.Wait( 5 )
+        Wait( 5 )
     end
 end
 
@@ -114,7 +114,7 @@ AddEventHandler("COP:PayTow", function()
 	if onJob and not recentpay then
 		recentpay = true
 		TriggerServerEvent("server:givepayJob", "Tow Truck from Police Officer", 1500)
-		Citizen.Wait(300000)
+		Wait(300000)
 		recentpay = false
 	else
 		TriggerEvent("DoLongHudText","Someone tried to pay you, but, you were paid recently, or are not a Tow Truck Driver.",2)
@@ -129,7 +129,7 @@ AddEventHandler("COP:PayTow", function(amount)
 		if not recentpay then
 			recentpay = true
 			TriggerServerEvent("server:givepayJob", "Government Payment", 1500)
-			Citizen.Wait(300000)
+			Wait(300000)
 			recentpay = false
 		else
 			TriggerEvent("DoLongHudText","Someone tried to government pay you, but, you were paid recently.",2)
@@ -343,17 +343,17 @@ function KeyboardInput(TextEntry, ExampleText, MaxStringLenght)
   blockinput = true
 
   while UpdateOnscreenKeyboard() ~= 1 and UpdateOnscreenKeyboard() ~= 2 do 
-    Citizen.Wait(0)
+    Wait(0)
   end
     
   if UpdateOnscreenKeyboard() ~= 2 then
     local result = GetOnscreenKeyboardResult()
-    Citizen.Wait(500)
+    Wait(500)
     blockinput = false
     TriggerEvent("hud:insidePrompt",false)
     return result
   else
-    Citizen.Wait(500)
+    Wait(500)
     blockinput = false
     TriggerEvent("hud:insidePrompt",false)
     return nil 
@@ -378,7 +378,7 @@ AddEventHandler('returnmechanicmaterials', function(materialsTable)
 	-- 	local itemname = itemvalues[x]["itemname"]
 		-- local itemcount = materialsTable["itemid"..itemid]["amount"]
 		TriggerEvent("chatMessage","Storage",4,materialsTable)
-		Citizen.Wait(10)
+		Wait(10)
 	-- end
 end)
 
@@ -435,7 +435,7 @@ AddEventHandler('event:control:towgarage', function(useID)
 		local playerped = PlayerPedId()
 		local coordA = GetEntityCoords(playerped, 1)
 		local coordB = GetOffsetFromEntityInWorldCoords(playerped, 0.0, 5.0, 0.0)
-		local targetVehicle = getVehicleInDirection(coordA, coordB)		
+		local targetVehicle = GetVehicleInDirection(coordA, coordB)		
 		if targetVehicle ~= 0 then
 			local plate = GetVehicleNumberPlateText(targetVehicle)
 			local vehNetId = VehToNet(targetVehicle)
@@ -444,16 +444,16 @@ AddEventHandler('event:control:towgarage', function(useID)
 		else
 			TriggerEvent("DoLongHudText","No vehicle found.",2)
 		end
-		Citizen.Wait(5000)
+		Wait(5000)
 	end
 end)
 
 -- #MarkedForMarker
-Citizen.CreateThread(function()
+CreateThread(function()
 
 	while true do
 
-		Citizen.Wait(1)
+		Wait(1)
 
 		if not Menu.hidden then
 			Menu.renderGUI()
@@ -482,7 +482,7 @@ AddEventHandler('fakeplate:accepted', function(newplate,isStolen,oldplate)
 	local playerped = PlayerPedId()
 	local coordA = GetEntityCoords(playerped, 1)
 	local coordB = GetOffsetFromEntityInWorldCoords(playerped, 0.0, 5.0, 0.0)
-	local targetVehicle = getVehicleInDirection(coordA, coordB)
+	local targetVehicle = GetVehicleInDirection(coordA, coordB)
 	local plate = GetVehicleNumberPlateText(targetVehicle)
 	if targetVehicle ~= nil  and targetVehicle ~= 0 then
 		TriggerEvent("inventory:removeItem","fakeplate", 1)
@@ -504,7 +504,7 @@ AddEventHandler('fakeplate:change', function()
 	local playerped = PlayerPedId()
 	local coordA = GetEntityCoords(playerped, 1)
 	local coordB = GetOffsetFromEntityInWorldCoords(playerped, 0.0, 5.0, 0.0)
-	local targetVehicle = getVehicleInDirection(coordA, coordB)
+	local targetVehicle = GetVehicleInDirection(coordA, coordB)
 	local plate = GetVehicleNumberPlateText(targetVehicle)
 	if targetVehicle ~= nil  and targetVehicle ~= 0 then
 		loadAnimDict("amb@medic@standing@kneel@base")
@@ -617,10 +617,10 @@ garagedrop = {
 	[5] =  { ['x'] = 119.16,['y'] = 3596.08,['z'] = 40.27,['h'] = 267.62, ['info'] = ' Garage 5 Sales' },
 }
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	TriggerServerEvent('garage:Update')
 	while true do
-		Citizen.Wait(0)
+		Wait(0)
 		if IsControlJustPressed(1, Keys["Y"]) then
 			TriggerServerEvent("towgarage:checkJobBounce",true)
 		end
@@ -714,10 +714,10 @@ Citizen.CreateThread(function()
 								if finished == 100 then
 									TriggerEvent('inventory:removeItem',itemvalues[x]["name"], itemcount)
 									TriggerServerEvent("scrap:processPayment",itemcount,"Tow Garage " .. i,itemid)
-									Citizen.Wait(1000)
+									Wait(1000)
 								end
 							end
-							Citizen.Wait(100)
+							Wait(100)
 						end
 					end
 				end
@@ -781,7 +781,7 @@ AddEventHandler('towgarage:requestUpdate', function()
 	local playerped = PlayerPedId()
 	local coordA = GetEntityCoords(playerped, 1)
 	local coordB = GetOffsetFromEntityInWorldCoords(playerped, 0.0, 5.0, 0.0)
-	local targetVehicle = getVehicleInDirection(coordA, coordB)
+	local targetVehicle = GetVehicleInDirection(coordA, coordB)
 	local plate = GetVehicleNumberPlateText(targetVehicle)
 	TriggerServerEvent('veh.callDegredation',plate,true)
 end)
@@ -825,7 +825,7 @@ AddEventHandler('towgarage:triggermenu', function(degradation)
 	local playerped = PlayerPedId()
 	local coordA = GetEntityCoords(playerped, 1)
 	local coordB = GetOffsetFromEntityInWorldCoords(playerped, 0.0, 5.0, 0.0)
-	local targetVehicle = getVehicleInDirection(coordA, coordB)
+	local targetVehicle = GetVehicleInDirection(coordA, coordB)
 
 
 
@@ -961,7 +961,7 @@ AddEventHandler('towgarage:TriggerRepairs', function(degname,amount)
 
 		local coordA = GetEntityCoords(playerped, 1)
 		local coordB = GetOffsetFromEntityInWorldCoords(playerped, 0.0, 5.0, 0.0)
-		local targetVehicle = getVehicleInDirection(coordA, coordB)
+		local targetVehicle = GetVehicleInDirection(coordA, coordB)
 
 		if garagename == "Tow Garage 5" and not GetVehicleClass(targetVehicle) == 8
 		then
@@ -987,7 +987,7 @@ AddEventHandler('towgarage:checkDegMenu', function(JobCheck,button)
 	local playerped = PlayerPedId()
 	local coordA = GetEntityCoords(playerped, 1)
 	local coordB = GetOffsetFromEntityInWorldCoords(playerped, 0.0, 5.0, 0.0)
-	local targetVehicle = getVehicleInDirection(coordA, coordB)
+	local targetVehicle = GetVehicleInDirection(coordA, coordB)
 	local engineHealth = math.ceil(GetVehicleEngineHealth(targetVehicle))
 	local bodyHealth = math.ceil(GetVehicleBodyHealth(targetVehicle))
 
@@ -1049,7 +1049,7 @@ end)
 
 RegisterNetEvent('towgarage:flatbed')
 AddEventHandler('towgarage:flatbed', function(model)
-	Citizen.Wait(0)
+	Wait(0)
 	if lastPlate ~= nil then
 		TriggerEvent("keys:remove",lastPlate)
 	end
@@ -1102,7 +1102,7 @@ AddEventHandler('towgarage:startRepair', function(garageName,amount,part,current
 			local rand = 3
 
 			while isRepair do
-				Citizen.Wait(0)
+				Wait(0)
 
 				DrawMarker(27,offsetMark[rand], 0, 0, 0, 0, 0, 0, 1.001, 1.0001, 0.5001, 0, 212, 175, 55, 0, 0, 0, 0)
 
@@ -1152,7 +1152,7 @@ AddEventHandler('pv:putVechile', function(garageNum)
 		local playerped = PlayerPedId()
 		local coordA = GetEntityCoords(playerped, 1)
 		local coordB = GetOffsetFromEntityInWorldCoords(playerped, 0.0, 5.0, 0.0)
-		local targetVehicle = getVehicleInDirection(coordA, coordB)
+		local targetVehicle = GetVehicleInDirection(coordA, coordB)
 
 	if targetVehicle ~= nil  and targetVehicle ~= 0 then
 
@@ -1175,7 +1175,7 @@ AddEventHandler('pv:putVechile', function(garageNum)
 					isCar = true
 					hasPutCarIn = true
 				while isCar do
-					Citizen.Wait(0)
+					Wait(0)
 					local coords = GetOffsetFromEntityInWorldCoords(targetVehicle, 0, 3.5, 0)
 
 					
@@ -1188,7 +1188,7 @@ AddEventHandler('pv:putVechile', function(garageNum)
 									local playerped = PlayerPedId()
 									local coordA = GetEntityCoords(playerped, 1)
 									local coordB = GetOffsetFromEntityInWorldCoords(playerped, 0.0, 5.0, 0.0)
-									local targetVehicle = getVehicleInDirection(coordA, coordB)
+									local targetVehicle = GetVehicleInDirection(coordA, coordB)
 									local plate = GetVehicleNumberPlateText(targetVehicle)
 									TriggerServerEvent('veh.callDegredation',plate,true)
 								elseif IsControlJustPressed(1, Keys["G"]) then
@@ -1230,26 +1230,6 @@ AddEventHandler('towgarage:vechileExit', function(targetVehicle,garageNum)
 end)
 
 
-function getVehicleInDirection(coordFrom, coordTo)
-	local offset = 0
-	local rayHandle
-	local vehicle
-
-	for i = 0, 100 do
-		rayHandle = CastRayPointToPoint(coordFrom.x, coordFrom.y, coordFrom.z, coordTo.x, coordTo.y, coordTo.z + offset, 10, PlayerPedId(), 0)	
-		a, b, c, d, vehicle = GetRaycastResult(rayHandle)
-		
-		offset = offset - 1
-
-		if vehicle ~= 0 then break end
-	end
-	
-	local distance = Vdist2(coordFrom, GetEntityCoords(vehicle))
-	
-	if distance > 25 then vehicle = nil end
-
-    return vehicle ~= nil and vehicle or 0
-end
 
 
 
