@@ -1,5 +1,13 @@
-NPX = {}
-NPX.Jobs = {}
+--[[
+    -- Type: Shared Script
+    -- Name: sh_jobmanager.lua
+    -- Use: Defines available jobs and base configuration
+    -- Created: 09/10/2025
+    -- By: VSSVSSN
+--]]
+
+NPX = NPX or {}
+NPX.Jobs = NPX.Jobs or {}
 NPX.Jobs.ValidJobs = {
     ["unemployed"] = {
         name = "Unemployed",
@@ -18,7 +26,7 @@ NPX.Jobs.ValidJobs = {
         },
     },
     ["police"] = {
-        name = "Police officer",
+        name = "Police Officer",
         paycheck = 150,
         whitelisted = true,
         ranks = {
@@ -46,7 +54,7 @@ NPX.Jobs.ValidJobs = {
         paycheck = 50
     },
     ["taxi"] = {
-        name = "Taxi driver",
+        name = "Taxi Driver",
         paycheck = 20
     },
     ["trucker"] = {
@@ -93,5 +101,5 @@ NPX.Jobs.ValidJobs = {
         name = "Food Truck Vendor",
         paycheck = 10
     },
-
 }
+

@@ -1,46 +1,81 @@
+--[[
+    -- Type: Server Script
+    -- Name: sv_jobmanager.lua
+    -- Use: Server-side job management including whitelists and paychecks
+    -- Created: 09/10/2025
+    -- By: VSSVSSN
+--]]
+
 NPX.Jobs.CurPlayerJobs = {}
 
-for k,v in pairs(NPX.Jobs.ValidJobs) do
-    NPX.Jobs.CurPlayerJobs[k] = {}
+for job, _ in pairs(NPX.Jobs.ValidJobs) do
+    NPX.Jobs.CurPlayerJobs[job] = {}
 end
 
-function NPX.Jobs.IsWhiteListed(self, hexId, characterId, job, callback)
-    if not hexId or not characterId then return end
+--[[
+    -- Type: Function
+    -- Name: IsWhiteListed
+    -- Use: Checks if a character is whitelisted for a job
+    -- Created: 09/10/2025
+    -- By: VSSVSSN
+--]]
+function NPX.Jobs:IsWhiteListed(hexId, characterId, job, callback)
+    if not hexId or not characterId then
+        callback(false, false)
+        return
+    end
 
-    local q = [[SELECT cid, owner, cid, job, rank FROM jobs_whitelist WHERE cid = @cid AND job = @job LIMIT 1]]
-    local v = {["owner"] = hexId, ["cid"] = characterId, ["job"] = job}
+    local q = [[SELECT cid, owner, job, rank FROM jobs_whitelist WHERE cid = @cid AND job = @job LIMIT 1]]
+    local v = { owner = hexId, cid = characterId, job = job }
 
     exports.ghmattimysql:execute(q, v, function(results)
-        if not results then callback(false, false) return end
-
-        local isWhiteListed = (results and results[1]) and results[1] or false
-        local rank = (isWhiteListed and results[1].rank) and results[1].rank or false
-        callback(isWhiteListed, rank)
+        if not results or not results[1] then
+            callback(false, false)
+            return
+        end
+        local rank = results[1].rank or 0
+        callback(true, rank)
     end)
 end
 
-function NPX.Jobs.JobExists(self, job)
+--[[
+    -- Type: Function
+    -- Name: JobExists
+    -- Use: Validates if a job is defined
+    -- Created: 09/10/2025
+    -- By: VSSVSSN
+--]]
+function NPX.Jobs:JobExists(job)
     return NPX.Jobs.ValidJobs[job] ~= nil
 end
 
-function NPX.Jobs.CountJob(self, job)
+--[[
+    -- Type: Function
+    -- Name: CountJob
+    -- Use: Returns number of players with a specific job
+    -- Created: 09/10/2025
+    -- By: VSSVSSN
+--]]
+function NPX.Jobs:CountJob(job)
     if not NPX.Jobs:JobExists(job) then return 0 end
 
     local count = 0
-    for k,v in pairs(NPX.Jobs.CurPlayerJobs[job]) do
-        if job == "ems" then
-            if v.isWhiteListed == true then
-                count = count + 1
-            end
-        else
+    for _, data in pairs(NPX.Jobs.CurPlayerJobs[job]) do
+        if job ~= "ems" or data.isWhiteListed then
             count = count + 1
         end
     end
-
     return count
 end
 
-function NPX.Jobs.CanBecomeJob(self, user, job, callback)
+--[[
+    -- Type: Function
+    -- Name: CanBecomeJob
+    -- Use: Validates whether the user can switch to a job
+    -- Created: 09/10/2025
+    -- By: VSSVSSN
+--]]
+function NPX.Jobs:CanBecomeJob(user, job, callback)
     if not user then callback(false) return end
     if not user:getVar("characterLoaded") then callback(false, "Character not loaded") return end
 
@@ -48,66 +83,74 @@ function NPX.Jobs.CanBecomeJob(self, user, job, callback)
     local hexId = user:getVar("hexid")
     local characterId = user:getVar("character").id
 
-    -- if NPX.Jobs.ValidJobs[job].requireDriversLicense and not exports["police"]:CheckLicense(characterId, "Drivers License") then
-    --     callback(false, "You need a drivers license.")
-    --     return
-    -- end
-
     if not hexId or not characterId or not src then callback(false, "Id's don't exist") return end
-        if not NPX.Jobs.ValidJobs[job] then callback(false, "Job isn't a valid job") return end
-        
-        TriggerEvent("np-jobmanager:attemptBecomeJob", src, characterId, function(allowed, reason)
-            if not allowed then callback(false, reason) return end
+    if not NPX.Jobs.ValidJobs[job] then callback(false, "Job isn't a valid job") return end
+
+    TriggerEvent("np-jobmanager:attemptBecomeJob", src, characterId, function(allowed, reason)
+        if not allowed then callback(false, reason) return end
+    end)
+
+    if WasEventCanceled() then callback(false) return end
+
+    if NPX.Jobs.ValidJobs[job].whitelisted then
+        NPX.Jobs:IsWhiteListed(hexId, characterId, job, function(whiteListed, rank)
+            if not whiteListed then callback(false, "You're not whitelisted for this job") return end
+            callback(true, nil, rank)
         end)
+        return
+    end
 
-        if WasEventCanceled() then callback(false) return end
-
-        -- if NPX.Jobs:CountJob(job) < 1 and NPX.Jobs.ValidJobs[job].name == "EMS" then
-        --     callback(true)
-        --     return
-        -- else
-        --     callback(false)
-        --     return
-        -- end
-
-        if NPX.Jobs.ValidJobs[job].whitelisted then
-            NPX.Jobs:IsWhiteListed(hexId, characterId, job, function(whiteListed, rank)
-                if not whiteListed then callback(false, "You're not whitelisted for this job") return end
-                callback(true, nil, rank)
-            end)
+    if NPX.Jobs:JobExists(job) then
+        local jobTable = NPX.Jobs.ValidJobs[job]
+        if jobTable.max and NPX.Jobs:CountJob(job) >= jobTable.max then
+            callback(false, "There are too many employees for this job right now, try again later")
             return
         end
-
-        if NPX.Jobs:JobExists(job) then
-            local jobTable = NPX.Jobs.ValidJobs[job]
-            if jobTable and jobTable.max then
-                if NPX.Jobs:CountJob(job) >= jobTable.max then callback(false, "There are too many employees for this job right now, try again later") return end
-            end
-        end
-        callback(true)
+    end
+    callback(true)
 end
 
-function NPX.Jobs.AddWhiteList(self, user, job, rank)
+--[[
+    -- Type: Function
+    -- Name: AddWhiteList
+    -- Use: Adds a character to a job whitelist
+    -- Created: 09/10/2025
+    -- By: VSSVSSN
+--]]
+function NPX.Jobs:AddWhiteList(user, job, rank)
     local cid = user:getCurrentCharacter().id
     local hexId = user:getVar("hexid")
     local q = [[INSERT INTO jobs_whitelist (cid, owner, job, rank) VALUES (@cid, @owner, @job, @rank)]]
-    local v = {["cid"] = cid, ["owner"] = hexId, ["job"] = job, ["rank"] = rank}
+    local v = { cid = cid, owner = hexId, job = job, rank = rank }
     exports.ghmattimysql:execute(q, v)
 end
 
-function NPX.Jobs.SetRank(self, user, job, rank)
-    local q = [[UPDATE jobs_whitelist SET (rank) VALUES (@rank) WHERE cid = @cid]]
-    local v = {["cid"] = cid, ["rank"] = rank}
+--[[
+    -- Type: Function
+    -- Name: SetRank
+    -- Use: Updates a character's rank for a job
+    -- Created: 09/10/2025
+    -- By: VSSVSSN
+--]]
+function NPX.Jobs:SetRank(user, job, rank)
+    local cid = user:getCurrentCharacter().id
+    local q = [[UPDATE jobs_whitelist SET rank = @rank WHERE cid = @cid AND job = @job]]
+    local v = { cid = cid, rank = rank, job = job }
     exports.ghmattimysql:execute(q, v)
 end
 
-function NPX.Jobs.SetJob(self, user, job, notify, callback)
-    if not user then return false end
-    if not job or type(job) ~= "string" then return false end
-    if not user:getVar("characterLoaded") then return false end 
+--[[
+    -- Type: Function
+    -- Name: SetJob
+    -- Use: Assigns a job to a user
+    -- Created: 09/10/2025
+    -- By: VSSVSSN
+--]]
+function NPX.Jobs:SetJob(user, job, notify, callback)
+    if not user or type(job) ~= "string" then return false end
+    if not user:getVar("characterLoaded") then return false end
 
-
-    NPX.Jobs:CanBecomeJob(user, job, function(allowed, reason, rank) 
+    NPX.Jobs:CanBecomeJob(user, job, function(allowed, reason, rank)
         if not allowed then
             if reason and type(reason) == "string" then
                 TriggerClientEvent("DoLongHudText", user.source, tostring(reason), 1)
@@ -117,25 +160,26 @@ function NPX.Jobs.SetJob(self, user, job, notify, callback)
 
         local src = user:getVar("source")
         local oldJob = user:getVar("job")
-        local hexId = user:getVar("hexid")
-        local characterId = user:getVar("character").id
 
         if oldJob then
             NPX.Jobs.CurPlayerJobs[oldJob][src] = nil
         end
 
         user:setVar("job", job)
-        NPX.Jobs.CurPlayerJobs[job][src] = {rank = rank and rank or 0, lastPayCheck = GetGameTimer(),isWhiteListed = false} 
+        NPX.Jobs.CurPlayerJobs[job][src] = {
+            rank = rank or 0,
+            lastPayCheck = os.time(),
+            isWhiteListed = false
+        }
 
         local name = NPX.Jobs.ValidJobs[job].name
-
 
         TriggerClientEvent("np-jobmanager:playerBecameJob", src, job, name, false)
         TriggerClientEvent("np-jobmanager:playerBecomeEvent", src, job, name, notify)
 
         if NPX.Jobs:CountJob("trucker") >= 1 then
-            TriggerEvent("lscustoms:IsTruckerOnline",true)
-        elseif NPX.Jobs:CountJob("trucker") <= 0 then
+            TriggerEvent("lscustoms:IsTruckerOnline", true)
+        else
             TriggerEvent("lscustoms:IsTruckerOnline", false)
         end
 
@@ -143,111 +187,87 @@ function NPX.Jobs.SetJob(self, user, job, notify, callback)
     end)
 end
 
-AddEventHandler("playerDropped", function(reason)
+AddEventHandler("playerDropped", function()
     local src = source
-
-    for j,u in pairs(NPX.Jobs.CurPlayerJobs) do
-        for k,s in pairs(u) do
-            if k == src then NPX.Jobs.CurPlayerJobs[j][k] = nil end
-        end
+    for job, players in pairs(NPX.Jobs.CurPlayerJobs) do
+        players[src] = nil
     end
 end)
 
-AddEventHandler("np-base:characterLoaded", function(user, char)
+AddEventHandler("np-base:characterLoaded", function(user)
     NPX.Jobs:SetJob(user, "unemployed", false)
 end)
 
--- Need to think of a better way to do this, says no such export when resource is started
+-- Exports registration after resources are ready
 AddEventHandler("np-base:exportsReady", function()
     exports["np-base"]:addModule("JobManager", NPX.Jobs)
 end)
 
-local policebonus = 0
-local emsbonus = 0
-local civbonus = 0
+local policebonus, emsbonus, civbonus = 0, 0, 0
 
-RegisterServerEvent('updatePays')
-AddEventHandler('updatePays', function(policebonus1,emsbonus1,civbonus1)
-    policebonus = policebonus1
-    emsbonus = emsbonus1
-    civbonus = civbonus1
+RegisterNetEvent('updatePays', function(policeBonus, emsBonus, civBonus)
+    policebonus = policeBonus
+    emsbonus = emsBonus
+    civbonus = civBonus
 end)
 
-RegisterServerEvent('updateSinglePays')
-AddEventHandler('updateSinglePlays', function(bonus,bonusType)
-    bonusType = bonusType
-    bonus = bonus
+RegisterNetEvent('updateSinglePays', function(bonus, bonusType)
     if bonusType == 'police' then
         policebonus = bonus
-    end
-    if bonusType == 'ems' then
+    elseif bonusType == 'ems' then
         emsbonus = bonus
-    end
-    if bonusType == 'civilian' then
+    elseif bonusType == 'civilian' then
         civbonus = bonus
     end
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
-        local src = source
         local curTime = os.time()
-        for job,tbl in pairs(NPX.Jobs.CurPlayerJobs) do
-            if NPX.Jobs.ValidJobs[job].paycheck then
-                local payCheck = NPX.Jobs.ValidJobs[job].paycheck
-
-                if NPX.Jobs.ValidJobs[job].name == "Police Officer" then
+        for job, tbl in pairs(NPX.Jobs.CurPlayerJobs) do
+            local payCheck = NPX.Jobs.ValidJobs[job].paycheck
+            if payCheck then
+                if job == "police" then
                     payCheck = payCheck + policebonus
-
-                elseif NPX.Jobs.ValidJobs[job].name == "EMS" then
+                elseif job == "ems" then
                     payCheck = payCheck + emsbonus
-
                 else
                     payCheck = payCheck + civbonus
                 end
 
-                for src,data in pairs(tbl) do
-                    local user = exports["np-base"]:getModule("Player"):GetUser(src)
-                    if user then
-                        if tonumber(curTime) == tonumber(data.lastPayCheck) or tonumber(data.lastPayCheck) >= 480 then
-                            NPX.Jobs.CurPlayerJobs[job][src].lastPayCheck = curTime
-                            TriggerEvent("server:givepayJob", job, math.floor(payCheck), src)
-                            exports["np-log"]:AddLog("Job Pay", user, "User recieved paycheck, amount: " .. tostring(payCheck))
-                        else
-
+                for src, data in pairs(tbl) do
+                    if curTime - data.lastPayCheck >= 1200 then
+                        NPX.Jobs.CurPlayerJobs[job][src].lastPayCheck = curTime
+                        TriggerEvent("server:givepayJob", job, math.floor(payCheck), src)
+                        local user = exports["np-base"]:getModule("Player"):GetUser(src)
+                        if user then
+                            exports["np-log"]:AddLog("Job Pay", user, "User received paycheck, amount: " .. tostring(payCheck))
                         end
                     end
                 end
             end
         end
-
-        Citizen.Wait(1200000)
+        Wait(1200000) -- 20 minutes
     end
 end)
 
-RegisterServerEvent('jobssystem:jobs')
-AddEventHandler('jobssystem:jobs', function(job, src)
-    if src == nil or src == 0 then src = source end
-
+RegisterNetEvent('jobssystem:jobs', function(job, src)
+    src = src ~= nil and src ~= 0 and src or source
     local jobs = exports["np-base"]:getModule("JobManager")
     local user = exports["np-base"]:getModule("Player"):GetUser(src)
-
-    if not user then return end
-    if not jobs then return end
-
+    if not user or not jobs then return end
     jobs:SetJob(user, tostring(job))
-
 end)
 
-
-
 RegisterCommand('setjob', function(source, args)
-TriggerEvent('jobssystem:jobs', args[1], source)
+    TriggerEvent('jobssystem:jobs', args[1], source)
 end)
 
 RegisterCommand('addwhitelist', function(source, args)
     local user = exports["np-base"]:getModule("Player"):GetUser(tonumber(args[1]))
     local jobs = exports["np-base"]:getModule("JobManager")
-    jobs:AddWhiteList(user, args[2], args[3])
-    print(args[2], args[3])
+    if user and jobs then
+        jobs:AddWhiteList(user, args[2], args[3])
+    end
 end)
+
