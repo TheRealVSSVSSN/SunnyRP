@@ -1,151 +1,125 @@
-------------------------------------------------------- system
-local entityEnumerator = {
-  __gc = function(enum)
-    if enum.destructor and enum.handle then
-      enum.destructor(enum.handle)
-    end
-    enum.destructor = nil
-    enum.handle = nil
-  end
+--[[ 
+    -- Type: Resource
+    -- Name: fsn_entfinder
+    -- Use: Caches entity pools and offers helper exports for nearby lookups
+    -- Created: 2024-06-27
+    -- By: VSSVSSN
+--]]
+
+------------------------------------------------------- config
+local UPDATE_INTERVAL <const> = 500 -- milliseconds
+local NEARBY_RANGE <const> = 50.0
+
+local config = {
+    trackObjects = false,
+    trackPickups = false
 }
 
-local function EnumerateEntities(initFunc, moveFunc, disposeFunc)
-  return coroutine.wrap(function()
-    local iter, id = initFunc()
-    if not id or id == 0 then
-      disposeFunc(iter)
-      return
+local function table_wipe(tbl)
+    for k in pairs(tbl) do
+        tbl[k] = nil
     end
-    
-    local enum = {handle = iter, destructor = disposeFunc}
-    setmetatable(enum, entityEnumerator)
-    
-    local next = true
-    repeat
-      coroutine.yield(id)
-      next, id = moveFunc(iter)
-    until not next
-    
-    enum.destructor, enum.handle = nil, nil
-    disposeFunc(iter)
-  end)
 end
 
 ------------------------------------------------------- datastore
 local datastore = {
-  peds = {},
-  objects = false,
-  vehicles = {},
-  pickups = false,
-  nearby = {
     peds = {},
-    objects = {},
+    objects = config.trackObjects and {} or false,
     vehicles = {},
-    pickups = {}  
-  }
+    pickups = config.trackPickups and {} or false,
+    nearby = {
+        peds = {},
+        objects = {},
+        vehicles = {},
+        pickups = {}
+    }
 }
 
-local myPed = PlayerPedId()
+------------------------------------------------------- internals
+--- Refresh entity tables using game pools
+-- @param pool string: pool name e.g. 'CPed'
+-- @param list table: store for all entities
+-- @param nearby table: store for nearby entities
+-- @param playerCoords vector3: player's coordinates
+-- @param filter function? optional post process/filter
+local function refreshEntities(pool, list, nearby, playerCoords, filter)
+    table_wipe(list)
+    table_wipe(nearby)
 
-------------------------------------------------------- exports
-function getVehicles(nearby)
-  if nearby then return datastore.nearby.vehicles else return datastore.vehicles end
-end
-function getPeds(nearby)
-  if nearby then return datastore.nearby.peds else return datastore.peds end
-end
-function getPickups(nearby)
-  if nearby then return datastore.nearby.pickups else return datastore.pickups end
-end
-function getObjects(nearby)
-  if nearby then return datastore.nearby.objects else return datastore.objects end
-end
---[[
-function getPedNearCoords(x,y,z,Distance)
-	for k, v in pairs(datastore.peds) do
-		if GetDistanceBetweenCoords(GetEntityCoords(v), x, y, z, true) < Distance then
-			return v
-		end
-	end
-	return false
-end
-]]--
-function getPedNearCoords(x,y,z,Distance)
-    local TargetPed
-    local Handle, Ped = FindFirstPed()
-    repeat
-        local DistanceBetween = GetDistanceBetweenCoords(x,y,z, GetEntityCoords(Ped), true)
-        if DoesEntityExist(Ped) and not IsPedAPlayer(Ped) and DistanceBetween <= Distance then
-            TargetPed = Ped
+    for _, entity in ipairs(GetGamePool(pool)) do
+        list[#list + 1] = entity
+
+        if #(GetEntityCoords(entity) - playerCoords) <= NEARBY_RANGE then
+            nearby[#nearby + 1] = entity
         end
 
-    Success, Ped = FindNextPed(Handle)
-    until not Success
-
-    EndFindPed(Handle)
-    return TargetPed
-end 
-
-------------------------------------------------------- internals
-function get_objects()
-	return EnumerateEntities(FindFirstObject, FindNextObject, EndFindObject)
+        if filter then filter(entity) end
+    end
 end
 
-function get_pickups()
-	return EnumerateEntities(FindFirstPickup, FindNextPickup, EndFindPickup)
+------------------------------------------------------- exports
+--- Retrieve tracked vehicles
+-- @param nearby boolean: return only nearby vehicles
+function getVehicles(nearby)
+    return nearby and datastore.nearby.vehicles or datastore.vehicles
 end
 
-function get_vehicles()
-	return EnumerateEntities(FindFirstVehicle, FindNextVehicle, EndFindVehicle)
+--- Retrieve tracked peds
+-- @param nearby boolean: return only nearby peds
+function getPeds(nearby)
+    return nearby and datastore.nearby.peds or datastore.peds
 end
 
-function get_peds()
-	return EnumerateEntities(FindFirstPed, FindNextPed, EndFindPed)
+--- Retrieve tracked pickups
+-- @param nearby boolean: return only nearby pickups
+function getPickups(nearby)
+    return nearby and datastore.nearby.pickups or datastore.pickups
 end
-Citizen.CreateThread(function()
-	while true do Citizen.Wait(0)
-		if datastore.objects then
-			datastore.objects = {}
-			datastore.nearby.objects = {}
-			for obj in get_objects() do
-				table.insert(datastore.objects, #datastore.objects+1, obj)
-				if GetDistanceBetweenCoords(GetEntityCoords(obj), GetEntityCoords(myPed), true) < 50 then
-					table.insert(datastore.nearby.objects, #datastore.nearby.objects+1, obj)
-				end
-			end
-		end
-		if datastore.peds then
-			datastore.peds = {}
-			datastore.nearby.peds = {}
-			for ped in get_peds() do
-				table.insert(datastore.peds, #datastore.peds+1, ped)
-				-- move this here to remove a thread
-				SetPedDropsWeaponsWhenDead(ped, false)
-				if GetDistanceBetweenCoords(GetEntityCoords(ped), GetEntityCoords(myPed), true) < 50 then
-					table.insert(datastore.nearby.peds, #datastore.nearby.peds+1, ped)
-				end
-			end
-		end
-		if datastore.vehicles then
-			datastore.vehicles = {}
-			datastore.nearby.vehicles = {}
-			for veh in get_vehicles() do
-				table.insert(datastore.vehicles, #datastore.vehicles+1, veh)
-				if GetDistanceBetweenCoords(GetEntityCoords(veh), GetEntityCoords(myPed), true) < 50 then
-					table.insert(datastore.nearby.vehicles, #datastore.nearby.vehicles+1, veh)
-				end
-			end
-		end
-		if datastore.pickups then
-			datastore.pickups = {}
-			datastore.nearby.pickups = {}
-			for pickup in get_pickups() do
-				table.insert(datastore.pickups, #datastore.pickups+1, pickup)
-				if GetDistanceBetweenCoords(GetEntityCoords(pickup), GetEntityCoords(myPed), true) < 50 then
-					table.insert(datastore.nearby.pickups, #datastore.nearby.pickups+1, pickup)
-				end
-			end
-		end
-		Citizen.Wait(500) 
-	end
+
+--- Retrieve tracked objects
+-- @param nearby boolean: return only nearby objects
+function getObjects(nearby)
+    return nearby and datastore.nearby.objects or datastore.objects
+end
+
+--- Return the closest non-player ped to the given coords within Distance
+function getPedNearCoords(x, y, z, Distance)
+    local coords = vector3(x, y, z)
+    local target, nearest = nil, Distance + 0.0
+
+    for _, ped in ipairs(GetGamePool('CPed')) do
+        if DoesEntityExist(ped) and not IsPedAPlayer(ped) then
+            local dist = #(GetEntityCoords(ped) - coords)
+            if dist <= nearest then
+                nearest = dist
+                target = ped
+            end
+        end
+    end
+
+    return target
+end
+
+------------------------------------------------------- main loop
+CreateThread(function()
+    while true do
+        local playerPed = PlayerPedId()
+        local playerCoords = GetEntityCoords(playerPed)
+
+        refreshEntities('CPed', datastore.peds, datastore.nearby.peds, playerCoords, function(ped)
+            SetPedDropsWeaponsWhenDead(ped, false)
+        end)
+
+        refreshEntities('CVehicle', datastore.vehicles, datastore.nearby.vehicles, playerCoords)
+
+        if datastore.objects then
+            refreshEntities('CObject', datastore.objects, datastore.nearby.objects, playerCoords)
+        end
+
+        if datastore.pickups then
+            refreshEntities('CPickup', datastore.pickups, datastore.nearby.pickups, playerCoords)
+        end
+
+        Wait(UPDATE_INTERVAL)
+    end
 end)
