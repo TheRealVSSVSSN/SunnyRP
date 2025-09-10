@@ -1,43 +1,62 @@
-function FindEndPointCar(x,y)   
+--[[
+    -- Type: Script
+    -- Name: clientTowAI.lua
+    -- Use: AI towing assistance for security trucks
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+
+--[[
+    -- Type: Function
+    -- Name: FindEndPointCar
+    -- Use: Finds a safe node to spawn a vehicle near the given coordinates
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+function FindEndPointCar(x, y)
     local randomPool = 250.0
     while true do
-
-        if (randomPool > 2900) then
+        if randomPool > 2900 then
             return
         end
-        local vehSpawnResult = {}
-        vehSpawnResult["x"] = 0.0
-        vehSpawnResult["y"] = 0.0
-        vehSpawnResult["z"] = 30.0
-        vehSpawnResult["x"] = x + math.random(randomPool - (randomPool * 2),randomPool) + 1.0  
-        vehSpawnResult["y"] = y + math.random(randomPool - (randomPool * 2),randomPool) + 1.0  
-        roadtest, vehSpawnResult, outHeading = GetClosestVehicleNodeWithHeading(vehSpawnResult["x"], vehSpawnResult["y"], vehSpawnResult["z"],  0, 55.0, 55.0)
 
-        Citizen.Wait(1000)        
-        if vehSpawnResult["z"] ~= 0.0 then
-            local caisseo = GetClosestVehicle(vehSpawnResult["x"], vehSpawnResult["y"], vehSpawnResult["z"], 20.000, 0, 70)
-            if not DoesEntityExist(caisseo) then
+        local vehSpawnResult = { x = 0.0, y = 0.0, z = 30.0 }
+        vehSpawnResult.x = x + math.random(randomPool - (randomPool * 2), randomPool) + 1.0
+        vehSpawnResult.y = y + math.random(randomPool - (randomPool * 2), randomPool) + 1.0
 
-                return vehSpawnResult["x"], vehSpawnResult["y"], vehSpawnResult["z"], outHeading
-            end            
+        local roadtest
+        roadtest, vehSpawnResult, outHeading = GetClosestVehicleNodeWithHeading(vehSpawnResult.x, vehSpawnResult.y, vehSpawnResult.z, 0, 55.0, 55.0)
+
+        Citizen.Wait(1000)
+        if vehSpawnResult.z ~= 0.0 then
+            local nearest = GetClosestVehicle(vehSpawnResult.x, vehSpawnResult.y, vehSpawnResult.z, 20.0, 0, 70)
+            if not DoesEntityExist(nearest) then
+                return vehSpawnResult.x, vehSpawnResult.y, vehSpawnResult.z, outHeading
+            end
         end
 
         randomPool = randomPool + 50.0
     end
-    --endResult["x"], endResult["y"], endResult["z"]
 end
 count = 0
 RegisterNetEvent("loopfuck")
 AddEventHandler("loopfuck", function(targetVehicle)
-    local coords = GetEntityCoords(targetVehicle)    
+    local coords = GetEntityCoords(targetVehicle)
     while count > 0 do
         coords = GetEntityCoords(targetVehicle)
         Citizen.Wait(1)
-        DrawText3Ds(coords["x"], coords["y"],coords["z"], "Vehicle.")
+        DrawText3Ds(coords["x"], coords["y"], coords["z"], "Vehicle.")
     end
 end)
 
-function FindEndPointCar2(x,y) 
+--[[
+    -- Type: Function
+    -- Name: FindEndPointCar2
+    -- Use: Locates a drop-off node for impounded vehicles
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+function FindEndPointCar2(x,y)
 
     local randomPool = 10.0
     local tryneg = false
@@ -80,13 +99,20 @@ end
 
 
 
+--[[
+    -- Type: Event
+    -- Name: startAITow
+    -- Use: Spawns an AI tow truck and handles impound logic
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 RegisterNetEvent("startAITow")
 AddEventHandler("startAITow", function()
     TriggerEvent("DoLongHudText","No tow trucks are available - try the Police on /311.")
     if true then return end
     if lasttaxi then return end
-    coordA = GetEntityCoords(GetPlayerPed(-1), 1)
-    coordB = GetOffsetFromEntityInWorldCoords(GetPlayerPed(-1), 0.0, 100.0, 0.0)
+    coordA = GetEntityCoords(PlayerPedId())
+    coordB = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 100.0, 0.0)
     targetVehicle = getVehicleInDirection(coordA, coordB)
 
     lasttaxi = true
@@ -97,7 +123,7 @@ AddEventHandler("startAITow", function()
     while not HasModelLoaded(car) do
         Citizen.Wait(0)
     end
-    plycoords = GetEntityCoords(GetPlayerPed(-1))
+    plycoords = GetEntityCoords(PlayerPedId())
     vehSpawnResult = {}
 
     vehSpawnResult["x"], vehSpawnResult["y"], vehSpawnResult["z"], outHeading = FindEndPointCar(plycoords["x"],plycoords["y"])
@@ -274,9 +300,16 @@ end)
 
 
 
+--[[
+    -- Type: Function
+    -- Name: DrawText3Ds
+    -- Use: Renders helper text at a world location
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 function DrawText3Ds(x,y,z, text)
-    local onScreen,_x,_y=World3dToScreen2d(x,y,z)
-    local px,py,pz=table.unpack(GetGameplayCamCoords())
+    local onScreen,_x,_y = World3dToScreen2d(x,y,z)
+    local px,py,pz = table.unpack(GetGameplayCamCoords())
     SetTextScale(0.35, 0.35)
     SetTextFont(4)
     SetTextProportional(1)
@@ -290,24 +323,26 @@ function DrawText3Ds(x,y,z, text)
     DrawRect(_x,_y+0.0125, 0.015+ factor, 0.03, 41, 11, 41, 68)
 end
 
-
-
+--[[
+    -- Type: Function
+    -- Name: getVehicleInDirection
+    -- Use: Retrieves the first vehicle in a given direction from the player
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 function getVehicleInDirection(coordFrom, coordTo)
     local offset = 0
     local rayHandle
     local vehicle
 
     for i = 0, 100 do
-        rayHandle = CastRayPointToPoint(coordFrom.x, coordFrom.y, coordFrom.z, coordTo.x, coordTo.y, coordTo.z + offset, 10, GetPlayerPed(-1), 0)   
+        rayHandle = CastRayPointToPoint(coordFrom.x, coordFrom.y, coordFrom.z, coordTo.x, coordTo.y, coordTo.z + offset, 10, PlayerPedId(), 0)
         a, b, c, d, vehicle = GetRaycastResult(rayHandle)
-        
         offset = offset - 1
-
         if vehicle ~= 0 then break end
     end
-    
+
     local distance = Vdist2(coordFrom, GetEntityCoords(vehicle))
-    
     if distance > 25 then vehicle = nil end
 
     return vehicle ~= nil and vehicle or 0

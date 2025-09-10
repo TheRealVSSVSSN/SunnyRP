@@ -1,13 +1,35 @@
+--[[
+    -- Type: Script
+    -- Name: client.lua
+    -- Use: Client-side logic for security truck heists
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+
+--[[
+    -- Type: Variable
+    -- Name: attempted
+    -- Use: Holds the vehicle entity currently being robbed
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 local attempted = 0
 
 local pickup = false
 local additionalWait = 0
+
+--[[
+    -- Type: Event
+    -- Name: sec:PickupCash
+    -- Use: Begins the cash pick-up loop for the player
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 RegisterNetEvent('sec:PickupCash')
 AddEventHandler('sec:PickupCash', function()
     pickup = true
     TriggerEvent("sec:PickupCashLoop")
-    Wait(180000)
-    Wait(additionalWait)
+    Citizen.Wait(180000 + additionalWait)
     pickup = false
 end)
 
@@ -17,7 +39,7 @@ AddEventHandler('sec:PickupCashLoop', function()
     SetVehicleHandbrake(attempted,true)
     while pickup do
         Citizen.Wait(0)
-        local coords = GetEntityCoords(GetPlayerPed(-1))
+        local coords = GetEntityCoords(PlayerPedId())
         local aDist = GetDistanceBetweenCoords(coords["x"], coords["y"],coords["z"], markerlocation["x"],markerlocation["y"],markerlocation["z"])
         if aDist < 10.0 then
             DrawMarker(27,markerlocation["x"],markerlocation["y"],markerlocation["z"], 0, 0, 0, 0, 0, 0, 1.51, 1.51, 0.3, 212, 189, 0, 30, 0, 0, 2, 0, 0, 0, 0)
@@ -33,74 +55,53 @@ AddEventHandler('sec:PickupCashLoop', function()
         end
     end
 end)
+
+--[[
+    -- Type: Function
+    -- Name: DropItemPedBankCard
+    -- Use: Gives a random security card to the player
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 function DropItemPedBankCard()
-
-    local pos = GetEntityCoords(PlayerPedId())
-    local myluck = math.random(5)
-
-    if myluck == 1 then
-        TriggerEvent("player:receiveItem","securityblue",1)
-    elseif myluck == 2 then
-        TriggerEvent("player:receiveItem","securityblack",1)
-    elseif myluck == 3 then
-        TriggerEvent("player:receiveItem","securitygreen",1)
-    elseif myluck == 4 then
-        TriggerEvent("player:receiveItem","securitygold",1)
-    else
-        TriggerEvent("player:receiveItem","securityred",1)
-    end
-    
+    local cards = {
+        "securityblue",
+        "securityblack",
+        "securitygreen",
+        "securitygold",
+        "securityred"
+    }
+    TriggerEvent("player:receiveItem", cards[math.random(#cards)], 1)
 end
 
 
+--[[
+    -- Type: Event
+    -- Name: sec:AddPeds
+    -- Use: Spawns security guards inside the targeted vehicle
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 RegisterNetEvent('sec:AddPeds')
 AddEventHandler('sec:AddPeds', function(veh)
-    local cType = 's_m_m_highsec_01'
-
-    local pedmodel = GetHashKey(cType)
-    RequestModel(pedmodel)
-    while not HasModelLoaded(pedmodel) do
-        RequestModel(pedmodel)
+    local pedModel = GetHashKey('s_m_m_highsec_01')
+    RequestModel(pedModel)
+    while not HasModelLoaded(pedModel) do
+        RequestModel(pedModel)
         Citizen.Wait(100)
     end
 
-
-   ped2 = CreatePedInsideVehicle(veh, 4, pedmodel, 0, 1, 0.0)
-   DecorSetBool(ped2, 'ScriptedPed', true)
-   ped3 = CreatePedInsideVehicle(veh, 4, pedmodel, 1, 1, 0.0)
-   DecorSetBool(ped3, 'ScriptedPed', true)
-   ped4 = CreatePedInsideVehicle(veh, 4, pedmodel, 2, 1, 0.0)
-   DecorSetBool(ped4, 'ScriptedPed', true)
-
-   GiveWeaponToPed(ped2, GetHashKey('WEAPON_SpecialCarbine'), 420, 0, 1)
-   GiveWeaponToPed(ped3, GetHashKey('WEAPON_SpecialCarbine'), 420, 0, 1)
-   GiveWeaponToPed(ped4, GetHashKey('WEAPON_SpecialCarbine'), 420, 0, 1)
-
-
-   SetPedDropsWeaponsWhenDead(ped2,false)
-   SetPedRelationshipGroupDefaultHash(ped2,GetHashKey('COP'))
-   SetPedRelationshipGroupHash(ped2,GetHashKey('COP'))
-   SetPedAsCop(ped2,true)
-   SetCanAttackFriendly(ped2,false,true)
-
-   SetPedDropsWeaponsWhenDead(ped3,false)
-   SetPedRelationshipGroupDefaultHash(ped3,GetHashKey('COP'))
-   SetPedRelationshipGroupHash(ped3,GetHashKey('COP'))
-   SetPedAsCop(ped3,true)
-   SetCanAttackFriendly(ped3,false,true)
-   
-
-   SetPedDropsWeaponsWhenDead(ped4,false)
-   SetPedRelationshipGroupDefaultHash(ped4,GetHashKey('COP'))
-   SetPedRelationshipGroupHash(ped4,GetHashKey('COP'))
-   SetPedAsCop(ped4,true)
-   SetCanAttackFriendly(ped4,false,true)
-
-   TaskCombatPed(ped2, GetPlayerPed(-1), 0, 16)
-   TaskCombatPed(ped3, GetPlayerPed(-1), 0, 16)
-   TaskCombatPed(ped4, GetPlayerPed(-1), 0, 16)
-
-
+    for seat = 0, 2 do
+        local guard = CreatePedInsideVehicle(veh, 4, pedModel, seat, true, 0.0)
+        DecorSetBool(guard, 'ScriptedPed', true)
+        GiveWeaponToPed(guard, GetHashKey('WEAPON_SpecialCarbine'), 420, false, true)
+        SetPedDropsWeaponsWhenDead(guard, false)
+        SetPedRelationshipGroupDefaultHash(guard, GetHashKey('COP'))
+        SetPedRelationshipGroupHash(guard, GetHashKey('COP'))
+        SetPedAsCop(guard, true)
+        SetCanAttackFriendly(guard, false, true)
+        TaskCombatPed(guard, PlayerPedId(), 0, 16)
+    end
 end)
 
 
@@ -123,13 +124,21 @@ end)
 -- end)
 
 local pickingup = false
+
+--[[
+    -- Type: Function
+    -- Name: pickUpCash
+    -- Use: Handles the animation and rewards while looting the truck
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 function pickUpCash()
     local gotcard = false
     local alerted = false
     local addedAdditionalTime = false
     if not pickingup then
         TriggerEvent("alert:noPedCheck", "banktruck")
-        local coords = GetEntityCoords(GetPlayerPed(-1))
+        local coords = GetEntityCoords(PlayerPedId())
        -- Citizen.Trace("Doing Animation")
         local length = 2
         pickingup = true
@@ -141,16 +150,16 @@ function pickUpCash()
 
         while pickingup do
 
-            local coords2 = GetEntityCoords(GetPlayerPed(-1))
+            local coords2 = GetEntityCoords(PlayerPedId())
             local aDist = GetDistanceBetweenCoords(coords["x"], coords["y"],coords["z"], coords2["x"],coords2["y"],coords2["z"])
             if aDist > 1.0 or not pickup then
                 pickingup = false
             end
 
-            if IsEntityPlayingAnim(GetPlayerPed(-1), "anim@mp_snowball", "pickup_snowball", 3) then
+            if IsEntityPlayingAnim(PlayerPedId(), "anim@mp_snowball", "pickup_snowball", 3) then
                 --ClearPedSecondaryTask(player)
             else
-                TaskPlayAnim(GetPlayerPed(-1), "anim@mp_snowball", "pickup_snowball", 8.0, -8, -1, 49, 0, 0, 0, 0)
+                TaskPlayAnim(PlayerPedId(), "anim@mp_snowball", "pickup_snowball", 8.0, -8.0, -1, 49, 0.0, 0, 0, 0)
             end 
 
             local chance = math.random(1,60)
@@ -174,7 +183,7 @@ function pickUpCash()
             local waitMin = 4000
             local waitMax = 6000
             
-            Wait(waitMin, waitMax)
+            Citizen.Wait(math.random(waitMin, waitMax))
 
             length = length + 1
 
@@ -184,7 +193,7 @@ function pickUpCash()
 
         end
         additionalWait = 0
-        ClearPedTasks(GetPlayerPed(-1))
+        ClearPedTasks(PlayerPedId())
         
     end
 end
@@ -203,14 +212,21 @@ end)
 RegisterNetEvent('sec:AllowHeist')
 AddEventHandler('sec:AllowHeist', function()
     TriggerEvent("sec:AddPeds",attempted)
-    SetVehicleDoorOpen(attempted, 2, 0, 0)
-    SetVehicleDoorOpen(attempted, 3, 0, 0)
+    SetVehicleDoorOpen(attempted, 2, false, false)
+    SetVehicleDoorOpen(attempted, 3, false, false)
     TriggerEvent("sec:PickupCash")
 
 end)
 
 
 
+--[[
+    -- Type: Function
+    -- Name: DrawText3Ds
+    -- Use: Renders 3D text at a world coordinate
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 function DrawText3Ds(x,y,z, text)
     local onScreen,_x,_y=World3dToScreen2d(x,y,z)
     local px,py,pz=table.unpack(GetGameplayCamCoords())
@@ -228,8 +244,16 @@ function DrawText3Ds(x,y,z, text)
 end
 
 
- --TaskCombatPed(ped, GetPlayerPed(-1), 0, 16)  
-function FindEndPointCar(x,y)   
+ --TaskCombatPed(ped, GetPlayerPed(-1), 0, 16)
+
+--[[
+    -- Type: Function
+    -- Name: FindEndPointCar
+    -- Use: Finds a safe road node near the given coordinates
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+function FindEndPointCar(x,y)
 	local randomPool = 50.0
 	while true do
 
