@@ -173,7 +173,7 @@ function valueVehicle()
 		end
 		value = ((value / max) * 400)
 		value = math.ceil(value)	
-		Citizen.Trace(factor .. " = " .. value .. " - " .. sales)
+		print(factor .. " = " .. value .. " - " .. sales)
 		toupdateValues[i] = { ["value"] = math.ceil(value), ["factor"] = factor, ["sales"] = sales }
 		value = value - sales
 		value = value / 2.5
@@ -205,10 +205,10 @@ function getKeysSortedByValue(tbl, sortFunction)
 
 	local penis = -4
 	for _, key in ipairs(keys) do
-		Citizen.Trace(key)
+		print(key)
 		local cocks = values[key]["sales"]
 		values[key]["sales"] = cocks + penis
-		Citizen.Trace(values[key]["factor"] .. " new value is now " .. values[key]["sales"])
+		print(values[key]["factor"] .. " new value is now " .. values[key]["sales"])
 		penis = penis + 1
 		if penis == 0 then
 			penis = 1
@@ -285,19 +285,19 @@ RegisterNetEvent("chopshop:taskItem")
 AddEventHandler("chopshop:taskItem", function(z)
 	
 	zz = z
-	Citizen.Trace("doing item stuffs heh")
+	print("doing item stuffs heh")
 	if zz then
 
 		RequestAnimDict('anim@heists@box_carry@')
 		while not HasAnimDictLoaded("anim@heists@box_carry@") do
-			Citizen.Wait(0)
+			Wait(0)
 		end
 
 		TriggerEvent("attachItemChop",values[taskNumber]["item"])
 
 		while zz do
 
-			Citizen.Wait(1)
+			Wait(1)
 
 			if not IsEntityPlayingAnim(PlayerPedId(), "anim@heists@box_carry@", "idle", 3) then
 				TaskPlayAnim(PlayerPedId(), "anim@heists@box_carry@", "idle", 8.0, -8, -1, 49, 0, 0, 0, 0)
@@ -307,7 +307,7 @@ AddEventHandler("chopshop:taskItem", function(z)
 
 	else
 		TriggerEvent("attachRemoveChopShop")
-		Citizen.Wait(100)
+		Wait(100)
 		ClearPedTasksImmediately(PlayerPedId())
 	end			
 end)
@@ -315,7 +315,7 @@ end)
 local front = 0
 local back = 0
 
-Citizen.CreateThread(function()
+CreateThread(function()
 
 	--SetEntityCoords(PlayerPedId(),976.81365966797,-3001.3740234375,-39.603717803955)
 	while true do
@@ -323,7 +323,7 @@ Citizen.CreateThread(function()
 		local pos = GetEntityCoords( PlayerPedId() )
 		if #(vector3(194.74269104004,-1005.3385620117,-98.999961853027) - pos) < 1 then
 			TriggerEvent("DoShortHudText", "Please Move.",2)
-			Citizen.Wait(2000)
+			Wait(2000)
 		end
 
 		if locationset then
@@ -354,7 +354,7 @@ Citizen.CreateThread(function()
 						if IsControlJustReleased(2, 38) then	
 							inprocess = true	
 							playDrill()	
-							Citizen.Wait(200)	
+							Wait(200)	
 						end	
 					else	
 						DrawText3DTest(postup["x"],postup["y"],postup["z"], "Face the vehicle to work on it.", 255,true)	
@@ -376,11 +376,10 @@ Citizen.CreateThread(function()
 						if taskNumber > 8 then	
 							valueVehicle()	
 
-							Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(myChop))	
-							DeleteVehicle(myChop)	
+                                                        DeleteVehicle(myChop)
 							SetEntityCoords(myChop,0.0,0.0,-90.0)	
 						end	
-						Citizen.Wait(200)	
+						Wait(200)	
 					end	
 				end	
 			end	
@@ -423,7 +422,7 @@ Citizen.CreateThread(function()
 							local caisseo = GetClosestVehicle(976.81365966797,-3001.3740234375,-39.603717803955, 4.000, 0, 70)
 							if DoesEntityExist(caisseo) then
 								TriggerEvent("DoLongHudText", "They're busy!",2 )
-								Citizen.Wait(2000)
+								Wait(2000)
 							else
 								if chopshopowner == 99999 then
 									TriggerServerEvent("request:chopshop",cid)
@@ -434,10 +433,10 @@ Citizen.CreateThread(function()
 									else
 										TriggerEvent("DoLongHudText","We cant do this vehicle, there is parts needing delivery.",2)
 									end
-									Citizen.Wait(2000)
+									Wait(2000)
 								else
 									SetEntityCoords(currentVehicle,976.81365966797,-3001.3740234375,-39.603717803955)
-									Citizen.Wait(2000)
+									Wait(2000)
 								end
 							end
 		   				end
@@ -464,13 +463,13 @@ Citizen.CreateThread(function()
 							local caisseo = GetClosestVehicle(194.74269104004,-1005.3385620117,-98.999961853027, 4.000, 0, 70)
 							if DoesEntityExist(caisseo) then
 								TriggerEvent("DoLongHudText", "They're busy!",2 )
-								Citizen.Wait(2000)
+								Wait(2000)
 							else
 								SetEntityCoords(currentVehicle,194.74269104004,-1005.3385620117,-98.999961853027)
 								myChop = currentVehicle
 
 								TriggerEvent("DoLongHudText", "Move your car.",2 )
-								Citizen.Wait(2000)
+								Wait(2000)
 							end							
 		   				end
 					end
@@ -500,7 +499,7 @@ Citizen.CreateThread(function()
 				DrawMarker(27,964.42156982422,-3003.5859375,-40.539896392822,0,0,0,0,0,0,1.001,1.0001,0.9001,50,115,155,50,0,0,0,0)
 				if IsControlJustReleased(2, 38) and #(vector3(964.42156982422,-3003.5859375,-39.639896392822) - pos) < 3 then
 					TriggerEvent("chopshop:currentValues")
-					Citizen.Wait(8000)
+					Wait(8000)
    				end
    			end
 
@@ -519,7 +518,7 @@ Citizen.CreateThread(function()
 					end	
 
 					endVars()
-					Citizen.Wait(2000)
+					Wait(2000)
    				end
    			end
 
@@ -537,7 +536,7 @@ Citizen.CreateThread(function()
 					end	
 
 					endVars()
-					Citizen.Wait(2000)
+					Wait(2000)
    				end
    			end
 
@@ -576,10 +575,9 @@ AddEventHandler("chopshop:closed", function()
 	if #(vector3(976.81365966797,-3001.3740234375,-39.603717803955) - pos) < 70 then
 		TriggerEvent("DoLongHudText","Chop Shop is shut, its too hot here - check your radio shortly.")
 		TaskLeaveVehicle(PlayerPedId(), myChop, 0)
-		Citizen.Wait(10)		
+		Wait(10)		
 
-		Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(myChop))	
-		DeleteVehicle(myChop)	
+                DeleteVehicle(myChop)
 		SetEntityCoords(myChop,0.0,0.0,-90.0)	
 		SetEntityCoords(PlayerPedId(),chopshop["x"],chopshop["y"],chopshop["z"])
 		endVars()
@@ -599,12 +597,12 @@ end
 function animCar()
 	RequestAnimDict('mp_car_bomb')
 	while not HasAnimDictLoaded("mp_car_bomb") do
-		Citizen.Wait(0)
+		Wait(0)
 	end
 	if not IsEntityPlayingAnim(PlayerPedId(), "mp_car_bomb", "car_bomb_mechanic", 3) then
 		TaskPlayAnim(PlayerPedId(), "mp_car_bomb", "car_bomb_mechanic", 8.0, -8, -1, 49, 0, 0, 0, 0)
 	end
-	Citizen.Wait(2200)  
+	Wait(2200)  
 	ClearPedTasks(PlayerPedId())
 end
 
