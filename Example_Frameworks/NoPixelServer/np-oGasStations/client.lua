@@ -31,37 +31,52 @@ local gasStations = {
     {-66.58, -2532.56, 6.14, 400}
 }
 
-function getVehicleInDirection(coordFrom, coordTo)
+--[[
+    -- Type: Function
+    -- Name: getVehicleInDirection
+    -- Use: Raycasts forward and returns the first vehicle hit
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function getVehicleInDirection(coordFrom, coordTo)
     local offset = 0
     local rayHandle
     local vehicle
 
-    for i = 0, 100 do
-        rayHandle = CastRayPointToPoint(coordFrom.x, coordFrom.y, coordFrom.z, coordTo.x, coordTo.y, coordTo.z + offset, 10, PlayerPedId(), 0)   
-        a, b, c, d, vehicle = GetRaycastResult(rayHandle)
-        
+    for _ = 0, 100 do
+        rayHandle = CastRayPointToPoint(coordFrom.x, coordFrom.y, coordFrom.z, coordTo.x, coordTo.y, coordTo.z + offset, 10, PlayerPedId(), 0)
+        local _, _, _, _, hitVehicle = GetRaycastResult(rayHandle)
+        vehicle = hitVehicle
         offset = offset - 1
-
         if vehicle ~= 0 then break end
     end
-    
-    local distance = Vdist2(coordFrom, GetEntityCoords(vehicle))
-    
-    if distance > 3000 then vehicle = nil end
 
-    return vehicle ~= nil and vehicle or 0
+    if vehicle ~= 0 then
+        local distance = Vdist2(coordFrom, GetEntityCoords(vehicle))
+        if distance > 3000 then vehicle = 0 end
+    end
+
+    return vehicle
 end
+
 local showGasStations = false
 
-RegisterNetEvent('CarPlayerHud:ToggleGas')
-AddEventHandler('CarPlayerHud:ToggleGas', function()
+--[[
+    -- Type: Function
+    -- Name: toggleGasStationBlips
+    -- Use: Toggles map blips for gas stations
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function toggleGasStationBlips()
     showGasStations = not showGasStations
-   for _, item in pairs(gasStations) do
-        if not showGasStations then
-            if item.blip ~= nil then
-                RemoveBlip(item.blip)
-            end
-        else
+    for _, item in ipairs(gasStations) do
+        if item.blip then
+            RemoveBlip(item.blip)
+            item.blip = nil
+        end
+
+        if showGasStations then
             item.blip = AddBlipForCoord(item[1], item[2], item[3])
             SetBlipSprite(item.blip, 361)
             SetBlipScale(item.blip, 0.7)
@@ -71,135 +86,167 @@ AddEventHandler('CarPlayerHud:ToggleGas', function()
             EndTextCommandSetBlipName(item.blip)
         end
     end
-end)
+end
+
+RegisterNetEvent('CarPlayerHud:ToggleGas')
+AddEventHandler('CarPlayerHud:ToggleGas', toggleGasStationBlips)
 
 Citizen.CreateThread(function()
     showGasStations = true
     TriggerEvent('CarPlayerHud:ToggleGas')
 end)
 
-function DisplayHelpText(str)
+--[[
+    -- Type: Function
+    -- Name: DisplayHelpText
+    -- Use: Shows help text on the player's screen
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function DisplayHelpText(str)
     SetTextComponentFormat("STRING")
     AddTextComponentString(str)
     DisplayHelpTextFromStringLabel(0, 0, 1, -1)
 end
 
-
-
-
-function TargetVehicle()
-    playerped = PlayerPedId()
-    coordA = GetEntityCoords(playerped, 1)
-    coordB = GetOffsetFromEntityInWorldCoords(playerped, 0.0, 100.0, 0.0)
-    targetVehicle = getVehicleInDirection(coordA, coordB)
+--[[
+    -- Type: Function
+    -- Name: TargetVehicle
+    -- Use: Returns the vehicle player is aiming at
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function TargetVehicle()
+    local playerped = PlayerPedId()
+    local coordA = GetEntityCoords(playerped)
+    local coordB = GetOffsetFromEntityInWorldCoords(playerped, 0.0, 100.0, 0.0)
+    local targetVehicle = getVehicleInDirection(coordA, coordB)
     return targetVehicle
 end
 
-function IsNearGasStations()
-    local location = {}
-    local hasFound = false
-    local pos = GetEntityCoords(PlayerPedId(), false)
-    for k,v in ipairs(gasStations) do
-        if(Vdist(v[1], v[2], v[3], pos.x, pos.y, pos.z) < 22.0)then
-            location = {v[1], v[2], v[3],v[4]}
-            hasFound = true
+--[[
+    -- Type: Function
+    -- Name: IsNearGasStations
+    -- Use: Determines if player is near any gas station
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function IsNearGasStations()
+    local pos = GetEntityCoords(PlayerPedId())
+    for _, v in ipairs(gasStations) do
+        if Vdist(v[1], v[2], v[3], pos.x, pos.y, pos.z) < 22.0 then
+            return { v[1], v[2], v[3], v[4] }, true
         end
     end
-
-
-    if hasFound then return location,true end
-    return {},false
+    return {}, false
 end
 
-
+--[[
+    -- Type: Event
+    -- Name: RefuelCar
+    -- Use: Refuels targeted vehicle using a petrol can
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 RegisterNetEvent("RefuelCar")
-AddEventHandler("RefuelCar",function()
-    local w = `WEAPON_PetrolCan` 
+AddEventHandler("RefuelCar", function()
+    local w = `WEAPON_PetrolCan`
     local curw = GetSelectedPedWeapon(PlayerPedId())
     if curw == w then
-        coordA = GetEntityCoords(PlayerPedId(), 1)
-        coordB = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 100.0, 0.0)
-        targetVehicle = getVehicleInDirection(coordA, coordB)
+        local coordA = GetEntityCoords(PlayerPedId())
+        local coordB = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 100.0, 0.0)
+        local targetVehicle = getVehicleInDirection(coordA, coordB)
         if DoesEntityExist(targetVehicle) then
-            SetPedAmmo( PlayerPedId(), GetSelectedPedWeapon(PlayerPedId()), 0 )
+            SetPedAmmo(PlayerPedId(), GetSelectedPedWeapon(PlayerPedId()), 0)
 
-            if DecorExistOn(targetVehicle, "CurrentFuel") then 
+            local curFuel
+            if DecorExistOn(targetVehicle, "CurrentFuel") then
                 curFuel = DecorGetInt(targetVehicle, "CurrentFuel")
-                
-                curFuel = curFuel + 30
-                if curFuel > 100 then
-                    curFuel = 100
-                end
-                DecorSetInt(targetVehicle, "CurrentFuel", curFuel)
+                curFuel = math.min(curFuel + 30, 100)
             else
-                DecorSetInt(targetVehicle, "CurrentFuel", 50)
+                curFuel = 50
             end
 
-            DecorSetInt(targetVehicle, "CurrentFuel", 100)
-            TriggerEvent("DoLongHudText","Refueled",1)
+            DecorSetInt(targetVehicle, "CurrentFuel", curFuel)
+            TriggerEvent("DoLongHudText", "Refueled", 1)
         else
-            TriggerEvent("DoLongHudText","No Target",2)
+            TriggerEvent("DoLongHudText", "No Target", 2)
         end
     else
-        TriggerEvent("DoLongHudText","Need a Gas Can",2)
+        TriggerEvent("DoLongHudText", "Need a Gas Can", 2)
     end
 end)
 
-RegisterNetEvent("RefuelCarServerReturn")
-AddEventHandler("RefuelCarServerReturn",function()
-
-
-    local timer = (100 - curFuel) * 400
-    refillVehicle()
-    local finished = exports["np-taskbar"]:taskBar(timer,"Refueling")
-    local veh = TargetVehicle()
-
-    if finished == 100 then
-        DecorSetInt(veh, "CurrentFuel", 100)
-    else
-
-        local curFuel = DecorGetInt(veh, "CurrentFuel")
-        local endFuel = (100 - curFuel) 
-        endFuel = math.ceil(endFuel * (finished / 100) + curFuel)
-        DecorSetInt(veh, "CurrentFuel", endFuel)
-
+--[[
+    -- Type: Function
+    -- Name: loadAnimDict
+    -- Use: Requests and loads animation dictionaries
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function loadAnimDict(dict)
+    while not HasAnimDictLoaded(dict) do
+        RequestAnimDict(dict)
+        Citizen.Wait(5)
     end
-    
-    endanimation()
-end)
-
-local petrolCan = {title = "Petrol Can", name = "PetrolCan", costs = 100, description = {}, model = "WEAPON_PetrolCan"}
-
-
-
-function refillVehicle()
-    ClearPedSecondaryTask(PlayerPedId())
-    loadAnimDict( "weapon@w_sp_jerrycan" ) 
-    TaskPlayAnim( PlayerPedId(), "weapon@w_sp_jerrycan", "fire", 8.0, 1.0, -1, 1, 0, 0, 0, 0 )
-    
 end
 
-function endanimation()
+--[[
+    -- Type: Function
+    -- Name: refillVehicle
+    -- Use: Plays refueling animation
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function refillVehicle()
+    ClearPedSecondaryTask(PlayerPedId())
+    loadAnimDict("weapon@w_sp_jerrycan")
+    TaskPlayAnim(PlayerPedId(), "weapon@w_sp_jerrycan", "fire", 8.0, 1.0, -1, 1, 0, 0, 0, 0)
+end
+
+--[[
+    -- Type: Function
+    -- Name: endanimation
+    -- Use: Clears refueling animation state
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function endanimation()
     shiftheld = false
     ctrlheld = false
     tabheld = false
     ClearPedTasksImmediately(PlayerPedId())
 end
 
-function loadAnimDict( dict )
-    while ( not HasAnimDictLoaded( dict ) ) do
-        RequestAnimDict( dict )
-        Citizen.Wait( 5 )
-    end
-end
+--[[
+    -- Type: Event
+    -- Name: RefuelCarServerReturn
+    -- Use: Handles timed refueling via server validation
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent("RefuelCarServerReturn")
+AddEventHandler("RefuelCarServerReturn", function()
+    local veh = TargetVehicle()
+    if veh == 0 then return end
 
-function TargetVehicle()
-    playerped = PlayerPedId()
-    coordA = GetEntityCoords(playerped, 1)
-    coordB = GetOffsetFromEntityInWorldCoords(playerped, 0.0, 100.0, 0.0)
-    targetVehicle = getVehicleInDirection(coordA, coordB)
-    return targetVehicle
-end
+    local curFuel = DecorGetInt(veh, "CurrentFuel")
+    local timer = (100 - curFuel) * 400
+    refillVehicle()
+    local finished = exports["np-taskbar"]:taskBar(timer, "Refueling")
+
+    if finished == 100 then
+        DecorSetInt(veh, "CurrentFuel", 100)
+    else
+        local endFuel = (100 - curFuel)
+        endFuel = math.ceil(endFuel * (finished / 100) + curFuel)
+        DecorSetInt(veh, "CurrentFuel", endFuel)
+    end
+
+    endanimation()
+end)
+
+local petrolCan = {title = "Petrol Can", name = "PetrolCan", costs = 100, description = {}, model = "WEAPON_PetrolCan"}
 
 
 
