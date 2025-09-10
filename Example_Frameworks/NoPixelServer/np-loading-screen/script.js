@@ -1,342 +1,171 @@
-
-var count = 0;
-
-const gstate = {
-  elems: [],
-  log: []
-};
-
-
-const technicalNames = ["INIT_BEFORE_MAP_LOADED", "MAP", "INIT_AFTER_MAP_LOADED", "INIT_SESSION"];
-var currentLoadingStage = 0;
-var loadingWeights = [1.5 / 10, 4 / 10, 1.5 / 10, 3 / 10];
-// These are hardcoded but can be changed easily
-// If # changes it's not the biggest deal; most important is which of the bars you are on (and that is unaffected by these numbers)
-// Make #debug window visible and you can quickly see #s of each
-// Just make sure you do it after restarting your FiveM client as client caches a lot in memory after first join
-var loadingTotals = [70, 70, 70, 220];
-var registeredTotals = [0, 0, 0, 0];
-var stageVisible = [false, false, false, false];
-
-var currentProgress = [0.0, 0.0, 0.0, 0.0];
-var currentLoadingCount = 0;
-
-
-const totalWidth = 99.1;
-var progressPositions = [];
-var progressMaxLengths = [];
-progressPositions[0] = 0.0;
-
-
-
 /*
- Functions below : Vue object
- Descipition: controls and handles vue components 
-
+    -- Type: State Module
+    -- Name: LoadingScreen
+    -- Use: Handles progress bars, logging, and background rotation for the loading screen
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
 */
 
-let v = new Vue({
-  el: '#app',
-  data: {
+(() => {
+  const technicalStages = ['INIT_BEFORE_MAP_LOADED', 'MAP', 'INIT_AFTER_MAP_LOADED', 'INIT_SESSION'];
+  const loadingWeights = [0.15, 0.4, 0.15, 0.3];
+  const loadingTotals = [70, 70, 70, 220];
+  const totalWidth = 99.1;
+
+  const state = {
+    currentStage: 0,
+    currentCount: 0,
+    progress: new Array(technicalStages.length).fill(0),
+    stageVisible: new Array(technicalStages.length).fill(false),
+    log: [],
     showLog: false,
-    lastbackground: -1,
-  },
-  methods: {
+    lastBackground: -1
+  };
 
+  const progressMax = loadingWeights.map(w => w * totalWidth);
+  let count = 0;
 
-    doProgress(stage) {
-      var idx = technicalNames.indexOf(stage);
-      if (idx >= 0) {
-        registeredTotals[idx]++;
-        if (idx > currentLoadingStage) {
-          while (currentLoadingStage < idx) {
-            currentProgress[currentLoadingStage] = 1.0;
-            currentLoadingStage++;
-          }
-          currentLoadingCount = 1;
+  function updateProgress() {
+    const debug = document.getElementById('debug');
+    debug.innerHTML = '';
+    for (let i = 0; i <= state.currentStage; i++) {
+      if ((state.progress[i] > 0 || !state.progress[i - 1]) && !state.stageVisible[i]) {
+        const bar = document.getElementById(`${technicalStages[i]}-bar`);
+        const label = document.getElementById(`${technicalStages[i]}-label`);
+        if (bar) {
+          bar.style.display = 'inline-block';
+          state.stageVisible[i] = true;
         }
-        else
-          currentLoadingCount++;
-        currentProgress[currentLoadingStage] = Math.min(currentLoadingCount / loadingTotals[idx], 1.0);
-        this.updateProgress();
-      }
-    },
-
-    updateProgress() {
-      document.querySelector('#debug').innerHTML = '';
-      var i = 0;
-      while (i <= currentLoadingStage) {
-        if ((currentProgress[i] > 0 || !currentProgress[i - 1]) && !stageVisible[i]) {
-
-          document.querySelector("#" + technicalNames[i] + "-bar").style.display = 'inline-block';
-          stageVisible[i] = true;
-        }
-        document.querySelector("#" + technicalNames[i] + "-bar").style.width = currentProgress[i] * progressMaxLengths[i] + '%';
-        document.querySelector("#" + technicalNames[i] + "-label").style.width = progressMaxLengths[i] + '%';
-        document.querySelector('#debug').innerHTML += String.format('{0}: {1}<br />', technicalNames[i], currentProgress[i]);
-        i++;
-      }
-    },
-
-    printLog(type, str) {
-      gstate.log.push({ type: type, str: str });
-    },
-
-    keypress(e) {
-      var code = e.keyCode
-      if (code == 71) {
-        this.showLog = !this.showLog
-      }
-    },
-
-    getRandomInt(max) {
-      return Math.floor(Math.random() * Math.floor(max));
-    },
-
-    randomBackground(length) {
-
-      var index = this.getRandomInt(length)
-      if (index == this.lastbackground) {
-        index = this.getRandomInt(length)
-        this.lastbackground = index
-      }
-      else {
-        this.lastbackground = index
+        if (label) label.style.display = 'inline-block';
       }
 
-      return index
-    },
-
-  },
-
-  created: function () {
-    document.addEventListener('keydown', this.keypress);
-  }
-})
-
-
-Vue.config.devtools = true;
-
-
-/*
- Functions below : Utility functions
- Descipition: came with the loading screen , unsure exactly 
-
-*/
-
-
-
-if (!String.format) {
-  String.format = function (format) {
-    var args = Array.prototype.slice.call(arguments, 1);
-    return format.replace(/{(\d+)}/g, function (match, number) {
-      return typeof args[number] != 'undefined'
-        ? args[number]
-        : match
-        ;
-    });
-  };
-}
-
-var i = 0;
-while (i < currentProgress.length) {
-  progressMaxLengths[i] = loadingWeights[i] * totalWidth;
-  progressPositions[i + 1] = progressPositions[i] + progressMaxLengths[i];
-  i++;
-}
-
-
-Array.prototype.last = function () {
-  return this[this.length - 1];
-};
-
-
-/*
- Functions below : Native and handler functions 
- Descipition: Handle incoming information from the loadingscreen API 
-
-*/
-
-
-if (!window.invokeNative) {
-
-  var newType = function newType(name) {
-    return function () {
-      return handlers.startInitFunction({ type: name });
-    };
-  };
-  var newOrder = function newOrder(name, idx, count) {
-    return function () {
-      return handlers.startInitFunctionOrder({ type: name, order: idx, count: count });
-    };
-  };
-  var newInvoke = function newInvoke(name, func, i) {
-    return function () {
-      handlers.initFunctionInvoking({ type: name, name: func, idx: i }); handlers.initFunctionInvoked({ type: name });
-    };
-  };
-  var startEntries = function startEntries(count) {
-    return function () {
-      return handlers.startDataFileEntries({ count: count });
-    };
-  };
-  var addEntry = function addEntry() {
-    return function () {
-      return handlers.onDataFileEntry({ name: 'meow', isNew: true });
-    };
-  };
-  var stopEntries = function stopEntries() {
-    return function () {
-      return handlers.endDataFileEntries({});
-    };
-  };
-
-  var newTypeWithOrder = function newTypeWithOrder(name, count) {
-    return function () {
-      newType(name)(); newOrder(name, 1, count)();
-    };
-  };
-
-  const demoFuncs = [
-    newTypeWithOrder('MAP', 5),
-    newInvoke('MAP', 'meow1', 1),
-    newInvoke('MAP', 'meow2', 2),
-    newInvoke('MAP', 'meow3', 3),
-    newInvoke('MAP', 'meow4', 4),
-    newInvoke('MAP', 'meow5', 5),
-    newOrder('MAP', 2, 2),
-    newInvoke('MAP', 'meow1', 1),
-    newInvoke('MAP', 'meow2', 2),
-    startEntries(6),
-    addEntry(),
-    addEntry(),
-    addEntry(),
-    addEntry(),
-    addEntry(),
-    addEntry(),
-    stopEntries(),
-    newTypeWithOrder('INIT_SESSION', 4),
-    newInvoke('INIT_SESSION', 'meow1', 1),
-    newInvoke('INIT_SESSION', 'meow2', 2),
-    newInvoke('INIT_SESSION', 'meow3', 3),
-    newInvoke('INIT_SESSION', 'meow4', 4),
-  ];
-
-  setInterval(function () { demoFuncs.length && demoFuncs.shift()(); }, 350);
-}
-
-
-const handlers = {
-  startInitFunction(data) {
-    gstate.elems.push({
-      name: data.type,
-      orders: []
-    });
-
-    v.printLog(1, String.format('Running {0} init functions', data.type));
-    if (data.type) v.doProgress(data.type);
-  },
-  startInitFunctionOrder(data) {
-    count = data.count;
-    v.printLog(1, String.format('[{0}] Running functions of order {1} ({2} total)', data.type, data.order, data.count));
-    if (data.type) v.doProgress(data.type);
-  },
-
-  initFunctionInvoking(data) {
-    v.printLog(3, String.format('Invoking {0} {1} init ({2} of {3})', data.name, data.type, data.idx, count));
-    if (data.type) v.doProgress(data.type);
-  },
-
-  initFunctionInvoked(data) {
-    if (data.type) v.doProgress(data.type);
-  },
-
-  endInitFunction(data) {
-    v.printLog(1, String.format('Done running {0} init functions', data.type));
-    if (data.type) v.doProgress(data.type);
-  },
-
-  startDataFileEntries(data) {
-    count = data.count;
-
-    v.printLog(1, 'Loading map');
-    if (data.type) v.doProgress(data.type);
-  },
-
-  onDataFileEntry(data) {
-    v.printLog(3, String.format('Loading {0}', data.name));
-    v.doProgress(data.type);
-    if (data.type) v.doProgress(data.type);
-  },
-
-  endDataFileEntries() {
-    v.printLog(1, 'Done loading map');
-  },
-
-  performMapLoadFunction(data) {
-    v.doProgress('MAP');
-  },
-
-  onLogLine(data) {
-    v.printLog(3, data.message);
-  }
-};
-
-
-
-// Windows event handler and interval for keep log up to date 
-
-
-setInterval(function () { if (v.showLog) { document.querySelector('#log').innerHTML = gstate.log.slice(-10).map(function (e) { return String.format("[{0}] {1}", e.type, e.str) }).join('<br />'); } }, 100);
-
-window.addEventListener('message', function (e) {
-  (handlers[e.data.eventName] || function () { })(e.data);
-});
-
-
-/*
- Functions below : Background elements
- Descipition: handles the transition of backgrounds and the end and start of animation of backgrounds
-
-*/
-
-var usedIndices = [];
-function generateBackground() {
-  var images = document.querySelectorAll("#background img");
-
-  if (usedIndices.length === images.length) {
-    usedIndices = [];
-  }
-
-  var rnd = v.randomBackground(images.length)
-  while (usedIndices.indexOf(rnd) !== -1) {
-    rnd = v.randomBackground(images.length)
-  }
-
-  for (var i = images.length - 1; i >= 0; i--) {
-    if (i == rnd) {
-      document.getElementById("bak" + i).style.opacity = 1;
-      TriggerAnimation("bak" + i)
-    }
-    else {
-      document.getElementById("bak" + i).style.opacity = 0;
+      const barEl = document.getElementById(`${technicalStages[i]}-bar`);
+      const labelEl = document.getElementById(`${technicalStages[i]}-label`);
+      if (barEl) barEl.style.width = `${state.progress[i] * progressMax[i]}%`;
+      if (labelEl) labelEl.style.width = `${progressMax[i]}%`;
+      debug.innerHTML += `${technicalStages[i]}: ${state.progress[i]}<br />`;
     }
   }
-}
 
-var el = document.getElementById("background");
+  function doProgress(stage) {
+    const idx = technicalStages.indexOf(stage);
+    if (idx === -1) return;
+    if (idx > state.currentStage) {
+      while (state.currentStage < idx) {
+        state.progress[state.currentStage] = 1;
+        state.currentStage++;
+      }
+      state.currentCount = 1;
+    } else {
+      state.currentCount++;
+    }
+    state.progress[state.currentStage] = Math.min(state.currentCount / loadingTotals[idx], 1);
+    updateProgress();
+  }
 
-function TriggerAnimation(elID) {
-  var targert = document.getElementById(elID)
-  targert.style.animation = 'none';
-  targert.offsetHeight; /* trigger reflow */
-  targert.style.animation = null;
-}
+  function printLog(type, str) {
+    state.log.push({ type, str });
+  }
 
-//  Starting functions
-setInterval(() => {
+  function refreshLog() {
+    if (!state.showLog) return;
+    const container = document.getElementById('log');
+    container.innerHTML = state.log.slice(-10).map(e => `[${e.type}] ${e.str}`).join('<br />');
+  }
+
+  function toggleLog() {
+    state.showLog = !state.showLog;
+    document.getElementById('log-container').style.display = state.showLog ? 'block' : 'none';
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'g' || e.key === 'G') toggleLog();
+  });
+
+  setInterval(refreshLog, 100);
+
+  const handlers = {
+    startInitFunction(data) {
+      printLog(1, `Running ${data.type} init functions`);
+      if (data.type) doProgress(data.type);
+    },
+    startInitFunctionOrder(data) {
+      count = data.count;
+      printLog(1, `[${data.type}] Running functions of order ${data.order} (${data.count} total)`);
+      if (data.type) doProgress(data.type);
+    },
+    initFunctionInvoking(data) {
+      printLog(3, `Invoking ${data.name} ${data.type} init (${data.idx} of ${count})`);
+      if (data.type) doProgress(data.type);
+    },
+    initFunctionInvoked(data) {
+      if (data.type) doProgress(data.type);
+    },
+    endInitFunction(data) {
+      printLog(1, `Done running ${data.type} init functions`);
+      if (data.type) doProgress(data.type);
+    },
+    startDataFileEntries(data) {
+      count = data.count;
+      printLog(1, 'Loading map');
+      if (data.type) doProgress(data.type);
+    },
+    onDataFileEntry(data) {
+      printLog(3, `Loading ${data.name}`);
+      if (data.type) doProgress(data.type);
+    },
+    endDataFileEntries() {
+      printLog(1, 'Done loading map');
+    },
+    performMapLoadFunction() {
+      doProgress('MAP');
+    },
+    onLogLine(data) {
+      printLog(3, data.message);
+    }
+  };
+
+  window.addEventListener('message', e => {
+    const handler = handlers[e.data.eventName];
+    if (handler) handler(e.data);
+  });
+
+  const usedBackgrounds = [];
+
+  function randomBackground(max) {
+    let index = Math.floor(Math.random() * max);
+    if (index === state.lastBackground) {
+      index = Math.floor(Math.random() * max);
+    }
+    state.lastBackground = index;
+    return index;
+  }
+
+  function generateBackground() {
+    const images = document.querySelectorAll('#background img');
+    if (usedBackgrounds.length === images.length) {
+      usedBackgrounds.length = 0;
+    }
+    let idx = randomBackground(images.length);
+    while (usedBackgrounds.includes(idx)) {
+      idx = randomBackground(images.length);
+    }
+    usedBackgrounds.push(idx);
+    images.forEach((img, i) => {
+      img.style.opacity = i === idx ? 1 : 0;
+      if (i === idx) triggerAnimation(img.id);
+    });
+  }
+
+  function triggerAnimation(id) {
+    const el = document.getElementById(id);
+    el.style.animation = 'none';
+    void el.offsetHeight;
+    el.style.animation = null;
+  }
+
+  setInterval(generateBackground, 9000);
+
   generateBackground();
-}, 9000);
-
-generateBackground();
-v.updateProgress();
+  updateProgress();
+})();
