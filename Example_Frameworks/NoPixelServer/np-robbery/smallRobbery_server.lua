@@ -1,3 +1,11 @@
+--[[
+    -- Type: Server Script
+    -- Name: smallRobbery_server.lua
+    -- Use: Manages state for small bank robberies
+    -- Created: 2024-10-10
+    -- By: VSSVSSN
+--]]
+
 local banks = {
     ["Bank1"] = { ["x"]=152.04, ["y"]=-1040.77, ["z"]= 29.37, ["robbing"] = false, ["robbingvault"] = false, ["lastRobbed"] = 1, ["rob"] = {}, ["started"] = false },
     ["Bank2"] = { ["x"]=-1212.980, ["y"]=-330.841, ["z"]= 37.787, ["robbing"] = false, ["robbingvault"] = false, ["lastRobbed"] = 1, ["rob"] = {}, ["started"] = false },
@@ -7,7 +15,7 @@ local banks = {
     ["Bank6"] = { ["x"]=1176.04, ["y"]=2706.339, ["z"]= 37.15, ["robbing"] = false, ["robbingvault"] = false, ["lastRobbed"] = 1, ["rob"] = {}, ["started"] = false },
   }
 
-RegisterServerEvent("rob:doorOpen")
+RegisterNetEvent("rob:doorOpen")
 AddEventHandler("rob:doorOpen", function(bankId,robbing)
     local src = source
      local bank = "Bank"..bankId
@@ -26,7 +34,7 @@ AddEventHandler("rob:doorOpen", function(bankId,robbing)
     end
 end)
 
-RegisterServerEvent("robbery:checkSearch")
+RegisterNetEvent("robbery:checkSearch")
 AddEventHandler("robbery:checkSearch", function(nearbank, inputType)
     local src = source
     TriggerClientEvent('robbery:giveleitem', source, nearbank, inputType)
@@ -39,11 +47,10 @@ AddEventHandler("robbery:checkSearch", function(nearbank, inputType)
 
 
 end)
-RegisterServerEvent("request:BankUpdate")
+RegisterNetEvent("request:BankUpdate")
 AddEventHandler("request:BankUpdate", function()
     local src = source
     local timers = {1,2,3,4,5,6}
-    print('cuck lord 5000')
     TriggerClientEvent('robbery:timers',src, timers)
     banks["started"] = true
     for i=1,6 do 
@@ -51,19 +58,18 @@ AddEventHandler("request:BankUpdate", function()
         bankRob["started"] = true
 
     end
-    Citizen.Wait(1000)
+    Wait(1000)
     TriggerClientEvent('updateBanksNow',src, banks)
-    print('getting here')
 end)
 
 
-RegisterServerEvent("robbery:decrypt")
+RegisterNetEvent("robbery:decrypt")
 AddEventHandler("robbery:decrypt", function()
     local src = source
     TriggerClientEvent('send:email', src)
 end)
 
-RegisterServerEvent('robbery:shutdown')
+RegisterNetEvent('robbery:shutdown')
 AddEventHandler('robbery:shutdown', function(bankID)
     TriggerClientEvent('robbery:shutdownBank',-1,bankID,true)
     local bankSecured = banks[bank]

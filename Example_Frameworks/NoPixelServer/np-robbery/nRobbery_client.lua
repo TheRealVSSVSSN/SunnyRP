@@ -1,3 +1,11 @@
+--[[
+    -- Type: Client Script
+    -- Name: nRobbery_client.lua
+    -- Use: Handles robbery interactions and HUD logic
+    -- Created: 2024-10-10
+    -- By: VSSVSSN
+--]]
+
 local markers = {}
 local particlePos = {}
 local flags = {}
@@ -47,14 +55,12 @@ AddEventHandler("robbery:sendServerFlags", function(Prison_Electric_State,Prison
     states["Paleto_Electric"] = Paleto_Power_State
     CURRENT_CARD_PALETO = PaletoCard
     CURRENT_CARD_CITY = CityCard
-    print("this is vault ", tostring(door))
-    print("thats prison:"..tostring(Prison_Power_State))
     VaultDoor()
 end)
 
 
 
-isCop = false
+local isCop = false
  
 RegisterNetEvent('nowCopSpawn')
 AddEventHandler('nowCopSpawn', function()
@@ -77,17 +83,15 @@ end)
 
 RegisterNetEvent("robbery:sendFlags")
 AddEventHandler("robbery:sendFlags", function(flagSent)
-  --  print("got the flags bud")
     flags = flagSent
 end)
 
 RegisterNetEvent("robbery:triggerItemUsed")
 AddEventHandler("robbery:triggerItemUsed", function(itemID,activePolice)
-    print(itemID)
     attemptToRob(itemID,activePolice)
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
     Wait(900)
     TriggerServerEvent("inv:playerSpawnedTest")
     
@@ -184,7 +188,7 @@ end
 
 
 
-Citizen.CreateThread(function()
+CreateThread(function()
     local isNear = false
     while true do 
         Wait(2000)
@@ -330,9 +334,9 @@ function attemptToRob(itemID,activePolice)
                     Wait(10)
                 end
                 Wait(100)
-                TaskPlayAnim(GetPlayerPed(-1),"weapon@w_sp_jerrycan","fire",2.0, -8, -1,49, 0, 0, 0, 0)
+                TaskPlayAnim(PlayerPedId(),"weapon@w_sp_jerrycan","fire",2.0, -8, -1,49, 0, 0, 0, 0)
                 Wait(5000)
-                TaskPlayAnim(GetPlayerPed(-1),"weapon@w_sp_jerrycan","fire",2.0, -8, -1,49, 0, 0, 0, 0)
+                TaskPlayAnim(PlayerPedId(),"weapon@w_sp_jerrycan","fire",2.0, -8, -1,49, 0, 0, 0, 0)
                 local thermite = markerDifficult[locationID].thermite
                 TriggerEvent("destroyProp")
                 ClearPedTasks(PlayerPedId())
@@ -392,8 +396,6 @@ function attemptToRob(itemID,activePolice)
 
     if itemID == "Gruppe6Card22" then
 
-        print('pog')
-
         if exports["np-inventory"]:hasEnoughOfItem("electronickit",1,false) then
             local card = exports["np-taskbar"]:taskBar(9000,"Inserting Card")
             if card == 100 then
@@ -447,9 +449,9 @@ function thermiteHandle(locationID,itemID)
             Wait(10)
         end
         Wait(100)
-        TaskPlayAnim(GetPlayerPed(-1),"weapon@w_sp_jerrycan","fire",2.0, -8, -1,49, 0, 0, 0, 0)
+        TaskPlayAnim(PlayerPedId(),"weapon@w_sp_jerrycan","fire",2.0, -8, -1,49, 0, 0, 0, 0)
         Wait(5000)
-        TaskPlayAnim(GetPlayerPed(-1),"weapon@w_sp_jerrycan","fire",2.0, -8, -1,49, 0, 0, 0, 0)
+        TaskPlayAnim(PlayerPedId(),"weapon@w_sp_jerrycan","fire",2.0, -8, -1,49, 0, 0, 0, 0)
         local thermite = markerDifficult[locationID].thermite
         TriggerEvent("destroyProp")
         ClearPedTasks(PlayerPedId())
@@ -513,7 +515,6 @@ end
 
 function mycb(success,locationID,timeremaining)
 
-    print('being called')
     TriggerEvent("destroyPropPhone")
     if success then
         TriggerServerEvent("robbery:robberyFinished",locationID,markers[locationID].toolType,43)

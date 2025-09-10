@@ -1,8 +1,15 @@
 
------Power Tracking---
+--[[
+    -- Type: Server Script
+    -- Name: nRobbery_server.lua
+    -- Use: Tracks robbery state and handles server-side logic
+    -- Created: 2024-10-10
+    -- By: VSSVSSN
+--]]
 
-local City_Power_State = true -- main city's power plate    
-local Prison_Power_State =  true
+-- Power state trackers
+local City_Power_State = true -- main city's power plate
+local Prison_Power_State = true
 local Paleto_Power_State = true
 local total = 0
 
@@ -87,15 +94,15 @@ function generateFlags()
 end
 generateFlags()
 
-RegisterServerEvent('robbery:lolo2')
-AddEventHandler('robber:lolo2', function()
+RegisterNetEvent('robbery:lolo2')
+AddEventHandler('robbery:lolo2', function()
     TriggerClientEvent('robbery:sendMarkers', -1, markers)
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
         TriggerClientEvent('robbery:sendMarkers', -1, markers)
-        Citizen.Wait(10000)
+        Wait(10000)
     end
 end)
 
@@ -128,11 +135,9 @@ end)
 
 RegisterNetEvent('robbery:robberyFailed')
 AddEventHandler('robbery:robberyFailed', function(locationID, itemid)
-
-    flags[locationID].toolUsed = itemsid
+    flags[locationID].toolUsed = itemid
     flags[locationID].inUse = false
     flags[locationID].isFinished = false
-
     TriggerClientEvent('robbery:sendFlags', -1, flags)
 end)
 
@@ -322,7 +327,7 @@ end
 --     end
 -- end)
 
-RegisterServerEvent('np-robbery:checkflag')
+RegisterNetEvent('np-robbery:checkflag')
 AddEventHandler('np-robbery:checkflag', function()
     -- Prison_Power
    total = total + 1
@@ -340,7 +345,7 @@ AddEventHandler('np-robbery:checkflag', function()
 end)
 
 
-RegisterServerEvent('robbery:alarmTrigger')
+RegisterNetEvent('robbery:alarmTrigger')
 AddEventHandler('robbery:alarmTrigger', function(locationID)
     local src = source
     local marker = markers[locationID]

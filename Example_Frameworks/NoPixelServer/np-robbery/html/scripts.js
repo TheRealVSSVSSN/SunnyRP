@@ -1,57 +1,31 @@
-$(document).ready(function(){
-  // Mouse Controls
-  var documentWidth = document.documentElement.clientWidth;
-  var documentHeight = document.documentElement.clientHeight;
+window.addEventListener('DOMContentLoaded', () => {
+  const container = document.querySelector('.signup-b');
+  const icon = document.getElementById('voice');
 
-  function renderToolOptions(tool,card)
-  {
-    if(tool == "electricLock")
-    {
-      $(".signup-b").css("display", "inline");
-      document.getElementById('voice').src='electronic.png'
-    }
-    else if(tool == "physicalPick")
-    {
-      $(".signup-b").css("display", "inline");
-       document.getElementById('voice').src='lockpick.png'
-    }
-    else if(tool == "physicalThermite")
-    {
-      $(".signup-b").css("display", "inline");
-       document.getElementById('voice').src='thermite.png'
-    }
-    else if(tool == "cardedlock")
-    {
-      $(".signup-b").css("display", "inline");
-      document.getElementById('voice').src='gruppe62.png'
-    }
-    else if(tool == "cardedlock2")
-    {
-      $(".signup-b").css("display", "inline");
-      document.getElementById('voice').src='gruppe622.png'
-    }
-    else if(tool == "airLock")
-    {
-      $(".signup-b").css("display", "inline");
-      document.getElementById('voice').src='airlock.png'
-    }    
-    else
-    {
-      $(".signup-b").css("display", "none");
-      $(".signup-b").fadeOut(150);
+  const tools = {
+    electricLock: 'electronic.png',
+    physicalPick: 'lockpick.png',
+    physicalThermite: 'thermite.png',
+    cardedlock: 'gruppe62.png',
+    cardedlock2: 'gruppe622.png',
+    airLock: 'airlock.png'
+  };
+
+  function renderToolOptions(tool) {
+    const img = tools[tool];
+    if (img) {
+      container.style.display = 'inline';
+      icon.src = img;
+    } else {
+      container.style.display = 'none';
     }
   }
 
-
-  // Listen for NUI Events
-  window.addEventListener('message', function(event){
-    var item = event.data;
-    if(item.openSection == "toolSelect") {
-      var tool = item.tool
-      var card = item.card
-      renderToolOptions(tool,card)
+  window.addEventListener('message', (event) => {
+    const { openSection, tool } = event.data;
+    if (openSection === 'toolSelect') {
+      renderToolOptions(tool);
     }
   });
+});
 
-});   
-   

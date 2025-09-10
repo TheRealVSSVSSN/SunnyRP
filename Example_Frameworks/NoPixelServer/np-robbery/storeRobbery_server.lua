@@ -1,14 +1,22 @@
-RegisterServerEvent("police:camrobbery")
+--[[
+    -- Type: Server Script
+    -- Name: storeRobbery_server.lua
+    -- Use: Handles security camera alerts and store robbery triggers
+    -- Created: 2024-10-10
+    -- By: VSSVSSN
+--]]
+
+RegisterNetEvent("police:camrobbery")
 AddEventHandler("police:camrobbery", function(storeid)
     TriggerClientEvent("police:notifySecurityCam",-1,storeid)
 end)
 
-RegisterServerEvent('store:robbery:register')
+RegisterNetEvent('store:robbery:register')
 AddEventHandler('store:robbery:register', function(storeid)
     TriggerClientEvent('store:register', source, storeid,1)
 end)
 
-RegisterServerEvent('store:robbery:safe')
+RegisterNetEvent('store:robbery:safe')
 AddEventHandler('store:robbery:safe', function(storeid)
     TriggerClientEvent('store:dosafe', source, storeid,1)
 end)

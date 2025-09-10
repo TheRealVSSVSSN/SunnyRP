@@ -1,8 +1,16 @@
+--[[
+    -- Type: Client Script
+    -- Name: pedRobbery_client.lua
+    -- Use: Handles robbing of pedestrians when aimed at
+    -- Created: 2024-10-10
+    -- By: VSSVSSN
+--]]
+
 local recentRobs = {}
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
         Wait(1)
-        aiming, ent = GetEntityPlayerIsFreeAimingAt(PlayerId())
+        local aiming, ent = GetEntityPlayerIsFreeAimingAt(PlayerId())
         if aiming then
             local pedCrds = GetEntityCoords(PlayerPedId())
             local entCrds = GetEntityCoords(ent)
@@ -17,19 +25,19 @@ Citizen.CreateThread(function()
                 local veh = 0
                 if IsPedInAnyVehicle(ent, false) and GetEntitySpeed(veh) < 1.5 then
                     ClearPedTasks(ent)
-                    Citizen.Wait(100)
+                    Wait(100)
                     veh = GetVehiclePedIsIn(ent,false)
                     TaskLeaveVehicle(ent, veh, 0)
-                    Citizen.Wait(1500)
+                    Wait(1500)
                     TriggerEvent("robEntity",ent,veh)
                     recentRobs["rob"..ent] = true
-                    Citizen.Wait(1000)
+                    Wait(1000)
                 end
 
                 if not IsPedInAnyVehicle(ent, false) then
                     TriggerEvent("robEntity",ent,veh)
                     recentRobs["rob"..ent] = true
-                    Citizen.Wait(1000)
+                    Wait(1000)
                 end
 
             end
@@ -74,21 +82,21 @@ AddEventHandler("robEntity", function(entityRobbed,veh)
     SetPedAlertness(entityRobbed, 0)
     SetPedKeepTask(entityRobbed, true)
 
-    Citizen.Wait(2000)
+        Wait(2000)
 
     RequestAnimDict("missfbi5ig_22")
     while not HasAnimDictLoaded("missfbi5ig_22") do
-        Citizen.Wait(0)
+        Wait(0)
     end
     local storeRobbery = false
 	local alerted = false
 	local robberySuccessful = true
 
 	while robbingEntity do
-		Citizen.Wait(100)
+                    Wait(100)
 		if not IsEntityPlayingAnim(entityRobbed, "missfbi5ig_22", "hands_up_anxious_scientist", 3) then
 			TaskPlayAnim(entityRobbed, "missfbi5ig_22", "hands_up_anxious_scientist", 5.0, 1.0, -1, 1, 0, 0, 0, 0)
-			Citizen.Wait(1000)
+                    Wait(1000)
 		end
 
 		pedCrds = GetEntityCoords(PlayerPedId())
@@ -122,27 +130,27 @@ AddEventHandler("robEntity", function(entityRobbed,veh)
 			end
 		    RequestAnimDict("mp_common")
 		    while not HasAnimDictLoaded("mp_common") do
-		        Citizen.Wait(0)
+                    Wait(0)
 		    end			
 		    TaskPlayAnim( entityRobbed, "mp_common", "givetake1_a", 1.0, 1.0, -1, 1, 0, 0, 0, 0 )
 
 
 			robbingEntity = false
 
-			Citizen.Wait(1200)
+                    Wait(1200)
 		end
 	end
-	Citizen.Wait(800)
+    Wait(800)
 	ClearPedTasks(entityRobbed)
 
 	TriggerEvent("client:newStress",true,50)
-	Citizen.Wait(5000)
+    Wait(5000)
 	TaskWanderStandard(entityRobbed, 10.0, 10)
 
 	DecorSetBool(entityRobbed, 'ScriptedPed', false)
 
 
-	Citizen.Wait(math.random(1000,30000))	
+    Wait(math.random(1000,30000))
 	if veh ~= 0 then
 		TriggerEvent("civilian:alertPolice",8.0,"personRobbed",veh)
 	else
