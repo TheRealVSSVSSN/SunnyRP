@@ -1,6 +1,6 @@
 local colors = {
 {name = "Black", colorindex = 0},{name = "Carbon Black", colorindex = 147},
-{name = "Hraphite", colorindex = 1},{name = "Anhracite Black", colorindex = 11},
+{name = "Graphite", colorindex = 1},{name = "Anthracite Black", colorindex = 11},
 {name = "Black Steel", colorindex = 2},{name = "Dark Steel", colorindex = 3},
 {name = "Silver", colorindex = 4},{name = "Bluish Silver", colorindex = 5},
 {name = "Rolled Steel", colorindex = 6},{name = "Shadow Silver", colorindex = 7},
@@ -11,7 +11,7 @@ local colors = {
 {name = "Grace Red", colorindex = 31},{name = "Garnet Red", colorindex = 32},
 {name = "Sunset Red", colorindex = 33},{name = "Cabernet Red", colorindex = 34},
 {name = "Wine Red", colorindex = 143},{name = "Candy Red", colorindex = 35},
-{name = "Hot Pink", colorindex = 135},{name = "Pfsiter Pink", colorindex = 137},
+{name = "Hot Pink", colorindex = 135},{name = "Pfister Pink", colorindex = 137},
 {name = "Salmon Pink", colorindex = 136},{name = "Sunrise Orange", colorindex = 36},
 {name = "Orange", colorindex = 38},{name = "Bright Orange", colorindex = 138},
 {name = "Gold", colorindex = 99},{name = "Bronze", colorindex = 90},
@@ -28,7 +28,7 @@ local colors = {
 {name = "Nautical Blue", colorindex = 69},{name = "Racing Blue", colorindex = 73},
 {name = "Ultra Blue", colorindex = 70},{name = "Light Blue", colorindex = 74},
 {name = "Chocolate Brown", colorindex = 96},{name = "Bison Brown", colorindex = 101},
-{name = "Creeen Brown", colorindex = 95},{name = "Feltzer Brown", colorindex = 94},
+{name = "Green Brown", colorindex = 95},{name = "Feltzer Brown", colorindex = 94},
 {name = "Maple Brown", colorindex = 97},{name = "Beechwood Brown", colorindex = 103},
 {name = "Sienna Brown", colorindex = 104},{name = "Saddle Brown", colorindex = 98},
 {name = "Moss Brown", colorindex = 100},{name = "Woodbeech Brown", colorindex = 102},
@@ -62,7 +62,7 @@ local mattecolors = {
 {name = "Green", colorindex = 128},
 {name = "Frost Green", colorindex = 151},
 {name = "Foliage Green", colorindex = 155},
-{name = "Olive Darb", colorindex = 152},
+{name = "Olive Drab", colorindex = 152},
 {name = "Dark Earth", colorindex = 153},
 {name = "Desert Tan", colorindex = 154}
 }
@@ -70,7 +70,7 @@ local mattecolors = {
 
 
 Config = {}
-Config.XYZ = {x = -210.84934997559, y = -1323.8863525391, z = 30.460493087769}
+Config.XYZ = vec3(-210.84934997559, -1323.8863525391, 30.460493087769)
 Config.prices = {}
 
 --------Prices---------
@@ -182,7 +182,7 @@ Config.prices = {
 		{ name = "Bulletproof Tires", price = 5000},
 		{ name = "White Tire Smoke",smokecolor = {254,254,254}, price = 3000},
 		{ name = "Black Tire Smoke", smokecolor = {1,1,1}, price = 3000},
-		{ name = "BLue Tire Smoke", smokecolor = {0,150,255}, price = 3000},
+                { name = "Blue Tire Smoke", smokecolor = {0,150,255}, price = 3000},
 		{ name = "Yellow Tire Smoke", smokecolor = {255,255,50}, price = 3000},
 		{ name = "Orange Tire Smoke", smokecolor = {255,153,51}, price = 3000},
 		{ name = "Red Tire Smoke", smokecolor = {255,10,10}, price = 3000},
@@ -695,13 +695,6 @@ Config.prices = {
 Config.ModelBlacklist = {
 	"police",
 }
-
---Sets if garage will be locked if someone is inside it already
-Config.lock = false
-
---Enable/disable old entering way
-Config.oldenter = false
-
 --Menu settings
 Config.menu = {
 
