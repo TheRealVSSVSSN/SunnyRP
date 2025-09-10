@@ -32,10 +32,10 @@ local function _differenceBetweenInsideZones(insideZones, newInsideZones)
     return false, nil, nil
   elseif insideZonesCount == 0 and newInsideZonesCount > 0 then
     -- Was in no zones last check, but in 1 or more zones now (just entered all zones in newInsideZones)
-    return true, copyTbl(newInsideZones), nil
+    return true, PolyZone.copyTable(newInsideZones), nil
   elseif insideZonesCount > 0 and newInsideZonesCount == 0 then
     -- Was in 1 or more zones last check, but in no zones now (just left all zones in insideZones)
-    return true, nil, copyTbl(insideZones)
+    return true, nil, PolyZone.copyTable(insideZones)
   end
 
   -- Check for zones that were in insideZones, but are not in newInsideZones (zones the player just left)
@@ -115,10 +115,10 @@ local function _initDebug(zone, options)
     return
   end
   
-  Citizen.CreateThread(function()
+  CreateThread(function()
     while not zone.destroyed do
       zone:draw()
-      Citizen.Wait(0)
+      Wait(0)
     end
   end)
 end
@@ -220,7 +220,7 @@ function ComboZone:isPointInsideExhaustive(point, insideZones)
   end
 
   if insideZones ~= nil then
-    insideZones = clearTbl(insideZones)
+    insideZones = PolyZone.clearTable(insideZones)
   else
     insideZones = {}
   end
@@ -251,7 +251,7 @@ function ComboZone:onPointInOut(getPointCb, onPointInOutCb, waitInMS)
   local _waitInMS = 500
   if waitInMS ~= nil then _waitInMS = waitInMS end
 
-  Citizen.CreateThread(function()
+  CreateThread(function()
     local isInside = nil
     local insideZone = nil
     while not self.destroyed do
@@ -264,7 +264,7 @@ function ComboZone:onPointInOut(getPointCb, onPointInOutCb, waitInMS)
           insideZone = newInsideZone
         end
       end
-      Citizen.Wait(_waitInMS)
+      Wait(_waitInMS)
     end
   end)
 end
@@ -274,7 +274,7 @@ function ComboZone:onPointInOutExhaustive(getPointCb, onPointInOutCb, waitInMS)
   local _waitInMS = 500
   if waitInMS ~= nil then _waitInMS = waitInMS end
 
-  Citizen.CreateThread(function()
+  CreateThread(function()
     local isInside, insideZones = nil, {}
     local newIsInside, newInsideZones = nil, {}
     while not self.destroyed do
@@ -284,11 +284,11 @@ function ComboZone:onPointInOutExhaustive(getPointCb, onPointInOutCb, waitInMS)
         local isDifferent, enteredZones, leftZones = _differenceBetweenInsideZones(insideZones, newInsideZones)
         if newIsInside ~= isInside or isDifferent then
           isInside = newIsInside
-          insideZones = copyTbl(newInsideZones)
+          insideZones = PolyZone.copyTable(newInsideZones)
           onPointInOutCb(isInside, point, insideZones, enteredZones, leftZones)
         end
       end
-      Citizen.Wait(_waitInMS)
+      Wait(_waitInMS)
     end
   end)
 end
