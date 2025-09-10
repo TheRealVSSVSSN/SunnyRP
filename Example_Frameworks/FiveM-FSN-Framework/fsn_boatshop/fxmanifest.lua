@@ -1,25 +1,27 @@
---[[/   :FIVEM MANIFEST SHIT:	\]]--
-fx_version 'bodacious'
-games { 'gta5' }
---[[/   :FIVEM MANIFEST SHIT:	\]]--
+--[[
+    -- Type: Manifest
+    -- Name: fsn_boatshop
+    -- Use: Defines resource metadata and script loading
+    -- Created: 2024-05-07
+    -- By: VSSVSSN
+--]]
 
---[[/	:Globals:	\]]--
-client_scripts { 
+fx_version 'cerulean'
+game 'gta5'
+lua54 'yes'
+
+shared_scripts {
+    '@fsn_main/server_settings/sh_settings.lua',
+    'config.lua'
+}
+
+client_scripts {
     '@fsn_main/cl_utils.lua',
-    '@fsn_main/server_settings/sh_settings.lua',
+    'cl_boatshop.lua'
 }
-server_scripts { 
+
+server_scripts {
     '@fsn_main/sv_utils.lua',
-    '@fsn_main/server_settings/sh_settings.lua',
-    '@mysql-async/lib/MySQL.lua'
-}
---[[/	:Globals:	\]]--
-
-client_scripts { 
-    'cl_boatshop.lua',
-    'cl_menu.lua',
-}
-
-server_scripts { 
-    'sv_boatshop.lua',
+    '@mysql-async/lib/MySQL.lua',
+    'sv_boatshop.lua'
 }
