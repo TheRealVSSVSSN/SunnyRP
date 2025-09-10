@@ -1,7 +1,5 @@
   // Mouse Controls
-  let documentWidth = document.documentElement.clientWidth;
-  let documentHeight = document.documentElement.clientHeight;
-  let audioPlayer = null
+  let audioPlayer = null;
   let authCodeField = null;
   let padStatus = null;
   let validPins = {};
@@ -50,20 +48,17 @@ function reset() {
   keypadClear();
 }
 
-function playSound(file,volume)
-{
+function playSound(file, volume) {
   if (audioPlayer != null) {
     audioPlayer.pause();
-  } else {
-      audioPlayer = new Audio("./sounds/" + file + ".ogg");
   }
+  audioPlayer = new Audio("./sounds/" + file + ".ogg");
   audioPlayer.volume = volume;
-  //audioPlayer.play();
+  audioPlayer.play();
 }
 
 function pinFailure() {
   $.post('http://np-stash/failure', JSON.stringify({pinResult: false}));
-  gameOver = true;
   $('#modal').fadeIn();
   ++failedAttempts;
   if (failedAttempts >= 3)
@@ -74,8 +69,7 @@ function pinFailure() {
 
 function pinSuccess(pElevated) {
   $.post('http://np-stash/complete', JSON.stringify({pinResult: true, owner: pElevated}));
-  playSound("lockUnlocked",0.6)
-  gameOver = true;
+  playSound("lockUnlocked", 0.6);
   $('#modal').fadeIn();
 }
 
