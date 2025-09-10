@@ -1,20 +1,27 @@
 
 
 
+--[[
+    -- Type: Event
+    -- Name: dispatch:svNotify
+    -- Use: Routes dispatch notifications to appropriate clients
+    -- Created: 2024-05-15
+    -- By: VSSVSSN
+--]]
 RegisterServerEvent('dispatch:svNotify')
 AddEventHandler('dispatch:svNotify', function(data)
     if data.dispatchCode == "10-13A" then
         local recipientList = {
-            police = "police",
-            ambulance = "ambulance"
+            police = true,
+            ambulance = true
           }
           local blipSprite = 84
           local blipColor = 1
         TriggerClientEvent('dispatch:clNotify',-1,{ dispatchCode = "10-13A", callSign = data.callSign, dispatchMessage = "officer down URGENT!", firstStreet = data.firstStreet, recipientList = recipientList, playSound = true, soundName = "10-1314", isImportant = true, priority = 3, origin = data.origin, blipSprite = blipSprite, blipColor = blipColor})
     elseif data.dispatchCode == "10-13B" then
         local recipientList = {
-            police = "police",
-            ambulance = "ambulance"
+            police = true,
+            ambulance = true
           }
           local blipSprite = 84
           local blipColor = 3
@@ -29,7 +36,7 @@ RegisterCommand('togglealerts', function(source, args, user)
     local src = source
     local user = exports["np-base"]:getModule("Player"):GetUser(src)
 
-      if user:getVar("job") == 'police' or user:getVar("job") == 'ems' then
+    if user:getVar("job") == 'police' or user:getVar("job") == 'ems' then
         TriggerClientEvent('dispatch:toggleNotifications', source, args[1])
     end
 end)
@@ -48,7 +55,7 @@ AddEventHandler('AlertReckless', function(street1, gender, plate, make, color1, 
         color2 = 158
     end
     
-    TriggerEvent('dispatch:svNotify', { dispatchCode = "10-94", gender = gender, firstStreet1 = street1, secondStreet = street2, model = make, plate = plate})
+    TriggerEvent('dispatch:svNotify', { dispatchCode = "10-94", gender = gender, firstStreet1 = street1, secondStreet = street2, model = make, plate = plate })
 end)
 
 
@@ -65,34 +72,48 @@ AddEventHandler('thiefInProgressS1', function(street1, gender, plate, make, colo
         color2 = 158
     end
     plate = string.upper(plate)
-    TriggerEvent('dispatch:svNotify', { dispatchCode = "10-60", gender = gender, firstStreet1 = street1, model = make, plate = plate, firstColor = color1, secondColor = color2, origin = pOrigin})
+    TriggerEvent('dispatch:svNotify', { dispatchCode = "10-60", gender = gender, firstStreet1 = street1, model = make, plate = plate, firstColor = color1, secondColor = color2, origin = pOrigin })
 end)
 
 
-RegisterServerEvent('OfficerEMSDown')
+--[[
+    -- Type: Event
+    -- Name: OfficerDown
+    -- Use: Notifies officers of an emergency down situation
+    -- Created: 2024-05-15
+    -- By: VSSVSSN
+--]]
+RegisterServerEvent('OfficerDown')
 AddEventHandler('OfficerDown', function(dCode, Street, callSign, plySound, important, prio, pos)
 
     local recipientList = {
-      police = "police",
-      ambulance = "ambulance"
+      police = true,
+      ambulance = true
     }
     local blipSprite = 84
     local blipColor = 1
 
 
-    TriggerEvent('dispatch:svNotify', { dispatchCode = "10-13A", dispatchMessage = "URGENT!", firstStreet = Street, recipientList = recipientList, playSound = plySound, isImportant = important, priority = prio, origin = pos})
+    TriggerEvent('dispatch:svNotify', { dispatchCode = "10-13A", dispatchMessage = "URGENT!", firstStreet = Street, recipientList = recipientList, playSound = plySound, isImportant = important, priority = prio, origin = pos })
 end)
 
-RegisterServerEvent('OfficerEMSDown2')
+--[[
+    -- Type: Event
+    -- Name: OfficerDown2
+    -- Use: Secondary officer down alert
+    -- Created: 2024-05-15
+    -- By: VSSVSSN
+--]]
+RegisterServerEvent('OfficerDown2')
 AddEventHandler('OfficerDown2', function(dCode, Street, callSign, plySound, important, prio, pos)
 
     local recipientList = {
-      police = "police",
-      ambulance = "ambulance"
+      police = true,
+      ambulance = true
     }
     local blipSprite = 84
     local blipColor = 1
 
 
-    TriggerEvent('dispatch:svNotify', { dispatchCode = "10-13A", dispatchMessage = "URGENT!", firstStreet = Street, recipientList = recipientList, playSound = plySound, isImportant = important, priority = prio, origin = pos})
+    TriggerEvent('dispatch:svNotify', { dispatchCode = "10-13A", dispatchMessage = "URGENT!", firstStreet = Street, recipientList = recipientList, playSound = plySound, isImportant = important, priority = prio, origin = pos })
 end)
