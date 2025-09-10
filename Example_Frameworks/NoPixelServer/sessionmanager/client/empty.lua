@@ -1,3 +1,14 @@
---This empty file causes the scheduler.lua to load clientside
---scheduler.lua when loaded inside the sessionmanager resource currently manages remote callbacks.
---Without this, callbacks will only work server->client and not client->server.
+--[[
+    -- Type: Client Script
+    -- Name: empty.lua
+    -- Use: Forces scheduler.lua to load client-side enabling remote callbacks
+    -- Created: 2024-06-04
+    -- By: VSSVSSN
+--]]
+
+--[[
+    -- The file intentionally contains no runtime code.
+    -- Its presence triggers client initialization of scheduler.lua,
+    -- allowing callbacks to function bi-directionally between
+    -- server and client.
+--]]
