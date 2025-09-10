@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CPedModelInfo__InitDataList>
   <InitDatas>
-<!--PED ITEM HERE-->
-<Item>
+    <Item>
       <Name>Kingpin</Name>
       <PropsName>null</PropsName>
       <ClipDictionaryName>move_m@generic</ClipDictionaryName>
@@ -76,8 +75,6 @@
       <AllowCloseSpawning value="false"/>
    
     </Item>
-
-<!--PED ITEM HERE-->
 
 <Item>
       <Name>Kingpin2</Name>
@@ -156,8 +153,6 @@
 
 
 
-<!--PED ITEM HERE-->
-
 
     <Item>
       <Name>Dean</Name>
@@ -232,13 +227,5 @@
       <DefaultRemoveRangeMultiplier value="1.00000000"/>
       <AllowCloseSpawning value="false"/>
     </Item>
-
-
-
-
-
-<!--PED ITEM HERE-->
-
-
-</InitDatas>
+  </InitDatas>
 </CPedModelInfo__InitDataList>

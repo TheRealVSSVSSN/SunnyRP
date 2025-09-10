@@ -1,6 +1,7 @@
+fx_version 'cerulean'
+game 'gta5'
 
-fx_version 'bodacious'
-games { 'rdr3', 'gta5' }
+lua54 'yes'
 
 ---------------------------------------------------------------------------
 -- INCLUDED FILES
