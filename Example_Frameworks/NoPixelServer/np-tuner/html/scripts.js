@@ -1,87 +1,78 @@
-$(document).ready(function(){
-  // Mouse Controls
-  var documentWidth = document.documentElement.clientWidth;
-  var documentHeight = document.documentElement.clientHeight;
-  var cursor = $('#cursor');
-  var cursorX = documentWidth / 2;
-  var cursorY = documentHeight / 2;
+// Type: Client-Side Script
+// Name: scripts.js
+// Use: Handles tuner UI interactions
+// Created: 2025-09-10
+// By: VSSVSSN
 
-  function UpdateCursorPos() {
-      $('#cursor').css('left', cursorX+2);
-      $('#cursor').css('top', cursorY+2);
+document.addEventListener('DOMContentLoaded', () => {
+  const documentWidth = document.documentElement.clientWidth;
+  const documentHeight = document.documentElement.clientHeight;
+  const cursor = document.getElementById('cursor');
+  let cursorX = documentWidth / 2;
+  let cursorY = documentHeight / 2;
+
+  function updateCursorPos() {
+    cursor.style.left = `${cursorX + 2}px`;
+    cursor.style.top = `${cursorY + 2}px`;
   }
 
-
-  var entityMap = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#39;',
-    '/': '&#x2F;',
-    '`': '&#x60;',
-    '=': '&#x3D;'
-  };
-
-  function escapeHtml (string) {
-    return String(string).replace(/[&<>"'`=\/]/g, function (s) {
-      return entityMap[s];
+  document.querySelector('.btntuneSystem').addEventListener('click', () => {
+    fetch('https://np-tuner/tuneSystem', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        boost: document.getElementById('boost').value,
+        fuel: document.getElementById('fuel').value,
+        gears: document.getElementById('gears').value,
+        braking: document.getElementById('braking').value,
+        drive: document.getElementById('drive').value
+      })
     });
-  }
-
-  $(".btntuneSystem").click(function(){
-    console.log("h345elloooo")
-      $.post('http://np-tuner/tuneSystem', JSON.stringify({ boost: $("#boost").val(),fuel: $("#fuel").val(),gears: $("#gears").val(),braking: $("#braking").val(),drive: $("#drive").val()  }));
   });
 
-
-  $(".btnDefault").click(function(){
-      $("#boost").val(0);
-      $("#fuel").val(0);
-      $("#gears").val(0);
-      $("#braking").val(5);
-      $("#train").val(5);
-      console.log("helloooo")
+  document.querySelector('.btnDefault').addEventListener('click', () => {
+    document.getElementById('boost').value = 0;
+    document.getElementById('fuel').value = 0;
+    document.getElementById('gears').value = 0;
+    document.getElementById('braking').value = 5;
+    document.getElementById('drive').value = 5;
   });
 
-  $(".btnSport").click(function(){
-      $("#boost").val(10);
-      $("#fuel").val(10);
-      $("#gears").val(10);
-      console.log("helloooo121221")
+  document.querySelector('.btnSport').addEventListener('click', () => {
+    document.getElementById('boost').value = 10;
+    document.getElementById('fuel').value = 10;
+    document.getElementById('gears').value = 10;
   });
 
-
-
-  // Listen for NUI Events
-  window.addEventListener('message', function(event){
-    var item = event.data;
-    // Open sub-windows / partials
-
-    if(item.openSection == "openNotepad") {
-      $(".notepad-container").fadeIn(100); 
-      $("#Ticket-form-JailRead").css("display", "none");
-      $("#Ticket-form-Jail").fadeIn(100); 
-      $("#cursor").css("display", "Block");
+  window.addEventListener('message', event => {
+    const item = event.data;
+    if (item.openSection === 'openNotepad') {
+      document.querySelector('.notepad-container').style.display = 'block';
+      const read = document.getElementById('Ticket-form-JailRead');
+      if (read) read.style.display = 'none';
+      document.getElementById('Ticket-form-Jail').style.display = 'block';
+      cursor.style.display = 'block';
+      if (item.boost) document.getElementById('boost').value = item.boost;
+      if (item.fuel) document.getElementById('fuel').value = item.fuel;
+      if (item.gears) document.getElementById('gears').value = item.gears;
+      if (item.braking) document.getElementById('braking').value = item.braking;
+      if (item.drive) document.getElementById('drive').value = item.drive;
     }
-
-    if(item.openSection == "close") {
-      $(".notepad-container").fadeOut(100)
-      $("#cursor").css("display", "none");
+    if (item.openSection === 'close') {
+      document.querySelector('.notepad-container').style.display = 'none';
+      cursor.style.display = 'none';
     }
-
   });
 
-  $(document).mousemove(function(event) {
+  document.addEventListener('mousemove', event => {
     cursorX = event.pageX;
     cursorY = event.pageY;
-    UpdateCursorPos();
+    updateCursorPos();
   });
 
-  // On 'Esc' call close method
-  document.onkeyup = function (data) {
-    if ( data.which == 27 ) {
-      $.post('http://np-tuner/close', JSON.stringify({}));
+  document.addEventListener('keyup', event => {
+    if (event.key === 'Escape') {
+      fetch('https://np-tuner/close', { method: 'POST', body: '{}' });
     }
-  };
+  });
 });
