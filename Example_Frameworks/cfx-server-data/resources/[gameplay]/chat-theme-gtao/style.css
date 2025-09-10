@@ -2,11 +2,19 @@
     font-family: inherit;
 }
 
+:root {
+    --base-size: 2.7vh;
+    --border: 0.28vh;
+    --edge-offset: 2.77vh;
+    --font-main: Font2, sans-serif;
+    --font-condensed: Font2_cond, sans-serif;
+}
+
 .chat-window {
-    --size: calc(((2.7vh * 1.2)) * 6);
+    --size: calc((var(--base-size) * 1.2) * 6);
 
     position: absolute;
-    right: calc(2.77vh);
+    right: var(--edge-offset);
     top: calc(50% - (var(--size) / 2));
     height: var(--size) !important;
 
@@ -22,21 +30,23 @@
 @font-face {
     font-family: 'Font2';
     src: url(https://runtime.fivem.net/temp/ChaletLondonNineteenSixty.otf?a);
+    font-display: swap;
 }
 
 @font-face {
     font-family: 'Font2_cond';
     src: url(https://runtime.fivem.net/temp/chaletcomprime-colognesixty-webfont.ttf?a);
+    font-display: swap;
 }
 
 .msg {
-    font-family: Font2, sans-serif;
+    font-family: var(--font-main);
     color: #fff;
 
     font-size: calc(1.8vh); /* 13px in 720p, calc'd by width */
     filter: url(#svgDropShadowFilter);
 
-    line-height: calc(2.7vh * 1.2);
+    line-height: calc(var(--base-size) * 1.2);
 
     margin-bottom: 0;
 }
@@ -47,7 +57,7 @@
 }
 
 .msg > span > span > b {
-    font-family: Font2_cond, sans-serif;
+    font-family: var(--font-condensed);
     font-weight: normal;
 
     vertical-align: baseline;
@@ -55,7 +65,7 @@
 
     line-height: 1;
 
-    font-size: calc(2.7vh);
+    font-size: calc(var(--base-size));
 }
 
 .msg > span > span > span {
@@ -69,8 +79,8 @@
 
 .chat-input {
     position: absolute;
-    right: calc(2.77vh);
-    bottom: calc(2.77vh);
+    right: var(--edge-offset);
+    bottom: var(--edge-offset);
 
     background: inherit !important;
 
@@ -81,14 +91,14 @@
 
     height: auto;
 
-    font-family: Font2, sans-serif;
+    font-family: var(--font-main);
 }
 
 .chat-input > div {
     background-color: rgba(0, 0, 0, .6) !important;
-    border: calc(0.28vh / 2) solid rgba(180, 180, 180, .6);
-    outline: calc(0.28vh / 2) solid rgba(0, 0, 0, .8); /* to replace margin-background */
-    padding: calc(0.28vh / 2);
+    border: calc(var(--border) / 2) solid rgba(180, 180, 180, .6);
+    outline: calc(var(--border) / 2) solid rgba(0, 0, 0, .8); /* to replace margin-background */
+    padding: calc(var(--border) / 2);
 }
 
 .chat-input .prefix {
@@ -112,14 +122,14 @@
 
 .chat-input > div + div {
     position: absolute;
-    bottom: calc(1.65vh + 0.28vh + 0.28vh + 0.28vh + (0.28vh / 2));
+    bottom: calc(1.65vh + (var(--border) * 3.5));
     width: 99.6%;
 
     text-align: left;
 }
 
 .suggestions {
-    border: calc(0.28vh / 2) solid rgba(180, 180, 180, .6);
+    border: calc(var(--border) / 2) solid rgba(180, 180, 180, .6);
     background: transparent;
 }
 
@@ -129,13 +139,13 @@ textarea {
 }
 
 @media screen and (min-aspect-ratio: 21/9) {
-	.chat-window, .chat-input {
-		right: calc(12.8vw);
-	}
+        .chat-window, .chat-input {
+                right: calc(12.8vw);
+        }
 }
 
 @media screen and (min-aspect-ratio: 32/9) {
-	.chat-window, .chat-input {
-		right: calc(25vw);
-	}
+        .chat-window, .chat-input {
+                right: calc(25vw);
+        }
 }
