@@ -3,47 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <title>NUI Blocker</title>
     <style>
         body {
             background-color: transparent;
         }
 
-
-        #xd {
+        #videoFrame {
             display: none;
         }
     </style>
 </head>
 <body>
-    <iframe id="xd" width="1920" height="1080" src="https://www.youtube.com/embed/5wV4zHptNGM?controls=0&autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ></iframe>
+    <iframe id="videoFrame" width="1920" height="1080" src="https://www.youtube.com/embed/5wV4zHptNGM?controls=0&autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <pre id="output"></pre>
     <script type="text/javascript">
-        var element = document.createElement ("nobr");
-        var devtoolsOpen = false;
-        let xddd = document.getElementById('xd');
+        const videoFrame = document.getElementById('videoFrame');
+        let devtoolsOpen = false;
+        const detector = new Image();
 
-        element.__defineGetter__("id", function() {
-            devtoolsOpen = true; // This only executes when devtools is open.
+        Object.defineProperty(detector, 'id', {
+            get: () => { devtoolsOpen = true; }
         });
-        setInterval(function() {
-            devtoolsOpen = false;
-            console.log(element);
-            if (devtoolsOpen)
-            {
-                xddd.style.display = 'block';
 
-                $.post('http://nui_blocker/callback');
+        setInterval(() => {
+            devtoolsOpen = false;
+            console.log(detector);
+            if (devtoolsOpen) {
+                videoFrame.style.display = 'block';
+                fetch('https://nui_blocker/detectDevtools', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json; charset=UTF-8'
+                    },
+                    body: JSON.stringify({})
+                });
             } else {
-                xddd.style.display = 'none';
+                videoFrame.style.display = 'none';
             }
         }, 3000);
-
-        
     </script>
-    
-
 </body>
 </html>
+
