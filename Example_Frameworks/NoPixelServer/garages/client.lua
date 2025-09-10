@@ -232,7 +232,7 @@ local entering = false
 RegisterNetEvent("house:entering")
 AddEventHandler("house:entering", function(entering)
 	entering = true
-	Citizen.Wait(10000)
+	Wait(10000)
 	entering = false
 end)
 
@@ -240,18 +240,18 @@ end)
 RegisterNetEvent("house:garagechanges")
 AddEventHandler("house:garagechanges", function(table_id)
 	if scannedPOIs["garage"..table_id] ~= nil then
-		Citizen.Wait(math.random(1000,5000))
+		Wait(math.random(1000,5000))
 		TriggerEvent("house:entering")
 		TriggerServerEvent("GarageData")
 	end
 end)
 
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	--TriggerServerEvent("GarageData")
 	
 	while true do
-		Citizen.Wait(1)
+		Wait(1)
 		local closest = 500.0
 		if garagesRunning then
 			for i,row in pairs(mygarages) do
@@ -264,10 +264,10 @@ Citizen.CreateThread(function()
 					scannedPOIs["garage"..row["table_id"]] = nil
 					RemoveHouseGarages(row)
 				end
-				Citizen.Wait(1000)
+				Wait(1000)
 			end
 		end
-		Citizen.Wait(math.ceil(closest * 20))
+		Wait(math.ceil(closest * 20))
 	end
 
 end)
@@ -320,11 +320,11 @@ function RemoveHouseGarages(currentRow)
 	TriggerEvent("RecreateGarages")	
 end
 local nearClothing = false
-Citizen.CreateThread(function()
+CreateThread(function()
 
 	while true do
 
-		Citizen.Wait(1)
+		Wait(1)
 		local plyId = LocalPed()
 		local plyCoords = GetEntityCoords(plyId)
 		for x,row in pairs(scannedPOIs) do
@@ -348,7 +348,7 @@ Citizen.CreateThread(function()
 						
 						if IsControlJustReleased(2, 38) then
 							TriggerServerEvent("house:enterhousebackdoor",row["house_id"],row["house_model"],false,backdoorinside["x"],backdoorinside["y"],backdoorinside["z"],backdoorinside["h"])
-							Citizen.Wait(3000)
+							Wait(3000)
 						end
 					end	
 				end
@@ -361,7 +361,7 @@ Citizen.CreateThread(function()
 						DrawText3Ds( backdoorinside["x"],backdoorinside["y"],backdoorinside["z"] , '~g~E~s~ to leave house.')
 						if IsControlJustReleased(2, 38) then
 							TriggerEvent("housing:exit:backdoor",backdooroutside["x"],backdooroutside["y"],backdooroutside["z"],backdooroutside["h"])
-							Citizen.Wait(3000)
+							Wait(3000)
 						end
 					end	
 				end
@@ -402,11 +402,11 @@ end)
 function logout()
 	TransitionToBlurred(500)
 	DoScreenFadeOut(500)
-	Citizen.Wait(1000)
-	Citizen.Wait(1000)   
+	Wait(1000)
+	Wait(1000)   
 	TriggerEvent("np-base:clearStates")
 	exports["np-base"]:getModule("SpawnManager"):Initialize()
-	Citizen.Wait(1000)
+	Wait(1000)
 end
 
 
@@ -505,7 +505,7 @@ AddEventHandler('Garages:ToggleGarageBlip', function()
     end
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	showGarages = false
 	TriggerEvent('Garages:ToggleGarageBlip')
 end)
@@ -577,7 +577,7 @@ function doCarDamages(eh, bh, Fuel, veh)
 
 	local currentVehicle = (veh and IsEntityAVehicle(veh)) and veh or GetVehiclePedIsIn(PlayerPedId(), false)
 
-	Citizen.Wait(100)
+	Wait(100)
 	SetVehicleEngineHealth(currentVehicle, engine)
 	if smash then
 		SmashVehicleWindow(currentVehicle, 0)
@@ -635,7 +635,7 @@ AddEventHandler('Garages:HouseRemoveVehicle', function(veh)
 	TriggerServerEvent('garages:SetVehOut', veh, plate)
 	TriggerEvent("Garages:ToggleHouse",false)
 	TriggerEvent("veh.PlayerOwned",veh)
-	Citizen.Wait(1000)
+	Wait(1000)
 	TriggerServerEvent("garages:CheckGarageForVeh")
 end)
 
@@ -658,8 +658,8 @@ AddEventHandler('Garages:ToggleHouse', function(tg)
 			if plate ~= dntdelete then
 
 				--SetEntityAsMissionEntity(myspawnedhousecars[i],false,true)
-				--DeleteEntity(myspawnedhousecars[i])
-				Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(myspawnedhousecars[i]))
+				--DeleteVehicle(myspawnedhousecars[i])
+				DeleteVehicle(myspawnedhousecars[i])
 			end
 		end
 	end
@@ -755,7 +755,7 @@ function spawnCars(houseCars)
 
 	 		RequestModel(v.model)
 			while not HasModelLoaded(v.model) do
-				Citizen.Wait(1)
+				Wait(1)
 			end
 	 		local vehicle = CreateVehicle(v.model,spawnStart.x,spawnStart.y + (i*4.5),spawnStart.z,235.0,true,false)
 			SetModelAsNoLongerNeeded(v.model)
@@ -764,7 +764,7 @@ function spawnCars(houseCars)
 		else
 	 		RequestModel(v.model)
 			while not HasModelLoaded(v.model) do
-				Citizen.Wait(1)
+				Wait(1)
 			end
 			SetModelAsNoLongerNeeded(v.model)
 
@@ -947,8 +947,8 @@ end)
 
 current_used_garage = "Any"
 
-Citizen.CreateThread(function()
-	Citizen.Wait(1000)
+CreateThread(function()
+	Wait(1000)
 	TriggerEvent("RecreateGarages")
 end) 
 
@@ -986,17 +986,17 @@ end)
 
 RegisterNetEvent("RecreateGarages")
 AddEventHandler("RecreateGarages", function()
-	Citizen.Wait(5000)
+	Wait(5000)
 	if not garagesRunning then
 		garagesRunning = true
 		local rooster = exports["isPed"]:GroupRank("rooster_academy")
 		for k,v in ipairs(garages) do
-			Citizen.CreateThread(function()
+			CreateThread(function()
 				if v.disabled then return end
 				local pos = v.loc
 				local gar = v.garage
 				while garagesRunning do
-					Citizen.Wait(1)
+					Wait(1)
 
 					local dist = #(vector3(pos[1],pos[2],pos[3]) - GetEntityCoords(LocalPed()))
 					if dist < 35.0 then
@@ -1032,7 +1032,7 @@ AddEventHandler("RecreateGarages", function()
 
 							elseif ( IsControlJustPressed(1,Controlkey["generalUse"][1]) or IsControlJustPressed(1,Controlkey["generalUseSecondary"][1]) ) and Menu.hidden then
 								TriggerServerEvent("garages:CheckGarageForVeh")
-								Citizen.Wait(150)
+								Wait(150)
 								MenuGarage()
 								TriggerEvent("inmenu",true)
 								selectedGarage = k
@@ -1044,7 +1044,7 @@ AddEventHandler("RecreateGarages", function()
 						end
 					end
 					if dist > 200.0 then
-						Citizen.Wait(2000)
+						Wait(2000)
 					end
 				end
 			end)
@@ -1056,7 +1056,7 @@ end)
 
 
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	local loc = vente_location
 	pos = vente_location
 	local blip = AddBlipForCoord(pos[1],pos[2],pos[3])
@@ -1084,7 +1084,7 @@ Citizen.CreateThread(function()
 					local plate = GetVehicleNumberPlateText(caissei)
 					TriggerServerEvent('garages:SelVehJudge',plate)
 					--SetEntityAsMissionEntity(caissei,false,true)
-					Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(caissei))
+					DeleteVehicle(caissei)
 				else
 					TriggerEvent("DoLongHudText","No Vehicle",2)
 				end
@@ -1094,7 +1094,7 @@ Citizen.CreateThread(function()
 		wait2 = #(vector3(376.6728515625,-1612.5723876953,29.29195022583) - GetEntityCoords(LocalPed()))
 		if wait2 > 50.0 then
 			if wait2 then
-				Citizen.Wait(math.ceil(wait2) * 10)
+				Wait(math.ceil(wait2) * 10)
 			end
 		end
 
@@ -1110,13 +1110,13 @@ currentlyselling = false
 AddEventHandler('garages:chopshopVehicle', function()
 	if not currentlyselling then
 		currentlyselling = true
-		Citizen.CreateThread(function()		
+		CreateThread(function()		
 			local allowsale = true
 			local startTime = GetGameTimer()
 			TriggerEvent("DoLongHudText","Attemping Vehicle Sale",1)
 			count = 12000
 			while count > 0 do
-				Citizen.Wait(1)
+				Wait(1)
 				local curTime = GetGameTimer()
 				if #(vector3(712.51171875,-723.117553710938,25.9337730407715) - GetEntityCoords(LocalPed())) > 15 then	
 					allowsale = false
@@ -1133,7 +1133,7 @@ AddEventHandler('garages:chopshopVehicle', function()
 
 			if DoesEntityExist(caissei) and #(vector3(712.51171875,-723.117553710938,25.9337730407715) - GetEntityCoords(LocalPed())) < 15 and allowsale then
 				TriggerEvent('keys:remove', GetVehicleNumberPlateText(caissei))
-				Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(caissei))
+				DeleteVehicle(caissei)
 				TriggerEvent("DoLongHudText","Vehicle sold",1)
 				TriggerServerEvent("garages:SelHotVeh")
 
@@ -1179,8 +1179,8 @@ AddEventHandler('garages:SpawnVehicle', function(oof, vehicle, plate, customized
 	local car = GetHashKey(vehicle)
 	local customized = json.decode(customized)
 	
-	Citizen.CreateThread(function()			
-		Citizen.Wait(100)
+	CreateThread(function()			
+		Wait(100)
 
 		if coordlocation == nil then
 			local loc = garages[selectedGarage].loc
@@ -1211,7 +1211,7 @@ AddEventHandler('garages:SpawnVehicle', function(oof, vehicle, plate, customized
 
 			RequestModel(car)
 			while not HasModelLoaded(car) do
-			Citizen.Wait(0)
+			Wait(0)
 			end
 
 			
@@ -1352,9 +1352,9 @@ end)
 AddEventHandler('garages:StoreVehicle', function(plates)
 	plates = plates
 	local pos = garages[selectedGarage].loc
-	Citizen.CreateThread(function()		
+	CreateThread(function()		
 		exports.veh:trackVehicleHealth()
-		Citizen.Wait(3000)
+		Wait(3000)
 		local caissei = GetClosestVehicle(pos[1], pos[2], pos[3], 3.000, 0, 70)
 		current_used_garage = garages[selectedGarage].garage
 		if not DoesEntityExist(caissei) then caissei = GetVehiclePedIsIn(PlayerPedId(), true) end
@@ -1382,13 +1382,12 @@ AddEventHandler('garages:StoreVehicle', function(plates)
 			local timeout = 0
 
 			while timeout < 1000 and not NetworkHasControlOfEntity(caissei) do
-				Citizen.Wait(100)
+				Wait(100)
 				timeout = timeout + 100
 			end
 
 			SetEntityAsMissionEntity(caissei, true, true)
-			DeleteVehicle(caissei)
-			DeleteEntity(caissei)
+                        DeleteVehicle(caissei)
 
 			TriggerEvent('keys:remove', platecaissei)
 
@@ -1397,7 +1396,7 @@ AddEventHandler('garages:StoreVehicle', function(plates)
 			TriggerEvent("DoLongHudText","No Vehicle",2)
 		end   
 
-		Citizen.Wait(5000)
+		Wait(5000)
 		TriggerServerEvent("garages:CheckGarageForVeh")
 	end)
 end)
@@ -1405,8 +1404,8 @@ end)
 AddEventHandler('garages:SelVehicle', function(vehicle, plate)
 	local car = GetHashKey(vehicle)	
 	local plate = plate
-	Citizen.CreateThread(function()		
-		Citizen.Wait(0)
+	CreateThread(function()		
+		Wait(0)
 		local caissei = GetClosestVehicle(215.124, -791.377, 30.836, 3.000, 0, 70)
 		if not DoesEntityExist(caissei) then caissei = GetVehiclePedIsIn(PlayerPedId(), true) end
 		--SetEntityAsMissionEntity(caissei,false,true)
@@ -1416,7 +1415,7 @@ AddEventHandler('garages:SelVehicle', function(vehicle, plate)
 				TriggerEvent("DoLongHudText","It's not your vehicle",2)
 			else
 				TriggerEvent('keys:remove', platecaissei)
-				Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(caissei))
+				DeleteVehicle(caissei)
 				TriggerServerEvent('garages:SelVeh', plate)
 				TriggerServerEvent("garages:CheckGarageForVeh")
 			end
@@ -1433,7 +1432,7 @@ AddEventHandler('garages:SellToPlayer', function(price,plate,player)
 	if waitingForAccept then
 		waitingForAccept = false
 		TriggerServerEvent("CancelSale",previousPlayer)
-		Citizen.Wait(1000)
+		Wait(1000)
 	end
 
 	waitingForAccept = true
@@ -1444,8 +1443,8 @@ AddEventHandler('garages:SellToPlayer', function(price,plate,player)
 	previousPlayer = player
 	local car = GetHashKey(vehicle)	
 	local plate = plate
-	Citizen.CreateThread(function()		
-		Citizen.Wait(0)
+	CreateThread(function()		
+		Wait(0)
 		local targetPed = GetPlayerFromServerId(player)
 		if not DoesPlayerExist(player) or not DoesEntityExist(GetPlayerPed(targetPed)) then
 			TriggerEvent("DoLongHudText","No Person",2)
@@ -1490,9 +1489,9 @@ end)
 RegisterNetEvent('garages:askingForVeh')
 AddEventHandler('garages:askingForVeh', function(source)
 	making = true
-	Citizen.CreateThread(function()	
+	CreateThread(function()	
 		while making do	
-			Citizen.Wait(3)
+			Wait(3)
 			DisplayHelpText('~g~'..Controlkey["generalUse"][2]..'~s~ to Accept Car ,~g~'..Controlkey["generalUseSecondary"][2]..'~s~ to Refuse Car.')
 
 			if ( IsControlJustPressed(1,Controlkey["generalUse"][1])) then
@@ -1514,8 +1513,8 @@ end)
 
 RegisterNetEvent('garages:ClientEnd')
 AddEventHandler('garages:ClientEnd', function(plate)
-	Citizen.CreateThread(function()		
-		Citizen.Wait(0)
+	CreateThread(function()		
+		Wait(0)
 		local pos = GetEntityCoords(PlayerPedId())
 		local caissei = GetClosestVehicle(pos.x,pos.y,pos.z, 3.000, 0, 70)
 		if not DoesEntityExist(caissei) then caissei = GetVehiclePedIsIn(PlayerPedId(), true) end
@@ -1531,8 +1530,8 @@ end)
 
 RegisterNetEvent('garages:PlayerEnd')
 AddEventHandler('garages:PlayerEnd', function(plate)
-	Citizen.CreateThread(function()		
-		Citizen.Wait(0)
+	CreateThread(function()		
+		Wait(0)
 		local pos = GetEntityCoords(PlayerPedId())
 		local caissei = GetClosestVehicle(pos.x,pos.y,pos.z, 3.000, 0, 70)
 		if not DoesEntityExist(caissei) then caissei = GetVehiclePedIsIn(PlayerPedId(), true) end
