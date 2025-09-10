@@ -1,27 +1,24 @@
-
 RegisterServerEvent('np:infinity:player:ready')
 AddEventHandler('np:infinity:player:ready', function()
-    local coords = GetEntityCoords(GetPlayerPed(source))
-    
+    local coords = {}
+    for _, id in ipairs(GetPlayers()) do
+        local ped = GetPlayerPed(id)
+        if DoesEntityExist(ped) then
+            coords[tonumber(id)] = GetEntityCoords(ped)
+        end
+    end
     TriggerClientEvent('np:infinity:player:coords', -1, coords)
 end)
 
 RegisterServerEvent('np:infinity:entity:coords')
 AddEventHandler('np:infinity:entity:coords', function(netId)
-    local coords = GetEntityCoords(GetPlayerPed(netId))
-    
-    TriggerClientEvent('np:infinity:player:coords', source, coords)
-end)
---[[
- Citizen.CreateThread(function()
-     while true do
-         Citizen.Wait(30000)
-         local sexinthetube = GetEntityCoords(GetPlayerPed(source))
-         if source == nil then return end
-       TriggerClientEvent('np:infinity:player:coords', source, sexinthetube)
-         TriggerEvent("np-base:updatecoords", sexinthetube.x, sexinthetube.y, sexinthetube.z)
-   print("[^2np-infinity^0]^3 Sync Successful.^0")
-     end
- end)
+    local entity = NetworkGetEntityFromNetworkId(netId)
+    local coords = false
 
- ---]]
+    if entity ~= 0 and DoesEntityExist(entity) then
+        coords = GetEntityCoords(entity)
+    end
+
+    TriggerClientEvent('np:infinity:entity:coords', source, netId, coords)
+end)
+

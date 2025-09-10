@@ -42,9 +42,7 @@ end)
 exports('DoesPlayerExist', function (pServerId)
     local playerId = GetPlayerFromServerId(tonumber(pServerId))
 
-    if playerId ~= -1 then
-        return true
-    end
+    return playerId ~= -1
 end)
 
 exports('IsPlayerActive', function (pServerId)
@@ -55,13 +53,13 @@ exports('GetNetworkedCoords', function (pType, pNetId)
     local coords
 
     if pType == 'player' then
-        local playerIndex = GetPlayerFromServerId(pNetId)
-		if not playerIndex == -1 then
-			coords = PlayerCoords[pNetId]
-		else
-			coords = GetEntityCoords(GetPlayerPed(playerIndex))
-		end
-        --coords = playerIndex == -1 and PlayerCoords[pNetId] or GetEntityCoords(GetPlayerPed(playerIndex))
+        local playerIndex = GetPlayerFromServerId(tonumber(pNetId))
+
+        if playerIndex == -1 then
+            coords = PlayerCoords[tonumber(pNetId)]
+        else
+            coords = GetEntityCoords(GetPlayerPed(playerIndex))
+        end
     else
         local entity = NetworkGetEntityFromNetworkId(pNetId)
 

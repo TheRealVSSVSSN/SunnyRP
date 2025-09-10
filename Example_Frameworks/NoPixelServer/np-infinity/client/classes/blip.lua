@@ -24,15 +24,15 @@ function EntityBlip:setSettings()
     end
 
     if self.settings.route then
-        SetBlipColour(self.handle, self.settings.route)
+        SetBlipRoute(self.handle, self.settings.route)
     end
 
     if self.settings.short then
-        SetBlipColour(self.handle, self.settings.short)
+        SetBlipAsShortRange(self.handle, self.settings.short)
     end
 
     if self.settings.scale then
-        SetBlipColour(self.handle, self.settings.scale)
+        SetBlipScale(self.handle, self.settings.scale)
     end
 
     if self.settings.heading then
