@@ -1,11 +1,18 @@
-RegisterServerEvent('chat:init')
-RegisterServerEvent('chat:addTemplate')
-RegisterServerEvent('chat:addMessage')
-RegisterServerEvent('chat:addSuggestion')
-RegisterServerEvent('chat:removeSuggestion')
-RegisterServerEvent('_chat:messageEntered')
-RegisterServerEvent('chat:clear')
-RegisterServerEvent('__cfx_internal:commandFallback')
+--[[
+    -- Type: Event Registration
+    -- Name: Chat Events
+    -- Use: Registers all server-side chat events
+    -- Created: 2024-05-14
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent('chat:init')
+RegisterNetEvent('chat:addTemplate')
+RegisterNetEvent('chat:addMessage')
+RegisterNetEvent('chat:addSuggestion')
+RegisterNetEvent('chat:removeSuggestion')
+RegisterNetEvent('_chat:messageEntered')
+RegisterNetEvent('chat:clear')
+RegisterNetEvent('__cfx_internal:commandFallback')
 
 -- this is a built-in event, but somehow needs to be registered
 RegisterNetEvent('playerJoining')
@@ -36,6 +43,13 @@ end)
 
 local modes = {}
 
+--[[
+    -- Type: Function
+    -- Name: getMatchingPlayers
+    -- Use: Returns players allowed by a specific ACE object
+    -- Created: 2024-05-14
+    -- By: VSSVSSN
+--]]
 local function getMatchingPlayers(seObject)
     local players = GetPlayers()
     local retval = {}
@@ -108,6 +122,13 @@ local function unregisterHooks(resource)
     end
 end
 
+--[[
+    -- Type: Function
+    -- Name: routeMessage
+    -- Use: Handles message routing, hooks and modes before broadcasting
+    -- Created: 2024-05-14
+    -- By: VSSVSSN
+--]]
 local function routeMessage(source, author, message, mode, fromConsole)
     if source >= 1 then
         author = GetPlayerName(source)
@@ -241,7 +262,13 @@ RegisterCommand('say', function(source, args, rawCommand)
     routeMessage(source, (source == 0) and 'console' or GetPlayerName(source), rawCommand:sub(5), nil, true)
 end)
 
--- command suggestions for clients
+--[[
+    -- Type: Function
+    -- Name: refreshCommands
+    -- Use: Sends available server commands to the specified player
+    -- Created: 2024-05-14
+    -- By: VSSVSSN
+--]]
 local function refreshCommands(player)
     if GetRegisteredCommands then
         local registeredCommands = GetRegisteredCommands()
