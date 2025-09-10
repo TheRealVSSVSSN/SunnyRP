@@ -1,36 +1,50 @@
 local mp_pointing = false
 local keyPressed = false
 
+--[[
+    -- Type: Function
+    -- Name: startPointing
+    -- Use: Initiates pointing animation
+    -- Created: 2024-XX-XX
+    -- By: VSSVSSN
+--]]
 local function startPointing()
-    local ped = GetPlayerPed(-1)
+    local ped = PlayerPedId()
     RequestAnimDict("anim@mp_point")
     while not HasAnimDictLoaded("anim@mp_point") do
         Wait(0)
     end
-    SetPedCurrentWeaponVisible(ped, 0, 1, 1, 1)
-    SetPedConfigFlag(ped, 36, 1)
+    SetPedCurrentWeaponVisible(ped, false, true, true, true)
+    SetPedConfigFlag(ped, 36, true)
     Citizen.InvokeNative(0x2D537BA194896636, ped, "task_mp_pointing", 0.5, 0, "anim@mp_point", 24)
     RemoveAnimDict("anim@mp_point")
 end
 
+--[[
+    -- Type: Function
+    -- Name: stopPointing
+    -- Use: Clears pointing animation
+    -- Created: 2024-XX-XX
+    -- By: VSSVSSN
+--]]
 local function stopPointing()
-    local ped = GetPlayerPed(-1)
+    local ped = PlayerPedId()
     Citizen.InvokeNative(0xD01015C7316AE176, ped, "Stop")
     if not IsPedInjured(ped) then
         ClearPedSecondaryTask(ped)
     end
-    if not IsPedInAnyVehicle(ped, 1) then
-        SetPedCurrentWeaponVisible(ped, 1, 1, 1, 1)
+    if not IsPedInAnyVehicle(ped, true) then
+        SetPedCurrentWeaponVisible(ped, true, true, true, true)
     end
-    SetPedConfigFlag(ped, 36, 0)
-    ClearPedSecondaryTask(PlayerPedId())
+    SetPedConfigFlag(ped, 36, false)
+    ClearPedSecondaryTask(ped)
 end
 
 local once = true
 local oldval = false
 local oldvalped = false
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
         Wait(15)
 
@@ -70,7 +84,7 @@ Citizen.CreateThread(function()
             if not IsPedOnFoot(PlayerPedId()) then
                 stopPointing()
             else
-                local ped = GetPlayerPed(-1)
+                local ped = PlayerPedId()
                 local camPitch = GetGameplayCamRelativePitch()
                 if camPitch < -70.0 then
                     camPitch = -70.0
@@ -80,8 +94,8 @@ Citizen.CreateThread(function()
                 camPitch = (camPitch + 70.0) / 112.0
 
                 local camHeading = GetGameplayCamRelativeHeading()
-                local cosCamHeading = Cos(camHeading)
-                local sinCamHeading = Sin(camHeading)
+                local cosCamHeading = math.cos(math.rad(camHeading))
+                local sinCamHeading = math.sin(math.rad(camHeading))
                 if camHeading < -180.0 then
                     camHeading = -180.0
                 elseif camHeading > 180.0 then
@@ -90,11 +104,11 @@ Citizen.CreateThread(function()
                 camHeading = (camHeading + 180.0) / 360.0
 
                 local blocked = 0
-                local nn = 0
 
                 local coords = GetOffsetFromEntityInWorldCoords(ped, (cosCamHeading * -0.2) - (sinCamHeading * (0.4 * camHeading + 0.3)), (sinCamHeading * -0.2) + (cosCamHeading * (0.4 * camHeading + 0.3)), 0.6)
-                local ray = Cast_3dRayPointToPoint(coords.x, coords.y, coords.z - 0.2, coords.x, coords.y, coords.z + 0.2, 0.4, 95, ped, 7);
-                nn,blocked,coords,coords = GetRaycastResult(ray)
+                local ray = StartShapeTestRay(coords.x, coords.y, coords.z - 0.2, coords.x, coords.y, coords.z + 0.2, 95, ped, 7)
+                local _, hit, _, _ = GetShapeTestResult(ray)
+                blocked = hit
 
                 Citizen.InvokeNative(0xD5BB4025AE449A4E, ped, "Pitch", camPitch)
                 Citizen.InvokeNative(0xD5BB4025AE449A4E, ped, "Heading", camHeading * -1.0 + 1.0)
