@@ -1,4 +1,15 @@
+--[[
+    -- Type: Local State
+    -- Name: focusTaken, isCop, isMedic, isNews, isInService
+    -- Use: Track voice focus and player job status for radar access
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 local focusTaken = false
+local isCop = false
+local isMedic = false
+local isNews = false
+local isInService = false
 --[[------------------------------------------------------------------------
 
     Wraith Radar System - v1.02
@@ -10,7 +21,7 @@ local focusTaken = false
     Resource Rename Fix 
 ------------------------------------------------------------------------]]--
 Citizen.CreateThread( function()
-    Citizen.Wait( 1000 )
+    Wait( 1000 )
     local resourceName = GetCurrentResourceName()
     SendNUIMessage( { resourcename = resourceName } )
 end )
@@ -26,9 +37,16 @@ function oppang( ang )
     return ( ang + 180 ) % 360 
 end 
 
-function FormatSpeed( speed )
-    return string.format( "%03d", speed )
-end 
+--[[
+    -- Type: Function
+    -- Name: FormatSpeed
+    -- Use: Returns a zero-padded speed value
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function FormatSpeed(speed)
+    return string.format("%03d", math.max(0, speed))
+end
 
 RegisterNetEvent("nowIsCop")
 AddEventHandler("nowIsCop", function(cb)
@@ -135,18 +153,22 @@ AddEventHandler("updateHotPlates", function(newPlates,newReasons)
     hotPlatesReason = newReasons
 end)
 
-function isHotVehicle(plate)
-    if hotPlates[string.upper(plate)] ~= nil or hotPlates[string.lower(plate)] ~= nil or hotPlates[plate] ~= nil then
-        return true
-    else
-        return false
-    end
+--[[
+    -- Type: Function
+    -- Name: isHotVehicle
+    -- Use: Determines if a license plate is flagged as hot
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function isHotVehicle(plate)
+    local normalized = plate and string.lower(plate) or ""
+    return hotPlates[plate] or hotPlates[normalized] or hotPlates[string.upper(normalized)] and true or false
 end
 
 
 RegisterNetEvent( 'startSpeedo' )
 AddEventHandler( 'startSpeedo', function()
-    local ped = GetPlayerPed( -1 )
+    local ped = PlayerPedId()
 
     if ( IsPedSittingInAnyVehicle( ped ) ) then 
         local vehicle = GetVehiclePedIsIn( ped, false )
@@ -182,7 +204,7 @@ end)
 
 RegisterNetEvent( 'wk:toggleRadar' )
 AddEventHandler( 'wk:toggleRadar', function()
-    local ped = GetPlayerPed( -1 )
+    local ped = PlayerPedId()
 
     if ( IsPedSittingInAnyVehicle( ped ) ) then 
         local vehicle = GetVehiclePedIsIn( ped, false )
@@ -239,7 +261,7 @@ function Radar_SetLimit()
                 break 
             end  
 
-            Citizen.Wait( 0 )
+            Wait( 0 )
         end 
     end )
 end 
@@ -341,7 +363,7 @@ end
 
 function ManageVehicleRadar()
     if ( radarEnabled ) then 
-        local ped = GetPlayerPed( -1 )
+        local ped = PlayerPedId()
 
         if ( IsPedSittingInAnyVehicle( ped ) ) then 
             local vehicle = GetVehiclePedIsIn( ped, false )
@@ -464,7 +486,7 @@ end
 
 RegisterNetEvent( 'wk:radarRC' )
 AddEventHandler( 'wk:radarRC', function()
-    Citizen.Wait( 10 )
+    Wait( 10 )
 
     TriggerEvent( 'wk:toggleMenuControlLock', true )
 
@@ -547,20 +569,20 @@ Citizen.CreateThread( function()
         ManageVehicleRadar()
 
         -- Only run 10 times a second, more realistic, also prevents spam 
-        Citizen.Wait( 200 )
+        Wait( 200 )
     end
 end )
 
 RegisterNetEvent( 'radar:alarm' )
 AddEventHandler( 'radar:alarm', function()
     PlaySoundFrontend( -1, "Beep_Green", "DLC_HEIST_HACKING_SNAKE_SOUNDS", 1 )
-    Citizen.Wait(100)
+    Wait(100)
     PlaySoundFrontend( -1, "Beep_Red", "DLC_HEIST_HACKING_SNAKE_SOUNDS", 1 )
-    Citizen.Wait(100)
+    Wait(100)
     PlaySoundFrontend( -1, "Beep_Green", "DLC_HEIST_HACKING_SNAKE_SOUNDS", 1 )
-    Citizen.Wait(100)
+    Wait(100)
     PlaySoundFrontend( -1, "Beep_Red", "DLC_HEIST_HACKING_SNAKE_SOUNDS", 1 )
-    Citizen.Wait(100)    
+    Wait(100)    
 end)
 
 
@@ -573,7 +595,7 @@ Citizen.CreateThread( function()
     local oldStolenFP = 0
     local oldStolenRP = 0
     while true do 
-        local ped = GetPlayerPed( -1 )
+        local ped = PlayerPedId()
 
         -- These control pressed natives must be the disabled check ones. 
         local inVeh = IsPedSittingInAnyVehicle( ped )
@@ -627,7 +649,7 @@ Citizen.CreateThread( function()
                 end    
             end
         end
-        Citizen.Wait( 100 )
+        Wait( 100 )
     end 
 end )
 
@@ -647,11 +669,11 @@ end )
 
 
 Citizen.CreateThread( function()
-    local ped = GetPlayerPed( -1 )
+    local ped = PlayerPedId()
             local veh = GetVehiclePedIsIn( ped, false )
     while true do 
         
-        ped = GetPlayerPed( -1 )
+        ped = PlayerPedId()
         -- These control pressed natives must be the disabled check ones. 
         local inVeh = IsPedSittingInAnyVehicle( ped )
         
@@ -700,11 +722,11 @@ Citizen.CreateThread( function()
                 SendNUIMessage( { hideradar = true } )
             end 
 
-            ped = GetPlayerPed( -1 )
-            Citizen.Wait(1100)
+            ped = PlayerPedId()
+            Wait(1100)
 
         end
-        Citizen.Wait( 1 )
+        Wait( 1 )
     end 
 end )
 
@@ -723,8 +745,8 @@ end )
 Citizen.CreateThread( function()
     while true do
         if ( locked ) then 
-            Citizen.Wait( 0 )
-            local ped = GetPlayerPed( -1 )  
+            Wait( 0 )
+            local ped = PlayerPedId()  
 
             DisableControlAction( 0, 1, true ) -- LookLeftRight
             DisableControlAction( 0, 2, true ) -- LookUpDown
@@ -735,7 +757,7 @@ Citizen.CreateThread( function()
 
             SetPauseMenuActive( false )
         else
-            Citizen.Wait( 100 )
+            Wait( 100 )
         end
 
         
@@ -746,6 +768,14 @@ end )
 --[[------------------------------------------------------------------------
     Notify  
 ------------------------------------------------------------------------]]--
-function Notify( text,num )
-    TriggerEvent("DoShortHudText",text,num)
-end 
+--[[
+    -- Type: Function
+    -- Name: Notify
+    -- Use: Displays a short HUD message to the player
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function Notify(text, num)
+    TriggerEvent("DoShortHudText", text, num)
+end
+
