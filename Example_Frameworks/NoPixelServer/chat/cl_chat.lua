@@ -1,5 +1,8 @@
 local chatInputActive = false
 local chatInputActivating = false
+local chatHidden = false
+local chatLoaded = false
+local focusTaken = false
 
 RegisterNetEvent('chatMessage')
 RegisterNetEvent('chat:addTemplate')
@@ -7,6 +10,7 @@ RegisterNetEvent('chat:addMessage')
 RegisterNetEvent('chat:addSuggestion')
 RegisterNetEvent('chat:removeSuggestion')
 RegisterNetEvent('chat:clear')
+RegisterNetEvent('chat:addSuggestions')
 
 -- internal events
 RegisterNetEvent('__cfx_internal:serverPrint')
@@ -36,26 +40,32 @@ AddEventHandler('chatMessage', function(author, color, text)
   end
 end)
 
+--[[
+    -- Type: Event
+    -- Name: chat:showCID
+    -- Use: Displays identification data when a nearby player shares their CID
+    -- Created: 2024-06-07
+    -- By: VSSVSSN
+--]]
 RegisterNetEvent('chat:showCID')
-AddEventHandler('chat:showCID', function(cidInformation, pid)
-  local person_src = pid
-  local pid = GetPlayerFromServerId(person_src)
-	local targetPed = GetPlayerPed(pid)
-	local myCoords = GetEntityCoords(GetPlayerPed(-1))
-  local targetCoords = GetEntityCoords(targetPed)
-  print(pid)
-    if pid ~= -1 then
-	    if GetDistanceBetweenCoords(myCoords, targetCoords, true) <= 1.5 then
-          SendNUIMessage({
-            type = 'ON_MESSAGE',
-            message = {
-              color = 9,
-              multiline = false,
-              args = cidInformation
-            }
-          })
-      end
+AddEventHandler('chat:showCID', function(cidInformation, srcId)
+  local playerId = GetPlayerFromServerId(srcId)
+  if playerId ~= -1 then
+    local targetPed = GetPlayerPed(playerId)
+    local myCoords = GetEntityCoords(PlayerPedId())
+    local targetCoords = GetEntityCoords(targetPed)
+
+    if #(myCoords - targetCoords) <= 1.5 then
+      SendNUIMessage({
+        type = 'ON_MESSAGE',
+        message = {
+          color = 9,
+          multiline = false,
+          args = cidInformation
+        }
+      })
     end
+  end
 end)
 
 -- AddEventHandler('__cfx_internal:serverPrint', function(msg)
@@ -75,7 +85,7 @@ end)
 
 AddEventHandler('chat:addMessage', function(message)
   local hud = exports["isPed"]:isPed("hud")
-  if hud then
+  if hud and hud < 3 then
     SendNUIMessage({
       type = 'ON_MESSAGE',
       message = message
@@ -92,6 +102,12 @@ AddEventHandler('chat:addSuggestion', function(name, help, params)
       params = params or nil
     }
   })
+end)
+
+AddEventHandler('chat:addSuggestions', function(suggestions)
+  for _, suggestion in ipairs(suggestions) do
+    TriggerEvent('chat:addSuggestion', suggestion.name, suggestion.help, suggestion.params)
+  end
 end)
 
 AddEventHandler('chat:removeSuggestion', function(name)
@@ -130,8 +146,6 @@ RegisterNUICallback('chatResult', function(data, cb)
 
   if not data.canceled then
     local id = PlayerId()
-
-    --deprecated
     local r, g, b = 0, 0x99, 255
 
     if data.message:sub(1, 1) == '/' then
@@ -140,11 +154,6 @@ RegisterNUICallback('chatResult', function(data, cb)
       TriggerServerEvent('_chat:messageEntered', GetPlayerName(id), { r, g, b }, data.message)
     end
   end
-
-  cb('ok')
-end)
-RegisterNUICallback('loaded', function(data, cb)
-  TriggerServerEvent('chat:init');
 
   cb('ok')
 end)
@@ -165,7 +174,7 @@ Citizen.CreateThread(function()
     Wait(0)
 
     if not chatInputActive then
-      if IsControlPressed(0,245) and not focusTaken then
+      if IsControlPressed(0, Controlkey["generalChat"][1]) and not focusTaken then
         chatInputActive = true
         chatInputActivating = true
 
@@ -176,9 +185,8 @@ Citizen.CreateThread(function()
     end
 
     if chatInputActivating then
-      if not IsControlPressed(0,245) then
+      if not IsControlPressed(0, Controlkey["generalChat"][1]) then
         SetNuiFocus(true)
-
         chatInputActivating = false
       end
     end
@@ -204,6 +212,13 @@ end)
 
 
 
+--[[
+    -- Type: Function
+    -- Name: refreshCommands
+    -- Use: Pulls available commands and sends them to the client suggestions list
+    -- Created: 2024-06-07
+    -- By: VSSVSSN
+--]]
 local function refreshCommands()
   if GetRegisteredCommands then
     local registeredCommands = GetRegisteredCommands()
@@ -237,11 +252,8 @@ AddEventHandler('onClientResourceStop', function(resName)
 end)
 
 RegisterNUICallback('loaded', function(data, cb)
-  TriggerServerEvent('chat:init');
-
+  TriggerServerEvent('chat:init')
   refreshCommands()
-
   chatLoaded = true
-
   cb('ok')
 end)

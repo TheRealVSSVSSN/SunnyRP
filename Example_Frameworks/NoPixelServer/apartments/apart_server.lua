@@ -44,7 +44,7 @@ AddEventHandler('housing:attemptsale', function(args,price,hid,model)
     local user = exports["np-base"]:getModule("Player"):GetUser(src)
     local char = user:getCurrentCharacter()
     local target = exports["np-base"]:getModule("Player"):GetUser(args)
-    local targetchar = user:getCurrentCharacter()
+    local targetchar = target:getCurrentCharacter()
 
     if target:getCash() >= price then
         target:removeMoney(price)
@@ -100,7 +100,7 @@ AddEventHandler('house:givekey', function(id, model, target)
     local user = exports["np-base"]:getModule("Player"):GetUser(src)
     local char = user:getCurrentCharacter()
     local zUser = exports["np-base"]:getModule("Player"):GetUser(target)
-    local zchar = user:getCurrentCharacter()
+    local zchar = zUser:getCurrentCharacter()
     local tIdentifier = zchar.id
         exports.ghmattimysql:execute("SELECT * FROM houses WHERE id = @id AND model = @model", {
             ['@id'] = id,

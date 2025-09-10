@@ -1,13 +1,13 @@
 local isNuiActive = false
 
-function setNuiActive(booleanOrNil)
-  local boolean = true
-  if booleanOrNil ~= nil then boolean = booleanOrNil end
-  if boolean ~= isNuiActive then
-    if boolean then TriggerServerEvent('ghmattimysql:request-data') end
-    isNuiActive = boolean
+function setNuiActive(state)
+  local shouldEnable = state
+  if shouldEnable == nil then shouldEnable = true end
+  if shouldEnable ~= isNuiActive then
+    if shouldEnable then TriggerServerEvent('ghmattimysql:request-data') end
+    isNuiActive = shouldEnable
     SendNUIMessage({ type = 'onToggleShow' })
-    SetNuiFocus(boolean, boolean)
+    SetNuiFocus(shouldEnable, shouldEnable)
   end
 end
 
@@ -20,8 +20,12 @@ RegisterNUICallback('close-explorer', function()
 end)
 
 CreateThread(function()
-  if isNuiActive then TriggerServerEvent('ghmattimysql:request-data') end
-  Wait(300000)
+  while true do
+    if isNuiActive then
+      TriggerServerEvent('ghmattimysql:request-data')
+    end
+    Wait(300000)
+  end
 end)
 
 function isArray(t)
