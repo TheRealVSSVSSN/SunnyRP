@@ -9,10 +9,10 @@ This package bundles the core **essentialmode** framework and the accompanying *
   - [sql.sql](#sqlsql)
   - [essentialmode/agents.md](#essentialmodeagentsmd)
   - [essentialmode/docs.md](#essentialmodedocsmd)
-  - [essentialmode/__resource.lua](#essentialmoderescourcelua)
+  - [essentialmode/fxmanifest.lua](#essentialmodefxmanifestlua)
   - [essentialmode/lib/MySQL.lua](#essentialmodelibmysqllua)
   - [[essential]/es_admin/agents.md](#essentiales_adminagentsmd)
-  - [[essential]/es_admin/__resource.lua](#essentiales_admin__resourcelua)
+  - [[essential]/es_admin/fxmanifest.lua](#essentiales_adminfxmanifestlua)
   - [[essential]/es_admin/positions.txt](#essentiales_adminpositionstxt)
 - [Server](#server)
   - [essentialmode/server/util.lua](#essentialmodeserverutillua)
@@ -54,8 +54,8 @@ Contributor instructions for documenting the essentialmode resource. It carries 
 ### essentialmode/docs.md
 Existing documentation detailing the essentialmode internals and event surface. The current document supersedes it by adding es_admin coverage.
 
-### essentialmode/__resource.lua
-Resource manifest registering NUI files and linking server and client scripts. It lists `client/player.lua` despite that file being absent, signalling a missing asset.
+### essentialmode/fxmanifest.lua
+Modern manifest declaring NUI files and server/client scripts without referencing non-existent assets.
 
 ### essentialmode/lib/MySQL.lua
 Lua wrapper around the bundled .NET MySql.Data driver. It opens connections, executes parameterised queries, escapes inputs and reads typed fields from result sets.
@@ -63,8 +63,8 @@ Lua wrapper around the bundled .NET MySql.Data driver. It opens connections, exe
 ### [essential]/es_admin/agents.md
 Documentation instructions specific to the es_admin addon.
 
-### [essential]/es_admin/__resource.lua
-Manifest that declares a dependency on essentialmode and registers the es_admin client and server scripts.
+### [essential]/es_admin/fxmanifest.lua
+Manifest converted to `fxmanifest.lua` syntax, declares dependency on essentialmode and registers the addon scripts.
 
 ### [essential]/es_admin/positions.txt
 Data file where the “pos” command appends coordinate tables for later reference.
@@ -120,10 +120,10 @@ Server‑side administrative addon:
 ### essentialmode/client/main.lua
 Client runtime coordinating with the server:
 - On session start, triggers `es:firstJoinProper` to initialise the account.
-- Every second sends `es:updatePositions` with current coordinates and refreshes the NUI money display when awaiting data.
+- Every second sends `es:updatePositions` with current coordinates gathered from `PlayerPedId()` and refreshes the NUI money display when awaiting data.
 - Manages decorators set via `es:setPlayerDecorator` and reapplies them on `playerSpawned`.
 - Handles money events (`es:activateMoney`, `es:addedMoney`, `es:removedMoney`) and opacity changes (`es:setMoneyDisplay`) by relaying to the NUI.
-- When `es:enablePvp` arrives, repeatedly enables friendly fire for all connected players.
+- When `es:enablePvp` arrives, repeatedly enables friendly fire for all connected players using `GetActivePlayers()`.
 
 ### [essential]/es_admin/cl_admin.lua
 Client counterpart for administrative commands:
@@ -242,21 +242,20 @@ None.
 | bans | banned, banner, reason, expires, timestamp | Tracks bans and their duration |
 
 ## Configuration & Integration
-- Database credentials are hard coded in `essentialmode/server/player/login.lua` and `es_admin/sv_admin.lua`; they must be edited to match the target MySQL server.
+- Database credentials are provided via server convars (`essentialmode_db_host`, `essentialmode_db_name`, `essentialmode_db_user`, `essentialmode_db_password`).
 - Include both `essentialmode` and `[essential]/es_admin` in the server’s resource start list so the admin commands are available.
 - Other resources can register commands or groups by triggering the events exposed in `server/main.lua`.
 
 ## Gaps & Inferences
-- `essentialmode/__resource.lua` references a missing `client/player.lua`. **TODO**
-- `playerConnecting` reads `settings.defaultSettings.banreason` while defaults define `banReason`; treated as the same key. *(Inferred High)*
-- Permission denial message uses `defaultSettings.permissionDenied` without the `settings` prefix and defaults to a boolean even though a string or function is expected. *(Inferred High)*
-- `LoadUser` contains unconditional `if(true)` blocks, likely meant to check decorator and new-player flags. *(Inferred High)*
-- `isLoggedIn` in `login.lua` never sets or reads a valid flag and appears unused. **TODO**
-- `Player` class uses typed variables (e.g. `: double`) that cause Lua compilation errors under `luac`. *(Info)*
-- `sv_admin.lua` defines an unused `permission` table. *(Info)*
-- `sv_admin.lua` includes an unused `stringsplit` function that references an undefined `Split` method. *(Info)*
-- `ban` command’s `if not tonumber(time) > 0` test misuses operator precedence; should be `if not (tonumber(time) > 0)`. *(Inferred High)*
-- RCON `ban` handler sends a message using undefined variable `player`; likely meant to use the provided id. *(Inferred High)*
+- Database credentials are now read from server convars (`essentialmode_db_*`) instead of being hard coded.
+- `playerConnecting` correctly uses the `banReason` key from default settings.
+- Permission denial messages now reference `settings.defaultSettings.permissionDenied`.
+- `LoadUser` checks `enableRankDecorators` and the `new` flag before applying decorators or firing `es:newPlayerLoaded`.
+- Removed unused `stringsplit` and `isLoggedIn` helpers from `login.lua`.
+- Removed unused permission table and `stringsplit` helper from `sv_admin.lua`.
+- Fixed ban command time validation and RCON ban player reference.
+- `Player` class still uses typed annotations (e.g., `: double`) which may cause issues under strict Lua compilers. *(Info)*
+- RCON `unban` command remains unimplemented. **TODO**
 - RCON `unban` command is stubbed with no database update. **TODO**
 - Event handler for `es:adminCommandRan` is empty, so admin command logging is not implemented. **TODO**
 - Audit events `es:userCommandRan`, `es:commandRan`, `es:adminCommandFailed`, and `es:invalidCommandHandler` are emitted without default handlers. *(Info)*

@@ -21,7 +21,7 @@ local oldPos
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(1000)
-		local pos = GetEntityCoords(GetPlayerPed(-1))
+                local pos = GetEntityCoords(PlayerPedId())
 
 		if(oldPos ~= pos)then
 			TriggerServerEvent('es:updatePositions', pos.x, pos.y, pos.z)
@@ -47,14 +47,14 @@ AddEventHandler("es:setPlayerDecorator", function(key, value, doNow)
 	DecorRegister(key, 3)
 
 	if(doNow)then
-		DecorSetInt(GetPlayerPed(-1), key, value)
+                DecorSetInt(PlayerPedId(), key, value)
 	end
 end)
 
 AddEventHandler("playerSpawned", function()
-	for k,v in pairs(myDecorators)do
-		DecorSetInt(GetPlayerPed(-1), k, v)
-	end
+        for k,v in pairs(myDecorators)do
+                DecorSetInt(PlayerPedId(), k, v)
+        end
 end)
 
 RegisterNetEvent('es:activateMoney')
@@ -95,14 +95,12 @@ AddEventHandler("es:enablePvp", function()
 	Citizen.CreateThread(function()
 		while true do
 			Citizen.Wait(0)
-			for i = 0,32 do
-				if NetworkIsPlayerConnected(i) then
-					if NetworkIsPlayerConnected(i) and GetPlayerPed(i) ~= nil then
-						SetCanAttackFriendly(GetPlayerPed(i), true, true)
-						NetworkSetFriendlyFireOption(true)
-					end
-				end
-			end
+                        for _, i in ipairs(GetActivePlayers()) do
+                                if NetworkIsPlayerConnected(i) and GetPlayerPed(i) ~= nil then
+                                        SetCanAttackFriendly(GetPlayerPed(i), true, true)
+                                        NetworkSetFriendlyFireOption(true)
+                                end
+                        end
 		end
 	end)
 end)

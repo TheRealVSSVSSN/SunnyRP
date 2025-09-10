@@ -6,8 +6,13 @@
 -- Loading MySQL Class
 require "resources/essentialmode/lib/MySQL"
 
--- MySQL:open("IP", "databasname", "user", "password")
-MySQL:open("127.0.0.1", "gta5_gamemode_essential", "root", "1202")
+-- MySQL configuration via server convars for flexibility
+MySQL:open(
+    GetConvar('essentialmode_db_host', '127.0.0.1'),
+    GetConvar('essentialmode_db_name', 'gta5_gamemode_essential'),
+    GetConvar('essentialmode_db_user', 'root'),
+    GetConvar('essentialmode_db_password', '')
+)
 
 function LoadUser(identifier, source, new)
 	local executed_query = MySQL:executeQuery("SELECT * FROM users WHERE identifier = '@name'", {['@name'] = identifier})
@@ -16,26 +21,15 @@ function LoadUser(identifier, source, new)
 	local group = groups[result[1].group]
 	Users[source] = Player(source, result[1].permission_level, result[1].money, result[1].identifier, group)
 
-	TriggerEvent('es:playerLoaded', source, Users[source])
+        TriggerEvent('es:playerLoaded', source, Users[source])
 
-	if(true)then
-		TriggerClientEvent('es:setPlayerDecorator', source, 'rank', Users[source]:getPermissions())
-	end
+        if settings.defaultSettings.enableRankDecorators then
+                TriggerClientEvent('es:setPlayerDecorator', source, 'rank', Users[source]:getPermissions())
+        end
 
-	if(true)then
-		TriggerEvent('es:newPlayerLoaded', source, Users[source])
-	end
-end
-
-function stringsplit(self, delimiter)
-  local a = self:Split(delimiter)
-  local t = {}
-
-  for i = 0, #a - 1 do
-     table.insert(t, a[i])
-  end
-
-  return t
+        if new then
+                TriggerEvent('es:newPlayerLoaded', source, Users[source])
+        end
 end
 
 function isIdentifierBanned(id)
@@ -68,17 +62,6 @@ function hasAccount(identifier)
 end
 
 
-function isLoggedIn(source)
-	if(Users[GetPlayerName(source)] ~= nil)then
-	if(Users[GetPlayerName(source)]['isLoggedIn'] == 1) then
-		return true
-	else
-		return false
-	end
-	else
-		return false
-	end
-end
 
 function registerUser(identifier, source)
 	if not hasAccount(identifier) then
