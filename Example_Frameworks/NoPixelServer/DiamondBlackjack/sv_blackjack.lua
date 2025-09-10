@@ -9,20 +9,23 @@ end
 local blackjackGameInProgress = {}
 local blackjackGameData = {}
 
-function tryTakeChips(source,amount)
+function tryTakeChips(source, amount)
     local src = source
     local user = exports["np-base"]:getModule("Player"):GetUser(src)
-    if amount >= user:getCash() then
-        TriggerClientEvent('DoShortHudText', src, 'Get the fuck out',2)
+
+    amount = math.floor(tonumber(amount) or 0)
+    if amount <= 0 then
+        return false
+    elseif amount > user:getCash() then
+        TriggerClientEvent('DoShortHudText', src, 'Insufficient funds', 2)
+        return false
+    elseif amount > 5000 then
+        TriggerClientEvent('DoShortHudText', src, 'Max Betting is $5000', 2)
         return false
     end
-    if amount < 5001 then
+
     user:removeMoney(amount)
     return true
-    else if amount > 5000 then 
-     TriggerClientEvent('DoShortHudText', src, 'Max Betting is $5000',2)
-    end
-    end
 end
 
 function giveChips(source,amount)
@@ -128,7 +131,7 @@ AddEventHandler("Blackjack:standBlackjack",function(gameId,nextCardCount)
 end)
 
 for i=0,31,1 do
-    Citizen.CreateThread(function()
+    CreateThread(function()
         math.randomseed(os.clock()*100000000000)
         while true do  --blackjack game management thread
             math.random() 

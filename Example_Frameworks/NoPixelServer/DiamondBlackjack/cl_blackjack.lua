@@ -22,11 +22,11 @@ local bettedThisRound = false
 local standOrHitThisRound = false
 local globalGameId = -1
 local globalNextCardCount = -1
-cardObjects = {}
+local cardObjects = {}
 local drawCurrentHand = false
 local currentHand = 0
 local dealersHand = 0
-currentBetAmount = 0
+local currentBetAmount = 0
 sittingAtBlackjackTable = false
 local canExitBlackjack = false
 local dealerSecondCardFromGameId = {} 
@@ -74,28 +74,31 @@ cfg.blackjackTables = {
 
 --Use this command to get the coords you need for setting up new tables. 
 --Some maps use the prop vw_prop_casino_blckjack_01 some use vw_prop_casino_blckjack_01b, so change accordingly.
-RegisterCommand("getcasinotable",function()
+local SEARCH_RADIUS = 5.0
+
+local function printTableInfo(entity, model)
+    print("Found entity")
+    print("tablePos pos", GetEntityCoords(entity))
+    print("tableHeading heading", GetEntityHeading(entity))
+    print("prop: " .. model)
+end
+
+RegisterCommand("getcasinotable", function()
     local playerCoords = GetEntityCoords(PlayerPedId())
-    local blackjackTable = GetClosestObjectOfType(playerCoords.x,playerCoords.y,playerCoords.z,GetEntityHeading(PlayerPedId()),GetHashKey("vw_prop_casino_blckjack_01"),0,0,0)
+    local blackjackTable = GetClosestObjectOfType(playerCoords.x, playerCoords.y, playerCoords.z, SEARCH_RADIUS, GetHashKey("vw_prop_casino_blckjack_01"), false, false, false)
     if DoesEntityExist(blackjackTable) then
-        print("Found entity")
-        print("tablePos pos",GetEntityCoords(blackjackTable))
-        print("tableHeading heading",GetEntityHeading(blackjackTable))
-        print("prop: vw_prop_casino_blckjack_01")
+        printTableInfo(blackjackTable, "vw_prop_casino_blckjack_01")
     else
-        local blackjackTable2 = GetClosestObjectOfType(playerCoords.x,playerCoords.y,playerCoords.z,GetEntityHeading(PlayerPedId()),GetHashKey("vw_prop_casino_blckjack_01b"),0,0,0)
+        local blackjackTable2 = GetClosestObjectOfType(playerCoords.x, playerCoords.y, playerCoords.z, SEARCH_RADIUS, GetHashKey("vw_prop_casino_blckjack_01b"), false, false, false)
         if DoesEntityExist(blackjackTable2) then
-            print("Found entity")
-            print("tablePos pos:",GetEntityCoords(blackjackTable2))
-            print("tableHeading heading:",GetEntityHeading(blackjackTable2))
-            print("prop: vw_prop_casino_blckjack_01")
+            printTableInfo(blackjackTable2, "vw_prop_casino_blckjack_01b")
         else
             print("Could not find entity")
         end
     end
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	TriggerServerEvent("Blackjack:requestBlackjackTableData")
 end)
 
@@ -104,12 +107,12 @@ AddEventHandler("Blackjack:sendBlackjackTableData", function(newBlackjackTableDa
     blackjackTableData = newBlackjackTableData
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while not closeToCasino do 
         Wait(0)
     end
-    maleCasinoDealer = GetHashKey("S_M_Y_Casino_01")
-    femaleCasinoDealer = GetHashKey("S_F_Y_Casino_01")
+    local maleCasinoDealer = GetHashKey("S_M_Y_Casino_01")
+    local femaleCasinoDealer = GetHashKey("S_F_Y_Casino_01")
     math.randomseed(GetGameTimer())
    
     dealerAnimDict = "anim_casino_b@amb@casino@games@shared@dealer@"
@@ -152,8 +155,8 @@ Citizen.CreateThread(function()
             TaskPlayAnim(dealerEntity, dealerAnimDict, "female_idle", 1000.0, -2.0, -1, 2, 1148846080, 0) --anim_name is idle or female_idle depending on gender
         end
         PlayFacialAnim(dealerEntity, "idle_facial", dealerAnimDict)
-        RemoveAnimDict(dealerAnimDict)
     end
+    RemoveAnimDict(dealerAnimDict)
     local blackjackTable = GetClosestObjectOfType(1129.406, 262.3578, -52.041,1.0,GetHashKey("vw_prop_casino_blckjack_01b"),0,0,0)
     SetObjectTextureVariant(blackjackTable,3)
     local rouletteTable = GetClosestObjectOfType(1132.7875976563,262.42929077148,-51.035781860352,1.0,GetHashKey("vw_prop_casino_roulette_01b"),0,0,0)
@@ -176,13 +179,11 @@ end)
 function resetDealerIdle(dealerPed)
     local gender = getDealerGenderFromPed(dealerPed)
     if DoesEntityExist(dealerPed) then
-        if gender == "male" then 
-            genderAnimString = "" 
-        end 
-        if gender == "female" then 
-            genderAnimString = "female_" 
-        end 
-        dealerAnimDict = "anim_casino_b@amb@casino@games@shared@dealer@"
+        local genderAnimString = ""
+        if gender == "female" then
+            genderAnimString = "female_"
+        end
+        local dealerAnimDict = "anim_casino_b@amb@casino@games@shared@dealer@"
         RequestAnimDict(dealerAnimDict)
         while not HasAnimDictLoaded(dealerAnimDict) do
             Wait(0)
@@ -194,7 +195,7 @@ function resetDealerIdle(dealerPed)
     end
 end
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do 
         if shouldForceIdleCardGames and sittingAtBlackjackTable then
             TaskPlayAnim(GetPlayerPed(-1),"anim_casino_b@amb@casino@games@shared@player@", "idle_cardgames", 1.0, 1.0, -1, 0)
@@ -205,7 +206,7 @@ end)
 
 local playedCasinoGuiSound = false
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do 
         if not sittingAtBlackjackTable then
             if closestChair ~= nil and closestChairDist < 2 then
@@ -228,7 +229,7 @@ Citizen.CreateThread(function()
     end
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do 
         if closestChair ~= -1 then
             if closestChairDist > 2 and closestChairDist < 5 then 
@@ -246,7 +247,7 @@ Citizen.CreateThread(function()
     end
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do 
         if waitingForBetState then
             if IsDisabledControlJustPressed(0, 22) then --Custom Bet [space]
@@ -293,7 +294,7 @@ AddEventHandler("Blackjack:successBlackjackBet",function()
     --print("made blackjackInstructional nil cause its success")
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
         if closestChair ~= -1 and closestChairDist < 2 then 
             if IsControlJustPressed(0, 38) then --Sit down [E]
@@ -312,7 +313,7 @@ AddEventHandler("Blackjack:sitAtBlackjackTable",function(chair)
     goToBlackjackSeat(chair)
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
         if sittingAtBlackjackTable and canExitBlackjack then
             SetPedCapsule(PlayerPedId(),0.2) 
@@ -365,7 +366,7 @@ Citizen.CreateThread(function()
     end
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do 
         local playerCoords = GetEntityCoords(GetPlayerPed(-1))
         closeToCasino = false
@@ -379,7 +380,7 @@ Citizen.CreateThread(function()
     end
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do 
         if closeToCasino then
             closestChairDist = 1000
@@ -455,7 +456,7 @@ function showHowToBlackjack(flag)
     end
 end
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
         if blackjackInstructional ~= nil then 
             DrawScaleformMovieFullscreen(blackjackInstructional, 255, 255, 255, 255, 0)
@@ -512,7 +513,7 @@ AddEventHandler("Blackjack:beginBetsBlackjack",function(gameID,tableId)
     currentHand = 0
     SetEntityCoordsNoOffset(dealerPed, cfg.blackjackTables[tableId].dealerPos.x,cfg.blackjackTables[tableId].dealerPos.y,cfg.blackjackTables[tableId].dealerPos.z, 0,0,1)
     SetEntityHeading(dealerPed, cfg.blackjackTables[tableId].dealerHeading)
-    Citizen.CreateThread(function()
+    CreateThread(function()
         drawTimerBar = true
         while timeLeft > 0 do 
             timeLeft = timeLeft - 1
@@ -587,7 +588,7 @@ AddEventHandler("Blackjack:standOrHit",function(gameId,chairId,nextCardCount,tab
             waitingForStandOrHitState = true
             PlayAmbientSpeech1(dealerPed,"MINIGAME_BJACK_DEALER_ANOTHER_CARD","SPEECH_PARAMS_FORCE_NORMAL_CLEAR",1)
             startStandOrHit(gameId,dealerPed,chairId,true)
-            Citizen.CreateThread(function()
+            CreateThread(function()
                 if sittingAtBlackjackTable then
                     drawTimerBar = true
                     timeLeft = 20
@@ -1193,8 +1194,8 @@ function betChipsForNextHand(chipsAmount,chipsProp,something,chairID,someBool,zO
 end 
 
 function getDealerGenderFromPed(dealerPed)
-    maleCasinoDealer = GetHashKey("S_M_Y_Casino_01")
-    femaleCasinoDealer = GetHashKey("S_F_Y_Casino_01")
+    local maleCasinoDealer = GetHashKey("S_M_Y_Casino_01")
+    local femaleCasinoDealer = GetHashKey("S_F_Y_Casino_01")
 
     if GetEntityModel(dealerPed) == maleCasinoDealer then 
         return "male" 
@@ -2642,7 +2643,7 @@ end
 function setupBlackjackInstructionalScaleform(scaleform)
     local scaleform = RequestScaleformMovie(scaleform)
     while not HasScaleformMovieLoaded(scaleform) do
-        Citizen.Wait(0)
+        Wait(0)
     end
     PushScaleformMovieFunction(scaleform, "CLEAR_ALL")
     PopScaleformMovieFunctionVoid()
@@ -2699,7 +2700,7 @@ end
 function setupBlackjackMidBetScaleform(scaleform)
     local scaleform = RequestScaleformMovie(scaleform)
     while not HasScaleformMovieLoaded(scaleform) do
-        Citizen.Wait(0)
+        Wait(0)
     end
     PushScaleformMovieFunction(scaleform, "CLEAR_ALL")
     PopScaleformMovieFunctionVoid()
