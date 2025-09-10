@@ -8,9 +8,10 @@
 
 local function LoadUser(identifier, source, isNew)
     local result = MySQL.query.await('SELECT permission_level, money, identifier, `group` FROM users WHERE identifier = ?', {identifier})
-    if not result[1] then return end
-    local group = groups[result[1].group]
-    Users[source] = Player(source, result[1].permission_level, result[1].money, result[1].identifier, group)
+    local account = result[1]
+    if not account then return end
+    local group = groups[account.group] or groups['user']
+    Users[source] = Player(source, account.permission_level, account.money, account.identifier, group)
     TriggerEvent('es:playerLoaded', source, Users[source])
     if settings.defaultSettings.enableRankDecorators then
         TriggerClientEvent('es:setPlayerDecorator', source, 'rank', Users[source]:getPermissions(), true)
@@ -100,19 +101,17 @@ AddEventHandler('es:getAllPlayers', function(cb)
 end)
 
 --[[
-    -- Type: Function
-    -- Name: savePlayerMoney
-    -- Use: Periodically writes player money to the database
+    -- Type: Thread
+    -- Name: MoneySaver
+    -- Use: Persists all players' money every minute
     -- Created: 09/10/2025
     -- By: VSSVSSN
 --]]
-local function savePlayerMoney()
-    SetTimeout(60000, function()
+CreateThread(function()
+    while true do
+        Wait(60000)
         for _, v in pairs(Users) do
-            MySQL.update('UPDATE users SET money = ? WHERE identifier = ?', {v.money, v.identifier})
+            MySQL.update.await('UPDATE users SET money = ? WHERE identifier = ?', {v.money, v.identifier})
         end
-        savePlayerMoney()
-    end)
-end
-
-savePlayerMoney()
+    end
+end)
