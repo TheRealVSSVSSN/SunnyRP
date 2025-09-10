@@ -54,7 +54,8 @@ Creates the ESX client object and utility methods.
 - Provides notification helpers and a generic `ESX.TriggerServerCallback` RPC using `esx:triggerServerCallback`/`esx:serverCallback` events.
 - `ESX.SetPlayerData` broadcasts changes through `esx:setPlayerData` so imports.lua can mirror PlayerData.
 - Registers network events to update inventory, weapons, accounts, job, and to display `esx:showNotification`, `esx:showAdvancedNotification`, and `esx:showHelpNotification` messages from the server.
-- Implements a robust `ESX.SetTimeout` scheduler using unique identifiers and pair iteration to prevent skipped callbacks.
+- Implements a robust `ESX.SetTimeout` scheduler using unique identifiers, calculating precise waits to minimize idle CPU time.
+- Safely handles server callback responses by verifying the request ID before executing the stored callback and logging unexpected responses.
 - `ESX.ShowNotification` now passes boolean parameters to `DrawNotification` per current native recommendations.
 
 ### client/common.lua
