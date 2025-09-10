@@ -1,84 +1,64 @@
 # fsn_bikerental Documentation
 
-## Overview
-fsn_bikerental supplies map‑based bicycle rental booths on the client. Players walk to a kiosk, open a native UI to pick a bike, pay a fee, and spawn a temporary vehicle that is flagged for return. No server code ships with the resource; all logic is client‑side with a small NUI frontend.
-
-## Table of Contents
-- [File Inventory](#file-inventory)
-- [Runtime Details](#runtime-details)
-  - [fxmanifest.lua](#fxmanifestlua)
-  - [client.lua](#clientlua)
-  - [html/index.html](#htmlindexhtml)
-  - [html/script.js](#htmlscriptjs)
-  - [html/style.css](#htmlstylecss)
-  - [html/cursor.png](#htmlcursorpng)
-- [Cross-Index](#cross-index)
-  - [Events](#events)
-  - [NUI Messages](#nui-messages)
-  - [Exports](#exports)
-  - [Commands](#commands)
-  - [NUI Callbacks](#nui-callbacks)
-  - [ESX Callbacks](#esx-callbacks)
-  - [Database](#database)
-- [Security & Performance Notes](#security--performance-notes)
-- [Configuration & Integration](#configuration--integration)
-- [Gaps & Inferences](#gaps--inferences)
+## Overview and Runtime Context
+The resource supplies bicycle rental kiosks around the map. It is entirely client-side with a small NUI menu; no local server scripts are present. Players approach a kiosk, pay for a bike, and receive a temporary vehicle flagged as rented.
 
 ## File Inventory
-| Path | Type | Role |
-| ---- | ---- | ---- |
-| fxmanifest.lua | Manifest | Declares dependencies, client script, and NUI assets. |
-| client.lua | Client | Manages rental booths, prompts, vehicle spawn/return, NUI toggling, and callbacks. |
-| html/index.html | NUI | Markup for the rental menu and form posting. |
-| html/script.js | NUI | Handles UI visibility and Escape key. |
-| html/style.css | NUI | Positions and styles the menu. |
-| html/cursor.png | NUI Asset | Image used as cursor while the menu is active. |
+| Path | Side | Role |
+|------|------|------|
+| fxmanifest.lua | Manifest | Declares dependencies, client script, and NUI files. |
+| client.lua | Client | Handles map blips, prompts, bike spawning/returning, and NUI callbacks. |
+| html/index.html | NUI | Markup with buttons for bike selection and pricing. |
+| html/script.js | NUI | Toggles menu visibility and posts Escape requests. |
+| html/style.css | NUI | Layout and appearance for the rental menu. |
+| html/cursor.png | NUI Asset | Cursor image displayed when GUI is active. |
 
-## Runtime Details
-### fxmanifest.lua
-- Targets GTA V using the `bodacious` game build and loads both utility and settings scripts from `fsn_main` for client and server contexts【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/fxmanifest.lua†L1-L16】
-- Includes `@mysql-async/lib/MySQL.lua` even though the resource has no Lua server logic【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/fxmanifest.lua†L12-L16】
-- Registers the sole client script `client.lua` and points the UI page to `html/index.html` with its associated assets【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/fxmanifest.lua†L19-L29】
-
+## Client
 ### client.lua
-- Declares state flags and registers a decoration `bikeRental:rented` used to mark spawned bikes【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L1-L6】
-- `bikeRentalCoords` lists kiosk locations; startup thread adds map blips and continuously checks player proximity【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L8-L31】
-- Depending on whether the player is on foot or riding a tagged bike, the loop displays 3D prompts using `Util.DrawText3D` and responds to **E** to open the menu or return the vehicle【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L31-L55】
-- `spawnCar` loads the requested model, spawns it near the player, seats them, and tags it with the rental decoration【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L66-L81】
-- `deleteCar` removes the current vehicle only if it carries the decoration, using a native delete call for cleanup【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L84-L95】
-- `EnableGui` toggles NUI focus and sends an `enableui` message to show or hide the HTML page【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L100-L108】
+- Maintains GUI state flags and registers the decoration `bikeRental:rented` used to tag spawned bikes【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L1-L6】
+- `bikeRentalCoords` defines kiosk locations; startup thread adds blips and continuously checks player proximity【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L8-L31】
+- When near a kiosk, shows 3D prompts and reacts to **E** depending on whether the player is on foot or riding a tagged bike【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L31-L57】
+- `spawnCar` loads the requested model, creates the vehicle, seats the player, and marks it rented【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L66-L81】
+- `deleteCar` removes the vehicle if it carries the rental decoration, resetting prompts【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L84-L95】
+- `EnableGui` toggles NUI focus and sends an `enableui` message to the HTML page【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L100-L108】
 - NUI callbacks:
-  - `escape` closes the menu and re-enables prompts【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L110-L115】
-  - `rentBike` validates funds via `fsn_main:fsn_GetWallet`, deducts cash, displays a notification, spawns the bike, and hides the UI【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L117-L131】
-- A secondary thread disables camera and melee controls while the menu is active and forwards a `click` message when the melee key is released【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L133-L149】
+  - `escape` closes the menu and restores prompts【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L110-L115】
+  - `rentBike` checks wallet funds via `fsn_main` export, subtracts cash, spawns the bike, and hides the UI【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L117-L131】
+- A control-disabling thread runs while the UI is open and forwards a `click` message when a disabled melee key is released【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L133-L146】
+- The variable `rentalMenuOpen` is defined but unused *(Inferred: Low)*【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L4-L4】
 
+## Manifest
+### fxmanifest.lua
+- Targets the `bodacious` game build for GTA V【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/fxmanifest.lua†L1-L2】
+- Loads utility and settings scripts from `fsn_main` for both client and server contexts, and includes `@mysql-async` despite no server logic in this resource【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/fxmanifest.lua†L8-L16】
+- Registers `client.lua` as the lone client script and points `ui_page` to `html/index.html` with its asset list【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/fxmanifest.lua†L19-L29】
+
+## NUI
 ### html/index.html
-- Loads jQuery and defines a `spawn_selected` helper that posts the chosen model and price to the `rentBike` callback【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/html/index.html†L1-L30】
-- Presents buttons for seven bike models with hard-coded prices; clicking sends the selection to the client script【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/html/index.html†L13-L19】
+- Loads jQuery libraries and defines `spawn_selected`, which posts the chosen bike model and cost to the `rentBike` callback【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/html/index.html†L1-L30】
+- Presents seven bike options with fixed prices; clicking a button triggers the post and closes after client confirmation【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/html/index.html†L11-L19】
 
 ### html/script.js
-- Listens for `enableui` messages to toggle page visibility【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/html/script.js†L1-L6】
-- Posts to the `escape` callback when the Escape key is released【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/html/script.js†L8-L11】
+- Listens for `enableui` messages to show or hide the page and submits an `escape` post when the Escape key is released【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/html/script.js†L1-L11】
 
 ### html/style.css
-- Hides the body by default and positions the dialog and optional cursor image at fixed screen coordinates【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/html/style.css†L3-L21】
-- Styles buttons with a white theme and blue hover state【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/html/style.css†L23-L38】
+- Hides the body by default, positions the dialog, and styles buttons with a white theme and blue hover state【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/html/style.css†L3-L38】
 
 ### html/cursor.png
-- Static image used as a custom cursor when the menu is open.
+- Image asset used for a custom cursor when the menu is active.
 
-## Cross-Index
+## Cross-Indexes
 ### Events
 | Name | Direction | Payload | Notes |
-|------|-----------|---------|------|
-| `fsn_notify:displayNotification` | Client → Client | `(message, position, duration, style)` | External notification system *(Inferred: High)*【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L55-L56】【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L120-L120】【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L129-L129】|
+|------|-----------|---------|-------|
+| `fsn_notify:displayNotification` | Client → Client | `(message, position, duration, style)` | Shows feedback to players *(Inferred: High)*【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L55-L55】【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L120-L120】【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L129-L129】|
 | `fsn_bank:change:walletMinus` | Client → Client | `(amount)` | Deducts funds from wallet *(Inferred: High)*【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L118-L119】|
 
 ### NUI Messages
 | Name | Source → Target | Payload | Purpose |
 |------|----------------|---------|---------|
-| `enableui` | Client → NUI | `{ enable: boolean }` | Show or hide menu【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L100-L108】|
-| `click` | Client → NUI | none | Simulate mouse click while controls disabled【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L133-L146】|
+| `enableui` | Client → NUI | `{ enable: boolean }` | Display or hide menu【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L100-L108】|
+| `click` | Client → NUI | none | Simulate mouse click with controls disabled【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L133-L146】|
 
 ### Exports
 | Name | Direction | Returns | Notes |
@@ -92,27 +72,25 @@ None.
 | Name | Payload | Purpose |
 |------|---------|---------|
 | `escape` | none | Close menu and re-enable prompts【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L110-L115】|
-| `rentBike` | `{ model: string, price: number }` | Validate funds, deduct cost, spawn bike【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L117-L131】|
-
-### ESX Callbacks
-None.
+| `rentBike` | `{ model: string, price: number }` | Verify funds, deduct money, and spawn bike【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L117-L131】|
 
 ### Database
-No direct database queries; inclusion of `mysql-async` hints at planned server features *(Inferred: Low)*【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/fxmanifest.lua†L12-L16】
+No direct queries; inclusion of `@mysql-async` in the manifest suggests planned server features *(Inferred: Low)*【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/fxmanifest.lua†L12-L16】
 
-## Security & Performance Notes
-- All validation and vehicle spawning occur on the client, allowing potential currency spoofing or free bike spawning *(Inferred: Medium)*【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L117-L131】
-- Proximity and control loops run every frame (`Citizen.Wait(0)`), though limited booth count keeps processing light【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L25-L26】【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L133-L150】
-- Decoration `bikeRental:rented` marks rentals but lacks server-side enforcement *(Inferred: Medium)*【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L6】【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L84-L91】
-
-## Configuration & Integration
-- Rental locations are hard-coded in `bikeRentalCoords` and can be expanded for additional kiosks【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L8-L11】
-- Depends on `fsn_main` for utilities and wallet access, `fsn_bank` for money changes, and `fsn_notify` for UI feedback.
+## Configuration & Integration Points
+- Kiosk coordinates and labels are hard-coded in `bikeRentalCoords`; adding entries introduces new rental locations【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L8-L11】
+- Depends on external `fsn_main`, `fsn_bank`, and `fsn_notify` resources for utilities, wallet access, and notifications.
 - NUI assets must remain under `html/` with paths registered in the manifest.
 
+## Security & Performance Notes
+- All validation occurs client-side, enabling potential currency spoofing or unauthorized bike spawns *(Inferred: Medium)*【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L117-L131】
+- Proximity and control loops run each frame; limited kiosk count keeps overhead low【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L25-L26】【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L133-L150】
+- Decoration `bikeRental:rented` identifies rentals but lacks server enforcement *(Inferred: Medium)*【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L6】【F:Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/client.lua†L84-L91】
+
 ## Gaps & Inferences
-- `fsn_notify:displayNotification` and `fsn_bank:change:walletMinus` behavior inferred from naming and usage *(Inferred: High)*
-- MySQL library inclusion suggests future server expansion but currently unused *(Inferred: Low)*
-- Lack of server-side verification could permit exploiting the rental system *(Inferred: Medium)*
+- `fsn_notify:displayNotification` and `fsn_bank:change:walletMinus` behaviors inferred from usage; underlying implementations not present *(Inferred: High)*.
+- `@mysql-async` inclusion suggests future server-side expansion, currently unused *(Inferred: Low)*.
+- `rentalMenuOpen` appears vestigial *(Inferred: Low)*.
+- No server-side checks to prevent exploiting the rental system *(Inferred: Medium)*.
 
 DOCS COMPLETE
