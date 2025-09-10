@@ -1,7 +1,7 @@
 if not IsDuplicityVersion() then
-    Citizen.CreateThread(function()
+    CreateThread(function()
         while true do
-            Citizen.Wait(0)
+            Wait(0)
             if NetworkIsSessionStarted() then
                 TriggerServerEvent("Queue:playerActivated")
                 return
@@ -28,7 +28,7 @@ _Queue.Priority = {}
 _Queue.Connecting = {}
 _Queue.JoinCbs = {}
 _Queue.TempPriority = {}
-_Queue.JoinDelay = GetGameTimer() + Config.JoinDelay and Config.JoinDelay or 0
+_Queue.JoinDelay = GetGameTimer() + (Config.JoinDelay or 0)
 
 local tostring = tostring
 local tonumber = tonumber
@@ -59,13 +59,19 @@ function Queue:DebugPrint(msg)
     end
 end
 
+--[[
+    -- Type: Function
+    -- Name: HexIdToSteamId
+    -- Use: Converts a hexadecimal identifier to a Steam ID
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 function Queue:HexIdToSteamId(hexId)
     local cid = math_floor(tonumber(string_sub(hexId, 7), 16))
-	local steam64 = math_floor(tonumber(string_sub( cid, 2)))
-	local a = steam64 % 2 == 0 and 0 or 1
-	local b = math_floor(math_abs(6561197960265728 - steam64 - a) / 2)
-	local sid = "steam_0:"..a..":"..(a == 1 and b -1 or b)
-    return sid
+    local steam64 = math_floor(tonumber(string_sub(tostring(cid), 2)))
+    local a = steam64 % 2
+    local b = math_floor(math_abs(6561197960265728 - steam64 - a) / 2)
+    return string_format("steam_0:%d:%d", a, a == 1 and b - 1 or b)
 end
 
 function Queue:IsSteamRunning(src)
@@ -422,7 +428,7 @@ function Queue:CanJoin(src, cb)
             await = false
         end)
 
-        while await do Citizen.Wait(0) end
+        while await do Wait(0) end
 
         if not allow then return end
     end
@@ -450,15 +456,15 @@ local function playerConnect(name, setKickReason, deferrals)
 
     deferrals.defer()
 
-    Citizen.CreateThread(function()
+    CreateThread(function()
         while connecting do
-            Citizen.Wait(100)
+            Wait(100)
             if not connecting then return end
             deferrals.update(Config.Language.connecting)
         end
     end)
 
-    Citizen.Wait(500)
+    Wait(500)
 
     local function done(msg, _deferrals)
         connecting = false
@@ -467,7 +473,7 @@ local function playerConnect(name, setKickReason, deferrals)
 
         if msg then deferrals.update(tostring(msg) or "") end
 
-        Citizen.Wait(500)
+        Wait(500)
 
         if not msg then
             deferrals.done()
@@ -520,7 +526,7 @@ local function playerConnect(name, setKickReason, deferrals)
         allow = true
     end) 
 
-    while allow == nil do Citizen.Wait(0) end
+    while allow == nil do Wait(0) end
     if not allow then return end
 
     if Config.PriorityOnly and not Queue:IsPriority(ids) then done(Config.Language.wlonly) return end
@@ -588,7 +594,7 @@ local function playerConnect(name, setKickReason, deferrals)
     if rejoined then return end
 
     while true do
-        Citizen.Wait(500)
+        Wait(500)
 
         local pos, data = Queue:IsInQueue(ids, true)
 
@@ -626,7 +632,7 @@ local function playerConnect(name, setKickReason, deferrals)
             local added = Queue:AddToConnecting(ids)
 
             update(Config.Language.joining, data.deferrals)
-            Citizen.Wait(500)
+            Wait(500)
 
             if not added then
                 done(Config.Language.connectingerr)
@@ -652,7 +658,7 @@ local function playerConnect(name, setKickReason, deferrals)
 end
 AddEventHandler("playerConnecting", playerConnect)
 
-Citizen.CreateThread(function()
+CreateThread(function()
     local function remove(data, pos, msg)
         if data and data.source then
             Queue:RemoveFromQueue(data.source, true)
@@ -663,7 +669,7 @@ Citizen.CreateThread(function()
     end
 
     while true do
-        Citizen.Wait(1000)
+        Wait(1000)
     
         local i = 1
     
@@ -705,7 +711,7 @@ Citizen.CreateThread(function()
     end
 end)
 
-RegisterServerEvent("Queue:playerActivated")
+RegisterNetEvent("Queue:playerActivated")
 AddEventHandler("Queue:playerActivated", function()
     local src = source
     local ids = Queue:GetIds(src)
