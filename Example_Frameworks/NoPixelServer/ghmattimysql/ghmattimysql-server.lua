@@ -1,50 +1,41 @@
 local function safeParameters(parameters)
-  if parameters == nil then
-    return {[''] = ''}
-  end
-  return parameters
+  return parameters or {}
 end
 
-exports('executeSync', function (query, parameters)
-  local res = {}
-  local finishedQuery = false
-  exports.ghmattimysql:execute(query, safeParameters(parameters), function (result)
-    res = result
-    finishedQuery = true
-  end, GetInvokingResource())
-  repeat Citizen.Wait(0) until finishedQuery == true
-  return res
+local function awaitSql(cb)
+  local p = promise.new()
+  cb(p)
+  return Citizen.Await(p)
+end
+
+exports('executeSync', function(query, parameters)
+  return awaitSql(function(p)
+    exports.ghmattimysql:execute(query, safeParameters(parameters), function(result)
+      p:resolve(result)
+    end, GetInvokingResource())
+  end)
 end)
 
-exports('scalarSync', function (query, parameters)
-  local res = {}
-  local finishedQuery = false
-  exports.ghmattimysql:scalar(query, safeParameters(parameters), function (result)
-    res = result
-    finishedQuery = true
-  end, GetInvokingResource())
-  repeat Citizen.Wait(0) until finishedQuery == true
-  return res
+exports('scalarSync', function(query, parameters)
+  return awaitSql(function(p)
+    exports.ghmattimysql:scalar(query, safeParameters(parameters), function(result)
+      p:resolve(result)
+    end, GetInvokingResource())
+  end)
 end)
 
-exports('transactionSync', function (query, parameters)
-  local res = {}
-  local finishedTransaction = false
-  exports.ghmattimysql:transaction(query, safeParameters(parameters), function (result)
-    res = result
-    finishedTransaction = true
-  end, GetInvokingResource())
-  repeat Citizen.Wait(0) until finishedTransaction == true
-  return res
+exports('transactionSync', function(queries, parameters)
+  return awaitSql(function(p)
+    exports.ghmattimysql:transaction(queries, safeParameters(parameters), function(result)
+      p:resolve(result)
+    end, GetInvokingResource())
+  end)
 end)
 
-exports('storeSync', function (query)
-  local res = {}
-  local finishedStore = false
-  exports.ghmattimysql:store(query, function (result)
-    res = result
-    finishedStore = true
-  end, GetInvokingResource())
-  repeat Citizen.Wait(0) until finishedStore == true
-  return res
+exports('storeSync', function(query)
+  return awaitSql(function(p)
+    exports.ghmattimysql:store(query, function(result)
+      p:resolve(result)
+    end, GetInvokingResource())
+  end)
 end)
