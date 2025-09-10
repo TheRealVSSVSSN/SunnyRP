@@ -1,4 +1,11 @@
-local isRDR = not TerraingridActivate and true or false
+--[[
+    -- Type: Variable
+    -- Name: isRDR
+    -- Use: Detects if the current game is RedM based on native availability
+    -- Created: 2024-05-14
+    -- By: VSSVSSN
+--]]
+local isRDR = TerraingridActivate ~= nil
 
 local chatInputActive = false
 local chatInputActivating = false
@@ -49,7 +56,13 @@ AddEventHandler('__cfx_internal:serverPrint', function(msg)
   })
 end)
 
--- addMessage
+--[[
+    -- Type: Function
+    -- Name: addMessage
+    -- Use: Sends a message object or string to the NUI chat interface
+    -- Created: 2024-05-14
+    -- By: VSSVSSN
+--]]
 local addMessage = function(message)
   if type(message) == 'string' then
     message = {
@@ -66,7 +79,13 @@ end
 exports('addMessage', addMessage)
 AddEventHandler('chat:addMessage', addMessage)
 
--- addSuggestion
+--[[
+    -- Type: Function
+    -- Name: addSuggestion
+    -- Use: Adds a command suggestion to the chat interface
+    -- Created: 2024-05-14
+    -- By: VSSVSSN
+--]]
 local addSuggestion = function(name, help, params)
   SendNUIMessage({
     type = 'ON_SUGGESTION_ADD',
@@ -147,6 +166,13 @@ RegisterNUICallback('chatResult', function(data, cb)
   cb('ok')
 end)
 
+--[[
+    -- Type: Function
+    -- Name: refreshCommands
+    -- Use: Populates client-side command suggestions
+    -- Created: 2024-05-14
+    -- By: VSSVSSN
+--]]
 local function refreshCommands()
   if GetRegisteredCommands then
     local registeredCommands = GetRegisteredCommands()
@@ -166,6 +192,13 @@ local function refreshCommands()
   end
 end
 
+--[[
+    -- Type: Function
+    -- Name: refreshThemes
+    -- Use: Updates available chat themes from active resources
+    -- Created: 2024-05-14
+    -- By: VSSVSSN
+--]]
 local function refreshThemes()
   local themes = {}
 
@@ -248,7 +281,14 @@ if not isRDR then
   end, false)
 end
 
-Citizen.CreateThread(function()
+--[[
+    -- Type: Thread
+    -- Name: chatInputHandler
+    -- Use: Manages chat input focus and visibility state
+    -- Created: 2024-05-14
+    -- By: VSSVSSN
+--]]
+CreateThread(function()
   SetTextChatEnabled(false)
   SetNuiFocus(false)
 
