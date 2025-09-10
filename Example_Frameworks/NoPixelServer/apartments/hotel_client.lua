@@ -238,7 +238,7 @@ RegisterNetEvent('hotel:AddCashToHotel')
 AddEventHandler('hotel:AddCashToHotel', function(amount)
 	if inRoom() then
 		TriggerServerEvent('hotel:AddCashToHotel', amount)
-		Citizen.Wait(555)
+		Wait(555)
 		TriggerServerEvent("hotel:getInfo")
 	end
 end)
@@ -258,7 +258,7 @@ RegisterNetEvent('hotel:RemoveCashFromHotel')
 AddEventHandler('hotel:RemoveCashFromHotel', function(amount)
 	if inRoom() then
 		TriggerServerEvent('hotel:RemoveCashFromHotel', amount)
-		Citizen.Wait(555)
+		Wait(555)
 		TriggerServerEvent("hotel:getInfo")
 	end		
 end)
@@ -267,7 +267,7 @@ RegisterNetEvent('hotel:CheckCashFromHotel')
 AddEventHandler('hotel:CheckCashFromHotel', function()
 	if inRoom() then
 		TriggerServerEvent('hotel:CheckCashFromHotel')
-		Citizen.Wait(555)
+		Wait(555)
 		TriggerServerEvent("hotel:getInfo")
 	end		
 end)
@@ -276,7 +276,7 @@ RegisterNetEvent('hotel:AddDMToHotel')
 AddEventHandler('hotel:AddDMToHotel', function(amount)
 	if inRoom() then
 		TriggerServerEvent('hotel:AddDMToHotel', amount)
-		Citizen.Wait(555)
+		Wait(555)
 		TriggerServerEvent("hotel:getInfo")
 	end		
 end)
@@ -285,7 +285,7 @@ RegisterNetEvent('hotel:RemoveDMFromHotel')
 AddEventHandler('hotel:RemoveDMFromHotel', function(amount)
 	if inRoom() then
 		TriggerServerEvent('hotel:RemoveDMFromHotel', amount)
-		Citizen.Wait(555)
+		Wait(555)
 		TriggerServerEvent("hotel:getInfo")
 	end		
 end)
@@ -397,7 +397,7 @@ RegisterNetEvent('hotel:createRoom')
 AddEventHandler('hotel:createRoom', function(source, isImprisoned, isClothesSpawn)
 
 	TriggerServerEvent('hotel:load')
-	Citizen.Wait(250)
+	Wait(250)
 
 	local isinprison
 	isinprison = isImprisoned
@@ -487,7 +487,7 @@ end)
 function prisionSpawn()
 	spawning = true
 	DoScreenFadeOut(100)
-	Citizen.Wait(100)
+	Wait(100)
 
 
 	local x = 1708.443
@@ -509,13 +509,13 @@ function prisionSpawn()
 	SetEntityInvincible(PlayerPedId(),false)
 	FreezeEntityPosition(PlayerPedId(),false)
 
-	Citizen.Wait(2000)
+	Wait(2000)
 
 	TriggerEvent("attachWeapons")
 	TriggerEvent("spawning",false)
 
 	TriggerEvent("tokovoip:onPlayerLoggedIn", true)
-	Citizen.Wait(2000)
+	Wait(2000)
 	TriggerServerEvent("request-dropped-items")
 	TriggerServerEvent("HOWMUCHCASHUHGOT")
 	TriggerServerEvent("server-request-update",exports["isPed"]:isPed("cid"))
@@ -523,7 +523,7 @@ function prisionSpawn()
 	DestroyCam(cam, false)
 	 TriggerServerEvent("stocks:retrieveclientstocks")
 	 DoScreenFadeIn(1000)
-	 Citizen.Wait(1000)
+	 Wait(1000)
 end
 
 RegisterNUICallback('selectedspawn', function(data, cb)
@@ -538,7 +538,7 @@ end)
 RegisterNUICallback('confirmspawn', function(data, cb)
 	spawning = true
 	DoScreenFadeOut(100)
-	Citizen.Wait(100)
+	Wait(100)
 	SendNUIMessage({
 		openSection = "close",
 	})	
@@ -555,7 +555,7 @@ RegisterNUICallback('confirmspawn', function(data, cb)
     DestroyCam(startcam, false)
     DestroyCam(cam, false)
     DestroyCam(cam2, false)
-    Citizen.Wait(0)
+    Wait(0)
     FreezeEntityPosition(GetPlayerPed(-1), false)
 	confirmSpawning(false)
 end)
@@ -588,14 +588,14 @@ function confirmSpawning(isClothesSpawn)
 	SetEntityInvincible(PlayerPedId(),false)
 	FreezeEntityPosition(PlayerPedId(),false)
 
-	Citizen.Wait(2000)
+	Wait(2000)
 	DoScreenFadeIn(4000)
 	TriggerEvent("attachWeapons")
 	TriggerEvent("spawning",false)
 
 
 	TriggerEvent("tokovoip:onPlayerLoggedIn", true)
-	Citizen.Wait(2000)
+	Wait(2000)
 	TriggerServerEvent("request-dropped-items")
 	 TriggerServerEvent("HOWMUCHCASHUHGOT")
 	 TriggerServerEvent("server-request-update",exports["isPed"]:isPed("cid"))
@@ -630,7 +630,7 @@ function doCamera()
 	if spawning then
 		return
 	end
-	Citizen.Wait(1)
+	Wait(1)
 	killcam = false
 	local camselection = currentselection
 	DoScreenFadeOut(1)
@@ -661,7 +661,7 @@ function doCamera()
 			camAngle = i - i - i
 		end
 		SetCamRot(cam, camAngle, 0.0, 0.0)
-		Citizen.Wait(1)
+		Wait(1)
 	end
 
 end
@@ -759,7 +759,7 @@ function processBuildType(numMultiplier,roomType)
 	SetEntityInvincible(PlayerPedId(), false)
 	FreezeEntityPosition(PlayerPedId(),false)
 	TriggerEvent("enabledamage",true)
-	Citizen.Wait(1000)
+	Wait(1000)
 	DoScreenFadeIn(1000)
 end
 function CleanUpPeds()
@@ -815,7 +815,7 @@ function buildRoom(numMultiplier,roomType)
 
 	SetEntityCoords(PlayerPedId(), 152.09986877441 , -1004.7946166992, -98.999984741211)
 
-	Citizen.Wait(5000)
+	Wait(5000)
 
 	local generator = { x = 175.09986877441 , y = -904.7946166992, z = -98.999984741211}
 	generator.x = (175.09986877441) + ((numMultiplier * 12.0))
@@ -830,7 +830,7 @@ function buildRoom(numMultiplier,roomType)
 	local building = CreateObject(`furnitured_motel`,generator.x,generator.y,generator.z,false,false,false)
 
 	FreezeEntityPosition(building,true)
-	Citizen.Wait(100)
+	Wait(100)
 	FloatTilSafe(numMultiplier,roomType,building)
 	
 	CreateObject(`v_49_motelmp_stuff`,generator.x,generator.y,generator.z,false,false,false)
@@ -903,7 +903,7 @@ local Keys = {
 }
 
 
--- Citizen.CreateThread(function()
+-- CreateThread(function()
 	
 --  	while true do
 --  		if IsControlJustPressed(1, Controlkey["housingSecondary"][1]) then
@@ -912,7 +912,7 @@ local Keys = {
 -- 			FreezeEntityPosition(detector,true)
 -- 		end
 --  		FreezeEntityPosition(PlayerPedId(),false)
--- 		Citizen.Wait(0)
+-- 		Wait(0)
 -- 		DrawMarker(27,-221.544921875,-1012.197265625,29.298439025879, 0, 0, 0, 0, 0, 0, 5.001, 5.0001, 0.5001, 0, 155, 255, 200, 0, 0, 0, 0)	
 -- 		if #(vector3(-221.544921875,-1012.197265625,29.298439025879) - GetEntityCoords(PlayerPedId())) < 5 then
 -- 				DisplayHelpText('Press ~b~H~s~ to teleport to base model , press ~b~'..Controlkey["housingSecondary"][2]..'~s~ to spawn into new model')
@@ -931,7 +931,7 @@ end
 function buildRoom2(numMultiplier,roomType)
 	SetEntityCoords(PlayerPedId(),347.04724121094,-1000.2844848633,-99.194671630859)
 	FreezeEntityPosition(PlayerPedId(),true)
-	Citizen.Wait(5000)
+	Wait(5000)
 	local generator = { x = 175.09986877441 , y = -904.7946166992, z = -98.999984741211}
 	generator.x = (175.09986877441) + ((numMultiplier * 25.0))
 	generator.y = (-774.7946166992) -- ((numMultiplier * 25.0))
@@ -946,7 +946,7 @@ function buildRoom2(numMultiplier,roomType)
 	SetEntityCoords(PlayerPedId(), 	generator.x + 3.9, generator.y - 11.2, generator.z, generator.h)
 	local building = CreateObject(`furnitured_midapart`,generator.x+2.29760700,generator.y-1.33191200,generator.z+1.26253700,false,false,false)
 	FreezeEntityPosition(building,true)
-	Citizen.Wait(100)
+	Wait(100)
 	FloatTilSafe(numMultiplier,roomType,building)
 	if not isForced then
 		TriggerServerEvent('hotel:getID')
@@ -962,7 +962,7 @@ function FloatTilSafe(numMultiplier,roomType,buildingsent)
 	local counter = 100
 	local building = buildingsent
 	while processing == 3 do
-		Citizen.Wait(100)
+		Wait(100)
 		if DoesEntityExist(building) then
 
 			processing = 2
@@ -1176,13 +1176,13 @@ end)
 function logout()
     TransitionToBlurred(500)
     DoScreenFadeOut(500)
-    Citizen.Wait(1000)
+    Wait(1000)
     CleanUpArea()
-    Citizen.Wait(1000)   
+    Wait(1000)   
 		TriggerEvent("np-base:clearStates")
     exports["np-base"]:getModule("SpawnManager"):Initialize()
 
-	Citizen.Wait(1000)
+	Wait(1000)
 end
 
 local canInteract = true
@@ -1228,10 +1228,10 @@ end)
 
 
 
-Citizen.CreateThread(function()
+CreateThread(function()
 
  	while true do
-		Citizen.Wait(0)
+		Wait(0)
 	
 		comparedst = 1000
 
@@ -1264,7 +1264,7 @@ Citizen.CreateThread(function()
 					DrawText3Ds(235.91, -416.43, -118.16, "Public Records")
 					if IsControlJustReleased(1,Controlkey["generalUse"][1]) then
 						TriggerEvent("phone:publicrecords")
-						Citizen.Wait(2500)
+						Wait(2500)
 					end	
 				end
 
@@ -1272,7 +1272,7 @@ Citizen.CreateThread(function()
 					DrawText3Ds(236.51, -414.43, -118.16, "Property Records")
 					if IsControlJustReleased(1, Controlkey["generalUse"][1]) then
 						TriggerServerEvent("houses:PropertyListing")
-						Citizen.Wait(2500)
+						Wait(2500)
 					end	
 				end
 
@@ -1283,7 +1283,7 @@ Citizen.CreateThread(function()
 				DrawText3Ds(260.72366333008,-375.27133178711,-44.137680053711, "~g~"..Controlkey["generalUse"][2].."~s~ Upgrade Housing (25k for tier 2.")
 				if IsControlJustReleased(1,Controlkey["generalUse"][1]) then
 					TriggerEvent("hotel:AttemptUpgrade")
-					Citizen.Wait(2500)
+					Wait(2500)
 				end		
 			end
 
@@ -1337,7 +1337,7 @@ Citizen.CreateThread(function()
 						if myRoomLock == false then
 						TriggerServerEvent("hotel:updateLockStatus",true)
 				
-						Citizen.Wait(500)
+						Wait(500)
 						else
 							TriggerServerEvent("hotel:updateLockStatus",false)
 						end
@@ -1347,12 +1347,12 @@ Citizen.CreateThread(function()
 						if myRoomLock == false then
 							TriggerServerEvent("hotel:updateLockStatus",true)
 					
-							Citizen.Wait(500)
+							Wait(500)
 							else
 						
 								TriggerServerEvent("hotel:updateLockStatus",false)
 							end
-						Citizen.Wait(500)
+						Wait(500)
 					end
 				end
 
@@ -1360,22 +1360,22 @@ Citizen.CreateThread(function()
 				if IsControlJustReleased(1,Controlkey["housingMain"][1]) then
 					TriggerEvent("DoLongHudText","Please wait!",1)
 
-					Citizen.Wait(300)
+					Wait(300)
 					TriggerEvent("dooranim")
 					TriggerEvent('InteractSound_CL:PlayOnOne','DoorOpen', 0.7)
 
 					if #(vector3(apartments1[myRoomNumber]["x"],apartments1[myRoomNumber]["y"],apartments1[myRoomNumber]["z"]) - plyCoords) < 5 and myRoomType == 1 then	
 						processBuildType(myRoomNumber,myRoomType)
 						TriggerServerEvent("hotel:getInfo")
-						Citizen.Wait(500)
+						Wait(500)
 					elseif (#(vector3(160.26762390137,-641.96905517578,47.073524475098) - plyCoords) < 5 and myRoomType == 3) or entry4rd < 5 then
 						processBuildType(myRoomNumber,myRoomType)
 						TriggerServerEvent("hotel:getInfo")
-						Citizen.Wait(500)					
+						Wait(500)					
 					elseif #(vector3(267.48132324219,-638.818359375,42.020294189453) - plyCoords) < 5 and myRoomType == 2 then
 						processBuildType(myRoomNumber,myRoomType)
 						TriggerServerEvent("hotel:getInfo")
-						Citizen.Wait(500)
+						Wait(500)
 					else
 						TriggerEvent("DoLongHudText","Moved too far away!",2)
 					end			
@@ -1423,7 +1423,7 @@ Citizen.CreateThread(function()
 					end
 					TriggerEvent("enabledamage",true)
 					insideApartment = false
-					Citizen.Wait(100)
+					Wait(100)
 					TriggerEvent("dooranim")
 					TriggerEvent('InteractSound_CL:PlayOnOne','DoorClose', 0.7)
 					curRoom = { x = 1420.0, y = 1420.0, z = -900.0 }
@@ -1439,7 +1439,7 @@ Citizen.CreateThread(function()
 					CleanUpArea()
 					DoScreenFadeOut(1)
 					buildGarage()
-					Citizen.Wait(4500)
+					Wait(4500)
 					DoScreenFadeIn(1)
 				end
  
@@ -1472,7 +1472,7 @@ Citizen.CreateThread(function()
 					else
 						TriggerEvent("DoLongHudText","This is not your stash!",2)
 					end
-					Citizen.Wait(1900)
+					Wait(1900)
 				end
 			end
 
@@ -1509,7 +1509,7 @@ Citizen.CreateThread(function()
 				else
 					TriggerEvent("DoLongHudText","This is not your stash!",2)
 				end
-				Citizen.Wait(1900)
+				Wait(1900)
 			end
 
 		end
@@ -1537,7 +1537,7 @@ Citizen.CreateThread(function()
 					CleanUpArea()
 					DoScreenFadeOut(1)
 					buildGarage()
-					Citizen.Wait(4500)
+					Wait(4500)
 					DoScreenFadeIn(1)
 				end
 
@@ -1555,7 +1555,7 @@ Citizen.CreateThread(function()
 						SetEntityCoords(PlayerPedId(),313.2561340332,-227.30776977539,54.221176147461)
 					end
 
-					Citizen.Wait(2000)
+					Wait(2000)
 					curRoom = { x = 1420.0, y = 1420.0, z = -900.0 }
 					TriggerEvent("attachWeapons")
 				end
@@ -1612,7 +1612,7 @@ Citizen.CreateThread(function()
 				DrawLightWithRange(lights["x"],lights["y"],lights["z"]+3, 255, 197, 143, 100.0, 0.45)
 				DrawLightWithRange(lights["x"],lights["y"],lights["z"]-3, 255, 197, 143, 100.0, 0.45)
 			else
-				Citizen.Wait(math.ceil(comparedst * 10))
+				Wait(math.ceil(comparedst * 10))
 			end
 			
 		end
