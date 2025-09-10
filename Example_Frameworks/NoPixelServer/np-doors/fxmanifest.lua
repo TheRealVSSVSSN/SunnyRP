@@ -1,16 +1,19 @@
-fx_version 'bodacious'
-games { 'rdr3', 'gta5' }
+fx_version 'cerulean'
+game 'gta5'
+
+lua54 'yes'
 
 author 'whitewingz'
 description 'One City Doors'
 version '1.0.0'
 
--- dependency "np-base"
-dependency "ghmattimysql"
+dependency 'ghmattimysql'
 
-shared_script "shared/sh_doors.lua"
-client_script "@np-errorlog/client/cl_errorlog.lua"
-server_script "server/sv_doors.lua"
-client_script "client/cl_doors.lua"
+shared_script 'shared/sh_doors.lua'
+client_scripts {
+    '@np-errorlog/client/cl_errorlog.lua',
+    'client/cl_doors.lua'
+}
+server_script 'server/sv_doors.lua'
 
 server_export 'isDoorLocked'
