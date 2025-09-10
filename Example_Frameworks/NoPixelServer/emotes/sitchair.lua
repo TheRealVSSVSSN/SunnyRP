@@ -194,7 +194,7 @@ AddEventHandler('animation:Chair2', function()
 		TaskStartScenarioAtPosition(ped, 'PROP_HUMAN_SEAT_BENCH', pos.x, pos.y, pos.z-0.5, GetEntityHeading(chair), 0, true, true)
 		sitting = true
 		TriggerEvent("Fuckmylife2",chair,GetEntityHeading(chair))
-		Citizen.Wait(4000)
+		Wait(4000)
 		recentlysat = false
 end)
 
@@ -205,7 +205,7 @@ AddEventHandler("Fuckmylife2", function(object,bearing)
 	while sitting do
 		AttachEntityToEntity(ped, object, 20, 0.0, 0.0, -0.5, 0.0, 0.0, 0.0, false, false, false, false, 1, true)
 		SetEntityHeading(ped, bearing)
-		Citizen.Wait(0)
+		Wait(0)
 		if IsControlJustReleased(1,96) then
 			local pos = GetOffsetFromEntityInWorldCoords(object, 0.0, 0.0, 0.05)
 			if pos.z < (posend.z+1) then
@@ -335,7 +335,7 @@ AddEventHandler("startCoaster",function(object)
 	RequestScript(coasterscript)
 
 	while not HasScriptLoaded(coasterscript) do
-		Citizen.Wait(0)
+		Wait(0)
 	end
 	StartNewScript(coasterscript)
 	SetScriptAsNoLongerNeeded(coasterscript)
@@ -365,10 +365,10 @@ function sit(object)
 	while sitting do
 		AttachEntityToEntity(ped, object, 20, 0.0, 0.0, 1.0+objinfo.verticalOffset, 0.0, 0.0, 180.0, false, false, false, false, 1, true)
 
-		Citizen.Wait(0)
+		Wait(0)
 	end
 	ClearPedTasks(ped)
-	Citizen.Wait(1400)
+	Wait(1400)
 	SetEntityCoords(ped,lastPos)
 end
 --AttachEntityToEntity(entity1, entity2, boneIndex, x, y, z, xRot, yRot, zRot, p9, useSoftPinning, collision, isPed, vertexIndex, fixedRot)

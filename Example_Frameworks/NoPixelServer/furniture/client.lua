@@ -65,7 +65,7 @@ AddEventHandler('furniture:Start', function()
 	createObject()
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	currentObject = props[1][1]
 
 	while true do
@@ -77,14 +77,14 @@ Citizen.CreateThread(function()
 			renderText()	
 			DrawScaleformMovieFullscreen(form, 255, 255, 255, 255, 0)
 			if(IsControlJustPressed(1,82)) then
-				if buildMode == "Movement" or buildMode == "Roate" then
+				if buildMode == "Movement" or buildMode == "Rotate" then
 					nextObject()
 				else
 					selectObjectNext()
 				end
 			end
 			if(IsControlJustPressed(1,244)) then
-				if buildMode == "Movement" or buildMode == "Roate" then
+				if buildMode == "Movement" or buildMode == "Rotate" then
 					backObject()
 				else
 					selectObjectBack()
@@ -92,7 +92,7 @@ Citizen.CreateThread(function()
 			end
 
 			if(IsControlJustPressed(1,74)) then
-				stopFuniture()
+				stopFurniture()
 			end
 
 			if(IsControlJustPressed(1,29)) then
@@ -116,8 +116,8 @@ Citizen.CreateThread(function()
 				SetEntityCollision(loadedObjects[selectedObject],true,true)
 				SetEntityAlpha(loadedObjects[selectedObject], 255, false)
 				if buildMode == "Movement" then
-					buildMode = "Roate"
-				elseif buildMode == "Roate" then
+					buildMode = "Rotate"
+				elseif buildMode == "Rotate" then
 
 					DeleteEntity(object)
 					buildMode = "Edit"
@@ -148,7 +148,7 @@ Citizen.CreateThread(function()
 			end
 
 			if(IsControlJustPressed(1,18)) then -- Enter , for confirming Object
-				if buildMode == "Movement" or buildMode == "Roate" then
+				if buildMode == "Movement" or buildMode == "Rotate" then
 					if canPlace() then
 						placeObject()
 					end
@@ -160,7 +160,7 @@ Citizen.CreateThread(function()
 			if(IsControlPressed(1,108)) and not IsControlPressed(1,36) and not IsControlPressed(1,21) then -- left
 				if buildMode == "Movement" then
 					MoveObject("l")
-				elseif buildMode == "Roate" then
+				elseif buildMode == "Rotate" then
 					RotateObject("yl")
 				end
 			end
@@ -169,7 +169,7 @@ Citizen.CreateThread(function()
 			if(IsControlPressed(1,107)) and not IsControlPressed(1,36)  and not IsControlPressed(1,21) then -- right
 				if buildMode == "Movement" then
 					MoveObject("r")
-				elseif buildMode == "Roate" then
+				elseif buildMode == "Rotate" then
 					RotateObject("yr")
 				end
 			end
@@ -177,7 +177,7 @@ Citizen.CreateThread(function()
 			if(IsControlPressed(1,61)) and not IsControlPressed(1,36) and not IsControlPressed(1,21) then -- front
 				if buildMode == "Movement" then
 					MoveObject("f")
-				elseif buildMode == "Roate" then
+				elseif buildMode == "Rotate" then
 					RotateObject("pl")
 				end
 			end
@@ -186,7 +186,7 @@ Citizen.CreateThread(function()
 			if(IsControlPressed(1,60)) and not IsControlPressed(1,36) and not IsControlPressed(1,21) then -- Back
 				if buildMode == "Movement" then
 					MoveObject("b")
-				elseif buildMode == "Roate" then
+				elseif buildMode == "Rotate" then
 					RotateObject("pr")
 				end
 			end
@@ -194,7 +194,7 @@ Citizen.CreateThread(function()
 			if(IsControlPressed(1,117)) and not IsControlPressed(1,36)  and not IsControlPressed(1,21) then -- simple heading left
 				if buildMode == "Movement" then
 					MoveObject("u")
-				elseif buildMode == "Roate" then
+				elseif buildMode == "Rotate" then
 					RotateObject("rl")
 				end
 				
@@ -204,7 +204,7 @@ Citizen.CreateThread(function()
 			if(IsControlPressed(1,118)) and not IsControlPressed(1,36)  and not IsControlPressed(1,21) then -- simple Heading Right
 				if buildMode == "Movement" then
 					MoveObject("d")
-				elseif buildMode == "Roate" then
+				elseif buildMode == "Rotate" then
 					RotateObject("rr")
 				end
 			end
@@ -256,9 +256,9 @@ Citizen.CreateThread(function()
 				SetEntityCoords(object,something)
 			end
 
-			Citizen.Wait(1)
+			Wait(1)
 		else
-			Citizen.Wait(900)
+			Wait(900)
 		end
 	end
 end)
@@ -266,7 +266,7 @@ end)
 
 
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		if IsControlPressed(0, 177) and buildMode == "Movement" then
 			if isInCamera then
@@ -319,12 +319,12 @@ Citizen.CreateThread(function()
 					startPitch = camPitch
 				end
 
-				Citizen.Wait(1)
+				Wait(1)
 			else
-				Citizen.Wait(900)
+				Wait(900)
 			end
 		else
-			Citizen.Wait(900)
+			Wait(900)
 		end
 	end
 end)
@@ -352,7 +352,7 @@ end
 function placeObject()
 	local insert = {["name"] = currentObject , ["pos"] = GetOffsetFromEntityInWorldCoords(object,0.0,0.0,0.0), ["rot"] = GetEntityRotation(object,2)}
 	CurrentPlacedObjects[#CurrentPlacedObjects+1]=insert
-	palceCurrentObjects()
+	placeCurrentObjects()
 end
 
 function canPlace()
@@ -376,7 +376,14 @@ function getPrice(name)
 
 end
 
-function palceCurrentObjects()
+--[[
+    -- Type: Function
+    -- Name: placeCurrentObjects
+    -- Use: Rebuilds placed objects and recalculates cost
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+function placeCurrentObjects()
 	cost = 0
 	for i,v in ipairs(loadedObjects) do
 		DeleteEntity(v)
@@ -386,7 +393,7 @@ function palceCurrentObjects()
 		cost = cost + getPrice(v.name)
 		RequestModel(GetHashKey(v.name))
 		while not HasModelLoaded(GetHashKey(v.name)) do
-			Citizen.Wait(1)
+			Wait(1)
 		end
 
 		local place = CreateObject(GetHashKey(v.name), v.pos.x, v.pos.y, v.pos.z, true, false, false)
@@ -400,19 +407,19 @@ function palceCurrentObjects()
 end
 		
 function RotateObject(direction)
-	roatation = GetEntityRotation(object,2)
+	rotation = GetEntityRotation(object,2)
 	if direction == "yl" then
-		SetEntityRotation(object,roatation.x,roatation.y,roatation.z+(moveWeight*3),2,1)
+		SetEntityRotation(object,rotation.x,rotation.y,rotation.z+(moveWeight*3),2,1)
 	elseif direction == "yr" then
-		SetEntityRotation(object,roatation.x,roatation.y,roatation.z-(moveWeight*3),2,1)
+		SetEntityRotation(object,rotation.x,rotation.y,rotation.z-(moveWeight*3),2,1)
 	elseif direction == "rl" then
-		SetEntityRotation(object,roatation.x,roatation.y+(moveWeight*3),roatation.z,2,1)
+		SetEntityRotation(object,rotation.x,rotation.y+(moveWeight*3),rotation.z,2,1)
 	elseif direction == "rr" then
-		SetEntityRotation(object,roatation.x,roatation.y-(moveWeight*3),roatation.z,2,1)
+		SetEntityRotation(object,rotation.x,rotation.y-(moveWeight*3),rotation.z,2,1)
 	elseif direction == "pl" then
-		SetEntityRotation(object,roatation.x+(moveWeight*3),roatation.y,roatation.z,2,1)
+		SetEntityRotation(object,rotation.x+(moveWeight*3),rotation.y,rotation.z,2,1)
 	elseif direction == "pr" then
-		SetEntityRotation(object,roatation.x-(moveWeight*3),roatation.y,roatation.z,2,1)
+		SetEntityRotation(object,rotation.x-(moveWeight*3),rotation.y,rotation.z,2,1)
 	end
 end
 
@@ -476,7 +483,14 @@ end
 
 
 
-function stopFuniture()
+--[[
+    -- Type: Function
+    -- Name: stopFurniture
+    -- Use: Clears placed objects and resets build state
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+function stopFurniture()
 	CurrentPlacedObjects = {}
 	cost = 0
 	for i,v in ipairs(loadedObjects) do
@@ -529,7 +543,7 @@ function createObject()
 		local heading = GetEntityHeading(PlayerPedId())
 		RequestModel(GetHashKey(currentObject))
 		while not HasModelLoaded(GetHashKey(currentObject)) do
-			Citizen.Wait(1)
+			Wait(1)
 		end
 
 		object = CreateObject(GetHashKey(currentObject), x, y, z, false, true, true)
@@ -545,7 +559,7 @@ function createObject()
 
 		RequestModel(GetHashKey(currentObject))
 		while not HasModelLoaded(GetHashKey(currentObject)) do
-			Citizen.Wait(1)
+			Wait(1)
 		end
 
 		object = CreateObject(GetHashKey(currentObject),pos.x, pos.y, pos.z, false, true, true)
@@ -661,7 +675,7 @@ function renderText()
 	end
 
 	if showControls then
-		if buildMode == "Movement" or buildMode == "Roate" then
+		if buildMode == "Movement" or buildMode == "Rotate" then
 			DrawRect(0.050, 0.874,0.09,0.180,0,0,0,150)
 			DrawRect(0.15, 0.874,0.09,0.180,0,0,0,150)
 
@@ -710,7 +724,7 @@ function renderText()
 			AddTextComponentString(" - [Ctrl+Home] Secondary")
 			DrawText(0.010, 0.924)
 
-			if buildMode == "Roate" then
+			if buildMode == "Rotate" then
 
 				SetTextFont(4)
 				SetTextProportional(0)
@@ -756,7 +770,7 @@ function renderText()
 				SetTextColour(255, 255, 255, 255)
 				SetTextCentre(0)
 				SetTextEntry("STRING")
-				AddTextComponentString(" - [Num 8/5] Foward/Back")
+				AddTextComponentString(" - [Num 8/5] Forward/Back")
 				DrawText(0.110, 0.834)
 
 				SetTextFont(4)
@@ -795,21 +809,35 @@ end
 
 
 
+--[[
+    -- Type: Function
+    -- Name: ButtonMessage
+    -- Use: Pushes text onto the scaleform stack
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 function ButtonMessage(text)
     BeginTextCommandScaleformString("STRING")
     AddTextComponentScaleform(text)
     EndTextCommandScaleformString()
 end
 
+--[[
+    -- Type: Function
+    -- Name: Button
+    -- Use: Adds control button info to scaleform
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 function Button(ControlButton)
-    N_0xe83a3e3557a56640(ControlButton)
+    ScaleformMovieMethodAddParamButtonName(ControlButton)
 end
 
 
 function setupScaleform(scaleform)
     local scaleform = RequestScaleformMovie(scaleform)
     while not HasScaleformMovieLoaded(scaleform) do
-        Citizen.Wait(0)
+        Wait(0)
     end
     PushScaleformMovieFunction(scaleform, "CLEAR_ALL")
     PopScaleformMovieFunctionVoid()
