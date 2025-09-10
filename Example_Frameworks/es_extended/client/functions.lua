@@ -992,8 +992,13 @@ end
 
 RegisterNetEvent('esx:serverCallback')
 AddEventHandler('esx:serverCallback', function(requestId, ...)
-	ESX.ServerCallbacks[requestId](...)
-	ESX.ServerCallbacks[requestId] = nil
+        local cb = ESX.ServerCallbacks[requestId]
+        if cb then
+                cb(...)
+                ESX.ServerCallbacks[requestId] = nil
+        else
+                print(('[^3WARNING^7] Received unknown server callback response (%s)'):format(requestId))
+        end
 end)
 
 RegisterNetEvent('esx:showNotification')
@@ -1014,17 +1019,25 @@ end)
 -- SetTimeout
 CreateThread(function()
         while true do
-                local sleep = 100
-                if next(ESX.TimeoutCallbacks) ~= nil then
-                        local currTime = GetGameTimer()
-                        sleep = 0
-                        for id, data in pairs(ESX.TimeoutCallbacks) do
-                                if currTime >= data.time then
-                                        data.cb()
-                                        ESX.TimeoutCallbacks[id] = nil
+                local nextTimer
+                local currTime = GetGameTimer()
+
+                for id, data in pairs(ESX.TimeoutCallbacks) do
+                        if currTime >= data.time then
+                                data.cb()
+                                ESX.TimeoutCallbacks[id] = nil
+                        else
+                                local remaining = data.time - currTime
+                                if not nextTimer or remaining < nextTimer then
+                                        nextTimer = remaining
                                 end
                         end
                 end
-                Wait(sleep)
+
+                if nextTimer then
+                        Wait(nextTimer)
+                else
+                        Wait(500)
+                end
         end
 end)
