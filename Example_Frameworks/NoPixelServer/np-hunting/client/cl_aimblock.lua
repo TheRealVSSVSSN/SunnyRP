@@ -1,25 +1,39 @@
 local hasHuntingRifle = false
 local isFreeAiming = false
+
+--[[
+    -- Type: Function
+    -- Name: processScope
+    -- Use: Toggles the custom sniper scope UI when aiming
+    -- Created: 2024-06-10
+    -- By: VSSVSSN
+--]]
 local function processScope(freeAiming)
-  if not isFreeAiming and freeAiming then
-    isFreeAiming = true
-    exports["np-ui"]:sendAppEvent("sniper-scope", { show = true })
-  elseif isFreeAiming and not freeAiming then
-    isFreeAiming = false
-    exports["np-ui"]:sendAppEvent("sniper-scope", { show = false })
-  end
+    if not isFreeAiming and freeAiming then
+        isFreeAiming = true
+        exports["np-ui"]:sendAppEvent("sniper-scope", { show = true })
+    elseif isFreeAiming and not freeAiming then
+        isFreeAiming = false
+        exports["np-ui"]:sendAppEvent("sniper-scope", { show = false })
+    end
 end
 
 local blockShotActive = false
+--[[
+    -- Type: Function
+    -- Name: blockShooting
+    -- Use: Prevents firing the hunting rifle at invalid targets
+    -- Created: 2024-06-10
+    -- By: VSSVSSN
+--]]
 local function blockShooting()
     if blockShotActive then return end
     blockShotActive = true
-    Citizen.CreateThread(function()
+    CreateThread(function()
         while hasHuntingRifle do
             local ply = PlayerId()
             local ped = PlayerPedId()
-            local ent = nil
-            local aiming, ent = GetEntityPlayerIsFreeAimingAt(ply)
+            local _, ent = GetEntityPlayerIsFreeAimingAt(ply)
             local freeAiming = IsPlayerFreeAiming(ply)
             processScope(freeAiming)
             local et = GetEntityType(ent)
@@ -33,14 +47,21 @@ local function blockShooting()
                 DisableControlAction(0, 58, true)
                 DisablePlayerFiring(ped, true)
             end
-            Citizen.Wait(0)
+            Wait(0)
         end
         blockShotActive = false
         processScope(false)
     end)
 end
 
-Citizen.CreateThread(function()
+--[[
+    -- Type: Thread
+    -- Name: monitorHuntingRifle
+    -- Use: Activates blocking when the hunting rifle is equipped
+    -- Created: 2024-06-10
+    -- By: VSSVSSN
+--]]
+CreateThread(function()
     local huntingRifleHash = `weapon_sniperrifle2` -- -646649097
 
     while true do
@@ -50,6 +71,6 @@ Citizen.CreateThread(function()
         else
             hasHuntingRifle = false
         end
-        Citizen.Wait(1000)
+        Wait(1000)
     end
 end)
