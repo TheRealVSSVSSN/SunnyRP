@@ -1,6 +1,6 @@
 Config = {}
 
-Config.version = "1.1.0"
+Config.version = "1.2.0"
 
 ------- Modules -------
 Config.enableDebug = true

@@ -187,7 +187,7 @@ function CycleRadioChannels()
 end
 
 function StartRadioTask()
-    Citizen.CreateThread(function()
+    CreateThread(function()
         local lib = "random@arrests"
         local anim = "generic_radio_chatter"
 
@@ -200,7 +200,7 @@ function StartRadioTask()
 
             SetControlNormal(0, 249, 1.0)
 
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         StopAnimTask(Player, lib, anim, 3.0)

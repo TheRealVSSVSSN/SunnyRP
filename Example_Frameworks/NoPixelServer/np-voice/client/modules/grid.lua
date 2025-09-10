@@ -80,7 +80,7 @@ function LoadGridModule()
     RegisterModuleContext("grid", 0)
     UpdateContextVolume("grid", -1.0)
 
-    Citizen.CreateThread(function()
+    CreateThread(function()
         while true do
             local idle = 250 --100
 
@@ -96,7 +96,7 @@ function LoadGridModule()
 
             PreviousGrid = currentGrid
     
-            Citizen.Wait(idle)
+            Wait(idle)
         end
     end)
 
@@ -118,7 +118,7 @@ end
 -- end
 
 -- function nearbyGridsThread()
---     Citizen.CreateThread(function()
+--     CreateThread(function()
 --         while true do
 --             MumbleClearVoiceTarget(CurrentTarget)
 --                 for _, channel in pairs(edgeGrids) do
@@ -127,7 +127,7 @@ end
 --                 end
 --             MumbleSetVoiceTarget(CurrentTarget)
     
---             Citizen.Wait(200)
+--             Wait(200)
 --         end
 --     end)
 -- end

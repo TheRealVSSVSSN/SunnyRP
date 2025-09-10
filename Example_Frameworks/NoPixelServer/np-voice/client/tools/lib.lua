@@ -20,7 +20,7 @@ function Throttled(name, time)
     if not Throttles[name] then
         if time then
             Throttles[name] = true
-            Citizen.SetTimeout(time, function() Throttles[name] = false end)
+            SetTimeout(time, function() Throttles[name] = false end)
         end
 
         return false
@@ -46,7 +46,7 @@ function LoadAnimDict(dict)
         RequestAnimDict(dict)
 
         while not HasAnimDictLoaded(dict) do
-            Citizen.Wait(0)
+            Wait(0)
         end
     end
 end
@@ -104,7 +104,7 @@ end
 function TimeOut(time)
     local p = promise:new()
 
-    Citizen.SetTimeout(time, function ()
+    SetTimeout(time, function ()
         p:resolve(true)
     end)
 

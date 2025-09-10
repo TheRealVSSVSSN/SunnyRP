@@ -77,3 +77,4 @@ end,true)
 RegisterCommand('channelSubscribers', function(src, args, raw)
     print(DumpTable(channelSubscribers))
 end,true)
+
