@@ -47,37 +47,35 @@ function SpawnTruckPaleto()
 
     RequestModel(vehicle)
     while not HasModelLoaded(vehicle) do
-      Wait(1)
+      Wait(0)
     end
 
     local trailerToSpawn = GetHashKey(trailer)
     RequestModel(trailerToSpawn)
     while not HasModelLoaded(trailerToSpawn) do
-      Wait(1)
+      Wait(0)
     end
 
-    local plate = "DOCK" .. GetRandomIntInRange(1000, 9000)
-    local coords = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0, 2.0, 0)
-    local spawned_car = CreateVehicle(vehicle, DockInfo["truckspawn"]["x"],DockInfo["truckspawn"]["y"],DockInfo["truckspawn"]["z"], DockInfo["truckspawn"]["h"], true, false)
+    local truckPlate = "DOCK" .. GetRandomIntInRange(1000, 9000)
+    local spawned_car = CreateVehicle(vehicle, DockInfo["truckspawn"].x, DockInfo["truckspawn"].y, DockInfo["truckspawn"].z, DockInfo["truckspawn"].h, true, false)
 
     SetVehicleOnGroundProperly(spawned_car)
-    SetVehicleNumberPlateText(spawned_car, plate)
-    TriggerEvent("keys:addNew",spawned_car,plate)
-    TriggerServerEvent('garges:addJobPlate', plate)
-    SetPedIntoVehicle(myPed, spawned_car, - 1)
-    SetEntityAsMissionEntity(spawned_car,false,true)
+    SetVehicleNumberPlateText(spawned_car, truckPlate)
+    TriggerEvent('keys:addNew', spawned_car, truckPlate)
+    TriggerServerEvent('garages:addJobPlate', truckPlate)
+    SetPedIntoVehicle(myPed, spawned_car, -1)
+    SetEntityAsMissionEntity(spawned_car, false, true)
     SetVehiclePetrolTankHealth(spawned_car, 1000.0)
 
-
-    local plate = "DOCK" .. GetRandomIntInRange(1000, 9000)
-    local spawned_trailer = CreateVehicle(trailerToSpawn, DockInfo["trailerspawn"]["x"],DockInfo["trailerspawn"]["y"],DockInfo["trailerspawn"]["z"], DockInfo["trailerspawn"]["h"], true, false)
+    local trailerPlate = "DOCK" .. GetRandomIntInRange(1000, 9000)
+    local spawned_trailer = CreateVehicle(trailerToSpawn, DockInfo["trailerspawn"].x, DockInfo["trailerspawn"].y, DockInfo["trailerspawn"].z, DockInfo["trailerspawn"].h, true, false)
     SetVehicleOnGroundProperly(spawned_trailer)
-    SetVehicleNumberPlateText(spawned_trailer, plate)
-    TriggerEvent("keys:addNew",spawned_trailer,plate)
-    TriggerServerEvent('garges:addJobPlate', plate)
-    SetPedIntoVehicle(myPed, spawned_trailer, - 1)    
-    SetEntityAsMissionEntity(spawned_trailer,false,true)
+    SetVehicleNumberPlateText(spawned_trailer, trailerPlate)
+    TriggerEvent('keys:addNew', spawned_trailer, trailerPlate)
+    TriggerServerEvent('garages:addJobPlate', trailerPlate)
+    SetEntityAsMissionEntity(spawned_trailer, false, true)
     SetVehiclePetrolTankHealth(spawned_trailer, 1000.0)
+    AttachVehicleToTrailer(spawned_car, spawned_trailer, 1.0)
     
 end
 
@@ -272,8 +270,8 @@ Citizen.CreateThread(function()
             else
               TriggerServerEvent("trucker:jobTaken",job)
               for i = 1, currentJobs[currentJobPos].dropAmount do
-                  loadModel("prop_cs_cardbox_01")
-                  local obj = CreateObject(`prop_cs_cardbox_01`,currentJobs[currentJobPos].pickup[1], currentJobs[currentJobPos].pickup[2], currentJobs[currentJobPos].pickup[3]-0.8, 1, 0, 0)
+                loadModel("prop_cs_cardbox_01")
+                local obj = CreateObject(GetHashKey('prop_cs_cardbox_01'), currentJobs[currentJobPos].pickup[1], currentJobs[currentJobPos].pickup[2], currentJobs[currentJobPos].pickup[3]-0.8, 1, 0, 0)
                   PlaceObjectOnGroundProperly(obj)
               end
               notspawned = false
@@ -564,7 +562,7 @@ function attachBox()
 
     loadModel("prop_cs_cardbox_01")
     local vehc = GetEntityCoords(existingVeh)
-    local obj = CreateObject(`prop_cs_cardbox_01`,vehc["x"],vehc["y"],vehc["z"], 1, 0, 0)
+    local obj = CreateObject(GetHashKey('prop_cs_cardbox_01'), vehc["x"], vehc["y"], vehc["z"], 1, 0, 0)
 
     local x = math.random(10) / 10
     if math.random(100) > 50 then
@@ -580,7 +578,7 @@ function attachBox()
 end
 
 function DelBox()
-    local objFound = GetClosestObjectOfType( GetEntityCoords(PlayerPedId()), 5.0, `prop_cs_cardbox_01`, 0, 0, 0)
+    local objFound = GetClosestObjectOfType(GetEntityCoords(PlayerPedId()), 5.0, GetHashKey('prop_cs_cardbox_01'), 0, 0, 0)
     if objFound then
         DetachEntity(objFound)
 
@@ -780,17 +778,17 @@ end
 --------------------------------------
 
 function spawnTruck(i)
-  
-      Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(spawnedvehicles[i]))
-      
+
+      DeleteEntity(spawnedvehicles[i])
+
 
       TriggerEvent("DoLongHudText","Use Phone to check job",1)
 
-      local model = `mule2`
+      local model = GetHashKey('mule2')
       RequestModel(model)
       while not HasModelLoaded(model) do
-          Wait(1)
-      end 
+          Wait(0)
+      end
 
       local playerPed = PlayerPedId()
       if plate ~= nil then
@@ -800,7 +798,7 @@ function spawnTruck(i)
 
       local pos = GetEntityCoords(PlayerPedId())
 
-      Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(existingVeh))
+      DeleteEntity(existingVeh)
       spawned_car = CreateVehicle(model, garges[i][1], garges[i][2], garges[i][3], garges[i][4], true, false)
       SetVehicleFixed(spawned_car)
       SetVehicleEngineHealth(spawned_car, 1000.0)
@@ -812,7 +810,7 @@ function spawnTruck(i)
 
       SetVehicleNumberPlateText(existingVeh, plate)
       TriggerEvent("keys:addNew",existingVeh,plate)
-      TriggerServerEvent('garges:addJobPlate', plate)
+      TriggerServerEvent('garages:addJobPlate', plate)
 
       SetPedIntoVehicle(playerPed, existingVeh, -1)
       local finished = exports["np-taskbar"]:taskBar(3000,"Checking Vehicle")
@@ -831,12 +829,12 @@ function SpawnSaleVehicles(garageNum)
   end
   for i=1,#garges do
 
-      local model = `mule2`
+      local model = GetHashKey('mule2')
       RequestModel(model)
       while not HasModelLoaded(model) do
-          Wait(1)
-      end 
-      local veh = CreateVehicle(model,garges[i][1],garges[i][2],garges[i][3],garges[i][4],false,false)
+          Wait(0)
+      end
+      local veh = CreateVehicle(model, garges[i][1], garges[i][2], garges[i][3], garges[i][4], false, false)
       
       SetVehicleOnGroundProperly(veh)
       SetEntityInvincible(veh,true)
