@@ -1,71 +1,64 @@
 curjob = 'Unemployed'
 
+--[[ 
+    -- Type: Function
+    -- Name: fsn_GetJob
+    -- Use: Returns the player's current job
+    -- Created: 2024-10-??
+    -- By: VSSVSSN
+--]]
 function fsn_GetJob()
   return curjob
 end
 
+--[[ 
+    -- Type: Function
+    -- Name: fsn_SetJob
+    -- Use: Updates the player's job and informs the server
+    -- Created: 2024-10-??
+    -- By: VSSVSSN
+--]]
 function fsn_SetJob(job)
   curjob = job
+  TriggerServerEvent('fsn_jobs:updateJob', job)
 end
 
+--[[ 
+    -- Type: Function
+    -- Name: fsn_jobs:quit handler
+    -- Use: Resets job to Unemployed and notifies server
+    -- Created: 2024-10-??
+    -- By: VSSVSSN
+--]]
 RegisterNetEvent('fsn_jobs:quit')
 AddEventHandler('fsn_jobs:quit', function()
   curjob = 'Unemployed'
+  TriggerServerEvent('fsn_jobs:updateJob', 'Unemployed')
 end)
 
 current_time = 0
-Citizen.CreateThread(function()
+CreateThread(function()
   while true do
-    Citizen.Wait(1000)
+    Wait(1000)
     current_time = current_time + 1
   end
 end)
 
-RegisterNetEvent('fsn_jobs:paycheck')
-AddEventHandler('fsn_jobs:paycheck', function()
-  
-  if curjob == 'Police' then
-    TriggerEvent('fsn_bank:change:bankAdd', 350)
-    TriggerEvent('fsn_notify:displayNotification', 'Salary: $350', 'centerLeft', 5000, 'info')
-  
-  elseif curjob == 'EMS' then
-    TriggerEvent('fsn_bank:change:bankAdd', 350)
-    TriggerEvent('fsn_notify:displayNotification', 'Salary: $350', 'centerLeft', 5000, 'info')
-  
-  elseif curjob == 'Mechanic' then
-    TriggerEvent('fsn_bank:change:bankAdd', 100)
-    TriggerEvent('fsn_notify:displayNotification', 'Salary: $100', 'centerLeft', 5000, 'info')
-  
-  elseif curjob == 'CarDealer' then
-    TriggerEvent('fsn_bank:change:bankAdd', 100)
-    TriggerEvent('fsn_notify:displayNotification', 'Salary: $100', 'centerLeft', 5000, 'info')
-  
-  elseif curjob == 'BoatDealer' then
-    TriggerEvent('fsn_bank:change:bankAdd', 100)
-    TriggerEvent('fsn_notify:displayNotification', 'Salary: $100', 'centerLeft', 5000, 'info')
-
-  elseif curjob == 'Rancher' then
-    TriggerEvent('fsn_bank:change:bankAdd', 100)
-    TriggerEvent('fsn_notify:displayNotification', 'Salary: $100', 'centerLeft', 5000, 'info')
-  
-  elseif curjob == 'Taxi Driver' then
-    TriggerEvent('fsn_bank:change:bankAdd', 150)
-    TriggerEvent('fsn_notify:displayNotification', 'Salary: $150', 'centerLeft', 5000, 'info')
-  
-  elseif curjob == 'Truck Driver' then
-    TriggerEvent('fsn_bank:change:bankAdd', 100)
-    TriggerEvent('fsn_notify:displayNotification', 'Salary: $100', 'centerLeft', 5000, 'info')
-  
-  elseif curjob == 'Unemployed' then
-    TriggerEvent('fsn_bank:change:bankAdd', 50)
-    TriggerEvent('fsn_notify:displayNotification', 'Salary: $50', 'centerLeft', 5000, 'info')
+--[[ 
+    -- Type: Event
+    -- Name: onClientResourceStart
+    -- Use: Sync initial job with server when resource loads
+    -- Created: 2024-10-??
+    -- By: VSSVSSN
+--]]
+AddEventHandler('onClientResourceStart', function(res)
+  if res == GetCurrentResourceName() then
+    TriggerServerEvent('fsn_jobs:updateJob', curjob)
   end
-
-
 end)
 
-function table.contains(table, element)
-  for _, value in pairs(table) do
+function table.contains(tbl, element)
+  for _, value in pairs(tbl) do
     if value[1] == element then
       return true
     end
