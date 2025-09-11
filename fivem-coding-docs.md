@@ -438,6 +438,76 @@ ensure my_resource
 
 ### Client Natives by Category
 
+#### Player
+
+##### GetPlayerPed (0x43A66C31C68491C0)
+- **Scope**: Shared
+- **Signature**: `Ped GetPlayerPed(Player player)`
+- **Purpose**: Obtain the ped handle controlled by a given player.
+- **Parameters / Returns**:
+  - `player` (`Player`): slot or server ID of the player.
+  - **Returns**: `Ped` handle for that player.
+- **OneSync / Networking**: Entity ownership is required for actions on the ped to replicate.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Function
+        -- Name: listName
+        -- Use: Prints the player's name and ped entity
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    local id = PlayerId()                     -- local player's slot
+    local ped = GetPlayerPed(id)               -- obtain ped handle
+    print(('Player %s ped %s'):format(GetPlayerName(id), ped))
+    ```
+
+  - JavaScript:
+
+    ```javascript
+    // client/main.js
+    const id = PlayerId();                    // local player's slot
+    const ped = GetPlayerPed(id);             // obtain ped handle
+    console.log(`Player ${GetPlayerName(id)} ped ${ped}`);
+    ```
+
+- **Caveats / Limitations**:
+  - Returns 0 if the player does not exist.
+- **Reference**: https://docs.fivem.net/natives/?_0x43A66C31C68491C0
+  - TODO(next-run): verify signature and hash against official docs.
+
+##### GetPlayerName (0x6D0DE6A7B5DA71F8)
+- **Scope**: Shared
+- **Signature**: `char* GetPlayerName(Player player)`
+- **Purpose**: Get the display name of a player.
+- **Parameters / Returns**:
+  - `player` (`Player`): slot or server ID of the player.
+  - **Returns**: `string` player name.
+- **OneSync / Networking**: Names are synced by the game; no additional replication required.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    -- Get and print the name of the current player
+    local id = PlayerId()
+    print(('You are %s'):format(GetPlayerName(id)))
+    ```
+
+  - JavaScript:
+
+    ```javascript
+    // Print the local player's name
+    const id = PlayerId();
+    console.log(`You are ${GetPlayerName(id)}`);
+    ```
+
+- **Caveats / Limitations**:
+  - Returns an empty string if the player does not exist.
+- **Reference**: https://docs.fivem.net/natives/?_0x6D0DE6A7B5DA71F8
+  - TODO(next-run): verify signature and hash against official docs.
+
 ### Server Natives by Category
 
-CONTINUE-HERE — 2025-09-11T02:15:32+00:00 — next: start 13.2 Client Natives by Category (Player)
+CONTINUE-HERE — 2025-09-11T02:21:42+00:00 — next: continue 13.2 Client Natives > Player category with GetPlayerPing
