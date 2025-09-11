@@ -1,11 +1,10 @@
-$(function(){
-    window.addEventListener("message", function(event){   
-        if(event.data.options){
-          var options = event.data.options;
-          new Noty(options).show();
-        }else{
-          var maxNotifications = event.data.maxNotifications;
-          Noty.setMaxVisible(maxNotifications.max, maxNotifications.queue);
-        };
+document.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('message', (event) => {
+        if (event.data.options) {
+            new Noty(event.data.options).show();
+        } else {
+            const maxNotifications = event.data.maxNotifications;
+            Noty.setMaxVisible(maxNotifications.max, maxNotifications.queue);
+        }
     });
 });
