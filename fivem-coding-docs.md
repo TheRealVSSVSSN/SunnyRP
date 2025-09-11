@@ -15,6 +15,10 @@
     - [Minimal Templates (Lua/JS)](#minimal-templates-luajs)
     - [server.cfg Template](#servercfg-template)
 12. [References](#references)
+13. [Natives Index (Client / Server, by Category)](#natives-index-client--server-by-category)
+    - [Taxonomy & Scope Notes](#taxonomy--scope-notes)
+    - [Client Natives by Category](#client-natives-by-category)
+    - [Server Natives by Category](#server-natives-by-category)
 
 ---
 
@@ -418,3 +422,22 @@ ensure my_resource
 - https://docs.fivem.net/docs/scripting-manual/networking/state-bags/
 - https://docs.fivem.net/docs/scripting-manual/debugging/using-profiler/
 - https://docs.fivem.net/docs/scripting-manual/introduction/best-practices/
+
+---
+
+## Natives Index (Client / Server, by Category)
+
+### Taxonomy & Scope Notes
+- **Client-only** natives run in game clients and cannot be executed on the server.
+- **Server-only** natives run in FXServer and manage resources or network state.
+- **Shared** natives work in both realms.
+- OneSync dictates entity ownership; some natives require the entity owner to call them for replication.
+
+#### References
+- https://docs.fivem.net/natives/
+
+### Client Natives by Category
+
+### Server Natives by Category
+
+CONTINUE-HERE — 2025-09-11T02:15:32+00:00 — next: start 13.2 Client Natives by Category (Player)
