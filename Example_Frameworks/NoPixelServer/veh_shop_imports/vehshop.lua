@@ -1,3 +1,10 @@
+--[[
+    -- Type: Client Script
+    -- Name: vehshop.lua
+    -- Use: Handles import vehicle shop interactions on the client side
+    -- Created: 2025-02-15
+    -- By: VSSVSSN
+--]]
 RegisterNetEvent('FinishMoneyCheckForVeh2')
 RegisterNetEvent('vehshop:spawnVehicle2')
 local vehshop_blips = {}
@@ -214,7 +221,7 @@ AddEventHandler("car:testdrive", function()
 		local modelwait = 1
 		RequestModel(model)
 		while not HasModelLoaded(model) and modelwait < 100 do
-			Citizen.Wait(100)
+			Wait(100)
 			modelwait = modelwait + 1
 		end
 		if modelwait > 100 then
@@ -225,7 +232,7 @@ AddEventHandler("car:testdrive", function()
 		local veh = CreateVehicle(model,vehshop_locations[1].outside[1],vehshop_locations[1].outside[2],vehshop_locations[1].outside[3],vehshop_locations[1].outside[4],true,false)
 		local vehplate = "CAR"..math.random(10000,99999) 
 		SetVehicleNumberPlateText(veh, vehplate)
-		Citizen.Wait(100)
+		Wait(100)
 		TriggerEvent("keys:addNew", veh, vehplate)
 		SetModelAsNoLongerNeeded(model)
 		SetVehicleOnGroundProperly(veh)
@@ -262,7 +269,7 @@ end)
 RegisterNetEvent("finance:enableOnClient2")
 AddEventHandler("finance:enableOnClient2", function(addplate)
 	financedPlates[addplate] = true
-	Citizen.Wait(60000)
+	Wait(60000)
 	financedPlates[addplate] = nil
 end)	
 
@@ -404,7 +411,7 @@ end
 function SpawnSaleVehicles()
 	if not hasspawned then
 		TriggerServerEvent("carshop:requesttable2")
-		Citizen.Wait(1500)
+		Wait(1500)
 	end
 	DespawnSaleVehicles(true)
 	vehicles_spawned = true
@@ -418,7 +425,7 @@ function SpawnSaleVehicles()
 
 		RequestModel(model)
 		while not HasModelLoaded(model) and modelwait < 100 do
-			Citizen.Wait(100)
+			Wait(100)
 			modelwait = modelwait + 1
 		end
 
@@ -509,9 +516,9 @@ function ShowVehshopBlips(bool)
 			SetBlipColour(blip, 3)
 			vehshop_blips[#vehshop_blips+1]= {blip = blip, pos = loc}
 		end
-		Citizen.CreateThread(function()
+		CreateThread(function()
 			while #vehshop_blips > 0 do
-				Citizen.Wait(1)
+				Wait(1)
 				local inrange = false
 
 				if #(vector3(vehshop_locations[1].outside[1],vehshop_locations[1].outside[2],vehshop_locations[1].outside[3]) - GetEntityCoords(LocalPed())) < 5.0 then
@@ -559,7 +566,7 @@ function ShowVehshopBlips(bool)
 						if vehicles_spawned then
 							DespawnSaleVehicles(false,true)
 						end
-						Citizen.Wait(1000)
+						Wait(1000)
 					end
 				end
 				inrangeofvehshop = inrange
@@ -614,7 +621,7 @@ function OpenCreator()
 end
 
 function CloseCreator(name, veh, price, financed)
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		local ped = LocalPed()
 		if not boughtcar then
 			local pos = currentlocation.pos.entering
@@ -642,7 +649,7 @@ function CloseCreator(name, veh, price, financed)
 			local modelwait = 1
 			RequestModel(model)
 			while not HasModelLoaded(model) and modelwait < 100 do
-				Citizen.Wait(100)
+				Wait(100)
 				modelwait = modelwait + 1
 			end
 			if modelwait > 100 then
@@ -897,7 +904,7 @@ function resetscaleform(topspeed,handling,braking,accel,resetscaleform,i)
     scaleform = RequestScaleformMovie(resetscaleform)
 
     while not HasScaleformMovieLoaded(scaleform) do
-        Citizen.Wait(0)
+        Wait(0)
     end
 
 	topspeedc = topspeed / 20
@@ -926,13 +933,13 @@ function resetscaleform(topspeed,handling,braking,accel,resetscaleform,i)
 end
 
 
---[[Citizen]]--
+
 function Initialize(scaleform,veh,vehname)
 
     scaleform = RequestScaleformMovie(scaleform)
 
     while not HasScaleformMovieLoaded(scaleform) do
-        Citizen.Wait(0)
+        Wait(0)
     end
 
     PushScaleformMovieFunction(scaleform, "SET_VEHICLE_INFOR_AND_STATS")
@@ -962,10 +969,10 @@ function Initialize(scaleform,veh,vehname)
     if accel > 100 then
     	accel = 100
     end
-    Citizen.Trace(topspeed)
-    Citizen.Trace(handling)
-    Citizen.Trace(braking)
-    Citizen.Trace(accel)
+    print(topspeed)
+    print(handling)
+    print(braking)
+    print(accel)
 
     PushScaleformMovieFunctionParameterInt( topspeed )
     PushScaleformMovieFunctionParameterInt( handling )
@@ -984,9 +991,9 @@ AddEventHandler('event:control:update', function(table)
 end)
 
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
-		Citizen.Wait(0)
+		Wait(0)
 		if ( IsControlJustPressed(1,Controlkey["generalUse"][1]) or IsControlJustPressed(1, Controlkey["generalUseSecondary"][1]) ) and IsPlayerInRangeOfVehshop() then
 			if vehshop.opened then
 				CloseCreator()
@@ -1032,7 +1039,7 @@ Citizen.CreateThread(function()
 								local modelwait = 1
 								RequestModel(hash)
 								while not HasModelLoaded(hash) and modelwait < 100 do
-									Citizen.Wait(100)
+									Wait(100)
 									modelwait = modelwait + 1
 								end
 
@@ -1045,7 +1052,7 @@ Citizen.CreateThread(function()
 									local timer = 9000
 									while not DoesEntityExist(veh) and timer > 0 do
 										timer = timer - 1
-										Citizen.Wait(1)
+										Wait(1)
 									end
 									TriggerEvent("vehsearch:disable",veh)
 
@@ -1159,7 +1166,7 @@ AddEventHandler('vehshop:spawnVehicle2', function(v)
 
 		local modelwait = 1
 		while not HasModelLoaded(car) and modelwait < 100 do
-			Citizen.Wait(100)
+			Wait(100)
 			modelwait = modelwait + 1
 		end
 
@@ -1205,7 +1212,7 @@ local vehshopLoc = PolyZone:Create({
 })
 
 local HeadBone = 0x796e;
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
         local plyPed = PlayerPedId()
         local coord = GetPedBoneCoords(plyPed, HeadBone)
@@ -1216,17 +1223,17 @@ Citizen.CreateThread(function()
         elseif not inPoly and insideVehShop then
             insideVehShop = false
         end
-        Citizen.Wait(500)
+        Wait(500)
     end
 end)
 
 local isExportReady = false
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
-        Citizen.Wait(500)
+        Wait(500)
         if insideVehShop and isExportReady then
             rank = exports["isPed"]:GroupRank("illegal_carshop")
-            Citizen.Wait(10000)
+            Wait(10000)
         end
     end
 end)
