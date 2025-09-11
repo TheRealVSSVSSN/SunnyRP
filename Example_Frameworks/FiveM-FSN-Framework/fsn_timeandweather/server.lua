@@ -1,280 +1,253 @@
------------------- change this -------------------
+--[[
+    -- Type: Server Script
+    -- Name: fsn_timeandweather
+    -- Use: Synchronizes time and weather across the server
+    -- Created: 2024-02-14
+    -- By: VSSVSSN
+--]]
 
-admins = {
-    'steam:11000010e0828a9',
+local admins = {
+    'steam:11000010e0828a9'
 }
 
--- Set this to false if you don't want the weather to change automatically every 10 minutes.
-DynamicWeather = true
+local DynamicWeather = true
+local debugprint = false
 
---------------------------------------------------
-debugprint = false -- don't touch this unless you know what you're doing or you're being asked by Vespura to turn this on.
---------------------------------------------------
-
-
-
-
-
-
-
--------------------- DON'T CHANGE THIS --------------------
-AvailableWeatherTypes = {
-    'EXTRASUNNY'
+local AvailableWeatherTypes = {
+    'EXTRASUNNY','CLEAR','NEUTRAL','SMOG','FOGGY','OVERCAST','CLOUDS',
+    'CLEARING','RAIN','THUNDER','SNOW','BLIZZARD','SNOWLIGHT','XMAS','HALLOWEEN'
 }
-CurrentWeather = "EXTRASUNNY"
-local baseTime = 0
-local timeOffset = 0
-local freezeTime = false
-local blackout = false
+
+local CurrentWeather = 'EXTRASUNNY'
+local baseTime, timeOffset = 0, 0
+local freezeTime, blackout = false, false
 local newWeatherTimer = 10
+math.randomseed(os.time())
 
-RegisterServerEvent('fsn_timeandweather:requestSync')
-AddEventHandler('fsn_timeandweather:requestSync', function()
+--[[
+    -- Type: Function
+    -- Name: isAllowedToChange
+    -- Use: Validates if the player has permission to use admin commands
+    -- Created: 2024-02-14
+    -- By: VSSVSSN
+--]]
+local function isAllowedToChange(player)
+    for _, id in ipairs(admins) do
+        for _, pid in ipairs(GetPlayerIdentifiers(player)) do
+            if debugprint then
+                print(('admin id: %s\nplayer id: %s'):format(id, pid))
+            end
+            if string.lower(pid) == string.lower(id) then
+                return true
+            end
+        end
+    end
+    return false
+end
+
+--[[
+    -- Type: Event
+    -- Name: fsn_timeandweather:requestSync
+    -- Use: Sends current time and weather to all clients
+    -- Created: 2024-02-14
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent('fsn_timeandweather:requestSync', function()
     TriggerClientEvent('fsn_timeandweather:updateWeather', -1, CurrentWeather, blackout)
     TriggerClientEvent('fsn_timeandweather:updateTime', -1, baseTime, timeOffset, freezeTime)
 end)
 
-function isAllowedToChange(player)
-    local allowed = false
-    for i,id in ipairs(admins) do
-        for x,pid in ipairs(GetPlayerIdentifiers(player)) do
-            if debugprint then print('admin id: ' .. id .. '\nplayer id:' .. pid) end
-            if string.lower(pid) == string.lower(id) then
-                allowed = true
-            end
-        end
+-- Command helpers
+--[[
+    -- Type: Function
+    -- Name: setTimeCommand
+    -- Use: Sets the time and notifies the player
+    -- Created: 2024-02-14
+    -- By: VSSVSSN
+--]]
+local function setTimeCommand(source, hour, minute, label)
+    ShiftToMinute(minute)
+    ShiftToHour(hour)
+    if source == 0 then
+        print(('Time has changed to %02d:%02d.'):format(hour, minute))
+    else
+        TriggerClientEvent('fsn_timeandweather:notify', source, 'Time set to ~y~' .. label .. '~s~.')
     end
-    return allowed
+    TriggerEvent('fsn_timeandweather:requestSync')
 end
 
-RegisterCommand('freezetime', function(source, args)
-    if source ~= 0 then
-        if isAllowedToChange(source) then
-            freezeTime = not freezeTime
-            if freezeTime then
-                TriggerClientEvent('fsn_timeandweather:notify', source, 'Time is now ~b~frozen~s~.')
-            else
-                TriggerClientEvent('fsn_timeandweather:notify', source, 'Time is ~y~no longer frozen~s~.')
-            end
+--[[
+    -- Type: Function
+    -- Name: ShiftToMinute
+    -- Use: Adjusts timeOffset to the specified minute
+    -- Created: 2024-02-14
+    -- By: VSSVSSN
+--]]
+function ShiftToMinute(minute)
+    timeOffset = timeOffset - (((baseTime + timeOffset) % 60) - minute)
+end
+
+--[[
+    -- Type: Function
+    -- Name: ShiftToHour
+    -- Use: Adjusts timeOffset to the specified hour
+    -- Created: 2024-02-14
+    -- By: VSSVSSN
+--]]
+function ShiftToHour(hour)
+    timeOffset = timeOffset - ((((baseTime + timeOffset) / 60) % 24) - hour) * 60
+end
+
+RegisterCommand('freezetime', function(source)
+    if source == 0 or isAllowedToChange(source) then
+        freezeTime = not freezeTime
+        local msg = freezeTime and 'Time is now ~b~frozen~s~.' or 'Time is ~y~no longer frozen~s~.'
+        if source == 0 then
+            print(msg:gsub('~.-~', ''))
         else
-            TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^8Error: ^1You are not allowed to use this command.')
+            TriggerClientEvent('fsn_timeandweather:notify', source, msg)
         end
     else
-        freezeTime = not freezeTime
-        if freezeTime then
-            print("Time is now frozen.")
-        else
-            print("Time is no longer frozen.")
-        end
+        TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^8Error: ^1You are not allowed to use this command.')
     end
 end)
 
-RegisterCommand('freezeweather', function(source, args)
-    if source ~= 0 then
-        if isAllowedToChange(source) then
-            DynamicWeather = not DynamicWeather
-            if not DynamicWeather then
-                TriggerClientEvent('fsn_timeandweather:notify', source, 'Dynamic weather changes are now ~r~disabled~s~.')
-            else
-                TriggerClientEvent('fsn_timeandweather:notify', source, 'Dynamic weather changes are now ~b~enabled~s~.')
-            end
+RegisterCommand('freezeweather', function(source)
+    if source == 0 or isAllowedToChange(source) then
+        DynamicWeather = not DynamicWeather
+        local msg = DynamicWeather and 'Dynamic weather changes are now ~b~enabled~s~.' or 'Dynamic weather changes are now ~r~disabled~s~.'
+        if source == 0 then
+            print(msg:gsub('~.-~', ''))
         else
-            TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^8Error: ^1You are not allowed to use this command.')
+            TriggerClientEvent('fsn_timeandweather:notify', source, msg)
         end
     else
-        DynamicWeather = not DynamicWeather
-        if not DynamicWeather then
-            print("Weather is now frozen.")
-        else
-            print("Weather is no longer frozen.")
-        end
+        TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^8Error: ^1You are not allowed to use this command.')
     end
 end)
+
+--[[
+    -- Type: Function
+    -- Name: NextWeatherStage
+    -- Use: Randomizes the next weather type
+    -- Created: 2024-02-14
+    -- By: VSSVSSN
+--]]
+local function NextWeatherStage()
+    local newWeather = AvailableWeatherTypes[math.random(#AvailableWeatherTypes)]
+    if newWeather == CurrentWeather then
+        newWeather = AvailableWeatherTypes[math.random(#AvailableWeatherTypes)]
+    end
+    CurrentWeather = newWeather
+    TriggerEvent('fsn_timeandweather:requestSync')
+    if debugprint then
+        print((':fsn_timeandweather: New random weather type: %s'):format(CurrentWeather))
+        print(':fsn_timeandweather: Resetting timer to 10 minutes.')
+    end
+end
 
 RegisterCommand('weather', function(source, args)
-    if source == 0 then
-        local validWeatherType = false
-        if args[1] == nil then
-            print("Invalid syntax, correct syntax is: /weather <weathertype> ")
-            return
+    local wtype = args[1] and string.upper(args[1]) or nil
+    local validWeatherType = false
+    for _, wt in ipairs(AvailableWeatherTypes) do
+        if wt == wtype then
+            validWeatherType = true
+            break
+        end
+    end
+
+    if not validWeatherType then
+        local msg = 'Invalid weather type, valid weather types are: \n' .. table.concat(AvailableWeatherTypes, ' ')
+        if source == 0 then
+            print(msg)
         else
-            for i,wtype in ipairs(AvailableWeatherTypes) do
-                if wtype == string.upper(args[1]) then
-                    validWeatherType = true
-                end
-            end
-            if validWeatherType then
-                print("Weather has been updated.")
-                CurrentWeather = string.upper(args[1])
-                newWeatherTimer = 10
-                TriggerEvent('fsn_timeandweather:requestSync')
-            else
-                print("Invalid weather type, valid weather types are: \nEXTRASUNNY CLEAR NEUTRAL SMOG FOGGY OVERCAST CLOUDS CLEARING RAIN THUNDER SNOW BLIZZARD SNOWLIGHT XMAS HALLOWEEN ")
-            end
+            TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^8Error: ^1' .. msg)
+        end
+        return
+    end
+
+    if source == 0 or isAllowedToChange(source) then
+        CurrentWeather = wtype
+        newWeatherTimer = 10
+        TriggerEvent('fsn_timeandweather:requestSync')
+        if source == 0 then
+            print('Weather has been updated.')
+        else
+            TriggerClientEvent('fsn_timeandweather:notify', source, 'Weather will change to: ~y~' .. string.lower(wtype) .. '~s~.')
         end
     else
-        if isAllowedToChange(source) then
-            local validWeatherType = false
-            if args[1] == nil then
-                TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^8Error: ^1Invalid syntax, use ^0/weather <weatherType> ^1instead!')
-            else
-                for i,wtype in ipairs(AvailableWeatherTypes) do
-                    if wtype == string.upper(args[1]) then
-                        validWeatherType = true
-                    end
-                end
-                if validWeatherType then
-                    TriggerClientEvent('fsn_timeandweather:notify', source, 'Weather will change to: ~y~' .. string.lower(args[1]) .. "~s~.")
-                    CurrentWeather = string.upper(args[1])
-                    newWeatherTimer = 10
-                    TriggerEvent('fsn_timeandweather:requestSync')
-                else
-                    TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^8Error: ^1Invalid weather type, valid weather types are: ^0\nEXTRASUNNY CLEAR NEUTRAL SMOG FOGGY OVERCAST CLOUDS CLEARING RAIN THUNDER SNOW BLIZZARD SNOWLIGHT XMAS HALLOWEEN ')
-                end
-            end
-        else
-            TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^8Error: ^1You do not have access to that command.')
-            print('Access for command /weather denied.')
-        end
+        TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^8Error: ^1You do not have access to that command.')
+        print('Access for command /weather denied.')
     end
 end, false)
 
 RegisterCommand('blackout', function(source)
-    if source == 0 then
+    if source == 0 or isAllowedToChange(source) then
         blackout = not blackout
-        if blackout then
-            print("Blackout is now enabled.")
+        if source == 0 then
+            print(blackout and 'Blackout is now enabled.' or 'Blackout is now disabled.')
         else
-            print("Blackout is now disabled.")
-        end
-    else
-        if isAllowedToChange(source) then
-            blackout = not blackout
-            if blackout then
-                TriggerClientEvent('fsn_timeandweather:notify', source, 'Blackout is now ~b~enabled~s~.')
-            else
-                TriggerClientEvent('fsn_timeandweather:notify', source, 'Blackout is now ~r~disabled~s~.')
-            end
+            local msg = blackout and 'Blackout is now ~b~enabled~s~.' or 'Blackout is now ~r~disabled~s~.'
+            TriggerClientEvent('fsn_timeandweather:notify', source, msg)
             TriggerEvent('fsn_timeandweather:requestSync')
         end
     end
 end)
 
 RegisterCommand('morning', function(source)
-    if source == 0 then
-        print("For console, use the \"/time <hh> <mm>\" command instead!")
-        return
-    end
-    if isAllowedToChange(source) then
-        ShiftToMinute(0)
-        ShiftToHour(9)
-        TriggerClientEvent('fsn_timeandweather:notify', source, 'Time set to ~y~morning~s~.')
-        TriggerEvent('fsn_timeandweather:requestSync')
-    end
+    if source == 0 then return print('For console, use the "/time <hh> <mm>" command instead!') end
+    if isAllowedToChange(source) then setTimeCommand(source, 9, 0, 'morning') end
 end)
+
 RegisterCommand('noon', function(source)
-    if source == 0 then
-        print("For console, use the \"/time <hh> <mm>\" command instead!")
-        return
-    end
-    if isAllowedToChange(source) then
-        ShiftToMinute(0)
-        ShiftToHour(12)
-        TriggerClientEvent('fsn_timeandweather:notify', source, 'Time set to ~y~noon~s~.')
-        TriggerEvent('fsn_timeandweather:requestSync')
-    end
+    if source == 0 then return print('For console, use the "/time <hh> <mm>" command instead!') end
+    if isAllowedToChange(source) then setTimeCommand(source, 12, 0, 'noon') end
 end)
+
 RegisterCommand('evening', function(source)
-    if source == 0 then
-        print("For console, use the \"/time <hh> <mm>\" command instead!")
-        return
-    end
-    if isAllowedToChange(source) then
-        ShiftToMinute(0)
-        ShiftToHour(18)
-        TriggerClientEvent('fsn_timeandweather:notify', source, 'Time set to ~y~evening~s~.')
-        TriggerEvent('fsn_timeandweather:requestSync')
-    end
+    if source == 0 then return print('For console, use the "/time <hh> <mm>" command instead!') end
+    if isAllowedToChange(source) then setTimeCommand(source, 18, 0, 'evening') end
 end)
+
 RegisterCommand('night', function(source)
-    if source == 0 then
-        print("For console, use the \"/time <hh> <mm>\" command instead!")
+    if source == 0 then return print('For console, use the "/time <hh> <mm>" command instead!') end
+    if isAllowedToChange(source) then setTimeCommand(source, 23, 0, 'night') end
+end)
+
+RegisterCommand('time', function(source, args)
+    local h, m = tonumber(args[1]), tonumber(args[2])
+    if not h or not m then
+        local msg = 'Invalid syntax, correct syntax is: time <hour> <minute> !'
+        if source == 0 then
+            print(msg)
+        else
+            TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^8Error: ^1Invalid syntax. Use ^0/time <hour> <minute> ^1instead!')
+        end
         return
     end
-    if isAllowedToChange(source) then
-        ShiftToMinute(0)
-        ShiftToHour(23)
-        TriggerClientEvent('fsn_timeandweather:notify', source, 'Time set to ~y~night~s~.')
+    if source == 0 or isAllowedToChange(source) then
+        if h >= 24 then h = 0 end
+        if m >= 60 then m = 0 end
+        ShiftToHour(h)
+        ShiftToMinute(m)
+        if source == 0 then
+            print(('Time has changed to %02d:%02d.'):format(h, m))
+        else
+            local newtime = string.format('%02d:%02d', math.floor(((baseTime + timeOffset) / 60) % 24), math.floor((baseTime + timeOffset) % 60))
+            TriggerClientEvent('fsn_timeandweather:notify', source, 'Time was changed to: ~y~' .. newtime .. '~s~!')
+        end
         TriggerEvent('fsn_timeandweather:requestSync')
+    else
+        TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^8Error: ^1You do not have access to that command.')
+        print('Access for command /time denied.')
     end
 end)
 
-function ShiftToMinute(minute)
-    timeOffset = timeOffset - ( ( (baseTime+timeOffset) % 60 ) - minute )
-end
-
-function ShiftToHour(hour)
-    timeOffset = timeOffset - ( ( ((baseTime+timeOffset)/60) % 24 ) - hour ) * 60
-end
-
-RegisterCommand('time', function(source, args, rawCommand)
-    if source == 0 then
-        if tonumber(args[1]) ~= nil and tonumber(args[2]) ~= nil then
-            local argh = tonumber(args[1])
-            local argm = tonumber(args[2])
-            if argh < 24 then
-                ShiftToHour(argh)
-            else
-                ShiftToHour(0)
-            end
-            if argm < 60 then
-                ShiftToMinute(argm)
-            else
-                ShiftToMinute(0)
-            end
-            print("Time has changed to " .. argh .. ":" .. argm .. ".")
-            TriggerEvent('fsn_timeandweather:requestSync')
-        else
-            print("Invalid syntax, correct syntax is: time <hour> <minute> !")
-        end
-    elseif source ~= 0 then
-        if isAllowedToChange(source) then
-            if tonumber(args[1]) ~= nil and tonumber(args[2]) ~= nil then
-                local argh = tonumber(args[1])
-                local argm = tonumber(args[2])
-                if argh < 24 then
-                    ShiftToHour(argh)
-                else
-                    ShiftToHour(0)
-                end
-                if argm < 60 then
-                    ShiftToMinute(argm)
-                else
-                    ShiftToMinute(0)
-                end
-                local newtime = math.floor(((baseTime+timeOffset)/60)%24) .. ":"
-				local minute = math.floor((baseTime+timeOffset)%60)
-                if minute < 10 then
-                    newtime = newtime .. "0" .. minute
-                else
-                    newtime = newtime .. minute
-                end
-                TriggerClientEvent('fsn_timeandweather:notify', source, 'Time was changed to: ~y~' .. newtime .. "~s~!")
-                TriggerEvent('fsn_timeandweather:requestSync')
-            else
-                TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^8Error: ^1Invalid syntax. Use ^0/time <hour> <minute> ^1instead!')
-            end
-        else
-            TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^8Error: ^1You do not have access to that command.')
-            print('Access for command /time denied.')
-        end
-    end
-end)
-
-Citizen.CreateThread(function()
+-- Time and weather update loops
+CreateThread(function()
     while true do
-        Citizen.Wait(0)
-        local newBaseTime = os.time(os.date("!*t"))/2 + 360
+        Wait(1000)
+        local newBaseTime = os.time(os.date('!*t')) / 2 + 360
         if freezeTime then
             timeOffset = timeOffset + baseTime - newBaseTime
         end
@@ -282,25 +255,25 @@ Citizen.CreateThread(function()
     end
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
-        Citizen.Wait(5000)
+        Wait(5000)
         TriggerClientEvent('fsn_timeandweather:updateTime', -1, baseTime, timeOffset, freezeTime)
     end
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
-        Citizen.Wait(300000)
+        Wait(300000)
         TriggerClientEvent('fsn_timeandweather:updateWeather', -1, CurrentWeather, blackout)
     end
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
+        Wait(60000)
         newWeatherTimer = newWeatherTimer - 1
-        Citizen.Wait(60000)
-        if newWeatherTimer == 0 then
+        if newWeatherTimer <= 0 then
             if DynamicWeather then
                 NextWeatherStage()
             end
@@ -309,11 +282,3 @@ Citizen.CreateThread(function()
     end
 end)
 
-function NextWeatherStage()
-    CurrentWeather = 'EXTRASUNNY'
-    TriggerEvent("fsn_timeandweather:requestSync")
-    if debugprint then
-        print(":fsn_timeandweather: New random weather type has been generated: " .. CurrentWeather .. ".\n")
-        print(":fsn_timeandweather: Resetting timer to 10 minutes.\n")
-    end
-end
