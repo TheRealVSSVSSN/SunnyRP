@@ -1,104 +1,139 @@
--- stuff to administrate prio
+--[[
+    -- Type: Server Script
+    -- Name: Priority Administration
+    -- Use: Provides commands for moderating queue priority
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
 
-local prio_moderators = {}
+local moderators = {
+    'steam:11000010e0828a9',
+    'steam:11000011098d978',
+    'steam:110000106f35cce'
+}
 
-function fsn_isModerator(src)
-  local devid = {
-    'steam:11000010e0828a9', 'steam:11000011098d978', 'steam:110000106f35cce'
-  }
-  local steamid = GetPlayerIdentifiers(src)[1]
-  return table.contains(devid, steamid)
+--[[
+    -- Type: Function
+    -- Name: getSteamId
+    -- Use: Retrieves a player's steam identifier
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function getSteamId(src)
+    for _, id in ipairs(GetPlayerIdentifiers(src)) do
+        if id:sub(1,5) == 'steam' then
+            return id
+        end
+    end
+    return nil
 end
 
-function table.contains(table, element)
-  for _, value in pairs(table) do
-    if value == element then
-      return true
+--[[
+    -- Type: Function
+    -- Name: isModerator
+    -- Use: Checks if a player has moderation rights
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function isModerator(src)
+    local steamid = getSteamId(src)
+    if not steamid then return false end
+    for _, id in ipairs(moderators) do
+        if id == steamid then return true end
     end
-  end
-  return false
+    return false
 end
 
-function fsn_SplitString(inputstr, sep)
-    if sep == nil then
-        sep = "%s"
-    end
-    local t={} ; i=1
-    for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
-        t[i] = str
-        i = i + 1
-    end
-    return t
+--[[
+    -- Type: Function
+    -- Name: sendMessage
+    -- Use: Sends a chat message to a player
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function sendMessage(target, msg)
+    TriggerClientEvent('chatMessage', target, '', {255,255,255}, msg)
 end
 
-AddEventHandler('chatMessage', function(source, auth, msg)
-	local split = fsn_SplitString(msg, ' ')
-	if split[1] == '/priority' then
-		if split[2] == 'admin' then
-			if fsn_isModerator(source) then
-				if split[3] == 'check' then
-					local steamid = GetPlayerIdentifiers(tonumber(split[4]))[1]
-					local src = source
-					MySQL.Async.fetchAll('SELECT * FROM `fsn_users` WHERE `steamid` = @steamid', {['@steamid'] = steamid}, function(res)
-						for k, usr in pairs(res) do
-							if usr.priority ~= 0 then
-								TriggerClientEvent('chatMessage', src, '', {255,255,255}, '^1^*:fsn_priority:^0^r '..usr.name..' priority level: '..usr.priority)
-							else
-								TriggerClientEvent('chatMessage', src, '', {255,255,255}, '^1^*:fsn_priority:^0^r '..usr.name..' does not have priority.')
-							end
-						end
-					end)
-				end
-				if split[3] == 'set' then
-					split[5] = tonumber(split[5])
-					if split[5] > 90 then
-						TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:fsn_priority:^0^r Admin priority levels need to be set in the database!')
-					else
-						local steamid = GetPlayerIdentifiers(tonumber(split[4]))[1]
-						local src = source
-						Queue.AddPriority(steamid, split[5])
-						MySQL.Sync.execute("UPDATE `fsn_users` SET `priority` = @prio WHERE `steamid` = @steamid", {['@prio'] = split[5], ['@steamid'] = steamid})
-						TriggerClientEvent('chatMessage', split[4], '', {255,255,255}, '^1^*:fsn_priority:^0^r A moderator updated your priority. Use: /priority check')
-						TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:fsn_priority:^0^r You set '..steamid..' priority to: '..split[5])
-					end
-				end
-				if split[3] == 'remove' then
-					local steamid = GetPlayerIdentifiers(tonumber(split[4]))[1]
-					Queue.RemovePriority(steamid)
-					MySQL.Sync.execute("UPDATE `fsn_users` SET `priority` = 0 WHERE `steamid` = @steamid", {['@steamid'] = steamid})
-					TriggerClientEvent('chatMessage', split[4], '', {255,255,255}, '^1^*:fsn_priority:^0^r A moderator removed your priority')
-					TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:fsn_priority:^0^r You removed '..steamid..' priority')
-				end
-				if split[3] == 'tempset' then
-					split[5] = tonumber(split[5])
-					if split[5] > 90 then
-						TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:fsn_priority:^0^r Admin priority levels need to be set in the database!')
-					else
-						local steamid = GetPlayerIdentifiers(tonumber(split[4]))[1]
-						Queue.AddPriority(steamid, split[5])
-						TriggerClientEvent('chatMessage', split[4], '', {255,255,255}, '^1^*:fsn_priority:^0^r A moderator temporarily set your priority to: '..split[5])
-						TriggerClientEvent('chatMessage', split[4], '', {255,255,255}, '^1^*:fsn_priority:^0^r This is in place until the next server restart')
-						TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:fsn_priority:^0^r You set temporarily '..steamid..' priority to: '..split[5])
-						TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:fsn_priority:^0^r This is in place until the next server restart')
-					end
-				end
-			else
-				TriggerClientEvent('chatMessage', src, '', {255,255,255}, '^1^*:fsn_priority:^0^r You do not have permission to modify priority.')
-			end
-		end
-		if split[2] == 'check' then
-			local steamid = GetPlayerIdentifiers(source)[1]
-			local src = source
-			local prio = 0
-			MySQL.Async.fetchAll('SELECT * FROM `fsn_users` WHERE `steamid` = @steamid', {['@steamid'] = steamid}, function(res)
-				for k, usr in pairs(res) do
-					if usr.priority ~= 0 then
-						TriggerClientEvent('chatMessage', src, '', {255,255,255}, '^1^*:fsn_priority:^0^r Your current priority level is: '..usr.priority)
-					else
-						TriggerClientEvent('chatMessage', src, '', {255,255,255}, '^1^*:fsn_priority:^0^r You do not have priority.')
-					end
-				end
-			end)
-		end 
-	end
-end)
+--[[
+    -- Type: Command
+    -- Name: priority
+    -- Use: Handles priority administration and checking
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+RegisterCommand('priority', function(source, args)
+    if args[1] == 'admin' then
+        if not isModerator(source) then
+            sendMessage(source, '^1^*:fsn_priority:^0^r You do not have permission to modify priority.')
+            return
+        end
+
+        local action = args[2]
+        local targetId = tonumber(args[3])
+        if not targetId then
+            sendMessage(source, '^1^*:fsn_priority:^0^r Invalid target.')
+            return
+        end
+
+        local steamid = getSteamId(targetId)
+        if not steamid then
+            sendMessage(source, '^1^*:fsn_priority:^0^r Steam ID not found for target.')
+            return
+        end
+
+        if action == 'check' then
+            MySQL.Async.fetchAll('SELECT priority, name FROM fsn_users WHERE steamid = @steamid', {['@steamid']=steamid}, function(res)
+                local usr = res[1]
+                if usr and usr.priority ~= 0 then
+                    sendMessage(source, '^1^*:fsn_priority:^0^r '..usr.name..' priority level: '..usr.priority)
+                else
+                    sendMessage(source, '^1^*:fsn_priority:^0^r '..(usr and usr.name or steamid)..' does not have priority.')
+                end
+            end)
+        elseif action == 'set' then
+            local level = tonumber(args[4])
+            if not level or level > 90 then
+                sendMessage(source, '^1^*:fsn_priority:^0^r Admin priority levels need to be set in the database!')
+                return
+            end
+            Queue.AddPriority(steamid, level)
+            MySQL.Async.execute('UPDATE fsn_users SET priority = @prio WHERE steamid = @steamid', {['@prio']=level, ['@steamid']=steamid}, function()
+                sendMessage(targetId, '^1^*:fsn_priority:^0^r A moderator updated your priority. Use: /priority check')
+                sendMessage(source, '^1^*:fsn_priority:^0^r You set '..steamid..' priority to: '..level)
+            end)
+        elseif action == 'remove' then
+            Queue.RemovePriority(steamid)
+            MySQL.Async.execute('UPDATE fsn_users SET priority = 0 WHERE steamid = @steamid', {['@steamid']=steamid}, function()
+                sendMessage(targetId, '^1^*:fsn_priority:^0^r A moderator removed your priority')
+                sendMessage(source, '^1^*:fsn_priority:^0^r You removed '..steamid..' priority')
+            end)
+        elseif action == 'tempset' then
+            local level = tonumber(args[4])
+            if not level or level > 90 then
+                sendMessage(source, '^1^*:fsn_priority:^0^r Admin priority levels need to be set in the database!')
+                return
+            end
+            Queue.AddPriority(steamid, level)
+            sendMessage(targetId, '^1^*:fsn_priority:^0^r A moderator temporarily set your priority to: '..level)
+            sendMessage(targetId, '^1^*:fsn_priority:^0^r This is in place until the next server restart')
+            sendMessage(source, '^1^*:fsn_priority:^0^r You temporarily set '..steamid..' priority to: '..level)
+            sendMessage(source, '^1^*:fsn_priority:^0^r This is in place until the next server restart')
+        end
+    elseif args[1] == 'check' then
+        local steamid = getSteamId(source)
+        if not steamid then
+            sendMessage(source, '^1^*:fsn_priority:^0^r Steam ID not found.')
+            return
+        end
+        MySQL.Async.fetchAll('SELECT priority FROM fsn_users WHERE steamid = @steamid', {['@steamid']=steamid}, function(res)
+            local usr = res[1]
+            if usr and usr.priority ~= 0 then
+                sendMessage(source, '^1^*:fsn_priority:^0^r Your current priority level is: '..usr.priority)
+            else
+                sendMessage(source, '^1^*:fsn_priority:^0^r You do not have priority.')
+            end
+        end)
+    end
+end, false)
+
