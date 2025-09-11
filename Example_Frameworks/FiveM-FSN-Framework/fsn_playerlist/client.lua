@@ -1,120 +1,128 @@
-local ignorePlayerNameDistance = false
-local disPlayerNames = 15
+local displayDistance = 15.0
+local displayKey = 20
 
-current_characters = {}
-RegisterNetEvent('fsn_main:updateCharacters')
-AddEventHandler('fsn_main:updateCharacters', function(tbl)
-  current_characters = tbl
-end)
-
-function fsn_drawPlayerId(x,y,z, text, talking) -- some useful function, use it if you want!
-    local onScreen,_x,_y=World3dToScreen2d(x,y,z)
-    local px,py,pz=table.unpack(GetGameplayCamCoords())
-    local dist = GetDistanceBetweenCoords(px,py,pz, x,y,z, 1)
-
-    local scale = (1/dist)*2
-    local fov = (1/GetGameplayCamFov())*100
-    local scale = scale*fov
-
-    if onScreen then
-        SetTextScale(0.0*scale, 0.55*scale)
-        SetTextFont(0)
-        SetTextProportional(1)
-        -- SetTextScale(0.0, 0.55)
-        if talking then
-          SetTextColour(0, 0, 255, 255)
-        end
-        SetTextDropshadow(0, 0, 0, 0, 255)
-        SetTextEdge(2, 0, 0, 0, 150)
-        SetTextDropShadow()
-        SetTextOutline()
-        SetTextEntry("STRING")
-        SetTextCentre(1)
-        AddTextComponentString(text)
-        DrawText(_x,_y)
-    end
-end
-
+local currentCharacters = {}
 local isPlayerMenuActive = false
-current_characters = {}
-RegisterNetEvent('fsn_main:updateCharacters')
-AddEventHandler('fsn_main:updateCharacters', function(tbl)
-  current_characters = tbl
+
+--[[
+    -- Type: Event Handler
+    -- Name: fsn_main:updateCharacters
+    -- Use: Updates the local cache of active character data
+    -- Created: 2024-05-06
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent('fsn_main:updateCharacters', function(tbl)
+    currentCharacters = tbl or {}
 end)
 
-function fsn_displayPlayerMenu()
-  local players = {}
-  for _, i in ipairs(GetActivePlayers()) do --for i=0,49 do
-    if NetworkIsPlayerActive(i) then
-      local idee = 0
-      for k, v in pairs(current_characters) do
-        if GetPlayerServerId(i) == v.ply_id then
-          idee = k
-        end
-      end
-      if GetPlayerPed(i) then
-        local character = current_characters[idee]
-        if character then
-          table.insert(players, #players+1, {
-            ply_id = character.ply_id,
-            ply_name = character.ply_name,
-            char_name = character.char_fname..' '..character.char_lname
-          })
-        end
-      end
+--[[
+    -- Type: Function
+    -- Name: drawPlayerId
+    -- Use: Renders a player server ID above their head
+    -- Created: 2024-05-06
+    -- By: VSSVSSN
+--]]
+local function drawPlayerId(coords, text, talking)
+    local onScreen, sx, sy = World3dToScreen2d(coords.x, coords.y, coords.z)
+    if not onScreen then return end
+
+    local camCoords = GetGameplayCamCoords()
+    local dist = #(camCoords - coords)
+    local scale = (1 / dist) * 2 * (1 / GetGameplayCamFov()) * 100
+
+    SetTextScale(0.0 * scale, 0.55 * scale)
+    SetTextFont(0)
+    SetTextProportional(1)
+    if talking then
+        SetTextColour(0, 0, 255, 255)
+    else
+        SetTextColour(255, 255, 255, 255)
     end
-  end
-  --[[
-  players = json.encode(players)
-  SendNUIMessage({
-    enable = true,
-    players = players
-  })
-  ]]
-TriggerEvent('chatMessage', '', {255,255,255}, '^1^*NOTICE |^0^r Use "/playerinfo ID" for reporting.')
-  --if #players < 2 then
-  --  TriggerEvent('chatMessage', '', {255,255,255}, '^8You are alone in the server. You may be instanced. View ^6http://servers.fivem.net/^8 to see if there are other online players.')
-  --end
-  isPlayerMenuActive = true
+    SetTextDropshadow(0, 0, 0, 0, 255)
+    SetTextEdge(2, 0, 0, 0, 150)
+    SetTextDropShadow()
+    SetTextOutline()
+    SetTextEntry('STRING')
+    SetTextCentre(true)
+    AddTextComponentString(text)
+    DrawText(sx, sy)
 end
 
-local function fsn_hidePlayerMenu()
-  if isPlayerMenuActive then
-    --[[
+--[[
+    -- Type: Function
+    -- Name: displayPlayerMenu
+    -- Use: Sends player data to the NUI scoreboard
+    -- Created: 2024-05-06
+    -- By: VSSVSSN
+--]]
+local function displayPlayerMenu()
+    local players = {}
+    for _, playerId in ipairs(GetActivePlayers()) do
+        if NetworkIsPlayerActive(playerId) then
+            local serverId = GetPlayerServerId(playerId)
+            for _, character in pairs(currentCharacters) do
+                if character.ply_id == serverId then
+                    players[#players + 1] = {
+                        ply_id = character.ply_id,
+                        ply_name = character.ply_name,
+                        char_name = string.format('%s %s', character.char_fname, character.char_lname)
+                    }
+                    break
+                end
+            end
+        end
+    end
+
     SendNUIMessage({
-      enable = false
+        type = 'show',
+        players = players
     })
-    ]]
-    isPlayerMenuActive = false
-  end
+    isPlayerMenuActive = true
 end
 
-Citizen.CreateThread(function()
-  while true do
-    for i=0,99 do
-      N_0x31698aa80e0223f8(i)
-    end
-    for _, id in ipairs(GetActivePlayers()) do --for id = 0, 31 do
-      if NetworkIsPlayerActive(id) then
-        ped = GetPlayerPed(id)
-        x1, y1, z1 = table.unpack( GetEntityCoords( GetPlayerPed( -1 ), true ) )
-        x2, y2, z2 = table.unpack( GetEntityCoords( GetPlayerPed( id ), true ) )
-        distance = math.floor(GetDistanceBetweenCoords(x1,  y1,  z1,  x2,  y2,  z2,  true))
-        if ((distance < disPlayerNames)) and IsControlPressed(0,20) then
-          if NetworkIsPlayerTalking(id) then
-            fsn_drawPlayerId(x2, y2, z2+1, tostring(GetPlayerServerId(id)), true)
-          else
-            fsn_drawPlayerId(x2, y2, z2+1, tostring(GetPlayerServerId(id)), false)
-          end
+--[[
+    -- Type: Function
+    -- Name: hidePlayerMenu
+    -- Use: Hides the scoreboard NUI
+    -- Created: 2024-05-06
+    -- By: VSSVSSN
+--]]
+local function hidePlayerMenu()
+    SendNUIMessage({ type = 'hide' })
+    isPlayerMenuActive = false
+end
+
+--[[
+    -- Type: Thread
+    -- Name: scoreboardLoop
+    -- Use: Handles scoreboard toggling and player ID rendering
+    -- Created: 2024-05-06
+    -- By: VSSVSSN
+--]]
+CreateThread(function()
+    while true do
+        Wait(0)
+        local keyHeld = IsControlPressed(0, displayKey)
+        local myCoords = GetEntityCoords(PlayerPedId())
+
+        if keyHeld then
+            if not isPlayerMenuActive then
+                displayPlayerMenu()
+                TriggerEvent('chatMessage', '', {255, 255, 255}, '^1^*NOTICE |^0^r Use "/playerinfo ID" for reporting.')
+            end
+
+            for _, playerId in ipairs(GetActivePlayers()) do
+                if NetworkIsPlayerActive(playerId) then
+                    local ped = GetPlayerPed(playerId)
+                    local coords = GetEntityCoords(ped)
+                    local dist = #(myCoords - coords)
+                    if dist < displayDistance then
+                        drawPlayerId(coords + vec(0.0, 0.0, 1.0), tostring(GetPlayerServerId(playerId)), NetworkIsPlayerTalking(playerId))
+                    end
+                end
+            end
+        elseif isPlayerMenuActive then
+            hidePlayerMenu()
         end
-      end
     end
-    Citizen.Wait(0)
-    if IsControlJustPressed(0,20) then
-      TriggerEvent('chatMessage', '', {255,255,255}, '^1^*NOTICE |^0^r Use "/playerinfo ID" for reporting.')
-    --  fsn_displayPlayerMenu()
-    --else
-    --  fsn_hidePlayerMenu()
-    end
-  end
 end)
