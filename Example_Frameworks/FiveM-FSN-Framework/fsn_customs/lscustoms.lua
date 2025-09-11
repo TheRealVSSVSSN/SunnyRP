@@ -1,16 +1,34 @@
-function moneycheck(amt)
-	if amt == nil then
-		 TriggerEvent('fsn_notify:displayNotification', '<b>SHIT</b> Something went wrong lol.', 'centerLeft', 3000, 'error')
-		return false
-	end
-	local result = false
+--[[
+    -- Type: Function
+    -- Name: canAfford
+    -- Use: Checks if the player has enough cash for a purchase
+    -- Created: 2024-03-15
+    -- By: VSSVSSN
+--]]
+local function canAfford(amount)
+    if not amount then
+        TriggerEvent('fsn_notify:displayNotification', 'Invalid purchase amount.', 'centerLeft', 3000, 'error')
+        return false
+    end
 
-	 if tonumber(exports.fsn_main:fsn_GetWallet()) >= tonumber(amt) then
-	 	return true
-	 else
-	  	TriggerEvent('fsn_notify:displayNotification', 'You cannot afford this!', 'centerLeft', 3000, 'error')
-	 end
-	return false
+    local wallet = tonumber(exports.fsn_main:fsn_GetWallet()) or 0
+    if wallet >= tonumber(amount) then
+        return true
+    end
+
+    TriggerEvent('fsn_notify:displayNotification', 'You cannot afford this!', 'centerLeft', 3000, 'error')
+    return false
+end
+
+--[[
+    -- Type: Function
+    -- Name: stringStarts
+    -- Use: Checks if a string begins with a given substring
+    -- Created: 2024-03-15
+    -- By: VSSVSSN
+--]]
+local function stringStarts(str, start)
+    return string.sub(str, 1, string.len(start)) == start
 end
 
 local lsc = {
@@ -141,8 +159,8 @@ local lsc = {
 			buttons = {
 				{name = "Black",costs =1500, colorindex = 0, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Carbon Black",costs =1500, colorindex = 147, description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Hraphite",costs =1500, colorindex = 1, description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Anhracite Black",costs =1500, colorindex = 11, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Graphite",costs =1500, colorindex = 1, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Anthracite Black",costs =1500, colorindex = 11, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Black Steel",costs =1500, colorindex = 2, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Dark Steel",costs =1500, colorindex = 3, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Silver",costs =1500, colorindex = 4, description = "", centre = 0, font = 0, scale = 0.4},
@@ -164,7 +182,7 @@ local lsc = {
 				{name = "Wine Red",costs =1500, colorindex = 143, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Candy Red",costs =1500, colorindex = 35, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Hot Pink",costs =1500, colorindex = 135, description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Pfsiter Pink",costs =1500, colorindex = 137, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Pfister Pink",costs =1500, colorindex = 137, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Salmon Pink",costs =1500, colorindex = 136, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Sunrise Orange",costs =1500, colorindex = 36, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Orange",costs =1500, colorindex = 38, description = "", centre = 0, font = 0, scale = 0.4},
@@ -196,7 +214,7 @@ local lsc = {
 				{name = "Light Blue",costs =1500, colorindex = 74, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Chocolate Brown",costs =1500, colorindex = 96, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Bison Brown",costs =1500, colorindex = 101, description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Creeen Brown",costs =1500, colorindex = 95, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Green Brown",costs =1500, colorindex = 95, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Feltzer Brown",costs =1500, colorindex = 94, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Maple Brown",costs =1500, colorindex = 97, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Beechwood Brown",costs =1500, colorindex = 103, description = "", centre = 0, font = 0, scale = 0.4},
@@ -222,8 +240,8 @@ local lsc = {
 			buttons = {
 				{name = "Black",costs =1500, colorindex = 0, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Carbon Black",costs =1500, colorindex = 147, description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Hraphite",costs =1500, colorindex = 1, description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Anhracite Black",costs =1500, colorindex = 11, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Graphite",costs =1500, colorindex = 1, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Anthracite Black",costs =1500, colorindex = 11, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Black Steel",costs =1500, colorindex = 2, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Dark Steel",costs =1500, colorindex = 3, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Silver",costs =1500, colorindex = 4, description = "", centre = 0, font = 0, scale = 0.4},
@@ -245,7 +263,7 @@ local lsc = {
 				{name = "Wine Red",costs =1500, colorindex = 143, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Candy Red",costs =1500, colorindex = 35, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Hot Pink",costs =1500, colorindex = 135, description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Pfsiter Pink",costs =1500, colorindex = 137, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Pfister Pink",costs =1500, colorindex = 137, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Salmon Pink",costs =1500, colorindex = 136, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Sunrise Orange",costs =1500, colorindex = 36, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Orange",costs =1500, colorindex = 38, description = "", centre = 0, font = 0, scale = 0.4},
@@ -277,7 +295,7 @@ local lsc = {
 				{name = "Light Blue",costs =1500, colorindex = 74, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Chocolate Brown",costs =1500, colorindex = 96, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Bison Brown",costs =1500, colorindex = 101, description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Creeen Brown",costs =1500, colorindex = 95, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Green Brown",costs =1500, colorindex = 95, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Feltzer Brown",costs =1500, colorindex = 94, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Maple Brown",costs =1500, colorindex = 97, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Beechwood Brown",costs =1500, colorindex = 103, description = "", centre = 0, font = 0, scale = 0.4},
@@ -303,8 +321,8 @@ local lsc = {
 			buttons = {
 				{name = "Black",costs =1500, colorindex = 0, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Carbon Black",costs =1500, colorindex = 147, description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Hraphite",costs =1500, colorindex = 1, description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Anhracite Black",costs =1500, colorindex = 11, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Graphite",costs =1500, colorindex = 1, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Anthracite Black",costs =1500, colorindex = 11, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Black Steel",costs =1500, colorindex = 2, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Dark Steel",costs =1500, colorindex = 3, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Silver",costs =1500, colorindex = 4, description = "", centre = 0, font = 0, scale = 0.4},
@@ -326,7 +344,7 @@ local lsc = {
 				{name = "Wine Red",costs =1500, colorindex = 143, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Candy Red",costs =1500, colorindex = 35, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Hot Pink",costs =1500, colorindex = 135, description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Pfsiter Pink",costs =1500, colorindex = 137, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Pfister Pink",costs =1500, colorindex = 137, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Salmon Pink",costs =1500, colorindex = 136, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Sunrise Orange",costs =1500, colorindex = 36, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Orange",costs =1500, colorindex = 38, description = "", centre = 0, font = 0, scale = 0.4},
@@ -358,7 +376,7 @@ local lsc = {
 				{name = "Light Blue",costs =1500, colorindex = 74, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Chocolate Brown",costs =1500, colorindex = 96, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Bison Brown",costs =1500, colorindex = 101, description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Creeen Brown",costs =1500, colorindex = 95, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Green Brown",costs =1500, colorindex = 95, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Feltzer Brown",costs =1500, colorindex = 94, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Maple Brown",costs =1500, colorindex = 97, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Beechwood Brown",costs =1500, colorindex = 103, description = "", centre = 0, font = 0, scale = 0.4},
@@ -496,8 +514,8 @@ local lsc = {
 			buttons = {
 				{name = "Black",costs =1500, colorindex = 0, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Carbon Black",costs =1500, colorindex = 147, description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Hraphite",costs =1500, colorindex = 1, description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Anhracite Black",costs =1500, colorindex = 11, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Graphite",costs =1500, colorindex = 1, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Anthracite Black",costs =1500, colorindex = 11, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Black Steel",costs =1500, colorindex = 2, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Dark Steel",costs =1500, colorindex = 3, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Silver",costs =1500, colorindex = 4, description = "", centre = 0, font = 0, scale = 0.4},
@@ -519,7 +537,7 @@ local lsc = {
 				{name = "Wine Red",costs =1500, colorindex = 143, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Candy Red",costs =1500, colorindex = 35, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Hot Pink",costs =1500, colorindex = 135, description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Pfsiter Pink",costs =1500, colorindex = 137, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Pfister Pink",costs =1500, colorindex = 137, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Salmon Pink",costs =1500, colorindex = 136, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Sunrise Orange",costs =1500, colorindex = 36, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Orange",costs =1500, colorindex = 38, description = "", centre = 0, font = 0, scale = 0.4},
@@ -551,7 +569,7 @@ local lsc = {
 				{name = "Light Blue",costs =1500, colorindex = 74, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Chocolate Brown",costs =1500, colorindex = 96, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Bison Brown",costs =1500, colorindex = 101, description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Creeen Brown",costs =1500, colorindex = 95, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Green Brown",costs =1500, colorindex = 95, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Feltzer Brown",costs =1500, colorindex = 94, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Maple Brown",costs =1500, colorindex = 97, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Beechwood Brown",costs =1500, colorindex = 103, description = "", centre = 0, font = 0, scale = 0.4},
@@ -663,8 +681,8 @@ local lsc = {
 			buttons = {
 				{name = "Black",costs =1500, colorindex = 0, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Carbon Black",costs =1500, colorindex = 147, description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Hraphite",costs =1500, colorindex = 1, description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Anhracite Black",costs =1500, colorindex = 11, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Graphite",costs =1500, colorindex = 1, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Anthracite Black",costs =1500, colorindex = 11, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Black Steel",costs =1500, colorindex = 2, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Dark Steel",costs =1500, colorindex = 3, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Silver",costs =1500, colorindex = 4, description = "", centre = 0, font = 0, scale = 0.4},
@@ -686,7 +704,7 @@ local lsc = {
 				{name = "Wine Red",costs =1500, colorindex = 143, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Candy Red",costs =1500, colorindex = 35, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Hot Pink",costs =1500, colorindex = 135, description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Pfsiter Pink",costs =1500, colorindex = 137, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Pfister Pink",costs =1500, colorindex = 137, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Salmon Pink",costs =1500, colorindex = 136, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Sunrise Orange",costs =1500, colorindex = 36, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Orange",costs =1500, colorindex = 38, description = "", centre = 0, font = 0, scale = 0.4},
@@ -718,7 +736,7 @@ local lsc = {
 				{name = "Light Blue",costs =1500, colorindex = 74, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Chocolate Brown",costs =1500, colorindex = 96, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Bison Brown",costs =1500, colorindex = 101, description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Creeen Brown",costs =1500, colorindex = 95, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Green Brown",costs =1500, colorindex = 95, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Feltzer Brown",costs =1500, colorindex = 94, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Maple Brown",costs =1500, colorindex = 97, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Beechwood Brown",costs =1500, colorindex = 103, description = "", centre = 0, font = 0, scale = 0.4},
@@ -744,8 +762,8 @@ local lsc = {
 			buttons = {
 				{name = "Black",costs =1500, colorindex = 0, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Carbon Black",costs =1500, colorindex = 147, description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Hraphite",costs =1500, colorindex = 1, description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Anhracite Black",costs =1500, colorindex = 11, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Graphite",costs =1500, colorindex = 1, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Anthracite Black",costs =1500, colorindex = 11, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Black Steel",costs =1500, colorindex = 2, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Dark Steel",costs =1500, colorindex = 3, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Silver",costs =1500, colorindex = 4, description = "", centre = 0, font = 0, scale = 0.4},
@@ -767,7 +785,7 @@ local lsc = {
 				{name = "Wine Red",costs =1500, colorindex = 143, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Candy Red",costs =1500, colorindex = 35, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Hot Pink",costs =1500, colorindex = 135, description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Pfsiter Pink",costs =1500, colorindex = 137, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Pfister Pink",costs =1500, colorindex = 137, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Salmon Pink",costs =1500, colorindex = 136, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Sunrise Orange",costs =1500, colorindex = 36, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Orange",costs =1500, colorindex = 38, description = "", centre = 0, font = 0, scale = 0.4},
@@ -799,7 +817,7 @@ local lsc = {
 				{name = "Light Blue",costs =1500, colorindex = 74, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Chocolate Brown",costs =1500, colorindex = 96, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Bison Brown",costs =1500, colorindex = 101, description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Creeen Brown",costs =1500, colorindex = 95, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Green Brown",costs =1500, colorindex = 95, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Feltzer Brown",costs =1500, colorindex = 94, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Maple Brown",costs =1500, colorindex = 97, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Beechwood Brown",costs =1500, colorindex = 103, description = "", centre = 0, font = 0, scale = 0.4},
@@ -825,8 +843,8 @@ local lsc = {
 			buttons = {
 				{name = "Black",costs = 1000, colorindex = 0, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Carbon Black",costs =1500, colorindex = 147, description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Hraphite",costs =1500, colorindex = 1, description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Anhracite Black",costs =1500, colorindex = 11, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Graphite",costs =1500, colorindex = 1, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Anthracite Black",costs =1500, colorindex = 11, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Black Steel",costs =1500, colorindex = 2, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Dark Steel",costs =1500, colorindex = 3, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Silver",costs =1500, colorindex = 4, description = "", centre = 0, font = 0, scale = 0.4},
@@ -848,7 +866,7 @@ local lsc = {
 				{name = "Wine Red",costs =1500, colorindex = 143, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Candy Red",costs =1500, colorindex = 35, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Hot Pink",costs =1500, colorindex = 135, description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Pfsiter Pink",costs =1500, colorindex = 137, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Pfister Pink",costs =1500, colorindex = 137, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Salmon Pink",costs =1500, colorindex = 136, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Sunrise Orange",costs =1500, colorindex = 36, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Orange",costs =1500, colorindex = 38, description = "", centre = 0, font = 0, scale = 0.4},
@@ -880,7 +898,7 @@ local lsc = {
 				{name = "Light Blue",costs =1500, colorindex = 74, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Chocolate Brown",costs =1500, colorindex = 96, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Bison Brown",costs =1500, colorindex = 101, description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Creeen Brown",costs =1500, colorindex = 95, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Green Brown",costs =1500, colorindex = 95, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Feltzer Brown",costs =1500, colorindex = 94, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Maple Brown",costs =1500, colorindex = 97, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Beechwood Brown",costs =1500, colorindex = 103, description = "", centre = 0, font = 0, scale = 0.4},
@@ -1741,10 +1759,9 @@ function DriveOutOfGarage()
 	savetable.plateindex = GetVehicleNumberPlateTextIndex(veh)
 	-- COLOURS
 	savetable.colours = {}
-	local primary, secondary = GetVehicleColours(veh)
-	print(primary.." "..secondary)
-	savetable.colours.primary = primary
-	savetable.colours.secondary = secondary
+        local primary, secondary = GetVehicleColours(veh)
+        savetable.colours.primary = primary
+        savetable.colours.secondary = secondary
 	savetable.colours.pearlone = 0
 	savetable.colours.pearltwo = 0
 	-- WINDOW TINT
@@ -1756,18 +1773,6 @@ function DriveOutOfGarage()
 	tiresmoke = GetVehicleTyreSmokeColor(veh)
 
 	TriggerServerEvent('fsn_cargarage:updateVehicle', exports["fsn_cargarage"]:getCarDetails(veh))
-end
-
-function fsn_SplitString(inputstr, sep)
-    if sep == nil then
-        sep = "%s"
-    end
-    local t={} ; i=1
-    for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
-        t[i] = str
-        i = i + 1
-    end
-    return t
 end
 
 
@@ -1891,9 +1896,9 @@ function tablelength(T)
 end
 local backlock = false
 local horn = ''
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
-		Citizen.Wait(0)
+		Wait(0)
 		if lsc ~= nil and lsc.inside == false then
 			local ped = PlayerPedId();
 			if IsPedSittingInAnyVehicle(ped) then
@@ -2189,7 +2194,7 @@ function ButtonSelected(button)
 	local car = GetVehiclePedIsUsing(ped)
 	if lsc.currentmenu == "repair" then
 		if button.name == "Repair vehicle" then
-			if (moneycheck(button.costs)) then
+			if (canAfford(button.costs)) then
 				DecorSetBool(car, "keepingVehicleOnFire", 0)
 				TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 				SetVehicleFixed(car)
@@ -2311,49 +2316,49 @@ function ButtonSelected(button)
 		elseif button.name == "Metallic" then
 			OpenMenu("pearlescentmetallic")
 		end
-	elseif lsc.currentmenu == "primarychrome" and moneycheck(button.costs) then
+	elseif lsc.currentmenu == "primarychrome" and canAfford(button.costs) then
 		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		vehiclecol[1] = button.colorindex
-	elseif lsc.currentmenu == "primaryclassic" and moneycheck(button.costs) then
+	elseif lsc.currentmenu == "primaryclassic" and canAfford(button.costs) then
 		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		vehiclecol[1] = button.colorindex
-	elseif lsc.currentmenu == "primarymatte" and moneycheck(button.costs) then
+	elseif lsc.currentmenu == "primarymatte" and canAfford(button.costs) then
 		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		vehiclecol[1] = button.colorindex
-	elseif lsc.currentmenu == "primarymetal" and moneycheck(button.costs) then
+	elseif lsc.currentmenu == "primarymetal" and canAfford(button.costs) then
 		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		vehiclecol[1] = button.colorindex
-	elseif lsc.currentmenu == "primarymetallic" and moneycheck(button.costs) then
+	elseif lsc.currentmenu == "primarymetallic" and canAfford(button.costs) then
 		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		vehiclecol[1] = button.colorindex
-	elseif lsc.currentmenu == "secondarychrome" and moneycheck(button.costs) then
+	elseif lsc.currentmenu == "secondarychrome" and canAfford(button.costs) then
 		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		vehiclecol[2] = button.colorindex
-	elseif lsc.currentmenu == "secondaryclassic" and moneycheck(button.costs) then
+	elseif lsc.currentmenu == "secondaryclassic" and canAfford(button.costs) then
 		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		vehiclecol[2] = button.colorindex
-	elseif lsc.currentmenu == "secondarymatte" and moneycheck(button.costs) then
+	elseif lsc.currentmenu == "secondarymatte" and canAfford(button.costs) then
 		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		vehiclecol[2] = button.colorindex
-	elseif lsc.currentmenu == "secondarymetal" and moneycheck(button.costs) then
+	elseif lsc.currentmenu == "secondarymetal" and canAfford(button.costs) then
 		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		vehiclecol[2] = button.colorindex
-	elseif lsc.currentmenu == "secondarymetallic" and moneycheck(button.costs) then
+	elseif lsc.currentmenu == "secondarymetallic" and canAfford(button.costs) then
 		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		vehiclecol[2] = button.colorindex
-	elseif lsc.currentmenu == "pearlescentchrome" and moneycheck(button.costs) then
+	elseif lsc.currentmenu == "pearlescentchrome" and canAfford(button.costs) then
 		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		extracol[1] = button.colorindex
-	elseif lsc.currentmenu == "pearlescentclassic" and moneycheck(button.costs) then
+	elseif lsc.currentmenu == "pearlescentclassic" and canAfford(button.costs) then
 		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		extracol[1] = button.colorindex
-	elseif lsc.currentmenu == "pearlescentmatte" and moneycheck(button.costs) then
+	elseif lsc.currentmenu == "pearlescentmatte" and canAfford(button.costs) then
 		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		extracol[1] = button.colorindex
-	elseif lsc.currentmenu == "pearlescentmetal" and moneycheck(button.costs) then
+	elseif lsc.currentmenu == "pearlescentmetal" and canAfford(button.costs) then
 		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		extracol[1] = button.colorindex
-	elseif lsc.currentmenu == "pearlescentmetallic" and moneycheck(button.costs) then
+	elseif lsc.currentmenu == "pearlescentmetallic" and canAfford(button.costs) then
 		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		extracol[1] = button.colorindex
 	elseif lsc.currentmenu == "bumpers" then
@@ -2386,8 +2391,8 @@ function ButtonSelected(button)
 			ToggleVehicleMod(car, 22, false)
 			mods[22].mod = -1;
 
-		elseif button.name == "Xenon Lights" and moneycheck(button.costs) then
-			if (moneycheck(button.costs)) then
+		elseif button.name == "Xenon Lights" and canAfford(button.costs) then
+			if (canAfford(button.costs)) then
 				TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 				ToggleVehicleMod(car, 22, true)
 				mods[22].mod = 1;
@@ -2397,7 +2402,7 @@ function ButtonSelected(button)
 		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		plateindex = button.plateindex
 	elseif lsc.currentmenu == "chassis" or lsc.currentmenu == "armor" or lsc.currentmenu == "brakes" or lsc.currentmenu == "frontbumper" or lsc.currentmenu == "rearbumper" or lsc.currentmenu == "engine" or lsc.currentmenu == "exhaust" or lsc.currentmenu == "hood" or lsc.currentmenu == "horn" or lsc.currentmenu == "rollcage" or lsc.currentmenu == "roof" or lsc.currentmenu == "skirts" or lsc.currentmenu == "spoiler" or lsc.currentmenu == "suspension" or lsc.currentmenu == "transmission" or lsc.currentmenu == "grille" or lsc.currentmenu == "horn" then
-		if (moneycheck(button.costs)) then
+		if (canAfford(button.costs)) then
 			TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 			mods[button.modtype].mod = button.mod
 			SetVehicleMod(car,button.modtype,button.mod)
@@ -2408,8 +2413,8 @@ function ButtonSelected(button)
 			mods[9].mod = button.mod
 			SetVehicleMod(car,9,button.mod)
 			SetVehicleMod(car,8,button.mod)
-		elseif (moneycheck(button.costs)) then
-			if (moneycheck(button.costs)) then
+		elseif (canAfford(button.costs)) then
+			if (canAfford(button.costs)) then
 				TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 				mods[button.modtype].mod = button.mod
 				SetVehicleMod(car,button.modtype,button.mod)
@@ -2420,8 +2425,8 @@ function ButtonSelected(button)
 			ToggleVehicleMod(car, button.modtype, false)
 			mods[18].mod = -1;
 
-		elseif button.name == "Turbo Tuning" and moneycheck(button.costs) then
-			if (moneycheck(button.costs)) then
+		elseif button.name == "Turbo Tuning" and canAfford(button.costs) then
+			if (canAfford(button.costs)) then
 				TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 				ToggleVehicleMod(car, button.modtype, true)
 				mods[18].mod = 1;
@@ -2452,28 +2457,28 @@ function ButtonSelected(button)
 			OpenMenu(button.name:lower())
 		end
 	elseif lsc.currentmenu == "sport" or lsc.currentmenu == "muscle" or lsc.currentmenu == "lowrider" or lsc.currentmenu == "backwheel" or lsc.currentmenu == "frontwheel" or lsc.currentmenu == "highend" or lsc.currentmenu == "suv" or lsc.currentmenu == "offroad" or lsc.currentmenu == "tuner" then
-		if (moneycheck(button.costs)) then
+		if (canAfford(button.costs)) then
 			TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 			wheeltype = button.wtype
 			mods[button.modtype].mod = button.mod
 			SetVehicleMod(car,button.modtype,button.mod)
 		end
-	elseif lsc.currentmenu == "wheelcolor" and moneycheck(button.costs) then
+	elseif lsc.currentmenu == "wheelcolor" and canAfford(button.costs) then
 		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		extracol[2] = button.colorindex
-	elseif lsc.currentmenu == "windows" and moneycheck(button.costs) then
+	elseif lsc.currentmenu == "windows" and canAfford(button.costs) then
 		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		windowtint = button.tint
 	elseif lsc.currentmenu == "wheelaccessories" then
-		if button.name == "Stock Tires" and moneycheck(button.costs) then
+		if button.name == "Stock Tires" and canAfford(button.costs) then
 			SetVehicleModKit(car,0)
 			SetVehicleMod(car,23,mods[23].mod,false)
 			if IsThisModelABike(GetEntityModel(car)) then
 				SetVehicleModKit(car,0)
 				SetVehicleMod(car,24,mods[24].mod,false)
 			end
-		elseif button.name == "Custom Tires" and moneycheck(button.costs) then
-			if (moneycheck(button.costs)) then
+		elseif button.name == "Custom Tires" and canAfford(button.costs) then
+			if (canAfford(button.costs)) then
 				TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 				SetVehicleModKit(car,0)
 				SetVehicleMod(car,23,mods[23].mod,true)
@@ -2483,7 +2488,7 @@ function ButtonSelected(button)
 				end
 			end
 		end
-    elseif lsc.currentmenu == "tiresmoke" and moneycheck(button.costs) then --and moneycheck(button.costs) then
+    elseif lsc.currentmenu == "tiresmoke" and canAfford(button.costs) then --and canAfford(button.costs) then
         TriggerEvent('fsn_bank:change:walletMinus', button.costs)
         tiresmoke[1] = button.color[1]
         tiresmoke[2] = button.color[2]
@@ -2498,7 +2503,7 @@ function ButtonSelected(button)
 			neoncolor[1] = nil
 			neoncolor[2] = nil
 			neoncolor[3] = nil
-		elseif moneycheck(button.costs) then
+		elseif canAfford(button.costs) then
 			TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 			neoncolor[1] = 255
 			neoncolor[2] = 255
@@ -2509,12 +2514,12 @@ function ButtonSelected(button)
 			SetVehicleNeonLightEnabled(car,2,true)
 			SetVehicleNeonLightEnabled(car,3,true)
 		end
-	elseif lsc.currentmenu == "neoncolor" and moneycheck(button.costs) then
+	elseif lsc.currentmenu == "neoncolor" and canAfford(button.costs) then
 		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		neoncolor[1] = button.color[1]
 		neoncolor[2] = button.color[2]
 		neoncolor[3] = button.color[3]
-	elseif lsc.currentmenu == "headlightcolor" and moneycheck(button.costs) then
+	elseif lsc.currentmenu == "headlightcolor" and canAfford(button.costs) then
 		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		headlightcolor = button.color
 	end
@@ -2524,11 +2529,11 @@ function OpenMenu(menu)
 	lsc.lastmenu = lsc.currentmenu
 	if menu == "bumpers" then
 		lsc.lastmenu = "main"
-	elseif menu ~= "secondarycolor" and stringstarts(menu, "secondary") then
+	elseif menu ~= "secondarycolor" and stringStarts(menu, "secondary") then
 		lsc.lastmenu = "secondarycolor"
-	elseif menu ~= "primarycolor" and stringstarts(menu, "primary") then
+	elseif menu ~= "primarycolor" and stringStarts(menu, "primary") then
 		lsc.lastmenu = "primarycolor"
-	elseif menu ~= "pearlescentcolor" and stringstarts(menu, "pearlescent") then
+	elseif menu ~= "pearlescentcolor" and stringStarts(menu, "pearlescent") then
 		lsc.lastmenu = "pearlescentcolor"
 	elseif menu == "primarycolor" or menu == "secondarycolor" or menu == "pearlescentcolor" then
 		lsc.lastmenu = "respray"
@@ -2648,10 +2653,14 @@ function Back()
 	end
 end
 
-function stringstarts(String,Start)
-   return string.sub(String,1,string.len(Start))==Start
-end
-function AddBlips()
+--[[
+    -- Type: Function
+    -- Name: AddBlips
+    -- Use: Adds map blips for all LSCustoms locations
+    -- Created: 2024-03-15
+    -- By: VSSVSSN
+--]]
+local function AddBlips()
 	for i,pos in ipairs(lsc.locations) do
 		local blip = AddBlipForCoord(pos.inside.x,pos.inside.y,pos.inside.z)
 		SetBlipSprite(blip, 72)
@@ -2659,10 +2668,8 @@ function AddBlips()
 	end
 end
 
-function resourceStart(resource)
-	if (resource == GetCurrentResourceName()) then
-		Citizen.Trace("lscustoms: Initialized script (1.0.0)\n");
-		AddBlips();
-	end
-end
-AddEventHandler("onClientResourceStart", resourceStart);
+AddEventHandler('onClientResourceStart', function(resource)
+    if resource ~= GetCurrentResourceName() then return end
+    print('lscustoms: Initialized script (1.0.1)')
+    AddBlips()
+end)
