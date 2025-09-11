@@ -7,6 +7,7 @@ RegisterNetEvent('fsn_ems:ad:stopBleeding')
 AddEventHandler('fsn_ems:ad:stopBleeding', function()
 	isBleeding = false
 end)
+
 local advanceBleedTimer = 0
 local blackoutTimer = 0
 
@@ -343,7 +344,7 @@ AddEventHandler('fsn_ems:set:WalkType', function(wt)
 	if currentwalktype ~= 0 then
 		RequestAnimSet(currentwalktype)
 		while not HasAnimSetLoaded(currentwalktype) do
-			Citizen.Wait(0)
+			Wait(0)
 			print('loading animset: '..currentwalktype)
 		end
 		SetPedMovementClipset(PlayerPedId(), currentwalktype, true)
@@ -356,8 +357,8 @@ local crouching = false
 function isCrouching()
 	return crouching 
 end
-Citizen.CreateThread(function()
-	while true do Citizen.Wait(0)
+CreateThread(function()
+	while true do Wait(0)
 		if IsControlJustPressed(0, 36) then
 			if crouching then
 				ResetPedMovementClipset(PlayerPedId(), 0, 0)
@@ -365,7 +366,7 @@ Citizen.CreateThread(function()
 				if not HasAnimSetLoaded( "move_ped_crouched" ) then
 					RequestAnimSet( "move_ped_crouched" )
 					while ( not HasAnimSetLoaded( "move_ped_crouched" ) ) do
-						Citizen.Wait(0)
+						Wait(0)
 						print('loading clipset: move_ped_crouched')
 					end
 				end
@@ -379,13 +380,13 @@ function ProcessRunStuff(ped)
     if IsInjuryCausingLimp() and not (onPainKiller > 0)  then
         RequestAnimSet("move_m@injured")
         while not HasAnimSetLoaded("move_m@injured") do
-            Citizen.Wait(0)
+            Wait(0)
         end
 		if crouching then
 			if not HasAnimSetLoaded( "move_ped_crouched" ) then
 				RequestAnimSet( "move_ped_crouched" )
 				while ( not HasAnimSetLoaded( "move_ped_crouched" ) ) do
-					Citizen.Wait(0)
+					Wait(0)
 					print('loading clipset: move_ped_crouched')
 				end
 			end
@@ -416,7 +417,7 @@ function ProcessRunStuff(ped)
 			if not HasAnimSetLoaded( "move_ped_crouched" ) then
 				RequestAnimSet( "move_ped_crouched" )
 				while ( not HasAnimSetLoaded( "move_ped_crouched" ) ) do
-					Citizen.Wait(0)
+					Wait(0)
 					print('loading clipset: move_ped_crouched')
 				end
 			end
@@ -426,7 +427,7 @@ function ProcessRunStuff(ped)
 				if not HasAnimSetLoaded(currentwalktype) then
 					RequestAnimSet(currentwalktype)
 					while not HasAnimSetLoaded(currentwalktype) do
-						Citizen.Wait(0)
+						Wait(0)
 						print('loading animset: '..currentwalktype)
 					end
 				end
@@ -491,7 +492,7 @@ function ProcessDamage(ped)
                         
                         DoScreenFadeOut(100)
                         while not IsScreenFadedOut() do
-                            Citizen.Wait(0)
+                            Wait(0)
                         end
 
                         if not IsPedRagdoll(ped) and IsPedOnFoot(ped) and not IsPedSwimming(ped) then
@@ -499,7 +500,7 @@ function ProcessDamage(ped)
                             SetPedToRagdoll(ped, 5000, 1, 2)
                         end
 
-                        Citizen.Wait(5000)
+                        Wait(5000)
                         DoScreenFadeIn(250)
                     end
                     headCount = 0
@@ -664,7 +665,7 @@ AddEventHandler('mythic_hospital:client:UseAdrenaline', function(tier)
 	TriggerEvent('fsn_evidence:ped:updateDamage', BodyParts)
 end)  
     
-Citizen.CreateThread(function()
+CreateThread(function()
     local player = PlayerPedId()
 	while true do
 		if not IsEntityDead(player) and not (#injured == 0) then
@@ -693,7 +694,7 @@ Citizen.CreateThread(function()
 						
 					DoScreenFadeOut(500)
 					while not IsScreenFadedOut() do
-						Citizen.Wait(0)
+						Wait(0)
 					end
 			
 					if not IsPedRagdoll(player) and IsPedOnFoot(player) and not IsPedSwimming(player) then
@@ -701,7 +702,7 @@ Citizen.CreateThread(function()
 						SetPedToRagdollWithFall(PlayerPedId(), 10000, 12000, 1, GetEntityForwardVector(player), 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
 					end
 			
-					Citizen.Wait(5000)
+					Wait(5000)
 					DoScreenFadeIn(500)
 					blackoutTimer = 0
 				end
@@ -740,11 +741,11 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(30000)
+		Wait(30000)
 	end
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
     local player = PlayerPedId()
     
     while true do
@@ -791,12 +792,12 @@ Citizen.CreateThread(function()
 
         playerHealth = health
         playerArmour = armour
-        Citizen.Wait(333)
+        Wait(333)
 
 		ProcessRunStuff(player)
-		Citizen.Wait(333)
+		Wait(333)
 
 		ProcessDamage(player)
-		Citizen.Wait(333)
+		Wait(333)
 	end
 end)

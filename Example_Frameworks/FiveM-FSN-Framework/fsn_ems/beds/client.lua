@@ -60,6 +60,7 @@ AddEventHandler('fsn_ems:bed:update', function(bedid, bed)
 	--print('fsn_ems:bed Bed update for ('..bedid..') ['..tostring(bed)..']')
 end)
 
+
 function fsn_drawText3D(x,y,z, text,r,g,b)
     local onScreen,_x,_y=World3dToScreen2d(x,y,z)
     local px,py,pz=table.unpack(GetGameplayCamCoords())
@@ -79,9 +80,9 @@ function fsn_drawText3D(x,y,z, text,r,g,b)
     end
 end
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
-		Citizen.Wait(10000)
+		Wait(10000)
 		if inbed then
 			local newhealth =GetEntityHealth(PlayerPedId())+10 
 			if newhealth >= 200 then
@@ -98,7 +99,7 @@ Citizen.CreateThread(function()
 	end
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	local blip = AddBlipForCoord(296.18298339844,-584.42895507813,42.720436096191)
 	SetBlipSprite(blip, 80)
 	BeginTextCommandSetBlipName("STRING")
@@ -106,7 +107,7 @@ Citizen.CreateThread(function()
 	EndTextCommandSetBlipName(blip)
 	SetBlipAsShortRange(blip, true)
 	while true do
-	Citizen.Wait(0)
+	Wait(0)
 		if inbed then
 			if beds[mybed].occupied[3] then
 				fsn_drawText3D(beds[mybed].enter.x, beds[mybed].enter.y, beds[mybed].enter.z-0.3, "You are restrained to the bed.", 255, 0, 0)
@@ -115,11 +116,11 @@ Citizen.CreateThread(function()
 				if IsControlJustPressed(0, 51) then
 					TriggerServerEvent('fsn_ems:bed:occupy', mybed)
 					DoScreenFadeOut(1000)
-					Citizen.Wait(1010)
+					Wait(1010)
 					SetEntityCoords(PlayerPedId(), beds[mybed].enter.x, beds[mybed].enter.y, beds[mybed].enter.z)
 					inbed = false
 					mybed = 0
-					Citizen.Wait(1500)
+					Wait(1500)
 					DoScreenFadeIn(2000)
 				end
 			end
@@ -143,13 +144,13 @@ Citizen.CreateThread(function()
 									TriggerEvent('fsn_ems:reviveMe')
 								end
 								DoScreenFadeOut(1000)
-								Citizen.Wait(1010)
+								Wait(1010)
 								SetEntityCoords(PlayerPedId(), v.bed.x, v.bed.y, v.bed.z)
 								SetEntityHeading(PlayerPedId(), v.bed.h)
 								ExecuteCommand("e sleep")
 								inbed = true
 								mybed = k
-								Citizen.Wait(1500)
+								Wait(1500)
 								DoScreenFadeIn(2000)
 							end
 						end
@@ -176,7 +177,7 @@ Citizen.CreateThread(function()
 								if IsControlJustPressed(0, 51) then
 									while not HasAnimDictLoaded('mp_arresting') do
 										RequestAnimDict('mp_arresting')
-										Citizen.Wait(5)
+										Wait(5)
 									end
 									TaskPlayAnim(PlayerPedId(), 'mp_arresting', 'a_arrest_on_floor', 8.0, 1.0, -1, 16, 0, 0, 0, 0)
 									TriggerServerEvent('fsn_ems:bed:restraintoggle', k)
@@ -186,7 +187,7 @@ Citizen.CreateThread(function()
 								if IsControlJustPressed(0, 51) then
 									while not HasAnimDictLoaded('mp_arresting') do
 										RequestAnimDict('mp_arresting')
-										Citizen.Wait(5)
+										Wait(5)
 									end
 									TaskPlayAnim(PlayerPedId(), 'mp_arresting', 'a_arrest_on_floor', 8.0, 1.0, -1, 16, 0, 0, 0, 0)
 									TriggerServerEvent('fsn_ems:bed:restraintoggle', k)
@@ -208,13 +209,13 @@ Citizen.CreateThread(function()
 								TriggerEvent('fsn_ems:reviveMe')
 							end
 							DoScreenFadeOut(1000)
-							Citizen.Wait(1010)
+							Wait(1010)
 							SetEntityCoords(PlayerPedId(), v.bed.x, v.bed.y, v.bed.z)
 							SetEntityHeading(PlayerPedId(), v.bed.h)
 							ExecuteCommand("e sleep")
 							inbed = true
 							mybed = k
-							Citizen.Wait(1500)
+							Wait(1500)
 							DoScreenFadeIn(2000)
 						end
 					end

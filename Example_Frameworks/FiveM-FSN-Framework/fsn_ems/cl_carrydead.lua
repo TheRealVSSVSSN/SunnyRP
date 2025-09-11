@@ -13,7 +13,7 @@ carried_id = false
 function loadAnim( dict )
     while ( not HasAnimDictLoaded( dict ) ) do
         RequestAnimDict( dict )
-        Citizen.Wait( 5 )
+        Wait( 5 )
     end
 end
 
@@ -49,8 +49,8 @@ AddEventHandler('fsn_ems:carry:end', function(carryingid)
 	SetPedCanRagdoll(PlayerPedId(), true)
 end)
 
-Citizen.CreateThread(function()
-	while true do Citizen.Wait(0)
+CreateThread(function()
+	while true do Wait(0)
 		if carried then 
 			local ped = GetPlayerPed(GetPlayerFromServerId(carried_id))
 			loadAnim( "amb@world_human_bum_slumped@male@laying_on_left_side@base" ) 
@@ -67,10 +67,10 @@ Citizen.CreateThread(function()
 	end
 end)
 
-DecorRegister("fsn_ems:dead")
+DecorRegister("fsn_ems:dead", 2)
 DecorSetBool(PlayerPedId(), "fsn_ems:dead", false)
-Citizen.CreateThread(function()
-	while true do Citizen.Wait(0)
+CreateThread(function()
+	while true do Wait(0)
 		if fsn_IsDead() then
 			DecorSetBool(PlayerPedId(), "fsn_ems:dead", true)
 		else
@@ -117,3 +117,4 @@ end)
 
 -- other shit
 DetachEntity(PlayerPedId())
+

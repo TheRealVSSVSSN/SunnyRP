@@ -21,9 +21,9 @@ function drawTxt(text,font,centre,x,y,scale,r,g,b,a)
   DrawText(x , y)
 end
 
-Citizen.CreateThread(function()
+CreateThread(function()
   while true do
-    Citizen.Wait(0)
+    Wait(0)
     if IsEntityDead(PlayerPedId()) then
       SetEntityHealth(PlayerPedId(), 150)
       TriggerEvent('fsn_ems:killMe')
@@ -31,7 +31,7 @@ Citizen.CreateThread(function()
   end
 end)
 
-currenttime = 0
+local currenttime = 0
 local deathtime = currenttime
 local amidead = false
 local canRespawn = false
@@ -72,7 +72,7 @@ AddEventHandler('fsn_ems:reviveMe', function()
 end)
 
 
-DecorRegister("deadPly")
+DecorRegister("deadPly", 2)
 RegisterNetEvent('fsn_ems:killMe')
 AddEventHandler('fsn_ems:killMe', function()
   if not amidead then
@@ -105,9 +105,9 @@ AddEventHandler('fsn_ems:killMe', function()
 end)
 
 -- thread to check if im dead
-Citizen.CreateThread(function()
+CreateThread(function()
   while true do
-    Citizen.Wait(0)
+    Wait(0)
     if amidead then
       SetPedToRagdoll(PlayerPedId(), 1, 1000, 0, 0, 0, 0)
       local def = deathtime + 300
@@ -130,9 +130,9 @@ Citizen.CreateThread(function()
 end)
 
 -- thread to check if im dead
-Citizen.CreateThread(function()
+CreateThread(function()
   while true do
-    Citizen.Wait(1000)
+    Wait(1000)
     currenttime = currenttime + 1
   end
 end)
@@ -159,7 +159,7 @@ function fsn_Airlift()
     TriggerEvent('fsn_needs:stress:remove', 100)
     TriggerEvent('mythic_hospital:client:ResetLimbs') -- reset limbs/limp
     TriggerEvent('mythic_hospital:client:RemoveBleed') -- remove bleed
-    Citizen.Wait(2000)
+    Wait(2000)
     DoScreenFadeIn(1500)
     ClearPedBloodDamage(PlayerPedId())
     if #onduty_ems > 0 then
@@ -235,9 +235,9 @@ local clockInStations = {
 {x = 1191.9343261719, y = -1474.7747802734, z = 34.859516143799},
 {x = 310.27493286133, y = -599.16485595703, z = 43.291816711426}
 }
-Citizen.CreateThread(function()
+CreateThread(function()
   while true do
-    Citizen.Wait(0)
+    Wait(0)
 	SetPlayerHealthRechargeMultiplier(PlayerId(), 0.0)
     for k, hosp in pairs(clockInStations) do
       if GetDistanceBetweenCoords(hosp.x,hosp.y,hosp.z,GetEntityCoords(PlayerPedId()), true) < 10 and amiems then
@@ -276,37 +276,37 @@ local disp_id = 0
 local last_disp = 0
 RegisterNetEvent('fsn_jobs:ems:request')
 AddEventHandler('fsn_jobs:ems:request', function(tbl)
+  local x, y, z = tbl.x, tbl.y, tbl.z
   if exports.fsn_police:fsn_PDDuty() then
     if #onduty_ems < 2 then
       TriggerEvent('fsn_police:dispatchcall', tbl, 9)
     end
-    local var1, var2 = GetStreetNameAtCoord(x, y, z, Citizen.ResultAsInteger(), Citizen.ResultAsInteger())
-    local sname = GetStreetNameFromHashKey(var1)
+    local streetHash = GetStreetNameAtCoord(x, y, z)
+    local sname = GetStreetNameFromHashKey(streetHash)
     TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:DISPATCH:^0^r (10-47) EMS requested @ ^4'..sname)
   end
   if emsonduty then
-    local x = tbl.x
-    local y = tbl.y
-    local var1, var2 = GetStreetNameAtCoord(x, y, z, Citizen.ResultAsInteger(), Citizen.ResultAsInteger())
-    local sname = GetStreetNameFromHashKey(var1)
+    local streetHash = GetStreetNameAtCoord(x, y, z)
+    local sname = GetStreetNameFromHashKey(streetHash)
     TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:DISPATCH:^0^r (10-47) EMS requested @ ^4'..sname)
-    disp_id = #dispatch_calls+1
+    disp_id = #dispatch_calls + 1
     last_disp = currenttime
     table.insert(dispatch_calls, disp_id, {
       type = 'ems call',
       cx = x,
-      cy = y
+      cy = y,
+      cz = z
     })
-    SetNotificationTextEntry("STRING");
-    AddTextComponentString('Location: ~y~'..sname);
-    SetNotificationMessage("CHAR_DEFAULT", "CHAR_DEFAULT", true, 1, "DISPATCH", "");
-    DrawNotification(false, true);
-	TriggerEvent("fsn_main:blip:add", "ems", "ALERT: EMS Request", 310, x, y, z)
+    SetNotificationTextEntry("STRING")
+    AddTextComponentString('Location: ~y~'..sname)
+    SetNotificationMessage("CHAR_DEFAULT", "CHAR_DEFAULT", true, 1, "DISPATCH", "")
+    DrawNotification(false, true)
+    TriggerEvent("fsn_main:blip:add", "ems", "ALERT: EMS Request", 310, x, y, z)
   end
 end)
-Citizen.CreateThread(function()
+CreateThread(function()
    while true do
-     Citizen.Wait(0)
+     Wait(0)
      if disp_id ~= 0 then
        if last_disp + 10 > currenttime then
          SetTextComponentFormat("STRING")
@@ -334,9 +334,9 @@ local hospitals = {
 }
 local healing = false
 local healstart = 0
-Citizen.CreateThread(function()
+CreateThread(function()
   while true do
-    Citizen.Wait(0)
+    Wait(0)
     for k, hosp in pairs(hospitals) do
       if GetDistanceBetweenCoords(hosp.x,hosp.y,hosp.z,GetEntityCoords(PlayerPedId()), true) < 10 and not healing then
         DrawMarker(1,hosp.x,hosp.y,hosp.z-1,0,0,0,0,0,0,1.001,1.0001,0.4001,0,155,255,175,0,0,0,0)
@@ -364,21 +364,21 @@ Citizen.CreateThread(function()
   end
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
   while true do
-    Citizen.Wait(0)
+    Wait(0)
 	if pulsing then
 		DoScreenFadeOut(1000)
-		Citizen.Wait(1500)
+		Wait(1500)
 		DoScreenFadeIn(1000)
-		Citizen.Wait(20000)
+		Wait(20000)
 	end
   end
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
   while true do
-    Citizen.Wait(0)
+    Wait(0)
 	SetPlayerHealthRechargeMultiplier(PlayerId(), 0.0)
 	if GetEntityHealth(PlayerPedId()) < 130 then
 		if not bandw then
