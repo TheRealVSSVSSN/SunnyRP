@@ -435,6 +435,7 @@ ensure my_resource
 | Replay | 6 | 6 | 0 | 2025-09-11T07:37 |
 | ACL | 10 | 10 | 0 | 2025-09-11T08:12 |
 | CFX | 50 | 50 | 0 | 2025-09-11T09:55 |
+| Vehicle | ? | 10 | ? | 2025-09-11T22:59 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -10191,6 +10192,309 @@ RegisterCommand('rgb', () => {
 - **Reference**: https://docs.fivem.net/natives/?n=ResetEditorValues
 
 
+#### Vehicle
+
+##### AddVehiclePhoneExplosiveDevice
+- **Scope**: Shared
+- **Signature**: `void ADD_VEHICLE_PHONE_EXPLOSIVE_DEVICE(Vehicle vehicle)`
+- **Purpose**: Attaches a phone-triggered bomb to the vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target vehicle handle.
+- **OneSync / Networking**: Requires vehicle ownership on server for replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: add_bomb; Use: Adds phone bomb; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('add_bomb', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        AddVehiclePhoneExplosiveDevice(veh)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: add_bomb */
+    RegisterCommand('add_bomb', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      AddVehiclePhoneExplosiveDevice(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Bomb detonation must be handled separately.
+- **Reference**: https://docs.fivem.net/natives/?n=AddVehiclePhoneExplosiveDevice
+
+##### AddVehicleStuckCheckWithWarp
+- **Scope**: Shared
+- **Signature**: `void ADD_VEHICLE_STUCK_CHECK_WITH_WARP(Vehicle vehicle, float p1, int p2, bool p3, bool p4, bool p5, bool p6)`
+- **Purpose**: Detects if a vehicle is stuck and optionally warps it to free position.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to monitor.
+  - `p1` (`float`): Radius to check.
+  - `p2` (`int`): Milliseconds before considered stuck.
+  - `p3`-`p6` (`bool`): Undocumented flags.
+- **OneSync / Networking**: Server calls require entity ownership.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: stuck; Use: adds stuck monitor; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('stuck', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        AddVehicleStuckCheckWithWarp(veh, 1.0, 1000, true, false, false, false)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: stuck */
+    RegisterCommand('stuck', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      AddVehicleStuckCheckWithWarp(veh, 1.0, 1000, true, false, false, false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Flag meanings undocumented.
+- **Reference**: https://docs.fivem.net/natives/?n=AddVehicleStuckCheckWithWarp
+
+##### AddVehicleUpsidedownCheck
+- **Scope**: Shared
+- **Signature**: `void ADD_VEHICLE_UPSIDEDOWN_CHECK(Vehicle vehicle)`
+- **Purpose**: Enables internal check for vehicle flipped upside down.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to monitor.
+- **OneSync / Networking**: Ownership required server-side.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: flip_check; Use: monitors flip; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('flip_check', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        AddVehicleUpsidedownCheck(veh)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: flip_check */
+    RegisterCommand('flip_check', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      AddVehicleUpsidedownCheck(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires periodic polling with `IsVehicleUpsidedown`.
+- **Reference**: https://docs.fivem.net/natives/?n=AddVehicleUpsidedownCheck
+
+##### AreAllVehicleWindowsIntact
+- **Scope**: Shared
+- **Signature**: `bool ARE_ALL_VEHICLE_WINDOWS_INTACT(Vehicle vehicle)`
+- **Purpose**: Checks if every window is unbroken.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - **Returns**: `bool` intact status.
+- **OneSync / Networking**: Accurate only for entities within visibility.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: win_intact; Use: prints window status; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('win_intact', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(AreAllVehicleWindowsIntact(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: win_intact */
+    RegisterCommand('win_intact', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(AreAllVehicleWindowsIntact(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns false for missing vehicles.
+- **Reference**: https://docs.fivem.net/natives/?n=AreAllVehicleWindowsIntact
+
+##### AreAnyVehicleSeatsFree
+- **Scope**: Shared
+- **Signature**: `bool ARE_ANY_VEHICLE_SEATS_FREE(Vehicle vehicle)`
+- **Purpose**: Tests if at least one seat is unoccupied.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to query.
+  - **Returns**: `bool` seat availability.
+- **OneSync / Networking**: Requires local ped data for remote vehicles.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: seat_free; Use: checks seat availability; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('seat_free', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), true)
+        print(AreAnyVehicleSeatsFree(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: seat_free */
+    RegisterCommand('seat_free', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), true);
+      console.log(AreAnyVehicleSeatsFree(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not account for NPC reservation.
+- **Reference**: https://docs.fivem.net/natives/?n=AreAnyVehicleSeatsFree
+
+##### AreVehicleWheelsLinked
+- **Scope**: Shared
+- **Signature**: `bool ARE_VEHICLE_WHEELS_LINKED(Vehicle vehicle)`
+- **Purpose**: Determines if front and rear wheels steer together.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - **Returns**: `bool` linkage state.
+- **OneSync / Networking**: Local mechanical info; server queries may be outdated.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: wheels_linked; Use: prints linkage; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('wheels_linked', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(AreVehicleWheelsLinked(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: wheels_linked */
+    RegisterCommand('wheels_linked', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(AreVehicleWheelsLinked(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Rarely used outside specialized vehicles.
+- **Reference**: https://docs.fivem.net/natives/?n=AreVehicleWheelsLinked
+
+##### AttachVehicleToCargobob
+- **Scope**: Shared
+- **Signature**: `void ATTACH_VEHICLE_TO_CARGOBOB(Vehicle vehicle, Vehicle cargobob, int p2, float x, float y, float z)`
+- **Purpose**: Hooks a vehicle to a cargobob helicopter.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to attach.
+  - `cargobob` (`Vehicle`): Cargobob entity.
+  - `p2` (`int`): Hook index.
+  - `x`, `y`, `z` (`float`): Offset.
+- **OneSync / Networking**: Server calls require control of both entities.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: hook_cb; Use: attach to cargobob; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('hook_cb', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        local cb = GetVehiclePedIsIn(PlayerPedId(), true)
+        AttachVehicleToCargobob(veh, cb, 0, 0.0, 0.0, 0.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: hook_cb */
+    RegisterCommand('hook_cb', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      const cb = GetVehiclePedIsIn(PlayerPedId(), true);
+      AttachVehicleToCargobob(veh, cb, 0, 0.0, 0.0, 0.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires correct hook index or will fail silently.
+- **Reference**: https://docs.fivem.net/natives/?n=AttachVehicleToCargobob
+
+##### AttachVehicleToTowTruck
+- **Scope**: Shared
+- **Signature**: `void ATTACH_VEHICLE_TO_TOW_TRUCK(Vehicle towTruck, Vehicle vehicle, int rear, float x, float y, float z)`
+- **Purpose**: Connects a vehicle to a tow truck.
+- **Parameters / Returns**:
+  - `towTruck` (`Vehicle`): Tow truck entity.
+  - `vehicle` (`Vehicle`): Vehicle being towed.
+  - `rear` (`int`): 0 front, 1 rear.
+  - `x`, `y`, `z` (`float`): Offset.
+- **OneSync / Networking**: Both entities must be controlled by the caller.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: tow; Use: attach vehicle to tow truck; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('tow', function()
+        local tow = GetVehiclePedIsIn(PlayerPedId(), false)
+        local veh = GetClosestVehicle(GetEntityCoords(PlayerPedId()), 10.0, 0, 70)
+        AttachVehicleToTowTruck(tow, veh, 1, 0.0, 0.0, 0.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: tow */
+    RegisterCommand('tow', () => {
+      const tow = GetVehiclePedIsIn(PlayerPedId(), false);
+      const veh = GetClosestVehicle(GetEntityCoords(PlayerPedId()), 10.0, 0, 70);
+      AttachVehicleToTowTruck(tow, veh, 1, 0.0, 0.0, 0.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Offsets must align or vehicle will clip.
+- **Reference**: https://docs.fivem.net/natives/?n=AttachVehicleToTowTruck
+
+##### AttachVehicleToTrailer
+- **Scope**: Shared
+- **Signature**: `void ATTACH_VEHICLE_TO_TRAILER(Vehicle vehicle, Vehicle trailer, float radius)`
+- **Purpose**: Couples a vehicle with a trailer.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Towing vehicle.
+  - `trailer` (`Vehicle`): Trailer entity.
+  - `radius` (`float`): Coupling range.
+- **OneSync / Networking**: Caller must control both entities.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: trailer; Use: attach trailer; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('trailer', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        local trailer = GetClosestVehicle(GetEntityCoords(PlayerPedId()), 10.0, 0, 70)
+        AttachVehicleToTrailer(veh, trailer, 10.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: trailer */
+    RegisterCommand('trailer', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      const trailer = GetClosestVehicle(GetEntityCoords(PlayerPedId()), 10.0, 0, 70);
+      AttachVehicleToTrailer(veh, trailer, 10.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Use `DetachVehicleFromTrailer` to separate.
+- **Reference**: https://docs.fivem.net/natives/?n=AttachVehicleToTrailer
+
+##### BreakOffVehicleWheel
+- **Scope**: Shared
+- **Signature**: `void BREAK_OFF_VEHICLE_WHEEL(Vehicle vehicle, bool p1, bool p2, bool p3, bool p4)`
+- **Purpose**: Detaches a wheel from the vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - `p1`-`p4` (`bool`): Flags controlling physics and deletion.
+- **OneSync / Networking**: Ownership required to replicate wheel removal.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: break_wheel; Use: pops a wheel; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('break_wheel', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        BreakOffVehicleWheel(veh, false, true, true, false)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: break_wheel */
+    RegisterCommand('break_wheel', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      BreakOffVehicleWheel(veh, false, true, true, false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Flags are undocumented.
+- **Reference**: https://docs.fivem.net/natives/?n=BreakOffVehicleWheel
+
 ### Server Natives by Category
 #### ACL
 
@@ -12090,4 +12394,4 @@ RegisterCommand('rgb', () => {
   - Only meaningful inside an event handler.
 - **Reference**: https://docs.fivem.net/natives/?n=WasEventCanceled
 
-CONTINUE-HERE — 2025-09-11T09:55:49 — next: none :: n/a
+CONTINUE-HERE — 2025-09-11T22:59:27 — next: Vehicle :: BreakOffVehicleWindow
