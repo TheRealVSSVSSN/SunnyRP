@@ -434,6 +434,7 @@ ensure my_resource
 | Recording | 17 | 17 | 0 | 2025-09-11T06:52 |
 | Replay | 6 | 6 | 0 | 2025-09-11T07:37 |
 | ACL | 10 | 10 | 0 | 2025-09-11T08:12 |
+| CFX | ? | 10 | ? | 2025-09-11T08:26 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -10546,4 +10547,342 @@ RegisterCommand('rgb', () => {
   - Returns `false` if either principal or ACE is undefined.
 - **Reference**: https://docs.fivem.net/natives/?n=IsPrincipalAceAllowed
 
-CONTINUE-HERE — 2025-09-11T08:13:11 — next: 13.3 Server Natives > CFX category :: AddStateBagChangeHandler
+#### CFX
+
+##### AddStateBagChangeHandler
+- **Scope**: Shared
+- **Signature(s)**: `int ADD_STATE_BAG_CHANGE_HANDLER(string bagName, string keyFilter, function handler)`
+- **Purpose**: Registers a callback that fires whenever a matching state bag key changes.
+- **Parameters / Returns**:
+  - `bagName` (`string`): Bag name or prefix to match.
+  - `keyFilter` (`string`): Key to filter, or `nil` to watch all keys.
+  - `handler` (`function`): Callback `(bagName, key, value, reserved, replicated)`.
+  - **Returns**: `int` handler ID used with `RemoveStateBagChangeHandler`.
+- **OneSync / Networking**: Callback runs on the realm where the change occurs; for entities, ownership dictates who can set values.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Shared Init
+        -- Name: watch_lock
+        -- Use: Prints when a vehicle lock state bag changes
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    local handlerId = AddStateBagChangeHandler('entity:', 'locked', function(bagName, key, value, _reserved, replicated)
+        print(('Bag %s key %s -> %s (replicated: %s)'):format(bagName, key, tostring(value), tostring(replicated)))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Shared Init: watch_lock */
+    const handlerId = AddStateBagChangeHandler('entity:', 'locked', (bagName, key, value, _reserved, replicated) => {
+      console.log(`Bag ${bagName} key ${key} -> ${value} (replicated: ${replicated})`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Remember to remove handlers to prevent leaks.
+- **Reference**: https://docs.fivem.net/natives/?n=ADD_STATE_BAG_CHANGE_HANDLER
+
+##### ExecuteCommand
+- **Scope**: Server
+- **Signature(s)**: `bool EXECUTE_COMMAND(string commandString)`
+- **Purpose**: Executes a server console command programmatically.
+- **Parameters / Returns**:
+  - `commandString` (`string`): Full command line to run.
+  - **Returns**: `bool` success.
+- **OneSync / Networking**: Commands run on server; effects depend on command.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: restart_weather
+        -- Use: Restarts weather script via console command
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('restart_weather', function()
+        ExecuteCommand('restart weather')
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: restart_weather */
+    RegisterCommand('restart_weather', () => {
+      ExecuteCommand('restart weather');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only runs commands available to the server console.
+- **Reference**: https://docs.fivem.net/natives/?n=EXECUTE_COMMAND
+
+##### GetCurrentResourceName
+- **Scope**: Shared
+- **Signature(s)**: `string GET_CURRENT_RESOURCE_NAME()`
+- **Purpose**: Returns the name of the currently executing resource.
+- **Parameters / Returns**:
+  - **Returns**: `string` resource name.
+- **OneSync / Networking**: None.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Shared Init
+        -- Name: print_res
+        -- Use: Prints current resource name on start
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    AddEventHandler('onResourceStart', function(res)
+        if res == GetCurrentResourceName() then
+            print('Started resource:', res)
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Shared Init: print_res */
+    on('onResourceStart', (res) => {
+      if (res === GetCurrentResourceName()) {
+        console.log('Started resource:', res);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns empty string if called outside a resource context.
+- **Reference**: https://docs.fivem.net/natives/?n=GET_CURRENT_RESOURCE_NAME
+
+##### GetNumPlayerIdentifiers
+- **Scope**: Server
+- **Signature(s)**: `int GET_NUM_PLAYER_IDENTIFIERS(Player player)`
+- **Purpose**: Returns how many identifiers the player has (license, steam, etc.).
+- **Parameters / Returns**:
+  - `player` (`Player`): Player ID.
+  - **Returns**: `int` count.
+- **OneSync / Networking**: Server query only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: id_count
+        -- Use: Prints number of identifiers for invoking player
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('id_count', function(src)
+        print('Identifiers:', GetNumPlayerIdentifiers(src))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: id_count */
+    RegisterCommand('id_count', (src) => {
+      console.log('Identifiers:', GetNumPlayerIdentifiers(src));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Identifiers depend on user platform and may be missing.
+- **Reference**: https://docs.fivem.net/natives/?n=GET_NUM_PLAYER_IDENTIFIERS
+
+##### GetPlayerEndpoint
+- **Scope**: Server
+- **Signature(s)**: `string GET_PLAYER_ENDPOINT(Player player)`
+- **Purpose**: Retrieves the IP endpoint of a player.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player ID.
+  - **Returns**: `string` IP and port.
+- **OneSync / Networking**: Server-only; do not expose to clients.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: show_ip
+        -- Use: Logs player endpoint
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('show_ip', function(src)
+        print('Endpoint:', GetPlayerEndpoint(src))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: show_ip */
+    RegisterCommand('show_ip', (src) => {
+      console.log('Endpoint:', GetPlayerEndpoint(src));
+    });
+    ```
+- **Caveats / Limitations**:
+  - May return empty string for proxied or disconnected players.
+- **Reference**: https://docs.fivem.net/natives/?n=GET_PLAYER_ENDPOINT
+
+##### GetPlayerIdentifier
+- **Scope**: Server
+- **Signature(s)**: `string GET_PLAYER_IDENTIFIER(Player player, int index)`
+- **Purpose**: Returns a specific identifier for a player by index.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player ID.
+  - `index` (`int`): Identifier slot (0..GetNumPlayerIdentifiers-1).
+  - **Returns**: `string` identifier or `nil` if out of range.
+- **OneSync / Networking**: Server query only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: first_id
+        -- Use: Prints first identifier of invoking player
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('first_id', function(src)
+        print('First identifier:', GetPlayerIdentifier(src, 0))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: first_id */
+    RegisterCommand('first_id', (src) => {
+      console.log('First identifier:', GetPlayerIdentifier(src, 0));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Identifier order is not guaranteed.
+- **Reference**: https://docs.fivem.net/natives/?n=GET_PLAYER_IDENTIFIER
+
+##### GetPlayerName
+- **Scope**: Server
+- **Signature(s)**: `string GET_PLAYER_NAME(Player player)`
+- **Purpose**: Returns the player’s display name.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player ID.
+  - **Returns**: `string` name.
+- **OneSync / Networking**: Server query only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: whoami
+        -- Use: Replies with your player name
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('whoami', function(src)
+        TriggerClientEvent('chat:addMessage', src, { args = { 'System', GetPlayerName(src) } })
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: whoami */
+    RegisterCommand('whoami', (src) => {
+      emitNet('chat:addMessage', src, { args: ['System', GetPlayerName(src)] });
+    });
+    ```
+- **Caveats / Limitations**:
+  - Name can be changed by user; do not rely for identity.
+- **Reference**: https://docs.fivem.net/natives/?n=GET_PLAYER_NAME
+
+##### GetPlayerPing
+- **Scope**: Server
+- **Signature(s)**: `int GET_PLAYER_PING(Player player)`
+- **Purpose**: Returns the network latency in milliseconds for a player.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player ID.
+  - **Returns**: `int` ping.
+- **OneSync / Networking**: Server query only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: my_ping
+        -- Use: Prints your current ping
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('my_ping', function(src)
+        print('Ping:', GetPlayerPing(src))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: my_ping */
+    RegisterCommand('my_ping', (src) => {
+      console.log('Ping:', GetPlayerPing(src));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Values can fluctuate rapidly; avoid spamming queries.
+- **Reference**: https://docs.fivem.net/natives/?n=GET_PLAYER_PING
+
+##### GetPlayers
+- **Scope**: Server
+- **Signature(s)**: `table GET_PLAYERS()`
+- **Purpose**: Returns an array of active player IDs.
+- **Parameters / Returns**:
+  - **Returns**: `table` of player sources.
+- **OneSync / Networking**: Server query only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: list_players
+        -- Use: Prints all connected player IDs
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('list_players', function()
+        for _, id in ipairs(GetPlayers()) do
+            print('Player ID:', id)
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: list_players */
+    RegisterCommand('list_players', () => {
+      for (const id of GetPlayers()) {
+        console.log('Player ID:', id);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns empty table if no players are connected.
+- **Reference**: https://docs.fivem.net/natives/?n=GET_PLAYERS
+
+##### GetResourceKvpInt
+- **Scope**: Server
+- **Signature(s)**: `int GET_RESOURCE_KVP_INT(string key)`
+- **Purpose**: Reads an integer value from the resource key-value store.
+- **Parameters / Returns**:
+  - `key` (`string`): Key name.
+  - **Returns**: `int` stored value or `0` if missing.
+- **OneSync / Networking**: Server-only storage; not replicated.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Server Init
+        -- Name: load_counter
+        -- Use: Loads a startup counter from KVP and prints it
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    local count = GetResourceKvpInt('startup_counter')
+    print('Startup count:', count)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Server Init: load_counter */
+    const count = GetResourceKvpInt('startup_counter');
+    console.log('Startup count:', count);
+    ```
+- **Caveats / Limitations**:
+  - Returns 0 when key is absent or non-integer.
+- **Reference**: https://docs.fivem.net/natives/?n=GET_RESOURCE_KVP_INT
+CONTINUE-HERE — 2025-09-11T08:26:26 — next: 13.3 Server Natives > CFX category :: GetResourceKvpString
