@@ -1,5 +1,6 @@
-fx_version 'bodacious'
-games { 'gta5' }
+fx_version 'cerulean'
+game 'gta5'
+lua54 'yes'
 
 author 'jamessc0tt'
 description 'Original code by jamessc0t. Crutchie added stress system'
