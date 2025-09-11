@@ -1,11 +1,11 @@
-RegisterServerEvent('chat:init')
-RegisterServerEvent('chat:addTemplate')
-RegisterServerEvent('chat:addMessage')
-RegisterServerEvent('chat:addSuggestion')
-RegisterServerEvent('chat:removeSuggestion')
-RegisterServerEvent('_chat:messageEntered')
-RegisterServerEvent('chat:clear')
-RegisterServerEvent('__cfx_internal:commandFallback')
+RegisterNetEvent('chat:init')
+RegisterNetEvent('chat:addTemplate')
+RegisterNetEvent('chat:addMessage')
+RegisterNetEvent('chat:addSuggestion')
+RegisterNetEvent('chat:removeSuggestion')
+RegisterNetEvent('_chat:messageEntered')
+RegisterNetEvent('chat:clear')
+RegisterNetEvent('__cfx_internal:commandFallback')
 
 AddEventHandler('_chat:messageEntered', function(author, color, message)
     if not message or not author then
@@ -33,11 +33,18 @@ AddEventHandler('__cfx_internal:commandFallback', function(command)
     CancelEvent()
 end)
 
--- player join messages
+--[[
+    -- Type: Function
+    -- Name: onPlayerInit
+    -- Use: Handles player chat initialization and join logging
+    -- Created: 10 Sep 2025
+    -- By: VSSVSSN
+--]]
 AddEventHandler('chat:init', function()
     TriggerClientEvent('chatMessage', -1, '', { 255, 255, 255 }, '^2* ' .. GetPlayerName(source) .. ' joined.')
-	local ident = table.concat(GetPlayerIdentifiers(source), ', ')
-	TriggerEvent('fsn_main:logging:addLog', source, 'connections', 'Player('..source..') connected via IP('..GetPlayerEndpoint(source)..') and Identifiers('..ident..')')
+    local ident = table.concat(GetPlayerIdentifiers(source), ', ')
+    TriggerEvent('fsn_main:logging:addLog', source, 'connections', 'Player('..source..') connected via IP('..GetPlayerEndpoint(source)..') and Identifiers('..ident..')')
+    refreshCommands(source)
 end)
 
 AddEventHandler('playerDropped', function(reason)
@@ -49,7 +56,13 @@ RegisterCommand('say', function(source, args, rawCommand)
     TriggerClientEvent('chatMessage', -1, (source == 0) and 'console' or GetPlayerName(source), { 255, 255, 255 }, rawCommand:sub(5))
 end)
 
--- command suggestions for clients
+--[[
+    -- Type: Function
+    -- Name: refreshCommands
+    -- Use: Sends available command suggestions to a client
+    -- Created: 10 Sep 2025
+    -- By: VSSVSSN
+--]]
 local function refreshCommands(player)
     if GetRegisteredCommands then
         local registeredCommands = GetRegisteredCommands()
@@ -68,10 +81,6 @@ local function refreshCommands(player)
         TriggerClientEvent('chat:addSuggestions', player, suggestions)
     end
 end
-
-AddEventHandler('chat:init', function()
-    refreshCommands(source)
-end)
 
 AddEventHandler('onServerResourceStart', function(resName)
     Wait(500)
