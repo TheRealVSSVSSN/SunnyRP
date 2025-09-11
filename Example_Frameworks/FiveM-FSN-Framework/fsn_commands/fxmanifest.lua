@@ -1,31 +1,26 @@
-fx_version 'bodacious'
-games { 'gta5' }
-
+fx_version 'cerulean'
+game 'gta5'
+lua54 'yes'
 
 description 'Commands for the framework'
 
---[[/	:FSN:	\]]--
-client_scripts { 
-    '@fsn_main/cl_utils.lua',
+shared_scripts {
     '@fsn_main/server_settings/sh_settings.lua'
 }
-server_scripts { 
+
+client_scripts {
+    '@fsn_main/cl_utils.lua',
+    'client.lua'
+}
+
+server_scripts {
     '@fsn_main/sv_utils.lua',
-    '@fsn_main/server_settings/sh_settings.lua',
-    '@mysql-async/lib/MySQL.lua'
-}
---[[/	:FSN:	\]]--
-
-client_scripts { 
-    'client.lua',
+    '@mysql-async/lib/MySQL.lua',
+    'server.lua'
 }
 
-server_scripts { 
-    'server.lua',
-}
-
--- exports
 exports {
   'fsn_SplitString',
   'fsn_getHDC'
 }
+
