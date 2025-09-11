@@ -10,7 +10,7 @@ end
 function createNumber()
 	local created = false
 	local num = 'not-defined-number'
-	while not created do --Citizen.Wait(0)
+        while not created do --Wait(0)
 		num = math.random(0,9)..math.random(0,9)..math.random(0,9)..'-'..math.random(0,9)..math.random(0,9)..math.random(0,9)..'-'..math.random(0,9)..math.random(0,9)..math.random(0,9)
 		if not io.open(datastorePath..'contacts/'..num..'.txt', 'r') then
 			
@@ -31,8 +31,7 @@ function createNumber()
 	end
 end
 
-RegisterServerEvent('fsn_phones:SYS:request:details')
-AddEventHandler('fsn_phones:SYS:request:details', function(num, details)
+RegisterNetEvent('fsn_phones:SYS:request:details', function(num, details)
 	local deets = {}
 	
     local f = assert(io.open(datastorePath..details..'/'..num..'.txt', "rb"))
@@ -44,8 +43,7 @@ AddEventHandler('fsn_phones:SYS:request:details', function(num, details)
 	TriggerClientEvent('fsn_phones:SYS:recieve:details', source, details, deets)
 end)
 
-RegisterServerEvent('fsn_phones:SYS:set:details')
-AddEventHandler('fsn_phones:SYS:set:details', function(num, details, tbl)
+RegisterNetEvent('fsn_phones:SYS:set:details', function(num, details, tbl)
 	local detailsFile = io.open(datastorePath..details..'/'..num..'.txt', 'w')
 	detailsFile:write(json.encode(tbl))
 	detailsFile:close()
@@ -55,8 +53,7 @@ AddEventHandler('fsn_phones:SYS:set:details', function(num, details, tbl)
 	end
 end)
 
-RegisterServerEvent('fsn_phones:SYS:requestGarage')
-AddEventHandler('fsn_phones:SYS:requestGarage', function()
+RegisterNetEvent('fsn_phones:SYS:requestGarage', function()
 	local char_id = exports["fsn_main"]:fsn_CharID(source)
 	local src = source
 	MySQL.Async.fetchAll("SELECT * FROM fsn_vehicles where char_id = @charid", {['@charid'] = char_id }, function(tbl)
@@ -66,8 +63,7 @@ end)
 
 --TriggerEvent('fsn_phones:SYS:set:details', '504-262-425', 'contacts', {{name='james',number='999-999-999'},{name='james',number='999-999-999'},{name='james',number='999-999-999'}})
 
-RegisterServerEvent('fsn_phones:SYS:newNumber')
-AddEventHandler('fsn_phones:SYS:newNumber', function(charid)
+RegisterNetEvent('fsn_phones:SYS:newNumber', function(charid)
   local src = source
   local number = createNumber()
   MySQL.Async.execute('UPDATE `fsn_characters` SET `char_phone` = @number WHERE `fsn_characters`.`char_id` = @charid;', {['@charid'] = charid, ['@number'] = number}, function(rowsChanged)
@@ -82,32 +78,27 @@ AddEventHandler('fsn_phones:SYS:newNumber', function(charid)
   end)
 end)
 
-RegisterServerEvent('fsn_phones:UTIL:chat')
-AddEventHandler('fsn_phones:UTIL:chat', function(str, players)
+RegisterNetEvent('fsn_phones:UTIL:chat', function(str, players)
   for k, v in pairs(players) do
     TriggerClientEvent('chatMessage', v, '', {255,255,255}, str)
   end
 end)
 
-RegisterServerEvent('fsn_phones:USE:sendMessage')
-AddEventHandler('fsn_phones:USE:sendMessage', function(msg)
+RegisterNetEvent('fsn_phones:USE:sendMessage', function(msg)
 	TriggerClientEvent('fsn_phones:USE:Message', -1, msg)
 end)
 
-RegisterServerEvent('fsn_phones:SYS:sendTweet')
-AddEventHandler('fsn_phones:SYS:sendTweet', function(twt)
+RegisterNetEvent('fsn_phones:SYS:sendTweet', function(twt)
 	twt.datetime = os.time()
 	TriggerClientEvent('fsn_phones:USE:Tweet', -1, twt)
 end)
 
 local ads = {}
-RegisterServerEvent('fsn_phones:USE:requestAdverts')
-AddEventHandler('c', function()
-	TriggerClientEvent('fsn_phones:SYS:updateAdverts', source, ads)
+RegisterNetEvent('fsn_phones:USE:requestAdverts', function()
+        TriggerClientEvent('fsn_phones:SYS:updateAdverts', source, ads)
 end)
 
-RegisterServerEvent('fsn_phones:USE:sendAdvert')
-AddEventHandler('fsn_phones:USE:sendAdvert', function(ad, name, num)
+RegisterNetEvent('fsn_phones:USE:sendAdvert', function(ad, name, num)
 	for k, v in pairs(ads) do
 		if v.playerid == source then
 			ads[k] = nil

@@ -1,8 +1,7 @@
 local isOrdering = false
 
-RegisterNetEvent('fsn_phones:USE:darkweb:order')
-AddEventHandler('fsn_phones:USE:darkweb:order', function(iswep, item, amt)
-	deliveryTypeOne(iswep, item, amt)
+RegisterNetEvent('fsn_phones:USE:darkweb:order', function(iswep, item, amt)
+        deliveryTypeOne(iswep, item, amt)
 end)
 
 function fillVehicle(ped, vehicle, escort, escorting)
@@ -52,29 +51,29 @@ function deliveryTypeOne(iswep, item, amt)
 			loc = {x = -980.98614501953, y = -2231.7346191406, z = 8.6372041702271, h = 226.14091491699}
 		}
 	}
-	local deliveryFront = false
-	Citizen.CreateThread(function()
+        local deliveryFront = false
+        CreateThread(function()
 		-- load models
 		RequestModel(GetHashKey(deliveryVehicle.vehicle))
-		while not HasModelLoaded(GetHashKey(deliveryVehicle.vehicle)) do
-			Citizen.Wait(1)
-		end
-		RequestModel(GetHashKey(deliveryVehicle.ped))
-		while not HasModelLoaded(GetHashKey(deliveryVehicle.ped)) do
-			Citizen.Wait(1)
-		end
+                while not HasModelLoaded(GetHashKey(deliveryVehicle.vehicle)) do
+                        Wait(1)
+                end
+                RequestModel(GetHashKey(deliveryVehicle.ped))
+                while not HasModelLoaded(GetHashKey(deliveryVehicle.ped)) do
+                        Wait(1)
+                end
 		for k, v in pairs(deliveryProtection) do
 			if not HasModelLoaded(GetHashKey(v.vehicle)) then
 				RequestModel(GetHashKey(v.vehicle))
-				while not HasModelLoaded(GetHashKey(v.vehicle)) do
-					Citizen.Wait(1)
-				end
+                                while not HasModelLoaded(GetHashKey(v.vehicle)) do
+                                        Wait(1)
+                                end
 			end
 			if not HasModelLoaded(GetHashKey(v.ped)) then
 				RequestModel(GetHashKey(v.ped))
-				while not HasModelLoaded(GetHashKey(v.ped)) do
-					Citizen.Wait(1)
-				end
+                                while not HasModelLoaded(GetHashKey(v.ped)) do
+                                        Wait(1)
+                                end
 			end
 		end
 		
@@ -103,12 +102,11 @@ function deliveryTypeOne(iswep, item, amt)
 		-- spawn peds
 		for i=1,deliveryVehicle.peds do
 			local id = #deliveryVehicle.pedents+1
-			deliveryVehicle.pedents[id] = CreatePed(0,GetHashKey(deliveryVehicle.ped),deliveryVehicle.loc.x, deliveryVehicle.loc.y, deliveryVehicle.loc.z+math.random(5,10), deliveryVehicle.loc.h, true, true)
-			SetPedDiesInVehicle(deliveryVehicle.pedents[id], false)
-			SetPedConfigFlag(deliveryVehicle.pedents[id], 32, false)
-			--TaskWarpPedIntoVehicle(deliveryVehicle.pedents[id], deliveryVehicle.ent, -2)
-			fillVehicle(deliveryVehicle.pedents[id], deliveryVehicle.ent)
-			Citizen.Wait(100)
+                        deliveryVehicle.pedents[id] = CreatePed(0,GetHashKey(deliveryVehicle.ped),deliveryVehicle.loc.x, deliveryVehicle.loc.y, deliveryVehicle.loc.z+math.random(5,10), deliveryVehicle.loc.h, true, true)
+                        SetPedDiesInVehicle(deliveryVehicle.pedents[id], false)
+                        SetPedConfigFlag(deliveryVehicle.pedents[id], 32, false)
+                        fillVehicle(deliveryVehicle.pedents[id], deliveryVehicle.ent)
+                        Wait(100)
 			if GetPedInVehicleSeat(deliveryVehicle.ent, -1) == deliveryVehicle.pedents[id] then
 				TaskVehicleDriveToCoord(deliveryVehicle.pedents[id], deliveryVehicle.ent, deliveryDestination.x, deliveryDestination.y, deliveryDestination.z, -1, GetHashKey(deliveryVehicle.vehicle), 1, 0, true)
 			end
@@ -116,12 +114,12 @@ function deliveryTypeOne(iswep, item, amt)
 		for k, v in pairs(deliveryProtection) do
 			for i=1,v.peds do
 				local id = #v.pedents+1
-				v.pedents[id] = CreatePed(0,GetHashKey(v.ped),v.loc.x, v.loc.y, v.loc.z+math.random(5,10), v.loc.h, true, true)
-				GiveWeaponToPed(v.pedents[id], GetHashKey("WEAPON_MINIGUN"), 200, false, true)
-				SetPedDiesInVehicle(v.pedents[id], false)
-				fillVehicle(v.pedents[id], v.ent)
-				SetPedConfigFlag(v.pedents[id], 32, false)
-				Citizen.Wait(100)
+                                v.pedents[id] = CreatePed(0,GetHashKey(v.ped),v.loc.x, v.loc.y, v.loc.z+math.random(5,10), v.loc.h, true, true)
+                                GiveWeaponToPed(v.pedents[id], GetHashKey("WEAPON_MINIGUN"), 200, false, true)
+                                SetPedDiesInVehicle(v.pedents[id], false)
+                                fillVehicle(v.pedents[id], v.ent)
+                                SetPedConfigFlag(v.pedents[id], 32, false)
+                                Wait(100)
 				if GetPedInVehicleSeat(v.ent, -1) == v.pedents[id] then
 					if not deliveryFront then
 						TaskVehicleEscort(v.pedents[id], v.ent, deliveryVehicle.ent, -1, -1, 1, 10, 0, 10)
@@ -135,31 +133,31 @@ function deliveryTypeOne(iswep, item, amt)
 				end
 			end
 		end
-		while true do Citizen.Wait(0)
-			if deliveryStage == 1 then
-				if GetDistanceBetweenCoords(GetEntityCoords(deliveryVehicle.ent), deliveryDestination.x, deliveryDestination.y, deliveryDestination.z, false) < 10 then
-					TriggerEvent('fsn_notify:displayNotification', 'Delivery has reached it\'s location.', 'centerLeft', 6000, 'error')
-					DeleteEntity(deliveryVehicle.ent)
-					for k, v in pairs(deliveryProtection) do
-						DeleteEntity(v.ent)
-					end
-					deliveryStage = 2
-				end
-			elseif deliveryStage == 2 then
-				deliveryVehicle.ent = CreateVehicle(GetHashKey(deliveryVehicle.vehicle), deliveryVehicle.loc.x, deliveryVehicle.loc.y, deliveryVehicle.loc.z, deliveryVehicle.loc.h, true, true)
+                while deliveryStage < 3 do
+                        Wait(0)
+                        if deliveryStage == 1 then
+                                if GetDistanceBetweenCoords(GetEntityCoords(deliveryVehicle.ent), deliveryDestination.x, deliveryDestination.y, deliveryDestination.z, false) < 10 then
+                                        TriggerEvent('fsn_notify:displayNotification', 'Delivery has reached it\'s location.', 'centerLeft', 6000, 'error')
+                                        DeleteEntity(deliveryVehicle.ent)
+                                        for k, v in pairs(deliveryProtection) do
+                                                DeleteEntity(v.ent)
+                                        end
+                                        deliveryStage = 2
+                                end
+                        elseif deliveryStage == 2 then
+                                deliveryVehicle.ent = CreateVehicle(GetHashKey(deliveryVehicle.vehicle), deliveryVehicle.loc.x, deliveryVehicle.loc.y, deliveryVehicle.loc.z, deliveryVehicle.loc.h, true, true)
 
-				deliveryVehicle.blip = AddBlipForEntity(deliveryVehicle.ent)
-				SetBlipSprite(deliveryVehicle.blip, 1)
-				SetBlipColour(deliveryVehicle.blip, 1)
-				SetBlipAsShortRange(deliveryVehicle.blip, true)
-				BeginTextCommandSetBlipName("STRING")
-				AddTextComponentString("Delivery Vehicle")
-				EndTextCommandSetBlipName(deliveryVehicle.blip)
-				
-				
-			end
-		end
-	end)
+                                deliveryVehicle.blip = AddBlipForEntity(deliveryVehicle.ent)
+                                SetBlipSprite(deliveryVehicle.blip, 1)
+                                SetBlipColour(deliveryVehicle.blip, 1)
+                                SetBlipAsShortRange(deliveryVehicle.blip, true)
+                                BeginTextCommandSetBlipName("STRING")
+                                AddTextComponentString("Delivery Vehicle")
+                                EndTextCommandSetBlipName(deliveryVehicle.blip)
+                                deliveryStage = 3
+                        end
+                end
+        end)
 end
 
 --deliveryTypeOne(false, 'vpn1', 1)

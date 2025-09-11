@@ -5,42 +5,41 @@ local myNumber = '000-000-000'
 local myName = 'nothing nothing'
 local myChar = -1
 
-RegisterNetEvent('fsn_phones:SYS:updateNumber')
-AddEventHandler('fsn_phones:SYS:updateNumber', function(number)
-	myNumber = number
-	exports['mythic_notify']:DoCustomHudText('inform', 'New number: '..number, 10000)
-end)
-function fsn_NearestPlayersC(x, y, z, radius)
-	local players = {}
-	for id = 0, 128 do
-		local ppos = GetEntityCoords(GetPlayerPed(id))
-		if GetDistanceBetweenCoords(ppos.x, ppos.y, ppos.z, x, y, z) < radius then
-			table.insert(players, #players+1, GetPlayerServerId(id))
-		end
-	end
-  return players
-end
-RegisterNetEvent('fsn_phones:UTIL:displayNumber')
-AddEventHandler('fsn_phones:UTIL:displayNumber', function()
-	if init() and myNumber ~= '000-000-000' then
-		local pos = GetEntityCoords(PlayerPedId())
-	  TriggerServerEvent('fsn_phones:UTIL:chat', '^*^3phone# |^0^r '..myNumber, fsn_NearestPlayersC(pos.x, pos.y, pos.z, 5))
-	else
-		TriggerEvent('fsn_notify:displayNotification', 'You do not have a phone number!<br>Goto Lifeinvader to get a SIM Card!', 'centerLeft', 8000, 'error')
-	end
+RegisterNetEvent('fsn_phones:SYS:updateNumber', function(number)
+        myNumber = number
+        exports['mythic_notify']:DoCustomHudText('inform', 'New number: '..number, 10000)
 end)
 
-function init() -- function to check if the character has init'd
-	if myNumber == '000-000-000' then
-		--exports['mythic_notify']:DoCustomHudText('error', 'init() == false - head to life invader to get a phone number', 4000)
-		print('init() == false - head to life invader to get a phone number')
-		return true -- change to false before live
-	elseif myUsername == 'unset'  then
-		exports['mythic_notify']:DoCustomHudText('error', 'init() == false - your character has not been loaded properly, rejoin the server', 4000)
-		return false -- change to false before live
-	else
-		return true
-	end
+local function getNearbyPlayers(coords, radius)
+        local players = {}
+        for _, playerId in ipairs(GetActivePlayers()) do
+                local ped = GetPlayerPed(playerId)
+                local ppos = GetEntityCoords(ped)
+                if #(ppos - coords) < radius then
+                        players[#players + 1] = GetPlayerServerId(playerId)
+                end
+        end
+        return players
+end
+
+RegisterNetEvent('fsn_phones:UTIL:displayNumber', function()
+        if init() and myNumber ~= '000-000-000' then
+                local pos = GetEntityCoords(PlayerPedId())
+                TriggerServerEvent('fsn_phones:UTIL:chat', '^*^3phone# |^0^r '..myNumber, getNearbyPlayers(pos, 5))
+        else
+                TriggerEvent('fsn_notify:displayNotification', 'You do not have a phone number!<br>Goto Lifeinvader to get a SIM Card!', 'centerLeft', 8000, 'error')
+        end
+end)
+
+local function init()
+        if myNumber == '000-000-000' then
+                print('init() == false - head to life invader to get a phone number')
+                return false
+        elseif myUsername == 'unset' then
+                exports['mythic_notify']:DoCustomHudText('error', 'init() == false - your character has not been loaded properly, rejoin the server', 4000)
+                return false
+        end
+        return true
 end
 local datastore = {
 	calls = {
@@ -118,10 +117,9 @@ local datastore = {
 	vehicles = {}
 }
 
-RegisterNetEvent('fsn_phones:SYS:receiveGarage')
-AddEventHandler('fsn_phones:SYS:receiveGarage', function(vehtbl)
-	datastore['vehicles'] = vehtbl
-	sendDataStore()
+RegisterNetEvent('fsn_phones:SYS:receiveGarage', function(vehtbl)
+        datastore['vehicles'] = vehtbl
+        sendDataStore()
 end)
 
 local phoneEnabled = false
@@ -154,49 +152,43 @@ function sendDataStore()
 	})
 end
 
---[[
+
 function isPhoneActive()
-	if phoneEnabled then
-		return true
-	else
-		return false
-	end
+        return phoneEnabled
 end
-]]
 
 function togglePhone()
-	if not init() then return end -- character has not been initiated
-	local playerPed = PlayerPedId()
-	if phoneEnabled then
-		ClearPedTasks(playerPed)
-		SetNuiFocus( false )
-		SendNUIMessage({
-			type = 'status',
-			display = false,
-		})
-		--SetPauseMenuActive(true)
-	else
-
-		if not fsn_HasPhone() then -- if does not have phone return jack shit
-			TriggerEvent('fsn_notify:displayNotification', 'You do not have a phone!<br>Visit a general store to get one.', 'centerLeft', 5000, 'error')
-		return end
-		
-		SetNuiFocus( true, true )
-		SendNUIMessage({
-			type = 'status',
-			display = true,
-			phoneType = 'iphone', -- I'll set this dynamically in the future
-			phonenumber = myNumber,
-			username = myUsername,
-		})
-		if not IsPedInAnyVehicle(playerPed,  false) then
-			PhonePlayIn()
-			--TaskStartScenarioInPlace(playerPed, "WORLD_HUMAN_STAND_MOBILE", 0, true);
-		end
-		TriggerServerEvent('fsn_phones:SYS:requestGarage')
-		sendDataStore()
-	end
-	phoneEnabled = not phoneEnabled
+        if not init() then return end -- character has not been initiated
+        local playerPed = PlayerPedId()
+        if phoneEnabled then
+                SetNuiFocus(false, false)
+                SendNUIMessage({
+                        type = 'status',
+                        display = false,
+                })
+                if not IsPedInAnyVehicle(playerPed, false) then
+                        PhonePlayOut()
+                end
+        else
+                if not fsn_HasPhone() then -- if does not have phone return jack shit
+                        TriggerEvent('fsn_notify:displayNotification', 'You do not have a phone!<br>Visit a general store to get one.', 'centerLeft', 5000, 'error')
+                        return
+                end
+                SetNuiFocus(true, true)
+                SendNUIMessage({
+                        type = 'status',
+                        display = true,
+                        phoneType = 'iphone', -- I'll set this dynamically in the future
+                        phonenumber = myNumber,
+                        username = myUsername,
+                })
+                if not IsPedInAnyVehicle(playerPed, false) then
+                        PhonePlayIn()
+                end
+                TriggerServerEvent('fsn_phones:SYS:requestGarage')
+                sendDataStore()
+        end
+        phoneEnabled = not phoneEnabled
 end
 
 -- disable nui focus every time the script is restarted 
@@ -320,11 +312,10 @@ RegisterNUICallback('messageinactive', function(data, cb)
 	toggleMessageInactive()
 end)
 ]]
-RegisterNetEvent('fsn_phones:GUI:notification')
-AddEventHandler('fsn_phones:GUI:notification', function(icon, app, html, sound)
+RegisterNetEvent('fsn_phones:GUI:notification', function(icon, app, html, sound)
 	if sound then
 		TriggerServerEvent('InteractSound_SV:PlayWithinDistance', 2, 'demo', 0.1)
-		--Citizen.Wait(200)
+           --Wait(200)
 	end
 	SendNUIMessage({
 		type = 'notification',
@@ -339,19 +330,16 @@ end)
 	USE
 		Uses of the phone, interactions from the server
 ]]--
-RegisterNetEvent('fsn_phones:USE:Phone')
-AddEventHandler('fsn_phones:USE:Phone', function()
-	if init() then
-		togglePhone()
-	end
+RegisterNetEvent('fsn_phones:USE:Phone', function()
+        if init() then
+                togglePhone()
+        end
 end)
-RegisterNetEvent('fsn_phones:USE:Email')
-AddEventHandler('fsn_phones:USE:Email', function(email)
-	table.insert(datastore['emails'], #datastore['emails']+1, email)
-	TriggerEvent('fsn_phones:GUI:notification', 'img/Apple/Mail.png', 'MAIL', '<b>'..string.sub(email.subject, 1, 30)..'</b><br>'..string.sub(email.body, 1,30), false)
+RegisterNetEvent('fsn_phones:USE:Email', function(email)
+        table.insert(datastore['emails'], #datastore['emails']+1, email)
+        TriggerEvent('fsn_phones:GUI:notification', 'img/Apple/Mail.png', 'MAIL', '<b>'..string.sub(email.subject, 1, 30)..'</b><br>'..string.sub(email.body, 1,30), false)
 end)
-RegisterNetEvent('fsn_phones:USE:Message')
-AddEventHandler('fsn_phones:USE:Message', function(msg)
+RegisterNetEvent('fsn_phones:USE:Message', function(msg)
 	if dbug then print(':fsn_phones: Got txt message for: '..msg.to) end
 	if msg.to == myNumber then
 		if dbug then print(':fsn_phones: is for me') end
@@ -387,8 +375,7 @@ AddEventHandler('fsn_phones:USE:Message', function(msg)
 		TriggerServerEvent('fsn_phones:SYS:set:details', myNumber, 'messages', datastore['messages'])
 	end
 end)
-RegisterNetEvent('fsn_phones:USE:Tweet')
-AddEventHandler('fsn_phones:USE:Tweet', function(tweet)
+RegisterNetEvent('fsn_phones:USE:Tweet', function(tweet)
 	--[[
 	local id = #datastore['tweets']+1
 	table.insert(datastore['tweets'], id, {
@@ -410,26 +397,22 @@ AddEventHandler('fsn_phones:USE:Tweet', function(tweet)
 	end
 	sendDataStore()
 end)
-RegisterNetEvent('fsn_phones:SYS:updateAdverts')
-AddEventHandler('fsn_phones:SYS:updateAdverts', function(tbl)
-	datastore['adverts'] = tbl
-	sendDataStore()
+RegisterNetEvent('fsn_phones:SYS:updateAdverts', function(tbl)
+        datastore['adverts'] = tbl
+        sendDataStore()
 end)
 
-RegisterNetEvent('fsn_phones:SYS:recieve:details')
-AddEventHandler('fsn_phones:SYS:recieve:details', function(details, tbl)
-	datastore[details] = tbl
-	sendDataStore()
+RegisterNetEvent('fsn_phones:SYS:recieve:details', function(details, tbl)
+        datastore[details] = tbl
+        sendDataStore()
 end)
 
-RegisterNetEvent('fsn_phones:SYS:addTransaction')
-AddEventHandler('fsn_phones:SYS:addTransaction', function(tran)
+RegisterNetEvent('fsn_phones:SYS:addTransaction', function(tran)
 	print 'got transaction'
 	--table.insert(datastore['transactions'], #datastore['transactions']+1, tran)
 	datastore['transactions'] = Util.PrependTable(datastore['transactions'], tran)
 	sendDataStore()
 end)
-RegisterNetEvent('fsn_phones:SYS:addCall')
 RegisterNetEvent('fsn_phones:SYS:addCall', function(num, incoming, missed)
 	local name = num
 	if datastore['contacts'][num] then
@@ -496,7 +479,7 @@ end)
 local stores = {
 	vector3(-1082.1314697266, -247.65126037598, 37.763290405273)
 }
-Citizen.CreateThread( function()
+CreateThread(function()
 	for k, store in pairs(stores) do
 		local blip = AddBlipForCoord(store.x, store.y, store.z)
 		SetBlipSprite(blip, 365)
@@ -506,7 +489,7 @@ Citizen.CreateThread( function()
 		EndTextCommandSetBlipName(blip)
 	end
 	while true do
-		Citizen.Wait(0)
+           Wait(0)
 		local playerPed = PlayerPedId()
 		local playerPos = GetEntityCoords(playerPed)
 		for k, v in pairs(stores) do
@@ -608,7 +591,7 @@ function newPhoneProp()
 	deletePhone()
 	RequestModel(phoneModel)
 	while not HasModelLoaded(phoneModel) do
-		Citizen.Wait(1)
+           Wait(1)
 	end
 	phoneProp = CreateObject(GetHashKey(phoneModel), 1.0, 1.0, 1.0, 1, 1, 0)
 	local bone = GetPedBoneIndex(myPedId, 28422)
@@ -617,7 +600,7 @@ end
 
 function deletePhone ()
 	if phoneProp ~= 0 then
-		Citizen.InvokeNative(0xAE3CBE5BF394C9C9 , Citizen.PointerValueIntInitialized(phoneProp))
+           DeleteEntity(phoneProp)
 		--DeleteEntity(GetHashKey(phoneProp))
 		phoneProp = 0
 	end
@@ -651,7 +634,7 @@ function PhonePlayAnim (status, freeze, force)
 	TaskPlayAnim(myPedId, dict, anim, 3.0, -1, -1, flag, 0, false, false, false)
 
 	if status ~= 'out' and currentStatus == 'out' then
-		Citizen.Wait(380)
+               Wait(380)
 		newPhoneProp()
 	end
 
@@ -661,7 +644,7 @@ function PhonePlayAnim (status, freeze, force)
 	currentStatus = status
 
 	if status == 'out' then
-		Citizen.Wait(180)
+               Wait(180)
 		deletePhone()
 		StopAnimTask(myPedId, lastDict, lastAnim, 1.0)
 	end
