@@ -1,21 +1,8 @@
---Config
-local timer = 0 --in minutes - Set the time during the player is outlaw
-local showOutlaw = false --Set if show outlaw act on map
-local gunshotAlert = true --Set if show alert when player use gun
-local carJackingAlert = true --Set if show when player do carjacking
-local meleeAlert = true --Set if show when player fight in melee
-local blipGunTime = 60 --in second
-local blipMeleeTime = 60 --in second
-local blipJackingTime = 60 -- in second
-local blipDeathTime = 360 -- in second
 local isInService = false
---End config
+local isCop = false
+local HudStage = 1
 
-local origin = false --Don't touche it
-local timing = timer * 60000 --Don't touche i
-
-
-isCop = false
+-- removed legacy configuration and unused variables
 
 RegisterNetEvent('nowCopSpawn')
 AddEventHandler('nowCopSpawn', function()
@@ -27,10 +14,6 @@ AddEventHandler('nowCopSpawnOff', function()
     isCop = false
 end)
 
-
-
-
-HudStage = 1
 RegisterNetEvent("disableHUD")
 AddEventHandler("disableHUD", function(passedinfo)
   HudStage = passedinfo
@@ -109,7 +92,7 @@ RegisterNetEvent('outlawNotifyChat311r')
 AddEventHandler('outlawNotifyChat311r', function(args, caller)
     table.remove(args, 1)
     if isInService then
-        TriggerEvent('chatMessage', "311 RESPONSE:", 3, "^3 Sent to: " .. source .. ": ^7" .. table.concat(args, " ") .. " ")
+        TriggerEvent('chatMessage', "311 RESPONSE:", 3, "^3 Sent to: " .. caller .. ": ^7" .. table.concat(args, " ") .. " ")
     end
 end)
 
@@ -131,7 +114,7 @@ RegisterNetEvent('outlawNotifyChat911r')
 AddEventHandler('outlawNotifyChat911r', function(args, caller)
     table.remove(args, 1)
     if isInService then
-        TriggerEvent('chatMessage', "911 RESPONSE:", 3, "^3 Sent to: " .. source .. ": ^7" .. table.concat(args, " ") .. " ")
+        TriggerEvent('chatMessage', "911 RESPONSE:", 3, "^3 Sent to: " .. caller .. ": ^7" .. table.concat(args, " ") .. " ")
     end
 end)
 
@@ -152,9 +135,7 @@ end)
 
 RegisterNetEvent('outlawNotify')
 AddEventHandler('outlawNotify', function(alert, senderpos)
-
-    if not origin and isCop then
-     --   TriggerEvent("DoLongHudText", "Dispatch: " .. alert .. " " )
+    if isCop then
         TriggerEvent('chatMessage', "^1[Dispatch]", 3, alert)
     end
 end)
@@ -201,17 +182,17 @@ function KeyboardInput(TextEntry, ExampleText, MaxStringLenght)
   blockinput = true
 
   while UpdateOnscreenKeyboard() ~= 1 and UpdateOnscreenKeyboard() ~= 2 do
-    Citizen.Wait(0)
+    Wait(0)
   end
 
   if UpdateOnscreenKeyboard() ~= 2 then
     local result = GetOnscreenKeyboardResult()
-    Citizen.Wait(500)
+    Wait(500)
     blockinput = false
     TriggerEvent("hud:insidePrompt",false)
     return result
   else
-    Citizen.Wait(500)
+    Wait(500)
     blockinput = false
     TriggerEvent("hud:insidePrompt",false)
     return nil
@@ -253,7 +234,7 @@ AddEventHandler('car:engineHasKeys', function(targetVehicle, allow)
                 SetVehicleEngineOn(targetVehicle,0,1,1)
                 SetVehicleUndriveable(targetVehicle,true)
                 TriggerEvent("DoShortHudText", "Engine Halted",1)
-                Citizen.Wait(300)
+                Wait(300)
                 waitKeys = false
             end
         else
@@ -261,7 +242,7 @@ AddEventHandler('car:engineHasKeys', function(targetVehicle, allow)
                 waitKeys = true
                 TriggerEvent("keys:startvehicle")
                 TriggerEvent("DoShortHudText", "Engine Started",1)
-                Citizen.Wait(300)
+                Wait(300)
                 waitKeys = false
             end
         end
@@ -344,7 +325,7 @@ AddEventHandler('DoHudTextCoords', function(text,obj)
             DrawText3DTest(plyCoords2["x"],plyCoords2["y"],plyCoords2["z"]+mycount2 - 1.25, text, output,power2)
         end
 
-        Citizen.Wait(1)
+        Wait(1)
     end
 
 end)
@@ -357,7 +338,7 @@ AddEventHandler('scaryLoop2', function()
         if msgCount2 > 2.6 then
            scary2 = 0
         end
-        Citizen.Wait(1)
+        Wait(1)
         scary2 = scary2 - 1
     end
     dicks2 = 0
@@ -452,7 +433,7 @@ end
 local nextMeleeAction = GetCloudTimeAsInt() -- 1777000000
 AddEventHandler('gameEventTriggered', function (name, args)
     local isSelfAttacker = (args[2] == PlayerPedId() and true or false)
-    local isMeleeAttack = (args[5] == `WEAPON_UNARMED` and true or false)
+    local isMeleeAttack = (args[5] == GetHashKey("WEAPON_UNARMED"))
     if name == "CEventNetworkEntityDamage" and isMeleeAttack and isSelfAttacker and GetCloudTimeAsInt() > nextMeleeAction then
         TriggerEvent("civilian:alertPolice",35.0,"fight",0)
         TriggerEvent("Evidence:StateSet",1,300)
@@ -536,7 +517,7 @@ local exlusionZones = {
 --10-94
 local ped = PlayerPedId()
 local isInVehicle = IsPedInAnyVehicle(ped, true)
-Citizen.CreateThread( function()
+CreateThread( function()
     while true do
         Wait(1000)
         ped = PlayerPedId()
@@ -546,11 +527,11 @@ end)
 
 
 
-Citizen.CreateThread( function()
+CreateThread( function()
     local origin = false
-    local w = `WEAPON_PetrolCan`
-    local w1 = `WEAPON_FIREEXTINGUISHER`
-    local w2 = `WEAPON_FLARE`
+    local w = GetHashKey("WEAPON_PetrolCan")
+    local w1 = GetHashKey("WEAPON_FIREEXTINGUISHER")
+    local w2 = GetHashKey("WEAPON_FLARE")
     local curw = GetSelectedPedWeapon(PlayerPedId())
     local armed = false
     local timercheck = 0
@@ -585,7 +566,7 @@ Citizen.CreateThread( function()
                 for i,v in ipairs(exlusionZones) do
                     local playerPos = GetEntityCoords(ped)
                     if #(vector3(v[1],v[2],v[3]) - vector3(playerPos.x,playerPos.y,playerPos.z)) < v[4] then
-                        --if `WEAPON_COMBATPDW` == curw then
+                        --if GetHashKey("WEAPON_COMBATPDW") == curw then
                             inArea = true
                         --end
                     end
@@ -614,7 +595,7 @@ Citizen.CreateThread( function()
         else
 
 
-             Citizen.Wait(5000)
+             Wait(5000)
 
 
         end
@@ -628,7 +609,7 @@ function gcr()
 end
 
 
-Citizen.CreateThread( function()
+CreateThread( function()
 
     local origin2 = false
     while true do
@@ -638,9 +619,9 @@ Citizen.CreateThread( function()
         local street1 = GetStreetNameFromHashKey(s1)
         local street2 = GetStreetNameFromHashKey(s2)
         local isInVehicle = IsPedInAnyVehicle(PlayerPedId(), true)
-        local w = `WEAPON_PetrolCan`
-        local w1 = `WEAPON_FIREEXTINGUISHER`
-        local w2 = `WEAPON_FLARE`
+        local w = GetHashKey("WEAPON_PetrolCan")
+        local w1 = GetHashKey("WEAPON_FIREEXTINGUISHER")
+        local w2 = GetHashKey("WEAPON_FLARE")
         local curw = GetSelectedPedWeapon(PlayerPedId())
 
         local targetCoords = GetEntityCoords(PlayerPedId(), 0)
@@ -692,7 +673,7 @@ local gasStations = {
 }
 
 
-Citizen.CreateThread( function()
+CreateThread( function()
     local origin3 = false
     while true do
         Wait(1)
@@ -724,7 +705,7 @@ Citizen.CreateThread( function()
             end
         end
         if dstcheck > 50 then
-            Citizen.Wait(math.ceil(dstcheck*10))
+            Wait(math.ceil(dstcheck*10))
         end
     end
 end)
