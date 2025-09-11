@@ -13,7 +13,7 @@ AddEventHandler('fsn_police:ToggleK9', function(Model)
         Model = GetHashKey(Model)
         RequestModel(Model)
         while not HasModelLoaded(Model) do
-            Citizen.Wait(50)
+            Wait(50)
             RequestModel(Model)
         end
 
@@ -41,7 +41,7 @@ AddEventHandler('fsn_police:Sit', function()
     else
         RequestAnimDict('creatures@rottweiler@amb@world_dog_sitting@idle_a')
         while not HasAnimDictLoaded('creatures@rottweiler@amb@world_dog_sitting@idle_a') do
-            Citizen.Wait(50)
+            Wait(50)
         end
 
         TaskPlayAnim(K9, 'creatures@rottweiler@amb@world_dog_sitting@idle_a', 'idle_b', 8.0, -8.0, -1, 2, 0.0, 0, 0, 0)
@@ -80,12 +80,12 @@ AddEventHandler('fsn_police:k9:search:person:finish', function(Found)
     if Found then
         RequestAnimDict('creatures@rottweiler@amb@sleep_in_kennel@')
         while not HasAnimDictLoaded('creatures@rottweiler@amb@sleep_in_kennel@') do
-            Citizen.Wait(50)
+            Wait(50)
         end
 
         TaskPlayAnim(K9, 'creatures@rottweiler@amb@sleep_in_kennel@', 'sleep_in_kennel', 8.0, -8.0, -1, 2, 0.0, 0, 0, 0)
         TriggerEvent('fsn_notify:displayNotification', 'Your dog has detected an illegal substance', 'centerLeft', 2000, 'error')
-        Citizen.Wait(2000)
+        Wait(2000)
         ClearPedTasksImmediately(K9)
         TaskFollowToOffsetOfEntity(K9, PlayerPedId(), 0.5, 0.0, 0.0, 5.0, -1, 1.0, 1)
         SetPedKeepTask(K9, true)

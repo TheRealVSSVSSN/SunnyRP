@@ -52,17 +52,17 @@ local rnd_names = {
    "Abigail Liberty",
 }
 
-RegisterServerEvent('fsn_police:dispatch')
+RegisterNetEvent('fsn_police:dispatch')
 AddEventHandler('fsn_police:dispatch', function(coords, id, chatPrint)
   TriggerClientEvent('fsn_police:dispatchcall', -1, coords, id, chatPrint)
 end)
 
-RegisterServerEvent('fsn_police:runplate::target')
+RegisterNetEvent('fsn_police:runplate::target')
 AddEventHandler('fsn_police:runplate::target', function(plate)
   TriggerEvent('fsn_police:runplate', source, plate)
 end)
 
-RegisterServerEvent('fsn_police:runplate')
+RegisterNetEvent('fsn_police:runplate')
 AddEventHandler('fsn_police:runplate', function(src, plate)
   MySQL.Async.fetchAll('SELECT * FROM `fsn_vehicles` WHERE `veh_plate` = @plate', {['@plate'] = plate}, function(vehicle)
     if not vehicle[1] then
@@ -81,20 +81,20 @@ AddEventHandler('fsn_police:runplate', function(src, plate)
   end)
 end)
 
-RegisterServerEvent('fsn_police:toggleHandcuffs')
+RegisterNetEvent('fsn_police:toggleHandcuffs')
 AddEventHandler('fsn_police:toggleHandcuffs', function(ply)
   TriggerClientEvent('fsn_police:handcuffs:toggle', -1, ply)
 end)
 
-RegisterServerEvent('fsn_police:ticket')
+RegisterNetEvent('fsn_police:ticket')
 AddEventHandler('fsn_police:ticket', function(ply, ticket)
   TriggerClientEvent('fsn_bank:change:bankMinus', ply, ticket)
   TriggerClientEvent('fsn_notify:displayNotification', ply, 'You have been fined $'..ticket..' by the state.', 'centerLeft', 10000, 'alert')
   TriggerClientEvent('fsn_notify:displayNotification', source, 'You fined '..ply..' $'..ticket, 'centerLeft', 6000, 'info')
 end)
 
-RegisterServerEvent('fsn_police:update')
-RegisterServerEvent('fsn_police:onDuty')
+RegisterNetEvent('fsn_police:update')
+RegisterNetEvent('fsn_police:onDuty')
 AddEventHandler('fsn_police:onDuty', function(policelevel)
   if policelevel > 2 then
     table.insert(onduty_police, {ply_id = source, ply_lvl = policelevel})
@@ -106,7 +106,7 @@ AddEventHandler('fsn_police:onDuty', function(policelevel)
   end
 end)
 
-RegisterServerEvent('fsn_police:offDuty')
+RegisterNetEvent('fsn_police:offDuty')
 AddEventHandler('fsn_police:offDuty', function()
   for k, v in pairs(onduty_police) do
     if v.ply_id == source then
@@ -127,12 +127,12 @@ AddEventHandler('playerDropped', function()
   TriggerClientEvent('fsn_police:update', -1, onduty_police)
 end)
 
-RegisterServerEvent('fsn_police:requestUpdate')
+RegisterNetEvent('fsn_police:requestUpdate')
 AddEventHandler('fsn_police:requestUpdate', function()
   TriggerClientEvent('fsn_police:update', source, onduty_police)
 end)
 
-RegisterServerEvent('fsn_police:search:end:inventory')
+RegisterNetEvent('fsn_police:search:end:inventory')
 AddEventHandler('fsn_police:search:end:inventory', function(inv_tbl, officerid)
   local str = ''
   for k, v in pairs(inv_tbl) do
@@ -142,7 +142,7 @@ AddEventHandler('fsn_police:search:end:inventory', function(inv_tbl, officerid)
   TriggerClientEvent('chatMessage', officerid, '', {255,255,255}, '^1^*SEARCH |^0^r '..str)
 end)
 
-RegisterServerEvent('fsn_police:search:end:weapons')
+RegisterNetEvent('fsn_police:search:end:weapons')
 AddEventHandler('fsn_police:search:end:weapons', function(wep_tbl, officerid)
 	if #wep_tbl < 1 then
 		TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*SEARCH |^0^r No weapons found.')
@@ -157,7 +157,7 @@ AddEventHandler('fsn_police:search:end:weapons', function(wep_tbl, officerid)
 	--TriggerClientEvent('chatMessage', officerid, '', {255,255,255}, '^1^*SEARCH |^0^r '..str)
 end)
 
-RegisterServerEvent('fsn_police:search:end:money')
+RegisterNetEvent('fsn_police:search:end:money')
 AddEventHandler('fsn_police:search:end:money', function(officerid, money_tbl)
   TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*SEARCH |^0^r Wallet: ^6$'..money_tbl.wallet..'^0, Bank: ^6$'..money_tbl.bank)
   TriggerClientEvent('chatMessage', officerid, '', {255,255,255}, '^1^*SEARCH |^0^r Wallet: ^6$'..money_tbl.wallet..'^0, Bank: ^6$'..money_tbl.bank)
@@ -165,24 +165,24 @@ end)
 
 
 ----------- escorting
-RegisterServerEvent('fsn_police:cuffs:toggleEscort')
+RegisterNetEvent('fsn_police:cuffs:toggleEscort')
 AddEventHandler('fsn_police:cuffs:toggleEscort', function(ply)
 	TriggerClientEvent('fsn_police:ply:toggleDrag', ply, source)
 	TriggerClientEvent('fsn_police:pd:toggleDrag', source, ply)
 end)
 
 ------------ cuffing
-RegisterServerEvent('fsn_police:cuffs:requestCuff')
+RegisterNetEvent('fsn_police:cuffs:requestCuff')
 AddEventHandler('fsn_police:cuffs:requestCuff', function(ply)
 	TriggerClientEvent('fsn_police:cuffs:startCuffing', source)
 	TriggerClientEvent('fsn_police:cuffs:startCuffed', ply, source)
 end)
-RegisterServerEvent('fsn_police:cuffs:requestunCuff')
+RegisterNetEvent('fsn_police:cuffs:requestunCuff')
 AddEventHandler('fsn_police:cuffs:requestunCuff', function(ply)
 	TriggerClientEvent('fsn_police:cuffs:startunCuffing', source)
 	TriggerClientEvent('fsn_police:cuffs:startunCuffed', ply, source)
 end)
-RegisterServerEvent('fsn_police:cuffs:toggleHard')
+RegisterNetEvent('fsn_police:cuffs:toggleHard')
 AddEventHandler('fsn_police:cuffs:toggleHard', function(ply)
 	TriggerClientEvent('fsn_police:cuffs:toggleHard', ply)
 end)

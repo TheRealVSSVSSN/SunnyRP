@@ -1,4 +1,4 @@
-RegisterServerEvent('fsn_police:database:CPIC')
+RegisterNetEvent('fsn_police:database:CPIC')
 AddEventHandler('fsn_police:database:CPIC', function(data)
   --[[
     "suspectID":$("#booking-player-id").val(),
@@ -21,7 +21,7 @@ AddEventHandler('fsn_police:database:CPIC', function(data)
   }, function(rowsChanged) end)
 end)
 
-RegisterServerEvent('fsn_police:database:CPIC:search')
+RegisterNetEvent('fsn_police:database:CPIC:search')
 AddEventHandler('fsn_police:database:CPIC:search', function(id)
   local res = {}
   local src = source
@@ -36,7 +36,7 @@ AddEventHandler('fsn_police:database:CPIC:search', function(id)
   end)
 end)
 
-RegisterServerEvent('fsn_police:MDT:warrant')
+RegisterNetEvent('fsn_police:MDT:warrant')
 AddEventHandler('fsn_police:MDT:warrant', function(tbl)
   MySQL.Async.execute('INSERT INTO `fsn_warrants` (`war_id`, `suspect_name`, `officer_name`, `war_charges`, `war_times`, `war_fine`, `war_desc`, `war_status`, `war_date`) VALUES (NULL, @suspect_name, @officer_name, @war_charges, @war_times, @war_fine, @war_desc, @war_status, @war_time)', {
     ['@suspect_name'] = tbl.suspectName,
@@ -52,7 +52,7 @@ AddEventHandler('fsn_police:MDT:warrant', function(tbl)
   TriggerClientEvent('fsn_police:911', -1, 'NIL', 'DISPATCH', 'A new warrant has been submitted for: ^*'..tbl.suspectName..'^r check your MDT for details.')
 end)
 
-RegisterServerEvent('fsn_police:MDT:requestwarrants')
+RegisterNetEvent('fsn_police:MDT:requestwarrants')
 AddEventHandler('fsn_police:MDT:requestwarrants', function(name)
   local src = source
   if name ~= false then
@@ -67,7 +67,7 @@ AddEventHandler('fsn_police:MDT:requestwarrants', function(name)
   end
 end)
 
-RegisterServerEvent('fsn_police:MDTremovewarrant')
+RegisterNetEvent('fsn_police:MDTremovewarrant')
 AddEventHandler('fsn_police:MDTremovewarrant', function(id)
     MySQL.Async.execute('DELETE FROM `fsn_warrants` WHERE `fsn_warrants`.`war_id` = @id', {['@id'] = id})
 end)

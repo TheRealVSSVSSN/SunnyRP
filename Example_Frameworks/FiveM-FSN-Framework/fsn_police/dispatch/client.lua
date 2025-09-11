@@ -1,4 +1,4 @@
-blips = {}
+local blips = {}
 RegisterNetEvent('fsn_main:blip:add')
 AddEventHandler('fsn_main:blip:add', function(whofor, blipname, blipid, x,y,z)
 	print 'trying to add blip'
@@ -30,7 +30,7 @@ function addBlip(text, blipid, x, y, z, color, ttl, whofor)
 	blips[#blips+1] = {blipObject = blip, location = {x, y, z}, type = whofor, timeToDelete = removeTime, active = true}
 end
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		Wait(5000)
 		for i, _ in pairs(blips) do

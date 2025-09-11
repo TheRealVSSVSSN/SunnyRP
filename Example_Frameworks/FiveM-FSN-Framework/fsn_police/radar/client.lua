@@ -5,7 +5,7 @@ local rear = ''
 
 RegisterNetEvent('fsn_police:radar:toggle')
 AddEventHandler('fsn_police:radar:toggle', function()
-  if pdonduty then
+  if exports['fsn_police']:fsn_PDDuty() then
     radarEnabled = not radarEnabled
   else
     TriggerEvent('chatMessage', '', {255,255,255}, '^8^*:FSN:^r^0 You are not signed in as a police officer.')
@@ -35,10 +35,10 @@ function formatSpeed(spd)
     return '~r~'..math.floor(spd)
   end
 end
-Citizen.CreateThread(function()
+CreateThread(function()
   while true do
-    Citizen.Wait(0)
-    if radarEnabled and pdonduty and IsPedInAnyVehicle(PlayerPedId()) then
+    Wait(0)
+    if radarEnabled and exports['fsn_police']:fsn_PDDuty() and IsPedInAnyVehicle(PlayerPedId()) then
       if IsControlJustPressed(1, 135) then
         freezeRadar = not freezeRadar
       end

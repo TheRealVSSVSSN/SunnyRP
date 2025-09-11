@@ -24,14 +24,14 @@ Util.Tick(function()
            nearestDist, nearestPos = Util.PositionCheck(playerPos, armory.pos.xyz)
 
 
-            if nearestDist < distance and pdonduty then
+            if nearestDist < distance and exports['fsn_police']:fsn_PDDuty() then
                 DrawMarker(27, armory.pos.x, armory.pos.y, armory.pos.z-1, 0, 0, 0, 0, 0, 0, 1.001, 1.0001, 0.4001, 255, 255, 255, 175, 0, 0, 0, 0)
                 if nearestDist < drawDistance then
                     if not armory.busy then
                         Util.DrawText3D(armory.pos.x, armory.pos.y, armory.pos.z, '[E] Armory', false)
                         if IsControlJustReleased(0, Util.GetKeyNumber('E')) then
                             --print(armory.id)
-                            TriggerServerEvent('fsn_police:armory:request', armory.id, policelevel)
+                            TriggerServerEvent('fsn_police:armory:request', armory.id, exports['fsn_police']:fsn_getPDLevel())
                         end
                     else
                         Utils.DrawText3D(armory.pos.x, armory.pos.y, armory.pos.z, '~r~Armory in use.\nPlease try again later.', false)
@@ -49,5 +49,5 @@ end)
 
 RegisterNetEvent('fsn_police:armory:request')
 AddEventHandler('fsn_police:armory:request', function (armory_id)
-    TriggerServerEvent('fsn_police:armory:request', armory_id, policelevel)
+    TriggerServerEvent('fsn_police:armory:request', armory_id, exports['fsn_police']:fsn_getPDLevel())
 end)

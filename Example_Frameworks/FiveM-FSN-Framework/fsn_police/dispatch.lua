@@ -126,8 +126,8 @@ AddEventHandler('fsn_police:dispatch:toggle', function()
 end)
 
 function displayDispatch(x,y,z,id,chatPrint)
-  if pdonduty then
-    local var1, var2 = GetStreetNameAtCoord(x, y, z, Citizen.ResultAsInteger(), Citizen.ResultAsInteger())
+  if exports['fsn_police']:fsn_PDDuty() then
+    local var1, var2 = GetStreetNameAtCoord(x, y, z)
     local sname = GetStreetNameFromHashKey(var1)
     if chatPrint then
       TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:DISPATCH:^0^r '..chatPrint)
@@ -178,9 +178,9 @@ AddEventHandler('fsn_police:dispatchcall', function(tbl, id, chatPrint)
   end
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
   while true do
-    Citizen.Wait(1000)
+    Wait(1000)
     current_time = current_time + 1
   end
 end)
@@ -188,16 +188,16 @@ end)
 local myGSR = false
 local lastGSR = 0
 local last_Fight = 0
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
-		Citizen.Wait(0)
+		Wait(0)
 		if IsPedShooting(PlayerPedId()) and exports["fsn_criminalmisc"]:HoldingWeapon() then
 			print 'adding gsr'
 			lastGSR = current_time
 			myGSR = true
 			TriggerEvent('fsn_evidence:ped:addState', 'GSR Residue', 'LFINGER')
 		end
-		if IsPedInMeleeCombat(PlayerPedId()) and not pdonduty then
+            if IsPedInMeleeCombat(PlayerPedId()) and not exports['fsn_police']:fsn_PDDuty() then
 			if last_Fight+10000 < GetGameTimer() then
 				local pos = GetEntityCoords(PlayerPedId())
 			   local coords = {
@@ -223,10 +223,10 @@ AddEventHandler('fsn_commands:police:gsrMe', function(pd)
 	TriggerServerEvent('fsn_commands:police:gsrResult', pd, myGSR)
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
    while true do
-     Citizen.Wait(0)
-	 if IsPedShooting(PlayerPedId()) and not pdonduty then
+     Wait(0)
+     if IsPedShooting(PlayerPedId()) and not exports['fsn_police']:fsn_PDDuty() then
 		if exports["fsn_criminalmisc"]:HoldingWeapon() then
 		   local pos = GetEntityCoords(PlayerPedId())
 		   local coords = {

@@ -98,9 +98,9 @@ RegisterNUICallback("setWaypoint", function(data, cb)
   TriggerEvent('fsn_notify:displayNotification', '<b>Waypoint added</b><br>Call: <span style="color:#f9aa43">'..data.tencode..'</span><br>Location: <span style="color:#4286f4">'..data.loc, 'centerRight', 8000, 'info')
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
   while true do
-    Citizen.Wait(0)
+    Wait(0)
   --  if IsPedInAnyVehicle(PlayerPedId()) and amicop then
    --   if IsControlJustPressed(0,244) and GetVehicleClass(GetVehiclePedIsIn(PlayerPedId())) == 18 and IsVehicleEngineOn(GetVehiclePedIsIn(PlayerPedId())) then
    --     TriggerEvent('fsn_police:MDT:toggle')
