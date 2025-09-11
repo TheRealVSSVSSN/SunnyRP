@@ -427,6 +427,11 @@ ensure my_resource
 
 ## Natives Index (Client / Server, by Category)
 
+### 13.0 Processing Ledger
+| Category | Total | Done | Remaining | Last Updated |
+|----------|------:|-----:|----------:|--------------|
+| Player | 248 | 14 | 234 | 2025-09-11 |
+
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
 - **Server-only** natives run in FXServer and manage resources or network state.
@@ -439,6 +444,448 @@ ensure my_resource
 ### Client Natives by Category
 
 #### Player
+
+##### GetPlayerFromServerId (hash unknown)
+- **Scope**: Shared
+- **Signature**: `Player GetPlayerFromServerId(int serverId)`
+- **Purpose**: Convert a server ID to a player index on the client.
+- **Parameters / Returns**:
+  - `serverId` (`int`): Server ID assigned by the server.
+  - **Returns**: `Player` index or `-1` if not found.
+- **OneSync / Networking**: Works for any connected player; no entity ownership.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Function
+        -- Name: findById
+        -- Use: Prints player's name via server ID
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('getname', function(src, args)
+        local sid = tonumber(args[1])
+        if not sid then return end
+        local pid = GetPlayerFromServerId(sid) -- map server ID to client index
+        if pid ~= -1 then
+            print(('Player name: %s'):format(GetPlayerName(pid)))
+        end
+    end)
+    ```
+
+  - JavaScript:
+
+    ```javascript
+    // client/main.js
+    RegisterCommand('getname', (_, args) => {
+      const sid = parseInt(args[0], 10);
+      if (isNaN(sid)) return;
+      const pid = GetPlayerFromServerId(sid); // map server ID to client index
+      if (pid !== -1) {
+        console.log(`Player name: ${GetPlayerName(pid)}`);
+      }
+    });
+    ```
+
+- **Caveats / Limitations**:
+  - Returns -1 if the ID is not active.
+- **Reference**: https://docs.fivem.net/natives/?n=GetPlayerFromServerId
+  - TODO(next-run): verify signature and hash against official docs.
+
+##### GetPlayerGroup (0x0D127585F77030AF)
+- **Scope**: Shared
+- **Signature**: `int GetPlayerGroup(Player player)`
+- **Purpose**: Get the group ID the player belongs to.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player index.
+  - **Returns**: `int` group identifier.
+- **OneSync / Networking**: Group membership is local; no replication.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Function
+        -- Name: showGroup
+        -- Use: Logs player's group ID
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('mygroup', function()
+        local id = PlayerId()
+        local grp = GetPlayerGroup(id) -- query group ID
+        print(('Group for %s: %d'):format(GetPlayerName(id), grp))
+    end)
+    ```
+
+  - JavaScript:
+
+    ```javascript
+    // client/main.js
+    RegisterCommand('mygroup', () => {
+      const id = PlayerId();
+      const grp = GetPlayerGroup(id); // query group ID
+      console.log(`Group for ${GetPlayerName(id)}: ${grp}`);
+    });
+    ```
+
+- **Caveats / Limitations**:
+  - Returns 0 if not in a group.
+- **Reference**: https://docs.fivem.net/natives/?_0x0D127585F77030AF
+
+##### GetPlayerHasReserveParachute (0x5DDFE2FF727F3CA3)
+- **Scope**: Shared
+- **Signature**: `bool GetPlayerHasReserveParachute(Player player)`
+- **Purpose**: Check if the player carries a reserve parachute.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player index.
+  - **Returns**: `bool` reserve state.
+- **OneSync / Networking**: State is synced; ownership not required.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Function
+        -- Name: hasReserve
+        -- Use: Prints whether player has a reserve parachute
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('checkreserve', function()
+        local id = PlayerId()
+        local has = GetPlayerHasReserveParachute(id)
+        print(('Reserve chute: %s'):format(has and 'yes' or 'no'))
+    end)
+    ```
+
+  - JavaScript:
+
+    ```javascript
+    // client/main.js
+    RegisterCommand('checkreserve', () => {
+      const id = PlayerId();
+      const has = GetPlayerHasReserveParachute(id);
+      console.log(`Reserve chute: ${has ? 'yes' : 'no'}`);
+    });
+    ```
+
+- **Caveats / Limitations**:
+  - Only reflects current equipment state.
+- **Reference**: https://docs.fivem.net/natives/?_0x5DDFE2FF727F3CA3
+
+##### GetPlayerHealthRechargeLimit (0x8BC515BAE4AAF8FF)
+- **Scope**: Shared
+- **Signature**: `float GetPlayerHealthRechargeLimit(Player player)`
+- **Purpose**: Retrieve the auto-recharge limit of the player's health.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player index.
+  - **Returns**: `float` health threshold.
+- **OneSync / Networking**: Value is local; server may override.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Function
+        -- Name: healthLimit
+        -- Use: Displays health recharge limit
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('healthlim', function()
+        local id = PlayerId()
+        local limit = GetPlayerHealthRechargeLimit(id)
+        print(('Recharge limit: %.1f'):format(limit))
+    end)
+    ```
+
+  - JavaScript:
+
+    ```javascript
+    // client/main.js
+    RegisterCommand('healthlim', () => {
+      const id = PlayerId();
+      const limit = GetPlayerHealthRechargeLimit(id);
+      console.log(`Recharge limit: ${limit}`);
+    });
+    ```
+
+- **Caveats / Limitations**:
+  - Returns 0.0 if health regen is disabled.
+- **Reference**: https://docs.fivem.net/natives/?_0x8BC515BAE4AAF8FF
+
+##### GetPlayerIndex (0xA5EDC40EF369B48D)
+- **Scope**: Shared
+- **Signature**: `Player GetPlayerIndex()`
+- **Purpose**: Get the local player's index.
+- **Parameters / Returns**:
+  - **Returns**: `Player` index of the caller.
+- **OneSync / Networking**: Only valid on the local client.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Function
+        -- Name: myIndex
+        -- Use: Prints local player index
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('myindex', function()
+        print(('Index: %d'):format(GetPlayerIndex()))
+    end)
+    ```
+
+  - JavaScript:
+
+    ```javascript
+    // client/main.js
+    RegisterCommand('myindex', () => {
+      console.log(`Index: ${GetPlayerIndex()}`);
+    });
+    ```
+
+- **Caveats / Limitations**:
+  - Equivalent to `PlayerId()`; not meaningful server-side.
+- **Reference**: https://docs.fivem.net/natives/?_0xA5EDC40EF369B48D
+
+##### GetPlayerInvincible (0xB721981B2B939E07)
+- **Scope**: Shared
+- **Signature**: `bool GetPlayerInvincible(Player player)`
+- **Purpose**: Determine if invincibility is enabled for the player.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player index.
+  - **Returns**: `bool` indicating invincibility.
+- **OneSync / Networking**: Server should validate critical logic.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Function
+        -- Name: checkGod
+        -- Use: Logs whether player is invincible
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('amigod', function()
+        local id = PlayerId()
+        print(('Invincible: %s'):format(GetPlayerInvincible(id) and 'yes' or 'no'))
+    end)
+    ```
+
+  - JavaScript:
+
+    ```javascript
+    // client/main.js
+    RegisterCommand('amigod', () => {
+      const id = PlayerId();
+      console.log(`Invincible: ${GetPlayerInvincible(id) ? 'yes' : 'no'}`);
+    });
+    ```
+
+- **Caveats / Limitations**:
+  - Returns true only if set via `SetPlayerInvincible`.
+- **Reference**: https://docs.fivem.net/natives/?_0xB721981B2B939E07
+
+##### GetPlayerMaxArmour (0x92659B4CE1863CB3)
+- **Scope**: Shared
+- **Signature**: `int GetPlayerMaxArmour(Player player)`
+- **Purpose**: Retrieve the maximum armour value for a player.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player index.
+  - **Returns**: `int` armour capacity.
+- **OneSync / Networking**: Local stat; may be capped by gameplay.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Function
+        -- Name: maxArmour
+        -- Use: Prints player's armour capacity
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('maxarmour', function()
+        local id = PlayerId()
+        print(('Max armour: %d'):format(GetPlayerMaxArmour(id)))
+    end)
+    ```
+
+  - JavaScript:
+
+    ```javascript
+    // client/main.js
+    RegisterCommand('maxarmour', () => {
+      const id = PlayerId();
+      console.log(`Max armour: ${GetPlayerMaxArmour(id)}`);
+    });
+    ```
+
+- **Caveats / Limitations**:
+  - Returns 0 if the player index is invalid.
+- **Reference**: https://docs.fivem.net/natives/?_0x92659B4CE1863CB3
+
+##### GetPlayerName (0x6D0DE6A7B5DA71F8)
+- **Scope**: Shared
+- **Signature**: `char* GetPlayerName(Player player)`
+- **Purpose**: Get the display name of a player.
+- **Parameters / Returns**:
+  - `player` (`Player`): slot or server ID of the player.
+  - **Returns**: `string` player name.
+- **OneSync / Networking**: Names are synced by the game; no additional replication required.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    -- Get and print the name of the current player
+    local id = PlayerId()
+    print(('You are %s'):format(GetPlayerName(id)))
+    ```
+
+  - JavaScript:
+
+    ```javascript
+    // Print the local player's name
+    const id = PlayerId();
+    console.log(`You are ${GetPlayerName(id)}`);
+    ```
+
+- **Caveats / Limitations**:
+  - Returns an empty string if the player does not exist.
+- **Reference**: https://docs.fivem.net/natives/?_0x6D0DE6A7B5DA71F8
+  - TODO(next-run): verify signature and hash against official docs.
+
+##### GetPlayerParachuteModelOverride (0xC219887CA3E65C41)
+- **Scope**: Shared
+- **Signature**: `Hash GetPlayerParachuteModelOverride(Player player)`
+- **Purpose**: Get the model hash set to override the player's parachute.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player index.
+  - **Returns**: `Hash` model identifier.
+- **OneSync / Networking**: Model override is synced; ensure model is streamed.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Function
+        -- Name: chuteModel
+        -- Use: Prints parachute model override hash
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('chutemodel', function()
+        local id = PlayerId()
+        print(('Model override: %s'):format(GetPlayerParachuteModelOverride(id)))
+    end)
+    ```
+
+  - JavaScript:
+
+    ```javascript
+    // client/main.js
+    RegisterCommand('chutemodel', () => {
+      const id = PlayerId();
+      console.log(`Model override: ${GetPlayerParachuteModelOverride(id)}`);
+    });
+    ```
+
+- **Caveats / Limitations**:
+  - Returns 0 if no override is set.
+- **Reference**: https://docs.fivem.net/natives/?_0xC219887CA3E65C41
+
+##### GetPlayerParachutePackTintIndex (0x6E9C742F340CE5A2)
+- **Scope**: Shared
+- **Signature**: `void GetPlayerParachutePackTintIndex(Player player, int* tintIndex)`
+- **Purpose**: Retrieve the tint index for the player's parachute pack.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player index.
+  - `tintIndex` (`int*`): Output tint index.
+- **OneSync / Networking**: Tint is synced with OneSync.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Function
+        -- Name: packTint
+        -- Use: Prints parachute pack tint index
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('packtint', function()
+        local id = PlayerId()
+        local tint = 0
+        GetPlayerParachutePackTintIndex(id, tint) -- fetch tint index
+        print(('Pack tint: %d'):format(tint))
+    end)
+    ```
+
+  - JavaScript:
+
+    ```javascript
+    // client/main.js
+    RegisterCommand('packtint', () => {
+      const id = PlayerId();
+      const tintIndex = new Int32Array(1);
+      GetPlayerParachutePackTintIndex(id, tintIndex);
+      console.log(`Pack tint: ${tintIndex[0]}`);
+    });
+    ```
+
+- **Caveats / Limitations**:
+  - Requires array/reference to capture output.
+- **Reference**: https://docs.fivem.net/natives/?_0x6E9C742F340CE5A2
+
+##### GetPlayerParachuteSmokeTrailColor (0xEF56DBABD3CD4887)
+- **Scope**: Shared
+- **Signature**: `void GetPlayerParachuteSmokeTrailColor(Player player, int* r, int* g, int* b)`
+- **Purpose**: Get the RGB color for the player's parachute smoke trail.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player index.
+  - `r` (`int*`): Red component.
+  - `g` (`int*`): Green component.
+  - `b` (`int*`): Blue component.
+- **OneSync / Networking**: Color is synced with other clients.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Function
+        -- Name: smokeColor
+        -- Use: Logs parachute smoke trail color
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('smokecolor', function()
+        local id = PlayerId()
+        local r, g, b = 0, 0, 0
+        GetPlayerParachuteSmokeTrailColor(id, r, g, b)
+        print(('Smoke color: %d %d %d'):format(r, g, b))
+    end)
+    ```
+
+  - JavaScript:
+
+    ```javascript
+    // client/main.js
+    RegisterCommand('smokecolor', () => {
+      const id = PlayerId();
+      const rgb = new Int32Array(3);
+      GetPlayerParachuteSmokeTrailColor(id, rgb, rgb.subarray(1), rgb.subarray(2));
+      console.log(`Smoke color: ${rgb[0]} ${rgb[1]} ${rgb[2]}`);
+    });
+    ```
+
+- **Caveats / Limitations**:
+  - Requires three mutable references/arrays.
+- **Reference**: https://docs.fivem.net/natives/?_0xEF56DBABD3CD4887
 
 ##### GetPlayerPed (0x43A66C31C68491C0)
 - **Scope**: Shared
@@ -478,36 +925,6 @@ ensure my_resource
 - **Reference**: https://docs.fivem.net/natives/?_0x43A66C31C68491C0
   - TODO(next-run): verify signature and hash against official docs.
 
-##### GetPlayerName (0x6D0DE6A7B5DA71F8)
-- **Scope**: Shared
-- **Signature**: `char* GetPlayerName(Player player)`
-- **Purpose**: Get the display name of a player.
-- **Parameters / Returns**:
-  - `player` (`Player`): slot or server ID of the player.
-  - **Returns**: `string` player name.
-- **OneSync / Networking**: Names are synced by the game; no additional replication required.
-- **Examples**:
-  - Lua:
-
-    ```lua
-    -- Get and print the name of the current player
-    local id = PlayerId()
-    print(('You are %s'):format(GetPlayerName(id)))
-    ```
-
-  - JavaScript:
-
-    ```javascript
-    // Print the local player's name
-    const id = PlayerId();
-    console.log(`You are ${GetPlayerName(id)}`);
-    ```
-
-- **Caveats / Limitations**:
-  - Returns an empty string if the player does not exist.
-- **Reference**: https://docs.fivem.net/natives/?_0x6D0DE6A7B5DA71F8
-  - TODO(next-run): verify signature and hash against official docs.
-
 ##### GetPlayerPing (0x6E31E993)
 - **Scope**: Shared
 - **Signature**: `int GetPlayerPing(Player player)`
@@ -528,7 +945,7 @@ ensure my_resource
         -- By: VSSVSSN
     --]]
     RegisterCommand('ping', function(src)
-        local ping = GetPlayerPing(src)             -- query server latency
+        local ping = GetPlayerPing(src) -- query server latency
         print(('Player %s ping %dms'):format(src, ping))
     end)
     ```
@@ -539,7 +956,7 @@ ensure my_resource
     // server/main.js
     // Prints a player's ping when they use /ping
     RegisterCommand('ping', (src) => {
-      const ping = GetPlayerPing(src);             // query server latency
+      const ping = GetPlayerPing(src); // query server latency
       console.log(`Player ${src} ping ${ping}ms`);
     });
     ```
@@ -588,8 +1005,6 @@ ensure my_resource
   - Returns 0 if the player does not exist.
 - **Reference**: https://docs.fivem.net/natives/?n=GetPlayerServerId
   - TODO(next-run): verify signature and hash against official docs.
-
-
 ### Server Natives by Category
 
-CONTINUE-HERE — 2025-09-11T02:42:45+00:00 — next: continue 13.2 Client Natives > Player category with GetPlayerFromServerId
+CONTINUE-HERE — 2025-09-11T03:00:06+00:00 — next: 13.2 Client Natives > Player category :: GetPlayerParachuteTintIndex
