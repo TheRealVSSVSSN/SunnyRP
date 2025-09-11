@@ -202,10 +202,10 @@ AddEventHandler('fsn_vehiclecontrol:damage:repairkit', function()
 				
 				RequestAnimDict("mini@repair")
 				while not HasAnimDictLoaded("mini@repair") do
-					Citizen.Wait(0)
+                                    Wait(0)
 				end
 				TaskPlayAnim(PlayerPedId(), "mini@repair", "fixing_a_player", 8.0, -8, -1, 16, 0, 0, 0, 0)
-				Citizen.Wait(10000)
+                            Wait(10000)
 				ClearPedTasks(PlayerPedId())
 				FreezeEntityPosition(PlayerPedId(), false)
 				SetVehicleDoorShut(vehicle, 4, false)
@@ -257,9 +257,9 @@ AddEventHandler('fsn_vehiclecontrol:damage:repairkit', function()
 end)
 
 if cfg.torqueMultiplierEnabled or cfg.preventVehicleFlip or cfg.limpMode then
-	Citizen.CreateThread(function()
-		while true do
-			Citizen.Wait(0)
+        CreateThread(function()
+                while true do
+                        Wait(0)
 			if cfg.torqueMultiplierEnabled or cfg.sundayDriver or cfg.limpMode then
 				if pedInSameVehicleLast then
 					local factor = 1.0
@@ -343,9 +343,9 @@ if cfg.torqueMultiplierEnabled or cfg.preventVehicleFlip or cfg.limpMode then
 	end)
 end
 
-Citizen.CreateThread(function()
-	while true do
-		Citizen.Wait(50)
+CreateThread(function()
+        while true do
+                Wait(50)
 		local ped = PlayerPedId()
 		if isPedDrivingAVehicle() then
 			vehicle = GetVehiclePedIsIn(ped, false)

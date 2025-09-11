@@ -1,4 +1,11 @@
 local flaggedplates = {}
+
+local function contains(tbl, val)
+  for _, v in pairs(tbl) do
+    if v == val then return true end
+  end
+  return false
+end
 local speed_cameras = {
 	{784.353088378906,-1005.27600097656,25.6527767181396, 94.677604675293},
 	{223.694885253906,-1040.59167480469,28.8767967224121, 62.378173828125},
@@ -49,14 +56,14 @@ AddEventHandler('fsn_vehiclecontrol:flagged:add', function()
 
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
   while true do
-    Citizen.Wait(0)
+    Wait(0)
     for k, v in pairs(speed_cameras) do
       if GetDistanceBetweenCoords(v[1], v[2], v[3], GetEntityCoords(PlayerPedId()), true) < 30 then
-        if IsPedInAnyVehicle(PlayerPedId()) and GetPedInVehicleSeat(GetVehiclePedIsIn(PlayerPedId(),  false), -1) == PlayerPedId() then
-		  if table.contains(flaggedplates, GetVehicleNumberPlateText(GetVehiclePedIsIn(PlayerPedId()))) then
-			local pos = GetEntityCoords(PlayerPedId())
+        if IsPedInAnyVehicle(PlayerPedId(), false) and GetPedInVehicleSeat(GetVehiclePedIsIn(PlayerPedId(), false), -1) == PlayerPedId() then
+                  if contains(flaggedplates, GetVehicleNumberPlateText(GetVehiclePedIsIn(PlayerPedId(), false))) then
+                        local pos = GetEntityCoords(PlayerPedId())
 		        local coords = {
 		          x = pos.x,
 		          y = pos.y,
@@ -64,7 +71,7 @@ Citizen.CreateThread(function()
 		        }
 		        TriggerServerEvent('fsn_police:dispatch', coords, 11)
 		  end
-		  local speed = GetEntitySpeed(GetVehiclePedIsIn(PlayerPedId(),  false)) * 2.236936
+                  local speed = GetEntitySpeed(GetVehiclePedIsIn(PlayerPedId(), false)) * 2.236936
 			    speed = math.floor(speed)
           local try = math.random(0, 100)
           if try > 30 and speed > 60 and GetVehicleClass(GetVehiclePedIsIn(PlayerPedId(),  false)) ~= 18 then
@@ -75,7 +82,7 @@ Citizen.CreateThread(function()
 		          z = pos.z
 		        }
 		        TriggerServerEvent('fsn_police:dispatch', coords, 8)
-            Citizen.Wait(5000)
+            Wait(5000)
           end
         end
       end

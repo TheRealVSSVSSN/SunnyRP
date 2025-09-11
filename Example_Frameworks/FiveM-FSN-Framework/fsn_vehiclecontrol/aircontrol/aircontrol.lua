@@ -23,22 +23,19 @@ local vehicleClassDisableControl = {
 }
 
 -- Main thread
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
-        -- Loop forever and update every frame
-        Citizen.Wait(0)
+        Wait(0)
 
-        -- Get player, vehicle and vehicle class
         local player = PlayerPedId()
         local vehicle = GetVehiclePedIsIn(player, false)
-        local vehicleClass = GetVehicleClass(vehicle)
-
-        -- Disable control if player is in the driver seat and vehicle class matches array
-        if ((GetPedInVehicleSeat(vehicle, -1) == player) and vehicleClassDisableControl[vehicleClass]) then
-            -- Check if vehicle is in the air and disable L/R and UP/DN controls
-            if IsEntityInAir(vehicle) then
-                DisableControlAction(2, 59)
-                DisableControlAction(2, 60)
+        if vehicle ~= 0 then
+            local vehicleClass = GetVehicleClass(vehicle)
+            if GetPedInVehicleSeat(vehicle, -1) == player and vehicleClassDisableControl[vehicleClass] then
+                if IsEntityInAir(vehicle) then
+                    DisableControlAction(2, 59)
+                    DisableControlAction(2, 60)
+                end
             end
         end
     end
