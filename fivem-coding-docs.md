@@ -430,7 +430,7 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Player | 248 | 100 | 148 | 2025-09-11T04:46 |
+| Player | 248 | 115 | 133 | 2025-09-11T04:52 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -3913,7 +3913,501 @@ ensure my_resource
   - TODO(next-run): verify semantics.
 - **Reference**: https://docs.fivem.net/natives/?n=_0xCAC57395B151135F
 
+
+##### _0xCB645E85E97EA48B (0xCB645E85E97EA48B)
+- **Scope**: Client
+- **Signature**: `BOOL _0xCB645E85E97EA48B()`
+- **Purpose**: Returns profile setting 243.
+- **Parameters / Returns**:
+  - **Returns**: `bool` profile flag 243.
+- **OneSync / Networking**: Local only; no replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: prof243
+        -- Use: Prints profile setting 243 flag
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('prof243', function()
+        print(_0xCB645E85E97EA48B())
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: prof243 */
+    RegisterCommand('prof243', () => {
+      console.log(global._0xCB645E85E97EA48B());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Internal profile flag; not documented.
+- **Reference**: https://docs.fivem.net/natives/?n=_0xCB645E85E97EA48B
+
+##### _0xD821056B9ACF8052 (0xD821056B9ACF8052)
+- **Scope**: Client
+- **Signature**: `void _0xD821056B9ACF8052(Player player, Any p1)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `p1` (`any`): Unknown.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: nativeD821
+        -- Use: Calls the undocumented native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('nativeD821', function()
+        _0xD821056B9ACF8052(PlayerId(), 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: nativeD821 */
+    RegisterCommand('nativeD821', () => {
+      global._0xD821056B9ACF8052(PlayerId(), 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0xD821056B9ACF8052
+
+##### _0xDCC07526B8EC45AF (0xDCC07526B8EC45AF)
+- **Scope**: Client
+- **Signature**: `BOOL _0xDCC07526B8EC45AF(Player player)`
+- **Purpose**: Always returns false.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - **Returns**: `bool` always `false`.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: nativeDCC0
+        -- Use: Tests always-false native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('nativeDCC0', function()
+        print(_0xDCC07526B8EC45AF(PlayerId()))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: nativeDCC0 */
+    RegisterCommand('nativeDCC0', () => {
+      console.log(_0xDCC07526B8EC45AF(PlayerId()));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns false regardless of inputs.
+- **Reference**: https://docs.fivem.net/natives/?n=_0xDCC07526B8EC45AF
+
+##### _0xDD2620B7B9D16FF1 (0xDD2620B7B9D16FF1)
+- **Scope**: Client
+- **Signature**: `BOOL _0xDD2620B7B9D16FF1(Player player, float p1)`
+- **Purpose**: Undocumented; seen in `agency_heist3a` with p1 around 0.4–0.7.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `p1` (`float`): Unknown.
+  - **Returns**: `bool` result of native.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: nativeDD26
+        -- Use: Calls the undocumented native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('nativeDD26', function()
+        print(_0xDD2620B7B9D16FF1(PlayerId(), 0.5))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: nativeDD26 */
+    RegisterCommand('nativeDD26', () => {
+      console.log(_0xDD2620B7B9D16FF1(PlayerId(), 0.5));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0xDD2620B7B9D16FF1
+
+##### _0xDE45D1A1EF45EE61 (0xDE45D1A1EF45EE61)
+- **Scope**: Client
+- **Signature**: `void _0xDE45D1A1EF45EE61(Player player, BOOL toggle)`
+- **Purpose**: Undocumented; alias `SET_HUD_ANIM_STOP_LEVEL` suggests HUD animation control.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `toggle` (`bool`): Unknown effect.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: nativeDE45
+        -- Use: Calls the undocumented native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('nativeDE45', function()
+        _0xDE45D1A1EF45EE61(PlayerId(), true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: nativeDE45 */
+    RegisterCommand('nativeDE45', () => {
+      _0xDE45D1A1EF45EE61(PlayerId(), true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0xDE45D1A1EF45EE61
+
+##### _0xFAC75988A7D078D3 (0xFAC75988A7D078D3)
+- **Scope**: Client
+- **Signature**: `void _0xFAC75988A7D078D3(Player player)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: nativeFAC7
+        -- Use: Calls the undocumented native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('nativeFAC7', function()
+        _0xFAC75988A7D078D3(PlayerId())
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: nativeFAC7 */
+    RegisterCommand('nativeFAC7', () => {
+      _0xFAC75988A7D078D3(PlayerId());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0xFAC75988A7D078D3
+
+##### _0xFFEE8FA29AB9A18E (0xFFEE8FA29AB9A18E)
+- **Scope**: Client
+- **Signature**: `void _0xFFEE8FA29AB9A18E(Player player)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: nativeFFEE
+        -- Use: Calls the undocumented native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('nativeFFEE', function()
+        _0xFFEE8FA29AB9A18E(PlayerId())
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: nativeFFEE */
+    RegisterCommand('nativeFFEE', () => {
+      _0xFFEE8FA29AB9A18E(PlayerId());
+    });
+    ```
+- **Caveats / Limitations**:
+  - NativeDB notes an additional undocumented parameter.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0xFFEE8FA29AB9A18E
+
+##### NetworkPlayerIdToInt (hash unknown)
+- **Scope**: Client
+- **Signature**: `int NETWORK_PLAYER_ID_TO_INT()`
+- **Purpose**: Alias of `PLAYER_ID`, returns the local player's network index.
+- **Parameters / Returns**:
+  - **Returns**: `int` player index.
+- **OneSync / Networking**: Local only; use `source` on server.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: nidtoint
+        -- Use: Prints player index
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('nidtoint', function()
+        print(NetworkPlayerIdToInt())
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: nidtoint */
+    RegisterCommand('nidtoint', () => {
+      console.log(NetworkPlayerIdToInt());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Equivalent to `PlayerId()`.
+- **Reference**: https://docs.fivem.net/natives/?n=NetworkPlayerIdToInt
+
+##### PlayerAttachVirtualBound (0xED51733DC73AED51)
+- **Scope**: Client
+- **Signature**: `void PLAYER_ATTACH_VIRTUAL_BOUND(float p0, float p1, float p2, float p3, float p4, float p5, float p6, float p7)`
+- **Purpose**: Attach a virtual boundary to the player; used in `ob_sofa_michael`.
+- **Parameters / Returns**:
+  - `p0`–`p7` (`float`): Boundary parameters, semantics unknown.
+- **OneSync / Networking**: Local visualization; not synced.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: attachvbound
+        -- Use: Attaches a virtual bound with default values
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('attachvbound', function()
+        PlayerAttachVirtualBound(0.0,0.0,0.0,0.0,0.0,0.5,1.0,0.7)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: attachvbound */
+    RegisterCommand('attachvbound', () => {
+      PlayerAttachVirtualBound(0.0,0.0,0.0,0.0,0.0,0.5,1.0,0.7);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Parameters are poorly documented.
+- **Reference**: https://docs.fivem.net/natives/?n=PlayerAttachVirtualBound
+
+##### PlayerDetachVirtualBound (0x1DD5897E2FA6E7C9)
+- **Scope**: Client
+- **Signature**: `void PLAYER_DETACH_VIRTUAL_BOUND()`
+- **Purpose**: Remove a virtual boundary previously attached to the player.
+- **Parameters / Returns**:
+  - None.
+- **OneSync / Networking**: Local visualization; not synced.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: detachvbound
+        -- Use: Detaches virtual bound
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('detachvbound', function()
+        PlayerDetachVirtualBound()
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: detachvbound */
+    RegisterCommand('detachvbound', () => {
+      PlayerDetachVirtualBound();
+    });
+    ```
+- **Caveats / Limitations**:
+  - Used with `PlayerAttachVirtualBound`.
+- **Reference**: https://docs.fivem.net/natives/?n=PlayerDetachVirtualBound
+
+##### PlayerId (0x4F8644AF03D0E0D6)
+- **Scope**: Client
+- **Signature**: `Player PLAYER_ID()`
+- **Purpose**: Get the local player's index.
+- **Parameters / Returns**:
+  - **Returns**: `Player` index of local player.
+- **OneSync / Networking**: Local only; server scripts should use the `source` parameter.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: pid
+        -- Use: Prints local player index
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('pid', function()
+        print(PlayerId())
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: pid */
+    RegisterCommand('pid', () => {
+      console.log(PlayerId());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not available on server.
+- **Reference**: https://docs.fivem.net/natives/?n=PlayerId
+
+##### PlayerPedId (0xD80958FC74E988A6)
+- **Scope**: Client
+- **Signature**: `Ped PLAYER_PED_ID()`
+- **Purpose**: Get the entity handle of the local player's ped.
+- **Parameters / Returns**:
+  - **Returns**: `Ped` handle for local player.
+- **OneSync / Networking**: Local entity handle; use `GetPlayerPed` for other players.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: ppid
+        -- Use: Prints local ped handle
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('ppid', function()
+        print(PlayerPedId())
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: ppid */
+    RegisterCommand('ppid', () => {
+      console.log(PlayerPedId());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Handle changes if model changes.
+- **Reference**: https://docs.fivem.net/natives/?n=PlayerPedId
+
+##### RemovePlayerHelmet (0xF3AC26D3CC576528)
+- **Scope**: Client
+- **Signature**: `void REMOVE_PLAYER_HELMET(Player player, BOOL p2)`
+- **Purpose**: Force a player to remove their helmet.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `p2` (`bool`): Unknown toggle.
+- **OneSync / Networking**: Affects local player model; ownership required for remote players.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: removehelm
+        -- Use: Removes player's helmet
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('removehelm', function()
+        RemovePlayerHelmet(PlayerId(), true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: removehelm */
+    RegisterCommand('removehelm', () => {
+      RemovePlayerHelmet(PlayerId(), true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Second parameter usage unknown.
+- **Reference**: https://docs.fivem.net/natives/?n=RemovePlayerHelmet
+
+##### ReportCrime (0xE9B09589827545E7)
+- **Scope**: Client
+- **Signature**: `void REPORT_CRIME(Player player, int crimeType, int wantedLvlThresh)`
+- **Purpose**: Report a crime for a player, potentially increasing wanted level.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player to report.
+  - `crimeType` (`int`): Crime ID.
+  - `wantedLvlThresh` (`int`): Wanted level threshold.
+- **OneSync / Networking**: Server-side authority should validate usage.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: reportcrime
+        -- Use: Reports a sample crime
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('reportcrime', function()
+        ReportCrime(PlayerId(), 7, GetWantedLevelThreshold(1))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: reportcrime */
+    RegisterCommand('reportcrime', () => {
+      ReportCrime(PlayerId(), 7, GetWantedLevelThreshold(1));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Crime and threshold IDs must match game logic.
+- **Reference**: https://docs.fivem.net/natives/?n=ReportCrime
+
+##### ReportPoliceSpottedPlayer (0xDC64D2C53493ED12)
+- **Scope**: Client
+- **Signature**: `void REPORT_POLICE_SPOTTED_PLAYER(Player player)`
+- **Purpose**: Inform the game that police have spotted the player.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player spotted.
+- **OneSync / Networking**: Server validation recommended before flagging.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: policespot
+        -- Use: Flags player as spotted by police
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('policespot', function()
+        ReportPoliceSpottedPlayer(PlayerId())
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: policespot */
+    RegisterCommand('policespot', () => {
+      ReportPoliceSpottedPlayer(PlayerId());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Undocumented crime escalation behavior.
+- **Reference**: https://docs.fivem.net/natives/?n=ReportPoliceSpottedPlayer
+
 ### Server Natives by Category
 
 
-CONTINUE-HERE — 2025-09-11T04:46 — next: 13.2 Client Natives > Player category :: _0xCB645E85E97EA48B
+CONTINUE-HERE — 2025-09-11T04:52 — next: 13.2 Client Natives > Player category :: ResetPlayerArrestState
