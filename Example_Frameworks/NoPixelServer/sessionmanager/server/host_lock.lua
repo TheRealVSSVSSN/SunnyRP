@@ -1,69 +1,109 @@
--- whitelist c2s events
-RegisterServerEvent('hostingSession')
-RegisterServerEvent('hostedSession')
+--[[
+    -- Type: Server Script
+    -- Name: host_lock.lua
+    -- Use: Coordinates session host locking between clients
+    -- Created: 2024-06-04
+    -- By: VSSVSSN
+--]]
 
--- event handler for pre-session 'acquire'
-local currentHosting
+-- whitelist c2s events
+RegisterNetEvent('hostingSession')
+RegisterNetEvent('hostedSession')
+
+--[[
+    -- Type: Constant
+    -- Name: HOST_TIMEOUT
+    -- Use: Maximum time a host lock can be held (ms)
+    -- Created: 2024-06-04
+    -- By: VSSVSSN
+--]]
+local HOST_TIMEOUT <const> = 5000
+
+--[[
+    -- Type: Variable
+    -- Name: currentHosting
+    -- Use: Stores the source ID holding the host lock
+    -- Created: 2024-06-04
+    -- By: VSSVSSN
+--]]
+local currentHosting = nil
+
+--[[
+    -- Type: Variable
+    -- Name: hostReleaseCallbacks
+    -- Use: Queue of callbacks triggered when host lock is released
+    -- Created: 2024-06-04
+    -- By: VSSVSSN
+--]]
 local hostReleaseCallbacks = {}
 
--- TODO: add a timeout for the hosting lock to be held
--- TODO: add checks for 'fraudulent' conflict cases of hosting attempts (typically whenever the host can not be reached)
-AddEventHandler('hostingSession', function()
-    -- if the lock is currently held, tell the client to await further instruction
-    if currentHosting then
-        TriggerClientEvent('sessionHostResult', source, 'wait')
-
-        -- register a callback for when the lock is freed
-        table.insert(hostReleaseCallbacks, function()
-            TriggerClientEvent('sessionHostResult', source, 'free')
-        end)
-
-        return
-    end
-
-    -- if the current host was last contacted less than a second ago
-    if GetHostId() then
-        if GetPlayerLastMsg(GetHostId()) < 1000 then
-            TriggerClientEvent('sessionHostResult', source, 'conflict')
-
-            return
+--[[
+    -- Type: Function
+    -- Name: releaseHost
+    -- Use: Frees the host lock and notifies queued callbacks
+    -- Created: 2024-06-04
+    -- By: VSSVSSN
+--]]
+local function releaseHost()
+    for _, cb in ipairs(hostReleaseCallbacks) do
+        local ok, err = pcall(cb)
+        if not ok then
+            print('[sessionmanager] host release callback error:', err)
         end
     end
 
     hostReleaseCallbacks = {}
+    currentHosting = nil
+end
 
-    currentHosting = source
+--[[
+    -- Type: Event
+    -- Name: hostingSession
+    -- Use: Attempt to acquire host lock before creating a session
+    -- Created: 2024-06-04
+    -- By: VSSVSSN
+--]]
+AddEventHandler('hostingSession', function()
+    local src = source
 
-    TriggerClientEvent('sessionHostResult', source, 'go')
-
-    -- set a timeout of 5 seconds
-    SetTimeout(5000, function()
-        if not currentHosting then
-            return
+    if currentHosting then
+        TriggerClientEvent('sessionHostResult', src, 'wait')
+        hostReleaseCallbacks[#hostReleaseCallbacks + 1] = function()
+            TriggerClientEvent('sessionHostResult', src, 'free')
         end
+        return
+    end
 
-        currentHosting = nil
+    local hostId = GetHostId()
+    if hostId and hostId ~= 0 and GetPlayerLastMsg(hostId) < 1000 then
+        TriggerClientEvent('sessionHostResult', src, 'conflict')
+        return
+    end
 
-        for _, cb in ipairs(hostReleaseCallbacks) do
-            cb()
+    currentHosting = src
+    TriggerClientEvent('sessionHostResult', src, 'go')
+
+    Citizen.SetTimeout(HOST_TIMEOUT, function()
+        if currentHosting == src then
+            releaseHost()
         end
     end)
 end)
 
+--[[
+    -- Type: Event
+    -- Name: hostedSession
+    -- Use: Releases the host lock after a session starts
+    -- Created: 2024-06-04
+    -- By: VSSVSSN
+--]]
 AddEventHandler('hostedSession', function()
-    -- check if the client is the original locker
     if currentHosting ~= source then
-        -- TODO: drop client as they're clearly lying
-        print(currentHosting, '~=', source)
+        print(('[sessionmanager] %s attempted to release host lock without ownership'):format(source))
         return
     end
 
-    -- free the host lock (call callbacks and remove the lock value)
-    for _, cb in ipairs(hostReleaseCallbacks) do
-        cb()
-    end
-
-    currentHosting = nil
+    releaseHost()
 end)
 
 EnableEnhancedHostSupport(true)
