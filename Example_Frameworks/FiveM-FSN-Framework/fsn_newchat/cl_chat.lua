@@ -1,5 +1,5 @@
 local chatInputActive = false
-local chatInputActivating = false
+local OPEN_CHAT_KEY = 245 -- INPUT_MP_TEXT_CHAT_ALL
 
 RegisterNetEvent('chatMessage')
 RegisterNetEvent('chat:addTemplate')
@@ -46,7 +46,7 @@ AddEventHandler('__cfx_internal:serverPrint', function(msg)
 end)
 
 AddEventHandler('chat:addMessage', function(message)
-  if message:sub(1, 1) ~= '/' then
+  if type(message) == 'table' then
     SendNUIMessage({
       type = 'ON_MESSAGE',
       message = message
@@ -118,6 +118,13 @@ RegisterNUICallback('chatResult', function(data, cb)
   cb('ok')
 end)
 
+--[[
+    -- Type: Function
+    -- Name: refreshCommands
+    -- Use: Builds chat command suggestions for the client
+    -- Created: 10 Sep 2025
+    -- By: VSSVSSN
+--]]
 local function refreshCommands()
   if GetRegisteredCommands then
     local registeredCommands = GetRegisteredCommands()
@@ -125,12 +132,12 @@ local function refreshCommands()
     local suggestions = {}
 
     for _, command in ipairs(registeredCommands) do
-        if IsAceAllowed(('command.%s'):format(command.name)) then
-            table.insert(suggestions, {
-                name = '/' .. command.name,
-                help = ''
-            })
-        end
+      if IsAceAllowed(('command.%s'):format(command.name)) then
+        table.insert(suggestions, {
+          name = '/' .. command.name,
+          help = ''
+        })
+      end
     end
 
     TriggerEvent('chat:addSuggestions', suggestions)
@@ -151,30 +158,28 @@ RegisterNUICallback('loaded', function(data, cb)
   cb('ok')
 end)
 
-Citizen.CreateThread(function()
+--[[
+    -- Type: Function
+    -- Name: chatControlThread
+    -- Use: Handles keyboard input for opening the chat interface
+    -- Created: 10 Sep 2025
+    -- By: VSSVSSN
+--]]
+CreateThread(function()
   SetTextChatEnabled(false)
   SetNuiFocus(false)
 
   while true do
     Wait(0)
 
-    if not chatInputActive then
-      if IsControlPressed(0, 245) --[[ INPUT_MP_TEXT_CHAT_ALL ]] then
-        chatInputActive = true
-        chatInputActivating = true
+    if not chatInputActive and IsControlJustReleased(0, OPEN_CHAT_KEY) then
+      chatInputActive = true
 
-        SendNUIMessage({
-          type = 'ON_OPEN'
-        })
-      end
-    end
+      SendNUIMessage({
+        type = 'ON_OPEN'
+      })
 
-    if chatInputActivating then
-      if not IsControlPressed(0, 245) then
-        SetNuiFocus(true)
-
-        chatInputActivating = false
-      end
+      SetNuiFocus(true, false)
     end
   end
 end)
