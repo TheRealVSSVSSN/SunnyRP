@@ -1,29 +1,28 @@
---[[/	:FSN:	\]]--
-fx_version 'adamant'
+fx_version 'cerulean'
 game 'gta5'
+lua54 'yes'
 
-client_script '@fsn_main/cl_utils.lua'
-server_script '@fsn_main/sv_utils.lua'
-client_script '@fsn_main/server_settings/sh_settings.lua'
-server_script '@fsn_main/server_settings/sh_settings.lua'
-server_script '@mysql-async/lib/MySQL.lua'
---[[/	:FSN:	\]]--
+description 'Simple Notification Script using Noty.js'
 
-description "Simple Notification Script using https://notifyjs.com/"
+ui_page 'html/index.html'
 
-ui_page "html/index.html"
+client_scripts {
+    'cl_notify.lua'
+}
 
-client_script "cl_notify.lua"
-server_script "server.lua"
+server_scripts {
+    'server.lua'
+}
 
-export "SetQueueMax"
-export "SendNotification"
+exports {
+    'SetQueueMax',
+    'SendNotification'
+}
 
 files {
-    "html/index.html",
-    "html/pNotify.js",
-    "html/noty.js",
-    "html/noty.css",
-    "html/themes.css",
-    "html/sound-example.wav"
+    'html/index.html',
+    'html/noty.js',
+    'html/noty.css',
+    'html/themes.css',
+    'html/pNotify.js'
 }
