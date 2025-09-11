@@ -1,28 +1,19 @@
--- TODO: Merge "threads"
 local canJump = true
 
-Citizen.CreateThread(function()
-	while true do
-		Citizen.Wait(1)
-		if IsPedJumping(PlayerPedId()) then
-			if canJump then
-				Citizen.Wait(1000)
-				canJump = false
-				Citizen.Wait(3000)
-				canJump = true
-			end 			
-		end
-	end
-end)
-
-Citizen.CreateThread(function()
-	while true do
-		Citizen.Wait(1)
-		NetworkSessionVoiceLeave()
-		if IsPedJumping(PlayerPedId()) then
-			if not canJump then
-				SetPedToRagdoll(PlayerPedId(), 1, 1000, 0, 0, 0, 0)
-			end 			
-		end
-	end
+CreateThread(function()
+        NetworkSessionVoiceLeave()
+        while true do
+                Wait(1)
+                local ped = PlayerPedId()
+                if IsPedJumping(ped) then
+                        if canJump then
+                                Wait(1000)
+                                canJump = false
+                                Wait(3000)
+                                canJump = true
+                        else
+                                SetPedToRagdoll(ped, 1, 1000, 0, 0, 0, 0)
+                        end
+                end
+        end
 end)

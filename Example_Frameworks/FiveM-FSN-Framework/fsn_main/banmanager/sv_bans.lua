@@ -99,70 +99,73 @@ function print_table(node)
 end
 
 function checkBan(source, setKickReason)
-	local src = source
-	updateIdentifiers(src)
-	
-	for k, v in pairs(GetPlayerIdentifiers(src)) do
-		--print('>>>    :fsn_main: (sv_bans.lua) Checking bans for Player('..src..'), Identifier('..v..')')
-		sql = "SELECT * FROM `fsn_bans` WHERE `ban_identifier` = '"..v.."'"
-		--print('>>>>>>>>>>> '..sql)
-		local check = MySQL.Sync.fetchAll(sql)
-		if check[1] then
-			if check[1].ban_expire >= os.time() or check[1].ban_expire == -1 then
-				local reason = 'your ban is weirdly formatted, ask jamessc0tt'
-				if check[1]['ban_expire'] == -1 then
-					print(':fsn_main: (sv_bans.lua) - Player('..src..') is PERM banned, Identifier('..v..') - dropping player.')
-					reason = ':FSN: You are banned from Fusion Roleplay. \n\nBanID: '..check[1]['ban_id']..'\nReason: '..check[1]['ban_reason']..'\nExpires: Never\n\nAppeal this ban @ fsn.life/forums\n\n'
-				else
-					print(':fsn_main: (sv_bans.lua) - Player('..src..') is banned until Date('..check[1]['ban_expire']..'), Identifier('..v..') - dropping player.')
-                    reason = ':FSN: You are banned from Fusion Roleplay. \n\nBanID: '..check[1]['ban_id']..'\nReason: '..check[1]['ban_reason']..'\nExpires: '..check[1]['ban_expire']..'\n\nAppeal this ban @ fsn.life/forums\n\n'
-                    -- unban date needs to be formatted properly jamesy
-				end
-				DropPlayer(src, reason)
-				if setKickReason then
-					setKickReason(reason)
-				end
-				CancelEvent()
-			end
-		end
-	end
+        local src = source
+        updateIdentifiers(src)
+        for _, identifier in pairs(GetPlayerIdentifiers(src)) do
+                local check = MySQL.query.await('SELECT * FROM fsn_bans WHERE ban_identifier = @identifier', {
+                        ['@identifier'] = identifier
+                })
+                if check[1] then
+                        if check[1].ban_expire >= os.time() or check[1].ban_expire == -1 then
+                                local reason
+                                if check[1].ban_expire == -1 then
+                                        print((':fsn_main: (sv_bans.lua) - Player(%s) is PERM banned, Identifier(%s) - dropping player.'):format(src, identifier))
+                                        reason = ':FSN: You are banned from Fusion Roleplay. \n\nBanID: '..check[1].ban_id..'\nReason: '..check[1].ban_reason..'\nExpires: Never\n\nAppeal this ban @ fsn.life/forums\n\n'
+                                else
+                                        print((':fsn_main: (sv_bans.lua) - Player(%s) is banned until Date(%s), Identifier(%s) - dropping player.'):format(src, check[1].ban_expire, identifier))
+                                        reason = ':FSN: You are banned from Fusion Roleplay. \n\nBanID: '..check[1].ban_id..'\nReason: '..check[1].ban_reason..'\nExpires: '..check[1].ban_expire..'\n\nAppeal this ban @ fsn.life/forums\n\n'
+                                end
+                                DropPlayer(src, reason)
+                                if setKickReason then
+                                        setKickReason(reason)
+                                end
+                                CancelEvent()
+                        end
+                end
+        end
 end
 
 function updateIdentifiers(src)
 	
-	local steamid = GetPlayerIdentifiers(src)[1]
-	if not steamid then print('trying to update identifiers for player('..src..') failed') return else print(':fsn_main: (sv_bans.lua) Updating identifiers for Player('..src..') with SteamID('..steamid..')') end
-	local sql = MySQL.Sync.fetchAll("SELECT * FROM `fsn_users` WHERE `steamid` = '"..steamid.."'")
-	if sql[1] then
-        local myIdentifiers = sql[1]['identifiers']
-		if myIdentifiers then
-			myIdentifiers = json.decode(myIdentifiers)
-		else
-			myIdentifiers = {}
-		end
-		for k, v in pairs(GetPlayerIdentifiers(src)) do
-			--print('checking identifier: '..v)
-			local split = SplitString(v, ':')
-			local iType = split[1]
-			if not myIdentifiers[iType] then
-				myIdentifiers[iType] = {}
-			end
-			local exists = false
-			for key, value in pairs(myIdentifiers[iType]) do
-				if value == v then
-					exists = true
-				end
-			end
-			if not exists then
-				table.insert(myIdentifiers[iType], #myIdentifiers[iType]+1, v)
-			end
-		end
-		local update = json.encode(myIdentifiers)
-		--print(':fsn_main: Updating user_id('..sql[1]['user_id']..') identifiers\n to '..update)
-		
-		MySQL.Sync.execute("UPDATE `fsn_users` SET `identifiers` = '"..update.."' WHERE `user_id` = "..sql[1]['user_id']..";")
-	end
-	
+        local steamid = GetPlayerIdentifiers(src)[1]
+        if not steamid then
+                print('trying to update identifiers for player('..src..') failed')
+                return
+        else
+                print(':fsn_main: (sv_bans.lua) Updating identifiers for Player('..src..') with SteamID('..steamid..')')
+        end
+        local sql = MySQL.query.await('SELECT * FROM fsn_users WHERE steamid = @steamid', {
+                ['@steamid'] = steamid
+        })
+        if sql[1] then
+                local myIdentifiers = sql[1].identifiers
+                if myIdentifiers then
+                        myIdentifiers = json.decode(myIdentifiers)
+                else
+                        myIdentifiers = {}
+                end
+                for _, v in pairs(GetPlayerIdentifiers(src)) do
+                        local split = SplitString(v, ':')
+                        local iType = split[1]
+                        myIdentifiers[iType] = myIdentifiers[iType] or {}
+                        local exists = false
+                        for _, value in pairs(myIdentifiers[iType]) do
+                                if value == v then
+                                        exists = true
+                                        break
+                                end
+                        end
+                        if not exists then
+                                table.insert(myIdentifiers[iType], v)
+                        end
+                end
+                local update = json.encode(myIdentifiers)
+                MySQL.update.await('UPDATE fsn_users SET identifiers = @ids WHERE user_id = @id', {
+                        ['@ids'] = update,
+                        ['@id'] = sql[1].user_id
+                })
+        end
+
 end
 
 --AddEventHandler("playerConnecting", checkBan)
