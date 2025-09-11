@@ -1,120 +1,109 @@
-$(document).ready(function () {
-  // Mouse Controls
-  var documentWidth = document.documentElement.clientWidth;
-  var documentHeight = document.documentElement.clientHeight;
-  var RadioChannel = "0.0";
-  var Emergency = false;
-  var Powered = false;
+document.addEventListener('DOMContentLoaded', () => {
+  const radioForm = document.getElementById('Radio-Form');
+  const radioChannelInput = document.getElementById('RadioChannel');
+  const powerBtn = document.getElementById('power');
+  const volumeUpBtn = document.getElementById('volumeUp');
+  const volumeDownBtn = document.getElementById('volumeDown');
+  const overlay = document.querySelector('.full-screen');
+  const container = document.querySelector('.radio-container');
 
-  function escapeHtml(string) {
-    return String(string).replace(/[&<>"'`=\/]/g, function (s) {
-      return entityMap[s];
+  let radioChannel = '0.0';
+  let emergency = false;
+  let powered = false;
+
+  const post = (url, data = {}) => {
+    fetch(`https://radio/${url}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+      body: JSON.stringify(data)
     });
-  }
+  };
 
-  function closeGui() {
-    if (Powered) {
-      if (RadioChannel < 100.0 || RadioChannel > 999.9) {
-        if (RadioChannel < 10 && Emergency) {
-        } else {
-          RadioChannel = "0.0";
+  const closeGui = () => {
+    if (powered) {
+      const channelNum = parseFloat(radioChannel);
+      if (channelNum < 100.0 || channelNum > 999.9) {
+        if (!(channelNum < 10 && emergency)) {
+          radioChannel = '0.0';
         }
       }
-      $.post("http://radio/close", JSON.stringify({ channel: RadioChannel }));
+      post('close', { channel: radioChannel });
     } else {
-      $.post("http://radio/cleanClose", JSON.stringify({}));
+      post('cleanClose');
     }
-  }
+  };
 
-  function closeSave() {
-    if (Powered) {
-      RadioChannel = parseFloat($("#RadioChannel").val());
-      if (!RadioChannel) {
-        RadioChannel = "0.0";
-      }
+  const closeSave = () => {
+    if (powered) {
+      const parsed = parseFloat(radioChannelInput.value);
+      radioChannel = parsed ? parsed.toFixed(1) : '0.0';
     }
     closeGui();
-  }
+  };
 
-  // Listen for NUI Events
-  window.addEventListener("message", function (event) {
-    var item = event.data;
-    if (item.reset === true) {
-      closeGui();
-    }
-    if (item.set === true) {
-      RadioChannel = item.setChannel;
-    }
-    if (item.open === true) {
-      Emergency = item.jobType;
-
-      if (RadioChannel != "0.0" && Powered) {
-        $("#RadioChannel").val(RadioChannel);
-      } else {
-        if (Powered) {
-          $("#RadioChannel").val("");
-          $("#RadioChannel").attr("placeholder", "100.0-999.9");
-          $("#RadioChannel").prop("disabled", false);
+  window.addEventListener('message', event => {
+    const item = event.data;
+    if (item.reset) closeGui();
+    if (item.set) radioChannel = item.setChannel;
+    if (typeof item.open === 'boolean') {
+      emergency = item.jobType;
+      if (item.open) {
+        if (radioChannel !== '0.0' && powered) {
+          radioChannelInput.value = radioChannel;
+        } else if (powered) {
+          radioChannelInput.value = '';
+          radioChannelInput.placeholder = '100.0-999.9';
+          radioChannelInput.disabled = false;
         } else {
-          $("#RadioChannel").val("");
-          $("#RadioChannel").attr("placeholder", "Off");
-          $("#RadioChannel").prop("disabled", true);
+          radioChannelInput.value = '';
+          radioChannelInput.placeholder = 'Off';
+          radioChannelInput.disabled = true;
         }
+        overlay.style.display = 'block';
+        container.style.display = 'block';
+        radioChannelInput.focus();
+      } else {
+        overlay.style.display = 'none';
+        container.style.display = 'none';
       }
-
-      $(".full-screen").fadeIn(100);
-      $(".radio-container").fadeIn(100);
-      $("#cursor").css("display", "block");
-      $("#RadioChannel").focus();
-    }
-    if (item.open === false) {
-      $(".full-screen").fadeOut(100);
-      $(".radio-container").fadeOut(100);
-      $("#cursor").css("display", "none");
     }
   });
 
-  $("#Radio-Form").submit(function (e) {
+  radioForm.addEventListener('submit', e => {
     e.preventDefault();
     closeSave();
   });
 
-  $("#power").click(function () {
-    if (Powered === false) {
-      Powered = true;
-      $("#RadioChannel").prop("disabled", false);
-      $("#RadioChannel").focus();
-      $("#RadioChannel").val(RadioChannel === "0.0" ? "" : RadioChannel);
-      $("#RadioChannel").attr("placeholder", "100.0-999.9");
-      $.post("http://radio/click", JSON.stringify({}));
-      $.post(
-        "http://radio/poweredOn",
-        JSON.stringify({ channel: RadioChannel })
-      );
+  powerBtn.addEventListener('click', () => {
+    if (!powered) {
+      powered = true;
+      radioChannelInput.disabled = false;
+      radioChannelInput.focus();
+      radioChannelInput.value = radioChannel === '0.0' ? '' : radioChannel;
+      radioChannelInput.placeholder = '100.0-999.9';
+      post('click');
+      post('poweredOn', { channel: radioChannel });
     } else {
-      Powered = false;
-      $.post("http://radio/click", JSON.stringify({}));
-      $.post("http://radio/poweredOff", JSON.stringify({}));
-
-      $("#RadioChannel").val("");
-      $("#RadioChannel").attr("placeholder", "Off");
-      $("#RadioChannel").prop("disabled", true);
+      powered = false;
+      post('click');
+      post('poweredOff');
+      radioChannelInput.value = '';
+      radioChannelInput.placeholder = 'Off';
+      radioChannelInput.disabled = true;
     }
   });
-  $("#volumeUp").click(function () {
-    $.post("http://radio/click", JSON.stringify({}));
-    $.post("http://radio/volumeUp", JSON.stringify({}));
+
+  volumeUpBtn.addEventListener('click', () => {
+    post('click');
+    post('volumeUp');
   });
 
-  $("#volumeDown").click(function () {
-    $.post("http://radio/click", JSON.stringify({}));
-    $.post("http://radio/volumeDown", JSON.stringify({}));
+  volumeDownBtn.addEventListener('click', () => {
+    post('click');
+    post('volumeDown');
   });
 
-  // On 'Esc' call close method
-  document.onkeyup = function (data) {
-    if (data.which == 27) {
-      closeSave();
-    }
-  };
+  document.addEventListener('keyup', e => {
+    if (e.key === 'Escape') closeSave();
+  });
 });
