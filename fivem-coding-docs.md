@@ -508,6 +508,47 @@ ensure my_resource
 - **Reference**: https://docs.fivem.net/natives/?_0x6D0DE6A7B5DA71F8
   - TODO(next-run): verify signature and hash against official docs.
 
+##### GetPlayerPing (0x6E31E993)
+- **Scope**: Shared
+- **Signature**: `int GetPlayerPing(Player player)`
+- **Purpose**: Retrieve the measured network latency for a given player in milliseconds.
+- **Parameters / Returns**:
+  - `player` (`Player`): slot or server ID of the player.
+  - **Returns**: `int` latency in milliseconds.
+- **OneSync / Networking**: Ping is tracked server‑side and does not rely on entity ownership.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Function
+        -- Name: checkPing
+        -- Use: Prints a player's current ping to console
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('ping', function(src)
+        local ping = GetPlayerPing(src)             -- query server latency
+        print(('Player %s ping %dms'):format(src, ping))
+    end)
+    ```
+
+  - JavaScript:
+
+    ```javascript
+    // server/main.js
+    // Prints a player's ping when they use /ping
+    RegisterCommand('ping', (src) => {
+      const ping = GetPlayerPing(src);             // query server latency
+      console.log(`Player ${src} ping ${ping}ms`);
+    });
+    ```
+
+- **Caveats / Limitations**:
+  - Returns 0 if the player does not exist or ping is unavailable.
+- **Reference**: https://docs.fivem.net/natives/?_0x6E31E993
+  - TODO(next-run): verify signature and hash against official docs.
+
 ### Server Natives by Category
 
-CONTINUE-HERE — 2025-09-11T02:21:42+00:00 — next: continue 13.2 Client Natives > Player category with GetPlayerPing
+CONTINUE-HERE — 2025-09-11T03:00:00+00:00 — next: continue 13.2 Client Natives > Player category with GetPlayerServerId
