@@ -430,7 +430,7 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Player | 248 | 75 | 173 | 2025-09-11T04:28 |
+| Player | 248 | 100 | 148 | 2025-09-11T04:46 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -3062,7 +3062,858 @@ ensure my_resource
   - TODO(next-run): verify semantics.
 - **Reference**: https://docs.fivem.net/natives/?n=_0x2382AB11450AE7BA
 
+##### _0x2F41A3BAE005E5FA (0x2F41A3BAE005E5FA)
+- **Scope**: Client
+- **Signature**: `void _0x2F41A3BAE005E5FA(Any p0, Any p1)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `p0` (`any`): Unknown.
+  - `p1` (`any`): Unknown.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: native2f41
+        -- Use: Demonstrates calling the native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('native2f41', function()
+        _0x2F41A3BAE005E5FA(0, 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: native2f41 */
+    RegisterCommand('native2f41', () => {
+      _0x2F41A3BAE005E5FA(0, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0x2F41A3BAE005E5FA
+
+##### _0x2F7CEB6520288061 (0x2F7CEB6520288061 0x2849D4B2)
+- **Scope**: Client
+- **Signature**: `void _0x2F7CEB6520288061(BOOL p0)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `p0` (`bool`): Unknown.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: native2f7c
+        -- Use: Demonstrates calling the native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('native2f7c', function()
+        _0x2F7CEB6520288061(0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: native2f7c */
+    RegisterCommand('native2f7c', () => {
+      _0x2F7CEB6520288061(0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0x2F7CEB6520288061
+
+##### _0x31E90B8873A4CD3B (0x31E90B8873A4CD3B)
+- **Scope**: Client
+- **Signature**: `void _0x31E90B8873A4CD3B(Player player, float p1)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`player`): Unknown.
+  - `p1` (`float`): Unknown.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: native31e9
+        -- Use: Demonstrates calling the native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('native31e9', function()
+        _0x31E90B8873A4CD3B(0, 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: native31e9 */
+    RegisterCommand('native31e9', () => {
+      _0x31E90B8873A4CD3B(0, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0x31E90B8873A4CD3B
+
+##### _0x36F1B38855F2A8DF (0x36F1B38855F2A8DF 0x3A7E5FB6)
+- **Scope**: Client
+- **Signature**: `void _0x36F1B38855F2A8DF(Player player)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`player`): Unknown.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: native36f1
+        -- Use: Demonstrates calling the native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('native36f1', function()
+        _0x36F1B38855F2A8DF(0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: native36f1 */
+    RegisterCommand('native36f1', () => {
+      _0x36F1B38855F2A8DF(0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0x36F1B38855F2A8DF
+
+##### _0x4669B3ED80F24B4E (0x4669B3ED80F24B4E 0xB9FB142F)
+- **Scope**: Client
+- **Signature**: `void _0x4669B3ED80F24B4E(Player player)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`player`): Unknown.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: native4669
+        -- Use: Demonstrates calling the native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('native4669', function()
+        _0x4669B3ED80F24B4E(0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: native4669 */
+    RegisterCommand('native4669', () => {
+      _0x4669B3ED80F24B4E(0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0x4669B3ED80F24B4E
+
+##### _0x5501B7A5CDB79D37 (0x5501B7A5CDB79D37)
+- **Scope**: Client
+- **Signature**: `void _0x5501B7A5CDB79D37(Player player)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`player`): Unknown.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: native5501
+        -- Use: Demonstrates calling the native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('native5501', function()
+        _0x5501B7A5CDB79D37(0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: native5501 */
+    RegisterCommand('native5501', () => {
+      _0x5501B7A5CDB79D37(0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0x5501B7A5CDB79D37
+
+##### _0x55FCC0C390620314 (0x55FCC0C390620314)
+- **Scope**: Client
+- **Signature**: `void _0x55FCC0C390620314(Player player1, Player player2, BOOL toggle)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player1` (`player`): Unknown.
+  - `player2` (`player`): Unknown.
+  - `toggle` (`bool`): Unknown.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: native55fc
+        -- Use: Demonstrates calling the native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('native55fc', function()
+        _0x55FCC0C390620314(0, 0, 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: native55fc */
+    RegisterCommand('native55fc', () => {
+      _0x55FCC0C390620314(0, 0, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0x55FCC0C390620314
+
+##### _0x690A61A6D13583F6 (0x690A61A6D13583F6 0x1D371529)
+- **Scope**: Client
+- **Signature**: `BOOL _0x690A61A6D13583F6(Player player)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`player`): Unknown.
+  - **Returns**: `bool` result.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: native690a
+        -- Use: Demonstrates calling the native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('native690a', function()
+        local result = _0x690A61A6D13583F6(0)
+                print(result)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: native690a */
+    RegisterCommand('native690a', () => {
+      const result = _0x690A61A6D13583F6(0);
+            console.log(result);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0x690A61A6D13583F6
+
+##### _0x6E4361FF3E8CD7CA (0x6E4361FF3E8CD7CA)
+- **Scope**: Client
+- **Signature**: `Any _0x6E4361FF3E8CD7CA(Any p0)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `p0` (`any`): Unknown.
+  - **Returns**: `any` result.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: native6e43
+        -- Use: Demonstrates calling the native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('native6e43', function()
+        local result = _0x6E4361FF3E8CD7CA(0)
+                print(result)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: native6e43 */
+    RegisterCommand('native6e43', () => {
+      const result = _0x6E4361FF3E8CD7CA(0);
+            console.log(result);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0x6E4361FF3E8CD7CA
+
+##### _0x70A382ADEC069DD3 (0x70A382ADEC069DD3)
+- **Scope**: Client
+- **Signature**: `void _0x70A382ADEC069DD3(float coordX, float coordY, float coordZ)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `coordX` (`float`): Unknown.
+  - `coordY` (`float`): Unknown.
+  - `coordZ` (`float`): Unknown.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: native70a3
+        -- Use: Demonstrates calling the native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('native70a3', function()
+        _0x70A382ADEC069DD3(0, 0, 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: native70a3 */
+    RegisterCommand('native70a3', () => {
+      _0x70A382ADEC069DD3(0, 0, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0x70A382ADEC069DD3
+
+##### _0x7148E0F43D11F0D9 (0x7148E0F43D11F0D9)
+- **Scope**: Client
+- **Signature**: `void _0x7148E0F43D11F0D9()`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - None.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: native7148
+        -- Use: Demonstrates calling the native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('native7148', function()
+        _0x7148E0F43D11F0D9()
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: native7148 */
+    RegisterCommand('native7148', () => {
+      _0x7148E0F43D11F0D9();
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0x7148E0F43D11F0D9
+
+##### _0x7BAE68775557AE0B (0x7BAE68775557AE0B)
+- **Scope**: Client
+- **Signature**: `void _0x7BAE68775557AE0B(Any p0, Any p1, Any p2, Any p3, Any p4, Any p5)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `p0` (`any`): Unknown.
+  - `p1` (`any`): Unknown.
+  - `p2` (`any`): Unknown.
+  - `p3` (`any`): Unknown.
+  - `p4` (`any`): Unknown.
+  - `p5` (`any`): Unknown.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: native7bae
+        -- Use: Demonstrates calling the native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('native7bae', function()
+        _0x7BAE68775557AE0B(0, 0, 0, 0, 0, 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: native7bae */
+    RegisterCommand('native7bae', () => {
+      _0x7BAE68775557AE0B(0, 0, 0, 0, 0, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0x7BAE68775557AE0B
+
+##### _0x7E07C78925D5FD96 (0x7E07C78925D5FD96)
+- **Scope**: Client
+- **Signature**: `Any _0x7E07C78925D5FD96(Any p0)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `p0` (`any`): Unknown.
+  - **Returns**: `any` result.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: native7e07
+        -- Use: Demonstrates calling the native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('native7e07', function()
+        local result = _0x7E07C78925D5FD96(0)
+                print(result)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: native7e07 */
+    RegisterCommand('native7e07', () => {
+      const result = _0x7E07C78925D5FD96(0);
+            console.log(result);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0x7E07C78925D5FD96
+
+##### _0x823EC8E82BA45986 (0x823EC8E82BA45986)
+- **Scope**: Client
+- **Signature**: `void _0x823EC8E82BA45986(Any p0)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `p0` (`any`): Unknown.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: native823e
+        -- Use: Demonstrates calling the native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('native823e', function()
+        _0x823EC8E82BA45986(0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: native823e */
+    RegisterCommand('native823e', () => {
+      _0x823EC8E82BA45986(0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0x823EC8E82BA45986
+
+##### _0x8D768602ADEF2245 (0x8D768602ADEF2245)
+- **Scope**: Client
+- **Signature**: `void _0x8D768602ADEF2245(Player player, float p1)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`player`): Unknown.
+  - `p1` (`float`): Unknown.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: native8d76
+        -- Use: Demonstrates calling the native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('native8d76', function()
+        _0x8D768602ADEF2245(0, 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: native8d76 */
+    RegisterCommand('native8d76', () => {
+      _0x8D768602ADEF2245(0, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0x8D768602ADEF2245
+
+##### _0x9097EB6D4BB9A12A (0x9097EB6D4BB9A12A)
+- **Scope**: Client
+- **Signature**: `void _0x9097EB6D4BB9A12A(Player player, Entity entity)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`player`): Unknown.
+  - `entity` (`entity`): Unknown.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: native9097
+        -- Use: Demonstrates calling the native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('native9097', function()
+        _0x9097EB6D4BB9A12A(0, 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: native9097 */
+    RegisterCommand('native9097', () => {
+      _0x9097EB6D4BB9A12A(0, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0x9097EB6D4BB9A12A
+
+##### _0x9EDD76E87D5D51BA (0x9EDD76E87D5D51BA 0xE30A64DC)
+- **Scope**: Client
+- **Signature**: `void _0x9EDD76E87D5D51BA(Player player)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`player`): Unknown.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: native9edd
+        -- Use: Demonstrates calling the native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('native9edd', function()
+        _0x9EDD76E87D5D51BA(0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: native9edd */
+    RegisterCommand('native9edd', () => {
+      _0x9EDD76E87D5D51BA(0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0x9EDD76E87D5D51BA
+
+##### _0x9F260BFB59ADBCA3 (0x9F260BFB59ADBCA3)
+- **Scope**: Client
+- **Signature**: `void _0x9F260BFB59ADBCA3(Player player, Entity entity)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`player`): Unknown.
+  - `entity` (`entity`): Unknown.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: native9f26
+        -- Use: Demonstrates calling the native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('native9f26', function()
+        _0x9F260BFB59ADBCA3(0, 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: native9f26 */
+    RegisterCommand('native9f26', () => {
+      _0x9F260BFB59ADBCA3(0, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0x9F260BFB59ADBCA3
+
+##### _0xAD73CE5A09E42D12 (0xAD73CE5A09E42D12 0x85725848)
+- **Scope**: Client
+- **Signature**: `void _0xAD73CE5A09E42D12(Player player)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`player`): Unknown.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: nativead73
+        -- Use: Demonstrates calling the native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('nativead73', function()
+        _0xAD73CE5A09E42D12(0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: nativead73 */
+    RegisterCommand('nativead73', () => {
+      _0xAD73CE5A09E42D12(0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0xAD73CE5A09E42D12
+
+##### _0xB45EFF719D8427A6 (0xB45EFF719D8427A6 0xBF6993C7)
+- **Scope**: Client
+- **Signature**: `void _0xB45EFF719D8427A6(float p0)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `p0` (`float`): Unknown.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: nativeb45e
+        -- Use: Demonstrates calling the native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('nativeb45e', function()
+        _0xB45EFF719D8427A6(0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: nativeb45e */
+    RegisterCommand('nativeb45e', () => {
+      _0xB45EFF719D8427A6(0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0xB45EFF719D8427A6
+
+##### _0xB885852C39CC265D (0xB885852C39CC265D 0x47D6004E)
+- **Scope**: Client
+- **Signature**: `void _0xB885852C39CC265D()`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - None.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: nativeb885
+        -- Use: Demonstrates calling the native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('nativeb885', function()
+        _0xB885852C39CC265D()
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: nativeb885 */
+    RegisterCommand('nativeb885', () => {
+      _0xB885852C39CC265D();
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0xB885852C39CC265D
+
+##### _0xB9CF1F793A9F1BF1 (0xB9CF1F793A9F1BF1)
+- **Scope**: Client
+- **Signature**: `BOOL _0xB9CF1F793A9F1BF1()`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - **Returns**: `bool` result.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: nativeb9cf
+        -- Use: Demonstrates calling the native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('nativeb9cf', function()
+        local result = _0xB9CF1F793A9F1BF1()
+                print(result)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: nativeb9cf */
+    RegisterCommand('nativeb9cf', () => {
+      const result = _0xB9CF1F793A9F1BF1();
+            console.log(result);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0xB9CF1F793A9F1BF1
+
+##### _0xBC9490CA15AEA8FB (0xBC9490CA15AEA8FB 0x6B34A160)
+- **Scope**: Client
+- **Signature**: `void _0xBC9490CA15AEA8FB(Player player)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`player`): Unknown.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: nativebc94
+        -- Use: Demonstrates calling the native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('nativebc94', function()
+        _0xBC9490CA15AEA8FB(0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: nativebc94 */
+    RegisterCommand('nativebc94', () => {
+      _0xBC9490CA15AEA8FB(0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0xBC9490CA15AEA8FB
+
+##### _0xC3376F42B1FACCC6 (0xC3376F42B1FACCC6 0x02DF7AF4)
+- **Scope**: Client
+- **Signature**: `void _0xC3376F42B1FACCC6(Player player)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`player`): Unknown.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: nativec337
+        -- Use: Demonstrates calling the native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('nativec337', function()
+        _0xC3376F42B1FACCC6(0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: nativec337 */
+    RegisterCommand('nativec337', () => {
+      _0xC3376F42B1FACCC6(0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0xC3376F42B1FACCC6
+
+##### _0xCAC57395B151135F (0xCAC57395B151135F 0x00563E0D)
+- **Scope**: Client
+- **Signature**: `void _0xCAC57395B151135F(Player player, BOOL p1)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`player`): Unknown.
+  - `p1` (`bool`): Unknown.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: nativecac5
+        -- Use: Demonstrates calling the native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('nativecac5', function()
+        _0xCAC57395B151135F(0, 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: nativecac5 */
+    RegisterCommand('nativecac5', () => {
+      _0xCAC57395B151135F(0, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0xCAC57395B151135F
+
 ### Server Natives by Category
 
 
-CONTINUE-HERE — 2025-09-11T04:28:34+00:00 — next: 13.2 Client Natives > Player category :: _0x2F41A3BAE005E5FA
+CONTINUE-HERE — 2025-09-11T04:46 — next: 13.2 Client Natives > Player category :: _0xCB645E85E97EA48B
