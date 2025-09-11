@@ -359,55 +359,69 @@ local vehshop = {
 	}
 }
 local fakecar = {model = '', car = nil}
-local vehshop_locations = {}
+local vehshop_locations = {
+        vector3(-45.80539, -1098.37451, 26.42235)
+}
 
-local vehshop_blips ={}
+local vehshop_blips = {}
 local inrangeofvehshop = false
 local currentlocation = nil
 local boughtcar = false
 local ibought = ''
 
 local function LocalPed()
-return PlayerPedId()
+        return PlayerPedId()
 end
 
-function drawTxt(text,font,centre,x,y,scale,r,g,b,a)
-	SetTextFont(font)
-	SetTextProportional(0)
-	SetTextScale(scale, scale)
-	SetTextColour(r, g, b, a)
-	SetTextDropShadow(0, 0, 0, 0,255)
+local function drawTxt(text, font, centre, x, y, scale, r, g, b, a)
+        SetTextFont(font)
+        SetTextProportional(0)
+        SetTextScale(scale, scale)
+        SetTextColour(r, g, b, a)
+        SetTextDropShadow(0, 0, 0, 0,255)
 	SetTextEdge(1, 0, 0, 0, 255)
 	SetTextDropShadow()
 	SetTextOutline()
 	SetTextCentre(centre)
 	SetTextEntry("STRING")
 	AddTextComponentString(text)
-	DrawText(x , y)
+        DrawText(x , y)
 end
 
 function IsPlayerInRangeOfVehshop()
-return inrangeofvehshop
+        return inrangeofvehshop
 end
 
-function ShowVehshopBlips(bool)
+function ShowVehshopBlips(show)
+        for _, blip in pairs(vehshop_blips) do
+                RemoveBlip(blip)
+        end
+        vehshop_blips = {}
+        if show then
+                for _, loc in ipairs(vehshop_locations) do
+                        local blip = AddBlipForCoord(loc.x, loc.y, loc.z)
+                        SetBlipSprite(blip, 225)
+                        SetBlipScale(blip, 0.8)
+                        SetBlipAsShortRange(blip, true)
+                        BeginTextCommandSetBlipName('STRING')
+                        AddTextComponentString('Vehicle Shop')
+                        EndTextCommandSetBlipName(blip)
+                        table.insert(vehshop_blips, blip)
+                end
+        end
 end
 
-function f(n)
-return n + 0.0001
+local function f(n)
+        return n + 0.0001
 end
 
-function LocalPed()
-return PlayerPedId()
+local function try(f, catch_f)
+        local status, exception = pcall(f)
+        if not status then
+                catch_f(exception)
+        end
 end
-
-function try(f, catch_f)
-local status, exception = pcall(f)
-if not status then
-catch_f(exception)
-end
-end
-function firstToUpper(str)
+local function firstToUpper(str)
     return (str:gsub("^%l", string.upper))
 end
 --local veh = nil
@@ -437,8 +451,8 @@ function CloseCreator()
 			FreezeEntityPosition(ped,false)
 			SetEntityVisible(ped,true)
 		else
-			local veh = GetVehiclePedIsUsing(ped)
-			Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(veh))
+                        local veh = GetVehiclePedIsUsing(ped)
+                        DeleteVehicle(veh)
 			local pos = {-34.02855682373, -1089.1179199219, 26.422239303589, 0.0}--currentlocation.pos.outside
 			SetEntityCoords(ped,pos[1],pos[2],pos[3])
 			FreezeEntityPosition(ped,false)
@@ -576,9 +590,9 @@ Citizen.CreateThread(function()
 					if vehshop.currentmenu == "compacts" or vehshop.currentmenu == "coupes" or vehshop.currentmenu == "sedans" or vehshop.currentmenu == "sports" or vehshop.currentmenu == "sportsclassics" or vehshop.currentmenu == "super" or vehshop.currentmenu == "muscle" or vehshop.currentmenu == "offroad" or vehshop.currentmenu == "suvs" or vehshop.currentmenu == "vans" or vehshop.currentmenu == "industrial" or vehshop.currentmenu == "motorcycles" or vehshop.currentmenu == "bicycles" then
 						if selected then
 							if fakecar.model ~= button.model then
-								if DoesEntityExist(fakecar.car) then
-									Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(fakecar.car))
-								end
+                                                                if DoesEntityExist(fakecar.car) then
+                                                                        DeleteVehicle(fakecar.car)
+                                                                end
 								local pos = {-37.41089630127,-1088.1712646484,25.990238189697,251.69311523438}
 								local hash = GetHashKey(button.model)
 								RequestModel(hash)
@@ -727,9 +741,9 @@ function Back()
 	if vehshop.currentmenu == "main" then
 		CloseCreator()
 	elseif vehshop.currentmenu == "compacts" or vehshop.currentmenu == "coupes" or vehshop.currentmenu == "sedans" or vehshop.currentmenu == "sports" or vehshop.currentmenu == "sportsclassics" or vehshop.currentmenu == "super" or vehshop.currentmenu == "muscle" or vehshop.currentmenu == "offroad" or vehshop.currentmenu == "suvs" or vehshop.currentmenu == "vans" or vehshop.currentmenu == "industrial" or vehshop.currentmenu == "bicycles" or vehshop.currentmenu == "motorcycles" then
-		if DoesEntityExist(fakecar.car) then
-			Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(fakecar.car))
-		end
+                if DoesEntityExist(fakecar.car) then
+                        DeleteVehicle(fakecar.car)
+                end
 		fakecar = {model = '', car = nil}
 		OpenMenu(vehshop.lastmenu)
 	else
