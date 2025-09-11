@@ -434,7 +434,7 @@ ensure my_resource
 | Recording | 17 | 17 | 0 | 2025-09-11T06:52 |
 | Replay | 6 | 6 | 0 | 2025-09-11T07:37 |
 | ACL | 10 | 10 | 0 | 2025-09-11T08:12 |
-| CFX | ? | 20 | ? | 2025-09-11T08:39 |
+| CFX | ? | 30 | ? | 2025-09-11T09:12 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -11215,4 +11215,324 @@ RegisterCommand('rgb', () => {
   - Principals must be defined in ACL.
 - **Reference**: https://docs.fivem.net/natives/?n=IS_PRINCIPAL_ACE_ALLOWED
 
-CONTINUE-HERE — 2025-09-11T08:39:37 — next: 13.3 Server Natives > CFX category :: LoadResourceFile
+##### LoadResourceFile
+- **Scope**: Server
+- **Signature(s)**: `string LOAD_RESOURCE_FILE(string resourceName, string fileName)`
+- **Purpose**: Reads the contents of a file within a resource at runtime.
+- **Parameters / Returns**:
+  - `resourceName` (`string`): Resource to read from.
+  - `fileName` (`string`): Relative path inside the resource.
+  - **Returns**: `string` file data or `nil` if not found.
+- **OneSync / Networking**: Server-side only; no replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Server Init
+        -- Name: show_manifest
+        -- Use: Prints fxmanifest of another resource
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    local manifest = LoadResourceFile('chat', 'fxmanifest.lua')
+    print(manifest)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Server Init: show_manifest */
+    const manifest = LoadResourceFile('chat', 'fxmanifest.lua');
+    console.log(manifest);
+    ```
+- **Caveats / Limitations**:
+  - Cannot read files outside the resource or stream data larger than memory.
+- **Reference**: https://docs.fivem.net/natives/?n=LoadResourceFile
+
+##### PerformHttpRequest
+- **Scope**: Server
+- **Signature(s)**: `void PERFORM_HTTP_REQUEST(string url, function cb, string method = 'GET', string data = '', table headers = {})`
+- **Purpose**: Sends an asynchronous HTTP request and invokes a callback with the result.
+- **Parameters / Returns**:
+  - `url` (`string`): Target URL.
+  - `cb` (`function`): Callback `(statusCode, body, headers)`.
+  - `method` (`string`, default `"GET"`): HTTP method.
+  - `data` (`string`, default `""`): Request body.
+  - `headers` (`table`, default `{}`): Additional HTTP headers.
+- **OneSync / Networking**: Runs on server thread; avoid long callbacks to prevent blocking.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Server Init
+        -- Name: fetch_status
+        -- Use: Requests example.com and logs status code
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    PerformHttpRequest('https://example.com', function(status, body, headers)
+        print('Status:', status)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Server Init: fetch_status */
+    PerformHttpRequest('https://example.com', (status, body, headers) => {
+      console.log('Status:', status);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Callback runs in the scheduler; heavy processing can stall other tasks.
+- **Reference**: https://docs.fivem.net/natives/?n=PerformHttpRequest
+
+##### RegisterCommand
+- **Scope**: Server
+- **Signature(s)**: `void REGISTER_COMMAND(string commandName, function handler, bool restricted)`
+- **Purpose**: Registers a console/chat command and associates it with a handler function.
+- **Parameters / Returns**:
+  - `commandName` (`string`): Command name without prefix.
+  - `handler` (`function`): `(source, args, rawCommand)` callback.
+  - `restricted` (`bool`): If `true`, ACL permission `command.<name>` is required.
+- **OneSync / Networking**: Handler runs on server; use ACL to gate sensitive actions.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: announce
+        -- Use: Broadcasts a message to all players
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('announce', function(source, args)
+        TriggerClientEvent('chat:addMessage', -1, { args = { 'Server', table.concat(args, ' ') } })
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: announce */
+    RegisterCommand('announce', (src, args) => {
+      emitNet('chat:addMessage', -1, { args: ['Server', args.join(' ')] });
+    });
+    ```
+- **Caveats / Limitations**:
+  - Without `restricted` true, any player may execute the command.
+- **Reference**: https://docs.fivem.net/natives/?n=RegisterCommand
+
+##### RegisterNetEvent
+- **Scope**: Shared
+- **Signature(s)**: `void REGISTER_NET_EVENT(string eventName)`
+- **Purpose**: Declares a network event so other resources or clients can trigger it.
+- **Parameters / Returns**:
+  - `eventName` (`string`): Event identifier.
+- **OneSync / Networking**: Allows cross-resource and client↔server communication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Server Event
+        -- Name: log_chat
+        -- Use: Receives chatLog events from clients
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterNetEvent('chatLog')
+    AddEventHandler('chatLog', function(msg)
+        print(('Player %s says: %s'):format(source, msg))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Server Event: log_chat */
+    RegisterNetEvent('chatLog');
+    onNet('chatLog', (msg) => {
+      console.log(`Player ${source} says: ${msg}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Events from clients need validation to prevent abuse.
+- **Reference**: https://docs.fivem.net/natives/?n=RegisterNetEvent
+
+##### RegisterServerEvent
+- **Scope**: Server
+- **Signature(s)**: `void REGISTER_SERVER_EVENT(string eventName)`
+- **Purpose**: Alias of `RegisterNetEvent` for server-side clarity.
+- **Parameters / Returns**:
+  - `eventName` (`string`): Event identifier.
+- **OneSync / Networking**: Same behavior as `RegisterNetEvent`.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Server Event
+        -- Name: log_score
+        -- Use: Logs client-reported score updates
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterServerEvent('scoreUpdate')
+    AddEventHandler('scoreUpdate', function(score)
+        print(('Score from %s: %s'):format(source, score))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Server Event: log_score */
+    RegisterServerEvent('scoreUpdate');
+    onNet('scoreUpdate', (score) => {
+      console.log(`Score from ${source}: ${score}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Still requires `RegisterNetEvent` for client-side listening.
+- **Reference**: https://docs.fivem.net/natives/?n=RegisterServerEvent
+
+##### RemoveStateBagChangeHandler
+- **Scope**: Shared
+- **Signature(s)**: `void REMOVE_STATE_BAG_CHANGE_HANDLER(int handlerId)`
+- **Purpose**: Unregisters a previously added state bag change handler.
+- **Parameters / Returns**:
+  - `handlerId` (`int`): ID returned by `AddStateBagChangeHandler`.
+- **OneSync / Networking**: Ensures no further callbacks for that handler.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Shared Cleanup
+        -- Name: stop_watch
+        -- Use: Removes state bag handler when no longer needed
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    local id = AddStateBagChangeHandler('entity:', 'locked', function() end)
+    RemoveStateBagChangeHandler(id)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Shared Cleanup: stop_watch */
+    const id = AddStateBagChangeHandler('entity:', 'locked', () => {});
+    RemoveStateBagChangeHandler(id);
+    ```
+- **Caveats / Limitations**:
+  - Calling with an invalid ID has no effect.
+- **Reference**: https://docs.fivem.net/natives/?n=RemoveStateBagChangeHandler
+
+##### SaveResourceFile
+- **Scope**: Server
+- **Signature(s)**: `bool SAVE_RESOURCE_FILE(string resourceName, string fileName, string data, int dataLength)`
+- **Purpose**: Writes data to a file inside a resource on disk.
+- **Parameters / Returns**:
+  - `resourceName` (`string`): Target resource.
+  - `fileName` (`string`): Relative path to write.
+  - `data` (`string`): Content to save.
+  - `dataLength` (`int`): Length of `data` in bytes.
+  - **Returns**: `bool` success flag.
+- **OneSync / Networking**: Server-side persistence; clients do not see files until next resource load.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Server Init
+        -- Name: save_counter
+        -- Use: Stores a startup counter in a file
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    local count = 1
+    SaveResourceFile(GetCurrentResourceName(), 'counter.txt', tostring(count), #tostring(count))
+    ```
+  - JavaScript:
+    ```javascript
+    /* Server Init: save_counter */
+    const count = 1;
+    SaveResourceFile(GetCurrentResourceName(), 'counter.txt', String(count), String(count).length);
+    ```
+- **Caveats / Limitations**:
+  - Files cannot be written outside the resource directory.
+- **Reference**: https://docs.fivem.net/natives/?n=SaveResourceFile
+
+##### SetConvar
+- **Scope**: Server
+- **Signature(s)**: `void SET_CONVAR(string varName, string value)`
+- **Purpose**: Sets a runtime console variable only accessible on the server.
+- **Parameters / Returns**:
+  - `varName` (`string`): ConVar name.
+  - `value` (`string`): New value.
+- **OneSync / Networking**: Not replicated to clients.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Server Init
+        -- Name: set_password
+        -- Use: Updates rcon password at runtime
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    SetConvar('rcon_password', 'changeme')
+    ```
+  - JavaScript:
+    ```javascript
+    /* Server Init: set_password */
+    SetConvar('rcon_password', 'changeme');
+    ```
+- **Caveats / Limitations**:
+  - Value resets on server restart.
+- **Reference**: https://docs.fivem.net/natives/?n=SetConvar
+
+##### SetConvarReplicated
+- **Scope**: Server
+- **Signature(s)**: `void SET_CONVAR_REPLICATED(string varName, string value)`
+- **Purpose**: Sets a ConVar whose value is replicated to clients.
+- **Parameters / Returns**:
+  - `varName` (`string`): ConVar name.
+  - `value` (`string`): New value.
+- **OneSync / Networking**: Replicated to all clients; changes after join will update automatically.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Server Init
+        -- Name: set_hostname
+        -- Use: Sets public server name
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    SetConvarReplicated('sv_hostname', 'SunnyRP Test Server')
+    ```
+  - JavaScript:
+    ```javascript
+    /* Server Init: set_hostname */
+    SetConvarReplicated('sv_hostname', 'SunnyRP Test Server');
+    ```
+- **Caveats / Limitations**:
+  - Large values may exceed network limits.
+- **Reference**: https://docs.fivem.net/natives/?n=SetConvarReplicated
+
+##### SetConvarServerInfo
+- **Scope**: Server
+- **Signature(s)**: `void SET_CONVAR_SERVER_INFO(string varName, string value)`
+- **Purpose**: Sets a replicated ConVar marked as public server info for server lists.
+- **Parameters / Returns**:
+  - `varName` (`string`): ConVar name.
+  - `value` (`string`): Value broadcast to clients and server listings.
+- **OneSync / Networking**: Replicated to clients and shown in server info queries.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Server Init
+        -- Name: set_mapname
+        -- Use: Announces current map in server info
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    SetConvarServerInfo('mapname', 'Los Santos')
+    ```
+  - JavaScript:
+    ```javascript
+    /* Server Init: set_mapname */
+    SetConvarServerInfo('mapname', 'Los Santos');
+    ```
+- **Caveats / Limitations**:
+  - Intended for short metadata strings only.
+- **Reference**: https://docs.fivem.net/natives/?n=SetConvarServerInfo
+CONTINUE-HERE — 2025-09-11T09:14:14 — next: 13.3 Server Natives > CFX category :: SetGameType
