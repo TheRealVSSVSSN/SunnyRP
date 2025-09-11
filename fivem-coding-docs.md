@@ -433,6 +433,7 @@ ensure my_resource
 | Player | 248 | 248 | 0 | 2025-09-11T06:38 |
 | Recording | 17 | 17 | 0 | 2025-09-11T06:52 |
 | Replay | 6 | 6 | 0 | 2025-09-11T07:37 |
+| ACL | 10 | 10 | 0 | 2025-09-11T08:12 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -10190,4 +10191,359 @@ RegisterCommand('rgb', () => {
 
 
 ### Server Natives by Category
-CONTINUE-HERE — 2025-09-11T07:38:17 — next: 13.3 Server Natives > ACL category :: AddAce
+#### ACL
+
+##### AddAce
+- **Scope**: Server
+- **Signature**: `bool ADD_ACE(string principal, string object, bool allow)`
+- **Purpose**: Grants or denies a permission for a principal at runtime.
+- **Parameters / Returns**:
+  - `principal` (`string`): Principal or group receiving the access control entry.
+  - `object` (`string`): Permission or object name (e.g., `command.car`).
+  - `allow` (`bool`): `true` to allow, `false` to deny.
+  - **Returns**: `bool` indicating success.
+- **OneSync / Networking**: Server-side ACL only; not replicated to clients.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Server Init
+        -- Name: grant_car_command
+        -- Use: Allows group.admin to use /car
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    AddEventHandler('onResourceStart', function(res)
+        if res == GetCurrentResourceName() then
+            AddAce('group.admin', 'command.car', true)
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Server Init: grant_car_command */
+    on('onResourceStart', (res) => {
+      if (res === GetCurrentResourceName()) {
+        AddAce('group.admin', 'command.car', true);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Entries are not persisted; define them in `server.cfg` for permanence.
+- **Reference**: https://docs.fivem.net/natives/?n=AddAce
+
+##### AddAceResource
+- **Scope**: Server
+- **Signature**: `bool ADD_ACE_RESOURCE(string resource, string object, bool allow)`
+- **Purpose**: Grants or denies a permission to a resource's principal.
+- **Parameters / Returns**:
+  - `resource` (`string`): Resource name whose principal is modified.
+  - `object` (`string`): Permission or object name.
+  - `allow` (`bool`): `true` to allow, `false` to deny.
+  - **Returns**: `bool` indicating success.
+- **OneSync / Networking**: Server-only ACL modification.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Server Init
+        -- Name: allow_resource_start
+        -- Use: Allows this resource to use start command
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    AddEventHandler('onResourceStart', function(res)
+        if res == GetCurrentResourceName() then
+            AddAceResource(res, 'command.start', true)
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Server Init: allow_resource_start */
+    on('onResourceStart', (res) => {
+      if (res === GetCurrentResourceName()) {
+        AddAceResource(res, 'command.start', true);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Changes are runtime-only and reset on restart.
+- **Reference**: https://docs.fivem.net/natives/?n=AddAceResource
+
+##### AddPrincipal
+- **Scope**: Server
+- **Signature**: `bool ADD_PRINCIPAL(string child, string parent)`
+- **Purpose**: Makes one principal inherit another's permissions.
+- **Parameters / Returns**:
+  - `child` (`string`): Principal being added (e.g., `identifier.steam:...`).
+  - `parent` (`string`): Principal or group to inherit from.
+  - **Returns**: `bool` success flag.
+- **OneSync / Networking**: No direct networking; affects server ACL graph.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: add_admin
+        -- Use: Adds invoking player to group.admin
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('add_admin', function(source)
+        local id = GetPlayerIdentifier(source, 0)
+        AddPrincipal('identifier.' .. id, 'group.admin')
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: add_admin */
+    RegisterCommand('add_admin', (src) => {
+      const id = GetPlayerIdentifier(src, 0);
+      AddPrincipal('identifier.' + id, 'group.admin');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Use cautious validation; identifiers can be spoofed if not verified.
+- **Reference**: https://docs.fivem.net/natives/?n=AddPrincipal
+
+##### AddPrincipalResource
+- **Scope**: Server
+- **Signature**: `bool ADD_PRINCIPAL_RESOURCE(string resource, string parent)`
+- **Purpose**: Adds a resource's principal as a child of another principal or group.
+- **Parameters / Returns**:
+  - `resource` (`string`): Resource name.
+  - `parent` (`string`): Principal or group to inherit from.
+  - **Returns**: `bool` success.
+- **OneSync / Networking**: Server-only ACL graph update.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Server Init
+        -- Name: resource_inherit_admin
+        -- Use: Makes this resource inherit group.admin permissions
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    AddEventHandler('onResourceStart', function(res)
+        if res == GetCurrentResourceName() then
+            AddPrincipalResource(res, 'group.admin')
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Server Init: resource_inherit_admin */
+    on('onResourceStart', (res) => {
+      if (res === GetCurrentResourceName()) {
+        AddPrincipalResource(res, 'group.admin');
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Reset on restart; persist in `server.cfg` as needed.
+- **Reference**: https://docs.fivem.net/natives/?n=AddPrincipalResource
+
+##### RemoveAce
+- **Scope**: Server
+- **Signature**: `bool REMOVE_ACE(string principal, string object)`
+- **Purpose**: Deletes an ACE from a principal.
+- **Parameters / Returns**:
+  - `principal` (`string`): Principal or group.
+  - `object` (`string`): Permission to remove.
+  - **Returns**: `bool` success.
+- **OneSync / Networking**: Server-side only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Server Init
+        -- Name: revoke_car_command
+        -- Use: Removes /car permission from group.admin
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RemoveAce('group.admin', 'command.car')
+    ```
+  - JavaScript:
+    ```javascript
+    /* Server Init: revoke_car_command */
+    RemoveAce('group.admin', 'command.car');
+    ```
+- **Caveats / Limitations**:
+  - Only affects runtime ACL; restart reverts.
+- **Reference**: https://docs.fivem.net/natives/?n=RemoveAce
+
+##### RemoveAceResource
+- **Scope**: Server
+- **Signature**: `bool REMOVE_ACE_RESOURCE(string resource, string object)`
+- **Purpose**: Deletes an ACE from a resource's principal.
+- **Parameters / Returns**:
+  - `resource` (`string`): Resource name.
+  - `object` (`string`): Permission to remove.
+  - **Returns**: `bool` success.
+- **OneSync / Networking**: Server-only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Server Init
+        -- Name: revoke_resource_start
+        -- Use: Removes start command from this resource
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RemoveAceResource(GetCurrentResourceName(), 'command.start')
+    ```
+  - JavaScript:
+    ```javascript
+    /* Server Init: revoke_resource_start */
+    RemoveAceResource(GetCurrentResourceName(), 'command.start');
+    ```
+- **Caveats / Limitations**:
+  - Runtime-only; restart restores permissions.
+- **Reference**: https://docs.fivem.net/natives/?n=RemoveAceResource
+
+##### RemovePrincipal
+- **Scope**: Server
+- **Signature**: `bool REMOVE_PRINCIPAL(string child, string parent)`
+- **Purpose**: Revokes inheritance of permissions between principals.
+- **Parameters / Returns**:
+  - `child` (`string`): Principal losing permissions.
+  - `parent` (`string`): Principal or group to detach from.
+  - **Returns**: `bool` success.
+- **OneSync / Networking**: ACL modification only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: remove_admin
+        -- Use: Removes invoking player from group.admin
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('remove_admin', function(source)
+        local id = GetPlayerIdentifier(source, 0)
+        RemovePrincipal('identifier.' .. id, 'group.admin')
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: remove_admin */
+    RegisterCommand('remove_admin', (src) => {
+      const id = GetPlayerIdentifier(src, 0);
+      RemovePrincipal('identifier.' + id, 'group.admin');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only affects current runtime.
+- **Reference**: https://docs.fivem.net/natives/?n=RemovePrincipal
+
+##### RemovePrincipalResource
+- **Scope**: Server
+- **Signature**: `bool REMOVE_PRINCIPAL_RESOURCE(string resource, string parent)`
+- **Purpose**: Detaches a resource's principal from another principal or group.
+- **Parameters / Returns**:
+  - `resource` (`string`): Resource name.
+  - `parent` (`string`): Principal or group to detach from.
+  - **Returns**: `bool` success.
+- **OneSync / Networking**: Server-only ACL adjustment.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Server Init
+        -- Name: resource_remove_admin
+        -- Use: Removes admin inheritance from this resource
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RemovePrincipalResource(GetCurrentResourceName(), 'group.admin')
+    ```
+  - JavaScript:
+    ```javascript
+    /* Server Init: resource_remove_admin */
+    RemovePrincipalResource(GetCurrentResourceName(), 'group.admin');
+    ```
+- **Caveats / Limitations**:
+  - Non-persistent across restarts.
+- **Reference**: https://docs.fivem.net/natives/?n=RemovePrincipalResource
+
+##### IsPlayerAceAllowed
+- **Scope**: Server
+- **Signature**: `bool IS_PLAYER_ACE_ALLOWED(Player player, string object)`
+- **Purpose**: Tests whether a player has a specific permission.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player ID or `source`.
+  - `object` (`string`): Permission to test.
+  - **Returns**: `bool` allowed.
+- **OneSync / Networking**: Query only; no replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: can_kick
+        -- Use: Reports if invoking player may use /kick
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('can_kick', function(src)
+        local msg
+        if IsPlayerAceAllowed(src, 'command.kick') then
+            msg = 'You can kick players.'
+        else
+            msg = 'Permission denied.'
+        end
+        TriggerClientEvent('chat:addMessage', src, { args = { 'System', msg } })
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: can_kick */
+    RegisterCommand('can_kick', (src) => {
+      const msg = IsPlayerAceAllowed(src, 'command.kick')
+        ? 'You can kick players.'
+        : 'Permission denied.';
+      emitNet('chat:addMessage', src, { args: ['System', msg] });
+    });
+    ```
+- **Caveats / Limitations**:
+  - Checks only current runtime ACL state.
+- **Reference**: https://docs.fivem.net/natives/?n=IsPlayerAceAllowed
+
+##### IsPrincipalAceAllowed
+- **Scope**: Server
+- **Signature**: `bool IS_PRINCIPAL_ACE_ALLOWED(string principal, string object)`
+- **Purpose**: Tests if a principal or group has a given permission.
+- **Parameters / Returns**:
+  - `principal` (`string`): Principal or group name.
+  - `object` (`string`): Permission to test.
+  - **Returns**: `bool` allowed.
+- **OneSync / Networking**: Server query only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Server Init
+        -- Name: check_admin_car
+        -- Use: Checks if group.admin has /car permission
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    local allowed = IsPrincipalAceAllowed('group.admin', 'command.car')
+    print('admin can /car:', allowed)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Server Init: check_admin_car */
+    const allowed = IsPrincipalAceAllowed('group.admin', 'command.car');
+    console.log('admin can /car:', allowed);
+    ```
+- **Caveats / Limitations**:
+  - Returns `false` if either principal or ACE is undefined.
+- **Reference**: https://docs.fivem.net/natives/?n=IsPrincipalAceAllowed
+
+CONTINUE-HERE — 2025-09-11T08:13:11 — next: 13.3 Server Natives > CFX category :: AddStateBagChangeHandler
