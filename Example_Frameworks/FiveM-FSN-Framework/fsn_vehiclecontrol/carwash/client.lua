@@ -7,7 +7,7 @@ local carwashes = {
   {x = -238.81951904297, y = 6231.4731445313, z = 30.648466110229},
   {x = 170.49784851074, y = -1718.4346923828, z = 28.712507247924}
 }
-Citizen.CreateThread(function()
+CreateThread(function()
   for _, cwash in pairs(carwashes) do
     local blip = AddBlipForCoord(cwash.x, cwash.y, cwash.z)
     SetBlipSprite(blip, 100)
@@ -18,15 +18,16 @@ Citizen.CreateThread(function()
     EndTextCommandSetBlipName(blip)
   end
   while true do
-    Citizen.Wait(0)
+    Wait(0)
     for _, cwash in pairs(carwashes) do
       if GetDistanceBetweenCoords(cwash.x, cwash.y, cwash.z, GetEntityCoords(PlayerPedId())) < 5 and IsPedInAnyVehicle(PlayerPedId()) then
         SetTextComponentFormat("STRING")
         AddTextComponentString("Press ~INPUT_PICKUP~ to wash your car!")
         DisplayHelpTextFromStringLabel(0, 0, 1, -1)
         if IsControlJustPressed(0,38) then
-          if exports.fsn_main:fsn_GetWallet() >= 150 then
-            SetVehicleDirtLevel(GetVehiclePedIsIn(PlayerPedId(), 0.0))
+          if exports.fsn_main:fsn_GetWallet() >= 50 then
+            local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+            SetVehicleDirtLevel(veh, 0.0)
             TriggerEvent('fsn_bank:change:walletMinus', 50)
           else
             TriggerEvent('fsn_notify:displayNotification', 'You cannot afford this', 'centerLeft', 5000, 'error')

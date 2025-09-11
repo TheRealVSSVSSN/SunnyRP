@@ -8,16 +8,16 @@ streetName.textColour = {r = 255, g = 255, b = 255, a = 255}
 -- End of configuration
 
 
-Citizen.CreateThread( function()
+CreateThread(function()
 	local lastStreetA = 0
 	local lastStreetB = 0
 	local lastStreetName = {}
 
 	while streetName.show do
-		Wait( 0 )
-		if IsPedInAnyVehicle(PlayerPedId(), true) then
-			local playerPos = GetEntityCoords( GetPlayerPed( -1 ), true )
-			local streetA, streetB = Citizen.InvokeNative( 0x2EB41072B4C1E4C0, playerPos.x, playerPos.y, playerPos.z, Citizen.PointerValueInt(), Citizen.PointerValueInt() )
+                Wait(0)
+                if IsPedInAnyVehicle(PlayerPedId(), true) then
+                        local playerPos = GetEntityCoords(PlayerPedId(), true)
+                        local streetA, streetB = Citizen.InvokeNative( 0x2EB41072B4C1E4C0, playerPos.x, playerPos.y, playerPos.z, Citizen.PointerValueInt(), Citizen.PointerValueInt() )
 			local street = {}
 
 			if not ((streetA == lastStreetA or streetA == lastStreetB) and (streetB == lastStreetA or streetB == lastStreetB)) then

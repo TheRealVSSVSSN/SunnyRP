@@ -31,34 +31,32 @@ compass.intercardinal.tickColour = {r = 255, g = 255, b = 255, a = 255}
 -- End of configuration
 
 
-Citizen.CreateThread( function()
-	if compass.position.centered then
-		compass.position.x = compass.position.x - compass.width / 2
-	end
+CreateThread(function()
+        if compass.position.centered then
+                compass.position.x = compass.position.x - compass.width / 2
+        end
 
-	while compass.show do
-		Wait( 0 )
-		if IsPedInAnyVehicle(PlayerPedId(), true) then
-			local pxDegree = compass.width / compass.fov
-			local playerHeadingDegrees = 0
+        while compass.show do
+                Wait(0)
+                if IsPedInAnyVehicle(PlayerPedId(), true) then
+                        local pxDegree = compass.width / compass.fov
+                        local playerHeadingDegrees = 0
 
-			if compass.followGameplayCam then
-				-- Converts [-180, 180] to [0, 360] where E = 90 and W = 270
-				local camRot = Citizen.InvokeNative( 0x837765A25378F0BB, 0, Citizen.ResultAsVector() )
-				playerHeadingDegrees = 360.0 - ((camRot.z + 360.0) % 360.0)
-			else
-				-- Converts E = 270 to E = 90
-				playerHeadingDegrees = 360.0 - GetEntityHeading( GetPlayerPed( -1 ) )
-			end
+                        if compass.followGameplayCam then
+                                local camRot = Citizen.InvokeNative(0x837765A25378F0BB, 0, Citizen.ResultAsVector())
+                                playerHeadingDegrees = 360.0 - ((camRot.z + 360.0) % 360.0)
+                        else
+                                playerHeadingDegrees = 360.0 - GetEntityHeading(PlayerPedId())
+                        end
 
-			local tickDegree = playerHeadingDegrees - compass.fov / 2
-			local tickDegreeRemainder = compass.ticksBetweenCardinals - (tickDegree % compass.ticksBetweenCardinals)
-			local tickPosition = compass.position.x + tickDegreeRemainder * pxDegree
+                        local tickDegree = playerHeadingDegrees - compass.fov / 2
+                        local tickDegreeRemainder = compass.ticksBetweenCardinals - (tickDegree % compass.ticksBetweenCardinals)
+                        local tickPosition = compass.position.x + tickDegreeRemainder * pxDegree
 
-			tickDegree = tickDegree + tickDegreeRemainder
+                        tickDegree = tickDegree + tickDegreeRemainder
 
-			while tickPosition < compass.position.x + compass.width do
-				if (tickDegree % 90.0) == 0 then
+                        while tickPosition < compass.position.x + compass.width do
+                                if (tickDegree % 90.0) == 0 then
 					-- Draw cardinal
 					if compass.cardinal.tickShow then
 						DrawRect( tickPosition, compass.position.y, compass.cardinal.tickSize.w, compass.cardinal.tickSize.h, compass.cardinal.tickColour.r, compass.cardinal.tickColour.g, compass.cardinal.tickColour.b, compass.cardinal.tickColour.a )

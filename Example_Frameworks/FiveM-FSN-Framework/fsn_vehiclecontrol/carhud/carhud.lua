@@ -45,28 +45,29 @@ local UI = {
 
 
 
-Citizen.CreateThread(function()
-	while true do Citizen.Wait(1)
+CreateThread(function()
+        while true do Wait(1)
 
 
 		local MyPed = PlayerPedId()
 
-		if(IsPedInAnyVehicle(MyPed, false))then
-			DisplayRadar(true)
-			local MyPedVeh = GetVehiclePedIsIn(PlayerPedId(),false)
+                if(IsPedInAnyVehicle(MyPed, false))then
+                        DisplayRadar(true)
+                        local MyPedVeh = GetVehiclePedIsIn(MyPed,false)
 			local PlateVeh = GetVehicleNumberPlateText(MyPedVeh)
 			local VehStopped = IsVehicleStopped(MyPedVeh)
 			local VehEngineHP = GetVehicleEngineHealth(MyPedVeh)
 			local VehBodyHP = GetVehicleBodyHealth(MyPedVeh)
 			local VehBurnout = IsVehicleInBurnout(MyPedVeh)
 
-			if HUD.Speed == 'kmh' then
-				Speed = GetEntitySpeed(GetVehiclePedIsIn(PlayerPedId(), false)) * 3.6
-			elseif HUD.Speed == 'mph' then
-				Speed = GetEntitySpeed(GetVehiclePedIsIn(PlayerPedId(), false)) * 2.236936
-			else
-				Speed = 0.0
-			end
+                        local speed
+                        if HUD.Speed == 'kmh' then
+                                speed = GetEntitySpeed(MyPedVeh) * 3.6
+                        elseif HUD.Speed == 'mph' then
+                                speed = GetEntitySpeed(MyPedVeh) * 2.236936
+                        else
+                                speed = 0.0
+                        end
 			if seatbelt then
 				drawTxt(UI.x + 0.517, UI.y + 1.399, 1.0,1.0,0.4, "~g~SEATBELT", 66, 220, 244, 255)
 			else
@@ -75,12 +76,12 @@ Citizen.CreateThread(function()
 			if HUD.SpeedIndicator then
 				if HUD.Speed == 'mph' then
 					drawRct(UI.x + 0.124, 	UI.y + 0.932, 0.046,0.03,0,0,0,150) -- Speed panel
-					drawTxt(UI.x + 0.625, 	UI.y + 1.42, 1.0,1.0,0.64 , "~w~" .. math.ceil(Speed), 255, 255, 255, 255)
-					if math.ceil(Speed) == 0 then
+					drawTxt(UI.x + 0.625, 	UI.y + 1.42, 1.0,1.0,0.64 , "~w~" .. math.ceil(speed), 255, 255, 255, 255)
+					if math.ceil(speed) == 0 then
 						drawTxt(UI.x + 0.647, 	UI.y + 1.428, 1.0,1.0,0.4, "~w~ mph", 255, 255, 255, 255)
-					elseif math.ceil(Speed) < 45 then
+					elseif math.ceil(speed) < 45 then
 						drawTxt(UI.x + 0.647, 	UI.y + 1.428, 1.0,1.0,0.4, "~g~ mph", 255, 255, 255, 255)
-					elseif math.ceil(Speed) < 80 then
+					elseif math.ceil(speed) < 80 then
 						drawTxt(UI.x + 0.647, 	UI.y + 1.428, 1.0,1.0,0.4, "~o~ mph", 255, 255, 255, 255)
 					else
 						drawTxt(UI.x + 0.647, 	UI.y + 1.428, 1.0,1.0,0.4, "~r~ mph", 255, 255, 255, 255)
@@ -93,12 +94,12 @@ Citizen.CreateThread(function()
 					end
 				elseif HUD.Speed == 'kmh' then
 					drawRct(UI.x + 0.124, 	UI.y + 0.932, 0.046,0.03,0,0,0,150) -- Speed panel
-					drawTxt(UI.x + 0.625, 	UI.y + 1.42, 1.0,1.0,0.64 , "~w~" .. math.ceil(Speed), 255, 255, 255, 255)
-					if math.ceil(Speed) == 0 then
+					drawTxt(UI.x + 0.625, 	UI.y + 1.42, 1.0,1.0,0.64 , "~w~" .. math.ceil(speed), 255, 255, 255, 255)
+					if math.ceil(speed) == 0 then
 						drawTxt(UI.x + 0.647, 	UI.y + 1.428, 1.0,1.0,0.4, "~w~ kmh", 255, 255, 255, 255)
-					elseif math.ceil(Speed) < 73 then
+					elseif math.ceil(speed) < 73 then
 						drawTxt(UI.x + 0.647, 	UI.y + 1.428, 1.0,1.0,0.4, "~g~ kmh", 255, 255, 255, 255)
-					elseif math.ceil(Speed) < 129 then
+					elseif math.ceil(speed) < 129 then
 						drawTxt(UI.x + 0.647, 	UI.y + 1.428, 1.0,1.0,0.4, "~o~ kmh", 255, 255, 255, 255)
 					else
 						drawTxt(UI.x + 0.647, 	UI.y + 1.428, 1.0,1.0,0.4, "~r~ kmh", 255, 255, 255, 255)

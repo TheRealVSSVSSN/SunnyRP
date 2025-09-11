@@ -237,9 +237,9 @@ AddEventHandler('fsn_vehiclecontrol:keys:carjack', function(plate)
 	table.insert(myKeys, {plate,true})
 end)
 
-Citizen.CreateThread(function()
-	while true do
-		Citizen.Wait(0)
+CreateThread(function()
+        while true do
+                Wait(0)
 		if IsControlJustReleased(0, 7) then
 			if IsPedInAnyVehicle(PlayerPedId()) and GetPedInVehicleSeat(GetVehiclePedIsIn(PlayerPedId(), false), -1) == PlayerPedId() then
 				if GetVehicleDoorsLockedForPlayer(GetVehiclePedIsIn(PlayerPedId(), false), PlayerId()) then
@@ -332,7 +332,7 @@ AddEventHandler('EngineToggle:Engine', function()
 			StateIndex = i
 		end
 	end
-	--Citizen.Wait(1500)
+        --Wait(1500)
 	if IsPedInAnyVehicle(PlayerPedId(), false) then
 		if (GetPedInVehicleSeat(veh, -1) == PlayerPedId()) then
 			vehicles[StateIndex][2] = not IsVehicleEngineOn(veh)
@@ -350,14 +350,14 @@ AddEventHandler('EngineToggle:RPDamage', function(State)
 end)
 
 if OnAtEnter then
-	Citizen.CreateThread(function()
-		while true do
-			Citizen.Wait(0)
+        CreateThread(function()
+                while true do
+                        Wait(0)
 			if GetSeatPedIsTryingToEnter(PlayerPedId()) == -1 then
 				for i, vehicle in ipairs(vehicles) do
 					if vehicle[1] == GetVehiclePedIsTryingToEnter(PlayerPedId()) and not vehicle[2] then
-						Citizen.Wait(3500)
-						vehicle[2] = true
+                                                  Wait(3500)
+                                                  vehicle[2] = true
 					end
 				end
 			end
