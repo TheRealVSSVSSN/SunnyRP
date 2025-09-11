@@ -1,17 +1,27 @@
-resource_manifest_version '44febabe-d386-4d18-afbe-5e627f4af937'
+fx_version 'cerulean'
+game 'gta5'
+lua54 'yes'
 
-server_script('server.lua')
-client_script('client/cl_backup.lua')
-client_script('client/clothingshop.lua')
-client_script('client/tattooshop.lua')
-client_script('client/healingspots.lua')
-client_script('client/barbershop.lua')
-client_script('client/skins.lua')
-client_script('client/client.lua')
+author 'SunnyRP'
+description 'Updated clothing resource'
 
-ui_page('client/html/index.html')
+server_scripts {
+    'server.lua'
+}
 
-files({
+client_scripts {
+    'client/cl_backup.lua',
+    'client/clothingshop.lua',
+    'client/tattooshop.lua',
+    'client/healingspots.lua',
+    'client/barbershop.lua',
+    'client/skins.lua',
+    'client/client.lua'
+}
+
+ui_page 'client/html/index.html'
+
+files {
     'client/html/index.html',
     'client/html/script.js',
     'client/html/style.css',
@@ -31,4 +41,4 @@ files({
     'client/html/webfonts/fa-solid-900.woff',
     'client/html/webfonts/fa-solid-900.woff2',
     'client/html/css/all.min.css'
-})
+}

@@ -13,6 +13,7 @@ function GetCurrentPedFace()
 end
 
 function LoadPlayerFace(data)
+    local player = PlayerPedId()
     if data.headBlend then
         SetPlayerHeadBlend(data.headBlend)
     end
@@ -26,13 +27,14 @@ function LoadPlayerFace(data)
     end
 
     if data.hairColor then
-        SetPedHairColor(player,table.unpack(data.hairColor))
+        SetPedHairColor(player, table.unpack(data.hairColor))
     end
 
     RefreshUI()
 end
 
 function SetPlayerHeadBlend(data)
+    local player = PlayerPedId()
     SetPedHeadBlendData(player,
             tonumber(data['shapeFirst']),
             tonumber(data['shapeSecond']),
@@ -47,6 +49,7 @@ function SetPlayerHeadBlend(data)
 end
 
 function SetPlayerHeadStructure(data)
+    local player = PlayerPedId()
     for i = 1, #face_features do
         SetPedFaceFeature(player, i - 1, data[i])
     end
@@ -63,9 +66,7 @@ RegisterNUICallback('getPlayerFace', function(data, cb)
 end)
 
 RegisterNUICallback('setPlayerFace', function(data, cb)
-    player = GetPlayerPed(-1)
     LoadPlayerFace(data.face)
-
     cb('ok')
 end)
 
