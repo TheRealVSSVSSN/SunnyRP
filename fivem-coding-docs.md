@@ -39,6 +39,11 @@ A FiveM server is built from individual **resources** that contain scripts, conf
 3. Select the “CFX Default FiveM” recipe and enter your license key.
 4. Deploy the recipe and click **Save & Run Server**.
 
+#### txAdmin Features
+- Web dashboard for live console, resource control, and player list.
+- Schedule restarts and backups.
+- Built‑in diagnostics for resource crashes and performance.
+
 ### Minimal `server.cfg`
 ```cfg
 # Identity
@@ -186,6 +191,29 @@ server TriggerClientEvent ───▶ client AddEventHandler
 - In C#, use a parameter marked `[FromSource]` to capture the caller.
 - Use `CancelEvent()` to stop default handling.
 - Validate all parameters before use.
+
+### Validation & Cancellation
+```lua
+-- server/main.lua
+RegisterNetEvent('buyItem')
+AddEventHandler('buyItem', function(price)
+    if price > 1000 then
+        CancelEvent() -- reject exploit attempt
+        return
+    end
+    -- process purchase
+end)
+```
+```javascript
+// server/main.js
+onNet('buyItem', (price) => {
+  if (price > 1000) {
+    CancelEvent(); // reject exploit attempt
+    return;
+  }
+  // process purchase
+});
+```
 [`Docs: Listening for events`](https://docs.fivem.net/docs/scripting-manual/working-with-events/listening-for-events/) · [`Docs: Triggering events`](https://docs.fivem.net/docs/scripting-manual/working-with-events/triggering-events/) · [`Docs: Event cancellation`](https://docs.fivem.net/docs/scripting-manual/working-with-events/event-cancelation/)
 
 ---
@@ -311,7 +339,9 @@ RegisterCommand('car', (src) => {
 ## Debugging & Profiling
 - **Client console (F8)** for runtime logs and errors.
 - **Server console** prints resource output.
+- `resmon 1` displays per-resource CPU and memory usage.
 - **Profiler** (`profiler record <ms>` then `profiler view`) highlights performance hotspots.
+- txAdmin's web console streams logs and runs commands remotely.
 [`Docs: Using the profiler`](https://docs.fivem.net/docs/scripting-manual/debugging/using-profiler/)
 
 ---
