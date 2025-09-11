@@ -1,18 +1,31 @@
---[[/	:FSN:	\]]--
-fx_version 'adamant'
+--[[
+    -- Type: Manifest
+    -- Name: fsn_priority
+    -- Use: Resource manifest
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+
+fx_version 'cerulean'
+lua54 'yes'
 game 'gta5'
 
-client_script '@fsn_main/cl_utils.lua'
-server_script '@fsn_main/sv_utils.lua'
-client_script '@fsn_main/server_settings/sh_settings.lua'
-server_script '@fsn_main/server_settings/sh_settings.lua'
-server_script '@mysql-async/lib/MySQL.lua'
---[[/	:FSN:	\]]--
+shared_script '@fsn_main/server_settings/sh_settings.lua'
 
-dependency "connectqueue"
-dependency "mysql-async"
+client_scripts {
+    '@fsn_main/cl_utils.lua'
+}
 
-server_script "@connectqueue/connectqueue.lua"
+server_scripts {
+    '@fsn_main/sv_utils.lua',
+    '@mysql-async/lib/MySQL.lua',
+    '@connectqueue/connectqueue.lua',
+    'server.lua',
+    'administration.lua'
+}
 
-server_script "server.lua"
-server_script "administration.lua"
+dependencies {
+    'connectqueue',
+    'mysql-async'
+}
+

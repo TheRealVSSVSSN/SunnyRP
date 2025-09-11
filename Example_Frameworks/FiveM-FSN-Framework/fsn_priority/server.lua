@@ -1,33 +1,56 @@
-local mysql = false
+--[[
+    -- Type: Server Script
+    -- Name: Priority Loader
+    -- Use: Loads priority entries from database and registers them with connectqueue
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+
+local mysqlReady = false
 MySQL.ready(function()
-	mysql = true
+    mysqlReady = true
 end)
 
-local queue = false
+local queueReady = false
 Queue.OnReady(function()
-	queue = true
+    queueReady = true
 end)
 
-local prio = false
-function doPriority()
-	print 'i am running priority look at me im so sexual'
-	MySQL.Async.fetchAll('SELECT * FROM `fsn_users` WHERE `priority` != 0', {}, function(res)
-		for k, usr in pairs(res) do
-			Queue.AddPriority(usr.steamid, tonumber(usr.priority))
-			print(':fsn_priority: Adding priority('..usr.priority..') for user '..usr.name..'('..usr.steamid..')')
-		end
-	end)
-	prio = true
+--[[
+    -- Type: Function
+    -- Name: loadPriority
+    -- Use: Fetches priority users from database and adds them to queue
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+local function loadPriority()
+    MySQL.Async.fetchAll('SELECT steamid, priority, name FROM fsn_users WHERE priority <> 0', {}, function(res)
+        for _, usr in ipairs(res) do
+            Queue.AddPriority(usr.steamid, tonumber(usr.priority))
+            print(string.format('[fsn_priority] Added priority %d for %s (%s)', usr.priority, usr.name, usr.steamid))
+        end
+    end)
 end
 
+CreateThread(function()
+    repeat
+        Wait(500)
+    until mysqlReady and queueReady
 
-Citizen.CreateThread(function()
-	while not prio do
-		Citizen.Wait(0)
-		while mysql and queue and not prio do
-			Citizen.Wait(0)
-			doPriority()
-			break
-		end
-	end
+    loadPriority()
 end)
+
+--[[
+    -- Type: Command
+    -- Name: reloadpriority
+    -- Use: Reloads priority levels from database
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+RegisterCommand('reloadpriority', function(src)
+    if src == 0 then
+        loadPriority()
+        print('[fsn_priority] Priority list reloaded by console')
+    end
+end, true)
+
