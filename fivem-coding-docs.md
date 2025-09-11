@@ -430,7 +430,7 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Player | 248 | 140 | 108 | 2025-09-11T05:03 |
+| Player | 248 | 150 | 98 | 2025-09-11T05:14 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -5273,6 +5273,339 @@ ensure my_resource
   - TODO(next-run): verify semantics.
 - **Reference**: https://docs.fivem.net/natives/?n=SetPlayerClothPinFrames
 
+
+##### SetPlayerControl (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_CONTROL(Player player, BOOL hasControl, int flags)`
+- **Purpose**: Enable or disable input for a player with optional flag effects.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player to modify.
+  - `hasControl` (`bool`): True grants control; false freezes the player.
+  - `flags` (`int`): Optional behavior bits.
+- **OneSync / Networking**: Only affects entities owned by the caller; remote players require server-side authority.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: freeze
+        -- Use: Disables local player control
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('freeze', function()
+        SetPlayerControl(PlayerId(), false, 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: freeze */
+    RegisterCommand('freeze', () => {
+      SetPlayerControl(PlayerId(), false, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Flags influence leaving vehicles and other behaviors.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerControl
+
+##### SetPlayerForcedAim (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_FORCED_AIM(Player player, BOOL toggle)`
+- **Purpose**: Force the player into aiming mode.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player to affect.
+  - `toggle` (`bool`): Enable or disable forced aim.
+- **OneSync / Networking**: Local effect; use client events for remote players.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: forceaim
+        -- Use: Forces player to aim
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('forceaim', function()
+        SetPlayerForcedAim(PlayerId(), true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: forceaim */
+    RegisterCommand('forceaim', () => {
+      SetPlayerForcedAim(PlayerId(), true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Player remains aimed until toggled off.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerForcedAim
+
+##### SetPlayerForcedZoom (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_FORCED_ZOOM(Player player, BOOL toggle)`
+- **Purpose**: Force the player's view to zoom in.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player to affect.
+  - `toggle` (`bool`): Enable or disable forced zoom.
+- **OneSync / Networking**: Local effect; use client events for remote players.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: forcezoom
+        -- Use: Forces zoomed view
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('forcezoom', function()
+        SetPlayerForcedZoom(PlayerId(), true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: forcezoom */
+    RegisterCommand('forcezoom', () => {
+      SetPlayerForcedZoom(PlayerId(), true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Stay zoomed until disabled.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerForcedZoom
+
+##### SetPlayerHasReserveParachute (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_HAS_RESERVE_PARACHUTE(Player player)`
+- **Purpose**: Give the player a reserve parachute pack.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player to modify.
+- **OneSync / Networking**: Only affects the caller's player; server should validate before granting.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: reservepara
+        -- Use: Grants reserve parachute
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('reservepara', function()
+        SetPlayerHasReserveParachute(PlayerId())
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: reservepara */
+    RegisterCommand('reservepara', () => {
+      SetPlayerHasReserveParachute(PlayerId());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Parachute availability still depends on main pack.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerHasReserveParachute
+
+##### SetPlayerHealthRechargeMultiplier (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_HEALTH_RECHARGE_MULTIPLIER(Player player, float regenRate)`
+- **Purpose**: Adjust the rate at which the player's health regenerates.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player to affect.
+  - `regenRate` (`float`): Multiplier where `1.0` is normal and `0.0` disables regen.
+- **OneSync / Networking**: Local change; server should validate for remote players.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: regen
+        -- Use: Disables health regeneration
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('regen', function()
+        SetPlayerHealthRechargeMultiplier(PlayerId(), 0.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: regen */
+    RegisterCommand('regen', () => {
+      SetPlayerHealthRechargeMultiplier(PlayerId(), 0.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not affect damage taken.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerHealthRechargeMultiplier
+
+##### SetPlayerInvincible (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_INVINCIBLE(Player player, BOOL toggle)`
+- **Purpose**: Toggle invincibility for the player.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player to affect.
+  - `toggle` (`bool`): True enables god mode.
+- **OneSync / Networking**: Only affects local player; remote players require server checks.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: god
+        -- Use: Makes player invincible
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('god', function()
+        SetPlayerInvincible(PlayerId(), true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: god */
+    RegisterCommand('god', () => {
+      SetPlayerInvincible(PlayerId(), true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not protect against all scripted events.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerInvincible
+
+##### SetPlayerInvincibleKeepRagdollEnabled (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_INVINCIBLE_KEEP_RAGDOLL_ENABLED(Player player, BOOL toggle)`
+- **Purpose**: Make player invincible but still able to ragdoll.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player to affect.
+  - `toggle` (`bool`): True enables invincibility while allowing ragdoll.
+- **OneSync / Networking**: Local effect; remote players must be handled by server.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: godrag
+        -- Use: Invincible but can ragdoll
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('godrag', function()
+        SetPlayerInvincibleKeepRagdollEnabled(PlayerId(), true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: godrag */
+    RegisterCommand('godrag', () => {
+      SetPlayerInvincibleKeepRagdollEnabled(PlayerId(), true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Disable with same call using `false`.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerInvincibleKeepRagdollEnabled
+
+##### SetPlayerLockonRangeOverride (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_LOCKON_RANGE_OVERRIDE(Player player, float range)`
+- **Purpose**: Override auto-aim lock-on distance.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player to modify.
+  - `range` (`float`): Lock-on range in meters.
+- **OneSync / Networking**: Local change; server should validate.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: lockon
+        -- Use: Reduces lock-on distance
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('lockon', function()
+        SetPlayerLockonRangeOverride(PlayerId(), 5.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: lockon */
+    RegisterCommand('lockon', () => {
+      SetPlayerLockonRangeOverride(PlayerId(), 5.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only affects targeting; does not remove lock-on.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerLockonRangeOverride
+
+##### SetPlayerMayOnlyEnterThisVehicle (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_MAY_ONLY_ENTER_THIS_VEHICLE(Player player, Vehicle vehicle)`
+- **Purpose**: Restrict the player to entering a specific vehicle.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player to restrict.
+  - `vehicle` (`Vehicle`): Allowed vehicle.
+- **OneSync / Networking**: Requires entity ownership; server should manage when enforcing on others.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: vehlock
+        -- Use: Allows entry only to current vehicle
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('vehlock', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetPlayerMayOnlyEnterThisVehicle(PlayerId(), veh)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: vehlock */
+    RegisterCommand('vehlock', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetPlayerMayOnlyEnterThisVehicle(PlayerId(), veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Player may still exit the allowed vehicle normally.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerMayOnlyEnterThisVehicle
+
+##### SetPlayerMaxArmour (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_MAX_ARMOUR(Player player, int value)`
+- **Purpose**: Define the player's maximum armor value.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player to modify.
+  - `value` (`int`): Maximum armor amount.
+- **OneSync / Networking**: Local only; server must replicate when affecting others.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: maxarmour
+        -- Use: Sets max armour to 100
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('maxarmour', function()
+        SetPlayerMaxArmour(PlayerId(), 100)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: maxarmour */
+    RegisterCommand('maxarmour', () => {
+      SetPlayerMaxArmour(PlayerId(), 100);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not apply to current armour if higher than maximum.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerMaxArmour
+
 ### Server Natives by Category
 
-CONTINUE-HERE — 2025-09-11T05:03 — next: 13.2 Client Natives > Player category :: SetPlayerControl
+CONTINUE-HERE — 2025-09-11T05:14 — next: 13.2 Client Natives > Player category :: SetPlayerMeleeWeaponDamageModifier
