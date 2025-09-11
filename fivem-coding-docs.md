@@ -435,7 +435,7 @@ ensure my_resource
 | Replay | 6 | 6 | 0 | 2025-09-11T07:37 |
 | ACL | 10 | 10 | 0 | 2025-09-11T08:12 |
 | CFX | 50 | 50 | 0 | 2025-09-11T09:55 |
-| Vehicle | ? | 10 | ? | 2025-09-11T22:59 |
+| Vehicle | ? | 20 | ? | 2025-09-11T23:20 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -10495,6 +10495,298 @@ RegisterCommand('rgb', () => {
   - Flags are undocumented.
 - **Reference**: https://docs.fivem.net/natives/?n=BreakOffVehicleWheel
 
+##### BreakOffVehicleWindow
+- **Scope**: Shared
+- **Signature**: `void BREAK_OFF_VEHICLE_WINDOW(Vehicle vehicle, int windowIndex)`
+- **Purpose**: Detaches a specified window from the vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - `windowIndex` (`int`): Window ID (0 front left, 1 front right, etc.).
+- **OneSync / Networking**: Requires entity control to replicate removal.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: pop_window; Use: removes front left window; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('pop_window', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        BreakOffVehicleWindow(veh, 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: pop_window */
+    RegisterCommand('pop_window', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      BreakOffVehicleWindow(veh, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Window indices vary by vehicle model.
+- **Reference**: https://docs.fivem.net/natives/?n=BreakOffVehicleWindow
+
+##### BringVehicleToHalt
+- **Scope**: Shared
+- **Signature**: `void BRING_VEHICLE_TO_HALT(Vehicle vehicle, float distance, int duration, bool brake)`
+- **Purpose**: Gradually slows a vehicle to a stop within a set distance and time.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to stop.
+  - `distance` (`float`): Approximate stopping distance in meters.
+  - `duration` (`int`): Time in milliseconds to reach halt.
+  - `brake` (`bool`): Apply handbrake when finished.
+- **OneSync / Networking**: Entity owner must call for networked vehicles.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: halt; Use: stops current vehicle; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('halt', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        BringVehicleToHalt(veh, 5.0, 3000, true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: halt */
+    RegisterCommand('halt', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      BringVehicleToHalt(veh, 5.0, 3000, true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Vehicle may overshoot if moving too fast.
+- **Reference**: https://docs.fivem.net/natives/?n=BringVehicleToHalt
+
+##### CanAnchorBoatHere
+- **Scope**: Client
+- **Signature**: `bool CAN_ANCHOR_BOAT_HERE(Vehicle boat)`
+- **Purpose**: Tests if water depth and conditions allow anchoring at current location.
+- **Parameters / Returns**:
+  - `boat` (`Vehicle`): Boat to test.
+  - **Returns**: `bool` indicating anchoring validity.
+- **OneSync / Networking**: Local environmental check.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: can_anchor; Use: prints if boat can anchor; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('can_anchor', function()
+        local boat = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(CanAnchorBoatHere(boat))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: can_anchor */
+    RegisterCommand('can_anchor', () => {
+      const boat = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(CanAnchorBoatHere(boat));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only applies to watercraft.
+- **Reference**: https://docs.fivem.net/natives/?n=CanAnchorBoatHere
+
+##### CanBoatBeAnchored
+- **Scope**: Client
+- **Signature**: `bool CAN_BOAT_BE_ANCHORED(Vehicle boat)`
+- **Purpose**: Checks if the boat model supports anchoring.
+- **Parameters / Returns**:
+  - `boat` (`Vehicle`): Boat handle.
+  - **Returns**: `bool` support status.
+- **OneSync / Networking**: Local model query.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: can_anchor_model; Use: prints model anchoring capability; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('can_anchor_model', function()
+        local boat = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(CanBoatBeAnchored(boat))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: can_anchor_model */
+    RegisterCommand('can_anchor_model', () => {
+      const boat = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(CanBoatBeAnchored(boat));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns false for non-boat vehicles.
+- **Reference**: https://docs.fivem.net/natives/?n=CanBoatBeAnchored
+
+##### CanBoatBeAnchoredHere
+- **Scope**: Client
+- **Signature**: `bool CAN_BOAT_BE_ANCHORED_HERE(Vehicle boat)`
+- **Purpose**: Determines if the boat can anchor at its current position considering depth and model.
+- **Parameters / Returns**:
+  - `boat` (`Vehicle`): Boat handle.
+  - **Returns**: `bool` indicating feasibility.
+- **OneSync / Networking**: Local-only evaluation.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: anchor_here; Use: prints full anchoring check; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('anchor_here', function()
+        local boat = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(CanBoatBeAnchoredHere(boat))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: anchor_here */
+    RegisterCommand('anchor_here', () => {
+      const boat = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(CanBoatBeAnchoredHere(boat));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns false in shallow or obstructed waters.
+- **Reference**: https://docs.fivem.net/natives/?n=CanBoatBeAnchoredHere
+
+##### CanShuffleSeat
+- **Scope**: Client
+- **Signature**: `bool CAN_SHUFFLE_SEAT(Vehicle vehicle, int seatIndex)`
+- **Purpose**: Indicates if the local ped can move into the specified seat.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to test.
+  - `seatIndex` (`int`): Target seat.
+  - **Returns**: `bool` ability result.
+- **OneSync / Networking**: Seat changes replicate if entity is networked and caller is owner.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: can_shuffle; Use: prints if seat swap possible; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('can_shuffle', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        local seat = tonumber(args[1] or -1)
+        print(CanShuffleSeat(veh, seat))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: can_shuffle */
+    RegisterCommand('can_shuffle', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      const seat = Number(args[0] || -1);
+      console.log(CanShuffleSeat(veh, seat));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not account for NPC occupants.
+- **Reference**: https://docs.fivem.net/natives/?n=CanShuffleSeat
+
+##### CanVehicleParachuteBeActivated
+- **Scope**: Client
+- **Signature**: `bool CAN_VEHICLE_PARACHUTE_BE_ACTIVATED(Vehicle vehicle)`
+- **Purpose**: Checks if the vehicle's parachute system is ready to deploy.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - **Returns**: `bool` activation availability.
+- **OneSync / Networking**: Local state check; parachute deployment must be replicated by owner.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: can_para; Use: prints if parachute usable; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('can_para', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(CanVehicleParachuteBeActivated(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: can_para */
+    RegisterCommand('can_para', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(CanVehicleParachuteBeActivated(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only relevant for vehicles with parachute mods.
+- **Reference**: https://docs.fivem.net/natives/?n=CanVehicleParachuteBeActivated
+
+##### ClearVehicleCustomPrimaryColour
+- **Scope**: Shared
+- **Signature**: `void CLEAR_VEHICLE_CUSTOM_PRIMARY_COLOUR(Vehicle vehicle)`
+- **Purpose**: Removes any custom primary paint, reverting to default.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+- **OneSync / Networking**: Requires entity control for networked vehicles.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: clear_color1; Use: clears primary color; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('clear_color1', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        ClearVehicleCustomPrimaryColour(veh)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: clear_color1 */
+    RegisterCommand('clear_color1', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      ClearVehicleCustomPrimaryColour(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not refresh vehicle appearance until resynced.
+- **Reference**: https://docs.fivem.net/natives/?n=ClearVehicleCustomPrimaryColour
+
+##### ClearVehicleCustomSecondaryColour
+- **Scope**: Shared
+- **Signature**: `void CLEAR_VEHICLE_CUSTOM_SECONDARY_COLOUR(Vehicle vehicle)`
+- **Purpose**: Resets custom secondary paint to factory default.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+- **OneSync / Networking**: Caller must own the entity for replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: clear_color2; Use: clears secondary color; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('clear_color2', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        ClearVehicleCustomSecondaryColour(veh)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: clear_color2 */
+    RegisterCommand('clear_color2', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      ClearVehicleCustomSecondaryColour(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Visual update may require entity resync.
+- **Reference**: https://docs.fivem.net/natives/?n=ClearVehicleCustomSecondaryColour
+
+##### ClearVehicleDamage
+- **Scope**: Shared
+- **Signature**: `void CLEAR_VEHICLE_DAMAGE(Vehicle vehicle)`
+- **Purpose**: Resets cosmetic damage on the vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to repair visually.
+- **OneSync / Networking**: Ownership needed for global effect.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: clear_damage; Use: clears visual damage; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('clear_damage', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        ClearVehicleDamage(veh)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: clear_damage */
+    RegisterCommand('clear_damage', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      ClearVehicleDamage(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not fix mechanical damage; use `SetVehicleFixed` for full repair.
+- **Reference**: https://docs.fivem.net/natives/?n=ClearVehicleDamage
+
 ### Server Natives by Category
 #### ACL
 
@@ -12394,4 +12686,4 @@ RegisterCommand('rgb', () => {
   - Only meaningful inside an event handler.
 - **Reference**: https://docs.fivem.net/natives/?n=WasEventCanceled
 
-CONTINUE-HERE — 2025-09-11T22:59:27 — next: Vehicle :: BreakOffVehicleWindow
+CONTINUE-HERE — 2025-09-11T23:20 — next: Vehicle :: ClearVehicleDecorations
