@@ -430,7 +430,7 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Player | 248 | 196 | 52 | 2025-09-11T05:37 |
+| Player | 248 | 206 | 42 | 2025-09-11T05:50 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -7172,8 +7172,486 @@ ensure my_resource
   - Amount of restored charge is unspecified.
 - **Reference**: https://docs.fivem.net/natives/?n=SpecialAbilityChargeOnMissionFailed
 
+
+##### SpecialAbilityChargeSmall (0x2E7B9B683481687D / 0x6F463F56)
+- **Scope**: Client
+- **Signature**: `void SPECIAL_ABILITY_CHARGE_SMALL(Player player, BOOL p1, BOOL p2)`
+- **Purpose**: Undocumented/unclear on official docs
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `p1` (`bool`): Unknown; observed as true.
+  - `p2` (`bool`): Unknown; observed as true.
+  - **Returns**: None.
+- **OneSync / Networking**: Local ability state; replicate to server if gameplay impacts others.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: special_charge_small
+        -- Use: Calls SpecialAbilityChargeSmall
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('special_charge_small', function()
+        SpecialAbilityChargeSmall(PlayerId(), true, true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: special_charge_small */
+    RegisterCommand('special_charge_small', () => {
+      SpecialAbilityChargeSmall(PlayerId(), true, true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Parameters `p1` and `p2` are undocumented.
+- **Reference**: https://docs.fivem.net/natives/?n=SpecialAbilityChargeSmall
+
+##### SpecialAbilityDeactivate (0xD6A953C6D1492057 / 0x80C2AB09)
+- **Scope**: Client
+- **Signature**: `void SPECIAL_ABILITY_DEACTIVATE(Player player)`
+- **Purpose**: Undocumented/unclear on official docs
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - **Returns**: None.
+- **OneSync / Networking**: Local ability state; server should validate.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: special_deactivate
+        -- Use: Calls SpecialAbilityDeactivate
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('special_deactivate', function()
+        SpecialAbilityDeactivate(PlayerId())
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: special_deactivate */
+    RegisterCommand('special_deactivate', () => {
+      SpecialAbilityDeactivate(PlayerId());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Parameters beyond `player` are undocumented.
+- **Reference**: https://docs.fivem.net/natives/?n=SpecialAbilityDeactivate
+
+##### SpecialAbilityDeactivateFast (0x9CB5CE07A3968D5A / 0x0751908A)
+- **Scope**: Client
+- **Signature**: `void SPECIAL_ABILITY_DEACTIVATE_FAST(Player player)`
+- **Purpose**: Undocumented/unclear on official docs
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - **Returns**: None.
+- **OneSync / Networking**: Local ability state; server should validate.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: special_deactivate_fast
+        -- Use: Calls SpecialAbilityDeactivateFast
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('special_deactivate_fast', function()
+        SpecialAbilityDeactivateFast(PlayerId())
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: special_deactivate_fast */
+    RegisterCommand('special_deactivate_fast', () => {
+      SpecialAbilityDeactivateFast(PlayerId());
+    });
+    ```
+- **Caveats / Limitations**:
+  - No return; purpose unclear.
+- **Reference**: https://docs.fivem.net/natives/?n=SpecialAbilityDeactivateFast
+
+##### _SpecialAbilityDeplete (0x17F7471EACA78290)
+- **Scope**: Client
+- **Signature**: `void _SPECIAL_ABILITY_DEPLETE(Any p0)`
+- **Purpose**: Undocumented/unclear on official docs
+- **Parameters / Returns**:
+  - `p0` (`any`): Unknown.
+  - **Returns**: None.
+- **OneSync / Networking**: Local.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: special_deplete
+        -- Use: Calls _SPECIAL_ABILITY_DEPLETE
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('special_deplete', function()
+        _SPECIAL_ABILITY_DEPLETE(PlayerId())
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: special_deplete */
+    RegisterCommand('special_deplete', () => {
+      _SPECIAL_ABILITY_DEPLETE(PlayerId());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Native is undocumented; behavior unknown.
+- **Reference**: https://docs.fivem.net/natives/?n=SpecialAbilityDeplete
+
+##### SpecialAbilityDepleteMeter (0x1D506DBBBC51E64B / 0x9F80F6DF)
+- **Scope**: Client
+- **Signature**: `void SPECIAL_ABILITY_DEPLETE_METER(Player player, BOOL p1)`
+- **Purpose**: Undocumented/unclear on official docs
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `p1` (`bool`): Unknown; usually true.
+  - **Returns**: None.
+- **OneSync / Networking**: Local ability meter.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: special_deplete_meter
+        -- Use: Calls SpecialAbilityDepleteMeter
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('special_deplete_meter', function()
+        SpecialAbilityDepleteMeter(PlayerId(), true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: special_deplete_meter */
+    RegisterCommand('special_deplete_meter', () => {
+      SpecialAbilityDepleteMeter(PlayerId(), true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Parameter `p1` is undocumented.
+- **Reference**: https://docs.fivem.net/natives/?n=SpecialAbilityDepleteMeter
+
+##### SpecialAbilityFillMeter (0x3DACA8DDC6FD4980 / 0xB71589DA)
+- **Scope**: Client
+- **Signature**: `void SPECIAL_ABILITY_FILL_METER(Player player, BOOL p1)`
+- **Purpose**: Recharges the player's special ability meter.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `p1` (`bool`): Unknown; typically true.
+  - **Returns**: None.
+- **OneSync / Networking**: Local ability meter.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: special_fill_meter
+        -- Use: Calls SpecialAbilityFillMeter
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('special_fill_meter', function()
+        SpecialAbilityFillMeter(PlayerId(), true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: special_fill_meter */
+    RegisterCommand('special_fill_meter', () => {
+      SpecialAbilityFillMeter(PlayerId(), true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Also known as `_RECHARGE_SPECIAL_ABILITY`.
+- **Reference**: https://docs.fivem.net/natives/?n=SpecialAbilityFillMeter
+
+##### SpecialAbilityLock (0x6A09D0D590A47D13 / 0x1B7BB388)
+- **Scope**: Client
+- **Signature**: `void SPECIAL_ABILITY_LOCK(Hash playerModel)`
+- **Purpose**: Undocumented/unclear on official docs
+- **Parameters / Returns**:
+  - `playerModel` (`Hash`): Model to lock ability for.
+  - **Returns**: None.
+- **OneSync / Networking**: Local effect based on ped model.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: special_lock
+        -- Use: Calls SpecialAbilityLock
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('special_lock', function()
+        SpecialAbilityLock(GetEntityModel(PlayerPedId()))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: special_lock */
+    RegisterCommand('special_lock', () => {
+      SpecialAbilityLock(GetEntityModel(PlayerPedId()));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Purpose unknown; may depend on model.
+- **Reference**: https://docs.fivem.net/natives/?n=SpecialAbilityLock
+
+##### SpecialAbilityReset (0x375F0E738F861A94 / 0xA7D8BCD3)
+- **Scope**: Client
+- **Signature**: `void SPECIAL_ABILITY_RESET(Player player)`
+- **Purpose**: Undocumented/unclear on official docs
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - **Returns**: None.
+- **OneSync / Networking**: Local ability state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: special_reset
+        -- Use: Calls SpecialAbilityReset
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('special_reset', function()
+        SpecialAbilityReset(PlayerId())
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: special_reset */
+    RegisterCommand('special_reset', () => {
+      SpecialAbilityReset(PlayerId());
+    });
+    ```
+- **Caveats / Limitations**:
+  - No return; use with caution.
+- **Reference**: https://docs.fivem.net/natives/?n=SpecialAbilityReset
+
+##### SpecialAbilityUnlock (0xF145F3BE2EFA9A3B / 0x1FDB2919)
+- **Scope**: Client
+- **Signature**: `void SPECIAL_ABILITY_UNLOCK(Hash playerModel)`
+- **Purpose**: Undocumented/unclear on official docs
+- **Parameters / Returns**:
+  - `playerModel` (`Hash`): Model to unlock ability for.
+  - **Returns**: None.
+- **OneSync / Networking**: Local effect based on model.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: special_unlock
+        -- Use: Calls SpecialAbilityUnlock
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('special_unlock', function()
+        SpecialAbilityUnlock(GetEntityModel(PlayerPedId()))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: special_unlock */
+    RegisterCommand('special_unlock', () => {
+      SpecialAbilityUnlock(GetEntityModel(PlayerPedId()));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Purpose unknown.
+- **Reference**: https://docs.fivem.net/natives/?n=SpecialAbilityUnlock
+
+##### StartFiringAmnesty (0xBF9BD71691857E48 / 0x5F8A22A6)
+- **Scope**: Client
+- **Signature**: `void START_FIRING_AMNESTY(int duration)`
+- **Purpose**: Temporarily prevents wanted level for firing weapons.
+- **Parameters / Returns**:
+  - `duration` (`int`): Duration in milliseconds.
+  - **Returns**: None.
+- **OneSync / Networking**: Local; server should monitor for abuse.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: firing_amnesty
+        -- Use: Calls StartFiringAmnesty
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('firing_amnesty', function()
+        StartFiringAmnesty(10000) -- 10 seconds
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: firing_amnesty */
+    RegisterCommand('firing_amnesty', () => {
+      StartFiringAmnesty(10000); // 10 seconds
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only suppresses crime for a limited time.
+- **Reference**: https://docs.fivem.net/natives/?n=StartFiringAmnesty
+
+##### StartPlayerTeleport (0xAD15F075A4DA0FDE / 0xC552E06C)
+- **Scope**: Client
+- **Signature**: `void START_PLAYER_TELEPORT(Player player, float x, float y, float z, float heading, BOOL teleportWithVehicle, BOOL findCollisionLand, BOOL p7)`
+- **Purpose**: Begins an asynchronous player teleport.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player to teleport.
+  - `x`, `y`, `z` (`float`): Destination coordinates.
+  - `heading` (`float`): Heading at destination.
+  - `teleportWithVehicle` (`bool`): Include vehicle.
+  - `findCollisionLand` (`bool`): Auto-detect ground Z.
+  - `p7` (`bool`): Unknown.
+  - **Returns**: None.
+- **OneSync / Networking**: Server should validate destination and handle entity ownership.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: tp_start
+        -- Use: Teleports the player asynchronously
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('tp_start', function()
+        StartPlayerTeleport(PlayerId(), 200.0, 200.0, 30.0, 0.0, false, true, true)
+        while IsPlayerTeleportActive() do
+            Wait(0)
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: tp_start */
+    RegisterCommand('tp_start', () => {
+      StartPlayerTeleport(PlayerId(), 200.0, 200.0, 30.0, 0.0, false, true, true);
+      const interval = setInterval(() => {
+        if (!IsPlayerTeleportActive()) clearInterval(interval);
+      }, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - `findCollisionLand` only works for players on foot.
+- **Reference**: https://docs.fivem.net/natives/?n=StartPlayerTeleport
+
+##### StopPlayerTeleport (0xC449EDED9D73009C / 0x86AB8DBB)
+- **Scope**: Client
+- **Signature**: `void STOP_PLAYER_TELEPORT()`
+- **Purpose**: Cancels an active teleport started with `StartPlayerTeleport`.
+- **Parameters / Returns**:
+  - **Returns**: None.
+- **OneSync / Networking**: Local; server should track teleport completion.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: tp_stop
+        -- Use: Cancels player teleport
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('tp_stop', function()
+        StopPlayerTeleport()
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: tp_stop */
+    RegisterCommand('tp_stop', () => {
+      StopPlayerTeleport();
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only effective while a teleport is active.
+- **Reference**: https://docs.fivem.net/natives/?n=StopPlayerTeleport
+
+##### SuppressCrimeThisFrame (0x9A987297ED8BD838 / 0x59B5C2A2)
+- **Scope**: Client
+- **Signature**: `void SUPPRESS_CRIME_THIS_FRAME(Player player, int crimeType)`
+- **Purpose**: Suppresses detection of a specific crime for the current frame.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player to affect.
+  - `crimeType` (`int`): Crime type ID (see `REPORT_CRIME`).
+  - **Returns**: None.
+- **OneSync / Networking**: Must be called every frame to maintain suppression.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: suppress_crime
+        -- Use: Calls SuppressCrimeThisFrame for weapon firing
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('suppress_crime', function()
+        SuppressCrimeThisFrame(PlayerId(), 6) -- 6: firing weapon
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: suppress_crime */
+    RegisterCommand('suppress_crime', () => {
+      SuppressCrimeThisFrame(PlayerId(), 6); // 6: firing weapon
+    });
+    ```
+- **Caveats / Limitations**:
+  - Must run in a loop for sustained effect.
+- **Reference**: https://docs.fivem.net/natives/?n=SuppressCrimeThisFrame
+
+##### _UpdatePlayerTeleport (0xE23D5873C2394C61 / _HAS_PLAYER_TELEPORT_FINISHED)
+- **Scope**: Client
+- **Signature**: `BOOL _UPDATE_PLAYER_TELEPORT(Player player)`
+- **Purpose**: Checks if an asynchronous teleport has completed.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player to query.
+  - **Returns**: `bool` indicating completion.
+- **OneSync / Networking**: Local; server may poll to synchronize state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: tp_status
+        -- Use: Reports if teleport finished
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('tp_status', function()
+        print(_UPDATE_PLAYER_TELEPORT(PlayerId()))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: tp_status */
+    RegisterCommand('tp_status', () => {
+      console.log(_UPDATE_PLAYER_TELEPORT(PlayerId()));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns `false` while teleport in progress.
+- **Reference**: https://docs.fivem.net/natives/?n=UpdatePlayerTeleport
+
 ### Server Natives by Category
 
 
 
-CONTINUE-HERE — 2025-09-11T05:37 — next: 13.2 Client Natives > Player category :: SpecialAbilityChargeSmall
+CONTINUE-HERE — 2025-09-11T05:50 — next: 13.2 Client Natives > Player category :: ArePlayerFlashingStarsAboutToDrop
