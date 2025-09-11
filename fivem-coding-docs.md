@@ -430,7 +430,7 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Player | 248 | 115 | 133 | 2025-09-11T04:52 |
+| Player | 248 | 140 | 108 | 2025-09-11T05:03 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -4407,7 +4407,872 @@ ensure my_resource
   - Undocumented crime escalation behavior.
 - **Reference**: https://docs.fivem.net/natives/?n=ReportPoliceSpottedPlayer
 
+##### ResetPlayerArrestState (0x2D03E13C460760D6)
+- **Scope**: Client
+- **Signature**: `void RESET_PLAYER_ARREST_STATE(Player player);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - **Returns**: None.
+- **OneSync / Networking**: Local effect; server should authorize when affecting remote players.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: reset_arrest
+        -- Use: Calls ResetPlayerArrestState
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('reset_arrest', function()
+        ResetPlayerArrestState(PlayerId())
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: reset_arrest */
+    RegisterCommand('reset_arrest', () => {
+      ResetPlayerArrestState(PlayerId());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=ResetPlayerArrestState
+
+##### ResetPlayerInputGait (0x19531C47A2ABD691)
+- **Scope**: Client
+- **Signature**: `void RESET_PLAYER_INPUT_GAIT(Player player);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - **Returns**: None.
+- **OneSync / Networking**: Local effect; server should authorize when affecting remote players.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: reset_input_
+        -- Use: Calls ResetPlayerInputGait
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('reset_input_', function()
+        ResetPlayerInputGait(PlayerId())
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: reset_input_ */
+    RegisterCommand('reset_input_', () => {
+      ResetPlayerInputGait(PlayerId());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=ResetPlayerInputGait
+
+##### ResetPlayerStamina (0xA6F312FCCE9C1DFE)
+- **Scope**: Client
+- **Signature**: `void RESET_PLAYER_STAMINA(Player player);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - **Returns**: None.
+- **OneSync / Networking**: Local effect; server should authorize when affecting remote players.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: reset_stamin
+        -- Use: Calls ResetPlayerStamina
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('reset_stamin', function()
+        ResetPlayerStamina(PlayerId())
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: reset_stamin */
+    RegisterCommand('reset_stamin', () => {
+      ResetPlayerStamina(PlayerId());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=ResetPlayerStamina
+
+##### ResetWantedLevelDifficulty (0xB9D0DD990DC141DD)
+- **Scope**: Client
+- **Signature**: `void RESET_WANTED_LEVEL_DIFFICULTY(Player player);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - **Returns**: None.
+- **OneSync / Networking**: Local effect; server should authorize when affecting remote players.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: reset_wanted
+        -- Use: Calls ResetWantedLevelDifficulty
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('reset_wanted', function()
+        ResetWantedLevelDifficulty(PlayerId())
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: reset_wanted */
+    RegisterCommand('reset_wanted', () => {
+      ResetWantedLevelDifficulty(PlayerId());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=ResetWantedLevelDifficulty
+
+##### ResetWorldBoundaryForPlayer (0xDA1DF03D5A315F4E)
+- **Scope**: Client
+- **Signature**: `void RESET_WORLD_BOUNDARY_FOR_PLAYER();`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - None.
+  - **Returns**: None.
+- **OneSync / Networking**: Local effect; server should authorize when affecting remote players.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: reset_world_
+        -- Use: Calls ResetWorldBoundaryForPlayer
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('reset_world_', function()
+        ResetWorldBoundaryForPlayer()
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: reset_world_ */
+    RegisterCommand('reset_world_', () => {
+      ResetWorldBoundaryForPlayer();
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=ResetWorldBoundaryForPlayer
+
+##### RestorePlayerStamina (0xA352C1B864CAFD33)
+- **Scope**: Client
+- **Signature**: `void RESTORE_PLAYER_STAMINA(Player player, float percentage);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `percentage` (`float`): Stamina percentage.
+  - **Returns**: None.
+- **OneSync / Networking**: Local effect; server should authorize when affecting remote players.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: restore_stam
+        -- Use: Calls RestorePlayerStamina
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('restore_stam', function()
+        RestorePlayerStamina(PlayerId(),0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: restore_stam */
+    RegisterCommand('restore_stam', () => {
+      RestorePlayerStamina(PlayerId(),0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=RestorePlayerStamina
+
+##### SetAchievementProgress (0xC2AFFFDABBDC2C5C)
+- **Scope**: Client
+- **Signature**: `BOOL _SET_ACHIEVEMENT_PROGRESS(int achievement, int progress);`
+- **Purpose**: For Steam. Does nothing and always returns false in the retail version of the game.
+- **Parameters / Returns**:
+  - `achievement` (`int`): Achievement ID.
+  - `progress` (`int`): Progress value.
+  - **Returns**: `bool` success.
+- **OneSync / Networking**: Local effect; server should authorize when affecting remote players.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: set_achievem
+        -- Use: Calls SetAchievementProgress
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('set_achievem', function()
+        SetAchievementProgress(0,0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: set_achievem */
+    RegisterCommand('set_achievem', () => {
+      SetAchievementProgress(0,0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - No additional notes.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetAchievementProgress
+
+##### SetAirDragMultiplierForPlayersVehicle (0xCA7DC8329F0A1E9E)
+- **Scope**: Client
+- **Signature**: `void SET_AIR_DRAG_MULTIPLIER_FOR_PLAYERS_VEHICLE(Player player, float multiplier);`
+- **Purpose**: ``` This can be between 1.0f - 14.9f You can change the max in IDA from 15.0. I say 15.0 as the function blrs if what you input is greater than or equal to 15.0 hence why it's 14.9 max default. On PC the multiplier can be between 0.0f and 50.0f (inclusive). ```
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `multiplier` (`float`): Drag multiplier.
+  - **Returns**: None.
+- **OneSync / Networking**: Local effect; server should authorize when affecting remote players.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: set_air_drag
+        -- Use: Calls SetAirDragMultiplierForPlayersVehicle
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('set_air_drag', function()
+        SetAirDragMultiplierForPlayersVehicle(PlayerId(),0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: set_air_drag */
+    RegisterCommand('set_air_drag', () => {
+      SetAirDragMultiplierForPlayersVehicle(PlayerId(),0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - No additional notes.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetAirDragMultiplierForPlayersVehicle
+
+##### SetAllRandomPedsFlee (0x056E0FE8534C2949)
+- **Scope**: Client
+- **Signature**: `void SET_ALL_RANDOM_PEDS_FLEE(Player player, BOOL toggle);`
+- **Purpose**: Sets whether all random peds will run away from the player if they are agitated (threatened) (bool=true), or if they will stand their ground (bool=false).
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `toggle` (`bool`): Enable or disable.
+  - **Returns**: None.
+- **OneSync / Networking**: Local effect; server should authorize when affecting remote players.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: set_all_rand
+        -- Use: Calls SetAllRandomPedsFlee
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('set_all_rand', function()
+        SetAllRandomPedsFlee(PlayerId(),true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: set_all_rand */
+    RegisterCommand('set_all_rand', () => {
+      SetAllRandomPedsFlee(PlayerId(),true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - No additional notes.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetAllRandomPedsFlee
+
+##### SetAllRandomPedsFleeThisFrame (0x471D2FF42A94B4F2)
+- **Scope**: Client
+- **Signature**: `void SET_ALL_RANDOM_PEDS_FLEE_THIS_FRAME(Player player);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - **Returns**: None.
+- **OneSync / Networking**: Local effect; server should authorize when affecting remote players.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: set_all_rand
+        -- Use: Calls SetAllRandomPedsFleeThisFrame
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('set_all_rand', function()
+        SetAllRandomPedsFleeThisFrame(PlayerId())
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: set_all_rand */
+    RegisterCommand('set_all_rand', () => {
+      SetAllRandomPedsFleeThisFrame(PlayerId());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetAllRandomPedsFleeThisFrame
+
+##### SetAutoGiveParachuteWhenEnterPlane (0x9F343285A00B4BB6)
+- **Scope**: Client
+- **Signature**: `void SET_AUTO_GIVE_PARACHUTE_WHEN_ENTER_PLANE(Player player, BOOL toggle);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `toggle` (`bool`): Enable or disable.
+  - **Returns**: None.
+- **OneSync / Networking**: Local effect; server should authorize when affecting remote players.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: set_auto_giv
+        -- Use: Calls SetAutoGiveParachuteWhenEnterPlane
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('set_auto_giv', function()
+        SetAutoGiveParachuteWhenEnterPlane(PlayerId(),true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: set_auto_giv */
+    RegisterCommand('set_auto_giv', () => {
+      SetAutoGiveParachuteWhenEnterPlane(PlayerId(),true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetAutoGiveParachuteWhenEnterPlane
+
+##### SetAutoGiveScubaGearWhenExitVehicle (0xD2B315B6689D537D)
+- **Scope**: Client
+- **Signature**: `void SET_AUTO_GIVE_SCUBA_GEAR_WHEN_EXIT_VEHICLE(Player player, BOOL toggle);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `toggle` (`bool`): Enable or disable.
+  - **Returns**: None.
+- **OneSync / Networking**: Local effect; server should authorize when affecting remote players.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: set_auto_giv
+        -- Use: Calls SetAutoGiveScubaGearWhenExitVehicle
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('set_auto_giv', function()
+        SetAutoGiveScubaGearWhenExitVehicle(PlayerId(),true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: set_auto_giv */
+    RegisterCommand('set_auto_giv', () => {
+      SetAutoGiveScubaGearWhenExitVehicle(PlayerId(),true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetAutoGiveScubaGearWhenExitVehicle
+
+##### SetDisableAmbientMeleeMove (0x2E8AABFA40A84F8C)
+- **Scope**: Client
+- **Signature**: `void SET_DISABLE_AMBIENT_MELEE_MOVE(Player player, BOOL toggle);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `toggle` (`bool`): Enable or disable.
+  - **Returns**: None.
+- **OneSync / Networking**: Local effect; server should authorize when affecting remote players.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: set_disable_
+        -- Use: Calls SetDisableAmbientMeleeMove
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('set_disable_', function()
+        SetDisableAmbientMeleeMove(PlayerId(),true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: set_disable_ */
+    RegisterCommand('set_disable_', () => {
+      SetDisableAmbientMeleeMove(PlayerId(),true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetDisableAmbientMeleeMove
+
+##### SetDispatchCopsForPlayer (0xDB172424876553F4)
+- **Scope**: Client
+- **Signature**: `void SET_DISPATCH_COPS_FOR_PLAYER(Player player, BOOL toggle);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `toggle` (`bool`): Enable or disable.
+  - **Returns**: None.
+- **OneSync / Networking**: Local effect; server should authorize when affecting remote players.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: set_dispatch
+        -- Use: Calls SetDispatchCopsForPlayer
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('set_dispatch', function()
+        SetDispatchCopsForPlayer(PlayerId(),true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: set_dispatch */
+    RegisterCommand('set_dispatch', () => {
+      SetDispatchCopsForPlayer(PlayerId(),true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetDispatchCopsForPlayer
+
+##### SetEveryoneIgnorePlayer (0x8EEDA153AD141BA4)
+- **Scope**: Client
+- **Signature**: `void SET_EVERYONE_IGNORE_PLAYER(Player player, BOOL toggle);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `toggle` (`bool`): Enable or disable.
+  - **Returns**: None.
+- **OneSync / Networking**: Local effect; server should authorize when affecting remote players.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: set_everyone
+        -- Use: Calls SetEveryoneIgnorePlayer
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('set_everyone', function()
+        SetEveryoneIgnorePlayer(PlayerId(),true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: set_everyone */
+    RegisterCommand('set_everyone', () => {
+      SetEveryoneIgnorePlayer(PlayerId(),true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetEveryoneIgnorePlayer
+
+##### SetIgnoreLowPriorityShockingEvents (0x596976B02B6B5700)
+- **Scope**: Client
+- **Signature**: `void SET_IGNORE_LOW_PRIORITY_SHOCKING_EVENTS(Player player, BOOL toggle);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `toggle` (`bool`): Enable or disable.
+  - **Returns**: None.
+- **OneSync / Networking**: Local effect; server should authorize when affecting remote players.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: set_ignore_l
+        -- Use: Calls SetIgnoreLowPriorityShockingEvents
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('set_ignore_l', function()
+        SetIgnoreLowPriorityShockingEvents(PlayerId(),true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: set_ignore_l */
+    RegisterCommand('set_ignore_l', () => {
+      SetIgnoreLowPriorityShockingEvents(PlayerId(),true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetIgnoreLowPriorityShockingEvents
+
+##### SetMaxWantedLevel (0xAA5F02DB48D704B9)
+- **Scope**: Client
+- **Signature**: `void SET_MAX_WANTED_LEVEL(int maxWantedLevel);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `maxWantedLevel` (`int`): Maximum wanted level.
+  - **Returns**: None.
+- **OneSync / Networking**: Local effect; server should authorize when affecting remote players.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: set_max_want
+        -- Use: Calls SetMaxWantedLevel
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('set_max_want', function()
+        SetMaxWantedLevel(0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: set_max_want */
+    RegisterCommand('set_max_want', () => {
+      SetMaxWantedLevel(0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetMaxWantedLevel
+
+##### SetPlayerBluetoothState (0x5DC40A8869C22141)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_BLUETOOTH_STATE( Player player, BOOL state);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `state` (`bool`): Enable or disable.
+  - **Returns**: None.
+- **OneSync / Networking**: Local effect; server should authorize when affecting remote players.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: set_bluetoot
+        -- Use: Calls SetPlayerBluetoothState
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('set_bluetoot', function()
+        SetPlayerBluetoothState(PlayerId(),true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: set_bluetoot */
+    RegisterCommand('set_bluetoot', () => {
+      SetPlayerBluetoothState(PlayerId(),true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerBluetoothState
+
+##### SetPlayerCanBeHassledByGangs (0xD5E460AD7020A246)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_CAN_BE_HASSLED_BY_GANGS(Player player, BOOL toggle);`
+- **Purpose**: ``` Sets whether this player can be hassled by gangs. ```
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `toggle` (`bool`): Enable or disable.
+  - **Returns**: None.
+- **OneSync / Networking**: Local effect; server should authorize when affecting remote players.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: set_can_be_h
+        -- Use: Calls SetPlayerCanBeHassledByGangs
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('set_can_be_h', function()
+        SetPlayerCanBeHassledByGangs(PlayerId(),true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: set_can_be_h */
+    RegisterCommand('set_can_be_h', () => {
+      SetPlayerCanBeHassledByGangs(PlayerId(),true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - No additional notes.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerCanBeHassledByGangs
+
+##### SetPlayerCanDoDriveBy (0x6E8834B52EC20C77)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_CAN_DO_DRIVE_BY(Player player, BOOL toggle);`
+- **Purpose**: Sets whether the player is able to do drive-bys in vehicle (shooting & aiming in vehicles), this also includes middle finger taunts. This is a toggle, it does not have to be ran every frame.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `toggle` (`bool`): Enable or disable.
+  - **Returns**: None.
+- **OneSync / Networking**: Local effect; server should authorize when affecting remote players.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: set_can_do_d
+        -- Use: Calls SetPlayerCanDoDriveBy
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('set_can_do_d', function()
+        SetPlayerCanDoDriveBy(PlayerId(),true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: set_can_do_d */
+    RegisterCommand('set_can_do_d', () => {
+      SetPlayerCanDoDriveBy(PlayerId(),true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - No additional notes.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerCanDoDriveBy
+
+##### SetPlayerCanLeaveParachuteSmokeTrail (0xF401B182DBA8AF53)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_CAN_LEAVE_PARACHUTE_SMOKE_TRAIL(Player player, BOOL enabled);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `enabled` (`bool`): Enable or disable.
+  - **Returns**: None.
+- **OneSync / Networking**: Local effect; server should authorize when affecting remote players.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: set_can_leav
+        -- Use: Calls SetPlayerCanLeaveParachuteSmokeTrail
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('set_can_leav', function()
+        SetPlayerCanLeaveParachuteSmokeTrail(PlayerId(),true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: set_can_leav */
+    RegisterCommand('set_can_leav', () => {
+      SetPlayerCanLeaveParachuteSmokeTrail(PlayerId(),true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerCanLeaveParachuteSmokeTrail
+
+##### SetPlayerCanUseCover (0xD465A8599DFF6814)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_CAN_USE_COVER(Player player, BOOL toggle);`
+- **Purpose**: ``` Sets whether this player can take cover. ```
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `toggle` (`bool`): Enable or disable.
+  - **Returns**: None.
+- **OneSync / Networking**: Local effect; server should authorize when affecting remote players.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: set_can_use_
+        -- Use: Calls SetPlayerCanUseCover
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('set_can_use_', function()
+        SetPlayerCanUseCover(PlayerId(),true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: set_can_use_ */
+    RegisterCommand('set_can_use_', () => {
+      SetPlayerCanUseCover(PlayerId(),true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - No additional notes.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerCanUseCover
+
+##### SetPlayerClothLockCounter (0x14D913B777DFF5DA)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_CLOTH_LOCK_COUNTER(int value);`
+- **Purpose**: ``` 6 matches across 4 scripts. 5 occurrences were 240. The other was 255. ```
+- **Parameters / Returns**:
+  - `value` (`int`): Counter value.
+  - **Returns**: None.
+- **OneSync / Networking**: Local effect; server should authorize when affecting remote players.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: set_cloth_lo
+        -- Use: Calls SetPlayerClothLockCounter
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('set_cloth_lo', function()
+        SetPlayerClothLockCounter(0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: set_cloth_lo */
+    RegisterCommand('set_cloth_lo', () => {
+      SetPlayerClothLockCounter(0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - No additional notes.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerClothLockCounter
+
+##### SetPlayerClothPackageIndex (0x9F7BBA2EA6372500)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_CLOTH_PACKAGE_INDEX(int index);`
+- **Purpose**: ``` Every occurrence was either 0 or 2. ```
+- **Parameters / Returns**:
+  - `index` (`int`): Package index.
+  - **Returns**: None.
+- **OneSync / Networking**: Local effect; server should authorize when affecting remote players.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: set_cloth_pa
+        -- Use: Calls SetPlayerClothPackageIndex
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('set_cloth_pa', function()
+        SetPlayerClothPackageIndex(0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: set_cloth_pa */
+    RegisterCommand('set_cloth_pa', () => {
+      SetPlayerClothPackageIndex(0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - No additional notes.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerClothPackageIndex
+
+##### SetPlayerClothPinFrames (0x749FADDF97DFE930)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_CLOTH_PIN_FRAMES(Player player, int p1);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `p1` (`int`): Unknown.
+  - **Returns**: None.
+- **OneSync / Networking**: Local effect; server should authorize when affecting remote players.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: set_cloth_pi
+        -- Use: Calls SetPlayerClothPinFrames
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('set_cloth_pi', function()
+        SetPlayerClothPinFrames(PlayerId(),0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: set_cloth_pi */
+    RegisterCommand('set_cloth_pi', () => {
+      SetPlayerClothPinFrames(PlayerId(),0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerClothPinFrames
+
 ### Server Natives by Category
 
-
-CONTINUE-HERE — 2025-09-11T04:52 — next: 13.2 Client Natives > Player category :: ResetPlayerArrestState
+CONTINUE-HERE — 2025-09-11T05:03 — next: 13.2 Client Natives > Player category :: SetPlayerControl
