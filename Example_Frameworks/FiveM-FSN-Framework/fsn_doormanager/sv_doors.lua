@@ -824,13 +824,27 @@ local doors = {
 	},
 	}
 
-RegisterServerEvent('fsn_doormanager:request')
-AddEventHandler('fsn_doormanager:request', function()
-	TriggerClientEvent('fsn_doormanager:request', source, doors)
+--[[
+        -- Type: Function
+        -- Name: fsn_doormanager:requestDoors
+        -- Use: Sends current door states to requesting client
+        -- Created: 2025-09-10
+        -- By: VSSVSSN
+--]]
+RegisterNetEvent('fsn_doormanager:requestDoors', function()
+        TriggerClientEvent('fsn_doormanager:syncDoors', source, doors)
 end)
 
-RegisterServerEvent('fsn_doormanager:toggle')
-AddEventHandler('fsn_doormanager:toggle', function(id)
-	doors[id].locked = not doors[id].locked
-	TriggerClientEvent('fsn_doormanager:request', -1, doors)
+--[[
+        -- Type: Function
+        -- Name: fsn_doormanager:toggleDoor
+        -- Use: Toggles the lock state of a door and syncs to clients
+        -- Created: 2025-09-10
+        -- By: VSSVSSN
+--]]
+RegisterNetEvent('fsn_doormanager:toggleDoor', function(id)
+        if doors[id] then
+                doors[id].locked = not doors[id].locked
+                TriggerClientEvent('fsn_doormanager:syncDoors', -1, doors)
+        end
 end)
