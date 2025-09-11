@@ -1,28 +1,63 @@
+--[[
+    -- Type: Module
+    -- Name: fsn_errorcontrol client
+    -- Use: Intercepts errors and forwards them to server logging
+    -- Created: 2025-09-10
+    -- By: VSSVSSN
+--]]
+
 local oldError = error
 local oldTrace = Citizen.Trace
 
-local errorWords = {"failure", "error", "not", "failed", "not safe", "invalid", "cannot", ".lua", "server", "client", "attempt", "traceback", "stack", "function"}
+-- keywords used to detect error-like messages in trace output
+local errorWords = {
+    'failure', 'error', 'not', 'failed', 'not safe', 'invalid',
+    'cannot', '.lua', 'server', 'client', 'attempt',
+    'traceback', 'stack', 'function'
+}
 
-function error(...)
+--[[
+    -- Type: Function
+    -- Name: sendError
+    -- Use: Logs the message locally and relays it to the server
+--]]
+local function sendError(msg)
     local resource = GetCurrentResourceName()
-    print(":: fsn_errorcontrol :: (" .. resource..")")
-    print(...)
-    print(":: end ::")
-	
-	TriggerServerEvent('fsn_main:logging:addLog', GetPlayerServerId(PlayerId()), 'scripterror', ...)
+    print((':: fsn_errorcontrol :: (%s)'):format(resource))
+    print(msg)
+    print(':: end ::')
+
+    TriggerServerEvent('fsn_main:logging:addLog', GetPlayerServerId(PlayerId()), 'scripterror', msg)
 end
 
-function Citizen.Trace(...)
-    oldTrace(...)
+--[[
+    -- Type: Function
+    -- Name: error
+    -- Use: Overrides the global error function to log before propagating
+--]]
+function error(...)
+    local msg = table.concat({...}, ' ')
+    sendError(msg)
+    oldError(msg)
+end
 
-    if type(...) == "string" then
-        args = string.lower(...)
-        
+--[[
+    -- Type: Function
+    -- Name: Citizen.Trace
+    -- Use: Hooks into Citizen.Trace to catch error keywords
+--]]
+function Citizen.Trace(...)
+    local msg = table.concat({...}, ' ')
+    oldTrace(msg)
+
+    if type(msg) == 'string' then
+        local lowerMsg = msg:lower()
         for _, word in ipairs(errorWords) do
-            if string.find(args, word) then
-                error(...)
-                return
+            if lowerMsg:find(word, 1, true) then
+                error(msg)
+                break
             end
         end
     end
 end
+
