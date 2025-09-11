@@ -113,7 +113,9 @@ FiveM ships multiple scripting runtimes.
 RegisterCommand('whereami', function()
     local ped = PlayerPedId()
     local coords = GetEntityCoords(ped)
-    TriggerEvent('chat:addMessage', { args = { '[POS]', ('x=%.2f y=%.2f z=%.2f'):format(coords.x, coords.y, coords.z) } })
+    TriggerEvent('chat:addMessage', {
+        args = { '[POS]', ('x=%.2f y=%.2f z=%.2f'):format(coords.x, coords.y, coords.z) }
+    })
 end, false)
 ```
 
@@ -181,6 +183,7 @@ client TriggerServerEvent ───▶ server AddEventHandler
 server TriggerClientEvent ───▶ client AddEventHandler
 ```
 - `source` (Lua) or `global.source` (JS) identifies the caller on the server.
+- In C#, use a parameter marked `[FromSource]` to capture the caller.
 - Use `CancelEvent()` to stop default handling.
 - Validate all parameters before use.
 [`Docs: Listening for events`](https://docs.fivem.net/docs/scripting-manual/working-with-events/listening-for-events/) · [`Docs: Triggering events`](https://docs.fivem.net/docs/scripting-manual/working-with-events/triggering-events/) · [`Docs: Event cancellation`](https://docs.fivem.net/docs/scripting-manual/working-with-events/event-cancelation/)
@@ -193,19 +196,24 @@ ConVars are server configuration variables accessible at runtime.
 ### Setting & Getting
 ```lua
 -- server/main.lua
-SetConvar('voiceEnabled', 'true')
-local enabled = GetConvar('voiceEnabled', 'false')
+SetConvar('voiceEnabled', 'true')      -- set a ConVar
+local enabled = GetConvar('voiceEnabled', 'false') -- read with fallback
 ```
 ```javascript
 // server/main.js
-setConvar('voiceEnabled', 'true');
-const enabled = GetConvar('voiceEnabled', 'false');
+setConvar('voiceEnabled', 'true'); // set a ConVar
+const enabled = GetConvar('voiceEnabled', 'false'); // read with fallback
 ```
 
 ### Server Replicated
 ```lua
 SetConvarReplicated('weather', 'RAIN')
 local w = GetConvar('weather', 'CLEAR') -- works on client & server
+```
+```javascript
+// server/main.js
+SetConvarReplicated('weather', 'RAIN');
+const w = GetConvar('weather', 'CLEAR'); // works on client & server
 ```
 
 ### Registering Commands
@@ -219,10 +227,11 @@ end, true) -- true => requires command.announce permission
 ```
 ```javascript
 // server/main.js
+// Restricted command guarded by ACL
 RegisterCommand('announce', (src, args) => {
   if (!args.length) return;
   emitNet('chat:addMessage', -1, { args: ['[ANN]', args.join(' ')] });
-}, true);
+}, true); // true => requires command.announce permission
 ```
 [`Docs: ConVars`](https://docs.fivem.net/docs/scripting-reference/convars/) · [`Docs: Server commands`](https://docs.fivem.net/docs/server-manual/server-commands/)
 
@@ -240,7 +249,7 @@ Entity(veh).state:set('owner', source, true) -- replicate to clients
 ```javascript
 // client/main.js
 const veh = GetVehiclePedIsIn(PlayerPedId(), false);
-console.log(Entity(veh).state.owner);
+console.log(Entity(veh).state.owner); // read replicated value
 ```
 
 ### Change Handlers
@@ -249,6 +258,12 @@ console.log(Entity(veh).state.owner);
 AddStateBagChangeHandler('owner', nil, function(bagName, key, value)
     print(('Entity %s new owner %s'):format(bagName, value))
 end)
+```
+```javascript
+// any side
+AddStateBagChangeHandler('owner', null, (bagName, key, value) => {
+  console.log(`Entity ${bagName} new owner ${value}`);
+});
 ```
 - Use replicated flags (`true` parameter) to sync from clients to server when needed.
 [`Docs: OneSync`](https://docs.fivem.net/docs/scripting-reference/onesync/) · [`Docs: State bags`](https://docs.fivem.net/docs/scripting-manual/networking/state-bags/)
@@ -266,7 +281,29 @@ add_principal identifier.fivem:123456 group.admin
 ```
 - `add_ace principal object allow|deny`
 - `add_principal child parent`
-- `remove_ace`, `remove_principal`, `test_ace` for checks
+- `remove_ace`, `remove_principal`, `test_ace` for checks (`test_ace group.admin vehicle.spawn`)
+
+### Checking Permissions in Scripts
+```lua
+-- server/main.lua
+RegisterCommand('car', function(src)
+    if not IsPlayerAceAllowed(src, 'vehicle.spawn') then
+        TriggerClientEvent('chat:addMessage', src, { args = { '[ERROR]', 'No permission' } })
+        return
+    end
+    -- spawn vehicle here
+end)
+```
+```javascript
+// server/main.js
+RegisterCommand('car', (src) => {
+  if (!IsPlayerAceAllowed(src, 'vehicle.spawn')) {
+    emitNet('chat:addMessage', src, { args: ['[ERROR]', 'No permission'] });
+    return;
+  }
+  // spawn vehicle here
+});
+```
 [`Docs: Server commands (ACL section)`](https://docs.fivem.net/docs/server-manual/server-commands/)
 
 ---
@@ -286,6 +323,7 @@ add_principal identifier.fivem:123456 group.admin
 - Keep resources non-blocking (`Citizen.Wait`/`setTimeout`) to avoid hitching.
 - Guard commands/resources with ACL principals.
 - Track changes in version control and document resources.
+[`Docs: Best practices`](https://docs.fivem.net/docs/scripting-manual/introduction/best-practices/)
 
 ---
 
@@ -349,3 +387,4 @@ ensure my_resource
 - https://docs.fivem.net/docs/scripting-reference/onesync/
 - https://docs.fivem.net/docs/scripting-manual/networking/state-bags/
 - https://docs.fivem.net/docs/scripting-manual/debugging/using-profiler/
+- https://docs.fivem.net/docs/scripting-manual/introduction/best-practices/
