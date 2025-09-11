@@ -434,7 +434,7 @@ ensure my_resource
 | Recording | 17 | 17 | 0 | 2025-09-11T06:52 |
 | Replay | 6 | 6 | 0 | 2025-09-11T07:37 |
 | ACL | 10 | 10 | 0 | 2025-09-11T08:12 |
-| CFX | ? | 30 | ? | 2025-09-11T09:12 |
+| CFX | ? | 46 | ? | 2025-09-11T09:19 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -11535,4 +11535,444 @@ RegisterCommand('rgb', () => {
 - **Caveats / Limitations**:
   - Intended for short metadata strings only.
 - **Reference**: https://docs.fivem.net/natives/?n=SetConvarServerInfo
-CONTINUE-HERE — 2025-09-11T09:14:14 — next: 13.3 Server Natives > CFX category :: SetGameType
+##### SetGameType
+- **Scope**: Server
+- **Signature(s)**: `void SET_GAME_TYPE(string gametype)`
+- **Purpose**: Sets a custom game type string shown in server listings.
+- **Parameters / Returns**:
+  - `gametype` (`string`): Label displayed to clients and in server browsers.
+  - **Returns**: None.
+- **OneSync / Networking**: Broadcast to all clients and used for external server queries.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Server Init
+        -- Name: set_gametype
+        -- Use: Sets the server game type
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    SetGameType('SunnyRP')
+    ```
+  - JavaScript:
+    ```javascript
+    /* Server Init: set_gametype */
+    SetGameType('SunnyRP');
+    ```
+- **Caveats / Limitations**:
+  - Purely informational; does not enforce any mode.
+- **Reference**: https://docs.fivem.net/natives/?n=SetGameType
+
+##### SetHttpHandler
+- **Scope**: Server
+- **Signature(s)**: `void SET_HTTP_HANDLER(function handler)`
+- **Purpose**: Registers a callback to respond to HTTP requests hitting the FXServer port.
+- **Parameters / Returns**:
+  - `handler` (`function`): Receives `(req, res)` objects and writes responses.
+  - **Returns**: None.
+- **OneSync / Networking**: Runs on server side only; unrelated to game networking.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Server Init
+        -- Name: simple_http
+        -- Use: Responds with plain text
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    SetHttpHandler(function(req, res)
+        if req.path == '/' then
+            res.send('ok')
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Server Init: simple_http */
+    SetHttpHandler((req, res) => {
+      if (req.path === '/') {
+        res.send('ok');
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Handler replaces any previous handler.
+- **Reference**: https://docs.fivem.net/natives/?n=SetHttpHandler
+
+##### SetInterval
+- **Scope**: Server
+- **Signature(s)**: `int SET_INTERVAL(function callback, int interval)`
+- **Purpose**: Schedules a function to run repeatedly at the given interval.
+- **Parameters / Returns**:
+  - `callback` (`function`): Function executed every cycle.
+  - `interval` (`number`): Delay in milliseconds.
+  - **Returns**: `number` timer identifier.
+- **OneSync / Networking**: Local to server runtime.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Timer
+        -- Name: heartbeat
+        -- Use: Prints a log every second
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    local t = SetInterval(function()
+        print('heartbeat')
+    end, 1000)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Timer: heartbeat */
+    const t = SetInterval(() => {
+      console.log('heartbeat');
+    }, 1000);
+    ```
+- **Caveats / Limitations**:
+  - Clear the interval with `ClearInterval` to prevent leaks.
+- **Reference**: https://docs.fivem.net/natives/?n=SetInterval
+
+##### SetMapName
+- **Scope**: Server
+- **Signature(s)**: `void SET_MAP_NAME(string mapName)`
+- **Purpose**: Defines the map name presented in server browsers.
+- **Parameters / Returns**:
+  - `mapName` (`string`): Map label.
+  - **Returns**: None.
+- **OneSync / Networking**: Replicated as server info.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Server Init; Name: set_map; Use: sets map name; Created: 2025-09-11; By: VSSVSSN ]]
+    SetMapName('Los Santos')
+    ```
+  - JavaScript:
+    ```javascript
+    /* Server Init: set_map */
+    SetMapName('Los Santos');
+    ```
+- **Caveats / Limitations**:
+  - Informational only.
+- **Reference**: https://docs.fivem.net/natives/?n=SetMapName
+
+##### SetPlayerRoutingBucket
+- **Scope**: Server
+- **Signature(s)**: `void SET_PLAYER_ROUTING_BUCKET(Player playerSrc, int bucket)`
+- **Purpose**: Moves a player into a specific routing bucket (instance).
+- **Parameters / Returns**:
+  - `playerSrc` (`Player`): Source ID.
+  - `bucket` (`number`): Target bucket ID.
+  - **Returns**: None.
+- **OneSync / Networking**: Requires OneSync; affects entity visibility for the player.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: bucket; Use: swap player bucket; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('bucket', function(src, args)
+        SetPlayerRoutingBucket(src, tonumber(args[1]) or 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: bucket */
+    RegisterCommand('bucket', (src, args) => {
+      SetPlayerRoutingBucket(src, Number(args[0]) || 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Player entities migrate on next frame; ensure cleanup in old bucket.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerRoutingBucket
+
+##### SetRoutingBucketEntityLockdownMode
+- **Scope**: Server
+- **Signature(s)**: `void SET_ROUTING_BUCKET_ENTITY_LOCKDOWN_MODE(int bucket, string mode)`
+- **Purpose**: Controls whether foreign entities can migrate into the bucket.
+- **Parameters / Returns**:
+  - `bucket` (`number`): Bucket ID.
+  - `mode` (`string`): "strict" blocks, "relaxed" allows.
+  - **Returns**: None.
+- **OneSync / Networking**: OneSync required; influences cross-bucket entity replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Server Init; Name: lockdown; Use: sets lockdown to strict; Created: 2025-09-11; By: VSSVSSN ]]
+    SetRoutingBucketEntityLockdownMode(1, 'strict')
+    ```
+  - JavaScript:
+    ```javascript
+    /* Server Init: lockdown */
+    SetRoutingBucketEntityLockdownMode(1, 'strict');
+    ```
+- **Caveats / Limitations**:
+  - Use carefully to avoid orphaned entities.
+- **Reference**: https://docs.fivem.net/natives/?n=SetRoutingBucketEntityLockdownMode
+
+##### SetRoutingBucketPopulationEnabled
+- **Scope**: Server
+- **Signature(s)**: `void SET_ROUTING_BUCKET_POPULATION_ENABLED(int bucket, bool enabled)`
+- **Purpose**: Toggles ambient population generation within a bucket.
+- **Parameters / Returns**:
+  - `bucket` (`number`): Bucket ID.
+  - `enabled` (`boolean`): Enable or disable.
+  - **Returns**: None.
+- **OneSync / Networking**: OneSync required; affects new ambient peds/vehicles.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Server Init; Name: pop_disable; Use: disables population in bucket 2; Created: 2025-09-11; By: VSSVSSN ]]
+    SetRoutingBucketPopulationEnabled(2, false)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Server Init: pop_disable */
+    SetRoutingBucketPopulationEnabled(2, false);
+    ```
+- **Caveats / Limitations**:
+  - Existing population remains until removed manually.
+- **Reference**: https://docs.fivem.net/natives/?n=SetRoutingBucketPopulationEnabled
+
+##### SetTimeout
+- **Scope**: Server
+- **Signature(s)**: `int SET_TIMEOUT(function callback, int ms)`
+- **Purpose**: Executes a function once after the specified delay.
+- **Parameters / Returns**:
+  - `callback` (`function`): Function to run.
+  - `ms` (`number`): Delay in milliseconds.
+  - **Returns**: `number` timer identifier.
+- **OneSync / Networking**: Local to server runtime.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Timer; Name: delayed_msg; Use: prints after 1s; Created: 2025-09-11; By: VSSVSSN ]]
+    SetTimeout(function()
+        print('delayed')
+    end, 1000)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Timer: delayed_msg */
+    SetTimeout(() => {
+      console.log('delayed');
+    }, 1000);
+    ```
+- **Caveats / Limitations**:
+  - Clear with `ClearTimeout` if not needed.
+- **Reference**: https://docs.fivem.net/natives/?n=SetTimeout
+
+##### StartFindKvp
+- **Scope**: Server
+- **Signature(s)**: `int START_FIND_KVP(string prefix)`
+- **Purpose**: Begins an iteration over key-value pairs with the given prefix.
+- **Parameters / Returns**:
+  - `prefix` (`string`): Key prefix to search.
+  - **Returns**: `number` search handle.
+- **OneSync / Networking**: Local to server storage.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Utility; Name: list_kvp; Use: logs all KVP keys starting with 'cfg'; Created: 2025-09-11; By: VSSVSSN ]]
+    local h = StartFindKvp('cfg')
+    while true do
+        local k = FindKvp(h)
+        if not k then break end
+        print(k)
+    end
+    EndFindKvp(h)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Utility: list_kvp */
+    const h = StartFindKvp('cfg');
+    for (;;) {
+      const k = FindKvp(h);
+      if (!k) break;
+      console.log(k);
+    }
+    EndFindKvp(h);
+    ```
+- **Caveats / Limitations**:
+  - Use `EndFindKvp` to release handles.
+- **Reference**: https://docs.fivem.net/natives/?n=StartFindKvp
+
+##### StartResource
+- **Scope**: Server
+- **Signature(s)**: `BOOL START_RESOURCE(string resourceName)`
+- **Purpose**: Starts the specified resource.
+- **Parameters / Returns**:
+  - `resourceName` (`string`): Name of resource.
+  - **Returns**: `bool` success.
+- **OneSync / Networking**: Triggers resource start which may register events/net handlers.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Admin Cmd; Name: start_res; Use: starts a resource; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('start_res', function(src, args)
+        StartResource(args[1])
+    end, true)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: start_res */
+    RegisterCommand('start_res', (src, args) => {
+      StartResource(args[0]);
+    }, true);
+    ```
+- **Caveats / Limitations**:
+  - Fails if resource is missing or already running.
+- **Reference**: https://docs.fivem.net/natives/?n=StartResource
+
+##### StopFindKvp
+- **Scope**: Server
+- **Signature(s)**: `void STOP_FIND_KVP(int handle)`
+- **Purpose**: Ends a KVP search started with `StartFindKvp`.
+- **Parameters / Returns**:
+  - `handle` (`number`): Search handle.
+  - **Returns**: None.
+- **OneSync / Networking**: Local to server.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Utility; Name: end_kvp; Use: closes KVP search; Created: 2025-09-11; By: VSSVSSN ]]
+    local h = StartFindKvp('cfg')
+    StopFindKvp(h)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Utility: end_kvp */
+    const h = StartFindKvp('cfg');
+    StopFindKvp(h);
+    ```
+- **Caveats / Limitations**:
+  - Handle becomes invalid after call.
+- **Reference**: https://docs.fivem.net/natives/?n=StopFindKvp
+
+##### StopResource
+- **Scope**: Server
+- **Signature(s)**: `BOOL STOP_RESOURCE(string resourceName)`
+- **Purpose**: Stops a running resource.
+- **Parameters / Returns**:
+  - `resourceName` (`string`): Name to stop.
+  - **Returns**: `bool` success.
+- **OneSync / Networking**: Resource cleanup triggered.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Admin Cmd; Name: stop_res; Use: stops a resource; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('stop_res', function(src, args)
+        StopResource(args[1])
+    end, true)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: stop_res */
+    RegisterCommand('stop_res', (src, args) => {
+      StopResource(args[0]);
+    }, true);
+    ```
+- **Caveats / Limitations**:
+  - Ensure dependent resources handle the stop cleanly.
+- **Reference**: https://docs.fivem.net/natives/?n=StopResource
+
+##### TriggerClientEvent
+- **Scope**: Server
+- **Signature(s)**: `void TRIGGER_CLIENT_EVENT(string eventName, Player playerSrc, ...)`
+- **Purpose**: Sends a network event from server to targeted client(s).
+- **Parameters / Returns**:
+  - `eventName` (`string`): Event to trigger.
+  - `playerSrc` (`Player`): Target player ID or `-1` for all.
+  - `...` (varargs): Event payload.
+  - **Returns**: None.
+- **OneSync / Networking**: Respects routing buckets and owner checks; data serialized over network.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: pingall; Use: sends ping event; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('pingall', function()
+        TriggerClientEvent('chat:addMessage', -1, { args = { '[PING]', 'pong' } })
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: pingall */
+    RegisterCommand('pingall', () => {
+      emitNet('chat:addMessage', -1, { args: ['[PING]', 'pong'] });
+    });
+    ```
+- **Caveats / Limitations**:
+  - Validate payloads; clients can send malformed responses.
+- **Reference**: https://docs.fivem.net/natives/?n=TriggerClientEvent
+
+##### TriggerClientEventInternal
+- **Scope**: Server
+- **Signature(s)**: Not documented on official page.
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - **Returns**: None.
+- **OneSync / Networking**: Internal function for low-level event dispatch.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Placeholder; Name: tce_internal; Use: calls internal API; Created: 2025-09-11; By: VSSVSSN ]]
+    TriggerClientEventInternal('event', 1, '', 0)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Placeholder: tce_internal */
+    TriggerClientEventInternal('event', 1, '', 0);
+    ```
+- **Caveats / Limitations**:
+  - Intended for internal use; parameters may change.
+- **Reference**: https://docs.fivem.net/natives/?n=TriggerClientEventInternal
+  - TODO(next-run): verify semantics.
+
+##### TriggerEvent
+- **Scope**: Server
+- **Signature(s)**: `void TRIGGER_EVENT(string eventName, ...)`
+- **Purpose**: Executes a server-side event.
+- **Parameters / Returns**:
+  - `eventName` (`string`): Name of event.
+  - `...` (varargs): Payload.
+  - **Returns**: None.
+- **OneSync / Networking**: Local to server; not sent to clients.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Utility; Name: call_event; Use: fires custom event; Created: 2025-09-11; By: VSSVSSN ]]
+    TriggerEvent('my:event', 1, 2, 3)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Utility: call_event */
+    TriggerEvent('my:event', 1, 2, 3);
+    ```
+- **Caveats / Limitations**:
+  - Ensure event handlers validate input.
+- **Reference**: https://docs.fivem.net/natives/?n=TriggerEvent
+
+##### TriggerEventInternal
+- **Scope**: Server
+- **Signature(s)**: Not documented on official page.
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - **Returns**: None.
+- **OneSync / Networking**: Internal server event dispatcher.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Placeholder; Name: te_internal; Use: calls internal API; Created: 2025-09-11; By: VSSVSSN ]]
+    TriggerEventInternal('my:event', '', 0)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Placeholder: te_internal */
+    TriggerEventInternal('my:event', '', 0);
+    ```
+- **Caveats / Limitations**:
+  - Parameters undocumented; avoid in production.
+- **Reference**: https://docs.fivem.net/natives/?n=TriggerEventInternal
+  - TODO(next-run): verify semantics.
+
+CONTINUE-HERE — 2025-09-11T09:19:29 — next: 13.3 Server Natives > CFX category :: VerifyPasswordHash
