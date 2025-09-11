@@ -41,12 +41,12 @@ local lastname = {
 
 local logged = {}
 
-RegisterServerEvent('server:takephone')
+RegisterNetEvent('server:takephone')
 AddEventHandler('server:takephone', function(target)
     TriggerClientEvent('inventory:removeItem', target, "mobilephone", 1)
 end)
 
-RegisterServerEvent('police:multipledenominators')
+RegisterNetEvent('police:multipledenominators')
 AddEventHandler('police:multipledenominators', function(hasdenoms)
 	local src = source
 	if hasdenoms then
@@ -56,12 +56,12 @@ AddEventHandler('police:multipledenominators', function(hasdenoms)
 	end
 end)
 
-RegisterServerEvent('CrashTackle')
+RegisterNetEvent('CrashTackle')
 AddEventHandler('CrashTackle', function(player)
 	TriggerClientEvent('playerTackled', player)
 end)
 
-RegisterServerEvent('police:targetCheckBank')
+RegisterNetEvent('police:targetCheckBank')
 AddEventHandler('police:targetCheckBank', function(target)
 	local src = source
 	local user = exports["np-base"]:getModule("Player"):GetUser(target)
@@ -79,7 +79,7 @@ local user = exports["np-base"]:getModule("Player"):GetUser(source)
 user:addMoney(100)
 end)
 
-RegisterServerEvent('checkLicensePlate')
+RegisterNetEvent('checkLicensePlate')
 AddEventHandler('checkLicensePlate', function(oof)
 	local source = source
 	local user = exports["np-base"]:getModule("Player"):GetUser(source)
@@ -129,17 +129,17 @@ AddEventHandler('checkLicensePlate', function(oof)
 		end)
 end)
 
-RegisterServerEvent('dragPlayer:disable')
+RegisterNetEvent('dragPlayer:disable')
 AddEventHandler('dragPlayer:disable', function()
 	TriggerClientEvent('drag:stopped', -1, source)
 end)
 
-RegisterServerEvent('dr:releaseEscort')
+RegisterNetEvent('dr:releaseEscort')
 AddEventHandler('dr:releaseEscort', function(releaseID)
 	TriggerClientEvent('dr:releaseEscort', tonumber(releaseID))
 end)
 
-RegisterServerEvent('police:IsTargetCuffed') -- that is np's code ((sway))
+RegisterNetEvent('police:IsTargetCuffed') -- that is np's code ((sway))
 AddEventHandler('police:IsTargetCuffed', function(playerID)
 	local src = source
 	TriggerClientEvent("police:IsPlayerCuffed", playerID, src)
@@ -187,7 +187,7 @@ AddEventHandler("spawn100k",function ()
 	user:removeMoney(500)
 end)
 
-RegisterServerEvent('police:showID')
+RegisterNetEvent('police:showID')
 AddEventHandler('police:showID', function(itemInfo)
 	local src = source
 	local fuck = json.decode(itemInfo)
@@ -223,13 +223,13 @@ AddEventHandler('police:showID', function(itemInfo)
 	TriggerClientEvent("chat:showCID", -1, data, src)
 end)
 
-RegisterServerEvent('gc:showthemIdentity')
+RegisterNetEvent('gc:showthemIdentity')
 AddEventHandler('gc:showthemIdentity', function(user)
 	local src = source
 	--
 end)
 
-RegisterServerEvent('police:showPH') -- that is np's code ((sway))
+RegisterNetEvent('police:showPH') -- that is np's code ((sway))
 AddEventHandler('police:showPH', function()
 	local src = source
 	local player = exports["np-base"]:getModule("Player"):GetUser(src)
@@ -238,7 +238,7 @@ AddEventHandler('police:showPH', function()
 	TriggerClientEvent('outlawNotifyPhone', -1, src, result)
 end)
 
-RegisterServerEvent('police:jailGranted')
+RegisterNetEvent('police:jailGranted')
 AddEventHandler('police:jailGranted', function(args)
 	local src = source
 	reason = " "
@@ -278,7 +278,7 @@ AddEventHandler('police:jailGranted', function(args)
 
 end)
 
-RegisterServerEvent("police:deletecrimes")
+RegisterNetEvent("police:deletecrimes")
 AddEventHandler("police:deletecrimes", function(target)
 	local src = source
 	local user = exports["np-base"]:getModule("Player"):GetUser(src)
@@ -298,14 +298,14 @@ AddEventHandler("police:deletecrimes", function(target)
 	-- missing here
 end)
 
-RegisterServerEvent('police:gsrGranted') -- that is np's code ((sway))
+RegisterNetEvent('police:gsrGranted') -- that is np's code ((sway))
 AddEventHandler('police:gsrGranted', function(t)
     local copId = source
     TriggerClientEvent("DoLongHudText", t, 'You have been GSR tested',1)
     TriggerClientEvent('police:hasShotRecently', t, copId)
 end)
 
-RegisterServerEvent('police:hasShotRecently') -- that is np's code ((sway))
+RegisterNetEvent('police:hasShotRecently') -- that is np's code ((sway))
 AddEventHandler('police:hasShotRecently', function(shotRecently, copId)
 	local src = source
 	local user = exports["np-base"]:getModule("Player"):GetUser(src)
@@ -315,7 +315,7 @@ AddEventHandler('police:hasShotRecently', function(shotRecently, copId)
     TriggerClientEvent("chatMessage", copId, "", {255,0,0}, msg)
 end)
 
-RegisterServerEvent('police:fingerPrintAsk')
+RegisterNetEvent('police:fingerPrintAsk')
 AddEventHandler('police:fingerPrintAsk', function(t, v)
 	-- 3.0 Code ((sway))
 	local src = source
@@ -324,17 +324,17 @@ AddEventHandler('police:fingerPrintAsk', function(t, v)
 	TriggerClientEvent('police:fingerPrintVeh', t, v)
 end)
 
-RegisterServerEvent('police:remmaskGranted') -- that is np's code ((sway))
+RegisterNetEvent('police:remmaskGranted') -- that is np's code ((sway))
 AddEventHandler('police:remmaskGranted', function(targetplayer)
     TriggerClientEvent('police:remmaskAccepted', targetplayer)
 end)
 
-RegisterServerEvent('unseatAccepted') -- that is np's code ((sway))
+RegisterNetEvent('unseatAccepted') -- that is np's code ((sway))
 AddEventHandler('unseatAccepted', function(targetplayer,x,y,z)
     TriggerClientEvent('unseatPlayerFinish', targetplayer,x,y,z)
 end)
 
-RegisterServerEvent('police:updateLicenses')
+RegisterNetEvent('police:updateLicenses')
 AddEventHandler('police:updateLicenses', function(targetlicense, status, license)
     if status == 1 then
 		-- add license
@@ -343,7 +343,7 @@ AddEventHandler('police:updateLicenses', function(targetlicense, status, license
     end
 end)
 
-RegisterServerEvent("police:targetCheckInventory")
+RegisterNetEvent("police:targetCheckInventory")
 AddEventHandler("police:targetCheckInventory", function(target, status)
 	-- done for npx ((sway))
 	local src = source
@@ -356,7 +356,7 @@ end)
 
 
 
-RegisterServerEvent('police:SeizeCash')
+RegisterNetEvent('police:SeizeCash')
 AddEventHandler('police:SeizeCash', function(target)
 	local src = source
 	local user = exports["np-base"]:getModule("Player"):GetUser(src)
@@ -377,7 +377,7 @@ end)
 
 --- POLICE SEXTION -------------------------------
 
-RegisterServerEvent('police:cuffGranted2')
+RegisterNetEvent('police:cuffGranted2')
 AddEventHandler('police:cuffGranted2', function(t,softcuff)
 	local src = source
     
@@ -394,7 +394,7 @@ AddEventHandler('police:cuffGranted2', function(t,softcuff)
 	end
 end)
 
-RegisterServerEvent('police:cuffGranted')
+RegisterNetEvent('police:cuffGranted')
 AddEventHandler('police:cuffGranted', function(t)
 	local src = source
 	
@@ -404,7 +404,7 @@ AddEventHandler('police:cuffGranted', function(t)
 		TriggerClientEvent('police:cuffTransition',src)
 end)
 
-RegisterServerEvent('police:escortAsk')
+RegisterNetEvent('police:escortAsk')
 AddEventHandler('police:escortAsk', function(target)
 		TriggerClientEvent('dr:escort', target,source)
 end)
@@ -412,13 +412,13 @@ end)
 
 
 
-RegisterServerEvent('falseCuffs')
+RegisterNetEvent('falseCuffs')
 AddEventHandler('falseCuffs', function(t)
 	TriggerClientEvent('falseCuffs',t)
 	TriggerClientEvent('menu:setCuffState', t, false)
 end)
 
-RegisterServerEvent('police:setCuffState')
+RegisterNetEvent('police:setCuffState')
 AddEventHandler('police:setCuffState', function(t,state)
 	TriggerClientEvent('police:currentHandCuffedState',t,true)
 	TriggerClientEvent('menu:setCuffState', t, true)
@@ -427,7 +427,7 @@ end)
 
 
 
-RegisterServerEvent('police:forceEnterAsk')
+RegisterNetEvent('police:forceEnterAsk')
 AddEventHandler('police:forceEnterAsk', function(target,netid)
 		TriggerClientEvent('police:forcedEnteringVeh', target, netid)
 		TriggerClientEvent('notification', source, 'Seating Player',1)
@@ -454,30 +454,30 @@ function checkDBForDna(ident,dna)
 end
 
 
-RegisterServerEvent('ped:forceTrunkAsk')
+RegisterNetEvent('ped:forceTrunkAsk')
 AddEventHandler('ped:forceTrunkAsk', function(targettrunk)
 	TriggerClientEvent('ped:forcedEnteringVeh', targettrunk)
 end)
 
-RegisterServerEvent('Evidence:GetWounds')
+RegisterNetEvent('Evidence:GetWounds')
 AddEventHandler('Evidence:GetWounds', function(t)
 	print(t)
 	TriggerClientEvent('Evidence:GiveWounds',t,source)
 end)
 
-RegisterServerEvent('Evidence:GiveWoundsFinish')
+RegisterNetEvent('Evidence:GiveWoundsFinish')
 AddEventHandler('Evidence:GiveWoundsFinish', function(CurrentDamageList,id,bones)
 	local src = source
 	TriggerClientEvent('Evidence:CurrentDamageListTarget',id,CurrentDamageList,bones,src)
 end)
 
-RegisterServerEvent('evidence:bleeder')
+RegisterNetEvent('evidence:bleeder')
 AddEventHandler('evidence:bleeder', function(isBleeding)
 	local src = source
 	TriggerClientEvent('bleeder:alter',src,isBleeding)
 end)
 
-RegisterServerEvent('bones:server:updateServer')
+RegisterNetEvent('bones:server:updateServer')
 AddEventHandler('bones:server:updateServer', function(bones)
 	local src = source
 
@@ -489,7 +489,7 @@ AddEventHandler('bones:server:updateServer', function(bones)
 	exports.ghmattimysql:execute("UPDATE characters SET `bones` = @bones WHERE id = @identifier", {['bones'] = bones, ['identifier'] = characterId})
 end)
 
-RegisterServerEvent("Evidence:checkDna")
+RegisterNetEvent("Evidence:checkDna")
 AddEventHandler("Evidence:checkDna", function()
 		local src = source
 		local user = exports["np-base"]:getModule("Player"):GetUser(src)
@@ -529,7 +529,7 @@ AddEventHandler("Evidence:checkDna", function()
 	end
 end)
 
-RegisterServerEvent('police:setServerMeta')
+RegisterNetEvent('police:setServerMeta')
 AddEventHandler('police:setServerMeta', function(health, armor, thrist, hungry)
 	print("saving hunger and thirst")
     local src = source
@@ -553,7 +553,7 @@ AddEventHandler('police:setServerMeta', function(health, armor, thrist, hungry)
     end)
 end)
 
-RegisterServerEvent('police:SetMeta')
+RegisterNetEvent('police:SetMeta')
 AddEventHandler('police:SetMeta', function()
     local src = source
 	local user = exports["np-base"]:getModule("Player"):GetUser(src)
@@ -568,29 +568,29 @@ AddEventHandler('police:SetMeta', function()
     end)
 end)
 
-RegisterServerEvent('government:bill')
+RegisterNetEvent('government:bill')
 AddEventHandler('government:bill', function(data)
 	local src = source
 	local user = exports["np-base"]:getModule("Player"):GetUser(src)
 	user:removeMoney(data)
 end)
 
-RegisterServerEvent('sniffAccepted')
+RegisterNetEvent('sniffAccepted')
 AddEventHandler('sniffAccepted', function(data)
 	TriggerClientEvent('K9:SniffConfirmed', source)
 end)
 
-RegisterServerEvent('reviveGranted')
+RegisterNetEvent('reviveGranted')
 AddEventHandler('reviveGranted', function(t)
 	TriggerClientEvent('reviveFunction', t)
 end)
 
-RegisterServerEvent('ems:stomachpumptarget')
+RegisterNetEvent('ems:stomachpumptarget')
 AddEventHandler('ems:stomachpumptarget', function(t)
 	TriggerClientEvent('fx:stomachpump', t)
 end)
 
-RegisterServerEvent('police:emsVehCheck')
+RegisterNetEvent('police:emsVehCheck')
 AddEventHandler('police:emsVehCheck', function()
 	local src = source
 	local user = exports["np-base"]:getModule("Player"):GetUser(src)
@@ -602,12 +602,12 @@ AddEventHandler('police:emsVehCheck', function()
 	end
 end)
 
-RegisterServerEvent('ems:healplayer')
+RegisterNetEvent('ems:healplayer')
 AddEventHandler('ems:healplayer', function(t)
 	TriggerClientEvent('ems:healpassed',t)
 end)
 
-RegisterServerEvent('huntAccepted')
+RegisterNetEvent('huntAccepted')
 AddEventHandler('huntAccepted', function(player, distance, coords)
 	TriggerClientEvent('K9:HuntAccepted', source)
 end)
@@ -616,7 +616,7 @@ end)
 						Emotes
 --]]---------------------------------------------------
 
-RegisterServerEvent('police:setEmoteData')
+RegisterNetEvent('police:setEmoteData')
 AddEventHandler('police:setEmoteData', function(emoteTable)
 	local src = source
 	local user = exports["np-base"]:getModule("Player"):GetUser(src)
@@ -625,7 +625,7 @@ AddEventHandler('police:setEmoteData', function(emoteTable)
 	exports.ghmattimysql:execute("UPDATE characters SET `emotes` = @emotes WHERE id = @cid", {['emotes'] = emote, ['cid'] = char.id})
 end)
 
-RegisterServerEvent('police:setAnimData')
+RegisterNetEvent('police:setAnimData')
 AddEventHandler('police:setAnimData', function(AnimSet)
 	local src = source
 	local user = exports["np-base"]:getModule("Player"):GetUser(src)
@@ -634,7 +634,7 @@ AddEventHandler('police:setAnimData', function(AnimSet)
 	exports.ghmattimysql:execute("UPDATE characters SET `meta` = @metaData WHERE id = @cid", {['metaData'] = metaData, ['cid'] = char.id})
 end)
 
-RegisterServerEvent('police:getAnimData')
+RegisterNetEvent('police:getAnimData')
 AddEventHandler('police:getAnimData', function()
 	local src = source
 	local user = exports["np-base"]:getModule("Player"):GetUser(src)
@@ -656,7 +656,7 @@ AddEventHandler('police:getAnimData', function()
 	end)
 end)
 
-RegisterServerEvent('police:getEmoteData')
+RegisterNetEvent('police:getEmoteData')
 AddEventHandler('police:getEmoteData', function()
 	local src = source
 	local user = exports["np-base"]:getModule("Player"):GetUser(src)
@@ -702,7 +702,7 @@ end)
  end)
 --]]
 
-RegisterServerEvent('police:whitelist')
+RegisterNetEvent('police:whitelist')
 AddEventHandler('police:whitelist', function(arg,jobType)
 	local src = source
 	local user = exports["np-base"]:getModule("Player"):GetUser(src)
@@ -740,7 +740,7 @@ AddEventHandler('police:whitelist', function(arg,jobType)
 	end
 end)
 
-RegisterServerEvent('police:remove')
+RegisterNetEvent('police:remove')
 AddEventHandler('police:remove', function(arg,jobType)
 	local src = source
 	local user = exports["np-base"]:getModule("Player"):GetUser(src)
@@ -778,7 +778,7 @@ AddEventHandler('police:remove', function(arg,jobType)
 	end
 end)
 
--- RegisterServerEvent("isVip")
+-- RegisterNetEvent("isVip")
 -- AddEventHandler("isVip", function(src)
 -- 	local commands = exports["np-base"]:getModule("Commands")
 -- 	if src == nil or src == 0 then src = source end
@@ -902,7 +902,7 @@ function jailUser(player,reason,cid,time,src)
 		
 end
 
-RegisterServerEvent("911")
+RegisterNetEvent("911")
 AddEventHandler("911", function(args)
 	local src = source
 
@@ -942,7 +942,7 @@ AddEventHandler("911", function(args)
 	end
 end)
 
-RegisterServerEvent("311")
+RegisterNetEvent("311")
 AddEventHandler("311", function(args)
 	local src = source
 
@@ -982,7 +982,7 @@ AddEventHandler("311", function(args)
 	end
 end)
 
--- RegisterServerEvent("911a")
+-- RegisterNetEvent("911a")
 -- AddEventHandler("911a", function(args)
 -- 	local src = source
 -- 	table.remove(args, 1)
@@ -1023,12 +1023,12 @@ end)
 -- 	end
 -- end)
 
-RegisterServerEvent("fire:serverStopFire")
+RegisterNetEvent("fire:serverStopFire")
 AddEventHandler("fire:serverStopFire", function(x,y,z, radius)
 	TriggerClientEvent("fire:stopClientFires", -1, x,y,z, radius)
 end)
 
-RegisterServerEvent("911r")
+RegisterNetEvent("911r")
 AddEventHandler("911r", function(args)
 	local src = source
 	-- table.remove(args, 1)
@@ -1078,7 +1078,7 @@ AddEventHandler("911r", function(args)
 end)
 
 
-RegisterServerEvent("311r")
+RegisterNetEvent("311r")
 AddEventHandler("311r", function(args)
 	local src = source
 	-- table.remove(args, 1)
