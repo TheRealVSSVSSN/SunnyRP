@@ -1,16 +1,14 @@
 {
   "name": "webpack-builder",
-  "version": "1.0.1",
-  "description": "",
-  "main": "index.js",
+  "version": "1.1.0",
+  "description": "Lightweight webpack wrapper for FiveM resources",
+  "main": "webpack_builder.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node -e \"console.log('No tests specified')\""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "async": "^3.1.0",
-    "webpack": "^4.41.2",
-    "worker-farm": "^1.7.0"
+    "webpack": "^5.88.2"
   }
 }
