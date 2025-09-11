@@ -430,7 +430,7 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Player | 248 | 150 | 98 | 2025-09-11T05:14 |
+| Player | 248 | 160 | 88 | 2025-09-11T05:21 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -5606,6 +5606,362 @@ ensure my_resource
   - Does not apply to current armour if higher than maximum.
 - **Reference**: https://docs.fivem.net/natives/?n=SetPlayerMaxArmour
 
+##### SetPlayerMeleeWeaponDamageModifier (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_MELEE_WEAPON_DAMAGE_MODIFIER(Player player, float modifier)`
+- **Purpose**: Adjust the damage dealt by a player's melee attacks.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player to modify.
+  - `modifier` (`float`): Multiplier applied to melee damage.
+  - **Returns**: None.
+- **OneSync / Networking**: Local effect; server should authorize to prevent exploits.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: melee_dmg
+        -- Use: Calls SetPlayerMeleeWeaponDamageModifier
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('melee_dmg', function()
+        SetPlayerMeleeWeaponDamageModifier(PlayerId(), 2.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: melee_dmg */
+    RegisterCommand('melee_dmg', () => {
+      SetPlayerMeleeWeaponDamageModifier(PlayerId(), 2.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Values above `1.0` amplify damage.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerMeleeWeaponDamageModifier
+
+##### SetPlayerMeleeWeaponDefenseModifier (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_MELEE_WEAPON_DEFENSE_MODIFIER(Player player, float modifier)`
+- **Purpose**: Modify how much melee damage the player receives.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player to adjust.
+  - `modifier` (`float`): Multiplier applied when receiving melee damage.
+  - **Returns**: None.
+- **OneSync / Networking**: Local effect; validate on server for fairness.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: melee_def
+        -- Use: Calls SetPlayerMeleeWeaponDefenseModifier
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('melee_def', function()
+        SetPlayerMeleeWeaponDefenseModifier(PlayerId(), 0.5)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: melee_def */
+    RegisterCommand('melee_def', () => {
+      SetPlayerMeleeWeaponDefenseModifier(PlayerId(), 0.5);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Values below `1.0` reduce incoming damage.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerMeleeWeaponDefenseModifier
+
+##### SetPlayerModel (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_MODEL(Player player, Hash model)`
+- **Purpose**: Change the player's ped model.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player to modify.
+  - `model` (`Hash`): Model hash to apply.
+  - **Returns**: None.
+- **OneSync / Networking**: Changing model locally; server-side validation recommended.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: copmodel
+        -- Use: Switches to cop model
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('copmodel', function()
+        local model = GetHashKey('s_m_y_cop_01')
+        SetPlayerModel(PlayerId(), model)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: copmodel */
+    RegisterCommand('copmodel', () => {
+      const model = GetHashKey('s_m_y_cop_01');
+      SetPlayerModel(PlayerId(), model);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Model must be streamed before use.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerModel
+
+##### SetPlayerNoCollisionBetweenPlayers (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_NO_COLLISION_BETWEEN_PLAYERS(Player player, BOOL toggle)`
+- **Purpose**: Enable or disable collisions between the player and others.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player to apply to.
+  - `toggle` (`bool`): True to disable collision.
+  - **Returns**: None.
+- **OneSync / Networking**: Local ped physics; ensure both sides agree for consistency.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: nocollide
+        -- Use: Calls SetPlayerNoCollisionBetweenPlayers
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('nocollide', function()
+        SetPlayerNoCollisionBetweenPlayers(PlayerId(), true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: nocollide */
+    RegisterCommand('nocollide', () => {
+      SetPlayerNoCollisionBetweenPlayers(PlayerId(), true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - May not affect vehicles.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerNoCollisionBetweenPlayers
+
+##### SetPlayerNoiseMultiplier (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_NOISE_MULTIPLIER(Player player, float multiplier)`
+- **Purpose**: Scale the amount of noise the player makes.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player to modify.
+  - `multiplier` (`float`): Noise scale factor.
+  - **Returns**: None.
+- **OneSync / Networking**: Local stealth mechanics; server should coordinate for gameplay.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: silent
+        -- Use: Calls SetPlayerNoiseMultiplier
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('silent', function()
+        SetPlayerNoiseMultiplier(PlayerId(), 0.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: silent */
+    RegisterCommand('silent', () => {
+      SetPlayerNoiseMultiplier(PlayerId(), 0.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Zero may still generate minimal noise.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerNoiseMultiplier
+
+##### SetPlayerParachuteModelOverride (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_PARACHUTE_MODEL_OVERRIDE(Player player, Hash model)`
+- **Purpose**: Override the parachute model used by the player.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player to adjust.
+  - `model` (`Hash`): Parachute model hash.
+  - **Returns**: None.
+- **OneSync / Networking**: Local visual change; ensure synchronization for others if needed.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: chute_model
+        -- Use: Calls SetPlayerParachuteModelOverride
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('chute_model', function()
+        local model = GetHashKey('p_parachute1_sp_s')
+        SetPlayerParachuteModelOverride(PlayerId(), model)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: chute_model */
+    RegisterCommand('chute_model', () => {
+      const model = GetHashKey('p_parachute1_sp_s');
+      SetPlayerParachuteModelOverride(PlayerId(), model);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Model must exist and be streamed.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerParachuteModelOverride
+
+##### SetPlayerParachutePackModelOverride (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_PARACHUTE_PACK_MODEL_OVERRIDE(Player player, Hash model)`
+- **Purpose**: Change the parachute pack model worn by the player.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player to modify.
+  - `model` (`Hash`): Pack model hash.
+  - **Returns**: None.
+- **OneSync / Networking**: Local visual; replicate via server if required.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: pack_model
+        -- Use: Calls SetPlayerParachutePackModelOverride
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('pack_model', function()
+        local model = GetHashKey('p_parachute_s')
+        SetPlayerParachutePackModelOverride(PlayerId(), model)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: pack_model */
+    RegisterCommand('pack_model', () => {
+      const model = GetHashKey('p_parachute_s');
+      SetPlayerParachutePackModelOverride(PlayerId(), model);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Model must be loaded.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerParachutePackModelOverride
+
+##### SetPlayerParachutePackTintIndex (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_PARACHUTE_PACK_TINT_INDEX(Player player, int index)`
+- **Purpose**: Change the tint of the player's parachute pack.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player to modify.
+  - `index` (`int`): Tint index.
+  - **Returns**: None.
+- **OneSync / Networking**: Cosmetic; replicate for other players if necessary.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: pack_tint
+        -- Use: Calls SetPlayerParachutePackTintIndex
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('pack_tint', function()
+        SetPlayerParachutePackTintIndex(PlayerId(), 2)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: pack_tint */
+    RegisterCommand('pack_tint', () => {
+      SetPlayerParachutePackTintIndex(PlayerId(), 2);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Tint indices outside available range may fallback.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerParachutePackTintIndex
+
+##### SetPlayerParachutePropTintIndex (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_PARACHUTE_PROP_TINT_INDEX(Player player, int index)`
+- **Purpose**: Set the tint index for the parachute prop model.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player to modify.
+  - `index` (`int`): Tint index for prop.
+- **OneSync / Networking**: Visual change; synchronize if needed.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: prop_tint
+        -- Use: Calls SetPlayerParachutePropTintIndex
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('prop_tint', function()
+        SetPlayerParachutePropTintIndex(PlayerId(), 1)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: prop_tint */
+    RegisterCommand('prop_tint', () => {
+      SetPlayerParachutePropTintIndex(PlayerId(), 1);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires parachute equipped.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerParachutePropTintIndex
+
+##### SetPlayerParachuteSmokeTrailColor (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_PARACHUTE_SMOKE_TRAIL_COLOR(Player player, int r, int g, int b)`
+- **Purpose**: Change the smoke color emitted from the player's parachute.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player to modify.
+  - `r` (`int`): Red component (0-255).
+  - `g` (`int`): Green component (0-255).
+  - `b` (`int`): Blue component (0-255).
+  - **Returns**: None.
+- **OneSync / Networking**: Visual only; server should validate for remote visibility.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: chute_smoke
+        -- Use: Calls SetPlayerParachuteSmokeTrailColor
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('chute_smoke', function()
+        SetPlayerParachuteSmokeTrailColor(PlayerId(), 255, 0, 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: chute_smoke */
+    RegisterCommand('chute_smoke', () => {
+      SetPlayerParachuteSmokeTrailColor(PlayerId(), 255, 0, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires smoke trail enabled.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerParachuteSmokeTrailColor
+
 ### Server Natives by Category
 
-CONTINUE-HERE — 2025-09-11T05:14 — next: 13.2 Client Natives > Player category :: SetPlayerMeleeWeaponDamageModifier
+CONTINUE-HERE — 2025-09-11T05:21 — next: 13.2 Client Natives > Player category :: SetPlayerParachuteTintIndex
