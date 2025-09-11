@@ -1,17 +1,23 @@
-CREATE TABLE gtav_rp2.user_inventory (
-  id �NT NOT NULL,
-  item_id VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  name VARCHAR(500) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0',
-  information VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0',
-  slot �NT NOT NULL,
-  dropped T�NY�NT NOT NULL DEFAULT '0',
-  creationDate B�G�NT NOT NULL DEFAULT '0',
-  quality �NT DEFAULT '100',
-  PRIMARY KEY (id)
-)
-ENGINE = INNODB,
-AUTO_INCREMENT = 2861,
-AVG_ROW_LENGTH = 630,
-CHARACTER SET latin1,
-COLLATE latin1_swedish_ci,
-ROW_FORMAT = DYNAMIC;
+-- Vehicle shop SQL schema
+-- Uses standard MySQL tables
+
+CREATE TABLE IF NOT EXISTS vehicle_display (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    model VARCHAR(60) NOT NULL,
+    baseprice INT NOT NULL DEFAULT 0,
+    commission INT NOT NULL DEFAULT 15
+);
+
+CREATE TABLE IF NOT EXISTS characters_cars (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    owner VARCHAR(64) NOT NULL,
+    cid INT NOT NULL,
+    license_plate VARCHAR(12) NOT NULL,
+    name VARCHAR(60) NOT NULL,
+    model VARCHAR(60) NOT NULL,
+    purchase_price INT NOT NULL,
+    financed INT DEFAULT 0,
+    payments_left INT DEFAULT 0,
+    last_payment INT DEFAULT 0,
+    vehicle_state VARCHAR(10) DEFAULT 'Out'
+);
