@@ -1,3 +1,11 @@
+--[[
+    -- Type: Client Script
+    -- Name: trucks.lua
+    -- Use: Handles armored truck events for bank robberies
+    -- Created: 2024-04-XX
+    -- By: VSSVSSN
+--]]
+
 local moneyTruckHash = GetHashKey("stockade")
 local payOut = 10000
 local respawnTime = 2000 * 60 * 1000
@@ -101,7 +109,7 @@ if truckId == 1 then
     TaskVehicleDriveToCoordLongrange(thisMoneyTruckPed, thisMoneyTruck, -34.552, -673.060, 31.944, 20.0,  447, 1.0)
   end
   --TaskVehicleDriveToCoordLongrange(thisMoneyTruckPed,  thisMoneyTruck,  moneyTruckDest[1],  moneyTruckDest[3],  moneyTruckDest[3],  30.0,  447,  20)
-  Citizen.Wait(delayTime)
+  Wait(delayTime)
 end
 
 function setGaurd(inputPed)
@@ -129,17 +137,17 @@ function checkMoneyTruckTick()
     thisMoneyTruck = storedMoneyTrucks[i+1].truck
     thisMoneyTruckPed = storedMoneyTruckPeds[i+1].ped
     thisMoneyTruckPed2 = storedMoneyTruckPeds2[i+1].ped
-    thisMoneyTruckBreached = moneyTrucks[i][breached]
+    thisMoneyTruckBreached = moneyTrucks[i]["breached"]
     thisMoneyTruckCoord = GetEntityCoords(thisMoneyTruckPed)
     if DoesEntityExist(thisMoneyTruck) then
     --check to see if we are at endlocation so we can choose another location rand to go to
     if GetDistanceBetweenCoords(thisMoneyTruckCoord.x, thisMoneyTruckCoord.y, thisMoneyTruckCoord.z, -34.552, -673.060, 31.944, true) < 60.0 then
-      Citizen.Trace("Security van" .. thisMoneyTruck .. "has arrived \n")
+      print("Security van" .. thisMoneyTruck .. "has arrived \n")
       SetEntityAsMissionEntity(thisMoneyTruck, 0, 0)
       ClearPedTasks(thisMoneyTruckPed)
-      Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(thisMoneyTruck))
-      DeletePed(Citizen.PointerValueIntInitialized(thisMoneyTruckPed))
-      DeletePed(Citizen.PointerValueIntInitialized(thisMoneyTruckPed2))
+      DeleteEntity(thisMoneyTruck)
+      DeletePed(thisMoneyTruckPed)
+      DeletePed(thisMoneyTruckPed2)
     end
 
     if GetVehicleDoorAngleRatio(thisMoneyTruck, 2) > .1 or GetVehicleDoorAngleRatio(thisMoneyTruck, 3) > .1 then
@@ -160,9 +168,9 @@ function checkMoneyTruckTick()
           --TriggerServerEvent('fs_freemode:missionComplete', payOut)
           TriggerEvent('fsn_inventory:item:add', 'dirty_money', payOut)
 		  --SetPlayerWantedLevel(GetPlayerPed(playerPed),3,0)
-          Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(thisMoneyTruck))
-          DeletePed(Citizen.PointerValueIntInitialized(thisMoneyTruckPed))
-          DeletePed(Citizen.PointerValueIntInitialized(thisMoneyTruckPed2))
+          DeleteEntity(thisMoneyTruck)
+          DeletePed(thisMoneyTruckPed)
+          DeletePed(thisMoneyTruckPed2)
           RemovePickup(cashPickup[i])
         end
       end
@@ -171,17 +179,17 @@ function checkMoneyTruckTick()
     if GetVehicleBodyHealth(thisMoneyTruck) < 5.0 then
       NetworkExplodeVehicle(thisMoneyTruck,1,1,1)
       SetEntityAsMissionEntity(thisMoneyTruck, 0, 0)
-      Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(thisMoneyTruck))
-      DeletePed(Citizen.PointerValueIntInitialized(thisMoneyTruckPed))
-      DeletePed(Citizen.PointerValueIntInitialized(thisMoneyTruckPed2))
+      DeleteEntity(thisMoneyTruck)
+      DeletePed(thisMoneyTruckPed)
+      DeletePed(thisMoneyTruckPed2)
     end
   end
 end
 end
 
-Citizen.CreateThread(function()
+CreateThread(function()
   SetFarDrawVehicles(true)
-  Citizen.Wait(10000)
+  Wait(10000)
 	if exports["fsn_inventory"]:fsn_HasItem('radio_receiver') then
 		TriggerEvent('fsn_phone:recieveMessage', {
 		  sender = 'DarkWeb',

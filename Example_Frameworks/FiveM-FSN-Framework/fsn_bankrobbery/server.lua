@@ -1,3 +1,11 @@
+--[[
+    -- Type: Server Script
+    -- Name: server.lua
+    -- Use: Controls bank robbery vault states and payouts
+    -- Created: 2024-04-XX
+    -- By: VSSVSSN
+--]]
+
 local vault_doors = {
   [1] = {'closed'},
   [2] = {'closed'},
@@ -14,21 +22,19 @@ local banks_payout = {
   [5] = 1000000
 }
 
-local canrob = true
-local lastrob = 0
-local currenttime = 0
-Citizen.CreateThread(function()
-	while true do
-		Citizen.Wait(1000)
-		if currenttime < 1800 or lastrob+1800 < currenttime then
-			canrob = true
-			TriggerClientEvent('fsn_bankrobbery:timer', -1, true)
-		else
-			canrob = false
-			TriggerClientEvent('fsn_bankrobbery:timer', -1, false)
-		end
-		currenttime = currenttime + 1
-	end 
+local canrob, lastrob, currenttime = true, 0, 0
+CreateThread(function()
+    while true do
+        Wait(1000)
+        if currenttime < 1800 or lastrob + 1800 < currenttime then
+            canrob = true
+            TriggerClientEvent('fsn_bankrobbery:timer', -1, true)
+        else
+            canrob = false
+            TriggerClientEvent('fsn_bankrobbery:timer', -1, false)
+        end
+        currenttime = currenttime + 1
+    end
 end)
 
 AddEventHandler('fsn_main:money:bank:Add', function(ply, amt)
@@ -84,7 +90,7 @@ AddEventHandler('fsn_bankrobbery:payout', function(id)
     print(':fsn_bankrobbery: '..source..' robbed bank #'..id..' and took $'..amt..' leaving the bank with $'..banks_payout[id])
     TriggerClientEvent('fsn_inventory:item:add', source, 'dirty_money', amt)
     TriggerClientEvent('fsn_notify:displayNotification', source, 'You got $'..amt..'DM from the vault!!', 'centerRight', 8000, 'error')
-    TriggerClientEvent('fsn_needs:stress:add', 30)
+    TriggerClientEvent('fsn_needs:stress:add', source, 30)
   else
     TriggerClientEvent('fsn_notify:displayNotification', source, 'This bank has no money left!', 'centerRight', 8000, 'error')
   end
