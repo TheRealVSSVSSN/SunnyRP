@@ -1,3 +1,11 @@
+--[[
+    -- Type: Resource Client
+    -- Name: fsn_cargarage/client.lua
+    -- Use: Client-side garage interactions and vehicle management
+    -- Created: 2024-11-27
+    -- By: VSSVSSN
+--]]
+
 local garages = {
 	["Peaceful street"] = {
 		pos = {x = -294.14520263672, y = -762.88854980469, z = 33.968509674072, h = 50.745643615723},
@@ -83,10 +91,10 @@ function getCarDetails(veh)
 				main = {0,0},
 				extras = {0,0},
 			},
-			neons = {
-				enabled = {false, false, false},
-				colours = {0,0,0},
-			},
+                        neons = {
+                                enabled = {[0]=false,[1]=false,[2]=false,[3]=false},
+                                colours = {0,0,0},
+                        },
 			wheels = {
 				type = 0,
 				smoke = {0,0,0},
@@ -191,48 +199,34 @@ AddEventHandler('fsn_cargarage:vehicleStatus', function(plate, status, grg)
 	TriggerEvent('fsn_notify:displayNotification', 'INFO: <b>'..plate..'</b> set to <b>'..statuses[status]..'</b> at <b><i>'..grg, 'centerLeft', 3000, 'info')
 end)
 
+--[[
+    -- Type: Event
+    -- Name: fsn_cargarage:receiveVehicles
+    -- Use: Updates local garage cache and NUI based on vehicle type
+    -- Created: 2024-11-27
+    -- By: VSSVSSN
+--]]
 RegisterNetEvent('fsn_cargarage:receiveVehicles')
-AddEventHandler('fsn_cargarage:receiveVehicles', function(type, vehtbl)
-	if type == 'cars' then
-		myGarage.cars = vehtbl
-		local grg = json.encode(vehtbl)
-		SendNUIMessage({
-			receive = 'vehicles',
-			garage = grg
-		})
-	elseif type == 'aircrafts' then
-		myGarage.aircrafts = vehtbl
-		local grg = json.encode(vehtbl)
-		SendNUIMessage({
-			receive = 'aircrafts',
-			garage = grg
-		})
-	elseif type == 'boats' then
-		myGarage.boats = vehtbl
-		local grg = json.encode(vehtbl)
-		SendNUIMessage({
-			receive = 'boats',
-			garage = grg
-		})
-	else
-	end
+AddEventHandler('fsn_cargarage:receiveVehicles', function(vehType, vehicles)
+        if not myGarage[vehType] then return end
+        myGarage[vehType] = vehicles
+        SendNUIMessage({
+                receive = vehType,
+                garage = json.encode(vehicles)
+        })
 end)
 
+--[[
+    -- Type: Function
+    -- Name: fsn_ToggleGarageMenu
+    -- Use: Toggles NUI garage menu and player focus
+    -- Created: 2024-11-27
+    -- By: VSSVSSN
+--]]
 function fsn_ToggleGarageMenu()
-	FreezeEntityPosition(PlayerPedId(), 0)
-  SetEntityCollision(PlayerPedId(), 1, 1)
-	menuEnabled = not menuEnabled
-	if ( menuEnabled ) then
-		SetNuiFocus( true, true )
-		SendNUIMessage({
-			showmenu = true
-		})
-	else
-		SetNuiFocus( false )
-		SendNUIMessage({
-			hidemenu = true
-		})
-	end
+        menuEnabled = not menuEnabled
+        SetNuiFocus(menuEnabled, menuEnabled)
+        SendNUIMessage(menuEnabled and {showmenu = true} or {hidemenu = true})
 end
 
 function fsn_GetVehicleDetails(vehid)
@@ -245,15 +239,22 @@ function fsn_GetVehicleDetails(vehid)
 	end
 end
 
+--[[
+    -- Type: Function
+    -- Name: fsn_GetVehicleVehIDP
+    -- Use: Returns vehicle ID given a plate
+    -- Created: 2024-11-27
+    -- By: VSSVSSN
+--]]
 function fsn_GetVehicleVehIDP(plate)
-	for k, v in pairs(myGarage) do
-		for key, value in pairs(v) do
-			if value.plate == plate then
-				print(value.plate)
-			end
-		end
-	end
-	return false
+        for _, garage in pairs(myGarage) do
+                for _, veh in pairs(garage) do
+                        if veh.veh_plate == plate or veh.plate == plate then
+                                return veh.veh_id
+                        end
+                end
+        end
+        return false
 end
 
 function fsn_SplitString(inputstr, sep)
@@ -273,66 +274,54 @@ DecorRegister('fuelLevel', 3)
 DecorRegister('vehDMG:electronics', 3)
 DecorRegister('vehDMG:clutch', 3)
 DecorRegister('vehDMG:gearbox', 3)
-DecorRegister('vehDMG:breaks', 3)
+DecorRegister('vehDMG:brakes', 3)
 DecorRegister('vehDMG:transmission', 3)
 DecorRegister('vehDMG:axle', 3)
 DecorRegister('vehDMG:fuel_injectors', 3)
 DecorRegister('vehDMG:fuel_tank', 3)
-DecorRegister('vehDMG:tyre_depth', 3)
+DecorRegister('vehDMG:tires', 3)
 
-function doCarDamages(eh, bh, veh)
-	
-	smash = false
-	damageOutside = false
-	damageOutside2 = false 
-	local engine = eh + 0.0
-	local body = bh + 0.0
-	if engine < 200.0 then
-		engine = 200.0
-	end
+--[[
+    -- Type: Function
+    -- Name: doCarDamages
+    -- Use: Applies stored damage values to a vehicle
+    -- Created: 2024-11-27
+    -- By: VSSVSSN
+--]]
+local function doCarDamages(eh, bh, veh)
+        local smash, damageOutside, damageOutside2 = false, false, false
+        local engine = eh + 0.0
+        local body = bh + 0.0
+        if engine < 200.0 then engine = 200.0 end
+        if body < 150.0 then body = 150.0 end
+        if body < 950.0 then smash = true end
+        if body < 920.0 then
+                damageOutside = true
+                damageOutside2 = true
+        end
 
-	if body < 150.0 then
-		body = 150.0
-	end
-	if body < 950.0 then
-		smash = true
-	end
+        local currentVehicle = (veh and IsEntityAVehicle(veh)) and veh or GetVehiclePedIsIn(PlayerPedId(), false)
 
-	if body < 920.0 then
-		damageOutside = true
-	end
-
-	if body < 920.0 then
-		damageOutside2 = true
-	end
-	
-	print('fsn_cargarage: details eh('..eh..') bh('..bh..') smash('..tostring(smash)..') damageOutside('..tostring(damageOutside)..') damageOutside2('..tostring(damageOutside2)..')')
-	
-	local currentVehicle = (veh and IsEntityAVehicle(veh)) and veh or GetVehiclePedIsIn(PlayerPedId(), false)
-
-	Citizen.Wait(100)
-	SetVehicleEngineHealth(currentVehicle, engine)
-	if smash then
-		SmashVehicleWindow(currentVehicle, 0)
-		SmashVehicleWindow(currentVehicle, 1)
-		SmashVehicleWindow(currentVehicle, 2)
-		SmashVehicleWindow(currentVehicle, 3)
-		SmashVehicleWindow(currentVehicle, 4)
-	end
-	if damageOutside then
-		SetVehicleDoorBroken(currentVehicle, 1, true)
-		SetVehicleDoorBroken(currentVehicle, 6, true)
-		SetVehicleDoorBroken(currentVehicle, 4, true)
-	end
-	if damageOutside2 then
-		SetVehicleTyreBurst(currentVehicle, 1, false, 990.0)
-		SetVehicleTyreBurst(currentVehicle, 2, false, 990.0)
-		SetVehicleTyreBurst(currentVehicle, 3, false, 990.0)
-		SetVehicleTyreBurst(currentVehicle, 4, false, 990.0)
-	end
-	if body < 1000 then
-		SetVehicleBodyHealth(currentVehicle, 985.0)
-	end
+        Citizen.Wait(100)
+        SetVehicleEngineHealth(currentVehicle, engine)
+        if smash then
+                for i = 0, 4 do
+                        SmashVehicleWindow(currentVehicle, i)
+                end
+        end
+        if damageOutside then
+                SetVehicleDoorBroken(currentVehicle, 1, true)
+                SetVehicleDoorBroken(currentVehicle, 6, true)
+                SetVehicleDoorBroken(currentVehicle, 4, true)
+        end
+        if damageOutside2 then
+                for i = 1, 4 do
+                        SetVehicleTyreBurst(currentVehicle, i, false, 990.0)
+                end
+        end
+        if body < 1000 then
+                SetVehicleBodyHealth(currentVehicle, 985.0)
+        end
 end
 
 function fsn_SpawnVehicle(vehid)
@@ -516,8 +505,8 @@ Citizen.CreateThread(function()
 								TriggerServerEvent('fsn_garages:vehicle:update', deets)
 								SetEntityAsMissionEntity( vehicle, false, true )
 								TriggerServerEvent('fsn_cargarage:vehicle:toggleStatus', GetVehicleNumberPlateText(vehicle), 0, key)
-								Citizen.InvokeNative( 0xEA386986E786A54F, Citizen.PointerValueIntInitialized( vehicle ) )
-								despawn = false
+                                                                DeleteVehicle(vehicle)
+                                                                despawn = false
 							end
 
 					end
@@ -537,15 +526,22 @@ Citizen.CreateThread(function()
 	end
 end)
 
-function fsn_IsVehicleHere(x,y,z,radius)
-	for k, v in pairs(myVehicles) do
-		local veh = v.ent
-		if not veh then return false end
-		if GetDistanceBetweenCoords(x,y,z,GetEntityCoords(veh, true)) < 5.8 then
-			return veh
-		end
-	end
-	return false
+--[[
+    -- Type: Function
+    -- Name: fsn_IsVehicleHere
+    -- Use: Checks for a spawned vehicle near coordinates
+    -- Created: 2024-11-27
+    -- By: VSSVSSN
+--]]
+function fsn_IsVehicleHere(x, y, z, radius)
+        radius = radius or 5.8
+        for _, v in pairs(myVehicles) do
+                local veh = v.ent
+                if veh and GetDistanceBetweenCoords(x, y, z, GetEntityCoords(veh, true)) < radius then
+                        return veh
+                end
+        end
+        return false
 end
 
 function fsn_IsVehicleOwner(veh1)

@@ -14,18 +14,34 @@
 --  END:        Threads
 --  -------------------
 
---  -------------------
---  BEGIN:    Functions
---  -------------------
-
-local function SpawnVehicle(name, coordinates, heading, licensePlate)
-    RequestModel(name)
-
-    while not HasModelLoaded(name) do
-        Wait(100)
+--[[
+    -- Type: Function
+    -- Name: loadModel
+    -- Use: Requests and loads a model into memory
+    -- Created: 2024-07-02
+    -- By: VSSVSSN
+--]]
+local function loadModel(model)
+    local hash = type(model) == 'number' and model or joaat(model)
+    if not HasModelLoaded(hash) then
+        RequestModel(hash)
+        while not HasModelLoaded(hash) do
+            Wait(0)
+        end
     end
+    return hash
+end
 
-    local vehicle = CreateVehicle(name, coordinates, heading, true, true)
+--[[
+    -- Type: Function
+    -- Name: SpawnVehicle
+    -- Use: Spawns a vehicle at the specified coordinates
+    -- Created: 2024-07-02
+    -- By: VSSVSSN
+--]]
+local function SpawnVehicle(model, coordinates, heading, licensePlate)
+    local hash = loadModel(model)
+    local vehicle = CreateVehicle(hash, coordinates.x, coordinates.y, coordinates.z, heading, true, true)
 
     SetEntityAsMissionEntity(vehicle, true, true)
 
@@ -33,33 +49,37 @@ local function SpawnVehicle(name, coordinates, heading, licensePlate)
         SetVehicleNumberPlateText(vehicle, licensePlate)
     end
 
-    SetModelAsNoLongerNeeded(name)
+    SetModelAsNoLongerNeeded(hash)
 
     return vehicle
-
 end
 
+--[[
+    -- Type: Function
+    -- Name: getVehicleInDirection
+    -- Use: Returns entity handle of vehicle in raycast
+    -- Created: 2024-07-02
+    -- By: VSSVSSN
+--]]
 local function getVehicleInDirection(coordFrom, coordTo)
-
     local playerPed = PlayerPedId()
-
-    local rayHandle = CastRayPointToPoint(coordFrom.x, coordFrom.y, coordFrom.z, coordTo.x, coordTo.y, coordTo.z, 10, playerPed, 0)
-	local a, b, c, d, vehicle = GetRaycastResult(rayHandle)
+    local rayHandle = StartShapeTestRay(coordFrom.x, coordFrom.y, coordFrom.z, coordTo.x, coordTo.y, coordTo.z, 10, playerPed, 0)
+    local _, _, _, _, vehicle = GetShapeTestResult(rayHandle)
     return vehicle
-    
 end
 
+--[[
+    -- Type: Function
+    -- Name: lookingAt
+    -- Use: Finds vehicle player is looking at
+    -- Created: 2024-07-02
+    -- By: VSSVSSN
+--]]
 local function lookingAt()
-
-    local targetVehicle = false
     local playerPed = PlayerPedId()
-
-	local coordA = GetEntityCoords(playerPed, 1)
-	local coordB = GetOffsetFromEntityInWorldCoords(playerPed, 0.0, 20.0, -1.0)
-	targetVehicle = getVehicleInDirection(coordA, coordB)
-
-    return targetVehicle
-    
+    local coordA = GetEntityCoords(playerPed, false)
+    local coordB = GetOffsetFromEntityInWorldCoords(playerPed, 0.0, 20.0, -1.0)
+    return getVehicleInDirection(coordA, coordB)
 end
 
 --  -------------------
@@ -85,17 +105,17 @@ AddEventHandler('fsn_developer:deleteVehicle', function()
 
     if IsPedInAnyVehicle(playerPed, false) then
 
-        local vehicle = GetVehiclePedIsIn(playerPed)
-
-        SetEntityAsMissionEntity( vehicle, true, true)
+        local vehicle = GetVehiclePedIsIn(playerPed, false)
+        SetEntityAsMissionEntity(vehicle, true, true)
         DeleteVehicle(vehicle)
 
     else
 
         local vehicle = lookingAt()
-
-        SetEntityAsMissionEntity(vehicle, true, true)
-        DeleteVehicle(vehicle)
+        if vehicle ~= 0 then
+            SetEntityAsMissionEntity(vehicle, true, true)
+            DeleteVehicle(vehicle)
+        end
 
     end
 

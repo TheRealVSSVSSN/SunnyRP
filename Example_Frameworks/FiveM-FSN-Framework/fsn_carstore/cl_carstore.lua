@@ -1,33 +1,33 @@
-local inside_store = {x = -43.723617553711, y = -1099.2775878906, z = 26.422357559204}
+local inside_store = vector3(-43.723617553711, -1099.2775878906, 26.422357559204)
 local car_spots = {}
+local TestingCar = false
 
 function BuyCar(key)
-	local veh = car_spots[key].car.object
-	local model = GetEntityModel(veh)
-	local colors = table.pack(GetVehicleColours(veh))
-	local extra_colors = table.pack(GetVehicleExtraColours(veh))
+        local veh = car_spots[key].car.object
+        local model = GetEntityModel(veh)
+        local colors = table.pack(GetVehicleColours(veh))
+        local extra_colors = table.pack(GetVehicleExtraColours(veh))
 
-	Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(veh))
-	local pos = {-61.230403900146, -1105.9610595703, 25.955364227295,74.102165222168}
-	
-	FreezeEntityPosition(ped,false)
-	RequestModel(model)
-	while not HasModelLoaded(model) do
-		Citizen.Wait(0)
-	end
-	personalvehicle = CreateVehicle(model,pos[1],pos[2],pos[3],pos[4],true,false)
-	SetModelAsNoLongerNeeded(model)
+        DeleteVehicle(veh)
+        local spawnPos = vector4(-61.230403900146, -1105.9610595703, 25.955364227295, 74.102165222168)
 
-	SetVehicleOnGroundProperly(personalvehicle)
-	SetVehicleHasBeenOwnedByPlayer(personalvehicle,true)
-	local id = NetworkGetNetworkIdFromEntity(personalvehicle)
-	SetNetworkIdCanMigrate(id, true)
-	--Citizen.InvokeNative(0x629BFA74418D6239,Citizen.PointerValueIntInitialized(personalvehicle))
-	SetEntityAsMissionEntity(personalvehicle, true, true)
-	SetVehicleColours(personalvehicle,colors[1],colors[2])
-	SetVehicleExtraColours(personalvehicle,extra_colors[1],extra_colors[2])
-	TaskWarpPedIntoVehicle(PlayerPedId(),personalvehicle,-1)
-	SetEntityVisible(ped,true)
+        RequestModel(model)
+        while not HasModelLoaded(model) do
+                Citizen.Wait(0)
+        end
+        local personalvehicle = CreateVehicle(model, spawnPos.x, spawnPos.y, spawnPos.z, spawnPos.w, true, false)
+        SetModelAsNoLongerNeeded(model)
+
+        SetVehicleOnGroundProperly(personalvehicle)
+        SetVehicleHasBeenOwnedByPlayer(personalvehicle, true)
+        local id = NetworkGetNetworkIdFromEntity(personalvehicle)
+        SetNetworkIdCanMigrate(id, true)
+        SetEntityAsMissionEntity(personalvehicle, true, true)
+        SetVehicleColours(personalvehicle, colors[1], colors[2])
+        SetVehicleExtraColours(personalvehicle, extra_colors[1], extra_colors[2])
+        local ped = PlayerPedId()
+        TaskWarpPedIntoVehicle(ped, personalvehicle, -1)
+        SetEntityVisible(ped, true)
 	
 	local details = {
 		plate = GetVehicleNumberPlateText(personalvehicle),
@@ -173,45 +173,40 @@ Util.Tick(function()
 end, 0)
 
 TriggerServerEvent('fsn_carstore:floor:Request')
-RegisterNetEvent('fsn_carstore:floor:Update')
-AddEventHandler('fsn_carstore:floor:Update', function(tbl)
-	car_spots = tbl
+RegisterNetEvent('fsn_carstore:floor:Update', function(tbl)
+        car_spots = tbl
 end)
-RegisterNetEvent('fsn_carstore:floor:UpdateCar')
-AddEventHandler('fsn_carstore:floor:UpdateCar', function(updatedcar, tbl)
-	print('fsn_carstore: got update for car('..updatedcar..')')
-	car_spots[updatedcar]['car']['color'] = tbl['car']['color']
-	car_spots[updatedcar]['car']['model'] = tbl['car']['model']
-	car_spots[updatedcar]['car']['name'] = tbl['car']['name']
-	car_spots[updatedcar]['car']['commission'] = tbl['car']['commission']
-	car_spots[updatedcar]['car']['buyprice'] = tbl['car']['buyprice']
-	car_spots[updatedcar]['updated'] = false
+RegisterNetEvent('fsn_carstore:floor:UpdateCar', function(updatedcar, tbl)
+        print('fsn_carstore: got update for car('..updatedcar..')')
+        car_spots[updatedcar]['car']['color'] = tbl['car']['color']
+        car_spots[updatedcar]['car']['model'] = tbl['car']['model']
+        car_spots[updatedcar]['car']['name'] = tbl['car']['name']
+        car_spots[updatedcar]['car']['commission'] = tbl['car']['commission']
+        car_spots[updatedcar]['car']['buyprice'] = tbl['car']['buyprice']
+        car_spots[updatedcar]['updated'] = false
 end)
 
 -- command shit
-RegisterNetEvent('fsn_carstore:floor:commission')
-AddEventHandler('fsn_carstore:floor:commission', function(amt)
-	for k,v in pairs(car_spots) do
-		if GetDistanceBetweenCoords(v.x, v.y, v.z, GetEntityCoords(PlayerPedId()), true) < 2 then
-			TriggerServerEvent('fsn_carstore:floor:commission', k, amt)
-		end
-	end
+RegisterNetEvent('fsn_carstore:floor:commission', function(amt)
+        for k, v in pairs(car_spots) do
+                if GetDistanceBetweenCoords(v.x, v.y, v.z, GetEntityCoords(PlayerPedId()), true) < 2 then
+                        TriggerServerEvent('fsn_carstore:floor:commission', k, amt)
+                end
+        end
 end)
-RegisterNetEvent('fsn_carstore:floor:color:One')
-AddEventHandler('fsn_carstore:floor:color:One', function(col)
-	for k,v in pairs(car_spots) do
-		if GetDistanceBetweenCoords(v.x, v.y, v.z, GetEntityCoords(PlayerPedId()), true) < 2 then
-			TriggerServerEvent('fsn_carstore:floor:color:One', k, col)
-		end
-	end
+RegisterNetEvent('fsn_carstore:floor:color:One', function(col)
+        for k, v in pairs(car_spots) do
+                if GetDistanceBetweenCoords(v.x, v.y, v.z, GetEntityCoords(PlayerPedId()), true) < 2 then
+                        TriggerServerEvent('fsn_carstore:floor:color:One', k, col)
+                end
+        end
 end)
-RegisterNetEvent('fsn_carstore:floor:color:Two')
-AddEventHandler('fsn_carstore:floor:color:Two', function(col)
-	for k,v in pairs(car_spots) do
-		if GetDistanceBetweenCoords(v.x, v.y, v.z, GetEntityCoords(PlayerPedId()), true) < 2 then
-			TriggerServerEvent('fsn_carstore:floor:color:Two', k, col)
-		end
-	end
+RegisterNetEvent('fsn_carstore:floor:color:Two', function(col)
+        for k, v in pairs(car_spots) do
+                if GetDistanceBetweenCoords(v.x, v.y, v.z, GetEntityCoords(PlayerPedId()), true) < 2 then
+                        TriggerServerEvent('fsn_carstore:floor:color:Two', k, col)
+                end
+        end
 end)
 
 Citizen.CreateThread(function()
@@ -228,42 +223,40 @@ end)
 -- Test Drive Functions
 
 function TestDriveVehicle(key)
-	if TestingCar then
-		exports['mythic_notify']:DoCustomHudText('error', 'Test vehicle already out. Only one test vehicle can be out at a time.', 7000)
-		return;
-	end
-	TestingCar = true
+        if TestingCar then
+                exports['mythic_notify']:DoCustomHudText('error', 'Test vehicle already out. Only one test vehicle can be out at a time.', 7000)
+                return;
+        end
+        TestingCar = true
 
-	local veh = car_spots[key].car.object
-	local model = GetEntityModel(veh)
-	local colors = table.pack(GetVehicleColours(veh))
-	local extra_colors = table.pack(GetVehicleExtraColours(veh))
+        local veh = car_spots[key].car.object
+        local model = GetEntityModel(veh)
+        local colors = table.pack(GetVehicleColours(veh))
+        local extra_colors = table.pack(GetVehicleExtraColours(veh))
 
-	Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(veh))
-	local pos = {-45.347373962402, -1082.3184814453, 26.691509246826}
-	
-	FreezeEntityPosition(ped,false)
-	RequestModel(model)
-	while not HasModelLoaded(model) do
-		Citizen.Wait(0)
-	end
-	testvehicle = CreateVehicle(model,pos[1],pos[2],pos[3],pos[4],true,false)
-	SetModelAsNoLongerNeeded(model)
+        DeleteVehicle(veh)
+        local pos = vector4(-45.347373962402, -1082.3184814453, 26.691509246826, 68.0)
 
-	SetVehicleOnGroundProperly(testvehicle)
-	SetVehicleHasBeenOwnedByPlayer(testvehicle,true)
-	exports['mythic_notify']:DoCustomHudText('success', 'The test vehicle is outside.', 3000)
-	local id = NetworkGetNetworkIdFromEntity(testvehicle)
-	SetNetworkIdCanMigrate(id, true)
-	--Citizen.InvokeNative(0x629BFA74418D6239,Citizen.PointerValueIntInitialized(personalvehicle))
-	SetEntityAsMissionEntity(testvehicle, true, true)
-	SetVehicleColours(testvehicle,colors[1],colors[2])
-	SetVehicleExtraColours(testvehicle,extra_colors[1],extra_colors[2])
-	SetVehicleNumberPlateText(testvehicle, "PDM TEST")
+        RequestModel(model)
+        while not HasModelLoaded(model) do
+                Citizen.Wait(0)
+        end
+        local testvehicle = CreateVehicle(model, pos.x, pos.y, pos.z, pos.w, true, false)
+        SetModelAsNoLongerNeeded(model)
 
-	TriggerEvent('fsn_cargarage:makeMine', testvehicle, car_spots[key].car.model, GetVehicleNumberPlateText(testvehicle))
+        SetVehicleOnGroundProperly(testvehicle)
+        SetVehicleHasBeenOwnedByPlayer(testvehicle, true)
+        exports['mythic_notify']:DoCustomHudText('success', 'The test vehicle is outside.', 3000)
+        local id = NetworkGetNetworkIdFromEntity(testvehicle)
+        SetNetworkIdCanMigrate(id, true)
+        SetEntityAsMissionEntity(testvehicle, true, true)
+        SetVehicleColours(testvehicle, colors[1], colors[2])
+        SetVehicleExtraColours(testvehicle, extra_colors[1], extra_colors[2])
+        SetVehicleNumberPlateText(testvehicle, 'PDMTEST')
 
-	TestingCar = testvehicle
+        TriggerEvent('fsn_cargarage:makeMine', testvehicle, car_spots[key].car.model, GetVehicleNumberPlateText(testvehicle))
+
+        TestingCar = testvehicle
 end
 
 Citizen.CreateThread(function()
@@ -283,13 +276,13 @@ Citizen.CreateThread(function()
 						local ped = GetPedInVehicleSeat(TestingCar, seat)
 						if ped and ped ~= 0 then TaskLeaveVehicle(ped, TestingCar,16); end
 					end
-					SetEntityAsMissionEntity( TestingCar, false, true )
-					Citizen.InvokeNative( 0xEA386986E786A54F, Citizen.PointerValueIntInitialized( TestingCar ) )
-					exports['mythic_notify']:DoCustomHudText('success', 'Test vehicle has been returned')
-					if DoesEntityExist(TestingCar) then SetVehicleUndriveable(TestingCar, true); end
-					TestingCar = false
-				end
-			end
-		end
-	end
+                                        SetEntityAsMissionEntity(TestingCar, false, true)
+                                        DeleteVehicle(TestingCar)
+                                        exports['mythic_notify']:DoCustomHudText('success', 'Test vehicle has been returned')
+                                        if DoesEntityExist(TestingCar) then SetVehicleUndriveable(TestingCar, true) end
+                                        TestingCar = false
+                                end
+                        end
+                end
+        end
 end)

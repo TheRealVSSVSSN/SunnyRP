@@ -1,87 +1,77 @@
 /*--------------------------------------------------------------------------
 
-    ActionMenu 
+    ActionMenu
     Created by WolfKnight
-    Additional help from lowheartrate, TheStonedTurtle, and Briglair.  
+    Additional help from lowheartrate, TheStonedTurtle, and Briglair.
+    Refactored to vanilla JS
 
 --------------------------------------------------------------------------*/
 
-$( function() {
-    // Adds all of the correct button actions 
-    init();
+document.addEventListener('DOMContentLoaded', () => {
+  init();
+  const actionContainer = document.getElementById('ass');
 
-    // Gets the actionmenu div container 
-    var actionContainer = $( "#ass" );
+  window.addEventListener('message', (event) => {
+    const item = event.data;
 
-    // Listens for NUI messages from Lua 
-    window.addEventListener( 'message', function( event ) {
-        var item = event.data;
-        
-		if ( item.update) {
-			
-		}
-		
-        // Show the menu 
-        if ( item.showmenu ) {
-            ResetMenu()
-            actionContainer.show();
-        }
+    if (item.showmenu) {
+      resetMenu();
+      actionContainer.style.display = 'block';
+    }
 
-        // Hide the menu 
-        if ( item.hidemenu ) {
-            actionContainer.hide(); 
-        }
-    } );
-} )
+    if (item.hidemenu) {
+      actionContainer.style.display = 'none';
+    }
+  });
+});
 
-// Hides all div elements that contain a data-parent, in
-// other words, hide all buttons in submenus. 
-function ResetMenu() {
-    $( "div" ).each( function( i, obj ) {
-        var element = $( this );
-
-        if ( element.attr( "data-parent" ) ) {
-            element.hide();
-        } else {
-            element.show();
-        }
-    } );
+// Hides all div elements that contain a data-parent.
+function resetMenu() {
+  document.querySelectorAll('div').forEach((element) => {
+    if (element.dataset.parent) {
+      element.style.display = 'none';
+    } else {
+      element.style.display = 'block';
+    }
+  });
 }
 
-// Configures every button click to use its data-action, or data-sub
-// to open a submenu. 
+// Configures every button click to use its data-action or data-sub.
 function init() {
-    // Loops through every button that has the class of "menuoption"
-    $( ".menuoption" ).each( function( i, obj ) {
+  document.querySelectorAll('.menuoption').forEach((button) => {
+    const action = button.dataset.action;
+    const sub = button.dataset.sub;
 
-        // If the button has a data-action, then we set it up so when it is 
-        // pressed, we send the data to the lua side. 
-        if ( $( this ).attr( "data-action" ) ) {
-            $( this ).click( function() { 
-                var data = $( this ).data( "action" ); 
+    if (action) {
+      button.addEventListener('click', () => {
+        sendData('ButtonClick', action);
+      });
+    }
 
-                sendData( "ButtonClick", data ); 
-            } )
+    if (sub) {
+      button.addEventListener('click', () => {
+        const element = document.getElementById(sub);
+        if (element) {
+          element.style.display = 'block';
         }
-
-        // If the button has a data-sub, then we set it up so when it is 
-        // pressed, we show the submenu buttons, and hide all of the others.
-        if ( $( this ).attr( "data-sub" ) ) {
-            $( this ).click( function() {
-                var menu = $( this ).data( "sub" );
-                var element = $( "#" + menu ); 
-                element.show();
-                $( this ).parent().hide();  
-            } )
-        }
-    } );
+        button.parentElement.style.display = 'none';
+      });
+    }
+  });
 }
 
-// Send data to lua for processing.
-function sendData( name, data ) {
-    $.post( "http://fsn_characterdetails/" + name, JSON.stringify( data ), function( datab ) {
-        if ( datab != "ok" ) {
-            console.log( datab );
-        }            
-    } );
+// Send data to Lua for processing.
+function sendData(name, data) {
+  fetch(`https://fsn_characterdetails/${name}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+    body: JSON.stringify(data)
+  })
+    .then((response) => response.text())
+    .then((resp) => {
+      if (resp !== 'ok') {
+        console.log(resp);
+      }
+    })
+    .catch((err) => console.error('NUI callback error:', err));
 }

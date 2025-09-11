@@ -1,117 +1,155 @@
-local ChoosingTattoo = false; local CurrentCategory = 1; local CurrentTattoo = 1; local TattooCamera; local PreviousTattoos = {}; local ShopTattoos = {}
+--[[ 
+    -- Type: Module
+    -- Name: Tattoo Client
+    -- Use: Handles tattoo shop interactions and preview camera
+    -- Created: 2024-04-22
+    -- By: VSSVSSN
+--]]
+
+local choosingTattoo = false
+local currentCategory = 1
+local currentTattoo = 1
+local tattooCamera
+local previousTattoos = {}
 
 RegisterNetEvent('fsn_characterdetails:recievetattoos')
-AddEventHandler('fsn_characterdetails:recievetattoos', function(Data)
-    PreviousTattoos = Data
+AddEventHandler('fsn_characterdetails:recievetattoos', function(data)
+    previousTattoos = data or {}
 end)
 
-Citizen.CreateThread(function()
-	for k, Store in pairs(TattooLocations) do
-		local Blip = AddBlipForCoord(Store.X, Store.Y, Store.Z)
-		SetBlipSprite(Blip, 75)
-		SetBlipAsShortRange(Blip, true)
-		BeginTextCommandSetBlipName('STRING')
-		AddTextComponentString('InKed uP')
-		EndTextCommandSetBlipName(Blip)
-	end
-	while true do
-		Citizen.Wait(0)
-		for k, Coordinates in pairs(TattooLocations) do
-			if GetDistanceBetweenCoords(Coordinates.X, Coordinates.Y, Coordinates.Z, GetEntityCoords(PlayerPedId(), true)) < 10 then
-				DrawMarker(1, Coordinates.X, Coordinates.Y, Coordinates.Z - 1, 0, 0, 0, 0, 0, 0, 1.001, 1.0001, 0.4001, 0, 155, 255, 175, 0, 0, 0, 0)
-				if GetDistanceBetweenCoords(Coordinates.X, Coordinates.Y, Coordinates.Z, GetEntityCoords(PlayerPedId()), true) < 1 then
-					SetTextComponentFormat('STRING')
-					AddTextComponentString('Press ~INPUT_PICKUP~ to get a ~y~tattoo')
-					DisplayHelpTextFromStringLabel(0, 0, 1, -1)
-					if IsControlJustPressed(0, 38) then
+CreateThread(function()
+    for _, store in ipairs(Config.TattooLocations) do
+        local blip = AddBlipForCoord(store.X, store.Y, store.Z)
+        SetBlipSprite(blip, 75)
+        SetBlipAsShortRange(blip, true)
+        BeginTextCommandSetBlipName('STRING')
+        AddTextComponentString('InKed uP')
+        EndTextCommandSetBlipName(blip)
+    end
+
+    while true do
+        Wait(0)
+        local playerPed = PlayerPedId()
+        local playerCoords = GetEntityCoords(playerPed)
+
+        for _, coords in ipairs(Config.TattooLocations) do
+            local distance = #(playerCoords - vector3(coords.X, coords.Y, coords.Z))
+            if distance < 10.0 then
+                DrawMarker(1, coords.X, coords.Y, coords.Z - 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.001, 1.0001, 0.4001, 0, 155, 255, 175, false, false, 0, false)
+                if distance < 1.0 then
+                    SetTextComponentFormat('STRING')
+                    AddTextComponentString('Press ~INPUT_PICKUP~ to get a ~y~tattoo')
+                    DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+                    if IsControlJustPressed(0, 38) then
                         ToggleActionMenu()
-						PreviewTattoo()
-					end
-				end
-			end
-		end
-	end
+                        previewTattoo()
+                    end
+                end
+            end
+        end
+    end
 end)
+
+local function applyTattoos()
+    ClearPedDecorations(PlayerPedId())
+    for _, hash in ipairs(previousTattoos) do
+        local category = GetTattooCategory(hash)
+        if category then
+            ApplyPedOverlay(PlayerPedId(), GetHashKey(category), GetHashKey(hash))
+        end
+    end
+end
 
 function ExitTattooStore()
-	ChoosingTattoo = false
+    choosingTattoo = false
 end
 
 function NextCategory()
-    if CurrentCategory == 3 then
-        CurrentCategory = 1
-        return
+    currentCategory = currentCategory + 1
+    if currentCategory > #Config.TattooCategories then
+        currentCategory = 1
     end
-    CurrentCategory = CurrentCategory + 1
-	CurrentTattoo = 1
-	PreviewTattoo()
+    currentTattoo = 1
+    previewTattoo()
 end
 
 function BackCategory()
-    if CurrentCategory == 1 then
-        CurrentCategory = 3
-        return
+    currentCategory = currentCategory - 1
+    if currentCategory < 1 then
+        currentCategory = #Config.TattooCategories
     end
-    CurrentCategory = CurrentCategory - 1
-	CurrentTattoo = 1
-	PreviewTattoo()
+    currentTattoo = 1
+    previewTattoo()
 end
 
 function NextTattoo()
-    CurrentTattoo = CurrentTattoo + 1
-	PreviewTattoo()
+    local list = Config.TattooList[Config.TattooCategories[currentCategory].Value]
+    currentTattoo = currentTattoo + 1
+    if currentTattoo > #list then
+        currentTattoo = 1
+    end
+    previewTattoo()
 end
 
 function PreviousTattoo()
-    CurrentTattoo = CurrentTattoo - 1
-	PreviewTattoo()
+    local list = Config.TattooList[Config.TattooCategories[currentCategory].Value]
+    currentTattoo = currentTattoo - 1
+    if currentTattoo < 1 then
+        currentTattoo = #list
+    end
+    previewTattoo()
 end
 
 function PurchaseTattoo()
-    local TargetTattooHash = TattooList[TattooCategories[CurrentCategory].Value][CurrentTattoo].NameHash
-    table.insert(PreviousTattoos, TargetTattooHash)
-    print(PreviousTattoos)
-    print(PreviousTattoos[1])
+    local hash = Config.TattooList[Config.TattooCategories[currentCategory].Value][currentTattoo].NameHash
+    table.insert(previousTattoos, hash)
     TriggerEvent('fsn_main:saveCharacter')
 end
 
-function PreviewTattoo()
-    ChoosingTattoo = true
-    
-    SetEntityHeading(PlayerPedId(), 297.7296)
-    ClearPedDecorations(PlayerPedId())
+function previewTattoo()
+    choosingTattoo = true
 
-    if not DoesCamExist(TattooCamera) then
-        TattooCamera = CreateCam('DEFAULT_SCRIPTED_CAMERA', true)
-        SetCamCoord(TattooCamera, GetEntityCoords(PlayerPedId()))
-        SetCamRot(TattooCamera, 0.0, 0.0, 0.0)
-        SetCamActive(TattooCamera,  true)
+    local playerPed = PlayerPedId()
+    SetEntityHeading(playerPed, 297.7296)
+    applyTattoos()
+
+    if not DoesCamExist(tattooCamera) then
+        tattooCamera = CreateCam('DEFAULT_SCRIPTED_CAMERA', true)
+        SetCamActive(tattooCamera, true)
         RenderScriptCams(true, false, 0, true, true)
-
-        SetCamCoord(TattooCamera, GetEntityCoords(PlayerPedId()))
     end
 
-    FreezeEntityPosition(PlayerPedId(), true)
+    FreezeEntityPosition(playerPed, true)
 
-    local Coordinates = GetEntityCoords(PlayerPedId())
+    local coords = GetEntityCoords(playerPed)
+    local data = Config.TattooList[Config.TattooCategories[currentCategory].Value][currentTattoo]
 
-    SetCamCoord(TattooCamera, Coordinates.x + TattooList[TattooCategories[CurrentCategory].Value][CurrentTattoo].AddedX, Coordinates.y + TattooList[TattooCategories[CurrentCategory].Value][CurrentTattoo].AddedY, Coordinates.z + TattooList[TattooCategories[CurrentCategory].Value][CurrentTattoo].AddedZ)
-    SetCamRot(TattooCamera, 0.0, 0.0, TattooList[TattooCategories[CurrentCategory].Value][CurrentTattoo].RotZ)
+    SetCamCoord(tattooCamera, coords.x + data.AddedX, coords.y + data.AddedY, coords.z + data.AddedZ)
+    SetCamRot(tattooCamera, 0.0, 0.0, data.RotZ)
 
-    ClearPedDecorations(PlayerPedId())
-    --ApplyTattoos()
-    ApplyPedOverlay(PlayerPedId(), GetHashKey(TattooCategories[CurrentCategory].Value), GetHashKey(TattooList[TattooCategories[CurrentCategory].Value][CurrentTattoo].NameHash))
+    ApplyPedOverlay(playerPed, GetHashKey(Config.TattooCategories[currentCategory].Value), GetHashKey(data.NameHash))
 
-    while ChoosingTattoo do
-        Citizen.Wait(0)
-        -- IF whatever then go to next tattoo etc using functions.
+    while choosingTattoo do
+        Wait(0)
     end
 
-    RenderScriptCams(false, false, 0, 1, 0)
-    DestroyCam(TattooCamera, true)
-    FreezeEntityPosition(PlayerPedId(), false)
+    RenderScriptCams(false, false, 0, true, false)
+    DestroyCam(tattooCamera, true)
+    FreezeEntityPosition(playerPed, false)
+    applyTattoos()
 end
 
 function GetPreviousTattoos()
-    return PreviousTattoos
+    return previousTattoos
+end
+
+function GetTattooCategory(tattooHash)
+    for category, tattoos in pairs(Config.TattooList) do
+        for _, info in ipairs(tattoos) do
+            if info.NameHash == tattooHash then
+                return category
+            end
+        end
+    end
+    return nil
 end

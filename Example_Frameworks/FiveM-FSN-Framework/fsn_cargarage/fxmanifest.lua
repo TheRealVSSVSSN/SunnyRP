@@ -1,30 +1,31 @@
-fx_version 'bodacious'
-games { 'gta5' }
+fx_version 'cerulean'
+game 'gta5'
 
+--[[
+    -- Type: Manifest
+    -- Name: fsn_cargarage/fxmanifest.lua
+    -- Use: Resource definition for garage system
+    -- Created: 2024-11-27
+    -- By: VSSVSSN
+--]]
 
 description 'Garages for the server'
+lua54 'yes'
 
---[[/	:FSN:	\]]--
-client_scripts { 
+shared_script '@fsn_main/server_settings/sh_settings.lua'
+
+client_scripts {
     '@fsn_main/cl_utils.lua',
-    '@fsn_main/server_settings/sh_settings.lua'
+    'client.lua'
 }
-server_scripts { 
+
+server_scripts {
     '@fsn_main/sv_utils.lua',
-    '@fsn_main/server_settings/sh_settings.lua',
-    '@mysql-async/lib/MySQL.lua'
-}
---[[/	:FSN:	\]]--
-
-client_scripts { 
-    'client.lua',
+    '@ghmattimysql/ghmattimysql-server.lua',
+    'server.lua'
 }
 
-server_scripts { 
-    'server.lua',
-}
-
-ui_page "gui/ui.html"
+ui_page 'gui/ui.html'
 
 files {
   'gui/ui.css',
@@ -32,7 +33,6 @@ files {
   'gui/ui.js'
 }
 
--- exports
 exports {
   'fsn_IsVehicleOwner',
   'fsn_GetVehicleVehIDP',

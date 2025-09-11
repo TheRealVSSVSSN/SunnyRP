@@ -1,9 +1,18 @@
 local vehicles = {}
 fuel_amount = 100
 
+local function contains(tbl, element)
+  for _, value in pairs(tbl) do
+    if value[1] == element then
+      return true
+    end
+  end
+  return false
+end
+
 RegisterNetEvent('fsn_fuel:set')
 AddEventHandler('fsn_fuel:set', function(car, fuelamount)
-  if table.contains(vehicles, car) then
+  if contains(vehicles, car) then
     for k, v in pairs(vehicles) do
       if v[1] == car then
         v[2] = fuelamount
@@ -17,17 +26,17 @@ end)
 
 RegisterNetEvent('fsn_fuel:update')
 AddEventHandler('fsn_fuel:update', function(car, fuelamount)
-  if table.contains(vehicles, car) then
+  if contains(vehicles, car) then
     for k, v in pairs(vehicles) do
       if v[1] == car then
         v[2] = fuelamount
-        fuel_amount = fuel_amount
+        fuel_amount = fuelamount
       end
     end
   else
     table.insert(vehicles, {car, fuelamount})
-    if IsPedInAnyVehicle(PlayerPedId()) then
-      if GetVehiclePedIsIn(PlayerPedId()) == car then
+    if IsPedInAnyVehicle(PlayerPedId(), false) then
+      if GetVehiclePedIsIn(PlayerPedId(), false) == car then
         fuel_amount = fuelamount
       end
     end
@@ -35,12 +44,12 @@ AddEventHandler('fsn_fuel:update', function(car, fuelamount)
 end)
 
 local notified = false
-Citizen.CreateThread(function()
+CreateThread(function()
   while true do
-    Citizen.Wait(4000)
+    Wait(4000)
     local consumption = 0.02
     local speed = GetEntitySpeed(GetVehiclePedIsIn(PlayerPedId(), false)) * 2.236936
-    if IsPedInAnyVehicle(PlayerPedId()) then
+    if IsPedInAnyVehicle(PlayerPedId(), false) then
       if IsVehicleEngineOn(GetVehiclePedIsIn(PlayerPedId(), false)) and GetPedInVehicleSeat(GetVehiclePedIsIn(PlayerPedId(), false), -1) == PlayerPedId() then
         if speed <= 2 then
           consumption = 0.01
@@ -53,16 +62,16 @@ Citizen.CreateThread(function()
         elseif speed > 120 then
           consumption = 0.4
         end
-        if table.contains(vehicles, GetVehicleNumberPlateText(GetVehiclePedIsIn(PlayerPedId()))) then
+        if contains(vehicles, GetVehicleNumberPlateText(GetVehiclePedIsIn(PlayerPedId(), false))) then
           for _, car in pairs(vehicles) do
-            if car[1] == GetVehicleNumberPlateText(GetVehiclePedIsIn(PlayerPedId())) then
+            if car[1] == GetVehicleNumberPlateText(GetVehiclePedIsIn(PlayerPedId(), false)) then
               if fuel_amount - consumption <= 0 then
                 fuel_amount = 0
               else
                 fuel_amount = fuel_amount - consumption
               end
               vehicles[_][2] = fuel_amount
-              TriggerServerEvent('fsn_fuel:update', GetVehicleNumberPlateText(GetVehiclePedIsIn(PlayerPedId())), fuel_amount)
+              TriggerServerEvent('fsn_fuel:update', GetVehicleNumberPlateText(GetVehiclePedIsIn(PlayerPedId(), false)), fuel_amount)
             end
           end
           if fuel_amount < 20 then
@@ -70,22 +79,22 @@ Citizen.CreateThread(function()
               TriggerEvent('fsn_notify:displayNotification', 'You are running out of fuel!!', 'centerRight', 3000, 'error')
               notified = true
               PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
-              Citizen.Wait(100)
+              Wait(100)
               PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
-              Citizen.Wait(100)
+              Wait(100)
               PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
             end
           end
           if fuel_amount == 0 then
-            SetVehicleEngineOn(GetVehiclePedIsIn(PlayerPedId()), false, true, false)
+            SetVehicleEngineOn(GetVehiclePedIsIn(PlayerPedId(), false), false, true, false)
           elseif fuel_amount < 5 then
-            SetVehicleEngineOn(GetVehiclePedIsIn(PlayerPedId()), false, true, false)
-            Citizen.Wait(500)
-            SetVehicleEngineOn(GetVehiclePedIsIn(PlayerPedId()), true, true, false)
+            SetVehicleEngineOn(GetVehiclePedIsIn(PlayerPedId(), false), false, true, false)
+            Wait(500)
+            SetVehicleEngineOn(GetVehiclePedIsIn(PlayerPedId(), false), true, true, false)
           end
         else
           fuel_amount = math.random(30, 100)
-          table.insert(vehicles, {GetVehicleNumberPlateText(GetVehiclePedIsIn(PlayerPedId())), fuel_amount})
+          table.insert(vehicles, {GetVehicleNumberPlateText(GetVehiclePedIsIn(PlayerPedId(), false)), fuel_amount})
         end
       end
     else
@@ -136,10 +145,10 @@ Citizen.CreateThread(function()
     EndTextCommandSetBlipName(blip)
   end
   while true do
-    Citizen.Wait(0)
+    Wait(0)
     for _, fstn in pairs(fuel_stations) do
       if GetDistanceBetweenCoords(fstn[1], fstn[2], fstn[3], GetEntityCoords(PlayerPedId()).x, GetEntityCoords(PlayerPedId()).y, GetEntityCoords(PlayerPedId()).z) < 10 then
-        if not IsPedInAnyVehicle(PlayerPedId()) then
+        if not IsPedInAnyVehicle(PlayerPedId(), false) then
           local veh = fsn_lookingAt()
           if veh then
             local veh_index = 0
@@ -159,8 +168,8 @@ Citizen.CreateThread(function()
               	DisplayHelpTextFromStringLabel(0, 0, 1, -1)
                 if IsControlPressed(0, 38) then
                   if vehicles[veh_index][2]+0.2 < 100 then
-                    vehicles[veh_index][2] = vehicles[veh_index][2]+0.2
-                    fuel_amount = fuel_amount+0.2
+                    vehicles[veh_index][2] = vehicles[veh_index][2] + 0.2
+                    fuel_amount = fuel_amount + 0.2
                     price = price + 0.5
                   else
                     fuel_amount = 100

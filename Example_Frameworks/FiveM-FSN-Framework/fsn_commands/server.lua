@@ -1,5 +1,6 @@
 local current_characters = {}
-AddEventHandler('fsn_main:updateCharacters', function(tbl)
+
+RegisterNetEvent('fsn_main:updateCharacters', function(tbl)
   current_characters = tbl
 end)
 
@@ -14,7 +15,8 @@ function fsn_SplitString(inputstr, sep)
     if sep == nil then
         sep = "%s"
     end
-    local t={} ; i=1
+    local t = {}
+    local i = 1
     for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
         t[i] = str
         i = i + 1
@@ -808,7 +810,7 @@ AddEventHandler('chatMessage', function(source, auth, msg)
             if tonumber(split[3]) then
               TriggerClientEvent('fsn_commands:police:livery', source, tonumber(split[3]))
             else
-              TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'There was an issue with the arguments you provided.')``
+              TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'There was an issue with the arguments you provided.')
             end
           else
             TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'There was an issue with the arguments you provided.')
@@ -1179,7 +1181,7 @@ AddEventHandler('chatMessage', function(source, auth, msg)
             if tonumber(split[3]) then
               TriggerClientEvent('fsn_commands:police:livery', source, tonumber(split[3]))
             else
-              TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'There was an issue with the arguments you provided.')``
+              TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'There was an issue with the arguments you provided.')
             end
           else
             TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'There was an issue with the arguments you provided.')

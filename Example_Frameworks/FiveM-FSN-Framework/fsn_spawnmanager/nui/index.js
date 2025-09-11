@@ -1,34 +1,50 @@
-$(function() {
-  var selected = false
-  window.addEventListener('message', function(event) {
-    if (event.data.hide) {
-      $('.spawnmenu').hide()
+(function () {
+  const spawnMenu = document.querySelector('.spawnmenu');
+  const selections = document.querySelector('.selections');
+  const spawnButton = document.querySelector('.spawnbutton');
+
+  window.addEventListener('message', (event) => {
+    const data = event.data;
+
+    if (data.hide) {
+      spawnMenu.style.display = 'none';
+      return;
     }
-    if (event.data.locs) {
-      $('.selections').html('')
-      $('.spawnbutton').hide()
-      for (i = 0; i < event.data.locs.length; i++) {
-        var loc = event.data.locs[i];
-        var sel = '';
+
+    if (data.locs) {
+      selections.innerHTML = '';
+      spawnButton.style.display = 'none';
+
+      data.locs.forEach((loc, i) => {
+        const div = document.createElement('div');
+        div.className = 'selection' + (loc.selected ? ' selected' : '');
+        div.textContent = loc.name;
+        div.onclick = () => camToLoc(i);
+        selections.appendChild(div);
+
         if (loc.selected) {
-          sel = 'selected'
-          $('.spawnbutton').show()
+          spawnButton.style.display = 'block';
         }
-        $('.selections').append('<div class="selection '+sel+'" onclick="camToLoc('+i+')">'+
-            loc.name+
-        '</div>')
-      }
-      $('.spawnmenu').show()
+      });
+
+      spawnMenu.style.display = 'block';
     }
-  })
-})
+  });
 
-function camToLoc(id) {
-  $.post('http://fsn_spawnmanager/camToLoc', JSON.stringify({
-    loc: id
-  }))
-}
+  window.camToLoc = (id) => {
+    fetch('https://fsn_spawnmanager/camToLoc', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+      body: JSON.stringify({ loc: id })
+    });
+  };
 
-function spawn() {
-  $.post('http://fsn_spawnmanager/spawnAtLoc', JSON.stringify({}))
-}
+  window.spawn = () => {
+    fetch('https://fsn_spawnmanager/spawnAtLoc', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+      body: JSON.stringify({})
+    });
+  };
+})();
+
