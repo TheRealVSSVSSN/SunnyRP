@@ -430,7 +430,7 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Player | 248 | 50 | 198 | 2025-09-11 |
+| Player | 248 | 65 | 183 | 2025-09-11 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -2221,6 +2221,506 @@ ensure my_resource
   - Only checks local ped state.
 - **Reference**: https://docs.fivem.net/natives/?n=IsPlayerClimbing
 
+##### IsPlayerControlOn (0x49C32D60007AFA47 0x618857F2)
+- **Scope**: Client
+- **Signature**: `BOOL IsPlayerControlOn(Player player)`
+- **Purpose**: Check if the player currently has input control enabled.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - **Returns**: `bool` true when control is active.
+- **OneSync / Networking**: Local check; server cannot rely on it for authority.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: ctrlon
+        -- Use: Prints control state
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('ctrlon', function()
+        print(('Control on: %s'):format(tostring(IsPlayerControlOn(PlayerId()))))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: ctrlon */
+    RegisterCommand('ctrlon', () => {
+      console.log(`Control on: ${IsPlayerControlOn(PlayerId())}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not toggle control; use `SetPlayerControl` to change state.
+- **Reference**: https://docs.fivem.net/natives/?n=IsPlayerControlOn
+
+##### IsPlayerDead (0x424D4687FA1E5652 0x140CA5A8)
+- **Scope**: Client
+- **Signature**: `BOOL IsPlayerDead(Player player)`
+- **Purpose**: Determine if the player's ped is dead.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - **Returns**: `bool` true if the player has died.
+- **OneSync / Networking**: Local check; server should validate death before consequences.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: isdead
+        -- Use: Prints death status
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('isdead', function()
+        print(('Dead: %s'):format(tostring(IsPlayerDead(PlayerId()))))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: isdead */
+    RegisterCommand('isdead', () => {
+      console.log(`Dead: ${IsPlayerDead(PlayerId())}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not account for incapacitation without death.
+- **Reference**: https://docs.fivem.net/natives/?n=IsPlayerDead
+
+##### _IsPlayerDrivingDangerously (0xF10B44FD479D69F3 0x1E359CC8)
+- **Scope**: Client
+- **Signature**: `BOOL _IsPlayerDrivingDangerously(Player player, int type)`
+- **Purpose**: Check if the player is driving recklessly; `type` meaning is undocumented.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `type` (`int`): Mode flag (semantics unknown).
+  - **Returns**: `bool` true when flagged as dangerous.
+- **OneSync / Networking**: Local heuristic; not authoritative.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: drivedanger
+        -- Use: Tests dangerous driving state
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('drivedanger', function()
+        print(('Dangerous: %s'):format(tostring(_IsPlayerDrivingDangerously(PlayerId(), 0))))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: drivedanger */
+    RegisterCommand('drivedanger', () => {
+      console.log(`Dangerous: ${_IsPlayerDrivingDangerously(PlayerId(), 0)}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - `type` parameter lacks official description.
+- **Reference**: https://docs.fivem.net/natives/?n=_IsPlayerDrivingDangerously
+
+##### IsPlayerFreeAiming (0x2E397FD2ECD37C87 0x1DEC67B7)
+- **Scope**: Client
+- **Signature**: `BOOL IsPlayerFreeAiming(Player player)`
+- **Purpose**: Determine if the player is aiming without a target lock.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - **Returns**: `bool` true while freely aiming.
+- **OneSync / Networking**: Aiming state is client-side; servers should verify actions.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: freeaim
+        -- Use: Prints free-aim status
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('freeaim', function()
+        print(('Free aiming: %s'):format(tostring(IsPlayerFreeAiming(PlayerId()))))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: freeaim */
+    RegisterCommand('freeaim', () => {
+      console.log(`Free aiming: ${IsPlayerFreeAiming(PlayerId())}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not reveal aim target.
+- **Reference**: https://docs.fivem.net/natives/?n=IsPlayerFreeAiming
+
+##### IsPlayerFreeAimingAtEntity (0x3C06B5C839B38F7B 0x7D80EEAA)
+- **Scope**: Client
+- **Signature**: `BOOL IsPlayerFreeAimingAtEntity(Player player, Entity entity)`
+- **Purpose**: Check if the player is free-aiming specifically at an entity.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `entity` (`Entity`): Entity being evaluated.
+  - **Returns**: `bool` true when the entity is targeted.
+- **OneSync / Networking**: Entity must exist locally; server should validate hits.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: aimat
+        -- Use: Tests aim at current target
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('aimat', function()
+        local target = PlayerPedId()
+        print(('Aiming at self: %s'):format(tostring(IsPlayerFreeAimingAtEntity(PlayerId(), target))))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: aimat */
+    RegisterCommand('aimat', () => {
+      const target = PlayerPedId();
+      console.log(`Aiming at self: ${IsPlayerFreeAimingAtEntity(PlayerId(), target)}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only checks a single entity at a time.
+- **Reference**: https://docs.fivem.net/natives/?n=IsPlayerFreeAimingAtEntity
+
+##### IsPlayerFreeForAmbientTask (0xDCCFD3F106C36AB4 0x85C7E232)
+- **Scope**: Client
+- **Signature**: `BOOL IsPlayerFreeForAmbientTask(Player player)`
+- **Purpose**: Determine if the player is free for ambient AI tasks.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - **Returns**: `bool` true when free for ambient tasks.
+- **OneSync / Networking**: Local behavior; server-side scripts should not rely on it.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: ambient
+        -- Use: Checks ambient task availability
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('ambient', function()
+        print(('Free for ambient: %s'):format(tostring(IsPlayerFreeForAmbientTask(PlayerId()))))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: ambient */
+    RegisterCommand('ambient', () => {
+      console.log(`Free for ambient: ${IsPlayerFreeForAmbientTask(PlayerId())}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Internal logic not documented.
+- **Reference**: https://docs.fivem.net/natives/?n=IsPlayerFreeForAmbientTask
+
+##### IsPlayerLoggingInNp (0x74556E1420867ECA 0x8F72FAD0)
+- **Scope**: Client
+- **Signature**: `BOOL IsPlayerLoggingInNp()`
+- **Purpose**: Check if the player is logging into NP (unused feature).
+- **Parameters / Returns**:
+  - **Returns**: `bool` always false per docs.
+- **OneSync / Networking**: Local stub; no network impact.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: loginchk
+        -- Use: Prints NP login status
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('loginchk', function()
+        print(('Logging in NP: %s'):format(tostring(IsPlayerLoggingInNp())))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: loginchk */
+    RegisterCommand('loginchk', () => {
+      console.log(`Logging in NP: ${IsPlayerLoggingInNp()}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Hard-coded to return false.
+- **Reference**: https://docs.fivem.net/natives/?n=IsPlayerLoggingInNp
+
+##### IsPlayerOnline (0xF25D331DC2627BBC 0x9FAB6729)
+- **Scope**: Client
+- **Signature**: `BOOL IsPlayerOnline()`
+- **Purpose**: Determine if the game session is connected to online services.
+- **Parameters / Returns**:
+  - **Returns**: `bool` true when network services are signed in.
+- **OneSync / Networking**: Local; relates to Rockstar online state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: online
+        -- Use: Prints online state
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('online', function()
+        print(('Online: %s'):format(tostring(IsPlayerOnline())))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: online */
+    RegisterCommand('online', () => {
+      console.log(`Online: ${IsPlayerOnline()}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Alias of `NetworkIsSignedOnline`.
+- **Reference**: https://docs.fivem.net/natives/?n=IsPlayerOnline
+
+##### IsPlayerPlaying (0x5E9564D8246B909A 0xE15D777F)
+- **Scope**: Client
+- **Signature**: `BOOL IsPlayerPlaying(Player player)`
+- **Purpose**: Check if the player has a valid, alive ped.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - **Returns**: `bool` true if playing.
+- **OneSync / Networking**: Ped existence must be confirmed by server for authoritative logic.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: playing
+        -- Use: Prints playing status
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('playing', function()
+        print(('Is playing: %s'):format(tostring(IsPlayerPlaying(PlayerId()))))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: playing */
+    RegisterCommand('playing', () => {
+      console.log(`Is playing: ${IsPlayerPlaying(PlayerId())}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not confirm active participation in gameplay.
+- **Reference**: https://docs.fivem.net/natives/?n=IsPlayerPlaying
+
+##### IsPlayerPressingHorn (0xFA1E2BF8B10598F9 0xED1D1662)
+- **Scope**: Client
+- **Signature**: `BOOL IsPlayerPressingHorn(Player player)`
+- **Purpose**: Determine if the player is holding the vehicle horn.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - **Returns**: `bool` true while horn is pressed.
+- **OneSync / Networking**: Horn state not network authoritative; sync separately if needed.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: horn
+        -- Use: Prints horn state
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('horn', function()
+        print(('Pressing horn: %s'):format(tostring(IsPlayerPressingHorn(PlayerId()))))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: horn */
+    RegisterCommand('horn', () => {
+      console.log(`Pressing horn: ${IsPlayerPressingHorn(PlayerId())}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only valid when the player is in a vehicle.
+- **Reference**: https://docs.fivem.net/natives/?n=IsPlayerPressingHorn
+
+##### IsPlayerReadyForCutscene (0x908CBECC2CAA3690 0xBB77E9CD)
+- **Scope**: Client
+- **Signature**: `BOOL IsPlayerReadyForCutscene(Player player)`
+- **Purpose**: Check if the player is ready to start a cutscene.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - **Returns**: `bool` readiness flag.
+- **OneSync / Networking**: Local state; synchronize cutscene triggers via events.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: cutscene
+        -- Use: Prints cutscene readiness
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('cutscene', function()
+        print(('Ready for cutscene: %s'):format(tostring(IsPlayerReadyForCutscene(PlayerId()))))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: cutscene */
+    RegisterCommand('cutscene', () => {
+      console.log(`Ready for cutscene: ${IsPlayerReadyForCutscene(PlayerId())}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not initiate cutscene.
+- **Reference**: https://docs.fivem.net/natives/?n=IsPlayerReadyForCutscene
+
+##### IsPlayerRidingTrain (0x4EC12697209F2196 0x9765E71D)
+- **Scope**: Client
+- **Signature**: `BOOL IsPlayerRidingTrain(Player player)`
+- **Purpose**: Check if the player is currently on a train.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - **Returns**: `bool` true when riding a train.
+- **OneSync / Networking**: Train state must be replicated via entity ownership.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: train
+        -- Use: Prints train riding status
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('train', function()
+        print(('On train: %s'):format(tostring(IsPlayerRidingTrain(PlayerId()))))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: train */
+    RegisterCommand('train', () => {
+      console.log(`On train: ${IsPlayerRidingTrain(PlayerId())}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only detects actual train entities.
+- **Reference**: https://docs.fivem.net/natives/?n=IsPlayerRidingTrain
+
+##### IsPlayerScriptControlOn (0x8A876A65283DD7D7 0x61B00A84)
+- **Scope**: Client
+- **Signature**: `BOOL IsPlayerScriptControlOn(Player player)`
+- **Purpose**: Determine if the script currently controls the player.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - **Returns**: `bool` control flag.
+- **OneSync / Networking**: Local check; does not grant control rights.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: scriptctrl
+        -- Use: Prints script control status
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('scriptctrl', function()
+        print(('Script control: %s'):format(tostring(IsPlayerScriptControlOn(PlayerId()))))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: scriptctrl */
+    RegisterCommand('scriptctrl', () => {
+      console.log(`Script control: ${IsPlayerScriptControlOn(PlayerId())}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not change control state.
+- **Reference**: https://docs.fivem.net/natives/?n=IsPlayerScriptControlOn
+
+##### IsPlayerTargettingAnything (0x78CFE51896B6B8A4 0x456DB50D)
+- **Scope**: Client
+- **Signature**: `BOOL IsPlayerTargettingAnything(Player player)`
+- **Purpose**: Check if the player is targeting any entity.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - **Returns**: `bool` true when any target is locked.
+- **OneSync / Networking**: Targeting is client-side; server should validate hits.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: targeting
+        -- Use: Prints targeting state
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('targeting', function()
+        print(('Targeting anything: %s'):format(tostring(IsPlayerTargettingAnything(PlayerId()))))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: targeting */
+    RegisterCommand('targeting', () => {
+      console.log(`Targeting anything: ${IsPlayerTargettingAnything(PlayerId())}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not return which entity is targeted.
+- **Reference**: https://docs.fivem.net/natives/?n=IsPlayerTargettingAnything
+
+##### IsPlayerTargettingEntity (0x7912F7FC4F6264B6 0xF3240B77)
+- **Scope**: Client
+- **Signature**: `BOOL IsPlayerTargettingEntity(Player player, Entity entity)`
+- **Purpose**: Check if the player is targeting a specific entity.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `entity` (`Entity`): Entity to test.
+  - **Returns**: `bool` true if the entity is targeted.
+- **OneSync / Networking**: Entity must exist locally; server should confirm targeting events.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: targetent
+        -- Use: Tests targeting of own ped
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('targetent', function()
+        local ent = PlayerPedId()
+        print(('Targeting self: %s'):format(tostring(IsPlayerTargettingEntity(PlayerId(), ent))))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: targetent */
+    RegisterCommand('targetent', () => {
+      const ent = PlayerPedId();
+      console.log(`Targeting self: ${IsPlayerTargettingEntity(PlayerId(), ent)}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires entity handle; does not return the target.
+- **Reference**: https://docs.fivem.net/natives/?n=IsPlayerTargettingEntity
 ### Server Natives by Category
 
-CONTINUE-HERE — 2025-09-11T03:14:09+00:00 — next: 13.2 Client Natives > Player category :: IsPlayerControlOn
+
+CONTINUE-HERE — 2025-09-11T03:25:53+00:00 — next: 13.2 Client Natives > Player category :: IsPlayerTeleportActive
