@@ -1,319 +1,212 @@
-local inside_store = {x = -734.44207763672, y = -1312.2078857422, z = 5.0003824234009}
-local boat_spots = {}
-local rented_boats = {}
+--[[
+    -- Type: Client
+    -- Name: BoatShopClient
+    -- Use: Handles showroom rendering and player interactions
+    -- Created: 2024-05-07
+    -- By: VSSVSSN
+--]]
 
-function BuyBoat(key)
-	local veh = boat_spots[key].boat.object
-	local model = GetEntityModel(veh)
-	local colors = table.pack(GetVehicleColours(veh))
-	local extra_colors = table.pack(GetVehicleExtraColours(veh))
+local boatSpots = {}
+local rentals = {}
+local showroomCenter = vector3(-734.4421, -1312.2079, 5.0003)
 
-	Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(veh))
-	local pos = vector4(-714.47515869141,-1354.5272216797,-0.47480717301369,134.67294311523)
-	
-	FreezeEntityPosition(ped,false)
-	RequestModel(model)
-	while not HasModelLoaded(model) do
-		Citizen.Wait(0)
-	end
-	personalvehicle = CreateVehicle(model,pos[1],pos[2],pos[3],pos[4],true,false)
-	SetModelAsNoLongerNeeded(model)
-
-	SetVehicleOnGroundProperly(personalvehicle)
-	SetVehicleHasBeenOwnedByPlayer(personalvehicle,true)
-	local id = NetworkGetNetworkIdFromEntity(personalvehicle)
-	SetNetworkIdCanMigrate(id, true)
-	--Citizen.InvokeNative(0x629BFA74418D6239,Citizen.PointerValueIntInitialized(personalvehicle))
-	SetEntityAsMissionEntity(personalvehicle, true, true)
-	SetVehicleColours(personalvehicle,colors[1],colors[2])
-	SetVehicleExtraColours(personalvehicle,extra_colors[1],extra_colors[2])
-	TaskWarpPedIntoVehicle(PlayerPedId(),personalvehicle,-1)
-	SetEntityVisible(ped,true)
-	
-	local details = {
-		plate = GetVehicleNumberPlateText(personalvehicle),
-		livery = 0,
-		fuel = 100,
-		damage = {
-			engine = 1000,
-			body = 1000,
-			advanced = {
-				electronics = 100,
-				clutch = 100,
-				gearbox = 100,
-				brakes = 100,
-				transmission = 100,
-				axle = 100,
-				fuel_injectors = 100,
-				fuel_tank = 100,
-				tires = 100,
-			},
-		},
-		modkit = 0,
-		customisations = {
-			plate = 0,
-			windows = 0,
-			colours = {
-				main = {0,0},
-				extras = {0,0},
-			},
-			neons = {
-				enabled = {false, false, false},
-				colours = {0,0,0},
-			},
-			wheels = {
-				type = 0,
-				smoke = {0,0,0},
-			},
-			mods = {},
-		}
-	}
-	
-	local finance = {
-		outright = true,
-		buyprice = boat_spots[key].boat.buyprice+boat_spots[key].boat.commission,
-		base = boat_spots[key].boat.buyprice,
-		commission = boat_spots[key].boat.commission
-	}
-	
-	TriggerServerEvent('fsn_cargarage:buyVehicle', exports["fsn_main"]:fsn_CharID(), boat_spots[key].boat.name, boat_spots[key].boat.model, GetVehicleNumberPlateText(personalvehicle), details, finance, 'b', 0)
-	exports['mythic_notify']:DoCustomHudText('success', 'You bought '..boat_spots[key].boat.name..' for $'..boat_spots[key].boat.buyprice+boat_spots[key].boat.commission, 3000)
-	TriggerEvent('fsn_bank:change:walletMinus', boat_spots[key].boat.buyprice+boat_spots[key].boat.commission)
-	TriggerEvent('fsn_cargarage:makeMine', personalvehicle, boat_spots[key].boat.model, GetVehicleNumberPlateText(personalvehicle))
+--[[
+    -- Type: Function
+    -- Name: spawnDisplayBoat
+    -- Use: Spawns or refreshes a showroom boat at a given slot
+    -- Created: 2024-05-07
+    -- By: VSSVSSN
+--]]
+local function spawnDisplayBoat(idx)
+    local spot = boatSpots[idx]
+    if not spot or not spot.boat.model then return end
+    if DoesEntityExist(spot.boat.entity) then
+        DeleteVehicle(spot.boat.entity)
+    end
+    local m = GetHashKey(spot.boat.model)
+    RequestModel(m)
+    while not HasModelLoaded(m) do Wait(0) end
+    local pos = spot.coords
+    spot.boat.entity = CreateVehicle(m, pos.x, pos.y, pos.z - 1.0, pos.w, false, false)
+    SetVehicleOnGroundProperly(spot.boat.entity)
+    FreezeEntityPosition(spot.boat.entity, true)
+    SetEntityInvincible(spot.boat.entity, true)
+    SetVehicleColours(spot.boat.entity, spot.boat.color[1], spot.boat.color[2])
+    SetVehicleNumberPlateText(spot.boat.entity, 'PDMFLOOR')
 end
 
-function RentBoat(key)
-
-	TriggerEvent('fsn_bank:change:walletMinus', boat_spots[key].boat.rentalprice)
-	local veh = boat_spots[key].boat.object
-	local model = GetEntityModel(veh)
-	local colors = table.pack(GetVehicleColours(veh))
-	local extra_colors = table.pack(GetVehicleExtraColours(veh))
-
-	Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(veh))
-	local pos = vector4(-714.47515869141,-1354.5272216797,-0.47480717301369,134.67294311523)
-	
-	FreezeEntityPosition(ped,false)
-	RequestModel(model)
-	while not HasModelLoaded(model) do
-		Citizen.Wait(0)
-	end
-	boatrental = CreateVehicle(model,pos[1],pos[2],pos[3],pos[4],true,false)
-	SetModelAsNoLongerNeeded(model)
-
-	SetVehicleOnGroundProperly(boatrental)
-	SetVehicleHasBeenOwnedByPlayer(boatrental,true)
-	exports['mythic_notify']:DoCustomHudText('success', 'You rented a boat!.', 3000)
-	local id = NetworkGetNetworkIdFromEntity(boatrental)
-	SetNetworkIdCanMigrate(id, true)
-	Citizen.InvokeNative(0x629BFA74418D6239,Citizen.PointerValueIntInitialized(boatrental))
-	SetEntityAsMissionEntity(boatrental, true, true)
-	SetVehicleColours(boatrental,colors[1],colors[2])
-	SetVehicleExtraColours(boatrental,extra_colors[1],extra_colors[2])
-	TaskWarpPedIntoVehicle(PlayerPedId(),boatrental,-1)
-
-	TriggerEvent('fsn_cargarage:makeMine', boatrental, boat_spots[key].boat.model, GetVehicleNumberPlateText(boatrental))
-
-	local boat = {
-		plate = GetVehicleNumberPlateText(boatrental),
-		 rentalprice = boat_spots[key].boat.rentalprice
-	}
-
-	table.insert(rented_boats, #rented_boats+1, boat)
-	
+--[[
+    -- Type: Function
+    -- Name: buyBoat
+    -- Use: Transfers ownership of a showroom boat to the player
+    -- Created: 2024-05-07
+    -- By: VSSVSSN
+--]]
+local function buyBoat(idx)
+    local ped = PlayerPedId()
+    local spot = boatSpots[idx]
+    local boat = spot.boat
+    local price = boat.buyprice + math.floor(boat.buyprice * (boat.commission / 100))
+    TriggerEvent('fsn_bank:change:walletMinus', price)
+    local model = GetHashKey(boat.model)
+    RequestModel(model)
+    while not HasModelLoaded(model) do Wait(0) end
+    local spawn = vector4(-714.4751,-1354.5272,-0.4748,134.6729)
+    local veh = CreateVehicle(model, spawn.x, spawn.y, spawn.z, spawn.w, true, false)
+    SetVehicleColours(veh, boat.color[1], boat.color[2])
+    SetVehicleHasBeenOwnedByPlayer(veh, true)
+    TaskWarpPedIntoVehicle(ped, veh, -1)
+    local finance = {
+        outright = true,
+        buyprice = price,
+        base = boat.buyprice,
+        commission = boat.commission
+    }
+    local details = { plate = GetVehicleNumberPlateText(veh) }
+    TriggerServerEvent('fsn_cargarage:buyVehicle', exports['fsn_main']:fsn_CharID(), boat.name, boat.model, details.plate, details, finance, 'b', 0)
+    TriggerEvent('fsn_cargarage:makeMine', veh, boat.model, details.plate)
+    exports['mythic_notify']:DoCustomHudText('success', 'Purchased '..boat.name..' for $'..price, 3000)
 end
 
-Util.Tick(function()
-	if GetDistanceBetweenCoords(inside_store.x, inside_store.y, inside_store.z, GetEntityCoords(PlayerPedId()), true) < 100 then
-		for key, boat in pairs(boat_spots) do
-			if boat.boat.model then
-				if not DoesEntityExist(boat.boat.object) then
-					RequestModel(GetHashKey(boat.boat.model))
-					while not HasModelLoaded(GetHashKey(boat.boat.model)) do
-						Citizen.Wait(1)
-						if GetDistanceBetweenCoords(inside_store.x, inside_store.y, inside_store.z, GetEntityCoords(PlayerPedId()), true) < 10 then
-							--Util.DrawText3D(boat.x, boat.y, boat.z, ':FSN: Loading vehicle: '..boat.boat.model, {255, 0, 0, 255}, 0.2)
-						end
-					end
-					boat.boat.object = CreateVehicle(GetHashKey(boat.boat.model), boat.x, boat.y, boat.z-1, boat.h, false, false)
-					FreezeEntityPosition(boat.boat.object, true)
-					SetVehicleOnGroundProperly(boat.boat.object)
-					SetVehicleColours(boat.boat.object, boat.boat.color[1], boat.boat.color[2])
-					SetVehicleExtraColours(boat.boat.object, -1, -1)
-					SetVehicleNumberPlateText(boat.boat.object, "PDMFLOOR")
-				else
-					if IsEntityAttachedToAnyVehicle(boat.boat.object) then
-						-- someone is trying to tow this shit
-						DetachEntity(boat.boat.object)
-					end
-					if GetDistanceBetweenCoords(boat.x,boat.y,boat.z, GetEntityCoords(boat.boat.object), true) > 2 then
-						-- boat is not where it's supposed to be :/
-						SetEntityCoords(boat.boat.object, boat.x, boat.y, boat.z-1, 1, 0, 0, 1)
-						SetVehicleOnGroundProperly(boat.boat.object)
-					end
-					FreezeEntityPosition(boat.boat.object, true)
-					SetEntityInvincible(boat.boat.object,true)
-					SetEntityAsMissionEntity( boat.boat.object, true, true )
-					
-					if not boat.updated then
-						IsEntityVisible(boat.boat.object)
-						Citizen.Wait(10)
-						DeleteEntity(boat.boat.object)
-						if not boat.updatestart then
-							boat.updatestart = GetNetworkTime()
-						end
-						if boat.updatestart+300 < GetNetworkTime() then
-							local primary, secondary = GetVehicleColours(boat.boat.object)
-							print('PRIMARY: '..primary..' ?? '..boat.boat.color[1])
-							print('SECONDARY: '..secondary..' ?? '..boat.boat.color[2])
-							boat.updated = true
-							boat.updatestart = false
-						else
-							--Util.DrawText3D(boat.x, boat.y, boat.z, ':FSN: Updating vehicle', {255, 0, 0, 255}, 0.2)
-						end
-					else
-						if GetDistanceBetweenCoords(boat.x, boat.y, boat.z, GetEntityCoords(PlayerPedId()), true) < 5 then
-							Util.DrawText3D(boat.x, boat.y, boat.z+2.45, 'Vehicle: ~b~'..boat.boat.name, {255, 255, 255, 255}, 0.3)
-							Util.DrawText3D(boat.x, boat.y, boat.z+2.3, 'Base Price: ~g~$'..boat.boat.buyprice, {255, 255, 255, 200}, 0.2)
-							Util.DrawText3D(boat.x, boat.y, boat.z+2.18, 'Commission: ~r~'..boat.boat.commission..'~w~%', {255, 255, 255, 200}, 0.2)
-							local comm = math.floor(boat.boat.buyprice / 100 * boat.boat.commission)
-							Util.DrawText3D(boat.x, boat.y, boat.z+2.06, 'Actual Price ~g~$'..boat.boat.buyprice+comm, {255, 255, 255, 200}, 0.2)
-							Util.DrawText3D(boat.x, boat.y, boat.z+1.94, 'Rental Price ~g~$'..boat.boat.rentalprice, {255, 255, 255, 200}, 0.2)
-							--if exports["fsn_jobs"]:isWhitelistClockedIn(1) then
-							if exports['fsn_jobs']:isWhitelistClockedIn(4) then
-								Util.DrawText3D(boat.x, boat.y, boat.z+1.78, '~r~[ E ] Organise Finance ~b~||~w~ ~g~[ H ] Change ~b~||~w~ /comm {new%}', {255, 255, 255, 200}, 0.2)
-								if IsControlJustPressed(0, 74) then
-									-- [H] Change boat
-									OpenCreator(key)
-								end
-								if IsControlJustPressed(0, 38) then
-									-- [E] Organise finance
-									exports['mythic_notify']:DoCustomHudText('error', 'Your business has not been around long enough to afford this!', 3000)
-								end
+--[[
+    -- Type: Function
+    -- Name: rentBoat
+    -- Use: Spawns a temporary rental boat for the player
+    -- Created: 2024-05-07
+    -- By: VSSVSSN
+--]]
+local function rentBoat(idx)
+    local ped = PlayerPedId()
+    local boat = boatSpots[idx].boat
+    TriggerEvent('fsn_bank:change:walletMinus', boat.rentalprice)
+    local model = GetHashKey(boat.model)
+    RequestModel(model)
+    while not HasModelLoaded(model) do Wait(0) end
+    local spawn = vector4(-714.4751,-1354.5272,-0.4748,134.6729)
+    local veh = CreateVehicle(model, spawn.x, spawn.y, spawn.z, spawn.w, true, false)
+    SetVehicleColours(veh, boat.color[1], boat.color[2])
+    SetVehicleHasBeenOwnedByPlayer(veh, true)
+    TaskWarpPedIntoVehicle(ped, veh, -1)
+    local plate = GetVehicleNumberPlateText(veh)
+    rentals[#rentals+1] = {plate = plate, price = boat.rentalprice, entity = veh}
+    TriggerEvent('fsn_cargarage:makeMine', veh, boat.model, plate)
+    exports['mythic_notify']:DoCustomHudText('success', 'Boat rented', 3000)
+end
 
-							else
-								Util.DrawText3D(boat.x, boat.y, boat.z+1.78, '~g~[ E ]~w~ Purchase ~b~||~w~ Talk to an employee to discuss finance!', {255, 255, 255, 200}, 0.2)
-								Util.DrawText3D(boat.x, boat.y, boat.z+1.65, '~g~[ G ]~w~ Rent', {255, 255, 255, 200}, 0.2)
-								if IsControlJustPressed(0, 38) then
-									-- [E] Purchase
-									if exports["fsn_main"]:fsn_CanAfford(boat.boat.buyprice+comm) then
-										BuyBoat(key)
-									else
-										exports['mythic_notify']:DoCustomHudText('error', 'You cannot afford $'..boat.boat.buyprice+comm..' right now', 3000)
-									end
-								end
-								if IsControlJustPressed(0, 47) then
-									-- [G] Test Drive\
-									if exports["fsn_main"]:fsn_CanAfford(boat.boat.rentalprice) then
-										RentBoat(key)
-									else
-										exports['mythic_notify']:DoCustomHudText('error', 'You cannot afford $'..boat.boat.rentalprice..' right now', 3000)
-									end
-								end
-							end
-						end
-					end					
-				end
-			else
-				Util.DrawText3D(boat.x, boat.y, boat.z+2, 'boat not set', {255, 255, 255, 200}, 0.2)
-			end
-		end
-	end
-end, 0)
+--[[
+    -- Type: Function
+    -- Name: handleReturn
+    -- Use: Processes returning rental boats and refunds half price
+    -- Created: 2024-05-07
+    -- By: VSSVSSN
+--]]
+local function handleReturn()
+    local ped = PlayerPedId()
+    local pos = GetEntityCoords(ped)
+    local returnPos = vector3(-714.4751,-1354.5272,-0.4748)
+    if #(pos - returnPos) < 10.0 and IsPedInAnyVehicle(ped, false) then
+        local veh = GetVehiclePedIsIn(ped, false)
+        for i, b in ipairs(rentals) do
+            if GetVehicleNumberPlateText(veh) == b.plate then
+                Util.DrawText3D(returnPos.x, returnPos.y, returnPos.z+0.5, 'Press ~g~[E]~w~ to return rental', {255,255,255,200}, 0.2)
+                if IsControlJustPressed(0, Util.GetKeyNumber('E')) then
+                    TaskLeaveVehicle(ped, veh, 16)
+                    Wait(1000)
+                    DeleteVehicle(veh)
+                    TriggerEvent('fsn_bank:change:walletAdd', b.price*0.5)
+                    exports['mythic_notify']:DoCustomHudText('success', 'Rental returned', 3000)
+                    table.remove(rentals, i)
+                end
+                break
+            end
+        end
+    end
+end
+
+--[[
+    -- Type: Thread
+    -- Name: DisplayThread
+    -- Use: Maintains showroom boats and interaction prompts
+    -- Created: 2024-05-07
+    -- By: VSSVSSN
+--]]
+CreateThread(function()
+    local blip = AddBlipForCoord(showroomCenter)
+    SetBlipSprite(blip, 455)
+    SetBlipColour(blip, 3)
+    SetBlipAsShortRange(blip, true)
+    SetBlipScale(blip, 0.9)
+    BeginTextCommandSetBlipName('STRING')
+    AddTextComponentString('Los Santos Marina')
+    EndTextCommandSetBlipName(blip)
+
+    while true do
+        Wait(0)
+        local ped = PlayerPedId()
+        local pos = GetEntityCoords(ped)
+        if #(pos - showroomCenter) < 100.0 then
+            for idx, spot in pairs(boatSpots) do
+                if not DoesEntityExist(spot.boat.entity) then
+                    spawnDisplayBoat(idx)
+                end
+                if #(pos - vector3(spot.coords.x, spot.coords.y, spot.coords.z)) < 5.0 then
+                    local b = spot.boat
+                    local comm = math.floor(b.buyprice * (b.commission/100))
+                    Util.DrawText3D(spot.coords.x, spot.coords.y, spot.coords.z+2.4, 'Boat: ~b~'..b.name, {255,255,255,255}, 0.3)
+                    Util.DrawText3D(spot.coords.x, spot.coords.y, spot.coords.z+2.2, 'Price: ~g~$'..(b.buyprice+comm), {255,255,255,200}, 0.2)
+                    Util.DrawText3D(spot.coords.x, spot.coords.y, spot.coords.z+2.0, 'Rental: ~g~$'..b.rentalprice, {255,255,255,200}, 0.2)
+                    if IsControlJustPressed(0, 38) then -- E
+                        if exports['fsn_main']:fsn_CanAfford(b.buyprice+comm) then
+                            buyBoat(idx)
+                        else
+                            exports['mythic_notify']:DoCustomHudText('error', 'Not enough money', 3000)
+                        end
+                    elseif IsControlJustPressed(0, 47) then -- G
+                        if exports['fsn_main']:fsn_CanAfford(b.rentalprice) then
+                            rentBoat(idx)
+                        else
+                            exports['mythic_notify']:DoCustomHudText('error', 'Not enough money', 3000)
+                        end
+                    end
+                end
+            end
+            handleReturn()
+        else
+            for _, spot in pairs(boatSpots) do
+                if spot.boat.entity and DoesEntityExist(spot.boat.entity) then
+                    DeleteVehicle(spot.boat.entity)
+                    spot.boat.entity = nil
+                end
+            end
+            Wait(500)
+        end
+    end
+end)
+
+--[[
+    -- Type: Event
+    -- Name: fsn_boatshop:floor:Update
+    -- Use: Receives full showroom state from server
+    -- Created: 2024-05-07
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent('fsn_boatshop:floor:Update', function(data)
+    boatSpots = data
+    for idx in pairs(boatSpots) do
+        spawnDisplayBoat(idx)
+    end
+end)
+
+--[[
+    -- Type: Event
+    -- Name: fsn_boatshop:floor:Updateboat
+    -- Use: Updates a single showroom slot
+    -- Created: 2024-05-07
+    -- By: VSSVSSN
+--]]
+RegisterNetEvent('fsn_boatshop:floor:Updateboat', function(idx, data)
+    boatSpots[idx] = data
+    spawnDisplayBoat(idx)
+end)
 
 TriggerServerEvent('fsn_boatshop:floor:Request')
-RegisterNetEvent('fsn_boatshop:floor:Update')
-AddEventHandler('fsn_boatshop:floor:Update', function(tbl)
-	boat_spots = tbl
-end)
-RegisterNetEvent('fsn_boatshop:floor:Updateboat')
-AddEventHandler('fsn_boatshop:floor:Updateboat', function(updatedboat, tbl)
-	print('fsn_boatshop: got update for boat('..updatedboat..')')
-	boat_spots[updatedboat]['boat']['color'] = tbl['boat']['color']
-	boat_spots[updatedboat]['boat']['model'] = tbl['boat']['model']
-	boat_spots[updatedboat]['boat']['name'] = tbl['boat']['name']
-	boat_spots[updatedboat]['boat']['commission'] = tbl['boat']['commission']
-	boat_spots[updatedboat]['boat']['buyprice'] = tbl['boat']['buyprice']
-	boat_spots[updatedboat]['boat']['rentalprice'] = tbl['boat']['rentalprice']
-	boat_spots[updatedboat]['updated'] = false
-end)
-
--- command shit
-RegisterNetEvent('fsn_boatshop:floor:commission')
-AddEventHandler('fsn_boatshop:floor:commission', function(amt)
-	for k,v in pairs(boat_spots) do
-		if GetDistanceBetweenCoords(v.x, v.y, v.z, GetEntityCoords(PlayerPedId()), true) < 2 then
-			TriggerServerEvent('fsn_boatshop:floor:commission', k, amt)
-		end
-	end
-end)
-RegisterNetEvent('fsn_boatshop:floor:color:One')
-AddEventHandler('fsn_boatshop:floor:color:One', function(col)
-	for k,v in pairs(boat_spots) do
-		if GetDistanceBetweenCoords(v.x, v.y, v.z, GetEntityCoords(PlayerPedId()), true) < 2 then
-			TriggerServerEvent('fsn_boatshop:floor:color:One', k, col)
-		end
-	end
-end)
-RegisterNetEvent('fsn_boatshop:floor:color:Two')
-AddEventHandler('fsn_boatshop:floor:color:Two', function(col)
-	for k,v in pairs(boat_spots) do
-		if GetDistanceBetweenCoords(v.x, v.y, v.z, GetEntityCoords(PlayerPedId()), true) < 2 then
-			TriggerServerEvent('fsn_boatshop:floor:color:Two', k, col)
-		end
-	end
-end)
-
-Citizen.CreateThread(function()
-	local blip = AddBlipForCoord(-734.44207763672, -1312.2078857422, 5.0003824234009)
-	SetBlipSprite(blip, 455)
-	SetBlipColour(blip, 3)
-	SetBlipAsShortRange(blip, true)
-	SetBlipScale(blip, 0.9)
-	BeginTextCommandSetBlipName("STRING")
-	AddTextComponentString("Los Santos Marina")
-	EndTextCommandSetBlipName(blip)
-	Citizen.Wait(0)
-end)
-
-Citizen.CreateThread(function()
-	while true do
-		Citizen.Wait(10)
-			local playerPed = PlayerPedId()
-			local playerPos = GetEntityCoords(playerPed)
-			local rentedboat
-
-			local playerVehicle = GetVehiclePedIsIn(playerPed, false)
-
-			for k,b in pairs(rented_boats) do
-				if GetVehicleNumberPlateText(playerVehicle) == b.plate then
-					rentedboat = GetVehiclePedIsIn(playerPed)
-					rentalprice = b.rentalprice
-				end
-			end
-
-			local boatrentalReturn = vector3(-714.47515869141,-1354.5272216797,-0.47480717301369)
-
-			if Util.GetVecDist(playerPos, boatrentalReturn.xyz) < 10 then
-				if IsPedInAnyVehicle(playerPed, true) then
-					if rentedboat ~= nil then
-						Util.DrawText3D(boatrentalReturn.x, boatrentalReturn.y, boatrentalReturn.z+0.5, 'Press ~g~[ E ]~w~ to return the rental.', {255, 255, 255, 200}, 0.2)
-						if IsControlJustPressed(0, Util.GetKeyNumber("E"), IsDisabledControlJustPressed(0, Util.GetKeyNumber("E"))) then
-							local maxPassengers = GetVehicleMaxNumberOfPassengers(rentedboat)
-							for seat = -1,maxPassengers-1,1 do
-								local ped = GetPedInVehicleSeat(rentedboat, seat)
-								if ped and ped ~= 0 then TaskLeaveVehicle(ped, rentedboat,16); end
-							end
-							table.remove(rented_boats,#rented_boats,rentedboat)
-							SetEntityAsMissionEntity( rentedboat, false, true )
-							DeleteVehicle( rentedboat )
-							exports['mythic_notify']:DoCustomHudText('success', 'Boat rental has been returned')
-							TriggerEvent('fsn_bank:change:walletAdd', rentalprice*0.5)
-							SetPedCoordsKeepVehicle(playerPed, -718.85162353516, -1325.6365966797, 1.596290230751)
-							if DoesEntityExist(rentedboat) then SetVehicleUndriveable(rentedboat, true); end
-					end
-				end
-			end
-		end
-	end
-end)
