@@ -430,7 +430,8 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Player | 248 | 235 | 13 | 2025-09-11T06:21 |
+| Player | 248 | 248 | 0 | 2025-09-11T06:38 |
+| Recording | 17 | 0 | 17 | 2025-09-11T06:38 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -6655,6 +6656,72 @@ RegisterCommand('rgb', () => {
   - Flags influence leaving vehicles and other behaviors.
 - **Reference**: https://docs.fivem.net/natives/?n=SetPlayerControl
 
+##### SetPlayerFallDistance (0xEFD79FA81DFBA9CB)
+- **Scope**: Client
+- **Signature**: `void _SET_PLAYER_FALL_DISTANCE(Player player, float distance)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `distance` (`float`): Unknown threshold.
+- **OneSync / Networking**: Local effect.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: set_fall_distance
+        -- Use: Calls SetPlayerFallDistance
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('set_fall_distance', function()
+        SetPlayerFallDistance(PlayerId(), 10.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: set_fall_distance */
+    RegisterCommand('set_fall_distance', () => {
+      SetPlayerFallDistance(PlayerId(), 10.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerFallDistance
+
+##### SetPlayerForceSkipAimIntro (0x7651BC64AE59E128 / 0x374F42F0)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_FORCE_SKIP_AIM_INTRO(Player player, BOOL toggle)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `toggle` (`bool`): Enable to skip aim intro.
+- **OneSync / Networking**: Local only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: skip_aim_intro
+        -- Use: Calls SetPlayerForceSkipAimIntro
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('skip_aim_intro', function()
+        SetPlayerForceSkipAimIntro(PlayerId(), true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: skip_aim_intro */
+    RegisterCommand('skip_aim_intro', () => {
+      SetPlayerForceSkipAimIntro(PlayerId(), true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerForceSkipAimIntro
+
 ##### SetPlayerForcedAim (hash unknown)
 - **Scope**: Client
 - **Signature**: `void SET_PLAYER_FORCED_AIM(Player player, BOOL toggle)`
@@ -6753,6 +6820,39 @@ RegisterCommand('rgb', () => {
   - Parachute availability still depends on main pack.
 - **Reference**: https://docs.fivem.net/natives/?n=SetPlayerHasReserveParachute
 
+##### SetPlayerHealthRechargeLimit (0xC388A0F065F5BC34)
+- **Scope**: Client
+- **Signature**: `void _SET_PLAYER_HEALTH_RECHARGE_LIMIT(Player player, float limit)`
+- **Purpose**: Sets the fraction of max health that can auto-regenerate.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `limit` (`float`): 0.0–1.0, default 0.5.
+- **OneSync / Networking**: Local effect.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: hp_limit
+        -- Use: Calls SetPlayerHealthRechargeLimit
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('hp_limit', function()
+        SetPlayerHealthRechargeLimit(PlayerId(), 0.3)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: hp_limit */
+    RegisterCommand('hp_limit', () => {
+      SetPlayerHealthRechargeLimit(PlayerId(), 0.3);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Values outside 0.0–1.0 are clamped.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerHealthRechargeLimit
+
 ##### SetPlayerHealthRechargeMultiplier (hash unknown)
 - **Scope**: Client
 - **Signature**: `void SET_PLAYER_HEALTH_RECHARGE_MULTIPLIER(Player player, float regenRate)`
@@ -6785,6 +6885,39 @@ RegisterCommand('rgb', () => {
 - **Caveats / Limitations**:
   - Does not affect damage taken.
 - **Reference**: https://docs.fivem.net/natives/?n=SetPlayerHealthRechargeMultiplier
+ 
+##### SetPlayerHomingRocketDisabled (0xEE4EBDD2593BA844)
+- **Scope**: Client
+- **Signature**: `void _SET_PLAYER_HOMING_ROCKET_DISABLED(Player player, BOOL disabled)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `disabled` (`bool`): Toggle homing lock.
+- **OneSync / Networking**: Local effect.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: disable_homing
+        -- Use: Calls SetPlayerHomingRocketDisabled
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('disable_homing', function()
+        SetPlayerHomingRocketDisabled(PlayerId(), true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: disable_homing */
+    RegisterCommand('disable_homing', () => {
+      SetPlayerHomingRocketDisabled(PlayerId(), true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerHomingRocketDisabled
 
 ##### SetPlayerInvincible (hash unknown)
 - **Scope**: Client
@@ -6852,6 +6985,72 @@ RegisterCommand('rgb', () => {
   - Disable with same call using `false`.
 - **Reference**: https://docs.fivem.net/natives/?n=SetPlayerInvincibleKeepRagdollEnabled
 
+##### SetPlayerLeavePedBehind (0xFF300C7649724A0B / 0xAD8383FA)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_LEAVE_PED_BEHIND(Player player, BOOL toggle)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `toggle` (`bool`): Enable or disable leaving ped behind when entering vehicles.
+- **OneSync / Networking**: Local effect.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: leave_ped
+        -- Use: Calls SetPlayerLeavePedBehind
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('leave_ped', function()
+        SetPlayerLeavePedBehind(PlayerId(), true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: leave_ped */
+    RegisterCommand('leave_ped', () => {
+      SetPlayerLeavePedBehind(PlayerId(), true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerLeavePedBehind
+
+##### SetPlayerLockon (0x5C8B2F450EE4328E / 0x0B270E0F)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_LOCKON(Player player, BOOL toggle)`
+- **Purpose**: Toggle aim lock-on for the player.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `toggle` (`bool`): False prevents lock-on.
+- **OneSync / Networking**: Local preference.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: lockon_toggle
+        -- Use: Calls SetPlayerLockon
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('lockon_toggle', function()
+        SetPlayerLockon(PlayerId(), false)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: lockon_toggle */
+    RegisterCommand('lockon_toggle', () => {
+      SetPlayerLockon(PlayerId(), false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Affects only local targeting behavior.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerLockon
+
 ##### SetPlayerLockonRangeOverride (hash unknown)
 - **Scope**: Client
 - **Signature**: `void SET_PLAYER_LOCKON_RANGE_OVERRIDE(Player player, float range)`
@@ -6884,6 +7083,38 @@ RegisterCommand('rgb', () => {
 - **Caveats / Limitations**:
   - Only affects targeting; does not remove lock-on.
 - **Reference**: https://docs.fivem.net/natives/?n=SetPlayerLockonRangeOverride
+
+##### SetPlayerMayNotEnterAnyVehicle (0x1DE37BBF9E9CC14A / 0xAF7AFCC4)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_MAY_NOT_ENTER_ANY_VEHICLE(Player player)`
+- **Purpose**: Prevent the player from entering any vehicle.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player index.
+- **OneSync / Networking**: Must be invoked each frame.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_ban
+        -- Use: Calls SetPlayerMayNotEnterAnyVehicle
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_ban', function()
+        SetPlayerMayNotEnterAnyVehicle(PlayerId())
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_ban */
+    RegisterCommand('veh_ban', () => {
+      SetPlayerMayNotEnterAnyVehicle(PlayerId());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Needs to run continuously to remain effective.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerMayNotEnterAnyVehicle
 
 ##### SetPlayerMayOnlyEnterThisVehicle (hash unknown)
 - **Scope**: Client
@@ -7343,6 +7574,76 @@ RegisterCommand('rgb', () => {
   - Tint index must exist.
 - **Reference**: https://docs.fivem.net/natives/?n=SetPlayerParachuteTintIndex
 
+##### SetPlayerParachuteVariationOverride (0xD9284A8C0D48352C / 0x9254249D)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_PARACHUTE_VARIATION_OVERRIDE(Player player, int p1, Any p2, Any p3, BOOL p4)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `p1` (`int`): Usually 5.
+  - `p2` (`Any`): Unknown.
+  - `p3` (`Any`): Unknown.
+  - `p4` (`bool`): Usually false.
+- **OneSync / Networking**: Local cosmetic.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: chute_var
+        -- Use: Calls SetPlayerParachuteVariationOverride
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('chute_var', function()
+        SetPlayerParachuteVariationOverride(PlayerId(),5,0,0,false)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: chute_var */
+    RegisterCommand('chute_var', () => {
+      SetPlayerParachuteVariationOverride(PlayerId(),5,0,0,false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Parameters unverified.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerParachuteVariationOverride
+
+##### SetPlayerReserveParachuteModelOverride (0x0764486AEDE748DB)
+- **Scope**: Client
+- **Signature**: `void _SET_PLAYER_RESERVE_PARACHUTE_MODEL_OVERRIDE(Player player, Hash model)`
+- **Purpose**: Assign a custom model to the reserve parachute.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `model` (`Hash`): Model hash.
+- **OneSync / Networking**: Visual only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: res_model
+        -- Use: Calls SetPlayerReserveParachuteModelOverride
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('res_model', function()
+        SetPlayerReserveParachuteModelOverride(PlayerId(), `p_parachute_s`)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: res_model */
+    RegisterCommand('res_model', () => {
+      SetPlayerReserveParachuteModelOverride(PlayerId(), GetHashKey('p_parachute_s'));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Model must be loaded.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerReserveParachuteModelOverride
+
 ##### SetPlayerReserveParachutePackTintIndex (hash unknown)
 - **Scope**: Client
 - **Signature**: `void SET_PLAYER_RESERVE_PARACHUTE_PACK_TINT_INDEX(Player player, int index)`
@@ -7443,6 +7744,39 @@ RegisterCommand('rgb', () => {
 - **Caveats / Limitations**:
   - TODO(next-run): verify semantics.
 - **Reference**: https://docs.fivem.net/natives/?n=SetPlayerResetEvadeFlagRaised
+
+##### SetPlayerResetFlagPreferRearSeats (0x11D5F725F0E780E0 / 0x725C6174)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_RESET_FLAG_PREFER_REAR_SEATS(Player player, int flags)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `flags` (`int`): Seat selection flag.
+- **OneSync / Networking**: Local only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: rear_seat
+        -- Use: Calls SetPlayerResetFlagPreferRearSeats
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('rear_seat', function()
+        SetPlayerResetFlagPreferRearSeats(PlayerId(), 6)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: rear_seat */
+    RegisterCommand('rear_seat', () => {
+      SetPlayerResetFlagPreferRearSeats(PlayerId(), 6);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Flags 0–6 observed; semantics unclear.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerResetFlagPreferRearSeats
 
 ##### SetPlayerSimulateAiming (hash unknown)
 - **Scope**: Client
@@ -7581,6 +7915,71 @@ RegisterCommand('rgb', () => {
   - Behavior varies by animation set.
 - **Reference**: https://docs.fivem.net/natives/?n=SetPlayerStealthMovement
 
+##### SetPlayerStealthPerceptionModifier (0x4E9021C1FCDD507A / 0x3D26105F)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_STEALTH_PERCEPTION_MODIFIER(Player player, float value)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `value` (`float`): Modifier value.
+- **OneSync / Networking**: Local.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: stealth_perc
+        -- Use: Calls SetPlayerStealthPerceptionModifier
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('stealth_perc', function()
+        SetPlayerStealthPerceptionModifier(PlayerId(), 0.5)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: stealth_perc */
+    RegisterCommand('stealth_perc', () => {
+      SetPlayerStealthPerceptionModifier(PlayerId(), 0.5);
+    });
+    ```
+- **Caveats / Limitations**:
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerStealthPerceptionModifier
+
+##### SetPlayerTargetLevel (0x5702B917B99DB1CD / 0x772DA539)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_TARGET_LEVEL(int targetLevel)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `targetLevel` (`int`): Desired level.
+- **OneSync / Networking**: Local.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: target_level
+        -- Use: Calls SetPlayerTargetLevel
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('target_level', function()
+        SetPlayerTargetLevel(2)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: target_level */
+    RegisterCommand('target_level', () => {
+      SetPlayerTargetLevel(2);
+    });
+    ```
+- **Caveats / Limitations**:
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerTargetLevel
+
 ##### SetPlayerTargetingMode (hash unknown)
 - **Scope**: Client
 - **Signature**: `void SET_PLAYER_TARGETING_MODE(int mode)`
@@ -7647,6 +8046,39 @@ RegisterCommand('rgb', () => {
 - **Caveats / Limitations**:
   - Team logic must be implemented server-side.
 - **Reference**: https://docs.fivem.net/natives/?n=SetPlayerTeam
+
+##### SetPlayerUnderwaterTimeRemaining (0xA0D3E4F7AAFB7E78)
+- **Scope**: Client
+- **Signature**: `Any _SET_PLAYER_UNDERWATER_TIME_REMAINING(Player player, float percentage)`
+- **Purpose**: Locks remaining underwater breathing time.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player id.
+  - `percentage` (`float`): 0.0–100.0 percentage of bar.
+- **OneSync / Networking**: Local; not replicated.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: water_time
+        -- Use: Calls SetPlayerUnderwaterTimeRemaining
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('water_time', function()
+        SetPlayerUnderwaterTimeRemaining(PlayerId(), 50.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: water_time */
+    RegisterCommand('water_time', () => {
+      SetPlayerUnderwaterTimeRemaining(PlayerId(), 50.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Overrides natural underwater timer; conflicts with `SET_PED_MAX_TIME_UNDERWATER`.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerUnderwaterTimeRemaining
 
 ##### SetPlayerVehicleDamageModifier (hash unknown)
 - **Scope**: Client
@@ -9002,4 +9434,4 @@ RegisterCommand('rgb', () => {
 
 
 
-CONTINUE-HERE — 2025-09-11T06:21 — next: 13.2 Client Natives > Player category :: SetPlayerFallDistance
+CONTINUE-HERE — 2025-09-11T06:38 — next: 13.2 Client Natives > Recording category :: DisableRockstarEditorCameraChanges
