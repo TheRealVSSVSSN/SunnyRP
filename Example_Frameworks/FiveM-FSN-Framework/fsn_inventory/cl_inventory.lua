@@ -67,8 +67,7 @@ function fsn_CurrentWeight()
 			end
 		end
 	end
-	print('currently carrying '..weight)
-	return weight
+        return weight
 end
 function fsn_HasItem(item)	
 	for k,v in pairs(firstInventory) do
@@ -140,12 +139,13 @@ RegisterNUICallback( "viewData", function(data, cb)
 			end
 		end
 	end
-	SendNUIMessage({
-		action = 'data',
-		index = index,
-		name = name,
-		html = strang
-	})
+        SendNUIMessage({
+                action = 'data',
+                index = index,
+                name = name,
+                html = strang
+        })
+        cb('ok')
 end)
 
 --[[
@@ -173,24 +173,21 @@ function setItemOwner(shoptype , item)
 end
 
 function setItemPolice(armoryid , item)
-	if item.customData ~= nil then
-		print(item.customData.ammotype)
-		print(item.index)
-		if item.index == 'WEAPON_STUNGUN' or item.customData.ammotype ~= 'none' then
-			item.customData.PDIssued = Util.MakeString(6)
-			item.customData.Owner = 'Police: '..name
-		end
-	end
+        if item.customData ~= nil then
+                if item.index == 'WEAPON_STUNGUN' or item.customData.ammotype ~= 'none' then
+                        item.customData.PDIssued = Util.MakeString(6)
+                        item.customData.Owner = 'Police: '..name
+                end
+        end
 end
 
 function fsn_setDevWeapon(item)
-	print(item)
-	if item.customData ~= nil then
-		if item.index == 'weapon_stungun' or item.customData.ammotype ~= 'none' then
-			item.customData.Serial = 'DEV GUN'
-			item.customData.Owner = 'DEV: ' .. name
-		end
-	end
+        if item.customData ~= nil then
+                if item.index == 'weapon_stungun' or item.customData.ammotype ~= 'none' then
+                        item.customData.Serial = 'DEV GUN'
+                        item.customData.Owner = 'DEV: ' .. name
+                end
+        end
 end
 
 --[[
