@@ -430,7 +430,7 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Player | 248 | 65 | 183 | 2025-09-11 |
+| Player | 248 | 75 | 173 | 2025-09-11 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -2720,7 +2720,349 @@ ensure my_resource
 - **Caveats / Limitations**:
   - Requires entity handle; does not return the target.
 - **Reference**: https://docs.fivem.net/natives/?n=IsPlayerTargettingEntity
+##### IsPlayerTeleportActive (0x02B15662D7F8886F 0x3A11D118)
+- **Scope**: Client
+- **Signature**: `BOOL IsPlayerTeleportActive()`
+- **Purpose**: Determine if a teleport started with `StartPlayerTeleport` is in progress.
+- **Parameters / Returns**:
+  - **Returns**: `bool` `true` while teleport is active.
+- **OneSync / Networking**: Local check; server should manage remote teleports.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: waittp
+        -- Use: Waits for any active teleport to finish
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('waittp', function()
+        while IsPlayerTeleportActive() do
+            Wait(0)
+        end
+        print('Teleport complete')
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: waittp */
+    RegisterCommand('waittp', () => {
+      const tick = setTick(() => {
+        if (!IsPlayerTeleportActive()) {
+          console.log('Teleport complete');
+          clearTick(tick);
+        }
+      });
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only reflects local teleport state.
+- **Reference**: https://docs.fivem.net/natives/?n=IsPlayerTeleportActive
+
+##### IsPlayerWantedLevelGreater (0x238DB2A2C23EE9EF 0x589A2661)
+- **Scope**: Client
+- **Signature**: `BOOL IsPlayerWantedLevelGreater(Player player, int wantedLevel)`
+- **Purpose**: Check if a player's wanted level exceeds a threshold.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player handle.
+  - `wantedLevel` (`int`): Level to compare.
+  - **Returns**: `bool` `true` if current level is above the threshold.
+- **OneSync / Networking**: Call on the player owner for accurate results.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: wantedgt
+        -- Use: Tests if wanted level is greater than argument
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('wantedgt', function(_, args)
+        local lvl = tonumber(args[1]) or 0
+        print(IsPlayerWantedLevelGreater(PlayerId(), lvl))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: wantedgt */
+    RegisterCommand('wantedgt', (_, args) => {
+      const lvl = parseInt(args[0] ?? '0', 10);
+      console.log(IsPlayerWantedLevelGreater(PlayerId(), lvl));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Client view only; server should enforce wanted levels.
+- **Reference**: https://docs.fivem.net/natives/?n=IsPlayerWantedLevelGreater
+
+##### IsSpecialAbilityActive (0x3E5F7FC85D854E15 0x1B17E334)
+- **Scope**: Client
+- **Signature**: `BOOL IsSpecialAbilityActive(Player player)`
+- **Purpose**: Check if the player's special ability is currently active.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player handle.
+  - **Returns**: `bool` `true` when ability is active.
+- **OneSync / Networking**: Ability state is local; sync to others via events if needed.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: abilityactive
+        -- Use: Prints special ability state
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('abilityactive', function()
+        print(IsSpecialAbilityActive(PlayerId()))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: abilityactive */
+    RegisterCommand('abilityactive', () => {
+      console.log(IsSpecialAbilityActive(PlayerId()));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Some builds mention an unused parameter.
+- **Reference**: https://docs.fivem.net/natives/?n=IsSpecialAbilityActive
+
+##### IsSpecialAbilityEnabled (0xB1D200FE26AEF3CB 0xC01238CC)
+- **Scope**: Client
+- **Signature**: `BOOL IsSpecialAbilityEnabled(Player player)`
+- **Purpose**: Determine if the special ability is enabled for the player.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player handle.
+  - **Returns**: `bool` flag.
+- **OneSync / Networking**: State is local; server can enforce via abilities.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: abilityenabled
+        -- Use: Shows if special ability is enabled
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('abilityenabled', function()
+        print(IsSpecialAbilityEnabled(PlayerId()))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: abilityenabled */
+    RegisterCommand('abilityenabled', () => {
+      console.log(IsSpecialAbilityEnabled(PlayerId()));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Documentation notes an extra, undefined parameter.
+- **Reference**: https://docs.fivem.net/natives/?n=IsSpecialAbilityEnabled
+
+##### IsSpecialAbilityMeterFull (0x05A1FE504B7F2587 0x2E19D7F6)
+- **Scope**: Client
+- **Signature**: `BOOL IsSpecialAbilityMeterFull(Player player)`
+- **Purpose**: Check if the player's special ability meter is full.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player handle.
+  - **Returns**: `bool` `true` if meter is full.
+- **OneSync / Networking**: Meter value is local; replicate via events if required.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: abilityfull
+        -- Use: Prints if special ability meter is full
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('abilityfull', function()
+        print(IsSpecialAbilityMeterFull(PlayerId()))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: abilityfull */
+    RegisterCommand('abilityfull', () => {
+      console.log(IsSpecialAbilityMeterFull(PlayerId()));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Documentation notes an extra, undefined parameter.
+- **Reference**: https://docs.fivem.net/natives/?n=IsSpecialAbilityMeterFull
+
+##### IsSpecialAbilityUnlocked (0xC6017F6A6CDFA694 0xC9C75E82)
+- **Scope**: Client
+- **Signature**: `BOOL IsSpecialAbilityUnlocked(Hash playerModel)`
+- **Purpose**: Check if the special ability is unlocked for a player model.
+- **Parameters / Returns**:
+  - `playerModel` (`Hash`): Model hash to test.
+  - **Returns**: `bool` unlock state.
+- **OneSync / Networking**: Use model hash consistent with server setup.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: abilityunlocked
+        -- Use: Tests ability unlock for current ped
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('abilityunlocked', function()
+        local model = GetEntityModel(PlayerPedId())
+        print(IsSpecialAbilityUnlocked(model))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: abilityunlocked */
+    RegisterCommand('abilityunlocked', () => {
+      const model = GetEntityModel(PlayerPedId());
+      console.log(IsSpecialAbilityUnlocked(model));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only checks unlock status; does not activate ability.
+- **Reference**: https://docs.fivem.net/natives/?n=IsSpecialAbilityUnlocked
+
+##### IsSystemUiBeingDisplayed (0x5D511E3867C87139 0xE495B6DA)
+- **Scope**: Client
+- **Signature**: `BOOL IsSystemUiBeingDisplayed()`
+- **Purpose**: Detect if system UI (e.g., Rockstar overlays) is visible.
+- **Parameters / Returns**:
+  - **Returns**: `bool` `true` when UI overlays block gameplay.
+- **OneSync / Networking**: Local only; useful for pausing gameplay logic.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: sysui
+        -- Use: Prints system UI visibility
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('sysui', function()
+        print(IsSystemUiBeingDisplayed())
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: sysui */
+    RegisterCommand('sysui', () => {
+      console.log(IsSystemUiBeingDisplayed());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not specify which overlay is shown.
+- **Reference**: https://docs.fivem.net/natives/?n=IsSystemUiBeingDisplayed
+
+##### _0x0032A6DBA562C518 (0x0032A6DBA562C518 0x47CAB814)
+- **Scope**: Client
+- **Signature**: `void _0x0032A6DBA562C518()`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - None.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: native0032
+        -- Use: Calls the undocumented native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('native0032', function()
+        _0x0032A6DBA562C518()
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: native0032 */
+    RegisterCommand('native0032', () => {
+      global._0x0032A6DBA562C518();
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0x0032A6DBA562C518
+
+##### _0x237440E46D918649 (0x237440E46D918649)
+- **Scope**: Client
+- **Signature**: `void _0x237440E46D918649(Any p0)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `p0` (`any`): Unknown.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: native2374
+        -- Use: Demonstrates calling the native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('native2374', function()
+        _0x237440E46D918649(0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: native2374 */
+    RegisterCommand('native2374', () => {
+      global._0x237440E46D918649(0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0x237440E46D918649
+
+##### _0x2382AB11450AE7BA (0x2382AB11450AE7BA)
+- **Scope**: Client
+- **Signature**: `void _0x2382AB11450AE7BA(Any p0, Any p1)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `p0` (`any`): Unknown.
+  - `p1` (`any`): Unknown.
+- **OneSync / Networking**: Unknown replication behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: native2382
+        -- Use: Demonstrates calling the native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('native2382', function()
+        _0x2382AB11450AE7BA(0, 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: native2382 */
+    RegisterCommand('native2382', () => {
+      global._0x2382AB11450AE7BA(0, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_0x2382AB11450AE7BA
+
 ### Server Natives by Category
 
 
-CONTINUE-HERE — 2025-09-11T03:25:53+00:00 — next: 13.2 Client Natives > Player category :: IsPlayerTeleportActive
+CONTINUE-HERE — 2025-09-11T04:14:05+00:00 — next: 13.2 Client Natives > Player category :: _0x2F41A3BAE005E5FA
