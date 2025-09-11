@@ -177,7 +177,7 @@ AddEventHandler('fsn_police:armory:request', function(armory_id, policelevel)
     end
 end)
 
-RegisterServerEvent('fsn_police:armory:boughtOne')
+RegisterNetEvent('fsn_police:armory:boughtOne')
 AddEventHandler('fsn_police:armory:boughtOne', function(armory_id, item)
 	local a = armories[armory_id]
 	if a then
@@ -192,7 +192,7 @@ AddEventHandler('fsn_police:armory:boughtOne', function(armory_id, item)
 	end
 end)
 
-RegisterServerEvent('fsn_police:armory:closedArmory')
+RegisterNetEvent('fsn_police:armory:closedArmory')
 AddEventHandler('fsn_police:armory:closedArmory', function(armory_id)
 	local a = armories[armory_id]
 	if a then

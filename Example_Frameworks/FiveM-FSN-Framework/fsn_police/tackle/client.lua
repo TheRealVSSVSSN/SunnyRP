@@ -1,8 +1,8 @@
 local TackleTime = 1500 -- In milliseconds
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
-		Citizen.Wait(0)
+		Wait(0)
 		if IsControlPressed(0, 21) and IsControlJustReleased(0, 73) and fsn_PDDuty() then
 			if IsPedInAnyVehicle(PlayerPedId()) then
 				--TriggerEvent('chatMessage', 'Tackle', {255, 255, 255}, 'You cannot tackle someone in a vehicle')
@@ -13,7 +13,7 @@ Citizen.CreateThread(function()
 				SetPedToRagdollWithFall(PlayerPedId(), 1500, 2000, 0, ForwardVector, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
 
 				while IsPedRagdoll(PlayerPedId()) do
-					Citizen.Wait(0)
+					Wait(0)
 					for Key, Value in ipairs(GetTouchedPlayers()) do
 						if not Tackled[Value] then
 							Tackled[Value] = true

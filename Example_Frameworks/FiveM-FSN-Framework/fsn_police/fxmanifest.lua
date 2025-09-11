@@ -1,37 +1,39 @@
---[[/ :FSN: \]]--
-fx_version 'adamant'
+fx_version 'cerulean'
 game 'gta5'
+lua54 'yes'
 
-client_script '@fsn_main/cl_utils.lua'
-server_script '@fsn_main/sv_utils.lua'
-client_script '@fsn_main/server_settings/sh_settings.lua'
-server_script '@fsn_main/server_settings/sh_settings.lua'
-server_script '@mysql-async/lib/MySQL.lua'
---[[/ :FSN: \]]--
+shared_scripts {
+  '@fsn_main/server_settings/sh_settings.lua'
+}
 
-client_script 'client.lua'
-client_script 'dispatch.lua'
-server_script 'server.lua'
+client_scripts {
+  '@fsn_main/cl_utils.lua',
+  'client.lua',
+  'dispatch.lua',
+  'radar/client.lua',
+  'dispatch/client.lua',
+  'pedmanagement/client.lua',
+  'evidencelocker/client.lua',
+  'armory/cl_armory.lua',
+  'MDT/mdt_client.lua',
+  'tackle/client.lua',
+  'K9/client.lua'
+}
 
-client_script 'radar/client.lua'
-client_script 'dispatch/client.lua'
-client_script 'pedmanagement/client.lua'
-client_script 'evidencelocker/client.lua'
+server_scripts {
+  '@fsn_main/sv_utils.lua',
+  '@mysql-async/lib/MySQL.lua',
+  'server.lua',
+  'armory/sv_armory.lua',
+  'MDT/mdt_server.lua',
+  'tackle/server.lua',
+  'K9/server.lua',
+  'evidencelocker/server.lua'
+}
 
-client_script 'armory/cl_armory.lua'
-server_script 'armory/sv_armory.lua'
-
-client_script 'MDT/mdt_client.lua'
-server_script 'MDT/mdt_server.lua'
 ui_page 'MDT/gui/index.html'
 
-client_script 'tackle/client.lua'
-server_script 'tackle/server.lua'
-
-client_script 'K9/client.lua'
-server_script 'K9/server.lua'
-
-files({
+files {
   'MDT/gui/index.html',
   'MDT/gui/index.css',
   'MDT/gui/index.js',
@@ -43,13 +45,11 @@ files({
   'MDT/gui/images/icons/dmv.png',
   'MDT/gui/images/icons/warrants.png',
   'MDT/gui/images/pwr_icon.png'
-})
+}
 
-server_script 'evidencelocker/server.lua'
-
-exports({
+exports {
   'fsn_getIllegalItems',
   'fsn_PDDuty',
   'fsn_getPDLevel',
   'fsn_getCopAmt'
-})
+}

@@ -1,15 +1,14 @@
-amicop = false
-pdonduty = false ----------------- REMEMBER TO CHANGE THESE
-policelevel = 0
+local amicop = false
+local pdonduty = false -- player's duty status
+local policelevel = 0
 
-function showLoadingPrompt(showText, showTime, showType)
-  Citizen.CreateThread(function()
-    Citizen.Wait(0)
-    N_0xaba17d7ce615adbf("STRING") -- set type
-    AddTextComponentString(showText) -- sets the text
-    N_0xbd12f8228410d9b4(showType) -- show promt (types = 3)
-    Citizen.Wait(showTime) -- show time
-    N_0x10d373323e5b9c0d() -- remove promt
+local function showLoadingPrompt(showText, showTime, showType)
+  CreateThread(function()
+    BeginTextCommandBusyString("STRING")
+    AddTextComponentString(showText)
+    EndTextCommandBusyString(showType)
+    Wait(showTime)
+    RemoveLoadingPrompt()
   end)
 end
 
@@ -273,9 +272,9 @@ end
 ]]
 local pdCarBlips = {}
 
-Citizen.CreateThread(function()
+CreateThread(function()
   while true do
-    Citizen.Wait(4000)
+    Wait(4000)
     if pdonduty then
       for k, v in pairs(pdCarBlips) do
         if not DoesEntityExist(v.ent) or not IsVehicleDriveable(v.ent) then
@@ -287,9 +286,9 @@ Citizen.CreateThread(function()
   end
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
   while true do
-    Citizen.Wait(0)
+    Wait(0)
     if pdonduty then
       --[[
       for id = 0, 32 do
@@ -433,10 +432,10 @@ AddEventHandler('fsn_police:cuffs:startCuffed', function(srv_id)
 		SetEntityCoords(PlayerPedId(), GetOffsetFromEntityInWorldCoords(crimPed, 0.0, 0.45, 0.0))
 		while not HasAnimDictLoaded('mp_arrest_paired') do
 			RequestAnimDict('mp_arrest_paired')
-			Citizen.Wait(5)
+			Wait(5)
 		end
 		TaskPlayAnim(PlayerPedId(), "mp_arrest_paired", "crook_p2_back_right", 8.0, -8, -1, 32, 0, 0, 0, 0)
-		Citizen.Wait(3500)
+		Wait(3500)
 		cuffed = true
 	end
 end)
@@ -446,33 +445,33 @@ AddEventHandler('fsn_police:cuffs:startunCuffed', function(srv_id)
 	SetEntityHeading(PlayerPedId(), GetEntityHeading(crimPed))
 	SetEntityCoords(PlayerPedId(), GetOffsetFromEntityInWorldCoords(crimPed, 0.0, 0.45, 0.0))
 	DetachEntity(PlayerPedId(), true, false)
-	Citizen.Wait(2200)
+	Wait(2200)
 	cuffed = false
 	cuffed_hard = false
 	escorted = false
 	escorted_id = 0
-	Citizen.Wait(500)
+	Wait(500)
 	ClearPedTasks(PlayerPedId())
 end)
 RegisterNetEvent('fsn_police:cuffs:startCuffing')
 AddEventHandler('fsn_police:cuffs:startCuffing', function()
 	while not HasAnimDictLoaded('mp_arrest_paired') do
 		RequestAnimDict('mp_arrest_paired')
-		Citizen.Wait(5)
+		Wait(5)
 	end
 	TaskPlayAnim(PlayerPedId(), "mp_arrest_paired", "cop_p2_back_right", 8.0, -8, -1, 48, 0, 0, 0, 0)
-	Citizen.Wait(300)
+	Wait(300)
 	TriggerServerEvent('InteractSound_SV:PlayWithinDistance', 2, 'handcuffs', 1.0)
-	Citizen.Wait(2200)	
+	Wait(2200)	
 end)
 RegisterNetEvent('fsn_police:cuffs:startunCuffing')
 AddEventHandler('fsn_police:cuffs:startunCuffing', function()
 	while not HasAnimDictLoaded('mp_arresting') do
 		RequestAnimDict('mp_arresting')
-		Citizen.Wait(5)
+		Wait(5)
 	end
 	TaskPlayAnim(PlayerPedId(), "mp_arresting", "a_uncuff", 8.0, -8, -1, 48, 0, 0, 0, 0)
-	Citizen.Wait(2500)	
+	Wait(2500)	
 end)
 RegisterNetEvent('fsn_police:cuffs:toggleHard')
 AddEventHandler('fsn_police:cuffs:toggleHard', function()
@@ -512,19 +511,19 @@ end)
 DecorRegister("pd_cuff")
 DecorRegister("pd_cuff_hard")
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
-		Citizen.Wait(2500)
+		Wait(2500)
 		if cuffed and not cuffed_hard then
 			if IsPedRunning(PlayerPedId()) then
 				SetPedToRagdoll(PlayerPedId(), 1, 1000, 0, 0, 0, 0)
-				Citizen.Wait(math.random(2000,5000))
+				Wait(math.random(2000,5000))
 			end
 		end
 	end
 end)
-Citizen.CreateThread(function()
-	while true do Citizen.Wait(0)
+CreateThread(function()
+	while true do Wait(0)
 		if amicop and pdonduty then
 			for _, id in ipairs(GetActivePlayers()) do
 				if NetworkIsPlayerActive(id) then
@@ -566,9 +565,9 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
-		Citizen.Wait(0)
+		Wait(0)
 		-- cuff stuff
 		if cuffed then
 			DecorSetBool(PlayerPedId(), "pd_cuff", true)
@@ -656,7 +655,7 @@ Citizen.CreateThread(function()
 			end
 			while not HasAnimDictLoaded('mp_arresting') do
 				RequestAnimDict('mp_arresting')
-				Citizen.Wait(5)
+				Wait(5)
 			end
 			if not IsEntityPlayingAnim(PlayerPedId(), 'mp_arresting', 'idle', 3) and not IsPedRagdoll(PlayerPedId()) then
 				TaskPlayAnim(PlayerPedId(), 'mp_arresting', 'idle', 8.0, 1.0, -1, 49, 1.0, 0, 0, 0)
@@ -672,17 +671,17 @@ Citizen.CreateThread(function()
 end)
 
 --------------------------------------------- No wanted xx
-Citizen.CreateThread(function()
+CreateThread(function()
   while true do
-    Citizen.Wait(0)
+    Wait(0)
     local playerPed = PlayerPedId()
     local playerLocalisation = GetEntityCoords(playerPed)
     ClearAreaOfCops(playerLocalisation.x, playerLocalisation.y, playerLocalisation.z, 400.0)
   end
 end)
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
-      Citizen.Wait(0)
+      Wait(0)
 	  for i = 1, 12 do
 			EnableDispatchService(i, false)
 		end
@@ -708,4 +707,4 @@ function fsn_getIllegalItems()
   return IllegalItems
 end
 
-SetNuiFocus(true,true)
+SetNuiFocus(false,false)
