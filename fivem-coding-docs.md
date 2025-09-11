@@ -430,7 +430,7 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Player | 248 | 160 | 88 | 2025-09-11T05:21 |
+| Player | 248 | 171 | 77 | 2025-09-11T05:28 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -5961,7 +5961,380 @@ ensure my_resource
 - **Caveats / Limitations**:
   - Requires smoke trail enabled.
 - **Reference**: https://docs.fivem.net/natives/?n=SetPlayerParachuteSmokeTrailColor
+ 
+##### SetPlayerParachuteTintIndex (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_PARACHUTE_TINT_INDEX(Player player, int index)`
+- **Purpose**: Change the primary parachute's color.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player to modify.
+  - `index` (`int`): Tint index.
+  - **Returns**: None.
+- **OneSync / Networking**: Cosmetic; replicate to others when necessary.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: para_tint
+        -- Use: Calls SetPlayerParachuteTintIndex
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('para_tint', function()
+        SetPlayerParachuteTintIndex(PlayerId(), 3)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: para_tint */
+    RegisterCommand('para_tint', () => {
+      SetPlayerParachuteTintIndex(PlayerId(), 3);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Tint index must exist.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerParachuteTintIndex
+
+##### SetPlayerReserveParachutePackTintIndex (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_RESERVE_PARACHUTE_PACK_TINT_INDEX(Player player, int index)`
+- **Purpose**: Set tint for the reserve parachute pack.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player to modify.
+  - `index` (`int`): Tint index for reserve pack.
+  - **Returns**: None.
+- **OneSync / Networking**: Visual change; replicate if reserve pack is visible.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: res_pack_t
+        -- Use: Calls SetPlayerReserveParachutePackTintIndex
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('res_pack_t', function()
+        SetPlayerReserveParachutePackTintIndex(PlayerId(), 1)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: res_pack_t */
+    RegisterCommand('res_pack_t', () => {
+      SetPlayerReserveParachutePackTintIndex(PlayerId(), 1);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires reserve pack.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerReserveParachutePackTintIndex
+
+##### SetPlayerReserveParachuteTintIndex (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_RESERVE_PARACHUTE_TINT_INDEX(Player player, int index)`
+- **Purpose**: Change reserve parachute tint.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player to modify.
+  - `index` (`int`): Tint index.
+  - **Returns**: None.
+- **OneSync / Networking**: Cosmetic; replicate if needed.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: res_tint
+        -- Use: Calls SetPlayerReserveParachuteTintIndex
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('res_tint', function()
+        SetPlayerReserveParachuteTintIndex(PlayerId(), 2)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: res_tint */
+    RegisterCommand('res_tint', () => {
+      SetPlayerReserveParachuteTintIndex(PlayerId(), 2);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires reserve parachute equipped.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerReserveParachuteTintIndex
+
+##### SetPlayerResetEvadeFlagRaised (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_RESET_EVADE_FLAG_RAISED(Player player)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - **Returns**: None.
+- **OneSync / Networking**: Likely local; verify before using.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: reset_evade
+        -- Use: Calls SetPlayerResetEvadeFlagRaised
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('reset_evade', function()
+        SetPlayerResetEvadeFlagRaised(PlayerId())
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: reset_evade */
+    RegisterCommand('reset_evade', () => {
+      SetPlayerResetEvadeFlagRaised(PlayerId());
+    });
+    ```
+- **Caveats / Limitations**:
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerResetEvadeFlagRaised
+
+##### SetPlayerSimulateAiming (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_SIMULATE_AIMING(Player player, BOOL toggle)`
+- **Purpose**: Simulates the player aiming without input.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `toggle` (`bool`): Enable or disable.
+  - **Returns**: None.
+- **OneSync / Networking**: Local effect; remote players won't see unless synced by server.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: sim_aim
+        -- Use: Calls SetPlayerSimulateAiming
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('sim_aim', function()
+        SetPlayerSimulateAiming(PlayerId(), true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: sim_aim */
+    RegisterCommand('sim_aim', () => {
+      SetPlayerSimulateAiming(PlayerId(), true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Can desync if server expects real input.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerSimulateAiming
+
+##### SetPlayerSneakingNoiseMultiplier (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_SNEAKING_NOISE_MULTIPLIER(Player player, float multiplier)`
+- **Purpose**: Adjust how noisy the player is while sneaking.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player to adjust.
+  - `multiplier` (`float`): Noise multiplier.
+  - **Returns**: None.
+- **OneSync / Networking**: Local; not replicated automatically.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: sneak_noise
+        -- Use: Calls SetPlayerSneakingNoiseMultiplier
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('sneak_noise', function()
+        SetPlayerSneakingNoiseMultiplier(PlayerId(), 0.5)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: sneak_noise */
+    RegisterCommand('sneak_noise', () => {
+      SetPlayerSneakingNoiseMultiplier(PlayerId(), 0.5);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Multiplier < 1 reduces noise; > 1 increases.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerSneakingNoiseMultiplier
+
+##### SetPlayerSprint (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_SPRINT(Player player, BOOL toggle)`
+- **Purpose**: Enable or disable sprinting for the player.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player to affect.
+  - `toggle` (`bool`): Allow sprinting.
+  - **Returns**: None.
+- **OneSync / Networking**: Local; server should validate to prevent speed hacks.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: sprint_toggle
+        -- Use: Calls SetPlayerSprint
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('sprint_toggle', function()
+        SetPlayerSprint(PlayerId(), false)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: sprint_toggle */
+    RegisterCommand('sprint_toggle', () => {
+      SetPlayerSprint(PlayerId(), false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not affect stamina.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerSprint
+
+##### SetPlayerStealthMovement (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_STEALTH_MOVEMENT(Player player, BOOL toggle, BOOL p2)`
+- **Purpose**: Toggle stealth movement mode.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player to affect.
+  - `toggle` (`bool`): Enable or disable stealth.
+  - `p2` (`bool`): Unknown.
+  - **Returns**: None.
+- **OneSync / Networking**: Local; server should approve for gameplay impact.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: stealth
+        -- Use: Calls SetPlayerStealthMovement
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('stealth', function()
+        SetPlayerStealthMovement(PlayerId(), true, false)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: stealth */
+    RegisterCommand('stealth', () => {
+      SetPlayerStealthMovement(PlayerId(), true, false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Behavior varies by animation set.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerStealthMovement
+
+##### SetPlayerTargetingMode (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_TARGETING_MODE(int mode)`
+- **Purpose**: Set the player's aiming/targeting style.
+- **Parameters / Returns**:
+  - `mode` (`int`): Targeting mode.
+  - **Returns**: None.
+- **OneSync / Networking**: Local preference; no replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: target_mode
+        -- Use: Calls SetPlayerTargetingMode
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('target_mode', function()
+        SetPlayerTargetingMode(3)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: target_mode */
+    RegisterCommand('target_mode', () => {
+      SetPlayerTargetingMode(3);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Mode values depend on game settings.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerTargetingMode
+
+##### SetPlayerTeam (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_TEAM(Player player, int team)`
+- **Purpose**: Assign the player to a team.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `team` (`int`): Team index.
+  - **Returns**: None.
+- **OneSync / Networking**: Requires server authority to avoid desync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: join_team
+        -- Use: Calls SetPlayerTeam
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('join_team', function()
+        SetPlayerTeam(PlayerId(), 2)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: join_team */
+    RegisterCommand('join_team', () => {
+      SetPlayerTeam(PlayerId(), 2);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Team logic must be implemented server-side.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerTeam
+
+##### SetPlayerVehicleDamageModifier (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_VEHICLE_DAMAGE_MODIFIER(Player player, float modifier)`
+- **Purpose**: Modify damage dealt by the player's vehicle.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player controlling the vehicle.
+  - `modifier` (`float`): Damage multiplier.
+  - **Returns**: None.
+- **OneSync / Networking**: Server should validate modifier to prevent exploits.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_dmg
+        -- Use: Calls SetPlayerVehicleDamageModifier
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_dmg', function()
+        SetPlayerVehicleDamageModifier(PlayerId(), 2.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_dmg */
+    RegisterCommand('veh_dmg', () => {
+      SetPlayerVehicleDamageModifier(PlayerId(), 2.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Values above 1 increase damage.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerVehicleDamageModifier
 
 ### Server Natives by Category
 
-CONTINUE-HERE — 2025-09-11T05:21 — next: 13.2 Client Natives > Player category :: SetPlayerParachuteTintIndex
+CONTINUE-HERE — 2025-09-11T05:28 — next: 13.2 Client Natives > Player category :: SetPlayerVehicleDefenseModifier
