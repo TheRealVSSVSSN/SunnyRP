@@ -430,12 +430,13 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
+| Overall | 6442 | 361 | 6081 | 2025-09-11T23:32 |
 | Player | 248 | 248 | 0 | 2025-09-11T06:38 |
 | Recording | 17 | 17 | 0 | 2025-09-11T06:52 |
 | Replay | 6 | 6 | 0 | 2025-09-11T07:37 |
 | ACL | 10 | 10 | 0 | 2025-09-11T08:12 |
 | CFX | 50 | 50 | 0 | 2025-09-11T09:55 |
-| Vehicle | ? | 20 | ? | 2025-09-11T23:20 |
+| Vehicle | 751 | 30 | 721 | 2025-09-11T23:32 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -10787,6 +10788,355 @@ RegisterCommand('rgb', () => {
   - Does not fix mechanical damage; use `SetVehicleFixed` for full repair.
 - **Reference**: https://docs.fivem.net/natives/?n=ClearVehicleDamage
 
+##### ClearVehicleDecorations
+- **Scope**: Shared
+- **Signature(s)**: _Unavailable on current docs_
+- **Purpose**: Presumed to remove applied vehicle decorations or decals.
+- **Parameters / Returns**:
+  - **Unknown** — official documentation missing.
+- **OneSync / Networking**: Likely requires entity ownership for global effect.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Placeholder
+        -- Name: clear_decor
+        -- Use: calls undocumented native
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    ClearVehicleDecorations()
+    ```
+  - JavaScript:
+    ```javascript
+    /* Placeholder: clear_decor */
+    ClearVehicleDecorations();
+    ```
+- **Caveats / Limitations**:
+  - Not listed in public natives repository; behavior unverified.
+- **Reference**: https://docs.fivem.net/natives/?n=ClearVehicleDecorations
+  - TODO(next-run): verify semantics.
+
+##### ClearVehicleGeneratorAreaOfInterest
+- **Scope**: Shared
+- **Signature(s)**: `void CLEAR_VEHICLE_GENERATOR_AREA_OF_INTEREST()`
+- **Purpose**: Resumes normal vehicle generator spawning.
+- **Parameters / Returns**:
+  - None.
+- **OneSync / Networking**: Affects global cargen focus; no ownership needed.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: reset_cargen
+        -- Use: clears vehicle generator focus
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('reset_cargen', function()
+        ClearVehicleGeneratorAreaOfInterest()
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: reset_cargen */
+    RegisterCommand('reset_cargen', () => {
+      ClearVehicleGeneratorAreaOfInterest();
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires a previously set area via `SetVehicleGeneratorAreaOfInterest`.
+- **Reference**: https://docs.fivem.net/natives/?n=ClearVehicleGeneratorAreaOfInterest
+
+##### ClearVehiclePhoneExplosiveDevice
+- **Scope**: Shared
+- **Signature(s)**: `void _CLEAR_VEHICLE_PHONE_EXPLOSIVE_DEVICE()`
+- **Purpose**: Undocumented native; believed to remove a phone explosive from a vehicle.
+- **Parameters / Returns**:
+  - None.
+- **OneSync / Networking**: If it acts on a vehicle, caller should own the entity.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Placeholder
+        -- Name: clear_bomb
+        -- Use: removes phone explosive
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    _ClearVehiclePhoneExplosiveDevice()
+    ```
+  - JavaScript:
+    ```javascript
+    /* Placeholder: clear_bomb */
+    _ClearVehiclePhoneExplosiveDevice();
+    ```
+- **Caveats / Limitations**:
+  - Lacks official description.
+- **Reference**: https://docs.fivem.net/natives/?n=_CLEAR_VEHICLE_PHONE_EXPLOSIVE_DEVICE
+  - TODO(next-run): verify semantics.
+
+##### ClearVehicleRouteHistory
+- **Scope**: Shared
+- **Signature(s)**: `void CLEAR_VEHICLE_ROUTE_HISTORY(Vehicle vehicle)`
+- **Purpose**: Undocumented; likely resets internal route tracking for the vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target vehicle.
+- **OneSync / Networking**: Requires entity control on server for replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: clear_route
+        -- Use: clears vehicle route history
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('clear_route', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        ClearVehicleRouteHistory(veh)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: clear_route */
+    RegisterCommand('clear_route', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      ClearVehicleRouteHistory(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Behavior not documented.
+- **Reference**: https://docs.fivem.net/natives/?n=ClearVehicleRouteHistory
+  - TODO(next-run): verify semantics.
+
+##### CloseBombBayDoors
+- **Scope**: Shared
+- **Signature(s)**: `void CLOSE_BOMB_BAY_DOORS(Vehicle vehicle)`
+- **Purpose**: Closes an aircraft's bomb bay doors.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Aircraft with bomb bay.
+- **OneSync / Networking**: Caller must own the aircraft for network sync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: close_bay
+        -- Use: closes bomb bay doors
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('close_bay', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        CloseBombBayDoors(veh)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: close_bay */
+    RegisterCommand('close_bay', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      CloseBombBayDoors(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only affects aircraft equipped with bomb bays.
+- **Reference**: https://docs.fivem.net/natives/?n=CloseBombBayDoors
+
+##### ControlLandingGear
+- **Scope**: Shared
+- **Signature(s)**: `void CONTROL_LANDING_GEAR(Vehicle vehicle, int state)`
+- **Purpose**: Sets landing gear state for aircraft with retractable gear.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Aircraft handle.
+  - `state` (`int`): 0 deployed, 1 closing, 2 opening, 3 retracted.
+- **OneSync / Networking**: Requires entity control for replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: gear
+        -- Use: toggles landing gear
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('gear', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        ControlLandingGear(veh, tonumber(args[1]) or 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: gear */
+    RegisterCommand('gear', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      ControlLandingGear(veh, Number(args[0]) || 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Invalid states are ignored.
+- **Reference**: https://docs.fivem.net/natives/?n=ControlLandingGear
+
+##### CopyVehicleDamages
+- **Scope**: Shared
+- **Signature(s)**: `void COPY_VEHICLE_DAMAGES(Vehicle sourceVehicle, Vehicle targetVehicle)`
+- **Purpose**: Mirrors cosmetic damage from one vehicle to another.
+- **Parameters / Returns**:
+  - `sourceVehicle` (`Vehicle`): Vehicle to copy damage from.
+  - `targetVehicle` (`Vehicle`): Vehicle to apply damage to.
+- **OneSync / Networking**: Both vehicles must be networked and owned by caller on server.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: copy_dmg
+        -- Use: copies damage from the player's vehicle to a nearby one
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('copy_dmg', function()
+        local src = GetVehiclePedIsIn(PlayerPedId(), false)
+        local tgt = GetClosestVehicle(0.0, 0.0, 0.0, 5.0, 0, 70)
+        CopyVehicleDamages(src, tgt)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: copy_dmg */
+    RegisterCommand('copy_dmg', () => {
+      const src = GetVehiclePedIsIn(PlayerPedId(), false);
+      const tgt = GetClosestVehicle(0.0, 0.0, 0.0, 5.0, 0, 70);
+      CopyVehicleDamages(src, tgt);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Mechanical condition is not transferred.
+- **Reference**: https://docs.fivem.net/natives/?n=CopyVehicleDamages
+
+##### CreateMissionTrain
+- **Scope**: Shared
+- **Signature(s)**: `Vehicle CREATE_MISSION_TRAIN(int variation, float x, float y, float z, bool direction, bool isNetwork, bool netMissionEntity)`
+- **Purpose**: Spawns a mission-controlled train at given coordinates.
+- **Parameters / Returns**:
+  - `variation` (`int`): Train layout index.
+  - `x`, `y`, `z` (`float`): Spawn coordinates.
+  - `direction` (`bool`): Travel direction.
+  - `isNetwork` (`bool`): Create as networked entity.
+  - `netMissionEntity` (`bool`): Pin to script host.
+  - **Returns**: `Vehicle` handle or `0` on failure.
+- **OneSync / Networking**: Network flags must be true for cross-client visibility.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: createtrain
+        -- Use: spawns freight train variation
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('createtrain', function(_, args)
+        local pos = GetEntityCoords(PlayerPedId())
+        CreateMissionTrain(tonumber(args[1]) or 17, pos.x, pos.y, pos.z, true, true, true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: createtrain */
+    RegisterCommand('createtrain', (_src, args) => {
+      const pos = GetEntityCoords(PlayerPedId());
+      CreateMissionTrain(Number(args[0]) || 17, pos[0], pos[1], pos[2], true, true, true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Train models must be requested beforehand.
+- **Reference**: https://docs.fivem.net/natives/?n=CreateMissionTrain
+
+##### CreatePickUpRopeForCargobob
+- **Scope**: Shared
+- **Signature(s)**: `void CREATE_PICK_UP_ROPE_FOR_CARGOBOB(Vehicle cargobob, int state)`
+- **Purpose**: Deploys a hook or magnet from a Cargobob helicopter.
+- **Parameters / Returns**:
+  - `cargobob` (`Vehicle`): Cargobob handle.
+  - `state` (`int`): 0 hook, 1 magnet.
+- **OneSync / Networking**: Ownership required to sync rope state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: drop_hook
+        -- Use: deploys cargobob hook
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('drop_hook', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        CreatePickUpRopeForCargobob(veh, tonumber(args[1]) or 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: drop_hook */
+    RegisterCommand('drop_hook', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      CreatePickUpRopeForCargobob(veh, Number(args[0]) || 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only works on Cargobob helicopters.
+- **Reference**: https://docs.fivem.net/natives/?n=CreatePickUpRopeForCargobob
+
+##### CreateScriptVehicleGenerator
+- **Scope**: Shared
+- **Signature(s)**: `int CREATE_SCRIPT_VEHICLE_GENERATOR(float x, float y, float z, float heading, float p4, float p5, Hash modelHash, int p7, int p8, int p9, int p10, bool p11, bool p12, bool p13, bool p14, bool p15, int p16)`
+- **Purpose**: Defines a vehicle spawn point managed by script.
+- **Parameters / Returns**:
+  - `x`, `y`, `z` (`float`): Generator position.
+  - `heading` (`float`): Spawn heading.
+  - `p4`, `p5` (`float`): Unknown, commonly 5.0 and 3.0.
+  - `modelHash` (`Hash`): Vehicle model.
+  - `p7`–`p10` (`int`): Unknown, typically -1.
+  - `p11` (`bool`): Unknown, usually true.
+  - `p12`–`p13` (`bool`): Unknown flags, usually false.
+  - `p14` (`bool`): Unknown flag.
+  - `p15` (`bool`): Unknown, usually true.
+  - `p16` (`int`): Unknown, typically -1.
+  - **Returns**: `int` generator ID.
+- **OneSync / Networking**: Created vehicles need standard entity ownership for sync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: make_gen
+        -- Use: creates an adder generator at player position
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('make_gen', function()
+        local p = GetEntityCoords(PlayerPedId())
+        CreateScriptVehicleGenerator(p.x, p.y, p.z, 0.0, 5.0, 3.0, GetHashKey('adder'), -1, -1, -1, -1, true, false, false, false, true, -1)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: make_gen */
+    RegisterCommand('make_gen', () => {
+      const p = GetEntityCoords(PlayerPedId());
+      CreateScriptVehicleGenerator(p[0], p[1], p[2], 0.0, 5.0, 3.0, GetHashKey('adder'), -1, -1, -1, -1, true, false, false, false, true, -1);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Many parameters are undocumented.
+- **Reference**: https://docs.fivem.net/natives/?n=CreateScriptVehicleGenerator
+
 ### Server Natives by Category
 #### ACL
 
@@ -12686,4 +13036,4 @@ RegisterCommand('rgb', () => {
   - Only meaningful inside an event handler.
 - **Reference**: https://docs.fivem.net/natives/?n=WasEventCanceled
 
-CONTINUE-HERE — 2025-09-11T23:20 — next: Vehicle :: ClearVehicleDecorations
+CONTINUE-HERE — 2025-09-11T23:32 — next: Vehicle :: CreateVehicle
