@@ -1,21 +1,24 @@
---[[/	:FSN:	\]]--
-fx_version 'adamant'
+--[[/   :FSN:   \]]--
+fx_version 'cerulean'
 game 'gta5'
+lua54 'yes'
 
-client_script '@fsn_main/cl_utils.lua'
-server_script '@fsn_main/sv_utils.lua'
-client_script '@fsn_main/server_settings/sh_settings.lua'
-server_script '@fsn_main/server_settings/sh_settings.lua'
-server_script '@mysql-async/lib/MySQL.lua'
---[[/	:FSN:	\]]--
+shared_script '@fsn_main/server_settings/sh_settings.lua'
 
-client_script 'client.lua'
-client_script 'cl_desk.lua'
-server_script 'sv_desk.lua'
+client_scripts {
+  '@fsn_main/cl_utils.lua',
+  'client.lua',
+  'cl_desk.lua'
+}
 
-server_script 'server.lua'
+server_scripts {
+  '@fsn_main/sv_utils.lua',
+  '@mysql-async/lib/MySQL.lua',
+  'sv_desk.lua',
+  'server.lua'
+}
 
-exports({
+exports {
   'fsn_hasLicense',
   'fsn_getLicensePoints'
-})
+}
