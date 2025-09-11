@@ -434,7 +434,7 @@ ensure my_resource
 | Recording | 17 | 17 | 0 | 2025-09-11T06:52 |
 | Replay | 6 | 6 | 0 | 2025-09-11T07:37 |
 | ACL | 10 | 10 | 0 | 2025-09-11T08:12 |
-| CFX | ? | 46 | ? | 2025-09-11T09:19 |
+| CFX | 50 | 50 | 0 | 2025-09-11T09:55 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -11975,4 +11975,119 @@ RegisterCommand('rgb', () => {
 - **Reference**: https://docs.fivem.net/natives/?n=TriggerEventInternal
   - TODO(next-run): verify semantics.
 
-CONTINUE-HERE — 2025-09-11T09:19:29 — next: 13.3 Server Natives > CFX category :: VerifyPasswordHash
+##### TriggerLatentClientEvent
+- **Scope**: Server
+- **Signature(s)**: `void TRIGGER_LATENT_CLIENT_EVENT(string eventName, Player playerSrc, int bps, ...)`
+- **Purpose**: Sends a client event with bandwidth throttling for large payloads.
+- **Parameters / Returns**:
+  - `eventName` (`string`): Event to trigger.
+  - `playerSrc` (`Player`): Target player ID or `-1` for broadcast.
+  - `bps` (`int`): Bytes-per-second limit for transfer.
+  - `...` (varargs): Event payload.
+  - **Returns**: None.
+- **OneSync / Networking**: Respects routing buckets; data is fragmented according to `bps`.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: bigmsg; Use: sends large message slowly; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('bigmsg', function()
+        local data = string.rep('A', 200000)
+        TriggerLatentClientEvent('chat:addMessage', -1, 50000, { args = { '[BIG]', data } })
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: bigmsg */
+    RegisterCommand('bigmsg', () => {
+      const data = 'A'.repeat(200000);
+      TriggerLatentClientEvent('chat:addMessage', -1, 50000, { args: ['[BIG]', data] });
+    });
+    ```
+- **Caveats / Limitations**:
+  - Use moderate `bps` values to avoid congestion.
+- **Reference**: https://docs.fivem.net/natives/?n=TriggerLatentClientEvent
+
+##### TriggerLatentClientEventInternal
+- **Scope**: Server
+- **Signature(s)**: Not documented on official page.
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - **Returns**: None.
+- **OneSync / Networking**: Internal latent-event dispatcher.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Placeholder; Name: tlce_internal; Use: calls internal latent API; Created: 2025-09-11; By: VSSVSSN ]]
+    TriggerLatentClientEventInternal('event', 1, '', 0, 0)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Placeholder: tlce_internal */
+    TriggerLatentClientEventInternal('event', 1, '', 0, 0);
+    ```
+- **Caveats / Limitations**:
+  - Not intended for production; parameters may change.
+- **Reference**: https://docs.fivem.net/natives/?n=TriggerLatentClientEventInternal
+  - TODO(next-run): verify semantics.
+
+##### VerifyPasswordHash
+- **Scope**: Server
+- **Signature(s)**: `bool VERIFY_PASSWORD_HASH(string password, string hash)`
+- **Purpose**: Checks a plaintext password against a stored hash.
+- **Parameters / Returns**:
+  - `password` (`string`): Plain text input.
+  - `hash` (`string`): Hash generated via `GetPasswordHash`.
+  - **Returns**: `bool` match result.
+- **OneSync / Networking**: Server-only verification.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: checkpass; Use: verifies a password; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('checkpass', function(_, args)
+        local ok = VerifyPasswordHash(args[1] or '', args[2] or '')
+        print('Match:', ok)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: checkpass */
+    RegisterCommand('checkpass', (_src, args) => {
+      const ok = VerifyPasswordHash(args[0] || '', args[1] || '');
+      console.log('Match:', ok);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only hashes produced with `GetPasswordHash` are supported.
+- **Reference**: https://docs.fivem.net/natives/?n=VerifyPasswordHash
+
+##### WasEventCanceled
+- **Scope**: Shared
+- **Signature(s)**: `bool WAS_EVENT_CANCELED()`
+- **Purpose**: Determines whether the current event has been canceled via `CancelEvent`.
+- **Parameters / Returns**:
+  - **Returns**: `bool` cancellation status.
+- **OneSync / Networking**: Local to the executing context.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Event Handler; Name: example_evt; Use: checks if canceled; Created: 2025-09-11; By: VSSVSSN ]]
+    AddEventHandler('example', function()
+        if WasEventCanceled() then
+            print('Event was canceled')
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Event Handler: example_evt */
+    on('example', () => {
+      if (WasEventCanceled()) {
+        console.log('Event was canceled');
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only meaningful inside an event handler.
+- **Reference**: https://docs.fivem.net/natives/?n=WasEventCanceled
+
+CONTINUE-HERE — 2025-09-11T09:55:49 — next: none :: n/a
