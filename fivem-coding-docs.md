@@ -430,7 +430,7 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Player | 248 | 171 | 77 | 2025-09-11T05:28 |
+| Player | 248 | 196 | 52 | 2025-09-11T05:37 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -6335,6 +6335,845 @@ ensure my_resource
   - Values above 1 increase damage.
 - **Reference**: https://docs.fivem.net/natives/?n=SetPlayerVehicleDamageModifier
 
+##### SetPlayerVehicleDefenseModifier (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_VEHICLE_DEFENSE_MODIFIER(Player player, float modifier)`
+- **Purpose**: Adjusts the damage resistance of the player's current vehicle.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `modifier` (`float`): Defense multiplier, minimum 0.1.
+- **OneSync / Networking**: Local effect; server should validate values for remote players.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_def
+        -- Use: Calls SetPlayerVehicleDefenseModifier
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_def', function()
+        SetPlayerVehicleDefenseModifier(PlayerId(), 2.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_def */
+    RegisterCommand('veh_def', () => {
+      SetPlayerVehicleDefenseModifier(PlayerId(), 2.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Values below 0.1 are ignored.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerVehicleDefenseModifier
+
+##### SetPlayerWantedCentrePosition (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_WANTED_CENTRE_POSITION(Player player, Vector3 position, BOOL p2, BOOL p3)`
+- **Purpose**: Sets the center position used for police search behavior.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `position` (`Vector3`): World coordinates.
+  - `p2` (`bool`): Unknown flag.
+  - `p3` (`bool`): Unknown flag.
+- **OneSync / Networking**: Local change; server should manage wanted logic for all players.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: wanted_pos
+        -- Use: Calls SetPlayerWantedCentrePosition
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('wanted_pos', function()
+        local pos = GetEntityCoords(PlayerPedId())
+        SetPlayerWantedCentrePosition(PlayerId(), pos, false, false)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: wanted_pos */
+    RegisterCommand('wanted_pos', () => {
+      const pos = GetEntityCoords(PlayerPedId());
+      SetPlayerWantedCentrePosition(PlayerId(), pos, false, false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Flags `p2` and `p3` remain undocumented.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerWantedCentrePosition
+
+##### SetPlayerWantedLevel (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_WANTED_LEVEL(Player player, int wantedLevel, BOOL delayedResponse)`
+- **Purpose**: Sets the player's wanted level.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `wantedLevel` (`int`): Level 0-5.
+  - `delayedResponse` (`bool`): Toggle slower police response.
+- **OneSync / Networking**: Inform the server so other clients receive consistent wanted state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: wanted_lvl
+        -- Use: Calls SetPlayerWantedLevel
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('wanted_lvl', function()
+        SetPlayerWantedLevel(PlayerId(), 5, false)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: wanted_lvl */
+    RegisterCommand('wanted_lvl', () => {
+      SetPlayerWantedLevel(PlayerId(), 5, false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Wanted level over 5 is ignored.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerWantedLevel
+
+##### SetPlayerWantedLevelNoDrop (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_WANTED_LEVEL_NO_DROP(Player player, int wantedLevel, BOOL delayedResponse)`
+- **Purpose**: Sets wanted level without allowing it to decrease naturally.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `wantedLevel` (`int`): Level 0-5.
+  - `delayedResponse` (`bool`): Toggle slower police response.
+- **OneSync / Networking**: Sync via server to avoid mismatch.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: wanted_nodrop
+        -- Use: Calls SetPlayerWantedLevelNoDrop
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('wanted_nodrop', function()
+        SetPlayerWantedLevelNoDrop(PlayerId(), 5, false)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: wanted_nodrop */
+    RegisterCommand('wanted_nodrop', () => {
+      SetPlayerWantedLevelNoDrop(PlayerId(), 5, false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Wanted level remains until explicitly cleared.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerWantedLevelNoDrop
+
+##### SetPlayerWantedLevelNow (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_WANTED_LEVEL_NOW(Player player, BOOL p1)`
+- **Purpose**: Forces pending wanted level changes to apply immediately.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `p1` (`bool`): Unknown, usually false.
+- **OneSync / Networking**: Ensure server knows final level after forcing.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: wanted_now
+        -- Use: Calls SetPlayerWantedLevelNow
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('wanted_now', function()
+        SetPlayerWantedLevel(PlayerId(), 5, false)
+        SetPlayerWantedLevelNow(PlayerId(), false)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: wanted_now */
+    RegisterCommand('wanted_now', () => {
+      SetPlayerWantedLevel(PlayerId(), 5, false);
+      SetPlayerWantedLevelNow(PlayerId(), false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Second parameter purpose undocumented.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerWantedLevelNow
+
+##### SetPlayerWeaponDamageModifier (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_WEAPON_DAMAGE_MODIFIER(Player player, float modifier)`
+- **Purpose**: Scales weapon damage dealt by the player.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `modifier` (`float`): Damage multiplier, min 0.1.
+- **OneSync / Networking**: Local only; server should verify to prevent exploits.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: wep_dmg
+        -- Use: Calls SetPlayerWeaponDamageModifier
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('wep_dmg', function()
+        SetPlayerWeaponDamageModifier(PlayerId(), 2.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: wep_dmg */
+    RegisterCommand('wep_dmg', () => {
+      SetPlayerWeaponDamageModifier(PlayerId(), 2.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Values below 0.1 are ignored.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerWeaponDamageModifier
+
+##### SetPlayerWeaponDefenseModifier (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_PLAYER_WEAPON_DEFENSE_MODIFIER(Player player, float modifier)`
+- **Purpose**: Alters how much damage the player receives from weapons.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `modifier` (`float`): Defense multiplier.
+- **OneSync / Networking**: Local effect; server validation recommended.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: wep_def
+        -- Use: Calls SetPlayerWeaponDefenseModifier
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('wep_def', function()
+        SetPlayerWeaponDefenseModifier(PlayerId(), 2.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: wep_def */
+    RegisterCommand('wep_def', () => {
+      SetPlayerWeaponDefenseModifier(PlayerId(), 2.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Extreme values may produce unexpected results.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerWeaponDefenseModifier
+
+##### _SetPlayerWeaponDefenseModifier_2 (hash unknown)
+- **Scope**: Client
+- **Signature**: `void _SET_PLAYER_WEAPON_DEFENSE_MODIFIER_2(Player player, float modifier)`
+- **Purpose**: Secondary variant for weapon defense scaling.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `modifier` (`float`): Defense multiplier.
+- **OneSync / Networking**: Local; use cautiously as semantics are unclear.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: wep_def2
+        -- Use: Calls _SetPlayerWeaponDefenseModifier_2
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('wep_def2', function()
+        SetPlayerWeaponDefenseModifier_2(PlayerId(), 2.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: wep_def2 */
+    RegisterCommand('wep_def2', () => {
+      SetPlayerWeaponDefenseModifier_2(PlayerId(), 2.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Specific effects are undocumented.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayerWeaponDefenseModifier_2
+
+##### SetPoliceIgnorePlayer (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_POLICE_IGNORE_PLAYER(Player player, BOOL toggle)`
+- **Purpose**: Toggles whether police react to the player.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `toggle` (`bool`): True to ignore.
+- **OneSync / Networking**: Local effect; server should manage global wanted system.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: police_ignore
+        -- Use: Calls SetPoliceIgnorePlayer
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('police_ignore', function()
+        SetPoliceIgnorePlayer(PlayerId(), true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: police_ignore */
+    RegisterCommand('police_ignore', () => {
+      SetPoliceIgnorePlayer(PlayerId(), true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not clear existing wanted level.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPoliceIgnorePlayer
+
+##### SetPoliceRadarBlips (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_POLICE_RADAR_BLIPS(BOOL toggle)`
+- **Purpose**: Shows or hides police blips on the radar.
+- **Parameters / Returns**:
+  - `toggle` (`bool`): True to enable blips.
+- **OneSync / Networking**: Affects only local HUD.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: police_blips
+        -- Use: Calls SetPoliceRadarBlips
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('police_blips', function()
+        SetPoliceRadarBlips(true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: police_blips */
+    RegisterCommand('police_blips', () => {
+      SetPoliceRadarBlips(true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only affects map display.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPoliceRadarBlips
+
+##### SetRunSprintMultiplierForPlayer (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_RUN_SPRINT_MULTIPLIER_FOR_PLAYER(Player player, float multiplier)`
+- **Purpose**: Scales running speed.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `multiplier` (`float`): Speed multiplier up to 1.49.
+- **OneSync / Networking**: Local change; servers may enforce limits.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: runspeed
+        -- Use: Calls SetRunSprintMultiplierForPlayer
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('runspeed', function()
+        SetRunSprintMultiplierForPlayer(PlayerId(), 1.2)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: runspeed */
+    RegisterCommand('runspeed', () => {
+      SetRunSprintMultiplierForPlayer(PlayerId(), 1.2);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Values above 1.49 are ignored; cannot slow below default.
+- **Reference**: https://docs.fivem.net/natives/?n=SetRunSprintMultiplierForPlayer
+
+##### _SetSpecialAbility (hash unknown)
+- **Scope**: Client
+- **Signature**: `void _SET_SPECIAL_ABILITY(Player player, int p1)`
+- **Purpose**: Configures player-specific special ability state.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `p1` (`int`): Unknown value.
+- **OneSync / Networking**: Client-side; use carefully with custom ability systems.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: special_set
+        -- Use: Calls _SetSpecialAbility
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('special_set', function()
+        SetSpecialAbility(PlayerId(), 1)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: special_set */
+    RegisterCommand('special_set', () => {
+      SetSpecialAbility(PlayerId(), 1);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Parameters are not fully documented.
+- **Reference**: https://docs.fivem.net/natives/?n=SetSpecialAbility
+
+##### SetSpecialAbilityMultiplier (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_SPECIAL_ABILITY_MULTIPLIER(float multiplier)`
+- **Purpose**: Sets global multiplier for special ability usage.
+- **Parameters / Returns**:
+  - `multiplier` (`float`): Scaling factor.
+- **OneSync / Networking**: Local effect.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: special_mult
+        -- Use: Calls SetSpecialAbilityMultiplier
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('special_mult', function()
+        SetSpecialAbilityMultiplier(2.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: special_mult */
+    RegisterCommand('special_mult', () => {
+      SetSpecialAbilityMultiplier(2.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Affects all specials globally for the player.
+- **Reference**: https://docs.fivem.net/natives/?n=SetSpecialAbilityMultiplier
+
+##### SetSwimMultiplierForPlayer (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_SWIM_MULTIPLIER_FOR_PLAYER(Player player, float multiplier)`
+- **Purpose**: Adjusts swimming speed.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `multiplier` (`float`): Speed multiplier up to 1.49.
+- **OneSync / Networking**: Local effect; server may enforce limits.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: swimspeed
+        -- Use: Calls SetSwimMultiplierForPlayer
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('swimspeed', function()
+        SetSwimMultiplierForPlayer(PlayerId(), 1.2)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: swimspeed */
+    RegisterCommand('swimspeed', () => {
+      SetSwimMultiplierForPlayer(PlayerId(), 1.2);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Values above 1.49 are ignored.
+- **Reference**: https://docs.fivem.net/natives/?n=SetSwimMultiplierForPlayer
+
+##### SetWantedLevelDifficulty (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_WANTED_LEVEL_DIFFICULTY(Player player, float difficulty)`
+- **Purpose**: Modifies AI difficulty for pursuing police.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `difficulty` (`float`): Value up to 1.0.
+- **OneSync / Networking**: Local tuning; sync wanted behavior via server events.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: wanted_difficulty
+        -- Use: Calls SetWantedLevelDifficulty
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('wanted_difficulty', function()
+        SetWantedLevelDifficulty(PlayerId(), 0.5)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: wanted_difficulty */
+    RegisterCommand('wanted_difficulty', () => {
+      SetWantedLevelDifficulty(PlayerId(), 0.5);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Higher values increase police aggression.
+- **Reference**: https://docs.fivem.net/natives/?n=SetWantedLevelDifficulty
+
+##### _SetWantedLevelHiddenEvasionTime (hash unknown)
+- **Scope**: Client
+- **Signature**: `void _SET_WANTED_LEVEL_HIDDEN_EVASION_TIME(Player player, int wantedLevel, int lossTime)`
+- **Purpose**: Sets extra time required to lose a hidden wanted level.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `wantedLevel` (`int`): Level to adjust.
+  - `lossTime` (`int`): Time in seconds.
+- **OneSync / Networking**: Local; introduced in game build v2060.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: wanted_evasion
+        -- Use: Calls _SetWantedLevelHiddenEvasionTime
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('wanted_evasion', function()
+        SetWantedLevelHiddenEvasionTime(PlayerId(), 2, 30)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: wanted_evasion */
+    RegisterCommand('wanted_evasion', () => {
+      SetWantedLevelHiddenEvasionTime(PlayerId(), 2, 30);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only effective on supported game builds.
+- **Reference**: https://docs.fivem.net/natives/?n=SetWantedLevelHiddenEvasionTime
+
+##### SetWantedLevelMultiplier (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SET_WANTED_LEVEL_MULTIPLIER(float multiplier)`
+- **Purpose**: Globally scales the rate at which wanted level increases.
+- **Parameters / Returns**:
+  - `multiplier` (`float`): Scaling factor.
+- **OneSync / Networking**: Local; consider syncing with server.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: wanted_mult
+        -- Use: Calls SetWantedLevelMultiplier
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('wanted_mult', function()
+        SetWantedLevelMultiplier(0.5)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: wanted_mult */
+    RegisterCommand('wanted_mult', () => {
+      SetWantedLevelMultiplier(0.5);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Affects all wanted level changes for the player.
+- **Reference**: https://docs.fivem.net/natives/?n=SetWantedLevelMultiplier
+
+##### SimulatePlayerInputGait (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SIMULATE_PLAYER_INPUT_GAIT(Player player, float amount, int gaitType, float rotationSpeed, BOOL p4, BOOL p5)`
+- **Purpose**: Simulates player movement input, forcing walking without actual controls.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `amount` (`float`): Analog amount (0-1).
+  - `gaitType` (`int`): Duration/behavior code, -1 for continuous.
+  - `rotationSpeed` (`float`): Rotation speed while moving.
+  - `p4` (`bool`): Always true.
+  - `p5` (`bool`): Always false.
+- **OneSync / Networking**: Local movement; server must manage final position.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: gait
+        -- Use: Calls SimulatePlayerInputGait
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('gait', function()
+        SimulatePlayerInputGait(PlayerId(), 1.0, -1, 0.0, true, false)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: gait */
+    RegisterCommand('gait', () => {
+      SimulatePlayerInputGait(PlayerId(), 1.0, -1, 0.0, true, false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Must be called each frame to maintain movement.
+- **Reference**: https://docs.fivem.net/natives/?n=SimulatePlayerInputGait
+
+##### _SpecialAbilityActivate (hash unknown)
+- **Scope**: Client
+- **Signature**: `void _SPECIAL_ABILITY_ACTIVATE(Player player)`
+- **Purpose**: Activates the player's special ability.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+- **OneSync / Networking**: Local effect; ensure server agrees with ability activation.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: special_activate
+        -- Use: Calls _SpecialAbilityActivate
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('special_activate', function()
+        SpecialAbilityActivate(PlayerId())
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: special_activate */
+    RegisterCommand('special_activate', () => {
+      SpecialAbilityActivate(PlayerId());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Ability must be charged before activation.
+- **Reference**: https://docs.fivem.net/natives/?n=SpecialAbilityActivate
+
+##### SpecialAbilityChargeAbsolute (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SPECIAL_ABILITY_CHARGE_ABSOLUTE(Player player, int p1, BOOL p2)`
+- **Purpose**: Adds a fixed amount of charge to the special ability.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `p1` (`int`): Amount of charge.
+  - `p2` (`bool`): Typically true.
+- **OneSync / Networking**: Local; keep ability state synced with server.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: special_charge_abs
+        -- Use: Calls SpecialAbilityChargeAbsolute
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('special_charge_abs', function()
+        SpecialAbilityChargeAbsolute(PlayerId(), 10, true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: special_charge_abs */
+    RegisterCommand('special_charge_abs', () => {
+      SpecialAbilityChargeAbsolute(PlayerId(), 10, true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Accepts only certain charge values (5–30).
+- **Reference**: https://docs.fivem.net/natives/?n=SpecialAbilityChargeAbsolute
+
+##### SpecialAbilityChargeContinuous (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SPECIAL_ABILITY_CHARGE_CONTINUOUS(Player player, Ped p2)`
+- **Purpose**: Continuously charges ability based on a second entity.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `p2` (`Ped`): Source ped; often `PlayerPedId()`.
+- **OneSync / Networking**: Local; parameters are partly undocumented.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: special_charge_cont
+        -- Use: Calls SpecialAbilityChargeContinuous
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('special_charge_cont', function()
+        SpecialAbilityChargeContinuous(PlayerId(), PlayerPedId())
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: special_charge_cont */
+    RegisterCommand('special_charge_cont', () => {
+      SpecialAbilityChargeContinuous(PlayerId(), PlayerPedId());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Parameters beyond the ped are undocumented.
+- **Reference**: https://docs.fivem.net/natives/?n=SpecialAbilityChargeContinuous
+
+##### SpecialAbilityChargeLarge (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SPECIAL_ABILITY_CHARGE_LARGE(Player player, BOOL p1, BOOL p2)`
+- **Purpose**: Adds a large chunk to the special ability meter.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `p1` (`bool`): Typically true.
+  - `p2` (`bool`): Unknown.
+- **OneSync / Networking**: Local; state should sync with server.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: special_charge_large
+        -- Use: Calls SpecialAbilityChargeLarge
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('special_charge_large', function()
+        SpecialAbilityChargeLarge(PlayerId(), true, true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: special_charge_large */
+    RegisterCommand('special_charge_large', () => {
+      SpecialAbilityChargeLarge(PlayerId(), true, true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Exact charge amount is unspecified.
+- **Reference**: https://docs.fivem.net/natives/?n=SpecialAbilityChargeLarge
+
+##### SpecialAbilityChargeMedium (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SPECIAL_ABILITY_CHARGE_MEDIUM(Player player, BOOL p1, BOOL p2)`
+- **Purpose**: Adds a medium amount of special ability charge.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `p1` (`bool`): Typically true.
+  - `p2` (`bool`): Unknown.
+- **OneSync / Networking**: Local only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: special_charge_med
+        -- Use: Calls SpecialAbilityChargeMedium
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('special_charge_med', function()
+        SpecialAbilityChargeMedium(PlayerId(), true, true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: special_charge_med */
+    RegisterCommand('special_charge_med', () => {
+      SpecialAbilityChargeMedium(PlayerId(), true, true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Charging amounts are undocumented.
+- **Reference**: https://docs.fivem.net/natives/?n=SpecialAbilityChargeMedium
+
+##### SpecialAbilityChargeNormalized (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SPECIAL_ABILITY_CHARGE_NORMALIZED(Player player, float normalizedValue, BOOL p2)`
+- **Purpose**: Sets special ability charge using a normalized value.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `normalizedValue` (`float`): Charge 0.0–1.0.
+  - `p2` (`bool`): Typically true.
+- **OneSync / Networking**: Local; ensure server tracks final value.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: special_charge_norm
+        -- Use: Calls SpecialAbilityChargeNormalized
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('special_charge_norm', function()
+        SpecialAbilityChargeNormalized(PlayerId(), 1.0, true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: special_charge_norm */
+    RegisterCommand('special_charge_norm', () => {
+      SpecialAbilityChargeNormalized(PlayerId(), 1.0, true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Values outside 0.0–1.0 are clamped.
+- **Reference**: https://docs.fivem.net/natives/?n=SpecialAbilityChargeNormalized
+
+##### SpecialAbilityChargeOnMissionFailed (hash unknown)
+- **Scope**: Client
+- **Signature**: `void SPECIAL_ABILITY_CHARGE_ON_MISSION_FAILED(Player player)`
+- **Purpose**: Restores special ability when a mission fails.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+- **OneSync / Networking**: Local; sync ability state with server if used.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: special_charge_fail
+        -- Use: Calls SpecialAbilityChargeOnMissionFailed
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('special_charge_fail', function()
+        SpecialAbilityChargeOnMissionFailed(PlayerId())
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: special_charge_fail */
+    RegisterCommand('special_charge_fail', () => {
+      SpecialAbilityChargeOnMissionFailed(PlayerId());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Amount of restored charge is unspecified.
+- **Reference**: https://docs.fivem.net/natives/?n=SpecialAbilityChargeOnMissionFailed
+
 ### Server Natives by Category
 
-CONTINUE-HERE — 2025-09-11T05:28 — next: 13.2 Client Natives > Player category :: SetPlayerVehicleDefenseModifier
+
+
+CONTINUE-HERE — 2025-09-11T05:37 — next: 13.2 Client Natives > Player category :: SpecialAbilityChargeSmall
