@@ -432,7 +432,7 @@ ensure my_resource
 |----------|------:|-----:|----------:|--------------|
 | Player | 248 | 248 | 0 | 2025-09-11T06:38 |
 | Recording | 17 | 17 | 0 | 2025-09-11T06:52 |
-| Replay | 6 | 0 | 6 | 2025-09-11T06:52 |
+| Replay | 6 | 6 | 0 | 2025-09-11T07:37 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -9991,5 +9991,203 @@ RegisterCommand('rgb', () => {
   - Effect lasts one frame only.
 - **Reference**: https://docs.fivem.net/natives/?n=StopRecordingThisFrame
 
+#### Replay
+
+##### ActivateRockstarEditor (0x49DA8145672B2725)
+- **Scope**: Client
+- **Signature**: `void _ACTIVATE_ROCKSTAR_EDITOR()`
+- **Purpose**: Activates the Rockstar Editor mode.
+- **Parameters / Returns**:
+  - None.
+- **OneSync / Networking**: Local operation; no server sync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: editor_start
+        -- Use: Opens Rockstar Editor
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('editor_start', function()
+        ActivateRockstarEditor()
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: editor_start */
+    RegisterCommand('editor_start', () => {
+      ActivateRockstarEditor();
+    });
+    ```
+- **Caveats / Limitations**:
+  - Screen fades out; call `DoScreenFadeIn` after leaving.
+- **Reference**: https://docs.fivem.net/natives/?n=ActivateRockstarEditor
+
+##### IsInteriorRenderingDisabled (0x95AB8B5C992C7B58)
+- **Scope**: Client
+- **Signature**: `BOOL _IS_INTERIOR_RENDERING_DISABLED()`
+- **Purpose**: Reports whether interior rendering is disabled.
+- **Parameters / Returns**:
+  - **Returns**: `bool` status.
+- **OneSync / Networking**: Local check; no replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: interior_disabled
+        -- Use: Prints interior rendering status
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('interior_disabled', function()
+        print(IsInteriorRenderingDisabled())
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: interior_disabled */
+    RegisterCommand('interior_disabled', () => {
+      console.log(IsInteriorRenderingDisabled());
+    });
+    ```
+- **Caveats / Limitations**:
+  - When true, normal interiors are invisible.
+- **Reference**: https://docs.fivem.net/natives/?n=IsInteriorRenderingDisabled
+
+##### _0x5AD3932DAEB1E5D3
+- **Scope**: Client
+- **Signature**: `void _0x5AD3932DAEB1E5D3()`
+- **Purpose**: Undocumented/unclear on official docs
+- **Parameters / Returns**:
+  - None.
+- **OneSync / Networking**: Local effect.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: replay_disable_render
+        -- Use: Calls 0x5AD3932DAEB1E5D3
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('replay_disable_render', function()
+        _0x5AD3932DAEB1E5D3()
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: replay_disable_render */
+    RegisterCommand('replay_disable_render', () => {
+      _0x5AD3932DAEB1E5D3();
+    });
+    ```
+- **Caveats / Limitations**:
+  - Native disables certain rendering; details unknown.
+  - TODO(next-run): verify semantics
+- **Reference**: https://docs.fivem.net/natives/?n=0x5AD3932DAEB1E5D3
+
+##### _0x7E2BD3EF6C205F09
+- **Scope**: Client
+- **Signature**: `void _0x7E2BD3EF6C205F09(char* p0, BOOL p1)`
+- **Purpose**: Undocumented/unclear on official docs
+- **Parameters / Returns**:
+  - `p0` (`string`): Unknown filter name.
+  - `p1` (`bool`): Unknown flag.
+- **OneSync / Networking**: Local only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: replay_filter
+        -- Use: Calls 0x7E2BD3EF6C205F09
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('replay_filter', function()
+        _0x7E2BD3EF6C205F09("No_Filter", true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: replay_filter */
+    RegisterCommand('replay_filter', () => {
+      _0x7E2BD3EF6C205F09("No_Filter", true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Known to do nothing; may be internal stub.
+- **Reference**: https://docs.fivem.net/natives/?n=0x7E2BD3EF6C205F09
+
+##### _0xE058175F8EAFE79A
+- **Scope**: Client
+- **Signature**: `void _0xE058175F8EAFE79A(BOOL p0)`
+- **Purpose**: Undocumented/unclear on official docs
+- **Parameters / Returns**:
+  - `p0` (`bool`): Unknown.
+- **OneSync / Networking**: Local only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: replay_toggle
+        -- Use: Calls 0xE058175F8EAFE79A
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('replay_toggle', function()
+        _0xE058175F8EAFE79A(true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: replay_toggle */
+    RegisterCommand('replay_toggle', () => {
+      _0xE058175F8EAFE79A(true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Effect unknown.
+  - TODO(next-run): verify semantics
+- **Reference**: https://docs.fivem.net/natives/?n=0xE058175F8EAFE79A
+
+##### ResetEditorValues (0x3353D13F09307691)
+- **Scope**: Client
+- **Signature**: `void _RESET_EDITOR_VALUES()`
+- **Purpose**: Clears internal Rockstar Editor state.
+- **Parameters / Returns**:
+  - None.
+- **OneSync / Networking**: Local.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: editor_reset
+        -- Use: Resets Rockstar Editor values
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('editor_reset', function()
+        ResetEditorValues()
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: editor_reset */
+    RegisterCommand('editor_reset', () => {
+      ResetEditorValues();
+    });
+    ```
+- **Caveats / Limitations**:
+  - Affects local recording flags.
+- **Reference**: https://docs.fivem.net/natives/?n=ResetEditorValues
+
+
 ### Server Natives by Category
-CONTINUE-HERE — 2025-09-11T06:52:44 — next: 13.2 Client Natives > Replay category :: ActivateRockstarEditor
+CONTINUE-HERE — 2025-09-11T07:38:17 — next: 13.3 Server Natives > ACL category :: AddAce
