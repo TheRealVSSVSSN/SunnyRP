@@ -34,79 +34,77 @@ local config = {
 	}
 }
 
-RegisterServerEvent('fsn_gangs:request')
-AddEventHandler('fsn_gangs:request', function()
-	TriggerClientEvent('fsn_gangs:recieve', source, config)
+RegisterNetEvent('fsn_gangs:request', function()
+        local src = source
+        TriggerClientEvent('fsn_gangs:recieve', src, config)
 end)
 
-RegisterServerEvent('fsn_gangs:inventory:request')
-AddEventHandler('fsn_gangs:inventory:request', function(key)
-	if config[key] then
-		local g = config[key]
-		
-	end
+RegisterNetEvent('fsn_gangs:inventory:request', function(key)
+        local src = source
+        local g = config[key]
+        if not g then return end
+        -- inventory logic placeholder
 end)
 
-RegisterServerEvent('fsn_gangs:tryTakeOver')
-AddEventHandler('fsn_gangs:tryTakeOver', function(key)
-	if config[key] then
-		local g = config[key]
-		local online_members = {}
-		for _,m in pairs(g.members) do
-			if export['fsn_main']:fsn_GetPlayerFromCharacterId(m.id) and NetworkIsPlayerActive(fsn_GetPlayerFromCharacterId(m.id)) then
-				table.insert(online_members, #online_members+1, export['fsn_main']:fsn_GetPlayerFromCharacterId(m.id))
-			end
-		end
-		if #online_members < script.required_online then
-			TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'Not enough gang members online'})
-			return
-		end
-		if not g.takeover.ongoing then
+RegisterNetEvent('fsn_gangs:tryTakeOver', function(key)
+        local src = source
+        local g = config[key]
+        if not g then return end
 
-		else
-			TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'Somebody is already doing a takeover'})
-			return
-		end
-	end
+        local online_members = {}
+        for _, m in pairs(g.members) do
+                local ply = exports['fsn_main']:fsn_GetPlayerFromCharacterId(m.id)
+                if ply and NetworkIsPlayerActive(ply) then
+                        table.insert(online_members, ply)
+                end
+        end
+
+        if #online_members < script.required_online then
+                TriggerClientEvent('mythic_notify:client:SendAlert', src, { type = 'error', text = 'Not enough gang members online'})
+                return
+        end
+
+        if g.takeover.ongoing then
+                TriggerClientEvent('mythic_notify:client:SendAlert', src, { type = 'error', text = 'Somebody is already doing a takeover'})
+                return
+        end
+
+        g.takeover.ongoing = true
 end)
 
-RegisterServerEvent('fsn_gangs:garage:enter')
-AddEventHandler('fsn_gangs:garage:enter', function(key, mdl, plate)
-	if config[key] then
-		local g = config[key]
-		if not g.interior.car then	
-			g.interior.car = {
-				model = mdl,
-				plate = plate
-			}
-			TriggerClientEvent('fsn_gangs:hideout:enter', source, key, config[key])
-		else	
-			TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'There is already a car in the garage.'})
-		end
-	end
+RegisterNetEvent('fsn_gangs:garage:enter', function(key, mdl, plate)
+        local src = source
+        local g = config[key]
+        if not g then return end
+        if not g.interior.car then
+                g.interior.car = {
+                        model = mdl,
+                        plate = plate
+                }
+                TriggerClientEvent('fsn_gangs:hideout:enter', src, key, g)
+        else
+                TriggerClientEvent('mythic_notify:client:SendAlert', src, { type = 'error', text = 'There is already a car in the garage.'})
+        end
 end)
 
-RegisterServerEvent('fsn_gangs:hideout:enter')
-AddEventHandler('fsn_gangs:hideout:enter', function(key)
-	if config[key] then
-		local g = config[key]
-	 	-- add check for if char is in gang
-		TriggerClientEvent('fsn_gangs:hideout:enter', source, key, config[key])
-		-- else spawn outside
-	else
-		TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'No gang: '..key})
-	end
+RegisterNetEvent('fsn_gangs:hideout:enter', function(key)
+        local src = source
+        local g = config[key]
+        if not g then
+                TriggerClientEvent('mythic_notify:client:SendAlert', src, { type = 'error', text = 'No gang: '..tostring(key)})
+                return
+        end
+        -- add check for if char is in gang
+        TriggerClientEvent('fsn_gangs:hideout:enter', src, key, g)
 end)
-RegisterServerEvent('fsn_gangs:hideout:leave')
-AddEventHandler('fsn_gangs:hideout:leave', function(key, incar)
-	if config[key] then
-		local g = config[key]
-		if incar then
-			-- do car shenanigans
-			TriggerClientEvent('fsn_gangs:hideout:leave', source, g.interior.car.plate)
-			g.interior.car = false
-		else
-			TriggerClientEvent('fsn_gangs:hideout:leave', source)
-		end
-	end
+RegisterNetEvent('fsn_gangs:hideout:leave', function(key, incar)
+        local src = source
+        local g = config[key]
+        if not g then return end
+        if incar then
+                TriggerClientEvent('fsn_gangs:hideout:leave', src, g.interior.car and g.interior.car.plate)
+                g.interior.car = false
+        else
+                TriggerClientEvent('fsn_gangs:hideout:leave', src)
+        end
 end)
