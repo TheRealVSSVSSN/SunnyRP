@@ -549,6 +549,47 @@ ensure my_resource
 - **Reference**: https://docs.fivem.net/natives/?_0x6E31E993
   - TODO(next-run): verify signature and hash against official docs.
 
+##### GetPlayerServerId (hash unknown)
+- **Scope**: Shared
+- **Signature**: `int GetPlayerServerId(Player player)`
+- **Purpose**: Retrieve the server ID associated with a given player slot.
+- **Parameters / Returns**:
+  - `player` (`Player`): slot or client index.
+  - **Returns**: `int` server ID for network events.
+- **OneSync / Networking**: Server IDs are required when sending events or referencing players across network boundaries; no entity ownership needed.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: myid
+        -- Use: Prints the caller's server ID
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('myid', function()
+        local id = GetPlayerServerId(PlayerId()) -- convert client slot to server ID
+        print(('Your server ID is %d'):format(id))
+    end)
+    ```
+
+  - JavaScript:
+
+    ```javascript
+    // client/main.js
+    RegisterCommand('myid', () => {
+      const id = GetPlayerServerId(PlayerId()); // convert client slot to server ID
+      console.log(`Your server ID is ${id}`);
+    });
+    ```
+
+- **Caveats / Limitations**:
+  - Returns 0 if the player does not exist.
+- **Reference**: https://docs.fivem.net/natives/?n=GetPlayerServerId
+  - TODO(next-run): verify signature and hash against official docs.
+
+
 ### Server Natives by Category
 
-CONTINUE-HERE — 2025-09-11T03:00:00+00:00 — next: continue 13.2 Client Natives > Player category with GetPlayerServerId
+CONTINUE-HERE — 2025-09-11T02:42:45+00:00 — next: continue 13.2 Client Natives > Player category with GetPlayerFromServerId
