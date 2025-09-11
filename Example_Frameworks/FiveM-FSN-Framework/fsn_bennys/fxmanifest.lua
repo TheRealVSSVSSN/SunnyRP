@@ -1,23 +1,15 @@
-fx_version 'bodacious'
-games { 'gta5' }
+fx_version 'cerulean'
+game 'gta5'
 
+lua54 'yes'
 
 description 'Benny Tuning for the server'
 
---[[/	:FSN:	\]]--
-client_scripts { 
-    '@fsn_main/cl_utils.lua',
-    '@fsn_main/server_settings/sh_settings.lua'
-}
-server_scripts { 
-    '@fsn_main/sv_utils.lua',
-    '@fsn_main/server_settings/sh_settings.lua',
-    '@mysql-async/lib/MySQL.lua'
-}
---[[/	:FSN:	\]]--
+shared_script '@fsn_main/server_settings/sh_settings.lua'
 
 client_scripts {
+    '@fsn_main/cl_utils.lua',
     'menu.lua',
-    'cl_config.lua',	
-    'cl_bennys.lua',
+    'cl_config.lua',
+    'cl_bennys.lua'
 }

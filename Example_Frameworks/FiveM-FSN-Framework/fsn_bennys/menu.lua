@@ -223,12 +223,12 @@ function Menu:addButton(name, args)
 	button.name = name 
 	button.selected = false
 	button.sprite = nil
-	if args ~= nil then
-		if not type(args) == 'table' then
-			args = {args}
-		end
-		button.args = args
-	end
+        if args ~= nil then
+                if type(args) ~= 'table' then
+                        args = {args}
+                end
+                button.args = args
+        end
 	table.insert(self.buttons, button)
 	return self.buttons[#self.buttons]
 end
@@ -237,12 +237,12 @@ function Menu:addPurchase(name,price,info,args)
 	local button = {}
 	button.name = name 
 	button.selected = false
-	if args ~= nil then
-		if not type(args) == 'table' then
-			args = {args}
-		end
-		button.args = args
-	end
+        if args ~= nil then
+                if type(args) ~= 'table' then
+                        args = {args}
+                end
+                button.args = args
+        end
 	button.price = price or 0
 	button.purchased = false
 	button.sprite = nil
@@ -274,12 +274,12 @@ function Menu:addCheckbox(name, b)
 end
 
 function Menu:removeButton(button)
-	for i,btn in pairs(self.buttons) do
-		if btn == button then
-			buttons[i] = nil
-			break
-		end
-	end
+        for i,btn in pairs(self.buttons) do
+                if btn == button then
+                        self.buttons[i] = nil
+                        break
+                end
+        end
 end
 
 
