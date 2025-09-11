@@ -5,39 +5,39 @@
     
 -------------------------------------------------------------------------*/
 
-var resourceName = ""; 
-var radarEnabled = false; 
-var targets = []; 
+let resourceName = "";
+let radarEnabled = false;
+const targets = {};
 
-$( function() {
+$(document).ready(() => {
     radarInit();
 
-    var radarContainer = $( "#policeradar" );
+    const radarContainer = $("#policeradar");
 
-    var fwdArrowFront = radarContainer.find( ".fwdarrowfront" );
-    var fwdArrowBack = radarContainer.find( ".fwdarrowback" );
-    var bwdArrowFront = radarContainer.find( ".bwdarrowfront" );
-    var bwdArrowBack = radarContainer.find( ".bwdarrowback" );
+    const fwdArrowFront = radarContainer.find(".fwdarrowfront");
+    const fwdArrowBack = radarContainer.find(".fwdarrowback");
+    const bwdArrowFront = radarContainer.find(".bwdarrowfront");
+    const bwdArrowBack = radarContainer.find(".bwdarrowback");
 
-    var fwdSame = radarContainer.find( ".fwdsame" );
-    var fwdOpp = radarContainer.find( ".fwdopp" );
-    var fwdXmit = radarContainer.find( ".fwdxmit" );
+    const fwdSame = radarContainer.find(".fwdsame");
+    const fwdOpp = radarContainer.find(".fwdopp");
+    const fwdXmit = radarContainer.find(".fwdxmit");
 
-    var bwdSame = radarContainer.find( ".bwdsame" );
-    var bwdOpp = radarContainer.find( ".bwdopp" );
-    var bwdXmit = radarContainer.find( ".bwdxmit" );
+    const bwdSame = radarContainer.find(".bwdsame");
+    const bwdOpp = radarContainer.find(".bwdopp");
+    const bwdXmit = radarContainer.find(".bwdxmit");
 
-    var radarRCContainer = $( "#policeradarrc" ); 
+    const radarRCContainer = $("#policeradarrc");
 
-    window.addEventListener( 'message', function( event ) {
-        var item = event.data;
+    window.addEventListener('message', (event) => {
+        const item = event.data;
 
-        if ( item.resourcename ) {
+        if (item.resourcename) {
             resourceName = item.resourcename;
         }
 
-        if ( item.toggleradar ) {
-            radarEnabled = !radarEnabled; 
+        if (item.toggleradar) {
+            radarEnabled = !radarEnabled;
             radarContainer.fadeToggle();
         }
 
@@ -46,151 +46,152 @@ $( function() {
             radarContainer.fadeOut();
         }
 
-        if ( item.hideradar ) {
+        if (item.hideradar) {
             radarContainer.fadeOut();
-        } else if ( item.hideradar == false ) {
+        } else if (item.hideradar === false) {
             radarContainer.fadeIn();
         }
 
-
-
-        if ( item.frontchange ) {
-            $(".frontant").empty();
-            $(".frontant").html(item.plate);
+        if (item.frontchange) {
+            $(".frontant").empty().html(item.plate);
         }
 
-        if ( item.rearchange ) {
-            $(".rearant").empty();
-            $(".rearant").html(item.plate);
+        if (item.rearchange) {
+            $(".rearant").empty().html(item.plate);
         }
 
-
-        if ( item.patrolspeed ) {
-            updateSpeed( "patrolspeed", item.patrolspeed ); 
+        if (item.patrolspeed) {
+            updateSpeed("patrolspeed", item.patrolspeed);
         }
 
-        if ( item.fwdspeed ) {
-            updateSpeed( "fwdspeed", item.fwdspeed ); 
+        if (item.fwdspeed) {
+            updateSpeed("fwdspeed", item.fwdspeed);
         }
 
-        if ( item.fwdfast ) {
-            updateSpeed( "fwdfast", item.fwdfast ); 
+        if (item.fwdfast) {
+            updateSpeed("fwdfast", item.fwdfast);
         }
 
-        if ( item.lockfwdfast == true || item.lockfwdfast == false ) {
-            lockSpeed( "fwdfast", item.lockfwdfast )
+        if (item.lockfwdfast === true || item.lockfwdfast === false) {
+            lockSpeed("fwdfast", item.lockfwdfast);
         }
 
-        if ( item.bwdspeed ) {
-            updateSpeed( "bwdspeed", item.bwdspeed );  
+        if (item.bwdspeed) {
+            updateSpeed("bwdspeed", item.bwdspeed);
         }
 
-        if ( item.bwdfast ) {
-            updateSpeed( "bwdfast", item.bwdfast );    
+        if (item.bwdfast) {
+            updateSpeed("bwdfast", item.bwdfast);
         }
 
-        if ( item.lockbwdfast == true || item.lockbwdfast == false ) {
-            lockSpeed( "bwdfast", item.lockbwdfast )
+        if (item.lockbwdfast === true || item.lockbwdfast === false) {
+            lockSpeed("bwdfast", item.lockbwdfast);
         }
 
-        if ( item.fwddir || item.fwddir == false ) {
-            updateArrowDir( fwdArrowFront, fwdArrowBack, item.fwddir )
+        if (item.fwddir || item.fwddir === false) {
+            updateArrowDir(fwdArrowFront, fwdArrowBack, item.fwddir);
         }
 
-        if ( item.bwddir || item.bwddir == false  ) {
-            updateArrowDir( bwdArrowFront, bwdArrowBack, item.bwddir )
+        if (item.bwddir || item.bwddir === false) {
+            updateArrowDir(bwdArrowFront, bwdArrowBack, item.bwddir);
         }
 
-        if ( item.fwdxmit ) {
-            fwdXmit.addClass( "active" );
-        } else if ( item.fwdxmit == false ) {
-            fwdXmit.removeClass( "active" );
+        if (item.fwdxmit) {
+            fwdXmit.addClass("active");
+        } else if (item.fwdxmit === false) {
+            fwdXmit.removeClass("active");
         }
 
-        if ( item.bwdxmit ) {
-            bwdXmit.addClass( "active" );   
-        } else if ( item.bwdxmit == false ) {
-            bwdXmit.removeClass( "active" );   
+        if (item.bwdxmit) {
+            bwdXmit.addClass("active");
+        } else if (item.bwdxmit === false) {
+            bwdXmit.removeClass("active");
         }
 
-        if ( item.fwdmode ) {
-            modeSwitch( fwdSame, fwdOpp, item.fwdmode );
+        if (item.fwdmode) {
+            modeSwitch(fwdSame, fwdOpp, item.fwdmode);
         }
 
-        if ( item.bwdmode ) {
-            modeSwitch( bwdSame, bwdOpp, item.bwdmode );
+        if (item.bwdmode) {
+            modeSwitch(bwdSame, bwdOpp, item.bwdmode);
         }
 
-        if ( item.toggleradarrc ) {
+        if (item.toggleradarrc) {
             radarRCContainer.toggle();
         }
-    } );
-} )
+    });
+});
 
 function radarInit() {
-    $( '.container' ).each( function( i, obj ) {
-        $( this ).find( '[data-target]' ).each( function( subi, subobj ) {
-            targets[ $( this ).attr( "data-target" ) ] = $( this )
-        } )
-     } );
+    $('.container').each((i, obj) => {
+        $(obj).find('[data-target]').each((subi, subobj) => {
+            targets[$(subobj).attr('data-target')] = $(subobj);
+        });
+    });
 
-    $( "#policeradarrc" ).find( "button" ).each( function( i, obj ) {
-        if ( $( this ).attr( "data-action" ) ) {
-            $( this ).click( function() { 
-                var data = $( this ).data( "action" ); 
-
-                sendData( "RadarRC", data ); 
-            } )
+    $('#policeradarrc').find('button').each((i, obj) => {
+        const ele = $(obj);
+        if (ele.attr('data-action')) {
+            ele.on('click', () => {
+                const data = ele.data('action');
+                sendData('RadarRC', data);
+            });
         }
-    } );
+    });
 }
 
-function updateSpeed( attr, data ) {
-    targets[ attr ].find( ".speednumber" ).each( function( i, obj ) {
-        $( obj ).html( data[i] ); 
-    } ); 
+function updateSpeed(attr, data) {
+    targets[attr].find('.speednumber').each((i, obj) => {
+        $(obj).html(data[i]);
+    });
 }
 
-function lockSpeed( attr, state ) {
-    targets[ attr ].find( ".speednumber" ).each( function( i, obj ) {
-        if ( state == true ) {
-            $( obj ).addClass( "locked" ); 
+function lockSpeed(attr, state) {
+    targets[attr].find('.speednumber').each((i, obj) => {
+        if (state === true) {
+            $(obj).addClass('locked');
         } else {
-            $( obj ).removeClass( "locked" );
+            $(obj).removeClass('locked');
         }
-    } ); 
+    });
 }
 
-function modeSwitch( sameEle, oppEle, state ) {
-    if ( state == "same" ) {
-        sameEle.addClass( "active" );
-        oppEle.removeClass( "active" ); 
-    } else if ( state == "opp" ) {
-        oppEle.addClass( "active" );
-        sameEle.removeClass( "active" ); 
-    } else if ( state == "none" ) {
-        oppEle.removeClass( "active" ); 
-        sameEle.removeClass( "active" ); 
+function modeSwitch(sameEle, oppEle, state) {
+    if (state === 'same') {
+        sameEle.addClass('active');
+        oppEle.removeClass('active');
+    } else if (state === 'opp') {
+        oppEle.addClass('active');
+        sameEle.removeClass('active');
+    } else if (state === 'none') {
+        oppEle.removeClass('active');
+        sameEle.removeClass('active');
     }
 }
 
-function updateArrowDir( fwdEle, bwdEle, state ) {
-    if ( state == true ) {
-        fwdEle.addClass( "active" ); 
-        bwdEle.removeClass( "active" ); 
-    } else if ( state == false ) {
-        bwdEle.addClass( "active" ); 
-        fwdEle.removeClass( "active" ); 
-    } else if ( state == null ) {
-        fwdEle.removeClass( "active" ); 
-        bwdEle.removeClass( "active" ); 
+function updateArrowDir(fwdEle, bwdEle, state) {
+    if (state === true) {
+        fwdEle.addClass('active');
+        bwdEle.removeClass('active');
+    } else if (state === false) {
+        bwdEle.addClass('active');
+        fwdEle.removeClass('active');
+    } else if (state === null) {
+        fwdEle.removeClass('active');
+        bwdEle.removeClass('active');
     }
 }
 
-function sendData( name, data ) {
-    $.post( "http://" + resourceName + "/" + name, JSON.stringify( data ), function( datab ) {
-        if ( datab != "ok" ) {
-            console.log( datab );
-        }            
-    } );
+function sendData(name, data) {
+    fetch(`https://${resourceName}/${name}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }).then(r => r.text()).then(datab => {
+        if (datab && datab !== 'ok') {
+            console.log(datab);
+        }
+    });
 }
