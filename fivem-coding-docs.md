@@ -430,7 +430,7 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Player | 248 | 206 | 42 | 2025-09-11T05:50 |
+| Player | 248 | 231 | 17 | 2025-09-11T06:06 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -445,6 +445,920 @@ ensure my_resource
 
 #### Player
 
+##### ArePlayerFlashingStarsAboutToDrop (0xAFAF86043E5874E9 / 0xE13A71C7)
+- **Scope**: Client
+- **Signature**: `BOOL ARE_PLAYER_FLASHING_STARS_ABOUT_TO_DROP(Player player)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - **Returns**: `bool` status.
+- **OneSync / Networking**: Local check; servers should not rely on it.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: stars_drop
+        -- Use: Prints if wanted stars are about to drop
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('stars_drop', function()
+        print(ArePlayerFlashingStarsAboutToDrop(PlayerId()))
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: stars_drop */
+    RegisterCommand('stars_drop', () => {
+      console.log(ArePlayerFlashingStarsAboutToDrop(PlayerId()));
+    });
+    ```
+- **Caveats / Limitations**:
+  - No official description.
+- **Reference**: https://docs.fivem.net/natives/?n=ARE_PLAYER_FLASHING_STARS_ABOUT_TO_DROP
+  - TODO(next-run): verify semantics.
+
+##### ArePlayerStarsGreyedOut (0x0A6EB355EE14A2DB / 0x5E72AB72)
+- **Scope**: Client
+- **Signature**: `BOOL ARE_PLAYER_STARS_GREYED_OUT(Player player)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - **Returns**: `bool` status.
+- **OneSync / Networking**: Local query only.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: stars_grey
+        -- Use: Prints if wanted stars are greyed out
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('stars_grey', function()
+        print(ArePlayerStarsGreyedOut(PlayerId()))
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: stars_grey */
+    RegisterCommand('stars_grey', () => {
+      console.log(ArePlayerStarsGreyedOut(PlayerId()));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Function behavior undocumented.
+- **Reference**: https://docs.fivem.net/natives/?n=ARE_PLAYER_STARS_GREYED_OUT
+  - TODO(next-run): verify semantics.
+
+##### AssistedMovementCloseRoute (0xAEBF081FFC0A0E5E / 0xF23277F3)
+- **Scope**: Client
+- **Signature**: `void ASSISTED_MOVEMENT_CLOSE_ROUTE()`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - **Returns**: None.
+- **OneSync / Networking**: Local; affects only current script.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: assist_close
+        -- Use: Calls AssistedMovementCloseRoute
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('assist_close', function()
+        AssistedMovementCloseRoute()
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: assist_close */
+    RegisterCommand('assist_close', () => {
+      AssistedMovementCloseRoute();
+    });
+    ```
+- **Caveats / Limitations**:
+  - No official explanation.
+- **Reference**: https://docs.fivem.net/natives/?n=ASSISTED_MOVEMENT_CLOSE_ROUTE
+  - TODO(next-run): verify semantics.
+
+##### AssistedMovementFlushRoute (0x8621390F0CDCFE1F / 0xD04568B9)
+- **Scope**: Client
+- **Signature**: `void ASSISTED_MOVEMENT_FLUSH_ROUTE()`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - **Returns**: None.
+- **OneSync / Networking**: Local to calling client.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: assist_flush
+        -- Use: Calls AssistedMovementFlushRoute
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('assist_flush', function()
+        AssistedMovementFlushRoute()
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: assist_flush */
+    RegisterCommand('assist_flush', () => {
+      AssistedMovementFlushRoute();
+    });
+    ```
+- **Caveats / Limitations**:
+  - No documented behavior.
+- **Reference**: https://docs.fivem.net/natives/?n=ASSISTED_MOVEMENT_FLUSH_ROUTE
+  - TODO(next-run): verify semantics.
+
+##### CanPedHearPlayer (0xF297383AA91DCA29 / 0x1C70B2EB)
+- **Scope**: Client
+- **Signature**: `BOOL CAN_PED_HEAR_PLAYER(Player player, Ped ped)`
+- **Purpose**: Checks if a ped can hear the specified player.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player index.
+  - `ped` (`Ped`): Ped to test.
+  - **Returns**: `bool` heard state.
+- **OneSync / Networking**: Requires the ped to exist on the client.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: can_hear
+        -- Use: Tests if the player's ped can hear them
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('can_hear', function()
+        local ped = PlayerPedId()
+        print(CanPedHearPlayer(PlayerId(), ped))
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: can_hear */
+    RegisterCommand('can_hear', () => {
+      const ped = PlayerPedId();
+      console.log(CanPedHearPlayer(PlayerId(), ped));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Documentation sparse.
+- **Reference**: https://docs.fivem.net/natives/?n=CAN_PED_HEAR_PLAYER
+
+##### CanPlayerStartMission (0xDE7465A27D403C06 / 0x39E3CB3F)
+- **Scope**: Client
+- **Signature**: `BOOL CAN_PLAYER_START_MISSION(Player player)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player index.
+  - **Returns**: `bool` result.
+- **OneSync / Networking**: Local check; mission logic should be validated server-side.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: can_mission
+        -- Use: Prints if the player can start a mission
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('can_mission', function()
+        print(CanPlayerStartMission(PlayerId()))
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: can_mission */
+    RegisterCommand('can_mission', () => {
+      console.log(CanPlayerStartMission(PlayerId()));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Function semantics unclear.
+- **Reference**: https://docs.fivem.net/natives/?n=CAN_PLAYER_START_MISSION
+  - TODO(next-run): verify behavior.
+
+##### ChangePlayerPed (0x048189FAC643DEEE / 0xBE515485)
+- **Scope**: Client
+- **Signature**: `void CHANGE_PLAYER_PED(Player player, Ped ped, BOOL b2, BOOL resetDamage)`
+- **Purpose**: Changes the player to a specified ped.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player index.
+  - `ped` (`Ped`): Ped to assign.
+  - `b2` (`bool`): Unknown.
+  - `resetDamage` (`bool`): Reset health damage.
+  - **Returns**: None.
+- **OneSync / Networking**: Changing ped requires entity ownership to replicate.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: change_ped
+        -- Use: Reassigns current ped to the player
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('change_ped', function()
+        local ped = PlayerPedId()
+        ChangePlayerPed(PlayerId(), ped, false, false)
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: change_ped */
+    RegisterCommand('change_ped', () => {
+      const ped = PlayerPedId();
+      ChangePlayerPed(PlayerId(), ped, false, false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Parameters `b2` and `resetDamage` are not documented.
+- **Reference**: https://docs.fivem.net/natives/?n=CHANGE_PLAYER_PED
+  - TODO(next-run): verify parameter meanings.
+
+##### ClearPlayerHasDamagedAtLeastOneNonAnimalPed (0x4AACB96203D11A31 / 0x7E3BFBC5)
+- **Scope**: Client
+- **Signature**: `void CLEAR_PLAYER_HAS_DAMAGED_AT_LEAST_ONE_NON_ANIMAL_PED(Player player)`
+- **Purpose**: Resets the internal flag tracking non-animal ped damage.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player index.
+  - **Returns**: None.
+- **OneSync / Networking**: Local flag only.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: clear_nonanimal
+        -- Use: Clears damage flag on non-animal peds
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('clear_nonanimal', function()
+        ClearPlayerHasDamagedAtLeastOneNonAnimalPed(PlayerId())
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: clear_nonanimal */
+    RegisterCommand('clear_nonanimal', () => {
+      ClearPlayerHasDamagedAtLeastOneNonAnimalPed(PlayerId());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Purpose inferred from name.
+- **Reference**: https://docs.fivem.net/natives/?n=CLEAR_PLAYER_HAS_DAMAGED_AT_LEAST_ONE_NON_ANIMAL_PED
+  - TODO(next-run): confirm exact behavior.
+
+##### ClearPlayerHasDamagedAtLeastOnePed (0xF0B67A4DE6AB5F98 / 0x1D31CBBD)
+- **Scope**: Client
+- **Signature**: `void CLEAR_PLAYER_HAS_DAMAGED_AT_LEAST_ONE_PED(Player player)`
+- **Purpose**: Resets the flag tracking if the player damaged any ped.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player index.
+  - **Returns**: None.
+- **OneSync / Networking**: Local flag only.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: clear_damage
+        -- Use: Clears damage flag on any ped
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('clear_damage', function()
+        ClearPlayerHasDamagedAtLeastOnePed(PlayerId())
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: clear_damage */
+    RegisterCommand('clear_damage', () => {
+      ClearPlayerHasDamagedAtLeastOnePed(PlayerId());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Behaviour inferred; official docs unclear.
+- **Reference**: https://docs.fivem.net/natives/?n=CLEAR_PLAYER_HAS_DAMAGED_AT_LEAST_ONE_PED
+  - TODO(next-run): verify semantics.
+
+##### ClearPlayerParachuteModelOverride (0x8753997EB5F6EE3F / 0x6FF034BB)
+- **Scope**: Client
+- **Signature**: `void CLEAR_PLAYER_PARACHUTE_MODEL_OVERRIDE(Player player)`
+- **Purpose**: Removes any set parachute model override.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player index.
+  - **Returns**: None.
+- **OneSync / Networking**: Visual change local to client.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: clear_para_model
+        -- Use: Resets parachute model
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('clear_para_model', function()
+        ClearPlayerParachuteModelOverride(PlayerId())
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: clear_para_model */
+    RegisterCommand('clear_para_model', () => {
+      ClearPlayerParachuteModelOverride(PlayerId());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only resets model for local client.
+- **Reference**: https://docs.fivem.net/natives/?n=CLEAR_PLAYER_PARACHUTE_MODEL_OVERRIDE
+
+##### ClearPlayerParachutePackModelOverride (0x10C54E4389C12B42 / 0xBB62AAC5)
+- **Scope**: Client
+- **Signature**: `void CLEAR_PLAYER_PARACHUTE_PACK_MODEL_OVERRIDE(Player player)`
+- **Purpose**: Clears any custom parachute pack model.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player index.
+  - **Returns**: None.
+- **OneSync / Networking**: Local-only visual change.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: clear_para_pack
+        -- Use: Resets parachute pack model
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('clear_para_pack', function()
+        ClearPlayerParachutePackModelOverride(PlayerId())
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: clear_para_pack */
+    RegisterCommand('clear_para_pack', () => {
+      ClearPlayerParachutePackModelOverride(PlayerId());
+    });
+    ```
+- **Caveats / Limitations**:
+  - No network replication.
+- **Reference**: https://docs.fivem.net/natives/?n=CLEAR_PLAYER_PARACHUTE_PACK_MODEL_OVERRIDE
+
+##### ClearPlayerParachuteVariationOverride (0x0F4CC924CF8C7B21 / 0xFD60F5AB)
+- **Scope**: Client
+- **Signature**: `void CLEAR_PLAYER_PARACHUTE_VARIATION_OVERRIDE(Player player)`
+- **Purpose**: Removes parachute visual variation override.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player index.
+  - **Returns**: None.
+- **OneSync / Networking**: Local visual change.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: clear_para_var
+        -- Use: Clears parachute variation override
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('clear_para_var', function()
+        ClearPlayerParachuteVariationOverride(PlayerId())
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: clear_para_var */
+    RegisterCommand('clear_para_var', () => {
+      ClearPlayerParachuteVariationOverride(PlayerId());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Visual only.
+- **Reference**: https://docs.fivem.net/natives/?n=CLEAR_PLAYER_PARACHUTE_VARIATION_OVERRIDE
+
+##### _ClearPlayerReserveParachuteModelOverride (0x290D248E25815AE8)
+- **Scope**: Client
+- **Signature**: `void _CLEAR_PLAYER_RESERVE_PARACHUTE_MODEL_OVERRIDE(Player player)`
+- **Purpose**: Clears reserve parachute model override.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player index.
+  - **Returns**: None.
+- **OneSync / Networking**: Local effect only.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: clear_para_reserve
+        -- Use: Clears reserve parachute model
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('clear_para_reserve', function()
+        _ClearPlayerReserveParachuteModelOverride(PlayerId())
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: clear_para_reserve */
+    RegisterCommand('clear_para_reserve', () => {
+      _ClearPlayerReserveParachuteModelOverride(PlayerId());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Underscore denotes native naming; availability may vary by build.
+- **Reference**: https://docs.fivem.net/natives/?n=_CLEAR_PLAYER_RESERVE_PARACHUTE_MODEL_OVERRIDE
+
+##### ClearPlayerWantedLevel (0xB302540597885499 / 0x54EA5BCC)
+- **Scope**: Client
+- **Signature**: `void CLEAR_PLAYER_WANTED_LEVEL(Player player)`
+- **Purpose**: Resets the player's wanted level to zero.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player index.
+- **OneSync / Networking**: Only affects local wanted status; server should enforce desired state.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: clear_wanted
+        -- Use: Clears player's wanted level
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('clear_wanted', function()
+        ClearPlayerWantedLevel(PlayerId())
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: clear_wanted */
+    RegisterCommand('clear_wanted', () => {
+      ClearPlayerWantedLevel(PlayerId());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Check current wanted level before clearing for efficiency.
+- **Reference**: https://docs.fivem.net/natives/?n=CLEAR_PLAYER_WANTED_LEVEL
+
+##### DisablePlayerFiring (0x5E6CC07646BBEAB8 / 0x30CB28CB)
+- **Scope**: Client
+- **Signature**: `void DISABLE_PLAYER_FIRING(Player player, BOOL toggle)`
+- **Purpose**: Temporarily prevents the player from performing combat actions.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player index.
+  - `toggle` (`bool`): Unused; call every frame to disable firing.
+  - **Returns**: None.
+- **OneSync / Networking**: Local only; must be called every frame to maintain effect.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: nofire
+        -- Use: Disables firing for five seconds
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('nofire', function()
+        CreateThread(function()
+            local start = GetGameTimer()
+            while GetGameTimer() - start < 5000 do
+                DisablePlayerFiring(PlayerId(), true)
+                Wait(0)
+            end
+        end)
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: nofire */
+    RegisterCommand('nofire', () => {
+      const start = GetGameTimer();
+      const tick = setTick(() => {
+        DisablePlayerFiring(PlayerId(), true);
+        if (GetGameTimer() - start > 5000) clearTick(tick);
+      });
+    });
+    ```
+- **Caveats / Limitations**:
+  - Effect lasts only one frame unless repeatedly invoked.
+- **Reference**: https://docs.fivem.net/natives/?n=DISABLE_PLAYER_FIRING
+
+##### DisablePlayerVehicleRewards (0xC142BE3BB9CE125F / 0x8C6E611D)
+- **Scope**: Client
+- **Signature**: `void DISABLE_PLAYER_VEHICLE_REWARDS(Player player)`
+- **Purpose**: Blocks vehicle entry rewards for the player.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player index.
+  - **Returns**: None.
+- **OneSync / Networking**: Call every frame for persistent effect; local only.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: no_rewards
+        -- Use: Disables vehicle rewards for five seconds
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('no_rewards', function()
+        CreateThread(function()
+            local start = GetGameTimer()
+            while GetGameTimer() - start < 5000 do
+                DisablePlayerVehicleRewards(PlayerId())
+                Wait(0)
+            end
+        end)
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: no_rewards */
+    RegisterCommand('no_rewards', () => {
+      const start = GetGameTimer();
+      const tick = setTick(() => {
+        DisablePlayerVehicleRewards(PlayerId());
+        if (GetGameTimer() - start > 5000) clearTick(tick);
+      });
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only affects current frame when called.
+- **Reference**: https://docs.fivem.net/natives/?n=DISABLE_PLAYER_VEHICLE_REWARDS
+
+##### DisplaySystemSigninUi (0x94DD7888C10A979E / 0x4264CED2)
+- **Scope**: Client
+- **Signature**: `void DISPLAY_SYSTEM_SIGNIN_UI(BOOL unk)`
+- **Purpose**: Shows the system sign-in interface.
+- **Parameters / Returns**:
+  - `unk` (`bool`): Purpose unknown.
+  - **Returns**: None.
+- **OneSync / Networking**: UI is local; has no network effect.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: signin_ui
+        -- Use: Displays the system sign-in dialog
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('signin_ui', function()
+        DisplaySystemSigninUi(true)
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: signin_ui */
+    RegisterCommand('signin_ui', () => {
+      DisplaySystemSigninUi(true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Boolean parameter meaning not documented.
+- **Reference**: https://docs.fivem.net/natives/?n=DISPLAY_SYSTEM_SIGNIN_UI
+
+##### EnableSpecialAbility (0x181EC197DAEFE121 / 0xC86C1B4E)
+- **Scope**: Client
+- **Signature**: `void ENABLE_SPECIAL_ABILITY(Player player, BOOL toggle)`
+- **Purpose**: Toggles the player's special ability availability.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player index.
+  - `toggle` (`bool`): Enable (`true`) or disable (`false`).
+  - **Returns**: None.
+- **OneSync / Networking**: Only affects the local player's ability state.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: special_on
+        -- Use: Enables special ability
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('special_on', function()
+        EnableSpecialAbility(PlayerId(), true)
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: special_on */
+    RegisterCommand('special_on', () => {
+      EnableSpecialAbility(PlayerId(), true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Additional parameters may exist in future builds.
+- **Reference**: https://docs.fivem.net/natives/?n=ENABLE_SPECIAL_ABILITY
+
+##### ExtendWorldBoundaryForPlayer (0x5006D96C995A5827 / 0x64DDB07D)
+- **Scope**: Client
+- **Signature**: `void EXTEND_WORLD_BOUNDARY_FOR_PLAYER(float x, float y, float z)`
+- **Purpose**: Extends the playable world limits to specified coordinates.
+- **Parameters / Returns**:
+  - `x`, `y`, `z` (`float`): Boundary coordinates.
+  - **Returns**: None.
+- **OneSync / Networking**: Local change; ensure server validates world boundary.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: world_extend
+        -- Use: Extends world boundary to large coordinates
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('world_extend', function()
+        ExtendWorldBoundaryForPlayer(10000.0, 10000.0, 1000.0)
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: world_extend */
+    RegisterCommand('world_extend', () => {
+      ExtendWorldBoundaryForPlayer(10000.0, 10000.0, 1000.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Used rarely; misuse may cause unexpected game behavior.
+- **Reference**: https://docs.fivem.net/natives/?n=EXTEND_WORLD_BOUNDARY_FOR_PLAYER
+
+##### ForceCleanup (0xBC8983F38F78ED51 / 0xFDAAEA2B)
+- **Scope**: Client
+- **Signature**: `void FORCE_CLEANUP(int cleanupFlags)`
+- **Purpose**: Forces script cleanup using flag bits.
+- **Parameters / Returns**:
+  - `cleanupFlags` (`int`): Bitmask indicating what to clean.
+  - **Returns**: None.
+- **OneSync / Networking**: Local; misuse can terminate scripts unexpectedly.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: force_clean
+        -- Use: Triggers FORCE_CLEANUP with flag 1
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('force_clean', function()
+        ForceCleanup(1)
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: force_clean */
+    RegisterCommand('force_clean', () => {
+      ForceCleanup(1);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Flags must be chosen carefully to avoid crashing scripts.
+- **Reference**: https://docs.fivem.net/natives/?n=FORCE_CLEANUP
+
+##### ForceCleanupForAllThreadsWithThisName (0x4C68DDDDF0097317 / 0x04256C73)
+- **Scope**: Client
+- **Signature**: `void FORCE_CLEANUP_FOR_ALL_THREADS_WITH_THIS_NAME(char* name, int cleanupFlags)`
+- **Purpose**: Applies cleanup flags to all scripts with a given name.
+- **Parameters / Returns**:
+  - `name` (`string`): Thread name.
+  - `cleanupFlags` (`int`): Cleanup bitmask.
+  - **Returns**: None.
+- **OneSync / Networking**: Local to client.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: force_clean_name
+        -- Use: Forces cleanup for threads named 'example'
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('force_clean_name', function()
+        ForceCleanupForAllThreadsWithThisName('example', 1)
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: force_clean_name */
+    RegisterCommand('force_clean_name', () => {
+      ForceCleanupForAllThreadsWithThisName('example', 1);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Ensure thread name matches exactly.
+- **Reference**: https://docs.fivem.net/natives/?n=FORCE_CLEANUP_FOR_ALL_THREADS_WITH_THIS_NAME
+
+##### ForceCleanupForThreadWithThisId (0xF745B37630DF176B / 0x882D3EB3)
+- **Scope**: Client
+- **Signature**: `void FORCE_CLEANUP_FOR_THREAD_WITH_THIS_ID(int id, int cleanupFlags)`
+- **Purpose**: Forces cleanup for a specific script thread.
+- **Parameters / Returns**:
+  - `id` (`int`): Thread ID.
+  - `cleanupFlags` (`int`): Cleanup bitmask.
+  - **Returns**: None.
+- **OneSync / Networking**: Local effect only.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: force_clean_id
+        -- Use: Forces cleanup for a thread ID
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('force_clean_id', function(_, args)
+        local id = tonumber(args[1])
+        if id then ForceCleanupForThreadWithThisId(id, 1) end
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: force_clean_id */
+    RegisterCommand('force_clean_id', (_, args) => {
+      const id = parseInt(args[0], 10);
+      if (!isNaN(id)) ForceCleanupForThreadWithThisId(id, 1);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Use carefully to avoid terminating critical threads.
+- **Reference**: https://docs.fivem.net/natives/?n=FORCE_CLEANUP_FOR_THREAD_WITH_THIS_ID
+
+##### _GetAchievementProgress (0x1C186837D0619335)
+- **Scope**: Client
+- **Signature**: `int _GET_ACHIEVEMENT_PROGRESS(int achievement)`
+- **Purpose**: Retrieves progress toward a given achievement.
+- **Parameters / Returns**:
+  - `achievement` (`int`): Achievement ID.
+  - **Returns**: `int` progress value.
+- **OneSync / Networking**: Local; relies on platform APIs.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: ach_prog
+        -- Use: Prints progress for an achievement
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('ach_prog', function(_, args)
+        local id = tonumber(args[1]) or 0
+        print(GetAchievementProgress(id))
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: ach_prog */
+    RegisterCommand('ach_prog', (_, args) => {
+      const id = parseInt(args[0], 10) || 0;
+      console.log(GetAchievementProgress(id));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns 0 on retail versions.
+- **Reference**: https://docs.fivem.net/natives/?n=_GET_ACHIEVEMENT_PROGRESS
+
+##### GetAreCameraControlsDisabled (0x7C814D2FB49F40C0 / 0x4C456AF2)
+- **Scope**: Client
+- **Signature**: `BOOL GET_ARE_CAMERA_CONTROLS_DISABLED()`
+- **Purpose**: Checks if the main player's camera controls are disabled.
+- **Parameters / Returns**:
+  - **Returns**: `bool` indicating camera control state.
+- **OneSync / Networking**: Client-side only.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: cam_disabled
+        -- Use: Reports if camera controls are disabled
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('cam_disabled', function()
+        print(GetAreCameraControlsDisabled())
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: cam_disabled */
+    RegisterCommand('cam_disabled', () => {
+      console.log(GetAreCameraControlsDisabled());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns true if no main player info exists.
+- **Reference**: https://docs.fivem.net/natives/?n=GET_ARE_CAMERA_CONTROLS_DISABLED
+
+##### GetCauseOfMostRecentForceCleanup (0x9A41CF4674A12272 / 0x39AA9FC8)
+- **Scope**: Client
+- **Signature**: `int GET_CAUSE_OF_MOST_RECENT_FORCE_CLEANUP()`
+- **Purpose**: Retrieves the cause code for the latest `ForceCleanup`.
+- **Parameters / Returns**:
+  - **Returns**: `int` cleanup cause.
+- **OneSync / Networking**: Local query.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: last_cleanup
+        -- Use: Prints cause of the most recent ForceCleanup
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('last_cleanup', function()
+        print(GetCauseOfMostRecentForceCleanup())
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: last_cleanup */
+    RegisterCommand('last_cleanup', () => {
+      console.log(GetCauseOfMostRecentForceCleanup());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Specific cause codes are undocumented.
+- **Reference**: https://docs.fivem.net/natives/?n=GET_CAUSE_OF_MOST_RECENT_FORCE_CLEANUP
+  - TODO(next-run): catalog possible return values.
 ##### GetPlayerFromServerId (hash unknown)
 - **Scope**: Shared
 - **Signature**: `Player GetPlayerFromServerId(int serverId)`
@@ -7654,4 +8568,4 @@ ensure my_resource
 
 
 
-CONTINUE-HERE — 2025-09-11T05:50 — next: 13.2 Client Natives > Player category :: ArePlayerFlashingStarsAboutToDrop
+CONTINUE-HERE — 2025-09-11T06:06 — next: 13.2 Client Natives > Player category :: GetEntityPlayerIsFreeAimingAt
