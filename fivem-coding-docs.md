@@ -430,7 +430,7 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Player | 248 | 14 | 234 | 2025-09-11 |
+| Player | 248 | 25 | 223 | 2025-09-11 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -887,6 +887,49 @@ ensure my_resource
   - Requires three mutable references/arrays.
 - **Reference**: https://docs.fivem.net/natives/?_0xEF56DBABD3CD4887
 
+##### GetPlayerParachuteTintIndex (hash unknown)
+- **Scope**: Shared
+- **Signature**: `void GetPlayerParachuteTintIndex(Player player, int* tintIndex)`
+- **Purpose**: Retrieve the tint index applied to the player's parachute canopy.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player index.
+  - `tintIndex` (`int*`): Output tint slot.
+- **OneSync / Networking**: Tint is synced to other players when deployed.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Function
+        -- Name: chuteTint
+        -- Use: Prints parachute canopy tint index
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('chutetint', function()
+        local id = PlayerId()
+        local tint = 0
+        GetPlayerParachuteTintIndex(id, tint)
+        print(('Chute tint: %d'):format(tint))
+    end)
+    ```
+
+  - JavaScript:
+
+    ```javascript
+    // client/main.js
+    RegisterCommand('chutetint', () => {
+      const id = PlayerId();
+      const tint = new Int32Array(1);
+      GetPlayerParachuteTintIndex(id, tint);
+      console.log(`Chute tint: ${tint[0]}`);
+    });
+    ```
+
+- **Caveats / Limitations**:
+  - Requires a mutable reference/array for output.
+- **Reference**: https://docs.fivem.net/natives/?n=GetPlayerParachuteTintIndex
+
 ##### GetPlayerPed (0x43A66C31C68491C0)
 - **Scope**: Shared
 - **Signature**: `Ped GetPlayerPed(Player player)`
@@ -1005,6 +1048,333 @@ ensure my_resource
   - Returns 0 if the player does not exist.
 - **Reference**: https://docs.fivem.net/natives/?n=GetPlayerServerId
   - TODO(next-run): verify signature and hash against official docs.
+##### GetPlayerShortName (hash unknown)
+- **Scope**: Shared
+- **Signature**: `char* GetPlayerShortName(Player player)`
+- **Purpose**: Get a truncated version of the player's name.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player index.
+  - **Returns**: `string` short name.
+- **OneSync / Networking**: Name data is global; no extra replication.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: shortname
+        -- Use: Prints a shortened player name
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('shortname', function()
+        local id = PlayerId()
+        print(('Short: %s'):format(GetPlayerShortName(id)))
+    end)
+    ```
+
+  - JavaScript:
+
+    ```javascript
+    // client/main.js
+    RegisterCommand('shortname', () => {
+      const id = PlayerId();
+      console.log(`Short: ${GetPlayerShortName(id)}`);
+    });
+    ```
+
+- **Caveats / Limitations**:
+  - Length is limited by engine rules.
+- **Reference**: https://docs.fivem.net/natives/?n=GetPlayerShortName
+
+##### GetPlayerSprintStaminaRemaining (hash unknown)
+- **Scope**: Shared
+- **Signature**: `float GetPlayerSprintStaminaRemaining(Player player)`
+- **Purpose**: Returns remaining stamina for sprinting.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player index.
+  - **Returns**: `float` stamina fraction.
+- **OneSync / Networking**: Stamina is local; server should verify important logic.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: stam
+        -- Use: Prints sprint stamina remaining
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('stam', function()
+        print(('Stamina: %.2f'):format(GetPlayerSprintStaminaRemaining(PlayerId())))
+    end)
+    ```
+
+  - JavaScript:
+
+    ```javascript
+    // client/main.js
+    RegisterCommand('stam', () => {
+      console.log(`Stamina: ${GetPlayerSprintStaminaRemaining(PlayerId()).toFixed(2)}`);
+    });
+    ```
+
+- **Caveats / Limitations**:
+  - Values range 0.0–1.0.
+- **Reference**: https://docs.fivem.net/natives/?n=GetPlayerSprintStaminaRemaining
+
+##### GetPlayerSprintTimeRemaining (hash unknown)
+- **Scope**: Shared
+- **Signature**: `float GetPlayerSprintTimeRemaining(Player player)`
+- **Purpose**: Time left before the player becomes exhausted while sprinting.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player index.
+  - **Returns**: `float` seconds remaining.
+- **OneSync / Networking**: Local stat; server should validate.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: sprinttime
+        -- Use: Prints sprint time remaining
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('sprinttime', function()
+        print(('Time: %.2f'):format(GetPlayerSprintTimeRemaining(PlayerId())))
+    end)
+    ```
+
+  - JavaScript:
+
+    ```javascript
+    // client/main.js
+    RegisterCommand('sprinttime', () => {
+      console.log(`Time: ${GetPlayerSprintTimeRemaining(PlayerId()).toFixed(2)}`);
+    });
+    ```
+
+- **Caveats / Limitations**:
+  - Returns 0 when stamina is depleted.
+- **Reference**: https://docs.fivem.net/natives/?n=GetPlayerSprintTimeRemaining
+
+##### GetPlayerStealthNoise (hash unknown)
+- **Scope**: Shared
+- **Signature**: `float GetPlayerStealthNoise(Player player)`
+- **Purpose**: Retrieve the noise level produced by the player in stealth mode.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player index.
+  - **Returns**: `float` noise value.
+- **OneSync / Networking**: Local; replicate gameplay consequences server-side.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    RegisterCommand('stealth', function()
+        print(('Noise: %.2f'):format(GetPlayerStealthNoise(PlayerId())))
+    end)
+    ```
+
+  - JavaScript:
+
+    ```javascript
+    RegisterCommand('stealth', () => {
+      console.log(`Noise: ${GetPlayerStealthNoise(PlayerId()).toFixed(2)}`);
+    });
+    ```
+
+- **Caveats / Limitations**:
+  - Value meaning is undocumented.
+- **Reference**: https://docs.fivem.net/natives/?n=GetPlayerStealthNoise
+  - TODO(next-run): verify semantics.
+
+##### GetPlayerSwitchState (hash unknown)
+- **Scope**: Shared
+- **Signature**: `int GetPlayerSwitchState()`
+- **Purpose**: Report the current character switch state.
+- **Parameters / Returns**:
+  - **Returns**: `int` state enum.
+- **OneSync / Networking**: Not replicated; affects only local client.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    RegisterCommand('switchstate', function()
+        print(('Switch state: %d'):format(GetPlayerSwitchState()))
+    end)
+    ```
+
+  - JavaScript:
+
+    ```javascript
+    RegisterCommand('switchstate', () => {
+      console.log(`Switch state: ${GetPlayerSwitchState()}`);
+    });
+    ```
+
+- **Caveats / Limitations**:
+  - Only meaningful in single-player style transitions.
+- **Reference**: https://docs.fivem.net/natives/?n=GetPlayerSwitchState
+
+##### GetPlayerTargetEntity (hash unknown)
+- **Scope**: Shared
+- **Signature**: `bool GetPlayerTargetEntity(Player player, Entity* entity)`
+- **Purpose**: Check which entity the player is aiming at.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player index.
+  - `entity` (`Entity*`): Output targeted entity.
+  - **Returns**: `bool` success flag.
+- **OneSync / Networking**: Targeting may not replicate; server should validate.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    RegisterCommand('target', function()
+        local ent = 0
+        if GetPlayerTargetEntity(PlayerId(), ent) then
+            print(('Target: %s'):format(ent))
+        end
+    end)
+    ```
+
+  - JavaScript:
+
+    ```javascript
+    RegisterCommand('target', () => {
+      const entBuf = new Int32Array(1);
+      if (GetPlayerTargetEntity(PlayerId(), entBuf)) {
+        console.log(`Target: ${entBuf[0]}`);
+      }
+    });
+    ```
+
+- **Caveats / Limitations**:
+  - Requires mutable reference to receive entity.
+- **Reference**: https://docs.fivem.net/natives/?n=GetPlayerTargetEntity
+
+##### GetPlayerTeam (hash unknown)
+- **Scope**: Shared
+- **Signature**: `int GetPlayerTeam(Player player)`
+- **Purpose**: Get the team index the player belongs to.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player index.
+  - **Returns**: `int` team identifier.
+- **OneSync / Networking**: Team assignment is global; server authoritative.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    RegisterCommand('team', function()
+        print(('Team: %d'):format(GetPlayerTeam(PlayerId())))
+    end)
+    ```
+
+  - JavaScript:
+
+    ```javascript
+    RegisterCommand('team', () => {
+      console.log(`Team: ${GetPlayerTeam(PlayerId())}`);
+    });
+    ```
+
+- **Caveats / Limitations**:
+  - Returns 0 if no team is set.
+- **Reference**: https://docs.fivem.net/natives/?n=GetPlayerTeam
+
+##### GetPlayerUnderwaterTimeRemaining (hash unknown)
+- **Scope**: Shared
+- **Signature**: `float GetPlayerUnderwaterTimeRemaining(Player player)`
+- **Purpose**: Time left before drowning while underwater.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player index.
+  - **Returns**: `float` seconds remaining.
+- **OneSync / Networking**: Local; server should enforce consequences.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    RegisterCommand('water', function()
+        print(('Air: %.2f'):format(GetPlayerUnderwaterTimeRemaining(PlayerId())))
+    end)
+    ```
+
+  - JavaScript:
+
+    ```javascript
+    RegisterCommand('water', () => {
+      console.log(`Air: ${GetPlayerUnderwaterTimeRemaining(PlayerId()).toFixed(2)}`);
+    });
+    ```
+
+- **Caveats / Limitations**:
+  - Returns 0 when breath is exhausted.
+- **Reference**: https://docs.fivem.net/natives/?n=GetPlayerUnderwaterTimeRemaining
+
+##### GetPlayerWantedCentrePosition (hash unknown)
+- **Scope**: Shared
+- **Signature**: `void GetPlayerWantedCentrePosition(Player player, float* x, float* y, float* z)`
+- **Purpose**: Obtain the coordinates of the wanted level focus point.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player index.
+  - `x`,`y`,`z` (`float*`): Output coordinates.
+- **OneSync / Networking**: Position is server-authoritative in OneSync.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    RegisterCommand('wantedpos', function()
+        local x,y,z = 0.0,0.0,0.0
+        GetPlayerWantedCentrePosition(PlayerId(), x, y, z)
+        print(('Wanted centre: %.2f %.2f %.2f'):format(x, y, z))
+    end)
+    ```
+
+  - JavaScript:
+
+    ```javascript
+    RegisterCommand('wantedpos', () => {
+      const buf = new Float32Array(3);
+      GetPlayerWantedCentrePosition(PlayerId(), buf, buf.subarray(1), buf.subarray(2));
+      console.log(`Wanted centre: ${buf[0].toFixed(2)} ${buf[1].toFixed(2)} ${buf[2].toFixed(2)}`);
+    });
+    ```
+
+- **Caveats / Limitations**:
+  - Requires mutable float references.
+- **Reference**: https://docs.fivem.net/natives/?n=GetPlayerWantedCentrePosition
+
+##### GetPlayerWantedLevel (hash unknown)
+- **Scope**: Shared
+- **Signature**: `int GetPlayerWantedLevel(Player player)`
+- **Purpose**: Retrieve the current wanted level for the player.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player index.
+  - **Returns**: `int` wanted level (0–5).
+- **OneSync / Networking**: Wanted level syncs across clients; server should manage authority.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    RegisterCommand('wanted', function()
+        print(('Wanted level: %d'):format(GetPlayerWantedLevel(PlayerId())))
+    end)
+    ```
+
+  - JavaScript:
+
+    ```javascript
+    RegisterCommand('wanted', () => {
+      console.log(`Wanted level: ${GetPlayerWantedLevel(PlayerId())}`);
+    });
+    ```
+
+- **Caveats / Limitations**:
+  - Maximum value is 5.
+- **Reference**: https://docs.fivem.net/natives/?n=GetPlayerWantedLevel
+
 ### Server Natives by Category
 
-CONTINUE-HERE — 2025-09-11T03:00:06+00:00 — next: 13.2 Client Natives > Player category :: GetPlayerParachuteTintIndex
+CONTINUE-HERE — 2025-09-11T03:06:47+00:00 — next: 13.2 Client Natives > Player category :: GetPlayerWeaponDamageModifier
