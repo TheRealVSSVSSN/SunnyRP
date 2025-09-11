@@ -430,13 +430,13 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Overall | 6442 | 371 | 6071 | 2025-09-11T23:39 |
+| Overall | 6442 | 381 | 6061 | 2025-09-11T23:49 |
 | Player | 248 | 248 | 0 | 2025-09-11T06:38 |
 | Recording | 17 | 17 | 0 | 2025-09-11T06:52 |
 | Replay | 6 | 6 | 0 | 2025-09-11T07:37 |
 | ACL | 10 | 10 | 0 | 2025-09-11T08:12 |
 | CFX | 50 | 50 | 0 | 2025-09-11T09:55 |
-| Vehicle | 751 | 40 | 711 | 2025-09-11T23:39 |
+| Vehicle | 751 | 50 | 701 | 2025-09-11T23:49 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -13430,4 +13430,296 @@ RegisterCommand('rgb', () => {
   - Must be called every frame to maintain effect.
 - **Reference**: https://docs.fivem.net/natives/?n=DisableVehicleFirstPersonCamThisFrame
 
-CONTINUE-HERE — 2025-09-11T23:39 — next: Vehicle :: DisableVehicleImpactExplosionActivation
+##### DisableVehicleImpactExplosionActivation
+- **Scope**: Shared
+- **Signature(s)**: `void DISABLE_VEHICLE_IMPACT_EXPLOSION_ACTIVATION(Vehicle vehicle, bool toggle)`
+- **Purpose**: Prevents vehicle impact from triggering an explosion.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target vehicle.
+  - `toggle` (`bool`): True disables explosion activation.
+- **OneSync / Networking**: Caller must own the vehicle for replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: safe_car; Use: Toggles impact explosions; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('safe_car', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        DisableVehicleImpactExplosionActivation(veh, args[1] == '1')
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: safe_car */
+    RegisterCommand('safe_car', (src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      DisableVehicleImpactExplosionActivation(veh, args[0] === '1');
+    });
+    ```
+- **Caveats / Limitations**:
+  - TODO(next-run): verify default state and persistence.
+- **Reference**: https://docs.fivem.net/natives/?n=DisableVehicleImpactExplosionActivation
+
+##### DisableVehicleNeonLights
+- **Scope**: Shared
+- **Signature(s)**: `void DISABLE_VEHICLE_NEON_LIGHTS(Vehicle vehicle, bool disable)`
+- **Purpose**: Suppresses all neon lighting on a vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target vehicle.
+  - `disable` (`bool`): True to turn off all neon lights.
+- **OneSync / Networking**: Requires entity ownership to sync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: neon_off; Use: Disables neon lights; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('neon_off', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        DisableVehicleNeonLights(veh, true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: neon_off */
+    RegisterCommand('neon_off', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      DisableVehicleNeonLights(veh, true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - TODO(next-run): confirm if individual neon indices can be toggled.
+- **Reference**: https://docs.fivem.net/natives/?n=DisableVehicleNeonLights
+
+##### DisableVehicleTurretMovementThisFrame
+- **Scope**: Client
+- **Signature(s)**: `void DISABLE_VEHICLE_TURRET_MOVEMENT_THIS_FRAME(Vehicle vehicle)`
+- **Purpose**: Freezes turret rotation for current frame.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle whose turret is frozen.
+- **OneSync / Networking**: Visual-only; call on controlling client.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Tick; Name: freeze_turret; Use: Holds turret still; Created: 2025-09-11; By: VSSVSSN ]]
+    CreateThread(function()
+        while true do
+            local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+            DisableVehicleTurretMovementThisFrame(veh)
+            Wait(0)
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Tick: freeze_turret */
+    setTick(() => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      DisableVehicleTurretMovementThisFrame(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - TODO(next-run): verify multiplayer effects on remote clients.
+- **Reference**: https://docs.fivem.net/natives/?n=DisableVehicleTurretMovementThisFrame
+
+##### DisableVehicleWeapon
+- **Scope**: Shared
+- **Signature(s)**: `void DISABLE_VEHICLE_WEAPON(bool disabled, Hash weaponHash, Vehicle vehicle, Ped owner)`
+- **Purpose**: Toggles availability of a specific vehicle weapon.
+- **Parameters / Returns**:
+  - `disabled` (`bool`): True to disable firing.
+  - `weaponHash` (`Hash`): Weapon identifier.
+  - `vehicle` (`Vehicle`): Vehicle containing the weapon.
+  - `owner` (`Ped`): Ped controlling the weapon.
+- **OneSync / Networking**: Call from weapon owner's host to replicate.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: lock_gun; Use: Disables vehicle weapon; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('lock_gun', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        local owner = PlayerPedId()
+        DisableVehicleWeapon(true, `VEHICLE_WEAPON_SPACE_ROCKET`, veh, owner)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: lock_gun */
+    RegisterCommand('lock_gun', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      const owner = PlayerPedId();
+      DisableVehicleWeapon(true, GetHashKey('VEHICLE_WEAPON_SPACE_ROCKET'), veh, owner);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Weapon hash must exist for the vehicle.
+- **Reference**: https://docs.fivem.net/natives/?n=DisableVehicleWeapon
+
+##### DisableVehicleWorldCollision
+- **Scope**: Shared
+- **Signature(s)**: `void DISABLE_VEHICLE_WORLD_COLLISION(Vehicle vehicle, bool toggle)`
+- **Purpose**: Enables or disables collision of the vehicle with the world.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target vehicle.
+  - `toggle` (`bool`): True disables collision.
+- **OneSync / Networking**: Ownership required; may desync physics if misused.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: noclip_car; Use: Toggle world collision; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('noclip_car', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        DisableVehicleWorldCollision(veh, true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: noclip_car */
+    RegisterCommand('noclip_car', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      DisableVehicleWorldCollision(veh, true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Vehicle may fall through map; use carefully.
+- **Reference**: https://docs.fivem.net/natives/?n=DisableVehicleWorldCollision
+
+##### DisplayDistantVehicleSmoke
+- **Scope**: Client
+- **Signature(s)**: `void DISPLAY_DISTANT_VEHICLE_SMOKE(bool toggle)`
+- **Purpose**: Toggles rendering of exhaust smoke for distant vehicles.
+- **Parameters / Returns**:
+  - `toggle` (`bool`): True to show smoke.
+- **OneSync / Networking**: Visual-only; client preference.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: smoke; Use: Toggles distant smoke; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('smoke', function(_, args)
+        DisplayDistantVehicleSmoke(args[1] == '1')
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: smoke */
+    RegisterCommand('smoke', (src, args) => {
+      DisplayDistantVehicleSmoke(args[0] === '1');
+    });
+    ```
+- **Caveats / Limitations**:
+  - TODO(next-run): verify impact on performance.
+- **Reference**: https://docs.fivem.net/natives/?n=DisplayDistantVehicleSmoke
+
+##### DisplayPlayerInVehicleBadgeThisFrame
+- **Scope**: Client
+- **Signature(s)**: `void DISPLAY_PLAYER_IN_VEHICLE_BADGE_THIS_FRAME(Player player, string badgeText, int alpha)`
+- **Purpose**: Shows a temporary HUD badge for the specified player in a vehicle.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `badgeText` (`string`): Text label.
+  - `alpha` (`int`): Transparency value 0–255.
+- **OneSync / Networking**: Local display; not networked.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: badge; Use: Displays player badge; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('badge', function(_, args)
+        DisplayPlayerInVehicleBadgeThisFrame(PlayerId(), args[1] or 'TEST', 255)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: badge */
+    RegisterCommand('badge', (src, args) => {
+      DisplayPlayerInVehicleBadgeThisFrame(PlayerId(), args[0] || 'TEST', 255);
+    });
+    ```
+- **Caveats / Limitations**:
+  - TODO(next-run): verify correct parameter order.
+- **Reference**: https://docs.fivem.net/natives/?n=DisplayPlayerInVehicleBadgeThisFrame
+
+##### DoesCargobobHavePickupMagnet
+- **Scope**: Shared
+- **Signature(s)**: `bool DOES_CARGOBOB_HAVE_PICKUP_MAGNET(Vehicle cargobob)`
+- **Purpose**: Checks if a Cargobob has a magnet attachment.
+- **Parameters / Returns**:
+  - `cargobob` (`Vehicle`): The Cargobob to inspect.
+  - **Returns**: `bool` magnet presence.
+- **OneSync / Networking**: Requires owning the Cargobob for accurate state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: has_magnet; Use: Reports magnet attachment; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('has_magnet', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(DoesCargobobHavePickupMagnet(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: has_magnet */
+    RegisterCommand('has_magnet', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(DoesCargobobHavePickupMagnet(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only valid for Cargobob models.
+- **Reference**: https://docs.fivem.net/natives/?n=DoesCargobobHavePickupMagnet
+
+##### DoesCargobobHavePickupRope
+- **Scope**: Shared
+- **Signature(s)**: `bool DOES_CARGOBOB_HAVE_PICKUP_ROPE(Vehicle cargobob)`
+- **Purpose**: Returns whether a Cargobob has a pickup rope deployed.
+- **Parameters / Returns**:
+  - `cargobob` (`Vehicle`): The helicopter to check.
+  - **Returns**: `bool` rope status.
+- **OneSync / Networking**: Ownership needed to check rope state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: has_rope; Use: Prints rope presence; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('has_rope', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(DoesCargobobHavePickupRope(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: has_rope */
+    RegisterCommand('has_rope', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(DoesCargobobHavePickupRope(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only relevant for Cargobob helicopters.
+- **Reference**: https://docs.fivem.net/natives/?n=DoesCargobobHavePickupRope
+
+##### DoesVehicleHaveLandingGear
+- **Scope**: Shared
+- **Signature(s)**: `bool DOES_VEHICLE_HAVE_LANDING_GEAR(Vehicle vehicle)`
+- **Purpose**: Determines if a vehicle is equipped with retractable landing gear.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to inspect.
+  - **Returns**: `bool` landing gear availability.
+- **OneSync / Networking**: Ownership required to ensure accurate info.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[ Type: Command; Name: has_gear; Use: Checks for landing gear; Created: 2025-09-11; By: VSSVSSN ]]
+    RegisterCommand('has_gear', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(DoesVehicleHaveLandingGear(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: has_gear */
+    RegisterCommand('has_gear', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(DoesVehicleHaveLandingGear(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - TODO(next-run): confirm if applies to all aircraft classes.
+- **Reference**: https://docs.fivem.net/natives/?n=DoesVehicleHaveLandingGear
+
+CONTINUE-HERE — 2025-09-11T23:49 — next: Vehicle :: DoesVehicleHaveSearchlight
