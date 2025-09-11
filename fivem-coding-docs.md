@@ -430,7 +430,7 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Player | 248 | 25 | 223 | 2025-09-11 |
+| Player | 248 | 50 | 198 | 2025-09-11 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -1375,6 +1375,852 @@ ensure my_resource
   - Maximum value is 5.
 - **Reference**: https://docs.fivem.net/natives/?n=GetPlayerWantedLevel
 
+##### GetPlayersLastVehicle (0xB6997A7EB3F5C8C0 0xE2757AC1)
+- **Scope**: Client
+- **Signature**: `Vehicle GetPlayersLastVehicle()`
+- **Purpose**: Retrieve the last vehicle the player used.
+- **Parameters / Returns**:
+  - **Returns**: `Vehicle` handle or `0` if destroyed.
+- **OneSync / Networking**: Local lookup; verify entity exists before use.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: lastveh
+        -- Use: Prints last vehicle model
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('lastveh', function()
+        local veh = GetPlayersLastVehicle()
+        if veh ~= 0 then
+            print(('Last vehicle: %s'):format(GetDisplayNameFromVehicleModel(GetEntityModel(veh))))
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: lastveh */
+    RegisterCommand('lastveh', () => {
+      const veh = GetPlayersLastVehicle();
+      if (veh !== 0) {
+        console.log(`Last vehicle: ${GetDisplayNameFromVehicleModel(GetEntityModel(veh))}`);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns `0` if last vehicle was destroyed; use `GetVehiclePedIsIn` otherwise.
+- **Reference**: https://docs.fivem.net/natives/?n=GetPlayersLastVehicle
+
+##### GetTimeSinceLastArrest (0x5063F92F07C2A316 0x62824EF4)
+- **Scope**: Client
+- **Signature**: `int GetTimeSinceLastArrest()`
+- **Purpose**: Milliseconds elapsed since the player was arrested.
+- **Parameters / Returns**:
+  - **Returns**: `int` milliseconds or `-1` if never arrested.
+- **OneSync / Networking**: Local state; server should track penalties separately.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: sincearrest
+        -- Use: Prints ms since arrest
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('sincearrest', function()
+        print(('Since arrest: %d ms'):format(GetTimeSinceLastArrest()))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: sincearrest */
+    RegisterCommand('sincearrest', () => {
+      console.log(`Since arrest: ${GetTimeSinceLastArrest()} ms`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns `-1` if the player has never been arrested.
+- **Reference**: https://docs.fivem.net/natives/?n=GetTimeSinceLastArrest
+
+##### GetTimeSinceLastDeath (0xC7034807558DDFCA 0x24BC5AC0)
+- **Scope**: Client
+- **Signature**: `int GetTimeSinceLastDeath()`
+- **Purpose**: Milliseconds elapsed since the player last died.
+- **Parameters / Returns**:
+  - **Returns**: `int` milliseconds or `-1` if never died.
+- **OneSync / Networking**: Local measurement; server must enforce respawn rules.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: sincedeath
+        -- Use: Prints ms since death
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('sincedeath', function()
+        print(('Since death: %d ms'):format(GetTimeSinceLastDeath()))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: sincedeath */
+    RegisterCommand('sincedeath', () => {
+      console.log(`Since death: ${GetTimeSinceLastDeath()} ms`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns `-1` if the player has not died this session.
+- **Reference**: https://docs.fivem.net/natives/?n=GetTimeSinceLastDeath
+
+##### GetTimeSincePlayerDroveAgainstTraffic (0xDB89591E290D9182 0x9F27D00E)
+- **Scope**: Client
+- **Signature**: `int GetTimeSincePlayerDroveAgainstTraffic(Player player)`
+- **Purpose**: Milliseconds since the specified player drove against traffic.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player index.
+  - **Returns**: `int` milliseconds or `-1` if never.
+- **OneSync / Networking**: Local check; server should validate traffic offenses.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: trafsince
+        -- Use: Shows ms since wrong-way driving
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('trafsince', function()
+        print(('Since wrong way: %d ms'):format(GetTimeSincePlayerDroveAgainstTraffic(PlayerId())))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: trafsince */
+    RegisterCommand('trafsince', () => {
+      console.log(`Since wrong way: ${GetTimeSincePlayerDroveAgainstTraffic(PlayerId())} ms`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns `-1` if no instance recorded.
+- **Reference**: https://docs.fivem.net/natives/?n=GetTimeSincePlayerDroveAgainstTraffic
+
+##### GetTimeSincePlayerDroveOnPavement (0xD559D2BE9E37853B 0x8836E732)
+- **Scope**: Client
+- **Signature**: `int GetTimeSincePlayerDroveOnPavement(Player player)`
+- **Purpose**: Milliseconds since the player last drove on the sidewalk.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player index.
+  - **Returns**: `int` milliseconds or `-1` if never.
+- **OneSync / Networking**: Local check; server may enforce penalties.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: pavedsince
+        -- Use: Shows ms since driving on pavement
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('pavedsince', function()
+        print(('Since pavement: %d ms'):format(GetTimeSincePlayerDroveOnPavement(PlayerId())))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: pavedsince */
+    RegisterCommand('pavedsince', () => {
+      console.log(`Since pavement: ${GetTimeSincePlayerDroveOnPavement(PlayerId())} ms`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns `-1` if no event logged.
+- **Reference**: https://docs.fivem.net/natives/?n=GetTimeSincePlayerDroveOnPavement
+
+##### GetTimeSincePlayerHitPed (0xE36A25322DC35F42 0xB6209195)
+- **Scope**: Client
+- **Signature**: `int GetTimeSincePlayerHitPed(Player player)`
+- **Purpose**: Milliseconds since the player collided with a pedestrian.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player index.
+  - **Returns**: `int` milliseconds or `-1` if never.
+- **OneSync / Networking**: Local metric; servers should validate damage.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: hitpedsince
+        -- Use: Shows ms since hitting a ped
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('hitpedsince', function()
+        print(('Since hit ped: %d ms'):format(GetTimeSincePlayerHitPed(PlayerId())))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: hitpedsince */
+    RegisterCommand('hitpedsince', () => {
+      console.log(`Since hit ped: ${GetTimeSincePlayerHitPed(PlayerId())} ms`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns `-1` if no collision recorded.
+- **Reference**: https://docs.fivem.net/natives/?n=GetTimeSincePlayerHitPed
+
+##### GetTimeSincePlayerHitVehicle (0x5D35ECF3A81A0EE0 0x6E9B8B9E)
+- **Scope**: Client
+- **Signature**: `int GetTimeSincePlayerHitVehicle(Player player)`
+- **Purpose**: Milliseconds since the player collided with a vehicle.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player index.
+  - **Returns**: `int` milliseconds or `-1` if never.
+- **OneSync / Networking**: Local metric; servers should track damage separately.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: hitvehsince
+        -- Use: Shows ms since hitting a vehicle
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('hitvehsince', function()
+        print(('Since hit vehicle: %d ms'):format(GetTimeSincePlayerHitVehicle(PlayerId())))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: hitvehsince */
+    RegisterCommand('hitvehsince', () => {
+      console.log(`Since hit vehicle: ${GetTimeSincePlayerHitVehicle(PlayerId())} ms`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns `-1` if no collision recorded.
+- **Reference**: https://docs.fivem.net/natives/?n=GetTimeSincePlayerHitVehicle
+
+##### _GetWantedLevelParoleDuration (0xA72200F51875FEA4)
+- **Scope**: Client
+- **Signature**: `int _GetWantedLevelParoleDuration()`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - **Returns**: `int` value, meaning unknown.
+- **OneSync / Networking**: Unknown.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: parole
+        -- Use: Prints parole duration value
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('parole', function()
+        print(('_GET_WANTED_LEVEL_PAROLE_DURATION: %d'):format(_GetWantedLevelParoleDuration()))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: parole */
+    RegisterCommand('parole', () => {
+      console.log(`_GET_WANTED_LEVEL_PAROLE_DURATION: ${_GetWantedLevelParoleDuration()}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Documentation lacks details.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=_GET_WANTED_LEVEL_PAROLE_DURATION
+
+##### GetWantedLevelRadius (0x085DEB493BE80812 0x1CF7D7DA)
+- **Scope**: Client
+- **Signature**: `float GetWantedLevelRadius(Player player)`
+- **Purpose**: Legacy native from GTA IV; returns no useful data.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player index.
+  - **Returns**: `float` radius; typically `0.0`.
+- **OneSync / Networking**: No replicated effect.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: wlradius
+        -- Use: Prints wanted level radius
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('wlradius', function()
+        print(('Wanted radius: %.2f'):format(GetWantedLevelRadius(PlayerId())))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: wlradius */
+    RegisterCommand('wlradius', () => {
+      console.log(`Wanted radius: ${GetWantedLevelRadius(PlayerId()).toFixed(2)}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does nothing in GTA V.
+- **Reference**: https://docs.fivem.net/natives/?n=GetWantedLevelRadius
+
+##### GetWantedLevelThreshold (0xFDD179EAF45B556C 0xD9783F6B)
+- **Scope**: Client
+- **Signature**: `int GetWantedLevelThreshold(int wantedLevel)`
+- **Purpose**: Returns score threshold for a wanted level.
+- **Parameters / Returns**:
+  - `wantedLevel` (`int`): Level 1–5.
+  - **Returns**: `int` score threshold (undocumented units).
+- **OneSync / Networking**: Local only; server should manage wanted logic.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: wlthreshold
+        -- Use: Shows threshold for wanted level
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('wlthreshold', function(src, args)
+        local lvl = tonumber(args[1]) or 1
+        print(('Threshold: %d'):format(GetWantedLevelThreshold(lvl)))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: wlthreshold */
+    RegisterCommand('wlthreshold', (_, args) => {
+      const lvl = parseInt(args[0] ?? '1', 10);
+      console.log(`Threshold: ${GetWantedLevelThreshold(lvl)}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Units are undocumented.
+  - TODO(next-run): verify scaling.
+- **Reference**: https://docs.fivem.net/natives/?n=GetWantedLevelThreshold
+
+##### GiveAchievementToPlayer (0xBEC7076D64130195 0x822BC992)
+- **Scope**: Client
+- **Signature**: `BOOL GiveAchievementToPlayer(int achievement)`
+- **Purpose**: Award a GTA achievement to the local player.
+- **Parameters / Returns**:
+  - `achievement` (`int`): Achievement ID (0–60).
+  - **Returns**: `bool` success status.
+- **OneSync / Networking**: Local only; no server-side tracking.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: achieve
+        -- Use: Triggers an achievement
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('achieve', function(_, args)
+        local id = tonumber(args[1]) or 0
+        GiveAchievementToPlayer(id)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: achieve */
+    RegisterCommand('achieve', (_, args) => {
+      const id = parseInt(args[0] ?? '0', 10);
+      GiveAchievementToPlayer(id);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Achievement IDs above documented range may have no effect.
+- **Reference**: https://docs.fivem.net/natives/?n=GiveAchievementToPlayer
+
+##### GivePlayerRagdollControl (0x3C49C870E66F0A28 0xC7B4D7AC)
+- **Scope**: Client
+- **Signature**: `void GivePlayerRagdollControl(Player player, BOOL toggle)`
+- **Purpose**: Allow or revoke ragdoll control for a player.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player index.
+  - `toggle` (`bool`): `true` to allow control.
+- **OneSync / Networking**: Applies locally; server should enforce gameplay rules.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: ragdollctrl
+        -- Use: Toggles ragdoll control
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('ragdollctrl', function(_, args)
+        local enable = args[1] == '1'
+        GivePlayerRagdollControl(PlayerId(), enable)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: ragdollctrl */
+    RegisterCommand('ragdollctrl', (_, args) => {
+      const enable = args[0] === '1';
+      GivePlayerRagdollControl(PlayerId(), enable);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only affects local player's ped.
+- **Reference**: https://docs.fivem.net/natives/?n=GivePlayerRagdollControl
+
+##### HasAchievementBeenPassed (0x867365E111A3B6EB 0x136A5BE9)
+- **Scope**: Client
+- **Signature**: `BOOL HasAchievementBeenPassed(int achievement)`
+- **Purpose**: Check if an achievement has been unlocked.
+- **Parameters / Returns**:
+  - `achievement` (`int`): Achievement ID.
+  - **Returns**: `bool` true if unlocked.
+- **OneSync / Networking**: Local check.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: hasach
+        -- Use: Tests achievement status
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('hasach', function(_, args)
+        local id = tonumber(args[1]) or 0
+        print(('Unlocked: %s'):format(tostring(HasAchievementBeenPassed(id))))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: hasach */
+    RegisterCommand('hasach', (_, args) => {
+      const id = parseInt(args[0] ?? '0', 10);
+      console.log(`Unlocked: ${HasAchievementBeenPassed(id)}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Uses same ID range as `GiveAchievementToPlayer`.
+- **Reference**: https://docs.fivem.net/natives/?n=HasAchievementBeenPassed
+
+##### HasForceCleanupOccurred (0xC968670BFACE42D9 0x4B37333C)
+- **Scope**: Client
+- **Signature**: `BOOL HasForceCleanupOccurred(int cleanupFlags)`
+- **Purpose**: Detect if a force cleanup has been triggered.
+- **Parameters / Returns**:
+  - `cleanupFlags` (`int`): Bitmask of cleanup causes.
+  - **Returns**: `bool` true if the event occurred.
+- **OneSync / Networking**: Local script housekeeping.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: fcleanup
+        -- Use: Checks force cleanup flag
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('fcleanup', function(_, args)
+        local flag = tonumber(args[1]) or 0
+        print(('Cleanup: %s'):format(tostring(HasForceCleanupOccurred(flag))))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: fcleanup */
+    RegisterCommand('fcleanup', (_, args) => {
+      const flag = parseInt(args[0] ?? '0', 10);
+      console.log(`Cleanup: ${HasForceCleanupOccurred(flag)}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Flags vary by script; consult R* script references.
+- **Reference**: https://docs.fivem.net/natives/?n=HasForceCleanupOccurred
+
+##### _HasPlayerBeenShotByCop (0xBC0753C9CA14B506 0x9DF75B2A)
+- **Scope**: Client
+- **Signature**: `BOOL _HasPlayerBeenShotByCop(Player player, int ms, BOOL p2)`
+- **Purpose**: Check if a cop shot the player within a time window.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `ms` (`int`): Time window in milliseconds.
+  - `p2` (`bool`): Usually `false`.
+  - **Returns**: `bool` true if shot by police.
+- **OneSync / Networking**: Local detection; servers should verify damage source.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: copshot
+        -- Use: Checks if police shot you recently
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('copshot', function()
+        print(('_HAS_PLAYER_BEEN_SHOT_BY_COP: %s'):format(tostring(_HasPlayerBeenShotByCop(PlayerId(), 5000, false))))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: copshot */
+    RegisterCommand('copshot', () => {
+      console.log(`_HAS_PLAYER_BEEN_SHOT_BY_COP: ${_HasPlayerBeenShotByCop(PlayerId(), 5000, false)}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - `p2` parameter remains undocumented.
+- **Reference**: https://docs.fivem.net/natives/?n=_HAS_PLAYER_BEEN_SHOT_BY_COP
+
+##### HasPlayerBeenSpottedInStolenVehicle (0xD705740BB0A1CF4C 0x4A01B76A)
+- **Scope**: Client
+- **Signature**: `BOOL HasPlayerBeenSpottedInStolenVehicle(Player player)`
+- **Purpose**: Determine if police witnessed the player in a stolen vehicle.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - **Returns**: `bool` true if spotted.
+- **OneSync / Networking**: Local check; server should enforce consequences.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: stolen
+        -- Use: Prints stolen-vehicle detection
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('stolen', function()
+        print(('Spotted: %s'):format(tostring(HasPlayerBeenSpottedInStolenVehicle(PlayerId()))))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: stolen */
+    RegisterCommand('stolen', () => {
+      console.log(`Spotted: ${HasPlayerBeenSpottedInStolenVehicle(PlayerId())}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Depends on police perception system.
+- **Reference**: https://docs.fivem.net/natives/?n=HasPlayerBeenSpottedInStolenVehicle
+
+##### HasPlayerDamagedAtLeastOneNonAnimalPed (0xE4B90F367BD81752 0xA3707DFC)
+- **Scope**: Client
+- **Signature**: `BOOL HasPlayerDamagedAtLeastOneNonAnimalPed(Player player)`
+- **Purpose**: Check if the player has hurt any human ped.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - **Returns**: `bool` true if damage occurred.
+- **OneSync / Networking**: Local metric; servers handle crime tracking.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: nonanimal
+        -- Use: Checks human ped damage
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('nonanimal', function()
+        print(('Damaged human: %s'):format(tostring(HasPlayerDamagedAtLeastOneNonAnimalPed(PlayerId()))))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: nonanimal */
+    RegisterCommand('nonanimal', () => {
+      console.log(`Damaged human: ${HasPlayerDamagedAtLeastOneNonAnimalPed(PlayerId())}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Animals do not trigger this flag.
+- **Reference**: https://docs.fivem.net/natives/?n=HasPlayerDamagedAtLeastOneNonAnimalPed
+
+##### HasPlayerDamagedAtLeastOnePed (0x20CE80B0C2BF4ACC 0x14F52453)
+- **Scope**: Client
+- **Signature**: `BOOL HasPlayerDamagedAtLeastOnePed(Player player)`
+- **Purpose**: Check if the player has damaged any pedestrian.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - **Returns**: `bool` true if damage occurred.
+- **OneSync / Networking**: Local metric; servers handle penalty.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: pedhit
+        -- Use: Checks ped damage
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('pedhit', function()
+        print(('Damaged ped: %s'):format(tostring(HasPlayerDamagedAtLeastOnePed(PlayerId()))))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: pedhit */
+    RegisterCommand('pedhit', () => {
+      console.log(`Damaged ped: ${HasPlayerDamagedAtLeastOnePed(PlayerId())}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Includes animals unless filtered separately.
+- **Reference**: https://docs.fivem.net/natives/?n=HasPlayerDamagedAtLeastOnePed
+
+##### HasPlayerLeftTheWorld (0xD55DDFB47991A294 0xFEA40B6C)
+- **Scope**: Client
+- **Signature**: `BOOL HasPlayerLeftTheWorld(Player player)`
+- **Purpose**: Determine if the player moved beyond world bounds.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - **Returns**: `bool` true if outside bounds.
+- **OneSync / Networking**: Local; server should validate coordinates.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: outworld
+        -- Use: Checks if player left world
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('outworld', function()
+        print(('Left world: %s'):format(tostring(HasPlayerLeftTheWorld(PlayerId()))))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: outworld */
+    RegisterCommand('outworld', () => {
+      console.log(`Left world: ${HasPlayerLeftTheWorld(PlayerId())}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Triggered in rare edge cases.
+- **Reference**: https://docs.fivem.net/natives/?n=HasPlayerLeftTheWorld
+
+##### IntToParticipantindex (0x9EC6603812C24710 0x98F3B274)
+- **Scope**: Client
+- **Signature**: `int IntToParticipantindex(int value)`
+- **Purpose**: Convert an integer to a network participant index.
+- **Parameters / Returns**:
+  - `value` (`int`): Input integer.
+  - **Returns**: Same value.
+- **OneSync / Networking**: Utility for network participant IDs.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: topart
+        -- Use: Casts value to participant index
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('topart', function(_, args)
+        local v = tonumber(args[1]) or 0
+        print(('Participant: %d'):format(IntToParticipantindex(v)))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: topart */
+    RegisterCommand('topart', (_, args) => {
+      const v = parseInt(args[0] ?? '0', 10);
+      console.log(`Participant: ${IntToParticipantindex(v)}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Performs no validation; returns input unchanged.
+- **Reference**: https://docs.fivem.net/natives/?n=IntToParticipantindex
+
+##### IntToPlayerindex (0x41BD2A6B006AF756 0x98DD98F1)
+- **Scope**: Client
+- **Signature**: `Player IntToPlayerindex(int value)`
+- **Purpose**: Cast an integer to a Player handle.
+- **Parameters / Returns**:
+  - `value` (`int`): Input integer.
+  - **Returns**: `Player` handle equal to the input.
+- **OneSync / Networking**: Utility; does not validate existence.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: toplayer
+        -- Use: Casts value to player handle
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('toplayer', function(_, args)
+        local v = tonumber(args[1]) or 0
+        print(('Player handle: %d'):format(IntToPlayerindex(v)))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: toplayer */
+    RegisterCommand('toplayer', (_, args) => {
+      const v = parseInt(args[0] ?? '0', 10);
+      console.log(`Player handle: ${IntToPlayerindex(v)}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not check if the player exists.
+- **Reference**: https://docs.fivem.net/natives/?n=IntToPlayerindex
+
+##### IsPlayerBattleAware (0x38D28DA81E4E9BF9 0x013B4F72)
+- **Scope**: Client
+- **Signature**: `BOOL IsPlayerBattleAware(Player player)`
+- **Purpose**: Determine if the player is in combat awareness.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - **Returns**: `bool` true if battle-aware.
+- **OneSync / Networking**: Local check.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: battleaware
+        -- Use: Prints battle awareness status
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('battleaware', function()
+        print(('Battle aware: %s'):format(tostring(IsPlayerBattleAware(PlayerId()))))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: battleaware */
+    RegisterCommand('battleaware', () => {
+      console.log(`Battle aware: ${IsPlayerBattleAware(PlayerId())}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Underlying metric is unspecified.
+- **Reference**: https://docs.fivem.net/natives/?n=IsPlayerBattleAware
+
+##### IsPlayerBeingArrested (0x388A47C51ABDAC8E 0x7F6A60D3)
+- **Scope**: Client
+- **Signature**: `BOOL IsPlayerBeingArrested(Player player, BOOL atArresting)`
+- **Purpose**: Check if the player is currently being arrested.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - `atArresting` (`bool`): Include pre-busted state when `true`.
+  - **Returns**: `bool` true if arrest sequence is active.
+- **OneSync / Networking**: Local check; server must enforce jail logic.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: arresting
+        -- Use: Checks if being arrested
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('arresting', function()
+        print(('Being arrested: %s'):format(tostring(IsPlayerBeingArrested(PlayerId(), true))))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: arresting */
+    RegisterCommand('arresting', () => {
+      console.log(`Being arrested: ${IsPlayerBeingArrested(PlayerId(), true)}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - `atArresting` changes when the flag becomes true.
+- **Reference**: https://docs.fivem.net/natives/?n=IsPlayerBeingArrested
+
+##### IsPlayerBluetoothEnable (0x65FAEE425DE637B0 0xEA01BD4A)
+- **Scope**: Client
+- **Signature**: `BOOL IsPlayerBluetoothEnable(Player player)`
+- **Purpose**: Check if the player's Bluetooth feature is enabled.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - **Returns**: `bool` true if enabled.
+- **OneSync / Networking**: Local-only; used for Rockstar features.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: btcheck
+        -- Use: Prints Bluetooth status
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('btcheck', function()
+        print(('Bluetooth: %s'):format(tostring(IsPlayerBluetoothEnable(PlayerId()))))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: btcheck */
+    RegisterCommand('btcheck', () => {
+      console.log(`Bluetooth: ${IsPlayerBluetoothEnable(PlayerId())}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Mainly used on consoles; often returns false on PC.
+- **Reference**: https://docs.fivem.net/natives/?n=IsPlayerBluetoothEnable
+
+##### IsPlayerClimbing (0x95E8F73DC65EFB9C 0x4A9E9AE0)
+- **Scope**: Client
+- **Signature**: `BOOL IsPlayerClimbing(Player player)`
+- **Purpose**: Determine if the player is climbing.
+- **Parameters / Returns**:
+  - `player` (`Player`): Target player.
+  - **Returns**: `bool` true while climbing.
+- **OneSync / Networking**: Local movement state; not network authoritative.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: climbing
+        -- Use: Prints climb status
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('climbing', function()
+        print(('Climbing: %s'):format(tostring(IsPlayerClimbing(PlayerId()))))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: climbing */
+    RegisterCommand('climbing', () => {
+      console.log(`Climbing: ${IsPlayerClimbing(PlayerId())}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only checks local ped state.
+- **Reference**: https://docs.fivem.net/natives/?n=IsPlayerClimbing
+
 ### Server Natives by Category
 
-CONTINUE-HERE — 2025-09-11T03:06:47+00:00 — next: 13.2 Client Natives > Player category :: GetPlayerWeaponDamageModifier
+CONTINUE-HERE — 2025-09-11T03:14:09+00:00 — next: 13.2 Client Natives > Player category :: IsPlayerControlOn
