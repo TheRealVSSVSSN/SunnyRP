@@ -431,7 +431,8 @@ ensure my_resource
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
 | Player | 248 | 248 | 0 | 2025-09-11T06:38 |
-| Recording | 17 | 0 | 17 | 2025-09-11T06:38 |
+| Recording | 17 | 17 | 0 | 2025-09-11T06:52 |
+| Replay | 6 | 0 | 6 | 2025-09-11T06:52 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -9428,10 +9429,567 @@ RegisterCommand('rgb', () => {
 - **Caveats / Limitations**:
   - Returns `false` while teleport in progress.
 - **Reference**: https://docs.fivem.net/natives/?n=UpdatePlayerTeleport
+ 
+#### Recording
+
+##### DisableRockstarEditorCameraChanges (0xAF66DCEE6609B148)
+- **Scope**: Client
+- **Signature**: `void _DISABLE_ROCKSTAR_EDITOR_CAMERA_CHANGES()`
+- **Purpose**: Disables camera switching in Rockstar Editor.
+- **Parameters / Returns**:
+  - **Returns**: None.
+- **OneSync / Networking**: Local only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: ed_dis_cam
+        -- Use: Disables editor camera changes
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('ed_dis_cam', function()
+        DisableRockstarEditorCameraChanges()
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: ed_dis_cam */
+    RegisterCommand('ed_dis_cam', () => {
+      DisableRockstarEditorCameraChanges();
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only applies while using Rockstar Editor.
+- **Reference**: https://docs.fivem.net/natives/?n=DisableRockstarEditorCameraChanges
+
+##### IsRecording (0x1897CA71995A90B4)
+- **Scope**: Client
+- **Signature**: `BOOL _IS_RECORDING()`
+- **Purpose**: Returns whether recording or action replay is active.
+- **Parameters / Returns**:
+  - **Returns**: `bool` status.
+- **OneSync / Networking**: Local check only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: rec_status
+        -- Use: Prints recording status
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('rec_status', function()
+        print(IsRecording())
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: rec_status */
+    RegisterCommand('rec_status', () => {
+      console.log(IsRecording());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns true for action replay as well.
+- **Reference**: https://docs.fivem.net/natives/?n=IsRecording
+
+##### _0x13B350B8AD0EEE10 (0x13B350B8AD0EEE10)
+- **Scope**: Client
+- **Signature**: `void _0x13B350B8AD0EEE10()`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - None.
+- **OneSync / Networking**: Unknown.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: rec_func1
+        -- Use: Calls 0x13B350B8AD0EEE10
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('rec_func1', function()
+        N_0x13B350B8AD0EEE10()
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: rec_func1 */
+    RegisterCommand('rec_func1', () => {
+      global.N_0x13B350B8AD0EEE10();
+    });
+    ```
+- **Caveats / Limitations**:
+  - Behavior unknown.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?_0x13B350B8AD0EEE10
+
+##### _0x208784099002BC30 (0x208784099002BC30)
+- **Scope**: Client
+- **Signature**: `void _0x208784099002BC30(char* missionNameLabel, Any p1)`
+- **Purpose**: Deprecated/unused; exact behavior unknown.
+- **Parameters / Returns**:
+  - `missionNameLabel` (`string`): Mission label.
+  - `p1` (`any`): Unknown; typically 0.
+- **OneSync / Networking**: None.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: rec_func2
+        -- Use: Calls 0x208784099002BC30
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('rec_func2', function()
+        N_0x208784099002BC30('mission_label', 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: rec_func2 */
+    RegisterCommand('rec_func2', () => {
+      global.N_0x208784099002BC30('mission_label', 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Documented as null operation.
+  - TODO(next-run): verify usage.
+- **Reference**: https://docs.fivem.net/natives/?_0x208784099002BC30
+
+##### _0x293220DA1B46CEBC (0x293220DA1B46CEBC)
+- **Scope**: Client
+- **Signature**: `void _0x293220DA1B46CEBC(float p0, float p1, int p2)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `p0` (`float`): Unknown.
+  - `p1` (`float`): Unknown.
+  - `p2` (`int`): Unknown.
+- **OneSync / Networking**: Unknown.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: rec_func3
+        -- Use: Calls 0x293220DA1B46CEBC
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('rec_func3', function()
+        N_0x293220DA1B46CEBC(0.0, 0.0, 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: rec_func3 */
+    RegisterCommand('rec_func3', () => {
+      global.N_0x293220DA1B46CEBC(0.0, 0.0, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - No documented behavior.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?_0x293220DA1B46CEBC
+
+##### _0x33D47E85B476ABCD (0x33D47E85B476ABCD)
+- **Scope**: Client
+- **Signature**: `BOOL _0x33D47E85B476ABCD(BOOL p0)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `p0` (`bool`): Unknown.
+  - **Returns**: `bool` result.
+- **OneSync / Networking**: Unknown.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: rec_func4
+        -- Use: Calls 0x33D47E85B476ABCD
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('rec_func4', function()
+        print(N_0x33D47E85B476ABCD(true))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: rec_func4 */
+    RegisterCommand('rec_func4', () => {
+      console.log(global.N_0x33D47E85B476ABCD(true));
+    });
+    ```
+- **Caveats / Limitations**:
+  - No official description.
+  - TODO(next-run): determine purpose.
+- **Reference**: https://docs.fivem.net/natives/?_0x33D47E85B476ABCD
+
+##### _0x4282E08174868BE3 (0x4282E08174868BE3)
+- **Scope**: Client
+- **Signature**: `Any _0x4282E08174868BE3()`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - **Returns**: Unknown value.
+- **OneSync / Networking**: Unknown.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: rec_func5
+        -- Use: Calls 0x4282E08174868BE3
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('rec_func5', function()
+        print(N_0x4282E08174868BE3())
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: rec_func5 */
+    RegisterCommand('rec_func5', () => {
+      console.log(global.N_0x4282E08174868BE3());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Unknown effect.
+  - TODO(next-run): document return value.
+- **Reference**: https://docs.fivem.net/natives/?_0x4282E08174868BE3
+
+##### _0x48621C9FCA3EBD28 (0x48621C9FCA3EBD28)
+- **Scope**: Client
+- **Signature**: `void _0x48621C9FCA3EBD28(int p0)`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `p0` (`int`): Unknown.
+- **OneSync / Networking**: Unknown.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: rec_func6
+        -- Use: Calls 0x48621C9FCA3EBD28
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('rec_func6', function()
+        N_0x48621C9FCA3EBD28(0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: rec_func6 */
+    RegisterCommand('rec_func6', () => {
+      global.N_0x48621C9FCA3EBD28(0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - No documented behavior.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?_0x48621C9FCA3EBD28
+
+##### _0x66972397E0757E7A (0x66972397E0757E7A)
+- **Scope**: Client
+- **Signature**: `void _0x66972397E0757E7A(Any p0, Any p1, Any p2)`
+- **Purpose**: Does nothing; documented as a null subroutine.
+- **Parameters / Returns**:
+  - `p0` (`any`): Unused.
+  - `p1` (`any`): Unused.
+  - `p2` (`any`): Unused.
+- **OneSync / Networking**: None.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: rec_func7
+        -- Use: Calls 0x66972397E0757E7A
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('rec_func7', function()
+        N_0x66972397E0757E7A(0, 0, 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: rec_func7 */
+    RegisterCommand('rec_func7', () => {
+      global.N_0x66972397E0757E7A(0, 0, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - No effect on gameplay.
+- **Reference**: https://docs.fivem.net/natives/?_0x66972397E0757E7A
+
+##### _0x81CBAE94390F9F89 (0x81CBAE94390F9F89)
+- **Scope**: Client
+- **Signature**: `void _0x81CBAE94390F9F89()`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - None.
+- **OneSync / Networking**: Unknown.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: rec_func8
+        -- Use: Calls 0x81CBAE94390F9F89
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('rec_func8', function()
+        N_0x81CBAE94390F9F89()
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: rec_func8 */
+    RegisterCommand('rec_func8', () => {
+      global.N_0x81CBAE94390F9F89();
+    });
+    ```
+- **Caveats / Limitations**:
+  - Behavior not documented.
+  - TODO(next-run): verify effect.
+- **Reference**: https://docs.fivem.net/natives/?_0x81CBAE94390F9F89
+
+##### _0xDF4B952F7D381B95 (0xDF4B952F7D381B95)
+- **Scope**: Client
+- **Signature**: `Any _0xDF4B952F7D381B95()`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - **Returns**: Unknown value.
+- **OneSync / Networking**: Unknown.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: rec_func9
+        -- Use: Calls 0xDF4B952F7D381B95
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('rec_func9', function()
+        print(N_0xDF4B952F7D381B95())
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: rec_func9 */
+    RegisterCommand('rec_func9', () => {
+      console.log(global.N_0xDF4B952F7D381B95());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Return meaning unknown.
+  - TODO(next-run): document behavior.
+- **Reference**: https://docs.fivem.net/natives/?_0xDF4B952F7D381B95
+
+##### _0xF854439EFBB3B583 (0xF854439EFBB3B583)
+- **Scope**: Client
+- **Signature**: `void _0xF854439EFBB3B583()`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - None.
+- **OneSync / Networking**: Unknown.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: rec_func10
+        -- Use: Calls 0xF854439EFBB3B583
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('rec_func10', function()
+        N_0xF854439EFBB3B583()
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: rec_func10 */
+    RegisterCommand('rec_func10', () => {
+      global.N_0xF854439EFBB3B583();
+    });
+    ```
+- **Caveats / Limitations**:
+  - No documentation available.
+  - TODO(next-run): verify purpose.
+- **Reference**: https://docs.fivem.net/natives/?_0xF854439EFBB3B583
+
+##### SaveRecordingClip (0x644546EC5287471B)
+- **Scope**: Client
+- **Signature**: `BOOL _SAVE_RECORDING_CLIP()`
+- **Purpose**: Saves the current action replay clip.
+- **Parameters / Returns**:
+  - **Returns**: `bool` success.
+- **OneSync / Networking**: Local file operation.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: rec_save
+        -- Use: Saves action replay clip
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('rec_save', function()
+        print(SaveRecordingClip())
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: rec_save */
+    RegisterCommand('rec_save', () => {
+      console.log(SaveRecordingClip());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Fails if no clip recorded.
+- **Reference**: https://docs.fivem.net/natives/?n=SaveRecordingClip
+
+##### StartRecording (0xC3AC2FFF9612AC81)
+- **Scope**: Client
+- **Signature**: `void _START_RECORDING(int mode)`
+- **Purpose**: Begins recording or enables action replay.
+- **Parameters / Returns**:
+  - `mode` (`int`): 0 = action replay, 1 = full recording.
+- **OneSync / Networking**: Local; ensure disk has space.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: rec_start
+        -- Use: Starts replay recording
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('rec_start', function()
+        StartRecording(1)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: rec_start */
+    RegisterCommand('rec_start', () => {
+      StartRecording(1);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does nothing if already recording.
+- **Reference**: https://docs.fivem.net/natives/?n=StartRecording
+
+##### StopRecordingAndDiscardClip (0x88BB3507ED41A240)
+- **Scope**: Client
+- **Signature**: `void _STOP_RECORDING_AND_DISCARD_CLIP()`
+- **Purpose**: Stops recording and deletes the clip.
+- **Parameters / Returns**:
+  - None.
+- **OneSync / Networking**: Local; cannot be undone.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: rec_discard
+        -- Use: Discards current recording
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('rec_discard', function()
+        StopRecordingAndDiscardClip()
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: rec_discard */
+    RegisterCommand('rec_discard', () => {
+      StopRecordingAndDiscardClip();
+    });
+    ```
+- **Caveats / Limitations**:
+  - Clip is permanently lost.
+- **Reference**: https://docs.fivem.net/natives/?n=StopRecordingAndDiscardClip
+
+##### StopRecordingAndSaveClip (0x071A5197D6AFC8B3)
+- **Scope**: Client
+- **Signature**: `void _STOP_RECORDING_AND_SAVE_CLIP()`
+- **Purpose**: Stops recording and saves the clip to disk.
+- **Parameters / Returns**:
+  - None.
+- **OneSync / Networking**: Local operation.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: rec_stop_save
+        -- Use: Stops and saves recording
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('rec_stop_save', function()
+        StopRecordingAndSaveClip()
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: rec_stop_save */
+    RegisterCommand('rec_stop_save', () => {
+      StopRecordingAndSaveClip();
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only works if recording active.
+- **Reference**: https://docs.fivem.net/natives/?n=StopRecordingAndSaveClip
+
+##### StopRecordingThisFrame (0xEB2D525B57F42B40)
+- **Scope**: Client
+- **Signature**: `void _STOP_RECORDING_THIS_FRAME()`
+- **Purpose**: Temporarily disables recording for the current frame.
+- **Parameters / Returns**:
+  - None.
+- **OneSync / Networking**: Local only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: rec_stop_frame
+        -- Use: Stops recording for one frame
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('rec_stop_frame', function()
+        StopRecordingThisFrame()
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: rec_stop_frame */
+    RegisterCommand('rec_stop_frame', () => {
+      StopRecordingThisFrame();
+    });
+    ```
+- **Caveats / Limitations**:
+  - Effect lasts one frame only.
+- **Reference**: https://docs.fivem.net/natives/?n=StopRecordingThisFrame
 
 ### Server Natives by Category
-
-
-
-
-CONTINUE-HERE — 2025-09-11T06:38 — next: 13.2 Client Natives > Recording category :: DisableRockstarEditorCameraChanges
+CONTINUE-HERE — 2025-09-11T06:52:44 — next: 13.2 Client Natives > Replay category :: ActivateRockstarEditor
