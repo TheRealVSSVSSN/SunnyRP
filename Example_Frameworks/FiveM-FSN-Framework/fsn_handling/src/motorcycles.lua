@@ -31,7 +31,7 @@ return {
 		TractionCurveLateral	 = 26.0,
 		TractionSpringDeltaMax   = 0.05,
 		LowSpeedTractionLossMult = 0.01,
-		CamberStiffnesss		 = 0.7,
+		CamberStiffness		 = 0.7,
 		TractionBiasFront        = 0.35,
 		TractionLossMult         = 2.0,
 
@@ -122,7 +122,7 @@ return {
 		TractionCurveLateral	 = 26.0,
 		TractionSpringDeltaMax   = 0.05,
 		LowSpeedTractionLossMult = 0.01,
-		CamberStiffnesss		 = 0.5,
+		CamberStiffness		 = 0.5,
 		TractionBiasFront        = 0.35,
 		TractionLossMult         = 1.28,
 
@@ -213,7 +213,7 @@ return {
 		TractionCurveLateral	 = 26.0,
 		TractionSpringDeltaMax   = 0.05,
 		LowSpeedTractionLossMult = 0.01,
-		CamberStiffnesss		 = 0.55,
+		CamberStiffness		 = 0.55,
 		TractionBiasFront        = 0.35,
 		TractionLossMult         = 1.56,
 
@@ -304,7 +304,7 @@ return {
 		TractionCurveLateral	 = 26.0,
 		TractionSpringDeltaMax   = 0.05,
 		LowSpeedTractionLossMult = 0.01,
-		CamberStiffnesss		 = 0.7,
+		CamberStiffness		 = 0.7,
 		TractionBiasFront        = 0.35,
 		TractionLossMult         = 4.62,
 
@@ -395,7 +395,7 @@ return {
 		TractionCurveLateral	 = 26.0,
 		TractionSpringDeltaMax   = 0.05,
 		LowSpeedTractionLossMult = 0.01,
-		CamberStiffnesss		 = 0.7,
+		CamberStiffness		 = 0.7,
 		TractionBiasFront        = 0.35,
 		TractionLossMult         = 4.62,
 
@@ -486,7 +486,7 @@ return {
 		TractionCurveLateral	 = 26.0,
 		TractionSpringDeltaMax   = 0.05,
 		LowSpeedTractionLossMult = 0.01,
-		CamberStiffnesss		 = 0.7,
+		CamberStiffness		 = 0.7,
 		TractionBiasFront        = 0.35,
 		TractionLossMult         = 4.62,
 
@@ -577,7 +577,7 @@ return {
 		TractionCurveLateral	 = 26.0,
 		TractionSpringDeltaMax   = 0.05,
 		LowSpeedTractionLossMult = 0.01,
-		CamberStiffnesss		 = 0.7,
+		CamberStiffness		 = 0.7,
 		TractionBiasFront        = 0.35,
 		TractionLossMult         = 4.62,
 
@@ -668,7 +668,7 @@ return {
 		TractionCurveLateral	 = 26.0,
 		TractionSpringDeltaMax   = 0.05,
 		LowSpeedTractionLossMult = 0.01,
-		CamberStiffnesss		 = 0.7,
+		CamberStiffness		 = 0.7,
 		TractionBiasFront        = 0.35,
 		TractionLossMult         = 4.62,
 
@@ -759,7 +759,7 @@ return {
 		TractionCurveLateral	 = 26.0,
 		TractionSpringDeltaMax   = 0.05,
 		LowSpeedTractionLossMult = 0.01,
-		CamberStiffnesss		 = 0.7,
+		CamberStiffness		 = 0.7,
 		TractionBiasFront        = 0.35,
 		TractionLossMult         = 4.62,
 
@@ -850,7 +850,7 @@ return {
 		TractionCurveLateral	 = 26.0,
 		TractionSpringDeltaMax   = 0.05,
 		LowSpeedTractionLossMult = 0.01,
-		CamberStiffnesss		 = 0.7,
+		CamberStiffness		 = 0.7,
 		TractionBiasFront        = 0.35,
 		TractionLossMult         = 4.62,
 
@@ -941,7 +941,7 @@ return {
 		TractionCurveLateral	 = 26.0,
 		TractionSpringDeltaMax   = 0.05,
 		LowSpeedTractionLossMult = 0.01,
-		CamberStiffnesss		 = 0.7,
+		CamberStiffness		 = 0.7,
 		TractionBiasFront        = 0.35,
 		TractionLossMult         = 4.62,
 
@@ -1032,7 +1032,7 @@ return {
 		TractionCurveLateral	 = 26.0,
 		TractionSpringDeltaMax   = 0.05,
 		LowSpeedTractionLossMult = 0.01,
-		CamberStiffnesss		 = 0.7,
+		CamberStiffness		 = 0.7,
 		TractionBiasFront        = 0.35,
 		TractionLossMult         = 4.62,
 
@@ -1123,7 +1123,7 @@ return {
 		TractionCurveLateral	 = 26.0,
 		TractionSpringDeltaMax   = 0.05,
 		LowSpeedTractionLossMult = 0.01,
-		CamberStiffnesss		 = 0.7,
+		CamberStiffness		 = 0.7,
 		TractionBiasFront        = 0.35,
 		TractionLossMult         = 4.62,
 
@@ -1214,7 +1214,7 @@ return {
 		TractionCurveLateral	 = 26.0,
 		TractionSpringDeltaMax   = 0.05,
 		LowSpeedTractionLossMult = 0.01,
-		CamberStiffnesss		 = 0.7,
+		CamberStiffness		 = 0.7,
 		TractionBiasFront        = 0.35,
 		TractionLossMult         = 4.62,
 
@@ -1305,7 +1305,7 @@ return {
 		TractionCurveLateral	 = 26.0,
 		TractionSpringDeltaMax   = 0.05,
 		LowSpeedTractionLossMult = 0.01,
-		CamberStiffnesss		 = 0.7,
+		CamberStiffness		 = 0.7,
 		TractionBiasFront        = 0.35,
 		TractionLossMult         = 4.62,
 
@@ -1396,7 +1396,7 @@ return {
 		TractionCurveLateral	 = 26.0,
 		TractionSpringDeltaMax   = 0.05,
 		LowSpeedTractionLossMult = 0.01,
-		CamberStiffnesss		 = 0.7,
+		CamberStiffness		 = 0.7,
 		TractionBiasFront        = 0.35,
 		TractionLossMult         = 4.62,
 
@@ -1487,7 +1487,7 @@ return {
 		TractionCurveLateral	 = 26.0,
 		TractionSpringDeltaMax   = 0.05,
 		LowSpeedTractionLossMult = 0.01,
-		CamberStiffnesss		 = 0.7,
+		CamberStiffness		 = 0.7,
 		TractionBiasFront        = 0.35,
 		TractionLossMult         = 4.62,
 
@@ -1578,7 +1578,7 @@ return {
 		TractionCurveLateral	 = 26.0,
 		TractionSpringDeltaMax   = 0.05,
 		LowSpeedTractionLossMult = 0.01,
-		CamberStiffnesss		 = 0.7,
+		CamberStiffness		 = 0.7,
 		TractionBiasFront        = 0.35,
 		TractionLossMult         = 4.62,
 
@@ -1669,7 +1669,7 @@ return {
 		TractionCurveLateral	 = 26.0,
 		TractionSpringDeltaMax   = 0.05,
 		LowSpeedTractionLossMult = 0.01,
-		CamberStiffnesss		 = 0.7,
+		CamberStiffness		 = 0.7,
 		TractionBiasFront        = 0.35,
 		TractionLossMult         = 4.62,
 
@@ -1760,7 +1760,7 @@ return {
 		TractionCurveLateral	 = 26.0,
 		TractionSpringDeltaMax   = 0.05,
 		LowSpeedTractionLossMult = 0.01,
-		CamberStiffnesss		 = 0.7,
+		CamberStiffness		 = 0.7,
 		TractionBiasFront        = 0.35,
 		TractionLossMult         = 4.62,
 
@@ -1851,7 +1851,7 @@ return {
 		TractionCurveLateral	 = 26.0,
 		TractionSpringDeltaMax   = 0.05,
 		LowSpeedTractionLossMult = 0.01,
-		CamberStiffnesss		 = 0.7,
+		CamberStiffness		 = 0.7,
 		TractionBiasFront        = 0.35,
 		TractionLossMult         = 4.62,
 
@@ -1942,7 +1942,7 @@ return {
 		TractionCurveLateral	 = 26.0,
 		TractionSpringDeltaMax   = 0.05,
 		LowSpeedTractionLossMult = 0.01,
-		CamberStiffnesss		 = 0.7,
+		CamberStiffness		 = 0.7,
 		TractionBiasFront        = 0.35,
 		TractionLossMult         = 4.62,
 
@@ -2033,7 +2033,7 @@ return {
 		TractionCurveLateral	 = 26.0,
 		TractionSpringDeltaMax   = 0.05,
 		LowSpeedTractionLossMult = 0.01,
-		CamberStiffnesss		 = 0.7,
+		CamberStiffness		 = 0.7,
 		TractionBiasFront        = 0.35,
 		TractionLossMult         = 4.62,
 
@@ -2124,7 +2124,7 @@ return {
 		TractionCurveLateral	 = 26.0,
 		TractionSpringDeltaMax   = 0.05,
 		LowSpeedTractionLossMult = 0.01,
-		CamberStiffnesss		 = 0.7,
+		CamberStiffness		 = 0.7,
 		TractionBiasFront        = 0.35,
 		TractionLossMult         = 4.62,
 
@@ -2215,7 +2215,7 @@ return {
 		TractionCurveLateral	 = 26.0,
 		TractionSpringDeltaMax   = 0.05,
 		LowSpeedTractionLossMult = 0.01,
-		CamberStiffnesss		 = 0.7,
+		CamberStiffness		 = 0.7,
 		TractionBiasFront        = 0.35,
 		TractionLossMult         = 4.62,
 
@@ -2306,7 +2306,7 @@ return {
 		TractionCurveLateral	 = 26.0,
 		TractionSpringDeltaMax   = 0.05,
 		LowSpeedTractionLossMult = 0.01,
-		CamberStiffnesss		 = 0.7,
+		CamberStiffness		 = 0.7,
 		TractionBiasFront        = 0.35,
 		TractionLossMult         = 4.62,
 
@@ -2397,7 +2397,7 @@ return {
 		TractionCurveLateral	 = 26.0,
 		TractionSpringDeltaMax   = 0.05,
 		LowSpeedTractionLossMult = 0.01,
-		CamberStiffnesss		 = 0.7,
+		CamberStiffness		 = 0.7,
 		TractionBiasFront        = 0.35,
 		TractionLossMult         = 4.62,
 
@@ -2488,7 +2488,7 @@ return {
 		TractionCurveLateral	 = 26.0,
 		TractionSpringDeltaMax   = 0.05,
 		LowSpeedTractionLossMult = 0.01,
-		CamberStiffnesss		 = 0.7,
+		CamberStiffness		 = 0.7,
 		TractionBiasFront        = 0.35,
 		TractionLossMult         = 4.62,
 
@@ -2579,7 +2579,7 @@ return {
 		TractionCurveLateral	 = 26.0,
 		TractionSpringDeltaMax   = 0.05,
 		LowSpeedTractionLossMult = 0.01,
-		CamberStiffnesss		 = 0.7,
+		CamberStiffness		 = 0.7,
 		TractionBiasFront        = 0.35,
 		TractionLossMult         = 4.62,
 
@@ -2670,7 +2670,7 @@ return {
 		TractionCurveLateral	 = 26.0,
 		TractionSpringDeltaMax   = 0.05,
 		LowSpeedTractionLossMult = 0.01,
-		CamberStiffnesss		 = 0.7,
+		CamberStiffness		 = 0.7,
 		TractionBiasFront        = 0.35,
 		TractionLossMult         = 4.62,
 
@@ -2761,7 +2761,7 @@ return {
 		TractionCurveLateral	 = 26.0,
 		TractionSpringDeltaMax   = 0.05,
 		LowSpeedTractionLossMult = 0.01,
-		CamberStiffnesss		 = 0.7,
+		CamberStiffness		 = 0.7,
 		TractionBiasFront        = 0.35,
 		TractionLossMult         = 4.62,
 

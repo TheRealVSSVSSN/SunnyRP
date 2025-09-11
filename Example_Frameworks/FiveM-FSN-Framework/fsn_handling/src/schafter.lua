@@ -92,7 +92,7 @@ return {
 		TractionCurveLateral     = 16.6,
 		TractionSpringDeltaMax   = 0.133,
 		LowSpeedTractionLossMult = 0.22,
-		CamberStiffnesss         = 0,
+		CamberStiffness         = 0,
 		TractionBiasFront        = 0.4834,
 		TractionLossMult         = 1.28,
 
