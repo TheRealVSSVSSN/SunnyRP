@@ -1,3 +1,10 @@
+--[[
+    -- Type: Variable
+    -- Name: state variables
+    -- Use: Track UI state for clothing interactions
+    -- Created: 2024-09-10
+    -- By: VSSVSSN
+--]]
 local firstSpawn = true
 local componentScroller = 0
 local subComponentScroller = 0
@@ -7,7 +14,19 @@ local removeScroller = 0
 local opacityScroller = 0
 local colourScroller = 0
 
-player_data = {}
+-- player clothing data container
+local player_data = {}
+
+--[[
+    -- Type: Function
+    -- Name: getPed
+    -- Use: Returns the current player's ped for reuse
+    -- Created: 2024-09-10
+    -- By: VSSVSSN
+--]]
+local function getPed()
+    return PlayerPedId()
+end
 
 RegisterNetEvent('fsn_clothing:menu')
 AddEventHandler('fsn_clothing:menu', function()
@@ -295,9 +314,17 @@ function overlays(title)
     end
 end
 
+--[[
+    -- Type: Function
+    -- Name: save
+    -- Use: Persists current outfit to server
+    -- Created: 2024-09-10
+    -- By: VSSVSSN
+--]]
 function save()
     if not player_data then player_data = {} end
-    player_data.model = GetEntityModel(PlayerPedId())
+    local ped = getPed()
+    player_data.model = GetEntityModel(ped)
     player_data.new = false
 	if not player_data.clothing then
 		player_data.clothing = {}
@@ -306,11 +333,11 @@ function save()
 		player_data.clothing.palette = {}
 	end
     for i = 0, 11 do
-        player_data.clothing.drawables[i+1] = GetPedDrawableVariation(PlayerPedId(), i)
+        player_data.clothing.drawables[i+1] = GetPedDrawableVariation(ped, i)
         if i ~= 2 then
-            player_data.clothing.textures[i+1] = GetPedTextureVariation(PlayerPedId(), i)
+            player_data.clothing.textures[i+1] = GetPedTextureVariation(ped, i)
         end
-        player_data.clothing.palette[i+1] = GetPedPaletteVariation(PlayerPedId(), i)
+        player_data.clothing.palette[i+1] = GetPedPaletteVariation(ped, i)
     end
 	
 	if not player_data.props then
@@ -319,8 +346,8 @@ function save()
 		player_data.props.textures = {}
 	end
     for i = 0, 7 do
-        player_data.props.drawables[i+1] = GetPedPropIndex(PlayerPedId(), i)
-        player_data.props.textures[i+1] = GetPedPropTextureIndex(PlayerPedId(), i)
+        player_data.props.drawables[i+1] = GetPedPropIndex(ped, i)
+        player_data.props.textures[i+1] = GetPedPropTextureIndex(ped, i)
     end
 	
 	if not player_data.overlays then
@@ -328,17 +355,25 @@ function save()
 		player_data.overlays.drawables = {}
 	end
     for i = 0, 12 do
-        player_data.overlays.drawables[i+1] = GetPedHeadOverlayValue(PlayerPedId(), i)
+        player_data.overlays.drawables[i+1] = GetPedHeadOverlayValue(ped, i)
     end
 
-    if player_data.clothing.drawables[12] == 55 and GetEntityModel(PlayerPedId()) == GetHashKey("mp_m_freemode_01") then player_data.clothing.drawables[12] = 56 SetPedComponentVariation(PlayerPedId(), 11, 56, 0, 2) end
-    if player_data.clothing.drawables[12] == 48 and GetEntityModel(PlayerPedId()) == GetHashKey("mp_f_freemode_01") then player_data.clothing.drawables[12] = 49 SetPedComponentVariation(PlayerPedId(), 11, 49, 0, 2) end
+    if player_data.clothing.drawables[12] == 55 and GetEntityModel(ped) == GetHashKey("mp_m_freemode_01") then player_data.clothing.drawables[12] = 56 SetPedComponentVariation(ped, 11, 56, 0, 2) end
+    if player_data.clothing.drawables[12] == 48 and GetEntityModel(ped) == GetHashKey("mp_f_freemode_01") then player_data.clothing.drawables[12] = 49 SetPedComponentVariation(ped, 11, 49, 0, 2) end
 
     TriggerServerEvent("clothes:save", player_data)
 end
 
+--[[
+    -- Type: Function
+    -- Name: GetOutfit
+    -- Use: Returns current outfit data without saving
+    -- Created: 2024-09-10
+    -- By: VSSVSSN
+--]]
 function GetOutfit()
-    player_data.model = GetEntityModel(PlayerPedId())
+    local ped = getPed()
+    player_data.model = GetEntityModel(ped)
     player_data.new = false
 	if not player_data.clothing then
 		player_data.clothing = {}
@@ -347,11 +382,11 @@ function GetOutfit()
 		player_data.clothing.palette = {}
 	end
     for i = 0, 11 do
-        player_data.clothing.drawables[i+1] = GetPedDrawableVariation(PlayerPedId(), i)
+        player_data.clothing.drawables[i+1] = GetPedDrawableVariation(ped, i)
         if i ~= 2 then
-            player_data.clothing.textures[i+1] = GetPedTextureVariation(PlayerPedId(), i)
+            player_data.clothing.textures[i+1] = GetPedTextureVariation(ped, i)
         end
-        player_data.clothing.palette[i+1] = GetPedPaletteVariation(PlayerPedId(), i)
+        player_data.clothing.palette[i+1] = GetPedPaletteVariation(ped, i)
     end
 	
 	if not player_data.props then
@@ -360,8 +395,8 @@ function GetOutfit()
 		player_data.props.textures = {}
 	end
     for i = 0, 7 do
-        player_data.props.drawables[i+1] = GetPedPropIndex(PlayerPedId(), i)
-        player_data.props.textures[i+1] = GetPedPropTextureIndex(PlayerPedId(), i)
+        player_data.props.drawables[i+1] = GetPedPropIndex(ped, i)
+        player_data.props.textures[i+1] = GetPedPropTextureIndex(ped, i)
     end
 	
 	if not player_data.overlays then
@@ -369,42 +404,56 @@ function GetOutfit()
 		player_data.overlays.drawables = {}
 	end
     for i = 0, 12 do
-        player_data.overlays.drawables[i+1] = GetPedHeadOverlayValue(PlayerPedId(), i)
+        player_data.overlays.drawables[i+1] = GetPedHeadOverlayValue(ped, i)
     end
 
-    if player_data.clothing.drawables[12] == 55 and GetEntityModel(PlayerPedId()) == GetHashKey("mp_m_freemode_01") then player_data.clothing.drawables[12] = 56 SetPedComponentVariation(PlayerPedId(), 11, 56, 0, 2) end
-    if player_data.clothing.drawables[12] == 48 and GetEntityModel(PlayerPedId()) == GetHashKey("mp_f_freemode_01") then player_data.clothing.drawables[12] = 49 SetPedComponentVariation(PlayerPedId(), 11, 49, 0, 2) end
+    if player_data.clothing.drawables[12] == 55 and GetEntityModel(ped) == GetHashKey("mp_m_freemode_01") then player_data.clothing.drawables[12] = 56 SetPedComponentVariation(ped, 11, 56, 0, 2) end
+    if player_data.clothing.drawables[12] == 48 and GetEntityModel(ped) == GetHashKey("mp_f_freemode_01") then player_data.clothing.drawables[12] = 49 SetPedComponentVariation(ped, 11, 49, 0, 2) end
 
     return player_data
 end
 
+--[[
+    -- Type: Function
+    -- Name: DisplayHelpText
+    -- Use: Renders helper text on screen
+    -- Created: 2024-09-10
+    -- By: VSSVSSN
+--]]
 function DisplayHelpText(str)
     SetTextComponentFormat("STRING")
     AddTextComponentString(str)
     DisplayHelpTextFromStringLabel(0, 0, 1, -1)
 end
 
+--[[
+    -- Type: Event
+    -- Name: clothes:changemodel
+    -- Use: Applies a new model to the player
+    -- Created: 2024-09-10
+    -- By: VSSVSSN
+--]]
 AddEventHandler("clothes:changemodel", function(skin)
-	local helf = GetEntityHealth(PlayerPedId())
+    local ped = getPed()
+    local health = GetEntityHealth(ped)
     local model = GetHashKey(skin)
     if IsModelInCdimage(model) and IsModelValid(model) then
         RequestModel(model)
         while not HasModelLoaded(model) do
-            Citizen.Wait(0)
+            Wait(0)
         end
         SetPlayerModel(PlayerId(), model)
-        if skin ~= "mp_f_freemode_01" and skin ~= "mp_m_freemode_01" then 
-            SetPedRandomComponentVariation(PlayerPedId(), true)
+        if model ~= GetHashKey("mp_f_freemode_01") and model ~= GetHashKey("mp_m_freemode_01") then
+            SetPedRandomComponentVariation(ped, true)
         else
-            SetPedComponentVariation(PlayerPedId(), 11, 0, 240, 0)
-            SetPedComponentVariation(PlayerPedId(), 8, 0, 240, 0)
-            SetPedComponentVariation(PlayerPedId(), 11, 6, 1, 0)
+            SetPedComponentVariation(ped, 11, 0, 240, 0)
+            SetPedComponentVariation(ped, 8, 0, 240, 0)
+            SetPedComponentVariation(ped, 11, 6, 1, 0)
         end
         SetModelAsNoLongerNeeded(model)
-    else
     end
-	TriggerEvent('fsn_criminalmisc:weapons:equip')
-	SetEntityHealth(PlayerPedId(), helf)
+    TriggerEvent('fsn_criminalmisc:weapons:equip')
+    SetEntityHealth(ped, health)
 end)
 
 local savingWeapons = {
@@ -470,77 +519,86 @@ local savingWeapons = {
 
 RegisterNetEvent("clothes:spawn")
 AddEventHandler("clothes:spawn", function(data)
-	local helf = GetEntityHealth(PlayerPedId())
+    local ped = getPed()
+    local helf = GetEntityHealth(ped)
     player_data = data
-	if data and type(data) == "table" and data.model then
-		local model = player_data.model
+    if data and type(data) == "table" and data.model then
+        local model = player_data.model
 		-- weapon saving
-		local pre_weapons = {}
-		local pre_health = 0
-		for i=1, #savingWeapons do
-			if HasPedGotWeapon(PlayerPedId(), GetHashKey(savingWeapons[i])) then
-			  local ammo = GetAmmoInPedWeapon(PlayerPedId(), GetHashKey(savingWeapons[i]))
-			  pre_weapons[#pre_weapons+1] = {weaponHash = savingWeapons[i], ammo = ammo}
-			end
-		end
-			
-		if IsModelInCdimage(model) and IsModelValid(model) then
-			RequestModel(model)
-			while not HasModelLoaded(model) do
-				Citizen.Wait(0)
-			end
-			SetPlayerModel(PlayerId(), model)
-			if skin ~= "mp_f_freemode_01" and skin ~= "mp_m_freemode_01" then 
-				SetPedRandomComponentVariation(PlayerPedId(), true)
-			else
-				SetPedComponentVariation(PlayerPedId(), 11, 0, 240, 0)
-				SetPedComponentVariation(PlayerPedId(), 8, 0, 240, 0)
-				SetPedComponentVariation(PlayerPedId(), 11, 6, 1, 0)
-			end
-			SetModelAsNoLongerNeeded(model)
-			if not player_data.new then
-				TriggerEvent("clothes:setComponents")
-			else
-				TriggerServerEvent("clothes:loaded")
-			end
-		end
-	else
-		TriggerEvent('clothes:firstspawn')
-		print('fsn_clothing: no clothing data????')
-	end
-	TriggerEvent('fsn_criminalmisc:weapons:equip')
-	SetPedSuffersCriticalHits(PlayerPedId(),false)
-	SetEntityHealth(PlayerPedId(), helf)
+        local pre_weapons = {}
+        for i=1, #savingWeapons do
+            if HasPedGotWeapon(ped, GetHashKey(savingWeapons[i])) then
+                local ammo = GetAmmoInPedWeapon(ped, GetHashKey(savingWeapons[i]))
+                pre_weapons[#pre_weapons+1] = {weaponHash = savingWeapons[i], ammo = ammo}
+            end
+        end
+
+        if IsModelInCdimage(model) and IsModelValid(model) then
+            RequestModel(model)
+            while not HasModelLoaded(model) do
+                Wait(0)
+            end
+            SetPlayerModel(PlayerId(), model)
+            if model ~= GetHashKey("mp_f_freemode_01") and model ~= GetHashKey("mp_m_freemode_01") then
+                SetPedRandomComponentVariation(ped, true)
+            else
+                SetPedComponentVariation(ped, 11, 0, 240, 0)
+                SetPedComponentVariation(ped, 8, 0, 240, 0)
+                SetPedComponentVariation(ped, 11, 6, 1, 0)
+            end
+            SetModelAsNoLongerNeeded(model)
+            if not player_data.new then
+                TriggerEvent("clothes:setComponents")
+            else
+                TriggerServerEvent("clothes:loaded")
+            end
+        end
+    else
+        TriggerEvent('clothes:firstspawn')
+        print('fsn_clothing: no clothing data????')
+    end
+    TriggerEvent('fsn_criminalmisc:weapons:equip')
+    SetPedSuffersCriticalHits(ped,false)
+    SetEntityHealth(ped, helf)
 end)
 
+
 AddEventHandler("clothes:setComponents", function()
-	local helf = GetEntityHealth(PlayerPedId())
-    if GetEntityModel(PlayerPedId()) == GetHashKey("mp_m_freemode_01") or GetEntityModel(PlayerPedId()) == GetHashKey("mp_f_freemode_01") then
+    local ped = getPed()
+    local helf = GetEntityHealth(ped)
+    if GetEntityModel(ped) == GetHashKey("mp_m_freemode_01") or GetEntityModel(ped) == GetHashKey("mp_f_freemode_01") then
         for i = 0, 11 do
             if i == 0 then
-                SetPedHeadBlendData(PlayerPedId(), player_data.clothing.drawables[i+1], player_data.clothing.drawables[i+1], 0, player_data.clothing.drawables[i+1], player_data.clothing.drawables[i+1], 0, 0.5, 0.5, 0.0, false)
+                SetPedHeadBlendData(ped, player_data.clothing.drawables[i+1], player_data.clothing.drawables[i+1], 0,player_data.clothing.drawables[i+1], player_data.clothing.drawables[i+1], 0, 0.5, 0.5, 0.0, false)
             elseif i == 2 then
-                SetPedComponentVariation(PlayerPedId(), i, player_data.clothing.drawables[i+1], 0, 1)
-                SetPedHairColor(PlayerPedId(), player_data.clothing.textures[i+1], player_data.clothing.textures[i+1])
+                SetPedComponentVariation(ped, i, player_data.clothing.drawables[i+1], 0, 1)
+                SetPedHairColor(ped, player_data.clothing.textures[i+1], player_data.clothing.textures[i+1])
             else
-                SetPedComponentVariation(PlayerPedId(), i, player_data.clothing.drawables[i+1], player_data.clothing.textures[i+1], player_data.clothing.palette[i+1])
+                SetPedComponentVariation(ped, i, player_data.clothing.drawables[i+1], player_data.clothing.textures[i+1], player_data.clothing.palette[i+1])
             end
         end
         for i = 0, 7 do
-            SetPedPropIndex(PlayerPedId(), i, player_data.props.drawables[i+1], player_data.props.textures[i+1], false)
+            SetPedPropIndex(ped, i, player_data.props.drawables[i+1], player_data.props.textures[i+1], false)
         end
-        for i = 0, 12 do
-            SetPedHeadOverlay(PlayerPedId(), i, player_data.overlays.drawables[i+1], player_data.overlays.opacity[i+1])
-            SetPedHeadOverlayColor(PlayerPedId(), i, player_data.overlays.colours[i+1].colourType, player_data.overlays.colours[i+1].colour, player_data.overlays.colours[i+1].colour)
+        if player_data.overlays then
+            for i = 0, 12 do
+                local draw = player_data.overlays.drawables and player_data.overlays.drawables[i+1] or 0
+                local opac = player_data.overlays.opacity and player_data.overlays.opacity[i+1] or 1.0
+                SetPedHeadOverlay(ped, i, draw, opac)
+                if player_data.overlays.colours and player_data.overlays.colours[i+1] then
+                    local colour = player_data.overlays.colours[i+1]
+                    SetPedHeadOverlayColor(ped, i, colour.colourType or 0, colour.colour or 0, colour.colour or 0)
+                end
+            end
         end
     else
         for i = 0, 11 do
-            SetPedComponentVariation(PlayerPedId(), i, player_data.clothing.drawables[i+1], player_data.clothing.textures[i+1], player_data.clothing.palette[i+1])
+            SetPedComponentVariation(ped, i, player_data.clothing.drawables[i+1], player_data.clothing.textures[i+1],player_data.clothing.palette[i+1])
         end
         for i = 0, 7 do
-            SetPedPropIndex(PlayerPedId(), i, player_data.props.drawables[i+1], player_data.props.textures[i+1], false)
+            SetPedPropIndex(ped, i, player_data.props.drawables[i+1], player_data.props.textures[i+1], false)
         end
     end
     TriggerServerEvent("clothes:loaded")
-	SetEntityHealth(PlayerPedId(), helf)
+    SetEntityHealth(ped, helf)
 end)
