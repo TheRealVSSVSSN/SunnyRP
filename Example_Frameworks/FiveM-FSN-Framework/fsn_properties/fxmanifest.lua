@@ -1,24 +1,28 @@
---[[/	:FSN:	\]]--
-fx_version 'adamant'
+--[[/   :FSN:   \]]--
+fx_version 'cerulean'
+lua54 'yes'
 game 'gta5'
 
-client_script '@fsn_main/cl_utils.lua'
-server_script '@fsn_main/sv_utils.lua'
-client_script '@fsn_main/server_settings/sh_settings.lua'
-server_script '@fsn_main/server_settings/sh_settings.lua'
-server_script '@mysql-async/lib/MySQL.lua'
---[[/	:FSN:	\]]--
-
-ui_page "nui/ui.html"
-files {
-	"nui/ui.html",
-	"nui/ui.js",
-	"nui/ui.css"
+client_scripts {
+    '@fsn_main/cl_utils.lua',
+    '@fsn_main/server_settings/sh_settings.lua',
+    'cl_manage.lua',
+    'cl_properties.lua'
 }
 
+server_scripts {
+    '@fsn_main/sv_utils.lua',
+    '@fsn_main/server_settings/sh_settings.lua',
+    '@mysql-async/lib/MySQL.lua',
+    'sv_conversion.lua',
+    'sv_properties.lua'
+}
 
-client_script 'cl_manage.lua'
-client_script 'cl_properties.lua'
+ui_page 'nui/ui.html'
+files {
+    'nui/ui.html',
+    'nui/ui.js',
+    'nui/ui.css'
+}
+--[[/   :FSN:   \]]--
 
-server_script 'sv_conversion.lua'
-server_script 'sv_properties.lua'

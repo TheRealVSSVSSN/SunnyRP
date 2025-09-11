@@ -194,25 +194,31 @@ AddEventHandler('fsn_properties:buy', function(id)
 	end
 end)
 
+--[[
+-- Type: Function
+-- Name: saveProperty
+-- Use: Persists property data to the database
+-- Created: 2025-09-10
+-- By: VSSVSSN
+]]
 function saveProperty(id)
-	local p = sv_properties[id]
-	
-	local inv = json.encode(p.inventory)
-	local keys = json.encode(p.keys)
-	local weps = json.encode(p.weapons)
-	local money = p.money
-	local owner = p.owner
-	local rent = p.rent
-	
-	MySQL.Sync.execute("UPDATE `fsn_properties` SET `property_owner` = @owner, `property_coowners` = @keys, `property_inventory` = @inv, `property_weapons` = @weps, `property_money` = @money, `property_expiry` = @rent WHERE `property_id` = @id;",  {
-		['@id'] = id,
-		['@owner'] = owner,
-		['@keys'] = keys,
-		['@inv'] = inv,
-		['@weps'] = weps,
-		['@money'] = money,
-		['@rent'] = rent,
-	})
+local p = sv_properties[id]
+local inv = json.encode(p.inventory)
+local keys = json.encode(p.keys)
+local weps = json.encode(p.weapons)
+local money = p.money
+local owner = p.owner
+local rent = p.rent
+
+MySQL.Async.execute("UPDATE `fsn_properties` SET `property_owner` = @owner, `property_coowners` = @keys, `property_inventory` = @inv, `property_weapons` = @weps, `property_money` = @money, `property_expiry` = @rent WHERE `property_id` = @id;", {
+['@id'] = id,
+['@owner'] = owner,
+['@keys'] = keys,
+['@inv'] = inv,
+['@weps'] = weps,
+['@money'] = money,
+['@rent'] = rent,
+})
 end
 --[[
 	commands
