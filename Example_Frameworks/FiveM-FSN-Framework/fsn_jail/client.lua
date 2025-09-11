@@ -1,191 +1,192 @@
-local jailtime = 0
-local totaltime = 0
-local beginSentence = 0
-local isinjail = false
-local characterid = 0
-local timetick = 0
-local jobcomplete = false
-local lastjob = 0
-local myjob = 0
+--[[
+    -- Type: Client Script
+    -- Name: fsn_jail client
+    -- Use: Handles jail logic for players
+    -- Created: 2024-04-21
+    -- By: VSSVSSN
+--]]
 
-local jobs = {
-	{x = 1609.4788818359, y = 2668.8981933594, z = 45.564933776855},
-	{x = 1608.2047119141, y = 2655.5576171875, z = 45.564933776855},
-	{x = 1663.1888427734, y = 2635.4958496094, z = 45.564880371094},
-	{x = 1703.9364013672, y = 2631.6931152344, z = 45.564872741699},
-	{x = 1758.1614990234, y = 2646.4929199219, z = 45.56489944458},
-	{x = 1779.0938720703, y = 2659.8835449219, z = 45.564910888672},
-	{x = 1756.6635742188, y = 2677.162109375, z = 45.564910888672},
-	{x = 1697.4555664063, y = 2686.08203125, z = 45.564888000488},
-	{x = 1661.994140625, y = 2636.4445800781, z = 45.564872741699},
-	{x = 1649.4085693359, y = 2586.0710449219, z = 45.56485748291},
-	{x = 1624.4453125, y = 2577.3071289063, z = 45.564868927002},
-	{x = 1625.0989990234, y = 2575.7470703125, z = 45.564876556396},
-	{x = 1608.9229736328, y = 2567.0065917969, z = 45.564876556396},
-	{x = 1609.6904296875, y = 2568.5939941406, z = 45.564876556396},
-	{x = 1707.1981201172, y = 2481.3537597656, z = 45.564918518066},
-	{x = 1706.1644287109, y = 2479.4211425781, z = 45.564922332764},
-	{x = 1737.2509765625, y = 2504.7338867188, z = 45.564975738525},
-	{x = 1735.4582519531, y = 2504.5319824219, z = 45.564987182617},
-	{x = 1760.7620849609, y = 2519.2299804688, z = 45.564987182617},
-	{x = 1760.8270263672, y = 2517.3139648438, z = 45.565002441406},
-	{x = 1761.4669189453, y = 2540.3828125, z = 45.565017700195},
-	{x = 1760.5579833984, y = 2541.4289550781, z = 45.565017700195},
-	{x = 1695.7875976563, y = 2535.9916992188, z = 45.564888000488},
-	{x = 1695.1467285156, y = 2537.8662109375, z = 45.564888000488},
-	{x = 1679.4931640625, y = 2480.4077148438, z = 45.564922332764},
-	{x = 1678.0528564453, y = 2480.9506835938, z = 45.564945220947},
-	{x = 1622.435546875, y = 2507.7373046875, z = 45.564888000488},
-	{x = 1621.630859375, y = 2509.3666992188, z = 45.564888000488}
+local state = {
+    time = 0,
+    total = 0,
+    tick = 0,
+    active = false,
+    lastJob = 0,
+    jobId = 0
 }
 
-function drawTxt(x,y ,width,height,scale, text, r,g,b,a, outline)
+local jailCoords = vector3(1653.5433, 2603.8093, 45.5649)
+local releaseCoords = vector3(1852.42, 2603.44, 45.672)
+local boundaryCentre = vector3(1691.8677, 2606.4614, 45.5603)
+local boundaryRadius = 330.0
+
+local jobs = {
+    vector3(1609.4789, 2668.8982, 45.5649),
+    vector3(1608.2047, 2655.5576, 45.5649),
+    vector3(1663.1888, 2635.4958, 45.5649),
+    vector3(1703.9364, 2631.6931, 45.5649),
+    vector3(1758.1615, 2646.4929, 45.5649),
+    vector3(1779.0939, 2659.8835, 45.5649),
+    vector3(1756.6636, 2677.1621, 45.5649),
+    vector3(1697.4556, 2686.0820, 45.5649),
+    vector3(1661.9941, 2636.4446, 45.5649),
+    vector3(1649.4086, 2586.0710, 45.5649),
+    vector3(1624.4453, 2577.3071, 45.5649),
+    vector3(1625.0990, 2575.7471, 45.5649),
+    vector3(1608.9230, 2567.0066, 45.5649),
+    vector3(1609.6904, 2568.5940, 45.5649),
+    vector3(1707.1981, 2481.3538, 45.5649),
+    vector3(1706.1644, 2479.4211, 45.5649),
+    vector3(1737.2510, 2504.7339, 45.5650),
+    vector3(1735.4583, 2504.5320, 45.5650),
+    vector3(1760.7621, 2519.2300, 45.5650),
+    vector3(1760.8270, 2517.3140, 45.5650),
+    vector3(1761.4669, 2540.3828, 45.5650),
+    vector3(1760.5580, 2541.4290, 45.5650),
+    vector3(1695.7876, 2535.9917, 45.5649),
+    vector3(1695.1467, 2537.8662, 45.5649),
+    vector3(1679.4932, 2480.4077, 45.5649),
+    vector3(1678.0529, 2480.9507, 45.5649),
+    vector3(1622.4355, 2507.7373, 45.5649),
+    vector3(1621.6309, 2509.3667, 45.5649)
+}
+
+local function drawTxt(x, y, width, height, scale, text, r, g, b, a, outline)
     SetTextFont(0)
-    SetTextProportional(0)
+    SetTextProportional(false)
     SetTextScale(scale, scale)
     SetTextColour(r, g, b, a)
-    SetTextDropShadow(0, 0, 0, 0,255)
-    SetTextEdge(1, 0, 0, 0, 255)
     SetTextDropShadow()
-    if(outline)then
-	    SetTextOutline()
-	end
-    SetTextEntry("STRING")
-    AddTextComponentString(text)
-    DrawText(x - width/2, y - height/2 + 0.005)
+    SetTextEdge(1, 0, 0, 0, 255)
+    if outline then SetTextOutline() end
+    BeginTextCommandDisplayText("STRING")
+    AddTextComponentSubstringPlayerName(text)
+    EndTextCommandDisplayText(x - width / 2, y - height / 2 + 0.005)
 end
 
-RegisterNetEvent('fsn_jail:spawn:recieve')
-AddEventHandler('fsn_jail:spawn:recieve', function(result)
-	jailtime = result
-  if jailtime >= 1 then
-    TriggerEvent('fsn_jail:sendme', jailtime)
-    TriggerServerEvent('fsn_jail:update:database', jailtime)
-  else
-    jailtime = 0
-    beginSentence = 0
-    isinjail = false
-  end
-end)
+local function teleport(coords)
+    SetEntityCoords(PlayerPedId(), coords.x, coords.y, coords.z)
+end
 
-RegisterNetEvent('fsn_jail:sendme')
-AddEventHandler('fsn_jail:sendme', function(time)
-	jailtime = time
-	totaltime = time
-  isinjail = true
-  RemoveAllPedWeapons(PlayerPedId())
-  local jail = {x = 1653.5433349609, y = 2603.8093261719, z = 45.564876556396}
-  SetEntityCoords(PlayerPedId(), jail.x, jail.y,jail.z+1)
-  TriggerEvent('pNotify:SendNotification', {text = "You've been sent to jail for: ".. math.floor(tonumber(jailtime) / 60) .." minutes",
-    layout = "centerRight",
-    timeout = 600,
-    progressBar = true,
-    type = "info"
-  })
-  TriggerEvent('fsn_hungerandthirst:pause')
-end)
+local function assignJob()
+    state.jobId = math.random(1, #jobs)
+    state.lastJob = state.tick
+    TriggerEvent('fsn_notify:displayNotification', 'You just got a new job (#' .. state.jobId .. "), head to it to reduce your sentence!", 'centerRight', 4000, 'info')
+end
 
-RegisterNetEvent('fsn_jail:releaseme')
-AddEventHandler('fsn_jail:releaseme', function()
-	jailtime = 0
-  isinjail = false
-  SetEntityCoords(PlayerPedId(), 1852.42, 2603.44,45.672)
-  TriggerServerEvent('fsn_jail:update:database', jailtime)
-  TriggerEvent('pNotify:SendNotification', {text = "You've been released from jail",
-    layout = "centerRight",
-    timeout = 600,
-    progressBar = true,
-    type = "info"
-  })
-  TriggerEvent('fsn_hungerandthirst:unpause')
-end)
+local function completeJob()
+    local earned = math.random(60, 180)
+    state.time = math.max(state.time - earned, 0)
+    state.lastJob = state.tick
+    state.jobId = 0
+    TriggerEvent('fsn_notify:displayNotification', 'Job well done! ' .. earned .. ' seconds earned!', 'centerRight', 4000, 'success')
+end
 
-RegisterNetEvent('fsn_jail:init')
-AddEventHandler('fsn_jail:init', function(char_id)
-  characterid = char_id
-  TriggerServerEvent("fsn_jail:spawn", characterid)
-end)
+local function jailInfo()
+    local inmins = math.floor(state.time / 60)
+    drawTxt(1.24, 1.44, 1.0, 1.0, 0.4, 'Jailtime: ~r~' .. inmins .. '~w~ minutes remaining', 255, 255, 255, 255)
+end
 
-Citizen.CreateThread(function()
-  while true do
-    Citizen.Wait(0)
-    if isinjail then
-		local maff = lastjob + 30
-		if maff <= timetick then
-			if myjob == 0 then
-				if jailtime > totaltime / 50 then
-					myjob = math.random(1, #jobs)
-					lastjob = timetick
-					TriggerEvent('fsn_notify:displayNotification', 'You just got a new job (#'..myjob..'), head to it to reduce your sentence!', 'centerRight', 4000, 'info')
-				end
-			end
-		else
-			--print(maff..' not larger than '..timetick..', waiting')
-		end
-		if myjob ~= 0 then
-			local job = jobs[myjob]
-			DrawMarker(1,job.x, job.y, job.z-1,0,0,0,0,0,0,1.0,1.0,90.4001,0,155,255,175,0,0,0,0)
-			if GetDistanceBetweenCoords(job.x, job.y, job.z, GetEntityCoords(PlayerPedId()), true) < 1 then
-				--amb@world_human_welding@male@idle_a
-				--idle_a
-				RequestAnimDict('amb@world_human_welding@male@idle_a')
-				while not HasAnimDictLoaded('amb@world_human_welding@male@idle_a') do
-					Citizen.Wait(1)
-				end
-				TaskPlayAnim(PlayerPedId(), "amb@world_human_welding@male@idle_a", 'idle_a', 4.0, -4, -1, 1, 0, 0, 0, 0)
-				SetTextComponentFormat("STRING")
-				AddTextComponentString("~g~working...")
-				DisplayHelpTextFromStringLabel(0, 0, 1, -1)
-				local sex = math.random(60,180)
-				jailtime = jailtime - sex
-				lastjob = timetick
-				myjob = 0
-				TriggerEvent('fsn_notify:displayNotification', 'Job well done! '..sex..' seconds earned!', 'centerRight', 4000, 'success')
-			end
-		end
-      local inmins = tonumber(jailtime) / 60
-      drawTxt(1.24, 1.44, 1.0,1.0,0.4, "Jailtime: ~r~" .. math.floor(inmins) .. "~w~ minutes remaining", 255, 255, 255, 255)
+RegisterNetEvent('fsn_jail:spawn:receive', function(result)
+    state.time = result
+    if state.time >= 1 then
+        TriggerEvent('fsn_jail:enter', state.time)
+        TriggerServerEvent('fsn_jail:update:database', state.time)
+    else
+        state.time = 0
+        state.active = false
     end
-  end
 end)
 
-Citizen.CreateThread(function()
-  while true do
-    Citizen.Wait(0)
-    if isinjail then
-      Citizen.Wait(1000)
-	  timetick = timetick + 1
-      jailtime = jailtime - 1
-	  if GetDistanceBetweenCoords(1691.8676757813, 2606.4614257813, 45.560329437256,GetEntityCoords(PlayerPedId()), true) > 330 then
-		SetEntityCoords(PlayerPedId(), 1654.0007324219, 2601.3422851563, 45.564872741699)
-		TriggerEvent('fsn_notify:displayNotification', 'You must stay in jail for the entirity of your sentence!', 'centerRight', 6000, 'error')
-	  end
-      if jailtime <= 0 then
-        TriggerEvent('fsn_jail:releaseme')
-      end
-    end
-  end
+-- compatibility with old misspelled event
+RegisterNetEvent('fsn_jail:spawn:recieve', function(result)
+    TriggerEvent('fsn_jail:spawn:receive', result)
 end)
 
---[[
-Citizen.CreateThread(function()
-  while true do
-    Citizen.Wait(0)
-    if isinjail then
-		DrawMarker(1,1691.8676757813, 2606.4614257813, 45.560329437256,0,0,0,0,0,0,330.001,330.0001,30.4001,0,155,255,175,0,0,0,0)
-		for k,v in pairs(jobs) do
-			DrawMarker(1,v.x, v.y, v.z-1,0,0,0,0,0,0,1.0,1.0,90.4001,0,155,255,175,0,0,0,0)
-		end
-    end
-  end
+RegisterNetEvent('fsn_jail:enter', function(time)
+    state.time = time
+    state.total = time
+    state.active = true
+    RemoveAllPedWeapons(PlayerPedId())
+    teleport(jailCoords + vector3(0.0, 0.0, 1.0))
+    TriggerEvent('pNotify:SendNotification', {text = "You've been sent to jail for: " .. math.floor(state.time / 60) .. " minutes",
+        layout = 'centerRight', timeout = 600, progressBar = true, type = 'info'})
+    TriggerEvent('fsn_hungerandthirst:pause')
 end)
-]]
-Citizen.CreateThread(function()
-  while true do
-    Citizen.Wait(0)
-    if isinjail then
-      Citizen.Wait(60000)
-      TriggerServerEvent('fsn_jail:update:database', jailtime)
+
+RegisterNetEvent('fsn_jail:release', function()
+    state.time = 0
+    state.active = false
+    state.jobId = 0
+    teleport(releaseCoords)
+    TriggerServerEvent('fsn_jail:update:database', state.time)
+    TriggerEvent('pNotify:SendNotification', {text = "You've been released from jail", layout = 'centerRight', timeout = 600, progressBar = true, type = 'info'})
+    TriggerEvent('fsn_hungerandthirst:unpause')
+end)
+
+-- compatibility alias
+RegisterNetEvent('fsn_jail:releaseme', function()
+    TriggerEvent('fsn_jail:release')
+end)
+
+RegisterNetEvent('fsn_jail:init', function(charId)
+    TriggerServerEvent('fsn_jail:spawn', charId)
+end)
+
+CreateThread(function()
+    while true do
+        if state.active then
+            Wait(0)
+            local now = state.tick
+            if state.jobId == 0 and (now - state.lastJob) >= 30 and state.time > (state.total / 50) then
+                assignJob()
+            end
+            if state.jobId ~= 0 then
+                local job = jobs[state.jobId]
+                DrawMarker(1, job.x, job.y, job.z - 1.0, 0, 0, 0, 0, 0, 0, 1.0, 1.0, 90.4001, 0, 155, 255, 175, false, false, 0, false)
+                if #(GetEntityCoords(PlayerPedId()) - job) < 1.0 then
+                    RequestAnimDict('amb@world_human_welding@male@idle_a')
+                    while not HasAnimDictLoaded('amb@world_human_welding@male@idle_a') do
+                        Wait(1)
+                    end
+                    TaskPlayAnim(PlayerPedId(), 'amb@world_human_welding@male@idle_a', 'idle_a', 4.0, -4.0, -1, 1, 0, false, false, false)
+                    BeginTextCommandDisplayHelp('STRING')
+                    AddTextComponentSubstringPlayerName('~g~working...')
+                    EndTextCommandDisplayHelp(0, false, true, -1)
+                    completeJob()
+                end
+            end
+            jailInfo()
+        else
+            Wait(1000)
+        end
     end
-  end
+end)
+
+CreateThread(function()
+    while true do
+        if state.active then
+            Wait(1000)
+            state.tick = state.tick + 1
+            state.time = state.time - 1
+            if #(GetEntityCoords(PlayerPedId()) - boundaryCentre) > boundaryRadius then
+                teleport(jailCoords)
+                TriggerEvent('fsn_notify:displayNotification', 'You must stay in jail for the entirety of your sentence!', 'centerRight', 6000, 'error')
+            end
+            if state.time <= 0 then
+                TriggerEvent('fsn_jail:release')
+            end
+        else
+            Wait(1000)
+        end
+    end
+end)
+
+CreateThread(function()
+    while true do
+        Wait(60000)
+        if state.active then
+            TriggerServerEvent('fsn_jail:update:database', state.time)
+        end
+    end
 end)

@@ -1,50 +1,73 @@
-local current_characters = {}
+--[[
+    -- Type: Server Script
+    -- Name: fsn_jail server
+    -- Use: Handles jail related server events and database interaction
+    -- Created: 2024-04-21
+    -- By: VSSVSSN
+--]]
+
+local currentCharacters = {}
+
 AddEventHandler('fsn_main:updateCharacters', function(tbl)
-  current_characters = tbl
-end)
-RegisterServerEvent('fsn_jail:spawn')
-AddEventHandler('fsn_jail:spawn', function(char_id)
-  local src = source
-	MySQL.Async.fetchAll("SELECT * FROM `fsn_characters` WHERE char_id = @id", { ['@id'] = char_id}, function (result)
-    if(result[1] == nil) then
-			print('we dont have a fucking clue')
-		else
-      print(char_id..' HAS '..result[1].char_jailtime..' LEFT IN JAIL')
-			TriggerClientEvent('fsn_jail:spawn:recieve', src, result[1].char_jailtime)
-		end
-	end)
+    currentCharacters = tbl
 end)
 
-RegisterServerEvent('fsn_jail:sendsuspect')
-AddEventHandler('fsn_jail:sendsuspect', function(src, player, time)
-  local character = 0
-  for k, v in pairs(current_characters) do
-    if v.ply_id == player then
-      character = v.char_id
-    end
-  end
-  MySQL.Async.execute("UPDATE `fsn_characters` SET `char_jailtime` = '"..time.."' WHERE `char_id` = '"..character.."';", {})
-  TriggerClientEvent('pNotify:SendNotification', src, {text = "You jailed "..player.." for " ..math.floor(time/60).. "mins.",
-    layout = "centerRight",
-    timeout = 300,
-    progressBar = true,
-    type = "success"
-  })
-  TriggerClientEvent('fsn_jail:spawn:recieve', player, time)
+RegisterNetEvent('fsn_jail:spawn', function(charId)
+    local src = source
+    MySQL.Async.fetchScalar('SELECT char_jailtime FROM fsn_characters WHERE char_id = @id', {['@id'] = charId}, function(time)
+        time = tonumber(time) or 0
+        print(('%s has %s left in jail'):format(charId, time))
+        TriggerClientEvent('fsn_jail:spawn:receive', src, time)
+    end)
 end)
 
-RegisterServerEvent('fsn_jail:update:database')
-AddEventHandler('fsn_jail:update:database', function(time)
-  for k, v in pairs(current_characters) do
-    if v.ply_id == source then
-      char_id = v.char_id
+RegisterNetEvent('fsn_jail:sendsuspect', function(copId, targetId, time)
+    local charId
+    for _, v in pairs(currentCharacters) do
+        if v.ply_id == targetId then
+            charId = v.char_id
+            break
+        end
     end
-  end
-  MySQL.Async.execute("UPDATE `fsn_characters` SET `char_jailtime` = '"..time.."' WHERE `char_id` = '"..char_id.."';", {})
-  TriggerClientEvent('pNotify:SendNotification', source, {text = "Jailtime updated to "..time,
-    layout = "centerRight",
-    timeout = 300,
-    progressBar = true,
-    type = "success"
-  })
+    if not charId then return end
+    MySQL.Async.execute('UPDATE fsn_characters SET char_jailtime = @time WHERE char_id = @char', {
+        ['@time'] = time,
+        ['@char'] = charId
+    })
+    TriggerClientEvent('pNotify:SendNotification', copId, {
+        text = 'You jailed '..targetId..' for '..math.floor(time/60)..' mins.',
+        layout = 'centerRight',
+        timeout = 300,
+        progressBar = true,
+        type = 'success'
+    })
+    TriggerClientEvent('fsn_jail:spawn:receive', targetId, time)
+end)
+
+RegisterNetEvent('fsn_jail:update:database', function(time)
+    local src = source
+    local charId
+    for _, v in pairs(currentCharacters) do
+        if v.ply_id == src then
+            charId = v.char_id
+            break
+        end
+    end
+    if not charId then return end
+    MySQL.Async.execute('UPDATE fsn_characters SET char_jailtime = @time WHERE char_id = @char', {
+        ['@time'] = time,
+        ['@char'] = charId
+    })
+    TriggerClientEvent('pNotify:SendNotification', src, {
+        text = 'Jailtime updated to '..time,
+        layout = 'centerRight',
+        timeout = 300,
+        progressBar = true,
+        type = 'success'
+    })
+end)
+
+-- compatibility with old misspelled client event
+RegisterNetEvent('fsn_jail:spawn:recieve', function(charId)
+    TriggerEvent('fsn_jail:spawn', charId)
 end)
