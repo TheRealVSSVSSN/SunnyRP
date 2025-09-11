@@ -1,10 +1,9 @@
-resource_manifest_version '44febabe-d386-4d18-afbe-5e627f4af937'
+fx_version 'cerulean'
+game 'gta5'
 
-client_script('client/client.lua')
+ui_page 'client/html/index.html'
 
-ui_page('client/html/index.html')
-
-files({
+files {
     'client/html/index.html',
     'client/html/script.js',
     'client/html/style.css',
@@ -22,5 +21,9 @@ files({
     'client/html/buttonOff.png',
     'client/html/buttonOn.png',
     'client/html/buttonHover.png',
-    'client/html/engine.png',
-})
+    'client/html/engine.png'
+}
+
+client_scripts {
+    'client/client.lua'
+}
