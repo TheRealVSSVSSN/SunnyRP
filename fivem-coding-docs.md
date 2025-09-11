@@ -430,7 +430,7 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Player | 248 | 231 | 17 | 2025-09-11T06:06 |
+| Player | 248 | 235 | 13 | 2025-09-11T06:21 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -879,7 +879,7 @@ ensure my_resource
   - Visual only.
 - **Reference**: https://docs.fivem.net/natives/?n=CLEAR_PLAYER_PARACHUTE_VARIATION_OVERRIDE
 
-##### _ClearPlayerReserveParachuteModelOverride (0x290D248E25815AE8)
+##### ClearPlayerReserveParachuteModelOverride (0x290D248E25815AE8)
 - **Scope**: Client
 - **Signature**: `void _CLEAR_PLAYER_RESERVE_PARACHUTE_MODEL_OVERRIDE(Player player)`
 - **Purpose**: Clears reserve parachute model override.
@@ -899,7 +899,7 @@ ensure my_resource
         -- By: VSSVSSN
     --]]
     RegisterCommand('clear_para_reserve', function()
-        _ClearPlayerReserveParachuteModelOverride(PlayerId())
+        ClearPlayerReserveParachuteModelOverride(PlayerId())
     end)
     ```
   - JavaScript:
@@ -907,7 +907,7 @@ ensure my_resource
     ```javascript
     /* Command: clear_para_reserve */
     RegisterCommand('clear_para_reserve', () => {
-      _ClearPlayerReserveParachuteModelOverride(PlayerId());
+      ClearPlayerReserveParachuteModelOverride(PlayerId());
     });
     ```
 - **Caveats / Limitations**:
@@ -1254,7 +1254,7 @@ ensure my_resource
   - Use carefully to avoid terminating critical threads.
 - **Reference**: https://docs.fivem.net/natives/?n=FORCE_CLEANUP_FOR_THREAD_WITH_THIS_ID
 
-##### _GetAchievementProgress (0x1C186837D0619335)
+##### GetAchievementProgress (0x1C186837D0619335)
 - **Scope**: Client
 - **Signature**: `int _GET_ACHIEVEMENT_PROGRESS(int achievement)`
 - **Purpose**: Retrieves progress toward a given achievement.
@@ -1326,6 +1326,281 @@ ensure my_resource
 - **Reference**: https://docs.fivem.net/natives/?n=GET_ARE_CAMERA_CONTROLS_DISABLED
 
 ##### GetCauseOfMostRecentForceCleanup (0x9A41CF4674A12272 / 0x39AA9FC8)
+
+##### GetEntityPlayerIsFreeAimingAt (0x2975C866E6713290 / 0x8866D9D0)
+- **Scope**: Client
+- **Signature**: `BOOL GET_ENTITY_PLAYER_IS_FREE_AIMING_AT(Player player, Entity* entity)`
+- **Purpose**: Checks if the player is aiming freely at an entity and returns that entity.
+- **Parameters / Returns**:
+  - `player` (Player): Player index.
+  - `entity` (Entity*): Output handle for targeted entity.
+  - `**Returns**` (bool): success flag
+- **OneSync / Networking**: Local query; server should validate aim targets when needed.
+- **Examples**:
+  - Lua:
+    ```lua
+
+--[[
+    -- Type: Command
+    -- Name: aim_ent
+    -- Use: Prints entity ID the player is aiming at
+    -- Created: 2025-09-11
+    -- By: VSSVSSN
+--]]
+RegisterCommand('aim_ent', function()
+    local ent=0
+    if GetEntityPlayerIsFreeAimingAt(PlayerId(), ent) then
+        print(('Entity: %s'):format(ent))
+    else
+        print('No entity in sight')
+    end
+end)
+
+    ```
+  - JavaScript:
+    ```javascript
+
+/* Command: aim_ent */
+RegisterCommand('aim_ent', () => {
+  const ent = Citizen.pointerValueInt();
+  if (GetEntityPlayerIsFreeAimingAt(PlayerId(), ent)) {
+    console.log(`Entity: ${Citizen.pointerGetValue(ent)}`);
+  } else {
+    console.log('No entity in sight');
+  }
+});
+
+    ```
+- **Caveats / Limitations**:
+  - Requires a valid weapon and aim mode.
+- **Reference**: https://docs.fivem.net/natives/?n=GetEntityPlayerIsFreeAimingAt
+
+
+##### GetIsPlayerDrivingOnHighway (0x5FC472C501CCADB3 / 0x46E7E31D)
+- **Scope**: Client
+- **Signature**: `BOOL GET_IS_PLAYER_DRIVING_ON_HIGHWAY(Player playerId)`
+- **Purpose**: Determines if the player is currently driving on a highway.
+- **Parameters / Returns**:
+  - `playerId` (Player): Local player index.
+  - `**Returns**` (bool): whether on highway
+- **OneSync / Networking**: Local check; server cannot rely on this for enforcement.
+- **Examples**:
+  - Lua:
+    ```lua
+
+--[[
+    -- Type: Command
+    -- Name: on_highway
+    -- Use: Reports if player drives on a highway
+    -- Created: 2025-09-11
+    -- By: VSSVSSN
+--]]
+RegisterCommand('on_highway', function()
+    print(GetIsPlayerDrivingOnHighway(PlayerId()))
+end)
+
+    ```
+  - JavaScript:
+    ```javascript
+
+/* Command: on_highway */
+RegisterCommand('on_highway', () => {
+  console.log(GetIsPlayerDrivingOnHighway(PlayerId()));
+});
+
+    ```
+- **Caveats / Limitations**:
+  - Detection relies on map data and may be imperfect.
+- **Reference**: https://docs.fivem.net/natives/?n=GetIsPlayerDrivingOnHighway
+
+
+##### GetMaxWantedLevel (0x462E0DB9B137DC5F / 0x457F1E44)
+- **Scope**: Client
+- **Signature**: `int GET_MAX_WANTED_LEVEL()`
+- **Purpose**: Returns the global maximum wanted level allowed.
+- **Parameters / Returns**:
+  - `**Returns**` (int): max level (0–5)
+- **OneSync / Networking**: Local; server sets rules separately.
+- **Examples**:
+  - Lua:
+    ```lua
+
+--[[
+    -- Type: Command
+    -- Name: max_wanted
+    -- Use: Prints game maximum wanted level
+    -- Created: 2025-09-11
+    -- By: VSSVSSN
+--]]
+RegisterCommand('max_wanted', function()
+    print(('Max wanted: %d'):format(GetMaxWantedLevel()))
+end)
+
+    ```
+  - JavaScript:
+    ```javascript
+
+/* Command: max_wanted */
+RegisterCommand('max_wanted', () => {
+  console.log(`Max wanted: ${GetMaxWantedLevel()}`);
+});
+
+    ```
+- **Caveats / Limitations**:
+  - Does not alter current player state.
+- **Reference**: https://docs.fivem.net/natives/?n=GetMaxWantedLevel
+
+
+##### GetNumberOfPlayers (0x407C7F91DDB46C16 / 0x4C1B8867)
+- **Scope**: Shared
+- **Signature**: `int GET_NUMBER_OF_PLAYERS()`
+- **Purpose**: Provides the count of players in the current session.
+- **Parameters / Returns**:
+  - `**Returns**` (int): player count
+- **OneSync / Networking**: Server authoritative for connected clients.
+- **Examples**:
+  - Lua:
+    ```lua
+
+--[[
+    -- Type: Command
+    -- Name: count_players
+    -- Use: Prints player count
+    -- Created: 2025-09-11
+    -- By: VSSVSSN
+--]]
+RegisterCommand('count_players', function()
+    print(('Players: %d'):format(GetNumberOfPlayers()))
+end)
+
+    ```
+  - JavaScript:
+    ```javascript
+
+/* Command: count_players */
+RegisterCommand('count_players', () => {
+  console.log(`Players: ${GetNumberOfPlayers()}`);
+});
+
+    ```
+- **Caveats / Limitations**:
+  - On non-networked sessions, always returns 1.
+- **Reference**: https://docs.fivem.net/natives/?n=GetNumberOfPlayers
+
+
+##### GetNumberOfPlayersInTeam (0x1FC200409F10E6F1)
+- **Scope**: Client
+- **Signature**: `int _GET_NUMBER_OF_PLAYERS_IN_TEAM(int team)`
+- **Purpose**: Counts players assigned to a specific team.
+- **Parameters / Returns**:
+  - `team` (int): Team index.
+  - `**Returns**` (int): number of players
+- **OneSync / Networking**: Team tracking depends on game mode; not synced by default.
+- **Examples**:
+  - Lua:
+    ```lua
+
+--[[
+    -- Type: Command
+    -- Name: team_count
+    -- Use: Prints number of players in team 0
+    -- Created: 2025-09-11
+    -- By: VSSVSSN
+--]]
+RegisterCommand('team_count', function()
+    print(GetNumberOfPlayersInTeam(0))
+end)
+
+    ```
+  - JavaScript:
+    ```javascript
+
+/* Command: team_count */
+RegisterCommand('team_count', () => {
+  console.log(GetNumberOfPlayersInTeam(0));
+});
+
+    ```
+- **Caveats / Limitations**:
+  - Team assignments require custom scripts.
+- **Reference**: https://docs.fivem.net/natives/?n=GetNumberOfPlayersInTeam
+
+
+##### GetPlayerCurrentStealthNoise (0x2F395D61F3A1F877 / 0xC3B02362)
+- **Scope**: Client
+- **Signature**: `float GET_PLAYER_CURRENT_STEALTH_NOISE(Player player)`
+- **Purpose**: Retrieves the player's current noise level for stealth mechanics.
+- **Parameters / Returns**:
+  - `player` (Player): Player index.
+  - `**Returns**` (float): noise value
+- **OneSync / Networking**: Local use; does not replicate.
+- **Examples**:
+  - Lua:
+    ```lua
+
+--[[
+    -- Type: Command
+    -- Name: stealth_noise
+    -- Use: Prints current stealth noise
+    -- Created: 2025-09-11
+    -- By: VSSVSSN
+--]]
+RegisterCommand('stealth_noise', function()
+    print(GetPlayerCurrentStealthNoise(PlayerId()))
+end)
+
+    ```
+  - JavaScript:
+    ```javascript
+
+/* Command: stealth_noise */
+RegisterCommand('stealth_noise', () => {
+  console.log(GetPlayerCurrentStealthNoise(PlayerId()));
+});
+
+    ```
+- **Caveats / Limitations**:
+  - Values are undefined when not sneaking.
+- **Reference**: https://docs.fivem.net/natives/?n=GetPlayerCurrentStealthNoise
+
+
+##### GetPlayerFakeWantedLevel (0x56105E599CAB0EFA / 0x0098D244)
+- **Scope**: Client
+- **Signature**: `int GET_PLAYER_FAKE_WANTED_LEVEL(Player player)`
+- **Purpose**: Returns a scripted wanted level unrelated to actual police response.
+- **Parameters / Returns**:
+  - `player` (Player): Player index.
+  - `**Returns**` (int): fake wanted level
+- **OneSync / Networking**: Cosmetic; does not trigger network wanted status.
+- **Examples**:
+  - Lua:
+    ```lua
+
+--[[
+    -- Type: Command
+    -- Name: fake_wanted
+    -- Use: Prints player's fake wanted level
+    -- Created: 2025-09-11
+    -- By: VSSVSSN
+--]]
+RegisterCommand('fake_wanted', function()
+    print(GetPlayerFakeWantedLevel(PlayerId()))
+end)
+
+    ```
+  - JavaScript:
+    ```javascript
+
+/* Command: fake_wanted */
+RegisterCommand('fake_wanted', () => {
+  console.log(GetPlayerFakeWantedLevel(PlayerId()));
+});
+
+    ```
+- **Caveats / Limitations**:
+  - Only used by specific missions.
+- **Reference**: https://docs.fivem.net/natives/?n=GetPlayerFakeWantedLevel
+
 - **Scope**: Client
 - **Signature**: `int GET_CAUSE_OF_MOST_RECENT_FORCE_CLEANUP()`
 - **Purpose**: Retrieves the cause code for the latest `ForceCleanup`.
@@ -1845,6 +2120,164 @@ ensure my_resource
 - **Reference**: https://docs.fivem.net/natives/?n=GetPlayerParachuteTintIndex
 
 ##### GetPlayerPed (0x43A66C31C68491C0)
+
+##### GetPlayerPedScriptIndex (0x50FAC3A3E030A6E1 / 0x6AC64990)
+- **Scope**: Client
+- **Signature**: `Ped GET_PLAYER_PED_SCRIPT_INDEX(Player player)`
+- **Purpose**: Retrieves the pedestrian handle using the script index of a player.
+- **Parameters / Returns**:
+  - `player` (Player): Player index.
+  - `**Returns**` (Ped): ped handle
+- **OneSync / Networking**: Requires entity ownership for remote players.
+- **Examples**:
+  - Lua:
+    ```lua
+
+--[[
+    -- Type: Command
+    -- Name: ped_script
+    -- Use: Prints ped handle via script index
+    -- Created: 2025-09-11
+    -- By: VSSVSSN
+--]]
+RegisterCommand('ped_script', function()
+    print(GetPlayerPedScriptIndex(PlayerId()))
+end)
+
+    ```
+  - JavaScript:
+    ```javascript
+
+/* Command: ped_script */
+RegisterCommand('ped_script', () => {
+  console.log(GetPlayerPedScriptIndex(PlayerId()));
+});
+
+    ```
+- **Caveats / Limitations**:
+  - Same result as `GetPlayerPed` for local player.
+- **Reference**: https://docs.fivem.net/natives/?n=GetPlayerPedScriptIndex
+
+
+##### GetPlayerReserveParachuteModelOverride (0x37FAAA68DCA9D08D)
+- **Scope**: Client
+- **Signature**: `Hash _GET_PLAYER_RESERVE_PARACHUTE_MODEL_OVERRIDE(Player player)`
+- **Purpose**: Returns the override model hash for the player's reserve parachute.
+- **Parameters / Returns**:
+  - `player` (Player): Player index.
+  - `**Returns**` (Hash): model identifier
+- **OneSync / Networking**: Local visual change only.
+- **Examples**:
+  - Lua:
+    ```lua
+
+--[[
+    -- Type: Command
+    -- Name: reserve_model
+    -- Use: Prints reserve parachute model override
+    -- Created: 2025-09-11
+    -- By: VSSVSSN
+--]]
+RegisterCommand('reserve_model', function()
+    print(GetPlayerReserveParachuteModelOverride(PlayerId()))
+end)
+
+    ```
+  - JavaScript:
+    ```javascript
+
+/* Command: reserve_model */
+RegisterCommand('reserve_model', () => {
+  console.log(GetPlayerReserveParachuteModelOverride(PlayerId()));
+});
+
+    ```
+- **Caveats / Limitations**:
+  - Only returns a value if previously set.
+- **Reference**: https://docs.fivem.net/natives/?n=GetPlayerReserveParachuteModelOverride
+
+
+##### GetPlayerReserveParachuteTintIndex (0xD5A016BC3C09CF40 / 0x77B8EF01)
+- **Scope**: Client
+- **Signature**: `void GET_PLAYER_RESERVE_PARACHUTE_TINT_INDEX(Player player, int* index)`
+- **Purpose**: Obtains the tint index for the player's reserve parachute.
+- **Parameters / Returns**:
+  - `player` (Player): Player index.
+  - `index` (int*): Output tint index.
+- **OneSync / Networking**: Visual only; not networked.
+- **Examples**:
+  - Lua:
+    ```lua
+
+--[[
+    -- Type: Command
+    -- Name: reserve_tint
+    -- Use: Prints reserve parachute tint
+    -- Created: 2025-09-11
+    -- By: VSSVSSN
+--]]
+RegisterCommand('reserve_tint', function()
+    local tint = GetPlayerReserveParachuteTintIndex(PlayerId())
+    print(('Tint: %d'):format(tint))
+end)
+
+    ```
+  - JavaScript:
+    ```javascript
+
+/* Command: reserve_tint */
+RegisterCommand('reserve_tint', () => {
+  const tint = GetPlayerReserveParachuteTintIndex(PlayerId());
+  console.log(`Tint: ${tint}`);
+});
+
+    ```
+- **Caveats / Limitations**:
+  - Returns -1 if no tint set.
+- **Reference**: https://docs.fivem.net/natives/?n=GetPlayerReserveParachuteTintIndex
+
+
+##### GetPlayerRgbColour (0xE902EF951DCE178F / 0x6EF43BBB)
+- **Scope**: Shared
+- **Signature**: `void GET_PLAYER_RGB_COLOUR(Player player, int* r, int* g, int* b)`
+- **Purpose**: Retrieves the scoreboard color for a player.
+- **Parameters / Returns**:
+  - `player` (Player): Player index.
+  - `r` (int*): Output red component.
+  - `g` (int*): Output green component.
+  - `b` (int*): Output blue component.
+- **OneSync / Networking**: Color is synced from server to clients.
+- **Examples**:
+  - Lua:
+    ```lua
+
+--[[
+    -- Type: Command
+    -- Name: rgb
+    -- Use: Prints player scoreboard color
+    -- Created: 2025-09-11
+    -- By: VSSVSSN
+--]]
+RegisterCommand('rgb', function()
+    local r,g,b = GetPlayerRgbColour(PlayerId())
+    print(('Color: %d %d %d'):format(r,g,b))
+end)
+
+    ```
+  - JavaScript:
+    ```javascript
+
+/* Command: rgb */
+RegisterCommand('rgb', () => {
+  const color = GetPlayerRgbColour(PlayerId());
+  console.log(`Color: ${color[0]} ${color[1]} ${color[2]}`);
+});
+
+    ```
+- **Caveats / Limitations**:
+  - Only meaningful in network sessions with teams.
+- **Reference**: https://docs.fivem.net/natives/?n=GetPlayerRgbColour
+
 - **Scope**: Shared
 - **Signature**: `Ped GetPlayerPed(Player player)`
 - **Purpose**: Obtain the ped handle controlled by a given player.
@@ -2523,9 +2956,9 @@ ensure my_resource
   - Returns `-1` if no collision recorded.
 - **Reference**: https://docs.fivem.net/natives/?n=GetTimeSincePlayerHitVehicle
 
-##### _GetWantedLevelParoleDuration (0xA72200F51875FEA4)
+##### GetWantedLevelParoleDuration (0xA72200F51875FEA4)
 - **Scope**: Client
-- **Signature**: `int _GetWantedLevelParoleDuration()`
+- **Signature**: `int GetWantedLevelParoleDuration()`
 - **Purpose**: Undocumented/unclear on official docs.
 - **Parameters / Returns**:
   - **Returns**: `int` value, meaning unknown.
@@ -2541,14 +2974,14 @@ ensure my_resource
         -- By: VSSVSSN
     --]]
     RegisterCommand('parole', function()
-        print(('_GET_WANTED_LEVEL_PAROLE_DURATION: %d'):format(_GetWantedLevelParoleDuration()))
+        print(('_GET_WANTED_LEVEL_PAROLE_DURATION: %d'):format(GetWantedLevelParoleDuration()))
     end)
     ```
   - JavaScript:
     ```javascript
     /* Command: parole */
     RegisterCommand('parole', () => {
-      console.log(`_GET_WANTED_LEVEL_PAROLE_DURATION: ${_GetWantedLevelParoleDuration()}`);
+      console.log(`_GET_WANTED_LEVEL_PAROLE_DURATION: ${GetWantedLevelParoleDuration()}`);
     });
     ```
 - **Caveats / Limitations**:
@@ -2765,9 +3198,9 @@ ensure my_resource
   - Flags vary by script; consult R* script references.
 - **Reference**: https://docs.fivem.net/natives/?n=HasForceCleanupOccurred
 
-##### _HasPlayerBeenShotByCop (0xBC0753C9CA14B506 0x9DF75B2A)
+##### HasPlayerBeenShotByCop (0xBC0753C9CA14B506 0x9DF75B2A)
 - **Scope**: Client
-- **Signature**: `BOOL _HasPlayerBeenShotByCop(Player player, int ms, BOOL p2)`
+- **Signature**: `BOOL HasPlayerBeenShotByCop(Player player, int ms, BOOL p2)`
 - **Purpose**: Check if a cop shot the player within a time window.
 - **Parameters / Returns**:
   - `player` (`Player`): Target player.
@@ -2786,14 +3219,14 @@ ensure my_resource
         -- By: VSSVSSN
     --]]
     RegisterCommand('copshot', function()
-        print(('_HAS_PLAYER_BEEN_SHOT_BY_COP: %s'):format(tostring(_HasPlayerBeenShotByCop(PlayerId(), 5000, false))))
+        print(('_HAS_PLAYER_BEEN_SHOT_BY_COP: %s'):format(tostring(HasPlayerBeenShotByCop(PlayerId(), 5000, false))))
     end)
     ```
   - JavaScript:
     ```javascript
     /* Command: copshot */
     RegisterCommand('copshot', () => {
-      console.log(`_HAS_PLAYER_BEEN_SHOT_BY_COP: ${_HasPlayerBeenShotByCop(PlayerId(), 5000, false)}`);
+      console.log(`_HAS_PLAYER_BEEN_SHOT_BY_COP: ${HasPlayerBeenShotByCop(PlayerId(), 5000, false)}`);
     });
     ```
 - **Caveats / Limitations**:
@@ -3201,9 +3634,9 @@ ensure my_resource
   - Does not account for incapacitation without death.
 - **Reference**: https://docs.fivem.net/natives/?n=IsPlayerDead
 
-##### _IsPlayerDrivingDangerously (0xF10B44FD479D69F3 0x1E359CC8)
+##### IsPlayerDrivingDangerously (0xF10B44FD479D69F3 0x1E359CC8)
 - **Scope**: Client
-- **Signature**: `BOOL _IsPlayerDrivingDangerously(Player player, int type)`
+- **Signature**: `BOOL IsPlayerDrivingDangerously(Player player, int type)`
 - **Purpose**: Check if the player is driving recklessly; `type` meaning is undocumented.
 - **Parameters / Returns**:
   - `player` (`Player`): Target player.
@@ -3221,19 +3654,19 @@ ensure my_resource
         -- By: VSSVSSN
     --]]
     RegisterCommand('drivedanger', function()
-        print(('Dangerous: %s'):format(tostring(_IsPlayerDrivingDangerously(PlayerId(), 0))))
+        print(('Dangerous: %s'):format(tostring(IsPlayerDrivingDangerously(PlayerId(), 0))))
     end)
     ```
   - JavaScript:
     ```javascript
     /* Command: drivedanger */
     RegisterCommand('drivedanger', () => {
-      console.log(`Dangerous: ${_IsPlayerDrivingDangerously(PlayerId(), 0)}`);
+      console.log(`Dangerous: ${IsPlayerDrivingDangerously(PlayerId(), 0)}`);
     });
     ```
 - **Caveats / Limitations**:
   - `type` parameter lacks official description.
-- **Reference**: https://docs.fivem.net/natives/?n=_IsPlayerDrivingDangerously
+- **Reference**: https://docs.fivem.net/natives/?n=IsPlayerDrivingDangerously
 
 ##### IsPlayerFreeAiming (0x2E397FD2ECD37C87 0x1DEC67B7)
 - **Scope**: Client
@@ -7488,7 +7921,7 @@ ensure my_resource
   - Extreme values may produce unexpected results.
 - **Reference**: https://docs.fivem.net/natives/?n=SetPlayerWeaponDefenseModifier
 
-##### _SetPlayerWeaponDefenseModifier_2 (hash unknown)
+##### SetPlayerWeaponDefenseModifier_2 (hash unknown)
 - **Scope**: Client
 - **Signature**: `void _SET_PLAYER_WEAPON_DEFENSE_MODIFIER_2(Player player, float modifier)`
 - **Purpose**: Secondary variant for weapon defense scaling.
@@ -7502,7 +7935,7 @@ ensure my_resource
     --[[
         -- Type: Command
         -- Name: wep_def2
-        -- Use: Calls _SetPlayerWeaponDefenseModifier_2
+        -- Use: Calls SetPlayerWeaponDefenseModifier_2
         -- Created: 2025-09-11
         -- By: VSSVSSN
     --]]
@@ -7619,7 +8052,7 @@ ensure my_resource
   - Values above 1.49 are ignored; cannot slow below default.
 - **Reference**: https://docs.fivem.net/natives/?n=SetRunSprintMultiplierForPlayer
 
-##### _SetSpecialAbility (hash unknown)
+##### SetSpecialAbility (hash unknown)
 - **Scope**: Client
 - **Signature**: `void _SET_SPECIAL_ABILITY(Player player, int p1)`
 - **Purpose**: Configures player-specific special ability state.
@@ -7633,7 +8066,7 @@ ensure my_resource
     --[[
         -- Type: Command
         -- Name: special_set
-        -- Use: Calls _SetSpecialAbility
+        -- Use: Calls SetSpecialAbility
         -- Created: 2025-09-11
         -- By: VSSVSSN
     --]]
@@ -7750,7 +8183,7 @@ ensure my_resource
   - Higher values increase police aggression.
 - **Reference**: https://docs.fivem.net/natives/?n=SetWantedLevelDifficulty
 
-##### _SetWantedLevelHiddenEvasionTime (hash unknown)
+##### SetWantedLevelHiddenEvasionTime (hash unknown)
 - **Scope**: Client
 - **Signature**: `void _SET_WANTED_LEVEL_HIDDEN_EVASION_TIME(Player player, int wantedLevel, int lossTime)`
 - **Purpose**: Sets extra time required to lose a hidden wanted level.
@@ -7765,7 +8198,7 @@ ensure my_resource
     --[[
         -- Type: Command
         -- Name: wanted_evasion
-        -- Use: Calls _SetWantedLevelHiddenEvasionTime
+        -- Use: Calls SetWantedLevelHiddenEvasionTime
         -- Created: 2025-09-11
         -- By: VSSVSSN
     --]]
@@ -7853,7 +8286,7 @@ ensure my_resource
   - Must be called each frame to maintain movement.
 - **Reference**: https://docs.fivem.net/natives/?n=SimulatePlayerInputGait
 
-##### _SpecialAbilityActivate (hash unknown)
+##### SpecialAbilityActivate (hash unknown)
 - **Scope**: Client
 - **Signature**: `void _SPECIAL_ABILITY_ACTIVATE(Player player)`
 - **Purpose**: Activates the player's special ability.
@@ -7866,7 +8299,7 @@ ensure my_resource
     --[[
         -- Type: Command
         -- Name: special_activate
-        -- Use: Calls _SpecialAbilityActivate
+        -- Use: Calls SpecialAbilityActivate
         -- Created: 2025-09-11
         -- By: VSSVSSN
     --]]
@@ -8188,7 +8621,7 @@ ensure my_resource
   - No return; purpose unclear.
 - **Reference**: https://docs.fivem.net/natives/?n=SpecialAbilityDeactivateFast
 
-##### _SpecialAbilityDeplete (0x17F7471EACA78290)
+##### SpecialAbilityDeplete (0x17F7471EACA78290)
 - **Scope**: Client
 - **Signature**: `void _SPECIAL_ABILITY_DEPLETE(Any p0)`
 - **Purpose**: Undocumented/unclear on official docs
@@ -8531,7 +8964,7 @@ ensure my_resource
   - Must run in a loop for sustained effect.
 - **Reference**: https://docs.fivem.net/natives/?n=SuppressCrimeThisFrame
 
-##### _UpdatePlayerTeleport (0xE23D5873C2394C61 / _HAS_PLAYER_TELEPORT_FINISHED)
+##### UpdatePlayerTeleport (0xE23D5873C2394C61 / _HAS_PLAYER_TELEPORT_FINISHED)
 - **Scope**: Client
 - **Signature**: `BOOL _UPDATE_PLAYER_TELEPORT(Player player)`
 - **Purpose**: Checks if an asynchronous teleport has completed.
@@ -8568,4 +9001,5 @@ ensure my_resource
 
 
 
-CONTINUE-HERE — 2025-09-11T06:06 — next: 13.2 Client Natives > Player category :: GetEntityPlayerIsFreeAimingAt
+
+CONTINUE-HERE — 2025-09-11T06:21 — next: 13.2 Client Natives > Player category :: SetPlayerFallDistance
