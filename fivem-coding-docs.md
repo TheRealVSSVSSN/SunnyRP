@@ -430,13 +430,13 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Overall | 6442 | 361 | 6081 | 2025-09-11T23:32 |
+| Overall | 6442 | 371 | 6071 | 2025-09-11T23:39 |
 | Player | 248 | 248 | 0 | 2025-09-11T06:38 |
 | Recording | 17 | 17 | 0 | 2025-09-11T06:52 |
 | Replay | 6 | 6 | 0 | 2025-09-11T07:37 |
 | ACL | 10 | 10 | 0 | 2025-09-11T08:12 |
 | CFX | 50 | 50 | 0 | 2025-09-11T09:55 |
-| Vehicle | 751 | 30 | 721 | 2025-09-11T23:32 |
+| Vehicle | 751 | 40 | 711 | 2025-09-11T23:39 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -13034,6 +13034,400 @@ RegisterCommand('rgb', () => {
     ```
 - **Caveats / Limitations**:
   - Only meaningful inside an event handler.
-- **Reference**: https://docs.fivem.net/natives/?n=WasEventCanceled
+  - **Reference**: https://docs.fivem.net/natives/?n=WasEventCanceled
 
-CONTINUE-HERE — 2025-09-11T23:32 — next: Vehicle :: CreateVehicle
+##### CreateVehicle
+- **Scope**: Shared
+- **Signature(s)**: `Vehicle CREATE_VEHICLE(Hash modelHash, float x, float y, float z, float heading, bool isNetwork, bool bScriptHostVeh, bool p7)`
+- **Purpose**: Spawns a vehicle at the specified location.
+- **Parameters / Returns**:
+  - `modelHash` (`Hash`): Vehicle model.
+  - `x`, `y`, `z` (`float`): Spawn coordinates.
+  - `heading` (`float`): Initial heading.
+  - `isNetwork` (`bool`): Create as networked entity.
+  - `bScriptHostVeh` (`bool`): Sets script ownership.
+  - `p7` (`bool`): Undocumented flag.
+  - **Returns**: `Vehicle` handle.
+- **OneSync / Networking**: Use `isNetwork` and be entity owner for replication.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: spawnadder
+        -- Use: Spawns an Adder
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('spawnadder', function()
+        local model = `adder`
+        RequestModel(model)
+        while not HasModelLoaded(model) do Wait(0) end
+        local ped = PlayerPedId()
+        local coords = GetEntityCoords(ped)
+        local veh = CreateVehicle(model, coords.x, coords.y, coords.z, GetEntityHeading(ped), true, false, false)
+        SetPedIntoVehicle(ped, veh, -1)
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: spawnadder */
+    RegisterCommand('spawnadder', () => {
+      const model = GetHashKey('adder');
+      RequestModel(model);
+      while (!HasModelLoaded(model)) Wait(0);
+      const ped = PlayerPedId();
+      const [x, y, z] = GetEntityCoords(ped);
+      const veh = CreateVehicle(model, x, y, z, GetEntityHeading(ped), true, false, false);
+      SetPedIntoVehicle(ped, veh, -1);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Model must be loaded prior to spawning.
+- **Reference**: https://docs.fivem.net/natives/?n=CreateVehicle
+
+##### DeleteMissionTrain
+- **Scope**: Shared
+- **Signature(s)**: `void DELETE_MISSION_TRAIN(Vehicle train)`
+- **Purpose**: Removes a scripted train.
+- **Parameters / Returns**:
+  - `train` (`Vehicle`): Train entity.
+- **OneSync / Networking**: Caller must own the train entity.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: deltrain
+        -- Use: Deletes the mission train the player is in
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('deltrain', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        DeleteMissionTrain(veh)
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: deltrain */
+    RegisterCommand('deltrain', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      DeleteMissionTrain(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only affects mission-scripted trains.
+- **Reference**: https://docs.fivem.net/natives/?n=DeleteMissionTrain
+
+##### DeleteScriptVehicleGenerator
+- **Scope**: Shared
+- **Signature(s)**: `void DELETE_SCRIPT_VEHICLE_GENERATOR(int generator)`
+- **Purpose**: Removes a previously created vehicle generator.
+- **Parameters / Returns**:
+  - `generator` (`int`): Generator ID.
+- **OneSync / Networking**: Removal is networked if generator spawned net vehicles.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: delgen
+        -- Use: Deletes a script vehicle generator
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('delgen', function()
+        if genId then
+            DeleteScriptVehicleGenerator(genId)
+            genId = nil
+        end
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: delgen */
+    RegisterCommand('delgen', () => {
+      if (global.genId) {
+        DeleteScriptVehicleGenerator(global.genId);
+        global.genId = null;
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Generator ID must be stored after creation.
+- **Reference**: https://docs.fivem.net/natives/?n=DeleteScriptVehicleGenerator
+
+##### DeleteVehicle
+- **Scope**: Shared
+- **Signature(s)**: `void DELETE_VEHICLE(Vehicle vehicle)`
+- **Purpose**: Deletes a vehicle entity.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+- **OneSync / Networking**: Caller must own entity for network removal.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: delveh
+        -- Use: Deletes the player's current vehicle
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('delveh', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        DeleteVehicle(veh)
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: delveh */
+    RegisterCommand('delveh', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      DeleteVehicle(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Non-networked vehicles only despawn locally.
+- **Reference**: https://docs.fivem.net/natives/?n=DeleteVehicle
+
+##### DetachVehicleFromAnyCargobob
+- **Scope**: Shared
+- **Signature(s)**: `bool DETACH_VEHICLE_FROM_ANY_CARGOBOB(Vehicle vehicle)`
+- **Purpose**: Detaches a vehicle from any Cargobob carrying it.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to detach.
+  - **Returns**: `bool` success.
+- **OneSync / Networking**: Call from owner of the vehicle and Cargobob.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: detach_cargo
+        -- Use: Detaches vehicle from Cargobob
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('detach_cargo', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        DetachVehicleFromAnyCargobob(veh)
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: detach_cargo */
+    RegisterCommand('detach_cargo', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      DetachVehicleFromAnyCargobob(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only works if vehicle is attached to a Cargobob.
+- **Reference**: https://docs.fivem.net/natives/?n=DetachVehicleFromAnyCargobob
+
+##### DetachVehicleFromAnyTowTruck
+- **Scope**: Shared
+- **Signature(s)**: `bool DETACH_VEHICLE_FROM_ANY_TOW_TRUCK(Vehicle vehicle)`
+- **Purpose**: Releases a vehicle from any tow truck.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to detach.
+  - **Returns**: `bool` success.
+- **OneSync / Networking**: Requires ownership of both entities for replication.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: detach_tow
+        -- Use: Detaches vehicle from tow truck
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('detach_tow', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        DetachVehicleFromAnyTowTruck(veh)
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: detach_tow */
+    RegisterCommand('detach_tow', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      DetachVehicleFromAnyTowTruck(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - No effect if vehicle is not towed.
+- **Reference**: https://docs.fivem.net/natives/?n=DetachVehicleFromAnyTowTruck
+
+##### DetachVehicleFromCargobob
+- **Scope**: Shared
+- **Signature(s)**: `bool DETACH_VEHICLE_FROM_CARGOBOB(Vehicle cargobob, Vehicle vehicle)`
+- **Purpose**: Releases a vehicle from a specific Cargobob.
+- **Parameters / Returns**:
+  - `cargobob` (`Vehicle`): Cargobob handle.
+  - `vehicle` (`Vehicle`): Attached vehicle.
+  - **Returns**: `bool` success.
+- **OneSync / Networking**: Invoke from entity owner to sync detachment.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: detach_specific
+        -- Use: Detaches given vehicle from Cargobob
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('detach_specific', function()
+        local ped = PlayerPedId()
+        local cb = GetVehiclePedIsIn(ped, true)
+        local veh = GetVehiclePedIsIn(ped, false)
+        DetachVehicleFromCargobob(cb, veh)
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: detach_specific */
+    RegisterCommand('detach_specific', () => {
+      const ped = PlayerPedId();
+      const cb = GetVehiclePedIsIn(ped, true);
+      const veh = GetVehiclePedIsIn(ped, false);
+      DetachVehicleFromCargobob(cb, veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only applicable to Cargobob helicopters.
+- **Reference**: https://docs.fivem.net/natives/?n=DetachVehicleFromCargobob
+
+##### DetachVehicleFromTowTruck
+- **Scope**: Shared
+- **Signature(s)**: `bool DETACH_VEHICLE_FROM_TOW_TRUCK(Vehicle towTruck, Vehicle vehicle)`
+- **Purpose**: Unhooks a vehicle from a tow truck.
+- **Parameters / Returns**:
+  - `towTruck` (`Vehicle`): Tow truck entity.
+  - `vehicle` (`Vehicle`): Vehicle to unhook.
+  - **Returns**: `bool` success.
+- **OneSync / Networking**: Call by owner of both vehicles.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: unhook
+        -- Use: Detaches vehicle from tow truck
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('unhook', function()
+        local tow = GetVehiclePedIsIn(PlayerPedId(), true)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        DetachVehicleFromTowTruck(tow, veh)
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: unhook */
+    RegisterCommand('unhook', () => {
+      const ped = PlayerPedId();
+      const tow = GetVehiclePedIsIn(ped, true);
+      const veh = GetVehiclePedIsIn(ped, false);
+      DetachVehicleFromTowTruck(tow, veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only for vehicles attached via tow truck hook.
+- **Reference**: https://docs.fivem.net/natives/?n=DetachVehicleFromTowTruck
+
+##### DetachVehicleWindscreen
+- **Scope**: Shared
+- **Signature(s)**: `void DETACH_VEHICLE_WINDSCREEN(Vehicle vehicle)`
+- **Purpose**: Breaks and detaches the vehicle's windshield.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target vehicle.
+- **OneSync / Networking**: Requires ownership to propagate breakage.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: break_glass
+        -- Use: Detaches current vehicle windscreen
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('break_glass', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        DetachVehicleWindscreen(veh)
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Command: break_glass */
+    RegisterCommand('break_glass', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      DetachVehicleWindscreen(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only certain vehicle classes support windshield detachment.
+- **Reference**: https://docs.fivem.net/natives/?n=DetachVehicleWindscreen
+
+##### DisableVehicleFirstPersonCamThisFrame
+- **Scope**: Client
+- **Signature(s)**: `void DISABLE_VEHICLE_FIRST_PERSON_CAM_THIS_FRAME()`
+- **Purpose**: Prevents first-person camera inside vehicles for the current frame.
+- **Parameters / Returns**:
+  - **Returns**: None.
+- **OneSync / Networking**: Client-side visual effect only.
+- **Examples**:
+  - Lua:
+
+    ```lua
+    --[[
+        -- Type: Tick
+        -- Name: disable_fp
+        -- Use: Disables first-person view each frame
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    CreateThread(function()
+        while true do
+            DisableVehicleFirstPersonCamThisFrame()
+            Wait(0)
+        end
+    end)
+    ```
+  - JavaScript:
+
+    ```javascript
+    /* Tick: disable_fp */
+    setTick(() => {
+      DisableVehicleFirstPersonCamThisFrame();
+    });
+    ```
+- **Caveats / Limitations**:
+  - Must be called every frame to maintain effect.
+- **Reference**: https://docs.fivem.net/natives/?n=DisableVehicleFirstPersonCamThisFrame
+
+CONTINUE-HERE — 2025-09-11T23:39 — next: Vehicle :: DisableVehicleImpactExplosionActivation
