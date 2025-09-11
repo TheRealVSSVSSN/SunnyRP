@@ -1,7 +1,5 @@
 Config = {}
 
 Config.Developers = {
-
-    'steam:11000010556c810',
-
+    'steam:11000010556c810'
 }

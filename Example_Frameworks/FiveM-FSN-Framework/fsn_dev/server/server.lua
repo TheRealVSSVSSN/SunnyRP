@@ -3,6 +3,11 @@
 --  -------------------
 
 local FSN
+local DeveloperLookup = {}
+
+for _, id in ipairs(Config.Developers) do
+    DeveloperLookup[id] = true
+end
 
 --  -------------------
 --  END:         Locals
@@ -18,9 +23,8 @@ CreateThread(function()
         TriggerEvent('fsn:getFsnObject', function(fsnObject)
             FSN = fsnObject
         end)
+        Wait(0)
     end
-
-    Wait(1000)
 
 end)
 
@@ -32,37 +36,20 @@ end)
 --  BEGIN:    Functions
 --  -------------------
 
-function isDeveloper(source)
-
-    local playerId = source
-    local identifiers = GetNumPlayerIdentifiers(playerId)
-    local steamId
-
-    for i = 0, identifiers - 1 do
-        local id = GetPlayerIdentifier(playerId, i)
-        if string.find(id, 'steam:') then
-            steamId = id
-            break
+--[[
+    -- Type: Function
+    -- Name: isDeveloper
+    -- Use: Checks if a player is in the developer list
+    -- Created: 2024-07-02
+    -- By: VSSVSSN
+--]]
+local function isDeveloper(source)
+    for i = 0, GetNumPlayerIdentifiers(source) - 1 do
+        local id = GetPlayerIdentifier(source, i)
+        if DeveloperLookup[id] then
+            return true
         end
     end
-
-    local developers = Config.Developers
-    local isDeveloper = false
-
-    for i = 1, #Config.Developers do
-        if developers[i] == steamId then
-            isDeveloper = true
-        elseif isDeveloper == false then
-            isDeveloper = false
-        end
-    end
-
-    if isDeveloper then
-        return true
-    else
-        return false
-    end
-
     return false
 end
 
@@ -145,7 +132,7 @@ function registerDeveloperCommands(source)
             return
         end
 
-        local palyerId = source
+        local playerId = source
 
         if not isDeveloper(playerId) then
             return
@@ -179,9 +166,9 @@ function registerDeveloperCommands(source)
 
             if target then
                 if amount then
-                    TriggerClientEvent('fsn_bank:change:walletAdd', source, amount, targetId)
+                    TriggerClientEvent('fsn_bank:change:walletAdd', targetId, amount)
                 else
-                    print('^8You need to specify and amount.')
+                    print('^8You need to specify an amount.')
                 end
             else
                 print('^8Target not found. Either they do not exist or were entered wrong.')
@@ -202,7 +189,7 @@ function registerDeveloperCommands(source)
                 if amount then
                     TriggerClientEvent('fsn_bank:change:walletAdd', playerId, amount, targetId)
                 else
-                    TriggerClientEvent('chat:addMessage', players[j], {
+                    TriggerClientEvent('chat:addMessage', playerId, {
                         template = '<div style="padding: 0.5vw; background-color: rgba(44, 44, 44, 0.6); border-radius: 3px;"><strong>^8SYSTEM: ^7</strong><br>You need to specify an amount!</div>',
                         args = { }
                     })
