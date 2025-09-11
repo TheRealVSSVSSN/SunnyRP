@@ -1,21 +1,23 @@
+<!--
+    Type: NUI HTML
+    Name: ui.html
+    Use: Evidence locker interface layout
+    Created: 2024-06-06
+    By: VSSVSSN
+-->
 <html>
     <head>
-        <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
-        <script src="ui.js" type="text/javascript"></script>
-        <link href="ui.css" rel="stylesheet" type="text/css"/>
+        <meta charset="utf-8" />
+        <link href="ui.css" rel="stylesheet" type="text/css" />
+        <script src="ui.js" type="text/javascript" defer></script>
     </head>
-
     <body>
-        <div id="actionmenu" style="display: none;">
-			<button id="phonebutton" class="menuoption" data-action="locker-deposit">Deposit Evidence</button>
-			<button id="phonebutton" class="menuoption" data-sub="inventory">View Evidence</button>
-			<div id="property-info">
-			
-			</div>
-			<div id="inventory" style="display: none;" data-parent="ass">
-				
-			</div>
-			<button class="menuoption" data-action="exit">Exit</button>
+        <div id="actionmenu" style="display:none;">
+            <button class="menuoption" data-action="locker-deposit">Deposit Evidence</button>
+            <button class="menuoption" data-action="inventory">View Evidence</button>
+            <div id="inventory" data-parent="inventory" style="display:none;"></div>
+            <button class="menuoption" data-action="exit">Exit</button>
         </div>
     </body>
 </html>
+

@@ -1,23 +1,33 @@
---[[/	:FSN:	\]]--
-fx_version 'adamant'
+--[[
+    -- Type: Manifest
+    -- Name: fxmanifest.lua
+    -- Use: Defines resource metadata and scripts
+    -- Created: 2024-06-06
+    -- By: VSSVSSN
+]]
+
+fx_version 'cerulean'
 game 'gta5'
+lua54 'yes'
 
-client_script '@fsn_main/cl_utils.lua'
-server_script '@fsn_main/sv_utils.lua'
-client_script '@fsn_main/server_settings/sh_settings.lua'
-server_script '@fsn_main/server_settings/sh_settings.lua'
-server_script '@mysql-async/lib/MySQL.lua'
---[[/	:FSN:	\]]--
-
--- Tell FiveM's NUI system what the main html file is for this resource
-ui_page "nui/ui.html"
-
--- Add the files that need to be used/loaded
-files {
-	"nui/ui.html",
-	"nui/ui.js",
-	"nui/ui.css"
+client_scripts {
+    '@fsn_main/cl_utils.lua',
+    '@fsn_main/server_settings/sh_settings.lua',
+    'client.lua'
 }
 
-client_script 'client.lua'
-server_script 'server.lua'
+server_scripts {
+    '@fsn_main/sv_utils.lua',
+    '@fsn_main/server_settings/sh_settings.lua',
+    '@mysql-async/lib/MySQL.lua',
+    'server.lua'
+}
+
+ui_page 'nui/ui.html'
+
+files {
+    'nui/ui.html',
+    'nui/ui.js',
+    'nui/ui.css'
+}
+
