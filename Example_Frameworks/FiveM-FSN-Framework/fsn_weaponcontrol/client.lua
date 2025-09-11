@@ -1,299 +1,418 @@
----------------------------------------------------------------------
--- WEAPONS
----------------------------------------------------------------------
-local weapons = {
-	--{name = 'WEAPON_KNIFE', 		   	 bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'melee', 		model = 'prop_w_me_knife_01'},
-	--{name = 'WEAPON_NIGHTSTICK', 	 	 bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'melee', 		model = 'w_me_nightstick'},
-	--{name = 'WEAPON_HAMMER', 		     bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'melee', 		model = 'prop_tool_hammer'},
-	--{name = 'WEAPON_BAT', 			     bone = 24818, x = 0.0, y = 0.0, z = 0.0, xRot = 320.0, yRot = 320.0, zRot = 320.0, category = 'melee', 		model = 'w_me_bat'},
-	--{name = 'WEAPON_GOLFCLUB', 		   bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'melee', 		model = 'w_me_gclub'},
-	--{name = 'WEAPON_CROWBAR', 		 	 bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'melee', 		model = 'w_me_crowbar'},
-	--{name = 'WEAPON_BOTTLE', 		     bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'melee', 		model = 'prop_w_me_bottle'},
-	--{name = 'WEAPON_KNUCKLE', 		 	 bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'melee', 		model = 'prop_w_me_dagger'},
-	--{name = 'WEAPON_HATCHET', 		 	 bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'melee', 		model = 'w_me_hatchet'},
-	--{name = 'WEAPON_MACHETE', 		 	 bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'melee', 		model = 'prop_ld_w_me_machette'},
-	--{name = 'WEAPON_SWITCHBLADE',  	 bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'melee', 		model = 'prop_w_me_dagger'},
-	--{name = 'WEAPON_FLASHLIGHT', 	 	 bone = 24818, x = 0.0, y = 0.0, z = 0.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'melee', 		model = 'prop_w_me_dagger'},
+-- luacheck: globals GetHashKey RequestModel HasModelLoaded Wait GetPedBoneIndex CreateObject AttachEntityToEntity
+-- luacheck: globals SetEntityCollision DeleteObject CreateThread PlayerPedId IsPedInAnyVehicle IsPedGettingIntoAVehicle
+-- luacheck: globals HasPedGotWeapon GetSelectedPedWeapon IsPedShooting IsPedDoingDriveby GetCurrentPedWeapon
+-- luacheck: globals GetFollowPedCamViewMode GetGameplayCamRelativePitch SetGameplayCamRelativePitch HasAnimDictLoaded
+-- luacheck: globals RequestAnimDict TaskPlayAnim ClearPedTasks DoesEntityExist
+-- luacheck: globals IsEntityDead IsPedArmed DisableControlAction
 
-	--{name = 'WEAPON_PISTOL', 		     bone = 51826, x = -0.01, y = 0.10, z = 0.07,  xRot = -115.0, yRot = 0.0,  zRot = 0.0, category = 'handguns', 	model = 'w_pi_pistol'},
-	--{name = 'WEAPON_COMBATPISTOL', 	 bone = 51826, x = -0.01, y = 0.10, z = 0.07,  xRot = -115.0, yRot = 0.0,  zRot = 0.0, category = 'handguns', 	model = 'w_pi_combatpistol'},
-	--{name = 'WEAPON_APPISTOL', 			 bone = 51826, x = -0.01, y = 0.10, z = 0.07,  xRot = -115.0, yRot = 0.0,  zRot = 0.0, category = 'handguns', 	model = 'w_pi_appistol'},
-	--{name = 'WEAPON_PISTOL50', 			 bone = 51826, x = -0.01, y = 0.10, z = 0.07,  xRot = -115.0, yRot = 0.0,  zRot = 0.0, category = 'handguns', 	model = 'w_pi_pistol50'},
-	--{name = 'WEAPON_VINTAGEPISTOL',	 bone = 51826, x = -0.01, y = 0.10, z = 0.07,  xRot = -115.0, yRot = 0.0,  zRot = 0.0, category = 'handguns', 	model = 'w_pi_vintage_pistol'},
-	--{name = 'WEAPON_HEAVYPISTOL', 	 bone = 51826, x = -0.01, y = 0.10, z = 0.07,  xRot = -115.0, yRot = 0.0,  zRot = 0.0, category = 'handguns', 	model = 'w_pi_heavypistol'},
-	--{name = 'WEAPON_SNSPISTOL', 		 bone = 58271, x = -0.01, y = 0.1,  z = -0.07, xRot = -55.0,  yRot = 0.10, zRot = 0.0, category = 'handguns', 	model = 'w_pi_sns_pistol'},
-	--{name = 'WEAPON_FLAREGUN', 			 bone = 58271, x = -0.01, y = 0.1,  z = -0.07, xRot = -55.0,  yRot = 0.10, zRot = 0.0, category = 'handguns', 	model = 'w_pi_flaregun'},
-	--{name = 'WEAPON_MARKSMANPISTOL', bone = 58271, x = -0.01, y = 0.1,  z = -0.07, xRot = -55.0,  yRot = 0.10, zRot = 0.0, category = 'handguns', 	model = ''},
-	--{name = 'WEAPON_REVOLVER', 			 bone = 58271, x = -0.01, y = 0.1,  z = -0.07, xRot = -55.0,  yRot = 0.10, zRot = 0.0, category = 'handguns', 	model = ''},
-	--{name = 'WEAPON_STUNGUN', 			 bone = 58271, x = -0.01, y = 0.1,  z = -0.07, xRot = -55.0,  yRot = 0.10, zRot = 0.0, category = 'handguns', 	model = 'w_pi_stungun'},
-
-	{name = 'WEAPON_MICROSMG', 			 bone = 24818, x = 0.09, y = -0.15, z = 0.1, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'machine', 	model = 'w_sb_microsmg'},
-	{name = 'WEAPON_SMG', 				   bone = 24818, x = 0.09, y = -0.15, z = 0.1, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'machine', 	model = 'w_sb_smg'},
-	{name = 'WEAPON_MG', 				     bone = 24818, x = 0.09, y = -0.15, z = 0.1, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'machine', 	model = 'w_mg_mg'},
-	{name = 'WEAPON_COMBATMG', 			 bone = 24818, x = 0.09, y = -0.15, z = 0.1, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'machine', 	model = 'w_mg_combatmg'},
-	{name = 'WEAPON_GUSENBERG', 		 bone = 24818, x = 0.09, y = -0.15, z = 0.1, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'machine', 	model = 'w_sb_gusenberg'},
-	{name = 'WEAPON_COMBATPDW', 		 bone = 24818, x = 0.09, y = -0.15, z = 0.1, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'machine', 	model = ''},
-	{name = 'WEAPON_MACHINEPISTOL',  bone = 24818, x = 0.09, y = -0.15, z = 0.1, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'machine', 	model = ''},
-	{name = 'WEAPON_ASSAULTSMG', 		 bone = 24818, x = 0.09, y = -0.15, z = 0.1, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'machine', 	model = 'w_sb_assaultsmg'},
-	{name = 'WEAPON_MINISMG', 			 bone = 24818, x = 0.09, y = -0.15, z = 0.1, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'machine', 	model = ''},
-
-  {name = 'WEAPON_ASSAULTRIFLE', 		bone = 24818, x = 0.09, y = -0.15, z = 0.1, xRot = 10.0, yRot = 160.0, zRot = 10.0, category = 'assault', 	model = 'w_ar_assaultrifle'},
-	{name = 'WEAPON_CARBINERIFLE', 	  bone = 24818, x = 0.09, y = -0.15, z = 0.1, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'assault', 	model = 'w_ar_carbinerifle'},
-	{name = 'WEAPON_ADVANCEDRIFLE',   bone = 24818, x = 0.09, y = -0.15, z = 0.1, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'assault', 	model = 'w_ar_advancedrifle'},
-	{name = 'WEAPON_SPECIALCARBINE',  bone = 24818, x = 0.09, y = -0.15, z = 0.1, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'assault', 	model = 'w_ar_specialcarbine'},
-	{name = 'WEAPON_BULLPUPRIFLE', 	  bone = 24818, x = 0.09, y = -0.15, z = 0.1, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'assault', 	model = 'w_ar_bullpuprifle'},
-
-	{name = 'WEAPON_PUMPSHOTGUN', 	 bone = 24818, x = 0.1, y = -0.15, z = 0.0, xRot = 0.0, yRot = 135.0, zRot = 0.0, category = 'shotgun', 	model = 'w_sg_pumpshotgun'},
-	{name = 'WEAPON_SAWNOFFSHOTGUN', bone = 24818, x = 0.1, y = -0.15, z = 0.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'shotgun', 	model = ''},
-	{name = 'WEAPON_BULLPUPSHOTGUN', bone = 24818, x = 0.1, y = -0.15, z = 0.0, xRot = 0.0, yRot = 135.0, zRot = 0.0, category = 'shotgun', 	model = 'w_sg_bullpupshotgun'},
-	{name = 'WEAPON_ASSAULTSHOTGUN', bone = 24818, x = 0.1, y = -0.15, z = 0.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'shotgun', 	model = 'w_sg_assaultshotgun'},
-	{name = 'WEAPON_MUSKET', 			   bone = 24818, x = 0.1, y = -0.15, z = 0.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'shotgun', 	model = 'w_ar_musket'},
-	{name = 'WEAPON_HEAVYSHOTGUN', 	 bone = 24818, x = 0.1, y = -0.15, z = 0.0, xRot = 0.0, yRot = 225.0, zRot = 0.0, category = 'shotgun', 	model = 'w_sg_heavyshotgun'},
-	{name = 'WEAPON_DBSHOTGUN', 		 bone = 24818, x = 0.1, y = -0.15, z = 0.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'shotgun', 	model = ''},
-	{name = 'WEAPON_AUTOSHOTGUN', 	 bone = 24818, x = 0.1, y = 0.15, z = 0.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'shotgun', 	model = ''},
-
-	{name = 'WEAPON_SNIPERRIFLE', 	 bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'sniper', 	model = 'w_sr_sniperrifle'},
-	{name = 'WEAPON_HEAVYSNIPER', 	 bone = 24818, x = 0.1, y = -0.15, z = 0.0, xRot = 0.0, yRot = 135.0, zRot = 0.0, category = 'sniper', 	model = 'w_sr_heavysniper'},
-	{name = 'WEAPON_MARKSMANRIFLE',  bone = 24818, x = 0.1, y = -0.15, z = 0.0, xRot = 0.0, yRot = 135.0, zRot = 0.0, category = 'sniper', 	model = 'w_sr_marksmanrifle'},
-
-	{name = 'WEAPON_REMOTESNIPER', 	 bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'none', 		model = ''},
-	{name = 'WEAPON_STINGER', 			 bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'none', 		model = ''},
-
-	{name = 'WEAPON_GRENADELAUNCHER',bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'heavy', 		model = 'w_lr_grenadelauncher'},
-	{name = 'WEAPON_RPG', 				   bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'heavy', 		model = 'w_lr_rpg'},
-	{name = 'WEAPON_MINIGUN', 		   bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'heavy', 		model = 'w_mg_minigun'},
-	{name = 'WEAPON_FIREWORK', 			 bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'heavy', 		model = 'w_lr_firework'},
-	{name = 'WEAPON_RAILGUN', 			 bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'heavy', 		model = 'w_ar_railgun'},
-	{name = 'WEAPON_HOMINGLAUNCHER', bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'heavy', 		model = 'w_lr_homing'},
-	{name = 'WEAPON_COMPACTLAUNCHER',bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'heavy', 		model = ''},
-
-	--{name = 'WEAPON_STICKYBOMB', 		   bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'thrown', 	model = 'prop_bomb_01_s'},
-	--{name = 'WEAPON_MOLOTOV', 			   bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'thrown', 	model = 'w_ex_molotov'},
-	--{name = 'WEAPON_FIREEXTINGUISHER', bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'thrown', 	model = 'w_am_fire_exting'},
-	--{name = 'WEAPON_PETROLCAN', 		bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'thrown', 	model = 'w_am_jerrycan'},
-	--{name = 'WEAPON_PROXMINE', 			bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'thrown', 	model = ''},
-	--{name = 'WEAPON_SNOWBALL', 			bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'thrown', 	model = 'w_ex_snowball'},
-	--{name = 'WEAPON_BALL', 				bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'thrown', 	model = 'w_am_baseball'},
-	--{name = 'WEAPON_GRENADE', 			bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'thrown', 	model = 'w_ex_grenadefrag'},
-	--{name = 'WEAPON_SMOKEGRENADE', 		bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'thrown', 	model = 'w_ex_grenadesmoke'},
-	--{name = 'WEAPON_BZGAS', 			bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'thrown', 	model = 'w_ex_grenadesmoke'},
-
-	--{name = 'WEAPON_DIGISCANNER', 		bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'others', 	model = 'w_am_digiscanner'},
-	--{name = 'WEAPON_DAGGER', 			bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'others', 	model = 'prop_w_me_dagger'},
-	--{name = 'WEAPON_GARBAGEBAG', 		bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'others', 	model = ''},
-	--{name = 'WEAPON_HANDCUFFS', 		bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'others', 	model = ''},
-	--{name = 'WEAPON_BATTLEAXE', 		bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'others', 	model = 'prop_tool_fireaxe'},
-	--{name = 'WEAPON_PIPEBOMB', 			bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'others', 	model = ''},
-	--{name = 'WEAPON_POOLCUE', 			bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'others', 	model = 'prop_pool_cue'},
-	--{name = 'WEAPON_WRENCH', 			bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'others', 	model = 'w_me_hammer'},
-	--{name = 'GADGET_NIGHTVISION', 		bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'others', 	model = ''},
-	--{name = 'GADGET_PARACHUTE', 		bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'others', 	model = 'p_parachute_s'}
-}
-local weapon_models = {}
-Citizen.CreateThread(function()
-  while true do
-    Citizen.Wait(0)
-		if IsPedInAnyVehicle(PlayerPedId(), false) or IsPedGettingIntoAVehicle(PlayerPedId()) then
-			for k, v in pairs(weapon_models) do
-				DetachEntity(weapon_models[k].obj, true, true)
-	      DeleteObject(weapon_models[k].obj)
-	      weapon_models[k] = nil
-			end
-		else
-	    for k, wepdetails in pairs(weapons) do
-	      if HasPedGotWeapon(PlayerPedId(), GetHashKey(wepdetails.name), false) then
-	        if GetSelectedPedWeapon(PlayerPedId()) == GetHashKey(wepdetails.name) then
-	          if weapon_models[wepdetails.name] then
-	            DetachEntity(weapon_models[wepdetails.name].obj, true, true)
-	            DeleteObject(weapon_models[wepdetails.name].obj)
-	            weapon_models[wepdetails.name] = nil
-	          end
-	        else
-	          if not weapon_models[wepdetails.name] then
-	            if wepdetails.model ~= '' then
-	              local bonePos = GetWorldPositionOfEntityBone(PlayerPedId(), GetPedBoneIndex(PlayerPedId(), wepdetails.bone))
-	              local startLoad = GetNetworkTime()
-	              RequestModel(GetHashKey(wepdetails.model))
-	              while not HasModelLoaded(GetHashKey(wepdetails.model)) do
-	                Wait(0)
-	                --print(':fsn_weaponcontrol: Loading model for: '..wepdetails.name)
-	                if startLoad+500 < GetNetworkTime() then
-	                  print(':fsn_weaponcontrol: Loading FAILED for model: '..wepdetails.name)
-	                  --TriggerEvent('fsn_notify:displayNotification', ':fsn_weaponcontrol: Loading FAILED for model: '..wepdetails.name, 'centerRight', 3000, 'error')
-	                else
-	                  Wait(1)
-	                end
-	              end
-	              if HasModelLoaded(GetHashKey(wepdetails.model)) then
-	                --print(':fsn_weaponcontrol: Adding weapon for: '..wepdetails.name)
-	                local object = CreateObject(GetHashKey(wepdetails.model), bonePos.x, bonePos.y, bonePos.z, true, true, true)
-	                weapon_models[wepdetails.name] = {}
-	                weapon_models[wepdetails.name].obj = object
-									SetEntityCollision(object, false, false)
-	                AttachEntityToEntity(object, PlayerPedId(), GetPedBoneIndex(PlayerPedId(), wepdetails.bone), wepdetails.x, wepdetails.y, wepdetails.z, wepdetails.xRot, wepdetails.yRot, wepdetails.zRot, false, false, false, false, 2, true)
-	              end
-	            end
-	          end
-	        end
-	      else
-	        if weapon_models[wepdetails.name] then
-	          DetachEntity(weapon_models[wepdetails.name].obj, true, true)
-	          DeleteObject(weapon_models[wepdetails.name].obj)
-	          weapon_models[wepdetails.name] = nil
-	        end
-	      end
-	    end
-		end
-  end
-end)
-
-local recoils = {
-	[453432689] = 0.3, -- PISTOL
-	[3219281620] = 0.3, -- PISTOL MK2
-	[1593441988] = 0.2, -- COMBAT PISTOL
-	[584646201] = 0.1, -- AP PISTOL
-	[2578377531] = 0.6, -- PISTOL .50
-	[324215364] = 0.2, -- MICRO SMG
-	[736523883] = 0.1, -- SMG
-	[2024373456] = 0.1, -- SMG MK2
-	[4024951519] = 0.1, -- ASSAULT SMG
-	[3220176749] = 0.2, -- ASSAULT RIFLE
-	[961495388] = 0.2, -- ASSAULT RIFLE MK2
-	[2210333304] = 0.1, -- CARBINE RIFLE
-	[4208062921] = 0.1, -- CARBINE RIFLE MK2
-	[2937143193] = 0.1, -- ADVANCED RIFLE
-	[2634544996] = 0.1, -- MG
-	[2144741730] = 0.1, -- COMBAT MG
-	[3686625920] = 0.1, -- COMBAT MG MK2
-	[487013001] = 0.4, -- PUMP SHOTGUN
-	[1432025498] = 0.35, -- PUMP SHOTGUN MK2
-	[2017895192] = 0.7, -- SAWNOFF SHOTGUN
-	[3800352039] = 0.4, -- ASSAULT SHOTGUN
-	[2640438543] = 0.2, -- BULLPUP SHOTGUN
-	[911657153] = 0.1, -- STUN GUN
-	[100416529] = 0.5, -- SNIPER RIFLE
-	[205991906] = 0.7, -- HEAVY SNIPER
-	[177293209] = 0.6, -- HEAVY SNIPER MK2
-	[856002082] = 1.2, -- REMOTE SNIPER
-	[2726580491] = 1.0, -- GRENADE LAUNCHER
-	[1305664598] = 1.0, -- GRENADE LAUNCHER SMOKE
-	[2982836145] = 0.0, -- RPG
-	[1752584910] = 0.0, -- STINGER
-	[1119849093] = 0.01, -- MINIGUN
-	[3218215474] = 0.2, -- SNS PISTOL
-	[1627465347] = 0.1, -- GUSENBERG
-	[3231910285] = 0.2, -- SPECIAL CARBINE
-	[-1768145561] = 0.15, -- SPECIAL CARBINE MK2
-	[3523564046] = 0.5, -- HEAVY PISTOL
-	[2132975508] = 0.2, -- BULLPUP RIFLE
-	[-2066285827] = 0.15, -- BULLPUP RIFLE MK2
-	[137902532] = 0.4, -- VINTAGE PISTOL
-	[2828843422] = 0.7, -- MUSKET
-	[984333226] = 0.2, -- HEAVY SHOTGUN
-	[3342088282] = 0.3, -- MARKSMAN RIFLE
-	[1785463520] = 0.25, -- MARKSMAN RIFLE MK2
-	[1672152130] = 0, -- HOMING LAUNCHER
-	[1198879012] = 0.9, -- FLARE GUN
-	[171789620] = 0.2, -- COMBAT PDW
-	[3696079510] = 0.9, -- MARKSMAN PISTOL
-	[1834241177] = 2.4, -- RAILGUN
-	[3675956304] = 0.3, -- MACHINE PISTOL
-	[3249783761] = 0.6, -- REVOLVER
-	[-879347409] = 0.6, -- REVOLVER MK2
-	[4019527611] = 0.7, -- DOUBLE BARREL SHOTGUN
-	[1649403952] = 0.3, -- COMPACT RIFLE
-	[317205821] = 0.2, -- AUTO SHOTGUN
-	[125959754] = 0.5, -- COMPACT LAUNCHER
-	[3173288789] = 0.1, -- MINI SMG
+--[[
+    -- Type: Config
+    -- Name: BACK_WEAPONS
+    -- Use: Defines weapons to display on the player model when holstered
+    -- Created: 2025-09-11
+    -- By: VSSVSSN
+--]]
+local BACK_WEAPONS = {
+    {
+        name = 'WEAPON_MICROSMG',
+        bone = 24818, x = 0.09, y = -0.15, z = 0.1,
+        xRot = 0.0, yRot = 0.0, zRot = 0.0,
+        model = 'w_sb_microsmg'
+    },
+    {
+        name = 'WEAPON_SMG',
+        bone = 24818, x = 0.09, y = -0.15, z = 0.1,
+        xRot = 0.0, yRot = 0.0, zRot = 0.0,
+        model = 'w_sb_smg'
+    },
+    {
+        name = 'WEAPON_MG',
+        bone = 24818, x = 0.09, y = -0.15, z = 0.1,
+        xRot = 0.0, yRot = 0.0, zRot = 0.0,
+        model = 'w_mg_mg'
+    },
+    {
+        name = 'WEAPON_COMBATMG',
+        bone = 24818, x = 0.09, y = -0.15, z = 0.1,
+        xRot = 0.0, yRot = 0.0, zRot = 0.0,
+        model = 'w_mg_combatmg'
+    },
+    {
+        name = 'WEAPON_GUSENBERG',
+        bone = 24818, x = 0.09, y = -0.15, z = 0.1,
+        xRot = 0.0, yRot = 0.0, zRot = 0.0,
+        model = 'w_sb_gusenberg'
+    },
+    {
+        name = 'WEAPON_ASSAULTSMG',
+        bone = 24818, x = 0.09, y = -0.15, z = 0.1,
+        xRot = 0.0, yRot = 0.0, zRot = 0.0,
+        model = 'w_sb_assaultsmg'
+    },
+    {
+        name = 'WEAPON_ASSAULTRIFLE',
+        bone = 24818, x = 0.09, y = -0.15, z = 0.1,
+        xRot = 10.0, yRot = 160.0, zRot = 10.0,
+        model = 'w_ar_assaultrifle'
+    },
+    {
+        name = 'WEAPON_CARBINERIFLE',
+        bone = 24818, x = 0.09, y = -0.15, z = 0.1,
+        xRot = 0.0, yRot = 0.0, zRot = 0.0,
+        model = 'w_ar_carbinerifle'
+    },
+    {
+        name = 'WEAPON_ADVANCEDRIFLE',
+        bone = 24818, x = 0.09, y = -0.15, z = 0.1,
+        xRot = 0.0, yRot = 0.0, zRot = 0.0,
+        model = 'w_ar_advancedrifle'
+    },
+    {
+        name = 'WEAPON_SPECIALCARBINE',
+        bone = 24818, x = 0.09, y = -0.15, z = 0.1,
+        xRot = 0.0, yRot = 0.0, zRot = 0.0,
+        model = 'w_ar_specialcarbine'
+    },
+    {
+        name = 'WEAPON_BULLPUPRIFLE',
+        bone = 24818, x = 0.09, y = -0.15, z = 0.1,
+        xRot = 0.0, yRot = 0.0, zRot = 0.0,
+        model = 'w_ar_bullpuprifle'
+    },
+    {
+        name = 'WEAPON_PUMPSHOTGUN',
+        bone = 24818, x = 0.10, y = -0.15, z = 0.0,
+        xRot = 0.0, yRot = 135.0, zRot = 0.0,
+        model = 'w_sg_pumpshotgun'
+    },
+    {
+        name = 'WEAPON_BULLPUPSHOTGUN',
+        bone = 24818, x = 0.10, y = -0.15, z = 0.0,
+        xRot = 0.0, yRot = 135.0, zRot = 0.0,
+        model = 'w_sg_bullpupshotgun'
+    },
+    {
+        name = 'WEAPON_ASSAULTSHOTGUN',
+        bone = 24818, x = 0.10, y = -0.15, z = 0.0,
+        xRot = 0.0, yRot = 0.0, zRot = 0.0,
+        model = 'w_sg_assaultshotgun'
+    },
+    {
+        name = 'WEAPON_MUSKET',
+        bone = 24818, x = 0.10, y = -0.15, z = 0.0,
+        xRot = 0.0, yRot = 0.0, zRot = 0.0,
+        model = 'w_ar_musket'
+    },
+    {
+        name = 'WEAPON_HEAVYSHOTGUN',
+        bone = 24818, x = 0.10, y = -0.15, z = 0.0,
+        xRot = 0.0, yRot = 225.0, zRot = 0.0,
+        model = 'w_sg_heavyshotgun'
+    },
+    {
+        name = 'WEAPON_HEAVYSNIPER',
+        bone = 24818, x = 0.10, y = -0.15, z = 0.0,
+        xRot = 0.0, yRot = 135.0, zRot = 0.0,
+        model = 'w_sr_heavysniper'
+    },
+    {
+        name = 'WEAPON_MARKSMANRIFLE',
+        bone = 24818, x = 0.10, y = -0.15, z = 0.0,
+        xRot = 0.0, yRot = 135.0, zRot = 0.0,
+        model = 'w_sr_marksmanrifle'
+    }
 }
 
-Citizen.CreateThread(function()
-	while true do
-		Citizen.Wait(0)
-		if IsPedShooting(PlayerPedId()) and not IsPedDoingDriveby(PlayerPedId()) then
-			local _,wep = GetCurrentPedWeapon(PlayerPedId())
-			_,cAmmo = GetAmmoInClip(PlayerPedId(), wep)
-			if recoils[wep] and recoils[wep] ~= 0 then
-				tv = 0
-				if GetFollowPedCamViewMode() ~= 4 then
-					repeat
-						Wait(0)
-						p = GetGameplayCamRelativePitch()
-						SetGameplayCamRelativePitch(p+0.1, 0.2)
-						tv = tv+0.1
-					until tv >= recoils[wep]
-				else
-					repeat
-						Wait(0)
-						p = GetGameplayCamRelativePitch()
-						if recoils[wep] > 0.1 then
-							SetGameplayCamRelativePitch(p+0.6, 1.2)
-							tv = tv+0.6
-						else
-							SetGameplayCamRelativePitch(p+0.016, 0.333)
-							tv = tv+0.1
-						end
-					until tv >= recoils[wep]
-				end
-			end
-		end
-	end
-end)
+--[[
+    -- Type: Config
+    -- Name: RECOIL_VALUES
+    -- Use: Recoil intensity per weapon hash
+    -- Created: 2025-09-11
+    -- By: VSSVSSN
+--]]
+local RECOIL_VALUES = {
+    [GetHashKey('WEAPON_PISTOL')] = 0.3,
+    [GetHashKey('WEAPON_PISTOL_MK2')] = 0.3,
+    [GetHashKey('WEAPON_COMBATPISTOL')] = 0.2,
+    [GetHashKey('WEAPON_APPISTOL')] = 0.1,
+    [GetHashKey('WEAPON_PISTOL50')] = 0.6,
+    [GetHashKey('WEAPON_MICROSMG')] = 0.2,
+    [GetHashKey('WEAPON_SMG')] = 0.1,
+    [GetHashKey('WEAPON_SMG_MK2')] = 0.1,
+    [GetHashKey('WEAPON_ASSAULTSMG')] = 0.1,
+    [GetHashKey('WEAPON_ASSAULTRIFLE')] = 0.2,
+    [GetHashKey('WEAPON_ASSAULTRIFLE_MK2')] = 0.2,
+    [GetHashKey('WEAPON_CARBINERIFLE')] = 0.1,
+    [GetHashKey('WEAPON_CARBINERIFLE_MK2')] = 0.1,
+    [GetHashKey('WEAPON_ADVANCEDRIFLE')] = 0.1,
+    [GetHashKey('WEAPON_MG')] = 0.1,
+    [GetHashKey('WEAPON_COMBATMG')] = 0.1,
+    [GetHashKey('WEAPON_COMBATMG_MK2')] = 0.1,
+    [GetHashKey('WEAPON_PUMPSHOTGUN')] = 0.4,
+    [GetHashKey('WEAPON_PUMPSHOTGUN_MK2')] = 0.35,
+    [GetHashKey('WEAPON_SAWNOFFSHOTGUN')] = 0.7,
+    [GetHashKey('WEAPON_ASSAULTSHOTGUN')] = 0.4,
+    [GetHashKey('WEAPON_BULLPUPSHOTGUN')] = 0.2,
+    [GetHashKey('WEAPON_STUNGUN')] = 0.1,
+    [GetHashKey('WEAPON_SNIPERRIFLE')] = 0.5,
+    [GetHashKey('WEAPON_HEAVYSNIPER')] = 0.7,
+    [GetHashKey('WEAPON_HEAVYSNIPER_MK2')] = 0.6,
+    [GetHashKey('WEAPON_REMOTESNIPER')] = 1.2,
+    [GetHashKey('WEAPON_GRENADELAUNCHER')] = 1.0,
+    [GetHashKey('WEAPON_GRENADELAUNCHER_SMOKE')] = 1.0,
+    [GetHashKey('WEAPON_RPG')] = 0.0,
+    [GetHashKey('WEAPON_STINGER')] = 0.0,
+    [GetHashKey('WEAPON_MINIGUN')] = 0.01,
+    [GetHashKey('WEAPON_SNSPISTOL')] = 0.2,
+    [GetHashKey('WEAPON_GUSENBERG')] = 0.1,
+    [GetHashKey('WEAPON_SPECIALCARBINE')] = 0.2,
+    [GetHashKey('WEAPON_SPECIALCARBINE_MK2')] = 0.15,
+    [GetHashKey('WEAPON_HEAVYPISTOL')] = 0.5,
+    [GetHashKey('WEAPON_BULLPUPRIFLE')] = 0.2,
+    [GetHashKey('WEAPON_BULLPUPRIFLE_MK2')] = 0.15,
+    [GetHashKey('WEAPON_VINTAGEPISTOL')] = 0.4,
+    [GetHashKey('WEAPON_MUSKET')] = 0.7,
+    [GetHashKey('WEAPON_HEAVYSHOTGUN')] = 0.2,
+    [GetHashKey('WEAPON_MARKSMANRIFLE')] = 0.3,
+    [GetHashKey('WEAPON_MARKSMANRIFLE_MK2')] = 0.25,
+    [GetHashKey('WEAPON_HOMINGLAUNCHER')] = 0.0,
+    [GetHashKey('WEAPON_FLAREGUN')] = 0.9,
+    [GetHashKey('WEAPON_COMBATPDW')] = 0.2,
+    [GetHashKey('WEAPON_MARKSMANPISTOL')] = 0.9,
+    [GetHashKey('WEAPON_RAILGUN')] = 2.4,
+    [GetHashKey('WEAPON_MACHINEPISTOL')] = 0.3,
+    [GetHashKey('WEAPON_REVOLVER')] = 0.6,
+    [GetHashKey('WEAPON_REVOLVER_MK2')] = 0.6,
+    [GetHashKey('WEAPON_DBSHOTGUN')] = 0.7,
+    [GetHashKey('WEAPON_COMPACTRIFLE')] = 0.3,
+    [GetHashKey('WEAPON_AUTOSHOTGUN')] = 0.2,
+    [GetHashKey('WEAPON_COMPACTLAUNCHER')] = 0.5,
+    [GetHashKey('WEAPON_MINISMG')] = 0.1
+}
 
-function loadAnimDict( dict )
-	while ( not HasAnimDictLoaded( dict ) ) do
-		RequestAnimDict( dict )
-		Citizen.Wait( 0 )
-	end
+--[[
+    -- Type: Config
+    -- Name: HOLSTER_WEAPONS
+    -- Use: Weapons that trigger holster animations
+    -- Created: 2025-09-11
+    -- By: VSSVSSN
+--]]
+local HOLSTER_WEAPONS = {
+    GetHashKey('WEAPON_PISTOL'),
+    GetHashKey('WEAPON_COMBATPISTOL'),
+    GetHashKey('WEAPON_STUNGUN')
+}
+
+--[[
+    -- Type: Variable
+    -- Name: holstered
+    -- Use: Tracks whether the player's weapon is holstered
+    -- Created: 2025-09-11
+    -- By: VSSVSSN
+--]]
+local holstered = true
+local attachedWeapons = {}
+
+--[[
+    -- Type: Function
+    -- Name: isHolsterWeapon
+    -- Use: Determines if the specified weapon uses holster animations
+    -- Created: 2025-09-11
+    -- By: VSSVSSN
+--]]
+local function isHolsterWeapon(weapon)
+    for _, hash in ipairs(HOLSTER_WEAPONS) do
+        if hash == weapon then
+            return true
+        end
+    end
+    return false
 end
-local weapons = {
-	"WEAPON_PISTOL",
-	"WEAPON_COMBATPISTOL",
-	"WEAPON_STUNGUN",
-}
-function CheckWeapon(ped)
-	for i = 1, #weapons do
-		if GetHashKey(weapons[i]) == GetSelectedPedWeapon(ped) then
-			return true
-		end
-	end
-	return false
+
+--[[
+    -- Type: Function
+    -- Name: loadModel
+    -- Use: Loads a model into memory
+    -- Created: 2025-09-11
+    -- By: VSSVSSN
+--]]
+local function loadModel(model)
+    local hash = GetHashKey(model)
+    RequestModel(hash)
+    while not HasModelLoaded(hash) do
+        Wait(0)
+    end
+    return hash
 end
-Citizen.CreateThread(function()
-	while true do
-		Citizen.Wait(0)
-		local ped = PlayerPedId()
-		if DoesEntityExist( ped ) and not IsEntityDead( ped ) and not IsPedInAnyVehicle(PlayerPedId(), true) then
-			loadAnimDict( "rcmjosh4" )
-			loadAnimDict( "weapons@pistol@" )
-			if CheckWeapon(ped) then
-				if holstered then
-					TaskPlayAnim(ped, "rcmjosh4", "josh_leadout_cop2", 8.0, 2.0, -1, 48, 10, 0, 0, 0 )
-					Citizen.Wait(600)
-					ClearPedTasks(ped)
-					holstered = false
-				end
-				--SetPedComponentVariation(ped, 9, 0, 0, 0)
-			elseif not CheckWeapon(ped) then
-				if not holstered then
-					TaskPlayAnim(ped, "weapons@pistol@", "aim_2_holster", 8.0, 2.0, -1, 48, 10, 0, 0, 0 )
-					Citizen.Wait(500)
-					ClearPedTasks(ped)
-					holstered = true
-				end
-				--SetPedComponentVariation(ped, 9, 1, 0, 0)
-			end
-		end
-	end
-end)
-Citizen.CreateThread(function()
+
+--[[
+    -- Type: Function
+    -- Name: attachWeapon
+    -- Use: Attaches weapon model to the player
+    -- Created: 2025-09-11
+    -- By: VSSVSSN
+--]]
+local function attachWeapon(ped, cfg)
+    local bone = GetPedBoneIndex(ped, cfg.bone)
+    local model = loadModel(cfg.model)
+    local obj = CreateObject(model, 0.0, 0.0, 0.0, true, true, false)
+    AttachEntityToEntity(
+        obj,
+        ped,
+        bone,
+        cfg.x, cfg.y, cfg.z,
+        cfg.xRot, cfg.yRot, cfg.zRot,
+        false, false, false, false, 2, true
+    )
+    SetEntityCollision(obj, false, false)
+    attachedWeapons[cfg.name] = obj
+end
+
+--[[
+    -- Type: Function
+    -- Name: removeWeapon
+    -- Use: Removes attached weapon model
+    -- Created: 2025-09-11
+    -- By: VSSVSSN
+--]]
+local function removeWeapon(name)
+    if attachedWeapons[name] then
+        DeleteObject(attachedWeapons[name])
+        attachedWeapons[name] = nil
+    end
+end
+
+--[[
+    -- Type: Thread
+    -- Name: Weapon Back Attachment
+    -- Use: Displays weapons on player model when not equipped
+    -- Created: 2025-09-11
+    -- By: VSSVSSN
+--]]
+CreateThread(function()
     while true do
-        Citizen.Wait(0)
+        Wait(0)
         local ped = PlayerPedId()
-                if IsPedArmed(ped, 6) then
-            DisableControlAction(1, 140, true)
-                DisableControlAction(1, 141, true)
-                DisableControlAction(1, 142, true)
+        if IsPedInAnyVehicle(ped, true) or IsPedGettingIntoAVehicle(ped) then
+            for name in pairs(attachedWeapons) do
+                removeWeapon(name)
+            end
+        else
+            for _, cfg in ipairs(BACK_WEAPONS) do
+                local hash = GetHashKey(cfg.name)
+                if HasPedGotWeapon(ped, hash, false) then
+                    if GetSelectedPedWeapon(ped) == hash then
+                        removeWeapon(cfg.name)
+                    elseif not attachedWeapons[cfg.name] and cfg.model ~= '' then
+                        attachWeapon(ped, cfg)
+                    end
+                else
+                    removeWeapon(cfg.name)
+                end
+            end
+        end
+    end
+end)
+
+--[[
+    -- Type: Thread
+    -- Name: Weapon Recoil
+    -- Use: Applies recoil based on weapon
+    -- Created: 2025-09-11
+    -- By: VSSVSSN
+--]]
+CreateThread(function()
+    while true do
+        Wait(0)
+        local ped = PlayerPedId()
+        if IsPedShooting(ped) and not IsPedDoingDriveby(ped) then
+            local _, wep = GetCurrentPedWeapon(ped)
+            local recoil = RECOIL_VALUES[wep]
+            if recoil and recoil > 0 then
+                local view = GetFollowPedCamViewMode()
+                local tv = 0.0
+                while tv < recoil do
+                    Wait(0)
+                    local pitch = GetGameplayCamRelativePitch()
+                    if view ~= 4 then
+                        SetGameplayCamRelativePitch(pitch + 0.1, 0.2)
+                        tv = tv + 0.1
+                    else
+                        local step = recoil > 0.1 and 0.6 or 0.016
+                        local inc = recoil > 0.1 and 0.6 or 0.1
+                        SetGameplayCamRelativePitch(pitch + step, recoil > 0.1 and 1.2 or 0.333)
+                        tv = tv + inc
+                    end
+                end
+            end
+        end
+    end
+end)
+
+--[[
+    -- Type: Function
+    -- Name: loadAnimDict
+    -- Use: Ensures an animation dictionary is loaded
+    -- Created: 2025-09-11
+    -- By: VSSVSSN
+--]]
+local function loadAnimDict(dict)
+    while not HasAnimDictLoaded(dict) do
+        RequestAnimDict(dict)
+        Wait(0)
+    end
+end
+
+--[[
+    -- Type: Thread
+    -- Name: Holster Animations
+    -- Use: Plays holster/unholster animations for pistols
+    -- Created: 2025-09-11
+    -- By: VSSVSSN
+--]]
+CreateThread(function()
+    while true do
+        Wait(0)
+        local ped = PlayerPedId()
+        if DoesEntityExist(ped) and not IsEntityDead(ped) and not IsPedInAnyVehicle(ped, true) then
+            local current = GetSelectedPedWeapon(ped)
+            if isHolsterWeapon(current) then
+                if holstered then
+                    loadAnimDict('rcmjosh4')
+                    loadAnimDict('weapons@pistol@')
+                    TaskPlayAnim(ped, 'rcmjosh4', 'josh_leadout_cop2', 8.0, 2.0, -1, 48, 0, false, false, false)
+                    Wait(600)
+                    ClearPedTasks(ped)
+                    holstered = false
+                end
+            else
+                if not holstered then
+                    loadAnimDict('weapons@pistol@')
+                    TaskPlayAnim(ped, 'weapons@pistol@', 'aim_2_holster', 8.0, 2.0, -1, 48, 0, false, false, false)
+                    Wait(500)
+                    ClearPedTasks(ped)
+                    holstered = true
+                end
+            end
+        end
+    end
+end)
+
+--[[
+    -- Type: Thread
+    -- Name: Disable Melee While Armed
+    -- Use: Prevents melee actions when armed
+    -- Created: 2025-09-11
+    -- By: VSSVSSN
+--]]
+CreateThread(function()
+    while true do
+        Wait(0)
+        local ped = PlayerPedId()
+        if IsPedArmed(ped, 6) then
+            DisableControlAction(0, 140, true)
+            DisableControlAction(0, 141, true)
+            DisableControlAction(0, 142, true)
         end
     end
 end)
