@@ -13,15 +13,12 @@ local FSN
 --  -------------------
 
 CreateThread(function()
-
     while not FSN do
-        TriggerEvent('fsn:getFsnObject', function(fsnObject)
-            FSN = fsnObject
+        TriggerEvent('fsn:getFsnObject', function(obj)
+            FSN = obj
         end)
+        Wait(100)
     end
-
-    Wait(1000)
-
 end)
 
 --  -------------------
@@ -32,520 +29,266 @@ end)
 --  BEGIN:    Functions
 --  -------------------
 
-function isModerator(source)
-
-    local playerId = source
-    local identifiers = GetNumPlayerIdentifiers(playerId)
-    local steamId
-
-    for i = 0, identifiers - 1 do
-        local id = GetPlayerIdentifier(playerId, i)
-        if string.find(id, 'steam:') then
-            steamId = id
-            break
+local function getSteamIdentifier(src)
+    for _, identifier in ipairs(GetPlayerIdentifiers(src)) do
+        if identifier:sub(1,5) == 'steam' then
+            return identifier
         end
     end
+    return nil
+end
 
-    local Moderators = Config.Moderators
-    local isModerator = false
-
-    for i = 1, #Config.Moderators do
-        if Moderators[i] == steamId then
-            isModerator = true
-        elseif isModerator == false then
-            isModerator = false
+local function isModerator(src)
+    local steamId = getSteamIdentifier(src)
+    if not steamId then return false end
+    for _, id in ipairs(Config.Moderators) do
+        if id == steamId then
+            return true
         end
     end
-
-    if isModerator then
-        return true
-    else
-        return false
-    end
-
     return false
 end
 
-function fsn_GetModeratorId(source)
-
-    local playerId = source
-    local identifier = GetPlayerName(playerId)
-
-    --for i = 1, #identifiers do
-        --steamId = identifiers[1]
-    --end
-
-    return identifier
-
-end
-
-function isAdmin(source)
-
-    local playerId = source
-    local identifiers = GetNumPlayerIdentifiers(playerId)
-    local steamId
-
-    for i = 0, identifiers - 1 do
-        local id = GetPlayerIdentifier(playerId, i)
-        if string.find(id, 'steam:') then
-            steamId = id
-            break
+local function isAdmin(src)
+    local steamId = getSteamIdentifier(src)
+    if not steamId then return false end
+    for _, id in ipairs(Config.Admins) do
+        if id == steamId then
+            return true
         end
     end
-
-    local Admins = Config.Admins
-    local isAdmin = false
-
-    for i = 1, #Config.Admins do
-        if Admins[i] == steamId then
-            isAdmin = true
-        elseif isAdmin == false then
-            isAdmin = false
-        end
-    end
-
-    if isAdmin then
-        return true
-    else
-        return false
-    end
-
     return false
 end
 
-function fsn_GetAdminId(source)
-
-    local playerId = source
-    local identifier = GetPlayerName(playerId)
-
-    --for i = 1, #identifiers do
-        --steamId = identifiers[1]
-    --end
-
-    return identifier
-
+local function getModeratorName(src)
+    return GetPlayerName(src)
 end
 
-function registerModeratorCommands(source)
-
-    RegisterCommand('sc', function(source, args, rawCommand)
-
-        if source == 0 then
-          return
-        end
-    
-        local playerId = source
-        local playerIdentifier = GetPlayerIdentifiers(playerId)
-
-        if not isModerator(playerId) then
-            return
-        end
-       
-        local players = GetPlayers()
-        
-    
-        --for k, ply in pairs(GetPlayers()) do
-        for j = 1, #players do
-                       
-            if isModerator(players[j]) then
-    
-                local adminName = fsn_GetModeratorId(players[j])
-                local msg = rawCommand:sub(3)
-                
-                TriggerClientEvent('chat:addMessage', players[j], {
-                template = '<div style="padding: 0.5vw; background-color: rgba(44, 95, 148, 0.6); border-radius: 3px;"><strong>^8SC [Mod] {0}:^7</strong><br>{1}</div>',
-                args = { adminName, msg }
-                })
-    
-            end
-    
-        end
-      
-      end)
-    
+local function getAdminName(src)
+    return GetPlayerName(src)
 end
 
-function registerAdminCommands()
-
-    RegisterCommand('sc', function(source, args, rawCommand)
-
-        if source == 0 then
-          return
-        end
-    
-        local playerId = source
-
-        if not isAdmin(playerId) then
-            return
-        end
-       
-        local players = GetPlayers()
-        
-    
-        --for k, ply in pairs(GetPlayers()) do
-        for j = 1, #players do
-                         
-            if isAdmin(players[j]) then
-    
-                local adminName = fsn_GetAdminId(players[j])
-                local msg = rawCommand:sub(3)
-                
-                TriggerClientEvent('chat:addMessage', players[j], {
-                template = '<div style="padding: 0.5vw; background-color: rgba(44, 95, 148, 0.6); border-radius: 3px;"><strong>^8SC [Admin] {0}:^7</strong><br>{1}</div>',
-                args = { adminName, msg }
+local function registerModeratorCommands()
+    RegisterCommand('sc', function(source, args, raw)
+        if source == 0 or not isModerator(source) then return end
+        local msg = raw:sub(4)
+        for _, ply in ipairs(GetPlayers()) do
+            ply = tonumber(ply)
+            if isModerator(ply) then
+                TriggerClientEvent('chat:addMessage', ply, {
+                    template = '<div style="padding:0.5vw; background-color: rgba(44, 95, 148, 0.6); border-radius:3px;"><strong>^8SC [Mod] {0}:^7</strong><br>{1}</div>',
+                    args = {getModeratorName(source), msg}
                 })
-    
             end
-    
         end
-      
+    end)
+end
+
+local function registerAdminCommands()
+    RegisterCommand('sc', function(source, args, raw)
+        if source == 0 or not isAdmin(source) then return end
+        local msg = raw:sub(4)
+        for _, ply in ipairs(GetPlayers()) do
+            ply = tonumber(ply)
+            if isAdmin(ply) then
+                TriggerClientEvent('chat:addMessage', ply, {
+                    template = '<div style="padding:0.5vw; background-color: rgba(44,95,148,0.6); border-radius:3px;"><strong>^8SC [Admin] {0}:^7</strong><br>{1}</div>',
+                    args = {getAdminName(source), msg}
+                })
+            end
+        end
     end)
 
-    RegisterCommand('adminmenu', function(source, args, rawCommand)
-
-        if source == 0 then
-            return
-        end
-
-        local playerId = source
-
-        if not isAdmin(playerId) then
-            return
-        end
-
-        TriggerClientEvent('chat:addMessage', playerId, {
-            template = '<div style="padding: 0.5vw; background-color: rgba(44, 95, 148, 0.6); border-radius: 3px;"><strong>^8System: ^7</strong><br>The admin menu is not yet implemented!</div>',
-            args = {  }
-        })
-
-    end)
-
-    RegisterCommand('amenu', function(source, args, rawCommand)
-
-        if source == 0 then
-            return
-        end
-
-        local playerId = source
-
-        if not isAdmin(playerId) then
-            return
-        end
-
-        TriggerClientEvent('chat:addMessage', playerId, {
-            template = '<div style="padding: 0.5vw; background-color: rgba(44, 95, 148, 0.6); border-radius: 3px;"><strong>^8System: ^7</strong><br>The admin menu is not yet implemented!</div>',
+    RegisterCommand('adminmenu', function(source)
+        if source == 0 or not isAdmin(source) then return end
+        TriggerClientEvent('chat:addMessage', source, {
+            template = '<div style="padding:0.5vw; background-color: rgba(44,95,148,0.6); border-radius:3px;"><strong>^8System:^7</strong><br>The admin menu is not yet implemented!</div>',
             args = {}
         })
-
     end)
 
-    RegisterCommand('freeze', function(source, args, rawCommand)
-
-        if source == 0 then
-            return
-        end
-
-        local playerId = source
-
-        if not isAdmin(playerId) then
-            return
-        end
-
-        local targetId  = tonumber(args[1])
-        local target    = FSN.GetPlayerFromId(targetId)
-
-        if target then
-            local targetName = GetPlayerName(target.ply_id)
-            local adminName = GetPlayerName(playerId)
-            print(target.ply_id)
-            TriggerClientEvent('fsn_admin:FreezeMe', target.ply_id, adminName)
-            TriggerClientEvent('chat:addMessage', playerId, {
-                template = '<div style="padding: 0.5vw; background-color: rgba(44, 95, 148, 0.6); border-radius: 3px;"><strong>^8System: ^7</strong><br>You toggled the frozen status of {0}</div>',
-                args = { targetName }
-            })
-        else
-            TriggerClientEvent('chat:addMessage', playerId, {
-                template = '<div style="padding: 0.5vw; background-color: rgba(44, 95, 148, 0.6); border-radius: 3px;"><strong>^8System: ^7</strong><br>That target either doesn\'t exist or was entered wrong.</div>',
-                args = {  }
-            })
-        end
-
+    RegisterCommand('amenu', function(source)
+        if source == 0 or not isAdmin(source) then return end
+        TriggerClientEvent('chat:addMessage', source, {
+            template = '<div style="padding:0.5vw; background-color: rgba(44,95,148,0.6); border-radius:3px;"><strong>^8System:^7</strong><br>The admin menu is not yet implemented!</div>',
+            args = {}
+        })
     end)
 
-    RegisterCommand('announce', function(source, args, rawCommand)
-
-        if source == 0 then
-            local msg = rawCommand:sub(9)
-
-            TriggerClientEvent('chat:addMessage', -1, {
-                template = '<div style="padding: 0.5vw; background-color: rgba(44, 95, 148, 0.6); border-radius: 3px;"><strong>^8SERVER ANNOUNCEMENT: ^7</strong><br>{0}</div>',
-                args = { msg }
-            })
-        else
-
-            local playerId = source
-
-            if not isAdmin(playerId) then
-                return
-            end
-
-            local adminName = fsn_GetAdminId(playerId)
-            local msg = rawCommand:sub(9)
-
-            TriggerClientEvent('chat:addMessage', -1, {
-                template = '<div style="padding: 0.5vw; background-color: rgba(44, 95, 148, 0.6); border-radius: 3px;"><strong>^8[{0}] Announcement: ^7</strong><br>{1}</div>',
-                args = { adminName, msg }
-            })
-        end
-
-    end)
-
-    RegisterCommand('goto', function(source, args, rawCommand)
-
-        if source == 0 then
-            return
-        end
-
-        local playerId = source
-
-        if not isAdmin(playerId) then
-            return
-        end
-
+    RegisterCommand('freeze', function(source, args)
+        if source == 0 or not isAdmin(source) then return end
         local targetId = tonumber(args[1])
-        local target = FSN.GetPlayerFromId(targetId)
-
+        local target = targetId and FSN.GetPlayerFromId(targetId)
         if target then
-            TriggerClientEvent('fsn_admin:requestXYZ', target.ply_id, playerId, target.ply_id)
-            TriggerClientEvent('chat:addMessage', playerId, {
-                template = '<div style="padding: 0.5vw; background-color: rgba(44, 95, 148, 0.6); border-radius: 3px;"><strong>^8System: ^7</strong> You teleported to {0}.</div>',
-                args = { target.ply_id }
+            TriggerClientEvent('fsn_admin:FreezeMe', target.ply_id, getAdminName(source))
+            TriggerClientEvent('chat:addMessage', source, {
+                template = '<div style="padding:0.5vw; background-color: rgba(44,95,148,0.6); border-radius:3px;"><strong>^8System:^7</strong><br>You toggled the frozen status of {0}</div>',
+                args = {targetId}
             })
         else
-            TriggerClientEvent('chat:addMessage', playerId, {
-                template = '<div style="padding: 0.5vw; background-color: rgba(44, 95, 148, 0.6); border-radius: 3px;"><strong>^8System: ^7</strong><br>That target either doesn\'t exist or was entered wrong.</div>',
-                args = {  }
+            TriggerClientEvent('chat:addMessage', source, {
+                template = '<div style="padding:0.5vw; background-color: rgba(44,95,148,0.6); border-radius:3px;"><strong>^8System:^7</strong><br>That target either doesn\'t exist or was entered wrong.</div>',
+                args = {}
             })
         end
-
     end)
 
-    RegisterCommand('bring', function(source, args, rawCommand)
-
+    RegisterCommand('announce', function(source, args, raw)
+        local msg = raw:sub(9)
         if source == 0 then
+            TriggerClientEvent('chat:addMessage', -1, {
+                template = '<div style="padding:0.5vw; background-color: rgba(44,95,148,0.6); border-radius:3px;"><strong>^8SERVER ANNOUNCEMENT:^7</strong><br>{0}</div>',
+                args = {msg}
+            })
             return
         end
+        if not isAdmin(source) then return end
+        TriggerClientEvent('chat:addMessage', -1, {
+            template = '<div style="padding:0.5vw; background-color: rgba(44,95,148,0.6); border-radius:3px;"><strong>^8[{0}] Announcement:^7</strong><br>{1}</div>',
+            args = {getAdminName(source), msg}
+        })
+    end)
 
-        local playerId = source
-
-        if not isAdmin(playerId) then
-            return
-        end
-
+    RegisterCommand('goto', function(source, args)
+        if source == 0 or not isAdmin(source) then return end
         local targetId = tonumber(args[1])
-        local target = FSN.GetPlayerFromId(targetId)
-
+        local target = targetId and FSN.GetPlayerFromId(targetId)
         if target then
-            TriggerClientEvent('fsn_admin:requestXYZ', playerId, target.ply_id, playerId)
-            TriggerClientEvent('chat:addMessage', playerId, {
-                template = '<div style="padding: 0.5vw; background-color: rgba(44, 95, 148, 0.6); border-radius: 3px;"><strong>^8System: ^7</strong> You brought {0} to you.</div>',
-                args = { target.ply_id }
+            TriggerClientEvent('fsn_admin:requestXYZ', target.ply_id, source)
+            TriggerClientEvent('chat:addMessage', source, {
+                template = '<div style="padding:0.5vw; background-color: rgba(44,95,148,0.6); border-radius:3px;"><strong>^8System:^7</strong> You teleported to {0}.</div>',
+                args = {targetId}
             })
         else
-            TriggerClientEvent('chat:addMessage', playerId, {
-                template = '<div style="padding: 0.5vw; background-color: rgba(44, 95, 148, 0.6); border-radius: 3px;"><strong>^8System: ^7</strong><br>That target either doesn\'t exist or was entered wrong.</div>',
-                args = {  }
+            TriggerClientEvent('chat:addMessage', source, {
+                template = '<div style="padding:0.5vw; background-color: rgba(44,95,148,0.6); border-radius:3px;"><strong>^8System:^7</strong><br>That target either doesn\'t exist or was entered wrong.</div>',
+                args = {}
             })
         end
-
     end)
 
-    RegisterCommand('kick', function(source, args, rawCommand)
+    RegisterCommand('bring', function(source, args)
+        if source == 0 or not isAdmin(source) then return end
+        local targetId = tonumber(args[1])
+        local target = targetId and FSN.GetPlayerFromId(targetId)
+        if target then
+            TriggerClientEvent('fsn_admin:requestXYZ', source, target.ply_id)
+            TriggerClientEvent('chat:addMessage', source, {
+                template = '<div style="padding:0.5vw; background-color: rgba(44,95,148,0.6); border-radius:3px;"><strong>^8System:^7</strong> You brought {0} to you.</div>',
+                args = {targetId}
+            })
+        else
+            TriggerClientEvent('chat:addMessage', source, {
+                template = '<div style="padding:0.5vw; background-color: rgba(44,95,148,0.6); border-radius:3px;"><strong>^8System:^7</strong><br>That target either doesn\'t exist or was entered wrong.</div>',
+                args = {}
+            })
+        end
+    end)
 
+    RegisterCommand('kick', function(source, args, raw)
+        local targetId = tonumber(args[1])
+        local reason = raw:sub(7)
         if source == 0 then
-            local targetId = tonumber(args[1])
-            local target = FSN.GetPlayerFromId(targetId)
-            local reason = rawCommand:sub(7)
-
-            if target then
-                if reason then
-                    DropPlayer(target.ply_id, 'You have been kicked by the server for: ' .. reason)
-                end
+            if targetId and reason and reason ~= '' then
+                DropPlayer(targetId, 'You have been kicked by the server for: '..reason)
             end
+            return
+        end
+        if not isAdmin(source) then return end
+        local target = targetId and FSN.GetPlayerFromId(targetId)
+        if target and reason ~= '' then
+            DropPlayer(target.ply_id, 'You have been kicked for: '..reason..' by: '..getAdminName(source))
         else
-
-            local playerId = source
-
-            if not isAdmin(playerId) then
-                return
-            end
-
-            local targetId = tonumber(args[1])
-            local target = FSN.GetPlayerFromId(targetId)
-            local reason = rawCommand:sub(7)
-            local adminName = fsn_GetAdminId(playerId)
-
-            if target then
-                if reason then
-                    DropPlayer(target.ply_id, 'You have been kicked for: ' .. reason .. ' by: ' .. adminName)
-                else
-                    TriggerClientEvent('chat:addMessage', playerId, {
-                        template = '<div style="padding: 0.5vw; background-color: rgba(44, 95, 148, 0.6); border-radius: 3px;"><strong>^8System: ^7</strong><br>You need to specify a reason.</div>',
-                        args = {  }
-                    })
-                end
-            else
-                TriggerClientEvent('chat:addMessage', playerId, {
-                    template = '<div style="padding: 0.5vw; background-color: rgba(44, 95, 148, 0.6); border-radius: 3px;"><strong>^8System: ^7</strong><br>That target either doesn\'t exist or was entered wrong.</div>',
-                    args = {  }
-                })
-            end
-
+            TriggerClientEvent('chat:addMessage', source, {
+                template = '<div style="padding:0.5vw; background-color: rgba(44,95,148,0.6); border-radius:3px;"><strong>^8System:^7</strong><br>You need to specify a valid target and reason.</div>',
+                args = {}
+            })
         end
     end)
 
-    RegisterCommand('ban', function(source, args, rawCommand)
-
+    RegisterCommand('ban', function(source, args, raw)
         local times = {
             ['1d']=86400,
             ['2d']=172800,
             ['3d']=259200,
-            ['4d']=354600,
+            ['4d']=345600,
             ['5d']=432000,
             ['6d']=518400,
             ['1w']=604800,
             ['2w']=1209600,
             ['3w']=1814400,
             ['1m']=2629743,
-            ['2m']=529486,
-            ['perm'] = 999999999999999999
+            ['2m']=5259486,
+            ['perm']=999999999
         }
 
-        if source == 0 then
-            local targetId = tonumber(args[1])
-            local target = FSN.GetPlayerFromId(targetId)
-            local reason = rawCommand:sub(5)
-            local length = args[2]
+        local targetId = tonumber(args[1])
+        local length   = args[2]
+        local reason   = raw:sub(5)
 
-            if target then
-                if reason and length then
-                    local unbanTime = os.time() + times[length]
-                    local steamId = GetPlayerIdentifiers(target.ply_id)
+        if source ~= 0 and not isAdmin(source) then return end
+        if not targetId or not length or not times[length] or reason == '' then return end
 
-                    for i = 1, #GetPlayerIdentifiers(target) do
-                        if string.match(steamId[1], 'steam:') then
-                            steamId = steamId[1]
-                        end
-                    end
-                        
-                    MySQL.Async.execute('UPDATE fsn_users SET banned = @unban, banned_r = @reason, WHERE steamid = @steamId', {
-                        ['@unban'] = unbanTime,
-                        ['@reason'] = reason,
-                        ['@steamId'] = steamId,
-                    }, function(rowsChanged)
-                    end)
-                    DropPlayer(target.ply_id, 'You have beend banned for: ' .. reason .. ' by the server. Time: '.. length)
-                end
-            else
-
-            end
-        else
-
-            local playerId = source
-
-            if not isAdmin(playerId) then 
-                return
-            end
-
-            local targetId = tonumber(args[1])
-            local target = FSN.GetPlayerFromId(targetId)
-            local reason = rawCommand:sub(5)
-            local length = args[2]
-
-            if target then
-                if reason and length then
-                    local unbanTime = os.time() + times[length]
-                    local steamId = GetPlayerIdentifiers(target)
-                    local adminName = fsn_GetAdminId(playerId)
-
-                    for i = 1, #GetPlayerIdentifiers(target.ply_id) do
-                        if string.match(steamId[1], 'steam:') then
-                            steamId = steamId[1]
-                        end
-                    end
-                        
-                    MySQL.Async.execute('UPDATE fsn_users SET banned = @unban, banned_r = @reason, WHERE steamid = @steamId', {
-                        ['@unban'] = unbanTime,
-                        ['@reason'] = reason,
-                        ['@steamId'] = steamId,
-                    }, function(rowsChanged)
-                    end)
-                    DropPlayer(target.ply_id, 'You have beend banned for: ' .. reason .. ' by ' ..adminName.. '. Time: '.. length)
-                end
-            else
-                TriggerClientEvent('chat:addMessage', playerId, {
-                    template = '<div style="padding: 0.5vw; background-color: rgba(44, 95, 148, 0.6); border-radius: 3px;"><strong>^8System: ^7</strong><br>That target either doesn\'t exist or was entered wrong.</div>',
-                    args = {  }
+        local target = FSN.GetPlayerFromId(targetId)
+        if not target then
+            if source ~= 0 then
+                TriggerClientEvent('chat:addMessage', source, {
+                    template = '<div style="padding:0.5vw; background-color: rgba(44,95,148,0.6); border-radius:3px;"><strong>^8System:^7</strong><br>That target either doesn\'t exist or was entered wrong.</div>',
+                    args = {}
                 })
             end
+            return
         end
+
+        local steamId = getSteamIdentifier(target.ply_id)
+        if not steamId then return end
+
+        local unbanTime = os.time() + times[length]
+        MySQL.Async.execute('UPDATE fsn_users SET banned = @unban, banned_r = @reason WHERE steamid = @steamId', {
+            ['@unban'] = unbanTime,
+            ['@reason'] = reason,
+            ['@steamId'] = steamId
+        })
+
+        local banner = source == 0 and 'the server' or getAdminName(source)
+        DropPlayer(target.ply_id, 'You have been banned for: '..reason..' by '..banner..'. Time: '..length)
     end)
-
 end
 
-function registerModeratorSuggestions(source)
-
-    local playerId = source
-
-    if isModerator(playerId) then
-        TriggerClientEvent('chat:addSuggestion', playerId, '/sc', 'Talk in staff chat.', {
-            { name = 'Message', help = 'Message to send.', },
+local function registerModeratorSuggestions(source)
+    if isModerator(source) then
+        TriggerClientEvent('chat:addSuggestion', source, '/sc', 'Talk in staff chat.', {
+            { name = 'Message', help = 'Message to send.' }
         })
     end
-
 end
 
-function registerAdminSuggestions(source)
-
-    local playerId = source
-
-    if isAdmin(playerId) then
-        TriggerClientEvent('chat:addSuggestion', playerId, '/sc', 'Talk in staff chat.', {
-            { name = 'Message', help = 'Message to send.', },
+local function registerAdminSuggestions(source)
+    if isAdmin(source) then
+        TriggerClientEvent('chat:addSuggestion', source, '/sc', 'Talk in staff chat.', {
+            { name = 'Message', help = 'Message to send.' }
         })
-
-        TriggerClientEvent('chat:addSuggestion', playerId, '/adminmenu', 'The admin menu is not yet implemented.', {
-            { },
+        TriggerClientEvent('chat:addSuggestion', source, '/adminmenu', 'The admin menu is not yet implemented.', {})
+        TriggerClientEvent('chat:addSuggestion', source, '/amenu', 'The admin menu is not yet implemented.', {})
+        TriggerClientEvent('chat:addSuggestion', source, '/freeze', 'Freeze the target you specify.', {
+            { name = 'ID', help = 'The server ID of the target' }
         })
-
-        TriggerClientEvent('chat:addSuggestion', playerId, '/amenu', 'The admin menu is not yet implemented.', {
-            { name = 'Message', help = 'Message to send.', },
+        TriggerClientEvent('chat:addSuggestion', source, '/goto', 'Teleport to the target you specify.', {
+            { name = 'ID', help = 'The server ID of the target' }
         })
-
-        TriggerClientEvent('chat:addSuggestion', playerId, '/freeze', 'Freeze the target you specify.', {
-            { name = 'ID', help = 'The server ID of the target', },
+        TriggerClientEvent('chat:addSuggestion', source, '/bring', 'Bring the target you specify to your location.', {
+            { name = 'ID', help = 'The server ID of the target' }
         })
-
-        TriggerClientEvent('chat:addSuggestion', playerId, '/goto', 'Teleport to the target you specify.', {
-            { name = 'ID', help = 'The server ID of the target', },
+        TriggerClientEvent('chat:addSuggestion', source, '/kick', 'Kick the specified target from the server.', {
+            { name = 'ID', help = 'The server ID of the target' },
+            { name = 'reason', help = 'The reason you are kicking the target from the server.' }
         })
-
-        TriggerClientEvent('chat:addSuggestion', playerId, '/bring', 'Bring the target you specify to your location.', {
-            { name = 'ID', help = 'The server ID of the target', },
-        })
-
-        TriggerClientEvent('chat:addSuggestion', playerId, '/kick', 'Kick the specified target from the server.', {
-            { name = 'ID', help = 'The server ID of the target', },
-            { name = 'reason', help = 'The reason you are kicking the target from the server.'},
-        })
-
-        TriggerClientEvent('chat:addSuggestion', playerId, '/ban', 'Ban the target from the server.', {
-            { name = 'ID', help = 'The server ID of the target', },
-            { name = 'Length', help = 'A valid length for the ban: 1d, 2d, 3d, 4d, 5d, 6d. 1w, 2w, 3w, 1m, 2m, perm'},
-            { name = 'Reason', help = 'The reason for the ban'},
+        TriggerClientEvent('chat:addSuggestion', source, '/ban', 'Ban the target from the server.', {
+            { name = 'ID', help = 'The server ID of the target' },
+            { name = 'Length', help = 'Valid lengths: 1d,2d,3d,4d,5d,6d,1w,2w,3w,1m,2m,perm' },
+            { name = 'Reason', help = 'The reason for the ban' }
         })
     end
-
 end
 
 --  -------------------
@@ -553,66 +296,42 @@ end
 --  -------------------
 
 --  -------------------
---  BEGIN:      Exports
---  -------------------
-
---  -------------------
---  END:        Exports
---  -------------------
-
---  -------------------
 --  BEGIN:       Events
 --  -------------------
 
+RegisterNetEvent('fsn_admin:sendXYZ')
+AddEventHandler('fsn_admin:sendXYZ', function(sendTo, coords)
+    TriggerClientEvent('fsn_admin:receiveXYZ', sendTo, coords)
+end)
+
 RegisterNetEvent('fsn_admin:enableAdminCommands')
 AddEventHandler('fsn_admin:enableAdminCommands', function(source)
-
-    local playerId = source
-
-    registerAdminSuggestions(playerId)
-
+    registerAdminSuggestions(source)
 end)
 
 RegisterNetEvent('fsn_admin:enableModeratorCommands')
 AddEventHandler('fsn_admin:enableModeratorCommands', function(source)
-
-    local playerId = source
-
-    registerModeratorSuggestions(playerId)
-    registerModeratorCommands(playerId)
-
+    registerModeratorSuggestions(source)
 end)
 
---Will register the chat suggestions and commands for the players when they connect if they are an admin or moderator.
 RegisterNetEvent('fsn:playerReady')
 AddEventHandler('fsn:playerReady', function()
-
-    local playerId  = source
-
+    local playerId = source
     Wait(1000)
-
     if isAdmin(playerId) then
         TriggerEvent('fsn_admin:enableAdminCommands', playerId)
     end
-
     if isModerator(playerId) then
         TriggerEvent('fsn_admin:enableModeratorCommands', playerId)
     end
-
 end)
 
--- This is here to register the admin commands so the server can use them without having an admin connect.
 AddEventHandler('onResourceStart', function(resourceName)
-    Wait(100)
-
-    if (GetCurrentResourceName() ~= resourceName) then
-        return
-    end
-
+    if GetCurrentResourceName() ~= resourceName then return end
     registerAdminCommands()
+    registerModeratorCommands()
 end)
 
 --  -------------------
 --  END:         Events
 --  -------------------
-
