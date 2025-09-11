@@ -434,7 +434,7 @@ ensure my_resource
 | Recording | 17 | 17 | 0 | 2025-09-11T06:52 |
 | Replay | 6 | 6 | 0 | 2025-09-11T07:37 |
 | ACL | 10 | 10 | 0 | 2025-09-11T08:12 |
-| CFX | ? | 10 | ? | 2025-09-11T08:26 |
+| CFX | ? | 20 | ? | 2025-09-11T08:39 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -10885,4 +10885,334 @@ RegisterCommand('rgb', () => {
 - **Caveats / Limitations**:
   - Returns 0 when key is absent or non-integer.
 - **Reference**: https://docs.fivem.net/natives/?n=GET_RESOURCE_KVP_INT
-CONTINUE-HERE — 2025-09-11T08:26:26 — next: 13.3 Server Natives > CFX category :: GetResourceKvpString
+##### GetResourceKvpString
+- **Scope**: Server
+- **Signature(s)**: `string GET_RESOURCE_KVP_STRING(string key)`
+- **Purpose**: Reads a string value from the resource key-value store.
+- **Parameters / Returns**:
+  - `key` (`string`): Key name.
+  - **Returns**: `string` stored value or empty string.
+- **OneSync / Networking**: Server-only storage; not replicated.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Server Init
+        -- Name: load_name
+        -- Use: Loads a server name from KVP and prints it
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    local name = GetResourceKvpString('server_name')
+    print('Server name:', name)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Server Init: load_name */
+    const name = GetResourceKvpString('server_name');
+    console.log('Server name:', name);
+    ```
+- **Caveats / Limitations**:
+  - Returns empty string if the key is absent.
+- **Reference**: https://docs.fivem.net/natives/?n=GET_RESOURCE_KVP_STRING
+
+##### GetResourceMetadata
+- **Scope**: Shared
+- **Signature(s)**: `string GET_RESOURCE_METADATA(string resourceName, string metadataKey, int index)`
+- **Purpose**: Retrieves a metadata value from a resource's fxmanifest.
+- **Parameters / Returns**:
+  - `resourceName` (`string`): Target resource.
+  - `metadataKey` (`string`): Manifest field name.
+  - `index` (`int`): Zero-based index for multiple values.
+  - **Returns**: `string` value or `nil` if missing.
+- **OneSync / Networking**: None; local lookup.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Shared Init
+        -- Name: print_version
+        -- Use: Prints version metadata from this resource
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    local ver = GetResourceMetadata(GetCurrentResourceName(), 'version', 0)
+    print('Resource version:', ver)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Shared Init: print_version */
+    const ver = GetResourceMetadata(GetCurrentResourceName(), 'version', 0);
+    console.log('Resource version:', ver);
+    ```
+- **Caveats / Limitations**:
+  - Indexes start at 0; out-of-range returns `null`.
+- **Reference**: https://docs.fivem.net/natives/?n=GET_RESOURCE_METADATA
+
+##### GetResourcePath
+- **Scope**: Server
+- **Signature(s)**: `string GET_RESOURCE_PATH(string resourceName)`
+- **Purpose**: Returns the filesystem path for a resource.
+- **Parameters / Returns**:
+  - `resourceName` (`string`): Resource to query.
+  - **Returns**: `string` absolute path.
+- **OneSync / Networking**: Server-only; exposes server file paths.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Server Init
+        -- Name: print_path
+        -- Use: Displays path to a resource
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    print('Path:', GetResourcePath('chat'))
+    ```
+  - JavaScript:
+    ```javascript
+    /* Server Init: print_path */
+    console.log('Path:', GetResourcePath('chat'));
+    ```
+- **Caveats / Limitations**:
+  - Avoid exposing paths to untrusted clients.
+- **Reference**: https://docs.fivem.net/natives/?n=GET_RESOURCE_PATH
+
+##### GetResourceState
+- **Scope**: Server
+- **Signature(s)**: `string GET_RESOURCE_STATE(string resourceName)`
+- **Purpose**: Reports the current state of a resource (e.g., started, stopped).
+- **Parameters / Returns**:
+  - `resourceName` (`string`): Resource to query.
+  - **Returns**: `string` state name.
+- **OneSync / Networking**: Server query only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: res_state
+        -- Use: Prints state of a resource
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('res_state', function(_, args)
+        print(GetResourceState(args[1] or 'chat'))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: res_state */
+    RegisterCommand('res_state', (_src, args) => {
+      console.log(GetResourceState(args[0] || 'chat'));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns `missing` for unknown resources.
+- **Reference**: https://docs.fivem.net/natives/?n=GET_RESOURCE_STATE
+
+##### GetResourceTime
+- **Scope**: Shared
+- **Signature(s)**: `int GET_RESOURCE_TIME()`
+- **Purpose**: Returns milliseconds since the current resource started.
+- **Parameters / Returns**:
+  - **Returns**: `int` elapsed ms.
+- **OneSync / Networking**: None; local timer.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: uptime
+        -- Use: Prints resource uptime
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('uptime', function()
+        print('Uptime ms:', GetResourceTime())
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: uptime */
+    RegisterCommand('uptime', () => {
+      console.log('Uptime ms:', GetResourceTime());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Resets when resource restarts.
+- **Reference**: https://docs.fivem.net/natives/?n=GET_RESOURCE_TIME
+
+##### HasStateBagValue
+- **Scope**: Shared
+- **Signature(s)**: `bool HAS_STATE_BAG_VALUE(string bagName, string key)`
+- **Purpose**: Checks if a state bag contains a specific key.
+- **Parameters / Returns**:
+  - `bagName` (`string`): Bag identifier or prefix.
+  - `key` (`string`): Key to check.
+  - **Returns**: `bool` presence.
+- **OneSync / Networking**: Respects entity ownership for replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Shared Function
+        -- Name: has_locked
+        -- Use: Tests if a vehicle has a 'locked' state bag key
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    local vehicleBag = ('entity:%s'):format(veh)
+    if HasStateBagValue(vehicleBag, 'locked') then
+        print('Vehicle lock state exists')
+    end
+    ```
+  - JavaScript:
+    ```javascript
+    /* Shared Function: has_locked */
+    const vehicleBag = `entity:${veh}`;
+    if (HasStateBagValue(vehicleBag, 'locked')) {
+      console.log('Vehicle lock state exists');
+    }
+    ```
+- **Caveats / Limitations**:
+  - Only checks existence, not value.
+- **Reference**: https://docs.fivem.net/natives/?n=HAS_STATE_BAG_VALUE
+
+##### IsAceAllowed
+- **Scope**: Server
+- **Signature(s)**: `bool IS_ACE_ALLOWED(string object, string permission)`
+- **Purpose**: Tests if a principal has a given permission.
+- **Parameters / Returns**:
+  - `object` (`string`): Principal name (e.g., `identifier.fivem:123`).
+  - `permission` (`string`): ACE to test.
+  - **Returns**: `bool` result.
+- **OneSync / Networking**: Server-only ACL check.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: can_kick
+        -- Use: Prints if a principal can use kick command
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('can_kick', function(src)
+        print(IsAceAllowed(('player.%s'):format(src), 'command.kick'))
+    end, true)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: can_kick */
+    RegisterCommand('can_kick', (src) => {
+      console.log(IsAceAllowed(`player.${src}`, 'command.kick'));
+    }, true);
+    ```
+- **Caveats / Limitations**:
+  - Requires ACL to be configured.
+- **Reference**: https://docs.fivem.net/natives/?n=IS_ACE_ALLOWED
+
+##### IsDuplicityVersion
+- **Scope**: Shared
+- **Signature(s)**: `bool IS_DUPLICITY_VERSION()`
+- **Purpose**: Indicates if code is running on the server.
+- **Parameters / Returns**:
+  - **Returns**: `bool` true on server, false on client.
+- **OneSync / Networking**: None.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Shared Function
+        -- Name: check_realm
+        -- Use: Prints realm information
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    if IsDuplicityVersion() then
+        print('Running on server')
+    else
+        print('Running on client')
+    end
+    ```
+  - JavaScript:
+    ```javascript
+    /* Shared Function: check_realm */
+    if (IsDuplicityVersion()) {
+      console.log('Running on server');
+    } else {
+      console.log('Running on client');
+    }
+    ```
+- **Caveats / Limitations**:
+  - Useful for shared scripts to branch logic.
+- **Reference**: https://docs.fivem.net/natives/?n=IS_DUPLICITY_VERSION
+
+##### IsPlayerAceAllowed
+- **Scope**: Server
+- **Signature(s)**: `bool IS_PLAYER_ACE_ALLOWED(Player player, string permission)`
+- **Purpose**: Checks if a player has a specific permission via ACL.
+- **Parameters / Returns**:
+  - `player` (`Player`): Player ID.
+  - `permission` (`string`): ACE to test.
+  - **Returns**: `bool` result.
+- **OneSync / Networking**: Server ACL query.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: is_admin
+        -- Use: Tells player if they have admin permission
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('is_admin', function(src)
+        local allowed = IsPlayerAceAllowed(src, 'admin')
+        TriggerClientEvent('chat:addMessage', src, { args = { 'System', tostring(allowed) } })
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: is_admin */
+    RegisterCommand('is_admin', (src) => {
+      const allowed = IsPlayerAceAllowed(src, 'admin');
+      emitNet('chat:addMessage', src, { args: ['System', String(allowed)] });
+    });
+    ```
+- **Caveats / Limitations**:
+  - Permission checks are case-sensitive.
+- **Reference**: https://docs.fivem.net/natives/?n=IS_PLAYER_ACE_ALLOWED
+
+##### IsPrincipalAceAllowed
+- **Scope**: Server
+- **Signature(s)**: `bool IS_PRINCIPAL_ACE_ALLOWED(string principal, string permission)`
+- **Purpose**: Tests if a principal has an ACE without resolving player ID.
+- **Parameters / Returns**:
+  - `principal` (`string`): Principal name (e.g., `group.admin`).
+  - `permission` (`string`): ACE to test.
+  - **Returns**: `bool` result.
+- **OneSync / Networking**: Server ACL query.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Server Init
+        -- Name: check_group
+        -- Use: Logs if admin group has restart permission
+        -- Created: 2025-09-11
+        -- By: VSSVSSN
+    --]]
+    print('Admin can restart?', IsPrincipalAceAllowed('group.admin', 'command.restart'))
+    ```
+  - JavaScript:
+    ```javascript
+    /* Server Init: check_group */
+    console.log('Admin can restart?', IsPrincipalAceAllowed('group.admin', 'command.restart'));
+    ```
+- **Caveats / Limitations**:
+  - Principals must be defined in ACL.
+- **Reference**: https://docs.fivem.net/natives/?n=IS_PRINCIPAL_ACE_ALLOWED
+
+CONTINUE-HERE — 2025-09-11T08:39:37 — next: 13.3 Server Natives > CFX category :: LoadResourceFile
