@@ -4,7 +4,7 @@ This document indexes the Example_Frameworks/ directory to guide development of 
 
 ## Scan Stamp & Inventory Overview
 
-TREE-SCAN-STAMP — 2025-09-12T23:09:06+00:00 — dirs:783 files:14695
+TREE-SCAN-STAMP — 2025-09-12T23:13:54+00:00 — dirs:783 files:14695
 
 | Folder | Resources | Files | Server Files | Client Files | Shared Files |
 | --- | --- | --- | --- | --- | --- |
@@ -923,10 +923,10 @@ Example_Frameworks/FiveM-FSN-Framework/pipeline.yml
 | Scope | Total | Done | Remaining | Last Updated |
 | --- | --- | --- | --- | --- |
 | File Enumeration | 14695 | 723 | 13972 | 2025-09-12 |
-| Function Extraction | 0 | 0 | 0 | 2025-09-12 |
-| Event Extraction | 0 | 0 | 0 | 2025-09-12 |
-| Native Currency Checks | 0 | 0 | 0 | 2025-09-12 |
-| Similarity Merges | 0 | 0 | 0 | 2025-09-12 |
+| Function Extraction | 9 | 9 | 0 | 2025-09-12 |
+| Event Extraction | 10 | 10 | 0 | 2025-09-12 |
+| Native Currency Checks | 22 | 22 | 0 | 2025-09-12 |
+| Similarity Merges | 2 | 2 | 0 | 2025-09-12 |
 
 ## Function & Event Registry
 
@@ -935,16 +935,444 @@ Example_Frameworks/FiveM-FSN-Framework/pipeline.yml
 - Events detected via patterns like `RegisterNetEvent`, `AddEventHandler`, `TriggerClientEvent`, and `TriggerServerEvent`.
 
 ### 5.2 Consolidated Index
-- _No functions or events documented yet._
+
+#### Functions
+- [cancelFishing](#cancelfishing)
+- [cancelHunt](#cancelhunt)
+- [cancelYoga](#cancelyoga)
+- [createBlips](#createblips)
+- [getNearestSpot](#getnearestspot)
+- [spawnAnimal](#spawnanimal)
+- [startFishing](#startfishing)
+- [startHunt](#starthunt)
+- [startYoga](#startyoga)
+
+#### Events
+- [chat:addMessage](#chataddmessage)
+- [fsn_admin:FreezeMe](#fsn_adminfreezeme)
+- [fsn_admin:receiveXYZ](#fsn_adminreceivexyz)
+- [fsn_admin:requestXYZ](#fsn_adminrequestxyz)
+- [fsn_admin:sendXYZ](#fsn_adminsendxyz)
+- [fsn_admin:spawnVehicle](#fsn_adminspawnvehicle)
+- [fsn_cargarage:makeMine](#fsn_cargaragemakemine)
+- [fsn_needs:stress:remove](#fsn_needsstressremove)
+- [fsn_notify:displayNotification](#fsn_notifydisplaynotification)
+- [fsn_yoga:checkStress](#fsn_yogacheckstress)
 
 ### 5.3 Functions — Detailed Entries
-- _TODO(next-run): begin populating function details._
+
+#### createBlips
+- **Name**: createBlips
+- **Type**: Client
+- **Defined In**:
+  - Example_Frameworks/FiveM-FSN-Framework/fsn_activities/fishing/client.lua (47-60)
+  - Example_Frameworks/FiveM-FSN-Framework/fsn_activities/hunting/client.lua (46-59)
+  - Example_Frameworks/FiveM-FSN-Framework/fsn_activities/yoga/client.lua (48-61)
+- **Signature(s)**: `createBlips()`
+- **Purpose**: Generates map blips for activity locations.
+- **Key Flows**:
+  - Loops configured blip table and sets properties.
+- **Natives Used**:
+  - AddBlipForCoord — OK
+  - SetBlipHighDetail — OK
+  - SetBlipSprite — OK
+  - SetBlipDisplay — OK
+  - SetBlipScale — OK
+  - SetBlipColour — OK
+  - SetBlipAsShortRange — OK
+  - BeginTextCommandSetBlipName — OK
+  - AddTextComponentString — OK
+  - EndTextCommandSetBlipName — OK
+- **OneSync / Networking Notes**: Client-only blip creation; purely visual.
+- **Examples**:
+```lua
+-- Create activity blips on resource start
+CreateThread(function()
+    createBlips()
+end)
+```
+- **Security / Anti-Abuse**: Static data; no inputs.
+- **References**:
+  - https://docs.fivem.net/natives/
+
+#### getNearestSpot
+- **Name**: getNearestSpot
+- **Type**: Client
+- **Defined In**:
+  - Example_Frameworks/FiveM-FSN-Framework/fsn_activities/fishing/client.lua (69-79)
+  - Example_Frameworks/FiveM-FSN-Framework/fsn_activities/yoga/client.lua (70-80)
+- **Signature(s)**: `getNearestSpot(playerPos)`
+- **Purpose**: Returns closest predefined activity position.
+- **Key Flows**:
+  - Iterates configured vectors; tracks nearest.
+- **Natives Used**: none.
+- **OneSync / Networking Notes**: Local computation only.
+- **Examples**:
+```lua
+local dist, pos = getNearestSpot(GetEntityCoords(PlayerPedId()))
+```
+- **Security / Anti-Abuse**: relies on trusted client data.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### cancelFishing
+- **Name**: cancelFishing
+- **Type**: Client
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_activities/fishing/client.lua (88-95)
+- **Signature(s)**: `cancelFishing(ped)`
+- **Purpose**: Stops fishing scenario and resets state.
+- **Key Flows**:
+  - Sends HUD note, clears ped tasks, resets flags.
+- **Natives Used**:
+  - ClearPedTasksImmediately — OK
+- **OneSync / Networking Notes**: Client-only; no server notification.
+- **Examples**:
+```lua
+if IsControlJustPressed(0, fishEndKey) then
+    cancelFishing(PlayerPedId())
+end
+```
+- **Security / Anti-Abuse**: none; affects local ped.
+- **References**:
+  - https://docs.fivem.net/natives/
+
+#### startFishing
+- **Name**: startFishing
+- **Type**: Client
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_activities/fishing/client.lua (104-112)
+- **Signature(s)**: `startFishing(ped)`
+- **Purpose**: Plays fishing scenario and rewards fish.
+- **Key Flows**:
+  - Notifies user, starts scenario, waits random time, clears tasks.
+- **Natives Used**:
+  - TaskStartScenarioInPlace — OK
+  - ClearPedTasksImmediately — OK
+- **OneSync / Networking Notes**: Outcome not synced; server unaware.
+- **Examples**:
+```lua
+fishing = true
+startFishing(PlayerPedId())
+fishing = false
+```
+- **Security / Anti-Abuse**: Local-only reward; vulnerable to client manipulation.
+- **References**:
+  - https://docs.fivem.net/natives/
+
+#### spawnAnimal
+- **Name**: spawnAnimal
+- **Type**: Client
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_activities/hunting/client.lua (68-76)
+- **Signature(s)**: `spawnAnimal(ped)`
+- **Purpose**: Spawns roaming deer ahead of player.
+- **Key Flows**:
+  - Requests model, waits for load, creates ped, sets wander behavior.
+- **Natives Used**:
+  - GetHashKey — OK
+  - RequestModel — OK
+  - HasModelLoaded — OK
+  - GetOffsetFromEntityInWorldCoords — OK
+  - CreatePed — OK
+  - TaskWanderStandard — OK
+  - SetEntityAsMissionEntity — OK
+- **OneSync / Networking Notes**: Spawned entity exists only client-side.
+- **Examples**:
+```lua
+spawnAnimal(PlayerPedId())
+```
+- **Security / Anti-Abuse**: Clients can spawn peds freely; no validation.
+- **References**:
+  - https://docs.fivem.net/natives/
+
+#### cancelHunt
+- **Name**: cancelHunt
+- **Type**: Client
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_activities/hunting/client.lua (85-91)
+- **Signature(s)**: `cancelHunt()`
+- **Purpose**: Cancels hunting session and removes animal.
+- **Key Flows**:
+  - Sends HUD note, deletes spawned entity.
+- **Natives Used**:
+  - DoesEntityExist — OK
+  - DeleteEntity — OK
+- **OneSync / Networking Notes**: Local cleanup; server not informed.
+- **Examples**:
+```lua
+if IsControlJustPressed(0, huntEndKey) then
+    cancelHunt()
+end
+```
+- **Security / Anti-Abuse**: Local-only; no safeguards.
+- **References**:
+  - https://docs.fivem.net/natives/
+
+#### startHunt
+- **Name**: startHunt
+- **Type**: Client
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_activities/hunting/client.lua (100-104)
+- **Signature(s)**: `startHunt(ped)`
+- **Purpose**: Begins hunt by spawning target and setting state.
+- **Key Flows**:
+  - Notifies user and calls `spawnAnimal`.
+- **Natives Used**: none.
+- **OneSync / Networking Notes**: No server sync; purely client.
+- **Examples**:
+```lua
+if IsControlJustPressed(0, huntStartKey) then
+    startHunt(PlayerPedId())
+end
+```
+- **Security / Anti-Abuse**: No validation; client decides start.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### cancelYoga
+- **Name**: cancelYoga
+- **Type**: Client
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_activities/yoga/client.lua (89-93)
+- **Signature(s)**: `cancelYoga(ped)`
+- **Purpose**: Aborts yoga scenario.
+- **Key Flows**:
+  - Notifies user, clears ped task, resets flag.
+- **Natives Used**:
+  - ClearPedTasksImmediately — OK
+- **OneSync / Networking Notes**: Local only.
+- **Examples**:
+```lua
+cancelYoga(PlayerPedId())
+```
+- **Security / Anti-Abuse**: none.
+- **References**:
+  - https://docs.fivem.net/natives/
+
+#### startYoga
+- **Name**: startYoga
+- **Type**: Client
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_activities/yoga/client.lua (102-109)
+- **Signature(s)**: `startYoga(ped)`
+- **Purpose**: Runs yoga scenario and triggers stress relief.
+- **Key Flows**:
+  - Shows message, waits, starts scenario, after 15s triggers `fsn_yoga:checkStress` and clears task.
+- **Natives Used**:
+  - TaskStartScenarioInPlace — OK
+  - ClearPedTasksImmediately — OK
+- **OneSync / Networking Notes**: Stress removal performed client-side; not validated server-side.
+- **Examples**:
+```lua
+doingYoga = true
+startYoga(PlayerPedId())
+```
+- **Security / Anti-Abuse**: Client can fake completion; no server check.
+- **References**:
+  - https://docs.fivem.net/natives/
 
 ### 5.4 Events — Detailed Entries
-- _TODO(next-run): begin populating event details._
+
+#### chat:addMessage
+- **Event**: chat:addMessage
+- **Direction**: Intra-Client
+- **Type**: LocalEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_admin/client/client.lua (78-88)
+- **Payload**:
+  - template:string
+  - args:table
+- **Typical Callers / Listeners**: called from admin freeze handler; handled by default chat resource.
+- **Natives Used**: none
+- **OneSync / Replication Notes**: local UI update only.
+- **Examples**:
+```lua
+TriggerEvent('chat:addMessage', {template = 'Message', args = {}})
+```
+- **Security / Anti-Abuse**: relies on client; no rate limiting.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### fsn_admin:FreezeMe
+- **Event**: fsn_admin:FreezeMe
+- **Direction**: Server→Client
+- **Type**: NetEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_admin/client/client.lua (74-93)
+- **Payload**:
+  - adminName:string
+- **Typical Callers / Listeners**: Triggered by admin commands; listened by client to toggle freeze.
+- **Natives Used**:
+  - FreezeEntityPosition — OK
+- **OneSync / Replication Notes**: freeze state is client-side; may desync without server checks.
+- **Examples**:
+```lua
+TriggerClientEvent('fsn_admin:FreezeMe', targetId, 'Admin')
+```
+- **Security / Anti-Abuse**: requires server-side permission checks.
+- **References**:
+  - https://docs.fivem.net/natives/
+
+#### fsn_admin:receiveXYZ
+- **Event**: fsn_admin:receiveXYZ
+- **Direction**: Server→Client
+- **Type**: NetEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_admin/client/client.lua (69-72)
+- **Payload**:
+  - coords:vector3
+- **Typical Callers / Listeners**: server sends coordinates; client teleports.
+- **Natives Used**:
+  - SetEntityCoords — OK
+- **OneSync / Replication Notes**: teleport not validated server-side.
+- **Examples**:
+```lua
+TriggerClientEvent('fsn_admin:receiveXYZ', player, GetEntityCoords(PlayerPedId()))
+```
+- **Security / Anti-Abuse**: ensure server validates sender.
+- **References**:
+  - https://docs.fivem.net/natives/
+
+#### fsn_admin:requestXYZ
+- **Event**: fsn_admin:requestXYZ
+- **Direction**: Server→Client
+- **Type**: NetEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_admin/client/client.lua (63-67)
+- **Payload**:
+  - sendto:number
+- **Typical Callers / Listeners**: server requests coordinates; client responds via `fsn_admin:sendXYZ`.
+- **Natives Used**:
+  - GetEntityCoords — OK
+- **OneSync / Replication Notes**: coordinate data sent without verification.
+- **Examples**:
+```lua
+TriggerClientEvent('fsn_admin:requestXYZ', player, adminId)
+```
+- **Security / Anti-Abuse**: ensure only authorized admins invoke.
+- **References**:
+  - https://docs.fivem.net/natives/
+
+#### fsn_admin:sendXYZ
+- **Event**: fsn_admin:sendXYZ
+- **Direction**: Client→Server
+- **Type**: NetEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_admin/client/client.lua (66)
+- **Payload**:
+  - sendto:number
+  - coords:vector3
+- **Typical Callers / Listeners**: client sends position to server; server teleports or relays.
+- **Natives Used**: none
+- **OneSync / Replication Notes**: trust boundary from client to server.
+- **Examples**:
+```lua
+TriggerServerEvent('fsn_admin:sendXYZ', target, GetEntityCoords(PlayerPedId()))
+```
+- **Security / Anti-Abuse**: server must sanitize coordinates and source.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### fsn_admin:spawnVehicle
+- **Event**: fsn_admin:spawnVehicle
+- **Direction**: Server→Client
+- **Type**: NetEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_admin/client/client.lua (39-61)
+- **Payload**:
+  - vehmodel:string
+- **Typical Callers / Listeners**: admin command on server triggers; client spawns and owns vehicle.
+- **Natives Used**:
+  - PlayerPedId — OK
+  - GetEntityCoords — OK
+  - GetEntityHeading — OK
+  - SetVehicleOnGroundProperly — OK
+  - SetVehicleNumberPlateTextIndex — OK
+  - SetPedIntoVehicle — OK
+  - GetDisplayNameFromVehicleModel — OK
+  - GetEntityModel — OK
+  - GetVehicleNumberPlateText — OK
+- **OneSync / Replication Notes**: vehicle ownership handled via subsequent events.
+- **Examples**:
+```lua
+TriggerClientEvent('fsn_admin:spawnVehicle', player, 'adder')
+```
+- **Security / Anti-Abuse**: ensure server restricts usage to admins.
+- **References**:
+  - https://docs.fivem.net/natives/
+
+#### fsn_cargarage:makeMine
+- **Event**: fsn_cargarage:makeMine
+- **Direction**: Intra-Client
+- **Type**: LocalEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_admin/client/client.lua (56)
+- **Payload**:
+  - vehicle:entity
+  - name:string
+  - plate:string
+- **Typical Callers / Listeners**: triggered after vehicle spawn to transfer ownership; listener in cargarage resource.
+- **Natives Used**:
+  - GetDisplayNameFromVehicleModel — OK
+  - GetEntityModel — OK
+  - GetVehicleNumberPlateText — OK
+- **OneSync / Replication Notes**: relies on client to inform garage.
+- **Examples**:
+```lua
+TriggerEvent('fsn_cargarage:makeMine', veh, model, plate)
+```
+- **Security / Anti-Abuse**: susceptible to spoofing; validate server-side.
+- **References**:
+  - https://docs.fivem.net/natives/
+
+#### fsn_needs:stress:remove
+- **Event**: fsn_needs:stress:remove
+- **Direction**: Intra-Client
+- **Type**: LocalEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_activities/yoga/client.lua (148)
+- **Payload**:
+  - amount:number
+- **Typical Callers / Listeners**: triggered after yoga to reduce stress; handled by needs system.
+- **Natives Used**: none
+- **OneSync / Replication Notes**: client-side stat change; vulnerable to manipulation.
+- **Examples**:
+```lua
+TriggerEvent('fsn_needs:stress:remove', 10)
+```
+- **Security / Anti-Abuse**: server should validate stress removal.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### fsn_notify:displayNotification
+- **Event**: fsn_notify:displayNotification
+- **Direction**: Intra-Client
+- **Type**: LocalEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_admin/client/client.lua (58-59)
+- **Payload**:
+  - message:string
+  - position:string
+  - duration:number
+  - style:string
+- **Typical Callers / Listeners**: used to show HUD notifications; listener in notify resource.
+- **Natives Used**: none
+- **OneSync / Replication Notes**: UI only.
+- **Examples**:
+```lua
+TriggerEvent('fsn_notify:displayNotification', 'Hello', 'centerLeft', 2000, 'info')
+```
+- **Security / Anti-Abuse**: spam risk; rate limit recommended.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### fsn_yoga:checkStress
+- **Event**: fsn_yoga:checkStress
+- **Direction**: Intra-Client
+- **Type**: NetEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_activities/yoga/client.lua (145-153)
+- **Payload**: none
+- **Typical Callers / Listeners**: triggered after yoga; listener removes stress.
+- **Natives Used**: none
+- **OneSync / Replication Notes**: not validated server-side.
+- **Examples**:
+```lua
+TriggerEvent('fsn_yoga:checkStress')
+```
+- **Security / Anti-Abuse**: susceptible to manual triggering.
+- **References**:
+  - https://docs.fivem.net/docs/
 
 ## Similarity Merge Report
-- No merges performed this run.
+- Canonicalized identical helper functions.
+- Merged `createBlips` definitions (fishing, hunting, yoga).
+- Merged `getNearestSpot` definitions (fishing, yoga).
+- TODO(next-run): review other activity helpers for consolidation.
 
 ## Troubleshooting & Profiling Hooks
 - TODO(next-run): document recommended debug commands and profiling tools.
@@ -955,5 +1383,5 @@ Example_Frameworks/FiveM-FSN-Framework/pipeline.yml
 
 ## PROGRESS MARKERS (EOF)
 
-CONTINUE-HERE — 2025-09-12T23:09:06+00:00 — next: FiveM-FSN-Framework/fsn_activities/fishing/client.lua @ line 1
-MERGE-QUEUE — 2025-09-12T23:09:06+00:00 — remaining: 0 (top 5: n/a)
+CONTINUE-HERE — 2025-09-12T23:13:54+00:00 — next: FiveM-FSN-Framework/fsn_admin/server/server.lua @ line 1
+MERGE-QUEUE — 2025-09-12T23:13:54+00:00 — remaining: 0 (top 5: n/a)
