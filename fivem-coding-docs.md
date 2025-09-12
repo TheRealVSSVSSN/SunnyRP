@@ -430,13 +430,13 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Overall | 6442 | 633 | 5809 | 2025-09-12T06:14:47+00:00 |
+| Overall | 6442 | 658 | 5784 | 2025-09-12T06:26:25+00:00 |
 | Player | 248 | 248 | 0 | 2025-09-11T06:38 |
 | Recording | 17 | 17 | 0 | 2025-09-11T06:52 |
 | Replay | 6 | 6 | 0 | 2025-09-11T07:37 |
 | ACL | 10 | 10 | 0 | 2025-09-11T08:12 |
 | CFX | 50 | 50 | 0 | 2025-09-11T09:55 |
-| Vehicle | 751 | 302 | 449 | 2025-09-12T06:14:47+00:00 |
+| Vehicle | 751 | 327 | 424 | 2025-09-12T06:26:25+00:00 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -22978,5 +22978,936 @@ RegisterCommand('rgb', () => {
 - **Caveats / Limitations**:
   - Semantics are undocumented.
 - **Reference**: https://docs.fivem.net/natives/?_0x0205F5365292D2EB
+##### _0x0419B167EE128F33
+- **Name**: _0x0419B167EE128F33
+- **Scope**: Client
+- **Signature**: `Any _0x0419B167EE128F33(Any p0, Any p1);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `p0` (`Any`): Undocumented.
+  - `p1` (`Any`): Undocumented.
+  - **Returns**: `Any` Undocumented.
+- **OneSync / Networking**: Entity effects require ownership; run on the entity owner when using OneSync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_0419
+        -- Use: Demonstrates _0x0419B167EE128F33
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_0419', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        _0x0419B167EE128F33(0, 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_0419 */
+    RegisterCommand('veh_0419', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      _0x0419B167EE128F33(0, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Undocumented/unclear on official docs.
+- **Reference**: https://docs.fivem.net/natives/?_0x0419B167EE128F33
 
-CONTINUE-HERE — 2025-09-12T06:14:47+00:00 — next: Vehicle :: N_0x0419B167EE128F33
+##### _0x0581730AB9380412
+- **Name**: _0x0581730AB9380412
+- **Scope**: Client
+- **Signature**: `void _0x0581730AB9380412(Any p0, Any p1, Any p2, Any p3, Any p4, Any p5);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `p0` (`Any`): Undocumented.
+  - `p1` (`Any`): Undocumented.
+  - `p2` (`Any`): Undocumented.
+  - `p3` (`Any`): Undocumented.
+  - `p4` (`Any`): Undocumented.
+  - `p5` (`Any`): Undocumented.
+  - **Returns**: `void` None
+- **OneSync / Networking**: Entity effects require ownership; run on the entity owner when using OneSync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_0581
+        -- Use: Demonstrates _0x0581730AB9380412
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_0581', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        _0x0581730AB9380412(0, 0, 0, 0, 0, 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_0581 */
+    RegisterCommand('veh_0581', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      _0x0581730AB9380412(0, 0, 0, 0, 0, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Undocumented/unclear on official docs.
+- **Reference**: https://docs.fivem.net/natives/?_0x0581730AB9380412
+
+##### _0x063AE2B2CC273588
+- **Name**: _0x063AE2B2CC273588
+- **Scope**: Client
+- **Signature**: `void _0x063AE2B2CC273588(Vehicle vehicle, BOOL p1);`
+- **Purpose**: A vehicle recording playback flag only used in jewelry_heist
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Undocumented.
+  - `p1` (`BOOL`): Undocumented.
+  - **Returns**: `void` None
+- **OneSync / Networking**: Entity effects require ownership; run on the entity owner when using OneSync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_063a
+        -- Use: Demonstrates _0x063AE2B2CC273588
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_063a', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        _0x063AE2B2CC273588(veh, false)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_063a */
+    RegisterCommand('veh_063a', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      _0x063AE2B2CC273588(veh, false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - A vehicle recording playback flag only used in jewelry_heist
+- **Reference**: https://docs.fivem.net/natives/?_0x063AE2B2CC273588
+
+##### _0x065D03A9D6B2C6B5
+- **Name**: _0x065D03A9D6B2C6B5
+- **Scope**: Client
+- **Signature**: `void _0x065D03A9D6B2C6B5(Any p0, Any p1);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `p0` (`Any`): Undocumented.
+  - `p1` (`Any`): Undocumented.
+  - **Returns**: `void` None
+- **OneSync / Networking**: Entity effects require ownership; run on the entity owner when using OneSync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_065d
+        -- Use: Demonstrates _0x065D03A9D6B2C6B5
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_065d', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        _0x065D03A9D6B2C6B5(0, 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_065d */
+    RegisterCommand('veh_065d', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      _0x065D03A9D6B2C6B5(0, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Undocumented/unclear on official docs.
+- **Reference**: https://docs.fivem.net/natives/?_0x065D03A9D6B2C6B5
+
+##### _0x107A473D7A6647A9
+- **Name**: _0x107A473D7A6647A9
+- **Scope**: Client
+- **Signature**: `void _0x107A473D7A6647A9(Vehicle vehicle);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Undocumented.
+  - **Returns**: `void` None
+- **OneSync / Networking**: Entity effects require ownership; run on the entity owner when using OneSync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_107a
+        -- Use: Demonstrates _0x107A473D7A6647A9
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_107a', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        _0x107A473D7A6647A9(veh)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_107a */
+    RegisterCommand('veh_107a', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      _0x107A473D7A6647A9(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Undocumented/unclear on official docs.
+- **Reference**: https://docs.fivem.net/natives/?_0x107A473D7A6647A9
+
+##### _0x1312DDD8385AEE4E
+- **Name**: _0x1312DDD8385AEE4E
+- **Scope**: Client
+- **Signature**: `void _0x1312DDD8385AEE4E(Any p0, Any p1);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `p0` (`Any`): Undocumented.
+  - `p1` (`Any`): Undocumented.
+  - **Returns**: `void` None
+- **OneSync / Networking**: Entity effects require ownership; run on the entity owner when using OneSync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_1312
+        -- Use: Demonstrates _0x1312DDD8385AEE4E
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_1312', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        _0x1312DDD8385AEE4E(0, 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_1312 */
+    RegisterCommand('veh_1312', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      _0x1312DDD8385AEE4E(0, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Undocumented/unclear on official docs.
+- **Reference**: https://docs.fivem.net/natives/?_0x1312DDD8385AEE4E
+
+##### _0x182F266C2D9E2BEB
+- **Name**: _0x182F266C2D9E2BEB
+- **Scope**: Client
+- **Signature**: `void _0x182F266C2D9E2BEB(Vehicle vehicle, float p1);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Undocumented.
+  - `p1` (`float`): Undocumented.
+  - **Returns**: `void` None
+- **OneSync / Networking**: Entity effects require ownership; run on the entity owner when using OneSync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_182f
+        -- Use: Demonstrates _0x182F266C2D9E2BEB
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_182f', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        _0x182F266C2D9E2BEB(veh, 0.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_182f */
+    RegisterCommand('veh_182f', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      _0x182F266C2D9E2BEB(veh, 0.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Undocumented/unclear on official docs.
+- **Reference**: https://docs.fivem.net/natives/?_0x182F266C2D9E2BEB
+
+##### _0x2310A8F9421EBF43
+- **Name**: _0x2310A8F9421EBF43
+- **Scope**: Client
+- **Signature**: `void _0x2310A8F9421EBF43(Any p0);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `p0` (`Any`): Undocumented.
+  - **Returns**: `void` None
+- **OneSync / Networking**: Entity effects require ownership; run on the entity owner when using OneSync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_2310
+        -- Use: Demonstrates _0x2310A8F9421EBF43
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_2310', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        _0x2310A8F9421EBF43(0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_2310 */
+    RegisterCommand('veh_2310', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      _0x2310A8F9421EBF43(0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Undocumented/unclear on official docs.
+- **Reference**: https://docs.fivem.net/natives/?_0x2310A8F9421EBF43
+
+##### _0x2311DD7159F00582
+- **Name**: _0x2311DD7159F00582
+- **Scope**: Client
+- **Signature**: `void _0x2311DD7159F00582(Vehicle vehicle, BOOL p1);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Undocumented.
+  - `p1` (`BOOL`): Undocumented.
+  - **Returns**: `void` None
+- **OneSync / Networking**: Entity effects require ownership; run on the entity owner when using OneSync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_2311
+        -- Use: Demonstrates _0x2311DD7159F00582
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_2311', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        _0x2311DD7159F00582(veh, false)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_2311 */
+    RegisterCommand('veh_2311', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      _0x2311DD7159F00582(veh, false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Undocumented/unclear on official docs.
+- **Reference**: https://docs.fivem.net/natives/?_0x2311DD7159F00582
+
+##### _0x2C4A1590ABF43E8B
+- **Name**: _0x2C4A1590ABF43E8B
+- **Scope**: Client
+- **Signature**: `void _0x2C4A1590ABF43E8B(Vehicle vehicle, BOOL p1);`
+- **Purpose**: SET_VEHICLE_W* (next character is either H or I)
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Undocumented.
+  - `p1` (`BOOL`): Undocumented.
+  - **Returns**: `void` None
+- **OneSync / Networking**: Entity effects require ownership; run on the entity owner when using OneSync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_2c4a
+        -- Use: Demonstrates _0x2C4A1590ABF43E8B
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_2c4a', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        _0x2C4A1590ABF43E8B(veh, false)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_2c4a */
+    RegisterCommand('veh_2c4a', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      _0x2C4A1590ABF43E8B(veh, false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - SET_VEHICLE_W* (next character is either H or I)
+- **Reference**: https://docs.fivem.net/natives/?_0x2C4A1590ABF43E8B
+
+##### _0x3441CAD2F2231923
+- **Name**: _0x3441CAD2F2231923
+- **Scope**: Client
+- **Signature**: `void _0x3441CAD2F2231923(Vehicle vehicle, BOOL p1);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Undocumented.
+  - `p1` (`BOOL`): Undocumented.
+  - **Returns**: `void` None
+- **OneSync / Networking**: Entity effects require ownership; run on the entity owner when using OneSync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_3441
+        -- Use: Demonstrates _0x3441CAD2F2231923
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_3441', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        _0x3441CAD2F2231923(veh, false)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_3441 */
+    RegisterCommand('veh_3441', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      _0x3441CAD2F2231923(veh, false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Undocumented/unclear on official docs.
+- **Reference**: https://docs.fivem.net/natives/?_0x3441CAD2F2231923
+
+##### _0x35BB21DE06784373
+- **Name**: _0x35BB21DE06784373
+- **Scope**: Client
+- **Signature**: `void _0x35BB21DE06784373(Any p0, Any p1);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `p0` (`Any`): Undocumented.
+  - `p1` (`Any`): Undocumented.
+  - **Returns**: `void` None
+- **OneSync / Networking**: Entity effects require ownership; run on the entity owner when using OneSync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_35bb
+        -- Use: Demonstrates _0x35BB21DE06784373
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_35bb', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        _0x35BB21DE06784373(0, 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_35bb */
+    RegisterCommand('veh_35bb', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      _0x35BB21DE06784373(0, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Undocumented/unclear on official docs.
+- **Reference**: https://docs.fivem.net/natives/?_0x35BB21DE06784373
+
+##### _0x35E0654F4BAD7971
+- **Name**: _0x35E0654F4BAD7971
+- **Scope**: Client
+- **Signature**: `void _0x35E0654F4BAD7971(BOOL p0);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `p0` (`BOOL`): Undocumented.
+  - **Returns**: `void` None
+- **OneSync / Networking**: Entity effects require ownership; run on the entity owner when using OneSync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_35e0
+        -- Use: Demonstrates _0x35E0654F4BAD7971
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_35e0', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        _0x35E0654F4BAD7971(false)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_35e0 */
+    RegisterCommand('veh_35e0', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      _0x35E0654F4BAD7971(false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Undocumented/unclear on official docs.
+- **Reference**: https://docs.fivem.net/natives/?_0x35E0654F4BAD7971
+
+##### _0x36DE109527A2C0C4
+- **Name**: _0x36DE109527A2C0C4
+- **Scope**: Client
+- **Signature**: `void _0x36DE109527A2C0C4(BOOL toggle);`
+- **Purpose**: Does nothing. It's a nullsub. NativeDB Introduced: v1604
+- **Parameters / Returns**:
+  - `toggle` (`BOOL`): Undocumented.
+  - **Returns**: `void` None
+- **OneSync / Networking**: Entity effects require ownership; run on the entity owner when using OneSync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_36de
+        -- Use: Demonstrates _0x36DE109527A2C0C4
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_36de', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        _0x36DE109527A2C0C4(false)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_36de */
+    RegisterCommand('veh_36de', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      _0x36DE109527A2C0C4(false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does nothing. It's a nullsub. NativeDB Introduced: v1604
+- **Reference**: https://docs.fivem.net/natives/?_0x36DE109527A2C0C4
+
+##### _0x3B458DDB57038F08
+- **Name**: _0x3B458DDB57038F08
+- **Scope**: Client
+- **Signature**: `void _0x3B458DDB57038F08(Vehicle vehicle, int doorIndex, BOOL toggle);`
+- **Purpose**: Usually used alongside other vehicle door natives.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Undocumented.
+  - `doorIndex` (`int`): Undocumented.
+  - `toggle` (`BOOL`): Undocumented.
+  - **Returns**: `void` None
+- **OneSync / Networking**: Entity effects require ownership; run on the entity owner when using OneSync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_3b45
+        -- Use: Demonstrates _0x3B458DDB57038F08
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_3b45', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        _0x3B458DDB57038F08(veh, 0, false)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_3b45 */
+    RegisterCommand('veh_3b45', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      _0x3B458DDB57038F08(veh, 0, false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Usually used alongside other vehicle door natives.
+- **Reference**: https://docs.fivem.net/natives/?_0x3B458DDB57038F08
+
+##### _0x407DC5E97DB1A4D3
+- **Name**: _0x407DC5E97DB1A4D3
+- **Scope**: Client
+- **Signature**: `void _0x407DC5E97DB1A4D3(Any p0, Any p1);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `p0` (`Any`): Undocumented.
+  - `p1` (`Any`): Undocumented.
+  - **Returns**: `void` None
+- **OneSync / Networking**: Entity effects require ownership; run on the entity owner when using OneSync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_407d
+        -- Use: Demonstrates _0x407DC5E97DB1A4D3
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_407d', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        _0x407DC5E97DB1A4D3(0, 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_407d */
+    RegisterCommand('veh_407d', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      _0x407DC5E97DB1A4D3(0, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Undocumented/unclear on official docs.
+- **Reference**: https://docs.fivem.net/natives/?_0x407DC5E97DB1A4D3
+
+##### _0x41290B40FA63E6DA
+- **Name**: _0x41290B40FA63E6DA
+- **Scope**: Client
+- **Signature**: `void _0x41290B40FA63E6DA(Any p0);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `p0` (`Any`): Undocumented.
+  - **Returns**: `void` None
+- **OneSync / Networking**: Entity effects require ownership; run on the entity owner when using OneSync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_4129
+        -- Use: Demonstrates _0x41290B40FA63E6DA
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_4129', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        _0x41290B40FA63E6DA(0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_4129 */
+    RegisterCommand('veh_4129', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      _0x41290B40FA63E6DA(0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Undocumented/unclear on official docs.
+- **Reference**: https://docs.fivem.net/natives/?_0x41290B40FA63E6DA
+
+##### _0x428AD3E26C8D9EB0
+- **Name**: _0x428AD3E26C8D9EB0
+- **Scope**: Client
+- **Signature**: `void _0x428AD3E26C8D9EB0(Vehicle vehicle, float x, float y, float z, float p4);`
+- **Purpose**: SET_*
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Undocumented.
+  - `x` (`float`): Undocumented.
+  - `y` (`float`): Undocumented.
+  - `z` (`float`): Undocumented.
+  - `p4` (`float`): Undocumented.
+  - **Returns**: `void` None
+- **OneSync / Networking**: Entity effects require ownership; run on the entity owner when using OneSync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_428a
+        -- Use: Demonstrates _0x428AD3E26C8D9EB0
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_428a', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        _0x428AD3E26C8D9EB0(veh, 0.0, 0.0, 0.0, 0.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_428a */
+    RegisterCommand('veh_428a', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      _0x428AD3E26C8D9EB0(veh, 0.0, 0.0, 0.0, 0.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - SET_*
+- **Reference**: https://docs.fivem.net/natives/?_0x428AD3E26C8D9EB0
+
+##### _0x430A7631A84C9BE7
+- **Name**: _0x430A7631A84C9BE7
+- **Scope**: Client
+- **Signature**: `void _0x430A7631A84C9BE7(Any p0);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `p0` (`Any`): Undocumented.
+  - **Returns**: `void` None
+- **OneSync / Networking**: Entity effects require ownership; run on the entity owner when using OneSync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_430a
+        -- Use: Demonstrates _0x430A7631A84C9BE7
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_430a', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        _0x430A7631A84C9BE7(0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_430a */
+    RegisterCommand('veh_430a', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      _0x430A7631A84C9BE7(0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Undocumented/unclear on official docs.
+- **Reference**: https://docs.fivem.net/natives/?_0x430A7631A84C9BE7
+
+##### _0x4419966C9936071A
+- **Name**: _0x4419966C9936071A
+- **Scope**: Client
+- **Signature**: `void _0x4419966C9936071A(Vehicle vehicle);`
+- **Purpose**: CLEAR_VEHICLE_*
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Undocumented.
+  - **Returns**: `void` None
+- **OneSync / Networking**: Entity effects require ownership; run on the entity owner when using OneSync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_4419
+        -- Use: Demonstrates _0x4419966C9936071A
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_4419', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        _0x4419966C9936071A(veh)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_4419 */
+    RegisterCommand('veh_4419', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      _0x4419966C9936071A(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - CLEAR_VEHICLE_*
+- **Reference**: https://docs.fivem.net/natives/?_0x4419966C9936071A
+
+##### _0x4AD280EB48B2D8E6
+- **Name**: _0x4AD280EB48B2D8E6
+- **Scope**: Client
+- **Signature**: `void _0x4AD280EB48B2D8E6(Vehicle vehicle, BOOL togle);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Undocumented.
+  - `togle` (`BOOL`): Undocumented.
+  - **Returns**: `void` None
+- **OneSync / Networking**: Entity effects require ownership; run on the entity owner when using OneSync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_4ad2
+        -- Use: Demonstrates _0x4AD280EB48B2D8E6
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_4ad2', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        _0x4AD280EB48B2D8E6(veh, false)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_4ad2 */
+    RegisterCommand('veh_4ad2', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      _0x4AD280EB48B2D8E6(veh, false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Undocumented/unclear on official docs.
+- **Reference**: https://docs.fivem.net/natives/?_0x4AD280EB48B2D8E6
+
+##### _0x4D9D109F63FEE1D4
+- **Name**: _0x4D9D109F63FEE1D4
+- **Scope**: Client
+- **Signature**: `void _0x4D9D109F63FEE1D4(Any p0, BOOL p1);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `p0` (`Any`): Undocumented.
+  - `p1` (`BOOL`): Undocumented.
+  - **Returns**: `void` None
+- **OneSync / Networking**: Entity effects require ownership; run on the entity owner when using OneSync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_4d9d
+        -- Use: Demonstrates _0x4D9D109F63FEE1D4
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_4d9d', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        _0x4D9D109F63FEE1D4(0, false)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_4d9d */
+    RegisterCommand('veh_4d9d', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      _0x4D9D109F63FEE1D4(0, false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Undocumented/unclear on official docs.
+- **Reference**: https://docs.fivem.net/natives/?_0x4D9D109F63FEE1D4
+
+##### _0x51DB102F4A3BA5E0
+- **Name**: _0x51DB102F4A3BA5E0
+- **Scope**: Client
+- **Signature**: `void _0x51DB102F4A3BA5E0(BOOL toggle);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `toggle` (`BOOL`): Undocumented.
+  - **Returns**: `void` None
+- **OneSync / Networking**: Entity effects require ownership; run on the entity owner when using OneSync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_51db
+        -- Use: Demonstrates _0x51DB102F4A3BA5E0
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_51db', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        _0x51DB102F4A3BA5E0(false)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_51db */
+    RegisterCommand('veh_51db', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      _0x51DB102F4A3BA5E0(false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Undocumented/unclear on official docs.
+- **Reference**: https://docs.fivem.net/natives/?_0x51DB102F4A3BA5E0
+
+##### _0x51F30DB60626A20E
+- **Name**: _0x51F30DB60626A20E
+- **Scope**: Client
+- **Signature**: `BOOL _0x51F30DB60626A20E(Vehicle vehicle, float x, float y, float z, float rotX, float rotY, float rotZ, int p7, Any p8);`
+- **Purpose**: Usex in decompiled scripts in combination with [`_GET_VEHICLE_SUSPENSION_BOUNDS`](#_0xDF7E3EEB29642C38). NativeDB Introduced: v1180 ``` // Example from fm_bj_race_controller.c if (!VEHICLE::_0x51F30DB60626A20E(uParam0->f_26, uParam0->f_12.f_3, uParam0->f_12, 2, 1) && !func_282(uParam0->f_6)) { VEHICLE::_GET_VEHICLE_SUSPENSION_BOUNDS(*uParam0, &vVar15, &uVar16); VEHICLE::_GET_VEHICLE_SUSPENSION_BOUNDS(uParam0->f_26, &vVar17, &uVar18); fVar19 = SYSTEM::VDIST2(0f, 0f, vVar15.z, 0f, 0f, vVar17.z); uParam0->f_12.f_3.f_2 = (uParam0->f_12.f_3.f_2 + fVar19); if (!VEHICLE::_0x51F30DB60626A20E(uParam0->f_26, uParam0->f_12.f_3, uParam0->f_12, 2, 1)) { uParam0->f_12.f_3 = { uParam0->f_6 }; uParam0->f_12 = { uParam0->f_9 }; } }
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): the target vehicle
+  - `x` (`float`): vehicle location
+  - `y` (`float`): vehicle location
+  - `z` (`float`): vehicle location
+  - `rotX` (`float`): some kind of vehicle rotation value
+  - `rotY` (`float`): some kind of vehicle rotation value
+  - `rotZ` (`float`): some kind of vehicle rotation value
+  - `p7` (`int`): usually 2
+  - `p8` (`Any`): usually 1
+  - **Returns**: `BOOL` A BOOL value, purpose unknown.
+- **OneSync / Networking**: Entity effects require ownership; run on the entity owner when using OneSync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_51f3
+        -- Use: Demonstrates _0x51F30DB60626A20E
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_51f3', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        _0x51F30DB60626A20E(veh, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_51f3 */
+    RegisterCommand('veh_51f3', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      _0x51F30DB60626A20E(veh, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Usex in decompiled scripts in combination with [`_GET_VEHICLE_SUSPENSION_BOUNDS`](#_0xDF7E3EEB29642C38). NativeDB Introduced: v1180 ``` // Example from fm_bj_race_controller.c if (!VEHICLE::_0x51F30DB60626A20E(uParam0->f_26, uParam0->f_12.f_3, uParam0->f_12, 2, 1) && !func_282(uParam0->f_6)) { VEHICLE::_GET_VEHICLE_SUSPENSION_BOUNDS(*uParam0, &vVar15, &uVar16); VEHICLE::_GET_VEHICLE_SUSPENSION_BOUNDS(uParam0->f_26, &vVar17, &uVar18); fVar19 = SYSTEM::VDIST2(0f, 0f, vVar15.z, 0f, 0f, vVar17.z); uParam0->f_12.f_3.f_2 = (uParam0->f_12.f_3.f_2 + fVar19); if (!VEHICLE::_0x51F30DB60626A20E(uParam0->f_26, uParam0->f_12.f_3, uParam0->f_12, 2, 1)) { uParam0->f_12.f_3 = { uParam0->f_6 }; uParam0->f_12 = { uParam0->f_9 }; } }
+- **Reference**: https://docs.fivem.net/natives/?_0x51F30DB60626A20E
+
+##### _0x56EB5E94318D3FB6
+- **Name**: _0x56EB5E94318D3FB6
+- **Scope**: Client
+- **Signature**: `void _0x56EB5E94318D3FB6(Vehicle vehicle, BOOL p1);`
+- **Purpose**: Undocumented/unclear on official docs.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Undocumented.
+  - `p1` (`BOOL`): Undocumented.
+  - **Returns**: `void` None
+- **OneSync / Networking**: Entity effects require ownership; run on the entity owner when using OneSync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_56eb
+        -- Use: Demonstrates _0x56EB5E94318D3FB6
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_56eb', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        _0x56EB5E94318D3FB6(veh, false)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_56eb */
+    RegisterCommand('veh_56eb', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      _0x56EB5E94318D3FB6(veh, false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Undocumented/unclear on official docs.
+- **Reference**: https://docs.fivem.net/natives/?_0x56EB5E94318D3FB6
+
+CONTINUE-HERE — 2025-09-12T06:26:25+00:00 — next: Vehicle :: N_0x5845066D8A1EA7F7
