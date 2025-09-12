@@ -430,13 +430,13 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Overall | 6442 | 858 | 5584 | 2025-09-12T08:18:54+00:00 |
+| Overall | 6442 | 883 | 5559 | 2025-09-12T16:32:34+00:00 |
 | Player | 248 | 248 | 0 | 2025-09-11T06:38 |
 | Recording | 17 | 17 | 0 | 2025-09-11T06:52 |
 | Replay | 6 | 6 | 0 | 2025-09-11T07:37 |
 | ACL | 10 | 10 | 0 | 2025-09-11T08:12 |
 | CFX | 50 | 50 | 0 | 2025-09-11T09:55 |
-| Vehicle | 751 | 527 | 224 | 2025-09-12T08:18:54+00:00 |
+| Vehicle | 751 | 552 | 199 | 2025-09-12T16:32:34+00:00 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -31216,4 +31216,934 @@ RegisterCommand('rgb', () => {
   - Only functional on taxi models.
 - **Reference**: https://docs.fivem.net/natives/?n=SetTaxiLights
 
-CONTINUE-HERE — 2025-09-12T08:18:54+00:00 — next: Vehicle :: SetTrailerAttachmentEnabled
+##### SetTrailerAttachmentEnabled
+- **Name**: SetTrailerAttachmentEnabled
+- **Scope**: Client
+- **Signature**: `void SET_TRAILER_ATTACHMENT_ENABLED(Vehicle vehicle, BOOL enabled);`
+- **Purpose**: Enables or disables a trailer's ability to attach to vehicles.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Trailer entity.
+  - `enabled` (`bool`): `true` allows attachment.
+  - **Returns**: `void`
+- **OneSync / Networking**: Call on trailer owner to replicate attachment state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: trailer_attach
+        -- Use: Toggle trailer attachment
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('trailer_attach', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetTrailerAttachmentEnabled(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: trailer_attach */
+    RegisterCommand('trailer_attach', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetTrailerAttachmentEnabled(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only applies to trailer vehicles.
+- **Reference**: https://docs.fivem.net/natives/?n=SetTrailerAttachmentEnabled
+
+##### SetTrailerInverseMassScale
+- **Name**: SetTrailerInverseMassScale
+- **Scope**: Client
+- **Signature**: `void SET_TRAILER_INVERSE_MASS_SCALE(Vehicle vehicle, float p1);`
+- **Purpose**: Adjusts the inverse mass scaling for a trailer, influencing physics reactions.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Trailer entity.
+  - `p1` (`float`): Scaling factor.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must call to sync physics.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: trailer_mass
+        -- Use: Adjust inverse mass scale
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('trailer_mass', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetTrailerInverseMassScale(veh, tonumber(args[1]) or 1.0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: trailer_mass */
+    RegisterCommand('trailer_mass', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetTrailerInverseMassScale(veh, parseFloat(args[0]) || 1.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Exact physics effect undocumented.
+  - TODO(next-run): verify parameter usage.
+- **Reference**: https://docs.fivem.net/natives/?n=SetTrailerInverseMassScale
+
+##### _SetTrailerLegsLowered
+- **Name**: _SetTrailerLegsLowered
+- **Scope**: Client
+- **Signature**: `void _SET_TRAILER_LEGS_LOWERED(Vehicle vehicle);`
+- **Purpose**: Lowers the support legs of a trailer.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Trailer entity.
+  - **Returns**: `void`
+- **OneSync / Networking**: Execute on trailer owner to replicate leg state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: trailer_lower
+        -- Use: Lower trailer legs
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('trailer_lower', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then _SetTrailerLegsLowered(veh) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: trailer_lower */
+    RegisterCommand('trailer_lower', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) _SetTrailerLegsLowered(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Native name is underscored and may change.
+  - TODO(next-run): confirm availability in latest build.
+- **Reference**: https://docs.fivem.net/natives/?n=_SetTrailerLegsLowered
+
+##### SetTrailerLegsRaised
+- **Name**: SetTrailerLegsRaised
+- **Scope**: Client
+- **Signature**: `void SET_TRAILER_LEGS_RAISED(Vehicle vehicle);`
+- **Purpose**: Raises the support legs of a trailer.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Trailer entity.
+  - **Returns**: `void`
+- **OneSync / Networking**: Call on owner to sync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: trailer_raise
+        -- Use: Raise trailer legs
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('trailer_raise', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetTrailerLegsRaised(veh) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: trailer_raise */
+    RegisterCommand('trailer_raise', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetTrailerLegsRaised(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Used after attaching trailer to vehicle.
+- **Reference**: https://docs.fivem.net/natives/?n=SetTrailerLegsRaised
+
+##### SetTrainCruiseSpeed
+- **Name**: SetTrainCruiseSpeed
+- **Scope**: Client
+- **Signature**: `void SET_TRAIN_CRUISE_SPEED(Vehicle train, float speed);`
+- **Purpose**: Sets cruising speed for a train, starting or stopping movement.
+- **Parameters / Returns**:
+  - `train` (`Vehicle`): Train entity.
+  - `speed` (`float`): Speed in m/s.
+  - **Returns**: `void`
+- **OneSync / Networking**: Apply on train owner for global effect.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: train_cruise
+        -- Use: Set train cruise speed
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('train_cruise', function(_, args)
+        local train = GetVehiclePedIsIn(PlayerPedId(), false)
+        if train ~= 0 then SetTrainCruiseSpeed(train, tonumber(args[1]) or 0.0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: train_cruise */
+    RegisterCommand('train_cruise', (_src, args) => {
+      const train = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (train !== 0) SetTrainCruiseSpeed(train, parseFloat(args[0]) || 0.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Call every frame to maintain constant speed.
+- **Reference**: https://docs.fivem.net/natives/?n=SetTrainCruiseSpeed
+
+##### SetTrainSpeed
+- **Name**: SetTrainSpeed
+- **Scope**: Client
+- **Signature**: `void SET_TRAIN_SPEED(Vehicle train, float speed);`
+- **Purpose**: Immediately sets the train's speed without cruise control.
+- **Parameters / Returns**:
+  - `train` (`Vehicle`): Train entity.
+  - `speed` (`float`): Desired speed.
+  - **Returns**: `void`
+- **OneSync / Networking**: Call on owner.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: train_speed
+        -- Use: Force train speed
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('train_speed', function(_, args)
+        local train = GetVehiclePedIsIn(PlayerPedId(), false)
+        if train ~= 0 then SetTrainSpeed(train, tonumber(args[1]) or 0.0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: train_speed */
+    RegisterCommand('train_speed', (_src, args) => {
+      const train = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (train !== 0) SetTrainSpeed(train, parseFloat(args[0]) || 0.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Sudden speed changes may cause derailment.
+- **Reference**: https://docs.fivem.net/natives/?n=SetTrainSpeed
+
+##### SetTrainTrackSpawnFrequency
+- **Name**: SetTrainTrackSpawnFrequency
+- **Scope**: Client
+- **Signature**: `void SET_TRAIN_TRACK_SPAWN_FREQUENCY(int trackIndex, int frequency);`
+- **Purpose**: Controls how often trains spawn on a specific track.
+- **Parameters / Returns**:
+  - `trackIndex` (`int`): Track identifier.
+  - `frequency` (`int`): Spawn rate.
+  - **Returns**: `void`
+- **OneSync / Networking**: Server-side use recommended to maintain consistency.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: train_freq
+        -- Use: Adjust train spawn frequency
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('train_freq', function(_, args)
+        SetTrainTrackSpawnFrequency(tonumber(args[1]) or 0, tonumber(args[2]) or 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: train_freq */
+    RegisterCommand('train_freq', (_src, args) => {
+      SetTrainTrackSpawnFrequency(parseInt(args[0]) || 0, parseInt(args[1]) || 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Unrealistic values may stall train generation.
+- **Reference**: https://docs.fivem.net/natives/?n=SetTrainTrackSpawnFrequency
+
+##### SetTransformRateForAnimation
+- **Name**: SetTransformRateForAnimation
+- **Scope**: Client
+- **Signature**: `void SET_TRANSFORM_RATE_FOR_ANIMATION(Vehicle vehicle, float transformRate);`
+- **Purpose**: Sets playback speed for submarine car transformation animations.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to transform.
+  - `transformRate` (`float`): Animation speed factor.
+  - **Returns**: `void`
+- **OneSync / Networking**: Run on owner to sync animation rate.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: sub_rate
+        -- Use: Adjust transform animation rate
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('sub_rate', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetTransformRateForAnimation(veh, tonumber(args[1]) or 2.5) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: sub_rate */
+    RegisterCommand('sub_rate', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetTransformRateForAnimation(veh, parseFloat(args[0]) || 2.5);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only affects vehicles with submarine transformation.
+- **Reference**: https://docs.fivem.net/natives/?n=SetTransformRateForAnimation
+
+##### SetTransformToSubmarineUsesAlternateInput
+- **Name**: SetTransformToSubmarineUsesAlternateInput
+- **Scope**: Client
+- **Signature**: `void SET_TRANSFORM_TO_SUBMARINE_USES_ALTERNATE_INPUT(Vehicle vehicle, BOOL useAlternateInput);`
+- **Purpose**: Changes submarine transformation control to the special vehicle key.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Submarine-capable vehicle.
+  - `useAlternateInput` (`bool`): Use alternate transform key when `true`.
+  - **Returns**: `void`
+- **OneSync / Networking**: Apply on owner to sync input mode.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: sub_input
+        -- Use: Toggle alternate submarine input
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('sub_input', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetTransformToSubmarineUsesAlternateInput(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: sub_input */
+    RegisterCommand('sub_input', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetTransformToSubmarineUsesAlternateInput(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires game build 1365+.
+- **Reference**: https://docs.fivem.net/natives/?n=SetTransformToSubmarineUsesAlternateInput
+
+##### _SetTyreHealth
+- **Name**: _SetTyreHealth
+- **Scope**: Client
+- **Signature**: `void _SET_TYRE_HEALTH(Vehicle vehicle, int wheelIndex, float health);`
+- **Purpose**: Sets health value for a specific tire.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `wheelIndex` (`int`): Wheel ID.
+  - `health` (`float`): Health value (0.0–1000.0).
+  - **Returns**: `void`
+- **OneSync / Networking**: Must run on owner to replicate tire state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: tyre_health
+        -- Use: Set tyre health
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('tyre_health', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then _SetTyreHealth(veh, tonumber(args[1]) or 0, tonumber(args[2]) or 1000.0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: tyre_health */
+    RegisterCommand('tyre_health', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) _SetTyreHealth(veh, parseInt(args[0]) || 0, parseFloat(args[1]) || 1000.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Introduced in build 1868.
+- **Reference**: https://docs.fivem.net/natives/?n=_SetTyreHealth
+
+##### _SetTyreSoftnessMultiplier
+- **Name**: _SetTyreSoftnessMultiplier
+- **Scope**: Client
+- **Signature**: `void _SET_TYRE_SOFTNESS_MULTIPLIER(Vehicle vehicle, int wheelIndex, float multiplier);`
+- **Purpose**: Adjusts how quickly a tire wears based on compound softness.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `wheelIndex` (`int`): Wheel ID.
+  - `multiplier` (`float`): Softness multiplier.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must call to sync wear.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: tyre_soft
+        -- Use: Set tyre softness multiplier
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('tyre_soft', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then _SetTyreSoftnessMultiplier(veh, tonumber(args[1]) or 0, tonumber(args[2]) or 1.0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: tyre_soft */
+    RegisterCommand('tyre_soft', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) _SetTyreSoftnessMultiplier(veh, parseInt(args[0]) || 0, parseFloat(args[1]) || 1.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Valid wheel indices 0–5.
+- **Reference**: https://docs.fivem.net/natives/?n=_SetTyreSoftnessMultiplier
+
+##### _SetTyreTractionLossMultiplier
+- **Name**: _SetTyreTractionLossMultiplier
+- **Scope**: Client
+- **Signature**: `void _SET_TYRE_TRACTION_LOSS_MULTIPLIER(Vehicle vehicle, int wheelIndex, float multiplier);`
+- **Purpose**: Modifies how much traction a tire loses.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `wheelIndex` (`int`): Wheel ID.
+  - `multiplier` (`float`): Traction loss factor.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must call.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: tyre_traction
+        -- Use: Set tyre traction loss
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('tyre_traction', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then _SetTyreTractionLossMultiplier(veh, tonumber(args[1]) or 0, tonumber(args[2]) or 0.0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: tyre_traction */
+    RegisterCommand('tyre_traction', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) _SetTyreTractionLossMultiplier(veh, parseInt(args[0]) || 0, parseFloat(args[1]) || 0.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Introduced in build 2060.
+- **Reference**: https://docs.fivem.net/natives/?n=_SetTyreTractionLossMultiplier
+
+##### _SetTyreWearMultiplier
+- **Name**: _SetTyreWearMultiplier
+- **Scope**: Client
+- **Signature**: `void _SET_TYRE_WEAR_MULTIPLIER(Vehicle vehicle, int wheelIndex, float multiplier);`
+- **Purpose**: Sets tire wear rate for a specific wheel.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `wheelIndex` (`int`): Wheel ID.
+  - `multiplier` (`float`): Wear multiplier.
+  - **Returns**: `void`
+- **OneSync / Networking**: Call on owner to sync wear.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: tyre_wear
+        -- Use: Set tyre wear multiplier
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('tyre_wear', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then _SetTyreWearMultiplier(veh, tonumber(args[1]) or 0, tonumber(args[2]) or 1.0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: tyre_wear */
+    RegisterCommand('tyre_wear', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) _SetTyreWearMultiplier(veh, parseInt(args[0]) || 0, parseFloat(args[1]) || 1.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Introduced in build 1868.
+- **Reference**: https://docs.fivem.net/natives/?n=_SetTyreWearMultiplier
+
+##### _SetUseHigherVehicleJumpForce
+- **Name**: _SetUseHigherVehicleJumpForce
+- **Scope**: Client
+- **Signature**: `void _SET_USE_HIGHER_VEHICLE_JUMP_FORCE(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Allows FLAG_JUMPING_CAR vehicles to jump higher.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target vehicle.
+  - `toggle` (`bool`): Enable higher jump force.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must toggle to replicate.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: jumpforce
+        -- Use: Toggle high jump force
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('jumpforce', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then _SetUseHigherVehicleJumpForce(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: jumpforce */
+    RegisterCommand('jumpforce', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) _SetUseHigherVehicleJumpForce(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only for vehicles with jump capability.
+- **Reference**: https://docs.fivem.net/natives/?n=_SetUseHigherVehicleJumpForce
+
+##### SetVehicleActAsIfHighSpeedForFragSmashing
+- **Name**: SetVehicleActAsIfHighSpeedForFragSmashing
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_ACT_AS_IF_HIGH_SPEED_FOR_FRAG_SMASHING(Vehicle vehicle, BOOL actHighSpeed);`
+- **Purpose**: Simulates high-speed impact for breakable object collisions.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to configure.
+  - `actHighSpeed` (`bool`): Enables high-speed behavior for one frame.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner should call every frame while needed.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: frag_speed
+        -- Use: Simulate high-speed frag smash
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('frag_speed', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleActAsIfHighSpeedForFragSmashing(veh, true) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: frag_speed */
+    RegisterCommand('frag_speed', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleActAsIfHighSpeedForFragSmashing(veh, true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Effect lasts a single frame.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleActAsIfHighSpeedForFragSmashing
+
+##### SetVehicleActiveDuringPlayback
+- **Name**: SetVehicleActiveDuringPlayback
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_ACTIVE_DURING_PLAYBACK(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Keeps vehicle physics active when playing recorded clips.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target vehicle.
+  - `toggle` (`bool`): Enable activity during playback.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner should toggle for global playback effects.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: playback_active
+        -- Use: Toggle active during playback
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('playback_active', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleActiveDuringPlayback(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: playback_active */
+    RegisterCommand('playback_active', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleActiveDuringPlayback(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Useful for playback scenarios only.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleActiveDuringPlayback
+
+##### SetVehicleActiveForPedNavigation
+- **Name**: SetVehicleActiveForPedNavigation
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_ACTIVE_FOR_PED_NAVIGATION(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Marks vehicle as active so peds can navigate around it.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `toggle` (`bool`): Enable ped navigation awareness.
+  - **Returns**: `void`
+- **OneSync / Networking**: Must be applied on owner for sync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: ped_nav
+        -- Use: Toggle ped navigation activity
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('ped_nav', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleActiveForPedNavigation(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: ped_nav */
+    RegisterCommand('ped_nav', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleActiveForPedNavigation(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Intended for scripted navigation scenarios.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleActiveForPedNavigation
+
+##### SetVehicleAlarm
+- **Name**: SetVehicleAlarm
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_ALARM(Vehicle vehicle, BOOL state);`
+- **Purpose**: Toggles a vehicle's alarm siren.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target vehicle.
+  - `state` (`bool`): `true` enables alarm.
+  - **Returns**: `void`
+- **OneSync / Networking**: Run on owner to replicate sound.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_alarm
+        -- Use: Toggle vehicle alarm
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_alarm', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleAlarm(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_alarm */
+    RegisterCommand('veh_alarm', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleAlarm(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Alarm stops after set duration unless retriggered.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleAlarm
+
+##### SetVehicleAllowNoPassengersLockon
+- **Name**: SetVehicleAllowNoPassengersLockon
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_ALLOW_NO_PASSENGERS_LOCKON(Vehicle veh, BOOL toggle);`
+- **Purpose**: Prevents passenger seating when enabled.
+- **Parameters / Returns**:
+  - `veh` (`Vehicle`): Target vehicle.
+  - `toggle` (`bool`): `true` disallows passengers.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must call to enforce passenger restriction.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: no_passengers
+        -- Use: Toggle passenger lock
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('no_passengers', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleAllowNoPassengersLockon(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: no_passengers */
+    RegisterCommand('no_passengers', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleAllowNoPassengersLockon(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Affects only passenger seat availability.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleAllowNoPassengersLockon
+
+##### SetVehicleAutomaticallyAttaches
+- **Name**: SetVehicleAutomaticallyAttaches
+- **Scope**: Client
+- **Signature**: `Any SET_VEHICLE_AUTOMATICALLY_ATTACHES(Vehicle vehicle, BOOL p1, Any p2);`
+- **Purpose**: Configures automatic trailer attachment behavior.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `p1` (`bool`): Enable automatic attach.
+  - `p2` (`Any`): Unknown.
+  - **Returns**: `Any`
+- **OneSync / Networking**: Owner must call to sync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: auto_attach
+        -- Use: Toggle automatic attachment
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('auto_attach', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleAutomaticallyAttaches(veh, args[1] == 'on', 0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: auto_attach */
+    RegisterCommand('auto_attach', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleAutomaticallyAttaches(veh, args[0] === 'on', 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Parameters beyond `p1` undocumented.
+  - TODO(next-run): clarify `p2` usage.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleAutomaticallyAttaches
+
+##### SetVehicleBodyHealth
+- **Name**: SetVehicleBodyHealth
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_BODY_HEALTH(Vehicle vehicle, float value);`
+- **Purpose**: Sets overall structural health of the vehicle body.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `value` (`float`): Health value (0.0–1000.0+).
+  - **Returns**: `void`
+- **OneSync / Networking**: Run on owner to propagate damage state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: body_health
+        -- Use: Set vehicle body health
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('body_health', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleBodyHealth(veh, tonumber(args[1]) or 1000.0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: body_health */
+    RegisterCommand('body_health', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleBodyHealth(veh, parseFloat(args[0]) || 1000.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Values outside expected range may produce undefined results.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleBodyHealth
+
+##### _SetVehicleBombCount
+- **Name**: _SetVehicleBombCount
+- **Scope**: Client
+- **Signature**: `void _SET_VEHICLE_BOMB_COUNT(Vehicle aircraft, int bombCount);`
+- **Purpose**: Sets the tracked bomb inventory for an aircraft.
+- **Parameters / Returns**:
+  - `aircraft` (`Vehicle`): Aircraft entity.
+  - `bombCount` (`int`): Number of bombs.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner should call to sync bomb count.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: bomb_count
+        -- Use: Set aircraft bomb count
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('bomb_count', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then _SetVehicleBombCount(veh, tonumber(args[1]) or 0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: bomb_count */
+    RegisterCommand('bomb_count', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) _SetVehicleBombCount(veh, parseInt(args[0]) || 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not affect weapon ammo directly.
+- **Reference**: https://docs.fivem.net/natives/?n=_SetVehicleBombCount
+
+##### SetVehicleBrake
+- **Name**: SetVehicleBrake
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_BRAKE(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Applies or releases manual braking force.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `toggle` (`bool`): Engage brake when `true`.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must apply for synced movement.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_brake
+        -- Use: Toggle vehicle brake
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_brake', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleBrake(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_brake */
+    RegisterCommand('veh_brake', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleBrake(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Overrides player input while active.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleBrake
+
+##### SetVehicleBrakeLights
+- **Name**: SetVehicleBrakeLights
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_BRAKE_LIGHTS(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Forces brake lights on or off.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `toggle` (`bool`): `true` lights on.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must toggle to sync visuals.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: brake_lights
+        -- Use: Toggle brake lights
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('brake_lights', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleBrakeLights(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: brake_lights */
+    RegisterCommand('brake_lights', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleBrakeLights(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not apply braking force.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleBrakeLights
+
+##### SetVehicleBulldozerArmPosition
+- **Name**: SetVehicleBulldozerArmPosition
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_BULLDOZER_ARM_POSITION(Vehicle vehicle, float position, BOOL p2);`
+- **Purpose**: Sets the hydraulic arm position of bulldozer-type vehicles.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Bulldozer vehicle.
+  - `position` (`float`): Arm position 0.0–1.0.
+  - `p2` (`bool`): Whether to set directly (`true`) or incrementally (`false`).
+  - **Returns**: `void`
+- **OneSync / Networking**: Call on vehicle owner to sync arm state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: dozer_arm
+        -- Use: Set bulldozer arm position
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('dozer_arm', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleBulldozerArmPosition(veh, tonumber(args[1]) or 0.5, true) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: dozer_arm */
+    RegisterCommand('dozer_arm', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleBulldozerArmPosition(veh, parseFloat(args[0]) || 0.5, true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Specific to bulldozer models.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleBulldozerArmPosition
+
+CONTINUE-HERE — 2025-09-12T16:32:34+00:00 — next: Vehicle :: SetVehicleBurnout
