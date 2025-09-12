@@ -430,13 +430,13 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Overall | 6442 | 558 | 5884 | 2025-09-12T05:38:34+00:00 |
+| Overall | 6442 | 583 | 5859 | 2025-09-12T05:57:41+00:00 |
 | Player | 248 | 248 | 0 | 2025-09-11T06:38 |
 | Recording | 17 | 17 | 0 | 2025-09-11T06:52 |
 | Replay | 6 | 6 | 0 | 2025-09-11T07:37 |
 | ACL | 10 | 10 | 0 | 2025-09-11T08:12 |
 | CFX | 50 | 50 | 0 | 2025-09-11T09:55 |
-| Vehicle | 751 | 227 | 524 | 2025-09-12T05:38:34+00:00 |
+| Vehicle | 751 | 252 | 499 | 2025-09-12T05:57:41+00:00 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -20232,4 +20232,922 @@ RegisterCommand('rgb', () => {
   - Requires boat with anchor capability.
 - **Reference**: https://docs.fivem.net/natives/?n=IsBoatAnchored
 
-CONTINUE-HERE — 2025-09-12T05:38:34+00:00 — next: Vehicle :: IsCopVehicleInArea_3d
+##### IsCopVehicleInArea_3d
+- **Name**: IsCopVehicleInArea_3d
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_COP_VEHICLE_IN_AREA_3D(float x1, float x2, float y1, float y2, float z1, float z2)`
+- **Purpose**: Checks if any law-enforcement vehicle exists within a 3D bounding box.
+- **Parameters / Returns**:
+  - `x1` (`float`), `y1` (`float`), `z1` (`float`): Minimum corner of the box.
+  - `x2` (`float`), `y2` (`float`), `z2` (`float`): Maximum corner of the box.
+  - **Returns**: `bool` indicating presence.
+- **OneSync / Networking**: Pure spatial query; only considers vehicles streamed to the caller.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: cop_near
+        -- Use: Checks for nearby cop vehicles
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('cop_near', function()
+        local p = GetEntityCoords(PlayerPedId())
+        local r = 50.0
+        print(IsCopVehicleInArea_3d(p.x - r, p.x + r, p.y - r, p.y + r, p.z - r, p.z + r))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: cop_near */
+    RegisterCommand('cop_near', () => {
+      const [x, y, z] = GetEntityCoords(PlayerPedId());
+      const r = 50.0;
+      console.log(IsCopVehicleInArea_3d(x - r, x + r, y - r, y + r, z - r, z + r));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not detect unstreamed or server-only vehicles.
+- **Reference**: https://docs.fivem.net/natives/?n=IsCopVehicleInArea_3d
+
+##### IsEntityAttachedToHandlerFrame
+- **Name**: IsEntityAttachedToHandlerFrame
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_ENTITY_ATTACHED_TO_HANDLER_FRAME(Vehicle vehicle, Entity entity)`
+- **Purpose**: Determines whether an entity is attached to a handler frame of a handler vehicle (e.g., cargo handlers).
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Handler vehicle.
+  - `entity` (`Entity`): Target entity.
+  - **Returns**: `bool` attachment state.
+- **OneSync / Networking**: Run on the network owner of the handler vehicle for accurate results.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: handler_attached
+        -- Use: Checks if entity is attached to handler frame
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('handler_attached', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsEntityAttachedToHandlerFrame(veh, PlayerPedId()))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: handler_attached */
+    RegisterCommand('handler_attached', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsEntityAttachedToHandlerFrame(veh, PlayerPedId()));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only valid for vehicles with handler frames such as cargo loaders.
+- **Reference**: https://docs.fivem.net/natives/?n=IsEntityAttachedToHandlerFrame
+
+##### IsEntryPointForSeatClear
+- **Name**: IsEntryPointForSeatClear
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_ENTRY_POINT_FOR_SEAT_CLEAR(Ped ped, Vehicle vehicle, int seatIndex, BOOL side, BOOL onEnter)`
+- **Purpose**: Tests whether a seat can be entered or exited without obstruction.
+- **Parameters / Returns**:
+  - `ped` (`Ped`): Evaluating ped.
+  - `vehicle` (`Vehicle`): Target vehicle.
+  - `seatIndex` (`int`): Seat to test (`-1` for driver).
+  - `side` (`bool`): `false` for left, `true` for right on bikes.
+  - `onEnter` (`bool`): `true` to check entering, `false` for exiting.
+  - **Returns**: `bool` clear status.
+- **OneSync / Networking**: Call on seat owner to avoid stale collision data.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: seat_clear
+        -- Use: Reports if driver seat entry is clear
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('seat_clear', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), true)
+        print(IsEntryPointForSeatClear(PlayerPedId(), veh, -1, false, true))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: seat_clear */
+    RegisterCommand('seat_clear', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), true);
+      console.log(IsEntryPointForSeatClear(PlayerPedId(), veh, -1, false, true));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Obstruction checks are local; physics desync can yield false positives.
+- **Reference**: https://docs.fivem.net/natives/?n=IsEntryPointForSeatClear
+
+##### IsExtraBrokenOff
+- **Name**: IsExtraBrokenOff
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_EXTRA_BROKEN_OFF(Vehicle vehicle, int extraId)`
+- **Purpose**: Returns whether a specified vehicle extra is broken off or disabled.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - `extraId` (`int`): Extra component identifier.
+  - **Returns**: `bool` broken state.
+- **OneSync / Networking**: Use on vehicle owner to synchronize damage states.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: extra_broken
+        -- Use: Checks if extra 1 is broken
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('extra_broken', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsExtraBrokenOff(veh, 1))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: extra_broken */
+    RegisterCommand('extra_broken', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsExtraBrokenOff(veh, 1));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Non-breakable extras always return `false`.
+- **Reference**: https://docs.fivem.net/natives/?n=IsExtraBrokenOff
+
+##### IsHandlerFrameLinedUpWithContainer
+- **Name**: IsHandlerFrameLinedUpWithContainer
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_HANDLER_FRAME_LINED_UP_WITH_CONTAINER(Vehicle vehicle, Entity entity)`
+- **Purpose**: Checks if a handler vehicle's frame is aligned with a container for pickup.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Handler vehicle.
+  - `entity` (`Entity`): Target container entity.
+  - **Returns**: `bool` alignment state.
+- **OneSync / Networking**: Run on handler owner to ensure correct spatial testing.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: handler_align
+        -- Use: Tests handler frame alignment
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('handler_align', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsHandlerFrameLinedUpWithContainer(veh, PlayerPedId()))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: handler_align */
+    RegisterCommand('handler_align', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsHandlerFrameLinedUpWithContainer(veh, PlayerPedId()));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Applies only to handler vehicles capable of container operations.
+- **Reference**: https://docs.fivem.net/natives/?n=IsHandlerFrameLinedUpWithContainer
+
+##### IsHeliLandingAreaBlocked
+- **Name**: IsHeliLandingAreaBlocked
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_HELI_LANDING_AREA_BLOCKED(Vehicle vehicle)`
+- **Purpose**: Detects if a helicopter's landing area is obstructed.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Helicopter handle.
+  - **Returns**: `bool` blocked status.
+- **OneSync / Networking**: Use on heli owner for accurate collision data.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: heli_blocked
+        -- Use: Checks if landing zone is blocked
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('heli_blocked', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsHeliLandingAreaBlocked(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: heli_blocked */
+    RegisterCommand('heli_blocked', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsHeliLandingAreaBlocked(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only works on helicopters with landing skids.
+- **Reference**: https://docs.fivem.net/natives/?n=IsHeliLandingAreaBlocked
+
+##### IsHeliPartBroken
+- **Name**: IsHeliPartBroken
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_HELI_PART_BROKEN(Vehicle vehicle, BOOL p1, BOOL p2, BOOL p3)`
+- **Purpose**: Returns whether specified helicopter components are damaged.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Helicopter handle.
+  - `p1` (`bool`), `p2` (`bool`), `p3` (`bool`): Unknown component selectors.
+  - **Returns**: `bool` damage state.
+- **OneSync / Networking**: Query on vehicle owner to reflect local damage state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: heli_part
+        -- Use: Checks generic helicopter parts
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('heli_part', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsHeliPartBroken(veh, false, false, true))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: heli_part */
+    RegisterCommand('heli_part', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsHeliPartBroken(veh, false, false, true));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Parameter meanings are undocumented.
+  - TODO(next-run): verify component mapping.
+- **Reference**: https://docs.fivem.net/natives/?n=IsHeliPartBroken
+
+##### IsMissionTrain
+- **Name**: IsMissionTrain
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_MISSION_TRAIN(Vehicle train)`
+- **Purpose**: Determines if a train is flagged as a mission train.
+- **Parameters / Returns**:
+  - `train` (`Vehicle`): Train vehicle handle.
+  - **Returns**: `bool` mission status.
+- **OneSync / Networking**: Call on train owner for authoritative status.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: mission_train
+        -- Use: Reports if current train is mission-controlled
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('mission_train', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsMissionTrain(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: mission_train */
+    RegisterCommand('mission_train', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsMissionTrain(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only valid for train entities.
+- **Reference**: https://docs.fivem.net/natives/?n=IsMissionTrain
+
+##### IsNitrousActive
+- **Name**: IsNitrousActive
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_NITROUS_ACTIVE(Vehicle vehicle)`
+- **Purpose**: Checks whether nitrous boost is active on a vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - **Returns**: `bool` nitrous status.
+- **OneSync / Networking**: Query the owner to synchronize nitrous state across clients.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: nitrous_active
+        -- Use: Prints nitrous status
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('nitrous_active', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsNitrousActive(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: nitrous_active */
+    RegisterCommand('nitrous_active', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsNitrousActive(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires vehicles configured with nitrous mods.
+- **Reference**: https://docs.fivem.net/natives/?n=IsNitrousActive
+
+##### IsPedExclusiveDriverOfVehicle
+- **Name**: IsPedExclusiveDriverOfVehicle
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_PED_EXCLUSIVE_DRIVER_OF_VEHICLE(Ped ped, Vehicle vehicle, int* outIndex)`
+- **Purpose**: Determines if a ped is the exclusive driver of a vehicle and optionally retrieves seat index.
+- **Parameters / Returns**:
+  - `ped` (`Ped`): Target ped.
+  - `vehicle` (`Vehicle`): Vehicle in question.
+  - `outIndex` (`int*`): Output seat index or `-1` if none.
+  - **Returns**: `bool` exclusivity.
+- **OneSync / Networking**: Use on vehicle owner to avoid mismatched seat data.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: exclusive_driver
+        -- Use: Checks if player is sole driver
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('exclusive_driver', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        local idx = 0
+        local result = IsPedExclusiveDriverOfVehicle(PlayerPedId(), veh, idx)
+        print(result)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: exclusive_driver */
+    RegisterCommand('exclusive_driver', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      let out = 0;
+      const result = IsPedExclusiveDriverOfVehicle(PlayerPedId(), veh, out);
+      console.log(result);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Output seat index is unreliable; treat as hint only.
+- **Reference**: https://docs.fivem.net/natives/?n=IsPedExclusiveDriverOfVehicle
+
+##### IsPlaneLandingGearIntact
+- **Name**: IsPlaneLandingGearIntact
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_PLANE_LANDING_GEAR_INTACT(Vehicle plane)`
+- **Purpose**: Checks whether a plane's landing gear is intact.
+- **Parameters / Returns**:
+  - `plane` (`Vehicle`): Plane handle.
+  - **Returns**: `bool` gear integrity.
+- **OneSync / Networking**: Query on plane owner for accurate damage status.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: gear_intact
+        -- Use: Prints landing gear status
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('gear_intact', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsPlaneLandingGearIntact(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: gear_intact */
+    RegisterCommand('gear_intact', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsPlaneLandingGearIntact(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only valid for fixed-wing aircraft.
+- **Reference**: https://docs.fivem.net/natives/?n=IsPlaneLandingGearIntact
+
+##### IsPlaybackGoingOnForVehicle
+- **Name**: IsPlaybackGoingOnForVehicle
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_PLAYBACK_GOING_ON_FOR_VEHICLE(Vehicle vehicle)`
+- **Purpose**: Checks if a scripted vehicle recording playback is active.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - **Returns**: `bool` playback running.
+- **OneSync / Networking**: Only authoritative on controlling node; other clients may not have playback info.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: playback_active
+        -- Use: Prints if recording playback runs
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('playback_active', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsPlaybackGoingOnForVehicle(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: playback_active */
+    RegisterCommand('playback_active', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsPlaybackGoingOnForVehicle(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Playback scripts must be started separately using recording natives.
+- **Reference**: https://docs.fivem.net/natives/?n=IsPlaybackGoingOnForVehicle
+
+##### IsPlaybackUsingAiGoingOnForVehicle
+- **Name**: IsPlaybackUsingAiGoingOnForVehicle
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_PLAYBACK_USING_AI_GOING_ON_FOR_VEHICLE(Vehicle vehicle)`
+- **Purpose**: Indicates if a vehicle recording playback is using AI for navigation.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - **Returns**: `bool` AI playback status.
+- **OneSync / Networking**: Only valid on the node orchestrating playback.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: playback_ai
+        -- Use: Reports if AI playback runs
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('playback_ai', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsPlaybackUsingAiGoingOnForVehicle(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: playback_ai */
+    RegisterCommand('playback_ai', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsPlaybackUsingAiGoingOnForVehicle(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires playback started with AI flag.
+- **Reference**: https://docs.fivem.net/natives/?n=IsPlaybackUsingAiGoingOnForVehicle
+
+##### IsRocketBoostActive
+- **Name**: IsRocketBoostActive
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_ROCKET_BOOST_ACTIVE(Vehicle vehicle)`
+- **Purpose**: Checks whether a vehicle's rocket boost is currently engaged.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - **Returns**: `bool` boost state.
+- **OneSync / Networking**: Call on vehicle owner to sync boost state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: rocket_boost
+        -- Use: Prints rocket boost state
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('rocket_boost', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsRocketBoostActive(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: rocket_boost */
+    RegisterCommand('rocket_boost', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsRocketBoostActive(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only vehicles equipped with rocket boost return true.
+- **Reference**: https://docs.fivem.net/natives/?n=IsRocketBoostActive
+
+##### IsSeatWarpOnly
+- **Name**: IsSeatWarpOnly
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_SEAT_WARP_ONLY(Vehicle vehicle, int seatIndex)`
+- **Purpose**: Determines if a vehicle seat can only be entered via warp.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - `seatIndex` (`int`): Target seat index.
+  - **Returns**: `bool` warp-only flag.
+- **OneSync / Networking**: Run on vehicle owner to respect seat restrictions.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: seat_warp
+        -- Use: Checks if passenger seat requires warp
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('seat_warp', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsSeatWarpOnly(veh, 0))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: seat_warp */
+    RegisterCommand('seat_warp', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsSeatWarpOnly(veh, 0));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Primarily used for scripted scenarios and special vehicles.
+- **Reference**: https://docs.fivem.net/natives/?n=IsSeatWarpOnly
+
+##### IsTaxiLightOn
+- **Name**: IsTaxiLightOn
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_TAXI_LIGHT_ON(Vehicle vehicle)`
+- **Purpose**: Checks the state of a taxi's roof light.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Taxi vehicle.
+  - **Returns**: `bool` light state.
+- **OneSync / Networking**: Query on vehicle owner for up-to-date light status.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: taxi_light
+        -- Use: Prints if taxi light is on
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('taxi_light', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsTaxiLightOn(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: taxi_light */
+    RegisterCommand('taxi_light', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsTaxiLightOn(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Applies only to vehicles with taxi light extras.
+- **Reference**: https://docs.fivem.net/natives/?n=IsTaxiLightOn
+
+##### IsThisModelAnAmphibiousCar
+- **Name**: IsThisModelAnAmphibiousCar
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_THIS_MODEL_AN_AMPHIBIOUS_CAR(Hash model)`
+- **Purpose**: Returns whether a model represents an amphibious car.
+- **Parameters / Returns**:
+  - `model` (`Hash`): Model identifier.
+  - **Returns**: `bool` amphibious flag.
+- **OneSync / Networking**: Pure model query; no network interaction.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: model_amph_car
+        -- Use: Tests player's vehicle model for amphibious capability
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('model_amph_car', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsThisModelAnAmphibiousCar(GetEntityModel(veh)))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: model_amph_car */
+    RegisterCommand('model_amph_car', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsThisModelAnAmphibiousCar(GetEntityModel(veh)));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only certain water-capable cars return true.
+- **Reference**: https://docs.fivem.net/natives/?n=IsThisModelAnAmphibiousCar
+
+##### IsThisModelAnAmphibiousQuadbike
+- **Name**: IsThisModelAnAmphibiousQuadbike
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_THIS_MODEL_AN_AMPHIBIOUS_QUADBIKE(Hash model)`
+- **Purpose**: Checks if a model is an amphibious quadbike.
+- **Parameters / Returns**:
+  - `model` (`Hash`): Model identifier.
+  - **Returns**: `bool` amphibious flag.
+- **OneSync / Networking**: Pure model query; no replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: model_amph_quad
+        -- Use: Tests if vehicle is an amphibious quadbike
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('model_amph_quad', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsThisModelAnAmphibiousQuadbike(GetEntityModel(veh)))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: model_amph_quad */
+    RegisterCommand('model_amph_quad', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsThisModelAnAmphibiousQuadbike(GetEntityModel(veh)));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns false for standard quads.
+- **Reference**: https://docs.fivem.net/natives/?n=IsThisModelAnAmphibiousQuadbike
+
+##### IsThisModelABicycle
+- **Name**: IsThisModelABicycle
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_THIS_MODEL_A_BICYCLE(Hash model)`
+- **Purpose**: Determines if the model represents a pedal bicycle.
+- **Parameters / Returns**:
+  - `model` (`Hash`): Model identifier.
+  - **Returns**: `bool` bicycle flag.
+- **OneSync / Networking**: Model lookup only; no network effect.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: model_bicycle
+        -- Use: Checks if player's vehicle is a bicycle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('model_bicycle', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsThisModelABicycle(GetEntityModel(veh)))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: model_bicycle */
+    RegisterCommand('model_bicycle', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsThisModelABicycle(GetEntityModel(veh)));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns false for motorcycles.
+- **Reference**: https://docs.fivem.net/natives/?n=IsThisModelABicycle
+
+##### IsThisModelABike
+- **Name**: IsThisModelABike
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_THIS_MODEL_A_BIKE(Hash model)`
+- **Purpose**: Checks if a model corresponds to a motorbike.
+- **Parameters / Returns**:
+  - `model` (`Hash`): Model identifier.
+  - **Returns**: `bool` motorcycle flag.
+- **OneSync / Networking**: Model lookup only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: model_bike
+        -- Use: Prints if vehicle model is a motorbike
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('model_bike', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsThisModelABike(GetEntityModel(veh)))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: model_bike */
+    RegisterCommand('model_bike', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsThisModelABike(GetEntityModel(veh)));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Includes both motorcycles and quads.
+- **Reference**: https://docs.fivem.net/natives/?n=IsThisModelABike
+
+##### IsThisModelABoat
+- **Name**: IsThisModelABoat
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_THIS_MODEL_A_BOAT(Hash model)`
+- **Purpose**: Determines if a model is categorized as a boat.
+- **Parameters / Returns**:
+  - `model` (`Hash`): Model identifier.
+  - **Returns**: `bool` boat flag.
+- **OneSync / Networking**: Pure model query.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: model_boat
+        -- Use: Checks if vehicle model is a boat
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('model_boat', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsThisModelABoat(GetEntityModel(veh)))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: model_boat */
+    RegisterCommand('model_boat', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsThisModelABoat(GetEntityModel(veh)));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns true for all watercraft including jetskis.
+- **Reference**: https://docs.fivem.net/natives/?n=IsThisModelABoat
+
+##### IsThisModelACar
+- **Name**: IsThisModelACar
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_THIS_MODEL_A_CAR(Hash model)`
+- **Purpose**: Checks whether a model is classified as a standard automobile.
+- **Parameters / Returns**:
+  - `model` (`Hash`): Model identifier.
+  - **Returns**: `bool` car flag.
+- **OneSync / Networking**: Model lookup only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: model_car
+        -- Use: Prints if vehicle model is a car
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('model_car', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsThisModelACar(GetEntityModel(veh)))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: model_car */
+    RegisterCommand('model_car', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsThisModelACar(GetEntityModel(veh)));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Use `IsThisModelAnAmphibiousCar` for water-capable cars.
+- **Reference**: https://docs.fivem.net/natives/?n=IsThisModelACar
+
+##### IsThisModelAHeli
+- **Name**: IsThisModelAHeli
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_THIS_MODEL_A_HELI(Hash model)`
+- **Purpose**: Determines if a model is a helicopter.
+- **Parameters / Returns**:
+  - `model` (`Hash`): Model identifier.
+  - **Returns**: `bool` helicopter flag.
+- **OneSync / Networking**: Pure model query.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: model_heli
+        -- Use: Checks if vehicle model is a helicopter
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('model_heli', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsThisModelAHeli(GetEntityModel(veh)))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: model_heli */
+    RegisterCommand('model_heli', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsThisModelAHeli(GetEntityModel(veh)));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Includes VTOL aircraft flagged as helicopters.
+- **Reference**: https://docs.fivem.net/natives/?n=IsThisModelAHeli
+
+##### IsThisModelAJetski
+- **Name**: IsThisModelAJetski
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_THIS_MODEL_A_JETSKI(Hash model)`
+- **Purpose**: Returns true if a model is a jetski.
+- **Parameters / Returns**:
+  - `model` (`Hash`): Model identifier.
+  - **Returns**: `bool` jetski flag.
+- **OneSync / Networking**: Pure model query.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: model_jetski
+        -- Use: Prints if vehicle model is a jetski
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('model_jetski', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsThisModelAJetski(GetEntityModel(veh)))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: model_jetski */
+    RegisterCommand('model_jetski', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsThisModelAJetski(GetEntityModel(veh)));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Detects jetskis even if classified as boats elsewhere.
+- **Reference**: https://docs.fivem.net/natives/?n=IsThisModelAJetski
+
+##### IsThisModelAPlane
+- **Name**: IsThisModelAPlane
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_THIS_MODEL_A_PLANE(Hash model)`
+- **Purpose**: Determines if a model is a fixed-wing plane.
+- **Parameters / Returns**:
+  - `model` (`Hash`): Model identifier.
+  - **Returns**: `bool` plane flag.
+- **OneSync / Networking**: Pure model query with no replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: model_plane
+        -- Use: Checks if vehicle model is a plane
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('model_plane', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsThisModelAPlane(GetEntityModel(veh)))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: model_plane */
+    RegisterCommand('model_plane', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsThisModelAPlane(GetEntityModel(veh)));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not detect helicopters or VTOL aircraft.
+- **Reference**: https://docs.fivem.net/natives/?n=IsThisModelAPlane
+CONTINUE-HERE — 2025-09-12T05:57:41+00:00 — next: Vehicle :: IsThisModelAQuadbike
