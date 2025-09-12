@@ -307,8 +307,8 @@ onesync on
 ## 13. Natives Index (Client / Server, by Category)
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
-| Overall | 6442 | 1058 | 5384 | 2025-09-12T20:35:01.804126+00:00 |
-| Vehicle | 751 | 727 | 24 | 2025-09-12T20:35:01.804126+00:00 |
+| Overall | 6442 | 1068 | 5374 | 2025-09-12T20:53:25.585962+00:00 |
+| Vehicle | 751 | 737 | 14 | 2025-09-12T20:53:25.585962+00:00 |
 
 ### 13.1 Taxonomy & Scope Notes
 - Natives are grouped by high-level game systems (e.g., Vehicle, Player) and scope (Client or Server).
@@ -6192,4 +6192,408 @@ onesync on
   - Recording must have been paused previously.
 - **Reference**: https://docs.fivem.net/natives/?n=UnpausePlaybackRecordedVehicle
 
-CONTINUE-HERE — 2025-09-12T20:35:01.804126+00:00 — next: Vehicle :: DisableVehicleWorldCollision
+##### DisableVehicleWorldCollision
+- **Name**: _DISABLE_VEHICLE_WORLD_COLLISION (0x75627043C6AA90AD)
+- **Scope**: Client
+- **Signature**: `void _DISABLE_VEHICLE_WORLD_COLLISION(Vehicle vehicle);`
+- **Purpose**: Temporarily disables collisions between a vehicle and static world geometry.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle whose world collisions will be disabled.
+- **OneSync / Networking**: Requires entity control; other clients see the vehicle passing through mapped world objects but still collide with dynamic entities.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_nocol
+        -- Use: Lets the player drive through buildings with their current vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_nocol', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            DisableVehicleWorldCollision(veh)
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_nocol */
+    RegisterCommand('veh_nocol', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        DisableVehicleWorldCollision(veh);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - No native to re-enable collision; recreate vehicle to reset.
+- **Reference**: https://docs.fivem.net/natives/?n=_DISABLE_VEHICLE_WORLD_COLLISION
+
+##### DoesCargobobHavePickUpRope
+- **Name**: DOES_CARGOBOB_HAVE_PICK_UP_ROPE (0x1821D91AD4B56108)
+- **Scope**: Client
+- **Signature**: `BOOL DOES_CARGOBOB_HAVE_PICK_UP_ROPE(Vehicle cargobob);`
+- **Purpose**: Checks if a Cargobob helicopter currently has its hook deployed.
+- **Parameters / Returns**:
+  - `cargobob` (`Vehicle`): Target Cargobob.
+  - **Returns**: `bool` indicating whether the hook is active.
+- **OneSync / Networking**: Only reliable for streamed Cargobobs.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: rope_status
+        -- Use: Reports if a nearby Cargobob has its pick-up rope deployed
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('rope_status', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and DoesCargobobHavePickUpRope(veh) then
+            TriggerEvent('chat:addMessage', {args = {'System', 'Hook ready.'}})
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: rope_status */
+    RegisterCommand('rope_status', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && DoesCargobobHavePickUpRope(veh)) {
+        emit('chat:addMessage', { args: ['System', 'Hook ready.'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns false when the magnet attachment is active.
+- **Reference**: https://docs.fivem.net/natives/?n=DoesCargobobHavePickUpRope
+
+##### DoesCargobobHavePickupMagnet
+- **Name**: DOES_CARGOBOB_HAVE_PICKUP_MAGNET (0x6E08BF5B3722BAC9)
+- **Scope**: Client
+- **Signature**: `BOOL DOES_CARGOBOB_HAVE_PICKUP_MAGNET(Vehicle cargobob);`
+- **Purpose**: Determines if a Cargobob has its magnet deployed for pickups.
+- **Parameters / Returns**:
+  - `cargobob` (`Vehicle`): Target helicopter.
+  - **Returns**: `bool` indicating magnet availability.
+- **OneSync / Networking**: Streamed Cargobob ownership needed for accurate state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: magnet_status
+        -- Use: Sends chat notice when the player's Cargobob magnet is active
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('magnet_status', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and DoesCargobobHavePickupMagnet(veh) then
+            TriggerEvent('chat:addMessage', {args = {'System', 'Magnet active.'}})
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: magnet_status */
+    RegisterCommand('magnet_status', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && DoesCargobobHavePickupMagnet(veh)) {
+        emit('chat:addMessage', { args: ['System', 'Magnet active.'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns false when the hook is deployed instead.
+- **Reference**: https://docs.fivem.net/natives/?n=DoesCargobobHavePickupMagnet
+
+##### DoesExtraExist
+- **Name**: DOES_EXTRA_EXIST (0x1262D55792428154)
+- **Scope**: Client
+- **Signature**: `BOOL DOES_EXTRA_EXIST(Vehicle vehicle, int extraId);`
+- **Purpose**: Tests whether a given extra component is available on a vehicle model.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to inspect.
+  - `extraId` (`number`): Extra index to check.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Extras change only appear to others when the vehicle is network-owned.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: has_extra
+        -- Use: Informs the player if extra 1 exists on the current vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('has_extra', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and DoesExtraExist(veh, 1) then
+            TriggerEvent('chat:addMessage', {args = {'System', 'Extra 1 available.'}})
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: has_extra */
+    RegisterCommand('has_extra', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && DoesExtraExist(veh, 1)) {
+        emit('chat:addMessage', { args: ['System', 'Extra 1 available.'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only checks model capability; does not indicate if extra is enabled.
+- **Reference**: https://docs.fivem.net/natives/?n=DoesExtraExist
+
+##### DoesScriptVehicleGeneratorExist
+- **Name**: DOES_SCRIPT_VEHICLE_GENERATOR_EXIST (0xF6086BC836400876)
+- **Scope**: Client
+- **Signature**: `BOOL DOES_SCRIPT_VEHICLE_GENERATOR_EXIST(int vehicleGenerator);`
+- **Purpose**: Verifies if a script-created vehicle generator still exists.
+- **Parameters / Returns**:
+  - `vehicleGenerator` (`number`): Handle returned by `CreateScriptVehicleGenerator`.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Generator presence is local; use server coordination to spawn shared vehicles.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: check_generator
+        -- Use: Confirms whether a stored generator handle is valid
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    local gen
+    RegisterCommand('spawn_gen', function()
+        gen = CreateScriptVehicleGenerator(0.0, 0.0, 72.0, 0.0, 0.0, 0.0, GetHashKey('adder'), 1, 1, 1, 1, 0, 0, 0, 0, 0)
+    end)
+    RegisterCommand('check_generator', function()
+        if gen and DoesScriptVehicleGeneratorExist(gen) then
+            TriggerEvent('chat:addMessage', {args = {'System', 'Generator active.'}})
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: spawn_gen & check_generator */
+    let gen;
+    RegisterCommand('spawn_gen', () => {
+      gen = CreateScriptVehicleGenerator(0.0, 0.0, 72.0, 0.0, 0.0, 0.0, GetHashKey('adder'), 1, 1, 1, 1, 0, 0, 0, 0, 0);
+    });
+    RegisterCommand('check_generator', () => {
+      if (gen && DoesScriptVehicleGeneratorExist(gen)) {
+        emit('chat:addMessage', { args: ['System', 'Generator active.'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Local generators do not automatically synchronize across clients.
+- **Reference**: https://docs.fivem.net/natives/?n=DoesScriptVehicleGeneratorExist
+
+##### DoesVehicleAllowRappel
+- **Name**: _DOES_VEHICLE_ALLOW_RAPPEL (0x4E417C547182C84D)
+- **Scope**: Client
+- **Signature**: `BOOL _DOES_VEHICLE_ALLOW_RAPPEL(Vehicle vehicle);`
+- **Purpose**: Checks if a vehicle model permits rappelling.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to test.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Only meaningful for helicopters streamed to the client.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: rappel_check
+        -- Use: Alerts the player when the current helicopter supports rappelling
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('rappel_check', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and DoesVehicleAllowRappel(veh) then
+            TriggerEvent('chat:addMessage', {args = {'System', 'Rappelling allowed.'}})
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: rappel_check */
+    RegisterCommand('rappel_check', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && DoesVehicleAllowRappel(veh)) {
+        emit('chat:addMessage', { args: ['System', 'Rappelling allowed.'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only true for models flagged with `FLAG_ALLOWS_RAPPEL`.
+- **Reference**: https://docs.fivem.net/natives/?n=DoesVehicleAllowRappel
+
+##### DoesVehicleExistWithDecorator
+- **Name**: DOES_VEHICLE_EXIST_WITH_DECORATOR (0x956B409B984D9BF7)
+- **Scope**: Client
+- **Signature**: `BOOL DOES_VEHICLE_EXIST_WITH_DECORATOR(char* decorator);`
+- **Purpose**: Searches for any vehicle in the world tagged with the given decorator.
+- **Parameters / Returns**:
+  - `decorator` (`string`): Decorator key to search for.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Only detects vehicles within streaming range.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: find_decor
+        -- Use: Checks if any streamed vehicle has the decorator "missionCar"
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('find_decor', function()
+        if DoesVehicleExistWithDecorator('missionCar') then
+            TriggerEvent('chat:addMessage', {args = {'System', 'Mission car nearby.'}})
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: find_decor */
+    RegisterCommand('find_decor', () => {
+      if (DoesVehicleExistWithDecorator('missionCar')) {
+        emit('chat:addMessage', { args: ['System', 'Mission car nearby.'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires decorator to be registered and applied beforehand.
+- **Reference**: https://docs.fivem.net/natives/?n=DoesVehicleExistWithDecorator
+
+##### DoesVehicleHaveLandingGear
+- **Name**: _DOES_VEHICLE_HAVE_LANDING_GEAR (0xE43701C36CAFF1A4)
+- **Scope**: Client
+- **Signature**: `BOOL _DOES_VEHICLE_HAVE_LANDING_GEAR(Vehicle vehicle);`
+- **Purpose**: Detects if an aircraft model features landing gear.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Aircraft to inspect.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Requires ownership for accurate gear state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: gear_check
+        -- Use: Notifies the player if the current aircraft has landing gear
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('gear_check', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and DoesVehicleHaveLandingGear(veh) then
+            TriggerEvent('chat:addMessage', {args = {'System', 'Landing gear installed.'}})
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: gear_check */
+    RegisterCommand('gear_check', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && DoesVehicleHaveLandingGear(veh)) {
+        emit('chat:addMessage', { args: ['System', 'Landing gear installed.'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns false for aircraft with fixed gear.
+- **Reference**: https://docs.fivem.net/natives/?n=_DOES_VEHICLE_HAVE_LANDING_GEAR
+
+##### DoesVehicleHaveRoof
+- **Name**: DOES_VEHICLE_HAVE_ROOF (0x8AC862B0B32C5B80)
+- **Scope**: Client
+- **Signature**: `BOOL DOES_VEHICLE_HAVE_ROOF(Vehicle vehicle);`
+- **Purpose**: Indicates if a vehicle model includes a roof.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to query.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Works on streamed vehicles; model-based.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: check_roof
+        -- Use: Displays a chat message if the current vehicle has a roof
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('check_roof', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and DoesVehicleHaveRoof(veh) then
+            TriggerEvent('chat:addMessage', {args = {'System', 'Roof present.'}})
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: check_roof */
+    RegisterCommand('check_roof', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && DoesVehicleHaveRoof(veh)) {
+        emit('chat:addMessage', { args: ['System', 'Roof present.'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Convertible vehicles report true even with the roof down.
+- **Reference**: https://docs.fivem.net/natives/?n=DoesVehicleHaveRoof
+
+##### DoesVehicleHaveSearchlight
+- **Name**: DOES_VEHICLE_HAVE_SEARCHLIGHT (0x99015ED7DBEA5113)
+- **Scope**: Client
+- **Signature**: `BOOL DOES_VEHICLE_HAVE_SEARCHLIGHT(Vehicle vehicle);`
+- **Purpose**: Determines if a vehicle supports an operable searchlight.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to inspect.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Use network ownership for toggling the searchlight.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: searchlight_check
+        -- Use: Alerts the player if their vehicle has a searchlight
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('searchlight_check', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and DoesVehicleHaveSearchlight(veh) then
+            TriggerEvent('chat:addMessage', {args = {'System', 'Searchlight equipped.'}})
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: searchlight_check */
+    RegisterCommand('searchlight_check', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && DoesVehicleHaveSearchlight(veh)) {
+        emit('chat:addMessage', { args: ['System', 'Searchlight equipped.'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only applicable to helicopters with built-in searchlights.
+- **Reference**: https://docs.fivem.net/natives/?n=DoesVehicleHaveSearchlight
+
+CONTINUE-HERE — 2025-09-12T20:53:25.585962+00:00 — next: Vehicle :: DoesVehicleHaveStuckVehicleCheck
