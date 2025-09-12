@@ -430,13 +430,13 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Overall | 6442 | 508 | 5934 | 2025-09-12T05:14 |
+| Overall | 6442 | 533 | 5909 | 2025-09-12T05:30 |
 | Player | 248 | 248 | 0 | 2025-09-11T06:38 |
 | Recording | 17 | 17 | 0 | 2025-09-11T06:52 |
 | Replay | 6 | 6 | 0 | 2025-09-11T07:37 |
 | ACL | 10 | 10 | 0 | 2025-09-11T08:12 |
 | CFX | 50 | 50 | 0 | 2025-09-11T09:55 |
-| Vehicle | 751 | 177 | 574 | 2025-09-12T05:14 |
+| Vehicle | 751 | 202 | 549 | 2025-09-12T05:30 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -18401,4 +18401,929 @@ RegisterCommand('rgb', () => {
   - Returned string depends on game language settings.
 - **Reference**: https://docs.fivem.net/natives/?n=GetVehicleModColor_1Name
 
-CONTINUE-HERE — 2025-09-12T05:14 — next: Vehicle :: GetVehicleModColor_2
+##### GetVehicleModColor_2
+- **Name**: GetVehicleModColor_2
+- **Scope**: Shared
+- **Signature(s)**: `void GET_VEHICLE_MOD_COLOR_2(Vehicle vehicle, int* paintType, int* color)`
+- **Purpose**: Fetches secondary mod paint information.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - `paintType` (`int*`): Output paint type.
+  - `color` (`int*`): Output color index.
+- **OneSync / Networking**: Query on the vehicle owner to ensure accurate data.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: mod_color2
+        -- Use: Prints mod secondary color data
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('mod_color2', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        local pType, color = GetVehicleModColor_2(veh)
+        print(pType, color)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: mod_color2 */
+    RegisterCommand('mod_color2', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      const [pType, color] = GetVehicleModColor_2(veh);
+      console.log(pType, color);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Secondary mod color slots vary by mod kit.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleModColor_2
+
+##### GetVehicleModColor_2Name
+- **Name**: GetVehicleModColor_2Name
+- **Scope**: Shared
+- **Signature(s)**: `char* GET_VEHICLE_MOD_COLOR_2_NAME(Vehicle vehicle, BOOL p1)`
+- **Purpose**: Returns a localized name for the secondary mod color.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - `p1` (`BOOL`): Include color index in name.
+  - **Returns**: `string` color name.
+- **OneSync / Networking**: Pure query; ownership not required.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: mod_color2_name
+        -- Use: Prints mod secondary color name
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('mod_color2_name', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetVehicleModColor_2Name(veh, true))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: mod_color2_name */
+    RegisterCommand('mod_color2_name', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetVehicleModColor_2Name(veh, true));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returned string depends on game language settings.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleModColor_2Name
+
+##### GetVehicleModIdentifierHash
+- **Name**: GetVehicleModIdentifierHash
+- **Scope**: Shared
+- **Signature(s)**: `Hash GET_VEHICLE_MOD_IDENTIFIER_HASH(Vehicle vehicle, int modType, int modIndex)`
+- **Purpose**: Retrieves the hash for a specific modification.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - `modType` (`int`): Mod slot enumeration.
+  - `modIndex` (`int`): Installed mod index.
+  - **Returns**: `Hash` identifier.
+- **OneSync / Networking**: Query owner to ensure current mod data.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: mod_id_hash
+        -- Use: Prints hash of mod at slot/index
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('mod_id_hash', function(source, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        local slot = tonumber(args[1]) or 0
+        local index = tonumber(args[2]) or 0
+        print(GetVehicleModIdentifierHash(veh, slot, index))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: mod_id_hash */
+    RegisterCommand('mod_id_hash', (src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      const slot = parseInt(args[0]) || 0;
+      const index = parseInt(args[1]) || 0;
+      console.log(GetVehicleModIdentifierHash(veh, slot, index));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Hash may be 0 if mod index is invalid.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleModIdentifierHash
+
+##### GetVehicleModKit
+- **Name**: GetVehicleModKit
+- **Scope**: Shared
+- **Signature(s)**: `int GET_VEHICLE_MOD_KIT(Vehicle vehicle)`
+- **Purpose**: Returns the mod kit ID currently applied to the vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - **Returns**: `int` mod kit ID.
+- **OneSync / Networking**: Call on vehicle owner for accurate information.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: mod_kit
+        -- Use: Prints mod kit ID
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('mod_kit', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetVehicleModKit(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: mod_kit */
+    RegisterCommand('mod_kit', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetVehicleModKit(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - -1 if no mod kit is set.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleModKit
+
+##### GetVehicleModKitType
+- **Name**: GetVehicleModKitType
+- **Scope**: Shared
+- **Signature(s)**: `int GET_VEHICLE_MOD_KIT_TYPE(Vehicle vehicle)`
+- **Purpose**: Returns the mod kit type enumeration for the vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - **Returns**: `int` mod kit type.
+- **OneSync / Networking**: Owner call recommended when using OneSync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: mod_kit_type
+        -- Use: Prints mod kit type
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('mod_kit_type', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetVehicleModKitType(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: mod_kit_type */
+    RegisterCommand('mod_kit_type', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetVehicleModKitType(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Mod kit type affects available mod slots.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleModKitType
+
+##### GetVehicleModModifierValue
+- **Name**: GetVehicleModModifierValue
+- **Scope**: Shared
+- **Signature(s)**: `float GET_VEHICLE_MOD_MODIFIER_VALUE(Vehicle vehicle, int modType)`
+- **Purpose**: Returns the modifier value for performance mods.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - `modType` (`int`): Mod slot enumeration.
+  - **Returns**: `float` modifier value.
+- **OneSync / Networking**: Query owner for up-to-date values.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: mod_modifier
+        -- Use: Prints performance modifier value
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('mod_modifier', function(source, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        local slot = tonumber(args[1]) or 11
+        print(GetVehicleModModifierValue(veh, slot))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: mod_modifier */
+    RegisterCommand('mod_modifier', (src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      const slot = parseInt(args[0]) || 11;
+      console.log(GetVehicleModModifierValue(veh, slot));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only applies to performance-related mod types.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleModModifierValue
+
+##### GetVehicleModVariation
+- **Name**: GetVehicleModVariation
+- **Scope**: Shared
+- **Signature(s)**: `BOOL GET_VEHICLE_MOD_VARIATION(Vehicle vehicle, int modType)`
+- **Purpose**: Checks if a mod variation (e.g., turbo) is installed.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - `modType` (`int`): Mod slot enumeration.
+  - **Returns**: `bool` variation state.
+- **OneSync / Networking**: Call on owner for proper sync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: mod_variation
+        -- Use: Prints if variation is installed
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('mod_variation', function(source, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        local slot = tonumber(args[1]) or 11
+        print(GetVehicleModVariation(veh, slot))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: mod_variation */
+    RegisterCommand('mod_variation', (src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      const slot = parseInt(args[0]) || 11;
+      console.log(GetVehicleModVariation(veh, slot));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only certain mod slots support variations.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleModVariation
+
+##### GetVehicleModelAcceleration
+- **Name**: GetVehicleModelAcceleration
+- **Scope**: Shared
+- **Signature(s)**: `float GET_VEHICLE_MODEL_ACCELERATION(Hash modelHash)`
+- **Purpose**: Returns base acceleration for a vehicle model.
+- **Parameters / Returns**:
+  - `modelHash` (`Hash`): Model identifier.
+  - **Returns**: `float` acceleration value.
+- **OneSync / Networking**: No entity required; pure model query.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: model_accel
+        -- Use: Prints model acceleration
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('model_accel', function(source, args)
+        local model = GetHashKey(args[1] or 'adder')
+        print(GetVehicleModelAcceleration(model))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: model_accel */
+    RegisterCommand('model_accel', (src, args) => {
+      const model = GetHashKey(args[0] || 'adder');
+      console.log(GetVehicleModelAcceleration(model));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Uses handling data; mods may alter runtime acceleration.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleModelAcceleration
+
+##### GetVehicleModelMaxBraking
+- **Name**: GetVehicleModelMaxBraking
+- **Scope**: Shared
+- **Signature(s)**: `float GET_VEHICLE_MODEL_MAX_BRAKING(Hash modelHash)`
+- **Purpose**: Returns base braking capability for a model.
+- **Parameters / Returns**:
+  - `modelHash` (`Hash`): Model identifier.
+  - **Returns**: `float` braking value.
+- **OneSync / Networking**: Model query; no entity needed.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: model_brake
+        -- Use: Prints model braking value
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('model_brake', function(source, args)
+        local model = GetHashKey(args[1] or 'adder')
+        print(GetVehicleModelMaxBraking(model))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: model_brake */
+    RegisterCommand('model_brake', (src, args) => {
+      const model = GetHashKey(args[0] || 'adder');
+      console.log(GetVehicleModelMaxBraking(model));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Value may differ with installed mods.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleModelMaxBraking
+
+##### GetVehicleModelMaxBrakingMaxMods
+- **Name**: GetVehicleModelMaxBrakingMaxMods
+- **Scope**: Shared
+- **Signature(s)**: `float GET_VEHICLE_MODEL_MAX_BRAKING_MAX_MODS(Hash modelHash)`
+- **Purpose**: Returns maximum braking value with performance mods.
+- **Parameters / Returns**:
+  - `modelHash` (`Hash`): Model identifier.
+  - **Returns**: `float` braking value with mods.
+- **OneSync / Networking**: Model query; no entity required.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: model_brake_mod
+        -- Use: Prints max braking with mods
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('model_brake_mod', function(source, args)
+        local model = GetHashKey(args[1] or 'adder')
+        print(GetVehicleModelMaxBrakingMaxMods(model))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: model_brake_mod */
+    RegisterCommand('model_brake_mod', (src, args) => {
+      const model = GetHashKey(args[0] || 'adder');
+      console.log(GetVehicleModelMaxBrakingMaxMods(model));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Assumes best available upgrades.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleModelMaxBrakingMaxMods
+
+##### GetVehicleModelMaxSpeed
+- **Name**: GetVehicleModelMaxSpeed
+- **Scope**: Shared
+- **Signature(s)**: `float GET_VEHICLE_MODEL_MAX_SPEED(Hash modelHash)`
+- **Purpose**: Returns default top speed for a model.
+- **Parameters / Returns**:
+  - `modelHash` (`Hash`): Model identifier.
+  - **Returns**: `float` speed in m/s.
+- **OneSync / Networking**: Model query; no entity needed.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: model_speed
+        -- Use: Prints model top speed
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('model_speed', function(source, args)
+        local model = GetHashKey(args[1] or 'adder')
+        print(GetVehicleModelMaxSpeed(model))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: model_speed */
+    RegisterCommand('model_speed', (src, args) => {
+      const model = GetHashKey(args[0] || 'adder');
+      console.log(GetVehicleModelMaxSpeed(model));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Actual speed may differ due to game physics.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleModelMaxSpeed
+
+##### GetVehicleModelMaxTraction
+- **Name**: GetVehicleModelMaxTraction
+- **Scope**: Shared
+- **Signature(s)**: `float GET_VEHICLE_MODEL_MAX_TRACTION(Hash modelHash)`
+- **Purpose**: Returns base traction for a model.
+- **Parameters / Returns**:
+  - `modelHash` (`Hash`): Model identifier.
+  - **Returns**: `float` traction value.
+- **OneSync / Networking**: Model query; no entity required.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: model_traction
+        -- Use: Prints model traction
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('model_traction', function(source, args)
+        local model = GetHashKey(args[1] or 'adder')
+        print(GetVehicleModelMaxTraction(model))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: model_traction */
+    RegisterCommand('model_traction', (src, args) => {
+      const model = GetHashKey(args[0] || 'adder');
+      console.log(GetVehicleModelMaxTraction(model));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Handling mods can override this base value.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleModelMaxTraction
+
+##### GetVehicleModelNumberOfSeats
+- **Name**: GetVehicleModelNumberOfSeats
+- **Scope**: Shared
+- **Signature(s)**: `int GET_VEHICLE_MODEL_NUMBER_OF_SEATS(Hash modelHash)`
+- **Purpose**: Returns seat count for a vehicle model.
+- **Parameters / Returns**:
+  - `modelHash` (`Hash`): Model identifier.
+  - **Returns**: `int` seat count.
+- **OneSync / Networking**: Model query; no entity needed.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: model_seats
+        -- Use: Prints seat count
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('model_seats', function(source, args)
+        local model = GetHashKey(args[1] or 'adder')
+        print(GetVehicleModelNumberOfSeats(model))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: model_seats */
+    RegisterCommand('model_seats', (src, args) => {
+      const model = GetHashKey(args[0] || 'adder');
+      console.log(GetVehicleModelNumberOfSeats(model));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Some models report seats not accessible to players.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleModelNumberOfSeats
+
+##### GetVehicleModelValue
+- **Name**: GetVehicleModelValue
+- **Scope**: Shared
+- **Signature(s)**: `float GET_VEHICLE_MODEL_VALUE(Hash modelHash)`
+- **Purpose**: Returns monetary value for the model.
+- **Parameters / Returns**:
+  - `modelHash` (`Hash`): Model identifier.
+  - **Returns**: `float` vehicle value.
+- **OneSync / Networking**: Model query; no entity needed.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: model_value
+        -- Use: Prints model value
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('model_value', function(source, args)
+        local model = GetHashKey(args[1] or 'adder')
+        print(GetVehicleModelValue(model))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: model_value */
+    RegisterCommand('model_value', (src, args) => {
+      const model = GetHashKey(args[0] || 'adder');
+      console.log(GetVehicleModelValue(model));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Value is from handling data; economy systems may differ.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleModelValue
+
+##### GetVehicleNeonLightsColour
+- **Name**: GetVehicleNeonLightsColour
+- **Scope**: Shared
+- **Signature(s)**: `void GET_VEHICLE_NEON_LIGHTS_COLOUR(Vehicle vehicle, int* r, int* g, int* b)`
+- **Purpose**: Retrieves neon lights RGB colour.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - `r` (`int*`): Output red component.
+  - `g` (`int*`): Output green component.
+  - `b` (`int*`): Output blue component.
+- **OneSync / Networking**: Query owner to match replicated colour.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: neon_colour
+        -- Use: Prints neon RGB
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('neon_colour', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        local r, g, b = GetVehicleNeonLightsColour(veh)
+        print(r, g, b)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: neon_colour */
+    RegisterCommand('neon_colour', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      const [r, g, b] = GetVehicleNeonLightsColour(veh);
+      console.log(r, g, b);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns default colour when neon not installed.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleNeonLightsColour
+
+##### GetVehicleNodePosition
+- **Name**: GetVehicleNodePosition
+- **Scope**: Shared
+- **Signature(s)**: `Vector3 GET_VEHICLE_NODE_POSITION(int nodeId)`
+- **Purpose**: Retrieves coordinates for a path node.
+- **Parameters / Returns**:
+  - `nodeId` (`int`): Node identifier.
+  - **Returns**: `Vector3` world position.
+- **OneSync / Networking**: Pure data lookup; no networking concerns.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: node_pos
+        -- Use: Prints position of node 0
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('node_pos', function()
+        local pos = GetVehicleNodePosition(0)
+        print(pos)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: node_pos */
+    RegisterCommand('node_pos', () => {
+      const pos = GetVehicleNodePosition(0);
+      console.log(pos);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Node IDs are game-internal and may vary by area.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleNodePosition
+
+##### GetVehicleNumberOfPassengers
+- **Name**: GetVehicleNumberOfPassengers
+- **Scope**: Shared
+- **Signature(s)**: `int GET_VEHICLE_NUMBER_OF_PASSENGERS(Vehicle vehicle)`
+- **Purpose**: Returns current passenger count excluding driver.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - **Returns**: `int` passenger count.
+- **OneSync / Networking**: Call on owner to avoid stale data.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: passenger_count
+        -- Use: Prints passenger count
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('passenger_count', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetVehicleNumberOfPassengers(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: passenger_count */
+    RegisterCommand('passenger_count', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetVehicleNumberOfPassengers(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not count ped occupying mount points.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleNumberOfPassengers
+
+##### GetVehicleNumberPlateText
+- **Name**: GetVehicleNumberPlateText
+- **Scope**: Shared
+- **Signature(s)**: `char* GET_VEHICLE_NUMBER_PLATE_TEXT(Vehicle vehicle)`
+- **Purpose**: Retrieves the vehicle's plate text.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - **Returns**: `string` plate text.
+- **OneSync / Networking**: Query owner to ensure latest text.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: plate_text
+        -- Use: Prints current plate text
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('plate_text', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetVehicleNumberPlateText(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: plate_text */
+    RegisterCommand('plate_text', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetVehicleNumberPlateText(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Max 8 characters unless using custom plate settings.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleNumberPlateText
+
+##### GetVehicleNumberPlateTextIndex
+- **Name**: GetVehicleNumberPlateTextIndex
+- **Scope**: Shared
+- **Signature(s)**: `int GET_VEHICLE_NUMBER_PLATE_TEXT_INDEX(Vehicle vehicle)`
+- **Purpose**: Gets the plate style index.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - **Returns**: `int` plate style.
+- **OneSync / Networking**: Query owner to match replicated style.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: plate_index
+        -- Use: Prints plate style index
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('plate_index', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetVehicleNumberPlateTextIndex(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: plate_index */
+    RegisterCommand('plate_index', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetVehicleNumberPlateTextIndex(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Style indices vary by game region.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleNumberPlateTextIndex
+
+##### GetVehicleOilLevel
+- **Name**: GetVehicleOilLevel
+- **Scope**: Shared
+- **Signature(s)**: `float GET_VEHICLE_OIL_LEVEL(Vehicle vehicle)`
+- **Purpose**: Returns current oil level (0.0–1.0).
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - **Returns**: `float` oil level.
+- **OneSync / Networking**: Query owner to ensure accurate reading.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: oil_level
+        -- Use: Prints oil level fraction
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('oil_level', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetVehicleOilLevel(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: oil_level */
+    RegisterCommand('oil_level', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetVehicleOilLevel(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Oil level impacts engine failure when very low.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleOilLevel
+
+##### GetVehiclePedIsIn
+- **Name**: GetVehiclePedIsIn
+- **Scope**: Shared
+- **Signature(s)**: `Vehicle GET_VEHICLE_PED_IS_IN(Ped ped, BOOL lastVehicle)`
+- **Purpose**: Returns vehicle a ped occupies or last used.
+- **Parameters / Returns**:
+  - `ped` (`Ped`): Target ped.
+  - `lastVehicle` (`BOOL`): Use last vehicle if not in one.
+  - **Returns**: `Vehicle` handle or 0.
+- **OneSync / Networking**: Owner query when expecting synced entity.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: ped_vehicle
+        -- Use: Prints current vehicle handle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('ped_vehicle', function(source, args)
+        local target = GetPlayerPed(-1)
+        local veh = GetVehiclePedIsIn(target, false)
+        print(veh)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: ped_vehicle */
+    RegisterCommand('ped_vehicle', () => {
+      const ped = PlayerPedId();
+      const veh = GetVehiclePedIsIn(ped, false);
+      console.log(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns 0 if ped is not in a vehicle.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehiclePedIsIn
+
+##### GetVehiclePedIsUsing
+- **Name**: GetVehiclePedIsUsing
+- **Scope**: Shared
+- **Signature(s)**: `Vehicle GET_VEHICLE_PED_IS_USING(Ped ped)`
+- **Purpose**: Gets the vehicle a ped is actively operating.
+- **Parameters / Returns**:
+  - `ped` (`Ped`): Target ped.
+  - **Returns**: `Vehicle` handle or 0.
+- **OneSync / Networking**: Call on owner when ped is remote.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: ped_using
+        -- Use: Prints vehicle ped is using
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('ped_using', function()
+        local ped = PlayerPedId()
+        print(GetVehiclePedIsUsing(ped))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: ped_using */
+    RegisterCommand('ped_using', () => {
+      const ped = PlayerPedId();
+      console.log(GetVehiclePedIsUsing(ped));
+    });
+    ```
+- **Caveats / Limitations**:
+  - May differ from `GetVehiclePedIsIn` when exiting vehicles.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehiclePedIsUsing
+
+##### GetVehiclePetrolTankHealth
+- **Name**: GetVehiclePetrolTankHealth
+- **Scope**: Shared
+- **Signature(s)**: `float GET_VEHICLE_PETROL_TANK_HEALTH(Vehicle vehicle)`
+- **Purpose**: Returns fuel tank health value.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - **Returns**: `float` health.
+- **OneSync / Networking**: Query owner for current state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: tank_health
+        -- Use: Prints petrol tank health
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('tank_health', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetVehiclePetrolTankHealth(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: tank_health */
+    RegisterCommand('tank_health', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetVehiclePetrolTankHealth(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Values below 0.0 cause explosions when damaged further.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehiclePetrolTankHealth
+
+##### GetVehiclePlateType
+- **Name**: GetVehiclePlateType
+- **Scope**: Shared
+- **Signature(s)**: `int GET_VEHICLE_PLATE_TYPE(Vehicle vehicle)`
+- **Purpose**: Returns plate material type enumeration.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - **Returns**: `int` plate type.
+- **OneSync / Networking**: Query owner for accurate value.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: plate_type
+        -- Use: Prints plate type enum
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('plate_type', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetVehiclePlateType(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: plate_type */
+    RegisterCommand('plate_type', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetVehiclePlateType(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Plate type affects dirt mapping and damage visuals.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehiclePlateType
+
+##### GetVehicleQuaternion
+- **Name**: GetVehicleQuaternion
+- **Scope**: Shared
+- **Signature(s)**: `void GET_VEHICLE_QUATERNION(Vehicle vehicle, float* x, float* y, float* z, float* w)`
+- **Purpose**: Retrieves vehicle orientation as quaternion.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - `x` (`float*`), `y` (`float*`), `z` (`float*`), `w` (`float*`): Output components.
+- **OneSync / Networking**: Call on owner for precise orientation.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_quat
+        -- Use: Prints quaternion orientation
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_quat', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        local x, y, z, w = GetVehicleQuaternion(veh)
+        print(x, y, z, w)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_quat */
+    RegisterCommand('veh_quat', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      const [x, y, z, w] = GetVehicleQuaternion(veh);
+      console.log(x, y, z, w);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Orientation may desync if called on non-owner in OneSync.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleQuaternion
+
+CONTINUE-HERE — 2025-09-12T05:30 — next: Vehicle :: GetVehicleRecordingId
