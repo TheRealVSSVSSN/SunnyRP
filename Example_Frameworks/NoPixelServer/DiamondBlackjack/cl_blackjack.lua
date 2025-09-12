@@ -191,14 +191,14 @@ function resetDealerIdle(dealerPed)
         --print("playing idle animation: " .. tostring(genderAnimString .. "idle"))
         TaskPlayAnim(dealerPed, dealerAnimDict, genderAnimString .. "idle", 1000.0, -2.0, -1, 2, 1148846080, 0) --anim_name is idle or female_idle depending on gender
         PlayFacialAnim(dealerPed, "idle_facial", dealerAnimDict)
-        TaskPlayAnim(GetPlayerPed(-1),"anim_casino_b@amb@casino@games@shared@player@", "idle_cardgames", 1.0, 1.0, -1, 0)
+        TaskPlayAnim(PlayerPedId(),"anim_casino_b@amb@casino@games@shared@player@", "idle_cardgames", 1.0, 1.0, -1, 0) -- https://docs.fivem.net/natives/?_0xB31A277C1AC7B7FF
     end
 end
 
 CreateThread(function()
     while true do 
         if shouldForceIdleCardGames and sittingAtBlackjackTable then
-            TaskPlayAnim(GetPlayerPed(-1),"anim_casino_b@amb@casino@games@shared@player@", "idle_cardgames", 1.0, 1.0, -1, 0)
+            TaskPlayAnim(PlayerPedId(),"anim_casino_b@amb@casino@games@shared@player@", "idle_cardgames", 1.0, 1.0, -1, 0) -- https://docs.fivem.net/natives/?_0xB31A277C1AC7B7FF
         end
         Wait(0)
     end
@@ -325,10 +325,10 @@ CreateThread(function()
                 while not HasAnimDictLoaded(blackjackAnimDictToLoad) do 
                     Wait(0)
                 end
-                --FreezeEntityPosition(GetPlayerPed(-1),false)
-                --SetEntityCollision(GetPlayerPed(-1),true,true)
+                --FreezeEntityPosition(PlayerPedId(),false)
+                --SetEntityCollision(PlayerPedId(),true,true)
                 NetworkStopSynchronisedScene(currentSceneId)
-                TaskPlayAnim(GetPlayerPed(-1), blackjackAnimDictToLoad, "sit_exit_left", 1.0, 1.0, 2500, 0)              
+                TaskPlayAnim(PlayerPedId(), blackjackAnimDictToLoad, "sit_exit_left", 1.0, 1.0, 2500, 0) -- https://docs.fivem.net/natives/?_0xB31A277C1AC7B7FF
                 --SetPlayerControl(PlayerId(),1,256,0)
                 sittingAtBlackjackTable = false
                 timeoutHowToBlackjack = true
@@ -368,7 +368,7 @@ end)
 
 CreateThread(function()
     while true do 
-        local playerCoords = GetEntityCoords(GetPlayerPed(-1))
+        local playerCoords = GetEntityCoords(PlayerPedId())
         closeToCasino = false
         for k,v in pairs(cfg.blackjackTables) do
             cfg.blackjackTables[k].distance = #(playerCoords-cfg.blackjackTables[k].tablePos)
@@ -385,7 +385,7 @@ CreateThread(function()
         if closeToCasino then
             closestChairDist = 1000
             closestChair = -1
-            local playerCoords = GetEntityCoords(GetPlayerPed(-1))
+            local playerCoords = GetEntityCoords(PlayerPedId())
             for i=0,((#cfg.blackjackTables+1)*4)-1,1 do
                 local vectorOfBlackjackSeat = blackjack_func_348(i)
                 local distToBlackjackSeat = #(playerCoords - vectorOfBlackjackSeat)
@@ -624,7 +624,7 @@ end)
 function getClosestDealer()
     local tmpclosestDealerPed = nil
     local tmpclosestDealerPedDistance = 100000
-    local playerCoords = GetEntityCoords(GetPlayerPed(-1))
+    local playerCoords = GetEntityCoords(PlayerPedId())
     for k,v in pairs(dealerPeds) do 
         local dealerPed = v
         --print("Entity ID of this dealer ped: " .. tostring(dealerPed))
