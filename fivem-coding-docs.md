@@ -307,8 +307,8 @@ onesync on
 ## 13. Natives Index (Client / Server, by Category)
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
-| Overall | 6442 | 983 | 5459 | 2025-09-12T18:45:33+00:00 |
-| Vehicle | 751 | 652 | 99 | 2025-09-12T18:45:33+00:00 |
+| Overall | 6442 | 1008 | 5434 | 2025-09-12T20:13:58.131329+00:00 |
+| Vehicle | 751 | 677 | 74 | 2025-09-12T20:13:58.131329+00:00 |
 
 ### 13.1 Taxonomy & Scope Notes
 - Natives are grouped by high-level game systems (e.g., Vehicle, Player) and scope (Client or Server).
@@ -316,6 +316,231 @@ onesync on
 
 ### 13.2 Client Natives by Category
 #### Vehicle
+##### AddRoadNodeSpeedZone
+- **Name**: AddRoadNodeSpeedZone
+- **Scope**: Client
+- **Signature**: `int ADD_ROAD_NODE_SPEED_ZONE(float x, float y, float z, float radius, float speed, BOOL p5);`
+- **Purpose**: Defines a temporary speed limit area for AI vehicles.
+- **Parameters / Returns**:
+  - `x` (`float`)
+  - `y` (`float`)
+  - `z` (`float`)
+  - `radius` (`float`): Zone radius in meters.
+  - `speed` (`float`): Max speed in m/s.
+  - `p5` (`bool`): Unknown flag.
+  - **Returns**: `int` zone ID.
+- **OneSync / Networking**: Local client only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: roadspeedzone
+        -- Use: Slow traffic near player
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('roadspeedzone', function()
+        local pos = GetEntityCoords(PlayerPedId())
+        AddRoadNodeSpeedZone(pos.x, pos.y, pos.z, 50.0, 10.0, false)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: roadspeedzone */
+    RegisterCommand('roadspeedzone', (_src) => {
+      const [x, y, z] = GetEntityCoords(PlayerPedId(), false);
+      AddRoadNodeSpeedZone(x, y, z, 50.0, 10.0, false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Zone disappears on resource stop.
+  - TODO(next-run): verify `p5`.
+- **Reference**: https://docs.fivem.net/natives/?n=AddRoadNodeSpeedZone
+
+##### AddVehicleCombatAngledAvoidanceArea
+- **Name**: AddVehicleCombatAngledAvoidanceArea
+- **Scope**: Client
+- **Signature**: `Any ADD_VEHICLE_COMBAT_ANGLED_AVOIDANCE_AREA(float p0, float p1, float p2, float p3, float p4, float p5, float p6);`
+- **Purpose**: Marks an angled region that AI drivers will try to avoid.
+- **Parameters / Returns**:
+  - `p0–p6` (`float`): Corner coordinates of the area; semantics undocumented.
+  - **Returns**: `Any` handle.
+- **OneSync / Networking**: Client-side only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_avoid_area
+        -- Use: Keep NPC cars away from crash scene
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_avoid_area', function()
+        local pos = GetEntityCoords(PlayerPedId())
+        AddVehicleCombatAngledAvoidanceArea(pos.x+5.0,pos.y+5.0,pos.z,pos.x-5.0,pos.y-5.0,pos.z+5.0,5.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_avoid_area */
+    RegisterCommand('veh_avoid_area', () => {
+      const [x,y,z]=GetEntityCoords(PlayerPedId(), false);
+      AddVehicleCombatAngledAvoidanceArea(x+5.0,y+5.0,z,x-5.0,y-5.0,z+5.0,5.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Parameters lack official docs.
+  - TODO(next-run): verify usage.
+- **Reference**: https://docs.fivem.net/natives/?n=AddVehicleCombatAngledAvoidanceArea
+
+##### AddVehiclePhoneExplosiveDevice
+- **Name**: AddVehiclePhoneExplosiveDevice
+- **Scope**: Client
+- **Signature**: `void ADD_VEHICLE_PHONE_EXPLOSIVE_DEVICE(Vehicle vehicle);`
+- **Purpose**: Attaches a remotely detonated bomb to a vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target vehicle.
+  - **Returns**: `void`
+- **OneSync / Networking**: Trigger on vehicle owner so device syncs.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_bomb
+        -- Use: Plant phone explosive on current vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_bomb', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then AddVehiclePhoneExplosiveDevice(veh) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_bomb */
+    RegisterCommand('veh_bomb', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) AddVehiclePhoneExplosiveDevice(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only works on vehicles supporting remote explosives.
+- **Reference**: https://docs.fivem.net/natives/?n=AddVehiclePhoneExplosiveDevice
+
+##### AddVehicleStuckCheckWithWarp
+- **Name**: AddVehicleStuckCheckWithWarp
+- **Scope**: Client
+- **Signature**: `void ADD_VEHICLE_STUCK_CHECK_WITH_WARP(Any p0, float p1, Any p2, BOOL p3, BOOL p4, BOOL p5, Any p6);`
+- **Purpose**: Monitors a vehicle for being stuck and warps it when necessary.
+- **Parameters / Returns**:
+  - `p0` (`Any`): Vehicle handle.
+  - `p1` (`float`): Time in seconds before warp.
+  - `p2`–`p6` (`Any/bool`): Undocumented flags.
+  - **Returns**: `void`
+- **OneSync / Networking**: Run on owner to avoid conflicting warps.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_stuckwarp
+        -- Use: Auto-warp stuck vehicles after 10s
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_stuckwarp', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then AddVehicleStuckCheckWithWarp(veh, 10.0, 0, true, true, true, 0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_stuckwarp */
+    RegisterCommand('veh_stuckwarp', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) AddVehicleStuckCheckWithWarp(veh, 10.0, 0, true, true, true, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Parameters largely undocumented.
+  - TODO(next-run): confirm flag meanings.
+- **Reference**: https://docs.fivem.net/natives/?n=AddVehicleStuckCheckWithWarp
+
+##### AddVehicleUpsidedownCheck
+- **Name**: AddVehicleUpsidedownCheck
+- **Scope**: Client
+- **Signature**: `void ADD_VEHICLE_UPSIDEDOWN_CHECK(Vehicle vehicle);`
+- **Purpose**: Enables automatic upside-down detection for a vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to monitor.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner-only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_flipcheck
+        -- Use: Start upside-down monitoring
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_flipcheck', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then AddVehicleUpsidedownCheck(veh) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_flipcheck */
+    RegisterCommand('veh_flipcheck', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) AddVehicleUpsidedownCheck(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Behaviour after detection controlled by game engine.
+- **Reference**: https://docs.fivem.net/natives/?n=AddVehicleUpsidedownCheck
+
+##### AllowAmbientVehiclesToAvoidAdverseConditions
+- **Name**: AllowAmbientVehiclesToAvoidAdverseConditions
+- **Scope**: Client
+- **Signature**: `void ALLOW_AMBIENT_VEHICLES_TO_AVOID_ADVERSE_CONDITIONS(Vehicle vehicle);`
+- **Purpose**: Debug native that hints ambient AI to reroute around hazards.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Reference model for avoidance.
+  - **Returns**: `void`
+- **OneSync / Networking**: Local hint only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_avoid
+        -- Use: Encourage local traffic to reroute
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_avoid', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then AllowAmbientVehiclesToAvoidAdverseConditions(veh) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_avoid */
+    RegisterCommand('veh_avoid', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) AllowAmbientVehiclesToAvoidAdverseConditions(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Native flagged as debug and may have no effect.
+- **Reference**: https://docs.fivem.net/natives/?n=AllowAmbientVehiclesToAvoidAdverseConditions
 ##### SetVehicleDoorsShut
 - **Name**: SetVehicleDoorsShut
 - **Scope**: Client
@@ -3274,4 +3499,723 @@ onesync on
   - Only applies to vehicles supporting armour mods.
 - **Reference**: https://docs.fivem.net/natives/?n=SetVehicleWindscreenArmour
 
-CONTINUE-HERE — 2025-09-12T18:45:33+00:00 — next: Vehicle :: SetVehicleXenonLightsColour
+
+##### SetVehicleXenonLightsColor
+- **Name**: SetVehicleXenonLightsColor
+- **Scope**: Client
+- **Signature**: `void _SET_VEHICLE_XENON_LIGHTS_COLOR(Vehicle vehicle, int color);`
+- **Purpose**: Changes xenon headlight color.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `color` (`int`): 0–12 paint index.
+  - **Returns**: `void`
+- **OneSync / Networking**: Vehicle owner must apply for sync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_xenon
+        -- Use: Set xenon color
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_xenon', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and args[1] then
+            ToggleVehicleMod(veh, 22, true)
+            SetVehicleHeadlightsColour(veh, tonumber(args[1]))
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_xenon */
+    RegisterCommand('veh_xenon', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && args[0]) {
+        ToggleVehicleMod(veh, 22, true);
+        SetVehicleHeadlightsColour(veh, parseInt(args[0]));
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires xenon mod installed (mod index 22).
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleXenonLightsColor
+
+##### SkipTimeInPlaybackRecordedVehicle
+- **Name**: SkipTimeInPlaybackRecordedVehicle
+- **Scope**: Client
+- **Signature**: `void SKIP_TIME_IN_PLAYBACK_RECORDED_VEHICLE(Vehicle vehicle, float time);`
+- **Purpose**: Fast-forwards a playback recording by the given time.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `time` (`float`): Seconds to skip.
+  - **Returns**: `void`
+- **OneSync / Networking**: Playback is local; owner must run for sync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: playback_skip
+        -- Use: Skip 5s of current recording
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('playback_skip', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SkipTimeInPlaybackRecordedVehicle(veh, 5.0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: playback_skip */
+    RegisterCommand('playback_skip', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SkipTimeInPlaybackRecordedVehicle(veh, 5.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only works while playback is active.
+- **Reference**: https://docs.fivem.net/natives/?n=SkipTimeInPlaybackRecordedVehicle
+
+##### SkipToEndAndStopPlaybackRecordedVehicle
+- **Name**: SkipToEndAndStopPlaybackRecordedVehicle
+- **Scope**: Client
+- **Signature**: `void SKIP_TO_END_AND_STOP_PLAYBACK_RECORDED_VEHICLE(Vehicle vehicle);`
+- **Purpose**: Jumps to the end of a playback recording and stops it.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner-only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: playback_end
+        -- Use: Finish current vehicle recording
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('playback_end', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SkipToEndAndStopPlaybackRecordedVehicle(veh) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: playback_end */
+    RegisterCommand('playback_end', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SkipToEndAndStopPlaybackRecordedVehicle(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Recording must be loaded.
+- **Reference**: https://docs.fivem.net/natives/?n=SkipToEndAndStopPlaybackRecordedVehicle
+
+##### SmashVehicleWindow
+- **Name**: SmashVehicleWindow
+- **Scope**: Client
+- **Signature**: `void SMASH_VEHICLE_WINDOW(Vehicle vehicle, int windowIndex);`
+- **Purpose**: Breaks a specified vehicle window.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `windowIndex` (`int`): Window ID (see `IsVehicleWindowIntact`).
+  - **Returns**: `void`
+- **OneSync / Networking**: Call on owner so damage syncs.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: smash_window
+        -- Use: Break driver's window
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('smash_window', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SmashVehicleWindow(veh, 0) end -- 0: driver
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: smash_window */
+    RegisterCommand('smash_window', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SmashVehicleWindow(veh, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only affects intact windows.
+- **Reference**: https://docs.fivem.net/natives/?n=SmashVehicleWindow
+
+##### StabiliseEntityAttachedToHeli
+- **Name**: StabiliseEntityAttachedToHeli
+- **Scope**: Client
+- **Signature**: `void STABILISE_ENTITY_ATTACHED_TO_HELI(Vehicle vehicle, Entity entity, float p2);`
+- **Purpose**: Reduces swing of an entity attached to a helicopter.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Helicopter.
+  - `entity` (`Entity`): Attached entity.
+  - `p2` (`float`): Strength factor.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must manage both entities.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: heli_stabilise
+        -- Use: Stabilise attached cargo
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('heli_stabilise', function()
+        local heli = GetVehiclePedIsIn(PlayerPedId(), false)
+        local attached = GetEntityAttachedTo(heli)
+        if heli ~= 0 and attached ~= 0 then
+            StabiliseEntityAttachedToHeli(heli, attached, 1.0)
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: heli_stabilise */
+    RegisterCommand('heli_stabilise', () => {
+      const heli = GetVehiclePedIsIn(PlayerPedId(), false);
+      const attached = GetEntityAttachedTo(heli);
+      if (heli !== 0 && attached !== 0) {
+        StabiliseEntityAttachedToHeli(heli, attached, 1.0);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only for helicopter attachments.
+- **Reference**: https://docs.fivem.net/natives/?n=StabiliseEntityAttachedToHeli
+
+##### StartPlaybackRecordedVehicle
+- **Name**: StartPlaybackRecordedVehicle
+- **Scope**: Client
+- **Signature**: `void START_PLAYBACK_RECORDED_VEHICLE(Vehicle vehicle, int recording, char* script, BOOL p3);`
+- **Purpose**: Starts playing a prerecorded driving path on a vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `recording` (`int`): Recording ID.
+  - `script` (`string`)
+  - `p3` (`bool`): Trailer flag.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner-only; ensure recording loaded.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: playback_start
+        -- Use: Play recording 1
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('playback_start', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then StartPlaybackRecordedVehicle(veh, 1, "scripts", false) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: playback_start */
+    RegisterCommand('playback_start', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) StartPlaybackRecordedVehicle(veh, 1, 'scripts', false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Recording must be requested beforehand.
+- **Reference**: https://docs.fivem.net/natives/?n=StartPlaybackRecordedVehicle
+
+##### StartPlaybackRecordedVehicleUsingAi
+- **Name**: StartPlaybackRecordedVehicleUsingAi
+- **Scope**: Client
+- **Signature**: `void START_PLAYBACK_RECORDED_VEHICLE_USING_AI(Vehicle vehicle, int recording, char* script, float speed, int drivingStyle);`
+- **Purpose**: Plays a vehicle recording while letting AI handle driving decisions.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `recording` (`int`)
+  - `script` (`string`)
+  - `speed` (`float`): Playback speed multiplier.
+  - `drivingStyle` (`int`): AI style flags.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner-only; AI may interact with traffic.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: playback_ai
+        -- Use: Play recording using AI at normal speed
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('playback_ai', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then StartPlaybackRecordedVehicleUsingAi(veh, 1, "scripts", 1.0, 0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: playback_ai */
+    RegisterCommand('playback_ai', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) StartPlaybackRecordedVehicleUsingAi(veh, 1, 'scripts', 1.0, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Driving style values mirror SetDriveTaskDrivingStyle.
+- **Reference**: https://docs.fivem.net/natives/?n=StartPlaybackRecordedVehicleUsingAi
+
+##### StartPlaybackRecordedVehicleWithFlags
+- **Name**: StartPlaybackRecordedVehicleWithFlags
+- **Scope**: Client
+- **Signature**: `void START_PLAYBACK_RECORDED_VEHICLE_WITH_FLAGS(Vehicle vehicle, int recording, char* script, int flags, int time, int drivingStyle);`
+- **Purpose**: Starts playback with extra control flags and initial offset.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `recording` (`int`)
+  - `script` (`string`)
+  - `flags` (`int`): Bitfield affecting AI behaviour.
+  - `time` (`int`): Start offset ms.
+  - `drivingStyle` (`int`)
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner-only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: playback_flags
+        -- Use: Start recording with flags
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('playback_flags', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then StartPlaybackRecordedVehicleWithFlags(veh,1,"scripts",0,0,0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: playback_flags */
+    RegisterCommand('playback_flags', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) StartPlaybackRecordedVehicleWithFlags(veh,1,'scripts',0,0,0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Flags usage undocumented.
+- **Reference**: https://docs.fivem.net/natives/?n=StartPlaybackRecordedVehicleWithFlags
+
+##### StartVehicleAlarm
+- **Name**: StartVehicleAlarm
+- **Scope**: Client
+- **Signature**: `void START_VEHICLE_ALARM(Vehicle vehicle);`
+- **Purpose**: Triggers the vehicle's alarm siren.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must trigger to sync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_alarm
+        -- Use: Start car alarm
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_alarm', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then StartVehicleAlarm(veh) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_alarm */
+    RegisterCommand('veh_alarm', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) StartVehicleAlarm(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Alarm stops automatically after timeout.
+- **Reference**: https://docs.fivem.net/natives/?n=StartVehicleAlarm
+
+##### StartVehicleHorn
+- **Name**: StartVehicleHorn
+- **Scope**: Client
+- **Signature**: `void START_VEHICLE_HORN(Vehicle vehicle, int duration, Hash mode, BOOL forever);`
+- **Purpose**: Sounds the vehicle horn for a duration.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `duration` (`int`): milliseconds.
+  - `mode` (`Hash`): 0, `NORMAL`, or `HELDDOWN`.
+  - `forever` (`bool`)
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner triggers horn.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_horn
+        -- Use: Honk for 2s
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_horn', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then StartVehicleHorn(veh, 2000, `NORMAL`, false) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_horn */
+    RegisterCommand('veh_horn', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) StartVehicleHorn(veh, 2000, GetHashKey('NORMAL'), false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Players inside vehicle may override horn.
+- **Reference**: https://docs.fivem.net/natives/?n=StartVehicleHorn
+
+##### StopAllGarageActivity
+- **Name**: StopAllGarageActivity
+- **Scope**: Client
+- **Signature**: `void STOP_ALL_GARAGE_ACTIVITY();`
+- **Purpose**: Cancels all ongoing scripted garage operations.
+- **Parameters / Returns**:
+  - **Returns**: `void`
+- **OneSync / Networking**: Not networked.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: garage_stop
+        -- Use: Stop garage scenes
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('garage_stop', function()
+        StopAllGarageActivity()
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: garage_stop */
+    RegisterCommand('garage_stop', () => {
+      StopAllGarageActivity();
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only affects scripted sequences using garage system.
+- **Reference**: https://docs.fivem.net/natives/?n=StopAllGarageActivity
+
+##### StopBringVehicleToHalt
+- **Name**: StopBringVehicleToHalt
+- **Scope**: Client
+- **Signature**: `void _STOP_BRING_VEHICLE_TO_HALT(Vehicle vehicle);`
+- **Purpose**: Aborts the engine-controlled halting task.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must cancel halt.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: halt_cancel
+        -- Use: Cancel forced stopping
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('halt_cancel', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then StopBringVehicleToHalt(veh) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: halt_cancel */
+    RegisterCommand('halt_cancel', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) StopBringVehicleToHalt(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only cancels CTaskBringVehicleToHalt.
+- **Reference**: https://docs.fivem.net/natives/?n=StopBringVehicleToHalt
+
+##### StopPlaybackRecordedVehicle
+- **Name**: StopPlaybackRecordedVehicle
+- **Scope**: Client
+- **Signature**: `void STOP_PLAYBACK_RECORDED_VEHICLE(Vehicle vehicle);`
+- **Purpose**: Stops playback mode for a vehicle recording.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner-only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: playback_stop
+        -- Use: Stop current recording
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('playback_stop', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then StopPlaybackRecordedVehicle(veh) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: playback_stop */
+    RegisterCommand('playback_stop', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) StopPlaybackRecordedVehicle(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Vehicle remains in last playback state.
+- **Reference**: https://docs.fivem.net/natives/?n=StopPlaybackRecordedVehicle
+
+##### SwitchTrainTrack
+- **Name**: SwitchTrainTrack
+- **Scope**: Client
+- **Signature**: `void SWITCH_TRAIN_TRACK(int trackId, BOOL state);`
+- **Purpose**: Enables or disables ambient trains on a specific track.
+- **Parameters / Returns**:
+  - `trackId` (`int`): Track index.
+  - `state` (`bool`): `true` allow trains.
+  - **Returns**: `void`
+- **OneSync / Networking**: Changes affect all clients when run on server.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: train_toggle
+        -- Use: Toggle main train track
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('train_toggle', function(_, args)
+        local on = args[1] == 'on'
+        SwitchTrainTrack(0, on)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: train_toggle */
+    RegisterCommand('train_toggle', (_src, args) => {
+      const on = args[0] === 'on';
+      SwitchTrainTrack(0, on);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only toggles spawning; existing trains persist.
+- **Reference**: https://docs.fivem.net/natives/?n=SwitchTrainTrack
+
+##### ToggleVehicleMod
+- **Name**: ToggleVehicleMod
+- **Scope**: Client
+- **Signature**: `void TOGGLE_VEHICLE_MOD(Vehicle vehicle, int modType, BOOL toggle);`
+- **Purpose**: Enables or disables a vehicle modification.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `modType` (`int`)
+  - `toggle` (`bool`)
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_turbo
+        -- Use: Toggle turbo mod
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_turbo', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then ToggleVehicleMod(veh, 18, true) end -- 18: turbo
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_turbo */
+    RegisterCommand('veh_turbo', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) ToggleVehicleMod(veh, 18, true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Vehicle must support the mod.
+- **Reference**: https://docs.fivem.net/natives/?n=ToggleVehicleMod
+
+##### TrackVehicleVisibility
+- **Name**: TrackVehicleVisibility
+- **Scope**: Client
+- **Signature**: `void TRACK_VEHICLE_VISIBILITY(Vehicle vehicle);`
+- **Purpose**: Starts tracking if a vehicle becomes unseen for cleanup logic.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - **Returns**: `void`
+- **OneSync / Networking**: Local only; use with missions.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_track
+        -- Use: Track current vehicle visibility
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_track', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then TrackVehicleVisibility(veh) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_track */
+    RegisterCommand('veh_track', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) TrackVehicleVisibility(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires external checks to act when hidden.
+- **Reference**: https://docs.fivem.net/natives/?n=TrackVehicleVisibility
+
+##### TransformToCar
+- **Name**: TransformToCar
+- **Scope**: Client
+- **Signature**: `void TRANSFORM_TO_CAR(Vehicle vehicle, BOOL instantly);`
+- **Purpose**: Converts the Stromberg into its land form.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `instantly` (`bool`): Skip animation.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner transforms entity.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: stromberg_car
+        -- Use: Transform to car
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('stromberg_car', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then TransformToCar(veh, false) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: stromberg_car */
+    RegisterCommand('stromberg_car', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) TransformToCar(veh, false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only works on Stromberg model.
+- **Reference**: https://docs.fivem.net/natives/?n=TransformToCar
+
+##### TransformToSubmarine
+- **Name**: TransformToSubmarine
+- **Scope**: Client
+- **Signature**: `void TRANSFORM_TO_SUBMARINE(Vehicle vehicle, BOOL instantly);`
+- **Purpose**: Switches the Stromberg into submarine mode.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `instantly` (`bool`)
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must trigger.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: stromberg_sub
+        -- Use: Transform to submarine
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('stromberg_sub', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then TransformToSubmarine(veh, false) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: stromberg_sub */
+    RegisterCommand('stromberg_sub', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) TransformToSubmarine(veh, false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only works on Stromberg model.
+- **Reference**: https://docs.fivem.net/natives/?n=TransformToSubmarine
+
+##### UnpausePlaybackRecordedVehicle
+- **Name**: UnpausePlaybackRecordedVehicle
+- **Scope**: Client
+- **Signature**: `void UNPAUSE_PLAYBACK_RECORDED_VEHICLE(Vehicle vehicle);`
+- **Purpose**: Resumes a paused vehicle recording.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner-only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: playback_resume
+        -- Use: Resume vehicle recording
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('playback_resume', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then UnpausePlaybackRecordedVehicle(veh) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: playback_resume */
+    RegisterCommand('playback_resume', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) UnpausePlaybackRecordedVehicle(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Recording must have been paused previously.
+- **Reference**: https://docs.fivem.net/natives/?n=UnpausePlaybackRecordedVehicle
+
+CONTINUE-HERE — 2025-09-12T20:13:58.131329+00:00 — next: Vehicle :: AreAllVehicleWindowsIntact
