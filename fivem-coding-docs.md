@@ -307,8 +307,8 @@ onesync on
 ## 13. Natives Index (Client / Server, by Category)
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
-| Overall | 6442 | 174 | 6268 | 2025-09-12T21:06:30+00:00 |
-| Vehicle | 751 | 174 | 577 | 2025-09-12T21:06:30+00:00 |
+| Overall | 6442 | 184 | 6258 | 2025-09-12T21:16:28+00:00 |
+| Vehicle | 751 | 184 | 567 | 2025-09-12T21:16:28+00:00 |
 
 ### 13.1 Taxonomy & Scope Notes
 - Natives are grouped by high-level game systems (e.g., Vehicle, Player) and scope (Client or Server).
@@ -7164,4 +7164,417 @@ onesync on
   - Requires nitrous mods to be configured beforehand.
 - **Reference**: https://docs.fivem.net/natives/?n=FullyChargeNitrous
 
-CONTINUE-HERE — 2025-09-12T21:06:30+00:00 — next: Vehicle :: GetAllVehicles
+##### GetAllVehicles
+- **Name**: GetAllVehicles
+- **Scope**: Client
+- **Signature**: `int GET_ALL_VEHICLES(int* vehArray);`
+- **Purpose**: Fills an array with handles for every vehicle in the current game pool. Deprecated in favor of `GetGamePool`.
+- **Parameters / Returns**:
+  - `vehArray` (`int*`): Pre-allocated array to receive vehicle handles.
+  - **Returns**: `int` count of vehicles written.
+- **OneSync / Networking**: Client-side only; use `GetGamePool` to cover all streamed vehicles.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: vehicles_count
+        -- Use: Reports total streamed vehicles
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('vehicles_count', function()
+        local vehs = GetGamePool('CVehicle') -- replacement for GetAllVehicles
+        TriggerEvent('chat:addMessage', {args = {'System', ('%s vehicles active'):format(#vehs)}})
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: vehicles_count */
+    RegisterCommand('vehicles_count', () => {
+      const vehs = GetGamePool('CVehicle'); // replacement for GetAllVehicles
+      emit('chat:addMessage', { args: ['System', `${vehs.length} vehicles active`] });
+    });
+    ```
+- **Caveats / Limitations**:
+  - Native is deprecated; `GetGamePool` provides the same functionality.
+- **Reference**: https://docs.fivem.net/natives/?n=GetAllVehicles
+
+##### GetBoatBoomPositionRatio
+- **Name**: GetBoatBoomPositionRatio
+- **Scope**: Client
+- **Signature**: `float GET_BOAT_BOOM_POSITION_RATIO(Vehicle vehicle);`
+- **Purpose**: Returns a normalized ratio describing the boom position for supported boat models.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Boat to query.
+  - **Returns**: `float` ratio from 0.0 (retracted) to 1.0 (extended).
+- **OneSync / Networking**: Only meaningful for boats the client owns or controls.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: boom_ratio
+        -- Use: Shows boom extension percentage on the current boat
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('boom_ratio', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and IsThisModelABoat(GetEntityModel(veh)) then
+            local ratio = GetBoatBoomPositionRatio(veh)
+            TriggerEvent('chat:addMessage', {args = {'System', ('Boom: %d%%'):format(ratio*100)}})
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: boom_ratio */
+    RegisterCommand('boom_ratio', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && IsThisModelABoat(GetEntityModel(veh))) {
+        const ratio = GetBoatBoomPositionRatio(veh);
+        emit('chat:addMessage', { args: ['System', `Boom: ${Math.floor(ratio*100)}%`] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only certain boats have controllable booms.
+- **Reference**: https://docs.fivem.net/natives/?n=GetBoatBoomPositionRatio
+
+##### GetBoatBoomPositionRatio_2
+- **Name**: _GET_BOAT_BOOM_POSITION_RATIO_2
+- **Scope**: Client
+- **Signature**: `void _GET_BOAT_BOOM_POSITION_RATIO_2(Vehicle vehicle, BOOL p1);`
+- **Purpose**: Internal variant for retrieving a secondary boom ratio on specific boats.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target boat.
+  - `p1` (`bool`): Unknown flag.
+  - **Returns**: `void` (value obtained through native-specific context).
+- **OneSync / Networking**: Local effect only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: boom_ratio2
+        -- Use: Invokes hidden boom ratio function on current boat
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('boom_ratio2', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then _GET_BOAT_BOOM_POSITION_RATIO_2(veh, true) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: boom_ratio2 */
+    RegisterCommand('boom_ratio2', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        GetBoatBoomPositionRatio_2(veh, true);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Behavior is undocumented; useful data output is unknown.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=GetBoatBoomPositionRatio_2
+
+##### GetBoatBoomPositionRatio_3
+- **Name**: _GET_BOAT_BOOM_POSITION_RATIO_3
+- **Scope**: Client
+- **Signature**: `void _GET_BOAT_BOOM_POSITION_RATIO_3(Vehicle vehicle, BOOL p1);`
+- **Purpose**: Another internal call for alternative boom ratio retrieval.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target boat.
+  - `p1` (`bool`): Unknown usage.
+  - **Returns**: `void`.
+- **OneSync / Networking**: Local-only; does not sync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: boom_ratio3
+        -- Use: Invokes tertiary boom ratio function
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('boom_ratio3', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then _GET_BOAT_BOOM_POSITION_RATIO_3(veh, true) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: boom_ratio3 */
+    RegisterCommand('boom_ratio3', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        GetBoatBoomPositionRatio_3(veh, true);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Function purpose not documented.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?n=GetBoatBoomPositionRatio_3
+
+##### GetBoatVehicleModelAgility
+- **Name**: GetBoatVehicleModelAgility
+- **Scope**: Client
+- **Signature**: `float GET_BOAT_VEHICLE_MODEL_AGILITY(Hash modelHash);`
+- **Purpose**: Retrieves the agility factor for a boat model, accounting for installed modifications.
+- **Parameters / Returns**:
+  - `modelHash` (`Hash`): Boat model identifier.
+  - **Returns**: `float` agility rating.
+- **OneSync / Networking**: Static model data; same across clients.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: boat_agility
+        -- Use: Displays agility rating for current boat
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('boat_agility', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and IsThisModelABoat(GetEntityModel(veh)) then
+            local agility = GetBoatVehicleModelAgility(GetEntityModel(veh))
+            TriggerEvent('chat:addMessage', {args = {'System', ('Agility: %.2f'):format(agility)}})
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: boat_agility */
+    RegisterCommand('boat_agility', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && IsThisModelABoat(GetEntityModel(veh))) {
+        const agility = GetBoatVehicleModelAgility(GetEntityModel(veh));
+        emit('chat:addMessage', { args: ['System', `Agility: ${agility.toFixed(2)}`] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only applies to boat models.
+- **Reference**: https://docs.fivem.net/natives/?n=GetBoatVehicleModelAgility
+
+##### GetCanVehicleJump
+- **Name**: _GET_CAN_VEHICLE_JUMP
+- **Scope**: Client
+- **Signature**: `BOOL _GET_CAN_VEHICLE_JUMP(Vehicle vehicle);`
+- **Purpose**: Checks if a vehicle has a built-in jump ability.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to inspect.
+  - **Returns**: `bool` indicating if jump is available.
+- **OneSync / Networking**: Only valid for the client-owned vehicle.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_can_jump
+        -- Use: Reports if the current vehicle can jump
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_can_jump', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and _GET_CAN_VEHICLE_JUMP(veh) then
+            TriggerEvent('chat:addMessage', {args = {'System', 'Jump system available.'}})
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_can_jump */
+    RegisterCommand('veh_can_jump', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && GetCanVehicleJump(veh)) {
+        emit('chat:addMessage', { args: ['System', 'Jump system available.'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only certain vehicles (e.g., Ruiner 2000) support jumping.
+- **Reference**: https://docs.fivem.net/natives/?n=GetCanVehicleJump
+
+##### GetCargobobHookPosition
+- **Name**: _GET_CARGOBOB_HOOK_POSITION
+- **Scope**: Client
+- **Signature**: `Vector3 _GET_CARGOBOB_HOOK_POSITION(Vehicle cargobob);`
+- **Purpose**: Provides world coordinates of an active Cargobob hook.
+- **Parameters / Returns**:
+  - `cargobob` (`Vehicle`): Target Cargobob helicopter.
+  - **Returns**: `vector3` hook position.
+- **OneSync / Networking**: Accurate only when the hook exists locally; sync depends on entity owner.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: hook_pos
+        -- Use: Prints hook location for the current Cargobob
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('hook_pos', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            local pos = _GET_CARGOBOB_HOOK_POSITION(veh)
+            TriggerEvent('chat:addMessage', {args = {'System', ('Hook at %.1f %.1f %.1f'):format(pos.x, pos.y, pos.z)}})
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: hook_pos */
+    RegisterCommand('hook_pos', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        const pos = GetCargobobHookPosition(veh);
+        emit('chat:addMessage', { args: ['System', `Hook at ${pos[0].toFixed(1)} ${pos[1].toFixed(1)} ${pos[2].toFixed(1)}`] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only valid for Cargobob models with deployed hook.
+- **Reference**: https://docs.fivem.net/natives/?n=GetCargobobHookPosition
+
+##### GetClosestVehicle
+- **Name**: GetClosestVehicle
+- **Scope**: Client
+- **Signature**: `Vehicle GET_CLOSEST_VEHICLE(float x, float y, float z, float radius, Hash modelHash, int flags);`
+- **Purpose**: Finds the nearest vehicle to a position within a radius.
+- **Parameters / Returns**:
+  - `x`, `y`, `z` (`float`): Position to search from.
+  - `radius` (`float`): Search radius.
+  - `modelHash` (`Hash`): Optional vehicle model filter; 0 for any.
+  - `flags` (`int`): Bitwise search modifiers (commonly 70).
+  - **Returns**: `Vehicle` handle or 0 if none found.
+- **OneSync / Networking**: Only considers vehicles streamed to the client.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: near_vehicle
+        -- Use: Targets closest vehicle within 15m
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('near_vehicle', function()
+        local p = PlayerPedId()
+        local coords = GetEntityCoords(p)
+        local veh = GetClosestVehicle(coords.x, coords.y, coords.z, 15.0, 0, 70)
+        if veh ~= 0 then
+            SetEntityAsMissionEntity(veh, true, true)
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: near_vehicle */
+    RegisterCommand('near_vehicle', () => {
+      const ped = PlayerPedId();
+      const [x, y, z] = GetEntityCoords(ped);
+      const veh = GetClosestVehicle(x, y, z, 15.0, 0, 70);
+      if (veh !== 0) {
+        SetEntityAsMissionEntity(veh, true, true);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Flags control included vehicle types; helicopters/boats require specific flags.
+- **Reference**: https://docs.fivem.net/natives/?n=GetClosestVehicle
+
+##### GetConvertibleRoofState
+- **Name**: GetConvertibleRoofState
+- **Scope**: Client
+- **Signature**: `int GET_CONVERTIBLE_ROOF_STATE(Vehicle vehicle);`
+- **Purpose**: Returns the roof animation state for convertible vehicles.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to check.
+  - **Returns**: `int` `eRoofState` enum.
+- **OneSync / Networking**: Requires entity ownership for accurate state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: roof_state
+        -- Use: Displays convertible roof state
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('roof_state', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            local state = GetConvertibleRoofState(veh)
+            TriggerEvent('chat:addMessage', {args = {'System', ('Roof state: %d'):format(state)}})
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: roof_state */
+    RegisterCommand('roof_state', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        const state = GetConvertibleRoofState(veh);
+        emit('chat:addMessage', { args: ['System', `Roof state: ${state}`] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only valid on convertible vehicles.
+- **Reference**: https://docs.fivem.net/natives/?n=GetConvertibleRoofState
+
+##### GetCurrentPlaybackForVehicle
+- **Name**: GetCurrentPlaybackForVehicle
+- **Scope**: Client
+- **Signature**: `int GET_CURRENT_PLAYBACK_FOR_VEHICLE(Vehicle vehicle);`
+- **Purpose**: Retrieves the recording playback identifier currently running on a vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle being played back.
+  - **Returns**: `int` playback ID or 0 if none.
+- **OneSync / Networking**: Playback must be started by the owner to replicate.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: playback_id
+        -- Use: Reports current vehicle recording ID
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('playback_id', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            local id = GetCurrentPlaybackForVehicle(veh)
+            TriggerEvent('chat:addMessage', {args = {'System', ('Playback ID: %d'):format(id)}})
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: playback_id */
+    RegisterCommand('playback_id', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        const id = GetCurrentPlaybackForVehicle(veh);
+        emit('chat:addMessage', { args: ['System', `Playback ID: ${id}`] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns 0 when no playback is active.
+- **Reference**: https://docs.fivem.net/natives/?n=GetCurrentPlaybackForVehicle
+
+CONTINUE-HERE — 2025-09-12T21:16:28+00:00 — next: Vehicle :: GetDisplayNameFromVehicleModel
