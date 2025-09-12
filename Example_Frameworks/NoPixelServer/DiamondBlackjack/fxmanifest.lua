@@ -1,5 +1,6 @@
 fx_version "cerulean"
 game "gta5"
+lua54 'yes' -- use Lua 5.4 runtime
 
 description "DiamondBlackjack"
 
@@ -18,7 +19,7 @@ client_scripts {
 
 server_script "sv_blackjack.lua"
 
-files{
+files {
 	"peds.meta",
 	'audio/dlcvinewood_amp.dat10',
 	'audio/dlcvinewood_amp.dat10.nametable',

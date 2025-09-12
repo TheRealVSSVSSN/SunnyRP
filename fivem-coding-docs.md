@@ -307,8 +307,8 @@ onesync on
 ## 13. Natives Index (Client / Server, by Category)
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
-| Overall | 6442 | 259 | 6183 | 2025-09-12T21:44:04+00:00 |
-| Vehicle | 751 | 259 | 492 | 2025-09-12T21:44:04+00:00 |
+| Overall | 6442 | 259 | 6183 | 2025-09-12T22:43:32+00:00 |
+| Vehicle | 751 | 259 | 492 | 2025-09-12T22:43:32+00:00 |
 
 ### 13.1 Taxonomy & Scope Notes
 - Natives are grouped by high-level game systems (e.g., Vehicle, Player) and scope (Client or Server).
@@ -10730,4 +10730,4 @@ onesync on
   - Bit meanings vary; refer to enum for flags.
 - **Reference**: https://docs.fivem.net/natives/?_0xEEBFC7A7EFDC35B4
 
-CONTINUE-HERE — 2025-09-12T21:44:04+00:00 — next: Vehicle :: GetVehicleCountermeasureCount
+CONTINUE-HERE — 2025-09-12T22:43:32+00:00 — next: Vehicle :: GetVehicleCountermeasureCount
