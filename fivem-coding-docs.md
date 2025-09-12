@@ -430,13 +430,13 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Overall | 6442 | 406 | 6036 | 2025-09-12T00:03 |
+| Overall | 6442 | 406 | 6036 | 2025-09-12T00:17 |
 | Player | 248 | 248 | 0 | 2025-09-11T06:38 |
 | Recording | 17 | 17 | 0 | 2025-09-11T06:52 |
 | Replay | 6 | 6 | 0 | 2025-09-11T07:37 |
 | ACL | 10 | 10 | 0 | 2025-09-11T08:12 |
 | CFX | 50 | 50 | 0 | 2025-09-11T09:55 |
-| Vehicle | 751 | 75 | 676 | 2025-09-12T00:03 |
+| Vehicle | 751 | 75 | 676 | 2025-09-12T00:17 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -14642,4 +14642,4 @@ RegisterCommand('rgb', () => {
   - Ensure the vehicle supports convertible roofs.
 - **Reference**: https://docs.fivem.net/natives/?n=GetConvertibleRoofState
 
-CONTINUE-HERE — 2025-09-12T00:03 — next: Vehicle :: GetCurrentPlaybackForVehicle
+CONTINUE-HERE — 2025-09-12T00:17 — next: Vehicle :: GetCurrentPlaybackForVehicle
