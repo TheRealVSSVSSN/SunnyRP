@@ -430,13 +430,13 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Overall | 6442 | 733 | 5709 | 2025-09-12T06:57:44+00:00 |
+| Overall | 6442 | 758 | 5684 | 2025-09-12T07:20:05+00:00 |
 | Player | 248 | 248 | 0 | 2025-09-11T06:38 |
 | Recording | 17 | 17 | 0 | 2025-09-11T06:52 |
 | Replay | 6 | 6 | 0 | 2025-09-11T07:37 |
 | ACL | 10 | 10 | 0 | 2025-09-11T08:12 |
 | CFX | 50 | 50 | 0 | 2025-09-11T09:55 |
-| Vehicle | 751 | 402 | 349 | 2025-09-12T06:57:44+00:00 |
+| Vehicle | 751 | 427 | 324 | 2025-09-12T07:20:05+00:00 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -26644,4 +26644,902 @@ RegisterCommand('rgb', () => {
   - Undocumented native.
 - **Reference**: https://docs.fivem.net/natives/?_0xF051D9BFB6BA39C0
 
-CONTINUE-HERE — 2025-09-12T06:57:44+00:00 — next: Vehicle :: N_0xF25E02CB9C5818F8
+##### _0xF25E02CB9C5818F8
+- **Name**: _0xF25E02CB9C5818F8
+- **Scope**: Client
+- **Signature**: `void _0xF25E02CB9C5818F8();`
+- **Purpose**: Undocumented native with no parameters.
+- **Parameters / Returns**:
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Entity-related effects require calling on the owner.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_f25e
+        -- Use: Demonstrates _0xF25E02CB9C5818F8
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_f25e', function()
+        _0xF25E02CB9C5818F8()
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_f25e */
+    RegisterCommand('veh_f25e', () => {
+      _0xF25E02CB9C5818F8();
+    });
+    ```
+- **Caveats / Limitations**:
+  - Undocumented native.
+- **Reference**: https://docs.fivem.net/natives/?_0xF25E02CB9C5818F8
+
+##### _0xF3B0E0AED097A3F5
+- **Name**: _0xF3B0E0AED097A3F5
+- **Scope**: Client
+- **Signature**: `Any _0xF3B0E0AED097A3F5(Any p0, Any p1);`
+- **Purpose**: Undocumented native with two unknown parameters.
+- **Parameters / Returns**:
+  - `p0` (`Any`): Unknown.
+  - `p1` (`Any`): Unknown.
+  - **Returns**: `Any` result.
+- **OneSync / Networking**: Entity-related effects require calling on the owner.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_f3b0
+        -- Use: Demonstrates _0xF3B0E0AED097A3F5
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_f3b0', function()
+        _0xF3B0E0AED097A3F5(0, 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_f3b0 */
+    RegisterCommand('veh_f3b0', () => {
+      _0xF3B0E0AED097A3F5(0, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Undocumented native.
+- **Reference**: https://docs.fivem.net/natives/?_0xF3B0E0AED097A3F5
+
+##### _0xF8B49F5BA7F850E7
+- **Name**: _0xF8B49F5BA7F850E7
+- **Scope**: Client
+- **Signature**: `void _0xF8B49F5BA7F850E7(Vehicle vehicle, int p1);`
+- **Purpose**: Undocumented native affecting a vehicle with an unknown flag.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target vehicle.
+  - `p1` (`int`): Unknown.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Must be executed by the vehicle owner for replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_f8b4
+        -- Use: Demonstrates _0xF8B49F5BA7F850E7
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_f8b4', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        _0xF8B49F5BA7F850E7(veh, 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_f8b4 */
+    RegisterCommand('veh_f8b4', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      _0xF8B49F5BA7F850E7(veh, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Undocumented native.
+- **Reference**: https://docs.fivem.net/natives/?_0xF8B49F5BA7F850E7
+
+##### _0xFAF2A78061FD9EF4
+- **Name**: _0xFAF2A78061FD9EF4
+- **Scope**: Client
+- **Signature**: `void _0xFAF2A78061FD9EF4(Any p0, float p1, float p2, float p3);`
+- **Purpose**: Undocumented native with one unknown handle and three floats.
+- **Parameters / Returns**:
+  - `p0` (`Any`): Unknown.
+  - `p1` (`float`): Unknown.
+  - `p2` (`float`): Unknown.
+  - `p3` (`float`): Unknown.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Entity-related effects require calling on the owner.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_faf2
+        -- Use: Demonstrates _0xFAF2A78061FD9EF4
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_faf2', function()
+        _0xFAF2A78061FD9EF4(0, 0.0, 0.0, 0.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_faf2 */
+    RegisterCommand('veh_faf2', () => {
+      _0xFAF2A78061FD9EF4(0, 0.0, 0.0, 0.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Undocumented native.
+- **Reference**: https://docs.fivem.net/natives/?_0xFAF2A78061FD9EF4
+
+##### NetworkUseHighPrecisionVehicleBlending
+- **Name**: NetworkUseHighPrecisionVehicleBlending
+- **Scope**: Client
+- **Signature**: `void _NETWORK_USE_HIGH_PRECISION_VEHICLE_BLENDING(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Toggles high precision interpolation for train vehicles.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target train vehicle.
+  - `toggle` (`BOOL`): Enable or disable high precision blending.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Must run on the train's owner to replicate.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_precblend
+        -- Use: Demonstrates NetworkUseHighPrecisionVehicleBlending
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_precblend', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        NetworkUseHighPrecisionVehicleBlending(veh, true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_precblend */
+    RegisterCommand('veh_precblend', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      NetworkUseHighPrecisionVehicleBlending(veh, true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Implemented only for trains.
+- **Reference**: https://docs.fivem.net/natives/?n=NetworkUseHighPrecisionVehicleBlending
+
+##### OpenBombBayDoors
+- **Name**: OpenBombBayDoors
+- **Scope**: Client
+- **Signature**: `void OPEN_BOMB_BAY_DOORS(Vehicle vehicle);`
+- **Purpose**: Opens the bomb bay doors on supported aircraft.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Aircraft with bomb bay doors.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Call on the aircraft owner to sync door state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_bombbay
+        -- Use: Demonstrates OpenBombBayDoors
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_bombbay', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        OpenBombBayDoors(veh)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_bombbay */
+    RegisterCommand('veh_bombbay', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      OpenBombBayDoors(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires vehicle with bomb bay feature.
+- **Reference**: https://docs.fivem.net/natives/?n=OpenBombBayDoors
+
+##### PausePlaybackRecordedVehicle
+- **Name**: PausePlaybackRecordedVehicle
+- **Scope**: Client
+- **Signature**: `void PAUSE_PLAYBACK_RECORDED_VEHICLE(Vehicle vehicle);`
+- **Purpose**: Pauses a playback recording for the specified vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle using a recording.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Playback must be paused by the owner to replicate.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_pauseplay
+        -- Use: Demonstrates PausePlaybackRecordedVehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_pauseplay', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        PausePlaybackRecordedVehicle(veh)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_pauseplay */
+    RegisterCommand('veh_pauseplay', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      PausePlaybackRecordedVehicle(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Recording must be playing.
+- **Reference**: https://docs.fivem.net/natives/?n=PausePlaybackRecordedVehicle
+
+##### PopOutVehicleWindscreen
+- **Name**: PopOutVehicleWindscreen
+- **Scope**: Client
+- **Signature**: `void POP_OUT_VEHICLE_WINDSCREEN(Vehicle vehicle);`
+- **Purpose**: Detaches the vehicle's windscreen.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target vehicle.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Must run on vehicle owner for replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_windout
+        -- Use: Demonstrates PopOutVehicleWindscreen
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_windout', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        PopOutVehicleWindscreen(veh)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_windout */
+    RegisterCommand('veh_windout', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      PopOutVehicleWindscreen(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Windscreen remains missing until vehicle repaired.
+- **Reference**: https://docs.fivem.net/natives/?n=PopOutVehicleWindscreen
+
+##### PreloadVehicleMod
+- **Name**: PreloadVehicleMod
+- **Scope**: Client
+- **Signature**: `void PRELOAD_VEHICLE_MOD(Any p0, int modType, Any p2);`
+- **Purpose**: Preloads a vehicle mod kit before applying it.
+- **Parameters / Returns**:
+  - `p0` (`Any`): Vehicle handle (assumed).
+  - `modType` (`int`): Mod slot; see `SetVehicleMod` for enum.
+  - `p2` (`Any`): Unknown.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Vehicle owner should call for reliable results.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_preloadmod
+        -- Use: Demonstrates PreloadVehicleMod
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_preloadmod', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        PreloadVehicleMod(veh, 0, 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_preloadmod */
+    RegisterCommand('veh_preloadmod', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      PreloadVehicleMod(veh, 0, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Parameters poorly documented.
+- **Reference**: https://docs.fivem.net/natives/?n=PreloadVehicleMod
+
+##### RaiseConvertibleRoof
+- **Name**: RaiseConvertibleRoof
+- **Scope**: Client
+- **Signature**: `void RAISE_CONVERTIBLE_ROOF(Vehicle vehicle, BOOL instantlyRaise);`
+- **Purpose**: Raises a convertible vehicle's roof with optional instant action.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Convertible vehicle.
+  - `instantlyRaise` (`BOOL`): Skip animation when `true`.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Run on vehicle owner to sync roof state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_roofup
+        -- Use: Demonstrates RaiseConvertibleRoof
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_roofup', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        RaiseConvertibleRoof(veh, false)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_roofup */
+    RegisterCommand('veh_roofup', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      RaiseConvertibleRoof(veh, false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Vehicle must support convertible roofs.
+- **Reference**: https://docs.fivem.net/natives/?n=RaiseConvertibleRoof
+
+##### RaiseRetractableWheels
+- **Name**: RaiseRetractableWheels
+- **Scope**: Client
+- **Signature**: `void _RAISE_RETRACTABLE_WHEELS(Vehicle vehicle);`
+- **Purpose**: Raises retractable wheels on aircraft like planes.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Aircraft with retractable wheels.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Run on vehicle owner to replicate wheel state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_wheelsup
+        -- Use: Demonstrates RaiseRetractableWheels
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_wheelsup', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        RaiseRetractableWheels(veh)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_wheelsup */
+    RegisterCommand('veh_wheelsup', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      RaiseRetractableWheels(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only works on vehicles with retractable wheels.
+- **Reference**: https://docs.fivem.net/natives/?n=RaiseRetractableWheels
+
+##### ReleasePreloadMods
+- **Name**: ReleasePreloadMods
+- **Scope**: Client
+- **Signature**: `void RELEASE_PRELOAD_MODS(Vehicle vehicle);`
+- **Purpose**: Clears preloaded vehicle mods to free memory.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle whose preloaded mods should be released.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Call on owner if mod state must sync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_releasemods
+        -- Use: Demonstrates ReleasePreloadMods
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_releasemods', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        ReleasePreloadMods(veh)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_releasemods */
+    RegisterCommand('veh_releasemods', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      ReleasePreloadMods(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires prior call to `PreloadVehicleMod`.
+- **Reference**: https://docs.fivem.net/natives/?n=ReleasePreloadMods
+
+##### RemovePickUpRopeForCargobob
+- **Name**: RemovePickUpRopeForCargobob
+- **Scope**: Client
+- **Signature**: `void REMOVE_PICK_UP_ROPE_FOR_CARGOBOB(Vehicle cargobob);`
+- **Purpose**: Retracts a Cargobob's hook and disables drop hook natives.
+- **Parameters / Returns**:
+  - `cargobob` (`Vehicle`): Target Cargobob helicopter.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Run on helicopter owner to sync hook state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_retracthook
+        -- Use: Demonstrates RemovePickUpRopeForCargobob
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_retracthook', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        RemovePickUpRopeForCargobob(veh)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_retracthook */
+    RegisterCommand('veh_retracthook', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      RemovePickUpRopeForCargobob(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - After retraction, drop-hook natives no longer work.
+- **Reference**: https://docs.fivem.net/natives/?n=RemovePickUpRopeForCargobob
+
+##### RemoveRoadNodeSpeedZone
+- **Name**: RemoveRoadNodeSpeedZone
+- **Scope**: Client
+- **Signature**: `BOOL REMOVE_ROAD_NODE_SPEED_ZONE(int speedzone);`
+- **Purpose**: Removes a previously added road node speed zone.
+- **Parameters / Returns**:
+  - `speedzone` (`int`): Identifier returned by `AddRoadNodeSpeedZone`.
+  - **Returns**: `BOOL` success.
+- **OneSync / Networking**: Local to runtime; not replicated across clients.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_delspeedzone
+        -- Use: Demonstrates RemoveRoadNodeSpeedZone
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_delspeedzone', function()
+        RemoveRoadNodeSpeedZone(1)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_delspeedzone */
+    RegisterCommand('veh_delspeedzone', () => {
+      RemoveRoadNodeSpeedZone(1);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires existing speed zone id.
+- **Reference**: https://docs.fivem.net/natives/?n=RemoveRoadNodeSpeedZone
+
+##### RemoveVehicleAsset
+- **Name**: RemoveVehicleAsset
+- **Scope**: Client
+- **Signature**: `void REMOVE_VEHICLE_ASSET(int vehicleAsset);`
+- **Purpose**: Releases a previously requested vehicle asset.
+- **Parameters / Returns**:
+  - `vehicleAsset` (`int`): Asset ID to unload.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Asset handling is local and not replicated.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_removeasset
+        -- Use: Demonstrates RemoveVehicleAsset
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_removeasset', function()
+        RemoveVehicleAsset(3)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_removeasset */
+    RegisterCommand('veh_removeasset', () => {
+      RemoveVehicleAsset(3);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Asset must have been requested first.
+- **Reference**: https://docs.fivem.net/natives/?n=RemoveVehicleAsset
+
+##### RemoveVehicleCombatAvoidanceArea
+- **Name**: RemoveVehicleCombatAvoidanceArea
+- **Scope**: Client
+- **Signature**: `void REMOVE_VEHICLE_COMBAT_AVOIDANCE_AREA(Any p0);`
+- **Purpose**: Deletes a previously set vehicle combat avoidance area.
+- **Parameters / Returns**:
+  - `p0` (`Any`): Area identifier.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Local to client; server must manage separately.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_clearavoid
+        -- Use: Demonstrates RemoveVehicleCombatAvoidanceArea
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_clearavoid', function()
+        RemoveVehicleCombatAvoidanceArea(0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_clearavoid */
+    RegisterCommand('veh_clearavoid', () => {
+      RemoveVehicleCombatAvoidanceArea(0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Undocumented parameters.
+- **Reference**: https://docs.fivem.net/natives/?n=RemoveVehicleCombatAvoidanceArea
+
+##### RemoveVehicleHighDetailModel
+- **Name**: RemoveVehicleHighDetailModel
+- **Scope**: Client
+- **Signature**: `void REMOVE_VEHICLE_HIGH_DETAIL_MODEL(Vehicle vehicle);`
+- **Purpose**: Unloads the high detail model of a vehicle to reduce memory.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to downgrade.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Owner should call; other clients may still stream high LOD.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_lowlod
+        -- Use: Demonstrates RemoveVehicleHighDetailModel
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_lowlod', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        RemoveVehicleHighDetailModel(veh)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_lowlod */
+    RegisterCommand('veh_lowlod', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      RemoveVehicleHighDetailModel(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Effects may be undone when vehicle is streamed out/in.
+- **Reference**: https://docs.fivem.net/natives/?n=RemoveVehicleHighDetailModel
+
+##### RemoveVehicleMod
+- **Name**: RemoveVehicleMod
+- **Scope**: Client
+- **Signature**: `void REMOVE_VEHICLE_MOD(Vehicle vehicle, int modType);`
+- **Purpose**: Removes a modification from the specified slot.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to modify.
+  - `modType` (`int`): Mod slot index.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Must run on vehicle owner for replicated mod removal.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_removemod
+        -- Use: Demonstrates RemoveVehicleMod
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_removemod', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        RemoveVehicleMod(veh, 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_removemod */
+    RegisterCommand('veh_removemod', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      RemoveVehicleMod(veh, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Mod kit must be set before removal.
+- **Reference**: https://docs.fivem.net/natives/?n=RemoveVehicleMod
+
+##### RemoveVehicleRecording
+- **Name**: RemoveVehicleRecording
+- **Scope**: Client
+- **Signature**: `void REMOVE_VEHICLE_RECORDING(int recording, char* script);`
+- **Purpose**: Unloads a previously requested vehicle recording.
+- **Parameters / Returns**:
+  - `recording` (`int`): Recording identifier.
+  - `script` (`char*`): Recording name.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Recording assets are local and not synced.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_removerec
+        -- Use: Demonstrates RemoveVehicleRecording
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_removerec', function()
+        RemoveVehicleRecording(1, 'demo')
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_removerec */
+    RegisterCommand('veh_removerec', () => {
+      RemoveVehicleRecording(1, 'demo');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Use with `RequestVehicleRecording` for lifecycle management.
+- **Reference**: https://docs.fivem.net/natives/?n=RemoveVehicleRecording
+
+##### RemoveVehicleShadowEffect
+- **Name**: RemoveVehicleShadowEffect
+- **Scope**: Client
+- **Signature**: `void _REMOVE_VEHICLE_SHADOW_EFFECT(Vehicle vehicle);`
+- **Purpose**: Clears the shadow effect applied by `_SET_VEHICLE_SHADOW_EFFECT`.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to clear effect from.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Call on vehicle owner for replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_unshadow
+        -- Use: Demonstrates RemoveVehicleShadowEffect
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_unshadow', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        RemoveVehicleShadowEffect(veh)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_unshadow */
+    RegisterCommand('veh_unshadow', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      RemoveVehicleShadowEffect(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires prior call to `_SET_VEHICLE_SHADOW_EFFECT`.
+- **Reference**: https://docs.fivem.net/natives/?n=RemoveVehicleShadowEffect
+
+##### RemoveVehicleStuckCheck
+- **Name**: RemoveVehicleStuckCheck
+- **Scope**: Client
+- **Signature**: `void REMOVE_VEHICLE_STUCK_CHECK(Vehicle vehicle);`
+- **Purpose**: Stops monitoring of a vehicle's stuck state.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle previously added to a stuck check.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Run on owner to ensure consistent behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_unstuck
+        -- Use: Demonstrates RemoveVehicleStuckCheck
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_unstuck', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        RemoveVehicleStuckCheck(veh)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_unstuck */
+    RegisterCommand('veh_unstuck', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      RemoveVehicleStuckCheck(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Vehicle must have been added with `AddVehicleStuckCheckWithWarp`.
+- **Reference**: https://docs.fivem.net/natives/?n=RemoveVehicleStuckCheck
+
+##### RemoveVehicleUpsidedownCheck
+- **Name**: RemoveVehicleUpsidedownCheck
+- **Scope**: Client
+- **Signature**: `void REMOVE_VEHICLE_UPSIDEDOWN_CHECK(Vehicle vehicle);`
+- **Purpose**: Stops checking whether a vehicle is upside down.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle previously added to upside-down check.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Call on owner to update monitoring state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_noupside
+        -- Use: Demonstrates RemoveVehicleUpsidedownCheck
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_noupside', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        RemoveVehicleUpsidedownCheck(veh)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_noupside */
+    RegisterCommand('veh_noupside', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      RemoveVehicleUpsidedownCheck(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Vehicle must have had an upside-down check added first.
+- **Reference**: https://docs.fivem.net/natives/?n=RemoveVehicleUpsidedownCheck
+
+##### RemoveVehicleWindow
+- **Name**: RemoveVehicleWindow
+- **Scope**: Client
+- **Signature**: `void REMOVE_VEHICLE_WINDOW(Vehicle vehicle, int windowIndex);`
+- **Purpose**: Removes the specified window from a vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to modify.
+  - `windowIndex` (`int`): Window identifier.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Must run on vehicle owner to sync broken window state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_removewin
+        -- Use: Demonstrates RemoveVehicleWindow
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_removewin', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        RemoveVehicleWindow(veh, 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_removewin */
+    RegisterCommand('veh_removewin', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      RemoveVehicleWindow(veh, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Window indices vary by vehicle model.
+- **Reference**: https://docs.fivem.net/natives/?n=RemoveVehicleWindow
+
+##### RemoveVehiclesFromGeneratorsInArea
+- **Name**: RemoveVehiclesFromGeneratorsInArea
+- **Scope**: Client
+- **Signature**: `void REMOVE_VEHICLES_FROM_GENERATORS_IN_AREA(float x1, float y1, float z1, float x2, float y2, float z2, Any unk);`
+- **Purpose**: Deletes vehicles generated in the specified area.
+- **Parameters / Returns**:
+  - `x1`, `y1`, `z1` (`float`): Corner 1 of area.
+  - `x2`, `y2`, `z2` (`float`): Corner 2 of area.
+  - `unk` (`Any`): Unknown flag.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Remove vehicles only on caller's client; server should manage global cleanup.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_cleararea
+        -- Use: Demonstrates RemoveVehiclesFromGeneratorsInArea
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_cleararea', function()
+        local x, y, z = table.unpack(GetEntityCoords(PlayerPedId()))
+        RemoveVehiclesFromGeneratorsInArea(x-10.0, y-10.0, z-10.0, x+10.0, y+10.0, z+10.0, 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_cleararea */
+    RegisterCommand('veh_cleararea', () => {
+      const [x, y, z] = GetEntityCoords(PlayerPedId());
+      RemoveVehiclesFromGeneratorsInArea(x-10.0, y-10.0, z-10.0, x+10.0, y+10.0, z+10.0, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only affects generated vehicles; existing ones remain.
+- **Reference**: https://docs.fivem.net/natives/?n=RemoveVehiclesFromGeneratorsInArea
+
+##### RequestVehicleAsset
+- **Name**: RequestVehicleAsset
+- **Scope**: Client
+- **Signature**: `void REQUEST_VEHICLE_ASSET(Hash vehicleHash, int vehicleAsset);`
+- **Purpose**: Requests streaming of a vehicle's asset variant.
+- **Parameters / Returns**:
+  - `vehicleHash` (`Hash`): Model hash of vehicle.
+  - `vehicleAsset` (`int`): Asset slot to load.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Asset requests are local.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_requestasset
+        -- Use: Demonstrates RequestVehicleAsset
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_requestasset', function()
+        RequestVehicleAsset(GetHashKey('cargobob3'), 3)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_requestasset */
+    RegisterCommand('veh_requestasset', () => {
+      RequestVehicleAsset(GetHashKey('cargobob3'), 3);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Must call `RemoveVehicleAsset` to unload.
+- **Reference**: https://docs.fivem.net/natives/?n=RequestVehicleAsset
+
+CONTINUE-HERE — 2025-09-12T07:20:05+00:00 — next: Vehicle :: RequestVehicleDashboardScaleformMovie
