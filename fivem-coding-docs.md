@@ -430,13 +430,13 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Overall | 6442 | 808 | 5634 | 2025-09-12T08:02:02+00:00 |
+| Overall | 6442 | 833 | 5609 | 2025-09-12T08:12:15+00:00 |
 | Player | 248 | 248 | 0 | 2025-09-11T06:38 |
 | Recording | 17 | 17 | 0 | 2025-09-11T06:52 |
 | Replay | 6 | 6 | 0 | 2025-09-11T07:37 |
 | ACL | 10 | 10 | 0 | 2025-09-11T08:12 |
 | CFX | 50 | 50 | 0 | 2025-09-11T09:55 |
-| Vehicle | 751 | 477 | 274 | 2025-09-12T08:02:02+00:00 |
+| Vehicle | 751 | 502 | 249 | 2025-09-12T08:12:15+00:00 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -29370,4 +29370,932 @@ RegisterCommand('rgb', () => {
 - **Caveats / Limitations**:
   - Only affects ambient AI vehicles.
 - **Reference**: https://docs.fivem.net/natives/?n=SetGarbageTrucks
-CONTINUE-HERE — 2025-09-12T08:02:02+00:00 — next: Vehicle :: SetHeliBladesFullSpeed
+##### SetHeliBladesFullSpeed
+- **Name**: SetHeliBladesFullSpeed
+- **Scope**: Client
+- **Signature**: `void SET_HELI_BLADES_FULL_SPEED(Vehicle vehicle);`
+- **Purpose**: Spins helicopter or plane blades at maximum rate.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target helicopter or plane.
+  - **Returns**: `void`
+- **OneSync / Networking**: Call on the entity owner so other players see the change.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: heliblades
+        -- Use: Spin rotor at full speed
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('heliblades', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetHeliBladesFullSpeed(veh) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: heliblades */
+    RegisterCommand('heliblades', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetHeliBladesFullSpeed(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Works on helicopters and planes.
+- **Reference**: https://docs.fivem.net/natives/?n=SetHeliBladesFullSpeed
+
+##### SetHeliBladesSpeed
+- **Name**: SetHeliBladesSpeed
+- **Scope**: Client
+- **Signature**: `void SET_HELI_BLADES_SPEED(Vehicle vehicle, float speed);`
+- **Purpose**: Sets rotor speed as fraction of full speed.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Helicopter or plane.
+  - `speed` (`float`): 0.0–1.0 multiplier.
+  - **Returns**: `void`
+- **OneSync / Networking**: Ownership required for synced vehicles.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: helispeed
+        -- Use: Set rotor speed percent
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('helispeed', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetHeliBladesSpeed(veh, tonumber(args[1]) or 1.0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: helispeed */
+    RegisterCommand('helispeed', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetHeliBladesSpeed(veh, parseFloat(args[0]) || 1.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Input outside 0.0–1.0 is clamped by the game.
+- **Reference**: https://docs.fivem.net/natives/?n=SetHeliBladesSpeed
+
+##### SetHeliCombatOffset
+- **Name**: SetHeliCombatOffset
+- **Scope**: Client
+- **Signature**: `void SET_HELI_COMBAT_OFFSET(Vehicle vehicle, float x, float y, float z);`
+- **Purpose**: Offsets chase position for AI helis in combat.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Helicopter handle.
+  - `x` (`float`): Lateral offset.
+  - `y` (`float`): Forward offset.
+  - `z` (`float`): Vertical offset.
+  - **Returns**: `void`
+- **OneSync / Networking**: Only affects local AI behavior; no replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: helioffset
+        -- Use: Shift combat offset
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('helioffset', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetHeliCombatOffset(veh, 5.0, 0.0, 2.0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: helioffset */
+    RegisterCommand('helioffset', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetHeliCombatOffset(veh, 5.0, 0.0, 2.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Introduced in build v1180.
+- **Reference**: https://docs.fivem.net/natives/?n=SetHeliCombatOffset
+
+##### _SetHeliMainRotorHealth
+- **Name**: _SetHeliMainRotorHealth
+- **Scope**: Client
+- **Signature**: `void _SET_HELI_MAIN_ROTOR_HEALTH(Vehicle vehicle, float health);`
+- **Purpose**: Adjusts main rotor damage level.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Helicopter.
+  - `health` (`float`): Rotor health value.
+  - **Returns**: `void`
+- **OneSync / Networking**: Requires entity control for network sync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: rotorhealth
+        -- Use: Set rotor health
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('rotorhealth', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then _SetHeliMainRotorHealth(veh, tonumber(args[1]) or 1000.0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: rotorhealth */
+    RegisterCommand('rotorhealth', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) _SetHeliMainRotorHealth(veh, parseFloat(args[0]) || 1000.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Official docs lack health range details.
+  - TODO(next-run): verify acceptable health range.
+- **Reference**: https://docs.fivem.net/natives/?n=_SetHeliMainRotorHealth
+
+##### SetHeliResistToExplosion
+- **Name**: SetHeliResistToExplosion
+- **Scope**: Client
+- **Signature**: `void SET_HELI_RESIST_TO_EXPLOSION(Vehicle helicopter, BOOL bResistToExplosion);`
+- **Purpose**: Allows helicopters to survive multiple explosions.
+- **Parameters / Returns**:
+  - `helicopter` (`Vehicle`): Target heli.
+  - `bResistToExplosion` (`bool`): Enable resistance.
+  - **Returns**: `void`
+- **OneSync / Networking**: Ownership required for networked helicopters.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: heliresist
+        -- Use: Toggle explosion resistance
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('heliresist', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetHeliResistToExplosion(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: heliresist */
+    RegisterCommand('heliresist', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetHeliResistToExplosion(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Introduced in game build 2545.
+- **Reference**: https://docs.fivem.net/natives/?n=SetHeliResistToExplosion
+
+##### SetHeliTailBoomCanBreakOff
+- **Name**: SetHeliTailBoomCanBreakOff
+- **Scope**: Client
+- **Signature**: `void SET_HELI_TAIL_BOOM_CAN_BREAK_OFF(Vehicle heli, BOOL toggle);`
+- **Purpose**: Enables or disables tail boom detachment on damage.
+- **Parameters / Returns**:
+  - `heli` (`Vehicle`): Helicopter handle.
+  - `toggle` (`bool`): Allow tail boom to detach.
+  - **Returns**: `void`
+- **OneSync / Networking**: Entity owner must call for replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: tailboom
+        -- Use: Toggle tail boom break-off
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('tailboom', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetHeliTailBoomCanBreakOff(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: tailboom */
+    RegisterCommand('tailboom', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetHeliTailBoomCanBreakOff(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only functional on helicopter vehicles.
+- **Reference**: https://docs.fivem.net/natives/?n=SetHeliTailBoomCanBreakOff
+
+##### _SetHeliTailRotorHealth
+- **Name**: _SetHeliTailRotorHealth
+- **Scope**: Client
+- **Signature**: `void _SET_HELI_TAIL_ROTOR_HEALTH(Vehicle vehicle, float health);`
+- **Purpose**: Adjusts tail rotor damage level.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Helicopter.
+  - `health` (`float`): Tail rotor health value.
+  - **Returns**: `void`
+- **OneSync / Networking**: Requires entity control for synced helicopters.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: tailhealth
+        -- Use: Set tail rotor health
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('tailhealth', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then _SetHeliTailRotorHealth(veh, tonumber(args[1]) or 1000.0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: tailhealth */
+    RegisterCommand('tailhealth', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) _SetHeliTailRotorHealth(veh, parseFloat(args[0]) || 1000.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Health range undocumented.
+  - TODO(next-run): verify valid range.
+- **Reference**: https://docs.fivem.net/natives/?n=_SetHeliTailRotorHealth
+
+##### SetHeliTurbulenceScalar
+- **Name**: SetHeliTurbulenceScalar
+- **Scope**: Client
+- **Signature**: `void SET_HELI_TURBULENCE_SCALAR(Vehicle vehicle, float p1);`
+- **Purpose**: Scales turbulence applied to a helicopter.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Helicopter.
+  - `p1` (`float`): Undocumented scalar.
+  - **Returns**: `void`
+- **OneSync / Networking**: Call on owner for networked vehicles.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: turbulence
+        -- Use: Adjust turbulence
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('turbulence', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetHeliTurbulenceScalar(veh, tonumber(args[1]) or 1.0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: turbulence */
+    RegisterCommand('turbulence', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetHeliTurbulenceScalar(veh, parseFloat(args[0]) || 1.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Parameter meaning undocumented.
+  - TODO(next-run): verify effect of `p1`.
+- **Reference**: https://docs.fivem.net/natives/?n=SetHeliTurbulenceScalar
+
+##### _SetHelicopterRollPitchYawMult
+- **Name**: _SetHelicopterRollPitchYawMult
+- **Scope**: Client
+- **Signature**: `void _SET_HELICOPTER_ROLL_PITCH_YAW_MULT(Vehicle helicopter, float multiplier);`
+- **Purpose**: Scales roll/pitch/yaw responsiveness.
+- **Parameters / Returns**:
+  - `helicopter` (`Vehicle`): Target heli.
+  - `multiplier` (`float`): 0.0–1.0 responsiveness.
+  - **Returns**: `void`
+- **OneSync / Networking**: Ownership required for replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: helimult
+        -- Use: Adjust handling multiplier
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('helimult', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then _SetHelicopterRollPitchYawMult(veh, tonumber(args[1]) or 1.0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: helimult */
+    RegisterCommand('helimult', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) _SetHelicopterRollPitchYawMult(veh, parseFloat(args[0]) || 1.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Multiplier outside 0.0–1.0 undefined.
+- **Reference**: https://docs.fivem.net/natives/?n=_SetHelicopterRollPitchYawMult
+
+##### SetHoverModeWingRatio
+- **Name**: SetHoverModeWingRatio
+- **Scope**: Client
+- **Signature**: `void SET_HOVER_MODE_WING_RATIO(Vehicle vehicle, float ratio);`
+- **Purpose**: Opens or closes Deluxo/Oppressor wings.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target vehicle.
+  - `ratio` (`float`): 0.0 closed, 1.0 open.
+  - **Returns**: `void`
+- **OneSync / Networking**: Use on owning client for proper sync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: wings
+        -- Use: Toggle hover wings
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('wings', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetHoverModeWingRatio(veh, tonumber(args[1]) or 1.0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: wings */
+    RegisterCommand('wings', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetHoverModeWingRatio(veh, parseFloat(args[0]) || 1.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Deluxo requires sufficient altitude to deploy.
+- **Reference**: https://docs.fivem.net/natives/?n=SetHoverModeWingRatio
+
+##### _SetHydraulicRaised
+- **Name**: _SetHydraulicRaised
+- **Scope**: Client
+- **Signature**: `void _SET_HYDRAULIC_RAISED(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Raises or lowers hydraulics on supported vehicles.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Lowrider vehicle.
+  - `toggle` (`bool`): True to raise.
+  - **Returns**: `void`
+- **OneSync / Networking**: Call on entity owner.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: hydroraised
+        -- Use: Toggle hydraulic raise
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('hydroraised', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then _SetHydraulicRaised(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: hydroraised */
+    RegisterCommand('hydroraised', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) _SetHydraulicRaised(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only works on vehicles with hydraulics.
+- **Reference**: https://docs.fivem.net/natives/?n=_SetHydraulicRaised
+
+##### _SetHydraulicWheelState
+- **Name**: _SetHydraulicWheelState
+- **Scope**: Client
+- **Signature**: `void _SET_HYDRAULIC_WHEEL_STATE(Vehicle vehicle, int state);`
+- **Purpose**: Sets hydraulic configuration for all wheels.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target vehicle.
+  - `state` (`int`): Hydraulic state index.
+  - **Returns**: `void`
+- **OneSync / Networking**: Ownership required.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: hydrostate
+        -- Use: Apply wheel state
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('hydrostate', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then _SetHydraulicWheelState(veh, tonumber(args[1]) or 0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: hydrostate */
+    RegisterCommand('hydrostate', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) _SetHydraulicWheelState(veh, parseInt(args[0]) || 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - State values undocumented.
+  - TODO(next-run): map valid states.
+- **Reference**: https://docs.fivem.net/natives/?n=_SetHydraulicWheelState
+
+##### _SetHydraulicWheelStateTransition
+- **Name**: _SetHydraulicWheelStateTransition
+- **Scope**: Client
+- **Signature**: `void _SET_HYDRAULIC_WHEEL_STATE_TRANSITION(Vehicle vehicle, int wheelId, int state, float value, float p4);`
+- **Purpose**: Animates hydraulic wheel transitions.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target vehicle.
+  - `wheelId` (`int`): Wheel index.
+  - `state` (`int`): Transition state (0 reset, 1 raise, 2 jump).
+  - `value` (`float`): Height or force.
+  - `p4` (`float`): Unknown.
+  - **Returns**: `void`
+- **OneSync / Networking**: Use by entity owner for sync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: hydrowheel
+        -- Use: Raise wheel 0
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('hydrowheel', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then _SetHydraulicWheelStateTransition(veh, 0, 1, 1.0, 0.0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: hydrowheel */
+    RegisterCommand('hydrowheel', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) _SetHydraulicWheelStateTransition(veh, 0, 1, 1.0, 0.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - `p4` purpose undocumented.
+- **Reference**: https://docs.fivem.net/natives/?n=_SetHydraulicWheelStateTransition
+
+##### _SetHydraulicWheelValue
+- **Name**: _SetHydraulicWheelValue
+- **Scope**: Client
+- **Signature**: `void _SET_HYDRAULIC_WHEEL_VALUE(Vehicle vehicle, int wheelId, float value);`
+- **Purpose**: Directly sets hydraulic wheel height.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target vehicle.
+  - `wheelId` (`int`): Wheel index.
+  - `value` (`float`): Height value.
+  - **Returns**: `void`
+- **OneSync / Networking**: Ownership required.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: hydrovalue
+        -- Use: Set wheel height
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('hydrovalue', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then _SetHydraulicWheelValue(veh, 0, tonumber(args[1]) or 1.0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: hydrovalue */
+    RegisterCommand('hydrovalue', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) _SetHydraulicWheelValue(veh, 0, parseFloat(args[0]) || 1.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Works only on vehicles supporting hydraulics.
+- **Reference**: https://docs.fivem.net/natives/?n=_SetHydraulicWheelValue
+
+##### SetLastDrivenVehicle
+- **Name**: SetLastDrivenVehicle
+- **Scope**: Client
+- **Signature**: `void SET_LAST_DRIVEN_VEHICLE(Vehicle vehicle);`
+- **Purpose**: Stores vehicle as the last driven by the player.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to mark.
+  - **Returns**: `void`
+- **OneSync / Networking**: Local only; no network replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: lastveh
+        -- Use: Mark last driven vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('lastveh', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetLastDrivenVehicle(veh) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: lastveh */
+    RegisterCommand('lastveh', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetLastDrivenVehicle(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Behavior of stored handle is undocumented.
+- **Reference**: https://docs.fivem.net/natives/?n=SetLastDrivenVehicle
+
+##### SetLightsCutoffDistanceTweak
+- **Name**: SetLightsCutoffDistanceTweak
+- **Scope**: Client
+- **Signature**: `void SET_LIGHTS_CUTOFF_DISTANCE_TWEAK(float distance);`
+- **Purpose**: Adjusts headlight cutoff distance globally.
+- **Parameters / Returns**:
+  - `distance` (`float`): New cutoff distance.
+  - **Returns**: `void`
+- **OneSync / Networking**: Local visual change only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: lightsdist
+        -- Use: Set light cutoff distance
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('lightsdist', function(_, args)
+        SetLightsCutoffDistanceTweak(tonumber(args[1]) or 50.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: lightsdist */
+    RegisterCommand('lightsdist', (_src, args) => {
+      SetLightsCutoffDistanceTweak(parseFloat(args[0]) || 50.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Affects all vehicles for the local player.
+- **Reference**: https://docs.fivem.net/natives/?n=SetLightsCutoffDistanceTweak
+
+##### SetMissionTrainAsNoLongerNeeded
+- **Name**: SetMissionTrainAsNoLongerNeeded
+- **Scope**: Client
+- **Signature**: `void SET_MISSION_TRAIN_AS_NO_LONGER_NEEDED(Vehicle* train, BOOL p1);`
+- **Purpose**: Releases a scripted train entity.
+- **Parameters / Returns**:
+  - `train` (`Vehicle*`): Train handle pointer.
+  - `p1` (`bool`): Always false per docs.
+  - **Returns**: `void`
+- **OneSync / Networking**: Client-side; ensure server deletes entity.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: releasetrain
+        -- Use: Release mission train
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('releasetrain', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetMissionTrainAsNoLongerNeeded(veh, false)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: releasetrain */
+    RegisterCommand('releasetrain', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetMissionTrainAsNoLongerNeeded(veh, false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - `p1` parameter ignored.
+- **Reference**: https://docs.fivem.net/natives/?n=SetMissionTrainAsNoLongerNeeded
+
+##### SetMissionTrainCoords
+- **Name**: SetMissionTrainCoords
+- **Scope**: Client
+- **Signature**: `void SET_MISSION_TRAIN_COORDS(Vehicle train, float x, float y, float z);`
+- **Purpose**: Teleports mission train to coordinates.
+- **Parameters / Returns**:
+  - `train` (`Vehicle`): Train handle.
+  - `x` (`float`): X coordinate.
+  - `y` (`float`): Y coordinate.
+  - `z` (`float`): Z coordinate.
+  - **Returns**: `void`
+- **OneSync / Networking**: Ownership required to sync position.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: trainpos
+        -- Use: Move train
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('trainpos', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetMissionTrainCoords(veh, 1000.0, 1000.0, 40.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: trainpos */
+    RegisterCommand('trainpos', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetMissionTrainCoords(veh, 1000.0, 1000.0, 40.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Use for mission trains only.
+- **Reference**: https://docs.fivem.net/natives/?n=SetMissionTrainCoords
+
+##### SetNitrousIsActive
+- **Name**: SetNitrousIsActive
+- **Scope**: Client
+- **Signature**: `void SET_NITROUS_IS_ACTIVE(Vehicle vehicle, BOOL isActive);`
+- **Purpose**: Toggles vehicle nitrous system.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target vehicle.
+  - `isActive` (`bool`): Enable nitrous.
+  - **Returns**: `void`
+- **OneSync / Networking**: Requires entity control; combine with SetOverrideNitrousLevel for custom behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: nitrous
+        -- Use: Toggle nitrous
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('nitrous', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetNitrousIsActive(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: nitrous */
+    RegisterCommand('nitrous', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetNitrousIsActive(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Introduced in build 3095.
+- **Reference**: https://docs.fivem.net/natives/?n=SetNitrousIsActive
+
+##### SetNumberOfParkedVehicles
+- **Name**: SetNumberOfParkedVehicles
+- **Scope**: Client
+- **Signature**: `void SET_NUMBER_OF_PARKED_VEHICLES(int value);`
+- **Purpose**: Adjusts global parked vehicle density.
+- **Parameters / Returns**:
+  - `value` (`int`): Desired count multiplier.
+  - **Returns**: `void`
+- **OneSync / Networking**: Local ambient setting; server should broadcast if needed.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: parkeddensity
+        -- Use: Set parked vehicle count
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('parkeddensity', function(_, args)
+        SetNumberOfParkedVehicles(tonumber(args[1]) or 1)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: parkeddensity */
+    RegisterCommand('parkeddensity', (_src, args) => {
+      SetNumberOfParkedVehicles(parseInt(args[0]) || 1);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Affects ambient spawn system only.
+- **Reference**: https://docs.fivem.net/natives/?n=SetNumberOfParkedVehicles
+
+##### SetOpenRearDoorsOnExplosion
+- **Name**: SetOpenRearDoorsOnExplosion
+- **Scope**: Client
+- **Signature**: `void SET_OPEN_REAR_DOORS_ON_EXPLOSION(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Allows armored vehicle rear doors to open after explosion.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target vehicle.
+  - `toggle` (`bool`): Enable door opening.
+  - **Returns**: `void`
+- **OneSync / Networking**: Call on entity owner to replicate door state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: expldoor
+        -- Use: Toggle rear door opening
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('expldoor', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetOpenRearDoorsOnExplosion(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: expldoor */
+    RegisterCommand('expldoor', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetOpenRearDoorsOnExplosion(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Useful for vehicles like Stockade.
+- **Reference**: https://docs.fivem.net/natives/?n=SetOpenRearDoorsOnExplosion
+
+##### _SetOppressorTransformState
+- **Name**: _SetOppressorTransformState
+- **Scope**: Client
+- **Signature**: `void _SET_OPPRESSOR_TRANSFORM_STATE(Vehicle vehicle, BOOL extend);`
+- **Purpose**: Extends or retracts Oppressor wings.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Oppressor bike.
+  - `extend` (`bool`): True to extend.
+  - **Returns**: `void`
+- **OneSync / Networking**: Requires vehicle ownership to replicate.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: oppressor
+        -- Use: Toggle wing state
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('oppressor', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then _SetOppressorTransformState(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: oppressor */
+    RegisterCommand('oppressor', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) _SetOppressorTransformState(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Tested on Oppressor only.
+- **Reference**: https://docs.fivem.net/natives/?n=_SetOppressorTransformState
+
+##### SetOverrideNitrousLevel
+- **Name**: SetOverrideNitrousLevel
+- **Scope**: Client
+- **Signature**: `void SET_OVERRIDE_NITROUS_LEVEL(Vehicle vehicle, BOOL override);`
+- **Purpose**: Overrides nitrous parameters for a vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target vehicle.
+  - `override` (`bool`): Enable override; extra params available in newer builds.
+  - **Returns**: `void`
+- **OneSync / Networking**: Call on entity owner for proper sync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: nitrooverride
+        -- Use: Enable nitrous override
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('nitrooverride', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetOverrideNitrousLevel(veh, true, 5.0, 5.0, 5.0, false) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: nitrooverride */
+    RegisterCommand('nitrooverride', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetOverrideNitrousLevel(veh, true, 5.0, 5.0, 5.0, false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Extra parameters require game build 2060+.
+- **Reference**: https://docs.fivem.net/natives/?n=SetOverrideNitrousLevel
+
+##### SetParkedVehicleDensityMultiplierThisFrame
+- **Name**: SetParkedVehicleDensityMultiplierThisFrame
+- **Scope**: Client
+- **Signature**: `void SET_PARKED_VEHICLE_DENSITY_MULTIPLIER_THIS_FRAME(float multiplier);`
+- **Purpose**: Temporarily scales parked vehicle density for this frame.
+- **Parameters / Returns**:
+  - `multiplier` (`float`): Density multiplier.
+  - **Returns**: `void`
+- **OneSync / Networking**: Local effect only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: parkframe
+        -- Use: Set parked density this frame
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('parkframe', function(_, args)
+        SetParkedVehicleDensityMultiplierThisFrame(tonumber(args[1]) or 1.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: parkframe */
+    RegisterCommand('parkframe', (_src, args) => {
+      SetParkedVehicleDensityMultiplierThisFrame(parseFloat(args[0]) || 1.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Must be called every frame to persist effect.
+- **Reference**: https://docs.fivem.net/natives/?n=SetParkedVehicleDensityMultiplierThisFrame
+
+##### SetPickupRopeLengthForCargobob
+- **Name**: SetPickupRopeLengthForCargobob
+- **Scope**: Client
+- **Signature**: `void SET_PICKUP_ROPE_LENGTH_FOR_CARGOBOB(Vehicle cargobob, float length1, float length2, BOOL state);`
+- **Purpose**: Adjusts the cargo hook rope length.
+- **Parameters / Returns**:
+  - `cargobob` (`Vehicle`): Cargobob helicopter.
+  - `length1` (`float`): Primary length (min 1.9, max 100.0).
+  - `length2` (`float`): Secondary length.
+  - `state` (`bool`): Activate adjustment.
+  - **Returns**: `void`
+- **OneSync / Networking**: Ownership required to sync rope position.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: ropelength
+        -- Use: Set Cargobob rope length
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('ropelength', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetPickupRopeLengthForCargobob(veh, tonumber(args[1]) or 5.0, tonumber(args[2]) or 5.0, true) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: ropelength */
+    RegisterCommand('ropelength', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetPickupRopeLengthForCargobob(veh, parseFloat(args[0]) || 5.0, parseFloat(args[1]) || 5.0, true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Length outside 1.9–100.0 is clamped.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPickupRopeLengthForCargobob
+
+CONTINUE-HERE — 2025-09-12T08:12:15+00:00 — next: Vehicle :: SetPlaneAvoidsOther
