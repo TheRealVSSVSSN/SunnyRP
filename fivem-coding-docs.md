@@ -430,13 +430,13 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Overall | 6442 | 608 | 5834 | 2025-09-12T06:04:29+00:00 |
+| Overall | 6442 | 633 | 5809 | 2025-09-12T06:14:47+00:00 |
 | Player | 248 | 248 | 0 | 2025-09-11T06:38 |
 | Recording | 17 | 17 | 0 | 2025-09-11T06:52 |
 | Replay | 6 | 6 | 0 | 2025-09-11T07:37 |
 | ACL | 10 | 10 | 0 | 2025-09-11T08:12 |
 | CFX | 50 | 50 | 0 | 2025-09-11T09:55 |
-| Vehicle | 751 | 277 | 474 | 2025-09-12T06:04:29+00:00 |
+| Vehicle | 751 | 302 | 449 | 2025-09-12T06:14:47+00:00 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -22067,4 +22067,916 @@ RegisterCommand('rgb', () => {
 - **Caveats / Limitations**:
   - Applicable only to gen9 titles (e.g., expanded/HSW content).
 - **Reference**: https://docs.fivem.net/natives/?n=IsVehicleModGen9Exclusive
-CONTINUE-HERE — 2025-09-12T06:04:29+00:00 — next: Vehicle :: IsVehicleModel
+
+##### IsVehicleModel
+- **Name**: IsVehicleModel
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_VEHICLE_MODEL(Vehicle vehicle, Hash model)`
+- **Purpose**: Returns true if a vehicle's model matches the given hash.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - `model` (`Hash`): Model hash to compare.
+  - **Returns**: `bool` match flag.
+- **OneSync / Networking**: Requires entity ownership for reliable model detection.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_ismodel
+        -- Use: Prints if player's vehicle is an Adder
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_ismodel', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsVehicleModel(veh, `adder`))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_ismodel */
+    RegisterCommand('veh_ismodel', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsVehicleModel(veh, GetHashKey('adder')));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Model must be streamed in before comparison.
+- **Reference**: https://docs.fivem.net/natives/?n=IsVehicleModel
+
+##### IsVehicleNeonLightEnabled
+- **Name**: IsVehicleNeonLightEnabled
+- **Scope**: Shared
+- **Signature(s)**: `BOOL _IS_VEHICLE_NEON_LIGHT_ENABLED(Vehicle vehicle, int index)`
+- **Purpose**: Checks whether a specific neon light on a vehicle is enabled.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - `index` (`int`): Neon position (0–3: FL, FR, RL, RR).
+  - **Returns**: `bool` enabled flag.
+- **OneSync / Networking**: Neon state may not sync for vehicles you do not own.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_neon
+        -- Use: Prints if front-left neon is on
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_neon', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsVehicleNeonLightEnabled(veh, 0))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_neon */
+    RegisterCommand('veh_neon', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsVehicleNeonLightEnabled(veh, 0));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only valid for vehicles that support neon lights.
+- **Reference**: https://docs.fivem.net/natives/?n=_IS_VEHICLE_NEON_LIGHT_ENABLED
+
+##### IsVehicleOnAllWheels
+- **Name**: IsVehicleOnAllWheels
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_VEHICLE_ON_ALL_WHEELS(Vehicle vehicle)`
+- **Purpose**: Returns true if the vehicle currently has all wheels touching the ground.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to check.
+  - **Returns**: `bool` all-wheels flag.
+- **OneSync / Networking**: Physics queries require ownership for remote vehicles.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_allwheels
+        -- Use: Prints if vehicle is fully grounded
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_allwheels', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsVehicleOnAllWheels(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_allwheels */
+    RegisterCommand('veh_allwheels', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsVehicleOnAllWheels(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Off-road physics may report false negatives on steep angles.
+- **Reference**: https://docs.fivem.net/natives/?n=IsVehicleOnAllWheels
+
+##### IsVehicleOnBoostPad
+- **Name**: IsVehicleOnBoostPad
+- **Scope**: Shared
+- **Signature(s)**: `BOOL _IS_VEHICLE_ON_BOOST_PAD(Vehicle vehicle)`
+- **Purpose**: Detects if the vehicle is currently on a stunt-race boost pad.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - **Returns**: `bool` boost-pad flag.
+- **OneSync / Networking**: Local track data may not exist on the server.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_boostpad
+        -- Use: Prints if vehicle is on a boost pad
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_boostpad', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsVehicleOnBoostPad(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_boostpad */
+    RegisterCommand('veh_boostpad', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsVehicleOnBoostPad(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Applicable mainly in stunt race contexts.
+- **Reference**: https://docs.fivem.net/natives/?n=_IS_VEHICLE_ON_BOOST_PAD
+
+##### IsVehicleParachuteActive
+- **Name**: IsVehicleParachuteActive
+- **Scope**: Shared
+- **Signature(s)**: `BOOL _IS_VEHICLE_PARACHUTE_ACTIVE(Vehicle vehicle)`
+- **Purpose**: Checks whether a vehicle's deployed parachute is active.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target vehicle.
+  - **Returns**: `bool` parachute state.
+- **OneSync / Networking**: Parachute state syncs only for owned vehicles.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_parachute
+        -- Use: Prints if vehicle parachute is active
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_parachute', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsVehicleParachuteActive(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_parachute */
+    RegisterCommand('veh_parachute', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsVehicleParachuteActive(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only certain stunt vehicles support parachutes.
+- **Reference**: https://docs.fivem.net/natives/?n=_IS_VEHICLE_PARACHUTE_ACTIVE
+
+##### IsVehicleRocketBoostActive
+- **Name**: IsVehicleRocketBoostActive
+- **Scope**: Shared
+- **Signature(s)**: `BOOL _IS_VEHICLE_ROCKET_BOOST_ACTIVE(Vehicle vehicle)`
+- **Purpose**: Returns true while a vehicle's rocket boost is firing.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle with rocket boost.
+  - **Returns**: `bool` boost state.
+- **OneSync / Networking**: Requires ownership to detect active boost.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_rocket
+        -- Use: Prints if rocket boost is active
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_rocket', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsVehicleRocketBoostActive(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_rocket */
+    RegisterCommand('veh_rocket', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsVehicleRocketBoostActive(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only applies to vehicles equipped with rocket boost modules.
+- **Reference**: https://docs.fivem.net/natives/?n=_IS_VEHICLE_ROCKET_BOOST_ACTIVE
+
+##### IsVehicleSearchlightOn
+- **Name**: IsVehicleSearchlightOn
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_VEHICLE_SEARCHLIGHT_ON(Vehicle vehicle)`
+- **Purpose**: Determines if a vehicle's searchlight is currently on.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - **Returns**: `bool` searchlight flag.
+- **OneSync / Networking**: State replicates to others when owner toggles the light.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_searchlight
+        -- Use: Prints if searchlight is on
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_searchlight', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsVehicleSearchlightOn(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_searchlight */
+    RegisterCommand('veh_searchlight', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsVehicleSearchlightOn(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only applicable to vehicles equipped with searchlights.
+- **Reference**: https://docs.fivem.net/natives/?n=IsVehicleSearchlightOn
+
+##### IsVehicleSeatFree
+- **Name**: IsVehicleSeatFree
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_VEHICLE_SEAT_FREE(Vehicle vehicle, int seatIndex)`
+- **Purpose**: Checks whether a specified seat in a vehicle is unoccupied.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to inspect.
+  - `seatIndex` (`int`): Seat identifier (e.g., `-1` driver).
+  - **Returns**: `bool` seat availability.
+- **OneSync / Networking**: Seat occupancy syncs for networked vehicles.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: seat_free
+        -- Use: Prints if passenger seat is free
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('seat_free', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsVehicleSeatFree(veh, 0))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: seat_free */
+    RegisterCommand('seat_free', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsVehicleSeatFree(veh, 0));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Seat indices vary across vehicle types.
+- **Reference**: https://docs.fivem.net/natives/?n=IsVehicleSeatFree
+
+##### IsVehicleSirenAudioOn
+- **Name**: IsVehicleSirenAudioOn
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_VEHICLE_SIREN_AUDIO_ON(Vehicle vehicle)`
+- **Purpose**: Checks if the vehicle's siren sound is active.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to check.
+  - **Returns**: `bool` audio active flag.
+- **OneSync / Networking**: Siren audio state is replicated from the controlling client.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: siren_audio
+        -- Use: Prints if siren audio is on
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('siren_audio', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsVehicleSirenAudioOn(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: siren_audio */
+    RegisterCommand('siren_audio', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsVehicleSirenAudioOn(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Audio may be muted if `MuteSirens` is enabled.
+- **Reference**: https://docs.fivem.net/natives/?n=IsVehicleSirenAudioOn
+
+##### IsVehicleSirenOn
+- **Name**: IsVehicleSirenOn
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_VEHICLE_SIREN_ON(Vehicle vehicle)`
+- **Purpose**: Returns true if vehicle emergency lights are active.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to check.
+  - **Returns**: `bool` siren state.
+- **OneSync / Networking**: Requires entity ownership for state changes.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: siren_on
+        -- Use: Prints if siren lights are on
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('siren_on', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsVehicleSirenOn(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: siren_on */
+    RegisterCommand('siren_on', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsVehicleSirenOn(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Lights can be active without audio.
+- **Reference**: https://docs.fivem.net/natives/?n=IsVehicleSirenOn
+
+##### IsVehicleSlipstreamLeader
+- **Name**: IsVehicleSlipstreamLeader
+- **Scope**: Shared
+- **Signature(s)**: `BOOL _IS_VEHICLE_SLIPSTREAM_LEADER(Vehicle vehicle)`
+- **Purpose**: Determines if a vehicle is the lead vehicle in a slipstream chain.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to check.
+  - **Returns**: `bool` leader flag.
+- **OneSync / Networking**: Slipstream data is local to race scripts.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: slip_leader
+        -- Use: Prints if vehicle is slipstream leader
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('slip_leader', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsVehicleSlipstreamLeader(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: slip_leader */
+    RegisterCommand('slip_leader', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsVehicleSlipstreamLeader(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only relevant in slipstream-enabled races.
+- **Reference**: https://docs.fivem.net/natives/?n=_IS_VEHICLE_SLIPSTREAM_LEADER
+
+##### IsVehicleSprayable
+- **Name**: IsVehicleSprayable
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_VEHICLE_SPRAYABLE(Vehicle vehicle)`
+- **Purpose**: Returns whether the vehicle can be resprayed in mod shops.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - **Returns**: `bool` sprayable flag.
+- **OneSync / Networking**: Pure lookup; no replication concerns.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_sprayable
+        -- Use: Prints if vehicle can be resprayed
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_sprayable', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsVehicleSprayable(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_sprayable */
+    RegisterCommand('veh_sprayable', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsVehicleSprayable(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Certain mission vehicles cannot be resprayed.
+- **Reference**: https://docs.fivem.net/natives/?n=IsVehicleSprayable
+
+##### IsVehicleStolen
+- **Name**: IsVehicleStolen
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_VEHICLE_STOLEN(Vehicle vehicle)`
+- **Purpose**: Indicates whether the vehicle is flagged as stolen.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - **Returns**: `bool` stolen flag.
+- **OneSync / Networking**: Stolen state replicates with entity state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_stolen
+        -- Use: Prints if vehicle is marked stolen
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_stolen', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsVehicleStolen(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_stolen */
+    RegisterCommand('veh_stolen', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsVehicleStolen(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Many vehicles default to not stolen even if player is not owner.
+- **Reference**: https://docs.fivem.net/natives/?n=IsVehicleStolen
+
+##### IsVehicleStopped
+- **Name**: IsVehicleStopped
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_VEHICLE_STOPPED(Vehicle vehicle)`
+- **Purpose**: Returns true if vehicle speed is near zero.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - **Returns**: `bool` stopped flag.
+- **OneSync / Networking**: Requires ownership for accurate speed reading.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_stopped
+        -- Use: Prints if vehicle is stopped
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_stopped', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsVehicleStopped(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_stopped */
+    RegisterCommand('veh_stopped', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsVehicleStopped(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Small movements may still report not stopped.
+- **Reference**: https://docs.fivem.net/natives/?n=IsVehicleStopped
+
+##### IsVehicleStoppedAtTrafficLights
+- **Name**: IsVehicleStoppedAtTrafficLights
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_VEHICLE_STOPPED_AT_TRAFFIC_LIGHTS(Vehicle vehicle)`
+- **Purpose**: Checks if the vehicle is stopped at a traffic light.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - **Returns**: `bool` stoplight flag.
+- **OneSync / Networking**: Depends on client-side traffic light detection.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_stoplight
+        -- Use: Prints if vehicle is at a red light
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_stoplight', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsVehicleStoppedAtTrafficLights(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_stoplight */
+    RegisterCommand('veh_stoplight', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsVehicleStoppedAtTrafficLights(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only works for mapped traffic light positions.
+- **Reference**: https://docs.fivem.net/natives/?n=IsVehicleStoppedAtTrafficLights
+
+##### IsVehicleStuckOnRoof
+- **Name**: IsVehicleStuckOnRoof
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_VEHICLE_STUCK_ON_ROOF(Vehicle vehicle)`
+- **Purpose**: Detects if a vehicle is resting upside-down.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - **Returns**: `bool` stuck flag.
+- **OneSync / Networking**: Physics state relies on entity ownership.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_roof
+        -- Use: Prints if vehicle is stuck on its roof
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_roof', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsVehicleStuckOnRoof(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_roof */
+    RegisterCommand('veh_roof', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsVehicleStuckOnRoof(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - May not detect short flips.
+- **Reference**: https://docs.fivem.net/natives/?n=IsVehicleStuckOnRoof
+
+##### IsVehicleStuckTimerUp
+- **Name**: IsVehicleStuckTimerUp
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_VEHICLE_STUCK_TIMER_UP(Vehicle vehicle, int p1, int p2)`
+- **Purpose**: Tests if a vehicle has been stuck for specified durations.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - `p1` (`int`): Timer index.
+  - `p2` (`int`): Time in ms.
+  - **Returns**: `bool` timer expired flag.
+- **OneSync / Networking**: Timer state is local to the controlling script.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_stucktimer
+        -- Use: Prints if vehicle has been stuck for 5s
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_stucktimer', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsVehicleStuckTimerUp(veh, 0, 5000))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_stucktimer */
+    RegisterCommand('veh_stucktimer', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsVehicleStuckTimerUp(veh, 0, 5000));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Timer indices 0–3 represent different stuck conditions.
+- **Reference**: https://docs.fivem.net/natives/?n=IsVehicleStuckTimerUp
+
+##### IsVehicleTyreBurst
+- **Name**: IsVehicleTyreBurst
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_VEHICLE_TYRE_BURST(Vehicle vehicle, int wheelID, BOOL isBurstToRim)`
+- **Purpose**: Checks if a specific tyre is burst.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - `wheelID` (`int`): Wheel index.
+  - `isBurstToRim` (`bool`): Treats fully shredded tyres as burst.
+  - **Returns**: `bool` burst flag.
+- **OneSync / Networking**: Tyre damage requires entity ownership.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: tyre_check
+        -- Use: Prints if front-left tyre is burst
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('tyre_check', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsVehicleTyreBurst(veh, 0, true))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: tyre_check */
+    RegisterCommand('tyre_check', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsVehicleTyreBurst(veh, 0, true));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Wheel indices differ on motorcycles and larger vehicles.
+- **Reference**: https://docs.fivem.net/natives/?n=IsVehicleTyreBurst
+
+##### IsVehicleVisible
+- **Name**: IsVehicleVisible
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_VEHICLE_VISIBLE(Vehicle vehicle)`
+- **Purpose**: Checks whether the vehicle is currently visible (not hidden or occluded).
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - **Returns**: `bool` visibility flag.
+- **OneSync / Networking**: Hidden state may differ per client depending on streaming.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_visible
+        -- Use: Prints if vehicle is visible
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_visible', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsVehicleVisible(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_visible */
+    RegisterCommand('veh_visible', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsVehicleVisible(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - `SetEntityVisible` may override normal checks.
+- **Reference**: https://docs.fivem.net/natives/?n=IsVehicleVisible
+
+##### IsVehicleWeaponDisabled
+- **Name**: IsVehicleWeaponDisabled
+- **Scope**: Shared
+- **Signature(s)**: `BOOL _IS_VEHICLE_WEAPON_DISABLED(Hash weaponHash, Vehicle vehicle, Ped owner)`
+- **Purpose**: Determines if a specific vehicle-mounted weapon is disabled for a driver.
+- **Parameters / Returns**:
+  - `weaponHash` (`Hash`): Weapon identifier.
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - `owner` (`Ped`): Intended owner of the weapon.
+  - **Returns**: `bool` disabled flag.
+- **OneSync / Networking**: Weapon disable state must be set by owning server/client.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_weapon_disabled
+        -- Use: Prints if vehicle MG is disabled
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_weapon_disabled', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsVehicleWeaponDisabled(`VEHICLE_WEAPON_TANK`, veh, PlayerPedId()))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_weapon_disabled */
+    RegisterCommand('veh_weapon_disabled', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsVehicleWeaponDisabled(GetHashKey('VEHICLE_WEAPON_TANK'), veh, PlayerPedId()));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires valid weapon hashes for the given vehicle.
+- **Reference**: https://docs.fivem.net/natives/?n=_IS_VEHICLE_WEAPON_DISABLED
+
+##### IsVehicleWindowIntact
+- **Name**: IsVehicleWindowIntact
+- **Scope**: Shared
+- **Signature(s)**: `BOOL IS_VEHICLE_WINDOW_INTACT(Vehicle vehicle, int windowIndex)`
+- **Purpose**: Checks if a specified window on a vehicle is unbroken.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - `windowIndex` (`int`): Window identifier.
+  - **Returns**: `bool` intact flag.
+- **OneSync / Networking**: Window damage synchronizes with entity owner.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: window_intact
+        -- Use: Prints if driver's window is intact
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('window_intact', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(IsVehicleWindowIntact(veh, 0))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: window_intact */
+    RegisterCommand('window_intact', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(IsVehicleWindowIntact(veh, 0));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Indices vary with vehicle door counts.
+- **Reference**: https://docs.fivem.net/natives/?n=IsVehicleWindowIntact
+
+##### LowerConvertibleRoof
+- **Name**: LowerConvertibleRoof
+- **Scope**: Shared
+- **Signature(s)**: `void LOWER_CONVERTIBLE_ROOF(Vehicle vehicle, BOOL instantlyLower)`
+- **Purpose**: Lowers a convertible's roof, optionally instant.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Convertible vehicle.
+  - `instantlyLower` (`bool`): If true, skips animation.
+- **OneSync / Networking**: Roof state changes replicate to others.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: roof_down
+        -- Use: Lowers convertible roof instantly
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('roof_down', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        LowerConvertibleRoof(veh, true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: roof_down */
+    RegisterCommand('roof_down', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      LowerConvertibleRoof(veh, true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only works on vehicles flagged as convertibles.
+- **Reference**: https://docs.fivem.net/natives/?n=LowerConvertibleRoof
+
+##### LowerRetractableWheels
+- **Name**: LowerRetractableWheels
+- **Scope**: Shared
+- **Signature(s)**: `void _LOWER_RETRACTABLE_WHEELS(Vehicle vehicle)`
+- **Purpose**: Extends retractable landing gear or wheels on applicable vehicles.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle with retractable wheels.
+- **OneSync / Networking**: Gear state requires entity ownership to replicate.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: wheels_down
+        -- Use: Lowers retractable wheels
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('wheels_down', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        LowerRetractableWheels(veh)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: wheels_down */
+    RegisterCommand('wheels_down', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      LowerRetractableWheels(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not all aircraft support retractable gear.
+- **Reference**: https://docs.fivem.net/natives/?n=_LOWER_RETRACTABLE_WHEELS
+
+##### ModifyVehicleTopSpeed
+- **Name**: ModifyVehicleTopSpeed
+- **Scope**: Shared
+- **Signature(s)**: `void MODIFY_VEHICLE_TOP_SPEED(Vehicle vehicle, float value)`
+- **Purpose**: Adjusts a vehicle's max speed by a multiplier value.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - `value` (`float`): Speed multiplier (-1.0 resets).
+- **OneSync / Networking**: Applied on owner; state syncs via physics.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: speed_mod
+        -- Use: Sets vehicle top speed multiplier
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('speed_mod', function(source, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        local mult = tonumber(args[1]) or -1.0
+        ModifyVehicleTopSpeed(veh, mult)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: speed_mod */
+    RegisterCommand('speed_mod', (src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      const mult = parseFloat(args[0]) || -1.0;
+      ModifyVehicleTopSpeed(veh, mult);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Negative multiplier resets to handling-defined speed.
+- **Reference**: https://docs.fivem.net/natives/?n=ModifyVehicleTopSpeed
+
+##### _0x0205F5365292D2EB
+- **Name**: _0x0205F5365292D2EB
+- **Scope**: Shared
+- **Signature(s)**: `void _0x0205F5365292D2EB(Vehicle vehicle, float p1)`
+- **Purpose**: Undocumented native affecting vehicle dynamics.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - `p1` (`float`): Unknown effect.
+- **OneSync / Networking**: Requires entity ownership.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_0205
+        -- Use: Calls undocumented native on vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_0205', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        _0x0205F5365292D2EB(veh, 1.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_0205 */
+    RegisterCommand('veh_0205', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      _0x0205F5365292D2EB(veh, 1.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Semantics are undocumented.
+- **Reference**: https://docs.fivem.net/natives/?_0x0205F5365292D2EB
+
+CONTINUE-HERE — 2025-09-12T06:14:47+00:00 — next: Vehicle :: N_0x0419B167EE128F33
