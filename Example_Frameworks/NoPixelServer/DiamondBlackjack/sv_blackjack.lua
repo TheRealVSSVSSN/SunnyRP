@@ -9,6 +9,13 @@ end
 local blackjackGameInProgress = {}
 local blackjackGameData = {}
 
+--[[
+    -- Type: Function
+    -- Name: tryTakeChips
+    -- Use: Validates bet amount and removes cash from player
+    -- Created: 2025-09-12
+    -- By: VSSVSSN
+--]]
 local function tryTakeChips(source, amount)
     local src = source
     local user = exports["np-base"]:getModule("Player"):GetUser(src)
@@ -28,6 +35,13 @@ local function tryTakeChips(source, amount)
     return true
 end
 
+--[[
+    -- Type: Function
+    -- Name: giveChips
+    -- Use: Rewards chips to player after hand resolution
+    -- Created: 2025-09-12
+    -- By: VSSVSSN
+--]]
 local function giveChips(source,amount)
     local src = source
     local user = exports["np-base"]:getModule("Player"):GetUser(src)
@@ -49,26 +63,25 @@ AddEventHandler("Blackjack:requestBlackjackTableData", function()
     TriggerClientEvent("Blackjack:sendBlackjackTableData",source,blackjackTables)
 end)
 
-RegisterNetEvent("Blackjack:requestSitAtBlackjackTable")
+RegisterNetEvent("Blackjack:requestSitAtBlackjackTable") -- https://docs.fivem.net/docs/scripting-reference/events/server-events/
 AddEventHandler("Blackjack:requestSitAtBlackjackTable", function(chairId)
-    local source = source
-
-    if source ~= nil then
-        for k,v in pairs(blackjackTables) do 
-            if v == source then 
-                blackjackTables[k] = false
-                --print("[Error] Player tried to sit at a table, but he's already sitting there :?, proceeding...")
-                return
-            end
-        end
-        --print("setting blackjacktable chairID: " .. tostring(chairId))
-        blackjackTables[chairId] = source
-        TriggerClientEvent("Blackjack:sendBlackjackTableData",-1,blackjackTables)
-        TriggerClientEvent("Blackjack:sitAtBlackjackTable",source,chairId)
-    else
-        TriggerClientEvent("blackjack:notify",source,"~r~Error, can't sit you down.")
-        --print("[casino catastrophe] id is nil what?")
+    local src = source
+    chairId = tonumber(chairId)
+    if not chairId or chairId < 0 or chairId > 127 then
+        TriggerClientEvent("blackjack:notify", src, "~r~Invalid chair.")
+        return
     end
+
+    for k, v in pairs(blackjackTables) do
+        if v == src then
+            blackjackTables[k] = false
+            return
+        end
+    end
+
+    blackjackTables[chairId] = src
+    TriggerClientEvent("Blackjack:sendBlackjackTableData", -1, blackjackTables)
+    TriggerClientEvent("Blackjack:sitAtBlackjackTable", src, chairId)
 end)
 
 RegisterNetEvent("Blackjack:leaveBlackjackTable")
@@ -86,48 +99,44 @@ AddEventHandler("Blackjack:leaveBlackjackTable", function(chairId)
 end)
 
 RegisterNetEvent("Blackjack:setBlackjackBet")
-AddEventHandler("Blackjack:setBlackjackBet",function(gameId,betAmount,chairId)
-    local source = source
+AddEventHandler("Blackjack:setBlackjackBet", function(gameId, betAmount, chairId)
+    local src = source
+    gameId = tonumber(gameId)
+    betAmount = math.floor(tonumber(betAmount) or 0)
+    chairId = tonumber(chairId)
+    if not gameId or not chairId or chairId < 0 or chairId > 127 or betAmount <= 0 then
+        TriggerClientEvent("blackjack:notify", src, "~r~Error betting!")
+        return
+    end
 
-    if gameId ~= nil and betAmount ~= nil and chairId ~= nil then 
-        if blackjackGameData[gameId] == nil then
-            blackjackGameData[gameId] = {}
-        end
-        if not blackjackGameInProgress[gameId] then
-            if tonumber(betAmount) then
-                betAmount = tonumber(betAmount)
-                if betAmount > 0 then
-                    if tryTakeChips(source,betAmount) then
-                        --print("Taken",betAmount,"chips from id",source)
-                        if blackjackGameData[gameId][source] == nil then
-                            blackjackGameData[gameId][source] = {}
-                        end
-                        blackjackGameData[gameId][source][1] = betAmount
-                        --print("GameId: " .. tostring(gameId) .. " source: " .. tostring(source) .. " has placed a bet of " .. tostring(betAmount))
-                        TriggerClientEvent("Blackjack:successBlackjackBet",source)
-                        TriggerClientEvent("Blackjack:syncChipsPropBlackjack",-1,betAmount,chairId)
-                        TriggerClientEvent("blackjack:notify",source,"~g~Bet placed: " .. tostring(betAmount) .. " chips.")
-                    else 
-                        TriggerClientEvent("blackjack:notify",source,"~r~Not enough chips!")
-                    end
-                end
-            end
-        end
+    blackjackGameData[gameId] = blackjackGameData[gameId] or {}
+    if blackjackGameInProgress[gameId] then return end
+
+    if tryTakeChips(src, betAmount) then
+        blackjackGameData[gameId][src] = blackjackGameData[gameId][src] or {}
+        blackjackGameData[gameId][src][1] = betAmount
+        TriggerClientEvent("Blackjack:successBlackjackBet", src)
+        TriggerClientEvent("Blackjack:syncChipsPropBlackjack", -1, betAmount, chairId)
+        TriggerClientEvent("blackjack:notify", src, "~g~Bet placed: " .. betAmount .. " chips.")
     else
-        TriggerClientEvent("blackjack:notify",source,"~r~Error betting!")
+        TriggerClientEvent("blackjack:notify", src, "~r~Not enough chips!")
     end
 end)
 
 RegisterNetEvent("Blackjack:hitBlackjack")
-AddEventHandler("Blackjack:hitBlackjack",function(gameId,nextCardCount)
-    local source = source
-    blackjackGameData[gameId][source][2][nextCardCount] = true
+AddEventHandler("Blackjack:hitBlackjack", function(gameId, nextCardCount)
+    local src = source
+    if blackjackGameData[gameId] and blackjackGameData[gameId][src] and blackjackGameData[gameId][src][2] then
+        blackjackGameData[gameId][src][2][nextCardCount] = true
+    end
 end)
 
 RegisterNetEvent("Blackjack:standBlackjack")
-AddEventHandler("Blackjack:standBlackjack",function(gameId,nextCardCount)
-    local source = source
-    blackjackGameData[gameId][source][2][nextCardCount] = false
+AddEventHandler("Blackjack:standBlackjack", function(gameId, nextCardCount)
+    local src = source
+    if blackjackGameData[gameId] and blackjackGameData[gameId][src] and blackjackGameData[gameId][src][2] then
+        blackjackGameData[gameId][src][2][nextCardCount] = false
+    end
 end)
 
 for i=0,31 do
