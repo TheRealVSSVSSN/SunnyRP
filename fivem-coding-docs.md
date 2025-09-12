@@ -430,13 +430,13 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Overall | 6442 | 783 | 5659 | 2025-09-12T07:29:09+00:00 |
+| Overall | 6442 | 808 | 5634 | 2025-09-12T08:02:02+00:00 |
 | Player | 248 | 248 | 0 | 2025-09-11T06:38 |
 | Recording | 17 | 17 | 0 | 2025-09-11T06:52 |
 | Replay | 6 | 6 | 0 | 2025-09-11T07:37 |
 | ACL | 10 | 10 | 0 | 2025-09-11T08:12 |
 | CFX | 50 | 50 | 0 | 2025-09-11T09:55 |
-| Vehicle | 751 | 452 | 299 | 2025-09-12T07:29:09+00:00 |
+| Vehicle | 751 | 477 | 274 | 2025-09-12T08:02:02+00:00 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -28455,4 +28455,919 @@ RegisterCommand('rgb', () => {
 - **Caveats / Limitations**:
   - Entity must already be attached to the Cargobob.
 - **Reference**: https://docs.fivem.net/natives/?n=SetCargobobExcludeFromPickupEntity
- CONTINUE-HERE — 2025-09-12T07:29:09+00:00 — next: Vehicle :: SetCargobobForceDontDetachVehicle
+##### SetCargobobForceDontDetachVehicle
+- **Name**: SetCargobobForceDontDetachVehicle
+- **Scope**: Client
+- **Signature**: `void SET_CARGOBOB_FORCE_DONT_DETACH_VEHICLE(Vehicle cargobob, BOOL toggle);`
+- **Purpose**: Prevents the Cargobob from detaching its attached vehicle.
+- **Parameters / Returns**:
+  - `cargobob` (`Vehicle`): Helicopter performing the lift.
+  - `toggle` (`bool`): `true` keeps the vehicle locked.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Execute on the Cargobob owner so the attachment state replicates.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: cargobob_hold
+        -- Use: Locks attached vehicle on the hook
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('cargobob_hold', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetCargobobForceDontDetachVehicle(veh, true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: cargobob_hold */
+    RegisterCommand('cargobob_hold', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetCargobobForceDontDetachVehicle(veh, true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only applies while the Cargobob owns the attached entity.
+- **Reference**: https://docs.fivem.net/natives/?n=SetCargobobForceDontDetachVehicle
+
+##### SetCargobobHookCanAttach
+- **Name**: SetCargobobHookCanAttach
+- **Scope**: Client
+- **Signature**: `void _SET_CARGOBOB_HOOK_CAN_ATTACH(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Enables or disables the ability for the Cargobob hook to attach vehicles.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Cargobob helicopter.
+  - `toggle` (`bool`): `true` allows attaching.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Call on hook owner's client for networked vehicles.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: cargobob_attach
+        -- Use: Toggles hook attachment ability
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('cargobob_attach', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetCargobobHookCanAttach(veh, true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: cargobob_attach */
+    RegisterCommand('cargobob_attach', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetCargobobHookCanAttach(veh, true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Setting `false` prevents any pickup attempts.
+- **Reference**: https://docs.fivem.net/natives/?n=SetCargobobHookCanAttach
+
+##### SetCargobobPickupMagnetActive
+- **Name**: SetCargobobPickupMagnetActive
+- **Scope**: Client
+- **Signature**: `void SET_CARGOBOB_PICKUP_MAGNET_ACTIVE(Vehicle cargobob, BOOL isActive);`
+- **Purpose**: Toggles the Cargobob's magnetic pickup mode.
+- **Parameters / Returns**:
+  - `cargobob` (`Vehicle`): Target Cargobob.
+  - `isActive` (`bool`): `true` enables magnet.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Activate on owning client to sync magnet state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: cargobob_magnet
+        -- Use: Enables Cargobob magnet
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('cargobob_magnet', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetCargobobPickupMagnetActive(veh, true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: cargobob_magnet */
+    RegisterCommand('cargobob_magnet', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetCargobobPickupMagnetActive(veh, true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not affect aircraft.
+- **Reference**: https://docs.fivem.net/natives/?n=SetCargobobPickupMagnetActive
+
+##### SetCargobobPickupMagnetEffectRadius
+- **Name**: SetCargobobPickupMagnetEffectRadius
+- **Scope**: Client
+- **Signature**: `void SET_CARGOBOB_PICKUP_MAGNET_EFFECT_RADIUS(Vehicle vehicle, float radius);`
+- **Purpose**: Sets the radius in which the Cargobob magnet attracts entities.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Cargobob.
+  - `radius` (`float`): Attraction radius.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Owner must apply to replicate magnetic range.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: cargobob_radius
+        -- Use: Adjusts magnet radius
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('cargobob_radius', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetCargobobPickupMagnetEffectRadius(veh, 20.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: cargobob_radius */
+    RegisterCommand('cargobob_radius', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetCargobobPickupMagnetEffectRadius(veh, 20.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Large radii may pull unintended objects.
+- **Reference**: https://docs.fivem.net/natives/?n=SetCargobobPickupMagnetEffectRadius
+
+##### SetCargobobPickupMagnetFalloff
+- **Name**: SetCargobobPickupMagnetFalloff
+- **Scope**: Client
+- **Signature**: `void SET_CARGOBOB_PICKUP_MAGNET_FALLOFF(Vehicle vehicle, float falloff);`
+- **Purpose**: Controls how magnetic strength decreases with distance.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Cargobob.
+  - `falloff` (`float`): Decay multiplier.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Apply on owner for consistent attraction.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: cargobob_falloff
+        -- Use: Sets magnet falloff
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('cargobob_falloff', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetCargobobPickupMagnetFalloff(veh, 5.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: cargobob_falloff */
+    RegisterCommand('cargobob_falloff', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetCargobobPickupMagnetFalloff(veh, 5.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Exact falloff semantics are undocumented.
+- **Reference**: https://docs.fivem.net/natives/?n=SetCargobobPickupMagnetFalloff
+
+##### SetCargobobPickupMagnetPullRopeLength
+- **Name**: SetCargobobPickupMagnetPullRopeLength
+- **Scope**: Client
+- **Signature**: `void SET_CARGOBOB_PICKUP_MAGNET_PULL_ROPE_LENGTH(Vehicle cargobob, float length);`
+- **Purpose**: Adjusts the rope length used when pulling magnetized entities.
+- **Parameters / Returns**:
+  - `cargobob` (`Vehicle`): Cargobob helicopter.
+  - `length` (`float`): Rope length.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Must run on owning client to sync rope behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: cargobob_rope
+        -- Use: Sets magnet rope length
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('cargobob_rope', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetCargobobPickupMagnetPullRopeLength(veh, 10.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: cargobob_rope */
+    RegisterCommand('cargobob_rope', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetCargobobPickupMagnetPullRopeLength(veh, 10.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Large lengths may cause instability.
+- **Reference**: https://docs.fivem.net/natives/?n=SetCargobobPickupMagnetPullRopeLength
+
+##### SetCargobobPickupMagnetPullStrength
+- **Name**: SetCargobobPickupMagnetPullStrength
+- **Scope**: Client
+- **Signature**: `void SET_CARGOBOB_PICKUP_MAGNET_PULL_STRENGTH(Vehicle cargobob, float strength);`
+- **Purpose**: Sets how strongly the magnet pulls entities upward.
+- **Parameters / Returns**:
+  - `cargobob` (`Vehicle`): Cargobob helicopter.
+  - `strength` (`float`): Pull force.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Run on the Cargobob owner for synced effects.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: cargobob_pull
+        -- Use: Increases magnet pull strength
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('cargobob_pull', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetCargobobPickupMagnetPullStrength(veh, 50.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: cargobob_pull */
+    RegisterCommand('cargobob_pull', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetCargobobPickupMagnetPullStrength(veh, 50.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Excessive strength may cause jitter.
+- **Reference**: https://docs.fivem.net/natives/?n=SetCargobobPickupMagnetPullStrength
+
+##### SetCargobobPickupMagnetReducedFalloff
+- **Name**: SetCargobobPickupMagnetReducedFalloff
+- **Scope**: Client
+- **Signature**: `void SET_CARGOBOB_PICKUP_MAGNET_REDUCED_FALLOFF(Vehicle cargobob, float factor);`
+- **Purpose**: Sets a secondary falloff multiplier for the magnet.
+- **Parameters / Returns**:
+  - `cargobob` (`Vehicle`): Cargobob helicopter.
+  - `factor` (`float`): Reduction factor.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Only the owner should call to replicate attraction.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: cargobob_rfalloff
+        -- Use: Tweaks reduced falloff
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('cargobob_rfalloff', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetCargobobPickupMagnetReducedFalloff(veh, 2.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: cargobob_rfalloff */
+    RegisterCommand('cargobob_rfalloff', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetCargobobPickupMagnetReducedFalloff(veh, 2.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Purpose of reduction is sparsely documented.
+- **Reference**: https://docs.fivem.net/natives/?n=SetCargobobPickupMagnetReducedFalloff
+
+##### SetCargobobPickupMagnetReducedStrength
+- **Name**: SetCargobobPickupMagnetReducedStrength
+- **Scope**: Client
+- **Signature**: `void SET_CARGOBOB_PICKUP_MAGNET_REDUCED_STRENGTH(Vehicle cargobob, Vehicle vehicle);`
+- **Purpose**: Applies a weaker magnet force to a specific attached vehicle.
+- **Parameters / Returns**:
+  - `cargobob` (`Vehicle`): Cargobob.
+  - `vehicle` (`Vehicle`): Vehicle to weaken.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Must run on owner of both entities.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: cargobob_rstrength
+        -- Use: Weakens magnet on attached vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('cargobob_rstrength', function()
+        local cb = GetVehiclePedIsIn(PlayerPedId(), false)
+        local att = GetEntityAttachedToTowTruck(cb)
+        SetCargobobPickupMagnetReducedStrength(cb, att)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: cargobob_rstrength */
+    RegisterCommand('cargobob_rstrength', () => {
+      const cb = GetVehiclePedIsIn(PlayerPedId(), false);
+      const att = GetEntityAttachedToTowTruck(cb);
+      SetCargobobPickupMagnetReducedStrength(cb, att);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires an entity currently attached.
+- **Reference**: https://docs.fivem.net/natives/?n=SetCargobobPickupMagnetReducedStrength
+
+##### SetCargobobPickupMagnetStrength
+- **Name**: SetCargobobPickupMagnetStrength
+- **Scope**: Client
+- **Signature**: `void SET_CARGOBOB_PICKUP_MAGNET_STRENGTH(Vehicle cargobob, float strength);`
+- **Purpose**: Directly sets magnet strength.
+- **Parameters / Returns**:
+  - `cargobob` (`Vehicle`): Cargobob.
+  - `strength` (`float`): Magnetic force level.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Run on owner for correct replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: cargobob_strength
+        -- Use: Sets magnet strength
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('cargobob_strength', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetCargobobPickupMagnetStrength(veh, 25.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: cargobob_strength */
+    RegisterCommand('cargobob_strength', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetCargobobPickupMagnetStrength(veh, 25.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Overly high values may behave unpredictably.
+- **Reference**: https://docs.fivem.net/natives/?n=SetCargobobPickupMagnetStrength
+
+##### SetCargobobPickupRopeDampingMultiplier
+- **Name**: SetCargobobPickupRopeDampingMultiplier
+- **Scope**: Client
+- **Signature**: `void SET_CARGOBOB_PICKUP_ROPE_DAMPING_MULTIPLIER(Vehicle cargobob, float multiplier);`
+- **Purpose**: Scales rope damping when using the magnet.
+- **Parameters / Returns**:
+  - `cargobob` (`Vehicle`): Cargobob helicopter.
+  - `multiplier` (`float`): Damping coefficient.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Execute on owner to replicate rope physics.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: cargobob_damp
+        -- Use: Adjusts magnet rope damping
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('cargobob_damp', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetCargobobPickupRopeDampingMultiplier(veh, 0.5)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: cargobob_damp */
+    RegisterCommand('cargobob_damp', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetCargobobPickupRopeDampingMultiplier(veh, 0.5);
+    });
+    ```
+- **Caveats / Limitations**:
+  - `multiplier` semantics partially undocumented.
+- **Reference**: https://docs.fivem.net/natives/?n=SetCargobobPickupRopeDampingMultiplier
+
+##### SetCargobobPickupRopeType
+- **Name**: SetCargobobPickupRopeType
+- **Scope**: Client
+- **Signature**: `void SET_CARGOBOB_PICKUP_ROPE_TYPE(Vehicle vehicle, int state);`
+- **Purpose**: Chooses which rope model the Cargobob magnet uses.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Cargobob.
+  - `state` (`int`): Rope type identifier.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Owner must call to update rope appearance.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: cargobob_rope_type
+        -- Use: Switches magnet rope type
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('cargobob_rope_type', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetCargobobPickupRopeType(veh, tonumber(args[1]) or 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: cargobob_rope_type */
+    RegisterCommand('cargobob_rope_type', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetCargobobPickupRopeType(veh, parseInt(args[0]) || 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Rope type values are undocumented.
+- **Reference**: https://docs.fivem.net/natives/?n=SetCargobobPickupRopeType
+
+##### SetConvertibleRoof
+- **Name**: SetConvertibleRoof
+- **Scope**: Client
+- **Signature**: `void SET_CONVERTIBLE_ROOF(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Instantly adds or removes a non-animated convertible roof.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to modify.
+  - `toggle` (`bool`): `true` adds roof, `false` removes.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Must run on vehicle owner to replicate body state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_roof
+        -- Use: Toggles convertible roof
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_roof', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetConvertibleRoof(veh, args[1] == 'on')
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_roof */
+    RegisterCommand('veh_roof', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetConvertibleRoof(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only affects vehicles with roofless variants.
+- **Reference**: https://docs.fivem.net/natives/?n=SetConvertibleRoof
+
+##### SetConvertibleRoofLatchState
+- **Name**: SetConvertibleRoofLatchState
+- **Scope**: Client
+- **Signature**: `void SET_CONVERTIBLE_ROOF_LATCH_STATE(Vehicle vehicle, BOOL latched);`
+- **Purpose**: Locks or unlocks the convertible roof mechanism.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Convertible car.
+  - `latched` (`bool`): `true` locks roof.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Owner must call to sync latch state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_rooflock
+        -- Use: Latches convertible roof
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_rooflock', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetConvertibleRoofLatchState(veh, true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_rooflock */
+    RegisterCommand('veh_rooflock', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetConvertibleRoofLatchState(veh, true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not animate roof movement.
+- **Reference**: https://docs.fivem.net/natives/?n=SetConvertibleRoofLatchState
+
+##### SetDeployHeliStubWings
+- **Name**: SetDeployHeliStubWings
+- **Scope**: Client
+- **Signature**: `void _SET_DEPLOY_HELI_STUB_WINGS(Vehicle vehicle, BOOL deploy, BOOL p2);`
+- **Purpose**: Toggles stub wings on specific helicopters.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Helicopter entity.
+  - `deploy` (`bool`): Deploy or retract wings.
+  - `p2` (`bool`): Additional flag (unknown).
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Run on owner for visible change.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: heli_stub
+        -- Use: Deploys stub wings
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('heli_stub', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetDeployHeliStubWings(veh, true, false)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: heli_stub */
+    RegisterCommand('heli_stub', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetDeployHeliStubWings(veh, true, false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only used on specific models like Akula.
+- **Reference**: https://docs.fivem.net/natives/?n=SetDeployHeliStubWings
+
+##### SetDisableVehicleEngineFires
+- **Name**: SetDisableVehicleEngineFires
+- **Scope**: Client
+- **Signature**: `void SET_DISABLE_VEHICLE_ENGINE_FIRES(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Stops engine fire effects on the vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target vehicle.
+  - `toggle` (`bool`): `true` disables engine fires.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Call on owner to apply to others.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_nofire
+        -- Use: Disables engine fire effects
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_nofire', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetDisableVehicleEngineFires(veh, true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_nofire */
+    RegisterCommand('veh_nofire', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetDisableVehicleEngineFires(veh, true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not repair existing damage.
+- **Reference**: https://docs.fivem.net/natives/?n=SetDisableVehicleEngineFires
+
+##### SetDisableVehicleWindowCollisions
+- **Name**: SetDisableVehicleWindowCollisions
+- **Scope**: Client
+- **Signature**: `void _SET_DISABLE_VEHICLE_WINDOW_COLLISIONS(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Toggles bullet/impact collisions on vehicle windows.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to modify.
+  - `toggle` (`bool`): `true` disables collisions.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Run on owner to sync hit detection.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_nowindowcol
+        -- Use: Disables window collisions
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_nowindowcol', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetDisableVehicleWindowCollisions(veh, true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_nowindowcol */
+    RegisterCommand('veh_nowindowcol', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetDisableVehicleWindowCollisions(veh, true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Bullets will pass through disabled windows.
+- **Reference**: https://docs.fivem.net/natives/?n=SetDisableVehicleWindowCollisions
+
+##### SetDistantCarsEnabled
+- **Name**: SetDistantCarsEnabled
+- **Scope**: Client
+- **Signature**: `void SET_DISTANT_CARS_ENABLED(BOOL toggle);`
+- **Purpose**: Toggles rendering of distant ambient vehicles.
+- **Parameters / Returns**:
+  - `toggle` (`bool`): `true` enables distant cars.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Local visual toggle only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: distantcars
+        -- Use: Shows distant traffic
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('distantcars', function(_, args)
+        SetDistantCarsEnabled(args[1] == 'on')
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: distantcars */
+    RegisterCommand('distantcars', (_src, args) => {
+      SetDistantCarsEnabled(args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Purely cosmetic; does not affect gameplay.
+- **Reference**: https://docs.fivem.net/natives/?n=SetDistantCarsEnabled
+
+##### SetDriftTyresEnabled
+- **Name**: SetDriftTyresEnabled
+- **Scope**: Client
+- **Signature**: `void _SET_DRIFT_TYRES_ENABLED(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Enables drift tyre physics on the vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to modify.
+  - `toggle` (`bool`): `true` enables drifting.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Call on owner so grip changes replicate.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_drift
+        -- Use: Activates drift tyres
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_drift', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetDriftTyresEnabled(veh, true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_drift */
+    RegisterCommand('veh_drift', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetDriftTyresEnabled(veh, true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only effective on vehicles that support drift tyres.
+- **Reference**: https://docs.fivem.net/natives/?n=SetDriftTyresEnabled
+
+##### SetEnableVehicleSlipstreaming
+- **Name**: SetEnableVehicleSlipstreaming
+- **Scope**: Client
+- **Signature**: `void SET_ENABLE_VEHICLE_SLIPSTREAMING(BOOL toggle);`
+- **Purpose**: Globally toggles slipstream draft physics.
+- **Parameters / Returns**:
+  - `toggle` (`bool`): Enable or disable effect.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Local toggle; servers may broadcast via events.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: slipstream
+        -- Use: Enables slipstream drafting
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('slipstream', function(_, args)
+        SetEnableVehicleSlipstreaming(args[1] == 'on')
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: slipstream */
+    RegisterCommand('slipstream', (_src, args) => {
+      SetEnableVehicleSlipstreaming(args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Affects all vehicles locally.
+- **Reference**: https://docs.fivem.net/natives/?n=SetEnableVehicleSlipstreaming
+
+##### SetFarDrawVehicles
+- **Name**: SetFarDrawVehicles
+- **Scope**: Client
+- **Signature**: `void SET_FAR_DRAW_VEHICLES(BOOL toggle);`
+- **Purpose**: Controls whether far vehicles are drawn at all.
+- **Parameters / Returns**:
+  - `toggle` (`bool`): `true` draws far vehicles.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Visual-only, local.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: fardraw
+        -- Use: Toggles distant vehicle rendering
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('fardraw', function(_, args)
+        SetFarDrawVehicles(args[1] == 'on')
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: fardraw */
+    RegisterCommand('fardraw', (_src, args) => {
+      SetFarDrawVehicles(args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only affects rendering distance.
+- **Reference**: https://docs.fivem.net/natives/?n=SetFarDrawVehicles
+
+##### SetForceHdVehicle
+- **Name**: SetForceHdVehicle
+- **Scope**: Client
+- **Signature**: `void SET_FORCE_HD_VEHICLE(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Forces a vehicle to stay in high-detail mode.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `toggle` (`bool`): `true` forces HD.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Must run on owner to affect streaming for others.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_forcehd
+        -- Use: Forces high-detail model
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_forcehd', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetForceHdVehicle(veh, true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_forcehd */
+    RegisterCommand('veh_forcehd', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetForceHdVehicle(veh, true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Increases streaming load.
+- **Reference**: https://docs.fivem.net/natives/?n=SetForceHdVehicle
+
+##### SetForceLowLodAnchorMode
+- **Name**: SetForceLowLodAnchorMode
+- **Scope**: Client
+- **Signature**: `void SET_FORCE_LOW_LOD_ANCHOR_MODE(Vehicle boat, BOOL toggle);`
+- **Purpose**: Keeps a boat in low-LOD anchor mode even when driven.
+- **Parameters / Returns**:
+  - `boat` (`Vehicle`): Boat entity.
+  - `toggle` (`bool`): Maintain low-LOD anchor.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Owner must call alongside SetBoatRemainsAnchoredWhilePlayerIsDriver.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: boat_lowlod
+        -- Use: Forces low-LOD anchor mode
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('boat_lowlod', function()
+        local boat = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetForceLowLodAnchorMode(boat, true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: boat_lowlod */
+    RegisterCommand('boat_lowlod', () => {
+      const boat = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetForceLowLodAnchorMode(boat, true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires boat to remain anchored setting enabled.
+- **Reference**: https://docs.fivem.net/natives/?n=SetForceLowLodAnchorMode
+
+##### SetForkliftForkHeight
+- **Name**: SetForkliftForkHeight
+- **Scope**: Client
+- **Signature**: `void SET_FORKLIFT_FORK_HEIGHT(Vehicle vehicle, float height);`
+- **Purpose**: Raises or lowers a forklift's forks.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Forklift to control.
+  - `height` (`float`): 0.0 lowest, 1.0 highest.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Call on owner to sync fork position.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: forklift
+        -- Use: Lifts forklift forks
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('forklift', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetForkliftForkHeight(veh, tonumber(args[1]) or 1.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: forklift */
+    RegisterCommand('forklift', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetForkliftForkHeight(veh, parseFloat(args[0]) || 1.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Forklift must support adjustable forks.
+- **Reference**: https://docs.fivem.net/natives/?n=SetForkliftForkHeight
+
+##### SetGarbageTrucks
+- **Name**: SetGarbageTrucks
+- **Scope**: Client
+- **Signature**: `void SET_GARBAGE_TRUCKS(BOOL toggle);`
+- **Purpose**: Toggles garbage truck ambient spawns.
+- **Parameters / Returns**:
+  - `toggle` (`bool`): Enable garbage truck logic.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Local world setting; servers should broadcast if needed.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: garbage
+        -- Use: Toggles garbage trucks
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('garbage', function(_, args)
+        SetGarbageTrucks(args[1] == 'on')
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: garbage */
+    RegisterCommand('garbage', (_src, args) => {
+      SetGarbageTrucks(args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only affects ambient AI vehicles.
+- **Reference**: https://docs.fivem.net/natives/?n=SetGarbageTrucks
+CONTINUE-HERE — 2025-09-12T08:02:02+00:00 — next: Vehicle :: SetHeliBladesFullSpeed
