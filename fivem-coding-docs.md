@@ -430,13 +430,13 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Overall | 6442 | 883 | 5559 | 2025-09-12T16:32:34+00:00 |
+| Overall | 6442 | 908 | 5534 | 2025-09-12T16:40:02+00:00 |
 | Player | 248 | 248 | 0 | 2025-09-11T06:38 |
 | Recording | 17 | 17 | 0 | 2025-09-11T06:52 |
 | Replay | 6 | 6 | 0 | 2025-09-11T07:37 |
 | ACL | 10 | 10 | 0 | 2025-09-11T08:12 |
 | CFX | 50 | 50 | 0 | 2025-09-11T09:55 |
-| Vehicle | 751 | 552 | 199 | 2025-09-12T16:32:34+00:00 |
+| Vehicle | 751 | 577 | 174 | 2025-09-12T16:40:02+00:00 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -32146,4 +32146,940 @@ RegisterCommand('rgb', () => {
   - Specific to bulldozer models.
 - **Reference**: https://docs.fivem.net/natives/?n=SetVehicleBulldozerArmPosition
 
-CONTINUE-HERE — 2025-09-12T16:32:34+00:00 — next: Vehicle :: SetVehicleBurnout
+##### SetVehicleBurnout
+- **Name**: SetVehicleBurnout
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_BURNOUT(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Enables or disables burnout mode on a vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to modify.
+  - `toggle` (`bool`): `true` allows burnout.
+  - **Returns**: `void`
+- **OneSync / Networking**: Call on the vehicle owner to ensure burnout replicates.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_burnout
+        -- Use: Toggle burnout state
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_burnout', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleBurnout(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_burnout */
+    RegisterCommand('veh_burnout', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleBurnout(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only works on vehicles capable of burnouts.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleBurnout
+
+##### SetVehicleCanBeTargetted
+- **Name**: SetVehicleCanBeTargetted
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_CAN_BE_TARGETTED(Vehicle vehicle, BOOL state);`
+- **Purpose**: Toggles whether the vehicle can be weapon-targeted or locked on.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `state` (`bool`): `true` allows targeting.
+  - **Returns**: `void`
+- **OneSync / Networking**: Apply on vehicle owner to sync lock-on behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_target
+        -- Use: Toggle weapon targeting
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_target', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleCanBeTargetted(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_target */
+    RegisterCommand('veh_target', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleCanBeTargetted(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Affects missile lock; manual aim still possible.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleCanBeTargetted
+
+##### SetVehicleCanBeUsedByFleeingPeds
+- **Name**: SetVehicleCanBeUsedByFleeingPeds
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_CAN_BE_USED_BY_FLEEING_PEDS(Vehicle vehicle, BOOL state);`
+- **Purpose**: Allows fleeing NPCs to enter and use the vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `state` (`bool`): `true` lets NPCs use it.
+  - **Returns**: `void`
+- **OneSync / Networking**: Call on owner so ped AI sees the change.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_fleeuse
+        -- Use: Toggle NPC fleeing use
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_fleeuse', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleCanBeUsedByFleeingPeds(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_fleeuse */
+    RegisterCommand('veh_fleeuse', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleCanBeUsedByFleeingPeds(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Influences AI pathfinding when fleeing.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleCanBeUsedByFleeingPeds
+
+##### SetVehicleCanBreak
+- **Name**: SetVehicleCanBreak
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_CAN_BREAK(Vehicle vehicle, BOOL state);`
+- **Purpose**: Enables or disables a vehicle's ability to break apart in crashes.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `state` (`bool`): `true` permits damage breakage.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must apply to maintain consistent physics.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_break
+        -- Use: Toggle structural breaking
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_break', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleCanBreak(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_break */
+    RegisterCommand('veh_break', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleCanBreak(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not prevent cosmetic scratches.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleCanBreak
+
+##### SetVehicleCanEngineOperateOnFire
+- **Name**: SetVehicleCanEngineOperateOnFire
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_CAN_ENGINE_OPERATE_ON_FIRE(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Determines if an engine keeps running while the vehicle is on fire.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `toggle` (`bool`): `true` keeps engine running.
+  - **Returns**: `void`
+- **OneSync / Networking**: Call on owner to sync engine behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_fireoper
+        -- Use: Toggle engine operation on fire
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_fireoper', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleCanEngineOperateOnFire(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_fireoper */
+    RegisterCommand('veh_fireoper', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleCanEngineOperateOnFire(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Engine may still stall from other damage.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleCanEngineOperateOnFire
+
+##### SetVehicleCanLeakOil
+- **Name**: SetVehicleCanLeakOil
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_CAN_LEAK_OIL(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Enables or disables oil leakage when the vehicle is damaged.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `toggle` (`bool`): `true` permits oil leaks.
+  - **Returns**: `void`
+- **OneSync / Networking**: Apply on owner to replicate leak effects.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_leakoil
+        -- Use: Toggle oil leaks
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_leakoil', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleCanLeakOil(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_leakoil */
+    RegisterCommand('veh_leakoil', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleCanLeakOil(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Visual effect only; does not create hazards.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleCanLeakOil
+
+##### SetVehicleCanLeakPetrol
+- **Name**: SetVehicleCanLeakPetrol
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_CAN_LEAK_PETROL(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Determines if fuel leaks from a damaged vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `toggle` (`bool`): `true` enables fuel leakage.
+  - **Returns**: `void`
+- **OneSync / Networking**: Call on owner to sync leak visuals.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_leakpetrol
+        -- Use: Toggle petrol leaks
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_leakpetrol', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleCanLeakPetrol(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_leakpetrol */
+    RegisterCommand('veh_leakpetrol', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleCanLeakPetrol(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not create combustible puddles.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleCanLeakPetrol
+
+##### SetVehicleCanUseFogLights
+- **Name**: SetVehicleCanUseFogLights
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_CAN_USE_FOG_LIGHTS(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Enables fog light usage if the model supports it.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `toggle` (`bool`): `true` allows fog lights.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must apply to sync light state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_fog
+        -- Use: Toggle fog lights
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_fog', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleCanUseFogLights(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_fog */
+    RegisterCommand('veh_fog', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleCanUseFogLights(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only affects models with fog lights.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleCanUseFogLights
+
+##### SetVehicleColourCombination
+- **Name**: SetVehicleColourCombination
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_COLOUR_COMBINATION(Vehicle vehicle, int colorCombo);`
+- **Purpose**: Applies a preset colour combination to the vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `colorCombo` (`int`): Index of the colour preset.
+  - **Returns**: `void`
+- **OneSync / Networking**: Apply on owner to replicate colours.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_colorcombo
+        -- Use: Set colour combination
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_colorcombo', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleColourCombination(veh, tonumber(args[1]) or 0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_colorcombo */
+    RegisterCommand('veh_colorcombo', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleColourCombination(veh, parseInt(args[0]) || 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Limited to available preset combinations.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleColourCombination
+
+##### SetVehicleColours
+- **Name**: SetVehicleColours
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_COLOURS(Vehicle vehicle, int primary, int secondary);`
+- **Purpose**: Sets classic primary and secondary paint indices.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `primary` (`int`): Primary colour index.
+  - `secondary` (`int`): Secondary colour index.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must apply to replicate paint.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_colours
+        -- Use: Set paint indices
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_colours', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleColours(veh, tonumber(args[1]) or 0, tonumber(args[2]) or 0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_colours */
+    RegisterCommand('veh_colours', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleColours(veh, parseInt(args[0]) || 0, parseInt(args[1]) || 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Uses GTA V colour IDs.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleColours
+
+##### SetVehicleCoolantLeak
+- **Name**: SetVehicleCoolantLeak
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_COOLANT_LEAK(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Controls whether coolant leaks when the vehicle is damaged.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `toggle` (`bool`): `true` enables leaks.
+  - **Returns**: `void`
+- **OneSync / Networking**: Call on owner to sync particle effects.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_coolant
+        -- Use: Toggle coolant leaks
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_coolant', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleCoolantLeak(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_coolant */
+    RegisterCommand('veh_coolant', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleCoolantLeak(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Visual only; does not affect performance.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleCoolantLeak
+
+##### SetVehicleDamage
+- **Name**: SetVehicleDamage
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_DAMAGE(Vehicle vehicle, float x, float y, float z, float damage, float radius, BOOL focusOnModel);`
+- **Purpose**: Applies damage to a specific point on the vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `x`, `y`, `z` (`float`): Offset position relative to vehicle.
+  - `damage` (`float`): Damage magnitude.
+  - `radius` (`float`): Radius affected.
+  - `focusOnModel` (`bool`): `true` damages model even if area empty.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must apply for consistent deformation.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_damage
+        -- Use: Apply vehicle damage
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_damage', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            SetVehicleDamage(veh, 0.0, 1.0, 0.0, tonumber(args[1]) or 100.0, 1.0, true)
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_damage */
+    RegisterCommand('veh_damage', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        SetVehicleDamage(veh, 0.0, 1.0, 0.0, parseFloat(args[0]) || 100.0, 1.0, true);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Coordinates are relative to vehicle bones.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleDamage
+
+##### SetVehicleDamageModifier
+- **Name**: SetVehicleDamageModifier
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_DAMAGE_MODIFIER(Vehicle vehicle, float damageModifier);`
+- **Purpose**: Scales damage applied to the vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `damageModifier` (`float`): Multiplier for incoming damage.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must call to synchronize modifier.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_dmgmod
+        -- Use: Set damage modifier
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_dmgmod', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleDamageModifier(veh, tonumber(args[1]) or 1.0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_dmgmod */
+    RegisterCommand('veh_dmgmod', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleDamageModifier(veh, parseFloat(args[0]) || 1.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Modifier persists until reset.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleDamageModifier
+
+##### SetVehicleDeformationFixed
+- **Name**: SetVehicleDeformationFixed
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_DEFORMATION_FIXED(Vehicle vehicle);`
+- **Purpose**: Removes all deformation, restoring the vehicle's shape.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must call for others to see repairs.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_fixdeform
+        -- Use: Fix body deformation
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_fixdeform', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleDeformationFixed(veh) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_fixdeform */
+    RegisterCommand('veh_fixdeform', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleDeformationFixed(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not repair engine health.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleDeformationFixed
+
+##### SetVehicleDensityMultiplierThisFrame
+- **Name**: SetVehicleDensityMultiplierThisFrame
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_DENSITY_MULTIPLIER_THIS_FRAME(float multiplier);`
+- **Purpose**: Adjusts traffic density for the current frame.
+- **Parameters / Returns**:
+  - `multiplier` (`float`): Density factor (0.0–1.0).
+  - **Returns**: `void`
+- **OneSync / Networking**: Client-only; affects local traffic.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_density
+        -- Use: Set traffic density
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_density', function(_, args)
+        SetVehicleDensityMultiplierThisFrame(tonumber(args[1]) or 1.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_density */
+    RegisterCommand('veh_density', (_src, args) => {
+      SetVehicleDensityMultiplierThisFrame(parseFloat(args[0]) || 1.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Must be called every frame for persistent effect.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleDensityMultiplierThisFrame
+
+##### SetVehicleDirtLevel
+- **Name**: SetVehicleDirtLevel
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_DIRT_LEVEL(Vehicle vehicle, float level);`
+- **Purpose**: Sets how dirty the vehicle appears.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `level` (`float`): Dirt level 0.0–15.0.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must apply to sync appearance.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_dirt
+        -- Use: Set dirt level
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_dirt', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleDirtLevel(veh, tonumber(args[1]) or 0.0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_dirt */
+    RegisterCommand('veh_dirt', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleDirtLevel(veh, parseFloat(args[0]) || 0.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Value caps at 15.0.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleDirtLevel
+
+##### SetVehicleDoorBroken
+- **Name**: SetVehicleDoorBroken
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_DOOR_BROKEN(Vehicle vehicle, int doorIndex, BOOL deleteDoor);`
+- **Purpose**: Breaks a vehicle door optionally removing it.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `doorIndex` (`int`): Door identifier.
+  - `deleteDoor` (`bool`): `true` deletes the door.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must call so others see missing door.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_doorbreak
+        -- Use: Break a door
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_doorbreak', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleDoorBroken(veh, tonumber(args[1]) or 0, true) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_doorbreak */
+    RegisterCommand('veh_doorbreak', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleDoorBroken(veh, parseInt(args[0]) || 0, true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Door indices vary by vehicle type.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleDoorBroken
+
+##### SetVehicleDoorControl
+- **Name**: SetVehicleDoorControl
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_DOOR_CONTROL(Vehicle vehicle, int doorIndex, int speed, float angle);`
+- **Purpose**: Controls the door's open angle at a given speed.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `doorIndex` (`int`): Target door.
+  - `speed` (`int`): Opening speed.
+  - `angle` (`float`): Target angle degrees.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must call to sync animation.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_doorctl
+        -- Use: Control door angle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_doorctl', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleDoorControl(veh, tonumber(args[1]) or 0, 1, tonumber(args[2]) or 45.0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_doorctl */
+    RegisterCommand('veh_doorctl', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleDoorControl(veh, parseInt(args[0]) || 0, 1, parseFloat(args[1]) || 45.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Door must not be broken.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleDoorControl
+
+##### SetVehicleDoorLatched
+- **Name**: SetVehicleDoorLatched
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_DOOR_LATCHED(Vehicle vehicle, int doorIndex, BOOL p2, BOOL p3, BOOL p4);`
+- **Purpose**: Forces a door to latch in place.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `doorIndex` (`int`): Door identifier.
+  - `p2`, `p3`, `p4` (`bool`): Unknown flags.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must call for others to see latching.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_doorlatch
+        -- Use: Latch a door
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_doorlatch', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleDoorLatched(veh, tonumber(args[1]) or 0, true, true, true) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_doorlatch */
+    RegisterCommand('veh_doorlatch', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleDoorLatched(veh, parseInt(args[0]) || 0, true, true, true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - `p2`–`p4` flags undocumented.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleDoorLatched
+
+##### SetVehicleDoorOpen
+- **Name**: SetVehicleDoorOpen
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_DOOR_OPEN(Vehicle vehicle, int doorIndex, BOOL loose, BOOL openInstantly);`
+- **Purpose**: Opens a vehicle door with optional looseness and speed.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `doorIndex` (`int`): Door identifier.
+  - `loose` (`bool`): `true` leaves door loose.
+  - `openInstantly` (`bool`): `true` opens without animation.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must call to replicate door state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_dooropen
+        -- Use: Open a door
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_dooropen', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleDoorOpen(veh, tonumber(args[1]) or 0, false, false) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_dooropen */
+    RegisterCommand('veh_dooropen', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleDoorOpen(veh, parseInt(args[0]) || 0, false, false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Opening broken doors has no effect.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleDoorOpen
+
+##### SetVehicleDoorsLocked
+- **Name**: SetVehicleDoorsLocked
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_DOORS_LOCKED(Vehicle vehicle, int lockStatus);`
+- **Purpose**: Sets overall vehicle lock status.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `lockStatus` (`int`): Lock state value.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must call to enforce locks.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_lock
+        -- Use: Set lock status
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_lock', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleDoorsLocked(veh, tonumber(args[1]) or 1) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_lock */
+    RegisterCommand('veh_lock', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleDoorsLocked(veh, parseInt(args[0]) || 1);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Lock status values correspond to built-in enums.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleDoorsLocked
+
+##### SetVehicleDoorsLockedForAllPlayers
+- **Name**: SetVehicleDoorsLockedForAllPlayers
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_DOORS_LOCKED_FOR_ALL_PLAYERS(Vehicle vehicle, BOOL locked);`
+- **Purpose**: Locks or unlocks doors for every player.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `locked` (`bool`): `true` prevents all from entering.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must call to enforce locks globally.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_lockall
+        -- Use: Lock doors for all players
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_lockall', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleDoorsLockedForAllPlayers(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_lockall */
+    RegisterCommand('veh_lockall', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleDoorsLockedForAllPlayers(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Overrides individual player lock settings.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleDoorsLockedForAllPlayers
+
+##### SetVehicleDoorsLockedForNonScriptPlayers
+- **Name**: SetVehicleDoorsLockedForNonScriptPlayers
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_DOORS_LOCKED_FOR_NON_SCRIPT_PLAYERS(Vehicle vehicle, BOOL locked);`
+- **Purpose**: Locks doors for players not controlled by scripts.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `locked` (`bool`): `true` blocks entry for non-script players.
+  - **Returns**: `void`
+- **OneSync / Networking**: Call on owner to enforce to all clients.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_locknon
+        -- Use: Lock doors for non-script players
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_locknon', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleDoorsLockedForNonScriptPlayers(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_locknon */
+    RegisterCommand('veh_locknon', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleDoorsLockedForNonScriptPlayers(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Script-controlled players unaffected.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleDoorsLockedForNonScriptPlayers
+
+##### SetVehicleDoorsLockedForPlayer
+- **Name**: SetVehicleDoorsLockedForPlayer
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_DOORS_LOCKED_FOR_PLAYER(Vehicle vehicle, Player player, BOOL locked);`
+- **Purpose**: Locks or unlocks doors for a specific player.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `player` (`Player`): Target player.
+  - `locked` (`bool`): Lock state.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must call; remote players receive lock state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_lockply
+        -- Use: Lock doors for self
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_lockply', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleDoorsLockedForPlayer(veh, PlayerId(), args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_lockply */
+    RegisterCommand('veh_lockply', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleDoorsLockedForPlayer(veh, PlayerId(), args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Works only for players currently spawned.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleDoorsLockedForPlayer
+
+##### SetVehicleDoorsLockedForTeam
+- **Name**: SetVehicleDoorsLockedForTeam
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_DOORS_LOCKED_FOR_TEAM(Vehicle vehicle, int team, BOOL locked);`
+- **Purpose**: Locks or unlocks vehicle doors for a specific team.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `team` (`int`): Team identifier.
+  - `locked` (`bool`): Lock state.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must call to sync team locks.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_lockteam
+        -- Use: Lock doors for team 1
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_lockteam', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleDoorsLockedForTeam(veh, 1, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_lockteam */
+    RegisterCommand('veh_lockteam', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleDoorsLockedForTeam(veh, 1, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Teams must be defined elsewhere.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleDoorsLockedForTeam
+CONTINUE-HERE — 2025-09-12T16:40:02+00:00 — next: Vehicle :: SetVehicleDoorsShut
