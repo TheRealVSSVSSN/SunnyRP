@@ -430,13 +430,13 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Overall | 6442 | 458 | 5984 | 2025-09-12T03:55 |
+| Overall | 6442 | 483 | 5959 | 2025-09-12T04:10 |
 | Player | 248 | 248 | 0 | 2025-09-11T06:38 |
 | Recording | 17 | 17 | 0 | 2025-09-11T06:52 |
 | Replay | 6 | 6 | 0 | 2025-09-11T07:37 |
 | ACL | 10 | 10 | 0 | 2025-09-11T08:12 |
 | CFX | 50 | 50 | 0 | 2025-09-11T09:55 |
-| Vehicle | 751 | 127 | 624 | 2025-09-12T03:55 |
+| Vehicle | 751 | 152 | 599 | 2025-09-12T04:10 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -16558,4 +16558,924 @@ RegisterCommand('rgb', () => {
 - **Caveats / Limitations**:
   - Value is static; does not reflect temporary boosts.
 - **Reference**: https://docs.fivem.net/natives/?n=GetVehicleAcceleration
-CONTINUE-HERE — 2025-09-12T03:55 — next: Vehicle :: GetVehicleAttachedToCargobob
+##### GetVehicleAttachedToCargobob
+- **Name**: GetVehicleAttachedToCargobob
+- **Scope**: Shared
+- **Signature(s)**: `Vehicle GET_VEHICLE_ATTACHED_TO_CARGOBOB(Vehicle cargobob)`
+- **Purpose**: Returns the vehicle currently hooked to a Cargobob.
+- **Parameters / Returns**:
+  - `cargobob` (`Vehicle`): Cargobob handle.
+  - **Returns**: `Vehicle` handle or `0` if none.
+- **OneSync / Networking**: Call on the helicopter's owner to ensure accurate state in OneSync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: hooked
+        -- Use: Prints vehicle attached to current Cargobob
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('hooked', function()
+        local cb = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetVehicleAttachedToCargobob(cb))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: hooked */
+    RegisterCommand('hooked', () => {
+      const cb = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetVehicleAttachedToCargobob(cb));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only returns a vehicle if the Cargobob model has a working hook.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleAttachedToCargobob
+
+##### GetVehicleBodyHealth
+- **Name**: GetVehicleBodyHealth
+- **Scope**: Shared
+- **Signature(s)**: `float GET_VEHICLE_BODY_HEALTH(Vehicle vehicle)`
+- **Purpose**: Retrieves chassis health (0–1000) independent of engine health.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target vehicle.
+  - **Returns**: `float` body health.
+- **OneSync / Networking**: Query on entity owner for up-to-date damage state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: body_health
+        -- Use: Prints body health of current vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('body_health', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetVehicleBodyHealth(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: body_health */
+    RegisterCommand('body_health', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetVehicleBodyHealth(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Vehicle may remain drivable even at 0 health.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleBodyHealth
+
+##### _GET_VEHICLE_BOMB_COUNT
+- **Name**: _GET_VEHICLE_BOMB_COUNT
+- **Scope**: Shared
+- **Signature(s)**: `int _GET_VEHICLE_BOMB_COUNT(Vehicle aircraft)`
+- **Purpose**: Returns number of bombs stored on an aircraft.
+- **Parameters / Returns**:
+  - `aircraft` (`Vehicle`): Plane or VTOL handle.
+  - **Returns**: `int` remaining bombs.
+- **OneSync / Networking**: Use on entity owner to track bomb inventory across clients.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: bomb_count
+        -- Use: Prints remaining bomb count
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('bomb_count', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetVehicleBombCount(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: bomb_count */
+    RegisterCommand('bomb_count', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetVehicleBombCount(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not directly affect weapon ammo; scripts must enforce usage.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleBombCount
+
+##### _GET_VEHICLE_CAN_ACTIVATE_PARACHUTE
+- **Name**: _GET_VEHICLE_CAN_ACTIVATE_PARACHUTE
+- **Scope**: Shared
+- **Signature(s)**: `BOOL _GET_VEHICLE_CAN_ACTIVATE_PARACHUTE(Vehicle vehicle)`
+- **Purpose**: Checks if a parachute system can be engaged for the vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target vehicle.
+  - **Returns**: `bool` parachute availability.
+- **OneSync / Networking**: Local check; server should validate parachute deployment separately.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: can_para
+        -- Use: Prints if vehicle supports parachute
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('can_para', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetVehicleCanActivateParachute(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: can_para */
+    RegisterCommand('can_para', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetVehicleCanActivateParachute(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Documentation lacks detail on conditions.
+  - TODO(next-run): verify server support.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleCanActivateParachute
+
+##### GetVehicleCauseOfDestruction
+- **Name**: GetVehicleCauseOfDestruction
+- **Scope**: Shared
+- **Signature(s)**: `Hash GET_VEHICLE_CAUSE_OF_DESTRUCTION(Vehicle vehicle)`
+- **Purpose**: Returns weapon hash that destroyed the vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Destroyed vehicle.
+  - **Returns**: `Hash` of destruction cause or `0`.
+- **OneSync / Networking**: Requires entity existence; servers should verify against abuse.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: destroy_cause
+        -- Use: Prints hash that destroyed the last vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('destroy_cause', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), true)
+        print(GetVehicleCauseOfDestruction(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: destroy_cause */
+    RegisterCommand('destroy_cause', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), true);
+      console.log(GetVehicleCauseOfDestruction(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns 0 if cause unknown.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleCauseOfDestruction
+
+##### GetVehicleClass
+- **Name**: GetVehicleClass
+- **Scope**: Shared
+- **Signature(s)**: `int GET_VEHICLE_CLASS(Vehicle vehicle)`
+- **Purpose**: Returns the class index of the vehicle model.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to inspect.
+  - **Returns**: `int` class ID (0=Compacts … 22=Open Wheel).
+- **OneSync / Networking**: Pure lookup; no replication concerns.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_class
+        -- Use: Prints class ID of current vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_class', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetVehicleClass(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_class */
+    RegisterCommand('veh_class', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetVehicleClass(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Class name translation requires lookup tables.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleClass
+
+##### GetVehicleClassEstimatedMaxSpeed
+- **Name**: GetVehicleClassEstimatedMaxSpeed
+- **Scope**: Shared
+- **Signature(s)**: `float GET_VEHICLE_CLASS_ESTIMATED_MAX_SPEED(int vehicleClass)`
+- **Purpose**: Returns the estimated top speed for a vehicle class.
+- **Parameters / Returns**:
+  - `vehicleClass` (`int`): Class ID.
+  - **Returns**: `float` speed value in m/s.
+- **OneSync / Networking**: Constant lookup; no replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: class_max_speed
+        -- Use: Prints estimated max speed for class 6 (Sports)
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('class_max_speed', function()
+        print(GetVehicleClassEstimatedMaxSpeed(6))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: class_max_speed */
+    RegisterCommand('class_max_speed', () => {
+      console.log(GetVehicleClassEstimatedMaxSpeed(6));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Values are approximations and ignore modifications.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleClassEstimatedMaxSpeed
+
+##### GetVehicleClassFromName
+- **Name**: GetVehicleClassFromName
+- **Scope**: Shared
+- **Signature(s)**: `int GET_VEHICLE_CLASS_FROM_NAME(Hash modelHash)`
+- **Purpose**: Retrieves class ID for a model hash without spawning the vehicle.
+- **Parameters / Returns**:
+  - `modelHash` (`Hash`): Model identifier.
+  - **Returns**: `int` class ID.
+- **OneSync / Networking**: Server-side lookup useful for validation before spawn.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: class_from_name
+        -- Use: Prints class of adder model
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('class_from_name', function()
+        print(GetVehicleClassFromName(joaat('adder')))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: class_from_name */
+    RegisterCommand('class_from_name', () => {
+      console.log(GetVehicleClassFromName(joaat('adder')));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires hashed model names.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleClassFromName
+
+##### GetVehicleClassMaxAcceleration
+- **Name**: GetVehicleClassMaxAcceleration
+- **Scope**: Shared
+- **Signature(s)**: `float GET_VEHICLE_CLASS_MAX_ACCELERATION(int vehicleClass)`
+- **Purpose**: Gives the baseline acceleration stat for a vehicle class.
+- **Parameters / Returns**:
+  - `vehicleClass` (`int`): Class ID.
+  - **Returns**: `float` acceleration stat.
+- **OneSync / Networking**: Constant lookup; unaffected by network.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: class_max_accel
+        -- Use: Prints class acceleration for class 6
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('class_max_accel', function()
+        print(GetVehicleClassMaxAcceleration(6))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: class_max_accel */
+    RegisterCommand('class_max_accel', () => {
+      console.log(GetVehicleClassMaxAcceleration(6));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Stats are base-game constants.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleClassMaxAcceleration
+
+##### GetVehicleClassMaxAgility
+- **Name**: GetVehicleClassMaxAgility
+- **Scope**: Shared
+- **Signature(s)**: `float GET_VEHICLE_CLASS_MAX_AGILITY(int vehicleClass)`
+- **Purpose**: Provides handling agility metric for a vehicle class.
+- **Parameters / Returns**:
+  - `vehicleClass` (`int`): Class ID.
+  - **Returns**: `float` agility value.
+- **OneSync / Networking**: Static lookup.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: class_max_agility
+        -- Use: Prints agility value for class 6
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('class_max_agility', function()
+        print(GetVehicleClassMaxAgility(6))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: class_max_agility */
+    RegisterCommand('class_max_agility', () => {
+      console.log(GetVehicleClassMaxAgility(6));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Units are arbitrary handling stats.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleClassMaxAgility
+
+##### GetVehicleClassMaxBraking
+- **Name**: GetVehicleClassMaxBraking
+- **Scope**: Shared
+- **Signature(s)**: `float GET_VEHICLE_CLASS_MAX_BRAKING(int vehicleClass)`
+- **Purpose**: Returns braking capability statistic for a class.
+- **Parameters / Returns**:
+  - `vehicleClass` (`int`): Class ID.
+  - **Returns**: `float` braking stat.
+- **OneSync / Networking**: Static lookup.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: class_max_brake
+        -- Use: Prints braking stat for class 6
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('class_max_brake', function()
+        print(GetVehicleClassMaxBraking(6))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: class_max_brake */
+    RegisterCommand('class_max_brake', () => {
+      console.log(GetVehicleClassMaxBraking(6));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Values may not match modified vehicles.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleClassMaxBraking
+
+##### GetVehicleClassMaxTraction
+- **Name**: GetVehicleClassMaxTraction
+- **Scope**: Shared
+- **Signature(s)**: `float GET_VEHICLE_CLASS_MAX_TRACTION(int vehicleClass)`
+- **Purpose**: Provides traction stat for a vehicle class.
+- **Parameters / Returns**:
+  - `vehicleClass` (`int`): Class ID.
+  - **Returns**: `float` traction value.
+- **OneSync / Networking**: Lookup only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: class_max_traction
+        -- Use: Prints traction stat for class 6
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('class_max_traction', function()
+        print(GetVehicleClassMaxTraction(6))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: class_max_traction */
+    RegisterCommand('class_max_traction', () => {
+      console.log(GetVehicleClassMaxTraction(6));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Traction metric is not actual grip.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleClassMaxTraction
+
+##### GetVehicleColor
+- **Name**: GetVehicleColor
+- **Scope**: Shared
+- **Signature(s)**: `void GET_VEHICLE_COLOR(Vehicle vehicle, int* r, int* g, int* b)`
+- **Purpose**: Reads the custom primary colour RGB values.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target vehicle.
+  - `r` (`int*`), `g` (`int*`), `b` (`int*`): Output colour values.
+- **OneSync / Networking**: Use on owner to capture latest custom paint.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_color
+        -- Use: Prints custom primary colour RGB
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_color', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        local r_ptr,g_ptr,b_ptr=Citizen.PointerValueInt(),Citizen.PointerValueInt(),Citizen.PointerValueInt()
+        GetVehicleColor(veh, r_ptr, g_ptr, b_ptr)
+        print(Citizen.PointerGetValue(r_ptr), Citizen.PointerGetValue(g_ptr), Citizen.PointerGetValue(b_ptr))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_color */
+    RegisterCommand('veh_color', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      const r = Citizen.pointerValueInt();
+      const g = Citizen.pointerValueInt();
+      const b = Citizen.pointerValueInt();
+      GetVehicleColor(veh, r, g, b);
+      console.log(Citizen.pointerGetValue(r), Citizen.pointerGetValue(g), Citizen.pointerGetValue(b));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns custom colour; factory colours use `GetVehicleColours`.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleColor
+
+##### GetVehicleColourCombination
+- **Name**: GetVehicleColourCombination
+- **Scope**: Shared
+- **Signature(s)**: `int GET_VEHICLE_COLOUR_COMBINATION(Vehicle vehicle)`
+- **Purpose**: Retrieves current colour combination index for vehicles supporting presets.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - **Returns**: `int` combination index.
+- **OneSync / Networking**: Call on owner to sync modded colours.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: colour_combo
+        -- Use: Prints colour combination index
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('colour_combo', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetVehicleColourCombination(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: colour_combo */
+    RegisterCommand('colour_combo', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetVehicleColourCombination(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only certain vehicles support colour presets.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleColourCombination
+
+##### GetVehicleColours
+- **Name**: GetVehicleColours
+- **Scope**: Shared
+- **Signature(s)**: `void GET_VEHICLE_COLOURS(Vehicle vehicle, int* colorPrimary, int* colorSecondary)`
+- **Purpose**: Retrieves stock primary and secondary colour indices.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - `colorPrimary` (`int*`), `colorSecondary` (`int*`): Output indices.
+- **OneSync / Networking**: Query owner to account for mod changes.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_colours
+        -- Use: Prints factory colour indices
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_colours', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        local p_ptr,s_ptr=Citizen.PointerValueInt(),Citizen.PointerValueInt()
+        GetVehicleColours(veh, p_ptr, s_ptr)
+        print(Citizen.PointerGetValue(p_ptr), Citizen.PointerGetValue(s_ptr))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_colours */
+    RegisterCommand('veh_colours', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      const p = Citizen.pointerValueInt();
+      const s = Citizen.pointerValueInt();
+      GetVehicleColours(veh, p, s);
+      console.log(Citizen.pointerGetValue(p), Citizen.pointerGetValue(s));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Values are paint indices; map to RGB via colour tables.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleColours
+
+##### GetVehicleColoursWhichCanBeSet
+- **Name**: GetVehicleColoursWhichCanBeSet
+- **Scope**: Shared
+- **Signature(s)**: `int GET_VEHICLE_COLOURS_WHICH_CAN_BE_SET(Vehicle vehicle)`
+- **Purpose**: Returns bitfield indicating which colour slots the shader exposes.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - **Returns**: `int` bitmask of supported colour channels.
+- **OneSync / Networking**: Pure lookup.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: settable_colours
+        -- Use: Prints colour capability bitmask
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('settable_colours', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetVehicleColoursWhichCanBeSet(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: settable_colours */
+    RegisterCommand('settable_colours', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetVehicleColoursWhichCanBeSet(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Bit meanings: 1 primary, 2 secondary, 4 pearl, etc.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleColoursWhichCanBeSet
+
+##### _GET_VEHICLE_COUNTERMEASURE_COUNT
+- **Name**: _GET_VEHICLE_COUNTERMEASURE_COUNT
+- **Scope**: Shared
+- **Signature(s)**: `int _GET_VEHICLE_COUNTERMEASURE_COUNT(Vehicle aircraft)`
+- **Purpose**: Returns remaining countermeasures on an aircraft.
+- **Parameters / Returns**:
+  - `aircraft` (`Vehicle`): Plane handle.
+  - **Returns**: `int` count of countermeasures.
+- **OneSync / Networking**: Query owner to keep counts synchronized.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: counter_count
+        -- Use: Prints remaining countermeasures
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('counter_count', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetVehicleCountermeasureCount(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: counter_count */
+    RegisterCommand('counter_count', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetVehicleCountermeasureCount(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires aircraft equipped with countermeasures.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleCountermeasureCount
+
+##### _GET_VEHICLE_CURRENT_SLIPSTREAM_DRAFT
+- **Name**: _GET_VEHICLE_CURRENT_SLIPSTREAM_DRAFT
+- **Scope**: Shared
+- **Signature(s)**: `float _GET_VEHICLE_CURRENT_SLIPSTREAM_DRAFT(Vehicle vehicle)`
+- **Purpose**: Returns slipstream boost factor (0.0–3.0).
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - **Returns**: `float` draft multiplier.
+- **OneSync / Networking**: Local-only; servers should not trust without validation.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: slipstream
+        -- Use: Prints slipstream draft value
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('slipstream', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetVehicleCurrentSlipstreamDraft(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: slipstream */
+    RegisterCommand('slipstream', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetVehicleCurrentSlipstreamDraft(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Value interpretation is unclear.
+  - TODO(next-run): validate range and units.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleCurrentSlipstreamDraft
+
+##### GetVehicleCustomPrimaryColour
+- **Name**: GetVehicleCustomPrimaryColour
+- **Scope**: Shared
+- **Signature(s)**: `void GET_VEHICLE_CUSTOM_PRIMARY_COLOUR(Vehicle vehicle, int* r, int* g, int* b)`
+- **Purpose**: Retrieves custom primary paint RGB values.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target vehicle.
+  - `r` (`int*`), `g` (`int*`), `b` (`int*`): Output colours.
+- **OneSync / Networking**: Owner query recommended.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: cust_primary
+        -- Use: Prints custom primary RGB
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('cust_primary', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        local r,g,b=Citizen.PointerValueInt(),Citizen.PointerValueInt(),Citizen.PointerValueInt()
+        GetVehicleCustomPrimaryColour(veh, r, g, b)
+        print(Citizen.PointerGetValue(r), Citizen.PointerGetValue(g), Citizen.PointerGetValue(b))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: cust_primary */
+    RegisterCommand('cust_primary', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      const r = Citizen.pointerValueInt();
+      const g = Citizen.pointerValueInt();
+      const b = Citizen.pointerValueInt();
+      GetVehicleCustomPrimaryColour(veh, r, g, b);
+      console.log(Citizen.pointerGetValue(r), Citizen.pointerGetValue(g), Citizen.pointerGetValue(b));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Defaults to zero if no custom colour is set.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleCustomPrimaryColour
+
+##### GetVehicleCustomSecondaryColour
+- **Name**: GetVehicleCustomSecondaryColour
+- **Scope**: Shared
+- **Signature(s)**: `void GET_VEHICLE_CUSTOM_SECONDARY_COLOUR(Vehicle vehicle, int* r, int* g, int* b)`
+- **Purpose**: Retrieves custom secondary paint RGB values.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target vehicle.
+  - `r` (`int*`), `g` (`int*`), `b` (`int*`): Output colours.
+- **OneSync / Networking**: Owner query recommended.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: cust_secondary
+        -- Use: Prints custom secondary RGB
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('cust_secondary', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        local r,g,b=Citizen.PointerValueInt(),Citizen.PointerValueInt(),Citizen.PointerValueInt()
+        GetVehicleCustomSecondaryColour(veh, r, g, b)
+        print(Citizen.PointerGetValue(r), Citizen.PointerGetValue(g), Citizen.PointerGetValue(b))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: cust_secondary */
+    RegisterCommand('cust_secondary', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      const r = Citizen.pointerValueInt();
+      const g = Citizen.pointerValueInt();
+      const b = Citizen.pointerValueInt();
+      GetVehicleCustomSecondaryColour(veh, r, g, b);
+      console.log(Citizen.pointerGetValue(r), Citizen.pointerGetValue(g), Citizen.pointerGetValue(b));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Defaults to zero if unset.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleCustomSecondaryColour
+
+##### _GET_VEHICLE_DASHBOARD_COLOR
+- **Name**: _GET_VEHICLE_DASHBOARD_COLOR
+- **Scope**: Shared
+- **Signature(s)**: `void _GET_VEHICLE_DASHBOARD_COLOR(Vehicle vehicle, int* color)`
+- **Purpose**: Obtains dashboard colour index used for vehicle interior lighting.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - `color` (`int*`): Output colour index.
+- **OneSync / Networking**: Owner query needed for modded interiors.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: dash_color
+        -- Use: Prints dashboard colour index
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('dash_color', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        local c=Citizen.PointerValueInt()
+        GetVehicleDashboardColor(veh, c)
+        print(Citizen.PointerGetValue(c))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: dash_color */
+    RegisterCommand('dash_color', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      const c = Citizen.pointerValueInt();
+      GetVehicleDashboardColor(veh, c);
+      console.log(Citizen.pointerGetValue(c));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires vehicles supporting dashboard colour customization.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleDashboardColor
+
+##### GetVehicleDeformationAtPos
+- **Name**: GetVehicleDeformationAtPos
+- **Scope**: Shared
+- **Signature(s)**: `Vector3 GET_VEHICLE_DEFORMATION_AT_POS(Vehicle vehicle, float offsetX, float offsetY, float offsetZ)`
+- **Purpose**: Returns deformation offset at a specific point on the vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target vehicle.
+  - `offsetX`, `offsetY`, `offsetZ` (`float`): Local space offsets.
+  - **Returns**: `vector3` deformation magnitude.
+- **OneSync / Networking**: Call on owner to receive up-to-date damage info.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: deform_pos
+        -- Use: Prints deformation vector at bonnet
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('deform_pos', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        local v = GetVehicleDeformationAtPos(veh, 0.0, 2.0, 0.5)
+        print(v.x, v.y, v.z)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: deform_pos */
+    RegisterCommand('deform_pos', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      const v = GetVehicleDeformationAtPos(veh, 0.0, 2.0, 0.5);
+      console.log(v[0], v[1], v[2]);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Coordinates are in vehicle local space.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleDeformationAtPos
+
+##### GetVehicleDirtLevel
+- **Name**: GetVehicleDirtLevel
+- **Scope**: Shared
+- **Signature(s)**: `float GET_VEHICLE_DIRT_LEVEL(Vehicle vehicle)`
+- **Purpose**: Returns dirt accumulation level (0.0–15.0).
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - **Returns**: `float` dirt value.
+- **OneSync / Networking**: Check on owner; cleaning should be broadcast via native setters.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: dirt_level
+        -- Use: Prints current dirt level
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('dirt_level', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetVehicleDirtLevel(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: dirt_level */
+    RegisterCommand('dirt_level', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetVehicleDirtLevel(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Getter for `SetVehicleDirtLevel`.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleDirtLevel
+
+##### GetVehicleDoorAngleRatio
+- **Name**: GetVehicleDoorAngleRatio
+- **Scope**: Shared
+- **Signature(s)**: `float GET_VEHICLE_DOOR_ANGLE_RATIO(Vehicle vehicle, int doorIndex)`
+- **Purpose**: Returns the open ratio for a door from 0.0 (closed) to 1.0 (open).
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - `doorIndex` (`int`): Door index.
+  - **Returns**: `float` open ratio.
+- **OneSync / Networking**: Call on owner; door state syncs when using door natives.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: door_angle
+        -- Use: Prints driver door open ratio
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('door_angle', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetVehicleDoorAngleRatio(veh, 0))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: door_angle */
+    RegisterCommand('door_angle', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetVehicleDoorAngleRatio(veh, 0));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires correct door index; see `eDoorId`.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleDoorAngleRatio
+
+##### GetVehicleDoorLockStatus
+- **Name**: GetVehicleDoorLockStatus
+- **Scope**: Shared
+- **Signature(s)**: `int GET_VEHICLE_DOOR_LOCK_STATUS(Vehicle vehicle)`
+- **Purpose**: Returns door lock state enum for the vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - **Returns**: `int` lock status.
+- **OneSync / Networking**: Query owner; lock changes propagate with corresponding setter.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: lock_status
+        -- Use: Prints door lock status enum
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('lock_status', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetVehicleDoorLockStatus(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: lock_status */
+    RegisterCommand('lock_status', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetVehicleDoorLockStatus(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Refer to `SetVehicleDoorsLocked` for enum meanings.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleDoorLockStatus
+CONTINUE-HERE — 2025-09-12T04:10 — next: Vehicle :: GetVehicleDoorsLockedForPlayer
