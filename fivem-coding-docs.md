@@ -1,5 +1,321 @@
-| Overall | 6442 | 933 | 5509 | 2025-09-12T17:02:12+00:00 |
-| Vehicle | 751 | 602 | 149 | 2025-09-12T17:02:12+00:00 |
+# FiveM Coding Documentation
+
+## 1. Overview
+FiveM provides a framework for extending Grand Theft Auto V with multiplayer scripts. Resources run on FXServer and can execute on clients and the server simultaneously. This document summarizes official guidance for building secure and efficient code.
+
+**References**
+- https://docs.fivem.net/docs/
+
+## 2. Environment Setup (FXServer, server.cfg, txAdmin)
+- Download the latest FXServer artifact and extract it on the host.
+- Create a `server.cfg` to define ports, resources, and settings.
+- Run the server directly or via **txAdmin** for web-based management and monitoring.
+
+```sh
+# launch FXServer
+./run.sh +exec server.cfg
+
+# launch via txAdmin profile
+./fxserver +set serverProfile dev
+```
+
+**References**
+- https://docs.fivem.net/docs/server-manual/setting-up-a-server/
+- https://docs.fivem.net/docs/server-manual/setting-up-a-server-using-txadmin/
+- https://docs.fivem.net/docs/server-manual/server-cfg/
+
+## 3. Resource Anatomy & fxmanifest.lua
+- A resource is a folder with an `fxmanifest.lua` describing files and runtime options.
+- Client scripts run on players; server scripts run on FXServer; shared scripts load on both.
+- Assets such as HTML, data files, or streaming content are referenced from the manifest.
+
+```lua
+-- fxmanifest.lua
+fx_version 'cerulean'
+game 'gta5'
+
+lua54 'yes'
+
+shared_script 'config.lua'
+client_scripts { 'client/main.lua' }
+server_scripts { 'server/main.lua' }
+```
+
+**References**
+- https://docs.fivem.net/docs/scripting-reference/resource-manifest/resource-manifest/
+
+## 4. Runtimes: Lua, JavaScript, C#
+- **Lua**: default runtime; enable Lua 5.4 with `lua54 'yes'`.
+- **JavaScript**: uses Node.js features; scripts are listed with `.js` paths.
+- **C#**: compiled assemblies loaded via `client_script`/`server_script` entries pointing to `.net.dll` files.
+
+```lua
+--[[
+    -- Type: Server Script
+    -- Name: hello.lua
+    -- Use: Prints a server message
+    -- Created: 2025-09-12
+    -- By: VSSVSSN
+--]]
+print('Hello from Lua runtime')
+```
+
+```javascript
+/* Server Script: hello.js */
+console.log('Hello from JavaScript runtime');
+```
+
+```csharp
+// Server Script: Hello.cs
+using CitizenFX.Core;
+public class Hello : BaseScript
+{
+    public Hello() { Debug.WriteLine("Hello from C# runtime"); }
+}
+```
+
+**References**
+- https://docs.fivem.net/docs/scripting-manual/runtimes/lua/
+- https://docs.fivem.net/docs/scripting-manual/runtimes/javascript/
+- https://docs.fivem.net/docs/scripting-manual/runtimes/csharp/
+
+## 5. Events: Listening, Triggering, Net Events
+- Register local events with `AddEventHandler` and cross-network events with `RegisterNetEvent`.
+- Use `TriggerServerEvent` and `TriggerClientEvent` to communicate between client and server.
+
+Flow diagrams:
+- **Client → Server**: `Client TriggerServerEvent → Server AddEventHandler`
+- **Server → Clients**: `Server TriggerClientEvent → Client AddEventHandler`
+
+```lua
+--[[
+    -- Type: Client Script
+    -- Name: hello_evt.lua
+    -- Use: Sends greeting to server
+    -- Created: 2025-09-12
+    -- By: VSSVSSN
+--]]
+RegisterCommand('hi', function()
+    TriggerServerEvent('hello:server', 'Hi from client')
+end)
+
+RegisterNetEvent('hello:client')
+AddEventHandler('hello:client', function(msg)
+    print(('Server says: %s'):format(msg))
+end)
+```
+
+```javascript
+/* Client Script: hello_evt.js */
+RegisterCommand('hi', () => {
+  TriggerServerEvent('hello:server', 'Hi from client');
+});
+
+onNet('hello:client', (msg) => {
+  console.log(`Server says: ${msg}`);
+});
+```
+
+Server side:
+
+```lua
+--[[ Server Script: hello_srv.lua ]]--
+RegisterNetEvent('hello:server')
+AddEventHandler('hello:server', function(msg)
+    print(('Client says: %s'):format(msg))
+    TriggerClientEvent('hello:client', source, 'Greetings from server')
+end)
+```
+
+```javascript
+/* Server Script: hello_srv.js */
+onNet('hello:server', (msg) => {
+  console.log(`Client says: ${msg}`);
+  emitNet('hello:client', global.source, 'Greetings from server');
+});
+```
+
+**References**
+- https://docs.fivem.net/docs/scripting-manual/events/
+
+## 6. ConVars & Commands
+- ConVars configure runtime behavior; define them in `server.cfg` or at runtime with `SetConvar`.
+- Commands are registered with `RegisterCommand` and can be restricted with ACL.
+
+```lua
+--[[ Command: ping ]]--
+RegisterCommand('ping', function(src)
+    TriggerClientEvent('chat:addMessage', src, { args = { 'Pong!' } })
+end, false)
+
+-- read a ConVar
+local host = GetConvar('mysql_host', 'localhost')
+```
+
+```javascript
+/* Command: ping */
+RegisterCommand('ping', (src) => {
+  emitNet('chat:addMessage', src, { args: ['Pong!'] });
+}, false);
+
+// read a ConVar
+const host = GetConvar('mysql_host', 'localhost');
+```
+
+**References**
+- https://docs.fivem.net/docs/scripting-manual/commands/
+- https://docs.fivem.net/docs/scripting-reference/convars/
+
+## 7. Networking & Sync: OneSync + State Bags
+- Enable OneSync in `server.cfg` with `onesync on` for improved entity routing and ownership.
+- State bags provide key-value storage on entities that automatically replicate to owners and nearby clients.
+
+```lua
+--[[ Vehicle state bag example ]]--
+local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+if veh ~= 0 then
+    Entity(veh).state:set('locked', true, true) -- last true makes it replicated
+end
+```
+
+```javascript
+/* Vehicle state bag example */
+const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+if (veh !== 0) {
+  Entity(veh).state.set('locked', true, true); // replicate to all
+}
+```
+
+**References**
+- https://docs.fivem.net/docs/scripting-reference/onesync/
+- https://docs.fivem.net/docs/scripting-reference/state-bags/
+
+## 8. Access Control (ACL), Principals, Permissions
+- ACL uses principals (`identifier.steam:`, `resource.`) and ACEs to grant or deny commands and events.
+- Modify permissions in `server.cfg` using `add_principal` and `add_ace`.
+
+```cfg
+add_principal identifier.steam:110000112345678 group.admin
+add_ace group.admin command allow
+add_ace resource.myresource command.mycmd allow
+```
+
+**References**
+- https://docs.fivem.net/docs/scripting-manual/access-control/
+- https://docs.fivem.net/docs/server-manual/permissions/
+
+## 9. Debugging & Profiling
+- Use console commands like `txaEvent` and `print` for quick debugging.
+- The built-in profiler measures CPU usage: `profiler record <ms>` then `profiler view`.
+
+```sh
+profiler record 5000
+profiler view
+```
+
+**References**
+- https://docs.fivem.net/docs/scripting-reference/debugging/
+- https://docs.fivem.net/docs/scripting-reference/profiling/
+
+## 10. Security & Best Practices Checklist
+- Never trust client input; validate on the server.
+- Use parameterized queries when interacting with MySQL to avoid injection.
+- Check the `source` of events to prevent spoofing.
+- Limit expensive loops and rate-limit external calls.
+
+**Limitations / Notes**
+- Security recommendations evolve with new platform updates.
+- TODO(next-run): verify latest hardening guidelines.
+
+**References**
+- https://docs.fivem.net/docs/scripting-manual/security-practices/
+
+## 11. Appendices (Templates)
+### Lua Resource Template
+```lua
+-- fxmanifest.lua
+fx_version 'cerulean'
+game 'gta5'
+lua54 'yes'
+
+client_script 'client.lua'
+server_script 'server.lua'
+```
+
+```lua
+-- client.lua
+print('client ready')
+```
+
+```lua
+-- server.lua
+print('server ready')
+```
+
+### JavaScript Resource Template
+```lua
+-- fxmanifest.lua
+fx_version 'cerulean'
+game 'gta5'
+
+client_script 'client.js'
+server_script 'server.js'
+```
+
+```javascript
+// client.js
+console.log('client ready');
+```
+
+```javascript
+// server.js
+console.log('server ready');
+```
+
+### server.cfg Template
+```cfg
+endpoint_add_tcp "0.0.0.0:30120"
+endpoint_add_udp "0.0.0.0:30120"
+ensure my-resource
+onesync on
+```
+
+**References**
+- https://docs.fivem.net/docs/scripting-reference/resource-manifest/resource-manifest/
+- https://docs.fivem.net/docs/server-manual/server-cfg/
+
+## 12. References
+- https://docs.fivem.net/docs/
+- https://docs.fivem.net/docs/server-manual/setting-up-a-server/
+- https://docs.fivem.net/docs/server-manual/setting-up-a-server-using-txadmin/
+- https://docs.fivem.net/docs/server-manual/server-cfg/
+- https://docs.fivem.net/docs/scripting-reference/resource-manifest/resource-manifest/
+- https://docs.fivem.net/docs/scripting-manual/runtimes/lua/
+- https://docs.fivem.net/docs/scripting-manual/runtimes/javascript/
+- https://docs.fivem.net/docs/scripting-manual/runtimes/csharp/
+- https://docs.fivem.net/docs/scripting-manual/events/
+- https://docs.fivem.net/docs/scripting-manual/commands/
+- https://docs.fivem.net/docs/scripting-reference/convars/
+- https://docs.fivem.net/docs/scripting-reference/onesync/
+- https://docs.fivem.net/docs/scripting-reference/state-bags/
+- https://docs.fivem.net/docs/scripting-manual/access-control/
+- https://docs.fivem.net/docs/server-manual/permissions/
+- https://docs.fivem.net/docs/scripting-reference/debugging/
+- https://docs.fivem.net/docs/scripting-reference/profiling/
+- https://docs.fivem.net/docs/scripting-manual/security-practices/
+
+## 13. Natives Index (Client / Server, by Category)
+### 13.0 Processing Ledger
+| Category | Total | Done | Remaining | Last Updated |
+| Overall | 6442 | 933 | 5509 | 2025-09-12T17:15:03+00:00 |
+| Vehicle | 751 | 602 | 149 | 2025-09-12T17:15:03+00:00 |
+
+### 13.1 Taxonomy & Scope Notes
+- Natives are grouped by high-level game systems (e.g., Vehicle, Player) and scope (Client or Server).
+- Entries are sorted alphabetically within each category.
+
+### 13.2 Client Natives by Category
+#### Vehicle
 ##### SetVehicleDoorsShut
 - **Name**: SetVehicleDoorsShut
 - **Scope**: Client
@@ -955,4 +1271,7 @@
   - TODO(next-run): verify handling hash behavior.
 - **Reference**: https://docs.fivem.net/natives/?n=_SetVehicleHandlingHashForAi
 
-CONTINUE-HERE — 2025-09-12T17:02:12+00:00 — next: Vehicle :: SetVehicleHasBeenDrivenFlag
+### 13.3 Server Natives by Category
+- No server native entries documented yet.
+
+CONTINUE-HERE — 2025-09-12T17:15:03+00:00 — next: Vehicle :: SetVehicleHasBeenDrivenFlag
