@@ -307,8 +307,8 @@ onesync on
 ## 13. Natives Index (Client / Server, by Category)
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
-| Overall | 6442 | 933 | 5509 | 2025-09-12T17:15:03+00:00 |
-| Vehicle | 751 | 602 | 149 | 2025-09-12T17:15:03+00:00 |
+| Overall | 6442 | 958 | 5484 | 2025-09-12T18:34:33+00:00 |
+| Vehicle | 751 | 627 | 124 | 2025-09-12T18:34:33+00:00 |
 
 ### 13.1 Taxonomy & Scope Notes
 - Natives are grouped by high-level game systems (e.g., Vehicle, Player) and scope (Client or Server).
@@ -1274,4 +1274,998 @@ onesync on
 ### 13.3 Server Natives by Category
 - No server native entries documented yet.
 
-CONTINUE-HERE — 2025-09-12T17:15:03+00:00 — next: Vehicle :: SetVehicleHasBeenDrivenFlag
+##### SetVehicleHasBeenDrivenFlag
+- **Name**: SetVehicleHasBeenDrivenFlag
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_HAS_BEEN_DRIVEN_FLAG(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Marks a vehicle as having been driven, influencing persistence logic.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `toggle` (`bool`): `true` sets the flag.
+  - **Returns**: `void`
+- **OneSync / Networking**: Call on vehicle owner; affects only local state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_drivenflag
+        -- Use: Toggle driven flag
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_drivenflag', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleHasBeenDrivenFlag(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_drivenflag */
+    RegisterCommand('veh_drivenflag', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleHasBeenDrivenFlag(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Impact on network cleanup is undocumented.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleHasBeenDrivenFlag
+
+##### SetVehicleHasStrongAxles
+- **Name**: SetVehicleHasStrongAxles
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_HAS_STRONG_AXLES(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Makes axles resistant to deformation during collisions.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `toggle` (`bool`): Enables heavy-duty axles when `true`.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must call to sync damage behaviour.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_axles
+        -- Use: Toggle strong axles
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_axles', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleHasStrongAxles(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_axles */
+    RegisterCommand('veh_axles', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleHasStrongAxles(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only affects collision deformation, not suspension strength.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleHasStrongAxles
+
+##### SetVehicleHomingLockon
+- **Name**: SetVehicleHomingLockon
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_HOMING_LOCKON(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Toggles homing missile lock-on capability for the vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `toggle` (`bool`): Enables lock-on when `true`.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner should call to ensure weapon state sync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_homing
+        -- Use: Toggle homing lock-on
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_homing', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleHomingLockon(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_homing */
+    RegisterCommand('veh_homing', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleHomingLockon(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Affects certain aircraft and weaponized vehicles only.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleHomingLockon
+
+##### SetVehicleIndicatorLights
+- **Name**: SetVehicleIndicatorLights
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_INDICATOR_LIGHTS(Vehicle vehicle, int turnSignal, BOOL toggle);`
+- **Purpose**: Controls left/right indicator lights.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle entity.
+  - `turnSignal` (`int`): `0` left, `1` right.
+  - `toggle` (`bool`): `true` enables the light.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner call required to replicate light state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_blink
+        -- Use: Toggle indicators
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_blink', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            SetVehicleIndicatorLights(veh, tonumber(args[1]) or 0, args[2] == 'on')
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_blink */
+    RegisterCommand('veh_blink', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        SetVehicleIndicatorLights(veh, parseInt(args[0]) || 0, args[1] === 'on');
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only visual; no built-in blinking timer.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleIndicatorLights
+
+##### SetVehicleInteriorColor
+- **Name**: SetVehicleInteriorColor
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_INTERIOR_COLOR(Vehicle vehicle, int color);`
+- **Purpose**: Sets interior trim color index.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `color` (`int`): Interior color ID.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner call needed to replicate to others.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_intcol
+        -- Use: Set interior color
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_intcol', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and args[1] then
+            SetVehicleInteriorColor(veh, tonumber(args[1]))
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_intcol */
+    RegisterCommand('veh_intcol', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && args[0]) {
+        SetVehicleInteriorColor(veh, parseInt(args[0]));
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Color indices vary by vehicle model.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleInteriorColor
+
+##### SetVehicleInteriorlight
+- **Name**: SetVehicleInteriorlight
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_INTERIORLIGHT(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Toggles interior dome light.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `toggle` (`bool`): `true` turns on light.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must call to sync light state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_dome
+        -- Use: Toggle interior light
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_dome', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleInteriorlight(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_dome */
+    RegisterCommand('veh_dome', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleInteriorlight(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Light may auto-toggle with door state.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleInteriorlight
+
+##### SetVehicleIsConsideredByPlayer
+- **Name**: SetVehicleIsConsideredByPlayer
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_IS_CONSIDERED_BY_PLAYER(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Excludes vehicle from player targeting when disabled.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `toggle` (`bool`): `false` removes from targeting.
+  - **Returns**: `void`
+- **OneSync / Networking**: Client-side only; no replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_ignore
+        -- Use: Toggle player consideration
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_ignore', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleIsConsideredByPlayer(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_ignore */
+    RegisterCommand('veh_ignore', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleIsConsideredByPlayer(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not prevent damage or collision.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleIsConsideredByPlayer
+
+##### SetVehicleIsStolen
+- **Name**: SetVehicleIsStolen
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_IS_STOLEN(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Marks a vehicle as stolen, affecting police response.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `toggle` (`bool`): `true` marks as stolen.
+  - **Returns**: `void`
+- **OneSync / Networking**: Call on owner for AI police to react consistently.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_stolen
+        -- Use: Toggle stolen state
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_stolen', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleIsStolen(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_stolen */
+    RegisterCommand('veh_stolen', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleIsStolen(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - AI behavior impact varies; not network-critical.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleIsStolen
+
+##### SetVehicleIsWanted
+- **Name**: SetVehicleIsWanted
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_IS_WANTED(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Marks vehicle as wanted for police tracking.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `toggle` (`bool`): Wanted state.
+  - **Returns**: `void`
+- **OneSync / Networking**: Local AI only; not replicated.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_wanted
+        -- Use: Toggle wanted flag
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_wanted', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleIsWanted(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_wanted */
+    RegisterCommand('veh_wanted', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleIsWanted(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Primarily used for AI police dispatch.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleIsWanted
+
+##### SetVehicleKeepEngineOnWhenAbandoned
+- **Name**: SetVehicleKeepEngineOnWhenAbandoned
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_KEEP_ENGINE_ON_WHEN_ABANDONED(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Keeps engine running even when driver exits.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `toggle` (`bool`): `true` leaves engine on.
+  - **Returns**: `void`
+- **OneSync / Networking**: Call on owner; engine state replicates.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_engineon
+        -- Use: Keep engine running after exit
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_engineon', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetVehicleKeepEngineOnWhenAbandoned(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_engineon */
+    RegisterCommand('veh_engineon', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetVehicleKeepEngineOnWhenAbandoned(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Engine may still shut off after timeout.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleKeepEngineOnWhenAbandoned
+
+##### SetVehicleLivery
+- **Name**: SetVehicleLivery
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_LIVERY(Vehicle vehicle, int livery);`
+- **Purpose**: Applies a vehicle livery by index.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `livery` (`int`): Livery index.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must apply so others see it.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_livery
+        -- Use: Set livery
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_livery', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and args[1] then
+            SetVehicleLivery(veh, tonumber(args[1]))
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_livery */
+    RegisterCommand('veh_livery', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && args[0]) {
+        SetVehicleLivery(veh, parseInt(args[0]));
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Valid indices depend on vehicle model.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleLivery
+
+##### SetVehicleLivery2
+- **Name**: SetVehicleLivery2
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_LIVERY2(Vehicle vehicle, int livery);`
+- **Purpose**: Sets secondary livery layer when supported.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `livery` (`int`): Secondary livery index.
+  - **Returns**: `void`
+- **OneSync / Networking**: Apply on owner to replicate.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_livery2
+        -- Use: Set secondary livery
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_livery2', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and args[1] then
+            SetVehicleLivery2(veh, tonumber(args[1]))
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_livery2 */
+    RegisterCommand('veh_livery2', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && args[0]) {
+        SetVehicleLivery2(veh, parseInt(args[0]));
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not all vehicles support a second livery.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleLivery2
+
+##### SetVehicleLodMultiplier
+- **Name**: SetVehicleLodMultiplier
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_LOD_MULTIPLIER(Vehicle vehicle, float multiplier);`
+- **Purpose**: Adjusts Level-of-Detail distance scaling for the vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `multiplier` (`float`): LOD distance scale.
+  - **Returns**: `void`
+- **OneSync / Networking**: Client-side visual tweak; no replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_lod
+        -- Use: Set LOD multiplier
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_lod', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and args[1] then
+            SetVehicleLodMultiplier(veh, tonumber(args[1]))
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_lod */
+    RegisterCommand('veh_lod', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && args[0]) {
+        SetVehicleLodMultiplier(veh, parseFloat(args[0]));
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Extreme values may impact performance.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleLodMultiplier
+
+##### SetVehicleLights
+- **Name**: SetVehicleLights
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_LIGHTS(Vehicle vehicle, int state);`
+- **Purpose**: Forces vehicle lights state.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `state` (`int`): `0` normal, `1` always on, `2` always off, `3` unknown.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner call required for replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_lights
+        -- Use: Set lights state
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_lights', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and args[1] then
+            SetVehicleLights(veh, tonumber(args[1]))
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_lights */
+    RegisterCommand('veh_lights', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && args[0]) {
+        SetVehicleLights(veh, parseInt(args[0]));
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Some states may revert based on time-of-day.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleLights
+
+##### SetVehicleLightsMode
+- **Name**: SetVehicleLightsMode
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_LIGHTS_MODE(Vehicle vehicle, int mode);`
+- **Purpose**: Overrides automatic headlight logic.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `mode` (`int`): `0` auto, `1` off, `2` on.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner call ensures others see the mode.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_lightmode
+        -- Use: Set lights mode
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_lightmode', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and args[1] then
+            SetVehicleLightsMode(veh, tonumber(args[1]))
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_lightmode */
+    RegisterCommand('veh_lightmode', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && args[0]) {
+        SetVehicleLightsMode(veh, parseInt(args[0]));
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Some vehicles ignore manual modes.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleLightsMode
+
+##### SetVehicleLightsOnPlayerVehicle
+- **Name**: SetVehicleLightsOnPlayerVehicle
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_LIGHTS_ON_PLAYER_VEHICLE(Player player, BOOL toggle);`
+- **Purpose**: Forces headlights for a player’s current vehicle.
+- **Parameters / Returns**:
+  - `player` (`Player`)
+  - `toggle` (`bool`): `true` lights on.
+  - **Returns**: `void`
+- **OneSync / Networking**: Local effect; only affects specified player’s view.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: player_lights
+        -- Use: Force player's vehicle lights
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('player_lights', function(src, args)
+        local toggle = args[1] == 'on'
+        SetVehicleLightsOnPlayerVehicle(src, toggle)
+    end, false)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: player_lights */
+    RegisterCommand('player_lights', (src, args) => {
+      SetVehicleLightsOnPlayerVehicle(src, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires server context to target other players.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleLightsOnPlayerVehicle
+
+##### SetVehicleMaxSpeed
+- **Name**: SetVehicleMaxSpeed
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_MAX_SPEED(Vehicle vehicle, float speed);`
+- **Purpose**: Caps maximum vehicle speed (m/s).
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `speed` (`float`): Max speed in meters per second.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner call; speed cap replicates via physics.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_speed
+        -- Use: Set max speed
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_speed', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and args[1] then
+            SetVehicleMaxSpeed(veh, tonumber(args[1]))
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_speed */
+    RegisterCommand('veh_speed', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && args[0]) {
+        SetVehicleMaxSpeed(veh, parseFloat(args[0]));
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Setting `speed` to `-1` removes limit.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleMaxSpeed
+
+##### SetVehicleMod
+- **Name**: SetVehicleMod
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_MOD(Vehicle vehicle, int modType, int modIndex, BOOL customTires);`
+- **Purpose**: Applies a mod kit component.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `modType` (`int`): Mod slot.
+  - `modIndex` (`int`): Component index.
+  - `customTires` (`bool`): Only for wheels.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must apply for others to see modification.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_mod
+        -- Use: Apply vehicle mod
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_mod', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and args[1] and args[2] then
+            SetVehicleMod(veh, tonumber(args[1]), tonumber(args[2]), args[3] == 'true')
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_mod */
+    RegisterCommand('veh_mod', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && args.length >= 2) {
+        SetVehicleMod(veh, parseInt(args[0]), parseInt(args[1]), args[2] === 'true');
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires mod kit installed via `SetVehicleModKit`.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleMod
+
+##### SetVehicleModColor1
+- **Name**: SetVehicleModColor1
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_MOD_COLOR_1(Vehicle vehicle, int paintType, int color, int pearlescent);`
+- **Purpose**: Sets primary paint mod color.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `paintType` (`int`): Color category.
+  - `color` (`int`): Color index.
+  - `pearlescent` (`int`): Pearlescent index.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner call required to sync visual change.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_modcol1
+        -- Use: Set primary mod color
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_modcol1', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and args[1] and args[2] and args[3] then
+            SetVehicleModColor1(veh, tonumber(args[1]), tonumber(args[2]), tonumber(args[3]))
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_modcol1 */
+    RegisterCommand('veh_modcol1', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && args.length >= 3) {
+        SetVehicleModColor1(veh, parseInt(args[0]), parseInt(args[1]), parseInt(args[2]));
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Valid indices depend on paint type.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleModColor1
+
+##### SetVehicleModColor2
+- **Name**: SetVehicleModColor2
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_MOD_COLOR_2(Vehicle vehicle, int paintType, int color);`
+- **Purpose**: Sets secondary paint mod color.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `paintType` (`int`)
+  - `color` (`int`)
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner call required for replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_modcol2
+        -- Use: Set secondary mod color
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_modcol2', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and args[1] and args[2] then
+            SetVehicleModColor2(veh, tonumber(args[1]), tonumber(args[2]))
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_modcol2 */
+    RegisterCommand('veh_modcol2', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && args.length >= 2) {
+        SetVehicleModColor2(veh, parseInt(args[0]), parseInt(args[1]));
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Secondary paint may not be visible on all models.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleModColor2
+
+##### SetVehicleModKit
+- **Name**: SetVehicleModKit
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_MOD_KIT(Vehicle vehicle, int modKit);`
+- **Purpose**: Selects mod kit allowing installation of modifications.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `modKit` (`int`): Usually `0` for default kit.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must set before applying mods.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_modkit
+        -- Use: Set mod kit
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_modkit', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and args[1] then
+            SetVehicleModKit(veh, tonumber(args[1]))
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_modkit */
+    RegisterCommand('veh_modkit', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && args[0]) {
+        SetVehicleModKit(veh, parseInt(args[0]));
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Required before any `SetVehicleMod` calls.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleModKit
+
+##### SetVehicleModelAlpha
+- **Name**: SetVehicleModelAlpha
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_MODEL_ALPHA(Vehicle vehicle, int alpha);`
+- **Purpose**: Sets vehicle model alpha transparency.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `alpha` (`int`): 0-255 transparency.
+  - **Returns**: `void`
+- **OneSync / Networking**: Client-side effect; non-replicated.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_alpha
+        -- Use: Set vehicle transparency
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_alpha', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and args[1] then
+            SetVehicleModelAlpha(veh, tonumber(args[1]))
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_alpha */
+    RegisterCommand('veh_alpha', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && args[0]) {
+        SetVehicleModelAlpha(veh, parseInt(args[0]));
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Transparency resets when model reloads.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleModelAlpha
+
+##### SetVehicleModelIsSuppressed
+- **Name**: SetVehicleModelIsSuppressed
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_MODEL_IS_SUPPRESSED(Hash model, BOOL toggle);`
+- **Purpose**: Suppresses ambient spawning of specified vehicle model.
+- **Parameters / Returns**:
+  - `model` (`Hash`): Vehicle model hash.
+  - `toggle` (`bool`): `true` prevents spawning.
+  - **Returns**: `void`
+- **OneSync / Networking**: Global effect; call on server for all clients.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: model_suppress
+        -- Use: Toggle model suppression
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('model_suppress', function(_, args)
+        if args[1] then
+            SetVehicleModelIsSuppressed(GetHashKey(args[1]), args[2] == 'on')
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: model_suppress */
+    RegisterCommand('model_suppress', (_src, args) => {
+      if (args[0]) {
+        SetVehicleModelIsSuppressed(GetHashKey(args[0]), args[1] === 'on');
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not despawn existing vehicles.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleModelIsSuppressed
+
+##### SetVehicleNeonLightEnabled
+- **Name**: SetVehicleNeonLightEnabled
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_NEON_LIGHT_ENABLED(Vehicle vehicle, int index, BOOL toggle);`
+- **Purpose**: Enables or disables neon light tubes by index.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `index` (`int`): 0=left,1=right,2=front,3=back.
+  - `toggle` (`bool`): `true` enables.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner call required; neon state replicates.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_neon
+        -- Use: Toggle neon lights
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_neon', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and args[1] then
+            SetVehicleNeonLightEnabled(veh, tonumber(args[1]), args[2] == 'on')
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_neon */
+    RegisterCommand('veh_neon', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && args.length >= 2) {
+        SetVehicleNeonLightEnabled(veh, parseInt(args[0]), args[1] === 'on');
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Neon mods must be installed first.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleNeonLightEnabled
+
+##### SetVehicleNeonLightsColour
+- **Name**: SetVehicleNeonLightsColour
+- **Scope**: Client
+- **Signature**: `void SET_VEHICLE_NEON_LIGHTS_COLOUR(Vehicle vehicle, int r, int g, int b);`
+- **Purpose**: Sets RGB color for neon lighting.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `r` (`int`)
+  - `g` (`int`)
+  - `b` (`int`)
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must call; color replicates.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_neoncol
+        -- Use: Set neon color
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_neoncol', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and args[1] and args[2] and args[3] then
+            SetVehicleNeonLightsColour(veh, tonumber(args[1]), tonumber(args[2]), tonumber(args[3]))
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_neoncol */
+    RegisterCommand('veh_neoncol', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && args.length >= 3) {
+        SetVehicleNeonLightsColour(veh, parseInt(args[0]), parseInt(args[1]), parseInt(args[2]));
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Values outside 0-255 are clamped.
+- **Reference**: https://docs.fivem.net/natives/?n=SetVehicleNeonLightsColour
+CONTINUE-HERE — 2025-09-12T18:34:33+00:00 — next: Vehicle :: SetVehicleNumberPlateText
