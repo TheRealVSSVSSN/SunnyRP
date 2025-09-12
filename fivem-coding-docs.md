@@ -307,8 +307,8 @@ onesync on
 ## 13. Natives Index (Client / Server, by Category)
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
-| Overall | 6442 | 184 | 6258 | 2025-09-12T21:16:28+00:00 |
-| Vehicle | 751 | 184 | 567 | 2025-09-12T21:16:28+00:00 |
+| Overall | 6442 | 209 | 6233 | 2025-09-12T21:27:41+00:00 |
+| Vehicle | 751 | 209 | 542 | 2025-09-12T21:27:41+00:00 |
 
 ### 13.1 Taxonomy & Scope Notes
 - Natives are grouped by high-level game systems (e.g., Vehicle, Player) and scope (Client or Server).
@@ -7577,4 +7577,1040 @@ onesync on
   - Returns 0 when no playback is active.
 - **Reference**: https://docs.fivem.net/natives/?n=GetCurrentPlaybackForVehicle
 
-CONTINUE-HERE — 2025-09-12T21:16:28+00:00 — next: Vehicle :: GetDisplayNameFromVehicleModel
+##### GetDisplayNameFromVehicleModel
+- **Name**: GetDisplayNameFromVehicleModel
+- **Scope**: Client
+- **Signature**: `char* GET_DISPLAY_NAME_FROM_VEHICLE_MODEL(Hash modelHash);`
+- **Purpose**: Returns the display name text label for the provided vehicle model.
+- **Parameters / Returns**:
+  - `modelHash` (`Hash`): Vehicle model hash to query.
+  - **Returns**: `string` display label or `CARNOTFOUND`.
+- **OneSync / Networking**: Pure metadata lookup; no ownership required.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: vehlabel
+        -- Use: Show current vehicle display label
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('vehlabel', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            local name = GetDisplayNameFromVehicleModel(GetEntityModel(veh))
+            TriggerEvent('chat:addMessage', { args = {'Vehicle', name} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: vehlabel */
+    RegisterCommand('vehlabel', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        const name = GetDisplayNameFromVehicleModel(GetEntityModel(veh));
+        emit('chat:addMessage', { args: ['Vehicle', name] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns `CARNOTFOUND` for unknown models.
+- **Reference**: https://docs.fivem.net/natives/?_0xB215AAC32D25D019
+
+##### _GET_DOES_VEHICLE_HAVE_TOMBSTONE
+- **Name**: _GET_DOES_VEHICLE_HAVE_TOMBSTONE
+- **Scope**: Client
+- **Signature**: `BOOL _GET_DOES_VEHICLE_HAVE_TOMBSTONE(Vehicle vehicle);`
+- **Purpose**: Checks if the vehicle supports a decorative tombstone.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to inspect.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Vehicle must be streamed to query decor data.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: tombstone
+        -- Use: Notify if the current vehicle has a tombstone option
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('tombstone', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and GetDoesVehicleHaveTombstone(veh) then
+            TriggerEvent('chat:addMessage', { args = {'Vehicle', 'Tombstone available'} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: tombstone */
+    RegisterCommand('tombstone', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && GetDoesVehicleHaveTombstone(veh)) {
+        emit('chat:addMessage', { args: ['Vehicle', 'Tombstone available'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Documentation for this native is limited.
+  - TODO(next-run): verify semantics.
+- **Reference**: https://docs.fivem.net/natives/?_0x71AFB258CCED3A27
+
+##### _GET_DRIFT_TYRES_ENABLED
+- **Name**: _GET_DRIFT_TYRES_ENABLED
+- **Scope**: Client
+- **Signature**: `BOOL _GET_DRIFT_TYRES_ENABLED(Vehicle vehicle);`
+- **Purpose**: Returns whether drift tyre mode is enabled on the vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to check.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Requires vehicle to be streamed; state sync is owner-driven.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: drifttyres
+        -- Use: Report if current vehicle uses drift tyres
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('drifttyres', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and GetDriftTyresEnabled(veh) then
+            TriggerEvent('chat:addMessage', { args = {'Vehicle', 'Drift tyres active'} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: drifttyres */
+    RegisterCommand('drifttyres', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && GetDriftTyresEnabled(veh)) {
+        emit('chat:addMessage', { args: ['Vehicle', 'Drift tyres active'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only applicable to vehicles with drift mode support.
+- **Reference**: https://docs.fivem.net/natives/?_0x2F5A72430E78C8D3
+
+##### _GET_ENTITY_ATTACHED_TO_CARGOBOB
+- **Name**: _GET_ENTITY_ATTACHED_TO_CARGOBOB
+- **Scope**: Client
+- **Signature**: `Entity _GET_ENTITY_ATTACHED_TO_CARGOBOB(Vehicle vehicle);`
+- **Purpose**: Retrieves the entity currently attached to the specified Cargobob.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Cargobob to check.
+  - **Returns**: `Entity` handle or `0`.
+- **OneSync / Networking**: Cargobob must be owned or streamed to access attachment state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: cargobobload
+        -- Use: Show entity attached to current Cargobob
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('cargobobload', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            local ent = GetEntityAttachedToCargobob(veh)
+            if ent ~= 0 then
+                TriggerEvent('chat:addMessage', { args = {'Cargobob', ('Attached entity: %s'):format(ent)} })
+            end
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: cargobobload */
+    RegisterCommand('cargobobload', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        const ent = GetEntityAttachedToCargobob(veh);
+        if (ent !== 0) {
+          emit('chat:addMessage', { args: ['Cargobob', `Attached entity: ${ent}`] });
+        }
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns 0 when nothing is attached.
+- **Reference**: https://docs.fivem.net/natives/?_0x99093F60746708CA
+
+##### GetEntityAttachedToTowTruck
+- **Name**: GetEntityAttachedToTowTruck
+- **Scope**: Client
+- **Signature**: `Entity GET_ENTITY_ATTACHED_TO_TOW_TRUCK(Vehicle towTruck);`
+- **Purpose**: Returns the entity currently towed by the tow truck.
+- **Parameters / Returns**:
+  - `towTruck` (`Vehicle`): Tow truck vehicle handle.
+  - **Returns**: `Entity` handle or `0`.
+- **OneSync / Networking**: Tow truck must be streamed; attachment sync handled by owner.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: towload
+        -- Use: Report the entity attached to the tow truck
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('towload', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            local ent = GetEntityAttachedToTowTruck(veh)
+            if ent ~= 0 then
+                TriggerEvent('chat:addMessage', { args = {'Tow', ('Attached entity: %s'):format(ent)} })
+            end
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: towload */
+    RegisterCommand('towload', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        const ent = GetEntityAttachedToTowTruck(veh);
+        if (ent !== 0) {
+          emit('chat:addMessage', { args: ['Tow', `Attached entity: ${ent}`] });
+        }
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only returns vehicles attached via tow mechanism.
+- **Reference**: https://docs.fivem.net/natives/?_0xEFEA18DCF10F8F75
+
+##### _GET_ENTRY_POSITION_OF_DOOR
+- **Name**: _GET_ENTRY_POSITION_OF_DOOR
+- **Scope**: Client
+- **Signature**: `Vector3 _GET_ENTRY_POSITION_OF_DOOR(Vehicle vehicle, int doorIndex);`
+- **Purpose**: Provides the world position where a ped would enter the specified door.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to sample.
+  - `doorIndex` (`int`): Door ID (see eDoorId).
+  - **Returns**: `vector3` coordinates.
+- **OneSync / Networking**: Vehicle must be streamed; purely local calculation.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: doorpos
+        -- Use: Print entry position for driver's door
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('doorpos', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            local pos = GetEntryPositionOfDoor(veh, 0)
+            TriggerEvent('chat:addMessage', { args = {'Door', ('%.2f %.2f %.2f'):format(pos.x, pos.y, pos.z)} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: doorpos */
+    RegisterCommand('doorpos', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        const pos = GetEntryPositionOfDoor(veh, 0);
+        emit('chat:addMessage', { args: ['Door', `${pos.x.toFixed(2)} ${pos.y.toFixed(2)} ${pos.z.toFixed(2)}`] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Coordinates are local to client; may differ slightly across machines.
+- **Reference**: https://docs.fivem.net/natives/?_0xC0572928C0ABFDA3
+
+##### _GET_HAS_RETRACTABLE_WHEELS
+- **Name**: _GET_HAS_RETRACTABLE_WHEELS
+- **Scope**: Client
+- **Signature**: `BOOL _GET_HAS_RETRACTABLE_WHEELS(Vehicle vehicle);`
+- **Purpose**: Determines if the vehicle features retractable landing gear or wheels.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to inspect.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Requires vehicle entity to be streamed.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: retractwheels
+        -- Use: Check if current vehicle has retractable wheels
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('retractwheels', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and GetHasRetractableWheels(veh) then
+            TriggerEvent('chat:addMessage', { args = {'Vehicle', 'Retractable wheels'} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: retractwheels */
+    RegisterCommand('retractwheels', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && GetHasRetractableWheels(veh)) {
+        emit('chat:addMessage', { args: ['Vehicle', 'Retractable wheels'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Typically true for aircraft like Hydra.
+- **Reference**: https://docs.fivem.net/natives/?_0xDCA174A42133F08C
+
+##### _GET_HAS_ROCKET_BOOST
+- **Name**: _GET_HAS_ROCKET_BOOST
+- **Scope**: Client
+- **Signature**: `BOOL _GET_HAS_ROCKET_BOOST(Vehicle vehicle);`
+- **Purpose**: Checks if the vehicle includes a rocket boost system.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to inspect.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Rocket boost state syncs with vehicle owner.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: rocketboost
+        -- Use: Determine if current vehicle has rocket boost
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('rocketboost', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and GetHasRocketBoost(veh) then
+            TriggerEvent('chat:addMessage', { args = {'Vehicle', 'Rocket boost ready'} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: rocketboost */
+    RegisterCommand('rocketboost', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && GetHasRocketBoost(veh)) {
+        emit('chat:addMessage', { args: ['Vehicle', 'Rocket boost ready'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only for vehicles supporting rocket boost upgrades.
+- **Reference**: https://docs.fivem.net/natives/?_0x36D782F68B309BDA
+
+##### GetHeliMainRotorHealth
+- **Name**: GetHeliMainRotorHealth
+- **Scope**: Client
+- **Signature**: `float GET_HELI_MAIN_ROTOR_HEALTH(Vehicle vehicle);`
+- **Purpose**: Retrieves main rotor health; 0 stalls the rotor.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Helicopter to check.
+  - **Returns**: `float` (max 1000).
+- **OneSync / Networking**: Health syncs from owning client.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: mainrotor
+        -- Use: Report main rotor health of current heli
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('mainrotor', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            local hp = GetHeliMainRotorHealth(veh)
+            TriggerEvent('chat:addMessage', { args = {'Heli', ('Main rotor: %d'):format(math.floor(hp))} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: mainrotor */
+    RegisterCommand('mainrotor', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        const hp = GetHeliMainRotorHealth(veh);
+        emit('chat:addMessage', { args: ['Heli', `Main rotor: ${Math.floor(hp)}`] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Value ranges 0–1000.
+- **Reference**: https://docs.fivem.net/natives/?_0xE4CB7541F413D2C5
+
+##### GetHeliTailBoomHealth
+- **Name**: GetHeliTailBoomHealth
+- **Scope**: Client
+- **Signature**: `float GET_HELI_TAIL_BOOM_HEALTH(Vehicle vehicle);`
+- **Purpose**: Returns tail boom structural health; -100 stalls rotors.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Helicopter to inspect.
+  - **Returns**: `float` (max 1000).
+- **OneSync / Networking**: Synced with helicopter owner.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: tailboom
+        -- Use: Report tail boom health of current heli
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('tailboom', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            local hp = GetHeliTailBoomHealth(veh)
+            TriggerEvent('chat:addMessage', { args = {'Heli', ('Tail boom: %d'):format(math.floor(hp))} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: tailboom */
+    RegisterCommand('tailboom', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        const hp = GetHeliTailBoomHealth(veh);
+        emit('chat:addMessage', { args: ['Heli', `Tail boom: ${Math.floor(hp)}`] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Below -100 rotor failure occurs.
+- **Reference**: https://docs.fivem.net/natives/?_0xAC51915D27E4A5F7
+
+##### GetHeliTailRotorHealth
+- **Name**: GetHeliTailRotorHealth
+- **Scope**: Client
+- **Signature**: `float GET_HELI_TAIL_ROTOR_HEALTH(Vehicle heli);`
+- **Purpose**: Gets health of the tail rotor; 0 stalls the rotor.
+- **Parameters / Returns**:
+  - `heli` (`Vehicle`): Helicopter to inspect.
+  - **Returns**: `float` (max 1000).
+- **OneSync / Networking**: Health value owned by controlling client.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: tailrotor
+        -- Use: Report tail rotor health of current heli
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('tailrotor', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            local hp = GetHeliTailRotorHealth(veh)
+            TriggerEvent('chat:addMessage', { args = {'Heli', ('Tail rotor: %d'):format(math.floor(hp))} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: tailrotor */
+    RegisterCommand('tailrotor', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        const hp = GetHeliTailRotorHealth(veh);
+        emit('chat:addMessage', { args: ['Heli', `Tail rotor: ${Math.floor(hp)}`] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Max value 1000.
+- **Reference**: https://docs.fivem.net/natives/?_0xAE8CE82A4219AC8C
+
+##### _GET_HYDRAULIC_WHEEL_VALUE
+- **Name**: _GET_HYDRAULIC_WHEEL_VALUE
+- **Scope**: Client
+- **Signature**: `float _GET_HYDRAULIC_WHEEL_VALUE(Vehicle vehicle, int wheelId);`
+- **Purpose**: Returns the hydraulic suspension value for a wheel.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to inspect.
+  - `wheelId` (`int`): Wheel index.
+  - **Returns**: `float` height ratio.
+- **OneSync / Networking**: Hydraulic positions replicate from owner.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: hydrowheel
+        -- Use: Display hydraulic value for front left wheel
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('hydrowheel', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            local v = GetHydraulicWheelValue(veh, 0)
+            TriggerEvent('chat:addMessage', { args = {'Hydraulics', ('Wheel: %.2f'):format(v)} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: hydrowheel */
+    RegisterCommand('hydrowheel', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        const v = GetHydraulicWheelValue(veh, 0);
+        emit('chat:addMessage', { args: ['Hydraulics', `Wheel: ${v.toFixed(2)}`] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Wheel indices vary by vehicle.
+- **Reference**: https://docs.fivem.net/natives/?_0x0BB5CBDDD0F25AE3
+
+##### GetIsBoatCapsized
+- **Name**: GetIsBoatCapsized
+- **Scope**: Client
+- **Signature**: `BOOL GET_IS_BOAT_CAPSIZED(Vehicle vehicle);`
+- **Purpose**: Checks whether the boat is overturned in water.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Boat to check.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Requires streamed boat; state derived locally.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: capsized
+        -- Use: Warn if current boat is capsized
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('capsized', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and GetIsBoatCapsized(veh) then
+            TriggerEvent('chat:addMessage', { args = {'Boat', 'Capsized!'} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: capsized */
+    RegisterCommand('capsized', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && GetIsBoatCapsized(veh)) {
+        emit('chat:addMessage', { args: ['Boat', 'Capsized!'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only valid for boat-class vehicles.
+- **Reference**: https://docs.fivem.net/natives/?_0xBA91D045575699AD
+
+##### _GET_IS_DOOR_VALID
+- **Name**: _GET_IS_DOOR_VALID
+- **Scope**: Client
+- **Signature**: `BOOL _GET_IS_DOOR_VALID(Vehicle vehicle, int doorIndex);`
+- **Purpose**: Verifies that a specific vehicle door index exists.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to inspect.
+  - `doorIndex` (`int`): Door ID.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Local query; vehicle must be streamed.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: doorvalid
+        -- Use: Check if rear left door index is valid
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('doorvalid', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and GetIsDoorValid(veh, 2) then
+            TriggerEvent('chat:addMessage', { args = {'Door', 'Rear left door exists'} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: doorvalid */
+    RegisterCommand('doorvalid', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && GetIsDoorValid(veh, 2)) {
+        emit('chat:addMessage', { args: ['Door', 'Rear left door exists'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Door indices differ between vehicles.
+- **Reference**: https://docs.fivem.net/natives/?_0x645F4B6E8499F632
+
+##### GetIsLeftVehicleHeadlightDamaged
+- **Name**: GetIsLeftVehicleHeadlightDamaged
+- **Scope**: Client
+- **Signature**: `BOOL GET_IS_LEFT_VEHICLE_HEADLIGHT_DAMAGED(Vehicle vehicle);`
+- **Purpose**: Determines if the left headlight is broken from driver's view.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to check.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Damage state shared by owning client.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: leftlight
+        -- Use: Report status of left headlight
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('leftlight', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and GetIsLeftVehicleHeadlightDamaged(veh) then
+            TriggerEvent('chat:addMessage', { args = {'Lights', 'Left headlight broken'} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: leftlight */
+    RegisterCommand('leftlight', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && GetIsLeftVehicleHeadlightDamaged(veh)) {
+        emit('chat:addMessage', { args: ['Lights', 'Left headlight broken'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Perspective is from driver seat.
+- **Reference**: https://docs.fivem.net/natives/?_0x5EF77C9ADD3B11A3
+
+##### GetIsRightVehicleHeadlightDamaged
+- **Name**: GetIsRightVehicleHeadlightDamaged
+- **Scope**: Client
+- **Signature**: `BOOL GET_IS_RIGHT_VEHICLE_HEADLIGHT_DAMAGED(Vehicle vehicle);`
+- **Purpose**: Determines if the right headlight is broken from driver's view.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to check.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Damage state shared by owning client.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: rightlight
+        -- Use: Report status of right headlight
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('rightlight', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and GetIsRightVehicleHeadlightDamaged(veh) then
+            TriggerEvent('chat:addMessage', { args = {'Lights', 'Right headlight broken'} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: rightlight */
+    RegisterCommand('rightlight', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && GetIsRightVehicleHeadlightDamaged(veh)) {
+        emit('chat:addMessage', { args: ['Lights', 'Right headlight broken'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Perspective is from driver seat.
+- **Reference**: https://docs.fivem.net/natives/?_0xA7ECB73355EB2F20
+
+##### _GET_IS_VEHICLE_ELECTRIC
+- **Name**: _GET_IS_VEHICLE_ELECTRIC
+- **Scope**: Client
+- **Signature**: `BOOL _GET_IS_VEHICLE_ELECTRIC(Hash vehicleModel);`
+- **Purpose**: Checks if a vehicle model is electric-powered.
+- **Parameters / Returns**:
+  - `vehicleModel` (`Hash`): Model hash to test.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Model metadata lookup only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: elecmodel
+        -- Use: Inform if current vehicle model is electric
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('elecmodel', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            local model = GetEntityModel(veh)
+            if GetIsVehicleElectric(model) then
+                TriggerEvent('chat:addMessage', { args = {'Vehicle', 'Electric model'} })
+            end
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: elecmodel */
+    RegisterCommand('elecmodel', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        const model = GetEntityModel(veh);
+        if (GetIsVehicleElectric(model)) {
+          emit('chat:addMessage', { args: ['Vehicle', 'Electric model'] });
+        }
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Introduced in later game builds; not all models defined.
+- **Reference**: https://docs.fivem.net/natives/?_0x1FCB07FE230B6639
+
+##### _GET_IS_VEHICLE_EMP_DISABLED
+- **Name**: _GET_IS_VEHICLE_EMP_DISABLED
+- **Scope**: Client
+- **Signature**: `BOOL _GET_IS_VEHICLE_EMP_DISABLED(Vehicle vehicle);`
+- **Purpose**: Returns whether the vehicle is disabled by an EMP effect.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to check.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: EMP state must be synced by owner.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: empcheck
+        -- Use: Alert if current vehicle is EMP disabled
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('empcheck', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and GetIsVehicleEmpDisabled(veh) then
+            TriggerEvent('chat:addMessage', { args = {'Vehicle', 'EMP disabled'} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: empcheck */
+    RegisterCommand('empcheck', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && GetIsVehicleEmpDisabled(veh)) {
+        emit('chat:addMessage', { args: ['Vehicle', 'EMP disabled'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires game build with EMP mines support.
+- **Reference**: https://docs.fivem.net/natives/?_0x0506ED94363AD905
+
+##### GetIsVehicleEngineRunning
+- **Name**: GetIsVehicleEngineRunning
+- **Scope**: Client
+- **Signature**: `BOOL GET_IS_VEHICLE_ENGINE_RUNNING(Vehicle vehicle);`
+- **Purpose**: Returns true if the engine is currently on.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to inspect.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Engine state syncs to all clients.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: engine
+        -- Use: Inform if current vehicle engine is running
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('engine', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and GetIsVehicleEngineRunning(veh) then
+            TriggerEvent('chat:addMessage', { args = {'Vehicle', 'Engine on'} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: engine */
+    RegisterCommand('engine', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && GetIsVehicleEngineRunning(veh)) {
+        emit('chat:addMessage', { args: ['Vehicle', 'Engine on'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns false during entry/exit animations.
+- **Reference**: https://docs.fivem.net/natives/?_0xAE31E7DF9B5B132E
+
+##### GetIsVehiclePrimaryColourCustom
+- **Name**: GetIsVehiclePrimaryColourCustom
+- **Scope**: Client
+- **Signature**: `BOOL GET_IS_VEHICLE_PRIMARY_COLOUR_CUSTOM(Vehicle vehicle);`
+- **Purpose**: Checks if the vehicle uses a custom primary colour.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to inspect.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Colour customization is synced with owner.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: primarycolor
+        -- Use: Inform if vehicle primary colour is custom
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('primarycolor', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and GetIsVehiclePrimaryColourCustom(veh) then
+            TriggerEvent('chat:addMessage', { args = {'Vehicle', 'Primary colour custom'} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: primarycolor */
+    RegisterCommand('primarycolor', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && GetIsVehiclePrimaryColourCustom(veh)) {
+        emit('chat:addMessage', { args: ['Vehicle', 'Primary colour custom'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only reflects paint applied via mod shops or scripts.
+- **Reference**: https://docs.fivem.net/natives/?_0xF095C0405307B21B
+
+##### GetIsVehicleSecondaryColourCustom
+- **Name**: GetIsVehicleSecondaryColourCustom
+- **Scope**: Client
+- **Signature**: `BOOL GET_IS_VEHICLE_SECONDARY_COLOUR_CUSTOM(Vehicle vehicle);`
+- **Purpose**: Checks if the vehicle uses a custom secondary colour.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to inspect.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Colour customization is synced with owner.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: secondarycolor
+        -- Use: Inform if vehicle secondary colour is custom
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('secondarycolor', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and GetIsVehicleSecondaryColourCustom(veh) then
+            TriggerEvent('chat:addMessage', { args = {'Vehicle', 'Secondary colour custom'} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: secondarycolor */
+    RegisterCommand('secondarycolor', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && GetIsVehicleSecondaryColourCustom(veh)) {
+        emit('chat:addMessage', { args: ['Vehicle', 'Secondary colour custom'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only reflects paint applied via mod shops or scripts.
+- **Reference**: https://docs.fivem.net/natives/?_0x910A32E7AAD2656C
+
+##### _GET_IS_VEHICLE_SHUNT_BOOST_ACTIVE
+- **Name**: _GET_IS_VEHICLE_SHUNT_BOOST_ACTIVE
+- **Scope**: Client
+- **Signature**: `BOOL _GET_IS_VEHICLE_SHUNT_BOOST_ACTIVE(Vehicle vehicle);`
+- **Purpose**: Checks if the vehicle's shunt boost is currently active.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to inspect.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Boost state synced from owner.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: shuntboost
+        -- Use: Notify if shunt boost is active
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('shuntboost', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and GetIsVehicleShuntBoostActive(veh) then
+            TriggerEvent('chat:addMessage', { args = {'Vehicle', 'Shunt boost active'} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: shuntboost */
+    RegisterCommand('shuntboost', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && GetIsVehicleShuntBoostActive(veh)) {
+        emit('chat:addMessage', { args: ['Vehicle', 'Shunt boost active'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires vehicles with Arena War shunt boost.
+- **Reference**: https://docs.fivem.net/natives/?_0xA2459F72C14E2E8D
+
+##### _GET_IS_WHEELS_LOWERED_STATE_ACTIVE
+- **Name**: _GET_IS_WHEELS_LOWERED_STATE_ACTIVE
+- **Scope**: Client
+- **Signature**: `BOOL _GET_IS_WHEELS_LOWERED_STATE_ACTIVE(Vehicle vehicle);`
+- **Purpose**: Returns whether the vehicle's lowered wheel state is active.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to check.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Lowered state synchronized by owner.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: lowwheels
+        -- Use: Notify if wheels are lowered
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('lowwheels', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and GetIsWheelsLoweredStateActive(veh) then
+            TriggerEvent('chat:addMessage', { args = {'Vehicle', 'Wheels lowered'} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: lowwheels */
+    RegisterCommand('lowwheels', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && GetIsWheelsLoweredStateActive(veh)) {
+        emit('chat:addMessage', { args: ['Vehicle', 'Wheels lowered'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only for vehicles with hydraulic lowering.
+- **Reference**: https://docs.fivem.net/natives/?_0x1DA0DA9CB3F0C8BF
+
+##### GetLandingGearState
+- **Name**: GetLandingGearState
+- **Scope**: Client
+- **Signature**: `int GET_LANDING_GEAR_STATE(Vehicle vehicle);`
+- **Purpose**: Retrieves landing gear deployment state.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Aircraft to inspect.
+  - **Returns**: `int` state (0 deployed, 1 closing, 3 opening, 4 retracted, 5 broken).
+- **OneSync / Networking**: Gear state synced by owner.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: gearstate
+        -- Use: Report landing gear state of current aircraft
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('gearstate', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            local state = GetLandingGearState(veh)
+            TriggerEvent('chat:addMessage', { args = {'Gear', ('State: %d'):format(state)} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: gearstate */
+    RegisterCommand('gearstate', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        const state = GetLandingGearState(veh);
+        emit('chat:addMessage', { args: ['Gear', `State: ${state}`] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Some aircraft may not support all states.
+- **Reference**: https://docs.fivem.net/natives/?_0x9B0F3DCA3DB0F4CD
+
+##### GetLastDrivenVehicle
+- **Name**: GetLastDrivenVehicle
+- **Scope**: Client
+- **Signature**: `Vehicle GET_LAST_DRIVEN_VEHICLE();`
+- **Purpose**: Returns the last vehicle the player controlled.
+- **Parameters / Returns**:
+  - **Returns**: `Vehicle` handle or `0` if none.
+- **OneSync / Networking**: Handle valid only if vehicle still exists locally.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: lastveh
+        -- Use: Teleport back to last driven vehicle if it exists
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('lastveh', function()
+        local veh = GetLastDrivenVehicle()
+        if veh ~= 0 then
+            SetEntityCoords(PlayerPedId(), GetEntityCoords(veh))
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: lastveh */
+    RegisterCommand('lastveh', () => {
+      const veh = GetLastDrivenVehicle();
+      if (veh !== 0) {
+        const coords = GetEntityCoords(veh, false);
+        SetEntityCoords(PlayerPedId(), coords[0], coords[1], coords[2], false, false, false, true);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns 0 if the vehicle has despawned.
+- **Reference**: https://docs.fivem.net/natives/?_0xB2D06FAEDE65B577
+
+CONTINUE-HERE — 2025-09-12T21:27:41+00:00 — next: Vehicle :: GetLastPedInVehicleSeat
