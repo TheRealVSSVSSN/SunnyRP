@@ -307,8 +307,8 @@ onesync on
 ## 13. Natives Index (Client / Server, by Category)
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
-| Overall | 6442 | 234 | 6208 | 2025-09-12T21:36:55+00:00 |
-| Vehicle | 751 | 234 | 517 | 2025-09-12T21:36:55+00:00 |
+| Overall | 6442 | 259 | 6183 | 2025-09-12T21:44:04+00:00 |
+| Vehicle | 751 | 259 | 492 | 2025-09-12T21:44:04+00:00 |
 
 ### 13.1 Taxonomy & Scope Notes
 - Natives are grouped by high-level game systems (e.g., Vehicle, Player) and scope (Client or Server).
@@ -9694,4 +9694,1040 @@ onesync on
 - **Caveats / Limitations**:
   - Recording must be requested and loaded.
 - **Reference**: https://docs.fivem.net/natives/?_0xF0F2103EFAF8CBA7
-CONTINUE-HERE — 2025-09-12T21:36:55+00:00 — next: Vehicle :: GetSubmarineIsUnderDesignDepth
+##### GetSubmarineIsUnderDesignDepth
+- **Name**: GetSubmarineIsUnderDesignDepth
+- **Scope**: Client
+- **Signature**: `BOOL GET_SUBMARINE_IS_UNDER_DESIGN_DEPTH(Vehicle submarine);`
+- **Purpose**: Determines if the submarine is operating below its designated crush depth.
+- **Parameters / Returns**:
+  - `submarine` (`Vehicle`): Submarine vehicle to evaluate.
+  - **Returns**: `bool` indicating unsafe depth.
+- **OneSync / Networking**: Works on any streamed submarine; ownership not required.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: subcrush
+        -- Use: Warns if current submarine is below design depth
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('subcrush', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and GetSubmarineIsUnderDesignDepth(veh) then
+            TriggerEvent('chat:addMessage', { args = {'Sub', 'Hull at risk'} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: subcrush */
+    RegisterCommand('subcrush', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && GetSubmarineIsUnderDesignDepth(veh)) {
+        emit('chat:addMessage', { args: ['Sub', 'Hull at risk'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only applicable to submarine models.
+- **Reference**: https://docs.fivem.net/natives/?_0x3E71D0B300B7AA79
+
+##### GetSubmarineNumberOfAirLeaks
+- **Name**: GetSubmarineNumberOfAirLeaks
+- **Scope**: Client
+- **Signature**: `int GET_SUBMARINE_NUMBER_OF_AIR_LEAKS(Vehicle submarine);`
+- **Purpose**: Returns how many active air leaks exist on a submarine.
+- **Parameters / Returns**:
+  - `submarine` (`Vehicle`): Submarine to inspect.
+  - **Returns**: Leak count; excessive leaks will drown occupants.
+- **OneSync / Networking**: Requires the submarine to be streamed.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: subleaks
+        -- Use: Reports leak count for current submarine
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('subleaks', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            local leaks = GetSubmarineNumberOfAirLeaks(veh)
+            TriggerEvent('chat:addMessage', { args = {'Leaks', leaks} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: subleaks */
+    RegisterCommand('subleaks', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        const leaks = GetSubmarineNumberOfAirLeaks(veh);
+        emit('chat:addMessage', { args: ['Leaks', leaks] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Leak threshold for drowning is engine-defined.
+- **Reference**: https://docs.fivem.net/natives/?_0x093D6DDCA5B8FBAE
+
+##### GetTimePositionInRecording
+- **Name**: GetTimePositionInRecording
+- **Scope**: Client
+- **Signature**: `float GET_TIME_POSITION_IN_RECORDING(Vehicle vehicle);`
+- **Purpose**: Obtains current playback time for a vehicle recording.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle playing a recording.
+  - **Returns**: Time elapsed in seconds.
+- **OneSync / Networking**: Local to the client; recordings are not networked.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: rectime
+        -- Use: Reports current time of a vehicle recording
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('rectime', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            local t = GetTimePositionInRecording(veh)
+            TriggerEvent('chat:addMessage', { args = {'Recording', ('%.2f s'):format(t)} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: rectime */
+    RegisterCommand('rectime', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        const t = GetTimePositionInRecording(veh);
+        emit('chat:addMessage', { args: ['Recording', `${t.toFixed(2)} s`] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires a recording started with `StartPlaybackRecordedVehicle`.
+- **Reference**: https://docs.fivem.net/natives/?_0x5746F3A7AB7FE544
+
+##### GetTotalDurationOfVehicleRecording
+- **Name**: GetTotalDurationOfVehicleRecording
+- **Scope**: Client
+- **Signature**: `float GET_TOTAL_DURATION_OF_VEHICLE_RECORDING(int recording, char* script);`
+- **Purpose**: Retrieves total length of a vehicle recording defined by script and index.
+- **Parameters / Returns**:
+  - `recording` (`int`): Recording index.
+  - `script` (`string`): Recording file name.
+  - **Returns**: Duration in seconds.
+- **OneSync / Networking**: Local query; recordings are not synchronized.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: reclen
+        -- Use: Shows total duration of a vehicle recording
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('reclen', function(source, args)
+        local id = tonumber(args[1]) or 1
+        local len = GetTotalDurationOfVehicleRecording(id, 'race1')
+        TriggerEvent('chat:addMessage', { args = {'Recording', ('%.2f s'):format(len)} })
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: reclen */
+    RegisterCommand('reclen', (src, args) => {
+      const id = parseInt(args[0]) || 1;
+      const len = GetTotalDurationOfVehicleRecording(id, 'race1');
+      emit('chat:addMessage', { args: ['Recording', `${len.toFixed(2)} s`] });
+    });
+    ```
+- **Caveats / Limitations**:
+  - Recording must be loaded prior to querying length.
+- **Reference**: https://docs.fivem.net/natives/?_0x0E48D1C262390950
+
+##### GetTotalDurationOfVehicleRecordingId
+- **Name**: GetTotalDurationOfVehicleRecordingId
+- **Scope**: Client
+- **Signature**: `float GET_TOTAL_DURATION_OF_VEHICLE_RECORDING_ID(int id);`
+- **Purpose**: Retrieves total length from an active recording handle.
+- **Parameters / Returns**:
+  - `id` (`int`): Recording handle obtained from `OpenVehicleRecording`.
+  - **Returns**: Duration in seconds.
+- **OneSync / Networking**: Local operation without network impact.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: recidlen
+        -- Use: Shows total duration of a recording handle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('recidlen', function(source, args)
+        local id = tonumber(args[1]) or 1
+        local len = GetTotalDurationOfVehicleRecordingId(id)
+        TriggerEvent('chat:addMessage', { args = {'Recording', ('%.2f s'):format(len)} })
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: recidlen */
+    RegisterCommand('recidlen', (src, args) => {
+      const id = parseInt(args[0]) || 1;
+      const len = GetTotalDurationOfVehicleRecordingId(id);
+      emit('chat:addMessage', { args: ['Recording', `${len.toFixed(2)} s`] });
+    });
+    ```
+- **Caveats / Limitations**:
+  - Recording handle must be valid.
+- **Reference**: https://docs.fivem.net/natives/?_0x102D125411A7B6E6
+
+##### GetTrainCarriage
+- **Name**: GetTrainCarriage
+- **Scope**: Client
+- **Signature**: `Entity GET_TRAIN_CARRIAGE(Vehicle train, int trailerNumber);`
+- **Purpose**: Fetches a specific carriage entity from a train.
+- **Parameters / Returns**:
+  - `train` (`Vehicle`): Train engine entity.
+  - `trailerNumber` (`int`): 1-based carriage index.
+  - **Returns**: Carriage `Entity` handle or 0.
+- **OneSync / Networking**: Requires train to be streamed; remote carriages may not be available.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: traincar
+        -- Use: Prints model of a specified train carriage
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('traincar', function(source, args)
+        local train = GetVehiclePedIsIn(PlayerPedId(), false)
+        local idx = tonumber(args[1]) or 1
+        local car = GetTrainCarriage(train, idx)
+        if car ~= 0 then
+            local model = GetDisplayNameFromVehicleModel(GetEntityModel(car))
+            TriggerEvent('chat:addMessage', { args = {'Carriage', model} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: traincar */
+    RegisterCommand('traincar', (src, args) => {
+      const train = GetVehiclePedIsIn(PlayerPedId(), false);
+      const idx = parseInt(args[0]) || 1;
+      const car = GetTrainCarriage(train, idx);
+      if (car !== 0) {
+        const model = GetDisplayNameFromVehicleModel(GetEntityModel(car));
+        emit('chat:addMessage', { args: ['Carriage', model] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Indexing starts at 1 for trailers; 0 returns engine.
+- **Reference**: https://docs.fivem.net/natives/?_0x08AAFD0814722BC3
+
+##### _GET_TYRE_HEALTH
+- **Name**: _GET_TYRE_HEALTH
+- **Scope**: Client
+- **Signature**: `float _GET_TYRE_HEALTH(Vehicle vehicle, int wheelIndex);`
+- **Purpose**: Retrieves health value for a specific wheel.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to inspect.
+  - `wheelIndex` (`int`): Wheel slot index.
+  - **Returns**: Health value (0.0–1.0).
+- **OneSync / Networking**: Accurate only for owned vehicles with wheel data.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: tyrehealth
+        -- Use: Displays tyre health for the specified wheel
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('tyrehealth', function(source, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        local idx = tonumber(args[1]) or 0
+        if veh ~= 0 then
+            local health = GetTyreHealth(veh, idx)
+            TriggerEvent('chat:addMessage', { args = {'Tyre', ('%.2f'):format(health)} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: tyrehealth */
+    RegisterCommand('tyrehealth', (src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      const idx = parseInt(args[0]) || 0;
+      if (veh !== 0) {
+        const health = GetTyreHealth(veh, idx);
+        emit('chat:addMessage', { args: ['Tyre', health.toFixed(2)] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Wheel indices vary by vehicle model.
+- **Reference**: https://docs.fivem.net/natives/?_0x55EAB010FAEE9380
+
+##### _GET_TYRE_WEAR_MULTIPLIER
+- **Name**: _GET_TYRE_WEAR_MULTIPLIER
+- **Scope**: Client
+- **Signature**: `float _GET_TYRE_WEAR_MULTIPLIER(Vehicle vehicle, int wheelIndex);`
+- **Purpose**: Returns wear multiplier affecting tyre degradation.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to inspect.
+  - `wheelIndex` (`int`): Wheel slot index.
+  - **Returns**: Wear multiplier.
+- **OneSync / Networking**: Values may desync for non-owned vehicles.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: tyrewear
+        -- Use: Shows wear multiplier for a tyre
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('tyrewear', function(source, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        local idx = tonumber(args[1]) or 0
+        if veh ~= 0 then
+            local wear = GetTyreWearMultiplier(veh, idx)
+            TriggerEvent('chat:addMessage', { args = {'TyreWear', ('%.2f'):format(wear)} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: tyrewear */
+    RegisterCommand('tyrewear', (src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      const idx = parseInt(args[0]) || 0;
+      if (veh !== 0) {
+        const wear = GetTyreWearMultiplier(veh, idx);
+        emit('chat:addMessage', { args: ['TyreWear', wear.toFixed(2)] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires racing DLC vehicles for meaningful values.
+- **Reference**: https://docs.fivem.net/natives/?_0x6E387895952F4F71
+
+##### GetVehicleAcceleration
+- **Name**: GetVehicleAcceleration
+- **Scope**: Client
+- **Signature**: `float GET_VEHICLE_ACCELERATION(Vehicle vehicle);`
+- **Purpose**: Returns the maximum drive force value of a vehicle including modifications.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to query.
+  - **Returns**: Acceleration value as float.
+- **OneSync / Networking**: Snapshot only; not replicated to others.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: vehaccel
+        -- Use: Reports acceleration stat for current vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('vehaccel', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            local accel = GetVehicleAcceleration(veh)
+            TriggerEvent('chat:addMessage', { args = {'Accel', ('%.2f'):format(accel)} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: vehaccel */
+    RegisterCommand('vehaccel', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        const accel = GetVehicleAcceleration(veh);
+        emit('chat:addMessage', { args: ['Accel', accel.toFixed(2)] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not reflect real-time speed or traction.
+- **Reference**: https://docs.fivem.net/natives/?_0x5DD35C8D074E57AE
+
+##### GetVehicleAttachedToCargobob
+- **Name**: GetVehicleAttachedToCargobob
+- **Scope**: Client
+- **Signature**: `Vehicle GET_VEHICLE_ATTACHED_TO_CARGOBOB(Vehicle cargobob);`
+- **Purpose**: Returns vehicle currently hooked to a cargobob.
+- **Parameters / Returns**:
+  - `cargobob` (`Vehicle`): Cargobob helicopter.
+  - **Returns**: Attached vehicle handle or 0.
+- **OneSync / Networking**: Requires ownership of cargobob for up-to-date attachment state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: cargoload
+        -- Use: Reports model attached to current cargobob
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('cargoload', function()
+        local heli = GetVehiclePedIsIn(PlayerPedId(), false)
+        local veh = GetVehicleAttachedToCargobob(heli)
+        if veh ~= 0 then
+            local model = GetDisplayNameFromVehicleModel(GetEntityModel(veh))
+            TriggerEvent('chat:addMessage', { args = {'Cargo', model} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: cargoload */
+    RegisterCommand('cargoload', () => {
+      const heli = GetVehiclePedIsIn(PlayerPedId(), false);
+      const veh = GetVehicleAttachedToCargobob(heli);
+      if (veh !== 0) {
+        const model = GetDisplayNameFromVehicleModel(GetEntityModel(veh));
+        emit('chat:addMessage', { args: ['Cargo', model] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns 0 if no vehicle is attached or if the entity is not a cargobob.
+- **Reference**: https://docs.fivem.net/natives/?_0x873B82D42AC2B9E5
+
+##### GetVehicleBodyHealth
+- **Name**: GetVehicleBodyHealth
+- **Scope**: Client
+- **Signature**: `float GET_VEHICLE_BODY_HEALTH(Vehicle vehicle);`
+- **Purpose**: Retrieves body integrity value of a vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to inspect.
+  - **Returns**: Health from 0.0 to 1000.0.
+- **OneSync / Networking**: Works on both owned and remote vehicles but may lag on remote.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: bodyhp
+        -- Use: Reports body health of current vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('bodyhp', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            local hp = GetVehicleBodyHealth(veh)
+            TriggerEvent('chat:addMessage', { args = {'Body', ('%.1f'):format(hp)} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: bodyhp */
+    RegisterCommand('bodyhp', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        const hp = GetVehicleBodyHealth(veh);
+        emit('chat:addMessage', { args: ['Body', hp.toFixed(1)] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Vehicle may still operate when health is 0.
+- **Reference**: https://docs.fivem.net/natives/?_0xF271147EB7B40F12
+
+##### _GET_VEHICLE_BOMB_COUNT
+- **Name**: _GET_VEHICLE_BOMB_COUNT
+- **Scope**: Client
+- **Signature**: `int _GET_VEHICLE_BOMB_COUNT(Vehicle aircraft);`
+- **Purpose**: Returns remaining bombs on a compatible aircraft.
+- **Parameters / Returns**:
+  - `aircraft` (`Vehicle`): Plane equipped with bomb bay.
+  - **Returns**: Bomb count.
+- **OneSync / Networking**: Syncs with passengers; owner must manage decrementing when bombs dropped.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: bombcount
+        -- Use: Displays remaining aircraft bombs
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('bombcount', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            local count = GetVehicleBombCount(veh)
+            TriggerEvent('chat:addMessage', { args = {'Bombs', count} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: bombcount */
+    RegisterCommand('bombcount', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        const count = GetVehicleBombCount(veh);
+        emit('chat:addMessage', { args: ['Bombs', count] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not decrement automatically when bombs are dropped via weapons API.
+- **Reference**: https://docs.fivem.net/natives/?_0xEA12BD130D7569A1
+
+##### _GET_VEHICLE_CAN_ACTIVATE_PARACHUTE
+- **Name**: _GET_VEHICLE_CAN_ACTIVATE_PARACHUTE
+- **Scope**: Client
+- **Signature**: `BOOL _GET_VEHICLE_CAN_ACTIVATE_PARACHUTE(Vehicle vehicle);`
+- **Purpose**: Checks if a vehicle's deployable parachute is ready.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to query.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: State is local; ensure ownership for accurate result.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: canpara
+        -- Use: Indicates if current vehicle can deploy parachute
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('canpara', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            local ready = GetVehicleCanActivateParachute(veh)
+            TriggerEvent('chat:addMessage', { args = {'Parachute', tostring(ready)} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: canpara */
+    RegisterCommand('canpara', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        const ready = GetVehicleCanActivateParachute(veh);
+        emit('chat:addMessage', { args: ['Parachute', ready ? 'true' : 'false'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only relevant for vehicles with parachute mod installed.
+- **Reference**: https://docs.fivem.net/natives/?_0xA916396DF4154EE3
+
+##### GetVehicleCauseOfDestruction
+- **Name**: GetVehicleCauseOfDestruction
+- **Scope**: Client
+- **Signature**: `Hash GET_VEHICLE_CAUSE_OF_DESTRUCTION(Vehicle vehicle);`
+- **Purpose**: Provides weapon or entity hash responsible for destroying a vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Destroyed vehicle handle.
+  - **Returns**: Hash for cause; 0 if unknown.
+- **OneSync / Networking**: Accurate only on the owner that witnessed destruction.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: vehcause
+        -- Use: Reports destruction cause of last driven vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('vehcause', function()
+        local veh = GetLastDrivenVehicle()
+        if veh ~= 0 then
+            local cause = GetVehicleCauseOfDestruction(veh)
+            TriggerEvent('chat:addMessage', { args = {'Cause', tostring(cause)} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: vehcause */
+    RegisterCommand('vehcause', () => {
+      const veh = GetLastDrivenVehicle();
+      if (veh !== 0) {
+        const cause = GetVehicleCauseOfDestruction(veh);
+        emit('chat:addMessage', { args: ['Cause', `${cause}`] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Causes may map to weapon hashes; translation required.
+- **Reference**: https://docs.fivem.net/natives/?_0xE495D1EF4C91FD20
+
+##### GetVehicleClass
+- **Name**: GetVehicleClass
+- **Scope**: Client
+- **Signature**: `int GET_VEHICLE_CLASS(Vehicle vehicle);`
+- **Purpose**: Returns the numeric class identifier for a vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to classify.
+  - **Returns**: Class ID (0–22).
+- **OneSync / Networking**: Static lookup; no sync concerns.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: vehclass
+        -- Use: Displays class ID for current vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('vehclass', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            local class = GetVehicleClass(veh)
+            TriggerEvent('chat:addMessage', { args = {'Class', class} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: vehclass */
+    RegisterCommand('vehclass', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        const cls = GetVehicleClass(veh);
+        emit('chat:addMessage', { args: ['Class', cls] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Use `_GET_LABEL_TEXT` to resolve class names.
+- **Reference**: https://docs.fivem.net/natives/?_0x29439776AAA00A62
+
+##### GetVehicleClassEstimatedMaxSpeed
+- **Name**: GetVehicleClassEstimatedMaxSpeed
+- **Scope**: Client
+- **Signature**: `float GET_VEHICLE_CLASS_ESTIMATED_MAX_SPEED(int vehicleClass);`
+- **Purpose**: Provides rough top-speed estimate for a vehicle class.
+- **Parameters / Returns**:
+  - `vehicleClass` (`int`): Class ID.
+  - **Returns**: Estimated speed in m/s.
+- **OneSync / Networking**: Pure lookup with no networking.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: classspeed
+        -- Use: Shows estimated max speed for a vehicle class
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('classspeed', function(source, args)
+        local class = tonumber(args[1]) or 0
+        local speed = GetVehicleClassEstimatedMaxSpeed(class)
+        TriggerEvent('chat:addMessage', { args = {'MaxSpeed', ('%.1f'):format(speed)} })
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: classspeed */
+    RegisterCommand('classspeed', (src, args) => {
+      const cls = parseInt(args[0]) || 0;
+      const speed = GetVehicleClassEstimatedMaxSpeed(cls);
+      emit('chat:addMessage', { args: ['MaxSpeed', speed.toFixed(1)] });
+    });
+    ```
+- **Caveats / Limitations**:
+  - Estimates ignore modifications.
+- **Reference**: https://docs.fivem.net/natives/?_0x00C09F246ABEDD82
+
+##### GetVehicleClassFromName
+- **Name**: GetVehicleClassFromName
+- **Scope**: Client
+- **Signature**: `int GET_VEHICLE_CLASS_FROM_NAME(Hash modelHash);`
+- **Purpose**: Resolves class ID from a vehicle model hash.
+- **Parameters / Returns**:
+  - `modelHash` (`Hash`): Vehicle model identifier.
+- **Returns**: Class ID.
+- **OneSync / Networking**: None; uses static lookup.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: classfromname
+        -- Use: Shows class ID for a model name
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('classfromname', function(source, args)
+        local name = args[1] or 'adder'
+        local class = GetVehicleClassFromName(GetHashKey(name))
+        TriggerEvent('chat:addMessage', { args = {'Class', class} })
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: classfromname */
+    RegisterCommand('classfromname', (src, args) => {
+      const name = args[0] || 'adder';
+      const cls = GetVehicleClassFromName(GetHashKey(name));
+      emit('chat:addMessage', { args: ['Class', cls] });
+    });
+    ```
+- **Caveats / Limitations**:
+  - Model must be loaded or present in game data.
+- **Reference**: https://docs.fivem.net/natives/?_0xDEDF1C8BD47C2200
+
+##### GetVehicleClassMaxAcceleration
+- **Name**: GetVehicleClassMaxAcceleration
+- **Scope**: Client
+- **Signature**: `float GET_VEHICLE_CLASS_MAX_ACCELERATION(int vehicleClass);`
+- **Purpose**: Returns peak acceleration characteristic for a vehicle class.
+- **Parameters / Returns**:
+  - `vehicleClass` (`int`): Class ID.
+  - **Returns**: Acceleration value.
+- **OneSync / Networking**: Static lookup; not networked.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: classaccel
+        -- Use: Shows max acceleration value for a class
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('classaccel', function(source, args)
+        local class = tonumber(args[1]) or 0
+        local accel = GetVehicleClassMaxAcceleration(class)
+        TriggerEvent('chat:addMessage', { args = {'Accel', ('%.2f'):format(accel)} })
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: classaccel */
+    RegisterCommand('classaccel', (src, args) => {
+      const cls = parseInt(args[0]) || 0;
+      const accel = GetVehicleClassMaxAcceleration(cls);
+      emit('chat:addMessage', { args: ['Accel', accel.toFixed(2)] });
+    });
+    ```
+- **Caveats / Limitations**:
+  - Value is theoretical and not affected by mods.
+- **Reference**: https://docs.fivem.net/natives/?_0x2F83E7E45D9EA7AE
+
+##### GetVehicleClassMaxAgility
+- **Name**: GetVehicleClassMaxAgility
+- **Scope**: Client
+- **Signature**: `float GET_VEHICLE_CLASS_MAX_AGILITY(int vehicleClass);`
+- **Purpose**: Returns agility stat for given vehicle class.
+- **Parameters / Returns**:
+  - `vehicleClass` (`int`): Class ID.
+  - **Returns**: Agility value.
+- **OneSync / Networking**: Pure lookup.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: classagility
+        -- Use: Displays agility stat for a class
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('classagility', function(source, args)
+        local class = tonumber(args[1]) or 0
+        local ag = GetVehicleClassMaxAgility(class)
+        TriggerEvent('chat:addMessage', { args = {'Agility', ('%.2f'):format(ag)} })
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: classagility */
+    RegisterCommand('classagility', (src, args) => {
+      const cls = parseInt(args[0]) || 0;
+      const ag = GetVehicleClassMaxAgility(cls);
+      emit('chat:addMessage', { args: ['Agility', ag.toFixed(2)] });
+    });
+    ```
+- **Caveats / Limitations**:
+  - Used mostly for AI handling; gameplay use limited.
+- **Reference**: https://docs.fivem.net/natives/?_0x4F930AD022D6DE3B
+
+##### GetVehicleClassMaxBraking
+- **Name**: GetVehicleClassMaxBraking
+- **Scope**: Client
+- **Signature**: `float GET_VEHICLE_CLASS_MAX_BRAKING(int vehicleClass);`
+- **Purpose**: Provides theoretical braking value for a class.
+- **Parameters / Returns**:
+  - `vehicleClass` (`int`): Class ID.
+  - **Returns**: Braking force value.
+- **OneSync / Networking**: Static data; not replicated.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: classbrake
+        -- Use: Shows max braking for a class
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('classbrake', function(source, args)
+        local class = tonumber(args[1]) or 0
+        local brake = GetVehicleClassMaxBraking(class)
+        TriggerEvent('chat:addMessage', { args = {'Braking', ('%.2f'):format(brake)} })
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: classbrake */
+    RegisterCommand('classbrake', (src, args) => {
+      const cls = parseInt(args[0]) || 0;
+      const brake = GetVehicleClassMaxBraking(cls);
+      emit('chat:addMessage', { args: ['Braking', brake.toFixed(2)] });
+    });
+    ```
+- **Caveats / Limitations**:
+  - Represents maximum possible braking, not current state.
+- **Reference**: https://docs.fivem.net/natives/?_0x4BF54C16EC8FEC03
+
+##### GetVehicleClassMaxTraction
+- **Name**: GetVehicleClassMaxTraction
+- **Scope**: Client
+- **Signature**: `float GET_VEHICLE_CLASS_MAX_TRACTION(int vehicleClass);`
+- **Purpose**: Returns highest traction value for a class.
+- **Parameters / Returns**:
+  - `vehicleClass` (`int`): Class ID.
+  - **Returns**: Traction stat.
+- **OneSync / Networking**: Lookup only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: classtraction
+        -- Use: Shows max traction for a class
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('classtraction', function(source, args)
+        local class = tonumber(args[1]) or 0
+        local tr = GetVehicleClassMaxTraction(class)
+        TriggerEvent('chat:addMessage', { args = {'Traction', ('%.2f'):format(tr)} })
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: classtraction */
+    RegisterCommand('classtraction', (src, args) => {
+      const cls = parseInt(args[0]) || 0;
+      const tr = GetVehicleClassMaxTraction(cls);
+      emit('chat:addMessage', { args: ['Traction', tr.toFixed(2)] });
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not affected by weather or surface conditions.
+- **Reference**: https://docs.fivem.net/natives/?_0xDBC86D85C5059461
+
+##### GetVehicleColor
+- **Name**: GetVehicleColor
+- **Scope**: Client
+- **Signature**: `void GET_VEHICLE_COLOR(Vehicle vehicle, int* r, int* g, int* b);`
+- **Purpose**: Retrieves the RGB color applied to a vehicle's paint.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to read.
+  - `r` (`int`): Primary red component.
+  - `g` (`int`): Primary green component.
+  - `b` (`int`): Primary blue component.
+  - **Returns**: None.
+- **OneSync / Networking**: Requires ownership for accurate values.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: vehcolor
+        -- Use: Displays RGB color of current vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('vehcolor', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            local r,g,b = 0,0,0
+            r,g,b = GetVehicleColor(veh)
+            TriggerEvent('chat:addMessage', { args = {'Color', ("%d %d %d"):format(r,g,b)} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: vehcolor */
+    RegisterCommand('vehcolor', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        const [r, g, b] = GetVehicleColor(veh);
+        emit('chat:addMessage', { args: ['Color', `${r} ${g} ${b}`] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns stock color even if custom color set; use `GetVehicleCustomPrimaryColour` for custom values.
+- **Reference**: https://docs.fivem.net/natives/?_0xF3CC740D36221548
+
+##### GetVehicleColourCombination
+- **Name**: GetVehicleColourCombination
+- **Scope**: Client
+- **Signature**: `int GET_VEHICLE_COLOUR_COMBINATION(Vehicle vehicle);`
+- **Purpose**: Retrieves index of preset colour combination applied to vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to check.
+  - **Returns**: Combination index.
+- **OneSync / Networking**: Local lookup; combination sync handled automatically.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: colourcombo
+        -- Use: Shows colour combination index
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('colourcombo', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            local combo = GetVehicleColourCombination(veh)
+            TriggerEvent('chat:addMessage', { args = {'Combo', combo} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: colourcombo */
+    RegisterCommand('colourcombo', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        const combo = GetVehicleColourCombination(veh);
+        emit('chat:addMessage', { args: ['Combo', combo] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Custom colours may not map to preset indices.
+- **Reference**: https://docs.fivem.net/natives/?_0x6A842D197F845D56
+
+##### GetVehicleColours
+- **Name**: GetVehicleColours
+- **Scope**: Client
+- **Signature**: `void GET_VEHICLE_COLOURS(Vehicle vehicle, int* colorPrimary, int* colorSecondary);`
+- **Purpose**: Retrieves primary and secondary paint indices.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to inspect.
+  - `colorPrimary` (`int*`): Primary colour index.
+  - `colorSecondary` (`int*`): Secondary colour index.
+  - **Returns**: None.
+- **OneSync / Networking**: Accurate for owned vehicles; remote ones may lag.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: vehcolours
+        -- Use: Lists colour indices for vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('vehcolours', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            local p,s = GetVehicleColours(veh)
+            TriggerEvent('chat:addMessage', { args = {'Colours', (p .. ' / ' .. s)} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: vehcolours */
+    RegisterCommand('vehcolours', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        const [p, s] = GetVehicleColours(veh);
+        emit('chat:addMessage', { args: ['Colours', `${p} / ${s}`] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns mod kit indices, not RGB values.
+- **Reference**: https://docs.fivem.net/natives/?_0xA19435F193E081AC
+
+##### GetVehicleColoursWhichCanBeSet
+- **Name**: GetVehicleColoursWhichCanBeSet
+- **Scope**: Client
+- **Signature**: `int GET_VEHICLE_COLOURS_WHICH_CAN_BE_SET(Vehicle vehicle);`
+- **Purpose**: Returns bitfield indicating which colour slots are supported.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to check.
+  - **Returns**: Bitmask of available colour slots.
+- **OneSync / Networking**: Depends on shader; consistent across clients.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: colourscan
+        -- Use: Displays colour capability bitmask
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('colourscan', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            local mask = GetVehicleColoursWhichCanBeSet(veh)
+            TriggerEvent('chat:addMessage', { args = {'ColourMask', mask} })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: colourscan */
+    RegisterCommand('colourscan', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        const mask = GetVehicleColoursWhichCanBeSet(veh);
+        emit('chat:addMessage', { args: ['ColourMask', mask] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Bit meanings vary; refer to enum for flags.
+- **Reference**: https://docs.fivem.net/natives/?_0xEEBFC7A7EFDC35B4
+
+CONTINUE-HERE — 2025-09-12T21:44:04+00:00 — next: Vehicle :: GetVehicleCountermeasureCount
