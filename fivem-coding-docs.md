@@ -307,8 +307,8 @@ onesync on
 ## 13. Natives Index (Client / Server, by Category)
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
-| Overall | 6442 | 1008 | 5434 | 2025-09-12T20:13:58.131329+00:00 |
-| Vehicle | 751 | 677 | 74 | 2025-09-12T20:13:58.131329+00:00 |
+| Overall | 6442 | 1058 | 5384 | 2025-09-12T20:35:01.804126+00:00 |
+| Vehicle | 751 | 727 | 24 | 2025-09-12T20:35:01.804126+00:00 |
 
 ### 13.1 Taxonomy & Scope Notes
 - Natives are grouped by high-level game systems (e.g., Vehicle, Player) and scope (Client or Server).
@@ -316,6 +316,1980 @@ onesync on
 
 ### 13.2 Client Natives by Category
 #### Vehicle
+##### AreAllVehicleWindowsIntact
+- **Name**: AreAllVehicleWindowsIntact
+- **Scope**: Client
+- **Signature**: `BOOL ARE_ALL_VEHICLE_WINDOWS_INTACT(Vehicle vehicle);`
+- **Purpose**: Checks if every window on a vehicle is undamaged.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to inspect.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Works on any streamed vehicle; ownership not required.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: checkglass
+        -- Use: Reports if the current vehicle has intact windows
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('checkglass', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and AreAllVehicleWindowsIntact(veh) then
+            TriggerEvent('chat:addMessage', { args = { 'Windows undamaged' } })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: checkglass */
+    RegisterCommand('checkglass', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && AreAllVehicleWindowsIntact(veh)) {
+        emit('chat:addMessage', { args: ['Windows undamaged'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns true for vehicles without windows.
+- **Reference**: https://docs.fivem.net/natives/?n=AreAllVehicleWindowsIntact
+
+##### AreAnyVehicleSeatsFree
+- **Name**: AreAnyVehicleSeatsFree
+- **Scope**: Client
+- **Signature**: `BOOL ARE_ANY_VEHICLE_SEATS_FREE(Vehicle vehicle);`
+- **Purpose**: Determines if any seat in the vehicle is unoccupied.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to check.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Local check; streaming required for remote vehicles.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: seatcheck
+        -- Use: Notify if a seat is free in current vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('seatcheck', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and AreAnyVehicleSeatsFree(veh) then
+            TriggerEvent('chat:addMessage', { args = { 'Seat available' } })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: seatcheck */
+    RegisterCommand('seatcheck', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && AreAnyVehicleSeatsFree(veh)) {
+        emit('chat:addMessage', { args: ['Seat available'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not identify which seat is free.
+- **Reference**: https://docs.fivem.net/natives/?n=AreAnyVehicleSeatsFree
+
+##### AreBombBayDoorsOpen
+- **Name**: AreBombBayDoorsOpen
+- **Scope**: Client
+- **Signature**: `BOOL _ARE_BOMB_BAY_DOORS_OPEN(Vehicle aircraft);`
+- **Purpose**: Checks whether an aircraft's bomb bay is currently open.
+- **Parameters / Returns**:
+  - `aircraft` (`Vehicle`): Plane to inspect.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: The aircraft must be streamed to the client.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: bombbayclose
+        -- Use: Close bomb bay if open
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('bombbayclose', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and AreBombBayDoorsOpen(veh) then
+            CloseBombBayDoors(veh)
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: bombbayclose */
+    RegisterCommand('bombbayclose', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && AreBombBayDoorsOpen(veh)) {
+        CloseBombBayDoors(veh);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only relevant for aircraft with bomb bay doors.
+- **Reference**: https://docs.fivem.net/natives/?n=AreBombBayDoorsOpen
+
+##### AreHeliStubWingsDeployed
+- **Name**: AreHeliStubWingsDeployed
+- **Scope**: Client
+- **Signature**: `BOOL _ARE_HELI_STUB_WINGS_DEPLOYED(Vehicle vehicle);`
+- **Purpose**: Indicates if a helicopter's stub wings are extended.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Helicopter handle.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Requires the heli to be owned or local for reliable results.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: stubwings
+        -- Use: Report helicopter wing state
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('stubwings', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            local deployed = AreHeliStubWingsDeployed(veh)
+            TriggerEvent('chat:addMessage', { args = { deployed and 'Wings out' or 'Wings retracted' } })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: stubwings */
+    RegisterCommand('stubwings', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        const deployed = AreHeliStubWingsDeployed(veh);
+        emit('chat:addMessage', { args: [deployed ? 'Wings out' : 'Wings retracted'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only applies to helicopters with deployable wings.
+- **Reference**: https://docs.fivem.net/natives/?n=AreHeliStubWingsDeployed
+
+##### AreOutriggerLegsDeployed
+- **Name**: AreOutriggerLegsDeployed
+- **Scope**: Client
+- **Signature**: `BOOL _ARE_OUTRIGGER_LEGS_DEPLOYED(Vehicle vehicle);`
+- **Purpose**: Checks if a vehicle's outrigger legs are deployed.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to inspect.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Local check; entity must be streamed in.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: outriggers
+        -- Use: Announce outrigger state
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('outriggers', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            local state = AreOutriggerLegsDeployed(veh)
+            TriggerEvent('chat:addMessage', { args = { state and 'Outriggers down' or 'Outriggers up' } })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: outriggers */
+    RegisterCommand('outriggers', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        const state = AreOutriggerLegsDeployed(veh);
+        emit('chat:addMessage', { args: [state ? 'Outriggers down' : 'Outriggers up'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only relevant for vehicles equipped with outriggers.
+- **Reference**: https://docs.fivem.net/natives/?n=AreOutriggerLegsDeployed
+
+##### ArePlaneControlPanelsIntact
+- **Name**: ArePlaneControlPanelsIntact
+- **Scope**: Client
+- **Signature**: `BOOL ARE_PLANE_CONTROL_PANELS_INTACT(Vehicle vehicle, BOOL checkForZeroHealth);`
+- **Purpose**: Tests if the aircraft's control panels are undamaged.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Plane to inspect.
+  - `checkForZeroHealth` (`bool`): Treat zero-health parts as damaged.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Only checks components known on the invoking client.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: panelcheck
+        -- Use: Verify plane control panels
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('panelcheck', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            if not ArePlaneControlPanelsIntact(veh, true) then
+                TriggerEvent('chat:addMessage', { args = { 'Control panels damaged' } })
+            end
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: panelcheck */
+    RegisterCommand('panelcheck', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && !ArePlaneControlPanelsIntact(veh, true)) {
+        emit('chat:addMessage', { args: ['Control panels damaged'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only valid for aircraft with control panels.
+- **Reference**: https://docs.fivem.net/natives/?n=ArePlaneControlPanelsIntact
+
+##### ArePlanePropellersIntact
+- **Name**: ArePlanePropellersIntact
+- **Scope**: Client
+- **Signature**: `BOOL ARE_PLANE_PROPELLERS_INTACT(Vehicle plane);`
+- **Purpose**: Determines whether all propellers are still attached.
+- **Parameters / Returns**:
+  - `plane` (`Vehicle`): Plane to inspect.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Requires client to own or stream the plane.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: propcheck
+        -- Use: Check if plane propellers are intact
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('propcheck', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and not ArePlanePropellersIntact(veh) then
+            TriggerEvent('chat:addMessage', { args = { 'Propeller damaged' } })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: propcheck */
+    RegisterCommand('propcheck', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && !ArePlanePropellersIntact(veh)) {
+        emit('chat:addMessage', { args: ['Propeller damaged'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only applies to propeller aircraft.
+- **Reference**: https://docs.fivem.net/natives/?n=ArePlanePropellersIntact
+
+##### ArePlaneWingsIntact
+- **Name**: ArePlaneWingsIntact
+- **Scope**: Client
+- **Signature**: `BOOL _ARE_PLANE_WINGS_INTACT(Vehicle plane);`
+- **Purpose**: Checks if both wings are still attached to the aircraft.
+- **Parameters / Returns**:
+  - `plane` (`Vehicle`): Plane to inspect.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Plane must be streamed to the client.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: wingcheck
+        -- Use: Report plane wing damage
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('wingcheck', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and not ArePlaneWingsIntact(veh) then
+            TriggerEvent('chat:addMessage', { args = { 'Wing missing' } })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: wingcheck */
+    RegisterCommand('wingcheck', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && !ArePlaneWingsIntact(veh)) {
+        emit('chat:addMessage', { args: ['Wing missing'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Intended for aircraft only.
+- **Reference**: https://docs.fivem.net/natives/?n=ArePlaneWingsIntact
+
+##### AttachContainerToHandlerFrame
+- **Name**: AttachContainerToHandlerFrame
+- **Scope**: Client
+- **Signature**: `void _ATTACH_CONTAINER_TO_HANDLER_FRAME(Vehicle handler, Entity container);`
+- **Purpose**: Locks a freight container onto a handler vehicle frame.
+- **Parameters / Returns**:
+  - `handler` (`Vehicle`): Handler vehicle.
+  - `container` (`Entity`): Container entity to attach.
+  - **Returns**: `void`.
+- **OneSync / Networking**: Both entities must be network-owned by the same client.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: dock_attach
+        -- Use: Attach targeted container to handler
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('dock_attach', function()
+        local handler = GetVehiclePedIsIn(PlayerPedId(), false)
+        local container = GetEntityPlayerIsFreeAimingAt(PlayerId())
+        if handler ~= 0 and container ~= 0 then
+            AttachContainerToHandlerFrame(handler, container)
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: dock_attach */
+    RegisterCommand('dock_attach', () => {
+      const handler = GetVehiclePedIsIn(PlayerPedId(), false);
+      const [success, container] = GetEntityPlayerIsFreeAimingAt(PlayerId());
+      if (handler !== 0 && success) {
+        AttachContainerToHandlerFrame(handler, container);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Container must match handler type.
+- **Reference**: https://docs.fivem.net/natives/?n=AttachContainerToHandlerFrame
+
+##### AttachEntityToCargobob
+- **Name**: AttachEntityToCargobob
+- **Scope**: Client
+- **Signature**: `void ATTACH_ENTITY_TO_CARGOBOB(Vehicle vehicle, Entity entity, int p2, float x, float y, float z);`
+- **Purpose**: Suspends an entity from a Cargobob using its hook.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Cargobob helicopter.
+  - `entity` (`Entity`): Object or vehicle to attach.
+  - `p2` (`int`): Attachment method flag.
+  - `x` (`float`): Offset X.
+  - `y` (`float`): Offset Y.
+  - `z` (`float`): Offset Z.
+  - **Returns**: `void`.
+- **OneSync / Networking**: Both entities must be owned by the executing client.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: cargohook
+        -- Use: Attach aimed vehicle to your Cargobob
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('cargohook', function()
+        local heli = GetVehiclePedIsIn(PlayerPedId(), false)
+        local target = GetEntityPlayerIsFreeAimingAt(PlayerId())
+        if heli ~= 0 and target ~= 0 then
+            AttachEntityToCargobob(heli, target, 0, 0.0, 0.0, -1.0)
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: cargohook */
+    RegisterCommand('cargohook', () => {
+      const heli = GetVehiclePedIsIn(PlayerPedId(), false);
+      const [success, target] = GetEntityPlayerIsFreeAimingAt(PlayerId());
+      if (heli !== 0 && success) {
+        AttachEntityToCargobob(heli, target, 0, 0.0, 0.0, -1.0);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Fails if hook is retracted.
+- **Reference**: https://docs.fivem.net/natives/?n=AttachEntityToCargobob
+##### AttachVehicleOnToTrailer
+- **Name**: AttachVehicleOnToTrailer
+- **Scope**: Client
+- **Signature**: `void ATTACH_VEHICLE_ON_TO_TRAILER(Vehicle vehicle, Vehicle trailer, float offsetX, float offsetY, float offsetZ, float coordsX, float coordsY, float coordsZ, float rotationX, float rotationY, float rotationZ, float disableColls);`
+- **Purpose**: Precisely places a vehicle onto a trailer with offsets and rotations.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to mount.
+  - `trailer` (`Vehicle`): Target trailer.
+  - `offsetX`, `offsetY`, `offsetZ` (`float`): Attachment offsets.
+  - `coordsX`, `coordsY`, `coordsZ` (`float`): Trailer-relative coordinates.
+  - `rotationX`, `rotationY`, `rotationZ` (`float`): Rotation applied on the trailer.
+  - `disableColls` (`float`): Non-zero disables vehicle-trailer collision.
+  - **Returns**: `void`.
+- **OneSync / Networking**: Both vehicles must be controlled by the same client.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: loadtrailer
+        -- Use: Mount current vehicle onto aimed trailer
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('loadtrailer', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        local trailer = GetEntityPlayerIsFreeAimingAt(PlayerId())
+        if veh ~= 0 and trailer ~= 0 then
+            AttachVehicleOnToTrailer(veh, trailer, 0.0,0.0,0.0,0.0,0.0,0.5,0.0,0.0,0.0,0.0)
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: loadtrailer */
+    RegisterCommand('loadtrailer', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      const [success, trailer] = GetEntityPlayerIsFreeAimingAt(PlayerId());
+      if (veh !== 0 && success) {
+        AttachVehicleOnToTrailer(veh, trailer, 0.0,0.0,0.0,0.0,0.0,0.5,0.0,0.0,0.0,0.0);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Incorrect offsets may cause clipping.
+- **Reference**: https://docs.fivem.net/natives/?n=AttachVehicleOnToTrailer
+
+##### AttachVehicleToCargobob
+- **Name**: AttachVehicleToCargobob
+- **Scope**: Client
+- **Signature**: `void ATTACH_VEHICLE_TO_CARGOBOB(Vehicle cargobob, Vehicle vehicle, int vehicleBoneIndex, float x, float y, float z);`
+- **Purpose**: Hooks a vehicle onto a Cargobob.
+- **Parameters / Returns**:
+  - `cargobob` (`Vehicle`): Helicopter with hook.
+  - `vehicle` (`Vehicle`): Vehicle to attach.
+  - `vehicleBoneIndex` (`int`): Bone on vehicle to attach.
+  - `x`, `y`, `z` (`float`): Offset relative to hook.
+  - **Returns**: `void`.
+- **OneSync / Networking**: Executing client must own both entities.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: hookcar
+        -- Use: Lift aimed vehicle with current Cargobob
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('hookcar', function()
+        local heli = GetVehiclePedIsIn(PlayerPedId(), false)
+        local target = GetEntityPlayerIsFreeAimingAt(PlayerId())
+        if heli ~= 0 and target ~= 0 then
+            AttachVehicleToCargobob(heli, target, 0, 0.0, 0.0, -1.0)
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: hookcar */
+    RegisterCommand('hookcar', () => {
+      const heli = GetVehiclePedIsIn(PlayerPedId(), false);
+      const [success, target] = GetEntityPlayerIsFreeAimingAt(PlayerId());
+      if (heli !== 0 && success) {
+        AttachVehicleToCargobob(heli, target, 0, 0.0, 0.0, -1.0);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Hook must be deployed and within range.
+- **Reference**: https://docs.fivem.net/natives/?n=AttachVehicleToCargobob
+
+##### AttachVehicleToTowTruck
+- **Name**: AttachVehicleToTowTruck
+- **Scope**: Client
+- **Signature**: `void ATTACH_VEHICLE_TO_TOW_TRUCK(Vehicle towTruck, Vehicle vehicle, BOOL rear, float hookOffsetX, float hookOffsetY, float hookOffsetZ);`
+- **Purpose**: Connects a vehicle to a tow truck.
+- **Parameters / Returns**:
+  - `towTruck` (`Vehicle`): Tow truck.
+  - `vehicle` (`Vehicle`): Vehicle being towed.
+  - `rear` (`bool`): Attach to rear of tow truck.
+  - `hookOffsetX`, `hookOffsetY`, `hookOffsetZ` (`float`): Hook offsets.
+  - **Returns**: `void`.
+- **OneSync / Networking**: Both vehicles need the same network owner.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: towcar
+        -- Use: Tow aimed vehicle with current truck
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('towcar', function()
+        local truck = GetVehiclePedIsIn(PlayerPedId(), false)
+        local target = GetEntityPlayerIsFreeAimingAt(PlayerId())
+        if truck ~= 0 and target ~= 0 then
+            AttachVehicleToTowTruck(truck, target, false, 0.0, 0.0, 0.0)
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: towcar */
+    RegisterCommand('towcar', () => {
+      const truck = GetVehiclePedIsIn(PlayerPedId(), false);
+      const [success, target] = GetEntityPlayerIsFreeAimingAt(PlayerId());
+      if (truck !== 0 && success) {
+        AttachVehicleToTowTruck(truck, target, false, 0.0, 0.0, 0.0);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Tow arm must be extended.
+- **Reference**: https://docs.fivem.net/natives/?n=AttachVehicleToTowTruck
+
+##### AttachVehicleToTrailer
+- **Name**: AttachVehicleToTrailer
+- **Scope**: Client
+- **Signature**: `void ATTACH_VEHICLE_TO_TRAILER(Vehicle vehicle, Vehicle trailer, float radius);`
+- **Purpose**: Links a vehicle to a trailer using default attachment points.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to attach.
+  - `trailer` (`Vehicle`): Trailer entity.
+  - `radius` (`float`): Attachment tolerance radius.
+  - **Returns**: `void`.
+- **OneSync / Networking**: Requires ownership of both entities.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: hitch
+        -- Use: Attach current vehicle to aimed trailer
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('hitch', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        local trailer = GetEntityPlayerIsFreeAimingAt(PlayerId())
+        if veh ~= 0 and trailer ~= 0 then
+            AttachVehicleToTrailer(veh, trailer, 5.0)
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: hitch */
+    RegisterCommand('hitch', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      const [success, trailer] = GetEntityPlayerIsFreeAimingAt(PlayerId());
+      if (veh !== 0 && success) {
+        AttachVehicleToTrailer(veh, trailer, 5.0);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Trailer must support the vehicle type.
+- **Reference**: https://docs.fivem.net/natives/?n=AttachVehicleToTrailer
+
+##### BringVehicleToHalt
+- **Name**: BringVehicleToHalt
+- **Scope**: Client
+- **Signature**: `void BRING_VEHICLE_TO_HALT(Vehicle vehicle, float distance, int duration, BOOL bControlVerticalVelocity);`
+- **Purpose**: Gradually stops a vehicle within the given distance and duration.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to stop.
+  - `distance` (`float`): Desired stopping distance.
+  - `duration` (`int`): Time in milliseconds to brake.
+  - `bControlVerticalVelocity` (`bool`): Control Z velocity for aircraft.
+  - **Returns**: `void`.
+- **OneSync / Networking**: Only effective if client has control of the vehicle.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: halt
+        -- Use: Stop the current vehicle quickly
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('halt', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            BringVehicleToHalt(veh, 10.0, 3000, false)
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: halt */
+    RegisterCommand('halt', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        BringVehicleToHalt(veh, 10.0, 3000, false);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Sudden halt may look unnatural on remote clients.
+- **Reference**: https://docs.fivem.net/natives/?n=BringVehicleToHalt
+
+##### CanAnchorBoatHere
+- **Name**: CanAnchorBoatHere
+- **Scope**: Client
+- **Signature**: `BOOL CAN_ANCHOR_BOAT_HERE(Vehicle boat);`
+- **Purpose**: Checks if the water depth allows anchoring the boat.
+- **Parameters / Returns**:
+  - `boat` (`Vehicle`): Boat to test.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Requires local control to anchor.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: anchorcheck
+        -- Use: Notify if current boat can anchor
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('anchorcheck', function()
+        local boat = GetVehiclePedIsIn(PlayerPedId(), false)
+        if boat ~= 0 and CanAnchorBoatHere(boat) then
+            TriggerEvent('chat:addMessage', { args = { 'Safe to anchor' } })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: anchorcheck */
+    RegisterCommand('anchorcheck', () => {
+      const boat = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (boat !== 0 && CanAnchorBoatHere(boat)) {
+        emit('chat:addMessage', { args: ['Safe to anchor'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Ignores proximity to other boats.
+- **Reference**: https://docs.fivem.net/natives/?n=CanAnchorBoatHere
+
+##### CanAnchorBoatHereIgnorePlayers
+- **Name**: CanAnchorBoatHereIgnorePlayers
+- **Scope**: Client
+- **Signature**: `BOOL CAN_ANCHOR_BOAT_HERE_IGNORE_PLAYERS(Vehicle boat);`
+- **Purpose**: Anchor check that ignores nearby players when evaluating space.
+- **Parameters / Returns**:
+  - `boat` (`Vehicle`): Boat to test.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Local check.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: anchorignore
+        -- Use: Anchor check ignoring player collision
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('anchorignore', function()
+        local boat = GetVehiclePedIsIn(PlayerPedId(), false)
+        if boat ~= 0 and CanAnchorBoatHereIgnorePlayers(boat) then
+            TriggerEvent('chat:addMessage', { args = { 'Anchor spot clear' } })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: anchorignore */
+    RegisterCommand('anchorignore', () => {
+      const boat = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (boat !== 0 && CanAnchorBoatHereIgnorePlayers(boat)) {
+        emit('chat:addMessage', { args: ['Anchor spot clear'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Still blocked by world geometry.
+- **Reference**: https://docs.fivem.net/natives/?n=CanAnchorBoatHereIgnorePlayers
+
+##### CanCargobobPickUpEntity
+- **Name**: CanCargobobPickUpEntity
+- **Scope**: Client
+- **Signature**: `BOOL CAN_CARGOBOB_PICK_UP_ENTITY(Vehicle cargobob, Entity entity);`
+- **Purpose**: Tests if the Cargobob can pick up the specified entity.
+- **Parameters / Returns**:
+  - `cargobob` (`Vehicle`): Helicopter.
+  - `entity` (`Entity`): Object or vehicle to pick up.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Both entities must be streamed.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: canhook
+        -- Use: Check if aimed entity can be hooked
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('canhook', function()
+        local heli = GetVehiclePedIsIn(PlayerPedId(), false)
+        local target = GetEntityPlayerIsFreeAimingAt(PlayerId())
+        if heli ~= 0 and target ~= 0 then
+            local can = CanCargobobPickUpEntity(heli, target)
+            TriggerEvent('chat:addMessage', { args = { can and 'Hookable' or 'Not hookable' } })
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: canhook */
+    RegisterCommand('canhook', () => {
+      const heli = GetVehiclePedIsIn(PlayerPedId(), false);
+      const [success, target] = GetEntityPlayerIsFreeAimingAt(PlayerId());
+      if (heli !== 0 && success) {
+        const can = CanCargobobPickUpEntity(heli, target);
+        emit('chat:addMessage', { args: [can ? 'Hookable' : 'Not hookable'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Some entities are hardcoded as non-hookable.
+- **Reference**: https://docs.fivem.net/natives/?n=CanCargobobPickUpEntity
+
+##### CanShuffleSeat
+- **Name**: CanShuffleSeat
+- **Scope**: Client
+- **Signature**: `BOOL CAN_SHUFFLE_SEAT(Vehicle vehicle, int seatIndex);`
+- **Purpose**: Checks whether the player can move to a target seat.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle being checked.
+  - `seatIndex` (`int`): Target seat index.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Seat occupancy must be up to date on the client.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: shuffle
+        -- Use: Attempt to shuffle to passenger seat
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('shuffle', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and CanShuffleSeat(veh, 0) then
+            SetPedIntoVehicle(PlayerPedId(), veh, 0)
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: shuffle */
+    RegisterCommand('shuffle', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && CanShuffleSeat(veh, 0)) {
+        SetPedIntoVehicle(PlayerPedId(), veh, 0);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Seat indexes vary by vehicle type.
+- **Reference**: https://docs.fivem.net/natives/?n=CanShuffleSeat
+
+##### ClearLastDrivenVehicle
+- **Name**: ClearLastDrivenVehicle
+- **Scope**: Client
+- **Signature**: `void CLEAR_LAST_DRIVEN_VEHICLE();`
+- **Purpose**: Clears the script's stored reference to the last driven vehicle.
+- **Parameters / Returns**:
+  - **Returns**: `void`.
+- **OneSync / Networking**: Client-side state only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: clearlast
+        -- Use: Forget last driven vehicle for tasks
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('clearlast', function()
+        ClearLastDrivenVehicle()
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: clearlast */
+    RegisterCommand('clearlast', () => {
+      ClearLastDrivenVehicle();
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only affects scripts using the native.
+- **Reference**: https://docs.fivem.net/natives/?n=ClearLastDrivenVehicle
+##### ClearNitrous
+- **Name**: ClearNitrous
+- **Scope**: Client
+- **Signature**: `void CLEAR_NITROUS(Vehicle vehicle);`
+- **Purpose**: Resets nitrous levels on the specified vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to modify.
+  - **Returns**: `void`.
+- **OneSync / Networking**: Requires network control of the vehicle.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: clearnos
+        -- Use: Remove nitrous from current vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('clearnos', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then ClearNitrous(veh) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: clearnos */
+    RegisterCommand('clearnos', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) ClearNitrous(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Affects only vehicles with nitrous components.
+- **Reference**: https://docs.fivem.net/natives/?n=ClearNitrous
+
+##### ClearVehicleCustomPrimaryColour
+- **Name**: ClearVehicleCustomPrimaryColour
+- **Scope**: Client | Server
+- **Signature**: `void CLEAR_VEHICLE_CUSTOM_PRIMARY_COLOUR(Vehicle vehicle);`
+- **Purpose**: Removes custom primary paint from a vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to modify.
+  - **Returns**: `void`.
+- **OneSync / Networking**: Requires owner to replicate appearance.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: clearpri
+        -- Use: Reset vehicle's primary color
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('clearpri', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then ClearVehicleCustomPrimaryColour(veh) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: clearpri */
+    RegisterCommand('clearpri', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) ClearVehicleCustomPrimaryColour(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Color change may not replicate if vehicle not networked.
+- **Reference**: https://docs.fivem.net/natives/?n=ClearVehicleCustomPrimaryColour
+
+##### ClearVehicleCustomSecondaryColour
+- **Name**: ClearVehicleCustomSecondaryColour
+- **Scope**: Client | Server
+- **Signature**: `void CLEAR_VEHICLE_CUSTOM_SECONDARY_COLOUR(Vehicle vehicle);`
+- **Purpose**: Removes custom secondary paint from a vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to modify.
+  - **Returns**: `void`.
+- **OneSync / Networking**: Requires network ownership for replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: clearsec
+        -- Use: Reset vehicle's secondary color
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('clearsec', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then ClearVehicleCustomSecondaryColour(veh) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: clearsec */
+    RegisterCommand('clearsec', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) ClearVehicleCustomSecondaryColour(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only affects vehicles with custom colors set.
+- **Reference**: https://docs.fivem.net/natives/?n=ClearVehicleCustomSecondaryColour
+
+##### ClearVehicleGeneratorAreaOfInterest
+- **Name**: ClearVehicleGeneratorAreaOfInterest
+- **Scope**: Client
+- **Signature**: `void CLEAR_VEHICLE_GENERATOR_AREA_OF_INTEREST();`
+- **Purpose**: Resets any vehicle generator area set with `SET_VEHICLE_GENERATOR_AREA_OF_INTEREST`.
+- **Parameters / Returns**:
+  - **Returns**: `void`.
+- **OneSync / Networking**: Local only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: clearvgaoi
+        -- Use: Clear previously defined generator area
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('clearvgaoi', function()
+        ClearVehicleGeneratorAreaOfInterest()
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: clearvgaoi */
+    RegisterCommand('clearvgaoi', () => {
+      ClearVehicleGeneratorAreaOfInterest();
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only affects local generator operations.
+- **Reference**: https://docs.fivem.net/natives/?n=ClearVehicleGeneratorAreaOfInterest
+
+##### ClearVehiclePhoneExplosiveDevice
+- **Name**: ClearVehiclePhoneExplosiveDevice
+- **Scope**: Client
+- **Signature**: `void _CLEAR_VEHICLE_PHONE_EXPLOSIVE_DEVICE();`
+- **Purpose**: Removes a planted phone bomb from the player’s current vehicle.
+- **Parameters / Returns**:
+  - **Returns**: `void`.
+- **OneSync / Networking**: Affects vehicle owned by executing client.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: disarmbomb
+        -- Use: Clear phone bomb from current vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('disarmbomb', function()
+        ClearVehiclePhoneExplosiveDevice()
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: disarmbomb */
+    RegisterCommand('disarmbomb', () => {
+      ClearVehiclePhoneExplosiveDevice();
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only works if a phone bomb was previously armed.
+- **Reference**: https://docs.fivem.net/natives/?n=ClearVehiclePhoneExplosiveDevice
+
+##### ClearVehicleRouteHistory
+- **Name**: ClearVehicleRouteHistory
+- **Scope**: Client
+- **Signature**: `void CLEAR_VEHICLE_ROUTE_HISTORY(Vehicle vehicle);`
+- **Purpose**: Clears recorded route data used by autopilot or trains.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to clear.
+  - **Returns**: `void`.
+- **OneSync / Networking**: Requires vehicle control.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: clearroute
+        -- Use: Reset route history for current vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('clearroute', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then ClearVehicleRouteHistory(veh) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: clearroute */
+    RegisterCommand('clearroute', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) ClearVehicleRouteHistory(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Applies to scripted routes only.
+- **Reference**: https://docs.fivem.net/natives/?n=ClearVehicleRouteHistory
+
+##### CloseBombBayDoors
+- **Name**: CloseBombBayDoors
+- **Scope**: Client
+- **Signature**: `void CLOSE_BOMB_BAY_DOORS(Vehicle vehicle);`
+- **Purpose**: Closes the bomb bay on supported aircraft.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Aircraft to modify.
+  - **Returns**: `void`.
+- **OneSync / Networking**: Requires control of the aircraft.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: bombclose
+        -- Use: Close bomb bay immediately
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('bombclose', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then CloseBombBayDoors(veh) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: bombclose */
+    RegisterCommand('bombclose', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) CloseBombBayDoors(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Ignored on aircraft without bomb bays.
+- **Reference**: https://docs.fivem.net/natives/?n=CloseBombBayDoors
+
+##### ControlLandingGear
+- **Name**: ControlLandingGear
+- **Scope**: Client
+- **Signature**: `void CONTROL_LANDING_GEAR(Vehicle vehicle, int state);`
+- **Purpose**: Sets aircraft landing gear state.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Aircraft.
+  - `state` (`int`): Gear state (0–4).
+  - **Returns**: `void`.
+- **OneSync / Networking**: Requires network ownership for replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: gear
+        -- Use: Toggle landing gear
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('gear', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            local state = GetLandingGearState(veh)
+            ControlLandingGear(veh, state == 0 and 1 or 0)
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: gear */
+    RegisterCommand('gear', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        const state = GetLandingGearState(veh);
+        ControlLandingGear(veh, state === 0 ? 1 : 0);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - State values vary between aircraft.
+- **Reference**: https://docs.fivem.net/natives/?n=ControlLandingGear
+
+##### CopyVehicleDamages
+- **Name**: CopyVehicleDamages
+- **Scope**: Client
+- **Signature**: `void COPY_VEHICLE_DAMAGES(Vehicle sourceVehicle, Vehicle targetVehicle);`
+- **Purpose**: Transfers damage status from one vehicle to another.
+- **Parameters / Returns**:
+  - `sourceVehicle` (`Vehicle`): Vehicle to copy from.
+  - `targetVehicle` (`Vehicle`): Vehicle to apply damage to.
+  - **Returns**: `void`.
+- **OneSync / Networking**: Both vehicles must be controlled by the same client.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: copydamage
+        -- Use: Apply current vehicle damage to aimed vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('copydamage', function()
+        local src = GetVehiclePedIsIn(PlayerPedId(), false)
+        local tgt = GetEntityPlayerIsFreeAimingAt(PlayerId())
+        if src ~= 0 and tgt ~= 0 then
+            CopyVehicleDamages(src, tgt)
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: copydamage */
+    RegisterCommand('copydamage', () => {
+      const src = GetVehiclePedIsIn(PlayerPedId(), false);
+      const [success, tgt] = GetEntityPlayerIsFreeAimingAt(PlayerId());
+      if (src !== 0 && success) {
+        CopyVehicleDamages(src, tgt);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not copy dirt levels.
+- **Reference**: https://docs.fivem.net/natives/?n=CopyVehicleDamages
+
+##### CreateMissionTrain
+- **Name**: CreateMissionTrain
+- **Scope**: Client | Server
+- **Signature**: `Vehicle CREATE_MISSION_TRAIN(int variation, float x, float y, float z, BOOL direction);`
+- **Purpose**: Spawns a train with a preset variation at coordinates.
+- **Parameters / Returns**:
+  - `variation` (`int`): Train preset ID.
+  - `x`, `y`, `z` (`float`): Spawn coordinates.
+  - `direction` (`bool`): Train direction.
+  - **Returns**: `Vehicle` train handle.
+- **OneSync / Networking**: On server, spawned train is networked automatically.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: spawntrain
+        -- Use: Spawn a mission train ahead of player
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('spawntrain', function()
+        local pos = GetEntityCoords(PlayerPedId())
+        CreateMissionTrain(0, pos.x, pos.y + 50.0, pos.z, true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: spawntrain */
+    RegisterCommand('spawntrain', () => {
+      const [x, y, z] = GetEntityCoords(PlayerPedId(), false);
+      CreateMissionTrain(0, x, y + 50.0, z, true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Variations correspond to predefined consist layouts.
+- **Reference**: https://docs.fivem.net/natives/?n=CreateMissionTrain
+##### CreatePickUpRopeForCargobob
+- **Name**: CreatePickUpRopeForCargobob
+- **Scope**: Client
+- **Signature**: `void CREATE_PICK_UP_ROPE_FOR_CARGOBOB(Vehicle cargobob, int state);`
+- **Purpose**: Creates or retracts a pickup rope for the Cargobob.
+- **Parameters / Returns**:
+  - `cargobob` (`Vehicle`): Helicopter.
+  - `state` (`int`): 0 deploy, 1 retract.
+  - **Returns**: `void`.
+- **OneSync / Networking**: Only affects Cargobobs owned by the client.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: ropetoggle
+        -- Use: Deploy pickup rope
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('ropetoggle', function()
+        local heli = GetVehiclePedIsIn(PlayerPedId(), false)
+        if heli ~= 0 then CreatePickUpRopeForCargobob(heli, 0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: ropetoggle */
+    RegisterCommand('ropetoggle', () => {
+      const heli = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (heli !== 0) CreatePickUpRopeForCargobob(heli, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only valid on Cargobobs with hook capability.
+- **Reference**: https://docs.fivem.net/natives/?n=CreatePickUpRopeForCargobob
+
+##### CreateScriptVehicleGenerator
+- **Name**: CreateScriptVehicleGenerator
+- **Scope**: Client | Server
+- **Signature**: `int CREATE_SCRIPT_VEHICLE_GENERATOR(float x, float y, float z, float heading, float p4, float p5, Hash modelHash, int p7, int p8, int p9, int p10, BOOL p11, BOOL p12, BOOL p13, BOOL p14, BOOL p15, int p16);`
+- **Purpose**: Creates a vehicle generator that spawns vehicles over time.
+- **Parameters / Returns**:
+  - `x`, `y`, `z` (`float`): Generator position.
+  - `heading` (`float`): Spawn heading.
+  - `p4`, `p5` (`float`): Area dimensions.
+  - `modelHash` (`Hash`): Vehicle model.
+  - `p7`–`p10` (`int`): Unknown flags.
+  - `p11`–`p15` (`bool`): Spawn conditions.
+  - `p16` (`int`): Variations.
+  - **Returns**: `int` generator ID.
+- **OneSync / Networking**: Server generators spawn networked vehicles.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: creategen
+        -- Use: Create a simple vehicle generator
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('creategen', function()
+        local pos = GetEntityCoords(PlayerPedId())
+        CreateScriptVehicleGenerator(pos.x, pos.y, pos.z, 0.0, 5.0, 3.0, `adder`,1,1,1,1,true,false,false,false,false,0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: creategen */
+    RegisterCommand('creategen', () => {
+      const [x, y, z] = GetEntityCoords(PlayerPedId(), false);
+      CreateScriptVehicleGenerator(x, y, z, 0.0, 5.0, 3.0, GetHashKey('adder'),1,1,1,1,true,false,false,false,false,0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Many parameters undocumented; adjust with caution.
+- **Reference**: https://docs.fivem.net/natives/?n=CreateScriptVehicleGenerator
+
+##### CreateVehicle
+- **Name**: CreateVehicle
+- **Scope**: Client | Server
+- **Signature**: `Vehicle CREATE_VEHICLE(Hash modelHash, float x, float y, float z, float heading, BOOL isNetwork, BOOL netMissionEntity);`
+- **Purpose**: Spawns a vehicle of the given model at specified coordinates.
+- **Parameters / Returns**:
+  - `modelHash` (`Hash`): Vehicle model.
+  - `x`, `y`, `z` (`float`): Spawn position.
+  - `heading` (`float`): Facing angle.
+  - `isNetwork` (`bool`): Create as network object.
+  - `netMissionEntity` (`bool`): Register as mission entity.
+  - **Returns**: `Vehicle` handle.
+- **OneSync / Networking**: Server-spawned networked vehicles replicate to clients.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: spawnadder
+        -- Use: Spawn an Adder at player location
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('spawnadder', function()
+        local pos = GetEntityCoords(PlayerPedId())
+        CreateVehicle(`adder`, pos.x, pos.y, pos.z, GetEntityHeading(PlayerPedId()), true, false)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: spawnadder */
+    RegisterCommand('spawnadder', () => {
+      const [x, y, z] = GetEntityCoords(PlayerPedId(), false);
+      CreateVehicle(GetHashKey('adder'), x, y, z, GetEntityHeading(PlayerPedId()), true, false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Model must be loaded beforehand.
+- **Reference**: https://docs.fivem.net/natives/?n=CreateVehicle
+
+##### DeleteAllTrains
+- **Name**: DeleteAllTrains
+- **Scope**: Client | Server
+- **Signature**: `void DELETE_ALL_TRAINS();`
+- **Purpose**: Removes all train entities from the world.
+- **Parameters / Returns**:
+  - **Returns**: `void`.
+- **OneSync / Networking**: Server call replicates to all clients.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: cleartrains
+        -- Use: Remove all trains from the world
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('cleartrains', function()
+        DeleteAllTrains()
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: cleartrains */
+    RegisterCommand('cleartrains', () => {
+      DeleteAllTrains();
+    });
+    ```
+- **Caveats / Limitations**:
+  - Existing train handles become invalid.
+- **Reference**: https://docs.fivem.net/natives/?n=DeleteAllTrains
+
+##### DeleteMissionTrain
+- **Name**: DeleteMissionTrain
+- **Scope**: Client | Server
+- **Signature**: `void DELETE_MISSION_TRAIN(Vehicle* train);`
+- **Purpose**: Deletes a mission train created via `CreateMissionTrain`.
+- **Parameters / Returns**:
+  - `train` (`Vehicle`): Train handle to delete.
+  - **Returns**: `void`.
+- **OneSync / Networking**: Deletion syncs to all clients.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: deltrain
+        -- Use: Delete the nearest mission train
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('deltrain', function()
+        local train = GetClosestVehicle(GetEntityCoords(PlayerPedId()), 50.0, 0, 8192)
+        if train ~= 0 then DeleteMissionTrain(train) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: deltrain */
+    RegisterCommand('deltrain', () => {
+      const [x, y, z] = GetEntityCoords(PlayerPedId(), false);
+      const train = GetClosestVehicle(x, y, z, 50.0, 0, 8192);
+      if (train !== 0) DeleteMissionTrain(train);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Train handle is invalidated after deletion.
+- **Reference**: https://docs.fivem.net/natives/?n=DeleteMissionTrain
+
+##### DeleteScriptVehicleGenerator
+- **Name**: DeleteScriptVehicleGenerator
+- **Scope**: Client | Server
+- **Signature**: `void DELETE_SCRIPT_VEHICLE_GENERATOR(int vehicleGenerator);`
+- **Purpose**: Removes a vehicle generator previously created.
+- **Parameters / Returns**:
+  - `vehicleGenerator` (`int`): Generator ID.
+  - **Returns**: `void`.
+- **OneSync / Networking**: Server side removal stops further spawns.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: delgen
+        -- Use: Remove a stored generator
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    local lastGen
+    RegisterCommand('creategen', function()
+        local pos = GetEntityCoords(PlayerPedId())
+        lastGen = CreateScriptVehicleGenerator(pos.x, pos.y, pos.z, 0.0, 5.0, 3.0, `blista`,1,1,1,1,true,false,false,false,false,0)
+    end)
+    RegisterCommand('delgen', function()
+        if lastGen then DeleteScriptVehicleGenerator(lastGen) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: delgen */
+    let lastGen;
+    RegisterCommand('creategen', () => {
+      const [x, y, z] = GetEntityCoords(PlayerPedId(), false);
+      lastGen = CreateScriptVehicleGenerator(x, y, z, 0.0,5.0,3.0, GetHashKey('blista'),1,1,1,1,true,false,false,false,false,0);
+    });
+    RegisterCommand('delgen', () => {
+      if (lastGen) DeleteScriptVehicleGenerator(lastGen);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Existing spawned vehicles remain.
+- **Reference**: https://docs.fivem.net/natives/?n=DeleteScriptVehicleGenerator
+
+##### DeleteVehicle
+- **Name**: DeleteVehicle
+- **Scope**: Client | Server
+- **Signature**: `void DELETE_VEHICLE(Vehicle* vehicle);`
+- **Purpose**: Deletes a vehicle entity.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to remove.
+  - **Returns**: `void`.
+- **OneSync / Networking**: Requires network ownership.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: delveh
+        -- Use: Delete vehicle player is in
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('delveh', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then DeleteVehicle(veh) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: delveh */
+    RegisterCommand('delveh', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) DeleteVehicle(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - May leave players without a fallback vehicle.
+- **Reference**: https://docs.fivem.net/natives/?n=DeleteVehicle
+
+##### DetachContainerFromHandlerFrame
+- **Name**: DetachContainerFromHandlerFrame
+- **Scope**: Client
+- **Signature**: `void DETACH_CONTAINER_FROM_HANDLER_FRAME(Vehicle vehicle);`
+- **Purpose**: Releases a container from a handler vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Handler vehicle.
+  - **Returns**: `void`.
+- **OneSync / Networking**: Requires ownership of handler.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: dock_detach
+        -- Use: Detach container from handler
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('dock_detach', function()
+        local handler = GetVehiclePedIsIn(PlayerPedId(), false)
+        if handler ~= 0 then DetachContainerFromHandlerFrame(handler) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: dock_detach */
+    RegisterCommand('dock_detach', () => {
+      const handler = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (handler !== 0) DetachContainerFromHandlerFrame(handler);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Container drops instantly; ensure safe position.
+- **Reference**: https://docs.fivem.net/natives/?n=DetachContainerFromHandlerFrame
+
+##### DetachEntityFromCargobob
+- **Name**: DetachEntityFromCargobob
+- **Scope**: Client
+- **Signature**: `Any DETACH_ENTITY_FROM_CARGOBOB(Vehicle vehicle, Entity entity);`
+- **Purpose**: Releases an entity from a Cargobob hook.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Cargobob.
+  - `entity` (`Entity`): Attached entity.
+  - **Returns**: `Any` (unused).
+- **OneSync / Networking**: Requires control of both entities.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: unhook
+        -- Use: Detach hooked entity
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('unhook', function()
+        local heli = GetVehiclePedIsIn(PlayerPedId(), false)
+        local target = GetEntityAttachedToEntity(heli)
+        if heli ~= 0 and target ~= 0 then
+            DetachEntityFromCargobob(heli, target)
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: unhook */
+    RegisterCommand('unhook', () => {
+      const heli = GetVehiclePedIsIn(PlayerPedId(), false);
+      const target = GetEntityAttachedToEntity(heli);
+      if (heli !== 0 && target !== 0) {
+        DetachEntityFromCargobob(heli, target);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Return value unused.
+- **Reference**: https://docs.fivem.net/natives/?n=DetachEntityFromCargobob
+
+##### DetachVehicleFromAnyCargobob
+- **Name**: DetachVehicleFromAnyCargobob
+- **Scope**: Client
+- **Signature**: `BOOL DETACH_VEHICLE_FROM_ANY_CARGOBOB(Vehicle vehicle);`
+- **Purpose**: Detaches the vehicle from any Cargobob if hooked.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to release.
+  - **Returns**: `bool` success.
+- **OneSync / Networking**: Vehicle must be network-controlled.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: unhookme
+        -- Use: Detach current vehicle from any Cargobob
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('unhookme', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then DetachVehicleFromAnyCargobob(veh) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: unhookme */
+    RegisterCommand('unhookme', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) DetachVehicleFromAnyCargobob(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only affects vehicles currently attached.
+- **Reference**: https://docs.fivem.net/natives/?n=DetachVehicleFromAnyCargobob
+##### DetachVehicleFromAnyTowTruck
+- **Name**: DetachVehicleFromAnyTowTruck
+- **Scope**: Client
+- **Signature**: `BOOL DETACH_VEHICLE_FROM_ANY_TOW_TRUCK(Vehicle vehicle);`
+- **Purpose**: Releases the vehicle from any tow truck.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to release.
+  - **Returns**: `bool` success.
+- **OneSync / Networking**: Requires vehicle ownership.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: untow
+        -- Use: Detach current vehicle from tow trucks
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('untow', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then DetachVehicleFromAnyTowTruck(veh) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: untow */
+    RegisterCommand('untow', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) DetachVehicleFromAnyTowTruck(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does nothing if not towed.
+- **Reference**: https://docs.fivem.net/natives/?n=DetachVehicleFromAnyTowTruck
+
+##### DetachVehicleFromCargobob
+- **Name**: DetachVehicleFromCargobob
+- **Scope**: Client
+- **Signature**: `void DETACH_VEHICLE_FROM_CARGOBOB(Vehicle cargobob, Vehicle vehicle);`
+- **Purpose**: Detaches a specific vehicle from a Cargobob.
+- **Parameters / Returns**:
+  - `cargobob` (`Vehicle`): Helicopter.
+  - `vehicle` (`Vehicle`): Vehicle to release.
+  - **Returns**: `void`.
+- **OneSync / Networking**: Both entities must be owned locally.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: unhookcar
+        -- Use: Detach targeted vehicle from Cargobob
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('unhookcar', function()
+        local heli = GetVehiclePedIsIn(PlayerPedId(), false)
+        local target = GetEntityPlayerIsFreeAimingAt(PlayerId())
+        if heli ~= 0 and target ~= 0 then
+            DetachVehicleFromCargobob(heli, target)
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: unhookcar */
+    RegisterCommand('unhookcar', () => {
+      const heli = GetVehiclePedIsIn(PlayerPedId(), false);
+      const [success, target] = GetEntityPlayerIsFreeAimingAt(PlayerId());
+      if (heli !== 0 && success) {
+        DetachVehicleFromCargobob(heli, target);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - No effect if vehicle not attached to given Cargobob.
+- **Reference**: https://docs.fivem.net/natives/?n=DetachVehicleFromCargobob
+
+##### DetachVehicleFromTowTruck
+- **Name**: DetachVehicleFromTowTruck
+- **Scope**: Client
+- **Signature**: `void DETACH_VEHICLE_FROM_TOW_TRUCK(Vehicle towTruck, Vehicle vehicle);`
+- **Purpose**: Detaches a vehicle from a specific tow truck.
+- **Parameters / Returns**:
+  - `towTruck` (`Vehicle`): Tow truck.
+  - `vehicle` (`Vehicle`): Vehicle to release.
+  - **Returns**: `void`.
+- **OneSync / Networking**: Same owner required.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: untowcar
+        -- Use: Release aimed vehicle from tow truck
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('untowcar', function()
+        local truck = GetVehiclePedIsIn(PlayerPedId(), false)
+        local target = GetEntityPlayerIsFreeAimingAt(PlayerId())
+        if truck ~= 0 and target ~= 0 then
+            DetachVehicleFromTowTruck(truck, target)
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: untowcar */
+    RegisterCommand('untowcar', () => {
+      const truck = GetVehiclePedIsIn(PlayerPedId(), false);
+      const [success, target] = GetEntityPlayerIsFreeAimingAt(PlayerId());
+      if (truck !== 0 && success) {
+        DetachVehicleFromTowTruck(truck, target);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Tow winch must be active.
+- **Reference**: https://docs.fivem.net/natives/?n=DetachVehicleFromTowTruck
+
+##### DetachVehicleFromTrailer
+- **Name**: DetachVehicleFromTrailer
+- **Scope**: Client
+- **Signature**: `void DETACH_VEHICLE_FROM_TRAILER(Vehicle vehicle);`
+- **Purpose**: Unhitches a vehicle from its trailer.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to detach.
+  - **Returns**: `void`.
+- **OneSync / Networking**: Requires control of vehicle.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: unhitch
+        -- Use: Detach current vehicle from trailer
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('unhitch', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then DetachVehicleFromTrailer(veh) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: unhitch */
+    RegisterCommand('unhitch', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) DetachVehicleFromTrailer(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Trailer remains in place.
+- **Reference**: https://docs.fivem.net/natives/?n=DetachVehicleFromTrailer
+
+##### DetonateVehiclePhoneExplosiveDevice
+- **Name**: DetonateVehiclePhoneExplosiveDevice
+- **Scope**: Client
+- **Signature**: `void DETONATE_VEHICLE_PHONE_EXPLOSIVE_DEVICE();`
+- **Purpose**: Triggers the phone bomb on the player's current vehicle.
+- **Parameters / Returns**:
+  - **Returns**: `void`.
+- **OneSync / Networking**: Requires vehicle ownership.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: detonate
+        -- Use: Detonate phone bomb on current vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('detonate', function()
+        DetonateVehiclePhoneExplosiveDevice()
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: detonate */
+    RegisterCommand('detonate', () => {
+      DetonateVehiclePhoneExplosiveDevice();
+    });
+    ```
+- **Caveats / Limitations**:
+  - Fails if no bomb is armed.
+- **Reference**: https://docs.fivem.net/natives/?n=DetonateVehiclePhoneExplosiveDevice
+
+##### DisableIndividualPlanePropeller
+- **Name**: DisableIndividualPlanePropeller
+- **Scope**: Client
+- **Signature**: `void DISABLE_INDIVIDUAL_PLANE_PROPELLER(Vehicle vehicle, int propeller);`
+- **Purpose**: Disables a specific propeller on a plane.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Plane.
+  - `propeller` (`int`): Propeller index.
+  - **Returns**: `void`.
+- **OneSync / Networking**: Must own the aircraft.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: killprop
+        -- Use: Disable propeller 0
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('killprop', function()
+        local plane = GetVehiclePedIsIn(PlayerPedId(), false)
+        if plane ~= 0 then DisableIndividualPlanePropeller(plane, 0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: killprop */
+    RegisterCommand('killprop', () => {
+      const plane = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (plane !== 0) DisableIndividualPlanePropeller(plane, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Index varies with aircraft model.
+- **Reference**: https://docs.fivem.net/natives/?n=DisableIndividualPlanePropeller
+
+##### DisablePlaneAileron
+- **Name**: DisablePlaneAileron
+- **Scope**: Client
+- **Signature**: `void DISABLE_PLANE_AILERON(Vehicle vehicle, BOOL p1, BOOL p2);`
+- **Purpose**: Temporarily disables a plane's aileron control.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Plane.
+  - `p1` (`bool`): Left aileron.
+  - `p2` (`bool`): Right aileron.
+  - **Returns**: `void`.
+- **OneSync / Networking**: Ownership required.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: disableail
+        -- Use: Disable left aileron
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('disableail', function()
+        local plane = GetVehiclePedIsIn(PlayerPedId(), false)
+        if plane ~= 0 then DisablePlaneAileron(plane, true, false) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: disableail */
+    RegisterCommand('disableail', () => {
+      const plane = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (plane !== 0) DisablePlaneAileron(plane, true, false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Use sparingly; affects handling.
+- **Reference**: https://docs.fivem.net/natives/?n=DisablePlaneAileron
+
+##### DisableVehicleNeonLights
+- **Name**: DisableVehicleNeonLights
+- **Scope**: Client
+- **Signature**: `void _DISABLE_VEHICLE_NEON_LIGHTS(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Enables or disables neon light effects globally on a vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to modify.
+  - `toggle` (`bool`): Disable when true.
+  - **Returns**: `void`.
+- **OneSync / Networking**: Requires ownership for replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: neoff
+        -- Use: Disable neon lights on current car
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('neoff', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then DisableVehicleNeonLights(veh, true) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: neoff */
+    RegisterCommand('neoff', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) DisableVehicleNeonLights(veh, true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Individual neon tubes cannot be toggled with this native.
+- **Reference**: https://docs.fivem.net/natives/?n=DisableVehicleNeonLights
+
+##### DisableVehicleTurretMovementThisFrame
+- **Name**: DisableVehicleTurretMovementThisFrame
+- **Scope**: Client
+- **Signature**: `void _DISABLE_VEHICLE_TURRET_MOVEMENT_THIS_FRAME(Vehicle vehicle);`
+- **Purpose**: Freezes vehicle turret rotation for the current frame.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle with turret.
+  - **Returns**: `void`.
+- **OneSync / Networking**: Call each frame on controlling client.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Thread
+        -- Name: lockturret
+        -- Use: Continuously lock current vehicle turret
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    CreateThread(function()
+        while true do
+            local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+            if veh ~= 0 then DisableVehicleTurretMovementThisFrame(veh) end
+            Wait(0)
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Thread: lockturret */
+    setTick(() => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) DisableVehicleTurretMovementThisFrame(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Must be called every frame to maintain lock.
+- **Reference**: https://docs.fivem.net/natives/?n=DisableVehicleTurretMovementThisFrame
+
+##### DisableVehicleWeapon
+- **Name**: DisableVehicleWeapon
+- **Scope**: Client
+- **Signature**: `void DISABLE_VEHICLE_WEAPON(BOOL disabled, Hash weaponHash, Vehicle vehicle, Ped owner);`
+- **Purpose**: Disables a specific mounted weapon on the given vehicle.
+- **Parameters / Returns**:
+  - `disabled` (`bool`): True to disable.
+  - `weaponHash` (`Hash`): Weapon identifier.
+  - `vehicle` (`Vehicle`): Vehicle containing the weapon.
+  - `owner` (`Ped`): Ped controlling the weapon.
+  - **Returns**: `void`.
+- **OneSync / Networking**: Client must control the vehicle to enforce disable.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: disablegun
+        -- Use: Disable mounted vehicle weapon
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('disablegun', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            DisableVehicleWeapon(true, `VEHICLE_WEAPON_ENEMY_LASER`, veh, PlayerPedId())
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: disablegun */
+    RegisterCommand('disablegun', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        DisableVehicleWeapon(true, GetHashKey('VEHICLE_WEAPON_ENEMY_LASER'), veh, PlayerPedId());
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Weapon hash must exist on the vehicle model.
+- **Reference**: https://docs.fivem.net/natives/?n=DisableVehicleWeapon
 ##### AddRoadNodeSpeedZone
 - **Name**: AddRoadNodeSpeedZone
 - **Scope**: Client
@@ -4218,4 +6192,4 @@ onesync on
   - Recording must have been paused previously.
 - **Reference**: https://docs.fivem.net/natives/?n=UnpausePlaybackRecordedVehicle
 
-CONTINUE-HERE — 2025-09-12T20:13:58.131329+00:00 — next: Vehicle :: AreAllVehicleWindowsIntact
+CONTINUE-HERE — 2025-09-12T20:35:01.804126+00:00 — next: Vehicle :: DisableVehicleWorldCollision
