@@ -430,13 +430,13 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Overall | 6442 | 406 | 6036 | 2025-09-12T00:17 |
+| Overall | 6442 | 418 | 6024 | 2025-09-12T00:53 |
 | Player | 248 | 248 | 0 | 2025-09-11T06:38 |
 | Recording | 17 | 17 | 0 | 2025-09-11T06:52 |
 | Replay | 6 | 6 | 0 | 2025-09-11T07:37 |
 | ACL | 10 | 10 | 0 | 2025-09-11T08:12 |
 | CFX | 50 | 50 | 0 | 2025-09-11T09:55 |
-| Vehicle | 751 | 75 | 676 | 2025-09-12T00:17 |
+| Vehicle | 751 | 87 | 664 | 2025-09-12T00:53 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -14642,4 +14642,441 @@ RegisterCommand('rgb', () => {
   - Ensure the vehicle supports convertible roofs.
 - **Reference**: https://docs.fivem.net/natives/?n=GetConvertibleRoofState
 
-CONTINUE-HERE — 2025-09-12T00:17 — next: Vehicle :: GetCurrentPlaybackForVehicle
+##### GetCurrentPlaybackForVehicle
+- **Name**: GetCurrentPlaybackForVehicle
+- **Scope**: Shared
+- **Signature(s)**: `int GET_CURRENT_PLAYBACK_FOR_VEHICLE(Vehicle vehicle)`
+- **Purpose**: Returns the playback ID currently assigned to a vehicle if a recording is playing.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle being checked.
+  - **Returns**: `int` playback identifier or 0 when not recording.
+- **OneSync / Networking**: Vehicle must be owned locally to query playback state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: playback_id
+        -- Use: Prints current playback handle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('playback_id', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetCurrentPlaybackForVehicle(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: playback_id */
+    RegisterCommand('playback_id', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetCurrentPlaybackForVehicle(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Works only on vehicles playing recorded paths.
+  - TODO(next-run): verify return value when playback is absent.
+- **Reference**: https://docs.fivem.net/natives/?n=GetCurrentPlaybackForVehicle
+
+##### GetDisplayNameFromVehicleModel
+- **Name**: GetDisplayNameFromVehicleModel
+- **Scope**: Shared
+- **Signature(s)**: `char* GET_DISPLAY_NAME_FROM_VEHICLE_MODEL(Hash modelHash)`
+- **Purpose**: Retrieves the internal display name label for a vehicle model.
+- **Parameters / Returns**:
+  - `modelHash` (`Hash`): Vehicle model identifier.
+  - **Returns**: `string` label such as `ADDER`.
+- **OneSync / Networking**: Pure lookup; no network impact.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_name
+        -- Use: Prints display name for model
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_name', function(_, args)
+        local model = GetHashKey(args[1] or 'adder')
+        print(GetDisplayNameFromVehicleModel(model))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_name */
+    RegisterCommand('veh_name', (src, args) => {
+      const model = GetHashKey(args[0] || 'adder');
+      console.log(GetDisplayNameFromVehicleModel(model));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returned label may need `GetLabelText` for localization.
+- **Reference**: https://docs.fivem.net/natives/?n=GetDisplayNameFromVehicleModel
+
+##### GetEntityAttachedToCargobob
+- **Name**: GetEntityAttachedToCargobob
+- **Scope**: Shared
+- **Signature(s)**: `Entity GET_ENTITY_ATTACHED_TO_CARGOBOB(Vehicle cargobob)`
+- **Purpose**: Returns the entity currently attached to a Cargobob's hook.
+- **Parameters / Returns**:
+  - `cargobob` (`Vehicle`): Cargobob helicopter.
+  - **Returns**: `Entity` handle or 0.
+- **OneSync / Networking**: Requires ownership of the Cargobob for accurate state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: cargobob_cargo
+        -- Use: Prints entity attached to Cargobob
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('cargobob_cargo', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetEntityAttachedToCargobob(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: cargobob_cargo */
+    RegisterCommand('cargobob_cargo', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetEntityAttachedToCargobob(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only valid for Cargobob helicopters.
+- **Reference**: https://docs.fivem.net/natives/?n=GetEntityAttachedToCargobob
+
+##### GetEntityAttachedToTowTruck
+- **Name**: GetEntityAttachedToTowTruck
+- **Scope**: Shared
+- **Signature(s)**: `Entity GET_ENTITY_ATTACHED_TO_TOW_TRUCK(Vehicle towTruck)`
+- **Purpose**: Retrieves the entity currently hooked to a tow truck.
+- **Parameters / Returns**:
+  - `towTruck` (`Vehicle`): Tow truck vehicle.
+  - **Returns**: `Entity` handle or 0 if none.
+- **OneSync / Networking**: Tow truck must be owned locally.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: tow_target
+        -- Use: Prints entity hooked to tow truck
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('tow_target', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetEntityAttachedToTowTruck(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: tow_target */
+    RegisterCommand('tow_target', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetEntityAttachedToTowTruck(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only for tow trucks with a valid attachment.
+- **Reference**: https://docs.fivem.net/natives/?n=GetEntityAttachedToTowTruck
+
+##### GetHasRocketBoost
+- **Name**: GetHasRocketBoost
+- **Scope**: Shared
+- **Signature(s)**: `bool GET_HAS_ROCKET_BOOST(Vehicle vehicle)`
+- **Purpose**: Checks if a vehicle has a rocket boost system installed.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to inspect.
+  - **Returns**: `bool` rocket boost availability.
+- **OneSync / Networking**: Requires network ownership for correct information.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: has_boost
+        -- Use: Prints if current vehicle has rocket boost
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('has_boost', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetHasRocketBoost(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: has_boost */
+    RegisterCommand('has_boost', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetHasRocketBoost(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Applies only to vehicles supporting rocket boost.
+- **Reference**: https://docs.fivem.net/natives/?n=GetHasRocketBoost
+
+##### GetHasVehicleBeenOwnedByPlayer
+- **Name**: GetHasVehicleBeenOwnedByPlayer
+- **Scope**: Shared
+- **Signature(s)**: `bool GET_HAS_VEHICLE_BEEN_OWNED_BY_PLAYER(Vehicle vehicle)`
+- **Purpose**: Indicates whether a vehicle has ever been owned by a player.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - **Returns**: `bool` ownership history.
+- **OneSync / Networking**: Ownership should be local to ensure accuracy.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: owned_by_player
+        -- Use: Prints if vehicle was owned by a player
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('owned_by_player', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetHasVehicleBeenOwnedByPlayer(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: owned_by_player */
+    RegisterCommand('owned_by_player', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetHasVehicleBeenOwnedByPlayer(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Meaning of "owned" varies between game modes.
+  - TODO(next-run): clarify exact ownership criteria.
+- **Reference**: https://docs.fivem.net/natives/?n=GetHasVehicleBeenOwnedByPlayer
+
+##### GetHeliMainRotorHealth
+- **Name**: GetHeliMainRotorHealth
+- **Scope**: Shared
+- **Signature(s)**: `float GET_HELI_MAIN_ROTOR_HEALTH(Vehicle vehicle)`
+- **Purpose**: Returns the health value of a helicopter's main rotor.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Helicopter to query.
+  - **Returns**: `float` rotor health.
+- **OneSync / Networking**: Helicopter should be owned locally for reliable data.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: main_rotor
+        -- Use: Prints main rotor health
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('main_rotor', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetHeliMainRotorHealth(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: main_rotor */
+    RegisterCommand('main_rotor', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetHeliMainRotorHealth(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only meaningful for helicopters.
+- **Reference**: https://docs.fivem.net/natives/?n=GetHeliMainRotorHealth
+
+##### GetHeliTailRotorHealth
+- **Name**: GetHeliTailRotorHealth
+- **Scope**: Shared
+- **Signature(s)**: `float GET_HELI_TAIL_ROTOR_HEALTH(Vehicle vehicle)`
+- **Purpose**: Retrieves the health value of a helicopter's tail rotor.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Helicopter to inspect.
+  - **Returns**: `float` tail rotor health.
+- **OneSync / Networking**: Requires local ownership of the helicopter.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: tail_rotor
+        -- Use: Prints tail rotor health
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('tail_rotor', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetHeliTailRotorHealth(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: tail_rotor */
+    RegisterCommand('tail_rotor', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetHeliTailRotorHealth(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only meaningful for helicopters.
+- **Reference**: https://docs.fivem.net/natives/?n=GetHeliTailRotorHealth
+
+##### GetIsDoorValid
+- **Name**: GetIsDoorValid
+- **Scope**: Shared
+- **Signature(s)**: `bool GET_IS_DOOR_VALID(Vehicle vehicle, int doorIndex)`
+- **Purpose**: Checks whether a door index is valid for a given vehicle model.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - `doorIndex` (`int`): Door index (0=driver, etc.).
+  - **Returns**: `bool` validity.
+- **OneSync / Networking**: Requires vehicle ownership to ensure door data is up to date.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: door_valid
+        -- Use: Prints if specified door index is valid
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('door_valid', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        local index = tonumber(args[1]) or 0
+        print(GetIsDoorValid(veh, index))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: door_valid */
+    RegisterCommand('door_valid', (src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      const index = parseInt(args[0] || '0');
+      console.log(GetIsDoorValid(veh, index));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Door indices vary across vehicle types.
+- **Reference**: https://docs.fivem.net/natives/?n=GetIsDoorValid
+
+##### GetIsLeftVehicleHeadlightDamaged
+- **Name**: GetIsLeftVehicleHeadlightDamaged
+- **Scope**: Shared
+- **Signature(s)**: `bool GET_IS_LEFT_VEHICLE_HEADLIGHT_DAMAGED(Vehicle vehicle)`
+- **Purpose**: Determines whether the left headlight of a vehicle is broken.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to inspect.
+  - **Returns**: `bool` damage status.
+- **OneSync / Networking**: Requires vehicle ownership to read accurate damage state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: left_headlight
+        -- Use: Prints left headlight damage status
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('left_headlight', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetIsLeftVehicleHeadlightDamaged(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: left_headlight */
+    RegisterCommand('left_headlight', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetIsLeftVehicleHeadlightDamaged(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Damage state may be unreliable for remote vehicles.
+- **Reference**: https://docs.fivem.net/natives/?n=GetIsLeftVehicleHeadlightDamaged
+
+##### GetIsRightVehicleHeadlightDamaged
+- **Name**: GetIsRightVehicleHeadlightDamaged
+- **Scope**: Shared
+- **Signature(s)**: `bool GET_IS_RIGHT_VEHICLE_HEADLIGHT_DAMAGED(Vehicle vehicle)`
+- **Purpose**: Checks whether the right headlight of a vehicle is broken.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to inspect.
+  - **Returns**: `bool` damage status.
+- **OneSync / Networking**: Ownership required for accurate results.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: right_headlight
+        -- Use: Prints right headlight damage status
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('right_headlight', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetIsRightVehicleHeadlightDamaged(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: right_headlight */
+    RegisterCommand('right_headlight', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetIsRightVehicleHeadlightDamaged(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Damage state may desync on non-owned vehicles.
+- **Reference**: https://docs.fivem.net/natives/?n=GetIsRightVehicleHeadlightDamaged
+
+##### GetIsVehicleEngineRunning
+- **Name**: GetIsVehicleEngineRunning
+- **Scope**: Shared
+- **Signature(s)**: `bool GET_IS_VEHICLE_ENGINE_RUNNING(Vehicle vehicle)`
+- **Purpose**: Returns whether a vehicle's engine is currently active.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - **Returns**: `bool` engine running state.
+- **OneSync / Networking**: Requires local ownership for real-time status.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: engine_running
+        -- Use: Prints if vehicle engine is running
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('engine_running', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetIsVehicleEngineRunning(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: engine_running */
+    RegisterCommand('engine_running', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetIsVehicleEngineRunning(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Engine state may lag behind for remote entities.
+- **Reference**: https://docs.fivem.net/natives/?n=GetIsVehicleEngineRunning
+
+CONTINUE-HERE — 2025-09-12T00:53 — next: Vehicle :: GetIsVehiclePrimaryColourCustom
