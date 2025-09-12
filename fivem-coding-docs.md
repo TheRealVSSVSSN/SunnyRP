@@ -430,13 +430,13 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Overall | 6442 | 418 | 6024 | 2025-09-12T00:53 |
+| Overall | 6442 | 433 | 6009 | 2025-09-12T03:41 |
 | Player | 248 | 248 | 0 | 2025-09-11T06:38 |
 | Recording | 17 | 17 | 0 | 2025-09-11T06:52 |
 | Replay | 6 | 6 | 0 | 2025-09-11T07:37 |
 | ACL | 10 | 10 | 0 | 2025-09-11T08:12 |
 | CFX | 50 | 50 | 0 | 2025-09-11T09:55 |
-| Vehicle | 751 | 87 | 664 | 2025-09-12T00:53 |
+| Vehicle | 751 | 102 | 649 | 2025-09-12T03:41 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -15079,4 +15079,548 @@ RegisterCommand('rgb', () => {
   - Engine state may lag behind for remote entities.
 - **Reference**: https://docs.fivem.net/natives/?n=GetIsVehicleEngineRunning
 
-CONTINUE-HERE — 2025-09-12T00:53 — next: Vehicle :: GetIsVehiclePrimaryColourCustom
+##### GetIsVehiclePrimaryColourCustom
+- **Name**: GetIsVehiclePrimaryColourCustom
+- **Scope**: Shared
+- **Signature(s)**: `bool GET_IS_VEHICLE_PRIMARY_COLOUR_CUSTOM(Vehicle vehicle)`
+- **Purpose**: Determines whether a vehicle is using a custom primary paint.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target vehicle.
+  - **Returns**: `bool` custom colour flag.
+- **OneSync / Networking**: Requires vehicle ownership to read accurate cosmetic data.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: primary_colour
+        -- Use: Prints if current vehicle has custom primary colour
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('primary_colour', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetIsVehiclePrimaryColourCustom(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: primary_colour */
+    RegisterCommand('primary_colour', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetIsVehiclePrimaryColourCustom(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only reports true if a custom RGB colour was applied.
+- **Reference**: https://docs.fivem.net/natives/?n=GetIsVehiclePrimaryColourCustom
+
+##### GetIsVehicleSecondaryColourCustom
+- **Name**: GetIsVehicleSecondaryColourCustom
+- **Scope**: Shared
+- **Signature(s)**: `bool GET_IS_VEHICLE_SECONDARY_COLOUR_CUSTOM(Vehicle vehicle)`
+- **Purpose**: Checks if a vehicle has a custom secondary paint set.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target vehicle.
+  - **Returns**: `bool` custom colour flag.
+- **OneSync / Networking**: Entity ownership recommended for consistent results.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: secondary_colour
+        -- Use: Prints if current vehicle has custom secondary colour
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('secondary_colour', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetIsVehicleSecondaryColourCustom(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: secondary_colour */
+    RegisterCommand('secondary_colour', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetIsVehicleSecondaryColourCustom(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns false for vehicles without mod kits.
+- **Reference**: https://docs.fivem.net/natives/?n=GetIsVehicleSecondaryColourCustom
+
+##### _GetIsVehicleShuntBoostActive
+- **Name**: _GetIsVehicleShuntBoostActive
+- **Scope**: Shared
+- **Signature(s)**: `bool _GET_IS_VEHICLE_SHUNT_BOOST_ACTIVE(Vehicle vehicle)`
+- **Purpose**: Indicates whether the vehicle's Arena War shunt boost is active.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle equipped with shunt boost.
+  - **Returns**: `bool` boost state.
+- **OneSync / Networking**: Call from owning client to prevent desync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: shunt_active
+        -- Use: Prints if shunt boost is active
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('shunt_active', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(_GetIsVehicleShuntBoostActive(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: shunt_active */
+    RegisterCommand('shunt_active', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(_GetIsVehicleShuntBoostActive(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only relevant for vehicles with Arena War shunt boost modification.
+- **Reference**: https://docs.fivem.net/natives/?n=_GetIsVehicleShuntBoostActive
+
+##### _GetIsWheelsLoweredStateActive
+- **Name**: _GetIsWheelsLoweredStateActive
+- **Scope**: Shared
+- **Signature(s)**: `bool _GET_IS_WHEELS_LOWERED_STATE_ACTIVE(Vehicle vehicle)`
+- **Purpose**: Returns whether a vehicle's hydraulics are lowered.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target lowrider.
+  - **Returns**: `bool` lowered state.
+- **OneSync / Networking**: Ownership required to read suspension state accurately.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: wheels_lowered
+        -- Use: Prints if hydraulics are lowered
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('wheels_lowered', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(_GetIsWheelsLoweredStateActive(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: wheels_lowered */
+    RegisterCommand('wheels_lowered', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(_GetIsWheelsLoweredStateActive(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Applies only to vehicles with adjustable hydraulics.
+- **Reference**: https://docs.fivem.net/natives/?n=_GetIsWheelsLoweredStateActive
+
+##### GetLandingGearState
+- **Name**: GetLandingGearState
+- **Scope**: Shared
+- **Signature(s)**: `int GET_LANDING_GEAR_STATE(Vehicle vehicle)`
+- **Purpose**: Reports the current landing gear state of aircraft.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Aircraft to query.
+  - **Returns**: `int` state (0 deployed, 1 closing, 3 opening, 4 retracted, 5 broken).
+- **OneSync / Networking**: Use on owned aircraft to stay in sync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: gear_state
+        -- Use: Prints landing gear state
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('gear_state', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetLandingGearState(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: gear_state */
+    RegisterCommand('gear_state', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetLandingGearState(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - State value 2 is unused.
+- **Reference**: https://docs.fivem.net/natives/?n=GetLandingGearState
+
+##### GetLastDrivenVehicle
+- **Name**: GetLastDrivenVehicle
+- **Scope**: Shared
+- **Signature(s)**: `Vehicle GET_LAST_DRIVEN_VEHICLE()`
+- **Purpose**: Retrieves the vehicle last operated by the local player.
+- **Parameters / Returns**:
+  - **Returns**: `Vehicle` handle or 0 if none.
+- **OneSync / Networking**: Client-side query; result is local to caller.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: last_vehicle
+        -- Use: Prints handle of last driven vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('last_vehicle', function()
+        print(GetLastDrivenVehicle())
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: last_vehicle */
+    RegisterCommand('last_vehicle', () => {
+      console.log(GetLastDrivenVehicle());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns 0 if player has never driven a vehicle this session.
+- **Reference**: https://docs.fivem.net/natives/?n=GetLastDrivenVehicle
+
+##### GetLastPedInVehicleSeat
+- **Name**: GetLastPedInVehicleSeat
+- **Scope**: Shared
+- **Signature(s)**: `Ped GET_LAST_PED_IN_VEHICLE_SEAT(Vehicle vehicle, int seatIndex)`
+- **Purpose**: Returns the last ped occupying a specified seat.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to check.
+  - `seatIndex` (`int`): Seat identifier; see `IsVehicleSeatFree` for indices.
+  - **Returns**: `Ped` handle or 0.
+- **OneSync / Networking**: Seat history is local; ownership ensures accuracy.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: last_seat
+        -- Use: Prints last ped in passenger seat
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('last_seat', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetLastPedInVehicleSeat(veh, 0))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: last_seat */
+    RegisterCommand('last_seat', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetLastPedInVehicleSeat(veh, 0));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns 0 if seat has never been occupied.
+- **Reference**: https://docs.fivem.net/natives/?n=GetLastPedInVehicleSeat
+
+##### _GetLastRammedVehicle
+- **Name**: _GetLastRammedVehicle
+- **Scope**: Shared
+- **Signature(s)**: `Vehicle _GET_LAST_RAMMED_VEHICLE(Vehicle vehicle)`
+- **Purpose**: Retrieves the last vehicle hit using the shunt boost mechanic.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle performing the ram.
+  - **Returns**: `Vehicle` handle or 0.
+- **OneSync / Networking**: Ownership required for reliable results.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: last_rammed
+        -- Use: Prints last vehicle rammed with shunt boost
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('last_rammed', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(_GetLastRammedVehicle(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: last_rammed */
+    RegisterCommand('last_rammed', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(_GetLastRammedVehicle(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only applicable to vehicles with shunt boost.
+- **Reference**: https://docs.fivem.net/natives/?n=_GetLastRammedVehicle
+
+##### GetLiveryName
+- **Name**: GetLiveryName
+- **Scope**: Shared
+- **Signature(s)**: `char* GET_LIVERY_NAME(Vehicle vehicle, int liveryIndex)`
+- **Purpose**: Returns the internal label for a vehicle livery.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to query.
+  - `liveryIndex` (`int`): Index from 0 to `GetVehicleLiveryCount`-1.
+  - **Returns**: `string` label (use `_GET_LABEL_TEXT` for localized name).
+- **OneSync / Networking**: Requires mod kit present and vehicle ownership.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: livery_name
+        -- Use: Prints label of current livery
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('livery_name', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        local idx = GetVehicleLivery(veh)
+        print(GetLiveryName(veh, idx))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: livery_name */
+    RegisterCommand('livery_name', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      const idx = GetVehicleLivery(veh);
+      console.log(GetLiveryName(veh, idx));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns null if mod kit is not initialized.
+- **Reference**: https://docs.fivem.net/natives/?n=GetLiveryName
+
+##### GetMakeNameFromVehicleModel
+- **Name**: GetMakeNameFromVehicleModel
+- **Scope**: Shared
+- **Signature(s)**: `char* GET_MAKE_NAME_FROM_VEHICLE_MODEL(Hash modelHash)`
+- **Purpose**: Retrieves the manufacturer label associated with a vehicle model.
+- **Parameters / Returns**:
+  - `modelHash` (`Hash`): Vehicle model identifier.
+  - **Returns**: `string` manufacturer label or "CARNOTFOUND".
+- **OneSync / Networking**: Pure lookup; no network impact.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: make_name
+        -- Use: Prints manufacturer of current vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('make_name', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetMakeNameFromVehicleModel(GetEntityModel(veh)))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: make_name */
+    RegisterCommand('make_name', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetMakeNameFromVehicleModel(GetEntityModel(veh)));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns "CARNOTFOUND" for unknown models.
+- **Reference**: https://docs.fivem.net/natives/?n=GetMakeNameFromVehicleModel
+
+##### GetModSlotName
+- **Name**: GetModSlotName
+- **Scope**: Shared
+- **Signature(s)**: `char* GET_MOD_SLOT_NAME(Vehicle vehicle, int modType)`
+- **Purpose**: Provides the label of a vehicle modification slot.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - `modType` (`int`): Modification category.
+  - **Returns**: `string` slot label.
+- **OneSync / Networking**: Ownership ensures correct mod kit data.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: mod_slot
+        -- Use: Prints label of mod slot 0
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('mod_slot', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetModSlotName(veh, 0))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: mod_slot */
+    RegisterCommand('mod_slot', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetModSlotName(veh, 0));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires mod kit set with `SetVehicleModKit`.
+- **Reference**: https://docs.fivem.net/natives/?n=GetModSlotName
+
+##### GetModTextLabel
+- **Name**: GetModTextLabel
+- **Scope**: Shared
+- **Signature(s)**: `char* GET_MOD_TEXT_LABEL(Vehicle vehicle, int modType, int modValue)`
+- **Purpose**: Fetches the internal label for a specific mod option.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - `modType` (`int`): Modification category.
+  - `modValue` (`int`): Index within the category.
+  - **Returns**: `string` label.
+- **OneSync / Networking**: Ownership required for mod data consistency.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: mod_label
+        -- Use: Prints label of spoiler option 0
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('mod_label', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetModTextLabel(veh, 0, 0))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: mod_label */
+    RegisterCommand('mod_label', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetModTextLabel(veh, 0, 0));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Use `_GET_LABEL_TEXT` to localize the label.
+- **Reference**: https://docs.fivem.net/natives/?n=GetModTextLabel
+
+##### GetNumModColors
+- **Name**: GetNumModColors
+- **Scope**: Shared
+- **Signature(s)**: `int GET_NUM_MOD_COLORS(int paintType, BOOL p1)`
+- **Purpose**: Returns the number of available colours for a paint type.
+- **Parameters / Returns**:
+  - `paintType` (`int`): Paint category (0 normal, 1 metallic, 2 pearl, 3 matte, 4 metal, 5 chrome).
+  - `p1` (`bool`): Unknown flag.
+  - **Returns**: `int` colour count.
+- **OneSync / Networking**: Pure lookup; no network impact.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: mod_colors
+        -- Use: Prints number of metallic colours
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('mod_colors', function()
+        print(GetNumModColors(1, false))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: mod_colors */
+    RegisterCommand('mod_colors', () => {
+      console.log(GetNumModColors(1, false));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Second parameter is undocumented.
+  - TODO(next-run): verify semantics of `p1`.
+- **Reference**: https://docs.fivem.net/natives/?n=GetNumModColors
+
+##### GetNumModKits
+- **Name**: GetNumModKits
+- **Scope**: Shared
+- **Signature(s)**: `int GET_NUM_MOD_KITS(Vehicle vehicle)`
+- **Purpose**: Retrieves number of mod kits available for a vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - **Returns**: `int` mod kit count.
+- **OneSync / Networking**: Ownership required to access mod kit data.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: mod_kits
+        -- Use: Prints number of mod kits on current vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('mod_kits', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetNumModKits(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: mod_kits */
+    RegisterCommand('mod_kits', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetNumModKits(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns 0 for vehicles without mod support.
+- **Reference**: https://docs.fivem.net/natives/?n=GetNumModKits
+
+##### GetNumVehicleMods
+- **Name**: GetNumVehicleMods
+- **Scope**: Shared
+- **Signature(s)**: `int GET_NUM_VEHICLE_MODS(Vehicle vehicle, int modType)`
+- **Purpose**: Gives the count of modification options for a category.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - `modType` (`int`): Modification category.
+  - **Returns**: `int` number of mods.
+- **OneSync / Networking**: Call on owner to receive accurate counts.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: mod_count
+        -- Use: Prints number of spoiler options
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('mod_count', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetNumVehicleMods(veh, 0))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: mod_count */
+    RegisterCommand('mod_count', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetNumVehicleMods(veh, 0));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Some categories may return 0 even if visible in game.
+- **Reference**: https://docs.fivem.net/natives/?n=GetNumVehicleMods
+CONTINUE-HERE — 2025-09-12T03:41 — next: Vehicle :: GetNumVehicleWindowTints
