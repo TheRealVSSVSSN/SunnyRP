@@ -430,13 +430,13 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Overall | 6442 | 433 | 6009 | 2025-09-12T03:41 |
+| Overall | 6442 | 458 | 5984 | 2025-09-12T03:55 |
 | Player | 248 | 248 | 0 | 2025-09-11T06:38 |
 | Recording | 17 | 17 | 0 | 2025-09-11T06:52 |
 | Replay | 6 | 6 | 0 | 2025-09-11T07:37 |
 | ACL | 10 | 10 | 0 | 2025-09-11T08:12 |
 | CFX | 50 | 50 | 0 | 2025-09-11T09:55 |
-| Vehicle | 751 | 102 | 649 | 2025-09-12T03:41 |
+| Vehicle | 751 | 127 | 624 | 2025-09-12T03:55 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -15623,4 +15623,939 @@ RegisterCommand('rgb', () => {
 - **Caveats / Limitations**:
   - Some categories may return 0 even if visible in game.
 - **Reference**: https://docs.fivem.net/natives/?n=GetNumVehicleMods
-CONTINUE-HERE — 2025-09-12T03:41 — next: Vehicle :: GetNumVehicleWindowTints
+##### GetNumVehicleWindowTints
+- **Name**: GetNumVehicleWindowTints
+- **Scope**: Shared
+- **Signature(s)**: `int GET_NUM_VEHICLE_WINDOW_TINTS()`
+- **Purpose**: Returns the total number of window tint options available.
+- **Parameters / Returns**:
+  - **Returns**: `int` tint count.
+- **OneSync / Networking**: Pure lookup; no replication concerns.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: tint_count
+        -- Use: Prints available window tint count
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('tint_count', function()
+        print(GetNumVehicleWindowTints())
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: tint_count */
+    RegisterCommand('tint_count', () => {
+      console.log(GetNumVehicleWindowTints());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Documentation does not clarify if stock tint is counted.
+  - TODO(next-run): verify enumeration order.
+- **Reference**: https://docs.fivem.net/natives/?n=GetNumVehicleWindowTints
+
+##### GetNumberOfVehicleColours
+- **Name**: GetNumberOfVehicleColours
+- **Scope**: Shared
+- **Signature(s)**: `int GET_NUMBER_OF_VEHICLE_COLOURS(Vehicle vehicle)`
+- **Purpose**: Returns the number of colour combinations available for the specified vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to query.
+  - **Returns**: `int` combination count.
+- **OneSync / Networking**: Query on entity owner to ensure modded colours are considered.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: color_combos
+        -- Use: Prints colour combinations for current vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('color_combos', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetNumberOfVehicleColours(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: color_combos */
+    RegisterCommand('color_combos', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetNumberOfVehicleColours(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Function name suggests colours but actually counts combinations.
+- **Reference**: https://docs.fivem.net/natives/?n=GetNumberOfVehicleColours
+
+##### _GET_NUMBER_OF_VEHICLE_DOORS
+- **Name**: _GET_NUMBER_OF_VEHICLE_DOORS
+- **Scope**: Shared
+- **Signature(s)**: `int _GET_NUMBER_OF_VEHICLE_DOORS(Vehicle vehicle)`
+- **Purpose**: Retrieves the number of door indices supported by a vehicle model.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to inspect.
+  - **Returns**: `int` door count.
+- **OneSync / Networking**: Call on entity owner for consistent mod states.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: door_count
+        -- Use: Prints door count of current vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('door_count', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(_GET_NUMBER_OF_VEHICLE_DOORS(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: door_count */
+    RegisterCommand('door_count', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(_GET_NUMBER_OF_VEHICLE_DOORS(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Undocumented native; may not exist for all vehicle types.
+  - TODO(next-run): confirm behavior for bikes and boats.
+- **Reference**: https://docs.fivem.net/natives/?n=_GET_NUMBER_OF_VEHICLE_DOORS
+
+##### GetNumberOfVehicleNumberPlates
+- **Name**: GetNumberOfVehicleNumberPlates
+- **Scope**: Shared
+- **Signature(s)**: `int GET_NUMBER_OF_VEHICLE_NUMBER_PLATES()`
+- **Purpose**: Returns the count of available licence plate styles.
+- **Parameters / Returns**:
+  - **Returns**: `int` style count.
+- **OneSync / Networking**: Static query; no networking impact.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: plate_styles
+        -- Use: Prints number plate style count
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('plate_styles', function()
+        print(GetNumberOfVehicleNumberPlates())
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: plate_styles */
+    RegisterCommand('plate_styles', () => {
+      console.log(GetNumberOfVehicleNumberPlates());
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns total styles, not which are unlockable.
+- **Reference**: https://docs.fivem.net/natives/?n=GetNumberOfVehicleNumberPlates
+
+##### GetPedInVehicleSeat
+- **Name**: GetPedInVehicleSeat
+- **Scope**: Shared
+- **Signature(s)**: `Ped GET_PED_IN_VEHICLE_SEAT(Vehicle vehicle, int seatIndex)`
+- **Purpose**: Retrieves the ped occupying a specific seat of a vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - `seatIndex` (`int`): Seat identifier (-1 driver, 0 front passenger, etc.).
+  - **Returns**: `Ped` handle or 0.
+- **OneSync / Networking**: Ensure the vehicle is owned locally for accurate state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: seat_driver
+        -- Use: Prints ped in driver's seat
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('seat_driver', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetPedInVehicleSeat(veh, -1))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: seat_driver */
+    RegisterCommand('seat_driver', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetPedInVehicleSeat(veh, -1));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Ambient vehicles may spawn temporary occupants if seat is empty.
+- **Reference**: https://docs.fivem.net/natives/?n=GetPedInVehicleSeat
+
+##### GetPedUsingVehicleDoor
+- **Name**: GetPedUsingVehicleDoor
+- **Scope**: Shared
+- **Signature(s)**: `Ped GET_PED_USING_VEHICLE_DOOR(Vehicle vehicle, int doorIndex)`
+- **Purpose**: Returns the ped currently operating a given vehicle door.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - `doorIndex` (`int`): Door identifier.
+  - **Returns**: `Ped` handle or 0.
+- **OneSync / Networking**: Query owner for real-time status.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: door_user
+        -- Use: Prints ped using door 0
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('door_user', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetPedUsingVehicleDoor(veh, 0))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: door_user */
+    RegisterCommand('door_user', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetPedUsingVehicleDoor(veh, 0));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Door indices vary by vehicle class.
+- **Reference**: https://docs.fivem.net/natives/?n=GetPedUsingVehicleDoor
+
+##### GetPositionInRecording
+- **Name**: GetPositionInRecording
+- **Scope**: Shared
+- **Signature(s)**: `float GET_POSITION_IN_RECORDING(Vehicle vehicle)`
+- **Purpose**: Returns distance traveled along the vehicle's current recording playback.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle with active recording.
+  - **Returns**: `float` travelled distance.
+- **OneSync / Networking**: Recording playback occurs client-side; no replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: rec_pos
+        -- Use: Prints distance along recording
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('rec_pos', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetPositionInRecording(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: rec_pos */
+    RegisterCommand('rec_pos', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetPositionInRecording(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns 0 if no recording is active.
+- **Reference**: https://docs.fivem.net/natives/?n=GetPositionInRecording
+
+##### GetPositionOfVehicleRecordingAtTime
+- **Name**: GetPositionOfVehicleRecordingAtTime
+- **Scope**: Shared
+- **Signature(s)**: `Vector3 GET_POSITION_OF_VEHICLE_RECORDING_AT_TIME(int recording, float time, char* script)`
+- **Purpose**: Provides the world coordinates of a path point in a vehicle recording at a given time.
+- **Parameters / Returns**:
+  - `recording` (`int`): Recording handle.
+  ￼  - `time` (`float`): Playback time.
+  - `script` (`string`): Recording identifier.
+  - **Returns**: `Vector3` position.
+- **OneSync / Networking**: Local lookup; results not automatically replicated.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: rec_pos_at
+        -- Use: Prints position at 10s into recording 0
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('rec_pos_at', function()
+        local pos = GetPositionOfVehicleRecordingAtTime(0, 10.0, 'recording1')
+        print(('%s,%s,%s'):format(pos.x, pos.y, pos.z))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: rec_pos_at */
+    RegisterCommand('rec_pos_at', () => {
+      const pos = GetPositionOfVehicleRecordingAtTime(0, 10.0, 'recording1');
+      console.log(`${pos.x},${pos.y},${pos.z}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - No interpolation between points; results step between path nodes.
+- **Reference**: https://docs.fivem.net/natives/?n=GetPositionOfVehicleRecordingAtTime
+
+##### GetPositionOfVehicleRecordingIdAtTime
+- **Name**: GetPositionOfVehicleRecordingIdAtTime
+- **Scope**: Shared
+- **Signature(s)**: `Vector3 GET_POSITION_OF_VEHICLE_RECORDING_ID_AT_TIME(int id, float time)`
+- **Purpose**: Retrieves position from a recording referenced by ID at a specified time.
+- **Parameters / Returns**:
+  - `id` (`int`): Recording ID from `GetVehicleRecordingId`.
+  - `time` (`float`): Playback time.
+  - **Returns**: `Vector3` position.
+- **OneSync / Networking**: Local computation only.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: rec_id_pos
+        -- Use: Prints position at 5s into recording id
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('rec_id_pos', function()
+        local pos = GetPositionOfVehicleRecordingIdAtTime(0, 5.0)
+        print(('%s,%s,%s'):format(pos.x, pos.y, pos.z))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: rec_id_pos */
+    RegisterCommand('rec_id_pos', () => {
+      const pos = GetPositionOfVehicleRecordingIdAtTime(0, 5.0);
+      console.log(`${pos.x},${pos.y},${pos.z}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires recording loaded via `RequestVehicleRecording`.
+- **Reference**: https://docs.fivem.net/natives/?n=GetPositionOfVehicleRecordingIdAtTime
+
+##### GetRandomVehicleBackBumperInSphere
+- **Name**: GetRandomVehicleBackBumperInSphere
+- **Scope**: Shared
+- **Signature(s)**: `Vehicle GET_RANDOM_VEHICLE_BACK_BUMPER_IN_SPHERE(float x, float y, float z, float radius, int p4, int p5, int p6)`
+- **Purpose**: Finds a vehicle whose rear bumper lies within a sphere.
+- **Parameters / Returns**:
+  - `x`, `y`, `z` (`float`): Sphere centre.
+  - `radius` (`float`): Search radius.
+  - `p4`, `p5`, `p6` (`int`): Unknown flags.
+  - **Returns**: `Vehicle` handle or 0.
+- **OneSync / Networking**: Search occurs locally; ensure area is streamed.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: random_back
+        -- Use: Prints vehicle found behind player
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('random_back', function()
+        local coords = GetEntityCoords(PlayerPedId())
+        local veh = GetRandomVehicleBackBumperInSphere(coords.x, coords.y, coords.z, 5.0, 0, 0, 0)
+        print(veh)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: random_back */
+    RegisterCommand('random_back', () => {
+      const coords = GetEntityCoords(PlayerPedId());
+      const veh = GetRandomVehicleBackBumperInSphere(coords[0], coords[1], coords[2], 5.0, 0, 0, 0);
+      console.log(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Parameters after radius are undocumented.
+  - TODO(next-run): verify search behaviour and flags.
+- **Reference**: https://docs.fivem.net/natives/?n=GetRandomVehicleBackBumperInSphere
+
+##### GetRandomVehicleFrontBumperInSphere
+- **Name**: GetRandomVehicleFrontBumperInSphere
+- **Scope**: Shared
+- **Signature(s)**: `Vehicle GET_RANDOM_VEHICLE_FRONT_BUMPER_IN_SPHERE(float x, float y, float z, float radius, int p4, int p5, int p6)`
+- **Purpose**: Retrieves a vehicle whose front bumper is within a sphere.
+- **Parameters / Returns**:
+  - `x`, `y`, `z` (`float`): Sphere centre.
+  - `radius` (`float`): Search radius.
+  - `p4`, `p5`, `p6` (`int`): Unknown flags.
+  - **Returns**: `Vehicle` handle or 0.
+- **OneSync / Networking**: Local search; requires streaming.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: random_front
+        -- Use: Prints vehicle found in front sphere
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('random_front', function()
+        local coords = GetEntityCoords(PlayerPedId())
+        local veh = GetRandomVehicleFrontBumperInSphere(coords.x, coords.y, coords.z, 5.0, 0, 0, 0)
+        print(veh)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: random_front */
+    RegisterCommand('random_front', () => {
+      const coords = GetEntityCoords(PlayerPedId());
+      const veh = GetRandomVehicleFrontBumperInSphere(coords[0], coords[1], coords[2], 5.0, 0, 0, 0);
+      console.log(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Behaviour of unknown flags needs confirmation.
+  - TODO(next-run): clarify p4–p6.
+- **Reference**: https://docs.fivem.net/natives/?n=GetRandomVehicleFrontBumperInSphere
+
+##### GetRandomVehicleInSphere
+- **Name**: GetRandomVehicleInSphere
+- **Scope**: Shared
+- **Signature(s)**: `Vehicle GET_RANDOM_VEHICLE_IN_SPHERE(float x, float y, float z, float radius, Hash modelHash, int flags)`
+- **Purpose**: Returns a random vehicle within a sphere, optionally filtered by model.
+- **Parameters / Returns**:
+  - `x`, `y`, `z` (`float`): Sphere centre.
+  - `radius` (`float`): Search radius.
+  - `modelHash` (`Hash`): Filter; 0 for any.
+  - `flags` (`int`): Search behaviour flags.
+  - **Returns**: `Vehicle` handle or 0.
+- **OneSync / Networking**: Local search; ensure entities are streamed.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: random_vehicle
+        -- Use: Prints random nearby vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('random_vehicle', function()
+        local coords = GetEntityCoords(PlayerPedId())
+        local veh = GetRandomVehicleInSphere(coords.x, coords.y, coords.z, 10.0, 0, 0)
+        print(veh)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: random_vehicle */
+    RegisterCommand('random_vehicle', () => {
+      const coords = GetEntityCoords(PlayerPedId());
+      const veh = GetRandomVehicleInSphere(coords[0], coords[1], coords[2], 10.0, 0, 0);
+      console.log(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Flag meanings are largely undocumented.
+  - TODO(next-run): enumerate flag options.
+- **Reference**: https://docs.fivem.net/natives/?n=GetRandomVehicleInSphere
+
+##### GetRandomVehicleModelInMemory
+- **Name**: GetRandomVehicleModelInMemory
+- **Scope**: Shared
+- **Signature(s)**: `void GET_RANDOM_VEHICLE_MODEL_IN_MEMORY(BOOL p0, Hash* modelHash, int* successIndicator)`
+- **Purpose**: Selects a random vehicle model loaded in memory.
+- **Parameters / Returns**:
+  - `p0` (`bool`): Unknown, usually true.
+  - `modelHash` (`Hash*`): Output model hash pointer.
+  - `successIndicator` (`int*`): Output status (0 success, -1 fail).
+- **OneSync / Networking**: Model lookup only; no replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: random_model
+        -- Use: Prints a random loaded vehicle model
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('random_model', function()
+        local modelPtr = Citizen.PointerValueInt()
+        local okPtr = Citizen.PointerValueInt()
+        GetRandomVehicleModelInMemory(true, modelPtr, okPtr)
+        print(('model:%s ok:%s'):format(Citizen.PointerValueInt(modelPtr), Citizen.PointerValueInt(okPtr)))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: random_model */
+    RegisterCommand('random_model', () => {
+      const modelPtr = Memory.alloc(8);
+      const okPtr = Memory.alloc(4);
+      GetRandomVehicleModelInMemory(true, modelPtr, okPtr);
+      console.log(`model:${Memory.readInt(modelPtr)} ok:${Memory.readInt(okPtr)}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Low-level pointer use; not available in all runtimes.
+  - TODO(next-run): validate pointer helper functions per runtime.
+- **Reference**: https://docs.fivem.net/natives/?n=GetRandomVehicleModelInMemory
+
+##### _GET_REMAINING_NITROUS_DURATION
+- **Name**: _GET_REMAINING_NITROUS_DURATION
+- **Scope**: Shared
+- **Signature(s)**: `float _GET_REMAINING_NITROUS_DURATION(Vehicle vehicle)`
+- **Purpose**: Returns remaining nitrous boost time for a vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle with nitrous system.
+  - **Returns**: `float` seconds remaining.
+- **OneSync / Networking**: Query on owner to reflect current state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: nitro_time
+        -- Use: Prints nitrous time left
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('nitro_time', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(_GET_REMAINING_NITROUS_DURATION(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: nitro_time */
+    RegisterCommand('nitro_time', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(_GET_REMAINING_NITROUS_DURATION(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only relevant when nitrous system is active.
+- **Reference**: https://docs.fivem.net/natives/?n=_GET_REMAINING_NITROUS_DURATION
+
+##### GetRotationOfVehicleRecordingAtTime
+- **Name**: GetRotationOfVehicleRecordingAtTime
+- **Scope**: Shared
+- **Signature(s)**: `Vector3 GET_ROTATION_OF_VEHICLE_RECORDING_AT_TIME(int recording, float time, char* script)`
+- **Purpose**: Retrieves the rotation at a time within a vehicle recording.
+- **Parameters / Returns**:
+  - `recording` (`int`): Recording handle.
+  - `time` (`float`): Playback time.
+  - `script` (`string`): Recording identifier.
+  - **Returns**: `Vector3` rotation (deg).
+- **OneSync / Networking**: Local computation; no network impact.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: rec_rot_at
+        -- Use: Prints rotation at 10s of recording 0
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('rec_rot_at', function()
+        local rot = GetRotationOfVehicleRecordingAtTime(0, 10.0, 'recording1')
+        print(('%s,%s,%s'):format(rot.x, rot.y, rot.z))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: rec_rot_at */
+    RegisterCommand('rec_rot_at', () => {
+      const rot = GetRotationOfVehicleRecordingAtTime(0, 10.0, 'recording1');
+      console.log(`${rot.x},${rot.y},${rot.z}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - No interpolation between keyframes.
+- **Reference**: https://docs.fivem.net/natives/?n=GetRotationOfVehicleRecordingAtTime
+
+##### GetRotationOfVehicleRecordingIdAtTime
+- **Name**: GetRotationOfVehicleRecordingIdAtTime
+- **Scope**: Shared
+- **Signature(s)**: `Vector3 GET_ROTATION_OF_VEHICLE_RECORDING_ID_AT_TIME(int id, float time)`
+- **Purpose**: Returns rotation for a recording referenced by ID.
+- **Parameters / Returns**:
+  - `id` (`int`): Recording ID.
+  - `time` (`float`): Playback time.
+  - **Returns**: `Vector3` rotation.
+- **OneSync / Networking**: Local lookup.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: rec_id_rot
+        -- Use: Prints rotation at 5s into recording id
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('rec_id_rot', function()
+        local rot = GetRotationOfVehicleRecordingIdAtTime(0, 5.0)
+        print(('%s,%s,%s'):format(rot.x, rot.y, rot.z))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: rec_id_rot */
+    RegisterCommand('rec_id_rot', () => {
+      const rot = GetRotationOfVehicleRecordingIdAtTime(0, 5.0);
+      console.log(`${rot.x},${rot.y},${rot.z}`);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires preloaded recording.
+- **Reference**: https://docs.fivem.net/natives/?n=GetRotationOfVehicleRecordingIdAtTime
+
+##### GetSubmarineIsUnderDesignDepth
+- **Name**: GetSubmarineIsUnderDesignDepth
+- **Scope**: Shared
+- **Signature(s)**: `BOOL GET_SUBMARINE_IS_UNDER_DESIGN_DEPTH(Vehicle submarine)`
+- **Purpose**: Checks if a submarine is below its safe operating depth.
+- **Parameters / Returns**:
+  - `submarine` (`Vehicle`): Submarine entity.
+  - **Returns**: `bool` true if below design depth.
+- **OneSync / Networking**: Query owner for accurate depth.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: sub_depth
+        -- Use: Prints if submarine is too deep
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('sub_depth', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetSubmarineIsUnderDesignDepth(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: sub_depth */
+    RegisterCommand('sub_depth', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetSubmarineIsUnderDesignDepth(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only meaningful for submarine models.
+- **Reference**: https://docs.fivem.net/natives/?n=GetSubmarineIsUnderDesignDepth
+
+##### GetSubmarineNumberOfAirLeaks
+- **Name**: GetSubmarineNumberOfAirLeaks
+- **Scope**: Shared
+- **Signature(s)**: `int GET_SUBMARINE_NUMBER_OF_AIR_LEAKS(Vehicle submarine)`
+- **Purpose**: Returns how many air leaks a submarine currently has.
+- **Parameters / Returns**:
+  - `submarine` (`Vehicle`): Submarine vehicle.
+  - **Returns**: `int` leak count.
+- **OneSync / Networking**: Query on owner for real-time state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: sub_leaks
+        -- Use: Prints submarine air leak count
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('sub_leaks', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetSubmarineNumberOfAirLeaks(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: sub_leaks */
+    RegisterCommand('sub_leaks', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetSubmarineNumberOfAirLeaks(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Exceeding four leaks causes player drowning.
+- **Reference**: https://docs.fivem.net/natives/?n=GetSubmarineNumberOfAirLeaks
+
+##### GetTimePositionInRecording
+- **Name**: GetTimePositionInRecording
+- **Scope**: Shared
+- **Signature(s)**: `float GET_TIME_POSITION_IN_RECORDING(Vehicle vehicle)`
+- **Purpose**: Returns the elapsed time within the vehicle's current recording playback.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle with recording.
+  - **Returns**: `float` time in seconds.
+- **OneSync / Networking**: Client-side; no network effect.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: rec_time
+        -- Use: Prints recording time
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('rec_time', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetTimePositionInRecording(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: rec_time */
+    RegisterCommand('rec_time', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetTimePositionInRecording(veh));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns 0 if recording not started.
+- **Reference**: https://docs.fivem.net/natives/?n=GetTimePositionInRecording
+
+##### GetTotalDurationOfVehicleRecording
+- **Name**: GetTotalDurationOfVehicleRecording
+- **Scope**: Shared
+- **Signature(s)**: `float GET_TOTAL_DURATION_OF_VEHICLE_RECORDING(int recording, char* script)`
+- **Purpose**: Retrieves total length of a vehicle recording.
+- **Parameters / Returns**:
+  - `recording` (`int`): Recording handle.
+  - `script` (`string`): Recording identifier.
+  - **Returns**: `float` total duration.
+- **OneSync / Networking**: Local lookup.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: rec_total
+        -- Use: Prints total duration of recording 0
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('rec_total', function()
+        print(GetTotalDurationOfVehicleRecording(0, 'recording1'))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: rec_total */
+    RegisterCommand('rec_total', () => {
+      console.log(GetTotalDurationOfVehicleRecording(0, 'recording1'));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Recording must be requested before calling.
+- **Reference**: https://docs.fivem.net/natives/?n=GetTotalDurationOfVehicleRecording
+
+##### GetTotalDurationOfVehicleRecordingId
+- **Name**: GetTotalDurationOfVehicleRecordingId
+- **Scope**: Shared
+- **Signature(s)**: `float GET_TOTAL_DURATION_OF_VEHICLE_RECORDING_ID(int id)`
+- **Purpose**: Returns total duration for a recording referenced by ID.
+- **Parameters / Returns**:
+  - `id` (`int`): Recording ID.
+  - **Returns**: `float` total time.
+- **OneSync / Networking**: Local computation.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: rec_id_total
+        -- Use: Prints total duration for recording id
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('rec_id_total', function()
+        print(GetTotalDurationOfVehicleRecordingId(0))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: rec_id_total */
+    RegisterCommand('rec_id_total', () => {
+      console.log(GetTotalDurationOfVehicleRecordingId(0));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires valid recording ID.
+- **Reference**: https://docs.fivem.net/natives/?n=GetTotalDurationOfVehicleRecordingId
+
+##### GetTrainCarriage
+- **Name**: GetTrainCarriage
+- **Scope**: Shared
+- **Signature(s)**: `Entity GET_TRAIN_CARRIAGE(Vehicle train, int trailerNumber)`
+- **Purpose**: Retrieves a handle to a train carriage by index.
+- **Parameters / Returns**:
+  - `train` (`Vehicle`): Train engine entity.
+  - `trailerNumber` (`int`): Carriage index starting at 1.
+  - **Returns**: `Entity` carriage handle or 0.
+- **OneSync / Networking**: Owner must query to ensure valid entity.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: carriage
+        -- Use: Prints handle for first carriage
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('carriage', function()
+        local train = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetTrainCarriage(train, 1))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: carriage */
+    RegisterCommand('carriage', () => {
+      const train = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetTrainCarriage(train, 1));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Trailer numbering is 1-based and depends on train length.
+- **Reference**: https://docs.fivem.net/natives/?n=GetTrainCarriage
+
+##### _GET_TYRE_HEALTH
+- **Name**: _GET_TYRE_HEALTH
+- **Scope**: Shared
+- **Signature(s)**: `float _GET_TYRE_HEALTH(Vehicle vehicle, int wheelIndex)`
+- **Purpose**: Returns the health value of a vehicle tyre.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - `wheelIndex` (`int`): Tyre index.
+  - **Returns**: `float` health from 0–1000.
+- **OneSync / Networking**: Query owner to reflect current damage.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: tyre_health
+        -- Use: Prints health of front-left tyre
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('tyre_health', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(_GET_TYRE_HEALTH(veh, 0))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: tyre_health */
+    RegisterCommand('tyre_health', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(_GET_TYRE_HEALTH(veh, 0));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns 1000 for pristine tyres.
+- **Reference**: https://docs.fivem.net/natives/?n=_GET_TYRE_HEALTH
+
+##### _GET_TYRE_WEAR_MULTIPLIER
+- **Name**: _GET_TYRE_WEAR_MULTIPLIER
+- **Scope**: Shared
+- **Signature(s)**: `float _GET_TYRE_WEAR_MULTIPLIER(Vehicle vehicle, int wheelIndex)`
+- **Purpose**: Retrieves tyre wear multiplier affecting degradation rate.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - `wheelIndex` (`int`): Tyre index.
+  - **Returns**: `float` wear multiplier.
+- **OneSync / Networking**: Owner query needed for sync accuracy.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: tyre_wear
+        -- Use: Prints wear multiplier of front-left tyre
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('tyre_wear', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(_GET_TYRE_WEAR_MULTIPLIER(veh, 0))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: tyre_wear */
+    RegisterCommand('tyre_wear', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(_GET_TYRE_WEAR_MULTIPLIER(veh, 0));
+    });
+    ```
+- **Caveats / Limitations**:
+  - Multiplier defaults to 1.0; meaning of other values undocumented.
+  - TODO(next-run): confirm range.
+- **Reference**: https://docs.fivem.net/natives/?n=_GET_TYRE_WEAR_MULTIPLIER
+
+##### GetVehicleAcceleration
+- **Name**: GetVehicleAcceleration
+- **Scope**: Shared
+- **Signature(s)**: `float GET_VEHICLE_ACCELERATION(Vehicle vehicle)`
+- **Purpose**: Returns the base acceleration stat of a vehicle considering mods.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle handle.
+  - **Returns**: `float` acceleration value.
+- **OneSync / Networking**: Use on owner for modded vehicles to ensure accuracy.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: accel
+        -- Use: Prints acceleration of current vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('accel', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        print(GetVehicleAcceleration(veh))
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: accel */
+    RegisterCommand('accel', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      console.log(GetVehicleAcceleration(veh));
+    });
+    ```
+  - C#:
+    ```cs
+    // Command: accel
+    using static CitizenFX.Core.Native.API;
+    RegisterCommand("accel", new Action<int, List<object>, string>((src, args, raw) => {
+        var veh = GetVehiclePedIsIn(PlayerPedId(), false);
+        Debug.WriteLine(GetVehicleAcceleration(veh).ToString());
+    }), false);
+    ```
+- **Caveats / Limitations**:
+  - Value is static; does not reflect temporary boosts.
+- **Reference**: https://docs.fivem.net/natives/?n=GetVehicleAcceleration
+CONTINUE-HERE — 2025-09-12T03:55 — next: Vehicle :: GetVehicleAttachedToCargobob
