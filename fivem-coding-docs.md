@@ -430,13 +430,13 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Overall | 6442 | 833 | 5609 | 2025-09-12T08:12:15+00:00 |
+| Overall | 6442 | 858 | 5584 | 2025-09-12T08:18:54+00:00 |
 | Player | 248 | 248 | 0 | 2025-09-11T06:38 |
 | Recording | 17 | 17 | 0 | 2025-09-11T06:52 |
 | Replay | 6 | 6 | 0 | 2025-09-11T07:37 |
 | ACL | 10 | 10 | 0 | 2025-09-11T08:12 |
 | CFX | 50 | 50 | 0 | 2025-09-11T09:55 |
-| Vehicle | 751 | 502 | 249 | 2025-09-12T08:12:15+00:00 |
+| Vehicle | 751 | 527 | 224 | 2025-09-12T08:18:54+00:00 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -30298,4 +30298,922 @@ RegisterCommand('rgb', () => {
   - Length outside 1.9–100.0 is clamped.
 - **Reference**: https://docs.fivem.net/natives/?n=SetPickupRopeLengthForCargobob
 
-CONTINUE-HERE — 2025-09-12T08:12:15+00:00 — next: Vehicle :: SetPlaneAvoidsOther
+##### _SetPlaneAvoidsOther
+- **Name**: _SetPlaneAvoidsOther
+- **Scope**: Client
+- **Signature**: `void _SET_PLANE_AVOIDS_OTHERS(Vehicle plane, BOOL toggle);`
+- **Purpose**: Enables AI collision avoidance between the plane and other nearby aircraft.
+- **Parameters / Returns**:
+  - `plane` (`Vehicle`): Plane to configure.
+  - `toggle` (`bool`): `true` to enable avoidance.
+  - **Returns**: `void`
+- **OneSync / Networking**: Call on the plane's owner to replicate to other clients.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: planeavoid
+        -- Use: Toggle AI avoidance
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('planeavoid', function(_, args)
+        local plane = GetVehiclePedIsIn(PlayerPedId(), false)
+        if plane ~= 0 then _SetPlaneAvoidsOther(plane, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: planeavoid */
+    RegisterCommand('planeavoid', (_src, args) => {
+      const plane = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (plane !== 0) _SetPlaneAvoidsOther(plane, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Applies only to AI-controlled planes.
+- **Reference**: https://docs.fivem.net/natives/?n=_SetPlaneAvoidsOther
+
+##### SetPlaneControlSectionsShouldBreakOffFromExplosions
+- **Name**: SetPlaneControlSectionsShouldBreakOffFromExplosions
+- **Scope**: Client
+- **Signature**: `void SET_PLANE_CONTROL_SECTIONS_SHOULD_BREAK_OFF_FROM_EXPLOSIONS(Vehicle plane, BOOL toggle);`
+- **Purpose**: Allows control surfaces to detach when the plane is hit by explosions.
+- **Parameters / Returns**:
+  - `plane` (`Vehicle`): Plane to affect.
+  - `toggle` (`bool`): Enable break-off behavior.
+  - **Returns**: `void`
+- **OneSync / Networking**: Run on the entity owner for consistent damage replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: planebreak
+        -- Use: Toggle explosion break-off
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('planebreak', function(_, args)
+        local plane = GetVehiclePedIsIn(PlayerPedId(), false)
+        if plane ~= 0 then SetPlaneControlSectionsShouldBreakOffFromExplosions(plane, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: planebreak */
+    RegisterCommand('planebreak', (_src, args) => {
+      const plane = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (plane !== 0) SetPlaneControlSectionsShouldBreakOffFromExplosions(plane, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Has effect only on plane models.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlaneControlSectionsShouldBreakOffFromExplosions
+
+##### _SetPlaneEngineHealth
+- **Name**: _SetPlaneEngineHealth
+- **Scope**: Client
+- **Signature**: `void _SET_PLANE_ENGINE_HEALTH(Vehicle vehicle, float health);`
+- **Purpose**: Sets engine health for plane vehicles.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Plane whose engine health is set.
+  - `health` (`float`): New engine health value.
+  - **Returns**: `void`
+- **OneSync / Networking**: Call on the plane owner to broadcast health changes.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: planeengine
+        -- Use: Set plane engine health
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('planeengine', function(_, args)
+        local plane = GetVehiclePedIsIn(PlayerPedId(), false)
+        if plane ~= 0 then _SetPlaneEngineHealth(plane, tonumber(args[1]) or 1000.0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: planeengine */
+    RegisterCommand('planeengine', (_src, args) => {
+      const plane = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (plane !== 0) _SetPlaneEngineHealth(plane, parseFloat(args[0]) || 1000.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Works only on plane models.
+- **Reference**: https://docs.fivem.net/natives/?n=_SetPlaneEngineHealth
+
+##### _SetPlanePropellersHealth
+- **Name**: _SetPlanePropellersHealth
+- **Scope**: Client
+- **Signature**: `void _SET_PLANE_PROPELLERS_HEALTH(Vehicle plane, float health);`
+- **Purpose**: Adjusts propeller health on planes.
+- **Parameters / Returns**:
+  - `plane` (`Vehicle`): Target plane.
+  - `health` (`float`): Health value for propellers.
+  - **Returns**: `void`
+- **OneSync / Networking**: Must run on the entity owner to sync propeller damage.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: planeprops
+        -- Use: Set propeller health
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('planeprops', function(_, args)
+        local plane = GetVehiclePedIsIn(PlayerPedId(), false)
+        if plane ~= 0 then _SetPlanePropellersHealth(plane, tonumber(args[1]) or 1000.0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: planeprops */
+    RegisterCommand('planeprops', (_src, args) => {
+      const plane = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (plane !== 0) _SetPlanePropellersHealth(plane, parseFloat(args[0]) || 1000.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only affects planes with propellers.
+- **Reference**: https://docs.fivem.net/natives/?n=_SetPlanePropellersHealth
+
+##### SetPlaneResistToExplosion
+- **Name**: SetPlaneResistToExplosion
+- **Scope**: Client
+- **Signature**: `void SET_PLANE_RESIST_TO_EXPLOSION(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Toggles resistance of a plane to explosion forces.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Plane to modify.
+  - `toggle` (`bool`): Enable explosion resistance.
+  - **Returns**: `void`
+- **OneSync / Networking**: Execute on owner to propagate resistance state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: planeresist
+        -- Use: Toggle explosion resistance
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('planeresist', function(_, args)
+        local plane = GetVehiclePedIsIn(PlayerPedId(), false)
+        if plane ~= 0 then SetPlaneResistToExplosion(plane, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: planeresist */
+    RegisterCommand('planeresist', (_src, args) => {
+      const plane = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (plane !== 0) SetPlaneResistToExplosion(plane, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Resistance may not prevent all damage types.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlaneResistToExplosion
+
+##### SetPlaneSectionDamageScale
+- **Name**: SetPlaneSectionDamageScale
+- **Scope**: Client
+- **Signature**: `void SET_PLANE_SECTION_DAMAGE_SCALE(Vehicle vehicle, int damageSection, float damageScale);`
+- **Purpose**: Scales damage applied to specific plane sections.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Plane to adjust.
+  - `damageSection` (`int`): Section ID from `ePlaneDamageSection`.
+  - `damageScale` (`float`): Damage multiplier for that section.
+  - **Returns**: `void`
+- **OneSync / Networking**: Call on owner to sync damage scaling.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: planesecscale
+        -- Use: Scale section damage
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('planesecscale', function(_, args)
+        local plane = GetVehiclePedIsIn(PlayerPedId(), false)
+        if plane ~= 0 then SetPlaneSectionDamageScale(plane, tonumber(args[1]) or 0, tonumber(args[2]) or 0.0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: planesecscale */
+    RegisterCommand('planesecscale', (_src, args) => {
+      const plane = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (plane !== 0) SetPlaneSectionDamageScale(plane, parseInt(args[0]) || 0, parseFloat(args[1]) || 0.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Section IDs outside the enum are ignored.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlaneSectionDamageScale
+
+##### SetPlaneTurbulenceMultiplier
+- **Name**: SetPlaneTurbulenceMultiplier
+- **Scope**: Client
+- **Signature**: `void SET_PLANE_TURBULENCE_MULTIPLIER(Vehicle vehicle, float multiplier);`
+- **Purpose**: Controls turbulence intensity for a plane.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Plane to adjust.
+  - `multiplier` (`float`): 0.0 no turbulence, 1.0 heavy.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must invoke to replicate turbulence.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: planeturb
+        -- Use: Set turbulence multiplier
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('planeturb', function(_, args)
+        local plane = GetVehiclePedIsIn(PlayerPedId(), false)
+        if plane ~= 0 then SetPlaneTurbulenceMultiplier(plane, tonumber(args[1]) or 0.0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: planeturb */
+    RegisterCommand('planeturb', (_src, args) => {
+      const plane = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (plane !== 0) SetPlaneTurbulenceMultiplier(plane, parseFloat(args[0]) || 0.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Effective only for planes.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlaneTurbulenceMultiplier
+
+##### SetPlaybackSpeed
+- **Name**: SetPlaybackSpeed
+- **Scope**: Client
+- **Signature**: `void SET_PLAYBACK_SPEED(Vehicle vehicle, float speed);`
+- **Purpose**: Changes the playback speed of recorded vehicle tasks.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle playing a recorded route.
+  - `speed` (`float`): Playback speed multiplier.
+  - **Returns**: `void`
+- **OneSync / Networking**: Apply on the controlling client.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: playspeed
+        -- Use: Adjust playback speed
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('playspeed', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetPlaybackSpeed(veh, tonumber(args[1]) or 1.0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: playspeed */
+    RegisterCommand('playspeed', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetPlaybackSpeed(veh, parseFloat(args[0]) || 1.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Applies only to vehicles running a playback task.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlaybackSpeed
+
+##### SetPlaybackToUseAi
+- **Name**: SetPlaybackToUseAi
+- **Scope**: Client
+- **Signature**: `void SET_PLAYBACK_TO_USE_AI(Vehicle vehicle, int drivingStyle);`
+- **Purpose**: Switches a playback-recorded vehicle to AI control with a given driving style.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to control.
+  - `drivingStyle` (`int`): Driving style flags.
+  - **Returns**: `void`
+- **OneSync / Networking**: Use on the owner to ensure consistent behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: playai
+        -- Use: Let playback use AI
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('playai', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetPlaybackToUseAi(veh, tonumber(args[1]) or 0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: playai */
+    RegisterCommand('playai', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetPlaybackToUseAi(veh, parseInt(args[0]) || 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Playback must have been started with a recorded route.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlaybackToUseAi
+
+##### SetPlaybackToUseAiTryToRevertBackLater
+- **Name**: SetPlaybackToUseAiTryToRevertBackLater
+- **Scope**: Client
+- **Signature**: `void SET_PLAYBACK_TO_USE_AI_TRY_TO_REVERT_BACK_LATER(Vehicle vehicle, int time, int drivingStyle, BOOL revert);`
+- **Purpose**: Temporarily hands playback control to AI, reverting after the given time.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to control.
+  - `time` (`int`): Milliseconds before reverting (0 for indefinite).
+  - `drivingStyle` (`int`): Driving style flags.
+  - `revert` (`bool`): Whether to revert after `time`.
+  - **Returns**: `void`
+- **OneSync / Networking**: Execute on owner to sync AI takeover.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: playairevert
+        -- Use: Temporary AI playback
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('playairevert', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetPlaybackToUseAiTryToRevertBackLater(veh, tonumber(args[1]) or 5000, tonumber(args[2]) or 0, true) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: playairevert */
+    RegisterCommand('playairevert', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetPlaybackToUseAiTryToRevertBackLater(veh, parseInt(args[0]) || 5000, parseInt(args[1]) || 0, true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Without a playback route, the command has no effect.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlaybackToUseAiTryToRevertBackLater
+
+##### SetPlayersLastVehicle
+- **Name**: SetPlayersLastVehicle
+- **Scope**: Client
+- **Signature**: `void SET_PLAYERS_LAST_VEHICLE(Vehicle vehicle);`
+- **Purpose**: Marks a vehicle as the player's last used vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to register.
+  - **Returns**: `void`
+- **OneSync / Networking**: Local to player; no network replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: setlastveh
+        -- Use: Record current vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('setlastveh', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetPlayersLastVehicle(veh) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: setlastveh */
+    RegisterCommand('setlastveh', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetPlayersLastVehicle(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Used internally for respawn logic; limited external effect.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPlayersLastVehicle
+
+##### SetPoliceFocusWillTrackVehicle
+- **Name**: SetPoliceFocusWillTrackVehicle
+- **Scope**: Client
+- **Signature**: `void SET_POLICE_FOCUS_WILL_TRACK_VEHICLE(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Flags a vehicle so police attention tracks it when the player gains wanted level.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to flag.
+  - `toggle` (`bool`): Enable tracking behavior.
+  - **Returns**: `void`
+- **OneSync / Networking**: Execute on owner for consistent police response.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: policetrack
+        -- Use: Toggle police tracking
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('policetrack', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetPoliceFocusWillTrackVehicle(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: policetrack */
+    RegisterCommand('policetrack', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetPoliceFocusWillTrackVehicle(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only influences wanted-level tracking.
+- **Reference**: https://docs.fivem.net/natives/?n=SetPoliceFocusWillTrackVehicle
+
+##### SetRandomBoats
+- **Name**: SetRandomBoats
+- **Scope**: Client
+- **Signature**: `void SET_RANDOM_BOATS(BOOL toggle);`
+- **Purpose**: Enables or disables ambient boat spawns.
+- **Parameters / Returns**:
+  - `toggle` (`bool`): `true` enables random boats.
+  - **Returns**: `void`
+- **OneSync / Networking**: Broadcast from server to keep world state consistent.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: randomboats
+        -- Use: Toggle ambient boats
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('randomboats', function(_, args)
+        SetRandomBoats(args[1] == 'on')
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: randomboats */
+    RegisterCommand('randomboats', (_src, args) => {
+      SetRandomBoats(args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only affects newly spawned boats.
+- **Reference**: https://docs.fivem.net/natives/?n=SetRandomBoats
+
+##### _SetRandomBoatsInMp
+- **Name**: _SetRandomBoatsInMp
+- **Scope**: Client
+- **Signature**: `void _SET_RANDOM_BOATS_IN_MP(BOOL toggle);`
+- **Purpose**: Toggles ambient boats specifically in multiplayer sessions.
+- **Parameters / Returns**:
+  - `toggle` (`bool`): Enable boat spawning in MP.
+  - **Returns**: `void`
+- **OneSync / Networking**: Should be invoked server-side or broadcast to all clients.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: randomboatsmp
+        -- Use: Toggle MP boat spawns
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('randomboatsmp', function(_, args)
+        _SetRandomBoatsInMp(args[1] == 'on')
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: randomboatsmp */
+    RegisterCommand('randomboatsmp', (_src, args) => {
+      _SetRandomBoatsInMp(args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Not documented extensively; behavior may vary.
+- **Reference**: https://docs.fivem.net/natives/?n=_SetRandomBoatsInMp
+
+##### SetRandomTrains
+- **Name**: SetRandomTrains
+- **Scope**: Client
+- **Signature**: `void SET_RANDOM_TRAINS(BOOL toggle);`
+- **Purpose**: Enables random train traffic on active tracks.
+- **Parameters / Returns**:
+  - `toggle` (`bool`): Enable spawning.
+  - **Returns**: `void`
+- **OneSync / Networking**: Broadcast from server to synchronize train spawns.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: randomtrains
+        -- Use: Toggle random trains
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('randomtrains', function(_, args)
+        SetRandomTrains(args[1] == 'on')
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: randomtrains */
+    RegisterCommand('randomtrains', (_src, args) => {
+      SetRandomTrains(args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires train tracks to be active via `SwitchTrainTrack`.
+- **Reference**: https://docs.fivem.net/natives/?n=SetRandomTrains
+
+##### SetRandomVehicleDensityMultiplierThisFrame
+- **Name**: SetRandomVehicleDensityMultiplierThisFrame
+- **Scope**: Client
+- **Signature**: `void SET_RANDOM_VEHICLE_DENSITY_MULTIPLIER_THIS_FRAME(float multiplier);`
+- **Purpose**: Adjusts ambient traffic density for the current frame.
+- **Parameters / Returns**:
+  - `multiplier` (`float`): Density multiplier.
+  - **Returns**: `void`
+- **OneSync / Networking**: Local effect; call each frame.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: randvehdensity
+        -- Use: Set random vehicle density this frame
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('randvehdensity', function(_, args)
+        SetRandomVehicleDensityMultiplierThisFrame(tonumber(args[1]) or 1.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: randvehdensity */
+    RegisterCommand('randvehdensity', (_src, args) => {
+      SetRandomVehicleDensityMultiplierThisFrame(parseFloat(args[0]) || 1.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Needs to be invoked every frame to persist.
+- **Reference**: https://docs.fivem.net/natives/?n=SetRandomVehicleDensityMultiplierThisFrame
+
+##### _SetReduceDriftVehicleSuspension
+- **Name**: _SetReduceDriftVehicleSuspension
+- **Scope**: Client
+- **Signature**: `void _SET_REDUCE_DRIFT_VEHICLE_SUSPENSION(Vehicle vehicle, BOOL enable);`
+- **Purpose**: Lowers a vehicle's stance to reduce drift suspension.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to modify.
+  - `enable` (`bool`): Apply lowered suspension.
+  - **Returns**: `void`
+- **OneSync / Networking**: Call on entity owner to sync stance change.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: driftsusp
+        -- Use: Toggle reduced suspension
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('driftsusp', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then _SetReduceDriftVehicleSuspension(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: driftsusp */
+    RegisterCommand('driftsusp', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) _SetReduceDriftVehicleSuspension(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only vehicles supporting stance adjustments respond.
+- **Reference**: https://docs.fivem.net/natives/?n=_SetReduceDriftVehicleSuspension
+
+##### SetRenderTrainAsDerailed
+- **Name**: SetRenderTrainAsDerailed
+- **Scope**: Client
+- **Signature**: `void SET_RENDER_TRAIN_AS_DERAILED(Vehicle train, BOOL toggle);`
+- **Purpose**: Visually derails a train, causing jumbled movement while continuing along tracks.
+- **Parameters / Returns**:
+  - `train` (`Vehicle`): Train to affect.
+  - `toggle` (`bool`): Enable derail rendering.
+  - **Returns**: `void`
+- **OneSync / Networking**: Apply on train owner so others see derail state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: derailtrain
+        -- Use: Toggle derail rendering
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('derailtrain', function(_, args)
+        local train = GetVehiclePedIsIn(PlayerPedId(), false)
+        if train ~= 0 then SetRenderTrainAsDerailed(train, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: derailtrain */
+    RegisterCommand('derailtrain', (_src, args) => {
+      const train = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (train !== 0) SetRenderTrainAsDerailed(train, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Purely visual; train physics remain on tracks.
+- **Reference**: https://docs.fivem.net/natives/?n=SetRenderTrainAsDerailed
+
+##### SetScriptVehicleGenerator
+- **Name**: SetScriptVehicleGenerator
+- **Scope**: Client
+- **Signature**: `void SET_SCRIPT_VEHICLE_GENERATOR(int vehicleGenerator, BOOL enabled);`
+- **Purpose**: Activates or deactivates a scripted vehicle generator.
+- **Parameters / Returns**:
+  - `vehicleGenerator` (`int`): Generator handle.
+  - `enabled` (`bool`): Enable spawning from this generator.
+  - **Returns**: `void`
+- **OneSync / Networking**: Typically managed on the server and broadcast to clients.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: genset
+        -- Use: Toggle vehicle generator
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('genset', function(_, args)
+        local gen = tonumber(args[1])
+        if gen then SetScriptVehicleGenerator(gen, args[2] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: genset */
+    RegisterCommand('genset', (_src, args) => {
+      const gen = parseInt(args[0]);
+      if (!isNaN(gen)) SetScriptVehicleGenerator(gen, args[1] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires a valid generator handle.
+- **Reference**: https://docs.fivem.net/natives/?n=SetScriptVehicleGenerator
+
+##### SetSpecialFlightModeAllowed
+- **Name**: SetSpecialFlightModeAllowed
+- **Scope**: Client
+- **Signature**: `void SET_SPECIAL_FLIGHT_MODE_ALLOWED(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Locks or unlocks a vehicle's special flight/hover mode.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle such as a Deluxo or Oppressor.
+  - `toggle` (`bool`): `false` locks current mode, `true` allows switching.
+  - **Returns**: `void`
+- **OneSync / Networking**: Call on owner to propagate mode lock.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: flightmode
+        -- Use: Lock/unlock special flight mode
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('flightmode', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetSpecialFlightModeAllowed(veh, args[1] ~= 'lock') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: flightmode */
+    RegisterCommand('flightmode', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetSpecialFlightModeAllowed(veh, args[0] !== 'lock');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Limited to vehicles supporting hover transformations.
+- **Reference**: https://docs.fivem.net/natives/?n=SetSpecialFlightModeAllowed
+
+##### SetSpecialFlightModeRatio
+- **Name**: SetSpecialFlightModeRatio
+- **Scope**: Client
+- **Signature**: `void SET_SPECIAL_FLIGHT_MODE_RATIO(Vehicle vehicle, float ratio);`
+- **Purpose**: Initiates hover transformation by setting the target ratio toward flight mode.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to transform.
+  - `ratio` (`float`): Value 0.0–1.0 representing progress toward hover mode.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must set ratio for others to see transformation.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: flightratio
+        -- Use: Adjust hover ratio
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('flightratio', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetSpecialFlightModeRatio(veh, tonumber(args[1]) or 0.0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: flightratio */
+    RegisterCommand('flightratio', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetSpecialFlightModeRatio(veh, parseFloat(args[0]) || 0.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Values beyond 0–1 may glitch vehicle state.
+- **Reference**: https://docs.fivem.net/natives/?n=SetSpecialFlightModeRatio
+
+##### SetSpecialFlightModeTargetRatio
+- **Name**: SetSpecialFlightModeTargetRatio
+- **Scope**: Client
+- **Signature**: `void SET_SPECIAL_FLIGHT_MODE_TARGET_RATIO(Vehicle vehicle, float state);`
+- **Purpose**: Sets the target hover transform state for vehicles like the Deluxo.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to transform.
+  - `state` (`float`): Target state (0.0 road, 1.0 hover).
+  - **Returns**: `void`
+- **OneSync / Networking**: Call on owner to replicate transformation.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: flighttarget
+        -- Use: Set hover target state
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('flighttarget', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetSpecialFlightModeTargetRatio(veh, tonumber(args[1]) or 1.0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: flighttarget */
+    RegisterCommand('flighttarget', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetSpecialFlightModeTargetRatio(veh, parseFloat(args[0]) || 1.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Does not block manual transformation toggles by players.
+- **Reference**: https://docs.fivem.net/natives/?n=SetSpecialFlightModeTargetRatio
+
+##### SetSubmarineCrushDepths
+- **Name**: SetSubmarineCrushDepths
+- **Scope**: Client
+- **Signature**: `void SET_SUBMARINE_CRUSH_DEPTHS(Vehicle vehicle, BOOL toggle, float depth1, float depth2, float depth3);`
+- **Purpose**: Configures depths at which a submarine will start taking crush damage.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Submarine to configure.
+  - `toggle` (`bool`): Enable custom depth handling.
+  - `depth1` (`float`): Initial warning depth.
+  - `depth2` (`float`): Critical depth.
+  - `depth3` (`float`): Fatal depth.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must call for crush effects to sync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: subcrush
+        -- Use: Set crush depths
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('subcrush', function(_, args)
+        local sub = GetVehiclePedIsIn(PlayerPedId(), false)
+        if sub ~= 0 then SetSubmarineCrushDepths(sub, true, tonumber(args[1]) or 50.0, tonumber(args[2]) or 60.0, tonumber(args[3]) or 70.0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: subcrush */
+    RegisterCommand('subcrush', (_src, args) => {
+      const sub = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (sub !== 0) SetSubmarineCrushDepths(sub, true, parseFloat(args[0]) || 50.0, parseFloat(args[1]) || 60.0, parseFloat(args[2]) || 70.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Applicable only to submarine vehicles.
+- **Reference**: https://docs.fivem.net/natives/?n=SetSubmarineCrushDepths
+
+##### SetTaskVehicleGotoPlaneMinHeightAboveTerrain
+- **Name**: SetTaskVehicleGotoPlaneMinHeightAboveTerrain
+- **Scope**: Client
+- **Signature**: `void SET_TASK_VEHICLE_GOTO_PLANE_MIN_HEIGHT_ABOVE_TERRAIN(Vehicle plane, int height);`
+- **Purpose**: Sets minimum height above terrain for plane goto tasks.
+- **Parameters / Returns**:
+  - `plane` (`Vehicle`): Plane controlled by a task.
+  - `height` (`int`): Minimum height in meters.
+  - **Returns**: `void`
+- **OneSync / Networking**: Apply on owner running the task.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: planeminheight
+        -- Use: Set plane minimum height
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('planeminheight', function(_, args)
+        local plane = GetVehiclePedIsIn(PlayerPedId(), false)
+        if plane ~= 0 then SetTaskVehicleGotoPlaneMinHeightAboveTerrain(plane, tonumber(args[1]) or 50) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: planeminheight */
+    RegisterCommand('planeminheight', (_src, args) => {
+      const plane = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (plane !== 0) SetTaskVehicleGotoPlaneMinHeightAboveTerrain(plane, parseInt(args[0]) || 50);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only affects scripted plane goto tasks.
+- **Reference**: https://docs.fivem.net/natives/?n=SetTaskVehicleGotoPlaneMinHeightAboveTerrain
+
+##### SetTaxiLights
+- **Name**: SetTaxiLights
+- **Scope**: Client
+- **Signature**: `void SET_TAXI_LIGHTS(Vehicle vehicle, BOOL state);`
+- **Purpose**: Switches taxi roof lights on or off.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Taxi vehicle.
+  - `state` (`bool`): `true` turns lights on.
+  - **Returns**: `void`
+- **OneSync / Networking**: Run on owner so all players see the lights.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: taxilights
+        -- Use: Toggle taxi lights
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('taxilights', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then SetTaxiLights(veh, args[1] == 'on') end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: taxilights */
+    RegisterCommand('taxilights', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) SetTaxiLights(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only functional on taxi models.
+- **Reference**: https://docs.fivem.net/natives/?n=SetTaxiLights
+
+CONTINUE-HERE — 2025-09-12T08:18:54+00:00 — next: Vehicle :: SetTrailerAttachmentEnabled
