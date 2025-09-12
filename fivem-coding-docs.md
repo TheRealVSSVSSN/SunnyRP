@@ -430,13 +430,13 @@ ensure my_resource
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
 |----------|------:|-----:|----------:|--------------|
-| Overall | 6442 | 758 | 5684 | 2025-09-12T07:20:05+00:00 |
+| Overall | 6442 | 783 | 5659 | 2025-09-12T07:29:09+00:00 |
 | Player | 248 | 248 | 0 | 2025-09-11T06:38 |
 | Recording | 17 | 17 | 0 | 2025-09-11T06:52 |
 | Replay | 6 | 6 | 0 | 2025-09-11T07:37 |
 | ACL | 10 | 10 | 0 | 2025-09-11T08:12 |
 | CFX | 50 | 50 | 0 | 2025-09-11T09:55 |
-| Vehicle | 751 | 427 | 324 | 2025-09-12T07:20:05+00:00 |
+| Vehicle | 751 | 452 | 299 | 2025-09-12T07:29:09+00:00 |
 
 ### Taxonomy & Scope Notes
 - **Client-only** natives run in game clients and cannot be executed on the server.
@@ -27542,4 +27542,917 @@ RegisterCommand('rgb', () => {
   - Must call `RemoveVehicleAsset` to unload.
 - **Reference**: https://docs.fivem.net/natives/?n=RequestVehicleAsset
 
-CONTINUE-HERE — 2025-09-12T07:20:05+00:00 — next: Vehicle :: RequestVehicleDashboardScaleformMovie
+##### RequestVehicleDashboardScaleformMovie
+- **Name**: RequestVehicleDashboardScaleformMovie
+- **Scope**: Client
+- **Signature**: `void REQUEST_VEHICLE_DASHBOARD_SCALEFORM_MOVIE(Vehicle vehicle);`
+- **Purpose**: Requests and loads the dashboard scaleform movie for a vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle whose dashboard UI should load.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Local-only; does not synchronize across the network.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_dash_sf
+        -- Use: Loads dashboard scaleform for current vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_dash_sf', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        RequestVehicleDashboardScaleformMovie(veh)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_dash_sf */
+    RegisterCommand('veh_dash_sf', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      RequestVehicleDashboardScaleformMovie(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Official documentation lacks detailed behavior.
+  - TODO(next-run): verify if a return value is provided.
+- **Reference**: https://docs.fivem.net/natives/?n=RequestVehicleDashboardScaleformMovie
+
+##### RequestVehicleHighDetailModel
+- **Name**: RequestVehicleHighDetailModel
+- **Scope**: Client
+- **Signature**: `void REQUEST_VEHICLE_HIGH_DETAIL_MODEL(Vehicle vehicle);`
+- **Purpose**: Forces the game to stream the high-detail model for the specified vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to stream at high detail.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Local streaming request; no replication required.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_highdetail
+        -- Use: Requests high detail model for current vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_highdetail', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        RequestVehicleHighDetailModel(veh)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_highdetail */
+    RegisterCommand('veh_highdetail', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      RequestVehicleHighDetailModel(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Consider using `HasVehicleHighDetailModelLoaded` to poll completion.
+- **Reference**: https://docs.fivem.net/natives/?n=RequestVehicleHighDetailModel
+
+##### RequestVehicleRecording
+- **Name**: RequestVehicleRecording
+- **Scope**: Client
+- **Signature**: `void REQUEST_VEHICLE_RECORDING(int recording, char* script);`
+- **Purpose**: Loads a prerecorded vehicle path for playback.
+- **Parameters / Returns**:
+  - `recording` (`int`): Numeric suffix in the recording file name.
+  - `script` (`char*`): Recording prefix identifying the mission or script.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Playback affects only the local client unless run on entity owner.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_recording
+        -- Use: Requests vehicle recording 1 for FBIs1UBER
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_recording', function()
+        RequestVehicleRecording(1, 'FBIs1UBER')
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_recording */
+    RegisterCommand('veh_recording', () => {
+      RequestVehicleRecording(1, 'FBIs1UBER');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only 24 recordings can be active concurrently.
+- **Reference**: https://docs.fivem.net/natives/?n=RequestVehicleRecording
+
+##### ResetVehicleStuckTimer
+- **Name**: ResetVehicleStuckTimer
+- **Scope**: Client
+- **Signature**: `void RESET_VEHICLE_STUCK_TIMER(Vehicle vehicle, int timerIndex);`
+- **Purpose**: Resets internal timers used to detect if a vehicle is stuck.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to reset.
+  - `timerIndex` (`int`): Which stuck timer to clear.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Run on vehicle owner to keep timer state consistent.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_resetstuck
+        -- Use: Clears stuck timer 0 for current vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_resetstuck', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        ResetVehicleStuckTimer(veh, 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_resetstuck */
+    RegisterCommand('veh_resetstuck', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      ResetVehicleStuckTimer(veh, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Timer index meaning is internal and undocumented.
+- **Reference**: https://docs.fivem.net/natives/?n=ResetVehicleStuckTimer
+
+##### ResetVehicleWheels
+- **Name**: ResetVehicleWheels
+- **Scope**: Client
+- **Signature**: `void RESET_VEHICLE_WHEELS(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Restores vehicle wheels to their original position or state.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target vehicle.
+  - `toggle` (`BOOL`): True to reset, false for no change.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Execute on vehicle owner to replicate wheel state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_resetwheels
+        -- Use: Resets wheels on current vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_resetwheels', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        ResetVehicleWheels(veh, true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_resetwheels */
+    RegisterCommand('veh_resetwheels', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      ResetVehicleWheels(veh, true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Official docs do not clarify toggle behavior.
+- **Reference**: https://docs.fivem.net/natives/?n=ResetVehicleWheels
+
+##### RollDownWindow
+- **Name**: RollDownWindow
+- **Scope**: Client
+- **Signature**: `void ROLL_DOWN_WINDOW(Vehicle vehicle, int windowIndex);`
+- **Purpose**: Rolls down a specific window on a vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to modify.
+  - `windowIndex` (`int`): Window identifier.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Must run on vehicle owner for window state to sync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_rolldown
+        -- Use: Rolls down driver's window
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_rolldown', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        RollDownWindow(veh, 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_rolldown */
+    RegisterCommand('veh_rolldown', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      RollDownWindow(veh, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Window indices vary by model; see `IsVehicleWindowIntact` for constants.
+- **Reference**: https://docs.fivem.net/natives/?n=RollDownWindow
+
+##### RollDownWindows
+- **Name**: RollDownWindows
+- **Scope**: Client
+- **Signature**: `void ROLL_DOWN_WINDOWS(Vehicle vehicle);`
+- **Purpose**: Rolls down all windows on a vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to modify.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Run on vehicle owner for consistent replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_rolldowns
+        -- Use: Rolls down all windows on current vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_rolldowns', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        RollDownWindows(veh)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_rolldowns */
+    RegisterCommand('veh_rolldowns', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      RollDownWindows(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only affects existing windows; removed ones remain missing.
+- **Reference**: https://docs.fivem.net/natives/?n=RollDownWindows
+
+##### RollUpWindow
+- **Name**: RollUpWindow
+- **Scope**: Client
+- **Signature**: `void ROLL_UP_WINDOW(Vehicle vehicle, int windowIndex);`
+- **Purpose**: Rolls up a specific window on a vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to modify.
+  - `windowIndex` (`int`): Window identifier.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Must run on vehicle owner to sync window state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_rollup
+        -- Use: Rolls up driver's window
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_rollup', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        RollUpWindow(veh, 0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_rollup */
+    RegisterCommand('veh_rollup', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      RollUpWindow(veh, 0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Windows must exist and be intact to roll up.
+- **Reference**: https://docs.fivem.net/natives/?n=RollUpWindow
+
+##### SetAllLowPriorityVehicleGeneratorsActive
+- **Name**: SetAllLowPriorityVehicleGeneratorsActive
+- **Scope**: Client
+- **Signature**: `void SET_ALL_LOW_PRIORITY_VEHICLE_GENERATORS_ACTIVE(BOOL active);`
+- **Purpose**: Enables or disables low-priority vehicle spawn generators globally.
+- **Parameters / Returns**:
+  - `active` (`BOOL`): True to enable, false to disable.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Affects only local world simulation.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_lowgen
+        -- Use: Toggles low-priority vehicle generators
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_lowgen', function(_, args)
+        SetAllLowPriorityVehicleGeneratorsActive(args[1] == 'on')
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_lowgen */
+    RegisterCommand('veh_lowgen', (_src, args) => {
+      SetAllLowPriorityVehicleGeneratorsActive(args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only affects generators flagged as low priority.
+- **Reference**: https://docs.fivem.net/natives/?n=SetAllLowPriorityVehicleGeneratorsActive
+
+##### SetAllVehicleGeneratorsActive
+- **Name**: SetAllVehicleGeneratorsActive
+- **Scope**: Client
+- **Signature**: `void SET_ALL_VEHICLE_GENERATORS_ACTIVE();`
+- **Purpose**: Reactivates all vehicle generators previously disabled.
+- **Parameters / Returns**:
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Local-only; server should manage global spawn states separately.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_allgen
+        -- Use: Reactivates all vehicle generators
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_allgen', function()
+        SetAllVehicleGeneratorsActive()
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_allgen */
+    RegisterCommand('veh_allgen', () => {
+      SetAllVehicleGeneratorsActive();
+    });
+    ```
+- **Caveats / Limitations**:
+  - No direct disable counterpart; use `SetAllVehicleGeneratorsActiveInArea` to control specific regions.
+- **Reference**: https://docs.fivem.net/natives/?n=SetAllVehicleGeneratorsActive
+
+##### SetAllVehicleGeneratorsActiveInArea
+- **Name**: SetAllVehicleGeneratorsActiveInArea
+- **Scope**: Client
+- **Signature**: `void SET_ALL_VEHICLE_GENERATORS_ACTIVE_IN_AREA(float x1, float y1, float z1, float x2, float y2, float z2, BOOL p6, BOOL p7);`
+- **Purpose**: Toggles vehicle generators within an axis-aligned area box.
+- **Parameters / Returns**:
+  - `x1`, `y1`, `z1` (`float`): First corner of area.
+  - `x2`, `y2`, `z2` (`float`): Opposite corner of area.
+  - `p6` (`BOOL`): Enable (true) or disable (false) generators.
+  - `p7` (`BOOL`): Unknown flag.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Local; server should coordinate global spawns.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_allgenarea
+        -- Use: Toggles generators in a 50m cube around player
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_allgenarea', function(_, args)
+        local x, y, z = table.unpack(GetEntityCoords(PlayerPedId()))
+        local enable = args[1] == 'on'
+        SetAllVehicleGeneratorsActiveInArea(x-25.0, y-25.0, z-25.0, x+25.0, y+25.0, z+25.0, enable, true)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_allgenarea */
+    RegisterCommand('veh_allgenarea', (_src, args) => {
+      const [x, y, z] = GetEntityCoords(PlayerPedId());
+      const enable = args[0] === 'on';
+      SetAllVehicleGeneratorsActiveInArea(x-25.0, y-25.0, z-25.0, x+25.0, y+25.0, z+25.0, enable, true);
+    });
+    ```
+- **Caveats / Limitations**:
+  - `p7` flag is undocumented; typically set to true.
+- **Reference**: https://docs.fivem.net/natives/?n=SetAllVehicleGeneratorsActiveInArea
+
+##### SetAmbientVehicleRangeMultiplierThisFrame
+- **Name**: SetAmbientVehicleRangeMultiplierThisFrame
+- **Scope**: Client
+- **Signature**: `void SET_AMBIENT_VEHICLE_RANGE_MULTIPLIER_THIS_FRAME(float range);`
+- **Purpose**: Scales spawn range for random ambient vehicles for the current frame.
+- **Parameters / Returns**:
+  - `range` (`float`): Multiplier, usually 0.0–1.0.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Affects only local ambient spawns.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_ambitrange
+        -- Use: Halves ambient vehicle spawn range for this frame
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_ambitrange', function()
+        SetAmbientVehicleRangeMultiplierThisFrame(0.5)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_ambitrange */
+    RegisterCommand('veh_ambitrange', () => {
+      SetAmbientVehicleRangeMultiplierThisFrame(0.5);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Must be called every frame to maintain effect.
+- **Reference**: https://docs.fivem.net/natives/?n=SetAmbientVehicleRangeMultiplierThisFrame
+
+##### SetBikeOnStand
+- **Name**: SetBikeOnStand
+- **Scope**: Client
+- **Signature**: `void SET_BIKE_ON_STAND(Vehicle vehicle, float x, float y);`
+- **Purpose**: Forces a bike to lean and turn while on a stand for visual display.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Bike to adjust.
+  - `x` (`float`): Turn value between -1.0 and 1.0.
+  - `y` (`float`): Lean value between -1.0 and 1.0.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Local effect; apply on owner for others to see.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_bikestand
+        -- Use: Leans bike left while on stand
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_bikestand', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetBikeOnStand(veh, -1.0, 1.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_bikestand */
+    RegisterCommand('veh_bikestand', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetBikeOnStand(veh, -1.0, 1.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only works on bike-class vehicles.
+- **Reference**: https://docs.fivem.net/natives/?n=SetBikeOnStand
+
+##### SetBoatAnchor
+- **Name**: SetBoatAnchor
+- **Scope**: Client
+- **Signature**: `void SET_BOAT_ANCHOR(Vehicle boat, BOOL toggle);`
+- **Purpose**: Drops or lifts a boat's anchor.
+- **Parameters / Returns**:
+  - `boat` (`Vehicle`): Boat to modify.
+  - `toggle` (`BOOL`): True to anchor, false to release.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Run on boat owner to replicate anchor state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_boatanchor
+        -- Use: Toggles anchor on current boat
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_boatanchor', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetBoatAnchor(veh, args[1] == 'on')
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_boatanchor */
+    RegisterCommand('veh_boatanchor', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetBoatAnchor(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Use `CanAnchorBoatHere` to check if anchoring is allowed.
+- **Reference**: https://docs.fivem.net/natives/?n=SetBoatAnchor
+
+##### SetBoatBoomPositionRatio
+- **Name**: SetBoatBoomPositionRatio
+- **Scope**: Client
+- **Signature**: `void SET_BOAT_BOOM_POSITION_RATIO(Vehicle vehicle, float ratio);`
+- **Purpose**: Adjusts the TR3 trailer's boom position relative to the boat.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): TR3 trailer vehicle.
+  - `ratio` (`float`): 0.0 (left) to 1.0 (back/right) boom position.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Apply on entity owner for other clients to see.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_boomratio
+        -- Use: Sets boom half way on current TR3
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_boomratio', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetBoatBoomPositionRatio(veh, 0.5)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_boomratio */
+    RegisterCommand('veh_boomratio', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetBoatBoomPositionRatio(veh, 0.5);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only applicable to the TR3 trailer.
+- **Reference**: https://docs.fivem.net/natives/?n=SetBoatBoomPositionRatio
+
+##### SetBoatDisableAvoidance
+- **Name**: SetBoatDisableAvoidance
+- **Scope**: Client
+- **Signature**: `void SET_BOAT_DISABLE_AVOIDANCE(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Toggles automatic boat avoidance behavior.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Boat to modify.
+  - `toggle` (`BOOL`): True to disable avoidance.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Call on boat owner to replicate navigation behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_boatavoid
+        -- Use: Disables avoidance on current boat
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_boatavoid', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetBoatDisableAvoidance(veh, args[1] == 'on')
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_boatavoid */
+    RegisterCommand('veh_boatavoid', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetBoatDisableAvoidance(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Avoidance toggle semantics are undocumented.
+- **Reference**: https://docs.fivem.net/natives/?n=SetBoatDisableAvoidance
+
+##### SetBoatIsSinking
+- **Name**: SetBoatIsSinking
+- **Scope**: Client
+- **Signature**: `void SET_BOAT_IS_SINKING(Vehicle vehicle);`
+- **Purpose**: Flags a boat as sinking for visual and physics effects.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Boat to sink.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Run on boat owner to replicate sinking state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_boatsink
+        -- Use: Marks current boat as sinking
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_boatsink', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetBoatIsSinking(veh)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_boatsink */
+    RegisterCommand('veh_boatsink', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetBoatIsSinking(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Official docs provide no extra details.
+- **Reference**: https://docs.fivem.net/natives/?n=SetBoatIsSinking
+
+##### SetBoatLowLodAnchorDistance
+- **Name**: SetBoatLowLodAnchorDistance
+- **Scope**: Client
+- **Signature**: `void SET_BOAT_LOW_LOD_ANCHOR_DISTANCE(Vehicle boat, float value);`
+- **Purpose**: Sets distance at which an anchored boat switches to low-detail buoyancy.
+- **Parameters / Returns**:
+  - `boat` (`Vehicle`): Target boat.
+  - `value` (`float`): Distance for LOD switch; -1.0 resets to default.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Local; adjust on owner to sync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_boatlodanchor
+        -- Use: Sets LOD anchor distance to 100m
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_boatlodanchor', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetBoatLowLodAnchorDistance(veh, 100.0)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_boatlodanchor */
+    RegisterCommand('veh_boatlodanchor', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetBoatLowLodAnchorDistance(veh, 100.0);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Setting negative values resets to default.
+- **Reference**: https://docs.fivem.net/natives/?n=SetBoatLowLodAnchorDistance
+
+##### SetBoatRemainsAnchoredWhilePlayerIsDriver
+- **Name**: SetBoatRemainsAnchoredWhilePlayerIsDriver
+- **Scope**: Client
+- **Signature**: `void SET_BOAT_REMAINS_ANCHORED_WHILE_PLAYER_IS_DRIVER(Vehicle boat, BOOL toggle);`
+- **Purpose**: Keeps a boat anchored even if the driver is a player.
+- **Parameters / Returns**:
+  - `boat` (`Vehicle`): Boat to modify.
+  - `toggle` (`BOOL`): True to keep anchored.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Apply on owner for replication.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_boatanchorplayer
+        -- Use: Keeps boat anchored while driving
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_boatanchorplayer', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetBoatRemainsAnchoredWhilePlayerIsDriver(veh, args[1] == 'on')
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_boatanchorplayer */
+    RegisterCommand('veh_boatanchorplayer', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetBoatRemainsAnchoredWhilePlayerIsDriver(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Often used alongside `SetBoatAnchor`.
+- **Reference**: https://docs.fivem.net/natives/?n=SetBoatRemainsAnchoredWhilePlayerIsDriver
+
+##### SetBoatSinksWhenWrecked
+- **Name**: SetBoatSinksWhenWrecked
+- **Scope**: Client
+- **Signature**: `void SET_BOAT_SINKS_WHEN_WRECKED(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Controls whether a boat sinks when destroyed.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Boat to modify.
+  - `toggle` (`BOOL`): True to sink when wrecked.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Run on boat owner for consistent behavior.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_boatsinkwreck
+        -- Use: Makes boat sink when wrecked
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_boatsinkwreck', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetBoatSinksWhenWrecked(veh, args[1] == 'on')
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_boatsinkwreck */
+    RegisterCommand('veh_boatsinkwreck', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetBoatSinksWhenWrecked(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only affects wrecked boats; does not force immediate sinking.
+- **Reference**: https://docs.fivem.net/natives/?n=SetBoatSinksWhenWrecked
+
+##### SetCamberedWheelsDisabled
+- **Name**: SetCamberedWheelsDisabled
+- **Scope**: Client
+- **Signature**: `void SET_CAMBERED_WHEELS_DISABLED(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Enables or disables cambered wheel visuals on a vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to modify.
+  - `toggle` (`BOOL`): True to disable cambering.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Run on vehicle owner to sync appearance.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_cambered
+        -- Use: Disables cambered wheels on current vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_cambered', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetCamberedWheelsDisabled(veh, args[1] == 'on')
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_cambered */
+    RegisterCommand('veh_cambered', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetCamberedWheelsDisabled(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only affects vehicles with camber-capable wheels.
+- **Reference**: https://docs.fivem.net/natives/?n=SetCamberedWheelsDisabled
+
+##### SetCanResprayVehicle
+- **Name**: SetCanResprayVehicle
+- **Scope**: Client
+- **Signature**: `void SET_CAN_RESPRAY_VEHICLE(Vehicle vehicle, BOOL state);`
+- **Purpose**: Determines if a vehicle can enter respray shops.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Target vehicle.
+  - `state` (`BOOL`): True to allow resprays.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Run on vehicle owner to replicate ability flag.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_respray
+        -- Use: Allows current vehicle to be resprayed
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_respray', function(_, args)
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetCanResprayVehicle(veh, args[1] == 'on')
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_respray */
+    RegisterCommand('veh_respray', (_src, args) => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetCanResprayVehicle(veh, args[0] === 'on');
+    });
+    ```
+- **Caveats / Limitations**:
+  - Disabled in multiplayer according to official docs.
+- **Reference**: https://docs.fivem.net/natives/?n=SetCanResprayVehicle
+
+##### SetCarBootOpen
+- **Name**: SetCarBootOpen
+- **Scope**: Client
+- **Signature**: `void SET_CAR_BOOT_OPEN(Vehicle vehicle);`
+- **Purpose**: Opens the trunk/boot of a vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle whose boot to open.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Call on vehicle owner to replicate door state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_bootopen
+        -- Use: Opens trunk on current vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_bootopen', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        SetCarBootOpen(veh)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_bootopen */
+    RegisterCommand('veh_bootopen', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      SetCarBootOpen(veh);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only operates on vehicles with a boot/trunk door.
+- **Reference**: https://docs.fivem.net/natives/?n=SetCarBootOpen
+
+##### SetCarHighSpeedBumpSeverityMultiplier
+- **Name**: SetCarHighSpeedBumpSeverityMultiplier
+- **Scope**: Client
+- **Signature**: `void SET_CAR_HIGH_SPEED_BUMP_SEVERITY_MULTIPLIER(float multiplier);`
+- **Purpose**: Modifies how severe high-speed bumps affect vehicles.
+- **Parameters / Returns**:
+  - `multiplier` (`float`): Severity factor.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Local-only; use on owner for others to experience effect.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_bumpsseverity
+        -- Use: Lowers high-speed bump severity
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_bumpsseverity', function()
+        SetCarHighSpeedBumpSeverityMultiplier(0.5)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_bumpsseverity */
+    RegisterCommand('veh_bumpsseverity', () => {
+      SetCarHighSpeedBumpSeverityMultiplier(0.5);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Semantics of multiplier are unclear.
+  - TODO(next-run): verify effect across vehicle classes.
+- **Reference**: https://docs.fivem.net/natives/?n=SetCarHighSpeedBumpSeverityMultiplier
+
+##### SetCargobobExcludeFromPickupEntity
+- **Name**: SetCargobobExcludeFromPickupEntity
+- **Scope**: Client
+- **Signature**: `void SET_CARGOBOB_EXCLUDE_FROM_PICKUP_ENTITY(Vehicle cargobob, Entity entity);`
+- **Purpose**: Prevents a specified entity from detaching from a Cargobob.
+- **Parameters / Returns**:
+  - `cargobob` (`Vehicle`): Cargobob helicopter.
+  - `entity` (`Entity`): Entity to keep attached.
+  - **Returns**: `void` None.
+- **OneSync / Networking**: Must run on owning client of both entities for consistent results.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_cargoexclude
+        -- Use: Locks attached entity to current Cargobob
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_cargoexclude', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        local ent = GetEntityAttachedToTowTruck(veh)
+        SetCargobobExcludeFromPickupEntity(veh, ent)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_cargoexclude */
+    RegisterCommand('veh_cargoexclude', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      const ent = GetEntityAttachedToTowTruck(veh);
+      SetCargobobExcludeFromPickupEntity(veh, ent);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Entity must already be attached to the Cargobob.
+- **Reference**: https://docs.fivem.net/natives/?n=SetCargobobExcludeFromPickupEntity
+ CONTINUE-HERE — 2025-09-12T07:29:09+00:00 — next: Vehicle :: SetCargobobForceDontDetachVehicle
