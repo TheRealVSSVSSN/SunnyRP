@@ -307,8 +307,8 @@ onesync on
 ## 13. Natives Index (Client / Server, by Category)
 ### 13.0 Processing Ledger
 | Category | Total | Done | Remaining | Last Updated |
-| Overall | 6442 | 1068 | 5374 | 2025-09-12T20:53:25.585962+00:00 |
-| Vehicle | 751 | 737 | 14 | 2025-09-12T20:53:25.585962+00:00 |
+| Overall | 6442 | 174 | 6268 | 2025-09-12T21:06:30+00:00 |
+| Vehicle | 751 | 174 | 577 | 2025-09-12T21:06:30+00:00 |
 
 ### 13.1 Taxonomy & Scope Notes
 - Natives are grouped by high-level game systems (e.g., Vehicle, Player) and scope (Client or Server).
@@ -6596,4 +6596,572 @@ onesync on
   - Only applicable to helicopters with built-in searchlights.
 - **Reference**: https://docs.fivem.net/natives/?n=DoesVehicleHaveSearchlight
 
-CONTINUE-HERE — 2025-09-12T20:53:25.585962+00:00 — next: Vehicle :: DoesVehicleHaveStuckVehicleCheck
+##### DoesVehicleHaveStuckVehicleCheck
+- **Name**: DoesVehicleHaveStuckVehicleCheck
+- **Scope**: Client
+- **Signature**: `BOOL DOES_VEHICLE_HAVE_STUCK_VEHICLE_CHECK(Vehicle vehicle);`
+- **Purpose**: Detects if a vehicle currently has a stuck check task active.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to query.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Local query; the vehicle must be streamed to inspect.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: stuck_check
+        -- Use: Adds a warp check to free a wedged vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('stuck_check', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and not DoesVehicleHaveStuckVehicleCheck(veh) then
+            -- allow the game to warp the vehicle if it becomes immobile
+            AddVehicleStuckCheckWithWarp(veh, 0.2, 1000, false, false, false, 0)
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: stuck_check */
+    RegisterCommand('stuck_check', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && !DoesVehicleHaveStuckVehicleCheck(veh)) {
+        // enable automatic warp if the vehicle gets stuck
+        AddVehicleStuckCheckWithWarp(veh, 0.2, 1000, false, false, false, 0);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only 16 vehicles can have stuck checks simultaneously.
+- **Reference**: https://docs.fivem.net/natives/?n=DoesVehicleHaveStuckVehicleCheck
+
+##### DoesVehicleHaveWeapons
+- **Name**: DoesVehicleHaveWeapons
+- **Scope**: Client
+- **Signature**: `BOOL DOES_VEHICLE_HAVE_WEAPONS(Vehicle vehicle);`
+- **Purpose**: Determines if a vehicle model is equipped with built-in weapons.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`): Vehicle to check.
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Query any streamed vehicle; weapon use requires ownership.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: veh_weapons
+        -- Use: Notifies if the current vehicle carries weapons
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('veh_weapons', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and DoesVehicleHaveWeapons(veh) then
+            TriggerEvent('chat:addMessage', {args = {'System', 'Weapons installed.'}})
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: veh_weapons */
+    RegisterCommand('veh_weapons', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && DoesVehicleHaveWeapons(veh)) {
+        emit('chat:addMessage', { args: ['System', 'Weapons installed.'] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Applies to armed vehicles such as the Lazer or weaponized quads.
+- **Reference**: https://docs.fivem.net/natives/?n=DoesVehicleHaveWeapons
+
+##### _DOES_VEHICLE_TYRE_EXIST (0x534E36D4DB9ECC5D)
+- **Name**: _DOES_VEHICLE_TYRE_EXIST (0x534E36D4DB9ECC5D)
+- **Scope**: Client
+- **Signature**: `BOOL _DOES_VEHICLE_TYRE_EXIST(Vehicle vehicle, int tyreIndex);`
+- **Purpose**: Checks whether a tyre exists at a given wheel index.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `tyreIndex` (`int`): Wheel slot (0–5 typical).
+  - **Returns**: `bool`.
+- **OneSync / Networking**: Use on streamed vehicles; ownership needed to modify tyres.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: tyre_exists
+        -- Use: Reports if a tyre slot is present
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('tyre_exists', function(src, args)
+        local idx = tonumber(args[1]) or 0
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 and _DoesVehicleTyreExist(veh, idx) then
+            TriggerEvent('chat:addMessage', {args = {'System', ('Tyre %d present'):format(idx)}})
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: tyre_exists */
+    RegisterCommand('tyre_exists', (src, args) => {
+      const idx = parseInt(args[0]) || 0;
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0 && DoesVehicleTyreExist(veh, idx)) {
+        emit('chat:addMessage', { args: ['System', `Tyre ${idx} present`] });
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Returns false if the tyre was removed or the index is invalid.
+- **Reference**: https://docs.fivem.net/natives/?n=_DOES_VEHICLE_TYRE_EXIST
+
+##### _EJECT_JB700_ROOF (0xE38CB9D7D39FDBCC)
+- **Name**: _EJECT_JB700_ROOF (0xE38CB9D7D39FDBCC)
+- **Scope**: Client
+- **Signature**: `void _EJECT_JB700_ROOF(Vehicle vehicle, float x, float y, float z);`
+- **Purpose**: Detaches the JB700's roof with an impulse vector.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `x`, `y`, `z` (`float`): Impulse direction.
+  - **Returns**: `void`
+- **OneSync / Networking**: Only affects the vehicle owner for proper sync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: eject_roof
+        -- Use: Blasts off the JB700 roof forward
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('eject_roof', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then _EjectJb700Roof(veh, 0.0, 5.0, 1.0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: eject_roof */
+    RegisterCommand('eject_roof', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        EjectJb700Roof(veh, 0.0, 5.0, 1.0);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only vehicles of model JB700 support this feature.
+- **Reference**: https://docs.fivem.net/natives/?n=_EJECT_JB700_ROOF
+
+##### _ENABLE_INDIVIDUAL_PLANE_PROPELLER (0xDC05D2777F855F44)
+- **Name**: _ENABLE_INDIVIDUAL_PLANE_PROPELLER (0xDC05D2777F855F44)
+- **Scope**: Client
+- **Signature**: `void _ENABLE_INDIVIDUAL_PLANE_PROPELLER(Vehicle plane, int propeller);`
+- **Purpose**: Starts a specific propeller on a prop-driven aircraft.
+- **Parameters / Returns**:
+  - `plane` (`Vehicle`): Propeller plane.
+  - `propeller` (`int`): Index of prop to enable.
+  - **Returns**: `void`
+- **OneSync / Networking**: Call on aircraft owner to sync prop state.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: prop_enable
+        -- Use: Re-enables a plane's first propeller
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('prop_enable', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then _EnableIndividualPlanePropeller(veh, 0) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: prop_enable */
+    RegisterCommand('prop_enable', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        EnableIndividualPlanePropeller(veh, 0);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Use after disabling a prop via `_DISABLE_INDIVIDUAL_PLANE_PROPELLER`.
+- **Reference**: https://docs.fivem.net/natives/?n=_ENABLE_INDIVIDUAL_PLANE_PROPELLER
+
+##### ExplodeVehicle
+- **Name**: ExplodeVehicle
+- **Scope**: Client
+- **Signature**: `void EXPLODE_VEHICLE(Vehicle vehicle, BOOL isAudible, BOOL isInvisible);`
+- **Purpose**: Detonates a vehicle with optional sound and visual effects.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `isAudible` (`bool`): Play explosion sound.
+  - `isInvisible` (`bool`): Hide explosion visuals.
+  - **Returns**: `void`
+- **OneSync / Networking**: Only the network owner can trigger a synced explosion.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: boom
+        -- Use: Destroys the nearest vehicle
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('boom', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then ExplodeVehicle(veh, true, false) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: boom */
+    RegisterCommand('boom', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        ExplodeVehicle(veh, true, false);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Invisible explosions still damage nearby entities.
+- **Reference**: https://docs.fivem.net/natives/?n=ExplodeVehicle
+
+##### ExplodeVehicleInCutscene
+- **Name**: ExplodeVehicleInCutscene
+- **Scope**: Client
+- **Signature**: `void EXPLODE_VEHICLE_IN_CUTSCENE(Vehicle vehicle, BOOL p1);`
+- **Purpose**: Instantly destroys a vehicle during scripted sequences.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `p1` (`bool`): Unknown flag.
+  - **Returns**: `void`
+- **OneSync / Networking**: Use only on mission vehicles you control.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: boom_cs
+        -- Use: Explodes current vehicle without normal FX
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('boom_cs', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then ExplodeVehicleInCutscene(veh, true) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: boom_cs */
+    RegisterCommand('boom_cs', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        ExplodeVehicleInCutscene(veh, true);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Intended for cutscenes; physics may behave oddly in freeplay.
+- **Reference**: https://docs.fivem.net/natives/?n=ExplodeVehicleInCutscene
+
+##### _FIND_RANDOM_POINT_IN_SPACE (0x8DC9675797123522)
+- **Name**: _FIND_RANDOM_POINT_IN_SPACE (0x8DC9675797123522)
+- **Scope**: Client
+- **Signature**: `Vector3 _FIND_RANDOM_POINT_IN_SPACE(Ped ped);`
+- **Purpose**: Calculates a distant random position relative to a ped.
+- **Parameters / Returns**:
+  - `ped` (`Ped`)
+  - **Returns**: `Vector3` position.
+- **OneSync / Networking**: Result is local only; moving entities requires server validation.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: random_space
+        -- Use: Draws a marker at a far random point
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('random_space', function()
+        local ped = PlayerPedId()
+        local pos = _FindRandomPointInSpace(ped)
+        DrawMarker(1, pos.x, pos.y, pos.z, 0.0,0.0,0.0, 0.0,0.0,0.0, 1.0,1.0,1.0, 0,255,0,150, false,true,2,nil,nil,false)
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: random_space */
+    RegisterCommand('random_space', () => {
+      const ped = PlayerPedId();
+      const pos = FindRandomPointInSpace(ped);
+      DrawMarker(1, pos.x, pos.y, pos.z, 0.0,0.0,0.0, 0.0,0.0,0.0, 1.0,1.0,1.0, 0,255,0,150, false, true, 2, undefined, undefined, false);
+    });
+    ```
+- **Caveats / Limitations**:
+  - Often returns positions high above ground; validate before teleporting.
+- **Reference**: https://docs.fivem.net/natives/?n=_FIND_RANDOM_POINT_IN_SPACE
+
+##### _FIND_VEHICLE_CARRYING_THIS_ENTITY (0x375E7FC44F21C8AB)
+- **Name**: _FIND_VEHICLE_CARRYING_THIS_ENTITY (0x375E7FC44F21C8AB)
+- **Scope**: Client
+- **Signature**: `Vehicle _FIND_VEHICLE_CARRYING_THIS_ENTITY(Entity entity);`
+- **Purpose**: Returns the handler-frame vehicle transporting a container entity.
+- **Parameters / Returns**:
+  - `entity` (`Entity`)
+  - **Returns**: `Vehicle` or `0` if none.
+- **OneSync / Networking**: Entity and carrier must be streamed to query.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: carrier_check
+        -- Use: Finds the vehicle carrying an aimed-at container
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('carrier_check', function()
+        local _, ent = GetEntityPlayerIsFreeAimingAt(PlayerId())
+        if ent and ent ~= 0 then
+            local veh = _FindVehicleCarryingThisEntity(ent)
+            if veh ~= 0 then
+                TriggerEvent('chat:addMessage', {args = {'System', 'Carrier detected.'}})
+            end
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: carrier_check */
+    RegisterCommand('carrier_check', () => {
+      const [hit, ent] = GetEntityPlayerIsFreeAimingAt(PlayerId());
+      if (hit) {
+        const veh = FindVehicleCarryingThisEntity(ent);
+        if (veh !== 0) {
+          emit('chat:addMessage', { args: ['System', 'Carrier detected.'] });
+        }
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Works only with handler-frame cargo entities.
+- **Reference**: https://docs.fivem.net/natives/?n=_FIND_VEHICLE_CARRYING_THIS_ENTITY
+
+##### FixVehicleWindow
+- **Name**: FixVehicleWindow
+- **Scope**: Client
+- **Signature**: `void FIX_VEHICLE_WINDOW(Vehicle vehicle, int windowIndex);`
+- **Purpose**: Repairs a broken vehicle window by index.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `windowIndex` (`int`): Window slot.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must call to sync repair.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: fix_window
+        -- Use: Restores the driver's window
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('fix_window', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then FixVehicleWindow(veh, 0) end -- 0 = driver
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: fix_window */
+    RegisterCommand('fix_window', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        FixVehicleWindow(veh, 0);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Unsupported on bikes, boats, or trains.
+- **Reference**: https://docs.fivem.net/natives/?n=FixVehicleWindow
+
+##### ForcePlaybackRecordedVehicleUpdate
+- **Name**: ForcePlaybackRecordedVehicleUpdate
+- **Scope**: Client
+- **Signature**: `void FORCE_PLAYBACK_RECORDED_VEHICLE_UPDATE(Vehicle vehicle, BOOL p1);`
+- **Purpose**: Immediately applies a skipped playback frame to a recorded vehicle.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `p1` (`bool`): Unknown flag.
+  - **Returns**: `void`
+- **OneSync / Networking**: Playback must run on the owner to sync movement.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: playback_skip
+        -- Use: Skips 5 seconds ahead in a recording
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('playback_skip', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            SkipTimeInPlaybackRecordedVehicle(veh, 5000)
+            ForcePlaybackRecordedVehicleUpdate(veh, true)
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: playback_skip */
+    RegisterCommand('playback_skip', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        SkipTimeInPlaybackRecordedVehicle(veh, 5000);
+        ForcePlaybackRecordedVehicleUpdate(veh, true);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Ensure recording is loaded before forcing updates.
+- **Reference**: https://docs.fivem.net/natives/?n=ForcePlaybackRecordedVehicleUpdate
+
+##### ForceSubmarineNeurtalBuoyancy
+- **Name**: ForceSubmarineNeurtalBuoyancy
+- **Scope**: Client
+- **Signature**: `void FORCE_SUBMARINE_NEURTAL_BUOYANCY(Vehicle submarine, int time);`
+- **Purpose**: Keeps a submarine neutrally buoyant for a set duration.
+- **Parameters / Returns**:
+  - `submarine` (`Vehicle`)
+  - `time` (`int`): Duration in milliseconds.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner-only; replicates position as normal.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: sub_neutral
+        -- Use: Holds submarine depth for 30 seconds
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('sub_neutral', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then ForceSubmarineNeurtalBuoyancy(veh, 30000) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: sub_neutral */
+    RegisterCommand('sub_neutral', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        ForceSubmarineNeurtalBuoyancy(veh, 30000);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Time must be >0; submarine rises normally after.
+- **Reference**: https://docs.fivem.net/natives/?n=ForceSubmarineNeurtalBuoyancy
+
+##### ForceSubmarineSurfaceMode
+- **Name**: ForceSubmarineSurfaceMode
+- **Scope**: Client
+- **Signature**: `void FORCE_SUBMARINE_SURFACE_MODE(Vehicle vehicle, BOOL toggle);`
+- **Purpose**: Forces a submarine to operate in surface mode.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - `toggle` (`bool`): Enable or disable surface mode.
+  - **Returns**: `void`
+- **OneSync / Networking**: Owner must toggle for network sync.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: sub_surface
+        -- Use: Toggles surface mode on the current submarine
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('sub_surface', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then ForceSubmarineSurfaceMode(veh, true) end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: sub_surface */
+    RegisterCommand('sub_surface', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        ForceSubmarineSurfaceMode(veh, true);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Only applicable to submarine vehicles.
+- **Reference**: https://docs.fivem.net/natives/?n=ForceSubmarineSurfaceMode
+
+##### FullyChargeNitrous
+- **Name**: FullyChargeNitrous
+- **Scope**: Client
+- **Signature**: `void FULLY_CHARGE_NITROUS(Vehicle vehicle);`
+- **Purpose**: Recharges a vehicle's nitrous system to full.
+- **Parameters / Returns**:
+  - `vehicle` (`Vehicle`)
+  - **Returns**: `void`
+- **OneSync / Networking**: Must be run by vehicle owner to replicate nitrous level.
+- **Examples**:
+  - Lua:
+    ```lua
+    --[[
+        -- Type: Command
+        -- Name: nitro_full
+        -- Use: Refills nitrous after setting mods
+        -- Created: 2025-09-12
+        -- By: VSSVSSN
+    --]]
+    RegisterCommand('nitro_full', function()
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        if veh ~= 0 then
+            SetOverrideNitrousLevel(veh, true, 1.5, 2.0, 0.5, false)
+            FullyChargeNitrous(veh)
+        end
+    end)
+    ```
+  - JavaScript:
+    ```javascript
+    /* Command: nitro_full */
+    RegisterCommand('nitro_full', () => {
+      const veh = GetVehiclePedIsIn(PlayerPedId(), false);
+      if (veh !== 0) {
+        SetOverrideNitrousLevel(veh, true, 1.5, 2.0, 0.5, false);
+        FullyChargeNitrous(veh);
+      }
+    });
+    ```
+- **Caveats / Limitations**:
+  - Requires nitrous mods to be configured beforehand.
+- **Reference**: https://docs.fivem.net/natives/?n=FullyChargeNitrous
+
+CONTINUE-HERE — 2025-09-12T21:06:30+00:00 — next: Vehicle :: GetAllVehicles
