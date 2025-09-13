@@ -1,0 +1,23 @@
+{
+  "title": "SET_PLAYER_MODEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "PLAYERAPI",
+    "SET_PLAYER_MODEL"
+  ],
+  "content": "0x00A1CADD001088360x774A4C54// SetPlayerModel\nvoid SET_PLAYER_MODEL(Player player, Hash model);Parameters:player: The player to set the model formodel: The model to useSet the model for a specific Player. Note that this will destroy the current Ped for the Player and create a new one, any reference to the old ped will be invalid after calling this.As per usual, make sure to request the model first and wait until it has loaded.Examples:Lualocal model = `a_f_m_beach_01`\nif IsModelInCdimage(model) and IsModelValid(model) then\n  RequestModel(model)\n  while not HasModelLoaded(model) do\n    Wait(0)\n  end\n  SetPlayerModel(PlayerId(), model)\n  SetModelAsNoLongerNeeded(model)\nend",
+  "codeBlocks": [
+    "// SetPlayerModel\nvoid SET_PLAYER_MODEL(Player player, Hash model);",
+    "local model = `a_f_m_beach_01`\nif IsModelInCdimage(model) and IsModelValid(model) then\n  RequestModel(model)\n  while not HasModelLoaded(model) do\n    Wait(0)\n  end\n  SetPlayerModel(PlayerId(), model)\n  SetModelAsNoLongerNeeded(model)\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PLAYER/SetPlayerModel.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

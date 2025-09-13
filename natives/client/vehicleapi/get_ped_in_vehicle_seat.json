@@ -1,0 +1,24 @@
+{
+  "title": "GET_PED_IN_VEHICLE_SEAT",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "GET_PED_IN_VEHICLE_SEAT"
+  ],
+  "content": "0xBB40DD2270B653660x388FDE9A// GetPedInVehicleSeat\nPed GET_PED_IN_VEHICLE_SEAT(Vehicle vehicle, int seatIndex);Parameters:vehicle: The vehicle to get the ped for.seatIndex: See eSeatPosition declared in IS_VEHICLE_SEAT_FREE.Returns: A handle to a ped in the specified vehicle seat, or 0 if no such ped existed.Gets the ped in the specified seat of the passed vehicle.If there is no ped in the seat, and the game considers the vehicle as ambient population, this will create a random occupant ped in the seat, which may be cleaned up by the game fairly soon if not marked as script-owned mission entity.NativeDB Added Parameter 3: BOOL p2 (uses a different GetOccupant function)Examples:Lua-- Checks if the player ped is in the drivers seat of the vehicle they are in.\nif GetPedInVehicleSeat(GetVehiclePedIsIn(PlayerPedId()), -1) == PlayerPedId() then \n  print(\"The player is the driver of this vehicle.\")\nelse\n  print(\"The player is not the driver of this vehicle.\")\nend",
+  "codeBlocks": [
+    "// GetPedInVehicleSeat\nPed GET_PED_IN_VEHICLE_SEAT(Vehicle vehicle, int seatIndex);",
+    "-- Checks if the player ped is in the drivers seat of the vehicle they are in.\nif GetPedInVehicleSeat(GetVehiclePedIsIn(PlayerPedId()), -1) == PlayerPedId() then \nelse\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/GetPedInVehicleSeat.md",
+    "https://docs.fivem.net/natives/?_0x22AC59A870E6A669",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

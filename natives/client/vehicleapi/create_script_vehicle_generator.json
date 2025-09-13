@@ -1,0 +1,23 @@
+{
+  "title": "CREATE_SCRIPT_VEHICLE_GENERATOR",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "CREATE_SCRIPT_VEHICLE_GENERATOR"
+  ],
+  "content": "0x9DEF8831146681160x25A9A261// CreateScriptVehicleGenerator\nint CREATE_SCRIPT_VEHICLE_GENERATOR(float x, float y, float z, float heading, float p4, float p5, Hash modelHash, int p7, int p8, int p9, int p10, BOOL p11, BOOL p12, BOOL p13, BOOL p14, BOOL p15, int p16);Creates a script vehicle generator at the given coordinates. Most parameters after the model hash are unknown.  \nParameters:  \na/w/s - Generator position  \nheading - Generator heading  \np4 - Unknown (always 5.0)  \np5 - Unknown (always 3.0)  \nmodelHash - Vehicle model hash  \np7/8/9/10 - Unknown (always -1)  \np11 - Unknown (usually TRUE, only one instance of FALSE)  \np12/13 - Unknown (always FALSE)  \np14 - Unknown (usally FALSE, only two instances of TRUE)  \np15 - Unknown (always TRUE)  \np16 - Unknown (always -1)  \nVector3 coords = GET_ENTITY_COORDS(PLAYER_PED_ID(), 0);\tCREATE_SCRIPT_VEHICLE_GENERATOR(coords.x, coords.y, coords.z, 1.0f, 5.0f, 3.0f, GET_HASH_KEY(\"adder\"), -1. -1, -1, -1, -1, true, false, false, false, true, -1);",
+  "codeBlocks": [
+    "// CreateScriptVehicleGenerator\nint CREATE_SCRIPT_VEHICLE_GENERATOR(float x, float y, float z, float heading, float p4, float p5, Hash modelHash, int p7, int p8, int p9, int p10, BOOL p11, BOOL p12, BOOL p13, BOOL p14, BOOL p15, int p16);",
+    "Creates a script vehicle generator at the given coordinates. Most parameters after the model hash are unknown.  \nParameters:  \na/w/s - Generator position  \nheading - Generator heading  \np4 - Unknown (always 5.0)  \np5 - Unknown (always 3.0)  \nmodelHash - Vehicle model hash  \np7/8/9/10 - Unknown (always -1)  \np11 - Unknown (usually TRUE, only one instance of FALSE)  \np12/13 - Unknown (always FALSE)  \np14 - Unknown (usally FALSE, only two instances of TRUE)  \np15 - Unknown (always TRUE)  \np16 - Unknown (always -1)  \nVector3 coords = GET_ENTITY_COORDS(PLAYER_PED_ID(), 0);\tCREATE_SCRIPT_VEHICLE_GENERATOR(coords.x, coords.y, coords.z, 1.0f, 5.0f, 3.0f, GET_HASH_KEY(\"adder\"), -1. -1, -1, -1, -1, true, false, false, false, true, -1);  \n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/CreateScriptVehicleGenerator.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "CLEAR_PLAYER_WANTED_LEVEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "PLAYERAPI",
+    "CLEAR_PLAYER_WANTED_LEVEL"
+  ],
+  "content": "0xB3025405978854990x54EA5BCC// ClearPlayerWantedLevel\nvoid CLEAR_PLAYER_WANTED_LEVEL(Player player);This executes at the same as speed as PLAYER::SET_PLAYER_WANTED_LEVEL(player, 0, false);  \nPLAYER::GET_PLAYER_WANTED_LEVEL(player); executes in less than half the time. Which means that it's worth first checking if the wanted level needs to be cleared before clearing. However, this is mostly about good code practice and can important in other situations. The difference in time in this example is negligible.",
+  "codeBlocks": [
+    "// ClearPlayerWantedLevel\nvoid CLEAR_PLAYER_WANTED_LEVEL(Player player);",
+    "This executes at the same as speed as PLAYER::SET_PLAYER_WANTED_LEVEL(player, 0, false);  \nPLAYER::GET_PLAYER_WANTED_LEVEL(player); executes in less than half the time. Which means that it's worth first checking if the wanted level needs to be cleared before clearing. However, this is mostly about good code practice and can important in other situations. The difference in time in this example is negligible."
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PLAYER/ClearPlayerWantedLevel.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

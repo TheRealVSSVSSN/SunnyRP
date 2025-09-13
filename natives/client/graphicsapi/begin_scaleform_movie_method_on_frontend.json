@@ -1,0 +1,24 @@
+{
+  "title": "BEGIN_SCALEFORM_MOVIE_METHOD_ON_FRONTEND",
+  "breadcrumbs": [
+    "Native Reference",
+    "GRAPHICSAPI",
+    "BEGIN_SCALEFORM_MOVIE_METHOD_ON_FRONTEND"
+  ],
+  "content": "0xAB58C27C2E6123C60xF6015178// BeginScaleformMovieMethodOnFrontend\nBOOL BEGIN_SCALEFORM_MOVIE_METHOD_ON_FRONTEND(char* functionName);Parameters:functionName: The function name of the scaleform to call.Starts frontend (pause menu) scaleform movie methods.\nThis can be used when you want to make custom frontend menus, and customize things like images or text in the menus etc.Use BEGIN_SCALEFORM_MOVIE_METHOD_ON_FRONTEND_HEADER for header scaleform functions.Old name:  _PUSH_SCALEFORM_MOVIE_FUNCTION_NOld name:  _BEGIN_SCALEFORM_MOVIE_METHOD_N",
+  "codeBlocks": [
+    "// BeginScaleformMovieMethodOnFrontend\nBOOL BEGIN_SCALEFORM_MOVIE_METHOD_ON_FRONTEND(char* functionName);",
+    "-- Example\nBeginScaleformMovieMethodOnFrontend('')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/BeginScaleformMovieMethodOnFrontend.md",
+    "https://docs.fivem.net/natives/?_0xB9449845F73F5E9C",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

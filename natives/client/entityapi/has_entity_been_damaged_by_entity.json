@@ -1,0 +1,22 @@
+{
+  "title": "HAS_ENTITY_BEEN_DAMAGED_BY_ENTITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENTITYAPI",
+    "HAS_ENTITY_BEEN_DAMAGED_BY_ENTITY"
+  ],
+  "content": "0xC86D67D52A707CF80x07FC77E0// HasEntityBeenDamagedByEntity\nBOOL HAS_ENTITY_BEEN_DAMAGED_BY_ENTITY(Entity entity, Entity damager, BOOL bCheckDamagerVehicle);Parameters:entity: The entity to check.damager: The entity that caused the damage.bCheckDamagerVehicle: If the damager is driving a vehicle then check to see if the entity was damaged by the vehicle.Returns: Returns true if the entity has been damaged by the specified entity.",
+  "codeBlocks": [
+    "// HasEntityBeenDamagedByEntity\nBOOL HAS_ENTITY_BEEN_DAMAGED_BY_ENTITY(Entity entity, Entity damager, BOOL bCheckDamagerVehicle);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/HasEntityBeenDamagedByEntity.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

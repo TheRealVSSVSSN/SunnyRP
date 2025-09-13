@@ -1,0 +1,23 @@
+{
+  "title": "GET_SCALEFORM_MOVIE_METHOD_RETURN_VALUE_INT",
+  "breadcrumbs": [
+    "Native Reference",
+    "GRAPHICSAPI",
+    "GET_SCALEFORM_MOVIE_METHOD_RETURN_VALUE_INT"
+  ],
+  "content": "0x2DE7EFA66B9060360x2CFB0E6D// GetScaleformMovieMethodReturnValueInt\nint GET_SCALEFORM_MOVIE_METHOD_RETURN_VALUE_INT(int method_return);Parameters:method_return: The return value of this native: EndScaleformMovieMethodReturnReturns: Returns an int in the same way GET_SCALEFORM_MOVIE_METHOD_RETURN_VALUE_STRING returns a string.Used to get a return value from a scaleform function. Returns an int in the same way GET_SCALEFORM_MOVIE_METHOD_RETURN_VALUE_STRING returns a string.Old name:  _GET_SCALEFORM_MOVIE_FUNCTION_RETURN_INT",
+  "codeBlocks": [
+    "// GetScaleformMovieMethodReturnValueInt\nint GET_SCALEFORM_MOVIE_METHOD_RETURN_VALUE_INT(int method_return);",
+    "-- Example\nGetScaleformMovieMethodReturnValueInt(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/GetScaleformMovieMethodReturnValueInt.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

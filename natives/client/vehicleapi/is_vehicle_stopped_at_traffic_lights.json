@@ -1,0 +1,22 @@
+{
+  "title": "IS_VEHICLE_STOPPED_AT_TRAFFIC_LIGHTS",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "IS_VEHICLE_STOPPED_AT_TRAFFIC_LIGHTS"
+  ],
+  "content": "0x2959F696AE390A990x69200FA4// IsVehicleStoppedAtTrafficLights\nBOOL IS_VEHICLE_STOPPED_AT_TRAFFIC_LIGHTS(Vehicle vehicle);Parameters:vehicle: The vehicle handle.Returns: Will return true if the vehicle is at an amber light junction and the vehicle driver's personality is set to not run amber lights, or if the vehicle is at a red light, regardless of the driver's personality.\nWill return false if the vehicle is stopped behind another vehicle waiting at a traffic light.This native checks if the given vehicle is stopped at a red or amber traffic light junction, provided the driver's personality is set to not run amber lights.",
+  "codeBlocks": [
+    "// IsVehicleStoppedAtTrafficLights\nBOOL IS_VEHICLE_STOPPED_AT_TRAFFIC_LIGHTS(Vehicle vehicle);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/IsVehicleStoppedAtTrafficLights.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

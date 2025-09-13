@@ -1,0 +1,23 @@
+{
+  "title": "SET_TRAILER_ATTACHMENT_ENABLED",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "SET_TRAILER_ATTACHMENT_ENABLED"
+  ],
+  "content": "0x2FA2494B47FDD009// SetTrailerAttachmentEnabled\nvoid SET_TRAILER_ATTACHMENT_ENABLED(Vehicle vehicle, BOOL enabled);Parameters:vehicle: The trailer to set attachment state forenabled: Enable or disable attachmentSets whether the trailer can attach to vehiclesExamples:Lualocal trailerModel = `tanker`\nlocal trailerCoordinates = vector3(-323.59, -757.83, 53.25)\nlocal trailerHeading = 247.77\n\nRequestModel(trailerModel)\n\nwhile not HasModelLoaded(trailerModel) do\n  Wait(0)\nend\n\nlocal trailerIndex = CreateVehicle(trailerModel, trailerCoordinates.x, trailerCoordinates.y, trailerCoordinates.z, trailerHeading, true, false)\n\nSetTrailerAttachmentEnabled(trailerIndex, false)\nSetModelAsNoLongerNeeded(trailerModel)",
+  "codeBlocks": [
+    "// SetTrailerAttachmentEnabled\nvoid SET_TRAILER_ATTACHMENT_ENABLED(Vehicle vehicle, BOOL enabled);",
+    "local trailerModel = `tanker`\nlocal trailerCoordinates = vector3(-323.59, -757.83, 53.25)\nlocal trailerHeading = 247.77\n\nRequestModel(trailerModel)\n\nwhile not HasModelLoaded(trailerModel) do\n  Wait(0)\nend\n\nlocal trailerIndex = CreateVehicle(trailerModel, trailerCoordinates.x, trailerCoordinates.y, trailerCoordinates.z, trailerHeading, true, false)\n\nSetTrailerAttachmentEnabled(trailerIndex, false)\nSetModelAsNoLongerNeeded(trailerModel)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetTrailerAttachmentEnabled.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

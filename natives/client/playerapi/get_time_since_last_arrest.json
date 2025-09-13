@@ -1,0 +1,23 @@
+{
+  "title": "GET_TIME_SINCE_LAST_ARREST",
+  "breadcrumbs": [
+    "Native Reference",
+    "PLAYERAPI",
+    "GET_TIME_SINCE_LAST_ARREST"
+  ],
+  "content": "0x5063F92F07C2A3160x62824EF4// GetTimeSinceLastArrest\nint GET_TIME_SINCE_LAST_ARREST();Returns the time since the character was arrested in (ms) milliseconds.  \nexample  \nvar time = Function.call<int>(Hash.GET_TIME_SINCE_LAST_ARREST();  \nUI.DrawSubtitle(time.ToString());  \nif player has not been arrested, the int returned will be -1.",
+  "codeBlocks": [
+    "// GetTimeSinceLastArrest\nint GET_TIME_SINCE_LAST_ARREST();",
+    "Returns the time since the character was arrested in (ms) milliseconds.  \nexample  \nvar time = Function.call<int>(Hash.GET_TIME_SINCE_LAST_ARREST();  \nUI.DrawSubtitle(time.ToString());  \nif player has not been arrested, the int returned will be -1."
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PLAYER/GetTimeSinceLastArrest.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

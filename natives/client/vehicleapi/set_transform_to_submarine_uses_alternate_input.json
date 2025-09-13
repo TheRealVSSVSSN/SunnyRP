@@ -1,0 +1,24 @@
+{
+  "title": "SET_TRANSFORM_TO_SUBMARINE_USES_ALTERNATE_INPUT",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "SET_TRANSFORM_TO_SUBMARINE_USES_ALTERNATE_INPUT"
+  ],
+  "content": "0x41B9FB92EDED32A6// SetTransformToSubmarineUsesAlternateInput\nvoid SET_TRANSFORM_TO_SUBMARINE_USES_ALTERNATE_INPUT(Vehicle vehicle, bool useAlternateInput);Parameters:vehicle: The vehicle for which the submarine mode should be configured.useAlternateInput: A boolean switch to enable/disable the use of alternate input.Changes the key used to transform a vehicle into submarine mode. When set to true, the transformation key switches from the default raise/lower convertible roof key (usually 'H') to the special vehicle transformation key (usually 'X').NativeDB Introduced: v1365Old name:  _SET_UNK_BOOL_0x102_FOR_SUBMARINE_VEHICLE_TASKExamples:LuaJavaScriptC#-- This example sets the key for submarine mode transformation to special vehicle transform \n\n-- Retrieve the player ped\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the vehicle in which the player is currently seated\nlocal vehicle = GetVehiclePedIsIn(playerPed, false)\n\n-- Retrieve the vehicle model hash\nlocal vehicleHash = GetEntityModel(vehicle)\n\n-- Check if the vehicle exists in the game world and if it is a Stromberg.\nif not DoesEntityExist(vehicle) or not vehicleHash == GetHashKey(\"stromberg\") then\n    -- If the vehicle does not exist or it's not a stromberg, end the execution of the code here.\n    return\nend\n\n-- Set the key for submarine mode transformation to special vehicle transform (X by default)\nSetTransformToSubmarineUsesAlternateInput(vehicle, true)",
+  "codeBlocks": [
+    "// SetTransformToSubmarineUsesAlternateInput\nvoid SET_TRANSFORM_TO_SUBMARINE_USES_ALTERNATE_INPUT(Vehicle vehicle, bool useAlternateInput);",
+    "NativeDB Introduced: v1365",
+    "-- This example sets the key for submarine mode transformation to special vehicle transform \n\n-- Retrieve the player ped\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the vehicle in which the player is currently seated\nlocal vehicle = GetVehiclePedIsIn(playerPed, false)\n\n-- Retrieve the vehicle model hash\nlocal vehicleHash = GetEntityModel(vehicle)\n\n-- Check if the vehicle exists in the game world and if it is a Stromberg.\nif not DoesEntityExist(vehicle) or not vehicleHash == GetHashKey(\"stromberg\") then\n    -- If the vehicle does not exist or it's not a stromberg, end the execution of the code here.\n    return\nend\n\n-- Set the key for submarine mode transformation to special vehicle transform (X by default)\nSetTransformToSubmarineUsesAlternateInput(vehicle, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetTransformToSubmarineUsesAlternateInput.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

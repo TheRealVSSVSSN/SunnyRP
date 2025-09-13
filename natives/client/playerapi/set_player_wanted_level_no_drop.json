@@ -1,0 +1,23 @@
+{
+  "title": "SET_PLAYER_WANTED_LEVEL_NO_DROP",
+  "breadcrumbs": [
+    "Native Reference",
+    "PLAYERAPI",
+    "SET_PLAYER_WANTED_LEVEL_NO_DROP"
+  ],
+  "content": "0x340E61DE7F4715650xED6F44F5// SetPlayerWantedLevelNoDrop\nvoid SET_PLAYER_WANTED_LEVEL_NO_DROP(Player player, int wantedLevel, BOOL delayedResponse);Parameters:player: the target playerwantedLevel: the wanted level 1-5delayedResponse: false = 0-10sec police spawn response time, true = 10-20sec police spawn response timeExamples:Lualocal player = PlayerId()\nSetPlayerWantedLevelNoDrop(player, 5, false) -- 5 star wanted level",
+  "codeBlocks": [
+    "// SetPlayerWantedLevelNoDrop\nvoid SET_PLAYER_WANTED_LEVEL_NO_DROP(Player player, int wantedLevel, BOOL delayedResponse);",
+    "local player = PlayerId()\nSetPlayerWantedLevelNoDrop(player, 5, false) -- 5 star wanted level"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PLAYER/SetPlayerWantedLevelNoDrop.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

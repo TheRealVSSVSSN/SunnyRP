@@ -1,0 +1,23 @@
+{
+  "title": "NETWORK_SHOW_PROFILE_UI",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORKAPI",
+    "NETWORK_SHOW_PROFILE_UI"
+  ],
+  "content": "0x859ED1CEA343FCA80xF00A20B0// NetworkShowProfileUi\nvoid NETWORK_SHOW_PROFILE_UI(int* networkHandle);Example:  \nint playerHandle;\t  \nNETWORK_HANDLE_FROM_PLAYER(selectedPlayer, &playerHandle, 13);  \nNETWORK_SHOW_PROFILE_UI(&playerHandle);",
+  "codeBlocks": [
+    "// NetworkShowProfileUi\nvoid NETWORK_SHOW_PROFILE_UI(int* networkHandle);",
+    "Example:  \nint playerHandle;\t  \nNETWORK_HANDLE_FROM_PLAYER(selectedPlayer, &playerHandle, 13);  \nNETWORK_SHOW_PROFILE_UI(&playerHandle);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/NETWORK/NetworkShowProfileUi.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

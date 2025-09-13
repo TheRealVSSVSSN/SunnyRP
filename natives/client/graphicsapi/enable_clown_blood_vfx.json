@@ -1,0 +1,25 @@
+{
+  "title": "ENABLE_CLOWN_BLOOD_VFX",
+  "breadcrumbs": [
+    "Native Reference",
+    "GRAPHICSAPI",
+    "ENABLE_CLOWN_BLOOD_VFX"
+  ],
+  "content": "0xD8214905797912730xC61C75E9// EnableClownBloodVfx\nvoid ENABLE_CLOWN_BLOOD_VFX(BOOL toggle);Parameters:toggle: Whether to toggle the clown VFX on or off.If true, this native will create purple explosions upon projectile impact, add comic-like PTFX when firing a weapon, create a sound on bullet impact and have its own \"blood effect\".If the PTFX asset \"scr_rcbarry2\" is not requested using (RequestNamedPtfxAsset) then this native will not work as intended.Excerpt from fm_content_drug_lab_work.c:STREAMING::REQUEST_NAMED_PTFX_ASSET(\"scr_rcbarry2\");\nif (STREAMING::HAS_NAMED_PTFX_ASSET_LOADED(\"scr_rcbarry2\"))\n{\n  GRAPHICS::ENABLE_CLOWN_BLOOD_VFX(true);\n  AUDIO::START_AUDIO_SCENE(\"DLC_CM2022_DRUG_TRIP_SPRINKLERS_SCENE\");\n  func_720(26);\n}\nOld name:  SET_CAMERA_ENDTIMEExamples:LuaRequestNamedPtfxAsset(\"scr_rcbarry2\") -- Request the PTFX\nwhile not HasNamedPtfxAssetLoaded(\"scr_rcbarry2\") do\n  Citizen.Wait(0)\nend\nEnableClownBloodVfx(true) -- Enable the clown PTFX",
+  "codeBlocks": [
+    "// EnableClownBloodVfx\nvoid ENABLE_CLOWN_BLOOD_VFX(BOOL toggle);",
+    "STREAMING::REQUEST_NAMED_PTFX_ASSET(\"scr_rcbarry2\");\nif (STREAMING::HAS_NAMED_PTFX_ASSET_LOADED(\"scr_rcbarry2\"))\n{\n  GRAPHICS::ENABLE_CLOWN_BLOOD_VFX(true);\n  AUDIO::START_AUDIO_SCENE(\"DLC_CM2022_DRUG_TRIP_SPRINKLERS_SCENE\");\n  func_720(26);\n}",
+    "RequestNamedPtfxAsset(\"scr_rcbarry2\") -- Request the PTFX\nwhile not HasNamedPtfxAssetLoaded(\"scr_rcbarry2\") do\n  Citizen.Wait(0)\nend\nEnableClownBloodVfx(true) -- Enable the clown PTFX"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/EnableClownBloodVfx.md",
+    "https://docs.fivem.net/natives/?_0xD821490579791273",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

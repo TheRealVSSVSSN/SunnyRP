@@ -1,0 +1,24 @@
+{
+  "title": "GET_BOAT_VEHICLE_MODEL_AGILITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "GET_BOAT_VEHICLE_MODEL_AGILITY"
+  ],
+  "content": "0x5AA3F878A178C4FC0x87C5D271// GetBoatVehicleModelAgility\nfloat GET_BOAT_VEHICLE_MODEL_AGILITY(Hash modelHash);Parameters:modelHash: The model hash of the boat.Returns: Returns the agility value of the specified boat as a float number.Retrieves the agility for a specific boat model, including any vehicle mods. Unlike other vehicles where Rockstar Games typically assess performance based on traction, boats use agility as a measure. This static value is distinct from the traction metrics used for other vehicle types.NativeDB Introduced: v323Old name:  _GET_VEHICLE_MODEL_MOVE_RESISTANCEExamples:LuaJavaScriptC#-- This example prints the agility of the player's current boat.\n\n-- Retrieve the player ped.\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the vehicle the player is currently in.\nlocal vehicle = GetVehiclePedIsIn(playerPed, false)\n\n-- Retrieve the model hash of the boat.\nlocal boatHash = GetEntityModel(vehicle)\n\n-- If the vehicle does not exist or is not a boat, end the execution of the code here.\nif not DoesEntityExist(vehicle) or not IsThisModelABoat(boatHash) then \n    return \nend\n\n-- Retrieve the agility of the boat.\nlocal agility = GetBoatVehicleModelAgility(boatHash)\n\n-- Print the agility of the boat.\nprint(\"Boat Agility: \" .. agility)",
+  "codeBlocks": [
+    "// GetBoatVehicleModelAgility\nfloat GET_BOAT_VEHICLE_MODEL_AGILITY(Hash modelHash);",
+    "NativeDB Introduced: v323",
+    "-- This example prints the agility of the player's current boat.\n\n-- Retrieve the player ped.\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the vehicle the player is currently in.\nlocal vehicle = GetVehiclePedIsIn(playerPed, false)\n\n-- Retrieve the model hash of the boat.\nlocal boatHash = GetEntityModel(vehicle)\n\n-- If the vehicle does not exist or is not a boat, end the execution of the code here.\nif not DoesEntityExist(vehicle) or not IsThisModelABoat(boatHash) then \n    return \nend\n\n-- Retrieve the agility of the boat.\nlocal agility = GetBoatVehicleModelAgility(boatHash)\n\n-- Print the agility of the boat."
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/GetBoatVehicleModelAgility.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

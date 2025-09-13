@@ -1,0 +1,22 @@
+{
+  "title": "SET_MODEL_AS_NO_LONGER_NEEDED",
+  "breadcrumbs": [
+    "Native Reference",
+    "STREAMINGAPI",
+    "SET_MODEL_AS_NO_LONGER_NEEDED"
+  ],
+  "content": "0xE532F5D78798DAAB0xAE0F069E// SetModelAsNoLongerNeeded\nvoid SET_MODEL_AS_NO_LONGER_NEEDED(Hash model);Parameters:model: The model to release ownership of.Releases the script ownership assigned by REQUEST_MODEL. This command should be used when done using a specific model hash in script.",
+  "codeBlocks": [
+    "// SetModelAsNoLongerNeeded\nvoid SET_MODEL_AS_NO_LONGER_NEEDED(Hash model);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/STREAMING/SetModelAsNoLongerNeeded.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

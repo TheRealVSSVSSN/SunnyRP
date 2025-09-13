@@ -1,0 +1,24 @@
+{
+  "title": "SET_SCALEFORM_MOVIE_TO_USE_LARGE_RT",
+  "breadcrumbs": [
+    "Native Reference",
+    "GRAPHICSAPI",
+    "SET_SCALEFORM_MOVIE_TO_USE_LARGE_RT"
+  ],
+  "content": "0x32F34FF7F617643B// SetScaleformMovieToUseLargeRt\nvoid SET_SCALEFORM_MOVIE_TO_USE_LARGE_RT(int scaleformMovieId, BOOL useLargeRT);Parameters:scaleformMovieId: The handle of the Scaleform to be used.useLargeRT: A boolean switch to enable/disable the use of the large rendertarget.NativeDB Introduced: v573Configures a Scaleform movie to render to a large render target (1280x720), which is useful for ensuring higher quality and clarity in certain display scenarios. Such as displaying the name of an organization (CEO Office) in a visually impactful way for example.",
+  "codeBlocks": [
+    "// SetScaleformMovieToUseLargeRt\nvoid SET_SCALEFORM_MOVIE_TO_USE_LARGE_RT(int scaleformMovieId, BOOL useLargeRT);",
+    "NativeDB Introduced: v573",
+    "-- Example\nSetScaleformMovieToUseLargeRt(0, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/SetScaleformMovieToUseLargeRt.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

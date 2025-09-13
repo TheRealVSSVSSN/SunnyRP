@@ -1,0 +1,24 @@
+{
+  "title": "SUPPRESS_CRIME_THIS_FRAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "PLAYERAPI",
+    "SUPPRESS_CRIME_THIS_FRAME"
+  ],
+  "content": "0x9A987297ED8BD8380x59B5C2A2// SuppressCrimeThisFrame\nvoid SUPPRESS_CRIME_THIS_FRAME(Player player, int crimeType);Parameters:player: The player we are suppressing the crime for.crimeType: The crime to suppress, see REPORT_CRIME for available types.Suppresses a crime for a given player for this frame only.Note: This native needs to be executed inside a thread if a crime is meant to be suppressed for a given amount of time.Old name:  _SWITCH_CRIME_TYPE",
+  "codeBlocks": [
+    "// SuppressCrimeThisFrame\nvoid SUPPRESS_CRIME_THIS_FRAME(Player player, int crimeType);",
+    "-- Example\nSuppressCrimeThisFrame(PlayerId(), 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PLAYER/SuppressCrimeThisFrame.md",
+    "https://docs.fivem.net/natives/?_0xE9B09589827545E7",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

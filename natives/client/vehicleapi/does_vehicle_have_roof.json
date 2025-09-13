@@ -1,0 +1,24 @@
+{
+  "title": "DOES_VEHICLE_HAVE_ROOF",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "DOES_VEHICLE_HAVE_ROOF"
+  ],
+  "content": "0x8AC862B0B32C5B800xDB817403// DoesVehicleHaveRoof\nBOOL DOES_VEHICLE_HAVE_ROOF(Vehicle vehicle);Parameters:vehicle: The vehicle to check for a roof presence.Returns: Returns true if the vehicle has a roof, false otherwise.Determines whether a specific vehicle is equipped with a roof.NativeDB Introduced: v323Examples:LuaJavaScriptC#local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\nif DoesVehicleHaveRoof(vehicle) then\n    print(\"This vehicle has a roof.\")\nelse\n    print(\"This vehicle does not have a roof.\")\nend",
+  "codeBlocks": [
+    "// DoesVehicleHaveRoof\nBOOL DOES_VEHICLE_HAVE_ROOF(Vehicle vehicle);",
+    "NativeDB Introduced: v323",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\nif DoesVehicleHaveRoof(vehicle) then\n    print(\"This vehicle has a roof.\")\nelse\n    print(\"This vehicle does not have a roof.\")\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/DoesVehicleHaveRoof.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

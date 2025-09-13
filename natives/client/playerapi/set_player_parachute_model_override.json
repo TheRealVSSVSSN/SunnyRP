@@ -1,0 +1,23 @@
+{
+  "title": "SET_PLAYER_PARACHUTE_MODEL_OVERRIDE",
+  "breadcrumbs": [
+    "Native Reference",
+    "PLAYERAPI",
+    "SET_PLAYER_PARACHUTE_MODEL_OVERRIDE"
+  ],
+  "content": "0x977DB4641F6FC3DB0x5D382498// SetPlayerParachuteModelOverride\nvoid SET_PLAYER_PARACHUTE_MODEL_OVERRIDE(Player player, Hash model);example:  \nPLAYER::SET_PLAYER_PARACHUTE_MODEL_OVERRIDE(PLAYER::PLAYER_ID(), 0x73268708);",
+  "codeBlocks": [
+    "// SetPlayerParachuteModelOverride\nvoid SET_PLAYER_PARACHUTE_MODEL_OVERRIDE(Player player, Hash model);",
+    "example:  \nPLAYER::SET_PLAYER_PARACHUTE_MODEL_OVERRIDE(PLAYER::PLAYER_ID(), 0x73268708);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PLAYER/SetPlayerParachuteModelOverride.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "GET_VEHICLE_FLIGHT_NOZZLE_POSITION",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "GET_VEHICLE_FLIGHT_NOZZLE_POSITION"
+  ],
+  "content": "0xDA62027C8BDB326E0xAD40AD55// GetVehicleFlightNozzlePosition\nfloat GET_VEHICLE_FLIGHT_NOZZLE_POSITION(Vehicle aircraft);Parameters:aircraft: The vehicle to check the hover mode on.Returns: A float indicating the percentage of the hover mode. 1.0 = in VTOL mode, 0.0 = in normal flying mode.Old name:  _GET_PLANE_HOVER_MODE_PERCENTAGEOld name:  _GET_VEHICLE_HOVER_MODE_PERCENTAGEOld name:  _GET_PLANE_VTOL_DIRECTIONExamples:LuaJavaScriptC#local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n\nif GetVehicleFlightNozzlePosition(vehicle) == 0.0 then\n    print(\"Flying normally!\")\nelseif GetVehicleFlightNozzlePosition(vehicle) == 1.0 then\n    print(\"Flying in VTOL mode!\")\nelse\n    print(\"Currently switching hover mode!\")\nend",
+  "codeBlocks": [
+    "// GetVehicleFlightNozzlePosition\nfloat GET_VEHICLE_FLIGHT_NOZZLE_POSITION(Vehicle aircraft);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n\nif GetVehicleFlightNozzlePosition(vehicle) == 0.0 then\n    print(\"Flying normally!\")\nelseif GetVehicleFlightNozzlePosition(vehicle) == 1.0 then\n    print(\"Flying in VTOL mode!\")\nelse\n    print(\"Currently switching hover mode!\")\nend\n\n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/GetVehicleFlightNozzlePosition.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

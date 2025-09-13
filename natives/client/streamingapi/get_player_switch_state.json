@@ -1,0 +1,23 @@
+{
+  "title": "GET_PLAYER_SWITCH_STATE",
+  "breadcrumbs": [
+    "Native Reference",
+    "STREAMINGAPI",
+    "GET_PLAYER_SWITCH_STATE"
+  ],
+  "content": "0x470555300D10B2A50x39A0E1F2// GetPlayerSwitchState\nint GET_PLAYER_SWITCH_STATE();Returns: Returns 5 if the player is in the air (in a state of switch).Returns 12 if the player is either not in the air or if the switch is completed.Examples:LuaJavaScriptC#local stateSwitch = GetPlayerSwitchState()\nif stateSwitch == 5 then\n    -- Player is in the air\n    elseif stateSwitch == 12 then\n    -- Player is not in the air or switch is completed\nend",
+  "codeBlocks": [
+    "// GetPlayerSwitchState\nint GET_PLAYER_SWITCH_STATE();",
+    "local stateSwitch = GetPlayerSwitchState()\nif stateSwitch == 5 then\n    -- Player is in the air\n    elseif stateSwitch == 12 then\n    -- Player is not in the air or switch is completed\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/STREAMING/GetPlayerSwitchState.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

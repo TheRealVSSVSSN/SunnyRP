@@ -1,0 +1,24 @@
+{
+  "title": "_DRAW_SPHERE",
+  "breadcrumbs": [
+    "Native Reference",
+    "GRAPHICSAPI",
+    "_DRAW_SPHERE"
+  ],
+  "content": "0x799017F9E3B10112// DrawSphere\nvoid _DRAW_SPHERE(float x, float y, float z, float radius, int r, int g, int b, float opacity);Parameters:x: X coordinate of the spherey: Y coordinate of the spherez: Z coordinate of the sphereradius: Size of the sphere, 1.0 = 1 meterr: Color red 0-255g: Color green 0-255b: Color blue 0-255opacity: Opacity from 0.0-1.0Draws a 3D sphere, typically seen in the GTA:O freemode event \"Penned In\".Example image:DrawSphere(35.45, 172.66, 126.22, 1.0, 0, 0, 255, 0.2)",
+  "codeBlocks": [
+    "// DrawSphere\nvoid _DRAW_SPHERE(float x, float y, float z, float radius, int r, int g, int b, float opacity);",
+    "DrawSphere(35.45, 172.66, 126.22, 1.0, 0, 0, 255, 0.2)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/DrawSphere.md",
+    "https://imgur.com/nCbtS4H",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

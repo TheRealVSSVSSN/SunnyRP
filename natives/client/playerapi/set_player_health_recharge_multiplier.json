@@ -1,0 +1,26 @@
+{
+  "title": "SET_PLAYER_HEALTH_RECHARGE_MULTIPLIER",
+  "breadcrumbs": [
+    "Native Reference",
+    "PLAYERAPI",
+    "SET_PLAYER_HEALTH_RECHARGE_MULTIPLIER"
+  ],
+  "content": "0x5DB660B38DD98A310x45514731// SetPlayerHealthRechargeMultiplier\nvoid SET_PLAYER_HEALTH_RECHARGE_MULTIPLIER(Player player, float regenRate);Parameters:player: The local player ID, see PLAYER_ID.regenRate: The recharge multiplier, this value needs to be a positive float value to work.This multiplier is reset to 1.0 every time the player ped is changed, often times via SET_PLAYER_MODEL or CHANGE_PLAYER_PED.Examples:Lua-- To disable the health recharge completely:\nSetPlayerHealthRechargeMultiplier(PlayerId(), 0.0)\n\n-- To reset it back to the normal recharge speed:\nSetPlayerHealthRechargeMultiplier(PlayerId(), 1.0)",
+  "codeBlocks": [
+    "// SetPlayerHealthRechargeMultiplier\nvoid SET_PLAYER_HEALTH_RECHARGE_MULTIPLIER(Player player, float regenRate);",
+    "-- To disable the health recharge completely:\nSetPlayerHealthRechargeMultiplier(PlayerId(), 0.0)\n\n-- To reset it back to the normal recharge speed:\nSetPlayerHealthRechargeMultiplier(PlayerId(), 1.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PLAYER/SetPlayerHealthRechargeMultiplier.md",
+    "https://docs.fivem.net/natives/?_0x4F8644AF03D0E0D6",
+    "https://docs.fivem.net/natives/?_0x00A1CADD00108836",
+    "https://docs.fivem.net/natives/?_0x048189FAC643DEEE",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

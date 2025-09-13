@@ -1,0 +1,24 @@
+{
+  "title": "CREATE_CHECKPOINT",
+  "breadcrumbs": [
+    "Native Reference",
+    "GRAPHICSAPI",
+    "CREATE_CHECKPOINT"
+  ],
+  "content": "0x0134F0835AB6BFCB0xF541B690// CreateCheckpoint\nint CREATE_CHECKPOINT(int type, float posX1, float posY1, float posZ1, float posX2, float posY2, float posZ2, float diameter, int red, int green, int blue, int alpha, int reserved);Creates a checkpoint. Returns the handle of the checkpoint.  \n20/03/17 : Attention, checkpoints are already handled by the game itself, so you must not loop it like markers.\nParameters:  \n* type - The type of checkpoint to create. See below for a list of checkpoint types.  \n* pos1 - The position of the checkpoint.  \n* pos2 - The position of the next checkpoint to point to.  \n* diameter - The diameter of the checkpoint.\n* color - The color of the checkpoint.  \n* reserved - Special parameter, see below for details. Usually set to 0 in the scripts.  \nCheckpoint types (prior to game build 2189):  \n0-4---------Cylinder: 1 arrow, 2 arrow, 3 arrows, CycleArrow, Checker  \n5-9---------Cylinder: 1 arrow, 2 arrow, 3 arrows, CycleArrow, Checker  \n10-14-------Ring: 1 arrow, 2 arrow, 3 arrows, CycleArrow, Checker  \n15-19-------1 arrow, 2 arrow, 3 arrows, CycleArrow, Checker        \n20-24-------Cylinder: 1 arrow, 2 arrow, 3 arrows, CycleArrow, Checker   \n25-29-------Cylinder: 1 arrow, 2 arrow, 3 arrows, CycleArrow, Checker      \n30-34-------Cylinder: 1 arrow, 2 arrow, 3 arrows, CycleArrow, Checker   \n35-38-------Ring: Airplane Up, Left, Right, UpsideDown  \n39----------?  \n40----------Ring: just a ring  \n41----------?  \n42-44-------Cylinder w/ number (uses 'reserved' parameter)  \n45-47-------Cylinder no arrow or number  \nIf using type 42-44, reserved sets number / number and shape to display  \n0-99------------Just numbers (0-99)  \n100-109-----------------Arrow (0-9)  \n110-119------------Two arrows (0-9)  \n120-129----------Three arrows (0-9)  \n130-139----------------Circle (0-9)  \n140-149------------CycleArrow (0-9)  \n150-159----------------Circle (0-9)  \n160-169----Circle  w/ pointer (0-9)  \n170-179-------Perforated ring (0-9)  \n180-189----------------Sphere (0-9)  \nCheckpoint Types as of game build 2189",
+  "codeBlocks": [
+    "// CreateCheckpoint\nint CREATE_CHECKPOINT(int type, float posX1, float posY1, float posZ1, float posX2, float posY2, float posZ2, float diameter, int red, int green, int blue, int alpha, int reserved);",
+    "Creates a checkpoint. Returns the handle of the checkpoint.  \n20/03/17 : Attention, checkpoints are already handled by the game itself, so you must not loop it like markers.\nParameters:  \n* type - The type of checkpoint to create. See below for a list of checkpoint types.  \n* pos1 - The position of the checkpoint.  \n* pos2 - The position of the next checkpoint to point to.  \n* diameter - The diameter of the checkpoint.\n* color - The color of the checkpoint.  \n* reserved - Special parameter, see below for details. Usually set to 0 in the scripts.  \nCheckpoint types (prior to game build 2189):  \n0-4---------Cylinder: 1 arrow, 2 arrow, 3 arrows, CycleArrow, Checker  \n5-9---------Cylinder: 1 arrow, 2 arrow, 3 arrows, CycleArrow, Checker  \n10-14-------Ring: 1 arrow, 2 arrow, 3 arrows, CycleArrow, Checker  \n15-19-------1 arrow, 2 arrow, 3 arrows, CycleArrow, Checker        \n20-24-------Cylinder: 1 arrow, 2 arrow, 3 arrows, CycleArrow, Checker   \n25-29-------Cylinder: 1 arrow, 2 arrow, 3 arrows, CycleArrow, Checker      \n30-34-------Cylinder: 1 arrow, 2 arrow, 3 arrows, CycleArrow, Checker   \n35-38-------Ring: Airplane Up, Left, Right, UpsideDown  \n39----------?  \n40----------Ring: just a ring  \n41----------?  \n42-44-------Cylinder w/ number (uses 'reserved' parameter)  \n45-47-------Cylinder no arrow or number  \nIf using type 42-44, reserved sets number / number and shape to display  \n0-99------------Just numbers (0-99)  \n100-109-----------------Arrow (0-9)  \n110-119------------Two arrows (0-9)  \n120-129----------Three arrows (0-9)  \n130-139----------------Circle (0-9)  \n140-149------------CycleArrow (0-9)  \n150-159----------------Circle (0-9)  \n160-169----Circle  w/ pointer (0-9)  \n170-179-------Perforated ring (0-9)  \n180-189----------------Sphere (0-9)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/CreateCheckpoint.md",
+    "https://docs.fivem.net/docs/game-references/checkpoints/",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

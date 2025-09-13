@@ -1,0 +1,24 @@
+{
+  "title": "NETWORK_CLAN_GET_MEMBERSHIP",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORKAPI",
+    "NETWORK_CLAN_GET_MEMBERSHIP"
+  ],
+  "content": "0xC8BC2011F67B34110xCDC4A590// NetworkClanGetMembership\nBOOL NETWORK_CLAN_GET_MEMBERSHIP(int* networkHandle, int* clanMembership, int membershipIndex);Parameters:networkHandle: A player network handle.clanMembership: Output buffer for the membership data. Also known as \"desc\".membershipIndex: If the player has multiple crews/memberships, use [0-9], or -1 to get the active crew/membership.Returns: Returns true on success, false otherwise.Retrieves a membership for a player, from the cache (i.e. downloaded via NETWORK_CLAN_DOWNLOAD_MEMBERSHIP).Test C++ code:\nhttps://pastebin.com/CD8wni4C",
+  "codeBlocks": [
+    "// NetworkClanGetMembership\nBOOL NETWORK_CLAN_GET_MEMBERSHIP(int* networkHandle, int* clanMembership, int membershipIndex);",
+    "-- Example\nNetworkClanGetMembership(0, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/NETWORK/NetworkClanGetMembership.md",
+    "https://pastebin.com/CD8wni4C",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

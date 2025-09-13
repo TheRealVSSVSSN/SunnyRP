@@ -1,0 +1,24 @@
+{
+  "title": "0x51F30DB60626A20E",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "0x51F30DB60626A20E"
+  ],
+  "content": "0x51F30DB60626A20E// N_0x51f30db60626a20e\nBOOL 0x51F30DB60626A20E(Vehicle vehicle, float x, float y, float z, float rotX, float rotY, float rotZ, int p7, Any p8);Parameters:vehicle: the target vehiclex: vehicle locationy: vehicle locationz: vehicle locationrotX: some kind of vehicle rotation valuerotY: some kind of vehicle rotation valuerotZ: some kind of vehicle rotation valuep7: usually 2p8: usually 1Returns: A BOOL value, purpose unknown.Usex in decompiled scripts in combination with _GET_VEHICLE_SUSPENSION_BOUNDS.NativeDB Introduced: v1180// Example from fm_bj_race_controller.c\nif (!VEHICLE::_0x51F30DB60626A20E(uParam0->f_26, uParam0->f_12.f_3, uParam0->f_12, 2, 1) && !func_282(uParam0->f_6))\n{\n    VEHICLE::_GET_VEHICLE_SUSPENSION_BOUNDS(*uParam0, &vVar15, &uVar16);\n    VEHICLE::_GET_VEHICLE_SUSPENSION_BOUNDS(uParam0->f_26, &vVar17, &uVar18);\n    fVar19 = SYSTEM::VDIST2(0f, 0f, vVar15.z, 0f, 0f, vVar17.z);\n    uParam0->f_12.f_3.f_2 = (uParam0->f_12.f_3.f_2 + fVar19);\n    if (!VEHICLE::_0x51F30DB60626A20E(uParam0->f_26, uParam0->f_12.f_3, uParam0->f_12, 2, 1))\n    {\n        uParam0->f_12.f_3 = { uParam0->f_6 };\n        uParam0->f_12 = { uParam0->f_9 };\n    }\n}",
+  "codeBlocks": [
+    "// N_0x51f30db60626a20e\nBOOL 0x51F30DB60626A20E(Vehicle vehicle, float x, float y, float z, float rotX, float rotY, float rotZ, int p7, Any p8);",
+    "// Example from fm_bj_race_controller.c\nif (!VEHICLE::_0x51F30DB60626A20E(uParam0->f_26, uParam0->f_12.f_3, uParam0->f_12, 2, 1) && !func_282(uParam0->f_6))\n{\n    VEHICLE::_GET_VEHICLE_SUSPENSION_BOUNDS(*uParam0, &vVar15, &uVar16);\n    VEHICLE::_GET_VEHICLE_SUSPENSION_BOUNDS(uParam0->f_26, &vVar17, &uVar18);\n    fVar19 = SYSTEM::VDIST2(0f, 0f, vVar15.z, 0f, 0f, vVar17.z);\n    uParam0->f_12.f_3.f_2 = (uParam0->f_12.f_3.f_2 + fVar19);\n    if (!VEHICLE::_0x51F30DB60626A20E(uParam0->f_26, uParam0->f_12.f_3, uParam0->f_12, 2, 1))\n    {\n        uParam0->f_12.f_3 = { uParam0->f_6 };\n        uParam0->f_12 = { uParam0->f_9 };\n    }\n}"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/N_0x51f30db60626a20e.md",
+    "https://docs.fivem.net/natives/?_0xDF7E3EEB29642C38",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

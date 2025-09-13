@@ -1,0 +1,23 @@
+{
+  "title": "RESTORE_PLAYER_STAMINA",
+  "breadcrumbs": [
+    "Native Reference",
+    "PLAYERAPI",
+    "RESTORE_PLAYER_STAMINA"
+  ],
+  "content": "0xA352C1B864CAFD330x62A93608// RestorePlayerStamina\nvoid RESTORE_PLAYER_STAMINA(Player player, float percentage);Parameters:player: player to restore the stamina forpercentage: seems to be a percentage that ranges from 0.0 to 1.0 (1.0 being 100%)Adds a percentage to a players staminaExamples:LuaCitizen.CreateThread(function()\n  while true do\n    RestorePlayerStamina(PlayerId(), 0.3)\n    Citizen.Wait(15000) -- 15 seconds\n  end\nend)",
+  "codeBlocks": [
+    "// RestorePlayerStamina\nvoid RESTORE_PLAYER_STAMINA(Player player, float percentage);",
+    "Citizen.CreateThread(function()\n  while true do\n    RestorePlayerStamina(PlayerId(), 0.3)\n    Citizen.Wait(15000) -- 15 seconds\n  end\nend)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PLAYER/RestorePlayerStamina.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

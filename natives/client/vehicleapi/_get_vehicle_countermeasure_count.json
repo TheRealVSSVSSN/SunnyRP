@@ -1,0 +1,25 @@
+{
+  "title": "_GET_VEHICLE_COUNTERMEASURE_COUNT",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "_GET_VEHICLE_COUNTERMEASURE_COUNT"
+  ],
+  "content": "0xF846AA63DF56B804// GetVehicleCountermeasureCount\nint _GET_VEHICLE_COUNTERMEASURE_COUNT(Vehicle aircraft);Parameters:aircraft: The vehicle to get the amount of countermeasures from.Returns: An int indicating the amount of countermeasures remaining on that plane.Similar to _GET_AIRCRAFT_BOMB_COUNT, this gets the amount of countermeasures that are present on this vehicle.Use _SET_AIRCRAFT_COUNTERMEASURE_COUNT to set the current amount.Old name:  _GET_AIRCRAFT_COUNTERMEASURE_COUNTExamples:LuaC#local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\nprint(\"This plane has \" .. GetAircraftCountermeasureCount(vehicle) .. \" countermeasures left.\")",
+  "codeBlocks": [
+    "// GetVehicleCountermeasureCount\nint _GET_VEHICLE_COUNTERMEASURE_COUNT(Vehicle aircraft);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/GetVehicleCountermeasureCount.md",
+    "https://docs.fivem.net/natives/?_0xEA12BD130D7569A1",
+    "https://docs.fivem.net/natives/?_0x9BDA23BF666F0855",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

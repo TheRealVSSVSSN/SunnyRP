@@ -1,0 +1,23 @@
+{
+  "title": "_GET_VEHICLE_ROOF_LIVERY_COUNT",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "_GET_VEHICLE_ROOF_LIVERY_COUNT"
+  ],
+  "content": "0x5ECB40269053C0D4// GetVehicleRoofLiveryCount\nint _GET_VEHICLE_ROOF_LIVERY_COUNT(Vehicle vehicle);Parameters:vehicle: The vehicle handle.Returns: A number of available rooftop liveries for vehicle.Returns a number of available rooftop liveries, or -1 if vehicle has no rooftop liveries available.",
+  "codeBlocks": [
+    "// GetVehicleRoofLiveryCount\nint _GET_VEHICLE_ROOF_LIVERY_COUNT(Vehicle vehicle);",
+    "-- Example\n_GetVehicleRoofLiveryCount(GetVehiclePedIsIn(PlayerPedId(), false))"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/GetVehicleRoofLiveryCount.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

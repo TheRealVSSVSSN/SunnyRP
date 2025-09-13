@@ -1,0 +1,23 @@
+{
+  "title": "ARE_PLANE_CONTROL_PANELS_INTACT",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "ARE_PLANE_CONTROL_PANELS_INTACT"
+  ],
+  "content": "0xF78F94D60248C7370x3B51B348// ArePlaneControlPanelsIntact\nBOOL ARE_PLANE_CONTROL_PANELS_INTACT(Vehicle vehicle, BOOL checkForZeroHealth);Parameters:vehicle: The vehicle to check. This should be a plane.checkForZeroHealth: If set to true, the native also checks if the plane's health is zero, indicating it is completely destroyed. If false, only the state of the control panels is considered.Returns: Returns true if the plane's control panels are intact, and, depending on the checkForZeroHealth parameter, the plane is not completely destroyed. Returns false if the control panels are damaged or the plane is destroyed (when checkForZeroHealth is true).Queries whether the control panels of a plane are intact. This native is used to determine the operational status of a plane's cockpit controls, which can affect the plane's flyability.Examples:LuaJavaScriptC#-- Retrieve the player ped\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the plane the player is currently in.\nlocal plane = GetVehiclePedIsIn(playerPed, false)\n\n-- If the player is not in a plane, return\nif (plane == 0) or (not IsThisModelAPlane(GetEntityModel(plane))) then return end\n\n-- Check if the plane's control panels are intact\nlocal controlPanelsIntact = ArePlaneControlPanelsIntact(plane, true)\n\nif (controlPanelsIntact) then\n    print(\"The plane's control panels are intact\")\nelse\n    print(\"The plane's control panels are damaged or the plane is destroyed\")\nend",
+  "codeBlocks": [
+    "// ArePlaneControlPanelsIntact\nBOOL ARE_PLANE_CONTROL_PANELS_INTACT(Vehicle vehicle, BOOL checkForZeroHealth);",
+    "-- Retrieve the player ped\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the plane the player is currently in.\nlocal plane = GetVehiclePedIsIn(playerPed, false)\n\n-- If the player is not in a plane, return\nif (plane == 0) or (not IsThisModelAPlane(GetEntityModel(plane))) then return end\n\n-- Check if the plane's control panels are intact\nlocal controlPanelsIntact = ArePlaneControlPanelsIntact(plane, true)\n\nif (controlPanelsIntact) then\n    print(\"The plane's control panels are intact\")\nelse\n    print(\"The plane's control panels are damaged or the plane is destroyed\")\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/ArePlaneControlPanelsIntact.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "SET_HELI_COMBAT_OFFSET",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "SET_HELI_COMBAT_OFFSET"
+  ],
+  "content": "0x0A3F820A9A9A9AC5// SetHeliCombatOffset\nvoid SET_HELI_COMBAT_OFFSET(Vehicle vehicle, float x, float y, float z);Parameters:vehicle: Helicopter for which the combat offset is being set.x: Offset along the X-axis (left/right) relative to the helicopter's current position and orientationy: Offset along the Y-axis (forward/backward) relative to the helicopter's current position and orientationz: Offset along the Z-axis (up/down) relative to the helicopter's current position and orientation.Set a specific offset for helis chasing target in combatNativeDB Introduced: v1180",
+  "codeBlocks": [
+    "// SetHeliCombatOffset\nvoid SET_HELI_COMBAT_OFFSET(Vehicle vehicle, float x, float y, float z);",
+    "NativeDB Introduced: v1180"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetHeliCombatOffset.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

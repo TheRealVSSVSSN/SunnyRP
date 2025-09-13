@@ -1,0 +1,23 @@
+{
+  "title": "_SET_BINK_MOVIE_TIME",
+  "breadcrumbs": [
+    "Native Reference",
+    "GRAPHICSAPI",
+    "_SET_BINK_MOVIE_TIME"
+  ],
+  "content": "0x0CB6B3446855B57A// SetBinkMovieTime\nvoid _SET_BINK_MOVIE_TIME(int binkMovie, float progress);Parameters:binkMovie: The movie that is being played.progress: As a percentage (0.0 - 100.0).Seeks a BINK movie to a specified position.Old name:  _SET_BINK_MOVIE_PROGRESSExamples:Lua-- Movie drawn prior\nSetBinkMovieTime(1, 50.0) -- Seeks to 50% in.",
+  "codeBlocks": [
+    "// SetBinkMovieTime\nvoid _SET_BINK_MOVIE_TIME(int binkMovie, float progress);",
+    "-- Movie drawn prior\nSetBinkMovieTime(1, 50.0) -- Seeks to 50% in."
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/SetBinkMovieTime.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

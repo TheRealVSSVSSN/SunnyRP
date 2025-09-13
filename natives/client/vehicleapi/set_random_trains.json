@@ -1,0 +1,25 @@
+{
+  "title": "SET_RANDOM_TRAINS",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "SET_RANDOM_TRAINS"
+  ],
+  "content": "0x80D9F74197EA47D90xD461CA7F// SetRandomTrains\nvoid SET_RANDOM_TRAINS(BOOL toggle);Parameters:toggle: Whether to enable random trains.Enables spawning random trains on the preset tracks.Requires SWITCH_TRAIN_TRACK and SET_TRAIN_TRACK_SPAWN_FREQUENCY to be set.Examples:LuaSwitchTrainTrack(0, true) -- Setting the Main train track(s) around LS and towards Sandy Shores active\nSwitchTrainTrack(3, true) -- Setting the Metro tracks active\nSetTrainTrackSpawnFrequency(0, 120000) -- The Train spawn frequency set for the game engine\nSetTrainTrackSpawnFrequency(3, 120000) -- The Metro spawn frequency set for the game engine\nSetRandomTrains(true) -- Telling the game we want to use randomly spawned trains",
+  "codeBlocks": [
+    "// SetRandomTrains\nvoid SET_RANDOM_TRAINS(BOOL toggle);",
+    "SwitchTrainTrack(0, true) -- Setting the Main train track(s) around LS and towards Sandy Shores active\nSwitchTrainTrack(3, true) -- Setting the Metro tracks active\nSetTrainTrackSpawnFrequency(0, 120000) -- The Train spawn frequency set for the game engine\nSetTrainTrackSpawnFrequency(3, 120000) -- The Metro spawn frequency set for the game engine\nSetRandomTrains(true) -- Telling the game we want to use randomly spawned trains"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetRandomTrains.md",
+    "https://docs.fivem.net/natives/?_0xFD813BB7DB977F20",
+    "https://docs.fivem.net/natives/?_0x21973BBF8D17EDFA",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

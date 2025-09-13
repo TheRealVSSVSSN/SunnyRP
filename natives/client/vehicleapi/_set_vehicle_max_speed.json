@@ -1,0 +1,23 @@
+{
+  "title": "_SET_VEHICLE_MAX_SPEED",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "_SET_VEHICLE_MAX_SPEED"
+  ],
+  "content": "0xBAA045B4E42F3C06// SetVehicleMaxSpeed\nvoid _SET_VEHICLE_MAX_SPEED(Vehicle vehicle, float speed);Parameters:vehicle: The vehicle handle.speed: The speed limit in meters per second.To reset the max speed, set the speed value to 0.0 or lower.",
+  "codeBlocks": [
+    "// SetVehicleMaxSpeed\nvoid _SET_VEHICLE_MAX_SPEED(Vehicle vehicle, float speed);",
+    "-- Example\n_SetVehicleMaxSpeed(GetVehiclePedIsIn(PlayerPedId(), false), 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetVehicleMaxSpeed.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

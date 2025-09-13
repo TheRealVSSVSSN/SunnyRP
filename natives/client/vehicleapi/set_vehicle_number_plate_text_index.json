@@ -1,0 +1,24 @@
+{
+  "title": "SET_VEHICLE_NUMBER_PLATE_TEXT_INDEX",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "SET_VEHICLE_NUMBER_PLATE_TEXT_INDEX"
+  ],
+  "content": "0x9088EB5A43FFB0A10xA1A1890E// SetVehicleNumberPlateTextIndex\nvoid SET_VEHICLE_NUMBER_PLATE_TEXT_INDEX(Vehicle vehicle, int plateIndex);Parameters:vehicle: The vehicle handle.plateIndex: The style to use for the plate, see plate styles.Please refer to GET_VEHICLE_NUMBER_PLATE_TEXT_INDEX for plate indicies.",
+  "codeBlocks": [
+    "// SetVehicleNumberPlateTextIndex\nvoid SET_VEHICLE_NUMBER_PLATE_TEXT_INDEX(Vehicle vehicle, int plateIndex);",
+    "-- Example\nSetVehicleNumberPlateTextIndex(GetVehiclePedIsIn(PlayerPedId(), false), 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetVehicleNumberPlateTextIndex.md",
+    "https://docs.fivem.net/natives/?_0xF11BC2DD9A3E7195",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

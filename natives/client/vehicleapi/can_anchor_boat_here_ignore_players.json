@@ -1,0 +1,24 @@
+{
+  "title": "CAN_ANCHOR_BOAT_HERE_IGNORE_PLAYERS",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "CAN_ANCHOR_BOAT_HERE_IGNORE_PLAYERS"
+  ],
+  "content": "0x24F4121D07579880// CanAnchorBoatHereIgnorePlayers\nBOOL CAN_ANCHOR_BOAT_HERE_IGNORE_PLAYERS(Vehicle boat);Parameters:boat: The boat to check.Returns: Returns true if the boat can be safely anchored at its current position (ignoring players on the boat), false otherwise.Checks if a boat can be anchored at its present position, ignoring any players standing on the boat.NativeDB Introduced: v678Old name:  _CAN_BOAT_BE_ANCHORED_2Old name:  _CAN_ANCHOR_BOAT_HERE_2Examples:LuaJavaScriptC#local boat = GetVehiclePedIsIn(PlayerPedId(), false)\nif not boat or not IsThisModelABoat(GetEntityModel(boat)) then return end\n\nif CanAnchorBoatHereIgnorePlayers(boat) then\n    print(\"It's safe to anchor the boat here, ignoring players on the boat\")\nelse\n    print(\"It's not safe to anchor the boat at this location, even ignoring players\")\nend",
+  "codeBlocks": [
+    "// CanAnchorBoatHereIgnorePlayers\nBOOL CAN_ANCHOR_BOAT_HERE_IGNORE_PLAYERS(Vehicle boat);",
+    "NativeDB Introduced: v678",
+    "local boat = GetVehiclePedIsIn(PlayerPedId(), false)\nif not boat or not IsThisModelABoat(GetEntityModel(boat)) then return end\n\nif CanAnchorBoatHereIgnorePlayers(boat) then\n    print(\"It's safe to anchor the boat here, ignoring players on the boat\")\nelse\n    print(\"It's not safe to anchor the boat at this location, even ignoring players\")\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/CanAnchorBoatHereIgnorePlayers.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

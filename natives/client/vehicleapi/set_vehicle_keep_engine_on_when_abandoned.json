@@ -1,0 +1,23 @@
+{
+  "title": "SET_VEHICLE_KEEP_ENGINE_ON_WHEN_ABANDONED",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "SET_VEHICLE_KEEP_ENGINE_ON_WHEN_ABANDONED"
+  ],
+  "content": "0xB8FBC8B1330CA9B40x51E0064F// SetVehicleKeepEngineOnWhenAbandoned\nvoid SET_VEHICLE_KEEP_ENGINE_ON_WHEN_ABANDONED(Vehicle vehicle, BOOL toggle);Parameters:vehicle: The vehicle handle.toggle: true to keep the engine on, otherwise false.Calling this native will keep a vehicle's engine running after exiting.Old name:  _SET_VEHICLE_JET_ENGINE_ON",
+  "codeBlocks": [
+    "// SetVehicleKeepEngineOnWhenAbandoned\nvoid SET_VEHICLE_KEEP_ENGINE_ON_WHEN_ABANDONED(Vehicle vehicle, BOOL toggle);",
+    "-- Example\nSetVehicleKeepEngineOnWhenAbandoned(GetVehiclePedIsIn(PlayerPedId(), false), false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetVehicleKeepEngineOnWhenAbandoned.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

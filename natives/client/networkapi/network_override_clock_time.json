@@ -1,0 +1,23 @@
+{
+  "title": "NETWORK_OVERRIDE_CLOCK_TIME",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORKAPI",
+    "NETWORK_OVERRIDE_CLOCK_TIME"
+  ],
+  "content": "0xE679E3E06E3638920xC077BCD6// NetworkOverrideClockTime\nvoid NETWORK_OVERRIDE_CLOCK_TIME(int hours, int minutes, int seconds);Parameters:hours: The hour to set (0-23).minutes: The minute to set (0-59).seconds: The second to set (0-59).Overrides the game clock time for the local player, allowing for manipulation of the in-game time. This native is effective in both multiplayer and singleplayer modes.Note: Passing wrong data (e.g. hours above 23) will cause the game to crash.",
+  "codeBlocks": [
+    "// NetworkOverrideClockTime\nvoid NETWORK_OVERRIDE_CLOCK_TIME(int hours, int minutes, int seconds);",
+    "-- Example\nNetworkOverrideClockTime(0, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/NETWORK/NetworkOverrideClockTime.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

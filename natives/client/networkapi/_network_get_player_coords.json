@@ -1,0 +1,23 @@
+{
+  "title": "_NETWORK_GET_PLAYER_COORDS",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORKAPI",
+    "_NETWORK_GET_PLAYER_COORDS"
+  ],
+  "content": "0x125E6D638B8605D4// NetworkGetPlayerCoords\nVector3 _NETWORK_GET_PLAYER_COORDS(Player player);\nParameters:player: The player id, MUST be another player.Returns: A Vector3 containing the coordinates of another player.Returns the coordinates of another player.Does not work if you enter your own player id as p0 (will return (0.0, 0.0, 0.0) in that case).",
+  "codeBlocks": [
+    "// NetworkGetPlayerCoords\nVector3 _NETWORK_GET_PLAYER_COORDS(Player player);",
+    "-- Example\n_NetworkGetPlayerCoords(PlayerId())"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/NETWORK/NetworkGetPlayerCoords.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "GET_HELI_TAIL_ROTOR_HEALTH",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "GET_HELI_TAIL_ROTOR_HEALTH"
+  ],
+  "content": "0xAE8CE82A4219AC8C0xA41BC13D// GetHeliTailRotorHealth\nfloat GET_HELI_TAIL_ROTOR_HEALTH(Vehicle heli);Parameters:heli: Helicopter for which you want to get the rotor health.Returns: Returns the health of the rear rotor of the helicopter, not the tail rotor as the name suggests. The maximum value is 1000. At 0, the tail rotor will stall.NativeDB Introduced: v323Old name:  _GET_HELI_TAIL_ROTOR_HEALTH",
+  "codeBlocks": [
+    "// GetHeliTailRotorHealth\nfloat GET_HELI_TAIL_ROTOR_HEALTH(Vehicle heli);",
+    "NativeDB Introduced: v323"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/GetHeliTailRotorHealth.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

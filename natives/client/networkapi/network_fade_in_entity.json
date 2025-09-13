@@ -1,0 +1,24 @@
+{
+  "title": "NETWORK_FADE_IN_ENTITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORKAPI",
+    "NETWORK_FADE_IN_ENTITY"
+  ],
+  "content": "0x1F4ED342ACEFE62D0x9B9FCD02// NetworkFadeInEntity\nvoid NETWORK_FADE_IN_ENTITY(Entity entity, BOOL bNetwork);Parameters:entity: The entity to fade inbNetwork: When set to true the fade in will be networked.Fade the given entity back in, usually used after the entity has been faded out with NETWORK_FADE_OUT_ENTITYWhen used on a entity which isn't invisible or faded out then the native will still work, it will just instanly make the ped invisible before fading in.Additional Parameters:flash: If set to true the entity will flash while fading in.Examples:Lualocal playerPed = PlayerPedId()\n\n-- fade out the player while flashing them\nNetworkFadeOutEntity(playerPed, true, false)\nwhile NetworkIsEntityFading(playerPed) do\n  Wait(0)\nend\n\n--- Do something like a teleport, or warp into a vehicle\n\n-- while generally frowned upon when you can use natives, this declaration has\n-- a missing parameter, which doesn't work without manually invoking.\nCitizen.InvokeNative(0x1F4ED342ACEFE62D, playerPed, false, true)\nwhile NetworkIsEntityFading(playerPed) do\n  Wait(0)\nend",
+  "codeBlocks": [
+    "// NetworkFadeInEntity\nvoid NETWORK_FADE_IN_ENTITY(Entity entity, BOOL bNetwork);",
+    "local playerPed = PlayerPedId()\n\n-- fade out the player while flashing them\nNetworkFadeOutEntity(playerPed, true, false)\nwhile NetworkIsEntityFading(playerPed) do\n  Wait(0)\nend\n\n--- Do something like a teleport, or warp into a vehicle\n\n-- while generally frowned upon when you can use natives, this declaration has\n-- a missing parameter, which doesn't work without manually invoking.\nCitizen.InvokeNative(0x1F4ED342ACEFE62D, playerPed, false, true)\nwhile NetworkIsEntityFading(playerPed) do\n  Wait(0)\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/NETWORK/NetworkFadeInEntity.md",
+    "https://docs.fivem.net/natives/?_0xDE564951F95E09ED",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

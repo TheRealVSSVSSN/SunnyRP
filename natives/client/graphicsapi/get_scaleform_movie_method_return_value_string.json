@@ -1,0 +1,23 @@
+{
+  "title": "GET_SCALEFORM_MOVIE_METHOD_RETURN_VALUE_STRING",
+  "breadcrumbs": [
+    "Native Reference",
+    "GRAPHICSAPI",
+    "GET_SCALEFORM_MOVIE_METHOD_RETURN_VALUE_STRING"
+  ],
+  "content": "0xE1E258829A8852450x516862EB// GetScaleformMovieMethodReturnValueString\nchar* GET_SCALEFORM_MOVIE_METHOD_RETURN_VALUE_STRING(int method_return);Parameters:method_return: The return value of this native: EndScaleformMovieMethodReturnReturns: Returns a string in the same way GET_SCALEFORM_MOVIE_METHOD_RETURN_VALUE_INT returns an int.Used to get a return value from a scaleform function. Returns a string in the same way GET_SCALEFORM_MOVIE_METHOD_RETURN_VALUE_INT returns an int.Old name:  SITTING_TVOld name:  _GET_SCALEFORM_MOVIE_FUNCTION_RETURN_STRINGExamples:Lualocal a = RequestScaleformMovie(\"translate\") --scaleform gfx\nwhile not HasScaleformMovieLoaded(a) do\n    Citizen.Wait(0)\nend\nBeginScaleformMovieMethod(a,\"EnglishToChinese\") --call function\nScaleformMovieMethodAddParamPlayerNameString(\"Good\") --input\nlocal b = EndScaleformMovieMethodReturnValue()\nwhile true do\n    if IsScaleformMovieMethodReturnValueReady(b) then\n       local c = GetScaleformMovieMethodReturnValueString(b) --output\n       print(c)\n       break\n    end\n    Citizen.Wait(0)\nend",
+  "codeBlocks": [
+    "// GetScaleformMovieMethodReturnValueString\nchar* GET_SCALEFORM_MOVIE_METHOD_RETURN_VALUE_STRING(int method_return);",
+    "local a = RequestScaleformMovie(\"translate\") --scaleform gfx\nwhile not HasScaleformMovieLoaded(a) do\n    Citizen.Wait(0)\nend\nBeginScaleformMovieMethod(a,\"EnglishToChinese\") --call function\nScaleformMovieMethodAddParamPlayerNameString(\"Good\") --input\nlocal b = EndScaleformMovieMethodReturnValue()\nwhile true do\n    if IsScaleformMovieMethodReturnValueReady(b) then\n       local c = GetScaleformMovieMethodReturnValueString(b) --output\n       break\n    end\n    Citizen.Wait(0)\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/GetScaleformMovieMethodReturnValueString.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "REQUEST_MODEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "STREAMINGAPI",
+    "REQUEST_MODEL"
+  ],
+  "content": "0x963D27A58DF860AC0xFFF1B500// RequestModel\nvoid REQUEST_MODEL(Hash model);Parameters:model: The model to request.Request a model (archetype) to be loaded for use by the current script. Use SET_MODEL_AS_NO_LONGER_NEEDED when done using the model in script.Examples:Lualocal modelHash = `adder`\nRequestModel(modelHash)\nwhile not HasModelLoaded(modelHash) do\n  Wait(0)\nend\n\n-- omitted: creating a vehicle\n\n-- when done using the model\nSetModelAsNoLongerNeeded(modelHash)",
+  "codeBlocks": [
+    "// RequestModel\nvoid REQUEST_MODEL(Hash model);",
+    "local modelHash = `adder`\nRequestModel(modelHash)\nwhile not HasModelLoaded(modelHash) do\n  Wait(0)\nend\n\n-- omitted: creating a vehicle\n\n-- when done using the model\nSetModelAsNoLongerNeeded(modelHash)\n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/STREAMING/RequestModel.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}
