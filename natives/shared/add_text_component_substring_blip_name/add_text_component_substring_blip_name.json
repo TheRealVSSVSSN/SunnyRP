@@ -1,0 +1,13 @@
+{
+  "title": "ADD_TEXT_COMPONENT_SUBSTRING_BLIP_NAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "ADD_TEXT_COMPONENT_SUBSTRING_BLIP_NAME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ADD_TEXT_COMPONENT_SUBSTRING_BLIP_NAME\nAddTextComponentSubstringBlipName()"
+  ],
+  "urls": [],
+  "tags": []
+}

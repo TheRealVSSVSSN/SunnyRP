@@ -1,0 +1,13 @@
+{
+  "title": "GET_MOUNT",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_MOUNT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_MOUNT\nGetMount()"
+  ],
+  "urls": [],
+  "tags": []
+}

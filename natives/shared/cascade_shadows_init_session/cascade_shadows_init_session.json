@@ -1,0 +1,13 @@
+{
+  "title": "CASCADE_SHADOWS_INIT_SESSION",
+  "breadcrumbs": [
+    "Native Reference",
+    "CASCADE_SHADOWS_INIT_SESSION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CASCADE_SHADOWS_INIT_SESSION\nCascadeShadowsInitSession()"
+  ],
+  "urls": [],
+  "tags": []
+}

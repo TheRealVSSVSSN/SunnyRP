@@ -1,0 +1,13 @@
+{
+  "title": "GET_VEHICLE_DASHBOARD_FUEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_VEHICLE_DASHBOARD_FUEL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_DASHBOARD_FUEL\nGetVehicleDashboardFuel()"
+  ],
+  "urls": [],
+  "tags": []
+}

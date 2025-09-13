@@ -1,0 +1,13 @@
+{
+  "title": "_SEETHROUGH_SET_NOISE_AMOUNT_MAX",
+  "breadcrumbs": [
+    "Native Reference",
+    "_SEETHROUGH_SET_NOISE_AMOUNT_MAX"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SEETHROUGH_SET_NOISE_AMOUNT_MAX\n_SeethroughSetNoiseAmountMax()"
+  ],
+  "urls": [],
+  "tags": []
+}

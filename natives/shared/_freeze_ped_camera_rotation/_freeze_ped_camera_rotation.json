@@ -1,0 +1,13 @@
+{
+  "title": "_FREEZE_PED_CAMERA_ROTATION",
+  "breadcrumbs": [
+    "Native Reference",
+    "_FREEZE_PED_CAMERA_ROTATION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _FREEZE_PED_CAMERA_ROTATION\n_FreezePedCameraRotation()"
+  ],
+  "urls": [],
+  "tags": []
+}

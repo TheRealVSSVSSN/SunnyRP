@@ -1,0 +1,13 @@
+{
+  "title": "_SET_PED_CAN_PLAY_INJURED_ANIMS",
+  "breadcrumbs": [
+    "Native Reference",
+    "_SET_PED_CAN_PLAY_INJURED_ANIMS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_PED_CAN_PLAY_INJURED_ANIMS\n_SetPedCanPlayInjuredAnims()"
+  ],
+  "urls": [],
+  "tags": []
+}

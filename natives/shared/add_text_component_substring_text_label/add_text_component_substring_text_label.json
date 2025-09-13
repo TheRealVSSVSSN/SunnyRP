@@ -1,0 +1,13 @@
+{
+  "title": "ADD_TEXT_COMPONENT_SUBSTRING_TEXT_LABEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "ADD_TEXT_COMPONENT_SUBSTRING_TEXT_LABEL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ADD_TEXT_COMPONENT_SUBSTRING_TEXT_LABEL\nAddTextComponentSubstringTextLabel()"
+  ],
+  "urls": [],
+  "tags": []
+}

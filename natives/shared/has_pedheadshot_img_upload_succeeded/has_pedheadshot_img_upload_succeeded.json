@@ -1,0 +1,13 @@
+{
+  "title": "HAS_PEDHEADSHOT_IMG_UPLOAD_SUCCEEDED",
+  "breadcrumbs": [
+    "Native Reference",
+    "HAS_PEDHEADSHOT_IMG_UPLOAD_SUCCEEDED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for HAS_PEDHEADSHOT_IMG_UPLOAD_SUCCEEDED\nHasPedheadshotImgUploadSucceeded()"
+  ],
+  "urls": [],
+  "tags": []
+}

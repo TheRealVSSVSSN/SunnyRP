@@ -1,0 +1,13 @@
+{
+  "title": "GET_PED_TIME_OF_DEATH",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PED_TIME_OF_DEATH"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PED_TIME_OF_DEATH\nGetPedTimeOfDeath()"
+  ],
+  "urls": [],
+  "tags": []
+}

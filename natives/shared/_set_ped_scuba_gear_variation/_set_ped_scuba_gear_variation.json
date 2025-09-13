@@ -1,0 +1,13 @@
+{
+  "title": "_SET_PED_SCUBA_GEAR_VARIATION",
+  "breadcrumbs": [
+    "Native Reference",
+    "_SET_PED_SCUBA_GEAR_VARIATION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_PED_SCUBA_GEAR_VARIATION\n_SetPedScubaGearVariation()"
+  ],
+  "urls": [],
+  "tags": []
+}

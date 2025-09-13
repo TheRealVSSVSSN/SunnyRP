@@ -1,0 +1,13 @@
+{
+  "title": "GET_GLOBAL_PASSENGER_MASS_MULTIPLIER",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_GLOBAL_PASSENGER_MASS_MULTIPLIER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_GLOBAL_PASSENGER_MASS_MULTIPLIER\nGetGlobalPassengerMassMultiplier()"
+  ],
+  "urls": [],
+  "tags": []
+}

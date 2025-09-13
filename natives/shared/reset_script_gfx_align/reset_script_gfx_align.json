@@ -1,0 +1,13 @@
+{
+  "title": "RESET_SCRIPT_GFX_ALIGN",
+  "breadcrumbs": [
+    "Native Reference",
+    "RESET_SCRIPT_GFX_ALIGN"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for RESET_SCRIPT_GFX_ALIGN\nResetScriptGfxAlign()"
+  ],
+  "urls": [],
+  "tags": []
+}

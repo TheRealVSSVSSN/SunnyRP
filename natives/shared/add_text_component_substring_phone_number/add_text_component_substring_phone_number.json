@@ -1,0 +1,13 @@
+{
+  "title": "ADD_TEXT_COMPONENT_SUBSTRING_PHONE_NUMBER",
+  "breadcrumbs": [
+    "Native Reference",
+    "ADD_TEXT_COMPONENT_SUBSTRING_PHONE_NUMBER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ADD_TEXT_COMPONENT_SUBSTRING_PHONE_NUMBER\nAddTextComponentSubstringPhoneNumber()"
+  ],
+  "urls": [],
+  "tags": []
+}

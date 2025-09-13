@@ -1,0 +1,13 @@
+{
+  "title": "GOLF_TRAIL_SET_COLOUR",
+  "breadcrumbs": [
+    "Native Reference",
+    "GOLF_TRAIL_SET_COLOUR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GOLF_TRAIL_SET_COLOUR\nGolfTrailSetColour()"
+  ],
+  "urls": [],
+  "tags": []
+}

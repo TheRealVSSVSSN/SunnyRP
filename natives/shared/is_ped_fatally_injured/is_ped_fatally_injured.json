@@ -1,0 +1,13 @@
+{
+  "title": "IS_PED_FATALLY_INJURED",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_PED_FATALLY_INJURED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_PED_FATALLY_INJURED\nIsPedFatallyInjured()"
+  ],
+  "urls": [],
+  "tags": []
+}

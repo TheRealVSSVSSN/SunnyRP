@@ -1,0 +1,13 @@
+{
+  "title": "CASCADE_SHADOWS_SET_AIRCRAFT_MODE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CASCADE_SHADOWS_SET_AIRCRAFT_MODE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CASCADE_SHADOWS_SET_AIRCRAFT_MODE\nCascadeShadowsSetAircraftMode()"
+  ],
+  "urls": [],
+  "tags": []
+}

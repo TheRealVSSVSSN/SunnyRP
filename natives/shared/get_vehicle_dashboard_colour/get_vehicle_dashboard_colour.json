@@ -1,0 +1,13 @@
+{
+  "title": "GET_VEHICLE_DASHBOARD_COLOUR",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_VEHICLE_DASHBOARD_COLOUR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_DASHBOARD_COLOUR\nGetVehicleDashboardColour()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_GROUP_SIZE",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_GROUP_SIZE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_GROUP_SIZE\nGetGroupSize()"
+  ],
+  "urls": [],
+  "tags": []
+}

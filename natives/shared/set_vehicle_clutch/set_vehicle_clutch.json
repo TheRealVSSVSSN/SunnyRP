@@ -1,0 +1,13 @@
+{
+  "title": "SET_VEHICLE_CLUTCH",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_VEHICLE_CLUTCH"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_VEHICLE_CLUTCH\nSetVehicleClutch()"
+  ],
+  "urls": [],
+  "tags": []
+}

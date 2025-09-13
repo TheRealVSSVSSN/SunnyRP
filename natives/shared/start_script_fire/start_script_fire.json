@@ -1,0 +1,13 @@
+{
+  "title": "START_SCRIPT_FIRE",
+  "breadcrumbs": [
+    "Native Reference",
+    "START_SCRIPT_FIRE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for START_SCRIPT_FIRE\nStartScriptFire()"
+  ],
+  "urls": [],
+  "tags": []
+}

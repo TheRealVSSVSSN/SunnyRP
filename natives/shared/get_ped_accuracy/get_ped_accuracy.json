@@ -1,0 +1,13 @@
+{
+  "title": "GET_PED_ACCURACY",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PED_ACCURACY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PED_ACCURACY\nGetPedAccuracy()"
+  ],
+  "urls": [],
+  "tags": []
+}

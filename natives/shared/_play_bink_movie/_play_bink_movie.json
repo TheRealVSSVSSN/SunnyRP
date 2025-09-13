@@ -1,0 +1,13 @@
+{
+  "title": "_PLAY_BINK_MOVIE",
+  "breadcrumbs": [
+    "Native Reference",
+    "_PLAY_BINK_MOVIE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _PLAY_BINK_MOVIE\n_PlayBinkMovie()"
+  ],
+  "urls": [],
+  "tags": []
+}

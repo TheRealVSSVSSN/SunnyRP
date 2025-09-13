@@ -9,7 +9,7 @@
   "codeBlocks": [
     "// ClearPopscheduleOverrideVehicleModel\nvoid CLEAR_POPSCHEDULE_OVERRIDE_VEHICLE_MODEL(int scheduleId);",
     "Only used once in the decompiled scripts. Seems to be related to scripted vehicle generators.  \nModified example from \"am_imp_exp.c4\", line 6418:  \n/* popSchedules[0] = ZONE::GET_ZONE_POPSCHEDULE(ZONE::GET_ZONE_AT_COORDS(891.3, 807.9, 188.1));  \netc.  \n*/  \nSTREAMING::SET_MODEL_AS_NO_LONGER_NEEDED(vehicleHash);  \nZONE::CLEAR_POPSCHEDULE_OVERRIDE_VEHICLE_MODEL(popSchedules[index]);",
-    "-- Example usage for CLEAR_POPSCHEDULE_OVERRIDE_VEHICLE_MODEL\nClearPopscheduleOverrideVehicleModel(0)"
+    "-- Example usage for CLEAR_POPSCHEDULE_OVERRIDE_VEHICLE_MODEL\nClearPopscheduleOverrideVehicleModel(1)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

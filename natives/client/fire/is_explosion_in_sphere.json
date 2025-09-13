@@ -8,7 +8,7 @@
   "content": "0xAB0F816885B0E4830xD455A7F3// IsExplosionInSphere\nBOOL IS_EXPLOSION_IN_SPHERE(int explosionType, float x, float y, float z, float radius);Parameters:explosionType: See ADD_EXPLOSION.x: y: z: radius:",
   "codeBlocks": [
     "// IsExplosionInSphere\nBOOL IS_EXPLOSION_IN_SPHERE(int explosionType, float x, float y, float z, float radius);",
-    "-- Example usage for IS_EXPLOSION_IN_SPHERE\nIsExplosionInSphere(0, 0.0, 0.0, 0.0, 0.0)"
+    "-- Example usage for IS_EXPLOSION_IN_SPHERE\nIsExplosionInSphere(1, 1.0, 1.0, 1.0, 1.0)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

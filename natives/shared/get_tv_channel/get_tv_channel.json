@@ -1,0 +1,13 @@
+{
+  "title": "GET_TV_CHANNEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_TV_CHANNEL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_TV_CHANNEL\nGetTvChannel()"
+  ],
+  "urls": [],
+  "tags": []
+}

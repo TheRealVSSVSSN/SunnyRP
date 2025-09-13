@@ -1,0 +1,13 @@
+{
+  "title": "GET_PED_LAST_DAMAGE_BONE",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PED_LAST_DAMAGE_BONE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PED_LAST_DAMAGE_BONE\nGetPedLastDamageBone()"
+  ],
+  "urls": [],
+  "tags": []
+}

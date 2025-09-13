@@ -1,0 +1,13 @@
+{
+  "title": "_SEETHROUGH_SET_HI_LIGHT_INTENSITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "_SEETHROUGH_SET_HI_LIGHT_INTENSITY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SEETHROUGH_SET_HI_LIGHT_INTENSITY\n_SeethroughSetHiLightIntensity()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_VEHICLE_DASHBOARD_SPEED",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_VEHICLE_DASHBOARD_SPEED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_DASHBOARD_SPEED\nGetVehicleDashboardSpeed()"
+  ],
+  "urls": [],
+  "tags": []
+}

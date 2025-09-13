@@ -1,0 +1,13 @@
+{
+  "title": "GET_VEHICLE_DASHBOARD_OIL_TEMP",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_VEHICLE_DASHBOARD_OIL_TEMP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_DASHBOARD_OIL_TEMP\nGetVehicleDashboardOilTemp()"
+  ],
+  "urls": [],
+  "tags": []
+}

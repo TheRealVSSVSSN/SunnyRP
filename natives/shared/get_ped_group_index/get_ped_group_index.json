@@ -1,0 +1,13 @@
+{
+  "title": "GET_PED_GROUP_INDEX",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PED_GROUP_INDEX"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PED_GROUP_INDEX\nGetPedGroupIndex()"
+  ],
+  "urls": [],
+  "tags": []
+}

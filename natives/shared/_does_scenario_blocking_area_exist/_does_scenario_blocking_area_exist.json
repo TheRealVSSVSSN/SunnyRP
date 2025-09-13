@@ -1,0 +1,13 @@
+{
+  "title": "_DOES_SCENARIO_BLOCKING_AREA_EXIST",
+  "breadcrumbs": [
+    "Native Reference",
+    "_DOES_SCENARIO_BLOCKING_AREA_EXIST"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _DOES_SCENARIO_BLOCKING_AREA_EXIST\n_DoesScenarioBlockingAreaExist()"
+  ],
+  "urls": [],
+  "tags": []
+}

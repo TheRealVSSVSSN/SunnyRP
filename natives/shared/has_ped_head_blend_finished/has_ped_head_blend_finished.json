@@ -1,0 +1,13 @@
+{
+  "title": "HAS_PED_HEAD_BLEND_FINISHED",
+  "breadcrumbs": [
+    "Native Reference",
+    "HAS_PED_HEAD_BLEND_FINISHED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for HAS_PED_HEAD_BLEND_FINISHED\nHasPedHeadBlendFinished()"
+  ],
+  "urls": [],
+  "tags": []
+}

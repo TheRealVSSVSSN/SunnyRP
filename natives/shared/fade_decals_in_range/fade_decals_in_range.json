@@ -1,0 +1,13 @@
+{
+  "title": "FADE_DECALS_IN_RANGE",
+  "breadcrumbs": [
+    "Native Reference",
+    "FADE_DECALS_IN_RANGE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for FADE_DECALS_IN_RANGE\nFadeDecalsInRange()"
+  ],
+  "urls": [],
+  "tags": []
+}

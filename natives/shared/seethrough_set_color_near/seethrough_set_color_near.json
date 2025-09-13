@@ -1,0 +1,13 @@
+{
+  "title": "SEETHROUGH_SET_COLOR_NEAR",
+  "breadcrumbs": [
+    "Native Reference",
+    "SEETHROUGH_SET_COLOR_NEAR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SEETHROUGH_SET_COLOR_NEAR\nSeethroughSetColorNear()"
+  ],
+  "urls": [],
+  "tags": []
+}

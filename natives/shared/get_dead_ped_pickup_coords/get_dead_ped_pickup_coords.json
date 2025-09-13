@@ -1,0 +1,13 @@
+{
+  "title": "GET_DEAD_PED_PICKUP_COORDS",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_DEAD_PED_PICKUP_COORDS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_DEAD_PED_PICKUP_COORDS\nGetDeadPedPickupCoords()"
+  ],
+  "urls": [],
+  "tags": []
+}

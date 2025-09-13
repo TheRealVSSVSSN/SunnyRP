@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_GADGET",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_GADGET"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_GADGET\nSetPedGadget()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "_SET_PED_COVER_CLIPSET_OVERRIDE",
+  "breadcrumbs": [
+    "Native Reference",
+    "_SET_PED_COVER_CLIPSET_OVERRIDE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_PED_COVER_CLIPSET_OVERRIDE\n_SetPedCoverClipsetOverride()"
+  ],
+  "urls": [],
+  "tags": []
+}

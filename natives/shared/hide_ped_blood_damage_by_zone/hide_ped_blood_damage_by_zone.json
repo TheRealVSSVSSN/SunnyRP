@@ -1,0 +1,13 @@
+{
+  "title": "HIDE_PED_BLOOD_DAMAGE_BY_ZONE",
+  "breadcrumbs": [
+    "Native Reference",
+    "HIDE_PED_BLOOD_DAMAGE_BY_ZONE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for HIDE_PED_BLOOD_DAMAGE_BY_ZONE\nHidePedBloodDamageByZone()"
+  ],
+  "urls": [],
+  "tags": []
+}

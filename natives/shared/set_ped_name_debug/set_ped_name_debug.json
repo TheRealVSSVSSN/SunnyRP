@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_NAME_DEBUG",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_NAME_DEBUG"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_NAME_DEBUG\nSetPedNameDebug()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "REMOVE_SCALEFORM_SCRIPT_HUD_MOVIE",
+  "breadcrumbs": [
+    "Native Reference",
+    "REMOVE_SCALEFORM_SCRIPT_HUD_MOVIE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REMOVE_SCALEFORM_SCRIPT_HUD_MOVIE\nRemoveScaleformScriptHudMovie()"
+  ],
+  "urls": [],
+  "tags": []
+}

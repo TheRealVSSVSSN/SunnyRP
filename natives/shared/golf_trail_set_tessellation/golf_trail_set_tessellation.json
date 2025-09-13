@@ -1,0 +1,13 @@
+{
+  "title": "GOLF_TRAIL_SET_TESSELLATION",
+  "breadcrumbs": [
+    "Native Reference",
+    "GOLF_TRAIL_SET_TESSELLATION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GOLF_TRAIL_SET_TESSELLATION\nGolfTrailSetTessellation()"
+  ],
+  "urls": [],
+  "tags": []
+}

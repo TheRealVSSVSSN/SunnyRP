@@ -1,0 +1,13 @@
+{
+  "title": "IS_PED_DOING_DRIVEBY",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_PED_DOING_DRIVEBY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_PED_DOING_DRIVEBY\nIsPedDoingDriveby()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "CASCADE_SHADOWS_SET_ENTITY_TRACKER_SCALE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CASCADE_SHADOWS_SET_ENTITY_TRACKER_SCALE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CASCADE_SHADOWS_SET_ENTITY_TRACKER_SCALE\nCascadeShadowsSetEntityTrackerScale()"
+  ],
+  "urls": [],
+  "tags": []
+}

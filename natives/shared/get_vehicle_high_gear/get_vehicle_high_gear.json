@@ -1,0 +1,13 @@
+{
+  "title": "GET_VEHICLE_HIGH_GEAR",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_VEHICLE_HIGH_GEAR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_HIGH_GEAR\nGetVehicleHighGear()"
+  ],
+  "urls": [],
+  "tags": []
+}

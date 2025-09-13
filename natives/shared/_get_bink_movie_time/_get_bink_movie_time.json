@@ -1,0 +1,13 @@
+{
+  "title": "_GET_BINK_MOVIE_TIME",
+  "breadcrumbs": [
+    "Native Reference",
+    "_GET_BINK_MOVIE_TIME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_BINK_MOVIE_TIME\n_GetBinkMovieTime()"
+  ],
+  "urls": [],
+  "tags": []
+}

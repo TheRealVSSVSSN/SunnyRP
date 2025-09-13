@@ -1,0 +1,13 @@
+{
+  "title": "GET_VEHICLE_DASHBOARD_CURRENT_GEAR",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_VEHICLE_DASHBOARD_CURRENT_GEAR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_DASHBOARD_CURRENT_GEAR\nGetVehicleDashboardCurrentGear()"
+  ],
+  "urls": [],
+  "tags": []
+}

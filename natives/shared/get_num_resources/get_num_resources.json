@@ -1,0 +1,13 @@
+{
+  "title": "GET_NUM_RESOURCES",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_NUM_RESOURCES"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_NUM_RESOURCES\nGetNumResources()"
+  ],
+  "urls": [],
+  "tags": []
+}

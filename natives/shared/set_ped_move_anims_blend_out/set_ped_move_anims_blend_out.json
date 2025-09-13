@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_MOVE_ANIMS_BLEND_OUT",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_MOVE_ANIMS_BLEND_OUT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_MOVE_ANIMS_BLEND_OUT\nSetPedMoveAnimsBlendOut()"
+  ],
+  "urls": [],
+  "tags": []
+}

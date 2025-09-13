@@ -1,0 +1,13 @@
+{
+  "title": "SET_PICKUP_AMMO_AMOUNT_SCALER",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PICKUP_AMMO_AMOUNT_SCALER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PICKUP_AMMO_AMOUNT_SCALER\nSetPickupAmmoAmountScaler()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_CAPSULE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_CAPSULE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_CAPSULE\nSetPedCapsule()"
+  ],
+  "urls": [],
+  "tags": []
+}

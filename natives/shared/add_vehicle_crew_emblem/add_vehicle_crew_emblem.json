@@ -1,0 +1,13 @@
+{
+  "title": "ADD_VEHICLE_CREW_EMBLEM",
+  "breadcrumbs": [
+    "Native Reference",
+    "ADD_VEHICLE_CREW_EMBLEM"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ADD_VEHICLE_CREW_EMBLEM\nAddVehicleCrewEmblem()"
+  ],
+  "urls": [],
+  "tags": []
+}

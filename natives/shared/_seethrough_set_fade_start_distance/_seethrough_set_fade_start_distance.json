@@ -1,0 +1,13 @@
+{
+  "title": "_SEETHROUGH_SET_FADE_START_DISTANCE",
+  "breadcrumbs": [
+    "Native Reference",
+    "_SEETHROUGH_SET_FADE_START_DISTANCE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SEETHROUGH_SET_FADE_START_DISTANCE\n_SeethroughSetFadeStartDistance()"
+  ],
+  "urls": [],
+  "tags": []
+}

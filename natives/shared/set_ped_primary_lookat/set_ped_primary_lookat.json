@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_PRIMARY_LOOKAT",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_PRIMARY_LOOKAT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_PRIMARY_LOOKAT\nSetPedPrimaryLookat()"
+  ],
+  "urls": [],
+  "tags": []
+}

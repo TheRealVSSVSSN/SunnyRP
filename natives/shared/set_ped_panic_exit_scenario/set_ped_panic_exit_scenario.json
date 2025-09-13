@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_PANIC_EXIT_SCENARIO",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_PANIC_EXIT_SCENARIO"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_PANIC_EXIT_SCENARIO\nSetPedPanicExitScenario()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "PRESET_INTERIOR_AMBIENT_CACHE",
+  "breadcrumbs": [
+    "Native Reference",
+    "PRESET_INTERIOR_AMBIENT_CACHE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for PRESET_INTERIOR_AMBIENT_CACHE\nPresetInteriorAmbientCache()"
+  ],
+  "urls": [],
+  "tags": []
+}

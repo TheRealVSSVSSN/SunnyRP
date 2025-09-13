@@ -1,0 +1,13 @@
+{
+  "title": "IS_CONVERSATION_PED_DEAD",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_CONVERSATION_PED_DEAD"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_CONVERSATION_PED_DEAD\nIsConversationPedDead()"
+  ],
+  "urls": [],
+  "tags": []
+}

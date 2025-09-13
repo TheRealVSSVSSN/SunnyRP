@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_CLOTH_PRONE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_CLOTH_PRONE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_CLOTH_PRONE\nSetPedClothProne()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_VEHICLE_EXTRA_COLOURS",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_VEHICLE_EXTRA_COLOURS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_EXTRA_COLOURS\nGetVehicleExtraColours()"
+  ],
+  "urls": [],
+  "tags": []
+}

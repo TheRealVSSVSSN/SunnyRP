@@ -1,0 +1,13 @@
+{
+  "title": "DISABLE_HEAD_BLEND_PALETTE_COLOR",
+  "breadcrumbs": [
+    "Native Reference",
+    "DISABLE_HEAD_BLEND_PALETTE_COLOR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DISABLE_HEAD_BLEND_PALETTE_COLOR\nDisableHeadBlendPaletteColor()"
+  ],
+  "urls": [],
+  "tags": []
+}

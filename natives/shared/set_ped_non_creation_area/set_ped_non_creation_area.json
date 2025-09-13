@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_NON_CREATION_AREA",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_NON_CREATION_AREA"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_NON_CREATION_AREA\nSetPedNonCreationArea()"
+  ],
+  "urls": [],
+  "tags": []
+}

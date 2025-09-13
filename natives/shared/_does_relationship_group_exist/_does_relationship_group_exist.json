@@ -1,0 +1,13 @@
+{
+  "title": "_DOES_RELATIONSHIP_GROUP_EXIST",
+  "breadcrumbs": [
+    "Native Reference",
+    "_DOES_RELATIONSHIP_GROUP_EXIST"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _DOES_RELATIONSHIP_GROUP_EXIST\n_DoesRelationshipGroupExist()"
+  ],
+  "urls": [],
+  "tags": []
+}

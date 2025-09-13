@@ -1,0 +1,13 @@
+{
+  "title": "DROP_AMBIENT_PROP",
+  "breadcrumbs": [
+    "Native Reference",
+    "DROP_AMBIENT_PROP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DROP_AMBIENT_PROP\nDropAmbientProp()"
+  ],
+  "urls": [],
+  "tags": []
+}

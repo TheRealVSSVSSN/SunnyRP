@@ -1,0 +1,13 @@
+{
+  "title": "TASK_COMBAT_PED",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASK_COMBAT_PED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for TASK_COMBAT_PED\nTaskCombatPed()"
+  ],
+  "urls": [],
+  "tags": []
+}

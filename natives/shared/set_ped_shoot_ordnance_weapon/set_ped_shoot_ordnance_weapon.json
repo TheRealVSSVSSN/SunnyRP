@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_SHOOT_ORDNANCE_WEAPON",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_SHOOT_ORDNANCE_WEAPON"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_SHOOT_ORDNANCE_WEAPON\nSetPedShootOrdnanceWeapon()"
+  ],
+  "urls": [],
+  "tags": []
+}

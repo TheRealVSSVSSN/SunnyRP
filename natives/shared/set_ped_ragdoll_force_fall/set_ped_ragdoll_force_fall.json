@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_RAGDOLL_FORCE_FALL",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_RAGDOLL_FORCE_FALL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_RAGDOLL_FORCE_FALL\nSetPedRagdollForceFall()"
+  ],
+  "urls": [],
+  "tags": []
+}

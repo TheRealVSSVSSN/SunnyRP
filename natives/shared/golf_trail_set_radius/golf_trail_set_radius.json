@@ -1,0 +1,13 @@
+{
+  "title": "GOLF_TRAIL_SET_RADIUS",
+  "breadcrumbs": [
+    "Native Reference",
+    "GOLF_TRAIL_SET_RADIUS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GOLF_TRAIL_SET_RADIUS\nGolfTrailSetRadius()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "_GET_NUM_HAIR_COLORS",
+  "breadcrumbs": [
+    "Native Reference",
+    "_GET_NUM_HAIR_COLORS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_NUM_HAIR_COLORS\n_GetNumHairColors()"
+  ],
+  "urls": [],
+  "tags": []
+}

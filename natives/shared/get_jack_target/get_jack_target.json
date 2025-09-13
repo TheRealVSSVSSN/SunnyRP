@@ -1,0 +1,13 @@
+{
+  "title": "GET_JACK_TARGET",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_JACK_TARGET"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_JACK_TARGET\nGetJackTarget()"
+  ],
+  "urls": [],
+  "tags": []
+}

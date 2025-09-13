@@ -1,0 +1,13 @@
+{
+  "title": "HAS_SCALEFORM_MOVIE_FILENAME_LOADED",
+  "breadcrumbs": [
+    "Native Reference",
+    "HAS_SCALEFORM_MOVIE_FILENAME_LOADED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for HAS_SCALEFORM_MOVIE_FILENAME_LOADED\nHasScaleformMovieFilenameLoaded()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "IS_PED_BEING_STEALTH_KILLED",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_PED_BEING_STEALTH_KILLED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_PED_BEING_STEALTH_KILLED\nIsPedBeingStealthKilled()"
+  ],
+  "urls": [],
+  "tags": []
+}

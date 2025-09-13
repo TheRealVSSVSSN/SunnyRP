@@ -1,0 +1,13 @@
+{
+  "title": "SET_VEHICLE_COLOURS",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_VEHICLE_COLOURS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_VEHICLE_COLOURS\nSetVehicleColours()"
+  ],
+  "urls": [],
+  "tags": []
+}

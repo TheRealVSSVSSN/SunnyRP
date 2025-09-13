@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_CAN_SWITCH_WEAPON",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_CAN_SWITCH_WEAPON"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_CAN_SWITCH_WEAPON\nSetPedCanSwitchWeapon()"
+  ],
+  "urls": [],
+  "tags": []
+}

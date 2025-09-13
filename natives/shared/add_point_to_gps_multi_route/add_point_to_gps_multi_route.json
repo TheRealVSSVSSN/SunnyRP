@@ -1,0 +1,13 @@
+{
+  "title": "ADD_POINT_TO_GPS_MULTI_ROUTE",
+  "breadcrumbs": [
+    "Native Reference",
+    "ADD_POINT_TO_GPS_MULTI_ROUTE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ADD_POINT_TO_GPS_MULTI_ROUTE\nAddPointToGpsMultiRoute()"
+  ],
+  "urls": [],
+  "tags": []
+}

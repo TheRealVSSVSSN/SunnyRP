@@ -1,0 +1,13 @@
+{
+  "title": "CLEAR_TIMECYCLE_MODIFIER",
+  "breadcrumbs": [
+    "Native Reference",
+    "CLEAR_TIMECYCLE_MODIFIER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CLEAR_TIMECYCLE_MODIFIER\nClearTimecycleModifier()"
+  ],
+  "urls": [],
+  "tags": []
+}

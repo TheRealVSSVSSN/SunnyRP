@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_CAN_RAGDOLL_FROM_PLAYER_IMPACT",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_CAN_RAGDOLL_FROM_PLAYER_IMPACT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_CAN_RAGDOLL_FROM_PLAYER_IMPACT\nSetPedCanRagdollFromPlayerImpact()"
+  ],
+  "urls": [],
+  "tags": []
+}

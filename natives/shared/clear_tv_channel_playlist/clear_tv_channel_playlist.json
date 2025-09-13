@@ -1,0 +1,13 @@
+{
+  "title": "CLEAR_TV_CHANNEL_PLAYLIST",
+  "breadcrumbs": [
+    "Native Reference",
+    "CLEAR_TV_CHANNEL_PLAYLIST"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CLEAR_TV_CHANNEL_PLAYLIST\nClearTvChannelPlaylist()"
+  ],
+  "urls": [],
+  "tags": []
+}

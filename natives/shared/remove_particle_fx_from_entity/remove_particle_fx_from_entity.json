@@ -1,0 +1,13 @@
+{
+  "title": "REMOVE_PARTICLE_FX_FROM_ENTITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "REMOVE_PARTICLE_FX_FROM_ENTITY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REMOVE_PARTICLE_FX_FROM_ENTITY\nRemoveParticleFxFromEntity()"
+  ],
+  "urls": [],
+  "tags": []
+}

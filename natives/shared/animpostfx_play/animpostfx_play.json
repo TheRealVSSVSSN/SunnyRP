@@ -1,0 +1,13 @@
+{
+  "title": "ANIMPOSTFX_PLAY",
+  "breadcrumbs": [
+    "Native Reference",
+    "ANIMPOSTFX_PLAY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ANIMPOSTFX_PLAY\nAnimpostfxPlay()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "STOP_FIRE_IN_RANGE",
+  "breadcrumbs": [
+    "Native Reference",
+    "STOP_FIRE_IN_RANGE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for STOP_FIRE_IN_RANGE\nStopFireInRange()"
+  ],
+  "urls": [],
+  "tags": []
+}

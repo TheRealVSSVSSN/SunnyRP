@@ -1,0 +1,13 @@
+{
+  "title": "_GET_PED_EVENT_DATA",
+  "breadcrumbs": [
+    "Native Reference",
+    "_GET_PED_EVENT_DATA"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_PED_EVENT_DATA\n_GetPedEventData()"
+  ],
+  "urls": [],
+  "tags": []
+}

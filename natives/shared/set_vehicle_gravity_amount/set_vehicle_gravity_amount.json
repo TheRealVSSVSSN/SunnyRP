@@ -1,0 +1,13 @@
+{
+  "title": "SET_VEHICLE_GRAVITY_AMOUNT",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_VEHICLE_GRAVITY_AMOUNT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_VEHICLE_GRAVITY_AMOUNT\nSetVehicleGravityAmount()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "REQUEST_SCALEFORM_MOVIE_WITH_IGNORE_SUPER_WIDESCREEN",
+  "breadcrumbs": [
+    "Native Reference",
+    "REQUEST_SCALEFORM_MOVIE_WITH_IGNORE_SUPER_WIDESCREEN"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REQUEST_SCALEFORM_MOVIE_WITH_IGNORE_SUPER_WIDESCREEN\nRequestScaleformMovieWithIgnoreSuperWidescreen()"
+  ],
+  "urls": [],
+  "tags": []
+}

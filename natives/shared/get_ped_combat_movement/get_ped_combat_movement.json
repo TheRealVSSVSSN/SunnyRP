@@ -1,0 +1,13 @@
+{
+  "title": "GET_PED_COMBAT_MOVEMENT",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PED_COMBAT_MOVEMENT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PED_COMBAT_MOVEMENT\nGetPedCombatMovement()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_PED_AS_GROUP_MEMBER",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PED_AS_GROUP_MEMBER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PED_AS_GROUP_MEMBER\nGetPedAsGroupMember()"
+  ],
+  "urls": [],
+  "tags": []
+}

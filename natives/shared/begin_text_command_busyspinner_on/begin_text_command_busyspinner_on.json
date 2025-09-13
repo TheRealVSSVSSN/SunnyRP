@@ -1,0 +1,13 @@
+{
+  "title": "BEGIN_TEXT_COMMAND_BUSYSPINNER_ON",
+  "breadcrumbs": [
+    "Native Reference",
+    "BEGIN_TEXT_COMMAND_BUSYSPINNER_ON"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for BEGIN_TEXT_COMMAND_BUSYSPINNER_ON\nBeginTextCommandBusyspinnerOn()"
+  ],
+  "urls": [],
+  "tags": []
+}

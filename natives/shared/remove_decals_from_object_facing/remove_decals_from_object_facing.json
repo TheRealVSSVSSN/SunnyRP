@@ -1,0 +1,13 @@
+{
+  "title": "REMOVE_DECALS_FROM_OBJECT_FACING",
+  "breadcrumbs": [
+    "Native Reference",
+    "REMOVE_DECALS_FROM_OBJECT_FACING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REMOVE_DECALS_FROM_OBJECT_FACING\nRemoveDecalsFromObjectFacing()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_PED_COMBAT_RANGE",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PED_COMBAT_RANGE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PED_COMBAT_RANGE\nGetPedCombatRange()"
+  ],
+  "urls": [],
+  "tags": []
+}

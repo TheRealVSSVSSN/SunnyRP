@@ -1,0 +1,13 @@
+{
+  "title": "_GRASS_LOD_RESET_SCRIPT_AREAS",
+  "breadcrumbs": [
+    "Native Reference",
+    "_GRASS_LOD_RESET_SCRIPT_AREAS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GRASS_LOD_RESET_SCRIPT_AREAS\n_GrassLodResetScriptAreas()"
+  ],
+  "urls": [],
+  "tags": []
+}

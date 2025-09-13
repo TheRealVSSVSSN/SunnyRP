@@ -1,0 +1,13 @@
+{
+  "title": "GET_VEHICLE_DOORS_LOCKED_FOR_PLAYER",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_VEHICLE_DOORS_LOCKED_FOR_PLAYER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_DOORS_LOCKED_FOR_PLAYER\nGetVehicleDoorsLockedForPlayer()"
+  ],
+  "urls": [],
+  "tags": []
+}

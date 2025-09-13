@@ -1,0 +1,13 @@
+{
+  "title": "IS_ENTITY_ON_FIRE",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_ENTITY_ON_FIRE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_ENTITY_ON_FIRE\nIsEntityOnFire()"
+  ],
+  "urls": [],
+  "tags": []
+}

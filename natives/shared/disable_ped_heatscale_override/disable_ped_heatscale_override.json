@@ -1,0 +1,13 @@
+{
+  "title": "DISABLE_PED_HEATSCALE_OVERRIDE",
+  "breadcrumbs": [
+    "Native Reference",
+    "DISABLE_PED_HEATSCALE_OVERRIDE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DISABLE_PED_HEATSCALE_OVERRIDE\nDisablePedHeatscaleOverride()"
+  ],
+  "urls": [],
+  "tags": []
+}

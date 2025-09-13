@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_MOTION_BLUR",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_MOTION_BLUR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_MOTION_BLUR\nSetPedMotionBlur()"
+  ],
+  "urls": [],
+  "tags": []
+}

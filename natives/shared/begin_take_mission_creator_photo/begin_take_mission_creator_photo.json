@@ -1,0 +1,13 @@
+{
+  "title": "BEGIN_TAKE_MISSION_CREATOR_PHOTO",
+  "breadcrumbs": [
+    "Native Reference",
+    "BEGIN_TAKE_MISSION_CREATOR_PHOTO"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for BEGIN_TAKE_MISSION_CREATOR_PHOTO\nBeginTakeMissionCreatorPhoto()"
+  ],
+  "urls": [],
+  "tags": []
+}

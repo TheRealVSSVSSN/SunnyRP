@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_DEFENSIVE_SPHERE_ATTACHED_TO_VEHICLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_DEFENSIVE_SPHERE_ATTACHED_TO_VEHICLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_DEFENSIVE_SPHERE_ATTACHED_TO_VEHICLE\nSetPedDefensiveSphereAttachedToVehicle()"
+  ],
+  "urls": [],
+  "tags": []
+}

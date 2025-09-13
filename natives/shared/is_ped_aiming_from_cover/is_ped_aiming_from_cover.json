@@ -1,0 +1,13 @@
+{
+  "title": "IS_PED_AIMING_FROM_COVER",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_PED_AIMING_FROM_COVER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_PED_AIMING_FROM_COVER\nIsPedAimingFromCover()"
+  ],
+  "urls": [],
+  "tags": []
+}

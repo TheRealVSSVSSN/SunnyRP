@@ -1,0 +1,13 @@
+{
+  "title": "_SEETHROUGH_SET_HI_LIGHT_NOISE",
+  "breadcrumbs": [
+    "Native Reference",
+    "_SEETHROUGH_SET_HI_LIGHT_NOISE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SEETHROUGH_SET_HI_LIGHT_NOISE\n_SeethroughSetHiLightNoise()"
+  ],
+  "urls": [],
+  "tags": []
+}

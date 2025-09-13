@@ -1,0 +1,13 @@
+{
+  "title": "HAS_SCALEFORM_CONTAINER_MOVIE_LOADED_INTO_PARENT",
+  "breadcrumbs": [
+    "Native Reference",
+    "HAS_SCALEFORM_CONTAINER_MOVIE_LOADED_INTO_PARENT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for HAS_SCALEFORM_CONTAINER_MOVIE_LOADED_INTO_PARENT\nHasScaleformContainerMovieLoadedIntoParent()"
+  ],
+  "urls": [],
+  "tags": []
+}

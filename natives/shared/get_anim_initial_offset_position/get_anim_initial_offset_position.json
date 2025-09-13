@@ -1,0 +1,13 @@
+{
+  "title": "GET_ANIM_INITIAL_OFFSET_POSITION",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_ANIM_INITIAL_OFFSET_POSITION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ANIM_INITIAL_OFFSET_POSITION\nGetAnimInitialOffsetPosition()"
+  ],
+  "urls": [],
+  "tags": []
+}

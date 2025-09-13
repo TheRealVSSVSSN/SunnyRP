@@ -1,0 +1,13 @@
+{
+  "title": "GET_IS_VEHICLE_SECONDARY_COLOUR_CUSTOM",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_IS_VEHICLE_SECONDARY_COLOUR_CUSTOM"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_IS_VEHICLE_SECONDARY_COLOUR_CUSTOM\nGetIsVehicleSecondaryColourCustom()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_NEVER_LEAVES_GROUP",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_NEVER_LEAVES_GROUP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_NEVER_LEAVES_GROUP\nSetPedNeverLeavesGroup()"
+  ],
+  "urls": [],
+  "tags": []
+}

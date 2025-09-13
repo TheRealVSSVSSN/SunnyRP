@@ -1,0 +1,13 @@
+{
+  "title": "GET_VEHICLE_CUSTOM_PRIMARY_COLOUR",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_VEHICLE_CUSTOM_PRIMARY_COLOUR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_CUSTOM_PRIMARY_COLOUR\nGetVehicleCustomPrimaryColour()"
+  ],
+  "urls": [],
+  "tags": []
+}

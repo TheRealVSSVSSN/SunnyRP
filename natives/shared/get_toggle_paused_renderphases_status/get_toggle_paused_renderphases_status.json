@@ -1,0 +1,13 @@
+{
+  "title": "GET_TOGGLE_PAUSED_RENDERPHASES_STATUS",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_TOGGLE_PAUSED_RENDERPHASES_STATUS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_TOGGLE_PAUSED_RENDERPHASES_STATUS\nGetTogglePausedRenderphasesStatus()"
+  ],
+  "urls": [],
+  "tags": []
+}

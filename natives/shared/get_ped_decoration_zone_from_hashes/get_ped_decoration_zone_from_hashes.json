@@ -1,0 +1,13 @@
+{
+  "title": "GET_PED_DECORATION_ZONE_FROM_HASHES",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PED_DECORATION_ZONE_FROM_HASHES"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PED_DECORATION_ZONE_FROM_HASHES\nGetPedDecorationZoneFromHashes()"
+  ],
+  "urls": [],
+  "tags": []
+}

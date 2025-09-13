@@ -1,0 +1,13 @@
+{
+  "title": "GET_PAUSE_MAP_POINTER_WORLD_POSITION",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PAUSE_MAP_POINTER_WORLD_POSITION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PAUSE_MAP_POINTER_WORLD_POSITION\nGetPauseMapPointerWorldPosition()"
+  ],
+  "urls": [],
+  "tags": []
+}

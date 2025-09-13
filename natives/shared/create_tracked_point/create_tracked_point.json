@@ -1,0 +1,13 @@
+{
+  "title": "CREATE_TRACKED_POINT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CREATE_TRACKED_POINT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CREATE_TRACKED_POINT\nCreateTrackedPoint()"
+  ],
+  "urls": [],
+  "tags": []
+}

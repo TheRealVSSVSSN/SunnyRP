@@ -1,0 +1,13 @@
+{
+  "title": "GET_ENTITY_SCRIPT",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_ENTITY_SCRIPT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ENTITY_SCRIPT\nGetEntityScript()"
+  ],
+  "urls": [],
+  "tags": []
+}

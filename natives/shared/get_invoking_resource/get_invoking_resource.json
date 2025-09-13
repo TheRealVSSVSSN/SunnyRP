@@ -1,0 +1,13 @@
+{
+  "title": "GET_INVOKING_RESOURCE",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_INVOKING_RESOURCE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_INVOKING_RESOURCE\nGetInvokingResource()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GOLF_TRAIL_SET_ENABLED",
+  "breadcrumbs": [
+    "Native Reference",
+    "GOLF_TRAIL_SET_ENABLED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GOLF_TRAIL_SET_ENABLED\nGolfTrailSetEnabled()"
+  ],
+  "urls": [],
+  "tags": []
+}

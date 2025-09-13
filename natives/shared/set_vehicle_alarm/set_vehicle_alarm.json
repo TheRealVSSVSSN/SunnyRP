@@ -1,0 +1,13 @@
+{
+  "title": "SET_VEHICLE_ALARM",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_VEHICLE_ALARM"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_VEHICLE_ALARM\nSetVehicleAlarm()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "HAS_PED_RECEIVED_EVENT",
+  "breadcrumbs": [
+    "Native Reference",
+    "HAS_PED_RECEIVED_EVENT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for HAS_PED_RECEIVED_EVENT\nHasPedReceivedEvent()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_RELATIONSHIP_GROUP_HASH",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_RELATIONSHIP_GROUP_HASH"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_RELATIONSHIP_GROUP_HASH\nSetPedRelationshipGroupHash()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "ANIMPOSTFX_IS_RUNNING",
+  "breadcrumbs": [
+    "Native Reference",
+    "ANIMPOSTFX_IS_RUNNING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ANIMPOSTFX_IS_RUNNING\nAnimpostfxIsRunning()"
+  ],
+  "urls": [],
+  "tags": []
+}

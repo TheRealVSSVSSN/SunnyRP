@@ -1,0 +1,13 @@
+{
+  "title": "GET_ENTITY_ROTATION",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_ENTITY_ROTATION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ENTITY_ROTATION\nGetEntityRotation()"
+  ],
+  "urls": [],
+  "tags": []
+}

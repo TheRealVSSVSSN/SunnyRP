@@ -1,0 +1,13 @@
+{
+  "title": "ADD_EXPLOSION",
+  "breadcrumbs": [
+    "Native Reference",
+    "ADD_EXPLOSION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ADD_EXPLOSION\nAddExplosion()"
+  ],
+  "urls": [],
+  "tags": []
+}

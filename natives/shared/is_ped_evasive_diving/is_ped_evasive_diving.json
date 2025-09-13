@@ -1,0 +1,13 @@
+{
+  "title": "IS_PED_EVASIVE_DIVING",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_PED_EVASIVE_DIVING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_PED_EVASIVE_DIVING\nIsPedEvasiveDiving()"
+  ],
+  "urls": [],
+  "tags": []
+}

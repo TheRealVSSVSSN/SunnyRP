@@ -1,0 +1,13 @@
+{
+  "title": "_SET_PLAYER_AIR_DEFENSE_ZONE_FLAG",
+  "breadcrumbs": [
+    "Native Reference",
+    "_SET_PLAYER_AIR_DEFENSE_ZONE_FLAG"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_PLAYER_AIR_DEFENSE_ZONE_FLAG\n_SetPlayerAirDefenseZoneFlag()"
+  ],
+  "urls": [],
+  "tags": []
+}

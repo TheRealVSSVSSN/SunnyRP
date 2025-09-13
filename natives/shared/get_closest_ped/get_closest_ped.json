@@ -1,0 +1,13 @@
+{
+  "title": "GET_CLOSEST_PED",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_CLOSEST_PED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_CLOSEST_PED\nGetClosestPed()"
+  ],
+  "urls": [],
+  "tags": []
+}

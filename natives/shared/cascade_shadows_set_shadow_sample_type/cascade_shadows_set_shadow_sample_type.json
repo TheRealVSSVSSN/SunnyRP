@@ -1,0 +1,13 @@
+{
+  "title": "CASCADE_SHADOWS_SET_SHADOW_SAMPLE_TYPE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CASCADE_SHADOWS_SET_SHADOW_SAMPLE_TYPE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CASCADE_SHADOWS_SET_SHADOW_SAMPLE_TYPE\nCascadeShadowsSetShadowSampleType()"
+  ],
+  "urls": [],
+  "tags": []
+}
