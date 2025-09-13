@@ -1,0 +1,24 @@
+{
+  "title": "_ARE_OUTRIGGER_LEGS_DEPLOYED",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "_ARE_OUTRIGGER_LEGS_DEPLOYED"
+  ],
+  "content": "0x3A9128352EAC9E85// AreOutriggerLegsDeployed\nBOOL _ARE_OUTRIGGER_LEGS_DEPLOYED(Vehicle vehicle);\nReturns: The deployment state of the vehicle's outrigger legsReturns whether the outrigger legs are deployed for the vehicle.\nThe Chernobog is one of the few vehicles with outrigger legs.NativeDB Introduced: v1290Examples:Lualocal vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\nlocal deployed = AreOutriggerLegsDeployed(vehicle)\nprint(\"deploy state:\", deployed)",
+  "codeBlocks": [
+    "// AreOutriggerLegsDeployed\nBOOL _ARE_OUTRIGGER_LEGS_DEPLOYED(Vehicle vehicle);\n",
+    "NativeDB Introduced: v1290",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\nlocal deployed = AreOutriggerLegsDeployed(vehicle)\nprint(\"deploy state:\", deployed)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/AreOutriggerLegsDeployed.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

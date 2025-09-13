@@ -1,0 +1,22 @@
+{
+  "title": "SET_VEHICLE_ENGINE_ON",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "SET_VEHICLE_ENGINE_ON"
+  ],
+  "content": "0x2497C4717C8B881E0x7FBC86F1// SetVehicleEngineOn\nvoid SET_VEHICLE_ENGINE_ON(Vehicle vehicle, BOOL value, BOOL instantly, BOOL disableAutoStart);Parameters:vehicle: The vehicle to start or stop the engine on.value: true to turn the vehicle on; false to turn it off.instantly: if true, the vehicle will be set to the state immediately; otherwise, the current driver will physically turn on or off the engine.disableAutoStart: If true, the system will prevent the engine from starting when the player got into it.Starts or stops the engine on the specified vehicle.\nFrom what I've tested when I do this to a helicopter the propellers turn off after the engine has started.",
+  "codeBlocks": [
+    "// SetVehicleEngineOn\nvoid SET_VEHICLE_ENGINE_ON(Vehicle vehicle, BOOL value, BOOL instantly, BOOL disableAutoStart);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetVehicleEngineOn.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

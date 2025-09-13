@@ -1,0 +1,23 @@
+{
+  "title": "IS_ENTRY_POINT_FOR_SEAT_CLEAR",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "IS_ENTRY_POINT_FOR_SEAT_CLEAR"
+  ],
+  "content": "0x639431E895B9AA570xAB0E79EB// IsEntryPointForSeatClear\nBOOL IS_ENTRY_POINT_FOR_SEAT_CLEAR(Ped ped, Vehicle vehicle, int seatIndex, BOOL checkSide, BOOL leftSide);Parameters:ped: The ped to check.vehicle: The vehicle to check.seatIndex: See eSeatPosition declared in IS_VEHICLE_SEAT_FREE.checkSide: True to check the side of the entry point relative to the vehicleleftSide: When checkSide is true together with this it only checks if entrypoints on the left side of the vehicle are clear, and for the right side when given falseReturns: True if the entry point is accesible and the area is clear for the given ped.Check if a entry point for a certain seat is clear, useful for checking if a vehicle seat is accesible.\nIf you park your vehicle near a wall and the ped cannot enter/exit this side, the return value toggles from true (not blocked) to false (blocked).Keep in mind, with checkSide set to true, that only certain vehicles have entry points on both sides for the same seat, like motorcycles, most normal vehicles don't have this and if the native doesn't find a entry point with the given parameters it will always return false. So for most normal usecases leaving checkSide set to false would result in the expected behavior.Old name:  _IS_VEHICLE_SEAT_ACCESSIBLE",
+  "codeBlocks": [
+    "// IsEntryPointForSeatClear\nBOOL IS_ENTRY_POINT_FOR_SEAT_CLEAR(Ped ped, Vehicle vehicle, int seatIndex, BOOL checkSide, BOOL leftSide);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/IsEntryPointForSeatClear.md",
+    "https://docs.fivem.net/natives/?_0x22AC59A870E6A669",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

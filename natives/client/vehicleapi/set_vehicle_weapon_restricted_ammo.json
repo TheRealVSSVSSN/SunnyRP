@@ -1,0 +1,23 @@
+{
+  "title": "SET_VEHICLE_WEAPON_RESTRICTED_AMMO",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "SET_VEHICLE_WEAPON_RESTRICTED_AMMO"
+  ],
+  "content": "0x44CD1F493DB2A0A6// SetVehicleWeaponRestrictedAmmo\nvoid SET_VEHICLE_WEAPON_RESTRICTED_AMMO(Vehicle vehicle, int weaponIndex, int ammoCount);Parameters:vehicle: The vehicle handleweaponIndex: The weapon index we're setting ammo for (between 0 and 3), see description for more.ammoCount: When set positive, will count down with every fire and prevent firing at 0. Set -1 to disable restricted ammo.Sets a limited number of ammo for a particular vehicle weapon index on a vehicle.Information about weapon indexes can be found in handling.meta.In the example given below, uWeaponHash defines weapon hashes for the vehicle. Each <Item> corresponds to an index starting from 0.<uWeaponHash>\n    <Item>VEHICLE_WEAPON_PLAYER_BUZZARD</Item>  <!-- Index: 0 -->\n    <Item>VEHICLE_WEAPON_SPACE_ROCKET</Item>    <!-- Index: 1 -->\n    <Item>VEHICLE_WEAPON_SEARCHLIGHT</Item>     <!-- Index: 2 -->\n</uWeaponHash>\nOld name:  _SET_VEHICLE_WEAPON_CAPACITY",
+  "codeBlocks": [
+    "// SetVehicleWeaponRestrictedAmmo\nvoid SET_VEHICLE_WEAPON_RESTRICTED_AMMO(Vehicle vehicle, int weaponIndex, int ammoCount);",
+    "<uWeaponHash>\n    <Item>VEHICLE_WEAPON_PLAYER_BUZZARD</Item>  <!-- Index: 0 -->\n    <Item>VEHICLE_WEAPON_SPACE_ROCKET</Item>    <!-- Index: 1 -->\n    <Item>VEHICLE_WEAPON_SEARCHLIGHT</Item>     <!-- Index: 2 -->\n</uWeaponHash>\n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetVehicleWeaponRestrictedAmmo.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "title": "_SET_VEHICLE_XENON_LIGHTS_COLOR",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "_SET_VEHICLE_XENON_LIGHTS_COLOR"
+  ],
+  "content": "0xE41033B25D003A07// SetVehicleXenonLightsColor\nvoid _SET_VEHICLE_XENON_LIGHTS_COLOR(Vehicle vehicle, int color);Parameters:vehicle: The vehicle handle.color: The paint index.Paint index goes from 0 to 12.You can find the list of colors and ids here: _GET_VEHICLE_HEADLIGHTS_COLOUROld name:  _SET_VEHICLE_HEADLIGHTS_COLOUROld name:  _SET_VEHICLE_XENON_LIGHTS_COLOURExamples:Lualocal veh = GetVehiclePedIsUsing(PlayerPedId())\nToggleVehicleMod(veh, 22, true) -- toggle xenon\nSetVehicleHeadlightsColour(veh, 2)",
+  "codeBlocks": [
+    "// SetVehicleXenonLightsColor\nvoid _SET_VEHICLE_XENON_LIGHTS_COLOR(Vehicle vehicle, int color);",
+    "local veh = GetVehiclePedIsUsing(PlayerPedId())\nToggleVehicleMod(veh, 22, true) -- toggle xenon\nSetVehicleHeadlightsColour(veh, 2)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetVehicleXenonLightsColor.md",
+    "https://docs.fivem.net/natives/?_0x3DFF319A831E0CDB",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

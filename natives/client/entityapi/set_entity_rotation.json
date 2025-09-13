@@ -1,0 +1,25 @@
+{
+  "title": "SET_ENTITY_ROTATION",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENTITYAPI",
+    "SET_ENTITY_ROTATION"
+  ],
+  "content": "0x8524A8B0171D5E070x0A345EFE// SetEntityRotation\nvoid SET_ENTITY_ROTATION(Entity entity, float pitch, float roll, float yaw, int rotationOrder, BOOL bDeadCheck);Parameters:entity: The entity to rotate.pitch: The pitch (X-axis) rotation in degrees.roll: The roll (Y-axis) rotation in degrees.yaw: The yaw (Z-axis) rotation in degrees.rotationOrder: Specifies the order in which yaw, pitch, and roll are applied, see GET_ENTITY_ROTATION for the available rotation orders.bDeadCheck: Usually set to true. Determines whether to check if the entity is dead before applying the rotation.Sets the rotation of a specified entity in the game world.NativeDB Introduced: v323Examples:Lua-- Example of rotating a vehicle 360 degrees\nRegisterCommand('360', function()\n    local playerPed = PlayerPedId() -- Get the player's Ped\n    local vehicle = GetVehiclePedIsIn(playerPed, false) -- Get the vehicle the player is currently in.\n    if not vehicle or not DoesEntityExist(vehicle) then\n        print(\"You are not in a vehicle\")\n        return\n    end\n    \n    local rot = GetEntityRotation(vehicle, 2)\n    local roll, pitch, yaw = rot.x, rot.y, rot.z\n    local finalYaw = yaw + 360\n    local steps = 20 -- Reduced the number of steps so each rotation is larger\n    -- Function to perform the rotation gradually\n    local function doRotation()\n        local currentYaw = yaw\n        -- Loop to adjust the rotation in steps\n        for i = 1, steps do\n            Citizen.Wait(20) -- Increases the delay between each adjustment to make the animation slower\n            currentYaw = currentYaw + (360 / steps) -- Increments the rotation\n            if currentYaw >= finalYaw then\n                currentYaw = finalYaw\n            end\n            -- Apply the current rotation\n            SetEntityRotation(vehicle, roll, pitch, currentYaw % 360, 2, true)\n            if currentYaw == finalYaw then\n                break -- Stops the loop once the rotation is complete\n            end\n        end\n    end\n    -- Execute the rotation in a coroutine to not block the main thread\n    Citizen.CreateThread(doRotation)\nend, false)",
+  "codeBlocks": [
+    "// SetEntityRotation\nvoid SET_ENTITY_ROTATION(Entity entity, float pitch, float roll, float yaw, int rotationOrder, BOOL bDeadCheck);",
+    "NativeDB Introduced: v323",
+    "-- Example of rotating a vehicle 360 degrees\nRegisterCommand('360', function()\n    local playerPed = PlayerPedId() -- Get the player's Ped\n    local vehicle = GetVehiclePedIsIn(playerPed, false) -- Get the vehicle the player is currently in.\n    if not vehicle or not DoesEntityExist(vehicle) then\n        print(\"You are not in a vehicle\")\n        return\n    end\n    \n    local rot = GetEntityRotation(vehicle, 2)\n    local roll, pitch, yaw = rot.x, rot.y, rot.z\n    local finalYaw = yaw + 360\n    local steps = 20 -- Reduced the number of steps so each rotation is larger\n    -- Function to perform the rotation gradually\n    local function doRotation()\n        local currentYaw = yaw\n        -- Loop to adjust the rotation in steps\n        for i = 1, steps do\n            Citizen.Wait(20) -- Increases the delay between each adjustment to make the animation slower\n            currentYaw = currentYaw + (360 / steps) -- Increments the rotation\n            if currentYaw >= finalYaw then\n                currentYaw = finalYaw\n            end\n            -- Apply the current rotation\n            SetEntityRotation(vehicle, roll, pitch, currentYaw % 360, 2, true)\n            if currentYaw == finalYaw then\n                break -- Stops the loop once the rotation is complete\n            end\n        end\n    end\n    -- Execute the rotation in a coroutine to not block the main thread\n    Citizen.CreateThread(doRotation)\nend, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/SetEntityRotation.md",
+    "https://docs.fivem.net/natives/?_0xAFBD61CC738D9EB9",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

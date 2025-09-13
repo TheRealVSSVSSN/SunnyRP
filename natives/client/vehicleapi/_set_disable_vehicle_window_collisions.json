@@ -1,0 +1,23 @@
+{
+  "title": "_SET_DISABLE_VEHICLE_WINDOW_COLLISIONS",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "_SET_DISABLE_VEHICLE_WINDOW_COLLISIONS"
+  ],
+  "content": "0x1087BC8EC540DAEB// SetDisableVehicleWindowCollisions\nvoid _SET_DISABLE_VEHICLE_WINDOW_COLLISIONS(Vehicle vehicle, BOOL toggle);Parameters:vehicle: The vehicle to toggle this for.toggle: True disables the collision, false enables the collisionR* used it to \"remove\" vehicle windows when \"nightshark\" had some mod, which adding some kind of armored windows. When enabled, you can't break vehicles glass. All your bullets wiil shoot through glass. You also will not able to break the glass with any other way (hitting and etc)Examples:Lualocal vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n\nif GetEntityModel(vehicle) == `NIGHTSHARK` then\n    -- Mod index 5 = armored window plates\n    if GetVehicleMod(vehicle, 5) ~= -1 then\n        -- The nightshark has armored plates in front of the windows\n        -- so we disable the window collisions\n        SetDisableVehicleWindowCollisions(vehicle, true)\n    else\n        -- The nightshark has no armored plates in front of the windows\n        -- so we enable the window collisions\n        SetDisableVehicleWindowCollisions(vehicle, false)\n    end\nend",
+  "codeBlocks": [
+    "// SetDisableVehicleWindowCollisions\nvoid _SET_DISABLE_VEHICLE_WINDOW_COLLISIONS(Vehicle vehicle, BOOL toggle);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n\nif GetEntityModel(vehicle) == `NIGHTSHARK` then\n    -- Mod index 5 = armored window plates\n    if GetVehicleMod(vehicle, 5) ~= -1 then\n        -- The nightshark has armored plates in front of the windows\n        -- so we disable the window collisions\n        SetDisableVehicleWindowCollisions(vehicle, true)\n    else\n        -- The nightshark has no armored plates in front of the windows\n        -- so we enable the window collisions\n        SetDisableVehicleWindowCollisions(vehicle, false)\n    end\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetDisableVehicleWindowCollisions.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

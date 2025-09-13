@@ -1,0 +1,24 @@
+{
+  "title": "CREATE_VEHICLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "CREATE_VEHICLE"
+  ],
+  "content": "0xAF35D0D2583051B00xDD75460A// CreateVehicle\nVehicle CREATE_VEHICLE(Hash modelHash, float x, float y, float z, float heading, BOOL isNetwork, BOOL netMissionEntity);Parameters:modelHash: The model of vehicle to spawn.x: Spawn coordinate X component.y: Spawn coordinate Y component.z: Spawn coordinate Z component.heading: Heading to face towards, in degrees.isNetwork: Whether to create a network object for the vehicle. If false, the vehicle exists only locally.netMissionEntity: Whether to register the vehicle as pinned to the script host in the R* network model.Returns: A script handle (fwScriptGuid index) for the vehicle, or 0 if the vehicle failed to be created.Creates a vehicle with the specified model at the specified position. This vehicle will initially be owned by the creating\nscript as a mission entity, and the model should be loaded already (e.g. using REQUEST_MODEL).NativeDB Added Parameter 8: BOOL p7Examples:Lualocal ModelHash = `adder` -- Use Compile-time hashes to get the hash of this model\nif not IsModelInCdimage(ModelHash) then return end\nRequestModel(ModelHash) -- Request the model\nwhile not HasModelLoaded(ModelHash) do -- Waits for the model to load\n  Wait(0)\nend\nlocal MyPed = PlayerPedId()\nlocal Vehicle = CreateVehicle(ModelHash, GetEntityCoords(MyPed), GetEntityHeading(MyPed), true, false) -- Spawns a networked vehicle on your current coords\nSetModelAsNoLongerNeeded(ModelHash) -- removes model from game memory as we no longer need it",
+  "codeBlocks": [
+    "// CreateVehicle\nVehicle CREATE_VEHICLE(Hash modelHash, float x, float y, float z, float heading, BOOL isNetwork, BOOL netMissionEntity);",
+    "NativeDB Added Parameter 8: BOOL p7",
+    "local ModelHash = `adder` -- Use Compile-time hashes to get the hash of this model\nif not IsModelInCdimage(ModelHash) then return end\nRequestModel(ModelHash) -- Request the model\nwhile not HasModelLoaded(ModelHash) do -- Waits for the model to load\n  Wait(0)\nend\nlocal MyPed = PlayerPedId()\nlocal Vehicle = CreateVehicle(ModelHash, GetEntityCoords(MyPed), GetEntityHeading(MyPed), true, false) -- Spawns a networked vehicle on your current coords\nSetModelAsNoLongerNeeded(ModelHash) -- removes model from game memory as we no longer need it"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/CreateVehicle.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

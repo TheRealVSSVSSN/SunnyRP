@@ -1,0 +1,23 @@
+{
+  "title": "SET_VEHICLE_COLOUR_COMBINATION",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "SET_VEHICLE_COLOUR_COMBINATION"
+  ],
+  "content": "0x33E8CD3322E2FE310xA557AEAD// SetVehicleColourCombination\nvoid SET_VEHICLE_COLOUR_COMBINATION(Vehicle vehicle, int colorCombination);Parameters:vehicle: The vehicle to modify.colorCombination: One of the default color values of the vehicle.Sets the selected vehicle's colors to their default value (specific variant specified using the colorCombination parameter).Range of possible values for colorCombination is currently unknown, I couldn't find where these values are stored either (Disquse's guess was vehicles.meta but I haven't seen it in there.)Examples:Lualocal vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\nlocal index = math.random(0, 16)\nSetVehicleColourCombination(vehicle, index)",
+  "codeBlocks": [
+    "// SetVehicleColourCombination\nvoid SET_VEHICLE_COLOUR_COMBINATION(Vehicle vehicle, int colorCombination);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\nlocal index = math.random(0, 16)\nSetVehicleColourCombination(vehicle, index)\n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetVehicleColourCombination.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

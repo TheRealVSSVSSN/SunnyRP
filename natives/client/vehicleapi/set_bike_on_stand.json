@@ -1,0 +1,23 @@
+{
+  "title": "SET_BIKE_ON_STAND",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "SET_BIKE_ON_STAND"
+  ],
+  "content": "0x9CFA4896C3A53CBB0x15D40761// SetBikeOnStand\nvoid SET_BIKE_ON_STAND(Vehicle vehicle, float x, float y);Only works on bikes, both X and Y work in the -1 - 1 range.\nX forces the bike to turn left or right (-1, 1)\nY forces the bike to lean to the left or to the right (-1, 1)\nExample with X -1/Y 1\nhttp://i.imgur.com/TgIuAPJ.jpg\nOld name:  _SET_BIKE_LEAN_ANGLE",
+  "codeBlocks": [
+    "// SetBikeOnStand\nvoid SET_BIKE_ON_STAND(Vehicle vehicle, float x, float y);",
+    "Only works on bikes, both X and Y work in the -1 - 1 range.\nX forces the bike to turn left or right (-1, 1)\nY forces the bike to lean to the left or to the right (-1, 1)\nExample with X -1/Y 1\nhttp://i.imgur.com/TgIuAPJ.jpg\n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetBikeOnStand.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

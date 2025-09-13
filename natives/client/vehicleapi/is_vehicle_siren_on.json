@@ -1,0 +1,23 @@
+{
+  "title": "IS_VEHICLE_SIREN_ON",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "IS_VEHICLE_SIREN_ON"
+  ],
+  "content": "0x4C9BF537BE2634B20x25EB5873// IsVehicleSirenOn\nBOOL IS_VEHICLE_SIREN_ON(Vehicle vehicle);Returns: Returns false if siren and lights are disabled or true if they are enabled.Returns whether the vehicle's lights and sirens are on.Examples:Lualocal veh = GetVehiclePedIsIn(PlayerPedId())\nprint(tostring(IsVehicleSirenOn(veh))",
+  "codeBlocks": [
+    "// IsVehicleSirenOn\nBOOL IS_VEHICLE_SIREN_ON(Vehicle vehicle);",
+    "local veh = GetVehiclePedIsIn(PlayerPedId())\nprint(tostring(IsVehicleSirenOn(veh))"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/IsVehicleSirenOn.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

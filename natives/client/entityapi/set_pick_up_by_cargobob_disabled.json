@@ -1,0 +1,24 @@
+{
+  "title": "SET_PICK_UP_BY_CARGOBOB_DISABLED",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENTITYAPI",
+    "SET_PICK_UP_BY_CARGOBOB_DISABLED"
+  ],
+  "content": "0xD7B80E7C3BEFC396// SetPickUpByCargobobDisabled\nvoid SET_PICK_UP_BY_CARGOBOB_DISABLED(Entity entity, BOOL toggle);Parameters:entity: The entity to be configured for pick up by Cargobob.toggle: A boolean value where true prevents the entity from being picked up by Cargobobs, and false allows it.Configures an entity to either allow or prevent it from being picked up by Cargobobs.NativeDB Introduced: v1180Examples:LuaJavaScriptC#-- This example prevents a entity (in this example the vehicle of the player) from being picked up by any Cargobobs.\n\n-- Retrieve the player ped\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the player's vehicle (cargobob)\nlocal vehicle = GetVehiclePedIsIn(playerPed, false)\n\n-- Check if the vehicle exists in the game world.\nif not DoesEntityExist(vehicle) then\n    -- If the vehicle does not exist, end the execution of the code here.\n    return\nend\n\n-- Prevent the vehicle from being picked up by Cargobobs.\nSetPickUpByCargobobDisabled(vehicle, true)",
+  "codeBlocks": [
+    "// SetPickUpByCargobobDisabled\nvoid SET_PICK_UP_BY_CARGOBOB_DISABLED(Entity entity, BOOL toggle);",
+    "NativeDB Introduced: v1180",
+    "-- This example prevents a entity (in this example the vehicle of the player) from being picked up by any Cargobobs.\n\n-- Retrieve the player ped\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the player's vehicle (cargobob)\nlocal vehicle = GetVehiclePedIsIn(playerPed, false)\n\n-- Check if the vehicle exists in the game world.\nif not DoesEntityExist(vehicle) then\n    -- If the vehicle does not exist, end the execution of the code here.\n    return\nend\n\n-- Prevent the vehicle from being picked up by Cargobobs.\nSetPickUpByCargobobDisabled(vehicle, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/SetPickUpByCargobobDisabled.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

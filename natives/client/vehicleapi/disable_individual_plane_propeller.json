@@ -1,0 +1,23 @@
+{
+  "title": "DISABLE_INDIVIDUAL_PLANE_PROPELLER",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "DISABLE_INDIVIDUAL_PLANE_PROPELLER"
+  ],
+  "content": "0x500873A45724C8630x004926A3// DisableIndividualPlanePropeller\nvoid DISABLE_INDIVIDUAL_PLANE_PROPELLER(Vehicle vehicle, int propeller);Parameters:vehicle: The propeller planepropeller: The propeller index to disable (starts at 0).NativeDB Introduced: v323Old name:  _DISABLE_PLANE_PROPELLER",
+  "codeBlocks": [
+    "// DisableIndividualPlanePropeller\nvoid DISABLE_INDIVIDUAL_PLANE_PROPELLER(Vehicle vehicle, int propeller);",
+    "NativeDB Introduced: v323"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/DisableIndividualPlanePropeller.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

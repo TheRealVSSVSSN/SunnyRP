@@ -1,0 +1,24 @@
+{
+  "title": "SET_OVERRIDE_NITROUS_LEVEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "SET_OVERRIDE_NITROUS_LEVEL"
+  ],
+  "content": "0xC8E9B6B71B8E660D// SetOverrideNitrousLevel\nvoid SET_OVERRIDE_NITROUS_LEVEL(Vehicle vehicle, BOOL override);Parameters:vehicle: The vehicle whose nitrous system is to be overridden.override: A boolean toggle to enable or disable the override settings.NativeDB Introduced: v1604\nNativeDB Added Parameter 2 (2060): float durationMod : A multiplier applied to the default nitrous duration (default is 3 seconds). \nNativeDB Added Parameter 3 (2060): float power : A multiplier applied to the default nitrous power multiplier (default is 3).\nNativeDB Added Parameter 4 (2060): float rechargeTime : A multiplier applied to the default nitrous recharge rate.\nNativeDB Added Parameter 5 (2060): BOOL disableSound : A boolean to disable the default nitrous sound when the nitrous is active.\nOverrides the default settings of a vehicle's nitrous system, allowing custom control over its performance characteristics.Old name:  _SET_VEHICLE_NITRO_ENABLEDExamples:LuaJavaScriptC#-- Retrieve the player ped\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the vehicle the player is currently in. \nlocal vehicle = GetVehiclePedIsIn(playerPed, false)\n\n-- Check if the vehicle exists in the game world.\nif vehicle == 0 then return end\n\n-- Configure the vehicle's nitrous system with custom settings for maximum effect.\nSetOverrideNitrousLevel(vehicle, true, 100, 100, 99999999999, false);",
+  "codeBlocks": [
+    "// SetOverrideNitrousLevel\nvoid SET_OVERRIDE_NITROUS_LEVEL(Vehicle vehicle, BOOL override);",
+    "NativeDB Introduced: v1604\nNativeDB Added Parameter 2 (2060): float durationMod : A multiplier applied to the default nitrous duration (default is 3 seconds). \nNativeDB Added Parameter 3 (2060): float power : A multiplier applied to the default nitrous power multiplier (default is 3).\nNativeDB Added Parameter 4 (2060): float rechargeTime : A multiplier applied to the default nitrous recharge rate.\nNativeDB Added Parameter 5 (2060): BOOL disableSound : A boolean to disable the default nitrous sound when the nitrous is active.\n",
+    "-- Retrieve the player ped\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the vehicle the player is currently in. \nlocal vehicle = GetVehiclePedIsIn(playerPed, false)\n\n-- Check if the vehicle exists in the game world.\nif vehicle == 0 then return end\n\n-- Configure the vehicle's nitrous system with custom settings for maximum effect.\nSetOverrideNitrousLevel(vehicle, true, 100, 100, 99999999999, false);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetOverrideNitrousLevel.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

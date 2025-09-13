@@ -1,0 +1,24 @@
+{
+  "title": "IS_NITROUS_ACTIVE",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "IS_NITROUS_ACTIVE"
+  ],
+  "content": "0x491E822B2C464FE4// IsNitrousActive\nBOOL IS_NITROUS_ACTIVE(Vehicle vehicle);Parameters:vehicle: The vehicle to check.Returns: Returns true if nitrous is active, otherwise false.NativeDB Introduced: 3095Determines if the nitrous is currently activated in the specified vehicle.Examples:LuaJavaScriptcsharp-- Retrieve the player ped\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the vehicle the player is currently in. \nlocal vehicle = GetVehiclePedIsIn(playerPed, false)\n\n-- Check if the vehicle exists in the game world.\nif vehicle == 0 then return end\n\n-- Print whether nitrous is active in the vehicle (True or False).\nprint(IsNitrousActive(vehicle))",
+  "codeBlocks": [
+    "// IsNitrousActive\nBOOL IS_NITROUS_ACTIVE(Vehicle vehicle);",
+    "NativeDB Introduced: 3095",
+    "-- Retrieve the player ped\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the vehicle the player is currently in. \nlocal vehicle = GetVehiclePedIsIn(playerPed, false)\n\n-- Check if the vehicle exists in the game world.\nif vehicle == 0 then return end\n\n-- Print whether nitrous is active in the vehicle (True or False).\nprint(IsNitrousActive(vehicle))"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/IsNitrousActive.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

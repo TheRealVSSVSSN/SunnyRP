@@ -1,0 +1,22 @@
+{
+  "title": "SET_HELI_BLADES_SPEED",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "SET_HELI_BLADES_SPEED"
+  ],
+  "content": "0xFD280B4D7F3ABC4D0x5C7D4EA9// SetHeliBladesSpeed\nvoid SET_HELI_BLADES_SPEED(Vehicle vehicle, float speed);Parameters:vehicle: The helicopter or the planespeed: Desired blade rotation speed from 0.0 to 1.0Despite its name, this works on Helicopters and Planes.Sets the speed of the helicopter blades in percentage of the full speed.",
+  "codeBlocks": [
+    "// SetHeliBladesSpeed\nvoid SET_HELI_BLADES_SPEED(Vehicle vehicle, float speed);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetHeliBladesSpeed.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

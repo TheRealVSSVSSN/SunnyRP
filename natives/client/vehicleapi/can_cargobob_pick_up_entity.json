@@ -1,0 +1,23 @@
+{
+  "title": "CAN_CARGOBOB_PICK_UP_ENTITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "CAN_CARGOBOB_PICK_UP_ENTITY"
+  ],
+  "content": "0x2C1D8B3B19E517CC// CanCargobobPickUpEntity\nBOOL CAN_CARGOBOB_PICK_UP_ENTITY(Vehicle cargobob, Entity entity);Parameters:cargobob: The Cargobob helicopter to be checked.entity: The entity to be checked for pick-up.Returns: Returns true if the Cargobob can pick up the specified entity, false otherwise.Determines whether the specified Cargobob can pick up a given entity.Examples:LuaJavaScriptC#\n-- This example checks if the player is in a Cargobob and if the Cargobob can pick up the specified entity.\n\n-- Retrieve the player ped.\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the player's vehicle (cargobob).\nlocal cargobob = GetVehiclePedIsIn(playerPed, false)\n\n-- Retrieve the model hash of the cargobob.\nlocal model = GetEntityModel(cargobob)\n\n-- Check if the vehicle exists and if it's a Cargobob. If not, terminate the script.\nif not DoesEntityExist(cargobob) or GetHashKey(\"cargobob\") ~= model then\n    return\nend\n\nlocal entityID = 15362 -- The entity you want to check if the Cargobob can pick up (this is a random entity ID).\n\n-- Check if the entity exists. If not, terminate the script.\nif not DoesEntityExist(entityID) then\n    return\nend\n\n-- Check if the Cargobob can pick up the specified entity.\nif CanCargobobPickUpEntity(vehicle, entityID) then\n    print(\"Cargobob can pick up the specified entity\")\nelse\n    print(\"Cargobob can't pick up the specified entity\")\nend",
+  "codeBlocks": [
+    "// CanCargobobPickUpEntity\nBOOL CAN_CARGOBOB_PICK_UP_ENTITY(Vehicle cargobob, Entity entity);",
+    "\n-- This example checks if the player is in a Cargobob and if the Cargobob can pick up the specified entity.\n\n-- Retrieve the player ped.\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the player's vehicle (cargobob).\nlocal cargobob = GetVehiclePedIsIn(playerPed, false)\n\n-- Retrieve the model hash of the cargobob.\nlocal model = GetEntityModel(cargobob)\n\n-- Check if the vehicle exists and if it's a Cargobob. If not, terminate the script.\nif not DoesEntityExist(cargobob) or GetHashKey(\"cargobob\") ~= model then\n    return\nend\n\nlocal entityID = 15362 -- The entity you want to check if the Cargobob can pick up (this is a random entity ID).\n\n-- Check if the entity exists. If not, terminate the script.\nif not DoesEntityExist(entityID) then\n    return\nend\n\n-- Check if the Cargobob can pick up the specified entity.\nif CanCargobobPickUpEntity(vehicle, entityID) then\n    print(\"Cargobob can pick up the specified entity\")\nelse\n    print(\"Cargobob can't pick up the specified entity\")\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/CanCargobobPickUpEntity.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}
