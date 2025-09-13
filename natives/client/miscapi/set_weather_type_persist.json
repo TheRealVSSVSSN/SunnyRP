@@ -1,0 +1,26 @@
+{
+  "title": "SET_WEATHER_TYPE_PERSIST",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "SET_WEATHER_TYPE_PERSIST"
+  ],
+  "content": "0x704983DF373B198F0xC6C04C75// SetWeatherTypePersist\nvoid SET_WEATHER_TYPE_PERSIST(char* weatherType);Parameters:weatherType: The weather type to be set as persistent. Refer to SET_WEATHER_TYPE_NOW for a list of weather type strings.Sets the current weather type to persist indefinitely until changed.Note: This native is not supported in networked sessions. Please refer to SET_OVERRIDE_WEATHER or SET_WEATHER_TYPE_NOW_PERSIST if you want to override weather in networked sessions.NativeDB Introduced: v323",
+  "codeBlocks": [
+    "// SetWeatherTypePersist\nvoid SET_WEATHER_TYPE_PERSIST(char* weatherType);",
+    "NativeDB Introduced: v323"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/SetWeatherTypePersist.md",
+    "https://docs.fivem.net/natives/?_0x29B487C359E19889",
+    "https://docs.fivem.net/natives/?_0xA43D5C6FE51ADBEF",
+    "https://docs.fivem.net/natives/?_0xED712CA327900C8A",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

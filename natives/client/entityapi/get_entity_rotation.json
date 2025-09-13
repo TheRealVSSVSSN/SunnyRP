@@ -1,0 +1,24 @@
+{
+  "title": "GET_ENTITY_ROTATION",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENTITYAPI",
+    "GET_ENTITY_ROTATION"
+  ],
+  "content": "0xAFBD61CC738D9EB90x8FF45B04// GetEntityRotation\nVector3 GET_ENTITY_ROTATION(Entity entity, int rotationOrder);Parameters:entity: The entity to get the rotation for.rotationOrder: The order yaw, pitch and roll is applied. Usually 2.Returns: A vector where the Z coordinate is the yaw.NOTE: What you use for rotationOrder when getting must be the same as rotationOrder when setting the rotation.enum eRotationOrder {\n    // Rotate around the z-axis, then the y-axis and finally the x-axis.\n    ROT_ZYX = 0,\n    // Rotate around the y-axis, then the z-axis and finally the x-axis.\n    ROT_YZX = 1,\n    // Rotate around the z-axis, then the x-axis and finally the y-axis.\n    ROT_ZXY = 2,\n    // Rotate around the x-axis, then the z-axis and finally the y-axis.\n    ROT_XZY = 3,\n    // Rotate around the y-axis, then the x-axis and finally the z-axis.\n    ROT_YXZ = 4,\n    // Rotate around the x-axis, then the y-axis and finally the z-axis.\n    ROT_XYZ = 5,\n}\nExamples:LuaJavaScriptC#local playerRotation = GetEntityRotation(PlayerPedId(), 2)\nprint(playerRotation)",
+  "codeBlocks": [
+    "// GetEntityRotation\nVector3 GET_ENTITY_ROTATION(Entity entity, int rotationOrder);",
+    "enum eRotationOrder {\n    // Rotate around the z-axis, then the y-axis and finally the x-axis.\n    ROT_ZYX = 0,\n    // Rotate around the y-axis, then the z-axis and finally the x-axis.\n    ROT_YZX = 1,\n    // Rotate around the z-axis, then the x-axis and finally the y-axis.\n    ROT_ZXY = 2,\n    // Rotate around the x-axis, then the z-axis and finally the y-axis.\n    ROT_XZY = 3,\n    // Rotate around the y-axis, then the x-axis and finally the z-axis.\n    ROT_YXZ = 4,\n    // Rotate around the x-axis, then the y-axis and finally the z-axis.\n    ROT_XYZ = 5,\n}\n",
+    "local playerRotation = GetEntityRotation(PlayerPedId(), 2)\nprint(playerRotation)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/GetEntityRotation.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

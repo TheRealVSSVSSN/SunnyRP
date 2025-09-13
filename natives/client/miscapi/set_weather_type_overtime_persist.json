@@ -1,0 +1,23 @@
+{
+  "title": "SET_WEATHER_TYPE_OVERTIME_PERSIST",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "SET_WEATHER_TYPE_OVERTIME_PERSIST"
+  ],
+  "content": "0xFB5045B7C42B75BF0x386F0D25// SetWeatherTypeOvertimePersist\nvoid SET_WEATHER_TYPE_OVERTIME_PERSIST(char* weatherType, float time);Parameters:weatherType: The weather type to override to.time: A float on how long to take to transition (in seconds).Refer to SET_WEATHER_TYPE_NOW for weather types.Old name:  _SET_WEATHER_TYPE_OVER_TIME",
+  "codeBlocks": [
+    "// SetWeatherTypeOvertimePersist\nvoid SET_WEATHER_TYPE_OVERTIME_PERSIST(char* weatherType, float time);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/SetWeatherTypeOvertimePersist.md",
+    "https://docs.fivem.net/natives/?_0x29B487C359E19889",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

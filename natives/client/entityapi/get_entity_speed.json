@@ -1,0 +1,23 @@
+{
+  "title": "GET_ENTITY_SPEED",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENTITYAPI",
+    "GET_ENTITY_SPEED"
+  ],
+  "content": "0xD5037BA82E12416F0x9E1E4798// GetEntitySpeed\nfloat GET_ENTITY_SPEED(Entity entity);Parameters:entity: Entity id you want to test for speed.Returns: Speed of a entity in m/s. You can convert to km/h using the value you get and multiply by 3.6, and miles/h by 2.236936. Also, the float returned is the length of GET_ENTITY_SPEED_VECTORGet the speed of a entity.",
+  "codeBlocks": [
+    "// GetEntitySpeed\nfloat GET_ENTITY_SPEED(Entity entity);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/GetEntitySpeed.md",
+    "https://docs.fivem.net/natives/?_0x9A8D700A51CB7B0D",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

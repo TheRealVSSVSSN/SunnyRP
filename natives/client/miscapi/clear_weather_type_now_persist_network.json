@@ -1,0 +1,23 @@
+{
+  "title": "CLEAR_WEATHER_TYPE_NOW_PERSIST_NETWORK",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "CLEAR_WEATHER_TYPE_NOW_PERSIST_NETWORK"
+  ],
+  "content": "0x0CF97F497FE7D048// ClearWeatherTypeNowPersistNetwork\nvoid CLEAR_WEATHER_TYPE_NOW_PERSIST_NETWORK(int transitionTimeInMs);Parameters:transitionTimeInMs: Transition time in milliseconds.Clears the active weather type after a specific amount of time determined by transitionTimeInMs.Examples:LuaRegisterCommand('weathertransition', function(source, args)\n    -- Set the weather type to foggy so we can see the change\n    SetWeatherTypeNowPersist(\"FOGGY\")\n    -- Clear the weather and run the transition\n    local transitionTimeInMs = tonumber(args[1]) or 5000\n    if transitionTimeInMs > 0 then\n        ClearWeatherTypeNowPersistNetwork(transitionTimeInMs)\n    end\nend, false)",
+  "codeBlocks": [
+    "// ClearWeatherTypeNowPersistNetwork\nvoid CLEAR_WEATHER_TYPE_NOW_PERSIST_NETWORK(int transitionTimeInMs);",
+    "RegisterCommand('weathertransition', function(source, args)\n    -- Set the weather type to foggy so we can see the change\n    SetWeatherTypeNowPersist(\"FOGGY\")\n    -- Clear the weather and run the transition\n    local transitionTimeInMs = tonumber(args[1]) or 5000\n    if transitionTimeInMs > 0 then\n        ClearWeatherTypeNowPersistNetwork(transitionTimeInMs)\n    end\nend, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/ClearWeatherTypeNowPersistNetwork.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

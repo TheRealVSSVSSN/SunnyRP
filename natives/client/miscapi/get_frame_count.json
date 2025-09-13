@@ -1,0 +1,23 @@
+{
+  "title": "GET_FRAME_COUNT",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "GET_FRAME_COUNT"
+  ],
+  "content": "0xFC8202EFC642E6F20xB477A015// GetFrameCount\nint GET_FRAME_COUNT();Returns: The number of the current frame being displayed.Gets the number of the current frame being displayed.Examples:Lua-- Create a thread\nCitizen.CreateThread(function()\n    -- Loop forever\n    while true do\n        -- Get the number of the current frame being displayed\n        local startCount = GetFrameCount()\n\n        -- Wait one second\n        Wait(1000)\n\n        -- Get the new number of the current frame being displayed, after waiting one second\n        local endCount = GetFrameCount()\n\n        -- Calculate the number of frames that have been rendered between the two points\n        local frameNum = endCount - startCount\n\n        -- Print the output to the console, mentioning that it is an approximate value\n        print(\"Approximate FPS: \"..frameNum)\n    end\nend)",
+  "codeBlocks": [
+    "// GetFrameCount\nint GET_FRAME_COUNT();",
+    "-- Create a thread\nCitizen.CreateThread(function()\n    -- Loop forever\n    while true do\n        -- Get the number of the current frame being displayed\n        local startCount = GetFrameCount()\n\n        -- Wait one second\n        Wait(1000)\n\n        -- Get the new number of the current frame being displayed, after waiting one second\n        local endCount = GetFrameCount()\n\n        -- Calculate the number of frames that have been rendered between the two points\n        local frameNum = endCount - startCount\n\n        -- Print the output to the console, mentioning that it is an approximate value\n        print(\"Approximate FPS: \"..frameNum)\n    end\nend)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/GetFrameCount.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

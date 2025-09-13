@@ -1,0 +1,23 @@
+{
+  "title": "GET_FRAME_TIME",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "GET_FRAME_TIME"
+  ],
+  "content": "0x15C40837039FFAF70x96374262// GetFrameTime\nfloat GET_FRAME_TIME();Returns: The frame time (in seconds) of the last frame.Gets the high precision frame time of the last frame in seconds.note: the example above is way less precise.Examples:Lualocal time1 = GetGameTimer()\nCitizen.Wait(0)\n\n-- Prints for example 0.01253530010581 at around 90 FPS\nprint(GetFrameTime())\n\n-- This would print about the same as above, but is less accurate, ie: 0.012\nprint((GetGameTimer() - time1) / 1000)",
+  "codeBlocks": [
+    "// GetFrameTime\nfloat GET_FRAME_TIME();",
+    "local time1 = GetGameTimer()\nCitizen.Wait(0)\n\n-- Prints for example 0.01253530010581 at around 90 FPS\nprint(GetFrameTime())\n\n-- This would print about the same as above, but is less accurate, ie: 0.012\nprint((GetGameTimer() - time1) / 1000)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/GetFrameTime.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

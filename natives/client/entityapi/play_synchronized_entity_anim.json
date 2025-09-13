@@ -1,0 +1,24 @@
+{
+  "title": "PLAY_SYNCHRONIZED_ENTITY_ANIM",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENTITYAPI",
+    "PLAY_SYNCHRONIZED_ENTITY_ANIM"
+  ],
+  "content": "0xC77720A12FE14A860x012760AA// PlaySynchronizedEntityAnim\nBOOL PLAY_SYNCHRONIZED_ENTITY_ANIM(Entity entity, int syncedScene, char* animName, char* animDictName, float fBlendInDelta, float fBlendOutDelta, int iFlags, float fMoverBlendInDelta);Parameters:entity: The entity handle to play the animation on.syncedScene: animName: The name of the animation to play.animDictName: The name of the animation dictionary to use.fBlendInDelta: Blend in time.fBlendOutDelta: Blend out time.iFlags: The flags to use when playing the animation. See TASK_PLAY_ANIM.fMoverBlendInDelta: Animations list",
+  "codeBlocks": [
+    "// PlaySynchronizedEntityAnim\nBOOL PLAY_SYNCHRONIZED_ENTITY_ANIM(Entity entity, int syncedScene, char* animName, char* animDictName, float fBlendInDelta, float fBlendOutDelta, int iFlags, float fMoverBlendInDelta);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/PlaySynchronizedEntityAnim.md",
+    "https://docs.fivem.net/natives/?_0xEA47FE3719165B94",
+    "https://alexguirre.github.io/animations-list/",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

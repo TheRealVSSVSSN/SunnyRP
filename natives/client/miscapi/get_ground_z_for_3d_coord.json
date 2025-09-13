@@ -1,0 +1,24 @@
+{
+  "title": "GET_GROUND_Z_FOR_3D_COORD",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "GET_GROUND_Z_FOR_3D_COORD"
+  ],
+  "content": "0xC906A7DAB05C8D2B0xA1BFD5E0// GetGroundZFor_3dCoord\nBOOL GET_GROUND_Z_FOR_3D_COORD(float x, float y, float z, float* groundZ, BOOL includeWater);Parameters:x: Position on the X-axis to get ground elevation.y: Position on the Y-axis to get ground elevation.z: Position on the Z-axis to get ground elevation.groundZ: includeWater: Determines if the top water level at the specified position should be considered the ground elevation. (It would only matter if the specified position is located above or under the water)Returns: This native`s first return value (retval) will return true if the ground elevation has been found, and the second (groundZ) will return the z-coord which represents the ground elevation at the specified position.This native gets the ground level (ground elevation) and returns the Z coordinate that represents it.\nNote: This native can only calculate the elevation when the coordinates are within the render distance of the client.NativeDB Added Parameter 6: BOOL p5Examples:Lualocal ped = PlayerPedId()\nlocal pedCoords = GetEntityCoords(ped) \nlocal retval, groundZ = GetGroundZFor_3dCoord(pedCoords.x, pedCoords.y, pedCoords.z, true)\n\nif retval then\n   -- Do stuff with groundZ\nend",
+  "codeBlocks": [
+    "// GetGroundZFor_3dCoord\nBOOL GET_GROUND_Z_FOR_3D_COORD(float x, float y, float z, float* groundZ, BOOL includeWater);",
+    "NativeDB Added Parameter 6: BOOL p5",
+    "local ped = PlayerPedId()\nlocal pedCoords = GetEntityCoords(ped) \nlocal retval, groundZ = GetGroundZFor_3dCoord(pedCoords.x, pedCoords.y, pedCoords.z, true)\n\nif retval then\n   -- Do stuff with groundZ\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/GetGroundZFor_3dCoord.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

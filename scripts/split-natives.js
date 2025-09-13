@@ -28,7 +28,8 @@ function collect(entries, trail = [], out = []) {
         breadcrumbs: entry.breadcrumbs || crumbs,
         content: entry.content || '',
         codeBlocks: entry.codeBlocks || [],
-        urls: entry.urls || []
+        urls: entry.urls || [],
+        tags: entry.tags || []
       });
     }
     if (Array.isArray(entry.children) && entry.children.length) {
@@ -39,12 +40,10 @@ function collect(entries, trail = [], out = []) {
 }
 
 function classify(native) {
-  const text = `${native.title} ${native.content}`.toLowerCase();
-  const hasServer = text.includes('server');
-  const hasClient = text.includes('client');
+  const tags = native.tags.map(t => t.toLowerCase());
   let scope = 'shared';
-  if (hasServer && !hasClient) scope = 'server';
-  else if (hasClient && !hasServer) scope = 'client';
+  if (tags.includes('server') && !tags.includes('client')) scope = 'server';
+  else if (tags.includes('client') && !tags.includes('server')) scope = 'client';
   const category = (native.breadcrumbs[1] || 'misc').toLowerCase().replace(/\s+/g, '_');
   return { scope, category };
 }

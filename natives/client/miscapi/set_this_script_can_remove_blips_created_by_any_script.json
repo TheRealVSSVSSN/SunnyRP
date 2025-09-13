@@ -1,0 +1,22 @@
+{
+  "title": "SET_THIS_SCRIPT_CAN_REMOVE_BLIPS_CREATED_BY_ANY_SCRIPT",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "SET_THIS_SCRIPT_CAN_REMOVE_BLIPS_CREATED_BY_ANY_SCRIPT"
+  ],
+  "content": "0xB98236CAAECEF8970xD06F1720// SetThisScriptCanRemoveBlipsCreatedByAnyScript\nvoid SET_THIS_SCRIPT_CAN_REMOVE_BLIPS_CREATED_BY_ANY_SCRIPT(BOOL toggle);Parameters:toggle: Bool indicating if the script that called this native can remove blips created by other scripts.Normally, blips can only be removed by the script or resource that created them. However, this native function allows a script to bypass this logic and remove blips from any script.",
+  "codeBlocks": [
+    "// SetThisScriptCanRemoveBlipsCreatedByAnyScript\nvoid SET_THIS_SCRIPT_CAN_REMOVE_BLIPS_CREATED_BY_ANY_SCRIPT(BOOL toggle);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/SetThisScriptCanRemoveBlipsCreatedByAnyScript.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

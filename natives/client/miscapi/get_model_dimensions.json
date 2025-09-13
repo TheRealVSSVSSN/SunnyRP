@@ -1,0 +1,23 @@
+{
+  "title": "GET_MODEL_DIMENSIONS",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "GET_MODEL_DIMENSIONS"
+  ],
+  "content": "0x03E8D3D5F549087A0x91ABB8E0// GetModelDimensions\nvoid GET_MODEL_DIMENSIONS(Hash modelHash, Vector3* minimum, Vector3* maximum);Gets the dimensions of a model.\nCalculate (maximum - minimum) to get the size, in which case, Y will be how long the model is.\nExample from the scripts: MISC::GET_MODEL_DIMENSIONS(ENTITY::GET_ENTITY_MODEL(PLAYER::PLAYER_PED_ID()), &v_1A, &v_17);",
+  "codeBlocks": [
+    "// GetModelDimensions\nvoid GET_MODEL_DIMENSIONS(Hash modelHash, Vector3* minimum, Vector3* maximum);",
+    "Gets the dimensions of a model.\nCalculate (maximum - minimum) to get the size, in which case, Y will be how long the model is.\nExample from the scripts: MISC::GET_MODEL_DIMENSIONS(ENTITY::GET_ENTITY_MODEL(PLAYER::PLAYER_PED_ID()), &v_1A, &v_17);\n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/GetModelDimensions.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

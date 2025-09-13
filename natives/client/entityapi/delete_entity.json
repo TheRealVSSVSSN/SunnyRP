@@ -1,0 +1,24 @@
+{
+  "title": "DELETE_ENTITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENTITYAPI",
+    "DELETE_ENTITY"
+  ],
+  "content": "0xAE3CBE5BF394C9C90xFAA3D236// DeleteEntity\nvoid DELETE_ENTITY(Entity* entity);Parameters:entity: The entity to delete.Delete the specified entity, and invalidate the passed handle (i.e., the in/out argument).\nYou might want to check if the entity exists before with DOES_ENTITY_EXIST.Examples:LuaJavaScriptC#-- Retrieve the vehicle the player is currently in. \nlocal vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n\n-- Check if the vehicle exists in the game world.\nif not DoesEntityExist(vehicle) then \n    -- If the vehicle does not exist, end the execution of the code here.\n    return \nend\n\n-- If the vehicle does exist, delete the vehicle entity from the game world.\nDeleteEntity(vehicle)",
+  "codeBlocks": [
+    "// DeleteEntity\nvoid DELETE_ENTITY(Entity* entity);",
+    "-- Retrieve the vehicle the player is currently in. \nlocal vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n\n-- Check if the vehicle exists in the game world.\nif not DoesEntityExist(vehicle) then \n    -- If the vehicle does not exist, end the execution of the code here.\n    return \nend\n\n-- If the vehicle does exist, delete the vehicle entity from the game world.\nDeleteEntity(vehicle)\n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/DeleteEntity.md",
+    "https://docs.fivem.net/natives/?_0x7239B21A38F536BA",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

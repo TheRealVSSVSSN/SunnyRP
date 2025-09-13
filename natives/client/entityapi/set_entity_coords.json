@@ -1,0 +1,23 @@
+{
+  "title": "SET_ENTITY_COORDS",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENTITYAPI",
+    "SET_ENTITY_COORDS"
+  ],
+  "content": "0x06843DA7060A026B0xDF70B41B// SetEntityCoords\nvoid SET_ENTITY_COORDS(Entity entity, float xPos, float yPos, float zPos, BOOL alive, BOOL deadFlag, BOOL ragdollFlag, BOOL clearArea);Parameters:entity: The entity to change coordinates for.xPos: The X coordinate.yPos: The Y coordinate.zPos: The Z coordinate, ground level.alive: Unused by the game, potentially used by debug builds of GTA in order to assert whether or not an entity was alive.deadFlag: Whether to disable physics for dead peds, too, and not just living peds.ragdollFlag: A special flag used for ragdolling peds.clearArea: Whether to clear any entities in the target area.Sets the coordinates (world position) for a specified entity, offset by the radius of the entity on the Z axis.Examples:LuaJavaScriptC#local ped = PlayerPedId()\nlocal currentPos = GetEntityCoords(ped)\nprint(currentPos)\n\nSetEntityCoords(ped, 674.883, 548.269, 133.94, false, false, false, true)\n\ncurrentPos = GetEntityCoords(ped)\nprint(currentPos) -- changed!",
+  "codeBlocks": [
+    "// SetEntityCoords\nvoid SET_ENTITY_COORDS(Entity entity, float xPos, float yPos, float zPos, BOOL alive, BOOL deadFlag, BOOL ragdollFlag, BOOL clearArea);",
+    "local ped = PlayerPedId()\nlocal currentPos = GetEntityCoords(ped)\nprint(currentPos)\n\nSetEntityCoords(ped, 674.883, 548.269, 133.94, false, false, false, true)\n\ncurrentPos = GetEntityCoords(ped)\nprint(currentPos) -- changed!"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/SetEntityCoords.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

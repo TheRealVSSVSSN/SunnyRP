@@ -1,0 +1,23 @@
+{
+  "title": "CLEAR_AREA_OF_PROJECTILES",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "CLEAR_AREA_OF_PROJECTILES"
+  ],
+  "content": "0x0A1CB9094635D1A60x18DB5434// ClearAreaOfProjectiles\nvoid CLEAR_AREA_OF_PROJECTILES(float x, float y, float z, float radius, BOOL createNetEvent);Parameters:x: The x coordinate of where to clear projectiles.y: The y coordinate of where to clear projectiles.z: The z coordinate of where to clear projectiles.radius: The area radius to clear projectiles.createNetEvent: specifies whether a CClearAreaEvent event of should be created for online use.Clears an area of projectiles at the given coordinates and radius.Examples:Lua-- Clear the area, do also create an event\nClearAreaOfProjectiles(0.0, 0.0, 0.0, 10000.0, true)",
+  "codeBlocks": [
+    "// ClearAreaOfProjectiles\nvoid CLEAR_AREA_OF_PROJECTILES(float x, float y, float z, float radius, BOOL createNetEvent);",
+    "-- Clear the area, do also create an event\nClearAreaOfProjectiles(0.0, 0.0, 0.0, 10000.0, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/ClearAreaOfProjectiles.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

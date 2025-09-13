@@ -1,0 +1,23 @@
+{
+  "title": "GET_ENTITY_FORWARD_VECTOR",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENTITYAPI",
+    "GET_ENTITY_FORWARD_VECTOR"
+  ],
+  "content": "0x0A794A5A57F8DF910x84DCECBF// GetEntityForwardVector\nVector3 GET_ENTITY_FORWARD_VECTOR(Entity entity);Parameters:entity: The entity to get the forward vector for.Returns: The forward vector.Gets the entity's forward vector.",
+  "codeBlocks": [
+    "// GetEntityForwardVector\nVector3 GET_ENTITY_FORWARD_VECTOR(Entity entity);",
+    "Gets the entity's forward vector."
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/GetEntityForwardVector.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}
