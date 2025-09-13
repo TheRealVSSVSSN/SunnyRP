@@ -1,0 +1,25 @@
+{
+  "title": "GET_VEHICLE_TYPE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_VEHICLE_TYPE"
+  ],
+  "content": "0xA273060E// GetVehicleType\nchar* GET_VEHICLE_TYPE(Vehicle vehicle);Parameters:vehicle: The vehicle's entity handle.Returns: If the entity is a vehicle, the vehicle type. If it is not a vehicle, the return value will be null.Returns the type of the passed vehicle.For client scripts, reference the more detailed GET_VEHICLE_TYPE_RAW native.Vehicle typesautomobilebikeboatheliplanesubmarinetrailertrain",
+  "codeBlocks": [
+    "// GetVehicleType\nchar* GET_VEHICLE_TYPE(Vehicle vehicle);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for GET_VEHICLE_TYPE\nGetVehicleType(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetVehicleType.md",
+    "https://docs.fivem.net/natives/?_0xDE73BC10",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client",
+    "server"
+  ]
+}

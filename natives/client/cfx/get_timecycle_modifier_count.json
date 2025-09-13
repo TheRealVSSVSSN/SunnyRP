@@ -1,0 +1,24 @@
+{
+  "title": "GET_TIMECYCLE_MODIFIER_COUNT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_TIMECYCLE_MODIFIER_COUNT"
+  ],
+  "content": "0xFE2A1D4D// GetTimecycleModifierCount\nint GET_TIMECYCLE_MODIFIER_COUNT();Returns: Returns the amount of timecycle modifiers loaded.Examples:Lualocal count = GetTimecycleModifierCount()\nprint(\"we have  \" .. count .. \"timecycle modifiers loaded\")",
+  "codeBlocks": [
+    "// GetTimecycleModifierCount\nint GET_TIMECYCLE_MODIFIER_COUNT();",
+    "local count = GetTimecycleModifierCount()",
+    "-- Example usage for GET_TIMECYCLE_MODIFIER_COUNT\nGetTimecycleModifierCount()"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetTimecycleModifierCount.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

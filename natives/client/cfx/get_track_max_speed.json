@@ -1,0 +1,23 @@
+{
+  "title": "GET_TRACK_MAX_SPEED",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_TRACK_MAX_SPEED"
+  ],
+  "content": "0x34EE2BF3// GetTrackMaxSpeed\nfloat GET_TRACK_MAX_SPEED(int track);Parameters:track: The track id (between 0 - 27)Returns: The max speed of the track",
+  "codeBlocks": [
+    "// GetTrackMaxSpeed\nfloat GET_TRACK_MAX_SPEED(int track);",
+    "-- Example usage for GET_TRACK_MAX_SPEED\nGetTrackMaxSpeed(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetTrackMaxSpeed.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

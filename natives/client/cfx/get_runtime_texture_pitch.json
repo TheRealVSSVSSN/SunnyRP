@@ -1,0 +1,23 @@
+{
+  "title": "GET_RUNTIME_TEXTURE_PITCH",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_RUNTIME_TEXTURE_PITCH"
+  ],
+  "content": "0xCA0A085F// GetRuntimeTexturePitch\nint GET_RUNTIME_TEXTURE_PITCH(long tex);Parameters:tex: A handle to the runtime texture.Returns: The row pitch in bytes.Gets the row pitch of the specified runtime texture, for use when creating data for SET_RUNTIME_TEXTURE_ARGB_DATA.",
+  "codeBlocks": [
+    "// GetRuntimeTexturePitch\nint GET_RUNTIME_TEXTURE_PITCH(long tex);",
+    "-- Example usage for GET_RUNTIME_TEXTURE_PITCH\nGetRuntimeTexturePitch(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetRuntimeTexturePitch.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

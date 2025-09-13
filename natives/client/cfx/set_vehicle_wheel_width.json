@@ -1,0 +1,23 @@
+{
+  "title": "SET_VEHICLE_WHEEL_WIDTH",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_VEHICLE_WHEEL_WIDTH"
+  ],
+  "content": "0x64C3F1C0// SetVehicleWheelWidth\nBOOL SET_VEHICLE_WHEEL_WIDTH(Vehicle vehicle, float width);Parameters:vehicle: The vehicle to set data for.width: Width of the wheels (usually between 0.1 and 1.5 is reasonable).Returns: Bool - whether change was successful or notSets vehicle's wheels' width (width is the same for all the wheels, cannot get/set specific wheel of vehicle).\nOnly works on non-default wheels.\nReturns whether change was successful (can be false if trying to set width for non-default wheels).",
+  "codeBlocks": [
+    "// SetVehicleWheelWidth\nBOOL SET_VEHICLE_WHEEL_WIDTH(Vehicle vehicle, float width);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for SET_VEHICLE_WHEEL_WIDTH\nSetVehicleWheelWidth(vehicle, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetVehicleWheelWidth.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

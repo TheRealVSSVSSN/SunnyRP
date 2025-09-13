@@ -1,0 +1,25 @@
+{
+  "title": "GET_ENTITY_ANIM_CURRENT_TIME",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENTITYAPI",
+    "GET_ENTITY_ANIM_CURRENT_TIME"
+  ],
+  "content": "0x346D81500D088F420x83943F41// GetEntityAnimCurrentTime\nfloat GET_ENTITY_ANIM_CURRENT_TIME(Entity entity, char* animDict, char* animName);Returns a float value representing animation's current playtime with respect to its total playtime. This value increasing in a range from [0 to 1] and wrap back to 0 when it reach 1.  \nExample:  \n0.000000 - mark the starting of animation.  \n0.500000 - mark the midpoint of the animation.  \n1.000000 - mark the end of animation.  \nAnimations list",
+  "codeBlocks": [
+    "// GetEntityAnimCurrentTime\nfloat GET_ENTITY_ANIM_CURRENT_TIME(Entity entity, char* animDict, char* animName);",
+    "Returns a float value representing animation's current playtime with respect to its total playtime. This value increasing in a range from [0 to 1] and wrap back to 0 when it reach 1.  \nExample:  \n0.000000 - mark the starting of animation.  \n0.500000 - mark the midpoint of the animation.  \n1.000000 - mark the end of animation.",
+    "local entity = PlayerPedId()\n-- Example usage for GET_ENTITY_ANIM_CURRENT_TIME\nGetEntityAnimCurrentTime(entity, '', '')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/GetEntityAnimCurrentTime.md",
+    "https://alexguirre.github.io/animations-list/",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

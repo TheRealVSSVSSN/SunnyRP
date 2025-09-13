@@ -1,0 +1,24 @@
+{
+  "title": "GET_WATER_QUAD_TYPE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_WATER_QUAD_TYPE"
+  ],
+  "content": "0xE2501B8B// GetWaterQuadType\nBOOL GET_WATER_QUAD_TYPE(int waterQuad, int* waterType);Parameters:waterQuad: The water quad indexwaterType: Returns: Returns true on success. Type is undefined on failureValid type definitions:0 Square1 Right triangle where the 90 degree angle is at maxX, minY2 Right triangle where the 90 degree angle is at minX, minY3 Right triangle where the 90 degree angle is at minX, maxY4 Right triangle where the 90 degree angle is at maxY, maxYExamples:Lualocal success, type = GetWaterQuadType(0)",
+  "codeBlocks": [
+    "// GetWaterQuadType\nBOOL GET_WATER_QUAD_TYPE(int waterQuad, int* waterType);",
+    "local success, type = GetWaterQuadType(0)",
+    "-- Example usage for GET_WATER_QUAD_TYPE\nGetWaterQuadType(0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetWaterQuadType.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

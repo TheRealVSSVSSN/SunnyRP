@@ -1,0 +1,23 @@
+{
+  "title": "SET_RUNTIME_TEXTURE_PIXEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_RUNTIME_TEXTURE_PIXEL"
+  ],
+  "content": "0xAB65ACEE// SetRuntimeTexturePixel\nvoid SET_RUNTIME_TEXTURE_PIXEL(long tex, int x, int y, int r, int g, int b, int a);Parameters:tex: A handle to the runtime texture.x: The X position of the pixel to change.y: The Y position of the pixel to change.r: The new R value (0-255).g: The new G value (0-255).b: The new B value (0-255).a: The new A value (0-255).Sets a pixel in the specified runtime texture. This will have to be committed using COMMIT_RUNTIME_TEXTURE to have any effect.",
+  "codeBlocks": [
+    "// SetRuntimeTexturePixel\nvoid SET_RUNTIME_TEXTURE_PIXEL(long tex, int x, int y, int r, int g, int b, int a);",
+    "-- Example usage for SET_RUNTIME_TEXTURE_PIXEL\nSetRuntimeTexturePixel(0, 0, 0, 0, 0, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetRuntimeTexturePixel.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

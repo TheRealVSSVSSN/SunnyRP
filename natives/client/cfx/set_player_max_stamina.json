@@ -1,0 +1,23 @@
+{
+  "title": "SET_PLAYER_MAX_STAMINA",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_PLAYER_MAX_STAMINA"
+  ],
+  "content": "0x35594F67// SetPlayerMaxStamina\nbool SET_PLAYER_MAX_STAMINA(Player playerId, float maxStamina);Parameters:playerId: The player indexmaxStamina: The value you want to setReturns: Did you manage to set the value.",
+  "codeBlocks": [
+    "// SetPlayerMaxStamina\nbool SET_PLAYER_MAX_STAMINA(Player playerId, float maxStamina);",
+    "local player = PlayerId()\n-- Example usage for SET_PLAYER_MAX_STAMINA\nSetPlayerMaxStamina(player, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetPlayerMaxStamina.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

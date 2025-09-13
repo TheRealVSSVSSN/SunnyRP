@@ -1,0 +1,25 @@
+{
+  "title": "GET_VEHICLE_HORN_TYPE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_VEHICLE_HORN_TYPE"
+  ],
+  "content": "0xDEA49773// GetVehicleHornType\nHash GET_VEHICLE_HORN_TYPE(Vehicle vehicle);Parameters:vehicle: The vehicle to check the horn type.Returns: Returns the vehicle horn type hash, or 0 if one is not set.This is a getter for the client-side native START_VEHICLE_HORN, which allows you to return the horn type of the vehicle.Note: This native only gets the hash value set with START_VEHICLE_HORN. If a wrong hash is passed into START_VEHICLE_HORN, it will return this wrong hash.enum eHornTypes\n{\n    NORMAL = 1330140148,\n    HELDDOWN = -2087385909,\n    AGGRESSIVE = -92810745\n}",
+  "codeBlocks": [
+    "// GetVehicleHornType\nHash GET_VEHICLE_HORN_TYPE(Vehicle vehicle);",
+    "enum eHornTypes\n{\n    NORMAL = 1330140148,\n    HELDDOWN = -2087385909,\n    AGGRESSIVE = -92810745\n}",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for GET_VEHICLE_HORN_TYPE\nGetVehicleHornType(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetVehicleHornType.md",
+    "https://docs.fivem.net/natives/?_0x9C8C6504B5B63D2C",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

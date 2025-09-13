@@ -1,0 +1,24 @@
+{
+  "title": "GET_INTERIOR_POSITION",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_INTERIOR_POSITION"
+  ],
+  "content": "0x77A435B0// GetInteriorPosition\nvoid GET_INTERIOR_POSITION(int interiorId, float* posX, float* posY, float* posZ);Parameters:interiorId: The target interior.posX: posY: posZ: Returns: Interior position.Examples:Lualocal playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\n\nif interiorId ~= 0 then\n  local x, y, z = GetInteriorPosition(interiorId)\n  print(\"current interior \" .. interiorId .. \" position is: \" .. vec(x, y, z))\nend",
+  "codeBlocks": [
+    "// GetInteriorPosition\nvoid GET_INTERIOR_POSITION(int interiorId, float* posX, float* posY, float* posZ);",
+    "local playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\n\nif interiorId ~= 0 then\n  local x, y, z = GetInteriorPosition(interiorId)\nend",
+    "-- Example usage for GET_INTERIOR_POSITION\nGetInteriorPosition(0, 0, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetInteriorPosition.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "GET_HELI_REAR_ROTOR_DAMAGE_SCALE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_HELI_REAR_ROTOR_DAMAGE_SCALE"
+  ],
+  "content": "0xC40161E2// GetHeliRearRotorDamageScale\nfloat GET_HELI_REAR_ROTOR_DAMAGE_SCALE(Vehicle heli);Parameters:heli: The helicopter to checkReturns: Returns a value representing the damage scaling factor applied to the helicopter's rear rotor. The value ranges from 0.0 (no damage scaling) to1.0 (full damage scaling).",
+  "codeBlocks": [
+    "// GetHeliRearRotorDamageScale\nfloat GET_HELI_REAR_ROTOR_DAMAGE_SCALE(Vehicle heli);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for GET_HELI_REAR_ROTOR_DAMAGE_SCALE\nGetHeliRearRotorDamageScale(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetHeliRearRotorDamageScale.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

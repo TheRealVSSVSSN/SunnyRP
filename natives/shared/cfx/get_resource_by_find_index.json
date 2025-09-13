@@ -1,0 +1,25 @@
+{
+  "title": "GET_RESOURCE_BY_FIND_INDEX",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_RESOURCE_BY_FIND_INDEX"
+  ],
+  "content": "0x387246B7// GetResourceByFindIndex\nchar* GET_RESOURCE_BY_FIND_INDEX(int findIndex);Parameters:findIndex: The index of the resource (starting at 0)Returns: The resource name as a stringExamples:Lualocal resourceList = {}\nfor i = 0, GetNumResources(), 1 do\n  local resource_name = GetResourceByFindIndex(i)\n  if resource_name and GetResourceState(resource_name) == \"started\" then\n    table.insert(resourceList, resource_name)\n  end\nend\nprint(table.unpack(resourceList))",
+  "codeBlocks": [
+    "// GetResourceByFindIndex\nchar* GET_RESOURCE_BY_FIND_INDEX(int findIndex);",
+    "local resourceList = {}\nfor i = 0, GetNumResources(), 1 do\n  local resource_name = GetResourceByFindIndex(i)\n  if resource_name and GetResourceState(resource_name) == \"started\" then\n    table.insert(resourceList, resource_name)\n  end\nend",
+    "-- Example usage for GET_RESOURCE_BY_FIND_INDEX\nGetResourceByFindIndex(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetResourceByFindIndex.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client",
+    "server"
+  ]
+}

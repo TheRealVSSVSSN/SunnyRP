@@ -1,0 +1,26 @@
+{
+  "title": "SET_RESOURCE_KVP_INT_NO_SYNC",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_RESOURCE_KVP_INT_NO_SYNC"
+  ],
+  "content": "0x26AEB707// SetResourceKvpIntNoSync\nvoid SET_RESOURCE_KVP_INT_NO_SYNC(char* key, int value);Parameters:key: The key to setvalue: The value to writeNonsynchronous SET_RESOURCE_KVP_INT operation; see FLUSH_RESOURCE_KVP.",
+  "codeBlocks": [
+    "// SetResourceKvpIntNoSync\nvoid SET_RESOURCE_KVP_INT_NO_SYNC(char* key, int value);",
+    "-- Example usage for SET_RESOURCE_KVP_INT_NO_SYNC\nSetResourceKvpIntNoSync('', 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetResourceKvpIntNoSync.md",
+    "https://docs.fivem.net/natives/?_0x6A2B1E8",
+    "https://docs.fivem.net/natives/?_0x5240DA5A",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client",
+    "server"
+  ]
+}

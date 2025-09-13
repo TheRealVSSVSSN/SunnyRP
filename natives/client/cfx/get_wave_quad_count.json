@@ -1,0 +1,24 @@
+{
+  "title": "GET_WAVE_QUAD_COUNT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_WAVE_QUAD_COUNT"
+  ],
+  "content": "0x9250C76// GetWaveQuadCount\nint GET_WAVE_QUAD_COUNT();Returns: Returns the amount of wave quads loaded.Examples:Lualocal waveQuadCount = GetWaveQuadCount()",
+  "codeBlocks": [
+    "// GetWaveQuadCount\nint GET_WAVE_QUAD_COUNT();",
+    "local waveQuadCount = GetWaveQuadCount()",
+    "-- Example usage for GET_WAVE_QUAD_COUNT\nGetWaveQuadCount()"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetWaveQuadCount.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

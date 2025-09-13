@@ -1,0 +1,23 @@
+{
+  "title": "SET_VEHICLE_NEXT_GEAR",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_VEHICLE_NEXT_GEAR"
+  ],
+  "content": "0x3A4566F4// SetVehicleNextGear\nvoid SET_VEHICLE_NEXT_GEAR(Vehicle vehicle, int nextGear);Parameters:vehicle: The vehicle handle.nextGear: The vehicles next gear.",
+  "codeBlocks": [
+    "// SetVehicleNextGear\nvoid SET_VEHICLE_NEXT_GEAR(Vehicle vehicle, int nextGear);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for SET_VEHICLE_NEXT_GEAR\nSetVehicleNextGear(vehicle, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetVehicleNextGear.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

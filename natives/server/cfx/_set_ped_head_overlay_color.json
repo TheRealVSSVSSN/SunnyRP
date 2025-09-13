@@ -1,0 +1,26 @@
+{
+  "title": "_SET_PED_HEAD_OVERLAY_COLOR",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "_SET_PED_HEAD_OVERLAY_COLOR"
+  ],
+  "content": "0x78935A27// SetPedHeadOverlayColor\nvoid _SET_PED_HEAD_OVERLAY_COLOR(Ped ped, int overlayID, int colorType, int colorID, int secondColorID);Parameters:ped: The ped entityoverlayID: An integer representing the overlay idcolorType: 1 for eyebrows, beards, makeup, and chest hair; 2 for blush and lipstick; and 0 otherwise, though not called in those cases.colorID: An integer representing the primary color idsecondColorID: An integer representing the secondary color idUsed for freemode (online) characters.\nCalled after SET_PED_HEAD_OVERLAY().\nNote:\nYou may need to call SetPedHeadBlendData prior to calling this native in order for it to work.This is the server-side RPC native equivalent of the client native _SET_PED_HEAD_OVERLAY_COLOR.",
+  "codeBlocks": [
+    "// SetPedHeadOverlayColor\nvoid _SET_PED_HEAD_OVERLAY_COLOR(Ped ped, int overlayID, int colorType, int colorID, int secondColorID);",
+    "Used for freemode (online) characters.\nCalled after SET_PED_HEAD_OVERLAY().",
+    "local ped = PlayerPedId()\n-- Example usage for _SET_PED_HEAD_OVERLAY_COLOR\n_SetPedHeadOverlayColor(ped, 0, 0, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetPedHeadOverlayColor.md",
+    "https://docs.fivem.net/natives/?_0x9414E18B9434C2FE",
+    "https://docs.fivem.net/natives/?_0x497BF74A7B9CB952",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

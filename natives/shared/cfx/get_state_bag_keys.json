@@ -1,0 +1,24 @@
+{
+  "title": "GET_STATE_BAG_KEYS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_STATE_BAG_KEYS"
+  ],
+  "content": "0x78D864C7// GetStateBagKeys\nobject GET_STATE_BAG_KEYS(char* bagName);Parameters:bagName: The name of the bag.Returns: Returns an array containing all keys for which the state bag has associated values.",
+  "codeBlocks": [
+    "// GetStateBagKeys\nobject GET_STATE_BAG_KEYS(char* bagName);",
+    "-- Example usage for GET_STATE_BAG_KEYS\nGetStateBagKeys('')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetStateBagKeys.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client",
+    "server"
+  ]
+}

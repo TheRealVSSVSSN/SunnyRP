@@ -1,0 +1,23 @@
+{
+  "title": "SET_TRACK_JUNCTION_ACTIVE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_TRACK_JUNCTION_ACTIVE"
+  ],
+  "content": "0x537B449D// SetTrackJunctionActive\nbool SET_TRACK_JUNCTION_ACTIVE(int junctionIndex, bool state);Parameters:junctionIndex: The junctions indexstate: Toggles the state of the junctionReturns: Returns if it succeeds setting the junctions state or notSets the state of a track junction.",
+  "codeBlocks": [
+    "// SetTrackJunctionActive\nbool SET_TRACK_JUNCTION_ACTIVE(int junctionIndex, bool state);",
+    "-- Example usage for SET_TRACK_JUNCTION_ACTIVE\nSetTrackJunctionActive(0, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetTrackJunctionActive.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

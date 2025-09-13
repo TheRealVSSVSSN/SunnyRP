@@ -1,0 +1,24 @@
+{
+  "title": "GET_VISUAL_SETTING_FLOAT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_VISUAL_SETTING_FLOAT"
+  ],
+  "content": "0x15346B4D// GetVisualSettingFloat\nfloat GET_VISUAL_SETTING_FLOAT(char* name);Parameters:name: The name of the value to get, such as pedLight.color.red.Returns: Returns the floating point value of the specified visual setting on success.A getter for SET_VISUAL_SETTING_FLOAT.",
+  "codeBlocks": [
+    "// GetVisualSettingFloat\nfloat GET_VISUAL_SETTING_FLOAT(char* name);",
+    "-- Example usage for GET_VISUAL_SETTING_FLOAT\nGetVisualSettingFloat('')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetVisualSettingFloat.md",
+    "https://docs.fivem.net/natives/?_0xD1D31681",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

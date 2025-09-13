@@ -1,0 +1,24 @@
+{
+  "title": "APPLY_FORCE_TO_ENTITY_CENTER_OF_MASS",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENTITYAPI",
+    "APPLY_FORCE_TO_ENTITY_CENTER_OF_MASS"
+  ],
+  "content": "0x18FF00FC7EFF559E0x28924E98// ApplyForceToEntityCenterOfMass\nvoid APPLY_FORCE_TO_ENTITY_CENTER_OF_MASS(Entity entity, int forceType, float x, float y, float z, int nComponent, BOOL bLocalForce, BOOL bScaleByMass, BOOL bApplyToChildren);Parameters:entity: The entity handleforceType: The force type, see APPLY_FORCE_TO_ENTITYx: The x component of the force to applyy: The y component of the force to applyz: The z component of the force to applynComponent: Component of the entity to apply the force too. Only matters for breakable or articulated (ragdoll) physics. 0 means the root or parent componentbLocalForce: Specifies whether the force vector passed in is in local or world coordinates. true means the force will get automatically transformed into world space before being appliedbScaleByMass: Specifies whether to scale the force by massbApplyToChildren: Default false. If the force should be applied to any attached childrenApply a force to an entities center of mass.",
+  "codeBlocks": [
+    "// ApplyForceToEntityCenterOfMass\nvoid APPLY_FORCE_TO_ENTITY_CENTER_OF_MASS(Entity entity, int forceType, float x, float y, float z, int nComponent, BOOL bLocalForce, BOOL bScaleByMass, BOOL bApplyToChildren);",
+    "local entity = PlayerPedId()\n-- Example usage for APPLY_FORCE_TO_ENTITY_CENTER_OF_MASS\nApplyForceToEntityCenterOfMass(entity, 0, 0.0, 0.0, 0.0, 0, false, false, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/ApplyForceToEntityCenterOfMass.md",
+    "https://docs.fivem.net/natives/?_0xC5F68BE9613E2D18",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

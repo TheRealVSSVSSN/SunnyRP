@@ -1,0 +1,23 @@
+{
+  "title": "SET_PED_MODEL_PERSONALITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_PED_MODEL_PERSONALITY"
+  ],
+  "content": "0x46F6B38B// SetPedModelPersonality\nvoid SET_PED_MODEL_PERSONALITY(Hash modelHash, Hash personalityHash);Parameters:modelHash: Ped's model.personalityHash: Personality hash.Overrides a ped model personality type.",
+  "codeBlocks": [
+    "// SetPedModelPersonality\nvoid SET_PED_MODEL_PERSONALITY(Hash modelHash, Hash personalityHash);",
+    "-- Example usage for SET_PED_MODEL_PERSONALITY\nSetPedModelPersonality(GetHashKey('prop'), GetHashKey('prop'))"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetPedModelPersonality.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

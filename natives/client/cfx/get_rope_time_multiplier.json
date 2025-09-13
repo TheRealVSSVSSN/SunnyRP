@@ -1,0 +1,23 @@
+{
+  "title": "GET_ROPE_TIME_MULTIPLIER",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_ROPE_TIME_MULTIPLIER"
+  ],
+  "content": "0xF341E6CA// GetRopeTimeMultiplier\nfloat GET_ROPE_TIME_MULTIPLIER(int rope);Parameters:rope: The rope to get the time multiplier for.Returns: The rope's time multiplier.",
+  "codeBlocks": [
+    "// GetRopeTimeMultiplier\nfloat GET_ROPE_TIME_MULTIPLIER(int rope);",
+    "-- Example usage for GET_ROPE_TIME_MULTIPLIER\nGetRopeTimeMultiplier(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetRopeTimeMultiplier.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

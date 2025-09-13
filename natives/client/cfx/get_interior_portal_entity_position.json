@@ -1,0 +1,24 @@
+{
+  "title": "GET_INTERIOR_PORTAL_ENTITY_POSITION",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_INTERIOR_PORTAL_ENTITY_POSITION"
+  ],
+  "content": "0x9B7AB83C// GetInteriorPortalEntityPosition\nvoid GET_INTERIOR_PORTAL_ENTITY_POSITION(int interiorId, int portalIndex, int entityIndex, float* posX, float* posY, float* posZ);Parameters:interiorId: The target interior.portalIndex: Interior portal index.entityIndex: Portal entity index.posX: posY: posZ: Returns: Portal entity position.Examples:Lualocal playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\nlocal portalIndex = 0\n\nif interiorId ~= 0 then\n  local count = GetInteriorPortalEntityCount(interiorId, portalIndex)\n  for i=0, count-1 do\n    local x, y, z = GetInteriorPortalEntityPosition(interiorId, portalIndex, i)\n    print(\"portal \" .. portalIndex ..\" entity \" .. i .. \" position is: \" .. vec3(x, y, z))\n  end\nend",
+  "codeBlocks": [
+    "// GetInteriorPortalEntityPosition\nvoid GET_INTERIOR_PORTAL_ENTITY_POSITION(int interiorId, int portalIndex, int entityIndex, float* posX, float* posY, float* posZ);",
+    "local playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\nlocal portalIndex = 0\n\nif interiorId ~= 0 then\n  local count = GetInteriorPortalEntityCount(interiorId, portalIndex)\n  for i=0, count-1 do\n    local x, y, z = GetInteriorPortalEntityPosition(interiorId, portalIndex, i)\n  end\nend",
+    "-- Example usage for GET_INTERIOR_PORTAL_ENTITY_POSITION\nGetInteriorPortalEntityPosition(0, 0, 0, 0, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetInteriorPortalEntityPosition.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

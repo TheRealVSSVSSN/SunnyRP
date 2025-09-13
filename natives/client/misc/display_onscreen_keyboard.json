@@ -1,0 +1,25 @@
+{
+  "title": "DISPLAY_ONSCREEN_KEYBOARD",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "DISPLAY_ONSCREEN_KEYBOARD"
+  ],
+  "content": "0x00DC833F2568DBF60xAD99F2CE// DisplayOnscreenKeyboard\nvoid DISPLAY_ONSCREEN_KEYBOARD(int keyboardType, char* windowTitle, char* description, char* defaultText, char* defaultConcat1, char* defaultConcat2, char* defaultConcat3, int maxInputLength);Parameters:keyboardType: See the list above. Default is 0.windowTitle: Text label for the title of the box.description: Has no use on PC.defaultText: Default text that is written in the input field.defaultConcat1: defaultConcat2: defaultConcat3: maxInputLength: Max number of characters that can be typed (2 - 256).Displays a text input box.enum eKeyboardType\n{\n  ONSCREEN_KEYBOARD_ENGLISH = 0,\n  ONSCREEN_KEYBOARD_LOCALISED = 1,\n  ONSCREEN_KEYBOARD_PASSWORD = 2,\n  ONSCREEN_KEYBOARD_GAMERTAG = 3,\n  ONSCREEN_KEYBOARD_EMAIL = 4,\n  ONSCREEN_KEYBOARD_BASIC_ENGLISH = 5,\n  ONSCREEN_KEYBOARD_FILENAME = 6\n};\nExamples:LuaAddTextEntry(\"my_input_title\", \"Enter something cool:\")\n\nDisplayOnscreenKeyboard(0, \"my_input_title\", \"\", \"\", \"\", \"\", \"\", 30) -- Show the text input box\n\nwhile UpdateOnscreenKeyboard() == 0 do Wait(0) end -- Wait for the user to stop editing\n\n-- This block of code is reached after the user is done editing\n\nlocal inputUpdate = UpdateOnscreenKeyboard()\n\nif inputUpdate == 1 then -- User hit OK in the text input box\n  local result = GetOnscreenKeyboardResult()\n  print(\"You wrote this in the input box:\", result)\nelseif inputUpdate == 2 then\n  print(\"You canceled the input!\")\nelse -- -1 or 3\n  print(\"An error has occurred\")\nend",
+  "codeBlocks": [
+    "// DisplayOnscreenKeyboard\nvoid DISPLAY_ONSCREEN_KEYBOARD(int keyboardType, char* windowTitle, char* description, char* defaultText, char* defaultConcat1, char* defaultConcat2, char* defaultConcat3, int maxInputLength);",
+    "enum eKeyboardType\n{\n  ONSCREEN_KEYBOARD_ENGLISH = 0,\n  ONSCREEN_KEYBOARD_LOCALISED = 1,\n  ONSCREEN_KEYBOARD_PASSWORD = 2,\n  ONSCREEN_KEYBOARD_GAMERTAG = 3,\n  ONSCREEN_KEYBOARD_EMAIL = 4,\n  ONSCREEN_KEYBOARD_BASIC_ENGLISH = 5,\n  ONSCREEN_KEYBOARD_FILENAME = 6\n};",
+    "AddTextEntry(\"my_input_title\", \"Enter something cool:\")\n\nDisplayOnscreenKeyboard(0, \"my_input_title\", \"\", \"\", \"\", \"\", \"\", 30) -- Show the text input box\n\nwhile UpdateOnscreenKeyboard() == 0 do Wait(0) end -- Wait for the user to stop editing\n\n-- This block of code is reached after the user is done editing\n\nlocal inputUpdate = UpdateOnscreenKeyboard()\n\nif inputUpdate == 1 then -- User hit OK in the text input box\n  local result = GetOnscreenKeyboardResult()\nelseif inputUpdate == 2 then\nelse -- -1 or 3\nend",
+    "-- Example usage for DISPLAY_ONSCREEN_KEYBOARD\nDisplayOnscreenKeyboard(0, '', '', '', '', '', '', 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/DisplayOnscreenKeyboard.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

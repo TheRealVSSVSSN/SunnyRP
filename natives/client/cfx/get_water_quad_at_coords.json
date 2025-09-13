@@ -1,0 +1,25 @@
+{
+  "title": "GET_WATER_QUAD_AT_COORDS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_WATER_QUAD_AT_COORDS"
+  ],
+  "content": "0x17321452// GetWaterQuadAtCoords\nint GET_WATER_QUAD_AT_COORDS(float x, float y);Parameters:x: The X coordinatey: The Y coordinateReturns: The water quad index at the given position. Returns -1 if there isn't any there.This native returns the index of a water quad if the given point is inside its bounds.If you also want to check for water level, check out GetWaterQuadAtCoords_3dExamples:Lualocal currentPedPosition = GetEntityCoords(PlayerPedId())\nlocal waterQuadIndex = GetWaterQuadAtCoords(currentPedPosition.x, currentPedPosition.y)",
+  "codeBlocks": [
+    "// GetWaterQuadAtCoords\nint GET_WATER_QUAD_AT_COORDS(float x, float y);",
+    "local currentPedPosition = GetEntityCoords(PlayerPedId())\nlocal waterQuadIndex = GetWaterQuadAtCoords(currentPedPosition.x, currentPedPosition.y)",
+    "-- Example usage for GET_WATER_QUAD_AT_COORDS\nGetWaterQuadAtCoords(0.0, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetWaterQuadAtCoords.md",
+    "https://docs.fivem.net/natives/?_0xF8E03DB8",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

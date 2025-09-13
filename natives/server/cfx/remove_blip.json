@@ -1,0 +1,24 @@
+{
+  "title": "REMOVE_BLIP",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "REMOVE_BLIP"
+  ],
+  "content": "0xD8C3C1CD// RemoveBlip\nvoid REMOVE_BLIP(Blip* blip);Parameters:blip: Blip handle to remove.Removes the blip from your map.\nNote: This function only works on the script that created the blip, if you wish to remove blips created by other scripts, see SET_THIS_SCRIPT_CAN_REMOVE_BLIPS_CREATED_BY_ANY_SCRIPT.This is the server-side RPC native equivalent of the client native REMOVE_BLIP.",
+  "codeBlocks": [
+    "// RemoveBlip\nvoid REMOVE_BLIP(Blip* blip);",
+    "-- Example usage for REMOVE_BLIP\nRemoveBlip(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/RemoveBlip.md",
+    "https://docs.fivem.net/natives/?_0x86A652570E5F25DD",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

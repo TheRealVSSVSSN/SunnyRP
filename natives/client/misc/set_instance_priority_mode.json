@@ -1,0 +1,23 @@
+{
+  "title": "SET_INSTANCE_PRIORITY_MODE",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "SET_INSTANCE_PRIORITY_MODE"
+  ],
+  "content": "0x9BAE5AD2508DF0780x721B2492// SetInstancePriorityMode\nvoid SET_INSTANCE_PRIORITY_MODE(int toggle);Parameters:toggle: toggles the instance priority modeSets the maximum prop density and changes a loading screen flag from 'loading story mode' to 'loading GTA Online'. It causes a loading screen to show as it reloads map data.Old name:  _ENABLE_MP_DLC_MAPSOld name:  _USE_FREEMODE_MAP_BEHAVIOROld name:  _LOWER_MAP_PROP_DENSITY",
+  "codeBlocks": [
+    "// SetInstancePriorityMode\nvoid SET_INSTANCE_PRIORITY_MODE(int toggle);",
+    "-- Example usage for SET_INSTANCE_PRIORITY_MODE\nSetInstancePriorityMode(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/SetInstancePriorityMode.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

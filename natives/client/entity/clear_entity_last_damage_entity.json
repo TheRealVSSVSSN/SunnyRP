@@ -1,0 +1,23 @@
+{
+  "title": "CLEAR_ENTITY_LAST_DAMAGE_ENTITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENTITYAPI",
+    "CLEAR_ENTITY_LAST_DAMAGE_ENTITY"
+  ],
+  "content": "0xA72CD9CA74A5ECBA0x2B83F43B// ClearEntityLastDamageEntity\nvoid CLEAR_ENTITY_LAST_DAMAGE_ENTITY(Entity entity);Parameters:entity: The entity to clear the last damaging entity from.This native could affect the arguments of the CEventNetworkEntityDamage game event, by clearing the damaging entity before the event is fired.",
+  "codeBlocks": [
+    "// ClearEntityLastDamageEntity\nvoid CLEAR_ENTITY_LAST_DAMAGE_ENTITY(Entity entity);",
+    "local entity = PlayerPedId()\n-- Example usage for CLEAR_ENTITY_LAST_DAMAGE_ENTITY\nClearEntityLastDamageEntity(entity)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/ClearEntityLastDamageEntity.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

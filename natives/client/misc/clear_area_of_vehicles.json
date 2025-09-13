@@ -1,0 +1,25 @@
+{
+  "title": "CLEAR_AREA_OF_VEHICLES",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "CLEAR_AREA_OF_VEHICLES"
+  ],
+  "content": "0x01C7B9B38428AEB60x63320F3C// ClearAreaOfVehicles\nvoid CLEAR_AREA_OF_VEHICLES(float x, float y, float z, float radius, BOOL p4, BOOL p5, BOOL p6, BOOL p7, BOOL p8);Example: \t\tCLEAR_AREA_OF_VEHICLES(0, 0, 0, 10000, false, false, false, false, false);  NativeDB Added Parameter 10: BOOL p9",
+  "codeBlocks": [
+    "// ClearAreaOfVehicles\nvoid CLEAR_AREA_OF_VEHICLES(float x, float y, float z, float radius, BOOL p4, BOOL p5, BOOL p6, BOOL p7, BOOL p8);",
+    "Example: \t\tCLEAR_AREA_OF_VEHICLES(0, 0, 0, 10000, false, false, false, false, false);",
+    "NativeDB Added Parameter 10: BOOL p9",
+    "-- Example usage for CLEAR_AREA_OF_VEHICLES\nClearAreaOfVehicles(0.0, 0.0, 0.0, 0.0, false, false, false, false, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/ClearAreaOfVehicles.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "title": "GET_VEHICLE_WHEELIE_STATE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_VEHICLE_WHEELIE_STATE"
+  ],
+  "content": "0x137260D1// GetVehicleWheelieState\nint GET_VEHICLE_WHEELIE_STATE(Vehicle vehicle);Parameters:vehicle: VehicleReturns: Vehicle's current wheelie state.List of known states:1: Not wheeling.\n65: Vehicle is ready to do wheelie (burnouting).\n129: Vehicle is doing wheelie.\nExamples:LuaCitizen.CreateThread(function()\n  while true do\n    Wait(1)\n\n    local veh = GetVehiclePedIsUsing(PlayerPedId())\n    if veh ~= 0 then\n      local wheelieState = GetVehicleWheelieState(veh)\n      if wheelieState == 1 then\n        print(\"Nothing\")\n      elseif wheelieState == 65 then\n        print(\"Ready to wheelie!\")\n      elseif wheelieState == 129 then\n        print(\"Doing wheelie!\")\n      end\n    end\n  end\nend)",
+  "codeBlocks": [
+    "// GetVehicleWheelieState\nint GET_VEHICLE_WHEELIE_STATE(Vehicle vehicle);",
+    "1: Not wheeling.\n65: Vehicle is ready to do wheelie (burnouting).\n129: Vehicle is doing wheelie.",
+    "Citizen.CreateThread(function()\n  while true do\n    Wait(1)\n\n    local veh = GetVehiclePedIsUsing(PlayerPedId())\n    if veh ~= 0 then\n      local wheelieState = GetVehicleWheelieState(veh)\n      if wheelieState == 1 then\n      elseif wheelieState == 65 then\n      elseif wheelieState == 129 then\n      end\n    end\n  end\nend)",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for GET_VEHICLE_WHEELIE_STATE\nGetVehicleWheelieState(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetVehicleWheelieState.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

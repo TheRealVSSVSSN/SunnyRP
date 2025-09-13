@@ -1,0 +1,24 @@
+{
+  "title": "GET_HELI_REAR_ROTOR_HEALTH",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_HELI_REAR_ROTOR_HEALTH"
+  ],
+  "content": "0x33EE6E2B// GetHeliRearRotorHealth\nfloat GET_HELI_REAR_ROTOR_HEALTH(Vehicle vehicle);Parameters:vehicle: The target vehicle.Returns: Returns the health of the helicopter's rear rotor. The maximum health value is 1000.This native is a getter for SET_HELI_TAIL_ROTOR_HEALTH",
+  "codeBlocks": [
+    "// GetHeliRearRotorHealth\nfloat GET_HELI_REAR_ROTOR_HEALTH(Vehicle vehicle);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for GET_HELI_REAR_ROTOR_HEALTH\nGetHeliRearRotorHealth(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetHeliRearRotorHealth.md",
+    "https://docs.fivem.net/natives/?_0xFE205F38AAA58E5B",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}
