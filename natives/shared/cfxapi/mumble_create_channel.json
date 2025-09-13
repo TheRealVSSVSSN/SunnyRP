@@ -1,0 +1,19 @@
+{
+  "title": "MUMBLE_CREATE_CHANNEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "MUMBLE_CREATE_CHANNEL"
+  ],
+  "content": "0x262663C5// MumbleCreateChannel\nvoid MUMBLE_CREATE_CHANNEL(int id);Parameters:id: ID of the channel.Create a permanent voice channel.",
+  "codeBlocks": [
+    "// MumbleCreateChannel\nvoid MUMBLE_CREATE_CHANNEL(int id);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/MumbleCreateChannel.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "title": "GET_PED_HEAD_OVERLAY_DATA",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PED_HEAD_OVERLAY_DATA"
+  ],
+  "content": "0xC46EE605// GetPedHeadOverlayData\nBOOL GET_PED_HEAD_OVERLAY_DATA(Ped ped, int index, int* overlayValue, int* colourType, int* firstColour, int* secondColour, float* overlayOpacity);Parameters:ped: The target pedindex: Overlay indexoverlayValue: Overlay value pointercolourType: Colour type pointerfirstColour: First colour pointersecondColour: Second colour pointeroverlayOpacity: Opacity pointerReturns: Returns ped's head overlay data.A getter for SET_PED_HEAD_OVERLAY and _SET_PED_HEAD_OVERLAY_COLOR natives.Examples:Lua-- getting beard overlay data\nlocal success, overlayValue, colourType, firstColour, secondColour, overlayOpacity = GetPedHeadOverlayData(PlayerPedId(), 1)\nif success then\n  -- incrementing value\n  SetPedHeadOverlay(PlayerPedId(), 1, overlayValue + 1, overlayOpacity)\nend",
+  "codeBlocks": [
+    "// GetPedHeadOverlayData\nBOOL GET_PED_HEAD_OVERLAY_DATA(Ped ped, int index, int* overlayValue, int* colourType, int* firstColour, int* secondColour, float* overlayOpacity);",
+    "-- getting beard overlay data\nlocal success, overlayValue, colourType, firstColour, secondColour, overlayOpacity = GetPedHeadOverlayData(PlayerPedId(), 1)\nif success then\n  -- incrementing value\n  SetPedHeadOverlay(PlayerPedId(), 1, overlayValue + 1, overlayOpacity)\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPedHeadOverlayData.md",
+    "https://docs.fivem.net/natives/?_0x48F44967FA05CC1E",
+    "https://docs.fivem.net/natives/?_0x497BF74A7B9CB952",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

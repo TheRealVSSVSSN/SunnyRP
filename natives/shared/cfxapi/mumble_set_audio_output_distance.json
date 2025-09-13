@@ -1,0 +1,19 @@
+{
+  "title": "MUMBLE_SET_AUDIO_OUTPUT_DISTANCE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "MUMBLE_SET_AUDIO_OUTPUT_DISTANCE"
+  ],
+  "content": "0x74C597D9// MumbleSetAudioOutputDistance\nvoid MUMBLE_SET_AUDIO_OUTPUT_DISTANCE(float distance);Parameters:distance: The output distance.Sets the current output distance. The player will be able to hear other players talking within this distance.",
+  "codeBlocks": [
+    "// MumbleSetAudioOutputDistance\nvoid MUMBLE_SET_AUDIO_OUTPUT_DISTANCE(float distance);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/MumbleSetAudioOutputDistance.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

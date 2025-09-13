@@ -1,0 +1,19 @@
+{
+  "title": "MUMBLE_GET_VOICE_CHANNEL_FROM_SERVER_ID",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "MUMBLE_GET_VOICE_CHANNEL_FROM_SERVER_ID"
+  ],
+  "content": "0x221C09F1// MumbleGetVoiceChannelFromServerId\nint MUMBLE_GET_VOICE_CHANNEL_FROM_SERVER_ID(int serverId);Parameters:serverId: The player's server id.Returns: Int representing the identifier of the voice channel.Returns the mumble voice channel from a player's server id.",
+  "codeBlocks": [
+    "// MumbleGetVoiceChannelFromServerId\nint MUMBLE_GET_VOICE_CHANNEL_FROM_SERVER_ID(int serverId);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/MumbleGetVoiceChannelFromServerId.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

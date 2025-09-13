@@ -1,0 +1,19 @@
+{
+  "title": "GET_PLAYER_TEAM",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PLAYER_TEAM"
+  ],
+  "content": "0x9873E404// GetPlayerTeam\nint GET_PLAYER_TEAM(char* playerSrc);Parameters:playerSrc: The player handle",
+  "codeBlocks": [
+    "// GetPlayerTeam\nint GET_PLAYER_TEAM(char* playerSrc);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPlayerTeam.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

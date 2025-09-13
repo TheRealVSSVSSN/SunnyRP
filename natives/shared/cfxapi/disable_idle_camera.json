@@ -1,0 +1,19 @@
+{
+  "title": "DISABLE_IDLE_CAMERA",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "DISABLE_IDLE_CAMERA"
+  ],
+  "content": "0x3D5AB7F0// DisableIdleCamera\nvoid DISABLE_IDLE_CAMERA(BOOL state);Parameters:state: On/OffDisables the game's afk camera that starts panning around after 30 seconds of inactivity.",
+  "codeBlocks": [
+    "// DisableIdleCamera\nvoid DISABLE_IDLE_CAMERA(BOOL state);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/DisableIdleCamera.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

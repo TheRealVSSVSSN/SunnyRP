@@ -1,0 +1,19 @@
+{
+  "title": "REGISTER_RESOURCE_ASSET",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "REGISTER_RESOURCE_ASSET"
+  ],
+  "content": "0x9862B266// RegisterResourceAsset\nchar* REGISTER_RESOURCE_ASSET(char* resourceName, char* fileName);Parameters:resourceName: The resource to add the asset to.fileName: A file name in the resource.Returns: A cache string to pass to REGISTER_STREAMING_FILE_FROM_CACHE on the client.Experimental: This native may be altered or removed in future versions of CitizenFX without warning.Registers a cached resource asset with the resource system, similar to the automatic scanning of the stream/ folder.",
+  "codeBlocks": [
+    "// RegisterResourceAsset\nchar* REGISTER_RESOURCE_ASSET(char* resourceName, char* fileName);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/RegisterResourceAsset.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

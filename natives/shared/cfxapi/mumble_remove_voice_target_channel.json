@@ -1,0 +1,20 @@
+{
+  "title": "MUMBLE_REMOVE_VOICE_TARGET_CHANNEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "MUMBLE_REMOVE_VOICE_TARGET_CHANNEL"
+  ],
+  "content": "0x268DB867// MumbleRemoveVoiceTargetChannel\nvoid MUMBLE_REMOVE_VOICE_TARGET_CHANNEL(int targetId, int channel);Parameters:targetId: A Mumble voice target ID, ranging from 1..30 (inclusive).channel: The game voice channel ID to remove from the target.Removes the specified voice channel from the user's voice targets.Performs the opposite operation of MUMBLE_ADD_VOICE_TARGET_CHANNEL",
+  "codeBlocks": [
+    "// MumbleRemoveVoiceTargetChannel\nvoid MUMBLE_REMOVE_VOICE_TARGET_CHANNEL(int targetId, int channel);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/MumbleRemoveVoiceTargetChannel.md",
+    "https://docs.fivem.net/natives/?_0x4D386C9E",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

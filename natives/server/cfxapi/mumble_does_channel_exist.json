@@ -1,0 +1,19 @@
+{
+  "title": "MUMBLE_DOES_CHANNEL_EXIST",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "MUMBLE_DOES_CHANNEL_EXIST"
+  ],
+  "content": "0xCC8CA25// MumbleDoesChannelExist\nBOOL MUMBLE_DOES_CHANNEL_EXIST(int channel);Parameters:channel: A game voice channel ID.Returns: True if the specific channel exists. False otherwise.Check whether specified channel exists on the Mumble server.",
+  "codeBlocks": [
+    "// MumbleDoesChannelExist\nBOOL MUMBLE_DOES_CHANNEL_EXIST(int channel);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/MumbleDoesChannelExist.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

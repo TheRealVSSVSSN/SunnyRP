@@ -1,0 +1,19 @@
+{
+  "title": "GET_PLAYER_WANTED_CENTRE_POSITION",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PLAYER_WANTED_CENTRE_POSITION"
+  ],
+  "content": "0x821F2D2C// GetPlayerWantedCentrePosition\nVector3 GET_PLAYER_WANTED_CENTRE_POSITION(char* playerSrc);Parameters:playerSrc: The target playerReturns: The player's position known by police. Vector zero if the player has no wanted level.Gets the current known coordinates for the specified player from cops perspective. This native is used server side when using OneSync.",
+  "codeBlocks": [
+    "// GetPlayerWantedCentrePosition\nVector3 GET_PLAYER_WANTED_CENTRE_POSITION(char* playerSrc);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPlayerWantedCentrePosition.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

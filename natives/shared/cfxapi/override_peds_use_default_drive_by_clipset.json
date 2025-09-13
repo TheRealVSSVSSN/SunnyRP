@@ -1,0 +1,20 @@
+{
+  "title": "OVERRIDE_PEDS_USE_DEFAULT_DRIVE_BY_CLIPSET",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "OVERRIDE_PEDS_USE_DEFAULT_DRIVE_BY_CLIPSET"
+  ],
+  "content": "0xB14F8EAD// OverridePedsUseDefaultDriveByClipset\nvoid OVERRIDE_PEDS_USE_DEFAULT_DRIVE_BY_CLIPSET(BOOL flag);Parameters:flag: true to override, false to use default game behavior.Allows the bypassing of default game behavior that prevents the use of SET_PED_DRIVE_BY_CLIPSET_OVERRIDE in certain scenarios to avoid clipping issues (e.g., when there is more than one Ped in a vehicle).Note: This flag and the overridden clipset are not replicated values and require synchronization through user scripts. Additionally, current game behavior also restricts applying this clipset locally when in first-person mode and will require a temporary workaround.",
+  "codeBlocks": [
+    "// OverridePedsUseDefaultDriveByClipset\nvoid OVERRIDE_PEDS_USE_DEFAULT_DRIVE_BY_CLIPSET(BOOL flag);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/OverridePedsUseDefaultDriveByClipset.md",
+    "https://docs.fivem.net/natives/?_0xED34AB6C5CB36520",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

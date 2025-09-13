@@ -1,0 +1,19 @@
+{
+  "title": "NETWORK_GET_ENTITY_OWNER",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "NETWORK_GET_ENTITY_OWNER"
+  ],
+  "content": "0x526FEE31// NetworkGetEntityOwner\nint NETWORK_GET_ENTITY_OWNER(Entity entity);Parameters:entity: The entity to get the owner for.Returns: On the server, the server ID of the entity owner. On the client, returns the player/slot ID of the entity owner.Returns the owner ID of the specified entity.",
+  "codeBlocks": [
+    "// NetworkGetEntityOwner\nint NETWORK_GET_ENTITY_OWNER(Entity entity);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/NetworkGetEntityOwner.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}
