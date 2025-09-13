@@ -1,0 +1,24 @@
+{
+  "title": "SET_MINIMAP_COMPONENT",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "SET_MINIMAP_COMPONENT"
+  ],
+  "content": "0x75A9A10948D1DEA60x419DCDC4// SetMinimapComponent\nint SET_MINIMAP_COMPONENT(int componentID, BOOL toggle, int hudColor);Parameters:componentID: The component ID to change.toggle: True to enable/colorize, false to disable.hudColor: The hudcolor index, the list of hud colors can be found here.Returns: Hardcoded to always return 1 (int)This native is used to colorize/toggle certain map components like the army base.Component IDs 6 through 14 are used by the freemode event King of the Castle in GTA Online.An incomplete list of component IDs:0: Los Santos International Airport yellow runway markers1: Sandy Shores Airfield yellow runway markers2: McKenzie Field yellow runway markers6: Vespucci Beach lifeguard building7: Top level zone of Alien Camp (Hippy Camp)8: Paleto Bay fire station drill tower9 Land Act Dam tower10 Pala Springs Aerial Tramway11 Galileo Observatory power unit12 Small zone (empty \"interior\") near Central Los Santos Medical Center13 Richman Mansion grotto14 2 Alien Camp (Hippy Camp) circles15 Fort ZancudoExamples:Lua-- Enables Fort Zancudo on the map\nSetMinimapComponent(15, true, 0)",
+  "codeBlocks": [
+    "// SetMinimapComponent\nint SET_MINIMAP_COMPONENT(int componentID, BOOL toggle, int hudColor);",
+    "-- Enables Fort Zancudo on the map\nSetMinimapComponent(15, true, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/SetMinimapComponent.md",
+    "https://docs.fivem.net/docs/game-references/hud-colors/",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

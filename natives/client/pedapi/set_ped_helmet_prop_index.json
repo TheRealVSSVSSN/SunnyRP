@@ -1,0 +1,24 @@
+{
+  "title": "SET_PED_HELMET_PROP_INDEX",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "SET_PED_HELMET_PROP_INDEX"
+  ],
+  "content": "0x26D83693ED99291C0xA316D13F// SetPedHelmetPropIndex\nvoid SET_PED_HELMET_PROP_INDEX(Ped ped, int propIndex);Parameters:ped: The ped handle.propIndex: The prop index to set the helmet to. Refer to SET_PED_PROP_INDEX.NativeDB Added Parameter 3: BOOL p2",
+  "codeBlocks": [
+    "// SetPedHelmetPropIndex\nvoid SET_PED_HELMET_PROP_INDEX(Ped ped, int propIndex);",
+    "NativeDB Added Parameter 3: BOOL p2"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/SetPedHelmetPropIndex.md",
+    "https://docs.fivem.net/natives/?_0x93376B65A266EB5F",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

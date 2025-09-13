@@ -1,0 +1,24 @@
+{
+  "title": "TASK_PERFORM_SEQUENCE",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "TASK_PERFORM_SEQUENCE"
+  ],
+  "content": "0x5ABA3986D90D8A3B0x4D9FBD11// TaskPerformSequence\nvoid TASK_PERFORM_SEQUENCE(Ped ped, int taskSequenceId);Parameters:ped: The ped to perform the sequence ontaskSequenceId: The sequenceId to performFor an example on how to use this please refer to OPEN_SEQUENCE_TASK",
+  "codeBlocks": [
+    "// TaskPerformSequence\nvoid TASK_PERFORM_SEQUENCE(Ped ped, int taskSequenceId);",
+    "local ped = PlayerPedId()\n-- Example usage for TASK_PERFORM_SEQUENCE\nTaskPerformSequence(ped, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/TaskPerformSequence.md",
+    "https://docs.fivem.net/natives/?_0xE8854A4326B9E12B",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

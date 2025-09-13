@@ -1,0 +1,23 @@
+{
+  "title": "_CLEAR_VEHICLE_TASKS",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "_CLEAR_VEHICLE_TASKS"
+  ],
+  "content": "0xDBBC7A2432524127// ClearVehicleTasks\nvoid _CLEAR_VEHICLE_TASKS(Vehicle vehicle);Parameters:vehicle: The vehicle to have tasks clearedCLEAR_*\n\nNativeDB Introduced: v1290",
+  "codeBlocks": [
+    "// ClearVehicleTasks\nvoid _CLEAR_VEHICLE_TASKS(Vehicle vehicle);",
+    "CLEAR_*\n\nNativeDB Introduced: v1290"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/ClearVehicleTasks.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

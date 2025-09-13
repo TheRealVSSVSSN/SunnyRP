@@ -1,0 +1,23 @@
+{
+  "title": "PAUSE_MENU_SET_BUSY_SPINNER",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "PAUSE_MENU_SET_BUSY_SPINNER"
+  ],
+  "content": "0xC78E239AC5B2DDB90x6C67131A// PauseMenuSetBusySpinner\nvoid PAUSE_MENU_SET_BUSY_SPINNER(BOOL bVisible, int iColumnID, int iSpinnerIndex);Parameters:bVisible: Sets or removes this spinner.iColumnID: Location of this spinner (0 - 17). Indexes can be found in common:\\data\\ui\\frontend.xml, PauseMenu\\PersistentData\\Spinner\\Offsets. If bVisible is false, this will be ignored.iSpinnerIndex: Index of this spinner. Can have a maximum of three spinners at a time.Sets a loading icon in the pause menu.",
+  "codeBlocks": [
+    "// PauseMenuSetBusySpinner\nvoid PAUSE_MENU_SET_BUSY_SPINNER(BOOL bVisible, int iColumnID, int iSpinnerIndex);",
+    "-- Example usage for PAUSE_MENU_SET_BUSY_SPINNER\nPauseMenuSetBusySpinner(false, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/PauseMenuSetBusySpinner.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

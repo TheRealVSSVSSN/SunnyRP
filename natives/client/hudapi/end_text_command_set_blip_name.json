@@ -1,0 +1,24 @@
+{
+  "title": "END_TEXT_COMMAND_SET_BLIP_NAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "END_TEXT_COMMAND_SET_BLIP_NAME"
+  ],
+  "content": "0xBC38B49BCB83BC9B0xE8E59820// EndTextCommandSetBlipName\nvoid END_TEXT_COMMAND_SET_BLIP_NAME(Blip blip);Parameters:blip: The blip to change the name for.Finalizes a text command started with BEGIN_TEXT_COMMAND_SET_BLIP_NAME, setting the name\nof the specified blip.Examples:Lua-- creates a blip called 'Food for me!' at 0.0, 0.0, 0.0\nAddTextEntry('MYBLIP', 'Food for ~a~!')\n\nlocal blip = AddBlipForCoords(0.0, 0.0, 0.0)\nBeginTextCommandSetBlipName('MYBLIP')\nAddTextComponentSubstringPlayerName('me')\nEndTextCommandSetBlipName(blip)",
+  "codeBlocks": [
+    "// EndTextCommandSetBlipName\nvoid END_TEXT_COMMAND_SET_BLIP_NAME(Blip blip);",
+    "-- creates a blip called 'Food for me!' at 0.0, 0.0, 0.0\nAddTextEntry('MYBLIP', 'Food for ~a~!')\n\nlocal blip = AddBlipForCoords(0.0, 0.0, 0.0)\nBeginTextCommandSetBlipName('MYBLIP')\nAddTextComponentSubstringPlayerName('me')\nEndTextCommandSetBlipName(blip)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/EndTextCommandSetBlipName.md",
+    "https://docs.fivem.net/natives/?_0xF9113A30DE5C6670",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

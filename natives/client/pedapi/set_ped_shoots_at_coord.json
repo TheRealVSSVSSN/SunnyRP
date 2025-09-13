@@ -1,0 +1,23 @@
+{
+  "title": "SET_PED_SHOOTS_AT_COORD",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "SET_PED_SHOOTS_AT_COORD"
+  ],
+  "content": "0x96A05E4FB321B1BA0xFD64EAE5// SetPedShootsAtCoord\nvoid SET_PED_SHOOTS_AT_COORD(Ped ped, float x, float y, float z, BOOL toggle);Parameters:ped: Ped index.x: y: z: toggle: Fires a weapon at a coordinate using a ped.",
+  "codeBlocks": [
+    "// SetPedShootsAtCoord\nvoid SET_PED_SHOOTS_AT_COORD(Ped ped, float x, float y, float z, BOOL toggle);",
+    "local ped = PlayerPedId()\n-- Example usage for SET_PED_SHOOTS_AT_COORD\nSetPedShootsAtCoord(ped, 0.0, 0.0, 0.0, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/SetPedShootsAtCoord.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "title": "SET_WARNING_MESSAGE_WITH_HEADER",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "SET_WARNING_MESSAGE_WITH_HEADER"
+  ],
+  "content": "0xDC38CC1E35B6A5D70x2DB9EAB5// SetWarningMessageWithHeader\nvoid SET_WARNING_MESSAGE_WITH_HEADER(char* titleMsg, char* entryLine1, int flags, char* promptMsg, BOOL p4, Any p5, BOOL background, Any* p7, BOOL showBg);You can only use text entries. No custom text.  \nC# Example :  \nFunction.Call(Hash._SET_WARNING_MESSAGE_2, \"HUD_QUIT\", \"HUD_CGIGNORE\", 2, \"HUD_CGINVITE\", 0, -1, 0, 0, 1);  \nyou can recreate this easily with scaleforms  \n---------------  \nFixed native name, from before nativedb restoration.  \nNativeDB Added Parameter 10: Any p9Old name:  _SET_WARNING_MESSAGE_2",
+  "codeBlocks": [
+    "// SetWarningMessageWithHeader\nvoid SET_WARNING_MESSAGE_WITH_HEADER(char* titleMsg, char* entryLine1, int flags, char* promptMsg, BOOL p4, Any p5, BOOL background, Any* p7, BOOL showBg);",
+    "You can only use text entries. No custom text.  \nC# Example :  \nFunction.Call(Hash._SET_WARNING_MESSAGE_2, \"HUD_QUIT\", \"HUD_CGIGNORE\", 2, \"HUD_CGINVITE\", 0, -1, 0, 0, 1);  \nyou can recreate this easily with scaleforms  \n---------------  \nFixed native name, from before nativedb restoration.",
+    "NativeDB Added Parameter 10: Any p9"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/SetWarningMessageWithHeader.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

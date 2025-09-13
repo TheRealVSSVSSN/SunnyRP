@@ -1,0 +1,26 @@
+{
+  "title": "SET_MP_GAMER_TAG_COLOUR",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "SET_MP_GAMER_TAG_COLOUR"
+  ],
+  "content": "0x613ED644950626AE0x7E3AA40A// SetMpGamerTagColour\nvoid SET_MP_GAMER_TAG_COLOUR(int gamerTagId, int component, int hudColorIndex);Parameters:gamerTagId: a gamerTagId obtained using  for example: CREATE_FAKE_MP_GAMER_TAG.component: a component id, see the full list here: linkhudColorIndex: a hud color index, see the full list here: linkSets a gamer tag's component colourExamples:LuaC#local playerPed = PlayerPedId() --get our players ped\nlocal playerName = GetPlayerName(PlayerId()) --get our players name\nlocal gamerTagId = CreateFakeMpGamerTag(playerPed, playerName, 0, 0, \"\", 0) --create a gamer tag\nSetMpGamerTagColour(gamerTagId, 0, 129) --set component 0(GAMER_NAME) color to 129(HUD_COLOUR_YOGA)",
+  "codeBlocks": [
+    "// SetMpGamerTagColour\nvoid SET_MP_GAMER_TAG_COLOUR(int gamerTagId, int component, int hudColorIndex);",
+    "local playerPed = PlayerPedId() --get our players ped\nlocal playerName = GetPlayerName(PlayerId()) --get our players name\nlocal gamerTagId = CreateFakeMpGamerTag(playerPed, playerName, 0, 0, \"\", 0) --create a gamer tag\nSetMpGamerTagColour(gamerTagId, 0, 129) --set component 0(GAMER_NAME) color to 129(HUD_COLOUR_YOGA)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/SetMpGamerTagColour.md",
+    "https://docs.fivem.net/natives/?_0xBFEFE3321A3F5015",
+    "https://docs.fivem.net/docs/game-references/gamer-tags/#components-list",
+    "https://docs.fivem.net/docs/game-references/hud-colors/",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

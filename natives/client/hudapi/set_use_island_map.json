@@ -1,0 +1,23 @@
+{
+  "title": "SET_USE_ISLAND_MAP",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "SET_USE_ISLAND_MAP"
+  ],
+  "content": "0x5E1460624D194A38// SetUseIslandMap\nvoid SET_USE_ISLAND_MAP(BOOL toggle);Parameters:toggle: A boolean value where true switches the minimap to the Cayo Perico map, and false reverts it to the standard map.Returns: This native does not return any value.Switches the display of the in-game minimap to the Cayo Perico map. This native needs to be called every frame to maintain the toggled state effectively.NativeDB Introduced: v2189Old name:  _SET_TOGGLE_MINIMAP_HEIST_ISLAND",
+  "codeBlocks": [
+    "// SetUseIslandMap\nvoid SET_USE_ISLAND_MAP(BOOL toggle);",
+    "NativeDB Introduced: v2189"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/SetUseIslandMap.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

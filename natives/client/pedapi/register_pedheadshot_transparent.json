@@ -1,0 +1,24 @@
+{
+  "title": "REGISTER_PEDHEADSHOT_TRANSPARENT",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "REGISTER_PEDHEADSHOT_TRANSPARENT"
+  ],
+  "content": "0x953563CE563143AF0x4DD03628// RegisterPedheadshotTransparent\nint REGISTER_PEDHEADSHOT_TRANSPARENT(Ped ped);Parameters:ped: A ped handle.Returns: The Pedheadshot handle.Similar to REGISTER_PEDHEADSHOT but creates a transparent background instead of black.Result of the example code:\nhttps://i.imgur.com/iHz8ztn.pngExamples:LuaCreateThread(function()\n    -- Get the ped headshot image.\n    local handle = RegisterPedheadshotTransparent(PlayerPedId())\n    while not IsPedheadshotReady(handle) or not IsPedheadshotValid(handle) do\n        Wait(0)\n    end\n    local txd = GetPedheadshotTxdString(handle)\n\n    -- Add the notification text, the more text you add the smaller the font\n    -- size will become (text is forced on 1 line only), so keep this short!\n    SetNotificationTextEntry(\"STRING\")\n    AddTextComponentSubstringPlayerName(\"Transparent Headshot\")\n\n    -- Draw the notification\n    DrawNotificationAward(txd, txd, 200, 0, \"FM_GEN_UNLOCK\")\n    \n    -- Cleanup after yourself!\n    UnregisterPedheadshot(handle)\nend)",
+  "codeBlocks": [
+    "// RegisterPedheadshotTransparent\nint REGISTER_PEDHEADSHOT_TRANSPARENT(Ped ped);",
+    "CreateThread(function()\n    -- Get the ped headshot image.\n    local handle = RegisterPedheadshotTransparent(PlayerPedId())\n    while not IsPedheadshotReady(handle) or not IsPedheadshotValid(handle) do\n        Wait(0)\n    end\n    local txd = GetPedheadshotTxdString(handle)\n\n    -- Add the notification text, the more text you add the smaller the font\n    -- size will become (text is forced on 1 line only), so keep this short!\n    SetNotificationTextEntry(\"STRING\")\n    AddTextComponentSubstringPlayerName(\"Transparent Headshot\")\n\n    -- Draw the notification\n    DrawNotificationAward(txd, txd, 200, 0, \"FM_GEN_UNLOCK\")\n    \n    -- Cleanup after yourself!\n    UnregisterPedheadshot(handle)\nend)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/RegisterPedheadshotTransparent.md",
+    "https://i.imgur.com/iHz8ztn.png",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

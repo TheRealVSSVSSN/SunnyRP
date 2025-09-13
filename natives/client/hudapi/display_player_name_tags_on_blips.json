@@ -1,0 +1,24 @@
+{
+  "title": "DISPLAY_PLAYER_NAME_TAGS_ON_BLIPS",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "DISPLAY_PLAYER_NAME_TAGS_ON_BLIPS"
+  ],
+  "content": "0x82CEDC33687E1F500x2F28F0A6// DisplayPlayerNameTagsOnBlips\nvoid DISPLAY_PLAYER_NAME_TAGS_ON_BLIPS(BOOL toggle);Parameters:toggle: the toggle booleanToggles whether or not name labels are shown on the expanded minimap next to player blips, like in GTA:O.\nDoesn't need to be called every frame.\nPreview: https://i.imgur.com/DfqKWfJ.png\nMake sure to call SET_BLIP_CATEGORY with index 7 for this to work on the desired blip.",
+  "codeBlocks": [
+    "// DisplayPlayerNameTagsOnBlips\nvoid DISPLAY_PLAYER_NAME_TAGS_ON_BLIPS(BOOL toggle);",
+    "-- Example usage for DISPLAY_PLAYER_NAME_TAGS_ON_BLIPS\nDisplayPlayerNameTagsOnBlips(false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/DisplayPlayerNameTagsOnBlips.md",
+    "https://i.imgur.com/DfqKWfJ.png",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

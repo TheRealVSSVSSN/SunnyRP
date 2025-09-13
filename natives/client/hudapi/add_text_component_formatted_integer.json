@@ -1,0 +1,23 @@
+{
+  "title": "ADD_TEXT_COMPONENT_FORMATTED_INTEGER",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "ADD_TEXT_COMPONENT_FORMATTED_INTEGER"
+  ],
+  "content": "0x0E4C749FF9DE9CC40x12929BDF// AddTextComponentFormattedInteger\nvoid ADD_TEXT_COMPONENT_FORMATTED_INTEGER(int value, BOOL commaSeparated);Parameters:value: The integer to add to the stringcommaSeparated: Whether or not to add comma seperators. So if true 1000 would become 1,000.Examples:Lua-- on initialization\nAddTextEntry('TEST_LABEL', '€~a~')\n\n-- when drawing\nBeginTextCommandThefeedPost('TEST_LABEL')\nAddTextComponentFormattedInteger(1000, true)\nEndTextCommandThefeedPostTicker(false, true)",
+  "codeBlocks": [
+    "// AddTextComponentFormattedInteger\nvoid ADD_TEXT_COMPONENT_FORMATTED_INTEGER(int value, BOOL commaSeparated);",
+    "-- on initialization\nAddTextEntry('TEST_LABEL', '€~a~')\n\n-- when drawing\nBeginTextCommandThefeedPost('TEST_LABEL')\nAddTextComponentFormattedInteger(1000, true)\nEndTextCommandThefeedPostTicker(false, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/AddTextComponentFormattedInteger.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

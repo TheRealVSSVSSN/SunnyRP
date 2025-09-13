@@ -1,0 +1,24 @@
+{
+  "title": "SET_PAUSE_MENU_PED_LIGHTING",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "SET_PAUSE_MENU_PED_LIGHTING"
+  ],
+  "content": "0x3CA6050692BC61B00x127310EB// SetPauseMenuPedLighting\nvoid SET_PAUSE_MENU_PED_LIGHTING(BOOL state);Parameters:state: True enables the light, false disables the light.Toggles the light state for the pause menu ped in frontend menus.This is used by R* in combination with SET_PAUSE_MENU_PED_SLEEP_STATE to toggle the \"offline\" or \"online\" state in the \"friends\" tab of the pause menu in GTA Online.Example:\nOn: \nOff:",
+  "codeBlocks": [
+    "// SetPauseMenuPedLighting\nvoid SET_PAUSE_MENU_PED_LIGHTING(BOOL state);",
+    "-- Example usage for SET_PAUSE_MENU_PED_LIGHTING\nSetPauseMenuPedLighting(false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/SetPauseMenuPedLighting.md",
+    "https://docs.fivem.net/natives/?_0xECF128344E9FF9F1",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

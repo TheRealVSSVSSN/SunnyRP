@@ -1,0 +1,24 @@
+{
+  "title": "SET_PAUSE_MENU_PED_SLEEP_STATE",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "SET_PAUSE_MENU_PED_SLEEP_STATE"
+  ],
+  "content": "0xECF128344E9FF9F10x8F45D327// SetPauseMenuPedSleepState\nvoid SET_PAUSE_MENU_PED_SLEEP_STATE(BOOL state);Parameters:state: 0 will make the ped slowly fall asleep, 1 will slowly wake the ped up.Toggles the pause menu ped sleep state for frontend menus.Example GIF",
+  "codeBlocks": [
+    "// SetPauseMenuPedSleepState\nvoid SET_PAUSE_MENU_PED_SLEEP_STATE(BOOL state);",
+    "-- Example usage for SET_PAUSE_MENU_PED_SLEEP_STATE\nSetPauseMenuPedSleepState(false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/SetPauseMenuPedSleepState.md",
+    "https://vespura.com/hi/i/2019-04-01_15-51_8ed38_1014.gif",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

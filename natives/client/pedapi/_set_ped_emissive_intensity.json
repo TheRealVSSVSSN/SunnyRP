@@ -1,0 +1,25 @@
+{
+  "title": "_SET_PED_EMISSIVE_INTENSITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "_SET_PED_EMISSIVE_INTENSITY"
+  ],
+  "content": "0x4E90D746056E273D// SetPedEmissiveIntensity\nvoid _SET_PED_EMISSIVE_INTENSITY(Ped ped, float intensity);Parameters:ped: The ped to set the glow intensity on.intensity: The glow intensity, value between 0.0 and 1.0.This native sets the glow intensity of illuminated clothing items.This native does NOT need to be executed every tick.\nThis native is NOT synced with other connected players, you will have to set the opacity on the ped on all clients individually.Glow intensity is a value between 0.0 and 1.0.In some older decompiled scripts this is known as _SET_PED_REFLECTION_INTENSITY.\nSince there's no joaat hash for this, I find _SET_PED_ILLUMINATED_CLOTHING_GLOW_INTENSITY more descriptive than _SET_PED_REFLECTION_INTENSITY.Use GetPedIlluminatedClothingGlowIntensity to get the illuminated clothing glow intensity of a specific ped.Intensity: 1.0:\nIntensity: 0.0:\nExamples code result:\n(Direct link if embed doesn't work: here)Old name:  _SET_PED_ILLUMINATED_CLOTHING_GLOW_INTENSITYExamples:LuaC#CreateThread(function()\n    local glowIntensity = 0.0\n    local reverse = false\n    while true do\n        Wait(100)\n        SetPedIlluminatedClothingGlowIntensity(PlayerPedId(), glowIntensity)\n        if reverse then\n            glowIntensity = glowIntensity - 0.05\n            if glowIntensity < 0.0 then\n                reverse = false\n                glowIntensity = 0.0\n            end\n        else\n            glowIntensity = glowIntensity + 0.05\n            if glowIntensity > 1.0 then\n                reverse = true\n                glowIntensity = 1.0\n            end\n        end\n    end\nend)",
+  "codeBlocks": [
+    "// SetPedEmissiveIntensity\nvoid _SET_PED_EMISSIVE_INTENSITY(Ped ped, float intensity);",
+    "CreateThread(function()\n    local glowIntensity = 0.0\n    local reverse = false\n    while true do\n        Wait(100)\n        SetPedIlluminatedClothingGlowIntensity(PlayerPedId(), glowIntensity)\n        if reverse then\n            glowIntensity = glowIntensity - 0.05\n            if glowIntensity < 0.0 then\n                reverse = false\n                glowIntensity = 0.0\n            end\n        else\n            glowIntensity = glowIntensity + 0.05\n            if glowIntensity > 1.0 then\n                reverse = true\n                glowIntensity = 1.0\n            end\n        end\n    end\nend)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/SetPedEmissiveIntensity.md",
+    "https://docs.fivem.net/natives/?_0x1461B28A06717D68",
+    "https://www.vespura.com/hi/i/2018-11-13_17-11_10199_232.gif",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

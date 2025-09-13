@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const BATCH_SIZE = 100;
+const BATCH_SIZE = parseInt(process.argv[2], 10) || 200;
 const SOURCE_FILE = path.join(__dirname, '..', 'natives.json');
 const OUTPUT_ROOT = path.join(__dirname, '..', 'natives');
 const LEDGER_FILE = path.join(OUTPUT_ROOT, 'ledger.json');
@@ -47,10 +47,6 @@ function generateExample(native) {
     ? match[1].split(',').map(p => p.trim().split(/\s+/))
     : [];
   const defaults = {
-    Ped: 'PlayerPedId()',
-    Vehicle: 'GetVehiclePedIsIn(PlayerPedId(), false)',
-    Entity: 'PlayerPedId()',
-    Player: 'PlayerId()',
     float: '0.0',
     int: '0',
     Hash: '0',
@@ -60,12 +56,32 @@ function generateExample(native) {
     'char*': "''",
     'const char*': "''"
   };
+  const vars = new Set();
   const args = params.map(p => {
     const type = p.length > 1 ? p.slice(0, -1).join(' ') : p[0];
-    return defaults[type] || '0';
+    switch (type) {
+      case 'Ped':
+        vars.add('local ped = PlayerPedId()');
+        return 'ped';
+      case 'Vehicle':
+        vars.add('local ped = PlayerPedId()');
+        vars.add('local vehicle = GetVehiclePedIsIn(ped, false)');
+        return 'vehicle';
+      case 'Entity':
+        vars.add('local entity = PlayerPedId()');
+        return 'entity';
+      case 'Player':
+        vars.add('local player = PlayerId()');
+        return 'player';
+      default:
+        return defaults[type] || '0';
+    }
   });
-  const call = `${toLuaFunc(native.title)}(${args.join(', ')})`;
-  return `-- Example\n${call}`;
+  return [
+    ...Array.from(vars),
+    `-- Example usage for ${native.title}`,
+    `${toLuaFunc(native.title)}(${args.join(', ')})`
+  ].join('\n');
 }
 
 function collect(entries, trail = [], out = []) {

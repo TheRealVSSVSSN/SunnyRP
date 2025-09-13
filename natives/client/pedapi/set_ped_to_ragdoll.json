@@ -1,0 +1,23 @@
+{
+  "title": "SET_PED_TO_RAGDOLL",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "SET_PED_TO_RAGDOLL"
+  ],
+  "content": "0xAE99FB955581844A0x83CB5052// SetPedToRagdoll\nBOOL SET_PED_TO_RAGDOLL(Ped ped, int minTime, int maxTime, int ragdollType, BOOL bAbortIfInjured, BOOL bAbortIfDead, BOOL bForceScriptControl);Parameters:ped: The ped to ragdoll.minTime: Time(ms) Ped is in ragdoll mode; only applies to ragdoll types 0 and not 1.maxTime: ragdollType: bAbortIfInjured: unusedbAbortIfDead: unusedbForceScriptControl: p4/p5: Unusued in TU27Ragdoll Types0: CTaskNMRelax\n1: CTaskNMScriptControl: Hardcoded not to work in networked environments.\nElse: CTaskNMBalance",
+  "codeBlocks": [
+    "// SetPedToRagdoll\nBOOL SET_PED_TO_RAGDOLL(Ped ped, int minTime, int maxTime, int ragdollType, BOOL bAbortIfInjured, BOOL bAbortIfDead, BOOL bForceScriptControl);",
+    "local ped = PlayerPedId()\n-- Example usage for SET_PED_TO_RAGDOLL\nSetPedToRagdoll(ped, 0, 0, 0, false, false, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/SetPedToRagdoll.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

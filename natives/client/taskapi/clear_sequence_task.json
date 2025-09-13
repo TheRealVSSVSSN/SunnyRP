@@ -1,0 +1,25 @@
+{
+  "title": "CLEAR_SEQUENCE_TASK",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "CLEAR_SEQUENCE_TASK"
+  ],
+  "content": "0x3841422E9C488D8C0x47ED03CE// ClearSequenceTask\nvoid CLEAR_SEQUENCE_TASK(int* taskSequenceId);Parameters:taskSequenceId: The task sequence to clearFor an example on how to use this please refer to OPEN_SEQUENCE_TASKNOTEIf you fail to call CLOSE_SEQUENCE_TASK and CLEAR_SEQUENCE_TASK the sequence system can get stuck in a broken state until you restart your client.",
+  "codeBlocks": [
+    "// ClearSequenceTask\nvoid CLEAR_SEQUENCE_TASK(int* taskSequenceId);",
+    "-- Example usage for CLEAR_SEQUENCE_TASK\nClearSequenceTask(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/ClearSequenceTask.md",
+    "https://docs.fivem.net/natives/?_0xE8854A4326B9E12B",
+    "https://docs.fivem.net/natives/?_0x39E72BC99E6360CB",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

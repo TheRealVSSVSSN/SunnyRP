@@ -1,0 +1,23 @@
+{
+  "title": "IS_PED_INJURED",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "IS_PED_INJURED"
+  ],
+  "content": "0x84A2DD9AC37C35C10x2530A087// IsPedInjured\nBOOL IS_PED_INJURED(Ped ped);Parameters:ped: The ped to check for injuries.Returns: Returns true if the ped is injured, false otherwise.Indicates whether this ped's health is below its injured threshold.\nThe default threshold is 100, these are stored in the pedhealth.meta file located in common:\\data\\Below are some of the valuesInjuredHealthThresholdName100.000000Strong100.000000Average100.000000Weak",
+  "codeBlocks": [
+    "// IsPedInjured\nBOOL IS_PED_INJURED(Ped ped);",
+    "local ped = PlayerPedId()\n-- Example usage for IS_PED_INJURED\nIsPedInjured(ped)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/IsPedInjured.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

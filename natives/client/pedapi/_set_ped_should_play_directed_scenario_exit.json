@@ -1,0 +1,23 @@
+{
+  "title": "_SET_PED_SHOULD_PLAY_DIRECTED_SCENARIO_EXIT",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "_SET_PED_SHOULD_PLAY_DIRECTED_SCENARIO_EXIT"
+  ],
+  "content": "0xEC6935EBE0847B900x761F8F48// SetPedShouldPlayDirectedScenarioExit\nBOOL _SET_PED_SHOULD_PLAY_DIRECTED_SCENARIO_EXIT(Ped ped, float x, float y, float z);Parameters:ped: the ped who should play a normal (unhurried) exit the next time they are given a script command.x: X Coordinate.y: Y Coordinate.z: Z Coordinate.Returns: Returns true if the position was successfully set.When this ped receives its next script task, they will exit from their scenario using the normal scenario exit.\nExiting the scenario may take several frames while the ped is playing the exit animation.\nIf the ped is not currently using a scenario at the time of the command or 0,0,0 is specified as the reaction position,\nthen the ped will by default attempt to direct their exit forwards.",
+  "codeBlocks": [
+    "// SetPedShouldPlayDirectedScenarioExit\nBOOL _SET_PED_SHOULD_PLAY_DIRECTED_SCENARIO_EXIT(Ped ped, float x, float y, float z);",
+    "local ped = PlayerPedId()\n-- Example usage for _SET_PED_SHOULD_PLAY_DIRECTED_SCENARIO_EXIT\n_SetPedShouldPlayDirectedScenarioExit(ped, 0.0, 0.0, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/SetPedShouldPlayDirectedScenarioExit.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

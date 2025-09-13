@@ -1,0 +1,25 @@
+{
+  "title": "GET_NUMBER_OF_PED_TEXTURE_VARIATIONS",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "GET_NUMBER_OF_PED_TEXTURE_VARIATIONS"
+  ],
+  "content": "0x8F7156A3142A6BAD0x83D9FBE7// GetNumberOfPedTextureVariations\nint GET_NUMBER_OF_PED_TEXTURE_VARIATIONS(Ped ped, int componentId, int drawableId);Parameters:ped: The ped handle.componentId: The component id you want to get the texture variations of. Refer to SET_PED_COMPONENT_VARIATION.drawableId: The drawable id of the component you want to get the texture variations of. Refer to GET_NUMBER_OF_PED_PROP_DRAWABLE_VARIATIONS.",
+  "codeBlocks": [
+    "// GetNumberOfPedTextureVariations\nint GET_NUMBER_OF_PED_TEXTURE_VARIATIONS(Ped ped, int componentId, int drawableId);",
+    "local ped = PlayerPedId()\n-- Example usage for GET_NUMBER_OF_PED_TEXTURE_VARIATIONS\nGetNumberOfPedTextureVariations(ped, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/GetNumberOfPedTextureVariations.md",
+    "https://docs.fivem.net/natives/?_0x262B14F48D29DE80",
+    "https://docs.fivem.net/natives/?_0x5FAF9754E789FB47",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

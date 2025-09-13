@@ -1,0 +1,23 @@
+{
+  "title": "SET_PED_CAN_LOSE_PROPS_ON_DAMAGE",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "SET_PED_CAN_LOSE_PROPS_ON_DAMAGE"
+  ],
+  "content": "0xE861D0B05C7662B80x2F9550C2// SetPedCanLosePropsOnDamage\nvoid SET_PED_CAN_LOSE_PROPS_ON_DAMAGE(Ped ped, BOOL loseProps, int p2);Parameters:ped: The target pedloseProps: true = allow props to fall off, false = don't let props fall offp2: purpose unknown, usually 0It makes the ped lose (or not lose) their props (like glasses or helmets/hat) when someone punches or pushes the ped.\nThis is probably what's being used in GTA:O to keep players from knocking other player's hats/glasses off when in combat.Examples:Lua-- Make the ped NOT lose their props when they're hit or pushed.\nSetPedCanLosePropsOnDamage(PlayerPedId(), false, 0)\n\n-- Make the ped LOSE their props when they're hit or pushed.\nSetPedCanLosePropsOnDamage(PlayerPedId(), true, 0)",
+  "codeBlocks": [
+    "// SetPedCanLosePropsOnDamage\nvoid SET_PED_CAN_LOSE_PROPS_ON_DAMAGE(Ped ped, BOOL loseProps, int p2);",
+    "-- Make the ped NOT lose their props when they're hit or pushed.\nSetPedCanLosePropsOnDamage(PlayerPedId(), false, 0)\n\n-- Make the ped LOSE their props when they're hit or pushed.\nSetPedCanLosePropsOnDamage(PlayerPedId(), true, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/SetPedCanLosePropsOnDamage.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "title": "SET_WARNING_MESSAGE_WITH_HEADER_EXTENDED",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "SET_WARNING_MESSAGE_WITH_HEADER_EXTENDED"
+  ],
+  "content": "0x38B55259C2E078ED// SetWarningMessageWithHeaderExtended\nvoid SET_WARNING_MESSAGE_WITH_HEADER_EXTENDED(char* headerTextLabel, char* line1TextLabel, int buttonsBitField, int buttonsBitFieldUpper, char* line2TextLabel, BOOL addNumber, int numberToAdd, char* firstSubstring, char* secondSubstring, BOOL showBackground, int errorCode);Parameters:headerTextLabel: Text label to set on the header/title.line1TextLabel: Text label to set on the first line of the body..buttonsBitField: Bit field of the button flags. See SET_WARNING_MESSAGE.buttonsBitFieldUpper: Bit field of the upper button flags. See SET_WARNING_MESSAGE_WITH_HEADER_AND_SUBSTRING_FLAGS_EXTENDED.line2TextLabel: Text label to set on the second line of the body.addNumber: If number should be inserted into ~1~ in the body.numberToAdd: What number to insert into ~1~ in the body.firstSubstring: First substring text label to insert into ~a~ in the body.secondSubstring: Second substring text label to insert into ~a~ in the body.showBackground: Bool indicating if the message should have a black background.errorCode: Error number to show at the bottom of the message. 0 is the default.Sets a warning message for one frame with header and upper buttons bit field that don't fit the standard 32 bit set.Old name:  _SET_WARNING_MESSAGE_WITH_HEADER_UNK",
+  "codeBlocks": [
+    "// SetWarningMessageWithHeaderExtended\nvoid SET_WARNING_MESSAGE_WITH_HEADER_EXTENDED(char* headerTextLabel, char* line1TextLabel, int buttonsBitField, int buttonsBitFieldUpper, char* line2TextLabel, BOOL addNumber, int numberToAdd, char* firstSubstring, char* secondSubstring, BOOL showBackground, int errorCode);",
+    "-- Example usage for SET_WARNING_MESSAGE_WITH_HEADER_EXTENDED\nSetWarningMessageWithHeaderExtended('', '', 0, 0, '', false, 0, '', '', false, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/SetWarningMessageWithHeaderExtended.md",
+    "https://docs.fivem.net/natives/?_0x7B1776B3B53F8D74",
+    "https://docs.fivem.net/natives/?_0x15803FEC3B9A872B",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

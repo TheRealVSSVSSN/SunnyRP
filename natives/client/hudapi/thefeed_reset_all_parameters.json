@@ -1,0 +1,23 @@
+{
+  "title": "THEFEED_RESET_ALL_PARAMETERS",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "THEFEED_RESET_ALL_PARAMETERS"
+  ],
+  "content": "0xFDD85225B2DEA55E0xA4524B23// ThefeedResetAllParameters\nvoid THEFEED_RESET_ALL_PARAMETERS();Old name:  _THEFEED_CLEAR_ANIMPOSTFX",
+  "codeBlocks": [
+    "// ThefeedResetAllParameters\nvoid THEFEED_RESET_ALL_PARAMETERS();",
+    "-- Example usage for THEFEED_RESET_ALL_PARAMETERS\nThefeedResetAllParameters()"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/ThefeedResetAllParameters.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}
