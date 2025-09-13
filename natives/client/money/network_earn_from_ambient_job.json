@@ -1,0 +1,24 @@
+{
+  "title": "NETWORK_EARN_FROM_AMBIENT_JOB",
+  "breadcrumbs": [
+    "Native Reference",
+    "MONEYAPI",
+    "NETWORK_EARN_FROM_AMBIENT_JOB"
+  ],
+  "content": "0xFB6DB092FBAE29E60xA14CC95D// NetworkEarnFromAmbientJob\nvoid NETWORK_EARN_FROM_AMBIENT_JOB(int p0, char* p1, Any* p2);Example for p1: \"AM_DISTRACT_COPS\"  Old name:  _NETWORK_EARN_FROM_AMBIENT_JOB",
+  "codeBlocks": [
+    "// NetworkEarnFromAmbientJob\nvoid NETWORK_EARN_FROM_AMBIENT_JOB(int p0, char* p1, Any* p2);",
+    "Example for p1: \"AM_DISTRACT_COPS\"",
+    "-- Example usage for NETWORK_EARN_FROM_AMBIENT_JOB\nNetworkEarnFromAmbientJob(0, '', 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MONEY/NetworkEarnFromAmbientJob.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

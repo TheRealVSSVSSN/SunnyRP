@@ -1,0 +1,23 @@
+{
+  "title": "FORCE_CINEMATIC_RENDERING_THIS_UPDATE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CAMAPI",
+    "FORCE_CINEMATIC_RENDERING_THIS_UPDATE"
+  ],
+  "content": "0xA41BCD7213805AAC0xFBB85E02// ForceCinematicRenderingThisUpdate\nvoid FORCE_CINEMATIC_RENDERING_THIS_UPDATE(BOOL enable);Parameters:enable: Whether it should force the cinematic rendering or not.Forces the camera to be in cinematic mode while the player is in a car. This has to be called every frame, e.g. in a Wait(0) loop.",
+  "codeBlocks": [
+    "// ForceCinematicRenderingThisUpdate\nvoid FORCE_CINEMATIC_RENDERING_THIS_UPDATE(BOOL enable);",
+    "-- Example usage for FORCE_CINEMATIC_RENDERING_THIS_UPDATE\nForceCinematicRenderingThisUpdate(false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CAM/ForceCinematicRenderingThisUpdate.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

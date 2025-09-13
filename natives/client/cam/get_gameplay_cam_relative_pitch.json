@@ -1,0 +1,24 @@
+{
+  "title": "GET_GAMEPLAY_CAM_RELATIVE_PITCH",
+  "breadcrumbs": [
+    "Native Reference",
+    "CAMAPI",
+    "GET_GAMEPLAY_CAM_RELATIVE_PITCH"
+  ],
+  "content": "0x3A6867B4845BEDA20xFC5A4946// GetGameplayCamRelativePitch\nfloat GET_GAMEPLAY_CAM_RELATIVE_PITCH();Returns: Returns the relative pitch of the gameplay cameraExamples:Lualocal pitch = GetGameplayCamRelativePitch()\nprint(\"LocalPlayer pitch: \" .. pitch)",
+  "codeBlocks": [
+    "// GetGameplayCamRelativePitch\nfloat GET_GAMEPLAY_CAM_RELATIVE_PITCH();",
+    "local pitch = GetGameplayCamRelativePitch()",
+    "-- Example usage for GET_GAMEPLAY_CAM_RELATIVE_PITCH\nGetGameplayCamRelativePitch()"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CAM/GetGameplayCamRelativePitch.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

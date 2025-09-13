@@ -1,0 +1,23 @@
+{
+  "title": "_CELL_CAM_SET_ROLL",
+  "breadcrumbs": [
+    "Native Reference",
+    "MOBILEAPI",
+    "_CELL_CAM_SET_ROLL"
+  ],
+  "content": "0x15E69E2802C24B8D// CellCamSetRoll\nvoid _CELL_CAM_SET_ROLL(float p0);Parameters:p0: Value from -1.0 to 1.0",
+  "codeBlocks": [
+    "// CellCamSetRoll\nvoid _CELL_CAM_SET_ROLL(float p0);",
+    "-- Example usage for _CELL_CAM_SET_ROLL\n_CellCamSetRoll(0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MOBILE/CellCamSetRoll.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "title": "PLAY_SYNCHRONIZED_CAM_ANIM",
+  "breadcrumbs": [
+    "Native Reference",
+    "CAMAPI",
+    "PLAY_SYNCHRONIZED_CAM_ANIM"
+  ],
+  "content": "0xE32EFE9AB4A9AA0C0x9458459E// PlaySynchronizedCamAnim\nBOOL PLAY_SYNCHRONIZED_CAM_ANIM(Cam camera, int scene, char* animName, char* animDictionary);Examples:  \nCAM::PLAY_SYNCHRONIZED_CAM_ANIM(l_2734, NETWORK::_02C40BF885C567B6(l_2739), \"PLAYER_EXIT_L_CAM\", \"mp_doorbell\");  \nCAM::PLAY_SYNCHRONIZED_CAM_ANIM(l_F0D[7/*1*/], l_F4D[15/*1*/], \"ah3b_attackheli_cam2\", \"missheistfbi3b_helicrash\");  \nAnimations list",
+  "codeBlocks": [
+    "// PlaySynchronizedCamAnim\nBOOL PLAY_SYNCHRONIZED_CAM_ANIM(Cam camera, int scene, char* animName, char* animDictionary);",
+    "Examples:  \nCAM::PLAY_SYNCHRONIZED_CAM_ANIM(l_2734, NETWORK::_02C40BF885C567B6(l_2739), \"PLAYER_EXIT_L_CAM\", \"mp_doorbell\");  \nCAM::PLAY_SYNCHRONIZED_CAM_ANIM(l_F0D[7/*1*/], l_F4D[15/*1*/], \"ah3b_attackheli_cam2\", \"missheistfbi3b_helicrash\");",
+    "-- Example usage for PLAY_SYNCHRONIZED_CAM_ANIM\nPlaySynchronizedCamAnim(0, 0, '', '')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CAM/PlaySynchronizedCamAnim.md",
+    "https://alexguirre.github.io/animations-list/",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}
