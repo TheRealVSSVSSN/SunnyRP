@@ -1,0 +1,19 @@
+{
+  "title": "RESET_MAP_ZOOM_DATA_LEVEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "RESET_MAP_ZOOM_DATA_LEVEL"
+  ],
+  "content": "0x11A5B7ED// ResetMapZoomDataLevel\nvoid RESET_MAP_ZOOM_DATA_LEVEL(int index);Parameters:index: Zoom level index.Resets values from the zoom level data by index to defaults from mapzoomdata.meta.",
+  "codeBlocks": [
+    "// ResetMapZoomDataLevel\nvoid RESET_MAP_ZOOM_DATA_LEVEL(int index);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/ResetMapZoomDataLevel.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

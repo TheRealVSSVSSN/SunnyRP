@@ -1,0 +1,19 @@
+{
+  "title": "OVERRIDE_PEDS_CAN_STAND_ON_TOP_FLAG",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "OVERRIDE_PEDS_CAN_STAND_ON_TOP_FLAG"
+  ],
+  "content": "0x90A9E0B2// OverridePedsCanStandOnTopFlag\nvoid OVERRIDE_PEDS_CAN_STAND_ON_TOP_FLAG(BOOL flag);Parameters:flag: true to override, false to use default game behavior.Sets whether peds can stand on top of all vehicles without falling off.Note this flag is not replicated automatically, you will have to manually do so.",
+  "codeBlocks": [
+    "// OverridePedsCanStandOnTopFlag\nvoid OVERRIDE_PEDS_CAN_STAND_ON_TOP_FLAG(BOOL flag);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/OverridePedsCanStandOnTopFlag.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

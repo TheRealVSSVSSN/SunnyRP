@@ -1,0 +1,19 @@
+{
+  "title": "GET_CLOSEST_TRACK_NODES",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_CLOSEST_TRACK_NODES"
+  ],
+  "content": "0x59FC24A7// GetClosestTrackNodes\nobject GET_CLOSEST_TRACK_NODES(Vector3 position, float radius);Parameters:position: Get track nodes at positionradius: Get track nodes within radiusReturns: Returns a list of tracks and node entries: a trackNode and a trackIdThe data returned adheres to the following layout:    {trackNode1, trackId1}, ..., {trackNodeN, trackIdN}Get all track nodes and their track ids within the radius of the specified coordinates.",
+  "codeBlocks": [
+    "// GetClosestTrackNodes\nobject GET_CLOSEST_TRACK_NODES(Vector3 position, float radius);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetClosestTrackNodes.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

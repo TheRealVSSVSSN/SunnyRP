@@ -1,0 +1,19 @@
+{
+  "title": "REGISTER_CONSOLE_LISTENER",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "REGISTER_CONSOLE_LISTENER"
+  ],
+  "content": "0x281B5448// RegisterConsoleListener\nvoid REGISTER_CONSOLE_LISTENER(func listener);Parameters:listener: A function of (channel: string, message: string) => void. The message might contain \\n.Registers a listener for console output messages.",
+  "codeBlocks": [
+    "// RegisterConsoleListener\nvoid REGISTER_CONSOLE_LISTENER(func listener);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/RegisterConsoleListener.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

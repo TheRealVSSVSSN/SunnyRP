@@ -1,0 +1,19 @@
+{
+  "title": "ADD_AUTHORIZED_PARACHUTE_PACK_MODEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "ADD_AUTHORIZED_PARACHUTE_PACK_MODEL"
+  ],
+  "content": "0x2E86DEA5// AddAuthorizedParachutePackModel\nvoid ADD_AUTHORIZED_PARACHUTE_PACK_MODEL(int modelNameHash);Parameters:modelNameHash: Name hash of the model to allow to be used for the player ped's parachute packReturns: None.Adds the given model name hash to the list of valid models for the player ped's parachute pack.",
+  "codeBlocks": [
+    "// AddAuthorizedParachutePackModel\nvoid ADD_AUTHORIZED_PARACHUTE_PACK_MODEL(int modelNameHash);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/AddAuthorizedParachutePackModel.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

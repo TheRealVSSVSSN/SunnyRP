@@ -1,0 +1,19 @@
+{
+  "title": "GET_ENTITY_ADDRESS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_ENTITY_ADDRESS"
+  ],
+  "content": "0x9A3144BC// GetEntityAddress\nAny* GET_ENTITY_ADDRESS(Entity entity);Parameters:entity: The handle of the entity to get the address of.Returns: A pointer containing the memory address of the entity.Experimental: This native may be altered or removed in future versions of CitizenFX without warning.Returns the memory address of an entity.This native is intended for singleplayer debugging, and may not be available during multiplayer.",
+  "codeBlocks": [
+    "// GetEntityAddress\nAny* GET_ENTITY_ADDRESS(Entity entity);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetEntityAddress.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

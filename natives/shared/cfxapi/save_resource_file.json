@@ -1,0 +1,19 @@
+{
+  "title": "SAVE_RESOURCE_FILE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SAVE_RESOURCE_FILE"
+  ],
+  "content": "0xA09E7E7B// SaveResourceFile\nBOOL SAVE_RESOURCE_FILE(char* resourceName, char* fileName, char* data, int dataLength);Parameters:resourceName: The name of the resource.fileName: The name of the file.data: The data to write to the file.dataLength: The length of the written data.Returns: A value indicating if the write succeeded.Writes the specified data to a file in the specified resource.\nUsing a length of -1 will automatically detect the length assuming the data is a C string.",
+  "codeBlocks": [
+    "// SaveResourceFile\nBOOL SAVE_RESOURCE_FILE(char* resourceName, char* fileName, char* data, int dataLength);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SaveResourceFile.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

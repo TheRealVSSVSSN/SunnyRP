@@ -1,0 +1,19 @@
+{
+  "title": "SEND_DUI_MOUSE_UP",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SEND_DUI_MOUSE_UP"
+  ],
+  "content": "0x1D735B93// SendDuiMouseUp\nvoid SEND_DUI_MOUSE_UP(long duiObject, char* button);Parameters:duiObject: The DUI browser handle.button: Either 'left', 'middle' or 'right'.Injects a 'mouse up' event for a DUI object. Coordinates are expected to be set using SEND_DUI_MOUSE_MOVE.",
+  "codeBlocks": [
+    "// SendDuiMouseUp\nvoid SEND_DUI_MOUSE_UP(long duiObject, char* button);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SendDuiMouseUp.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

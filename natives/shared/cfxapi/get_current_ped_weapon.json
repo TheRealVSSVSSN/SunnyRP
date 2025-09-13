@@ -1,0 +1,19 @@
+{
+  "title": "GET_CURRENT_PED_WEAPON",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_CURRENT_PED_WEAPON"
+  ],
+  "content": "0xB0237302// GetCurrentPedWeapon\nHash GET_CURRENT_PED_WEAPON(Ped ped);Parameters:ped: The target ped.Returns: The weapon hash.Returns the hash of weapon the Ped is currently using.",
+  "codeBlocks": [
+    "// GetCurrentPedWeapon\nHash GET_CURRENT_PED_WEAPON(Ped ped);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetCurrentPedWeapon.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

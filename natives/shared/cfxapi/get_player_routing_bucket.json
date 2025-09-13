@@ -1,0 +1,19 @@
+{
+  "title": "GET_PLAYER_ROUTING_BUCKET",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PLAYER_ROUTING_BUCKET"
+  ],
+  "content": "0x52441C34// GetPlayerRoutingBucket\nint GET_PLAYER_ROUTING_BUCKET(char* playerSrc);Parameters:playerSrc: The player to get the routing bucket for.Returns: The routing bucket ID.Gets the routing bucket for the specified player.Routing buckets are also known as 'dimensions' or 'virtual worlds' in past echoes, however they are population-aware.",
+  "codeBlocks": [
+    "// GetPlayerRoutingBucket\nint GET_PLAYER_ROUTING_BUCKET(char* playerSrc);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPlayerRoutingBucket.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

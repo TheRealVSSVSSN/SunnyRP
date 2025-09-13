@@ -1,0 +1,24 @@
+{
+  "title": "GET_PED_COLLECTION_NAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PED_COLLECTION_NAME"
+  ],
+  "content": "0xFED5D83A// GetPedCollectionName\nchar* GET_PED_COLLECTION_NAME(Ped ped, int index);Parameters:ped: The target pedindex: The target collection indexReturns: Name of the collection with given index. Base game collection (always stored with index 0) is an empty string. Returns null if Ped is not found or index is out of bounds.Returns name of collection under given index for the given Ped.Collections are groups of drawable components or props available for the given Ped. Usually collection corresponds to a certain DLC or the base game. See SET_PED_COLLECTION_COMPONENT_VARIATION, SET_PED_COLLECTION_PROP_INDEX, GET_NUMBER_OF_PED_COLLECTION_DRAWABLE_VARIATIONS etc natives for more details on how to work with collections.GET_PED_COLLECTION_NAME can be used together with GET_PED_COLLECTIONS_COUNT to list all collections attached to Ped.Examples:Lualocal ped = PlayerPedId()\nlocal count = GetPedCollectionsCount(ped)\nfor i = 0, count - 1 do\n  print(GetPedCollectionName(ped, i))\nend",
+  "codeBlocks": [
+    "// GetPedCollectionName\nchar* GET_PED_COLLECTION_NAME(Ped ped, int index);",
+    "local ped = PlayerPedId()\nlocal count = GetPedCollectionsCount(ped)\nfor i = 0, count - 1 do\n  print(GetPedCollectionName(ped, i))\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPedCollectionName.md",
+    "https://docs.fivem.net/natives/?_0x88711BBA",
+    "https://docs.fivem.net/natives/?_0x75240BCB",
+    "https://docs.fivem.net/natives/?_0x310D0271",
+    "https://docs.fivem.net/natives/?_0x45946359",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

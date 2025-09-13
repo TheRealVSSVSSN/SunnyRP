@@ -1,0 +1,19 @@
+{
+  "title": "SEND_DUI_MOUSE_DOWN",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SEND_DUI_MOUSE_DOWN"
+  ],
+  "content": "0x5D01F191// SendDuiMouseDown\nvoid SEND_DUI_MOUSE_DOWN(long duiObject, char* button);Parameters:duiObject: The DUI browser handle.button: Either 'left', 'middle' or 'right'.Injects a 'mouse down' event for a DUI object. Coordinates are expected to be set using SEND_DUI_MOUSE_MOVE.",
+  "codeBlocks": [
+    "// SendDuiMouseDown\nvoid SEND_DUI_MOUSE_DOWN(long duiObject, char* button);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SendDuiMouseDown.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

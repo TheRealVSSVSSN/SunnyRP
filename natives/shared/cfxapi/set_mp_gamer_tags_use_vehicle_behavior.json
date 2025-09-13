@@ -1,0 +1,19 @@
+{
+  "title": "SET_MP_GAMER_TAGS_USE_VEHICLE_BEHAVIOR",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_MP_GAMER_TAGS_USE_VEHICLE_BEHAVIOR"
+  ],
+  "content": "0x7A27BC93// SetMpGamerTagsUseVehicleBehavior\nvoid SET_MP_GAMER_TAGS_USE_VEHICLE_BEHAVIOR(bool enabled);Parameters:enabled: Whether tags should use normal game behavior. Default is true.Sets whether all tags should group (normal game behavior) or should remain independent and above each ped's respective head when in a vehicle.",
+  "codeBlocks": [
+    "// SetMpGamerTagsUseVehicleBehavior\nvoid SET_MP_GAMER_TAGS_USE_VEHICLE_BEHAVIOR(bool enabled);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetMpGamerTagsUseVehicleBehavior.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

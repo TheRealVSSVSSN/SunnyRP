@@ -1,0 +1,20 @@
+{
+  "title": "GET_CALMING_QUAD_AT_COORDS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_CALMING_QUAD_AT_COORDS"
+  ],
+  "content": "0x870E8B40// GetCalmingQuadAtCoords\nint GET_CALMING_QUAD_AT_COORDS(float x, float y);Parameters:x: The X coordinatey: The Y coordinateReturns: The calming quad index at the given position. Returns -1 if there isn't any there.This native returns the index of a calming quad if the given point is inside its bounds.Examples:Lualocal currentPedPosition = GetEntityCoords(PlayerPedId())\nlocal calmingQuadIndex = GetCalmingQuadAtCoords(currentPedPosition.x, currentPedPosition.y)",
+  "codeBlocks": [
+    "// GetCalmingQuadAtCoords\nint GET_CALMING_QUAD_AT_COORDS(float x, float y);",
+    "local currentPedPosition = GetEntityCoords(PlayerPedId())\nlocal calmingQuadIndex = GetCalmingQuadAtCoords(currentPedPosition.x, currentPedPosition.y)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetCalmingQuadAtCoords.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

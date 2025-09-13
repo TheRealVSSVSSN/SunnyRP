@@ -1,0 +1,20 @@
+{
+  "title": "BREAK_OFF_VEHICLE_WHEEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "BREAK_OFF_VEHICLE_WHEEL"
+  ],
+  "content": "0xA274CADB// BreakOffVehicleWheel\nvoid BREAK_OFF_VEHICLE_WHEEL(Vehicle vehicle, int wheelIndex, BOOL leaveDebrisTrail, BOOL deleteWheel, BOOL unknownFlag, BOOL putOnFire);Parameters:vehicle: The vehicle handle.wheelIndex: The wheel index.leaveDebrisTrail: Start \"veh_debris_trail\" ptfx.deleteWheel: True to delete wheel, otherwise detach.unknownFlag: Unknown flag.putOnFire: Set wheel on fire once detached.Break off vehicle wheel by index. The leaveDebrisTrail flag requires putOnFire to be true.Examples:Lualocal vehicle = GetVehiclePedIsIn(PlayerPedId())\n\nif DoesEntityExist(vehicle) then\n  for i = 0, 3 do\n    BreakOffVehicleWheel(vehicle, i, true, false, true, false)\n  end\nend",
+  "codeBlocks": [
+    "// BreakOffVehicleWheel\nvoid BREAK_OFF_VEHICLE_WHEEL(Vehicle vehicle, int wheelIndex, BOOL leaveDebrisTrail, BOOL deleteWheel, BOOL unknownFlag, BOOL putOnFire);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId())\n\nif DoesEntityExist(vehicle) then\n  for i = 0, 3 do\n    BreakOffVehicleWheel(vehicle, i, true, false, true, false)\n  end\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/BreakOffVehicleWheel.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

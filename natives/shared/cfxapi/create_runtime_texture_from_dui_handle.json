@@ -1,0 +1,19 @@
+{
+  "title": "CREATE_RUNTIME_TEXTURE_FROM_DUI_HANDLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "CREATE_RUNTIME_TEXTURE_FROM_DUI_HANDLE"
+  ],
+  "content": "0xB135472B// CreateRuntimeTextureFromDuiHandle\nlong CREATE_RUNTIME_TEXTURE_FROM_DUI_HANDLE(long txd, char* txn, char* duiHandle);Parameters:txd: A handle to the runtime TXD to create the runtime texture in.txn: The name for the texture in the runtime texture dictionary.duiHandle: The DUI handle returned from GET_DUI_HANDLE.Returns: The runtime texture handle.Creates a runtime texture from a DUI handle.",
+  "codeBlocks": [
+    "// CreateRuntimeTextureFromDuiHandle\nlong CREATE_RUNTIME_TEXTURE_FROM_DUI_HANDLE(long txd, char* txn, char* duiHandle);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/CreateRuntimeTextureFromDuiHandle.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

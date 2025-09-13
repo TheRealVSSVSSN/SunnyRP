@@ -1,0 +1,20 @@
+{
+  "title": "GET_CONVAR",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_CONVAR"
+  ],
+  "content": "0x6CCD2564// GetConvar\nchar* GET_CONVAR(char* varName, char* default_);Parameters:varName: The console variable to look up.default_: The default value to set if none is found.Returns: Returns the convar value if it can be found, otherwise it returns the assigned default.Can be used to get a console variable of type char*, for example a string.Examples:Luaif GetConvar('voice_useNativeAudio', 'false') == 'true' then\n    Citizen.Trace('Native Audio is enabled.')\nend",
+  "codeBlocks": [
+    "// GetConvar\nchar* GET_CONVAR(char* varName, char* default_);",
+    "if GetConvar('voice_useNativeAudio', 'false') == 'true' then\n    Citizen.Trace('Native Audio is enabled.')\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetConvar.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

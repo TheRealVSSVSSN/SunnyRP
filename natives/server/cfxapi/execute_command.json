@@ -1,0 +1,20 @@
+{
+  "title": "EXECUTE_COMMAND",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "EXECUTE_COMMAND"
+  ],
+  "content": "0x561C060B// ExecuteCommand\nvoid EXECUTE_COMMAND(char* commandString);Depending on your use case you may need to use add_acl resource.<your_resource_name> command.<command_name> allow to use this native in your resource.Examples:LuaCitizen.CreateThread(function()\n  -- stop the server after 1 minute\n  Citizen.Wait(60000)\n  ExecuteCommand(\"quit Shortlived\")\nend)",
+  "codeBlocks": [
+    "// ExecuteCommand\nvoid EXECUTE_COMMAND(char* commandString);",
+    "Citizen.CreateThread(function()\n  -- stop the server after 1 minute\n  Citizen.Wait(60000)\n  ExecuteCommand(\"quit Shortlived\")\nend)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/ExecuteCommand.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

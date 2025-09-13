@@ -1,0 +1,21 @@
+{
+  "title": "DELETE_RESOURCE_KVP_NO_SYNC",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "DELETE_RESOURCE_KVP_NO_SYNC"
+  ],
+  "content": "0x4152C90// DeleteResourceKvpNoSync\nvoid DELETE_RESOURCE_KVP_NO_SYNC(char* key);Parameters:key: The key to deleteNonsynchronous DELETE_RESOURCE_KVP operation; see FLUSH_RESOURCE_KVP.",
+  "codeBlocks": [
+    "// DeleteResourceKvpNoSync\nvoid DELETE_RESOURCE_KVP_NO_SYNC(char* key);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/DeleteResourceKvpNoSync.md",
+    "https://docs.fivem.net/natives/?_0x7389B5DF",
+    "https://docs.fivem.net/natives/?_0x5240DA5A",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

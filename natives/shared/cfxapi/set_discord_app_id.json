@@ -1,0 +1,20 @@
+{
+  "title": "SET_DISCORD_APP_ID",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_DISCORD_APP_ID"
+  ],
+  "content": "0x6A02254D// SetDiscordAppId\nvoid SET_DISCORD_APP_ID(char* appId);Parameters:appId: A valid Discord API App Id, can be generated at https://discordapp.com/developers/applications/This native sets the app id for the discord rich presence implementation.",
+  "codeBlocks": [
+    "// SetDiscordAppId\nvoid SET_DISCORD_APP_ID(char* appId);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetDiscordAppId.md",
+    "https://discordapp.com/developers/applications/",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

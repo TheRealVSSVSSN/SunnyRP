@@ -1,0 +1,19 @@
+{
+  "title": "SET_AUDIO_SUBMIX_EFFECT_PARAM_INT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_AUDIO_SUBMIX_EFFECT_PARAM_INT"
+  ],
+  "content": "0x77FAE2B8// SetAudioSubmixEffectParamInt\nvoid SET_AUDIO_SUBMIX_EFFECT_PARAM_INT(int submixId, int effectSlot, int paramIndex, int paramValue);Parameters:submixId: The submix.effectSlot: The effect slot for the submix. It is expected that the effect is set in this slot beforehand.paramIndex: The parameter index for the effect.paramValue: The parameter value to set.Sets an integer parameter for a submix effect.",
+  "codeBlocks": [
+    "// SetAudioSubmixEffectParamInt\nvoid SET_AUDIO_SUBMIX_EFFECT_PARAM_INT(int submixId, int effectSlot, int paramIndex, int paramValue);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetAudioSubmixEffectParamInt.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

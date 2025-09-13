@@ -1,0 +1,20 @@
+{
+  "title": "MUMBLE_SET_AUDIO_INPUT_INTENT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "MUMBLE_SET_AUDIO_INPUT_INTENT"
+  ],
+  "content": "0x6383526B// MumbleSetAudioInputIntent\nvoid MUMBLE_SET_AUDIO_INPUT_INTENT(Hash intentHash);Parameters:intentHash: The intent hash.Use this native to disable noise suppression and high pass filters.The possible intents for this are as follows (backticks are used to represent hashes):IndexDescription`speech`Default intent`music`Disable noise suppression and high pass filterExamples:Lua-- disable noise suppression and high pass filter\nMumbleSetAudioInputIntent(`music`)\n\n-- set the default intent (enable noise suppression and high pass filter)\nMumbleSetAudioInputIntent(`speech`)",
+  "codeBlocks": [
+    "// MumbleSetAudioInputIntent\nvoid MUMBLE_SET_AUDIO_INPUT_INTENT(Hash intentHash);",
+    "-- disable noise suppression and high pass filter\nMumbleSetAudioInputIntent(`music`)\n\n-- set the default intent (enable noise suppression and high pass filter)\nMumbleSetAudioInputIntent(`speech`)\n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/MumbleSetAudioInputIntent.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

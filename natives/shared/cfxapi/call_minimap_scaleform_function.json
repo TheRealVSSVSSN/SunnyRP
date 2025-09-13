@@ -1,0 +1,19 @@
+{
+  "title": "CALL_MINIMAP_SCALEFORM_FUNCTION",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "CALL_MINIMAP_SCALEFORM_FUNCTION"
+  ],
+  "content": "0x4C89C0ED// CallMinimapScaleformFunction\nBOOL CALL_MINIMAP_SCALEFORM_FUNCTION(int miniMap, char* fnName);Parameters:miniMap: The minimap overlay ID.fnName: A function in the overlay's TIMELINE.This is similar to the PushScaleformMovieFunction natives, except it calls in the TIMELINE of a minimap overlay.",
+  "codeBlocks": [
+    "// CallMinimapScaleformFunction\nBOOL CALL_MINIMAP_SCALEFORM_FUNCTION(int miniMap, char* fnName);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/CallMinimapScaleformFunction.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

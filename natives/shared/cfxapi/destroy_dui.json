@@ -1,0 +1,19 @@
+{
+  "title": "DESTROY_DUI",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "DESTROY_DUI"
+  ],
+  "content": "0xA085CB10// DestroyDui\nvoid DESTROY_DUI(long duiObject);Parameters:duiObject: The DUI browser handle.Destroys a DUI browser.",
+  "codeBlocks": [
+    "// DestroyDui\nvoid DESTROY_DUI(long duiObject);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/DestroyDui.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

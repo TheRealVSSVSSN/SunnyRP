@@ -1,0 +1,19 @@
+{
+  "title": "MUMBLE_SET_TALKER_PROXIMITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "MUMBLE_SET_TALKER_PROXIMITY"
+  ],
+  "content": "0x74E927B0// MumbleSetTalkerProximity\nvoid MUMBLE_SET_TALKER_PROXIMITY(float value);Parameters:value: Proximity value.",
+  "codeBlocks": [
+    "// MumbleSetTalkerProximity\nvoid MUMBLE_SET_TALKER_PROXIMITY(float value);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/MumbleSetTalkerProximity.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

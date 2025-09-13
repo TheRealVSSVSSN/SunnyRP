@@ -1,0 +1,21 @@
+{
+  "title": "GET_PED_SWEAT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PED_SWEAT"
+  ],
+  "content": "0x44B91E94// GetPedSweat\nfloat GET_PED_SWEAT(Ped ped);Parameters:ped: The target pedReturns: Returns ped's sweat.A getter for SET_PED_SWEAT.Examples:Lualocal sweat = GetPedSweat(PlayerPedId())",
+  "codeBlocks": [
+    "// GetPedSweat\nfloat GET_PED_SWEAT(Ped ped);",
+    "local sweat = GetPedSweat(PlayerPedId())"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPedSweat.md",
+    "https://docs.fivem.net/natives/?_0x27B0405F59637D1F",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

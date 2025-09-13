@@ -1,0 +1,20 @@
+{
+  "title": "SET_INTERIOR_PORTAL_ROOM_TO",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_INTERIOR_PORTAL_ROOM_TO"
+  ],
+  "content": "0x58982680// SetInteriorPortalRoomTo\nvoid SET_INTERIOR_PORTAL_ROOM_TO(int interiorId, int portalIndex, int roomTo);Parameters:interiorId: The target interior.portalIndex: Interior portal index.roomTo: New value.Examples:Lualocal playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\n\nif interiorId ~= 0 then\n  local portalIndex = 0\n\n  SetInteriorPortalRoomTo(interiorId, portalIndex, 0)\n  RefreshInterior(interiorId)\nend",
+  "codeBlocks": [
+    "// SetInteriorPortalRoomTo\nvoid SET_INTERIOR_PORTAL_ROOM_TO(int interiorId, int portalIndex, int roomTo);",
+    "local playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\n\nif interiorId ~= 0 then\n  local portalIndex = 0\n\n  SetInteriorPortalRoomTo(interiorId, portalIndex, 0)\n  RefreshInterior(interiorId)\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetInteriorPortalRoomTo.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

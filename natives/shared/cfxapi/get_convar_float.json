@@ -1,0 +1,19 @@
+{
+  "title": "GET_CONVAR_FLOAT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_CONVAR_FLOAT"
+  ],
+  "content": "0x9E666D// GetConvarFloat\nfloat GET_CONVAR_FLOAT(char* varName, float defaultValue);Parameters:varName: The console variable to getdefaultValue: The default value to set, if none are found.Returns: Returns the value set in varName, or default if none are specifiedThis will have floating point inaccuracy.",
+  "codeBlocks": [
+    "// GetConvarFloat\nfloat GET_CONVAR_FLOAT(char* varName, float defaultValue);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetConvarFloat.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "title": "DOES_TRAIN_STOP_AT_STATIONS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "DOES_TRAIN_STOP_AT_STATIONS"
+  ],
+  "content": "0x77CC80DC// DoesTrainStopAtStations\nBOOL DOES_TRAIN_STOP_AT_STATIONS(Vehicle train);Parameters:train: The train handleReturns: True if the train stops at stations. False otherwise",
+  "codeBlocks": [
+    "// DoesTrainStopAtStations\nBOOL DOES_TRAIN_STOP_AT_STATIONS(Vehicle train);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/DoesTrainStopAtStations.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

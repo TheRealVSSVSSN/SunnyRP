@@ -1,0 +1,20 @@
+{
+  "title": "GET_RESOURCE_METADATA",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_RESOURCE_METADATA"
+  ],
+  "content": "0x964BAB1D// GetResourceMetadata\nchar* GET_RESOURCE_METADATA(char* resourceName, char* metadataKey, int index);Parameters:resourceName: The resource name.metadataKey: The key in the resource manifest.index: The value index, in a range from [0..GET_NUM_RESOURCE_METDATA-1].Gets the metadata value at a specified key/index from a resource's manifest.\nSee also: Resource manifest",
+  "codeBlocks": [
+    "// GetResourceMetadata\nchar* GET_RESOURCE_METADATA(char* resourceName, char* metadataKey, int index);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetResourceMetadata.md",
+    "https://docs.fivem.net/docs/scripting-reference/resource-manifest/resource-manifest/",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "title": "REQUEST_PLAYER_COMMERCE_SESSION",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "REQUEST_PLAYER_COMMERCE_SESSION"
+  ],
+  "content": "0x96F93CCE// RequestPlayerCommerceSession\nvoid REQUEST_PLAYER_COMMERCE_SESSION(char* playerSrc, int skuId);Parameters:playerSrc: The player handleskuId: The ID of the SKU.Requests the specified player to buy the passed SKU. This'll pop up a prompt on the client, which upon acceptance\nwill open the browser prompting further purchase details.",
+  "codeBlocks": [
+    "// RequestPlayerCommerceSession\nvoid REQUEST_PLAYER_COMMERCE_SESSION(char* playerSrc, int skuId);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/RequestPlayerCommerceSession.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

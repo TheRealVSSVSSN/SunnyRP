@@ -1,0 +1,19 @@
+{
+  "title": "DRAW_LINE_2D",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "DRAW_LINE_2D"
+  ],
+  "content": "0xB856A90// DrawLine_2d\nvoid DRAW_LINE_2D(float x1, float y1, float x2, float y2, float width, int r, int g, int b, int a);Parameters:x1: First x.y1: First y.x2: Second x.y2: Second y.width: Width of line.r: Red.g: Green.b: Blue.a: Alpha.Like DRAW_RECT, but it's a line.",
+  "codeBlocks": [
+    "// DrawLine_2d\nvoid DRAW_LINE_2D(float x1, float y1, float x2, float y2, float width, int r, int g, int b, int a);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/DrawLine_2d.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "title": "GET_PED_PROP_COLLECTION_LOCAL_INDEX",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PED_PROP_COLLECTION_LOCAL_INDEX"
+  ],
+  "content": "0xCD420AD1// GetPedPropCollectionLocalIndex\nint GET_PED_PROP_COLLECTION_LOCAL_INDEX(Ped ped, int anchorPoint);Parameters:ped: The target pedanchorPoint: One of the anchor points from SET_PED_PROP_INDEXReturns: Local drawable index of the drawable that is currently used in the given ped and component, or -1 if the ped does not have a prop at the specified anchor pointAn analogue to GET_PED_PROP_INDEX that returns collection local prop index (inside GET_PED_PROP_COLLECTION_NAME collection) instead of the global prop index.",
+  "codeBlocks": [
+    "// GetPedPropCollectionLocalIndex\nint GET_PED_PROP_COLLECTION_LOCAL_INDEX(Ped ped, int anchorPoint);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPedPropCollectionLocalIndex.md",
+    "https://docs.fivem.net/natives/?_0x93376B65A266EB5F",
+    "https://docs.fivem.net/natives/?_0x898CC20EA75BACD8",
+    "https://docs.fivem.net/natives/?_0x6B5653E4",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

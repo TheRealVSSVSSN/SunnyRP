@@ -1,0 +1,19 @@
+{
+  "title": "DOES_PLAYER_OWN_SKU",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "DOES_PLAYER_OWN_SKU"
+  ],
+  "content": "0x167ABA27// DoesPlayerOwnSku\nBOOL DOES_PLAYER_OWN_SKU(char* playerSrc, int skuId);Parameters:playerSrc: The player handleskuId: The ID of the SKU.Returns: A boolean.Requests whether or not the player owns the specified SKU.",
+  "codeBlocks": [
+    "// DoesPlayerOwnSku\nBOOL DOES_PLAYER_OWN_SKU(char* playerSrc, int skuId);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/DoesPlayerOwnSku.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

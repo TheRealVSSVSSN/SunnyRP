@@ -1,0 +1,21 @@
+{
+  "title": "GET_ALL_VEHICLE_MODELS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_ALL_VEHICLE_MODELS"
+  ],
+  "content": "0xD7531645// GetAllVehicleModels\nobject GET_ALL_VEHICLE_MODELS();Returns all registered vehicle model names, including non-dlc vehicles and custom vehicles in no particular order.Example output\t[\"dubsta\", \"dubsta2\", \"dubsta3\", \"myverycoolcar\", \"sultan\", \"sultanrs\", ...]This native will not return vehicles that are unregistered (i.e from a resource being stopped) during runtime.Examples:LuaRegisterCommand(\"spawnrandomcar\", function()\n\tlocal vehicles = GetAllVehicleModels()\n\tlocal veh = vehicles[math.random(1, #vehicles)]\n\tRequestModel(veh)\n\trepeat Wait(0) until HasModelLoaded(veh)\n\tlocal veh = CreateVehicle(veh, GetEntityCoords(PlayerPedId()), GetEntityHeading(PlayerPedId()), true, false)\n\tSetPedIntoVehicle(PlayerPedId(), veh, -1)\nend)",
+  "codeBlocks": [
+    "// GetAllVehicleModels\nobject GET_ALL_VEHICLE_MODELS();",
+    "\t[\"dubsta\", \"dubsta2\", \"dubsta3\", \"myverycoolcar\", \"sultan\", \"sultanrs\", ...]",
+    "RegisterCommand(\"spawnrandomcar\", function()\n\tlocal vehicles = GetAllVehicleModels()\n\tlocal veh = vehicles[math.random(1, #vehicles)]\n\tRequestModel(veh)\n\trepeat Wait(0) until HasModelLoaded(veh)\n\tlocal veh = CreateVehicle(veh, GetEntityCoords(PlayerPedId()), GetEntityHeading(PlayerPedId()), true, false)\n\tSetPedIntoVehicle(PlayerPedId(), veh, -1)\nend)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetAllVehicleModels.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

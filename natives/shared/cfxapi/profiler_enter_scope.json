@@ -1,0 +1,19 @@
+{
+  "title": "PROFILER_ENTER_SCOPE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "PROFILER_ENTER_SCOPE"
+  ],
+  "content": "0xC795A4A9// ProfilerEnterScope\nvoid PROFILER_ENTER_SCOPE(char* scopeName);Parameters:scopeName: Scope name.Scope entry for profiler.",
+  "codeBlocks": [
+    "// ProfilerEnterScope\nvoid PROFILER_ENTER_SCOPE(char* scopeName);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/ProfilerEnterScope.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}
