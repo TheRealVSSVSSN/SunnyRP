@@ -1,0 +1,12 @@
+{
+  "title": "CANCEL_STUNT_JUMP",
+  "breadcrumbs": [
+    "CANCEL_STUNT_JUMP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CANCEL_STUNT_JUMP\nCancelStuntJump()"
+  ],
+  "urls": [],
+  "tags": []
+}

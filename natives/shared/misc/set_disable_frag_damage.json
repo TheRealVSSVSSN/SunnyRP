@@ -1,0 +1,12 @@
+{
+  "title": "SET_DISABLE_FRAG_DAMAGE",
+  "breadcrumbs": [
+    "SET_DISABLE_FRAG_DAMAGE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_DISABLE_FRAG_DAMAGE\nSetDisableFragDamage()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,12 @@
+{
+  "title": "SET_OVERRIDE_WEATHER",
+  "breadcrumbs": [
+    "SET_OVERRIDE_WEATHER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_OVERRIDE_WEATHER\nSetOverrideWeather()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,12 @@
+{
+  "title": "GET_STREET_NAME_AT_COORD",
+  "breadcrumbs": [
+    "GET_STREET_NAME_AT_COORD"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_STREET_NAME_AT_COORD\nGetStreetNameAtCoord()"
+  ],
+  "urls": [],
+  "tags": []
+}

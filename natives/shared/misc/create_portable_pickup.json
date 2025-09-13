@@ -1,0 +1,12 @@
+{
+  "title": "CREATE_PORTABLE_PICKUP",
+  "breadcrumbs": [
+    "CREATE_PORTABLE_PICKUP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CREATE_PORTABLE_PICKUP\nCreatePortablePickup()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,12 @@
+{
+  "title": "SET_DITCH_POLICE_MODELS",
+  "breadcrumbs": [
+    "SET_DITCH_POLICE_MODELS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_DITCH_POLICE_MODELS\nSetDitchPoliceModels()"
+  ],
+  "urls": [],
+  "tags": []
+}

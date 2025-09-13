@@ -1,0 +1,12 @@
+{
+  "title": "UGC_SET_PLAYER_DATA",
+  "breadcrumbs": [
+    "UGC_SET_PLAYER_DATA"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for UGC_SET_PLAYER_DATA\nUgcSetPlayerData()"
+  ],
+  "urls": [],
+  "tags": []
+}

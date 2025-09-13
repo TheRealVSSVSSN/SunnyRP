@@ -1,0 +1,12 @@
+{
+  "title": "HAS_PTFX_ASSET_LOADED",
+  "breadcrumbs": [
+    "HAS_PTFX_ASSET_LOADED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for HAS_PTFX_ASSET_LOADED\nHasPtfxAssetLoaded()"
+  ],
+  "urls": [],
+  "tags": []
+}

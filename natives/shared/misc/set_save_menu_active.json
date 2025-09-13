@@ -1,0 +1,12 @@
+{
+  "title": "SET_SAVE_MENU_ACTIVE",
+  "breadcrumbs": [
+    "SET_SAVE_MENU_ACTIVE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_SAVE_MENU_ACTIVE\nSetSaveMenuActive()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,12 @@
+{
+  "title": "GET_TENNIS_SWING_ANIM_COMPLETE",
+  "breadcrumbs": [
+    "GET_TENNIS_SWING_ANIM_COMPLETE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_TENNIS_SWING_ANIM_COMPLETE\nGetTennisSwingAnimComplete()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,12 @@
+{
+  "title": "_GET_BASE_ELEMENT_METADATA",
+  "breadcrumbs": [
+    "_GET_BASE_ELEMENT_METADATA"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_BASE_ELEMENT_METADATA\n_etBaseElementMetadata()"
+  ],
+  "urls": [],
+  "tags": []
+}

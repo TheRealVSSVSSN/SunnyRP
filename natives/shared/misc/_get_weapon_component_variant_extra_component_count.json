@@ -1,0 +1,12 @@
+{
+  "title": "_GET_WEAPON_COMPONENT_VARIANT_EXTRA_COMPONENT_COUNT",
+  "breadcrumbs": [
+    "_GET_WEAPON_COMPONENT_VARIANT_EXTRA_COMPONENT_COUNT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_WEAPON_COMPONENT_VARIANT_EXTRA_COMPONENT_COUNT\n_etWeaponComponentVariantExtraComponentCount()"
+  ],
+  "urls": [],
+  "tags": []
+}

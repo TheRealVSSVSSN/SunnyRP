@@ -1,0 +1,12 @@
+{
+  "title": "_GET_MAX_AMMO_BY_TYPE",
+  "breadcrumbs": [
+    "_GET_MAX_AMMO_BY_TYPE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_MAX_AMMO_BY_TYPE\n_etMaxAmmoByType()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,12 @@
+{
+  "title": "GET_PED_WAYPOINT_DISTANCE",
+  "breadcrumbs": [
+    "GET_PED_WAYPOINT_DISTANCE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PED_WAYPOINT_DISTANCE\nGetPedWaypointDistance()"
+  ],
+  "urls": [],
+  "tags": []
+}

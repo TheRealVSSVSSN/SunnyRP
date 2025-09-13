@@ -1,0 +1,12 @@
+{
+  "title": "HAS_ANIM_SET_LOADED",
+  "breadcrumbs": [
+    "HAS_ANIM_SET_LOADED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for HAS_ANIM_SET_LOADED\nHasAnimSetLoaded()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,12 @@
+{
+  "title": "GET_ACTIVE_VEHICLE_MISSION_TYPE",
+  "breadcrumbs": [
+    "GET_ACTIVE_VEHICLE_MISSION_TYPE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ACTIVE_VEHICLE_MISSION_TYPE\nGetActiveVehicleMissionType()"
+  ],
+  "urls": [],
+  "tags": []
+}

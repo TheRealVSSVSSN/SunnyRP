@@ -1,0 +1,12 @@
+{
+  "title": "SET_INTERIOR_ACTIVE",
+  "breadcrumbs": [
+    "SET_INTERIOR_ACTIVE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_INTERIOR_ACTIVE\nSetInteriorActive()"
+  ],
+  "urls": [],
+  "tags": []
+}

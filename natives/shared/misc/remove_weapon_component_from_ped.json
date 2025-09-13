@@ -1,0 +1,12 @@
+{
+  "title": "REMOVE_WEAPON_COMPONENT_FROM_PED",
+  "breadcrumbs": [
+    "REMOVE_WEAPON_COMPONENT_FROM_PED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REMOVE_WEAPON_COMPONENT_FROM_PED\nRemoveWeaponComponentFromPed()"
+  ],
+  "urls": [],
+  "tags": []
+}

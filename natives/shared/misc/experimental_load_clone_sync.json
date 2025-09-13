@@ -1,0 +1,12 @@
+{
+  "title": "EXPERIMENTAL_LOAD_CLONE_SYNC",
+  "breadcrumbs": [
+    "EXPERIMENTAL_LOAD_CLONE_SYNC"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for EXPERIMENTAL_LOAD_CLONE_SYNC\nExperimentalLoadCloneSync()"
+  ],
+  "urls": [],
+  "tags": []
+}

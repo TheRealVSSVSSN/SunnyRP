@@ -1,0 +1,12 @@
+{
+  "title": "GET_NAVMESH_ROUTE_RESULT",
+  "breadcrumbs": [
+    "GET_NAVMESH_ROUTE_RESULT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_NAVMESH_ROUTE_RESULT\nGetNavmeshRouteResult()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,12 @@
+{
+  "title": "SET_RANDOM_VEHICLE_DENSITY_MULTIPLIER_THIS_FRAME",
+  "breadcrumbs": [
+    "SET_RANDOM_VEHICLE_DENSITY_MULTIPLIER_THIS_FRAME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_RANDOM_VEHICLE_DENSITY_MULTIPLIER_THIS_FRAME\nSetRandomVehicleDensityMultiplierThisFrame()"
+  ],
+  "urls": [],
+  "tags": []
+}

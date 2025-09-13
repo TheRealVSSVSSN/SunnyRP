@@ -1,0 +1,12 @@
+{
+  "title": "ENABLE_SWITCH_PAUSE_BEFORE_DESCENT",
+  "breadcrumbs": [
+    "ENABLE_SWITCH_PAUSE_BEFORE_DESCENT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ENABLE_SWITCH_PAUSE_BEFORE_DESCENT\nEnableSwitchPauseBeforeDescent()"
+  ],
+  "urls": [],
+  "tags": []
+}

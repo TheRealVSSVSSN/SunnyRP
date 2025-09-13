@@ -1,0 +1,12 @@
+{
+  "title": "SET_FRONTEND_ACTIVE",
+  "breadcrumbs": [
+    "SET_FRONTEND_ACTIVE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_FRONTEND_ACTIVE\nSetFrontendActive()"
+  ],
+  "urls": [],
+  "tags": []
+}

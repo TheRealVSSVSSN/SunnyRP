@@ -1,0 +1,12 @@
+{
+  "title": "GET_NAME_OF_ZONE",
+  "breadcrumbs": [
+    "GET_NAME_OF_ZONE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_NAME_OF_ZONE\nGetNameOfZone()"
+  ],
+  "urls": [],
+  "tags": []
+}

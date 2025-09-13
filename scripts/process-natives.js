@@ -25,7 +25,7 @@ function flatten(nodes, trail = []) {
 
 const allNatives = flatten(nativesData);
 const unprocessed = allNatives.filter(n => !processed.has(n.title));
-const batch = unprocessed.slice(0, 300);
+const batch = unprocessed.slice(0, 500);
 
 function luaFuncName(title) {
   const parts = title.toLowerCase().split('_');
@@ -58,7 +58,7 @@ function exampleValue(type, ctxLines) {
       return 'true';
     case 'char*':
     case 'const char*':
-      return "''";
+      return "'example'";
     case 'ped':
       if (!ctxLines.includes('local ped = PlayerPedId()')) ctxLines.push('local ped = PlayerPedId()');
       return 'ped';

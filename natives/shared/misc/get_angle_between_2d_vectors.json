@@ -1,0 +1,12 @@
+{
+  "title": "GET_ANGLE_BETWEEN_2D_VECTORS",
+  "breadcrumbs": [
+    "GET_ANGLE_BETWEEN_2D_VECTORS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ANGLE_BETWEEN_2D_VECTORS\nGetAngleBetween2dVectors()"
+  ],
+  "urls": [],
+  "tags": []
+}

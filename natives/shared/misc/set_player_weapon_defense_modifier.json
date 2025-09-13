@@ -1,0 +1,12 @@
+{
+  "title": "SET_PLAYER_WEAPON_DEFENSE_MODIFIER",
+  "breadcrumbs": [
+    "SET_PLAYER_WEAPON_DEFENSE_MODIFIER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PLAYER_WEAPON_DEFENSE_MODIFIER\nSetPlayerWeaponDefenseModifier()"
+  ],
+  "urls": [],
+  "tags": []
+}

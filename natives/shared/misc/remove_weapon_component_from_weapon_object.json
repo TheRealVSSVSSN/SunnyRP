@@ -1,0 +1,12 @@
+{
+  "title": "REMOVE_WEAPON_COMPONENT_FROM_WEAPON_OBJECT",
+  "breadcrumbs": [
+    "REMOVE_WEAPON_COMPONENT_FROM_WEAPON_OBJECT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REMOVE_WEAPON_COMPONENT_FROM_WEAPON_OBJECT\nRemoveWeaponComponentFromWeaponObject()"
+  ],
+  "urls": [],
+  "tags": []
+}

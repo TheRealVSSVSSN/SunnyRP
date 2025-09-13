@@ -1,0 +1,12 @@
+{
+  "title": "SCALEFORM_MOVIE_METHOD_ADD_PARAM_TEXTURE_NAME_STRING",
+  "breadcrumbs": [
+    "SCALEFORM_MOVIE_METHOD_ADD_PARAM_TEXTURE_NAME_STRING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SCALEFORM_MOVIE_METHOD_ADD_PARAM_TEXTURE_NAME_STRING\nScaleformMovieMethodAddParamTextureNameString()"
+  ],
+  "urls": [],
+  "tags": []
+}

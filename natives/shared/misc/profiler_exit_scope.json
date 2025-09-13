@@ -1,0 +1,12 @@
+{
+  "title": "PROFILER_EXIT_SCOPE",
+  "breadcrumbs": [
+    "PROFILER_EXIT_SCOPE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for PROFILER_EXIT_SCOPE\nProfilerExitScope()"
+  ],
+  "urls": [],
+  "tags": []
+}

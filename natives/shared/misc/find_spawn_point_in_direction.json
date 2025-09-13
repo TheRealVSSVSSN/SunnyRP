@@ -1,0 +1,12 @@
+{
+  "title": "FIND_SPAWN_POINT_IN_DIRECTION",
+  "breadcrumbs": [
+    "FIND_SPAWN_POINT_IN_DIRECTION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for FIND_SPAWN_POINT_IN_DIRECTION\nFindSpawnPointInDirection()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,12 @@
+{
+  "title": "SET_WEATHER_TYPE_NOW_PERSIST",
+  "breadcrumbs": [
+    "SET_WEATHER_TYPE_NOW_PERSIST"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_WEATHER_TYPE_NOW_PERSIST\nSetWeatherTypeNowPersist()"
+  ],
+  "urls": [],
+  "tags": []
+}

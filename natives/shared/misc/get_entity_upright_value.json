@@ -1,0 +1,12 @@
+{
+  "title": "GET_ENTITY_UPRIGHT_VALUE",
+  "breadcrumbs": [
+    "GET_ENTITY_UPRIGHT_VALUE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ENTITY_UPRIGHT_VALUE\nGetEntityUprightValue()"
+  ],
+  "urls": [],
+  "tags": []
+}

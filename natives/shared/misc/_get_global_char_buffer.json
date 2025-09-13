@@ -1,0 +1,12 @@
+{
+  "title": "_GET_GLOBAL_CHAR_BUFFER",
+  "breadcrumbs": [
+    "_GET_GLOBAL_CHAR_BUFFER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_GLOBAL_CHAR_BUFFER\n_etGlobalCharBuffer()"
+  ],
+  "urls": [],
+  "tags": []
+}

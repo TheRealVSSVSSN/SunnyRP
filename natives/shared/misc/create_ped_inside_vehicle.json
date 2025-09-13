@@ -1,0 +1,12 @@
+{
+  "title": "CREATE_PED_INSIDE_VEHICLE",
+  "breadcrumbs": [
+    "CREATE_PED_INSIDE_VEHICLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CREATE_PED_INSIDE_VEHICLE\nCreatePedInsideVehicle()"
+  ],
+  "urls": [],
+  "tags": []
+}

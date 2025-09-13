@@ -1,0 +1,12 @@
+{
+  "title": "GET_PROFILE_SETTING",
+  "breadcrumbs": [
+    "GET_PROFILE_SETTING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PROFILE_SETTING\nGetProfileSetting()"
+  ],
+  "urls": [],
+  "tags": []
+}

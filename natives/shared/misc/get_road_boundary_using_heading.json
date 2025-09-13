@@ -1,0 +1,12 @@
+{
+  "title": "GET_ROAD_BOUNDARY_USING_HEADING",
+  "breadcrumbs": [
+    "GET_ROAD_BOUNDARY_USING_HEADING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ROAD_BOUNDARY_USING_HEADING\nGetRoadBoundaryUsingHeading()"
+  ],
+  "urls": [],
+  "tags": []
+}

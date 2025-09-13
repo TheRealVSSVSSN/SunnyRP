@@ -1,0 +1,12 @@
+{
+  "title": "OVERRIDE_LODSCALE_THIS_FRAME",
+  "breadcrumbs": [
+    "OVERRIDE_LODSCALE_THIS_FRAME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for OVERRIDE_LODSCALE_THIS_FRAME\nOverrideLodscaleThisFrame()"
+  ],
+  "urls": [],
+  "tags": []
+}

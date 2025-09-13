@@ -1,0 +1,12 @@
+{
+  "title": "GET_ENTITY_LOD_DIST",
+  "breadcrumbs": [
+    "GET_ENTITY_LOD_DIST"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ENTITY_LOD_DIST\nGetEntityLodDist()"
+  ],
+  "urls": [],
+  "tags": []
+}

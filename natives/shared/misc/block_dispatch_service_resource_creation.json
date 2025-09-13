@@ -1,0 +1,12 @@
+{
+  "title": "BLOCK_DISPATCH_SERVICE_RESOURCE_CREATION",
+  "breadcrumbs": [
+    "BLOCK_DISPATCH_SERVICE_RESOURCE_CREATION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for BLOCK_DISPATCH_SERVICE_RESOURCE_CREATION\nBlockDispatchServiceResourceCreation()"
+  ],
+  "urls": [],
+  "tags": []
+}

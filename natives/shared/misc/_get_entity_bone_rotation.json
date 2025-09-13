@@ -1,0 +1,12 @@
+{
+  "title": "_GET_ENTITY_BONE_ROTATION",
+  "breadcrumbs": [
+    "_GET_ENTITY_BONE_ROTATION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_ENTITY_BONE_ROTATION\n_etEntityBoneRotation()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,12 @@
+{
+  "title": "GET_CLIP_SET_FOR_SCRIPTED_GUN_TASK",
+  "breadcrumbs": [
+    "GET_CLIP_SET_FOR_SCRIPTED_GUN_TASK"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_CLIP_SET_FOR_SCRIPTED_GUN_TASK\nGetClipSetForScriptedGunTask()"
+  ],
+  "urls": [],
+  "tags": []
+}

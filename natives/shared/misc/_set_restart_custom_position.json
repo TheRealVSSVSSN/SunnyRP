@@ -1,0 +1,12 @@
+{
+  "title": "_SET_RESTART_CUSTOM_POSITION",
+  "breadcrumbs": [
+    "_SET_RESTART_CUSTOM_POSITION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_RESTART_CUSTOM_POSITION\n_etRestartCustomPosition()"
+  ],
+  "urls": [],
+  "tags": []
+}

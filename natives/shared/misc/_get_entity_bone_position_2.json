@@ -1,0 +1,12 @@
+{
+  "title": "_GET_ENTITY_BONE_POSITION_2",
+  "breadcrumbs": [
+    "_GET_ENTITY_BONE_POSITION_2"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_ENTITY_BONE_POSITION_2\n_etEntityBonePosition2()"
+  ],
+  "urls": [],
+  "tags": []
+}

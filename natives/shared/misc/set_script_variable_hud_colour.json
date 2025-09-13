@@ -1,0 +1,12 @@
+{
+  "title": "SET_SCRIPT_VARIABLE_HUD_COLOUR",
+  "breadcrumbs": [
+    "SET_SCRIPT_VARIABLE_HUD_COLOUR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_SCRIPT_VARIABLE_HUD_COLOUR\nSetScriptVariableHudColour()"
+  ],
+  "urls": [],
+  "tags": []
+}

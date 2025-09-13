@@ -1,0 +1,12 @@
+{
+  "title": "SET_MINIMAP_IN_SPECTATOR_MODE",
+  "breadcrumbs": [
+    "SET_MINIMAP_IN_SPECTATOR_MODE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_MINIMAP_IN_SPECTATOR_MODE\nSetMinimapInSpectatorMode()"
+  ],
+  "urls": [],
+  "tags": []
+}

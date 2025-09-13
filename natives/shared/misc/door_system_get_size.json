@@ -1,0 +1,12 @@
+{
+  "title": "DOOR_SYSTEM_GET_SIZE",
+  "breadcrumbs": [
+    "DOOR_SYSTEM_GET_SIZE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DOOR_SYSTEM_GET_SIZE\nDoorSystemGetSize()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,12 @@
+{
+  "title": "DOOR_SYSTEM_GET_ACTIVE",
+  "breadcrumbs": [
+    "DOOR_SYSTEM_GET_ACTIVE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DOOR_SYSTEM_GET_ACTIVE\nDoorSystemGetActive()"
+  ],
+  "urls": [],
+  "tags": []
+}

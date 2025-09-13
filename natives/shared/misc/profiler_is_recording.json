@@ -1,0 +1,12 @@
+{
+  "title": "PROFILER_IS_RECORDING",
+  "breadcrumbs": [
+    "PROFILER_IS_RECORDING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for PROFILER_IS_RECORDING\nProfilerIsRecording()"
+  ],
+  "urls": [],
+  "tags": []
+}

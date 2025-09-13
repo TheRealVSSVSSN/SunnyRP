@@ -1,0 +1,12 @@
+{
+  "title": "GET_VEHICLE_NODE_IS_SWITCHED_OFF",
+  "breadcrumbs": [
+    "GET_VEHICLE_NODE_IS_SWITCHED_OFF"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_NODE_IS_SWITCHED_OFF\nGetVehicleNodeIsSwitchedOff()"
+  ],
+  "urls": [],
+  "tags": []
+}

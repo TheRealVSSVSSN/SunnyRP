@@ -1,0 +1,12 @@
+{
+  "title": "SET_GAME_PAUSES_FOR_STREAMING",
+  "breadcrumbs": [
+    "SET_GAME_PAUSES_FOR_STREAMING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_GAME_PAUSES_FOR_STREAMING\nSetGamePausesForStreaming()"
+  ],
+  "urls": [],
+  "tags": []
+}

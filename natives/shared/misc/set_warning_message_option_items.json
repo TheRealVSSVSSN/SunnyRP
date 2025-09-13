@@ -1,0 +1,12 @@
+{
+  "title": "SET_WARNING_MESSAGE_OPTION_ITEMS",
+  "breadcrumbs": [
+    "SET_WARNING_MESSAGE_OPTION_ITEMS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_WARNING_MESSAGE_OPTION_ITEMS\nSetWarningMessageOptionItems()"
+  ],
+  "urls": [],
+  "tags": []
+}

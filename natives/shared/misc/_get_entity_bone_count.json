@@ -1,0 +1,12 @@
+{
+  "title": "_GET_ENTITY_BONE_COUNT",
+  "breadcrumbs": [
+    "_GET_ENTITY_BONE_COUNT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_ENTITY_BONE_COUNT\n_etEntityBoneCount()"
+  ],
+  "urls": [],
+  "tags": []
+}

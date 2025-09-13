@@ -1,0 +1,12 @@
+{
+  "title": "DOES_SCRIPTED_COVER_POINT_EXIST_AT_COORDS",
+  "breadcrumbs": [
+    "DOES_SCRIPTED_COVER_POINT_EXIST_AT_COORDS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DOES_SCRIPTED_COVER_POINT_EXIST_AT_COORDS\nDoesScriptedCoverPointExistAtCoords()"
+  ],
+  "urls": [],
+  "tags": []
+}

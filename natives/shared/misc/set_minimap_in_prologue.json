@@ -1,0 +1,12 @@
+{
+  "title": "SET_MINIMAP_IN_PROLOGUE",
+  "breadcrumbs": [
+    "SET_MINIMAP_IN_PROLOGUE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_MINIMAP_IN_PROLOGUE\nSetMinimapInPrologue()"
+  ],
+  "urls": [],
+  "tags": []
+}

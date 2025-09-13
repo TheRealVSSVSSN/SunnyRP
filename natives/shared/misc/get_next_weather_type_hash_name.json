@@ -1,0 +1,12 @@
+{
+  "title": "GET_NEXT_WEATHER_TYPE_HASH_NAME",
+  "breadcrumbs": [
+    "GET_NEXT_WEATHER_TYPE_HASH_NAME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_NEXT_WEATHER_TYPE_HASH_NAME\nGetNextWeatherTypeHashName()"
+  ],
+  "urls": [],
+  "tags": []
+}

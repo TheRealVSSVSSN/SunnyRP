@@ -1,0 +1,12 @@
+{
+  "title": "GET_ENTITY_HEIGHT",
+  "breadcrumbs": [
+    "GET_ENTITY_HEIGHT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ENTITY_HEIGHT\nGetEntityHeight()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,12 @@
+{
+  "title": "SET_PED_DROPS_INVENTORY_WEAPON",
+  "breadcrumbs": [
+    "SET_PED_DROPS_INVENTORY_WEAPON"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_DROPS_INVENTORY_WEAPON\nSetPedDropsInventoryWeapon()"
+  ],
+  "urls": [],
+  "tags": []
+}

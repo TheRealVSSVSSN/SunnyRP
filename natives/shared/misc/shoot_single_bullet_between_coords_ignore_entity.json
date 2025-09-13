@@ -1,0 +1,12 @@
+{
+  "title": "SHOOT_SINGLE_BULLET_BETWEEN_COORDS_IGNORE_ENTITY",
+  "breadcrumbs": [
+    "SHOOT_SINGLE_BULLET_BETWEEN_COORDS_IGNORE_ENTITY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SHOOT_SINGLE_BULLET_BETWEEN_COORDS_IGNORE_ENTITY\nShootSingleBulletBetweenCoordsIgnoreEntity()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,12 @@
+{
+  "title": "GET_WEAPON_COMPONENT_TYPE_MODEL",
+  "breadcrumbs": [
+    "GET_WEAPON_COMPONENT_TYPE_MODEL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_WEAPON_COMPONENT_TYPE_MODEL\nGetWeaponComponentTypeModel()"
+  ],
+  "urls": [],
+  "tags": []
+}

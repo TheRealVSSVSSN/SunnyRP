@@ -1,0 +1,12 @@
+{
+  "title": "SET_TIME_SCALE",
+  "breadcrumbs": [
+    "SET_TIME_SCALE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_TIME_SCALE\nSetTimeScale()"
+  ],
+  "urls": [],
+  "tags": []
+}

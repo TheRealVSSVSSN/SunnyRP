@@ -1,0 +1,12 @@
+{
+  "title": "_LOAD_GLOBAL_WATER_TYPE",
+  "breadcrumbs": [
+    "_LOAD_GLOBAL_WATER_TYPE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _LOAD_GLOBAL_WATER_TYPE\n_oadGlobalWaterType()"
+  ],
+  "urls": [],
+  "tags": []
+}

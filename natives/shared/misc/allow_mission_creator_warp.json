@@ -1,0 +1,12 @@
+{
+  "title": "ALLOW_MISSION_CREATOR_WARP",
+  "breadcrumbs": [
+    "ALLOW_MISSION_CREATOR_WARP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ALLOW_MISSION_CREATOR_WARP\nAllowMissionCreatorWarp()"
+  ],
+  "urls": [],
+  "tags": []
+}

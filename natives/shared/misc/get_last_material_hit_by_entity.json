@@ -1,0 +1,12 @@
+{
+  "title": "GET_LAST_MATERIAL_HIT_BY_ENTITY",
+  "breadcrumbs": [
+    "GET_LAST_MATERIAL_HIT_BY_ENTITY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_LAST_MATERIAL_HIT_BY_ENTITY\nGetLastMaterialHitByEntity()"
+  ],
+  "urls": [],
+  "tags": []
+}

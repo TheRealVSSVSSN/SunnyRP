@@ -1,0 +1,12 @@
+{
+  "title": "SET_FOCUS_ENTITY",
+  "breadcrumbs": [
+    "SET_FOCUS_ENTITY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_FOCUS_ENTITY\nSetFocusEntity()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,12 @@
+{
+  "title": "SET_MINIMAP_FOW_REVEAL_COORDINATE",
+  "breadcrumbs": [
+    "SET_MINIMAP_FOW_REVEAL_COORDINATE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_MINIMAP_FOW_REVEAL_COORDINATE\nSetMinimapFowRevealCoordinate()"
+  ],
+  "urls": [],
+  "tags": []
+}

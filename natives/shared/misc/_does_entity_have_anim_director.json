@@ -1,0 +1,12 @@
+{
+  "title": "_DOES_ENTITY_HAVE_ANIM_DIRECTOR",
+  "breadcrumbs": [
+    "_DOES_ENTITY_HAVE_ANIM_DIRECTOR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _DOES_ENTITY_HAVE_ANIM_DIRECTOR\n_oesEntityHaveAnimDirector()"
+  ],
+  "urls": [],
+  "tags": []
+}

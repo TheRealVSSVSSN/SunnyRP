@@ -1,0 +1,12 @@
+{
+  "title": "CREATE_NON_NETWORKED_PORTABLE_PICKUP",
+  "breadcrumbs": [
+    "CREATE_NON_NETWORKED_PORTABLE_PICKUP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CREATE_NON_NETWORKED_PORTABLE_PICKUP\nCreateNonNetworkedPortablePickup()"
+  ],
+  "urls": [],
+  "tags": []
+}

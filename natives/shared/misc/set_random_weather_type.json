@@ -1,0 +1,12 @@
+{
+  "title": "SET_RANDOM_WEATHER_TYPE",
+  "breadcrumbs": [
+    "SET_RANDOM_WEATHER_TYPE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_RANDOM_WEATHER_TYPE\nSetRandomWeatherType()"
+  ],
+  "urls": [],
+  "tags": []
+}

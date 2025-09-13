@@ -1,0 +1,12 @@
+{
+  "title": "UGC_UPDATE_CONTENT",
+  "breadcrumbs": [
+    "UGC_UPDATE_CONTENT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for UGC_UPDATE_CONTENT\nUgcUpdateContent()"
+  ],
+  "urls": [],
+  "tags": []
+}

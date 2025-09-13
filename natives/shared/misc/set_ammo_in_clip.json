@@ -1,0 +1,12 @@
+{
+  "title": "SET_AMMO_IN_CLIP",
+  "breadcrumbs": [
+    "SET_AMMO_IN_CLIP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_AMMO_IN_CLIP\nSetAmmoInClip()"
+  ],
+  "urls": [],
+  "tags": []
+}

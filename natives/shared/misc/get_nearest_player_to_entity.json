@@ -1,0 +1,12 @@
+{
+  "title": "GET_NEAREST_PLAYER_TO_ENTITY",
+  "breadcrumbs": [
+    "GET_NEAREST_PLAYER_TO_ENTITY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_NEAREST_PLAYER_TO_ENTITY\nGetNearestPlayerToEntity()"
+  ],
+  "urls": [],
+  "tags": []
+}

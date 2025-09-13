@@ -1,0 +1,12 @@
+{
+  "title": "_SET_AMMO_IN_VEHICLE_WEAPON_CLIP",
+  "breadcrumbs": [
+    "_SET_AMMO_IN_VEHICLE_WEAPON_CLIP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_AMMO_IN_VEHICLE_WEAPON_CLIP\n_etAmmoInVehicleWeaponClip()"
+  ],
+  "urls": [],
+  "tags": []
+}

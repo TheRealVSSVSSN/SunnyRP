@@ -1,0 +1,12 @@
+{
+  "title": "REQUEST_COLLISION_FOR_MODEL",
+  "breadcrumbs": [
+    "REQUEST_COLLISION_FOR_MODEL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REQUEST_COLLISION_FOR_MODEL\nRequestCollisionForModel()"
+  ],
+  "urls": [],
+  "tags": []
+}

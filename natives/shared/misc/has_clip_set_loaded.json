@@ -1,0 +1,12 @@
+{
+  "title": "HAS_CLIP_SET_LOADED",
+  "breadcrumbs": [
+    "HAS_CLIP_SET_LOADED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for HAS_CLIP_SET_LOADED\nHasClipSetLoaded()"
+  ],
+  "urls": [],
+  "tags": []
+}

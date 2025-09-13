@@ -1,0 +1,12 @@
+{
+  "title": "GET_ENTITY_PITCH",
+  "breadcrumbs": [
+    "GET_ENTITY_PITCH"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ENTITY_PITCH\nGetEntityPitch()"
+  ],
+  "urls": [],
+  "tags": []
+}

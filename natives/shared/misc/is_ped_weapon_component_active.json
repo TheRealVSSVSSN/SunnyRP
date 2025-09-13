@@ -1,0 +1,12 @@
+{
+  "title": "IS_PED_WEAPON_COMPONENT_ACTIVE",
+  "breadcrumbs": [
+    "IS_PED_WEAPON_COMPONENT_ACTIVE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_PED_WEAPON_COMPONENT_ACTIVE\nIsPedWeaponComponentActive()"
+  ],
+  "urls": [],
+  "tags": []
+}

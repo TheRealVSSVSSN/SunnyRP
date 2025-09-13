@@ -1,0 +1,12 @@
+{
+  "title": "CREATE_AMBIENT_PICKUP",
+  "breadcrumbs": [
+    "CREATE_AMBIENT_PICKUP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CREATE_AMBIENT_PICKUP\nCreateAmbientPickup()"
+  ],
+  "urls": [],
+  "tags": []
+}

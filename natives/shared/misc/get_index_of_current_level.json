@@ -1,0 +1,12 @@
+{
+  "title": "GET_INDEX_OF_CURRENT_LEVEL",
+  "breadcrumbs": [
+    "GET_INDEX_OF_CURRENT_LEVEL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_INDEX_OF_CURRENT_LEVEL\nGetIndexOfCurrentLevel()"
+  ],
+  "urls": [],
+  "tags": []
+}

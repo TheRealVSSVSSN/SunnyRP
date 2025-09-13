@@ -1,0 +1,12 @@
+{
+  "title": "_SET_MP_GAMER_TAG_USE_VEHICLE_HEALTH",
+  "breadcrumbs": [
+    "_SET_MP_GAMER_TAG_USE_VEHICLE_HEALTH"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_MP_GAMER_TAG_USE_VEHICLE_HEALTH\n_etMpGamerTagUseVehicleHealth()"
+  ],
+  "urls": [],
+  "tags": []
+}

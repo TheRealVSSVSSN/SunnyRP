@@ -1,0 +1,12 @@
+{
+  "title": "GET_WEAPON_DAMAGE",
+  "breadcrumbs": [
+    "GET_WEAPON_DAMAGE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_WEAPON_DAMAGE\nGetWeaponDamage()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,12 @@
+{
+  "title": "SET_PED_CURRENT_WEAPON_VISIBLE",
+  "breadcrumbs": [
+    "SET_PED_CURRENT_WEAPON_VISIBLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_CURRENT_WEAPON_VISIBLE\nSetPedCurrentWeaponVisible()"
+  ],
+  "urls": [],
+  "tags": []
+}

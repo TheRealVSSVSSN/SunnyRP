@@ -1,0 +1,12 @@
+{
+  "title": "SET_TEXT_SCALE",
+  "breadcrumbs": [
+    "SET_TEXT_SCALE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_TEXT_SCALE\nSetTextScale()"
+  ],
+  "urls": [],
+  "tags": []
+}

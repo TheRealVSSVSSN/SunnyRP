@@ -1,0 +1,12 @@
+{
+  "title": "CAN_CREATE_RANDOM_BIKE_RIDER",
+  "breadcrumbs": [
+    "CAN_CREATE_RANDOM_BIKE_RIDER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CAN_CREATE_RANDOM_BIKE_RIDER\nCanCreateRandomBikeRider()"
+  ],
+  "urls": [],
+  "tags": []
+}

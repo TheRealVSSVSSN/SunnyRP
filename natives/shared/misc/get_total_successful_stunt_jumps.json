@@ -1,0 +1,12 @@
+{
+  "title": "GET_TOTAL_SUCCESSFUL_STUNT_JUMPS",
+  "breadcrumbs": [
+    "GET_TOTAL_SUCCESSFUL_STUNT_JUMPS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_TOTAL_SUCCESSFUL_STUNT_JUMPS\nGetTotalSuccessfulStuntJumps()"
+  ],
+  "urls": [],
+  "tags": []
+}

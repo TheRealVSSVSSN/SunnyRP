@@ -1,0 +1,12 @@
+{
+  "title": "_GET_PED_WEAPON_LIVERY_COLOR",
+  "breadcrumbs": [
+    "_GET_PED_WEAPON_LIVERY_COLOR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_PED_WEAPON_LIVERY_COLOR\n_etPedWeaponLiveryColor()"
+  ],
+  "urls": [],
+  "tags": []
+}

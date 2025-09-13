@@ -1,0 +1,12 @@
+{
+  "title": "DRAW_SCALEFORM_MOVIE_FULLSCREEN",
+  "breadcrumbs": [
+    "DRAW_SCALEFORM_MOVIE_FULLSCREEN"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DRAW_SCALEFORM_MOVIE_FULLSCREEN\nDrawScaleformMovieFullscreen()"
+  ],
+  "urls": [],
+  "tags": []
+}

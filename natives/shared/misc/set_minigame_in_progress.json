@@ -1,0 +1,12 @@
+{
+  "title": "SET_MINIGAME_IN_PROGRESS",
+  "breadcrumbs": [
+    "SET_MINIGAME_IN_PROGRESS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_MINIGAME_IN_PROGRESS\nSetMinigameInProgress()"
+  ],
+  "urls": [],
+  "tags": []
+}

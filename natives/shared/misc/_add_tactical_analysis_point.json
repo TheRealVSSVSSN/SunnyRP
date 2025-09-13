@@ -1,0 +1,12 @@
+{
+  "title": "_ADD_TACTICAL_ANALYSIS_POINT",
+  "breadcrumbs": [
+    "_ADD_TACTICAL_ANALYSIS_POINT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _ADD_TACTICAL_ANALYSIS_POINT\n_ddTacticalAnalysisPoint()"
+  ],
+  "urls": [],
+  "tags": []
+}

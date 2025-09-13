@@ -1,0 +1,12 @@
+{
+  "title": "HAS_ANIM_DICT_LOADED",
+  "breadcrumbs": [
+    "HAS_ANIM_DICT_LOADED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for HAS_ANIM_DICT_LOADED\nHasAnimDictLoaded()"
+  ],
+  "urls": [],
+  "tags": []
+}

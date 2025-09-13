@@ -1,0 +1,12 @@
+{
+  "title": "REMOVE_MODEL_FROM_CREATOR_BUDGET",
+  "breadcrumbs": [
+    "REMOVE_MODEL_FROM_CREATOR_BUDGET"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REMOVE_MODEL_FROM_CREATOR_BUDGET\nRemoveModelFromCreatorBudget()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,12 @@
+{
+  "title": "GET_COORDS_OF_PROJECTILE_TYPE_WITHIN_DISTANCE",
+  "breadcrumbs": [
+    "GET_COORDS_OF_PROJECTILE_TYPE_WITHIN_DISTANCE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_COORDS_OF_PROJECTILE_TYPE_WITHIN_DISTANCE\nGetCoordsOfProjectileTypeWithinDistance()"
+  ],
+  "urls": [],
+  "tags": []
+}

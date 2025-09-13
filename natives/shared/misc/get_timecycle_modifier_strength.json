@@ -1,0 +1,12 @@
+{
+  "title": "GET_TIMECYCLE_MODIFIER_STRENGTH",
+  "breadcrumbs": [
+    "GET_TIMECYCLE_MODIFIER_STRENGTH"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_TIMECYCLE_MODIFIER_STRENGTH\nGetTimecycleModifierStrength()"
+  ],
+  "urls": [],
+  "tags": []
+}

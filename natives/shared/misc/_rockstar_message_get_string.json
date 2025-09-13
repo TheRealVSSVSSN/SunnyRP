@@ -1,0 +1,12 @@
+{
+  "title": "_ROCKSTAR_MESSAGE_GET_STRING",
+  "breadcrumbs": [
+    "_ROCKSTAR_MESSAGE_GET_STRING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _ROCKSTAR_MESSAGE_GET_STRING\n_ockstarMessageGetString()"
+  ],
+  "urls": [],
+  "tags": []
+}

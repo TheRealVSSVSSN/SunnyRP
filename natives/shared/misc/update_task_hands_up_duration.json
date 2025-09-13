@@ -1,0 +1,12 @@
+{
+  "title": "UPDATE_TASK_HANDS_UP_DURATION",
+  "breadcrumbs": [
+    "UPDATE_TASK_HANDS_UP_DURATION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for UPDATE_TASK_HANDS_UP_DURATION\nUpdateTaskHandsUpDuration()"
+  ],
+  "urls": [],
+  "tags": []
+}

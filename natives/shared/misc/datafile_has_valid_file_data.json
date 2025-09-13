@@ -1,0 +1,12 @@
+{
+  "title": "DATAFILE_HAS_VALID_FILE_DATA",
+  "breadcrumbs": [
+    "DATAFILE_HAS_VALID_FILE_DATA"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DATAFILE_HAS_VALID_FILE_DATA\nDatafileHasValidFileData()"
+  ],
+  "urls": [],
+  "tags": []
+}

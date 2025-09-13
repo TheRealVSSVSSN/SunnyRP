@@ -1,0 +1,12 @@
+{
+  "title": "IS_SWITCH_READY_FOR_DESCENT",
+  "breadcrumbs": [
+    "IS_SWITCH_READY_FOR_DESCENT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_SWITCH_READY_FOR_DESCENT\nIsSwitchReadyForDescent()"
+  ],
+  "urls": [],
+  "tags": []
+}

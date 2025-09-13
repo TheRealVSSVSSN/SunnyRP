@@ -1,0 +1,12 @@
+{
+  "title": "GET_ENTITY_CAN_BE_DAMAGED",
+  "breadcrumbs": [
+    "GET_ENTITY_CAN_BE_DAMAGED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ENTITY_CAN_BE_DAMAGED\nGetEntityCanBeDamaged()"
+  ],
+  "urls": [],
+  "tags": []
+}

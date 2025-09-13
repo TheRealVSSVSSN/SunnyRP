@@ -1,0 +1,12 @@
+{
+  "title": "GET_PLAYER_SWITCH_INTERP_OUT_DURATION",
+  "breadcrumbs": [
+    "GET_PLAYER_SWITCH_INTERP_OUT_DURATION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PLAYER_SWITCH_INTERP_OUT_DURATION\nGetPlayerSwitchInterpOutDuration()"
+  ],
+  "urls": [],
+  "tags": []
+}

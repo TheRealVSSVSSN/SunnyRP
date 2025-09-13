@@ -1,0 +1,12 @@
+{
+  "title": "DATAFILE_SELECT_UGC_PLAYER_DATA",
+  "breadcrumbs": [
+    "DATAFILE_SELECT_UGC_PLAYER_DATA"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DATAFILE_SELECT_UGC_PLAYER_DATA\nDatafileSelectUgcPlayerData()"
+  ],
+  "urls": [],
+  "tags": []
+}

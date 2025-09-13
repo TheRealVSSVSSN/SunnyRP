@@ -1,0 +1,12 @@
+{
+  "title": "GET_ENTITY_ALPHA",
+  "breadcrumbs": [
+    "GET_ENTITY_ALPHA"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ENTITY_ALPHA\nGetEntityAlpha()"
+  ],
+  "urls": [],
+  "tags": []
+}

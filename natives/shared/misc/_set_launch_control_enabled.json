@@ -1,0 +1,12 @@
+{
+  "title": "_SET_LAUNCH_CONTROL_ENABLED",
+  "breadcrumbs": [
+    "_SET_LAUNCH_CONTROL_ENABLED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_LAUNCH_CONTROL_ENABLED\n_etLaunchControlEnabled()"
+  ],
+  "urls": [],
+  "tags": []
+}

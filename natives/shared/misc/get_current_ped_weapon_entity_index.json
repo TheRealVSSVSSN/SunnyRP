@@ -1,0 +1,12 @@
+{
+  "title": "GET_CURRENT_PED_WEAPON_ENTITY_INDEX",
+  "breadcrumbs": [
+    "GET_CURRENT_PED_WEAPON_ENTITY_INDEX"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_CURRENT_PED_WEAPON_ENTITY_INDEX\nGetCurrentPedWeaponEntityIndex()"
+  ],
+  "urls": [],
+  "tags": []
+}

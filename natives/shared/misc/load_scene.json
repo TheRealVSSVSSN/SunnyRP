@@ -1,0 +1,12 @@
+{
+  "title": "LOAD_SCENE",
+  "breadcrumbs": [
+    "LOAD_SCENE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for LOAD_SCENE\nLoadScene()"
+  ],
+  "urls": [],
+  "tags": []
+}

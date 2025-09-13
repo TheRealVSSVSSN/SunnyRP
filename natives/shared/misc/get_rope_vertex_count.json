@@ -1,0 +1,12 @@
+{
+  "title": "GET_ROPE_VERTEX_COUNT",
+  "breadcrumbs": [
+    "GET_ROPE_VERTEX_COUNT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ROPE_VERTEX_COUNT\nGetRopeVertexCount()"
+  ],
+  "urls": [],
+  "tags": []
+}

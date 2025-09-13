@@ -1,0 +1,12 @@
+{
+  "title": "_GET_WEAPON_COMPONENT_VARIANT_EXTRA_COMPONENT_MODEL",
+  "breadcrumbs": [
+    "_GET_WEAPON_COMPONENT_VARIANT_EXTRA_COMPONENT_MODEL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_WEAPON_COMPONENT_VARIANT_EXTRA_COMPONENT_MODEL\n_etWeaponComponentVariantExtraComponentModel()"
+  ],
+  "urls": [],
+  "tags": []
+}

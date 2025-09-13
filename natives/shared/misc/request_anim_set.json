@@ -1,0 +1,12 @@
+{
+  "title": "REQUEST_ANIM_SET",
+  "breadcrumbs": [
+    "REQUEST_ANIM_SET"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REQUEST_ANIM_SET\nRequestAnimSet()"
+  ],
+  "urls": [],
+  "tags": []
+}

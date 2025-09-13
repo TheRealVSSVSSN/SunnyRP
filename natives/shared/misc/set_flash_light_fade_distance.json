@@ -1,0 +1,12 @@
+{
+  "title": "SET_FLASH_LIGHT_FADE_DISTANCE",
+  "breadcrumbs": [
+    "SET_FLASH_LIGHT_FADE_DISTANCE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_FLASH_LIGHT_FADE_DISTANCE\nSetFlashLightFadeDistance()"
+  ],
+  "urls": [],
+  "tags": []
+}

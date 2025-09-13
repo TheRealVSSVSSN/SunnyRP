@@ -1,0 +1,12 @@
+{
+  "title": "_GET_CLOUD_HAT_OPACITY",
+  "breadcrumbs": [
+    "_GET_CLOUD_HAT_OPACITY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_CLOUD_HAT_OPACITY\n_etCloudHatOpacity()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,12 @@
+{
+  "title": "GET_ANIM_DURATION",
+  "breadcrumbs": [
+    "GET_ANIM_DURATION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ANIM_DURATION\nGetAnimDuration()"
+  ],
+  "urls": [],
+  "tags": []
+}

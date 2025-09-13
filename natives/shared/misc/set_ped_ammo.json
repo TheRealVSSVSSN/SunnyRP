@@ -1,0 +1,12 @@
+{
+  "title": "SET_PED_AMMO",
+  "breadcrumbs": [
+    "SET_PED_AMMO"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_AMMO\nSetPedAmmo()"
+  ],
+  "urls": [],
+  "tags": []
+}

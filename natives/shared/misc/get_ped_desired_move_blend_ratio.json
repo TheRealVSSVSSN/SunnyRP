@@ -1,0 +1,12 @@
+{
+  "title": "GET_PED_DESIRED_MOVE_BLEND_RATIO",
+  "breadcrumbs": [
+    "GET_PED_DESIRED_MOVE_BLEND_RATIO"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PED_DESIRED_MOVE_BLEND_RATIO\nGetPedDesiredMoveBlendRatio()"
+  ],
+  "urls": [],
+  "tags": []
+}

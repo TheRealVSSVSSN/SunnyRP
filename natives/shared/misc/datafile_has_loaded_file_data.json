@@ -1,0 +1,12 @@
+{
+  "title": "DATAFILE_HAS_LOADED_FILE_DATA",
+  "breadcrumbs": [
+    "DATAFILE_HAS_LOADED_FILE_DATA"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DATAFILE_HAS_LOADED_FILE_DATA\nDatafileHasLoadedFileData()"
+  ],
+  "urls": [],
+  "tags": []
+}

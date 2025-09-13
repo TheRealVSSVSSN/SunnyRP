@@ -1,0 +1,12 @@
+{
+  "title": "SET_PED_PRELOAD_VARIATION_DATA",
+  "breadcrumbs": [
+    "SET_PED_PRELOAD_VARIATION_DATA"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_PRELOAD_VARIATION_DATA\nSetPedPreloadVariationData()"
+  ],
+  "urls": [],
+  "tags": []
+}

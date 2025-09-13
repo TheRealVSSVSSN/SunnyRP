@@ -1,0 +1,12 @@
+{
+  "title": "SET_GPS_CUSTOM_ROUTE_RENDER",
+  "breadcrumbs": [
+    "SET_GPS_CUSTOM_ROUTE_RENDER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_GPS_CUSTOM_ROUTE_RENDER\nSetGpsCustomRouteRender()"
+  ],
+  "urls": [],
+  "tags": []
+}

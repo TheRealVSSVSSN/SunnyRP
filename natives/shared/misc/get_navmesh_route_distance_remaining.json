@@ -1,0 +1,12 @@
+{
+  "title": "GET_NAVMESH_ROUTE_DISTANCE_REMAINING",
+  "breadcrumbs": [
+    "GET_NAVMESH_ROUTE_DISTANCE_REMAINING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_NAVMESH_ROUTE_DISTANCE_REMAINING\nGetNavmeshRouteDistanceRemaining()"
+  ],
+  "urls": [],
+  "tags": []
+}

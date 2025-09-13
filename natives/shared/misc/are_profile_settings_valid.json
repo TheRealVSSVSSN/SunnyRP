@@ -1,0 +1,12 @@
+{
+  "title": "ARE_PROFILE_SETTINGS_VALID",
+  "breadcrumbs": [
+    "ARE_PROFILE_SETTINGS_VALID"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ARE_PROFILE_SETTINGS_VALID\nAreProfileSettingsValid()"
+  ],
+  "urls": [],
+  "tags": []
+}

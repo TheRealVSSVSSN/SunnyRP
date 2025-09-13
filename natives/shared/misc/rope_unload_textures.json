@@ -1,0 +1,12 @@
+{
+  "title": "ROPE_UNLOAD_TEXTURES",
+  "breadcrumbs": [
+    "ROPE_UNLOAD_TEXTURES"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ROPE_UNLOAD_TEXTURES\nRopeUnloadTextures()"
+  ],
+  "urls": [],
+  "tags": []
+}

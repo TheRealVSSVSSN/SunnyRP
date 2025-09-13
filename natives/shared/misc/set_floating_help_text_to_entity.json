@@ -1,0 +1,12 @@
+{
+  "title": "SET_FLOATING_HELP_TEXT_TO_ENTITY",
+  "breadcrumbs": [
+    "SET_FLOATING_HELP_TEXT_TO_ENTITY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_FLOATING_HELP_TEXT_TO_ENTITY\nSetFloatingHelpTextToEntity()"
+  ],
+  "urls": [],
+  "tags": []
+}

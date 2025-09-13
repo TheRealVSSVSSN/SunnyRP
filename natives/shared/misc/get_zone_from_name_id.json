@@ -1,0 +1,12 @@
+{
+  "title": "GET_ZONE_FROM_NAME_ID",
+  "breadcrumbs": [
+    "GET_ZONE_FROM_NAME_ID"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ZONE_FROM_NAME_ID\nGetZoneFromNameId()"
+  ],
+  "urls": [],
+  "tags": []
+}

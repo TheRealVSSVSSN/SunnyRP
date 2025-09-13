@@ -1,0 +1,12 @@
+{
+  "title": "GET_PED_INDEX_FROM_ENTITY_INDEX",
+  "breadcrumbs": [
+    "GET_PED_INDEX_FROM_ENTITY_INDEX"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PED_INDEX_FROM_ENTITY_INDEX\nGetPedIndexFromEntityIndex()"
+  ],
+  "urls": [],
+  "tags": []
+}

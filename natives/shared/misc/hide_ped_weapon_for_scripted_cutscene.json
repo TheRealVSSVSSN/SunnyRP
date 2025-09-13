@@ -1,0 +1,12 @@
+{
+  "title": "HIDE_PED_WEAPON_FOR_SCRIPTED_CUTSCENE",
+  "breadcrumbs": [
+    "HIDE_PED_WEAPON_FOR_SCRIPTED_CUTSCENE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for HIDE_PED_WEAPON_FOR_SCRIPTED_CUTSCENE\nHidePedWeaponForScriptedCutscene()"
+  ],
+  "urls": [],
+  "tags": []
+}

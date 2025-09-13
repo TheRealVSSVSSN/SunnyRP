@@ -1,0 +1,23 @@
+{
+  "title": "SET_BLIP_COLOUR",
+  "breadcrumbs": [
+    "HUDAPI",
+    "SET_BLIP_COLOUR"
+  ],
+  "content": "0x03D7FB09E75D6B7E0xBB3C5A41// SetBlipColour\nvoid SET_BLIP_COLOUR(Blip blip, int color);Parameters:blip: The blip handle to set the color ofcolor: This can be a hex color code, or a blip color.Examples:Lualocal coords = GetEntityCoords(PlayerPedId())\nlocal blip = AddBlipForCoord(coords.x, coords.y, coords.z)\n\nSetBlipColour(blip, 1) -- Sets the color to red (see list above)\n\n-- You can also use a hex like so:\nSetBlipColour(blip, 0x3A7F3AFF) -- Our custom green",
+  "codeBlocks": [
+    "// SetBlipColour\nvoid SET_BLIP_COLOUR(Blip blip, int color);",
+    "-- Example usage for SET_BLIP_COLOUR\nSetBlipColour(0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/SetBlipColour.md",
+    "https://docs.fivem.net/docs/game-references/blips/#blip-colors",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

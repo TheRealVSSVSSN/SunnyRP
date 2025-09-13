@@ -1,0 +1,12 @@
+{
+  "title": "GET_GPS_BLIP_ROUTE_LENGTH",
+  "breadcrumbs": [
+    "GET_GPS_BLIP_ROUTE_LENGTH"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_GPS_BLIP_ROUTE_LENGTH\nGetGpsBlipRouteLength()"
+  ],
+  "urls": [],
+  "tags": []
+}

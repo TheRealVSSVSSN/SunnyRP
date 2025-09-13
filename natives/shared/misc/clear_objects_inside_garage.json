@@ -1,0 +1,12 @@
+{
+  "title": "CLEAR_OBJECTS_INSIDE_GARAGE",
+  "breadcrumbs": [
+    "CLEAR_OBJECTS_INSIDE_GARAGE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CLEAR_OBJECTS_INSIDE_GARAGE\nClearObjectsInsideGarage()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,12 @@
+{
+  "title": "ALLOW_PLAYER_SWITCH_PAN",
+  "breadcrumbs": [
+    "ALLOW_PLAYER_SWITCH_PAN"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ALLOW_PLAYER_SWITCH_PAN\nAllowPlayerSwitchPan()"
+  ],
+  "urls": [],
+  "tags": []
+}

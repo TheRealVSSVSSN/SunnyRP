@@ -1,0 +1,12 @@
+{
+  "title": "SET_PED_CHANCE_OF_FIRING_BLANKS",
+  "breadcrumbs": [
+    "SET_PED_CHANCE_OF_FIRING_BLANKS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_CHANCE_OF_FIRING_BLANKS\nSetPedChanceOfFiringBlanks()"
+  ],
+  "urls": [],
+  "tags": []
+}

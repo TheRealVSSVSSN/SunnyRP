@@ -1,0 +1,12 @@
+{
+  "title": "CLEAR_AREA_LEAVE_VEHICLE_HEALTH",
+  "breadcrumbs": [
+    "CLEAR_AREA_LEAVE_VEHICLE_HEALTH"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CLEAR_AREA_LEAVE_VEHICLE_HEALTH\nClearAreaLeaveVehicleHealth()"
+  ],
+  "urls": [],
+  "tags": []
+}

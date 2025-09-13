@@ -1,0 +1,12 @@
+{
+  "title": "GET_PED_DRAWABLE_VARIATION",
+  "breadcrumbs": [
+    "GET_PED_DRAWABLE_VARIATION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PED_DRAWABLE_VARIATION\nGetPedDrawableVariation()"
+  ],
+  "urls": [],
+  "tags": []
+}

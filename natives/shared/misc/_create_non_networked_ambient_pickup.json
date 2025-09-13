@@ -1,0 +1,12 @@
+{
+  "title": "_CREATE_NON_NETWORKED_AMBIENT_PICKUP",
+  "breadcrumbs": [
+    "_CREATE_NON_NETWORKED_AMBIENT_PICKUP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _CREATE_NON_NETWORKED_AMBIENT_PICKUP\n_reateNonNetworkedAmbientPickup()"
+  ],
+  "urls": [],
+  "tags": []
+}

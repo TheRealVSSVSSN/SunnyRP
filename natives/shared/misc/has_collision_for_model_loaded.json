@@ -1,0 +1,12 @@
+{
+  "title": "HAS_COLLISION_FOR_MODEL_LOADED",
+  "breadcrumbs": [
+    "HAS_COLLISION_FOR_MODEL_LOADED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for HAS_COLLISION_FOR_MODEL_LOADED\nHasCollisionForModelLoaded()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,12 @@
+{
+  "title": "GET_MISSION_FLAG",
+  "breadcrumbs": [
+    "GET_MISSION_FLAG"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_MISSION_FLAG\nGetMissionFlag()"
+  ],
+  "urls": [],
+  "tags": []
+}
