@@ -1,0 +1,23 @@
+{
+  "title": "SET_ENTITY_DRAW_OUTLINE_SHADER",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_ENTITY_DRAW_OUTLINE_SHADER"
+  ],
+  "content": "0x5261A01A// SetEntityDrawOutlineShader\nvoid SET_ENTITY_DRAW_OUTLINE_SHADER(int shader);Parameters:shader: An outline shader variant.Sets variant of shader that will be used to draw entity outline.Variants are:0: Default value, gauss shader.1: 2px wide solid color outline.2: Fullscreen solid color except for entity.",
+  "codeBlocks": [
+    "// SetEntityDrawOutlineShader\nvoid SET_ENTITY_DRAW_OUTLINE_SHADER(int shader);",
+    "-- Example usage for SET_ENTITY_DRAW_OUTLINE_SHADER\nSetEntityDrawOutlineShader(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetEntityDrawOutlineShader.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

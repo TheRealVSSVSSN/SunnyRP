@@ -1,0 +1,23 @@
+{
+  "title": "SET_FOG_VOLUME_RENDER_DISABLED",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_FOG_VOLUME_RENDER_DISABLED"
+  ],
+  "content": "0xFBC64DA3// SetFogVolumeRenderDisabled\nvoid SET_FOG_VOLUME_RENDER_DISABLED(BOOL state);Parameters:state: Toggle on or off.This completely disables rendering of fog volumes (vfxfogvolumeinfo.ymt).",
+  "codeBlocks": [
+    "// SetFogVolumeRenderDisabled\nvoid SET_FOG_VOLUME_RENDER_DISABLED(BOOL state);",
+    "-- Example usage for SET_FOG_VOLUME_RENDER_DISABLED\nSetFogVolumeRenderDisabled(false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetFogVolumeRenderDisabled.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

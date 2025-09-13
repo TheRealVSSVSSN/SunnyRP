@@ -1,0 +1,23 @@
+{
+  "title": "REMOVE_DRY_VOLUME",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "REMOVE_DRY_VOLUME"
+  ],
+  "content": "0x7BCAA6E7// RemoveDryVolume\nvoid REMOVE_DRY_VOLUME(int handle);Parameters:handle: The handle of the dry volume that needs to be removed.Removes a dry volume from the game session.\nSee CREATE_DRY_VOLUME for more info",
+  "codeBlocks": [
+    "// RemoveDryVolume\nvoid REMOVE_DRY_VOLUME(int handle);",
+    "-- Example usage for REMOVE_DRY_VOLUME\nRemoveDryVolume(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/RemoveDryVolume.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "SET_WATER_QUAD_TYPE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_WATER_QUAD_TYPE"
+  ],
+  "content": "0x50131EB2// SetWaterQuadType\nBOOL SET_WATER_QUAD_TYPE(int waterQuad, int type);Parameters:waterQuad: The water quad indextype: The water quad typeReturns: Returns true on success.This native allows you to update the water quad type.Valid type definitions:0 Square1 Right triangle where the 90 degree angle is at maxX, minY2 Right triangle where the 90 degree angle is at minX, minY3 Right triangle where the 90 degree angle is at minX, maxY4 Right triangle where the 90 degree angle is at maxY, maxYExamples:Lualocal success = SetWaterQuadType(0, 0)",
+  "codeBlocks": [
+    "// SetWaterQuadType\nBOOL SET_WATER_QUAD_TYPE(int waterQuad, int type);",
+    "local success = SetWaterQuadType(0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetWaterQuadType.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

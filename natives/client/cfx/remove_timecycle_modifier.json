@@ -1,0 +1,23 @@
+{
+  "title": "REMOVE_TIMECYCLE_MODIFIER",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "REMOVE_TIMECYCLE_MODIFIER"
+  ],
+  "content": "0x36DF8612// RemoveTimecycleModifier\nvoid REMOVE_TIMECYCLE_MODIFIER(char* modifierName);Parameters:modifierName: The timecycle modifier name.Examples:Lualocal modifierName = \"my_awesome_timecycle\"\nRemoveTimecycleModifier(modifierName)",
+  "codeBlocks": [
+    "// RemoveTimecycleModifier\nvoid REMOVE_TIMECYCLE_MODIFIER(char* modifierName);",
+    "local modifierName = \"my_awesome_timecycle\"\nRemoveTimecycleModifier(modifierName)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/RemoveTimecycleModifier.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

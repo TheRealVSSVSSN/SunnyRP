@@ -1,0 +1,23 @@
+{
+  "title": "SET_WATER_QUAD_HAS_LIMITED_DEPTH",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_WATER_QUAD_HAS_LIMITED_DEPTH"
+  ],
+  "content": "0xD1FDCFC1// SetWaterQuadHasLimitedDepth\nBOOL SET_WATER_QUAD_HAS_LIMITED_DEPTH(int waterQuad, BOOL hasLimitedDepth);Parameters:waterQuad: The water quad indexhasLimitedDepth: Unknown effectReturns: Returns true on success.Examples:Lualocal success = SetWaterQuadHasLimitedDepth(0, true)",
+  "codeBlocks": [
+    "// SetWaterQuadHasLimitedDepth\nBOOL SET_WATER_QUAD_HAS_LIMITED_DEPTH(int waterQuad, BOOL hasLimitedDepth);",
+    "local success = SetWaterQuadHasLimitedDepth(0, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetWaterQuadHasLimitedDepth.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

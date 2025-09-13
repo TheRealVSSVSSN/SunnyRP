@@ -1,0 +1,23 @@
+{
+  "title": "GET_ENTITY_POPULATION_TYPE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_ENTITY_POPULATION_TYPE"
+  ],
+  "content": "0xFC30DDFF// GetEntityPopulationType\nint GET_ENTITY_POPULATION_TYPE(Entity entity);Parameters:entity: the entity to obtain the population type fromReturns: Returns the population type ID, defined by the below enumeration:`cpp\nenum ePopulationType\n{\n\tPOPTYPE_UNKNOWN = 0,\n\tPOPTYPE_RANDOM_PERMANENT,\n\tPOPTYPE_RANDOM_PARKED,\n\tPOPTYPE_RANDOM_PATROL,\n\tPOPTYPE_RANDOM_SCENARIO,\n\tPOPTYPE_RANDOM_AMBIENT,\n\tPOPTYPE_PERMANENT,\n\tPOPTYPE_MISSION,\n\tPOPTYPE_REPLAY,\n\tPOPTYPE_CACHE,\n\tPOPTYPE_TOOL\n};This native gets an entity's population type.",
+  "codeBlocks": [
+    "// GetEntityPopulationType\nint GET_ENTITY_POPULATION_TYPE(Entity entity);",
+    "local entity = PlayerPedId()\n-- Example usage for GET_ENTITY_POPULATION_TYPE\nGetEntityPopulationType(entity)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetEntityPopulationType.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

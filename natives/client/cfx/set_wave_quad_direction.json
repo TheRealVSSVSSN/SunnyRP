@@ -1,0 +1,23 @@
+{
+  "title": "SET_WAVE_QUAD_DIRECTION",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_WAVE_QUAD_DIRECTION"
+  ],
+  "content": "0xFC9341A3// SetWaveQuadDirection\nBOOL SET_WAVE_QUAD_DIRECTION(int waveQuad, float directionX, float directionY);Parameters:waveQuad: The wave quad indexdirectionX: The minX coordinatedirectionY: The minY coordinateReturns: Returns true on success.directionX/Y should be constrained between -1.0 and 1.0\nA positive value will create the wave starting at min and rolling towards max\nA negative value will create the wave starting at max and rolling towards min\nApplying both values allows you to make diagonal wavesExamples:Lualocal success = SetWaveQuadDirection(0, 0.3, 0.1)",
+  "codeBlocks": [
+    "// SetWaveQuadDirection\nBOOL SET_WAVE_QUAD_DIRECTION(int waveQuad, float directionX, float directionY);",
+    "local success = SetWaveQuadDirection(0, 0.3, 0.1)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetWaveQuadDirection.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

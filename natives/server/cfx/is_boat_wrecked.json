@@ -1,0 +1,23 @@
+{
+  "title": "IS_BOAT_WRECKED",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "IS_BOAT_WRECKED"
+  ],
+  "content": "0x9049DB44// IsBoatWrecked\nbool IS_BOAT_WRECKED(Vehicle vehicle);Parameters:vehicle: The target vehicle.Returns: Returns whether or not the boat is wrecked.",
+  "codeBlocks": [
+    "// IsBoatWrecked\nbool IS_BOAT_WRECKED(Vehicle vehicle);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for IS_BOAT_WRECKED\nIsBoatWrecked(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/IsBoatWrecked.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

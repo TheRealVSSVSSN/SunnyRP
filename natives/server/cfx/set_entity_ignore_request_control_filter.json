@@ -1,0 +1,23 @@
+{
+  "title": "SET_ENTITY_IGNORE_REQUEST_CONTROL_FILTER",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_ENTITY_IGNORE_REQUEST_CONTROL_FILTER"
+  ],
+  "content": "0x9F7F8D36// SetEntityIgnoreRequestControlFilter\nvoid SET_ENTITY_IGNORE_REQUEST_CONTROL_FILTER(Entity entity, bool ignore);Parameters:entity: The entity handle to ignore the request control filter.ignore: Define if the entity ignores the request control filter policy.It allows to flag an entity to ignore the request control filter policy.",
+  "codeBlocks": [
+    "// SetEntityIgnoreRequestControlFilter\nvoid SET_ENTITY_IGNORE_REQUEST_CONTROL_FILTER(Entity entity, bool ignore);",
+    "local entity = PlayerPedId()\n-- Example usage for SET_ENTITY_IGNORE_REQUEST_CONTROL_FILTER\nSetEntityIgnoreRequestControlFilter(entity, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetEntityIgnoreRequestControlFilter.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

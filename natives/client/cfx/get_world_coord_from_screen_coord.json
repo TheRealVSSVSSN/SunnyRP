@@ -1,0 +1,23 @@
+{
+  "title": "GET_WORLD_COORD_FROM_SCREEN_COORD",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_WORLD_COORD_FROM_SCREEN_COORD"
+  ],
+  "content": "0xC81D0659// GetWorldCoordFromScreenCoord\nvoid GET_WORLD_COORD_FROM_SCREEN_COORD(float screenX, float screenY, Vector3* worldVector, Vector3* normalVector);Parameters:screenX: A screen horizontal axis coordinate (0.0 - 1.0).screenY: A screen vertical axis coordinate (0.0 - 1.0).worldVector: The world coord vector pointer.normalVector: The screen normal vector pointer.Returns: A Vector3 representing the world coordinates relative to the specified screen coordinates and a screen plane normal Vector3 (normalised).Converts a screen coordinate into its relative world coordinate.Examples:LuaCreateThread(function()\n  while true do\n    local screenX = GetDisabledControlNormal(0, 239)\n    local screenY = GetDisabledControlNormal(0, 240)\n\n    local world, normal = GetWorldCoordFromScreenCoord(screenX, screenY)\n\n    local depth = 10\n\n    local target = world + normal * depth\n\n    DrawSphere(target.x, target.y, target.z, 0.5, 255, 0, 0, 0.5)\n\n    Wait(0)\n  end\nend)",
+  "codeBlocks": [
+    "// GetWorldCoordFromScreenCoord\nvoid GET_WORLD_COORD_FROM_SCREEN_COORD(float screenX, float screenY, Vector3* worldVector, Vector3* normalVector);",
+    "CreateThread(function()\n  while true do\n    local screenX = GetDisabledControlNormal(0, 239)\n    local screenY = GetDisabledControlNormal(0, 240)\n\n    local world, normal = GetWorldCoordFromScreenCoord(screenX, screenY)\n\n    local depth = 10\n\n    local target = world + normal * depth\n\n    DrawSphere(target.x, target.y, target.z, 0.5, 255, 0, 0, 0.5)\n\n    Wait(0)\n  end\nend)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetWorldCoordFromScreenCoord.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

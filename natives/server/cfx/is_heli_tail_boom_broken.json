@@ -1,0 +1,23 @@
+{
+  "title": "IS_HELI_TAIL_BOOM_BROKEN",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "IS_HELI_TAIL_BOOM_BROKEN"
+  ],
+  "content": "0x2C59F987// IsHeliTailBoomBroken\nBOOL IS_HELI_TAIL_BOOM_BROKEN(Vehicle heli);Parameters:heli: The helicopter to checkReturns: Returns true if the helicopter's tail boom is broken, false if it is intact.",
+  "codeBlocks": [
+    "// IsHeliTailBoomBroken\nBOOL IS_HELI_TAIL_BOOM_BROKEN(Vehicle heli);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for IS_HELI_TAIL_BOOM_BROKEN\nIsHeliTailBoomBroken(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/IsHeliTailBoomBroken.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

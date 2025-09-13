@@ -1,0 +1,24 @@
+{
+  "title": "REMOVE_STATE_BAG_CHANGE_HANDLER",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "REMOVE_STATE_BAG_CHANGE_HANDLER"
+  ],
+  "content": "0xD36BE661// RemoveStateBagChangeHandler\nvoid REMOVE_STATE_BAG_CHANGE_HANDLER(int cookie);Parameters:cookie: The cookie.Experimental: This native may be altered or removed in future versions of CitizenFX without warning.Removes a handler for changes to a state bag.",
+  "codeBlocks": [
+    "// RemoveStateBagChangeHandler\nvoid REMOVE_STATE_BAG_CHANGE_HANDLER(int cookie);",
+    "-- Example usage for REMOVE_STATE_BAG_CHANGE_HANDLER\nRemoveStateBagChangeHandler(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/RemoveStateBagChangeHandler.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client",
+    "server"
+  ]
+}

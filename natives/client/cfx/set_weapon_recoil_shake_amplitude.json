@@ -1,0 +1,23 @@
+{
+  "title": "SET_WEAPON_RECOIL_SHAKE_AMPLITUDE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_WEAPON_RECOIL_SHAKE_AMPLITUDE"
+  ],
+  "content": "0x9864312F// SetWeaponRecoilShakeAmplitude\nvoid SET_WEAPON_RECOIL_SHAKE_AMPLITUDE(Hash weaponHash, float amplitude);Parameters:weaponHash: Weapon name hash.amplitude: Recoil shake amplitudeA setter for the recoil shake amplitude of a weapon.",
+  "codeBlocks": [
+    "// SetWeaponRecoilShakeAmplitude\nvoid SET_WEAPON_RECOIL_SHAKE_AMPLITUDE(Hash weaponHash, float amplitude);",
+    "-- Example usage for SET_WEAPON_RECOIL_SHAKE_AMPLITUDE\nSetWeaponRecoilShakeAmplitude(GetHashKey('prop'), 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetWeaponRecoilShakeAmplitude.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

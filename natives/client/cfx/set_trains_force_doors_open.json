@@ -1,0 +1,23 @@
+{
+  "title": "SET_TRAINS_FORCE_DOORS_OPEN",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_TRAINS_FORCE_DOORS_OPEN"
+  ],
+  "content": "0xD4D1BA63// SetTrainsForceDoorsOpen\nvoid SET_TRAINS_FORCE_DOORS_OPEN(bool forceOpen);Parameters:forceOpen: Should force open.Enables or disables whether train doors should be forced open whilst a player is inside the train. This is enabled by default in multiplayer.",
+  "codeBlocks": [
+    "// SetTrainsForceDoorsOpen\nvoid SET_TRAINS_FORCE_DOORS_OPEN(bool forceOpen);",
+    "-- Example usage for SET_TRAINS_FORCE_DOORS_OPEN\nSetTrainsForceDoorsOpen(false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetTrainsForceDoorsOpen.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

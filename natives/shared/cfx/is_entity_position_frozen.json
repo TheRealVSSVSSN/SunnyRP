@@ -1,0 +1,25 @@
+{
+  "title": "IS_ENTITY_POSITION_FROZEN",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "IS_ENTITY_POSITION_FROZEN"
+  ],
+  "content": "0xEDBE6ADD// IsEntityPositionFrozen\nbool IS_ENTITY_POSITION_FROZEN(Entity entity);Parameters:entity: The entity to check forReturns: Boolean stating if it is frozen or not.A getter for FREEZE_ENTITY_POSITION.Examples:LuaJavaScriptlocal isFrozen = IsEntityPositionFrozen(PlayerPedId())",
+  "codeBlocks": [
+    "// IsEntityPositionFrozen\nbool IS_ENTITY_POSITION_FROZEN(Entity entity);",
+    "local isFrozen = IsEntityPositionFrozen(PlayerPedId())"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/IsEntityPositionFrozen.md",
+    "https://docs.fivem.net/natives/?_0x428CA6DBD1094446",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client",
+    "server"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "SET_HANDLING_VECTOR",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_HANDLING_VECTOR"
+  ],
+  "content": "0x7F9D543// SetHandlingVector\nvoid SET_HANDLING_VECTOR(char* vehicle, char* class_, char* fieldName, Vector3 value);Parameters:vehicle: The vehicle class to set data for.class_: The handling class to set. Only \"CHandlingData\" is supported at this time.fieldName: The field name to set. These match the keys in handling.meta.value: The Vector3 value to set.Sets a global handling override for a specific vehicle class. The name is supposed to match the handlingName field from handling.meta.\nExample: SetHandlingVector('AIRTUG', 'CHandlingData', 'vecCentreOfMassOffset', vector3(0.0, 0.0, -5.0))",
+  "codeBlocks": [
+    "// SetHandlingVector\nvoid SET_HANDLING_VECTOR(char* vehicle, char* class_, char* fieldName, Vector3 value);",
+    "-- Example usage for SET_HANDLING_VECTOR\nSetHandlingVector('', '', '', 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetHandlingVector.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}
