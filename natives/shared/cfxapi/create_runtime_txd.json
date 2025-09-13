@@ -1,0 +1,20 @@
+{
+  "title": "CREATE_RUNTIME_TXD",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "CREATE_RUNTIME_TXD"
+  ],
+  "content": "0x1F3AC778// CreateRuntimeTxd\nlong CREATE_RUNTIME_TXD(char* name);Parameters:name: The name for the runtime TXD.Returns: A handle to the runtime TXD.Creates a runtime texture dictionary with the specified name.\nExample:local txd = CreateRuntimeTxd('meow')",
+  "codeBlocks": [
+    "// CreateRuntimeTxd\nlong CREATE_RUNTIME_TXD(char* name);",
+    "local txd = CreateRuntimeTxd('meow')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/CreateRuntimeTxd.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

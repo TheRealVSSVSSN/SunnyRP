@@ -1,0 +1,19 @@
+{
+  "title": "SET_PLAYER_ROUTING_BUCKET",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_PLAYER_ROUTING_BUCKET"
+  ],
+  "content": "0x6504EB38// SetPlayerRoutingBucket\nvoid SET_PLAYER_ROUTING_BUCKET(char* playerSrc, int bucket);Parameters:playerSrc: The player to set the routing bucket for.bucket: The bucket ID.Sets the routing bucket for the specified player.Routing buckets are also known as 'dimensions' or 'virtual worlds' in past echoes, however they are population-aware.",
+  "codeBlocks": [
+    "// SetPlayerRoutingBucket\nvoid SET_PLAYER_ROUTING_BUCKET(char* playerSrc, int bucket);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetPlayerRoutingBucket.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "title": "CLONE_TIMECYCLE_MODIFIER",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "CLONE_TIMECYCLE_MODIFIER"
+  ],
+  "content": "0x54D636B3// CloneTimecycleModifier\nint CLONE_TIMECYCLE_MODIFIER(char* sourceModifierName, char* clonedModifierName);Parameters:sourceModifierName: The source timecycle name.clonedModifierName: The clone timecycle name, must be unique.Returns: The cloned timecycle modifier index, or -1 if failed.Examples:Lualocal sourceName = \"underwater\"\nlocal cloneName = \"my_awesome_timecycle\"\n\nlocal clonedIndex = CloneTimecycleModifier(sourceName, cloneName)\nif clonedIndex ~= -1 then\n  SetTimecycleModifier(cloneName)\nend",
+  "codeBlocks": [
+    "// CloneTimecycleModifier\nint CLONE_TIMECYCLE_MODIFIER(char* sourceModifierName, char* clonedModifierName);",
+    "local sourceName = \"underwater\"\nlocal cloneName = \"my_awesome_timecycle\"\n\nlocal clonedIndex = CloneTimecycleModifier(sourceName, cloneName)\nif clonedIndex ~= -1 then\n  SetTimecycleModifier(cloneName)\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/CloneTimecycleModifier.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

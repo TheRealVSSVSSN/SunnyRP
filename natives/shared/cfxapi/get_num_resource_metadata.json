@@ -1,0 +1,20 @@
+{
+  "title": "GET_NUM_RESOURCE_METADATA",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_NUM_RESOURCE_METADATA"
+  ],
+  "content": "0x776E864// GetNumResourceMetadata\nint GET_NUM_RESOURCE_METADATA(char* resourceName, char* metadataKey);Parameters:resourceName: The resource name.metadataKey: The key to look up in the resource manifest.Gets the amount of metadata values with the specified key existing in the specified resource's manifest.\nSee also: Resource manifest",
+  "codeBlocks": [
+    "// GetNumResourceMetadata\nint GET_NUM_RESOURCE_METADATA(char* resourceName, char* metadataKey);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetNumResourceMetadata.md",
+    "https://docs.fivem.net/docs/scripting-reference/resource-manifest/resource-manifest/",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

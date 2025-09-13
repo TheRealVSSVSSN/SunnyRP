@@ -1,0 +1,19 @@
+{
+  "title": "ADD_MINIMAP_OVERLAY_WITH_DEPTH",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "ADD_MINIMAP_OVERLAY_WITH_DEPTH"
+  ],
+  "content": "0xED0935B5// AddMinimapOverlayWithDepth\nint ADD_MINIMAP_OVERLAY_WITH_DEPTH(char* name, int depth);Parameters:name: The path to a .gfx file in the current resource. It has to be specified as a file.depth: The depth of new overlay on the minimap. Pass -1 for game to figure out the highest depth itself. Should not be greater than 0x7EFFFFFD.Returns: A minimap overlay ID.Loads a minimap overlay from a GFx file in the current resource.",
+  "codeBlocks": [
+    "// AddMinimapOverlayWithDepth\nint ADD_MINIMAP_OVERLAY_WITH_DEPTH(char* name, int depth);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/AddMinimapOverlayWithDepth.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

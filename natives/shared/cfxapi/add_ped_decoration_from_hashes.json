@@ -1,0 +1,21 @@
+{
+  "title": "ADD_PED_DECORATION_FROM_HASHES",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "ADD_PED_DECORATION_FROM_HASHES"
+  ],
+  "content": "0x70559AC7// AddPedDecorationFromHashes\nvoid ADD_PED_DECORATION_FROM_HASHES(Ped ped, Hash collection, Hash overlay);Applies an Item from a PedDecorationCollection to a ped. These include tattoos and shirt decals.\ncollection - PedDecorationCollection filename hash\noverlay - Item name hash\nExample:\nEntry inside \"mpbeach_overlays.xml\" -\n<Item>\n<uvPos x=\"0.500000\" y=\"0.500000\" />\n<scale x=\"0.600000\" y=\"0.500000\" />\n<rotation value=\"0.000000\" />\n<nameHash>FM_Hair_Fuzz</nameHash>\n<txdHash>mp_hair_fuzz</txdHash>\n<txtHash>mp_hair_fuzz</txtHash>\n<zone>ZONE_HEAD</zone>\n<type>TYPE_TATTOO</type>\n<faction>FM</faction>\n<garment>All</garment>\n<gender>GENDER_DONTCARE</gender>\n<award />\n<awardLevel />\n</Item>\nCode:\nPED::_0x5F5D1665E352A839(PLAYER::PLAYER_PED_ID(), MISC::GET_HASH_KEY(\"mpbeach_overlays\"), MISC::GET_HASH_KEY(\"fm_hair_fuzz\"))\nThis is the server-side RPC native equivalent of the client native ADD_PED_DECORATION_FROM_HASHES.Old name:  _APPLY_PED_OVERLAYOld name:  _SET_PED_DECORATION",
+  "codeBlocks": [
+    "// AddPedDecorationFromHashes\nvoid ADD_PED_DECORATION_FROM_HASHES(Ped ped, Hash collection, Hash overlay);",
+    "Applies an Item from a PedDecorationCollection to a ped. These include tattoos and shirt decals.\ncollection - PedDecorationCollection filename hash\noverlay - Item name hash\nExample:\nEntry inside \"mpbeach_overlays.xml\" -\n<Item>\n<uvPos x=\"0.500000\" y=\"0.500000\" />\n<scale x=\"0.600000\" y=\"0.500000\" />\n<rotation value=\"0.000000\" />\n<nameHash>FM_Hair_Fuzz</nameHash>\n<txdHash>mp_hair_fuzz</txdHash>\n<txtHash>mp_hair_fuzz</txtHash>\n<zone>ZONE_HEAD</zone>\n<type>TYPE_TATTOO</type>\n<faction>FM</faction>\n<garment>All</garment>\n<gender>GENDER_DONTCARE</gender>\n<award />\n<awardLevel />\n</Item>\nCode:\nPED::_0x5F5D1665E352A839(PLAYER::PLAYER_PED_ID(), MISC::GET_HASH_KEY(\"mpbeach_overlays\"), MISC::GET_HASH_KEY(\"fm_hair_fuzz\"))\n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/AddPedDecorationFromHashes.md",
+    "https://docs.fivem.net/natives/?_0x5F5D1665E352A839",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

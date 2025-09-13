@@ -1,0 +1,21 @@
+{
+  "title": "CLEAR_PED_PROP",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "CLEAR_PED_PROP"
+  ],
+  "content": "0x2D23D743// ClearPedProp\nvoid CLEAR_PED_PROP(Ped ped, int propId);Parameters:ped: The ped handle.propId: The prop id you want to clear from the ped. Refer to SET_PED_PROP_INDEX.CLEAR_PED_PROPThis is the server-side RPC native equivalent of the client native CLEAR_PED_PROP.",
+  "codeBlocks": [
+    "// ClearPedProp\nvoid CLEAR_PED_PROP(Ped ped, int propId);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/ClearPedProp.md",
+    "https://docs.fivem.net/natives/?_0x93376B65A266EB5F",
+    "https://docs.fivem.net/natives/?_0x0943E5B8E078E76E",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

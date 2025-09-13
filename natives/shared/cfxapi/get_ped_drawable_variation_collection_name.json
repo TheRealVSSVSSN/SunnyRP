@@ -1,0 +1,22 @@
+{
+  "title": "GET_PED_DRAWABLE_VARIATION_COLLECTION_NAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PED_DRAWABLE_VARIATION_COLLECTION_NAME"
+  ],
+  "content": "0xBCE0AB63// GetPedDrawableVariationCollectionName\nchar* GET_PED_DRAWABLE_VARIATION_COLLECTION_NAME(Ped ped, int componentId);Parameters:ped: The target pedcomponentId: One of the components from SET_PED_COMPONENT_VARIATIONReturns: Collection name to which the current drawable used in the given ped and component belongs to. Returns null if Ped is not found or index is out of bounds.An analogue to GET_PED_DRAWABLE_VARIATION that returns collection name instead of the global drawable index.Should be used together with GET_PED_DRAWABLE_VARIATION_COLLECTION_LOCAL_INDEX.",
+  "codeBlocks": [
+    "// GetPedDrawableVariationCollectionName\nchar* GET_PED_DRAWABLE_VARIATION_COLLECTION_NAME(Ped ped, int componentId);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPedDrawableVariationCollectionName.md",
+    "https://docs.fivem.net/natives/?_0x262B14F48D29DE80",
+    "https://docs.fivem.net/natives/?_0x67F3780DD425D4FC",
+    "https://docs.fivem.net/natives/?_0x9970386F",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

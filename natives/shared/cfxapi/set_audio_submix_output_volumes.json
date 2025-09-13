@@ -1,0 +1,19 @@
+{
+  "title": "SET_AUDIO_SUBMIX_OUTPUT_VOLUMES",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_AUDIO_SUBMIX_OUTPUT_VOLUMES"
+  ],
+  "content": "0x825DC0D1// SetAudioSubmixOutputVolumes\nvoid SET_AUDIO_SUBMIX_OUTPUT_VOLUMES(int submixId, int outputSlot, float frontLeftVolume, float frontRightVolume, float rearLeftVolume, float rearRightVolume, float channel5Volume, float channel6Volume);Parameters:submixId: The submix.outputSlot: The output slot index.frontLeftVolume: The volume for the front left channel.frontRightVolume: The volume for the front right channel.rearLeftVolume: The volume for the rear left channel.rearRightVolume: The volume for the rear right channel.channel5Volume: The volume for channel 5.channel6Volume: The volume for channel 6.Sets the volumes for the sound channels in a submix effect.\nValues can be between 0.0 and 1.0.\nChannel 5 and channel 6 are not used in voice chat but are believed to be center and LFE channels.\nOutput slot starts at 0 for the first ADD_AUDIO_SUBMIX_OUTPUT call then incremented by 1 on each subsequent call.",
+  "codeBlocks": [
+    "// SetAudioSubmixOutputVolumes\nvoid SET_AUDIO_SUBMIX_OUTPUT_VOLUMES(int submixId, int outputSlot, float frontLeftVolume, float frontRightVolume, float rearLeftVolume, float rearRightVolume, float channel5Volume, float channel6Volume);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetAudioSubmixOutputVolumes.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

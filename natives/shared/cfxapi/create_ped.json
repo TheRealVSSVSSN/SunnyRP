@@ -1,0 +1,20 @@
+{
+  "title": "CREATE_PED",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "CREATE_PED"
+  ],
+  "content": "0x389EF71// CreatePed\nEntity CREATE_PED(int pedType, Hash modelHash, float x, float y, float z, float heading, BOOL isNetwork, BOOL bScriptHostPed);Parameters:pedType: Unused. Peds get set to CIVMALE/CIVFEMALE/etc. no matter the value specified.modelHash: The model of ped to spawn.x: Spawn coordinate X component.y: Spawn coordinate Y component.z: Spawn coordinate Z component.heading: Heading to face towards, in degrees.isNetwork: Whether to create a network object for the ped. If false, the ped exists only locally.bScriptHostPed: Whether to register the ped as pinned to the script host in the R* network model.Returns: A script handle (fwScriptGuid index) for the ped, or 0 if the ped failed to be created.Creates a ped (biped character, pedestrian, actor) with the specified model at the specified position and heading.\nThis ped will initially be owned by the creating script as a mission entity, and the model should be loaded already\n(e.g. using REQUEST_MODEL).This is the server-side RPC native equivalent of the client native CREATE_PED.",
+  "codeBlocks": [
+    "// CreatePed\nEntity CREATE_PED(int pedType, Hash modelHash, float x, float y, float z, float heading, BOOL isNetwork, BOOL bScriptHostPed);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/CreatePed.md",
+    "https://docs.fivem.net/natives/?_0xD49F9B0955C367DE",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

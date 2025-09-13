@@ -1,0 +1,19 @@
+{
+  "title": "SEND_DUI_MOUSE_WHEEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SEND_DUI_MOUSE_WHEEL"
+  ],
+  "content": "0x2D62133A// SendDuiMouseWheel\nvoid SEND_DUI_MOUSE_WHEEL(long duiObject, int deltaY, int deltaX);Parameters:duiObject: The DUI browser handle.deltaY: The wheel Y delta.deltaX: The wheel X delta.Injects a 'mouse wheel' event for a DUI object.",
+  "codeBlocks": [
+    "// SendDuiMouseWheel\nvoid SEND_DUI_MOUSE_WHEEL(long duiObject, int deltaY, int deltaX);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SendDuiMouseWheel.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

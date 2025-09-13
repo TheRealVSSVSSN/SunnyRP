@@ -1,0 +1,19 @@
+{
+  "title": "SET_VEHICLE_HANDLING_FLOAT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_VEHICLE_HANDLING_FLOAT"
+  ],
+  "content": "0x488C86D2// SetVehicleHandlingFloat\nvoid SET_VEHICLE_HANDLING_FLOAT(Vehicle vehicle, char* class_, char* fieldName, float value);Parameters:vehicle: The vehicle to set data for.class_: The handling class to set. Only \"CHandlingData\" is supported at this time.fieldName: The field name to set. These match the keys in handling.meta.value: The floating-point value to set.Sets a handling override for a specific vehicle. Certain handling flags can only be set globally using SET_HANDLING_FLOAT, this might require some experimentation.\nExample: SetVehicleHandlingFloat(vehicle, 'CHandlingData', 'fSteeringLock', 360.0)",
+  "codeBlocks": [
+    "// SetVehicleHandlingFloat\nvoid SET_VEHICLE_HANDLING_FLOAT(Vehicle vehicle, char* class_, char* fieldName, float value);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetVehicleHandlingFloat.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

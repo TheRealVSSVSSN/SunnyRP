@@ -1,0 +1,22 @@
+{
+  "title": "GET_PED_DRAWABLE_VARIATION_COLLECTION_LOCAL_INDEX",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PED_DRAWABLE_VARIATION_COLLECTION_LOCAL_INDEX"
+  ],
+  "content": "0x9970386F// GetPedDrawableVariationCollectionLocalIndex\nint GET_PED_DRAWABLE_VARIATION_COLLECTION_LOCAL_INDEX(Ped ped, int componentId);Parameters:ped: The target pedcomponentId: One of the components from SET_PED_COMPONENT_VARIATIONReturns: Local drawable index of the drawable that is currently used in the given ped and component.An analogue to GET_PED_DRAWABLE_VARIATION that returns collection local drawable index (inside GET_PED_DRAWABLE_VARIATION_COLLECTION_NAME collection) instead of the global drawable index.",
+  "codeBlocks": [
+    "// GetPedDrawableVariationCollectionLocalIndex\nint GET_PED_DRAWABLE_VARIATION_COLLECTION_LOCAL_INDEX(Ped ped, int componentId);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPedDrawableVariationCollectionLocalIndex.md",
+    "https://docs.fivem.net/natives/?_0x262B14F48D29DE80",
+    "https://docs.fivem.net/natives/?_0x67F3780DD425D4FC",
+    "https://docs.fivem.net/natives/?_0xBCE0AB63",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

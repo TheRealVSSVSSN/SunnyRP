@@ -1,0 +1,19 @@
+{
+  "title": "SET_FUEL_CONSUMPTION_STATE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_FUEL_CONSUMPTION_STATE"
+  ],
+  "content": "0x81DAD03E// SetFuelConsumptionState\nvoid SET_FUEL_CONSUMPTION_STATE(BOOL state);Parameters:state: True to turn on. False to turn off.Turns on and off fuel consumption in all vehicles operated by a player. NPC operated vehicles will not consume fuel to avoid traffic disruptions.The default Gta5 behaviour is fuel consumption turned off.",
+  "codeBlocks": [
+    "// SetFuelConsumptionState\nvoid SET_FUEL_CONSUMPTION_STATE(BOOL state);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetFuelConsumptionState.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

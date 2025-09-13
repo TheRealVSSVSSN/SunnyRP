@@ -1,0 +1,19 @@
+{
+  "title": "CREATE_AUDIO_SUBMIX",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "CREATE_AUDIO_SUBMIX"
+  ],
+  "content": "0x658D2BC8// CreateAudioSubmix\nint CREATE_AUDIO_SUBMIX(char* name);Parameters:name: The audio submix name.Returns: A submix ID, or -1 if the submix could not be created.Creates an audio submix with the specified name, or gets the existing audio submix by that name.",
+  "codeBlocks": [
+    "// CreateAudioSubmix\nint CREATE_AUDIO_SUBMIX(char* name);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/CreateAudioSubmix.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}
