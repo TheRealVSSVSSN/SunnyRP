@@ -1,0 +1,25 @@
+{
+  "title": "REMOVE_CONVAR_CHANGE_LISTENER",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "REMOVE_CONVAR_CHANGE_LISTENER"
+  ],
+  "content": "0xEAC49841// RemoveConvarChangeListener\nvoid REMOVE_CONVAR_CHANGE_LISTENER(int cookie);Parameters:cookie: The cookie returned from ADD_CONVAR_CHANGE_LISTENER",
+  "codeBlocks": [
+    "// RemoveConvarChangeListener\nvoid REMOVE_CONVAR_CHANGE_LISTENER(int cookie);",
+    "-- Example usage for REMOVE_CONVAR_CHANGE_LISTENER\nRemoveConvarChangeListener(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/RemoveConvarChangeListener.md",
+    "https://docs.fivem.net/natives/?_0xAB7F7241",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client",
+    "server"
+  ]
+}

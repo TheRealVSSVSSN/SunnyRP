@@ -1,0 +1,24 @@
+{
+  "title": "SET_TRAIN_STATE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_TRAIN_STATE"
+  ],
+  "content": "0x61CB74A0// SetTrainState\nvoid SET_TRAIN_STATE(Vehicle train, int state);Parameters:train: The train handlestate: The trains new stateReturns: The trains current state, refer to GET_TRAIN_STATE",
+  "codeBlocks": [
+    "// SetTrainState\nvoid SET_TRAIN_STATE(Vehicle train, int state);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for SET_TRAIN_STATE\nSetTrainState(vehicle, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetTrainState.md",
+    "https://docs.fivem.net/natives/?_0x81B50033",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

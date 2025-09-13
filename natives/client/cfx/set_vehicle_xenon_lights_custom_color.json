@@ -1,0 +1,24 @@
+{
+  "title": "SET_VEHICLE_XENON_LIGHTS_CUSTOM_COLOR",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_VEHICLE_XENON_LIGHTS_CUSTOM_COLOR"
+  ],
+  "content": "0x1683E7F0// SetVehicleXenonLightsCustomColor\nvoid SET_VEHICLE_XENON_LIGHTS_CUSTOM_COLOR(Vehicle vehicle, int red, int green, int blue);Parameters:vehicle: The vehicle handle.red: Red color (0-255).green: Green color (0-255).blue: Blue color (0-255).Sets custom vehicle xenon lights color, allowing to use RGB palette. The game will ignore lights color set by _SET_VEHICLE_XENON_LIGHTS_COLOR when custom color is active. This native is not synced between players. Requires xenon lights mod to be set on vehicle.Examples:Lualocal vehicle = GetVehiclePedIsUsing(PlayerPedId())\nif DoesEntityExist(vehicle) then\n  -- Toggle xenon lights mod.\n  ToggleVehicleMod(vehicle, 22, true)\n\n  -- Set pink lights color.\n  SetVehicleXenonLightsCustomColor(vehicle, 244, 5, 82)\nend",
+  "codeBlocks": [
+    "// SetVehicleXenonLightsCustomColor\nvoid SET_VEHICLE_XENON_LIGHTS_CUSTOM_COLOR(Vehicle vehicle, int red, int green, int blue);",
+    "local vehicle = GetVehiclePedIsUsing(PlayerPedId())\nif DoesEntityExist(vehicle) then\n  -- Toggle xenon lights mod.\n  ToggleVehicleMod(vehicle, 22, true)\n\n  -- Set pink lights color.\n  SetVehicleXenonLightsCustomColor(vehicle, 244, 5, 82)\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetVehicleXenonLightsCustomColor.md",
+    "https://docs.fivem.net/natives/?_0xE41033B25D003A07",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

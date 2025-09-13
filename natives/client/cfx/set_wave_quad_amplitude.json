@@ -1,0 +1,23 @@
+{
+  "title": "SET_WAVE_QUAD_AMPLITUDE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_WAVE_QUAD_AMPLITUDE"
+  ],
+  "content": "0xE4174B7B// SetWaveQuadAmplitude\nBOOL SET_WAVE_QUAD_AMPLITUDE(int waveQuad, float amplitude);Parameters:waveQuad: The wave quad indexamplitude: The amplitude valueReturns: Returns true on success.Examples:Lualocal success = SetWaveQuadAmplitude(0, 1.0)",
+  "codeBlocks": [
+    "// SetWaveQuadAmplitude\nBOOL SET_WAVE_QUAD_AMPLITUDE(int waveQuad, float amplitude);",
+    "local success = SetWaveQuadAmplitude(0, 1.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetWaveQuadAmplitude.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

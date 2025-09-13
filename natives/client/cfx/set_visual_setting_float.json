@@ -1,0 +1,23 @@
+{
+  "title": "SET_VISUAL_SETTING_FLOAT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_VISUAL_SETTING_FLOAT"
+  ],
+  "content": "0xD1D31681// SetVisualSettingFloat\nvoid SET_VISUAL_SETTING_FLOAT(char* name, float value);Parameters:name: The name of the value to set, such as pedLight.color.red.value: The value to write.Overrides a floating point value from visualsettings.dat temporarily.",
+  "codeBlocks": [
+    "// SetVisualSettingFloat\nvoid SET_VISUAL_SETTING_FLOAT(char* name, float value);",
+    "-- Example usage for SET_VISUAL_SETTING_FLOAT\nSetVisualSettingFloat('', 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetVisualSettingFloat.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

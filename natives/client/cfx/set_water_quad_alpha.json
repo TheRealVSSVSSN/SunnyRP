@@ -1,0 +1,23 @@
+{
+  "title": "SET_WATER_QUAD_ALPHA",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_WATER_QUAD_ALPHA"
+  ],
+  "content": "0xF49797EB// SetWaterQuadAlpha\nBOOL SET_WATER_QUAD_ALPHA(int waterQuad, int a0, int a1, int a2, int a3);Parameters:waterQuad: The water quad indexa0: The a0 levela1: The a1 levela2: The a2 levela3: The a3 levelReturns: Returns true on success.Examples:Lualocal success = SetWaterQuadAlpha(0, 5, 5, 5, 5)",
+  "codeBlocks": [
+    "// SetWaterQuadAlpha\nBOOL SET_WATER_QUAD_ALPHA(int waterQuad, int a0, int a1, int a2, int a3);",
+    "local success = SetWaterQuadAlpha(0, 5, 5, 5, 5)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetWaterQuadAlpha.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

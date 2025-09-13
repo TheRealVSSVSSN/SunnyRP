@@ -1,0 +1,23 @@
+{
+  "title": "SET_WAVE_QUAD_BOUNDS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_WAVE_QUAD_BOUNDS"
+  ],
+  "content": "0x1FCC1FAF// SetWaveQuadBounds\nBOOL SET_WAVE_QUAD_BOUNDS(int waveQuad, int minX, int minY, int maxX, int maxY);Parameters:waveQuad: The wave quad indexminX: The minX coordinateminY: The minY coordinatemaxX: The maxX coordinatemaxY: The maxY coordinateReturns: Returns true on success.This native allows you to update the bounds of a specified water quad index.Examples:Lualocal success = SetWaveQuadBounds(0, -5000, -5000, 5000, 5000)",
+  "codeBlocks": [
+    "// SetWaveQuadBounds\nBOOL SET_WAVE_QUAD_BOUNDS(int waveQuad, int minX, int minY, int maxX, int maxY);",
+    "local success = SetWaveQuadBounds(0, -5000, -5000, 5000, 5000)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetWaveQuadBounds.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

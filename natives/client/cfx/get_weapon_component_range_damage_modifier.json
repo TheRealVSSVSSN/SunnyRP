@@ -1,0 +1,23 @@
+{
+  "title": "GET_WEAPON_COMPONENT_RANGE_DAMAGE_MODIFIER",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_WEAPON_COMPONENT_RANGE_DAMAGE_MODIFIER"
+  ],
+  "content": "0xE134FB8D// GetWeaponComponentRangeDamageModifier\nfloat GET_WEAPON_COMPONENT_RANGE_DAMAGE_MODIFIER(Hash componentHash);Parameters:componentHash: Weapon component name hash.Returns: A weapon component damage modifier.A getter for CWeaponFallOffModifier damage modifier value in a weapon component.",
+  "codeBlocks": [
+    "// GetWeaponComponentRangeDamageModifier\nfloat GET_WEAPON_COMPONENT_RANGE_DAMAGE_MODIFIER(Hash componentHash);",
+    "-- Example usage for GET_WEAPON_COMPONENT_RANGE_DAMAGE_MODIFIER\nGetWeaponComponentRangeDamageModifier(GetHashKey('prop'))"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetWeaponComponentRangeDamageModifier.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

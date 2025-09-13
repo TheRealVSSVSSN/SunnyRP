@@ -1,0 +1,23 @@
+{
+  "title": "SET_WEAPONS_NO_AUTOSWAP",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_WEAPONS_NO_AUTOSWAP"
+  ],
+  "content": "0x2A7B50E// SetWeaponsNoAutoswap\nvoid SET_WEAPONS_NO_AUTOSWAP(BOOL state);Parameters:state: On/OffDisables autoswapping to another weapon when the current weapon runs out of ammo.",
+  "codeBlocks": [
+    "// SetWeaponsNoAutoswap\nvoid SET_WEAPONS_NO_AUTOSWAP(BOOL state);",
+    "-- Example usage for SET_WEAPONS_NO_AUTOSWAP\nSetWeaponsNoAutoswap(false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetWeaponsNoAutoswap.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

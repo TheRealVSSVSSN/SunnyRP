@@ -1,0 +1,24 @@
+{
+  "title": "STATE_BAG_HAS_KEY",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "STATE_BAG_HAS_KEY"
+  ],
+  "content": "0x12A330// StateBagHasKey\nbool STATE_BAG_HAS_KEY(char* bagName, char* key);Parameters:bagName: The name of the bag.key: The key used to check data existence.Returns: Returns true if the data associated with the specified key exists; otherwise, returns false.",
+  "codeBlocks": [
+    "// StateBagHasKey\nbool STATE_BAG_HAS_KEY(char* bagName, char* key);",
+    "-- Example usage for STATE_BAG_HAS_KEY\nStateBagHasKey('', '')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/StateBagHasKey.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client",
+    "server"
+  ]
+}
