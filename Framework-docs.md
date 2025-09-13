@@ -4,7 +4,7 @@ This document indexes the Example_Frameworks/ directory to guide development of 
 
 ## Scan Stamp & Inventory Overview
 
- TREE-SCAN-STAMP — 2025-09-13T00:43:16+00:00 — dirs:783 files:14434
+ TREE-SCAN-STAMP — 2025-09-13T02:54:30+00:00 — dirs:783 files:14434
 
 | Folder | Resources | Files | Server Files | Client Files | Shared Files |
 | --- | --- | --- | --- | --- | --- |
@@ -18,16 +18,37 @@ This document indexes the Example_Frameworks/ directory to guide development of 
 | vRP | 1 | 179 | 0 | 18 | 0 |
 | vorp_core-lua | 1 | 65 | 20 | 17 | 0 |
 
+## FULL DIRECTORY TREE
+
+```plaintext
+Example_Frameworks/
+└── FiveM-FSN-Framework/
+    ├── fsn_bankrobbery/
+    │   ├── cl_frontdesks.lua
+    │   ├── cl_safeanim.lua
+    │   ├── client.lua
+    │   ├── docs.md
+    │   ├── fxmanifest.lua
+    │   ├── server.lua
+    │   ├── sv_frontdesks.lua
+    │   └── trucks.lua
+    └── fsn_bennys/
+        ├── cl_bennys.lua
+        ├── cl_config.lua
+        ├── docs.md
+        ├── fxmanifest.lua
+        └── menu.lua
+```
 
 ## Processing Ledger
 
 | Scope | Total | Done | Remaining | Last Updated |
 | --- | --- | --- | --- | --- |
-| File Enumeration | 14434 | 751 | 13683 | 2025-09-13 |
-| Function Extraction | 28 | 28 | 0 | 2025-09-13 |
-| Event Extraction | 38 | 38 | 0 | 2025-09-13 |
-| Native Currency Checks | 87 | 87 | 0 | 2025-09-13 |
-| Similarity Merges | 2 | 2 | 0 | 2025-09-13 |
+| File Enumeration | 14434 | 761 | 13673 | 2025-09-13 |
+| Function Extraction | 38 | 38 | 0 | 2025-09-13 |
+| Event Extraction | 48 | 48 | 0 | 2025-09-13 |
+| Native Currency Checks | 92 | 92 | 0 | 2025-09-13 |
+| Similarity Merges | 3 | 3 | 0 | 2025-09-13 |
 
 ## Function & Event Registry
 
@@ -58,6 +79,16 @@ This document indexes the Example_Frameworks/ directory to guide development of 
 - [nearPos](#nearpos)
 - [registerAdminCommands](#registeradmincommands)
 - [registerAdminSuggestions](#registeradminsuggestions)
+- [afterHack](#afterhack)
+- [drawTxt](#drawtxt)
+- [round](#round)
+- [resultDisplay](#resultdisplay)
+- [loadAnimDict](#loadanimdict)
+- [crackingsafeanim](#crackingsafeanim)
+- [loadSafeTexture](#loadsafetexture)
+- [loadSafeAudio](#loadsafeaudio)
+- [setupModel](#setupmodel)
+- [spawnMoneyTruck](#spawnmoneytruck)
 - [registerModeratorCommands](#registermoderatorcommands)
 - [registerModeratorSuggestions](#registermoderatorsuggestions)
 - [saveApartment](#saveapartment)
@@ -106,6 +137,16 @@ This document indexes the Example_Frameworks/ directory to guide development of 
 - [toggleGUI](#togglegui)
 - [transferMoney](#transfermoney)
 - [withdrawMoney](#withdrawmoney)
+- [fsn_bankrobbery:timer](#fsn_bankrobberytimer)
+- [fsn_bankrobbery:desks:receive](#fsn_bankrobberydesksreceive)
+- [fsn_bankrobbery:desks:startHack](#fsn_bankrobberydesksstarthack)
+- [fsn_bankrobbery:desks:endHack](#fsn_bankrobberydesksendhack)
+- [safecracking:start](#safecrackingstart)
+- [safecracking:loop](#safecrackingloop)
+- [fsn_bankrobbery:vault:open](#fsn_bankrobberyvaultopen)
+- [fsn_bankrobbery:vault:close](#fsn_bankrobberyvaultclose)
+- [fsn_bankrobbery:init](#fsn_bankrobberyinit)
+- [fsn_bankrobbery:payout](#fsn_bankrobberypayout)
 
 ### 5.3 Functions — Detailed Entries
 
@@ -726,6 +767,208 @@ local id = getAvailableAppt(source)
 - **Security / Anti-Abuse**: ensures one apartment per source.
 - **References**:
   - https://docs.fivem.net/docs/
+
+#### afterHack
+- **Name**: afterHack
+- **Type**: Client
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bankrobbery/cl_frontdesks.lua (44-48)
+- **Signature(s)**: `afterHack(success)`
+- **Purpose**: Finalizes a front-desk hack attempt.
+- **Key Flows**:
+  - Sends hack result to server.
+  - Adds stress and hides the hacking UI.
+- **Natives Used**:
+  - TriggerServerEvent — OK
+  - TriggerEvent — OK
+- **OneSync / Networking Notes**: server trusts client-reported result.
+- **Examples**:
+```lua
+afterHack(true)
+```
+- **Security / Anti-Abuse**: susceptible to client spoofing.
+- **References**:
+  - https://docs.fivem.net/natives/
+
+#### drawTxt
+- **Name**: drawTxt
+- **Type**: Client
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bankrobbery/client.lua (41-54)
+- **Signature(s)**: `drawTxt(text, font, centre, x, y, scale, r, g, b, a)`
+- **Purpose**: Renders 2D HUD text.
+- **Key Flows**:
+  - Configures text properties and draws at screen coordinates.
+- **Natives Used**:
+  - SetTextFont — OK
+  - DrawText — OK
+- **OneSync / Networking Notes**: client-only.
+- **Examples**:
+```lua
+drawTxt('CODE REJECTED',4,1,0.5,0.5,0.6,255,255,255,255)
+```
+- **Security / Anti-Abuse**: none.
+- **References**:
+  - https://docs.fivem.net/natives/
+
+#### round
+- **Name**: round
+- **Type**: Client
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bankrobbery/client.lua (55-57)
+- **Signature(s)**: `round(num, numDecimalPlaces)`
+- **Purpose**: Utility to round numbers to decimals.
+- **Key Flows**:
+  - Uses powers of ten to round half-up.
+- **Natives Used**: none
+- **OneSync / Networking Notes**: local helper.
+- **Examples**:
+```lua
+local cash = round(amt, 2)
+```
+- **Security / Anti-Abuse**: none.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### resultDisplay
+- **Name**: resultDisplay
+- **Type**: Client
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bankrobbery/client.lua (59-161)
+- **Signature(s)**: `resultDisplay(accepted)`
+- **Purpose**: Shows keypad cracking success or failure feedback.
+- **Key Flows**:
+  - Spawns a thread displaying messages and sounds.
+- **Natives Used**:
+  - PlaySound — OK
+- **OneSync / Networking Notes**: local feedback only.
+- **Examples**:
+```lua
+resultDisplay(true)
+```
+- **Security / Anti-Abuse**: none.
+- **References**:
+  - https://docs.fivem.net/natives/
+
+#### loadAnimDict
+- **Name**: loadAnimDict
+- **Type**: Client
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bankrobbery/cl_safeanim.lua (154-159)
+- **Signature(s)**: `loadAnimDict(dict)`
+- **Purpose**: Ensures animation dictionary is loaded.
+- **Key Flows**:
+  - Requests and waits for anim dict.
+- **Natives Used**:
+  - HasAnimDictLoaded — OK
+  - RequestAnimDict — OK
+  - Wait — OK
+- **OneSync / Networking Notes**: none.
+- **Examples**:
+```lua
+loadAnimDict('mini@safe_cracking')
+```
+- **Security / Anti-Abuse**: none.
+- **References**:
+  - https://docs.fivem.net/natives/
+
+#### crackingsafeanim
+- **Name**: crackingsafeanim
+- **Type**: Client
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bankrobbery/cl_safeanim.lua (166-191)
+- **Signature(s)**: `crackingsafeanim(animType)`
+- **Purpose**: Plays safe cracking animations based on stage.
+- **Key Flows**:
+  - Loads animation dict and plays different clips.
+- **Natives Used**:
+  - TaskPlayAnim — OK
+  - IsEntityPlayingAnim — OK
+  - RequestAnimDict — OK
+- **OneSync / Networking Notes**: animation local to client.
+- **Examples**:
+```lua
+crackingsafeanim(1)
+```
+- **Security / Anti-Abuse**: none.
+- **References**:
+  - https://docs.fivem.net/natives/
+
+#### loadSafeTexture
+- **Name**: loadSafeTexture
+- **Type**: Client
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bankrobbery/cl_safeanim.lua (196-201)
+- **Signature(s)**: `loadSafeTexture()`
+- **Purpose**: Loads texture dictionary for safe-cracking UI.
+- **Key Flows**:
+  - Requests and waits for `MPSafeCracking` textures.
+- **Natives Used**:
+  - RequestStreamedTextureDict — OK
+  - HasStreamedTextureDictLoaded — OK
+  - Wait — OK
+- **OneSync / Networking Notes**: client-only.
+- **Examples**:
+```lua
+loadSafeTexture()
+```
+- **Security / Anti-Abuse**: none.
+- **References**:
+  - https://docs.fivem.net/natives/
+
+#### loadSafeAudio
+- **Name**: loadSafeAudio
+- **Type**: Client
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bankrobbery/cl_safeanim.lua (203-205)
+- **Signature(s)**: `loadSafeAudio()`
+- **Purpose**: Loads safe-cracking audio bank.
+- **Key Flows**:
+  - Requests ambient audio bank.
+- **Natives Used**:
+  - RequestAmbientAudioBank — OK
+- **OneSync / Networking Notes**: client-side sound.
+- **Examples**:
+```lua
+loadSafeAudio()
+```
+- **Security / Anti-Abuse**: none.
+- **References**:
+  - https://docs.fivem.net/natives/
+
+#### setupModel
+- **Name**: setupModel
+- **Type**: Client
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bankrobbery/trucks.lua (50-57)
+- **Signature(s)**: `setupModel(model)`
+- **Purpose**: Loads and prepares a model for spawning.
+- **Key Flows**:
+  - Requests model and waits for load.
+- **Natives Used**:
+  - RequestModel — OK
+  - HasModelLoaded — OK
+  - SetModelAsNoLongerNeeded — OK
+- **OneSync / Networking Notes**: model loading local.
+- **Examples**:
+```lua
+setupModel(moneyTruckHash)
+```
+- **Security / Anti-Abuse**: none.
+- **References**:
+  - https://docs.fivem.net/natives/
+
+#### spawnMoneyTruck
+- **Name**: spawnMoneyTruck
+- **Type**: Client
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bankrobbery/trucks.lua (60-113)
+- **Signature(s)**: `spawnMoneyTruck(delayTime, truckId, boolNew)`
+- **Purpose**: Spawns an armored truck with guard peds and blips.
+- **Key Flows**:
+  - Loads models, creates vehicle and peds, assigns tasks.
+- **Natives Used**:
+  - CreateVehicle — OK
+  - CreatePedInsideVehicle — OK
+  - TaskVehicleDriveToCoordLongrange — OK
+- **OneSync / Networking Notes**: spawned entities locally; server not aware.
+- **Examples**:
+```lua
+spawnMoneyTruck(0, 1, true)
+```
+- **Security / Anti-Abuse**: spawning unchecked may allow misuse.
+- **References**:
+  - https://docs.fivem.net/natives/
 
 ### 5.4 Events — Detailed Entries
 
@@ -1425,11 +1668,193 @@ RegisterNUICallback('withdrawMoney', function(data) ... end)
 - **References**:
   - https://docs.fivem.net/docs/
 
+#### fsn_bankrobbery:timer
+- **Event**: fsn_bankrobbery:timer
+- **Direction**: Server→Client
+- **Type**: NetEvent
+- **Defined In**:
+  - Example_Frameworks/FiveM-FSN-Framework/fsn_bankrobbery/client.lua (15-21)
+  - Example_Frameworks/FiveM-FSN-Framework/fsn_bankrobbery/server.lua (26-35)
+- **Payload**: `state` boolean
+- **Typical Callers / Listeners**: server broadcasts cooldown; clients enable or disable robbery.
+- **Natives Used**: none
+- **OneSync / Replication Notes**: synced to all players each second.
+- **Examples**:
+```lua
+AddEventHandler('fsn_bankrobbery:timer', function(state) canrob = state end)
+```
+- **Security / Anti-Abuse**: server controls state.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### fsn_bankrobbery:desks:receive
+- **Event**: fsn_bankrobbery:desks:receive
+- **Direction**: Server→Client
+- **Type**: NetEvent
+- **Defined In**:
+  - Example_Frameworks/FiveM-FSN-Framework/fsn_bankrobbery/cl_frontdesks.lua (11-14)
+  - Example_Frameworks/FiveM-FSN-Framework/fsn_bankrobbery/sv_frontdesks.lua (36-47,49-56,58-79)
+- **Payload**: `desks` table
+- **Typical Callers / Listeners**: server sends desk states; client updates local data.
+- **Natives Used**: none
+- **OneSync / Replication Notes**: broadcast to all clients when desks change.
+- **Examples**:
+```lua
+AddEventHandler('fsn_bankrobbery:desks:receive', function(tbl) desks = tbl end)
+```
+- **Security / Anti-Abuse**: assumes trusted server data.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### fsn_bankrobbery:desks:startHack
+- **Event**: fsn_bankrobbery:desks:startHack
+- **Direction**: Client→Server
+- **Type**: NetEvent
+- **Defined In**:
+  - Example_Frameworks/FiveM-FSN-Framework/fsn_bankrobbery/cl_frontdesks.lua (43)
+  - Example_Frameworks/FiveM-FSN-Framework/fsn_bankrobbery/sv_frontdesks.lua (49-56)
+- **Payload**: `bank` number, `keyboard` number
+- **Typical Callers / Listeners**: client initiates hack; server marks keyboard state.
+- **Natives Used**: none
+- **OneSync / Replication Notes**: server updates all clients with new state.
+- **Examples**:
+```lua
+TriggerServerEvent('fsn_bankrobbery:desks:startHack', bankId, keyId)
+```
+- **Security / Anti-Abuse**: server does not verify player proximity.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### fsn_bankrobbery:desks:endHack
+- **Event**: fsn_bankrobbery:desks:endHack
+- **Direction**: Client→Server
+- **Type**: NetEvent
+- **Defined In**:
+  - Example_Frameworks/FiveM-FSN-Framework/fsn_bankrobbery/cl_frontdesks.lua (45-46)
+  - Example_Frameworks/FiveM-FSN-Framework/fsn_bankrobbery/sv_frontdesks.lua (58-79)
+- **Payload**: `bank` number, `keyboard` number, `success` boolean
+- **Typical Callers / Listeners**: client reports hack result; server pays out or marks failure.
+- **Natives Used**: none
+- **OneSync / Replication Notes**: outcome trusted from client.
+- **Examples**:
+```lua
+TriggerServerEvent('fsn_bankrobbery:desks:endHack', bankId, keyId, true)
+```
+- **Security / Anti-Abuse**: client can falsify success.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### safecracking:start
+- **Event**: safecracking:start
+- **Direction**: External→Client
+- **Type**: LocalEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bankrobbery/cl_safeanim.lua (9-13)
+- **Payload**: none
+- **Typical Callers / Listeners**: external script triggers to begin safe minigame.
+- **Natives Used**:
+  - TriggerEvent — OK
+- **OneSync / Replication Notes**: client-only UI.
+- **Examples**:
+```lua
+TriggerEvent('safecracking:start')
+```
+- **Security / Anti-Abuse**: gated by caller.
+- **References**:
+  - https://docs.fivem.net/natives/
+
+#### safecracking:loop
+- **Event**: safecracking:loop
+- **Direction**: External→Client
+- **Type**: LocalEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bankrobbery/cl_safeanim.lua (16-205)
+- **Payload**: none
+- **Typical Callers / Listeners**: invoked by safecracking:start to run the minigame loop.
+- **Natives Used**:
+  - DrawSprite — OK
+  - IsControlPressed — OK
+- **OneSync / Replication Notes**: runs purely on client.
+- **Examples**:
+```lua
+TriggerEvent('safecracking:loop')
+```
+- **Security / Anti-Abuse**: client can terminate early.
+- **References**:
+  - https://docs.fivem.net/natives/
+
+#### fsn_bankrobbery:vault:open
+- **Event**: fsn_bankrobbery:vault:open
+- **Direction**: Client→Server
+- **Type**: NetEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bankrobbery/server.lua (58-63)
+- **Payload**: `id` number
+- **Typical Callers / Listeners**: client requests vault open; server broadcasts door state.
+- **Natives Used**: none
+- **OneSync / Replication Notes**: door state synced to all clients.
+- **Examples**:
+```lua
+TriggerServerEvent('fsn_bankrobbery:vault:open', 1)
+```
+- **Security / Anti-Abuse**: server does not validate requirements.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### fsn_bankrobbery:vault:close
+- **Event**: fsn_bankrobbery:vault:close
+- **Direction**: Client→Server
+- **Type**: NetEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bankrobbery/server.lua (70-75)
+- **Payload**: `id` number
+- **Typical Callers / Listeners**: client indicates leaving; server resets door.
+- **Natives Used**: none
+- **OneSync / Replication Notes**: broadcasts new state.
+- **Examples**:
+```lua
+TriggerServerEvent('fsn_bankrobbery:vault:close', 1)
+```
+- **Security / Anti-Abuse**: no position verification.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### fsn_bankrobbery:init
+- **Event**: fsn_bankrobbery:init
+- **Direction**: Client→Server
+- **Type**: NetEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bankrobbery/server.lua (77-81)
+- **Payload**: none
+- **Typical Callers / Listeners**: client requests current vault states on load.
+- **Natives Used**: none
+- **OneSync / Replication Notes**: server replies with vault data.
+- **Examples**:
+```lua
+TriggerServerEvent('fsn_bankrobbery:init')
+```
+- **Security / Anti-Abuse**: server trusts caller identity.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### fsn_bankrobbery:payout
+- **Event**: fsn_bankrobbery:payout
+- **Direction**: Client→Server
+- **Type**: NetEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bankrobbery/server.lua (83-97)
+- **Payload**: `id` number
+- **Typical Callers / Listeners**: client requests vault rewards; server grants dirty money.
+- **Natives Used**: none
+- **OneSync / Replication Notes**: payout amount computed server-side.
+- **Examples**:
+```lua
+TriggerServerEvent('fsn_bankrobbery:payout', 1)
+```
+- **Security / Anti-Abuse**: lacks item or police checks.
+- **References**:
+  - https://docs.fivem.net/docs/
+
 ## Similarity Merge Report
 - Canonicalized identical helper functions.
 - Merged `createBlips` definitions (fishing, hunting, yoga).
 - Merged `getNearestSpot` definitions (fishing, yoga).
 - Grouped outfit management events under `fsn_apartments:outfit:add`.
+- Merged `fsn_drawText3D` usage across apartments and bankrobbery.
 - TODO(next-run): review other activity helpers for consolidation.
 - TODO(next-run): reconcile duplicated instance events across client/server.
 
@@ -1442,5 +1867,5 @@ RegisterNUICallback('withdrawMoney', function(data) ... end)
 
 ## PROGRESS MARKERS (EOF)
 
-CONTINUE-HERE — 2025-09-13T00:43:16+00:00 — next: FiveM-FSN-Framework/fsn_bankrobbery/agents.md @ line 1
-MERGE-QUEUE — 2025-09-13T00:43:16+00:00 — remaining: 0 (top 5: n/a)
+CONTINUE-HERE — 2025-09-13T02:54:30+00:00 — next: FiveM-FSN-Framework/fsn_bennys/cl_config.lua @ line 1
+MERGE-QUEUE — 2025-09-13T02:54:30+00:00 — remaining: 0 (top 5: n/a)
