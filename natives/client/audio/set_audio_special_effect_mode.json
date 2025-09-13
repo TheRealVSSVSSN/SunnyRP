@@ -1,0 +1,24 @@
+{
+  "title": "SET_AUDIO_SPECIAL_EFFECT_MODE",
+  "breadcrumbs": [
+    "Native Reference",
+    "AUDIOAPI",
+    "SET_AUDIO_SPECIAL_EFFECT_MODE"
+  ],
+  "content": "0x12561FCBB62D5B9C0x62B43677// SetAudioSpecialEffectMode\nvoid SET_AUDIO_SPECIAL_EFFECT_MODE(int mode);Parameters:mode: Audio mode to apply this frameNeeds to be called every frame.enum eAudSpecialEffectMode\n{\n\tkSpecialEffectModeNormal = 0,\n\tkSpecialEffectModeUnderwater = 1,\n\tkSpecialEffectModeStoned = 2,\n\tkSpecialEffectModePauseMenu = 3,\n\tkSpecialEffectModeSlowMotion = 4,\n\tkSpecialEffectModeDrunkStage01 = 5,\n\tkSpecialEffectModeDrunkStage02 = 6,\n\tkSpecialEffectModeDrunkStage03 = 7,\n\tNUM_AUDSPECIALEFFECTMODE\n};",
+  "codeBlocks": [
+    "// SetAudioSpecialEffectMode\nvoid SET_AUDIO_SPECIAL_EFFECT_MODE(int mode);",
+    "enum eAudSpecialEffectMode\n{\n\tkSpecialEffectModeNormal = 0,\n\tkSpecialEffectModeUnderwater = 1,\n\tkSpecialEffectModeStoned = 2,\n\tkSpecialEffectModePauseMenu = 3,\n\tkSpecialEffectModeSlowMotion = 4,\n\tkSpecialEffectModeDrunkStage01 = 5,\n\tkSpecialEffectModeDrunkStage02 = 6,\n\tkSpecialEffectModeDrunkStage03 = 7,\n\tNUM_AUDSPECIALEFFECTMODE\n};",
+    "-- Example usage for SET_AUDIO_SPECIAL_EFFECT_MODE\nSetAudioSpecialEffectMode(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/AUDIO/SetAudioSpecialEffectMode.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

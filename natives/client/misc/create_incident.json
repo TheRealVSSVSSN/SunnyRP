@@ -1,0 +1,25 @@
+{
+  "title": "CREATE_INCIDENT",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "CREATE_INCIDENT"
+  ],
+  "content": "0x3F892CAF67444AE70xFC5FF7B3// CreateIncident\nBOOL CREATE_INCIDENT(int dispatchService, float x, float y, float z, int numUnits, float radius, int* outIncidentID);Parameters:dispatchService: Refer to ENABLE_DISPATCH_SERVICE for dispatch typesx: y: z: numUnits: radius: outIncidentID: NativeDB Added Parameter 8: Any p7\nNativeDB Added Parameter 9: Any p8",
+  "codeBlocks": [
+    "// CreateIncident\nBOOL CREATE_INCIDENT(int dispatchService, float x, float y, float z, int numUnits, float radius, int* outIncidentID);",
+    "NativeDB Added Parameter 8: Any p7\nNativeDB Added Parameter 9: Any p8",
+    "-- Example usage for CREATE_INCIDENT\nCreateIncident(0, 0.0, 0.0, 0.0, 0, 0.0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/CreateIncident.md",
+    "https://docs.fivem.net/natives/?_0xDC0F817884CDD856",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

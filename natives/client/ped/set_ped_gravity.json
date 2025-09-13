@@ -1,0 +1,24 @@
+{
+  "title": "SET_PED_GRAVITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "SET_PED_GRAVITY"
+  ],
+  "content": "0x9FF447B6B6AD960A0x3CA16652// SetPedGravity\nvoid SET_PED_GRAVITY(Ped ped, BOOL toggle);enable or disable the gravity of a ped  \nExamples:  \nPED::SET_PED_GRAVITY(PLAYER::PLAYER_PED_ID(), 0x00000001);  \nPED::SET_PED_GRAVITY(Local_289[iVar0 /*20*/], 0x00000001);",
+  "codeBlocks": [
+    "// SetPedGravity\nvoid SET_PED_GRAVITY(Ped ped, BOOL toggle);",
+    "enable or disable the gravity of a ped  \nExamples:  \nPED::SET_PED_GRAVITY(PLAYER::PLAYER_PED_ID(), 0x00000001);  \nPED::SET_PED_GRAVITY(Local_289[iVar0 /*20*/], 0x00000001);",
+    "local ped = PlayerPedId()\n-- Example usage for SET_PED_GRAVITY\nSetPedGravity(ped, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/SetPedGravity.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "title": "CELL_CAM_ACTIVATE",
+  "breadcrumbs": [
+    "Native Reference",
+    "MOBILEAPI",
+    "CELL_CAM_ACTIVATE"
+  ],
+  "content": "0xFDE8F069C542D1260x234C1AE9// CellCamActivate\nvoid CELL_CAM_ACTIVATE(BOOL active, BOOL bGoFirstPerson);Parameters:active: Toggle whether the camera should be active.bGoFirstPerson: Unused parameter.Activates the cellphone camera. Make sure you have a mobile phone created with CREATE_MOBILE_PHONE or else the camera will not work.",
+  "codeBlocks": [
+    "// CellCamActivate\nvoid CELL_CAM_ACTIVATE(BOOL active, BOOL bGoFirstPerson);",
+    "-- Example usage for CELL_CAM_ACTIVATE\nCellCamActivate(false, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MOBILE/CellCamActivate.md",
+    "https://docs.fivem.net/natives/?_0xA4E8E696C532FBC7",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

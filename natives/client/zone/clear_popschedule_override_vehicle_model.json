@@ -1,0 +1,24 @@
+{
+  "title": "CLEAR_POPSCHEDULE_OVERRIDE_VEHICLE_MODEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "ZONEAPI",
+    "CLEAR_POPSCHEDULE_OVERRIDE_VEHICLE_MODEL"
+  ],
+  "content": "0x5C0DE367AA0D911C0x7A72A24E// ClearPopscheduleOverrideVehicleModel\nvoid CLEAR_POPSCHEDULE_OVERRIDE_VEHICLE_MODEL(int scheduleId);Only used once in the decompiled scripts. Seems to be related to scripted vehicle generators.  \nModified example from \"am_imp_exp.c4\", line 6418:  \n/* popSchedules[0] = ZONE::GET_ZONE_POPSCHEDULE(ZONE::GET_ZONE_AT_COORDS(891.3, 807.9, 188.1));  \netc.  \n*/  \nSTREAMING::SET_MODEL_AS_NO_LONGER_NEEDED(vehicleHash);  \nZONE::CLEAR_POPSCHEDULE_OVERRIDE_VEHICLE_MODEL(popSchedules[index]);",
+  "codeBlocks": [
+    "// ClearPopscheduleOverrideVehicleModel\nvoid CLEAR_POPSCHEDULE_OVERRIDE_VEHICLE_MODEL(int scheduleId);",
+    "Only used once in the decompiled scripts. Seems to be related to scripted vehicle generators.  \nModified example from \"am_imp_exp.c4\", line 6418:  \n/* popSchedules[0] = ZONE::GET_ZONE_POPSCHEDULE(ZONE::GET_ZONE_AT_COORDS(891.3, 807.9, 188.1));  \netc.  \n*/  \nSTREAMING::SET_MODEL_AS_NO_LONGER_NEEDED(vehicleHash);  \nZONE::CLEAR_POPSCHEDULE_OVERRIDE_VEHICLE_MODEL(popSchedules[index]);",
+    "-- Example usage for CLEAR_POPSCHEDULE_OVERRIDE_VEHICLE_MODEL\nClearPopscheduleOverrideVehicleModel(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ZONE/ClearPopscheduleOverrideVehicleModel.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

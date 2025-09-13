@@ -1,0 +1,24 @@
+{
+  "title": "GET_NUMBER_OF_PED_PROP_DRAWABLE_VARIATIONS",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "GET_NUMBER_OF_PED_PROP_DRAWABLE_VARIATIONS"
+  ],
+  "content": "0x5FAF9754E789FB470xC9780B95// GetNumberOfPedPropDrawableVariations\nint GET_NUMBER_OF_PED_PROP_DRAWABLE_VARIATIONS(Ped ped, int propId);Parameters:ped: The ped handle.propId: The prop id you want to get the drawable variations of. Refer to SET_PED_PROP_INDEX",
+  "codeBlocks": [
+    "// GetNumberOfPedPropDrawableVariations\nint GET_NUMBER_OF_PED_PROP_DRAWABLE_VARIATIONS(Ped ped, int propId);",
+    "local ped = PlayerPedId()\n-- Example usage for GET_NUMBER_OF_PED_PROP_DRAWABLE_VARIATIONS\nGetNumberOfPedPropDrawableVariations(ped, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/GetNumberOfPedPropDrawableVariations.md",
+    "https://docs.fivem.net/natives/?_0x93376B65A266EB5F",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

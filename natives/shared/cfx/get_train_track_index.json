@@ -1,0 +1,24 @@
+{
+  "title": "GET_TRAIN_TRACK_INDEX",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_TRAIN_TRACK_INDEX"
+  ],
+  "content": "0x9AA339D// GetTrainTrackIndex\nint GET_TRAIN_TRACK_INDEX(Vehicle train);Parameters:train: The train handleReturns: The track index the train is currently on.",
+  "codeBlocks": [
+    "// GetTrainTrackIndex\nint GET_TRAIN_TRACK_INDEX(Vehicle train);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for GET_TRAIN_TRACK_INDEX\nGetTrainTrackIndex(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetTrainTrackIndex.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client",
+    "server"
+  ]
+}

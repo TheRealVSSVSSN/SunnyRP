@@ -1,0 +1,23 @@
+{
+  "title": "SET_ROPE_LENGTH_CHANGE_RATE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_ROPE_LENGTH_CHANGE_RATE"
+  ],
+  "content": "0x69B680A7// SetRopeLengthChangeRate\nvoid SET_ROPE_LENGTH_CHANGE_RATE(int rope, float lengthChangeRate);Parameters:rope: The rope to set the length change rate for.lengthChangeRate: The rope's new length change rate.Set's the ropes length change rate, which is the speed that rope should wind if started.",
+  "codeBlocks": [
+    "// SetRopeLengthChangeRate\nvoid SET_ROPE_LENGTH_CHANGE_RATE(int rope, float lengthChangeRate);",
+    "-- Example usage for SET_ROPE_LENGTH_CHANGE_RATE\nSetRopeLengthChangeRate(0, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetRopeLengthChangeRate.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

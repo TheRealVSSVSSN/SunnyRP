@@ -1,0 +1,24 @@
+{
+  "title": "GET_TRAIN_STATE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_TRAIN_STATE"
+  ],
+  "content": "0x81B50033// GetTrainState\nint GET_TRAIN_STATE(Vehicle train);Parameters:train: The train handleReturns: The trains current state`cpp\nenum eTrainState\n{\n    MOVING = 0,\n    ENTERING_STATION,\n    OPENING_DOORS,\n    STOPPED,\n    CLOSING_DOORS,\n    LEAVING_STATION,\n}",
+  "codeBlocks": [
+    "// GetTrainState\nint GET_TRAIN_STATE(Vehicle train);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for GET_TRAIN_STATE\nGetTrainState(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetTrainState.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client",
+    "server"
+  ]
+}

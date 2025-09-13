@@ -1,0 +1,22 @@
+{
+  "title": "IS_SCALEFORM_MOVIE_METHOD_RETURN_VALUE_READY",
+  "breadcrumbs": [
+    "GRAPHICSAPI",
+    "IS_SCALEFORM_MOVIE_METHOD_RETURN_VALUE_READY"
+  ],
+  "content": "0x768FF8961BA904D60x5CD7C3C0// IsScaleformMovieMethodReturnValueReady\nBOOL IS_SCALEFORM_MOVIE_METHOD_RETURN_VALUE_READY(int method_return);Parameters:method_return: The return value of this native: EndScaleformMovieMethodReturnReturns: Returns true if the return value of a scaleform function is ready to be collectedmethodReturn: The return value of this native: END_SCALEFORM_MOVIE_METHOD_RETURN_VALUE\nReturns true if the return value of a scaleform function is ready to be collected (using GET_SCALEFORM_MOVIE_METHOD_RETURN_VALUE_STRING or GET_SCALEFORM_MOVIE_METHOD_RETURN_VALUE_INT).Old name:  _GET_SCALEFORM_MOVIE_FUNCTION_RETURN_BOOL",
+  "codeBlocks": [
+    "// IsScaleformMovieMethodReturnValueReady\nBOOL IS_SCALEFORM_MOVIE_METHOD_RETURN_VALUE_READY(int method_return);",
+    "-- Example usage for IS_SCALEFORM_MOVIE_METHOD_RETURN_VALUE_READY\nIsScaleformMovieMethodReturnValueReady(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/IsScaleformMovieMethodReturnValueReady.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "title": "GET_WATER_QUAD_LEVEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_WATER_QUAD_LEVEL"
+  ],
+  "content": "0x6523816B// GetWaterQuadLevel\nBOOL GET_WATER_QUAD_LEVEL(int waterQuad, float* waterQuadLevel);Parameters:waterQuad: The returned water quad levelwaterQuadLevel: Returns: Returns true on success. Level is undefined on failurelevel is defined as \"z\" in water.xmlExamples:Lualocal success, waterQuadLevel = GetWaterQuadLevel(0)",
+  "codeBlocks": [
+    "// GetWaterQuadLevel\nBOOL GET_WATER_QUAD_LEVEL(int waterQuad, float* waterQuadLevel);",
+    "local success, waterQuadLevel = GetWaterQuadLevel(0)",
+    "-- Example usage for GET_WATER_QUAD_LEVEL\nGetWaterQuadLevel(0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetWaterQuadLevel.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

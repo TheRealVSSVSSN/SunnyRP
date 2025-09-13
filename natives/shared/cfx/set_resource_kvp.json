@@ -1,0 +1,26 @@
+{
+  "title": "SET_RESOURCE_KVP",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_RESOURCE_KVP"
+  ],
+  "content": "0x21C7A35B// SetResourceKvp\nvoid SET_RESOURCE_KVP(char* key, char* value);Parameters:key: The key to setvalue: The value to writeA setter for GET_RESOURCE_KVP_STRING.Examples:LuaSetResourceKvp('mollis', 'vesuvius citrate')",
+  "codeBlocks": [
+    "// SetResourceKvp\nvoid SET_RESOURCE_KVP(char* key, char* value);",
+    "SetResourceKvp('mollis', 'vesuvius citrate')",
+    "-- Example usage for SET_RESOURCE_KVP\nSetResourceKvp('', '')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetResourceKvp.md",
+    "https://docs.fivem.net/natives/?_0x5240DA5A",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client",
+    "server"
+  ]
+}

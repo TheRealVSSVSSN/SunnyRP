@@ -1,0 +1,25 @@
+{
+  "title": "SET_VEHICLE_ENVEFF_SCALE",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "SET_VEHICLE_ENVEFF_SCALE"
+  ],
+  "content": "0x3AFDC536C3D016740x8332730C// SetVehicleEnveffScale\nvoid SET_VEHICLE_ENVEFF_SCALE(Vehicle vehicle, float fade);Parameters:vehicle: Target vehiclefade: The paint fade effect strengthExamples with a besra:fade value 0.0fade value 0.5fade value 1.0The parameter fade is a value from 0-1, where 0 is fresh paint.Old name:  _SET_VEHICLE_PAINT_FADE",
+  "codeBlocks": [
+    "// SetVehicleEnveffScale\nvoid SET_VEHICLE_ENVEFF_SCALE(Vehicle vehicle, float fade);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for SET_VEHICLE_ENVEFF_SCALE\nSetVehicleEnveffScale(vehicle, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetVehicleEnveffScale.md",
+    "https://i.imgur.com/DXNk63e.jpg",
+    "https://i.imgur.com/2Vb35fq.jpg",
+    "https://i.imgur.com/aa8cxaD.jpg",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "GET_IS_PLAYER_DRIVING_ON_HIGHWAY",
+  "breadcrumbs": [
+    "PLAYERAPI",
+    "GET_IS_PLAYER_DRIVING_ON_HIGHWAY"
+  ],
+  "content": "0x5FC472C501CCADB30x46E7E31D// GetIsPlayerDrivingOnHighway\nBOOL GET_IS_PLAYER_DRIVING_ON_HIGHWAY(Player playerId);Parameters:playerId: The local index of the player to check (see PLAYER_ID)Returns: Returns a boolean value representing if the player is driving on a highway.Examples:Lua-- Get and store the local player index\nlocal playerId = PlayerId()\n\nif GetIsPlayerDrivingOnHighway(playerId) then\n    print(\"Player is driving on a highway!\")\nelse\n    print(\"Player is not driving on a highway.\")\nend",
+  "codeBlocks": [
+    "// GetIsPlayerDrivingOnHighway\nBOOL GET_IS_PLAYER_DRIVING_ON_HIGHWAY(Player playerId);",
+    "local player = source\n-- Example usage for GET_IS_PLAYER_DRIVING_ON_HIGHWAY\nGetIsPlayerDrivingOnHighway(player)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PLAYER/GetIsPlayerDrivingOnHighway.md",
+    "https://docs.fivem.net/natives/?_0x4F8644AF03D0E0D6",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

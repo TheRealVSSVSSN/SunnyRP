@@ -1,0 +1,22 @@
+{
+  "title": "SET_PLAYER_LOCKON",
+  "breadcrumbs": [
+    "PLAYERAPI",
+    "SET_PLAYER_LOCKON"
+  ],
+  "content": "0x5C8B2F450EE4328E0x0B270E0F// SetPlayerLockon\nvoid SET_PLAYER_LOCKON(Player player, BOOL toggle);Parameters:player: The player ID to toggle the lock on for.toggle: Set to false to prevent lock on, set to true to allow for lock on.Used to toggle the square up aim.Examples:Lualocal plyId = PlayerId()\nSetPlayerLockon(plyId, false)",
+  "codeBlocks": [
+    "// SetPlayerLockon\nvoid SET_PLAYER_LOCKON(Player player, BOOL toggle);",
+    "local player = source\n-- Example usage for SET_PLAYER_LOCKON\nSetPlayerLockon(player, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PLAYER/SetPlayerLockon.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

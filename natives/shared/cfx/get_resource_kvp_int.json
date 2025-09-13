@@ -1,0 +1,26 @@
+{
+  "title": "GET_RESOURCE_KVP_INT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_RESOURCE_KVP_INT"
+  ],
+  "content": "0x557B586A// GetResourceKvpInt\nint GET_RESOURCE_KVP_INT(char* key);Parameters:key: The key to fetchReturns: The integer value stored under the specified key, or 0 if not found.A getter for SET_RESOURCE_KVP_INT.Examples:Lualocal kvpValue = GetResourceKvpInt('bananabread') \nif kvpValue ~= 0 then\n\t-- do something!\nend",
+  "codeBlocks": [
+    "// GetResourceKvpInt\nint GET_RESOURCE_KVP_INT(char* key);",
+    "local kvpValue = GetResourceKvpInt('bananabread') \nif kvpValue ~= 0 then\n\t-- do something!\nend",
+    "-- Example usage for GET_RESOURCE_KVP_INT\nGetResourceKvpInt('')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetResourceKvpInt.md",
+    "https://docs.fivem.net/natives/?_0x6A2B1E8",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client",
+    "server"
+  ]
+}

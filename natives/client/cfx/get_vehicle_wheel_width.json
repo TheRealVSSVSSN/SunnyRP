@@ -1,0 +1,23 @@
+{
+  "title": "GET_VEHICLE_WHEEL_WIDTH",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_VEHICLE_WHEEL_WIDTH"
+  ],
+  "content": "0x9C7B59F9// GetVehicleWheelWidth\nfloat GET_VEHICLE_WHEEL_WIDTH(Vehicle vehicle);Parameters:vehicle: The vehicle to obtain data for.Returns: Float representing width of the wheel (usually between 0.1 and 1.5)Returns vehicle's wheels' width (width is the same for all the wheels, cannot get/set specific wheel of vehicle).\nOnly works on non-default wheels (returns 0 in case of default wheels).",
+  "codeBlocks": [
+    "// GetVehicleWheelWidth\nfloat GET_VEHICLE_WHEEL_WIDTH(Vehicle vehicle);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for GET_VEHICLE_WHEEL_WIDTH\nGetVehicleWheelWidth(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetVehicleWheelWidth.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

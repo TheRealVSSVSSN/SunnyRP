@@ -1,0 +1,24 @@
+{
+  "title": "_ATTACH_CAM_TO_VEHICLE_BONE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CAMAPI",
+    "_ATTACH_CAM_TO_VEHICLE_BONE"
+  ],
+  "content": "0x8DB3F12A02CAEF72// AttachCamToVehicleBone\nvoid _ATTACH_CAM_TO_VEHICLE_BONE(Cam cam, Vehicle vehicle, int boneIndex, BOOL relativeRotation, float rotX, float rotY, float rotZ, float offX, float offY, float offZ, BOOL fixedDirection);Parameters:cam: The camera handle.vehicle: The vehicle handle.boneIndex: relativeRotation: Whether or not the camera rotation will relative the vehicle rotation.rotX: The X rotation.rotY: The Y rotation.rotZ: The Z rotation.offX: The X offset direction.offY: The Y offset direction.offZ: The Z offset direction.fixedDirection: Whether or not the camera direction will relative to the vehicle direction.This native works with vehicles only.\nBone indexes are usually given by this native GET_ENTITY_BONE_INDEX_BY_NAME.",
+  "codeBlocks": [
+    "// AttachCamToVehicleBone\nvoid _ATTACH_CAM_TO_VEHICLE_BONE(Cam cam, Vehicle vehicle, int boneIndex, BOOL relativeRotation, float rotX, float rotY, float rotZ, float offX, float offY, float offZ, BOOL fixedDirection);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for _ATTACH_CAM_TO_VEHICLE_BONE\n_AttachCamToVehicleBone(0, vehicle, 0, false, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CAM/AttachCamToVehicleBone.md",
+    "https://docs.fivem.net/natives/?_0xFB71170B7E76ACBA",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

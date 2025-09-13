@@ -1,0 +1,24 @@
+{
+  "title": "SET_STATIC_EMITTER_ENABLED",
+  "breadcrumbs": [
+    "Native Reference",
+    "AUDIOAPI",
+    "SET_STATIC_EMITTER_ENABLED"
+  ],
+  "content": "0x399D2D3B33F1B8EB0x91F72E92// SetStaticEmitterEnabled\nvoid SET_STATIC_EMITTER_ENABLED(char* emitterName, BOOL toggle);Example:\nAUDIO::SET_STATIC_EMITTER_ENABLED((Any*)\"LOS_SANTOS_VANILLA_UNICORN_01_STAGE\", false);    AUDIO::SET_STATIC_EMITTER_ENABLED((Any*)\"LOS_SANTOS_VANILLA_UNICORN_02_MAIN_ROOM\", false);    AUDIO::SET_STATIC_EMITTER_ENABLED((Any*)\"LOS_SANTOS_VANILLA_UNICORN_03_BACK_ROOM\", false);\nThis turns off surrounding sounds not connected directly to peds.",
+  "codeBlocks": [
+    "// SetStaticEmitterEnabled\nvoid SET_STATIC_EMITTER_ENABLED(char* emitterName, BOOL toggle);",
+    "Example:\nAUDIO::SET_STATIC_EMITTER_ENABLED((Any*)\"LOS_SANTOS_VANILLA_UNICORN_01_STAGE\", false);    AUDIO::SET_STATIC_EMITTER_ENABLED((Any*)\"LOS_SANTOS_VANILLA_UNICORN_02_MAIN_ROOM\", false);    AUDIO::SET_STATIC_EMITTER_ENABLED((Any*)\"LOS_SANTOS_VANILLA_UNICORN_03_BACK_ROOM\", false);\nThis turns off surrounding sounds not connected directly to peds.",
+    "-- Example usage for SET_STATIC_EMITTER_ENABLED\nSetStaticEmitterEnabled('', false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/AUDIO/SetStaticEmitterEnabled.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

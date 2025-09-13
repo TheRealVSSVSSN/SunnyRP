@@ -1,0 +1,23 @@
+{
+  "title": "GET_LIVERY_NAME",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "GET_LIVERY_NAME"
+  ],
+  "content": "0xB4C7A93837C91A1F0xED80B5BE// GetLiveryName\nchar* GET_LIVERY_NAME(Vehicle vehicle, int liveryIndex);Second Param = LiveryIndex  \nexample   \nint count = VEHICLE::GET_VEHICLE_LIVERY_COUNT(veh);  \nfor (int i = 0; i < count; i++)    \n\t{  \nchar* LiveryName = VEHICLE::GET_LIVERY_NAME(veh, i);  \n\t}  \nthis example will work fine to fetch all names   \nfor example for Sanchez we get   \nSANC_LV1  \nSANC_LV2  \nSANC_LV3  \nSANC_LV4  \nSANC_LV5  \nUse _GET_LABEL_TEXT, to get the localized livery name.  \nNOTE: You may need to set the vehicle's modKit to 0 by using this function SET_VEHICLE_MOD_KIT before getting the name, otherwise this native may return NULL.",
+  "codeBlocks": [
+    "// GetLiveryName\nchar* GET_LIVERY_NAME(Vehicle vehicle, int liveryIndex);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for GET_LIVERY_NAME\nGetLiveryName(vehicle, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/GetLiveryName.md",
+    "https://docs.fivem.net/natives/?_0x1F2AA07F00B3217A",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "title": "SET_CLOUD_SETTINGS_OVERRIDE",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "SET_CLOUD_SETTINGS_OVERRIDE"
+  ],
+  "content": "0x02DEAAC8F8EA7FE7// SetCloudSettingsOverride\nvoid SET_CLOUD_SETTINGS_OVERRIDE(char* overrideSettingsName);Parameters:overrideSettingsName: The name of the cloud settings to use. Use a empty string to clear the override and return to the default settings.Overrides the cloud settings, which are normally controlled by the weather, with the specified named version. This native allows for custom cloud formations and behaviors that deviate from the default settings associated with the game's current weather conditions.NativeDB Introduced: v323",
+  "codeBlocks": [
+    "// SetCloudSettingsOverride\nvoid SET_CLOUD_SETTINGS_OVERRIDE(char* overrideSettingsName);",
+    "NativeDB Introduced: v323",
+    "-- Example usage for SET_CLOUD_SETTINGS_OVERRIDE\nSetCloudSettingsOverride('')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/SetCloudSettingsOverride.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

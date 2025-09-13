@@ -1,0 +1,22 @@
+{
+  "title": "_SET_OPPRESSOR_TRANSFORM_STATE",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "_SET_OPPRESSOR_TRANSFORM_STATE"
+  ],
+  "content": "0x544996C0081ABDEB// SetOppressorTransformState\nvoid _SET_OPPRESSOR_TRANSFORM_STATE(Vehicle vehicle, BOOL extend);Parameters:vehicle: The vehicle (tested with oppressor only)extend: Set to true to extend the wings, false to retract them.Set state to true to extend the wings, false to retract them.",
+  "codeBlocks": [
+    "// SetOppressorTransformState\nvoid _SET_OPPRESSOR_TRANSFORM_STATE(Vehicle vehicle, BOOL extend);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for _SET_OPPRESSOR_TRANSFORM_STATE\n_etOppressorTransformState(vehicle, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetOppressorTransformState.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

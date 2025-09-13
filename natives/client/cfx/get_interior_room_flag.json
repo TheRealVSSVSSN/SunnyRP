@@ -1,0 +1,24 @@
+{
+  "title": "GET_INTERIOR_ROOM_FLAG",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_INTERIOR_ROOM_FLAG"
+  ],
+  "content": "0x6B7AF743// GetInteriorRoomFlag\nint GET_INTERIOR_ROOM_FLAG(int interiorId, int roomIndex);Parameters:interiorId: The target interior.roomIndex: Interior room index.Returns: Room's flag.Examples:Lualocal playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\nlocal roomHash = GetRoomKeyFromEntity(playerPed)\nlocal roomId = GetInteriorRoomIndexByHash(interiorId, roomHash)\n\nif roomId ~= -1 then\n  local roomFlag = GetInteriorRoomFlag(interiorId, roomId)\n  print(\"current room flag is: \" .. roomFlag)\nend",
+  "codeBlocks": [
+    "// GetInteriorRoomFlag\nint GET_INTERIOR_ROOM_FLAG(int interiorId, int roomIndex);",
+    "local playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\nlocal roomHash = GetRoomKeyFromEntity(playerPed)\nlocal roomId = GetInteriorRoomIndexByHash(interiorId, roomHash)\n\nif roomId ~= -1 then\n  local roomFlag = GetInteriorRoomFlag(interiorId, roomId)\nend",
+    "-- Example usage for GET_INTERIOR_ROOM_FLAG\nGetInteriorRoomFlag(0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetInteriorRoomFlag.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

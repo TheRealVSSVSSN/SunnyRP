@@ -1,0 +1,25 @@
+{
+  "title": "HARD_ATTACH_CAM_TO_ENTITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "CAMAPI",
+    "HARD_ATTACH_CAM_TO_ENTITY"
+  ],
+  "content": "0x202A5ED9CE01D6E7// HardAttachCamToEntity\nvoid HARD_ATTACH_CAM_TO_ENTITY(Cam cam, Entity entity, float xRot, float yRot, float zRot, float xOffset, float yOffset, float zOffset, BOOL isRelative);Parameters:cam: The camera handle.entity: The entity handle.xRot: X-axis rotation.yRot: Y-axis rotation.zRot: Z-axis rotation.xOffset: X-axis offsetyOffset: Y-axis offsetzOffset: Z-axis offsetisRelative: Whether or not the camera position will be relative to the entity rotationAttaches a camera to an entity, including full matrix transformations for both rotation and position offsets.NativeDB Introduced: v2189Examples:LuaJavaScriptC#-- assuming that the obj variable was created earlier in the script\nlocal cam = CreateCam(\"DEFAULT_SCRIPTED_CAMERA\", true)\n\n-- attaches the camera to the object rotated 90 degrees and offset 10 x values\nHardAttachCamToEntity(cam, obj, 0.0, 0.0, 90.0, 10.0, 0.0, 0.0, true)\n\n-- renders the camera\nRenderScriptCams(true, false, 0, true, true)",
+  "codeBlocks": [
+    "// HardAttachCamToEntity\nvoid HARD_ATTACH_CAM_TO_ENTITY(Cam cam, Entity entity, float xRot, float yRot, float zRot, float xOffset, float yOffset, float zOffset, BOOL isRelative);",
+    "NativeDB Introduced: v2189",
+    "-- assuming that the obj variable was created earlier in the script\nlocal cam = CreateCam(\"DEFAULT_SCRIPTED_CAMERA\", true)\n\n-- attaches the camera to the object rotated 90 degrees and offset 10 x values\nHardAttachCamToEntity(cam, obj, 0.0, 0.0, 90.0, 10.0, 0.0, 0.0, true)\n\n-- renders the camera\nRenderScriptCams(true, false, 0, true, true)",
+    "local entity = PlayerPedId()\n-- Example usage for HARD_ATTACH_CAM_TO_ENTITY\nHardAttachCamToEntity(0, entity, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CAM/HardAttachCamToEntity.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

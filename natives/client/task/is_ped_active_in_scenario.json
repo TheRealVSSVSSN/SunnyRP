@@ -1,0 +1,24 @@
+{
+  "title": "IS_PED_ACTIVE_IN_SCENARIO",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "IS_PED_ACTIVE_IN_SCENARIO"
+  ],
+  "content": "0xAA135F9482C82CC30x05038F1A// IsPedActiveInScenario\nBOOL IS_PED_ACTIVE_IN_SCENARIO(Ped ped);Parameters:ped: The ped handle.Returns: Returns true if the ped is in a using a scenario and is doing the ambient animations.This is a stricter version of IS_PED_USING_ANY_SCENARIO. It only returns true if the ped is playing the ambient animations associated with the scenario.",
+  "codeBlocks": [
+    "// IsPedActiveInScenario\nBOOL IS_PED_ACTIVE_IN_SCENARIO(Ped ped);",
+    "local ped = PlayerPedId()\n-- Example usage for IS_PED_ACTIVE_IN_SCENARIO\nIsPedActiveInScenario(ped)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/IsPedActiveInScenario.md",
+    "https://docs.fivem.net/natives/?_0x57AB4A3080F85143",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

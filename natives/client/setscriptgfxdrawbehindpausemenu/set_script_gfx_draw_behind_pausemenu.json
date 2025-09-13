@@ -1,0 +1,22 @@
+{
+  "title": "SET_SCRIPT_GFX_DRAW_BEHIND_PAUSEMENU",
+  "breadcrumbs": [
+    "GRAPHICSAPI",
+    "SET_SCRIPT_GFX_DRAW_BEHIND_PAUSEMENU"
+  ],
+  "content": "0xC6372ECD45D73BCD0xF8FBCC25// SetScriptGfxDrawBehindPausemenu\nvoid SET_SCRIPT_GFX_DRAW_BEHIND_PAUSEMENU(BOOL flag);Parameters:flag: A boolean value.Sets a flag defining whether or not script draw commands should continue being drawn behind the pause menu. This is usually used for TV channels and other draw commands that are used with a world render target.",
+  "codeBlocks": [
+    "// SetScriptGfxDrawBehindPausemenu\nvoid SET_SCRIPT_GFX_DRAW_BEHIND_PAUSEMENU(BOOL flag);",
+    "-- Example usage for SET_SCRIPT_GFX_DRAW_BEHIND_PAUSEMENU\nSetScriptGfxDrawBehindPausemenu(true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/SetScriptGfxDrawBehindPausemenu.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

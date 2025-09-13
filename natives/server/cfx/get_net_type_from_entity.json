@@ -1,0 +1,25 @@
+{
+  "title": "GET_NET_TYPE_FROM_ENTITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_NET_TYPE_FROM_ENTITY"
+  ],
+  "content": "0x23B2A641// GetNetTypeFromEntity\nint GET_NET_TYPE_FROM_ENTITY(Entity entity);Parameters:entity: The entity to get the specific type of.Returns: The specific entity type returned as an integer value or -1 if the entity is invalid.Gets the specific entity type (as an integer), which can be one of the following defined down below:FiveM:enum eNetObjEntityType\n{\n    Automobile = 0,\n    Bike = 1,\n    Boat = 2,\n    Door = 3,\n    Heli = 4,\n    Object = 5,\n    Ped = 6,\n    Pickup = 7,\n    PickupPlacement = 8,\n    Plane = 9,\n    Submarine = 10,\n    Player = 11,\n    Trailer = 12,\n    Train = 13\n};\nRedM:enum eNetObjEntityType\n{\n    Animal = 0,\n    Automobile = 1,\n    Bike = 2,\n    Boat = 3,\n    Door = 4,\n    Heli = 5,\n    Object = 6,\n    Ped = 7,\n    Pickup = 8,\n    PickupPlacement = 9,\n    Plane = 10,\n    Submarine = 11,\n    Player = 12,\n    Trailer = 13,\n    Train = 14,\n    DraftVeh = 15,\n    StatsTracker = 16,\n    PropSet = 17,\n    AnimScene = 18,\n    GroupScenario = 19,\n    Herd = 20,\n    Horse = 21,\n    WorldState = 22,\n    WorldProjectile = 23,\n    Incident = 24,\n    Guardzone = 25,\n    PedGroup = 26,\n    CombatDirector = 27,\n    PedSharedTargeting = 28,\n    Persistent = 29\n};",
+  "codeBlocks": [
+    "// GetNetTypeFromEntity\nint GET_NET_TYPE_FROM_ENTITY(Entity entity);",
+    "enum eNetObjEntityType\n{\n    Automobile = 0,\n    Bike = 1,\n    Boat = 2,\n    Door = 3,\n    Heli = 4,\n    Object = 5,\n    Ped = 6,\n    Pickup = 7,\n    PickupPlacement = 8,\n    Plane = 9,\n    Submarine = 10,\n    Player = 11,\n    Trailer = 12,\n    Train = 13\n};",
+    "enum eNetObjEntityType\n{\n    Animal = 0,\n    Automobile = 1,\n    Bike = 2,\n    Boat = 3,\n    Door = 4,\n    Heli = 5,\n    Object = 6,\n    Ped = 7,\n    Pickup = 8,\n    PickupPlacement = 9,\n    Plane = 10,\n    Submarine = 11,\n    Player = 12,\n    Trailer = 13,\n    Train = 14,\n    DraftVeh = 15,\n    StatsTracker = 16,\n    PropSet = 17,\n    AnimScene = 18,\n    GroupScenario = 19,\n    Herd = 20,\n    Horse = 21,\n    WorldState = 22,\n    WorldProjectile = 23,\n    Incident = 24,\n    Guardzone = 25,\n    PedGroup = 26,\n    CombatDirector = 27,\n    PedSharedTargeting = 28,\n    Persistent = 29\n};",
+    "local entity = PlayerPedId()\n-- Example usage for GET_NET_TYPE_FROM_ENTITY\nGetNetTypeFromEntity(entity)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetNetTypeFromEntity.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

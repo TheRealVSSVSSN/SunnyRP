@@ -1,0 +1,24 @@
+{
+  "title": "SHOULD_USE_METRIC_MEASUREMENTS",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "SHOULD_USE_METRIC_MEASUREMENTS"
+  ],
+  "content": "0xD3D15555431AB7930xBAF17315// ShouldUseMetricMeasurements\nBOOL SHOULD_USE_METRIC_MEASUREMENTS();Returns: Returns true if the game is using the metric measurement system, false if imperial is used.Returns true if the game is using the metric measurement system (profile setting 227), false if imperial is used.Old name:  _IS_GAME_USING_METRIC_MEASUREMENT_SYSTEMExamples:Luaif (ShouldUseMetricMeasurements()) then\n    print(\"Distance to finish line: 8,04672 km.\")\nelse\n    print(\"Distance to finish line: 5 mi.\")\nend",
+  "codeBlocks": [
+    "// ShouldUseMetricMeasurements\nBOOL SHOULD_USE_METRIC_MEASUREMENTS();",
+    "if (ShouldUseMetricMeasurements()) then\nelse\nend",
+    "-- Example usage for SHOULD_USE_METRIC_MEASUREMENTS\nShouldUseMetricMeasurements()"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/ShouldUseMetricMeasurements.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

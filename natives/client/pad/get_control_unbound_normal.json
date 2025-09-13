@@ -1,0 +1,26 @@
+{
+  "title": "GET_CONTROL_UNBOUND_NORMAL",
+  "breadcrumbs": [
+    "Native Reference",
+    "PADAPI",
+    "GET_CONTROL_UNBOUND_NORMAL"
+  ],
+  "content": "0x5B84D09CEC5209C50xC49343BB// GetControlUnboundNormal\nfloat GET_CONTROL_UNBOUND_NORMAL(int padIndex, int control);Parameters:padIndex: The control system instance to use. See ENABLE_ALL_CONTROL_ACTIONS.control: The control ID to check.Seems to return values between -1 and 1 for controls like gas and steering.",
+  "codeBlocks": [
+    "// GetControlUnboundNormal\nfloat GET_CONTROL_UNBOUND_NORMAL(int padIndex, int control);",
+    "Seems to return values between -1 and 1 for controls like gas and steering.",
+    "-- Example usage for GET_CONTROL_UNBOUND_NORMAL\nGetControlUnboundNormal(0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PAD/GetControlUnboundNormal.md",
+    "https://docs.fivem.net/natives/?_0xA5FFE9B05F199DE7",
+    "https://docs.fivem.net/docs/game-references/controls/#controls",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

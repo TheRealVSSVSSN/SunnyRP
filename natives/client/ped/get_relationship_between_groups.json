@@ -1,0 +1,24 @@
+{
+  "title": "GET_RELATIONSHIP_BETWEEN_GROUPS",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "GET_RELATIONSHIP_BETWEEN_GROUPS"
+  ],
+  "content": "0x9E6B70061662AE5C0x4E372FE2// GetRelationshipBetweenGroups\nint GET_RELATIONSHIP_BETWEEN_GROUPS(Hash group1, Hash group2);Gets the relationship between two groups. This should be called twice (once for each group).  \nRelationship types:  \n0 = Companion  \n1 = Respect  \n2 = Like  \n3 = Neutral  \n4 = Dislike  \n5 = Hate  \n255 = Pedestrians  \nExample:  \nPED::GET_RELATIONSHIP_BETWEEN_GROUPS(l_1017, 0xA49E591C);  \nPED::GET_RELATIONSHIP_BETWEEN_GROUPS(0xA49E591C, l_1017);",
+  "codeBlocks": [
+    "// GetRelationshipBetweenGroups\nint GET_RELATIONSHIP_BETWEEN_GROUPS(Hash group1, Hash group2);",
+    "Gets the relationship between two groups. This should be called twice (once for each group).  \nRelationship types:  \n0 = Companion  \n1 = Respect  \n2 = Like  \n3 = Neutral  \n4 = Dislike  \n5 = Hate  \n255 = Pedestrians  \nExample:  \nPED::GET_RELATIONSHIP_BETWEEN_GROUPS(l_1017, 0xA49E591C);  \nPED::GET_RELATIONSHIP_BETWEEN_GROUPS(0xA49E591C, l_1017);",
+    "-- Example usage for GET_RELATIONSHIP_BETWEEN_GROUPS\nGetRelationshipBetweenGroups(GetHashKey('prop'), GetHashKey('prop'))"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/GetRelationshipBetweenGroups.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

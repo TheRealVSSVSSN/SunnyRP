@@ -1,0 +1,26 @@
+{
+  "title": "SET_PED_PRELOAD_PROP_DATA",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "SET_PED_PRELOAD_PROP_DATA"
+  ],
+  "content": "0x2B16A3BFF1FBCE490xC0E23671// SetPedPreloadPropData\nBOOL SET_PED_PRELOAD_PROP_DATA(Ped ped, int componentId, int drawableId, int textureId);Parameters:ped: The ped handle.componentId: The component that you want to set. Refer to SET_PED_COMPONENT_VARIATION.drawableId: The drawable id that is going to be set. Refer to GET_NUMBER_OF_PED_PROP_DRAWABLE_VARIATIONS.textureId: The texture id of the drawable. Refer to GET_NUMBER_OF_PED_PROP_TEXTURE_VARIATIONS.Old name:  _IS_PED_PROP_VALID",
+  "codeBlocks": [
+    "// SetPedPreloadPropData\nBOOL SET_PED_PRELOAD_PROP_DATA(Ped ped, int componentId, int drawableId, int textureId);",
+    "local ped = PlayerPedId()\n-- Example usage for SET_PED_PRELOAD_PROP_DATA\nSetPedPreloadPropData(ped, 0, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/SetPedPreloadPropData.md",
+    "https://docs.fivem.net/natives/?_0x262B14F48D29DE80",
+    "https://docs.fivem.net/natives/?_0x5FAF9754E789FB47",
+    "https://docs.fivem.net/natives/?_0xA6E7F1CEB523E171",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

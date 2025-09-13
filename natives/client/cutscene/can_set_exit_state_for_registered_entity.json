@@ -1,0 +1,23 @@
+{
+  "title": "CAN_SET_EXIT_STATE_FOR_REGISTERED_ENTITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "CUTSCENEAPI",
+    "CAN_SET_EXIT_STATE_FOR_REGISTERED_ENTITY"
+  ],
+  "content": "0x4C6A6451C79E46620x8FF5D3C4// CanSetExitStateForRegisteredEntity\nBOOL CAN_SET_EXIT_STATE_FOR_REGISTERED_ENTITY(char* cutsceneEntName, Hash modelHash);Parameters:cutsceneEntName: Name of the entity cHandle in the cutscenemodelHash: Can be 0Returns: Whether or not it is safe to begin interacting with the entityReturns if the script can begin interacting with the registered entity. Primarly used for lead-outs of cutscenes.\nReturns on frame after cutscene ends, so you cannot get is while using IsCutsceneActive()Whether it is safe to start doing scripted actions on the entity, like simulating walking out of a cutscene.",
+  "codeBlocks": [
+    "// CanSetExitStateForRegisteredEntity\nBOOL CAN_SET_EXIT_STATE_FOR_REGISTERED_ENTITY(char* cutsceneEntName, Hash modelHash);",
+    "-- Example usage for CAN_SET_EXIT_STATE_FOR_REGISTERED_ENTITY\nCanSetExitStateForRegisteredEntity('', GetHashKey('prop'))"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CUTSCENE/CanSetExitStateForRegisteredEntity.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

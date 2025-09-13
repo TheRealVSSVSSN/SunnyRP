@@ -1,0 +1,24 @@
+{
+  "title": "TASK_PLANE_MISSION",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "TASK_PLANE_MISSION"
+  ],
+  "content": "0x23703CD154E83B880x1D007E65// TaskPlaneMission\nvoid TASK_PLANE_MISSION(Ped ped, Vehicle vehicle, Vehicle targetVehicle, Ped targetPed, float fTargetCoordX, float fTargetCoordY, float fTargetCoordZ, int iMissionIndex, float fCruiseSpeed, float fTargetReachedDist, float fOrientation, int iFlightHeight, int iMinHeightAboveTerrain, BOOL bPrecise);Parameters:ped: The Ped handle.vehicle: The Vehicle handle for the actual plane that will be flown.targetVehicle: The target Vehicle handle (in case eVehicleMission requires one).targetPed: The target Ped (in case eVehicleMission requires one).fTargetCoordX: fTargetCoordY: fTargetCoordZ: iMissionIndex: The mission to be executed. See eVehicleMission.fCruiseSpeed: The cruise speed (in m/s).fTargetReachedDist: Distance (in meters) (at which the plane thinks it has arrived), this is also used as the hover distance for MISSION_ATTACK and MISSION_CIRCLE.fOrientation: Used to specify the desired orientation of the plane in degrees (0 to 360). Use -1 if no specific orientation is required.iFlightHeight: The height above sea level the plane tries to maintain, i.e. 50 meters.iMinHeightAboveTerrain: The minimum height above terrain, i.e. 30 meters.bPrecise: A boolean value, defaults to true.Gives the plane a mission (purpose or objective), the mission is passed onto the iMissionIndex parameter.enum eVehicleMission {\n    MISSION_NONE = 0,\n    MISSION_CRUISE, // 1\n    MISSION_RAM, // 2\n    MISSION_BLOCK, // 3\n    MISSION_GOTO, // 4\n    MISSION_STOP, // 5\n    MISSION_ATTACK, // 6\n    MISSION_FOLLOW, // 7\n    MISSION_FLEE, // 8\n    MISSION_CIRCLE, // 9\n    MISSION_ESCORT_LEFT, // 10\n    MISSION_ESCORT_RIGHT, // 11\n    MISSION_ESCORT_REAR, // 12\n    MISSION_ESCORT_FRONT, // 13\n    MISSION_GOTO_RACING, // 14\n    MISSION_FOLLOW_RECORDING, // 15\n    MISSION_POLICE_BEHAVIOUR, // 16\n    MISSION_PARK_PERPENDICULAR, // 17\n    MISSION_PARK_PARALLEL, // 18\n    MISSION_LAND, // 19\n    MISSION_LAND_AND_WAIT, // 20\n    MISSION_CRASH, // 21\n    MISSION_PULL_OVER, // 22\n    MISSION_PROTECT // 23\n};",
+  "codeBlocks": [
+    "// TaskPlaneMission\nvoid TASK_PLANE_MISSION(Ped ped, Vehicle vehicle, Vehicle targetVehicle, Ped targetPed, float fTargetCoordX, float fTargetCoordY, float fTargetCoordZ, int iMissionIndex, float fCruiseSpeed, float fTargetReachedDist, float fOrientation, int iFlightHeight, int iMinHeightAboveTerrain, BOOL bPrecise);",
+    "enum eVehicleMission {\n    MISSION_NONE = 0,\n    MISSION_CRUISE, // 1\n    MISSION_RAM, // 2\n    MISSION_BLOCK, // 3\n    MISSION_GOTO, // 4\n    MISSION_STOP, // 5\n    MISSION_ATTACK, // 6\n    MISSION_FOLLOW, // 7\n    MISSION_FLEE, // 8\n    MISSION_CIRCLE, // 9\n    MISSION_ESCORT_LEFT, // 10\n    MISSION_ESCORT_RIGHT, // 11\n    MISSION_ESCORT_REAR, // 12\n    MISSION_ESCORT_FRONT, // 13\n    MISSION_GOTO_RACING, // 14\n    MISSION_FOLLOW_RECORDING, // 15\n    MISSION_POLICE_BEHAVIOUR, // 16\n    MISSION_PARK_PERPENDICULAR, // 17\n    MISSION_PARK_PARALLEL, // 18\n    MISSION_LAND, // 19\n    MISSION_LAND_AND_WAIT, // 20\n    MISSION_CRASH, // 21\n    MISSION_PULL_OVER, // 22\n    MISSION_PROTECT // 23\n};",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for TASK_PLANE_MISSION\nTaskPlaneMission(ped, vehicle, vehicle, ped, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 0.0, 0, 0, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/TaskPlaneMission.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

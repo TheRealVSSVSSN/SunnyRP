@@ -1,0 +1,22 @@
+{
+  "title": "SET_ENTITY_MAX_SPEED",
+  "breadcrumbs": [
+    "ENTITYAPI",
+    "SET_ENTITY_MAX_SPEED"
+  ],
+  "content": "0x0E46A3FCBDE2A1B10x46AFFED3// SetEntityMaxSpeed\nvoid SET_ENTITY_MAX_SPEED(Entity entity, float speed);Parameters:entity: Entity to apply a maximum speed onspeed: Speed in meters per second",
+  "codeBlocks": [
+    "// SetEntityMaxSpeed\nvoid SET_ENTITY_MAX_SPEED(Entity entity, float speed);",
+    "local entity = GetEntityCoords(PlayerPedId())\n-- Example usage for SET_ENTITY_MAX_SPEED\nSetEntityMaxSpeed(entity, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/SetEntityMaxSpeed.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

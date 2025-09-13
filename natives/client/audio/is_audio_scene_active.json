@@ -1,0 +1,23 @@
+{
+  "title": "IS_AUDIO_SCENE_ACTIVE",
+  "breadcrumbs": [
+    "Native Reference",
+    "AUDIOAPI",
+    "IS_AUDIO_SCENE_ACTIVE"
+  ],
+  "content": "0xB65B60556E2A92250xACBED05C// IsAudioSceneActive\nBOOL IS_AUDIO_SCENE_ACTIVE(char* scene);Parameters:scene: the name of the sceneReturns: Returns true if the script is already running the named scene, false otherwise",
+  "codeBlocks": [
+    "// IsAudioSceneActive\nBOOL IS_AUDIO_SCENE_ACTIVE(char* scene);",
+    "-- Example usage for IS_AUDIO_SCENE_ACTIVE\nIsAudioSceneActive('')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/AUDIO/IsAudioSceneActive.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

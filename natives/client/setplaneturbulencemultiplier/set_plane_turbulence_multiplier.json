@@ -1,0 +1,22 @@
+{
+  "title": "SET_PLANE_TURBULENCE_MULTIPLIER",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "SET_PLANE_TURBULENCE_MULTIPLIER"
+  ],
+  "content": "0xAD2D28A1AFDFF1310xED159AE6// SetPlaneTurbulenceMultiplier\nvoid SET_PLANE_TURBULENCE_MULTIPLIER(Vehicle vehicle, float multiplier);Parameters:vehicle: The plane to set the multiplier formultiplier: The turbulence multiplier. Value between 0.0 and 1.0This native sets the turbulence multiplier. It only works for planes.\n0.0 = no turbulence at all.\n1.0 = heavy turbulence.Works by just calling it once, does not need to be called every tick.Examples:Lualocal plane = GetVehiclePedIsIn(PlayerPedId(), false)\nif IsThisModelAPlane(GetEntityModel(plane)) then\n    -- Goodbye turbulence!\n    SetPlaneTurbulenceMultiplier(plane, 0.0)\nend",
+  "codeBlocks": [
+    "// SetPlaneTurbulenceMultiplier\nvoid SET_PLANE_TURBULENCE_MULTIPLIER(Vehicle vehicle, float multiplier);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for SET_PLANE_TURBULENCE_MULTIPLIER\nSetPlaneTurbulenceMultiplier(vehicle, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetPlaneTurbulenceMultiplier.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

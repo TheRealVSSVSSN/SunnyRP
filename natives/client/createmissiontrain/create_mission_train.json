@@ -1,0 +1,23 @@
+{
+  "title": "CREATE_MISSION_TRAIN",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "CREATE_MISSION_TRAIN"
+  ],
+  "content": "0x63C6CCA8E68AE8C80xD4C2EAFD// CreateMissionTrain\nVehicle CREATE_MISSION_TRAIN(int variation, float x, float y, float z, BOOL direction);Parameters:variation: The variation id, these can range from 0 to 26 as of build 2802 (previously 0-25 in build 2372 and 0-24 before that).x: Spawn coordinate X component.y: Spawn coordinate Y component.z: Spawn coordinate Z component.direction: The direction in which the train will go (true or false)Returns: A script handle (fwScriptGuid index) for the train, or 0 if the train failed to be created.Train models must be requested before use. See trains.xml (located in Grand Theft Auto V\\update\\update.rpf\\common\\data\\levels\\gta5\\trains.xml) for freight and metro variations.Model names to request can be found by searching model_name in the file.The Lua usage example provided down below has been provided in such way so users can test each and every train variation.Newly added parameters (seen in 2372 build)NativeDB Added Parameter 6: BOOL isNetwork\nNativeDB Added Parameter 7: BOOL netMissionEntity\nisNetwork: Whether to create a network object for the train. If false, the train exists only locally.netMissionEntity: Whether to register the train as pinned to the script host in the R* network model.Train Models:freightCarriage Models:freightcarfreightcar2 (Added v2372)freightcont1freightcont2freightgrainmetrotraintankercarSome train variations (default from trains.xml as of build 2372)Very long train and freight variation.Freight train only.Double metro train (with both models flipped opposite to each other). This used to be 25 before the 2802 build, it also used to be 24 before the 2372 build.Examples:Lua--[[ \n    This function needs to be invoked prior to calling CreateMissionTrain  or the trains (as well as its carriages) won't spawn.\n    Could also result in a game-crash when CreateMissionTrain is called without\n    loading the train model needed for the variation before-hand.\n]]\nfunction loadTrainModels()\n    local trainsAndCarriages = {\n        'freight', 'metrotrain', 'freightcont1', 'freightcar', \n        'freightcar2', 'freightcont2', 'tankercar', 'freightgrain'\n    }\n\n    for _, vehicleName in ipairs(trainsAndCarriages) do\n        local modelHashKey = GetHashKey(vehicleName)\n        RequestModel(modelHashKey) -- load the model\n        -- wait for the model to load\n        while not HasModelLoaded(modelHashKey) do\n            Citizen.Wait(500)\n        end\n    end\nend\n\nloadTrainModels()\n\nRegisterCommand(\"createtrain\", function(source, args, rawCommand)\n    if #args < 1 then\n        TriggerEvent('chat:addMessage', {\n            args = { \n                'Error, provide a variation id, you can find those in trains.xml. Variations range from 0 to 26.'\n            }\n        })\n        return\n    end\n    \n    local playerCoords = GetEntityCoords(PlayerPedId())\n     -- Now actually create a train using a variation\n     -- These coordinates were used for testing: 1438.98, 6405.92, 34.19\n    CreateMissionTrain(\n        tonumber(args[1]),\n        playerCoords.x, playerCoords.y, playerCoords.z,\n        true,\n        true,\n        true\n    )\nend, false)",
+  "codeBlocks": [
+    "// CreateMissionTrain\nVehicle CREATE_MISSION_TRAIN(int variation, float x, float y, float z, BOOL direction);",
+    "-- Example usage for CREATE_MISSION_TRAIN\nCreateMissionTrain(0, 0.0, 0.0, 0.0, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/CreateMissionTrain.md",
+    "https://docs.fivem.net/natives/?_0x963D27A58DF860AC",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

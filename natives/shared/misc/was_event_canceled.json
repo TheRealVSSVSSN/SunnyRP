@@ -1,0 +1,12 @@
+{
+  "title": "WAS_EVENT_CANCELED",
+  "breadcrumbs": [
+    "WAS_EVENT_CANCELED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for WAS_EVENT_CANCELED\nWasEventCanceled()"
+  ],
+  "urls": [],
+  "tags": []
+}

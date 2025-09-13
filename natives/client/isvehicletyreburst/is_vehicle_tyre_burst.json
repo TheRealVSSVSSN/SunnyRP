@@ -1,0 +1,22 @@
+{
+  "title": "IS_VEHICLE_TYRE_BURST",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "IS_VEHICLE_TYRE_BURST"
+  ],
+  "content": "0xBA291848A0815CA90x48C80210// IsVehicleTyreBurst\nBOOL IS_VEHICLE_TYRE_BURST(Vehicle vehicle, int wheelID, BOOL isBurstToRim);Parameters:vehicle: The vehicle to check the tire status ofwheelID: The wheel id to check, see eVehicleWheelsisBurstToRim: Whether it should only return true if the tire is bursted to its rimsReturns: Returns true if the vehicle tire is poped, false otherwise.enum eVehicleWheels\n{\n\tWHEEL_LF = 0, // Vehicle Left front\n\tWHEEL_RF = 1, // Vehicle Right front\n\tWHEEL_LM = 2, // Vehicle Left middle\n\tWHEEL_RM = 3, // Vehicle Right middle\n\tWHEEL_LR = 4, // Vehicle Left rear\n\tWHEEL_RR = 5, // Vehicle Right rear\n\tWHEEL_BF = 6, // Bike front\n\tWHEEL_BR = 7, // Bike rear\n\tMAX_WHEELS = 8\n};",
+  "codeBlocks": [
+    "// IsVehicleTyreBurst\nBOOL IS_VEHICLE_TYRE_BURST(Vehicle vehicle, int wheelID, BOOL isBurstToRim);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for IS_VEHICLE_TYRE_BURST\nIsVehicleTyreBurst(vehicle, 0, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/IsVehicleTyreBurst.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

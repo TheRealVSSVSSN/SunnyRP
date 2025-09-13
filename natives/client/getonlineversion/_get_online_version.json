@@ -1,0 +1,22 @@
+{
+  "title": "_GET_ONLINE_VERSION",
+  "breadcrumbs": [
+    "NETWORKAPI",
+    "_GET_ONLINE_VERSION"
+  ],
+  "content": "0xFCA9373EF340AC0A// GetOnlineVersion\nchar* _GET_ONLINE_VERSION();Online version is defined here: update\\update.rpf\\common\\data\\version.txt\nExample:\n[ONLINE_VERSION_NUMBER]\n1.33\n_GET_ONLINE_VERSION() will return \"1.33\"\nOld name:  _GET_GAME_VERSION",
+  "codeBlocks": [
+    "// GetOnlineVersion\nchar* _GET_ONLINE_VERSION();",
+    "-- Example usage for _GET_ONLINE_VERSION\n_etOnlineVersion()"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/NETWORK/GetOnlineVersion.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

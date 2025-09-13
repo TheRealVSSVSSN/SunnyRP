@@ -1,0 +1,12 @@
+{
+  "title": "SEND_NUI_MESSAGE",
+  "breadcrumbs": [
+    "SEND_NUI_MESSAGE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SEND_NUI_MESSAGE\nSendNuiMessage()"
+  ],
+  "urls": [],
+  "tags": []
+}

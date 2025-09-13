@@ -1,0 +1,24 @@
+{
+  "title": "GET_INTERIOR_PORTAL_COUNT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_INTERIOR_PORTAL_COUNT"
+  ],
+  "content": "0xD05BB8B1// GetInteriorPortalCount\nint GET_INTERIOR_PORTAL_COUNT(int interiorId);Parameters:interiorId: The target interior.Returns: The amount of portals in interior.Examples:Lualocal playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\n\nif interiorId ~= 0 then\n  local count = GetInteriorPortalCount(interiorId)\n  print(\"interior \" .. interiorId .. \"has \" .. count .. \" portals\")\nend",
+  "codeBlocks": [
+    "// GetInteriorPortalCount\nint GET_INTERIOR_PORTAL_COUNT(int interiorId);",
+    "local playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\n\nif interiorId ~= 0 then\n  local count = GetInteriorPortalCount(interiorId)\nend",
+    "-- Example usage for GET_INTERIOR_PORTAL_COUNT\nGetInteriorPortalCount(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetInteriorPortalCount.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

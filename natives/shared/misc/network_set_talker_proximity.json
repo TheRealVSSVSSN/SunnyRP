@@ -1,0 +1,12 @@
+{
+  "title": "NETWORK_SET_TALKER_PROXIMITY",
+  "breadcrumbs": [
+    "NETWORK_SET_TALKER_PROXIMITY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SET_TALKER_PROXIMITY\nNetworkSetTalkerProximity()"
+  ],
+  "urls": [],
+  "tags": []
+}

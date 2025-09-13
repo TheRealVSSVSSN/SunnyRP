@@ -1,0 +1,25 @@
+{
+  "title": "GET_CAM_VIEW_MODE_FOR_CONTEXT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CAMAPI",
+    "GET_CAM_VIEW_MODE_FOR_CONTEXT"
+  ],
+  "content": "0xEE778F8C7E1142E20xF3B148A6// GetCamViewModeForContext\nint GET_CAM_VIEW_MODE_FOR_CONTEXT(int context);Parameters:context: See _GET_CAM_ACTIVE_VIEW_MODE_CONTEXT.See GET_FOLLOW_PED_CAM_VIEW_MODE for the view mode enum.",
+  "codeBlocks": [
+    "// GetCamViewModeForContext\nint GET_CAM_VIEW_MODE_FOR_CONTEXT(int context);",
+    "-- Example usage for GET_CAM_VIEW_MODE_FOR_CONTEXT\nGetCamViewModeForContext(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CAM/GetCamViewModeForContext.md",
+    "https://docs.fivem.net/natives/?_0x19CAFA3C87F7C2FF",
+    "https://docs.fivem.net/natives/?_0x8D4D46230B2C353A",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

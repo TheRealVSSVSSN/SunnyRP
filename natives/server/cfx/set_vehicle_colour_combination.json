@@ -1,0 +1,24 @@
+{
+  "title": "SET_VEHICLE_COLOUR_COMBINATION",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_VEHICLE_COLOUR_COMBINATION"
+  ],
+  "content": "0xA557AEAD// SetVehicleColourCombination\nvoid SET_VEHICLE_COLOUR_COMBINATION(Vehicle vehicle, int colorCombination);Parameters:vehicle: The vehicle to modify.colorCombination: One of the default color values of the vehicle.Sets the selected vehicle's colors to their default value (specific variant specified using the colorCombination parameter).\nRange of possible values for colorCombination is currently unknown, I couldn't find where these values are stored either (Disquse's guess was vehicles.meta but I haven't seen it in there.)This is the server-side RPC native equivalent of the client native SET_VEHICLE_COLOUR_COMBINATION.",
+  "codeBlocks": [
+    "// SetVehicleColourCombination\nvoid SET_VEHICLE_COLOUR_COMBINATION(Vehicle vehicle, int colorCombination);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for SET_VEHICLE_COLOUR_COMBINATION\nSetVehicleColourCombination(vehicle, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetVehicleColourCombination.md",
+    "https://docs.fivem.net/natives/?_0x33E8CD3322E2FE31",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

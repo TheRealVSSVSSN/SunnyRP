@@ -1,0 +1,22 @@
+{
+  "title": "SET_CARGOBOB_EXCLUDE_FROM_PICKUP_ENTITY",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "SET_CARGOBOB_EXCLUDE_FROM_PICKUP_ENTITY"
+  ],
+  "content": "0x1F34B0626C594380// SetCargobobExcludeFromPickupEntity\nvoid SET_CARGOBOB_EXCLUDE_FROM_PICKUP_ENTITY(Vehicle cargobob, Entity entity);Parameters:cargobob: The Cargobob helicopter from which the entity is not to be detachedentity: The entity to remain attached to the Cargobob.Prevents a specified entity from being detached from a Cargobob, even in the event of collisions.Examples:LuaJavaScriptC#-- This example prevents a specific entity from being detached from a Cargobob, even in the event of collisions.\n\n-- Retrieve the player ped\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the player's vehicle (cargobob)\nlocal cargobob = GetVehiclePedIsIn(playerPed, false)\n\n-- Retrieve the model hash of the cargobob.\nlocal cargobobModel = GetEntityModel(cargobob)\n\n-- Check if the cargobob exists. If not, terminate the script.\nif not DoesEntityExist(cargobob) or GetHashKey(\"cargobob\") ~= cargobobModel then \n    -- If the cargobob does not exist, end the execution of the code here.\n    return \nend\n\nlocal entityID = 15362 -- The entity you want to prevent from being detached from the Cargobob (this is a random entity ID).\n\n-- Check if the entity exists; if not, terminate the script.\nif not DoesEntityExist(yourEntity) then\n    return\nend\n\n-- Prevent the entity from being detached from the Cargobob.\nSetCargobobExcludeFromPickupEntity(cargobob, entityID)",
+  "codeBlocks": [
+    "// SetCargobobExcludeFromPickupEntity\nvoid SET_CARGOBOB_EXCLUDE_FROM_PICKUP_ENTITY(Vehicle cargobob, Entity entity);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\nlocal entity = GetEntityCoords(PlayerPedId())\n-- Example usage for SET_CARGOBOB_EXCLUDE_FROM_PICKUP_ENTITY\nSetCargobobExcludeFromPickupEntity(vehicle, entity)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetCargobobExcludeFromPickupEntity.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

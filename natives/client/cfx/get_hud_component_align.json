@@ -1,0 +1,24 @@
+{
+  "title": "GET_HUD_COMPONENT_ALIGN",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_HUD_COMPONENT_ALIGN"
+  ],
+  "content": "0xCD949E20// GetHudComponentAlign\nvoid GET_HUD_COMPONENT_ALIGN(int id, int* horizontalAlign, int* verticalAlign);Parameters:id: The hud component id.horizontalAlign: verticalAlign: See SET_SCRIPT_GFX_ALIGN for details about how gfx align works.",
+  "codeBlocks": [
+    "// GetHudComponentAlign\nvoid GET_HUD_COMPONENT_ALIGN(int id, int* horizontalAlign, int* verticalAlign);",
+    "-- Example usage for GET_HUD_COMPONENT_ALIGN\nGetHudComponentAlign(0, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetHudComponentAlign.md",
+    "https://docs.fivem.net/natives/?_0xB8A850F20A067EB6",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

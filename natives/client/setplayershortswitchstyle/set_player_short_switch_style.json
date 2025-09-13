@@ -1,0 +1,22 @@
+{
+  "title": "SET_PLAYER_SHORT_SWITCH_STYLE",
+  "breadcrumbs": [
+    "STREAMINGAPI",
+    "SET_PLAYER_SHORT_SWITCH_STYLE"
+  ],
+  "content": "0x5F2013F8BC24EE690xF0BD420D// SetPlayerShortSwitchStyle\nvoid SET_PLAYER_SHORT_SWITCH_STYLE(int style);Parameters:style: Always 0",
+  "codeBlocks": [
+    "// SetPlayerShortSwitchStyle\nvoid SET_PLAYER_SHORT_SWITCH_STYLE(int style);",
+    "-- Example usage for SET_PLAYER_SHORT_SWITCH_STYLE\nSetPlayerShortSwitchStyle(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/STREAMING/SetPlayerShortSwitchStyle.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

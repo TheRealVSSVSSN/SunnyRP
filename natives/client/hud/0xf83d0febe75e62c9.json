@@ -1,0 +1,27 @@
+{
+  "title": "0xF83D0FEBE75E62C9",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "0xF83D0FEBE75E62C9"
+  ],
+  "content": "0xF83D0FEBE75E62C9// N_0xf83d0febe75e62c9\nvoid 0xF83D0FEBE75E62C9(Blip blip, Any p1, Any p2, float width, Any p4, float length, float heading, Any p7);Parameters:blip: A blip from an entity. The entity can not be a ped. The width and length will not change if it is a ped.p1: -1.0 in decompiled scripts (unk)p2: 1.0 in decompiled scripts (unk)width: Width of the cone (0.0 to ~3.0)p4: 1.0 in decompiled scripts (unk)length: Length of the cone. (8.2 is 'normal' sized)heading: This heading is in radians, this can be calculated with (heading + 180.00) * (pi/180)p7: 1 in decompiled scripts (unk)NativeDB Added Parameter 9: int hudColour\nNativeDB Introduced: v1290\nSets the 'data' for a cone for a blipSee here for the hud colours for the coneName in scripts: SETUP_FAKE_CONE_DATA()For people who don't know how to convert degrees to radians and the other way around:degrees = radians * 180 / pi\nradians = degrees * pi / 180\nExamples:Lualocal ped = PlayerPedId()\nlocal blip = AddBlipForEntity(ped)\n\nCitizen.InvokeNative(0xF83D0FEBE75E62C9, blip, -1.0, 1.0, 0.36, 1.0, 8.2, (0.5 * math.pi), 0, 11)\nSetBlipShowCone(blip, true, 11)",
+  "codeBlocks": [
+    "// N_0xf83d0febe75e62c9\nvoid 0xF83D0FEBE75E62C9(Blip blip, Any p1, Any p2, float width, Any p4, float length, float heading, Any p7);",
+    "NativeDB Added Parameter 9: int hudColour\nNativeDB Introduced: v1290",
+    "degrees = radians * 180 / pi\nradians = degrees * pi / 180",
+    "local ped = PlayerPedId()\nlocal blip = AddBlipForEntity(ped)\n\nCitizen.InvokeNative(0xF83D0FEBE75E62C9, blip, -1.0, 1.0, 0.36, 1.0, 8.2, (0.5 * math.pi), 0, 11)\nSetBlipShowCone(blip, true, 11)",
+    "-- Example usage for 0xF83D0FEBE75E62C9\n0xf83d0febe75e62c9(0, 0, 0, 0.0, 0, 0.0, 0.0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/N_0xf83d0febe75e62c9.md",
+    "https://docs.fivem.net/docs/game-references/hud-colors/",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "title": "IS_BIT_SET",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "IS_BIT_SET"
+  ],
+  "content": "0xA921AA820C25702F0x902E26AC// IsBitSet\nBOOL IS_BIT_SET(int address, int offset);Returns bit's boolean state from [offset] of [address].\nExample:\nMISC::IS_BIT_SET(bitAddress, 1);\nTo enable and disable bits, see:\nMISC::SET_BIT(&bitAddress, 1);   // enable\nMISC::CLEAR_BIT(&bitAddress, 1); // disable",
+  "codeBlocks": [
+    "// IsBitSet\nBOOL IS_BIT_SET(int address, int offset);",
+    "Returns bit's boolean state from [offset] of [address].\nExample:\nMISC::IS_BIT_SET(bitAddress, 1);\nTo enable and disable bits, see:\nMISC::SET_BIT(&bitAddress, 1);   // enable\nMISC::CLEAR_BIT(&bitAddress, 1); // disable",
+    "-- Example usage for IS_BIT_SET\nIsBitSet(0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/IsBitSet.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

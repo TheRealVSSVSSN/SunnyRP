@@ -1,0 +1,23 @@
+{
+  "title": "DEACTIVATE_AUDIO_SLOWMO_MODE",
+  "breadcrumbs": [
+    "Native Reference",
+    "AUDIOAPI",
+    "DEACTIVATE_AUDIO_SLOWMO_MODE"
+  ],
+  "content": "0xDDC635D5B3262C560x0E387BFE// DeactivateAudioSlowmoMode\nvoid DEACTIVATE_AUDIO_SLOWMO_MODE(char* mode);Parameters:mode: name of the mode to deactivateDeactivates the named slowmo mode.",
+  "codeBlocks": [
+    "// DeactivateAudioSlowmoMode\nvoid DEACTIVATE_AUDIO_SLOWMO_MODE(char* mode);",
+    "-- Example usage for DEACTIVATE_AUDIO_SLOWMO_MODE\nDeactivateAudioSlowmoMode('')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/AUDIO/DeactivateAudioSlowmoMode.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

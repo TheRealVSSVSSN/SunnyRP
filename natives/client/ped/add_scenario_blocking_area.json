@@ -1,0 +1,23 @@
+{
+  "title": "ADD_SCENARIO_BLOCKING_AREA",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "ADD_SCENARIO_BLOCKING_AREA"
+  ],
+  "content": "0x1B5C85C612E5256E0xA38C0234// AddScenarioBlockingArea\nint ADD_SCENARIO_BLOCKING_AREA(float posMinX, float posMinY, float posMinZ, float posMaxX, float posMaxY, float posMaxZ, BOOL network, BOOL cancelActive, BOOL blockPeds, BOOL blockVehicles);Parameters:posMinX: Min X Coordinate.posMinY: Min Y Coordinate.posMinZ: Min Z Coordinate.posMaxX: Max X Coordinate.posMaxY: Max Y Coordinate.posMaxZ: Max Z Coordinate.network: Optionally networked to all other playerscancelActive: Should this cause peds already in active scenario points in the area specified to leaveblockPeds: if this area effects scenarios with pedsblockVehicles: if this area effects scenarios with vehiclesSets an area where scenarios are blocked",
+  "codeBlocks": [
+    "// AddScenarioBlockingArea\nint ADD_SCENARIO_BLOCKING_AREA(float posMinX, float posMinY, float posMinZ, float posMaxX, float posMaxY, float posMaxZ, BOOL network, BOOL cancelActive, BOOL blockPeds, BOOL blockVehicles);",
+    "-- Example usage for ADD_SCENARIO_BLOCKING_AREA\nAddScenarioBlockingArea(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, false, false, false, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/AddScenarioBlockingArea.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

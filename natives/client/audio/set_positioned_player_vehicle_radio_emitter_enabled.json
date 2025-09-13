@@ -1,0 +1,23 @@
+{
+  "title": "SET_POSITIONED_PLAYER_VEHICLE_RADIO_EMITTER_ENABLED",
+  "breadcrumbs": [
+    "Native Reference",
+    "AUDIOAPI",
+    "SET_POSITIONED_PLAYER_VEHICLE_RADIO_EMITTER_ENABLED"
+  ],
+  "content": "0xDA07819E452FFE8F// SetPositionedPlayerVehicleRadioEmitterEnabled\nvoid SET_POSITIONED_PLAYER_VEHICLE_RADIO_EMITTER_ENABLED(BOOL enabled);Parameters:enabled: enables/disables a positioned emitter for the player vehicle radio",
+  "codeBlocks": [
+    "// SetPositionedPlayerVehicleRadioEmitterEnabled\nvoid SET_POSITIONED_PLAYER_VEHICLE_RADIO_EMITTER_ENABLED(BOOL enabled);",
+    "-- Example usage for SET_POSITIONED_PLAYER_VEHICLE_RADIO_EMITTER_ENABLED\nSetPositionedPlayerVehicleRadioEmitterEnabled(false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/AUDIO/SetPositionedPlayerVehicleRadioEmitterEnabled.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

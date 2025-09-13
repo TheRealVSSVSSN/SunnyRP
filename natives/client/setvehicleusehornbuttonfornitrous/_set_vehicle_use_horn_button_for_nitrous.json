@@ -1,0 +1,22 @@
+{
+  "title": "_SET_VEHICLE_USE_HORN_BUTTON_FOR_NITROUS",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "_SET_VEHICLE_USE_HORN_BUTTON_FOR_NITROUS"
+  ],
+  "content": "0x1980F68872CC2C3D// SetVehicleUseHornButtonForNitrous\nvoid _SET_VEHICLE_USE_HORN_BUTTON_FOR_NITROUS(Vehicle vehicle, BOOL bToggle);Parameters:vehicle: The vehicle where this setting will be applied.bToggle: If set to true, the horn button will activate the nitrous system; if false, it will not.NativeDB Introduced: v3095Enables or disables the use of the vehicle's horn button for activating the nitrous system.Examples:LuaJavaScriptC#-- Retrieve the player ped\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the vehicle the player is currently in. \nlocal vehicle = GetVehiclePedIsIn(playerPed, false)\n\n-- Check if the vehicle exists in the game world.\nif vehicle == 0 then return end\n\n-- Enable activating nitrous in the vehicle using the horn button.\nSetVehicleUseHornButtonForNitrous(vehicle, true)",
+  "codeBlocks": [
+    "// SetVehicleUseHornButtonForNitrous\nvoid _SET_VEHICLE_USE_HORN_BUTTON_FOR_NITROUS(Vehicle vehicle, BOOL bToggle);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for _SET_VEHICLE_USE_HORN_BUTTON_FOR_NITROUS\n_etVehicleUseHornButtonForNitrous(vehicle, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetVehicleUseHornButtonForNitrous.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

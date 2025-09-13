@@ -1,0 +1,12 @@
+{
+  "title": "NETWORK_GET_PLAYER_INDEX_FROM_PED",
+  "breadcrumbs": [
+    "NETWORK_GET_PLAYER_INDEX_FROM_PED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_GET_PLAYER_INDEX_FROM_PED\nNetworkGetPlayerIndexFromPed()"
+  ],
+  "urls": [],
+  "tags": []
+}

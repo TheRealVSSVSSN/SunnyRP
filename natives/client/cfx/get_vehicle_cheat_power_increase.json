@@ -1,0 +1,24 @@
+{
+  "title": "GET_VEHICLE_CHEAT_POWER_INCREASE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_VEHICLE_CHEAT_POWER_INCREASE"
+  ],
+  "content": "0xC3C93F28// GetVehicleCheatPowerIncrease\nfloat GET_VEHICLE_CHEAT_POWER_INCREASE(Vehicle vehicle);Parameters:vehicle: The target vehicle.Returns: Returns vehicle's cheat power increase modifier value.A getter for SET_VEHICLE_CHEAT_POWER_INCREASE.",
+  "codeBlocks": [
+    "// GetVehicleCheatPowerIncrease\nfloat GET_VEHICLE_CHEAT_POWER_INCREASE(Vehicle vehicle);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for GET_VEHICLE_CHEAT_POWER_INCREASE\nGetVehicleCheatPowerIncrease(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetVehicleCheatPowerIncrease.md",
+    "https://docs.fivem.net/natives/?_0xB59E4BD37AE292DB",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

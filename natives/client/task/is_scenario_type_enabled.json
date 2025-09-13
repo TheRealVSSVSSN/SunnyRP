@@ -1,0 +1,24 @@
+{
+  "title": "IS_SCENARIO_TYPE_ENABLED",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "IS_SCENARIO_TYPE_ENABLED"
+  ],
+  "content": "0x3A815DB3EA0887220xAE37E969// IsScenarioTypeEnabled\nBOOL IS_SCENARIO_TYPE_ENABLED(char* scenarioType);Occurrences in the b617d scripts:\n\"PROP_HUMAN_SEAT_CHAIR\",\n\"WORLD_HUMAN_DRINKING\",\n\"WORLD_HUMAN_HANG_OUT_STREET\",\n\"WORLD_HUMAN_SMOKING\",\n\"WORLD_MOUNTAIN_LION_WANDER\",\n\"WORLD_HUMAN_DRINKING\"\nSometimes used together with MISC::IS_STRING_NULL_OR_EMPTY in the scripts.\nscenarioType could be the same as scenarioName, used in for example TASK::TASK_START_SCENARIO_AT_POSITION.",
+  "codeBlocks": [
+    "// IsScenarioTypeEnabled\nBOOL IS_SCENARIO_TYPE_ENABLED(char* scenarioType);",
+    "Occurrences in the b617d scripts:\n\"PROP_HUMAN_SEAT_CHAIR\",\n\"WORLD_HUMAN_DRINKING\",\n\"WORLD_HUMAN_HANG_OUT_STREET\",\n\"WORLD_HUMAN_SMOKING\",\n\"WORLD_MOUNTAIN_LION_WANDER\",\n\"WORLD_HUMAN_DRINKING\"\nSometimes used together with MISC::IS_STRING_NULL_OR_EMPTY in the scripts.\nscenarioType could be the same as scenarioName, used in for example TASK::TASK_START_SCENARIO_AT_POSITION.",
+    "-- Example usage for IS_SCENARIO_TYPE_ENABLED\nIsScenarioTypeEnabled('')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/IsScenarioTypeEnabled.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

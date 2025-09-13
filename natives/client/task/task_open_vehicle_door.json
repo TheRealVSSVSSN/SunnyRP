@@ -1,0 +1,23 @@
+{
+  "title": "TASK_OPEN_VEHICLE_DOOR",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "TASK_OPEN_VEHICLE_DOOR"
+  ],
+  "content": "0x965791A9A488A0620x8EE06BF4// TaskOpenVehicleDoor\nvoid TASK_OPEN_VEHICLE_DOOR(Ped ped, Vehicle vehicle, int timeOut, int seat, float speed);Parameters:ped: The ped to do the taskvehicle: The vehicle whose doors the ped shoud opentimeOut: Sets a timeout to the task; doesn't work for 0seat: The seat index - the ped will attempt to open doors to get to the specified seatspeed: The given ped will try to open the nearest door to 'seat'.Example: telling the ped to open the door for the driver seat does not necessarily mean it will open the driver door, it may choose to open the passenger door instead if that one is closer.",
+  "codeBlocks": [
+    "// TaskOpenVehicleDoor\nvoid TASK_OPEN_VEHICLE_DOOR(Ped ped, Vehicle vehicle, int timeOut, int seat, float speed);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for TASK_OPEN_VEHICLE_DOOR\nTaskOpenVehicleDoor(ped, vehicle, 0, 0, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/TaskOpenVehicleDoor.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

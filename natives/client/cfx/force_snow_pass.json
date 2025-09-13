@@ -1,0 +1,23 @@
+{
+  "title": "FORCE_SNOW_PASS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "FORCE_SNOW_PASS"
+  ],
+  "content": "0xE6E16170// ForceSnowPass\nvoid FORCE_SNOW_PASS(BOOL enabled);Parameters:enabled: Whether or not to force rendering to use a snow pass.Forces the game snow pass to render.",
+  "codeBlocks": [
+    "// ForceSnowPass\nvoid FORCE_SNOW_PASS(BOOL enabled);",
+    "-- Example usage for FORCE_SNOW_PASS\nForceSnowPass(false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/ForceSnowPass.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "title": "0x6CD79468A1E595C6",
+  "breadcrumbs": [
+    "Native Reference",
+    "PADAPI",
+    "0x6CD79468A1E595C6"
+  ],
+  "content": "0x6CD79468A1E595C6// N_0x6cd79468a1e595c6\nBOOL 0x6CD79468A1E595C6(int padIndex);Parameters:padIndex: The control system instance to use. See ENABLE_ALL_CONTROL_ACTIONS.",
+  "codeBlocks": [
+    "// N_0x6cd79468a1e595c6\nBOOL 0x6CD79468A1E595C6(int padIndex);",
+    "-- Example usage for 0x6CD79468A1E595C6\n0x6cd79468a1e595c6(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PAD/N_0x6cd79468a1e595c6.md",
+    "https://docs.fivem.net/natives/?_0xA5FFE9B05F199DE7",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

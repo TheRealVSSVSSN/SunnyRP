@@ -1,0 +1,22 @@
+{
+  "title": "GET_VEHICLE_ESTIMATED_MAX_SPEED",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "GET_VEHICLE_ESTIMATED_MAX_SPEED"
+  ],
+  "content": "0x53AF99BAA671CA470x7D1A0616// GetVehicleEstimatedMaxSpeed\nfloat GET_VEHICLE_ESTIMATED_MAX_SPEED(Vehicle vehicle);Parameters:vehicle: The vehicle for which to obtain the estimated max speed.Returns: Returns the estimated maximum speed of the specified vehicle as a float number.Retrieves a static value representing the estimated max speed of a specific vehicle, including any vehicle mods. This value does not change dynamically during gameplay.NativeDB Introduced: v323Old name:  _GET_VEHICLE_MAX_SPEEDExamples:LuaJavaScriptC#-- This example prints the estimated max speed of the player's current vehicle.\n\n-- Retrieve the player ped.\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the vehicle the player is currently in.\nlocal vehicle = GetVehiclePedIsIn(playerPed, false)\n\n-- If the vehicle does not exist, end the execution of the code here.\nif not DoesEntityExist(vehicle) then \n    return \nend\n\n-- Retrieve the estimated max speed of the vehicle.\nlocal estimatedMaxSpeed = GetVehicleEstimatedMaxSpeed(vehicle)\n\n-- Print the estimated max speed of the vehicle.\nprint(\"Estimated Max Speed: \" .. estimatedMaxSpeed)",
+  "codeBlocks": [
+    "// GetVehicleEstimatedMaxSpeed\nfloat GET_VEHICLE_ESTIMATED_MAX_SPEED(Vehicle vehicle);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for GET_VEHICLE_ESTIMATED_MAX_SPEED\nGetVehicleEstimatedMaxSpeed(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/GetVehicleEstimatedMaxSpeed.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "title": "SET_PLANE_SECTION_DAMAGE_SCALE",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "SET_PLANE_SECTION_DAMAGE_SCALE"
+  ],
+  "content": "0x0BBB9A7A8FFE931B// SetPlaneSectionDamageScale\nvoid SET_PLANE_SECTION_DAMAGE_SCALE(Vehicle vehicle, int damageSection, float damageScale);Parameters:vehicle: Plane to which the damage scale adjustment will be applied.damageSection: Specific section of the plane, as defined in the ePlaneDamageSection enum, where the damage scale will be adjusted.damageScale: A float value representing the scale of damage to be applied to the specified section.Returns: This native does not return any value.Adjusts the scale of damage applied to a specified section of a plane.\nIn the decompiled scripts the damageScale is always set to 0f (maybe to disable damages on the specified section)enum ePlaneDamageSection {\n    WING_L = 0,\n    WING_R = 1,\n    TAIL = 2,\n    ENGINE_L = 3,\n    ENGINE_R = 4,\n    ELEVATOR_L = 5,\n    ELEVATOR_R = 6,\n    AILERON_L = 7,\n    AILERON_R = 8,\n    RUDDER = 9,\n    RUDDER_2 = 10,\n    AIRBRAKE_L = 11,\n    AIRBRAKE_R = 12\n}\nNativeDB Introduced: v1290",
+  "codeBlocks": [
+    "// SetPlaneSectionDamageScale\nvoid SET_PLANE_SECTION_DAMAGE_SCALE(Vehicle vehicle, int damageSection, float damageScale);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for SET_PLANE_SECTION_DAMAGE_SCALE\nSetPlaneSectionDamageScale(vehicle, 0, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetPlaneSectionDamageScale.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

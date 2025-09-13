@@ -1,0 +1,24 @@
+{
+  "title": "TASK_ARREST_PED",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "TASK_ARREST_PED"
+  ],
+  "content": "0xF3B9A78A178572B10xBC0F153D// TaskArrestPed\nvoid TASK_ARREST_PED(Ped ped, Ped target);Example from \"me_amanda1.ysc.c4\":\nTASK::TASK_ARREST_PED(l_19F /* This is a Ped */ , PLAYER::PLAYER_PED_ID());\nExample from \"armenian1.ysc.c4\":\nif (!PED::IS_PED_INJURED(l_B18[0/*1*/])) {\n    TASK::TASK_ARREST_PED(l_B18[0/*1*/], PLAYER::PLAYER_PED_ID());\n}\nI would love to have time to experiment to see if a player Ped can arrest another Ped. Might make for a good cop mod.\nLooks like only the player can be arrested this way. Peds react and try to arrest you if you task them, but the player charater doesn't do anything if tasked to arrest another ped.",
+  "codeBlocks": [
+    "// TaskArrestPed\nvoid TASK_ARREST_PED(Ped ped, Ped target);",
+    "Example from \"me_amanda1.ysc.c4\":\nTASK::TASK_ARREST_PED(l_19F /* This is a Ped */ , PLAYER::PLAYER_PED_ID());\nExample from \"armenian1.ysc.c4\":\nif (!PED::IS_PED_INJURED(l_B18[0/*1*/])) {\n    TASK::TASK_ARREST_PED(l_B18[0/*1*/], PLAYER::PLAYER_PED_ID());\n}\nI would love to have time to experiment to see if a player Ped can arrest another Ped. Might make for a good cop mod.\nLooks like only the player can be arrested this way. Peds react and try to arrest you if you task them, but the player charater doesn't do anything if tasked to arrest another ped.",
+    "local ped = PlayerPedId()\n-- Example usage for TASK_ARREST_PED\nTaskArrestPed(ped, ped)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/TaskArrestPed.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

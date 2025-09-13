@@ -1,0 +1,23 @@
+{
+  "title": "GET_ROPE_UPDATE_ORDER",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_ROPE_UPDATE_ORDER"
+  ],
+  "content": "0x2AB2E0F6// GetRopeUpdateOrder\nint GET_ROPE_UPDATE_ORDER(int rope);Parameters:rope: The rope to get the update order for.Returns: The rope's update order.",
+  "codeBlocks": [
+    "// GetRopeUpdateOrder\nint GET_ROPE_UPDATE_ORDER(int rope);",
+    "-- Example usage for GET_ROPE_UPDATE_ORDER\nGetRopeUpdateOrder(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetRopeUpdateOrder.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

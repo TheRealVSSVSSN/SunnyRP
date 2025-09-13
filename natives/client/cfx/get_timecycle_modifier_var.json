@@ -1,0 +1,24 @@
+{
+  "title": "GET_TIMECYCLE_MODIFIER_VAR",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_TIMECYCLE_MODIFIER_VAR"
+  ],
+  "content": "0xA7109E12// GetTimecycleModifierVar\nBOOL GET_TIMECYCLE_MODIFIER_VAR(char* modifierName, char* varName, float* value1, float* value2);Parameters:modifierName: The name of timecycle modifier.varName: The name of timecycle variable.value1: value2: Returns: Whether or not variable by name was found on the specified timecycle modifier.Examples:Lualocal modifierName = \"superDARK\"\nlocal varName = \"postfx_noise\"\n\nif DoesTimecycleModifierHasVar(modifierName, varName) then\n  local success, value1, value2 = GetTimecycleModifierVar(modifierName, varName)\n\n  if success then\n    print(string.format(\"[%s] removed var %s with values: %f %f\", modifierName, varName, value1, value2))\n    RemoveTimecycleModifierVar(modifierName, varName)\n  end\nelse\n    SetTimecycleModifierVar(modifierName, varName, 1.0, 1.0)\n    print(string.format(\"[%s] created var %s\", modifierName, varName))\nend",
+  "codeBlocks": [
+    "// GetTimecycleModifierVar\nBOOL GET_TIMECYCLE_MODIFIER_VAR(char* modifierName, char* varName, float* value1, float* value2);",
+    "local modifierName = \"superDARK\"\nlocal varName = \"postfx_noise\"\n\nif DoesTimecycleModifierHasVar(modifierName, varName) then\n  local success, value1, value2 = GetTimecycleModifierVar(modifierName, varName)\n\n  if success then\n    RemoveTimecycleModifierVar(modifierName, varName)\n  end\nelse\n    SetTimecycleModifierVar(modifierName, varName, 1.0, 1.0)\nend",
+    "-- Example usage for GET_TIMECYCLE_MODIFIER_VAR\nGetTimecycleModifierVar('', '', 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetTimecycleModifierVar.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

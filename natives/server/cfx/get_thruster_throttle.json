@@ -1,0 +1,23 @@
+{
+  "title": "GET_THRUSTER_THROTTLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_THRUSTER_THROTTLE"
+  ],
+  "content": "0x94E24C96// GetThrusterThrottle\nfloat GET_THRUSTER_THROTTLE(Vehicle jetpack);Parameters:jetpack: The jetpack to check.Returns: Returns a value representing the main throttle of the jetpack. The values range from 0.0 (no throttle) to 1.0 (full throttle)",
+  "codeBlocks": [
+    "// GetThrusterThrottle\nfloat GET_THRUSTER_THROTTLE(Vehicle jetpack);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for GET_THRUSTER_THROTTLE\nGetThrusterThrottle(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetThrusterThrottle.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

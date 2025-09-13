@@ -1,0 +1,22 @@
+{
+  "title": "SET_SCRIPT_GFX_ALIGN_PARAMS",
+  "breadcrumbs": [
+    "GRAPHICSAPI",
+    "SET_SCRIPT_GFX_ALIGN_PARAMS"
+  ],
+  "content": "0xF5A2C681787E579D0x76C641E4// SetScriptGfxAlignParams\nvoid SET_SCRIPT_GFX_ALIGN_PARAMS(float x, float y, float w, float h);Parameters:x: The X offset for the item to be drawn.y: The Y offset for the item to be drawn.w: The width of the item to be drawn.h: The height of the item to be drawn.Sets the draw offset/calculated size for SET_SCRIPT_GFX_ALIGN. If using any alignment other than left/top, the game\nexpects the width/height to be configured using this native in order to get a proper starting position for the draw\ncommand.Old name:  _SCREEN_DRAW_POSITION_RATIO",
+  "codeBlocks": [
+    "// SetScriptGfxAlignParams\nvoid SET_SCRIPT_GFX_ALIGN_PARAMS(float x, float y, float w, float h);",
+    "-- Example usage for SET_SCRIPT_GFX_ALIGN_PARAMS\nSetScriptGfxAlignParams(0.0, 0.0, 0.0, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/SetScriptGfxAlignParams.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

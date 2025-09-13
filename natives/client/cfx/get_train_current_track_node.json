@@ -1,0 +1,23 @@
+{
+  "title": "GET_TRAIN_CURRENT_TRACK_NODE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_TRAIN_CURRENT_TRACK_NODE"
+  ],
+  "content": "0xE015E854// GetTrainCurrentTrackNode\nint GET_TRAIN_CURRENT_TRACK_NODE(Vehicle train);Parameters:train: The target train.Returns: Train's current track node index.",
+  "codeBlocks": [
+    "// GetTrainCurrentTrackNode\nint GET_TRAIN_CURRENT_TRACK_NODE(Vehicle train);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for GET_TRAIN_CURRENT_TRACK_NODE\nGetTrainCurrentTrackNode(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetTrainCurrentTrackNode.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "title": "IS_PED_IN_ANY_VEHICLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "IS_PED_IN_ANY_VEHICLE"
+  ],
+  "content": "0x997ABD671D25CA0B0x3B0171EE// IsPedInAnyVehicle\nBOOL IS_PED_IN_ANY_VEHICLE(Ped ped, BOOL atGetIn);Parameters:ped: The ped to check.atGetIn: true to also consider attempting to enter a vehicle.Returns: Whether or not the ped is currently involved in any vehicle.Returns whether the specified ped is in any vehicle. If atGetIn is set to true, also returns true if the ped is\ncurrently in the process of entering a vehicle (a specific stage check for CTaskEnterVehicle).Examples:Luaif IsPedInAnyVehicle(PlayerPedId(), false) then\n    print('Local player is in a vehicle!')\nend",
+  "codeBlocks": [
+    "// IsPedInAnyVehicle\nBOOL IS_PED_IN_ANY_VEHICLE(Ped ped, BOOL atGetIn);",
+    "if IsPedInAnyVehicle(PlayerPedId(), false) then\nend",
+    "local ped = PlayerPedId()\n-- Example usage for IS_PED_IN_ANY_VEHICLE\nIsPedInAnyVehicle(ped, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/IsPedInAnyVehicle.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

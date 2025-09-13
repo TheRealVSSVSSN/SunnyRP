@@ -1,0 +1,22 @@
+{
+  "title": "SET_VEHICLE_FIXED",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "SET_VEHICLE_FIXED"
+  ],
+  "content": "0x115722B1B9C14C1C0x17469AA1// SetVehicleFixed\nvoid SET_VEHICLE_FIXED(Vehicle vehicle);Parameters:vehicle: The vehicle that will be fixedFix a given vehicle.\nIf the vehicle's engine's broken then you cannot fix it with this native.Examples:LuaJavaScriptC#-- Get the player ped\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the vehicle the player is in\nlocal vehicle = GetVehiclePedIsIn(playerPed, false)\n\n-- If the player is not in a vehicle, return\nif (vehicle == 0) then return end \n\n-- Fix the vehicle\nSetVehicleFixed(vehicle)",
+  "codeBlocks": [
+    "// SetVehicleFixed\nvoid SET_VEHICLE_FIXED(Vehicle vehicle);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for SET_VEHICLE_FIXED\nSetVehicleFixed(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetVehicleFixed.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

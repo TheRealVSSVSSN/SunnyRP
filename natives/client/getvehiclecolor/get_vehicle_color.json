@@ -1,0 +1,24 @@
+{
+  "title": "GET_VEHICLE_COLOR",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "GET_VEHICLE_COLOR"
+  ],
+  "content": "0xF3CC740D362215480x03BC8F1B// GetVehicleColor\nvoid GET_VEHICLE_COLOR(Vehicle vehicle, int* r, int* g, int* b);Parameters:vehicle: The target vehicler: g: b: See SET_VEHICLE_CUSTOM_PRIMARY_COLOUR and SET_VEHICLE_CUSTOM_SECONDARY_COLOUR.",
+  "codeBlocks": [
+    "// GetVehicleColor\nvoid GET_VEHICLE_COLOR(Vehicle vehicle, int* r, int* g, int* b);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for GET_VEHICLE_COLOR\nGetVehicleColor(vehicle, 0, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/GetVehicleColor.md",
+    "https://docs.fivem.net/natives/?_0x7141766F91D15BEA",
+    "https://docs.fivem.net/natives/?_0x36CED73BFED89754",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

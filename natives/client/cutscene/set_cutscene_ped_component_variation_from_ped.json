@@ -1,0 +1,24 @@
+{
+  "title": "SET_CUTSCENE_PED_COMPONENT_VARIATION_FROM_PED",
+  "breadcrumbs": [
+    "Native Reference",
+    "CUTSCENEAPI",
+    "SET_CUTSCENE_PED_COMPONENT_VARIATION_FROM_PED"
+  ],
+  "content": "0x2A56C06EBEF2B0D90x1E7DA95E// SetCutscenePedComponentVariationFromPed\nvoid SET_CUTSCENE_PED_COMPONENT_VARIATION_FROM_PED(char* cutsceneEntName, Ped ped, Hash modelHash);Parameters:cutsceneEntName: Cutscene file cHandle, i.e Michael, Lamar, Franklin, MP_1-MP_4ped: Ped to copy components frommodelHash: Not strictly neccasary, can be 0Sets the components for a cutscene ped, this will take precendence over the cutscene's component overrides. This does not require the entity be registered.See REGISTER_ENTITY_FOR_CUTSCENE for an example.",
+  "codeBlocks": [
+    "// SetCutscenePedComponentVariationFromPed\nvoid SET_CUTSCENE_PED_COMPONENT_VARIATION_FROM_PED(char* cutsceneEntName, Ped ped, Hash modelHash);",
+    "local ped = PlayerPedId()\n-- Example usage for SET_CUTSCENE_PED_COMPONENT_VARIATION_FROM_PED\nSetCutscenePedComponentVariationFromPed('', ped, GetHashKey('prop'))"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CUTSCENE/SetCutscenePedComponentVariationFromPed.md",
+    "https://docs.fivem.net/natives/?_0xE40C1C56DF95C2E8",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

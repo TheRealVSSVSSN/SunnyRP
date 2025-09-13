@@ -1,0 +1,25 @@
+{
+  "title": "END_TEXT_COMMAND_THEFEED_POST_AWARD",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "END_TEXT_COMMAND_THEFEED_POST_AWARD"
+  ],
+  "content": "0xAA295B6F28BD587D0x02DED2B8// EndTextCommandThefeedPostAward\nint END_TEXT_COMMAND_THEFEED_POST_AWARD(char* textureDict, char* textureName, int rpBonus, int colorOverlay, char* titleLabel);Parameters:textureDict: The texture dictionary name for the icon on the left.textureName: The texture name for the icon on the left.rpBonus: The gained \"RP\" amount that will be displayed on the right side of the notification.colorOverlay: Hudcolor overlay that gets applied on top of the notification, conflicts with text/image visibility in most cases if set to something other than 0.titleLabel: The label that will be displayed at the top of the notification (title).Returns: The notification handle.Shows an \"award\" notification above the minimap, lua example result:Old description:Example:  \nUI::_SET_NOTIFICATION_TEXT_ENTRY(\"HUNT\");  \nUI::_0xAA295B6F28BD587D(\"Hunting\", \"Hunting_Gold_128\", 0, 109, \"HUD_MED_UNLKED\");  \nOld name:  _DRAW_NOTIFICATION_ICONOld name:  _DRAW_NOTIFICATION_AWARDExamples:LuaCitizen.CreateThread(function()\n    -- Get the ped headshot image.\n    local handle = RegisterPedheadshot(PlayerPedId())\n    while not IsPedheadshotReady(handle) or not IsPedheadshotValid(handle) do\n        Citizen.Wait(0)\n    end\n    local txd = GetPedheadshotTxdString(handle)\n\n    -- Add the notification text, the more text you add the smaller the font\n    -- size will become (text is forced on 1 line only), so keep this short!\n    BeginTextCommandThefeedPost(\"STRING\")\n    AddTextComponentSubstringPlayerName(\"You won the match!\")\n\n    -- Draw the notification\n    EndTextCommandThefeedPostAward(txd, txd, 200, 0, \"FM_GEN_UNLOCK\")\n    \n    -- Cleanup after yourself!\n    UnregisterPedheadshot(handle)\nend)",
+  "codeBlocks": [
+    "// EndTextCommandThefeedPostAward\nint END_TEXT_COMMAND_THEFEED_POST_AWARD(char* textureDict, char* textureName, int rpBonus, int colorOverlay, char* titleLabel);",
+    "Example:  \nUI::_SET_NOTIFICATION_TEXT_ENTRY(\"HUNT\");  \nUI::_0xAA295B6F28BD587D(\"Hunting\", \"Hunting_Gold_128\", 0, 109, \"HUD_MED_UNLKED\");",
+    "Citizen.CreateThread(function()\n    -- Get the ped headshot image.\n    local handle = RegisterPedheadshot(PlayerPedId())\n    while not IsPedheadshotReady(handle) or not IsPedheadshotValid(handle) do\n        Citizen.Wait(0)\n    end\n    local txd = GetPedheadshotTxdString(handle)\n\n    -- Add the notification text, the more text you add the smaller the font\n    -- size will become (text is forced on 1 line only), so keep this short!\n    BeginTextCommandThefeedPost(\"STRING\")\n    AddTextComponentSubstringPlayerName(\"You won the match!\")\n\n    -- Draw the notification\n    EndTextCommandThefeedPostAward(txd, txd, 200, 0, \"FM_GEN_UNLOCK\")\n    \n    -- Cleanup after yourself!\n    UnregisterPedheadshot(handle)\nend)",
+    "-- Example usage for END_TEXT_COMMAND_THEFEED_POST_AWARD\nEndTextCommandThefeedPostAward('', '', 0, 0, '')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/EndTextCommandThefeedPostAward.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "title": "GET_ENTITY_COORDS",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENTITYAPI",
+    "GET_ENTITY_COORDS"
+  ],
+  "content": "0x3FEF770D40960D5A0x1647F1CB// GetEntityCoords\nVector3 GET_ENTITY_COORDS(Entity entity, BOOL alive);Parameters:entity: The entity to get the coordinates from.alive: Unused by the game, potentially used by debug builds of GTA in order to assert whether or not an entity was alive.Returns: The current entity coordinates.Gets the current coordinates (world position) for a specified entity.Examples:LuaJavaScriptC#local playerCoords = GetEntityCoords(PlayerPedId())\nprint(playerCoords) -- vector3(...)",
+  "codeBlocks": [
+    "// GetEntityCoords\nVector3 GET_ENTITY_COORDS(Entity entity, BOOL alive);",
+    "local playerCoords = GetEntityCoords(PlayerPedId())",
+    "local entity = PlayerPedId()\n-- Example usage for GET_ENTITY_COORDS\nGetEntityCoords(entity, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/GetEntityCoords.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

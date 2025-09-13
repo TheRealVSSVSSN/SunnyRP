@@ -1,0 +1,24 @@
+{
+  "title": "GET_LOCAL_TIME",
+  "breadcrumbs": [
+    "Native Reference",
+    "CLOCKAPI",
+    "GET_LOCAL_TIME"
+  ],
+  "content": "0x50C7A99057A697480x124BCFA2// GetLocalTime\nvoid GET_LOCAL_TIME(int* year, int* month, int* day, int* hour, int* minute, int* second);Gets local system time as year, month, day, hour, minute and second.  \nExample usage:  \nint year;  \nint month;  \nint day;  \nint hour;  \nint minute;  \nint second;  \nor use std::tm struct  \nTIME::GET_LOCAL_TIME(&year, &month, &day, &hour, &minute, &second);",
+  "codeBlocks": [
+    "// GetLocalTime\nvoid GET_LOCAL_TIME(int* year, int* month, int* day, int* hour, int* minute, int* second);",
+    "Gets local system time as year, month, day, hour, minute and second.  \nExample usage:  \nint year;  \nint month;  \nint day;  \nint hour;  \nint minute;  \nint second;  \nor use std::tm struct  \nTIME::GET_LOCAL_TIME(&year, &month, &day, &hour, &minute, &second);",
+    "-- Example usage for GET_LOCAL_TIME\nGetLocalTime(0, 0, 0, 0, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CLOCK/GetLocalTime.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

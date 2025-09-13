@@ -1,0 +1,25 @@
+{
+  "title": "GET_PED_EYE_COLOR",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PED_EYE_COLOR"
+  ],
+  "content": "0xA47B860F// GetPedEyeColor\nint GET_PED_EYE_COLOR(Ped ped);Parameters:ped: The target pedReturns: Returns ped's eye colour, or -1 if fails to get.A getter for _SET_PED_EYE_COLOR. Returns -1 if fails to get.Examples:Lualocal pedEyeColour = GetPedEyeColor(PlayerPedId())\nif pedEyeColour == 7 then\n  print(\"Gray eyes!\")\nend",
+  "codeBlocks": [
+    "// GetPedEyeColor\nint GET_PED_EYE_COLOR(Ped ped);",
+    "local pedEyeColour = GetPedEyeColor(PlayerPedId())\nif pedEyeColour == 7 then\nend",
+    "local ped = PlayerPedId()\n-- Example usage for GET_PED_EYE_COLOR\nGetPedEyeColor(ped)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPedEyeColor.md",
+    "https://docs.fivem.net/natives/?_0x50B56988B170AFDF",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

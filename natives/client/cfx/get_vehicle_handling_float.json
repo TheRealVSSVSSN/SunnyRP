@@ -1,0 +1,23 @@
+{
+  "title": "GET_VEHICLE_HANDLING_FLOAT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_VEHICLE_HANDLING_FLOAT"
+  ],
+  "content": "0x642FC12F// GetVehicleHandlingFloat\nfloat GET_VEHICLE_HANDLING_FLOAT(Vehicle vehicle, char* class_, char* fieldName);Parameters:vehicle: The vehicle to obtain data for.class_: The handling class to get. Only \"CHandlingData\" is supported at this time.fieldName: The field name to get. These match the keys in handling.meta.Returns: A floating-point value.Returns the effective handling data of a vehicle as a floating-point value.\nExample: local fSteeringLock = GetVehicleHandlingFloat(vehicle, 'CHandlingData', 'fSteeringLock')",
+  "codeBlocks": [
+    "// GetVehicleHandlingFloat\nfloat GET_VEHICLE_HANDLING_FLOAT(Vehicle vehicle, char* class_, char* fieldName);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for GET_VEHICLE_HANDLING_FLOAT\nGetVehicleHandlingFloat(vehicle, '', '')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetVehicleHandlingFloat.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

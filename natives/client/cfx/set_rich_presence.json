@@ -1,0 +1,23 @@
+{
+  "title": "SET_RICH_PRESENCE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_RICH_PRESENCE"
+  ],
+  "content": "0x7BDCBD45// SetRichPresence\nvoid SET_RICH_PRESENCE(char* presenceState);Parameters:presenceState: The rich presence string to set.Sets the player's rich presence detail state for social platform providers to a specified string.",
+  "codeBlocks": [
+    "// SetRichPresence\nvoid SET_RICH_PRESENCE(char* presenceState);",
+    "-- Example usage for SET_RICH_PRESENCE\nSetRichPresence('')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetRichPresence.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

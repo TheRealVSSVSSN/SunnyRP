@@ -1,0 +1,26 @@
+{
+  "title": "GET_VEHICLE_DOOR_LOCK_STATUS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_VEHICLE_DOOR_LOCK_STATUS"
+  ],
+  "content": "0xD72CEF2// GetVehicleDoorLockStatus\nint GET_VEHICLE_DOOR_LOCK_STATUS(Vehicle vehicle);Parameters:vehicle: A vehicle handle.Returns: The door lock status for the specified vehicle.enum_VehicleLockStatus = {\n    None = 0,\n    Locked = 2,\n    LockedForPlayer = 3,\n    StickPlayerInside = 4, -- Doesn't allow players to exit the vehicle with the exit vehicle key.\n    CanBeBrokenInto = 7, -- Can be broken into the car. If the glass is broken, the value will be set to 1\n    CanBeBrokenIntoPersist = 8, -- Can be broken into persist\n    CannotBeTriedToEnter = 10, -- Cannot be tried to enter (Nothing happens when you press the vehicle enter key).\n}\nIt should be noted that while the client-side command and its\nsetter distinguish between states 0 (unset) and 1 (unlocked), the game will synchronize both as state 0, so the server-side\ncommand will return only '0' if unlocked.",
+  "codeBlocks": [
+    "// GetVehicleDoorLockStatus\nint GET_VEHICLE_DOOR_LOCK_STATUS(Vehicle vehicle);",
+    "enum_VehicleLockStatus = {\n    None = 0,\n    Locked = 2,\n    LockedForPlayer = 3,\n    StickPlayerInside = 4, -- Doesn't allow players to exit the vehicle with the exit vehicle key.\n    CanBeBrokenInto = 7, -- Can be broken into the car. If the glass is broken, the value will be set to 1\n    CanBeBrokenIntoPersist = 8, -- Can be broken into persist\n    CannotBeTriedToEnter = 10, -- Cannot be tried to enter (Nothing happens when you press the vehicle enter key).\n}",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for GET_VEHICLE_DOOR_LOCK_STATUS\nGetVehicleDoorLockStatus(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetVehicleDoorLockStatus.md",
+    "https://forum.cfx.re/t/4863241",
+    "https://docs.fivem.net/natives/?_0x25BC98A59C2EA962",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

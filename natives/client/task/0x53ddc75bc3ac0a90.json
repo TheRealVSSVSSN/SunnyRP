@@ -1,0 +1,25 @@
+{
+  "title": "0x53DDC75BC3AC0A90",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "0x53DDC75BC3AC0A90"
+  ],
+  "content": "0x53DDC75BC3AC0A90// N_0x53ddc75bc3ac0a90\nvoid 0x53DDC75BC3AC0A90(Vehicle vehicle);Parameters:vehicle: The vehicle to have tasks clearedRelated to _CLEAR_VEHICLE_TASKS and requires more research (e.g., _CLEAR_VEHICLE_SECONDARY_TASKS).CLEAR_*\n\nNativeDB Introduced: v1290",
+  "codeBlocks": [
+    "// N_0x53ddc75bc3ac0a90\nvoid 0x53DDC75BC3AC0A90(Vehicle vehicle);",
+    "CLEAR_*\n\nNativeDB Introduced: v1290",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for 0x53DDC75BC3AC0A90\n0x53ddc75bc3ac0a90(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/N_0x53ddc75bc3ac0a90.md",
+    "https://docs.fivem.net/natives/?_0xDBBC7A2432524127",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

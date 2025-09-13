@@ -1,0 +1,23 @@
+{
+  "title": "SET_VEHICLE_WHEEL_TIRE_COLLIDER_SIZE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_VEHICLE_WHEEL_TIRE_COLLIDER_SIZE"
+  ],
+  "content": "0xB962D05C// SetVehicleWheelTireColliderSize\nvoid SET_VEHICLE_WHEEL_TIRE_COLLIDER_SIZE(Vehicle vehicle, int wheelIndex, float value);Parameters:vehicle: The vehicle to obtain data for.wheelIndex: Index of wheel, 0-3.value: Radius of tire collider.Use along with SetVehicleWheelSize to resize the wheels (this native sets the collider size affecting physics while SetVehicleWheelSize will change visual size).",
+  "codeBlocks": [
+    "// SetVehicleWheelTireColliderSize\nvoid SET_VEHICLE_WHEEL_TIRE_COLLIDER_SIZE(Vehicle vehicle, int wheelIndex, float value);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for SET_VEHICLE_WHEEL_TIRE_COLLIDER_SIZE\nSetVehicleWheelTireColliderSize(vehicle, 0, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetVehicleWheelTireColliderSize.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

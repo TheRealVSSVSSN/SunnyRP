@@ -1,0 +1,24 @@
+{
+  "title": "END_TEXT_COMMAND_THEFEED_POST_TICKER",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "END_TEXT_COMMAND_THEFEED_POST_TICKER"
+  ],
+  "content": "0x2ED7843F8F8010230x08F7AF78// EndTextCommandThefeedPostTicker\nint END_TEXT_COMMAND_THEFEED_POST_TICKER(BOOL isImportant, BOOL bHasTokens);Parameters:isImportant: Makes the notification flash on the screen.bHasTokens: Makes the notification appear in the \"Pause Menu > Info/Brief > Notifications\" section.Returns: The notification handle.Example output preview:Old name:  _DRAW_NOTIFICATIONExamples:LuaBeginTextCommandThefeedPost(\"STRING\")\nAddTextComponentSubstringPlayerName(\"Hello \" .. GetPlayerName(PlayerId()) .. \".\")\nEndTextCommandThefeedPostTicker(true, true)",
+  "codeBlocks": [
+    "// EndTextCommandThefeedPostTicker\nint END_TEXT_COMMAND_THEFEED_POST_TICKER(BOOL isImportant, BOOL bHasTokens);",
+    "BeginTextCommandThefeedPost(\"STRING\")\nAddTextComponentSubstringPlayerName(\"Hello \" .. GetPlayerName(PlayerId()) .. \".\")\nEndTextCommandThefeedPostTicker(true, true)",
+    "-- Example usage for END_TEXT_COMMAND_THEFEED_POST_TICKER\nEndTextCommandThefeedPostTicker(false, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/EndTextCommandThefeedPostTicker.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

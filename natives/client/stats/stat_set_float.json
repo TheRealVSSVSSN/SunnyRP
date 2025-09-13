@@ -1,0 +1,24 @@
+{
+  "title": "STAT_SET_FLOAT",
+  "breadcrumbs": [
+    "Native Reference",
+    "STATSAPI",
+    "STAT_SET_FLOAT"
+  ],
+  "content": "0x4851997F37FE9B3C0x6CEA96F2// StatSetFloat\nBOOL STAT_SET_FLOAT(Hash statName, float value, BOOL save);Example:\n STATS::STAT_SET_FLOAT(MISC::GET_HASH_KEY(\"MP0_WEAPON_ACCURACY\"), 66.6f, true);",
+  "codeBlocks": [
+    "// StatSetFloat\nBOOL STAT_SET_FLOAT(Hash statName, float value, BOOL save);",
+    "Example:\n STATS::STAT_SET_FLOAT(MISC::GET_HASH_KEY(\"MP0_WEAPON_ACCURACY\"), 66.6f, true);",
+    "-- Example usage for STAT_SET_FLOAT\nStatSetFloat(GetHashKey('prop'), 0.0, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/STATS/StatSetFloat.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

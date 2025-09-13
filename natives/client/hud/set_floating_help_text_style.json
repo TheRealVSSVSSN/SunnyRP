@@ -1,0 +1,25 @@
+{
+  "title": "SET_FLOATING_HELP_TEXT_STYLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "SET_FLOATING_HELP_TEXT_STYLE"
+  ],
+  "content": "0x788E7FD431BD67F10x97852A82// SetFloatingHelpTextStyle\nvoid SET_FLOATING_HELP_TEXT_STYLE(int hudIndex, int style, int hudColor, int alpha, int arrowPosition, int boxOffset);Parameters:hudIndex: The hud index for the floating help messagestyle: Value 0 won't show an arrow at all. Values 1, 2 and -2 will display an arrow.hudColor: https://docs.fivem.net/docs/game-references/hud-colors/alpha: Value for the help box opacity, from 0-255. Anything greater will simply ignore the alpha value. Always 191 in R* scripts.arrowPosition: Used to set the arrow positon. No value will hide the arrowboxOffset: Offset for the floating help box. Note: Arrow stays fixedArrow Positions0 = Off / No arrow1 = Top2 = Left3 = Bottom4 = RightNoteAny numeric value greater than 4 will result in a right arrow (Index 4)ImportantNeeds to be called every frameExamples:LuaJavaScriptfunction DisplayHelpText(string)\n    BeginTextCommandDisplayHelp(\"STRING\")\n    AddTextComponentSubstringPlayerName(string)\n    EndTextCommandDisplayHelp(1, false, false, 0)\nend\n\nCreateThread(function()\n    while true do\n        Wait(0)\n\n        local Ped = PlayerPedId()\n\n        DisplayHelpText('Example Text')\n        SetFloatingHelpTextStyle(0, 2, 2, 0, 3, 0)\n        SetFloatingHelpTextToEntity(0, Ped, 0, 0)\n    end\nend)",
+  "codeBlocks": [
+    "// SetFloatingHelpTextStyle\nvoid SET_FLOATING_HELP_TEXT_STYLE(int hudIndex, int style, int hudColor, int alpha, int arrowPosition, int boxOffset);",
+    "function DisplayHelpText(string)\n    BeginTextCommandDisplayHelp(\"STRING\")\n    AddTextComponentSubstringPlayerName(string)\n    EndTextCommandDisplayHelp(1, false, false, 0)\nend\n\nCreateThread(function()\n    while true do\n        Wait(0)\n\n        local Ped = PlayerPedId()\n\n        DisplayHelpText('Example Text')\n        SetFloatingHelpTextStyle(0, 2, 2, 0, 3, 0)\n        SetFloatingHelpTextToEntity(0, Ped, 0, 0)\n    end\nend)",
+    "-- Example usage for SET_FLOATING_HELP_TEXT_STYLE\nSetFloatingHelpTextStyle(0, 0, 0, 0, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/SetFloatingHelpTextStyle.md",
+    "https://docs.fivem.net/docs/game-references/hud-colors/",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

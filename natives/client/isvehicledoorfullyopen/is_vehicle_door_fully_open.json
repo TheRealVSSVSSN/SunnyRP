@@ -1,0 +1,23 @@
+{
+  "title": "IS_VEHICLE_DOOR_FULLY_OPEN",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "IS_VEHICLE_DOOR_FULLY_OPEN"
+  ],
+  "content": "0x3E933CFF7B111C220xC2385B6F// IsVehicleDoorFullyOpen\nBOOL IS_VEHICLE_DOOR_FULLY_OPEN(Vehicle vehicle, int doorIndex);Parameters:vehicle: The vehicle to check.doorIndex: The index of the door to check.Returns: A bool indiciating if the specified door is fully open on the specified vehicle.See eDoorId declared in SET_VEHICLE_DOOR_SHUT",
+  "codeBlocks": [
+    "// IsVehicleDoorFullyOpen\nBOOL IS_VEHICLE_DOOR_FULLY_OPEN(Vehicle vehicle, int doorIndex);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for IS_VEHICLE_DOOR_FULLY_OPEN\nIsVehicleDoorFullyOpen(vehicle, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/IsVehicleDoorFullyOpen.md",
+    "https://docs.fivem.net/natives/?_0x93D9BD300D7789E5",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

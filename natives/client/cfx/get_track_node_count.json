@@ -1,0 +1,23 @@
+{
+  "title": "GET_TRACK_NODE_COUNT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_TRACK_NODE_COUNT"
+  ],
+  "content": "0x896A0C11// GetTrackNodeCount\nint GET_TRACK_NODE_COUNT(int trackIndex);Parameters:trackIndex: The track indexReturns: The amount of track nodes on the specified trackGets the specified tracks node count.",
+  "codeBlocks": [
+    "// GetTrackNodeCount\nint GET_TRACK_NODE_COUNT(int trackIndex);",
+    "-- Example usage for GET_TRACK_NODE_COUNT\nGetTrackNodeCount(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetTrackNodeCount.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

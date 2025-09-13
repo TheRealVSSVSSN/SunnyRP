@@ -1,0 +1,22 @@
+{
+  "title": "DOES_LATEST_BRIEF_STRING_EXIST",
+  "breadcrumbs": [
+    "GRAPHICSAPI",
+    "DOES_LATEST_BRIEF_STRING_EXIST"
+  ],
+  "content": "0x5E657EF1099EDD650x91A081A1// DoesLatestBriefStringExist\nBOOL DOES_LATEST_BRIEF_STRING_EXIST(int briefValue);Parameters:briefValue: A value indicating brief text.Used in pi_menu.c. Checks if there is a brief entry for specified value.\nValues:\n0 - Dialogue brief\n1 - Help text brief\n2 - Mission Objective brief",
+  "codeBlocks": [
+    "// DoesLatestBriefStringExist\nBOOL DOES_LATEST_BRIEF_STRING_EXIST(int briefValue);",
+    "-- Example usage for DOES_LATEST_BRIEF_STRING_EXIST\nDoesLatestBriefStringExist(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/DoesLatestBriefStringExist.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

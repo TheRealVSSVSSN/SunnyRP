@@ -1,0 +1,24 @@
+{
+  "title": "GET_RAYFIRE_MAP_OBJECT",
+  "breadcrumbs": [
+    "Native Reference",
+    "OBJECTAPI",
+    "GET_RAYFIRE_MAP_OBJECT"
+  ],
+  "content": "0xB48FCED898292E520xA286DE96// GetRayfireMapObject\nObject GET_RAYFIRE_MAP_OBJECT(float x, float y, float z, float radius, char* name);Example:\nOBJECT::GET_RAYFIRE_MAP_OBJECT(-809.9619750976562, 170.919, 75.7406997680664, 3.0, \"des_tvsmash\");\nOld name:  _GET_DES_OBJECT",
+  "codeBlocks": [
+    "// GetRayfireMapObject\nObject GET_RAYFIRE_MAP_OBJECT(float x, float y, float z, float radius, char* name);",
+    "Example:\nOBJECT::GET_RAYFIRE_MAP_OBJECT(-809.9619750976562, 170.919, 75.7406997680664, 3.0, \"des_tvsmash\");",
+    "-- Example usage for GET_RAYFIRE_MAP_OBJECT\nGetRayfireMapObject(0.0, 0.0, 0.0, 0.0, '')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/OBJECT/GetRayfireMapObject.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "title": "GET_BLIP_SPRITE",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "GET_BLIP_SPRITE"
+  ],
+  "content": "0x1FC877464A04FC4F0x72FF2E73// GetBlipSprite\nint GET_BLIP_SPRITE(Blip blip);Parameters:blip: The blip handle.Gets the sprite id of the specified blip. Blip sprite ids and images can be found here.",
+  "codeBlocks": [
+    "// GetBlipSprite\nint GET_BLIP_SPRITE(Blip blip);",
+    "-- Example usage for GET_BLIP_SPRITE\nGetBlipSprite(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/GetBlipSprite.md",
+    "https://docs.fivem.net/docs/game-references/blips/",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

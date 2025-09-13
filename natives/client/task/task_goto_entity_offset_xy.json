@@ -1,0 +1,24 @@
+{
+  "title": "TASK_GOTO_ENTITY_OFFSET_XY",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "TASK_GOTO_ENTITY_OFFSET_XY"
+  ],
+  "content": "0x338E7EF52B6095A90xBC1E3D0A// TaskGotoEntityOffsetXy\nvoid TASK_GOTO_ENTITY_OFFSET_XY(Ped ped, Entity entity, int duration, float targetRadius, float offsetX, float offsetY, float moveBlendRatio, int gotoEntityOffsetFlags);Parameters:ped: The ped handleentity: The target entity handleduration: The duration in seconds or -1 for forevertargetRadius: How far away the ped needs to be from the target entity before it starts movingoffsetX: The X offsetoffsetY: The Y offsetmoveBlendRatio: The move blend ratio (speed)gotoEntityOffsetFlags: The goto entity offset flags (see TASK_GOTO_ENTITY_OFFSET)Instructs the ped to go to the entity with the given offset.",
+  "codeBlocks": [
+    "// TaskGotoEntityOffsetXy\nvoid TASK_GOTO_ENTITY_OFFSET_XY(Ped ped, Entity entity, int duration, float targetRadius, float offsetX, float offsetY, float moveBlendRatio, int gotoEntityOffsetFlags);",
+    "local ped = PlayerPedId()\nlocal entity = PlayerPedId()\n-- Example usage for TASK_GOTO_ENTITY_OFFSET_XY\nTaskGotoEntityOffsetXy(ped, entity, 0, 0.0, 0.0, 0.0, 0.0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/TaskGotoEntityOffsetXy.md",
+    "https://docs.fivem.net/natives/?_0xE39B4FF4FDEBDE27",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

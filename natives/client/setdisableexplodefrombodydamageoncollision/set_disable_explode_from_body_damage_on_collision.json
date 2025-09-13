@@ -1,0 +1,23 @@
+{
+  "title": "SET_DISABLE_EXPLODE_FROM_BODY_DAMAGE_ON_COLLISION",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "SET_DISABLE_EXPLODE_FROM_BODY_DAMAGE_ON_COLLISION"
+  ],
+  "content": "0x26E13D440E7F6064// SetDisableExplodeFromBodyDamageOnCollision\nvoid SET_DISABLE_EXPLODE_FROM_BODY_DAMAGE_ON_COLLISION(Vehicle vehicle, BOOL disableExplode);Parameters:vehicle: The vehicle to apply this setting to.disableExplode: true to disable explosion from body damage on collision; false to allow explosions as normal.This only works for planes.Prevents a vehicle from exploding upon sustaining body damage from physical collisions.For helicopters, you might want to check SET_DISABLE_HELI_EXPLODE_FROM_BODY_DAMAGE instead.NativeDB Introduced: v1290Examples:LuaJavaScriptC#-- Retrieve the player ped\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the vehicle the player is currently in\nlocal vehicle = GetVehiclePedIsIn(playerPed, false)\n\n-- Disable explosion from body damage on collision for the vehicle\nSetDisableExplodeFromBodyDamageOnCollision(vehicle, true)",
+  "codeBlocks": [
+    "// SetDisableExplodeFromBodyDamageOnCollision\nvoid SET_DISABLE_EXPLODE_FROM_BODY_DAMAGE_ON_COLLISION(Vehicle vehicle, BOOL disableExplode);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for SET_DISABLE_EXPLODE_FROM_BODY_DAMAGE_ON_COLLISION\nSetDisableExplodeFromBodyDamageOnCollision(vehicle, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetDisableExplodeFromBodyDamageOnCollision.md",
+    "https://docs.fivem.net/natives/?_0xEDBC8405B3895CC9",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

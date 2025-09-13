@@ -1,0 +1,24 @@
+{
+  "title": "END_TEXT_COMMAND_THEFEED_POST_MESSAGETEXT_WITH_CREW_TAG_AND_ADDITIONAL_ICON",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "END_TEXT_COMMAND_THEFEED_POST_MESSAGETEXT_WITH_CREW_TAG_AND_ADDITIONAL_ICON"
+  ],
+  "content": "0x531B84E7DA981FB60xDEB491C8// EndTextCommandThefeedPostMessagetextWithCrewTagAndAdditionalIcon\nint END_TEXT_COMMAND_THEFEED_POST_MESSAGETEXT_WITH_CREW_TAG_AND_ADDITIONAL_ICON(char* picTxd, char* picTxn, BOOL flash, int iconType1, char* nameStr, char* subtitleStr, float duration, char* crewPackedStr, int iconType2, int textColor);List of picNames: pastebin.com/XdpJVbHz  \nflash is a bool for fading in.  \niconTypes:  \n1 : Chat Box  \n2 : Email  \n3 : Add Friend Request  \n4 : Nothing  \n5 : Nothing  \n6 : Nothing  \n7 : Right Jumping Arrow  \n8 : RP Icon  \n9 : $ Icon  \n\"sender\" is the very top header. This can be any old string.  \n\"subject\" is the header under the sender.  \n\"duration\" is a multiplier, so 1.0 is normal, 2.0 is twice as long (very slow), and 0.5 is half as long.  \n\"clanTag\" shows a crew tag in the \"sender\" header, after the text. You need to use 3 underscores as padding. Maximum length of this field seems to be 7. (e.g. \"MK\" becomes \"___MK\", \"ACE\" becomes \"___ACE\", etc.)  \niconType2 is a mirror of iconType. It shows in the \"subject\" line, right under the original iconType.  \nint IconNotification(char *text, char *text2, char *Subject)  \n{  \n\t_SET_NOTIFICATION_TEXT_ENTRY(\"STRING\");  \n\tADD_TEXT_COMPONENT_SUBSTRING_PLAYER_NAME(text);  \n\t_SET_NOTIFICATION_MESSAGE_CLAN_TAG_2(\"CHAR_SOCIAL_CLUB\", \"CHAR_SOCIAL_CLUB\", 1, 7, text2, Subject, 1.0f, \"__EXAMPLE\", 7);  \n\treturn _DRAW_NOTIFICATION(1, 1);  \n}  \nOld name:  _SET_NOTIFICATION_MESSAGE_CLAN_TAG_2",
+  "codeBlocks": [
+    "// EndTextCommandThefeedPostMessagetextWithCrewTagAndAdditionalIcon\nint END_TEXT_COMMAND_THEFEED_POST_MESSAGETEXT_WITH_CREW_TAG_AND_ADDITIONAL_ICON(char* picTxd, char* picTxn, BOOL flash, int iconType1, char* nameStr, char* subtitleStr, float duration, char* crewPackedStr, int iconType2, int textColor);",
+    "List of picNames: pastebin.com/XdpJVbHz  \nflash is a bool for fading in.  \niconTypes:  \n1 : Chat Box  \n2 : Email  \n3 : Add Friend Request  \n4 : Nothing  \n5 : Nothing  \n6 : Nothing  \n7 : Right Jumping Arrow  \n8 : RP Icon  \n9 : $ Icon  \n\"sender\" is the very top header. This can be any old string.  \n\"subject\" is the header under the sender.  \n\"duration\" is a multiplier, so 1.0 is normal, 2.0 is twice as long (very slow), and 0.5 is half as long.  \n\"clanTag\" shows a crew tag in the \"sender\" header, after the text. You need to use 3 underscores as padding. Maximum length of this field seems to be 7. (e.g. \"MK\" becomes \"___MK\", \"ACE\" becomes \"___ACE\", etc.)  \niconType2 is a mirror of iconType. It shows in the \"subject\" line, right under the original iconType.  \nint IconNotification(char *text, char *text2, char *Subject)  \n{  \n\t_SET_NOTIFICATION_TEXT_ENTRY(\"STRING\");  \n\tADD_TEXT_COMPONENT_SUBSTRING_PLAYER_NAME(text);  \n\t_SET_NOTIFICATION_MESSAGE_CLAN_TAG_2(\"CHAR_SOCIAL_CLUB\", \"CHAR_SOCIAL_CLUB\", 1, 7, text2, Subject, 1.0f, \"__EXAMPLE\", 7);  \n\treturn _DRAW_NOTIFICATION(1, 1);  \n}",
+    "-- Example usage for END_TEXT_COMMAND_THEFEED_POST_MESSAGETEXT_WITH_CREW_TAG_AND_ADDITIONAL_ICON\nEndTextCommandThefeedPostMessagetextWithCrewTagAndAdditionalIcon('', '', false, 0, '', '', 0.0, '', 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/EndTextCommandThefeedPostMessagetextWithCrewTagAndAdditionalIcon.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

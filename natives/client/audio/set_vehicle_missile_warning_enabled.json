@@ -1,0 +1,23 @@
+{
+  "title": "SET_VEHICLE_MISSILE_WARNING_ENABLED",
+  "breadcrumbs": [
+    "Native Reference",
+    "AUDIOAPI",
+    "SET_VEHICLE_MISSILE_WARNING_ENABLED"
+  ],
+  "content": "0xF3365489E0DD50F90x8AFC488D// SetVehicleMissileWarningEnabled\nvoid SET_VEHICLE_MISSILE_WARNING_ENABLED(Vehicle vehicle, BOOL toggle);Parameters:vehicle: Vehicle to toggle warning system for.toggle: true to enable, false to disable.Toggles the incoming missile warning system for specified vehicle.",
+  "codeBlocks": [
+    "// SetVehicleMissileWarningEnabled\nvoid SET_VEHICLE_MISSILE_WARNING_ENABLED(Vehicle vehicle, BOOL toggle);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for SET_VEHICLE_MISSILE_WARNING_ENABLED\nSetVehicleMissileWarningEnabled(vehicle, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/AUDIO/SetVehicleMissileWarningEnabled.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

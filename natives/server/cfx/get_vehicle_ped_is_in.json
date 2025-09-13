@@ -1,0 +1,23 @@
+{
+  "title": "GET_VEHICLE_PED_IS_IN",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_VEHICLE_PED_IS_IN"
+  ],
+  "content": "0xAFE92319// GetVehiclePedIsIn\nVehicle GET_VEHICLE_PED_IS_IN(Ped ped, BOOL lastVehicle);Parameters:ped: The target pedlastVehicle: False = CurrentVehicle, True = LastVehicleReturns: The vehicle id. Returns 0 if the ped is/was not in a vehicle.Gets the vehicle the specified Ped is/was in depending on bool value. This native is used server side when using OneSync.",
+  "codeBlocks": [
+    "// GetVehiclePedIsIn\nVehicle GET_VEHICLE_PED_IS_IN(Ped ped, BOOL lastVehicle);",
+    "local ped = PlayerPedId()\n-- Example usage for GET_VEHICLE_PED_IS_IN\nGetVehiclePedIsIn(ped, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetVehiclePedIsIn.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

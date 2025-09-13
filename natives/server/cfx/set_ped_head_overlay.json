@@ -1,0 +1,26 @@
+{
+  "title": "SET_PED_HEAD_OVERLAY",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_PED_HEAD_OVERLAY"
+  ],
+  "content": "0xD28DBA90// SetPedHeadOverlay\nvoid SET_PED_HEAD_OVERLAY(Ped ped, int overlayID, int index, float opacity);Parameters:ped: The ped entityoverlayID: The overlay id displayed up above.index: An integer representing the index (from 0 to _GET_NUM_OVERLAY_VALUES(overlayID)-1)opacity: A float ranging from 0.0 to 1.0OverlayID ranges from 0 to 12, index from 0 to _GET_NUM_OVERLAY_VALUES(overlayID)-1, and opacity from 0.0 to 1.0.\noverlayID       Part                  Index, to disable\n0               Blemishes             0 - 23, 255\n1               Facial Hair           0 - 28, 255\n2               Eyebrows              0 - 33, 255\n3               Ageing                0 - 14, 255\n4               Makeup                0 - 74, 255\n5               Blush                 0 - 6, 255\n6               Complexion            0 - 11, 255\n7               Sun Damage            0 - 10, 255\n8               Lipstick              0 - 9, 255\n9               Moles/Freckles        0 - 17, 255\n10              Chest Hair            0 - 16, 255\n11              Body Blemishes        0 - 11, 255\n12              Add Body Blemishes    0 - 1, 255\nNote:\nYou may need to call SetPedHeadBlendData prior to calling this native in order for it to work.This is the server-side RPC native equivalent of the client native SET_PED_HEAD_OVERLAY.",
+  "codeBlocks": [
+    "// SetPedHeadOverlay\nvoid SET_PED_HEAD_OVERLAY(Ped ped, int overlayID, int index, float opacity);",
+    "OverlayID ranges from 0 to 12, index from 0 to _GET_NUM_OVERLAY_VALUES(overlayID)-1, and opacity from 0.0 to 1.0.\noverlayID       Part                  Index, to disable\n0               Blemishes             0 - 23, 255\n1               Facial Hair           0 - 28, 255\n2               Eyebrows              0 - 33, 255\n3               Ageing                0 - 14, 255\n4               Makeup                0 - 74, 255\n5               Blush                 0 - 6, 255\n6               Complexion            0 - 11, 255\n7               Sun Damage            0 - 10, 255\n8               Lipstick              0 - 9, 255\n9               Moles/Freckles        0 - 17, 255\n10              Chest Hair            0 - 16, 255\n11              Body Blemishes        0 - 11, 255\n12              Add Body Blemishes    0 - 1, 255",
+    "local ped = PlayerPedId()\n-- Example usage for SET_PED_HEAD_OVERLAY\nSetPedHeadOverlay(ped, 0, 0, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetPedHeadOverlay.md",
+    "https://docs.fivem.net/natives/?_0x9414E18B9434C2FE",
+    "https://docs.fivem.net/natives/?_0x48F44967FA05CC1E",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

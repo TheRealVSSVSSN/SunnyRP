@@ -1,0 +1,22 @@
+{
+  "title": "NETWORK_HANDLE_FROM_PLAYER",
+  "breadcrumbs": [
+    "NETWORKAPI",
+    "NETWORK_HANDLE_FROM_PLAYER"
+  ],
+  "content": "0x388EB2B86C73B6B30xD3498917// NetworkHandleFromPlayer\nvoid NETWORK_HANDLE_FROM_PLAYER(Player player, int* networkHandle, int bufferSize);Returns a handle to networkHandle* from the specified player handle and stores it in a given buffer.  \n* Currently unknown struct  \nExample:  \nstd::vector<UINT64> GetPlayerNetworkHandle(Player player) {  \n    const int size = 13;  \n    uint64_t *buffer = std::make_unique<uint64_t[]>(size).get();  \n    NETWORK::NETWORK_HANDLE_FROM_PLAYER(player, reinterpret_cast<int *>(buffer), 13);  \n    for (int i = 0; i < size; i++) {  \n        Log::Msg(\"networkhandle[%i]: %llx\", i, buffer[i]);  \n    }  \n    std::vector<UINT64> result(buffer, buffer + sizeof(buffer));  \n    return result;  \n}",
+  "codeBlocks": [
+    "// NetworkHandleFromPlayer\nvoid NETWORK_HANDLE_FROM_PLAYER(Player player, int* networkHandle, int bufferSize);",
+    "local player = source\n-- Example usage for NETWORK_HANDLE_FROM_PLAYER\nNetworkHandleFromPlayer(player, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/NETWORK/NetworkHandleFromPlayer.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

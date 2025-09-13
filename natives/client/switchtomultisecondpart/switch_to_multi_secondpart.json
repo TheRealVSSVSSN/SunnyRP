@@ -1,0 +1,23 @@
+{
+  "title": "SWITCH_TO_MULTI_SECONDPART",
+  "breadcrumbs": [
+    "STREAMINGAPI",
+    "SWITCH_TO_MULTI_SECONDPART"
+  ],
+  "content": "0xD8295AF639FD9CB80x2349373B// SwitchToMultiSecondpart\nvoid SWITCH_TO_MULTI_SECONDPART(Ped ped);After using SWITCH_TO_MULTI_FIRSTPART , use this native to smoothly return the camera to the player's character.Old name:  _SWITCH_IN_PLAYERExamples:LuaJavaScriptC#RegisterCommand(\"switchPlayer\", function()\n    if IsPlayerSwitchInProgress() then return end\n    local ped = PlayerPedId()\n    SwitchToMultiFirstPart(ped, 0, 1)\n    Citizen.Wait(5000)\n    SwitchToMultiSecondPart(ped)\nend, false)",
+  "codeBlocks": [
+    "// SwitchToMultiSecondpart\nvoid SWITCH_TO_MULTI_SECONDPART(Ped ped);",
+    "local ped = PlayerPedId()\n-- Example usage for SWITCH_TO_MULTI_SECONDPART\nSwitchToMultiSecondpart(ped)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/STREAMING/SwitchToMultiSecondpart.md",
+    "https://docs.fivem.net/natives/?_0xAAB3200ED59016BC",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

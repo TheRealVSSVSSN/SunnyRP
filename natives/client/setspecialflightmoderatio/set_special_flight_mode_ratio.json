@@ -1,0 +1,23 @@
+{
+  "title": "SET_SPECIAL_FLIGHT_MODE_RATIO",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "SET_SPECIAL_FLIGHT_MODE_RATIO"
+  ],
+  "content": "0xD138FA15C9776837// SetSpecialFlightModeRatio\nvoid SET_SPECIAL_FLIGHT_MODE_RATIO(Vehicle vehicle, float ratio);Parameters:vehicle: The vehicle to which the ratio will be applied.ratio: A value between 0.0 and 1.0 indicating the target state for the vehicle's hover mode transition. In decompiled scripts, a common usage is 0.75 - GetFrameTime(). Exceeding the maximum can cause the Deluxo's wheels to glitch, delaying their return to the initial position.Used alongside SET_SPECIAL_FLIGHT_MODE_TARGET_RATIO, this function initiates hover transformation for vehicles with a hover mode, like the Deluxo, based on a specified ratio (0.0 to 1.0). Incorrect values can glitch the vehicle. Without pairing, vehicles revert to car mode. Ineffective on the oppressor2Old name:  _SET_VEHICLE_HOVER_TRANSFORM_RATIOExamples:LuaJavaScriptC#-- In this case we are enabling the hover mode for the vehicle and initiates hover transformation.\nlocal vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\nSetSpecialFlightModeRatio(vehicle, 0.75 - GetFrameTime())\nSetVehicleHoverTransformPercentage(vehicle, 1.0)",
+  "codeBlocks": [
+    "// SetSpecialFlightModeRatio\nvoid SET_SPECIAL_FLIGHT_MODE_RATIO(Vehicle vehicle, float ratio);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for SET_SPECIAL_FLIGHT_MODE_RATIO\nSetSpecialFlightModeRatio(vehicle, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetSpecialFlightModeRatio.md",
+    "https://docs.fivem.net/natives/?_0x438B3D7CA026FE91",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

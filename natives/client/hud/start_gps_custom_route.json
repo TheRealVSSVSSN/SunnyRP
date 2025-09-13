@@ -1,0 +1,24 @@
+{
+  "title": "START_GPS_CUSTOM_ROUTE",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "START_GPS_CUSTOM_ROUTE"
+  ],
+  "content": "0xDB34E8D56FC13B080x7F93799B// StartGpsCustomRoute\nvoid START_GPS_CUSTOM_ROUTE(int hudColor, BOOL displayOnFoot, BOOL followPlayer);Parameters:hudColor: The HUD color of the GPS path.displayOnFoot: Draws the path regardless if the player is in a vehicle or not.followPlayer: Draw the path partially between the previous and next point based on the players position between them. When false, the GPS appears to not disappear after the last leg is completed.Starts a new GPS custom-route, allowing you to plot lines on the map.\nLines are drawn directly between points.\nThe GPS custom route works like the GPS multi route, except it does not follow roads.Example result:Examples:Lua-- Clear any old route first\nClearGpsCustomRoute()\n\n-- Start a new route\nStartGpsCustomRoute(6, false, true)\n\n-- Add the points\nAddPointToGpsCustomRoute(1638.2155761719, -2344.685546875, 95.610511779785)\nAddPointToGpsCustomRoute(1653.0858154297, -2068.8654785156, 96.737915039063)\nAddPointToGpsCustomRoute(1451.9561767578, -2113.5344238281, 56.082130432129)\nAddPointToGpsCustomRoute(1540.6088867188, -2514.4519042969, 58.842422485352)\nAddPointToGpsCustomRoute(1638.2155761719, -2344.685546875, 95.610511779785)\n\n-- Set the route to render\nSetGpsCustomRouteRender(true, 16, 16)",
+  "codeBlocks": [
+    "// StartGpsCustomRoute\nvoid START_GPS_CUSTOM_ROUTE(int hudColor, BOOL displayOnFoot, BOOL followPlayer);",
+    "-- Clear any old route first\nClearGpsCustomRoute()\n\n-- Start a new route\nStartGpsCustomRoute(6, false, true)\n\n-- Add the points\nAddPointToGpsCustomRoute(1638.2155761719, -2344.685546875, 95.610511779785)\nAddPointToGpsCustomRoute(1653.0858154297, -2068.8654785156, 96.737915039063)\nAddPointToGpsCustomRoute(1451.9561767578, -2113.5344238281, 56.082130432129)\nAddPointToGpsCustomRoute(1540.6088867188, -2514.4519042969, 58.842422485352)\nAddPointToGpsCustomRoute(1638.2155761719, -2344.685546875, 95.610511779785)\n\n-- Set the route to render\nSetGpsCustomRouteRender(true, 16, 16)",
+    "-- Example usage for START_GPS_CUSTOM_ROUTE\nStartGpsCustomRoute(0, false, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/StartGpsCustomRoute.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "CAN_SHUFFLE_SEAT",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "CAN_SHUFFLE_SEAT"
+  ],
+  "content": "0x30785D90C956BF350xB3EB01ED// CanShuffleSeat\nBOOL CAN_SHUFFLE_SEAT(Vehicle vehicle, int seatIndex);Parameters:vehicle: The vehicle to check.seatIndex: See eSeatPosition declared in IS_VEHICLE_SEAT_FREE.",
+  "codeBlocks": [
+    "// CanShuffleSeat\nBOOL CAN_SHUFFLE_SEAT(Vehicle vehicle, int seatIndex);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for CAN_SHUFFLE_SEAT\nCanShuffleSeat(vehicle, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/CanShuffleSeat.md",
+    "https://docs.fivem.net/natives/?_0x22AC59A870E6A669",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

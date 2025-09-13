@@ -1,0 +1,24 @@
+{
+  "title": "ENABLE_ALL_CONTROL_ACTIONS",
+  "breadcrumbs": [
+    "Native Reference",
+    "PADAPI",
+    "ENABLE_ALL_CONTROL_ACTIONS"
+  ],
+  "content": "0xA5FFE9B05F199DE70xFC2F119F// EnableAllControlActions\nvoid ENABLE_ALL_CONTROL_ACTIONS(int padIndex);Parameters:padIndex: The control system instance to use.enum ePadType {\n  PLAYER_CONTROL = 0,\n  CAMERA_CONTROL = 1,\n  FRONTEND_CONTRO = 2\n};",
+  "codeBlocks": [
+    "// EnableAllControlActions\nvoid ENABLE_ALL_CONTROL_ACTIONS(int padIndex);",
+    "enum ePadType {\n  PLAYER_CONTROL = 0,\n  CAMERA_CONTROL = 1,\n  FRONTEND_CONTRO = 2\n};",
+    "-- Example usage for ENABLE_ALL_CONTROL_ACTIONS\nEnableAllControlActions(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PAD/EnableAllControlActions.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

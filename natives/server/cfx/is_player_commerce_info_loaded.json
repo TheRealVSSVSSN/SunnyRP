@@ -1,0 +1,23 @@
+{
+  "title": "IS_PLAYER_COMMERCE_INFO_LOADED",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "IS_PLAYER_COMMERCE_INFO_LOADED"
+  ],
+  "content": "0xBEFE93F4// IsPlayerCommerceInfoLoaded\nBOOL IS_PLAYER_COMMERCE_INFO_LOADED(char* playerSrc);Parameters:playerSrc: The player handleReturns: A boolean.Requests whether or not the commerce data for the specified player has loaded.",
+  "codeBlocks": [
+    "// IsPlayerCommerceInfoLoaded\nBOOL IS_PLAYER_COMMERCE_INFO_LOADED(char* playerSrc);",
+    "-- Example usage for IS_PLAYER_COMMERCE_INFO_LOADED\nIsPlayerCommerceInfoLoaded('')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/IsPlayerCommerceInfoLoaded.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

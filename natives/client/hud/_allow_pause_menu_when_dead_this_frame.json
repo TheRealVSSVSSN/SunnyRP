@@ -1,0 +1,24 @@
+{
+  "title": "_ALLOW_PAUSE_MENU_WHEN_DEAD_THIS_FRAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "_ALLOW_PAUSE_MENU_WHEN_DEAD_THIS_FRAME"
+  ],
+  "content": "0xCC3FDDED67BCFC630x630CD8EE// AllowPauseMenuWhenDeadThisFrame\nvoid _ALLOW_PAUSE_MENU_WHEN_DEAD_THIS_FRAME();Allows opening the pause menu this frame, when the player is dead.Examples:LuaCitizen.CreateThread(function()\n\twhile true do\n\t\tN_0xcc3fdded67bcfc63()\n\t\tWait(0)\n\tend\nend)",
+  "codeBlocks": [
+    "// AllowPauseMenuWhenDeadThisFrame\nvoid _ALLOW_PAUSE_MENU_WHEN_DEAD_THIS_FRAME();",
+    "Citizen.CreateThread(function()\n\twhile true do\n\t\tN_0xcc3fdded67bcfc63()\n\t\tWait(0)\n\tend\nend)",
+    "-- Example usage for _ALLOW_PAUSE_MENU_WHEN_DEAD_THIS_FRAME\n_AllowPauseMenuWhenDeadThisFrame()"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/AllowPauseMenuWhenDeadThisFrame.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

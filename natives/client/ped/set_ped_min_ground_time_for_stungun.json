@@ -1,0 +1,24 @@
+{
+  "title": "SET_PED_MIN_GROUND_TIME_FOR_STUNGUN",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "SET_PED_MIN_GROUND_TIME_FOR_STUNGUN"
+  ],
+  "content": "0xFA0675AB151073FA0x2F0D0973// SetPedMinGroundTimeForStungun\nvoid SET_PED_MIN_GROUND_TIME_FOR_STUNGUN(Ped ped, int minTimeInMs);Parameters:ped: The ped to set the min ground time forminTimeInMs: The minimum time the stun should last in milliseconds.Overwrites the minimum time the ped will stay on the ground for after being stunned. Setting this while the ped is stunned will not alter the duration of the current stun but will still effect future stuns.Passing -1 into the second parameter minTimeInMs will reset the modifier, making it use the weapons original DamageTime as the stun duration (see update/update.rpf/common/data/ai/weapons.meta)NOTE: Unlike what the native name implies, this works on any weapon that has its DamageType in the weapons.meta set to ELECTRIC.Examples:LuaJavaScriptC#-- This sets the minimum stun ground time for the player's ped to 10 seconds (and re-applies it if the player's ped changes)\n\nlocal currentPed = 0\nCreateThread(function()\n    while true do\n        local playerPed = PlayerPedId()\n\n        -- Checks if the player ped has changed\n        if currentPed ~= playerPed then\n            currentPed = playerPed\n\n            -- Sets the minimum stun ground time to 10 seconds\n            SetPedMinGroundTimeForStungun(currentPed, 10000)\n        end\n\n        Wait(1000)\n    end\nend)",
+  "codeBlocks": [
+    "// SetPedMinGroundTimeForStungun\nvoid SET_PED_MIN_GROUND_TIME_FOR_STUNGUN(Ped ped, int minTimeInMs);",
+    "-- This sets the minimum stun ground time for the player's ped to 10 seconds (and re-applies it if the player's ped changes)\n\nlocal currentPed = 0\nCreateThread(function()\n    while true do\n        local playerPed = PlayerPedId()\n\n        -- Checks if the player ped has changed\n        if currentPed ~= playerPed then\n            currentPed = playerPed\n\n            -- Sets the minimum stun ground time to 10 seconds\n            SetPedMinGroundTimeForStungun(currentPed, 10000)\n        end\n\n        Wait(1000)\n    end\nend)",
+    "local ped = PlayerPedId()\n-- Example usage for SET_PED_MIN_GROUND_TIME_FOR_STUNGUN\nSetPedMinGroundTimeForStungun(ped, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/SetPedMinGroundTimeForStungun.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

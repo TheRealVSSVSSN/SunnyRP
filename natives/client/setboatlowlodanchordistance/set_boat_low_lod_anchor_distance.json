@@ -1,0 +1,22 @@
+{
+  "title": "SET_BOAT_LOW_LOD_ANCHOR_DISTANCE",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "SET_BOAT_LOW_LOD_ANCHOR_DISTANCE"
+  ],
+  "content": "0xE842A9398079BD820x66FA450C// SetBoatLowLodAnchorDistance\nvoid SET_BOAT_LOW_LOD_ANCHOR_DISTANCE(Vehicle boat, float value);Parameters:boat: The target boat.value: The distance at which the LOD switch occurs. Set to -1.0 to reset the LOD distance to the default value.Sets the distance from the player at which anchored boats switch between high and low LOD (Level of Detail) buoyancy mode.NativeDB Introduced: v323Old name:  _SET_BOAT_ANCHOR_BUOYANCY_COEFFICIENTOld name:  _SET_BOAT_MOVEMENT_RESISTANCEExamples:LuaJavaScriptC#local boat = GetVehiclePedIsIn(PlayerPedId(), false)\nif not boat or not IsThisModelABoat(GetEntityModel(boat)) then return end\n\n-- Set the low LOD anchor distance to 100 units\nSetBoatLowLodAnchorDistance(boat, 100.0)\nprint(\"Set low LOD anchor distance to 100 units\")",
+  "codeBlocks": [
+    "// SetBoatLowLodAnchorDistance\nvoid SET_BOAT_LOW_LOD_ANCHOR_DISTANCE(Vehicle boat, float value);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for SET_BOAT_LOW_LOD_ANCHOR_DISTANCE\nSetBoatLowLodAnchorDistance(vehicle, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetBoatLowLodAnchorDistance.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

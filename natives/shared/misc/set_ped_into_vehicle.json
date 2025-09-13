@@ -1,0 +1,12 @@
+{
+  "title": "SET_PED_INTO_VEHICLE",
+  "breadcrumbs": [
+    "SET_PED_INTO_VEHICLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_INTO_VEHICLE\nSetPedIntoVehicle()"
+  ],
+  "urls": [],
+  "tags": []
+}

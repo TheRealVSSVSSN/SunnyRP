@@ -1,0 +1,22 @@
+{
+  "title": "SET_TRAIN_CRUISE_SPEED",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "SET_TRAIN_CRUISE_SPEED"
+  ],
+  "content": "0x16469284DB8C62B50xB507F51D// SetTrainCruiseSpeed\nvoid SET_TRAIN_CRUISE_SPEED(Vehicle train, float speed);Used to control train speed, can be used to start and stop its movement as well.Examples:Lualocal train = CreateMissionTrain(21, 40.2, -1201.3, 31.0, false)\nSetTrainCruiseSpeed(train, 20.0) -- Can be used to 'start' the train\nSetTrainCruiseSpeed(train, 0.0) -- Can be used to 'stop' the train",
+  "codeBlocks": [
+    "// SetTrainCruiseSpeed\nvoid SET_TRAIN_CRUISE_SPEED(Vehicle train, float speed);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for SET_TRAIN_CRUISE_SPEED\nSetTrainCruiseSpeed(vehicle, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetTrainCruiseSpeed.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

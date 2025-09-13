@@ -1,0 +1,24 @@
+{
+  "title": "GET_WATER_QUAD_IS_INVISIBLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_WATER_QUAD_IS_INVISIBLE"
+  ],
+  "content": "0x1DEDBD77// GetWaterQuadIsInvisible\nBOOL GET_WATER_QUAD_IS_INVISIBLE(int waterQuad, int* isInvisible);Parameters:waterQuad: The water quad indexisInvisible: Returns: Returns if the given water quad is invisibleExamples:Lualocal success, isInvisible = GetWaterQuadIsInvisible(0)",
+  "codeBlocks": [
+    "// GetWaterQuadIsInvisible\nBOOL GET_WATER_QUAD_IS_INVISIBLE(int waterQuad, int* isInvisible);",
+    "local success, isInvisible = GetWaterQuadIsInvisible(0)",
+    "-- Example usage for GET_WATER_QUAD_IS_INVISIBLE\nGetWaterQuadIsInvisible(0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetWaterQuadIsInvisible.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

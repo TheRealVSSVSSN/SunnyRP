@@ -1,0 +1,24 @@
+{
+  "title": "SET_PED_COMBAT_RANGE",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "SET_PED_COMBAT_RANGE"
+  ],
+  "content": "0x3C606747B23E497B0x8818A959// SetPedCombatRange\nvoid SET_PED_COMBAT_RANGE(Ped ped, int range);Parameters:ped: Ped indexrange: See eCombatRange enum.Define the scope within which the ped will engage in combat with the target.enum eCombatRange {\n    CR_NEAR = 0, // keeps within 5-15m\n    CR_MEDIUM = 1, // keeps within 7-30m\n    CR_FAR = 2, // keeps within 15-40m\n    CR_VERY_FAR = 3 // keeps within 22-45m\n};",
+  "codeBlocks": [
+    "// SetPedCombatRange\nvoid SET_PED_COMBAT_RANGE(Ped ped, int range);",
+    "enum eCombatRange {\n    CR_NEAR = 0, // keeps within 5-15m\n    CR_MEDIUM = 1, // keeps within 7-30m\n    CR_FAR = 2, // keeps within 15-40m\n    CR_VERY_FAR = 3 // keeps within 22-45m\n};",
+    "local ped = PlayerPedId()\n-- Example usage for SET_PED_COMBAT_RANGE\nSetPedCombatRange(ped, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/SetPedCombatRange.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

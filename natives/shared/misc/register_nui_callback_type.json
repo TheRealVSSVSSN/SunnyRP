@@ -1,0 +1,12 @@
+{
+  "title": "REGISTER_NUI_CALLBACK_TYPE",
+  "breadcrumbs": [
+    "REGISTER_NUI_CALLBACK_TYPE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REGISTER_NUI_CALLBACK_TYPE\nRegisterNuiCallbackType()"
+  ],
+  "urls": [],
+  "tags": []
+}

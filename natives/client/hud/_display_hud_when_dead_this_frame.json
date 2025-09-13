@@ -1,0 +1,24 @@
+{
+  "title": "_DISPLAY_HUD_WHEN_DEAD_THIS_FRAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "_DISPLAY_HUD_WHEN_DEAD_THIS_FRAME"
+  ],
+  "content": "0x7669F9E39DC170630xC380AC85// DisplayHudWhenDeadThisFrame\nvoid _DISPLAY_HUD_WHEN_DEAD_THIS_FRAME();Enables drawing some hud components, such as help labels, this frame, when the player is dead.Examples:LuaCitizen.CreateThread(function()\n\twhile true do\n\t\tN_0x7669f9e39dc17063()\n\t\tWait(0)\n\tend\nend)",
+  "codeBlocks": [
+    "// DisplayHudWhenDeadThisFrame\nvoid _DISPLAY_HUD_WHEN_DEAD_THIS_FRAME();",
+    "Citizen.CreateThread(function()\n\twhile true do\n\t\tN_0x7669f9e39dc17063()\n\t\tWait(0)\n\tend\nend)",
+    "-- Example usage for _DISPLAY_HUD_WHEN_DEAD_THIS_FRAME\n_DisplayHudWhenDeadThisFrame()"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/DisplayHudWhenDeadThisFrame.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

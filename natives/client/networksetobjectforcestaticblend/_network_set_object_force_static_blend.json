@@ -1,0 +1,22 @@
+{
+  "title": "_NETWORK_SET_OBJECT_FORCE_STATIC_BLEND",
+  "breadcrumbs": [
+    "NETWORKAPI",
+    "_NETWORK_SET_OBJECT_FORCE_STATIC_BLEND"
+  ],
+  "content": "0x0379DAF89BA09AA5// NetworkSetObjectForceStaticBlend\nvoid _NETWORK_SET_OBJECT_FORCE_STATIC_BLEND(Object object, BOOL enabled);Parameters:object: The object to set forced blending state for.enabled: true to enable forced blending.Sets whether or not an object (created using CREATE_OBJECT, or similar) should have its position/rotation synchronized,\neven if it is a 'static' object (for example, having flag 32 - Static - set in its archetype definition).This has to be called during the same frame the object is created/registered for network, as otherwise it may already\nhave a remote clone created.Once a remote clone is created, changing this value will not have any effect on said clone.",
+  "codeBlocks": [
+    "// NetworkSetObjectForceStaticBlend\nvoid _NETWORK_SET_OBJECT_FORCE_STATIC_BLEND(Object object, BOOL enabled);",
+    "-- Example usage for _NETWORK_SET_OBJECT_FORCE_STATIC_BLEND\n_etworkSetObjectForceStaticBlend(0, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/NETWORK/NetworkSetObjectForceStaticBlend.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

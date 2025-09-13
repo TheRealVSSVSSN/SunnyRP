@@ -1,0 +1,24 @@
+{
+  "title": "GET_TIMECYCLE_MODIFIER_INDEX_BY_NAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_TIMECYCLE_MODIFIER_INDEX_BY_NAME"
+  ],
+  "content": "0x5F4CD0E2// GetTimecycleModifierIndexByName\nint GET_TIMECYCLE_MODIFIER_INDEX_BY_NAME(char* modifierName);Parameters:modifierName: The timecycle modifier name.Returns: The timecycle modifier index.Examples:Lualocal modifierIndex = GetTimecycleModifierIndexByName(\"underwater\")\nlocal currentIndex = GetTimecycleModifierIndex()\n\nif currentIndex ~= -1 and currentIndex == modifierIndex then\n  print(\"we're actually using 'underwater' timecycle!\")\nend",
+  "codeBlocks": [
+    "// GetTimecycleModifierIndexByName\nint GET_TIMECYCLE_MODIFIER_INDEX_BY_NAME(char* modifierName);",
+    "local modifierIndex = GetTimecycleModifierIndexByName(\"underwater\")\nlocal currentIndex = GetTimecycleModifierIndex()\n\nif currentIndex ~= -1 and currentIndex == modifierIndex then\nend",
+    "-- Example usage for GET_TIMECYCLE_MODIFIER_INDEX_BY_NAME\nGetTimecycleModifierIndexByName('')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetTimecycleModifierIndexByName.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

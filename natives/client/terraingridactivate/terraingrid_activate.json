@@ -1,0 +1,25 @@
+{
+  "title": "TERRAINGRID_ACTIVATE",
+  "breadcrumbs": [
+    "GRAPHICSAPI",
+    "TERRAINGRID_ACTIVATE"
+  ],
+  "content": "0xA356990E161C9E650xA1CB6C94// TerraingridActivate\nvoid TERRAINGRID_ACTIVATE(BOOL toggle);Parameters:toggle: Enables or disables the golf putting grid display.This native enables/disables the gold putting grid display (https://i.imgur.com/TC6cku6.png).\nThis requires these two natives to be called as well to configure the grid: TERRAINGRID_SET_PARAMS and TERRAINGRID_SET_COLOURS.",
+  "codeBlocks": [
+    "// TerraingridActivate\nvoid TERRAINGRID_ACTIVATE(BOOL toggle);",
+    "-- Example usage for TERRAINGRID_ACTIVATE\nTerraingridActivate(true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/TerraingridActivate.md",
+    "https://i.imgur.com/TC6cku6.png",
+    "https://docs.fivem.net/natives/?_0x1C4FC5752BCD8E48",
+    "https://docs.fivem.net/natives/?_0x5CE62918F8D703C7",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

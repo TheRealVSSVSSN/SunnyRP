@@ -1,0 +1,22 @@
+{
+  "title": "NETWORK_GET_CONTENT_MODIFIER_LIST_ID",
+  "breadcrumbs": [
+    "NETWORKAPI",
+    "NETWORK_GET_CONTENT_MODIFIER_LIST_ID"
+  ],
+  "content": "0x187382F8A3E0A6C30xA78571CA// NetworkGetContentModifierListId\nint NETWORK_GET_CONTENT_MODIFIER_LIST_ID(Hash contentHash);Return the content modifier id (the tunables context if you want) of a specific content.  \nIt takes the content hash (which is the mission id hash), and return the content modifier id, used as the tunables context.  \nThe mission id can be found on the Social club, for example, 'socialclub.rockstargames.com/games/gtav/jobs/job/A8M6Bz8MLEC5xngvDCzGwA'  \n'A8M6Bz8MLEC5xngvDCzGwA' is the mission id, so the game hash this and use it as the parameter for this native.  \nOld name:  _GET_TUNABLES_CONTENT_MODIFIER_ID",
+  "codeBlocks": [
+    "// NetworkGetContentModifierListId\nint NETWORK_GET_CONTENT_MODIFIER_LIST_ID(Hash contentHash);",
+    "-- Example usage for NETWORK_GET_CONTENT_MODIFIER_LIST_ID\nNetworkGetContentModifierListId(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/NETWORK/NetworkGetContentModifierListId.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}
