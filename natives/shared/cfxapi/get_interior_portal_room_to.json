@@ -1,0 +1,20 @@
+{
+  "title": "GET_INTERIOR_PORTAL_ROOM_TO",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_INTERIOR_PORTAL_ROOM_TO"
+  ],
+  "content": "0x3F47F0E8// GetInteriorPortalRoomTo\nint GET_INTERIOR_PORTAL_ROOM_TO(int interiorId, int portalIndex);Parameters:interiorId: The target interior.portalIndex: Interior portal index.Returns: Portal's room TO index.Examples:Lualocal playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\n\nif interiorId ~= 0 then\n  local roomIndex = 0\n\n  local portalRoomTo = GetInteriorPortalRoomTo(interiorId, 0)\n  print(\"portal \" .. roomIndex .. \" room TO is: \" .. portalRoomTo)\nend",
+  "codeBlocks": [
+    "// GetInteriorPortalRoomTo\nint GET_INTERIOR_PORTAL_ROOM_TO(int interiorId, int portalIndex);",
+    "local playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\n\nif interiorId ~= 0 then\n  local roomIndex = 0\n\n  local portalRoomTo = GetInteriorPortalRoomTo(interiorId, 0)\n  print(\"portal \" .. roomIndex .. \" room TO is: \" .. portalRoomTo)\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetInteriorPortalRoomTo.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

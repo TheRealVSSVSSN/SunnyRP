@@ -1,0 +1,20 @@
+{
+  "title": "IS_PLAYER_EVADING_WANTED_LEVEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "IS_PLAYER_EVADING_WANTED_LEVEL"
+  ],
+  "content": "0x89A3881A// IsPlayerEvadingWantedLevel\nBOOL IS_PLAYER_EVADING_WANTED_LEVEL(char* playerSrc);Parameters:playerSrc: The target playerReturns: boolean value, depending if the player is evading his wanted level or not.This will return true if the player is evading wanted level, meaning that the wanted level stars are blink.\nOtherwise will return false.\n\nIf the player is not wanted, it simply returns false.",
+  "codeBlocks": [
+    "// IsPlayerEvadingWantedLevel\nBOOL IS_PLAYER_EVADING_WANTED_LEVEL(char* playerSrc);",
+    "This will return true if the player is evading wanted level, meaning that the wanted level stars are blink.\nOtherwise will return false.\n\nIf the player is not wanted, it simply returns false.\n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/IsPlayerEvadingWantedLevel.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "title": "SET_PLAYER_MODEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_PLAYER_MODEL"
+  ],
+  "content": "0x774A4C54// SetPlayerModel\nvoid SET_PLAYER_MODEL(Player player, Hash model);Parameters:player: The player to set the model formodel: The model to useSet the model for a specific Player. Note that this will destroy the current Ped for the Player and create a new one, any reference to the old ped will be invalid after calling this.\nAs per usual, make sure to request the model first and wait until it has loaded.This is the server-side RPC native equivalent of the client native SET_PLAYER_MODEL.",
+  "codeBlocks": [
+    "// SetPlayerModel\nvoid SET_PLAYER_MODEL(Player player, Hash model);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetPlayerModel.md",
+    "https://docs.fivem.net/natives/?_0x00A1CADD00108836",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

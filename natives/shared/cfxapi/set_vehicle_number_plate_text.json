@@ -1,0 +1,20 @@
+{
+  "title": "SET_VEHICLE_NUMBER_PLATE_TEXT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_VEHICLE_NUMBER_PLATE_TEXT"
+  ],
+  "content": "0x400F9556// SetVehicleNumberPlateText\nvoid SET_VEHICLE_NUMBER_PLATE_TEXT(Vehicle vehicle, char* plateText);Parameters:vehicle: The vehicle to set the plate forplateText: The text to set the plate to, 8 chars maximumSET_VEHICLE_NUMBER_PLATE_TEXTThis is the server-side RPC native equivalent of the client native SET_VEHICLE_NUMBER_PLATE_TEXT.",
+  "codeBlocks": [
+    "// SetVehicleNumberPlateText\nvoid SET_VEHICLE_NUMBER_PLATE_TEXT(Vehicle vehicle, char* plateText);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetVehicleNumberPlateText.md",
+    "https://docs.fivem.net/natives/?_0x95A88F0B409CDA47",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "title": "IS_PLAYER_COMMERCE_INFO_LOADED_EXT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "IS_PLAYER_COMMERCE_INFO_LOADED_EXT"
+  ],
+  "content": "0x1D14F4FE// IsPlayerCommerceInfoLoadedExt\nBOOL IS_PLAYER_COMMERCE_INFO_LOADED_EXT(char* playerSrc);Parameters:playerSrc: The player handleReturns: A boolean.Requests whether or not the commerce data for the specified player has loaded from Tebex.",
+  "codeBlocks": [
+    "// IsPlayerCommerceInfoLoadedExt\nBOOL IS_PLAYER_COMMERCE_INFO_LOADED_EXT(char* playerSrc);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/IsPlayerCommerceInfoLoadedExt.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "title": "SET_PED_MODEL_HEALTH_CONFIG",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_PED_MODEL_HEALTH_CONFIG"
+  ],
+  "content": "0xAF12A05D// SetPedModelHealthConfig\nvoid SET_PED_MODEL_HEALTH_CONFIG(Hash modelHash, char* configName);Parameters:modelHash: Ped's model.configName: Name of health config.Sets a ped model's health config.\nTakes effect only after setting player model with SET_PLAYER_MODEL.Examples:Lualocal pedModel = `mp_f_freemode_01`\nSetPedModelHealthConfig(pedModel, \"Strong\")\n\nSetPlayerModel(PlayerId(), pedModel)\nSetPedDefaultComponentVariation(PlayerPedId())",
+  "codeBlocks": [
+    "// SetPedModelHealthConfig\nvoid SET_PED_MODEL_HEALTH_CONFIG(Hash modelHash, char* configName);",
+    "local pedModel = `mp_f_freemode_01`\nSetPedModelHealthConfig(pedModel, \"Strong\")\n\nSetPlayerModel(PlayerId(), pedModel)\nSetPedDefaultComponentVariation(PlayerPedId())\n\n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetPedModelHealthConfig.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

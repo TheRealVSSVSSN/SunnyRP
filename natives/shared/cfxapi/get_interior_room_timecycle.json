@@ -1,0 +1,20 @@
+{
+  "title": "GET_INTERIOR_ROOM_TIMECYCLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_INTERIOR_ROOM_TIMECYCLE"
+  ],
+  "content": "0x82BA3F88// GetInteriorRoomTimecycle\nint GET_INTERIOR_ROOM_TIMECYCLE(int interiorId, int roomIndex);Parameters:interiorId: The target interior.roomIndex: Interior room index.Returns: Room's timecycle hash.Examples:Lualocal playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\nlocal roomHash = GetRoomKeyFromEntity(playerPed)\nlocal roomId = GetInteriorRoomIndexByHash(interiorId, roomHash)\n\nif roomId ~= -1 then\n  local roomTimecycle = GetInteriorRoomTimecycle(interiorId, roomId)\n  print(\"current room timecycle hash is: \" .. roomTimecycle)\nend",
+  "codeBlocks": [
+    "// GetInteriorRoomTimecycle\nint GET_INTERIOR_ROOM_TIMECYCLE(int interiorId, int roomIndex);",
+    "local playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\nlocal roomHash = GetRoomKeyFromEntity(playerPed)\nlocal roomId = GetInteriorRoomIndexByHash(interiorId, roomHash)\n\nif roomId ~= -1 then\n  local roomTimecycle = GetInteriorRoomTimecycle(interiorId, roomId)\n  print(\"current room timecycle hash is: \" .. roomTimecycle)\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetInteriorRoomTimecycle.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

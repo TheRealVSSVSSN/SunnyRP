@@ -1,0 +1,19 @@
+{
+  "title": "IS_PED_HANDCUFFED",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "IS_PED_HANDCUFFED"
+  ],
+  "content": "0x25865633// IsPedHandcuffed\nbool IS_PED_HANDCUFFED(Ped ped);Parameters:ped: The target ped.Returns: Whether or not the ped is handcuffed.",
+  "codeBlocks": [
+    "// IsPedHandcuffed\nbool IS_PED_HANDCUFFED(Ped ped);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/IsPedHandcuffed.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

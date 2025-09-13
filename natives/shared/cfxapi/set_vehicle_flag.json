@@ -1,0 +1,20 @@
+{
+  "title": "SET_VEHICLE_FLAG",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_VEHICLE_FLAG"
+  ],
+  "content": "0x63AE1A34// SetVehicleFlag\nbool SET_VEHICLE_FLAG(Vehicle vehicle, int flagIndex, bool value);Parameters:vehicle: The vehicle to set flag for.flagIndex: Flag index.value: true to enable the flag, false to disable it.This native is a setter for GET_VEHICLE_HAS_FLAG.",
+  "codeBlocks": [
+    "// SetVehicleFlag\nbool SET_VEHICLE_FLAG(Vehicle vehicle, int flagIndex, bool value);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetVehicleFlag.md",
+    "https://docs.fivem.net/natives/?_0xD85C9F57",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

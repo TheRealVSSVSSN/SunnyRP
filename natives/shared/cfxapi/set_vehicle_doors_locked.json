@@ -1,0 +1,22 @@
+{
+  "title": "SET_VEHICLE_DOORS_LOCKED",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_VEHICLE_DOORS_LOCKED"
+  ],
+  "content": "0x4CDD35D0// SetVehicleDoorsLocked\nvoid SET_VEHICLE_DOORS_LOCKED(Vehicle vehicle, int doorLockStatus);Parameters:vehicle: The vehicle whose doors are to be locked.doorLockStatus: The lock state to apply to the vehicle's doors, see eVehicleLockState.Locks the doors of a specified vehicle to a defined lock state, affecting how players and NPCs can interact with the vehicle.NativeDB Introduced: v323enum eVehicleLockState {\n// No specific lock state, vehicle behaves according to the game's default settings.\nVEHICLELOCK_NONE = 0,\n// Vehicle is fully unlocked, allowing free entry by players and NPCs.\nVEHICLELOCK_UNLOCKED = 1,\n// Vehicle is locked, preventing entry by players and NPCs.\nVEHICLELOCK_LOCKED = 2,\n// Vehicle locks out only players, allowing NPCs to enter.\nVEHICLELOCK_LOCKOUT_PLAYER_ONLY = 3,\n// Vehicle is locked once a player enters, preventing others from entering.\nVEHICLELOCK_LOCKED_PLAYER_INSIDE = 4,\n// Vehicle starts in a locked state, but may be unlocked through game events.\nVEHICLELOCK_LOCKED_INITIALLY = 5,\n// Forces the vehicle's doors to shut and lock.\nVEHICLELOCK_FORCE_SHUT_DOORS = 6,\n// Vehicle is locked but can still be damaged.\nVEHICLELOCK_LOCKED_BUT_CAN_BE_DAMAGED = 7,\n// Vehicle is locked, but its trunk/boot remains unlocked.\nVEHICLELOCK_LOCKED_BUT_BOOT_UNLOCKED = 8,\n// Vehicle is locked and does not allow passengers, except for the driver.\nVEHICLELOCK_LOCKED_NO_PASSENGERS = 9,\n// Vehicle is completely locked, preventing entry entirely, even if previously inside.\nVEHICLELOCK_CANNOT_ENTER = 10\n};\nThis is the server-side RPC native equivalent of the client native SET_VEHICLE_DOORS_LOCKED.",
+  "codeBlocks": [
+    "// SetVehicleDoorsLocked\nvoid SET_VEHICLE_DOORS_LOCKED(Vehicle vehicle, int doorLockStatus);",
+    "NativeDB Introduced: v323",
+    "enum eVehicleLockState {\n// No specific lock state, vehicle behaves according to the game's default settings.\nVEHICLELOCK_NONE = 0,\n// Vehicle is fully unlocked, allowing free entry by players and NPCs.\nVEHICLELOCK_UNLOCKED = 1,\n// Vehicle is locked, preventing entry by players and NPCs.\nVEHICLELOCK_LOCKED = 2,\n// Vehicle locks out only players, allowing NPCs to enter.\nVEHICLELOCK_LOCKOUT_PLAYER_ONLY = 3,\n// Vehicle is locked once a player enters, preventing others from entering.\nVEHICLELOCK_LOCKED_PLAYER_INSIDE = 4,\n// Vehicle starts in a locked state, but may be unlocked through game events.\nVEHICLELOCK_LOCKED_INITIALLY = 5,\n// Forces the vehicle's doors to shut and lock.\nVEHICLELOCK_FORCE_SHUT_DOORS = 6,\n// Vehicle is locked but can still be damaged.\nVEHICLELOCK_LOCKED_BUT_CAN_BE_DAMAGED = 7,\n// Vehicle is locked, but its trunk/boot remains unlocked.\nVEHICLELOCK_LOCKED_BUT_BOOT_UNLOCKED = 8,\n// Vehicle is locked and does not allow passengers, except for the driver.\nVEHICLELOCK_LOCKED_NO_PASSENGERS = 9,\n// Vehicle is completely locked, preventing entry entirely, even if previously inside.\nVEHICLELOCK_CANNOT_ENTER = 10\n};\n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetVehicleDoorsLocked.md",
+    "https://docs.fivem.net/natives/?_0xB664292EAECF7FA6",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}
