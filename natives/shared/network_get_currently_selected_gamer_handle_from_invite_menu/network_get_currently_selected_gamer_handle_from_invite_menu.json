@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_GET_CURRENTLY_SELECTED_GAMER_HANDLE_FROM_INVITE_MENU",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_GET_CURRENTLY_SELECTED_GAMER_HANDLE_FROM_INVITE_MENU"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_GET_CURRENTLY_SELECTED_GAMER_HANDLE_FROM_INVITE_MENU\nNetworkGetCurrentlySelectedGamerHandleFromInviteMenu()"
+  ],
+  "urls": [],
+  "tags": []
+}

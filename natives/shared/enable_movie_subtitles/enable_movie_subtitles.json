@@ -1,0 +1,13 @@
+{
+  "title": "ENABLE_MOVIE_SUBTITLES",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENABLE_MOVIE_SUBTITLES"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ENABLE_MOVIE_SUBTITLES\nEnableMovieSubtitles()"
+  ],
+  "urls": [],
+  "tags": []
+}

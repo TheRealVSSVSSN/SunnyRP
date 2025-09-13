@@ -1,0 +1,13 @@
+{
+  "title": "DRAW_DEBUG_LINE_WITH_TWO_COLOURS",
+  "breadcrumbs": [
+    "Native Reference",
+    "DRAW_DEBUG_LINE_WITH_TWO_COLOURS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DRAW_DEBUG_LINE_WITH_TWO_COLOURS\nDrawDebugLineWithTwoColours()"
+  ],
+  "urls": [],
+  "tags": []
+}

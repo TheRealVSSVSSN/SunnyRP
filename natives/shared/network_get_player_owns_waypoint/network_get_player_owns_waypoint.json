@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_GET_PLAYER_OWNS_WAYPOINT",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_GET_PLAYER_OWNS_WAYPOINT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_GET_PLAYER_OWNS_WAYPOINT\nNetworkGetPlayerOwnsWaypoint()"
+  ],
+  "urls": [],
+  "tags": []
+}

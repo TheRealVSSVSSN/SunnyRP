@@ -1,0 +1,13 @@
+{
+  "title": "GET_PLAYER_ENDPOINT",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PLAYER_ENDPOINT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PLAYER_ENDPOINT\nGetPlayerEndpoint()"
+  ],
+  "urls": [],
+  "tags": []
+}

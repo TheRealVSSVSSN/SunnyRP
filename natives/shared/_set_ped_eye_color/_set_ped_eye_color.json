@@ -1,0 +1,13 @@
+{
+  "title": "_SET_PED_EYE_COLOR",
+  "breadcrumbs": [
+    "Native Reference",
+    "_SET_PED_EYE_COLOR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_PED_EYE_COLOR\n_SetPedEyeColor()"
+  ],
+  "urls": [],
+  "tags": []
+}

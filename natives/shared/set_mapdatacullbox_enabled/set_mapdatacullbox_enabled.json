@@ -1,0 +1,13 @@
+{
+  "title": "SET_MAPDATACULLBOX_ENABLED",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_MAPDATACULLBOX_ENABLED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_MAPDATACULLBOX_ENABLED\nSetMapdatacullboxEnabled()"
+  ],
+  "urls": [],
+  "tags": []
+}

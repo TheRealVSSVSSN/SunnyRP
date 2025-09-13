@@ -1,0 +1,13 @@
+{
+  "title": "RESET_ENTITY_ALPHA",
+  "breadcrumbs": [
+    "Native Reference",
+    "RESET_ENTITY_ALPHA"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for RESET_ENTITY_ALPHA\nResetEntityAlpha()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_GET_GAMER_STATUS_RESULT",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_GET_GAMER_STATUS_RESULT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_GET_GAMER_STATUS_RESULT\nNetworkGetGamerStatusResult()"
+  ],
+  "urls": [],
+  "tags": []
+}

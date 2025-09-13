@@ -1,0 +1,13 @@
+{
+  "title": "DRAW_LOW_QUALITY_PHOTO_TO_PHONE",
+  "breadcrumbs": [
+    "Native Reference",
+    "DRAW_LOW_QUALITY_PHOTO_TO_PHONE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DRAW_LOW_QUALITY_PHOTO_TO_PHONE\nDrawLowQualityPhotoToPhone()"
+  ],
+  "urls": [],
+  "tags": []
+}

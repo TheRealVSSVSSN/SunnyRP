@@ -1,0 +1,13 @@
+{
+  "title": "IS_ACE_ALLOWED",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_ACE_ALLOWED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_ACE_ALLOWED\nIsAceAllowed()"
+  ],
+  "urls": [],
+  "tags": []
+}

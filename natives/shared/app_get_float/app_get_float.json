@@ -1,0 +1,13 @@
+{
+  "title": "APP_GET_FLOAT",
+  "breadcrumbs": [
+    "Native Reference",
+    "APP_GET_FLOAT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for APP_GET_FLOAT\nAppGetFloat()"
+  ],
+  "urls": [],
+  "tags": []
+}

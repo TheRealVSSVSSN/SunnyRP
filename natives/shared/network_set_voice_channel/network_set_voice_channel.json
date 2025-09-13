@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SET_VOICE_CHANNEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SET_VOICE_CHANNEL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SET_VOICE_CHANNEL\nNetworkSetVoiceChannel()"
+  ],
+  "urls": [],
+  "tags": []
+}

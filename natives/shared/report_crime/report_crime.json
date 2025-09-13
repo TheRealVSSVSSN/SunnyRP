@@ -1,0 +1,13 @@
+{
+  "title": "REPORT_CRIME",
+  "breadcrumbs": [
+    "Native Reference",
+    "REPORT_CRIME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REPORT_CRIME\nReportCrime()"
+  ],
+  "urls": [],
+  "tags": []
+}

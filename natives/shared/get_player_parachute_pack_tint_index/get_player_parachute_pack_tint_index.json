@@ -1,0 +1,13 @@
+{
+  "title": "GET_PLAYER_PARACHUTE_PACK_TINT_INDEX",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PLAYER_PARACHUTE_PACK_TINT_INDEX"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PLAYER_PARACHUTE_PACK_TINT_INDEX\nGetPlayerParachutePackTintIndex()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_GET_ENTITY_IS_LOCAL",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_GET_ENTITY_IS_LOCAL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_GET_ENTITY_IS_LOCAL\nNetworkGetEntityIsLocal()"
+  ],
+  "urls": [],
+  "tags": []
+}

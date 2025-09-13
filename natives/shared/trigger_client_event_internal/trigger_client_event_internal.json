@@ -1,0 +1,13 @@
+{
+  "title": "TRIGGER_CLIENT_EVENT_INTERNAL",
+  "breadcrumbs": [
+    "Native Reference",
+    "TRIGGER_CLIENT_EVENT_INTERNAL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for TRIGGER_CLIENT_EVENT_INTERNAL\nTriggerClientEventInternal()"
+  ],
+  "urls": [],
+  "tags": []
+}

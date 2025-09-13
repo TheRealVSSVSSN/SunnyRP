@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SET_IN_FREE_CAM_MODE",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SET_IN_FREE_CAM_MODE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SET_IN_FREE_CAM_MODE\nNetworkSetInFreeCamMode()"
+  ],
+  "urls": [],
+  "tags": []
+}

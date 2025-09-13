@@ -1,0 +1,13 @@
+{
+  "title": "_NETWORK_SET_CURRENT_MISSION_ID",
+  "breadcrumbs": [
+    "Native Reference",
+    "_NETWORK_SET_CURRENT_MISSION_ID"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _NETWORK_SET_CURRENT_MISSION_ID\n_NetworkSetCurrentMissionId()"
+  ],
+  "urls": [],
+  "tags": []
+}

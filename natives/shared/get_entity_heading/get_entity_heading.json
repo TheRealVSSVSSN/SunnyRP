@@ -1,0 +1,13 @@
+{
+  "title": "GET_ENTITY_HEADING",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_ENTITY_HEADING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ENTITY_HEADING\nGetEntityHeading()"
+  ],
+  "urls": [],
+  "tags": []
+}

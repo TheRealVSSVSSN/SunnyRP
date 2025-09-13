@@ -1,0 +1,13 @@
+{
+  "title": "APP_DATA_VALID",
+  "breadcrumbs": [
+    "Native Reference",
+    "APP_DATA_VALID"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for APP_DATA_VALID\nAppDataValid()"
+  ],
+  "urls": [],
+  "tags": []
+}

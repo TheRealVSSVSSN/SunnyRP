@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_FIRING_PATTERN",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_FIRING_PATTERN"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_FIRING_PATTERN\nSetPedFiringPattern()"
+  ],
+  "urls": [],
+  "tags": []
+}

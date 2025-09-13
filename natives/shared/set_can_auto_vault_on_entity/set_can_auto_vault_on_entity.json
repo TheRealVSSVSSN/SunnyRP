@@ -1,0 +1,13 @@
+{
+  "title": "SET_CAN_AUTO_VAULT_ON_ENTITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_CAN_AUTO_VAULT_ON_ENTITY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_CAN_AUTO_VAULT_ON_ENTITY\nSetCanAutoVaultOnEntity()"
+  ],
+  "urls": [],
+  "tags": []
+}

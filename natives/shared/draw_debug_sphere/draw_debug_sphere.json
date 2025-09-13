@@ -1,0 +1,13 @@
+{
+  "title": "DRAW_DEBUG_SPHERE",
+  "breadcrumbs": [
+    "Native Reference",
+    "DRAW_DEBUG_SPHERE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DRAW_DEBUG_SPHERE\nDrawDebugSphere()"
+  ],
+  "urls": [],
+  "tags": []
+}

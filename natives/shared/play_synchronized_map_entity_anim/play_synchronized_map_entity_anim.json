@@ -1,0 +1,13 @@
+{
+  "title": "PLAY_SYNCHRONIZED_MAP_ENTITY_ANIM",
+  "breadcrumbs": [
+    "Native Reference",
+    "PLAY_SYNCHRONIZED_MAP_ENTITY_ANIM"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for PLAY_SYNCHRONIZED_MAP_ENTITY_ANIM\nPlaySynchronizedMapEntityAnim()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_ARE_CAMERA_CONTROLS_DISABLED",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_ARE_CAMERA_CONTROLS_DISABLED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ARE_CAMERA_CONTROLS_DISABLED\nGetAreCameraControlsDisabled()"
+  ],
+  "urls": [],
+  "tags": []
+}

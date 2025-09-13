@@ -1,0 +1,13 @@
+{
+  "title": "TASK_LEAVE_VEHICLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASK_LEAVE_VEHICLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for TASK_LEAVE_VEHICLE\nTaskLeaveVehicle()"
+  ],
+  "urls": [],
+  "tags": []
+}

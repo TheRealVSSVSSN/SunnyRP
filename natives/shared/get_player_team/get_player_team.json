@@ -1,0 +1,13 @@
+{
+  "title": "GET_PLAYER_TEAM",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PLAYER_TEAM"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PLAYER_TEAM\nGetPlayerTeam()"
+  ],
+  "urls": [],
+  "tags": []
+}

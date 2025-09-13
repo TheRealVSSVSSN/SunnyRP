@@ -1,0 +1,13 @@
+{
+  "title": "PLAYER_DETACH_VIRTUAL_BOUND",
+  "breadcrumbs": [
+    "Native Reference",
+    "PLAYER_DETACH_VIRTUAL_BOUND"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for PLAYER_DETACH_VIRTUAL_BOUND\nPlayerDetachVirtualBound()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_EXPLODE_VEHICLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_EXPLODE_VEHICLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_EXPLODE_VEHICLE\nNetworkExplodeVehicle()"
+  ],
+  "urls": [],
+  "tags": []
+}

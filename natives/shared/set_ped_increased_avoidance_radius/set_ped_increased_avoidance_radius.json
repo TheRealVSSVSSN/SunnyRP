@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_INCREASED_AVOIDANCE_RADIUS",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_INCREASED_AVOIDANCE_RADIUS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_INCREASED_AVOIDANCE_RADIUS\nSetPedIncreasedAvoidanceRadius()"
+  ],
+  "urls": [],
+  "tags": []
+}

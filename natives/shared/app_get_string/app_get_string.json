@@ -1,0 +1,13 @@
+{
+  "title": "APP_GET_STRING",
+  "breadcrumbs": [
+    "Native Reference",
+    "APP_GET_STRING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for APP_GET_STRING\nAppGetString()"
+  ],
+  "urls": [],
+  "tags": []
+}

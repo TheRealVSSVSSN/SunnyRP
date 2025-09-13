@@ -1,0 +1,13 @@
+{
+  "title": "SET_MAP_NAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_MAP_NAME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_MAP_NAME\nSetMapName()"
+  ],
+  "urls": [],
+  "tags": []
+}

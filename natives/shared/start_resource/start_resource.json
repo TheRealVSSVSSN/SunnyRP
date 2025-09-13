@@ -1,0 +1,13 @@
+{
+  "title": "START_RESOURCE",
+  "breadcrumbs": [
+    "Native Reference",
+    "START_RESOURCE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for START_RESOURCE\nStartResource()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "_NETWORK_SET_CURRENT_SPAWN_SETTING",
+  "breadcrumbs": [
+    "Native Reference",
+    "_NETWORK_SET_CURRENT_SPAWN_SETTING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _NETWORK_SET_CURRENT_SPAWN_SETTING\n_NetworkSetCurrentSpawnSetting()"
+  ],
+  "urls": [],
+  "tags": []
+}

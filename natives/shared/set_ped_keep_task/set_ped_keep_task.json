@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_KEEP_TASK",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_KEEP_TASK"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_KEEP_TASK\nSetPedKeepTask()"
+  ],
+  "urls": [],
+  "tags": []
+}

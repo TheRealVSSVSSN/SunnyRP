@@ -1,0 +1,13 @@
+{
+  "title": "DRAW_DEBUG_CROSS",
+  "breadcrumbs": [
+    "Native Reference",
+    "DRAW_DEBUG_CROSS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DRAW_DEBUG_CROSS\nDrawDebugCross()"
+  ],
+  "urls": [],
+  "tags": []
+}

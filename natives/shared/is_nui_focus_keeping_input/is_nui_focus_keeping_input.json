@@ -1,0 +1,13 @@
+{
+  "title": "IS_NUI_FOCUS_KEEPING_INPUT",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_NUI_FOCUS_KEEPING_INPUT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_NUI_FOCUS_KEEPING_INPUT\nIsNuiFocusKeepingInput()"
+  ],
+  "urls": [],
+  "tags": []
+}

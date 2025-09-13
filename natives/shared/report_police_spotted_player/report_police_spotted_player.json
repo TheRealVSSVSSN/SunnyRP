@@ -1,0 +1,13 @@
+{
+  "title": "REPORT_POLICE_SPOTTED_PLAYER",
+  "breadcrumbs": [
+    "Native Reference",
+    "REPORT_POLICE_SPOTTED_PLAYER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REPORT_POLICE_SPOTTED_PLAYER\nReportPoliceSpottedPlayer()"
+  ],
+  "urls": [],
+  "tags": []
+}

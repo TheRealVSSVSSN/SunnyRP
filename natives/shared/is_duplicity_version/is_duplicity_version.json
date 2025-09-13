@@ -1,0 +1,13 @@
+{
+  "title": "IS_DUPLICITY_VERSION",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_DUPLICITY_VERSION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_DUPLICITY_VERSION\nIsDuplicityVersion()"
+  ],
+  "urls": [],
+  "tags": []
+}

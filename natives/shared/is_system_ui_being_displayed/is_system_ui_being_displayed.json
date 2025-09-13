@@ -1,0 +1,13 @@
+{
+  "title": "IS_SYSTEM_UI_BEING_DISPLAYED",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_SYSTEM_UI_BEING_DISPLAYED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_SYSTEM_UI_BEING_DISPLAYED\nIsSystemUiBeingDisplayed()"
+  ],
+  "urls": [],
+  "tags": []
+}

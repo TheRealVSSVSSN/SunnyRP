@@ -1,0 +1,13 @@
+{
+  "title": "SET_VEHICLE_WHEEL_Y_ROTATION",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_VEHICLE_WHEEL_Y_ROTATION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_VEHICLE_WHEEL_Y_ROTATION\nSetVehicleWheelYRotation()"
+  ],
+  "urls": [],
+  "tags": []
+}

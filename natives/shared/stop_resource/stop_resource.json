@@ -1,0 +1,13 @@
+{
+  "title": "STOP_RESOURCE",
+  "breadcrumbs": [
+    "Native Reference",
+    "STOP_RESOURCE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for STOP_RESOURCE\nStopResource()"
+  ],
+  "urls": [],
+  "tags": []
+}

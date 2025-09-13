@@ -1,0 +1,13 @@
+{
+  "title": "_SET_ENTITY_DECALS_DISABLED",
+  "breadcrumbs": [
+    "Native Reference",
+    "_SET_ENTITY_DECALS_DISABLED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_ENTITY_DECALS_DISABLED\n_SetEntityDecalsDisabled()"
+  ],
+  "urls": [],
+  "tags": []
+}

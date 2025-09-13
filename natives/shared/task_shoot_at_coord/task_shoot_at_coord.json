@@ -1,0 +1,13 @@
+{
+  "title": "TASK_SHOOT_AT_COORD",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASK_SHOOT_AT_COORD"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for TASK_SHOOT_AT_COORD\nTaskShootAtCoord()"
+  ],
+  "urls": [],
+  "tags": []
+}

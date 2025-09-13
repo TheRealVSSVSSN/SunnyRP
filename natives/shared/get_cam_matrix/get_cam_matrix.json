@@ -1,0 +1,13 @@
+{
+  "title": "GET_CAM_MATRIX",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_CAM_MATRIX"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_CAM_MATRIX\nGetCamMatrix()"
+  ],
+  "urls": [],
+  "tags": []
+}

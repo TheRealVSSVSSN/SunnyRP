@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SET_VOICE_ACTIVE",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SET_VOICE_ACTIVE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SET_VOICE_ACTIVE\nNetworkSetVoiceActive()"
+  ],
+  "urls": [],
+  "tags": []
+}

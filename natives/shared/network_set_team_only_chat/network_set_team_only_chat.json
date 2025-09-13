@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SET_TEAM_ONLY_CHAT",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SET_TEAM_ONLY_CHAT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SET_TEAM_ONLY_CHAT\nNetworkSetTeamOnlyChat()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_AMBIENT_PED_RANGE_MULTIPLIER",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_AMBIENT_PED_RANGE_MULTIPLIER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_AMBIENT_PED_RANGE_MULTIPLIER\nGetAmbientPedRangeMultiplier()"
+  ],
+  "urls": [],
+  "tags": []
+}

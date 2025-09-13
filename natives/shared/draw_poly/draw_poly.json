@@ -1,0 +1,13 @@
+{
+  "title": "DRAW_POLY",
+  "breadcrumbs": [
+    "Native Reference",
+    "DRAW_POLY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DRAW_POLY\nDrawPoly()"
+  ],
+  "urls": [],
+  "tags": []
+}

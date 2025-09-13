@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_CAN_RAGDOLL",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_CAN_RAGDOLL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_CAN_RAGDOLL\nSetPedCanRagdoll()"
+  ],
+  "urls": [],
+  "tags": []
+}

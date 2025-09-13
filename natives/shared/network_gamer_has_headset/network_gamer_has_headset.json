@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_GAMER_HAS_HEADSET",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_GAMER_HAS_HEADSET"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_GAMER_HAS_HEADSET\nNetworkGamerHasHeadset()"
+  ],
+  "urls": [],
+  "tags": []
+}

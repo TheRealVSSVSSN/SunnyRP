@@ -1,0 +1,13 @@
+{
+  "title": "IS_VEHICLE_ALARM_SET",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_VEHICLE_ALARM_SET"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_VEHICLE_ALARM_SET\nIsVehicleAlarmSet()"
+  ],
+  "urls": [],
+  "tags": []
+}

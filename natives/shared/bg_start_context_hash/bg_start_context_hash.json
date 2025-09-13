@@ -1,0 +1,13 @@
+{
+  "title": "BG_START_CONTEXT_HASH",
+  "breadcrumbs": [
+    "Native Reference",
+    "BG_START_CONTEXT_HASH"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for BG_START_CONTEXT_HASH\nBgStartContextHash()"
+  ],
+  "urls": [],
+  "tags": []
+}

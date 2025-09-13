@@ -1,0 +1,13 @@
+{
+  "title": "GET_CURRENT_RESOURCE_NAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_CURRENT_RESOURCE_NAME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_CURRENT_RESOURCE_NAME\nGetCurrentResourceName()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_PLAYER_NAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PLAYER_NAME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PLAYER_NAME\nGetPlayerName()"
+  ],
+  "urls": [],
+  "tags": []
+}

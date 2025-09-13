@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SET_NO_SPECTATOR_CHAT",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SET_NO_SPECTATOR_CHAT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SET_NO_SPECTATOR_CHAT\nNetworkSetNoSpectatorChat()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "FORCE_CLEANUP",
+  "breadcrumbs": [
+    "Native Reference",
+    "FORCE_CLEANUP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for FORCE_CLEANUP\nForceCleanup()"
+  ],
+  "urls": [],
+  "tags": []
+}

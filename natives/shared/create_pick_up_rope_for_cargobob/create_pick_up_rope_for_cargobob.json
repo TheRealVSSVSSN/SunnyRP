@@ -1,0 +1,13 @@
+{
+  "title": "CREATE_PICK_UP_ROPE_FOR_CARGOBOB",
+  "breadcrumbs": [
+    "Native Reference",
+    "CREATE_PICK_UP_ROPE_FOR_CARGOBOB"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CREATE_PICK_UP_ROPE_FOR_CARGOBOB\nCreatePickUpRopeForCargobob()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "_GET_NAME_OF_THREAD",
+  "breadcrumbs": [
+    "Native Reference",
+    "_GET_NAME_OF_THREAD"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_NAME_OF_THREAD\n_GetNameOfThread()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_GET_FRIEND_NAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_GET_FRIEND_NAME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_GET_FRIEND_NAME\nNetworkGetFriendName()"
+  ],
+  "urls": [],
+  "tags": []
+}

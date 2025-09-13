@@ -1,0 +1,13 @@
+{
+  "title": "REMOVE_FORCED_OBJECT",
+  "breadcrumbs": [
+    "Native Reference",
+    "REMOVE_FORCED_OBJECT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REMOVE_FORCED_OBJECT\nRemoveForcedObject()"
+  ],
+  "urls": [],
+  "tags": []
+}

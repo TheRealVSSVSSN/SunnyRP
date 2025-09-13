@@ -1,0 +1,13 @@
+{
+  "title": "SET_MODEL_HEADLIGHT_CONFIGURATION",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_MODEL_HEADLIGHT_CONFIGURATION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_MODEL_HEADLIGHT_CONFIGURATION\nSetModelHeadlightConfiguration()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_MODEL_IS_SUPPRESSED",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_MODEL_IS_SUPPRESSED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_MODEL_IS_SUPPRESSED\nSetPedModelIsSuppressed()"
+  ],
+  "urls": [],
+  "tags": []
+}

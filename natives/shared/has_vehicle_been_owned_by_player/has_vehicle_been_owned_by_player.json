@@ -1,0 +1,13 @@
+{
+  "title": "HAS_VEHICLE_BEEN_OWNED_BY_PLAYER",
+  "breadcrumbs": [
+    "Native Reference",
+    "HAS_VEHICLE_BEEN_OWNED_BY_PLAYER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for HAS_VEHICLE_BEEN_OWNED_BY_PLAYER\nHasVehicleBeenOwnedByPlayer()"
+  ],
+  "urls": [],
+  "tags": []
+}

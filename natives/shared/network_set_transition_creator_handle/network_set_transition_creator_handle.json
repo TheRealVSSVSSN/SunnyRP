@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SET_TRANSITION_CREATOR_HANDLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SET_TRANSITION_CREATOR_HANDLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SET_TRANSITION_CREATOR_HANDLE\nNetworkSetTransitionCreatorHandle()"
+  ],
+  "urls": [],
+  "tags": []
+}

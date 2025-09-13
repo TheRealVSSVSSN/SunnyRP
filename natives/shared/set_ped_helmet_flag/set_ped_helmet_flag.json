@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_HELMET_FLAG",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_HELMET_FLAG"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_HELMET_FLAG\nSetPedHelmetFlag()"
+  ],
+  "urls": [],
+  "tags": []
+}

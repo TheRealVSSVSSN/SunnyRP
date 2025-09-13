@@ -1,0 +1,13 @@
+{
+  "title": "SCRIPT_THREAD_ITERATOR_RESET",
+  "breadcrumbs": [
+    "Native Reference",
+    "SCRIPT_THREAD_ITERATOR_RESET"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SCRIPT_THREAD_ITERATOR_RESET\nScriptThreadIteratorReset()"
+  ],
+  "urls": [],
+  "tags": []
+}

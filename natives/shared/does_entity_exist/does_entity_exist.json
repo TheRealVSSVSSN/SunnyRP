@@ -1,0 +1,13 @@
+{
+  "title": "DOES_ENTITY_EXIST",
+  "breadcrumbs": [
+    "Native Reference",
+    "DOES_ENTITY_EXIST"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DOES_ENTITY_EXIST\nDoesEntityExist()"
+  ],
+  "urls": [],
+  "tags": []
+}

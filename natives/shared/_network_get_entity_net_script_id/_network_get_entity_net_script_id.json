@@ -1,0 +1,13 @@
+{
+  "title": "_NETWORK_GET_ENTITY_NET_SCRIPT_ID",
+  "breadcrumbs": [
+    "Native Reference",
+    "_NETWORK_GET_ENTITY_NET_SCRIPT_ID"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _NETWORK_GET_ENTITY_NET_SCRIPT_ID\n_NetworkGetEntityNetScriptId()"
+  ],
+  "urls": [],
+  "tags": []
+}

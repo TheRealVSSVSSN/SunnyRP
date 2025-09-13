@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_CLEAR_VOICE_PROXIMITY_OVERRIDE",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_CLEAR_VOICE_PROXIMITY_OVERRIDE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_CLEAR_VOICE_PROXIMITY_OVERRIDE\nNetworkClearVoiceProximityOverride()"
+  ],
+  "urls": [],
+  "tags": []
+}

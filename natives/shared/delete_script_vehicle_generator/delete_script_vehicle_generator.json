@@ -1,0 +1,13 @@
+{
+  "title": "DELETE_SCRIPT_VEHICLE_GENERATOR",
+  "breadcrumbs": [
+    "Native Reference",
+    "DELETE_SCRIPT_VEHICLE_GENERATOR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DELETE_SCRIPT_VEHICLE_GENERATOR\nDeleteScriptVehicleGenerator()"
+  ],
+  "urls": [],
+  "tags": []
+}

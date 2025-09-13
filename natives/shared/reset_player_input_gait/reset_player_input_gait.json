@@ -1,0 +1,13 @@
+{
+  "title": "RESET_PLAYER_INPUT_GAIT",
+  "breadcrumbs": [
+    "Native Reference",
+    "RESET_PLAYER_INPUT_GAIT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for RESET_PLAYER_INPUT_GAIT\nResetPlayerInputGait()"
+  ],
+  "urls": [],
+  "tags": []
+}

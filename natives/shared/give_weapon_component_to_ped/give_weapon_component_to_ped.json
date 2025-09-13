@@ -1,0 +1,13 @@
+{
+  "title": "GIVE_WEAPON_COMPONENT_TO_PED",
+  "breadcrumbs": [
+    "Native Reference",
+    "GIVE_WEAPON_COMPONENT_TO_PED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GIVE_WEAPON_COMPONENT_TO_PED\nGiveWeaponComponentToPed()"
+  ],
+  "urls": [],
+  "tags": []
+}

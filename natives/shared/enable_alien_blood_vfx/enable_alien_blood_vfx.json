@@ -1,0 +1,13 @@
+{
+  "title": "ENABLE_ALIEN_BLOOD_VFX",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENABLE_ALIEN_BLOOD_VFX"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ENABLE_ALIEN_BLOOD_VFX\nEnableAlienBloodVfx()"
+  ],
+  "urls": [],
+  "tags": []
+}

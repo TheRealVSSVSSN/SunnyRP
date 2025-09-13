@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_GET_LOCAL_HANDLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_GET_LOCAL_HANDLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_GET_LOCAL_HANDLE\nNetworkGetLocalHandle()"
+  ],
+  "urls": [],
+  "tags": []
+}

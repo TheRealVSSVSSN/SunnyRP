@@ -1,0 +1,13 @@
+{
+  "title": "DRAW_RECT",
+  "breadcrumbs": [
+    "Native Reference",
+    "DRAW_RECT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DRAW_RECT\nDrawRect()"
+  ],
+  "urls": [],
+  "tags": []
+}

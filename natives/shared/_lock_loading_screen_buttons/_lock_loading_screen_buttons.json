@@ -1,0 +1,13 @@
+{
+  "title": "_LOCK_LOADING_SCREEN_BUTTONS",
+  "breadcrumbs": [
+    "Native Reference",
+    "_LOCK_LOADING_SCREEN_BUTTONS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _LOCK_LOADING_SCREEN_BUTTONS\n_LockLoadingScreenButtons()"
+  ],
+  "urls": [],
+  "tags": []
+}

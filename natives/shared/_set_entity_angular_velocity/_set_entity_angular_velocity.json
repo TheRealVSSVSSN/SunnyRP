@@ -1,0 +1,13 @@
+{
+  "title": "_SET_ENTITY_ANGULAR_VELOCITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "_SET_ENTITY_ANGULAR_VELOCITY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_ENTITY_ANGULAR_VELOCITY\n_SetEntityAngularVelocity()"
+  ],
+  "urls": [],
+  "tags": []
+}

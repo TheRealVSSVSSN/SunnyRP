@@ -1,0 +1,13 @@
+{
+  "title": "GET_NO_LOADING_SCREEN",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_NO_LOADING_SCREEN"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_NO_LOADING_SCREEN\nGetNoLoadingScreen()"
+  ],
+  "urls": [],
+  "tags": []
+}

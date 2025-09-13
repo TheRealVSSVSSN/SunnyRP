@@ -1,0 +1,13 @@
+{
+  "title": "REMOVE_PLAYER_HELMET",
+  "breadcrumbs": [
+    "Native Reference",
+    "REMOVE_PLAYER_HELMET"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REMOVE_PLAYER_HELMET\nRemovePlayerHelmet()"
+  ],
+  "urls": [],
+  "tags": []
+}

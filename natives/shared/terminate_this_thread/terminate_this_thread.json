@@ -1,0 +1,13 @@
+{
+  "title": "TERMINATE_THIS_THREAD",
+  "breadcrumbs": [
+    "Native Reference",
+    "TERMINATE_THIS_THREAD"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for TERMINATE_THIS_THREAD\nTerminateThisThread()"
+  ],
+  "urls": [],
+  "tags": []
+}

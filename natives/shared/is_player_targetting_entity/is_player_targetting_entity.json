@@ -1,0 +1,13 @@
+{
+  "title": "IS_PLAYER_TARGETTING_ENTITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_PLAYER_TARGETTING_ENTITY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_PLAYER_TARGETTING_ENTITY\nIsPlayerTargettingEntity()"
+  ],
+  "urls": [],
+  "tags": []
+}

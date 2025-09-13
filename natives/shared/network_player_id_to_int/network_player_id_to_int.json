@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_PLAYER_ID_TO_INT",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_PLAYER_ID_TO_INT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_PLAYER_ID_TO_INT\nNetworkPlayerIdToInt()"
+  ],
+  "urls": [],
+  "tags": []
+}

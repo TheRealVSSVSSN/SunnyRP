@@ -1,0 +1,13 @@
+{
+  "title": "GET_PLAYER_LAST_MSG",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PLAYER_LAST_MSG"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PLAYER_LAST_MSG\nGetPlayerLastMsg()"
+  ],
+  "urls": [],
+  "tags": []
+}

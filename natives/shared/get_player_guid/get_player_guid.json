@@ -1,0 +1,13 @@
+{
+  "title": "GET_PLAYER_GUID",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PLAYER_GUID"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PLAYER_GUID\nGetPlayerGuid()"
+  ],
+  "urls": [],
+  "tags": []
+}

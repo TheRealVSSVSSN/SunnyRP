@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_LEG_IK_MODE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_LEG_IK_MODE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_LEG_IK_MODE\nSetPedLegIkMode()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "DRAW_LIGHT_WITH_RANGE",
+  "breadcrumbs": [
+    "Native Reference",
+    "DRAW_LIGHT_WITH_RANGE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DRAW_LIGHT_WITH_RANGE\nDrawLightWithRange()"
+  ],
+  "urls": [],
+  "tags": []
+}

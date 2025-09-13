@@ -1,0 +1,13 @@
+{
+  "title": "MUMBLE_IS_CONNECTED",
+  "breadcrumbs": [
+    "Native Reference",
+    "MUMBLE_IS_CONNECTED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for MUMBLE_IS_CONNECTED\nMumbleIsConnected()"
+  ],
+  "urls": [],
+  "tags": []
+}

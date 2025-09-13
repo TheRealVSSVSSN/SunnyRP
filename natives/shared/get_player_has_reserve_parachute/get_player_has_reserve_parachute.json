@@ -1,0 +1,13 @@
+{
+  "title": "GET_PLAYER_HAS_RESERVE_PARACHUTE",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PLAYER_HAS_RESERVE_PARACHUTE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PLAYER_HAS_RESERVE_PARACHUTE\nGetPlayerHasReserveParachute()"
+  ],
+  "urls": [],
+  "tags": []
+}

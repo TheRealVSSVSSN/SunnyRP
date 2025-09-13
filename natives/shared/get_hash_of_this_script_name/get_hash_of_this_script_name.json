@@ -1,0 +1,13 @@
+{
+  "title": "GET_HASH_OF_THIS_SCRIPT_NAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_HASH_OF_THIS_SCRIPT_NAME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_HASH_OF_THIS_SCRIPT_NAME\nGetHashOfThisScriptName()"
+  ],
+  "urls": [],
+  "tags": []
+}

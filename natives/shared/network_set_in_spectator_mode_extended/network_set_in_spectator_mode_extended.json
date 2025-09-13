@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SET_IN_SPECTATOR_MODE_EXTENDED",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SET_IN_SPECTATOR_MODE_EXTENDED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SET_IN_SPECTATOR_MODE_EXTENDED\nNetworkSetInSpectatorModeExtended()"
+  ],
+  "urls": [],
+  "tags": []
+}

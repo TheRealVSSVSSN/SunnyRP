@@ -1,0 +1,13 @@
+{
+  "title": "RESET_ENTITY_DRAW_OUTLINE_RENDER_TECHNIQUE",
+  "breadcrumbs": [
+    "Native Reference",
+    "RESET_ENTITY_DRAW_OUTLINE_RENDER_TECHNIQUE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for RESET_ENTITY_DRAW_OUTLINE_RENDER_TECHNIQUE\nResetEntityDrawOutlineRenderTechnique()"
+  ],
+  "urls": [],
+  "tags": []
+}

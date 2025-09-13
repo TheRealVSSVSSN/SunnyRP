@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_IN_VEHICLE_CONTEXT",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_IN_VEHICLE_CONTEXT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_IN_VEHICLE_CONTEXT\nSetPedInVehicleContext()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "_SET_PED_HELMET_UNK",
+  "breadcrumbs": [
+    "Native Reference",
+    "_SET_PED_HELMET_UNK"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_PED_HELMET_UNK\n_SetPedHelmetUnk()"
+  ],
+  "urls": [],
+  "tags": []
+}

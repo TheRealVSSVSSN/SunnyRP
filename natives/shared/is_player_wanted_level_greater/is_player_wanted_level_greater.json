@@ -1,0 +1,13 @@
+{
+  "title": "IS_PLAYER_WANTED_LEVEL_GREATER",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_PLAYER_WANTED_LEVEL_GREATER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_PLAYER_WANTED_LEVEL_GREATER\nIsPlayerWantedLevelGreater()"
+  ],
+  "urls": [],
+  "tags": []
+}

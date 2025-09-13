@@ -1,0 +1,13 @@
+{
+  "title": "DELETE_VEHICLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "DELETE_VEHICLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DELETE_VEHICLE\nDeleteVehicle()"
+  ],
+  "urls": [],
+  "tags": []
+}

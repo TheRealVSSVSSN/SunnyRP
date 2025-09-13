@@ -1,0 +1,13 @@
+{
+  "title": "SET_VEHICLE_POPULATION_BUDGET",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_VEHICLE_POPULATION_BUDGET"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_VEHICLE_POPULATION_BUDGET\nSetVehiclePopulationBudget()"
+  ],
+  "urls": [],
+  "tags": []
+}

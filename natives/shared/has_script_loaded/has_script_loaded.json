@@ -1,0 +1,13 @@
+{
+  "title": "HAS_SCRIPT_LOADED",
+  "breadcrumbs": [
+    "Native Reference",
+    "HAS_SCRIPT_LOADED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for HAS_SCRIPT_LOADED\nHasScriptLoaded()"
+  ],
+  "urls": [],
+  "tags": []
+}

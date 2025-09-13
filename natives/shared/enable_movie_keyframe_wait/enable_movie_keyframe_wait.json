@@ -1,0 +1,13 @@
+{
+  "title": "ENABLE_MOVIE_KEYFRAME_WAIT",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENABLE_MOVIE_KEYFRAME_WAIT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ENABLE_MOVIE_KEYFRAME_WAIT\nEnableMovieKeyframeWait()"
+  ],
+  "urls": [],
+  "tags": []
+}

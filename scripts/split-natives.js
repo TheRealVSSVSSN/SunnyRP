@@ -47,14 +47,14 @@ function generateExample(native) {
     ? match[1].split(',').map(p => p.trim().split(/\s+/))
     : [];
   const defaults = {
-    float: '0.0',
-    int: '0',
-    Hash: "GetHashKey('prop')",
-    BOOL: 'false',
-    bool: 'false',
-    char: "''",
-    'char*': "''",
-    'const char*': "''"
+    float: '1.0',
+    int: '1',
+    Hash: "GetHashKey('prop_beachball')",
+    BOOL: 'true',
+    bool: 'true',
+    char: "'a'",
+    'char*': "'example'",
+    'const char*': "'example'"
   };
   const vars = new Set();
   const args = params.map(p => {
@@ -91,7 +91,8 @@ function generateExample(native) {
 function collect(entries, trail = [], out = []) {
   for (const entry of entries) {
     const crumbs = trail.concat(entry.title);
-    if (entry.content || entry.codeBlocks) {
+    const isLeaf = !Array.isArray(entry.children) || entry.children.length === 0;
+    if (isLeaf) {
       out.push({
         title: entry.title,
         breadcrumbs: entry.breadcrumbs || crumbs,
@@ -100,8 +101,7 @@ function collect(entries, trail = [], out = []) {
         urls: entry.urls || [],
         tags: entry.tags || []
       });
-    }
-    if (Array.isArray(entry.children) && entry.children.length) {
+    } else {
       collect(entry.children, crumbs, out);
     }
   }

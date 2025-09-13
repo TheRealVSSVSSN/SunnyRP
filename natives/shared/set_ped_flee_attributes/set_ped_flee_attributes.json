@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_FLEE_ATTRIBUTES",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_FLEE_ATTRIBUTES"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_FLEE_ATTRIBUTES\nSetPedFleeAttributes()"
+  ],
+  "urls": [],
+  "tags": []
+}

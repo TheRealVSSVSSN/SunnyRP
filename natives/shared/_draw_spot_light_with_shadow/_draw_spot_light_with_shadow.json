@@ -1,0 +1,13 @@
+{
+  "title": "_DRAW_SPOT_LIGHT_WITH_SHADOW",
+  "breadcrumbs": [
+    "Native Reference",
+    "_DRAW_SPOT_LIGHT_WITH_SHADOW"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _DRAW_SPOT_LIGHT_WITH_SHADOW\n_DrawSpotLightWithShadow()"
+  ],
+  "urls": [],
+  "tags": []
+}

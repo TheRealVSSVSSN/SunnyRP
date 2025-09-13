@@ -1,0 +1,13 @@
+{
+  "title": "GET_ID_OF_THIS_THREAD",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_ID_OF_THIS_THREAD"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ID_OF_THIS_THREAD\nGetIdOfThisThread()"
+  ],
+  "urls": [],
+  "tags": []
+}

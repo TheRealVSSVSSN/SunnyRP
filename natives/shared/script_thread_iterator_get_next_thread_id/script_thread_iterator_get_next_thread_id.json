@@ -1,0 +1,13 @@
+{
+  "title": "SCRIPT_THREAD_ITERATOR_GET_NEXT_THREAD_ID",
+  "breadcrumbs": [
+    "Native Reference",
+    "SCRIPT_THREAD_ITERATOR_GET_NEXT_THREAD_ID"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SCRIPT_THREAD_ITERATOR_GET_NEXT_THREAD_ID\nScriptThreadIteratorGetNextThreadId()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_GET_OUT_UPSIDE_DOWN_VEHICLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_GET_OUT_UPSIDE_DOWN_VEHICLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_GET_OUT_UPSIDE_DOWN_VEHICLE\nSetPedGetOutUpsideDownVehicle()"
+  ],
+  "urls": [],
+  "tags": []
+}

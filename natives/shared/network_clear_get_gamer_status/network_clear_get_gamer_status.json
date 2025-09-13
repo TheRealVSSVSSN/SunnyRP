@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_CLEAR_GET_GAMER_STATUS",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_CLEAR_GET_GAMER_STATUS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_CLEAR_GET_GAMER_STATUS\nNetworkClearGetGamerStatus()"
+  ],
+  "urls": [],
+  "tags": []
+}

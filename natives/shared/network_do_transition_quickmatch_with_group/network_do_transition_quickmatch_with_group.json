@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_DO_TRANSITION_QUICKMATCH_WITH_GROUP",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_DO_TRANSITION_QUICKMATCH_WITH_GROUP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_DO_TRANSITION_QUICKMATCH_WITH_GROUP\nNetworkDoTransitionQuickmatchWithGroup()"
+  ],
+  "urls": [],
+  "tags": []
+}

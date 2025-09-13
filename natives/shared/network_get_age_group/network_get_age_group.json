@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_GET_AGE_GROUP",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_GET_AGE_GROUP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_GET_AGE_GROUP\nNetworkGetAgeGroup()"
+  ],
+  "urls": [],
+  "tags": []
+}

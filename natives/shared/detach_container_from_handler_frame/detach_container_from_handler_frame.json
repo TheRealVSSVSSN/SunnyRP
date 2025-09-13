@@ -1,0 +1,13 @@
+{
+  "title": "DETACH_CONTAINER_FROM_HANDLER_FRAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "DETACH_CONTAINER_FROM_HANDLER_FRAME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DETACH_CONTAINER_FROM_HANDLER_FRAME\nDetachContainerFromHandlerFrame()"
+  ],
+  "urls": [],
+  "tags": []
+}

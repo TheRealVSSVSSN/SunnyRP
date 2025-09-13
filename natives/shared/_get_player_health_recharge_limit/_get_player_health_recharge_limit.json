@@ -1,0 +1,13 @@
+{
+  "title": "_GET_PLAYER_HEALTH_RECHARGE_LIMIT",
+  "breadcrumbs": [
+    "Native Reference",
+    "_GET_PLAYER_HEALTH_RECHARGE_LIMIT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_PLAYER_HEALTH_RECHARGE_LIMIT\n_GetPlayerHealthRechargeLimit()"
+  ],
+  "urls": [],
+  "tags": []
+}

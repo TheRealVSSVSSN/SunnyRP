@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_DO_TRANSITION_TO_GAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_DO_TRANSITION_TO_GAME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_DO_TRANSITION_TO_GAME\nNetworkDoTransitionToGame()"
+  ],
+  "urls": [],
+  "tags": []
+}

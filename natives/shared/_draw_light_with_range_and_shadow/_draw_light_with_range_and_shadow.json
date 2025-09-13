@@ -1,0 +1,13 @@
+{
+  "title": "_DRAW_LIGHT_WITH_RANGE_AND_SHADOW",
+  "breadcrumbs": [
+    "Native Reference",
+    "_DRAW_LIGHT_WITH_RANGE_AND_SHADOW"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _DRAW_LIGHT_WITH_RANGE_AND_SHADOW\n_DrawLightWithRangeAndShadow()"
+  ],
+  "urls": [],
+  "tags": []
+}

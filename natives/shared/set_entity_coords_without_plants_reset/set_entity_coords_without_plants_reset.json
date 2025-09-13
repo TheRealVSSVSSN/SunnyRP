@@ -1,0 +1,13 @@
+{
+  "title": "SET_ENTITY_COORDS_WITHOUT_PLANTS_RESET",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_ENTITY_COORDS_WITHOUT_PLANTS_RESET"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_ENTITY_COORDS_WITHOUT_PLANTS_RESET\nSetEntityCoordsWithoutPlantsReset()"
+  ],
+  "urls": [],
+  "tags": []
+}

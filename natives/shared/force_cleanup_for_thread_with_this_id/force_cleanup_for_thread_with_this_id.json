@@ -1,0 +1,13 @@
+{
+  "title": "FORCE_CLEANUP_FOR_THREAD_WITH_THIS_ID",
+  "breadcrumbs": [
+    "Native Reference",
+    "FORCE_CLEANUP_FOR_THREAD_WITH_THIS_ID"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for FORCE_CLEANUP_FOR_THREAD_WITH_THIS_ID\nForceCleanupForThreadWithThisId()"
+  ],
+  "urls": [],
+  "tags": []
+}

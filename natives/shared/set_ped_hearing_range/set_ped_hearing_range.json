@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_HEARING_RANGE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_HEARING_RANGE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_HEARING_RANGE\nSetPedHearingRange()"
+  ],
+  "urls": [],
+  "tags": []
+}

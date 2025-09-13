@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_LOD_MULTIPLIER",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_LOD_MULTIPLIER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_LOD_MULTIPLIER\nSetPedLodMultiplier()"
+  ],
+  "urls": [],
+  "tags": []
+}

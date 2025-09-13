@@ -1,0 +1,13 @@
+{
+  "title": "GET_PLAYER_PED_SCRIPT_INDEX",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PLAYER_PED_SCRIPT_INDEX"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PLAYER_PED_SCRIPT_INDEX\nGetPlayerPedScriptIndex()"
+  ],
+  "urls": [],
+  "tags": []
+}

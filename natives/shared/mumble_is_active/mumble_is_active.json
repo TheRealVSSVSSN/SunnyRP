@@ -1,0 +1,13 @@
+{
+  "title": "MUMBLE_IS_ACTIVE",
+  "breadcrumbs": [
+    "Native Reference",
+    "MUMBLE_IS_ACTIVE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for MUMBLE_IS_ACTIVE\nMumbleIsActive()"
+  ],
+  "urls": [],
+  "tags": []
+}

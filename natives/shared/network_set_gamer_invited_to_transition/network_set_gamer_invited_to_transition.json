@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SET_GAMER_INVITED_TO_TRANSITION",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SET_GAMER_INVITED_TO_TRANSITION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SET_GAMER_INVITED_TO_TRANSITION\nNetworkSetGamerInvitedToTransition()"
+  ],
+  "urls": [],
+  "tags": []
+}

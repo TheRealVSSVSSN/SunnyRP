@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_GAMERTAG_FROM_HANDLE_PENDING",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_GAMERTAG_FROM_HANDLE_PENDING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_GAMERTAG_FROM_HANDLE_PENDING\nNetworkGamertagFromHandlePending()"
+  ],
+  "urls": [],
+  "tags": []
+}

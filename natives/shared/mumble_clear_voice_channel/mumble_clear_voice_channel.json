@@ -1,0 +1,13 @@
+{
+  "title": "MUMBLE_CLEAR_VOICE_CHANNEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "MUMBLE_CLEAR_VOICE_CHANNEL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for MUMBLE_CLEAR_VOICE_CHANNEL\nMumbleClearVoiceChannel()"
+  ],
+  "urls": [],
+  "tags": []
+}

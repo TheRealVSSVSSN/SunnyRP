@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_ENTITY_AREA_IS_OCCUPIED",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_ENTITY_AREA_IS_OCCUPIED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_ENTITY_AREA_IS_OCCUPIED\nNetworkEntityAreaIsOccupied()"
+  ],
+  "urls": [],
+  "tags": []
+}

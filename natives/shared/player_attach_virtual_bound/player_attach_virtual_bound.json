@@ -1,0 +1,13 @@
+{
+  "title": "PLAYER_ATTACH_VIRTUAL_BOUND",
+  "breadcrumbs": [
+    "Native Reference",
+    "PLAYER_ATTACH_VIRTUAL_BOUND"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for PLAYER_ATTACH_VIRTUAL_BOUND\nPlayerAttachVirtualBound()"
+  ],
+  "urls": [],
+  "tags": []
+}
