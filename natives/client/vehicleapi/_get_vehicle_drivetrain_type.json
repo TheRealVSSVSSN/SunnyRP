@@ -1,0 +1,26 @@
+{
+  "title": "_GET_VEHICLE_DRIVETRAIN_TYPE",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "_GET_VEHICLE_DRIVETRAIN_TYPE"
+  ],
+  "content": "0x1423725069EE1D14// GetVehicleDrivetrainType\nint _GET_VEHICLE_DRIVETRAIN_TYPE(Hash vehicleModel);Parameters:vehicleModel: The hash of the vehicle model to check.Returns: Returns the vehicle's drivetrain type.NativeDB Introduced: v3258Note: When using this native, the hash of the vehicle needs to be loaded into the client's memory. This can be done by requesting the model with REQUEST_MODEL or by simply having the vehicle spawned.enum eVehicleDrivetrainType\n{\n    INVALID = 0,\n    FWD = 1,\n    RWD = 2,\n    AWD = 3\n};\nNativeDB Introduced: v3258Examples:Lualocal vehicleHash = GetHashKey(\"elegy\")\nRequestModel(vehicleHash)\nrepeat\n    Wait(0)\nuntil HasModelLoaded(vehicleHash)\n\nlocal driveTrainType = GetVehicleDriveTrainType(vehicleHash)\n\nif driveTrainType == 1 then\n    -- FWD\n    print(GetLabelText(\"FMMC_DT_FWD\"))\nelseif driveTrainType == 2 then\n    -- RWD\n    print(GetLabelText(\"FMMC_DT_RWD\"))\nelseif driveTrainType == 3 then\n    -- AWD\n    print(GetLabelText(\"FMMC_DT_AWD\"))\nelse\n    print(\"invalid\")\nend",
+  "codeBlocks": [
+    "// GetVehicleDrivetrainType\nint _GET_VEHICLE_DRIVETRAIN_TYPE(Hash vehicleModel);",
+    "NativeDB Introduced: v3258",
+    "enum eVehicleDrivetrainType\n{\n    INVALID = 0,\n    FWD = 1,\n    RWD = 2,\n    AWD = 3\n};",
+    "local vehicleHash = GetHashKey(\"elegy\")\nRequestModel(vehicleHash)\nrepeat\n    Wait(0)\nuntil HasModelLoaded(vehicleHash)\n\nlocal driveTrainType = GetVehicleDriveTrainType(vehicleHash)\n\nif driveTrainType == 1 then\n    -- FWD\nelseif driveTrainType == 2 then\n    -- RWD\nelseif driveTrainType == 3 then\n    -- AWD\nelse\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/GetVehicleDrivetrainType.md",
+    "https://docs.fivem.net/natives/?_0x963D27A58DF860AC",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

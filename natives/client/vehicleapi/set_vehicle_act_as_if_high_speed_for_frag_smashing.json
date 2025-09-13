@@ -1,0 +1,23 @@
+{
+  "title": "SET_VEHICLE_ACT_AS_IF_HIGH_SPEED_FOR_FRAG_SMASHING",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "SET_VEHICLE_ACT_AS_IF_HIGH_SPEED_FOR_FRAG_SMASHING"
+  ],
+  "content": "0x1F9FB66F3A3842D20x4D840FC4// SetVehicleActAsIfHighSpeedForFragSmashing\nvoid SET_VEHICLE_ACT_AS_IF_HIGH_SPEED_FOR_FRAG_SMASHING(Vehicle vehicle, BOOL actHighSpeed);Parameters:vehicle: The vehicle to be affected by this setting.actHighSpeed: A boolean flag. Set to true to make the vehicle act as if it's at high speed for the current frameThis native is used to simulate a high-speed impact for a vehicle when it collides with a breakable object (frag). It's particularly useful in scripted sequences where a vehicle is required to break through a barrier but might not actually be moving at a sufficient speed to do so realistically. Note that this setting is temporary and will reset after one frame, so it needs to be called every frame for a lasting effect.",
+  "codeBlocks": [
+    "// SetVehicleActAsIfHighSpeedForFragSmashing\nvoid SET_VEHICLE_ACT_AS_IF_HIGH_SPEED_FOR_FRAG_SMASHING(Vehicle vehicle, BOOL actHighSpeed);",
+    "-- Example\nSetVehicleActAsIfHighSpeedForFragSmashing(GetVehiclePedIsIn(PlayerPedId(), false), false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetVehicleActAsIfHighSpeedForFragSmashing.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

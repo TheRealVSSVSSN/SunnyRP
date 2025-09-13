@@ -1,0 +1,23 @@
+{
+  "title": "GET_SUBMARINE_IS_UNDER_DESIGN_DEPTH",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "GET_SUBMARINE_IS_UNDER_DESIGN_DEPTH"
+  ],
+  "content": "0x3E71D0B300B7AA79// GetSubmarineIsUnderDesignDepth\nBOOL GET_SUBMARINE_IS_UNDER_DESIGN_DEPTH(Vehicle submarine);Parameters:submarine: The submarine vehicle to be evaluated for being under its crush depth threshold.Returns: Returns true if the submarine is below its designated crush depth, false otherwise.Determines if the submarine is operating below its designated crush depth.NativeDB Introduced: v2189Old name:  _GET_SUBMARINE_IS_BELOW_FIRST_CRUSH_DEPTH",
+  "codeBlocks": [
+    "// GetSubmarineIsUnderDesignDepth\nBOOL GET_SUBMARINE_IS_UNDER_DESIGN_DEPTH(Vehicle submarine);",
+    "NativeDB Introduced: v2189"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/GetSubmarineIsUnderDesignDepth.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

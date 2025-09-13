@@ -19,6 +19,55 @@ function sanitizeName(name) {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, '_');
 }
 
+function toLuaFunc(name) {
+  const hasUnderscore = name.startsWith('_');
+  const parts = name.replace(/^_/, '').toLowerCase().split('_');
+  const pascal = parts.map(p => p.charAt(0).toUpperCase() + p.slice(1)).join('');
+  return (hasUnderscore ? '_' : '') + pascal;
+}
+
+function sanitizeCodeBlocks(blocks = []) {
+  const banned = [/RegisterCommand/i, /print\s*\(/i, /console\.log\s*\(/i];
+  const cleaned = [];
+  for (const block of blocks) {
+    const lines = block
+      .split('\n')
+      .filter(line => !banned.some(re => re.test(line)))
+      .join('\n')
+      .trim();
+    if (lines) cleaned.push(lines);
+  }
+  return cleaned;
+}
+
+function generateExample(native) {
+  const proto = native.codeBlocks[0] || '';
+  const match = proto.match(/\(([^)]*)\)/);
+  const params = match && match[1].trim()
+    ? match[1].split(',').map(p => p.trim().split(/\s+/))
+    : [];
+  const defaults = {
+    Ped: 'PlayerPedId()',
+    Vehicle: 'GetVehiclePedIsIn(PlayerPedId(), false)',
+    Entity: 'PlayerPedId()',
+    Player: 'PlayerId()',
+    float: '0.0',
+    int: '0',
+    Hash: '0',
+    BOOL: 'false',
+    bool: 'false',
+    char: "''",
+    'char*': "''",
+    'const char*': "''"
+  };
+  const args = params.map(p => {
+    const type = p.length > 1 ? p.slice(0, -1).join(' ') : p[0];
+    return defaults[type] || '0';
+  });
+  const call = `${toLuaFunc(native.title)}(${args.join(', ')})`;
+  return `-- Example\n${call}`;
+}
+
 function collect(entries, trail = [], out = []) {
   for (const entry of entries) {
     const crumbs = trail.concat(entry.title);
@@ -65,6 +114,10 @@ function main() {
   }
 
   for (const native of slice) {
+    native.codeBlocks = sanitizeCodeBlocks(native.codeBlocks);
+    if (native.codeBlocks.length < 2) {
+      native.codeBlocks.push(generateExample(native));
+    }
     const { scope, category } = classify(native);
     const dir = path.join(OUTPUT_ROOT, scope, category);
     fs.mkdirSync(dir, { recursive: true });

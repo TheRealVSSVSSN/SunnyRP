@@ -1,0 +1,24 @@
+{
+  "title": "_GET_VEHICLE_ROOF_LIVERY",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "_GET_VEHICLE_ROOF_LIVERY"
+  ],
+  "content": "0x60190048C0764A26// GetVehicleRoofLivery\nint _GET_VEHICLE_ROOF_LIVERY(Vehicle vehicle);Parameters:vehicle: The vehicle handle.Returns: An index of the current vehicle's rooftop livery.Returns index of the current vehicle's rooftop livery.\nA getter for _SET_VEHICLE_ROOF_LIVERY.",
+  "codeBlocks": [
+    "// GetVehicleRoofLivery\nint _GET_VEHICLE_ROOF_LIVERY(Vehicle vehicle);",
+    "-- Example\n_GetVehicleRoofLivery(GetVehiclePedIsIn(PlayerPedId(), false))"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/GetVehicleRoofLivery.md",
+    "https://docs.fivem.net/natives/?_0xA6D3A8750DC73270",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

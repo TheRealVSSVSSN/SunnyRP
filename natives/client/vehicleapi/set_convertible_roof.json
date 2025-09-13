@@ -1,0 +1,26 @@
+{
+  "title": "SET_CONVERTIBLE_ROOF",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "SET_CONVERTIBLE_ROOF"
+  ],
+  "content": "0xF39C4F538B5124C20xC87B6A51// SetConvertibleRoof\nvoid SET_CONVERTIBLE_ROOF(Vehicle vehicle, BOOL toggle);Parameters:vehicle: The vehicle to which the roof state will be applied.toggle: Boolean value where true adds the roof and false removes it, applicable only if the vehicle has a version with and without a roof.Enables or disables the convertible roof on vehicles that support old-style GTA IV roofs, which are not animated. Setting toggle to true will apply the roof to the vehicle, and setting it to false will remove the roof, assuming the vehicle has versions with and without a roof.If you want to lock or unlock the roof mechanism, use SET_CONVERTIBLE_ROOF_LATCH_STATE.You can check if the vehicle has a roof with DOES_VEHICLE_HAVE_ROOF.NativeDB Introduced: v323Vehicles with both roofed and roofless versions (others may exist; this list is compiled from decompiled scripts).chinovolticbuccaneerbuccaneer2chino2factionfaction2mambaExamples:LuaJavaScriptC#-- In this case we are removing the roof from the vehicle.\nlocal vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\nif not DoesVehicleHaveRoof(vehicle) then return end\nSetConvertibleRoof(vehicle, false)",
+  "codeBlocks": [
+    "// SetConvertibleRoof\nvoid SET_CONVERTIBLE_ROOF(Vehicle vehicle, BOOL toggle);",
+    "NativeDB Introduced: v323",
+    "-- In this case we are removing the roof from the vehicle.\nlocal vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\nif not DoesVehicleHaveRoof(vehicle) then return end\nSetConvertibleRoof(vehicle, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetConvertibleRoof.md",
+    "https://docs.fivem.net/natives/?_0x1A78AD3D8240536F",
+    "https://docs.fivem.net/natives/?_0x8AC862B0B32C5B80",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

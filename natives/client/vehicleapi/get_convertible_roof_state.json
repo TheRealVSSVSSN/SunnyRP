@@ -1,0 +1,24 @@
+{
+  "title": "GET_CONVERTIBLE_ROOF_STATE",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "GET_CONVERTIBLE_ROOF_STATE"
+  ],
+  "content": "0xF8C397922FC03F410x1B09714D// GetConvertibleRoofState\nint GET_CONVERTIBLE_ROOF_STATE(Vehicle vehicle);Parameters:vehicle: Vehicle to get the state ofReturns: Returns the current roof state, refer to eRoofStateReturns the convertible state of the specified vehicle.enum eRoofState {\n    RAISED = 0,\n    LOWERING = 1,\n    LOWERED = 2,\n    RAISING = 3,\n    CLOSING_BOOT = 4,\n    ROOF_STUCK_RAISED = 5,\n    ROOF_STUCK_LOWERED = 6\n}\nExamples:Lualocal vehicle = GetVehiclePedIsIn(PlayerPedId())\nprint(GetConvertibleRoofState(vehicle))",
+  "codeBlocks": [
+    "// GetConvertibleRoofState\nint GET_CONVERTIBLE_ROOF_STATE(Vehicle vehicle);",
+    "enum eRoofState {\n    RAISED = 0,\n    LOWERING = 1,\n    LOWERED = 2,\n    RAISING = 3,\n    CLOSING_BOOT = 4,\n    ROOF_STUCK_RAISED = 5,\n    ROOF_STUCK_LOWERED = 6\n}",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId())"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/GetConvertibleRoofState.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "title": "GET_VEHICLE_MOD",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "GET_VEHICLE_MOD"
+  ],
+  "content": "0x772960298DA26FDB0xDC520069// GetVehicleMod\nint GET_VEHICLE_MOD(Vehicle vehicle, int modType);Parameters:vehicle: The vehicle to get the mod of.modType: Refer to eVehicleModType in SET_VEHICLE_MOD.Returns: Returns the current modIndex, or -1 if the mod is stock.",
+  "codeBlocks": [
+    "// GetVehicleMod\nint GET_VEHICLE_MOD(Vehicle vehicle, int modType);",
+    "-- Example\nGetVehicleMod(GetVehiclePedIsIn(PlayerPedId(), false), 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/GetVehicleMod.md",
+    "https://docs.fivem.net/natives/?_0x6AF0636DDEDCB6DD",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

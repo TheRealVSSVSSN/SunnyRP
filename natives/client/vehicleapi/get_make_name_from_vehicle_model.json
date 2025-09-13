@@ -1,0 +1,24 @@
+{
+  "title": "GET_MAKE_NAME_FROM_VEHICLE_MODEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "GET_MAKE_NAME_FROM_VEHICLE_MODEL"
+  ],
+  "content": "0xF7AF4F159FF99F97// GetMakeNameFromVehicleModel\nchar* GET_MAKE_NAME_FROM_VEHICLE_MODEL(Hash modelHash);Parameters:modelHash: The model hash of the vehicle.Returns: Returns the display label of the manufacturer if the vehicle model is recognized, or \"CARNOTFOUND\" if the hash does not correspond to any known vehicle model.Retrieves the manufacturer's name for a specified vehicle.NativeDB Introduced: v1868Old name:  _GET_MAKE_NAME_FROM_VEHICLE_MODELExamples:LuaJavaScriptC#-- This example prints the manufacturer of the player's current vehicle.\n\n-- Retrieve the player ped.\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the vehicle the player is currently in.\nlocal vehicle = GetVehiclePedIsIn(playerPed, false)\n\n-- If the vehicle does not exist, end the execution of the code here.\nif not DoesEntityExist(vehicle) then \n    return \nend\n\n-- Retrieve the model hash of the vehicle.\nlocal vehicleHash = GetEntityModel(vehicle)\n\n-- Retrieve the manufacturer of the vehicle.\nlocal manufacturer = GetMakeNameFromVehicleModel(vehicleHash)\n\n-- Print the manufacturer of the vehicle.\nprint(\"Vehicle Manufacturer: \" .. manufacturer)",
+  "codeBlocks": [
+    "// GetMakeNameFromVehicleModel\nchar* GET_MAKE_NAME_FROM_VEHICLE_MODEL(Hash modelHash);",
+    "NativeDB Introduced: v1868",
+    "-- This example prints the manufacturer of the player's current vehicle.\n\n-- Retrieve the player ped.\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the vehicle the player is currently in.\nlocal vehicle = GetVehiclePedIsIn(playerPed, false)\n\n-- If the vehicle does not exist, end the execution of the code here.\nif not DoesEntityExist(vehicle) then \n    return \nend\n\n-- Retrieve the model hash of the vehicle.\nlocal vehicleHash = GetEntityModel(vehicle)\n\n-- Retrieve the manufacturer of the vehicle.\nlocal manufacturer = GetMakeNameFromVehicleModel(vehicleHash)\n\n-- Print the manufacturer of the vehicle."
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/GetMakeNameFromVehicleModel.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

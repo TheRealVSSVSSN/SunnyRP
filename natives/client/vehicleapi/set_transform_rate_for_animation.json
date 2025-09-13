@@ -1,0 +1,23 @@
+{
+  "title": "SET_TRANSFORM_RATE_FOR_ANIMATION",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "SET_TRANSFORM_RATE_FOR_ANIMATION"
+  ],
+  "content": "0x498218259FB7C72D// SetTransformRateForAnimation\nvoid SET_TRANSFORM_RATE_FOR_ANIMATION(Vehicle vehicle, float transformRate);Parameters:vehicle: The vehicle for which the submarine car conversion animation speed should be adjusted.transformRate: The rate at which the submarine car conversion animations will be played.Affects the playback speed of the submarine car conversion animations. Does not affect hardcoded animations such as the wheels being retracted. In decompiled scripts the only value used for transformRate is 2.5.Old name:  _SET_UNK_FLOAT_0x104_FOR_SUBMARINE_VEHICLE_TASKExamples:LuaJavaScriptC#-- This example sets the transform rate for the submarine car conversion animations to 2.5\n\n-- Retrieve the player ped\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the vehicle in which the player is currently seated\nlocal vehicle = GetVehiclePedIsIn(playerPed, false) -- Get the vehicle in which the player is currently seated\n\n-- Retrieve the vehicle model hash\nlocal vehicleHash = GetEntityModel(vehicle)\n\n-- Check if the vehicle exists in the game world and if it is a Stromberg.\nif not DoesEntityExist(vehicle) or not vehicleHash == GetHashKey(\"stromberg\") then\n    -- If the vehicle does not exist or it's not a stromberg, end the execution of the code here.\n    return\nend\n\n-- Set the transform rate for the submarine car conversion animations to 2.5\nSetTransformRateForAnimation(vehicle, 2.5)",
+  "codeBlocks": [
+    "// SetTransformRateForAnimation\nvoid SET_TRANSFORM_RATE_FOR_ANIMATION(Vehicle vehicle, float transformRate);",
+    "-- This example sets the transform rate for the submarine car conversion animations to 2.5\n\n-- Retrieve the player ped\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the vehicle in which the player is currently seated\nlocal vehicle = GetVehiclePedIsIn(playerPed, false) -- Get the vehicle in which the player is currently seated\n\n-- Retrieve the vehicle model hash\nlocal vehicleHash = GetEntityModel(vehicle)\n\n-- Check if the vehicle exists in the game world and if it is a Stromberg.\nif not DoesEntityExist(vehicle) or not vehicleHash == GetHashKey(\"stromberg\") then\n    -- If the vehicle does not exist or it's not a stromberg, end the execution of the code here.\n    return\nend\n\n-- Set the transform rate for the submarine car conversion animations to 2.5\nSetTransformRateForAnimation(vehicle, 2.5)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetTransformRateForAnimation.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}
