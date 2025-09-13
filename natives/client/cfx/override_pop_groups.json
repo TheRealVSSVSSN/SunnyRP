@@ -1,0 +1,23 @@
+{
+  "title": "OVERRIDE_POP_GROUPS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "OVERRIDE_POP_GROUPS"
+  ],
+  "content": "0xD3BC438F// OverridePopGroups\nvoid OVERRIDE_POP_GROUPS(char* path);Parameters:path: The file path to load (popgroups, @resource/popgroups), or null to reload the default population groups file.Replaces the popgroups (CPopGroupList) meta file with the file in the specified path.Examples:Lua-- fxmanifest.lua:\nfile 'popgroups_dlc.xml'\n\n-- client.lua:\nOverridePopGroups('popgroups_dlc.xml')\n\n-- restore the original after five minutes\nWait(1000 * 60 * 5)\nOverridePopGroups(nil)",
+  "codeBlocks": [
+    "// OverridePopGroups\nvoid OVERRIDE_POP_GROUPS(char* path);",
+    "-- fxmanifest.lua:\nfile 'popgroups_dlc.xml'\n\n-- client.lua:\nOverridePopGroups('popgroups_dlc.xml')\n\n-- restore the original after five minutes\nWait(1000 * 60 * 5)\nOverridePopGroups(nil)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/OverridePopGroups.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

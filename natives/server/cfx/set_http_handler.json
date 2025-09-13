@@ -1,0 +1,24 @@
+{
+  "title": "SET_HTTP_HANDLER",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_HTTP_HANDLER"
+  ],
+  "content": "0xF5C6330C// SetHttpHandler\nvoid SET_HTTP_HANDLER(func handler);Parameters:handler: The handler function.Sets the handler for HTTP requests made to the executing resource.Example request URL: http://localhost:30120/http-test/ping - this request will be sent to the http-test resource with the /ping path.The handler function assumes the following signature:function HttpHandler(\n  request: {\n    address: string;\n    headers: Record<string, string>;\n    method: string;\n    path: string;\n    setDataHandler(handler: (data: string) => void): void;\n    setDataHandler(handler: (data: ArrayBuffer) => void, binary: 'binary'): void;\n    setCancelHandler(handler: () => void): void;\n  },\n  response: {\n    writeHead(code: number, headers?: Record<string, string | string[]>): void;\n    write(data: string): void;\n    send(data?: string): void;\n  }\n): void;request: The request object.address: The IP address of the request sender.path: The path to where the request was sent.headers: The headers sent with the request.method: The request method.setDataHandler: Sets the handler for when a data body is passed with the request. Additionally you can pass the 'binary' argument to receive a BufferArray in JavaScript or System.Byte[] in C# (has no effect in Lua).setCancelHandler: Sets the handler for when the request is cancelled.response: An object to control the response.writeHead: Sets the status code & headers of the response. Can be only called once and won't work if called after running other response functions.write: Writes to the response body without sending it. Can be called multiple times.send: Writes to the response body and then sends it along with the status code & headers, finishing the request.Examples:LuaSetHttpHandler(function(request, response)\n  if request.method == 'GET' and request.path == '/ping' then -- if a GET request was sent to the `/ping` path\n      response.writeHead(200, { ['Content-Type'] = 'text/plain' }) -- set the response status code to `200 OK` and the body content type to plain text\n      response.send('pong') -- respond to the request with `pong`\n  else -- otherwise\n      response.writeHead(404) -- set the response status code to `404 Not Found`\n      response.send() -- respond to the request with no data\n  end\nend)",
+  "codeBlocks": [
+    "// SetHttpHandler\nvoid SET_HTTP_HANDLER(func handler);",
+    "function HttpHandler(\n  request: {\n    address: string;\n    headers: Record<string, string>;\n    method: string;\n    path: string;\n    setDataHandler(handler: (data: string) => void): void;\n    setDataHandler(handler: (data: ArrayBuffer) => void, binary: 'binary'): void;\n    setCancelHandler(handler: () => void): void;\n  },\n  response: {\n    writeHead(code: number, headers?: Record<string, string | string[]>): void;\n    write(data: string): void;\n    send(data?: string): void;\n  }\n): void;",
+    "SetHttpHandler(function(request, response)\n  if request.method == 'GET' and request.path == '/ping' then -- if a GET request was sent to the `/ping` path\n      response.writeHead(200, { ['Content-Type'] = 'text/plain' }) -- set the response status code to `200 OK` and the body content type to plain text\n      response.send('pong') -- respond to the request with `pong`\n  else -- otherwise\n      response.writeHead(404) -- set the response status code to `404 Not Found`\n      response.send() -- respond to the request with no data\n  end\nend)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetHttpHandler.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

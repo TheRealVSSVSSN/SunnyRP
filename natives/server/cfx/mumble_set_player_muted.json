@@ -1,0 +1,23 @@
+{
+  "title": "MUMBLE_SET_PLAYER_MUTED",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "MUMBLE_SET_PLAYER_MUTED"
+  ],
+  "content": "0xCC6C2EB1// MumbleSetPlayerMuted\nvoid MUMBLE_SET_PLAYER_MUTED(int playerSrc, bool toggle);Parameters:playerSrc: The player to set the mute state oftoggle: Whether to mute or unmute the playerMutes or unmutes the specified player",
+  "codeBlocks": [
+    "// MumbleSetPlayerMuted\nvoid MUMBLE_SET_PLAYER_MUTED(int playerSrc, bool toggle);",
+    "-- Example usage for MUMBLE_SET_PLAYER_MUTED\nMumbleSetPlayerMuted(0, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/MumbleSetPlayerMuted.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

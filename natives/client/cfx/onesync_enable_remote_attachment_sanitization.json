@@ -1,0 +1,23 @@
+{
+  "title": "ONESYNC_ENABLE_REMOTE_ATTACHMENT_SANITIZATION",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "ONESYNC_ENABLE_REMOTE_ATTACHMENT_SANITIZATION"
+  ],
+  "content": "0x30CE39D8// OnesyncEnableRemoteAttachmentSanitization\nvoid ONESYNC_ENABLE_REMOTE_ATTACHMENT_SANITIZATION(BOOL enable);Parameters:enable: Whether to enable sanitization.Toggles a check that prevents attaching (networked) entities to remotely owned peds. This is disabled by default.",
+  "codeBlocks": [
+    "// OnesyncEnableRemoteAttachmentSanitization\nvoid ONESYNC_ENABLE_REMOTE_ATTACHMENT_SANITIZATION(BOOL enable);",
+    "-- Example usage for ONESYNC_ENABLE_REMOTE_ATTACHMENT_SANITIZATION\nOnesyncEnableRemoteAttachmentSanitization(false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/OnesyncEnableRemoteAttachmentSanitization.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

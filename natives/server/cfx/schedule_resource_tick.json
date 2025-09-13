@@ -1,0 +1,23 @@
+{
+  "title": "SCHEDULE_RESOURCE_TICK",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SCHEDULE_RESOURCE_TICK"
+  ],
+  "content": "0xB88A73AD// ScheduleResourceTick\nvoid SCHEDULE_RESOURCE_TICK(char* resourceName);Parameters:resourceName: The resource to tick.Schedules the specified resource to run a tick as soon as possible, bypassing the server's fixed tick rate.",
+  "codeBlocks": [
+    "// ScheduleResourceTick\nvoid SCHEDULE_RESOURCE_TICK(char* resourceName);",
+    "-- Example usage for SCHEDULE_RESOURCE_TICK\nScheduleResourceTick('')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/ScheduleResourceTick.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "GET_PLAYER_TIME_ONLINE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PLAYER_TIME_ONLINE"
+  ],
+  "content": "0x67D2E605// GetPlayerTimeOnline\nint GET_PLAYER_TIME_ONLINE(char* playerSrc);Parameters:playerSrc: A player.Returns: The current time online in seconds.Gets the current time online for a specified player.Examples:Lualocal function ShowTimeOnline()\n    local player = source\n    local secondsTotalOnline = GetPlayerTimeOnline(player)\n\n    print((\"Time online : %f H %f min %f\"):format(\n        (secondsTotalOnline / 3600),\n        ((secondsTotalOnline / 60) % 60),\n        (secondsTotalOnline % 60)\n    ))\nend\n\nRegisterNetEvent(\"myTimeOnline\", ShowTimeOnline)",
+  "codeBlocks": [
+    "// GetPlayerTimeOnline\nint GET_PLAYER_TIME_ONLINE(char* playerSrc);",
+    "local function ShowTimeOnline()\n    local player = source\n    local secondsTotalOnline = GetPlayerTimeOnline(player)\n\n        (secondsTotalOnline / 3600),\n        ((secondsTotalOnline / 60) % 60),\n        (secondsTotalOnline % 60)\n    ))\nend\n\nRegisterNetEvent(\"myTimeOnline\", ShowTimeOnline)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPlayerTimeOnline.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

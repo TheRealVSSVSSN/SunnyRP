@@ -1,0 +1,23 @@
+{
+  "title": "CREATE_DRY_VOLUME",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "CREATE_DRY_VOLUME"
+  ],
+  "content": "0xEB1C6DD// CreateDryVolume\nint CREATE_DRY_VOLUME(float xMin, float yMin, float zMin, float xMax, float yMax, float zMax);Parameters:xMin: The min X component of the AABB volume where water does not affect the player.yMin: The min Y component for the AABB volume.zMin: The min Z component for the AABB volume.xMax: The max X component for the AABB volume.yMax: The max Y component for the AABB volume.zMax: The max Z component for the AABB volume.Creates a volume where water effects do not apply.\nUseful for preventing water collisions from flooding areas underneath them.\nThis has no effect on waterquads, only water created from drawables and collisions.\nDon't create volumes when your local ped is swimming (e.g. use IS_PED_SWIMMING in your scripts before you call this)",
+  "codeBlocks": [
+    "// CreateDryVolume\nint CREATE_DRY_VOLUME(float xMin, float yMin, float zMin, float xMax, float yMax, float zMax);",
+    "-- Example usage for CREATE_DRY_VOLUME\nCreateDryVolume(0.0, 0.0, 0.0, 0.0, 0.0, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/CreateDryVolume.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

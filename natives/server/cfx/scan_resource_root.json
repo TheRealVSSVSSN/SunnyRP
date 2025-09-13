@@ -1,0 +1,23 @@
+{
+  "title": "SCAN_RESOURCE_ROOT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SCAN_RESOURCE_ROOT"
+  ],
+  "content": "0x636F097F// ScanResourceRoot\nvoid SCAN_RESOURCE_ROOT(char* rootPath, func callback);Parameters:rootPath: The resource directory to scan.callback: A callback that will receive an object with results.Scans the resources in the specified resource root. This function is only available in the 'monitor mode' process and is\nnot available for user resources.",
+  "codeBlocks": [
+    "// ScanResourceRoot\nvoid SCAN_RESOURCE_ROOT(char* rootPath, func callback);",
+    "-- Example usage for SCAN_RESOURCE_ROOT\nScanResourceRoot('', 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/ScanResourceRoot.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

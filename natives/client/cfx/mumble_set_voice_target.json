@@ -1,0 +1,23 @@
+{
+  "title": "MUMBLE_SET_VOICE_TARGET",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "MUMBLE_SET_VOICE_TARGET"
+  ],
+  "content": "0x960A4A95// MumbleSetVoiceTarget\nvoid MUMBLE_SET_VOICE_TARGET(int targetId);Parameters:targetId: A Mumble voice target ID, ranging from 1..30 (inclusive). 0 disables voice targets, and 31 is server loopback.Sets the current Mumble voice target ID to broadcast voice to.",
+  "codeBlocks": [
+    "// MumbleSetVoiceTarget\nvoid MUMBLE_SET_VOICE_TARGET(int targetId);",
+    "-- Example usage for MUMBLE_SET_VOICE_TARGET\nMumbleSetVoiceTarget(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/MumbleSetVoiceTarget.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

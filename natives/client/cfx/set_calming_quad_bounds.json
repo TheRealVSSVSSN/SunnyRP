@@ -1,0 +1,23 @@
+{
+  "title": "SET_CALMING_QUAD_BOUNDS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_CALMING_QUAD_BOUNDS"
+  ],
+  "content": "0xC5945BD9// SetCalmingQuadBounds\nBOOL SET_CALMING_QUAD_BOUNDS(int waterQuad, int minX, int minY, int maxX, int maxY);Parameters:waterQuad: The calming quad indexminX: The minX coordinateminY: The minY coordinatemaxX: The maxX coordinatemaxY: The maxY coordinateReturns: Returns true on success.Examples:Lualocal success = SetCalmingQuadBounds(1, -500, -500, 500, 500)",
+  "codeBlocks": [
+    "// SetCalmingQuadBounds\nBOOL SET_CALMING_QUAD_BOUNDS(int waterQuad, int minX, int minY, int maxX, int maxY);",
+    "local success = SetCalmingQuadBounds(1, -500, -500, 500, 500)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetCalmingQuadBounds.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "SET_AIM_COOLDOWN",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_AIM_COOLDOWN"
+  ],
+  "content": "0xA42A3DBF// SetAimCooldown\nvoid SET_AIM_COOLDOWN(int value);Parameters:value: Number of milliseconds between allowed aimingAdds a cooldown between instances of moving and then aiming.\nCan be optionally used to hinder 'speedboosting'\nTo turn off, set value to 0",
+  "codeBlocks": [
+    "// SetAimCooldown\nvoid SET_AIM_COOLDOWN(int value);",
+    "-- Example usage for SET_AIM_COOLDOWN\nSetAimCooldown(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetAimCooldown.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

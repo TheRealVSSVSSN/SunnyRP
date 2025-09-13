@@ -1,0 +1,24 @@
+{
+  "title": "GET_PLAYER_VEHICLE_DAMAGE_MODIFIER",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PLAYER_VEHICLE_DAMAGE_MODIFIER"
+  ],
+  "content": "0x78F27B1F// GetPlayerVehicleDamageModifier\nfloat GET_PLAYER_VEHICLE_DAMAGE_MODIFIER(Player playerId);Parameters:playerId: The player index.Returns: The value of player vehicle damage modifier.A getter for SET_PLAYER_VEHICLE_DAMAGE_MODIFIER.",
+  "codeBlocks": [
+    "// GetPlayerVehicleDamageModifier\nfloat GET_PLAYER_VEHICLE_DAMAGE_MODIFIER(Player playerId);",
+    "local player = PlayerId()\n-- Example usage for GET_PLAYER_VEHICLE_DAMAGE_MODIFIER\nGetPlayerVehicleDamageModifier(player)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPlayerVehicleDamageModifier.md",
+    "https://docs.fivem.net/natives/?_0xA50E117CDDF82F0C",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

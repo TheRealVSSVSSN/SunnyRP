@@ -1,0 +1,23 @@
+{
+  "title": "MUMBLE_ADD_VOICE_TARGET_PLAYER_BY_SERVER_ID",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "MUMBLE_ADD_VOICE_TARGET_PLAYER_BY_SERVER_ID"
+  ],
+  "content": "0x25F2B65F// MumbleAddVoiceTargetPlayerByServerId\nvoid MUMBLE_ADD_VOICE_TARGET_PLAYER_BY_SERVER_ID(int targetId, int serverId);Parameters:targetId: A Mumble voice target ID, ranging from 1..30 (inclusive).serverId: The player's server id.Adds the specified player to the target list for the specified Mumble voice target ID.",
+  "codeBlocks": [
+    "// MumbleAddVoiceTargetPlayerByServerId\nvoid MUMBLE_ADD_VOICE_TARGET_PLAYER_BY_SERVER_ID(int targetId, int serverId);",
+    "-- Example usage for MUMBLE_ADD_VOICE_TARGET_PLAYER_BY_SERVER_ID\nMumbleAddVoiceTargetPlayerByServerId(0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/MumbleAddVoiceTargetPlayerByServerId.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

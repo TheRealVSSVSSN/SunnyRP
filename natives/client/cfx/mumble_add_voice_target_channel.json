@@ -1,0 +1,23 @@
+{
+  "title": "MUMBLE_ADD_VOICE_TARGET_CHANNEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "MUMBLE_ADD_VOICE_TARGET_CHANNEL"
+  ],
+  "content": "0x4D386C9E// MumbleAddVoiceTargetChannel\nvoid MUMBLE_ADD_VOICE_TARGET_CHANNEL(int targetId, int channel);Parameters:targetId: A Mumble voice target ID, ranging from 1..30 (inclusive).channel: A game voice channel ID.Adds the specified channel to the target list for the specified Mumble voice target ID.",
+  "codeBlocks": [
+    "// MumbleAddVoiceTargetChannel\nvoid MUMBLE_ADD_VOICE_TARGET_CHANNEL(int targetId, int channel);",
+    "-- Example usage for MUMBLE_ADD_VOICE_TARGET_CHANNEL\nMumbleAddVoiceTargetChannel(0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/MumbleAddVoiceTargetChannel.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

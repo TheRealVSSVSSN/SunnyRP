@@ -1,0 +1,23 @@
+{
+  "title": "GET_PLAYER_FAKE_WANTED_LEVEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PLAYER_FAKE_WANTED_LEVEL"
+  ],
+  "content": "0x98D244// GetPlayerFakeWantedLevel\nint GET_PLAYER_FAKE_WANTED_LEVEL(char* playerSrc);Parameters:playerSrc: The target playerReturns: The fake wanted levelGets the current fake wanted level for a specified player. This native is used server side when using OneSync.",
+  "codeBlocks": [
+    "// GetPlayerFakeWantedLevel\nint GET_PLAYER_FAKE_WANTED_LEVEL(char* playerSrc);",
+    "-- Example usage for GET_PLAYER_FAKE_WANTED_LEVEL\nGetPlayerFakeWantedLevel('')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPlayerFakeWantedLevel.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "GET_PLAYER_PED",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PLAYER_PED"
+  ],
+  "content": "0x6E31E993// GetPlayerPed\nEntity GET_PLAYER_PED(char* playerSrc);Parameters:playerSrc: The player source, passed as a string.Returns: Returns a valid Ped Entity ID if the passed playerSrc is valid, 0 if not.Used to get the player's Ped Entity ID when a valid playerSrc is passed.Examples:Lua-- Let's assume source is a valid ID\nlocal pedId = GetPlayerPed(source);\n\n-- If pedId is valid (not equal to 0)\nif pedId ~= 0 then\n    -- Do something with this ped!\nend",
+  "codeBlocks": [
+    "// GetPlayerPed\nEntity GET_PLAYER_PED(char* playerSrc);",
+    "-- Let's assume source is a valid ID\nlocal pedId = GetPlayerPed(source);\n\n-- If pedId is valid (not equal to 0)\nif pedId ~= 0 then\n    -- Do something with this ped!\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPlayerPed.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

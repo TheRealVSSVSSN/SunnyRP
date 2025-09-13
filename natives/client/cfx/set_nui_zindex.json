@@ -1,0 +1,23 @@
+{
+  "title": "SET_NUI_ZINDEX",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_NUI_ZINDEX"
+  ],
+  "content": "0x3734AAFF// SetNuiZindex\nvoid SET_NUI_ZINDEX(int zIndex);Parameters:zIndex: New z-index value.Set the z-index of the NUI resource.",
+  "codeBlocks": [
+    "// SetNuiZindex\nvoid SET_NUI_ZINDEX(int zIndex);",
+    "-- Example usage for SET_NUI_ZINDEX\nSetNuiZindex(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetNuiZindex.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

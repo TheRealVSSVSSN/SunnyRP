@@ -1,0 +1,23 @@
+{
+  "title": "SET_DISCORD_RICH_PRESENCE_ACTION",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_DISCORD_RICH_PRESENCE_ACTION"
+  ],
+  "content": "0xCBBC3FAC// SetDiscordRichPresenceAction\nvoid SET_DISCORD_RICH_PRESENCE_ACTION(int index, char* label, char* url);Parameters:index: The button index, either 0 or 1.label: The text to display on the button.url: The URL to open when clicking the button. This has to start with fivem://connect/ or https://.Sets a clickable button to be displayed in a player's Discord rich presence.",
+  "codeBlocks": [
+    "// SetDiscordRichPresenceAction\nvoid SET_DISCORD_RICH_PRESENCE_ACTION(int index, char* label, char* url);",
+    "-- Example usage for SET_DISCORD_RICH_PRESENCE_ACTION\nSetDiscordRichPresenceAction(0, '', '')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetDiscordRichPresenceAction.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

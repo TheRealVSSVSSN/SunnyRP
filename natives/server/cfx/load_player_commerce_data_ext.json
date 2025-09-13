@@ -1,0 +1,24 @@
+{
+  "title": "LOAD_PLAYER_COMMERCE_DATA_EXT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "LOAD_PLAYER_COMMERCE_DATA_EXT"
+  ],
+  "content": "0x7995539E// LoadPlayerCommerceDataExt\nvoid LOAD_PLAYER_COMMERCE_DATA_EXT(char* playerSrc);Parameters:playerSrc: The player handleRequests the commerce data from Tebex for the specified player, including the owned SKUs.Use IS_PLAYER_COMMERCE_INFO_LOADED_EXT to check if it has loaded.This will not automatically update whenever a client purchases a package, if you want to fetch new purchases you will need to call this native again.This native will temporarily cache the players commerce data for 10 seconds, a call to this native after 10 seconds will re-fetch the players commerce data.Examples:LuaRegisterNetEvent(\"doesOwnPackage\", function(packageIdSku)\n\t-- source isn't valid across waits, so we localize it\n\tlocal source = source\n\n\t-- input isn't right\n\tif type(packageIdSku) ~= \"number\" then\n\t\treturn\n\tend\n\n\t-- The native will cache the results\n\tLoadPlayerCommerceDataExt(source)\n\t-- Wait for the players data to load\n\twhile not IsPlayerCommerceInfoLoadedExt(source) do\n\t\tWait(0)\n\tend\n\n\t-- Tell the client if they own the package or not\n\tTriggerClientEvent(\"doesOwnPackage\", source, DoesPlayerOwnSkuExt(source, packageIdSku))\nend)",
+  "codeBlocks": [
+    "// LoadPlayerCommerceDataExt\nvoid LOAD_PLAYER_COMMERCE_DATA_EXT(char* playerSrc);",
+    "RegisterNetEvent(\"doesOwnPackage\", function(packageIdSku)\n\t-- source isn't valid across waits, so we localize it\n\tlocal source = source\n\n\t-- input isn't right\n\tif type(packageIdSku) ~= \"number\" then\n\t\treturn\n\tend\n\n\t-- The native will cache the results\n\tLoadPlayerCommerceDataExt(source)\n\t-- Wait for the players data to load\n\twhile not IsPlayerCommerceInfoLoadedExt(source) do\n\t\tWait(0)\n\tend\n\n\t-- Tell the client if they own the package or not\n\tTriggerClientEvent(\"doesOwnPackage\", source, DoesPlayerOwnSkuExt(source, packageIdSku))\nend)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/LoadPlayerCommerceDataExt.md",
+    "https://docs.fivem.net/natives/?_0x1D14F4FE",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

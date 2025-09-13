@@ -1,0 +1,23 @@
+{
+  "title": "GET_PED_SPECIFIC_TASK_TYPE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PED_SPECIFIC_TASK_TYPE"
+  ],
+  "content": "0x7F4563D3// GetPedSpecificTaskType\nint GET_PED_SPECIFIC_TASK_TYPE(Ped ped, int index);Parameters:ped: The target ped.index: A zero-based index with a maximum value of 7.Returns: The type of the specific task.\n1604: A value of 530 denotes no script task is assigned or an invalid input was given.\n2060+: A value of 531 denotes no script task is assigned or an invalid input was given.Gets the type of a ped's specific task given an index of the CPedTaskSpecificDataNode nodes.\nA ped will typically have a task at index 0, if a ped has multiple tasks at once they will be in the order 0, 1, 2, etc.",
+  "codeBlocks": [
+    "// GetPedSpecificTaskType\nint GET_PED_SPECIFIC_TASK_TYPE(Ped ped, int index);",
+    "local ped = PlayerPedId()\n-- Example usage for GET_PED_SPECIFIC_TASK_TYPE\nGetPedSpecificTaskType(ped, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPedSpecificTaskType.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

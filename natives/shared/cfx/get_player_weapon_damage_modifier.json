@@ -1,0 +1,25 @@
+{
+  "title": "GET_PLAYER_WEAPON_DAMAGE_MODIFIER",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PLAYER_WEAPON_DAMAGE_MODIFIER"
+  ],
+  "content": "0x2A3D7CDA// GetPlayerWeaponDamageModifier\nfloat GET_PLAYER_WEAPON_DAMAGE_MODIFIER(Player playerId);Parameters:playerId: The player index.Returns: The value of player weapon damage modifier.A getter for SET_PLAYER_WEAPON_DAMAGE_MODIFIER.",
+  "codeBlocks": [
+    "// GetPlayerWeaponDamageModifier\nfloat GET_PLAYER_WEAPON_DAMAGE_MODIFIER(Player playerId);",
+    "local player = PlayerId()\n-- Example usage for GET_PLAYER_WEAPON_DAMAGE_MODIFIER\nGetPlayerWeaponDamageModifier(player)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPlayerWeaponDamageModifier.md",
+    "https://docs.fivem.net/natives/?_0xCE07B9F7817AADA3",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client",
+    "server"
+  ]
+}

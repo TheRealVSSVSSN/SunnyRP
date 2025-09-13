@@ -1,0 +1,26 @@
+{
+  "title": "SET_PED_COMPONENT_VARIATION",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_PED_COMPONENT_VARIATION"
+  ],
+  "content": "0xD4F7B05C// SetPedComponentVariation\nvoid SET_PED_COMPONENT_VARIATION(Ped ped, int componentId, int drawableId, int textureId, int paletteId);Parameters:ped: The ped handle.componentId: The component that you want to set.drawableId: The drawable id that is going to be set. Refer to GET_NUMBER_OF_PED_DRAWABLE_VARIATIONS.textureId: The texture id of the drawable. Refer to GET_NUMBER_OF_PED_TEXTURE_VARIATIONS.paletteId: 0 to 3.This native is used to set component variation on a ped. Components, drawables and textures IDs are related to the ped model.MP Freemode list of components0: Face\n1: Mask\n2: Hair\n3: Torso\n4: Leg\n5: Parachute / bag\n6: Shoes\n7: Accessory\n8: Undershirt\n9: Kevlar\n10: Badge\n11: Torso 2\nList of Component IDs// Components\nenum ePedVarComp\n{\nPV_COMP_INVALID = 0xFFFFFFFF,\nPV_COMP_HEAD = 0, // \"HEAD\"\nPV_COMP_BERD = 1, // \"BEARD\"\nPV_COMP_HAIR = 2, // \"HAIR\"\nPV_COMP_UPPR = 3, // \"UPPER\"\nPV_COMP_LOWR = 4, // \"LOWER\"\nPV_COMP_HAND = 5, // \"HAND\"\nPV_COMP_FEET = 6, // \"FEET\"\nPV_COMP_TEEF = 7, // \"TEETH\"\nPV_COMP_ACCS = 8, // \"ACCESSORIES\"\nPV_COMP_TASK = 9, // \"TASK\"\nPV_COMP_DECL = 10, // \"DECL\"\nPV_COMP_JBIB = 11, // \"JBIB\"\nPV_COMP_MAX = 12,\n};\nThis is the server-side RPC native equivalent of the client native SET_PED_COMPONENT_VARIATION.",
+  "codeBlocks": [
+    "// SetPedComponentVariation\nvoid SET_PED_COMPONENT_VARIATION(Ped ped, int componentId, int drawableId, int textureId, int paletteId);",
+    "// Components\nenum ePedVarComp\n{\nPV_COMP_INVALID = 0xFFFFFFFF,\nPV_COMP_HEAD = 0, // \"HEAD\"\nPV_COMP_BERD = 1, // \"BEARD\"\nPV_COMP_HAIR = 2, // \"HAIR\"\nPV_COMP_UPPR = 3, // \"UPPER\"\nPV_COMP_LOWR = 4, // \"LOWER\"\nPV_COMP_HAND = 5, // \"HAND\"\nPV_COMP_FEET = 6, // \"FEET\"\nPV_COMP_TEEF = 7, // \"TEETH\"\nPV_COMP_ACCS = 8, // \"ACCESSORIES\"\nPV_COMP_TASK = 9, // \"TASK\"\nPV_COMP_DECL = 10, // \"DECL\"\nPV_COMP_JBIB = 11, // \"JBIB\"\nPV_COMP_MAX = 12,\n};"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetPedComponentVariation.md",
+    "https://docs.fivem.net/natives/?_0x27561561732A7842",
+    "https://docs.fivem.net/natives/?_0x8F7156A3142A6BAD",
+    "https://docs.fivem.net/natives/?_0x262B14F48D29DE80",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

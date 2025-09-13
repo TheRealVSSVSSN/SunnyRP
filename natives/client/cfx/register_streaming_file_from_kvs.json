@@ -1,0 +1,23 @@
+{
+  "title": "REGISTER_STREAMING_FILE_FROM_KVS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "REGISTER_STREAMING_FILE_FROM_KVS"
+  ],
+  "content": "0x1493DCC1// RegisterStreamingFileFromKvs\nvoid REGISTER_STREAMING_FILE_FROM_KVS(char* kvsKey);Parameters:kvsKey: The KVP key in the current resource to register as an asset.Experimental: This native may be altered or removed in future versions of CitizenFX without warning.Registers a KVP value as an asset with the GTA streaming module system. This function currently won't work.",
+  "codeBlocks": [
+    "// RegisterStreamingFileFromKvs\nvoid REGISTER_STREAMING_FILE_FROM_KVS(char* kvsKey);",
+    "-- Example usage for REGISTER_STREAMING_FILE_FROM_KVS\nRegisterStreamingFileFromKvs('')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/RegisterStreamingFileFromKvs.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "GET_CALMING_QUAD_DAMPENING",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_CALMING_QUAD_DAMPENING"
+  ],
+  "content": "0xB0E3A058// GetCalmingQuadDampening\nBOOL GET_CALMING_QUAD_DAMPENING(int waterQuad, float* calmingQuadDampening);Parameters:waterQuad: The calming quad indexcalmingQuadDampening: Returns: Returns true on success. Dampening value is undefined on failureExamples:Lualocal success, dampening = GetCalmingQuadDampening(1)",
+  "codeBlocks": [
+    "// GetCalmingQuadDampening\nBOOL GET_CALMING_QUAD_DAMPENING(int waterQuad, float* calmingQuadDampening);",
+    "local success, dampening = GetCalmingQuadDampening(1)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetCalmingQuadDampening.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

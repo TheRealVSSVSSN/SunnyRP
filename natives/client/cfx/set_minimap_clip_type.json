@@ -1,0 +1,23 @@
+{
+  "title": "SET_MINIMAP_CLIP_TYPE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_MINIMAP_CLIP_TYPE"
+  ],
+  "content": "0xB8B4490C// SetMinimapClipType\nvoid SET_MINIMAP_CLIP_TYPE(int type);Parameters:type: 0 for rectangular, 1 for rounded.Sets the type for the minimap blip clipping object to be either rectangular or rounded.",
+  "codeBlocks": [
+    "// SetMinimapClipType\nvoid SET_MINIMAP_CLIP_TYPE(int type);",
+    "-- Example usage for SET_MINIMAP_CLIP_TYPE\nSetMinimapClipType(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetMinimapClipType.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

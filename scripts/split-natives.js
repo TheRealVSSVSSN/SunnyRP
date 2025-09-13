@@ -49,7 +49,7 @@ function generateExample(native) {
   const defaults = {
     float: '0.0',
     int: '0',
-    Hash: '0',
+    Hash: "GetHashKey('prop')",
     BOOL: 'false',
     bool: 'false',
     char: "''",
@@ -59,6 +59,10 @@ function generateExample(native) {
   const vars = new Set();
   const args = params.map(p => {
     const type = p.length > 1 ? p.slice(0, -1).join(' ') : p[0];
+    const name = p[p.length - 1] || '';
+    if (name.toLowerCase().includes('hash')) {
+      return "GetHashKey('prop')";
+    }
     switch (type) {
       case 'Ped':
         vars.add('local ped = PlayerPedId()');
@@ -109,7 +113,8 @@ function classify(native) {
   let scope = 'shared';
   if (tags.includes('server') && !tags.includes('client')) scope = 'server';
   else if (tags.includes('client') && !tags.includes('server')) scope = 'client';
-  const category = (native.breadcrumbs[1] || 'misc').toLowerCase().replace(/\s+/g, '_');
+  let category = (native.breadcrumbs[1] || 'misc').toLowerCase().replace(/\s+/g, '_');
+  category = category.replace(/_?api$/, '');
   return { scope, category };
 }
 

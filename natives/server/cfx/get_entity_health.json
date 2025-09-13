@@ -1,0 +1,23 @@
+{
+  "title": "GET_ENTITY_HEALTH",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_ENTITY_HEALTH"
+  ],
+  "content": "0x8E3222B7// GetEntityHealth\nint GET_ENTITY_HEALTH(Entity entity);Parameters:entity: The entity to check the health ofReturns: If the entity is a vehicle it will return 0-1000\nIf the entity is a ped it will return 0-200\nIf the entity is an object it will return 0Only works for vehicle and peds",
+  "codeBlocks": [
+    "// GetEntityHealth\nint GET_ENTITY_HEALTH(Entity entity);",
+    "local entity = PlayerPedId()\n-- Example usage for GET_ENTITY_HEALTH\nGetEntityHealth(entity)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetEntityHealth.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

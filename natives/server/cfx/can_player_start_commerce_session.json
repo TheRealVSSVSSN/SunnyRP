@@ -1,0 +1,23 @@
+{
+  "title": "CAN_PLAYER_START_COMMERCE_SESSION",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "CAN_PLAYER_START_COMMERCE_SESSION"
+  ],
+  "content": "0x429461C3// CanPlayerStartCommerceSession\nBOOL CAN_PLAYER_START_COMMERCE_SESSION(char* playerSrc);Parameters:playerSrc: The player handleReturns: True or false.Returns whether or not the specified player has enough information to start a commerce session for.",
+  "codeBlocks": [
+    "// CanPlayerStartCommerceSession\nBOOL CAN_PLAYER_START_COMMERCE_SESSION(char* playerSrc);",
+    "-- Example usage for CAN_PLAYER_START_COMMERCE_SESSION\nCanPlayerStartCommerceSession('')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/CanPlayerStartCommerceSession.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

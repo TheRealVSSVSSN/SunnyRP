@@ -1,0 +1,23 @@
+{
+  "title": "SET_CALMING_QUAD_DAMPENING",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_CALMING_QUAD_DAMPENING"
+  ],
+  "content": "0x67977501// SetCalmingQuadDampening\nBOOL SET_CALMING_QUAD_DAMPENING(int calmingQuad, float dampening);Parameters:calmingQuad: The calming quaddampening: The dampening valueReturns: Returns true on success.Examples:Lualocal success = SetCalmingQuadDampening(0, 1.0)",
+  "codeBlocks": [
+    "// SetCalmingQuadDampening\nBOOL SET_CALMING_QUAD_DAMPENING(int calmingQuad, float dampening);",
+    "local success = SetCalmingQuadDampening(0, 1.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetCalmingQuadDampening.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

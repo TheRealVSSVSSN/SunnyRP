@@ -1,0 +1,23 @@
+{
+  "title": "UNREGISTER_RAW_NUI_CALLBACK",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "UNREGISTER_RAW_NUI_CALLBACK"
+  ],
+  "content": "0x7FB46432// UnregisterRawNuiCallback\nvoid UNREGISTER_RAW_NUI_CALLBACK(char* callbackType);Parameters:callbackType: The callback type to targetWill unregister and cleanup a registered NUI callback handler.Use along side the REGISTER_RAW_NUI_CALLBACK native.",
+  "codeBlocks": [
+    "// UnregisterRawNuiCallback\nvoid UNREGISTER_RAW_NUI_CALLBACK(char* callbackType);",
+    "-- Example usage for UNREGISTER_RAW_NUI_CALLBACK\nUnregisterRawNuiCallback('')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/UnregisterRawNuiCallback.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

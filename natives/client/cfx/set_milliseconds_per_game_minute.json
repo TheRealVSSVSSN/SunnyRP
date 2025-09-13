@@ -1,0 +1,24 @@
+{
+  "title": "SET_MILLISECONDS_PER_GAME_MINUTE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_MILLISECONDS_PER_GAME_MINUTE"
+  ],
+  "content": "0x36CA2554// SetMillisecondsPerGameMinute\nvoid SET_MILLISECONDS_PER_GAME_MINUTE(int value);Parameters:value: Milliseconds.Overrides how many real ms are equal to one game minute.\nA setter for GetMillisecondsPerGameMinute.",
+  "codeBlocks": [
+    "// SetMillisecondsPerGameMinute\nvoid SET_MILLISECONDS_PER_GAME_MINUTE(int value);",
+    "-- Example usage for SET_MILLISECONDS_PER_GAME_MINUTE\nSetMillisecondsPerGameMinute(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetMillisecondsPerGameMinute.md",
+    "https://docs.fivem.net/natives/?_0x2F8B4D1C595B11DB",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "title": "MUMBLE_REMOVE_VOICE_TARGET_PLAYER",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "MUMBLE_REMOVE_VOICE_TARGET_PLAYER"
+  ],
+  "content": "0x88CD646F// MumbleRemoveVoiceTargetPlayer\nvoid MUMBLE_REMOVE_VOICE_TARGET_PLAYER(int targetId, Player player);Parameters:targetId: A Mumble voice target ID, ranging from 1..30 (inclusive).player: The player index to remove from the target.Removes the specified player from the user's voice targets.Performs the opposite operation of MUMBLE_ADD_VOICE_TARGET_PLAYER",
+  "codeBlocks": [
+    "// MumbleRemoveVoiceTargetPlayer\nvoid MUMBLE_REMOVE_VOICE_TARGET_PLAYER(int targetId, Player player);",
+    "local player = PlayerId()\n-- Example usage for MUMBLE_REMOVE_VOICE_TARGET_PLAYER\nMumbleRemoveVoiceTargetPlayer(0, player)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/MumbleRemoveVoiceTargetPlayer.md",
+    "https://docs.fivem.net/natives/?_0x32C5355A",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "SET_INTERIOR_ROOM_TIMECYCLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_INTERIOR_ROOM_TIMECYCLE"
+  ],
+  "content": "0x31C9A848// SetInteriorRoomTimecycle\nvoid SET_INTERIOR_ROOM_TIMECYCLE(int interiorId, int roomIndex, int timecycleHash);Parameters:interiorId: The target interior.roomIndex: Interior room index.timecycleHash: Timecycle hash.Examples:Lualocal playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\nlocal roomHash = GetRoomKeyFromEntity(playerPed)\nlocal roomId = GetInteriorRoomIndexByHash(interiorId, roomHash)\n\nif roomId ~= -1 then\n  local timecycleHash = GetHashKey(\"scanline_cam\")\n  SetInteriorRoomTimecycle(interiorId, roomId, timecycleHash)\n  RefreshInterior(interiorId)\nend",
+  "codeBlocks": [
+    "// SetInteriorRoomTimecycle\nvoid SET_INTERIOR_ROOM_TIMECYCLE(int interiorId, int roomIndex, int timecycleHash);",
+    "local playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\nlocal roomHash = GetRoomKeyFromEntity(playerPed)\nlocal roomId = GetInteriorRoomIndexByHash(interiorId, roomHash)\n\nif roomId ~= -1 then\n  local timecycleHash = GetHashKey(\"scanline_cam\")\n  SetInteriorRoomTimecycle(interiorId, roomId, timecycleHash)\n  RefreshInterior(interiorId)\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetInteriorRoomTimecycle.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

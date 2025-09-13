@@ -1,0 +1,23 @@
+{
+  "title": "REGISTER_TRACK_JUNCTION",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "REGISTER_TRACK_JUNCTION"
+  ],
+  "content": "0x35F743B5// RegisterTrackJunction\nint REGISTER_TRACK_JUNCTION(int trackIndex, int trackNode, int newIndex, int newNode, bool direction);Parameters:trackIndex: The track index a train should be ontrackNode: The node a train should be onnewIndex: The new track index for a train to be placed onnewNode: The new track node for a train to be placed ondirection: The direction a train should be traveling for this junctionReturns: The track junction's handle or -1 if invalid.Registers a track junction that when enabled will cause a train on the defined trackIndex, node and direction to change its current track index and begin traveling on the new node",
+  "codeBlocks": [
+    "// RegisterTrackJunction\nint REGISTER_TRACK_JUNCTION(int trackIndex, int trackNode, int newIndex, int newNode, bool direction);",
+    "-- Example usage for REGISTER_TRACK_JUNCTION\nRegisterTrackJunction(0, 0, 0, 0, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/RegisterTrackJunction.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

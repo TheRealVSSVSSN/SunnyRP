@@ -1,0 +1,23 @@
+{
+  "title": "LOAD_WATER_FROM_PATH",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "LOAD_WATER_FROM_PATH"
+  ],
+  "content": "0xF5102568// LoadWaterFromPath\nBOOL LOAD_WATER_FROM_PATH(char* resourceName, char* fileName);Parameters:resourceName: The name of the resource containing your modified water definitionfileName: The name of the fileReturns: Returns true on success.Define the xml in a resources fxmanifest, under the file(s) section.Examples:Lualocal success = LoadWaterFromPath('my-resource-name', 'water-all-over-the-place.xml')",
+  "codeBlocks": [
+    "// LoadWaterFromPath\nBOOL LOAD_WATER_FROM_PATH(char* resourceName, char* fileName);",
+    "local success = LoadWaterFromPath('my-resource-name', 'water-all-over-the-place.xml')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/LoadWaterFromPath.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

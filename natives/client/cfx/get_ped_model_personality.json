@@ -1,0 +1,23 @@
+{
+  "title": "GET_PED_MODEL_PERSONALITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PED_MODEL_PERSONALITY"
+  ],
+  "content": "0xFE08CAD6// GetPedModelPersonality\nHash GET_PED_MODEL_PERSONALITY(Hash modelHash);Parameters:modelHash: Ped's model.Gets a ped model's personality type.",
+  "codeBlocks": [
+    "// GetPedModelPersonality\nHash GET_PED_MODEL_PERSONALITY(Hash modelHash);",
+    "-- Example usage for GET_PED_MODEL_PERSONALITY\nGetPedModelPersonality(GetHashKey('prop'))"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPedModelPersonality.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "title": "GET_CONVAR_BOOL",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_CONVAR_BOOL"
+  ],
+  "content": "0x7E8EBFE5// GetConvarBool\nBOOL GET_CONVAR_BOOL(char* varName, BOOL defaultValue);Parameters:varName: The console variable to look up.defaultValue: The default value to set if none is found.Returns: Returns the convar value if it can be found, otherwise it returns the assigned default.Can be used to get a console variable casted back to bool.Examples:Luaif GetConvarBool('dev_mode', false) then\n    print(\"Dev Mode is eanbled, load dev mode menus\")\nend",
+  "codeBlocks": [
+    "// GetConvarBool\nBOOL GET_CONVAR_BOOL(char* varName, BOOL defaultValue);",
+    "if GetConvarBool('dev_mode', false) then\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetConvarBool.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client",
+    "server"
+  ]
+}

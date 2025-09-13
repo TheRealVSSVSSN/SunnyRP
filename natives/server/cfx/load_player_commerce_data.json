@@ -1,0 +1,23 @@
+{
+  "title": "LOAD_PLAYER_COMMERCE_DATA",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "LOAD_PLAYER_COMMERCE_DATA"
+  ],
+  "content": "0xA8F63EAB// LoadPlayerCommerceData\nvoid LOAD_PLAYER_COMMERCE_DATA(char* playerSrc);Parameters:playerSrc: The player handleRequests the commerce data for the specified player, including the owned SKUs. Use IS_PLAYER_COMMERCE_INFO_LOADED to check if it has loaded.",
+  "codeBlocks": [
+    "// LoadPlayerCommerceData\nvoid LOAD_PLAYER_COMMERCE_DATA(char* playerSrc);",
+    "-- Example usage for LOAD_PLAYER_COMMERCE_DATA\nLoadPlayerCommerceData('')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/LoadPlayerCommerceData.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}
