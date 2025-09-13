@@ -1,0 +1,22 @@
+{
+  "title": "DISABLE_PLAYER_VEHICLE_REWARDS",
+  "breadcrumbs": [
+    "PLAYERAPI",
+    "DISABLE_PLAYER_VEHICLE_REWARDS"
+  ],
+  "content": "0xC142BE3BB9CE125F0x8C6E611D// DisablePlayerVehicleRewards\nvoid DISABLE_PLAYER_VEHICLE_REWARDS(Player player);Parameters:player: The player to disable rewardsDisables vehicle rewards for the current frame.",
+  "codeBlocks": [
+    "// DisablePlayerVehicleRewards\nvoid DISABLE_PLAYER_VEHICLE_REWARDS(Player player);",
+    "local player = source\n-- Example usage for DISABLE_PLAYER_VEHICLE_REWARDS\nDisablePlayerVehicleRewards(player)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PLAYER/DisablePlayerVehicleRewards.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

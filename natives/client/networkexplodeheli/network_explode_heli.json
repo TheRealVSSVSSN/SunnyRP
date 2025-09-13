@@ -1,0 +1,22 @@
+{
+  "title": "NETWORK_EXPLODE_HELI",
+  "breadcrumbs": [
+    "NETWORKAPI",
+    "NETWORK_EXPLODE_HELI"
+  ],
+  "content": "0x2A5E0621DD815A9A0x955B31BF// NetworkExplodeHeli\nvoid NETWORK_EXPLODE_HELI(Vehicle heli, BOOL isAudible, BOOL isInvisible, int netScriptEntityId);Parameters:heli: Heli to explodeisAudible: isInvisible: netScriptEntityId:",
+  "codeBlocks": [
+    "// NetworkExplodeHeli\nvoid NETWORK_EXPLODE_HELI(Vehicle heli, BOOL isAudible, BOOL isInvisible, int netScriptEntityId);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for NETWORK_EXPLODE_HELI\nNetworkExplodeHeli(vehicle, true, true, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/NETWORK/NetworkExplodeHeli.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "title": "NETWORK_GET_LOCAL_SCENE_FROM_NETWORK_ID",
+  "breadcrumbs": [
+    "NETWORKAPI",
+    "NETWORK_GET_LOCAL_SCENE_FROM_NETWORK_ID"
+  ],
+  "content": "0x02C40BF885C567B60x16AED87B// NetworkGetLocalSceneFromNetworkId\nint NETWORK_GET_LOCAL_SCENE_FROM_NETWORK_ID(int netSceneId);Parameters:netSceneId: Network synchronised scene ID (returned by NETWORK_CREATE_SYNCHRONISED_SCENE).Returns: Local synchronized scene ID. This value can be used with natives such as: GET_SYNCHRONIZED_SCENE_PHASE, GET_SYNCHRONIZED_SCENE_RATE, IS_SYNCHRONIZED_SCENE_RUNNING and more.Returns a local synchronized scene handle of a networked synchronised scene.Old name:  _NETWORK_UNLINK_NETWORKED_SYNCHRONISED_SCENEOld name:  _NETWORK_CONVERT_SYNCHRONISED_SCENE_TO_SYNCHRONIZED_SCENE",
+  "codeBlocks": [
+    "// NetworkGetLocalSceneFromNetworkId\nint NETWORK_GET_LOCAL_SCENE_FROM_NETWORK_ID(int netSceneId);",
+    "-- Example usage for NETWORK_GET_LOCAL_SCENE_FROM_NETWORK_ID\nNetworkGetLocalSceneFromNetworkId(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/NETWORK/NetworkGetLocalSceneFromNetworkId.md",
+    "https://docs.fivem.net/natives/?_0x7CD6BC4C2BBDD526",
+    "https://docs.fivem.net/natives/?_0xE4A310B1D7FA73CC",
+    "https://docs.fivem.net/natives/?_0xD80932D577274D40",
+    "https://docs.fivem.net/natives/?_0x25D39B935A038A26",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

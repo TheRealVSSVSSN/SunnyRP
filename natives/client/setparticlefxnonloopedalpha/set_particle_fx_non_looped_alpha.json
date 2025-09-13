@@ -1,0 +1,22 @@
+{
+  "title": "SET_PARTICLE_FX_NON_LOOPED_ALPHA",
+  "breadcrumbs": [
+    "GRAPHICSAPI",
+    "SET_PARTICLE_FX_NON_LOOPED_ALPHA"
+  ],
+  "content": "0x77168D722C58B2FC0x497EAFF2// SetParticleFxNonLoopedAlpha\nvoid SET_PARTICLE_FX_NON_LOOPED_ALPHA(float alpha);Usage example for C#:  \nFunction.Call(Hash.SET_PARTICLE_FX_NON_LOOPED_ALPHA, new InputArgument[] { 0.1f });  \n\t\tNote: the argument alpha ranges from 0.0f-1.0f !",
+  "codeBlocks": [
+    "// SetParticleFxNonLoopedAlpha\nvoid SET_PARTICLE_FX_NON_LOOPED_ALPHA(float alpha);",
+    "-- Example usage for SET_PARTICLE_FX_NON_LOOPED_ALPHA\nSetParticleFxNonLoopedAlpha(0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/SetParticleFxNonLoopedAlpha.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

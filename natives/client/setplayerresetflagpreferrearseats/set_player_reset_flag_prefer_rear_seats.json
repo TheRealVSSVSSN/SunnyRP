@@ -1,0 +1,22 @@
+{
+  "title": "SET_PLAYER_RESET_FLAG_PREFER_REAR_SEATS",
+  "breadcrumbs": [
+    "PLAYERAPI",
+    "SET_PLAYER_RESET_FLAG_PREFER_REAR_SEATS"
+  ],
+  "content": "0x11D5F725F0E780E00x725C6174// SetPlayerResetFlagPreferRearSeats\nvoid SET_PLAYER_RESET_FLAG_PREFER_REAR_SEATS(Player player, int flags);example:  \nflags: 0-6  \nPLAYER::SET_PLAYER_RESET_FLAG_PREFER_REAR_SEATS(PLAYER::PLAYER_ID(), 6);  \nwouldnt the flag be the seatIndex?",
+  "codeBlocks": [
+    "// SetPlayerResetFlagPreferRearSeats\nvoid SET_PLAYER_RESET_FLAG_PREFER_REAR_SEATS(Player player, int flags);",
+    "local player = source\n-- Example usage for SET_PLAYER_RESET_FLAG_PREFER_REAR_SEATS\nSetPlayerResetFlagPreferRearSeats(player, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PLAYER/SetPlayerResetFlagPreferRearSeats.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

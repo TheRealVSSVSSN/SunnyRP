@@ -1,0 +1,23 @@
+{
+  "title": "SET_BOAT_ANCHOR",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "SET_BOAT_ANCHOR"
+  ],
+  "content": "0x75DBEC174AEEAD100xA3906284// SetBoatAnchor\nvoid SET_BOAT_ANCHOR(Vehicle boat, BOOL toggle);Parameters:boat: The target boat.toggle: Set the anchor state true deploys the anchor, false raises it.Sets the anchor state for a boat.NativeDB Introduced: v323Note: You might want to check if you can use your anchor before with CAN_ANCHOR_BOAT_HERE.Examples:LuaJavaScriptC#local boat = GetVehiclePedIsIn(PlayerPedId(), false)\nif not boat or not IsThisModelABoat(GetEntityModel(boat)) then return end\n\n-- Check if we can anchor the boat here\nif CanAnchorBoatHere(boat) then\n    -- Deploy the boat's anchor\n    SetBoatAnchor(boat, true)\n    \n    -- Wait for 10 seconds\n    Wait(10000)\n    \n    -- Raise the boat's anchor\n    SetBoatAnchor(boat, false)\nelse\n    print(\"Cannot anchor the boat at this location\")\nend",
+  "codeBlocks": [
+    "// SetBoatAnchor\nvoid SET_BOAT_ANCHOR(Vehicle boat, BOOL toggle);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for SET_BOAT_ANCHOR\nSetBoatAnchor(vehicle, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetBoatAnchor.md",
+    "https://docs.fivem.net/natives/?_0x26C10ECBDA5D043B",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

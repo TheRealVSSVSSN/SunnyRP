@@ -1,0 +1,23 @@
+{
+  "title": "NETWORK_ALLOW_REMOTE_ATTACHMENT_MODIFICATION",
+  "breadcrumbs": [
+    "NETWORKAPI",
+    "NETWORK_ALLOW_REMOTE_ATTACHMENT_MODIFICATION"
+  ],
+  "content": "0x267C78C60E806B9A0xBB2D33D3// NetworkAllowRemoteAttachmentModification\nvoid NETWORK_ALLOW_REMOTE_ATTACHMENT_MODIFICATION(Entity entity, BOOL toggle);Parameters:entity: Entity handle to allow remote attachment for.toggle: true/false.Allows scripts to use attachment commands on entities (eg. ATTACH_ENTITY_TO_ENTITY) that are not controlled by the client.Note: This is only local and does not affect entities on other machines. This is used by the ferris wheel script to sync players on carts.Old name:  _NETWORK_ALLOW_LOCAL_ENTITY_ATTACHMENT",
+  "codeBlocks": [
+    "// NetworkAllowRemoteAttachmentModification\nvoid NETWORK_ALLOW_REMOTE_ATTACHMENT_MODIFICATION(Entity entity, BOOL toggle);",
+    "local entity = GetEntityCoords(PlayerPedId())\n-- Example usage for NETWORK_ALLOW_REMOTE_ATTACHMENT_MODIFICATION\nNetworkAllowRemoteAttachmentModification(entity, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/NETWORK/NetworkAllowRemoteAttachmentModification.md",
+    "https://docs.fivem.net/natives/?_0x6B9BBD38AB0796DF",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

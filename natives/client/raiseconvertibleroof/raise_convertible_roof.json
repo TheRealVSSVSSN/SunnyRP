@@ -1,0 +1,24 @@
+{
+  "title": "RAISE_CONVERTIBLE_ROOF",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "RAISE_CONVERTIBLE_ROOF"
+  ],
+  "content": "0x8F5FB35D7E88FC700xA4E4CBA3// RaiseConvertibleRoof\nvoid RAISE_CONVERTIBLE_ROOF(Vehicle vehicle, BOOL instantlyRaise);Parameters:vehicle: The convertible vehicle whose roof you wish to raise.instantlyRaise: A boolean indicating whether the roof should be raised instantly without the animation transition. Set false to raise the roof with the animation, or true to raise it immediately.Raises the roof on a convertible vehicle, utilizing any available animations for the action. This native is particularly useful for creating a realistic interaction with convertible vehicles by animating the process of raising the roof.You can check if the vehicle has an convertible roof using IS_VEHICLE_A_CONVERTIBLE.To lower the convertible roof, you can use LOWER_CONVERTIBLE_ROOF.NativeDB Introduced: v323Examples:LuaJavaScriptC#local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\nif not IsVehicleAConvertible(vehicle, false) then return end\nRaiseConvertibleRoof(vehicle, false)",
+  "codeBlocks": [
+    "// RaiseConvertibleRoof\nvoid RAISE_CONVERTIBLE_ROOF(Vehicle vehicle, BOOL instantlyRaise);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for RAISE_CONVERTIBLE_ROOF\nRaiseConvertibleRoof(vehicle, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/RaiseConvertibleRoof.md",
+    "https://docs.fivem.net/natives/?_0x52F357A30698BCCE",
+    "https://docs.fivem.net/natives/?_0xDED51F703D0FA83D",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

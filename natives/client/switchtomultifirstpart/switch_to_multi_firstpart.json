@@ -1,0 +1,23 @@
+{
+  "title": "SWITCH_TO_MULTI_FIRSTPART",
+  "breadcrumbs": [
+    "STREAMINGAPI",
+    "SWITCH_TO_MULTI_FIRSTPART"
+  ],
+  "content": "0xAAB3200ED59016BC0xFB4D062D// SwitchToMultiFirstpart\nvoid SWITCH_TO_MULTI_FIRSTPART(Ped ped, int flags, int switchType);Parameters:ped: The Ped (player character) for which the switch is initiated.flags: Flags control various functionalities: 0 for normal behavior, 1 for no transition, and 255 for Switch IN.switchType: Specifies the type of switch (0 - 3): 0 for 1 step towards ped, 1 for 3 steps out from ped, 2 for 1 step out from ped, and 3 for 1 step towards ped.You can check if the player is in a Switch state with IS_PLAYER_SWITCH_IN_PROGRESS.*Note: Doesn't act normally when used on Mount Chiliad.*Old name:  _SWITCH_OUT_PLAYERExamples:LuaJavaScriptC#-- Check if the player is in a Switch \"state\"\nif not IsPlayerSwitchInProgress() then\n    -- If the player is not already in a Switch state, initiate a Switch\n    SwitchToMultiFirstPart(PlayerPedId(), 0, 1)\n    -- In this case, switchType is set to 1, which means \"3 steps out from ped\"\nend",
+  "codeBlocks": [
+    "// SwitchToMultiFirstpart\nvoid SWITCH_TO_MULTI_FIRSTPART(Ped ped, int flags, int switchType);",
+    "local ped = PlayerPedId()\n-- Example usage for SWITCH_TO_MULTI_FIRSTPART\nSwitchToMultiFirstpart(ped, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/STREAMING/SwitchToMultiFirstpart.md",
+    "https://docs.fivem.net/natives/?_0xD9D2CFFF49FAB35F",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

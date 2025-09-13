@@ -1,0 +1,22 @@
+{
+  "title": "SET_VEHICLE_LIGHTS",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "SET_VEHICLE_LIGHTS"
+  ],
+  "content": "0x34E710FF01247C5A0xE8930226// SetVehicleLights\nvoid SET_VEHICLE_LIGHTS(Vehicle vehicle, int state);Parameters:vehicle: The target vehicle.state: A value from eVehicleLightSetting representing the desired light setting.Sets the vehicle lights state. Allowing for different lighting modes.NativeDB Introduced: v323enum eVehicleLightSetting {\n    // Normal light behavior. Lights cycle through off, then low beams, then high beams.\n    // Note: It's affected by day or night; high beams don't exist in daytime.\n    NO_VEHICLE_LIGHT_OVERRIDE = 0,\n    // Vehicle doesn't have lights, always off.\n    FORCE_VEHICLE_LIGHTS_OFF  = 1, \n    // Vehicle has always-on lights.\n    // During day: Cycles between low beams and high beams. \n    // At night: Cycles between low beams, low beams, and high beams.\n    FORCE_VEHICLE_LIGHTS_ON   = 2,\n    // Sets vehicle lights on. Behaves like normal lights (same as 0).\n    SET_VEHICLE_LIGHTS_ON     = 3,\n    // Sets vehicle lights off. Behaves like normal lights (same as 0).\n    SET_VEHICLE_LIGHTS_OFF    = 4 \n};\nExamples:LuaJavaScriptC#local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\nif not vehicle then return end\n\n-- Set the vehicle lights to always on\nSetVehicleLights(vehicle, 2)",
+  "codeBlocks": [
+    "// SetVehicleLights\nvoid SET_VEHICLE_LIGHTS(Vehicle vehicle, int state);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for SET_VEHICLE_LIGHTS\nSetVehicleLights(vehicle, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetVehicleLights.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

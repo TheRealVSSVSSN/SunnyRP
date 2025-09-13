@@ -1,0 +1,23 @@
+{
+  "title": "REQUEST_MENU_PED_MODEL",
+  "breadcrumbs": [
+    "STREAMINGAPI",
+    "REQUEST_MENU_PED_MODEL"
+  ],
+  "content": "0xA0261AEF7ACFC51E0x48CEB6B4// RequestMenuPedModel\nvoid REQUEST_MENU_PED_MODEL(Hash model);Parameters:model: The model to request.Calls REQUEST_MODEL with the STRFLAG_PRIORITY_LOAD and STRFLAG_FORCE_LOAD set.",
+  "codeBlocks": [
+    "// RequestMenuPedModel\nvoid REQUEST_MENU_PED_MODEL(Hash model);",
+    "-- Example usage for REQUEST_MENU_PED_MODEL\nRequestMenuPedModel(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/STREAMING/RequestMenuPedModel.md",
+    "https://docs.fivem.net/natives/?_0x963D27A58DF860AC",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

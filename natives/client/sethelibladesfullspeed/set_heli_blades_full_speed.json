@@ -1,0 +1,22 @@
+{
+  "title": "SET_HELI_BLADES_FULL_SPEED",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "SET_HELI_BLADES_FULL_SPEED"
+  ],
+  "content": "0xA178472EBB8AE60D0x033A9408// SetHeliBladesFullSpeed\nvoid SET_HELI_BLADES_FULL_SPEED(Vehicle vehicle);Parameters:vehicle: The helicopter or the planeDespite its name, this works on Helicopters and Planes.Sets the speed of the helicopter blades to full speed.This is equivalent to calling SetHeliBladesSpeed(vehicleHandle, 1.0);",
+  "codeBlocks": [
+    "// SetHeliBladesFullSpeed\nvoid SET_HELI_BLADES_FULL_SPEED(Vehicle vehicle);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for SET_HELI_BLADES_FULL_SPEED\nSetHeliBladesFullSpeed(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetHeliBladesFullSpeed.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "title": "DETACH_ENTITY_FROM_CARGOBOB",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "DETACH_ENTITY_FROM_CARGOBOB"
+  ],
+  "content": "0xAF03011701811146// DetachEntityFromCargobob\nAny DETACH_ENTITY_FROM_CARGOBOB(Vehicle vehicle, Entity entity);Parameters:vehicle: The Cargobob helicopter.entity: The entity to be detached.Detaches the specified entity currently being carried by a Cargobob.Old name:  _DETACH_ENTITY_FROM_CARGOBOBExamples:LuaJavaScriptC#-- This example detaches a specific entity from a Cargobob.\n\n-- Retrieve the player ped.\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the player's vehicle (cargobob).\nlocal cargobob = GetVehiclePedIsIn(playerPed, false)\n\n-- Retrieve the model hash of the cargobob.\nlocal cargobobModel = GetEntityModel(cargobob)\n\n-- Check if the vehicle exists and if it's a Cargobob. If not, terminate the script.\nif not DoesEntityExist(cargobob) or cargobobModel ~= GetHashKey(\"cargobob\") then\n    return\nend\n\nlocal entityID = 15362 -- The entity you want to detach from the Cargobob (this is a random entity ID).\n\n-- Check if the entity exists; if not, terminate the script.\nif not DoesEntityExist(yourEntity) then\n    return\nend\n\n-- Detach the entity from the Cargobob.\nDetachEntityFromCargobob(cargobob, entityID)",
+  "codeBlocks": [
+    "// DetachEntityFromCargobob\nAny DETACH_ENTITY_FROM_CARGOBOB(Vehicle vehicle, Entity entity);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\nlocal entity = GetEntityCoords(PlayerPedId())\n-- Example usage for DETACH_ENTITY_FROM_CARGOBOB\nDetachEntityFromCargobob(vehicle, entity)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/DetachEntityFromCargobob.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

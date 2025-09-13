@@ -1,0 +1,22 @@
+{
+  "title": "SET_CHECKPOINT_CYLINDER_HEIGHT",
+  "breadcrumbs": [
+    "GRAPHICSAPI",
+    "SET_CHECKPOINT_CYLINDER_HEIGHT"
+  ],
+  "content": "0x2707AAE9D9297D890xFF0F9B22// SetCheckpointCylinderHeight\nvoid SET_CHECKPOINT_CYLINDER_HEIGHT(int checkpoint, float nearHeight, float farHeight, float radius);Sets the cylinder height of the checkpoint.  \nParameters:  \n* nearHeight - The height of the checkpoint when inside of the radius.  \n* farHeight - The height of the checkpoint when outside of the radius.  \n* radius - The radius of the checkpoint.",
+  "codeBlocks": [
+    "// SetCheckpointCylinderHeight\nvoid SET_CHECKPOINT_CYLINDER_HEIGHT(int checkpoint, float nearHeight, float farHeight, float radius);",
+    "-- Example usage for SET_CHECKPOINT_CYLINDER_HEIGHT\nSetCheckpointCylinderHeight(0, 0.0, 0.0, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/SetCheckpointCylinderHeight.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

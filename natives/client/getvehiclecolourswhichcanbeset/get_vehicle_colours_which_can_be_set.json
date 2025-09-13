@@ -1,0 +1,22 @@
+{
+  "title": "GET_VEHICLE_COLOURS_WHICH_CAN_BE_SET",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "GET_VEHICLE_COLOURS_WHICH_CAN_BE_SET"
+  ],
+  "content": "0xEEBFC7A7EFDC35B40x749DEEA2// GetVehicleColoursWhichCanBeSet\nint GET_VEHICLE_COLOURS_WHICH_CAN_BE_SET(Vehicle vehicle);Parameters:vehicle: The vehicle handleReturns: Returns a bitfield of the colours supported by the vehicle's shader.enum eColourBitField {\n    HAS_BODY_COLOUR1 = 1,\n    HAS_BODY_COLOUR2 = 2,\n    HAS_BODY_COLOUR3 = 4,\n    HAS_BODY_COLOUR4 = 8,\n    HAS_BODY_COLOUR5 = 16\n}",
+  "codeBlocks": [
+    "// GetVehicleColoursWhichCanBeSet\nint GET_VEHICLE_COLOURS_WHICH_CAN_BE_SET(Vehicle vehicle);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for GET_VEHICLE_COLOURS_WHICH_CAN_BE_SET\nGetVehicleColoursWhichCanBeSet(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/GetVehicleColoursWhichCanBeSet.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

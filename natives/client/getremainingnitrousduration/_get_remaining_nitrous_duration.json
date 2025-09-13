@@ -1,0 +1,22 @@
+{
+  "title": "_GET_REMAINING_NITROUS_DURATION",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "_GET_REMAINING_NITROUS_DURATION"
+  ],
+  "content": "0xBEC4B8653462450E// GetRemainingNitrousDuration\nfloat _GET_REMAINING_NITROUS_DURATION(Vehicle vehicle);Parameters:vehicle: The vehicle for which to retrieve the remaining nitrous duration.Returns: The amount of time that the nitrous boost can still be active for the given vehicle. If there is no nitrous system active or available, this may return 0.`lua\nCreateThread(function()\n    local playerPed, vehicle\n    while true do\n        -- Retrieve the player ped.\n        playerPed = PlayerPedId()    -- Retrieve the vehicle the player is currently in.\n    vehicle = GetVehiclePedIsIn(playerPed, false)\n\n    -- Retrieve if the nitrous of the vehicle is active.\n    if IsNitrousActive(vehicle) then\n        print(GetRemainingNitrousDuration(vehicle))\n    end\n\n    Wait(0)\nend\nend)setTick(async () => {\n    // Retrieve the player ped.\n    let playerPed = PlayerPedId();\n    \n    // Retrieve the vehicle the player is currently in.\n    let vehicle = GetVehiclePedIsIn(playerPed, false);\n\n    // Retrieve if the nitrous of the vehicle is active.\n    if (IsNitrousActive(vehicle)) {\n        console.log(GetRemainingNitrousDuration(vehicle));\n    }\n});\n```NativeDB Introduced: 3095Retrieves the remaining duration of nitrous boost available for the specified vehicle.",
+  "codeBlocks": [
+    "// GetRemainingNitrousDuration\nfloat _GET_REMAINING_NITROUS_DURATION(Vehicle vehicle);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for _GET_REMAINING_NITROUS_DURATION\n_etRemainingNitrousDuration(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/GetRemainingNitrousDuration.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "title": "GET_VEHICLE_NUMBER_PLATE_TEXT_INDEX",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "GET_VEHICLE_NUMBER_PLATE_TEXT_INDEX"
+  ],
+  "content": "0xF11BC2DD9A3E71950x499747B6// GetVehicleNumberPlateTextIndex\nint GET_VEHICLE_NUMBER_PLATE_TEXT_INDEX(Vehicle vehicle);Parameters:vehicle: The vehicle to get the plate index ofReturns: Returns the plate index, reference eVehiclePlateIndiciesenum eVehiclePlateIndicies {\n\tSanAndreasCursive = 0,\n\tSanAndreasBlack = 1,\n\tSanAndreasBlue = 2,\n\tSanAndreasPlain = 3,\n\tSRExcept = 4,\n\tNorthYankton = 5,\n\t// All indicies below this require b3095\n\tECola = 6,\n\tLasVenturas = 7,\n\tLiberyCity = 8,\n\tLSCarMeet = 9,\n\tLSPanic = 10,\n\tLSPounders = 11,\n\tSprunk = 12,\n}",
+  "codeBlocks": [
+    "// GetVehicleNumberPlateTextIndex\nint GET_VEHICLE_NUMBER_PLATE_TEXT_INDEX(Vehicle vehicle);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for GET_VEHICLE_NUMBER_PLATE_TEXT_INDEX\nGetVehicleNumberPlateTextIndex(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/GetVehicleNumberPlateTextIndex.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

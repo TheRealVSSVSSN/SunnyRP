@@ -1,0 +1,22 @@
+{
+  "title": "NETWORK_GET_HOST_OF_SCRIPT",
+  "breadcrumbs": [
+    "NETWORKAPI",
+    "NETWORK_GET_HOST_OF_SCRIPT"
+  ],
+  "content": "0x1D6A14F1F9A736FC0x9C95D0BB// NetworkGetHostOfScript\nPlayer NETWORK_GET_HOST_OF_SCRIPT(char* scriptName, int p1, int p2);scriptName examples:  \n\"freemode\", \"AM_CR_SecurityVan\", ...  \nMost of the time, these values are used:  \np1 = -1  \np2 = 0",
+  "codeBlocks": [
+    "// NetworkGetHostOfScript\nPlayer NETWORK_GET_HOST_OF_SCRIPT(char* scriptName, int p1, int p2);",
+    "-- Example usage for NETWORK_GET_HOST_OF_SCRIPT\nNetworkGetHostOfScript('', 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/NETWORK/NetworkGetHostOfScript.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

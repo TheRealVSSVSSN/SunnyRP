@@ -1,0 +1,22 @@
+{
+  "title": "_SEETHROUGH_SET_MAX_THICKNESS",
+  "breadcrumbs": [
+    "GRAPHICSAPI",
+    "_SEETHROUGH_SET_MAX_THICKNESS"
+  ],
+  "content": "0x0C8FAC83902A62DF// SeethroughSetMaxThickness\nvoid _SEETHROUGH_SET_MAX_THICKNESS(float thickness);Parameters:thickness: min: 1.0 max: 10000.0",
+  "codeBlocks": [
+    "// SeethroughSetMaxThickness\nvoid _SEETHROUGH_SET_MAX_THICKNESS(float thickness);",
+    "-- Example usage for _SEETHROUGH_SET_MAX_THICKNESS\n_eethroughSetMaxThickness(0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/SeethroughSetMaxThickness.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

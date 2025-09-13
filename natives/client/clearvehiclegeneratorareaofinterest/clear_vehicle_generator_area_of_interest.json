@@ -1,0 +1,23 @@
+{
+  "title": "CLEAR_VEHICLE_GENERATOR_AREA_OF_INTEREST",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "CLEAR_VEHICLE_GENERATOR_AREA_OF_INTEREST"
+  ],
+  "content": "0x0A436B8643716D140x6C73E45A// ClearVehicleGeneratorAreaOfInterest\nvoid CLEAR_VEHICLE_GENERATOR_AREA_OF_INTEREST();Removes the cargen area of interest and resumes normal cargen spawning.You can set the area of interest with SET_VEHICLE_GENERATOR_AREA_OF_INTERESTExamples:LuaJavaScriptC#-- This example clears the area of interest (cargen) and resumes normal spawning\nClearVehicleGeneratorAreaOfInterest()",
+  "codeBlocks": [
+    "// ClearVehicleGeneratorAreaOfInterest\nvoid CLEAR_VEHICLE_GENERATOR_AREA_OF_INTEREST();",
+    "-- Example usage for CLEAR_VEHICLE_GENERATOR_AREA_OF_INTEREST\nClearVehicleGeneratorAreaOfInterest()"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/ClearVehicleGeneratorAreaOfInterest.md",
+    "https://docs.fivem.net/natives/?_0x9A75585FB2E54FAD",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

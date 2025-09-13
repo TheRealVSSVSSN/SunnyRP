@@ -1,0 +1,23 @@
+{
+  "title": "IS_BOAT_ANCHORED",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "IS_BOAT_ANCHORED"
+  ],
+  "content": "0xB0AD1238A709B1A2// IsBoatAnchored\nBOOL IS_BOAT_ANCHORED(Vehicle boat);Parameters:boat: The boat to check.Returns: Returns true if the boat is currently anchored, false otherwise.Checks if a boat is currently anchored.This native is a getter for SET_BOAT_ANCHOR.NativeDB Introduced: v573Old name:  _IS_BOAT_ANCHORED_AND_FROZEN",
+  "codeBlocks": [
+    "// IsBoatAnchored\nBOOL IS_BOAT_ANCHORED(Vehicle boat);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for IS_BOAT_ANCHORED\nIsBoatAnchored(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/IsBoatAnchored.md",
+    "https://docs.fivem.net/natives/?_0x75DBEC174AEEAD10",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "DRAW_MARKER",
+  "breadcrumbs": [
+    "GRAPHICSAPI",
+    "DRAW_MARKER"
+  ],
+  "content": "0x28477EC23D8920890x48D84A02// DrawMarker\nvoid DRAW_MARKER(int type, float posX, float posY, float posZ, float dirX, float dirY, float dirZ, float rotX, float rotY, float rotZ, float scaleX, float scaleY, float scaleZ, int red, int green, int blue, int alpha, BOOL bobUpAndDown, BOOL faceCamera, int rotationOrder, BOOL rotate, char* textureDict, char* textureName, BOOL drawOnEnts);Parameters:type: The marker type to draw.posX: The X coordinate to draw the marker at.posY: The Y coordinate to draw the marker at.posZ: The Z coordinate to draw the marker at.dirX: The X component of the direction vector for the marker, or 0.0 to use rotX/Y/Z.dirY: The Y component of the direction vector for the marker, or 0.0 to use rotX/Y/Z.dirZ: The Z component of the direction vector for the marker, or 0.0 to use rotX/Y/Z.rotX: The X rotation for the marker. Only used if the direction vector is 0.0.rotY: The Y rotation for the marker. Only used if the direction vector is 0.0.rotZ: The Z rotation for the marker. Only used if the direction vector is 0.0.scaleX: The scale for the marker on the X axis.scaleY: The scale for the marker on the Y axis.scaleZ: The scale for the marker on the Z axis.red: The red component of the marker color, on a scale from 0-255.green: The green component of the marker color, on a scale from 0-255.blue: The blue component of the marker color, on a scale from 0-255.alpha: The alpha component of the marker color, on a scale from 0-255.bobUpAndDown: Whether or not the marker should slowly animate up/down.faceCamera: Whether the marker should be a 'billboard', as in, should constantly face the camera.rotationOrder: The order yaw, pitch and roll is applied. Usually 2.rotate: Rotations only apply to the heading.textureDict: A texture dictionary to draw the marker with, or NULL. Example: 'GolfPutting'textureName: A texture name in textureDict to draw the marker with, or NULL. Example: 'PuttingMarker'drawOnEnts: Whether or not the marker should draw on intersecting entities.Draws a marker with the specified appearance at the target location. This has to be called every frame, e.g. in a Wait(0) loop.There's a list of markers on the FiveM documentation site.Examples:LuaCreateThread(function()\n\twhile true do\n\t\t-- draw every frame\n\t\tWait(0)\n\n\t\tlocal pedCoords = GetEntityCoords(PlayerPedId())\n\t\tDrawMarker(2, pedCoords.x, pedCoords.y, pedCoords.z + 2, 0.0, 0.0, 0.0, 0.0, 180.0, 0.0, 2.0, 2.0, 2.0, 255, 128, 0, 50, false, true, 2, nil, nil, false)\n\tend\nend)",
+  "codeBlocks": [
+    "// DrawMarker\nvoid DRAW_MARKER(int type, float posX, float posY, float posZ, float dirX, float dirY, float dirZ, float rotX, float rotY, float rotZ, float scaleX, float scaleY, float scaleZ, int red, int green, int blue, int alpha, BOOL bobUpAndDown, BOOL faceCamera, int rotationOrder, BOOL rotate, char* textureDict, char* textureName, BOOL drawOnEnts);",
+    "-- Example usage for DRAW_MARKER\nDrawMarker(0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0, 0, 0, true, true, 0, true, '', '', true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/DrawMarker.md",
+    "https://docs.fivem.net/docs/game-references/markers/",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

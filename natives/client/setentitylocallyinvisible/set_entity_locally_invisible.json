@@ -1,0 +1,22 @@
+{
+  "title": "SET_ENTITY_LOCALLY_INVISIBLE",
+  "breadcrumbs": [
+    "NETWORKAPI",
+    "SET_ENTITY_LOCALLY_INVISIBLE"
+  ],
+  "content": "0xE135A9FF3F5D05D80x51ADCC5F// SetEntityLocallyInvisible\nvoid SET_ENTITY_LOCALLY_INVISIBLE(Entity entity);Sets the provided entity not visible for yourself for the current frame.Examples:LuaCreateThread(function()\n  -- Any random entity should work\n  local entity = PlayerPedId()\n  -- Make the entity visible for all players\n  SetEntityVisible(entity, true)\n  while true do\n    Wait(0)\n    -- Make the entity invisible for the current player only.\n    SetEntityLocallyInvisible(entity)\n  end\nend)",
+  "codeBlocks": [
+    "// SetEntityLocallyInvisible\nvoid SET_ENTITY_LOCALLY_INVISIBLE(Entity entity);",
+    "local entity = GetEntityCoords(PlayerPedId())\n-- Example usage for SET_ENTITY_LOCALLY_INVISIBLE\nSetEntityLocallyInvisible(entity)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/NETWORK/SetEntityLocallyInvisible.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

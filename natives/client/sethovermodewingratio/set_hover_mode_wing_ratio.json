@@ -1,0 +1,22 @@
+{
+  "title": "SET_HOVER_MODE_WING_RATIO",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "SET_HOVER_MODE_WING_RATIO"
+  ],
+  "content": "0x70A252F60A3E036B// SetHoverModeWingRatio\nvoid SET_HOVER_MODE_WING_RATIO(Vehicle vehicle, float ratio);Parameters:vehicle: The vehicle to which the ratio will be applied.ratio: Between 0.0 and 1.0. 0.0 is wings closed, 1.0 is wings open.This native allows opening or closing the wings of the Deluxo/Oppressor. For the Deluxo, wing deployment depends on sufficient altitude.Old name:  _SET_SPECIALFLIGHT_WING_RATIOExamples:LuaJavaScriptC#-- In this case we are opening the wings of the vehicle\nlocal vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\nSetHoverModeWingRatio(vehicle, 1.0)",
+  "codeBlocks": [
+    "// SetHoverModeWingRatio\nvoid SET_HOVER_MODE_WING_RATIO(Vehicle vehicle, float ratio);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for SET_HOVER_MODE_WING_RATIO\nSetHoverModeWingRatio(vehicle, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetHoverModeWingRatio.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

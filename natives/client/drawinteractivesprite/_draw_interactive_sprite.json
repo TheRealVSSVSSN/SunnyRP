@@ -1,0 +1,23 @@
+{
+  "title": "_DRAW_INTERACTIVE_SPRITE",
+  "breadcrumbs": [
+    "GRAPHICSAPI",
+    "_DRAW_INTERACTIVE_SPRITE"
+  ],
+  "content": "0x2BC54A8188768488// DrawInteractiveSprite\nvoid _DRAW_INTERACTIVE_SPRITE(char* textureDict, char* textureName, float screenX, float screenY, float width, float height, float heading, int red, int green, int blue, int alpha);Parameters:textureDict: Name of texture dictionary to load texture fromtextureName: Name of texture to load from texture dictionaryscreenX: Screen XscreenY: Screen Ywidth: Scale Xheight: Scale Yheading: Texture rotation in degrees (default = 0.0) positive is clockwise, measured in degreesred: Colorgreen: Colorblue: Coloralpha: Opacity levelSimilar to _DRAW_SPRITE, but seems to be some kind of \"interactive\" sprite, at least used by render targets.\nThese seem to be the only dicts ever requested by this native:prop_screen_biker_laptop\nProp_Screen_GR_Disruption\nProp_Screen_TaleOfUs\nprop_screen_nightclub\nProp_Screen_IE_Adhawk\nprop_screen_sm_free_trade_shipping\nprop_screen_hacker_truck\nMPDesktop\nProp_Screen_Nightclub\nAnd a few others",
+  "codeBlocks": [
+    "// DrawInteractiveSprite\nvoid _DRAW_INTERACTIVE_SPRITE(char* textureDict, char* textureName, float screenX, float screenY, float width, float height, float heading, int red, int green, int blue, int alpha);",
+    "-- Example usage for _DRAW_INTERACTIVE_SPRITE\n_rawInteractiveSprite('', '', 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/DrawInteractiveSprite.md",
+    "https://docs.fivem.net/natives/?_0xE7FFAE5EBF23D890",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

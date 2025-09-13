@@ -1,0 +1,22 @@
+{
+  "title": "SET_VEHICLE_DOOR_SHUT",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "SET_VEHICLE_DOOR_SHUT"
+  ],
+  "content": "0x93D9BD300D7789E50x142606BD// SetVehicleDoorShut\nvoid SET_VEHICLE_DOOR_SHUT(Vehicle vehicle, int doorIndex, BOOL closeInstantly);Parameters:vehicle: Vehicle.doorIndex: Index of the door you want to close.closeInstantly: Whether the doors close instantly.Sets the specified door index shut on the passed vehicle.enum eDoorId\n{\n\tVEH_EXT_DOOR_DSIDE_F = 0,\n\tVEH_EXT_DOOR_DSIDE_R = 1,\n\tVEH_EXT_DOOR_PSIDE_F = 2,\n\tVEH_EXT_DOOR_PSIDE_R = 3,\n\tVEH_EXT_BONNET = 4,\n\tVEH_EXT_BOOT = 5,\n\t// 0x872E72B8 = 0xFFFFFFFF,\n}\nExamples:Lualocal Vehicle = GetVehiclePedIsUsing(PlayerPedId())\nfor i = 0, 5 do\n  SetVehicleDoorShut(Vehicle, i, false) -- will close all doors from 0-5\nend",
+  "codeBlocks": [
+    "// SetVehicleDoorShut\nvoid SET_VEHICLE_DOOR_SHUT(Vehicle vehicle, int doorIndex, BOOL closeInstantly);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for SET_VEHICLE_DOOR_SHUT\nSetVehicleDoorShut(vehicle, 0, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetVehicleDoorShut.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

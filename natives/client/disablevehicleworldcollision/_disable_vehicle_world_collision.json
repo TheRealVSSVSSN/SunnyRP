@@ -1,0 +1,23 @@
+{
+  "title": "_DISABLE_VEHICLE_WORLD_COLLISION",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "_DISABLE_VEHICLE_WORLD_COLLISION"
+  ],
+  "content": "0x75627043C6AA90AD// DisableVehicleWorldCollision\nvoid _DISABLE_VEHICLE_WORLD_COLLISION(Vehicle vehicle);Parameters:vehicle: the vehicle to disable world collisions forDisables collision for this vehicle (maybe it also supports other entities, not sure).\nOnly world/building/fixed world objects will have their collisions disabled, props, peds, or any other entity still collides with the vehicle.Example videoNot sure if there is a native (and if so, which one) that resets the collisions.",
+  "codeBlocks": [
+    "// DisableVehicleWorldCollision\nvoid _DISABLE_VEHICLE_WORLD_COLLISION(Vehicle vehicle);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for _DISABLE_VEHICLE_WORLD_COLLISION\n_isableVehicleWorldCollision(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/DisableVehicleWorldCollision.md",
+    "https://streamable.com/6n45d5",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

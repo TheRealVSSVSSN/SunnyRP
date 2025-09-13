@@ -1,0 +1,12 @@
+{
+  "title": "CFXACTIVATE_TIMECYCLE_EDITOR",
+  "breadcrumbs": [
+    "CFXACTIVATE_TIMECYCLE_EDITOR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CFXACTIVATE_TIMECYCLE_EDITOR\nCfxactivateTimecycleEditor()"
+  ],
+  "urls": [],
+  "tags": []
+}

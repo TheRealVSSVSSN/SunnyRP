@@ -1,0 +1,22 @@
+{
+  "title": "_GET_SCRIPT_GFX_POSITION",
+  "breadcrumbs": [
+    "GRAPHICSAPI",
+    "_GET_SCRIPT_GFX_POSITION"
+  ],
+  "content": "0x6DD8F5AA635EB4B2// GetScriptGfxPosition\nvoid _GET_SCRIPT_GFX_POSITION(float x, float y, float* calculatedX, float* calculatedY);Parameters:x: The input X coordinate.y: The input Y coordinate.calculatedX: A pointer to the calculated X value.calculatedY: A pointer to the calculated Y value.Calculates the effective X/Y fractions when applying the values set by SET_SCRIPT_GFX_ALIGN and\nSET_SCRIPT_GFX_ALIGN_PARAMS.Examples:Lualocal calcX, calcX = GetScriptGfxPosition(0.2, 0.2)",
+  "codeBlocks": [
+    "// GetScriptGfxPosition\nvoid _GET_SCRIPT_GFX_POSITION(float x, float y, float* calculatedX, float* calculatedY);",
+    "-- Example usage for _GET_SCRIPT_GFX_POSITION\n_etScriptGfxPosition(0.0, 0.0, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/GetScriptGfxPosition.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

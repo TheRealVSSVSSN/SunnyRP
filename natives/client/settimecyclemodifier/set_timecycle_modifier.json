@@ -1,0 +1,22 @@
+{
+  "title": "SET_TIMECYCLE_MODIFIER",
+  "breadcrumbs": [
+    "GRAPHICSAPI",
+    "SET_TIMECYCLE_MODIFIER"
+  ],
+  "content": "0x2C933ABF17A1DF410xA81F3638// SetTimecycleModifier\nvoid SET_TIMECYCLE_MODIFIER(char* modifierName);Loads the specified timecycle modifier. Modifiers are defined separately in another file (e.g. \"timecycle_mods_1.xml\")\nParameters:\nmodifierName - The modifier to load (e.g. \"V_FIB_IT3\", \"scanline_cam\", etc.)",
+  "codeBlocks": [
+    "// SetTimecycleModifier\nvoid SET_TIMECYCLE_MODIFIER(char* modifierName);",
+    "-- Example usage for SET_TIMECYCLE_MODIFIER\nSetTimecycleModifier('')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/SetTimecycleModifier.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

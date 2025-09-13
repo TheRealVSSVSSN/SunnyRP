@@ -1,0 +1,23 @@
+{
+  "title": "DISABLE_MOON_CYCLE_OVERRIDE",
+  "breadcrumbs": [
+    "GRAPHICSAPI",
+    "DISABLE_MOON_CYCLE_OVERRIDE"
+  ],
+  "content": "0x2BF72AD5B41AA739// DisableMoonCycleOverride\nvoid DISABLE_MOON_CYCLE_OVERRIDE();Removes any custom moon cycle overrides that have been configured with ENABLE_MOON_CYCLE_OVERRIDEOld name:  _RESET_EXTRA_TIMECYCLE_MODIFIER_STRENGTHExamples:LuaDisableMoonCycleOverride()",
+  "codeBlocks": [
+    "// DisableMoonCycleOverride\nvoid DISABLE_MOON_CYCLE_OVERRIDE();",
+    "-- Example usage for DISABLE_MOON_CYCLE_OVERRIDE\nDisableMoonCycleOverride()"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/DisableMoonCycleOverride.md",
+    "https://docs.fivem.net/natives/?_0x2C328AF17210F009",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "title": "SET_VEHICLE_HEADLIGHT_SHADOWS",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "SET_VEHICLE_HEADLIGHT_SHADOWS"
+  ],
+  "content": "0x1FD09E7390A74D54// SetVehicleHeadlightShadows\nvoid SET_VEHICLE_HEADLIGHT_SHADOWS(Vehicle vehicle, int flag);Parameters:vehicle: The target vehicle.flag: A value from eVehicleHeadlightShadowFlags representing the desired headlight shadow flag.Sets the vehicle headlight shadow flags.NativeDB Introduced: v323enum eVehicleHeadlightShadowFlags {\n    // Default (Lights can be toggled between off, normal and high beams)\n    NO_HEADLIGHT_SHADOWS = 0,\n    // Lights Disabled (Lights are fully disabled, cannot be toggled)\n    HEADLIGHTS_CAST_DYNAMIC_SHADOWS = 1,\n    // Always On (Lights can be toggled between normal and high beams)\n    HEADLIGHTS_CAST_STATIC_SHADOWS = 2,\n    HEADLIGHTS_CAST_FULL_SHADOWS = 3 \n};\nOld name:  _SET_VEHICLE_LIGHTS_MODEExamples:LuaJavaScriptC#local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\nif not vehicle then return end\n\n-- Set the vehicle headlight shadows to cast static shadows (always on)\nSetVehicleHeadlightShadows(vehicle, 2)",
+  "codeBlocks": [
+    "// SetVehicleHeadlightShadows\nvoid SET_VEHICLE_HEADLIGHT_SHADOWS(Vehicle vehicle, int flag);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for SET_VEHICLE_HEADLIGHT_SHADOWS\nSetVehicleHeadlightShadows(vehicle, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetVehicleHeadlightShadows.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "title": "_ENABLE_AIRCRAFT_OBSTACLE_AVOIDANCE",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "_ENABLE_AIRCRAFT_OBSTACLE_AVOIDANCE"
+  ],
+  "content": "0x8AA9180DE2FEDD450xAE040377// EnableAircraftObstacleAvoidance\nvoid _ENABLE_AIRCRAFT_OBSTACLE_AVOIDANCE(Vehicle vehicle, BOOL avoidObstacles);Parameters:vehicle: The vehicle handle to toggle obstacle avoidance for.avoidObstacles: true / false to enable/disable heightmap obstacle avoidance respectively!Will disable a plane or a helicopter's need to swerve around object in its heightmap when using TASK_PLANE_MISSION or other AI / Pilot behavior.  Will ensure plane flys directly to it's destination or die trying! This native does NOT need to be called every frame, but instead, just called once on the vehicle (NOT THE PED) you're trying to disable avoidance for!Old name:  _0x8AA9180DE2FEDD45",
+  "codeBlocks": [
+    "// EnableAircraftObstacleAvoidance\nvoid _ENABLE_AIRCRAFT_OBSTACLE_AVOIDANCE(Vehicle vehicle, BOOL avoidObstacles);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for _ENABLE_AIRCRAFT_OBSTACLE_AVOIDANCE\n_nableAircraftObstacleAvoidance(vehicle, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/EnableAircraftObstacleAvoidance.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

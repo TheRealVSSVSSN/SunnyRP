@@ -1,0 +1,22 @@
+{
+  "title": "SET_PLAYER_MAY_NOT_ENTER_ANY_VEHICLE",
+  "breadcrumbs": [
+    "PLAYERAPI",
+    "SET_PLAYER_MAY_NOT_ENTER_ANY_VEHICLE"
+  ],
+  "content": "0x1DE37BBF9E9CC14A0xAF7AFCC4// SetPlayerMayNotEnterAnyVehicle\nvoid SET_PLAYER_MAY_NOT_ENTER_ANY_VEHICLE(Player player);Parameters:player: The player index.Establishes a reset flag to prevent the player from entering any vehicle. Not that this native must be called every frame.",
+  "codeBlocks": [
+    "// SetPlayerMayNotEnterAnyVehicle\nvoid SET_PLAYER_MAY_NOT_ENTER_ANY_VEHICLE(Player player);",
+    "local player = source\n-- Example usage for SET_PLAYER_MAY_NOT_ENTER_ANY_VEHICLE\nSetPlayerMayNotEnterAnyVehicle(player)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PLAYER/SetPlayerMayNotEnterAnyVehicle.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

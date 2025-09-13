@@ -1,0 +1,12 @@
+{
+  "title": "SET_CURRENT_PED_VEHICLE_WEAPON",
+  "breadcrumbs": [
+    "SET_CURRENT_PED_VEHICLE_WEAPON"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_CURRENT_PED_VEHICLE_WEAPON\nSetCurrentPedVehicleWeapon()"
+  ],
+  "urls": [],
+  "tags": []
+}

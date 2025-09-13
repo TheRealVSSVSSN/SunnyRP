@@ -1,0 +1,22 @@
+{
+  "title": "SET_VEHICLE_NAME_DEBUG",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "SET_VEHICLE_NAME_DEBUG"
+  ],
+  "content": "0xBFDF984E2C22B94F0xA712FF5C// SetVehicleNameDebug\nvoid SET_VEHICLE_NAME_DEBUG(Vehicle vehicle, char* name);Parameters:vehicle: The vehicle id.name: Debug name.This method is utilized solely for debugging purposes and is functional only in debug builds of the game. Please note that its functionality may not be available in the retail version.",
+  "codeBlocks": [
+    "// SetVehicleNameDebug\nvoid SET_VEHICLE_NAME_DEBUG(Vehicle vehicle, char* name);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for SET_VEHICLE_NAME_DEBUG\nSetVehicleNameDebug(vehicle, '')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetVehicleNameDebug.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

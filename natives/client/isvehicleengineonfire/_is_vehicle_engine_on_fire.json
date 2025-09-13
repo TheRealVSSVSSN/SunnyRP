@@ -1,0 +1,22 @@
+{
+  "title": "_IS_VEHICLE_ENGINE_ON_FIRE",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "_IS_VEHICLE_ENGINE_ON_FIRE"
+  ],
+  "content": "0xEC69ADF931AAE0C3// IsVehicleEngineOnFire\nBOOL _IS_VEHICLE_ENGINE_ON_FIRE(Vehicle vehicle);\nParameters:vehicle: The vehicle to check.Returns: Returns true when the engine of your vehicle is on fire. Returns false if it's not on fire.Only ever used once in decompiled scripts: am_pi_menu:\nReturns true if the engine is on fire, or if the vehicle engine health is < 0 and it has been on fire.It sometimes doesn't return true when the vehicle engine has been on fire, and has since been fixed. I'm not really sure what the exact conditions are.This usually returns true even if there are no visible flames yet (engine health > 0). However if you monitor engine health you'll see that it starts decreasing as soon as this returns true.Examples:Lualocal vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\nSetVehicleEngineHealth(vehicle, 99)\n\nCreateThread(function()\n    -- waiting for the vehicle to be on fire, usually takes one small\n    -- crash into a wall or something to do this if engine health < 100.\n    while IsVehicleEngineOnFire(vehicle) ~= 1 do\n        Wait(0)\n    end\n    print(\"Vehicle is now on fire!\")\nend)",
+  "codeBlocks": [
+    "// IsVehicleEngineOnFire\nBOOL _IS_VEHICLE_ENGINE_ON_FIRE(Vehicle vehicle);\n",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for _IS_VEHICLE_ENGINE_ON_FIRE\n_sVehicleEngineOnFire(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/IsVehicleEngineOnFire.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

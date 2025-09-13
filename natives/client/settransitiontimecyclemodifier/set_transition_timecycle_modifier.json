@@ -1,0 +1,23 @@
+{
+  "title": "SET_TRANSITION_TIMECYCLE_MODIFIER",
+  "breadcrumbs": [
+    "GRAPHICSAPI",
+    "SET_TRANSITION_TIMECYCLE_MODIFIER"
+  ],
+  "content": "0x3BCF567485E1971C0xBB2BA72A// SetTransitionTimecycleModifier\nvoid SET_TRANSITION_TIMECYCLE_MODIFIER(char* modifierName, float transition);Parameters:modifierName: The name of a timecycletransition: The speed to transition to modifierName. Appears to be half-seconds (?)This native doesn't work like SetWeatherTypeTransition.",
+  "codeBlocks": [
+    "// SetTransitionTimecycleModifier\nvoid SET_TRANSITION_TIMECYCLE_MODIFIER(char* modifierName, float transition);",
+    "-- Example usage for SET_TRANSITION_TIMECYCLE_MODIFIER\nSetTransitionTimecycleModifier('', 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/SetTransitionTimecycleModifier.md",
+    "https://docs.fivem.net/natives/?_0x578C752848ECFA0C",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}
