@@ -1,0 +1,23 @@
+{
+  "title": "SET_SCRIPT_GFX_ALIGN",
+  "breadcrumbs": [
+    "Native Reference",
+    "GRAPHICSAPI",
+    "SET_SCRIPT_GFX_ALIGN"
+  ],
+  "content": "0xB8A850F20A067EB60x228A2598// SetScriptGfxAlign\nvoid SET_SCRIPT_GFX_ALIGN(int horizontalAlign, int verticalAlign);Parameters:horizontalAlign: The horizontal alignment. This can be 67 ('C'), 76 ('L'), or 82 ('R').verticalAlign: The vertical alignment. This can be 67 ('C'), 66 ('B'), or 84 ('T').This function anchors script draws to a side of the safe zone. This needs to be called to make the interface\nindependent of the player's safe zone configuration.These values are equivalent to alignX and alignY in common:/data/ui/frontend.xml, which can be used as a baseline\nfor default alignment.Valid values for horizontalAlign, from original documentation:C (67) - Center: DRAW_TEXT starts in the middle of the screen, while DRAW_RECT starts on the right; both move with\nthe right side of the screen.L (76) - Left: Anchors to the left side, DRAW_RECT starts on the left side of the screen, same as DRAW_TEXT when\ncentered.R (82) - Right: DRAW_TEXT starts on the left side (normal 0,0), while DRAW_RECT starts some short distance away\nfrom the right side of the screen, both move with the right side of the screen.Valid values for verticalAlign, from original documentation:B (66) - Bottom: DRAW_RECT starts about as far as the middle of the map from the bottom, while DRAW_TEXT is about\nrather centered.C (67) - Center: It starts at a certain distance from the bottom, but the distance is fixed, the distance is\ndifferent from 66.T (84) - Top: Anchors to the top, DRAW_RECT starts on the top of the screen, DRAW_TEXT just below it.Using any other value (including 0) will result in the safe zone not being taken into account for this draw. The\ncanonical value for this is 'I' (73).For example, you can use SET_SCRIPT_GFX_ALIGN(0, 84) to only scale on the Y axis (to the top), but not change the X\naxis.To reset the value, use RESET_SCRIPT_GFX_ALIGN.Old name:  _SET_SCREEN_DRAW_POSITIONOld name:  _SCREEN_DRAW_POSITION_BEGINExamples:Lua-- align the next draw to the top left\nSetScriptGfxAlign(string.byte('L'), string.byte('T'))\n\n-- prints \"THIS LABEL NEEDS TO BE HERE !!!\"\nBeginTextCommandDisplayText('DUMMY1')\nEndTextCommandDisplayText(0.0, 0.0)\n\n-- reset the script draw alignment\nResetScriptGfxAlign()",
+  "codeBlocks": [
+    "// SetScriptGfxAlign\nvoid SET_SCRIPT_GFX_ALIGN(int horizontalAlign, int verticalAlign);",
+    "-- align the next draw to the top left\nSetScriptGfxAlign(string.byte('L'), string.byte('T'))\n\n-- prints \"THIS LABEL NEEDS TO BE HERE !!!\"\nBeginTextCommandDisplayText('DUMMY1')\nEndTextCommandDisplayText(0.0, 0.0)\n\n-- reset the script draw alignment\nResetScriptGfxAlign()"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/SetScriptGfxAlign.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

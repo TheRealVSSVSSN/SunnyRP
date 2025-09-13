@@ -1,0 +1,24 @@
+{
+  "title": "NETWORK_GET_NETWORK_ID_FROM_ENTITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORKAPI",
+    "NETWORK_GET_NETWORK_ID_FROM_ENTITY"
+  ],
+  "content": "0xA11700682F3AD45C0x9E35DAB6// NetworkGetNetworkIdFromEntity\nint NETWORK_GET_NETWORK_ID_FROM_ENTITY(Entity entity);Parameters:entity: the handle of the entity from which the network id should be takenReturns: The network id of the given entityGet the network id of the given entityAn entity network id represents a given entity for other clients, it's a handle shared between clients, can be reconverted to a client entity handle.\\\nThese (entity network IDs) can and will be reused, the network id will not change.\nIf you need to refer to an entity across machines (clients, or the server), you should use its network id.Read more at Network and local IDsExamples:LuaJavaScriptC#local obj = CreateObject(`prop_weed_01`, vector3(0.0, 0.0, 0.0), true)\nlocal netId = NetworkGetNetworkIdFromEntity(obj)",
+  "codeBlocks": [
+    "// NetworkGetNetworkIdFromEntity\nint NETWORK_GET_NETWORK_ID_FROM_ENTITY(Entity entity);",
+    "local obj = CreateObject(`prop_weed_01`, vector3(0.0, 0.0, 0.0), true)\nlocal netId = NetworkGetNetworkIdFromEntity(obj)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/NETWORK/NetworkGetNetworkIdFromEntity.md",
+    "https://docs.fivem.net/docs/scripting-manual/networking/ids/",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

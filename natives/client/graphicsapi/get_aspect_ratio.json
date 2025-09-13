@@ -1,0 +1,24 @@
+{
+  "title": "GET_ASPECT_RATIO",
+  "breadcrumbs": [
+    "Native Reference",
+    "GRAPHICSAPI",
+    "GET_ASPECT_RATIO"
+  ],
+  "content": "0xF1307EF624A80D87// GetAspectRatio\nfloat GET_ASPECT_RATIO(BOOL physicalAspect);Parameters:physicalAspect: A boolean value. Passing in true returns the physical aspect ratio of the game window. Passing in false returns the aspect ratio of the main game window.Returns: The aspect ratio of the game window as a floating-point number.This native retrieves the aspect ratio of the game window. If physicalAspect is true, it returns the physical aspect ratio of the game window, which is useful for 3x1 modes. Otherwise, it returns the aspect ratio of the main game window, considering any custom overrides from the settings menu.NativeDB Introduced: v323Old name:  _GET_SCREEN_ASPECT_RATIOOld name:  _GET_ASPECT_RATIO",
+  "codeBlocks": [
+    "// GetAspectRatio\nfloat GET_ASPECT_RATIO(BOOL physicalAspect);",
+    "NativeDB Introduced: v323",
+    "-- Example\nGetAspectRatio(false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/GetAspectRatio.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

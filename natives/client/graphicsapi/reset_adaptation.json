@@ -1,0 +1,23 @@
+{
+  "title": "RESET_ADAPTATION",
+  "breadcrumbs": [
+    "Native Reference",
+    "GRAPHICSAPI",
+    "RESET_ADAPTATION"
+  ],
+  "content": "0xE3E2C1B4C59DBC770xD8CC7221// ResetAdaptation\nvoid RESET_ADAPTATION(int numFrames);Parameters:numFrames: Number of frames.Resets AnimPostFX adaptation.",
+  "codeBlocks": [
+    "// ResetAdaptation\nvoid RESET_ADAPTATION(int numFrames);",
+    "-- Example\nResetAdaptation(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/ResetAdaptation.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

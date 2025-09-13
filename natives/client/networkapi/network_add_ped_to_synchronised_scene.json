@@ -1,0 +1,26 @@
+{
+  "title": "NETWORK_ADD_PED_TO_SYNCHRONISED_SCENE",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORKAPI",
+    "NETWORK_ADD_PED_TO_SYNCHRONISED_SCENE"
+  ],
+  "content": "0x742A637471BCECD90xB386713E// NetworkAddPedToSynchronisedScene\nvoid NETWORK_ADD_PED_TO_SYNCHRONISED_SCENE(Ped ped, int netScene, char* animDict, char* animClip, float blendInSpeed, float blendOutSpeed, int syncedSceneFlags, int ragdollFlags, float moverBlendInDelta, int ikFlags);Parameters:ped: Ped handle to add.netScene: Network scene handle (Returned by NETWORK_CREATE_SYNCHRONISED_SCENE)animDict: Dictionary of the animation that the ped will play. Network synchronised scenes don't require the animation dictionary to be loaded, unlike TASK_SYNCHRONIZED_SCENE.animClip: Clip name from the anim dictionary that the ped will play.blendInSpeed: Blend in speed. The lower the value, the slower the blend in speed is. Default is 8.0.blendOutSpeed: Blend out speed. This should be the negative value of blendInSpeed. Default is -8.0.syncedSceneFlags: Synchronized scene flags bit field from the above table.ragdollFlags: Ragdoll blocking flags. Default is 0.moverBlendInDelta: Determines the rate at which the mover blends in to the scene. Useful for ensuring a seamless entry onto a synchronized scene. Default is 1000.0.ikFlags: Inverse kinematics flags. Default is 0.Adds a ped to a networked synchronised scene.Synchronized scene playback flags (Also works in other NETWORK_ADD_*_TO_SYNCHRONISED_SCENE natives):ValueNameNotes0NoneNo flag set.1USE_PHYSICSAllows the ped to have physics during the scene.2TAG_SYNC_OUTThe task will do a tag synchronized blend out with the movement behaviour of the ped.4DONT_INTERRUPTThe scene will not be interrupted by external events.8ON_ABORT_STOP_SCENEThe scene will be stopped if the scripted task is aborted.16ABORT_ON_WEAPON_DAMAGEThe scene will be stopped if the ped is damaged by a weapon.32BLOCK_MOVER_UPDATEThe task will not update the mover.64LOOP_WITHIN_SCENEAnimations within this scene will be looped until the scene is finished.128PRESERVE_VELOCITYThe task will keep it's velocity when the scene is cleaned up/stopped. Do note that the USE_PHYSICS flag must also be present.256EXPAND_PED_CAPSULE_FROM_SKELETONThe task will apply the ExpandPedCapsuleFromSkeleton reset flag to the ped (See SET_PED_RESET_FLAG).512ACTIVATE_RAGDOLL_ON_COLLISIONThe ped will be ragdoll if it comes in contact with an object.1024HIDE_WEAPONThe ped's current weapon will be hidden during the scene.2048ABORT_ON_DEATHThe synchronised scene will be aborted if the ped dies.4096VEHICLE_ABORT_ON_LARGE_IMPACTIf the scene is running on a vehicle, then it will be aborted if the vehicle takes a heavy collision with another vehicle.8192VEHICLE_ALLOW_PLAYER_ENTRYIf the scene is on a vehicle, it allows players to enter it.16384PROCESS_ATTACHMENTS_ON_STARTAttachments will be processed at the start of the scene.32768NET_ON_EARLY_NON_PED_STOP_RETURN_TO_STARTA non-ped entity will be returned to their starting position if the scene finishes early.65536SET_PED_OUT_OF_VEHICLE_AT_STARTIf the ped is in a vehicle when the scene starts, it will be set out of the vehicle.131072NET_DISREGARD_ATTACHMENT_CHECKSAttachment checks will be disregarded when the scene is running.These flags can be combined with the | operator.",
+  "codeBlocks": [
+    "// NetworkAddPedToSynchronisedScene\nvoid NETWORK_ADD_PED_TO_SYNCHRONISED_SCENE(Ped ped, int netScene, char* animDict, char* animClip, float blendInSpeed, float blendOutSpeed, int syncedSceneFlags, int ragdollFlags, float moverBlendInDelta, int ikFlags);",
+    "-- Example\nNetworkAddPedToSynchronisedScene(PlayerPedId(), 0, '', '', 0.0, 0.0, 0, 0, 0.0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/NETWORK/NetworkAddPedToSynchronisedScene.md",
+    "https://docs.fivem.net/natives/?_0x7CD6BC4C2BBDD526",
+    "https://docs.fivem.net/natives/?_0xEEA929141F699854",
+    "https://docs.fivem.net/natives/?_0xC1E8A365BF3B29F2",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

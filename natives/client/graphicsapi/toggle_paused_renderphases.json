@@ -1,0 +1,23 @@
+{
+  "title": "TOGGLE_PAUSED_RENDERPHASES",
+  "breadcrumbs": [
+    "Native Reference",
+    "GRAPHICSAPI",
+    "TOGGLE_PAUSED_RENDERPHASES"
+  ],
+  "content": "0xDFC252D8A3E15AB70x30ADE541// TogglePausedRenderphases\nvoid TOGGLE_PAUSED_RENDERPHASES(BOOL toggle);Parameters:toggle: Setting it to false will exclude render updates as mentioned in the description, until it's set back to true.Switches the rendering display to exclude everything except PostFX, resulting in a frozen screen before the UI pass.Old name:  _ENABLE_GAMEPLAY_CAMOld name:  _SET_FROZEN_RENDERING_DISABLED",
+  "codeBlocks": [
+    "// TogglePausedRenderphases\nvoid TOGGLE_PAUSED_RENDERPHASES(BOOL toggle);",
+    "-- Example\nTogglePausedRenderphases(false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/TogglePausedRenderphases.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

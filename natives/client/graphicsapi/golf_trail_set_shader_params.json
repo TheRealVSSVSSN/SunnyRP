@@ -1,0 +1,24 @@
+{
+  "title": "GOLF_TRAIL_SET_SHADER_PARAMS",
+  "breadcrumbs": [
+    "Native Reference",
+    "GRAPHICSAPI",
+    "GOLF_TRAIL_SET_SHADER_PARAMS"
+  ],
+  "content": "0x9CFDD90B2B844BF70x4EA70FB4// GolfTrailSetShaderParams\nvoid GOLF_TRAIL_SET_SHADER_PARAMS(float p0, float p1, float p2, float p3, float p4);Only appeared in Golf & Golf_mp. Parameters were all ptrs",
+  "codeBlocks": [
+    "// GolfTrailSetShaderParams\nvoid GOLF_TRAIL_SET_SHADER_PARAMS(float p0, float p1, float p2, float p3, float p4);",
+    "Only appeared in Golf & Golf_mp. Parameters were all ptrs",
+    "-- Example\nGolfTrailSetShaderParams(0.0, 0.0, 0.0, 0.0, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/GolfTrailSetShaderParams.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

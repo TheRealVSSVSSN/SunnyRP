@@ -1,0 +1,24 @@
+{
+  "title": "0xDB1EA9411C8911EC",
+  "breadcrumbs": [
+    "Native Reference",
+    "GRAPHICSAPI",
+    "0xDB1EA9411C8911EC"
+  ],
+  "content": "0xDB1EA9411C8911EC// N_0xdb1ea9411c8911ec\nvoid 0xDB1EA9411C8911EC(int checkpointHandle);Parameters:checkpointHandle: the handle of a created checkpointNativeDB Introduced: v1180This native is used for the \"larger\" circular checkpoints, and sets the circle/ring around the checkpoint to point in the same direction as the inner arrow",
+  "codeBlocks": [
+    "// N_0xdb1ea9411c8911ec\nvoid 0xDB1EA9411C8911EC(int checkpointHandle);",
+    "NativeDB Introduced: v1180",
+    "-- Example\n0xdb1ea9411c8911ec(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/N_0xdb1ea9411c8911ec.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "0x37D5F739FD494675",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORKAPI",
+    "0x37D5F739FD494675"
+  ],
+  "content": "0x37D5F739FD494675// N_0x37d5f739fd494675\nint 0x37D5F739FD494675(Any p0);Parameters:p0: unknown.Returns: Returns an entity handle or -1, value changes based on p0's value.I've had this return the player's ped handle sometimes, but also other random entities.Whatever p0 is, it's at least not synced to other players.\nAt least not all the time, some p0 values actually output the same entity, (different handle of course, but same entity).\nBut another p0 value may return an entity for player x, but not for player y (it'll just return -1 even if the entity exists on both clients).",
+  "codeBlocks": [
+    "// N_0x37d5f739fd494675\nint 0x37D5F739FD494675(Any p0);",
+    "-- Example\n0x37d5f739fd494675(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/NETWORK/N_0x37d5f739fd494675.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}
