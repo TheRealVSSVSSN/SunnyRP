@@ -1,0 +1,23 @@
+{
+  "title": "ADD_AUDIO_SUBMIX_OUTPUT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "ADD_AUDIO_SUBMIX_OUTPUT"
+  ],
+  "content": "0xAC6E290D// AddAudioSubmixOutput\nvoid ADD_AUDIO_SUBMIX_OUTPUT(int submixId, int outputSubmixId);Parameters:submixId: The input submix.outputSubmixId: The output submix. Use 0 for the master game submix.Adds an output for the specified audio submix.",
+  "codeBlocks": [
+    "// AddAudioSubmixOutput\nvoid ADD_AUDIO_SUBMIX_OUTPUT(int submixId, int outputSubmixId);",
+    "-- Example usage for ADD_AUDIO_SUBMIX_OUTPUT\nAddAudioSubmixOutput(0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/AddAudioSubmixOutput.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

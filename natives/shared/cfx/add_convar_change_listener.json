@@ -1,0 +1,25 @@
+{
+  "title": "ADD_CONVAR_CHANGE_LISTENER",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "ADD_CONVAR_CHANGE_LISTENER"
+  ],
+  "content": "0xAB7F7241// AddConvarChangeListener\nint ADD_CONVAR_CHANGE_LISTENER(char* conVarFilter, func handler);Parameters:conVarFilter: The Console Variable to listen for, this can be a pattern like \"test:*\", or null for anyhandler: The handler function.Returns: A cookie to remove the change handler.Adds a listener for Console Variable changes.The function called expects to match the following signature:function ConVarChangeListener(conVarName: string, reserved: any);conVarName: The ConVar that changed.reserved: Currently unused.Examples:JavaScript// listen for all convar changes\nAddConvarChangeListener(null, (conVarName, reserved) => {\n    print(GetConvarInt(conVarName))\n})\n\n// listen to convars that start with \"script:\"\nAddConvarChangeListener(\"script:*\", (conVarName, reserved) => {\n    print(GetConvarInt(conVarName))\n})",
+  "codeBlocks": [
+    "// AddConvarChangeListener\nint ADD_CONVAR_CHANGE_LISTENER(char* conVarFilter, func handler);",
+    "function ConVarChangeListener(conVarName: string, reserved: any);",
+    "// listen for all convar changes\nAddConvarChangeListener(null, (conVarName, reserved) => {\n})\n\n// listen to convars that start with \"script:\"\nAddConvarChangeListener(\"script:*\", (conVarName, reserved) => {\n})"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/AddConvarChangeListener.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client",
+    "server"
+  ]
+}

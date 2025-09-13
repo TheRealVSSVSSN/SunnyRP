@@ -1,0 +1,25 @@
+{
+  "title": "IS_RAW_KEY_DOWN",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "IS_RAW_KEY_DOWN"
+  ],
+  "content": "0xD95A7387// IsRawKeyDown\nBOOL IS_RAW_KEY_DOWN(int rawKeyIndex);Parameters:rawKeyIndex: Index of raw key from keyboard.Returns: Returns bool value of down state.Gets if the specified rawKeyIndex is pressed down on the keyboard.This will not be triggered if the key is disabled with DISABLE_RAW_KEY_THIS_FRAMEVirtual key codes can be found hereExamples:Luaif IsRawKeyDown(32) then -- KEY_SPACE\n    print(\"Spacebar is down\")\nend",
+  "codeBlocks": [
+    "// IsRawKeyDown\nBOOL IS_RAW_KEY_DOWN(int rawKeyIndex);",
+    "if IsRawKeyDown(32) then -- KEY_SPACE\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/IsRawKeyDown.md",
+    "https://docs.fivem.net/natives/?_0x8BCF0014",
+    "https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

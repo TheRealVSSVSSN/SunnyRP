@@ -1,0 +1,23 @@
+{
+  "title": "REGISTER_FONT_FILE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "REGISTER_FONT_FILE"
+  ],
+  "content": "0x1B3A363// RegisterFontFile\nvoid REGISTER_FONT_FILE(char* fileName);Parameters:fileName: The name of the .gfx file, without extension.Registers a specified .gfx file as GFx font library.\nThe .gfx file has to be registered with the streamer already.",
+  "codeBlocks": [
+    "// RegisterFontFile\nvoid REGISTER_FONT_FILE(char* fileName);",
+    "-- Example usage for REGISTER_FONT_FILE\nRegisterFontFile('')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/RegisterFontFile.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

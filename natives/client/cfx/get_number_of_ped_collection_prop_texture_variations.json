@@ -1,0 +1,27 @@
+{
+  "title": "GET_NUMBER_OF_PED_COLLECTION_PROP_TEXTURE_VARIATIONS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_NUMBER_OF_PED_COLLECTION_PROP_TEXTURE_VARIATIONS"
+  ],
+  "content": "0x75CAF9CC// GetNumberOfPedCollectionPropTextureVariations\nint GET_NUMBER_OF_PED_COLLECTION_PROP_TEXTURE_VARIATIONS(Ped ped, int anchorPoint, char* collection, int propIndex);Parameters:ped: The target pedanchorPoint: One of the anchor points from SET_PED_PROP_INDEXcollection: Name of the collection. Empty string for the base game collection. See GET_PED_COLLECTION_NAME in order to list all available collections.propIndex: Local prop index inside the given collection. Refer to GET_NUMBER_OF_PED_COLLECTION_PROP_DRAWABLE_VARIATIONS.Returns: Number of texture variations available for the given prop. Returns 0 if ped or collection does not exist or index is out of bounds.An alternative to GET_NUMBER_OF_PED_PROP_TEXTURE_VARIATIONS that uses local collection indexing instead of the global one.",
+  "codeBlocks": [
+    "// GetNumberOfPedCollectionPropTextureVariations\nint GET_NUMBER_OF_PED_COLLECTION_PROP_TEXTURE_VARIATIONS(Ped ped, int anchorPoint, char* collection, int propIndex);",
+    "local ped = PlayerPedId()\n-- Example usage for GET_NUMBER_OF_PED_COLLECTION_PROP_TEXTURE_VARIATIONS\nGetNumberOfPedCollectionPropTextureVariations(ped, 0, '', 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetNumberOfPedCollectionPropTextureVariations.md",
+    "https://docs.fivem.net/natives/?_0x93376B65A266EB5F",
+    "https://docs.fivem.net/natives/?_0xFED5D83A",
+    "https://docs.fivem.net/natives/?_0x3B6A13E1",
+    "https://docs.fivem.net/natives/?_0xA6E7F1CEB523E171",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

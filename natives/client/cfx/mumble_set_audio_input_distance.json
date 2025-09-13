@@ -1,0 +1,23 @@
+{
+  "title": "MUMBLE_SET_AUDIO_INPUT_DISTANCE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "MUMBLE_SET_AUDIO_INPUT_DISTANCE"
+  ],
+  "content": "0x1B1052E2// MumbleSetAudioInputDistance\nvoid MUMBLE_SET_AUDIO_INPUT_DISTANCE(float distance);Parameters:distance: The input distance.Sets the current input distance. The player will be able to talk to other players within this distance.",
+  "codeBlocks": [
+    "// MumbleSetAudioInputDistance\nvoid MUMBLE_SET_AUDIO_INPUT_DISTANCE(float distance);",
+    "-- Example usage for MUMBLE_SET_AUDIO_INPUT_DISTANCE\nMumbleSetAudioInputDistance(0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/MumbleSetAudioInputDistance.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

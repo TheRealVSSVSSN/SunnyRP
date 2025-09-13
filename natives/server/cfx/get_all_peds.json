@@ -1,0 +1,24 @@
+{
+  "title": "GET_ALL_PEDS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_ALL_PEDS"
+  ],
+  "content": "0xB8584FEF// GetAllPeds\nobject GET_ALL_PEDS();Returns: An object containing a list of peds handles.Returns all peds handles known to the server.\nThe data returned adheres to the following layout:[127, 42, 13, 37]Examples:Lua-- This example prints information of every ped that has an owner.\n\nfor i, ped in ipairs(GetAllPeds()) do\n    local pedOwner = NetworkGetEntityOwner(ped)\n    if pedOwner > 0 then\n       local playerName = GetPlayerName(pedOwner)\n       local pedModel = GetEntityModel(ped)\n       local pedArmour = GetPedArmour(ped)\n       print(\"Ped : \"..ped..\" | Owner name : \"..playerName..\" | Model : \"..pedModel..\" | Armour : \"..pedArmour)\n    end\nend",
+  "codeBlocks": [
+    "// GetAllPeds\nobject GET_ALL_PEDS();",
+    "[127, 42, 13, 37]",
+    "-- This example prints information of every ped that has an owner.\n\nfor i, ped in ipairs(GetAllPeds()) do\n    local pedOwner = NetworkGetEntityOwner(ped)\n    if pedOwner > 0 then\n       local playerName = GetPlayerName(pedOwner)\n       local pedModel = GetEntityModel(ped)\n       local pedArmour = GetPedArmour(ped)\n    end\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetAllPeds.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

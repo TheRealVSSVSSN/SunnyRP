@@ -1,0 +1,23 @@
+{
+  "title": "REGISTER_RESOURCE_BUILD_TASK_FACTORY",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "REGISTER_RESOURCE_BUILD_TASK_FACTORY"
+  ],
+  "content": "0x285B43CA// RegisterResourceBuildTaskFactory\nvoid REGISTER_RESOURCE_BUILD_TASK_FACTORY(char* factoryId, func factoryFn);Parameters:factoryId: The identifier for the build task.factoryFn: The factory function.Registers a build task factory for resources.\nThe function should return an object (msgpack map) with the following fields:{\n// returns whether the specific resource should be built\nshouldBuild = func(resourceName: string): bool,\n\n// asynchronously start building the specific resource.\n// call cb when completed\nbuild = func(resourceName: string, cb: func(success: bool, status: string): void): void\n}",
+  "codeBlocks": [
+    "// RegisterResourceBuildTaskFactory\nvoid REGISTER_RESOURCE_BUILD_TASK_FACTORY(char* factoryId, func factoryFn);",
+    "{\n// returns whether the specific resource should be built\nshouldBuild = func(resourceName: string): bool,\n\n// asynchronously start building the specific resource.\n// call cb when completed\nbuild = func(resourceName: string, cb: func(success: bool, status: string): void): void\n}"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/RegisterResourceBuildTaskFactory.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

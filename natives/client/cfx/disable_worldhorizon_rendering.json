@@ -1,0 +1,23 @@
+{
+  "title": "DISABLE_WORLDHORIZON_RENDERING",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "DISABLE_WORLDHORIZON_RENDERING"
+  ],
+  "content": "0xA9C92CDC// DisableWorldhorizonRendering\nvoid DISABLE_WORLDHORIZON_RENDERING(BOOL state);Parameters:state: On/OffDisables the game's world horizon lods rendering (see farlods.#dd).\nUsing the island hopper natives might also affect this state.",
+  "codeBlocks": [
+    "// DisableWorldhorizonRendering\nvoid DISABLE_WORLDHORIZON_RENDERING(BOOL state);",
+    "-- Example usage for DISABLE_WORLDHORIZON_RENDERING\nDisableWorldhorizonRendering(false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/DisableWorldhorizonRendering.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

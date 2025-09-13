@@ -1,0 +1,24 @@
+{
+  "title": "GET_PLAYER_FROM_STATE_BAG_NAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PLAYER_FROM_STATE_BAG_NAME"
+  ],
+  "content": "0xA56135E0// GetPlayerFromStateBagName\nint GET_PLAYER_FROM_STATE_BAG_NAME(char* bagName);Parameters:bagName: An internal state bag ID from the argument to a state bag change handler.Returns: The player handle or 0 if the state bag name did not refer to a player, or the player does not exist.On the server this will return the players source, on the client it will return the player handle.Examples:JavaScriptLuaAddStateBagChangeHandler(\"isDead\", null, async (bagName, key, value /* boolean */) => {\n    const ply = GetPlayerFromStateBagName(bagName);\n    // The player doesn't exist!\n    if (ply === 0) return;\n    console.log(`Player: ${GetPlayerName(ply)} ${value ? 'died!' : 'is alive!'`)\n})",
+  "codeBlocks": [
+    "// GetPlayerFromStateBagName\nint GET_PLAYER_FROM_STATE_BAG_NAME(char* bagName);",
+    "AddStateBagChangeHandler(\"isDead\", null, async (bagName, key, value /* boolean */) => {\n    const ply = GetPlayerFromStateBagName(bagName);\n    // The player doesn't exist!\n    if (ply === 0) return;\n})"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPlayerFromStateBagName.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client",
+    "server"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "SET_KEY_MAPPING_HIDE_RESOURCES",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_KEY_MAPPING_HIDE_RESOURCES"
+  ],
+  "content": "0xCB0241B5// SetKeyMappingHideResources\nvoid SET_KEY_MAPPING_HIDE_RESOURCES(bool hide);Parameters:hide: true will disable the display of resource names, and false will enable it.Toggles the visibility of resource names in the FiveM key mapping page.",
+  "codeBlocks": [
+    "// SetKeyMappingHideResources\nvoid SET_KEY_MAPPING_HIDE_RESOURCES(bool hide);",
+    "-- Example usage for SET_KEY_MAPPING_HIDE_RESOURCES\nSetKeyMappingHideResources(false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetKeyMappingHideResources.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

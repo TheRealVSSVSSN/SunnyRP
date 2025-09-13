@@ -1,0 +1,25 @@
+{
+  "title": "GET_ENTITY_FROM_STATE_BAG_NAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_ENTITY_FROM_STATE_BAG_NAME"
+  ],
+  "content": "0x4BDF1867// GetEntityFromStateBagName\nEntity GET_ENTITY_FROM_STATE_BAG_NAME(char* bagName);Parameters:bagName: An internal state bag ID from the argument to a state bag change handler.Returns: The entity handle or 0 if the state bag name did not refer to an entity, or the entity does not exist.Returns the entity handle for the specified state bag name. For use with ADD_STATE_BAG_CHANGE_HANDLER.Examples:JavaScriptLuaAddStateBagChangeHandler(\"blockTasks\", null, async (bagName, key, value /* boolean */) => {\n    let entity = GetEntityFromStateBagName(bagName);\n    // Whoops, we were don't have a valid entity!\n    if (entity === 0) return;\n    // We don't want to freeze the entity position if the entity collision hasn't loaded yet\n    while (!HasCollisionLoadedAroundEntity(entity)) {\n        // The entity went out of our scope before the collision loaded\n        if (!DoesEntityExist(entity)) return;\n        await Delay(250);\n    }\n    SetEntityInvincible(entity, value)\n    FreezeEntityPosition(entity, value)\n    TaskSetBlockingOfNonTemporaryEvents(entity, value)\n})",
+  "codeBlocks": [
+    "// GetEntityFromStateBagName\nEntity GET_ENTITY_FROM_STATE_BAG_NAME(char* bagName);",
+    "AddStateBagChangeHandler(\"blockTasks\", null, async (bagName, key, value /* boolean */) => {\n    let entity = GetEntityFromStateBagName(bagName);\n    // Whoops, we were don't have a valid entity!\n    if (entity === 0) return;\n    // We don't want to freeze the entity position if the entity collision hasn't loaded yet\n    while (!HasCollisionLoadedAroundEntity(entity)) {\n        // The entity went out of our scope before the collision loaded\n        if (!DoesEntityExist(entity)) return;\n        await Delay(250);\n    }\n    SetEntityInvincible(entity, value)\n    FreezeEntityPosition(entity, value)\n    TaskSetBlockingOfNonTemporaryEvents(entity, value)\n})"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetEntityFromStateBagName.md",
+    "https://docs.fivem.net/natives/?_0x5BA35AAF",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client",
+    "server"
+  ]
+}

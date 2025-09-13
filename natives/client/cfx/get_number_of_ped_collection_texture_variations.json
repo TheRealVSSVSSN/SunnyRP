@@ -1,0 +1,27 @@
+{
+  "title": "GET_NUMBER_OF_PED_COLLECTION_TEXTURE_VARIATIONS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_NUMBER_OF_PED_COLLECTION_TEXTURE_VARIATIONS"
+  ],
+  "content": "0xD2C15D7// GetNumberOfPedCollectionTextureVariations\nint GET_NUMBER_OF_PED_COLLECTION_TEXTURE_VARIATIONS(Ped ped, int componentId, char* collection, int drawableId);Parameters:ped: The target pedcomponentId: One of the components from SET_PED_COMPONENT_VARIATIONcollection: Name of the collection. Empty string for the base game collection. See GET_PED_COLLECTION_NAME in order to list all available collections.drawableId: Local drawable Id inside the given collection. Refer to GET_NUMBER_OF_PED_COLLECTION_DRAWABLE_VARIATIONS.Returns: Number of texture variations available for the given drawable component. Returns 0 if ped or collection does not exist or index is out of bounds.An alternative to GET_NUMBER_OF_PED_TEXTURE_VARIATIONS that uses local collection indexing instead of the global one.",
+  "codeBlocks": [
+    "// GetNumberOfPedCollectionTextureVariations\nint GET_NUMBER_OF_PED_COLLECTION_TEXTURE_VARIATIONS(Ped ped, int componentId, char* collection, int drawableId);",
+    "local ped = PlayerPedId()\n-- Example usage for GET_NUMBER_OF_PED_COLLECTION_TEXTURE_VARIATIONS\nGetNumberOfPedCollectionTextureVariations(ped, 0, '', 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetNumberOfPedCollectionTextureVariations.md",
+    "https://docs.fivem.net/natives/?_0x262B14F48D29DE80",
+    "https://docs.fivem.net/natives/?_0xFED5D83A",
+    "https://docs.fivem.net/natives/?_0x310D0271",
+    "https://docs.fivem.net/natives/?_0x8F7156A3142A6BAD",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

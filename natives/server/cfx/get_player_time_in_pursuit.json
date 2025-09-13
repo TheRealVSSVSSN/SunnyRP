@@ -1,0 +1,23 @@
+{
+  "title": "GET_PLAYER_TIME_IN_PURSUIT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PLAYER_TIME_IN_PURSUIT"
+  ],
+  "content": "0x7ADE63E1// GetPlayerTimeInPursuit\nint GET_PLAYER_TIME_IN_PURSUIT(char* playerSrc, BOOL lastPursuit);Parameters:playerSrc: The target playerlastPursuit: False = CurrentPursuit, True = LastPursuitReturns: Returns -1, if the player is not wanted or wasn't in pursuit before, depending on the lastPursuit parameter\nReturns 0, if lastPursuit == False and the player has a wanted level, but the pursuit has not started yet\nOtherwise, will return the milliseconds of the pursuit.Gets the amount of time player has spent evading the cops.\nCounter starts and increments only when cops are chasing the player.\nIf the player is evading, the timer will pause.",
+  "codeBlocks": [
+    "// GetPlayerTimeInPursuit\nint GET_PLAYER_TIME_IN_PURSUIT(char* playerSrc, BOOL lastPursuit);",
+    "Gets the amount of time player has spent evading the cops.\nCounter starts and increments only when cops are chasing the player.\nIf the player is evading, the timer will pause."
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPlayerTimeInPursuit.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

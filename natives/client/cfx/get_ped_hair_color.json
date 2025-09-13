@@ -1,0 +1,24 @@
+{
+  "title": "GET_PED_HAIR_COLOR",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PED_HAIR_COLOR"
+  ],
+  "content": "0xA3EA2893// GetPedHairColor\nint GET_PED_HAIR_COLOR(Ped ped);Parameters:ped: The target pedReturns: Returns ped's primary hair colour.A getter for _SET_PED_HAIR_COLOR. Returns -1 if fails to get.Examples:Lualocal primaryColour = GetPedHairColor(PlayerPedId())\nif primaryColour == 18 then\n  print(\"You have red hair!\")\nend",
+  "codeBlocks": [
+    "// GetPedHairColor\nint GET_PED_HAIR_COLOR(Ped ped);",
+    "local primaryColour = GetPedHairColor(PlayerPedId())\nif primaryColour == 18 then\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPedHairColor.md",
+    "https://docs.fivem.net/natives/?_0x4CFFC65454C93A49",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

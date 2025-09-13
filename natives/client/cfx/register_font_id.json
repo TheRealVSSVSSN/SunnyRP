@@ -1,0 +1,24 @@
+{
+  "title": "REGISTER_FONT_ID",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "REGISTER_FONT_ID"
+  ],
+  "content": "0xACF6D8EE// RegisterFontId\nint REGISTER_FONT_ID(char* fontName);Parameters:fontName: The name of the font in the GFx font library.Returns: An index to use with SET_TEXT_FONT and similar natives.Registers a specified font name for use with text draw commands.",
+  "codeBlocks": [
+    "// RegisterFontId\nint REGISTER_FONT_ID(char* fontName);",
+    "-- Example usage for REGISTER_FONT_ID\nRegisterFontId('')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/RegisterFontId.md",
+    "https://docs.fivem.net/natives/?_0x66E0276CC5F6B9DA",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "SET_CONVAR_REPLICATED",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_CONVAR_REPLICATED"
+  ],
+  "content": "0xF292858C// SetConvarReplicated\nvoid SET_CONVAR_REPLICATED(char* varName, char* value);Parameters:varName: The console variable name.value: The value to set for the given console variable.Used to replicate a server variable onto clients.Examples:LuaSetConvarReplicated('voice_useNativeAudio', 'true')",
+  "codeBlocks": [
+    "// SetConvarReplicated\nvoid SET_CONVAR_REPLICATED(char* varName, char* value);",
+    "SetConvarReplicated('voice_useNativeAudio', 'true')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetConvarReplicated.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

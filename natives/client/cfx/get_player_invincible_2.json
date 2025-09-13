@@ -1,0 +1,26 @@
+{
+  "title": "GET_PLAYER_INVINCIBLE_2",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PLAYER_INVINCIBLE_2"
+  ],
+  "content": "0xF2E3912B// GetPlayerInvincible_2\nBOOL GET_PLAYER_INVINCIBLE_2(Player player);Parameters:player: The player idReturns: A boolean to tell if the player is invincible.Unlike GET_PLAYER_INVINCIBLE this native gets both SET_PLAYER_INVINCIBLE_KEEP_RAGDOLL_ENABLED and SET_PLAYER_INVINCIBLE invincibility state.",
+  "codeBlocks": [
+    "// GetPlayerInvincible_2\nBOOL GET_PLAYER_INVINCIBLE_2(Player player);",
+    "local player = PlayerId()\n-- Example usage for GET_PLAYER_INVINCIBLE_2\nGetPlayerInvincible2(player)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPlayerInvincible_2.md",
+    "https://docs.fivem.net/natives/?_0xB721981B2B939E07",
+    "https://docs.fivem.net/natives/?_0x6BC97F4F4BB3C04B",
+    "https://docs.fivem.net/natives/?_0x239528EACDC3E7DE",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

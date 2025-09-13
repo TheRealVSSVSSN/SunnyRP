@@ -1,0 +1,23 @@
+{
+  "title": "GET_ENTITY_ARCHETYPE_NAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_ENTITY_ARCHETYPE_NAME"
+  ],
+  "content": "0x47B870F5// GetEntityArchetypeName\nchar* GET_ENTITY_ARCHETYPE_NAME(Entity entity);Parameters:entity: An entity handle.Returns: Entity's archetype nameReturns entity's archetype name, if available.",
+  "codeBlocks": [
+    "// GetEntityArchetypeName\nchar* GET_ENTITY_ARCHETYPE_NAME(Entity entity);",
+    "local entity = PlayerPedId()\n-- Example usage for GET_ENTITY_ARCHETYPE_NAME\nGetEntityArchetypeName(entity)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetEntityArchetypeName.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

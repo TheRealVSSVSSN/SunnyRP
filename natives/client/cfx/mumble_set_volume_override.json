@@ -1,0 +1,23 @@
+{
+  "title": "MUMBLE_SET_VOLUME_OVERRIDE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "MUMBLE_SET_VOLUME_OVERRIDE"
+  ],
+  "content": "0x61C309E3// MumbleSetVolumeOverride\nvoid MUMBLE_SET_VOLUME_OVERRIDE(Player player, float volume);Parameters:player: A game player index.volume: The volume, ranging from 0.0 to 1.0 (or above).Overrides the output volume for a particular player on Mumble. This will also bypass 3D audio and distance calculations. -1.0 to reset the override.Set to -1.0 to reset the Volume override.",
+  "codeBlocks": [
+    "// MumbleSetVolumeOverride\nvoid MUMBLE_SET_VOLUME_OVERRIDE(Player player, float volume);",
+    "local player = PlayerId()\n-- Example usage for MUMBLE_SET_VOLUME_OVERRIDE\nMumbleSetVolumeOverride(player, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/MumbleSetVolumeOverride.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

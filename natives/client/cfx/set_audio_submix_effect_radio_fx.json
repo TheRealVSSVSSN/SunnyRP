@@ -1,0 +1,23 @@
+{
+  "title": "SET_AUDIO_SUBMIX_EFFECT_RADIO_FX",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_AUDIO_SUBMIX_EFFECT_RADIO_FX"
+  ],
+  "content": "0xAAA94D53// SetAudioSubmixEffectRadioFx\nvoid SET_AUDIO_SUBMIX_EFFECT_RADIO_FX(int submixId, int effectSlot);Parameters:submixId: The submix.effectSlot: The effect slot for the submix.Assigns a RadioFX effect to a submix effect slot.The parameter values for this effect are as follows (backticks are used to represent hashes):IndexTypeDescription`enabled`intEnables or disables RadioFX on this DSP.`default`intSets default parameters for the RadioFX DSP and enables it.`freq_low`float`freq_hi`float`fudge`float`rm_mod_freq`float`rm_mix`float`o_freq_lo`float`o_freq_hi`floatExamples:Lua-- we want to change the master output\nlocal submix = 0\n\n-- add a RadioFX effect to slot 0\nSetAudioSubmixEffectRadioFx(submix, 0)\n\n-- set the default values\nSetAudioSubmixEffectParamInt(submix, 0, `default`, 1)",
+  "codeBlocks": [
+    "// SetAudioSubmixEffectRadioFx\nvoid SET_AUDIO_SUBMIX_EFFECT_RADIO_FX(int submixId, int effectSlot);",
+    "-- we want to change the master output\nlocal submix = 0\n\n-- add a RadioFX effect to slot 0\nSetAudioSubmixEffectRadioFx(submix, 0)\n\n-- set the default values\nSetAudioSubmixEffectParamInt(submix, 0, `default`, 1)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetAudioSubmixEffectRadioFx.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "title": "IS_TRACK_SWITCHED_OFF",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "IS_TRACK_SWITCHED_OFF"
+  ],
+  "content": "0xE0C53765// IsTrackSwitchedOff\nbool IS_TRACK_SWITCHED_OFF(int track);Parameters:track: The track id (between 0 - 27)Returns: If this track allows ambient trains to spawnGetter for SWITCH_TRAIN_TRACK. Determines if ambient trains are able to spawn on this track.",
+  "codeBlocks": [
+    "// IsTrackSwitchedOff\nbool IS_TRACK_SWITCHED_OFF(int track);",
+    "-- Example usage for IS_TRACK_SWITCHED_OFF\nIsTrackSwitchedOff(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/IsTrackSwitchedOff.md",
+    "https://docs.fivem.net/natives/?_0xFD813BB7DB977F20",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}
