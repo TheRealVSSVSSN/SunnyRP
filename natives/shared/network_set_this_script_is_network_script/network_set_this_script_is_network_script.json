@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SET_THIS_SCRIPT_IS_NETWORK_SCRIPT",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SET_THIS_SCRIPT_IS_NETWORK_SCRIPT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SET_THIS_SCRIPT_IS_NETWORK_SCRIPT\nNetworkSetThisScriptIsNetworkScript()"
+  ],
+  "urls": [],
+  "tags": []
+}

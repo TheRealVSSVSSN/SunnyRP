@@ -1,0 +1,13 @@
+{
+  "title": "DELETE_ALL_TRAINS",
+  "breadcrumbs": [
+    "Native Reference",
+    "DELETE_ALL_TRAINS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DELETE_ALL_TRAINS\nDeleteAllTrains()"
+  ],
+  "urls": [],
+  "tags": []
+}

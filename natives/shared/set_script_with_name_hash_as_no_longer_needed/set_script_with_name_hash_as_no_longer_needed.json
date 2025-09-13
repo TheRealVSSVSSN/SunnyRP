@@ -1,0 +1,13 @@
+{
+  "title": "SET_SCRIPT_WITH_NAME_HASH_AS_NO_LONGER_NEEDED",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_SCRIPT_WITH_NAME_HASH_AS_NO_LONGER_NEEDED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_SCRIPT_WITH_NAME_HASH_AS_NO_LONGER_NEEDED\nSetScriptWithNameHashAsNoLongerNeeded()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_CLEAR_FOUND_GAMERS",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_CLEAR_FOUND_GAMERS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_CLEAR_FOUND_GAMERS\nNetworkClearFoundGamers()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_HIGHLY_PERCEPTIVE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_HIGHLY_PERCEPTIVE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_HIGHLY_PERCEPTIVE\nSetPedHighlyPerceptive()"
+  ],
+  "urls": [],
+  "tags": []
+}

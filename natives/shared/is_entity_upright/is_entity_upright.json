@@ -1,0 +1,13 @@
+{
+  "title": "IS_ENTITY_UPRIGHT",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_ENTITY_UPRIGHT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_ENTITY_UPRIGHT\nIsEntityUpright()"
+  ],
+  "urls": [],
+  "tags": []
+}

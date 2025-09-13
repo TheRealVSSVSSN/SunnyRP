@@ -1,0 +1,13 @@
+{
+  "title": "_DRAW_SPRITE_UV",
+  "breadcrumbs": [
+    "Native Reference",
+    "_DRAW_SPRITE_UV"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _DRAW_SPRITE_UV\n_DrawSpriteUv()"
+  ],
+  "urls": [],
+  "tags": []
+}

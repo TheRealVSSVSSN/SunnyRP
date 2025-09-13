@@ -1,0 +1,13 @@
+{
+  "title": "CLEAR_VEHICLE_CUSTOM_PRIMARY_COLOUR",
+  "breadcrumbs": [
+    "Native Reference",
+    "CLEAR_VEHICLE_CUSTOM_PRIMARY_COLOUR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CLEAR_VEHICLE_CUSTOM_PRIMARY_COLOUR\nClearVehicleCustomPrimaryColour()"
+  ],
+  "urls": [],
+  "tags": []
+}

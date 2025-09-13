@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_GET_PRESENCE_INVITE_IS_TOURNAMENT",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_GET_PRESENCE_INVITE_IS_TOURNAMENT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_GET_PRESENCE_INVITE_IS_TOURNAMENT\nNetworkGetPresenceInviteIsTournament()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "IS_VEHICLE_TYRE_BURST",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_VEHICLE_TYRE_BURST"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_VEHICLE_TYRE_BURST\nIsVehicleTyreBurst()"
+  ],
+  "urls": [],
+  "tags": []
+}

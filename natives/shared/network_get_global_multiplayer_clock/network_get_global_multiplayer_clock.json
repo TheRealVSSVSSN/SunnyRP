@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_GET_GLOBAL_MULTIPLAYER_CLOCK",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_GET_GLOBAL_MULTIPLAYER_CLOCK"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_GET_GLOBAL_MULTIPLAYER_CLOCK\nNetworkGetGlobalMultiplayerClock()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_ALL_ROPES",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_ALL_ROPES"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ALL_ROPES\nGetAllRopes()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_THIS_SCRIPT_NAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_THIS_SCRIPT_NAME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_THIS_SCRIPT_NAME\nGetThisScriptName()"
+  ],
+  "urls": [],
+  "tags": []
+}

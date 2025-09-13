@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_DO_TRANSITION_QUICKMATCH",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_DO_TRANSITION_QUICKMATCH"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_DO_TRANSITION_QUICKMATCH\nNetworkDoTransitionQuickmatch()"
+  ],
+  "urls": [],
+  "tags": []
+}

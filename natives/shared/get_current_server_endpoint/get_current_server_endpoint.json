@@ -1,0 +1,13 @@
+{
+  "title": "GET_CURRENT_SERVER_ENDPOINT",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_CURRENT_SERVER_ENDPOINT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_CURRENT_SERVER_ENDPOINT\nGetCurrentServerEndpoint()"
+  ],
+  "urls": [],
+  "tags": []
+}

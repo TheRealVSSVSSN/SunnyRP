@@ -1,0 +1,13 @@
+{
+  "title": "_GET_NUMBER_OF_PLAYERS_IN_TEAM",
+  "breadcrumbs": [
+    "Native Reference",
+    "_GET_NUMBER_OF_PLAYERS_IN_TEAM"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_NUMBER_OF_PLAYERS_IN_TEAM\n_GetNumberOfPlayersInTeam()"
+  ],
+  "urls": [],
+  "tags": []
+}

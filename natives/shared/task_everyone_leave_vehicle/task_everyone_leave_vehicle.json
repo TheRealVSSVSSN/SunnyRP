@@ -1,0 +1,13 @@
+{
+  "title": "TASK_EVERYONE_LEAVE_VEHICLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASK_EVERYONE_LEAVE_VEHICLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for TASK_EVERYONE_LEAVE_VEHICLE\nTaskEveryoneLeaveVehicle()"
+  ],
+  "urls": [],
+  "tags": []
+}

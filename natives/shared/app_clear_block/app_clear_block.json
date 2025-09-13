@@ -1,0 +1,13 @@
+{
+  "title": "APP_CLEAR_BLOCK",
+  "breadcrumbs": [
+    "Native Reference",
+    "APP_CLEAR_BLOCK"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for APP_CLEAR_BLOCK\nAppClearBlock()"
+  ],
+  "urls": [],
+  "tags": []
+}

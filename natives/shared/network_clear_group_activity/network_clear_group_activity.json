@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_CLEAR_GROUP_ACTIVITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_CLEAR_GROUP_ACTIVITY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_CLEAR_GROUP_ACTIVITY\nNetworkClearGroupActivity()"
+  ],
+  "urls": [],
+  "tags": []
+}

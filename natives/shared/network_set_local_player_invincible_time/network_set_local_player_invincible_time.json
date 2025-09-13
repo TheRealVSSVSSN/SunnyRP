@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SET_LOCAL_PLAYER_INVINCIBLE_TIME",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SET_LOCAL_PLAYER_INVINCIBLE_TIME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SET_LOCAL_PLAYER_INVINCIBLE_TIME\nNetworkSetLocalPlayerInvincibleTime()"
+  ],
+  "urls": [],
+  "tags": []
+}

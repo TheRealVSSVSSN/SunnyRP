@@ -1,0 +1,13 @@
+{
+  "title": "GET_PLAYER_UNDERWATER_TIME_REMAINING",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PLAYER_UNDERWATER_TIME_REMAINING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PLAYER_UNDERWATER_TIME_REMAINING\nGetPlayerUnderwaterTimeRemaining()"
+  ],
+  "urls": [],
+  "tags": []
+}

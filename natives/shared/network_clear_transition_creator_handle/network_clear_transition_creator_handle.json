@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_CLEAR_TRANSITION_CREATOR_HANDLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_CLEAR_TRANSITION_CREATOR_HANDLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_CLEAR_TRANSITION_CREATOR_HANDLE\nNetworkClearTransitionCreatorHandle()"
+  ],
+  "urls": [],
+  "tags": []
+}

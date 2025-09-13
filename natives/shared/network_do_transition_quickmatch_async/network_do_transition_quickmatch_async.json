@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_DO_TRANSITION_QUICKMATCH_ASYNC",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_DO_TRANSITION_QUICKMATCH_ASYNC"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_DO_TRANSITION_QUICKMATCH_ASYNC\nNetworkDoTransitionQuickmatchAsync()"
+  ],
+  "urls": [],
+  "tags": []
+}

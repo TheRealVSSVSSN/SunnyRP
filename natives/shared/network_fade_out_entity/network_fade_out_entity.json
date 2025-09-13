@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_FADE_OUT_ENTITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_FADE_OUT_ENTITY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_FADE_OUT_ENTITY\nNetworkFadeOutEntity()"
+  ],
+  "urls": [],
+  "tags": []
+}

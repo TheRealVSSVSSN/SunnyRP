@@ -1,0 +1,13 @@
+{
+  "title": "CLOSE_BOMB_BAY_DOORS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CLOSE_BOMB_BAY_DOORS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CLOSE_BOMB_BAY_DOORS\nCloseBombBayDoors()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SET_TRANSITION_VISIBILITY_LOCK",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SET_TRANSITION_VISIBILITY_LOCK"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SET_TRANSITION_VISIBILITY_LOCK\nNetworkSetTransitionVisibilityLock()"
+  ],
+  "urls": [],
+  "tags": []
+}

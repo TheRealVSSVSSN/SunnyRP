@@ -1,0 +1,13 @@
+{
+  "title": "SET_ENTITY_CAN_BE_DAMAGED",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_ENTITY_CAN_BE_DAMAGED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_ENTITY_CAN_BE_DAMAGED\nSetEntityCanBeDamaged()"
+  ],
+  "urls": [],
+  "tags": []
+}

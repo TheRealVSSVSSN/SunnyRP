@@ -1,0 +1,13 @@
+{
+  "title": "DISABLE_EDITOR_RUNTIME",
+  "breadcrumbs": [
+    "Native Reference",
+    "DISABLE_EDITOR_RUNTIME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DISABLE_EDITOR_RUNTIME\nDisableEditorRuntime()"
+  ],
+  "urls": [],
+  "tags": []
+}

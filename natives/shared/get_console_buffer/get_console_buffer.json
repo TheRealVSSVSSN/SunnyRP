@@ -1,0 +1,13 @@
+{
+  "title": "GET_CONSOLE_BUFFER",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_CONSOLE_BUFFER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_CONSOLE_BUFFER\nGetConsoleBuffer()"
+  ],
+  "urls": [],
+  "tags": []
+}

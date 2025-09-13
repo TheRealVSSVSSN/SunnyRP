@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_GET_PRESENCE_INVITE_INVITER",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_GET_PRESENCE_INVITE_INVITER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_GET_PRESENCE_INVITE_INVITER\nNetworkGetPresenceInviteInviter()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "DELETE_FUNCTION_REFERENCE",
+  "breadcrumbs": [
+    "Native Reference",
+    "DELETE_FUNCTION_REFERENCE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DELETE_FUNCTION_REFERENCE\nDeleteFunctionReference()"
+  ],
+  "urls": [],
+  "tags": []
+}

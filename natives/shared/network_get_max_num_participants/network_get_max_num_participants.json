@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_GET_MAX_NUM_PARTICIPANTS",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_GET_MAX_NUM_PARTICIPANTS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_GET_MAX_NUM_PARTICIPANTS\nNetworkGetMaxNumParticipants()"
+  ],
+  "urls": [],
+  "tags": []
+}

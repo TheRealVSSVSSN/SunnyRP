@@ -1,0 +1,13 @@
+{
+  "title": "IS_PLAYER_READY_FOR_CUTSCENE",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_PLAYER_READY_FOR_CUTSCENE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_PLAYER_READY_FOR_CUTSCENE\nIsPlayerReadyForCutscene()"
+  ],
+  "urls": [],
+  "tags": []
+}

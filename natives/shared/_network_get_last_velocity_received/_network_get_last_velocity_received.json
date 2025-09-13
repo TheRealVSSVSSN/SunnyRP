@@ -1,0 +1,13 @@
+{
+  "title": "_NETWORK_GET_LAST_VELOCITY_RECEIVED",
+  "breadcrumbs": [
+    "Native Reference",
+    "_NETWORK_GET_LAST_VELOCITY_RECEIVED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _NETWORK_GET_LAST_VELOCITY_RECEIVED\n_NetworkGetLastVelocityReceived()"
+  ],
+  "urls": [],
+  "tags": []
+}

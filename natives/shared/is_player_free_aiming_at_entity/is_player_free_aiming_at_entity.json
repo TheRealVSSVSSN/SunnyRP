@@ -1,0 +1,13 @@
+{
+  "title": "IS_PLAYER_FREE_AIMING_AT_ENTITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_PLAYER_FREE_AIMING_AT_ENTITY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_PLAYER_FREE_AIMING_AT_ENTITY\nIsPlayerFreeAimingAtEntity()"
+  ],
+  "urls": [],
+  "tags": []
+}

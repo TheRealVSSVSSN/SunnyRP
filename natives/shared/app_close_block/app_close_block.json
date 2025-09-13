@@ -1,0 +1,13 @@
+{
+  "title": "APP_CLOSE_BLOCK",
+  "breadcrumbs": [
+    "Native Reference",
+    "APP_CLOSE_BLOCK"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for APP_CLOSE_BLOCK\nAppCloseBlock()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_PLAYER_GROUP",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PLAYER_GROUP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PLAYER_GROUP\nGetPlayerGroup()"
+  ],
+  "urls": [],
+  "tags": []
+}

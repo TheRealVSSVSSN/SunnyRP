@@ -1,0 +1,13 @@
+{
+  "title": "TEMP_BAN_PLAYER",
+  "breadcrumbs": [
+    "Native Reference",
+    "TEMP_BAN_PLAYER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for TEMP_BAN_PLAYER\nTempBanPlayer()"
+  ],
+  "urls": [],
+  "tags": []
+}

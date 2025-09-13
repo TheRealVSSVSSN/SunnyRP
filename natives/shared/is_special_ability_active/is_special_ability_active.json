@@ -1,0 +1,13 @@
+{
+  "title": "IS_SPECIAL_ABILITY_ACTIVE",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_SPECIAL_ABILITY_ACTIVE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_SPECIAL_ABILITY_ACTIVE\nIsSpecialAbilityActive()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "PROCESS_ENTITY_ATTACHMENTS",
+  "breadcrumbs": [
+    "Native Reference",
+    "PROCESS_ENTITY_ATTACHMENTS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for PROCESS_ENTITY_ATTACHMENTS\nProcessEntityAttachments()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "CLEAR_LAST_DRIVEN_VEHICLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CLEAR_LAST_DRIVEN_VEHICLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CLEAR_LAST_DRIVEN_VEHICLE\nClearLastDrivenVehicle()"
+  ],
+  "urls": [],
+  "tags": []
+}

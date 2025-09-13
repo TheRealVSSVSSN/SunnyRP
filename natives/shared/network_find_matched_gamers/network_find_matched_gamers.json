@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_FIND_MATCHED_GAMERS",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_FIND_MATCHED_GAMERS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_FIND_MATCHED_GAMERS\nNetworkFindMatchedGamers()"
+  ],
+  "urls": [],
+  "tags": []
+}

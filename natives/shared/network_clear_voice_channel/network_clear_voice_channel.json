@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_CLEAR_VOICE_CHANNEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_CLEAR_VOICE_CHANNEL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_CLEAR_VOICE_CHANNEL\nNetworkClearVoiceChannel()"
+  ],
+  "urls": [],
+  "tags": []
+}

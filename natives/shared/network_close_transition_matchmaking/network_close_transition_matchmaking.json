@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_CLOSE_TRANSITION_MATCHMAKING",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_CLOSE_TRANSITION_MATCHMAKING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_CLOSE_TRANSITION_MATCHMAKING\nNetworkCloseTransitionMatchmaking()"
+  ],
+  "urls": [],
+  "tags": []
+}

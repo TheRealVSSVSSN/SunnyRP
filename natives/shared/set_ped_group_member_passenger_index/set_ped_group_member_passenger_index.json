@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_GROUP_MEMBER_PASSENGER_INDEX",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_GROUP_MEMBER_PASSENGER_INDEX"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_GROUP_MEMBER_PASSENGER_INDEX\nSetPedGroupMemberPassengerIndex()"
+  ],
+  "urls": [],
+  "tags": []
+}

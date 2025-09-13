@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SET_OVERRIDE_SPECTATOR_MODE",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SET_OVERRIDE_SPECTATOR_MODE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SET_OVERRIDE_SPECTATOR_MODE\nNetworkSetOverrideSpectatorMode()"
+  ],
+  "urls": [],
+  "tags": []
+}

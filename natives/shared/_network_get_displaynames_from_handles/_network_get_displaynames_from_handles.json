@@ -1,0 +1,13 @@
+{
+  "title": "_NETWORK_GET_DISPLAYNAMES_FROM_HANDLES",
+  "breadcrumbs": [
+    "Native Reference",
+    "_NETWORK_GET_DISPLAYNAMES_FROM_HANDLES"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _NETWORK_GET_DISPLAYNAMES_FROM_HANDLES\n_NetworkGetDisplaynamesFromHandles()"
+  ],
+  "urls": [],
+  "tags": []
+}

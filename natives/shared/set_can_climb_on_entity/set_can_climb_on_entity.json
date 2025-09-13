@@ -1,0 +1,13 @@
+{
+  "title": "SET_CAN_CLIMB_ON_ENTITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_CAN_CLIMB_ON_ENTITY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_CAN_CLIMB_ON_ENTITY\nSetCanClimbOnEntity()"
+  ],
+  "urls": [],
+  "tags": []
+}

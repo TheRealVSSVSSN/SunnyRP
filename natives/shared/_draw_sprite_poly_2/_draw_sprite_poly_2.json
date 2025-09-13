@@ -1,0 +1,13 @@
+{
+  "title": "_DRAW_SPRITE_POLY_2",
+  "breadcrumbs": [
+    "Native Reference",
+    "_DRAW_SPRITE_POLY_2"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _DRAW_SPRITE_POLY_2\n_DrawSpritePoly2()"
+  ],
+  "urls": [],
+  "tags": []
+}

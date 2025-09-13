@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_GENERATES_DEAD_BODY_EVENTS",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_GENERATES_DEAD_BODY_EVENTS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_GENERATES_DEAD_BODY_EVENTS\nSetPedGeneratesDeadBodyEvents()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_MAX_MOVE_BLEND_RATIO",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_MAX_MOVE_BLEND_RATIO"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_MAX_MOVE_BLEND_RATIO\nSetPedMaxMoveBlendRatio()"
+  ],
+  "urls": [],
+  "tags": []
+}

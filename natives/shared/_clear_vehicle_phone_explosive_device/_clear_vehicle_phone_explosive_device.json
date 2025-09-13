@@ -1,0 +1,13 @@
+{
+  "title": "_CLEAR_VEHICLE_PHONE_EXPLOSIVE_DEVICE",
+  "breadcrumbs": [
+    "Native Reference",
+    "_CLEAR_VEHICLE_PHONE_EXPLOSIVE_DEVICE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _CLEAR_VEHICLE_PHONE_EXPLOSIVE_DEVICE\n_ClearVehiclePhoneExplosiveDevice()"
+  ],
+  "urls": [],
+  "tags": []
+}

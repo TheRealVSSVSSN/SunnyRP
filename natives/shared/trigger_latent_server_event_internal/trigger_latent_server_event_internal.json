@@ -1,0 +1,13 @@
+{
+  "title": "TRIGGER_LATENT_SERVER_EVENT_INTERNAL",
+  "breadcrumbs": [
+    "Native Reference",
+    "TRIGGER_LATENT_SERVER_EVENT_INTERNAL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for TRIGGER_LATENT_SERVER_EVENT_INTERNAL\nTriggerLatentServerEventInternal()"
+  ],
+  "urls": [],
+  "tags": []
+}

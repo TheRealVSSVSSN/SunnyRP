@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_DO_TRANSITION_TO_FREEMODE",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_DO_TRANSITION_TO_FREEMODE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_DO_TRANSITION_TO_FREEMODE\nNetworkDoTransitionToFreemode()"
+  ],
+  "urls": [],
+  "tags": []
+}

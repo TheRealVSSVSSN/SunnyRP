@@ -1,0 +1,13 @@
+{
+  "title": "GET_ALL_OBJECTS",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_ALL_OBJECTS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ALL_OBJECTS\nGetAllObjects()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_DID_GET_GAMER_STATUS_SUCCEED",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_DID_GET_GAMER_STATUS_SUCCEED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_DID_GET_GAMER_STATUS_SUCCEED\nNetworkDidGetGamerStatusSucceed()"
+  ],
+  "urls": [],
+  "tags": []
+}

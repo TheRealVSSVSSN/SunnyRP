@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SET_FRIENDLY_FIRE_OPTION",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SET_FRIENDLY_FIRE_OPTION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SET_FRIENDLY_FIRE_OPTION\nNetworkSetFriendlyFireOption()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_GET_HOST_OF_THIS_SCRIPT",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_GET_HOST_OF_THIS_SCRIPT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_GET_HOST_OF_THIS_SCRIPT\nNetworkGetHostOfThisScript()"
+  ],
+  "urls": [],
+  "tags": []
+}

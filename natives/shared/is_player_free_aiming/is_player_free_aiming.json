@@ -1,0 +1,13 @@
+{
+  "title": "IS_PLAYER_FREE_AIMING",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_PLAYER_FREE_AIMING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_PLAYER_FREE_AIMING\nIsPlayerFreeAiming()"
+  ],
+  "urls": [],
+  "tags": []
+}

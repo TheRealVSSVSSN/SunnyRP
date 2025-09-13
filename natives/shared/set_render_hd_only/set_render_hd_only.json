@@ -1,0 +1,13 @@
+{
+  "title": "SET_RENDER_HD_ONLY",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_RENDER_HD_ONLY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_RENDER_HD_ONLY\nSetRenderHdOnly()"
+  ],
+  "urls": [],
+  "tags": []
+}

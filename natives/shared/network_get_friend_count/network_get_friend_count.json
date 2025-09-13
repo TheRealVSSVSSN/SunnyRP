@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_GET_FRIEND_COUNT",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_GET_FRIEND_COUNT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_GET_FRIEND_COUNT\nNetworkGetFriendCount()"
+  ],
+  "urls": [],
+  "tags": []
+}

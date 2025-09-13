@@ -1,0 +1,13 @@
+{
+  "title": "ATTACH_VEHICLE_TO_TOW_TRUCK",
+  "breadcrumbs": [
+    "Native Reference",
+    "ATTACH_VEHICLE_TO_TOW_TRUCK"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ATTACH_VEHICLE_TO_TOW_TRUCK\nAttachVehicleToTowTruck()"
+  ],
+  "urls": [],
+  "tags": []
+}

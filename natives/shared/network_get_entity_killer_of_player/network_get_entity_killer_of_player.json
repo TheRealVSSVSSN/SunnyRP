@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_GET_ENTITY_KILLER_OF_PLAYER",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_GET_ENTITY_KILLER_OF_PLAYER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_GET_ENTITY_KILLER_OF_PLAYER\nNetworkGetEntityKillerOfPlayer()"
+  ],
+  "urls": [],
+  "tags": []
+}

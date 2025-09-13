@@ -1,0 +1,13 @@
+{
+  "title": "IS_NUI_FOCUSED",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_NUI_FOCUSED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_NUI_FOCUSED\nIsNuiFocused()"
+  ],
+  "urls": [],
+  "tags": []
+}

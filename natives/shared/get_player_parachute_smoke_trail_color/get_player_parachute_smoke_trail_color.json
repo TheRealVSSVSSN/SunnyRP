@@ -1,0 +1,13 @@
+{
+  "title": "GET_PLAYER_PARACHUTE_SMOKE_TRAIL_COLOR",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PLAYER_PARACHUTE_SMOKE_TRAIL_COLOR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PLAYER_PARACHUTE_SMOKE_TRAIL_COLOR\nGetPlayerParachuteSmokeTrailColor()"
+  ],
+  "urls": [],
+  "tags": []
+}

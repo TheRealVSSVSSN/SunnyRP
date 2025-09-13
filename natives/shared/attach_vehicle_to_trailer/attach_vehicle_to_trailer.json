@@ -1,0 +1,13 @@
+{
+  "title": "ATTACH_VEHICLE_TO_TRAILER",
+  "breadcrumbs": [
+    "Native Reference",
+    "ATTACH_VEHICLE_TO_TRAILER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ATTACH_VEHICLE_TO_TRAILER\nAttachVehicleToTrailer()"
+  ],
+  "urls": [],
+  "tags": []
+}

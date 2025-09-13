@@ -1,0 +1,13 @@
+{
+  "title": "RESET_PLAYER_STAMINA",
+  "breadcrumbs": [
+    "Native Reference",
+    "RESET_PLAYER_STAMINA"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for RESET_PLAYER_STAMINA\nResetPlayerStamina()"
+  ],
+  "urls": [],
+  "tags": []
+}

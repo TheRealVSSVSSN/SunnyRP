@@ -1,0 +1,13 @@
+{
+  "title": "SET_PLAYER_SWITCH_ESTABLISHING_SHOT",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PLAYER_SWITCH_ESTABLISHING_SHOT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PLAYER_SWITCH_ESTABLISHING_SHOT\nSetPlayerSwitchEstablishingShot()"
+  ],
+  "urls": [],
+  "tags": []
+}

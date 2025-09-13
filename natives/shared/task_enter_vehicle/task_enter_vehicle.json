@@ -1,0 +1,13 @@
+{
+  "title": "TASK_ENTER_VEHICLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASK_ENTER_VEHICLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for TASK_ENTER_VEHICLE\nTaskEnterVehicle()"
+  ],
+  "urls": [],
+  "tags": []
+}

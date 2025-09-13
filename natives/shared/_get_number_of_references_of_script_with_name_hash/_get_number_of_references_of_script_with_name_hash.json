@@ -1,0 +1,13 @@
+{
+  "title": "_GET_NUMBER_OF_REFERENCES_OF_SCRIPT_WITH_NAME_HASH",
+  "breadcrumbs": [
+    "Native Reference",
+    "_GET_NUMBER_OF_REFERENCES_OF_SCRIPT_WITH_NAME_HASH"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_NUMBER_OF_REFERENCES_OF_SCRIPT_WITH_NAME_HASH\n_GetNumberOfReferencesOfScriptWithNameHash()"
+  ],
+  "urls": [],
+  "tags": []
+}

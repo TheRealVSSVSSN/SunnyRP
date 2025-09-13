@@ -1,0 +1,13 @@
+{
+  "title": "IS_PLAYER_FREE_FOR_AMBIENT_TASK",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_PLAYER_FREE_FOR_AMBIENT_TASK"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_PLAYER_FREE_FOR_AMBIENT_TASK\nIsPlayerFreeForAmbientTask()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_DISABLE_PROXIMITY_MIGRATION",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_DISABLE_PROXIMITY_MIGRATION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_DISABLE_PROXIMITY_MIGRATION\nNetworkDisableProximityMigration()"
+  ],
+  "urls": [],
+  "tags": []
+}

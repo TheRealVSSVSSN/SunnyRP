@@ -1,0 +1,13 @@
+{
+  "title": "APP_DELETE_APP_DATA",
+  "breadcrumbs": [
+    "Native Reference",
+    "APP_DELETE_APP_DATA"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for APP_DELETE_APP_DATA\nAppDeleteAppData()"
+  ],
+  "urls": [],
+  "tags": []
+}

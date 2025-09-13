@@ -1,0 +1,13 @@
+{
+  "title": "SET_PLAYER_SWITCH_OUTRO",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PLAYER_SWITCH_OUTRO"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PLAYER_SWITCH_OUTRO\nSetPlayerSwitchOutro()"
+  ],
+  "urls": [],
+  "tags": []
+}

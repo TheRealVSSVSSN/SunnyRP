@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SET_INVITE_ON_CALL_FOR_INVITE_MENU",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SET_INVITE_ON_CALL_FOR_INVITE_MENU"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SET_INVITE_ON_CALL_FOR_INVITE_MENU\nNetworkSetInviteOnCallForInviteMenu()"
+  ],
+  "urls": [],
+  "tags": []
+}

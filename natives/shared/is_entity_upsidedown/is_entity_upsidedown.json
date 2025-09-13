@@ -1,0 +1,13 @@
+{
+  "title": "IS_ENTITY_UPSIDEDOWN",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_ENTITY_UPSIDEDOWN"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_ENTITY_UPSIDEDOWN\nIsEntityUpsidedown()"
+  ],
+  "urls": [],
+  "tags": []
+}

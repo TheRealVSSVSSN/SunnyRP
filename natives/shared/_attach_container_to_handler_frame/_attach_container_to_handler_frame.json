@@ -1,0 +1,13 @@
+{
+  "title": "_ATTACH_CONTAINER_TO_HANDLER_FRAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "_ATTACH_CONTAINER_TO_HANDLER_FRAME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _ATTACH_CONTAINER_TO_HANDLER_FRAME\n_AttachContainerToHandlerFrame()"
+  ],
+  "urls": [],
+  "tags": []
+}

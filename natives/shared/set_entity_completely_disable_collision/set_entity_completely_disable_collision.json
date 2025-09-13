@@ -1,0 +1,13 @@
+{
+  "title": "SET_ENTITY_COMPLETELY_DISABLE_COLLISION",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_ENTITY_COMPLETELY_DISABLE_COLLISION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_ENTITY_COMPLETELY_DISABLE_COLLISION\nSetEntityCompletelyDisableCollision()"
+  ],
+  "urls": [],
+  "tags": []
+}

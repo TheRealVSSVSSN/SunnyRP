@@ -1,0 +1,13 @@
+{
+  "title": "DETACH_VEHICLE_FROM_ANY_CARGOBOB",
+  "breadcrumbs": [
+    "Native Reference",
+    "DETACH_VEHICLE_FROM_ANY_CARGOBOB"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DETACH_VEHICLE_FROM_ANY_CARGOBOB\nDetachVehicleFromAnyCargobob()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_NUMBER_OF_EVENTS",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_NUMBER_OF_EVENTS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_NUMBER_OF_EVENTS\nGetNumberOfEvents()"
+  ],
+  "urls": [],
+  "tags": []
+}

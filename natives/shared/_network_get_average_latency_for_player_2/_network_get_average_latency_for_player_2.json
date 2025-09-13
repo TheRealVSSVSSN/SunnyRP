@@ -1,0 +1,13 @@
+{
+  "title": "_NETWORK_GET_AVERAGE_LATENCY_FOR_PLAYER_2",
+  "breadcrumbs": [
+    "Native Reference",
+    "_NETWORK_GET_AVERAGE_LATENCY_FOR_PLAYER_2"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _NETWORK_GET_AVERAGE_LATENCY_FOR_PLAYER_2\n_NetworkGetAverageLatencyForPlayer2()"
+  ],
+  "urls": [],
+  "tags": []
+}

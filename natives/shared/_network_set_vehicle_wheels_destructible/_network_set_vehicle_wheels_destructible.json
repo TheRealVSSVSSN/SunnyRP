@@ -1,0 +1,13 @@
+{
+  "title": "_NETWORK_SET_VEHICLE_WHEELS_DESTRUCTIBLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "_NETWORK_SET_VEHICLE_WHEELS_DESTRUCTIBLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _NETWORK_SET_VEHICLE_WHEELS_DESTRUCTIBLE\n_NetworkSetVehicleWheelsDestructible()"
+  ],
+  "urls": [],
+  "tags": []
+}

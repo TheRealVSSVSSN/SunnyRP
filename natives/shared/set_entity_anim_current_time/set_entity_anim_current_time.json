@@ -1,0 +1,13 @@
+{
+  "title": "SET_ENTITY_ANIM_CURRENT_TIME",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_ENTITY_ANIM_CURRENT_TIME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_ENTITY_ANIM_CURRENT_TIME\nSetEntityAnimCurrentTime()"
+  ],
+  "urls": [],
+  "tags": []
+}

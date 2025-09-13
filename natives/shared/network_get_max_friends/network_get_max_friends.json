@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_GET_MAX_FRIENDS",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_GET_MAX_FRIENDS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_GET_MAX_FRIENDS\nNetworkGetMaxFriends()"
+  ],
+  "urls": [],
+  "tags": []
+}

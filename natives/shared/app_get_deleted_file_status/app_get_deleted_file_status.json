@@ -1,0 +1,13 @@
+{
+  "title": "APP_GET_DELETED_FILE_STATUS",
+  "breadcrumbs": [
+    "Native Reference",
+    "APP_GET_DELETED_FILE_STATUS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for APP_GET_DELETED_FILE_STATUS\nAppGetDeletedFileStatus()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_ENTITY_PLAYER_IS_FREE_AIMING_AT",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_ENTITY_PLAYER_IS_FREE_AIMING_AT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ENTITY_PLAYER_IS_FREE_AIMING_AT\nGetEntityPlayerIsFreeAimingAt()"
+  ],
+  "urls": [],
+  "tags": []
+}

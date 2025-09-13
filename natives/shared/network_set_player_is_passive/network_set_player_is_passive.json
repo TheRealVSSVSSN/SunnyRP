@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SET_PLAYER_IS_PASSIVE",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SET_PLAYER_IS_PASSIVE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SET_PLAYER_IS_PASSIVE\nNetworkSetPlayerIsPassive()"
+  ],
+  "urls": [],
+  "tags": []
+}

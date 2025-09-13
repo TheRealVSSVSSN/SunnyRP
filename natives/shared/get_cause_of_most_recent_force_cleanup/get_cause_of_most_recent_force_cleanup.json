@@ -1,0 +1,13 @@
+{
+  "title": "GET_CAUSE_OF_MOST_RECENT_FORCE_CLEANUP",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_CAUSE_OF_MOST_RECENT_FORCE_CLEANUP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_CAUSE_OF_MOST_RECENT_FORCE_CLEANUP\nGetCauseOfMostRecentForceCleanup()"
+  ],
+  "urls": [],
+  "tags": []
+}

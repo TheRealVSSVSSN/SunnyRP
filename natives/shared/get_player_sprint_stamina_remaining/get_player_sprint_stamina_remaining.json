@@ -1,0 +1,13 @@
+{
+  "title": "GET_PLAYER_SPRINT_STAMINA_REMAINING",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PLAYER_SPRINT_STAMINA_REMAINING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PLAYER_SPRINT_STAMINA_REMAINING\nGetPlayerSprintStaminaRemaining()"
+  ],
+  "urls": [],
+  "tags": []
+}

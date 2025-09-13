@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_ENTITY_AREA_DOES_EXIST",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_ENTITY_AREA_DOES_EXIST"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_ENTITY_AREA_DOES_EXIST\nNetworkEntityAreaDoesExist()"
+  ],
+  "urls": [],
+  "tags": []
+}

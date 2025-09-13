@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SET_SCRIPT_READY_FOR_EVENTS",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SET_SCRIPT_READY_FOR_EVENTS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SET_SCRIPT_READY_FOR_EVENTS\nNetworkSetScriptReadyForEvents()"
+  ],
+  "urls": [],
+  "tags": []
+}

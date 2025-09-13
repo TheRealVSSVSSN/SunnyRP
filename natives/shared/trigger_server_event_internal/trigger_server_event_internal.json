@@ -1,0 +1,13 @@
+{
+  "title": "TRIGGER_SERVER_EVENT_INTERNAL",
+  "breadcrumbs": [
+    "Native Reference",
+    "TRIGGER_SERVER_EVENT_INTERNAL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for TRIGGER_SERVER_EVENT_INTERNAL\nTriggerServerEventInternal()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "RESET_WORLD_BOUNDARY_FOR_PLAYER",
+  "breadcrumbs": [
+    "Native Reference",
+    "RESET_WORLD_BOUNDARY_FOR_PLAYER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for RESET_WORLD_BOUNDARY_FOR_PLAYER\nResetWorldBoundaryForPlayer()"
+  ],
+  "urls": [],
+  "tags": []
+}

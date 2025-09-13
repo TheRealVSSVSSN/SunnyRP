@@ -1,0 +1,13 @@
+{
+  "title": "GET_NUMBER_OF_PLAYERS",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_NUMBER_OF_PLAYERS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_NUMBER_OF_PLAYERS\nGetNumberOfPlayers()"
+  ],
+  "urls": [],
+  "tags": []
+}

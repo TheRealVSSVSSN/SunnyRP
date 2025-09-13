@@ -1,0 +1,13 @@
+{
+  "title": "DETACH_VEHICLE_FROM_ANY_TOW_TRUCK",
+  "breadcrumbs": [
+    "Native Reference",
+    "DETACH_VEHICLE_FROM_ANY_TOW_TRUCK"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DETACH_VEHICLE_FROM_ANY_TOW_TRUCK\nDetachVehicleFromAnyTowTruck()"
+  ],
+  "urls": [],
+  "tags": []
+}

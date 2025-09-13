@@ -1,0 +1,13 @@
+{
+  "title": "IS_VEHICLE_WANTED",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_VEHICLE_WANTED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_VEHICLE_WANTED\nIsVehicleWanted()"
+  ],
+  "urls": [],
+  "tags": []
+}

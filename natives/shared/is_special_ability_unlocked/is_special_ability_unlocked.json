@@ -1,0 +1,13 @@
+{
+  "title": "IS_SPECIAL_ABILITY_UNLOCKED",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_SPECIAL_ABILITY_UNLOCKED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_SPECIAL_ABILITY_UNLOCKED\nIsSpecialAbilityUnlocked()"
+  ],
+  "urls": [],
+  "tags": []
+}

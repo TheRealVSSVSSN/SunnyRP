@@ -1,0 +1,13 @@
+{
+  "title": "DRAW_DEBUG_TEXT_2D",
+  "breadcrumbs": [
+    "Native Reference",
+    "DRAW_DEBUG_TEXT_2D"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DRAW_DEBUG_TEXT_2D\nDrawDebugText2d()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "TRIGGER_SCRIPT_EVENT",
+  "breadcrumbs": [
+    "Native Reference",
+    "TRIGGER_SCRIPT_EVENT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for TRIGGER_SCRIPT_EVENT\nTriggerScriptEvent()"
+  ],
+  "urls": [],
+  "tags": []
+}

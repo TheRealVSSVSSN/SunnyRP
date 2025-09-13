@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_GET_GAMER_STATUS_FROM_QUEUE",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_GET_GAMER_STATUS_FROM_QUEUE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_GET_GAMER_STATUS_FROM_QUEUE\nNetworkGetGamerStatusFromQueue()"
+  ],
+  "urls": [],
+  "tags": []
+}

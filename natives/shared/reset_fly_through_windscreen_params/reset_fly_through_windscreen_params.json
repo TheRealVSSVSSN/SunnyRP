@@ -1,0 +1,13 @@
+{
+  "title": "RESET_FLY_THROUGH_WINDSCREEN_PARAMS",
+  "breadcrumbs": [
+    "Native Reference",
+    "RESET_FLY_THROUGH_WINDSCREEN_PARAMS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for RESET_FLY_THROUGH_WINDSCREEN_PARAMS\nResetFlyThroughWindscreenParams()"
+  ],
+  "urls": [],
+  "tags": []
+}

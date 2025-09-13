@@ -1,0 +1,13 @@
+{
+  "title": "_NETWORK_GET_DESTROYER_OF_ENTITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "_NETWORK_GET_DESTROYER_OF_ENTITY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _NETWORK_GET_DESTROYER_OF_ENTITY\n_NetworkGetDestroyerOfEntity()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "IS_VEHICLE_ENGINE_STARTING",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_VEHICLE_ENGINE_STARTING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_VEHICLE_ENGINE_STARTING\nIsVehicleEngineStarting()"
+  ],
+  "urls": [],
+  "tags": []
+}

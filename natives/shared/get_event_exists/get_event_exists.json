@@ -1,0 +1,13 @@
+{
+  "title": "GET_EVENT_EXISTS",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_EVENT_EXISTS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_EVENT_EXISTS\nGetEventExists()"
+  ],
+  "urls": [],
+  "tags": []
+}

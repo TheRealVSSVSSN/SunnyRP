@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_GET_PRESENCE_INVITE_FROM_ADMIN",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_GET_PRESENCE_INVITE_FROM_ADMIN"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_GET_PRESENCE_INVITE_FROM_ADMIN\nNetworkGetPresenceInviteFromAdmin()"
+  ],
+  "urls": [],
+  "tags": []
+}
