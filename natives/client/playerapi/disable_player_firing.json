@@ -1,0 +1,23 @@
+{
+  "title": "DISABLE_PLAYER_FIRING",
+  "breadcrumbs": [
+    "Native Reference",
+    "PLAYERAPI",
+    "DISABLE_PLAYER_FIRING"
+  ],
+  "content": "0x5E6CC07646BBEAB80x30CB28CB// DisablePlayerFiring\nvoid DISABLE_PLAYER_FIRING(Player player, BOOL toggle);Parameters:player: The player for which to disable combat methods.toggle: Unused, as this native will disable combat regardless of the value of this parameter.Inhibits the player from using any method of combat including melee and firearms.\\\nNOTE: Only disables the firing for one frame",
+  "codeBlocks": [
+    "// DisablePlayerFiring\nvoid DISABLE_PLAYER_FIRING(Player player, BOOL toggle);",
+    "-- Example\nDisablePlayerFiring(PlayerId(), false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PLAYER/DisablePlayerFiring.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

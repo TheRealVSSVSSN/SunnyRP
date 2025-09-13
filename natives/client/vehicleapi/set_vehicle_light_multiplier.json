@@ -1,0 +1,23 @@
+{
+  "title": "SET_VEHICLE_LIGHT_MULTIPLIER",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "SET_VEHICLE_LIGHT_MULTIPLIER"
+  ],
+  "content": "0xB385454F8791F57C0x48039D6A// SetVehicleLightMultiplier\nvoid SET_VEHICLE_LIGHT_MULTIPLIER(Vehicle vehicle, float multiplier);Parameters:vehicle: The vehicle handle.multiplier: The multiplier applied to the vehicle's headlights.This multiplier has no limit, by default the game has this set to 1.0.",
+  "codeBlocks": [
+    "// SetVehicleLightMultiplier\nvoid SET_VEHICLE_LIGHT_MULTIPLIER(Vehicle vehicle, float multiplier);",
+    "-- Example\nSetVehicleLightMultiplier(GetVehiclePedIsIn(PlayerPedId(), false), 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetVehicleLightMultiplier.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

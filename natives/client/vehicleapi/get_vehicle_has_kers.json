@@ -1,0 +1,23 @@
+{
+  "title": "GET_VEHICLE_HAS_KERS",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "GET_VEHICLE_HAS_KERS"
+  ],
+  "content": "0x50634E348C8D44EF0x0761E635// GetVehicleHasKers\nBOOL GET_VEHICLE_HAS_KERS(Vehicle vehicle);Parameters:vehicle: The vehicle handle.Returns: Returns true if the vehicle has a kers boost (for instance the lectro or the vindicator)Old name:  _HAS_VEHICLE_KERS_BOOST",
+  "codeBlocks": [
+    "// GetVehicleHasKers\nBOOL GET_VEHICLE_HAS_KERS(Vehicle vehicle);",
+    "-- Example\nGetVehicleHasKers(GetVehiclePedIsIn(PlayerPedId(), false))"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/GetVehicleHasKers.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "SET_ALL_RANDOM_PEDS_FLEE",
+  "breadcrumbs": [
+    "Native Reference",
+    "PLAYERAPI",
+    "SET_ALL_RANDOM_PEDS_FLEE"
+  ],
+  "content": "0x056E0FE8534C29490x49EAE968// SetAllRandomPedsFlee\nvoid SET_ALL_RANDOM_PEDS_FLEE(Player player, BOOL toggle);Parameters:player: The Player ID for whom you want to set this behavior.toggle: true/false.Sets whether all random peds will run away from the player if they are agitated (threatened) (bool=true), or if they will stand their ground (bool=false).",
+  "codeBlocks": [
+    "// SetAllRandomPedsFlee\nvoid SET_ALL_RANDOM_PEDS_FLEE(Player player, BOOL toggle);",
+    "-- Example\nSetAllRandomPedsFlee(PlayerId(), false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PLAYER/SetAllRandomPedsFlee.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

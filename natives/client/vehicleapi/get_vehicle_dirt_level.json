@@ -1,0 +1,24 @@
+{
+  "title": "GET_VEHICLE_DIRT_LEVEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "GET_VEHICLE_DIRT_LEVEL"
+  ],
+  "content": "0x8F17BC8BA08DA62B0xFD15C065// GetVehicleDirtLevel\nfloat GET_VEHICLE_DIRT_LEVEL(Vehicle vehicle);Parameters:vehicle: The vehicle to check.Returns: A number between 0.0 and 15.0 representing the vehicles dirt level.A getter for SET_VEHICLE_DIRT_LEVEL.Examples:Lualocal Vehicle = GetVehiclePedIsUsing(PlayerPedId())\nif GetVehicleDirtLevel(Vehicle) > 0.0 then -- if the cars dirt level is more than 0.0 then clean it.\n  SetVehicleDirtLevel(Vehicle, 0.0) -- set the vehicle dirt level to 0.0\nend",
+  "codeBlocks": [
+    "// GetVehicleDirtLevel\nfloat GET_VEHICLE_DIRT_LEVEL(Vehicle vehicle);",
+    "local Vehicle = GetVehiclePedIsUsing(PlayerPedId())\nif GetVehicleDirtLevel(Vehicle) > 0.0 then -- if the cars dirt level is more than 0.0 then clean it.\n  SetVehicleDirtLevel(Vehicle, 0.0) -- set the vehicle dirt level to 0.0\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/GetVehicleDirtLevel.md",
+    "https://docs.fivem.net/natives/?_0x79D3B596FE44EE8B",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

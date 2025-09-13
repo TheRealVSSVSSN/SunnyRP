@@ -1,0 +1,23 @@
+{
+  "title": "FORCE_SUBMARINE_NEURTAL_BUOYANCY",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "FORCE_SUBMARINE_NEURTAL_BUOYANCY"
+  ],
+  "content": "0xC67DB108A9ADE3BE// ForceSubmarineNeurtalBuoyancy\nvoid FORCE_SUBMARINE_NEURTAL_BUOYANCY(Vehicle submarine, int time);Parameters:submarine: The submarine vehicle to apply neutral buoyancy to.time: The duration in milliseconds for which to maintain neutral buoyancy.Forces a submarine to maintain neutral buoyancy for a specified duration, preventing it from rising when unoccupied or without a driver.NativeDB Introduced: v2189",
+  "codeBlocks": [
+    "// ForceSubmarineNeurtalBuoyancy\nvoid FORCE_SUBMARINE_NEURTAL_BUOYANCY(Vehicle submarine, int time);",
+    "NativeDB Introduced: v2189"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/ForceSubmarineNeurtalBuoyancy.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

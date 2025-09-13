@@ -1,0 +1,24 @@
+{
+  "title": "IS_TURRET_SEAT",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "IS_TURRET_SEAT"
+  ],
+  "content": "0xE33FFA906CE748800x7C43D32A// IsTurretSeat\nBOOL IS_TURRET_SEAT(Vehicle vehicle, int seatIndex);Parameters:vehicle: The vehicle to check.seatIndex: See eSeatPosition declared in IS_VEHICLE_SEAT_FREE.",
+  "codeBlocks": [
+    "// IsTurretSeat\nBOOL IS_TURRET_SEAT(Vehicle vehicle, int seatIndex);",
+    "-- Example\nIsTurretSeat(GetVehiclePedIsIn(PlayerPedId(), false), 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/IsTurretSeat.md",
+    "https://docs.fivem.net/natives/?_0x22AC59A870E6A669",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

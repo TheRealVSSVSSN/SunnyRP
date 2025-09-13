@@ -1,0 +1,23 @@
+{
+  "title": "GET_VEHICLE_IS_MERCENARY",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "GET_VEHICLE_IS_MERCENARY"
+  ],
+  "content": "0xD4C4642CB7F50B5D0x575504DE// GetVehicleIsMercenary\nBOOL GET_VEHICLE_IS_MERCENARY(Vehicle vehicle);Parameters:vehicle: The vehicle to check for mercenary status.Returns: Returns true if the vehicle is a mercenary vehicle, false otherwise.Returns whether the specified vehicle is designated as a mercenary vehicle",
+  "codeBlocks": [
+    "// GetVehicleIsMercenary\nBOOL GET_VEHICLE_IS_MERCENARY(Vehicle vehicle);",
+    "-- Example\nGetVehicleIsMercenary(GetVehiclePedIsIn(PlayerPedId(), false))"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/GetVehicleIsMercenary.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

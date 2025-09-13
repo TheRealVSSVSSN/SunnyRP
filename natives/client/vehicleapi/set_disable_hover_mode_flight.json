@@ -1,0 +1,23 @@
+{
+  "title": "SET_DISABLE_HOVER_MODE_FLIGHT",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "SET_DISABLE_HOVER_MODE_FLIGHT"
+  ],
+  "content": "0x2D55FE374D5FDB91// SetDisableHoverModeFlight\nvoid SET_DISABLE_HOVER_MODE_FLIGHT(Vehicle vehicle, BOOL toggle);Parameters:vehicle: The vehicle to which the toggle will be applied.toggle: Boolean parameter where setting true disables the vehicle's wings, preventing flight. Setting it to false allows the vehicle to fly as usual.Disables wings for Deluxo and Oppressor MK II. For the Deluxo, it retracts the wings immediately, preventing flight. For the Oppressor Mk II, the wings retract after landing and take-off is not possible, though it can still glide if launched into the air.Old name:  _SET_VEHICLE_HOVER_TRANSFORM_ACTIVEExamples:LuaJavaScriptC#-- In this case we are disabling the wings of the vehicle\nlocal vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\nSetDisableHoverModeFlight(vehicle, true)",
+  "codeBlocks": [
+    "// SetDisableHoverModeFlight\nvoid SET_DISABLE_HOVER_MODE_FLIGHT(Vehicle vehicle, BOOL toggle);",
+    "-- In this case we are disabling the wings of the vehicle\nlocal vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\nSetDisableHoverModeFlight(vehicle, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetDisableHoverModeFlight.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

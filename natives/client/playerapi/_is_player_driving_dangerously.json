@@ -1,0 +1,23 @@
+{
+  "title": "_IS_PLAYER_DRIVING_DANGEROUSLY",
+  "breadcrumbs": [
+    "Native Reference",
+    "PLAYERAPI",
+    "_IS_PLAYER_DRIVING_DANGEROUSLY"
+  ],
+  "content": "0xF10B44FD479D69F30x1E359CC8// IsPlayerDrivingDangerously\nBOOL _IS_PLAYER_DRIVING_DANGEROUSLY(Player player, int type);Parameters:player: Player IDtype: Refer to eViolationType.Returns: Returns true if the player is performing the type traffic violation.enum eViolationType {\n  // Checks if the player is driving on pedestrians walk ways\n  VT_PAVED_PEDESTRIAN_AREAS = 0,\n  // Checks if the player is running through red lights\n  // This takes some time to return true.\n  VT_RUNNING_REDS = 1,\n  // checks if the player is driving on the wrong side of the road\n  VT_AGAINST_TRAFFIC = 2\n};\nUsed solely in \"Al Di Napoli\" with type 2 for a voiceline.",
+  "codeBlocks": [
+    "// IsPlayerDrivingDangerously\nBOOL _IS_PLAYER_DRIVING_DANGEROUSLY(Player player, int type);",
+    "enum eViolationType {\n  // Checks if the player is driving on pedestrians walk ways\n  VT_PAVED_PEDESTRIAN_AREAS = 0,\n  // Checks if the player is running through red lights\n  // This takes some time to return true.\n  VT_RUNNING_REDS = 1,\n  // checks if the player is driving on the wrong side of the road\n  VT_AGAINST_TRAFFIC = 2\n};"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PLAYER/IsPlayerDrivingDangerously.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

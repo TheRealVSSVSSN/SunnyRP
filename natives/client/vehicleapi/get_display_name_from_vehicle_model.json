@@ -1,0 +1,23 @@
+{
+  "title": "GET_DISPLAY_NAME_FROM_VEHICLE_MODEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "GET_DISPLAY_NAME_FROM_VEHICLE_MODEL"
+  ],
+  "content": "0xB215AAC32D25D0190xEC86DF39// GetDisplayNameFromVehicleModel\nchar* GET_DISPLAY_NAME_FROM_VEHICLE_MODEL(Hash modelHash);Parameters:modelHash: A vehicle model to check.Returns: The display name for the vehicle, or 'CARNOTFOUND' if invalid.Returns the display name/text label (gameName in vehicles.meta) for the specified vehicle model.",
+  "codeBlocks": [
+    "// GetDisplayNameFromVehicleModel\nchar* GET_DISPLAY_NAME_FROM_VEHICLE_MODEL(Hash modelHash);",
+    "-- Example\nGetDisplayNameFromVehicleModel(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/GetDisplayNameFromVehicleModel.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}
