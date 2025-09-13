@@ -4,7 +4,7 @@ This document indexes the Example_Frameworks/ directory to guide development of 
 
 ## Scan Stamp & Inventory Overview
 
-TREE-SCAN-STAMP — 2025-09-13T00:25:12+00:00 — dirs:783 files:14434
+ TREE-SCAN-STAMP — 2025-09-13T00:43:16+00:00 — dirs:783 files:14434
 
 | Folder | Resources | Files | Server Files | Client Files | Shared Files |
 | --- | --- | --- | --- | --- | --- |
@@ -922,10 +922,10 @@ Example_Frameworks/FiveM-FSN-Framework/pipeline.yml
 
 | Scope | Total | Done | Remaining | Last Updated |
 | --- | --- | --- | --- | --- |
-| File Enumeration | 14434 | 735 | 13699 | 2025-09-13 |
+| File Enumeration | 14434 | 751 | 13683 | 2025-09-13 |
 | Function Extraction | 28 | 28 | 0 | 2025-09-13 |
-| Event Extraction | 28 | 28 | 0 | 2025-09-13 |
-| Native Currency Checks | 86 | 86 | 0 | 2025-09-13 |
+| Event Extraction | 38 | 38 | 0 | 2025-09-13 |
+| Native Currency Checks | 87 | 87 | 0 | 2025-09-13 |
 | Similarity Merges | 2 | 2 | 0 | 2025-09-13 |
 
 ## Function & Event Registry
@@ -988,13 +988,23 @@ Example_Frameworks/FiveM-FSN-Framework/pipeline.yml
 - [fsn_apartments:stash:add](#fsn_apartmentsstashadd)
 - [fsn_apartments:stash:take](#fsn_apartmentsstashtake)
 - [fsn_bank:change:bankAdd](#fsn_bankchangebankadd)
+- [fsn_bank:change:bankandwallet](#fsn_bankchangebankandwallet)
 - [fsn_bank:change:bankMinus](#fsn_bankchangebankminus)
+- [fsn_bank:database:update](#fsn_bankdatabaseupdate)
+- [fsn_bank:request:both](#fsn_bankrequestboth)
+- [fsn_bank:transfer](#fsn_banktransfer)
 - [fsn_bank:update:both](#fsn_bankupdateboth)
 - [fsn_cargarage:makeMine](#fsn_cargaragemakemine)
+- [fsn_main:displayBankandMoney](#fsn_maindisplaybankandmoney)
+- [fsn_main:logging:addLog](#fsn_mainloggingaddlog)
 - [fsn_needs:stress:remove](#fsn_needsstressremove)
 - [fsn_notify:displayNotification](#fsn_notifydisplaynotification)
+- [fsn_phones:SYS:addTransaction](#fsn_phonessysaddtransaction)
 - [fsn_yoga:checkStress](#fsn_yogacheckstress)
 - [fsn:playerReady](#fsnplayerready)
+- [toggleGUI](#togglegui)
+- [transferMoney](#transfermoney)
+- [withdrawMoney](#withdrawmoney)
 
 ### 5.3 Functions — Detailed Entries
 
@@ -2091,6 +2101,138 @@ TriggerClientEvent('fsn_bank:change:bankMinus', src, 200)
 - **References**:
   - https://docs.fivem.net/docs/
 
+#### fsn_bank:change:bankandwallet
+- **Event**: fsn_bank:change:bankandwallet
+- **Direction**: Intra-Client
+- **Type**: NetEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bank/client.lua (84,207-208,242)
+- **Payload**: `wallet:number`, `bank:number`
+- **Typical Callers / Listeners**: NUI deposit/withdraw callbacks emit to sync balances; core money system listens.
+- **Natives Used**:
+  - TriggerEvent — OK
+- **OneSync / Replication Notes**: Local broadcast; external listener should persist.
+- **Examples**:
+```lua
+TriggerEvent('fsn_bank:change:bankandwallet', new_wallet, new_bank)
+```
+- **Security / Anti-Abuse**: trusts client-supplied amounts.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### fsn_bank:database:update
+- **Event**: fsn_bank:database:update
+- **Direction**: Client→Server
+- **Type**: NetEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bank/server.lua (1-15)
+- **Payload**: `charid:number`, `wallet:number|false`, `bank:number|false`
+- **Typical Callers / Listeners**: resources persist wallet/bank columns after transactions.
+- **Natives Used**: none
+- **OneSync / Replication Notes**: Uses synchronous MySQL queries; heavy use may block.
+- **Examples**:
+```lua
+TriggerServerEvent('fsn_bank:database:update', charId, wallet, bank)
+```
+- **Security / Anti-Abuse**: input unvalidated; server trusts caller.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### fsn_bank:request:both
+- **Event**: fsn_bank:request:both
+- **Direction**: Intra-Client
+- **Type**: NetEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bank/client.lua (85,144)
+- **Payload**: none
+- **Typical Callers / Listeners**: ATM interaction requests balance data from core.
+- **Natives Used**:
+  - TriggerEvent — OK
+- **OneSync / Replication Notes**: expects external handler to reply with balances.
+- **Examples**:
+```lua
+TriggerEvent('fsn_bank:request:both')
+```
+- **Security / Anti-Abuse**: none.
+- **References**:
+  - https://docs.fivem.net/docs/
+- **Limitations / Notes**: TODO(next-run): verify server handler.
+
+#### fsn_bank:transfer
+- **Event**: fsn_bank:transfer
+- **Direction**: Client→Server
+- **Type**: NetEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bank/server.lua (17-36)
+- **Payload**: `receive:number`, `amount:number`
+- **Typical Callers / Listeners**: triggered by `transferMoney` NUI callback to move funds between players.
+- **Natives Used**:
+  - GetPlayerName — OK
+  - TriggerClientEvent — OK
+  - TriggerEvent — OK
+- **OneSync / Replication Notes**: sender and receiver balances updated on server; database persistence handled separately.
+- **Examples**:
+```lua
+TriggerServerEvent('fsn_bank:transfer', targetId, amount)
+```
+- **Security / Anti-Abuse**: validates target online and funds ≥ amount; no further checks.
+- **References**:
+  - https://docs.fivem.net/natives/  
+  - https://docs.fivem.net/docs/
+- **Limitations / Notes**: TODO(next-run): confirm logging of failed transfers.
+
+#### fsn_main:displayBankandMoney
+- **Event**: fsn_main:displayBankandMoney
+- **Direction**: Intra-Client
+- **Type**: LocalEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bank/client.lua (172)
+- **Payload**: none
+- **Typical Callers / Listeners**: `fsn_closeATM` restores HUD via core listener.
+- **Natives Used**:
+  - TriggerEvent — OK
+- **OneSync / Replication Notes**: local HUD update.
+- **Examples**:
+```lua
+TriggerEvent('fsn_main:displayBankandMoney')
+```
+- **Security / Anti-Abuse**: none.
+- **References**:
+  - https://docs.fivem.net/docs/
+- **Limitations / Notes**: TODO(next-run): locate handler in fsn_main.
+
+#### fsn_main:logging:addLog
+- **Event**: fsn_main:logging:addLog
+- **Direction**: Client→Server
+- **Type**: NetEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bank/client.lua (208,243)
+- **Payload**: `playerId:number`, `category:string`, `text:string`
+- **Typical Callers / Listeners**: deposit and withdraw callbacks log transactions on the server.
+- **Natives Used**:
+  - TriggerServerEvent — OK
+- **OneSync / Replication Notes**: server decides log persistence.
+- **Examples**:
+```lua
+TriggerServerEvent('fsn_main:logging:addLog', GetPlayerServerId(PlayerId()), 'money', message)
+```
+- **Security / Anti-Abuse**: client can spoof message contents.
+- **References**:
+  - https://docs.fivem.net/docs/
+- **Limitations / Notes**: TODO(next-run): verify server-side sanitization.
+
+#### fsn_phones:SYS:addTransaction
+- **Event**: fsn_phones:SYS:addTransaction
+- **Direction**: Intra-Client
+- **Type**: LocalEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bank/client.lua (201-206,236-241)
+- **Payload**: `{title:string, trantype:string, systype:string, tranamt:number}`
+- **Typical Callers / Listeners**: banking callbacks log transactions to the phone app.
+- **Natives Used**:
+  - TriggerEvent — OK
+- **OneSync / Replication Notes**: purely client; no server sync.
+- **Examples**:
+```lua
+TriggerEvent('fsn_phones:SYS:addTransaction', {title='Bank Deposit', trantype='CREDIT', systype='credit', tranamt=deposit})
+```
+- **Security / Anti-Abuse**: client controls log content.
+- **References**:
+  - https://docs.fivem.net/docs/
+- **Limitations / Notes**: TODO(next-run): confirm phone app persistence.
 #### fsn_apartments:instance:leave
 - **Event**: fsn_apartments:instance:leave
 - **Direction**: Server→Client
@@ -2124,6 +2266,63 @@ TriggerEvent('fsn_apartments:instance:debug')
 - **Security / Anti-Abuse**: restrict to developers to avoid spam.
 - **References**:
   - https://docs.fivem.net/docs/
+-
+#### toggleGUI
+- **Event**: toggleGUI
+- **Direction**: NUI→Client
+- **Type**: NUI
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bank/client.lua (271-273)
+- **Payload**: none
+- **Typical Callers / Listeners**: ATM UI requests close; client invokes `fsn_closeATM`.
+- **Natives Used**: none
+- **OneSync / Replication Notes**: UI-local; no network traffic.
+- **Examples**:
+```lua
+RegisterNUICallback('toggleGUI', function() fsn_closeATM() end)
+```
+- **Security / Anti-Abuse**: none.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### transferMoney
+- **Event**: transferMoney
+- **Direction**: NUI→Client
+- **Type**: NUI
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bank/client.lua (250-269)
+- **Payload**: `tbl` {transferAmount:number, transferTo:number}
+- **Typical Callers / Listeners**: ATM UI posts transfer form; client forwards to server via `fsn_bank:transfer`.
+- **Natives Used**:
+  - TriggerServerEvent — OK
+  - TriggerEvent — OK
+- **OneSync / Replication Notes**: server processes transfer; client updates on response.
+- **Examples**:
+```lua
+RegisterNUICallback('transferMoney', function(data)
+  TriggerServerEvent('fsn_bank:transfer', tonumber(data.transferTo), tonumber(data.transferAmount))
+end)
+```
+- **Security / Anti-Abuse**: amount capped at $500k; client-side validation only.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### withdrawMoney
+- **Event**: withdrawMoney
+- **Direction**: NUI→Client
+- **Type**: NUI
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bank/client.lua (215-248)
+- **Payload**: `tbl` {withdraw:number}
+- **Typical Callers / Listeners**: ATM UI posts withdrawal; client adjusts balances and logs.
+- **Natives Used**:
+  - TriggerEvent — OK
+  - TriggerServerEvent — OK
+- **OneSync / Replication Notes**: server notified only through follow-up events.
+- **Examples**:
+```lua
+RegisterNUICallback('withdrawMoney', function(data) ... end)
+```
+- **Security / Anti-Abuse**: capped at $500k; server trusts client.
+- **References**:
+  - https://docs.fivem.net/docs/
 
 ## Similarity Merge Report
 - Canonicalized identical helper functions.
@@ -2142,5 +2341,5 @@ TriggerEvent('fsn_apartments:instance:debug')
 
 ## PROGRESS MARKERS (EOF)
 
-CONTINUE-HERE — 2025-09-13T00:25:12+00:00 — next: FiveM-FSN-Framework/fsn_apartments/docs.md @ line 1
-MERGE-QUEUE — 2025-09-13T00:25:12+00:00 — remaining: 0 (top 5: n/a)
+CONTINUE-HERE — 2025-09-13T00:43:16+00:00 — next: FiveM-FSN-Framework/fsn_bankrobbery/agents.md @ line 1
+MERGE-QUEUE — 2025-09-13T00:43:16+00:00 — remaining: 0 (top 5: n/a)
