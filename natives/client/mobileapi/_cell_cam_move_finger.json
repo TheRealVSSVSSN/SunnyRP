@@ -1,0 +1,25 @@
+{
+  "title": "_CELL_CAM_MOVE_FINGER",
+  "breadcrumbs": [
+    "Native Reference",
+    "MOBILEAPI",
+    "_CELL_CAM_MOVE_FINGER"
+  ],
+  "content": "0x95C9E72F3D7DEC9B// CellCamMoveFinger\nvoid _CELL_CAM_MOVE_FINGER(int direction);Parameters:direction: The direction to swipe to, refer to eCellInput enum.Moves the character's finger in a swiping motion when holding a cellphone in their hand through the use of the CREATE_MOBILE_PHONE native.enum eCellInput {\n    CELL_INPUT_NONE = 0,\n    CELL_INPUT_UP = 1,\n    CELL_INPUT_DOWN = 2,\n    CELL_INPUT_LEFT = 3,\n    CELL_INPUT_RIGHT = 4,\n    CELL_INPUT_SELECT = 5\n}\nOld name:  _MOVE_FINGERExamples:LuaCreateThread(function()\n\tlocal eCellInput = {\n\t\tCELL_INPUT_NONE = 0,\n\t\tCELL_INPUT_UP = 1,\n\t\tCELL_INPUT_DOWN = 2,\n\t\tCELL_INPUT_LEFT = 3,\n\t\tCELL_INPUT_RIGHT = 4,\n\t\tCELL_INPUT_SELECT = 5\n\t}\n\t-- Create a mobile phone object and animate the character\n\tCreateMobilePhone(eCellInput.CELL_INPUT_NONE)\n\n\tWait(2000)\n\n\t-- Swipe up\n\tCellCamMoveFinger(eCellInput.CELL_INPUT_UP)\n\n\tWait(1500)\n\n\t-- Swipe right\n\tCellCamMoveFinger(eCellInput.CELL_INPUT_RIGHT)\n\n\tWait(1500)\n\n\t-- Tap the screen\n\tCellCamMoveFinger(eCellInput.CELL_INPUT_SELECT)\nend)",
+  "codeBlocks": [
+    "// CellCamMoveFinger\nvoid _CELL_CAM_MOVE_FINGER(int direction);",
+    "enum eCellInput {\n    CELL_INPUT_NONE = 0,\n    CELL_INPUT_UP = 1,\n    CELL_INPUT_DOWN = 2,\n    CELL_INPUT_LEFT = 3,\n    CELL_INPUT_RIGHT = 4,\n    CELL_INPUT_SELECT = 5\n}",
+    "CreateThread(function()\n\tlocal eCellInput = {\n\t\tCELL_INPUT_NONE = 0,\n\t\tCELL_INPUT_UP = 1,\n\t\tCELL_INPUT_DOWN = 2,\n\t\tCELL_INPUT_LEFT = 3,\n\t\tCELL_INPUT_RIGHT = 4,\n\t\tCELL_INPUT_SELECT = 5\n\t}\n\t-- Create a mobile phone object and animate the character\n\tCreateMobilePhone(eCellInput.CELL_INPUT_NONE)\n\n\tWait(2000)\n\n\t-- Swipe up\n\tCellCamMoveFinger(eCellInput.CELL_INPUT_UP)\n\n\tWait(1500)\n\n\t-- Swipe right\n\tCellCamMoveFinger(eCellInput.CELL_INPUT_RIGHT)\n\n\tWait(1500)\n\n\t-- Tap the screen\n\tCellCamMoveFinger(eCellInput.CELL_INPUT_SELECT)\nend)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MOBILE/CellCamMoveFinger.md",
+    "https://docs.fivem.net/natives/?_0xA4E8E696C532FBC7",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

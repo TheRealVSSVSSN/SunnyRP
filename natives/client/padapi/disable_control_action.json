@@ -1,0 +1,24 @@
+{
+  "title": "DISABLE_CONTROL_ACTION",
+  "breadcrumbs": [
+    "Native Reference",
+    "PADAPI",
+    "DISABLE_CONTROL_ACTION"
+  ],
+  "content": "0xFE99B66D079CF6BC0x3800C0DC// DisableControlAction\nvoid DISABLE_CONTROL_ACTION(int padIndex, int control, BOOL disable);Control values and meaningExample: CONTROLS::DISABLE_CONTROL_ACTION(2, 19, true) disables the switching UI from appearing both when using a keyboard and Xbox 360 controller. Needs to be executed each frame.\nControl group 1 and 0 gives the same results as 2. Same results for all players.",
+  "codeBlocks": [
+    "// DisableControlAction\nvoid DISABLE_CONTROL_ACTION(int padIndex, int control, BOOL disable);",
+    "-- Example usage for DISABLE_CONTROL_ACTION\nDisableControlAction(0, 0, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PAD/DisableControlAction.md",
+    "https://docs.fivem.net/docs/game-references/controls/#controls",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

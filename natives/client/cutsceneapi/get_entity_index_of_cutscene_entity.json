@@ -1,0 +1,23 @@
+{
+  "title": "GET_ENTITY_INDEX_OF_CUTSCENE_ENTITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "CUTSCENEAPI",
+    "GET_ENTITY_INDEX_OF_CUTSCENE_ENTITY"
+  ],
+  "content": "0x0A2E9FDB9A8C62F60x1D09ABC7// GetEntityIndexOfCutsceneEntity\nEntity GET_ENTITY_INDEX_OF_CUTSCENE_ENTITY(char* cutsceneEntName, Hash modelHash);Parameters:cutsceneEntName: I.E MP_1, MP_4, Michael, TrevormodelHash: Not strictly neccasary, can get 0Returns: Returns entity handleReturns the handle of a cutscene entity, can be ped",
+  "codeBlocks": [
+    "// GetEntityIndexOfCutsceneEntity\nEntity GET_ENTITY_INDEX_OF_CUTSCENE_ENTITY(char* cutsceneEntName, Hash modelHash);",
+    "-- Example usage for GET_ENTITY_INDEX_OF_CUTSCENE_ENTITY\nGetEntityIndexOfCutsceneEntity('', 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CUTSCENE/GetEntityIndexOfCutsceneEntity.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "TASK_WANDER_IN_AREA",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "TASK_WANDER_IN_AREA"
+  ],
+  "content": "0xE054346CA3A0F3150xC6981FB9// TaskWanderInArea\nvoid TASK_WANDER_IN_AREA(Ped ped, float x, float y, float z, float radius, int minimalLength, float timeBetweenWalks);Parameters:ped: The ped which will wander the area.x: The X coordinate.y: The Y coordinatez: The Z coordinateradius: The radius of the area to wander around inminimalLength: The minimal length it will wander before waiting timeBetweenWalks seconds before continuingtimeBetweenWalks: The length of time the ped will stand still/rest between walksMakes a ped wander/patrol around the specified area.The ped will continue to wander after getting distracted, but only if this additional task is temporary, ie. killing a target, after killing the target it will continue to wander around.Use GetIsTaskActive(ped, 222) to check if the ped is still wandering the area.Examples:Lua-- Load model for panther\nlocal model = `a_c_panther`\nRequestModel(model)\nwhile not HasModelLoaded(model) do\n  Citizen.Wait(0)\nend\n\n-- Spawn a panther at current coordinates\nlocal coords = GetEntityCoords(PlayerPedId())\nlocal ped = CreatePed(0, model, coords.x, coords.y, coords.z, 0.0, true)\n\n-- Make sure the ped doesn't flee or gets distracted\nSetBlockingOfNonTemporaryEvents(ped, true)\n\n-- Make ped wander in spawned area with radius of 100 meters, will wander at least 2 meters and wait for around 10 seconds between patrols\nTaskWanderInArea(ped, coords.x, coords.y, coords.z, 100.0, 2, 10.0)\n\n-- Check if the ped is wandering\n-- Tasks don't trigger instantly, so wait a bit before checking\nCitizen.Wait(1000)\nprint(GetIsTaskActive(ped, 222)) -- 1",
+  "codeBlocks": [
+    "// TaskWanderInArea\nvoid TASK_WANDER_IN_AREA(Ped ped, float x, float y, float z, float radius, int minimalLength, float timeBetweenWalks);",
+    "-- Load model for panther\nlocal model = `a_c_panther`\nRequestModel(model)\nwhile not HasModelLoaded(model) do\n  Citizen.Wait(0)\nend\n\n-- Spawn a panther at current coordinates\nlocal coords = GetEntityCoords(PlayerPedId())\nlocal ped = CreatePed(0, model, coords.x, coords.y, coords.z, 0.0, true)\n\n-- Make sure the ped doesn't flee or gets distracted\nSetBlockingOfNonTemporaryEvents(ped, true)\n\n-- Make ped wander in spawned area with radius of 100 meters, will wander at least 2 meters and wait for around 10 seconds between patrols\nTaskWanderInArea(ped, coords.x, coords.y, coords.z, 100.0, 2, 10.0)\n\n-- Check if the ped is wandering\n-- Tasks don't trigger instantly, so wait a bit before checking\nCitizen.Wait(1000)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/TaskWanderInArea.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

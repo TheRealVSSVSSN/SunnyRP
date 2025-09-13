@@ -1,0 +1,23 @@
+{
+  "title": "0xA2CCBE62CD4C91A4",
+  "breadcrumbs": [
+    "Native Reference",
+    "MOBILEAPI",
+    "0xA2CCBE62CD4C91A4"
+  ],
+  "content": "0xA2CCBE62CD4C91A40xC273BB4D// N_0xa2ccbe62cd4c91a4\nvoid 0xA2CCBE62CD4C91A4(int* toggle);Needs more research. If the \"phone_cam12\" filter is applied, this function is called with \"TRUE\"; otherwise, \"FALSE\".\nExample (XBOX 360):\n// check current filter selection\nif (MISC::ARE_STRINGS_EQUAL(getElem(g_2471024, &l_17, 4), \"phone_cam12\") != 0)\n{\n    MOBILE::_0xC273BB4D(0); // FALSE\n}\nelse\n{\n    MOBILE::_0xC273BB4D(1); // TRUE\n}",
+  "codeBlocks": [
+    "// N_0xa2ccbe62cd4c91a4\nvoid 0xA2CCBE62CD4C91A4(int* toggle);",
+    "Needs more research. If the \"phone_cam12\" filter is applied, this function is called with \"TRUE\"; otherwise, \"FALSE\".\nExample (XBOX 360):\n// check current filter selection\nif (MISC::ARE_STRINGS_EQUAL(getElem(g_2471024, &l_17, 4), \"phone_cam12\") != 0)\n{\n    MOBILE::_0xC273BB4D(0); // FALSE\n}\nelse\n{\n    MOBILE::_0xC273BB4D(1); // TRUE\n}"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MOBILE/N_0xa2ccbe62cd4c91a4.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

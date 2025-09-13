@@ -1,0 +1,23 @@
+{
+  "title": "GET_ZONE_SCUMMINESS",
+  "breadcrumbs": [
+    "Native Reference",
+    "ZONEAPI",
+    "GET_ZONE_SCUMMINESS"
+  ],
+  "content": "0x5F7B268D15BA07390xB2FB5C4C// GetZoneScumminess\nint GET_ZONE_SCUMMINESS(int zoneId);Parameters:zoneId: The zone idReturns: The zone scumminess levelGets the zone scumminess level, used to calculate the cellphone signal strength.enum eZoneScumminess\n{\n    SCUMMINESS_POSH = 0,\n    SCUMMINESS_NICE = 1,\n    SCUMMINESS_ABOVE_AVERAGE = 2,\n    SCUMMINESS_BELOW_AVERAGE = 3,\n    SCUMMINESS_CRAP = 4,\n    SCUMMINESS_SCUM = 5\n}",
+  "codeBlocks": [
+    "// GetZoneScumminess\nint GET_ZONE_SCUMMINESS(int zoneId);",
+    "enum eZoneScumminess\n{\n    SCUMMINESS_POSH = 0,\n    SCUMMINESS_NICE = 1,\n    SCUMMINESS_ABOVE_AVERAGE = 2,\n    SCUMMINESS_BELOW_AVERAGE = 3,\n    SCUMMINESS_CRAP = 4,\n    SCUMMINESS_SCUM = 5\n}"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ZONE/GetZoneScumminess.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

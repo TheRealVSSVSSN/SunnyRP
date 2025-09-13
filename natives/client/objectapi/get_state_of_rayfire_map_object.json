@@ -1,0 +1,24 @@
+{
+  "title": "GET_STATE_OF_RAYFIRE_MAP_OBJECT",
+  "breadcrumbs": [
+    "Native Reference",
+    "OBJECTAPI",
+    "GET_STATE_OF_RAYFIRE_MAP_OBJECT"
+  ],
+  "content": "0x899BA936634A322E0xF1B8817A// GetStateOfRayfireMapObject\nint GET_STATE_OF_RAYFIRE_MAP_OBJECT(Object object);See SET_STATE_OF_RAYFIRE_MAP_OBJECT to see the different statesGet a destructible object's state. Substract 1 to get the real state. For example, if the object just spawned (state 2), the native will return 3.Old name:  _GET_DES_OBJECT_STATE",
+  "codeBlocks": [
+    "// GetStateOfRayfireMapObject\nint GET_STATE_OF_RAYFIRE_MAP_OBJECT(Object object);",
+    "-- Example usage for GET_STATE_OF_RAYFIRE_MAP_OBJECT\nGetStateOfRayfireMapObject(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/OBJECT/GetStateOfRayfireMapObject.md",
+    "https://docs.fivem.net/natives/?_0x5C29F698D404C5E1",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

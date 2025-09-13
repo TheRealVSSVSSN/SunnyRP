@@ -1,0 +1,23 @@
+{
+  "title": "TASK_STAND_GUARD",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "TASK_STAND_GUARD"
+  ],
+  "content": "0xAE032F8BBA959E900xD130F636// TaskStandGuard\nvoid TASK_STAND_GUARD(Ped ped, float x, float y, float z, float heading, char* scenarioName);scenarioName example: \"WORLD_HUMAN_GUARD_STAND\"",
+  "codeBlocks": [
+    "// TaskStandGuard\nvoid TASK_STAND_GUARD(Ped ped, float x, float y, float z, float heading, char* scenarioName);",
+    "scenarioName example: \"WORLD_HUMAN_GUARD_STAND\""
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/TaskStandGuard.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

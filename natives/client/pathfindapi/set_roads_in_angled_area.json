@@ -1,0 +1,24 @@
+{
+  "title": "SET_ROADS_IN_ANGLED_AREA",
+  "breadcrumbs": [
+    "Native Reference",
+    "PATHFINDAPI",
+    "SET_ROADS_IN_ANGLED_AREA"
+  ],
+  "content": "0x1A5AA1208AF5DB590xBD088F4B// SetRoadsInAngledArea\nvoid SET_ROADS_IN_ANGLED_AREA(float x1, float y1, float z1, float x2, float y2, float z2, float width, BOOL unknown1, BOOL unknown2, BOOL unknown3);Parameters:x1: X dimension of the angled area 'origin'y1: Y dimension of the angled area 'origin'z1: Z dimension of the angled area 'origin'x2: X dimension of the angled area 'extent'y2: Y dimension of the angled area 'extent'z2: Z dimension of the angled area 'extent'width: Width of the angled areaunknown1: unknown2: unknown3: unknown3 is related to SEND_SCRIPT_WORLD_STATE_EVENT > CNetworkRoadNodeWorldStateData in networked environments.See IS_POINT_IN_ANGLED_AREA for the definition of an angled area.",
+  "codeBlocks": [
+    "// SetRoadsInAngledArea\nvoid SET_ROADS_IN_ANGLED_AREA(float x1, float y1, float z1, float x2, float y2, float z2, float width, BOOL unknown1, BOOL unknown2, BOOL unknown3);",
+    "-- Example usage for SET_ROADS_IN_ANGLED_AREA\nSetRoadsInAngledArea(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, false, false, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PATHFIND/SetRoadsInAngledArea.md",
+    "https://docs.fivem.net/natives/?_0x2A70BAE8883E4C81",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

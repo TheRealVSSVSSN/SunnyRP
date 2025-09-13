@@ -1,0 +1,23 @@
+{
+  "title": "SET_PED_CAN_PLAY_AMBIENT_IDLES",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "SET_PED_CAN_PLAY_AMBIENT_IDLES"
+  ],
+  "content": "0x8FD89A6240813FD00xB5AD044E// SetPedCanPlayAmbientIdles\nvoid SET_PED_CAN_PLAY_AMBIENT_IDLES(Ped ped, BOOL bBlockIdleClips, BOOL bRemoveIdleClipIfPlaying);Parameters:ped: Ped index.bBlockIdleClips: If true, prevents a ped from playing an idle animation this frame.bRemoveIdleClipIfPlaying: If true and the ped is playing an idle animation, the clip is stopped.Prevents a ped from playing ambient idle animations.Note: This native must be called every frame.",
+  "codeBlocks": [
+    "// SetPedCanPlayAmbientIdles\nvoid SET_PED_CAN_PLAY_AMBIENT_IDLES(Ped ped, BOOL bBlockIdleClips, BOOL bRemoveIdleClipIfPlaying);",
+    "local ped = PlayerPedId()\n-- Example usage for SET_PED_CAN_PLAY_AMBIENT_IDLES\nSetPedCanPlayAmbientIdles(ped, false, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/SetPedCanPlayAmbientIdles.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "GET_HASH_OF_MAP_AREA_AT_COORDS",
+  "breadcrumbs": [
+    "Native Reference",
+    "ZONEAPI",
+    "GET_HASH_OF_MAP_AREA_AT_COORDS"
+  ],
+  "content": "0x7EE64D51E84987280xB5C5C99B// GetHashOfMapAreaAtCoords\nHash GET_HASH_OF_MAP_AREA_AT_COORDS(float x, float y, float z);Returns a hash representing which part of the map the given coords are located.  \nPossible return values:  \n(Hash of) city -> -289320599  \n(Hash of) countryside -> 2072609373  \nC# Example :  \nPed player = Game.Player.Character;  \nHash h = Function.Call<Hash>(Hash.GET_HASH_OF_MAP_AREA_AT_COORDS, player.Position.X, player.Position.Y, player.Position.Z);",
+  "codeBlocks": [
+    "// GetHashOfMapAreaAtCoords\nHash GET_HASH_OF_MAP_AREA_AT_COORDS(float x, float y, float z);",
+    "Returns a hash representing which part of the map the given coords are located.  \nPossible return values:  \n(Hash of) city -> -289320599  \n(Hash of) countryside -> 2072609373  \nC# Example :  \nPed player = Game.Player.Character;  \nHash h = Function.Call<Hash>(Hash.GET_HASH_OF_MAP_AREA_AT_COORDS, player.Position.X, player.Position.Y, player.Position.Z);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ZONE/GetHashOfMapAreaAtCoords.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

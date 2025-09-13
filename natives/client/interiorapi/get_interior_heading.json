@@ -1,0 +1,23 @@
+{
+  "title": "GET_INTERIOR_HEADING",
+  "breadcrumbs": [
+    "Native Reference",
+    "INTERIORAPI",
+    "GET_INTERIOR_HEADING"
+  ],
+  "content": "0xF49B58631D9E22D9// GetInteriorHeading\nfloat GET_INTERIOR_HEADING(int interior);Parameters:interior: ID of the interiorReturns: Returns interior heading in radians. Multiply the returned value with 57.29578 (or 180.0 / math.pi) to convert it to degrees.NativeDB Introduced: v1493Old name:  _GET_INTERIOR_HEADING",
+  "codeBlocks": [
+    "// GetInteriorHeading\nfloat GET_INTERIOR_HEADING(int interior);",
+    "NativeDB Introduced: v1493"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/INTERIOR/GetInteriorHeading.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

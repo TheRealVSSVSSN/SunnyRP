@@ -1,0 +1,23 @@
+{
+  "title": "DOES_CAM_EXIST",
+  "breadcrumbs": [
+    "Native Reference",
+    "CAMAPI",
+    "DOES_CAM_EXIST"
+  ],
+  "content": "0xA7A932170592B50E0x1EF89DC0// DoesCamExist\nBOOL DOES_CAM_EXIST(Cam cam);Parameters:cam: The camera handle to look for.Returns: A boolean value representing whether the camera exists or not.Looks up a camera handle in the current camera pool and returns true if the handle is found, otherwise it returns false.",
+  "codeBlocks": [
+    "// DoesCamExist\nBOOL DOES_CAM_EXIST(Cam cam);",
+    "-- Example usage for DOES_CAM_EXIST\nDoesCamExist(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CAM/DoesCamExist.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "SET_TABLE_GAMES_CAMERA_THIS_UPDATE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CAMAPI",
+    "SET_TABLE_GAMES_CAMERA_THIS_UPDATE"
+  ],
+  "content": "0x79C0E43EB9B944E2// SetTableGamesCameraThisUpdate\nBOOL SET_TABLE_GAMES_CAMERA_THIS_UPDATE(Hash hash);Parameters:hash: Hash for table gameReturns: Returns a boolean value indicating if the camera settings were successfully overriden for this current frame.Override the camera work of the third-person camera to table game for current frame only.HashKeyHashGameCASINO_LUCKY_WHEEL_CAMERA5891389Lucky WheelCASINO_SLOT_MACHINE_CAMERA518572876SlotsCASINO_ROULETTE_CAMERA71681063RouletteCASINO_BLACKJACK_CAMERA-2124244681BlackjackCASINO_POKER_CAMERA-1938411241Three CardsCASINO_INSIDE_TRACK_CAMERA1929822423Inside TrackARCADE_LOVE_PROFESSOR_P1_CAMERA545868034LoveProfessorP1ARCADE_LOVE_PROFESSOR_P2_CAMERA935304251LoveProfessorP2Examples:LuaCreateThread(function()\n    while true do\n      -- override to lucky wheel camera work\n      SetTableGamesCameraThisUpdate(GetHashKey(\"CASINO_LUCKY_WHEEL_CAMERA\"))\n      Wait(0)\n    end\nend)",
+  "codeBlocks": [
+    "// SetTableGamesCameraThisUpdate\nBOOL SET_TABLE_GAMES_CAMERA_THIS_UPDATE(Hash hash);",
+    "CreateThread(function()\n    while true do\n      -- override to lucky wheel camera work\n      SetTableGamesCameraThisUpdate(GetHashKey(\"CASINO_LUCKY_WHEEL_CAMERA\"))\n      Wait(0)\n    end\nend)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CAM/SetTableGamesCameraThisUpdate.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

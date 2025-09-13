@@ -1,0 +1,23 @@
+{
+  "title": "GET_INTERIOR_AT_COORDS",
+  "breadcrumbs": [
+    "Native Reference",
+    "INTERIORAPI",
+    "GET_INTERIOR_AT_COORDS"
+  ],
+  "content": "0xB0F7F8663821D9C30xA17FBF37// GetInteriorAtCoords\nint GET_INTERIOR_AT_COORDS(float x, float y, float z);Returns interior ID from specified coordinates. If coordinates are outside, then it returns 0.  \nExample for VB.NET  \nDim interiorID As Integer = Native.Function.Call(Of Integer)(Hash.GET_INTERIOR_AT_COORDS, X, Y, Z)",
+  "codeBlocks": [
+    "// GetInteriorAtCoords\nint GET_INTERIOR_AT_COORDS(float x, float y, float z);",
+    "Returns interior ID from specified coordinates. If coordinates are outside, then it returns 0.  \nExample for VB.NET  \nDim interiorID As Integer = Native.Function.Call(Of Integer)(Hash.GET_INTERIOR_AT_COORDS, X, Y, Z)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/INTERIOR/GetInteriorAtCoords.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

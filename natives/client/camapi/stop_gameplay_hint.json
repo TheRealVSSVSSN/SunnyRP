@@ -1,0 +1,23 @@
+{
+  "title": "STOP_GAMEPLAY_HINT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CAMAPI",
+    "STOP_GAMEPLAY_HINT"
+  ],
+  "content": "0xF46C581C617189160x1BC28B7B// StopGameplayHint\nvoid STOP_GAMEPLAY_HINT(BOOL bStopImmediately);Parameters:bStopImmediately: Specifies whether the gameplay hint camera should stop instantly true or gradually transition out false.Terminates the current gameplay hint camera, with an option for immediate cessation or a gradual fade out.NativeDB Introduced: v323",
+  "codeBlocks": [
+    "// StopGameplayHint\nvoid STOP_GAMEPLAY_HINT(BOOL bStopImmediately);",
+    "NativeDB Introduced: v323"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CAM/StopGameplayHint.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

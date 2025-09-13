@@ -1,0 +1,23 @@
+{
+  "title": "STAT_SET_BOOL",
+  "breadcrumbs": [
+    "Native Reference",
+    "STATSAPI",
+    "STAT_SET_BOOL"
+  ],
+  "content": "0x4B33C4243DE0C4320x55D79DFB// StatSetBool\nBOOL STAT_SET_BOOL(Hash statName, BOOL value, BOOL save);Example:\n STATS::STAT_SET_BOOL(MISC::GET_HASH_KEY(\"MPPLY_MELEECHLENGECOMPLETED\"), trur, true);",
+  "codeBlocks": [
+    "// StatSetBool\nBOOL STAT_SET_BOOL(Hash statName, BOOL value, BOOL save);",
+    "Example:\n STATS::STAT_SET_BOOL(MISC::GET_HASH_KEY(\"MPPLY_MELEECHLENGECOMPLETED\"), trur, true);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/STATS/StatSetBool.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

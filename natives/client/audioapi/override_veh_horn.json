@@ -1,0 +1,25 @@
+{
+  "title": "OVERRIDE_VEH_HORN",
+  "breadcrumbs": [
+    "Native Reference",
+    "AUDIOAPI",
+    "OVERRIDE_VEH_HORN"
+  ],
+  "content": "0x3CDC1E622CCE03560x2ACAB783// OverrideVehHorn\nvoid OVERRIDE_VEH_HORN(Vehicle vehicle, BOOL override, int hornHash);Parameters:vehicle: The vehicle you want to change the horn on.override: Must be set to true. If set to false, the default horn hash will be restored.hornHash: A horn hash.Overrides the vehicle's horn hash.When changing this hash on a vehicle, _GET_VEHICLE_HORN_HASH will not return the 'overwritten' hash. It will still always return the default horn hash (same as GET_VEHICLE_DEFAULT_HORN).List of possible hashes (found in decompiled scripts):signedunsignedhex160482249516048224950x5FA7A5DF-126246500930325022870xB4C0500F-88955378934054135070xCAFA7C83-155794308627370242100xA323ACD2-131869661729762706790xB1664957-774000342872272930xFF89E59D-181514696724798203290x93CF0E29-33991935639550479400xEBBD3E04Examples:Lualocal vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n\n-- These are the most common horn hashes found in the decompiled scripts.\nlocal horns = {\n    1604822495,\n    3032502287,\n    3405413507,\n    2737024210,\n    2976270679,\n    4287227293,\n    2479820329,\n    3955047940\n}\n\nlocal randomHornHash = horns[math.random(1, #horns)]\n\nprint(randomHornHash)\n\nOverrideVehHorn(vehicle, true, randomHornHash)",
+  "codeBlocks": [
+    "// OverrideVehHorn\nvoid OVERRIDE_VEH_HORN(Vehicle vehicle, BOOL override, int hornHash);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n\n-- These are the most common horn hashes found in the decompiled scripts.\nlocal horns = {\n    1604822495,\n    3032502287,\n    3405413507,\n    2737024210,\n    2976270679,\n    4287227293,\n    2479820329,\n    3955047940\n}\n\nlocal randomHornHash = horns[math.random(1, #horns)]\n\n\nOverrideVehHorn(vehicle, true, randomHornHash)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/AUDIO/OverrideVehHorn.md",
+    "https://docs.fivem.net/natives/?_0xACB5DCCA1EC76840",
+    "https://docs.fivem.net/natives/?_0x02165D55000219AC",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

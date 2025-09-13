@@ -1,0 +1,24 @@
+{
+  "title": "GET_SHOP_PED_OUTFIT_COMPONENT_VARIANT",
+  "breadcrumbs": [
+    "Native Reference",
+    "FILESAPI",
+    "GET_SHOP_PED_OUTFIT_COMPONENT_VARIANT"
+  ],
+  "content": "0x19F2A026EDF0013F0x818534AC// GetShopPedOutfitComponentVariant\nBOOL GET_SHOP_PED_OUTFIT_COMPONENT_VARIANT(Hash outfit, int slot, Any* outComponentVariant);Parameters:outfit: A structure, see GET_SHOP_PED_QUERY_OUTFIT.slot: outfit slot.outComponentVariant: Old name:  _GET_PROP_FROM_OUTFIT",
+  "codeBlocks": [
+    "// GetShopPedOutfitComponentVariant\nBOOL GET_SHOP_PED_OUTFIT_COMPONENT_VARIANT(Hash outfit, int slot, Any* outComponentVariant);",
+    "-- Example usage for GET_SHOP_PED_OUTFIT_COMPONENT_VARIANT\nGetShopPedOutfitComponentVariant(0, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/FILES/GetShopPedOutfitComponentVariant.md",
+    "https://docs.fivem.net/natives/?_0x6D793F03A631FE56",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

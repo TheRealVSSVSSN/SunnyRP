@@ -1,0 +1,23 @@
+{
+  "title": "GET_AMMO_IN_PED_WEAPON",
+  "breadcrumbs": [
+    "Native Reference",
+    "WEAPONAPI",
+    "GET_AMMO_IN_PED_WEAPON"
+  ],
+  "content": "0x015A522136D7F9510x0C755733// GetAmmoInPedWeapon\nint GET_AMMO_IN_PED_WEAPON(Ped ped, Hash weaponhash);WEAPON::GET_AMMO_IN_PED_WEAPON(PLAYER::PLAYER_PED_ID(), a_0)  \nFrom decompiled scripts  \nReturns total ammo in weapon  \nGTALua Example :  \nnatives.WEAPON.GET_AMMO_IN_PED_WEAPON(plyPed, WeaponHash)",
+  "codeBlocks": [
+    "// GetAmmoInPedWeapon\nint GET_AMMO_IN_PED_WEAPON(Ped ped, Hash weaponhash);",
+    "WEAPON::GET_AMMO_IN_PED_WEAPON(PLAYER::PLAYER_PED_ID(), a_0)  \nFrom decompiled scripts  \nReturns total ammo in weapon  \nGTALua Example :  \nnatives.WEAPON.GET_AMMO_IN_PED_WEAPON(plyPed, WeaponHash)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/WEAPON/GetAmmoInPedWeapon.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

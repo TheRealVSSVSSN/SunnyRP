@@ -1,0 +1,23 @@
+{
+  "title": "GET_NEXT_AUDIBLE_BEAT",
+  "breadcrumbs": [
+    "Native Reference",
+    "AUDIOAPI",
+    "GET_NEXT_AUDIBLE_BEAT"
+  ],
+  "content": "0xC64A06D939F826F5// GetNextAudibleBeat\nBOOL GET_NEXT_AUDIBLE_BEAT(float* timeInSeconds, float* bpm, int* beatNum);Parameters:timeInSeconds: time in seconds until the start of the next beatbpm: current tempo in beats per minute,beatNum: integer beat within the barReturns: Returns information on beat information for any audible music.",
+  "codeBlocks": [
+    "// GetNextAudibleBeat\nBOOL GET_NEXT_AUDIBLE_BEAT(float* timeInSeconds, float* bpm, int* beatNum);",
+    "-- Example usage for GET_NEXT_AUDIBLE_BEAT\nGetNextAudibleBeat(0, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/AUDIO/GetNextAudibleBeat.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

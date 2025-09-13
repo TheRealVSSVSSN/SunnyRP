@@ -1,0 +1,24 @@
+{
+  "title": "GET_CLOSEST_MAJOR_VEHICLE_NODE",
+  "breadcrumbs": [
+    "Native Reference",
+    "PATHFINDAPI",
+    "GET_CLOSEST_MAJOR_VEHICLE_NODE"
+  ],
+  "content": "0x2EABE3B06F58C1BE0x04B5F15B// GetClosestMajorVehicleNode\nBOOL GET_CLOSEST_MAJOR_VEHICLE_NODE(float x, float y, float z, Vector3* outPosition, float zMeasureMult, int zTolerance);Parameters:x: X coordinatey: Y coordinatez: Z coordinateoutPosition: Pointer to the found nodes coordszMeasureMult: How strongly the difference in the Z direction should be weightedzTolerance: How far apart the Z coords have to be before zMeasureMult kicks inReturns: Returns the closest major vehicle node.Same as GET_CLOSEST_VEHICLE_NODE, but with the node flag GCNF_INCLUDE_SWITCHED_OFF_NODES set.",
+  "codeBlocks": [
+    "// GetClosestMajorVehicleNode\nBOOL GET_CLOSEST_MAJOR_VEHICLE_NODE(float x, float y, float z, Vector3* outPosition, float zMeasureMult, int zTolerance);",
+    "-- Example usage for GET_CLOSEST_MAJOR_VEHICLE_NODE\nGetClosestMajorVehicleNode(0.0, 0.0, 0.0, 0, 0.0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PATHFIND/GetClosestMajorVehicleNode.md",
+    "https://docs.fivem.net/natives/?_0x240A18690AE96513",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

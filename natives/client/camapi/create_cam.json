@@ -1,0 +1,24 @@
+{
+  "title": "CREATE_CAM",
+  "breadcrumbs": [
+    "Native Reference",
+    "CAMAPI",
+    "CREATE_CAM"
+  ],
+  "content": "0xC3981DCE61D9E13F0xE9BF2A7D// CreateCam\nCam CREATE_CAM(char* camName, BOOL active);Parameters:camName: A string representing the camera type, the game will convert the string into a joaat hash upon native execution.active: Set to true if you wish to make this new camera the active camera.Returns: A camera handle referencing the camera that was created.Creates a camera with the specified cam name, You can use SET_CAM_ natives to manipulate the camera.\\\nMake sure to call RENDER_SCRIPT_CAMS once the camera is created, or this won't have any visible effect.Camera names:DEFAULT_SCRIPTED_CAMERADEFAULT_ANIMATED_CAMERADEFAULT_SPLINE_CAMERADEFAULT_SCRIPTED_FLY_CAMERATIMED_SPLINE_CAMERACUSTOM_TIMED_SPLINE_CAMERAROUNDED_SPLINE_CAMERASMOOTHED_SPLINE_CAMERAExamples:LuaJavaScriptC#local cam = CreateCam(\"DEFAULT_SCRIPTED_CAMERA\", true)",
+  "codeBlocks": [
+    "// CreateCam\nCam CREATE_CAM(char* camName, BOOL active);",
+    "local cam = CreateCam(\"DEFAULT_SCRIPTED_CAMERA\", true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CAM/CreateCam.md",
+    "https://docs.fivem.net/natives/?_0x07E5B515DB0636FC",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

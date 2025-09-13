@@ -1,0 +1,24 @@
+{
+  "title": "DOES_ROPE_EXIST",
+  "breadcrumbs": [
+    "Native Reference",
+    "PHYSICSAPI",
+    "DOES_ROPE_EXIST"
+  ],
+  "content": "0xFD5448BE3111ED960x66E4A3AC// DoesRopeExist\nBOOL DOES_ROPE_EXIST(int* ropeId);Parameters:ropeId: The handle of the rope to checkReturns: Returns true if the rope exists, false otherwise.For an example on how to use this native please refer to ADD_ROPE",
+  "codeBlocks": [
+    "// DoesRopeExist\nBOOL DOES_ROPE_EXIST(int* ropeId);",
+    "-- Example usage for DOES_ROPE_EXIST\nDoesRopeExist(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PHYSICS/DoesRopeExist.md",
+    "https://docs.fivem.net/natives/?_0xE832D760399EB220",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

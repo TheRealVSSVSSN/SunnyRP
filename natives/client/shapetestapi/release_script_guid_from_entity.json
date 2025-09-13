@@ -1,0 +1,23 @@
+{
+  "title": "RELEASE_SCRIPT_GUID_FROM_ENTITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "SHAPETESTAPI",
+    "RELEASE_SCRIPT_GUID_FROM_ENTITY"
+  ],
+  "content": "0x2B3334BCA57CD7990xEC2AAF06// ReleaseScriptGuidFromEntity\nvoid RELEASE_SCRIPT_GUID_FROM_ENTITY(Entity entity);Parameters:entity: The entity handle to invalidate.Invalidates the entity handle passed by removing the fwScriptGuid from the entity. This should be used when receiving an\nambient entity from shape testing natives, but can also be used for other natives returning an 'irrelevant' entity handle.Old name:  _SHAPE_TEST_RESULT_ENTITY",
+  "codeBlocks": [
+    "// ReleaseScriptGuidFromEntity\nvoid RELEASE_SCRIPT_GUID_FROM_ENTITY(Entity entity);",
+    "local entity = PlayerPedId()\n-- Example usage for RELEASE_SCRIPT_GUID_FROM_ENTITY\nReleaseScriptGuidFromEntity(entity)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/SHAPETEST/ReleaseScriptGuidFromEntity.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}
