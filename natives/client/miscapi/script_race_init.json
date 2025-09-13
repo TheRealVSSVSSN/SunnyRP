@@ -1,0 +1,23 @@
+{
+  "title": "SCRIPT_RACE_INIT",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "SCRIPT_RACE_INIT"
+  ],
+  "content": "0x0A60017F841A54F20x2D33F15A// ScriptRaceInit\nvoid SCRIPT_RACE_INIT(int numCheckpoints, int numLaps, int numPlayers, Player localPlayer);Parameters:numCheckpoints: The total number of checkpoints in the racenumLaps: The total number of laps in the race.numPlayers: The total number of players participating in the race.localPlayer: Local player in the race.Initializes a script race in GTA:Online and sets up the helper split time system.NativeDB Introduced: v323",
+  "codeBlocks": [
+    "// ScriptRaceInit\nvoid SCRIPT_RACE_INIT(int numCheckpoints, int numLaps, int numPlayers, Player localPlayer);",
+    "NativeDB Introduced: v323"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/ScriptRaceInit.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

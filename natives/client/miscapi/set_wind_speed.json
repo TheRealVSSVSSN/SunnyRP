@@ -1,0 +1,23 @@
+{
+  "title": "SET_WIND_SPEED",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "SET_WIND_SPEED"
+  ],
+  "content": "0xEE09ECEDBABE47FC0x45705F94// SetWindSpeed\nvoid SET_WIND_SPEED(float speed);Parameters:speed: wind speed in meters per secondUsing this native will clamp the wind speed value to a range of 0.0 - 12.0. The wind speed will stay persistent until it is reset (see examples).Examples:LuaJavaScriptC#-- Sets the wind speed to 0 meters per second\nSetWind(0)\n\n-- Sets the wind to 11.99 m/s\nSetWind(11.99)\n\n-- Allows the game dynamically change the wind speed again\nSetWind(-1)",
+  "codeBlocks": [
+    "// SetWindSpeed\nvoid SET_WIND_SPEED(float speed);",
+    "-- Sets the wind speed to 0 meters per second\nSetWind(0)\n\n-- Sets the wind to 11.99 m/s\nSetWind(11.99)\n\n-- Allows the game dynamically change the wind speed again\nSetWind(-1)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/SetWindSpeed.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

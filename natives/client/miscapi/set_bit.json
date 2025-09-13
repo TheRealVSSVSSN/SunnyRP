@@ -1,0 +1,23 @@
+{
+  "title": "SET_BIT",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "SET_BIT"
+  ],
+  "content": "0x933D6A9EEC1BACD00x4EFE7E6B// SetBit\nvoid SET_BIT(int* address, int offset);This sets bit [offset] of [address] to on.\nThe offsets used are different bits to be toggled on and off, typically there is only one address used in a script.\nExample:\nMISC::SET_BIT(&bitAddress, 1);\nTo check if this bit has been enabled:\nMISC::IS_BIT_SET(bitAddress, 1); // will return 1 afterwards\nPlease note, this method may assign a value to [address] when used.",
+  "codeBlocks": [
+    "// SetBit\nvoid SET_BIT(int* address, int offset);",
+    "This sets bit [offset] of [address] to on.\nThe offsets used are different bits to be toggled on and off, typically there is only one address used in a script.\nExample:\nMISC::SET_BIT(&bitAddress, 1);\nTo check if this bit has been enabled:\nMISC::IS_BIT_SET(bitAddress, 1); // will return 1 afterwards\nPlease note, this method may assign a value to [address] when used.\n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/SetBit.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

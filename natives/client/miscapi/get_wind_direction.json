@@ -1,0 +1,24 @@
+{
+  "title": "GET_WIND_DIRECTION",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "GET_WIND_DIRECTION"
+  ],
+  "content": "0x1F400FEF721170DA0x89499A0D// GetWindDirection\nVector3 GET_WIND_DIRECTION();Returns: The wind directionUsed for hunting in singleplayer and for golfing in both sp and online. The GET_HEADING_FROM_VECTOR_2D native can be used to get the wind heading from the direction.Examples:LuaJavaScriptC#CreateThread(function()\n    while true do\n        local windDirection = GetWindDirection()\n\n        -- Gets the wind direction in degrees (math.atan converts the inverse tangent into radians and then math.deg converts it from radians to degrees)\n        local degrees = math.deg(math.atan(windDirection.x, windDirection.y))\n        print(\"wind direction in degrees:\", degrees)\n\n        -- Draws an airplane marker above the player's head to show the wind direction\n        local coords = GetEntityCoords(PlayerPedId())\n        DrawMarker(7, coords.x, coords.y, coords.z + 1.0, windDirection.x, windDirection.y, 0.0, 0.0, 0.0, 0.0, 2.0, 2.0, 2.0, 255, 128, 0, 50, false, false, 2, false, nil, nil, false)\n\n        -- Get world heading from the direction\n        print(\"wind direction in world heading:\", GetHeadingFromVector_2d(windDirection.x, windDirection.y))\n\n        Wait(0)\n    end\nend)",
+  "codeBlocks": [
+    "// GetWindDirection\nVector3 GET_WIND_DIRECTION();",
+    "CreateThread(function()\n    while true do\n        local windDirection = GetWindDirection()\n\n        -- Gets the wind direction in degrees (math.atan converts the inverse tangent into radians and then math.deg converts it from radians to degrees)\n        local degrees = math.deg(math.atan(windDirection.x, windDirection.y))\n        print(\"wind direction in degrees:\", degrees)\n\n        -- Draws an airplane marker above the player's head to show the wind direction\n        local coords = GetEntityCoords(PlayerPedId())\n        DrawMarker(7, coords.x, coords.y, coords.z + 1.0, windDirection.x, windDirection.y, 0.0, 0.0, 0.0, 0.0, 2.0, 2.0, 2.0, 255, 128, 0, 50, false, false, 2, false, nil, nil, false)\n\n        -- Get world heading from the direction\n        print(\"wind direction in world heading:\", GetHeadingFromVector_2d(windDirection.x, windDirection.y))\n\n        Wait(0)\n    end\nend)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/GetWindDirection.md",
+    "https://docs.fivem.net/natives/?_0x2FFB6B224F4B2926",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

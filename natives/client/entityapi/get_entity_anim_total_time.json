@@ -1,0 +1,24 @@
+{
+  "title": "GET_ENTITY_ANIM_TOTAL_TIME",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENTITYAPI",
+    "GET_ENTITY_ANIM_TOTAL_TIME"
+  ],
+  "content": "0x50BD2730B191E3600x433A9D18// GetEntityAnimTotalTime\nfloat GET_ENTITY_ANIM_TOTAL_TIME(Entity entity, char* animDict, char* animName);Returns a float value representing animation's total playtime in milliseconds.  \nExample:  \nGET_ENTITY_ANIM_TOTAL_TIME(PLAYER_ID(),\"amb@world_human_yoga@female@base\",\"base_b\")   \nreturn 20800.000000  \nAnimations list",
+  "codeBlocks": [
+    "// GetEntityAnimTotalTime\nfloat GET_ENTITY_ANIM_TOTAL_TIME(Entity entity, char* animDict, char* animName);",
+    "Returns a float value representing animation's total playtime in milliseconds.  \nExample:  \nGET_ENTITY_ANIM_TOTAL_TIME(PLAYER_ID(),\"amb@world_human_yoga@female@base\",\"base_b\")   \nreturn 20800.000000  \n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/GetEntityAnimTotalTime.md",
+    "https://alexguirre.github.io/animations-list/",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

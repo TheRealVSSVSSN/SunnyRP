@@ -1,0 +1,23 @@
+{
+  "title": "GET_ENTITY_MODEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENTITYAPI",
+    "GET_ENTITY_MODEL"
+  ],
+  "content": "0x9F47B058362C84B50xDAFCB3EC// GetEntityModel\nHash GET_ENTITY_MODEL(Entity entity);Parameters:entity: The entity to get the model for.Returns: The model hash of the entity.Returns the model hash from an entity.Examples:LuaJavaScriptC#local hash = GetEntityModel(PlayerPedId())\n\nif hash == `mp_m_freemode_01` then\n    print(\"This player is using the male freemode model.\")\nend",
+  "codeBlocks": [
+    "// GetEntityModel\nHash GET_ENTITY_MODEL(Entity entity);",
+    "local hash = GetEntityModel(PlayerPedId())\n\nif hash == `mp_m_freemode_01` then\n    print(\"This player is using the male freemode model.\")\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/GetEntityModel.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

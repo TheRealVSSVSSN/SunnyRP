@@ -1,0 +1,23 @@
+{
+  "title": "GET_ENTITY_HEIGHT_ABOVE_GROUND",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENTITYAPI",
+    "GET_ENTITY_HEIGHT_ABOVE_GROUND"
+  ],
+  "content": "0x1DD55701034110E50x57F56A4D// GetEntityHeightAboveGround\nfloat GET_ENTITY_HEIGHT_ABOVE_GROUND(Entity entity);Return height (z-dimension) above ground.   \nExample: The pilot in a titan plane is 1.844176 above ground.  \nHow can i convert it to meters?  \nEverything seems to be in meters, probably this too.",
+  "codeBlocks": [
+    "// GetEntityHeightAboveGround\nfloat GET_ENTITY_HEIGHT_ABOVE_GROUND(Entity entity);",
+    "Return height (z-dimension) above ground.   \nExample: The pilot in a titan plane is 1.844176 above ground.  \nHow can i convert it to meters?  \nEverything seems to be in meters, probably this too.  \n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/GetEntityHeightAboveGround.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

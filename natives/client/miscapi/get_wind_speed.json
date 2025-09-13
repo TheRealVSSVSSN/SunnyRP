@@ -1,0 +1,23 @@
+{
+  "title": "GET_WIND_SPEED",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "GET_WIND_SPEED"
+  ],
+  "content": "0xA8CF1CC0AFCD3F120x098F0F3C// GetWindSpeed\nfloat GET_WIND_SPEED();Returns: The wind speed in meters per secondExamples:LuaJavaScriptC#local beaufortScale = {\n    [0] = 0.2,\n    [1] = 1.5,\n    [2] = 3.3,\n    [3] = 5.4,\n    [4] = 7.9,\n    [5] = 10.7,\n    [6] = 13.8,\n    [7] = 17.1,\n    [8] = 20.7,\n    [9] = 24.4,\n    [10] = 28.4,\n    [11] = 32.6,\n    [12] = 32.7\n}\n\nlocal windSpeed = GetWindSpeed()\nfor i = 0, 12 do\n    if windSpeed <= beaufortScale[i] or i == 12 then\n        print(string.format(\"The current wind speed (%.2f m/s) is the equivalent to Beaufort number %s on the Beaufort scale\", windSpeed, i))\n        break\n    end\nend",
+  "codeBlocks": [
+    "// GetWindSpeed\nfloat GET_WIND_SPEED();",
+    "local beaufortScale = {\n    [0] = 0.2,\n    [1] = 1.5,\n    [2] = 3.3,\n    [3] = 5.4,\n    [4] = 7.9,\n    [5] = 10.7,\n    [6] = 13.8,\n    [7] = 17.1,\n    [8] = 20.7,\n    [9] = 24.4,\n    [10] = 28.4,\n    [11] = 32.6,\n    [12] = 32.7\n}\n\nlocal windSpeed = GetWindSpeed()\nfor i = 0, 12 do\n    if windSpeed <= beaufortScale[i] or i == 12 then\n        print(string.format(\"The current wind speed (%.2f m/s) is the equivalent to Beaufort number %s on the Beaufort scale\", windSpeed, i))\n        break\n    end\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/GetWindSpeed.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

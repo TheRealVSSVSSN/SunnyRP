@@ -1,0 +1,23 @@
+{
+  "title": "GET_ENTITY_POPULATION_TYPE",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENTITYAPI",
+    "GET_ENTITY_POPULATION_TYPE"
+  ],
+  "content": "0xF6F5161F4534EDFF0xFC30DDFF// GetEntityPopulationType\nint GET_ENTITY_POPULATION_TYPE(Entity entity);Parameters:entity: The entity to obtain the population type from.Returns: A population type, from the enumeration above.A population type, from the following enum: https://alloc8or.re/gta5/doc/enums/ePopulationType.txt",
+  "codeBlocks": [
+    "// GetEntityPopulationType\nint GET_ENTITY_POPULATION_TYPE(Entity entity);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/GetEntityPopulationType.md",
+    "https://alloc8or.re/gta5/doc/enums/ePopulationType.txt",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

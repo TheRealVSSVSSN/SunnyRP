@@ -1,0 +1,23 @@
+{
+  "title": "GET_ENTITY_HEADING_FROM_EULERS",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENTITYAPI",
+    "GET_ENTITY_HEADING_FROM_EULERS"
+  ],
+  "content": "0x846BF6291198A71E0x9320E642// GetEntityHeadingFromEulers\nfloat GET_ENTITY_HEADING_FROM_EULERS(Entity entity);Parameters:entity: The entity to get the heading from.Returns: Returns a float representing the entity's heading from eulers.Gets the heading of the entity physics in degrees, which tends to be more accurate than just GET_ENTITY_HEADING. This can be clearly seen while, for example, ragdolling a ped/player.Old name:  _GET_ENTITY_PHYSICS_HEADING",
+  "codeBlocks": [
+    "// GetEntityHeadingFromEulers\nfloat GET_ENTITY_HEADING_FROM_EULERS(Entity entity);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/GetEntityHeadingFromEulers.md",
+    "https://docs.fivem.net/natives/?_0xE83D4F9BA2A38914",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

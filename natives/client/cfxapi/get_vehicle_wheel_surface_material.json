@@ -1,0 +1,22 @@
+{
+  "title": "GET_VEHICLE_WHEEL_SURFACE_MATERIAL",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_VEHICLE_WHEEL_SURFACE_MATERIAL"
+  ],
+  "content": "0xA7F04022// GetVehicleWheelSurfaceMaterial\nint GET_VEHICLE_WHEEL_SURFACE_MATERIAL(Vehicle vehicle, int wheelIndex);Parameters:vehicle: The vehicle to obtain data for.wheelIndex: Index of wheel, 0-3.Returns: Integer representing the index of the current surface material of that wheel. Check materials.dat for the indexes.",
+  "codeBlocks": [
+    "// GetVehicleWheelSurfaceMaterial\nint GET_VEHICLE_WHEEL_SURFACE_MATERIAL(Vehicle vehicle, int wheelIndex);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetVehicleWheelSurfaceMaterial.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "title": "GET_VEHICLE_WHEEL_TIRE_COLLIDER_WIDTH",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_VEHICLE_WHEEL_TIRE_COLLIDER_WIDTH"
+  ],
+  "content": "0xEF65929C// GetVehicleWheelTireColliderWidth\nfloat GET_VEHICLE_WHEEL_TIRE_COLLIDER_WIDTH(Vehicle vehicle, int wheelIndex);Parameters:vehicle: The vehicle to obtain data for.wheelIndex: Index of wheel, 0-3.Returns: Float representing width of the wheel collider.",
+  "codeBlocks": [
+    "// GetVehicleWheelTireColliderWidth\nfloat GET_VEHICLE_WHEEL_TIRE_COLLIDER_WIDTH(Vehicle vehicle, int wheelIndex);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetVehicleWheelTireColliderWidth.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

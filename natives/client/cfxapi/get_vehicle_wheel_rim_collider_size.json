@@ -1,0 +1,22 @@
+{
+  "title": "GET_VEHICLE_WHEEL_RIM_COLLIDER_SIZE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_VEHICLE_WHEEL_RIM_COLLIDER_SIZE"
+  ],
+  "content": "0xCEE21AB2// GetVehicleWheelRimColliderSize\nfloat GET_VEHICLE_WHEEL_RIM_COLLIDER_SIZE(Vehicle vehicle, int wheelIndex);Parameters:vehicle: The vehicle to obtain data for.wheelIndex: Index of wheel, 0-3.Returns: Float representing size of the rim collider. Not sure what it is used for, probably to detect whether bullets hit rim or tire and puncture it (and to determine size of the wheel when tire is fully blown).",
+  "codeBlocks": [
+    "// GetVehicleWheelRimColliderSize\nfloat GET_VEHICLE_WHEEL_RIM_COLLIDER_SIZE(Vehicle vehicle, int wheelIndex);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetVehicleWheelRimColliderSize.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

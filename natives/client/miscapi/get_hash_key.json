@@ -1,0 +1,23 @@
+{
+  "title": "GET_HASH_KEY",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "GET_HASH_KEY"
+  ],
+  "content": "0xD24D37CC275948CC0x98EFF6F1// GetHashKey\nHash GET_HASH_KEY(char* string);Parameters:string: The string to hash.Returns: The hash of string.This native converts its past string to hash. It is hashed using jenkins one at a time method.Examples:Lualocal zentorno = GetHashKey('zentorno')\n\nif GetEntityModel(car) == zentorno then\n    print('Car is a zentorno!')\nend",
+  "codeBlocks": [
+    "// GetHashKey\nHash GET_HASH_KEY(char* string);",
+    "local zentorno = GetHashKey('zentorno')\n\nif GetEntityModel(car) == zentorno then\n    print('Car is a zentorno!')\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/GetHashKey.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

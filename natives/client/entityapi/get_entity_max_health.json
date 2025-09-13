@@ -1,0 +1,23 @@
+{
+  "title": "GET_ENTITY_MAX_HEALTH",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENTITYAPI",
+    "GET_ENTITY_MAX_HEALTH"
+  ],
+  "content": "0x15D757606D170C3C0xC7AE6AA1// GetEntityMaxHealth\nint GET_ENTITY_MAX_HEALTH(Entity entity);Return an integer value of entity's maximum health.  \nExample:  \n- Player = 200",
+  "codeBlocks": [
+    "// GetEntityMaxHealth\nint GET_ENTITY_MAX_HEALTH(Entity entity);",
+    "Return an integer value of entity's maximum health.  \nExample:  \n- Player = 200  \n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/GetEntityMaxHealth.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

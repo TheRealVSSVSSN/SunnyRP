@@ -1,0 +1,24 @@
+{
+  "title": "GET_GROUND_Z_AND_NORMAL_FOR_3D_COORD",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "GET_GROUND_Z_AND_NORMAL_FOR_3D_COORD"
+  ],
+  "content": "0x8BDC7BFC57A81E760x64D91CED// GetGroundZAndNormalFor_3dCoord\nBOOL GET_GROUND_Z_AND_NORMAL_FOR_3D_COORD(float x, float y, float z, float* groundZ, Vector3* normal);Parameters:x: X-coordinate of the point to check.y: Y-coordinate of the point to check.z: Z-coordinate of the point to check.groundZ: A pointer to a float where the ground Z-coordinate will be stored if found.normal: A pointer to a Vector3 structure where the surface normal at the ground point will be stored.Returns: Returns true if ground is found below the given coordinates and the surface normal could be determined, otherwise false.Attempts to identify the highest ground Z-coordinate and determine the corresponding surface normal directly beneath a specified 3D coordinate.NativeDB Introduced: v323Old name:  _GET_GROUND_Z_COORD_WITH_OFFSETSExamples:LuaJavaScriptC#local x, y, z = 100.0, -200.0, 50.0\nlocal success, groundZ, normal = GetGroundZAndNormalFor_3dCoord(x, y, z)\n\nif success then\n    print(\"Ground Z found at: \", groundZ)\n    print(\"Surface normal is: \", normal.x, normal.y, normal.z)\nelse\n    print(\"No ground found.\")\nend",
+  "codeBlocks": [
+    "// GetGroundZAndNormalFor_3dCoord\nBOOL GET_GROUND_Z_AND_NORMAL_FOR_3D_COORD(float x, float y, float z, float* groundZ, Vector3* normal);",
+    "NativeDB Introduced: v323",
+    "local x, y, z = 100.0, -200.0, 50.0\nlocal success, groundZ, normal = GetGroundZAndNormalFor_3dCoord(x, y, z)\n\nif success then\n    print(\"Ground Z found at: \", groundZ)\n    print(\"Surface normal is: \", normal.x, normal.y, normal.z)\nelse\n    print(\"No ground found.\")\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/GetGroundZAndNormalFor_3dCoord.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

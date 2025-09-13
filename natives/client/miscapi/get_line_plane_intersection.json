@@ -1,0 +1,24 @@
+{
+  "title": "GET_LINE_PLANE_INTERSECTION",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "GET_LINE_PLANE_INTERSECTION"
+  ],
+  "content": "0xF56DFB7B61BE72760xC6CC812C// GetLinePlaneIntersection\nBOOL GET_LINE_PLANE_INTERSECTION(float x1, float y1, float z1, float x2, float y2, float z2, float planeX, float planeY, float planeZ, float planeNormalX, float planeNormalY, float planeNormalZ, float* intersectionParameter);Parameters:x1: The X-coordinate of the first point of the line segment.y1: The Y-coordinate of the first point of the line segment.z1: The Z-coordinate of the first point of the line segment. Together, x1, y1, and z1 define the starting point of the line segment.x2: The X-coordinate of the second point of the line segment.y2: The Y-coordinate of the second point of the line segment.z2: The Z-coordinate of the second point of the line segment. Together, x2, y2, and z2 define the ending point of the line segment.planeX: The X-coordinate of a point on the plane. This, along with planeY and planeZ, specifies a point that lies on the plane's surface.planeY: The Y-coordinate of a point on the plane.planeZ: The Z-coordinate of a point on the plane.planeNormalX: The X-component of the plane's normal vector. The normal vector is perpendicular to the plane's surface and defines its orientation.planeNormalY: The Y-component of the plane's normal vector.planeNormalZ: The Z-component of the plane's normal vector. Together, planeNormalX, planeNormalY, and planeNormalZ fully describe the plane's orientation in 3D space.intersectionParameter: A pointer to a float. This parameter is used to return the value of t at which the line segment intersects the plane. The value of t is a scalar multiplier that can be used to calculate the exact intersection point on the line segment. If the line does not intersect the plane, the value of t is not meaningful.Returns: Returns true if the line segment intersects the plane, in which case the intersectionParameter will contain the intersection point's parameter value. Returns false if there is no intersection, making the intersectionParameter value irrelevant.Determines whether a line segment intersects a plane and, if so, returns the parameter value at which this intersection occurs.NativeDB Introduced: v323Examples:LuaJavaScriptC#-- Define the line segment with start and end points\nlocal startX, startY, startZ = 100.0, -200.0, 50.0\nlocal endX, endY, endZ = 200.0, -100.0, 50.0\n\n-- Define the plane with a point on the plane and the normal vector\nlocal planeX, planeY, planeZ = 150.0, -150.0, 50.0\nlocal normalX, normalY, normalZ = 0.0, 0.0, 1.0\n\n-- Call the native\nlocal success, intersectionParameter = GetLinePlaneIntersection(startX, startY, startZ, endX, endY, endZ, planeX, planeY, planeZ, normalX, normalY, normalZ, intersectionParameter)\n\nif success then\n    -- Calculate the intersection point using intersectionParameter\n    local intersectX = startX + (endX - startX) * intersectionParameter\n    local intersectY = startY + (endY - startY) * intersectionParameter\n    local intersectZ = startZ + (endZ - startZ) * intersectionParameter\n    \n    print(\"Intersection point at: (\" .. intersectX .. \", \" .. intersectY .. \", \" .. intersectZ .. \")\")\nelse\n    print(\"No intersection found.\")\nend",
+  "codeBlocks": [
+    "// GetLinePlaneIntersection\nBOOL GET_LINE_PLANE_INTERSECTION(float x1, float y1, float z1, float x2, float y2, float z2, float planeX, float planeY, float planeZ, float planeNormalX, float planeNormalY, float planeNormalZ, float* intersectionParameter);",
+    "NativeDB Introduced: v323",
+    "-- Define the line segment with start and end points\nlocal startX, startY, startZ = 100.0, -200.0, 50.0\nlocal endX, endY, endZ = 200.0, -100.0, 50.0\n\n-- Define the plane with a point on the plane and the normal vector\nlocal planeX, planeY, planeZ = 150.0, -150.0, 50.0\nlocal normalX, normalY, normalZ = 0.0, 0.0, 1.0\n\n-- Call the native\nlocal success, intersectionParameter = GetLinePlaneIntersection(startX, startY, startZ, endX, endY, endZ, planeX, planeY, planeZ, normalX, normalY, normalZ, intersectionParameter)\n\nif success then\n    -- Calculate the intersection point using intersectionParameter\n    local intersectX = startX + (endX - startX) * intersectionParameter\n    local intersectY = startY + (endY - startY) * intersectionParameter\n    local intersectZ = startZ + (endZ - startZ) * intersectionParameter\n    \n    print(\"Intersection point at: (\" .. intersectX .. \", \" .. intersectY .. \", \" .. intersectZ .. \")\")\nelse\n    print(\"No intersection found.\")\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/GetLinePlaneIntersection.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

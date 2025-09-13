@@ -1,0 +1,23 @@
+{
+  "title": "CLEAR_BIT",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "CLEAR_BIT"
+  ],
+  "content": "0xE80492A9AC099A930x8BC9E618// ClearBit\nvoid CLEAR_BIT(int* address, int offset);This sets bit [offset] of [address] to off.\nExample:\nMISC::CLEAR_BIT(&bitAddress, 1);\nTo check if this bit has been enabled:\nMISC::IS_BIT_SET(bitAddress, 1); // will return 0 afterwards",
+  "codeBlocks": [
+    "// ClearBit\nvoid CLEAR_BIT(int* address, int offset);",
+    "This sets bit [offset] of [address] to off.\nExample:\nMISC::CLEAR_BIT(&bitAddress, 1);\nTo check if this bit has been enabled:\nMISC::IS_BIT_SET(bitAddress, 1); // will return 0 afterwards\n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/ClearBit.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

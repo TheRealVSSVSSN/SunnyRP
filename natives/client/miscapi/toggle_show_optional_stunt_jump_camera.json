@@ -1,0 +1,23 @@
+{
+  "title": "TOGGLE_SHOW_OPTIONAL_STUNT_JUMP_CAMERA",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "TOGGLE_SHOW_OPTIONAL_STUNT_JUMP_CAMERA"
+  ],
+  "content": "0xFB80AB299D2EE1BD// ToggleShowOptionalStuntJumpCamera\nvoid TOGGLE_SHOW_OPTIONAL_STUNT_JUMP_CAMERA(BOOL toggle);Parameters:toggle: Set to true to enable the optional stunt jump camera angles, or false to disable them and use the default camera view.Enable/disable optional stunt camera.NativeDB Introduced: v757",
+  "codeBlocks": [
+    "// ToggleShowOptionalStuntJumpCamera\nvoid TOGGLE_SHOW_OPTIONAL_STUNT_JUMP_CAMERA(BOOL toggle);",
+    "NativeDB Introduced: v757"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/ToggleShowOptionalStuntJumpCamera.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "IS_ENTITY_AT_ENTITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENTITYAPI",
+    "IS_ENTITY_AT_ENTITY"
+  ],
+  "content": "0x751B70C3D034E1870xDABDCB52// IsEntityAtEntity\nBOOL IS_ENTITY_AT_ENTITY(Entity entity, Entity target, float xSize, float ySize, float zSize, BOOL highlightArea, BOOL do3dCheck, int transportMode);Parameters:entity: The source entity handle.target: The target entity handle.xSize: The x size of the axis aligned box around the target entity to check.ySize: The y size of the axis aligned box around the target entity to check.zSize: The z size of the axis aligned box around the target entity to check.highlightArea: do3dCheck: If the check should be 2d or 3d.transportMode: The transport mode. Returns early if the entity is not in that mode of transportation.Checks if entity is within the specified axis aligned box around the target entity.enum eTransportMode {\n    SCRIPT_TM_ANY = 0,\n    SCRIPT_TM_ON_FOOT = 1,\n    SCRIPT_TM_IN_VEHICLE = 2\n};",
+  "codeBlocks": [
+    "// IsEntityAtEntity\nBOOL IS_ENTITY_AT_ENTITY(Entity entity, Entity target, float xSize, float ySize, float zSize, BOOL highlightArea, BOOL do3dCheck, int transportMode);",
+    "enum eTransportMode {\n    SCRIPT_TM_ANY = 0,\n    SCRIPT_TM_ON_FOOT = 1,\n    SCRIPT_TM_IN_VEHICLE = 2\n};\n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/IsEntityAtEntity.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

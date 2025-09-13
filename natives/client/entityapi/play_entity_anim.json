@@ -1,0 +1,24 @@
+{
+  "title": "PLAY_ENTITY_ANIM",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENTITYAPI",
+    "PLAY_ENTITY_ANIM"
+  ],
+  "content": "0x7FB218262B8107010x878753D5// PlayEntityAnim\nBOOL PLAY_ENTITY_ANIM(Entity entity, char* animName, char* animDict, float fBlendDelta, BOOL bLoop, BOOL bHoldLastFrame, BOOL bDriveToPose, float fStartPhase, int iFlags);Parameters:entity: The entity handle to play the animation on.animName: The name of the animation to play.animDict: The name of the animation dictionary to use.fBlendDelta: Blend in and out time.bLoop: Sets AF_LOOPING in the flags.bHoldLastFrame: Sets AF_HOLD_LAST_FRAME in the flags.bDriveToPose: unusedfStartPhase: Clamped between 0.0 and 1.0. Sets the start phase of the animation.iFlags: The flags to use when playing the animation. See TASK_PLAY_ANIM.Animations list",
+  "codeBlocks": [
+    "// PlayEntityAnim\nBOOL PLAY_ENTITY_ANIM(Entity entity, char* animName, char* animDict, float fBlendDelta, BOOL bLoop, BOOL bHoldLastFrame, BOOL bDriveToPose, float fStartPhase, int iFlags);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/PlayEntityAnim.md",
+    "https://docs.fivem.net/natives/?_0xEA47FE3719165B94",
+    "https://alexguirre.github.io/animations-list/",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

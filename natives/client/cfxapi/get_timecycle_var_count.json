@@ -1,0 +1,23 @@
+{
+  "title": "GET_TIMECYCLE_VAR_COUNT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_TIMECYCLE_VAR_COUNT"
+  ],
+  "content": "0x838B34D8// GetTimecycleVarCount\nint GET_TIMECYCLE_VAR_COUNT();Returns: The amount of available variables for timecycle modifiers.Returns the amount of variables available to be applied on timecycle modifiers.Examples:Lualocal varCount = GetTimecycleVarCount()\n\nif varCount ~= 0 then\n  for index = 0, varCount - 1 do\n    local varName = GetTimecycleVarNameByIndex(index)\n    local varDefault = GetTimecycleVarDefaultValueByIndex(index)\n\n    print(string.format(\"[%d] %s (%f)\", index, varName, varDefault))\n  end\nend",
+  "codeBlocks": [
+    "// GetTimecycleVarCount\nint GET_TIMECYCLE_VAR_COUNT();",
+    "local varCount = GetTimecycleVarCount()\n\nif varCount ~= 0 then\n  for index = 0, varCount - 1 do\n    local varName = GetTimecycleVarNameByIndex(index)\n    local varDefault = GetTimecycleVarDefaultValueByIndex(index)\n\n    print(string.format(\"[%d] %s (%f)\", index, varName, varDefault))\n  end\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetTimecycleVarCount.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

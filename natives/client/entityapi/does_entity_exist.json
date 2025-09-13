@@ -1,0 +1,23 @@
+{
+  "title": "DOES_ENTITY_EXIST",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENTITYAPI",
+    "DOES_ENTITY_EXIST"
+  ],
+  "content": "0x7239B21A38F536BA0x3AC90869// DoesEntityExist\nBOOL DOES_ENTITY_EXIST(Entity entity);Parameters:entity: The entity to check if it exists.Returns: Whether the entity exists or not.Checks whether an entity exists in the game world.Examples:LuaJavaScriptC#local currentVehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n\nif DoesEntityExist(currentVehicle) then\n    DeleteEntity(currentVehicle)\nend",
+  "codeBlocks": [
+    "// DoesEntityExist\nBOOL DOES_ENTITY_EXIST(Entity entity);",
+    "local currentVehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n\nif DoesEntityExist(currentVehicle) then\n    DeleteEntity(currentVehicle)\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/DoesEntityExist.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "CLEAR_AREA_OF_COPS",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "CLEAR_AREA_OF_COPS"
+  ],
+  "content": "0x04F8FC8FCF58F88D0x95C53824// ClearAreaOfCops\nvoid CLEAR_AREA_OF_COPS(float x, float y, float z, float radius, BOOL createNetEvent);Parameters:x: The x coordinate of where to clear cops.y: The y coordinate of where to clear cops.z: The z coordinate of where to clear cops.radius: The area radius to clear cops.createNetEvent: specifies whether a CClearAreaEvent event of should be created for online use.Clears an area of cops at the given coordinates and radius.Examples:Lua-- Clear the area, do also create an event\nClearAreaOfCops(0.0, 0.0, 0.0, 10000.0, true)",
+  "codeBlocks": [
+    "// ClearAreaOfCops\nvoid CLEAR_AREA_OF_COPS(float x, float y, float z, float radius, BOOL createNetEvent);",
+    "-- Clear the area, do also create an event\nClearAreaOfCops(0.0, 0.0, 0.0, 10000.0, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/ClearAreaOfCops.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

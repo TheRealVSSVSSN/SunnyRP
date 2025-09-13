@@ -1,0 +1,24 @@
+{
+  "title": "SET_WIND_DIRECTION",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "SET_WIND_DIRECTION"
+  ],
+  "content": "0xEB0F4468467B45280x381AEEE9// SetWindDirection\nvoid SET_WIND_DIRECTION(float direction);Parameters:direction: the wind direction in radiansSets the wind direction. The wind direction will stay persistent until it is reset (see examples).Examples:LuaJavaScriptC#-- 180 degrees, wind will blow from the south\nSetWindDirection(math.rad(180.0))\n\n-- Allows the game to dynamically change the wind direction again\nSetWindDirection(-1)",
+  "codeBlocks": [
+    "// SetWindDirection\nvoid SET_WIND_DIRECTION(float direction);",
+    "-- 180 degrees, wind will blow from the south\nSetWindDirection(math.rad(180.0))\n\n-- Allows the game to dynamically change the wind direction again\nSetWindDirection(-1)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/SetWindDirection.md",
+    "https://en.wikipedia.org/wiki/Wind_direction",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}
