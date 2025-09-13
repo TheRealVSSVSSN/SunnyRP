@@ -1,0 +1,25 @@
+{
+  "title": "GET_GAME_POOL",
+  "content": "0x2B9D4F50// GetGamePool\nobject GET_GAME_POOL(char* poolName);Parameters:poolName: The pool name to get a list of entities from.Returns: An array containing entity handles for each entity in the named pool.Returns a list of entity handles (script GUID) for all entities in the specified pool - the data returned is an array as\nfollows:[ 770, 1026, 1282, 1538, 1794, 2050, 2306, 2562, 2818, 3074, 3330, 3586, 3842, 4098, 4354, 4610, ...]Supported poolsCPed: Peds (including animals) and players.CObject: Objects (props), doors, and projectiles.CNetObject: Networked objectsCVehicle: Vehicles.CPickup: Pickups.Examples:Lualocal vehiclePool = GetGamePool('CVehicle') -- Get the list of vehicles (entities) from the pool\nfor i = 1, #vehiclePool do -- loop through each vehicle (entity)\n    if GetPedInVehicleSeat(vehiclePool[i], -1) == 0 then\n        DeleteEntity(vehiclePool[i]) -- Delete vehicles (entities) that don't have a driver\n    end\nend",
+  "codeBlocks": [
+    "// GetGamePool\nobject GET_GAME_POOL(char* poolName);",
+    "[ 770, 1026, 1282, 1538, 1794, 2050, 2306, 2562, 2818, 3074, 3330, 3586, 3842, 4098, 4354, 4610, ...]",
+    "local vehiclePool = GetGamePool('CVehicle') -- Get the list of vehicles (entities) from the pool\nfor i = 1, #vehiclePool do -- loop through each vehicle (entity)\n    if GetPedInVehicleSeat(vehiclePool[i], -1) == 0 then\n        DeleteEntity(vehiclePool[i]) -- Delete vehicles (entities) that don't have a driver\n    end\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetGamePool.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_GAME_POOL"
+  ],
+  "tags": [
+    "client",
+    "server"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "title": "SET_HEALTH_CONFIG_FATIGUED_THRESHOLD",
+  "content": "0xC58953FD// SetHealthConfigFatiguedThreshold\nvoid SET_HEALTH_CONFIG_FATIGUED_THRESHOLD(char* configName, float newValue);Parameters:configName: Name of health config.newValue: ValueSets default fatigued health threshold value for specific health config.",
+  "codeBlocks": [
+    "// SetHealthConfigFatiguedThreshold\nvoid SET_HEALTH_CONFIG_FATIGUED_THRESHOLD(char* configName, float newValue);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetHealthConfigFatiguedThreshold.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_HEALTH_CONFIG_FATIGUED_THRESHOLD"
+  ],
+  "tags": [
+    "client"
+  ]
+}

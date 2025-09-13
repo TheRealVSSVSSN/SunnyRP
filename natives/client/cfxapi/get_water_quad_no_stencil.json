@@ -1,0 +1,23 @@
+{
+  "title": "GET_WATER_QUAD_NO_STENCIL",
+  "content": "0x6F4ACBA// GetWaterQuadNoStencil\nBOOL GET_WATER_QUAD_NO_STENCIL(int waterQuad, int* noStencil);Parameters:waterQuad: The water quad indexnoStencil: Returns: Returns if the given water quad has no stencil.Examples:Lualocal success, noStencil = GetWaterQuadNoStencil(0)",
+  "codeBlocks": [
+    "// GetWaterQuadNoStencil\nBOOL GET_WATER_QUAD_NO_STENCIL(int waterQuad, int* noStencil);",
+    "local success, noStencil = GetWaterQuadNoStencil(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetWaterQuadNoStencil.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_WATER_QUAD_NO_STENCIL"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "SET_ENTITY_HEADING",
+  "content": "0xE0FF064D// SetEntityHeading\nvoid SET_ENTITY_HEADING(Entity entity, float heading);Parameters:entity: The entity to set the heading for.heading: The heading in degrees.Set the heading of an entity in degrees also known as \"Yaw\".This is the server-side RPC native equivalent of the client native SET_ENTITY_HEADING.",
+  "codeBlocks": [
+    "// SetEntityHeading\nvoid SET_ENTITY_HEADING(Entity entity, float heading);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetEntityHeading.md",
+    "https://docs.fivem.net/natives/?_0x8E2530AA8ADA980E",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_ENTITY_HEADING"
+  ],
+  "tags": [
+    "server"
+  ]
+}

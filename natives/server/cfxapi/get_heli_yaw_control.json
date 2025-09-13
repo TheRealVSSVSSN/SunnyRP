@@ -1,0 +1,22 @@
+{
+  "title": "GET_HELI_YAW_CONTROL",
+  "content": "0x8FDC0768// GetHeliYawControl\nfloat GET_HELI_YAW_CONTROL(Vehicle heli);Parameters:heli: The helicopter to check.Returns: Returns a value the yaw control of the helicopter. The value ranges from -1.0 (yaw left) to 1.0 (yaw right), with 0.0 meaning no yaw input.",
+  "codeBlocks": [
+    "// GetHeliYawControl\nfloat GET_HELI_YAW_CONTROL(Vehicle heli);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetHeliYawControl.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_HELI_YAW_CONTROL"
+  ],
+  "tags": [
+    "server"
+  ]
+}

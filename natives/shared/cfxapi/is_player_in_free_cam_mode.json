@@ -1,0 +1,19 @@
+{
+  "title": "IS_PLAYER_IN_FREE_CAM_MODE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "IS_PLAYER_IN_FREE_CAM_MODE"
+  ],
+  "content": "0x1F14F2AC// IsPlayerInFreeCamMode\nbool IS_PLAYER_IN_FREE_CAM_MODE(char* playerSrc);Parameters:playerSrc: The player to get the free camera mode status ofReturns: Returns if the player is in free camera mode.",
+  "codeBlocks": [
+    "// IsPlayerInFreeCamMode\nbool IS_PLAYER_IN_FREE_CAM_MODE(char* playerSrc);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/IsPlayerInFreeCamMode.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

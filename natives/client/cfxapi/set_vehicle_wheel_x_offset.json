@@ -1,0 +1,23 @@
+{
+  "title": "SET_VEHICLE_WHEEL_X_OFFSET",
+  "content": "0xBD6357D// SetVehicleWheelXOffset\nvoid SET_VEHICLE_WHEEL_X_OFFSET(Vehicle vehicle, int wheelIndex, float offset);Adjusts the offset of the specified wheel relative to the wheel's axle center.\nNeeds to be called every frame in order to function properly, as GTA will reset the offset otherwise.\nThis function can be especially useful to set the track width of a vehicle, for example:function SetVehicleFrontTrackWidth(vehicle, width)\nSetVehicleWheelXOffset(vehicle, 0, -width/2)\nSetVehicleWheelXOffset(vehicle, 1, width/2)\nend",
+  "codeBlocks": [
+    "// SetVehicleWheelXOffset\nvoid SET_VEHICLE_WHEEL_X_OFFSET(Vehicle vehicle, int wheelIndex, float offset);",
+    "function SetVehicleFrontTrackWidth(vehicle, width)\nSetVehicleWheelXOffset(vehicle, 0, -width/2)\nSetVehicleWheelXOffset(vehicle, 1, width/2)\nend\n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetVehicleWheelXOffset.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_VEHICLE_WHEEL_X_OFFSET"
+  ],
+  "tags": [
+    "client"
+  ]
+}

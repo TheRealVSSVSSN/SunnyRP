@@ -1,0 +1,23 @@
+{
+  "title": "SET_WET_CLOTH_PIN_RADIUS_SCALE",
+  "content": "0xF1BD2CEF// SetWetClothPinRadiusScale\nvoid SET_WET_CLOTH_PIN_RADIUS_SCALE(float scale);Parameters:scale: A value that controls the wet cloth radius scale, default: 0.3, maximum: 1.0(used for dry cloth by default), lower values increase the adhesion effect of wet cloth, making it cling more tightly to the surface.Modifies the radius scale used in the simulation of wet cloth physics.\nThis affects how cloth behaves when wet, changing how it sticks or reacts to movement.Examples:LuaSetWetClothPinRadiusScale(1.0)",
+  "codeBlocks": [
+    "// SetWetClothPinRadiusScale\nvoid SET_WET_CLOTH_PIN_RADIUS_SCALE(float scale);",
+    "SetWetClothPinRadiusScale(1.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetWetClothPinRadiusScale.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_WET_CLOTH_PIN_RADIUS_SCALE"
+  ],
+  "tags": [
+    "client"
+  ]
+}

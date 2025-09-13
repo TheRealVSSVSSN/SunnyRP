@@ -1,0 +1,21 @@
+{
+  "title": "SET_RESOURCE_KVP_INT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_RESOURCE_KVP_INT"
+  ],
+  "content": "0x6A2B1E8// SetResourceKvpInt\nvoid SET_RESOURCE_KVP_INT(char* key, int value);Parameters:key: The key to setvalue: The value to writeA setter for GET_RESOURCE_KVP_INT.Examples:Lualocal lickMy = 42\nSetResourceKvp('bananabread', lickMy)",
+  "codeBlocks": [
+    "// SetResourceKvpInt\nvoid SET_RESOURCE_KVP_INT(char* key, int value);",
+    "local lickMy = 42\nSetResourceKvp('bananabread', lickMy)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetResourceKvpInt.md",
+    "https://docs.fivem.net/natives/?_0x557B586A",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

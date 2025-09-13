@@ -1,0 +1,22 @@
+{
+  "title": "SET_HEALTH_CONFIG_INVINCIBLE",
+  "content": "0x4A9EEDE6// SetHealthConfigInvincible\nvoid SET_HEALTH_CONFIG_INVINCIBLE(char* configName, BOOL newValue);Parameters:configName: Name of health config.newValue: ValueSets default invincible value for specific health config.",
+  "codeBlocks": [
+    "// SetHealthConfigInvincible\nvoid SET_HEALTH_CONFIG_INVINCIBLE(char* configName, BOOL newValue);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetHealthConfigInvincible.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_HEALTH_CONFIG_INVINCIBLE"
+  ],
+  "tags": [
+    "client"
+  ]
+}

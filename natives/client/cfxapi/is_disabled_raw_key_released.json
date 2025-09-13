@@ -1,0 +1,25 @@
+{
+  "title": "IS_DISABLED_RAW_KEY_RELEASED",
+  "content": "0x72B66C09// IsDisabledRawKeyReleased\nBOOL IS_DISABLED_RAW_KEY_RELEASED(int rawKeyIndex);Parameters:rawKeyIndex: Index of raw key from keyboard.Returns: Returns bool value of released state.Gets if the specified rawKeyIndex was released, even if the key is disabled with DISABLE_RAW_KEY_THIS_FRAME.Virtual key codes can be found hereExamples:Luaif IsDisabledRawKeyReleased(32) then -- KEY_SPACE\n    print(\"Spacebar released\")\nend",
+  "codeBlocks": [
+    "// IsDisabledRawKeyReleased\nBOOL IS_DISABLED_RAW_KEY_RELEASED(int rawKeyIndex);",
+    "if IsDisabledRawKeyReleased(32) then -- KEY_SPACE\n    print(\"Spacebar released\")\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/IsDisabledRawKeyReleased.md",
+    "https://docs.fivem.net/natives/?_0x8BCF0014",
+    "https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "IS_DISABLED_RAW_KEY_RELEASED"
+  ],
+  "tags": [
+    "client"
+  ]
+}

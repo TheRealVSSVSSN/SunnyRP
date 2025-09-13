@@ -1,0 +1,20 @@
+{
+  "title": "GET_VEHICLE_GEAR_RATIO",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_VEHICLE_GEAR_RATIO"
+  ],
+  "content": "0x82E794B7// GetVehicleGearRatio\nfloat GET_VEHICLE_GEAR_RATIO(Vehicle vehicle, int gear);Parameters:vehicle: The vehicle handle.gear: The vehicles gear you want to get.Gets vehicles gear ratio on choosen gear.Examples:LuaJavaScriptC#local vehicle = GetVehiclePedIsIn(PlayerPedId(-1))\nlocal currentGear = GetVehicleCurrentGear(Vehicle)\n\nprint(GetVehicleGearRatio(vehicle, currentGear)) -- will print current vehicle gear to console",
+  "codeBlocks": [
+    "// GetVehicleGearRatio\nfloat GET_VEHICLE_GEAR_RATIO(Vehicle vehicle, int gear);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(-1))\nlocal currentGear = GetVehicleCurrentGear(Vehicle)\n\nprint(GetVehicleGearRatio(vehicle, currentGear)) -- will print current vehicle gear to console"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetVehicleGearRatio.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

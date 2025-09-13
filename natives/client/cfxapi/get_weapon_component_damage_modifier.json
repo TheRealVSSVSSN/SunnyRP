@@ -1,0 +1,22 @@
+{
+  "title": "GET_WEAPON_COMPONENT_DAMAGE_MODIFIER",
+  "content": "0x4A0E3855// GetWeaponComponentDamageModifier\nfloat GET_WEAPON_COMPONENT_DAMAGE_MODIFIER(Hash componentHash);Parameters:componentHash: Weapon component name hash.Returns: A weapon component damage modifier.A getter for CWeaponDamageModifier in a weapon component.",
+  "codeBlocks": [
+    "// GetWeaponComponentDamageModifier\nfloat GET_WEAPON_COMPONENT_DAMAGE_MODIFIER(Hash componentHash);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetWeaponComponentDamageModifier.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_WEAPON_COMPONENT_DAMAGE_MODIFIER"
+  ],
+  "tags": [
+    "client"
+  ]
+}

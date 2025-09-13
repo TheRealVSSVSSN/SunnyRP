@@ -1,0 +1,22 @@
+{
+  "title": "GET_HELI_TAIL_ROTOR_DAMAGE_SCALE",
+  "content": "0x22239130// GetHeliTailRotorDamageScale\nfloat GET_HELI_TAIL_ROTOR_DAMAGE_SCALE(Vehicle heli);Parameters:heli: The helicopter to checkReturns: Returns a value representing the damage scaling factor applied to the helicopter's tail rotor. The value ranges from 0.0 (no damage scaling) to1.0 (full damage scaling).",
+  "codeBlocks": [
+    "// GetHeliTailRotorDamageScale\nfloat GET_HELI_TAIL_ROTOR_DAMAGE_SCALE(Vehicle heli);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetHeliTailRotorDamageScale.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_HELI_TAIL_ROTOR_DAMAGE_SCALE"
+  ],
+  "tags": [
+    "server"
+  ]
+}

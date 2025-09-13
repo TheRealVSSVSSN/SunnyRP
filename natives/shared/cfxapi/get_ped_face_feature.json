@@ -1,0 +1,21 @@
+{
+  "title": "GET_PED_FACE_FEATURE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PED_FACE_FEATURE"
+  ],
+  "content": "0xBA352ADD// GetPedFaceFeature\nfloat GET_PED_FACE_FEATURE(Ped ped, int index);Parameters:ped: The target pedindex: Face feature indexReturns: Returns ped's face feature value, or 0.0 if fails to get.A getter for _SET_PED_FACE_FEATURE. Returns 0.0 if fails to get.Examples:Lualocal noseWidth = GetPedFaceFeature(PlayerPedId(), 0)\nif noseWidth == 1.0 then\n  print(\"You have big nose!\")\nend",
+  "codeBlocks": [
+    "// GetPedFaceFeature\nfloat GET_PED_FACE_FEATURE(Ped ped, int index);",
+    "local noseWidth = GetPedFaceFeature(PlayerPedId(), 0)\nif noseWidth == 1.0 then\n  print(\"You have big nose!\")\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPedFaceFeature.md",
+    "https://docs.fivem.net/natives/?_0x71A5C1DBA060049E",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

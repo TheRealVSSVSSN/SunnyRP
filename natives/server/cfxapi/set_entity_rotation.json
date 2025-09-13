@@ -1,0 +1,25 @@
+{
+  "title": "SET_ENTITY_ROTATION",
+  "content": "0xA345EFE// SetEntityRotation\nvoid SET_ENTITY_ROTATION(Entity entity, float pitch, float roll, float yaw, int rotationOrder, BOOL bDeadCheck);Parameters:entity: The entity to rotate.pitch: The pitch (X-axis) rotation in degrees.roll: The roll (Y-axis) rotation in degrees.yaw: The yaw (Z-axis) rotation in degrees.rotationOrder: Specifies the order in which yaw, pitch, and roll are applied, see GET_ENTITY_ROTATION for the available rotation orders.bDeadCheck: Usually set to true. Determines whether to check if the entity is dead before applying the rotation.Sets the rotation of a specified entity in the game world.NativeDB Introduced: v323This is the server-side RPC native equivalent of the client native SET_ENTITY_ROTATION.",
+  "codeBlocks": [
+    "// SetEntityRotation\nvoid SET_ENTITY_ROTATION(Entity entity, float pitch, float roll, float yaw, int rotationOrder, BOOL bDeadCheck);",
+    "NativeDB Introduced: v323"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetEntityRotation.md",
+    "https://docs.fivem.net/natives/?_0xAFBD61CC738D9EB9",
+    "https://docs.fivem.net/natives/?_0x8524A8B0171D5E07",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_ENTITY_ROTATION"
+  ],
+  "tags": [
+    "server"
+  ]
+}

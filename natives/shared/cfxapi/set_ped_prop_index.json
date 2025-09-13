@@ -1,0 +1,24 @@
+{
+  "title": "SET_PED_PROP_INDEX",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_PED_PROP_INDEX"
+  ],
+  "content": "0x829F2E2// SetPedPropIndex\nvoid SET_PED_PROP_INDEX(Ped ped, int componentId, int drawableId, int textureId, BOOL attach);Parameters:ped: The ped handle.componentId: The component that you want to set. Refer to SET_PED_COMPONENT_VARIATION.drawableId: The drawable id that is going to be set. Refer to GET_NUMBER_OF_PED_PROP_DRAWABLE_VARIATIONS.textureId: The texture id of the drawable. Refer to GET_NUMBER_OF_PED_PROP_TEXTURE_VARIATIONS.attach: Attached or not.This native is used to set prop variation on a ped. Components, drawables and textures IDs are related to the ped model.MP Freemode list of props0: Hats\n1: Glasses\n2: Ears\n6: Watches\n7: Bracelets\nList of Prop IDsenum eAnchorPoints\n{\nANCHOR_HEAD = 0, // \"p_head\"\nANCHOR_EYES = 1, // \"p_eyes\"\nANCHOR_EARS = 2, // \"p_ears\"\nANCHOR_MOUTH = 3, // \"p_mouth\"\nANCHOR_LEFT_HAND = 4, // \"p_lhand\"\nANCHOR_RIGHT_HAND = 5, // \"p_rhand\"\nANCHOR_LEFT_WRIST = 6, // \"p_lwrist\"\nANCHOR_RIGHT_WRIST = 7, // \"p_rwrist\"\nANCHOR_HIP = 8, // \"p_lhip\"\nANCHOR_LEFT_FOOT = 9, // \"p_lfoot\"\nANCHOR_RIGHT_FOOT = 10, // \"p_rfoot\"\nANCHOR_PH_L_HAND = 11, // \"ph_lhand\"\nANCHOR_PH_R_HAND = 12, // \"ph_rhand\"\nNUM_ANCHORS = 13,\n};\nThis is the server-side RPC native equivalent of the client native SET_PED_PROP_INDEX.",
+  "codeBlocks": [
+    "// SetPedPropIndex\nvoid SET_PED_PROP_INDEX(Ped ped, int componentId, int drawableId, int textureId, BOOL attach);",
+    "enum eAnchorPoints\n{\nANCHOR_HEAD = 0, // \"p_head\"\nANCHOR_EYES = 1, // \"p_eyes\"\nANCHOR_EARS = 2, // \"p_ears\"\nANCHOR_MOUTH = 3, // \"p_mouth\"\nANCHOR_LEFT_HAND = 4, // \"p_lhand\"\nANCHOR_RIGHT_HAND = 5, // \"p_rhand\"\nANCHOR_LEFT_WRIST = 6, // \"p_lwrist\"\nANCHOR_RIGHT_WRIST = 7, // \"p_rwrist\"\nANCHOR_HIP = 8, // \"p_lhip\"\nANCHOR_LEFT_FOOT = 9, // \"p_lfoot\"\nANCHOR_RIGHT_FOOT = 10, // \"p_rfoot\"\nANCHOR_PH_L_HAND = 11, // \"ph_lhand\"\nANCHOR_PH_R_HAND = 12, // \"ph_rhand\"\nNUM_ANCHORS = 13,\n};\n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetPedPropIndex.md",
+    "https://docs.fivem.net/natives/?_0x262B14F48D29DE80",
+    "https://docs.fivem.net/natives/?_0x5FAF9754E789FB47",
+    "https://docs.fivem.net/natives/?_0xA6E7F1CEB523E171",
+    "https://docs.fivem.net/natives/?_0x93376B65A266EB5F",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

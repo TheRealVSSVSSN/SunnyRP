@@ -1,0 +1,22 @@
+{
+  "title": "SET_RUNTIME_TEXTURE_IMAGE",
+  "content": "0x28FC4ECB// SetRuntimeTextureImage\nBOOL SET_RUNTIME_TEXTURE_IMAGE(long tex, char* fileName);Parameters:tex: A runtime texture handle.fileName: The file name of an image to load, or a base64 \"data:\" URL. This should preferably be a PNG, and has to be specified as a file in the resource manifest.Returns: TRUE for success, FALSE for failure.Replaces the pixel data in a runtime texture with the image data from a file in the current resource, or a data URL.If the bitmap is a different size compared to the existing texture, it will be resampled.This command may end up executed asynchronously, and only update the texture data at a later time.",
+  "codeBlocks": [
+    "// SetRuntimeTextureImage\nBOOL SET_RUNTIME_TEXTURE_IMAGE(long tex, char* fileName);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetRuntimeTextureImage.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_RUNTIME_TEXTURE_IMAGE"
+  ],
+  "tags": [
+    "client"
+  ]
+}

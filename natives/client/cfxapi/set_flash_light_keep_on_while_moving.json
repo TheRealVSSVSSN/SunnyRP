@@ -1,0 +1,22 @@
+{
+  "title": "SET_FLASH_LIGHT_KEEP_ON_WHILE_MOVING",
+  "content": "0x7635B349// SetFlashLightKeepOnWhileMoving\nvoid SET_FLASH_LIGHT_KEEP_ON_WHILE_MOVING(BOOL state);Parameters:state: On/OffAllows Weapon-Flashlight beams to stay visible while moving. Normally it only stays on while aiming.",
+  "codeBlocks": [
+    "// SetFlashLightKeepOnWhileMoving\nvoid SET_FLASH_LIGHT_KEEP_ON_WHILE_MOVING(BOOL state);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetFlashLightKeepOnWhileMoving.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_FLASH_LIGHT_KEEP_ON_WHILE_MOVING"
+  ],
+  "tags": [
+    "client"
+  ]
+}

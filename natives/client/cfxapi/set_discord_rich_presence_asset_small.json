@@ -1,0 +1,22 @@
+{
+  "title": "SET_DISCORD_RICH_PRESENCE_ASSET_SMALL",
+  "content": "0xF61D04C4// SetDiscordRichPresenceAssetSmall\nvoid SET_DISCORD_RICH_PRESENCE_ASSET_SMALL(char* assetName);Parameters:assetName: The name of a valid asset registered on Discordapp's developer dashboard. Note that the asset has to be registered under the same discord API application set using the SET_DISCORD_APP_ID native.This native sets the small image asset for the discord rich presence implementation.",
+  "codeBlocks": [
+    "// SetDiscordRichPresenceAssetSmall\nvoid SET_DISCORD_RICH_PRESENCE_ASSET_SMALL(char* assetName);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetDiscordRichPresenceAssetSmall.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_DISCORD_RICH_PRESENCE_ASSET_SMALL"
+  ],
+  "tags": [
+    "client"
+  ]
+}

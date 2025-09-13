@@ -1,0 +1,20 @@
+{
+  "title": "GET_LAST_PED_IN_VEHICLE_SEAT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_LAST_PED_IN_VEHICLE_SEAT"
+  ],
+  "content": "0xF7C6792D// GetLastPedInVehicleSeat\nEntity GET_LAST_PED_IN_VEHICLE_SEAT(Vehicle vehicle, int seatIndex);Parameters:vehicle: The target vehicle.seatIndex: See eSeatPosition declared in IS_VEHICLE_SEAT_FREE.Returns: The last ped in the specified seat of the passed vehicle. Returns 0 if the specified seat was never occupied or the last ped does not exist anymore.",
+  "codeBlocks": [
+    "// GetLastPedInVehicleSeat\nEntity GET_LAST_PED_IN_VEHICLE_SEAT(Vehicle vehicle, int seatIndex);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetLastPedInVehicleSeat.md",
+    "https://docs.fivem.net/natives/?_0x22AC59A870E6A669",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "SET_PLAYER_WANTED_LEVEL",
+  "content": "0xB7A0914B// SetPlayerWantedLevel\nvoid SET_PLAYER_WANTED_LEVEL(Player player, int wantedLevel, BOOL delayedResponse);Parameters:player: the target playerwantedLevel: the wanted level 1-5delayedResponse: false = 0-10sec police spawn response time, true = 10-20sec police spawn response timeSET_PLAYER_WANTED_LEVELThis is the server-side RPC native equivalent of the client native SET_PLAYER_WANTED_LEVEL.",
+  "codeBlocks": [
+    "// SetPlayerWantedLevel\nvoid SET_PLAYER_WANTED_LEVEL(Player player, int wantedLevel, BOOL delayedResponse);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetPlayerWantedLevel.md",
+    "https://docs.fivem.net/natives/?_0x39FF19C64EF7DA5B",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_PLAYER_WANTED_LEVEL"
+  ],
+  "tags": [
+    "server"
+  ]
+}

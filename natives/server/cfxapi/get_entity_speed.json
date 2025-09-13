@@ -1,0 +1,23 @@
+{
+  "title": "GET_ENTITY_SPEED",
+  "content": "0x9E1E4798// GetEntitySpeed\nfloat GET_ENTITY_SPEED(Entity entity);Parameters:entity: The entity to get the speed ofReturns: The speed of the entity in meters per secondGets the current speed of the entity in meters per second.To convert to MPH: speed * 2.236936\nTo convert to KPH: speed * 3.6",
+  "codeBlocks": [
+    "// GetEntitySpeed\nfloat GET_ENTITY_SPEED(Entity entity);",
+    "To convert to MPH: speed * 2.236936\nTo convert to KPH: speed * 3.6\n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetEntitySpeed.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_ENTITY_SPEED"
+  ],
+  "tags": [
+    "server"
+  ]
+}

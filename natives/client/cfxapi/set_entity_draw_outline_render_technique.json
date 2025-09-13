@@ -1,0 +1,23 @@
+{
+  "title": "SET_ENTITY_DRAW_OUTLINE_RENDER_TECHNIQUE",
+  "content": "0x68DFF2DD// SetEntityDrawOutlineRenderTechnique\nvoid SET_ENTITY_DRAW_OUTLINE_RENDER_TECHNIQUE(char* techniqueGroup);Parameters:techniqueGroup: Technique group name.Sets the render technique for drawing an entity's outline. This function allows you to specify a technique group name to control how the entity's outline is rendered in the game.List of known technique group's:alt0\nalt1\nalt2\nalt3\nalt4\nalt5\nalt6\nalt7\nalt8\nblit\ncube\ndefault\ngeometry\nimposter\nimposterdeferred\nlightweight0\nlightweight0CutOut\nlightweight0CutOutTint\nlightweight0WaterRefractionAlpha\nlightweight4\nlightweight4CutOut\nlightweight4CutOutTint\nlightweight4WaterRefractionAlpha\nlightweight8\nlightweight8CutOut\nlightweight8CutOutTint\nlightweight8WaterRefractionAlpha\nlightweightHighQuality0\nlightweightHighQuality0CutOut\nlightweightHighQuality0WaterRefractionAlpha\nlightweightHighQuality4\nlightweightHighQuality4CutOut\nlightweightHighQuality4WaterRefractionAlpha\nlightweightHighQuality8\nlightweightHighQuality8CutOut\nlightweightHighQuality8WaterRefractionAlpha\nlightweightNoCapsule4\nlightweightNoCapsule8\nmultilight\ntessellate\nui\nunlit\nwaterreflection\nwaterreflectionalphaclip\nwaterreflectionalphacliptint\nwdcascade",
+  "codeBlocks": [
+    "// SetEntityDrawOutlineRenderTechnique\nvoid SET_ENTITY_DRAW_OUTLINE_RENDER_TECHNIQUE(char* techniqueGroup);",
+    "alt0\nalt1\nalt2\nalt3\nalt4\nalt5\nalt6\nalt7\nalt8\nblit\ncube\ndefault\ngeometry\nimposter\nimposterdeferred\nlightweight0\nlightweight0CutOut\nlightweight0CutOutTint\nlightweight0WaterRefractionAlpha\nlightweight4\nlightweight4CutOut\nlightweight4CutOutTint\nlightweight4WaterRefractionAlpha\nlightweight8\nlightweight8CutOut\nlightweight8CutOutTint\nlightweight8WaterRefractionAlpha\nlightweightHighQuality0\nlightweightHighQuality0CutOut\nlightweightHighQuality0WaterRefractionAlpha\nlightweightHighQuality4\nlightweightHighQuality4CutOut\nlightweightHighQuality4WaterRefractionAlpha\nlightweightHighQuality8\nlightweightHighQuality8CutOut\nlightweightHighQuality8WaterRefractionAlpha\nlightweightNoCapsule4\nlightweightNoCapsule8\nmultilight\ntessellate\nui\nunlit\nwaterreflection\nwaterreflectionalphaclip\nwaterreflectionalphacliptint\nwdcascade\n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetEntityDrawOutlineRenderTechnique.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_ENTITY_DRAW_OUTLINE_RENDER_TECHNIQUE"
+  ],
+  "tags": [
+    "client"
+  ]
+}

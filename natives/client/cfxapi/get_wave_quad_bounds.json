@@ -1,0 +1,23 @@
+{
+  "title": "GET_WAVE_QUAD_BOUNDS",
+  "content": "0xF86136DB// GetWaveQuadBounds\nBOOL GET_WAVE_QUAD_BOUNDS(int waveQuad, int* minX, int* minY, int* maxX, int* maxY);Parameters:waveQuad: The wave quad indexminX: The minX coordinateminY: The minY coordinatemaxX: The maxX coordinatemaxY: The maxY coordinateReturns: Returns true on success. Bounds are undefined on failureExamples:Lualocal success, minX, minY, maxX, maxY = GetWaveQuadBounds(1)",
+  "codeBlocks": [
+    "// GetWaveQuadBounds\nBOOL GET_WAVE_QUAD_BOUNDS(int waveQuad, int* minX, int* minY, int* maxX, int* maxY);",
+    "local success, minX, minY, maxX, maxY = GetWaveQuadBounds(1)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetWaveQuadBounds.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_WAVE_QUAD_BOUNDS"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "GET_VEHICLE_TYPE_RAW",
+  "content": "0xDE73BC10// GetVehicleTypeRaw\nint GET_VEHICLE_TYPE_RAW(Vehicle vehicle);Parameters:vehicle: The vehicle's entity handle.Returns: Returns the vehicles model typeReturns the model type of the vehicle as defined by:enum VehicleType\n{\n\tVEHICLE_TYPE_NONE = -1,\n\tVEHICLE_TYPE_CAR = 0,\n\tVEHICLE_TYPE_PLANE = 1,\n\tVEHICLE_TYPE_TRAILER = 2,\n\tVEHICLE_TYPE_QUADBIKE = 3,\n\tVEHICLE_TYPE_DRAFT = 4,\n\tVEHICLE_TYPE_SUBMARINECAR = 5,\n\tVEHICLE_TYPE_AMPHIBIOUS_AUTOMOBILE = 6,\n\tVEHICLE_TYPE_AMPHIBIOUS_QUADBIKE = 7,\n\tVEHICLE_TYPE_HELI = 8,\n\tVEHICLE_TYPE_BLIMP = 9,\n\tVEHICLE_TYPE_AUTOGYRO = 10,\n\tVEHICLE_TYPE_BIKE = 11,\n\tVEHICLE_TYPE_BICYCLE = 12,\n\tVEHICLE_TYPE_BOAT = 13,\n\tVEHICLE_TYPE_TRAIN = 14,\n\tVEHICLE_TYPE_SUBMARINE = 15,\n};",
+  "codeBlocks": [
+    "// GetVehicleTypeRaw\nint GET_VEHICLE_TYPE_RAW(Vehicle vehicle);",
+    "enum VehicleType\n{\n\tVEHICLE_TYPE_NONE = -1,\n\tVEHICLE_TYPE_CAR = 0,\n\tVEHICLE_TYPE_PLANE = 1,\n\tVEHICLE_TYPE_TRAILER = 2,\n\tVEHICLE_TYPE_QUADBIKE = 3,\n\tVEHICLE_TYPE_DRAFT = 4,\n\tVEHICLE_TYPE_SUBMARINECAR = 5,\n\tVEHICLE_TYPE_AMPHIBIOUS_AUTOMOBILE = 6,\n\tVEHICLE_TYPE_AMPHIBIOUS_QUADBIKE = 7,\n\tVEHICLE_TYPE_HELI = 8,\n\tVEHICLE_TYPE_BLIMP = 9,\n\tVEHICLE_TYPE_AUTOGYRO = 10,\n\tVEHICLE_TYPE_BIKE = 11,\n\tVEHICLE_TYPE_BICYCLE = 12,\n\tVEHICLE_TYPE_BOAT = 13,\n\tVEHICLE_TYPE_TRAIN = 14,\n\tVEHICLE_TYPE_SUBMARINE = 15,\n};\n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetVehicleTypeRaw.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_VEHICLE_TYPE_RAW"
+  ],
+  "tags": [
+    "client"
+  ]
+}

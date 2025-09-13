@@ -1,0 +1,22 @@
+{
+  "title": "GET_HUD_COMPONENT_SIZE",
+  "content": "0x12217D33// GetHudComponentSize\nVector3 GET_HUD_COMPONENT_SIZE(int id);Parameters:id: The hud component id.Returns: A Vector3 with the hud component size X and size Y values.",
+  "codeBlocks": [
+    "// GetHudComponentSize\nVector3 GET_HUD_COMPONENT_SIZE(int id);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetHudComponentSize.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_HUD_COMPONENT_SIZE"
+  ],
+  "tags": [
+    "client"
+  ]
+}

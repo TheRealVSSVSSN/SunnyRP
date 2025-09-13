@@ -1,0 +1,25 @@
+{
+  "title": "GET_VEHICLE_NEON_ENABLED",
+  "content": "0x684BDBF2// GetVehicleNeonEnabled\nBOOL GET_VEHICLE_NEON_ENABLED(Vehicle vehicle, int neonIndex);Parameters:vehicle: The vehicle to check.neonIndex: A value from the neonIndex enum representing the neon light to check.Returns: Returns true if the specified neon light is enabled, false otherwise.Getter to check if one of the neon lights of a vehicle is enabled. This native is the server side getter of IS_VEHICLE_NEON_LIGHT_ENABLED.enum neonIndex\n{\n    NEON_BACK = 0,   // Back neon\n    NEON_RIGHT = 1,  // Right neon\n    NEON_LEFT = 2,   // Left neon\n    NEON_FRONT = 3   // Front neon\n};\nExamples:LuaJavaScriptC#local vehicle = GetVehiclePedIsIn(GetPlayerPed(1), false) -- 1 is the source here\nlocal isRightNeonOn = GetVehicleNeonEnabled(vehicle, 1)\nprint(isRightNeonOn)",
+  "codeBlocks": [
+    "// GetVehicleNeonEnabled\nBOOL GET_VEHICLE_NEON_ENABLED(Vehicle vehicle, int neonIndex);",
+    "enum neonIndex\n{\n    NEON_BACK = 0,   // Back neon\n    NEON_RIGHT = 1,  // Right neon\n    NEON_LEFT = 2,   // Left neon\n    NEON_FRONT = 3   // Front neon\n};\n",
+    "local vehicle = GetVehiclePedIsIn(GetPlayerPed(1), false) -- 1 is the source here\nlocal isRightNeonOn = GetVehicleNeonEnabled(vehicle, 1)\nprint(isRightNeonOn)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetVehicleNeonEnabled.md",
+    "https://docs.fivem.net/natives/?_0x8C4B92553E4766A5",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_VEHICLE_NEON_ENABLED"
+  ],
+  "tags": [
+    "server"
+  ]
+}

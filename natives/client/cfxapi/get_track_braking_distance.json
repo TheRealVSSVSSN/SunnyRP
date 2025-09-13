@@ -1,0 +1,22 @@
+{
+  "title": "GET_TRACK_BRAKING_DISTANCE",
+  "content": "0xBF482A5E// GetTrackBrakingDistance\nfloat GET_TRACK_BRAKING_DISTANCE(int track);Parameters:track: The track id (between 0 - 27)Returns: The braking distance of the track. Used by trains to determine the point to slow down at when entering a station.",
+  "codeBlocks": [
+    "// GetTrackBrakingDistance\nfloat GET_TRACK_BRAKING_DISTANCE(int track);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetTrackBrakingDistance.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_TRACK_BRAKING_DISTANCE"
+  ],
+  "tags": [
+    "client"
+  ]
+}

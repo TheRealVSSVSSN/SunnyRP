@@ -1,0 +1,23 @@
+{
+  "title": "GET_INTERIOR_PORTAL_ENTITY_ROTATION",
+  "content": "0x9F9CEB63// GetInteriorPortalEntityRotation\nvoid GET_INTERIOR_PORTAL_ENTITY_ROTATION(int interiorId, int portalIndex, int entityIndex, float* rotX, float* rotY, float* rotZ, float* rotW);Parameters:interiorId: The target interior.portalIndex: Interior portal index.entityIndex: Portal entity index.rotX: rotY: rotZ: rotW: Returns: Portal entity rotation.Examples:Lualocal playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\nlocal portalIndex = 0\n\nif interiorId ~= 0 then\n  local count = GetInteriorPortalEntityCount(interiorId, portalIndex)\n  for i=0, count-1 do\n    local x, y, z, w = GetInteriorPortalEntityRotation(interiorId, portalIndex, i)\n    print(\"portal \" .. portalIndex ..\" entity \" .. i .. \" rotation is: \" .. vec4(x, y, z, w))\n  end\nend",
+  "codeBlocks": [
+    "// GetInteriorPortalEntityRotation\nvoid GET_INTERIOR_PORTAL_ENTITY_ROTATION(int interiorId, int portalIndex, int entityIndex, float* rotX, float* rotY, float* rotZ, float* rotW);",
+    "local playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\nlocal portalIndex = 0\n\nif interiorId ~= 0 then\n  local count = GetInteriorPortalEntityCount(interiorId, portalIndex)\n  for i=0, count-1 do\n    local x, y, z, w = GetInteriorPortalEntityRotation(interiorId, portalIndex, i)\n    print(\"portal \" .. portalIndex ..\" entity \" .. i .. \" rotation is: \" .. vec4(x, y, z, w))\n  end\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetInteriorPortalEntityRotation.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_INTERIOR_PORTAL_ENTITY_ROTATION"
+  ],
+  "tags": [
+    "client"
+  ]
+}

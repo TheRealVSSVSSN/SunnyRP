@@ -1,0 +1,23 @@
+{
+  "title": "SET_WATER_QUAD_NO_STENCIL",
+  "content": "0xC3FF42FF// SetWaterQuadNoStencil\nBOOL SET_WATER_QUAD_NO_STENCIL(int waterQuad, bool noStencil);Parameters:waterQuad: The water quad indexnoStencil: Unknown effectReturns: Returns true on success.Examples:Lualocal success = SetWaterQuadNoStencil(0, true)",
+  "codeBlocks": [
+    "// SetWaterQuadNoStencil\nBOOL SET_WATER_QUAD_NO_STENCIL(int waterQuad, bool noStencil);",
+    "local success = SetWaterQuadNoStencil(0, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetWaterQuadNoStencil.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_WATER_QUAD_NO_STENCIL"
+  ],
+  "tags": [
+    "client"
+  ]
+}

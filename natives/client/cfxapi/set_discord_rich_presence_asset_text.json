@@ -1,0 +1,22 @@
+{
+  "title": "SET_DISCORD_RICH_PRESENCE_ASSET_TEXT",
+  "content": "0xB029D2FA// SetDiscordRichPresenceAssetText\nvoid SET_DISCORD_RICH_PRESENCE_ASSET_TEXT(char* text);Parameters:text: Text to be displayed when hovering over image asset. Note that you must also set a valid image asset using the SET_DISCORD_RICH_PRESENCE_ASSET native.This native sets the hover text of the image asset for the discord rich presence implementation.",
+  "codeBlocks": [
+    "// SetDiscordRichPresenceAssetText\nvoid SET_DISCORD_RICH_PRESENCE_ASSET_TEXT(char* text);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetDiscordRichPresenceAssetText.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_DISCORD_RICH_PRESENCE_ASSET_TEXT"
+  ],
+  "tags": [
+    "client"
+  ]
+}

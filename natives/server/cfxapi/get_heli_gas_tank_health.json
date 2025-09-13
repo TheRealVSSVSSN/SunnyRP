@@ -1,0 +1,25 @@
+{
+  "title": "GET_HELI_GAS_TANK_HEALTH",
+  "content": "0xD4EC7858// GetHeliGasTankHealth\nint GET_HELI_GAS_TANK_HEALTH(Vehicle heli);Parameters:heli: The helicopter to checkReturns: Returns the current health of the helicopter's gas tank.Note This native will always return 1000.0 unless SET_VEHICLE_BODY_HEALTH, SET_VEHICLE_ENGINE_HEALTH, or SET_VEHICLE_PETROL_TANK_HEALTH have been called with a value greater than 1000.0.",
+  "codeBlocks": [
+    "// GetHeliGasTankHealth\nint GET_HELI_GAS_TANK_HEALTH(Vehicle heli);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetHeliGasTankHealth.md",
+    "https://docs.fivem.net/natives/?_0xB77D05AC8C78AADB",
+    "https://docs.fivem.net/natives/?_0x45F6D8EEF34ABEF1",
+    "https://docs.fivem.net/natives/?_0x70DB57649FA8D0D8",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_HELI_GAS_TANK_HEALTH"
+  ],
+  "tags": [
+    "server"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "title": "SET_VEHICLE_CURRENT_GEAR",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_VEHICLE_CURRENT_GEAR"
+  ],
+  "content": "0x8923DD42// SetVehicleCurrentGear\nvoid SET_VEHICLE_CURRENT_GEAR(Vehicle vehicle, int gear);Parameters:vehicle: The vehicle handle.gear: The gear you want the vehicle to use.",
+  "codeBlocks": [
+    "// SetVehicleCurrentGear\nvoid SET_VEHICLE_CURRENT_GEAR(Vehicle vehicle, int gear);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetVehicleCurrentGear.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

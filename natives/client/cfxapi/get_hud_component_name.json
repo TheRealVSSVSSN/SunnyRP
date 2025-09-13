@@ -1,0 +1,22 @@
+{
+  "title": "GET_HUD_COMPONENT_NAME",
+  "content": "0xA91866BC// GetHudComponentName\nchar* GET_HUD_COMPONENT_NAME(int id);Parameters:id: The hud component id.Returns: The hud component name.",
+  "codeBlocks": [
+    "// GetHudComponentName\nchar* GET_HUD_COMPONENT_NAME(int id);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetHudComponentName.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_HUD_COMPONENT_NAME"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "title": "GET_RESOURCE_PATH",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_RESOURCE_PATH"
+  ],
+  "content": "0x61DCF017// GetResourcePath\nchar* GET_RESOURCE_PATH(char* resourceName);Parameters:resourceName: The name of the resource.Returns: The resource directory name, possibly without trailing slash.Returns the physical on-disk path of the specified resource.",
+  "codeBlocks": [
+    "// GetResourcePath\nchar* GET_RESOURCE_PATH(char* resourceName);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetResourcePath.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "title": "SET_VEHICLE_PITCH_BIAS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_VEHICLE_PITCH_BIAS"
+  ],
+  "content": "0x2A6CC9F2// SetVehiclePitchBias\nvoid SET_VEHICLE_PITCH_BIAS(Vehicle vehicle, float value);Parameters:vehicle: Target vehicle.value: Pitch bias value.Set the vehicle's pitch bias. Only works on planes.",
+  "codeBlocks": [
+    "// SetVehiclePitchBias\nvoid SET_VEHICLE_PITCH_BIAS(Vehicle vehicle, float value);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetVehiclePitchBias.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

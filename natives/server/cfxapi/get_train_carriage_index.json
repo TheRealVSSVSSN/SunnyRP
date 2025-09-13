@@ -1,0 +1,22 @@
+{
+  "title": "GET_TRAIN_CARRIAGE_INDEX",
+  "content": "0x4B8285CF// GetTrainCarriageIndex\nint GET_TRAIN_CARRIAGE_INDEX(Vehicle train);Parameters:train: The entity handle.Returns: The carriage index. -1 returned if invalid result.",
+  "codeBlocks": [
+    "// GetTrainCarriageIndex\nint GET_TRAIN_CARRIAGE_INDEX(Vehicle train);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetTrainCarriageIndex.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_TRAIN_CARRIAGE_INDEX"
+  ],
+  "tags": [
+    "server"
+  ]
+}

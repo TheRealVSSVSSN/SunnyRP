@@ -1,0 +1,19 @@
+{
+  "title": "SET_PLAYER_STAMINA",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_PLAYER_STAMINA"
+  ],
+  "content": "0xA9EC16C7// SetPlayerStamina\nbool SET_PLAYER_STAMINA(Player playerId, float stamina);Parameters:playerId: The player indexstamina: The value you want to setReturns: Did you manage to set the value.",
+  "codeBlocks": [
+    "// SetPlayerStamina\nbool SET_PLAYER_STAMINA(Player playerId, float stamina);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetPlayerStamina.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

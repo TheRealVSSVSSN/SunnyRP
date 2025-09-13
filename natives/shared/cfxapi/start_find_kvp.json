@@ -1,0 +1,26 @@
+{
+  "title": "START_FIND_KVP",
+  "content": "0xDD379006// StartFindKvp\nint START_FIND_KVP(char* prefix);Parameters:prefix: A prefix matchReturns: A KVP find handle to use with FIND_KVP and close with END_FIND_KVPExamples:LuaSetResourceKvp('mollis:2', 'should be taken with alcohol')\nSetResourceKvp('mollis:1', 'vesuvius citrate')\nSetResourceKvp('mollis:manufacturer', 'Betta Pharmaceuticals')\n\nlocal kvpHandle = StartFindKvp('mollis:')\n\nif kvpHandle ~= -1 then \n\tlocal key\n\t\n\trepeat\n\t\tkey = FindKvp(kvpHandle)\n\n\t\tif key then\n\t\t\tprint(('%s: %s'):format(key, GetResourceKvpString(key)))\n\t\tend\n\tuntil not key\n\n\tEndFindKvp(kvpHandle)\nelse\n\tprint('No KVPs found')\nend",
+  "codeBlocks": [
+    "// StartFindKvp\nint START_FIND_KVP(char* prefix);",
+    "SetResourceKvp('mollis:2', 'should be taken with alcohol')\nSetResourceKvp('mollis:1', 'vesuvius citrate')\nSetResourceKvp('mollis:manufacturer', 'Betta Pharmaceuticals')\n\nlocal kvpHandle = StartFindKvp('mollis:')\n\nif kvpHandle ~= -1 then \n\tlocal key\n\t\n\trepeat\n\t\tkey = FindKvp(kvpHandle)\n\n\t\tif key then\n\t\t\tprint(('%s: %s'):format(key, GetResourceKvpString(key)))\n\t\tend\n\tuntil not key\n\n\tEndFindKvp(kvpHandle)\nelse\n\tprint('No KVPs found')\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/StartFindKvp.md",
+    "https://docs.fivem.net/natives/?_0xBD7BEBC5",
+    "https://docs.fivem.net/natives/?_0xB3210203",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "START_FIND_KVP"
+  ],
+  "tags": [
+    "client",
+    "server"
+  ]
+}
