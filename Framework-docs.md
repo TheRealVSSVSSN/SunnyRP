@@ -4,7 +4,7 @@ This document indexes the Example_Frameworks/ directory to guide development of 
 
 ## Scan Stamp & Inventory Overview
 
-TREE-SCAN-STAMP — 2025-09-12T23:23:48+00:00 — dirs:783 files:14434
+TREE-SCAN-STAMP — 2025-09-13T00:25:12+00:00 — dirs:783 files:14434
 
 | Folder | Resources | Files | Server Files | Client Files | Shared Files |
 | --- | --- | --- | --- | --- | --- |
@@ -922,11 +922,11 @@ Example_Frameworks/FiveM-FSN-Framework/pipeline.yml
 
 | Scope | Total | Done | Remaining | Last Updated |
 | --- | --- | --- | --- | --- |
-| File Enumeration | 14434 | 725 | 13709 | 2025-09-12 |
-| Function Extraction | 20 | 20 | 0 | 2025-09-12 |
-| Event Extraction | 17 | 17 | 0 | 2025-09-12 |
-| Native Currency Checks | 41 | 41 | 0 | 2025-09-12 |
-| Similarity Merges | 2 | 2 | 0 | 2025-09-12 |
+| File Enumeration | 14434 | 735 | 13699 | 2025-09-13 |
+| Function Extraction | 28 | 28 | 0 | 2025-09-13 |
+| Event Extraction | 28 | 28 | 0 | 2025-09-13 |
+| Native Currency Checks | 86 | 86 | 0 | 2025-09-13 |
+| Similarity Merges | 2 | 2 | 0 | 2025-09-13 |
 
 ## Function & Event Registry
 
@@ -942,24 +942,34 @@ Example_Frameworks/FiveM-FSN-Framework/pipeline.yml
 - [cancelYoga](#cancelyoga)
 - [createBlips](#createblips)
 - [getAdminName](#getadminname)
+- [EnterMyApartment](#entermyapartment)
+- [EnterRoom](#enterroom)
+- [fsn_closeATM](#fsn_closeatm)
+- [fsn_drawText3D](#fsn_drawtext3d)
+- [getAvailableAppt](#getavailableappt)
 - [getModeratorName](#getmoderatorname)
 - [getNearestSpot](#getnearestspot)
 - [getSteamIdentifier](#getsteamidentifier)
 - [inInstance](#ininstance)
 - [isAdmin](#isadmin)
 - [isModerator](#ismoderator)
+- [isNearStorage](#isnearstorage)
+- [nearPos](#nearpos)
 - [registerAdminCommands](#registeradmincommands)
 - [registerAdminSuggestions](#registeradminsuggestions)
 - [registerModeratorCommands](#registermoderatorcommands)
 - [registerModeratorSuggestions](#registermoderatorsuggestions)
+- [saveApartment](#saveapartment)
 - [spawnAnimal](#spawnanimal)
 - [startFishing](#startfishing)
 - [startHunt](#starthunt)
 - [startYoga](#startyoga)
 - [table.contains](#tablecontains)
+- [ToggleActionMenu](#toggleactionmenu)
 
 #### Events
 - [chat:addMessage](#chataddmessage)
+- [depositMoney](#depositmoney)
 - [fsn_admin:FreezeMe](#fsn_adminfreezeme)
 - [fsn_admin:enableAdminCommands](#fsn_adminenableadmincommands)
 - [fsn_admin:enableModeratorCommands](#fsn_adminenablemoderatorcommands)
@@ -967,10 +977,19 @@ Example_Frameworks/FiveM-FSN-Framework/pipeline.yml
 - [fsn_admin:requestXYZ](#fsn_adminrequestxyz)
 - [fsn_admin:sendXYZ](#fsn_adminsendxyz)
 - [fsn_admin:spawnVehicle](#fsn_adminspawnvehicle)
+- [fsn_apartments:characterCreation](#fsn_apartmentscharactercreation)
 - [fsn_apartments:instance:debug](#fsn_apartmentsinstancedebug)
 - [fsn_apartments:instance:join](#fsn_apartmentsinstancejoin)
 - [fsn_apartments:instance:leave](#fsn_apartmentsinstanceleave)
 - [fsn_apartments:instance:update](#fsn_apartmentsinstanceupdate)
+- [fsn_apartments:inv:update](#fsn_apartmentsinvupdate)
+- [fsn_apartments:outfit:add](#fsn_apartmentsoutfitadd)
+- [fsn_apartments:sendApartment](#fsn_apartmentssendapartment)
+- [fsn_apartments:stash:add](#fsn_apartmentsstashadd)
+- [fsn_apartments:stash:take](#fsn_apartmentsstashtake)
+- [fsn_bank:change:bankAdd](#fsn_bankchangebankadd)
+- [fsn_bank:change:bankMinus](#fsn_bankchangebankminus)
+- [fsn_bank:update:both](#fsn_bankupdateboth)
 - [fsn_cargarage:makeMine](#fsn_cargaragemakemine)
 - [fsn_needs:stress:remove](#fsn_needsstressremove)
 - [fsn_notify:displayNotification](#fsn_notifydisplaynotification)
@@ -1386,8 +1405,10 @@ end
 
 #### table.contains
 - **Name**: table.contains
-- **Type**: Client
-- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/cl_instancing.lua (73-79)
+- **Type**: Shared
+- **Defined In**:
+  - Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/cl_instancing.lua (73-79)
+  - Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/sv_instancing.lua (64-71)
 - **Signature(s)**: `table.contains(tbl, element)`
 - **Purpose**: Utility to check if a table contains a value.
 - **Key Flows**:
@@ -1401,6 +1422,197 @@ if table.contains(myinstance.players, id) then
 end
 ```
 - **Security / Anti-Abuse**: none.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### fsn_drawText3D
+- **Name**: fsn_drawText3D
+- **Type**: Client
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/client.lua (4-20)
+- **Signature(s)**: `fsn_drawText3D(x, y, z, text)`
+- **Purpose**: Renders 3D world text at the given position.
+- **Key Flows**:
+  - Projects world coordinates to screen space and draws styled text.
+- **Natives Used**:
+  - World3dToScreen2d — OK
+  - SetTextScale — OK
+  - SetTextFont — OK
+  - SetTextProportional — OK
+  - SetTextColour — OK
+  - SetTextDropshadow — OK
+  - SetTextEdge — OK
+  - SetTextDropShadow — OK
+  - SetTextOutline — OK
+  - SetTextEntry — OK
+  - SetTextCentre — OK
+  - AddTextComponentString — OK
+  - DrawText — OK
+- **OneSync / Networking Notes**: client-only rendering.
+- **Examples**:
+```lua
+fsn_drawText3D(storage.x, storage.y, storage.z, 'Storage')
+```
+- **Security / Anti-Abuse**: none.
+- **References**:
+  - https://docs.fivem.net/natives/
+
+#### nearPos
+- **Name**: nearPos
+- **Type**: Client
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/client.lua (26-27)
+- **Signature(s)**: `nearPos(pos, radius)`
+- **Purpose**: Checks player distance from a coordinate.
+- **Key Flows**:
+  - Compares `GetEntityCoords(PlayerPedId())` with target position.
+- **Natives Used**:
+  - GetEntityCoords — OK
+- **OneSync / Networking Notes**: client spatial check.
+- **Examples**:
+```lua
+if nearPos(storage, 0.5) then
+  -- interact
+end
+```
+- **Security / Anti-Abuse**: none.
+- **References**:
+  - https://docs.fivem.net/natives/?_0x3FEF770D40960D5A
+
+#### EnterMyApartment
+- **Name**: EnterMyApartment
+- **Type**: Client
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/client.lua (68-70)
+- **Signature(s)**: `EnterMyApartment()`
+- **Purpose**: Enters the player into their assigned apartment.
+- **Key Flows**:
+  - Calls `EnterRoom` with the saved room number.
+- **Natives Used**: none
+- **OneSync / Networking Notes**: relies on local room state.
+- **Examples**:
+```lua
+EnterMyApartment()
+```
+- **Security / Anti-Abuse**: ensure room number validated by server.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### EnterRoom
+- **Name**: EnterRoom
+- **Type**: Client
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/client.lua (432-442)
+- **Signature(s)**: `EnterRoom(id)`
+- **Purpose**: Teleports player to the apartment interior and creates an instance.
+- **Key Flows**:
+  - Fades screen, sets coordinates, triggers server instance creation.
+- **Natives Used**:
+  - DoScreenFadeOut — OK
+  - SetEntityCoords — OK
+  - DoScreenFadeIn — OK
+  - TriggerServerEvent — OK
+  - FreezeEntityPosition — OK
+- **OneSync / Networking Notes**: server instance ownership assigned after teleport.
+- **Examples**:
+```lua
+EnterRoom(5)
+```
+- **Security / Anti-Abuse**: validate `id` before teleport.
+- **References**:
+  - https://docs.fivem.net/natives/
+
+#### ToggleActionMenu
+- **Name**: ToggleActionMenu
+- **Type**: Client
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/client.lua (265-288)
+- **Signature(s)**: `ToggleActionMenu()`
+- **Purpose**: Opens or closes the apartment storage menu.
+- **Key Flows**:
+  - Initializes inventory tables and toggles NUI focus.
+- **Natives Used**:
+  - SetNuiFocus — OK
+  - SendNUIMessage — OK
+- **OneSync / Networking Notes**: local UI only.
+- **Examples**:
+```lua
+if nearPos(storage,0.5) then ToggleActionMenu() end
+```
+- **Security / Anti-Abuse**: restrict usage to apartment context.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### isNearStorage
+- **Name**: isNearStorage
+- **Type**: Client
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/client.lua (346-347)
+- **Signature(s)**: `isNearStorage()`
+- **Purpose**: Returns if player is near the apartment storage spot.
+- **Key Flows**:
+  - Exposes `instorage` state for other resources.
+- **Natives Used**: none
+- **OneSync / Networking Notes**: state local to client.
+- **Examples**:
+```lua
+if isNearStorage() then ... end
+```
+- **Security / Anti-Abuse**: none.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### saveApartment
+- **Name**: saveApartment
+- **Type**: Client
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/client.lua (480-482)
+- **Signature(s)**: `saveApartment()`
+- **Purpose**: Persists apartment state to the server.
+- **Key Flows**:
+  - Triggers server save with current apartment details.
+- **Natives Used**:
+  - TriggerServerEvent — OK
+- **OneSync / Networking Notes**: relies on server authority.
+- **Examples**:
+```lua
+saveApartment()
+```
+- **Security / Anti-Abuse**: server validates data.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### fsn_closeATM
+- **Name**: fsn_closeATM
+- **Type**: Client
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bank/client.lua (166-178)
+- **Signature(s)**: `fsn_closeATM()`
+- **Purpose**: Resets player state after leaving ATM UI.
+- **Key Flows**:
+  - Unfreezes player, removes focus, hides NUI.
+- **Natives Used**:
+  - FreezeEntityPosition — OK
+  - SetEntityCollision — OK
+  - ClearPedTasks — OK
+  - SetNuiFocus — OK
+  - SendNUIMessage — OK
+- **OneSync / Networking Notes**: client local.
+- **Examples**:
+```lua
+fsn_closeATM()
+```
+- **Security / Anti-Abuse**: prevents stuck state.
+- **References**:
+  - https://docs.fivem.net/natives/
+
+#### getAvailableAppt
+- **Name**: getAvailableAppt
+- **Type**: Server
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/server.lua (55-67)
+- **Signature(s)**: `getAvailableAppt(src)`
+- **Purpose**: Finds or assigns an unoccupied apartment slot.
+- **Key Flows**:
+  - Iterates apartment list; marks slot occupied by `src`.
+- **Natives Used**: none
+- **OneSync / Networking Notes**: server-only logic.
+- **Examples**:
+```lua
+local id = getAvailableAppt(source)
+```
+- **Security / Anti-Abuse**: ensures one apartment per source.
 - **References**:
   - https://docs.fivem.net/docs/
 
@@ -1695,6 +1907,190 @@ AddEventHandler('fsn_apartments:instance:update', function(inst) ... end)
 - **References**:
   - https://docs.fivem.net/docs/
 
+#### depositMoney
+- **Event**: depositMoney
+- **Direction**: NUI→Client
+- **Type**: NUI
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bank/client.lua (179-213)
+- **Payload**: `tbl` {deposit:number, atbank:boolean}
+- **Typical Callers / Listeners**: ATM UI posts form data; client validates and updates wallet/bank.
+- **Natives Used**:
+  - TriggerEvent — OK
+  - TriggerServerEvent — OK
+- **OneSync / Replication Notes**: balance changes synced via follow-up events.
+- **Examples**:
+```lua
+RegisterNUICallback('depositMoney', function(data) ... end)
+```
+- **Security / Anti-Abuse**: amount capped at $500k and requires bank context.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### fsn_apartments:characterCreation
+- **Event**: fsn_apartments:characterCreation
+- **Direction**: Server→Client
+- **Type**: NetEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/client.lua (447-469)
+- **Payload**: none
+- **Typical Callers / Listeners**: server instructs client to begin character creation flow.
+- **Natives Used**:
+  - TriggerServerEvent — OK
+  - SetEntityCoords — OK
+- **OneSync / Replication Notes**: player frozen during creation; instance created server-side.
+- **Examples**:
+```lua
+AddEventHandler('fsn_apartments:characterCreation', function() ... end)
+```
+- **Security / Anti-Abuse**: restricted to new characters.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### fsn_apartments:inv:update
+- **Event**: fsn_apartments:inv:update
+- **Direction**: Intra-Client
+- **Type**: LocalEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/client.lua (292-295)
+- **Payload**: `tbl:table`
+- **Typical Callers / Listeners**: inventory resource sends updated apartment inventory.
+- **Natives Used**: none
+- **OneSync / Replication Notes**: client-side cache refresh only.
+- **Examples**:
+```lua
+AddEventHandler('fsn_apartments:inv:update', function(t) ... end)
+```
+- **Security / Anti-Abuse**: trust source resource.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### fsn_apartments:outfit:add
+- **Event**: fsn_apartments:outfit:add (Aliases: fsn_apartments:outfit:use, fsn_apartments:outfit:remove, fsn_apartments:outfit:list)
+- **Direction**: Server→Client
+- **Type**: NetEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/client.lua (141-190)
+- **Payload**: varies (`key:string` or none)
+- **Typical Callers / Listeners**: server relays outfit management commands; client updates wardrobe.
+- **Natives Used**:
+  - TriggerEvent — OK
+  - TriggerServerEvent — OK
+- **OneSync / Replication Notes**: wardrobe state synchronized through server saves.
+- **Examples**:
+```lua
+TriggerEvent('fsn_apartments:outfit:add', 'casual')
+```
+- **Security / Anti-Abuse**: requires proximity to wardrobe.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### fsn_apartments:sendApartment
+- **Event**: fsn_apartments:sendApartment
+- **Direction**: Server→Client
+- **Type**: NetEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/client.lua (72-139)
+- **Payload**: `tbl` {number:int, apptinfo:table}
+- **Typical Callers / Listeners**: server provides apartment data to player after login.
+- **Natives Used**:
+  - TriggerEvent — OK
+- **OneSync / Replication Notes**: sets local apartment state.
+- **Examples**:
+```lua
+AddEventHandler('fsn_apartments:sendApartment', function(data) ... end)
+```
+- **Security / Anti-Abuse**: server validates ownership before send.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### fsn_apartments:stash:add
+- **Event**: fsn_apartments:stash:add
+- **Direction**: Server→Client
+- **Type**: NetEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/client.lua (30-49)
+- **Payload**: `amt:number`
+- **Typical Callers / Listeners**: server command deposits cash into apartment stash.
+- **Natives Used**:
+  - TriggerEvent — OK
+  - TriggerServerEvent — OK
+- **OneSync / Replication Notes**: server persists stash after client update.
+- **Examples**:
+```lua
+TriggerClientEvent('fsn_apartments:stash:add', src, 1000)
+```
+- **Security / Anti-Abuse**: enforces 150k stash limit and affordability.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### fsn_apartments:stash:take
+- **Event**: fsn_apartments:stash:take
+- **Direction**: Server→Client
+- **Type**: NetEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/client.lua (51-66)
+- **Payload**: `amt:number`
+- **Typical Callers / Listeners**: server command withdraws cash from stash.
+- **Natives Used**:
+  - TriggerEvent — OK
+  - TriggerServerEvent — OK
+- **OneSync / Replication Notes**: stash balance synchronized after withdrawal.
+- **Examples**:
+```lua
+TriggerClientEvent('fsn_apartments:stash:take', src, 500)
+```
+- **Security / Anti-Abuse**: ensures player has sufficient stash funds.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### fsn_bank:update:both
+- **Event**: fsn_bank:update:both
+- **Direction**: Server→Client
+- **Type**: NetEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bank/client.lua (90-99)
+- **Payload**: `wallet:number`, `bank:number`
+- **Typical Callers / Listeners**: server sends wallet and bank balances.
+- **Natives Used**:
+  - SendNUIMessage — OK
+- **OneSync / Replication Notes**: keeps client HUD in sync.
+- **Examples**:
+```lua
+TriggerClientEvent('fsn_bank:update:both', src, wallet, bank)
+```
+- **Security / Anti-Abuse**: values sourced from server database.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### fsn_bank:change:bankAdd
+- **Event**: fsn_bank:change:bankAdd
+- **Direction**: Server→Client
+- **Type**: NetEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bank/client.lua (101-109)
+- **Payload**: `amount:number`
+- **Typical Callers / Listeners**: server notifies client of bank deposit.
+- **Natives Used**:
+  - SendNUIMessage — OK
+- **OneSync / Replication Notes**: HUD update only.
+- **Examples**:
+```lua
+TriggerClientEvent('fsn_bank:change:bankAdd', src, 200)
+```
+- **Security / Anti-Abuse**: amounts validated server-side.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### fsn_bank:change:bankMinus
+- **Event**: fsn_bank:change:bankMinus
+- **Direction**: Server→Client
+- **Type**: NetEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bank/client.lua (111-119)
+- **Payload**: `amount:number`
+- **Typical Callers / Listeners**: server notifies client of bank withdrawal.
+- **Natives Used**:
+  - SendNUIMessage — OK
+- **OneSync / Replication Notes**: HUD update only.
+- **Examples**:
+```lua
+TriggerClientEvent('fsn_bank:change:bankMinus', src, 200)
+```
+- **Security / Anti-Abuse**: amounts validated server-side.
+- **References**:
+  - https://docs.fivem.net/docs/
+
 #### fsn_apartments:instance:leave
 - **Event**: fsn_apartments:instance:leave
 - **Direction**: Server→Client
@@ -1733,6 +2129,7 @@ TriggerEvent('fsn_apartments:instance:debug')
 - Canonicalized identical helper functions.
 - Merged `createBlips` definitions (fishing, hunting, yoga).
 - Merged `getNearestSpot` definitions (fishing, yoga).
+- Grouped outfit management events under `fsn_apartments:outfit:add`.
 - TODO(next-run): review other activity helpers for consolidation.
 - TODO(next-run): reconcile duplicated instance events across client/server.
 
@@ -1745,5 +2142,5 @@ TriggerEvent('fsn_apartments:instance:debug')
 
 ## PROGRESS MARKERS (EOF)
 
-CONTINUE-HERE — 2025-09-12T23:23:48+00:00 — next: FiveM-FSN-Framework/fsn_apartments/client.lua @ line 1
-MERGE-QUEUE — 2025-09-12T23:23:48+00:00 — remaining: 0 (top 5: n/a)
+CONTINUE-HERE — 2025-09-13T00:25:12+00:00 — next: FiveM-FSN-Framework/fsn_apartments/docs.md @ line 1
+MERGE-QUEUE — 2025-09-13T00:25:12+00:00 — remaining: 0 (top 5: n/a)
