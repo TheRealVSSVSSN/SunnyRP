@@ -1,0 +1,23 @@
+{
+  "title": "GET_TRAIN_DOOR_OPEN_RATIO",
+  "content": "0x40B16551// GetTrainDoorOpenRatio\nfloat GET_TRAIN_DOOR_OPEN_RATIO(Vehicle train, int doorIndex);Parameters:train: The train to obtain the door ratio for.doorIndex: Zero-based door index.Returns: A value between 0.0 (fully closed) and 1.0 (fully open).Gets the ratio that a door is open for on a train.Examples:LuaC#local doorCount = GetTrainDoorCount(train)\nfor doorIndex = 0, doorCount - 1 do\n    local ratio = GetTrainDoorOpenRatio(train, doorIndex)\n    print(\"Door \" .. tostring(doorIndex) .. \" is open by a ratio of \" .. tostring(ratio))\nend",
+  "codeBlocks": [
+    "// GetTrainDoorOpenRatio\nfloat GET_TRAIN_DOOR_OPEN_RATIO(Vehicle train, int doorIndex);",
+    "local doorCount = GetTrainDoorCount(train)\nfor doorIndex = 0, doorCount - 1 do\n    local ratio = GetTrainDoorOpenRatio(train, doorIndex)\n    print(\"Door \" .. tostring(doorIndex) .. \" is open by a ratio of \" .. tostring(ratio))\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetTrainDoorOpenRatio.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_TRAIN_DOOR_OPEN_RATIO"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "GET_WATER_QUAD_ALPHA",
+  "content": "0x14088095// GetWaterQuadAlpha\nBOOL GET_WATER_QUAD_ALPHA(int waterQuad, int* a0, int* a1, int* a2, int* a3);Parameters:waterQuad: The water quad indexa0: The a0 levela1: The a1 levela2: The a2 levela3: The a3 levelReturns: Returns true on success. Alpha values are undefined on failureExamples:Lualocal success, a0, a1, a2, a3 = GetWaterQuadAlpha(0)",
+  "codeBlocks": [
+    "// GetWaterQuadAlpha\nBOOL GET_WATER_QUAD_ALPHA(int waterQuad, int* a0, int* a1, int* a2, int* a3);",
+    "local success, a0, a1, a2, a3 = GetWaterQuadAlpha(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetWaterQuadAlpha.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_WATER_QUAD_ALPHA"
+  ],
+  "tags": [
+    "client"
+  ]
+}

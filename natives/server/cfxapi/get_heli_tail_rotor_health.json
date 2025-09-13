@@ -1,0 +1,23 @@
+{
+  "title": "GET_HELI_TAIL_ROTOR_HEALTH",
+  "content": "0xA41BC13D// GetHeliTailRotorHealth\nfloat GET_HELI_TAIL_ROTOR_HEALTH(Vehicle vehicle);Parameters:vehicle: The target vehicle.Returns: Return the health of the rear rotor of the helicopter, not the tail rotor.Note: This native is deprecated, please use GET_HELI_REAR_ROTOR_HEALTH instead.",
+  "codeBlocks": [
+    "// GetHeliTailRotorHealth\nfloat GET_HELI_TAIL_ROTOR_HEALTH(Vehicle vehicle);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetHeliTailRotorHealth.md",
+    "https://docs.fivem.net/natives/?_0x33EE6E2B",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_HELI_TAIL_ROTOR_HEALTH"
+  ],
+  "tags": [
+    "server"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "title": "SET_VEHICLE_WHEEL_SIZE",
+  "content": "0x53AB5C35// SetVehicleWheelSize\nBOOL SET_VEHICLE_WHEEL_SIZE(Vehicle vehicle, float size);Parameters:vehicle: The vehicle to set data for.size: Size of the wheels (usually between 0.5 and 1.5 is reasonable).Returns: Bool - whether change was successful or notSets vehicle's wheels' size (size is the same for all the wheels, cannot get/set specific wheel of vehicle).\nOnly works on non-default wheels.\nReturns whether change was successful (can be false if trying to set size for non-default wheels).",
+  "codeBlocks": [
+    "// SetVehicleWheelSize\nBOOL SET_VEHICLE_WHEEL_SIZE(Vehicle vehicle, float size);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetVehicleWheelSize.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_VEHICLE_WHEEL_SIZE"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "GET_INTERIOR_ENTITIES_EXTENTS",
+  "content": "0x322B1192// GetInteriorEntitiesExtents\nvoid GET_INTERIOR_ENTITIES_EXTENTS(int interiorId, float* bbMinX, float* bbMinY, float* bbMinZ, float* bbMaxX, float* bbMaxY, float* bbMaxZ);Parameters:interiorId: The target interior.bbMinX: bbMinY: bbMinZ: bbMaxX: bbMaxY: bbMaxZ: Returns: Interior entities extents.Examples:Lualocal playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\n\nif interiorId ~= 0 then\n  local minX, minY, minZ, maxX, maxY, maxZ = GetInteriorEntitiesExtents(interiorId, roomId)\n  print(\"current entities extents is: \" .. vec(minX, minY, minZ) ..\" / \" .. vec(maxX, maxY, maxZ))\nend",
+  "codeBlocks": [
+    "// GetInteriorEntitiesExtents\nvoid GET_INTERIOR_ENTITIES_EXTENTS(int interiorId, float* bbMinX, float* bbMinY, float* bbMinZ, float* bbMaxX, float* bbMaxY, float* bbMaxZ);",
+    "local playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\n\nif interiorId ~= 0 then\n  local minX, minY, minZ, maxX, maxY, maxZ = GetInteriorEntitiesExtents(interiorId, roomId)\n  print(\"current entities extents is: \" .. vec(minX, minY, minZ) ..\" / \" .. vec(maxX, maxY, maxZ))\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetInteriorEntitiesExtents.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_INTERIOR_ENTITIES_EXTENTS"
+  ],
+  "tags": [
+    "client"
+  ]
+}

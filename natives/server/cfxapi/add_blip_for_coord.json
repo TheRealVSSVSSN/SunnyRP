@@ -1,0 +1,23 @@
+{
+  "title": "ADD_BLIP_FOR_COORD",
+  "content": "0xC6F43D0E// AddBlipForCoord\nBlip ADD_BLIP_FOR_COORD(float x, float y, float z);Parameters:x: The X coordinate to create the blip on.y: The Y coordinate.z: The Z coordinate.Returns: A blip handle.Creates a blip for the specified coordinates. You can use SET_BLIP_ natives to change the blip.This is the server-side RPC native equivalent of the client native ADD_BLIP_FOR_COORD.",
+  "codeBlocks": [
+    "// AddBlipForCoord\nBlip ADD_BLIP_FOR_COORD(float x, float y, float z);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/AddBlipForCoord.md",
+    "https://docs.fivem.net/natives/?_0x5A039BB0BCA604B6",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "ADD_BLIP_FOR_COORD"
+  ],
+  "tags": [
+    "server"
+  ]
+}

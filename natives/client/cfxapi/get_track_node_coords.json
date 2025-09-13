@@ -1,0 +1,22 @@
+{
+  "title": "GET_TRACK_NODE_COORDS",
+  "content": "0x1628548E// GetTrackNodeCoords\nbool GET_TRACK_NODE_COORDS(int trackIndex, int trackNode, Vector3* coords);Parameters:trackIndex: The track indextrackNode: The track nodecoords: The resulting track node coordsReturns: Returns if it succeeds in getting coords or notGets the coordinates of a specific track node.",
+  "codeBlocks": [
+    "// GetTrackNodeCoords\nbool GET_TRACK_NODE_COORDS(int trackIndex, int trackNode, Vector3* coords);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetTrackNodeCoords.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_TRACK_NODE_COORDS"
+  ],
+  "tags": [
+    "client"
+  ]
+}

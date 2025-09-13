@@ -1,0 +1,22 @@
+{
+  "title": "GET_TRAIN_CARRIAGE_ENGINE",
+  "content": "0x95070FA// GetTrainCarriageEngine\nint GET_TRAIN_CARRIAGE_ENGINE(Vehicle train);Parameters:train: The entity handle.Returns: The train engine carriage.",
+  "codeBlocks": [
+    "// GetTrainCarriageEngine\nint GET_TRAIN_CARRIAGE_ENGINE(Vehicle train);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetTrainCarriageEngine.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_TRAIN_CARRIAGE_ENGINE"
+  ],
+  "tags": [
+    "server"
+  ]
+}

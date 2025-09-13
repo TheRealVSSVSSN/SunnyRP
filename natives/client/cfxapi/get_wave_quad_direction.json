@@ -1,0 +1,23 @@
+{
+  "title": "GET_WAVE_QUAD_DIRECTION",
+  "content": "0xCCE49A1C// GetWaveQuadDirection\nBOOL GET_WAVE_QUAD_DIRECTION(int waveQuad, float* directionX, float* directionY);Parameters:waveQuad: The wave quad indexdirectionX: The wave quad X directiondirectionY: The wave quad Y directionReturns: Returns true on success. Direction values are undefined on failureExamples:Lualocal success, directionX, directionY = GetWaveQuadDirection(1)",
+  "codeBlocks": [
+    "// GetWaveQuadDirection\nBOOL GET_WAVE_QUAD_DIRECTION(int waveQuad, float* directionX, float* directionY);",
+    "local success, directionX, directionY = GetWaveQuadDirection(1)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetWaveQuadDirection.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_WAVE_QUAD_DIRECTION"
+  ],
+  "tags": [
+    "client"
+  ]
+}

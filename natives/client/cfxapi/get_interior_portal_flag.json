@@ -1,0 +1,23 @@
+{
+  "title": "GET_INTERIOR_PORTAL_FLAG",
+  "content": "0xC74DA47C// GetInteriorPortalFlag\nint GET_INTERIOR_PORTAL_FLAG(int interiorId, int portalIndex);Parameters:interiorId: The target interior.portalIndex: Interior portal index.Returns: Portal's flag.Examples:Lualocal playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\n\nif interiorId ~= 0 then\n  local portalFlag = GetInteriorPortalFlag(interiorId, 0)\n  print(\"portal 0 flag is: \" .. portalRoomFrom)\nend",
+  "codeBlocks": [
+    "// GetInteriorPortalFlag\nint GET_INTERIOR_PORTAL_FLAG(int interiorId, int portalIndex);",
+    "local playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\n\nif interiorId ~= 0 then\n  local portalFlag = GetInteriorPortalFlag(interiorId, 0)\n  print(\"portal 0 flag is: \" .. portalRoomFrom)\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetInteriorPortalFlag.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_INTERIOR_PORTAL_FLAG"
+  ],
+  "tags": [
+    "client"
+  ]
+}

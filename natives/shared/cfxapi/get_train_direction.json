@@ -1,0 +1,23 @@
+{
+  "title": "GET_TRAIN_DIRECTION",
+  "content": "0x8DAF79B6// GetTrainDirection\nBOOL GET_TRAIN_DIRECTION(Vehicle train);Parameters:train: The train handleReturns: True if the train is moving forward on the track, False otherwiseGets the direction the train is facing",
+  "codeBlocks": [
+    "// GetTrainDirection\nBOOL GET_TRAIN_DIRECTION(Vehicle train);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetTrainDirection.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_TRAIN_DIRECTION"
+  ],
+  "tags": [
+    "client",
+    "server"
+  ]
+}

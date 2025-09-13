@@ -1,0 +1,23 @@
+{
+  "title": "SET_VEHICLE_WHEEL_IS_POWERED",
+  "content": "0xBD5291A0// SetVehicleWheelIsPowered\nvoid SET_VEHICLE_WHEEL_IS_POWERED(Vehicle vehicle, int wheelIndex, BOOL powered);Sets whether the wheel is powered.\nOn all wheel drive cars this works to change which wheels receive power, but if a car's fDriveBiasFront doesn't send power to that wheel, it won't get power anyway. This can be fixed by changing the fDriveBiasFront with SET_VEHICLE_HANDLING_FLOAT.\nMax number of wheels can be retrieved with the native GET_VEHICLE_NUMBER_OF_WHEELS.\nThis is a shortcut to a flag in SET_VEHICLE_WHEEL_FLAGS.Examples:LuaJavaScriptC#SetVehicleWheelIsPowered(vehicle, 0, true);",
+  "codeBlocks": [
+    "// SetVehicleWheelIsPowered\nvoid SET_VEHICLE_WHEEL_IS_POWERED(Vehicle vehicle, int wheelIndex, BOOL powered);",
+    "SetVehicleWheelIsPowered(vehicle, 0, true);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetVehicleWheelIsPowered.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_VEHICLE_WHEEL_IS_POWERED"
+  ],
+  "tags": [
+    "client"
+  ]
+}

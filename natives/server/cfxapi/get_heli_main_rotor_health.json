@@ -1,0 +1,23 @@
+{
+  "title": "GET_HELI_MAIN_ROTOR_HEALTH",
+  "content": "0xF01E2AAB// GetHeliMainRotorHealth\nfloat GET_HELI_MAIN_ROTOR_HEALTH(Vehicle vehicle);Parameters:vehicle: The target vehicle.Returns: See the client-side GET_HELI_MAIN_ROTOR_HEALTH for the return value.",
+  "codeBlocks": [
+    "// GetHeliMainRotorHealth\nfloat GET_HELI_MAIN_ROTOR_HEALTH(Vehicle vehicle);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetHeliMainRotorHealth.md",
+    "https://docs.fivem.net/natives/?_0xE4CB7541F413D2C5",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_HELI_MAIN_ROTOR_HEALTH"
+  ],
+  "tags": [
+    "server"
+  ]
+}
