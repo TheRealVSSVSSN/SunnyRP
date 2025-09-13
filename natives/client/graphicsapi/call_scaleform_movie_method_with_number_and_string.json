@@ -1,0 +1,23 @@
+{
+  "title": "CALL_SCALEFORM_MOVIE_METHOD_WITH_NUMBER_AND_STRING",
+  "breadcrumbs": [
+    "Native Reference",
+    "GRAPHICSAPI",
+    "CALL_SCALEFORM_MOVIE_METHOD_WITH_NUMBER_AND_STRING"
+  ],
+  "content": "0xEF662D8D57E290B10x6EAF56DE// CallScaleformMovieMethodWithNumberAndString\nvoid CALL_SCALEFORM_MOVIE_METHOD_WITH_NUMBER_AND_STRING(int scaleform, char* methodName, float floatParam1, float floatParam2, float floatParam3, float floatParam4, float floatParam5, char* stringParam1, char* stringParam2, char* stringParam3, char* stringParam4, char* stringParam5);Calls the Scaleform function and passes both float and string parameters (in their respective order).  \nThe number of parameters passed to the function varies, so the end of the float parameters is represented by -1.0, and the end of the string parameters is represented by 0 (NULL).  \nNOTE: The order of parameters in the function prototype is important! All float parameters must come first, followed by the string parameters.  \nExamples:  \n// function MY_FUNCTION(floatParam1, floatParam2, stringParam)  \nGRAPHICS::_CALL_SCALEFORM_MOVIE_FUNCTION_MIXED_PARAMS(scaleform, \"MY_FUNCTION\", 10.0, 20.0, -1.0, -1.0, -1.0, \"String param\", 0, 0, 0, 0);  \n// function MY_FUNCTION_2(floatParam, stringParam1, stringParam2)  \nGRAPHICS::_CALL_SCALEFORM_MOVIE_FUNCTION_MIXED_PARAMS(scaleform, \"MY_FUNCTION_2\", 10.0, -1.0, -1.0, -1.0, -1.0, \"String param #1\", \"String param #2\", 0, 0, 0);  \nOld name:  _CALL_SCALEFORM_MOVIE_FUNCTION_MIXED_PARAMS",
+  "codeBlocks": [
+    "// CallScaleformMovieMethodWithNumberAndString\nvoid CALL_SCALEFORM_MOVIE_METHOD_WITH_NUMBER_AND_STRING(int scaleform, char* methodName, float floatParam1, float floatParam2, float floatParam3, float floatParam4, float floatParam5, char* stringParam1, char* stringParam2, char* stringParam3, char* stringParam4, char* stringParam5);",
+    "Calls the Scaleform function and passes both float and string parameters (in their respective order).  \nThe number of parameters passed to the function varies, so the end of the float parameters is represented by -1.0, and the end of the string parameters is represented by 0 (NULL).  \nNOTE: The order of parameters in the function prototype is important! All float parameters must come first, followed by the string parameters.  \nExamples:  \n// function MY_FUNCTION(floatParam1, floatParam2, stringParam)  \nGRAPHICS::_CALL_SCALEFORM_MOVIE_FUNCTION_MIXED_PARAMS(scaleform, \"MY_FUNCTION\", 10.0, 20.0, -1.0, -1.0, -1.0, \"String param\", 0, 0, 0, 0);  \n// function MY_FUNCTION_2(floatParam, stringParam1, stringParam2)  \nGRAPHICS::_CALL_SCALEFORM_MOVIE_FUNCTION_MIXED_PARAMS(scaleform, \"MY_FUNCTION_2\", 10.0, -1.0, -1.0, -1.0, -1.0, \"String param #1\", \"String param #2\", 0, 0, 0);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/CallScaleformMovieMethodWithNumberAndString.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

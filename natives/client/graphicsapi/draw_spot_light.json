@@ -1,0 +1,23 @@
+{
+  "title": "DRAW_SPOT_LIGHT",
+  "breadcrumbs": [
+    "Native Reference",
+    "GRAPHICSAPI",
+    "DRAW_SPOT_LIGHT"
+  ],
+  "content": "0xD0F64B265C8C8B330xBDBC410C// DrawSpotLight\nvoid DRAW_SPOT_LIGHT(float posX, float posY, float posZ, float dirX, float dirY, float dirZ, int colorR, int colorG, int colorB, float distance, float brightness, float hardness, float radius, float falloff);Parameters:  \n* pos - coordinate where the spotlight is located  \n* dir - the direction vector the spotlight should aim at from its current position  \n* r,g,b - color of the spotlight  \n* distance - the maximum distance the light can reach  \n* brightness - the brightness of the light  \n* roundness - \"smoothness\" of the circle edge  \n* radius - the radius size of the spotlight  \n* falloff - the falloff size of the light's edge (example: www.i.imgur.com/DemAWeO.jpg)  \nExample in C# (spotlight aims at the closest vehicle):  \nVector3 myPos = Game.Player.Character.Position;  \nVehicle nearest = World.GetClosestVehicle(myPos , 1000f);  \nVector3 destinationCoords = nearest.Position;  \nVector3 dirVector = destinationCoords - myPos;  \ndirVector.Normalize();  \nFunction.Call(Hash.DRAW_SPOT_LIGHT, pos.X, pos.Y, pos.Z, dirVector.X, dirVector.Y, dirVector.Z, 255, 255, 255, 100.0f, 1f, 0.0f, 13.0f, 1f);",
+  "codeBlocks": [
+    "// DrawSpotLight\nvoid DRAW_SPOT_LIGHT(float posX, float posY, float posZ, float dirX, float dirY, float dirZ, int colorR, int colorG, int colorB, float distance, float brightness, float hardness, float radius, float falloff);",
+    "Parameters:  \n* pos - coordinate where the spotlight is located  \n* dir - the direction vector the spotlight should aim at from its current position  \n* r,g,b - color of the spotlight  \n* distance - the maximum distance the light can reach  \n* brightness - the brightness of the light  \n* roundness - \"smoothness\" of the circle edge  \n* radius - the radius size of the spotlight  \n* falloff - the falloff size of the light's edge (example: www.i.imgur.com/DemAWeO.jpg)  \nExample in C# (spotlight aims at the closest vehicle):  \nVector3 myPos = Game.Player.Character.Position;  \nVehicle nearest = World.GetClosestVehicle(myPos , 1000f);  \nVector3 destinationCoords = nearest.Position;  \nVector3 dirVector = destinationCoords - myPos;  \ndirVector.Normalize();  \nFunction.Call(Hash.DRAW_SPOT_LIGHT, pos.X, pos.Y, pos.Z, dirVector.X, dirVector.Y, dirVector.Z, 255, 255, 255, 100.0f, 1f, 0.0f, 13.0f, 1f);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/DrawSpotLight.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

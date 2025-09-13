@@ -1,0 +1,23 @@
+{
+  "title": "NETWORK_CONCEAL_PLAYER",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORKAPI",
+    "NETWORK_CONCEAL_PLAYER"
+  ],
+  "content": "0xBBDF0662528296060x72052DB3// NetworkConcealPlayer\nvoid NETWORK_CONCEAL_PLAYER(Player player, BOOL toggle, BOOL bAllowDamagingWhileConcealed);This is what R* uses to hide players in MP interiors.To manage player visibility with NetworkConcealPlayer, here’s a solid approach:General Population (players not in any instance):Use NetworkConcealPlayer to hide players who are in any instance. This way, general population players won’t see or interact with instance players.Instance Players (players in a specific instance):Use NetworkConcealPlayer to hide players who aren’t in the same instance. Instance players can still see and interact with the general population but not with players in other instances.This setup keeps instance players separate from each other while allowing interaction with the general population.Examples:Luafunction GetPlayerInstance(player)\n\t-- you can replace this with your own data\n    local playerServerId = GetPlayerServerId(player)\n    return Player(playerServerId).state.instance_id or 0\nend\n\nlocal playerId = PlayerId()\n-- Function to manage player visibility\nfunction concealPlayers()\n    local allPlayers = GetActivePlayers()\n\tlocal localPlayerInstance = GetPlayerInstance(playerId)\n\n    for _, player in ipairs(allPlayers) do\n        if player == playerId then goto continue end\n\n        local playerInstance = GetPlayerInstance(player)\n\n\t\tif playerInstance == localPlayerInstance then\n\t\t\t-- if we're in the same instance then we want to be able to see them\n\t\t\tNetworkConcealPlayer(player, false, false)\n\t\telse\n\t\t\t-- they're in a different instance, so hide them\n\t\t\tNetworkConcealPlayer(player, true, false)\n\t\tend\n\n\t\t::continue::\n    end\nend\n\nCreateThread(function()\n\twhile true do\n\t\tconcealPlayers()\n\t\tWait(250)\n\tend\nend)",
+  "codeBlocks": [
+    "// NetworkConcealPlayer\nvoid NETWORK_CONCEAL_PLAYER(Player player, BOOL toggle, BOOL bAllowDamagingWhileConcealed);",
+    "function GetPlayerInstance(player)\n\t-- you can replace this with your own data\n    local playerServerId = GetPlayerServerId(player)\n    return Player(playerServerId).state.instance_id or 0\nend\n\nlocal playerId = PlayerId()\n-- Function to manage player visibility\nfunction concealPlayers()\n    local allPlayers = GetActivePlayers()\n\tlocal localPlayerInstance = GetPlayerInstance(playerId)\n\n    for _, player in ipairs(allPlayers) do\n        if player == playerId then goto continue end\n\n        local playerInstance = GetPlayerInstance(player)\n\n\t\tif playerInstance == localPlayerInstance then\n\t\t\t-- if we're in the same instance then we want to be able to see them\n\t\t\tNetworkConcealPlayer(player, false, false)\n\t\telse\n\t\t\t-- they're in a different instance, so hide them\n\t\t\tNetworkConcealPlayer(player, true, false)\n\t\tend\n\n\t\t::continue::\n    end\nend\n\nCreateThread(function()\n\twhile true do\n\t\tconcealPlayers()\n\t\tWait(250)\n\tend\nend)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/NETWORK/NetworkConcealPlayer.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

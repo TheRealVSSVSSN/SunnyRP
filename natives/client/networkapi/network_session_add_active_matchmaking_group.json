@@ -1,0 +1,23 @@
+{
+  "title": "NETWORK_SESSION_ADD_ACTIVE_MATCHMAKING_GROUP",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORKAPI",
+    "NETWORK_SESSION_ADD_ACTIVE_MATCHMAKING_GROUP"
+  ],
+  "content": "0xCAE55F48D3D7875C0x5BE529F7// NetworkSessionAddActiveMatchmakingGroup\nvoid NETWORK_SESSION_ADD_ACTIVE_MATCHMAKING_GROUP(int groupId);Parameters:groupId: An identifier value between zero and four",
+  "codeBlocks": [
+    "// NetworkSessionAddActiveMatchmakingGroup\nvoid NETWORK_SESSION_ADD_ACTIVE_MATCHMAKING_GROUP(int groupId);",
+    "-- Example\nNetworkSessionAddActiveMatchmakingGroup(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/NETWORK/NetworkSessionAddActiveMatchmakingGroup.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

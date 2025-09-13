@@ -1,0 +1,26 @@
+{
+  "title": "IS_SCALEFORM_MOVIE_DELETING",
+  "breadcrumbs": [
+    "Native Reference",
+    "GRAPHICSAPI",
+    "IS_SCALEFORM_MOVIE_DELETING"
+  ],
+  "content": "0x86255B1FC929E33E// IsScaleformMovieDeleting\nBOOL IS_SCALEFORM_MOVIE_DELETING(int scaleformIndex);Parameters:scaleformIndex: Scaleform index returned by REQUEST_SCALEFORM_MOVIE (or similar natives).Returns: Returns true if a scaleform movie is being deleted from streaming memory (After it has been marked as no longer needed with SET_SCALEFORM_MOVIE_AS_NO_LONGER_NEEDED.NativeDB Introduced: v1290",
+  "codeBlocks": [
+    "// IsScaleformMovieDeleting\nBOOL IS_SCALEFORM_MOVIE_DELETING(int scaleformIndex);",
+    "NativeDB Introduced: v1290",
+    "-- Example\nIsScaleformMovieDeleting(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/IsScaleformMovieDeleting.md",
+    "https://docs.fivem.net/natives/?_0x11FE353CF9733E6F",
+    "https://docs.fivem.net/natives/?_0x1D132D614DD86811",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

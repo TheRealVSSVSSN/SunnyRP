@@ -1,0 +1,23 @@
+{
+  "title": "_SET_CHECKPOINT_ICON_HEIGHT",
+  "breadcrumbs": [
+    "Native Reference",
+    "GRAPHICSAPI",
+    "_SET_CHECKPOINT_ICON_HEIGHT"
+  ],
+  "content": "0x4B5B4DA5D79F19430x80151CCF// SetCheckpointIconHeight\nvoid _SET_CHECKPOINT_ICON_HEIGHT(int checkpoint, float height_multiplier);Parameters:checkpoint: The checkpoint the multiplier should be applied to.height_multiplier: The multiplier for the icon height above the checkpoint's coordinates. Default is 1.0This multiplies the height of the icon inside a checkpoint with the default height of about 2 units above the checkpoint's coordinates.Old name:  _SET_CHECKPOINT_SCALEExamples:Lualocal checkpoint = CreateCheckpoint(...)\nSetCheckpointIconHeight(checkpoint, 2.0) -- places the icon two times as high as the default.",
+  "codeBlocks": [
+    "// SetCheckpointIconHeight\nvoid _SET_CHECKPOINT_ICON_HEIGHT(int checkpoint, float height_multiplier);",
+    "local checkpoint = CreateCheckpoint(...)\nSetCheckpointIconHeight(checkpoint, 2.0) -- places the icon two times as high as the default."
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/SetCheckpointIconHeight.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

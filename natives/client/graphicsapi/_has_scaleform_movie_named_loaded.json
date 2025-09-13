@@ -1,0 +1,24 @@
+{
+  "title": "_HAS_SCALEFORM_MOVIE_NAMED_LOADED",
+  "breadcrumbs": [
+    "Native Reference",
+    "GRAPHICSAPI",
+    "_HAS_SCALEFORM_MOVIE_NAMED_LOADED"
+  ],
+  "content": "0x9743BCCF7CD6E1F6// HasScaleformMovieNamedLoaded\nBOOL _HAS_SCALEFORM_MOVIE_NAMED_LOADED(int* scaleformHandle, char* scaleformName);Parameters:scaleformHandle: Scaleform movie handlescaleformName: Name of the Scaleform movie to checkReturns: Returns true if the named Scaleform movie is loaded, false otherwise.Check if a Scaleform movie with the given name has been loaded.NativeDB Introduced: v3407",
+  "codeBlocks": [
+    "// HasScaleformMovieNamedLoaded\nBOOL _HAS_SCALEFORM_MOVIE_NAMED_LOADED(int* scaleformHandle, char* scaleformName);",
+    "NativeDB Introduced: v3407",
+    "-- Example\n_HasScaleformMovieNamedLoaded(0, '')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/HasScaleformMovieNamedLoaded.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}
