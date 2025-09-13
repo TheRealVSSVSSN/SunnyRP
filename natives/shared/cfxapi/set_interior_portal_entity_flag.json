@@ -1,0 +1,20 @@
+{
+  "title": "SET_INTERIOR_PORTAL_ENTITY_FLAG",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_INTERIOR_PORTAL_ENTITY_FLAG"
+  ],
+  "content": "0x8349CD76// SetInteriorPortalEntityFlag\nvoid SET_INTERIOR_PORTAL_ENTITY_FLAG(int interiorId, int portalIndex, int entityIndex, int flag);Parameters:interiorId: The target interior.portalIndex: Interior portal index.entityIndex: Portal entity index.flag: New flag value.Examples:Lualocal playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\nlocal portalIndex = 0\n\nif interiorId ~= 0 then\n  local count = GetInteriorPortalEntityCount(interiorId, portalIndex)\n  for i=0, count-1 do\n    SetInteriorPortalEntityFlag(interiorId, portalIndex, i, 0)\n  end\n  RefreshInterior(interiorId)\nend",
+  "codeBlocks": [
+    "// SetInteriorPortalEntityFlag\nvoid SET_INTERIOR_PORTAL_ENTITY_FLAG(int interiorId, int portalIndex, int entityIndex, int flag);",
+    "local playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\nlocal portalIndex = 0\n\nif interiorId ~= 0 then\n  local count = GetInteriorPortalEntityCount(interiorId, portalIndex)\n  for i=0, count-1 do\n    SetInteriorPortalEntityFlag(interiorId, portalIndex, i, 0)\n  end\n  RefreshInterior(interiorId)\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetInteriorPortalEntityFlag.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

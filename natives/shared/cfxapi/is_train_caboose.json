@@ -1,0 +1,19 @@
+{
+  "title": "IS_TRAIN_CABOOSE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "IS_TRAIN_CABOOSE"
+  ],
+  "content": "0xFA9336E5// IsTrainCaboose\nbool IS_TRAIN_CABOOSE(Vehicle train);Parameters:train: The train handleReturns: Returns true if the train is the caboose of the chain.",
+  "codeBlocks": [
+    "// IsTrainCaboose\nbool IS_TRAIN_CABOOSE(Vehicle train);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/IsTrainCaboose.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

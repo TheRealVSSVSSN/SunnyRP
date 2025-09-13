@@ -1,0 +1,19 @@
+{
+  "title": "RESET_VEHICLE_PEDS_CAN_STAND_ON_TOP_FLAG",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "RESET_VEHICLE_PEDS_CAN_STAND_ON_TOP_FLAG"
+  ],
+  "content": "0xDF62CFE2// ResetVehiclePedsCanStandOnTopFlag\nvoid RESET_VEHICLE_PEDS_CAN_STAND_ON_TOP_FLAG(Vehicle vehicle);Parameters:vehicle: The vehicle.Resets whether or not peds can stand on top of the specified vehicle.Note this flag is not replicated automatically, you will have to manually do so.",
+  "codeBlocks": [
+    "// ResetVehiclePedsCanStandOnTopFlag\nvoid RESET_VEHICLE_PEDS_CAN_STAND_ON_TOP_FLAG(Vehicle vehicle);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/ResetVehiclePedsCanStandOnTopFlag.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

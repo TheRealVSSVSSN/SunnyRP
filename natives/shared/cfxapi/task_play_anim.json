@@ -1,0 +1,22 @@
+{
+  "title": "TASK_PLAY_ANIM",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "TASK_PLAY_ANIM"
+  ],
+  "content": "0x5AB552C6// TaskPlayAnim\nvoid TASK_PLAY_ANIM(Ped ped, char* animDictionary, char* animationName, float blendInSpeed, float blendOutSpeed, int duration, int flag, float playbackRate, BOOL lockX, BOOL lockY, BOOL lockZ);Parameters:ped: The ped you want to play the animationanimDictionary: The animation dictionaryanimationName: The animation nameblendInSpeed: The speed at which the animation blends in. Lower is slower and higher is faster, 1.0 is normal, 8.0 is basically instantblendOutSpeed: The speed at which the animation blends out. Lower is slower and higher is faster, 1.0 is normal, 8.0 is basically instantduration: The duration of the animation in milliseconds. -1 will play the animation until canceledflag: The animation flags (see enum)playbackRate: The playback rate (between 0.0 and 1.0)lockX: lockY: lockZ: Animations listenum eScriptedAnimFlags\n{\nAF_LOOPING = 1,\nAF_HOLD_LAST_FRAME = 2,\nAF_REPOSITION_WHEN_FINISHED = 4,\nAF_NOT_INTERRUPTABLE = 8,\nAF_UPPERBODY = 16,\nAF_SECONDARY = 32,\nAF_REORIENT_WHEN_FINISHED = 64,\nAF_ABORT_ON_PED_MOVEMENT = 128,\nAF_ADDITIVE = 256,\nAF_TURN_OFF_COLLISION = 512,\nAF_OVERRIDE_PHYSICS = 1024,\nAF_IGNORE_GRAVITY = 2048,\nAF_EXTRACT_INITIAL_OFFSET = 4096,\nAF_EXIT_AFTER_INTERRUPTED = 8192,\nAF_TAG_SYNC_IN = 16384,\nAF_TAG_SYNC_OUT = 32768,\nAF_TAG_SYNC_CONTINUOUS = 65536,\nAF_FORCE_START = 131072,\nAF_USE_KINEMATIC_PHYSICS = 262144,\nAF_USE_MOVER_EXTRACTION = 524288,\nAF_HIDE_WEAPON = 1048576,\nAF_ENDS_IN_DEAD_POSE = 2097152,\nAF_ACTIVATE_RAGDOLL_ON_COLLISION = 4194304,\nAF_DONT_EXIT_ON_DEATH = 8388608,\nAF_ABORT_ON_WEAPON_DAMAGE = 16777216,\nAF_DISABLE_FORCED_PHYSICS_UPDATE = 33554432,\nAF_PROCESS_ATTACHMENTS_ON_START = 67108864,\nAF_EXPAND_PED_CAPSULE_FROM_SKELETON = 134217728,\nAF_USE_ALTERNATIVE_FP_ANIM = 268435456,\nAF_BLENDOUT_WRT_LAST_FRAME = 536870912,\nAF_USE_FULL_BLENDING = 1073741824\n}\nThis is the server-side RPC native equivalent of the client native TASK_PLAY_ANIM.",
+  "codeBlocks": [
+    "// TaskPlayAnim\nvoid TASK_PLAY_ANIM(Ped ped, char* animDictionary, char* animationName, float blendInSpeed, float blendOutSpeed, int duration, int flag, float playbackRate, BOOL lockX, BOOL lockY, BOOL lockZ);",
+    "enum eScriptedAnimFlags\n{\nAF_LOOPING = 1,\nAF_HOLD_LAST_FRAME = 2,\nAF_REPOSITION_WHEN_FINISHED = 4,\nAF_NOT_INTERRUPTABLE = 8,\nAF_UPPERBODY = 16,\nAF_SECONDARY = 32,\nAF_REORIENT_WHEN_FINISHED = 64,\nAF_ABORT_ON_PED_MOVEMENT = 128,\nAF_ADDITIVE = 256,\nAF_TURN_OFF_COLLISION = 512,\nAF_OVERRIDE_PHYSICS = 1024,\nAF_IGNORE_GRAVITY = 2048,\nAF_EXTRACT_INITIAL_OFFSET = 4096,\nAF_EXIT_AFTER_INTERRUPTED = 8192,\nAF_TAG_SYNC_IN = 16384,\nAF_TAG_SYNC_OUT = 32768,\nAF_TAG_SYNC_CONTINUOUS = 65536,\nAF_FORCE_START = 131072,\nAF_USE_KINEMATIC_PHYSICS = 262144,\nAF_USE_MOVER_EXTRACTION = 524288,\nAF_HIDE_WEAPON = 1048576,\nAF_ENDS_IN_DEAD_POSE = 2097152,\nAF_ACTIVATE_RAGDOLL_ON_COLLISION = 4194304,\nAF_DONT_EXIT_ON_DEATH = 8388608,\nAF_ABORT_ON_WEAPON_DAMAGE = 16777216,\nAF_DISABLE_FORCED_PHYSICS_UPDATE = 33554432,\nAF_PROCESS_ATTACHMENTS_ON_START = 67108864,\nAF_EXPAND_PED_CAPSULE_FROM_SKELETON = 134217728,\nAF_USE_ALTERNATIVE_FP_ANIM = 268435456,\nAF_BLENDOUT_WRT_LAST_FRAME = 536870912,\nAF_USE_FULL_BLENDING = 1073741824\n}\n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/TaskPlayAnim.md",
+    "https://alexguirre.github.io/animations-list/",
+    "https://docs.fivem.net/natives/?_0xEA47FE3719165B94",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

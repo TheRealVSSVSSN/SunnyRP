@@ -1,0 +1,19 @@
+{
+  "title": "SET_MANUAL_SHUTDOWN_LOADING_SCREEN_NUI",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_MANUAL_SHUTDOWN_LOADING_SCREEN_NUI"
+  ],
+  "content": "0x1722C938// SetManualShutdownLoadingScreenNui\nvoid SET_MANUAL_SHUTDOWN_LOADING_SCREEN_NUI(BOOL manualShutdown);Parameters:manualShutdown: TRUE to manually shut down the loading screen NUI.Sets whether or not SHUTDOWN_LOADING_SCREEN automatically shuts down the NUI frame for the loading screen. If this is enabled,\nyou will have to manually invoke SHUTDOWN_LOADING_SCREEN_NUI whenever you want to hide the NUI loading screen.",
+  "codeBlocks": [
+    "// SetManualShutdownLoadingScreenNui\nvoid SET_MANUAL_SHUTDOWN_LOADING_SCREEN_NUI(BOOL manualShutdown);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetManualShutdownLoadingScreenNui.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

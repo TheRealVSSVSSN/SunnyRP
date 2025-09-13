@@ -1,0 +1,20 @@
+{
+  "title": "SET_INTERIOR_PORTAL_FLAG",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_INTERIOR_PORTAL_FLAG"
+  ],
+  "content": "0x88B2355E// SetInteriorPortalFlag\nvoid SET_INTERIOR_PORTAL_FLAG(int interiorId, int portalIndex, int flag);Parameters:interiorId: The target interior.portalIndex: Interior portal index.flag: New flag value.Examples:Lualocal playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\n\nif interiorId ~= 0 then\n  local portalIndex = 0\n\n  SetInteriorPortalFlag(interiorId, portalIndex, 1)\n  RefreshInterior(interiorId)\nend",
+  "codeBlocks": [
+    "// SetInteriorPortalFlag\nvoid SET_INTERIOR_PORTAL_FLAG(int interiorId, int portalIndex, int flag);",
+    "local playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\n\nif interiorId ~= 0 then\n  local portalIndex = 0\n\n  SetInteriorPortalFlag(interiorId, portalIndex, 1)\n  RefreshInterior(interiorId)\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetInteriorPortalFlag.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

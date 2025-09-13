@@ -1,0 +1,19 @@
+{
+  "title": "MUMBLE_ADD_VOICE_TARGET_PLAYER",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "MUMBLE_ADD_VOICE_TARGET_PLAYER"
+  ],
+  "content": "0x32C5355A// MumbleAddVoiceTargetPlayer\nvoid MUMBLE_ADD_VOICE_TARGET_PLAYER(int targetId, Player player);Parameters:targetId: A Mumble voice target ID, ranging from 1..30 (inclusive).player: A game player index.Adds the specified player to the target list for the specified Mumble voice target ID.",
+  "codeBlocks": [
+    "// MumbleAddVoiceTargetPlayer\nvoid MUMBLE_ADD_VOICE_TARGET_PLAYER(int targetId, Player player);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/MumbleAddVoiceTargetPlayer.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

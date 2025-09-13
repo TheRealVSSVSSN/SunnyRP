@@ -1,0 +1,19 @@
+{
+  "title": "GET_ENTITY_ATTACHED_TO",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_ENTITY_ATTACHED_TO"
+  ],
+  "content": "0xFE1589F9// GetEntityAttachedTo\nEntity GET_ENTITY_ATTACHED_TO(Entity entity);Parameters:entity: The entity to check.Returns: The attached entity handle. 0 returned if the entity is not attached.Gets the entity that this entity is attached to.",
+  "codeBlocks": [
+    "// GetEntityAttachedTo\nEntity GET_ENTITY_ATTACHED_TO(Entity entity);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetEntityAttachedTo.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

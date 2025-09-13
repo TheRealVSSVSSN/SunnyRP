@@ -1,0 +1,21 @@
+{
+  "title": "IS_VEHICLE_WHEEL_BROKEN_OFF",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "IS_VEHICLE_WHEEL_BROKEN_OFF"
+  ],
+  "content": "0xCF1BC668// IsVehicleWheelBrokenOff\nBOOL IS_VEHICLE_WHEEL_BROKEN_OFF(Vehicle vehicle, int wheelIndex);Parameters:vehicle: The vehicle handle.wheelIndex: The wheel index.Getter for BREAK_OFF_VEHICLE_WHEEL.Examples:Lualocal vehicle = GetVehiclePedIsIn(PlayerPedId())\n\nif DoesEntityExist(vehicle) then\n  local isWheelBroken = IsVehicleWheelBrokenOff(vehicle, 1)\n  print(\"Is wheel 1 broken? \", isWheelBroken)\nend",
+  "codeBlocks": [
+    "// IsVehicleWheelBrokenOff\nBOOL IS_VEHICLE_WHEEL_BROKEN_OFF(Vehicle vehicle, int wheelIndex);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId())\n\nif DoesEntityExist(vehicle) then\n  local isWheelBroken = IsVehicleWheelBrokenOff(vehicle, 1)\n  print(\"Is wheel 1 broken? \", isWheelBroken)\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/IsVehicleWheelBrokenOff.md",
+    "https://docs.fivem.net/natives/?_0xA274CADB",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "title": "SET_INTERIOR_PROBE_LENGTH",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_INTERIOR_PROBE_LENGTH"
+  ],
+  "content": "0x423F7E39// SetInteriorProbeLength\nvoid SET_INTERIOR_PROBE_LENGTH(float probeLength);Parameters:probeLength: The desired probe length (0.0 - 150.0)Overwrite the games default CPortalTracker interior detection range.\nThis fixes potentially unwanted behaviour in the base game and allows you to build custom interiors with larger ceiling heights without running into graphical glitches.By default CPortalTracker will probe 4 units downward trying to reach collisions that are part of the interior the entity is in.\nIf no collision can be found 16 units are used in some circumstances.There are 30+ hard coded special cases, only some of them exposed via script (for example ENABLE_STADIUM_PROBES_THIS_FRAME).This native allows you to extend the probe range up to 150 units which is the same value the game uses for the xs_arena_interiorExamples:LuaRegisterCommand(\"setInteriorProbeLength\", function(src, args, raw)\n    local probeLength = (tonumber(args[1]) + 0.0)\n\n    print(\"Extending interior detection probes to: \", probeLength)\n    SetInteriorProbeLength(probeLength)\nend)\n\nRegisterCommand(\"resetInteriorProbeLength\", function()\n    print(\"Resetting interior detection probes to default settings\")\n    SetInteriorProbeLength(0.0)\nend)",
+  "codeBlocks": [
+    "// SetInteriorProbeLength\nvoid SET_INTERIOR_PROBE_LENGTH(float probeLength);",
+    "RegisterCommand(\"setInteriorProbeLength\", function(src, args, raw)\n    local probeLength = (tonumber(args[1]) + 0.0)\n\n    print(\"Extending interior detection probes to: \", probeLength)\n    SetInteriorProbeLength(probeLength)\nend)\n\nRegisterCommand(\"resetInteriorProbeLength\", function()\n    print(\"Resetting interior detection probes to default settings\")\n    SetInteriorProbeLength(0.0)\nend)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetInteriorProbeLength.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

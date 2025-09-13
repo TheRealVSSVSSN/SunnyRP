@@ -1,0 +1,19 @@
+{
+  "title": "GET_AIR_DRAG_MULTIPLIER_FOR_PLAYERS_VEHICLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_AIR_DRAG_MULTIPLIER_FOR_PLAYERS_VEHICLE"
+  ],
+  "content": "0x62FC38D0// GetAirDragMultiplierForPlayersVehicle\nfloat GET_AIR_DRAG_MULTIPLIER_FOR_PLAYERS_VEHICLE(char* playerSrc);Parameters:playerSrc: The player handle",
+  "codeBlocks": [
+    "// GetAirDragMultiplierForPlayersVehicle\nfloat GET_AIR_DRAG_MULTIPLIER_FOR_PLAYERS_VEHICLE(char* playerSrc);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetAirDragMultiplierForPlayersVehicle.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

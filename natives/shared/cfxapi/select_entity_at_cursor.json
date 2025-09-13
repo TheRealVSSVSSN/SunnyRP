@@ -1,0 +1,19 @@
+{
+  "title": "SELECT_ENTITY_AT_CURSOR",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SELECT_ENTITY_AT_CURSOR"
+  ],
+  "content": "0x3DD8130F// SelectEntityAtCursor\nEntity SELECT_ENTITY_AT_CURSOR(int hitFlags, BOOL precise);Parameters:hitFlags: A bit mask of entity types to match.precise: Whether to do a precise test, i.e. of visual coordinates, too.Returns: An entity handle, or zero.Gets the selected entity at the current mouse cursor position, and changes the current selection depth. This function supports SDK infrastructure and is not intended to be used directly from your code.",
+  "codeBlocks": [
+    "// SelectEntityAtCursor\nEntity SELECT_ENTITY_AT_CURSOR(int hitFlags, BOOL precise);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SelectEntityAtCursor.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

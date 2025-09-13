@@ -1,0 +1,20 @@
+{
+  "title": "GET_CALMING_QUAD_COUNT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_CALMING_QUAD_COUNT"
+  ],
+  "content": "0xCEBFC42// GetCalmingQuadCount\nint GET_CALMING_QUAD_COUNT();Returns: Returns the amount of calming quads loaded.Examples:Lualocal calmingQuadCount = GetCalmingQuadCount()",
+  "codeBlocks": [
+    "// GetCalmingQuadCount\nint GET_CALMING_QUAD_COUNT();",
+    "local calmingQuadCount = GetCalmingQuadCount()"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetCalmingQuadCount.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

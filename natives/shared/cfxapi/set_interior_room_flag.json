@@ -1,0 +1,20 @@
+{
+  "title": "SET_INTERIOR_ROOM_FLAG",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_INTERIOR_ROOM_FLAG"
+  ],
+  "content": "0x5518D60B// SetInteriorRoomFlag\nvoid SET_INTERIOR_ROOM_FLAG(int interiorId, int roomIndex, int flag);Parameters:interiorId: The target interior.roomIndex: Interior room index.flag: New flag value.Examples:Lualocal playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\nlocal roomHash = GetRoomKeyFromEntity(playerPed)\nlocal roomId = GetInteriorRoomIndexByHash(interiorId, roomHash)\n\nif roomId ~= -1 then\n  SetInteriorRoomFlag(interiorId, roomId, 64)\n  RefreshInterior(interiorId)\nend",
+  "codeBlocks": [
+    "// SetInteriorRoomFlag\nvoid SET_INTERIOR_ROOM_FLAG(int interiorId, int roomIndex, int flag);",
+    "local playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\nlocal roomHash = GetRoomKeyFromEntity(playerPed)\nlocal roomId = GetInteriorRoomIndexByHash(interiorId, roomHash)\n\nif roomId ~= -1 then\n  SetInteriorRoomFlag(interiorId, roomId, 64)\n  RefreshInterior(interiorId)\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetInteriorRoomFlag.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

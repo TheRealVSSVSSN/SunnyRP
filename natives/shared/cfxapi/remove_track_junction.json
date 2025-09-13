@@ -1,0 +1,19 @@
+{
+  "title": "REMOVE_TRACK_JUNCTION",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "REMOVE_TRACK_JUNCTION"
+  ],
+  "content": "0x4F3D2B2A// RemoveTrackJunction\nbool REMOVE_TRACK_JUNCTION(int junctionIndex);Parameters:junctionIndex: The junctions indexReturns: Returns if it succeeds in removing a junction or notRemoves the specified track junction.",
+  "codeBlocks": [
+    "// RemoveTrackJunction\nbool REMOVE_TRACK_JUNCTION(int junctionIndex);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/RemoveTrackJunction.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

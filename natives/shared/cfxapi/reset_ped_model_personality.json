@@ -1,0 +1,19 @@
+{
+  "title": "RESET_PED_MODEL_PERSONALITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "RESET_PED_MODEL_PERSONALITY"
+  ],
+  "content": "0x79A12861// ResetPedModelPersonality\nvoid RESET_PED_MODEL_PERSONALITY(Hash modelHash);Parameters:modelHash: Ped's model.Restores an overridden ped model personality type to the default value.",
+  "codeBlocks": [
+    "// ResetPedModelPersonality\nvoid RESET_PED_MODEL_PERSONALITY(Hash modelHash);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/ResetPedModelPersonality.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

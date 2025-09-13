@@ -1,0 +1,19 @@
+{
+  "title": "GET_WEAPON_COMPONENT_CAMERA_HASH",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_WEAPON_COMPONENT_CAMERA_HASH"
+  ],
+  "content": "0xACB7E68F// GetWeaponComponentCameraHash\nint GET_WEAPON_COMPONENT_CAMERA_HASH(Hash componentHash);Parameters:componentHash: Weapon component name hash.Returns: The hash of the scope camera.A getter for CameraHash in a weapon scope component.",
+  "codeBlocks": [
+    "// GetWeaponComponentCameraHash\nint GET_WEAPON_COMPONENT_CAMERA_HASH(Hash componentHash);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetWeaponComponentCameraHash.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}
