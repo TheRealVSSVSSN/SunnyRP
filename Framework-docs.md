@@ -4,8 +4,8 @@ This document indexes the Example_Frameworks/ directory to guide development of 
 
 ## Scan Stamp & Inventory Overview
 
- TREE-SCAN-STAMP — 2025-09-13T02:54:30+00:00 — dirs:783 files:14434
-
+ TREE-SCAN-STAMP — 2025-09-13T03:22:07+00:00 — dirs:783 files:14433
+ NATIVES-DB — present — entries:7289 — version:unknown — generatedAt:unknown
 | Folder | Resources | Files | Server Files | Client Files | Shared Files |
 | --- | --- | --- | --- | --- | --- |
 | FiveM-FSN-Framework | 58 | 723 | 75 | 124 | 3 |
@@ -32,22 +32,38 @@ Example_Frameworks/
     │   ├── server.lua
     │   ├── sv_frontdesks.lua
     │   └── trucks.lua
-    └── fsn_bennys/
-        ├── cl_bennys.lua
-        ├── cl_config.lua
+    ├── fsn_bennys/
+    │   ├── cl_bennys.lua
+    │   ├── cl_config.lua
+    │   ├── docs.md
+    │   ├── fxmanifest.lua
+    │   └── menu.lua
+    ├── fsn_bikerental/
+    │   ├── client.lua
+    │   ├── docs.md
+    │   ├── fxmanifest.lua
+    │   └── html/
+    │       ├── cursor.png
+    │       ├── index.html
+    │       ├── script.js
+    │       └── style.css
+    └── fsn_boatshop/
+        ├── cl_boatshop.lua
+        ├── config.lua
         ├── docs.md
         ├── fxmanifest.lua
-        └── menu.lua
+        └── sv_boatshop.lua
 ```
 
 ## Processing Ledger
 
 | Scope | Total | Done | Remaining | Last Updated |
 | --- | --- | --- | --- | --- |
-| File Enumeration | 14434 | 761 | 13673 | 2025-09-13 |
-| Function Extraction | 38 | 38 | 0 | 2025-09-13 |
-| Event Extraction | 48 | 48 | 0 | 2025-09-13 |
-| Native Currency Checks | 92 | 92 | 0 | 2025-09-13 |
+| File Enumeration | 14433 | 771 | 13662 | 2025-09-13 |
+| Function Extraction | 41 | 41 | 0 | 2025-09-13 |
+| Event Extraction | 50 | 50 | 0 | 2025-09-13 |
+| Native Currency Checks (local) | 96 | 96 | 0 | 2025-09-13 |
+| Native Currency Checks (web) | 0 | 0 | 0 | 2025-09-13 |
 | Similarity Merges | 3 | 3 | 0 | 2025-09-13 |
 
 ## Function & Event Registry
@@ -98,6 +114,9 @@ Example_Frameworks/
 - [startYoga](#startyoga)
 - [table.contains](#tablecontains)
 - [ToggleActionMenu](#toggleactionmenu)
+- [drawMenuText](#drawmenutext)
+- [Menu.new](#menunew)
+- [Menu:showNotification](#menushownotification)
 
 #### Events
 - [chat:addMessage](#chataddmessage)
@@ -147,6 +166,8 @@ Example_Frameworks/
 - [fsn_bankrobbery:vault:close](#fsn_bankrobberyvaultclose)
 - [fsn_bankrobbery:init](#fsn_bankrobberyinit)
 - [fsn_bankrobbery:payout](#fsn_bankrobberypayout)
+- [fsn_bikerental:escape](#fsn_bikerentalescape)
+- [fsn_bikerental:rentBike](#fsn_bikerentalrentbike)
 
 ### 5.3 Functions — Detailed Entries
 
@@ -181,6 +202,64 @@ CreateThread(function()
 end)
 ```
 - **Security / Anti-Abuse**: Static data; no inputs.
+- **References**:
+  - https://docs.fivem.net/natives/
+
+#### Menu.new
+- **Name**: Menu.new
+- **Type**: Client
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bennys/menu.lua (10-45)
+- **Signature(s)**: `Menu.new(title, header, x, y, width, height, font)`
+- **Purpose**: Constructs a menu object with default configuration.
+- **Key Flows**:
+  - Initializes state, control mappings, and styling.
+- **Natives Used**: none
+- **OneSync / Networking Notes**: local UI only.
+- **Examples**:
+```lua
+local menu = Menu.new('Bennys', 'Main', 0.5, 0.5, 0.2, 0.3, 0)
+```
+- **Security / Anti-Abuse**: no external inputs.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### Menu:showNotification
+- **Name**: Menu:showNotification
+- **Type**: Client
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bennys/menu.lua (47-57)
+- **Signature(s)**: `Menu:showNotification(txt)`
+- **Purpose**: Displays a temporary on-screen notification.
+- **Key Flows**:
+  - Spawns thread, sets notification, clears after delay.
+- **Natives Used**: none
+- **OneSync / Networking Notes**: local display only.
+- **Examples**:
+```lua
+menu:showNotification('Upgrade applied')
+```
+- **Security / Anti-Abuse**: duration hardcoded; no spam mitigation.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### drawMenuText
+- **Name**: drawMenuText
+- **Type**: Client
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bennys/menu.lua (75-88)
+- **Signature(s)**: `drawMenuText(text, font, centre, x, y, scale, r, g, b, a)`
+- **Purpose**: Renders menu text at given coordinates.
+- **Key Flows**:
+  - Configures text settings and draws to screen.
+- **Natives Used**:
+  - SET_TEXT_FONT — OK [local]
+  - SET_TEXT_SCALE — OK [local]
+  - SET_TEXT_COLOUR — OK [local]
+  - ADD_TEXT_COMPONENT_STRING — OK [local]
+- **OneSync / Networking Notes**: purely client-side rendering.
+- **Examples**:
+```lua
+drawMenuText('Welcome', 0, true, 0.5, 0.5, 0.5, 255, 255, 255, 255)
+```
+- **Security / Anti-Abuse**: inputs trusted; no sanitization.
 - **References**:
   - https://docs.fivem.net/natives/
 
@@ -1848,6 +1927,42 @@ TriggerServerEvent('fsn_bankrobbery:payout', 1)
 - **Security / Anti-Abuse**: lacks item or police checks.
 - **References**:
   - https://docs.fivem.net/docs/
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### fsn_bikerental:escape
+- **Event**: fsn_bikerental:escape
+- **Direction**: Client→Server
+- **Type**: NUI
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/html/script.js (8-12)
+- **Payload**: none
+- **Typical Callers / Listeners**: triggered when user presses Escape in rental UI; server closes UI.
+- **Natives Used**: none
+- **OneSync / Replication Notes**: NUI callback to server.
+- **Examples**:
+```javascript
+fetch('https://fsn_bikerental/escape', { method: 'POST', body: '{}' });
+```
+- **Security / Anti-Abuse**: server should verify requester identity.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### fsn_bikerental:rentBike
+- **Event**: fsn_bikerental:rentBike
+- **Direction**: Client→Server
+- **Type**: NUI
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_bikerental/html/script.js (14-25)
+- **Payload**: `model` string, `price` number
+- **Typical Callers / Listeners**: user selects bike in UI; server processes rental.
+- **Natives Used**: none
+- **OneSync / Replication Notes**: NUI fetch requiring server callback.
+- **Examples**:
+```javascript
+fetch('https://fsn_bikerental/rentBike', {method:'POST',headers:{'Content-Type':'application/json; charset=UTF-8'},body: JSON.stringify({model:'bmx', price:100})});
+```
+- **Security / Anti-Abuse**: validate model and price server-side.
+- **References**:
+  - https://docs.fivem.net/docs/
 
 ## Similarity Merge Report
 - Canonicalized identical helper functions.
@@ -1862,10 +1977,11 @@ TriggerServerEvent('fsn_bankrobbery:payout', 1)
 - TODO(next-run): document recommended debug commands and profiling tools.
 
 ## References
+- ./natives.json (local DB)
 - https://docs.fivem.net/docs/
 - https://docs.fivem.net/natives/
 
 ## PROGRESS MARKERS (EOF)
 
-CONTINUE-HERE — 2025-09-13T02:54:30+00:00 — next: FiveM-FSN-Framework/fsn_bennys/cl_config.lua @ line 1
-MERGE-QUEUE — 2025-09-13T02:54:30+00:00 — remaining: 0 (top 5: n/a)
+CONTINUE-HERE — 2025-09-13T03:22:07+00:00 — next: FiveM-FSN-Framework/fsn_bikerental/html/style.css @ line 1
+MERGE-QUEUE — 2025-09-13T03:22:07+00:00 — remaining: 0 (top 5: n/a)
