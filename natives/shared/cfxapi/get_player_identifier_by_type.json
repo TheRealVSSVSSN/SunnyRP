@@ -1,0 +1,21 @@
+{
+  "title": "GET_PLAYER_IDENTIFIER_BY_TYPE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PLAYER_IDENTIFIER_BY_TYPE"
+  ],
+  "content": "0xA61C8FC6// GetPlayerIdentifierByType\nchar* GET_PLAYER_IDENTIFIER_BY_TYPE(char* playerSrc, char* identifierType);Parameters:playerSrc: The player to get the identifier foridentifierType: The string to match in an identifier, this can be \"license\" for example.Returns: The identifier that matches the string providedGet an identifier from a player by the type of the identifier.\nKnown IdentifiersExamples:LuaJavaScriptC#local playerLicenses = {}\n\nAddEventHandler('playerJoining', function()\n    playerLicenses[source] = GetPlayerIdentifierByType(source, 'license')\nend)",
+  "codeBlocks": [
+    "// GetPlayerIdentifierByType\nchar* GET_PLAYER_IDENTIFIER_BY_TYPE(char* playerSrc, char* identifierType);",
+    "local playerLicenses = {}\n\nAddEventHandler('playerJoining', function()\n    playerLicenses[source] = GetPlayerIdentifierByType(source, 'license')\nend)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPlayerIdentifierByType.md",
+    "https://docs.fivem.net/docs/scripting-reference/runtimes/lua/functions/GetPlayerIdentifiers/#identifier-types",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

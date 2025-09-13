@@ -1,0 +1,19 @@
+{
+  "title": "DISABLE_VEHICLE_PASSENGER_IDLE_CAMERA",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "DISABLE_VEHICLE_PASSENGER_IDLE_CAMERA"
+  ],
+  "content": "0x5C140555// DisableVehiclePassengerIdleCamera\nvoid DISABLE_VEHICLE_PASSENGER_IDLE_CAMERA(BOOL state);Parameters:state: On/OffDisables the game's afk camera that starts panning around after 30 seconds of inactivity(While riding in a car as a passenger)",
+  "codeBlocks": [
+    "// DisableVehiclePassengerIdleCamera\nvoid DISABLE_VEHICLE_PASSENGER_IDLE_CAMERA(BOOL state);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/DisableVehiclePassengerIdleCamera.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

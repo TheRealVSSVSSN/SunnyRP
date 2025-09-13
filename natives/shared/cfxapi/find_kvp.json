@@ -1,0 +1,20 @@
+{
+  "title": "FIND_KVP",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "FIND_KVP"
+  ],
+  "content": "0xBD7BEBC5// FindKvp\nchar* FIND_KVP(int handle);Parameters:handle: The KVP find handle returned from START_FIND_KVPReturns: None.",
+  "codeBlocks": [
+    "// FindKvp\nchar* FIND_KVP(int handle);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/FindKvp.md",
+    "https://docs.fivem.net/natives/?_0xDD379006",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

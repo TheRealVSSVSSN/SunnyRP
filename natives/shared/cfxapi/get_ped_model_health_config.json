@@ -1,0 +1,20 @@
+{
+  "title": "GET_PED_MODEL_HEALTH_CONFIG",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PED_MODEL_HEALTH_CONFIG"
+  ],
+  "content": "0xF71542F7// GetPedModelHealthConfig\nHash GET_PED_MODEL_HEALTH_CONFIG(Hash modelHash);Parameters:modelHash: Ped's model.Gets a ped model's health config.Examples:LuaGetPedModelHealthConfig(`mp_f_freemode_01`)",
+  "codeBlocks": [
+    "// GetPedModelHealthConfig\nHash GET_PED_MODEL_HEALTH_CONFIG(Hash modelHash);",
+    "GetPedModelHealthConfig(`mp_f_freemode_01`)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPedModelHealthConfig.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

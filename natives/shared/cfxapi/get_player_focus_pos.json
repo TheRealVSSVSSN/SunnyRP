@@ -1,0 +1,19 @@
+{
+  "title": "GET_PLAYER_FOCUS_POS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PLAYER_FOCUS_POS"
+  ],
+  "content": "0x586F80FF// GetPlayerFocusPos\nVector3 GET_PLAYER_FOCUS_POS(char* playerSrc);Parameters:playerSrc: The player to get the focus position ofReturns: Returns a Vector3 containing the focus position of the player.Gets the focus position (i.e. the position of the active camera in the game world) of a player.",
+  "codeBlocks": [
+    "// GetPlayerFocusPos\nVector3 GET_PLAYER_FOCUS_POS(char* playerSrc);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPlayerFocusPos.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

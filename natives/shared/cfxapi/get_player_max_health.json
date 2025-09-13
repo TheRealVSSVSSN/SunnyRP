@@ -1,0 +1,19 @@
+{
+  "title": "GET_PLAYER_MAX_HEALTH",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PLAYER_MAX_HEALTH"
+  ],
+  "content": "0x8154E470// GetPlayerMaxHealth\nint GET_PLAYER_MAX_HEALTH(char* playerSrc);Parameters:playerSrc: The player handle",
+  "codeBlocks": [
+    "// GetPlayerMaxHealth\nint GET_PLAYER_MAX_HEALTH(char* playerSrc);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPlayerMaxHealth.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

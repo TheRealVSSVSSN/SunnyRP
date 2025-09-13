@@ -1,0 +1,20 @@
+{
+  "title": "DOES_PLAYER_EXIST",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "DOES_PLAYER_EXIST"
+  ],
+  "content": "0x12038599// DoesPlayerExist\nBOOL DOES_PLAYER_EXIST(char* playerSrc);Returns: True if the player exists, false otherwiseReturns whether or not the player existsExamples:Lualocal deferralMessages = { \"Isn't this just magical!\", \"We can defer all day!\", \"You'll get in eventually\", \"You're totally not going to sit here forever\", \"The Fruit Tree is a lie\" }\nAddEventHandler(\"playerConnecting\", function(name, setKickReason, deferrals)\n    local source = source\n    deferrals.defer()\n\n    Wait(0)\n\n\n    local messageIndex = 0\n\n    repeat\n        Wait(2000)\n        if messageIndex >= #deferralMessages then\n            deferrals.done()\n        else\n            messageIndex = messageIndex + 1\n        end\n        deferrals.update(deferralMessages[messageIndex])\n    until not DoesPlayerExist(source)\nend)",
+  "codeBlocks": [
+    "// DoesPlayerExist\nBOOL DOES_PLAYER_EXIST(char* playerSrc);",
+    "local deferralMessages = { \"Isn't this just magical!\", \"We can defer all day!\", \"You'll get in eventually\", \"You're totally not going to sit here forever\", \"The Fruit Tree is a lie\" }\nAddEventHandler(\"playerConnecting\", function(name, setKickReason, deferrals)\n    local source = source\n    deferrals.defer()\n\n    Wait(0)\n\n\n    local messageIndex = 0\n\n    repeat\n        Wait(2000)\n        if messageIndex >= #deferralMessages then\n            deferrals.done()\n        else\n            messageIndex = messageIndex + 1\n        end\n        deferrals.update(deferralMessages[messageIndex])\n    until not DoesPlayerExist(source)\nend)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/DoesPlayerExist.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

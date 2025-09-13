@@ -1,0 +1,21 @@
+{
+  "title": "DISABLE_RAW_KEY_THIS_FRAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "DISABLE_RAW_KEY_THIS_FRAME"
+  ],
+  "content": "0x8BCF0014// DisableRawKeyThisFrame\nBOOL DISABLE_RAW_KEY_THIS_FRAME(int rawKeyIndex);Parameters:rawKeyIndex: Index of raw key from keyboard.Returns: Returns bool value of down state.Disables the specified rawKeyIndex, making it not trigger the regular IS_RAW_KEY_* natives.Virtual key codes can be found hereExamples:Lualocal KEY_SPACE = 32\nDisableRawKeyThisFrame(KEY_SPACE)\n-- This will not get triggered this frame\nif IsRawKeyDown(KEY_SPACE) then\n\tprint(\"unreachable :(\")\nend\n-- this will get triggered\nif IsDisabledRawKeyDown(KEY_SPACE) then\n    print(\"Spacebar is down\")\nend",
+  "codeBlocks": [
+    "// DisableRawKeyThisFrame\nBOOL DISABLE_RAW_KEY_THIS_FRAME(int rawKeyIndex);",
+    "local KEY_SPACE = 32\nDisableRawKeyThisFrame(KEY_SPACE)\n-- This will not get triggered this frame\nif IsRawKeyDown(KEY_SPACE) then\n\tprint(\"unreachable :(\")\nend\n-- this will get triggered\nif IsDisabledRawKeyDown(KEY_SPACE) then\n    print(\"Spacebar is down\")\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/DisableRawKeyThisFrame.md",
+    "https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

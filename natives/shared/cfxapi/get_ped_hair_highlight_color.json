@@ -1,0 +1,21 @@
+{
+  "title": "GET_PED_HAIR_HIGHLIGHT_COLOR",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PED_HAIR_HIGHLIGHT_COLOR"
+  ],
+  "content": "0x4B087305// GetPedHairHighlightColor\nint GET_PED_HAIR_HIGHLIGHT_COLOR(Ped ped);Parameters:ped: The target pedReturns: Returns ped's secondary hair colour.A getter for _SET_PED_HAIR_COLOR. Returns -1 if fails to get.Examples:Lualocal secondaryColour = GetPedHairHighlightColor(PlayerPedId())\nif secondaryColour == 32 then\n  print(\"You have pink hair highlight colour!\")\nend",
+  "codeBlocks": [
+    "// GetPedHairHighlightColor\nint GET_PED_HAIR_HIGHLIGHT_COLOR(Ped ped);",
+    "local secondaryColour = GetPedHairHighlightColor(PlayerPedId())\nif secondaryColour == 32 then\n  print(\"You have pink hair highlight colour!\")\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPedHairHighlightColor.md",
+    "https://docs.fivem.net/natives/?_0x4CFFC65454C93A49",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

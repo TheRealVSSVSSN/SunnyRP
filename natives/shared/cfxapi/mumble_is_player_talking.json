@@ -1,0 +1,19 @@
+{
+  "title": "MUMBLE_IS_PLAYER_TALKING",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "MUMBLE_IS_PLAYER_TALKING"
+  ],
+  "content": "0x33EEF97F// MumbleIsPlayerTalking\nBOOL MUMBLE_IS_PLAYER_TALKING(Player player);Parameters:player: The target player.Returns: Whether or not the player is talking.",
+  "codeBlocks": [
+    "// MumbleIsPlayerTalking\nBOOL MUMBLE_IS_PLAYER_TALKING(Player player);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/MumbleIsPlayerTalking.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

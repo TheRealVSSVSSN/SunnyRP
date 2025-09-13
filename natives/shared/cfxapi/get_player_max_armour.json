@@ -1,0 +1,19 @@
+{
+  "title": "GET_PLAYER_MAX_ARMOUR",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PLAYER_MAX_ARMOUR"
+  ],
+  "content": "0x2A50657// GetPlayerMaxArmour\nint GET_PLAYER_MAX_ARMOUR(char* playerSrc);Parameters:playerSrc: The player handle",
+  "codeBlocks": [
+    "// GetPlayerMaxArmour\nint GET_PLAYER_MAX_ARMOUR(char* playerSrc);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPlayerMaxArmour.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "title": "CREATE_TIMECYCLE_MODIFIER",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "CREATE_TIMECYCLE_MODIFIER"
+  ],
+  "content": "0x70FA2AFA// CreateTimecycleModifier\nint CREATE_TIMECYCLE_MODIFIER(char* modifierName);Parameters:modifierName: The new timecycle name, must be unique.Returns: The created timecycle modifier index, or -1 if failed.Create a clean timecycle modifier. See SET_TIMECYCLE_MODIFIER_VAR to add variables.Examples:Lualocal modifierName = \"my_awesome_timecycle\"\nlocal createdIndex = CreateTimecycleModifier(modifierName)\n\nif createdIndex ~= -1 then\n  SetTimecycleModifier(modifierName)\nend",
+  "codeBlocks": [
+    "// CreateTimecycleModifier\nint CREATE_TIMECYCLE_MODIFIER(char* modifierName);",
+    "local modifierName = \"my_awesome_timecycle\"\nlocal createdIndex = CreateTimecycleModifier(modifierName)\n\nif createdIndex ~= -1 then\n  SetTimecycleModifier(modifierName)\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/CreateTimecycleModifier.md",
+    "https://docs.fivem.net/natives/?_0x6E0A422B",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "title": "GET_PLAYER_MELEE_WEAPON_DAMAGE_MODIFIER",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PLAYER_MELEE_WEAPON_DAMAGE_MODIFIER"
+  ],
+  "content": "0x8689A825// GetPlayerMeleeWeaponDamageModifier\nfloat GET_PLAYER_MELEE_WEAPON_DAMAGE_MODIFIER(Player playerId);Parameters:playerId: The player index.Returns: Returns player melee weapon damage modifier value.A getter for SET_PLAYER_MELEE_WEAPON_DAMAGE_MODIFIER.",
+  "codeBlocks": [
+    "// GetPlayerMeleeWeaponDamageModifier\nfloat GET_PLAYER_MELEE_WEAPON_DAMAGE_MODIFIER(Player playerId);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPlayerMeleeWeaponDamageModifier.md",
+    "https://docs.fivem.net/natives/?_0x4A3DC7ECCC321032",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "title": "DELETE_TRAIN",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "DELETE_TRAIN"
+  ],
+  "content": "0x523BA3DA// DeleteTrain\nvoid DELETE_TRAIN(Entity entity);Parameters:entity: The carriage to delete.Deletes the specified entity and any carriage its attached to, or that is attached to it.",
+  "codeBlocks": [
+    "// DeleteTrain\nvoid DELETE_TRAIN(Entity entity);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/DeleteTrain.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

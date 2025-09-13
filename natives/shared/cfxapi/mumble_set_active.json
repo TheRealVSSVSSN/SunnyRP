@@ -1,0 +1,19 @@
+{
+  "title": "MUMBLE_SET_ACTIVE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "MUMBLE_SET_ACTIVE"
+  ],
+  "content": "0xD932A3F3// MumbleSetActive\nvoid MUMBLE_SET_ACTIVE(BOOL state);Parameters:state: Voice chat state.",
+  "codeBlocks": [
+    "// MumbleSetActive\nvoid MUMBLE_SET_ACTIVE(BOOL state);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/MumbleSetActive.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}
