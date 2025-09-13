@@ -1,0 +1,24 @@
+{
+  "title": "_INVALIDATE_VEHICLE_IDLE_CAM",
+  "breadcrumbs": [
+    "Native Reference",
+    "CAMAPI",
+    "_INVALIDATE_VEHICLE_IDLE_CAM"
+  ],
+  "content": "0x9E4CFFF9892584720x65DDE8AF// InvalidateVehicleIdleCam\nvoid _INVALIDATE_VEHICLE_IDLE_CAM();Resets the vehicle idle camera timer. Calling this in a loop will disable the idle camera.Examples:LuaCitizen.CreateThread(function()\n\twhile true do\n\t\tInvalidateIdleCam()\n\t\tInvalidateVehicleIdleCam()\n\t\tWait(1000) --The idle camera activates after 30 second so we don't need to call this per frame\n\tend\nend)",
+  "codeBlocks": [
+    "// InvalidateVehicleIdleCam\nvoid _INVALIDATE_VEHICLE_IDLE_CAM();",
+    "Citizen.CreateThread(function()\n\twhile true do\n\t\tInvalidateIdleCam()\n\t\tInvalidateVehicleIdleCam()\n\t\tWait(1000) --The idle camera activates after 30 second so we don't need to call this per frame\n\tend\nend)",
+    "-- Example usage for _INVALIDATE_VEHICLE_IDLE_CAM\n_InvalidateVehicleIdleCam()"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CAM/InvalidateVehicleIdleCam.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

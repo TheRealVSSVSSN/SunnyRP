@@ -1,0 +1,26 @@
+{
+  "title": "SET_CAM_DOF_STRENGTH",
+  "breadcrumbs": [
+    "Native Reference",
+    "CAMAPI",
+    "SET_CAM_DOF_STRENGTH"
+  ],
+  "content": "0x5EE29B4D7D5DF8970x3CC4EB3F// SetCamDofStrength\nvoid SET_CAM_DOF_STRENGTH(Cam cam, float dofStrength);Parameters:cam: The camera handledofStrength: Depth of Field strength (between 0.0 and 1.0)Specifies how much the DoF effect should be applied (Set using SET_CAM_NEAR_DOF, SET_CAM_FAR_DOF, etc.)Examples:LuaCreateThread(function()\n    local camera = CreateCam(\"DEFAULT_SCRIPTED_FLY_CAMERA\", true)\n    -- Set the cam coordinates to the player coords\n    local playerCoords = GetEntityCoords(PlayerPedId())\n    SetCamCoord(camera, playerCoords)\n    -- Render the camera we just created\n    RenderScriptCams(true)\n    -- Use a shallow depth of field\n    SetCamUseShallowDofMode(camera, true)\n    -- Set at what distance your camera should start to focus (Example: 0.7 meters)\n    SetCamNearDof(camera, 0.7)\n    -- Set at what distance your camera should stop focusing (Example: 1.3 meters)\n    SetCamFarDof(camera, 1.3)\n    -- Apply 100% of the DoF effect (The native you're reading documentation on)\n    SetCamDofStrength(camera, 1.0)\n\n    while DoesCamExist(camera) do\n        -- Use DoF effect (needs to be called every tick)\n        SetUseHiDof()\n        Citizen.Wait(0)  \n    end\nend)",
+  "codeBlocks": [
+    "// SetCamDofStrength\nvoid SET_CAM_DOF_STRENGTH(Cam cam, float dofStrength);",
+    "CreateThread(function()\n    local camera = CreateCam(\"DEFAULT_SCRIPTED_FLY_CAMERA\", true)\n    -- Set the cam coordinates to the player coords\n    local playerCoords = GetEntityCoords(PlayerPedId())\n    SetCamCoord(camera, playerCoords)\n    -- Render the camera we just created\n    RenderScriptCams(true)\n    -- Use a shallow depth of field\n    SetCamUseShallowDofMode(camera, true)\n    -- Set at what distance your camera should start to focus (Example: 0.7 meters)\n    SetCamNearDof(camera, 0.7)\n    -- Set at what distance your camera should stop focusing (Example: 1.3 meters)\n    SetCamFarDof(camera, 1.3)\n    -- Apply 100% of the DoF effect (The native you're reading documentation on)\n    SetCamDofStrength(camera, 1.0)\n\n    while DoesCamExist(camera) do\n        -- Use DoF effect (needs to be called every tick)\n        SetUseHiDof()\n        Citizen.Wait(0)  \n    end\nend)",
+    "-- Example usage for SET_CAM_DOF_STRENGTH\nSetCamDofStrength(0, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CAM/SetCamDofStrength.md",
+    "https://docs.fivem.net/natives/?_0x3FA4BF0A7AB7DE2C",
+    "https://docs.fivem.net/natives/?_0xEDD91296CD01AEE0",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

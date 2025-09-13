@@ -1,0 +1,24 @@
+{
+  "title": "DISABLE_ALL_CONTROL_ACTIONS",
+  "breadcrumbs": [
+    "Native Reference",
+    "PADAPI",
+    "DISABLE_ALL_CONTROL_ACTIONS"
+  ],
+  "content": "0x5F4B6931816E599B0x16753CF4// DisableAllControlActions\nvoid DISABLE_ALL_CONTROL_ACTIONS(int padIndex);Parameters:padIndex: The control system instance to use. See ENABLE_ALL_CONTROL_ACTIONS.",
+  "codeBlocks": [
+    "// DisableAllControlActions\nvoid DISABLE_ALL_CONTROL_ACTIONS(int padIndex);",
+    "-- Example usage for DISABLE_ALL_CONTROL_ACTIONS\nDisableAllControlActions(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PAD/DisableAllControlActions.md",
+    "https://docs.fivem.net/natives/?_0xA5FFE9B05F199DE7",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

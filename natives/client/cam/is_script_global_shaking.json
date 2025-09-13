@@ -1,0 +1,26 @@
+{
+  "title": "IS_SCRIPT_GLOBAL_SHAKING",
+  "breadcrumbs": [
+    "Native Reference",
+    "CAMAPI",
+    "IS_SCRIPT_GLOBAL_SHAKING"
+  ],
+  "content": "0xC912AF078AF192120x6AEFE6A5// IsScriptGlobalShaking\nBOOL IS_SCRIPT_GLOBAL_SHAKING();Returns: Returns true if a scripted global camera shake is currently in effect, otherwise false.Determines if a global camera shake is currently active. You can stop the currently active global camera shake using STOP_SCRIPT_GLOBAL_SHAKING.NativeDB Introduced: v323Examples:LuaJavaScriptC#-- Print whether a global camera shake is currently active\nprint(IsScriptGlobalShaking())",
+  "codeBlocks": [
+    "// IsScriptGlobalShaking\nBOOL IS_SCRIPT_GLOBAL_SHAKING();",
+    "NativeDB Introduced: v323",
+    "-- Print whether a global camera shake is currently active",
+    "-- Example usage for IS_SCRIPT_GLOBAL_SHAKING\nIsScriptGlobalShaking()"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CAM/IsScriptGlobalShaking.md",
+    "https://docs.fivem.net/natives/?_0x1C9D7949FA533490",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

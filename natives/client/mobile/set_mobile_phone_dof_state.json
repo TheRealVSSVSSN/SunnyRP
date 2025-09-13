@@ -1,0 +1,23 @@
+{
+  "title": "SET_MOBILE_PHONE_DOF_STATE",
+  "breadcrumbs": [
+    "Native Reference",
+    "MOBILEAPI",
+    "SET_MOBILE_PHONE_DOF_STATE"
+  ],
+  "content": "0x375A706A5C2FD084// SetMobilePhoneDofState\nvoid SET_MOBILE_PHONE_DOF_STATE(BOOL toggle);Parameters:toggle: true/false to toggle DOF.Toggles depth of field on the cellphone camera.Old name:  _SET_MOBILE_PHONE_UNK",
+  "codeBlocks": [
+    "// SetMobilePhoneDofState\nvoid SET_MOBILE_PHONE_DOF_STATE(BOOL toggle);",
+    "-- Example usage for SET_MOBILE_PHONE_DOF_STATE\nSetMobilePhoneDofState(false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MOBILE/SetMobilePhoneDofState.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

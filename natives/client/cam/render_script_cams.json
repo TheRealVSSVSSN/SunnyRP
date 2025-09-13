@@ -1,0 +1,27 @@
+{
+  "title": "RENDER_SCRIPT_CAMS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CAMAPI",
+    "RENDER_SCRIPT_CAMS"
+  ],
+  "content": "0x07E5B515DB0636FC0x74337969// RenderScriptCams\nvoid RENDER_SCRIPT_CAMS(BOOL render, BOOL ease, int easeTime, BOOL easeCoordsAnim, BOOL p4);Parameters:render: Whether to render the cams or not.ease: If true it will make a smooth transition between the current camera and the new rendered camera.easeTime: The in milliseconds for the transition to happen.easeCoordsAnim: If false it will only do the smooth transition to the rotation and the coords will be set instantly.p4: Doesn't seem to change anything.Renders the camera previously created with CREATE_CAM or CREATE_CAMERANativeDB Added Parameter 6: Any p5Examples:Lualocal casino = vector3(881.31, 74.71, 94.43)\n\n-- Create the camera that will be used for RenderScriptCams\nlocal cam = CreateCam(\"DEFAULT_SCRIPTED_CAMERA\", true)\n-- Set the camera coordinates to be in front of the Casino\nSetCamCoord(cam, casino.x, casino.y, casino.z)\n-- Rotate the camera towards the casino\nSetCamRot(cam, -25.0, 0.0, -124.22)\n\n-- Render the camera and so a smooth transition for 2000ms\nRenderScriptCams(true, true, 2000, false, true)\n\n-- tell the game to load maps, collisions, objects, etc around the casino.\nSetFocusPosAndVel(casino.x, casino.y, casino.z, 0.0, 0.0, 0.0)\n\n -- We wait 5 seconds + 2 extra for the transition\nWait(7000)\n-- Remove the cam, we no longer need it\nDestroyCam(cam) \n\n-- reset streaming focus to be at the local player ped\nClearFocus()\n-- Stop rendering the script camera and interpolate back to their player ped\nRenderScriptCams(false, true, 2000, false, false)",
+  "codeBlocks": [
+    "// RenderScriptCams\nvoid RENDER_SCRIPT_CAMS(BOOL render, BOOL ease, int easeTime, BOOL easeCoordsAnim, BOOL p4);",
+    "NativeDB Added Parameter 6: Any p5",
+    "local casino = vector3(881.31, 74.71, 94.43)\n\n-- Create the camera that will be used for RenderScriptCams\nlocal cam = CreateCam(\"DEFAULT_SCRIPTED_CAMERA\", true)\n-- Set the camera coordinates to be in front of the Casino\nSetCamCoord(cam, casino.x, casino.y, casino.z)\n-- Rotate the camera towards the casino\nSetCamRot(cam, -25.0, 0.0, -124.22)\n\n-- Render the camera and so a smooth transition for 2000ms\nRenderScriptCams(true, true, 2000, false, true)\n\n-- tell the game to load maps, collisions, objects, etc around the casino.\nSetFocusPosAndVel(casino.x, casino.y, casino.z, 0.0, 0.0, 0.0)\n\n -- We wait 5 seconds + 2 extra for the transition\nWait(7000)\n-- Remove the cam, we no longer need it\nDestroyCam(cam) \n\n-- reset streaming focus to be at the local player ped\nClearFocus()\n-- Stop rendering the script camera and interpolate back to their player ped\nRenderScriptCams(false, true, 2000, false, false)",
+    "-- Example usage for RENDER_SCRIPT_CAMS\nRenderScriptCams(false, false, 0, false, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CAM/RenderScriptCams.md",
+    "https://docs.fivem.net/natives/?_0xC3981DCE61D9E13F",
+    "https://docs.fivem.net/natives/?_0x5E3CF89C6BCCA67D",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

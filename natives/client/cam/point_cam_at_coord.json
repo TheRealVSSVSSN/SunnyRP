@@ -1,0 +1,24 @@
+{
+  "title": "POINT_CAM_AT_COORD",
+  "breadcrumbs": [
+    "Native Reference",
+    "CAMAPI",
+    "POINT_CAM_AT_COORD"
+  ],
+  "content": "0xF75497BB865F08030x914BC21A// PointCamAtCoord\nvoid POINT_CAM_AT_COORD(Cam cam, float x, float y, float z);Examples:Lualocal coords = vector3(402.99, -998.02, -99.00)\nlocal cam = CreateCamWithParams(\"DEFAULT_SCRIPTED_CAMERA\", coords.x, coords.y, coords.z, 0.00, 0.00, 0.00, 50.00, false, 0)\nPointCamAtCoord(cam, coords.x, coords.y, coords.z)",
+  "codeBlocks": [
+    "// PointCamAtCoord\nvoid POINT_CAM_AT_COORD(Cam cam, float x, float y, float z);",
+    "local coords = vector3(402.99, -998.02, -99.00)\nlocal cam = CreateCamWithParams(\"DEFAULT_SCRIPTED_CAMERA\", coords.x, coords.y, coords.z, 0.00, 0.00, 0.00, 50.00, false, 0)\nPointCamAtCoord(cam, coords.x, coords.y, coords.z)",
+    "-- Example usage for POINT_CAM_AT_COORD\nPointCamAtCoord(0, 0.0, 0.0, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CAM/PointCamAtCoord.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

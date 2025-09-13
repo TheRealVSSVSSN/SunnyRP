@@ -1,0 +1,26 @@
+{
+  "title": "HARD_ATTACH_CAM_TO_PED_BONE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CAMAPI",
+    "HARD_ATTACH_CAM_TO_PED_BONE"
+  ],
+  "content": "0x149916F50C34A40D// HardAttachCamToPedBone\nvoid HARD_ATTACH_CAM_TO_PED_BONE(Cam cam, Ped ped, int boneIndex, float xRot, float yRot, float zRot, float xOffset, float yOffset, float zOffset, BOOL isRelative);Parameters:cam: The camera handle.ped: The ped handle.boneIndex: This is different to boneID, use GET_PED_BONE_INDEX to get the index from the ID. use the index for attaching to specific bones. cam will be attached to the center of ped if bone index given doesn't correspond to bone indexes for that entity type.xRot: X-axis rotation.yRot: Y-axis rotation.zRot: Z-axis rotation.xOffset: X-axis offset.yOffset: Y-axis offset.zOffset: Z-axis offset.isRelative: Whether or not the camera position will be relative to the bone rotation.Attaches a camera to a specific bone of a Ped, including full matrix transformations for both rotation and position offsets.\nThis native works with peds only.NativeDB Introduced: v1180Old name:  _ATTACH_CAM_TO_PED_BONE_2Examples:LuaJavaScriptC#local ped = PlayerPedId()\nlocal cam = CreateCam(\"DEFAULT_SCRIPTED_CAMERA\", true)\nlocal BONETAG_L_FINGER01 = 4089\n\n-- attach it to a finger on the left hand and rotates it 90 degrees on the X-axis\nHardAttachCamToPedBone(cam, ped, BONETAG_L_FINGER01, 90.0, 0.0, 0.0, 0.0, 0.0, 0.0, true)\n\n-- renders the camera\nRenderScriptCams(true, false, 0, true, true)",
+  "codeBlocks": [
+    "// HardAttachCamToPedBone\nvoid HARD_ATTACH_CAM_TO_PED_BONE(Cam cam, Ped ped, int boneIndex, float xRot, float yRot, float zRot, float xOffset, float yOffset, float zOffset, BOOL isRelative);",
+    "NativeDB Introduced: v1180",
+    "local ped = PlayerPedId()\nlocal cam = CreateCam(\"DEFAULT_SCRIPTED_CAMERA\", true)\nlocal BONETAG_L_FINGER01 = 4089\n\n-- attach it to a finger on the left hand and rotates it 90 degrees on the X-axis\nHardAttachCamToPedBone(cam, ped, BONETAG_L_FINGER01, 90.0, 0.0, 0.0, 0.0, 0.0, 0.0, true)\n\n-- renders the camera\nRenderScriptCams(true, false, 0, true, true)",
+    "local ped = PlayerPedId()\n-- Example usage for HARD_ATTACH_CAM_TO_PED_BONE\nHardAttachCamToPedBone(0, ped, 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CAM/HardAttachCamToPedBone.md",
+    "https://docs.fivem.net/natives/?_0x3F428D08BE5AAE31",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

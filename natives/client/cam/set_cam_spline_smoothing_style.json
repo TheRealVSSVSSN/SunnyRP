@@ -1,0 +1,26 @@
+{
+  "title": "SET_CAM_SPLINE_SMOOTHING_STYLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CAMAPI",
+    "SET_CAM_SPLINE_SMOOTHING_STYLE"
+  ],
+  "content": "0xD1B0F412F109EA5D0x15E141CE// SetCamSplineSmoothingStyle\nvoid SET_CAM_SPLINE_SMOOTHING_STYLE(Cam cam, int smoothingStyle);Sets the smoothing style for a DEFAULT_SPLINE_CAMERA\nRanges from 0 to 3 in rockstar scripts although there are actually 260: No lead-in or lead-out smoothing\n1: Smooth lead-in\n2: Smooth lead-out\n3: Both lead-in and lead-out are smoothed\n4-6: Longer speed up, lead-in, lead-out, and both in order as above. \n6: see above, but missed a node in testing(?)\n7: Smoothed lead-in, longer smoothed lead-out\n8: Longer lead-in and lead-out than 6, didn't drop node\n9: Constant acceleration\n10: Constant deceleration. Dropped 2 nodes in testing.\n11: Same as 0\n12: 10 but slower lead-in, reaches end node less early\n13: Extremely close to 3, slightly longer lead-in/lead-out\n14: Constant acceleration, dropped last 2 nodes in testing and halted (?)\n15: Very similar to 10, did not drop any nodes.\n16: Long lead-in, dropped 2 nodes in testing, very long leadout.\n17: Constant acceleration, slower speed-up than 9\n18: Same as 17 is to 9, slightly longer lead-out, lingers at end node\n19: Very long lead in and out\n20: Very long, gradual lead-in acceleration at start, gets extremely fast\n21: Same as 20 but for constant deceleration\n22: 20 and 21 combined, long linger at end node. Dropped 2 nodes in testing\n23: Constant acceleration, doesn't complete path before it stops\n24: Same as 23 but with constant deceleration, but completes path\n25: 23 and 24 combined, insanely fast at middle.\n26: No noticable lead-in, misses last 2 nodes in testing\n27+: Alternates between 0 and 26\nThe above is documented and graphed at Spline Cam Interp GraphsUsing 1-3 will result in misalignment from the passed durations for the spline nodes, the overall duration will remain but other nodes will be shortened if smoothing anything.\n\nGraph below demonstrates interpolation between 0-1000 and back 10 times.\n\n![](https://i.imgur.com/cixWh7m.png)\n\n## Parameters\n* **cam**: The DEFAULT_SPLINE_CAMERA to apply the smoothing to\n* **smoothingStyle**: 0 to 3, 0 no additional smoothing, 1 smooth lead-in, 2 smooth lead-out, 3 smooth lead-in & lead-out",
+  "codeBlocks": [
+    "// SetCamSplineSmoothingStyle\nvoid SET_CAM_SPLINE_SMOOTHING_STYLE(Cam cam, int smoothingStyle);",
+    "0: No lead-in or lead-out smoothing\n1: Smooth lead-in\n2: Smooth lead-out\n3: Both lead-in and lead-out are smoothed\n4-6: Longer speed up, lead-in, lead-out, and both in order as above. \n6: see above, but missed a node in testing(?)\n7: Smoothed lead-in, longer smoothed lead-out\n8: Longer lead-in and lead-out than 6, didn't drop node\n9: Constant acceleration\n10: Constant deceleration. Dropped 2 nodes in testing.\n11: Same as 0\n12: 10 but slower lead-in, reaches end node less early\n13: Extremely close to 3, slightly longer lead-in/lead-out\n14: Constant acceleration, dropped last 2 nodes in testing and halted (?)\n15: Very similar to 10, did not drop any nodes.\n16: Long lead-in, dropped 2 nodes in testing, very long leadout.\n17: Constant acceleration, slower speed-up than 9\n18: Same as 17 is to 9, slightly longer lead-out, lingers at end node\n19: Very long lead in and out\n20: Very long, gradual lead-in acceleration at start, gets extremely fast\n21: Same as 20 but for constant deceleration\n22: 20 and 21 combined, long linger at end node. Dropped 2 nodes in testing\n23: Constant acceleration, doesn't complete path before it stops\n24: Same as 23 but with constant deceleration, but completes path\n25: 23 and 24 combined, insanely fast at middle.\n26: No noticable lead-in, misses last 2 nodes in testing\n27+: Alternates between 0 and 26",
+    "Using 1-3 will result in misalignment from the passed durations for the spline nodes, the overall duration will remain but other nodes will be shortened if smoothing anything.\n\nGraph below demonstrates interpolation between 0-1000 and back 10 times.\n\n![](https://i.imgur.com/cixWh7m.png)\n\n## Parameters\n* **cam**: The DEFAULT_SPLINE_CAMERA to apply the smoothing to\n* **smoothingStyle**: 0 to 3, 0 no additional smoothing, 1 smooth lead-in, 2 smooth lead-out, 3 smooth lead-in & lead-out",
+    "-- Example usage for SET_CAM_SPLINE_SMOOTHING_STYLE\nSetCamSplineSmoothingStyle(0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CAM/SetCamSplineSmoothingStyle.md",
+    "https://docs.google.com/spreadsheets/d/1ejyiMcEYrhhQOL0mLe8664UN-vU4Oh-SBqQnVcKlFIk/edit?usp=sharing",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

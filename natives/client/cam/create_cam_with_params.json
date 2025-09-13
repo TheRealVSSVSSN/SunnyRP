@@ -1,0 +1,26 @@
+{
+  "title": "CREATE_CAM_WITH_PARAMS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CAMAPI",
+    "CREATE_CAM_WITH_PARAMS"
+  ],
+  "content": "0xB51194800B2571610x23B02F15// CreateCamWithParams\nCam CREATE_CAM_WITH_PARAMS(char* camName, float posX, float posY, float posZ, float rotX, float rotY, float rotZ, float fov, BOOL active, int rotationOrder);Parameters:camName: A string representing the camera type, the game will convert the string into a joaat hash upon native execution.posX: The x position of the camera (you can also send a vector3 instead of the bulk coordinates)posY: The y position of the camera (you can also send a vector3 instead of the bulk coordinates)posZ: The z position of the camera (you can also send a vector3 instead of the bulk coordinates)rotX: The x rotation of the camerarotY: The y rotation of the camerarotZ: The z rotation of the camerafov: The Field Of View of the camera, is the observable world that is seenactive: Set to true if you wish to make this new camera the active camera.rotationOrder: The order of rotation, see GET_ENTITY_ROTATIONReturns: A camera handle.Create a camera with the specified cam name/type, You can use SET_CAM_ natives to manipulate the camera.Take a look at CREATE_CAM if you would like to see the available camera names.Examples:LuaJavaScriptC#local cam = CreateCamWithParams(\"DEFAULT_SCRIPTED_CAMERA\", 561.3, 301.3, 63.0, 0.0, 0.0, 0.0, 90.0)",
+  "codeBlocks": [
+    "// CreateCamWithParams\nCam CREATE_CAM_WITH_PARAMS(char* camName, float posX, float posY, float posZ, float rotX, float rotY, float rotZ, float fov, BOOL active, int rotationOrder);",
+    "local cam = CreateCamWithParams(\"DEFAULT_SCRIPTED_CAMERA\", 561.3, 301.3, 63.0, 0.0, 0.0, 0.0, 90.0)",
+    "-- Example usage for CREATE_CAM_WITH_PARAMS\nCreateCamWithParams('', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, false, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CAM/CreateCamWithParams.md",
+    "https://docs.fivem.net/natives/?_0xAFBD61CC738D9EB9",
+    "https://docs.fivem.net/natives/?_0xC3981DCE61D9E13F",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}
