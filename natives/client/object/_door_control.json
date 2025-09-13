@@ -10,7 +10,7 @@
     "// DoorControl\nvoid _DOOR_CONTROL(Hash modelHash, float x, float y, float z, BOOL locked, float xRotMult, float yRotMult, float zRotMult);",
     "OBJECT::_9B12F9A24FABEDB0(${prop_gate_prison_01}, 1845.0, 2605.0, 45.0, 0, 0.0, 50.0, 0);  //door unlocked\nOBJECT::_9B12F9A24FABEDB0(${prop_gate_prison_01}, 1845.0, 2605.0, 45.0, 1, 0.0, 50.0, 0);  //door locked",
     "DoorControl(`prop_gate_prison_01`, 1845.0, 2605.0, 45.0, 0, 0.0, 50.0, 0) -- door unlocked\nDoorControl(`prop_gate_prison_01`, 1845.0, 2605.0, 45.0, 1, 0.0, 50.0, 0) -- door locked",
-    "-- Example usage for _DOOR_CONTROL\n_DoorControl(GetHashKey('prop'), 0.0, 0.0, 0.0, false, 0.0, 0.0, 0.0)"
+    "-- Example usage for _DOOR_CONTROL\n_DoorControl(GetHashKey('prop'), 1.0, 1.0, 1.0, true, 1.0, 1.0, 1.0)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

@@ -1,0 +1,13 @@
+{
+  "title": "RELEASE_NAMED_RENDERTARGET",
+  "breadcrumbs": [
+    "Native Reference",
+    "RELEASE_NAMED_RENDERTARGET"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for RELEASE_NAMED_RENDERTARGET\nReleaseNamedRendertarget()"
+  ],
+  "urls": [],
+  "tags": []
+}

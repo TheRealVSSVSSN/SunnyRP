@@ -1,0 +1,13 @@
+{
+  "title": "DECOR_IS_REGISTERED_AS_TYPE",
+  "breadcrumbs": [
+    "Native Reference",
+    "DECOR_IS_REGISTERED_AS_TYPE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DECOR_IS_REGISTERED_AS_TYPE\nDecorIsRegisteredAsType()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -8,7 +8,7 @@
   "content": "0x2801D0012266DF070x59090745// ClearGpsDisabledZoneAtIndex\nvoid CLEAR_GPS_DISABLED_ZONE_AT_INDEX(int index);Parameters:index: Index of disabled zone.Clears a disabled GPS route area from a certain index previously set using SET_GPS_DISABLED_ZONE_AT_INDEX.Old name:  _CLEAR_GPS_DISABLED_ZONE_AT_INDEX",
   "codeBlocks": [
     "// ClearGpsDisabledZoneAtIndex\nvoid CLEAR_GPS_DISABLED_ZONE_AT_INDEX(int index);",
-    "-- Example usage for CLEAR_GPS_DISABLED_ZONE_AT_INDEX\nClearGpsDisabledZoneAtIndex(0)"
+    "-- Example usage for CLEAR_GPS_DISABLED_ZONE_AT_INDEX\nClearGpsDisabledZoneAtIndex(1)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

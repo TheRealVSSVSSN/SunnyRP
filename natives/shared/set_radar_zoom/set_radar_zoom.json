@@ -1,0 +1,13 @@
+{
+  "title": "SET_RADAR_ZOOM",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_RADAR_ZOOM"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_RADAR_ZOOM\nSetRadarZoom()"
+  ],
+  "urls": [],
+  "tags": []
+}

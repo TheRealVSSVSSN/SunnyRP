@@ -1,0 +1,13 @@
+{
+  "title": "DECOR_SET_TIME",
+  "breadcrumbs": [
+    "Native Reference",
+    "DECOR_SET_TIME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DECOR_SET_TIME\nDecorSetTime()"
+  ],
+  "urls": [],
+  "tags": []
+}

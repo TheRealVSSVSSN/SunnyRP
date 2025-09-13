@@ -1,0 +1,13 @@
+{
+  "title": "GET_WEAPON_OBJECT_FROM_PED",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_WEAPON_OBJECT_FROM_PED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_WEAPON_OBJECT_FROM_PED\nGetWeaponObjectFromPed()"
+  ],
+  "urls": [],
+  "tags": []
+}

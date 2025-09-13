@@ -9,7 +9,7 @@
   "codeBlocks": [
     "// GetPosAlongGpsTypeRoute\nBOOL GET_POS_ALONG_GPS_TYPE_ROUTE(Vector3* result, BOOL bStartAtPlayerPos, float fDistanceAlongRoute, int slotType);",
     "enum eGpsSlotType {\n\tGPS_SLOT_WAYPOINT = 0,\n\tGPS_SLOT_RADAR_BLIP = 1,\n\tGPS_SLOT_DISCRETE = 2\n}",
-    "-- Example usage for GET_POS_ALONG_GPS_TYPE_ROUTE\nGetPosAlongGpsTypeRoute(0, false, 0.0, 0)"
+    "-- Example usage for GET_POS_ALONG_GPS_TYPE_ROUTE\nGetPosAlongGpsTypeRoute(0, true, 1.0, 1)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

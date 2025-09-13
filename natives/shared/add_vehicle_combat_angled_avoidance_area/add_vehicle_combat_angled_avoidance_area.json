@@ -1,0 +1,13 @@
+{
+  "title": "ADD_VEHICLE_COMBAT_ANGLED_AVOIDANCE_AREA",
+  "breadcrumbs": [
+    "Native Reference",
+    "ADD_VEHICLE_COMBAT_ANGLED_AVOIDANCE_AREA"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ADD_VEHICLE_COMBAT_ANGLED_AVOIDANCE_AREA\nAddVehicleCombatAngledAvoidanceArea()"
+  ],
+  "urls": [],
+  "tags": []
+}

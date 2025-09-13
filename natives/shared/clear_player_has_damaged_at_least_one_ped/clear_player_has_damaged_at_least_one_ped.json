@@ -1,0 +1,13 @@
+{
+  "title": "CLEAR_PLAYER_HAS_DAMAGED_AT_LEAST_ONE_PED",
+  "breadcrumbs": [
+    "Native Reference",
+    "CLEAR_PLAYER_HAS_DAMAGED_AT_LEAST_ONE_PED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CLEAR_PLAYER_HAS_DAMAGED_AT_LEAST_ONE_PED\nClearPlayerHasDamagedAtLeastOnePed()"
+  ],
+  "urls": [],
+  "tags": []
+}

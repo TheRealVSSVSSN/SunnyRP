@@ -1,0 +1,13 @@
+{
+  "title": "ALLOW_PLAYER_SWITCH_DESCENT",
+  "breadcrumbs": [
+    "Native Reference",
+    "ALLOW_PLAYER_SWITCH_DESCENT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ALLOW_PLAYER_SWITCH_DESCENT\nAllowPlayerSwitchDescent()"
+  ],
+  "urls": [],
+  "tags": []
+}

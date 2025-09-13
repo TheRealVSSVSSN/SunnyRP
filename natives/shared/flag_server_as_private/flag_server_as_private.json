@@ -1,0 +1,13 @@
+{
+  "title": "FLAG_SERVER_AS_PRIVATE",
+  "breadcrumbs": [
+    "Native Reference",
+    "FLAG_SERVER_AS_PRIVATE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for FLAG_SERVER_AS_PRIVATE\nFlagServerAsPrivate()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "SET_BLIP_COORDS",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_BLIP_COORDS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_BLIP_COORDS\nSetBlipCoords()"
+  ],
+  "urls": [],
+  "tags": []
+}

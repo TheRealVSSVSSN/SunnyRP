@@ -1,0 +1,13 @@
+{
+  "title": "HAS_PED_GOT_WEAPON_COMPONENT",
+  "breadcrumbs": [
+    "Native Reference",
+    "HAS_PED_GOT_WEAPON_COMPONENT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for HAS_PED_GOT_WEAPON_COMPONENT\nHasPedGotWeaponComponent()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_ONSCREEN_KEYBOARD_RESULT",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_ONSCREEN_KEYBOARD_RESULT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ONSCREEN_KEYBOARD_RESULT\nGetOnscreenKeyboardResult()"
+  ],
+  "urls": [],
+  "tags": []
+}

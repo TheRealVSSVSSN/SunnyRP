@@ -1,0 +1,13 @@
+{
+  "title": "CLEAR_PLAYER_PARACHUTE_MODEL_OVERRIDE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CLEAR_PLAYER_PARACHUTE_MODEL_OVERRIDE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CLEAR_PLAYER_PARACHUTE_MODEL_OVERRIDE\nClearPlayerParachuteModelOverride()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "_SET_PLAYER_IS_IN_DIRECTOR_MODE",
+  "breadcrumbs": [
+    "Native Reference",
+    "_SET_PLAYER_IS_IN_DIRECTOR_MODE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_PLAYER_IS_IN_DIRECTOR_MODE\n_SetPlayerIsInDirectorMode()"
+  ],
+  "urls": [],
+  "tags": []
+}

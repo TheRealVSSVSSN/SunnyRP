@@ -1,0 +1,13 @@
+{
+  "title": "SET_TEXT_COLOUR",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_TEXT_COLOUR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_TEXT_COLOUR\nSetTextColour()"
+  ],
+  "urls": [],
+  "tags": []
+}

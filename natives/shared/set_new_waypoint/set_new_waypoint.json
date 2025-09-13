@@ -1,0 +1,13 @@
+{
+  "title": "SET_NEW_WAYPOINT",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_NEW_WAYPOINT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_NEW_WAYPOINT\nSetNewWaypoint()"
+  ],
+  "urls": [],
+  "tags": []
+}

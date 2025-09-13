@@ -1,0 +1,13 @@
+{
+  "title": "CLEAR_PED_BLOOD_DAMAGE_BY_ZONE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CLEAR_PED_BLOOD_DAMAGE_BY_ZONE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CLEAR_PED_BLOOD_DAMAGE_BY_ZONE\nClearPedBloodDamageByZone()"
+  ],
+  "urls": [],
+  "tags": []
+}

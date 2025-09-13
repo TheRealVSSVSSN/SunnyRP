@@ -1,0 +1,13 @@
+{
+  "title": "REGISTER_NAMED_RENDERTARGET",
+  "breadcrumbs": [
+    "Native Reference",
+    "REGISTER_NAMED_RENDERTARGET"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REGISTER_NAMED_RENDERTARGET\nRegisterNamedRendertarget()"
+  ],
+  "urls": [],
+  "tags": []
+}

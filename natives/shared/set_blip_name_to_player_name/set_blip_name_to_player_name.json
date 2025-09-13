@@ -1,0 +1,13 @@
+{
+  "title": "SET_BLIP_NAME_TO_PLAYER_NAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_BLIP_NAME_TO_PLAYER_NAME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_BLIP_NAME_TO_PLAYER_NAME\nSetBlipNameToPlayerName()"
+  ],
+  "urls": [],
+  "tags": []
+}

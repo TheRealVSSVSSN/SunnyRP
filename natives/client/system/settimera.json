@@ -8,7 +8,7 @@
   "content": "0xC1B1E9A034A63A620x35785333// Settimera\nvoid SETTIMERA(int value);Parameters:value: In milliseconds.Sets the value for the timer A in milliseconds",
   "codeBlocks": [
     "// Settimera\nvoid SETTIMERA(int value);",
-    "-- Example usage for SETTIMERA\nSettimera(0)"
+    "-- Example usage for SETTIMERA\nSettimera(1)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

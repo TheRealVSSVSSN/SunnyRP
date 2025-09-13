@@ -1,0 +1,13 @@
+{
+  "title": "HAS_CLOUD_REQUESTS_FINISHED",
+  "breadcrumbs": [
+    "Native Reference",
+    "HAS_CLOUD_REQUESTS_FINISHED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for HAS_CLOUD_REQUESTS_FINISHED\nHasCloudRequestsFinished()"
+  ],
+  "urls": [],
+  "tags": []
+}

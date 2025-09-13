@@ -1,0 +1,13 @@
+{
+  "title": "_SET_BLIP_SQUARED_ROTATION",
+  "breadcrumbs": [
+    "Native Reference",
+    "_SET_BLIP_SQUARED_ROTATION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_BLIP_SQUARED_ROTATION\n_SetBlipSquaredRotation()"
+  ],
+  "urls": [],
+  "tags": []
+}

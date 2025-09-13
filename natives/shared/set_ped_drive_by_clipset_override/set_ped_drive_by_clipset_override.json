@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_DRIVE_BY_CLIPSET_OVERRIDE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_DRIVE_BY_CLIPSET_OVERRIDE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_DRIVE_BY_CLIPSET_OVERRIDE\nSetPedDriveByClipsetOverride()"
+  ],
+  "urls": [],
+  "tags": []
+}

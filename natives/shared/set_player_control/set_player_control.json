@@ -1,0 +1,13 @@
+{
+  "title": "SET_PLAYER_CONTROL",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PLAYER_CONTROL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PLAYER_CONTROL\nSetPlayerControl()"
+  ],
+  "urls": [],
+  "tags": []
+}

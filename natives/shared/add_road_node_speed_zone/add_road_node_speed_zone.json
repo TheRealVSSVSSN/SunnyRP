@@ -1,0 +1,13 @@
+{
+  "title": "ADD_ROAD_NODE_SPEED_ZONE",
+  "breadcrumbs": [
+    "Native Reference",
+    "ADD_ROAD_NODE_SPEED_ZONE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ADD_ROAD_NODE_SPEED_ZONE\nAddRoadNodeSpeedZone()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "_SET_PED_HAS_AI_BLIP_WITH_COLOR",
+  "breadcrumbs": [
+    "Native Reference",
+    "_SET_PED_HAS_AI_BLIP_WITH_COLOR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_PED_HAS_AI_BLIP_WITH_COLOR\n_SetPedHasAiBlipWithColor()"
+  ],
+  "urls": [],
+  "tags": []
+}

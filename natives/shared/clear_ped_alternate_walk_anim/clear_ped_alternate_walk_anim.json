@@ -1,0 +1,13 @@
+{
+  "title": "CLEAR_PED_ALTERNATE_WALK_ANIM",
+  "breadcrumbs": [
+    "Native Reference",
+    "CLEAR_PED_ALTERNATE_WALK_ANIM"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CLEAR_PED_ALTERNATE_WALK_ANIM\nClearPedAlternateWalkAnim()"
+  ],
+  "urls": [],
+  "tags": []
+}

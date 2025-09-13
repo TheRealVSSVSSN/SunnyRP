@@ -1,0 +1,13 @@
+{
+  "title": "DECOR_GET_BOOL",
+  "breadcrumbs": [
+    "Native Reference",
+    "DECOR_GET_BOOL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DECOR_GET_BOOL\nDecorGetBool()"
+  ],
+  "urls": [],
+  "tags": []
+}

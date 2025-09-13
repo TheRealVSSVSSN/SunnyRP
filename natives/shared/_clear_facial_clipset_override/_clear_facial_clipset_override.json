@@ -1,0 +1,13 @@
+{
+  "title": "_CLEAR_FACIAL_CLIPSET_OVERRIDE",
+  "breadcrumbs": [
+    "Native Reference",
+    "_CLEAR_FACIAL_CLIPSET_OVERRIDE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _CLEAR_FACIAL_CLIPSET_OVERRIDE\n_ClearFacialClipsetOverride()"
+  ],
+  "urls": [],
+  "tags": []
+}

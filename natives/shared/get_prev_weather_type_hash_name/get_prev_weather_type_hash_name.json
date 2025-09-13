@@ -1,0 +1,13 @@
+{
+  "title": "GET_PREV_WEATHER_TYPE_HASH_NAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PREV_WEATHER_TYPE_HASH_NAME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PREV_WEATHER_TYPE_HASH_NAME\nGetPrevWeatherTypeHashName()"
+  ],
+  "urls": [],
+  "tags": []
+}

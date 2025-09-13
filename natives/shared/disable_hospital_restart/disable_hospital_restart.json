@@ -1,0 +1,13 @@
+{
+  "title": "DISABLE_HOSPITAL_RESTART",
+  "breadcrumbs": [
+    "Native Reference",
+    "DISABLE_HOSPITAL_RESTART"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DISABLE_HOSPITAL_RESTART\nDisableHospitalRestart()"
+  ],
+  "urls": [],
+  "tags": []
+}

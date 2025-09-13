@@ -1,0 +1,13 @@
+{
+  "title": "CHANGE_PLAYER_PED",
+  "breadcrumbs": [
+    "Native Reference",
+    "CHANGE_PLAYER_PED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CHANGE_PLAYER_PED\nChangePlayerPed()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_IS_LOADING_SCREEN_ACTIVE",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_IS_LOADING_SCREEN_ACTIVE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_IS_LOADING_SCREEN_ACTIVE\nGetIsLoadingScreenActive()"
+  ],
+  "urls": [],
+  "tags": []
+}

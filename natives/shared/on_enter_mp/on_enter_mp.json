@@ -1,0 +1,13 @@
+{
+  "title": "ON_ENTER_MP",
+  "breadcrumbs": [
+    "Native Reference",
+    "ON_ENTER_MP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ON_ENTER_MP\nOnEnterMp()"
+  ],
+  "urls": [],
+  "tags": []
+}

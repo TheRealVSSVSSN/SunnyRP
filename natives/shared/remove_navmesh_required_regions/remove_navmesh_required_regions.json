@@ -1,0 +1,13 @@
+{
+  "title": "REMOVE_NAVMESH_REQUIRED_REGIONS",
+  "breadcrumbs": [
+    "Native Reference",
+    "REMOVE_NAVMESH_REQUIRED_REGIONS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REMOVE_NAVMESH_REQUIRED_REGIONS\nRemoveNavmeshRequiredRegions()"
+  ],
+  "urls": [],
+  "tags": []
+}

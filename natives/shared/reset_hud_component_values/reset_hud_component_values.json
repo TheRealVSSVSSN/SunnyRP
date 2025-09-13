@@ -1,0 +1,13 @@
+{
+  "title": "RESET_HUD_COMPONENT_VALUES",
+  "breadcrumbs": [
+    "Native Reference",
+    "RESET_HUD_COMPONENT_VALUES"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for RESET_HUD_COMPONENT_VALUES\nResetHudComponentValues()"
+  ],
+  "urls": [],
+  "tags": []
+}

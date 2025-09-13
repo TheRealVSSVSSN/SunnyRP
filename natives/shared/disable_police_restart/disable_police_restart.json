@@ -1,0 +1,13 @@
+{
+  "title": "DISABLE_POLICE_RESTART",
+  "breadcrumbs": [
+    "Native Reference",
+    "DISABLE_POLICE_RESTART"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DISABLE_POLICE_RESTART\nDisablePoliceRestart()"
+  ],
+  "urls": [],
+  "tags": []
+}

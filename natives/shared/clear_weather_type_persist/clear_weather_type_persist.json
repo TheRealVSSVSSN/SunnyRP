@@ -1,0 +1,13 @@
+{
+  "title": "CLEAR_WEATHER_TYPE_PERSIST",
+  "breadcrumbs": [
+    "Native Reference",
+    "CLEAR_WEATHER_TYPE_PERSIST"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CLEAR_WEATHER_TYPE_PERSIST\nClearWeatherTypePersist()"
+  ],
+  "urls": [],
+  "tags": []
+}

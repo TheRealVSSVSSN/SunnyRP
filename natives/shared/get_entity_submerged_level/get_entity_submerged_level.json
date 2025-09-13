@@ -1,0 +1,13 @@
+{
+  "title": "GET_ENTITY_SUBMERGED_LEVEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_ENTITY_SUBMERGED_LEVEL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ENTITY_SUBMERGED_LEVEL\nGetEntitySubmergedLevel()"
+  ],
+  "urls": [],
+  "tags": []
+}

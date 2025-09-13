@@ -1,0 +1,13 @@
+{
+  "title": "REQUEST_ADDITIONAL_TEXT",
+  "breadcrumbs": [
+    "Native Reference",
+    "REQUEST_ADDITIONAL_TEXT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REQUEST_ADDITIONAL_TEXT\nRequestAdditionalText()"
+  ],
+  "urls": [],
+  "tags": []
+}

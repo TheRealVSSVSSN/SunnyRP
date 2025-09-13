@@ -8,7 +8,7 @@
   "content": "0xC485E07E4F0B79580xB4A9A558// DoorSystemSetSpringRemoved\nvoid DOOR_SYSTEM_SET_SPRING_REMOVED(Hash doorHash, BOOL removed, BOOL requestDoor, BOOL forceUpdate);Parameters:doorHash: Door system identifierremoved: requestDoor: forceUpdate: On true invokes DOOR_SYSTEM_SET_DOOR_STATE; otherwise requestDoor is unused.Includes networking check: ownership vs. or the door itself isn't networked.",
   "codeBlocks": [
     "// DoorSystemSetSpringRemoved\nvoid DOOR_SYSTEM_SET_SPRING_REMOVED(Hash doorHash, BOOL removed, BOOL requestDoor, BOOL forceUpdate);",
-    "-- Example usage for DOOR_SYSTEM_SET_SPRING_REMOVED\nDoorSystemSetSpringRemoved(GetHashKey('prop'), false, false, false)"
+    "-- Example usage for DOOR_SYSTEM_SET_SPRING_REMOVED\nDoorSystemSetSpringRemoved(GetHashKey('prop'), true, true, true)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

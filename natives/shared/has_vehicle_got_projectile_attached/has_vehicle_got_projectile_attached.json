@@ -1,0 +1,13 @@
+{
+  "title": "HAS_VEHICLE_GOT_PROJECTILE_ATTACHED",
+  "breadcrumbs": [
+    "Native Reference",
+    "HAS_VEHICLE_GOT_PROJECTILE_ATTACHED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for HAS_VEHICLE_GOT_PROJECTILE_ATTACHED\nHasVehicleGotProjectileAttached()"
+  ],
+  "urls": [],
+  "tags": []
+}

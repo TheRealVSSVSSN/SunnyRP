@@ -1,0 +1,13 @@
+{
+  "title": "CLEAR_DRIVEBY_TASK_UNDERNEATH_DRIVING_TASK",
+  "breadcrumbs": [
+    "Native Reference",
+    "CLEAR_DRIVEBY_TASK_UNDERNEATH_DRIVING_TASK"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CLEAR_DRIVEBY_TASK_UNDERNEATH_DRIVING_TASK\nClearDrivebyTaskUnderneathDrivingTask()"
+  ],
+  "urls": [],
+  "tags": []
+}

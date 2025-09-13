@@ -1,0 +1,13 @@
+{
+  "title": "ASSISTED_MOVEMENT_CLOSE_ROUTE",
+  "breadcrumbs": [
+    "Native Reference",
+    "ASSISTED_MOVEMENT_CLOSE_ROUTE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ASSISTED_MOVEMENT_CLOSE_ROUTE\nAssistedMovementCloseRoute()"
+  ],
+  "urls": [],
+  "tags": []
+}

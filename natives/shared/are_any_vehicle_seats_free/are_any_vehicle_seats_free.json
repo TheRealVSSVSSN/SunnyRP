@@ -1,0 +1,13 @@
+{
+  "title": "ARE_ANY_VEHICLE_SEATS_FREE",
+  "breadcrumbs": [
+    "Native Reference",
+    "ARE_ANY_VEHICLE_SEATS_FREE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ARE_ANY_VEHICLE_SEATS_FREE\nAreAnyVehicleSeatsFree()"
+  ],
+  "urls": [],
+  "tags": []
+}

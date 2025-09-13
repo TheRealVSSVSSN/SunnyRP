@@ -1,0 +1,13 @@
+{
+  "title": "CLEAR_PED_STORED_HAT_PROP",
+  "breadcrumbs": [
+    "Native Reference",
+    "CLEAR_PED_STORED_HAT_PROP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CLEAR_PED_STORED_HAT_PROP\nClearPedStoredHatProp()"
+  ],
+  "urls": [],
+  "tags": []
+}

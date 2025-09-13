@@ -1,0 +1,13 @@
+{
+  "title": "GET_ZONE_POPSCHEDULE",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_ZONE_POPSCHEDULE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ZONE_POPSCHEDULE\nGetZonePopschedule()"
+  ],
+  "urls": [],
+  "tags": []
+}

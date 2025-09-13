@@ -1,0 +1,13 @@
+{
+  "title": "_GET_POWER_SAVING_MODE_DURATION",
+  "breadcrumbs": [
+    "Native Reference",
+    "_GET_POWER_SAVING_MODE_DURATION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_POWER_SAVING_MODE_DURATION\n_GetPowerSavingModeDuration()"
+  ],
+  "urls": [],
+  "tags": []
+}

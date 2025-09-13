@@ -1,0 +1,13 @@
+{
+  "title": "SET_COLOUR_OF_NEXT_TEXT_COMPONENT",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_COLOUR_OF_NEXT_TEXT_COMPONENT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_COLOUR_OF_NEXT_TEXT_COMPONENT\nSetColourOfNextTextComponent()"
+  ],
+  "urls": [],
+  "tags": []
+}

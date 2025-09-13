@@ -1,0 +1,13 @@
+{
+  "title": "_CLEAR_PED_COVER_CLIPSET_OVERRIDE",
+  "breadcrumbs": [
+    "Native Reference",
+    "_CLEAR_PED_COVER_CLIPSET_OVERRIDE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _CLEAR_PED_COVER_CLIPSET_OVERRIDE\n_ClearPedCoverClipsetOverride()"
+  ],
+  "urls": [],
+  "tags": []
+}

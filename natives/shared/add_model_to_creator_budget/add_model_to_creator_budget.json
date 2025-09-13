@@ -1,0 +1,13 @@
+{
+  "title": "ADD_MODEL_TO_CREATOR_BUDGET",
+  "breadcrumbs": [
+    "Native Reference",
+    "ADD_MODEL_TO_CREATOR_BUDGET"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ADD_MODEL_TO_CREATOR_BUDGET\nAddModelToCreatorBudget()"
+  ],
+  "urls": [],
+  "tags": []
+}

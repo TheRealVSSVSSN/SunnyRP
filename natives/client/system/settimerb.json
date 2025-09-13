@@ -8,7 +8,7 @@
   "content": "0x5AE11BC36633DE4E0x27C1B7C6// Settimerb\nvoid SETTIMERB(int value);Parameters:value: In milliseconds.Sets the value for the timer B in milliseconds",
   "codeBlocks": [
     "// Settimerb\nvoid SETTIMERB(int value);",
-    "-- Example usage for SETTIMERB\nSettimerb(0)"
+    "-- Example usage for SETTIMERB\nSettimerb(1)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

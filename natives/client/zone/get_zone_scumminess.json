@@ -9,7 +9,7 @@
   "codeBlocks": [
     "// GetZoneScumminess\nint GET_ZONE_SCUMMINESS(int zoneId);",
     "enum eZoneScumminess\n{\n    SCUMMINESS_POSH = 0,\n    SCUMMINESS_NICE = 1,\n    SCUMMINESS_ABOVE_AVERAGE = 2,\n    SCUMMINESS_BELOW_AVERAGE = 3,\n    SCUMMINESS_CRAP = 4,\n    SCUMMINESS_SCUM = 5\n}",
-    "-- Example usage for GET_ZONE_SCUMMINESS\nGetZoneScumminess(0)"
+    "-- Example usage for GET_ZONE_SCUMMINESS\nGetZoneScumminess(1)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

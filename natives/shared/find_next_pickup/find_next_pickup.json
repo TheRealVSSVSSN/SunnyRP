@@ -1,0 +1,13 @@
+{
+  "title": "FIND_NEXT_PICKUP",
+  "breadcrumbs": [
+    "Native Reference",
+    "FIND_NEXT_PICKUP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for FIND_NEXT_PICKUP\nFindNextPickup()"
+  ],
+  "urls": [],
+  "tags": []
+}

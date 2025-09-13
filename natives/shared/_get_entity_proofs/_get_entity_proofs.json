@@ -1,0 +1,13 @@
+{
+  "title": "_GET_ENTITY_PROOFS",
+  "breadcrumbs": [
+    "Native Reference",
+    "_GET_ENTITY_PROOFS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_ENTITY_PROOFS\n_GetEntityProofs()"
+  ],
+  "urls": [],
+  "tags": []
+}

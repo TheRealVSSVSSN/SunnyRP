@@ -1,0 +1,13 @@
+{
+  "title": "SET_BLIP_FADE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_BLIP_FADE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_BLIP_FADE\nSetBlipFade()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "DISABLE_VEHICLE_WEAPON",
+  "breadcrumbs": [
+    "Native Reference",
+    "DISABLE_VEHICLE_WEAPON"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DISABLE_VEHICLE_WEAPON\nDisableVehicleWeapon()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "ARE_ALL_VEHICLE_WINDOWS_INTACT",
+  "breadcrumbs": [
+    "Native Reference",
+    "ARE_ALL_VEHICLE_WINDOWS_INTACT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ARE_ALL_VEHICLE_WINDOWS_INTACT\nAreAllVehicleWindowsIntact()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "APPLY_PED_BLOOD_DAMAGE_BY_ZONE",
+  "breadcrumbs": [
+    "Native Reference",
+    "APPLY_PED_BLOOD_DAMAGE_BY_ZONE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for APPLY_PED_BLOOD_DAMAGE_BY_ZONE\nApplyPedBloodDamageByZone()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "SET_ZONE_ENABLED",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_ZONE_ENABLED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_ZONE_ENABLED\nSetZoneEnabled()"
+  ],
+  "urls": [],
+  "tags": []
+}

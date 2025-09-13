@@ -1,0 +1,13 @@
+{
+  "title": "CLEAR_ALL_PED_VEHICLE_FORCED_SEAT_USAGE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CLEAR_ALL_PED_VEHICLE_FORCED_SEAT_USAGE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CLEAR_ALL_PED_VEHICLE_FORCED_SEAT_USAGE\nClearAllPedVehicleForcedSeatUsage()"
+  ],
+  "urls": [],
+  "tags": []
+}

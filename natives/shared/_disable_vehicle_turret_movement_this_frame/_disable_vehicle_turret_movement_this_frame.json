@@ -1,0 +1,13 @@
+{
+  "title": "_DISABLE_VEHICLE_TURRET_MOVEMENT_THIS_FRAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "_DISABLE_VEHICLE_TURRET_MOVEMENT_THIS_FRAME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _DISABLE_VEHICLE_TURRET_MOVEMENT_THIS_FRAME\n_DisableVehicleTurretMovementThisFrame()"
+  ],
+  "urls": [],
+  "tags": []
+}

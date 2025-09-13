@@ -1,0 +1,13 @@
+{
+  "title": "_SET_BLIP_SHRINK",
+  "breadcrumbs": [
+    "Native Reference",
+    "_SET_BLIP_SHRINK"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_BLIP_SHRINK\n_SetBlipShrink()"
+  ],
+  "urls": [],
+  "tags": []
+}

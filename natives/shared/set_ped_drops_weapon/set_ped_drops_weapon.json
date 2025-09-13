@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_DROPS_WEAPON",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_DROPS_WEAPON"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_DROPS_WEAPON\nSetPedDropsWeapon()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "RESET_GLOBAL_ACTIONSCRIPT_FLAG",
+  "breadcrumbs": [
+    "Native Reference",
+    "RESET_GLOBAL_ACTIONSCRIPT_FLAG"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for RESET_GLOBAL_ACTIONSCRIPT_FLAG\nResetGlobalActionscriptFlag()"
+  ],
+  "urls": [],
+  "tags": []
+}

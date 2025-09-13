@@ -8,7 +8,7 @@
   "content": "0x3D87450E15D986940xF3C2875A// GetShapeTestResult\nint GET_SHAPE_TEST_RESULT(int shapeTestHandle, BOOL* hit, Vector3* endCoords, Vector3* surfaceNormal, Entity* entityHit);Parameters:shapeTestHandle: A shape test handle.hit: Whether or not the shape test hit any collisions.endCoords: The resulting coordinates where the shape test hit a collision.surfaceNormal: The surface normal of the hit position.entityHit: Any dynamic entity hit by the shape test.Returns: 0 if the handle is invalid, 1 if the shape test is still pending, or 2 if the shape test has completed, and the handle should be invalidated.Returns the result of a shape test.When used with an asynchronous shape test, this native should be looped until returning 0 or 2, after which the handle is invalidated.Unless the return value is 2, the other return values are undefined.Old name:  _GET_RAYCAST_RESULT",
   "codeBlocks": [
     "// GetShapeTestResult\nint GET_SHAPE_TEST_RESULT(int shapeTestHandle, BOOL* hit, Vector3* endCoords, Vector3* surfaceNormal, Entity* entityHit);",
-    "-- Example usage for GET_SHAPE_TEST_RESULT\nGetShapeTestResult(0, 0, 0, 0, 0)"
+    "-- Example usage for GET_SHAPE_TEST_RESULT\nGetShapeTestResult(1, 0, 0, 0, 0)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

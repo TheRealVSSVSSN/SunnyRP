@@ -1,0 +1,13 @@
+{
+  "title": "CLONE_PED_TO_TARGET",
+  "breadcrumbs": [
+    "Native Reference",
+    "CLONE_PED_TO_TARGET"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CLONE_PED_TO_TARGET\nClonePedToTarget()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "DECOR_GET_INT",
+  "breadcrumbs": [
+    "Native Reference",
+    "DECOR_GET_INT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DECOR_GET_INT\nDecorGetInt()"
+  ],
+  "urls": [],
+  "tags": []
+}

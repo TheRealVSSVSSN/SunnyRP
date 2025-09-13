@@ -1,0 +1,13 @@
+{
+  "title": "_ARE_HELI_STUB_WINGS_DEPLOYED",
+  "breadcrumbs": [
+    "Native Reference",
+    "_ARE_HELI_STUB_WINGS_DEPLOYED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _ARE_HELI_STUB_WINGS_DEPLOYED\n_AreHeliStubWingsDeployed()"
+  ],
+  "urls": [],
+  "tags": []
+}

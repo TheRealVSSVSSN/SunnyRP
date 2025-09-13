@@ -9,7 +9,7 @@
   "codeBlocks": [
     "// LoadAllPathNodes\nBOOL LOAD_ALL_PATH_NODES(BOOL keepInMemory);",
     "This native has been removed in v1180.",
-    "-- Example usage for LOAD_ALL_PATH_NODES\nLoadAllPathNodes(false)"
+    "-- Example usage for LOAD_ALL_PATH_NODES\nLoadAllPathNodes(true)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

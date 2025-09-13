@@ -1,0 +1,13 @@
+{
+  "title": "_GET_RANDOM_INT_IN_RANGE_2",
+  "breadcrumbs": [
+    "Native Reference",
+    "_GET_RANDOM_INT_IN_RANGE_2"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_RANDOM_INT_IN_RANGE_2\n_GetRandomIntInRange2()"
+  ],
+  "urls": [],
+  "tags": []
+}

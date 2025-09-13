@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_HAS_AI_BLIP",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_HAS_AI_BLIP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_HAS_AI_BLIP\nSetPedHasAiBlip()"
+  ],
+  "urls": [],
+  "tags": []
+}

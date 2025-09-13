@@ -1,0 +1,13 @@
+{
+  "title": "CLEAR_PED_DRIVE_BY_CLIPSET_OVERRIDE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CLEAR_PED_DRIVE_BY_CLIPSET_OVERRIDE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CLEAR_PED_DRIVE_BY_CLIPSET_OVERRIDE\nClearPedDriveByClipsetOverride()"
+  ],
+  "urls": [],
+  "tags": []
+}

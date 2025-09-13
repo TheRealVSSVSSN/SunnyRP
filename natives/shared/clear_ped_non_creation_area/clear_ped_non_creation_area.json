@@ -1,0 +1,13 @@
+{
+  "title": "CLEAR_PED_NON_CREATION_AREA",
+  "breadcrumbs": [
+    "Native Reference",
+    "CLEAR_PED_NON_CREATION_AREA"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CLEAR_PED_NON_CREATION_AREA\nClearPedNonCreationArea()"
+  ],
+  "urls": [],
+  "tags": []
+}

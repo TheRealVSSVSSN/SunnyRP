@@ -1,0 +1,13 @@
+{
+  "title": "ARE_PLAYER_STARS_GREYED_OUT",
+  "breadcrumbs": [
+    "Native Reference",
+    "ARE_PLAYER_STARS_GREYED_OUT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ARE_PLAYER_STARS_GREYED_OUT\nArePlayerStarsGreyedOut()"
+  ],
+  "urls": [],
+  "tags": []
+}

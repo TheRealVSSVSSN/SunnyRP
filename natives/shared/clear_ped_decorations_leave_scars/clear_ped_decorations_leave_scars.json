@@ -1,0 +1,13 @@
+{
+  "title": "CLEAR_PED_DECORATIONS_LEAVE_SCARS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CLEAR_PED_DECORATIONS_LEAVE_SCARS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CLEAR_PED_DECORATIONS_LEAVE_SCARS\nClearPedDecorationsLeaveScars()"
+  ],
+  "urls": [],
+  "tags": []
+}

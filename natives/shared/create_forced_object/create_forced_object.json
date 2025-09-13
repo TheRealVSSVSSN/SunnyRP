@@ -1,0 +1,13 @@
+{
+  "title": "CREATE_FORCED_OBJECT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CREATE_FORCED_OBJECT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CREATE_FORCED_OBJECT\nCreateForcedObject()"
+  ],
+  "urls": [],
+  "tags": []
+}

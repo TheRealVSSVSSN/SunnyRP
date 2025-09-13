@@ -1,0 +1,13 @@
+{
+  "title": "GET_ENTITY_QUATERNION",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_ENTITY_QUATERNION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ENTITY_QUATERNION\nGetEntityQuaternion()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "SET_TEXT_EDGE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_TEXT_EDGE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_TEXT_EDGE\nSetTextEdge()"
+  ],
+  "urls": [],
+  "tags": []
+}

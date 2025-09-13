@@ -1,0 +1,13 @@
+{
+  "title": "ADD_RELATIONSHIP_GROUP",
+  "breadcrumbs": [
+    "Native Reference",
+    "ADD_RELATIONSHIP_GROUP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ADD_RELATIONSHIP_GROUP\nAddRelationshipGroup()"
+  ],
+  "urls": [],
+  "tags": []
+}

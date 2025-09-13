@@ -1,0 +1,13 @@
+{
+  "title": "DISABLE_STUNT_JUMP_SET",
+  "breadcrumbs": [
+    "Native Reference",
+    "DISABLE_STUNT_JUMP_SET"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DISABLE_STUNT_JUMP_SET\nDisableStuntJumpSet()"
+  ],
+  "urls": [],
+  "tags": []
+}

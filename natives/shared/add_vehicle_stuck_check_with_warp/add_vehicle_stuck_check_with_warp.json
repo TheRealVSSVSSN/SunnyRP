@@ -1,0 +1,13 @@
+{
+  "title": "ADD_VEHICLE_STUCK_CHECK_WITH_WARP",
+  "breadcrumbs": [
+    "Native Reference",
+    "ADD_VEHICLE_STUCK_CHECK_WITH_WARP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ADD_VEHICLE_STUCK_CHECK_WITH_WARP\nAddVehicleStuckCheckWithWarp()"
+  ],
+  "urls": [],
+  "tags": []
+}

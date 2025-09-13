@@ -1,0 +1,13 @@
+{
+  "title": "_REQUEST_PATHS_PREFER_ACCURATE_BOUNDINGSTRUCT",
+  "breadcrumbs": [
+    "Native Reference",
+    "_REQUEST_PATHS_PREFER_ACCURATE_BOUNDINGSTRUCT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _REQUEST_PATHS_PREFER_ACCURATE_BOUNDINGSTRUCT\n_RequestPathsPreferAccurateBoundingstruct()"
+  ],
+  "urls": [],
+  "tags": []
+}

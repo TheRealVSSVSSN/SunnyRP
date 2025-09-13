@@ -1,0 +1,13 @@
+{
+  "title": "_SET_ALLOW_ABILITY_BAR_IN_MULTIPLAYER",
+  "breadcrumbs": [
+    "Native Reference",
+    "_SET_ALLOW_ABILITY_BAR_IN_MULTIPLAYER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_ALLOW_ABILITY_BAR_IN_MULTIPLAYER\n_SetAllowAbilityBarInMultiplayer()"
+  ],
+  "urls": [],
+  "tags": []
+}

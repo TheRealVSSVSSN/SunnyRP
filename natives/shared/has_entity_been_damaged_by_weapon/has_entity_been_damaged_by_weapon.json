@@ -1,0 +1,13 @@
+{
+  "title": "HAS_ENTITY_BEEN_DAMAGED_BY_WEAPON",
+  "breadcrumbs": [
+    "Native Reference",
+    "HAS_ENTITY_BEEN_DAMAGED_BY_WEAPON"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for HAS_ENTITY_BEEN_DAMAGED_BY_WEAPON\nHasEntityBeenDamagedByWeapon()"
+  ],
+  "urls": [],
+  "tags": []
+}

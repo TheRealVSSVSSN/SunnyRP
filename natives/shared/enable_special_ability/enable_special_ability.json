@@ -1,0 +1,13 @@
+{
+  "title": "ENABLE_SPECIAL_ABILITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENABLE_SPECIAL_ABILITY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ENABLE_SPECIAL_ABILITY\nEnableSpecialAbility()"
+  ],
+  "urls": [],
+  "tags": []
+}

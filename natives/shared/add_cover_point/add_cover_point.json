@@ -1,0 +1,13 @@
+{
+  "title": "ADD_COVER_POINT",
+  "breadcrumbs": [
+    "Native Reference",
+    "ADD_COVER_POINT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ADD_COVER_POINT\nAddCoverPoint()"
+  ],
+  "urls": [],
+  "tags": []
+}

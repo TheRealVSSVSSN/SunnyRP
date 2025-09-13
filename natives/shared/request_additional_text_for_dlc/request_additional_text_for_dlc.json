@@ -1,0 +1,13 @@
+{
+  "title": "REQUEST_ADDITIONAL_TEXT_FOR_DLC",
+  "breadcrumbs": [
+    "Native Reference",
+    "REQUEST_ADDITIONAL_TEXT_FOR_DLC"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REQUEST_ADDITIONAL_TEXT_FOR_DLC\nRequestAdditionalTextForDlc()"
+  ],
+  "urls": [],
+  "tags": []
+}

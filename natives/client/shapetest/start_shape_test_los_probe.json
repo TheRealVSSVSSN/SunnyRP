@@ -10,7 +10,7 @@
     "// StartShapeTestLosProbe\nint START_SHAPE_TEST_LOS_PROBE(float x1, float y1, float z1, float x2, float y2, float z2, int traceFlags, Entity entity, int optionFlags);",
     "enum eTraceFlags\n{\n  None = 0,\n  IntersectWorld = 1,\n  IntersectVehicles = 2,\n  IntersectPeds = 4,\n  IntersectRagdolls = 8,\n  IntersectObjects = 16,\n  IntersectPickup = 32,\n  IntersectGlass = 64,\n  IntersectRiver = 128,\n  IntersectFoliage = 256,\n\n  IntersectEverything = 511\n}",
     "enum eTraceOptionFlags\n{\n  None = 0,\n  OptionIgnoreGlass = 1,\n  OptionIgnoreSeeThrough = 2,\n  OptionIgnoreNoCollision = 4,\n\n  OptionDefault = 7\n}",
-    "local entity = PlayerPedId()\n-- Example usage for START_SHAPE_TEST_LOS_PROBE\nStartShapeTestLosProbe(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, entity, 0)"
+    "local entity = PlayerPedId()\n-- Example usage for START_SHAPE_TEST_LOS_PROBE\nStartShapeTestLosProbe(1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1, entity, 1)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

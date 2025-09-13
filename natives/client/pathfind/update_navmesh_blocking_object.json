@@ -8,7 +8,7 @@
   "content": "0x109E99373F2906870x4E9776D0// UpdateNavmeshBlockingObject\nvoid UPDATE_NAVMESH_BLOCKING_OBJECT(Object object, float posX, float posY, float posZ, float scaleX, float scaleY, float scaleZ, float heading, int flags);Parameters:object: Navmesh Blocking Object by ID. must be returned by ADD_NAVMESH_BLOCKING_OBJECT.posX: X position coordinate.posY: Y position coordinate.posZ: Z position coordinate.scaleX: X Scale.scaleY: Y Scale.scaleZ: Z Scale.heading: Heading of the blocking object.flags: Flags for the blocking object, see ADD_NAVMESH_BLOCKING_OBJECT for list of blocking object flags.",
   "codeBlocks": [
     "// UpdateNavmeshBlockingObject\nvoid UPDATE_NAVMESH_BLOCKING_OBJECT(Object object, float posX, float posY, float posZ, float scaleX, float scaleY, float scaleZ, float heading, int flags);",
-    "-- Example usage for UPDATE_NAVMESH_BLOCKING_OBJECT\nUpdateNavmeshBlockingObject(0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0)"
+    "-- Example usage for UPDATE_NAVMESH_BLOCKING_OBJECT\nUpdateNavmeshBlockingObject(0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

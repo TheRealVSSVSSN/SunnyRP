@@ -8,7 +8,7 @@
   "content": "0x80CA6A8B6C094CC40x7349C856// GetNthClosestVehicleNodeWithHeading\nBOOL GET_NTH_CLOSEST_VEHICLE_NODE_WITH_HEADING(float x, float y, float z, int nthClosest, Vector3* outPosition, float* outHeading, int* totalLanes, int nodeFlags, float zMeasureMult, float zTolerance);Parameters:x: X coordinatey: Y coordinatez: Z coordinatenthClosest: The index of the node to returnoutPosition: Pointer to the found nodes coordsoutHeading: Pointer to the found nodes headingtotalLanes: Pointer to the total lanes (forward + backward) of the found nodenodeFlags: Node flags, see GET_CLOSEST_VEHICLE_NODEzMeasureMult: How strongly the difference in the Z direction should be weightedzTolerance: How far apart the Z coords have to be before zMeasureMult kicks inReturns: Returns true if the node was found, or false if the node was not found, or was not streamed in.Get the nth closest vehicle node with its heading and total lane count. If you need specific forward and backward lane counts use GET_CLOSEST_ROAD.",
   "codeBlocks": [
     "// GetNthClosestVehicleNodeWithHeading\nBOOL GET_NTH_CLOSEST_VEHICLE_NODE_WITH_HEADING(float x, float y, float z, int nthClosest, Vector3* outPosition, float* outHeading, int* totalLanes, int nodeFlags, float zMeasureMult, float zTolerance);",
-    "-- Example usage for GET_NTH_CLOSEST_VEHICLE_NODE_WITH_HEADING\nGetNthClosestVehicleNodeWithHeading(0.0, 0.0, 0.0, 0, 0, 0, 0, 0, 0.0, 0.0)"
+    "-- Example usage for GET_NTH_CLOSEST_VEHICLE_NODE_WITH_HEADING\nGetNthClosestVehicleNodeWithHeading(1.0, 1.0, 1.0, 1, 0, 0, 0, 1, 1.0, 1.0)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

@@ -8,7 +8,7 @@
   "content": "0x03C27E13B42A0E820x4F44AF21// DoorSystemSetAutomaticRate\nvoid DOOR_SYSTEM_SET_AUTOMATIC_RATE(Hash doorHash, float rate, BOOL requestDoor, BOOL forceUpdate);Parameters:doorHash: Door system identifierrate: requestDoor: forceUpdate: On true invokes DOOR_SYSTEM_SET_DOOR_STATE; otherwise requestDoor is unused.Includes networking check: ownership vs. or the door itself isn't networked.",
   "codeBlocks": [
     "// DoorSystemSetAutomaticRate\nvoid DOOR_SYSTEM_SET_AUTOMATIC_RATE(Hash doorHash, float rate, BOOL requestDoor, BOOL forceUpdate);",
-    "-- Example usage for DOOR_SYSTEM_SET_AUTOMATIC_RATE\nDoorSystemSetAutomaticRate(GetHashKey('prop'), 0.0, false, false)"
+    "-- Example usage for DOOR_SYSTEM_SET_AUTOMATIC_RATE\nDoorSystemSetAutomaticRate(GetHashKey('prop'), 1.0, true, true)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

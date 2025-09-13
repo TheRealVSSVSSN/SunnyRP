@@ -1,0 +1,13 @@
+{
+  "title": "ARE_PLANE_PROPELLERS_INTACT",
+  "breadcrumbs": [
+    "Native Reference",
+    "ARE_PLANE_PROPELLERS_INTACT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ARE_PLANE_PROPELLERS_INTACT\nArePlanePropellersIntact()"
+  ],
+  "urls": [],
+  "tags": []
+}

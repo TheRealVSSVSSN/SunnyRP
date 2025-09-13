@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_DROPS_WEAPONS_WHEN_DEAD",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_DROPS_WEAPONS_WHEN_DEAD"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_DROPS_WEAPONS_WHEN_DEAD\nSetPedDropsWeaponsWhenDead()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -8,7 +8,7 @@
   "content": "0xE50E52416CCF948B0xF125BFCC// GetNthClosestVehicleNode\nBOOL GET_NTH_CLOSEST_VEHICLE_NODE(float x, float y, float z, int nthClosest, Vector3* outPosition, int nodeFlags, float zMeasureMult, float zTolerance);Parameters:x: X coordinatey: Y coordinatez: Z coordinatenthClosest: The index of the node to returnoutPosition: Pointer to the found nodes coordsnodeFlags: Node flags, see GET_CLOSEST_VEHICLE_NODEzMeasureMult: How strongly the difference in the Z direction should be weightedzTolerance: How far apart the Z coords have to be before zMeasureMult kicks inReturns: Returns the nth closest vehicle node.Same as GET_CLOSEST_VEHICLE_NODE, but returns the nth closest node instead of the first.",
   "codeBlocks": [
     "// GetNthClosestVehicleNode\nBOOL GET_NTH_CLOSEST_VEHICLE_NODE(float x, float y, float z, int nthClosest, Vector3* outPosition, int nodeFlags, float zMeasureMult, float zTolerance);",
-    "-- Example usage for GET_NTH_CLOSEST_VEHICLE_NODE\nGetNthClosestVehicleNode(0.0, 0.0, 0.0, 0, 0, 0, 0.0, 0.0)"
+    "-- Example usage for GET_NTH_CLOSEST_VEHICLE_NODE\nGetNthClosestVehicleNode(1.0, 1.0, 1.0, 1, 0, 1, 1.0, 1.0)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

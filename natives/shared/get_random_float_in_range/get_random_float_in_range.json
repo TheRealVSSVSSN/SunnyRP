@@ -1,0 +1,13 @@
+{
+  "title": "GET_RANDOM_FLOAT_IN_RANGE",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_RANDOM_FLOAT_IN_RANGE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_RANDOM_FLOAT_IN_RANGE\nGetRandomFloatInRange()"
+  ],
+  "urls": [],
+  "tags": []
+}

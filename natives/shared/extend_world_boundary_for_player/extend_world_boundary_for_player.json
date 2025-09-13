@@ -1,0 +1,13 @@
+{
+  "title": "EXTEND_WORLD_BOUNDARY_FOR_PLAYER",
+  "breadcrumbs": [
+    "Native Reference",
+    "EXTEND_WORLD_BOUNDARY_FOR_PLAYER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for EXTEND_WORLD_BOUNDARY_FOR_PLAYER\nExtendWorldBoundaryForPlayer()"
+  ],
+  "urls": [],
+  "tags": []
+}

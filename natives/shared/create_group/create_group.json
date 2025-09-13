@@ -1,0 +1,13 @@
+{
+  "title": "CREATE_GROUP",
+  "breadcrumbs": [
+    "Native Reference",
+    "CREATE_GROUP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CREATE_GROUP\nCreateGroup()"
+  ],
+  "urls": [],
+  "tags": []
+}

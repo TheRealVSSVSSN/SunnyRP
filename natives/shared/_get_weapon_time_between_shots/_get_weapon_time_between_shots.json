@@ -1,0 +1,13 @@
+{
+  "title": "_GET_WEAPON_TIME_BETWEEN_SHOTS",
+  "breadcrumbs": [
+    "Native Reference",
+    "_GET_WEAPON_TIME_BETWEEN_SHOTS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_WEAPON_TIME_BETWEEN_SHOTS\n_GetWeaponTimeBetweenShots()"
+  ],
+  "urls": [],
+  "tags": []
+}

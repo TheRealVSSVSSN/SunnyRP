@@ -1,0 +1,13 @@
+{
+  "title": "_SET_ALL_PATHS_CACHE_BOUNDINGSTRUCT",
+  "breadcrumbs": [
+    "Native Reference",
+    "_SET_ALL_PATHS_CACHE_BOUNDINGSTRUCT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_ALL_PATHS_CACHE_BOUNDINGSTRUCT\n_SetAllPathsCacheBoundingstruct()"
+  ],
+  "urls": [],
+  "tags": []
+}

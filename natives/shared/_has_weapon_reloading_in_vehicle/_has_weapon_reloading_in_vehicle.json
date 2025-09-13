@@ -1,0 +1,13 @@
+{
+  "title": "_HAS_WEAPON_RELOADING_IN_VEHICLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "_HAS_WEAPON_RELOADING_IN_VEHICLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _HAS_WEAPON_RELOADING_IN_VEHICLE\n_HasWeaponReloadingInVehicle()"
+  ],
+  "urls": [],
+  "tags": []
+}

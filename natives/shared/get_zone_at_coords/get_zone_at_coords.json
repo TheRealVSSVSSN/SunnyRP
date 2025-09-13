@@ -1,0 +1,13 @@
+{
+  "title": "GET_ZONE_AT_COORDS",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_ZONE_AT_COORDS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ZONE_AT_COORDS\nGetZoneAtCoords()"
+  ],
+  "urls": [],
+  "tags": []
+}

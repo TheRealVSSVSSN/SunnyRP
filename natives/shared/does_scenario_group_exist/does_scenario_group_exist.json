@@ -1,0 +1,13 @@
+{
+  "title": "DOES_SCENARIO_GROUP_EXIST",
+  "breadcrumbs": [
+    "Native Reference",
+    "DOES_SCENARIO_GROUP_EXIST"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DOES_SCENARIO_GROUP_EXIST\nDoesScenarioGroupExist()"
+  ],
+  "urls": [],
+  "tags": []
+}

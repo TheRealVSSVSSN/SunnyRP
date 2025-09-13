@@ -1,0 +1,13 @@
+{
+  "title": "APPLY_PED_DAMAGE_PACK",
+  "breadcrumbs": [
+    "Native Reference",
+    "APPLY_PED_DAMAGE_PACK"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for APPLY_PED_DAMAGE_PACK\nApplyPedDamagePack()"
+  ],
+  "urls": [],
+  "tags": []
+}

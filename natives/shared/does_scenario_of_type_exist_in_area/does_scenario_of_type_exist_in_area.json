@@ -1,0 +1,13 @@
+{
+  "title": "DOES_SCENARIO_OF_TYPE_EXIST_IN_AREA",
+  "breadcrumbs": [
+    "Native Reference",
+    "DOES_SCENARIO_OF_TYPE_EXIST_IN_AREA"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DOES_SCENARIO_OF_TYPE_EXIST_IN_AREA\nDoesScenarioOfTypeExistInArea()"
+  ],
+  "urls": [],
+  "tags": []
+}

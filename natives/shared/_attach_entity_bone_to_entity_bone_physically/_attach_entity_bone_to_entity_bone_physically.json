@@ -1,0 +1,13 @@
+{
+  "title": "_ATTACH_ENTITY_BONE_TO_ENTITY_BONE_PHYSICALLY",
+  "breadcrumbs": [
+    "Native Reference",
+    "_ATTACH_ENTITY_BONE_TO_ENTITY_BONE_PHYSICALLY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _ATTACH_ENTITY_BONE_TO_ENTITY_BONE_PHYSICALLY\n_AttachEntityBoneToEntityBonePhysically()"
+  ],
+  "urls": [],
+  "tags": []
+}

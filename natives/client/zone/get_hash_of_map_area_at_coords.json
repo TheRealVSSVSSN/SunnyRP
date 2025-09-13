@@ -9,7 +9,7 @@
   "codeBlocks": [
     "// GetHashOfMapAreaAtCoords\nHash GET_HASH_OF_MAP_AREA_AT_COORDS(float x, float y, float z);",
     "Returns a hash representing which part of the map the given coords are located.  \nPossible return values:  \n(Hash of) city -> -289320599  \n(Hash of) countryside -> 2072609373  \nC# Example :  \nPed player = Game.Player.Character;  \nHash h = Function.Call<Hash>(Hash.GET_HASH_OF_MAP_AREA_AT_COORDS, player.Position.X, player.Position.Y, player.Position.Z);",
-    "-- Example usage for GET_HASH_OF_MAP_AREA_AT_COORDS\nGetHashOfMapAreaAtCoords(0.0, 0.0, 0.0)"
+    "-- Example usage for GET_HASH_OF_MAP_AREA_AT_COORDS\nGetHashOfMapAreaAtCoords(1.0, 1.0, 1.0)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

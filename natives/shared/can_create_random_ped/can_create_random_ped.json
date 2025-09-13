@@ -1,0 +1,13 @@
+{
+  "title": "CAN_CREATE_RANDOM_PED",
+  "breadcrumbs": [
+    "Native Reference",
+    "CAN_CREATE_RANDOM_PED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CAN_CREATE_RANDOM_PED\nCanCreateRandomPed()"
+  ],
+  "urls": [],
+  "tags": []
+}

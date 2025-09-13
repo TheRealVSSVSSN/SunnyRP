@@ -1,0 +1,13 @@
+{
+  "title": "DECOR_SET_INT",
+  "breadcrumbs": [
+    "Native Reference",
+    "DECOR_SET_INT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DECOR_SET_INT\nDecorSetInt()"
+  ],
+  "urls": [],
+  "tags": []
+}

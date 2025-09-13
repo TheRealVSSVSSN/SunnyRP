@@ -1,0 +1,13 @@
+{
+  "title": "SET_BLIP_NAME_FROM_TEXT_FILE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_BLIP_NAME_FROM_TEXT_FILE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_BLIP_NAME_FROM_TEXT_FILE\nSetBlipNameFromTextFile()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "ADD_VEHICLE_PHONE_EXPLOSIVE_DEVICE",
+  "breadcrumbs": [
+    "Native Reference",
+    "ADD_VEHICLE_PHONE_EXPLOSIVE_DEVICE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ADD_VEHICLE_PHONE_EXPLOSIVE_DEVICE\nAddVehiclePhoneExplosiveDevice()"
+  ],
+  "urls": [],
+  "tags": []
+}

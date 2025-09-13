@@ -1,0 +1,13 @@
+{
+  "title": "CAN_PLAYER_START_MISSION",
+  "breadcrumbs": [
+    "Native Reference",
+    "CAN_PLAYER_START_MISSION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CAN_PLAYER_START_MISSION\nCanPlayerStartMission()"
+  ],
+  "urls": [],
+  "tags": []
+}
