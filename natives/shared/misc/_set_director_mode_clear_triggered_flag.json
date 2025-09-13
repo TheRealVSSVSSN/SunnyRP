@@ -1,0 +1,12 @@
+{
+  "title": "_SET_DIRECTOR_MODE_CLEAR_TRIGGERED_FLAG",
+  "breadcrumbs": [
+    "_SET_DIRECTOR_MODE_CLEAR_TRIGGERED_FLAG"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_DIRECTOR_MODE_CLEAR_TRIGGERED_FLAG\n_etDirectorModeClearTriggeredFlag()"
+  ],
+  "urls": [],
+  "tags": []
+}

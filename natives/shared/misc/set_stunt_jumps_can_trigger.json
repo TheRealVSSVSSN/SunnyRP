@@ -1,0 +1,12 @@
+{
+  "title": "SET_STUNT_JUMPS_CAN_TRIGGER",
+  "breadcrumbs": [
+    "SET_STUNT_JUMPS_CAN_TRIGGER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_STUNT_JUMPS_CAN_TRIGGER\nSetStuntJumpsCanTrigger()"
+  ],
+  "urls": [],
+  "tags": []
+}

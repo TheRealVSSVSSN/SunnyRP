@@ -1,0 +1,12 @@
+{
+  "title": "IS_PED_CURRENT_WEAPON_SILENCED",
+  "breadcrumbs": [
+    "IS_PED_CURRENT_WEAPON_SILENCED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_PED_CURRENT_WEAPON_SILENCED\nIsPedCurrentWeaponSilenced()"
+  ],
+  "urls": [],
+  "tags": []
+}

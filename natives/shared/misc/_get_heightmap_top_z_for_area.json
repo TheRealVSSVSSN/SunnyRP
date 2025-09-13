@@ -1,0 +1,12 @@
+{
+  "title": "_GET_HEIGHTMAP_TOP_Z_FOR_AREA",
+  "breadcrumbs": [
+    "_GET_HEIGHTMAP_TOP_Z_FOR_AREA"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_HEIGHTMAP_TOP_Z_FOR_AREA\n_etHeightmapTopZForArea()"
+  ],
+  "urls": [],
+  "tags": []
+}

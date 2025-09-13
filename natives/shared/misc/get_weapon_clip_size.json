@@ -1,0 +1,12 @@
+{
+  "title": "GET_WEAPON_CLIP_SIZE",
+  "breadcrumbs": [
+    "GET_WEAPON_CLIP_SIZE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_WEAPON_CLIP_SIZE\nGetWeaponClipSize()"
+  ],
+  "urls": [],
+  "tags": []
+}

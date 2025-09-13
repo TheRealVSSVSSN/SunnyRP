@@ -1,0 +1,12 @@
+{
+  "title": "_IS_ANY_AIR_DEFENSE_ZONE_INSIDE_SPHERE",
+  "breadcrumbs": [
+    "_IS_ANY_AIR_DEFENSE_ZONE_INSIDE_SPHERE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _IS_ANY_AIR_DEFENSE_ZONE_INSIDE_SPHERE\n_sAnyAirDefenseZoneInsideSphere()"
+  ],
+  "urls": [],
+  "tags": []
+}

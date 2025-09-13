@@ -1,0 +1,12 @@
+{
+  "title": "_REMOVE_ALL_AIR_DEFENSE_ZONES",
+  "breadcrumbs": [
+    "_REMOVE_ALL_AIR_DEFENSE_ZONES"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _REMOVE_ALL_AIR_DEFENSE_ZONES\n_emoveAllAirDefenseZones()"
+  ],
+  "urls": [],
+  "tags": []
+}

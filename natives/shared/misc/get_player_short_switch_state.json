@@ -1,0 +1,12 @@
+{
+  "title": "GET_PLAYER_SHORT_SWITCH_STATE",
+  "breadcrumbs": [
+    "GET_PLAYER_SHORT_SWITCH_STATE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PLAYER_SHORT_SWITCH_STATE\nGetPlayerShortSwitchState()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,12 @@
+{
+  "title": "GET_GAME_TIMER",
+  "breadcrumbs": [
+    "GET_GAME_TIMER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_GAME_TIMER\nGetGameTimer()"
+  ],
+  "urls": [],
+  "tags": []
+}

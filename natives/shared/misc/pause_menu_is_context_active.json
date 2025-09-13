@@ -1,0 +1,12 @@
+{
+  "title": "PAUSE_MENU_IS_CONTEXT_ACTIVE",
+  "breadcrumbs": [
+    "PAUSE_MENU_IS_CONTEXT_ACTIVE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for PAUSE_MENU_IS_CONTEXT_ACTIVE\nPauseMenuIsContextActive()"
+  ],
+  "urls": [],
+  "tags": []
+}

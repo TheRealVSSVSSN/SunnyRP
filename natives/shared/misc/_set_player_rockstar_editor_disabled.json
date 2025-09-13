@@ -1,0 +1,12 @@
+{
+  "title": "_SET_PLAYER_ROCKSTAR_EDITOR_DISABLED",
+  "breadcrumbs": [
+    "_SET_PLAYER_ROCKSTAR_EDITOR_DISABLED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_PLAYER_ROCKSTAR_EDITOR_DISABLED\n_etPlayerRockstarEditorDisabled()"
+  ],
+  "urls": [],
+  "tags": []
+}

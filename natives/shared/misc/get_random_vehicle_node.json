@@ -1,0 +1,12 @@
+{
+  "title": "GET_RANDOM_VEHICLE_NODE",
+  "breadcrumbs": [
+    "GET_RANDOM_VEHICLE_NODE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_RANDOM_VEHICLE_NODE\nGetRandomVehicleNode()"
+  ],
+  "urls": [],
+  "tags": []
+}

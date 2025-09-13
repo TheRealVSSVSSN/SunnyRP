@@ -1,0 +1,12 @@
+{
+  "title": "MAKE_PED_RELOAD",
+  "breadcrumbs": [
+    "MAKE_PED_RELOAD"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for MAKE_PED_RELOAD\nMakePedReload()"
+  ],
+  "urls": [],
+  "tags": []
+}

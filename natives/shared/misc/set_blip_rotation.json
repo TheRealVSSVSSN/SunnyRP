@@ -1,0 +1,12 @@
+{
+  "title": "SET_BLIP_ROTATION",
+  "breadcrumbs": [
+    "SET_BLIP_ROTATION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_BLIP_ROTATION\nSetBlipRotation()"
+  ],
+  "urls": [],
+  "tags": []
+}

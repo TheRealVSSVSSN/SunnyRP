@@ -1,0 +1,12 @@
+{
+  "title": "IS_NEW_LOAD_SCENE_ACTIVE",
+  "breadcrumbs": [
+    "IS_NEW_LOAD_SCENE_ACTIVE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_NEW_LOAD_SCENE_ACTIVE\nIsNewLoadSceneActive()"
+  ],
+  "urls": [],
+  "tags": []
+}

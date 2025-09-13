@@ -1,0 +1,12 @@
+{
+  "title": "REFILL_AMMO_INSTANTLY",
+  "breadcrumbs": [
+    "REFILL_AMMO_INSTANTLY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REFILL_AMMO_INSTANTLY\nRefillAmmoInstantly()"
+  ],
+  "urls": [],
+  "tags": []
+}

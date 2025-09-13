@@ -1,0 +1,12 @@
+{
+  "title": "CREATE_PICKUP",
+  "breadcrumbs": [
+    "CREATE_PICKUP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CREATE_PICKUP\nCreatePickup()"
+  ],
+  "urls": [],
+  "tags": []
+}

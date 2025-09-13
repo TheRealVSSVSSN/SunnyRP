@@ -1,0 +1,12 @@
+{
+  "title": "GET_ENTITY_MATRIX",
+  "breadcrumbs": [
+    "GET_ENTITY_MATRIX"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ENTITY_MATRIX\nGetEntityMatrix()"
+  ],
+  "urls": [],
+  "tags": []
+}

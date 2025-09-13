@@ -1,0 +1,12 @@
+{
+  "title": "GET_WEAPON_COMPONENT_HUD_STATS",
+  "breadcrumbs": [
+    "GET_WEAPON_COMPONENT_HUD_STATS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_WEAPON_COMPONENT_HUD_STATS\nGetWeaponComponentHudStats()"
+  ],
+  "urls": [],
+  "tags": []
+}

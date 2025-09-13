@@ -1,0 +1,12 @@
+{
+  "title": "PAUSE_TOGGLE_FULLSCREEN_MAP",
+  "breadcrumbs": [
+    "PAUSE_TOGGLE_FULLSCREEN_MAP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for PAUSE_TOGGLE_FULLSCREEN_MAP\nPauseToggleFullscreenMap()"
+  ],
+  "urls": [],
+  "tags": []
+}

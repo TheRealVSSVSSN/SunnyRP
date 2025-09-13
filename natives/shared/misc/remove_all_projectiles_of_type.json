@@ -1,0 +1,12 @@
+{
+  "title": "REMOVE_ALL_PROJECTILES_OF_TYPE",
+  "breadcrumbs": [
+    "REMOVE_ALL_PROJECTILES_OF_TYPE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REMOVE_ALL_PROJECTILES_OF_TYPE\nRemoveAllProjectilesOfType()"
+  ],
+  "urls": [],
+  "tags": []
+}

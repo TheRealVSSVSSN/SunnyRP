@@ -1,0 +1,12 @@
+{
+  "title": "_GET_VEHICLE_WEAPON_RELOAD_TIME",
+  "breadcrumbs": [
+    "_GET_VEHICLE_WEAPON_RELOAD_TIME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_VEHICLE_WEAPON_RELOAD_TIME\n_etVehicleWeaponReloadTime()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,12 @@
+{
+  "title": "GET_IS_PED_GADGET_EQUIPPED",
+  "breadcrumbs": [
+    "GET_IS_PED_GADGET_EQUIPPED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_IS_PED_GADGET_EQUIPPED\nGetIsPedGadgetEquipped()"
+  ],
+  "urls": [],
+  "tags": []
+}

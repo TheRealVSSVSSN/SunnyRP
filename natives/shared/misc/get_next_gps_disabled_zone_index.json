@@ -1,0 +1,12 @@
+{
+  "title": "GET_NEXT_GPS_DISABLED_ZONE_INDEX",
+  "breadcrumbs": [
+    "GET_NEXT_GPS_DISABLED_ZONE_INDEX"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_NEXT_GPS_DISABLED_ZONE_INDEX\nGetNextGpsDisabledZoneIndex()"
+  ],
+  "urls": [],
+  "tags": []
+}

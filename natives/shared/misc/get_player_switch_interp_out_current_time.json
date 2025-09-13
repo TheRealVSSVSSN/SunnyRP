@@ -1,0 +1,12 @@
+{
+  "title": "GET_PLAYER_SWITCH_INTERP_OUT_CURRENT_TIME",
+  "breadcrumbs": [
+    "GET_PLAYER_SWITCH_INTERP_OUT_CURRENT_TIME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PLAYER_SWITCH_INTERP_OUT_CURRENT_TIME\nGetPlayerSwitchInterpOutCurrentTime()"
+  ],
+  "urls": [],
+  "tags": []
+}

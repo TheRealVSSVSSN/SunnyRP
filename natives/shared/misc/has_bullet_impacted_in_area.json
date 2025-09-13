@@ -1,0 +1,12 @@
+{
+  "title": "HAS_BULLET_IMPACTED_IN_AREA",
+  "breadcrumbs": [
+    "HAS_BULLET_IMPACTED_IN_AREA"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for HAS_BULLET_IMPACTED_IN_AREA\nHasBulletImpactedInArea()"
+  ],
+  "urls": [],
+  "tags": []
+}

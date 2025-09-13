@@ -1,0 +1,12 @@
+{
+  "title": "GET_NUMBER_OF_STREAMING_REQUESTS",
+  "breadcrumbs": [
+    "GET_NUMBER_OF_STREAMING_REQUESTS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_NUMBER_OF_STREAMING_REQUESTS\nGetNumberOfStreamingRequests()"
+  ],
+  "urls": [],
+  "tags": []
+}

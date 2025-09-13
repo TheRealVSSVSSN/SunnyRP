@@ -1,0 +1,12 @@
+{
+  "title": "GET_PED_AMMO_TYPE_FROM_WEAPON",
+  "breadcrumbs": [
+    "GET_PED_AMMO_TYPE_FROM_WEAPON"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PED_AMMO_TYPE_FROM_WEAPON\nGetPedAmmoTypeFromWeapon()"
+  ],
+  "urls": [],
+  "tags": []
+}

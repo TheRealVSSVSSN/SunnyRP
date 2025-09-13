@@ -1,0 +1,12 @@
+{
+  "title": "DATAFILE_SELECT_UGC_STATS",
+  "breadcrumbs": [
+    "DATAFILE_SELECT_UGC_STATS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DATAFILE_SELECT_UGC_STATS\nDatafileSelectUgcStats()"
+  ],
+  "urls": [],
+  "tags": []
+}

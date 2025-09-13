@@ -1,0 +1,12 @@
+{
+  "title": "GET_PLAYER_SWITCH_JUMP_CUT_INDEX",
+  "breadcrumbs": [
+    "GET_PLAYER_SWITCH_JUMP_CUT_INDEX"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PLAYER_SWITCH_JUMP_CUT_INDEX\nGetPlayerSwitchJumpCutIndex()"
+  ],
+  "urls": [],
+  "tags": []
+}

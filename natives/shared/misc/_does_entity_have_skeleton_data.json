@@ -1,0 +1,12 @@
+{
+  "title": "_DOES_ENTITY_HAVE_SKELETON_DATA",
+  "breadcrumbs": [
+    "_DOES_ENTITY_HAVE_SKELETON_DATA"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _DOES_ENTITY_HAVE_SKELETON_DATA\n_oesEntityHaveSkeletonData()"
+  ],
+  "urls": [],
+  "tags": []
+}

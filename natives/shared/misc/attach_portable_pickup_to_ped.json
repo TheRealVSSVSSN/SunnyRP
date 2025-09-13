@@ -1,0 +1,12 @@
+{
+  "title": "ATTACH_PORTABLE_PICKUP_TO_PED",
+  "breadcrumbs": [
+    "ATTACH_PORTABLE_PICKUP_TO_PED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ATTACH_PORTABLE_PICKUP_TO_PED\nAttachPortablePickupToPed()"
+  ],
+  "urls": [],
+  "tags": []
+}

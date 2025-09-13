@@ -1,0 +1,12 @@
+{
+  "title": "_CLEAR_GARAGE_AREA",
+  "breadcrumbs": [
+    "_CLEAR_GARAGE_AREA"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _CLEAR_GARAGE_AREA\n_learGarageArea()"
+  ],
+  "urls": [],
+  "tags": []
+}

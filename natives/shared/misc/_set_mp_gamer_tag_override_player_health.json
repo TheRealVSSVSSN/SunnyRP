@@ -1,0 +1,12 @@
+{
+  "title": "_SET_MP_GAMER_TAG_OVERRIDE_PLAYER_HEALTH",
+  "breadcrumbs": [
+    "_SET_MP_GAMER_TAG_OVERRIDE_PLAYER_HEALTH"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_MP_GAMER_TAG_OVERRIDE_PLAYER_HEALTH\n_etMpGamerTagOverridePlayerHealth()"
+  ],
+  "urls": [],
+  "tags": []
+}

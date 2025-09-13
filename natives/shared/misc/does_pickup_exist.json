@@ -1,0 +1,12 @@
+{
+  "title": "DOES_PICKUP_EXIST",
+  "breadcrumbs": [
+    "DOES_PICKUP_EXIST"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DOES_PICKUP_EXIST\nDoesPickupExist()"
+  ],
+  "urls": [],
+  "tags": []
+}

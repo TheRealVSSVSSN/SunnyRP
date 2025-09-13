@@ -1,0 +1,12 @@
+{
+  "title": "UPDATE_TASK_SWEEP_AIM_POSITION",
+  "breadcrumbs": [
+    "UPDATE_TASK_SWEEP_AIM_POSITION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for UPDATE_TASK_SWEEP_AIM_POSITION\nUpdateTaskSweepAimPosition()"
+  ],
+  "urls": [],
+  "tags": []
+}

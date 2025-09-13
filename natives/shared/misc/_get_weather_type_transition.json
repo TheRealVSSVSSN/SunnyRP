@@ -1,0 +1,12 @@
+{
+  "title": "_GET_WEATHER_TYPE_TRANSITION",
+  "breadcrumbs": [
+    "_GET_WEATHER_TYPE_TRANSITION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_WEATHER_TYPE_TRANSITION\n_etWeatherTypeTransition()"
+  ],
+  "urls": [],
+  "tags": []
+}

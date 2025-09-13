@@ -1,0 +1,12 @@
+{
+  "title": "GET_PED_AMMO_BY_TYPE",
+  "breadcrumbs": [
+    "GET_PED_AMMO_BY_TYPE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PED_AMMO_BY_TYPE\nGetPedAmmoByType()"
+  ],
+  "urls": [],
+  "tags": []
+}

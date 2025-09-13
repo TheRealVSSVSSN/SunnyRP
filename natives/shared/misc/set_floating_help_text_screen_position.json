@@ -1,0 +1,12 @@
+{
+  "title": "SET_FLOATING_HELP_TEXT_SCREEN_POSITION",
+  "breadcrumbs": [
+    "SET_FLOATING_HELP_TEXT_SCREEN_POSITION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_FLOATING_HELP_TEXT_SCREEN_POSITION\nSetFloatingHelpTextScreenPosition()"
+  ],
+  "urls": [],
+  "tags": []
+}

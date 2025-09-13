@@ -1,0 +1,12 @@
+{
+  "title": "_GET_GLOBAL_WATER_TYPE",
+  "breadcrumbs": [
+    "_GET_GLOBAL_WATER_TYPE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_GLOBAL_WATER_TYPE\n_etGlobalWaterType()"
+  ],
+  "urls": [],
+  "tags": []
+}

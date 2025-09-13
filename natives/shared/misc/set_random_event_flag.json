@@ -1,0 +1,12 @@
+{
+  "title": "SET_RANDOM_EVENT_FLAG",
+  "breadcrumbs": [
+    "SET_RANDOM_EVENT_FLAG"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_RANDOM_EVENT_FLAG\nSetRandomEventFlag()"
+  ],
+  "urls": [],
+  "tags": []
+}

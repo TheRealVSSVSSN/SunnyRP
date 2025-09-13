@@ -1,0 +1,12 @@
+{
+  "title": "REQUEST_WEAPON_HIGH_DETAIL_MODEL",
+  "breadcrumbs": [
+    "REQUEST_WEAPON_HIGH_DETAIL_MODEL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REQUEST_WEAPON_HIGH_DETAIL_MODEL\nRequestWeaponHighDetailModel()"
+  ],
+  "urls": [],
+  "tags": []
+}

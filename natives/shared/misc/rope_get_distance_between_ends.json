@@ -1,0 +1,12 @@
+{
+  "title": "ROPE_GET_DISTANCE_BETWEEN_ENDS",
+  "breadcrumbs": [
+    "ROPE_GET_DISTANCE_BETWEEN_ENDS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ROPE_GET_DISTANCE_BETWEEN_ENDS\nRopeGetDistanceBetweenEnds()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,22 @@
+{
+  "title": "SET_BLIP_AS_FRIENDLY",
+  "breadcrumbs": [
+    "HUDAPI",
+    "SET_BLIP_AS_FRIENDLY"
+  ],
+  "content": "0x6F6F290102C02AB40xF290CFD8// SetBlipAsFriendly\nvoid SET_BLIP_AS_FRIENDLY(Blip blip, BOOL toggle);Parameters:blip: The blip handletoggle: True for friendly, false for enemyAllows the user to set a blip as friendly or enemy based on the toggle.",
+  "codeBlocks": [
+    "// SetBlipAsFriendly\nvoid SET_BLIP_AS_FRIENDLY(Blip blip, BOOL toggle);",
+    "-- Example usage for SET_BLIP_AS_FRIENDLY\nSetBlipAsFriendly(0, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/SetBlipAsFriendly.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "title": "GET_MAX_AMMO_IN_CLIP",
+  "breadcrumbs": [
+    "GET_MAX_AMMO_IN_CLIP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_MAX_AMMO_IN_CLIP\nGetMaxAmmoInClip()"
+  ],
+  "urls": [],
+  "tags": []
+}

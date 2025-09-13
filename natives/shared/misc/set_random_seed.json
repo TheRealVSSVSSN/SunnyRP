@@ -1,0 +1,12 @@
+{
+  "title": "SET_RANDOM_SEED",
+  "breadcrumbs": [
+    "SET_RANDOM_SEED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_RANDOM_SEED\nSetRandomSeed()"
+  ],
+  "urls": [],
+  "tags": []
+}

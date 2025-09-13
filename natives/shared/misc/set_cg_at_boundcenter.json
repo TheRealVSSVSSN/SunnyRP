@@ -1,0 +1,12 @@
+{
+  "title": "SET_CG_AT_BOUNDCENTER",
+  "breadcrumbs": [
+    "SET_CG_AT_BOUNDCENTER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_CG_AT_BOUNDCENTER\nSetCgAtBoundcenter()"
+  ],
+  "urls": [],
+  "tags": []
+}

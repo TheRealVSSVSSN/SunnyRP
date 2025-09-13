@@ -1,0 +1,12 @@
+{
+  "title": "GET_PED_WAYPOINT_PROGRESS",
+  "breadcrumbs": [
+    "GET_PED_WAYPOINT_PROGRESS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PED_WAYPOINT_PROGRESS\nGetPedWaypointProgress()"
+  ],
+  "urls": [],
+  "tags": []
+}

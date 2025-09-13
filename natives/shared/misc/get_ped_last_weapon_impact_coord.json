@@ -1,0 +1,12 @@
+{
+  "title": "GET_PED_LAST_WEAPON_IMPACT_COORD",
+  "breadcrumbs": [
+    "GET_PED_LAST_WEAPON_IMPACT_COORD"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PED_LAST_WEAPON_IMPACT_COORD\nGetPedLastWeaponImpactCoord()"
+  ],
+  "urls": [],
+  "tags": []
+}

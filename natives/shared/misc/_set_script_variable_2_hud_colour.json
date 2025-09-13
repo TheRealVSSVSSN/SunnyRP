@@ -1,0 +1,12 @@
+{
+  "title": "_SET_SCRIPT_VARIABLE_2_HUD_COLOUR",
+  "breadcrumbs": [
+    "_SET_SCRIPT_VARIABLE_2_HUD_COLOUR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_SCRIPT_VARIABLE_2_HUD_COLOUR\n_etScriptVariable2HudColour()"
+  ],
+  "urls": [],
+  "tags": []
+}

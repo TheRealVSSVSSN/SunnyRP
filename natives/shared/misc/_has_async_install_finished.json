@@ -1,0 +1,12 @@
+{
+  "title": "_HAS_ASYNC_INSTALL_FINISHED",
+  "breadcrumbs": [
+    "_HAS_ASYNC_INSTALL_FINISHED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _HAS_ASYNC_INSTALL_FINISHED\n_asAsyncInstallFinished()"
+  ],
+  "urls": [],
+  "tags": []
+}

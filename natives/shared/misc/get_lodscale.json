@@ -1,0 +1,12 @@
+{
+  "title": "GET_LODSCALE",
+  "breadcrumbs": [
+    "GET_LODSCALE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_LODSCALE\nGetLodscale()"
+  ],
+  "urls": [],
+  "tags": []
+}

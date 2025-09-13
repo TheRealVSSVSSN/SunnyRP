@@ -1,0 +1,12 @@
+{
+  "title": "GET_LOCKON_DISTANCE_OF_CURRENT_PED_WEAPON",
+  "breadcrumbs": [
+    "GET_LOCKON_DISTANCE_OF_CURRENT_PED_WEAPON"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_LOCKON_DISTANCE_OF_CURRENT_PED_WEAPON\nGetLockonDistanceOfCurrentPedWeapon()"
+  ],
+  "urls": [],
+  "tags": []
+}

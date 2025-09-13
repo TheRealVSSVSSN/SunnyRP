@@ -1,0 +1,12 @@
+{
+  "title": "ARE_ENTITIES_ENTIRELY_INSIDE_GARAGE",
+  "breadcrumbs": [
+    "ARE_ENTITIES_ENTIRELY_INSIDE_GARAGE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ARE_ENTITIES_ENTIRELY_INSIDE_GARAGE\nAreEntitiesEntirelyInsideGarage()"
+  ],
+  "urls": [],
+  "tags": []
+}

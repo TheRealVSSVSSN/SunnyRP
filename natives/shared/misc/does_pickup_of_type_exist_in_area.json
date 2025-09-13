@@ -1,0 +1,12 @@
+{
+  "title": "DOES_PICKUP_OF_TYPE_EXIST_IN_AREA",
+  "breadcrumbs": [
+    "DOES_PICKUP_OF_TYPE_EXIST_IN_AREA"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DOES_PICKUP_OF_TYPE_EXIST_IN_AREA\nDoesPickupOfTypeExistInArea()"
+  ],
+  "urls": [],
+  "tags": []
+}

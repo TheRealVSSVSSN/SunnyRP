@@ -1,0 +1,12 @@
+{
+  "title": "REMOVE_WEAPON_ASSET",
+  "breadcrumbs": [
+    "REMOVE_WEAPON_ASSET"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REMOVE_WEAPON_ASSET\nRemoveWeaponAsset()"
+  ],
+  "urls": [],
+  "tags": []
+}

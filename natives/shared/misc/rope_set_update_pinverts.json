@@ -1,0 +1,12 @@
+{
+  "title": "ROPE_SET_UPDATE_PINVERTS",
+  "breadcrumbs": [
+    "ROPE_SET_UPDATE_PINVERTS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ROPE_SET_UPDATE_PINVERTS\nRopeSetUpdatePinverts()"
+  ],
+  "urls": [],
+  "tags": []
+}

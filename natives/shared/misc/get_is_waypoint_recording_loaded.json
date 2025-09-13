@@ -1,0 +1,12 @@
+{
+  "title": "GET_IS_WAYPOINT_RECORDING_LOADED",
+  "breadcrumbs": [
+    "GET_IS_WAYPOINT_RECORDING_LOADED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_IS_WAYPOINT_RECORDING_LOADED\nGetIsWaypointRecordingLoaded()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,12 @@
+{
+  "title": "GET_FAKE_WANTED_LEVEL",
+  "breadcrumbs": [
+    "GET_FAKE_WANTED_LEVEL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_FAKE_WANTED_LEVEL\nGetFakeWantedLevel()"
+  ],
+  "urls": [],
+  "tags": []
+}

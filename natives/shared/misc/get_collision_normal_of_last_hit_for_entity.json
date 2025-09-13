@@ -1,0 +1,12 @@
+{
+  "title": "GET_COLLISION_NORMAL_OF_LAST_HIT_FOR_ENTITY",
+  "breadcrumbs": [
+    "GET_COLLISION_NORMAL_OF_LAST_HIT_FOR_ENTITY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_COLLISION_NORMAL_OF_LAST_HIT_FOR_ENTITY\nGetCollisionNormalOfLastHitForEntity()"
+  ],
+  "urls": [],
+  "tags": []
+}

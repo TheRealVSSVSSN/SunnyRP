@@ -1,0 +1,12 @@
+{
+  "title": "UGC_CREATE_CONTENT",
+  "breadcrumbs": [
+    "UGC_CREATE_CONTENT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for UGC_CREATE_CONTENT\nUgcCreateContent()"
+  ],
+  "urls": [],
+  "tags": []
+}

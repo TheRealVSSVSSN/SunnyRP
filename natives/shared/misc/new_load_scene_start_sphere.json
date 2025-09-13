@@ -1,0 +1,12 @@
+{
+  "title": "NEW_LOAD_SCENE_START_SPHERE",
+  "breadcrumbs": [
+    "NEW_LOAD_SCENE_START_SPHERE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NEW_LOAD_SCENE_START_SPHERE\nNewLoadSceneStartSphere()"
+  ],
+  "urls": [],
+  "tags": []
+}

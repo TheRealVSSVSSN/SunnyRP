@@ -1,0 +1,12 @@
+{
+  "title": "VEHICLE_WAYPOINT_PLAYBACK_PAUSE",
+  "breadcrumbs": [
+    "VEHICLE_WAYPOINT_PLAYBACK_PAUSE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for VEHICLE_WAYPOINT_PLAYBACK_PAUSE\nVehicleWaypointPlaybackPause()"
+  ],
+  "urls": [],
+  "tags": []
+}

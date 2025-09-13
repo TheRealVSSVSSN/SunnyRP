@@ -1,0 +1,12 @@
+{
+  "title": "REMOVE_CLIP_SET",
+  "breadcrumbs": [
+    "REMOVE_CLIP_SET"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REMOVE_CLIP_SET\nRemoveClipSet()"
+  ],
+  "urls": [],
+  "tags": []
+}

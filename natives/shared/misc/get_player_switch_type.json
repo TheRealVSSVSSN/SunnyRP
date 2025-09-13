@@ -1,0 +1,12 @@
+{
+  "title": "GET_PLAYER_SWITCH_TYPE",
+  "breadcrumbs": [
+    "GET_PLAYER_SWITCH_TYPE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PLAYER_SWITCH_TYPE\nGetPlayerSwitchType()"
+  ],
+  "urls": [],
+  "tags": []
+}

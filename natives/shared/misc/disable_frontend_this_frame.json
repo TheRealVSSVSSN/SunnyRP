@@ -1,0 +1,12 @@
+{
+  "title": "DISABLE_FRONTEND_THIS_FRAME",
+  "breadcrumbs": [
+    "DISABLE_FRONTEND_THIS_FRAME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DISABLE_FRONTEND_THIS_FRAME\nDisableFrontendThisFrame()"
+  ],
+  "urls": [],
+  "tags": []
+}

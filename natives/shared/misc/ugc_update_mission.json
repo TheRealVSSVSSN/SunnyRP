@@ -1,0 +1,12 @@
+{
+  "title": "UGC_UPDATE_MISSION",
+  "breadcrumbs": [
+    "UGC_UPDATE_MISSION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for UGC_UPDATE_MISSION\nUgcUpdateMission()"
+  ],
+  "urls": [],
+  "tags": []
+}

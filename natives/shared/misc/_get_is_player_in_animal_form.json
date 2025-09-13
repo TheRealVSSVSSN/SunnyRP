@@ -1,0 +1,12 @@
+{
+  "title": "_GET_IS_PLAYER_IN_ANIMAL_FORM",
+  "breadcrumbs": [
+    "_GET_IS_PLAYER_IN_ANIMAL_FORM"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_IS_PLAYER_IN_ANIMAL_FORM\n_etIsPlayerInAnimalForm()"
+  ],
+  "urls": [],
+  "tags": []
+}

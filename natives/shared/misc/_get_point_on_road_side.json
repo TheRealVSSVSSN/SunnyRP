@@ -1,0 +1,12 @@
+{
+  "title": "_GET_POINT_ON_ROAD_SIDE",
+  "breadcrumbs": [
+    "_GET_POINT_ON_ROAD_SIDE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_POINT_ON_ROAD_SIDE\n_etPointOnRoadSide()"
+  ],
+  "urls": [],
+  "tags": []
+}

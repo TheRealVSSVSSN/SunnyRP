@@ -1,0 +1,12 @@
+{
+  "title": "CREATE_PICKUP_ROTATE",
+  "breadcrumbs": [
+    "CREATE_PICKUP_ROTATE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CREATE_PICKUP_ROTATE\nCreatePickupRotate()"
+  ],
+  "urls": [],
+  "tags": []
+}

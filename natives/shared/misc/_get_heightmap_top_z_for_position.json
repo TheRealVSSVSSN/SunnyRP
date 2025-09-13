@@ -1,0 +1,12 @@
+{
+  "title": "_GET_HEIGHTMAP_TOP_Z_FOR_POSITION",
+  "breadcrumbs": [
+    "_GET_HEIGHTMAP_TOP_Z_FOR_POSITION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_HEIGHTMAP_TOP_Z_FOR_POSITION\n_etHeightmapTopZForPosition()"
+  ],
+  "urls": [],
+  "tags": []
+}

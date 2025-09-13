@@ -1,0 +1,12 @@
+{
+  "title": "REMOVE_NAMED_PTFX_ASSET",
+  "breadcrumbs": [
+    "REMOVE_NAMED_PTFX_ASSET"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REMOVE_NAMED_PTFX_ASSET\nRemoveNamedPtfxAsset()"
+  ],
+  "urls": [],
+  "tags": []
+}

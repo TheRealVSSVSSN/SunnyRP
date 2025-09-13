@@ -1,0 +1,12 @@
+{
+  "title": "GET_ROPE_VERTEX_COORD",
+  "breadcrumbs": [
+    "GET_ROPE_VERTEX_COORD"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ROPE_VERTEX_COORD\nGetRopeVertexCoord()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,12 @@
+{
+  "title": "IS_PED_WEAPON_READY_TO_SHOOT",
+  "breadcrumbs": [
+    "IS_PED_WEAPON_READY_TO_SHOOT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_PED_WEAPON_READY_TO_SHOOT\nIsPedWeaponReadyToShoot()"
+  ],
+  "urls": [],
+  "tags": []
+}

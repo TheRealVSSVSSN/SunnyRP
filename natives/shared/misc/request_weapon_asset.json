@@ -1,0 +1,12 @@
+{
+  "title": "REQUEST_WEAPON_ASSET",
+  "breadcrumbs": [
+    "REQUEST_WEAPON_ASSET"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REQUEST_WEAPON_ASSET\nRequestWeaponAsset()"
+  ],
+  "urls": [],
+  "tags": []
+}

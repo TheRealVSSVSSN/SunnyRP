@@ -1,0 +1,12 @@
+{
+  "title": "GET_ENTITY_BONE_INDEX_BY_NAME",
+  "breadcrumbs": [
+    "GET_ENTITY_BONE_INDEX_BY_NAME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ENTITY_BONE_INDEX_BY_NAME\nGetEntityBoneIndexByName()"
+  ],
+  "urls": [],
+  "tags": []
+}

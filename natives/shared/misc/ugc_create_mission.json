@@ -1,0 +1,12 @@
+{
+  "title": "UGC_CREATE_MISSION",
+  "breadcrumbs": [
+    "UGC_CREATE_MISSION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for UGC_CREATE_MISSION\nUgcCreateMission()"
+  ],
+  "urls": [],
+  "tags": []
+}

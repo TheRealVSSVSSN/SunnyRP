@@ -1,0 +1,12 @@
+{
+  "title": "_SET_MP_GAMER_TAG_MP_BAG_LARGE_COUNT",
+  "breadcrumbs": [
+    "_SET_MP_GAMER_TAG_MP_BAG_LARGE_COUNT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_MP_GAMER_TAG_MP_BAG_LARGE_COUNT\n_etMpGamerTagMpBagLargeCount()"
+  ],
+  "urls": [],
+  "tags": []
+}

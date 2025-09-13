@@ -1,0 +1,12 @@
+{
+  "title": "GET_MAX_AMMO",
+  "breadcrumbs": [
+    "GET_MAX_AMMO"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_MAX_AMMO\nGetMaxAmmo()"
+  ],
+  "urls": [],
+  "tags": []
+}

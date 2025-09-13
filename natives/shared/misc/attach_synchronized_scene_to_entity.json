@@ -1,0 +1,12 @@
+{
+  "title": "ATTACH_SYNCHRONIZED_SCENE_TO_ENTITY",
+  "breadcrumbs": [
+    "ATTACH_SYNCHRONIZED_SCENE_TO_ENTITY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ATTACH_SYNCHRONIZED_SCENE_TO_ENTITY\nAttachSynchronizedSceneToEntity()"
+  ],
+  "urls": [],
+  "tags": []
+}

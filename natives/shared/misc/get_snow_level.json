@@ -1,0 +1,12 @@
+{
+  "title": "GET_SNOW_LEVEL",
+  "breadcrumbs": [
+    "GET_SNOW_LEVEL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_SNOW_LEVEL\nGetSnowLevel()"
+  ],
+  "urls": [],
+  "tags": []
+}

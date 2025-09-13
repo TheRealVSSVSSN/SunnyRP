@@ -1,0 +1,12 @@
+{
+  "title": "ALLOW_PLAYER_SWITCH_OUTRO",
+  "breadcrumbs": [
+    "ALLOW_PLAYER_SWITCH_OUTRO"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ALLOW_PLAYER_SWITCH_OUTRO\nAllowPlayerSwitchOutro()"
+  ],
+  "urls": [],
+  "tags": []
+}

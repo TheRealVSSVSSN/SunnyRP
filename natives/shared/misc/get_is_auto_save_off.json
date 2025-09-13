@@ -1,0 +1,12 @@
+{
+  "title": "GET_IS_AUTO_SAVE_OFF",
+  "breadcrumbs": [
+    "GET_IS_AUTO_SAVE_OFF"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_IS_AUTO_SAVE_OFF\nGetIsAutoSaveOff()"
+  ],
+  "urls": [],
+  "tags": []
+}

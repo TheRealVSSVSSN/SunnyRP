@@ -1,0 +1,12 @@
+{
+  "title": "SET_DAMPING",
+  "breadcrumbs": [
+    "SET_DAMPING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_DAMPING\nSetDamping()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,12 @@
+{
+  "title": "NETWORK_UPDATE_LOAD_SCENE",
+  "breadcrumbs": [
+    "NETWORK_UPDATE_LOAD_SCENE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_UPDATE_LOAD_SCENE\nNetworkUpdateLoadScene()"
+  ],
+  "urls": [],
+  "tags": []
+}

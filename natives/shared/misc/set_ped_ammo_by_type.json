@@ -1,0 +1,12 @@
+{
+  "title": "SET_PED_AMMO_BY_TYPE",
+  "breadcrumbs": [
+    "SET_PED_AMMO_BY_TYPE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_AMMO_BY_TYPE\nSetPedAmmoByType()"
+  ],
+  "urls": [],
+  "tags": []
+}

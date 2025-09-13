@@ -1,0 +1,12 @@
+{
+  "title": "GET_PED_WEAPONTYPE_IN_SLOT",
+  "breadcrumbs": [
+    "GET_PED_WEAPONTYPE_IN_SLOT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PED_WEAPONTYPE_IN_SLOT\nGetPedWeapontypeInSlot()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,12 @@
+{
+  "title": "DETACH_PORTABLE_PICKUP_FROM_PED",
+  "breadcrumbs": [
+    "DETACH_PORTABLE_PICKUP_FROM_PED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DETACH_PORTABLE_PICKUP_FROM_PED\nDetachPortablePickupFromPed()"
+  ],
+  "urls": [],
+  "tags": []
+}

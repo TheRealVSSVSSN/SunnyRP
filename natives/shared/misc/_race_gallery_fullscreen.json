@@ -1,0 +1,12 @@
+{
+  "title": "_RACE_GALLERY_FULLSCREEN",
+  "breadcrumbs": [
+    "_RACE_GALLERY_FULLSCREEN"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _RACE_GALLERY_FULLSCREEN\n_aceGalleryFullscreen()"
+  ],
+  "urls": [],
+  "tags": []
+}

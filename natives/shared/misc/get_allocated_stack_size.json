@@ -1,0 +1,12 @@
+{
+  "title": "GET_ALLOCATED_STACK_SIZE",
+  "breadcrumbs": [
+    "GET_ALLOCATED_STACK_SIZE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ALLOCATED_STACK_SIZE\nGetAllocatedStackSize()"
+  ],
+  "urls": [],
+  "tags": []
+}

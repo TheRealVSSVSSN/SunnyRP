@@ -1,0 +1,12 @@
+{
+  "title": "_SET_MP_GAMER_TAG_DISABLE_PLAYER_HEALTH_SYNC",
+  "breadcrumbs": [
+    "_SET_MP_GAMER_TAG_DISABLE_PLAYER_HEALTH_SYNC"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_MP_GAMER_TAG_DISABLE_PLAYER_HEALTH_SYNC\n_etMpGamerTagDisablePlayerHealthSync()"
+  ],
+  "urls": [],
+  "tags": []
+}

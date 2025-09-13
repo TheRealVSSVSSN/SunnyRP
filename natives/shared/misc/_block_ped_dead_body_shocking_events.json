@@ -1,0 +1,12 @@
+{
+  "title": "_BLOCK_PED_DEAD_BODY_SHOCKING_EVENTS",
+  "breadcrumbs": [
+    "_BLOCK_PED_DEAD_BODY_SHOCKING_EVENTS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _BLOCK_PED_DEAD_BODY_SHOCKING_EVENTS\n_lockPedDeadBodyShockingEvents()"
+  ],
+  "urls": [],
+  "tags": []
+}

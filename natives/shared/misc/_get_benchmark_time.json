@@ -1,0 +1,12 @@
+{
+  "title": "_GET_BENCHMARK_TIME",
+  "breadcrumbs": [
+    "_GET_BENCHMARK_TIME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_BENCHMARK_TIME\n_etBenchmarkTime()"
+  ],
+  "urls": [],
+  "tags": []
+}

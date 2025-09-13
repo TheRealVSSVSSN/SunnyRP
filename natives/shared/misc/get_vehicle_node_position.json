@@ -1,0 +1,12 @@
+{
+  "title": "GET_VEHICLE_NODE_POSITION",
+  "breadcrumbs": [
+    "GET_VEHICLE_NODE_POSITION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_NODE_POSITION\nGetVehicleNodePosition()"
+  ],
+  "urls": [],
+  "tags": []
+}

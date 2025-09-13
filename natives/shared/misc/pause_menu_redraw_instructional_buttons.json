@@ -1,0 +1,12 @@
+{
+  "title": "PAUSE_MENU_REDRAW_INSTRUCTIONAL_BUTTONS",
+  "breadcrumbs": [
+    "PAUSE_MENU_REDRAW_INSTRUCTIONAL_BUTTONS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for PAUSE_MENU_REDRAW_INSTRUCTIONAL_BUTTONS\nPauseMenuRedrawInstructionalButtons()"
+  ],
+  "urls": [],
+  "tags": []
+}

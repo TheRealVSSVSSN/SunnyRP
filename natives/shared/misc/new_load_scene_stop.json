@@ -1,0 +1,12 @@
+{
+  "title": "NEW_LOAD_SCENE_STOP",
+  "breadcrumbs": [
+    "NEW_LOAD_SCENE_STOP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NEW_LOAD_SCENE_STOP\nNewLoadSceneStop()"
+  ],
+  "urls": [],
+  "tags": []
+}

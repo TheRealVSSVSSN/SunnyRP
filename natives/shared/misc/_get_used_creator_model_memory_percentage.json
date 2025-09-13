@@ -1,0 +1,12 @@
+{
+  "title": "_GET_USED_CREATOR_MODEL_MEMORY_PERCENTAGE",
+  "breadcrumbs": [
+    "_GET_USED_CREATOR_MODEL_MEMORY_PERCENTAGE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_USED_CREATOR_MODEL_MEMORY_PERCENTAGE\n_etUsedCreatorModelMemoryPercentage()"
+  ],
+  "urls": [],
+  "tags": []
+}

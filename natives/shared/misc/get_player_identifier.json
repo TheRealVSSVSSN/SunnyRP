@@ -1,0 +1,12 @@
+{
+  "title": "GET_PLAYER_IDENTIFIER",
+  "breadcrumbs": [
+    "GET_PLAYER_IDENTIFIER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PLAYER_IDENTIFIER\nGetPlayerIdentifier()"
+  ],
+  "urls": [],
+  "tags": []
+}

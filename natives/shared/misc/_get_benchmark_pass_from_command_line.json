@@ -1,0 +1,12 @@
+{
+  "title": "_GET_BENCHMARK_PASS_FROM_COMMAND_LINE",
+  "breadcrumbs": [
+    "_GET_BENCHMARK_PASS_FROM_COMMAND_LINE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_BENCHMARK_PASS_FROM_COMMAND_LINE\n_etBenchmarkPassFromCommandLine()"
+  ],
+  "urls": [],
+  "tags": []
+}

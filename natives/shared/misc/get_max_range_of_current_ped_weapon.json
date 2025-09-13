@@ -1,0 +1,12 @@
+{
+  "title": "GET_MAX_RANGE_OF_CURRENT_PED_WEAPON",
+  "breadcrumbs": [
+    "GET_MAX_RANGE_OF_CURRENT_PED_WEAPON"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_MAX_RANGE_OF_CURRENT_PED_WEAPON\nGetMaxRangeOfCurrentPedWeapon()"
+  ],
+  "urls": [],
+  "tags": []
+}

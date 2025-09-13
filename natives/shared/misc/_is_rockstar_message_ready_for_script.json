@@ -1,0 +1,12 @@
+{
+  "title": "_IS_ROCKSTAR_MESSAGE_READY_FOR_SCRIPT",
+  "breadcrumbs": [
+    "_IS_ROCKSTAR_MESSAGE_READY_FOR_SCRIPT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _IS_ROCKSTAR_MESSAGE_READY_FOR_SCRIPT\n_sRockstarMessageReadyForScript()"
+  ],
+  "urls": [],
+  "tags": []
+}

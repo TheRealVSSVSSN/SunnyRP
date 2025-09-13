@@ -1,0 +1,12 @@
+{
+  "title": "SET_DISABLE_BREAKING",
+  "breadcrumbs": [
+    "SET_DISABLE_BREAKING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_DISABLE_BREAKING\nSetDisableBreaking()"
+  ],
+  "urls": [],
+  "tags": []
+}

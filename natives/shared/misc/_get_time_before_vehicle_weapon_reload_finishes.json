@@ -1,0 +1,12 @@
+{
+  "title": "_GET_TIME_BEFORE_VEHICLE_WEAPON_RELOAD_FINISHES",
+  "breadcrumbs": [
+    "_GET_TIME_BEFORE_VEHICLE_WEAPON_RELOAD_FINISHES"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_TIME_BEFORE_VEHICLE_WEAPON_RELOAD_FINISHES\n_etTimeBeforeVehicleWeaponReloadFinishes()"
+  ],
+  "urls": [],
+  "tags": []
+}

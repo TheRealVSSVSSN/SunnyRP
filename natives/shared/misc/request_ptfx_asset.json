@@ -1,0 +1,12 @@
+{
+  "title": "REQUEST_PTFX_ASSET",
+  "breadcrumbs": [
+    "REQUEST_PTFX_ASSET"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REQUEST_PTFX_ASSET\nRequestPtfxAsset()"
+  ],
+  "urls": [],
+  "tags": []
+}

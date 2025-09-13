@@ -1,0 +1,12 @@
+{
+  "title": "GET_IS_TASK_ACTIVE",
+  "breadcrumbs": [
+    "GET_IS_TASK_ACTIVE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_IS_TASK_ACTIVE\nGetIsTaskActive()"
+  ],
+  "urls": [],
+  "tags": []
+}

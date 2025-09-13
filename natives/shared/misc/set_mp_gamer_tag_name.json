@@ -1,0 +1,12 @@
+{
+  "title": "SET_MP_GAMER_TAG_NAME",
+  "breadcrumbs": [
+    "SET_MP_GAMER_TAG_NAME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_MP_GAMER_TAG_NAME\nSetMpGamerTagName()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,12 @@
+{
+  "title": "_SET_CAN_PED_EQUIP_WEAPON",
+  "breadcrumbs": [
+    "_SET_CAN_PED_EQUIP_WEAPON"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_CAN_PED_EQUIP_WEAPON\n_etCanPedEquipWeapon()"
+  ],
+  "urls": [],
+  "tags": []
+}

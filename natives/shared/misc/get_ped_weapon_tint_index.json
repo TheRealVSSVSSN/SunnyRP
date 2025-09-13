@@ -1,0 +1,12 @@
+{
+  "title": "GET_PED_WEAPON_TINT_INDEX",
+  "breadcrumbs": [
+    "GET_PED_WEAPON_TINT_INDEX"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PED_WEAPON_TINT_INDEX\nGetPedWeaponTintIndex()"
+  ],
+  "urls": [],
+  "tags": []
+}

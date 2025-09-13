@@ -1,0 +1,12 @@
+{
+  "title": "DOES_ENTITY_HAVE_DRAWABLE",
+  "breadcrumbs": [
+    "DOES_ENTITY_HAVE_DRAWABLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DOES_ENTITY_HAVE_DRAWABLE\nDoesEntityHaveDrawable()"
+  ],
+  "urls": [],
+  "tags": []
+}

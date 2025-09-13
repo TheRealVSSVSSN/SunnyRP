@@ -1,0 +1,12 @@
+{
+  "title": "SET_MINIMAP_GOLF_COURSE_OFF",
+  "breadcrumbs": [
+    "SET_MINIMAP_GOLF_COURSE_OFF"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_MINIMAP_GOLF_COURSE_OFF\nSetMinimapGolfCourseOff()"
+  ],
+  "urls": [],
+  "tags": []
+}

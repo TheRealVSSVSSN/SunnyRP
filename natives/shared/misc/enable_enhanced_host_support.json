@@ -1,0 +1,12 @@
+{
+  "title": "ENABLE_ENHANCED_HOST_SUPPORT",
+  "breadcrumbs": [
+    "ENABLE_ENHANCED_HOST_SUPPORT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ENABLE_ENHANCED_HOST_SUPPORT\nEnableEnhancedHostSupport()"
+  ],
+  "urls": [],
+  "tags": []
+}

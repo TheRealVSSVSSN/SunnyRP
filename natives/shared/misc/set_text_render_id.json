@@ -1,0 +1,12 @@
+{
+  "title": "SET_TEXT_RENDER_ID",
+  "breadcrumbs": [
+    "SET_TEXT_RENDER_ID"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_TEXT_RENDER_ID\nSetTextRenderId()"
+  ],
+  "urls": [],
+  "tags": []
+}

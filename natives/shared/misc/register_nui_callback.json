@@ -1,0 +1,12 @@
+{
+  "title": "REGISTER_NUI_CALLBACK",
+  "breadcrumbs": [
+    "REGISTER_NUI_CALLBACK"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REGISTER_NUI_CALLBACK\nRegisterNuiCallback()"
+  ],
+  "urls": [],
+  "tags": []
+}

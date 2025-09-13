@@ -1,0 +1,12 @@
+{
+  "title": "GET_STATE_BAG_VALUE",
+  "breadcrumbs": [
+    "GET_STATE_BAG_VALUE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_STATE_BAG_VALUE\nGetStateBagValue()"
+  ],
+  "urls": [],
+  "tags": []
+}

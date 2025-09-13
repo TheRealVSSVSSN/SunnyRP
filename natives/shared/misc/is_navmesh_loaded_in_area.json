@@ -1,0 +1,12 @@
+{
+  "title": "IS_NAVMESH_LOADED_IN_AREA",
+  "breadcrumbs": [
+    "IS_NAVMESH_LOADED_IN_AREA"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_NAVMESH_LOADED_IN_AREA\nIsNavmeshLoadedInArea()"
+  ],
+  "urls": [],
+  "tags": []
+}

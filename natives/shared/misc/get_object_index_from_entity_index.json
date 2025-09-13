@@ -1,0 +1,12 @@
+{
+  "title": "GET_OBJECT_INDEX_FROM_ENTITY_INDEX",
+  "breadcrumbs": [
+    "GET_OBJECT_INDEX_FROM_ENTITY_INDEX"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_OBJECT_INDEX_FROM_ENTITY_INDEX\nGetObjectIndexFromEntityIndex()"
+  ],
+  "urls": [],
+  "tags": []
+}

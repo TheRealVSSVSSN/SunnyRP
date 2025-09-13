@@ -1,0 +1,12 @@
+{
+  "title": "SET_CONVAR_SERVER_INFO",
+  "breadcrumbs": [
+    "SET_CONVAR_SERVER_INFO"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_CONVAR_SERVER_INFO\nSetConvarServerInfo()"
+  ],
+  "urls": [],
+  "tags": []
+}

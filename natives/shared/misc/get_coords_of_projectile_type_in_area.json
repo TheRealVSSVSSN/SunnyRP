@@ -1,0 +1,12 @@
+{
+  "title": "GET_COORDS_OF_PROJECTILE_TYPE_IN_AREA",
+  "breadcrumbs": [
+    "GET_COORDS_OF_PROJECTILE_TYPE_IN_AREA"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_COORDS_OF_PROJECTILE_TYPE_IN_AREA\nGetCoordsOfProjectileTypeInArea()"
+  ],
+  "urls": [],
+  "tags": []
+}

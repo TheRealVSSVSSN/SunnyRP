@@ -1,0 +1,12 @@
+{
+  "title": "ROPE_ARE_TEXTURES_LOADED",
+  "breadcrumbs": [
+    "ROPE_ARE_TEXTURES_LOADED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ROPE_ARE_TEXTURES_LOADED\nRopeAreTexturesLoaded()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,12 @@
+{
+  "title": "GET_GPS_BLIP_ROUTE_FOUND",
+  "breadcrumbs": [
+    "GET_GPS_BLIP_ROUTE_FOUND"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_GPS_BLIP_ROUTE_FOUND\nGetGpsBlipRouteFound()"
+  ],
+  "urls": [],
+  "tags": []
+}

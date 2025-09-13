@@ -1,0 +1,12 @@
+{
+  "title": "REFRESH_WAYPOINT",
+  "breadcrumbs": [
+    "REFRESH_WAYPOINT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REFRESH_WAYPOINT\nRefreshWaypoint()"
+  ],
+  "urls": [],
+  "tags": []
+}

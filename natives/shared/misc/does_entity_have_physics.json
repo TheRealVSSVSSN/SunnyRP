@@ -1,0 +1,12 @@
+{
+  "title": "DOES_ENTITY_HAVE_PHYSICS",
+  "breadcrumbs": [
+    "DOES_ENTITY_HAVE_PHYSICS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DOES_ENTITY_HAVE_PHYSICS\nDoesEntityHavePhysics()"
+  ],
+  "urls": [],
+  "tags": []
+}

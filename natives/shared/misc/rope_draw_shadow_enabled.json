@@ -1,0 +1,12 @@
+{
+  "title": "ROPE_DRAW_SHADOW_ENABLED",
+  "breadcrumbs": [
+    "ROPE_DRAW_SHADOW_ENABLED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ROPE_DRAW_SHADOW_ENABLED\nRopeDrawShadowEnabled()"
+  ],
+  "urls": [],
+  "tags": []
+}

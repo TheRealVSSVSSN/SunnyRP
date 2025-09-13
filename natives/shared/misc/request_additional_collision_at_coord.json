@@ -1,0 +1,12 @@
+{
+  "title": "REQUEST_ADDITIONAL_COLLISION_AT_COORD",
+  "breadcrumbs": [
+    "REQUEST_ADDITIONAL_COLLISION_AT_COORD"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REQUEST_ADDITIONAL_COLLISION_AT_COORD\nRequestAdditionalCollisionAtCoord()"
+  ],
+  "urls": [],
+  "tags": []
+}
