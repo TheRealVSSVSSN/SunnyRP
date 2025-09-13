@@ -1,0 +1,24 @@
+{
+  "title": "_SET_CONTROL_LIGHT_EFFECT_COLOR",
+  "breadcrumbs": [
+    "Native Reference",
+    "PADAPI",
+    "_SET_CONTROL_LIGHT_EFFECT_COLOR"
+  ],
+  "content": "0x8290252FFF36ACB5// SetControlLightEffectColor\nvoid _SET_CONTROL_LIGHT_EFFECT_COLOR(int padIndex, int red, int green, int blue);Parameters:padIndex: The control system instance to use. See ENABLE_ALL_CONTROL_ACTIONS.red: green: blue: Old name:  _SET_CONTROL_GROUP_COLOR",
+  "codeBlocks": [
+    "// SetControlLightEffectColor\nvoid _SET_CONTROL_LIGHT_EFFECT_COLOR(int padIndex, int red, int green, int blue);",
+    "-- Example usage for _SET_CONTROL_LIGHT_EFFECT_COLOR\n_SetControlLightEffectColor(0, 0, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PAD/SetControlLightEffectColor.md",
+    "https://docs.fivem.net/natives/?_0xA5FFE9B05F199DE7",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "ADD_CAM_SPLINE_NODE_USING_CAMERA",
+  "breadcrumbs": [
+    "Native Reference",
+    "CAMAPI",
+    "ADD_CAM_SPLINE_NODE_USING_CAMERA"
+  ],
+  "content": "0x0FB82563989CF4FB0xBA6C085B// AddCamSplineNodeUsingCamera\nvoid ADD_CAM_SPLINE_NODE_USING_CAMERA(Cam cam, Cam cam2, int length, int p3);Parameters:cam: Camera to add cam2 as a node tocam2: Camera used for referencelength: Duration used for transition, has no effect for the first node.p3: Takes a camera and uses the information from it as a camera spline node.Examples:C#AddCamSplineNodeUsingCamera(cam, CreateCamWithParams(\"DEFAULT_SCRIPTED_CAMERA\", 975.9832f, 191.3923f, 86.82342f, -2.795285f, -0f, 154.0656f, 45f, true, 2), 5000, 3);",
+  "codeBlocks": [
+    "// AddCamSplineNodeUsingCamera\nvoid ADD_CAM_SPLINE_NODE_USING_CAMERA(Cam cam, Cam cam2, int length, int p3);",
+    "AddCamSplineNodeUsingCamera(cam, CreateCamWithParams(\"DEFAULT_SCRIPTED_CAMERA\", 975.9832f, 191.3923f, 86.82342f, -2.795285f, -0f, 154.0656f, 45f, true, 2), 5000, 3);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CAM/AddCamSplineNodeUsingCamera.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

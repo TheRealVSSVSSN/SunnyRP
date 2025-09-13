@@ -1,0 +1,24 @@
+{
+  "title": "DOOR_SYSTEM_SET_AUTOMATIC_DISTANCE",
+  "breadcrumbs": [
+    "Native Reference",
+    "OBJECTAPI",
+    "DOOR_SYSTEM_SET_AUTOMATIC_DISTANCE"
+  ],
+  "content": "0x9BA001CB45CBF6270x47531446// DoorSystemSetAutomaticDistance\nvoid DOOR_SYSTEM_SET_AUTOMATIC_DISTANCE(Hash doorHash, float distance, BOOL requestDoor, BOOL forceUpdate);Parameters:doorHash: Door system identifierdistance: requestDoor: forceUpdate: On true invokes DOOR_SYSTEM_SET_DOOR_STATE; otherwise requestDoor is unused.",
+  "codeBlocks": [
+    "// DoorSystemSetAutomaticDistance\nvoid DOOR_SYSTEM_SET_AUTOMATIC_DISTANCE(Hash doorHash, float distance, BOOL requestDoor, BOOL forceUpdate);",
+    "-- Example usage for DOOR_SYSTEM_SET_AUTOMATIC_DISTANCE\nDoorSystemSetAutomaticDistance(0, 0.0, false, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/OBJECT/DoorSystemSetAutomaticDistance.md",
+    "https://docs.fivem.net/natives/?_0x6BAB9442830C7F53",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

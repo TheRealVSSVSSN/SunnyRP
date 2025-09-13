@@ -1,0 +1,24 @@
+{
+  "title": "GET_SOUND_ID_FROM_NETWORK_ID",
+  "breadcrumbs": [
+    "Native Reference",
+    "AUDIOAPI",
+    "GET_SOUND_ID_FROM_NETWORK_ID"
+  ],
+  "content": "0x75262FD12D0A1C840xD064D4DC// GetSoundIdFromNetworkId\nint GET_SOUND_ID_FROM_NETWORK_ID(int netId);Parameters:netId: Network ID of sound.Returns: Integer representing a sound id, -1 on failure.Counterpart: GET_NETWORK_ID_FROM_SOUND_ID.",
+  "codeBlocks": [
+    "// GetSoundIdFromNetworkId\nint GET_SOUND_ID_FROM_NETWORK_ID(int netId);",
+    "-- Example usage for GET_SOUND_ID_FROM_NETWORK_ID\nGetSoundIdFromNetworkId(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/AUDIO/GetSoundIdFromNetworkId.md",
+    "https://docs.fivem.net/natives/?_0x2DE3F0A134FFBC0D",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

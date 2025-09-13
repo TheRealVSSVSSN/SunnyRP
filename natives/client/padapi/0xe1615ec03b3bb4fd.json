@@ -1,0 +1,23 @@
+{
+  "title": "0xE1615EC03B3BB4FD",
+  "breadcrumbs": [
+    "Native Reference",
+    "PADAPI",
+    "0xE1615EC03B3BB4FD"
+  ],
+  "content": "0xE1615EC03B3BB4FD// N_0xe1615ec03b3bb4fd\nBOOL 0xE1615EC03B3BB4FD();Used with IS_LOOK_INVERTED() and negates its affect.\n--\nNot sure how the person above got that description, but here's an actual example:\nif (PAD::_GET_LAST_INPUT_METHOD(2)) {\n    if (a_5) {\n        if (PAD::IS_LOOK_INVERTED()) {\n            a_3 *= -1;\n        }\n        if (PAD::_E1615EC03B3BB4FD()) {\n            a_3 *= -1;\n        }\n    }\n}",
+  "codeBlocks": [
+    "// N_0xe1615ec03b3bb4fd\nBOOL 0xE1615EC03B3BB4FD();",
+    "Used with IS_LOOK_INVERTED() and negates its affect.\n--\nNot sure how the person above got that description, but here's an actual example:\nif (PAD::_GET_LAST_INPUT_METHOD(2)) {\n    if (a_5) {\n        if (PAD::IS_LOOK_INVERTED()) {\n            a_3 *= -1;\n        }\n        if (PAD::_E1615EC03B3BB4FD()) {\n            a_3 *= -1;\n        }\n    }\n}"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PAD/N_0xe1615ec03b3bb4fd.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

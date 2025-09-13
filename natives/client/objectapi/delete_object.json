@@ -1,0 +1,24 @@
+{
+  "title": "DELETE_OBJECT",
+  "breadcrumbs": [
+    "Native Reference",
+    "OBJECTAPI",
+    "DELETE_OBJECT"
+  ],
+  "content": "0x539E0AE3E6634B9F0xD6EF9DA7// DeleteObject\nvoid DELETE_OBJECT(Object* object);Parameters:object: The object you want to delete.Deletes the specified object.Note: If for some reason the entity won't delete, you might want to check if the object is a mission entity.NativeDB Introduced: v323Examples:LuaJavaScriptC#local playerPed = PlayerPedId()\nlocal playerCoords = GetEntityCoords(playerPed)\nlocal objectHash = GetHashKey(\"v_ret_gc_chair03\")\n\nlocal object = GetClosestObjectOfType(playerCoords, 10.0, objectHash, true, false, false)\nif object == 0 then return end\n\n-- If the object is a mission entity, we have to set it to false. Otherwise, it won't be possible to delete the object.\nif IsEntityAMissionEntity(object) then\n    SetEntityAsMissionEntity(object, false, true)\nend\n\nDeleteObject(object)",
+  "codeBlocks": [
+    "// DeleteObject\nvoid DELETE_OBJECT(Object* object);",
+    "NativeDB Introduced: v323",
+    "local playerPed = PlayerPedId()\nlocal playerCoords = GetEntityCoords(playerPed)\nlocal objectHash = GetHashKey(\"v_ret_gc_chair03\")\n\nlocal object = GetClosestObjectOfType(playerCoords, 10.0, objectHash, true, false, false)\nif object == 0 then return end\n\n-- If the object is a mission entity, we have to set it to false. Otherwise, it won't be possible to delete the object.\nif IsEntityAMissionEntity(object) then\n    SetEntityAsMissionEntity(object, false, true)\nend\n\nDeleteObject(object)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/OBJECT/DeleteObject.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

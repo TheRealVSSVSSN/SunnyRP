@@ -1,0 +1,23 @@
+{
+  "title": "TASK_GO_TO_COORD_WHILE_AIMING_AT_ENTITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "TASK_GO_TO_COORD_WHILE_AIMING_AT_ENTITY"
+  ],
+  "content": "0xB2A16444EAD9AE470x9BD52ABD// TaskGoToCoordWhileAimingAtEntity\nvoid TASK_GO_TO_COORD_WHILE_AIMING_AT_ENTITY(Ped ped, float x, float y, float z, Entity entityToAimAt, float moveSpeed, BOOL shoot, float targetRadius, float slowDistance, BOOL useNavMesh, int navFlags, BOOL instantBlendAtAim, Hash firingPattern, int time);Parameters:ped: Ped to taskx: Destination X positiony: Destination Y positionz: Destination Z positionentityToAimAt: Entity that the ped will aim at.moveSpeed: Mostly 2f, but also 1/1.2f, etc.shoot: If true ped will shoot; false - will nottargetRadius: Usually 0.5fslowDistance: Usually 4fuseNavMesh: navFlags: Usually 0 or 64instantBlendAtAim: firingPattern: The firing pattern to use, refer to eFiringPatternHashestime: Usually 20000 (ms)Will make the ped move to a coordinate while aiming (and optionally shooting) at the given entity.enum eFiringPatternHashes {\n    FIRING_PATTERN_DEFAULT = 0,\n    FIRING_PATTERN_BURST_FIRE = -687903391,\n    FIRING_PATTERN_BURST_FIRE_DRIVEBY = -753768974,\n    FIRING_PATTERN_FULL_AUTO = -957453492,\n    FIRING_PATTERN_SINGLE_SHOT = 1566631136,\n    FIRING_PATTERN_DELAY_FIRE_BY_ONE_SEC = 2055493265,\n    FIRING_PATTERN_BURST_FIRE_HELI = -1857128337,\n    FIRING_PATTERN_SHORT_BURSTS = 445831135,\n    FIRING_PATTERN_BURST_FIRE_MICRO = 1122960381,\n    FIRING_PATTERN_SLOW_FIRE_TANK = -490063247,\n    FIRING_PATTERN_TAMPA_MORTAR = -1842093953\n}",
+  "codeBlocks": [
+    "// TaskGoToCoordWhileAimingAtEntity\nvoid TASK_GO_TO_COORD_WHILE_AIMING_AT_ENTITY(Ped ped, float x, float y, float z, Entity entityToAimAt, float moveSpeed, BOOL shoot, float targetRadius, float slowDistance, BOOL useNavMesh, int navFlags, BOOL instantBlendAtAim, Hash firingPattern, int time);",
+    "enum eFiringPatternHashes {\n    FIRING_PATTERN_DEFAULT = 0,\n    FIRING_PATTERN_BURST_FIRE = -687903391,\n    FIRING_PATTERN_BURST_FIRE_DRIVEBY = -753768974,\n    FIRING_PATTERN_FULL_AUTO = -957453492,\n    FIRING_PATTERN_SINGLE_SHOT = 1566631136,\n    FIRING_PATTERN_DELAY_FIRE_BY_ONE_SEC = 2055493265,\n    FIRING_PATTERN_BURST_FIRE_HELI = -1857128337,\n    FIRING_PATTERN_SHORT_BURSTS = 445831135,\n    FIRING_PATTERN_BURST_FIRE_MICRO = 1122960381,\n    FIRING_PATTERN_SLOW_FIRE_TANK = -490063247,\n    FIRING_PATTERN_TAMPA_MORTAR = -1842093953\n}"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/TaskGoToCoordWhileAimingAtEntity.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "title": "TASK_FOLLOW_POINT_ROUTE",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "TASK_FOLLOW_POINT_ROUTE"
+  ],
+  "content": "0x595583281858626E0xB837C816// TaskFollowPointRoute\nvoid TASK_FOLLOW_POINT_ROUTE(Ped ped, float speed, int routeMode);Parameters:ped: The ped to give the task to.speed: The speed to move at in m/s.routeMode: The route mode to use, refer to eFollowPointRouteModeMakes the ped go on a point route.enum eFollowPointRouteMode {\n\tTICKET_SINGLE = 0,\n\tTICKET_RETURN = 1,\n\tTICKET_SEASON = 2,\n\tTICKET_LOOP = 3\n}\nThis native is often times used with TASK_FLUSH_ROUTE and TASK_EXTEND_ROUTEExamples:LuaTaskFlushRoute()\nTaskExtendRoute(0.0, 0.0, 70.0)\nTaskExtendRoute(10.0, 0.0, 70.0)\nTaskExtendRoute(10.0, 10.0, 70.0)\nTaskFollowPointRoute(PlayerPedId(), 1.0, 0)",
+  "codeBlocks": [
+    "// TaskFollowPointRoute\nvoid TASK_FOLLOW_POINT_ROUTE(Ped ped, float speed, int routeMode);",
+    "enum eFollowPointRouteMode {\n\tTICKET_SINGLE = 0,\n\tTICKET_RETURN = 1,\n\tTICKET_SEASON = 2,\n\tTICKET_LOOP = 3\n}",
+    "TaskFlushRoute()\nTaskExtendRoute(0.0, 0.0, 70.0)\nTaskExtendRoute(10.0, 0.0, 70.0)\nTaskExtendRoute(10.0, 10.0, 70.0)\nTaskFollowPointRoute(PlayerPedId(), 1.0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/TaskFollowPointRoute.md",
+    "https://docs.fivem.net/natives/?_0x841142A1376E9006",
+    "https://docs.fivem.net/natives/?_0x1E7889778264843A",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

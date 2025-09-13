@@ -1,0 +1,24 @@
+{
+  "title": "SET_CUTSCENE_PED_PROP_VARIATION",
+  "breadcrumbs": [
+    "Native Reference",
+    "CUTSCENEAPI",
+    "SET_CUTSCENE_PED_PROP_VARIATION"
+  ],
+  "content": "0x0546524ADE2E97230x22E9A9DE// SetCutscenePedPropVariation\nvoid SET_CUTSCENE_PED_PROP_VARIATION(char* cutsceneEntName, int componentId, int drawableId, int textureId, Hash modelHash);Parameters:cutsceneEntName: i.e Michael, Trevor, MP_1, MP_4componentId: drawableId: textureId: modelHash: See SET_PED_PROP_INDEX",
+  "codeBlocks": [
+    "// SetCutscenePedPropVariation\nvoid SET_CUTSCENE_PED_PROP_VARIATION(char* cutsceneEntName, int componentId, int drawableId, int textureId, Hash modelHash);",
+    "-- Example usage for SET_CUTSCENE_PED_PROP_VARIATION\nSetCutscenePedPropVariation('', 0, 0, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CUTSCENE/SetCutscenePedPropVariation.md",
+    "https://docs.fivem.net/natives/?_0x93376B65A266EB5F",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

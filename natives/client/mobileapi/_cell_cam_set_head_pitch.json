@@ -1,0 +1,23 @@
+{
+  "title": "_CELL_CAM_SET_HEAD_PITCH",
+  "breadcrumbs": [
+    "Native Reference",
+    "MOBILEAPI",
+    "_CELL_CAM_SET_HEAD_PITCH"
+  ],
+  "content": "0xD6ADE981781FCA09// CellCamSetHeadPitch\nvoid _CELL_CAM_SET_HEAD_PITCH(float p0);Parameters:p0: Value from -1.0 to 1.0",
+  "codeBlocks": [
+    "// CellCamSetHeadPitch\nvoid _CELL_CAM_SET_HEAD_PITCH(float p0);",
+    "-- Example usage for _CELL_CAM_SET_HEAD_PITCH\n_CellCamSetHeadPitch(0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MOBILE/CellCamSetHeadPitch.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

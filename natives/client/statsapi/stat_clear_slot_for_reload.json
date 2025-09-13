@@ -1,0 +1,23 @@
+{
+  "title": "STAT_CLEAR_SLOT_FOR_RELOAD",
+  "breadcrumbs": [
+    "Native Reference",
+    "STATSAPI",
+    "STAT_CLEAR_SLOT_FOR_RELOAD"
+  ],
+  "content": "0xEB0A72181D4AA4AD0x84BDD475// StatClearSlotForReload\nAny STAT_CLEAR_SLOT_FOR_RELOAD(int statSlot);Example:\nfor (v_2 = 0; v_2 <= 4; v_2 += 1) {\n    STATS::STAT_CLEAR_SLOT_FOR_RELOAD(v_2);\n}",
+  "codeBlocks": [
+    "// StatClearSlotForReload\nAny STAT_CLEAR_SLOT_FOR_RELOAD(int statSlot);",
+    "Example:\nfor (v_2 = 0; v_2 <= 4; v_2 += 1) {\n    STATS::STAT_CLEAR_SLOT_FOR_RELOAD(v_2);\n}"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/STATS/StatClearSlotForReload.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "CANCEL_MUSIC_EVENT",
+  "breadcrumbs": [
+    "Native Reference",
+    "AUDIOAPI",
+    "CANCEL_MUSIC_EVENT"
+  ],
+  "content": "0x5B17A90291133DA50x89FF942D// CancelMusicEvent\nBOOL CANCEL_MUSIC_EVENT(char* eventName);Parameters:eventName: the name of the event to cancelReturns: True of the event was cancelled, false otherwise.All music event names found in the b617d scripts: pastebin.com/GnYt0R3P",
+  "codeBlocks": [
+    "// CancelMusicEvent\nBOOL CANCEL_MUSIC_EVENT(char* eventName);",
+    "All music event names found in the b617d scripts: pastebin.com/GnYt0R3P"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/AUDIO/CancelMusicEvent.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

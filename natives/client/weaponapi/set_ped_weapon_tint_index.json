@@ -1,0 +1,23 @@
+{
+  "title": "SET_PED_WEAPON_TINT_INDEX",
+  "breadcrumbs": [
+    "Native Reference",
+    "WEAPONAPI",
+    "SET_PED_WEAPON_TINT_INDEX"
+  ],
+  "content": "0x50969B9B89ED57380xEB2A7B23// SetPedWeaponTintIndex\nvoid SET_PED_WEAPON_TINT_INDEX(Ped ped, Hash weaponHash, int tintIndex);Parameters:ped: The target pedweaponHash: The target weapon hashtintIndex: Tint for weapon hashtintIndex can be the following:  \n0 : Default/Black\n1 : Green\n2 : Gold\n3 : Pink\n4 : Army\n5 : LSPD\n6 : Orange\n7 : Platinum\n\ntintIndex for MK2 weapons :\n0 : Classic Black\n1 : Classic Gray\n2 : Classic Two-Tone\n3 : Classic White\n4 : Classic Beige\n5 : Classic Green\n6 : Classic Blue\n7 : Classic Earth\n8 : Classic Brown & Black\n9 : Red Contrast\n10 : Blue Contrast\n11 : Yellow Contrast\n12 : Orange Contrast\n13 : Bold Pink\n14 : Bold Purple & Yellow\n15 : Bold Orange\n16 : Bold Green & Purple\n17 : Bold Red Features\n18 : Bold Green Features\n19 : Bold Cyan Features\n20 : Bold Yellow Features\n21 : Bold Red & White\n22 : Bold Blue & White\n23 : Metallic Gold\n24 : Metallic Platinum\n25 : Metallic Gray & Lilac\n26 : Metallic Purple & Lime\n27 : Metallic Red\n28 : Metallic Green\n29 : Metallic Blue\n30 : Metallic White & Aqua\n31 : Metallic Orange & Yellow\n32 : Mettalic Red and Yellow",
+  "codeBlocks": [
+    "// SetPedWeaponTintIndex\nvoid SET_PED_WEAPON_TINT_INDEX(Ped ped, Hash weaponHash, int tintIndex);",
+    "tintIndex can be the following:  \n0 : Default/Black\n1 : Green\n2 : Gold\n3 : Pink\n4 : Army\n5 : LSPD\n6 : Orange\n7 : Platinum\n\ntintIndex for MK2 weapons :\n0 : Classic Black\n1 : Classic Gray\n2 : Classic Two-Tone\n3 : Classic White\n4 : Classic Beige\n5 : Classic Green\n6 : Classic Blue\n7 : Classic Earth\n8 : Classic Brown & Black\n9 : Red Contrast\n10 : Blue Contrast\n11 : Yellow Contrast\n12 : Orange Contrast\n13 : Bold Pink\n14 : Bold Purple & Yellow\n15 : Bold Orange\n16 : Bold Green & Purple\n17 : Bold Red Features\n18 : Bold Green Features\n19 : Bold Cyan Features\n20 : Bold Yellow Features\n21 : Bold Red & White\n22 : Bold Blue & White\n23 : Metallic Gold\n24 : Metallic Platinum\n25 : Metallic Gray & Lilac\n26 : Metallic Purple & Lime\n27 : Metallic Red\n28 : Metallic Green\n29 : Metallic Blue\n30 : Metallic White & Aqua\n31 : Metallic Orange & Yellow\n32 : Mettalic Red and Yellow"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/WEAPON/SetPedWeaponTintIndex.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

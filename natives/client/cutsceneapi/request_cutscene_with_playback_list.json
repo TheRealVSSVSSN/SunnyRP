@@ -1,0 +1,23 @@
+{
+  "title": "REQUEST_CUTSCENE_WITH_PLAYBACK_LIST",
+  "breadcrumbs": [
+    "Native Reference",
+    "CUTSCENEAPI",
+    "REQUEST_CUTSCENE_WITH_PLAYBACK_LIST"
+  ],
+  "content": "0xC23DE0E91C30B58C0xD98F656A// RequestCutsceneWithPlaybackList\nvoid REQUEST_CUTSCENE_WITH_PLAYBACK_LIST(char* cutsceneName, int playbackFlags, int flags);playbackFlags: Which scenes should be played.\nExample: 0x105 (bit 0, 2 and 8 set) will enable scene 1, 3 and 9.\nOld name:  _REQUEST_CUTSCENE_EX",
+  "codeBlocks": [
+    "// RequestCutsceneWithPlaybackList\nvoid REQUEST_CUTSCENE_WITH_PLAYBACK_LIST(char* cutsceneName, int playbackFlags, int flags);",
+    "playbackFlags: Which scenes should be played.\nExample: 0x105 (bit 0, 2 and 8 set) will enable scene 1, 3 and 9."
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CUTSCENE/RequestCutsceneWithPlaybackList.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

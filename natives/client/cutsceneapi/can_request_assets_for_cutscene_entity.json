@@ -1,0 +1,25 @@
+{
+  "title": "CAN_REQUEST_ASSETS_FOR_CUTSCENE_ENTITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "CUTSCENEAPI",
+    "CAN_REQUEST_ASSETS_FOR_CUTSCENE_ENTITY"
+  ],
+  "content": "0xB56BBBCC2955D9CB0xDD8878E9// CanRequestAssetsForCutsceneEntity\nBOOL CAN_REQUEST_ASSETS_FOR_CUTSCENE_ENTITY();Returns: Whether you can request assets for cutscene entities, like components.Returns when it is safe to start applying changes to cutscene entities.Should always be used for applying components.See SET_CUTSCENE_PED_COMPONENT_VARIATION_FROM_PED and REGISTER_ENTITY_FOR_CUTSCENE for an example.This will be true before the cutscene is considered loaded",
+  "codeBlocks": [
+    "// CanRequestAssetsForCutsceneEntity\nBOOL CAN_REQUEST_ASSETS_FOR_CUTSCENE_ENTITY();",
+    "-- Example usage for CAN_REQUEST_ASSETS_FOR_CUTSCENE_ENTITY\nCanRequestAssetsForCutsceneEntity()"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CUTSCENE/CanRequestAssetsForCutsceneEntity.md",
+    "https://docs.fivem.net/natives/?_0x2A56C06EBEF2B0D9",
+    "https://docs.fivem.net/natives/?_0xE40C1C56DF95C2E8",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "ANIMATED_SHAKE_CAM",
+  "breadcrumbs": [
+    "Native Reference",
+    "CAMAPI",
+    "ANIMATED_SHAKE_CAM"
+  ],
+  "content": "0xA2746EEAE3E577CD0xE1168767// AnimatedShakeCam\nvoid ANIMATED_SHAKE_CAM(Cam cam, char* p1, char* p2, char* p3, float amplitude);Example from michael2 script.  \nCAM::ANIMATED_SHAKE_CAM(l_5069, \"shake_cam_all@\", \"light\", \"\", 1f);",
+  "codeBlocks": [
+    "// AnimatedShakeCam\nvoid ANIMATED_SHAKE_CAM(Cam cam, char* p1, char* p2, char* p3, float amplitude);",
+    "Example from michael2 script.  \nCAM::ANIMATED_SHAKE_CAM(l_5069, \"shake_cam_all@\", \"light\", \"\", 1f);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CAM/AnimatedShakeCam.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

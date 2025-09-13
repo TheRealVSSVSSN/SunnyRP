@@ -1,0 +1,23 @@
+{
+  "title": "CREATE_MONEY_PICKUPS",
+  "breadcrumbs": [
+    "Native Reference",
+    "OBJECTAPI",
+    "CREATE_MONEY_PICKUPS"
+  ],
+  "content": "0x0589B5E791CE9B2B0x36C9A5EA// CreateMoneyPickups\nvoid CREATE_MONEY_PICKUPS(float x, float y, float z, int value, int amount, Hash model);Spawns one or more money pickups.  \nx: The X-component of the world position to spawn the money pickups at.  \ny: The Y-component of the world position to spawn the money pickups at.  \nz: The Z-component of the world position to spawn the money pickups at.  \nvalue: The combined value of the pickups (in dollars).  \namount: The number of pickups to spawn.  \nmodel: The model to use, or 0 for default money model.  \nExample:  \nCREATE_MONEY_PICKUPS(x, y, z, 1000, 3, 0x684a97ae);  \nSpawns 3 spray cans that'll collectively give $1000 when picked up. (Three spray cans, each giving $334, $334, $332 = $1000).  \n==============================================  \nMax is 2000 in MP. So if you put the amount to 20, but the value to $400,000 eg. They will only be able to pickup 20 - $2,000 bags. So, $40,000",
+  "codeBlocks": [
+    "// CreateMoneyPickups\nvoid CREATE_MONEY_PICKUPS(float x, float y, float z, int value, int amount, Hash model);",
+    "Spawns one or more money pickups.  \nx: The X-component of the world position to spawn the money pickups at.  \ny: The Y-component of the world position to spawn the money pickups at.  \nz: The Z-component of the world position to spawn the money pickups at.  \nvalue: The combined value of the pickups (in dollars).  \namount: The number of pickups to spawn.  \nmodel: The model to use, or 0 for default money model.  \nExample:  \nCREATE_MONEY_PICKUPS(x, y, z, 1000, 3, 0x684a97ae);  \nSpawns 3 spray cans that'll collectively give $1000 when picked up. (Three spray cans, each giving $334, $334, $332 = $1000).  \n==============================================  \nMax is 2000 in MP. So if you put the amount to 20, but the value to $400,000 eg. They will only be able to pickup 20 - $2,000 bags. So, $40,000"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/OBJECT/CreateMoneyPickups.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "title": "TASK_SHARK_CIRCLE_COORD",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "TASK_SHARK_CIRCLE_COORD"
+  ],
+  "content": "0x60A19CF85FF4CEFA// TaskSharkCircleCoord\nvoid TASK_SHARK_CIRCLE_COORD(Ped ped, float x, float y, float z, float moveBlendRatio, float radius);Parameters:ped: The shark ped.x: X coordinate to circle aroundy: Y coordinate to circle aroundz: Z coordinate to circle aroundmoveBlendRatio: Animation blend ratio from 0.0 to 1.0radius: Radius of the circular path in metersMakes a shark ped circle around specified coordinates.NativeDB Introduced: v3407Examples:LuaCreateThread(function()\n    local sharkModel = GetHashKey(\"a_c_sharktiger\")\n    RequestModel(sharkModel)\n    \n    while not HasModelLoaded(sharkModel) do\n        Wait(0)\n    end\n\n    local coords = GetEntityCoords(PlayerPedId(), false)\n    local shark = CreatePed(28, sharkModel, coords.x, coords.y, coords.z, 0.0, true, true)\n    \n    SetModelAsNoLongerNeeded(sharkModel)\n    \n    if shark == 0 then return end\n    \n    TaskSharkCircleCoord(shark, coords.x, coords.y, coords.z - 5.0, 1.0, 10.0)\n    \n    Wait(10000) -- We're letting the shark do circle movement for 10 seconds\n    ClearPedTasks(shark) -- Going to stop the task\nend)",
+  "codeBlocks": [
+    "// TaskSharkCircleCoord\nvoid TASK_SHARK_CIRCLE_COORD(Ped ped, float x, float y, float z, float moveBlendRatio, float radius);",
+    "NativeDB Introduced: v3407",
+    "CreateThread(function()\n    local sharkModel = GetHashKey(\"a_c_sharktiger\")\n    RequestModel(sharkModel)\n    \n    while not HasModelLoaded(sharkModel) do\n        Wait(0)\n    end\n\n    local coords = GetEntityCoords(PlayerPedId(), false)\n    local shark = CreatePed(28, sharkModel, coords.x, coords.y, coords.z, 0.0, true, true)\n    \n    SetModelAsNoLongerNeeded(sharkModel)\n    \n    if shark == 0 then return end\n    \n    TaskSharkCircleCoord(shark, coords.x, coords.y, coords.z - 5.0, 1.0, 10.0)\n    \n    Wait(10000) -- We're letting the shark do circle movement for 10 seconds\n    ClearPedTasks(shark) -- Going to stop the task\nend)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/TaskSharkCircleCoord.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

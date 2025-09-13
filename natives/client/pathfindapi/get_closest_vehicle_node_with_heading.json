@@ -1,0 +1,24 @@
+{
+  "title": "GET_CLOSEST_VEHICLE_NODE_WITH_HEADING",
+  "breadcrumbs": [
+    "Native Reference",
+    "PATHFINDAPI",
+    "GET_CLOSEST_VEHICLE_NODE_WITH_HEADING"
+  ],
+  "content": "0xFF071FB798B803B00x8BD5759B// GetClosestVehicleNodeWithHeading\nBOOL GET_CLOSEST_VEHICLE_NODE_WITH_HEADING(float x, float y, float z, Vector3* outPosition, float* outHeading, int nodeFlags, float zMeasureMult, int zTolerance);Parameters:x: X coordinatey: Y coordinatez: Z coordinateoutPosition: Pointer to the found nodes coordsoutHeading: Pointer to the found nodes headingnodeFlags: Node flags, see GET_CLOSEST_VEHICLE_NODEzMeasureMult: How strongly the difference in the Z direction should be weightedzTolerance: How far apart the Z coords have to be before zMeasureMult kicks inReturns: Returns the closest vehicle node with its heading.Same as GET_CLOSEST_VEHICLE_NODE, but with the node flag GCNF_GET_HEADING set, causing the native to also return the heading.",
+  "codeBlocks": [
+    "// GetClosestVehicleNodeWithHeading\nBOOL GET_CLOSEST_VEHICLE_NODE_WITH_HEADING(float x, float y, float z, Vector3* outPosition, float* outHeading, int nodeFlags, float zMeasureMult, int zTolerance);",
+    "-- Example usage for GET_CLOSEST_VEHICLE_NODE_WITH_HEADING\nGetClosestVehicleNodeWithHeading(0.0, 0.0, 0.0, 0, 0, 0, 0.0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PATHFIND/GetClosestVehicleNodeWithHeading.md",
+    "https://docs.fivem.net/natives/?_0x240A18690AE96513",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

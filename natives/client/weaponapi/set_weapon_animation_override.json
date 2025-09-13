@@ -1,0 +1,25 @@
+{
+  "title": "SET_WEAPON_ANIMATION_OVERRIDE",
+  "breadcrumbs": [
+    "Native Reference",
+    "WEAPONAPI",
+    "SET_WEAPON_ANIMATION_OVERRIDE"
+  ],
+  "content": "0x1055AC3A667F09D90xA5DF7484// SetWeaponAnimationOverride\nvoid SET_WEAPON_ANIMATION_OVERRIDE(Ped ped, Hash animStyle);Parameters:ped: The ped handle.animStyle: The animation style to apply, passed as a hash.Changes the selected ped aiming animation style, you can find the list of animations below.These are stored in the weaponanimations.meta file located in Grand Theft Auto V\\update\\update.rpf\\common\\data\\ai\\weaponanimations.meta.For Lua, it's best if you send the animation using compile-time jenkins hashes to avoid overhead. An example is shown down below.Animationsenum eWeaponAnimationOverrides {\n\tBallistic = 0x5534A626,\n\tDefault = 0xE4DF46D5,\n\tFranklin = 0x44C24694,\n\tGang = 0xBC066B98,\n\tMichael = 0x55932F38,\n\tMP_F_Freemode = 0xACB10C83,\n\tTrevor = 0x2737D5AC,\n\tHillbilly = 0x8503D409,\n\tGang1H = 0x724A7AB7,\n\tFirstPerson = 0xEE38E8E0,\n\tFirstPersonAiming = 0xC76297A3,\n\tFirstPersonRNG = 0xA4FDD608,\n\tFirstPersonScope = 0x28117C22,\n\tFirstPersonMichael = 0xEAA2550B,\n\tFirstPersonMichaelAiming = 0x3E6FF30F,\n\tFirstPersonMichaelRNG = 0xB7A826C1,\n\tFirstPersonMichaelScope = 0xC554CF97,\n\tFirstPersonFranklin = 0xC407163A,\n\tFirstPersonFranklinAiming = 0x3D4B7B03,\n\tFirstPersonFranklinRNG = 0xBE79B0B4,\n\tFirstPersonFranklinScope = 0xAFEA6593,\n\tFirstPersonTrevor = 0xA65D5351,\n\tFirstPersonTrevorAiming = 0xF9BE8ED9,\n\tFirstPersonTrevorRNG = 0xD181ED09,\n\tFirstPersonTrevorScope = 0x34A67D6D,\n\tFirstPersonMPFemale = 0x8431583F,\n\tFat = 0xC531A409,\n\tSuperFat = 0x529E5780,\n\tFemale = 0x6D155A1B,\n\tGangFemale = 0x678ADF82,\n}\nExamples:Lua-- Works when holding a pistol.\n-- 'Hillbilly' also works for most peds.\nSetWeaponAnimationOverride(PlayerPedId(), `Gang1H`)",
+  "codeBlocks": [
+    "// SetWeaponAnimationOverride\nvoid SET_WEAPON_ANIMATION_OVERRIDE(Ped ped, Hash animStyle);",
+    "enum eWeaponAnimationOverrides {\n\tBallistic = 0x5534A626,\n\tDefault = 0xE4DF46D5,\n\tFranklin = 0x44C24694,\n\tGang = 0xBC066B98,\n\tMichael = 0x55932F38,\n\tMP_F_Freemode = 0xACB10C83,\n\tTrevor = 0x2737D5AC,\n\tHillbilly = 0x8503D409,\n\tGang1H = 0x724A7AB7,\n\tFirstPerson = 0xEE38E8E0,\n\tFirstPersonAiming = 0xC76297A3,\n\tFirstPersonRNG = 0xA4FDD608,\n\tFirstPersonScope = 0x28117C22,\n\tFirstPersonMichael = 0xEAA2550B,\n\tFirstPersonMichaelAiming = 0x3E6FF30F,\n\tFirstPersonMichaelRNG = 0xB7A826C1,\n\tFirstPersonMichaelScope = 0xC554CF97,\n\tFirstPersonFranklin = 0xC407163A,\n\tFirstPersonFranklinAiming = 0x3D4B7B03,\n\tFirstPersonFranklinRNG = 0xBE79B0B4,\n\tFirstPersonFranklinScope = 0xAFEA6593,\n\tFirstPersonTrevor = 0xA65D5351,\n\tFirstPersonTrevorAiming = 0xF9BE8ED9,\n\tFirstPersonTrevorRNG = 0xD181ED09,\n\tFirstPersonTrevorScope = 0x34A67D6D,\n\tFirstPersonMPFemale = 0x8431583F,\n\tFat = 0xC531A409,\n\tSuperFat = 0x529E5780,\n\tFemale = 0x6D155A1B,\n\tGangFemale = 0x678ADF82,\n}",
+    "-- Works when holding a pistol.\n-- 'Hillbilly' also works for most peds.\nSetWeaponAnimationOverride(PlayerPedId(), `Gang1H`)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/WEAPON/SetWeaponAnimationOverride.md",
+    "https://cookbook.fivem.net/2019/06/23/lua-support-for-compile-time-jenkins-hashes/",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

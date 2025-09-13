@@ -1,0 +1,23 @@
+{
+  "title": "SET_GAMEPLAY_VEHICLE_HINT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CAMAPI",
+    "SET_GAMEPLAY_VEHICLE_HINT"
+  ],
+  "content": "0xA2297E18F3E71C2E0x2C9A11D8// SetGameplayVehicleHint\nvoid SET_GAMEPLAY_VEHICLE_HINT(Vehicle vehicle, float offsetX, float offsetY, float offsetZ, BOOL p4, int time, int easeInTime, int easeOutTime);Parameters:vehicle: The vehicle to focus on.offsetX: Position offset XoffsetY: Position offset YoffsetZ: Position offset Zp4: time: Effect durationeaseInTime: Effect fade in durationeaseOutTime: EFfect fade out durationFocuses the camera on the specified vehicle.",
+  "codeBlocks": [
+    "// SetGameplayVehicleHint\nvoid SET_GAMEPLAY_VEHICLE_HINT(Vehicle vehicle, float offsetX, float offsetY, float offsetZ, BOOL p4, int time, int easeInTime, int easeOutTime);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for SET_GAMEPLAY_VEHICLE_HINT\nSetGameplayVehicleHint(vehicle, 0.0, 0.0, 0.0, false, 0, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CAM/SetGameplayVehicleHint.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

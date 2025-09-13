@@ -1,0 +1,23 @@
+{
+  "title": "SET_TASK_MOVE_NETWORK_SIGNAL_FLOAT",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "SET_TASK_MOVE_NETWORK_SIGNAL_FLOAT"
+  ],
+  "content": "0xD5BB4025AE449A4E0xA79BE783// SetTaskMoveNetworkSignalFloat\nvoid SET_TASK_MOVE_NETWORK_SIGNAL_FLOAT(Ped ped, char* signalName, float value);Parameters:ped: The ped on which the task is playing.signalName: The property name.value: The property value to set.p0 - PLAYER::PLAYER_PED_ID();\np1 - \"Phase\", \"Wobble\", \"x_axis\",\"y_axis\",\"introphase\",\"speed\".\np2 - From what i can see it goes up to 1f (maybe).\n-LcGamingHD\nExample: TASK::_D5BB4025AE449A4E(PLAYER::PLAYER_PED_ID(), \"Phase\", 0.5);\nOld name:  _SET_TASK_PROPERTY_FLOAT",
+  "codeBlocks": [
+    "// SetTaskMoveNetworkSignalFloat\nvoid SET_TASK_MOVE_NETWORK_SIGNAL_FLOAT(Ped ped, char* signalName, float value);",
+    "p0 - PLAYER::PLAYER_PED_ID();\np1 - \"Phase\", \"Wobble\", \"x_axis\",\"y_axis\",\"introphase\",\"speed\".\np2 - From what i can see it goes up to 1f (maybe).\n-LcGamingHD\nExample: TASK::_D5BB4025AE449A4E(PLAYER::PLAYER_PED_ID(), \"Phase\", 0.5);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/SetTaskMoveNetworkSignalFloat.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

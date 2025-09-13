@@ -1,0 +1,24 @@
+{
+  "title": "GET_NTH_CLOSEST_VEHICLE_NODE_ID_WITH_HEADING",
+  "breadcrumbs": [
+    "Native Reference",
+    "PATHFINDAPI",
+    "GET_NTH_CLOSEST_VEHICLE_NODE_ID_WITH_HEADING"
+  ],
+  "content": "0x6448050E9C2A72070xC1AEB88D// GetNthClosestVehicleNodeIdWithHeading\nint GET_NTH_CLOSEST_VEHICLE_NODE_ID_WITH_HEADING(float x, float y, float z, int nthClosest, Vector3* outPosition, float* outHeading, int nodeFlags, float zMeasureMult, float zTolerance);Parameters:x: X coordinatey: Y coordinatez: Z coordinatenthClosest: The index of the node to returnoutPosition: Pointer to the found nodes coordsoutHeading: Pointer to the found nodes headingnodeFlags: Node flags, see GET_CLOSEST_VEHICLE_NODEzMeasureMult: How strongly the difference in the Z direction should be weightedzTolerance: How far apart the Z coords have to be before zMeasureMult kicks inReturns: Returns the nth closest vehicle nodes id with its heading.",
+  "codeBlocks": [
+    "// GetNthClosestVehicleNodeIdWithHeading\nint GET_NTH_CLOSEST_VEHICLE_NODE_ID_WITH_HEADING(float x, float y, float z, int nthClosest, Vector3* outPosition, float* outHeading, int nodeFlags, float zMeasureMult, float zTolerance);",
+    "-- Example usage for GET_NTH_CLOSEST_VEHICLE_NODE_ID_WITH_HEADING\nGetNthClosestVehicleNodeIdWithHeading(0.0, 0.0, 0.0, 0, 0, 0, 0, 0.0, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PATHFIND/GetNthClosestVehicleNodeIdWithHeading.md",
+    "https://docs.fivem.net/natives/?_0x240A18690AE96513",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

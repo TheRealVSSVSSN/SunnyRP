@@ -1,0 +1,23 @@
+{
+  "title": "SET_SCENARIO_TYPE_ENABLED",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "SET_SCENARIO_TYPE_ENABLED"
+  ],
+  "content": "0xEB47EC4E34FB7EE10xDB18E5DE// SetScenarioTypeEnabled\nvoid SET_SCENARIO_TYPE_ENABLED(char* scenarioType, BOOL toggle);seems to enable/disable specific scenario-types from happening in the game world.\nHere are some scenario types from the scripts:\n\"WORLD_MOUNTAIN_LION_REST\"\n\"WORLD_MOUNTAIN_LION_WANDER\"\n\"DRIVE\"\n\"WORLD_VEHICLE_POLICE_BIKE\"\n\"WORLD_VEHICLE_POLICE_CAR\"\n\"WORLD_VEHICLE_POLICE_NEXT_TO_CAR\"\n\"WORLD_VEHICLE_DRIVE_SOLO\"\n\"WORLD_VEHICLE_BIKER\"\n\"WORLD_VEHICLE_DRIVE_PASSENGERS\"\n\"WORLD_VEHICLE_SALTON_DIRT_BIKE\"\n\"WORLD_VEHICLE_BICYCLE_MOUNTAIN\"\n\"PROP_HUMAN_SEAT_CHAIR\"\n\"WORLD_VEHICLE_ATTRACTOR\"\n\"WORLD_HUMAN_LEANING\"\n\"WORLD_HUMAN_HANG_OUT_STREET\"\n\"WORLD_HUMAN_DRINKING\"\n\"WORLD_HUMAN_SMOKING\"\n\"WORLD_HUMAN_GUARD_STAND\"\n\"WORLD_HUMAN_CLIPBOARD\"\n\"WORLD_HUMAN_HIKER\"\n\"WORLD_VEHICLE_EMPTY\"\n\"WORLD_VEHICLE_BIKE_OFF_ROAD_RACE\"\n\"WORLD_HUMAN_PAPARAZZI\"\n\"WORLD_VEHICLE_PARK_PERPENDICULAR_NOSE_IN\"\n\"WORLD_VEHICLE_PARK_PARALLEL\"\n\"WORLD_VEHICLE_CONSTRUCTION_SOLO\"\n\"WORLD_VEHICLE_CONSTRUCTION_PASSENGERS\"\n\"WORLD_VEHICLE_TRUCK_LOGS\"\nscenarioType could be the same as scenarioName, used in for example TASK::TASK_START_SCENARIO_AT_POSITION.",
+  "codeBlocks": [
+    "// SetScenarioTypeEnabled\nvoid SET_SCENARIO_TYPE_ENABLED(char* scenarioType, BOOL toggle);",
+    "seems to enable/disable specific scenario-types from happening in the game world.\nHere are some scenario types from the scripts:\n\"WORLD_MOUNTAIN_LION_REST\"\n\"WORLD_MOUNTAIN_LION_WANDER\"\n\"DRIVE\"\n\"WORLD_VEHICLE_POLICE_BIKE\"\n\"WORLD_VEHICLE_POLICE_CAR\"\n\"WORLD_VEHICLE_POLICE_NEXT_TO_CAR\"\n\"WORLD_VEHICLE_DRIVE_SOLO\"\n\"WORLD_VEHICLE_BIKER\"\n\"WORLD_VEHICLE_DRIVE_PASSENGERS\"\n\"WORLD_VEHICLE_SALTON_DIRT_BIKE\"\n\"WORLD_VEHICLE_BICYCLE_MOUNTAIN\"\n\"PROP_HUMAN_SEAT_CHAIR\"\n\"WORLD_VEHICLE_ATTRACTOR\"\n\"WORLD_HUMAN_LEANING\"\n\"WORLD_HUMAN_HANG_OUT_STREET\"\n\"WORLD_HUMAN_DRINKING\"\n\"WORLD_HUMAN_SMOKING\"\n\"WORLD_HUMAN_GUARD_STAND\"\n\"WORLD_HUMAN_CLIPBOARD\"\n\"WORLD_HUMAN_HIKER\"\n\"WORLD_VEHICLE_EMPTY\"\n\"WORLD_VEHICLE_BIKE_OFF_ROAD_RACE\"\n\"WORLD_HUMAN_PAPARAZZI\"\n\"WORLD_VEHICLE_PARK_PERPENDICULAR_NOSE_IN\"\n\"WORLD_VEHICLE_PARK_PARALLEL\"\n\"WORLD_VEHICLE_CONSTRUCTION_SOLO\"\n\"WORLD_VEHICLE_CONSTRUCTION_PASSENGERS\"\n\"WORLD_VEHICLE_TRUCK_LOGS\"\nscenarioType could be the same as scenarioName, used in for example TASK::TASK_START_SCENARIO_AT_POSITION."
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/SetScenarioTypeEnabled.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

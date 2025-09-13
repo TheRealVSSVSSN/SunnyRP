@@ -1,0 +1,23 @@
+{
+  "title": "ACTIVATE_AUDIO_SLOWMO_MODE",
+  "breadcrumbs": [
+    "Native Reference",
+    "AUDIOAPI",
+    "ACTIVATE_AUDIO_SLOWMO_MODE"
+  ],
+  "content": "0xD01005D2BA2EB7780x59A3A17D// ActivateAudioSlowmoMode\nvoid ACTIVATE_AUDIO_SLOWMO_MODE(char* mode);Parameters:mode: A string indicating the audio slow motion mode to use, see the table.Below is a list of modes and their respective hashes.Mode (string)HashSLOWMO_BIG_SCORE_JUMP0x2B981B0CJSH_EXIT_TUNNEL_SLOWMO0x2562AA6SLOW_MO_METH_HOUSE_RAYFIRE0xDB9E1909SLOWMO_FIB4_TRUCK_SMASH0x9E144347SLOWMO_PROLOGUE_VAULT0xEA2E68E1SLOWMO_T1_RAYFIRE_EXPLOSION0xD6D358F3SLOWMO_T1_TRAILER_SMASH0xBE607345BARRY_01_SLOWMO0xD59540D4BARRY_02_SLOWMO0x12F140B3SLOWMO_EXTREME_040xF562EA50NIGEL_02_SLOWMO_SETTING0x384689B0",
+  "codeBlocks": [
+    "// ActivateAudioSlowmoMode\nvoid ACTIVATE_AUDIO_SLOWMO_MODE(char* mode);",
+    "-- Example usage for ACTIVATE_AUDIO_SLOWMO_MODE\nActivateAudioSlowmoMode('')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/AUDIO/ActivateAudioSlowmoMode.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

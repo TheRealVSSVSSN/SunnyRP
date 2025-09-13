@@ -1,0 +1,24 @@
+{
+  "title": "TASK_VEHICLE_DRIVE_WANDER",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "TASK_VEHICLE_DRIVE_WANDER"
+  ],
+  "content": "0x480142959D337D000x36EC0EB0// TaskVehicleDriveWander\nvoid TASK_VEHICLE_DRIVE_WANDER(Ped ped, Vehicle vehicle, float speed, int drivingStyle);Parameters:ped: Ped id for the task.vehicle: Vehicle entity id for the task.speed: Speed of driving.drivingStyle: The driving style (default is 0) (see SetDriveTaskDrivingStyle).Drive randomly with no destination set.Examples:C#TaskVehicleDriveWander(Game.PlayerPed.Handle, Game.PlayerPed.CurrentVehicle.Handle, 60f, 447);",
+  "codeBlocks": [
+    "// TaskVehicleDriveWander\nvoid TASK_VEHICLE_DRIVE_WANDER(Ped ped, Vehicle vehicle, float speed, int drivingStyle);",
+    "TaskVehicleDriveWander(Game.PlayerPed.Handle, Game.PlayerPed.CurrentVehicle.Handle, 60f, 447);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/TaskVehicleDriveWander.md",
+    "https://docs.fivem.net/natives/?_0xDACE1BE37D88AF67",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

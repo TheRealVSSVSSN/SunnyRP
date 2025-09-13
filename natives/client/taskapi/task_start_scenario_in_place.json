@@ -1,0 +1,24 @@
+{
+  "title": "TASK_START_SCENARIO_IN_PLACE",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "TASK_START_SCENARIO_IN_PLACE"
+  ],
+  "content": "0x142A02425FF02BD90xE50D6DDE// TaskStartScenarioInPlace\nvoid TASK_START_SCENARIO_IN_PLACE(Ped ped, char* scenarioName, int timeToLeave, BOOL playIntroClip);Parameters:ped: The ped handle.scenarioName: The name of the scenario to start.timeToLeave: Sets the timeout on the scenario point to the specified time in milliseconds. If less than 0, sets the IdleForever flag.playIntroClip: If the ped should play the scenarios enter animation. Sets the SkipEnterClip flag.Puts the ped into the given scenario immediately at their current location. List of scenario names or in update/update.rpf/common/data/ai/scenarios.meta.",
+  "codeBlocks": [
+    "// TaskStartScenarioInPlace\nvoid TASK_START_SCENARIO_IN_PLACE(Ped ped, char* scenarioName, int timeToLeave, BOOL playIntroClip);",
+    "local ped = PlayerPedId()\n-- Example usage for TASK_START_SCENARIO_IN_PLACE\nTaskStartScenarioInPlace(ped, '', 0, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/TaskStartScenarioInPlace.md",
+    "https://pastebin.com/6mrYTdQv",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

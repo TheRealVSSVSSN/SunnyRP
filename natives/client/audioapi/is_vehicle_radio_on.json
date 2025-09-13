@@ -1,0 +1,23 @@
+{
+  "title": "IS_VEHICLE_RADIO_ON",
+  "breadcrumbs": [
+    "Native Reference",
+    "AUDIOAPI",
+    "IS_VEHICLE_RADIO_ON"
+  ],
+  "content": "0x0BE4BE946463F917// IsVehicleRadioOn\nBOOL IS_VEHICLE_RADIO_ON(Vehicle vehicle);Parameters:vehicle: The vehicle to checkReturns: Returns true if the given vehicle's radio onOld name:  _IS_VEHICLE_RADIO_ENABLEDExamples:LuaC#local radioEnabled = IsVehicleRadioEnabled(GetVehiclePedIsIn(PlayerPedId(), false))\nprint(radioEnabled)",
+  "codeBlocks": [
+    "// IsVehicleRadioOn\nBOOL IS_VEHICLE_RADIO_ON(Vehicle vehicle);",
+    "local radioEnabled = IsVehicleRadioEnabled(GetVehiclePedIsIn(PlayerPedId(), false))"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/AUDIO/IsVehicleRadioOn.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

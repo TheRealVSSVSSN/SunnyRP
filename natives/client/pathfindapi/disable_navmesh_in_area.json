@@ -1,0 +1,24 @@
+{
+  "title": "DISABLE_NAVMESH_IN_AREA",
+  "breadcrumbs": [
+    "Native Reference",
+    "PATHFINDAPI",
+    "DISABLE_NAVMESH_IN_AREA"
+  ],
+  "content": "0x4C8872D8CDBE1B8B0x6E37F132// DisableNavmeshInArea\nvoid DISABLE_NAVMESH_IN_AREA(float posMinX, float posMinY, float posMinZ, float posMaxX, float posMaxY, float posMaxZ, bool bDisable);Parameters:posMinX: X Min Coordinate.posMinY: Y Min Coordinate.posMinZ: Z Min Coordinate.posMaxX: X Max Coordinate.posMaxY: Y Max Coordinate.posMaxZ: Z Max Coordinate.bDisable: Whether to disable the navmesh or not.Use this if you want to completely disable a large area of navmesh.\nFor smaller areas, use ADD_NAVMESH_BLOCKING_OBJECT instead.",
+  "codeBlocks": [
+    "// DisableNavmeshInArea\nvoid DISABLE_NAVMESH_IN_AREA(float posMinX, float posMinY, float posMinZ, float posMaxX, float posMaxY, float posMaxZ, bool bDisable);",
+    "-- Example usage for DISABLE_NAVMESH_IN_AREA\nDisableNavmeshInArea(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PATHFIND/DisableNavmeshInArea.md",
+    "https://docs.fivem.net/natives/?_0xFCD5C8E06E502F5A",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "SET_VEHICLE_AUDIO_BODY_DAMAGE_FACTOR",
+  "breadcrumbs": [
+    "Native Reference",
+    "AUDIOAPI",
+    "SET_VEHICLE_AUDIO_BODY_DAMAGE_FACTOR"
+  ],
+  "content": "0x01BB4D577D38BD9E0xE81FAC68// SetVehicleAudioBodyDamageFactor\nvoid SET_VEHICLE_AUDIO_BODY_DAMAGE_FACTOR(Vehicle vehicle, float intensity);Parameters:vehicle: Vehicle to modifyintensity: A value 0.0 - 1.0. Higher the value, the more likely the vehicle is to make the sound while deceleratingVehicle will make a 'rattling' noise when decelerating",
+  "codeBlocks": [
+    "// SetVehicleAudioBodyDamageFactor\nvoid SET_VEHICLE_AUDIO_BODY_DAMAGE_FACTOR(Vehicle vehicle, float intensity);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for SET_VEHICLE_AUDIO_BODY_DAMAGE_FACTOR\nSetVehicleAudioBodyDamageFactor(vehicle, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/AUDIO/SetVehicleAudioBodyDamageFactor.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

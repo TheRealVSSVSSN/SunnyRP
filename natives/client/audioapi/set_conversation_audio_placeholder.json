@@ -1,0 +1,23 @@
+{
+  "title": "SET_CONVERSATION_AUDIO_PLACEHOLDER",
+  "breadcrumbs": [
+    "Native Reference",
+    "AUDIOAPI",
+    "SET_CONVERSATION_AUDIO_PLACEHOLDER"
+  ],
+  "content": "0x61631F5DF50D1C34// SetConversationAudioPlaceholder\nvoid SET_CONVERSATION_AUDIO_PLACEHOLDER(BOOL isPlaceHolder);Parameters:isPlaceHolder: Whether or not the conversation should use robot speech or notUsed to determine whether conversation should use robot speech or not",
+  "codeBlocks": [
+    "// SetConversationAudioPlaceholder\nvoid SET_CONVERSATION_AUDIO_PLACEHOLDER(BOOL isPlaceHolder);",
+    "-- Example usage for SET_CONVERSATION_AUDIO_PLACEHOLDER\nSetConversationAudioPlaceholder(false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/AUDIO/SetConversationAudioPlaceholder.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

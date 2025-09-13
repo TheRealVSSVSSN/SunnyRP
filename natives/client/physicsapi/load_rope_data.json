@@ -1,0 +1,23 @@
+{
+  "title": "LOAD_ROPE_DATA",
+  "breadcrumbs": [
+    "Native Reference",
+    "PHYSICSAPI",
+    "LOAD_ROPE_DATA"
+  ],
+  "content": "0xCBB203C04D1ABD270x9E8F1644// LoadRopeData\nvoid LOAD_ROPE_DATA(int ropeId, char* rope_preset);Rope presets can be found in the gamefiles. One example is \"ropeFamily3\", it is NOT a hash but rather a string.",
+  "codeBlocks": [
+    "// LoadRopeData\nvoid LOAD_ROPE_DATA(int ropeId, char* rope_preset);",
+    "Rope presets can be found in the gamefiles. One example is \"ropeFamily3\", it is NOT a hash but rather a string."
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PHYSICS/LoadRopeData.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}
