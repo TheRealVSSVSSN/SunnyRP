@@ -1,0 +1,22 @@
+{
+  "title": "SET_HEALTH_CONFIG_DEFAULT_HEALTH",
+  "content": "0xC705C778// SetHealthConfigDefaultHealth\nvoid SET_HEALTH_CONFIG_DEFAULT_HEALTH(char* configName, float newValue);Parameters:configName: Name of health config.newValue: ValueSets default health value for specific health config.",
+  "codeBlocks": [
+    "// SetHealthConfigDefaultHealth\nvoid SET_HEALTH_CONFIG_DEFAULT_HEALTH(char* configName, float newValue);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetHealthConfigDefaultHealth.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_HEALTH_CONFIG_DEFAULT_HEALTH"
+  ],
+  "tags": [
+    "client"
+  ]
+}

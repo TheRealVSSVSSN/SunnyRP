@@ -1,0 +1,23 @@
+{
+  "title": "GET_HELI_DISABLE_EXPLODE_FROM_BODY_DAMAGE",
+  "content": "0x82AFC0A3// GetHeliDisableExplodeFromBodyDamage\nBOOL GET_HELI_DISABLE_EXPLODE_FROM_BODY_DAMAGE(Vehicle heli);Parameters:heli: The helicopter to checkReturns: Returns true if the helicopter is set to be protected from exploding due to minor body damage, false otherwise.This is a getter for SET_DISABLE_HELI_EXPLODE_FROM_BODY_DAMAGE",
+  "codeBlocks": [
+    "// GetHeliDisableExplodeFromBodyDamage\nBOOL GET_HELI_DISABLE_EXPLODE_FROM_BODY_DAMAGE(Vehicle heli);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetHeliDisableExplodeFromBodyDamage.md",
+    "https://docs.fivem.net/natives/?_0xEDBC8405B3895CC9",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_HELI_DISABLE_EXPLODE_FROM_BODY_DAMAGE"
+  ],
+  "tags": [
+    "server"
+  ]
+}

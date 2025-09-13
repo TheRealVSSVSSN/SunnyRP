@@ -1,0 +1,22 @@
+{
+  "title": "SET_HEALTH_CONFIG_DEFAULT_ARMOR",
+  "content": "0x20A1E6A2// SetHealthConfigDefaultArmor\nvoid SET_HEALTH_CONFIG_DEFAULT_ARMOR(char* configName, float newValue);Parameters:configName: Name of health config.newValue: ValueSets default armor value for specific health config.",
+  "codeBlocks": [
+    "// SetHealthConfigDefaultArmor\nvoid SET_HEALTH_CONFIG_DEFAULT_ARMOR(char* configName, float newValue);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetHealthConfigDefaultArmor.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_HEALTH_CONFIG_DEFAULT_ARMOR"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "SET_TRAIN_DOOR_OPEN_RATIO",
+  "content": "0x2468DBE8// SetTrainDoorOpenRatio\nvoid SET_TRAIN_DOOR_OPEN_RATIO(Vehicle train, int doorIndex, float ratio);Parameters:train: The train to set the door ratio for.doorIndex: Zero-based door index.ratio: A value between 0.0 (fully closed) and 1.0 (fully open).Sets the ratio that a door is open for on a train.Examples:LuaC#-- open all doors on a train\nlocal doorCount = GetTrainDoorCount(train)\nfor doorIndex = 0, doorCount - 1 do\n    SetTrainDoorOpenRatio(train, doorIndex, 1.0)\nend",
+  "codeBlocks": [
+    "// SetTrainDoorOpenRatio\nvoid SET_TRAIN_DOOR_OPEN_RATIO(Vehicle train, int doorIndex, float ratio);",
+    "-- open all doors on a train\nlocal doorCount = GetTrainDoorCount(train)\nfor doorIndex = 0, doorCount - 1 do\n    SetTrainDoorOpenRatio(train, doorIndex, 1.0)\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetTrainDoorOpenRatio.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_TRAIN_DOOR_OPEN_RATIO"
+  ],
+  "tags": [
+    "client"
+  ]
+}

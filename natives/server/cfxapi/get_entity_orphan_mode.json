@@ -1,0 +1,23 @@
+{
+  "title": "GET_ENTITY_ORPHAN_MODE",
+  "content": "0xD16EA02F// GetEntityOrphanMode\nint GET_ENTITY_ORPHAN_MODE(Entity entity);Parameters:entity: The entity to get the orphan mode ofReturns: Returns the entities current orphan mode, refer to enum in SET_ENTITY_ORPHAN_MODE",
+  "codeBlocks": [
+    "// GetEntityOrphanMode\nint GET_ENTITY_ORPHAN_MODE(Entity entity);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetEntityOrphanMode.md",
+    "https://docs.fivem.net/natives/?_0x489E9162",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_ENTITY_ORPHAN_MODE"
+  ],
+  "tags": [
+    "server"
+  ]
+}

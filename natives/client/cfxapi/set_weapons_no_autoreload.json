@@ -1,0 +1,22 @@
+{
+  "title": "SET_WEAPONS_NO_AUTORELOAD",
+  "content": "0x311150E5// SetWeaponsNoAutoreload\nvoid SET_WEAPONS_NO_AUTORELOAD(BOOL state);Parameters:state: On/OffDisables the game's built-in auto-reloading.",
+  "codeBlocks": [
+    "// SetWeaponsNoAutoreload\nvoid SET_WEAPONS_NO_AUTORELOAD(BOOL state);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetWeaponsNoAutoreload.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_WEAPONS_NO_AUTORELOAD"
+  ],
+  "tags": [
+    "client"
+  ]
+}

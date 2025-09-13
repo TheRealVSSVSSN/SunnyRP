@@ -1,0 +1,23 @@
+{
+  "title": "IS_HELI_TAIL_BOOM_BREAKABLE",
+  "content": "0x23E46BD7// IsHeliTailBoomBreakable\nBOOL IS_HELI_TAIL_BOOM_BREAKABLE(Vehicle heli);Parameters:heli: The helicopter to checkReturns: Returns true if the helicopter's tail boom can break, false if it cannot.This is a getter for SET_HELI_TAIL_EXPLODE_THROW_DASHBOARD",
+  "codeBlocks": [
+    "// IsHeliTailBoomBreakable\nBOOL IS_HELI_TAIL_BOOM_BREAKABLE(Vehicle heli);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/IsHeliTailBoomBreakable.md",
+    "https://docs.fivem.net/natives/?_0x3EC8BF18AA453FE9",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "IS_HELI_TAIL_BOOM_BREAKABLE"
+  ],
+  "tags": [
+    "server"
+  ]
+}

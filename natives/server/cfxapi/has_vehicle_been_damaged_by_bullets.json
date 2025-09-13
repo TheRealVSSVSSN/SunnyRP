@@ -1,0 +1,22 @@
+{
+  "title": "HAS_VEHICLE_BEEN_DAMAGED_BY_BULLETS",
+  "content": "0xB8AF3137// HasVehicleBeenDamagedByBullets\nBOOL HAS_VEHICLE_BEEN_DAMAGED_BY_BULLETS(Vehicle vehicle);Parameters:vehicle: The target vehicle.Returns: Returns whether or not the target vehicle has been damaged by bullets.",
+  "codeBlocks": [
+    "// HasVehicleBeenDamagedByBullets\nBOOL HAS_VEHICLE_BEEN_DAMAGED_BY_BULLETS(Vehicle vehicle);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/HasVehicleBeenDamagedByBullets.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "HAS_VEHICLE_BEEN_DAMAGED_BY_BULLETS"
+  ],
+  "tags": [
+    "server"
+  ]
+}
