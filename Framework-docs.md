@@ -4,7 +4,7 @@ This document indexes the Example_Frameworks/ directory to guide development of 
 
 ## Scan Stamp & Inventory Overview
 
-TREE-SCAN-STAMP — 2025-09-12T23:13:54+00:00 — dirs:783 files:14695
+TREE-SCAN-STAMP — 2025-09-12T23:23:48+00:00 — dirs:783 files:14434
 
 | Folder | Resources | Files | Server Files | Client Files | Shared Files |
 | --- | --- | --- | --- | --- | --- |
@@ -922,10 +922,10 @@ Example_Frameworks/FiveM-FSN-Framework/pipeline.yml
 
 | Scope | Total | Done | Remaining | Last Updated |
 | --- | --- | --- | --- | --- |
-| File Enumeration | 14695 | 723 | 13972 | 2025-09-12 |
-| Function Extraction | 9 | 9 | 0 | 2025-09-12 |
-| Event Extraction | 10 | 10 | 0 | 2025-09-12 |
-| Native Currency Checks | 22 | 22 | 0 | 2025-09-12 |
+| File Enumeration | 14434 | 725 | 13709 | 2025-09-12 |
+| Function Extraction | 20 | 20 | 0 | 2025-09-12 |
+| Event Extraction | 17 | 17 | 0 | 2025-09-12 |
+| Native Currency Checks | 41 | 41 | 0 | 2025-09-12 |
 | Similarity Merges | 2 | 2 | 0 | 2025-09-12 |
 
 ## Function & Event Registry
@@ -941,23 +941,41 @@ Example_Frameworks/FiveM-FSN-Framework/pipeline.yml
 - [cancelHunt](#cancelhunt)
 - [cancelYoga](#cancelyoga)
 - [createBlips](#createblips)
+- [getAdminName](#getadminname)
+- [getModeratorName](#getmoderatorname)
 - [getNearestSpot](#getnearestspot)
+- [getSteamIdentifier](#getsteamidentifier)
+- [inInstance](#ininstance)
+- [isAdmin](#isadmin)
+- [isModerator](#ismoderator)
+- [registerAdminCommands](#registeradmincommands)
+- [registerAdminSuggestions](#registeradminsuggestions)
+- [registerModeratorCommands](#registermoderatorcommands)
+- [registerModeratorSuggestions](#registermoderatorsuggestions)
 - [spawnAnimal](#spawnanimal)
 - [startFishing](#startfishing)
 - [startHunt](#starthunt)
 - [startYoga](#startyoga)
+- [table.contains](#tablecontains)
 
 #### Events
 - [chat:addMessage](#chataddmessage)
 - [fsn_admin:FreezeMe](#fsn_adminfreezeme)
+- [fsn_admin:enableAdminCommands](#fsn_adminenableadmincommands)
+- [fsn_admin:enableModeratorCommands](#fsn_adminenablemoderatorcommands)
 - [fsn_admin:receiveXYZ](#fsn_adminreceivexyz)
 - [fsn_admin:requestXYZ](#fsn_adminrequestxyz)
 - [fsn_admin:sendXYZ](#fsn_adminsendxyz)
 - [fsn_admin:spawnVehicle](#fsn_adminspawnvehicle)
+- [fsn_apartments:instance:debug](#fsn_apartmentsinstancedebug)
+- [fsn_apartments:instance:join](#fsn_apartmentsinstancejoin)
+- [fsn_apartments:instance:leave](#fsn_apartmentsinstanceleave)
+- [fsn_apartments:instance:update](#fsn_apartmentsinstanceupdate)
 - [fsn_cargarage:makeMine](#fsn_cargaragemakemine)
 - [fsn_needs:stress:remove](#fsn_needsstressremove)
 - [fsn_notify:displayNotification](#fsn_notifydisplaynotification)
 - [fsn_yoga:checkStress](#fsn_yogacheckstress)
+- [fsn:playerReady](#fsnplayerready)
 
 ### 5.3 Functions — Detailed Entries
 
@@ -1165,6 +1183,227 @@ startYoga(PlayerPedId())
 - **References**:
   - https://docs.fivem.net/natives/
 
+#### getSteamIdentifier
+- **Name**: getSteamIdentifier
+- **Type**: Server
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_admin/server/server.lua (32-38)
+- **Signature(s)**: `getSteamIdentifier(src)`
+- **Purpose**: Returns the Steam identifier for a player.
+- **Key Flows**:
+  - Iterates identifiers from `GetPlayerIdentifiers` and selects the `steam:` entry.
+- **Natives Used**:
+  - GetPlayerIdentifiers — OK
+- **OneSync / Networking Notes**: depends on identifiers provided at connect time.
+- **Examples**:
+```lua
+local steam = getSteamIdentifier(source)
+```
+- **Security / Anti-Abuse**: returns `nil` if no Steam identifier is present.
+- **References**:
+  - https://docs.fivem.net/docs/scripting-reference/runtimes/server/server-functions/#getplayeridentifiers
+
+#### isModerator
+- **Name**: isModerator
+- **Type**: Server
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_admin/server/server.lua (41-50)
+- **Signature(s)**: `isModerator(src)`
+- **Purpose**: Checks if a player's Steam ID is in the moderator list.
+- **Key Flows**:
+  - Uses `getSteamIdentifier` to resolve Steam ID.
+- **Natives Used**: none
+- **OneSync / Networking Notes**: relies on client identifiers; spoofing requires Steam override.
+- **Examples**:
+```lua
+if isModerator(source) then
+  -- allow staff action
+end
+```
+- **Security / Anti-Abuse**: list is static; ensure Config.Moderators is secure.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### isAdmin
+- **Name**: isAdmin
+- **Type**: Server
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_admin/server/server.lua (52-60)
+- **Signature(s)**: `isAdmin(src)`
+- **Purpose**: Validates if a player is an administrator.
+- **Key Flows**:
+  - Compares Steam ID against `Config.Admins`.
+- **Natives Used**: none
+- **OneSync / Networking Notes**: same trust considerations as `isModerator`.
+- **Examples**:
+```lua
+if isAdmin(source) then
+  registerAdminCommands()
+end
+```
+- **Security / Anti-Abuse**: ensure Config.Admins is restricted.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### getModeratorName
+- **Name**: getModeratorName
+- **Type**: Server
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_admin/server/server.lua (63-65)
+- **Signature(s)**: `getModeratorName(src)`
+- **Purpose**: Retrieves a moderator's display name.
+- **Key Flows**:
+  - Wrapper around `GetPlayerName`.
+- **Natives Used**:
+  - GetPlayerName — OK
+- **OneSync / Networking Notes**: name reflects current session.
+- **Examples**:
+```lua
+local name = getModeratorName(source)
+```
+- **Security / Anti-Abuse**: none.
+- **References**:
+  - https://docs.fivem.net/docs/scripting-reference/runtimes/server/server-functions/#getplayername
+
+#### getAdminName
+- **Name**: getAdminName
+- **Type**: Server
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_admin/server/server.lua (67-69)
+- **Signature(s)**: `getAdminName(src)`
+- **Purpose**: Retrieves an administrator's display name.
+- **Key Flows**:
+  - Calls `GetPlayerName` directly.
+- **Natives Used**:
+  - GetPlayerName — OK
+- **OneSync / Networking Notes**: name is session-scoped.
+- **Examples**:
+```lua
+local admin = getAdminName(source)
+```
+- **Security / Anti-Abuse**: none.
+- **References**:
+  - https://docs.fivem.net/docs/scripting-reference/runtimes/server/server-functions/#getplayername
+
+#### registerModeratorCommands
+- **Name**: registerModeratorCommands
+- **Type**: Server
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_admin/server/server.lua (71-85)
+- **Signature(s)**: `registerModeratorCommands()`
+- **Purpose**: Registers staff chat for moderators.
+- **Key Flows**:
+  - Adds `/sc` command that broadcasts to other moderators.
+- **Natives Used**:
+  - RegisterCommand — OK
+  - GetPlayers — OK
+  - TriggerClientEvent — OK
+- **OneSync / Networking Notes**: uses server command routing; messages only sent to moderators.
+- **Examples**:
+```lua
+registerModeratorCommands()
+```
+- **Security / Anti-Abuse**: command validates caller is moderator.
+- **References**:
+  - https://docs.fivem.net/docs/scripting-reference/runtimes/server/server-functions/#registercommand
+  - https://docs.fivem.net/docs/scripting-reference/runtimes/server/server-functions/#getplayers
+  - https://docs.fivem.net/docs/scripting-reference/runtimes/server/server-functions/#triggerclientevent
+
+#### registerAdminCommands
+- **Name**: registerAdminCommands
+- **Type**: Server
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_admin/server/server.lua (87-255)
+- **Signature(s)**: `registerAdminCommands()`
+- **Purpose**: Registers administrative commands (chat, menus, teleport, moderation).
+- **Key Flows**:
+  - Adds `/sc`, `/adminmenu`, `/amenu`, `/freeze`, `/announce`, `/goto`, `/bring`, `/kick`, and `/ban`.
+- **Natives Used**:
+  - RegisterCommand — OK
+  - GetPlayers — OK
+  - TriggerClientEvent — OK
+  - DropPlayer — OK
+- **OneSync / Networking Notes**: commands perform server authority actions like teleporting and kicking.
+- **Examples**:
+```lua
+registerAdminCommands()
+```
+- **Security / Anti-Abuse**: every command checks `isAdmin` and validates inputs.
+- **References**:
+  - https://docs.fivem.net/docs/scripting-reference/runtimes/server/server-functions/#registercommand
+  - https://docs.fivem.net/docs/scripting-reference/runtimes/server/server-functions/#dropplayer
+
+#### registerModeratorSuggestions
+- **Name**: registerModeratorSuggestions
+- **Type**: Server
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_admin/server/server.lua (258-264)
+- **Signature(s)**: `registerModeratorSuggestions(source)`
+- **Purpose**: Adds chat suggestions for moderator commands.
+- **Key Flows**:
+  - Sends `chat:addSuggestion` for `/sc`.
+- **Natives Used**:
+  - TriggerClientEvent — OK
+- **OneSync / Networking Notes**: suggestion sent only if caller is moderator.
+- **Examples**:
+```lua
+registerModeratorSuggestions(source)
+```
+- **Security / Anti-Abuse**: verifies `isModerator` before sending.
+- **References**:
+  - https://docs.fivem.net/docs/scripting-reference/runtimes/server/server-functions/#triggerclientevent
+
+#### registerAdminSuggestions
+- **Name**: registerAdminSuggestions
+- **Type**: Server
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_admin/server/server.lua (266-292)
+- **Signature(s)**: `registerAdminSuggestions(source)`
+- **Purpose**: Adds chat suggestions for admin commands.
+- **Key Flows**:
+  - Provides `/sc`, `/adminmenu`, `/amenu`, `/freeze`, `/goto`, `/bring`, `/kick`, `/ban` suggestions.
+- **Natives Used**:
+  - TriggerClientEvent — OK
+- **OneSync / Networking Notes**: suggestions only sent to admins.
+- **Examples**:
+```lua
+registerAdminSuggestions(source)
+```
+- **Security / Anti-Abuse**: validates admin status before sending.
+- **References**:
+  - https://docs.fivem.net/docs/scripting-reference/runtimes/server/server-functions/#triggerclientevent
+
+#### inInstance
+- **Name**: inInstance
+- **Type**: Client (Export)
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/cl_instancing.lua (8-10)
+- **Signature(s)**: `inInstance()`
+- **Purpose**: Indicates whether the player is inside an apartment instance.
+- **Key Flows**:
+  - Returns boolean `instanced` flag.
+- **Natives Used**: none
+- **OneSync / Networking Notes**: state managed locally; exported for other resources.
+- **Examples**:
+```lua
+if inInstance() then
+  -- restrict interactions
+end
+```
+- **Security / Anti-Abuse**: client-controlled; trust cautiously.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### table.contains
+- **Name**: table.contains
+- **Type**: Client
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/cl_instancing.lua (73-79)
+- **Signature(s)**: `table.contains(tbl, element)`
+- **Purpose**: Utility to check if a table contains a value.
+- **Key Flows**:
+  - Iterates pairs and compares values.
+- **Natives Used**: none
+- **OneSync / Networking Notes**: none.
+- **Examples**:
+```lua
+if table.contains(myinstance.players, id) then
+  -- player is in instance
+end
+```
+- **Security / Anti-Abuse**: none.
+- **References**:
+  - https://docs.fivem.net/docs/
+
 ### 5.4 Events — Detailed Entries
 
 #### chat:addMessage
@@ -1247,7 +1486,7 @@ TriggerClientEvent('fsn_admin:requestXYZ', player, adminId)
 - **Event**: fsn_admin:sendXYZ
 - **Direction**: Client→Server
 - **Type**: NetEvent
-- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_admin/client/client.lua (66)
+ - **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_admin/client/client.lua (66); Example_Frameworks/FiveM-FSN-Framework/fsn_admin/server/server.lua (302-305)
 - **Payload**:
   - sendto:number
   - coords:vector3
@@ -1368,11 +1607,134 @@ TriggerEvent('fsn_yoga:checkStress')
 - **References**:
   - https://docs.fivem.net/docs/
 
+#### fsn_admin:enableAdminCommands
+- **Event**: fsn_admin:enableAdminCommands
+- **Direction**: Client→Server
+- **Type**: NetEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_admin/server/server.lua (307-310)
+- **Payload**: `source:number`
+- **Typical Callers / Listeners**: triggered when player is ready to provide admin chat suggestions.
+- **Natives Used**:
+  - TriggerClientEvent — OK
+- **OneSync / Replication Notes**: suggestions sent to a single player.
+- **Examples**:
+```lua
+TriggerEvent('fsn_admin:enableAdminCommands', playerId)
+```
+- **Security / Anti-Abuse**: only invoke for verified admins.
+- **References**:
+  - https://docs.fivem.net/docs/scripting-reference/runtimes/server/server-functions/#triggerclientevent
+
+#### fsn_admin:enableModeratorCommands
+- **Event**: fsn_admin:enableModeratorCommands
+- **Direction**: Client→Server
+- **Type**: NetEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_admin/server/server.lua (312-315)
+- **Payload**: `source:number`
+- **Typical Callers / Listeners**: enables moderator command suggestions.
+- **Natives Used**:
+  - TriggerClientEvent — OK
+- **OneSync / Replication Notes**: single-target suggestion dispatch.
+- **Examples**:
+```lua
+TriggerEvent('fsn_admin:enableModeratorCommands', playerId)
+```
+- **Security / Anti-Abuse**: verify moderator status before calling.
+- **References**:
+  - https://docs.fivem.net/docs/scripting-reference/runtimes/server/server-functions/#triggerclientevent
+
+#### fsn:playerReady
+- **Event**: fsn:playerReady
+- **Direction**: Client→Server
+- **Type**: NetEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_admin/server/server.lua (317-327)
+- **Payload**: none
+- **Typical Callers / Listeners**: client notifies server on spawn; server assigns command suggestions.
+- **Natives Used**:
+  - TriggerEvent — OK
+- **OneSync / Replication Notes**: depends on source id; processed after brief delay.
+- **Examples**:
+```lua
+TriggerServerEvent('fsn:playerReady')
+```
+- **Security / Anti-Abuse**: ensure server checks permissions after trigger.
+- **References**:
+  - https://docs.fivem.net/docs/scripting-reference/runtimes/server/server-functions/#triggerevent
+
+#### fsn_apartments:instance:join
+- **Event**: fsn_apartments:instance:join
+- **Direction**: Server→Client
+- **Type**: NetEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/cl_instancing.lua (51-55)
+- **Payload**: `inst:table`
+- **Typical Callers / Listeners**: server assigns player to an instance; client sets state.
+- **Natives Used**: none
+- **OneSync / Replication Notes**: affects local visibility.
+- **Examples**:
+```lua
+AddEventHandler('fsn_apartments:instance:join', function(inst) ... end)
+```
+- **Security / Anti-Abuse**: server controls membership to prevent spoofing.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### fsn_apartments:instance:update
+- **Event**: fsn_apartments:instance:update
+- **Direction**: Server→Client
+- **Type**: NetEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/cl_instancing.lua (57-60)
+- **Payload**: `inst:table`
+- **Typical Callers / Listeners**: server updates instance player list.
+- **Natives Used**: none
+- **OneSync / Replication Notes**: provides synchronized instance data.
+- **Examples**:
+```lua
+AddEventHandler('fsn_apartments:instance:update', function(inst) ... end)
+```
+- **Security / Anti-Abuse**: rely on server authority.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### fsn_apartments:instance:leave
+- **Event**: fsn_apartments:instance:leave
+- **Direction**: Server→Client
+- **Type**: NetEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/cl_instancing.lua (62-66)
+- **Payload**: none
+- **Typical Callers / Listeners**: server removes player from instance and resets state.
+- **Natives Used**: none
+- **OneSync / Replication Notes**: resets density multipliers client-side.
+- **Examples**:
+```lua
+AddEventHandler('fsn_apartments:instance:leave', function() instanced=false end)
+```
+- **Security / Anti-Abuse**: server should validate requester is member.
+- **References**:
+  - https://docs.fivem.net/docs/
+
+#### fsn_apartments:instance:debug
+- **Event**: fsn_apartments:instance:debug
+- **Direction**: Server→Client
+- **Type**: NetEvent
+- **Defined In**: Example_Frameworks/FiveM-FSN-Framework/fsn_apartments/cl_instancing.lua (68-70)
+- **Payload**: none
+- **Typical Callers / Listeners**: toggles instance debug overlay.
+- **Natives Used**: none
+- **OneSync / Replication Notes**: local visualization only.
+- **Examples**:
+```lua
+TriggerEvent('fsn_apartments:instance:debug')
+```
+- **Security / Anti-Abuse**: restrict to developers to avoid spam.
+- **References**:
+  - https://docs.fivem.net/docs/
+
 ## Similarity Merge Report
 - Canonicalized identical helper functions.
 - Merged `createBlips` definitions (fishing, hunting, yoga).
 - Merged `getNearestSpot` definitions (fishing, yoga).
 - TODO(next-run): review other activity helpers for consolidation.
+- TODO(next-run): reconcile duplicated instance events across client/server.
 
 ## Troubleshooting & Profiling Hooks
 - TODO(next-run): document recommended debug commands and profiling tools.
@@ -1383,5 +1745,5 @@ TriggerEvent('fsn_yoga:checkStress')
 
 ## PROGRESS MARKERS (EOF)
 
-CONTINUE-HERE — 2025-09-12T23:13:54+00:00 — next: FiveM-FSN-Framework/fsn_admin/server/server.lua @ line 1
-MERGE-QUEUE — 2025-09-12T23:13:54+00:00 — remaining: 0 (top 5: n/a)
+CONTINUE-HERE — 2025-09-12T23:23:48+00:00 — next: FiveM-FSN-Framework/fsn_apartments/client.lua @ line 1
+MERGE-QUEUE — 2025-09-12T23:23:48+00:00 — remaining: 0 (top 5: n/a)
