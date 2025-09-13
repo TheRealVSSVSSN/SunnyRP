@@ -1,0 +1,24 @@
+{
+  "title": "GET_PED_COLLECTIONS_COUNT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PED_COLLECTIONS_COUNT"
+  ],
+  "content": "0x45946359// GetPedCollectionsCount\nint GET_PED_COLLECTIONS_COUNT(Ped ped);Parameters:ped: The target pedReturns: Number of Ped variation collections. 0 if Ped is not found.Returns number of variation collections available for the given Ped.Collections are groups of drawable components or props available for the given Ped. Usually collection corresponds to a certain DLC or the base game. See SET_PED_COLLECTION_COMPONENT_VARIATION, SET_PED_COLLECTION_PROP_INDEX, GET_NUMBER_OF_PED_COLLECTION_DRAWABLE_VARIATIONS etc natives for more details on how to work with collections.GET_PED_COLLECTIONS_COUNT can be used together with GET_PED_COLLECTION_NAME to list all collections attached to Ped.Examples:Lualocal ped = PlayerPedId()\nlocal count = GetPedCollectionsCount(ped)\nfor i = 0, count - 1 do\n  print(GetPedCollectionName(ped, i))\nend",
+  "codeBlocks": [
+    "// GetPedCollectionsCount\nint GET_PED_COLLECTIONS_COUNT(Ped ped);",
+    "local ped = PlayerPedId()\nlocal count = GetPedCollectionsCount(ped)\nfor i = 0, count - 1 do\n  print(GetPedCollectionName(ped, i))\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPedCollectionsCount.md",
+    "https://docs.fivem.net/natives/?_0x88711BBA",
+    "https://docs.fivem.net/natives/?_0x75240BCB",
+    "https://docs.fivem.net/natives/?_0x310D0271",
+    "https://docs.fivem.net/natives/?_0xFED5D83A",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

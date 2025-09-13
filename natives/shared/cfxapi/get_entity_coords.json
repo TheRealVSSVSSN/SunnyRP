@@ -1,0 +1,21 @@
+{
+  "title": "GET_ENTITY_COORDS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_ENTITY_COORDS"
+  ],
+  "content": "0x1647F1CB// GetEntityCoords\nVector3 GET_ENTITY_COORDS(Entity entity);Parameters:entity: The entity to get the coordinates from.Returns: The current entity coordinates.Gets the current coordinates for a specified entity. This native is used server side when using OneSync.See GET_ENTITY_COORDS for client side.Examples:LuaJavaScriptC#local function ShowCoordinates()\n    local player = source\n    local ped = GetPlayerPed(player)\n    local playerCoords = GetEntityCoords(ped)\n\n    print(playerCoords) -- vector3(...)\nend\n\nRegisterNetEvent(\"myCoordinates\")\nAddEventHandler(\"myCoordinates\", ShowCoordinates)",
+  "codeBlocks": [
+    "// GetEntityCoords\nVector3 GET_ENTITY_COORDS(Entity entity);",
+    "local function ShowCoordinates()\n    local player = source\n    local ped = GetPlayerPed(player)\n    local playerCoords = GetEntityCoords(ped)\n\n    print(playerCoords) -- vector3(...)\nend\n\nRegisterNetEvent(\"myCoordinates\")\nAddEventHandler(\"myCoordinates\", ShowCoordinates)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetEntityCoords.md",
+    "https://docs.fivem.net/natives/?_0x3FEF770D40960D5A",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

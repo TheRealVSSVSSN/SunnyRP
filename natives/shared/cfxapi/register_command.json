@@ -1,0 +1,21 @@
+{
+  "title": "REGISTER_COMMAND",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "REGISTER_COMMAND"
+  ],
+  "content": "0x5FA79B0F// RegisterCommand\nvoid REGISTER_COMMAND(char* commandName, func handler, BOOL restricted);Parameters:commandName: The command you want to register.handler: A handler function that gets called whenever the command is executed.restricted: If this is a server command and you set this to true, then players will need the command.yourCommandName ace permission to execute this command.Registered commands can be executed by entering them in the client console (this works for client side and server side registered commands). Or by entering them in the server console/through an RCON client (only works for server side registered commands). Or if you use a supported chat resource, like the default one provided in the cfx-server-data repository, then you can enter the command in chat by prefixing it with a /.Commands registered using this function can also be executed by resources, using the ExecuteCommand native.The restricted bool is not used on the client side. Permissions can only be checked on the server side, so if you want to limit your command with an ace permission automatically, make it a server command (by registering it in a server script).Example result:Examples:LuaC#-- (server side script)\n-- Registers a command named 'ping'.\nRegisterCommand(\"ping\", function(source, args, rawCommand)\n    -- If the source is > 0, then that means it must be a player.\n    if (source > 0) then\n    \n        -- result (using the default GTA:O chat theme) https://i.imgur.com/TaCnG09.png\n        TriggerClientEvent(\"chat:addMessage\", -1, {\n            args = {\n                GetPlayerName(source),\n                \"PONG!\"\n            },\n            color = { 5, 255, 255 }\n        })\n    \n    -- If it's not a player, then it must be RCON, a resource, or the server console directly.\n    else\n        print(\"This command was executed by the server console, RCON client, or a resource.\")\n    end\nend, false --[[this command is not restricted, everyone can use this.]])",
+  "codeBlocks": [
+    "// RegisterCommand\nvoid REGISTER_COMMAND(char* commandName, func handler, BOOL restricted);",
+    "-- (server side script)\n-- Registers a command named 'ping'.\nRegisterCommand(\"ping\", function(source, args, rawCommand)\n    -- If the source is > 0, then that means it must be a player.\n    if (source > 0) then\n    \n        -- result (using the default GTA:O chat theme) https://i.imgur.com/TaCnG09.png\n        TriggerClientEvent(\"chat:addMessage\", -1, {\n            args = {\n                GetPlayerName(source),\n                \"PONG!\"\n            },\n            color = { 5, 255, 255 }\n        })\n    \n    -- If it's not a player, then it must be RCON, a resource, or the server console directly.\n    else\n        print(\"This command was executed by the server console, RCON client, or a resource.\")\n    end\nend, false --[[this command is not restricted, everyone can use this.]])"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/RegisterCommand.md",
+    "https://docs.fivem.net/natives/?_0x561C060B",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "title": "CREATE_OBJECT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "CREATE_OBJECT"
+  ],
+  "content": "0x2F7AA05C// CreateObject\nEntity CREATE_OBJECT(Hash modelHash, float x, float y, float z, BOOL isNetwork, BOOL netMissionEntity, BOOL doorFlag);Parameters:modelHash: The model to spawn.x: Spawn coordinate X component.y: Spawn coordinate Y component.z: Spawn coordinate Z component, 'ground level'.isNetwork: Whether to create a network object for the object. If false, the object exists only locally.netMissionEntity: Whether to register the object as pinned to the script host in the R* network model.doorFlag: False to create a door archetype (archetype flag bit 26 set) as a door. Required to be set to true to create door models in network mode.Returns: A script handle (fwScriptGuid index) for the object, or 0 if the object failed to be created.Creates an object (prop) with the specified model at the specified position, offset on the Z axis by the radius of the object's model.\nThis object will initially be owned by the creating script as a mission entity, and the model should be loaded already (e.g. using REQUEST_MODEL).This is the server-side RPC native equivalent of the client native CREATE_OBJECT.",
+  "codeBlocks": [
+    "// CreateObject\nEntity CREATE_OBJECT(Hash modelHash, float x, float y, float z, BOOL isNetwork, BOOL netMissionEntity, BOOL doorFlag);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/CreateObject.md",
+    "https://docs.fivem.net/natives/?_0x509D5878EB39E842",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

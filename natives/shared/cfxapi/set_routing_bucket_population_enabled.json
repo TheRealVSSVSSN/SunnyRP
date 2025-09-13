@@ -1,0 +1,19 @@
+{
+  "title": "SET_ROUTING_BUCKET_POPULATION_ENABLED",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_ROUTING_BUCKET_POPULATION_ENABLED"
+  ],
+  "content": "0xCE51AC2C// SetRoutingBucketPopulationEnabled\nvoid SET_ROUTING_BUCKET_POPULATION_ENABLED(int bucketId, BOOL mode);Parameters:bucketId: The routing bucket ID to adjust.mode: true to enable population, false to disable population.Sets whether or not the specified routing bucket has automatically-created population enabled.",
+  "codeBlocks": [
+    "// SetRoutingBucketPopulationEnabled\nvoid SET_ROUTING_BUCKET_POPULATION_ENABLED(int bucketId, BOOL mode);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetRoutingBucketPopulationEnabled.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

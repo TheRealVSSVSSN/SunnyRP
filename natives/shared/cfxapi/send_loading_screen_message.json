@@ -1,0 +1,19 @@
+{
+  "title": "SEND_LOADING_SCREEN_MESSAGE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SEND_LOADING_SCREEN_MESSAGE"
+  ],
+  "content": "0x8BBE6CC0// SendLoadingScreenMessage\nBOOL SEND_LOADING_SCREEN_MESSAGE(char* jsonString);Parameters:jsonString: The JSON-encoded message.Returns: A success value.Sends a message to the loadingScreen NUI frame, which contains the HTML page referenced in loadscreen resources.",
+  "codeBlocks": [
+    "// SendLoadingScreenMessage\nBOOL SEND_LOADING_SCREEN_MESSAGE(char* jsonString);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SendLoadingScreenMessage.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

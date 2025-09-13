@@ -1,0 +1,21 @@
+{
+  "title": "CLEAR_PED_TASKS_IMMEDIATELY",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "CLEAR_PED_TASKS_IMMEDIATELY"
+  ],
+  "content": "0xBC045625// ClearPedTasksImmediately\nvoid CLEAR_PED_TASKS_IMMEDIATELY(Ped ped);Parameters:ped: Ped id.Immediately stops the pedestrian from whatever it's doing. The difference between this and CLEAR_PED_TASKS is that this one teleports the ped but does not change the position of the ped.This is the server-side RPC native equivalent of the client native CLEAR_PED_TASKS_IMMEDIATELY.",
+  "codeBlocks": [
+    "// ClearPedTasksImmediately\nvoid CLEAR_PED_TASKS_IMMEDIATELY(Ped ped);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/ClearPedTasksImmediately.md",
+    "https://docs.fivem.net/natives/?_0xE1EF3C1216AFF2CD",
+    "https://docs.fivem.net/natives/?_0xAAA34F8A7CB32098",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

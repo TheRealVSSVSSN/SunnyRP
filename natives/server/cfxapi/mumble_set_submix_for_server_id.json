@@ -1,0 +1,19 @@
+{
+  "title": "MUMBLE_SET_SUBMIX_FOR_SERVER_ID",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "MUMBLE_SET_SUBMIX_FOR_SERVER_ID"
+  ],
+  "content": "0xFE3A3054// MumbleSetSubmixForServerId\nvoid MUMBLE_SET_SUBMIX_FOR_SERVER_ID(int serverId, int submixId);Parameters:serverId: The player's server ID.submixId: The submix ID.Sets the audio submix ID for a specified player using Mumble 'Native Audio' functionality.",
+  "codeBlocks": [
+    "// MumbleSetSubmixForServerId\nvoid MUMBLE_SET_SUBMIX_FOR_SERVER_ID(int serverId, int submixId);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/MumbleSetSubmixForServerId.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

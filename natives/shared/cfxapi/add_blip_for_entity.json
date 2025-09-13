@@ -1,0 +1,21 @@
+{
+  "title": "ADD_BLIP_FOR_ENTITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "ADD_BLIP_FOR_ENTITY"
+  ],
+  "content": "0x30822554// AddBlipForEntity\nBlip ADD_BLIP_FOR_ENTITY(Entity entity);Parameters:entity: The entity handle to create the blip.Returns: A blip handle.Create a blip that by default is red (enemy), you can use SET_BLIP_AS_FRIENDLY to make it blue (friend).\\\nCan be used for objects, vehicles and peds.\nExample of enemy:\n\nExample of friend:\nThis is the server-side RPC native equivalent of the client native ADD_BLIP_FOR_ENTITY.",
+  "codeBlocks": [
+    "// AddBlipForEntity\nBlip ADD_BLIP_FOR_ENTITY(Entity entity);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/AddBlipForEntity.md",
+    "https://docs.fivem.net/natives/?_0xC6F43D0E",
+    "https://docs.fivem.net/natives/?_0x5CDE92C702A8FCE7",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

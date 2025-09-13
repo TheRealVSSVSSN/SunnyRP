@@ -1,0 +1,20 @@
+{
+  "title": "ADD_MINIMAP_OVERLAY",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "ADD_MINIMAP_OVERLAY"
+  ],
+  "content": "0x4AFD2499// AddMinimapOverlay\nint ADD_MINIMAP_OVERLAY(char* name);Parameters:name: The path to a .gfx file in the current resource. It has to be specified as a file.Returns: A minimap overlay ID.Loads a minimap overlay from a GFx file in the current resource.If you need to control the depth of overlay use ADD_MINIMAP_OVERLAY_WITH_DEPTH.",
+  "codeBlocks": [
+    "// AddMinimapOverlay\nint ADD_MINIMAP_OVERLAY(char* name);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/AddMinimapOverlay.md",
+    "https://docs.fivem.net/natives/?_0xED0935B5",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

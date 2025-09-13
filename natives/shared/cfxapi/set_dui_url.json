@@ -1,0 +1,19 @@
+{
+  "title": "SET_DUI_URL",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_DUI_URL"
+  ],
+  "content": "0xF761D9F3// SetDuiUrl\nvoid SET_DUI_URL(long duiObject, char* url);Parameters:duiObject: The DUI browser handle.url: The new URL.Navigates the specified DUI browser to a different URL.",
+  "codeBlocks": [
+    "// SetDuiUrl\nvoid SET_DUI_URL(long duiObject, char* url);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetDuiUrl.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

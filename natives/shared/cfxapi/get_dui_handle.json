@@ -1,0 +1,19 @@
+{
+  "title": "GET_DUI_HANDLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_DUI_HANDLE"
+  ],
+  "content": "0x1655D41D// GetDuiHandle\nchar* GET_DUI_HANDLE(long duiObject);Parameters:duiObject: The DUI browser handle.Returns: The NUI window handle, for use in e.g. CREATE_RUNTIME_TEXTURE_FROM_DUI_HANDLE.Returns the NUI window handle for a specified DUI browser object.",
+  "codeBlocks": [
+    "// GetDuiHandle\nchar* GET_DUI_HANDLE(long duiObject);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetDuiHandle.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "title": "ADD_BLIP_FOR_RADIUS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "ADD_BLIP_FOR_RADIUS"
+  ],
+  "content": "0x4626756C// AddBlipForRadius\nBlip ADD_BLIP_FOR_RADIUS(float posX, float posY, float posZ, float radius);Parameters:posX: The x position of the blip (you can also send a vector3 instead of the bulk coordinates)posY: The y position of the blip (you can also send a vector3 instead of the bulk coordinates)posZ: The z position of the blip (you can also send a vector3 instead of the bulk coordinates)radius: The number that defines the radius of the blip circleReturns: The blip handle that can be manipulated with every SetBlip nativesCreate a blip with a radius for the specified coordinates (it doesnt create the blip sprite, so you need to use AddBlipCoords)\nExample image:\nThis is the server-side RPC native equivalent of the client native ADD_BLIP_FOR_RADIUS.",
+  "codeBlocks": [
+    "// AddBlipForRadius\nBlip ADD_BLIP_FOR_RADIUS(float posX, float posY, float posZ, float radius);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/AddBlipForRadius.md",
+    "https://docs.fivem.net/natives/?_0xC6F43D0E",
+    "https://docs.fivem.net/natives/?_0x46818D79B1F7499A",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

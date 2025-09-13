@@ -1,0 +1,19 @@
+{
+  "title": "SEND_DUI_MESSAGE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SEND_DUI_MESSAGE"
+  ],
+  "content": "0xCD380DA9// SendDuiMessage\nvoid SEND_DUI_MESSAGE(long duiObject, char* jsonString);Parameters:duiObject: The DUI browser handle.jsonString: The message, encoded as JSON.Sends a message to the specific DUI root page. This is similar to SEND_NUI_MESSAGE.",
+  "codeBlocks": [
+    "// SendDuiMessage\nvoid SEND_DUI_MESSAGE(long duiObject, char* jsonString);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SendDuiMessage.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}
