@@ -9,7 +9,7 @@
   "codeBlocks": [
     "// UnblockSpeechContextGroup\nvoid UNBLOCK_SPEECH_CONTEXT_GROUP(char* groupName);",
     "NativeDB Introduced: v1493",
-    "-- Example usage for UNBLOCK_SPEECH_CONTEXT_GROUP\nUnblockSpeechContextGroup('')"
+    "-- Example usage for UNBLOCK_SPEECH_CONTEXT_GROUP\nUnblockSpeechContextGroup('example')"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

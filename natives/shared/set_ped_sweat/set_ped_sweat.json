@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_SWEAT",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_SWEAT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_SWEAT\nSetPedSweat()"
+  ],
+  "urls": [],
+  "tags": []
+}

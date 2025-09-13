@@ -1,0 +1,13 @@
+{
+  "title": "DELETE_PED",
+  "breadcrumbs": [
+    "Native Reference",
+    "DELETE_PED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DELETE_PED\nDeletePed()"
+  ],
+  "urls": [],
+  "tags": []
+}

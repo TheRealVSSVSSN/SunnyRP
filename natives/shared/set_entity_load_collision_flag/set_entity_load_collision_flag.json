@@ -1,0 +1,13 @@
+{
+  "title": "SET_ENTITY_LOAD_COLLISION_FLAG",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_ENTITY_LOAD_COLLISION_FLAG"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_ENTITY_LOAD_COLLISION_FLAG\nSetEntityLoadCollisionFlag()"
+  ],
+  "urls": [],
+  "tags": []
+}

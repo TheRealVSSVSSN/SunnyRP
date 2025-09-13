@@ -1,0 +1,13 @@
+{
+  "title": "IS_ENTITY_PLAYING_ANIM",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_ENTITY_PLAYING_ANIM"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_ENTITY_PLAYING_ANIM\nIsEntityPlayingAnim()"
+  ],
+  "urls": [],
+  "tags": []
+}

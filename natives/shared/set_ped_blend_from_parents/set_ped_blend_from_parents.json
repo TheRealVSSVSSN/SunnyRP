@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_BLEND_FROM_PARENTS",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_BLEND_FROM_PARENTS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_BLEND_FROM_PARENTS\nSetPedBlendFromParents()"
+  ],
+  "urls": [],
+  "tags": []
+}

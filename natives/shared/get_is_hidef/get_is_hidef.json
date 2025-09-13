@@ -1,0 +1,13 @@
+{
+  "title": "GET_IS_HIDEF",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_IS_HIDEF"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_IS_HIDEF\nGetIsHidef()"
+  ],
+  "urls": [],
+  "tags": []
+}

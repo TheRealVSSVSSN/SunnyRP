@@ -1,0 +1,13 @@
+{
+  "title": "PAUSE_MENU_IS_CONTEXT_MENU_ACTIVE",
+  "breadcrumbs": [
+    "Native Reference",
+    "PAUSE_MENU_IS_CONTEXT_MENU_ACTIVE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for PAUSE_MENU_IS_CONTEXT_MENU_ACTIVE\nPauseMenuIsContextMenuActive()"
+  ],
+  "urls": [],
+  "tags": []
+}

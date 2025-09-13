@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_CAN_EVASIVE_DIVE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_CAN_EVASIVE_DIVE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_CAN_EVASIVE_DIVE\nSetPedCanEvasiveDive()"
+  ],
+  "urls": [],
+  "tags": []
+}

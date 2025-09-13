@@ -1,0 +1,13 @@
+{
+  "title": "IS_PED_GROUP_MEMBER",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_PED_GROUP_MEMBER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_PED_GROUP_MEMBER\nIsPedGroupMember()"
+  ],
+  "urls": [],
+  "tags": []
+}

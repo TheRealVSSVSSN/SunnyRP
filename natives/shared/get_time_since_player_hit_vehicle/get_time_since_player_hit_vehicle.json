@@ -1,0 +1,13 @@
+{
+  "title": "GET_TIME_SINCE_PLAYER_HIT_VEHICLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_TIME_SINCE_PLAYER_HIT_VEHICLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_TIME_SINCE_PLAYER_HIT_VEHICLE\nGetTimeSincePlayerHitVehicle()"
+  ],
+  "urls": [],
+  "tags": []
+}

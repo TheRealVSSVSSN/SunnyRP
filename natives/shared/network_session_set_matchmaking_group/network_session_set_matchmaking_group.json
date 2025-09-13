@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SESSION_SET_MATCHMAKING_GROUP",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SESSION_SET_MATCHMAKING_GROUP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SESSION_SET_MATCHMAKING_GROUP\nNetworkSessionSetMatchmakingGroup()"
+  ],
+  "urls": [],
+  "tags": []
+}

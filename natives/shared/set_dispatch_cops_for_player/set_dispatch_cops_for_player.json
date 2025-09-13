@@ -1,0 +1,13 @@
+{
+  "title": "SET_DISPATCH_COPS_FOR_PLAYER",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_DISPATCH_COPS_FOR_PLAYER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_DISPATCH_COPS_FOR_PLAYER\nSetDispatchCopsForPlayer()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_SEAT_PED_IS_TRYING_TO_ENTER",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_SEAT_PED_IS_TRYING_TO_ENTER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_SEAT_PED_IS_TRYING_TO_ENTER\nGetSeatPedIsTryingToEnter()"
+  ],
+  "urls": [],
+  "tags": []
+}

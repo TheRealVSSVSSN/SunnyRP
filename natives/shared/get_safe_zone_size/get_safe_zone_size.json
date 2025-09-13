@@ -1,0 +1,13 @@
+{
+  "title": "GET_SAFE_ZONE_SIZE",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_SAFE_ZONE_SIZE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_SAFE_ZONE_SIZE\nGetSafeZoneSize()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SET_ACTIVITY_SPECTATOR",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SET_ACTIVITY_SPECTATOR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SET_ACTIVITY_SPECTATOR\nNetworkSetActivitySpectator()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "BG_END_CONTEXT",
+  "breadcrumbs": [
+    "Native Reference",
+    "BG_END_CONTEXT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for BG_END_CONTEXT\nBgEndContext()"
+  ],
+  "urls": [],
+  "tags": []
+}

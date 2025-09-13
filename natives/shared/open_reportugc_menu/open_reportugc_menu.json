@@ -1,0 +1,13 @@
+{
+  "title": "OPEN_REPORTUGC_MENU",
+  "breadcrumbs": [
+    "Native Reference",
+    "OPEN_REPORTUGC_MENU"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for OPEN_REPORTUGC_MENU\nOpenReportugcMenu()"
+  ],
+  "urls": [],
+  "tags": []
+}

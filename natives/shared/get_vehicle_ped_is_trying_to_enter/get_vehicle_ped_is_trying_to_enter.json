@@ -1,0 +1,13 @@
+{
+  "title": "GET_VEHICLE_PED_IS_TRYING_TO_ENTER",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_VEHICLE_PED_IS_TRYING_TO_ENTER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_PED_IS_TRYING_TO_ENTER\nGetVehiclePedIsTryingToEnter()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_WANTED_LEVEL_RADIUS",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_WANTED_LEVEL_RADIUS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_WANTED_LEVEL_RADIUS\nGetWantedLevelRadius()"
+  ],
+  "urls": [],
+  "tags": []
+}

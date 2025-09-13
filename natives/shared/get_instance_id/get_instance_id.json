@@ -1,0 +1,13 @@
+{
+  "title": "GET_INSTANCE_ID",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_INSTANCE_ID"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_INSTANCE_ID\nGetInstanceId()"
+  ],
+  "urls": [],
+  "tags": []
+}

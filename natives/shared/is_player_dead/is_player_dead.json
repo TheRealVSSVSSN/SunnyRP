@@ -1,0 +1,13 @@
+{
+  "title": "IS_PLAYER_DEAD",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_PLAYER_DEAD"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_PLAYER_DEAD\nIsPlayerDead()"
+  ],
+  "urls": [],
+  "tags": []
+}

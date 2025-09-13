@@ -1,0 +1,13 @@
+{
+  "title": "BEGIN_TEXT_COMMAND_PRINT",
+  "breadcrumbs": [
+    "Native Reference",
+    "BEGIN_TEXT_COMMAND_PRINT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for BEGIN_TEXT_COMMAND_PRINT\nBeginTextCommandPrint()"
+  ],
+  "urls": [],
+  "tags": []
+}

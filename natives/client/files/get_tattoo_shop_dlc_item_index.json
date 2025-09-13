@@ -9,7 +9,7 @@
   "codeBlocks": [
     "// GetTattooShopDlcItemIndex\nint GET_TATTOO_SHOP_DLC_ITEM_INDEX(int character, int collection, int preset);",
     "NativeDB Introduced: v2189",
-    "-- Example usage for GET_TATTOO_SHOP_DLC_ITEM_INDEX\nGetTattooShopDlcItemIndex(0, 0, 0)"
+    "-- Example usage for GET_TATTOO_SHOP_DLC_ITEM_INDEX\nGetTattooShopDlcItemIndex(1, 1, 1)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

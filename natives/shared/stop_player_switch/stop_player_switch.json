@@ -1,0 +1,13 @@
+{
+  "title": "STOP_PLAYER_SWITCH",
+  "breadcrumbs": [
+    "Native Reference",
+    "STOP_PLAYER_SWITCH"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for STOP_PLAYER_SWITCH\nStopPlayerSwitch()"
+  ],
+  "urls": [],
+  "tags": []
+}

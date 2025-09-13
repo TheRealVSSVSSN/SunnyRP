@@ -1,0 +1,13 @@
+{
+  "title": "GET_PEDS_JACKER",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PEDS_JACKER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PEDS_JACKER\nGetPedsJacker()"
+  ],
+  "urls": [],
+  "tags": []
+}

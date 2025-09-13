@@ -8,7 +8,7 @@
   "content": "0xA3B0C41BA5CC0BB50xCD7F4030// StopSound\nvoid STOP_SOUND(int soundId);Parameters:soundId: The sound id to stopStops the sound from currently playing, there isn't a way to resume a sound\nafter stopping it.",
   "codeBlocks": [
     "// StopSound\nvoid STOP_SOUND(int soundId);",
-    "-- Example usage for STOP_SOUND\nStopSound(0)"
+    "-- Example usage for STOP_SOUND\nStopSound(1)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

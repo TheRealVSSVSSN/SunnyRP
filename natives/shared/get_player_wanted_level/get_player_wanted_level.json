@@ -1,0 +1,13 @@
+{
+  "title": "GET_PLAYER_WANTED_LEVEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PLAYER_WANTED_LEVEL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PLAYER_WANTED_LEVEL\nGetPlayerWantedLevel()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_DIES_WHEN_INJURED",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_DIES_WHEN_INJURED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_DIES_WHEN_INJURED\nSetPedDiesWhenInjured()"
+  ],
+  "urls": [],
+  "tags": []
+}

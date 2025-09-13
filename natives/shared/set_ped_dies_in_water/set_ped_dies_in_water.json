@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_DIES_IN_WATER",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_DIES_IN_WATER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_DIES_IN_WATER\nSetPedDiesInWater()"
+  ],
+  "urls": [],
+  "tags": []
+}

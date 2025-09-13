@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_STOP_SYNCHRONISED_SCENE",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_STOP_SYNCHRONISED_SCENE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_STOP_SYNCHRONISED_SCENE\nNetworkStopSynchronisedScene()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "SET_VEHICLE_WHEEL_BRAKE_PRESSURE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_VEHICLE_WHEEL_BRAKE_PRESSURE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_VEHICLE_WHEEL_BRAKE_PRESSURE\nSetVehicleWheelBrakePressure()"
+  ],
+  "urls": [],
+  "tags": []
+}

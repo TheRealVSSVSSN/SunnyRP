@@ -1,0 +1,13 @@
+{
+  "title": "INIT_SHOP_PED_COMPONENT",
+  "breadcrumbs": [
+    "Native Reference",
+    "INIT_SHOP_PED_COMPONENT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for INIT_SHOP_PED_COMPONENT\nInitShopPedComponent()"
+  ],
+  "urls": [],
+  "tags": []
+}

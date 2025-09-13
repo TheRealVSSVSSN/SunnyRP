@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_CLAN_GET_UI_FORMATTED_TAG",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_CLAN_GET_UI_FORMATTED_TAG"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_CLAN_GET_UI_FORMATTED_TAG\nNetworkClanGetUiFormattedTag()"
+  ],
+  "urls": [],
+  "tags": []
+}

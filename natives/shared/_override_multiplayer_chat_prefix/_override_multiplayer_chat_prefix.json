@@ -1,0 +1,13 @@
+{
+  "title": "_OVERRIDE_MULTIPLAYER_CHAT_PREFIX",
+  "breadcrumbs": [
+    "Native Reference",
+    "_OVERRIDE_MULTIPLAYER_CHAT_PREFIX"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _OVERRIDE_MULTIPLAYER_CHAT_PREFIX\n_OverrideMultiplayerChatPrefix()"
+  ],
+  "urls": [],
+  "tags": []
+}

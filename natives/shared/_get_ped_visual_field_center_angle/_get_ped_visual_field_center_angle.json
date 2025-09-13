@@ -1,0 +1,13 @@
+{
+  "title": "_GET_PED_VISUAL_FIELD_CENTER_ANGLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "_GET_PED_VISUAL_FIELD_CENTER_ANGLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_PED_VISUAL_FIELD_CENTER_ANGLE\n_GetPedVisualFieldCenterAngle()"
+  ],
+  "urls": [],
+  "tags": []
+}

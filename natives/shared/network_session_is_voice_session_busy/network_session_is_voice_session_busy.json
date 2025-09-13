@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SESSION_IS_VOICE_SESSION_BUSY",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SESSION_IS_VOICE_SESSION_BUSY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SESSION_IS_VOICE_SESSION_BUSY\nNetworkSessionIsVoiceSessionBusy()"
+  ],
+  "urls": [],
+  "tags": []
+}

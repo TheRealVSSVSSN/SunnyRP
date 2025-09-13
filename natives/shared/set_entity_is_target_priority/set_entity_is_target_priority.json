@@ -1,0 +1,13 @@
+{
+  "title": "SET_ENTITY_IS_TARGET_PRIORITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_ENTITY_IS_TARGET_PRIORITY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_ENTITY_IS_TARGET_PRIORITY\nSetEntityIsTargetPriority()"
+  ],
+  "urls": [],
+  "tags": []
+}

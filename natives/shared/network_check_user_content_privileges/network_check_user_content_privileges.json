@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_CHECK_USER_CONTENT_PRIVILEGES",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_CHECK_USER_CONTENT_PRIVILEGES"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_CHECK_USER_CONTENT_PRIVILEGES\nNetworkCheckUserContentPrivileges()"
+  ],
+  "urls": [],
+  "tags": []
+}

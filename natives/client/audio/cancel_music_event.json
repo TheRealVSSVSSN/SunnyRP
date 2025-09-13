@@ -9,7 +9,7 @@
   "codeBlocks": [
     "// CancelMusicEvent\nBOOL CANCEL_MUSIC_EVENT(char* eventName);",
     "All music event names found in the b617d scripts: pastebin.com/GnYt0R3P",
-    "-- Example usage for CANCEL_MUSIC_EVENT\nCancelMusicEvent('')"
+    "-- Example usage for CANCEL_MUSIC_EVENT\nCancelMusicEvent('example')"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

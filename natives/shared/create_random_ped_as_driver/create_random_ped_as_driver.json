@@ -1,0 +1,13 @@
+{
+  "title": "CREATE_RANDOM_PED_AS_DRIVER",
+  "breadcrumbs": [
+    "Native Reference",
+    "CREATE_RANDOM_PED_AS_DRIVER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CREATE_RANDOM_PED_AS_DRIVER\nCreateRandomPedAsDriver()"
+  ],
+  "urls": [],
+  "tags": []
+}

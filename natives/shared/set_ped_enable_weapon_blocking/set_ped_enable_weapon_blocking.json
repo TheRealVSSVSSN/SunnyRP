@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_ENABLE_WEAPON_BLOCKING",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_ENABLE_WEAPON_BLOCKING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_ENABLE_WEAPON_BLOCKING\nSetPedEnableWeaponBlocking()"
+  ],
+  "urls": [],
+  "tags": []
+}

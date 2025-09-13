@@ -1,0 +1,13 @@
+{
+  "title": "_SET_ARTIFICIAL_LIGHTS_STATE_AFFECTS_VEHICLES",
+  "breadcrumbs": [
+    "Native Reference",
+    "_SET_ARTIFICIAL_LIGHTS_STATE_AFFECTS_VEHICLES"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_ARTIFICIAL_LIGHTS_STATE_AFFECTS_VEHICLES\n_SetArtificialLightsStateAffectsVehicles()"
+  ],
+  "urls": [],
+  "tags": []
+}

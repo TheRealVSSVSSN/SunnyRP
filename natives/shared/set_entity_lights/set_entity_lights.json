@@ -1,0 +1,13 @@
+{
+  "title": "SET_ENTITY_LIGHTS",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_ENTITY_LIGHTS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_ENTITY_LIGHTS\nSetEntityLights()"
+  ],
+  "urls": [],
+  "tags": []
+}

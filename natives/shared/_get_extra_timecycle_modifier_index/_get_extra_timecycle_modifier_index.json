@@ -1,0 +1,13 @@
+{
+  "title": "_GET_EXTRA_TIMECYCLE_MODIFIER_INDEX",
+  "breadcrumbs": [
+    "Native Reference",
+    "_GET_EXTRA_TIMECYCLE_MODIFIER_INDEX"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_EXTRA_TIMECYCLE_MODIFIER_INDEX\n_GetExtraTimecycleModifierIndex()"
+  ],
+  "urls": [],
+  "tags": []
+}

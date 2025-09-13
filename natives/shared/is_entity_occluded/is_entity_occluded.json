@@ -1,0 +1,13 @@
+{
+  "title": "IS_ENTITY_OCCLUDED",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_ENTITY_OCCLUDED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_ENTITY_OCCLUDED\nIsEntityOccluded()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "IS_ENTITY_AN_OBJECT",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_ENTITY_AN_OBJECT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_ENTITY_AN_OBJECT\nIsEntityAnObject()"
+  ],
+  "urls": [],
+  "tags": []
+}

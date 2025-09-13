@@ -1,0 +1,13 @@
+{
+  "title": "SET_ENTITY_HAS_GRAVITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_ENTITY_HAS_GRAVITY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_ENTITY_HAS_GRAVITY\nSetEntityHasGravity()"
+  ],
+  "urls": [],
+  "tags": []
+}

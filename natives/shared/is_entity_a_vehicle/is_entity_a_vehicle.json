@@ -1,0 +1,13 @@
+{
+  "title": "IS_ENTITY_A_VEHICLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_ENTITY_A_VEHICLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_ENTITY_A_VEHICLE\nIsEntityAVehicle()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "CREATE_NM_MESSAGE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CREATE_NM_MESSAGE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CREATE_NM_MESSAGE\nCreateNmMessage()"
+  ],
+  "urls": [],
+  "tags": []
+}

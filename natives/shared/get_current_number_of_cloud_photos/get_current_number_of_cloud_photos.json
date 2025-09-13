@@ -1,0 +1,13 @@
+{
+  "title": "GET_CURRENT_NUMBER_OF_CLOUD_PHOTOS",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_CURRENT_NUMBER_OF_CLOUD_PHOTOS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_CURRENT_NUMBER_OF_CLOUD_PHOTOS\nGetCurrentNumberOfCloudPhotos()"
+  ],
+  "urls": [],
+  "tags": []
+}

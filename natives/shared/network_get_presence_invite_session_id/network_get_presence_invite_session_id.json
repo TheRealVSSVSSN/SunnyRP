@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_GET_PRESENCE_INVITE_SESSION_ID",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_GET_PRESENCE_INVITE_SESSION_ID"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_GET_PRESENCE_INVITE_SESSION_ID\nNetworkGetPresenceInviteSessionId()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -9,7 +9,7 @@
   "codeBlocks": [
     "// IsAlarmPlaying\nBOOL IS_ALARM_PLAYING(char* alarmName);",
     "local bAlarmPlaying = IsAlarmPlaying(\"PORT_OF_LS_HEIST_FORT_ZANCUDO_ALARMS\")",
-    "-- Example usage for IS_ALARM_PLAYING\nIsAlarmPlaying('')"
+    "-- Example usage for IS_ALARM_PLAYING\nIsAlarmPlaying('example')"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

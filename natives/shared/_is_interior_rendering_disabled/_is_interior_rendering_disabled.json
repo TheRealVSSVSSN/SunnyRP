@@ -1,0 +1,13 @@
+{
+  "title": "_IS_INTERIOR_RENDERING_DISABLED",
+  "breadcrumbs": [
+    "Native Reference",
+    "_IS_INTERIOR_RENDERING_DISABLED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _IS_INTERIOR_RENDERING_DISABLED\n_IsInteriorRenderingDisabled()"
+  ],
+  "urls": [],
+  "tags": []
+}

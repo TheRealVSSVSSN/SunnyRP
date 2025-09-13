@@ -1,0 +1,13 @@
+{
+  "title": "HAS_FORCE_CLEANUP_OCCURRED",
+  "breadcrumbs": [
+    "Native Reference",
+    "HAS_FORCE_CLEANUP_OCCURRED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for HAS_FORCE_CLEANUP_OCCURRED\nHasForceCleanupOccurred()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_VEHICLE_LIVERY",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_VEHICLE_LIVERY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_LIVERY\nGetVehicleLivery()"
+  ],
+  "urls": [],
+  "tags": []
+}

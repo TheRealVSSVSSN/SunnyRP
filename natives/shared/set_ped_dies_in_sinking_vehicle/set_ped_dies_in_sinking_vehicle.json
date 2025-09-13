@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_DIES_IN_SINKING_VEHICLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_DIES_IN_SINKING_VEHICLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_DIES_IN_SINKING_VEHICLE\nSetPedDiesInSinkingVehicle()"
+  ],
+  "urls": [],
+  "tags": []
+}

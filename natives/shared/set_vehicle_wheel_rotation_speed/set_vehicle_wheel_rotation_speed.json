@@ -1,0 +1,13 @@
+{
+  "title": "SET_VEHICLE_WHEEL_ROTATION_SPEED",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_VEHICLE_WHEEL_ROTATION_SPEED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_VEHICLE_WHEEL_ROTATION_SPEED\nSetVehicleWheelRotationSpeed()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_CAN_COWER_IN_COVER",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_CAN_COWER_IN_COVER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_CAN_COWER_IN_COVER\nSetPedCanCowerInCover()"
+  ],
+  "urls": [],
+  "tags": []
+}

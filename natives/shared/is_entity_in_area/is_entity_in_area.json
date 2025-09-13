@@ -1,0 +1,13 @@
+{
+  "title": "IS_ENTITY_IN_AREA",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_ENTITY_IN_AREA"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_ENTITY_IN_AREA\nIsEntityInArea()"
+  ],
+  "urls": [],
+  "tags": []
+}

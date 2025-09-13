@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_BOUNDS_ORIENTATION",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_BOUNDS_ORIENTATION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_BOUNDS_ORIENTATION\nSetPedBoundsOrientation()"
+  ],
+  "urls": [],
+  "tags": []
+}

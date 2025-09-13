@@ -8,7 +8,7 @@
   "content": "0x552369F549563AD50x13EB5861// DistantCopCarSirens\nvoid DISTANT_COP_CAR_SIRENS(BOOL shouldPlay);Parameters:shouldPlay: True will play distand sounds, false will disable them.Toggles fake distant siren soundsOld name:  _FORCE_AMBIENT_SIREN",
   "codeBlocks": [
     "// DistantCopCarSirens\nvoid DISTANT_COP_CAR_SIRENS(BOOL shouldPlay);",
-    "-- Example usage for DISTANT_COP_CAR_SIRENS\nDistantCopCarSirens(false)"
+    "-- Example usage for DISTANT_COP_CAR_SIRENS\nDistantCopCarSirens(true)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

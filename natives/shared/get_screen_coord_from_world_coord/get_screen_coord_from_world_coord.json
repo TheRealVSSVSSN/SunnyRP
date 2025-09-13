@@ -1,0 +1,13 @@
+{
+  "title": "GET_SCREEN_COORD_FROM_WORLD_COORD",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_SCREEN_COORD_FROM_WORLD_COORD"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_SCREEN_COORD_FROM_WORLD_COORD\nGetScreenCoordFromWorldCoord()"
+  ],
+  "urls": [],
+  "tags": []
+}

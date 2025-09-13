@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SESSION_WAS_INVITED",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SESSION_WAS_INVITED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SESSION_WAS_INVITED\nNetworkSessionWasInvited()"
+  ],
+  "urls": [],
+  "tags": []
+}

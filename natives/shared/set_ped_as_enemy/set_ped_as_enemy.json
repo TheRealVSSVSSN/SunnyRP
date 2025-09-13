@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_AS_ENEMY",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_AS_ENEMY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_AS_ENEMY\nSetPedAsEnemy()"
+  ],
+  "urls": [],
+  "tags": []
+}

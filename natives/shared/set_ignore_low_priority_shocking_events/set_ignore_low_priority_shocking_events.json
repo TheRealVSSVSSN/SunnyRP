@@ -1,0 +1,13 @@
+{
+  "title": "SET_IGNORE_LOW_PRIORITY_SHOCKING_EVENTS",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_IGNORE_LOW_PRIORITY_SHOCKING_EVENTS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_IGNORE_LOW_PRIORITY_SHOCKING_EVENTS\nSetIgnoreLowPriorityShockingEvents()"
+  ],
+  "urls": [],
+  "tags": []
+}

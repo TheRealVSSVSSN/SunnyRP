@@ -1,0 +1,13 @@
+{
+  "title": "GET_SHOP_PED_QUERY_COMPONENT",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_SHOP_PED_QUERY_COMPONENT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_SHOP_PED_QUERY_COMPONENT\nGetShopPedQueryComponent()"
+  ],
+  "urls": [],
+  "tags": []
+}

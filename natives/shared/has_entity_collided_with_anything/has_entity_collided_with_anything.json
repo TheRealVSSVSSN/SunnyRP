@@ -1,0 +1,13 @@
+{
+  "title": "HAS_ENTITY_COLLIDED_WITH_ANYTHING",
+  "breadcrumbs": [
+    "Native Reference",
+    "HAS_ENTITY_COLLIDED_WITH_ANYTHING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for HAS_ENTITY_COLLIDED_WITH_ANYTHING\nHasEntityCollidedWithAnything()"
+  ],
+  "urls": [],
+  "tags": []
+}

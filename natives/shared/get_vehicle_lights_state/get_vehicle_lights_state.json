@@ -1,0 +1,13 @@
+{
+  "title": "GET_VEHICLE_LIGHTS_STATE",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_VEHICLE_LIGHTS_STATE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_LIGHTS_STATE\nGetVehicleLightsState()"
+  ],
+  "urls": [],
+  "tags": []
+}

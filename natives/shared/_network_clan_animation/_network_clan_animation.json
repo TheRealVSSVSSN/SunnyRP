@@ -1,0 +1,13 @@
+{
+  "title": "_NETWORK_CLAN_ANIMATION",
+  "breadcrumbs": [
+    "Native Reference",
+    "_NETWORK_CLAN_ANIMATION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _NETWORK_CLAN_ANIMATION\n_NetworkClanAnimation()"
+  ],
+  "urls": [],
+  "tags": []
+}

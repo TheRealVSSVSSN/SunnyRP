@@ -1,0 +1,13 @@
+{
+  "title": "IS_SYNCHRONIZED_SCENE_RUNNING",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_SYNCHRONIZED_SCENE_RUNNING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_SYNCHRONIZED_SCENE_RUNNING\nIsSynchronizedSceneRunning()"
+  ],
+  "urls": [],
+  "tags": []
+}

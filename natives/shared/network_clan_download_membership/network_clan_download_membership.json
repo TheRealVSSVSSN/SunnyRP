@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_CLAN_DOWNLOAD_MEMBERSHIP",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_CLAN_DOWNLOAD_MEMBERSHIP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_CLAN_DOWNLOAD_MEMBERSHIP\nNetworkClanDownloadMembership()"
+  ],
+  "urls": [],
+  "tags": []
+}

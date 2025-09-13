@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_STEERS_AROUND_OBJECTS",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_STEERS_AROUND_OBJECTS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_STEERS_AROUND_OBJECTS\nSetPedSteersAroundObjects()"
+  ],
+  "urls": [],
+  "tags": []
+}

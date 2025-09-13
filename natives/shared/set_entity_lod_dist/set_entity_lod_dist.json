@@ -1,0 +1,13 @@
+{
+  "title": "SET_ENTITY_LOD_DIST",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_ENTITY_LOD_DIST"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_ENTITY_LOD_DIST\nSetEntityLodDist()"
+  ],
+  "urls": [],
+  "tags": []
+}

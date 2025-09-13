@@ -1,0 +1,13 @@
+{
+  "title": "_NETWORK_TRANSITION_TRACK",
+  "breadcrumbs": [
+    "Native Reference",
+    "_NETWORK_TRANSITION_TRACK"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _NETWORK_TRANSITION_TRACK\n_NetworkTransitionTrack()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_CLAN_IS_ROCKSTAR_CLAN",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_CLAN_IS_ROCKSTAR_CLAN"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_CLAN_IS_ROCKSTAR_CLAN\nNetworkClanIsRockstarClan()"
+  ],
+  "urls": [],
+  "tags": []
+}

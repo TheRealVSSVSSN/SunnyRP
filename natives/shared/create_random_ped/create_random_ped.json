@@ -1,0 +1,13 @@
+{
+  "title": "CREATE_RANDOM_PED",
+  "breadcrumbs": [
+    "Native Reference",
+    "CREATE_RANDOM_PED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CREATE_RANDOM_PED\nCreateRandomPed()"
+  ],
+  "urls": [],
+  "tags": []
+}

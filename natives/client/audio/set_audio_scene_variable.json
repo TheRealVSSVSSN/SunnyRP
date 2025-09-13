@@ -8,7 +8,7 @@
   "content": "0xEF21A9EF089A26680x19BB3CE8// SetAudioSceneVariable\nvoid SET_AUDIO_SCENE_VARIABLE(char* scene, char* variableName, float value);Parameters:scene: name of the scenevariableName: name of the variable to add/changevalue: value to set the variable to",
   "codeBlocks": [
     "// SetAudioSceneVariable\nvoid SET_AUDIO_SCENE_VARIABLE(char* scene, char* variableName, float value);",
-    "-- Example usage for SET_AUDIO_SCENE_VARIABLE\nSetAudioSceneVariable('', '', 0.0)"
+    "-- Example usage for SET_AUDIO_SCENE_VARIABLE\nSetAudioSceneVariable('example', 'example', 1.0)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

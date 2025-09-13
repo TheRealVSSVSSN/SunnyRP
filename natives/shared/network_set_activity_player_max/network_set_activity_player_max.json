@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SET_ACTIVITY_PLAYER_MAX",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SET_ACTIVITY_PLAYER_MAX"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SET_ACTIVITY_PLAYER_MAX\nNetworkSetActivityPlayerMax()"
+  ],
+  "urls": [],
+  "tags": []
+}

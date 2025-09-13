@@ -1,0 +1,13 @@
+{
+  "title": "INIT_SHOP_PED_PROP",
+  "breadcrumbs": [
+    "Native Reference",
+    "INIT_SHOP_PED_PROP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for INIT_SHOP_PED_PROP\nInitShopPedProp()"
+  ],
+  "urls": [],
+  "tags": []
+}

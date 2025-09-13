@@ -8,7 +8,7 @@
   "content": "0x159B7318403A1CD8// SetGlobalRadioSignalLevel\nvoid SET_GLOBAL_RADIO_SIGNAL_LEVEL(float signalLevel);Parameters:signalLevel: Radio signal level.Sets the global radio signal level, lower value will cause radio static.\nUsed only a handful of times in scripts.",
   "codeBlocks": [
     "// SetGlobalRadioSignalLevel\nvoid SET_GLOBAL_RADIO_SIGNAL_LEVEL(float signalLevel);",
-    "-- Example usage for SET_GLOBAL_RADIO_SIGNAL_LEVEL\nSetGlobalRadioSignalLevel(0.0)"
+    "-- Example usage for SET_GLOBAL_RADIO_SIGNAL_LEVEL\nSetGlobalRadioSignalLevel(1.0)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

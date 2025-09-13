@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_GET_PRIMARY_CLAN_DATA_PENDING",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_GET_PRIMARY_CLAN_DATA_PENDING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_GET_PRIMARY_CLAN_DATA_PENDING\nNetworkGetPrimaryClanDataPending()"
+  ],
+  "urls": [],
+  "tags": []
+}

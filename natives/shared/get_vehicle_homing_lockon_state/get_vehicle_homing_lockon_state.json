@@ -1,0 +1,13 @@
+{
+  "title": "GET_VEHICLE_HOMING_LOCKON_STATE",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_VEHICLE_HOMING_LOCKON_STATE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_HOMING_LOCKON_STATE\nGetVehicleHomingLockonState()"
+  ],
+  "urls": [],
+  "tags": []
+}

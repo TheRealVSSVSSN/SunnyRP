@@ -1,0 +1,13 @@
+{
+  "title": "GET_SHOP_PED_QUERY_OUTFIT",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_SHOP_PED_QUERY_OUTFIT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_SHOP_PED_QUERY_OUTFIT\nGetShopPedQueryOutfit()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_WANTED_LEVEL_THRESHOLD",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_WANTED_LEVEL_THRESHOLD"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_WANTED_LEVEL_THRESHOLD\nGetWantedLevelThreshold()"
+  ],
+  "urls": [],
+  "tags": []
+}

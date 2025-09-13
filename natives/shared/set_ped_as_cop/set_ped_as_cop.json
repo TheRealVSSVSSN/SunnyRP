@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_AS_COP",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_AS_COP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_AS_COP\nSetPedAsCop()"
+  ],
+  "urls": [],
+  "tags": []
+}

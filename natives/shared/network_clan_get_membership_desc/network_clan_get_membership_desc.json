@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_CLAN_GET_MEMBERSHIP_DESC",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_CLAN_GET_MEMBERSHIP_DESC"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_CLAN_GET_MEMBERSHIP_DESC\nNetworkClanGetMembershipDesc()"
+  ],
+  "urls": [],
+  "tags": []
+}

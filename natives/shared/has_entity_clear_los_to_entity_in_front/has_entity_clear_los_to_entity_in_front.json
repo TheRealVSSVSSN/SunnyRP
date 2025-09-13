@@ -1,0 +1,13 @@
+{
+  "title": "HAS_ENTITY_CLEAR_LOS_TO_ENTITY_IN_FRONT",
+  "breadcrumbs": [
+    "Native Reference",
+    "HAS_ENTITY_CLEAR_LOS_TO_ENTITY_IN_FRONT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for HAS_ENTITY_CLEAR_LOS_TO_ENTITY_IN_FRONT\nHasEntityClearLosToEntityInFront()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_PEDHEADSHOT_TXD_STRING",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PEDHEADSHOT_TXD_STRING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PEDHEADSHOT_TXD_STRING\nGetPedheadshotTxdString()"
+  ],
+  "urls": [],
+  "tags": []
+}

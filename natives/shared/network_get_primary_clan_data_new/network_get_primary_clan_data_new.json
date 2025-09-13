@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_GET_PRIMARY_CLAN_DATA_NEW",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_GET_PRIMARY_CLAN_DATA_NEW"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_GET_PRIMARY_CLAN_DATA_NEW\nNetworkGetPrimaryClanDataNew()"
+  ],
+  "urls": [],
+  "tags": []
+}

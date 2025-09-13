@@ -1,0 +1,13 @@
+{
+  "title": "SET_VEHICLE_ENGINE_HEALTH",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_VEHICLE_ENGINE_HEALTH"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_VEHICLE_ENGINE_HEALTH\nSetVehicleEngineHealth()"
+  ],
+  "urls": [],
+  "tags": []
+}

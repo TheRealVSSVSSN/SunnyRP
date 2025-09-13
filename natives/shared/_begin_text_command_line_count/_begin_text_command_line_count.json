@@ -1,0 +1,13 @@
+{
+  "title": "_BEGIN_TEXT_COMMAND_LINE_COUNT",
+  "breadcrumbs": [
+    "Native Reference",
+    "_BEGIN_TEXT_COMMAND_LINE_COUNT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _BEGIN_TEXT_COMMAND_LINE_COUNT\n_BeginTextCommandLineCount()"
+  ],
+  "urls": [],
+  "tags": []
+}

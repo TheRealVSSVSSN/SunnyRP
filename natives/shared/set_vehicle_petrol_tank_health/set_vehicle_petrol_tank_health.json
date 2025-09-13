@@ -1,0 +1,13 @@
+{
+  "title": "SET_VEHICLE_PETROL_TANK_HEALTH",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_VEHICLE_PETROL_TANK_HEALTH"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_VEHICLE_PETROL_TANK_HEALTH\nSetVehiclePetrolTankHealth()"
+  ],
+  "urls": [],
+  "tags": []
+}

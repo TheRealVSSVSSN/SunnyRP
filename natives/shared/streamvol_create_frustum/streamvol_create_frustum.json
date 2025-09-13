@@ -1,0 +1,13 @@
+{
+  "title": "STREAMVOL_CREATE_FRUSTUM",
+  "breadcrumbs": [
+    "Native Reference",
+    "STREAMVOL_CREATE_FRUSTUM"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for STREAMVOL_CREATE_FRUSTUM\nStreamvolCreateFrustum()"
+  ],
+  "urls": [],
+  "tags": []
+}

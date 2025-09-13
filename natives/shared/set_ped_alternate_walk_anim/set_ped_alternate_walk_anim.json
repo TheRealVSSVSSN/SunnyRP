@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_ALTERNATE_WALK_ANIM",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_ALTERNATE_WALK_ANIM"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_ALTERNATE_WALK_ANIM\nSetPedAlternateWalkAnim()"
+  ],
+  "urls": [],
+  "tags": []
+}

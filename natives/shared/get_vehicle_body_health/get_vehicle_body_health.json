@@ -1,0 +1,13 @@
+{
+  "title": "GET_VEHICLE_BODY_HEALTH",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_VEHICLE_BODY_HEALTH"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_BODY_HEALTH\nGetVehicleBodyHealth()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "SET_ENTITY_MAX_HEALTH",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_ENTITY_MAX_HEALTH"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_ENTITY_MAX_HEALTH\nSetEntityMaxHealth()"
+  ],
+  "urls": [],
+  "tags": []
+}

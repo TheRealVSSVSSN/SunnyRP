@@ -1,0 +1,13 @@
+{
+  "title": "APP_SET_STRING",
+  "breadcrumbs": [
+    "Native Reference",
+    "APP_SET_STRING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for APP_SET_STRING\nAppSetString()"
+  ],
+  "urls": [],
+  "tags": []
+}

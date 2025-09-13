@@ -1,0 +1,13 @@
+{
+  "title": "GET_NUM_TATTOO_SHOP_DLC_ITEMS",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_NUM_TATTOO_SHOP_DLC_ITEMS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_NUM_TATTOO_SHOP_DLC_ITEMS\nGetNumTattooShopDlcItems()"
+  ],
+  "urls": [],
+  "tags": []
+}

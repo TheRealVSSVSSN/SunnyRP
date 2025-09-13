@@ -1,0 +1,13 @@
+{
+  "title": "GET_VEHICLE_XMAS_SNOW_FACTOR",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_VEHICLE_XMAS_SNOW_FACTOR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_XMAS_SNOW_FACTOR\nGetVehicleXmasSnowFactor()"
+  ],
+  "urls": [],
+  "tags": []
+}

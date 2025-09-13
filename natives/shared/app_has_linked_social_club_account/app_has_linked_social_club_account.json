@@ -1,0 +1,13 @@
+{
+  "title": "APP_HAS_LINKED_SOCIAL_CLUB_ACCOUNT",
+  "breadcrumbs": [
+    "Native Reference",
+    "APP_HAS_LINKED_SOCIAL_CLUB_ACCOUNT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for APP_HAS_LINKED_SOCIAL_CLUB_ACCOUNT\nAppHasLinkedSocialClubAccount()"
+  ],
+  "urls": [],
+  "tags": []
+}

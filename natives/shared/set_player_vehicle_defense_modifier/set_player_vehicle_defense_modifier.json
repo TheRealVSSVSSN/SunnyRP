@@ -1,0 +1,13 @@
+{
+  "title": "SET_PLAYER_VEHICLE_DEFENSE_MODIFIER",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PLAYER_VEHICLE_DEFENSE_MODIFIER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PLAYER_VEHICLE_DEFENSE_MODIFIER\nSetPlayerVehicleDefenseModifier()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "OVERRIDE_INTERIOR_SMOKE_END",
+  "breadcrumbs": [
+    "Native Reference",
+    "OVERRIDE_INTERIOR_SMOKE_END"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for OVERRIDE_INTERIOR_SMOKE_END\nOverrideInteriorSmokeEnd()"
+  ],
+  "urls": [],
+  "tags": []
+}

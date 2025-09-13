@@ -1,0 +1,13 @@
+{
+  "title": "GET_VEHICLE_DOOR_LOCK_STATUS",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_VEHICLE_DOOR_LOCK_STATUS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_DOOR_LOCK_STATUS\nGetVehicleDoorLockStatus()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_STAY_IN_VEHICLE_WHEN_JACKED",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_STAY_IN_VEHICLE_WHEN_JACKED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_STAY_IN_VEHICLE_WHEN_JACKED\nSetPedStayInVehicleWhenJacked()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "HAS_ACHIEVEMENT_BEEN_PASSED",
+  "breadcrumbs": [
+    "Native Reference",
+    "HAS_ACHIEVEMENT_BEEN_PASSED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for HAS_ACHIEVEMENT_BEEN_PASSED\nHasAchievementBeenPassed()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "BG_END_CONTEXT_HASH",
+  "breadcrumbs": [
+    "Native Reference",
+    "BG_END_CONTEXT_HASH"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for BG_END_CONTEXT_HASH\nBgEndContextHash()"
+  ],
+  "urls": [],
+  "tags": []
+}

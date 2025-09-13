@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SESSION_MARK_VISIBLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SESSION_MARK_VISIBLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SESSION_MARK_VISIBLE\nNetworkSessionMarkVisible()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "IS_PLAYER_BEING_ARRESTED",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_PLAYER_BEING_ARRESTED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_PLAYER_BEING_ARRESTED\nIsPlayerBeingArrested()"
+  ],
+  "urls": [],
+  "tags": []
+}

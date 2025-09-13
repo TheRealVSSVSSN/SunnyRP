@@ -1,0 +1,13 @@
+{
+  "title": "IS_PRINCIPAL_ACE_ALLOWED",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_PRINCIPAL_ACE_ALLOWED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_PRINCIPAL_ACE_ALLOWED\nIsPrincipalAceAllowed()"
+  ],
+  "urls": [],
+  "tags": []
+}

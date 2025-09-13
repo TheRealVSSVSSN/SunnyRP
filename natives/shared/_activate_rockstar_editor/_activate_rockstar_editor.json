@@ -1,0 +1,13 @@
+{
+  "title": "_ACTIVATE_ROCKSTAR_EDITOR",
+  "breadcrumbs": [
+    "Native Reference",
+    "_ACTIVATE_ROCKSTAR_EDITOR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _ACTIVATE_ROCKSTAR_EDITOR\n_ActivateRockstarEditor()"
+  ],
+  "urls": [],
+  "tags": []
+}

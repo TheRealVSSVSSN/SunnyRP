@@ -8,7 +8,7 @@
   "content": "0x2F794A877ADD4C920xC3CB9DC6// StopAllAlarms\nvoid STOP_ALL_ALARMS(BOOL instantStop);Parameters:instantStop: Whether to kill the alarm instantly, or to let the audio system turn it off when it becomes inaudible",
   "codeBlocks": [
     "// StopAllAlarms\nvoid STOP_ALL_ALARMS(BOOL instantStop);",
-    "-- Example usage for STOP_ALL_ALARMS\nStopAllAlarms(false)"
+    "-- Example usage for STOP_ALL_ALARMS\nStopAllAlarms(true)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

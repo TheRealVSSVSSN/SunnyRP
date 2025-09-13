@@ -1,0 +1,13 @@
+{
+  "title": "IS_PED_HEADTRACKING_ENTITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_PED_HEADTRACKING_ENTITY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_PED_HEADTRACKING_ENTITY\nIsPedHeadtrackingEntity()"
+  ],
+  "urls": [],
+  "tags": []
+}

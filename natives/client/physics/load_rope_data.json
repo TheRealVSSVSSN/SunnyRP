@@ -9,7 +9,7 @@
   "codeBlocks": [
     "// LoadRopeData\nvoid LOAD_ROPE_DATA(int ropeId, char* rope_preset);",
     "Rope presets can be found in the gamefiles. One example is \"ropeFamily3\", it is NOT a hash but rather a string.",
-    "-- Example usage for LOAD_ROPE_DATA\nLoadRopeData(0, '')"
+    "-- Example usage for LOAD_ROPE_DATA\nLoadRopeData(1, 'example')"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",
