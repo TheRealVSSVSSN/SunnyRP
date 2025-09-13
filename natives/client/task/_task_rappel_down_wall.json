@@ -1,0 +1,25 @@
+{
+  "title": "_TASK_RAPPEL_DOWN_WALL",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "_TASK_RAPPEL_DOWN_WALL"
+  ],
+  "content": "0xEAF66ACDDC794793// TaskRappelDownWall\nvoid _TASK_RAPPEL_DOWN_WALL(Ped ped, float x1, float y1, float z1, float x2, float y2, float z2, float minZ, int ropeId, char* clipset, Any p10);Parameters:ped: Ped to perform the taskx1: X coord to start the tasky1: Y coord to start the taskz1: Z coord to start the taskx2: Second X coord, uses the same position as above in the scriptsy2: Second Y coordz2: Second Z coordminZ: Minimum Z that the player can descend toropeId: Rope to attach this task to, must be created with ADD_ROPEclipset: Clipset to use for the taskp10: Usually 1 in the scriptsAttaches a ped to a rope and allows player control to rappel down a wall.\nDisables all collisions while on the rope.NativeDB Introduced: v1868Examples:Lualocal coords = vector3(258.68, -3311.5, 45.72)\nRopeLoadTextures()\nSetEntityCoords(PlayerPedId(), coords - vector3(0, 0, 10.0))\nlocal ropeId = AddRope(coords, -90.0, 90.0, -90.0, 78.0, 7, 78.0, 78.0, 1.2, false, false, true, 10.0, false, 0)\nTaskRappelDownWall(PlayerPedId(), coords, coords, -130.0, ropeId, \"clipset@anim_heist@hs3f@ig1_rappel@male\", 1)\nN_0xa1ae736541b0fca3(ropeId, true)\nPinRopeVertex(ropeId, (GetRopeVertexCount(ropeId) - 1), coords + vector3(0, 0, 1.0))\nRopeSetUpdateOrder(ropeId, 0)",
+  "codeBlocks": [
+    "// TaskRappelDownWall\nvoid _TASK_RAPPEL_DOWN_WALL(Ped ped, float x1, float y1, float z1, float x2, float y2, float z2, float minZ, int ropeId, char* clipset, Any p10);",
+    "local coords = vector3(258.68, -3311.5, 45.72)\nRopeLoadTextures()\nSetEntityCoords(PlayerPedId(), coords - vector3(0, 0, 10.0))\nlocal ropeId = AddRope(coords, -90.0, 90.0, -90.0, 78.0, 7, 78.0, 78.0, 1.2, false, false, true, 10.0, false, 0)\nTaskRappelDownWall(PlayerPedId(), coords, coords, -130.0, ropeId, \"clipset@anim_heist@hs3f@ig1_rappel@male\", 1)\nN_0xa1ae736541b0fca3(ropeId, true)\nPinRopeVertex(ropeId, (GetRopeVertexCount(ropeId) - 1), coords + vector3(0, 0, 1.0))\nRopeSetUpdateOrder(ropeId, 0)",
+    "local ped = PlayerPedId()\n-- Example usage for _TASK_RAPPEL_DOWN_WALL\n_TaskRappelDownWall(ped, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, '', 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/TaskRappelDownWall.md",
+    "https://docs.fivem.net/natives/?_0xE832D760399EB220",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

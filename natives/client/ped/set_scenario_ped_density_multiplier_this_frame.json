@@ -1,0 +1,23 @@
+{
+  "title": "SET_SCENARIO_PED_DENSITY_MULTIPLIER_THIS_FRAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "SET_SCENARIO_PED_DENSITY_MULTIPLIER_THIS_FRAME"
+  ],
+  "content": "0x7A556143A1C038980x2909ABF0// SetScenarioPedDensityMultiplierThisFrame\nvoid SET_SCENARIO_PED_DENSITY_MULTIPLIER_THIS_FRAME(float interiorMult, float exteriorMult);Parameters:interiorMult: Multiplier for ped scenarios inside interiors.exteriorMult: Multiplier for ped scenarios outside interiors.Set the number of scenario peds on the entire map",
+  "codeBlocks": [
+    "// SetScenarioPedDensityMultiplierThisFrame\nvoid SET_SCENARIO_PED_DENSITY_MULTIPLIER_THIS_FRAME(float interiorMult, float exteriorMult);",
+    "-- Example usage for SET_SCENARIO_PED_DENSITY_MULTIPLIER_THIS_FRAME\nSetScenarioPedDensityMultiplierThisFrame(0.0, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/SetScenarioPedDensityMultiplierThisFrame.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

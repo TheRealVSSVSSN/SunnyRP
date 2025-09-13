@@ -1,0 +1,26 @@
+{
+  "title": "TASK_VEHICLE_MISSION",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "TASK_VEHICLE_MISSION"
+  ],
+  "content": "0x659427E0EF36BCDE0x20609E56// TaskVehicleMission\nvoid TASK_VEHICLE_MISSION(Ped ped, Vehicle vehicle, Vehicle vehicleTarget, int missionType, float speed, int drivingStyle, float radius, float straightLineDist, BOOL DriveAgainstTraffic);Parameters:ped: The ped to be tasked.vehicle: The vehicles' entity handle.vehicleTarget: The target vehicle.missionType: The mission type (default is 0) (see eVehicleMissionType).speed: The speed in m/s.drivingStyle: The driving style (default is 0) (see SetDriveTaskDrivingStyle).radius: The radius of when the task will be completed (default is -1.0f).straightLineDist: The distance before the vehicle will drive straight to the target (default is -1.0f).DriveAgainstTraffic: Whether the vehicle should drive against traffic (default is false).All parameters except ped, vehicle, vehicleTarget and speed are optional; with missionType being only those that require a target entity.If you don't want to use a parameter; pass 0 for int parameters, and -1.0f for the remaining float parameters.enum eVehicleMissionType\n{\n  None = 0,\n  Cruise = 1,\n  Ram = 2,\n  Block = 3,\n  GoTo = 4,\n  Stop = 5,\n  Attack = 6,\n  Follow = 7,\n  Flee = 8,\n  Circle = 9,\n  Escort = 12,\n  GoToRacing = 14,\n  FollowRecording = 15,\n  PoliceBehaviour = 16,\n  Land = 19,\n  LandAndWait = 20,\n  Crash = 21,\n  PullOver = 22,\n  HeliProtect = 23\n}\nExamples:Lualocal vehicle_model = `adder`\nRequestModel(vehicle_model)\nrepeat Wait(0) until HasModelLoaded(vehicle_model)\n\n-- Player needs in a vehicle for this to work\nlocal ped = PlayerPedId()\nlocal coords = GetEntityCoords(ped) - GetEntityForwardVector(ped) * 15.0\nlocal vehicle = CreateVehicle(vehicle_model, coords.x, coords.y, coords.z, GetEntityHeading(ped), true, false)\n-- Allow the game engine to clear the model from memory\nSetModelAsNoLongerNeeded(vehicle_model)\n\nlocal ped_model = `a_m_m_skater_01`\nRequestModel(ped_model)\nrepeat Wait(0) until HasModelLoaded(ped_model)\n\nlocal driver = CreatePedInsideVehicle(vehicle, 0, ped_model, -1, true, false)\n-- Allow the game engine to clear the model from memory\nSetModelAsNoLongerNeeded(ped_model)\n\nTaskVehicleMission(driver, vehicle, GetVehiclePedIsIn(ped, false), 8, 35.0, 786468, -1.0, -1.0, true)\n-- Mission Type: Flee | Drive Style: DrivingModeAvoidVehiclesReckless\nSetPedKeepTask(driver, true)",
+  "codeBlocks": [
+    "// TaskVehicleMission\nvoid TASK_VEHICLE_MISSION(Ped ped, Vehicle vehicle, Vehicle vehicleTarget, int missionType, float speed, int drivingStyle, float radius, float straightLineDist, BOOL DriveAgainstTraffic);",
+    "enum eVehicleMissionType\n{\n  None = 0,\n  Cruise = 1,\n  Ram = 2,\n  Block = 3,\n  GoTo = 4,\n  Stop = 5,\n  Attack = 6,\n  Follow = 7,\n  Flee = 8,\n  Circle = 9,\n  Escort = 12,\n  GoToRacing = 14,\n  FollowRecording = 15,\n  PoliceBehaviour = 16,\n  Land = 19,\n  LandAndWait = 20,\n  Crash = 21,\n  PullOver = 22,\n  HeliProtect = 23\n}",
+    "local vehicle_model = `adder`\nRequestModel(vehicle_model)\nrepeat Wait(0) until HasModelLoaded(vehicle_model)\n\n-- Player needs in a vehicle for this to work\nlocal ped = PlayerPedId()\nlocal coords = GetEntityCoords(ped) - GetEntityForwardVector(ped) * 15.0\nlocal vehicle = CreateVehicle(vehicle_model, coords.x, coords.y, coords.z, GetEntityHeading(ped), true, false)\n-- Allow the game engine to clear the model from memory\nSetModelAsNoLongerNeeded(vehicle_model)\n\nlocal ped_model = `a_m_m_skater_01`\nRequestModel(ped_model)\nrepeat Wait(0) until HasModelLoaded(ped_model)\n\nlocal driver = CreatePedInsideVehicle(vehicle, 0, ped_model, -1, true, false)\n-- Allow the game engine to clear the model from memory\nSetModelAsNoLongerNeeded(ped_model)\n\nTaskVehicleMission(driver, vehicle, GetVehiclePedIsIn(ped, false), 8, 35.0, 786468, -1.0, -1.0, true)\n-- Mission Type: Flee | Drive Style: DrivingModeAvoidVehiclesReckless\nSetPedKeepTask(driver, true)",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for TASK_VEHICLE_MISSION\nTaskVehicleMission(ped, vehicle, vehicle, 0, 0.0, 0, 0.0, 0.0, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/TaskVehicleMission.md",
+    "https://docs.fivem.net/natives/?_0xDACE1BE37D88AF67",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

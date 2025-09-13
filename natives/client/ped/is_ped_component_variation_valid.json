@@ -1,0 +1,26 @@
+{
+  "title": "IS_PED_COMPONENT_VARIATION_VALID",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "IS_PED_COMPONENT_VARIATION_VALID"
+  ],
+  "content": "0xE825F6B6CEA7671D0x952ABD9A// IsPedComponentVariationValid\nBOOL IS_PED_COMPONENT_VARIATION_VALID(Ped ped, int componentId, int drawableId, int textureId);Parameters:ped: The ped handle.componentId: The component id to check the variation of. Refer to SET_PED_COMPONENT_VARIATION.drawableId: The drawable id to get the component variation of. Refer to GET_NUMBER_OF_PED_PROP_DRAWABLE_VARIATIONS.textureId: The texture id to get the component variation of. Refer to GET_NUMBER_OF_PED_PROP_TEXTURE_VARIATIONS.Checks if the component variation is valid, this works great for randomizing components using loops.",
+  "codeBlocks": [
+    "// IsPedComponentVariationValid\nBOOL IS_PED_COMPONENT_VARIATION_VALID(Ped ped, int componentId, int drawableId, int textureId);",
+    "local ped = PlayerPedId()\n-- Example usage for IS_PED_COMPONENT_VARIATION_VALID\nIsPedComponentVariationValid(ped, 0, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/IsPedComponentVariationValid.md",
+    "https://docs.fivem.net/natives/?_0x262B14F48D29DE80",
+    "https://docs.fivem.net/natives/?_0x5FAF9754E789FB47",
+    "https://docs.fivem.net/natives/?_0xA6E7F1CEB523E171",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

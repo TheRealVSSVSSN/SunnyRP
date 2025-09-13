@@ -1,0 +1,24 @@
+{
+  "title": "SET_MOUSE_CURSOR_THIS_FRAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "SET_MOUSE_CURSOR_THIS_FRAME"
+  ],
+  "content": "0xAAE7CE1D63167423// SetMouseCursorThisFrame\nvoid SET_MOUSE_CURSOR_THIS_FRAME();Sets the mouse pointer to be active on current frame.Old name:  _SHOW_CURSOR_THIS_FRAMEOld name:  _SET_MOUSE_CURSOR_ACTIVE_THIS_FRAMEExamples:LuaCreateThread(function()\n  while true do\n    Wait(0)\n    SetMouseCursorThisFrame()\n  end\nend)",
+  "codeBlocks": [
+    "// SetMouseCursorThisFrame\nvoid SET_MOUSE_CURSOR_THIS_FRAME();",
+    "CreateThread(function()\n  while true do\n    Wait(0)\n    SetMouseCursorThisFrame()\n  end\nend)",
+    "-- Example usage for SET_MOUSE_CURSOR_THIS_FRAME\nSetMouseCursorThisFrame()"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/SetMouseCursorThisFrame.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "title": "DATAFILE_IS_SAVE_PENDING",
+  "breadcrumbs": [
+    "Native Reference",
+    "DATAFILEAPI",
+    "DATAFILE_IS_SAVE_PENDING"
+  ],
+  "content": "0xBEDB96A7584AA8CF0x5DCD0796// DatafileIsSavePending\nBOOL DATAFILE_IS_SAVE_PENDING();Example:  \nif (!DATAFILE::_BEDB96A7584AA8CF())  \n{  \n    if (!g_109E3)  \n\t{  \n        if (((sub_d4f() == 2) == 0) && (!NETWORK::NETWORK_IS_GAME_IN_PROGRESS()))  \n{  \n            if (NETWORK::NETWORK_IS_CLOUD_AVAILABLE())  \n\t{  \n                g_17A8B = 0;  \n            }  \n            if (!g_D52C)  \n\t{  \n                sub_730();  \n            }  \n        }  \n    }  \n}",
+  "codeBlocks": [
+    "// DatafileIsSavePending\nBOOL DATAFILE_IS_SAVE_PENDING();",
+    "Example:  \nif (!DATAFILE::_BEDB96A7584AA8CF())  \n{  \n    if (!g_109E3)  \n\t{  \n        if (((sub_d4f() == 2) == 0) && (!NETWORK::NETWORK_IS_GAME_IN_PROGRESS()))  \n{  \n            if (NETWORK::NETWORK_IS_CLOUD_AVAILABLE())  \n\t{  \n                g_17A8B = 0;  \n            }  \n            if (!g_D52C)  \n\t{  \n                sub_730();  \n            }  \n        }  \n    }  \n}",
+    "-- Example usage for DATAFILE_IS_SAVE_PENDING\nDatafileIsSavePending()"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/DATAFILE/DatafileIsSavePending.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

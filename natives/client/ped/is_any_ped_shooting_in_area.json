@@ -1,0 +1,23 @@
+{
+  "title": "IS_ANY_PED_SHOOTING_IN_AREA",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "IS_ANY_PED_SHOOTING_IN_AREA"
+  ],
+  "content": "0xA0D3D71EA1086C550x91833867// IsAnyPedShootingInArea\nBOOL IS_ANY_PED_SHOOTING_IN_AREA(float minX, float minY, float minZ, float maxX, float maxY, float maxZ, BOOL bHighlightArea, BOOL bDo3DCheck);Parameters:minX: Minimum X vectorminY: Minimum Y vectorminZ: Minimum Z vectormaxX: Maximum X vectormaxY: Maximum Y vectormaxZ: Maximum Z vectorbHighlightArea: Highlights the area to check when set to true.bDo3DCheck: Conducts a 3D height check when set to true.Returns: true if a ped is within the defined area, false otherwise.Verifies whether a ped is firing within a specific area.",
+  "codeBlocks": [
+    "// IsAnyPedShootingInArea\nBOOL IS_ANY_PED_SHOOTING_IN_AREA(float minX, float minY, float minZ, float maxX, float maxY, float maxZ, BOOL bHighlightArea, BOOL bDo3DCheck);",
+    "-- Example usage for IS_ANY_PED_SHOOTING_IN_AREA\nIsAnyPedShootingInArea(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, false, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/IsAnyPedShootingInArea.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "title": "END_TEXT_COMMAND_THEFEED_POST_STATS",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "END_TEXT_COMMAND_THEFEED_POST_STATS"
+  ],
+  "content": "0x2B7E9A4EAAA93C890xED130FA1// EndTextCommandThefeedPostStats\nint END_TEXT_COMMAND_THEFEED_POST_STATS(char* statTitle, int iconEnum, BOOL stepVal, int barValue, BOOL isImportant, char* picTxd, char* picTxn);Returns: The notification handle.List of picture namesExample result:Old name:  _SET_NOTIFICATION_MESSAGE_2Examples:LuaCitizen.CreateThread(function()\n    -- Get the ped headshot image.\n    local handle = RegisterPedheadshot(PlayerPedId())\n    while not IsPedheadshotReady(handle) or not IsPedheadshotValid(handle) do\n        Citizen.Wait(0)\n    end\n    local txd = GetPedheadshotTxdString(handle)\n\n    -- Add the notification text\n    BeginTextCommandThefeedPost(\"PS_UPDATE\")\n    AddTextComponentInteger(50)\n\n    -- Set the notification title and progress\n    local title = \"PSF_STAMINA\"\n    local p1 = 14\n    local lastProgress = 25\n    local newProgress = 50\n    local unknownBool = false\n    EndTextCommandThefeedPostStats(title, p1, newProgress, lastProgress, unknownBool, txd, txd)\n\n    -- Draw the notification\n    local showInBrief = true\n    local blink = false -- blink doesn't work when using icon notifications.\n    EndTextCommandThefeedPostTicker(blink, showInBrief)\n    \n    -- Cleanup after yourself!\n    UnregisterPedheadshot(handle)\nend)",
+  "codeBlocks": [
+    "// EndTextCommandThefeedPostStats\nint END_TEXT_COMMAND_THEFEED_POST_STATS(char* statTitle, int iconEnum, BOOL stepVal, int barValue, BOOL isImportant, char* picTxd, char* picTxn);",
+    "Citizen.CreateThread(function()\n    -- Get the ped headshot image.\n    local handle = RegisterPedheadshot(PlayerPedId())\n    while not IsPedheadshotReady(handle) or not IsPedheadshotValid(handle) do\n        Citizen.Wait(0)\n    end\n    local txd = GetPedheadshotTxdString(handle)\n\n    -- Add the notification text\n    BeginTextCommandThefeedPost(\"PS_UPDATE\")\n    AddTextComponentInteger(50)\n\n    -- Set the notification title and progress\n    local title = \"PSF_STAMINA\"\n    local p1 = 14\n    local lastProgress = 25\n    local newProgress = 50\n    local unknownBool = false\n    EndTextCommandThefeedPostStats(title, p1, newProgress, lastProgress, unknownBool, txd, txd)\n\n    -- Draw the notification\n    local showInBrief = true\n    local blink = false -- blink doesn't work when using icon notifications.\n    EndTextCommandThefeedPostTicker(blink, showInBrief)\n    \n    -- Cleanup after yourself!\n    UnregisterPedheadshot(handle)\nend)",
+    "-- Example usage for END_TEXT_COMMAND_THEFEED_POST_STATS\nEndTextCommandThefeedPostStats('', 0, false, 0, false, '', '')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/EndTextCommandThefeedPostStats.md",
+    "https://pastebin.com/XdpJVbHz",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

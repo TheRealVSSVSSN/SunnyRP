@@ -1,0 +1,23 @@
+{
+  "title": "END_TEXT_COMMAND_OVERRIDE_BUTTON_TEXT",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "END_TEXT_COMMAND_OVERRIDE_BUTTON_TEXT"
+  ],
+  "content": "0xA86911979638106F0x6E7FDA1C// EndTextCommandOverrideButtonText\nvoid END_TEXT_COMMAND_OVERRIDE_BUTTON_TEXT(int buttonIndex);Parameters:buttonIndex: Index of the instructional buttonOld name:  _END_TEXT_COMMAND_TIMER",
+  "codeBlocks": [
+    "// EndTextCommandOverrideButtonText\nvoid END_TEXT_COMMAND_OVERRIDE_BUTTON_TEXT(int buttonIndex);",
+    "-- Example usage for END_TEXT_COMMAND_OVERRIDE_BUTTON_TEXT\nEndTextCommandOverrideButtonText(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/EndTextCommandOverrideButtonText.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

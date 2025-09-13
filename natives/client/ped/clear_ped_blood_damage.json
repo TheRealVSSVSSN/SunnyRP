@@ -1,0 +1,23 @@
+{
+  "title": "CLEAR_PED_BLOOD_DAMAGE",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "CLEAR_PED_BLOOD_DAMAGE"
+  ],
+  "content": "0x8FE22675A5A458170xF7ADC960// ClearPedBloodDamage\nvoid CLEAR_PED_BLOOD_DAMAGE(Ped ped);Parameters:ped: Ped id.Clears the blood on a ped.",
+  "codeBlocks": [
+    "// ClearPedBloodDamage\nvoid CLEAR_PED_BLOOD_DAMAGE(Ped ped);",
+    "local ped = PlayerPedId()\n-- Example usage for CLEAR_PED_BLOOD_DAMAGE\nClearPedBloodDamage(ped)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/ClearPedBloodDamage.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

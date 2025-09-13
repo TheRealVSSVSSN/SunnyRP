@@ -1,0 +1,25 @@
+{
+  "title": "DELETE_ROPE",
+  "breadcrumbs": [
+    "Native Reference",
+    "PHYSICSAPI",
+    "DELETE_ROPE"
+  ],
+  "content": "0x52B48292813646490x748D72AF// DeleteRope\nvoid DELETE_ROPE(int* ropeId);Parameters:ropeId: The handle of the rope to deleteDeletes the rope with the specified handle.You should check if the rope exists before trying to delete it, see DOES_ROPE_EXIST.For an example on how to use this native please refer to ADD_ROPE",
+  "codeBlocks": [
+    "// DeleteRope\nvoid DELETE_ROPE(int* ropeId);",
+    "-- Example usage for DELETE_ROPE\nDeleteRope(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PHYSICS/DeleteRope.md",
+    "https://docs.fivem.net/natives/?_0xFD5448BE3111ED96",
+    "https://docs.fivem.net/natives/?_0xE832D760399EB220",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

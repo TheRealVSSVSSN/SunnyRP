@@ -1,0 +1,23 @@
+{
+  "title": "GET_WEAPONTYPE_GROUP",
+  "breadcrumbs": [
+    "Native Reference",
+    "WEAPONAPI",
+    "GET_WEAPONTYPE_GROUP"
+  ],
+  "content": "0xC3287EE3050FB74C0x5F2DE833// GetWeapontypeGroup\nHash GET_WEAPONTYPE_GROUP(Hash weaponHash);Parameters:weaponHash: The hash of the weapon.Returns: Returns the hash of the group of the weapon. Hashes:GroupUnsignedSignedExampleGROUP_DIGISCANNER3539449195-755518101WEAPON_DIGISCANNERGROUP_FIREEXTINGUISHER4257178988-37788308WEAPON_FIREEXTINGUISHERGROUP_HACKINGDEVICE11757619401175761940WEAPON_HACKINGDEVICEGROUP_HEAVY2725924767-1569042529WEAPON_RPGGROUP_MELEE3566412244-728555052WEAPON_BATGROUP_METALDETECTOR3759491383-535475913WEAPON_METALDETECTORGROUP_MG11593985881159398588WEAPON_COMBATMGGROUP_NIGHTVISION3493187224-801780072GADGET_NIGHTVISIONGROUP_PARACHUTE431593103431593103GADGET_PARACHUTEGROUP_PETROLCAN15956624601595662460WEAPON_PETROLCANGROUP_PISTOL416676503416676503WEAPON_PISTOLGROUP_RIFLE970310034970310034WEAPON_ASSAULTRIFLEGROUP_SHOTGUN860033945860033945WEAPON_PUMPSHOTGUNGROUP_SMG3337201093-957766203WEAPON_MICROSMGGROUP_SNIPER3082541095-1212426201WEAPON_SNIPERRIFLEGROUP_STUNGUN690389602690389602WEAPON_STUNGUNGROUP_THROWN15485072671548507267WEAPON_SNOWBALLGROUP_TRANQILIZER7515944175159441WEAPON_TRANQUILIZERGROUP_UNARMED2685387236-1609580060WEAPON_UNARMEDGets and returns the hash of the group of the specified weapon (group names can be found/changed under \"Group\" in the weapons' meta file).\nNote that the group is not the same as the location on the weapon wheel.Examples:LuaJavaScriptprint(GetWeapontypeGroup(`WEAPON_PISTOL`)) -- Outputs the hash of GROUP_PISTOL\nprint(GetWeapontypeGroup(`WEAPON_RPG`)) -- Outputs the hash of GROUP_HEAVY\nprint(GetWeapontypeGroup(`WEAPON_SNOWBALL`)) -- Outputs the hash of GROUP_THROWN\nprint(GetWeapontypeGroup(`WEAPON_MUSKET`)) -- Outputs the hash of GROUP_SNIPER\nprint(GetWeapontypeGroup(GetSelectedPedWeapon(PlayerPedId()))) -- Outputs the hash of the currently selected weapon",
+  "codeBlocks": [
+    "// GetWeapontypeGroup\nHash GET_WEAPONTYPE_GROUP(Hash weaponHash);",
+    "-- Example usage for GET_WEAPONTYPE_GROUP\nGetWeapontypeGroup(GetHashKey('prop'))"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/WEAPON/GetWeapontypeGroup.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

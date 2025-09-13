@@ -1,0 +1,25 @@
+{
+  "title": "SET_RADIUS_BLIP_EDGE",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "SET_RADIUS_BLIP_EDGE"
+  ],
+  "content": "0x25615540D894B8140x40E25DB8// SetRadiusBlipEdge\nvoid SET_RADIUS_BLIP_EDGE(Blip blip, BOOL toggle);Parameters:blip: The blip handletoggle: Whether to turn off or on the effectEnabling this on a radius blip will make it outline only.\\\nPlease note that this only works on a radius blip (i.e. one generated using ADD_BLIP_FOR_RADIUS), not a normal blip.Example result:\\\nExamples:Lualocal coords = GetEntityCoords(PlayerPedId())\nlocal radiusBlip = AddBlipForRadius(coords, 100.0) -- need to have .0\nSetBlipColour(radiusBlip, 1)\nSetBlipAlpha(radiusBlip, 255)\nSetRadiusBlipEdge(radiusBlip, true)",
+  "codeBlocks": [
+    "// SetRadiusBlipEdge\nvoid SET_RADIUS_BLIP_EDGE(Blip blip, BOOL toggle);",
+    "local coords = GetEntityCoords(PlayerPedId())\nlocal radiusBlip = AddBlipForRadius(coords, 100.0) -- need to have .0\nSetBlipColour(radiusBlip, 1)\nSetBlipAlpha(radiusBlip, 255)\nSetRadiusBlipEdge(radiusBlip, true)",
+    "-- Example usage for SET_RADIUS_BLIP_EDGE\nSetRadiusBlipEdge(0, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/SetRadiusBlipEdge.md",
+    "https://docs.fivem.net/natives/?_0x46818D79B1F7499A",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

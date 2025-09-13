@@ -1,0 +1,24 @@
+{
+  "title": "SET_PAD_SHAKE",
+  "breadcrumbs": [
+    "Native Reference",
+    "PADAPI",
+    "SET_PAD_SHAKE"
+  ],
+  "content": "0x48B3886C1358D0D50x5D38BD2F// SetPadShake\nvoid SET_PAD_SHAKE(int padIndex, int duration, int frequency);p0 always seems to be 0  \nduration in milliseconds   \nfrequency should range from about 10 (slow vibration) to 255 (very fast)  \nexample:  \nSET_PAD_SHAKE(0, 100, 200);",
+  "codeBlocks": [
+    "// SetPadShake\nvoid SET_PAD_SHAKE(int padIndex, int duration, int frequency);",
+    "p0 always seems to be 0  \nduration in milliseconds   \nfrequency should range from about 10 (slow vibration) to 255 (very fast)  \nexample:  \nSET_PAD_SHAKE(0, 100, 200);",
+    "-- Example usage for SET_PAD_SHAKE\nSetPadShake(0, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PAD/SetPadShake.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

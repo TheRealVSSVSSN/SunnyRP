@@ -1,0 +1,24 @@
+{
+  "title": "RELOAD_MAP_MENU",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "RELOAD_MAP_MENU"
+  ],
+  "content": "0x2916A928514C9827// ReloadMapMenu\nvoid RELOAD_MAP_MENU();Forces the map menu to reload.Examples:Luaif GetNumberOfReferencesOfScriptWithNameHash(`pausemenu_map`) > 0 then -- Ensure we're on the map screen\n  ReloadMapMenu()\n  print('Reloaded map menu!')\nend",
+  "codeBlocks": [
+    "// ReloadMapMenu\nvoid RELOAD_MAP_MENU();",
+    "if GetNumberOfReferencesOfScriptWithNameHash(`pausemenu_map`) > 0 then -- Ensure we're on the map screen\n  ReloadMapMenu()\nend",
+    "-- Example usage for RELOAD_MAP_MENU\nReloadMapMenu()"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/ReloadMapMenu.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

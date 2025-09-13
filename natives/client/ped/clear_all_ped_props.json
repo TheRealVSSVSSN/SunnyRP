@@ -1,0 +1,23 @@
+{
+  "title": "CLEAR_ALL_PED_PROPS",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "CLEAR_ALL_PED_PROPS"
+  ],
+  "content": "0xCD8A7537A9B52F060x81DF8B43// ClearAllPedProps\nvoid CLEAR_ALL_PED_PROPS(Ped ped);Parameters:ped: The ped handle.",
+  "codeBlocks": [
+    "// ClearAllPedProps\nvoid CLEAR_ALL_PED_PROPS(Ped ped);",
+    "local ped = PlayerPedId()\n-- Example usage for CLEAR_ALL_PED_PROPS\nClearAllPedProps(ped)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/ClearAllPedProps.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

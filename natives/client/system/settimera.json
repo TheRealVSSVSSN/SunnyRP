@@ -1,0 +1,23 @@
+{
+  "title": "SETTIMERA",
+  "breadcrumbs": [
+    "Native Reference",
+    "SYSTEMAPI",
+    "SETTIMERA"
+  ],
+  "content": "0xC1B1E9A034A63A620x35785333// Settimera\nvoid SETTIMERA(int value);Parameters:value: In milliseconds.Sets the value for the timer A in milliseconds",
+  "codeBlocks": [
+    "// Settimera\nvoid SETTIMERA(int value);",
+    "-- Example usage for SETTIMERA\nSettimera(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/SYSTEM/Settimera.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

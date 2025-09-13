@@ -1,0 +1,24 @@
+{
+  "title": "SET_MOUSE_CURSOR_VISIBLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "SET_MOUSE_CURSOR_VISIBLE"
+  ],
+  "content": "0x98215325A695E78A// SetMouseCursorVisible\nvoid SET_MOUSE_CURSOR_VISIBLE(BOOL isVisible);Parameters:isVisible: If the mouse cursor is visibleToggles the visibility of the cursor. Do note that if the game loses focus and then regains it, the cursor will become visible again.Old name:  _SET_MOUSE_CURSOR_VISIBLE_IN_MENUSExamples:LuaCitizen.CreateThread(function()\n    local menuType = \"FE_MENU_VERSION_CORONA_LOBBY\"\n    ActivateFrontendMenu(GetHashKey(menuType), false, -1)\n    --100 works as well\n    Citizen.Wait(1000)\n    --Hide frontend cursor\n    SetMouseCursorVisible(false)\nend)",
+  "codeBlocks": [
+    "// SetMouseCursorVisible\nvoid SET_MOUSE_CURSOR_VISIBLE(BOOL isVisible);",
+    "Citizen.CreateThread(function()\n    local menuType = \"FE_MENU_VERSION_CORONA_LOBBY\"\n    ActivateFrontendMenu(GetHashKey(menuType), false, -1)\n    --100 works as well\n    Citizen.Wait(1000)\n    --Hide frontend cursor\n    SetMouseCursorVisible(false)\nend)",
+    "-- Example usage for SET_MOUSE_CURSOR_VISIBLE\nSetMouseCursorVisible(false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/SetMouseCursorVisible.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "title": "SHOW_OUTLINE_INDICATOR_ON_BLIP",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "SHOW_OUTLINE_INDICATOR_ON_BLIP"
+  ],
+  "content": "0xB81656BC81FE24D10x8DE82C15// ShowOutlineIndicatorOnBlip\nvoid SHOW_OUTLINE_INDICATOR_ON_BLIP(Blip blip, BOOL toggle);Parameters:blip: The blip to toggle the outline on.toggle: Enables or disables the outline.Toggles a cyan outline around the blip.Color can be changed with SET_BLIP_SECONDARY_COLOUR. Enabling this circle will override the \"crew\" and \"friend\" half-circles (see SHOW_CREW_INDICATOR_ON_BLIP and SHOW_FRIEND_INDICATOR_ON_BLIP).Old name:  SET_BLIP_FRIENDLY",
+  "codeBlocks": [
+    "// ShowOutlineIndicatorOnBlip\nvoid SHOW_OUTLINE_INDICATOR_ON_BLIP(Blip blip, BOOL toggle);",
+    "-- Example usage for SHOW_OUTLINE_INDICATOR_ON_BLIP\nShowOutlineIndicatorOnBlip(0, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/ShowOutlineIndicatorOnBlip.md",
+    "https://docs.fivem.net/natives/?_0x14892474891E09EB",
+    "https://docs.fivem.net/natives/?_0xDCFB5D4DB8BF367E",
+    "https://docs.fivem.net/natives/?_0x23C3EB807312F01A",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

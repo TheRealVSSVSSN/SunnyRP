@@ -1,0 +1,24 @@
+{
+  "title": "GET_POSIX_TIME",
+  "breadcrumbs": [
+    "Native Reference",
+    "CLOCKAPI",
+    "GET_POSIX_TIME"
+  ],
+  "content": "0xDA488F299A5B164E0xE15A5281// GetPosixTime\nvoid GET_POSIX_TIME(int* year, int* month, int* day, int* hour, int* minute, int* second);Gets system time as year, month, day, hour, minute and second.  \nExample usage:  \n\tint year;  \n\tint month;  \n\tint day;  \n\tint hour;  \n\tint minute;  \n\tint second;  \n\tTIME::GET_POSIX_TIME(&year, &month, &day, &hour, &minute, &second);",
+  "codeBlocks": [
+    "// GetPosixTime\nvoid GET_POSIX_TIME(int* year, int* month, int* day, int* hour, int* minute, int* second);",
+    "Gets system time as year, month, day, hour, minute and second.  \nExample usage:  \n\tint year;  \n\tint month;  \n\tint day;  \n\tint hour;  \n\tint minute;  \n\tint second;  \n\tTIME::GET_POSIX_TIME(&year, &month, &day, &hour, &minute, &second);",
+    "-- Example usage for GET_POSIX_TIME\nGetPosixTime(0, 0, 0, 0, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CLOCK/GetPosixTime.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

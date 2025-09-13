@@ -1,0 +1,23 @@
+{
+  "title": "FIND_RADIO_STATION_INDEX",
+  "breadcrumbs": [
+    "Native Reference",
+    "AUDIOAPI",
+    "FIND_RADIO_STATION_INDEX"
+  ],
+  "content": "0x8D67489793FF428B0xECA1512F// FindRadioStationIndex\nint FIND_RADIO_STATION_INDEX(int stationNameHash);Parameters:stationNameHash: the station name hash to search forReturns: The station index for the specified hash, or 254 if the radio station did not exist.",
+  "codeBlocks": [
+    "// FindRadioStationIndex\nint FIND_RADIO_STATION_INDEX(int stationNameHash);",
+    "-- Example usage for FIND_RADIO_STATION_INDEX\nFindRadioStationIndex(GetHashKey('prop'))"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/AUDIO/FindRadioStationIndex.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

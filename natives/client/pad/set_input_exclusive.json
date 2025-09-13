@@ -1,0 +1,25 @@
+{
+  "title": "SET_INPUT_EXCLUSIVE",
+  "breadcrumbs": [
+    "Native Reference",
+    "PADAPI",
+    "SET_INPUT_EXCLUSIVE"
+  ],
+  "content": "0xEDE476E5EE29EDB10x4E8E29E6// SetInputExclusive\nvoid SET_INPUT_EXCLUSIVE(int padIndex, int control);Parameters:padIndex: The control system instance to use. See ENABLE_ALL_CONTROL_ACTIONS.control: The control ID to check.",
+  "codeBlocks": [
+    "// SetInputExclusive\nvoid SET_INPUT_EXCLUSIVE(int padIndex, int control);",
+    "-- Example usage for SET_INPUT_EXCLUSIVE\nSetInputExclusive(0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PAD/SetInputExclusive.md",
+    "https://docs.fivem.net/natives/?_0xA5FFE9B05F199DE7",
+    "https://docs.fivem.net/docs/game-references/controls/#controls",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

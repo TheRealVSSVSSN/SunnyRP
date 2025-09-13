@@ -1,0 +1,29 @@
+{
+  "title": "SET_PED_HEAD_BLEND_DATA",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "SET_PED_HEAD_BLEND_DATA"
+  ],
+  "content": "0x9414E18B9434C2FE0x60746B88// SetPedHeadBlendData\nvoid SET_PED_HEAD_BLEND_DATA(Ped ped, int shapeFirstID, int shapeSecondID, int shapeThirdID, int skinFirstID, int skinSecondID, int skinThirdID, float shapeMix, float skinMix, float thirdMix, BOOL isParent);Parameters:ped: The ped entityshapeFirstID: Controls the shape of the first ped's faceshapeSecondID: Controls the shape of the second ped's faceshapeThirdID: Controls the shape of the third ped's faceskinFirstID: Controls the first id's skin toneskinSecondID: Controls the second id's skin toneskinThirdID: Controls the third id's skin toneshapeMix: 0.0 - 1.0 Of whose characteristics to take Mother -> Father (shapeFirstID and shapeSecondID)skinMix: 0.0 - 1.0 Of whose characteristics to take Mother -> Father (skinFirstID and skinSecondID)thirdMix: Overrides the others in favor of the third IDs.isParent: IsParent is set for \"children\" of the player character's grandparents during old-gen character creation. It has unknown effect otherwise.For more info please refer to this topic.Other information:IDs start at zero and go Male Non-DLC, Female Non-DLC, Male DLC, and Female DLC.</br>This native function is often called prior to calling natives such as:SetPedHairColorSetPedHeadOverlayColorSetPedHeadOverlaySetPedFaceFeatureExamples:Lua-- Unfortunately, there's no clear way of getting the head blend data in lua out of the box, but there are wrappers:\n-- https://forum.cfx.re/t/small-c-export-event-wrapper-for-getpedheadblenddata/214611\nSetPedHeadBlendData(PlayerPedId(), 0, 0, 0, 0, 0, 0, 0, 0, 0, false)",
+  "codeBlocks": [
+    "// SetPedHeadBlendData\nvoid SET_PED_HEAD_BLEND_DATA(Ped ped, int shapeFirstID, int shapeSecondID, int shapeThirdID, int skinFirstID, int skinSecondID, int skinThirdID, float shapeMix, float skinMix, float thirdMix, BOOL isParent);",
+    "-- Unfortunately, there's no clear way of getting the head blend data in lua out of the box, but there are wrappers:\n-- https://forum.cfx.re/t/small-c-export-event-wrapper-for-getpedheadblenddata/214611\nSetPedHeadBlendData(PlayerPedId(), 0, 0, 0, 0, 0, 0, 0, 0, 0, false)",
+    "local ped = PlayerPedId()\n-- Example usage for SET_PED_HEAD_BLEND_DATA\nSetPedHeadBlendData(ped, 0, 0, 0, 0, 0, 0, 0.0, 0.0, 0.0, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/SetPedHeadBlendData.md",
+    "https://gtaforums.com/topic/858970-all-gtao-face-ids-pedset-ped-head-blend-data-explained",
+    "https://docs.fivem.net/natives/?_0xA23FE32C",
+    "https://docs.fivem.net/natives/?_0x78935A27",
+    "https://docs.fivem.net/natives/?_0xD28DBA90",
+    "https://docs.fivem.net/natives/?_0x6C8D4458",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

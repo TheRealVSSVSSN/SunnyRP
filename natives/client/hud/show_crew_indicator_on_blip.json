@@ -1,0 +1,26 @@
+{
+  "title": "SHOW_CREW_INDICATOR_ON_BLIP",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "SHOW_CREW_INDICATOR_ON_BLIP"
+  ],
+  "content": "0xDCFB5D4DB8BF367E0xABBE1E45// ShowCrewIndicatorOnBlip\nvoid SHOW_CREW_INDICATOR_ON_BLIP(Blip blip, BOOL toggle);Parameters:blip: The blip to toggle the half blue circle around the blip on.toggle: Enables or disables the half blue circle around the blip (on the left side).Enables or disables the blue half circle  around the specified blip on the left side of the blip. This is used to indicate that the player is in your crew in GTA:O. Color is changeable by using SET_BLIP_SECONDARY_COLOUR.To toggle the right side of the circle use: SHOW_FRIEND_INDICATOR_ON_BLIP.Example code result:\nOld name:  SET_BLIP_CREWExamples:Lualocal player = 1 -- make sure this is an actual player, dont just use this example code!\nlocal blip = GetBlipFromEntity(GetPlayerPed(player))\n\n-- Toggle the crew display.\nShowCrewIndicatorOnBlip(blip, true)\n\n-- Set the crew circle color.\n-- hud color 18 seems to be the closest color to the green crew color from GTA:O.\nSetBlipSecondaryColour(blip, GetHudColour(18))\n-- Result: https://i.imgur.com/iZ9tNWl.png",
+  "codeBlocks": [
+    "// ShowCrewIndicatorOnBlip\nvoid SHOW_CREW_INDICATOR_ON_BLIP(Blip blip, BOOL toggle);",
+    "local player = 1 -- make sure this is an actual player, dont just use this example code!\nlocal blip = GetBlipFromEntity(GetPlayerPed(player))\n\n-- Toggle the crew display.\nShowCrewIndicatorOnBlip(blip, true)\n\n-- Set the crew circle color.\n-- hud color 18 seems to be the closest color to the green crew color from GTA:O.\nSetBlipSecondaryColour(blip, GetHudColour(18))\n-- Result: https://i.imgur.com/iZ9tNWl.png",
+    "-- Example usage for SHOW_CREW_INDICATOR_ON_BLIP\nShowCrewIndicatorOnBlip(0, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/ShowCrewIndicatorOnBlip.md",
+    "https://docs.fivem.net/natives/?_0x14892474891E09EB",
+    "https://docs.fivem.net/natives/?_0x23C3EB807312F01A",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

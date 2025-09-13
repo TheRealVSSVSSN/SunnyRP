@@ -1,0 +1,24 @@
+{
+  "title": "PAUSE_MENU_ACTIVATE_CONTEXT",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "PAUSE_MENU_ACTIVATE_CONTEXT"
+  ],
+  "content": "0xDD564BDD0472C9360x9FE8FD5E// PauseMenuActivateContext\nvoid PAUSE_MENU_ACTIVATE_CONTEXT(Hash hash);Parameters:hash: Context name hash.Activates the specified frontend menu context.pausemenu.xml defines some specific menu options using 'context'. Context is basically a 'condition'.The *ALL* part of the context means that whatever is being defined, will be active when any or all of those conditions after *ALL* are met.The *NONE* part of the context section means that whatever is being defined, will NOT be active if any or all of the conditions after *NONE* are met.This basically allows you to hide certain menu sections, or things like instructional buttons.See the old description below for more info.Seems to add/set the current menu context (to show/hide buttons?)\nPausemenu.xml:\n<Contexts>*ALL*, DISPLAY_CORONA_BUTTONS, *NONE*, BET_LOCKED, BET_AVAILABLE, SCROLL_OPTION</Contexts>\nCode:if (...) {\n    sub_bbd34(a_0, 0, \"FM_BET_HELP\");\n    UI::PAUSE_MENU_ACTIVATE_CONTEXT(${bet_available}); // This native\n    UI::OBJECT_DECAL_TOGGLE(${bet_locked});\n} else {\n    sub_bbd34(a_0, 0, \"\");\n    UI::OBJECT_DECAL_TOGGLE(${bet_available});\n    UI::PAUSE_MENU_ACTIVATE_CONTEXT(${bet_locked}); // This native\n}\nOBJECT_DECAL_TOGGLE seems to remove a context, It also has a hash collision\n// Old\nScripts do not make this native's purpose clear. However, this native most likely has something to do with decals since in nearly every instance, \"OBJECT_DECAL_TOGGLE\" is called prior.Old name:  _ADD_FRONTEND_MENU_CONTEXT",
+  "codeBlocks": [
+    "// PauseMenuActivateContext\nvoid PAUSE_MENU_ACTIVATE_CONTEXT(Hash hash);",
+    "if (...) {\n    sub_bbd34(a_0, 0, \"FM_BET_HELP\");\n    UI::PAUSE_MENU_ACTIVATE_CONTEXT(${bet_available}); // This native\n    UI::OBJECT_DECAL_TOGGLE(${bet_locked});\n} else {\n    sub_bbd34(a_0, 0, \"\");\n    UI::OBJECT_DECAL_TOGGLE(${bet_available});\n    UI::PAUSE_MENU_ACTIVATE_CONTEXT(${bet_locked}); // This native\n}",
+    "-- Example usage for PAUSE_MENU_ACTIVATE_CONTEXT\nPauseMenuActivateContext(GetHashKey('prop'))"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/PauseMenuActivateContext.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

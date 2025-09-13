@@ -1,0 +1,24 @@
+{
+  "title": "TASK_SHOOT_AT_ENTITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "TASK_SHOOT_AT_ENTITY"
+  ],
+  "content": "0x08DA95E8298AE7720xAC0631C9// TaskShootAtEntity\nvoid TASK_SHOOT_AT_ENTITY(Entity entity, Entity target, int duration, Hash firingPattern);//this part of the code is to determine at which entity the player is aiming, for example if you want to create a mod where you give orders to peds\nEntity aimedentity;\nPlayer player = PLAYER::PLAYER_ID();\nPLAYER::_GET_AIMED_ENTITY(player, &aimedentity);\n//bg is an array of peds\nTASK::TASK_SHOOT_AT_ENTITY(bg[i], aimedentity, 5000, MISC::GET_HASH_KEY(\"FIRING_PATTERN_FULL_AUTO\"));\nin practical usage, getting the entity the player is aiming at and then task the peds to shoot at the entity, at a button press event would be better.\nFiring Pattern Hash Information: https://pastebin.com/Px036isB",
+  "codeBlocks": [
+    "// TaskShootAtEntity\nvoid TASK_SHOOT_AT_ENTITY(Entity entity, Entity target, int duration, Hash firingPattern);",
+    "//this part of the code is to determine at which entity the player is aiming, for example if you want to create a mod where you give orders to peds\nEntity aimedentity;\nPlayer player = PLAYER::PLAYER_ID();\nPLAYER::_GET_AIMED_ENTITY(player, &aimedentity);\n//bg is an array of peds\nTASK::TASK_SHOOT_AT_ENTITY(bg[i], aimedentity, 5000, MISC::GET_HASH_KEY(\"FIRING_PATTERN_FULL_AUTO\"));\nin practical usage, getting the entity the player is aiming at and then task the peds to shoot at the entity, at a button press event would be better.\nFiring Pattern Hash Information: https://pastebin.com/Px036isB",
+    "local entity = PlayerPedId()\n-- Example usage for TASK_SHOOT_AT_ENTITY\nTaskShootAtEntity(entity, entity, 0, GetHashKey('prop'))"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/TaskShootAtEntity.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "GET_DLC_VEHICLE_DATA",
+  "breadcrumbs": [
+    "Native Reference",
+    "FILESAPI",
+    "GET_DLC_VEHICLE_DATA"
+  ],
+  "content": "0x33468EDC08E371F60xCF428FA4// GetDlcVehicleData\nBOOL GET_DLC_VEHICLE_DATA(int dlcVehicleIndex, Any* outData);Parameters:dlcVehicleIndex: takes a number from 0 to GET_NUM_DLC_VEHICLES() - 1.outData: a struct of 3 8-byte items.Returns: A boolean value return if find or not the dlcVehicleIndex.The Second item in the struct *(Hash *)(outData + 1) is the vehicle hash.",
+  "codeBlocks": [
+    "// GetDlcVehicleData\nBOOL GET_DLC_VEHICLE_DATA(int dlcVehicleIndex, Any* outData);",
+    "-- Example usage for GET_DLC_VEHICLE_DATA\nGetDlcVehicleData(0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/FILES/GetDlcVehicleData.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

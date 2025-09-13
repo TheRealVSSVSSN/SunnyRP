@@ -1,0 +1,24 @@
+{
+  "title": "GET_SAFE_COORD_FOR_PED",
+  "breadcrumbs": [
+    "Native Reference",
+    "PATHFINDAPI",
+    "GET_SAFE_COORD_FOR_PED"
+  ],
+  "content": "0xB61C8E878A4199CA0xB370270A// GetSafeCoordForPed\nBOOL GET_SAFE_COORD_FOR_PED(float x, float y, float z, BOOL onlyOnPavement, Vector3* outPosition, int flags);Parameters:x: The X coordinate of the point to check.y: The Y coordinate of the point to check.z: The Z coordinate of the point to check.onlyOnPavement: Sets the GSC_FLAG_ONLY_PAVEMENT flag.outPosition: The location of the safe coord.flags: The search flags.Returns: Returns true if a safe coord was found and false otherwise.enum eSafePositionFlags {\n    // Only navmesh polygons marked as pavement\n    GSC_FLAG_ONLY_PAVEMENT = 1,\n    // Only navmesh polygons not marked as \"isolated\"\n    GSC_FLAG_NOT_ISOLATED = 2,\n    // No navmesh polygons created from interiors\n    GSC_FLAG_NOT_INTERIOR = 4,\n    // No navmesh polygons marked as water\n    GSC_FLAG_NOT_WATER = 8,\n    // Only navmesh polygons marked as \"network spawn candidate\"\n    GSC_FLAG_ONLY_NETWORK_SPAWN = 16,\n    // Specify whether to use a flood-fill from the starting position, as opposed to scanning all polygons within the search volume\n    GSC_FLAG_USE_FLOOD_FILL = 32\n}",
+  "codeBlocks": [
+    "// GetSafeCoordForPed\nBOOL GET_SAFE_COORD_FOR_PED(float x, float y, float z, BOOL onlyOnPavement, Vector3* outPosition, int flags);",
+    "enum eSafePositionFlags {\n    // Only navmesh polygons marked as pavement\n    GSC_FLAG_ONLY_PAVEMENT = 1,\n    // Only navmesh polygons not marked as \"isolated\"\n    GSC_FLAG_NOT_ISOLATED = 2,\n    // No navmesh polygons created from interiors\n    GSC_FLAG_NOT_INTERIOR = 4,\n    // No navmesh polygons marked as water\n    GSC_FLAG_NOT_WATER = 8,\n    // Only navmesh polygons marked as \"network spawn candidate\"\n    GSC_FLAG_ONLY_NETWORK_SPAWN = 16,\n    // Specify whether to use a flood-fill from the starting position, as opposed to scanning all polygons within the search volume\n    GSC_FLAG_USE_FLOOD_FILL = 32\n}",
+    "-- Example usage for GET_SAFE_COORD_FOR_PED\nGetSafeCoordForPed(0.0, 0.0, 0.0, false, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PATHFIND/GetSafeCoordForPed.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

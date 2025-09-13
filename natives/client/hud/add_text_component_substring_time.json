@@ -1,0 +1,25 @@
+{
+  "title": "ADD_TEXT_COMPONENT_SUBSTRING_TIME",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "ADD_TEXT_COMPONENT_SUBSTRING_TIME"
+  ],
+  "content": "0x1115F16B8AB9E8BF0x135B3CD0// AddTextComponentSubstringTime\nvoid ADD_TEXT_COMPONENT_SUBSTRING_TIME(int timestamp, int format);Parameters:timestamp: The timestamp in millisecondsformat: The format of the timestamp, as bitwise flagsTakes a time in milliseconds and converts it to a string. Use ~a~ to mark the position in your line of text where you want this substring inserted.enum eTimeFormat {\n    TEXT_FORMAT_MILLISECONDS = 1,\n    TEXT_FORMAT_SECONDS = 2,\n    TEXT_FORMAT_MINUTES = 4,\n    TEXT_FORMAT_HOURS = 8,\n    TEXT_FORMAT_DAYS = 16,\n    // e.g. show 12:20 not 00:12:20\n    TEXT_FORMAT_HIDE_LEADING_UNITS_EQUAL_TO_ZERO = 32,\n    // e.g. show 1:14 not 01:14\n    TEXT_FORMAT_HIDE_LEADING_ZEROS_ON_LEADING_UNITS = 64,\n    // e.g. show 3m24s not 3:24\n    TEXT_FORMAT_SHOW_UNIT_DIVIDERS_AS_LETTERS = 128,\n    // e.g. show 3m24 not 3m24s\n    TEXT_FORMAT_HIDE_UNIT_LETTER_FOR_SMALLEST_UNITS = 256,\n    // e.g. show 05:51 not 05:519\n    TEXT_FORMAT_HIDE_MILLISECONDS_UNITS_DIGIT = 512,\n    // e.g. show 05:5 not 05:519\n    TEXT_FORMAT_HIDE_MILLISECONDS_TENS_DIGIT = 1024,\n    // e.g. show 12.345 not 12:345\n    TEXT_FORMAT_USE_DOT_FOR_MILLISECOND_DIVIDER = 2048\n}\nExamples:Lua-- Renders the current game time in hours, minutes and seconds\nlocal time = GetGameTimer()\nAddTextEntry('TIME_LABEL', 'Game time: ~a~')\nBeginTextCommandDisplayText(\"TIME_LABEL\")\nAddTextComponentSubstringTime(time, 2 | 4 | 8)\nEndTextCommandDisplayText(0, 0)",
+  "codeBlocks": [
+    "// AddTextComponentSubstringTime\nvoid ADD_TEXT_COMPONENT_SUBSTRING_TIME(int timestamp, int format);",
+    "enum eTimeFormat {\n    TEXT_FORMAT_MILLISECONDS = 1,\n    TEXT_FORMAT_SECONDS = 2,\n    TEXT_FORMAT_MINUTES = 4,\n    TEXT_FORMAT_HOURS = 8,\n    TEXT_FORMAT_DAYS = 16,\n    // e.g. show 12:20 not 00:12:20\n    TEXT_FORMAT_HIDE_LEADING_UNITS_EQUAL_TO_ZERO = 32,\n    // e.g. show 1:14 not 01:14\n    TEXT_FORMAT_HIDE_LEADING_ZEROS_ON_LEADING_UNITS = 64,\n    // e.g. show 3m24s not 3:24\n    TEXT_FORMAT_SHOW_UNIT_DIVIDERS_AS_LETTERS = 128,\n    // e.g. show 3m24 not 3m24s\n    TEXT_FORMAT_HIDE_UNIT_LETTER_FOR_SMALLEST_UNITS = 256,\n    // e.g. show 05:51 not 05:519\n    TEXT_FORMAT_HIDE_MILLISECONDS_UNITS_DIGIT = 512,\n    // e.g. show 05:5 not 05:519\n    TEXT_FORMAT_HIDE_MILLISECONDS_TENS_DIGIT = 1024,\n    // e.g. show 12.345 not 12:345\n    TEXT_FORMAT_USE_DOT_FOR_MILLISECOND_DIVIDER = 2048\n}",
+    "-- Renders the current game time in hours, minutes and seconds\nlocal time = GetGameTimer()\nAddTextEntry('TIME_LABEL', 'Game time: ~a~')\nBeginTextCommandDisplayText(\"TIME_LABEL\")\nAddTextComponentSubstringTime(time, 2 | 4 | 8)\nEndTextCommandDisplayText(0, 0)",
+    "-- Example usage for ADD_TEXT_COMPONENT_SUBSTRING_TIME\nAddTextComponentSubstringTime(0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/AddTextComponentSubstringTime.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

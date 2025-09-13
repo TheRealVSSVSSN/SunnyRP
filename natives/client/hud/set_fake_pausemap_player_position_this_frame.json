@@ -1,0 +1,24 @@
+{
+  "title": "SET_FAKE_PAUSEMAP_PLAYER_POSITION_THIS_FRAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "SET_FAKE_PAUSEMAP_PLAYER_POSITION_THIS_FRAME"
+  ],
+  "content": "0x77E2DD177910E1CF0x54E75C7D// SetFakePausemapPlayerPositionThisFrame\nvoid SET_FAKE_PAUSEMAP_PLAYER_POSITION_THIS_FRAME(float x, float y);Parameters:x: X coord of the position.y: Y coord of the position.Overrides the position of the main player blip for the current frame.Old name:  _SET_PLAYER_BLIP_POSITION_THIS_FRAMEExamples:Lua-- Function to check if player is using the map\nlocal function IsPlayerUsingPausemap()\n  return IsPauseMenuActive() and GetNumberOfReferencesOfScriptWithNameHash(`pausemenu_map`) > 0\nend\n\nCitizen.CreateThread(function()\n  while true do\n    Wait(0) -- Not using Wait will cause the game to hang.\n\n    if IsPlayerUsingPausemap() and not IsPausemapInInteriorMode() then -- Make sure the player using the map and the map has switched view\n      SetFakePausemapPlayerPositionThisFrame(0.0, 0.0) -- Override position\n    end\n  end\nend)",
+  "codeBlocks": [
+    "// SetFakePausemapPlayerPositionThisFrame\nvoid SET_FAKE_PAUSEMAP_PLAYER_POSITION_THIS_FRAME(float x, float y);",
+    "-- Function to check if player is using the map\nlocal function IsPlayerUsingPausemap()\n  return IsPauseMenuActive() and GetNumberOfReferencesOfScriptWithNameHash(`pausemenu_map`) > 0\nend\n\nCitizen.CreateThread(function()\n  while true do\n    Wait(0) -- Not using Wait will cause the game to hang.\n\n    if IsPlayerUsingPausemap() and not IsPausemapInInteriorMode() then -- Make sure the player using the map and the map has switched view\n      SetFakePausemapPlayerPositionThisFrame(0.0, 0.0) -- Override position\n    end\n  end\nend)",
+    "-- Example usage for SET_FAKE_PAUSEMAP_PLAYER_POSITION_THIS_FRAME\nSetFakePausemapPlayerPositionThisFrame(0.0, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/SetFakePausemapPlayerPositionThisFrame.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

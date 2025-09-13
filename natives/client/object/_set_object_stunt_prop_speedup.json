@@ -1,0 +1,23 @@
+{
+  "title": "_SET_OBJECT_STUNT_PROP_SPEEDUP",
+  "breadcrumbs": [
+    "Native Reference",
+    "OBJECTAPI",
+    "_SET_OBJECT_STUNT_PROP_SPEEDUP"
+  ],
+  "content": "0x96EE0EBA0163DF80// SetObjectStuntPropSpeedup\nvoid _SET_OBJECT_STUNT_PROP_SPEEDUP(Object object, int intensity);Parameters:object: A Speed Boost or Slow Down propintensity: Ranges from 1-254, other values are ignored. Higher values will increase the effect of Speed Boosts and decrease the effect of Slow Downs.Sets the intensity of Speed Boost and Slow Down props.The corresponding values for Speed Boosts in the Creator are:\\\nWeak: 15\\\nNormal: 25\\\nStrong: 35\\\nExtra Strong: 45\\\nUltra Strong: 100For Slow Downs:\\\nWeak: 44\\\nNormal: 30\\\nStrong: 16",
+  "codeBlocks": [
+    "// SetObjectStuntPropSpeedup\nvoid _SET_OBJECT_STUNT_PROP_SPEEDUP(Object object, int intensity);",
+    "-- Example usage for _SET_OBJECT_STUNT_PROP_SPEEDUP\n_SetObjectStuntPropSpeedup(0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/OBJECT/SetObjectStuntPropSpeedup.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

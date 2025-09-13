@@ -1,0 +1,25 @@
+{
+  "title": "BEGIN_TEXT_COMMAND_IS_THIS_HELP_MESSAGE_BEING_DISPLAYED",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "BEGIN_TEXT_COMMAND_IS_THIS_HELP_MESSAGE_BEING_DISPLAYED"
+  ],
+  "content": "0x0A24DA3A41B718F50x00E20F2D// BeginTextCommandIsThisHelpMessageBeingDisplayed\nvoid BEGIN_TEXT_COMMAND_IS_THIS_HELP_MESSAGE_BEING_DISPLAYED(char* labelName);Parameters:labelName: Text entry name. This can be created using AddTextEntry.Examples:Lua-- Create new text entry\nAddTextEntry('TEST_LABEL', 'Hello world.')\n\n-- Draw help message\nBeginTextCommandDisplayHelp('TEST_LABEL')\nEndTextCommandDisplayHelp(0, false, true, -1)\n\n-- Test if the message has been displayed\nBeginTextCommandIsThisHelpMessageBeingDisplayed(\"TEST_LABEL\")\nlocal isDisplayed = EndTextCommandIsThisHelpMessageBeingDisplayed(0)",
+  "codeBlocks": [
+    "// BeginTextCommandIsThisHelpMessageBeingDisplayed\nvoid BEGIN_TEXT_COMMAND_IS_THIS_HELP_MESSAGE_BEING_DISPLAYED(char* labelName);",
+    "-- Create new text entry\nAddTextEntry('TEST_LABEL', 'Hello world.')\n\n-- Draw help message\nBeginTextCommandDisplayHelp('TEST_LABEL')\nEndTextCommandDisplayHelp(0, false, true, -1)\n\n-- Test if the message has been displayed\nBeginTextCommandIsThisHelpMessageBeingDisplayed(\"TEST_LABEL\")\nlocal isDisplayed = EndTextCommandIsThisHelpMessageBeingDisplayed(0)",
+    "-- Example usage for BEGIN_TEXT_COMMAND_IS_THIS_HELP_MESSAGE_BEING_DISPLAYED\nBeginTextCommandIsThisHelpMessageBeingDisplayed('')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/BeginTextCommandIsThisHelpMessageBeingDisplayed.md",
+    "https://docs.fivem.net/natives/?_0x32CA01C3",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

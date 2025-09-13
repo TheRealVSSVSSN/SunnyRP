@@ -1,0 +1,25 @@
+{
+  "title": "REMOVE_BLIP",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "REMOVE_BLIP"
+  ],
+  "content": "0x86A652570E5F25DD0xD8C3C1CD// RemoveBlip\nvoid REMOVE_BLIP(Blip* blip);Parameters:blip: Blip handle to remove.Removes the blip from your map.Note: This function only works on the script that created the blip, if you wish to remove blips created by other scripts, see SET_THIS_SCRIPT_CAN_REMOVE_BLIPS_CREATED_BY_ANY_SCRIPT.Examples:Lua-- Create the blip\nlocal coords = vector3(200.0, 200.0, 5.0)\nlocal blip = AddBlipForCoord(coords)\n\n-- When you want to remove it\nRemoveBlip(blip)",
+  "codeBlocks": [
+    "// RemoveBlip\nvoid REMOVE_BLIP(Blip* blip);",
+    "-- Create the blip\nlocal coords = vector3(200.0, 200.0, 5.0)\nlocal blip = AddBlipForCoord(coords)\n\n-- When you want to remove it\nRemoveBlip(blip)",
+    "-- Example usage for REMOVE_BLIP\nRemoveBlip(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/RemoveBlip.md",
+    "https://docs.fivem.net/natives/?_0x86A652570E5F25DD",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

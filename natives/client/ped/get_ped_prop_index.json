@@ -1,0 +1,24 @@
+{
+  "title": "GET_PED_PROP_INDEX",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "GET_PED_PROP_INDEX"
+  ],
+  "content": "0x898CC20EA75BACD80x746DDAC0// GetPedPropIndex\nint GET_PED_PROP_INDEX(Ped ped, int componentId);Parameters:ped: The ped handle.componentId: The component id to get the prop index from. Refer to SET_PED_COMPONENT_VARIATION.",
+  "codeBlocks": [
+    "// GetPedPropIndex\nint GET_PED_PROP_INDEX(Ped ped, int componentId);",
+    "local ped = PlayerPedId()\n-- Example usage for GET_PED_PROP_INDEX\nGetPedPropIndex(ped, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/GetPedPropIndex.md",
+    "https://docs.fivem.net/natives/?_0x262B14F48D29DE80",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

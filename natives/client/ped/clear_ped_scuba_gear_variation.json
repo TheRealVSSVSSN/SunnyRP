@@ -1,0 +1,23 @@
+{
+  "title": "CLEAR_PED_SCUBA_GEAR_VARIATION",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "CLEAR_PED_SCUBA_GEAR_VARIATION"
+  ],
+  "content": "0xB50EB4CCB29704AC0x080275EE// ClearPedScubaGearVariation\nvoid CLEAR_PED_SCUBA_GEAR_VARIATION(Ped ped);Parameters:ped: The ped to remove the scuba gear from.Removes the scubagear (for mp male: component id: 8, drawableId: 123, textureId: any) from peds. Does not play the 'remove scuba gear' animation, but instantly removes it.Old name:  _REMOVE_PED_SCUBA_GEAR_NOW",
+  "codeBlocks": [
+    "// ClearPedScubaGearVariation\nvoid CLEAR_PED_SCUBA_GEAR_VARIATION(Ped ped);",
+    "local ped = PlayerPedId()\n-- Example usage for CLEAR_PED_SCUBA_GEAR_VARIATION\nClearPedScubaGearVariation(ped)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/ClearPedScubaGearVariation.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

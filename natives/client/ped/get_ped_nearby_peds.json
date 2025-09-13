@@ -1,0 +1,24 @@
+{
+  "title": "GET_PED_NEARBY_PEDS",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "GET_PED_NEARBY_PEDS"
+  ],
+  "content": "0x23F8F5FC7E8C4A6B0x4D3325F4// GetPedNearbyPeds\nint GET_PED_NEARBY_PEDS(Ped ped, int* sizeAndPeds, int ignore);Console/PC structure definitions and example: pastebin.com/SsFej963For FiveM/Cfx.Re use-cases refer to: GET_GAME_POOL.",
+  "codeBlocks": [
+    "// GetPedNearbyPeds\nint GET_PED_NEARBY_PEDS(Ped ped, int* sizeAndPeds, int ignore);",
+    "local ped = PlayerPedId()\n-- Example usage for GET_PED_NEARBY_PEDS\nGetPedNearbyPeds(ped, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/GetPedNearbyPeds.md",
+    "https://docs.fivem.net/natives/?_0x2B9D4F50",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}
