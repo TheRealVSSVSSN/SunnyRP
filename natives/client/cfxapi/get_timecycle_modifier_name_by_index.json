@@ -1,0 +1,23 @@
+{
+  "title": "GET_TIMECYCLE_MODIFIER_NAME_BY_INDEX",
+  "content": "0x28CB8608// GetTimecycleModifierNameByIndex\nchar* GET_TIMECYCLE_MODIFIER_NAME_BY_INDEX(int modifierIndex);Parameters:modifierIndex: The timecycle modifier index.Returns: The timecycle modifier name.Examples:Lualocal modifierIndex = GetTimecycleModifierIndex()\n\nif modifierIndex ~= -1 then\n  local modifierName = GetTimecycleModifierNameByIndex(modifierIndex)\n  print(\"current timecycle name is \" .. modifierName)\nend",
+  "codeBlocks": [
+    "// GetTimecycleModifierNameByIndex\nchar* GET_TIMECYCLE_MODIFIER_NAME_BY_INDEX(int modifierIndex);",
+    "local modifierIndex = GetTimecycleModifierIndex()\n\nif modifierIndex ~= -1 then\n  local modifierName = GetTimecycleModifierNameByIndex(modifierIndex)\n  print(\"current timecycle name is \" .. modifierName)\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetTimecycleModifierNameByIndex.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_TIMECYCLE_MODIFIER_NAME_BY_INDEX"
+  ],
+  "tags": [
+    "client"
+  ]
+}

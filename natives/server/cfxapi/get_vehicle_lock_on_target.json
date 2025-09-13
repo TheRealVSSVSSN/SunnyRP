@@ -1,0 +1,22 @@
+{
+  "title": "GET_VEHICLE_LOCK_ON_TARGET",
+  "content": "0x4A557117// GetVehicleLockOnTarget\nVehicle GET_VEHICLE_LOCK_ON_TARGET(Vehicle vehicle);Parameters:vehicle: The vehicle to check.Returns: The vehicle that is locked on. 0 returned if no vehicle is locked on.Gets the vehicle that is locked on to for the specified vehicle.",
+  "codeBlocks": [
+    "// GetVehicleLockOnTarget\nVehicle GET_VEHICLE_LOCK_ON_TARGET(Vehicle vehicle);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetVehicleLockOnTarget.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_VEHICLE_LOCK_ON_TARGET"
+  ],
+  "tags": [
+    "server"
+  ]
+}

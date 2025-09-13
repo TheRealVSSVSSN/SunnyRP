@@ -1,0 +1,24 @@
+{
+  "title": "GET_WEAPON_ANIMATION_OVERRIDE",
+  "content": "0x63ED2E7// GetWeaponAnimationOverride\nHash GET_WEAPON_ANIMATION_OVERRIDE(Ped ped);Parameters:ped: The target ped.Returns: The weapon animation override.A getter for SET_WEAPON_ANIMATION_OVERRIDE.Examples:Lualocal weaponAnimation = GetWeaponAnimationOverride(PlayerPedId())",
+  "codeBlocks": [
+    "// GetWeaponAnimationOverride\nHash GET_WEAPON_ANIMATION_OVERRIDE(Ped ped);",
+    "local weaponAnimation = GetWeaponAnimationOverride(PlayerPedId())"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetWeaponAnimationOverride.md",
+    "https://docs.fivem.net/natives/?_0x1055AC3A667F09D9",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_WEAPON_ANIMATION_OVERRIDE"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "GET_VEHICLE_TOP_SPEED_MODIFIER",
+  "content": "0x998B7FEE// GetVehicleTopSpeedModifier\nfloat GET_VEHICLE_TOP_SPEED_MODIFIER(Vehicle vehicle);Parameters:vehicle: The target vehicle.Returns: Returns vehicle's modified top speed.A getter for MODIFY_VEHICLE_TOP_SPEED. Returns -1.0 if a modifier is not set.",
+  "codeBlocks": [
+    "// GetVehicleTopSpeedModifier\nfloat GET_VEHICLE_TOP_SPEED_MODIFIER(Vehicle vehicle);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetVehicleTopSpeedModifier.md",
+    "https://docs.fivem.net/natives/?_0x93A3996368C94158",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_VEHICLE_TOP_SPEED_MODIFIER"
+  ],
+  "tags": [
+    "client"
+  ]
+}

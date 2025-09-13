@@ -1,0 +1,23 @@
+{
+  "title": "GET_WATER_QUAD_HAS_LIMITED_DEPTH",
+  "content": "0x22EA3BD8// GetWaterQuadHasLimitedDepth\nBOOL GET_WATER_QUAD_HAS_LIMITED_DEPTH(int waterQuad, int* hasLimitedDepth);Parameters:waterQuad: The water quad indexhasLimitedDepth: Returns: Returns if the given water quad has a limited depth.Examples:Lualocal success, hasLimitedDepth = GetWaterQuadHasLimitedDepth(0)",
+  "codeBlocks": [
+    "// GetWaterQuadHasLimitedDepth\nBOOL GET_WATER_QUAD_HAS_LIMITED_DEPTH(int waterQuad, int* hasLimitedDepth);",
+    "local success, hasLimitedDepth = GetWaterQuadHasLimitedDepth(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetWaterQuadHasLimitedDepth.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_WATER_QUAD_HAS_LIMITED_DEPTH"
+  ],
+  "tags": [
+    "client"
+  ]
+}

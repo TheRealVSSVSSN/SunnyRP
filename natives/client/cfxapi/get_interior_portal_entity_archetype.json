@@ -1,0 +1,23 @@
+{
+  "title": "GET_INTERIOR_PORTAL_ENTITY_ARCHETYPE",
+  "content": "0x9A0E1700// GetInteriorPortalEntityArchetype\nint GET_INTERIOR_PORTAL_ENTITY_ARCHETYPE(int interiorId, int portalIndex, int entityIndex);Parameters:interiorId: The target interior.portalIndex: Interior portal index.entityIndex: Portal entity index.Returns: Portal entity archetype.Examples:Lualocal playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\nlocal portalIndex = 0\n\nif interiorId ~= 0 then\n  local count = GetInteriorPortalEntityCount(interiorId, portalIndex)\n  for i=0, count-1 do\n    local archetype = GetInteriorPortalEntityArchetype(interiorId, portalIndex, i)\n    print(\"portal \" .. portalIndex ..\" entity \" .. i .. \" archetype is: \" .. archetype)\n  end\nend",
+  "codeBlocks": [
+    "// GetInteriorPortalEntityArchetype\nint GET_INTERIOR_PORTAL_ENTITY_ARCHETYPE(int interiorId, int portalIndex, int entityIndex);",
+    "local playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\nlocal portalIndex = 0\n\nif interiorId ~= 0 then\n  local count = GetInteriorPortalEntityCount(interiorId, portalIndex)\n  for i=0, count-1 do\n    local archetype = GetInteriorPortalEntityArchetype(interiorId, portalIndex, i)\n    print(\"portal \" .. portalIndex ..\" entity \" .. i .. \" archetype is: \" .. archetype)\n  end\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetInteriorPortalEntityArchetype.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_INTERIOR_PORTAL_ENTITY_ARCHETYPE"
+  ],
+  "tags": [
+    "client"
+  ]
+}

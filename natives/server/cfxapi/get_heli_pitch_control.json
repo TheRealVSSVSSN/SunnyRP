@@ -1,0 +1,22 @@
+{
+  "title": "GET_HELI_PITCH_CONTROL",
+  "content": "0x1944AC95// GetHeliPitchControl\nfloat GET_HELI_PITCH_CONTROL(Vehicle heli);Parameters:heli: The helicopter to check.Returns: Returns a value representing the pitch control of the helicopter. The values range from -1.0 (nose down) to 1.0 (nose up), with 0.0 indicating no pitch input.",
+  "codeBlocks": [
+    "// GetHeliPitchControl\nfloat GET_HELI_PITCH_CONTROL(Vehicle heli);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetHeliPitchControl.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_HELI_PITCH_CONTROL"
+  ],
+  "tags": [
+    "server"
+  ]
+}

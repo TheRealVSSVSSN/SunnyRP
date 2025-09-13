@@ -1,0 +1,23 @@
+{
+  "title": "GET_WAVE_QUAD_AMPLITUDE",
+  "content": "0x865139A3// GetWaveQuadAmplitude\nBOOL GET_WAVE_QUAD_AMPLITUDE(int waveQuad, float* waveQuadAmplitude);Parameters:waveQuad: The wave quad indexwaveQuadAmplitude: Returns: Returns true on success. Amplitude is undefined on failureExamples:Lualocal success, amplitude = GetWaveQuadAmplitude(1)",
+  "codeBlocks": [
+    "// GetWaveQuadAmplitude\nBOOL GET_WAVE_QUAD_AMPLITUDE(int waveQuad, float* waveQuadAmplitude);",
+    "local success, amplitude = GetWaveQuadAmplitude(1)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetWaveQuadAmplitude.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_WAVE_QUAD_AMPLITUDE"
+  ],
+  "tags": [
+    "client"
+  ]
+}

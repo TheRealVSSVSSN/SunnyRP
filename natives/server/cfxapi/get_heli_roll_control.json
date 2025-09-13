@@ -1,0 +1,22 @@
+{
+  "title": "GET_HELI_ROLL_CONTROL",
+  "content": "0x12948DE9// GetHeliRollControl\nfloat GET_HELI_ROLL_CONTROL(Vehicle heli);Parameters:heli: The helicopter to check.Returns: Returns a value representing the roll control of the helicopter. The values range from -1.0 (roll left) to 1.0 (roll right), with 0.0 indicating no roll input.",
+  "codeBlocks": [
+    "// GetHeliRollControl\nfloat GET_HELI_ROLL_CONTROL(Vehicle heli);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetHeliRollControl.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_HELI_ROLL_CONTROL"
+  ],
+  "tags": [
+    "server"
+  ]
+}
