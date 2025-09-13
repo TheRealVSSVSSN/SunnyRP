@@ -1,0 +1,23 @@
+{
+  "title": "SET_VEHICLE_FUEL_LEVEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_VEHICLE_FUEL_LEVEL"
+  ],
+  "content": "0x843C985D// SetVehicleFuelLevel\nvoid SET_VEHICLE_FUEL_LEVEL(Vehicle vehicle, float level);Sets a vehicle's fuel level in liters.",
+  "codeBlocks": [
+    "// SET_VEHICLE_FUEL_LEVEL\nvoid SET_VEHICLE_FUEL_LEVEL(Vehicle vehicle, float level);",
+    "-- Example usage for SET_VEHICLE_FUEL_LEVEL\nlocal veh = GetVehiclePedIsIn(PlayerPedId(), false)\nSetVehicleFuelLevel(veh, 65.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetVehicleFuelLevel.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

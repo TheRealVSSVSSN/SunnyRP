@@ -1,0 +1,23 @@
+{
+  "title": "GET_FUEL_CONSUMPTION_STATE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_FUEL_CONSUMPTION_STATE"
+  ],
+  "content": "0x9B4F5E// GetFuelConsumptionState\nbool GET_FUEL_CONSUMPTION_STATE(Vehicle vehicle);Returns whether fuel consumption is enabled for the specified vehicle.",
+  "codeBlocks": [
+    "// GET_FUEL_CONSUMPTION_STATE\nbool GET_FUEL_CONSUMPTION_STATE(Vehicle vehicle);",
+    "-- Example usage for GET_FUEL_CONSUMPTION_STATE\nlocal veh = GetVehiclePedIsIn(PlayerPedId(), false)\nif GetFuelConsumptionState(veh) then\n    SetVehicleFuelLevel(veh, 100.0)\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetFuelConsumptionState.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

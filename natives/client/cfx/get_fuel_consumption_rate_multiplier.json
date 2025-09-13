@@ -1,0 +1,23 @@
+{
+  "title": "GET_FUEL_CONSUMPTION_RATE_MULTIPLIER",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_FUEL_CONSUMPTION_RATE_MULTIPLIER"
+  ],
+  "content": "0xEB2131// GetFuelConsumptionRateMultiplier\nfloat GET_FUEL_CONSUMPTION_RATE_MULTIPLIER(Vehicle vehicle);Returns the current fuel consumption rate multiplier for a vehicle.",
+  "codeBlocks": [
+    "// GET_FUEL_CONSUMPTION_RATE_MULTIPLIER\nfloat GET_FUEL_CONSUMPTION_RATE_MULTIPLIER(Vehicle vehicle);",
+    "-- Example usage for GET_FUEL_CONSUMPTION_RATE_MULTIPLIER\nlocal veh = GetVehiclePedIsIn(PlayerPedId(), false)\nlocal rate = GetFuelConsumptionRateMultiplier(veh)\nif rate > 1.5 then\n    SetFuelConsumptionRateMultiplier(veh, 1.0)\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetFuelConsumptionRateMultiplier.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}
