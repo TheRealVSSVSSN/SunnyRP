@@ -1,0 +1,23 @@
+{
+  "title": "REQUEST_VEHICLE_RECORDING",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "REQUEST_VEHICLE_RECORDING"
+  ],
+  "content": "0xAF514CABE74CBF150x91AFEFD9// RequestVehicleRecording\nvoid REQUEST_VEHICLE_RECORDING(int recording, char* script);Request the vehicle recording defined by the lowercase format string \"%s%03d.yvr\". For example, REQUEST_VEHICLE_RECORDING(1, \"FBIs1UBER\") corresponds to fbis1uber001.yvr.\nFor all vehicle recording/playback natives, \"script\" is a common prefix that usually corresponds to the script/mission the recording is used in, \"recording\" is its int suffix, and \"id\" (e.g., in native GET_TOTAL_DURATION_OF_VEHICLE_RECORDING_ID) corresponds to a unique identifier within the recording streaming module.\nNote that only 24 recordings (hardcoded in multiple places) can ever active at a given time before clobbering begins.",
+  "codeBlocks": [
+    "// RequestVehicleRecording\nvoid REQUEST_VEHICLE_RECORDING(int recording, char* script);",
+    "Request the vehicle recording defined by the lowercase format string \"%s%03d.yvr\". For example, REQUEST_VEHICLE_RECORDING(1, \"FBIs1UBER\") corresponds to fbis1uber001.yvr.\nFor all vehicle recording/playback natives, \"script\" is a common prefix that usually corresponds to the script/mission the recording is used in, \"recording\" is its int suffix, and \"id\" (e.g., in native GET_TOTAL_DURATION_OF_VEHICLE_RECORDING_ID) corresponds to a unique identifier within the recording streaming module.\nNote that only 24 recordings (hardcoded in multiple places) can ever active at a given time before clobbering begins.\n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/RequestVehicleRecording.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

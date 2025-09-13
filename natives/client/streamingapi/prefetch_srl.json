@@ -1,0 +1,25 @@
+{
+  "title": "PREFETCH_SRL",
+  "breadcrumbs": [
+    "Native Reference",
+    "STREAMINGAPI",
+    "PREFETCH_SRL"
+  ],
+  "content": "0x3D245789CE12982C0x37BE2FBB// PrefetchSrl\nvoid PREFETCH_SRL(char* srl);Parameters:srl: A SRL name.This native is used to attribute the SRL that BeginSrl is going to load. This is usually used for 'in-game' cinematics (not cutscenes but camera stuff) instead of SetFocusArea because it loads a specific area of the map which is pretty useful when the camera moves from distant areas.\nFor instance, GTA:O opening cutscene.https://pastebin.com/2EeKVeLA : a list of SRL found in srllist.meta\nhttps://pastebin.com/zd9XYUWY : here is the content of a SRL file opened with codewalker.Examples:LuaPrefetchSrl('GTAO_INTRO_MALE')\nwhile not IsSrlLoaded() do\n\tCitizen.Wait(100)\nend\nBeginSrl()",
+  "codeBlocks": [
+    "// PrefetchSrl\nvoid PREFETCH_SRL(char* srl);",
+    "PrefetchSrl('GTAO_INTRO_MALE')\nwhile not IsSrlLoaded() do\n\tCitizen.Wait(100)\nend\nBeginSrl()\n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/STREAMING/PrefetchSrl.md",
+    "https://pastebin.com/2EeKVeLA",
+    "https://pastebin.com/zd9XYUWY",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

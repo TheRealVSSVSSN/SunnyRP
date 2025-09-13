@@ -1,0 +1,23 @@
+{
+  "title": "IS_PLAYER_SWITCH_IN_PROGRESS",
+  "breadcrumbs": [
+    "Native Reference",
+    "STREAMINGAPI",
+    "IS_PLAYER_SWITCH_IN_PROGRESS"
+  ],
+  "content": "0xD9D2CFFF49FAB35F0x56135ACC// IsPlayerSwitchInProgress\nBOOL IS_PLAYER_SWITCH_IN_PROGRESS();Returns true if the player is currently switching, false otherwise.  \n(When the camera is in the sky moving from Trevor to Franklin for example)",
+  "codeBlocks": [
+    "// IsPlayerSwitchInProgress\nBOOL IS_PLAYER_SWITCH_IN_PROGRESS();",
+    "Returns true if the player is currently switching, false otherwise.  \n(When the camera is in the sky moving from Trevor to Franklin for example)  \n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/STREAMING/IsPlayerSwitchInProgress.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

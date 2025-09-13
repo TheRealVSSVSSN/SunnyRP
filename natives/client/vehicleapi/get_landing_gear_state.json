@@ -1,0 +1,23 @@
+{
+  "title": "GET_LANDING_GEAR_STATE",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "GET_LANDING_GEAR_STATE"
+  ],
+  "content": "0x9B0F3DCA3DB0F4CD0xA6F02670// GetLandingGearState\nint GET_LANDING_GEAR_STATE(Vehicle vehicle);Parameters:vehicle: The vehicle to check.Returns: The current state of the vehicles landing gear.Landing gear states:  \n0: Deployed  \n1: Closing (Retracting)\n3: Opening (Deploying)\n4: Retracted  \n5: Broken\nLanding gear state 2 is never used.Old name:  _GET_VEHICLE_LANDING_GEAR",
+  "codeBlocks": [
+    "// GetLandingGearState\nint GET_LANDING_GEAR_STATE(Vehicle vehicle);",
+    "Landing gear states:  \n0: Deployed  \n1: Closing (Retracting)\n3: Opening (Deploying)\n4: Retracted  \n5: Broken\n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/GetLandingGearState.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

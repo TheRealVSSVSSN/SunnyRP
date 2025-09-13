@@ -1,0 +1,25 @@
+{
+  "title": "LOWER_CONVERTIBLE_ROOF",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "LOWER_CONVERTIBLE_ROOF"
+  ],
+  "content": "0xDED51F703D0FA83D0xC5F72EAE// LowerConvertibleRoof\nvoid LOWER_CONVERTIBLE_ROOF(Vehicle vehicle, BOOL instantlyLower);Parameters:vehicle: The convertible vehicle whose roof you want to lower.instantlyLower: A boolean value indicating whether the roof should be lowered instantly without transitioning through the animation. Set to false to lower the roof with the animation or true to lower it instantly.Lowers the roof on a convertible vehicle, utilizing any available animations for the action. This native is particularly useful for creating a realistic interaction with convertible vehicles by animating the process of lowering the roof.You can check if the vehicle has an convertible roof using IS_VEHICLE_A_CONVERTIBLE.NativeDB Introduced: v323Examples:LuaJavaScriptC#local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\nif not IsVehicleAConvertible(vehicle, false) then return end\nLowerConvertibleRoof(vehicle, false)",
+  "codeBlocks": [
+    "// LowerConvertibleRoof\nvoid LOWER_CONVERTIBLE_ROOF(Vehicle vehicle, BOOL instantlyLower);",
+    "NativeDB Introduced: v323",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\nif not IsVehicleAConvertible(vehicle, false) then return end\nLowerConvertibleRoof(vehicle, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/LowerConvertibleRoof.md",
+    "https://docs.fivem.net/natives/?_0x52F357A30698BCCE",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

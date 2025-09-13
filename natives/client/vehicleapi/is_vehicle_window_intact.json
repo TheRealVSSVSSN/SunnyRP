@@ -1,0 +1,23 @@
+{
+  "title": "IS_VEHICLE_WINDOW_INTACT",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "IS_VEHICLE_WINDOW_INTACT"
+  ],
+  "content": "0x46E571A0E20D01F10xAC4EF23D// IsVehicleWindowIntact\nBOOL IS_VEHICLE_WINDOW_INTACT(Vehicle vehicle, int windowIndex);Parameters:vehicle: The vehicle handlewindowIndex: The index of the windowenum eWindowId {\n\tVEH_EXT_WINDOW_LF = 0,\n\tVEH_EXT_WINDOW_RF = 1,\n\tVEH_EXT_WINDOW_LR = 2,\n\tVEH_EXT_WINDOW_RR = 3,\n\tVEH_EXT_WINDOW_LM = 4,\n\tVEH_EXT_WINDOW_RM = 5,\n\tVEH_EXT_WINDSCREEN = 6,\n\tVEH_EXT_WINDSCREEN_R = 7,\n}",
+  "codeBlocks": [
+    "// IsVehicleWindowIntact\nBOOL IS_VEHICLE_WINDOW_INTACT(Vehicle vehicle, int windowIndex);",
+    "enum eWindowId {\n\tVEH_EXT_WINDOW_LF = 0,\n\tVEH_EXT_WINDOW_RF = 1,\n\tVEH_EXT_WINDOW_LR = 2,\n\tVEH_EXT_WINDOW_RR = 3,\n\tVEH_EXT_WINDOW_LM = 4,\n\tVEH_EXT_WINDOW_RM = 5,\n\tVEH_EXT_WINDSCREEN = 6,\n\tVEH_EXT_WINDSCREEN_R = 7,\n}\n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/IsVehicleWindowIntact.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

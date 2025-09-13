@@ -1,0 +1,23 @@
+{
+  "title": "SET_ISLAND_ENABLED",
+  "breadcrumbs": [
+    "Native Reference",
+    "STREAMINGAPI",
+    "SET_ISLAND_ENABLED"
+  ],
+  "content": "0x9A9D1BA639675CF1// SetIslandEnabled\nvoid SET_ISLAND_ENABLED(char* islandName, BOOL toggle);Parameters:islandName: The name of the island to be enabled or disabled.toggle: A boolean value where true enables the island and false disables it.Enables the specified island. For more information, see islandhopper.metaNativeDB Introduced: v2189Old name:  _SET_ISLAND_HOPPER_ENABLED",
+  "codeBlocks": [
+    "// SetIslandEnabled\nvoid SET_ISLAND_ENABLED(char* islandName, BOOL toggle);",
+    "NativeDB Introduced: v2189"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/STREAMING/SetIslandEnabled.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "SET_ENTITY_HEADING",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENTITYAPI",
+    "SET_ENTITY_HEADING"
+  ],
+  "content": "0x8E2530AA8ADA980E0xE0FF064D// SetEntityHeading\nvoid SET_ENTITY_HEADING(Entity entity, float heading);Parameters:entity: The entity to set the heading for.heading: The heading in degrees.Set the heading of an entity in degrees also known as \"Yaw\".Examples:LuaJavaScriptC#SetEntityHeading(PlayerPedId(), 40.0)",
+  "codeBlocks": [
+    "// SetEntityHeading\nvoid SET_ENTITY_HEADING(Entity entity, float heading);",
+    "SetEntityHeading(PlayerPedId(), 40.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/SetEntityHeading.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

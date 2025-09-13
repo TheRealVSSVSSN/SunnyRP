@@ -1,0 +1,22 @@
+{
+  "title": "SET_AMBIENT_VEHICLE_RANGE_MULTIPLIER_THIS_FRAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "SET_AMBIENT_VEHICLE_RANGE_MULTIPLIER_THIS_FRAME"
+  ],
+  "content": "0x90B6DA738A9A25DA0xDAE2A2BE// SetAmbientVehicleRangeMultiplierThisFrame\nvoid SET_AMBIENT_VEHICLE_RANGE_MULTIPLIER_THIS_FRAME(float range);Parameters:range: Most likely a value between 0.0 and 1.0.Old name:  _SET_SOME_VEHICLE_DENSITY_MULTIPLIER_THIS_FRAME",
+  "codeBlocks": [
+    "// SetAmbientVehicleRangeMultiplierThisFrame\nvoid SET_AMBIENT_VEHICLE_RANGE_MULTIPLIER_THIS_FRAME(float range);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetAmbientVehicleRangeMultiplierThisFrame.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

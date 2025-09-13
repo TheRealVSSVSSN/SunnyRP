@@ -1,0 +1,24 @@
+{
+  "title": "SET_VEHICLE_GENERATOR_AREA_OF_INTEREST",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "SET_VEHICLE_GENERATOR_AREA_OF_INTEREST"
+  ],
+  "content": "0x9A75585FB2E54FAD0x935A95DA// SetVehicleGeneratorAreaOfInterest\nvoid SET_VEHICLE_GENERATOR_AREA_OF_INTEREST(float x, float y, float z, float radius);Parameters:x: The X coordinate of the central point of the area of interest.y: The Y coordinate of the central point of the area of interest.z: The Z coordinate of the central point of the area of interest.radius: The radius around the central point, defining the size of the area of interestSpecifies an area of interest where cargens will focus on spawning vehiclesYou can clear the area of interest with CLEAR_VEHICLE_GENERATOR_AREA_OF_INTERESTExamples:LuaJavaScriptC#-- This example sets the area of interest (cargen) to the player's position with a radius of 100.0\n\n-- Retrieve the player ped\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the coordinates of the player.\nlocal coords = GetEntityCoords(playerPed, false)\n\n-- Set the area of interest to the player's position with a radius of 100.0\nSetVehicleGeneratorAreaOfInterest(coords.x, coords.y, coords.z, 100.0)",
+  "codeBlocks": [
+    "// SetVehicleGeneratorAreaOfInterest\nvoid SET_VEHICLE_GENERATOR_AREA_OF_INTEREST(float x, float y, float z, float radius);",
+    "-- This example sets the area of interest (cargen) to the player's position with a radius of 100.0\n\n-- Retrieve the player ped\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the coordinates of the player.\nlocal coords = GetEntityCoords(playerPed, false)\n\n-- Set the area of interest to the player's position with a radius of 100.0\nSetVehicleGeneratorAreaOfInterest(coords.x, coords.y, coords.z, 100.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetVehicleGeneratorAreaOfInterest.md",
+    "https://docs.fivem.net/natives/?_0x0A436B8643716D14",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

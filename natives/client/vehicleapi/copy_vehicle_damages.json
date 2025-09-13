@@ -1,0 +1,22 @@
+{
+  "title": "COPY_VEHICLE_DAMAGES",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "COPY_VEHICLE_DAMAGES"
+  ],
+  "content": "0xE44A982368A4AF230xBAE491C7// CopyVehicleDamages\nvoid COPY_VEHICLE_DAMAGES(Vehicle sourceVehicle, Vehicle targetVehicle);Parameters:sourceVehicle: The source to copy the vehicle damage.targetVehicle: The target to paste the vehicle damage.Copies sourceVehicle's damage (broken bumpers, broken lights, etc.) to targetVehicle.",
+  "codeBlocks": [
+    "// CopyVehicleDamages\nvoid COPY_VEHICLE_DAMAGES(Vehicle sourceVehicle, Vehicle targetVehicle);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/CopyVehicleDamages.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

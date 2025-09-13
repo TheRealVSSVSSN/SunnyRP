@@ -1,0 +1,24 @@
+{
+  "title": "DELETE_MISSION_TRAIN",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "DELETE_MISSION_TRAIN"
+  ],
+  "content": "0x5B76B14AE875C7950x86C9497D// DeleteMissionTrain\nvoid DELETE_MISSION_TRAIN(Vehicle* train);Used to delete mission trains created with CREATE_MISSION_TRAIN.Examples:Lualocal train = CreateMissionTrain(21, 40.2, -1201.3, 31.0, false)\nDeleteMissionTrain(train)",
+  "codeBlocks": [
+    "// DeleteMissionTrain\nvoid DELETE_MISSION_TRAIN(Vehicle* train);",
+    "local train = CreateMissionTrain(21, 40.2, -1201.3, 31.0, false)\nDeleteMissionTrain(train)\n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/DeleteMissionTrain.md",
+    "https://docs.fivem.net/natives/?_0x63C6CCA8E68AE8C8",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

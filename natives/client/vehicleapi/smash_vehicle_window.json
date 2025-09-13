@@ -1,0 +1,23 @@
+{
+  "title": "SMASH_VEHICLE_WINDOW",
+  "breadcrumbs": [
+    "Native Reference",
+    "VEHICLEAPI",
+    "SMASH_VEHICLE_WINDOW"
+  ],
+  "content": "0x9E5B5E4D2CCD22590xDDD9A8C2// SmashVehicleWindow\nvoid SMASH_VEHICLE_WINDOW(Vehicle vehicle, int windowIndex);Parameters:vehicle: The vehicle id.windowIndex: Windows to smash index.Smashes a vehicles window. See eWindowId declared in IS_VEHICLE_WINDOW_INTACT.",
+  "codeBlocks": [
+    "// SmashVehicleWindow\nvoid SMASH_VEHICLE_WINDOW(Vehicle vehicle, int windowIndex);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SmashVehicleWindow.md",
+    "https://docs.fivem.net/natives/?_0x46E571A0E20D01F1",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}
