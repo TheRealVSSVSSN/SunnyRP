@@ -1,0 +1,23 @@
+{
+  "title": "HAS_MINIMAP_OVERLAY_LOADED",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "HAS_MINIMAP_OVERLAY_LOADED"
+  ],
+  "content": "0xF7535F32// HasMinimapOverlayLoaded\nBOOL HAS_MINIMAP_OVERLAY_LOADED(int id);Parameters:id: A minimap overlay ID.Returns: A boolean indicating load status.Returns whether or not the specific minimap overlay has loaded.",
+  "codeBlocks": [
+    "// HasMinimapOverlayLoaded\nBOOL HAS_MINIMAP_OVERLAY_LOADED(int id);",
+    "-- Example usage for HAS_MINIMAP_OVERLAY_LOADED\nHasMinimapOverlayLoaded(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/HasMinimapOverlayLoaded.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

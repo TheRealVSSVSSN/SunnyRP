@@ -1,0 +1,24 @@
+{
+  "title": "RESTART_FRONTEND_MENU",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "RESTART_FRONTEND_MENU"
+  ],
+  "content": "0x10706DC6AD2D49C00xB07DAF98// RestartFrontendMenu\nvoid RESTART_FRONTEND_MENU(Hash menuHash, int highlightedTab);Parameters:menuHash: Hash of the frontend menu. See ACTIVATE_FRONTEND_MENU for the list of available menus.highlightedTab: Menu ID (from PauseMenuLUT (in pause_menu_sp_content.gfx files), but the value - 1000) of which tab to have highlighted on the header, or -1.Changes the current frontend menu to the desired frontend menu version.",
+  "codeBlocks": [
+    "// RestartFrontendMenu\nvoid RESTART_FRONTEND_MENU(Hash menuHash, int highlightedTab);",
+    "-- Example usage for RESTART_FRONTEND_MENU\nRestartFrontendMenu(0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/RestartFrontendMenu.md",
+    "https://docs.fivem.net/natives/?_0xEF01D36B9C9D0C7B",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

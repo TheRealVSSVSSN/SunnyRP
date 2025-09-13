@@ -1,0 +1,25 @@
+{
+  "title": "IS_DISABLED_CONTROL_PRESSED",
+  "breadcrumbs": [
+    "Native Reference",
+    "PADAPI",
+    "IS_DISABLED_CONTROL_PRESSED"
+  ],
+  "content": "0xE2587F8CBBD87B1D0x32A93544// IsDisabledControlPressed\nBOOL IS_DISABLED_CONTROL_PRESSED(int padIndex, int control);Parameters:padIndex: The control system instance to use. See ENABLE_ALL_CONTROL_ACTIONS.control: The control ID to check.",
+  "codeBlocks": [
+    "// IsDisabledControlPressed\nBOOL IS_DISABLED_CONTROL_PRESSED(int padIndex, int control);",
+    "-- Example usage for IS_DISABLED_CONTROL_PRESSED\nIsDisabledControlPressed(0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PAD/IsDisabledControlPressed.md",
+    "https://docs.fivem.net/natives/?_0xA5FFE9B05F199DE7",
+    "https://docs.fivem.net/docs/game-references/controls/#controls",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

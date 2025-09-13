@@ -1,0 +1,23 @@
+{
+  "title": "SEND_DUI_MOUSE_MOVE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SEND_DUI_MOUSE_MOVE"
+  ],
+  "content": "0xD9D7A0AA// SendDuiMouseMove\nvoid SEND_DUI_MOUSE_MOVE(long duiObject, int x, int y);Parameters:duiObject: The DUI browser handle.x: The mouse X position.y: The mouse Y position.Injects a 'mouse move' event for a DUI object. Coordinates are in browser space.",
+  "codeBlocks": [
+    "// SendDuiMouseMove\nvoid SEND_DUI_MOUSE_MOVE(long duiObject, int x, int y);",
+    "-- Example usage for SEND_DUI_MOUSE_MOVE\nSendDuiMouseMove(0, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SendDuiMouseMove.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

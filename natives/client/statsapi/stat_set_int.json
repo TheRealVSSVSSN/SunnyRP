@@ -1,0 +1,23 @@
+{
+  "title": "STAT_SET_INT",
+  "breadcrumbs": [
+    "Native Reference",
+    "STATSAPI",
+    "STAT_SET_INT"
+  ],
+  "content": "0xB3271D7AB655B4410xC9CC1C5C// StatSetInt\nBOOL STAT_SET_INT(Hash statName, int value, BOOL save);Examples:LuaStatSetInt(`MPPLY_KILLS_PLAYERS`, 1337, true)\nStatSetInt(`MP0_SHOOTING_ABILITY`, 100, true)\nStatSetInt(`MP0_SHOOTING_ABILITY`, 100, true)\nStatSetInt(`MP0_STEALTH_ABILITY`, 10, true)\nStatSetInt(`MP0_FLYING_ABILITY`, 5, true)\nStatSetInt(`MP0_WHEELIE_ABILITY`, 25, true)\nStatSetInt(`MP0_LUNG_CAPACITY`, 35, true)\nStatSetInt(`MP0_STRENGTH`, 15, true)\nStatSetInt(`MP0_STAMINA`, 25, true)",
+  "codeBlocks": [
+    "// StatSetInt\nBOOL STAT_SET_INT(Hash statName, int value, BOOL save);",
+    "StatSetInt(`MPPLY_KILLS_PLAYERS`, 1337, true)\nStatSetInt(`MP0_SHOOTING_ABILITY`, 100, true)\nStatSetInt(`MP0_SHOOTING_ABILITY`, 100, true)\nStatSetInt(`MP0_STEALTH_ABILITY`, 10, true)\nStatSetInt(`MP0_FLYING_ABILITY`, 5, true)\nStatSetInt(`MP0_WHEELIE_ABILITY`, 25, true)\nStatSetInt(`MP0_LUNG_CAPACITY`, 35, true)\nStatSetInt(`MP0_STRENGTH`, 15, true)\nStatSetInt(`MP0_STAMINA`, 25, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/STATS/StatSetInt.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

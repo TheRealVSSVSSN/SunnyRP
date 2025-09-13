@@ -1,0 +1,23 @@
+{
+  "title": "SET_MAP_ZOOM_DATA_LEVEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_MAP_ZOOM_DATA_LEVEL"
+  ],
+  "content": "0x447C718E// SetMapZoomDataLevel\nvoid SET_MAP_ZOOM_DATA_LEVEL(int index, float zoomScale, float zoomSpeed, float scrollSpeed, float tilesX, float tilesY);Parameters:index: Zoom level index.zoomScale: fZoomScale value.zoomSpeed: fZoomSpeed value.scrollSpeed: fScrollSpeed value.tilesX: vTiles X.tilesY: vTiles Y.Sets values to the zoom level data by index.",
+  "codeBlocks": [
+    "// SetMapZoomDataLevel\nvoid SET_MAP_ZOOM_DATA_LEVEL(int index, float zoomScale, float zoomSpeed, float scrollSpeed, float tilesX, float tilesY);",
+    "-- Example usage for SET_MAP_ZOOM_DATA_LEVEL\nSetMapZoomDataLevel(0, 0.0, 0.0, 0.0, 0.0, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetMapZoomDataLevel.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "title": "TASK_BOAT_MISSION",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "TASK_BOAT_MISSION"
+  ],
+  "content": "0x15C86013127CE63F0x5865B031// TaskBoatMission\nvoid TASK_BOAT_MISSION(Ped ped, Vehicle boat, Vehicle vehicleTarget, Ped pedTarget, float x, float y, float z, int missionType, float speed, int drivingStyle, float radius, int missionFlags);Parameters:ped: The ped to be tasked.boat: The boats' entity handle.vehicleTarget: The target vehicle (default is 0).pedTarget: The target ped (default is 0).x: The x coordinate of the target (default is 0.0f).y: The y coordinate of the target (default is 0.0f).z: The z coordinate of the target (default is 0.0f).missionType: The mission type (default is 0) (see TaskVehicleMission).speed: The speed in m/s (default is -1.0f).drivingStyle: The driving style (default is 0) (see SetDriveTaskDrivingStyle).radius: The radius of when the task will be completed (default is -1.0f).missionFlags: The mission flags (default is 0) (see eBoatMissionFlags).All parameters except ped and boat are optional, with pedTarget, vehicleTarget, x, y, z being dependent on missionType (ie. Attack/Flee mission types require a target ped/vehicle, whereas GoTo mission types require either x, y, z or a target ped/vehicle).If you don't want to use a parameter; pass 0.0f for x, y and z, 0 for pedTarget, vehicleTarget and other int parameters, and -1.0f for the remaining float parameters.enum eBoatMissionFlags\n{\n  None = 0,\n  StopAtEnd = 1,\n  StopAtShore = 2,\n  AvoidShore = 4,\n  PreferForward = 8,\n  NeverStop = 16,\n  NeverNavMesh = 32,\n  NeverRoute = 64,\n  ForceBeached = 128,\n  UseWanderRoute = 256,\n  UseFleeRoute = 512,\n  NeverPause = 1024,\n  // StopAtEnd | StopAtShore | AvoidShore\n  DefaultSettings = 7,\n  // StopAtEnd | StopAtShore | AvoidShore | PreferForward | NeverNavMesh | NeverRoute\n  OpenOceanSettings = 111,\n  // StopAtEnd | StopAtShore | AvoidShore | PreferForward | NeverNavMesh | NeverPause\n  BoatTaxiSettings = 1071,\n}\nExamples:Lualocal boat_model = `tropic`\nRequestModel(boat_model)\nrepeat Wait(0) until HasModelLoaded(boat_model)\n\n-- Player needs to be in open water & in a boat for this to work\nlocal ped = PlayerPedId()\nlocal coords = GetEntityCoords(ped) - GetEntityForwardVector(ped) * 15.0\nlocal vehicle = CreateVehicle(boat_model, coords.x, coords.y, coords.z, GetEntityHeading(ped), true, false)\n-- Allow the game engine to clear the model from memory\nSetModelAsNoLongerNeeded(boat_model)\n\nlocal ped_model = `a_m_m_skater_01`\nRequestModel(ped_model)\nrepeat Wait(0) until HasModelLoaded(ped_model)\n\nlocal driver = CreatePedInsideVehicle(vehicle, 0, ped_model, -1, true, false)\n-- Allow the game engine to clear the model from memory\nSetModelAsNoLongerNeeded(ped_model)\n\nTaskBoatMission(driver, vehicle, GetVehiclePedIsIn(ped, false), 0, 0.0, 0.0, 0.0, 7, -1.0, 786468, -1.0, 1044)\n-- Mission Type: Follow | Drive Style: DrivingModeAvoidVehiclesReckless | Mission Flags: AvoidShore | NeverStop | NeverPause\nSetPedKeepTask(driver, true)",
+  "codeBlocks": [
+    "// TaskBoatMission\nvoid TASK_BOAT_MISSION(Ped ped, Vehicle boat, Vehicle vehicleTarget, Ped pedTarget, float x, float y, float z, int missionType, float speed, int drivingStyle, float radius, int missionFlags);",
+    "enum eBoatMissionFlags\n{\n  None = 0,\n  StopAtEnd = 1,\n  StopAtShore = 2,\n  AvoidShore = 4,\n  PreferForward = 8,\n  NeverStop = 16,\n  NeverNavMesh = 32,\n  NeverRoute = 64,\n  ForceBeached = 128,\n  UseWanderRoute = 256,\n  UseFleeRoute = 512,\n  NeverPause = 1024,\n  // StopAtEnd | StopAtShore | AvoidShore\n  DefaultSettings = 7,\n  // StopAtEnd | StopAtShore | AvoidShore | PreferForward | NeverNavMesh | NeverRoute\n  OpenOceanSettings = 111,\n  // StopAtEnd | StopAtShore | AvoidShore | PreferForward | NeverNavMesh | NeverPause\n  BoatTaxiSettings = 1071,\n}",
+    "local boat_model = `tropic`\nRequestModel(boat_model)\nrepeat Wait(0) until HasModelLoaded(boat_model)\n\n-- Player needs to be in open water & in a boat for this to work\nlocal ped = PlayerPedId()\nlocal coords = GetEntityCoords(ped) - GetEntityForwardVector(ped) * 15.0\nlocal vehicle = CreateVehicle(boat_model, coords.x, coords.y, coords.z, GetEntityHeading(ped), true, false)\n-- Allow the game engine to clear the model from memory\nSetModelAsNoLongerNeeded(boat_model)\n\nlocal ped_model = `a_m_m_skater_01`\nRequestModel(ped_model)\nrepeat Wait(0) until HasModelLoaded(ped_model)\n\nlocal driver = CreatePedInsideVehicle(vehicle, 0, ped_model, -1, true, false)\n-- Allow the game engine to clear the model from memory\nSetModelAsNoLongerNeeded(ped_model)\n\nTaskBoatMission(driver, vehicle, GetVehiclePedIsIn(ped, false), 0, 0.0, 0.0, 0.0, 7, -1.0, 786468, -1.0, 1044)\n-- Mission Type: Follow | Drive Style: DrivingModeAvoidVehiclesReckless | Mission Flags: AvoidShore | NeverStop | NeverPause\nSetPedKeepTask(driver, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/TaskBoatMission.md",
+    "https://docs.fivem.net/natives/?_0x659427E0EF36BCDE",
+    "https://docs.fivem.net/natives/?_0xDACE1BE37D88AF67",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

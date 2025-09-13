@@ -1,0 +1,23 @@
+{
+  "title": "IS_GAMEPLAY_CAM_RENDERING",
+  "breadcrumbs": [
+    "Native Reference",
+    "CAMAPI",
+    "IS_GAMEPLAY_CAM_RENDERING"
+  ],
+  "content": "0x39B5D1B10383F0C80x0EF276DA// IsGameplayCamRendering\nBOOL IS_GAMEPLAY_CAM_RENDERING();Examples when this function will return 0 are:\n- During busted screen.\n- When player is coming out from a hospital.\n- When player is coming out from a police station.\n- When player is buying gun from AmmuNation.",
+  "codeBlocks": [
+    "// IsGameplayCamRendering\nBOOL IS_GAMEPLAY_CAM_RENDERING();",
+    "Examples when this function will return 0 are:\n- During busted screen.\n- When player is coming out from a hospital.\n- When player is coming out from a police station.\n- When player is buying gun from AmmuNation."
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CAM/IsGameplayCamRendering.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

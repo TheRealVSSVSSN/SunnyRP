@@ -1,0 +1,24 @@
+{
+  "title": "SET_BLIP_CATEGORY",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "SET_BLIP_CATEGORY"
+  ],
+  "content": "0x234CDD44D996FD9A0xEF72F533// SetBlipCategory\nvoid SET_BLIP_CATEGORY(Blip blip, int index);Parameters:blip: The blip to change the category index ofindex: The category index to change toExamples result:index:1 = No distance shown in legend\n2 = Distance shown in legend\n7 = \"Other Players\" category, also shows distance in legend\n10 = \"Property\" category\n11 = \"Owned Property\" category\n12 - 133 = Custom named categories\n134 - 254 = Custom unnamed categories\nindex wraps around after 255.Blips with categories 7, 10, 11 or 12 - 254 (custom categories) will all show under the specific categories listing in the map legend, regardless of sprite or name.Legend entriesindexLegend entryLabel7Other PlayersBLIP_OTHPLYR10PropertyBLIP_PROPCAT11Owned PropertyBLIP_APARTCAT12 - 133Custom categories (Named)BLIP_CAT_ + index134 - 254Custom categories (Unnamed)-Examples:Luablip = AddBlipForCoord(-702.97290039063, -1393.2911376953, 5.1502623558044)\nSetBlipSprite(blip, 370) -- Helipad For Sale\nSetBlipCategory(blip, 10)\n\nblip = AddBlipForCoord(-712.40521240234, -1298.7811279297, 5.1019215583801)\nSetBlipSprite(blip, 371) -- Dock For Sale\nSetBlipCategory(blip, 10)\n\nblip = AddBlipForCoord(-927.92755126953, -2824.1362304688, 13.947744369507)\nSetBlipSprite(blip, 372) -- Hangar For Sale\nSetBlipCategory(blip, 10)\n\n-- Custom named categories\nblip = AddBlipForCoord(0.0, 0.0, 0.0)\nSetBlipSprite(blip, 375) -- Business For Sale\nSetBlipCategory(blip, 12)\nAddTextEntry(\"BLIP_CAT_\" .. 12, \"Businesses For Sale\")",
+  "codeBlocks": [
+    "// SetBlipCategory\nvoid SET_BLIP_CATEGORY(Blip blip, int index);",
+    "1 = No distance shown in legend\n2 = Distance shown in legend\n7 = \"Other Players\" category, also shows distance in legend\n10 = \"Property\" category\n11 = \"Owned Property\" category\n12 - 133 = Custom named categories\n134 - 254 = Custom unnamed categories",
+    "blip = AddBlipForCoord(-702.97290039063, -1393.2911376953, 5.1502623558044)\nSetBlipSprite(blip, 370) -- Helipad For Sale\nSetBlipCategory(blip, 10)\n\nblip = AddBlipForCoord(-712.40521240234, -1298.7811279297, 5.1019215583801)\nSetBlipSprite(blip, 371) -- Dock For Sale\nSetBlipCategory(blip, 10)\n\nblip = AddBlipForCoord(-927.92755126953, -2824.1362304688, 13.947744369507)\nSetBlipSprite(blip, 372) -- Hangar For Sale\nSetBlipCategory(blip, 10)\n\n-- Custom named categories\nblip = AddBlipForCoord(0.0, 0.0, 0.0)\nSetBlipSprite(blip, 375) -- Business For Sale\nSetBlipCategory(blip, 12)\nAddTextEntry(\"BLIP_CAT_\" .. 12, \"Businesses For Sale\")"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/SetBlipCategory.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

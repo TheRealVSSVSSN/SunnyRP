@@ -1,0 +1,24 @@
+{
+  "title": "ATTACH_CAM_TO_ENTITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "CAMAPI",
+    "ATTACH_CAM_TO_ENTITY"
+  ],
+  "content": "0xFEDB7D269E8C60E30xAD7C45F6// AttachCamToEntity\nvoid ATTACH_CAM_TO_ENTITY(Cam cam, Entity entity, float xOffset, float yOffset, float zOffset, BOOL isRelative);Parameters:cam: The camera handle.entity: The entity handle.xOffset: X-axis offsetyOffset: Y-axis offsetzOffset: Z-axis offsetisRelative: Whether or not the camera will be relative to the entityLast param determines if its relative to the Entity  Examples:Lualocal entity = PlayerPedId()\nlocal cam = CreateCam(\"DEFAULT_SCRIPTED_CAMERA\", true)\n\nAttachCamToEntity(cam,entity, 0.0, 0.0, 0.0, true) --attach camera to the center of the entity\n\nSetCamActive(cam, true)\nRenderScriptCams(true, false, 0, true, true)",
+  "codeBlocks": [
+    "// AttachCamToEntity\nvoid ATTACH_CAM_TO_ENTITY(Cam cam, Entity entity, float xOffset, float yOffset, float zOffset, BOOL isRelative);",
+    "Last param determines if its relative to the Entity",
+    "local entity = PlayerPedId()\nlocal cam = CreateCam(\"DEFAULT_SCRIPTED_CAMERA\", true)\n\nAttachCamToEntity(cam,entity, 0.0, 0.0, 0.0, true) --attach camera to the center of the entity\n\nSetCamActive(cam, true)\nRenderScriptCams(true, false, 0, true, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CAM/AttachCamToEntity.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

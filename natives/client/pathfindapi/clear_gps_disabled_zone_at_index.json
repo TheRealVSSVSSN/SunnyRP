@@ -1,0 +1,24 @@
+{
+  "title": "CLEAR_GPS_DISABLED_ZONE_AT_INDEX",
+  "breadcrumbs": [
+    "Native Reference",
+    "PATHFINDAPI",
+    "CLEAR_GPS_DISABLED_ZONE_AT_INDEX"
+  ],
+  "content": "0x2801D0012266DF070x59090745// ClearGpsDisabledZoneAtIndex\nvoid CLEAR_GPS_DISABLED_ZONE_AT_INDEX(int index);Parameters:index: Index of disabled zone.Clears a disabled GPS route area from a certain index previously set using SET_GPS_DISABLED_ZONE_AT_INDEX.Old name:  _CLEAR_GPS_DISABLED_ZONE_AT_INDEX",
+  "codeBlocks": [
+    "// ClearGpsDisabledZoneAtIndex\nvoid CLEAR_GPS_DISABLED_ZONE_AT_INDEX(int index);",
+    "-- Example usage for CLEAR_GPS_DISABLED_ZONE_AT_INDEX\nClearGpsDisabledZoneAtIndex(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PATHFIND/ClearGpsDisabledZoneAtIndex.md",
+    "https://docs.fivem.net/natives/?_0xD0BC1C6FB18EE154",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

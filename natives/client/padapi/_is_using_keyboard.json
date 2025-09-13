@@ -1,0 +1,24 @@
+{
+  "title": "_IS_USING_KEYBOARD",
+  "breadcrumbs": [
+    "Native Reference",
+    "PADAPI",
+    "_IS_USING_KEYBOARD"
+  ],
+  "content": "0xA571D46727E2B718// IsUsingKeyboard\nBOOL _IS_USING_KEYBOARD(int padIndex);Parameters:padIndex: The control system instance to use. See ENABLE_ALL_CONTROL_ACTIONS.Old name:  _GET_LAST_INPUT_METHODOld name:  _IS_INPUT_DISABLED",
+  "codeBlocks": [
+    "// IsUsingKeyboard\nBOOL _IS_USING_KEYBOARD(int padIndex);",
+    "-- Example usage for _IS_USING_KEYBOARD\n_IsUsingKeyboard(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PAD/IsUsingKeyboard.md",
+    "https://docs.fivem.net/natives/?_0xA5FFE9B05F199DE7",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

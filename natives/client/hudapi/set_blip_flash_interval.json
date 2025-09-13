@@ -1,0 +1,23 @@
+{
+  "title": "SET_BLIP_FLASH_INTERVAL",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "SET_BLIP_FLASH_INTERVAL"
+  ],
+  "content": "0xAA51DB313C010A7E0xEAF67377// SetBlipFlashInterval\nvoid SET_BLIP_FLASH_INTERVAL(Blip blip, int interval);Parameters:blip: The blip to change flashing intervalinterval: Interval in milliseconds before flashing the blipSets the interval in milliseconds before flashing the blip.Examples:LuaJavaScriptlocal blip = AddBlipForCoord(0, 0, 0)\n\nSetBlipFlashes(blip, true)\n\n-- flash the blip every 50ms\nSetBlipFlashInterval(blip, 50)",
+  "codeBlocks": [
+    "// SetBlipFlashInterval\nvoid SET_BLIP_FLASH_INTERVAL(Blip blip, int interval);",
+    "local blip = AddBlipForCoord(0, 0, 0)\n\nSetBlipFlashes(blip, true)\n\n-- flash the blip every 50ms\nSetBlipFlashInterval(blip, 50)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/SetBlipFlashInterval.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

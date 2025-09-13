@@ -1,0 +1,26 @@
+{
+  "title": "TASK_PLAY_ANIM_ADVANCED",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "TASK_PLAY_ANIM_ADVANCED"
+  ],
+  "content": "0x3DDEB0E6// TaskPlayAnimAdvanced\nvoid TASK_PLAY_ANIM_ADVANCED(Ped ped, char* animDictionary, char* animationName, float posX, float posY, float posZ, float rotX, float rotY, float rotZ, float blendInSpeed, float blendOutSpeed, int duration, Any flag, float animTime, Any p14, Any p15);Parameters:ped: The ped you want to play the animationanimDictionary: The animation dictionaryanimationName: The animation nameposX: Initial X position of the taskposY: Initial Y position of the taskposZ: Initial Z position of the taskrotX: Initial X rotation of the taskrotY: Initial Y rotation of the taskrotZ: Initial Z rotation of the taskblendInSpeed: The speed at which the animation blends in. Lower is slower and higher is faster, 1.0 is normal, 8.0 is basically instantblendOutSpeed: The speed at which the animation blends out. Lower is slower and higher is faster, 1.0 is normal, 8.0 is basically instantduration: The duration of the animation in milliseconds. -1 will play the animation until canceledflag: See TASK_PLAY_ANIManimTime: Value between 0.0 and 1.0, lets you start an animation from the given pointp14: p15: Similar in functionality to TASK_PLAY_ANIM, except the position and rotation parameters let you specify the initial position and rotation of the task. The ped is teleported to the position specified.\nAnimations listThis is the server-side RPC native equivalent of the client native TASK_PLAY_ANIM_ADVANCED.",
+  "codeBlocks": [
+    "// TaskPlayAnimAdvanced\nvoid TASK_PLAY_ANIM_ADVANCED(Ped ped, char* animDictionary, char* animationName, float posX, float posY, float posZ, float rotX, float rotY, float rotZ, float blendInSpeed, float blendOutSpeed, int duration, Any flag, float animTime, Any p14, Any p15);",
+    "local ped = PlayerPedId()\n-- Example usage for TASK_PLAY_ANIM_ADVANCED\nTaskPlayAnimAdvanced(ped, '', '', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0, 0.0, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/TaskPlayAnimAdvanced.md",
+    "https://docs.fivem.net/natives/?_0xEA47FE3719165B94",
+    "https://alexguirre.github.io/animations-list/",
+    "https://docs.fivem.net/natives/?_0x83CDB10EA29B370B",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

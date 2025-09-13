@@ -1,0 +1,23 @@
+{
+  "title": "SET_ENTITY_DRAW_OUTLINE_COLOR",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_ENTITY_DRAW_OUTLINE_COLOR"
+  ],
+  "content": "0xB41A56C2// SetEntityDrawOutlineColor\nvoid SET_ENTITY_DRAW_OUTLINE_COLOR(int red, int green, int blue, int alpha);Parameters:red: Red component of color.green: Green component of color.blue: Blue component of color.alpha: Alpha component of color, ignored for shader 0.Sets color for entity outline. 255, 0, 255, 255 by default.",
+  "codeBlocks": [
+    "// SetEntityDrawOutlineColor\nvoid SET_ENTITY_DRAW_OUTLINE_COLOR(int red, int green, int blue, int alpha);",
+    "-- Example usage for SET_ENTITY_DRAW_OUTLINE_COLOR\nSetEntityDrawOutlineColor(0, 0, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetEntityDrawOutlineColor.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

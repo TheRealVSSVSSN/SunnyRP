@@ -1,0 +1,23 @@
+{
+  "title": "GET_PLAYER_CAMERA_ROTATION",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PLAYER_CAMERA_ROTATION"
+  ],
+  "content": "0x433C765D// GetPlayerCameraRotation\nVector3 GET_PLAYER_CAMERA_ROTATION(char* playerSrc);Parameters:playerSrc: The player handle.Returns: The player's camera rotation. Values are in radians.Gets the current camera rotation for a specified player. This native is used server side when using OneSync.",
+  "codeBlocks": [
+    "// GetPlayerCameraRotation\nVector3 GET_PLAYER_CAMERA_ROTATION(char* playerSrc);",
+    "-- Example usage for GET_PLAYER_CAMERA_ROTATION\nGetPlayerCameraRotation('')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPlayerCameraRotation.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

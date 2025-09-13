@@ -1,0 +1,24 @@
+{
+  "title": "GET_CAM_ROT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CAMAPI",
+    "GET_CAM_ROT"
+  ],
+  "content": "0x7D304C1C955E3E120xDAC84C9F// GetCamRot\nVector3 GET_CAM_ROT(Cam cam, int rotationOrder);Parameters:cam: The camera handle.rotationOrder: The order of rotation, see GET_ENTITY_ROTATIONReturns: A Vector3 representing the camera rotation in degrees.Gets a camera's rotation by handle (cam) lookup, outputs a Vector3 in degrees.Examples:Lua-- We need a valid camera handle for this to work.\nlocal theCamHandle = CreateCam(\"DEFAULT_SCRIPTED_CAMERA\", true)\n\n-- Let's set the camera rotation for illustrative purposes\nSetCamRot(theCamHandle, 0.1, 0.2, 0.3, 0)\n\n-- We are now able to get the camera rotation.\nlocal camRot = GetCamRot(theCamHandle, 0) -- vector3(0.100000, 0.200000, 0.300000)\nCitizen.Trace(string.format(\"Cam Rotation is x: %f, y: %f, z: %f\", camRot.x, camRot.y, camRot.z))",
+  "codeBlocks": [
+    "// GetCamRot\nVector3 GET_CAM_ROT(Cam cam, int rotationOrder);",
+    "-- We need a valid camera handle for this to work.\nlocal theCamHandle = CreateCam(\"DEFAULT_SCRIPTED_CAMERA\", true)\n\n-- Let's set the camera rotation for illustrative purposes\nSetCamRot(theCamHandle, 0.1, 0.2, 0.3, 0)\n\n-- We are now able to get the camera rotation.\nlocal camRot = GetCamRot(theCamHandle, 0) -- vector3(0.100000, 0.200000, 0.300000)\nCitizen.Trace(string.format(\"Cam Rotation is x: %f, y: %f, z: %f\", camRot.x, camRot.y, camRot.z))"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CAM/GetCamRot.md",
+    "https://docs.fivem.net/natives/?_0xAFBD61CC738D9EB9",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

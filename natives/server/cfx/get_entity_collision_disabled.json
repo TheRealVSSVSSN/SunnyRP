@@ -1,0 +1,23 @@
+{
+  "title": "GET_ENTITY_COLLISION_DISABLED",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_ENTITY_COLLISION_DISABLED"
+  ],
+  "content": "0xE8C0C629// GetEntityCollisionDisabled\nbool GET_ENTITY_COLLISION_DISABLED(Entity entity);Parameters:entity: The target entity.Returns: Returns whether or not entity collisions are disabled.",
+  "codeBlocks": [
+    "// GetEntityCollisionDisabled\nbool GET_ENTITY_COLLISION_DISABLED(Entity entity);",
+    "local entity = PlayerPedId()\n-- Example usage for GET_ENTITY_COLLISION_DISABLED\nGetEntityCollisionDisabled(entity)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetEntityCollisionDisabled.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

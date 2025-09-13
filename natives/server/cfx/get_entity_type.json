@@ -1,0 +1,23 @@
+{
+  "title": "GET_ENTITY_TYPE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_ENTITY_TYPE"
+  ],
+  "content": "0xB1BD08D// GetEntityType\nint GET_ENTITY_TYPE(Entity entity);Parameters:entity: The entity to get the type of.Returns: The entity type returned as an integer value.Gets the entity type (as an integer), which can be one of the following defined down below:The following entities will return type 1:PedPlayerAnimal (Red Dead Redemption 2)Horse (Red Dead Redemption 2)The following entities will return type 2:AutomobileBikeBoatHeliPlaneSubmarineTrailerTrainDraftVeh (Red Dead Redemption 2)The following entities will return type 3:ObjectDoorPickupOtherwise, a value of 0 will be returned.",
+  "codeBlocks": [
+    "// GetEntityType\nint GET_ENTITY_TYPE(Entity entity);",
+    "local entity = PlayerPedId()\n-- Example usage for GET_ENTITY_TYPE\nGetEntityType(entity)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetEntityType.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

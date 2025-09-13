@@ -1,0 +1,26 @@
+{
+  "title": "_TOGGLE_USE_PICKUPS_FOR_PLAYER",
+  "breadcrumbs": [
+    "Native Reference",
+    "OBJECTAPI",
+    "_TOGGLE_USE_PICKUPS_FOR_PLAYER"
+  ],
+  "content": "0x616093EC6B139DD90x7FADB4B9// ToggleUsePickupsForPlayer\nvoid _TOGGLE_USE_PICKUPS_FOR_PLAYER(Player player, Hash pickupHash, BOOL toggle);Parameters:player: Player ID. Use PLAYER_ID for your own player.pickupHash: Hash of the pickup, obtainable with GET_HASH_KEYtoggle: boolean that enables/disables the pickup drop (false to disable, true to enable)Disabling/enabling a player from getting pickups. From the scripts:\nOBJECT::_616093EC6B139DD9(PLAYER::PLAYER_ID(), ${pickup_portable_package}, 0);\nExamples:Lua-- Toggles the possibility for the player to drop the weapon pickups after death\nlocal pickup = GetHashKey(\"PICKUP_WEAPON_ADVANCEDRIFLE\")\nToggleUsePickupsForPlayer(PlayerId(), pickup, false)",
+  "codeBlocks": [
+    "// ToggleUsePickupsForPlayer\nvoid _TOGGLE_USE_PICKUPS_FOR_PLAYER(Player player, Hash pickupHash, BOOL toggle);",
+    "Disabling/enabling a player from getting pickups. From the scripts:\nOBJECT::_616093EC6B139DD9(PLAYER::PLAYER_ID(), ${pickup_portable_package}, 0);",
+    "-- Toggles the possibility for the player to drop the weapon pickups after death\nlocal pickup = GetHashKey(\"PICKUP_WEAPON_ADVANCEDRIFLE\")\nToggleUsePickupsForPlayer(PlayerId(), pickup, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/OBJECT/ToggleUsePickupsForPlayer.md",
+    "https://docs.fivem.net/natives/?_0x4F8644AF03D0E0D6",
+    "https://docs.fivem.net/natives/?_0xD24D37CC275948CC",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "title": "SET_BLIP_SPRITE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_BLIP_SPRITE"
+  ],
+  "content": "0x8DBBB0B9// SetBlipSprite\nvoid SET_BLIP_SPRITE(Blip blip, int spriteId);Parameters:blip: The blip to change.spriteId: The sprite ID to set.Sets the displayed sprite for a specific blip.\nThere's a list of sprites on the FiveM documentation site.This is the server-side RPC native equivalent of the client native SET_BLIP_SPRITE.",
+  "codeBlocks": [
+    "// SetBlipSprite\nvoid SET_BLIP_SPRITE(Blip blip, int spriteId);",
+    "-- Example usage for SET_BLIP_SPRITE\nSetBlipSprite(0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetBlipSprite.md",
+    "https://docs.fivem.net/docs/game-references/blips/",
+    "https://docs.fivem.net/natives/?_0xDF735600A4696DAF",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

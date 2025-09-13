@@ -1,0 +1,23 @@
+{
+  "title": "MUMBLE_REMOVE_VOICE_CHANNEL_LISTEN",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "MUMBLE_REMOVE_VOICE_CHANNEL_LISTEN"
+  ],
+  "content": "0x231523B7// MumbleRemoveVoiceChannelListen\nvoid MUMBLE_REMOVE_VOICE_CHANNEL_LISTEN(int channel);Parameters:channel: A game voice channel ID.Stops listening to the specified channel.",
+  "codeBlocks": [
+    "// MumbleRemoveVoiceChannelListen\nvoid MUMBLE_REMOVE_VOICE_CHANNEL_LISTEN(int channel);",
+    "-- Example usage for MUMBLE_REMOVE_VOICE_CHANNEL_LISTEN\nMumbleRemoveVoiceChannelListen(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/MumbleRemoveVoiceChannelListen.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "title": "APPLY_FORCE_TO_ENTITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "APPLY_FORCE_TO_ENTITY"
+  ],
+  "content": "0xC1C0855A// ApplyForceToEntity\nvoid APPLY_FORCE_TO_ENTITY(Entity entity, int forceType, float x, float y, float z, float offX, float offY, float offZ, int nComponent, BOOL bLocalForce, BOOL bLocalOffset, BOOL bScaleByMass, BOOL bPlayAudio, BOOL bScaleByTimeWarp);Parameters:entity: The entity handleforceType: The force typex: The x component of the force to applyy: The y component of the force to applyz: The z component of the force to applyoffX: Offset from center of entity (X)offY: Offset from center of entity (Y)offZ: Offset from center of entity (Z)nComponent: Component of the entity to apply the force too. Only matters for breakable or articulated (ragdoll) physics. 0 means the root or parent componentbLocalForce: Specifies whether the force vector passed in is in local or world coordinates. true means the force will get automatically transformed into world space before being appliedbLocalOffset: Specifies whether the offset passed in is in local or world coordinatesbScaleByMass: Specifies whether to scale the force by massbPlayAudio: Specifies whether to play audio events related to the force being applied. The audio will depend on the entity type. Currently vehicles are the only entity types supported, and will play a suspension squeal depending on the magnitude of the forcebScaleByTimeWarp: Specifies whether to scale the force by time warp. Default is trueenum eApplyForceTypes {\nAPPLY_TYPE_FORCE = 0,\nAPPLY_TYPE_IMPULSE = 1,\nAPPLY_TYPE_EXTERNAL_FORCE = 2,\nAPPLY_TYPE_EXTERNAL_IMPULSE = 3,\nAPPLY_TYPE_TORQUE = 4,\nAPPLY_TYPE_ANGULAR_IMPULSE = 5\n}\nThis is the server-side RPC native equivalent of the client native APPLY_FORCE_TO_ENTITY.",
+  "codeBlocks": [
+    "// ApplyForceToEntity\nvoid APPLY_FORCE_TO_ENTITY(Entity entity, int forceType, float x, float y, float z, float offX, float offY, float offZ, int nComponent, BOOL bLocalForce, BOOL bLocalOffset, BOOL bScaleByMass, BOOL bPlayAudio, BOOL bScaleByTimeWarp);",
+    "enum eApplyForceTypes {\nAPPLY_TYPE_FORCE = 0,\nAPPLY_TYPE_IMPULSE = 1,\nAPPLY_TYPE_EXTERNAL_FORCE = 2,\nAPPLY_TYPE_EXTERNAL_IMPULSE = 3,\nAPPLY_TYPE_TORQUE = 4,\nAPPLY_TYPE_ANGULAR_IMPULSE = 5\n}"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/ApplyForceToEntity.md",
+    "https://docs.fivem.net/natives/?_0xC5F68BE9613E2D18",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "title": "DATAFILE_LOAD_OFFLINE_UGC",
+  "breadcrumbs": [
+    "Native Reference",
+    "DATAFILEAPI",
+    "DATAFILE_LOAD_OFFLINE_UGC"
+  ],
+  "content": "0xC5238C011AF405E40x660C468E// DatafileLoadOfflineUgc\nBOOL DATAFILE_LOAD_OFFLINE_UGC(char* filename);Loads a User-Generated Content (UGC) file. These files can be found in \"[GTA5]\\data\\ugc\" and \"[GTA5]\\common\\patch\\ugc\". They seem to follow a naming convention, most likely of \"[name]_[part].ugc\". See example below for usage.\nReturns whether or not the file was successfully loaded.\nExample:\nDATAFILE::_LOAD_UGC_FILE(\"RockstarPlaylists\") // loads \"rockstarplaylists_00.ugc\"\nNativeDB Added Parameter 2: Any p1Old name:  _LOAD_UGC_FILE",
+  "codeBlocks": [
+    "// DatafileLoadOfflineUgc\nBOOL DATAFILE_LOAD_OFFLINE_UGC(char* filename);",
+    "Loads a User-Generated Content (UGC) file. These files can be found in \"[GTA5]\\data\\ugc\" and \"[GTA5]\\common\\patch\\ugc\". They seem to follow a naming convention, most likely of \"[name]_[part].ugc\". See example below for usage.\nReturns whether or not the file was successfully loaded.\nExample:\nDATAFILE::_LOAD_UGC_FILE(\"RockstarPlaylists\") // loads \"rockstarplaylists_00.ugc\"",
+    "NativeDB Added Parameter 2: Any p1"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/DATAFILE/DatafileLoadOfflineUgc.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

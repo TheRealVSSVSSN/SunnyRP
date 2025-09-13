@@ -1,0 +1,29 @@
+{
+  "title": "SET_PED_COLLECTION_PROP_INDEX",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_PED_COLLECTION_PROP_INDEX"
+  ],
+  "content": "0x75240BCB// SetPedCollectionPropIndex\nvoid SET_PED_COLLECTION_PROP_INDEX(Ped ped, int anchorPoint, char* collection, int propIndex, int textureId, BOOL attach);Parameters:ped: The target pedanchorPoint: One of the anchor points from SET_PED_PROP_INDEXcollection: Name of the collection. Empty string for the base game collection. See GET_PED_COLLECTION_NAME in order to list all available collections.propIndex: Local prop index inside the given collection. Refer to GET_NUMBER_OF_PED_COLLECTION_PROP_DRAWABLE_VARIATIONS.textureId: The texture id of the drawable. Refer to GET_NUMBER_OF_PED_COLLECTION_PROP_TEXTURE_VARIATIONS.attach: Attached or not.An alternative to SET_PED_PROP_INDEX that uses local collection indexing instead of the global one.The local / collection relative indexing is useful because the global index may get shifted after Title Update. While local index will remain the same which simplifies migration to the newer game version.Collection name and local index inside the collection can be obtained from the global index using GET_PED_COLLECTION_NAME_FROM_PROP and GET_PED_COLLECTION_LOCAL_INDEX_FROM_PROP natives.",
+  "codeBlocks": [
+    "// SetPedCollectionPropIndex\nvoid SET_PED_COLLECTION_PROP_INDEX(Ped ped, int anchorPoint, char* collection, int propIndex, int textureId, BOOL attach);",
+    "local ped = PlayerPedId()\n-- Example usage for SET_PED_COLLECTION_PROP_INDEX\nSetPedCollectionPropIndex(ped, 0, '', 0, 0, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetPedCollectionPropIndex.md",
+    "https://docs.fivem.net/natives/?_0x93376B65A266EB5F",
+    "https://docs.fivem.net/natives/?_0xFED5D83A",
+    "https://docs.fivem.net/natives/?_0x3B6A13E1",
+    "https://docs.fivem.net/natives/?_0x75CAF9CC",
+    "https://docs.fivem.net/natives/?_0x8ED0C17",
+    "https://docs.fivem.net/natives/?_0xFBDB885F",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

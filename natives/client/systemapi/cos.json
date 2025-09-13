@@ -1,0 +1,23 @@
+{
+  "title": "COS",
+  "breadcrumbs": [
+    "Native Reference",
+    "SYSTEMAPI",
+    "COS"
+  ],
+  "content": "0xD0FFB162F40A139C0x00238FE9// Cos\nfloat COS(float value);Parameters:value: The number of degrees (in degrees, not radians)Returns: The cosine of the given numberReturns the cosine of the given number.Examples:Lua-- Get the heading\nlocal heading = GetEntityHeading(PlayerPedId())\nlocal cos = Cos(heading)\n\n-- equivalent in lua\nlocal cosLua = math.cos(heading * (math.pi / 180))",
+  "codeBlocks": [
+    "// Cos\nfloat COS(float value);",
+    "-- Get the heading\nlocal heading = GetEntityHeading(PlayerPedId())\nlocal cos = Cos(heading)\n\n-- equivalent in lua\nlocal cosLua = math.cos(heading * (math.pi / 180))"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/SYSTEM/Cos.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

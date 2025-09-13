@@ -1,0 +1,23 @@
+{
+  "title": "NETWORK_GET_FIRST_ENTITY_OWNER",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "NETWORK_GET_FIRST_ENTITY_OWNER"
+  ],
+  "content": "0x1E546224// NetworkGetFirstEntityOwner\nint NETWORK_GET_FIRST_ENTITY_OWNER(Entity entity);Parameters:entity: The entity to get the first owner for.Returns: The server ID of the first entity owner.Returns the first owner ID of the specified entity.",
+  "codeBlocks": [
+    "// NetworkGetFirstEntityOwner\nint NETWORK_GET_FIRST_ENTITY_OWNER(Entity entity);",
+    "local entity = PlayerPedId()\n-- Example usage for NETWORK_GET_FIRST_ENTITY_OWNER\nNetworkGetFirstEntityOwner(entity)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/NetworkGetFirstEntityOwner.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

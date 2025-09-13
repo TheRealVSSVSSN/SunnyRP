@@ -1,0 +1,23 @@
+{
+  "title": "SET_WATER_AREA_CLIP_RECT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_WATER_AREA_CLIP_RECT"
+  ],
+  "content": "0x9FCD2EE6// SetWaterAreaClipRect\nvoid SET_WATER_AREA_CLIP_RECT(int minX, int minY, int maxX, int maxY);Sets world clip boundaries for water quads file (water.xml, water_heistisland.xml)\nUsed internally by LOAD_GLOBAL_WATER_FILEExamples:LuaSetWaterAreaClipRect(-4000, -4000, 4500, 8000)",
+  "codeBlocks": [
+    "// SetWaterAreaClipRect\nvoid SET_WATER_AREA_CLIP_RECT(int minX, int minY, int maxX, int maxY);",
+    "SetWaterAreaClipRect(-4000, -4000, 4500, 8000)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetWaterAreaClipRect.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

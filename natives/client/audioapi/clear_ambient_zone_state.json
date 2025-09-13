@@ -1,0 +1,23 @@
+{
+  "title": "CLEAR_AMBIENT_ZONE_STATE",
+  "breadcrumbs": [
+    "Native Reference",
+    "AUDIOAPI",
+    "CLEAR_AMBIENT_ZONE_STATE"
+  ],
+  "content": "0x218DD44AAAC964FF0xCDFF3C82// ClearAmbientZoneState\nvoid CLEAR_AMBIENT_ZONE_STATE(char* zoneName, BOOL forceUpdate);Parameters:zoneName: the zone name to clearforceUpdate: Whether ot not to force a zone to become disabled even if its currently activeResets the ambient zone enabled/disabled status to its value before it was modified by this scriptDefault behaviour is that any state change only gets applied once the player leaves the zone.",
+  "codeBlocks": [
+    "// ClearAmbientZoneState\nvoid CLEAR_AMBIENT_ZONE_STATE(char* zoneName, BOOL forceUpdate);",
+    "-- Example usage for CLEAR_AMBIENT_ZONE_STATE\nClearAmbientZoneState('', false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/AUDIO/ClearAmbientZoneState.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "DOOR_SYSTEM_FIND_EXISTING_DOOR",
+  "breadcrumbs": [
+    "Native Reference",
+    "OBJECTAPI",
+    "DOOR_SYSTEM_FIND_EXISTING_DOOR"
+  ],
+  "content": "0x589F80B325CC82C50xE9AE494F// DoorSystemFindExistingDoor\nBOOL DOOR_SYSTEM_FIND_EXISTING_DOOR(float x, float y, float z, Hash modelHash, Hash* doorOutPointer);Parameters:x: The X coordinate of the door objecty: The Y coordinate of the door objectz: The Z coordinate of the door objectmodelHash: Entity model hashdoorOutPointer: Search radius: 0.5",
+  "codeBlocks": [
+    "// DoorSystemFindExistingDoor\nBOOL DOOR_SYSTEM_FIND_EXISTING_DOOR(float x, float y, float z, Hash modelHash, Hash* doorOutPointer);",
+    "-- Example usage for DOOR_SYSTEM_FIND_EXISTING_DOOR\nDoorSystemFindExistingDoor(0.0, 0.0, 0.0, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/OBJECT/DoorSystemFindExistingDoor.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

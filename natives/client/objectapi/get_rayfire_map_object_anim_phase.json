@@ -1,0 +1,24 @@
+{
+  "title": "GET_RAYFIRE_MAP_OBJECT_ANIM_PHASE",
+  "breadcrumbs": [
+    "Native Reference",
+    "OBJECTAPI",
+    "GET_RAYFIRE_MAP_OBJECT_ANIM_PHASE"
+  ],
+  "content": "0x260EE4FDBDF4DB010x020497DE// GetRayfireMapObjectAnimPhase\nfloat GET_RAYFIRE_MAP_OBJECT_ANIM_PHASE(Object object);Parameters:object: The des-object handle to get the animation progress from.Returns: A float between 0.0 and 1.0, 0.0 is the beginning of the animation, 1.0 is the end. Value resets to 0.0 instantly after reaching 1.0.`object`: The des-object handle to get the animation progress from.\nReturn value is a float between 0.0 and 1.0, 0.0 is the beginning of the animation, 1.0 is the end. Value resets to 0.0 instantly after reaching 1.0.\nOld name:  _GET_DES_OBJECT_ANIM_PROGRESSExamples:Lualocal handle = GetRayfireMapObject(7.25, -656.98, 17.14, 50.0, \"des_finale_tunnel\")\nlocal handle2 = GetRayfireMapObject(7.25, -656.98, 17.14, 50.0, \"des_finale_vault\")\n\nSetStateOfRayfireMapObject(handle, 4) -- set to pre-start state\nSetStateOfRayfireMapObject(handle2, 4) -- set to pre-start state\n\nCitizen.Wait(100)\n\nSetStateOfRayfireMapObject(handle, 6) -- set to start animation state.\nSetStateOfRayfireMapObject(handle2, 6) -- set to start animation state.\n\nCitizen.CreateThread(function()\n    Citizen.Wait(10)\n    while GetRayfireMapObjectAnimPhase(handle) > 0.0 do\n        Citizen.Wait(0)\n    end\n    print(\"Animation 1 is done!\")\n    while GetRayfireMapObjectAnimPhase(handle2) > 0.0 do\n        Citizen.Wait(0)\n    end\n    print(\"Animation 2 is done!\")\nend)",
+  "codeBlocks": [
+    "// GetRayfireMapObjectAnimPhase\nfloat GET_RAYFIRE_MAP_OBJECT_ANIM_PHASE(Object object);",
+    "`object`: The des-object handle to get the animation progress from.\nReturn value is a float between 0.0 and 1.0, 0.0 is the beginning of the animation, 1.0 is the end. Value resets to 0.0 instantly after reaching 1.0.",
+    "local handle = GetRayfireMapObject(7.25, -656.98, 17.14, 50.0, \"des_finale_tunnel\")\nlocal handle2 = GetRayfireMapObject(7.25, -656.98, 17.14, 50.0, \"des_finale_vault\")\n\nSetStateOfRayfireMapObject(handle, 4) -- set to pre-start state\nSetStateOfRayfireMapObject(handle2, 4) -- set to pre-start state\n\nCitizen.Wait(100)\n\nSetStateOfRayfireMapObject(handle, 6) -- set to start animation state.\nSetStateOfRayfireMapObject(handle2, 6) -- set to start animation state.\n\nCitizen.CreateThread(function()\n    Citizen.Wait(10)\n    while GetRayfireMapObjectAnimPhase(handle) > 0.0 do\n        Citizen.Wait(0)\n    end\n    while GetRayfireMapObjectAnimPhase(handle2) > 0.0 do\n        Citizen.Wait(0)\n    end\nend)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/OBJECT/GetRayfireMapObjectAnimPhase.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

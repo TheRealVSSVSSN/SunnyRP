@@ -1,0 +1,23 @@
+{
+  "title": "REMOVE_SCENARIO_BLOCKING_AREA",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "REMOVE_SCENARIO_BLOCKING_AREA"
+  ],
+  "content": "0x31D16B74C6E29D660x4483EF06// RemoveScenarioBlockingArea\nvoid REMOVE_SCENARIO_BLOCKING_AREA(int scenarioBlockingIndex, BOOL bNetwork);Parameters:scenarioBlockingIndex: the index of the Scenario blocking areabNetwork: Optionally networked to all other players",
+  "codeBlocks": [
+    "// RemoveScenarioBlockingArea\nvoid REMOVE_SCENARIO_BLOCKING_AREA(int scenarioBlockingIndex, BOOL bNetwork);",
+    "-- Example usage for REMOVE_SCENARIO_BLOCKING_AREA\nRemoveScenarioBlockingArea(0, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/RemoveScenarioBlockingArea.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

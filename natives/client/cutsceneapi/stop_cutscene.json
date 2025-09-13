@@ -1,0 +1,23 @@
+{
+  "title": "STOP_CUTSCENE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CUTSCENEAPI",
+    "STOP_CUTSCENE"
+  ],
+  "content": "0xC7272775B4DC786E0x5EE84DC7// StopCutscene\nvoid STOP_CUTSCENE(BOOL p0);Parameters:p0: Always false",
+  "codeBlocks": [
+    "// StopCutscene\nvoid STOP_CUTSCENE(BOOL p0);",
+    "-- Example usage for STOP_CUTSCENE\nStopCutscene(false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CUTSCENE/StopCutscene.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

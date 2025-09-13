@@ -1,0 +1,23 @@
+{
+  "title": "SHOW_CONTACT_INSTRUCTIONAL_BUTTON",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "SHOW_CONTACT_INSTRUCTIONAL_BUTTON"
+  ],
+  "content": "0xC772A904CDE1186F// ShowContactInstructionalButton\nvoid SHOW_CONTACT_INSTRUCTIONAL_BUTTON(BOOL toggle);Parameters:toggle: Set to true to show the instructional buttons, or false to hide them.Controls the visibility of the \"Contact\" instructional buttons on the map screen.NativeDB Introduced: 2545",
+  "codeBlocks": [
+    "// ShowContactInstructionalButton\nvoid SHOW_CONTACT_INSTRUCTIONAL_BUTTON(BOOL toggle);",
+    "NativeDB Introduced: 2545"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/ShowContactInstructionalButton.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

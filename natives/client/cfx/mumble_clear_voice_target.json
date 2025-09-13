@@ -1,0 +1,23 @@
+{
+  "title": "MUMBLE_CLEAR_VOICE_TARGET",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "MUMBLE_CLEAR_VOICE_TARGET"
+  ],
+  "content": "0x8555DCBA// MumbleClearVoiceTarget\nvoid MUMBLE_CLEAR_VOICE_TARGET(int targetId);Parameters:targetId: A Mumble voice target ID, ranging from 1..30 (inclusive).Clears the target list for the specified Mumble voice target ID.",
+  "codeBlocks": [
+    "// MumbleClearVoiceTarget\nvoid MUMBLE_CLEAR_VOICE_TARGET(int targetId);",
+    "-- Example usage for MUMBLE_CLEAR_VOICE_TARGET\nMumbleClearVoiceTarget(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/MumbleClearVoiceTarget.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

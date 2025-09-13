@@ -1,0 +1,27 @@
+{
+  "title": "ADD_STATE_BAG_CHANGE_HANDLER",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "ADD_STATE_BAG_CHANGE_HANDLER"
+  ],
+  "content": "0x5BA35AAF// AddStateBagChangeHandler\nint ADD_STATE_BAG_CHANGE_HANDLER(char* keyFilter, char* bagFilter, func handler);Parameters:keyFilter: The key to check for, or null for no filter.bagFilter: The bag ID to check for such as entity:65535, or null for no filter.handler: The handler function.Returns: A cookie to remove the change handler.Adds a handler for changes to a state bag.The function called expects to match the following signature:function StateBagChangeHandler(bagName: string, key: string, value: any, reserved: number, replicated: boolean);bagName: The internal bag ID for the state bag which changed. This is usually player:Source, entity:NetID\nor localEntity:Handle.key: The changed key.value: The new value stored at key. The old value is still stored in the state bag at the time this callback executes.reserved: Currently unused.replicated: Whether the set is meant to be replicated.At this time, the change handler can't opt to reject changes.If bagName refers to an entity, use GET_ENTITY_FROM_STATE_BAG_NAME to get the entity handle\nIf bagName refers to a player, use GET_PLAYER_FROM_STATE_BAG_NAME to get the player handleExamples:JavaScriptLuaC#AddStateBagChangeHandler(\"blockTasks\", null, async (bagName, key, value /* boolean */) => {\n    let entity = GetEntityFromStateBagName(bagName);\n    // Whoops, we don't have a valid entity!\n    if (entity === 0) return;\n    // We don't want to freeze the entity position if the entity collision hasn't loaded yet\n    while (!HasCollisionLoadedAroundEntity(entity)) {\n        // The entity went out of our scope before the collision loaded\n        if (!DoesEntityExist(entity)) return;\n        await Delay(250);\n    }\n    SetEntityInvincible(entity, value)\n    FreezeEntityPosition(entity, value)\n    TaskSetBlockingOfNonTemporaryEvents(entity, value)\n})",
+  "codeBlocks": [
+    "// AddStateBagChangeHandler\nint ADD_STATE_BAG_CHANGE_HANDLER(char* keyFilter, char* bagFilter, func handler);",
+    "function StateBagChangeHandler(bagName: string, key: string, value: any, reserved: number, replicated: boolean);",
+    "AddStateBagChangeHandler(\"blockTasks\", null, async (bagName, key, value /* boolean */) => {\n    let entity = GetEntityFromStateBagName(bagName);\n    // Whoops, we don't have a valid entity!\n    if (entity === 0) return;\n    // We don't want to freeze the entity position if the entity collision hasn't loaded yet\n    while (!HasCollisionLoadedAroundEntity(entity)) {\n        // The entity went out of our scope before the collision loaded\n        if (!DoesEntityExist(entity)) return;\n        await Delay(250);\n    }\n    SetEntityInvincible(entity, value)\n    FreezeEntityPosition(entity, value)\n    TaskSetBlockingOfNonTemporaryEvents(entity, value)\n})"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/AddStateBagChangeHandler.md",
+    "https://docs.fivem.net/natives/?_0x4BDF1867",
+    "https://docs.fivem.net/natives/?_0xA56135E0",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client",
+    "server"
+  ]
+}

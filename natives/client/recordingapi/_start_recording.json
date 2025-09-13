@@ -1,0 +1,23 @@
+{
+  "title": "_START_RECORDING",
+  "breadcrumbs": [
+    "Native Reference",
+    "RECORDINGAPI",
+    "_START_RECORDING"
+  ],
+  "content": "0xC3AC2FFF9612AC81// StartRecording\nvoid _START_RECORDING(int mode);Parameters:mode: 0 turns on action replay, 1 starts recordingStarts recording a replay.\\\nIf already recording a replay, does nothing.",
+  "codeBlocks": [
+    "// StartRecording\nvoid _START_RECORDING(int mode);",
+    "-- Example usage for _START_RECORDING\n_StartRecording(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/RECORDING/StartRecording.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

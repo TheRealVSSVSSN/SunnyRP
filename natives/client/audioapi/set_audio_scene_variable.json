@@ -1,0 +1,23 @@
+{
+  "title": "SET_AUDIO_SCENE_VARIABLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "AUDIOAPI",
+    "SET_AUDIO_SCENE_VARIABLE"
+  ],
+  "content": "0xEF21A9EF089A26680x19BB3CE8// SetAudioSceneVariable\nvoid SET_AUDIO_SCENE_VARIABLE(char* scene, char* variableName, float value);Parameters:scene: name of the scenevariableName: name of the variable to add/changevalue: value to set the variable to",
+  "codeBlocks": [
+    "// SetAudioSceneVariable\nvoid SET_AUDIO_SCENE_VARIABLE(char* scene, char* variableName, float value);",
+    "-- Example usage for SET_AUDIO_SCENE_VARIABLE\nSetAudioSceneVariable('', '', 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/AUDIO/SetAudioSceneVariable.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

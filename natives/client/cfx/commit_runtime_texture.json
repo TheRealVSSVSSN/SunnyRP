@@ -1,0 +1,23 @@
+{
+  "title": "COMMIT_RUNTIME_TEXTURE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "COMMIT_RUNTIME_TEXTURE"
+  ],
+  "content": "0x19D81F4E// CommitRuntimeTexture\nvoid COMMIT_RUNTIME_TEXTURE(long tex);Parameters:tex: The runtime texture handle.Commits the backing pixels to the specified runtime texture.",
+  "codeBlocks": [
+    "// CommitRuntimeTexture\nvoid COMMIT_RUNTIME_TEXTURE(long tex);",
+    "-- Example usage for COMMIT_RUNTIME_TEXTURE\nCommitRuntimeTexture(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/CommitRuntimeTexture.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "REMOVE_ALL_PED_WEAPONS",
+  "breadcrumbs": [
+    "Native Reference",
+    "WEAPONAPI",
+    "REMOVE_ALL_PED_WEAPONS"
+  ],
+  "content": "0xF25DF915FA38C5F30xA44CE817// RemoveAllPedWeapons\nvoid REMOVE_ALL_PED_WEAPONS(Ped ped, BOOL p1);Parameters:ped: The ped entityp1: Parameter p1 does not seem to be used or referenced in game binaries.\\\nNote: When called for networked entities, a CRemoveAllWeaponsEvent will be created per request.",
+  "codeBlocks": [
+    "// RemoveAllPedWeapons\nvoid REMOVE_ALL_PED_WEAPONS(Ped ped, BOOL p1);",
+    "local ped = PlayerPedId()\n-- Example usage for REMOVE_ALL_PED_WEAPONS\nRemoveAllPedWeapons(ped, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/WEAPON/RemoveAllPedWeapons.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

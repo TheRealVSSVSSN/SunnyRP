@@ -1,0 +1,23 @@
+{
+  "title": "GET_ENTITY_INDEX_FROM_MAPDATA",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_ENTITY_INDEX_FROM_MAPDATA"
+  ],
+  "content": "0xEE43540D// GetEntityIndexFromMapdata\nint GET_ENTITY_INDEX_FROM_MAPDATA(int mapdata, int entity);Parameters:mapdata: The input map data index from GET_MAPDATA_FROM_HASH_KEY.entity: The input entity handle from GET_ENTITY_MAPDATA_OWNER.Returns: A transient (non-persistable) index to the requested entity, or -1.Returns the transient entity index for a specified mapdata/entity pair.\nThis function supports SDK infrastructure and is not intended to be used directly from your code.",
+  "codeBlocks": [
+    "// GetEntityIndexFromMapdata\nint GET_ENTITY_INDEX_FROM_MAPDATA(int mapdata, int entity);",
+    "-- Example usage for GET_ENTITY_INDEX_FROM_MAPDATA\nGetEntityIndexFromMapdata(0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetEntityIndexFromMapdata.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

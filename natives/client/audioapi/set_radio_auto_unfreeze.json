@@ -1,0 +1,23 @@
+{
+  "title": "SET_RADIO_AUTO_UNFREEZE",
+  "breadcrumbs": [
+    "Native Reference",
+    "AUDIOAPI",
+    "SET_RADIO_AUTO_UNFREEZE"
+  ],
+  "content": "0xC1AA9F53CE9829900xA40196BF// SetRadioAutoUnfreeze\nvoid SET_RADIO_AUTO_UNFREEZE(BOOL toggle);Parameters:toggle: if true the radio will automatically unfreeze as soon as the player gets in a vehicle",
+  "codeBlocks": [
+    "// SetRadioAutoUnfreeze\nvoid SET_RADIO_AUTO_UNFREEZE(BOOL toggle);",
+    "-- Example usage for SET_RADIO_AUTO_UNFREEZE\nSetRadioAutoUnfreeze(false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/AUDIO/SetRadioAutoUnfreeze.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

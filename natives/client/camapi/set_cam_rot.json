@@ -1,0 +1,24 @@
+{
+  "title": "SET_CAM_ROT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CAMAPI",
+    "SET_CAM_ROT"
+  ],
+  "content": "0x85973643155D0B070xEE38B3C1// SetCamRot\nvoid SET_CAM_ROT(Cam cam, float rotX, float rotY, float rotZ, int rotationOrder);Parameters:cam: The camera handle to use, in order to change the rotationrotX: Rotation on XrotY: Rotation on YrotZ: Rotation on ZrotationOrder: The order of rotation, see GET_ENTITY_ROTATIONSets the rotation of the camera.Examples:Lua-- We need a valid camera handle for this to work.\nlocal theCamHandle = CreateCam(\"DEFAULT_SCRIPTED_CAMERA\", true)\nSetCamRot(theCamHandle, 0.1, 0.2, 0.3, 0)",
+  "codeBlocks": [
+    "// SetCamRot\nvoid SET_CAM_ROT(Cam cam, float rotX, float rotY, float rotZ, int rotationOrder);",
+    "-- We need a valid camera handle for this to work.\nlocal theCamHandle = CreateCam(\"DEFAULT_SCRIPTED_CAMERA\", true)\nSetCamRot(theCamHandle, 0.1, 0.2, 0.3, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CAM/SetCamRot.md",
+    "https://docs.fivem.net/natives/?_0xAFBD61CC738D9EB9",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

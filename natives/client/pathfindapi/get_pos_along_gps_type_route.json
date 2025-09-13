@@ -1,0 +1,23 @@
+{
+  "title": "GET_POS_ALONG_GPS_TYPE_ROUTE",
+  "breadcrumbs": [
+    "Native Reference",
+    "PATHFINDAPI",
+    "GET_POS_ALONG_GPS_TYPE_ROUTE"
+  ],
+  "content": "0xF3162836C28F9DA50x40BB1149// GetPosAlongGpsTypeRoute\nBOOL GET_POS_ALONG_GPS_TYPE_ROUTE(Vector3* result, BOOL bStartAtPlayerPos, float fDistanceAlongRoute, int slotType);Parameters:result: Coordinates of waypoint markerbStartAtPlayerPos: Should we project distance from the player position or from next node.fDistanceAlongRoute: Distance we want to get the position along the route.slotType: Type of gps route to check against. See eGpsSlotType.Returns: will return true if a position is returned, false if not.Native to get a position along current player GPS route using supplied slot.\nThis native was previously named GET_GPS_WAYPOINT_ROUTE_END, but its named changed.enum eGpsSlotType {\n\tGPS_SLOT_WAYPOINT = 0,\n\tGPS_SLOT_RADAR_BLIP = 1,\n\tGPS_SLOT_DISCRETE = 2\n}\nOld name:  GET_GPS_WAYPOINT_ROUTE_END",
+  "codeBlocks": [
+    "// GetPosAlongGpsTypeRoute\nBOOL GET_POS_ALONG_GPS_TYPE_ROUTE(Vector3* result, BOOL bStartAtPlayerPos, float fDistanceAlongRoute, int slotType);",
+    "enum eGpsSlotType {\n\tGPS_SLOT_WAYPOINT = 0,\n\tGPS_SLOT_RADAR_BLIP = 1,\n\tGPS_SLOT_DISCRETE = 2\n}"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PATHFIND/GetPosAlongGpsTypeRoute.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

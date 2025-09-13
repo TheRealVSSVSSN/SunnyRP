@@ -1,0 +1,24 @@
+{
+  "title": "DELETE_RESOURCE_KVP",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "DELETE_RESOURCE_KVP"
+  ],
+  "content": "0x7389B5DF// DeleteResourceKvp\nvoid DELETE_RESOURCE_KVP(char* key);Parameters:key: The key to deleteExamples:LuaDeleteResourceKvp('liberty_city')",
+  "codeBlocks": [
+    "// DeleteResourceKvp\nvoid DELETE_RESOURCE_KVP(char* key);",
+    "DeleteResourceKvp('liberty_city')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/DeleteResourceKvp.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client",
+    "server"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "GET_INTERIOR_GROUP_ID",
+  "breadcrumbs": [
+    "Native Reference",
+    "INTERIORAPI",
+    "GET_INTERIOR_GROUP_ID"
+  ],
+  "content": "0xE4A84ABF135EF91A0x09D6376F// GetInteriorGroupId\nint GET_INTERIOR_GROUP_ID(int interior);Returns the group ID of the specified interior. For example, regular interiors have group 0, subway interiors have group 1. There are a few other groups too.",
+  "codeBlocks": [
+    "// GetInteriorGroupId\nint GET_INTERIOR_GROUP_ID(int interior);",
+    "Returns the group ID of the specified interior. For example, regular interiors have group 0, subway interiors have group 1. There are a few other groups too."
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/INTERIOR/GetInteriorGroupId.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

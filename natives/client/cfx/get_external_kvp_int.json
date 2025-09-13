@@ -1,0 +1,24 @@
+{
+  "title": "GET_EXTERNAL_KVP_INT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_EXTERNAL_KVP_INT"
+  ],
+  "content": "0x12B8D689// GetExternalKvpInt\nint GET_EXTERNAL_KVP_INT(char* resource, char* key);Parameters:resource: The resource to fetch from.key: The key to fetchReturns: A int that contains the value stored in the Kvp or nil/null if none.A getter for SET_RESOURCE_KVP_INT, but for a specified resource.Examples:Lualocal kvpValue = GetExternalKvpInt('food', 'bananabread') \nif kvpValue then\n\t-- do something!\nend",
+  "codeBlocks": [
+    "// GetExternalKvpInt\nint GET_EXTERNAL_KVP_INT(char* resource, char* key);",
+    "local kvpValue = GetExternalKvpInt('food', 'bananabread') \nif kvpValue then\n\t-- do something!\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetExternalKvpInt.md",
+    "https://docs.fivem.net/natives/?_0x6A2B1E8",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

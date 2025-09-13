@@ -1,0 +1,25 @@
+{
+  "title": "_SET_WARNING_MESSAGE_WITH_ALERT",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "_SET_WARNING_MESSAGE_WITH_ALERT"
+  ],
+  "content": "0x15803FEC3B9A872B// SetWarningMessageWithAlert\nvoid _SET_WARNING_MESSAGE_WITH_ALERT(char* labelTitle, char* labelMsg, int p2, int p3, char* labelMsg2, BOOL p5, int p6, int p7, char* p8, char* p9, BOOL background, int errorCode);Parameters:labelTitle: Label of the alert's title.labelMsg: Label of the alert's message.p2: This is an enum, check the description for a list.p3: This is an enum, check the description for a list.labelMsg2: Label of another message linep5: usually 0p6: usually -1p7: usually 0p8: unknown labelp9: unknown labelbackground: Set to anything other than 0 or false (even any string) and it will draw a background. Setting it to 0 or false will draw no background.errorCode: Error code, shown at the bottom left if set to value other than 0.instructionalKey enum list:Buttons = {\n      Empty = 0,\n      Select = 1, -- (RETURN)\n      Ok = 2, -- (RETURN)\n      Yes = 4, -- (RETURN)\n      Back = 8, -- (ESC)\n      Cancel = 16, -- (ESC)\n      No = 32, -- (ESC)\n      RetrySpace = 64, -- (SPACE)\n      Restart = 128, -- (SPACE)\n      Skip = 256, -- (SPACE)\n      Quit = 512, -- (ESC)\n      Adjust = 1024, -- (ARROWS)\n      SpaceKey = 2048, -- (SPACE)\n      Share = 4096, -- (SPACE)\n      SignIn = 8192, -- (SPACE)\n      Continue = 16384, -- (RETURN)\n      AdjustLeftRight = 32768, -- (SCROLL L/R)\n      AdjustUpDown = 65536, -- (SCROLL U/D)\n      Overwrite = 131072, -- (SPACE)\n      SocialClubSignup = 262144, -- (RETURN)\n      Confirm = 524288, -- (RETURN)\n      Queue = 1048576, -- (RETURN)\n      RetryReturn = 2097152, -- (RETURN)\n      BackEsc = 4194304, -- (ESC)\n      SocialClub = 8388608, -- (RETURN)\n      Spectate = 16777216, -- (SPACE)\n      OkEsc = 33554432, -- (ESC)\n      CancelTransfer = 67108864, -- (ESC)\n      LoadingSpinner = 134217728,\n      NoReturnToGTA = 268435456, -- (ESC)\n      CancelEsc = 536870912, -- (ESC)\n}\n\nAlt = {\n      Empty = 0,\n      No = 1, -- (SPACE)\n      Host = 2, -- (ESC)\n      SearchForJob = 4, -- (RETURN)\n      ReturnKey = 8, -- (TURN)\n      Freemode = 16, -- (ESC)\n}\nResult of the example code: https://i.imgur.com/TvmNF4k.pngOld name:  _DRAW_FRONTEND_ALERTExamples:LuaCitizen.CreateThread(function()\n\tAddTextEntry(\"FACES_WARNH2\", \"Nice title\")\n\tAddTextEntry(\"QM_NO_0\", \"Cool message\")\n\tAddTextEntry(\"QM_NO_3\", \"Cool message 2\")\n\twhile true do\n\t\tCitizen.Wait(0)\n\t\tDrawFrontendAlert(\"FACES_WARNH2\", \"QM_NO_0\", 3, 3, \"QM_NO_3\", 2, -1, false, \"FM_NXT_RAC\", \"QM_NO_1\", true, 10)\n\tend\nend)",
+  "codeBlocks": [
+    "// SetWarningMessageWithAlert\nvoid _SET_WARNING_MESSAGE_WITH_ALERT(char* labelTitle, char* labelMsg, int p2, int p3, char* labelMsg2, BOOL p5, int p6, int p7, char* p8, char* p9, BOOL background, int errorCode);",
+    "Buttons = {\n      Empty = 0,\n      Select = 1, -- (RETURN)\n      Ok = 2, -- (RETURN)\n      Yes = 4, -- (RETURN)\n      Back = 8, -- (ESC)\n      Cancel = 16, -- (ESC)\n      No = 32, -- (ESC)\n      RetrySpace = 64, -- (SPACE)\n      Restart = 128, -- (SPACE)\n      Skip = 256, -- (SPACE)\n      Quit = 512, -- (ESC)\n      Adjust = 1024, -- (ARROWS)\n      SpaceKey = 2048, -- (SPACE)\n      Share = 4096, -- (SPACE)\n      SignIn = 8192, -- (SPACE)\n      Continue = 16384, -- (RETURN)\n      AdjustLeftRight = 32768, -- (SCROLL L/R)\n      AdjustUpDown = 65536, -- (SCROLL U/D)\n      Overwrite = 131072, -- (SPACE)\n      SocialClubSignup = 262144, -- (RETURN)\n      Confirm = 524288, -- (RETURN)\n      Queue = 1048576, -- (RETURN)\n      RetryReturn = 2097152, -- (RETURN)\n      BackEsc = 4194304, -- (ESC)\n      SocialClub = 8388608, -- (RETURN)\n      Spectate = 16777216, -- (SPACE)\n      OkEsc = 33554432, -- (ESC)\n      CancelTransfer = 67108864, -- (ESC)\n      LoadingSpinner = 134217728,\n      NoReturnToGTA = 268435456, -- (ESC)\n      CancelEsc = 536870912, -- (ESC)\n}\n\nAlt = {\n      Empty = 0,\n      No = 1, -- (SPACE)\n      Host = 2, -- (ESC)\n      SearchForJob = 4, -- (RETURN)\n      ReturnKey = 8, -- (TURN)\n      Freemode = 16, -- (ESC)\n}",
+    "Citizen.CreateThread(function()\n\tAddTextEntry(\"FACES_WARNH2\", \"Nice title\")\n\tAddTextEntry(\"QM_NO_0\", \"Cool message\")\n\tAddTextEntry(\"QM_NO_3\", \"Cool message 2\")\n\twhile true do\n\t\tCitizen.Wait(0)\n\t\tDrawFrontendAlert(\"FACES_WARNH2\", \"QM_NO_0\", 3, 3, \"QM_NO_3\", 2, -1, false, \"FM_NXT_RAC\", \"QM_NO_1\", true, 10)\n\tend\nend)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/SetWarningMessageWithAlert.md",
+    "https://i.imgur.com/TvmNF4k.png",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "IS_FLASH_LIGHT_ON",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "IS_FLASH_LIGHT_ON"
+  ],
+  "content": "0x76876154// IsFlashLightOn\nbool IS_FLASH_LIGHT_ON(Ped ped);Parameters:ped: The target ped.Returns: Whether or not the ped's flash light is on.",
+  "codeBlocks": [
+    "// IsFlashLightOn\nbool IS_FLASH_LIGHT_ON(Ped ped);",
+    "local ped = PlayerPedId()\n-- Example usage for IS_FLASH_LIGHT_ON\nIsFlashLightOn(ped)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/IsFlashLightOn.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

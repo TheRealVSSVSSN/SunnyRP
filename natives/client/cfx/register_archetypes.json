@@ -1,0 +1,23 @@
+{
+  "title": "REGISTER_ARCHETYPES",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "REGISTER_ARCHETYPES"
+  ],
+  "content": "0x3C2F9037// RegisterArchetypes\nvoid REGISTER_ARCHETYPES(func factory);Parameters:factory: A function returning a list of archetypes.Experimental: This native may be altered or removed in future versions of CitizenFX without warning.Registers a set of archetypes with the game engine. These should match CBaseArchetypeDef class information from the game.Examples:LuaRegisterArchetypes(function()\n\treturn {\n\t\t{\n\t\t\tflags = 32,\n\t\t\tbbMin = vector3(-39.99570000, -8.00155600, -2.56818800),\n\t\t\tbbMax = vector3(40.00439000, 7.99858000, 1.44575100),\n\t\t\tbsCentre = vector3(0.00434110, -0.00148870, -0.56121830),\n\t\t\tbsRadius = 40.84160000,\n\t\t\tname = 'my_asset',\n\t\t\ttextureDictionary = 'my_asset',\n\t\t\tphysicsDictionary = 'my_asset',\n\t\t\tassetName = 'my_asset',\n\t\t\tassetType = 'ASSET_TYPE_DRAWABLE',\n\t\t\tlodDist = 450.45,\n\t\t\tspecialAttribute = 0\n\t\t}\n\t}\nend)",
+  "codeBlocks": [
+    "// RegisterArchetypes\nvoid REGISTER_ARCHETYPES(func factory);",
+    "RegisterArchetypes(function()\n\treturn {\n\t\t{\n\t\t\tflags = 32,\n\t\t\tbbMin = vector3(-39.99570000, -8.00155600, -2.56818800),\n\t\t\tbbMax = vector3(40.00439000, 7.99858000, 1.44575100),\n\t\t\tbsCentre = vector3(0.00434110, -0.00148870, -0.56121830),\n\t\t\tbsRadius = 40.84160000,\n\t\t\tname = 'my_asset',\n\t\t\ttextureDictionary = 'my_asset',\n\t\t\tphysicsDictionary = 'my_asset',\n\t\t\tassetName = 'my_asset',\n\t\t\tassetType = 'ASSET_TYPE_DRAWABLE',\n\t\t\tlodDist = 450.45,\n\t\t\tspecialAttribute = 0\n\t\t}\n\t}\nend)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/RegisterArchetypes.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

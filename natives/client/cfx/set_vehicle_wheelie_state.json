@@ -1,0 +1,25 @@
+{
+  "title": "SET_VEHICLE_WHEELIE_STATE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_VEHICLE_WHEELIE_STATE"
+  ],
+  "content": "0xEAB8DB65// SetVehicleWheelieState\nvoid SET_VEHICLE_WHEELIE_STATE(Vehicle vehicle, int state);Parameters:vehicle: Vehiclestate: Wheelie stateExample script: https://pastebin.com/J6XGbkCWList of known states:1: Not wheeling.\n65: Vehicle is ready to do wheelie (burnouting).\n129: Vehicle is doing wheelie.\nExamples:LuaCitizen.CreateThread(function()\n  while true do\n    Wait(1)\n\n    local ped = PlayerPedId()\n    local veh = GetVehiclePedIsUsing(ped)\n\n    if veh ~= 0 then\n      -- is vehicle a musclecar\n      if GetVehicleClass(veh) == 4 then\n        -- is ped a driver\n        if GetPedInVehicleSeat(veh, -1) == ped then\n          -- don't let vehicle to do wheelie\n          SetVehicleWheelieState(veh, 1)\n        end\n      end\n    end\n  end\nend)",
+  "codeBlocks": [
+    "// SetVehicleWheelieState\nvoid SET_VEHICLE_WHEELIE_STATE(Vehicle vehicle, int state);",
+    "1: Not wheeling.\n65: Vehicle is ready to do wheelie (burnouting).\n129: Vehicle is doing wheelie.",
+    "Citizen.CreateThread(function()\n  while true do\n    Wait(1)\n\n    local ped = PlayerPedId()\n    local veh = GetVehiclePedIsUsing(ped)\n\n    if veh ~= 0 then\n      -- is vehicle a musclecar\n      if GetVehicleClass(veh) == 4 then\n        -- is ped a driver\n        if GetPedInVehicleSeat(veh, -1) == ped then\n          -- don't let vehicle to do wheelie\n          SetVehicleWheelieState(veh, 1)\n        end\n      end\n    end\n  end\nend)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetVehicleWheelieState.md",
+    "https://pastebin.com/J6XGbkCW",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

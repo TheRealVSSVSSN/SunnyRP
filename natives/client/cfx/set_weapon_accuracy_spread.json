@@ -1,0 +1,23 @@
+{
+  "title": "SET_WEAPON_ACCURACY_SPREAD",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_WEAPON_ACCURACY_SPREAD"
+  ],
+  "content": "0x598DD6AE// SetWeaponAccuracySpread\nvoid SET_WEAPON_ACCURACY_SPREAD(Hash weaponHash, float spread);Parameters:weaponHash: Weapon name hash.spread: Accuracy spreadA setter for the accuracy spread of a weapon.",
+  "codeBlocks": [
+    "// SetWeaponAccuracySpread\nvoid SET_WEAPON_ACCURACY_SPREAD(Hash weaponHash, float spread);",
+    "-- Example usage for SET_WEAPON_ACCURACY_SPREAD\nSetWeaponAccuracySpread(GetHashKey('prop'), 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetWeaponAccuracySpread.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

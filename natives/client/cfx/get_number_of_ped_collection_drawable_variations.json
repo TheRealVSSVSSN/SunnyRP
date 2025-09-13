@@ -1,0 +1,26 @@
+{
+  "title": "GET_NUMBER_OF_PED_COLLECTION_DRAWABLE_VARIATIONS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_NUMBER_OF_PED_COLLECTION_DRAWABLE_VARIATIONS"
+  ],
+  "content": "0x310D0271// GetNumberOfPedCollectionDrawableVariations\nint GET_NUMBER_OF_PED_COLLECTION_DRAWABLE_VARIATIONS(Ped ped, int componentId, char* collection);Parameters:ped: The target pedcomponentId: One of the components from SET_PED_COMPONENT_VARIATIONcollection: Name of the collection. Empty string for the base game collection. See GET_PED_COLLECTION_NAME in order to list all available collections.Returns: Number of drawables available in the given collection. Returns 0 if ped or collection does not exist.An analogue of GET_NUMBER_OF_PED_DRAWABLE_VARIATIONS that returns number of drawable variations inside a single collection instead of the total number across all collections.",
+  "codeBlocks": [
+    "// GetNumberOfPedCollectionDrawableVariations\nint GET_NUMBER_OF_PED_COLLECTION_DRAWABLE_VARIATIONS(Ped ped, int componentId, char* collection);",
+    "local ped = PlayerPedId()\n-- Example usage for GET_NUMBER_OF_PED_COLLECTION_DRAWABLE_VARIATIONS\nGetNumberOfPedCollectionDrawableVariations(ped, 0, '')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetNumberOfPedCollectionDrawableVariations.md",
+    "https://docs.fivem.net/natives/?_0x262B14F48D29DE80",
+    "https://docs.fivem.net/natives/?_0xFED5D83A",
+    "https://docs.fivem.net/natives/?_0x27561561732A7842",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

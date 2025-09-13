@@ -1,0 +1,26 @@
+{
+  "title": "TASK_WARP_PED_INTO_VEHICLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "TASK_WARP_PED_INTO_VEHICLE"
+  ],
+  "content": "0x9A7D091411C5F6840x65D4A35D// TaskWarpPedIntoVehicle\nvoid TASK_WARP_PED_INTO_VEHICLE(Ped ped, Vehicle vehicle, int seatIndex);Parameters:ped: The Ped to be warped into the vehicle.vehicle: The target vehicle into which the ped will be warped.seatIndex: See eSeatPosition declared in IS_VEHICLE_SEAT_FREE.NativeDB Introduced: v323Warp a ped into a vehicle.Note: It's better to use TASK_ENTER_VEHICLE with the flag \"warp\" flag instead of this native.Examples:LuaJavaScriptC#-- This example creates a vehicle and warps the player into the driver's seat\n\n-- Retrieve the player ped\nlocal playerPed = PlayerPedId()\n\n-- Define the vehicle model and check if it exists in the game files\nlocal modelHash = `adder`  -- Use Compile-time hashes to get the model hash\nif not IsModelInCdimage(modelHash) then\n    return\nend\n\n-- Request the model and wait for it to load\nRequestModel(modelHash)  \nrepeat\n    Wait(0)\nuntil HasModelLoaded(modelHash)\n\n-- Create the vehicle at the player's coordinates with a heading of 0.0\nlocal coordsPlayer, heading = GetEntityCoords(playerPed), 0.0\nlocal vehicle = CreateVehicle(modelHash, coordsPlayer, heading, true, false)\n\n-- Define the seat index for the Ped (e.g., -1 for the driver's seat)\nlocal seatIndex = -1  \n\n-- Check if the vehicle exists and the player is alive\nif not DoesEntityExist(vehicle) or IsEntityDead(playerPed) then\n    return\nend\n\n-- Warp the Ped into the specified vehicle seat\nTaskWarpPedIntoVehicle(playerPed, vehicle, seatIndex)",
+  "codeBlocks": [
+    "// TaskWarpPedIntoVehicle\nvoid TASK_WARP_PED_INTO_VEHICLE(Ped ped, Vehicle vehicle, int seatIndex);",
+    "NativeDB Introduced: v323",
+    "-- This example creates a vehicle and warps the player into the driver's seat\n\n-- Retrieve the player ped\nlocal playerPed = PlayerPedId()\n\n-- Define the vehicle model and check if it exists in the game files\nlocal modelHash = `adder`  -- Use Compile-time hashes to get the model hash\nif not IsModelInCdimage(modelHash) then\n    return\nend\n\n-- Request the model and wait for it to load\nRequestModel(modelHash)  \nrepeat\n    Wait(0)\nuntil HasModelLoaded(modelHash)\n\n-- Create the vehicle at the player's coordinates with a heading of 0.0\nlocal coordsPlayer, heading = GetEntityCoords(playerPed), 0.0\nlocal vehicle = CreateVehicle(modelHash, coordsPlayer, heading, true, false)\n\n-- Define the seat index for the Ped (e.g., -1 for the driver's seat)\nlocal seatIndex = -1  \n\n-- Check if the vehicle exists and the player is alive\nif not DoesEntityExist(vehicle) or IsEntityDead(playerPed) then\n    return\nend\n\n-- Warp the Ped into the specified vehicle seat\nTaskWarpPedIntoVehicle(playerPed, vehicle, seatIndex)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/TaskWarpPedIntoVehicle.md",
+    "https://docs.fivem.net/natives/?_0x22AC59A870E6A669",
+    "https://docs.fivem.net/natives/?_0xC20E50AA46D09CA8",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

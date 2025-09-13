@@ -1,0 +1,26 @@
+{
+  "title": "GET_HELI_BODY_HEALTH",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_HELI_BODY_HEALTH"
+  ],
+  "content": "0xA886495D// GetHeliBodyHealth\nint GET_HELI_BODY_HEALTH(Vehicle heli);Parameters:heli: The helicopter to checkReturns: Returns the current health of the helicopter's body.Note This native will always return 1000.0 unless SET_VEHICLE_BODY_HEALTH, SET_VEHICLE_ENGINE_HEALTH, or SET_VEHICLE_PETROL_TANK_HEALTH have been called with a value greater than 1000.0.",
+  "codeBlocks": [
+    "// GetHeliBodyHealth\nint GET_HELI_BODY_HEALTH(Vehicle heli);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for GET_HELI_BODY_HEALTH\nGetHeliBodyHealth(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetHeliBodyHealth.md",
+    "https://docs.fivem.net/natives/?_0xB77D05AC8C78AADB",
+    "https://docs.fivem.net/natives/?_0x45F6D8EEF34ABEF1",
+    "https://docs.fivem.net/natives/?_0x70DB57649FA8D0D8",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "DRAW_GLOW_SPHERE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "DRAW_GLOW_SPHERE"
+  ],
+  "content": "0xBD25EC89// DrawGlowSphere\nvoid DRAW_GLOW_SPHERE(float posX, float posY, float posZ, float radius, int colorR, int colorG, int colorB, float intensity, BOOL invert, BOOL marker);Parameters:posX: Position X.posY: Position Y.posZ: Position Z.radius: Sphere radius.colorR: Red.colorG: Green.colorB: Blue.intensity: Intensity.invert: Invert rendering.marker: Draw as a marker, otherwise as an overlay.Draw a glow sphere this frame. Up to 256 per single frame.",
+  "codeBlocks": [
+    "// DrawGlowSphere\nvoid DRAW_GLOW_SPHERE(float posX, float posY, float posZ, float radius, int colorR, int colorG, int colorB, float intensity, BOOL invert, BOOL marker);",
+    "-- Example usage for DRAW_GLOW_SPHERE\nDrawGlowSphere(0.0, 0.0, 0.0, 0.0, 0, 0, 0, 0.0, false, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/DrawGlowSphere.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

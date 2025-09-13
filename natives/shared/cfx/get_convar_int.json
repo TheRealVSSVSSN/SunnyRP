@@ -1,0 +1,25 @@
+{
+  "title": "GET_CONVAR_INT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_CONVAR_INT"
+  ],
+  "content": "0x935C0AB2// GetConvarInt\nint GET_CONVAR_INT(char* varName, int default_);Parameters:varName: The console variable to look up.default_: The default value to set if none is found (variable not set using SET_CONVAR, or not accessible).Returns: Returns the convar value if it can be found, otherwise it returns the assigned default.Can be used to get a console variable casted back to int (an integer value).Examples:Luaif GetConvarInt('remainingRounds', 0) < 900 then\n    Citizen.Trace(\"Less than 900 rounds remaining...\")\nend",
+  "codeBlocks": [
+    "// GetConvarInt\nint GET_CONVAR_INT(char* varName, int default_);",
+    "if GetConvarInt('remainingRounds', 0) < 900 then\n    Citizen.Trace(\"Less than 900 rounds remaining...\")\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetConvarInt.md",
+    "https://docs.fivem.net/natives/?_0x341B16D2",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client",
+    "server"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "title": "IS_CONTROL_ENABLED",
+  "breadcrumbs": [
+    "Native Reference",
+    "PADAPI",
+    "IS_CONTROL_ENABLED"
+  ],
+  "content": "0x1CEA6BFDF248E5D90x9174AF84// IsControlEnabled\nBOOL IS_CONTROL_ENABLED(int padIndex, int control);Parameters:padIndex: The control system instance to use. See ENABLE_ALL_CONTROL_ACTIONS.control: The control ID to check.",
+  "codeBlocks": [
+    "// IsControlEnabled\nBOOL IS_CONTROL_ENABLED(int padIndex, int control);",
+    "-- Example usage for IS_CONTROL_ENABLED\nIsControlEnabled(0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PAD/IsControlEnabled.md",
+    "https://docs.fivem.net/natives/?_0xA5FFE9B05F199DE7",
+    "https://docs.fivem.net/docs/game-references/controls/#controls",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

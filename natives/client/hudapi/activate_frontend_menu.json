@@ -1,0 +1,23 @@
+{
+  "title": "ACTIVATE_FRONTEND_MENU",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "ACTIVATE_FRONTEND_MENU"
+  ],
+  "content": "0xEF01D36B9C9D0C7B0x01D83872// ActivateFrontendMenu\nvoid ACTIVATE_FRONTEND_MENU(Hash menuhash, BOOL togglePause, int component);Does stuff like this:\\\ngyazo.com/7fcb78ea3520e3dbc5b2c0c0f3712617\\\nExample:\\\nint GetHash = GET_HASH_KEY(\"fe_menu_version_corona_lobby\");\\\nACTIVATE_FRONTEND_MENU(GetHash, 0, -1);\\\nBOOL p1 is a toggle to define the game in pause.\\\nint p2 is unknown but -1 always works, not sure why though.\\\n[30/03/2017] ins1de :\\\nthe int p2 is actually a component variable. When the pause menu is visible, it opens the tab related to it.\\\nExample : Function.Call(Hash.ACTIVATE_FRONTEND_MENU,-1171018317, 0, 42);\\\nResult : Opens the \"Online\" tab without pausing the menu, with -1 it opens the map.Below is a list of all known Frontend Menu Hashes.FE_MENU_VERSION_SP_PAUSEFE_MENU_VERSION_MP_PAUSEFE_MENU_VERSION_CREATOR_PAUSEFE_MENU_VERSION_CUTSCENE_PAUSEFE_MENU_VERSION_SAVEGAMEFE_MENU_VERSION_PRE_LOBBYFE_MENU_VERSION_LOBBYFE_MENU_VERSION_MP_CHARACTER_SELECTFE_MENU_VERSION_MP_CHARACTER_CREATIONFE_MENU_VERSION_EMPTYFE_MENU_VERSION_EMPTY_NO_BACKGROUNDFE_MENU_VERSION_TEXT_SELECTIONFE_MENU_VERSION_CORONAFE_MENU_VERSION_CORONA_LOBBYFE_MENU_VERSION_CORONA_JOINED_PLAYERSFE_MENU_VERSION_CORONA_INVITE_PLAYERSFE_MENU_VERSION_CORONA_INVITE_FRIENDSFE_MENU_VERSION_CORONA_INVITE_CREWSFE_MENU_VERSION_CORONA_INVITE_MATCHED_PLAYERSFE_MENU_VERSION_CORONA_INVITE_LAST_JOB_PLAYERSFE_MENU_VERSION_CORONA_RACEFE_MENU_VERSION_CORONA_BETTINGFE_MENU_VERSION_JOINING_SCREENFE_MENU_VERSION_LANDING_MENUFE_MENU_VERSION_LANDING_KEYMAPPING_MENU",
+  "codeBlocks": [
+    "// ActivateFrontendMenu\nvoid ACTIVATE_FRONTEND_MENU(Hash menuhash, BOOL togglePause, int component);",
+    "-- Example usage for ACTIVATE_FRONTEND_MENU\nActivateFrontendMenu(0, false, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/ActivateFrontendMenu.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

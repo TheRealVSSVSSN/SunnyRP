@@ -1,0 +1,23 @@
+{
+  "title": "IS_PED_ARMED",
+  "breadcrumbs": [
+    "Native Reference",
+    "WEAPONAPI",
+    "IS_PED_ARMED"
+  ],
+  "content": "0x475768A975D5AD170x0BFC892C// IsPedArmed\nBOOL IS_PED_ARMED(Ped ped, int typeFlags);Parameters:ped: The ped to check armed state on.typeFlags: Type flags to check.Returns: Whether or not the ped is currently equipped with any weapon matching typeFlags.Checks if the ped is currently equipped with a weapon matching a bit specified using a bitwise-or in typeFlags.Bit valueEffect1Melee weapons2Explosive weapons4Any other weaponsNot specifying any bit will lead to the native always returning 'false', and for example specifying '4 | 2' will check for any weapon except fists and melee weapons.",
+  "codeBlocks": [
+    "// IsPedArmed\nBOOL IS_PED_ARMED(Ped ped, int typeFlags);",
+    "local ped = PlayerPedId()\n-- Example usage for IS_PED_ARMED\nIsPedArmed(ped, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/WEAPON/IsPedArmed.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

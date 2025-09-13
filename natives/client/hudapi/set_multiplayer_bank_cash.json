@@ -1,0 +1,24 @@
+{
+  "title": "SET_MULTIPLAYER_BANK_CASH",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "SET_MULTIPLAYER_BANK_CASH"
+  ],
+  "content": "0xDD21B55DF695CD0A0x2C842D03// SetMultiplayerBankCash\nvoid SET_MULTIPLAYER_BANK_CASH();Preview image:To change the bank balance use STAT_SET_INT with \"BANK_BALANCE\" to whatever value you need to.Examples:C#// Code to show both Money and Bank HUD\nN_0x170f541e1cadd1de(true);\nSetMultiplayerWalletCash();\nSetMultiplayerBankCash();\nN_0x170f541e1cadd1de(false);\n\n// Add a delay to let the player read his money\nawait Delay(5000);\n\n// Hide both Bank and Money HUD\nRemoveMultiplayerWalletCash();\nRemoveMultiplayerBankCash();",
+  "codeBlocks": [
+    "// SetMultiplayerBankCash\nvoid SET_MULTIPLAYER_BANK_CASH();",
+    "// Code to show both Money and Bank HUD\nN_0x170f541e1cadd1de(true);\nSetMultiplayerWalletCash();\nSetMultiplayerBankCash();\nN_0x170f541e1cadd1de(false);\n\n// Add a delay to let the player read his money\nawait Delay(5000);\n\n// Hide both Bank and Money HUD\nRemoveMultiplayerWalletCash();\nRemoveMultiplayerBankCash();"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/SetMultiplayerBankCash.md",
+    "https://docs.fivem.net/natives/?_0xB3271D7AB655B441",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "title": "IS_TRACK_ENABLED",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "IS_TRACK_ENABLED"
+  ],
+  "content": "0x31E695CB// IsTrackEnabled\nbool IS_TRACK_ENABLED(int track);Parameters:track: The track id (between 0 - 27)Returns: If this track is enabled.Getter for SET_TRACK_ENABLED",
+  "codeBlocks": [
+    "// IsTrackEnabled\nbool IS_TRACK_ENABLED(int track);",
+    "-- Example usage for IS_TRACK_ENABLED\nIsTrackEnabled(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/IsTrackEnabled.md",
+    "https://docs.fivem.net/natives/?_0x4B41E84C",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

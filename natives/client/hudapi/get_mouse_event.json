@@ -1,0 +1,23 @@
+{
+  "title": "GET_MOUSE_EVENT",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "GET_MOUSE_EVENT"
+  ],
+  "content": "0x632B2940C67F4EA9// GetMouseEvent\nBOOL GET_MOUSE_EVENT(int scaleformHandle, bool* received, int* selectionType, int* context, int* slotIndex);Parameters:scaleformHandle: Handle of the scaleformreceived: Returns a boolean indicating if the data was received successfully (in Lua).selectionType: The type of MouseEvent specified above.context: Context of the slot the mouse is hovering on.slotIndex: Index of the slot the mouse is hovering on.Returns: retVal Returns true if MOUSE_EVENT callback from Scaleforms has been called.Gets mouse event data from scaleforms with mouse support. Must be checked every frame.\nReturns item index if using the COLOUR_SWITCHER_02 scaleform.\nSelection types, found in MOUSE_EVENTS.as:\nMOUSE_DRAG_OUT = 0;\nMOUSE_DRAG_OVER = 1;\nMOUSE_DOWN = 2;\nMOUSE_MOVE = 3;\nMOUSE_UP = 4;\nMOUSE_PRESS = 5;\nMOUSE_RELEASE = 6;\nMOUSE_RELEASE_OUTSIDE = 7;\nMOUSE_ROLL_OUT = 8;\nMOUSE_ROLL_OVER = 9;\nMOUSE_WHEEL_UP = 10;\nMOUSE_WHEEL_DOWN = 11;Scaleforms that this works with:COLOUR_SWITCHER_02MP_RESULTS_PANELMP_NEXT_JOB_SELECTIONSC_LEADERBOARD\nProbably works with other scaleforms, needs more research.\nIn order to use this Native you MUST have controls 239, 240, 237, 238 enabled!\nThis native, due to its erroneous redundancy of the returned boolean value, works differently in C#: shifting the parameters (where received becomes selectionType and so on making the fourth parameter unused and always 0).Old name:  _GET_SCALEFORM_MOVIE_CURSOR_SELECTIONExamples:LuaC#local success, _eventType, _context, _itemId = GetMouseEvent(scaleform)",
+  "codeBlocks": [
+    "// GetMouseEvent\nBOOL GET_MOUSE_EVENT(int scaleformHandle, bool* received, int* selectionType, int* context, int* slotIndex);",
+    "local success, _eventType, _context, _itemId = GetMouseEvent(scaleform)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/GetMouseEvent.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

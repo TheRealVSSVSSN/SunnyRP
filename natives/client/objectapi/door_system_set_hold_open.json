@@ -1,0 +1,23 @@
+{
+  "title": "DOOR_SYSTEM_SET_HOLD_OPEN",
+  "breadcrumbs": [
+    "Native Reference",
+    "OBJECTAPI",
+    "DOOR_SYSTEM_SET_HOLD_OPEN"
+  ],
+  "content": "0xD9B71952F78A26400xECE58AE0// DoorSystemSetHoldOpen\nvoid DOOR_SYSTEM_SET_HOLD_OPEN(Hash doorHash, BOOL toggle);Parameters:doorHash: Door system identifiertoggle: Includes networking check: ownership vs. or the door itself isn't networked.",
+  "codeBlocks": [
+    "// DoorSystemSetHoldOpen\nvoid DOOR_SYSTEM_SET_HOLD_OPEN(Hash doorHash, BOOL toggle);",
+    "-- Example usage for DOOR_SYSTEM_SET_HOLD_OPEN\nDoorSystemSetHoldOpen(0, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/OBJECT/DoorSystemSetHoldOpen.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

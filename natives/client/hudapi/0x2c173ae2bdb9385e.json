@@ -1,0 +1,23 @@
+{
+  "title": "0x2C173AE2BDB9385E",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "0x2C173AE2BDB9385E"
+  ],
+  "content": "0x2C173AE2BDB9385E// N_0x2c173ae2bdb9385e\nint 0x2C173AE2BDB9385E(Blip blip);Parameters:blip: The blip to check.Returns: Seems to always return 0 from what I can tell. I've tried a lot of different blip related natives and it always seems to return 0.GETBLIP*\nSeems to always return 0 from what I can tell. I've tried a lot of different blip related natives and it always seems to return 0. Decompiled scripts always pass a blip handle as p0.",
+  "codeBlocks": [
+    "// N_0x2c173ae2bdb9385e\nint 0x2C173AE2BDB9385E(Blip blip);",
+    "-- Example usage for 0x2C173AE2BDB9385E\n0x2c173ae2bdb9385e(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/N_0x2c173ae2bdb9385e.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

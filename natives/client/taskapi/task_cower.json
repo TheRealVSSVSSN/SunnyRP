@@ -1,0 +1,23 @@
+{
+  "title": "TASK_COWER",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "TASK_COWER"
+  ],
+  "content": "0x3EB1FE9E8E908E150x9CF1C19B// TaskCower\nvoid TASK_COWER(Ped ped, int duration);Parameters:ped: Ped id.duration: Duration of the animation in ms. Set to -1 if you do not want a duration.The ped will act like NPC's involved in a gunfight. The ped will squat down with their heads held in place and look around.",
+  "codeBlocks": [
+    "// TaskCower\nvoid TASK_COWER(Ped ped, int duration);",
+    "local ped = PlayerPedId()\n-- Example usage for TASK_COWER\nTaskCower(ped, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/TaskCower.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

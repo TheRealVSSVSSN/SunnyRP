@@ -1,0 +1,24 @@
+{
+  "title": "LOAD_RESOURCE_FILE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "LOAD_RESOURCE_FILE"
+  ],
+  "content": "0x76A9EE1F// LoadResourceFile\nchar* LOAD_RESOURCE_FILE(char* resourceName, char* fileName);Parameters:resourceName: The resource name.fileName: The file in the resource.Returns: The file contentsReads the contents of a text file in a specified resource.\nIf executed on the client, this file has to be included in files in the resource manifest.\nExample: local data = LoadResourceFile(\"devtools\", \"data.json\")",
+  "codeBlocks": [
+    "// LoadResourceFile\nchar* LOAD_RESOURCE_FILE(char* resourceName, char* fileName);",
+    "-- Example usage for LOAD_RESOURCE_FILE\nLoadResourceFile('', '')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/LoadResourceFile.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client",
+    "server"
+  ]
+}

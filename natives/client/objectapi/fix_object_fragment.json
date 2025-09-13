@@ -1,0 +1,24 @@
+{
+  "title": "FIX_OBJECT_FRAGMENT",
+  "breadcrumbs": [
+    "Native Reference",
+    "OBJECTAPI",
+    "FIX_OBJECT_FRAGMENT"
+  ],
+  "content": "0xF9C1681347C8BD15// FixObjectFragment\nvoid FIX_OBJECT_FRAGMENT(Object object);Parameters:object: The object to fix fragments for (a handle should be passed).Resets and brings back all the children of a fragment based object.\nThis should be used when attaching or detaching an object from another entity, especially when the object being detached consists of multiple fragments.Attempting to teleport a fragment-based object using SET_ENTITY_COORDS such as a flag object, will result in it remaining in place and failing to teleport, given the condition mentioned in the preceding statement.The native should be executed after detaching the object from its parent entity and before calling SET_ENTITY_COORDS.Example given down below.Examples:LuaRegisterCommand(\"fixobject\", function(source, args, rawCommand)\n    -- prop_flag_ls does not get teleported after being attached to the player\n    -- prop_beachflag_01 only the pole gets teleported after being attached to the player\n    local modelHash = `prop_beachflag_01`\n    if not HasModelLoaded(modelHash) then\n        RequestModel(modelHash)\n        while not HasModelLoaded(modelHash) do\n            Citizen.Wait(1)\n        end\n    end\n\n    -- Set argument 1 to 0 if you wish to see what occurs when fragments aren't fixed.\n    -- i.e. /fixobject 0\n    local shouldFixFragments = tonumber(args[1]) or true\n    \n    local entity = CreateObject(modelHash, GetEntityCoords(PlayerPedId()), true, false, false)\n    AttachEntityToEntity(\n        entity,\n        PlayerPedId(),\n        GetPedBoneIndex(PlayerPedId(), 0x796E), --0x796E\n        0.0, 0.0, 0.1, -- offset attachment for the first entity\n        0.0, 0.0, 0.0, \n        false, \n        false, \n        false, \n        false, \n        1, -- rotation order\n        true, \n        false\n    )\n    \n    Citizen.SetTimeout(5000, function()\n        DetachEntity(entity, true, true)\n        Citizen.Trace(\"Detaching entity...\")\n    end)\n\n    Citizen.SetTimeout(8000, function()\n        local coords = GetEntityCoords(PlayerPedId())\n        Citizen.Trace(\n            string.format(\"Setting coords to %f %f %f...\", coords.x, coords.y, coords.z)\n        )\n        if shouldFixFragments then\n            Citizen.Trace(\"Fixing fragments for entity...\")\n            FixObjectFragment(entity)\n        end\n        SetEntityCoords(entity, coords, false, false, false, true)\n        FreezeEntityPosition(entity, true)\n    end)\nend, false)",
+  "codeBlocks": [
+    "// FixObjectFragment\nvoid FIX_OBJECT_FRAGMENT(Object object);",
+    "-- prop_flag_ls does not get teleported after being attached to the player\n    -- prop_beachflag_01 only the pole gets teleported after being attached to the player\n    local modelHash = `prop_beachflag_01`\n    if not HasModelLoaded(modelHash) then\n        RequestModel(modelHash)\n        while not HasModelLoaded(modelHash) do\n            Citizen.Wait(1)\n        end\n    end\n\n    -- Set argument 1 to 0 if you wish to see what occurs when fragments aren't fixed.\n    -- i.e. /fixobject 0\n    local shouldFixFragments = tonumber(args[1]) or true\n    \n    local entity = CreateObject(modelHash, GetEntityCoords(PlayerPedId()), true, false, false)\n    AttachEntityToEntity(\n        entity,\n        PlayerPedId(),\n        GetPedBoneIndex(PlayerPedId(), 0x796E), --0x796E\n        0.0, 0.0, 0.1, -- offset attachment for the first entity\n        0.0, 0.0, 0.0, \n        false, \n        false, \n        false, \n        false, \n        1, -- rotation order\n        true, \n        false\n    )\n    \n    Citizen.SetTimeout(5000, function()\n        DetachEntity(entity, true, true)\n        Citizen.Trace(\"Detaching entity...\")\n    end)\n\n    Citizen.SetTimeout(8000, function()\n        local coords = GetEntityCoords(PlayerPedId())\n        Citizen.Trace(\n            string.format(\"Setting coords to %f %f %f...\", coords.x, coords.y, coords.z)\n        )\n        if shouldFixFragments then\n            Citizen.Trace(\"Fixing fragments for entity...\")\n            FixObjectFragment(entity)\n        end\n        SetEntityCoords(entity, coords, false, false, false, true)\n        FreezeEntityPosition(entity, true)\n    end)\nend, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/OBJECT/FixObjectFragment.md",
+    "https://docs.fivem.net/natives/?_0x06843DA7060A026B",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

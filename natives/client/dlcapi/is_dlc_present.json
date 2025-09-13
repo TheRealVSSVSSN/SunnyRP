@@ -1,0 +1,23 @@
+{
+  "title": "IS_DLC_PRESENT",
+  "breadcrumbs": [
+    "Native Reference",
+    "DLCAPI",
+    "IS_DLC_PRESENT"
+  ],
+  "content": "0x812595A0644CE1DE0x1F321943// IsDlcPresent\nBOOL IS_DLC_PRESENT(Hash dlcHash);Example:\nDLC::IS_DLC_PRESENT($\\mpbusiness2\\);\n($ = gethashkey)\nbruteforce these:\n0xB119F6D\n0x96F02EE6",
+  "codeBlocks": [
+    "// IsDlcPresent\nBOOL IS_DLC_PRESENT(Hash dlcHash);",
+    "Example:\nDLC::IS_DLC_PRESENT($\\mpbusiness2\\);\n($ = gethashkey)\nbruteforce these:\n0xB119F6D\n0x96F02EE6"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/DLC/IsDlcPresent.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

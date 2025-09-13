@@ -1,0 +1,24 @@
+{
+  "title": "POINT_CAM_AT_ENTITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "CAMAPI",
+    "POINT_CAM_AT_ENTITY"
+  ],
+  "content": "0x5640BFF86B16E8DC0x7597A0F7// PointCamAtEntity\nvoid POINT_CAM_AT_ENTITY(Cam cam, Entity entity, float offsetX, float offsetY, float offsetZ, BOOL p5);Parameters:cam: Cam (Return value of CREATE_CAM or CREATE_CAM_WITH_PARAMS).entity: Entity for the camera to point at.offsetX: X offset for the camera (left/right).offsetY: Y offset for the camera (forward/backward).offsetZ: Z offset for the camera (up/down).p5: Always seems to be 1 (true).Points the camera at the specified entity.Offset works like GET_OFFSET_FROM_ENTITY_IN_WORLD_COORDS.Examples:Lualocal cam = CreateCameraWithParams(\"DEFAULT_SCRIPTED_CAMERA\", GetEntityCoords(PlayerPedId()), 0.0, 0.0, 0.0, 90.0, true, 2)\nPointCamAtEntity(cam, PlayerPedId(), 0.0, 0.0, 0.0, true)\nRenderScriptCams(true, false, 0, true, true)",
+  "codeBlocks": [
+    "// PointCamAtEntity\nvoid POINT_CAM_AT_ENTITY(Cam cam, Entity entity, float offsetX, float offsetY, float offsetZ, BOOL p5);",
+    "local cam = CreateCameraWithParams(\"DEFAULT_SCRIPTED_CAMERA\", GetEntityCoords(PlayerPedId()), 0.0, 0.0, 0.0, 90.0, true, 2)\nPointCamAtEntity(cam, PlayerPedId(), 0.0, 0.0, 0.0, true)\nRenderScriptCams(true, false, 0, true, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CAM/PointCamAtEntity.md",
+    "https://docs.fivem.net/natives/?_0x1899F328B0E12848",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

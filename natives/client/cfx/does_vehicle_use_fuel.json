@@ -1,0 +1,25 @@
+{
+  "title": "DOES_VEHICLE_USE_FUEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "DOES_VEHICLE_USE_FUEL"
+  ],
+  "content": "0xEF30A696// DoesVehicleUseFuel\nBOOL DOES_VEHICLE_USE_FUEL(Vehicle vehicle);Parameters:vehicle: The vehicle handle.Returns: True if the vehicle uses fuel to move. False otherwise.Checks whether the vehicle consumes fuel. The check is done based on petrol tank volume and vehicle type. Bicycles and vehicles with petrol tank volume equal to zero (only bicycles by default) do not use fuel. All other vehicles do.You can customize petrol tank volume using SET_HANDLING_FLOAT/SET_VEHICLE_HANDLING_FLOAT natives with fieldName equal to fPetrolTankVolume.",
+  "codeBlocks": [
+    "// DoesVehicleUseFuel\nBOOL DOES_VEHICLE_USE_FUEL(Vehicle vehicle);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for DOES_VEHICLE_USE_FUEL\nDoesVehicleUseFuel(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/DoesVehicleUseFuel.md",
+    "https://docs.fivem.net/natives/?_0x90DD01C",
+    "https://docs.fivem.net/natives/?_0x488C86D2",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

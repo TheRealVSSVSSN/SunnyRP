@@ -1,0 +1,23 @@
+{
+  "title": "TASK_PLAY_PHONE_GESTURE_ANIMATION",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "TASK_PLAY_PHONE_GESTURE_ANIMATION"
+  ],
+  "content": "0x8FBB6758B3B3E9EC0x1582162C// TaskPlayPhoneGestureAnimation\nvoid TASK_PLAY_PHONE_GESTURE_ANIMATION(Ped ped, char* animDict, char* animation, char* boneMaskType, float p4, float p5, BOOL p6, BOOL p7);Example from the scripts:\nTASK::TASK_PLAY_PHONE_GESTURE_ANIMATION(PLAYER::PLAYER_PED_ID(), v_3, v_2, v_4, 0.25, 0.25, 0, 0);\n=========================================================\n^^ No offense, but Idk how that would really help anyone.\nAs for the animDict & animation, they're both store in a global in all 5 scripts. So if anyone would be so kind as to read that global and comment what strings they use. Thanks.\nKnown boneMaskTypes'\n\"BONEMASK_HEADONLY\"\n\"BONEMASK_HEAD_NECK_AND_ARMS\"\n\"BONEMASK_HEAD_NECK_AND_L_ARM\"\n\"BONEMASK_HEAD_NECK_AND_R_ARM\"\np4 known args - 0.0f, 0.5f, 0.25f\np5 known args - 0.0f, 0.25f\np6 known args - 1 if a global if check is passed.\np7 known args - 1 if a global if check is passed.\nThe values found above, I found within the 5 scripts this is ever called in. (fmmc_launcher, fm_deathmatch_controller, fm_impromptu_dm_controller, fm_mission_controller, and freemode).\n=========================================================",
+  "codeBlocks": [
+    "// TaskPlayPhoneGestureAnimation\nvoid TASK_PLAY_PHONE_GESTURE_ANIMATION(Ped ped, char* animDict, char* animation, char* boneMaskType, float p4, float p5, BOOL p6, BOOL p7);",
+    "Example from the scripts:\nTASK::TASK_PLAY_PHONE_GESTURE_ANIMATION(PLAYER::PLAYER_PED_ID(), v_3, v_2, v_4, 0.25, 0.25, 0, 0);\n=========================================================\n^^ No offense, but Idk how that would really help anyone.\nAs for the animDict & animation, they're both store in a global in all 5 scripts. So if anyone would be so kind as to read that global and comment what strings they use. Thanks.\nKnown boneMaskTypes'\n\"BONEMASK_HEADONLY\"\n\"BONEMASK_HEAD_NECK_AND_ARMS\"\n\"BONEMASK_HEAD_NECK_AND_L_ARM\"\n\"BONEMASK_HEAD_NECK_AND_R_ARM\"\np4 known args - 0.0f, 0.5f, 0.25f\np5 known args - 0.0f, 0.25f\np6 known args - 1 if a global if check is passed.\np7 known args - 1 if a global if check is passed.\nThe values found above, I found within the 5 scripts this is ever called in. (fmmc_launcher, fm_deathmatch_controller, fm_impromptu_dm_controller, fm_mission_controller, and freemode).\n========================================================="
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/TaskPlayPhoneGestureAnimation.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

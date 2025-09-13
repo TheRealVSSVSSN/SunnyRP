@@ -1,0 +1,23 @@
+{
+  "title": "SET_TEXT_DROPSHADOW",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "SET_TEXT_DROPSHADOW"
+  ],
+  "content": "0x465C84BC39F1C3510xE6587517// SetTextDropshadow\nvoid SET_TEXT_DROPSHADOW(int distance, int r, int g, int b, int a);Parameters:distance: Shadow distance in pixels, both horizontal and vertical.r: Red color.g: Green color.b: Blue color.a: Alpha.distance - shadow distance in pixels, both horizontal and vertical\nr, g, b, a - color",
+  "codeBlocks": [
+    "// SetTextDropshadow\nvoid SET_TEXT_DROPSHADOW(int distance, int r, int g, int b, int a);",
+    "-- Example usage for SET_TEXT_DROPSHADOW\nSetTextDropshadow(0, 0, 0, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/SetTextDropshadow.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "LOAD_ALL_PATH_NODES",
+  "breadcrumbs": [
+    "Native Reference",
+    "PATHFINDAPI",
+    "LOAD_ALL_PATH_NODES"
+  ],
+  "content": "0x80E4A6EDDB0BE8D90xC66E28C3// LoadAllPathNodes\nBOOL LOAD_ALL_PATH_NODES(BOOL keepInMemory);Parameters:keepInMemory: if true, all path nodes will be loaded and be kept in memory; otherwise, all path nodes will be loaded, but unloaded as the game sees fit.This native has been removed in v1180.",
+  "codeBlocks": [
+    "// LoadAllPathNodes\nBOOL LOAD_ALL_PATH_NODES(BOOL keepInMemory);",
+    "This native has been removed in v1180."
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PATHFIND/LoadAllPathNodes.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

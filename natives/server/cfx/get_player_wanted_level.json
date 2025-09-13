@@ -1,0 +1,23 @@
+{
+  "title": "GET_PLAYER_WANTED_LEVEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PLAYER_WANTED_LEVEL"
+  ],
+  "content": "0xBDCDD163// GetPlayerWantedLevel\nint GET_PLAYER_WANTED_LEVEL(char* playerSrc);Parameters:playerSrc: The target playerReturns: The wanted levelReturns given players wanted level server-side.",
+  "codeBlocks": [
+    "// GetPlayerWantedLevel\nint GET_PLAYER_WANTED_LEVEL(char* playerSrc);",
+    "Returns given players wanted level server-side."
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPlayerWantedLevel.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

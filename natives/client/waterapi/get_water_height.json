@@ -1,0 +1,23 @@
+{
+  "title": "GET_WATER_HEIGHT",
+  "breadcrumbs": [
+    "Native Reference",
+    "WATERAPI",
+    "GET_WATER_HEIGHT"
+  ],
+  "content": "0xF6829842C06AE5240xD864E17C// GetWaterHeight\nBOOL GET_WATER_HEIGHT(float x, float y, float z, float* height);Parameters:x: The coordinate at which to test at for water.y: The coordinate at which to test at for water.z: The coordinate at which to test at for water.height: The height at which to test at for water.Returns: Returns false when land at the tested coordinates is higher than water, true otherwise.Retrieves the depth of the water beneath the specified position, accounting for the waves.Note: The result might vary depending on the specific frame when this command is executed due to wave fluctuations.",
+  "codeBlocks": [
+    "// GetWaterHeight\nBOOL GET_WATER_HEIGHT(float x, float y, float z, float* height);",
+    "-- Example usage for GET_WATER_HEIGHT\nGetWaterHeight(0.0, 0.0, 0.0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/WATER/GetWaterHeight.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

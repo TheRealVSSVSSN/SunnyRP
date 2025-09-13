@@ -1,0 +1,23 @@
+{
+  "title": "GET_COMBAT_FLOAT",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "GET_COMBAT_FLOAT"
+  ],
+  "content": "0x52DFF8A10508090A0x511D7EF8// GetCombatFloat\nfloat GET_COMBAT_FLOAT(Ped ped, int p1);p0: Ped Handle  \np1: int i | 0 <= i <= 27  \np1 probably refers to the attributes configured in combatbehavior.meta. There are 13. Example:  \n<BlindFireChance value=\"0.1\"/>  \n<WeaponShootRateModifier value=\"1.0\"/>  \n<TimeBetweenBurstsInCover value=\"1.25\"/>  \n<BurstDurationInCover value=\"2.0\"/>  \n<TimeBetweenPeeks value=\"10.0\"/>  \n<WeaponAccuracy value=\"0.18\"/>  \n<FightProficiency value=\"0.8\"/>  \n<StrafeWhenMovingChance value=\"1.0\"/>  \n<WalkWhenStrafingChance value=\"0.0\"/>  \n<AttackWindowDistanceForCover value=\"55.0\"/>  \n<TimeToInvalidateInjuredTarget value=\"9.0\"/>  \n<TriggerChargeTime_Near value=\"4.0\"/>  \n<TriggerChargeTime_Far value=\"10.0\"/>  \n-------------Confirmed by editing combatbehavior.meta:  \np1:  \n0=BlindFireChance  \n1=BurstDurationInCover  \n3=TimeBetweenBurstsInCover  \n4=TimeBetweenPeeks  \n5=StrafeWhenMovingChance  \n8=WalkWhenStrafingChance  \n11=AttackWindowDistanceForCover  \n12=TimeToInvalidateInjuredTarget  \n16=OptimalCoverDistance",
+  "codeBlocks": [
+    "// GetCombatFloat\nfloat GET_COMBAT_FLOAT(Ped ped, int p1);",
+    "p0: Ped Handle  \np1: int i | 0 <= i <= 27  \np1 probably refers to the attributes configured in combatbehavior.meta. There are 13. Example:  \n<BlindFireChance value=\"0.1\"/>  \n<WeaponShootRateModifier value=\"1.0\"/>  \n<TimeBetweenBurstsInCover value=\"1.25\"/>  \n<BurstDurationInCover value=\"2.0\"/>  \n<TimeBetweenPeeks value=\"10.0\"/>  \n<WeaponAccuracy value=\"0.18\"/>  \n<FightProficiency value=\"0.8\"/>  \n<StrafeWhenMovingChance value=\"1.0\"/>  \n<WalkWhenStrafingChance value=\"0.0\"/>  \n<AttackWindowDistanceForCover value=\"55.0\"/>  \n<TimeToInvalidateInjuredTarget value=\"9.0\"/>  \n<TriggerChargeTime_Near value=\"4.0\"/>  \n<TriggerChargeTime_Far value=\"10.0\"/>  \n-------------Confirmed by editing combatbehavior.meta:  \np1:  \n0=BlindFireChance  \n1=BurstDurationInCover  \n3=TimeBetweenBurstsInCover  \n4=TimeBetweenPeeks  \n5=StrafeWhenMovingChance  \n8=WalkWhenStrafingChance  \n11=AttackWindowDistanceForCover  \n12=TimeToInvalidateInjuredTarget  \n16=OptimalCoverDistance"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/GetCombatFloat.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

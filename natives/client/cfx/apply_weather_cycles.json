@@ -1,0 +1,23 @@
+{
+  "title": "APPLY_WEATHER_CYCLES",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "APPLY_WEATHER_CYCLES"
+  ],
+  "content": "0x3422291C// ApplyWeatherCycles\nBOOL APPLY_WEATHER_CYCLES(int numEntries, int msPerCycle);Parameters:numEntries: The number of cycle entries. Must be between 1 and 256msPerCycle: The duration in milliseconds of each cycle. Must be between 1000 and 86400000 (24 hours)Returns: Returns true if all parameters were valid, otherwise false.Examples:Lua-- Cycle between XMAS weather for 30 seconds (3 * 10000 milliseconds), and SMOG weather for 20 seconds (2 * 10000 milliseconds)\nlocal success = SetWeatherCycleEntry(0, \"XMAS\", 3) and\n                SetWeatherCycleEntry(1, \"SMOG\", 2) and\n                ApplyWeatherCycles(2, 10000)",
+  "codeBlocks": [
+    "// ApplyWeatherCycles\nBOOL APPLY_WEATHER_CYCLES(int numEntries, int msPerCycle);",
+    "-- Cycle between XMAS weather for 30 seconds (3 * 10000 milliseconds), and SMOG weather for 20 seconds (2 * 10000 milliseconds)\nlocal success = SetWeatherCycleEntry(0, \"XMAS\", 3) and\n                SetWeatherCycleEntry(1, \"SMOG\", 2) and\n                ApplyWeatherCycles(2, 10000)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/ApplyWeatherCycles.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

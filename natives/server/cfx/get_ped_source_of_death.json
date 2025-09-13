@@ -1,0 +1,23 @@
+{
+  "title": "GET_PED_SOURCE_OF_DEATH",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PED_SOURCE_OF_DEATH"
+  ],
+  "content": "0x84ADF9EB// GetPedSourceOfDeath\nEntity GET_PED_SOURCE_OF_DEATH(Ped ped);Parameters:ped: The target pedReturns: The entity id. Returns 0 if the ped has no killer.Get the entity that killed the ped. This native is used server side when using OneSync.",
+  "codeBlocks": [
+    "// GetPedSourceOfDeath\nEntity GET_PED_SOURCE_OF_DEATH(Ped ped);",
+    "local ped = PlayerPedId()\n-- Example usage for GET_PED_SOURCE_OF_DEATH\nGetPedSourceOfDeath(ped)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPedSourceOfDeath.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "SET_MINIMAP_SONAR_SWEEP",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "SET_MINIMAP_SONAR_SWEEP"
+  ],
+  "content": "0x6B50FC8749632EC1// SetMinimapSonarSweep\nvoid SET_MINIMAP_SONAR_SWEEP(BOOL toggle);Parameters:toggle: A boolean value where true activates the sonar sweep animation on the minimap, and false turns it off.Returns: This native does not return any value.Enables or disables the sonar sweep animation on the minimap.NativeDB Introduced: v2189Old name:  _SET_MINIMAP_SONAR_ENABLED",
+  "codeBlocks": [
+    "// SetMinimapSonarSweep\nvoid SET_MINIMAP_SONAR_SWEEP(BOOL toggle);",
+    "NativeDB Introduced: v2189"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/SetMinimapSonarSweep.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

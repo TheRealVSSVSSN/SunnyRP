@@ -1,0 +1,23 @@
+{
+  "title": "GET_WEAPON_COMPONENT_RETICULE_HASH",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_WEAPON_COMPONENT_RETICULE_HASH"
+  ],
+  "content": "0xF9AB9297// GetWeaponComponentReticuleHash\nint GET_WEAPON_COMPONENT_RETICULE_HASH(Hash componentHash);Parameters:componentHash: Weapon component name hash.Returns: The hash of the reticule camera.A getter for ReticuleHash in a weapon scope component.",
+  "codeBlocks": [
+    "// GetWeaponComponentReticuleHash\nint GET_WEAPON_COMPONENT_RETICULE_HASH(Hash componentHash);",
+    "-- Example usage for GET_WEAPON_COMPONENT_RETICULE_HASH\nGetWeaponComponentReticuleHash(GetHashKey('prop'))"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetWeaponComponentReticuleHash.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

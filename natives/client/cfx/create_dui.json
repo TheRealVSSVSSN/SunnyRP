@@ -1,0 +1,23 @@
+{
+  "title": "CREATE_DUI",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "CREATE_DUI"
+  ],
+  "content": "0x23EAF899// CreateDui\nlong CREATE_DUI(char* url, int width, int height);Parameters:url: The initial URL to load in the browser.width: The width of the backing surface.height: The height of the backing surface.Returns: A DUI object.Creates a DUI browser. This can be used to draw on a runtime texture using CREATE_RUNTIME_TEXTURE_FROM_DUI_HANDLE.",
+  "codeBlocks": [
+    "// CreateDui\nlong CREATE_DUI(char* url, int width, int height);",
+    "-- Example usage for CREATE_DUI\nCreateDui('', 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/CreateDui.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

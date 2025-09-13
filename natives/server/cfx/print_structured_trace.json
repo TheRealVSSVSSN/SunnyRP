@@ -1,0 +1,23 @@
+{
+  "title": "PRINT_STRUCTURED_TRACE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "PRINT_STRUCTURED_TRACE"
+  ],
+  "content": "0x90892DED// PrintStructuredTrace\nvoid PRINT_STRUCTURED_TRACE(char* jsonString);Parameters:jsonString: JSON data to submit as payload in the script_structured_trace event.Prints 'structured trace' data to the server file descriptor 3 channel. This is not generally useful outside of\nserver monitoring utilities.",
+  "codeBlocks": [
+    "// PrintStructuredTrace\nvoid PRINT_STRUCTURED_TRACE(char* jsonString);",
+    "-- Example usage for PRINT_STRUCTURED_TRACE\nPrintStructuredTrace('')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/PrintStructuredTrace.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "title": "CREATE_WEAPON_OBJECT",
+  "breadcrumbs": [
+    "Native Reference",
+    "WEAPONAPI",
+    "CREATE_WEAPON_OBJECT"
+  ],
+  "content": "0x9541D3CF0D398F360x62F5987F// CreateWeaponObject\nObject CREATE_WEAPON_OBJECT(Hash weaponHash, int ammoCount, float x, float y, float z, BOOL bCreateDefaultComponents, float scale, int customModelHash);Parameters:weaponHash: The hash of the weapon to create.ammoCount: The amount of ammo for the weapon.x: X coordinate for the weapon's position.y: Y coordinate for the weapon's position.z: Z coordinate for the weapon's position.bCreateDefaultComponents: Boolean that indicates whether the default components should be created for that weapon (true/false).scale: The size of the object, to increase it, set the scale to a value greater than 1.0.customModelHash: The hash of the custom model to use for the weapon object. Set to 0 if you do not intend to use a custom model hash.Create a weapon object that cannot be attached to a ped. If you want to create a weapon object that can be attached to a ped, use CREATE_OBJECT instead.NativeDB Added Parameter 9: BOOL bRegisterAsNetworkObject\nNativeDB Added Parameter 10: BOOL bScriptHostObject",
+  "codeBlocks": [
+    "// CreateWeaponObject\nObject CREATE_WEAPON_OBJECT(Hash weaponHash, int ammoCount, float x, float y, float z, BOOL bCreateDefaultComponents, float scale, int customModelHash);",
+    "NativeDB Added Parameter 9: BOOL bRegisterAsNetworkObject\nNativeDB Added Parameter 10: BOOL bScriptHostObject"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/WEAPON/CreateWeaponObject.md",
+    "https://docs.fivem.net/natives/?_0x509D5878EB39E842",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}
