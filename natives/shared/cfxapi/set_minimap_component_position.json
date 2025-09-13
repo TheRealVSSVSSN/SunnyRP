@@ -1,0 +1,19 @@
+{
+  "title": "SET_MINIMAP_COMPONENT_POSITION",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_MINIMAP_COMPONENT_POSITION"
+  ],
+  "content": "0x3E882B23// SetMinimapComponentPosition\nvoid SET_MINIMAP_COMPONENT_POSITION(char* name, char* alignX, char* alignY, float posX, float posY, float sizeX, float sizeY);Parameters:name: The name of the minimap component to override.alignX: Equivalent to the alignX field in frontend.xml.alignY: Equivalent to the alignY field in frontend.xml.posX: Equivalent to the posX field in frontend.xml.posY: Equivalent to the posY field in frontend.xml.sizeX: Equivalent to the sizeX field in frontend.xml.sizeY: Equivalent to the sizeY field in frontend.xml.Overrides the minimap component data (from common:/data/ui/frontend.xml) for a specified component.",
+  "codeBlocks": [
+    "// SetMinimapComponentPosition\nvoid SET_MINIMAP_COMPONENT_POSITION(char* name, char* alignX, char* alignY, float posX, float posY, float sizeX, float sizeY);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetMinimapComponentPosition.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

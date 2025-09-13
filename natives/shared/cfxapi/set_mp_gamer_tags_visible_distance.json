@@ -1,0 +1,19 @@
+{
+  "title": "SET_MP_GAMER_TAGS_VISIBLE_DISTANCE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_MP_GAMER_TAGS_VISIBLE_DISTANCE"
+  ],
+  "content": "0xD61676B3// SetMpGamerTagsVisibleDistance\nvoid SET_MP_GAMER_TAGS_VISIBLE_DISTANCE(float distance);Parameters:distance: The visible distance. Default is 100.0f.Sets the maximum distance at which all tags will be visible and which beyond will not be displayed. Distance is measured from the camera position.",
+  "codeBlocks": [
+    "// SetMpGamerTagsVisibleDistance\nvoid SET_MP_GAMER_TAGS_VISIBLE_DISTANCE(float distance);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetMpGamerTagsVisibleDistance.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

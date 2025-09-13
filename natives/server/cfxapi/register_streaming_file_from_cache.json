@@ -1,0 +1,19 @@
+{
+  "title": "REGISTER_STREAMING_FILE_FROM_CACHE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "REGISTER_STREAMING_FILE_FROM_CACHE"
+  ],
+  "content": "0xCEAD2D4B// RegisterStreamingFileFromCache\nvoid REGISTER_STREAMING_FILE_FROM_CACHE(char* resourceName, char* fileName, char* cacheString);Parameters:resourceName: The resource to add the asset to.fileName: A file name in the resource.cacheString: The string returned from REGISTER_RESOURCE_ASSET on the server.Experimental: This native may be altered or removed in future versions of CitizenFX without warning.Registers a dynamic streaming asset from the server with the GTA streaming module system.",
+  "codeBlocks": [
+    "// RegisterStreamingFileFromCache\nvoid REGISTER_STREAMING_FILE_FROM_CACHE(char* resourceName, char* fileName, char* cacheString);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/RegisterStreamingFileFromCache.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

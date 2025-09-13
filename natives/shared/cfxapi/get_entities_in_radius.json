@@ -1,0 +1,20 @@
+{
+  "title": "GET_ENTITIES_IN_RADIUS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_ENTITIES_IN_RADIUS"
+  ],
+  "content": "0xDFFBA12F// GetEntitiesInRadius\nobject GET_ENTITIES_IN_RADIUS(float x, float y, float z, float radius, int entityType, BOOL sortByDistance, object models);Parameters:x: The X coordinate.y: The Y coordinate.z: The Z coordinate.radius: Max distance from coordinate to entityentityType: Entity types see list belowsortByDistance: Sort output entites by distance from nearest to farthestmodels: List of allowed models its also optionalReturns: An array containing entity handles for each entity.Supported types[1] : Peds (including animals) and players.[2] : Vehicles.[3] : Objects (props), doors, and projectiles.Coordinates need to be send unpacked (x,y,z)-- Define the allowed model hashes\nlocal allowedModelHashes = { GetHashKey(\"p_crate03x\"), GetHashKey(\"p_crate22x\") }\n\n-- Get the player's current coordinates\nlocal playerCoords = GetEntityCoords(PlayerPedId())\n\n-- Retrieve all entities of type Object (type 3) within a radius of 10.0 units\n-- that match the allowed model hashes\n-- and sort output entities by distance\nlocal entities = GetEntitiesInRadius(playerCoords.x, playerCoords.y, playerCoords.z, 10.0, 3, true, allowedModelHashes)\n\n-- Iterate through the list of entities and print their ids\nfor i = 1, #entities do\n    local entity = entities[i]\n    print(entity)\nend",
+  "codeBlocks": [
+    "// GetEntitiesInRadius\nobject GET_ENTITIES_IN_RADIUS(float x, float y, float z, float radius, int entityType, BOOL sortByDistance, object models);",
+    "-- Define the allowed model hashes\nlocal allowedModelHashes = { GetHashKey(\"p_crate03x\"), GetHashKey(\"p_crate22x\") }\n\n-- Get the player's current coordinates\nlocal playerCoords = GetEntityCoords(PlayerPedId())\n\n-- Retrieve all entities of type Object (type 3) within a radius of 10.0 units\n-- that match the allowed model hashes\n-- and sort output entities by distance\nlocal entities = GetEntitiesInRadius(playerCoords.x, playerCoords.y, playerCoords.z, 10.0, 3, true, allowedModelHashes)\n\n-- Iterate through the list of entities and print their ids\nfor i = 1, #entities do\n    local entity = entities[i]\n    print(entity)\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetEntitiesInRadius.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

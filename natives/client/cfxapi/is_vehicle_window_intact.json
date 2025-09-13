@@ -1,0 +1,20 @@
+{
+  "title": "IS_VEHICLE_WINDOW_INTACT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "IS_VEHICLE_WINDOW_INTACT"
+  ],
+  "content": "0xAC4EF23D// IsVehicleWindowIntact\nBOOL IS_VEHICLE_WINDOW_INTACT(Vehicle vehicle, int windowIndex);Parameters:vehicle: The target vehicle.windowIndex: The window index.See the client-side IS_VEHICLE_WINDOW_INTACT for a window indexes list.",
+  "codeBlocks": [
+    "// IsVehicleWindowIntact\nBOOL IS_VEHICLE_WINDOW_INTACT(Vehicle vehicle, int windowIndex);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/IsVehicleWindowIntact.md",
+    "https://docs.fivem.net/natives/?_0x46E571A0E20D01F1",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

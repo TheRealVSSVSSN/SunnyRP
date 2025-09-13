@@ -1,0 +1,19 @@
+{
+  "title": "IS_STREAMING_FILE_READY",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "IS_STREAMING_FILE_READY"
+  ],
+  "content": "0xA194934D// IsStreamingFileReady\nBOOL IS_STREAMING_FILE_READY(char* registerAs);Parameters:registerAs: The file name to check, for example asset.ydr.Returns: Whether or not the streaming file has been registered.Experimental: This native may be altered or removed in future versions of CitizenFX without warning.Returns whether an asynchronous streaming file registration completed.",
+  "codeBlocks": [
+    "// IsStreamingFileReady\nBOOL IS_STREAMING_FILE_READY(char* registerAs);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/IsStreamingFileReady.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

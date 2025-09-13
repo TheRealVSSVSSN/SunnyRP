@@ -1,0 +1,19 @@
+{
+  "title": "GET_WEAPON_COMPONENT_CLIP_SIZE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_WEAPON_COMPONENT_CLIP_SIZE"
+  ],
+  "content": "0xE14CF665// GetWeaponComponentClipSize\nint GET_WEAPON_COMPONENT_CLIP_SIZE(Hash componentHash);Parameters:componentHash: Weapon component name hash.Returns: A weapon component clip size.A getter for ClipSize in a weapon component.",
+  "codeBlocks": [
+    "// GetWeaponComponentClipSize\nint GET_WEAPON_COMPONENT_CLIP_SIZE(Hash componentHash);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetWeaponComponentClipSize.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

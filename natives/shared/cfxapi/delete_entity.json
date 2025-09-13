@@ -1,0 +1,19 @@
+{
+  "title": "DELETE_ENTITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "DELETE_ENTITY"
+  ],
+  "content": "0xFAA3D236// DeleteEntity\nvoid DELETE_ENTITY(Entity entity);Parameters:entity: The entity to delete.Deletes the specified entity.NOTE: For trains this will only work if called on the train engine, it will not work on its carriages.",
+  "codeBlocks": [
+    "// DeleteEntity\nvoid DELETE_ENTITY(Entity entity);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/DeleteEntity.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

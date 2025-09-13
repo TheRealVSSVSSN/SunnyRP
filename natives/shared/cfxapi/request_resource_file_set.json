@@ -1,0 +1,21 @@
+{
+  "title": "REQUEST_RESOURCE_FILE_SET",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "REQUEST_RESOURCE_FILE_SET"
+  ],
+  "content": "0xE7490533// RequestResourceFileSet\nBOOL REQUEST_RESOURCE_FILE_SET(char* setName);Parameters:setName: The name of the file set as specified in fxmanifest.lua.Returns: TRUE if the set is mounted, FALSE if the request is still pending.Requests a resource file set with the specified name to be downloaded and mounted on top of the current resource.Resource file sets are specified in fxmanifest.lua with the following syntax:file_set 'addon_ui' {\n    'ui/addon/index.html',\n    'ui/addon/**.js',\n}\nThis command will trigger a script error if the request failed.Examples:Lua-- fxmanifest.lua\nfile_set 'dummies' {\n    'dummy/**.txt',\n    'potato.txt',\n}\n\n-- main script\nlocal function PrintTest()\n    local tests = { 'potato.txt', 'dummy/1.txt', 'dummy/b/2.txt' }\n\n    for _, v in ipairs(tests) do\n        local data = LoadResourceFile(GetCurrentResourceName(), v)\n        print(v, data)\n    end\nend\n\nRegisterCommand('fileset', function()\n    PrintTest()\n\n    while not RequestResourceFileSet('dummies') do\n        Wait(100)\n    end\n\n    PrintTest()\nend)",
+  "codeBlocks": [
+    "// RequestResourceFileSet\nBOOL REQUEST_RESOURCE_FILE_SET(char* setName);",
+    "file_set 'addon_ui' {\n    'ui/addon/index.html',\n    'ui/addon/**.js',\n}\n",
+    "-- fxmanifest.lua\nfile_set 'dummies' {\n    'dummy/**.txt',\n    'potato.txt',\n}\n\n-- main script\nlocal function PrintTest()\n    local tests = { 'potato.txt', 'dummy/1.txt', 'dummy/b/2.txt' }\n\n    for _, v in ipairs(tests) do\n        local data = LoadResourceFile(GetCurrentResourceName(), v)\n        print(v, data)\n    end\nend\n\nRegisterCommand('fileset', function()\n    PrintTest()\n\n    while not RequestResourceFileSet('dummies') do\n        Wait(100)\n    end\n\n    PrintTest()\nend)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/RequestResourceFileSet.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

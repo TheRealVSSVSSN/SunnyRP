@@ -1,0 +1,19 @@
+{
+  "title": "SET_HUD_COMPONENT_SIZE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_HUD_COMPONENT_SIZE"
+  ],
+  "content": "0x7644A9FA// SetHudComponentSize\nvoid SET_HUD_COMPONENT_SIZE(int id, float x, float y);Parameters:id: The hud component id.x: New size X.y: New size Y.",
+  "codeBlocks": [
+    "// SetHudComponentSize\nvoid SET_HUD_COMPONENT_SIZE(int id, float x, float y);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetHudComponentSize.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "title": "IS_RAW_KEY_PRESSED",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "IS_RAW_KEY_PRESSED"
+  ],
+  "content": "0x69F7C29E// IsRawKeyPressed\nBOOL IS_RAW_KEY_PRESSED(int rawKeyIndex);Parameters:rawKeyIndex: Index of raw key from keyboard.Returns: Returns bool value of pressed state.Gets if the specified rawKeyIndex is pressed on the keyboard.This will not be triggered if the key is disabled with DISABLE_RAW_KEY_THIS_FRAMEVirtual key codes can be found hereExamples:Luaif IsRawKeyPressed(32) then -- KEY_SPACE\n    print(\"Spacebar pressed\")\nend",
+  "codeBlocks": [
+    "// IsRawKeyPressed\nBOOL IS_RAW_KEY_PRESSED(int rawKeyIndex);",
+    "if IsRawKeyPressed(32) then -- KEY_SPACE\n    print(\"Spacebar pressed\")\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/IsRawKeyPressed.md",
+    "https://docs.fivem.net/natives/?_0x8BCF0014",
+    "https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}
