@@ -1,0 +1,19 @@
+{
+  "title": "SET_VEHICLE_HANDLING_INT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_VEHICLE_HANDLING_INT"
+  ],
+  "content": "0xC37F4CF9// SetVehicleHandlingInt\nvoid SET_VEHICLE_HANDLING_INT(Vehicle vehicle, char* class_, char* fieldName, int value);Parameters:vehicle: The vehicle to set data for.class_: The handling class to set. Only \"CHandlingData\" is supported at this time.fieldName: The field name to set. These match the keys in handling.meta.value: The integer value to set.Sets a handling override for a specific vehicle. Certain handling flags can only be set globally using SET_HANDLING_INT, this might require some experimentation.",
+  "codeBlocks": [
+    "// SetVehicleHandlingInt\nvoid SET_VEHICLE_HANDLING_INT(Vehicle vehicle, char* class_, char* fieldName, int value);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetVehicleHandlingInt.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

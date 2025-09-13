@@ -1,0 +1,19 @@
+{
+  "title": "SET_PED_MELEE_COMBAT_LIMITS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_PED_MELEE_COMBAT_LIMITS"
+  ],
+  "content": "0x8E51EC29// SetPedMeleeCombatLimits\nvoid SET_PED_MELEE_COMBAT_LIMITS(int primaryCount, int secondaryCount, int populationPedCount);Parameters:primaryCount: The number of peds that engage in combat (default: 1)secondaryCount: The number of peds that engage in taunting (default: 3)populationPedCount: The maximum number of population peds (ambient and scenario) that can engage in combat (default: 3)Override the limits on the number and types of melee combatants. The game is limited to at most ten combatants among the three types: primary, secondary, and observers.This native infers the number of observers based on the primary and secondary counts.",
+  "codeBlocks": [
+    "// SetPedMeleeCombatLimits\nvoid SET_PED_MELEE_COMBAT_LIMITS(int primaryCount, int secondaryCount, int populationPedCount);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetPedMeleeCombatLimits.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

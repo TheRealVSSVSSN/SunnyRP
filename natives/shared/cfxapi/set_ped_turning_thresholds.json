@@ -1,0 +1,20 @@
+{
+  "title": "SET_PED_TURNING_THRESHOLDS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_PED_TURNING_THRESHOLDS"
+  ],
+  "content": "0xB300F03// SetPedTurningThresholds\nvoid SET_PED_TURNING_THRESHOLDS(float min, float max);Parameters:min: Leftside angle on the above diagrammax: Rightside angle on the above diagramPurpose: The game's default values for these make shooting while traveling Left quite a bit slower than shooting while traveling right (This could be a game-balance thing?)Default Min: -45 Degrees\nDefault Max: 135 Degrees   \\ ,- ~ ||~ - ,\n, ' \\    x   x    ' ,\n,      \\    x    x   x  ,\n,         \\  x     x      ,\n,            \\     x    x  ,\n,              \\      x    ,\n,                \\   x     ,\n,                 \\   x x ,\n,                  \\  x ,\n,                 , '\n' - , _ _ _ ,  '  \\If the transition angle is within the shaded portion (x), there will be no transition(Quicker)\nThe angle corresponds to where you are looking(North on the circle) vs. the heading of your Ped.\nNote: For some reason,You can set these values to whatever you'd like with this native, but keep in mind that the transitional spin is only clockwise for some reason.I'd personally recommend something like -135/135",
+  "codeBlocks": [
+    "// SetPedTurningThresholds\nvoid SET_PED_TURNING_THRESHOLDS(float min, float max);",
+    "   \\ ,- ~ ||~ - ,\n, ' \\    x   x    ' ,\n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetPedTurningThresholds.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

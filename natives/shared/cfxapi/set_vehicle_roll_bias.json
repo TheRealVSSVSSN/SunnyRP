@@ -1,0 +1,19 @@
+{
+  "title": "SET_VEHICLE_ROLL_BIAS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_VEHICLE_ROLL_BIAS"
+  ],
+  "content": "0x264B45DE// SetVehicleRollBias\nvoid SET_VEHICLE_ROLL_BIAS(Vehicle vehicle, float value);Parameters:vehicle: Target vehicle.value: Roll bias value.Set the vehicle's roll bias. Only works on planes.",
+  "codeBlocks": [
+    "// SetVehicleRollBias\nvoid SET_VEHICLE_ROLL_BIAS(Vehicle vehicle, float value);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetVehicleRollBias.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

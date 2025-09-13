@@ -1,0 +1,19 @@
+{
+  "title": "GET_RESOURCE_STATE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_RESOURCE_STATE"
+  ],
+  "content": "0x4039B485// GetResourceState\nchar* GET_RESOURCE_STATE(char* resourceName);Parameters:resourceName: The name of the resource.Returns: The resource state. One of \"missing\", \"started\", \"starting\", \"stopped\", \"stopping\", \"uninitialized\" or \"unknown\".Returns the current state of the specified resource.",
+  "codeBlocks": [
+    "// GetResourceState\nchar* GET_RESOURCE_STATE(char* resourceName);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetResourceState.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

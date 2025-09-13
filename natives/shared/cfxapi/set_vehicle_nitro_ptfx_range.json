@@ -1,0 +1,20 @@
+{
+  "title": "SET_VEHICLE_NITRO_PTFX_RANGE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_VEHICLE_NITRO_PTFX_RANGE"
+  ],
+  "content": "0xA40CB822// SetVehicleNitroPtfxRange\nvoid SET_VEHICLE_NITRO_PTFX_RANGE(float range);Parameters:range: The visible distance. Default is 50.0f.Sets the maximum distance in which _SET_VEHICLE_NITRO_ENABLED PTFX are rendered. Distance is measured from the camera position.",
+  "codeBlocks": [
+    "// SetVehicleNitroPtfxRange\nvoid SET_VEHICLE_NITRO_PTFX_RANGE(float range);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetVehicleNitroPtfxRange.md",
+    "https://docs.fivem.net/natives/?_0xC8E9B6B71B8E660D",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

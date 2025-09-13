@@ -1,0 +1,19 @@
+{
+  "title": "GET_MAP_ZOOM_DATA_LEVEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_MAP_ZOOM_DATA_LEVEL"
+  ],
+  "content": "0x1363A998// GetMapZoomDataLevel\nBOOL GET_MAP_ZOOM_DATA_LEVEL(int index, float* zoomScale, float* zoomSpeed, float* scrollSpeed, float* tilesX, float* tilesY);Parameters:index: Zoom level index.zoomScale: fZoomScale value.zoomSpeed: fZoomSpeed value.scrollSpeed: fScrollSpeed value.tilesX: vTiles X.tilesY: vTiles Y.Returns: A boolean indicating TRUE if the data was received successfully.Returns the zoom level data by index from mapzoomdata.meta file.",
+  "codeBlocks": [
+    "// GetMapZoomDataLevel\nBOOL GET_MAP_ZOOM_DATA_LEVEL(int index, float* zoomScale, float* zoomSpeed, float* scrollSpeed, float* tilesX, float* tilesY);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetMapZoomDataLevel.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

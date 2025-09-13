@@ -1,0 +1,19 @@
+{
+  "title": "GET_ROPE_LENGTH_CHANGE_RATE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_ROPE_LENGTH_CHANGE_RATE"
+  ],
+  "content": "0x66D70EA3// GetRopeLengthChangeRate\nfloat GET_ROPE_LENGTH_CHANGE_RATE(int rope);Parameters:rope: The rope to get the length change rate for.Returns: The rope's length change rate.",
+  "codeBlocks": [
+    "// GetRopeLengthChangeRate\nfloat GET_ROPE_LENGTH_CHANGE_RATE(int rope);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetRopeLengthChangeRate.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

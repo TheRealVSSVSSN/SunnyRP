@@ -1,0 +1,20 @@
+{
+  "title": "GET_INTERIOR_ROOM_INDEX_BY_HASH",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_INTERIOR_ROOM_INDEX_BY_HASH"
+  ],
+  "content": "0xE0EE05F8// GetInteriorRoomIndexByHash\nint GET_INTERIOR_ROOM_INDEX_BY_HASH(int interiorId, int roomHash);Parameters:interiorId: The target interior.roomHash: Interior room hash.Returns: Room index, -1 if failed.Examples:Lualocal playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\nlocal roomHash = GetRoomKeyFromEntity(playerPed)\nlocal roomId = GetInteriorRoomIndexByHash(interiorId, roomHash)\n\nif roomId ~= -1 then\n  print(\"current room index is: \" .. roomId)\nend",
+  "codeBlocks": [
+    "// GetInteriorRoomIndexByHash\nint GET_INTERIOR_ROOM_INDEX_BY_HASH(int interiorId, int roomHash);",
+    "local playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\nlocal roomHash = GetRoomKeyFromEntity(playerPed)\nlocal roomId = GetInteriorRoomIndexByHash(interiorId, roomHash)\n\nif roomId ~= -1 then\n  print(\"current room index is: \" .. roomId)\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetInteriorRoomIndexByHash.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

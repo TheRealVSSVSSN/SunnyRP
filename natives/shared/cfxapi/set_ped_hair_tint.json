@@ -1,0 +1,21 @@
+{
+  "title": "SET_PED_HAIR_TINT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_PED_HAIR_TINT"
+  ],
+  "content": "0xA23FE32C// SetPedHairTint\nvoid SET_PED_HAIR_TINT(Ped ped, int colorID, int highlightColorID);Parameters:ped: The Ped whose hair tint is to be set.colorID: The tint index for the primary hair color.highlightColorID: The tint index for the hair highlight color.Sets the tint index for the hair on the specified ped.NativeDB Introduced: v323This is the server-side RPC native equivalent of the client native SET_PED_HAIR_TINT.Old name:  _SET_PED_HAIR_COLOR",
+  "codeBlocks": [
+    "// SetPedHairTint\nvoid SET_PED_HAIR_TINT(Ped ped, int colorID, int highlightColorID);",
+    "NativeDB Introduced: v323"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetPedHairTint.md",
+    "https://docs.fivem.net/natives/?_0x4CFFC65454C93A49",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

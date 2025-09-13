@@ -1,0 +1,19 @@
+{
+  "title": "SET_TRACK_ENABLED",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_TRACK_ENABLED"
+  ],
+  "content": "0x4B41E84C// SetTrackEnabled\nvoid SET_TRACK_ENABLED(int track, bool enabled);Parameters:track: The track id (between 0 - 27)enabled: Should this track be enabledToggles the track being active. If disabled mission trains will not be able to spawn on this track and will look for the next closest track to spawn",
+  "codeBlocks": [
+    "// SetTrackEnabled\nvoid SET_TRACK_ENABLED(int track, bool enabled);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetTrackEnabled.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

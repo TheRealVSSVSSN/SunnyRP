@@ -1,0 +1,20 @@
+{
+  "title": "GET_VEHICLE_FLIGHT_NOZZLE_POSITION",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_VEHICLE_FLIGHT_NOZZLE_POSITION"
+  ],
+  "content": "0xAD40AD55// GetVehicleFlightNozzlePosition\nfloat GET_VEHICLE_FLIGHT_NOZZLE_POSITION(Vehicle vehicle);Parameters:vehicle: The vehicle to check.Returns: The flight nozzel position between 0.0 (flying normally) and 1.0 (VTOL mode)Gets the flight nozzel position for the specified vehicle. See the client-side _GET_VEHICLE_FLIGHT_NOZZLE_POSITION native for usage examples.",
+  "codeBlocks": [
+    "// GetVehicleFlightNozzlePosition\nfloat GET_VEHICLE_FLIGHT_NOZZLE_POSITION(Vehicle vehicle);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetVehicleFlightNozzlePosition.md",
+    "https://docs.fivem.net/natives/?_0xDA62027C8BDB326E",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

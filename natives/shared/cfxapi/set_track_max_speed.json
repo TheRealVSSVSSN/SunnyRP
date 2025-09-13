@@ -1,0 +1,19 @@
+{
+  "title": "SET_TRACK_MAX_SPEED",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_TRACK_MAX_SPEED"
+  ],
+  "content": "0x37BFC732// SetTrackMaxSpeed\nvoid SET_TRACK_MAX_SPEED(int track, int newSpeed);Parameters:track: The track id (between 0 - 27)newSpeed: The tracks new speedSets the max speed for the train tracks. Used by ambient trains and for station calculations",
+  "codeBlocks": [
+    "// SetTrackMaxSpeed\nvoid SET_TRACK_MAX_SPEED(int track, int newSpeed);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetTrackMaxSpeed.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "title": "GET_ROPE_FLAGS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_ROPE_FLAGS"
+  ],
+  "content": "0xA80FFE99// GetRopeFlags\nint GET_ROPE_FLAGS(int rope);Parameters:rope: The rope to get the flags for.Returns: The rope's flags.enum eRopeFlags\n{\n    DrawShadowEnabled = 2,\n\tBreakable = 4,\n\tRopeUnwindingFront = 8,\n\tRopeWinding = 32\n}",
+  "codeBlocks": [
+    "// GetRopeFlags\nint GET_ROPE_FLAGS(int rope);",
+    "enum eRopeFlags\n{\n    DrawShadowEnabled = 2,\n\tBreakable = 4,\n\tRopeUnwindingFront = 8,\n\tRopeWinding = 32\n}\n"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetRopeFlags.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "title": "SET_PLAYER_TALKING_OVERRIDE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_PLAYER_TALKING_OVERRIDE"
+  ],
+  "content": "0xFC02CAF6// SetPlayerTalkingOverride\nvoid SET_PLAYER_TALKING_OVERRIDE(Player player, BOOL state);Parameters:player: The target player.state: Overriding state.the status of default voip system. It affects on NETWORK_IS_PLAYER_TALKING and mp_facial animation.\nThis function doesn't need to be called every frame, it works like a switcher.",
+  "codeBlocks": [
+    "// SetPlayerTalkingOverride\nvoid SET_PLAYER_TALKING_OVERRIDE(Player player, BOOL state);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetPlayerTalkingOverride.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ]
+}
