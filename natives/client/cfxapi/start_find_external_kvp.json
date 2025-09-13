@@ -1,0 +1,26 @@
+{
+  "title": "START_FIND_EXTERNAL_KVP",
+  "content": "0x8F2EECC3// StartFindExternalKvp\nint START_FIND_EXTERNAL_KVP(char* resourceName, char* prefix);Parameters:resourceName: The resource to try finding the key/values forprefix: A prefix matchReturns: A KVP find handle to use with FIND_KVP and close with END_FIND_KVPEquivalent of START_FIND_KVP, but for another resource than the current one.Examples:Lualocal kvpHandle = StartFindExternalKvp('drugs', 'mollis:')\n\nif kvpHandle ~= -1 then \n\tlocal key\n\t\n\trepeat\n\t\tkey = FindKvp(kvpHandle)\n\n\t\tif key then\n\t\t\tprint(('%s: %s'):format(key, GetResourceKvpString(key)))\n\t\tend\n\tuntil not key\n\n\tEndFindKvp(kvpHandle)\nelse\n\tprint('No KVPs found')\nend",
+  "codeBlocks": [
+    "// StartFindExternalKvp\nint START_FIND_EXTERNAL_KVP(char* resourceName, char* prefix);",
+    "local kvpHandle = StartFindExternalKvp('drugs', 'mollis:')\n\nif kvpHandle ~= -1 then \n\tlocal key\n\t\n\trepeat\n\t\tkey = FindKvp(kvpHandle)\n\n\t\tif key then\n\t\t\tprint(('%s: %s'):format(key, GetResourceKvpString(key)))\n\t\tend\n\tuntil not key\n\n\tEndFindKvp(kvpHandle)\nelse\n\tprint('No KVPs found')\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/StartFindExternalKvp.md",
+    "https://docs.fivem.net/natives/?_0xBD7BEBC5",
+    "https://docs.fivem.net/natives/?_0xB3210203",
+    "https://docs.fivem.net/natives/?_0xDD379006",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "START_FIND_EXTERNAL_KVP"
+  ],
+  "tags": [
+    "client"
+  ]
+}

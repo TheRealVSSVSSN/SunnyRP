@@ -1,0 +1,22 @@
+{
+  "title": "SET_FLY_THROUGH_WINDSCREEN_PARAMS",
+  "content": "0x4D3118ED// SetFlyThroughWindscreenParams\nBOOL SET_FLY_THROUGH_WINDSCREEN_PARAMS(float vehMinSpeed, float unkMinSpeed, float unkModifier, float minDamage);Parameters:vehMinSpeed: Vehicle minimum speed (default 35.0).unkMinSpeed: Unknown minimum speed (default 40.0).unkModifier: Unknown modifier (default 17.0).minDamage: Minimum damage (default 2000.0).Returns: A bool indicating if parameters was set successfully.Sets some in-game parameters which is used for checks is ped needs to fly through windscreen after a crash.",
+  "codeBlocks": [
+    "// SetFlyThroughWindscreenParams\nBOOL SET_FLY_THROUGH_WINDSCREEN_PARAMS(float vehMinSpeed, float unkMinSpeed, float unkModifier, float minDamage);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetFlyThroughWindscreenParams.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_FLY_THROUGH_WINDSCREEN_PARAMS"
+  ],
+  "tags": [
+    "client"
+  ]
+}

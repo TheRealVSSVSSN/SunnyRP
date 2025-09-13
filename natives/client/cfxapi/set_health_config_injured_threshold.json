@@ -1,0 +1,22 @@
+{
+  "title": "SET_HEALTH_CONFIG_INJURED_THRESHOLD",
+  "content": "0xF9D9B647// SetHealthConfigInjuredThreshold\nvoid SET_HEALTH_CONFIG_INJURED_THRESHOLD(char* configName, float newValue);Parameters:configName: Name of health config.newValue: ValueSets default injured health threshold value for specific health config.",
+  "codeBlocks": [
+    "// SetHealthConfigInjuredThreshold\nvoid SET_HEALTH_CONFIG_INJURED_THRESHOLD(char* configName, float newValue);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetHealthConfigInjuredThreshold.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_HEALTH_CONFIG_INJURED_THRESHOLD"
+  ],
+  "tags": [
+    "client"
+  ]
+}

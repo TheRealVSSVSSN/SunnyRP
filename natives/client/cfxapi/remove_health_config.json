@@ -1,0 +1,22 @@
+{
+  "title": "REMOVE_HEALTH_CONFIG",
+  "content": "0xE0ED5FB// RemoveHealthConfig\nvoid REMOVE_HEALTH_CONFIG(char* configName);Parameters:configName: Removes config name. Cannot be default game health config name.Removes health config.",
+  "codeBlocks": [
+    "// RemoveHealthConfig\nvoid REMOVE_HEALTH_CONFIG(char* configName);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/RemoveHealthConfig.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "REMOVE_HEALTH_CONFIG"
+  ],
+  "tags": [
+    "client"
+  ]
+}

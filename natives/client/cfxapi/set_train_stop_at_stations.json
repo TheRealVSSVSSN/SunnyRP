@@ -1,0 +1,22 @@
+{
+  "title": "SET_TRAIN_STOP_AT_STATIONS",
+  "content": "0xECB8B577// SetTrainStopAtStations\nvoid SET_TRAIN_STOP_AT_STATIONS(Vehicle train, BOOL state);Parameters:train: The train handlestate: True to make the train stop at stations. False to make the train not stop at stationsToggles a train's ability to stop at stations",
+  "codeBlocks": [
+    "// SetTrainStopAtStations\nvoid SET_TRAIN_STOP_AT_STATIONS(Vehicle train, BOOL state);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetTrainStopAtStations.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_TRAIN_STOP_AT_STATIONS"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "SET_EMITTER_PROBE_LENGTH",
+  "content": "0x8AA1F3C2// SetEmitterProbeLength\nvoid SET_EMITTER_PROBE_LENGTH(float probeLength);Parameters:probeLength: The desired probe length (20.0 - 150.0)Allows StaticEmitter's without a linked entity to make use of environment features like occlusion and reverb even if they are located higher than 20.0 units above any static collision inside interiors.This native allows you to extend the probe range up to 150.0 units.Examples:LuaRegisterCommand(\"setEmitterProbeLength\", function(src, args, raw)\n    local probeLength = (tonumber(args[1]) + 0.0)\n\n    print(\"Extending emitter probes to: \", probeLength)\n    SetEmitterProbeLength(probeLength)\nend)\n\nRegisterCommand(\"resetEmitterProbeLength\", function()\n    print(\"Resetting emitter probes to default settings\")\n    SetEmitterProbeLength(20.0)\nend)",
+  "codeBlocks": [
+    "// SetEmitterProbeLength\nvoid SET_EMITTER_PROBE_LENGTH(float probeLength);",
+    "RegisterCommand(\"setEmitterProbeLength\", function(src, args, raw)\n    local probeLength = (tonumber(args[1]) + 0.0)\n\n    print(\"Extending emitter probes to: \", probeLength)\n    SetEmitterProbeLength(probeLength)\nend)\n\nRegisterCommand(\"resetEmitterProbeLength\", function()\n    print(\"Resetting emitter probes to default settings\")\n    SetEmitterProbeLength(20.0)\nend)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetEmitterProbeLength.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_EMITTER_PROBE_LENGTH"
+  ],
+  "tags": [
+    "client"
+  ]
+}

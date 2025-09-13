@@ -1,0 +1,22 @@
+{
+  "title": "SET_HEALTH_CONFIG_HURT_THRESHOLD",
+  "content": "0x98DF1A83// SetHealthConfigHurtThreshold\nvoid SET_HEALTH_CONFIG_HURT_THRESHOLD(char* configName, float newValue);Parameters:configName: Name of health config.newValue: ValueSets default hurt health threshold value for specific health config.",
+  "codeBlocks": [
+    "// SetHealthConfigHurtThreshold\nvoid SET_HEALTH_CONFIG_HURT_THRESHOLD(char* configName, float newValue);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetHealthConfigHurtThreshold.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_HEALTH_CONFIG_HURT_THRESHOLD"
+  ],
+  "tags": [
+    "client"
+  ]
+}

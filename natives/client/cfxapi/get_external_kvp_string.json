@@ -1,0 +1,24 @@
+{
+  "title": "GET_EXTERNAL_KVP_STRING",
+  "content": "0x9080363A// GetExternalKvpString\nchar* GET_EXTERNAL_KVP_STRING(char* resource, char* key);Parameters:resource: The resource to fetch from.key: The key to fetchReturns: A string that contains the value stored in the Kvp or nil/null if none.A getter for SET_RESOURCE_KVP, but for a specified resource.Examples:Lualocal kvpValue = GetExternalKvpString('food', 'codfish') \nif kvpValue then\n\t-- do something!\nend",
+  "codeBlocks": [
+    "// GetExternalKvpString\nchar* GET_EXTERNAL_KVP_STRING(char* resource, char* key);",
+    "local kvpValue = GetExternalKvpString('food', 'codfish') \nif kvpValue then\n\t-- do something!\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetExternalKvpString.md",
+    "https://docs.fivem.net/natives/?_0x21C7A35B",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_EXTERNAL_KVP_STRING"
+  ],
+  "tags": [
+    "client"
+  ]
+}

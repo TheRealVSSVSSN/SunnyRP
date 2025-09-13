@@ -1,0 +1,22 @@
+{
+  "title": "SET_GLOBAL_PASSENGER_MASS_MULTIPLIER",
+  "content": "0x1C47F6AC// SetGlobalPassengerMassMultiplier\nvoid SET_GLOBAL_PASSENGER_MASS_MULTIPLIER(float massMul);Parameters:massMul: Weight of each passenger (not counting the driver) as a percentage of vehicle mass. Is applied to all vehicles. Default value is 0.05",
+  "codeBlocks": [
+    "// SetGlobalPassengerMassMultiplier\nvoid SET_GLOBAL_PASSENGER_MASS_MULTIPLIER(float massMul);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetGlobalPassengerMassMultiplier.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_GLOBAL_PASSENGER_MASS_MULTIPLIER"
+  ],
+  "tags": [
+    "client"
+  ]
+}

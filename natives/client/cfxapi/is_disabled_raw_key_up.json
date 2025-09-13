@@ -1,0 +1,25 @@
+{
+  "title": "IS_DISABLED_RAW_KEY_UP",
+  "content": "0x2C033875// IsDisabledRawKeyUp\nBOOL IS_DISABLED_RAW_KEY_UP(int rawKeyIndex);Parameters:rawKeyIndex: Index of raw key from keyboard.Returns: Returns bool value of up state.Gets if the specified rawKeyIndex is up, even if the key is disabled with DISABLE_RAW_KEY_THIS_FRAME.Virtual key codes can be found hereExamples:Luaif IsDisabledRawKeyUp(32) then -- KEY_SPACE\n    print(\"Spacebar is up\")\nend",
+  "codeBlocks": [
+    "// IsDisabledRawKeyUp\nBOOL IS_DISABLED_RAW_KEY_UP(int rawKeyIndex);",
+    "if IsDisabledRawKeyUp(32) then -- KEY_SPACE\n    print(\"Spacebar is up\")\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/IsDisabledRawKeyUp.md",
+    "https://docs.fivem.net/natives/?_0x8BCF0014",
+    "https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "IS_DISABLED_RAW_KEY_UP"
+  ],
+  "tags": [
+    "client"
+  ]
+}
