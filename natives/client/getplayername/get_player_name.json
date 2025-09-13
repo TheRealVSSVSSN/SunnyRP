@@ -1,0 +1,22 @@
+{
+  "title": "GET_PLAYER_NAME",
+  "breadcrumbs": [
+    "PLAYERAPI",
+    "GET_PLAYER_NAME"
+  ],
+  "content": "0x6D0DE6A7B5DA71F80x406B4B20// GetPlayerName\nchar* GET_PLAYER_NAME(Player player);Parameters:player: The player index, or -1 to get the local player ped.Returns: The name of the queried player. \"Invalid\" if the player does not exist.Returns the players name from a specified player index",
+  "codeBlocks": [
+    "// GetPlayerName\nchar* GET_PLAYER_NAME(Player player);",
+    "local player = source\n-- Example usage for GET_PLAYER_NAME\nGetPlayerName(player)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PLAYER/GetPlayerName.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "title": "CLEAR_PED_SECONDARY_TASK",
+  "breadcrumbs": [
+    "CLEAR_PED_SECONDARY_TASK"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CLEAR_PED_SECONDARY_TASK\nClearPedSecondaryTask()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,22 @@
+{
+  "title": "BRING_VEHICLE_TO_HALT",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "BRING_VEHICLE_TO_HALT"
+  ],
+  "content": "0x260BE8F09E326A200xCBC7D3C8// BringVehicleToHalt\nvoid BRING_VEHICLE_TO_HALT(Vehicle vehicle, float distance, int duration, BOOL bControlVerticalVelocity);Parameters:vehicle: The vehicle to stop.distance: The distance from the initial coords at which the vehicle should come to rest.duration: The length of time in seconds to hold the car at rest after stopping.bControlVerticalVelocity: false by default which allows gravity to act normally in the z direction. Enable this option to halt the vehicle's vertical velocity as well.This native makes the vehicle stop immediately, as it happens when we enter a multiplayer garage.Old name:  _SET_VEHICLE_HALT",
+  "codeBlocks": [
+    "// BringVehicleToHalt\nvoid BRING_VEHICLE_TO_HALT(Vehicle vehicle, float distance, int duration, BOOL bControlVerticalVelocity);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for BRING_VEHICLE_TO_HALT\nBringVehicleToHalt(vehicle, 0.0, 0, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/BringVehicleToHalt.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

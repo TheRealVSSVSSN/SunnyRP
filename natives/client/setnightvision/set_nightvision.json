@@ -1,0 +1,22 @@
+{
+  "title": "SET_NIGHTVISION",
+  "breadcrumbs": [
+    "GRAPHICSAPI",
+    "SET_NIGHTVISION"
+  ],
+  "content": "0x18F621F7A5B1F85D0xD1E5565F// SetNightvision\nvoid SET_NIGHTVISION(BOOL toggle);Enables Night Vision.  \nExample:  \nC#: Function.Call(Hash.SET_NIGHTVISION, true);  \nC++: GRAPHICS::SET_NIGHTVISION(true);  \nBOOL toggle:  \ntrue = turns night vision on for your player.  \nfalse = turns night vision off for your player.",
+  "codeBlocks": [
+    "// SetNightvision\nvoid SET_NIGHTVISION(BOOL toggle);",
+    "-- Example usage for SET_NIGHTVISION\nSetNightvision(true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/SetNightvision.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

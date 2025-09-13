@@ -1,0 +1,22 @@
+{
+  "title": "IS_VEHICLE_IN_GARAGE_AREA",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "IS_VEHICLE_IN_GARAGE_AREA"
+  ],
+  "content": "0xCEE4490CD57BB3C20xA90EC257// IsVehicleInGarageArea\nBOOL IS_VEHICLE_IN_GARAGE_AREA(char* garageName, Vehicle vehicle);garageName example \"Michael - Beverly Hills\"",
+  "codeBlocks": [
+    "// IsVehicleInGarageArea\nBOOL IS_VEHICLE_IN_GARAGE_AREA(char* garageName, Vehicle vehicle);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for IS_VEHICLE_IN_GARAGE_AREA\nIsVehicleInGarageArea('', vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/IsVehicleInGarageArea.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

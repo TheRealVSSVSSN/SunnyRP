@@ -1,0 +1,22 @@
+{
+  "title": "_GET_IS_VEHICLE_ELECTRIC",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "_GET_IS_VEHICLE_ELECTRIC"
+  ],
+  "content": "0x1FCB07FE230B6639// GetIsVehicleElectric\nBOOL _GET_IS_VEHICLE_ELECTRIC(Hash vehicleModel);\nParameters:vehicleModel: The hash of the vehicle model to check.Returns: Returns true if the vehicle is electric or false otherwise.Checks if the vehicle is electric.NativeDB Introduced: v3258Examples:Lualocal veh = GetVehiclePedIsIn(PlayerPedId(), false)\n-- GetVehiclePedIsIn will return 0 if the ped isn't currently in a vehicle\nif veh == 0 then return end\nlocal model = GetEntityModel(veh)\nif GetIsVehicleElectric(model) then\n    print(\"This vehicle is electric\")\nelse\n    print(\"This vehicle is not electric\")\nend",
+  "codeBlocks": [
+    "// GetIsVehicleElectric\nBOOL _GET_IS_VEHICLE_ELECTRIC(Hash vehicleModel);\n",
+    "-- Example usage for _GET_IS_VEHICLE_ELECTRIC\n_etIsVehicleElectric(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/GetIsVehicleElectric.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

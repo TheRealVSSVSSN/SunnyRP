@@ -1,0 +1,23 @@
+{
+  "title": "_ENABLE_INDIVIDUAL_PLANE_PROPELLER",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "_ENABLE_INDIVIDUAL_PLANE_PROPELLER"
+  ],
+  "content": "0xDC05D2777F855F44// EnableIndividualPlanePropeller\nvoid _ENABLE_INDIVIDUAL_PLANE_PROPELLER(Vehicle plane, int propeller);Parameters:plane: The propeller plane.propeller: The propeller index to enable (starts at 0).Enables individual propeller on a propeller plane. This native is the inverse of DISABLE_INDIVIDUAL_PLANE_PROPELLER.NativeDB Introduced: v3407Examples:LuaCreateThread(function()\n    local vehicle = GetVehiclePedIsIn(PlayerPedId(), false) -- The plane used in this example is the cuban800\n\n    DisableIndividualPlanePropeller(vehicle, 0)\n    DisableIndividualPlanePropeller(vehicle, 1)\n    -- We are disabling both propellers so we can start a specific one (since both are automatically started when entering the plane)\n    Wait(5000) -- We are waiting 5 seconds\n    EnableIndividualPlanePropeller(vehicle, 1) -- Starting the second propeller (since the index starts at 0)\nend)",
+  "codeBlocks": [
+    "// EnableIndividualPlanePropeller\nvoid _ENABLE_INDIVIDUAL_PLANE_PROPELLER(Vehicle plane, int propeller);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for _ENABLE_INDIVIDUAL_PLANE_PROPELLER\n_nableIndividualPlanePropeller(vehicle, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/EnableIndividualPlanePropeller.md",
+    "https://docs.fivem.net/natives/?_0x500873A45724C863",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "title": "CAN_ANCHOR_BOAT_HERE",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "CAN_ANCHOR_BOAT_HERE"
+  ],
+  "content": "0x26C10ECBDA5D043B0xE97A4F5E// CanAnchorBoatHere\nBOOL CAN_ANCHOR_BOAT_HERE(Vehicle boat);Parameters:boat: The boat to check.Returns: Returns true if the boat can be safely anchored at its current position, false otherwise.Checks if a boat can be anchored at its present position without possibly intersecting collision later.NativeDB Introduced: v323Old name:  _GET_BOAT_ANCHOROld name:  _CAN_BOAT_BE_ANCHOREDExamples:LuaJavaScriptC#local boat = GetVehiclePedIsIn(PlayerPedId(), false)\nif not boat or not IsThisModelABoat(GetEntityModel(boat)) then return end\n\nif CanAnchorBoatHere(boat) then\n    print(\"It's safe to anchor the boat here\")\nelse\n    print(\"It's not safe to anchor the boat at this location\")\nend",
+  "codeBlocks": [
+    "// CanAnchorBoatHere\nBOOL CAN_ANCHOR_BOAT_HERE(Vehicle boat);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for CAN_ANCHOR_BOAT_HERE\nCanAnchorBoatHere(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/CanAnchorBoatHere.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

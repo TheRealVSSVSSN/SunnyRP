@@ -1,0 +1,12 @@
+{
+  "title": "CANCEL_EVENT",
+  "breadcrumbs": [
+    "CANCEL_EVENT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CANCEL_EVENT\nCancelEvent()"
+  ],
+  "urls": [],
+  "tags": []
+}

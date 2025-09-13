@@ -1,0 +1,22 @@
+{
+  "title": "GET_VEHICLE_CAUSE_OF_DESTRUCTION",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "GET_VEHICLE_CAUSE_OF_DESTRUCTION"
+  ],
+  "content": "0xE495D1EF4C91FD200x7F8C20DD// GetVehicleCauseOfDestruction\nHash GET_VEHICLE_CAUSE_OF_DESTRUCTION(Vehicle vehicle);Parameters:vehicle: The vehicle to get the cause of destruction of.Returns: A hash representing the destruction cause. These can be weapon hashes.Examples:Lualocal destructionCauseHash = GetVehicleCauseOfDestruction(GetVehiclePedIsIn(PlayerPedId(), true))\nif destructionCauseHash == GetHashKey(\"weapon_stickybomb\") then\n     -- It looks like the vehicle was destroyed by a sticky bomb\n     Citizen.Trace('Vehicle was destroyed by a sticky bomb!')\nelseif destructionCauseHash ~= 0 then\n     -- It looks like the vehicle was destroyed by something else!\n     Citizen.Trace('Vehicle was destroyed by: ' .. destructionCauseHash)\nend",
+  "codeBlocks": [
+    "// GetVehicleCauseOfDestruction\nHash GET_VEHICLE_CAUSE_OF_DESTRUCTION(Vehicle vehicle);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for GET_VEHICLE_CAUSE_OF_DESTRUCTION\nGetVehicleCauseOfDestruction(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/GetVehicleCauseOfDestruction.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

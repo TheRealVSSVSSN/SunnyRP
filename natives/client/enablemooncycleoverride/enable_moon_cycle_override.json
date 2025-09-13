@@ -1,0 +1,23 @@
+{
+  "title": "ENABLE_MOON_CYCLE_OVERRIDE",
+  "breadcrumbs": [
+    "GRAPHICSAPI",
+    "ENABLE_MOON_CYCLE_OVERRIDE"
+  ],
+  "content": "0x2C328AF17210F009// EnableMoonCycleOverride\nvoid ENABLE_MOON_CYCLE_OVERRIDE(float phase);Parameters:phase: A value indicating the moon cycle.Enable a custom moon cycle, allowing control of which lunar phase the moon is in.Valid values are from 0.0 to 1.0, with 0.5 representing a full moon.ValueLunar Phase0.1Waxing Crescent0.2First Quarter0.3Waxing Gibbous0.5Full Moon0.7Waning Gibbous0.8Third Quarter0.9Waning CrescentThe moon phase can be disabled with DISABLE_MOON_CYCLE_OVERRIDEOld name:  _SET_EXTRA_TIMECYCLE_MODIFIER_STRENGTHExamples:LuaEnableMoonCycleOverride(0.5)",
+  "codeBlocks": [
+    "// EnableMoonCycleOverride\nvoid ENABLE_MOON_CYCLE_OVERRIDE(float phase);",
+    "-- Example usage for ENABLE_MOON_CYCLE_OVERRIDE\nEnableMoonCycleOverride(0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/EnableMoonCycleOverride.md",
+    "https://docs.fivem.net/natives/?_0x2BF72AD5B41AA739",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "title": "SET_OPEN_REAR_DOORS_ON_EXPLOSION",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "SET_OPEN_REAR_DOORS_ON_EXPLOSION"
+  ],
+  "content": "0x1B212B26DD3C04DF// SetOpenRearDoorsOnExplosion\nvoid SET_OPEN_REAR_DOORS_ON_EXPLOSION(Vehicle vehicle, BOOL toggle);Parameters:vehicle: The vehicle to apply this setting to.toggle: A boolean value where true allows the rear doors to open upon explosion, and false prevents them from opening.Returns: This native does not return any value.Enables or disables the opening of a vehicle's rear doors in the event of a sticky bomb explosion. This native is effective for armored vehicles, such as the Stockade (Brinks vehicle), allowing the rear doors to be opened through controlled explosions, which might otherwise remain locked due to the vehicle nature.Examples:LuaJavaScriptC#-- This example disables the rear doors of the vehicle from opening upon explosion.\n\n-- Retrieve the LocalPlayer.\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the vehicle the player is currently in. \nlocal vehicle = GetVehiclePedIsIn(playerPed, false)\n\n-- Check if the vehicle exists in the game world.\nif not DoesEntityExist(vehicle) then \n    -- If the vehicle does not exist, end the execution of the code here.\n    return \nend\n\n-- Retrieve the model of the vehicle\nlocal modelVehicle = GetEntityModel(vehicle)\n\n-- Retrieve the hash of the Stockade.\nlocal hashStockade = GetHashKey(\"stockade\")\n\n-- Check if the vehicle is a Stockade.\nif (modelVehicle == hashStockade) then\n    -- Disable the rear doors from opening upon explosion.\n    SetOpenRearDoorsOnExplosion(vehicle, true)\nend",
+  "codeBlocks": [
+    "// SetOpenRearDoorsOnExplosion\nvoid SET_OPEN_REAR_DOORS_ON_EXPLOSION(Vehicle vehicle, BOOL toggle);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for SET_OPEN_REAR_DOORS_ON_EXPLOSION\nSetOpenRearDoorsOnExplosion(vehicle, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetOpenRearDoorsOnExplosion.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

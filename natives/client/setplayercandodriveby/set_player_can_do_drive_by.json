@@ -1,0 +1,22 @@
+{
+  "title": "SET_PLAYER_CAN_DO_DRIVE_BY",
+  "breadcrumbs": [
+    "PLAYERAPI",
+    "SET_PLAYER_CAN_DO_DRIVE_BY"
+  ],
+  "content": "0x6E8834B52EC20C770xF4D99685// SetPlayerCanDoDriveBy\nvoid SET_PLAYER_CAN_DO_DRIVE_BY(Player player, BOOL toggle);Parameters:player: The player to target.toggle: If set to false, disables the players ability to do drive bys.Sets whether the player is able to do drive-bys in vehicle (shooting & aiming in vehicles), this also includes middle finger taunts.This is a toggle, it does not have to be ran every frame.",
+  "codeBlocks": [
+    "// SetPlayerCanDoDriveBy\nvoid SET_PLAYER_CAN_DO_DRIVE_BY(Player player, BOOL toggle);",
+    "local player = source\n-- Example usage for SET_PLAYER_CAN_DO_DRIVE_BY\nSetPlayerCanDoDriveBy(player, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PLAYER/SetPlayerCanDoDriveBy.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

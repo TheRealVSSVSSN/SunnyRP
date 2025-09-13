@@ -1,0 +1,22 @@
+{
+  "title": "SET_VEHICLE_DAMAGE",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "SET_VEHICLE_DAMAGE"
+  ],
+  "content": "0xA1DD317EA8FD4F290x21B458B2// SetVehicleDamage\nvoid SET_VEHICLE_DAMAGE(Vehicle vehicle, float xOffset, float yOffset, float zOffset, float damage, float radius, BOOL focusOnModel);Apply damage to vehicle at a location. Location is relative to vehicle model (not world).\nRadius of effect damage applied in a sphere at impact location\nWhen focusOnModel set to true, the damage sphere will travel towards the vehicle from the given point, thus guaranteeing an impactExamples:Lua-- Both of these are for an average sized car\n\n-- nothing will be hit\nSetVehicleDamage(vehicle, 0.0, 0.0, 0.33, 200.0, 100.0, false)\n\n-- will hit the first hitbox on your Z index line\nSetVehicleDamage(vehicle, 0.0, 0.0, 0.33, 200.0, 100.0, true)",
+  "codeBlocks": [
+    "// SetVehicleDamage\nvoid SET_VEHICLE_DAMAGE(Vehicle vehicle, float xOffset, float yOffset, float zOffset, float damage, float radius, BOOL focusOnModel);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for SET_VEHICLE_DAMAGE\nSetVehicleDamage(vehicle, 0.0, 0.0, 0.0, 0.0, 0.0, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetVehicleDamage.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

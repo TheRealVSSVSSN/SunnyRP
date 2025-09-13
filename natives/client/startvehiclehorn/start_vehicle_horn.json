@@ -1,0 +1,22 @@
+{
+  "title": "START_VEHICLE_HORN",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "START_VEHICLE_HORN"
+  ],
+  "content": "0x9C8C6504B5B63D2C0x0DF5ADB3// StartVehicleHorn\nvoid START_VEHICLE_HORN(Vehicle vehicle, int duration, Hash mode, BOOL forever);Parameters:vehicle: Vehicle idduration: The duration to sound the horn, in milliseconds.mode: The hash of \"NORMAL\" or \"HELDDOWN\". Can be 0.forever: Sounds the horn for the specified vehicle. Note that if a player is in the vehicle, it will only sound briefly.",
+  "codeBlocks": [
+    "// StartVehicleHorn\nvoid START_VEHICLE_HORN(Vehicle vehicle, int duration, Hash mode, BOOL forever);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for START_VEHICLE_HORN\nStartVehicleHorn(vehicle, 0, 0, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/StartVehicleHorn.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

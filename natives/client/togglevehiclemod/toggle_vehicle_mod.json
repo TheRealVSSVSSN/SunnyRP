@@ -1,0 +1,23 @@
+{
+  "title": "TOGGLE_VEHICLE_MOD",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "TOGGLE_VEHICLE_MOD"
+  ],
+  "content": "0x2A1F4F37F95BAD080xD095F811// ToggleVehicleMod\nvoid TOGGLE_VEHICLE_MOD(Vehicle vehicle, int modType, BOOL toggle);Parameters:vehicle: The vehicle handlemodType: Refer to eVehicleModType in SET_VEHICLE_MOD.toggle: A bool indicating whether the mod should be enabled/disabled (true/false)Enables or disables a vehicle mod by index (modType) for a given vehicle.eVehicleModType enum, used for modType index can be found under SET_VEHICLE_MOD.",
+  "codeBlocks": [
+    "// ToggleVehicleMod\nvoid TOGGLE_VEHICLE_MOD(Vehicle vehicle, int modType, BOOL toggle);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for TOGGLE_VEHICLE_MOD\nToggleVehicleMod(vehicle, 0, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/ToggleVehicleMod.md",
+    "https://docs.fivem.net/natives/?_0x6AF0636DDEDCB6DD",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

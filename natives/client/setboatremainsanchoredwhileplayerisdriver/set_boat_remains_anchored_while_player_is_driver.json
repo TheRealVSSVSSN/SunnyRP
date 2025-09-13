@@ -1,0 +1,23 @@
+{
+  "title": "SET_BOAT_REMAINS_ANCHORED_WHILE_PLAYER_IS_DRIVER",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "SET_BOAT_REMAINS_ANCHORED_WHILE_PLAYER_IS_DRIVER"
+  ],
+  "content": "0xE3EBAAE4847985300x0ED84792// SetBoatRemainsAnchoredWhilePlayerIsDriver\nvoid SET_BOAT_REMAINS_ANCHORED_WHILE_PLAYER_IS_DRIVER(Vehicle boat, BOOL toggle);Parameters:boat: The target boat.toggle: Set the anchoring behavior. If true, the boat will remain anchored even when a player is driving. If false, normal anchoring behavior applies (anchor is raised when a player drives).Sets whether a boat should remain anchored even when a player is driving it.Note: This native is always used with SET_BOAT_ANCHOR.NativeDB Introduced: v323Old name:  _SET_BOAT_FROZEN_WHEN_ANCHOREDExamples:LuaJavaScriptC#local boat = GetVehiclePedIsIn(PlayerPedId(), false)\nif not boat or not IsThisModelABoat(GetEntityModel(boat)) then return end\n\nSetBoatRemainsAnchoredWhilePlayerIsDriver(boat, true)\nSetBoatAnchor(boat, true)",
+  "codeBlocks": [
+    "// SetBoatRemainsAnchoredWhilePlayerIsDriver\nvoid SET_BOAT_REMAINS_ANCHORED_WHILE_PLAYER_IS_DRIVER(Vehicle boat, BOOL toggle);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for SET_BOAT_REMAINS_ANCHORED_WHILE_PLAYER_IS_DRIVER\nSetBoatRemainsAnchoredWhilePlayerIsDriver(vehicle, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetBoatRemainsAnchoredWhilePlayerIsDriver.md",
+    "https://docs.fivem.net/natives/?_0x75DBEC174AEEAD10",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

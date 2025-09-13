@@ -1,0 +1,22 @@
+{
+  "title": "GET_VEHICLE_DEFORMATION_AT_POS",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "GET_VEHICLE_DEFORMATION_AT_POS"
+  ],
+  "content": "0x4EC6CFBC7B2E95360xABF02075// GetVehicleDeformationAtPos\nVector3 GET_VEHICLE_DEFORMATION_AT_POS(Vehicle vehicle, float offsetX, float offsetY, float offsetZ);The only example I can find of this function in the scripts, is this:  \nstruct _s = VEHICLE::GET_VEHICLE_DEFORMATION_AT_POS(rPtr((A_0) + 4), 1.21f, 6.15f, 0.3f);  \n-----------------------------------------------------------------------------------------------------------------------------------------  \nPC scripts:  \nv_5/*{3}*/ = VEHICLE::GET_VEHICLE_DEFORMATION_AT_POS(a_0._f1, 1.21, 6.15, 0.3);",
+  "codeBlocks": [
+    "// GetVehicleDeformationAtPos\nVector3 GET_VEHICLE_DEFORMATION_AT_POS(Vehicle vehicle, float offsetX, float offsetY, float offsetZ);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for GET_VEHICLE_DEFORMATION_AT_POS\nGetVehicleDeformationAtPos(vehicle, 0.0, 0.0, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/GetVehicleDeformationAtPos.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

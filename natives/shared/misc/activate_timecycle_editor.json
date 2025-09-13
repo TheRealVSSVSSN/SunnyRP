@@ -1,0 +1,12 @@
+{
+  "title": "ACTIVATE_TIMECYCLE_EDITOR",
+  "breadcrumbs": [
+    "ACTIVATE_TIMECYCLE_EDITOR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ACTIVATE_TIMECYCLE_EDITOR\nActivateTimecycleEditor()"
+  ],
+  "urls": [],
+  "tags": []
+}

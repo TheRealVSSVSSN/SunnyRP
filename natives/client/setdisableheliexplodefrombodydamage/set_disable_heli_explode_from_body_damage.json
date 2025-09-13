@@ -1,0 +1,22 @@
+{
+  "title": "SET_DISABLE_HELI_EXPLODE_FROM_BODY_DAMAGE",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "SET_DISABLE_HELI_EXPLODE_FROM_BODY_DAMAGE"
+  ],
+  "content": "0xEDBC8405B3895CC9// SetDisableHeliExplodeFromBodyDamage\nvoid SET_DISABLE_HELI_EXPLODE_FROM_BODY_DAMAGE(Vehicle helicopter, BOOL disableExplode);Parameters:helicopter: The helicopter to apply this setting to.disableExplode: true to disable explosion from body damage on collision; false to allow explosions as normal.This works on helicopters and planes.Prevents a helicopter from exploding due to relatively minor body damage.NativeDB Introduced: v1103Examples:LuaJavaScriptC#-- Retrieve the player ped.\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the helicopter the player is currently in.\nlocal helicopter = GetVehiclePedIsIn(playerPed, false)\n\n-- If the player is not in a helicopter, or the vehicle is not a helicopter, return.\nif (helicopter == 0) or (not IsThisModelAHeli(GetEntityModel(helicopter))) then return end\n\n-- Disable explosion from body damage for the helicopter.\nSetDisableHeliExplodeFromBodyDamage(helicopter, true)",
+  "codeBlocks": [
+    "// SetDisableHeliExplodeFromBodyDamage\nvoid SET_DISABLE_HELI_EXPLODE_FROM_BODY_DAMAGE(Vehicle helicopter, BOOL disableExplode);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for SET_DISABLE_HELI_EXPLODE_FROM_BODY_DAMAGE\nSetDisableHeliExplodeFromBodyDamage(vehicle, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetDisableHeliExplodeFromBodyDamage.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

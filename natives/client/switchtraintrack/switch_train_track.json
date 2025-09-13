@@ -1,0 +1,22 @@
+{
+  "title": "SWITCH_TRAIN_TRACK",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "SWITCH_TRAIN_TRACK"
+  ],
+  "content": "0xFD813BB7DB977F200x68BFDD61// SwitchTrainTrack\nvoid SWITCH_TRAIN_TRACK(int trackId, BOOL state);Parameters:trackId: The internal id of the train track to switchstate: Whether ambient trains can spawn or notReturns: None. The original return type is void, but ABI compatibility makes this impossible.Toggles whether ambient trains can spawn on the specified track or not.trackIdFileDescription0trains1.datMain track around SA1trains2.datDavis Quartz Quarry branch2trains3.datSecond track alongside live track along Roy Lewenstein Blv.3trains4.datMetro track circuit4trains5.datBranch in Mirror Park Railyard5trains6.datBranch in Mirror Park Railyard6trains7.datLS branch to Mirror Park Railyard7trains8.datOverground part of metro track along Forum Dr.8trains9.datBranch to Mirror Park Railyard9trains10.datYankton train10trains11.datPart of metro track near mission row11trains12.datYankton prologue mission trainTracks IDs 0 and 3 are the main tracks you find trains on during normal gameplay, all the others are used during missions and are not complete tracks.",
+  "codeBlocks": [
+    "// SwitchTrainTrack\nvoid SWITCH_TRAIN_TRACK(int trackId, BOOL state);",
+    "-- Example usage for SWITCH_TRAIN_TRACK\nSwitchTrainTrack(0, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SwitchTrainTrack.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "title": "ADD_DECAL",
+  "breadcrumbs": [
+    "GRAPHICSAPI",
+    "ADD_DECAL"
+  ],
+  "content": "0xB302244A1839BDAD0xEAD0C412// AddDecal\nint ADD_DECAL(int decalType, float posX, float posY, float posZ, float dirX, float dirY, float dirZ, float sideX, float sideY, float sideZ, float width, float height, float rCoef, float gCoef, float bCoef, float opacity, float timeout, BOOL isLongRange, BOOL isDynamic, BOOL useComplexColn);Parameters:decalType: which type of decal to place, based on the ID, see DecalTypes enum.posX: X position coordinate.posY: Y position coordinate.posZ: Z position coordinate.dirX: X Orientation.dirY: Y Orientation.dirZ: Z Orientation.sideX: Usually set to 0.sideY: Usually set to 1.sideZ: Usually set to 0.width: Width of the decal.height: Height of the decal.rCoef: Red Color.gCoef: Green Color.bCoef: Blue Color.opacity: Alpha Color.timeout: The lifetime of the decal.isLongRange: toggle further LOD draw distance.isDynamic: toggle dynamics.useComplexColn: use complex coloring.Returns: An integer value representing the added decal index, will return 0 if the decal cannot be added.Places a decal into the worldpublic enum DecalTypes  \n{  \n    splatters_blood = 1010,  \n    splatters_blood_dir = 1015,  \n    splatters_blood_mist = 1017,  \n    splatters_mud = 1020,  \n    splatters_paint = 1030,  \n    splatters_water = 1040,  \n    splatters_water_hydrant = 1050,  \n    splatters_blood2 = 1110,  \n    weapImpact_metal = 4010,  \n    weapImpact_concrete = 4020,  \n    weapImpact_mattress = 4030,  \n    weapImpact_mud = 4032,  \n    weapImpact_wood = 4050,  \n    weapImpact_sand = 4053,  \n    weapImpact_cardboard = 4040,  \n    weapImpact_melee_glass = 4100,  \n    weapImpact_glass_blood = 4102,  \n    weapImpact_glass_blood2 = 4104,  \n    weapImpact_shotgun_paper = 4200,  \n    weapImpact_shotgun_mattress,  \n    weapImpact_shotgun_metal,  \n    weapImpact_shotgun_wood,  \n    weapImpact_shotgun_dirt,  \n    weapImpact_shotgun_tvscreen,  \n    weapImpact_shotgun_tvscreen2,  \n    weapImpact_shotgun_tvscreen3,  \n    weapImpact_melee_concrete = 4310,  \n    weapImpact_melee_wood = 4312,  \n    weapImpact_melee_metal = 4314,  \n    burn1 = 4421,  \n    burn2,  \n    burn3,  \n    burn4,  \n    burn5,  \n    bang_concrete_bang = 5000,  \n    bang_concrete_bang2,  \n    bang_bullet_bang,  \n    bang_bullet_bang2 = 5004,  \n    bang_glass = 5031,  \n    bang_glass2,  \n    solidPool_water = 9000,  \n    solidPool_blood,  \n    solidPool_oil,  \n    solidPool_petrol,  \n    solidPool_mud,  \n    porousPool_water,  \n    porousPool_blood,  \n    porousPool_oil,  \n    porousPool_petrol,  \n    porousPool_mud,  \n    porousPool_water_ped_drip,  \n    liquidTrail_water = 9050  \n}",
+  "codeBlocks": [
+    "// AddDecal\nint ADD_DECAL(int decalType, float posX, float posY, float posZ, float dirX, float dirY, float dirZ, float sideX, float sideY, float sideZ, float width, float height, float rCoef, float gCoef, float bCoef, float opacity, float timeout, BOOL isLongRange, BOOL isDynamic, BOOL useComplexColn);",
+    "-- Example usage for ADD_DECAL\nAddDecal(0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, true, true, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/AddDecal.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

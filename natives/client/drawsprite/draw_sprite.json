@@ -1,0 +1,22 @@
+{
+  "title": "DRAW_SPRITE",
+  "breadcrumbs": [
+    "GRAPHICSAPI",
+    "DRAW_SPRITE"
+  ],
+  "content": "0xE7FFAE5EBF23D8900x1FEC16B0// DrawSprite\nvoid DRAW_SPRITE(char* textureDict, char* textureName, float screenX, float screenY, float width, float height, float heading, int red, int green, int blue, int alpha);Draws a 2D sprite on the screen.  \nParameters:  \ntextureDict - Name of texture dictionary to load texture from (e.g. \"CommonMenu\", \"MPWeaponsCommon\", etc.)  \ntextureName - Name of texture to load from texture dictionary (e.g. \"last_team_standing_icon\", \"tennis_icon\", etc.)  \nscreenX/Y - Screen offset (0.5 = center)  \nscaleX/Y - Texture scaling. Negative values can be used to flip the texture on that axis. (0.5 = half)  \nheading - Texture rotation in degrees (default = 0.0) positive is clockwise, measured in degrees  \nred,green,blue - Sprite color (default = 255/255/255)  \nalpha - opacity level  \nNativeDB Added Parameter 12: BOOL p11",
+  "codeBlocks": [
+    "// DrawSprite\nvoid DRAW_SPRITE(char* textureDict, char* textureName, float screenX, float screenY, float width, float height, float heading, int red, int green, int blue, int alpha);",
+    "-- Example usage for DRAW_SPRITE\nDrawSprite('', '', 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/DrawSprite.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "title": "SET_ENTITY_VISIBLE",
+  "breadcrumbs": [
+    "ENTITYAPI",
+    "SET_ENTITY_VISIBLE"
+  ],
+  "content": "0xEA1C610A04DB6BBB0xD043E8E1// SetEntityVisible\nvoid SET_ENTITY_VISIBLE(Entity entity, BOOL toggle, BOOL unk);Parameters:entity: The entity to change the visibility oftoggle: Whether or not the entity will be visibleunk: Always 0 in scriptsToggle the visibility of a given entity.Examples:LuaSetEntityVisible(PlayerPedId(), false, 0)",
+  "codeBlocks": [
+    "// SetEntityVisible\nvoid SET_ENTITY_VISIBLE(Entity entity, BOOL toggle, BOOL unk);",
+    "local entity = GetEntityCoords(PlayerPedId())\n-- Example usage for SET_ENTITY_VISIBLE\nSetEntityVisible(entity, true, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/SetEntityVisible.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

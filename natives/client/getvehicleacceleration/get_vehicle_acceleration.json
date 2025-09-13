@@ -1,0 +1,22 @@
+{
+  "title": "GET_VEHICLE_ACCELERATION",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "GET_VEHICLE_ACCELERATION"
+  ],
+  "content": "0x5DD35C8D074E57AE0x00478321// GetVehicleAcceleration\nfloat GET_VEHICLE_ACCELERATION(Vehicle vehicle);Parameters:vehicle: The vehicle for which to obtain the acceleration.Returns: Returns the acceleration value of the specified vehicle as a float number.Retrieves a static value representing the maximum drive force of specific a vehicle, including any vehicle mods. This value does not change dynamically during gameplay. This value provides an approximation and should be considered alongside other performance metrics like top speed for a more comprehensive understanding of the vehicle's capabilities.NativeDB Introduced: v323Examples:LuaJavaScriptC#-- This example prints the acceleration of the player's current vehicle.\n\n-- Retrieve the player ped.\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the vehicle the player is currently in.\nlocal vehicle = GetVehiclePedIsIn(playerPed, false)\n\n-- If the vehicle does not exist, end the execution of the code here.\nif not DoesEntityExist(vehicle) then \n    return \nend\n\n-- Retrieve the acceleration of the vehicle.\nlocal acceleration = GetVehicleAcceleration(vehicle)\n\n-- Print the acceleration of the vehicle.\nprint(\"Vehicle Acceleration: \" .. acceleration)",
+  "codeBlocks": [
+    "// GetVehicleAcceleration\nfloat GET_VEHICLE_ACCELERATION(Vehicle vehicle);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for GET_VEHICLE_ACCELERATION\nGetVehicleAcceleration(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/GetVehicleAcceleration.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

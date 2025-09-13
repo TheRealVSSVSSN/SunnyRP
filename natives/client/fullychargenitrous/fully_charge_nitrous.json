@@ -1,0 +1,23 @@
+{
+  "title": "FULLY_CHARGE_NITROUS",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "FULLY_CHARGE_NITROUS"
+  ],
+  "content": "0x1A2BCC8C636F9226// FullyChargeNitrous\nvoid FULLY_CHARGE_NITROUS(Vehicle vehicle);Parameters:vehicle: The vehicle whose nitrous system is to be fully recharged.NativeDB Introduced: v3095Recharges the nitrous system of the specified vehicle to its maximum capacity. This action sets the nitrous charge duration to the maximum limit defined by previous settings applied through SET_OVERRIDE_NITROUS_LEVEL.Examples:LuaJavaScriptC#-- Retrieve the player ped\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the vehicle the player is currently in. \nlocal vehicle = GetVehiclePedIsIn(playerPed, false)\n\n-- Check if the vehicle exists in the game world.\nif vehicle == 0 then return end\n\n-- Set nitrous modifications with SET_OVERRIDE_NITROUS_LEVEL since this native require a durationMod to be specified.\nSetOverrideNitrousLevel(vehicle, true, 1.5, 2.0, 0.5, false)\n\n-- After setting the modifiers, fully recharge the nitrous system to the new max defined.\nFullyChargeNitrous(vehicle)",
+  "codeBlocks": [
+    "// FullyChargeNitrous\nvoid FULLY_CHARGE_NITROUS(Vehicle vehicle);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for FULLY_CHARGE_NITROUS\nFullyChargeNitrous(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/FullyChargeNitrous.md",
+    "https://docs.fivem.net/natives/?_0xC8E9B6B71B8E660D",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

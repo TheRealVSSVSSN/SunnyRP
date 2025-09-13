@@ -1,0 +1,23 @@
+{
+  "title": "_SET_BOAT_BOOM_POSITION_RATIO",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "_SET_BOAT_BOOM_POSITION_RATIO"
+  ],
+  "content": "0xF488C566413B42320xA25CCB8C// SetBoatBoomPositionRatio\nvoid _SET_BOAT_BOOM_POSITION_RATIO(Vehicle vehicle, float ratio);Parameters:vehicle: The TR3 vehicle.ratio: A value between 0.0 (left) and 1.0 (back)Sets the boat boom position for the TR3 trailer.Ratio value is between 0.0 and 1.0, where 0.0 is 90 degrees to the left of the boat, and 1.0 is just slightly to the right/back of the boat.To get the current boom position ratio, use GET_BOAT_BOOM_POSITION_RATIO.",
+  "codeBlocks": [
+    "// SetBoatBoomPositionRatio\nvoid _SET_BOAT_BOOM_POSITION_RATIO(Vehicle vehicle, float ratio);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for _SET_BOAT_BOOM_POSITION_RATIO\n_etBoatBoomPositionRatio(vehicle, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetBoatBoomPositionRatio.md",
+    "https://docs.fivem.net/natives/?_0x6636C535F6CC2725",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

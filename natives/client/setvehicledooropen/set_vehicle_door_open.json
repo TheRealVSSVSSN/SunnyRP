@@ -1,0 +1,23 @@
+{
+  "title": "SET_VEHICLE_DOOR_OPEN",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "SET_VEHICLE_DOOR_OPEN"
+  ],
+  "content": "0x7C65DAC73C35C8620xBB75D38B// SetVehicleDoorOpen\nvoid SET_VEHICLE_DOOR_OPEN(Vehicle vehicle, int doorIndex, BOOL loose, BOOL openInstantly);Parameters:vehicle: Vehicle.doorIndex: Index of the door you want to open (0-7)loose: Whether the door is \"loose\" (if true the doors have no \"spring\" and can be closed easily.)openInstantly: Whether the doors open instantly (if true this native seems to ignore loose)Sets the specified door index open on the passed vehicle. See IS_VEHICLE_DOOR_FULLY_OPEN.Examples:Lualocal Vehicle = GetVehiclePedIsUsing(PlayerPedId())\nfor i = 0, 5 do\n  SetVehicleDoorOpen(Vehicle, i, false, true) -- will open every door from 0-5\nend",
+  "codeBlocks": [
+    "// SetVehicleDoorOpen\nvoid SET_VEHICLE_DOOR_OPEN(Vehicle vehicle, int doorIndex, BOOL loose, BOOL openInstantly);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for SET_VEHICLE_DOOR_OPEN\nSetVehicleDoorOpen(vehicle, 0, true, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetVehicleDoorOpen.md",
+    "https://docs.fivem.net/natives/?_0x3E933CFF7B111C22",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

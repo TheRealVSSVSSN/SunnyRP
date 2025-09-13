@@ -1,0 +1,22 @@
+{
+  "title": "TRIGGER_SCREENBLUR_FADE_IN",
+  "breadcrumbs": [
+    "GRAPHICSAPI",
+    "TRIGGER_SCREENBLUR_FADE_IN"
+  ],
+  "content": "0xA328A24AAA6B7FDC0x5604B890// TriggerScreenblurFadeIn\nBOOL TRIGGER_SCREENBLUR_FADE_IN(float transitionTime);Parameters:transitionTime: Time in milliseconds to transition into a fully blurred screenOld name:  _TRANSITION_TO_BLURRED",
+  "codeBlocks": [
+    "// TriggerScreenblurFadeIn\nBOOL TRIGGER_SCREENBLUR_FADE_IN(float transitionTime);",
+    "-- Example usage for TRIGGER_SCREENBLUR_FADE_IN\nTriggerScreenblurFadeIn(0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/TriggerScreenblurFadeIn.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

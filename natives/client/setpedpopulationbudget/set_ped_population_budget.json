@@ -1,0 +1,22 @@
+{
+  "title": "SET_PED_POPULATION_BUDGET",
+  "breadcrumbs": [
+    "STREAMINGAPI",
+    "SET_PED_POPULATION_BUDGET"
+  ],
+  "content": "0x8C95333CFC3340F30xD2D026CD// SetPedPopulationBudget\nvoid SET_PED_POPULATION_BUDGET(int budgetLevel);Parameters:budgetLevel: Ranges from 0 to 3, where 0 is lowest (no peds) and 3 is the full budget level.Sets the memory budget level for ped population.",
+  "codeBlocks": [
+    "// SetPedPopulationBudget\nvoid SET_PED_POPULATION_BUDGET(int budgetLevel);",
+    "-- Example usage for SET_PED_POPULATION_BUDGET\nSetPedPopulationBudget(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/STREAMING/SetPedPopulationBudget.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

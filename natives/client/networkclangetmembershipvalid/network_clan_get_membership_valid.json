@@ -1,0 +1,22 @@
+{
+  "title": "NETWORK_CLAN_GET_MEMBERSHIP_VALID",
+  "breadcrumbs": [
+    "NETWORKAPI",
+    "NETWORK_CLAN_GET_MEMBERSHIP_VALID"
+  ],
+  "content": "0x48A59CF88D43DF0E0x48914F6A// NetworkClanGetMembershipValid\nBOOL NETWORK_CLAN_GET_MEMBERSHIP_VALID(int* networkHandle, int membershipIndex);Parameters:networkHandle: A player network handle.membershipIndex: If the player has multiple crews/memberships, use [0-9], or -1 to get the active crew/membership.Returns: Returns true if valid, false otherwise.Checks if a crew/membership for a player, from the cache (i.e. downloaded via NETWORK_CLAN_DOWNLOAD_MEMBERSHIP) is valid.",
+  "codeBlocks": [
+    "// NetworkClanGetMembershipValid\nBOOL NETWORK_CLAN_GET_MEMBERSHIP_VALID(int* networkHandle, int membershipIndex);",
+    "-- Example usage for NETWORK_CLAN_GET_MEMBERSHIP_VALID\nNetworkClanGetMembershipValid(0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/NETWORK/NetworkClanGetMembershipValid.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

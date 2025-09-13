@@ -1,0 +1,22 @@
+{
+  "title": "SET_PLAYER_MAY_ONLY_ENTER_THIS_VEHICLE",
+  "breadcrumbs": [
+    "PLAYERAPI",
+    "SET_PLAYER_MAY_ONLY_ENTER_THIS_VEHICLE"
+  ],
+  "content": "0x8026FF78F208978A0xA454DD29// SetPlayerMayOnlyEnterThisVehicle\nvoid SET_PLAYER_MAY_ONLY_ENTER_THIS_VEHICLE(Player player, Vehicle vehicle);Parameters:player: The player index.vehicle: Vehicle id.Limit the player to only enter this vehicle. Note set vehicle to false if you want them to access any vehicle.",
+  "codeBlocks": [
+    "// SetPlayerMayOnlyEnterThisVehicle\nvoid SET_PLAYER_MAY_ONLY_ENTER_THIS_VEHICLE(Player player, Vehicle vehicle);",
+    "local player = source\nlocal vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for SET_PLAYER_MAY_ONLY_ENTER_THIS_VEHICLE\nSetPlayerMayOnlyEnterThisVehicle(player, vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PLAYER/SetPlayerMayOnlyEnterThisVehicle.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

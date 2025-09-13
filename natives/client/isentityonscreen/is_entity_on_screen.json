@@ -1,0 +1,23 @@
+{
+  "title": "IS_ENTITY_ON_SCREEN",
+  "breadcrumbs": [
+    "ENTITYAPI",
+    "IS_ENTITY_ON_SCREEN"
+  ],
+  "content": "0xE659E47AF827484B0xC1FEC5ED// IsEntityOnScreen\nBOOL IS_ENTITY_ON_SCREEN(Entity entity);Parameters:entity: The entity to check.Returns: Returns true if the the entity is in between the minimum and maximum values for the 2D screen bound coords; otherwise, false.Determines whether the screen position of the specified entity is within the 2D bounds of the screen.This native will not check if the entity is not visible due to being occluded (for example, behind a wall). To check if a entity is on screen and is not occluded, use IS_ENTITY_OCCLUDED.",
+  "codeBlocks": [
+    "// IsEntityOnScreen\nBOOL IS_ENTITY_ON_SCREEN(Entity entity);",
+    "local entity = GetEntityCoords(PlayerPedId())\n-- Example usage for IS_ENTITY_ON_SCREEN\nIsEntityOnScreen(entity)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/IsEntityOnScreen.md",
+    "https://docs.fivem.net/natives/?_0xE31C2C72B8692B64",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

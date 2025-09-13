@@ -1,0 +1,23 @@
+{
+  "title": "CLEAR_NITROUS",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "CLEAR_NITROUS"
+  ],
+  "content": "0xC889AE921400E1ED// ClearNitrous\nvoid CLEAR_NITROUS(Vehicle vehicle);Parameters:vehicle: The vehicle whose nitrous system needs to be cleared.NativeDB Introduced: 3095Resets or clears the nitrous system for a specified vehicle. You can check if a vehicle has nitrous with IS_NITROUS_ACTIVEExamples:LuaJavaScriptC#-- Retrieve the player ped\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the vehicle the player is currently in. \nlocal vehicle = GetVehiclePedIsIn(playerPed, false)\n\n-- Check if the vehicle exists in the game world.\nif vehicle == 0 then return end\n\n-- Check if nitrous is active on the vehicle.\nif IsNitrousActive(vehicle) then\n    -- If nitrous is active, clear the nitrous boost from the vehicle.\n    ClearNitrous(vehicle)\nend",
+  "codeBlocks": [
+    "// ClearNitrous\nvoid CLEAR_NITROUS(Vehicle vehicle);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for CLEAR_NITROUS\nClearNitrous(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/ClearNitrous.md",
+    "https://docs.fivem.net/natives/?_0x491E822B2C464FE4",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

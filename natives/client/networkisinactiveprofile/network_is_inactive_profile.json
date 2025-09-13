@@ -1,0 +1,22 @@
+{
+  "title": "NETWORK_IS_INACTIVE_PROFILE",
+  "breadcrumbs": [
+    "NETWORKAPI",
+    "NETWORK_IS_INACTIVE_PROFILE"
+  ],
+  "content": "0x7E58745504313A2E0x95481343// NetworkIsInactiveProfile\nBOOL NETWORK_IS_INACTIVE_PROFILE(int* networkHandle);Returns: Returns true if the networkHandle is signed in on the same machine, but is not the main player.Checks if the networkHandle is the same as any other user that is signed in on the local machine.\nFor example, if your console has two or more users signed in (on different controllers), the profile that is not controlling the game would be \"inactive\".",
+  "codeBlocks": [
+    "// NetworkIsInactiveProfile\nBOOL NETWORK_IS_INACTIVE_PROFILE(int* networkHandle);",
+    "-- Example usage for NETWORK_IS_INACTIVE_PROFILE\nNetworkIsInactiveProfile(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/NETWORK/NetworkIsInactiveProfile.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

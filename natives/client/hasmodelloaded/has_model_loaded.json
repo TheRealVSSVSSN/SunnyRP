@@ -1,0 +1,22 @@
+{
+  "title": "HAS_MODEL_LOADED",
+  "breadcrumbs": [
+    "STREAMINGAPI",
+    "HAS_MODEL_LOADED"
+  ],
+  "content": "0x98A4EB5D89A0C9520x62BFDB37// HasModelLoaded\nBOOL HAS_MODEL_LOADED(Hash model);Parameters:model: The model hash to check for.Returns: A boolean indicating whether the archetype is loaded (true) or not (false).Returns whether the specified model (archetype) is currently loaded.Note that this will return 'true' even if the model has been requested and loaded by something other than the current script, if you're intending to actually use the model in a later frame, you should call REQUEST_MODEL anyway.",
+  "codeBlocks": [
+    "// HasModelLoaded\nBOOL HAS_MODEL_LOADED(Hash model);",
+    "-- Example usage for HAS_MODEL_LOADED\nHasModelLoaded(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/STREAMING/HasModelLoaded.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

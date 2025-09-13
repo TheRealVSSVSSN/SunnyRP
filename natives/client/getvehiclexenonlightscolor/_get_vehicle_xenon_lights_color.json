@@ -1,0 +1,23 @@
+{
+  "title": "_GET_VEHICLE_XENON_LIGHTS_COLOR",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "_GET_VEHICLE_XENON_LIGHTS_COLOR"
+  ],
+  "content": "0x3DFF319A831E0CDB// GetVehicleXenonLightsColor\nint _GET_VEHICLE_XENON_LIGHTS_COLOR(Vehicle vehicle);Parameters:vehicle: The vehicle to get the headlight color from.Returns: Returns the xenons light color, refer to eHeadlightColorsUse _SET_VEHICLE_HEADLIGHTS_COLOUR to set the headlights color for the vehicle.You must enable xenon headlights for this native to work properly.enum eHeadlightColors {\n    Default = 255,\n    White = 0,\n    Blue = 1,\n    ElectricBlue = 2,\n    MintGreen = 3,\n    LimeGreen = 4,\n    Yellow = 5,\n    GoldenShower = 6,\n    Orange = 7,\n    Red = 8,\n    PonyPink = 9,\n    HotPink = 10,\n    Purple = 11,\n    Blacklight = 12\n}\nOld name:  _GET_VEHICLE_HEADLIGHTS_COLOUROld name:  _GET_VEHICLE_XENON_LIGHTS_COLOUR",
+  "codeBlocks": [
+    "// GetVehicleXenonLightsColor\nint _GET_VEHICLE_XENON_LIGHTS_COLOR(Vehicle vehicle);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for _GET_VEHICLE_XENON_LIGHTS_COLOR\n_etVehicleXenonLightsColor(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/GetVehicleXenonLightsColor.md",
+    "https://docs.fivem.net/natives/?_0xE41033B25D003A07",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

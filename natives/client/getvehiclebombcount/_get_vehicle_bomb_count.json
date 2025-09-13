@@ -1,0 +1,24 @@
+{
+  "title": "_GET_VEHICLE_BOMB_COUNT",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "_GET_VEHICLE_BOMB_COUNT"
+  ],
+  "content": "0xEA12BD130D7569A1// GetVehicleBombCount\nint _GET_VEHICLE_BOMB_COUNT(Vehicle aircraft);Parameters:aircraft: The vehicle to get the amount of bombs from.Returns: An int indicating the amount of bombs remaining on that plane.Gets the amount of bombs that this vehicle has. As far as I know, this does not impact vehicle weapons or the ammo of those weapons in any way, it is just a way to keep track of the amount of bombs in a specific plane.In decompiled scripts this is used to check if the vehicle has enough bombs before a bomb can be dropped (bombs are dropped by using _SHOOT_SINGLE_BULLET_BETWEEN_COORDS_WITH_EXTRA_PARAMS).Use _SET_AIRCRAFT_BOMB_COUNT to set the amount of bombs on that vehicle.Old name:  _GET_AIRCRAFT_BOMB_COUNTExamples:LuaC#local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\nprint(\"This plane has \" .. GetAircraftBombCount(vehicle) .. \" bombs left.\")",
+  "codeBlocks": [
+    "// GetVehicleBombCount\nint _GET_VEHICLE_BOMB_COUNT(Vehicle aircraft);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for _GET_VEHICLE_BOMB_COUNT\n_etVehicleBombCount(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/GetVehicleBombCount.md",
+    "https://docs.fivem.net/natives/?_0xBFE5756E7407064A",
+    "https://docs.fivem.net/natives/?_0xF4B2ED59DEB5D774",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

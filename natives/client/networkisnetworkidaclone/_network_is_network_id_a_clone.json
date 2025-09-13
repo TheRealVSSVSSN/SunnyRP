@@ -1,0 +1,22 @@
+{
+  "title": "_NETWORK_IS_NETWORK_ID_A_CLONE",
+  "breadcrumbs": [
+    "NETWORKAPI",
+    "_NETWORK_IS_NETWORK_ID_A_CLONE"
+  ],
+  "content": "0x7242F8B741CE1086// NetworkIsNetworkIdAClone\nBOOL _NETWORK_IS_NETWORK_ID_A_CLONE(int netId);Parameters:netId: The network id for an object or entity.Returns: Probably a bool, returns 1 if you don't have control over the netId entity.Returns true if the specified network id is controlled by someone else.",
+  "codeBlocks": [
+    "// NetworkIsNetworkIdAClone\nBOOL _NETWORK_IS_NETWORK_ID_A_CLONE(int netId);",
+    "-- Example usage for _NETWORK_IS_NETWORK_ID_A_CLONE\n_etworkIsNetworkIdAClone(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/NETWORK/NetworkIsNetworkIdAClone.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

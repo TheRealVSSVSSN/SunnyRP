@@ -1,0 +1,12 @@
+{
+  "title": "SET_ENTITY_AS_NO_LONGER_NEEDED",
+  "breadcrumbs": [
+    "SET_ENTITY_AS_NO_LONGER_NEEDED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_ENTITY_AS_NO_LONGER_NEEDED\nSetEntityAsNoLongerNeeded()"
+  ],
+  "urls": [],
+  "tags": []
+}

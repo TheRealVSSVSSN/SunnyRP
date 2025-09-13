@@ -1,0 +1,22 @@
+{
+  "title": "0x725012A415DBA050",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "0x725012A415DBA050"
+  ],
+  "content": "0x725012A415DBA050// N_0x725012a415dba050\nAny 0x725012A415DBA050(Any p0, Any* p1, Any p2);Last named native above this one is TRACK_VEHICLE_VISIBILITY and first named native below is UNCUFF_PED.\nUnknown what it does, couldn't find good examples in the decompiled scripts.",
+  "codeBlocks": [
+    "// N_0x725012a415dba050\nAny 0x725012A415DBA050(Any p0, Any* p1, Any p2);",
+    "-- Example usage for 0x725012A415DBA050\n0x725012a415dba050(0, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/N_0x725012a415dba050.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

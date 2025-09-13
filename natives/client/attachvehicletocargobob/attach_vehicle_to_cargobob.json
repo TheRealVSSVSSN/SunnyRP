@@ -1,0 +1,23 @@
+{
+  "title": "ATTACH_VEHICLE_TO_CARGOBOB",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "ATTACH_VEHICLE_TO_CARGOBOB"
+  ],
+  "content": "0x4127F1D84E3477690x607DC9D5// AttachVehicleToCargobob\nvoid ATTACH_VEHICLE_TO_CARGOBOB(Vehicle cargobob, Vehicle vehicle, int vehicleBoneIndex, float x, float y, float z);Parameters:cargobob: The cargobobvehicle: The vehicle that will be attachedvehicleBoneIndex: A Vehicle bone the hook/magnet should attach to or -1 for none/default GET_ENTITY_BONE_INDEX_BY_NAMEx: x hook/magnet Offsety: y hook/magnet Offsetz: z hook/magnet OffsetExamples:Luafunction RequestVehicleModel(modelHash)\n    if not IsModelInCdimage(modelHash) then return end\n    RequestModel(modelHash)\n    while not HasModelLoaded(modelHash) do \n      Wait(0)\n    end\nend\n\nRegisterCommand('spawnCargobob', function(source, args)\n    local cargobobHash = `cargobob` \n    local carHash = `adder` \n    local myPed = PlayerPedId()\n\n    local spawnCoords = GetEntityCoords(myPed)\n\n    RequestVehicleModel(cargobobHash)\n    local cargobob = CreateVehicle(cargobobHash, spawnCoords+vec3(0.0,0.0, 10.0), GetEntityHeading(myPed), true, false) -- Spawns a cargobob above players location\n    SetHeliBladesSpeed(cargobob, 1.0) -- sets the helicoper blades to max spin speed\n    SetPedIntoVehicle(myPed, cargobob, -1) -- sets the player into the cargobob\n    SetModelAsNoLongerNeeded(cargobobHash) -- removes model from game memory as we no longer need it\n    CreatePickUpRopeForCargobob(cargobob, 1) -- 0 = hook, 1 = Magnet Enable rope from cargobob\n\n    RequestVehicleModel(carHash)\n    local vehicle = CreateVehicle(carHash, spawnCoords, GetEntityHeading(myPed), true, false) -- Spawns a vehicle for the cargobob to pickup\n    SetModelAsNoLongerNeeded(carHash)\n    Wait(1000)\n    AttachVehicleToCargobob(cargobob, vehicle, GetEntityBoneIndexByName(vehicle, 'bodyshell'), 0.0, 0.0, 0.0) --Attach the vehicle to the magnet or hook\nend)",
+  "codeBlocks": [
+    "// AttachVehicleToCargobob\nvoid ATTACH_VEHICLE_TO_CARGOBOB(Vehicle cargobob, Vehicle vehicle, int vehicleBoneIndex, float x, float y, float z);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for ATTACH_VEHICLE_TO_CARGOBOB\nAttachVehicleToCargobob(vehicle, vehicle, 0, 0.0, 0.0, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/AttachVehicleToCargobob.md",
+    "https://docs.fivem.net/natives/?_0xFB71170B7E76ACBA",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

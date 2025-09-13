@@ -1,0 +1,23 @@
+{
+  "title": "HAS_ENTITY_CLEAR_LOS_TO_ENTITY",
+  "breadcrumbs": [
+    "ENTITYAPI",
+    "HAS_ENTITY_CLEAR_LOS_TO_ENTITY"
+  ],
+  "content": "0xFCDFF7B72D23A1AC0x53576FA7// HasEntityClearLosToEntity\nBOOL HAS_ENTITY_CLEAR_LOS_TO_ENTITY(Entity entity1, Entity entity2, int flags);Parameters:entity1: Entity to start fromentity2: Entity to check toflags: A bit mask with bits 1, 2, 4, etc, relating to collider types (see: START_EXPENSIVE_SYNCHRONOUS_SHAPE_TEST_LOS_PROBE). 17 is most common in GTA scripts.Returns: Returns true if no collider of specified bitmask is hit.Checks if entity1 has a clear line of sight to entity2. So a simple raycast which if it collides with any of the given colliderTypes returns false.The direction of the check matters with for example bushes, so checking from inside to outside a bush with traceType 256 returns true, but the other way around returns false.",
+  "codeBlocks": [
+    "// HasEntityClearLosToEntity\nBOOL HAS_ENTITY_CLEAR_LOS_TO_ENTITY(Entity entity1, Entity entity2, int flags);",
+    "local entity = GetEntityCoords(PlayerPedId())\n-- Example usage for HAS_ENTITY_CLEAR_LOS_TO_ENTITY\nHasEntityClearLosToEntity(entity, entity, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/HasEntityClearLosToEntity.md",
+    "https://docs.fivem.net/natives/?_0x377906D8A31E5586",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

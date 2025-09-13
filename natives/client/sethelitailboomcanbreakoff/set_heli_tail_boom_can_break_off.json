@@ -1,0 +1,22 @@
+{
+  "title": "SET_HELI_TAIL_BOOM_CAN_BREAK_OFF",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "SET_HELI_TAIL_BOOM_CAN_BREAK_OFF"
+  ],
+  "content": "0x3EC8BF18AA453FE90x2916D69B// SetHeliTailBoomCanBreakOff\nvoid SET_HELI_TAIL_BOOM_CAN_BREAK_OFF(Vehicle heli, BOOL toggle);Parameters:heli: The helicopter for which the tail boom can break off.toggle: Determines whether the helicopter's tail boom can break off.Enables or disables the ability for a helicopter's tail boom to break off.NativeDB Introduced: v323Old name:  SET_HELI_TAIL_EXPLODE_THROW_DASHBOARDOld name:  WAS_COUNTER_ACTIVATEDExamples:LuaJavaScriptC#local heli = GetVehiclePedIsIn(PlayerPedId(), false)\nif heli == 0 or GetVehicleType(heli) ~= \"heli\" then return end\n\nSetHeliTailBoomCanBreakOff(heli, true)",
+  "codeBlocks": [
+    "// SetHeliTailBoomCanBreakOff\nvoid SET_HELI_TAIL_BOOM_CAN_BREAK_OFF(Vehicle heli, BOOL toggle);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for SET_HELI_TAIL_BOOM_CAN_BREAK_OFF\nSetHeliTailBoomCanBreakOff(vehicle, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/SetHeliTailBoomCanBreakOff.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "SET_ENTITY_TRAFFICLIGHT_OVERRIDE",
+  "breadcrumbs": [
+    "ENTITYAPI",
+    "SET_ENTITY_TRAFFICLIGHT_OVERRIDE"
+  ],
+  "content": "0x57C5DB656185EAC40xC47F5B91// SetEntityTrafficlightOverride\nvoid SET_ENTITY_TRAFFICLIGHT_OVERRIDE(Entity entity, int state);Changing traffic-lights will not change the behavior of NPCs.Example: hereenum eTrafficlightOverrideMode\n{\n    TLO_RED = 0,\n    TLO_AMBER = 1,\n    TLO_GREEN = 2,\n    TLO_NONE = 3\n}",
+  "codeBlocks": [
+    "// SetEntityTrafficlightOverride\nvoid SET_ENTITY_TRAFFICLIGHT_OVERRIDE(Entity entity, int state);",
+    "local entity = GetEntityCoords(PlayerPedId())\n-- Example usage for SET_ENTITY_TRAFFICLIGHT_OVERRIDE\nSetEntityTrafficlightOverride(entity, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/SetEntityTrafficlightOverride.md",
+    "https://www.gtaforums.com/topic/830463-help-with-turning-lights-green-and-causing-peds-to-crash-into-each-other/#entry1068211340",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

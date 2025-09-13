@@ -1,0 +1,23 @@
+{
+  "title": "GET_VEHICLE_DOOR_ANGLE_RATIO",
+  "breadcrumbs": [
+    "VEHICLEAPI",
+    "GET_VEHICLE_DOOR_ANGLE_RATIO"
+  ],
+  "content": "0xFE3F9C29F7B32BD50x0E399C26// GetVehicleDoorAngleRatio\nfloat GET_VEHICLE_DOOR_ANGLE_RATIO(Vehicle vehicle, int doorIndex);Parameters:vehicle: VehicledoorIndex: Index of door to checkReturns: A float representing angle of door mapped from 0.0 to 1.0Checks the angle of the door mapped from 0.0 - 1.0 where 0.0 is fully closed and 1.0 is fully open.See eDoorId declared in SET_VEHICLE_DOOR_SHUTExamples:Lualocal veh = GetVehiclePedIsIn(PlayerPedId()\n-- check if driver door is open\nif GetVehicleDoorAngleRatio(veh, 0) > 0.0 then\n  print(\"Driver door is open!)\nend",
+  "codeBlocks": [
+    "// GetVehicleDoorAngleRatio\nfloat GET_VEHICLE_DOOR_ANGLE_RATIO(Vehicle vehicle, int doorIndex);",
+    "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n-- Example usage for GET_VEHICLE_DOOR_ANGLE_RATIO\nGetVehicleDoorAngleRatio(vehicle, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/VEHICLE/GetVehicleDoorAngleRatio.md",
+    "https://docs.fivem.net/natives/?_0x93D9BD300D7789E5",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

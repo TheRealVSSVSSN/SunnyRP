@@ -1,0 +1,23 @@
+{
+  "title": "GET_SCALEFORM_MOVIE_METHOD_RETURN_VALUE_BOOL",
+  "breadcrumbs": [
+    "GRAPHICSAPI",
+    "GET_SCALEFORM_MOVIE_METHOD_RETURN_VALUE_BOOL"
+  ],
+  "content": "0xD80A80346A45D761// GetScaleformMovieMethodReturnValueBool\nBOOL GET_SCALEFORM_MOVIE_METHOD_RETURN_VALUE_BOOL(int methodReturn);Parameters:methodReturn: Operation handle returned by END_SCALEFORM_MOVIE_METHOD_RETURN_VALUEReturns: The return value passed from actionscript to game code.Old name:  _GET_SCALEFORM_MOVIE_METHOD_RETURN_VALUE_BOOL",
+  "codeBlocks": [
+    "// GetScaleformMovieMethodReturnValueBool\nBOOL GET_SCALEFORM_MOVIE_METHOD_RETURN_VALUE_BOOL(int methodReturn);",
+    "-- Example usage for GET_SCALEFORM_MOVIE_METHOD_RETURN_VALUE_BOOL\nGetScaleformMovieMethodReturnValueBool(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/GRAPHICS/GetScaleformMovieMethodReturnValueBool.md",
+    "https://docs.fivem.net/natives/?_0xC50AA39A577AF886",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

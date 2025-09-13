@@ -1,0 +1,23 @@
+{
+  "title": "GET_NETWORK_TIME",
+  "breadcrumbs": [
+    "NETWORKAPI",
+    "GET_NETWORK_TIME"
+  ],
+  "content": "0x7A5487FE9FAA6B480x998103C2// GetNetworkTime\nint GET_NETWORK_TIME();Returns: Returns the network time this tick, if you want a tick-agnostic version use GetNetworkTimeAccurate.Examples:LuaJavaScriptC#print(GetNetworkTime())",
+  "codeBlocks": [
+    "// GetNetworkTime\nint GET_NETWORK_TIME();",
+    "-- Example usage for GET_NETWORK_TIME\nGetNetworkTime()"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/NETWORK/GetNetworkTime.md",
+    "https://docs.fivem.net/natives/?_0x89023FBBF9200E9F",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}
