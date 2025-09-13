@@ -1,0 +1,13 @@
+{
+  "title": "HAS_PLAYER_BEEN_SPOTTED_IN_STOLEN_VEHICLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "HAS_PLAYER_BEEN_SPOTTED_IN_STOLEN_VEHICLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for HAS_PLAYER_BEEN_SPOTTED_IN_STOLEN_VEHICLE\nHasPlayerBeenSpottedInStolenVehicle()"
+  ],
+  "urls": [],
+  "tags": []
+}

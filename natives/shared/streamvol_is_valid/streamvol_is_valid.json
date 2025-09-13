@@ -1,0 +1,13 @@
+{
+  "title": "STREAMVOL_IS_VALID",
+  "breadcrumbs": [
+    "Native Reference",
+    "STREAMVOL_IS_VALID"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for STREAMVOL_IS_VALID\nStreamvolIsValid()"
+  ],
+  "urls": [],
+  "tags": []
+}

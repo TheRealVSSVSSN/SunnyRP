@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_SHOULD_PLAY_IMMEDIATE_SCENARIO_EXIT",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_SHOULD_PLAY_IMMEDIATE_SCENARIO_EXIT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_SHOULD_PLAY_IMMEDIATE_SCENARIO_EXIT\nSetPedShouldPlayImmediateScenarioExit()"
+  ],
+  "urls": [],
+  "tags": []
+}

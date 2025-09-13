@@ -1,0 +1,13 @@
+{
+  "title": "GET_VEHICLE_INDICATOR_LIGHTS",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_VEHICLE_INDICATOR_LIGHTS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_INDICATOR_LIGHTS\nGetVehicleIndicatorLights()"
+  ],
+  "urls": [],
+  "tags": []
+}

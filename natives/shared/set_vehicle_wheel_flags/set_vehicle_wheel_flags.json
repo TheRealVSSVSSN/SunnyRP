@@ -1,0 +1,13 @@
+{
+  "title": "SET_VEHICLE_WHEEL_FLAGS",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_VEHICLE_WHEEL_FLAGS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_VEHICLE_WHEEL_FLAGS\nSetVehicleWheelFlags()"
+  ],
+  "urls": [],
+  "tags": []
+}

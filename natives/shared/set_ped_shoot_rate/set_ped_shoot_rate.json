@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_SHOOT_RATE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_SHOOT_RATE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_SHOOT_RATE\nSetPedShootRate()"
+  ],
+  "urls": [],
+  "tags": []
+}

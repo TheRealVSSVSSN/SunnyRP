@@ -1,0 +1,13 @@
+{
+  "title": "GET_SHOP_PED_OUTFIT_PROP_VARIANT",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_SHOP_PED_OUTFIT_PROP_VARIANT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_SHOP_PED_OUTFIT_PROP_VARIANT\nGetShopPedOutfitPropVariant()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "IS_CONTENT_ITEM_LOCKED",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_CONTENT_ITEM_LOCKED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_CONTENT_ITEM_LOCKED\nIsContentItemLocked()"
+  ],
+  "urls": [],
+  "tags": []
+}

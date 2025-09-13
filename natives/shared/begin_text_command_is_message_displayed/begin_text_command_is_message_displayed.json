@@ -1,0 +1,13 @@
+{
+  "title": "BEGIN_TEXT_COMMAND_IS_MESSAGE_DISPLAYED",
+  "breadcrumbs": [
+    "Native Reference",
+    "BEGIN_TEXT_COMMAND_IS_MESSAGE_DISPLAYED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for BEGIN_TEXT_COMMAND_IS_MESSAGE_DISPLAYED\nBeginTextCommandIsMessageDisplayed()"
+  ],
+  "urls": [],
+  "tags": []
+}

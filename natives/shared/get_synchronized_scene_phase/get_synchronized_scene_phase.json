@@ -1,0 +1,13 @@
+{
+  "title": "GET_SYNCHRONIZED_SCENE_PHASE",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_SYNCHRONIZED_SCENE_PHASE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_SYNCHRONIZED_SCENE_PHASE\nGetSynchronizedScenePhase()"
+  ],
+  "urls": [],
+  "tags": []
+}

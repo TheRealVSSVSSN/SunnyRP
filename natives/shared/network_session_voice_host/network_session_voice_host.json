@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SESSION_VOICE_HOST",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SESSION_VOICE_HOST"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SESSION_VOICE_HOST\nNetworkSessionVoiceHost()"
+  ],
+  "urls": [],
+  "tags": []
+}

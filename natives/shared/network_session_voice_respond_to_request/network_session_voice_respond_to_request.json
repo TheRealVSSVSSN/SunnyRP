@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SESSION_VOICE_RESPOND_TO_REQUEST",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SESSION_VOICE_RESPOND_TO_REQUEST"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SESSION_VOICE_RESPOND_TO_REQUEST\nNetworkSessionVoiceRespondToRequest()"
+  ],
+  "urls": [],
+  "tags": []
+}

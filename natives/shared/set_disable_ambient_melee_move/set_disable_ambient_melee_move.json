@@ -1,0 +1,13 @@
+{
+  "title": "SET_DISABLE_AMBIENT_MELEE_MOVE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_DISABLE_AMBIENT_MELEE_MOVE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_DISABLE_AMBIENT_MELEE_MOVE\nSetDisableAmbientMeleeMove()"
+  ],
+  "urls": [],
+  "tags": []
+}

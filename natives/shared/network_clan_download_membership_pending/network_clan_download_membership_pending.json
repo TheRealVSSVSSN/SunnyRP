@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_CLAN_DOWNLOAD_MEMBERSHIP_PENDING",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_CLAN_DOWNLOAD_MEMBERSHIP_PENDING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_CLAN_DOWNLOAD_MEMBERSHIP_PENDING\nNetworkClanDownloadMembershipPending()"
+  ],
+  "urls": [],
+  "tags": []
+}

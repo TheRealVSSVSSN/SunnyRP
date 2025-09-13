@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SESSION_VALIDATE_JOIN",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SESSION_VALIDATE_JOIN"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SESSION_VALIDATE_JOIN\nNetworkSessionValidateJoin()"
+  ],
+  "urls": [],
+  "tags": []
+}

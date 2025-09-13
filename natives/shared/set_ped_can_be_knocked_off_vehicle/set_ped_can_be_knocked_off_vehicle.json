@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_CAN_BE_KNOCKED_OFF_VEHICLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_CAN_BE_KNOCKED_OFF_VEHICLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_CAN_BE_KNOCKED_OFF_VEHICLE\nSetPedCanBeKnockedOffVehicle()"
+  ],
+  "urls": [],
+  "tags": []
+}

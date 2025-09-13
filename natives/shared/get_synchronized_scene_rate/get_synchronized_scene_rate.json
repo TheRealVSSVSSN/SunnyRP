@@ -1,0 +1,13 @@
+{
+  "title": "GET_SYNCHRONIZED_SCENE_RATE",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_SYNCHRONIZED_SCENE_RATE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_SYNCHRONIZED_SCENE_RATE\nGetSynchronizedSceneRate()"
+  ],
+  "urls": [],
+  "tags": []
+}

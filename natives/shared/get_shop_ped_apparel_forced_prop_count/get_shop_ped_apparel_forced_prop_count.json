@@ -1,0 +1,13 @@
+{
+  "title": "GET_SHOP_PED_APPAREL_FORCED_PROP_COUNT",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_SHOP_PED_APPAREL_FORCED_PROP_COUNT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_SHOP_PED_APPAREL_FORCED_PROP_COUNT\nGetShopPedApparelForcedPropCount()"
+  ],
+  "urls": [],
+  "tags": []
+}

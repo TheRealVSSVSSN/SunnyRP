@@ -1,0 +1,13 @@
+{
+  "title": "GET_VEHICLE_CLUTCH",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_VEHICLE_CLUTCH"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_CLUTCH\nGetVehicleClutch()"
+  ],
+  "urls": [],
+  "tags": []
+}

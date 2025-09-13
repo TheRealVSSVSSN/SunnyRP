@@ -1,0 +1,13 @@
+{
+  "title": "_NETWORK_SET_CURRENT_DATA_MANAGER_HANDLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "_NETWORK_SET_CURRENT_DATA_MANAGER_HANDLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _NETWORK_SET_CURRENT_DATA_MANAGER_HANDLE\n_NetworkSetCurrentDataManagerHandle()"
+  ],
+  "urls": [],
+  "tags": []
+}

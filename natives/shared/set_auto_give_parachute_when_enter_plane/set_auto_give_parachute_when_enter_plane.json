@@ -1,0 +1,13 @@
+{
+  "title": "SET_AUTO_GIVE_PARACHUTE_WHEN_ENTER_PLANE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_AUTO_GIVE_PARACHUTE_WHEN_ENTER_PLANE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_AUTO_GIVE_PARACHUTE_WHEN_ENTER_PLANE\nSetAutoGiveParachuteWhenEnterPlane()"
+  ],
+  "urls": [],
+  "tags": []
+}

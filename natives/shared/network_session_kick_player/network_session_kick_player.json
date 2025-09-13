@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SESSION_KICK_PLAYER",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SESSION_KICK_PLAYER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SESSION_KICK_PLAYER\nNetworkSessionKickPlayer()"
+  ],
+  "urls": [],
+  "tags": []
+}

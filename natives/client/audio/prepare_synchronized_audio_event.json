@@ -8,7 +8,7 @@
   "content": "0xC7ABCACA4985A7660xE1D91FD0// PrepareSynchronizedAudioEvent\nBOOL PREPARE_SYNCHRONIZED_AUDIO_EVENT(char* audioEvent, int startOffsetMs);Parameters:audioEvent: The audio event name.startOffsetMs: Unused parameter (since v323)",
   "codeBlocks": [
     "// PrepareSynchronizedAudioEvent\nBOOL PREPARE_SYNCHRONIZED_AUDIO_EVENT(char* audioEvent, int startOffsetMs);",
-    "-- Example usage for PREPARE_SYNCHRONIZED_AUDIO_EVENT\nPrepareSynchronizedAudioEvent('', 0)"
+    "-- Example usage for PREPARE_SYNCHRONIZED_AUDIO_EVENT\nPrepareSynchronizedAudioEvent('example', 1)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SESSION_VOICE_SET_TIMEOUT",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SESSION_VOICE_SET_TIMEOUT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SESSION_VOICE_SET_TIMEOUT\nNetworkSessionVoiceSetTimeout()"
+  ],
+  "urls": [],
+  "tags": []
+}

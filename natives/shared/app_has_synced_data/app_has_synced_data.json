@@ -1,0 +1,13 @@
+{
+  "title": "APP_HAS_SYNCED_DATA",
+  "breadcrumbs": [
+    "Native Reference",
+    "APP_HAS_SYNCED_DATA"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for APP_HAS_SYNCED_DATA\nAppHasSyncedData()"
+  ],
+  "urls": [],
+  "tags": []
+}

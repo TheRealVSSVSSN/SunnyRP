@@ -1,0 +1,13 @@
+{
+  "title": "_SET_BINK_SHOULD_SKIP",
+  "breadcrumbs": [
+    "Native Reference",
+    "_SET_BINK_SHOULD_SKIP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_BINK_SHOULD_SKIP\n_SetBinkShouldSkip()"
+  ],
+  "urls": [],
+  "tags": []
+}

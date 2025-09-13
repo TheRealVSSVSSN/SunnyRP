@@ -1,0 +1,13 @@
+{
+  "title": "GET_REQUESTINGNIGHTVISION",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_REQUESTINGNIGHTVISION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_REQUESTINGNIGHTVISION\nGetRequestingnightvision()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_CLEAR_FOLLOWERS",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_CLEAR_FOLLOWERS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_CLEAR_FOLLOWERS\nNetworkClearFollowers()"
+  ],
+  "urls": [],
+  "tags": []
+}

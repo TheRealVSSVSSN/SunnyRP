@@ -1,0 +1,13 @@
+{
+  "title": "PAUSE_MENU_DEACTIVATE_CONTEXT",
+  "breadcrumbs": [
+    "Native Reference",
+    "PAUSE_MENU_DEACTIVATE_CONTEXT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for PAUSE_MENU_DEACTIVATE_CONTEXT\nPauseMenuDeactivateContext()"
+  ],
+  "urls": [],
+  "tags": []
+}

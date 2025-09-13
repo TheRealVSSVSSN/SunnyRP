@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_GET_PRESENCE_INVITE_PLAYLIST_CURRENT",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_GET_PRESENCE_INVITE_PLAYLIST_CURRENT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_GET_PRESENCE_INVITE_PLAYLIST_CURRENT\nNetworkGetPresenceInvitePlaylistCurrent()"
+  ],
+  "urls": [],
+  "tags": []
+}

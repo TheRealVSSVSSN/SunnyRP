@@ -1,0 +1,13 @@
+{
+  "title": "SET_AUTO_GIVE_SCUBA_GEAR_WHEN_EXIT_VEHICLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_AUTO_GIVE_SCUBA_GEAR_WHEN_EXIT_VEHICLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_AUTO_GIVE_SCUBA_GEAR_WHEN_EXIT_VEHICLE\nSetAutoGiveScubaGearWhenExitVehicle()"
+  ],
+  "urls": [],
+  "tags": []
+}

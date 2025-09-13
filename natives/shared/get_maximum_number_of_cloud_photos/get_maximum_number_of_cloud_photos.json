@@ -1,0 +1,13 @@
+{
+  "title": "GET_MAXIMUM_NUMBER_OF_CLOUD_PHOTOS",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_MAXIMUM_NUMBER_OF_CLOUD_PHOTOS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_MAXIMUM_NUMBER_OF_CLOUD_PHOTOS\nGetMaximumNumberOfCloudPhotos()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "MOVE_VEHICLE_DECALS",
+  "breadcrumbs": [
+    "Native Reference",
+    "MOVE_VEHICLE_DECALS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for MOVE_VEHICLE_DECALS\nMoveVehicleDecals()"
+  ],
+  "urls": [],
+  "tags": []
+}

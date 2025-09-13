@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SESSION_SET_MATCHMAKING_MENTAL_STATE",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SESSION_SET_MATCHMAKING_MENTAL_STATE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SESSION_SET_MATCHMAKING_MENTAL_STATE\nNetworkSessionSetMatchmakingMentalState()"
+  ],
+  "urls": [],
+  "tags": []
+}

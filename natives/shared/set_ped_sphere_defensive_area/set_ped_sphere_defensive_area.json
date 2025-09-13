@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_SPHERE_DEFENSIVE_AREA",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_SPHERE_DEFENSIVE_AREA"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_SPHERE_DEFENSIVE_AREA\nSetPedSphereDefensiveArea()"
+  ],
+  "urls": [],
+  "tags": []
+}

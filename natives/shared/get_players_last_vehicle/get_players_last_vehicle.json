@@ -1,0 +1,13 @@
+{
+  "title": "GET_PLAYERS_LAST_VEHICLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PLAYERS_LAST_VEHICLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PLAYERS_LAST_VEHICLE\nGetPlayersLastVehicle()"
+  ],
+  "urls": [],
+  "tags": []
+}

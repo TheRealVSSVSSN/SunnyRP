@@ -1,0 +1,13 @@
+{
+  "title": "_GET_TIME_OF_LAST_PED_WEAPON_DAMAGE",
+  "breadcrumbs": [
+    "Native Reference",
+    "_GET_TIME_OF_LAST_PED_WEAPON_DAMAGE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_TIME_OF_LAST_PED_WEAPON_DAMAGE\n_GetTimeOfLastPedWeaponDamage()"
+  ],
+  "urls": [],
+  "tags": []
+}

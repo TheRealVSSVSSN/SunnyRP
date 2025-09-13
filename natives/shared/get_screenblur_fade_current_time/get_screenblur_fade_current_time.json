@@ -1,0 +1,13 @@
+{
+  "title": "GET_SCREENBLUR_FADE_CURRENT_TIME",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_SCREENBLUR_FADE_CURRENT_TIME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_SCREENBLUR_FADE_CURRENT_TIME\nGetScreenblurFadeCurrentTime()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "SET_EVERYONE_IGNORE_PLAYER",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_EVERYONE_IGNORE_PLAYER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_EVERYONE_IGNORE_PLAYER\nSetEveryoneIgnorePlayer()"
+  ],
+  "urls": [],
+  "tags": []
+}

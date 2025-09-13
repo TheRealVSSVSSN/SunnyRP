@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_AS_GROUP_LEADER",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_AS_GROUP_LEADER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_AS_GROUP_LEADER\nSetPedAsGroupLeader()"
+  ],
+  "urls": [],
+  "tags": []
+}

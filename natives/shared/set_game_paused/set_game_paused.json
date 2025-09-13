@@ -1,0 +1,13 @@
+{
+  "title": "SET_GAME_PAUSED",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_GAME_PAUSED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_GAME_PAUSED\nSetGamePaused()"
+  ],
+  "urls": [],
+  "tags": []
+}

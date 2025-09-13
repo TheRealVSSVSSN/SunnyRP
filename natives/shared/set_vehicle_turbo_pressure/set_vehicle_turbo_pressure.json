@@ -1,0 +1,13 @@
+{
+  "title": "SET_VEHICLE_TURBO_PRESSURE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_VEHICLE_TURBO_PRESSURE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_VEHICLE_TURBO_PRESSURE\nSetVehicleTurboPressure()"
+  ],
+  "urls": [],
+  "tags": []
+}

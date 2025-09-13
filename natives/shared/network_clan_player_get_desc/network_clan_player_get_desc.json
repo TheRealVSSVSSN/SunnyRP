@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_CLAN_PLAYER_GET_DESC",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_CLAN_PLAYER_GET_DESC"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_CLAN_PLAYER_GET_DESC\nNetworkClanPlayerGetDesc()"
+  ],
+  "urls": [],
+  "tags": []
+}

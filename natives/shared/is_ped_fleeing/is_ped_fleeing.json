@@ -1,0 +1,13 @@
+{
+  "title": "IS_PED_FLEEING",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_PED_FLEEING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_PED_FLEEING\nIsPedFleeing()"
+  ],
+  "urls": [],
+  "tags": []
+}

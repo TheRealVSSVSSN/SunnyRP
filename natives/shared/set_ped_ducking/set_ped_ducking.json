@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_DUCKING",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_DUCKING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_DUCKING\nSetPedDucking()"
+  ],
+  "urls": [],
+  "tags": []
+}

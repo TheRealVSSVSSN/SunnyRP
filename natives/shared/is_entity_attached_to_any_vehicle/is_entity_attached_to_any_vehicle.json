@@ -1,0 +1,13 @@
+{
+  "title": "IS_ENTITY_ATTACHED_TO_ANY_VEHICLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_ENTITY_ATTACHED_TO_ANY_VEHICLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_ENTITY_ATTACHED_TO_ANY_VEHICLE\nIsEntityAttachedToAnyVehicle()"
+  ],
+  "urls": [],
+  "tags": []
+}

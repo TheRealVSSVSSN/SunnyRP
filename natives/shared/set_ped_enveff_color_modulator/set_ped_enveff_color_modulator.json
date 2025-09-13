@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_ENVEFF_COLOR_MODULATOR",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_ENVEFF_COLOR_MODULATOR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_ENVEFF_COLOR_MODULATOR\nSetPedEnveffColorModulator()"
+  ],
+  "urls": [],
+  "tags": []
+}

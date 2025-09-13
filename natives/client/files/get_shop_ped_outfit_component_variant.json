@@ -8,7 +8,7 @@
   "content": "0x19F2A026EDF0013F0x818534AC// GetShopPedOutfitComponentVariant\nBOOL GET_SHOP_PED_OUTFIT_COMPONENT_VARIANT(Hash outfit, int slot, Any* outComponentVariant);Parameters:outfit: A structure, see GET_SHOP_PED_QUERY_OUTFIT.slot: outfit slot.outComponentVariant: Old name:  _GET_PROP_FROM_OUTFIT",
   "codeBlocks": [
     "// GetShopPedOutfitComponentVariant\nBOOL GET_SHOP_PED_OUTFIT_COMPONENT_VARIANT(Hash outfit, int slot, Any* outComponentVariant);",
-    "-- Example usage for GET_SHOP_PED_OUTFIT_COMPONENT_VARIANT\nGetShopPedOutfitComponentVariant(GetHashKey('prop'), 0, 0)"
+    "-- Example usage for GET_SHOP_PED_OUTFIT_COMPONENT_VARIANT\nGetShopPedOutfitComponentVariant(GetHashKey('prop_beachball'), 1, 0)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

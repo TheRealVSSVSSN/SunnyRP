@@ -9,7 +9,7 @@
   "codeBlocks": [
     "// SetStaticEmitterEnabled\nvoid SET_STATIC_EMITTER_ENABLED(char* emitterName, BOOL toggle);",
     "Example:\nAUDIO::SET_STATIC_EMITTER_ENABLED((Any*)\"LOS_SANTOS_VANILLA_UNICORN_01_STAGE\", false);    AUDIO::SET_STATIC_EMITTER_ENABLED((Any*)\"LOS_SANTOS_VANILLA_UNICORN_02_MAIN_ROOM\", false);    AUDIO::SET_STATIC_EMITTER_ENABLED((Any*)\"LOS_SANTOS_VANILLA_UNICORN_03_BACK_ROOM\", false);\nThis turns off surrounding sounds not connected directly to peds.",
-    "-- Example usage for SET_STATIC_EMITTER_ENABLED\nSetStaticEmitterEnabled('', false)"
+    "-- Example usage for SET_STATIC_EMITTER_ENABLED\nSetStaticEmitterEnabled('example', true)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

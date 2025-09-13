@@ -1,0 +1,13 @@
+{
+  "title": "IS_PED_HEADING_TOWARDS_POSITION",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_PED_HEADING_TOWARDS_POSITION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_PED_HEADING_TOWARDS_POSITION\nIsPedHeadingTowardsPosition()"
+  ],
+  "urls": [],
+  "tags": []
+}

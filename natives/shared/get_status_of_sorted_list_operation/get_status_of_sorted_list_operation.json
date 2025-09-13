@@ -1,0 +1,13 @@
+{
+  "title": "GET_STATUS_OF_SORTED_LIST_OPERATION",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_STATUS_OF_SORTED_LIST_OPERATION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_STATUS_OF_SORTED_LIST_OPERATION\nGetStatusOfSortedListOperation()"
+  ],
+  "urls": [],
+  "tags": []
+}

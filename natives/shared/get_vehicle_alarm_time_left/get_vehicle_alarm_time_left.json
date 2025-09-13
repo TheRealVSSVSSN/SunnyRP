@@ -1,0 +1,13 @@
+{
+  "title": "GET_VEHICLE_ALARM_TIME_LEFT",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_VEHICLE_ALARM_TIME_LEFT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_ALARM_TIME_LEFT\nGetVehicleAlarmTimeLeft()"
+  ],
+  "urls": [],
+  "tags": []
+}

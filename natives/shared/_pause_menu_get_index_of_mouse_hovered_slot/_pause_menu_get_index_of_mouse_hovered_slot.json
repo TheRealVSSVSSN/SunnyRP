@@ -1,0 +1,13 @@
+{
+  "title": "_PAUSE_MENU_GET_INDEX_OF_MOUSE_HOVERED_SLOT",
+  "breadcrumbs": [
+    "Native Reference",
+    "_PAUSE_MENU_GET_INDEX_OF_MOUSE_HOVERED_SLOT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _PAUSE_MENU_GET_INDEX_OF_MOUSE_HOVERED_SLOT\n_PauseMenuGetIndexOfMouseHoveredSlot()"
+  ],
+  "urls": [],
+  "tags": []
+}

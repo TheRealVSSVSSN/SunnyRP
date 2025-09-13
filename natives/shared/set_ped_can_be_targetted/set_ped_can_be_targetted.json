@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_CAN_BE_TARGETTED",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_CAN_BE_TARGETTED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_CAN_BE_TARGETTED\nSetPedCanBeTargetted()"
+  ],
+  "urls": [],
+  "tags": []
+}

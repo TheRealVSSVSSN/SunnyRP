@@ -1,0 +1,13 @@
+{
+  "title": "GIVE_PLAYER_RAGDOLL_CONTROL",
+  "breadcrumbs": [
+    "Native Reference",
+    "GIVE_PLAYER_RAGDOLL_CONTROL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GIVE_PLAYER_RAGDOLL_CONTROL\nGivePlayerRagdollControl()"
+  ],
+  "urls": [],
+  "tags": []
+}

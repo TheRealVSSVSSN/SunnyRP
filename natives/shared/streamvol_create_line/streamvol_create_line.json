@@ -1,0 +1,13 @@
+{
+  "title": "STREAMVOL_CREATE_LINE",
+  "breadcrumbs": [
+    "Native Reference",
+    "STREAMVOL_CREATE_LINE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for STREAMVOL_CREATE_LINE\nStreamvolCreateLine()"
+  ],
+  "urls": [],
+  "tags": []
+}

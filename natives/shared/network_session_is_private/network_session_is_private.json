@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SESSION_IS_PRIVATE",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SESSION_IS_PRIVATE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SESSION_IS_PRIVATE\nNetworkSessionIsPrivate()"
+  ],
+  "urls": [],
+  "tags": []
+}

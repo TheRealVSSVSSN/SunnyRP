@@ -1,0 +1,13 @@
+{
+  "title": "SHUTDOWN_CREATOR_BUDGET",
+  "breadcrumbs": [
+    "Native Reference",
+    "SHUTDOWN_CREATOR_BUDGET"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SHUTDOWN_CREATOR_BUDGET\nShutdownCreatorBudget()"
+  ],
+  "urls": [],
+  "tags": []
+}

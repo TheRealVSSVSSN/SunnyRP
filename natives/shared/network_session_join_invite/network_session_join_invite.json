@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SESSION_JOIN_INVITE",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SESSION_JOIN_INVITE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SESSION_JOIN_INVITE\nNetworkSessionJoinInvite()"
+  ],
+  "urls": [],
+  "tags": []
+}

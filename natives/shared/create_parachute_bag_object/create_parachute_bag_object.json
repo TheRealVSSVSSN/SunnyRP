@@ -1,0 +1,13 @@
+{
+  "title": "CREATE_PARACHUTE_BAG_OBJECT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CREATE_PARACHUTE_BAG_OBJECT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CREATE_PARACHUTE_BAG_OBJECT\nCreateParachuteBagObject()"
+  ],
+  "urls": [],
+  "tags": []
+}

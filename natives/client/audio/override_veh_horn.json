@@ -9,7 +9,7 @@
   "codeBlocks": [
     "// OverrideVehHorn\nvoid OVERRIDE_VEH_HORN(Vehicle vehicle, BOOL override, int hornHash);",
     "local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n\n-- These are the most common horn hashes found in the decompiled scripts.\nlocal horns = {\n    1604822495,\n    3032502287,\n    3405413507,\n    2737024210,\n    2976270679,\n    4287227293,\n    2479820329,\n    3955047940\n}\n\nlocal randomHornHash = horns[math.random(1, #horns)]\n\n\nOverrideVehHorn(vehicle, true, randomHornHash)",
-    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for OVERRIDE_VEH_HORN\nOverrideVehHorn(vehicle, false, GetHashKey('prop'))"
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for OVERRIDE_VEH_HORN\nOverrideVehHorn(vehicle, true, GetHashKey('prop'))"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

@@ -1,0 +1,13 @@
+{
+  "title": "SET_ALL_RANDOM_PEDS_FLEE_THIS_FRAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_ALL_RANDOM_PEDS_FLEE_THIS_FRAME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_ALL_RANDOM_PEDS_FLEE_THIS_FRAME\nSetAllRandomPedsFleeThisFrame()"
+  ],
+  "urls": [],
+  "tags": []
+}

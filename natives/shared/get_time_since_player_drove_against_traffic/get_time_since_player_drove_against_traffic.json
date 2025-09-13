@@ -1,0 +1,13 @@
+{
+  "title": "GET_TIME_SINCE_PLAYER_DROVE_AGAINST_TRAFFIC",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_TIME_SINCE_PLAYER_DROVE_AGAINST_TRAFFIC"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_TIME_SINCE_PLAYER_DROVE_AGAINST_TRAFFIC\nGetTimeSincePlayerDroveAgainstTraffic()"
+  ],
+  "urls": [],
+  "tags": []
+}

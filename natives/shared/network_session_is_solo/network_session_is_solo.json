@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SESSION_IS_SOLO",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SESSION_IS_SOLO"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SESSION_IS_SOLO\nNetworkSessionIsSolo()"
+  ],
+  "urls": [],
+  "tags": []
+}

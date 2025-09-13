@@ -8,7 +8,7 @@
   "content": "0xA018A12E5C5C2FA60xF3A67AF3// InterruptConversation\nvoid INTERRUPT_CONVERSATION(Ped interrupterPed, char* context, char* voiceName);Parameters:interrupterPed: the ped speakingcontext: the line to usevoiceName: the voicename for the audio assetHandles conversation interrupts, using the code-side system for improved timing and to minimize unfriendly logic interactions.",
   "codeBlocks": [
     "// InterruptConversation\nvoid INTERRUPT_CONVERSATION(Ped interrupterPed, char* context, char* voiceName);",
-    "local ped = PlayerPedId()\n-- Example usage for INTERRUPT_CONVERSATION\nInterruptConversation(ped, '', '')"
+    "local ped = PlayerPedId()\n-- Example usage for INTERRUPT_CONVERSATION\nInterruptConversation(ped, 'example', 'example')"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

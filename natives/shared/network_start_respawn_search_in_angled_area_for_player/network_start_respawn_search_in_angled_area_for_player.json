@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_START_RESPAWN_SEARCH_IN_ANGLED_AREA_FOR_PLAYER",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_START_RESPAWN_SEARCH_IN_ANGLED_AREA_FOR_PLAYER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_START_RESPAWN_SEARCH_IN_ANGLED_AREA_FOR_PLAYER\nNetworkStartRespawnSearchInAngledAreaForPlayer()"
+  ],
+  "urls": [],
+  "tags": []
+}

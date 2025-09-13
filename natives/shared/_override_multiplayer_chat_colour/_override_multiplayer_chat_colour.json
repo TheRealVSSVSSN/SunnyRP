@@ -1,0 +1,13 @@
+{
+  "title": "_OVERRIDE_MULTIPLAYER_CHAT_COLOUR",
+  "breadcrumbs": [
+    "Native Reference",
+    "_OVERRIDE_MULTIPLAYER_CHAT_COLOUR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _OVERRIDE_MULTIPLAYER_CHAT_COLOUR\n_OverrideMultiplayerChatColour()"
+  ],
+  "urls": [],
+  "tags": []
+}

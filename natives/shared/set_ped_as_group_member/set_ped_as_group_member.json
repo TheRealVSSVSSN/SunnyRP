@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_AS_GROUP_MEMBER",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_AS_GROUP_MEMBER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_AS_GROUP_MEMBER\nSetPedAsGroupMember()"
+  ],
+  "urls": [],
+  "tags": []
+}

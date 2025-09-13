@@ -1,0 +1,13 @@
+{
+  "title": "GIVE_ACHIEVEMENT_TO_PLAYER",
+  "breadcrumbs": [
+    "Native Reference",
+    "GIVE_ACHIEVEMENT_TO_PLAYER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GIVE_ACHIEVEMENT_TO_PLAYER\nGiveAchievementToPlayer()"
+  ],
+  "urls": [],
+  "tags": []
+}

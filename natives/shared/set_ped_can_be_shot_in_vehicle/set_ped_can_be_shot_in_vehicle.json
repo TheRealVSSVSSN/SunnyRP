@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_CAN_BE_SHOT_IN_VEHICLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_CAN_BE_SHOT_IN_VEHICLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_CAN_BE_SHOT_IN_VEHICLE\nSetPedCanBeShotInVehicle()"
+  ],
+  "urls": [],
+  "tags": []
+}

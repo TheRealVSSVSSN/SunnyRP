@@ -1,0 +1,13 @@
+{
+  "title": "GET_IS_PETROL_DECAL_IN_RANGE",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_IS_PETROL_DECAL_IN_RANGE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_IS_PETROL_DECAL_IN_RANGE\nGetIsPetrolDecalInRange()"
+  ],
+  "urls": [],
+  "tags": []
+}

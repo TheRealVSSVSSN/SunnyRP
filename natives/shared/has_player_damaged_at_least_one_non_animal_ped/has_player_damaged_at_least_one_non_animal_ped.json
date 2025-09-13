@@ -1,0 +1,13 @@
+{
+  "title": "HAS_PLAYER_DAMAGED_AT_LEAST_ONE_NON_ANIMAL_PED",
+  "breadcrumbs": [
+    "Native Reference",
+    "HAS_PLAYER_DAMAGED_AT_LEAST_ONE_NON_ANIMAL_PED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for HAS_PLAYER_DAMAGED_AT_LEAST_ONE_NON_ANIMAL_PED\nHasPlayerDamagedAtLeastOneNonAnimalPed()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_VARIANT_COMPONENT",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_VARIANT_COMPONENT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VARIANT_COMPONENT\nGetVariantComponent()"
+  ],
+  "urls": [],
+  "tags": []
+}

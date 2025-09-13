@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SESSION_SET_MATCHMAKING_GROUP_MAX",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SESSION_SET_MATCHMAKING_GROUP_MAX"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SESSION_SET_MATCHMAKING_GROUP_MAX\nNetworkSessionSetMatchmakingGroupMax()"
+  ],
+  "urls": [],
+  "tags": []
+}

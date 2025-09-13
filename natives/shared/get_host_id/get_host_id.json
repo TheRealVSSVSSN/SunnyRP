@@ -1,0 +1,13 @@
+{
+  "title": "GET_HOST_ID",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_HOST_ID"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_HOST_ID\nGetHostId()"
+  ],
+  "urls": [],
+  "tags": []
+}

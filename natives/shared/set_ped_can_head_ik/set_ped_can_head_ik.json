@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_CAN_HEAD_IK",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_CAN_HEAD_IK"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_CAN_HEAD_IK\nSetPedCanHeadIk()"
+  ],
+  "urls": [],
+  "tags": []
+}

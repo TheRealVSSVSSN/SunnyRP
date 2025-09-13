@@ -8,7 +8,7 @@
   "content": "0x0B568201DD99F0EB0x1193ED6E// SetConversationAudioControlledByAnim\nvoid SET_CONVERSATION_AUDIO_CONTROLLED_BY_ANIM(BOOL enable);Parameters:enable: Pass in true to set conversation flow to be controlled by animation triggers.Sets whether or not scripted conversation flow should be controlled by anim triggers",
   "codeBlocks": [
     "// SetConversationAudioControlledByAnim\nvoid SET_CONVERSATION_AUDIO_CONTROLLED_BY_ANIM(BOOL enable);",
-    "-- Example usage for SET_CONVERSATION_AUDIO_CONTROLLED_BY_ANIM\nSetConversationAudioControlledByAnim(false)"
+    "-- Example usage for SET_CONVERSATION_AUDIO_CONTROLLED_BY_ANIM\nSetConversationAudioControlledByAnim(true)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

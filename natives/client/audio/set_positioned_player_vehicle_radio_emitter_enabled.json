@@ -8,7 +8,7 @@
   "content": "0xDA07819E452FFE8F// SetPositionedPlayerVehicleRadioEmitterEnabled\nvoid SET_POSITIONED_PLAYER_VEHICLE_RADIO_EMITTER_ENABLED(BOOL enabled);Parameters:enabled: enables/disables a positioned emitter for the player vehicle radio",
   "codeBlocks": [
     "// SetPositionedPlayerVehicleRadioEmitterEnabled\nvoid SET_POSITIONED_PLAYER_VEHICLE_RADIO_EMITTER_ENABLED(BOOL enabled);",
-    "-- Example usage for SET_POSITIONED_PLAYER_VEHICLE_RADIO_EMITTER_ENABLED\nSetPositionedPlayerVehicleRadioEmitterEnabled(false)"
+    "-- Example usage for SET_POSITIONED_PLAYER_VEHICLE_RADIO_EMITTER_ENABLED\nSetPositionedPlayerVehicleRadioEmitterEnabled(true)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

@@ -1,0 +1,13 @@
+{
+  "title": "HAS_PLAYER_LEFT_THE_WORLD",
+  "breadcrumbs": [
+    "Native Reference",
+    "HAS_PLAYER_LEFT_THE_WORLD"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for HAS_PLAYER_LEFT_THE_WORLD\nHasPlayerLeftTheWorld()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "SET_MAX_WANTED_LEVEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_MAX_WANTED_LEVEL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_MAX_WANTED_LEVEL\nSetMaxWantedLevel()"
+  ],
+  "urls": [],
+  "tags": []
+}

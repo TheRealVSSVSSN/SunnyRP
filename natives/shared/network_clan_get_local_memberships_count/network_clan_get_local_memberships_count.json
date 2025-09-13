@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_CLAN_GET_LOCAL_MEMBERSHIPS_COUNT",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_CLAN_GET_LOCAL_MEMBERSHIPS_COUNT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_CLAN_GET_LOCAL_MEMBERSHIPS_COUNT\nNetworkClanGetLocalMembershipsCount()"
+  ],
+  "urls": [],
+  "tags": []
+}

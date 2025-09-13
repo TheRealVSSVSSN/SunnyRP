@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_AO_BLOB_RENDERING",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_AO_BLOB_RENDERING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_AO_BLOB_RENDERING\nSetPedAoBlobRendering()"
+  ],
+  "urls": [],
+  "tags": []
+}

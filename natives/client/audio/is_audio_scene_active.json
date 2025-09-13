@@ -8,7 +8,7 @@
   "content": "0xB65B60556E2A92250xACBED05C// IsAudioSceneActive\nBOOL IS_AUDIO_SCENE_ACTIVE(char* scene);Parameters:scene: the name of the sceneReturns: Returns true if the script is already running the named scene, false otherwise",
   "codeBlocks": [
     "// IsAudioSceneActive\nBOOL IS_AUDIO_SCENE_ACTIVE(char* scene);",
-    "-- Example usage for IS_AUDIO_SCENE_ACTIVE\nIsAudioSceneActive('')"
+    "-- Example usage for IS_AUDIO_SCENE_ACTIVE\nIsAudioSceneActive('example')"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

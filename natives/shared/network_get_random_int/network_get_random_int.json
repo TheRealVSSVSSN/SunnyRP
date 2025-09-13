@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_GET_RANDOM_INT",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_GET_RANDOM_INT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_GET_RANDOM_INT\nNetworkGetRandomInt()"
+  ],
+  "urls": [],
+  "tags": []
+}

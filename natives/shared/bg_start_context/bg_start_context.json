@@ -1,0 +1,13 @@
+{
+  "title": "BG_START_CONTEXT",
+  "breadcrumbs": [
+    "Native Reference",
+    "BG_START_CONTEXT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for BG_START_CONTEXT\nBgStartContext()"
+  ],
+  "urls": [],
+  "tags": []
+}

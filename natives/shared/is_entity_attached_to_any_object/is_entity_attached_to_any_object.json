@@ -1,0 +1,13 @@
+{
+  "title": "IS_ENTITY_ATTACHED_TO_ANY_OBJECT",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_ENTITY_ATTACHED_TO_ANY_OBJECT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_ENTITY_ATTACHED_TO_ANY_OBJECT\nIsEntityAttachedToAnyObject()"
+  ],
+  "urls": [],
+  "tags": []
+}

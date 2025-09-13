@@ -1,0 +1,13 @@
+{
+  "title": "IS_PED_GETTING_INTO_A_VEHICLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_PED_GETTING_INTO_A_VEHICLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_PED_GETTING_INTO_A_VEHICLE\nIsPedGettingIntoAVehicle()"
+  ],
+  "urls": [],
+  "tags": []
+}

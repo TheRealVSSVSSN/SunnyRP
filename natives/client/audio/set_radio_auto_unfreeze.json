@@ -8,7 +8,7 @@
   "content": "0xC1AA9F53CE9829900xA40196BF// SetRadioAutoUnfreeze\nvoid SET_RADIO_AUTO_UNFREEZE(BOOL toggle);Parameters:toggle: if true the radio will automatically unfreeze as soon as the player gets in a vehicle",
   "codeBlocks": [
     "// SetRadioAutoUnfreeze\nvoid SET_RADIO_AUTO_UNFREEZE(BOOL toggle);",
-    "-- Example usage for SET_RADIO_AUTO_UNFREEZE\nSetRadioAutoUnfreeze(false)"
+    "-- Example usage for SET_RADIO_AUTO_UNFREEZE\nSetRadioAutoUnfreeze(true)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

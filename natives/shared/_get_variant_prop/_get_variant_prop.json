@@ -1,0 +1,13 @@
+{
+  "title": "_GET_VARIANT_PROP",
+  "breadcrumbs": [
+    "Native Reference",
+    "_GET_VARIANT_PROP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_VARIANT_PROP\n_GetVariantProp()"
+  ],
+  "urls": [],
+  "tags": []
+}

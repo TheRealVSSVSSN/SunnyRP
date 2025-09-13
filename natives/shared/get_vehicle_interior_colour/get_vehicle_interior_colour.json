@@ -1,0 +1,13 @@
+{
+  "title": "GET_VEHICLE_INTERIOR_COLOUR",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_VEHICLE_INTERIOR_COLOUR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_INTERIOR_COLOUR\nGetVehicleInteriorColour()"
+  ],
+  "urls": [],
+  "tags": []
+}

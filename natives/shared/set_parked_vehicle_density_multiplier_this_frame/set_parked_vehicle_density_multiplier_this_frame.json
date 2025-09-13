@@ -1,0 +1,13 @@
+{
+  "title": "SET_PARKED_VEHICLE_DENSITY_MULTIPLIER_THIS_FRAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PARKED_VEHICLE_DENSITY_MULTIPLIER_THIS_FRAME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PARKED_VEHICLE_DENSITY_MULTIPLIER_THIS_FRAME\nSetParkedVehicleDensityMultiplierThisFrame()"
+  ],
+  "urls": [],
+  "tags": []
+}

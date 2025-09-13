@@ -1,0 +1,13 @@
+{
+  "title": "GIVE_PED_NM_MESSAGE",
+  "breadcrumbs": [
+    "Native Reference",
+    "GIVE_PED_NM_MESSAGE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GIVE_PED_NM_MESSAGE\nGivePedNmMessage()"
+  ],
+  "urls": [],
+  "tags": []
+}

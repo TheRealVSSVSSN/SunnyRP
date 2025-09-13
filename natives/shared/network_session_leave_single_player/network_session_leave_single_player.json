@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SESSION_LEAVE_SINGLE_PLAYER",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SESSION_LEAVE_SINGLE_PLAYER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SESSION_LEAVE_SINGLE_PLAYER\nNetworkSessionLeaveSinglePlayer()"
+  ],
+  "urls": [],
+  "tags": []
+}

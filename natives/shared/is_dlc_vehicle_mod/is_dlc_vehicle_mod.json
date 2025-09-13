@@ -1,0 +1,13 @@
+{
+  "title": "IS_DLC_VEHICLE_MOD",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_DLC_VEHICLE_MOD"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_DLC_VEHICLE_MOD\nIsDlcVehicleMod()"
+  ],
+  "urls": [],
+  "tags": []
+}

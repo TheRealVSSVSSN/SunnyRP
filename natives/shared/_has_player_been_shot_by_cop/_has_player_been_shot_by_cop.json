@@ -1,0 +1,13 @@
+{
+  "title": "_HAS_PLAYER_BEEN_SHOT_BY_COP",
+  "breadcrumbs": [
+    "Native Reference",
+    "_HAS_PLAYER_BEEN_SHOT_BY_COP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _HAS_PLAYER_BEEN_SHOT_BY_COP\n_HasPlayerBeenShotByCop()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_RANDOM_PED_AT_COORD",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_RANDOM_PED_AT_COORD"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_RANDOM_PED_AT_COORD\nGetRandomPedAtCoord()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "SET_AIR_DRAG_MULTIPLIER_FOR_PLAYERS_VEHICLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_AIR_DRAG_MULTIPLIER_FOR_PLAYERS_VEHICLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_AIR_DRAG_MULTIPLIER_FOR_PLAYERS_VEHICLE\nSetAirDragMultiplierForPlayersVehicle()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "_HAS_ENTITY_CLEAR_LOS_TO_ENTITY_2",
+  "breadcrumbs": [
+    "Native Reference",
+    "_HAS_ENTITY_CLEAR_LOS_TO_ENTITY_2"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _HAS_ENTITY_CLEAR_LOS_TO_ENTITY_2\n_HasEntityClearLosToEntity2()"
+  ],
+  "urls": [],
+  "tags": []
+}

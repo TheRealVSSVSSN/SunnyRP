@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_CLAN_GET_EMBLEM_TXD_NAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_CLAN_GET_EMBLEM_TXD_NAME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_CLAN_GET_EMBLEM_TXD_NAME\nNetworkClanGetEmblemTxdName()"
+  ],
+  "urls": [],
+  "tags": []
+}

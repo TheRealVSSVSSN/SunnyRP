@@ -1,0 +1,13 @@
+{
+  "title": "_SET_BINK_MOVIE_VOLUME",
+  "breadcrumbs": [
+    "Native Reference",
+    "_SET_BINK_MOVIE_VOLUME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_BINK_MOVIE_VOLUME\n_SetBinkMovieVolume()"
+  ],
+  "urls": [],
+  "tags": []
+}

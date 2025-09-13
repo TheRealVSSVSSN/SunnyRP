@@ -1,0 +1,13 @@
+{
+  "title": "IS_ENTITY_IN_AIR",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_ENTITY_IN_AIR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_ENTITY_IN_AIR\nIsEntityInAir()"
+  ],
+  "urls": [],
+  "tags": []
+}

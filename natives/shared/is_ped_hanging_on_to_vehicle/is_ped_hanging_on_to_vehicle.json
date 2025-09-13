@@ -1,0 +1,13 @@
+{
+  "title": "IS_PED_HANGING_ON_TO_VEHICLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_PED_HANGING_ON_TO_VEHICLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_PED_HANGING_ON_TO_VEHICLE\nIsPedHangingOnToVehicle()"
+  ],
+  "urls": [],
+  "tags": []
+}

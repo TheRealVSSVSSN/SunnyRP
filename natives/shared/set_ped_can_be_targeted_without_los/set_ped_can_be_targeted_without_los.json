@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_CAN_BE_TARGETED_WITHOUT_LOS",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_CAN_BE_TARGETED_WITHOUT_LOS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_CAN_BE_TARGETED_WITHOUT_LOS\nSetPedCanBeTargetedWithoutLos()"
+  ],
+  "urls": [],
+  "tags": []
+}

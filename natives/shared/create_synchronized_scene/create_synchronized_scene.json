@@ -1,0 +1,13 @@
+{
+  "title": "CREATE_SYNCHRONIZED_SCENE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CREATE_SYNCHRONIZED_SCENE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CREATE_SYNCHRONIZED_SCENE\nCreateSynchronizedScene()"
+  ],
+  "urls": [],
+  "tags": []
+}

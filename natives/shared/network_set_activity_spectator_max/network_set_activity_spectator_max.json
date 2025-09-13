@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_SET_ACTIVITY_SPECTATOR_MAX",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_SET_ACTIVITY_SPECTATOR_MAX"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_SET_ACTIVITY_SPECTATOR_MAX\nNetworkSetActivitySpectatorMax()"
+  ],
+  "urls": [],
+  "tags": []
+}

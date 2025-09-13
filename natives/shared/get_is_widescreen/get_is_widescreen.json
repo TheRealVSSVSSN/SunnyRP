@@ -1,0 +1,13 @@
+{
+  "title": "GET_IS_WIDESCREEN",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_IS_WIDESCREEN"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_IS_WIDESCREEN\nGetIsWidescreen()"
+  ],
+  "urls": [],
+  "tags": []
+}

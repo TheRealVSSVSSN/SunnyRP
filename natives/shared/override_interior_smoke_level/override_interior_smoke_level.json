@@ -1,0 +1,13 @@
+{
+  "title": "OVERRIDE_INTERIOR_SMOKE_LEVEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "OVERRIDE_INTERIOR_SMOKE_LEVEL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for OVERRIDE_INTERIOR_SMOKE_LEVEL\nOverrideInteriorSmokeLevel()"
+  ],
+  "urls": [],
+  "tags": []
+}

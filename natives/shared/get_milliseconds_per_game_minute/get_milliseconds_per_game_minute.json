@@ -1,0 +1,13 @@
+{
+  "title": "GET_MILLISECONDS_PER_GAME_MINUTE",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_MILLISECONDS_PER_GAME_MINUTE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_MILLISECONDS_PER_GAME_MINUTE\nGetMillisecondsPerGameMinute()"
+  ],
+  "urls": [],
+  "tags": []
+}

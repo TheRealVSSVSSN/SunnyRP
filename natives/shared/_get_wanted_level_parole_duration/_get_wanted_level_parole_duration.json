@@ -1,0 +1,13 @@
+{
+  "title": "_GET_WANTED_LEVEL_PAROLE_DURATION",
+  "breadcrumbs": [
+    "Native Reference",
+    "_GET_WANTED_LEVEL_PAROLE_DURATION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_WANTED_LEVEL_PAROLE_DURATION\n_GetWantedLevelParoleDuration()"
+  ],
+  "urls": [],
+  "tags": []
+}

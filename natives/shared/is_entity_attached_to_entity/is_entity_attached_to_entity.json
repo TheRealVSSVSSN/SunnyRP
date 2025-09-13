@@ -1,0 +1,13 @@
+{
+  "title": "IS_ENTITY_ATTACHED_TO_ENTITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_ENTITY_ATTACHED_TO_ENTITY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_ENTITY_ATTACHED_TO_ENTITY\nIsEntityAttachedToEntity()"
+  ],
+  "urls": [],
+  "tags": []
+}

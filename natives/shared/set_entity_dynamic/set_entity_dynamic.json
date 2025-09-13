@@ -1,0 +1,13 @@
+{
+  "title": "SET_ENTITY_DYNAMIC",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_ENTITY_DYNAMIC"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_ENTITY_DYNAMIC\nSetEntityDynamic()"
+  ],
+  "urls": [],
+  "tags": []
+}

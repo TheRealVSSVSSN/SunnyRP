@@ -1,0 +1,13 @@
+{
+  "title": "APP_SAVE_DATA",
+  "breadcrumbs": [
+    "Native Reference",
+    "APP_SAVE_DATA"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for APP_SAVE_DATA\nAppSaveData()"
+  ],
+  "urls": [],
+  "tags": []
+}

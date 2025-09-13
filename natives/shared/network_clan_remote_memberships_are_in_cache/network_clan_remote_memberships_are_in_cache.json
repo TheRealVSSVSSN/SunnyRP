@@ -1,0 +1,13 @@
+{
+  "title": "NETWORK_CLAN_REMOTE_MEMBERSHIPS_ARE_IN_CACHE",
+  "breadcrumbs": [
+    "Native Reference",
+    "NETWORK_CLAN_REMOTE_MEMBERSHIPS_ARE_IN_CACHE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for NETWORK_CLAN_REMOTE_MEMBERSHIPS_ARE_IN_CACHE\nNetworkClanRemoteMembershipsAreInCache()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_TIME_SINCE_PLAYER_HIT_PED",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_TIME_SINCE_PLAYER_HIT_PED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_TIME_SINCE_PLAYER_HIT_PED\nGetTimeSincePlayerHitPed()"
+  ],
+  "urls": [],
+  "tags": []
+}

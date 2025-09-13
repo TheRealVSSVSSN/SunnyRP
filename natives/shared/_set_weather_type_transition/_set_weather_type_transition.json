@@ -1,0 +1,13 @@
+{
+  "title": "_SET_WEATHER_TYPE_TRANSITION",
+  "breadcrumbs": [
+    "Native Reference",
+    "_SET_WEATHER_TYPE_TRANSITION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_WEATHER_TYPE_TRANSITION\n_SetWeatherTypeTransition()"
+  ],
+  "urls": [],
+  "tags": []
+}

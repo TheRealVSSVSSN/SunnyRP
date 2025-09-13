@@ -1,0 +1,13 @@
+{
+  "title": "IS_ENTITY_IN_WATER",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_ENTITY_IN_WATER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_ENTITY_IN_WATER\nIsEntityInWater()"
+  ],
+  "urls": [],
+  "tags": []
+}

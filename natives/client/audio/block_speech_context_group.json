@@ -9,7 +9,7 @@
   "codeBlocks": [
     "// BlockSpeechContextGroup\nvoid BLOCK_SPEECH_CONTEXT_GROUP(char* groupName, int contextBlockTarget);",
     "enum eAudContextBlockTarget {\n\tAUD_CONTEXT_BLOCK_PLAYER = 0,\n\tAUD_CONTEXT_BLOCK_NPCS = 1,\n\tAUD_CONTEXT_BLOCK_BUDDYS = 2,\n\tAUD_CONTEXT_BLOCK_EVERYONE = 3,\n\n\tAUD_CONTEXT_BLOCK_TARGETS_TOTAL\n}",
-    "-- Example usage for BLOCK_SPEECH_CONTEXT_GROUP\nBlockSpeechContextGroup('', 0)"
+    "-- Example usage for BLOCK_SPEECH_CONTEXT_GROUP\nBlockSpeechContextGroup('example', 1)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",
