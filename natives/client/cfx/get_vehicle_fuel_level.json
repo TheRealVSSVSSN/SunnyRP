@@ -1,0 +1,23 @@
+{
+  "title": "GET_VEHICLE_FUEL_LEVEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_VEHICLE_FUEL_LEVEL"
+  ],
+  "content": "0x5F739BB// GetVehicleFuelLevel\nfloat GET_VEHICLE_FUEL_LEVEL(Vehicle vehicle);Returns the current fuel level of a vehicle in liters.",
+  "codeBlocks": [
+    "// GET_VEHICLE_FUEL_LEVEL\nfloat GET_VEHICLE_FUEL_LEVEL(Vehicle vehicle);",
+    "-- Example usage for GET_VEHICLE_FUEL_LEVEL\nlocal veh = GetVehiclePedIsIn(PlayerPedId(), false)\nlocal fuel = GetVehicleFuelLevel(veh)\nif fuel <= 0.0 then\n    SetVehicleEngineOn(veh, false, true, true)\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetVehicleFuelLevel.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "SHUTDOWN_LOADING_SCREEN",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SHUTDOWN_LOADING_SCREEN"
+  ],
+  "content": "0x923CB32A3B874FCB// ShutdownLoadingScreen\nvoid SHUTDOWN_LOADING_SCREEN();Shuts down the loading screen previously set to manual shutdown.",
+  "codeBlocks": [
+    "// SHUTDOWN_LOADING_SCREEN\nvoid SHUTDOWN_LOADING_SCREEN();",
+    "-- Example usage for SHUTDOWN_LOADING_SCREEN\nif not IsScreenFadedOut() then\n    ShutdownLoadingScreen()\nend"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/ShutdownLoadingScreen.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

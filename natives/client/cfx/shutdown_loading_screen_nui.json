@@ -1,0 +1,23 @@
+{
+  "title": "SHUTDOWN_LOADING_SCREEN_NUI",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SHUTDOWN_LOADING_SCREEN_NUI"
+  ],
+  "content": "0xB9234AFB// ShutdownLoadingScreenNui\nvoid SHUTDOWN_LOADING_SCREEN_NUI();Closes the NUI loading screen overlay used during player connecting.",
+  "codeBlocks": [
+    "// SHUTDOWN_LOADING_SCREEN_NUI\nvoid SHUTDOWN_LOADING_SCREEN_NUI();",
+    "-- Example usage for SHUTDOWN_LOADING_SCREEN_NUI\nCreateThread(function()\n    while not HasCollisionLoadedAroundEntity(PlayerPedId()) do\n        Wait(0)\n    end\n    ShutdownLoadingScreenNui()\nend)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/ShutdownLoadingScreenNui.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}
