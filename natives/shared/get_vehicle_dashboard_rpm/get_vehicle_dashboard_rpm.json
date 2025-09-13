@@ -1,0 +1,13 @@
+{
+  "title": "GET_VEHICLE_DASHBOARD_RPM",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_VEHICLE_DASHBOARD_RPM"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_DASHBOARD_RPM\nGetVehicleDashboardRpm()"
+  ],
+  "urls": [],
+  "tags": []
+}

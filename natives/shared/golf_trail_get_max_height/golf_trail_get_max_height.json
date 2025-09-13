@@ -1,0 +1,13 @@
+{
+  "title": "GOLF_TRAIL_GET_MAX_HEIGHT",
+  "breadcrumbs": [
+    "Native Reference",
+    "GOLF_TRAIL_GET_MAX_HEIGHT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GOLF_TRAIL_GET_MAX_HEIGHT\nGolfTrailGetMaxHeight()"
+  ],
+  "urls": [],
+  "tags": []
+}

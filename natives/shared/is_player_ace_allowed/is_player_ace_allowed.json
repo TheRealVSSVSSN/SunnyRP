@@ -1,0 +1,13 @@
+{
+  "title": "IS_PLAYER_ACE_ALLOWED",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_PLAYER_ACE_ALLOWED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_PLAYER_ACE_ALLOWED\nIsPlayerAceAllowed()"
+  ],
+  "urls": [],
+  "tags": []
+}

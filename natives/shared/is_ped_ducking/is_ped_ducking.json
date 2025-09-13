@@ -1,0 +1,13 @@
+{
+  "title": "IS_PED_DUCKING",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_PED_DUCKING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_PED_DUCKING\nIsPedDucking()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_VEHICLE_GRAVITY_AMOUNT",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_VEHICLE_GRAVITY_AMOUNT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_GRAVITY_AMOUNT\nGetVehicleGravityAmount()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_VEHICLE_DASHBOARD_VACUUM",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_VEHICLE_DASHBOARD_VACUUM"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_DASHBOARD_VACUUM\nGetVehicleDashboardVacuum()"
+  ],
+  "urls": [],
+  "tags": []
+}

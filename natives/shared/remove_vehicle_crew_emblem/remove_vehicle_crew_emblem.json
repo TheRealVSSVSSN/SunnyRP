@@ -1,0 +1,13 @@
+{
+  "title": "REMOVE_VEHICLE_CREW_EMBLEM",
+  "breadcrumbs": [
+    "Native Reference",
+    "REMOVE_VEHICLE_CREW_EMBLEM"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REMOVE_VEHICLE_CREW_EMBLEM\nRemoveVehicleCrewEmblem()"
+  ],
+  "urls": [],
+  "tags": []
+}

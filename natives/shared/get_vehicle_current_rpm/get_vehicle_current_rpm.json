@@ -1,0 +1,13 @@
+{
+  "title": "GET_VEHICLE_CURRENT_RPM",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_VEHICLE_CURRENT_RPM"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_CURRENT_RPM\nGetVehicleCurrentRpm()"
+  ],
+  "urls": [],
+  "tags": []
+}

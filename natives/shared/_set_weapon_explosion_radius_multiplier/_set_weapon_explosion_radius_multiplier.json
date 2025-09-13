@@ -1,0 +1,13 @@
+{
+  "title": "_SET_WEAPON_EXPLOSION_RADIUS_MULTIPLIER",
+  "breadcrumbs": [
+    "Native Reference",
+    "_SET_WEAPON_EXPLOSION_RADIUS_MULTIPLIER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_WEAPON_EXPLOSION_RADIUS_MULTIPLIER\n_SetWeaponExplosionRadiusMultiplier()"
+  ],
+  "urls": [],
+  "tags": []
+}

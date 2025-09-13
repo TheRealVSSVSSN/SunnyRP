@@ -8,7 +8,7 @@
   "content": "0x2E2EBA0EE7CED0E00xFB40075B// IsExplosionInArea\nBOOL IS_EXPLOSION_IN_AREA(int explosionType, float x1, float y1, float z1, float x2, float y2, float z2);Parameters:explosionType: See ADD_EXPLOSION.x1: y1: z1: x2: y2: z2:",
   "codeBlocks": [
     "// IsExplosionInArea\nBOOL IS_EXPLOSION_IN_AREA(int explosionType, float x1, float y1, float z1, float x2, float y2, float z2);",
-    "-- Example usage for IS_EXPLOSION_IN_AREA\nIsExplosionInArea(0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)"
+    "-- Example usage for IS_EXPLOSION_IN_AREA\nIsExplosionInArea(1, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

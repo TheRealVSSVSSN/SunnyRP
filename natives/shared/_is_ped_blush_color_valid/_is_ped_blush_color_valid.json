@@ -1,0 +1,13 @@
+{
+  "title": "_IS_PED_BLUSH_COLOR_VALID",
+  "breadcrumbs": [
+    "Native Reference",
+    "_IS_PED_BLUSH_COLOR_VALID"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _IS_PED_BLUSH_COLOR_VALID\n_IsPedBlushColorValid()"
+  ],
+  "urls": [],
+  "tags": []
+}

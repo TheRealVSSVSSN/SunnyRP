@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_DEFENSIVE_SPHERE_ATTACHED_TO_PED",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_DEFENSIVE_SPHERE_ATTACHED_TO_PED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_DEFENSIVE_SPHERE_ATTACHED_TO_PED\nSetPedDefensiveSphereAttachedToPed()"
+  ],
+  "urls": [],
+  "tags": []
+}

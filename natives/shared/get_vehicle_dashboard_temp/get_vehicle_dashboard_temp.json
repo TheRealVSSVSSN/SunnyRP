@@ -1,0 +1,13 @@
+{
+  "title": "GET_VEHICLE_DASHBOARD_TEMP",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_VEHICLE_DASHBOARD_TEMP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_DASHBOARD_TEMP\nGetVehicleDashboardTemp()"
+  ],
+  "urls": [],
+  "tags": []
+}

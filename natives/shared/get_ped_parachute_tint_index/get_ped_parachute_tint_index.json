@@ -1,0 +1,13 @@
+{
+  "title": "GET_PED_PARACHUTE_TINT_INDEX",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PED_PARACHUTE_TINT_INDEX"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PED_PARACHUTE_TINT_INDEX\nGetPedParachuteTintIndex()"
+  ],
+  "urls": [],
+  "tags": []
+}

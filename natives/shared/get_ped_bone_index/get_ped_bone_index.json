@@ -1,0 +1,13 @@
+{
+  "title": "GET_PED_BONE_INDEX",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PED_BONE_INDEX"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PED_BONE_INDEX\nGetPedBoneIndex()"
+  ],
+  "urls": [],
+  "tags": []
+}

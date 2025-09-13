@@ -1,0 +1,13 @@
+{
+  "title": "GET_VEHICLE_CREW_EMBLEM_REQUEST_STATE",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_VEHICLE_CREW_EMBLEM_REQUEST_STATE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_CREW_EMBLEM_REQUEST_STATE\nGetVehicleCrewEmblemRequestState()"
+  ],
+  "urls": [],
+  "tags": []
+}

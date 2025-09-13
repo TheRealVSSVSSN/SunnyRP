@@ -1,0 +1,13 @@
+{
+  "title": "_OVERRIDE_PED_BADGE_TEXTURE",
+  "breadcrumbs": [
+    "Native Reference",
+    "_OVERRIDE_PED_BADGE_TEXTURE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _OVERRIDE_PED_BADGE_TEXTURE\n_OverridePedBadgeTexture()"
+  ],
+  "urls": [],
+  "tags": []
+}

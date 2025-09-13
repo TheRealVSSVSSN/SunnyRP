@@ -1,0 +1,13 @@
+{
+  "title": "GOLF_TRAIL_SET_PATH",
+  "breadcrumbs": [
+    "Native Reference",
+    "GOLF_TRAIL_SET_PATH"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GOLF_TRAIL_SET_PATH\nGolfTrailSetPath()"
+  ],
+  "urls": [],
+  "tags": []
+}

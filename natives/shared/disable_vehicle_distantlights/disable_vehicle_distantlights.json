@@ -1,0 +1,13 @@
+{
+  "title": "DISABLE_VEHICLE_DISTANTLIGHTS",
+  "breadcrumbs": [
+    "Native Reference",
+    "DISABLE_VEHICLE_DISTANTLIGHTS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DISABLE_VEHICLE_DISTANTLIGHTS\nDisableVehicleDistantlights()"
+  ],
+  "urls": [],
+  "tags": []
+}

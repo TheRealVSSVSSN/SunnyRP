@@ -1,0 +1,13 @@
+{
+  "title": "_REGISTER_NOIR_SCREEN_EFFECT_THIS_FRAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "_REGISTER_NOIR_SCREEN_EFFECT_THIS_FRAME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _REGISTER_NOIR_SCREEN_EFFECT_THIS_FRAME\n_RegisterNoirScreenEffectThisFrame()"
+  ],
+  "urls": [],
+  "tags": []
+}

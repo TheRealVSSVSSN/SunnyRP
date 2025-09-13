@@ -1,0 +1,13 @@
+{
+  "title": "_IS_PED_BODY_BLEMISH_VALID",
+  "breadcrumbs": [
+    "Native Reference",
+    "_IS_PED_BODY_BLEMISH_VALID"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _IS_PED_BODY_BLEMISH_VALID\n_IsPedBodyBlemishValid()"
+  ],
+  "urls": [],
+  "tags": []
+}

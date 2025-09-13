@@ -1,0 +1,13 @@
+{
+  "title": "HAS_PED_PRELOAD_PROP_DATA_FINISHED",
+  "breadcrumbs": [
+    "Native Reference",
+    "HAS_PED_PRELOAD_PROP_DATA_FINISHED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for HAS_PED_PRELOAD_PROP_DATA_FINISHED\nHasPedPreloadPropDataFinished()"
+  ],
+  "urls": [],
+  "tags": []
+}

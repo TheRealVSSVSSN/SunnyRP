@@ -1,0 +1,13 @@
+{
+  "title": "ADD_PETROL_TRAIL_DECAL_INFO",
+  "breadcrumbs": [
+    "Native Reference",
+    "ADD_PETROL_TRAIL_DECAL_INFO"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ADD_PETROL_TRAIL_DECAL_INFO\nAddPetrolTrailDecalInfo()"
+  ],
+  "urls": [],
+  "tags": []
+}

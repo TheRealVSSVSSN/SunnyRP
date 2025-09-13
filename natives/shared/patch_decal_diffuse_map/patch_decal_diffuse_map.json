@@ -1,0 +1,13 @@
+{
+  "title": "PATCH_DECAL_DIFFUSE_MAP",
+  "breadcrumbs": [
+    "Native Reference",
+    "PATCH_DECAL_DIFFUSE_MAP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for PATCH_DECAL_DIFFUSE_MAP\nPatchDecalDiffuseMap()"
+  ],
+  "urls": [],
+  "tags": []
+}

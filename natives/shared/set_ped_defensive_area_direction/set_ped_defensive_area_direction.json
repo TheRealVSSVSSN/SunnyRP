@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_DEFENSIVE_AREA_DIRECTION",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_DEFENSIVE_AREA_DIRECTION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_DEFENSIVE_AREA_DIRECTION\nSetPedDefensiveAreaDirection()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "IS_COP_PED_IN_AREA_3D",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_COP_PED_IN_AREA_3D"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_COP_PED_IN_AREA_3D\nIsCopPedInArea3d()"
+  ],
+  "urls": [],
+  "tags": []
+}

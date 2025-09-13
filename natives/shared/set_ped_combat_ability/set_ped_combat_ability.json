@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_COMBAT_ABILITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_COMBAT_ABILITY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_COMBAT_ABILITY\nSetPedCombatAbility()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_NUM_PLAYER_INDICES",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_NUM_PLAYER_INDICES"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_NUM_PLAYER_INDICES\nGetNumPlayerIndices()"
+  ],
+  "urls": [],
+  "tags": []
+}

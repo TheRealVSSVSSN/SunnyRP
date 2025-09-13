@@ -1,0 +1,13 @@
+{
+  "title": "_GET_PED_TASK_COMBAT_TARGET",
+  "breadcrumbs": [
+    "Native Reference",
+    "_GET_PED_TASK_COMBAT_TARGET"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_PED_TASK_COMBAT_TARGET\n_GetPedTaskCombatTarget()"
+  ],
+  "urls": [],
+  "tags": []
+}

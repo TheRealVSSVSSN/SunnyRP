@@ -1,0 +1,13 @@
+{
+  "title": "GET_PED_HEAD_BLEND_NUM_HEADS",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PED_HEAD_BLEND_NUM_HEADS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PED_HEAD_BLEND_NUM_HEADS\nGetPedHeadBlendNumHeads()"
+  ],
+  "urls": [],
+  "tags": []
+}

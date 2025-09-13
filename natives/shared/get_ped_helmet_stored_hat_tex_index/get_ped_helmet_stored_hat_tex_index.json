@@ -1,0 +1,13 @@
+{
+  "title": "GET_PED_HELMET_STORED_HAT_TEX_INDEX",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PED_HELMET_STORED_HAT_TEX_INDEX"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PED_HELMET_STORED_HAT_TEX_INDEX\nGetPedHelmetStoredHatTexIndex()"
+  ],
+  "urls": [],
+  "tags": []
+}

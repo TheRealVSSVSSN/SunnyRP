@@ -1,0 +1,13 @@
+{
+  "title": "_GET_PED_CURRENT_MOVEMENT_SPEED",
+  "breadcrumbs": [
+    "Native Reference",
+    "_GET_PED_CURRENT_MOVEMENT_SPEED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_PED_CURRENT_MOVEMENT_SPEED\n_GetPedCurrentMovementSpeed()"
+  ],
+  "urls": [],
+  "tags": []
+}

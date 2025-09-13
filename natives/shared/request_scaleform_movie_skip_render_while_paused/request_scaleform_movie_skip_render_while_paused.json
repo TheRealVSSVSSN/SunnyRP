@@ -1,0 +1,13 @@
+{
+  "title": "REQUEST_SCALEFORM_MOVIE_SKIP_RENDER_WHILE_PAUSED",
+  "breadcrumbs": [
+    "Native Reference",
+    "REQUEST_SCALEFORM_MOVIE_SKIP_RENDER_WHILE_PAUSED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REQUEST_SCALEFORM_MOVIE_SKIP_RENDER_WHILE_PAUSED\nRequestScaleformMovieSkipRenderWhilePaused()"
+  ],
+  "urls": [],
+  "tags": []
+}

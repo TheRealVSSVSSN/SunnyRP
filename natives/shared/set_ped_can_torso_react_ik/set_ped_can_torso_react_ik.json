@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_CAN_TORSO_REACT_IK",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_CAN_TORSO_REACT_IK"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_CAN_TORSO_REACT_IK\nSetPedCanTorsoReactIk()"
+  ],
+  "urls": [],
+  "tags": []
+}

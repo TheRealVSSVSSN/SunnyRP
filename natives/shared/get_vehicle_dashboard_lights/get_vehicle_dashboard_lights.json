@@ -1,0 +1,13 @@
+{
+  "title": "GET_VEHICLE_DASHBOARD_LIGHTS",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_VEHICLE_DASHBOARD_LIGHTS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_DASHBOARD_LIGHTS\nGetVehicleDashboardLights()"
+  ],
+  "urls": [],
+  "tags": []
+}

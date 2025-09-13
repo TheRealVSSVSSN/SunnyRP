@@ -1,0 +1,13 @@
+{
+  "title": "DISABLE_OCCLUSION_THIS_FRAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "DISABLE_OCCLUSION_THIS_FRAME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DISABLE_OCCLUSION_THIS_FRAME\nDisableOcclusionThisFrame()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_GAME_NAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_GAME_NAME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_GAME_NAME\nGetGameName()"
+  ],
+  "urls": [],
+  "tags": []
+}

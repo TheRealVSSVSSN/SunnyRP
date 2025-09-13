@@ -1,0 +1,13 @@
+{
+  "title": "DOES_GROUP_EXIST",
+  "breadcrumbs": [
+    "Native Reference",
+    "DOES_GROUP_EXIST"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DOES_GROUP_EXIST\nDoesGroupExist()"
+  ],
+  "urls": [],
+  "tags": []
+}

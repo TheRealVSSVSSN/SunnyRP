@@ -1,0 +1,13 @@
+{
+  "title": "REMOVE_SCRIPT_FIRE",
+  "breadcrumbs": [
+    "Native Reference",
+    "REMOVE_SCRIPT_FIRE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REMOVE_SCRIPT_FIRE\nRemoveScriptFire()"
+  ],
+  "urls": [],
+  "tags": []
+}

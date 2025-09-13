@@ -1,0 +1,13 @@
+{
+  "title": "_GET_PED_DIES_IN_WATER",
+  "breadcrumbs": [
+    "Native Reference",
+    "_GET_PED_DIES_IN_WATER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_PED_DIES_IN_WATER\n_GetPedDiesInWater()"
+  ],
+  "urls": [],
+  "tags": []
+}

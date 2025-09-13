@@ -1,0 +1,13 @@
+{
+  "title": "GET_PED_STEALTH_MOVEMENT",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PED_STEALTH_MOVEMENT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PED_STEALTH_MOVEMENT\nGetPedStealthMovement()"
+  ],
+  "urls": [],
+  "tags": []
+}

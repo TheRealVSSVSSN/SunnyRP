@@ -1,0 +1,13 @@
+{
+  "title": "DONT_RENDER_IN_GAME_UI",
+  "breadcrumbs": [
+    "Native Reference",
+    "DONT_RENDER_IN_GAME_UI"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DONT_RENDER_IN_GAME_UI\nDontRenderInGameUi()"
+  ],
+  "urls": [],
+  "tags": []
+}

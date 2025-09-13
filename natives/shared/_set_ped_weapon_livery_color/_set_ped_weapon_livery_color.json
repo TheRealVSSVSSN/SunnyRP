@@ -1,0 +1,13 @@
+{
+  "title": "_SET_PED_WEAPON_LIVERY_COLOR",
+  "breadcrumbs": [
+    "Native Reference",
+    "_SET_PED_WEAPON_LIVERY_COLOR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_PED_WEAPON_LIVERY_COLOR\n_SetPedWeaponLiveryColor()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "ADD_POINT_TO_GPS_CUSTOM_ROUTE",
+  "breadcrumbs": [
+    "Native Reference",
+    "ADD_POINT_TO_GPS_CUSTOM_ROUTE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ADD_POINT_TO_GPS_CUSTOM_ROUTE\nAddPointToGpsCustomRoute()"
+  ],
+  "urls": [],
+  "tags": []
+}

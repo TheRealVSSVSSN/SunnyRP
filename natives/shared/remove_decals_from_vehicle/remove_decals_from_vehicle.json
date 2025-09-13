@@ -1,0 +1,13 @@
+{
+  "title": "REMOVE_DECALS_FROM_VEHICLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "REMOVE_DECALS_FROM_VEHICLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REMOVE_DECALS_FROM_VEHICLE\nRemoveDecalsFromVehicle()"
+  ],
+  "urls": [],
+  "tags": []
+}

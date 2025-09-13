@@ -1,0 +1,13 @@
+{
+  "title": "RELEASE_MOVIE_MESH_SET",
+  "breadcrumbs": [
+    "Native Reference",
+    "RELEASE_MOVIE_MESH_SET"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for RELEASE_MOVIE_MESH_SET\nReleaseMovieMeshSet()"
+  ],
+  "urls": [],
+  "tags": []
+}

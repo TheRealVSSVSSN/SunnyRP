@@ -1,0 +1,13 @@
+{
+  "title": "CASCADE_SHADOWS_SET_CASCADE_BOUNDS_SCALE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CASCADE_SHADOWS_SET_CASCADE_BOUNDS_SCALE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CASCADE_SHADOWS_SET_CASCADE_BOUNDS_SCALE\nCascadeShadowsSetCascadeBoundsScale()"
+  ],
+  "urls": [],
+  "tags": []
+}

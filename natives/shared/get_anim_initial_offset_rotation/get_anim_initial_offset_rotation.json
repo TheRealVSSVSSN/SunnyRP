@@ -1,0 +1,13 @@
+{
+  "title": "GET_ANIM_INITIAL_OFFSET_ROTATION",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_ANIM_INITIAL_OFFSET_ROTATION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ANIM_INITIAL_OFFSET_ROTATION\nGetAnimInitialOffsetRotation()"
+  ],
+  "urls": [],
+  "tags": []
+}

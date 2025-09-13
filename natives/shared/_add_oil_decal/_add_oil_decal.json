@@ -1,0 +1,13 @@
+{
+  "title": "_ADD_OIL_DECAL",
+  "breadcrumbs": [
+    "Native Reference",
+    "_ADD_OIL_DECAL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _ADD_OIL_DECAL\n_AddOilDecal()"
+  ],
+  "urls": [],
+  "tags": []
+}

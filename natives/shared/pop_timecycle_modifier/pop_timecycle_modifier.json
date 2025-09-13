@@ -1,0 +1,13 @@
+{
+  "title": "POP_TIMECYCLE_MODIFIER",
+  "breadcrumbs": [
+    "Native Reference",
+    "POP_TIMECYCLE_MODIFIER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for POP_TIMECYCLE_MODIFIER\nPopTimecycleModifier()"
+  ],
+  "urls": [],
+  "tags": []
+}

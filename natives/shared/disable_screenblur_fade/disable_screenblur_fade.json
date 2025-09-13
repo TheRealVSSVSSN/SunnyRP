@@ -1,0 +1,13 @@
+{
+  "title": "DISABLE_SCREENBLUR_FADE",
+  "breadcrumbs": [
+    "Native Reference",
+    "DISABLE_SCREENBLUR_FADE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DISABLE_SCREENBLUR_FADE\nDisableScreenblurFade()"
+  ],
+  "urls": [],
+  "tags": []
+}

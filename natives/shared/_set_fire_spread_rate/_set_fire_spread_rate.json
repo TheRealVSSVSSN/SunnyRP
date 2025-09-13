@@ -1,0 +1,13 @@
+{
+  "title": "_SET_FIRE_SPREAD_RATE",
+  "breadcrumbs": [
+    "Native Reference",
+    "_SET_FIRE_SPREAD_RATE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_FIRE_SPREAD_RATE\n_SetFireSpreadRate()"
+  ],
+  "urls": [],
+  "tags": []
+}

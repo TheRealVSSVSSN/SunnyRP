@@ -1,0 +1,13 @@
+{
+  "title": "SAVE_HIGH_QUALITY_PHOTO",
+  "breadcrumbs": [
+    "Native Reference",
+    "SAVE_HIGH_QUALITY_PHOTO"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SAVE_HIGH_QUALITY_PHOTO\nSaveHighQualityPhoto()"
+  ],
+  "urls": [],
+  "tags": []
+}

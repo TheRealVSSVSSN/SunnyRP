@@ -1,0 +1,13 @@
+{
+  "title": "BEGIN_TAKE_HIGH_QUALITY_PHOTO",
+  "breadcrumbs": [
+    "Native Reference",
+    "BEGIN_TAKE_HIGH_QUALITY_PHOTO"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for BEGIN_TAKE_HIGH_QUALITY_PHOTO\nBeginTakeHighQualityPhoto()"
+  ],
+  "urls": [],
+  "tags": []
+}

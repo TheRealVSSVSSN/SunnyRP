@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_INFINITE_AMMO",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_INFINITE_AMMO"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_INFINITE_AMMO\nSetPedInfiniteAmmo()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "BEGIN_SCALEFORM_SCRIPT_HUD_MOVIE_METHOD",
+  "breadcrumbs": [
+    "Native Reference",
+    "BEGIN_SCALEFORM_SCRIPT_HUD_MOVIE_METHOD"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for BEGIN_SCALEFORM_SCRIPT_HUD_MOVIE_METHOD\nBeginScaleformScriptHudMovieMethod()"
+  ],
+  "urls": [],
+  "tags": []
+}

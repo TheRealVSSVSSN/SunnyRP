@@ -1,0 +1,13 @@
+{
+  "title": "GET_NETWORK_WALK_MODE",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_NETWORK_WALK_MODE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_NETWORK_WALK_MODE\nGetNetworkWalkMode()"
+  ],
+  "urls": [],
+  "tags": []
+}

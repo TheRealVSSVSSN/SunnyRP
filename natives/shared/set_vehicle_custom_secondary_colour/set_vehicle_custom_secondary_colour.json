@@ -1,0 +1,13 @@
+{
+  "title": "SET_VEHICLE_CUSTOM_SECONDARY_COLOUR",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_VEHICLE_CUSTOM_SECONDARY_COLOUR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_VEHICLE_CUSTOM_SECONDARY_COLOUR\nSetVehicleCustomSecondaryColour()"
+  ],
+  "urls": [],
+  "tags": []
+}

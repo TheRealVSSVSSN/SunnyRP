@@ -1,0 +1,13 @@
+{
+  "title": "START_ENTITY_FIRE",
+  "breadcrumbs": [
+    "Native Reference",
+    "START_ENTITY_FIRE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for START_ENTITY_FIRE\nStartEntityFire()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_VEHICLE_DIRT_LEVEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_VEHICLE_DIRT_LEVEL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_DIRT_LEVEL\nGetVehicleDirtLevel()"
+  ],
+  "urls": [],
+  "tags": []
+}

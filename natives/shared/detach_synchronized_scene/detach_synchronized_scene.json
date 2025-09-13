@@ -1,0 +1,13 @@
+{
+  "title": "DETACH_SYNCHRONIZED_SCENE",
+  "breadcrumbs": [
+    "Native Reference",
+    "DETACH_SYNCHRONIZED_SCENE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DETACH_SYNCHRONIZED_SCENE\nDetachSynchronizedScene()"
+  ],
+  "urls": [],
+  "tags": []
+}

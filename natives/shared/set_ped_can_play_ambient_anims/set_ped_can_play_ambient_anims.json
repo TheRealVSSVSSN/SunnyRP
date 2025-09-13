@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_CAN_PLAY_AMBIENT_ANIMS",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_CAN_PLAY_AMBIENT_ANIMS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_CAN_PLAY_AMBIENT_ANIMS\nSetPedCanPlayAmbientAnims()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "_SEETHROUGH_GET_MAX_THICKNESS",
+  "breadcrumbs": [
+    "Native Reference",
+    "_SEETHROUGH_GET_MAX_THICKNESS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SEETHROUGH_GET_MAX_THICKNESS\n_SeethroughGetMaxThickness()"
+  ],
+  "urls": [],
+  "tags": []
+}

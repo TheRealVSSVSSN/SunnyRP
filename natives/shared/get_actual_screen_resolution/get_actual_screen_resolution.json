@@ -1,0 +1,13 @@
+{
+  "title": "GET_ACTUAL_SCREEN_RESOLUTION",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_ACTUAL_SCREEN_RESOLUTION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ACTUAL_SCREEN_RESOLUTION\nGetActualScreenResolution()"
+  ],
+  "urls": [],
+  "tags": []
+}

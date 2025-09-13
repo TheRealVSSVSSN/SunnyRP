@@ -1,0 +1,13 @@
+{
+  "title": "_GET_ENTITY_INSIDE_EXPLOSION_SPHERE",
+  "breadcrumbs": [
+    "Native Reference",
+    "_GET_ENTITY_INSIDE_EXPLOSION_SPHERE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_ENTITY_INSIDE_EXPLOSION_SPHERE\n_GetEntityInsideExplosionSphere()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "SET_VEHICLE_STEERING_ANGLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_VEHICLE_STEERING_ANGLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_VEHICLE_STEERING_ANGLE\nSetVehicleSteeringAngle()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_PED_ALERTNESS",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PED_ALERTNESS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PED_ALERTNESS\nGetPedAlertness()"
+  ],
+  "urls": [],
+  "tags": []
+}

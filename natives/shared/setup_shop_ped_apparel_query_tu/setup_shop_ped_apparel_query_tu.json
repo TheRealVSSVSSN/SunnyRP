@@ -1,0 +1,13 @@
+{
+  "title": "SETUP_SHOP_PED_APPAREL_QUERY_TU",
+  "breadcrumbs": [
+    "Native Reference",
+    "SETUP_SHOP_PED_APPAREL_QUERY_TU"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SETUP_SHOP_PED_APPAREL_QUERY_TU\nSetupShopPedApparelQueryTu()"
+  ],
+  "urls": [],
+  "tags": []
+}

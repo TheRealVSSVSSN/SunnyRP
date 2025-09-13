@@ -1,0 +1,13 @@
+{
+  "title": "_SET_WEAPON_OBJECT_LIVERY_COLOR",
+  "breadcrumbs": [
+    "Native Reference",
+    "_SET_WEAPON_OBJECT_LIVERY_COLOR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_WEAPON_OBJECT_LIVERY_COLOR\n_SetWeaponObjectLiveryColor()"
+  ],
+  "urls": [],
+  "tags": []
+}

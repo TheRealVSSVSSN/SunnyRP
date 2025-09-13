@@ -1,0 +1,13 @@
+{
+  "title": "GET_PED_ENVEFF_SCALE",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PED_ENVEFF_SCALE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PED_ENVEFF_SCALE\nGetPedEnveffScale()"
+  ],
+  "urls": [],
+  "tags": []
+}

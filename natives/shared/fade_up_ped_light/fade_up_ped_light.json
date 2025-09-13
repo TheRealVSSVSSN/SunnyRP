@@ -1,0 +1,13 @@
+{
+  "title": "FADE_UP_PED_LIGHT",
+  "breadcrumbs": [
+    "Native Reference",
+    "FADE_UP_PED_LIGHT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for FADE_UP_PED_LIGHT\nFadeUpPedLight()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_CLOSEST_FIRE_POS",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_CLOSEST_FIRE_POS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_CLOSEST_FIRE_POS\nGetClosestFirePos()"
+  ],
+  "urls": [],
+  "tags": []
+}

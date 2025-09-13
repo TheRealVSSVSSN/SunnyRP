@@ -1,0 +1,13 @@
+{
+  "title": "RESET_PARTICLE_FX_OVERRIDE",
+  "breadcrumbs": [
+    "Native Reference",
+    "RESET_PARTICLE_FX_OVERRIDE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for RESET_PARTICLE_FX_OVERRIDE\nResetParticleFxOverride()"
+  ],
+  "urls": [],
+  "tags": []
+}

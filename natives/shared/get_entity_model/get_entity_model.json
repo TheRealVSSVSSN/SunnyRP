@@ -1,0 +1,13 @@
+{
+  "title": "GET_ENTITY_MODEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_ENTITY_MODEL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ENTITY_MODEL\nGetEntityModel()"
+  ],
+  "urls": [],
+  "tags": []
+}

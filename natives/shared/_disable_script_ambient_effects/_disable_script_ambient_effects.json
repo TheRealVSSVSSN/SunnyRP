@@ -1,0 +1,13 @@
+{
+  "title": "_DISABLE_SCRIPT_AMBIENT_EFFECTS",
+  "breadcrumbs": [
+    "Native Reference",
+    "_DISABLE_SCRIPT_AMBIENT_EFFECTS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _DISABLE_SCRIPT_AMBIENT_EFFECTS\n_DisableScriptAmbientEffects()"
+  ],
+  "urls": [],
+  "tags": []
+}

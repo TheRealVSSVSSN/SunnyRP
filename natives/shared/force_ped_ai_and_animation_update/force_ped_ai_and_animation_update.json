@@ -1,0 +1,13 @@
+{
+  "title": "FORCE_PED_AI_AND_ANIMATION_UPDATE",
+  "breadcrumbs": [
+    "Native Reference",
+    "FORCE_PED_AI_AND_ANIMATION_UPDATE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for FORCE_PED_AI_AND_ANIMATION_UPDATE\nForcePedAiAndAnimationUpdate()"
+  ],
+  "urls": [],
+  "tags": []
+}

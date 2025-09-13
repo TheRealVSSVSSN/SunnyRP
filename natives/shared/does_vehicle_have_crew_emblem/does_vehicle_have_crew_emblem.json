@@ -1,0 +1,13 @@
+{
+  "title": "DOES_VEHICLE_HAVE_CREW_EMBLEM",
+  "breadcrumbs": [
+    "Native Reference",
+    "DOES_VEHICLE_HAVE_CREW_EMBLEM"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DOES_VEHICLE_HAVE_CREW_EMBLEM\nDoesVehicleHaveCrewEmblem()"
+  ],
+  "urls": [],
+  "tags": []
+}

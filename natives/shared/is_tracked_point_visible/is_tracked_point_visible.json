@@ -1,0 +1,13 @@
+{
+  "title": "IS_TRACKED_POINT_VISIBLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_TRACKED_POINT_VISIBLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_TRACKED_POINT_VISIBLE\nIsTrackedPointVisible()"
+  ],
+  "urls": [],
+  "tags": []
+}

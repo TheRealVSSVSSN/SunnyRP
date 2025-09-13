@@ -1,0 +1,13 @@
+{
+  "title": "GET_GAME_BUILD_NUMBER",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_GAME_BUILD_NUMBER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_GAME_BUILD_NUMBER\nGetGameBuildNumber()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_INFINITE_AMMO_CLIP",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_INFINITE_AMMO_CLIP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_INFINITE_AMMO_CLIP\nSetPedInfiniteAmmoClip()"
+  ],
+  "urls": [],
+  "tags": []
+}

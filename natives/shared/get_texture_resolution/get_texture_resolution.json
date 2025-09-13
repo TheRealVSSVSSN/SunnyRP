@@ -1,0 +1,13 @@
+{
+  "title": "GET_TEXTURE_RESOLUTION",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_TEXTURE_RESOLUTION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_TEXTURE_RESOLUTION\nGetTextureResolution()"
+  ],
+  "urls": [],
+  "tags": []
+}

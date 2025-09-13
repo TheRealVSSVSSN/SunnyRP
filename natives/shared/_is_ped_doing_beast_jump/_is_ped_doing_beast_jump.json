@@ -1,0 +1,13 @@
+{
+  "title": "_IS_PED_DOING_BEAST_JUMP",
+  "breadcrumbs": [
+    "Native Reference",
+    "_IS_PED_DOING_BEAST_JUMP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _IS_PED_DOING_BEAST_JUMP\n_IsPedDoingBeastJump()"
+  ],
+  "urls": [],
+  "tags": []
+}

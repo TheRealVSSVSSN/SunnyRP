@@ -1,0 +1,13 @@
+{
+  "title": "GET_IS_VEHICLE_ENGINE_RUNNING",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_IS_VEHICLE_ENGINE_RUNNING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_IS_VEHICLE_ENGINE_RUNNING\nGetIsVehicleEngineRunning()"
+  ],
+  "urls": [],
+  "tags": []
+}

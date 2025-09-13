@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_RANDOM_COMPONENT_VARIATION",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_RANDOM_COMPONENT_VARIATION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_RANDOM_COMPONENT_VARIATION\nSetPedRandomComponentVariation()"
+  ],
+  "urls": [],
+  "tags": []
+}

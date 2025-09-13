@@ -1,0 +1,13 @@
+{
+  "title": "DOES_PARTICLE_FX_LOOPED_EXIST",
+  "breadcrumbs": [
+    "Native Reference",
+    "DOES_PARTICLE_FX_LOOPED_EXIST"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DOES_PARTICLE_FX_LOOPED_EXIST\nDoesParticleFxLoopedExist()"
+  ],
+  "urls": [],
+  "tags": []
+}

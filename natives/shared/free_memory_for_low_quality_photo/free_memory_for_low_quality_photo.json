@@ -1,0 +1,13 @@
+{
+  "title": "FREE_MEMORY_FOR_LOW_QUALITY_PHOTO",
+  "breadcrumbs": [
+    "Native Reference",
+    "FREE_MEMORY_FOR_LOW_QUALITY_PHOTO"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for FREE_MEMORY_FOR_LOW_QUALITY_PHOTO\nFreeMemoryForLowQualityPhoto()"
+  ],
+  "urls": [],
+  "tags": []
+}

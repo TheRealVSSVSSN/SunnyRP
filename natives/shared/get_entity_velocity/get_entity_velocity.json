@@ -1,0 +1,13 @@
+{
+  "title": "GET_ENTITY_VELOCITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_ENTITY_VELOCITY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_ENTITY_VELOCITY\nGetEntityVelocity()"
+  ],
+  "urls": [],
+  "tags": []
+}

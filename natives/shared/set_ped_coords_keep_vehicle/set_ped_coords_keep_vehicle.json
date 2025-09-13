@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_COORDS_KEEP_VEHICLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_COORDS_KEEP_VEHICLE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_COORDS_KEEP_VEHICLE\nSetPedCoordsKeepVehicle()"
+  ],
+  "urls": [],
+  "tags": []
+}

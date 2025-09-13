@@ -1,0 +1,13 @@
+{
+  "title": "GET_VEHICLE_DASHBOARD_OIL_PRESSURE",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_VEHICLE_DASHBOARD_OIL_PRESSURE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_DASHBOARD_OIL_PRESSURE\nGetVehicleDashboardOilPressure()"
+  ],
+  "urls": [],
+  "tags": []
+}

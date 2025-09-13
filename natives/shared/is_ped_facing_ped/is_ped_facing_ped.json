@@ -1,0 +1,13 @@
+{
+  "title": "IS_PED_FACING_PED",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_PED_FACING_PED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_PED_FACING_PED\nIsPedFacingPed()"
+  ],
+  "urls": [],
+  "tags": []
+}

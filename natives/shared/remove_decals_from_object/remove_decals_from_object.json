@@ -1,0 +1,13 @@
+{
+  "title": "REMOVE_DECALS_FROM_OBJECT",
+  "breadcrumbs": [
+    "Native Reference",
+    "REMOVE_DECALS_FROM_OBJECT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REMOVE_DECALS_FROM_OBJECT\nRemoveDecalsFromObject()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "ANIMPOSTFX_STOP",
+  "breadcrumbs": [
+    "Native Reference",
+    "ANIMPOSTFX_STOP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ANIMPOSTFX_STOP\nAnimpostfxStop()"
+  ],
+  "urls": [],
+  "tags": []
+}

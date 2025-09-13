@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_CONFIG_FLAG",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_CONFIG_FLAG"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_CONFIG_FLAG\nSetPedConfigFlag()"
+  ],
+  "urls": [],
+  "tags": []
+}

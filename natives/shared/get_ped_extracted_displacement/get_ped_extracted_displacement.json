@@ -1,0 +1,13 @@
+{
+  "title": "GET_PED_EXTRACTED_DISPLACEMENT",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PED_EXTRACTED_DISPLACEMENT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PED_EXTRACTED_DISPLACEMENT\nGetPedExtractedDisplacement()"
+  ],
+  "urls": [],
+  "tags": []
+}

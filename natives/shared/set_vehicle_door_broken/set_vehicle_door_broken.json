@@ -1,0 +1,13 @@
+{
+  "title": "SET_VEHICLE_DOOR_BROKEN",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_VEHICLE_DOOR_BROKEN"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_VEHICLE_DOOR_BROKEN\nSetVehicleDoorBroken()"
+  ],
+  "urls": [],
+  "tags": []
+}

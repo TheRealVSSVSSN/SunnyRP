@@ -1,0 +1,13 @@
+{
+  "title": "CASCADE_SHADOWS_ENABLE_ENTITY_TRACKER",
+  "breadcrumbs": [
+    "Native Reference",
+    "CASCADE_SHADOWS_ENABLE_ENTITY_TRACKER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CASCADE_SHADOWS_ENABLE_ENTITY_TRACKER\nCascadeShadowsEnableEntityTracker()"
+  ],
+  "urls": [],
+  "tags": []
+}

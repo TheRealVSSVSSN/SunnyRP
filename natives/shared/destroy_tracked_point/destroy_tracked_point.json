@@ -1,0 +1,13 @@
+{
+  "title": "DESTROY_TRACKED_POINT",
+  "breadcrumbs": [
+    "Native Reference",
+    "DESTROY_TRACKED_POINT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DESTROY_TRACKED_POINT\nDestroyTrackedPoint()"
+  ],
+  "urls": [],
+  "tags": []
+}

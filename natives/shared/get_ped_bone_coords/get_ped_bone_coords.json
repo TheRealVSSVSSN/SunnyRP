@@ -1,0 +1,13 @@
+{
+  "title": "GET_PED_BONE_COORDS",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PED_BONE_COORDS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PED_BONE_COORDS\nGetPedBoneCoords()"
+  ],
+  "urls": [],
+  "tags": []
+}

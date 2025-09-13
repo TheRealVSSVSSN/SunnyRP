@@ -1,0 +1,13 @@
+{
+  "title": "OVERRIDE_INTERIOR_SMOKE_NAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "OVERRIDE_INTERIOR_SMOKE_NAME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for OVERRIDE_INTERIOR_SMOKE_NAME\nOverrideInteriorSmokeName()"
+  ],
+  "urls": [],
+  "tags": []
+}

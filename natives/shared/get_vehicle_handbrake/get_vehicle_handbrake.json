@@ -1,0 +1,13 @@
+{
+  "title": "GET_VEHICLE_HANDBRAKE",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_VEHICLE_HANDBRAKE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_HANDBRAKE\nGetVehicleHandbrake()"
+  ],
+  "urls": [],
+  "tags": []
+}

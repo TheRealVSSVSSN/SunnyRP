@@ -1,0 +1,13 @@
+{
+  "title": "STOP_ENTITY_FIRE",
+  "breadcrumbs": [
+    "Native Reference",
+    "STOP_ENTITY_FIRE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for STOP_ENTITY_FIRE\nStopEntityFire()"
+  ],
+  "urls": [],
+  "tags": []
+}

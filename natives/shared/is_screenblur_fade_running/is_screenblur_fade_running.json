@@ -1,0 +1,13 @@
+{
+  "title": "IS_SCREENBLUR_FADE_RUNNING",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_SCREENBLUR_FADE_RUNNING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_SCREENBLUR_FADE_RUNNING\nIsScreenblurFadeRunning()"
+  ],
+  "urls": [],
+  "tags": []
+}

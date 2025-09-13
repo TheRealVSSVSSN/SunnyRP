@@ -1,0 +1,13 @@
+{
+  "title": "GET_TIMECYCLE_TRANSITION_MODIFIER_INDEX",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_TIMECYCLE_TRANSITION_MODIFIER_INDEX"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_TIMECYCLE_TRANSITION_MODIFIER_INDEX\nGetTimecycleTransitionModifierIndex()"
+  ],
+  "urls": [],
+  "tags": []
+}

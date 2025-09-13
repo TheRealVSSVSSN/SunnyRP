@@ -1,0 +1,13 @@
+{
+  "title": "GET_PED_RESET_FLAG",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PED_RESET_FLAG"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PED_RESET_FLAG\nGetPedResetFlag()"
+  ],
+  "urls": [],
+  "tags": []
+}

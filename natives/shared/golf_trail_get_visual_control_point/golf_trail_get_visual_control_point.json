@@ -1,0 +1,13 @@
+{
+  "title": "GOLF_TRAIL_GET_VISUAL_CONTROL_POINT",
+  "breadcrumbs": [
+    "Native Reference",
+    "GOLF_TRAIL_GET_VISUAL_CONTROL_POINT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GOLF_TRAIL_GET_VISUAL_CONTROL_POINT\nGolfTrailGetVisualControlPoint()"
+  ],
+  "urls": [],
+  "tags": []
+}

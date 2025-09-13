@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_CAN_TELEPORT_TO_GROUP_LEADER",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_CAN_TELEPORT_TO_GROUP_LEADER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_CAN_TELEPORT_TO_GROUP_LEADER\nSetPedCanTeleportToGroupLeader()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "REQUEST_SCALEFORM_MOVIE_INSTANCE",
+  "breadcrumbs": [
+    "Native Reference",
+    "REQUEST_SCALEFORM_MOVIE_INSTANCE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REQUEST_SCALEFORM_MOVIE_INSTANCE\nRequestScaleformMovieInstance()"
+  ],
+  "urls": [],
+  "tags": []
+}

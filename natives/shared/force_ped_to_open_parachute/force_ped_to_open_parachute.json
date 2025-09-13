@@ -1,0 +1,13 @@
+{
+  "title": "FORCE_PED_TO_OPEN_PARACHUTE",
+  "breadcrumbs": [
+    "Native Reference",
+    "FORCE_PED_TO_OPEN_PARACHUTE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for FORCE_PED_TO_OPEN_PARACHUTE\nForcePedToOpenParachute()"
+  ],
+  "urls": [],
+  "tags": []
+}

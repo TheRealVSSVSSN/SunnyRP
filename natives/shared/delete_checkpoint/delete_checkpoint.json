@@ -1,0 +1,13 @@
+{
+  "title": "DELETE_CHECKPOINT",
+  "breadcrumbs": [
+    "Native Reference",
+    "DELETE_CHECKPOINT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DELETE_CHECKPOINT\nDeleteCheckpoint()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "SET_GAME_TYPE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_GAME_TYPE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_GAME_TYPE\nSetGameType()"
+  ],
+  "urls": [],
+  "tags": []
+}

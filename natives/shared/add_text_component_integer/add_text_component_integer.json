@@ -1,0 +1,13 @@
+{
+  "title": "ADD_TEXT_COMPONENT_INTEGER",
+  "breadcrumbs": [
+    "Native Reference",
+    "ADD_TEXT_COMPONENT_INTEGER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ADD_TEXT_COMPONENT_INTEGER\nAddTextComponentInteger()"
+  ],
+  "urls": [],
+  "tags": []
+}

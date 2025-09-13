@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_RAGDOLL_ON_COLLISION",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_RAGDOLL_ON_COLLISION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_RAGDOLL_ON_COLLISION\nSetPedRagdollOnCollision()"
+  ],
+  "urls": [],
+  "tags": []
+}

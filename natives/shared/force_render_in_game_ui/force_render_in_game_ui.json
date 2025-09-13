@@ -1,0 +1,13 @@
+{
+  "title": "FORCE_RENDER_IN_GAME_UI",
+  "breadcrumbs": [
+    "Native Reference",
+    "FORCE_RENDER_IN_GAME_UI"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for FORCE_RENDER_IN_GAME_UI\nForceRenderInGameUi()"
+  ],
+  "urls": [],
+  "tags": []
+}

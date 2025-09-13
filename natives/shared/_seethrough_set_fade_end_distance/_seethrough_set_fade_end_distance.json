@@ -1,0 +1,13 @@
+{
+  "title": "_SEETHROUGH_SET_FADE_END_DISTANCE",
+  "breadcrumbs": [
+    "Native Reference",
+    "_SEETHROUGH_SET_FADE_END_DISTANCE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SEETHROUGH_SET_FADE_END_DISTANCE\n_SeethroughSetFadeEndDistance()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_PED_HEAD_OVERLAY_NUM",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PED_HEAD_OVERLAY_NUM"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PED_HEAD_OVERLAY_NUM\nGetPedHeadOverlayNum()"
+  ],
+  "urls": [],
+  "tags": []
+}

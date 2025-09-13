@@ -1,0 +1,13 @@
+{
+  "title": "IS_PED_BEING_STUNNED",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_PED_BEING_STUNNED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_PED_BEING_STUNNED\nIsPedBeingStunned()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "HAS_SCALEFORM_SCRIPT_HUD_MOVIE_LOADED",
+  "breadcrumbs": [
+    "Native Reference",
+    "HAS_SCALEFORM_SCRIPT_HUD_MOVIE_LOADED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for HAS_SCALEFORM_SCRIPT_HUD_MOVIE_LOADED\nHasScaleformScriptHudMovieLoaded()"
+  ],
+  "urls": [],
+  "tags": []
+}

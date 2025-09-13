@@ -1,0 +1,13 @@
+{
+  "title": "IS_PED_BEING_JACKED",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_PED_BEING_JACKED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_PED_BEING_JACKED\nIsPedBeingJacked()"
+  ],
+  "urls": [],
+  "tags": []
+}

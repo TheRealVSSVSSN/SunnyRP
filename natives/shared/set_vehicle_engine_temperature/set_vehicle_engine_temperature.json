@@ -1,0 +1,13 @@
+{
+  "title": "SET_VEHICLE_ENGINE_TEMPERATURE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_VEHICLE_ENGINE_TEMPERATURE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_VEHICLE_ENGINE_TEMPERATURE\nSetVehicleEngineTemperature()"
+  ],
+  "urls": [],
+  "tags": []
+}

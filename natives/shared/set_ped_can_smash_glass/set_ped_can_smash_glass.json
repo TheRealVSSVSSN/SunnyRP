@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_CAN_SMASH_GLASS",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_CAN_SMASH_GLASS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_CAN_SMASH_GLASS\nSetPedCanSmashGlass()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "BEGIN_TEXT_COMMAND_DISPLAY_HELP",
+  "breadcrumbs": [
+    "Native Reference",
+    "BEGIN_TEXT_COMMAND_DISPLAY_HELP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for BEGIN_TEXT_COMMAND_DISPLAY_HELP\nBeginTextCommandDisplayHelp()"
+  ],
+  "urls": [],
+  "tags": []
+}

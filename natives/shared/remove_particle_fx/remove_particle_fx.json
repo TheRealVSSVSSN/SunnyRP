@@ -1,0 +1,13 @@
+{
+  "title": "REMOVE_PARTICLE_FX",
+  "breadcrumbs": [
+    "Native Reference",
+    "REMOVE_PARTICLE_FX"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REMOVE_PARTICLE_FX\nRemoveParticleFx()"
+  ],
+  "urls": [],
+  "tags": []
+}

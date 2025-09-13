@@ -1,0 +1,13 @@
+{
+  "title": "ADD_PETROL_DECAL",
+  "breadcrumbs": [
+    "Native Reference",
+    "ADD_PETROL_DECAL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ADD_PETROL_DECAL\nAddPetrolDecal()"
+  ],
+  "urls": [],
+  "tags": []
+}

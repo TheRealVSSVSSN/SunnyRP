@@ -1,0 +1,13 @@
+{
+  "title": "GET_PED_MONEY",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PED_MONEY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PED_MONEY\nGetPedMoney()"
+  ],
+  "urls": [],
+  "tags": []
+}

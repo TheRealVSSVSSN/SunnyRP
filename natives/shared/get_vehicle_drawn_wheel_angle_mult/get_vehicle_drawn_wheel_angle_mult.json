@@ -1,0 +1,13 @@
+{
+  "title": "GET_VEHICLE_DRAWN_WHEEL_ANGLE_MULT",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_VEHICLE_DRAWN_WHEEL_ANGLE_MULT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_VEHICLE_DRAWN_WHEEL_ANGLE_MULT\nGetVehicleDrawnWheelAngleMult()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_COWER_HASH",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_COWER_HASH"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_COWER_HASH\nSetPedCowerHash()"
+  ],
+  "urls": [],
+  "tags": []
+}

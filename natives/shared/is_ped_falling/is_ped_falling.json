@@ -1,0 +1,13 @@
+{
+  "title": "IS_PED_FALLING",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_PED_FALLING"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_PED_FALLING\nIsPedFalling()"
+  ],
+  "urls": [],
+  "tags": []
+}

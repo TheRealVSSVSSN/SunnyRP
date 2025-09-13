@@ -1,0 +1,13 @@
+{
+  "title": "SEETHROUGH_SET_HEATSCALE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SEETHROUGH_SET_HEATSCALE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SEETHROUGH_SET_HEATSCALE\nSeethroughSetHeatscale()"
+  ],
+  "urls": [],
+  "tags": []
+}

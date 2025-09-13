@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_MOVEMENT_CLIPSET",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_MOVEMENT_CLIPSET"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_MOVEMENT_CLIPSET\nSetPedMovementClipset()"
+  ],
+  "urls": [],
+  "tags": []
+}

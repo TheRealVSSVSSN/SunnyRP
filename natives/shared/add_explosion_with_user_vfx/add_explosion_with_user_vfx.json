@@ -1,0 +1,13 @@
+{
+  "title": "ADD_EXPLOSION_WITH_USER_VFX",
+  "breadcrumbs": [
+    "Native Reference",
+    "ADD_EXPLOSION_WITH_USER_VFX"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ADD_EXPLOSION_WITH_USER_VFX\nAddExplosionWithUserVfx()"
+  ],
+  "urls": [],
+  "tags": []
+}

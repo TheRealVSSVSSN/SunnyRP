@@ -1,0 +1,13 @@
+{
+  "title": "GET_PED_PARACHUTE_LANDING_TYPE",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_PED_PARACHUTE_LANDING_TYPE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_PED_PARACHUTE_LANDING_TYPE\nGetPedParachuteLandingType()"
+  ],
+  "urls": [],
+  "tags": []
+}

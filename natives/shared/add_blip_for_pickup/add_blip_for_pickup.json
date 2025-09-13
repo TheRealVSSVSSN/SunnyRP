@@ -1,0 +1,13 @@
+{
+  "title": "ADD_BLIP_FOR_PICKUP",
+  "breadcrumbs": [
+    "Native Reference",
+    "ADD_BLIP_FOR_PICKUP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ADD_BLIP_FOR_PICKUP\nAddBlipForPickup()"
+  ],
+  "urls": [],
+  "tags": []
+}

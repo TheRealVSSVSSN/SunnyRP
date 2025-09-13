@@ -1,0 +1,13 @@
+{
+  "title": "CLEAR_DRAW_ORIGIN",
+  "breadcrumbs": [
+    "Native Reference",
+    "CLEAR_DRAW_ORIGIN"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CLEAR_DRAW_ORIGIN\nClearDrawOrigin()"
+  ],
+  "urls": [],
+  "tags": []
+}
