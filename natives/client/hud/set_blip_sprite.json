@@ -1,0 +1,25 @@
+{
+  "title": "SET_BLIP_SPRITE",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "SET_BLIP_SPRITE"
+  ],
+  "content": "0xDF735600A4696DAF0x8DBBB0B9// SetBlipSprite\nvoid SET_BLIP_SPRITE(Blip blip, int spriteId);Parameters:blip: The blip to change.spriteId: The sprite ID to set.Sets the displayed sprite for a specific blip.There's a list of sprites on the FiveM documentation site.Examples:LuaSetBlipSprite(blip, 588) -- changes `blip` to radar_nhp_orbit",
+  "codeBlocks": [
+    "// SetBlipSprite\nvoid SET_BLIP_SPRITE(Blip blip, int spriteId);",
+    "SetBlipSprite(blip, 588) -- changes `blip` to radar_nhp_orbit",
+    "-- Example usage for SET_BLIP_SPRITE\nSetBlipSprite(0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/SetBlipSprite.md",
+    "https://docs.fivem.net/docs/game-references/blips/",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

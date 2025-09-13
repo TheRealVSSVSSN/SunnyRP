@@ -1,0 +1,23 @@
+{
+  "title": "BLOCK_DEATH_JINGLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "AUDIOAPI",
+    "BLOCK_DEATH_JINGLE"
+  ],
+  "content": "0xF154B8D1775B2DEC0xD2858D8A// BlockDeathJingle\nvoid BLOCK_DEATH_JINGLE(BOOL blocked);Parameters:blocked: Sets if the death jingle can play when a player dies or not",
+  "codeBlocks": [
+    "// BlockDeathJingle\nvoid BLOCK_DEATH_JINGLE(BOOL blocked);",
+    "-- Example usage for BLOCK_DEATH_JINGLE\nBlockDeathJingle(false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/AUDIO/BlockDeathJingle.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

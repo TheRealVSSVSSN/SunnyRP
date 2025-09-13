@@ -1,0 +1,23 @@
+{
+  "title": "GET_NUM_NAVMESHES_EXISTING_IN_AREA",
+  "breadcrumbs": [
+    "Native Reference",
+    "PATHFINDAPI",
+    "GET_NUM_NAVMESHES_EXISTING_IN_AREA"
+  ],
+  "content": "0x01708E8DD3FF8C650x76AFFBB5// GetNumNavmeshesExistingInArea\nint GET_NUM_NAVMESHES_EXISTING_IN_AREA(float posMinX, float posMinY, float posMinZ, float posMaxX, float posMaxY, float posMaxZ);Parameters:posMinX: Min X Coordinate.posMinY: Min Y Coordinate.posMinZ: Min Z Coordinate.posMaxX: Max X Coordinate.posMaxY: Max Y Coordinate.posMaxZ: Max Z Coordinate.Returns: Returns the number of navmeshes which exist in the given area (irrespective of whether they are currently loaded or not)",
+  "codeBlocks": [
+    "// GetNumNavmeshesExistingInArea\nint GET_NUM_NAVMESHES_EXISTING_IN_AREA(float posMinX, float posMinY, float posMinZ, float posMaxX, float posMaxY, float posMaxZ);",
+    "-- Example usage for GET_NUM_NAVMESHES_EXISTING_IN_AREA\nGetNumNavmeshesExistingInArea(0.0, 0.0, 0.0, 0.0, 0.0, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PATHFIND/GetNumNavmeshesExistingInArea.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

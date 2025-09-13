@@ -1,0 +1,23 @@
+{
+  "title": "REQUEST_CUTSCENE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CUTSCENEAPI",
+    "REQUEST_CUTSCENE"
+  ],
+  "content": "0x7A86743F475D9E090xB5977853// RequestCutscene\nvoid REQUEST_CUTSCENE(char* cutsceneName, int flags);Parameters:cutsceneName: Case insensitive name of the .cut fileflags: Usually 8",
+  "codeBlocks": [
+    "// RequestCutscene\nvoid REQUEST_CUTSCENE(char* cutsceneName, int flags);",
+    "-- Example usage for REQUEST_CUTSCENE\nRequestCutscene('', 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/CUTSCENE/RequestCutscene.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "title": "IS_ALARM_PLAYING",
+  "breadcrumbs": [
+    "Native Reference",
+    "AUDIOAPI",
+    "IS_ALARM_PLAYING"
+  ],
+  "content": "0x226435CB96CCFC8C0x9D8E1D23// IsAlarmPlaying\nBOOL IS_ALARM_PLAYING(char* alarmName);Returns: Returns true if an alarm is currently playing with the specified nameExamples:Lualocal bAlarmPlaying = IsAlarmPlaying(\"PORT_OF_LS_HEIST_FORT_ZANCUDO_ALARMS\")",
+  "codeBlocks": [
+    "// IsAlarmPlaying\nBOOL IS_ALARM_PLAYING(char* alarmName);",
+    "local bAlarmPlaying = IsAlarmPlaying(\"PORT_OF_LS_HEIST_FORT_ZANCUDO_ALARMS\")",
+    "-- Example usage for IS_ALARM_PLAYING\nIsAlarmPlaying('')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/AUDIO/IsAlarmPlaying.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

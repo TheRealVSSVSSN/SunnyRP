@@ -1,0 +1,24 @@
+{
+  "title": "PAUSE_MENU_SET_WARN_ON_TAB_CHANGE",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "PAUSE_MENU_SET_WARN_ON_TAB_CHANGE"
+  ],
+  "content": "0xF06EBB91A81E09E30x11D09737// PauseMenuSetWarnOnTabChange\nvoid PAUSE_MENU_SET_WARN_ON_TAB_CHANGE(BOOL setWarn);Parameters:setWarn: Wether to show the message or not.Shows this warning message when trying to switch pause menu header tabs: https://i.imgur.com/8qmfztu.png",
+  "codeBlocks": [
+    "// PauseMenuSetWarnOnTabChange\nvoid PAUSE_MENU_SET_WARN_ON_TAB_CHANGE(BOOL setWarn);",
+    "-- Example usage for PAUSE_MENU_SET_WARN_ON_TAB_CHANGE\nPauseMenuSetWarnOnTabChange(false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/PauseMenuSetWarnOnTabChange.md",
+    "https://i.imgur.com/8qmfztu.png",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

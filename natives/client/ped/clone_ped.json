@@ -1,0 +1,24 @@
+{
+  "title": "CLONE_PED",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "CLONE_PED"
+  ],
+  "content": "0xEF29A16337FACADB0x8C8A8D6E// ClonePed\nPed CLONE_PED(Ped ped, BOOL isNetwork, BOOL bScriptHostPed, BOOL copyHeadBlendFlag);Parameters:ped: The input ped.isNetwork: Whether or not the ped should be registered as a network object.bScriptHostPed: Script host flag.copyHeadBlendFlag: If true, head blend data is referenced, not copied.Returns: A new ped handle representing the ped's copy.Creates a copy of the passed ped, optionally setting it as local and/or shallow-copying the head blend data.Examples:Lua-- makes a locally visible duplicate of the local player for presentation\nlocal playerDummy = ClonePed(PlayerPedId(), false, false, true)\nSetEntityCoords(playerDummy, pos.x, pos.y, pos.z)",
+  "codeBlocks": [
+    "// ClonePed\nPed CLONE_PED(Ped ped, BOOL isNetwork, BOOL bScriptHostPed, BOOL copyHeadBlendFlag);",
+    "-- makes a locally visible duplicate of the local player for presentation\nlocal playerDummy = ClonePed(PlayerPedId(), false, false, true)\nSetEntityCoords(playerDummy, pos.x, pos.y, pos.z)",
+    "local ped = PlayerPedId()\n-- Example usage for CLONE_PED\nClonePed(ped, false, false, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/ClonePed.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

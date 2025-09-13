@@ -1,0 +1,23 @@
+{
+  "title": "TASK_PAUSE",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "TASK_PAUSE"
+  ],
+  "content": "0xE73A266DB0CA90420x17A64668// TaskPause\nvoid TASK_PAUSE(Ped ped, int ms);Parameters:ped: The ped to pause. Set to this 0 when using task sequences.ms: The amount of miliseconds to wait.This tasks the ped to do nothing for the specified amount of miliseconds.\nThis is useful if you want to add a delay between tasks when using a sequence task.",
+  "codeBlocks": [
+    "// TaskPause\nvoid TASK_PAUSE(Ped ped, int ms);",
+    "local ped = PlayerPedId()\n-- Example usage for TASK_PAUSE\nTaskPause(ped, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/TaskPause.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

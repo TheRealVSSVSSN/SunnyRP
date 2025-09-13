@@ -1,0 +1,23 @@
+{
+  "title": "SET_PED_HELMET",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "SET_PED_HELMET"
+  ],
+  "content": "0x560A43136EB581050xED366E53// SetPedHelmet\nvoid SET_PED_HELMET(Ped ped, BOOL bEnable);Parameters:ped: Ped index.bEnable: Boolean value that indicates whether the helmet should be worn or not.Sets whether a pedestrian should wear a helmet.",
+  "codeBlocks": [
+    "// SetPedHelmet\nvoid SET_PED_HELMET(Ped ped, BOOL bEnable);",
+    "local ped = PlayerPedId()\n-- Example usage for SET_PED_HELMET\nSetPedHelmet(ped, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/SetPedHelmet.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

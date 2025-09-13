@@ -1,0 +1,24 @@
+{
+  "title": "FORCE_PED_MOTION_STATE",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "FORCE_PED_MOTION_STATE"
+  ],
+  "content": "0xF28965D04F570DCA0x164DDEFF// ForcePedMotionState\nBOOL FORCE_PED_MOTION_STATE(Ped ped, Hash motionStateHash, BOOL shouldReset, int updateState, BOOL forceAIPreCameraUpdate);Parameters:ped: The ped handle.motionStateHash: The motion state hash.shouldReset: If the motion state should be set even if the ped is already in the specified motion state.updateState: Integer but treated as a boolean (only allows 1 or 0). Sets ped reset flags CPED_RESET_FLAG_ForcePreCameraAiAnimUpdateIfFirstPerson and CPED_RESET_FLAG_ForcePostCameraAnimUpdate.forceAIPreCameraUpdate: If updateState is 1, will set either CPED_RESET_FLAG_ForcePreCameraAIUpdate (if true) or CPED_RESET_FLAG_ForcePostCameraAIUpdate (if false) ped reset flags.Returns: Whether or not the motion state was forced on the ped successfully.enum ePedMotionState\n{\n    MOTIONSTATE_NONE = -294553821, // MotionState_None\n    MOTIONSTATE_IDLE = -1871534317, // MotionState_Idle\n    MOTIONSTATE_WALK = -668482597, // MotionState_Walk\n    MOTIONSTATE_RUN = -530524, // MotionState_Run\n    MOTIONSTATE_SPRINT = -1115154469, // MotionState_Sprint\n    MOTIONSTATE_CROUCH_IDLE = 1140525470, // MotionState_Crouch_Idle\n    MOTIONSTATE_CROUCH_WALK = 147004056, // MotionState_Crouch_Walk\n    MOTIONSTATE_CROUCH_RUN = 898879241, // MotionState_Crouch_Run\n    MOTIONSTATE_DONOTHING = 247561816, // MotionState_DoNothing\n    MOTIONSTATE_ANIMATEDVELOCITY = 1427811395, // MotionState_AnimatedVelocity\n    MOTIONSTATE_INVEHICLE = -1797663347, // MotionState_InVehicle\n    MOTIONSTATE_AIMING = 1063765679, // MotionState_Aiming\n    MOTIONSTATE_DIVING_IDLE = 1212730861, // MotionState_Diving_Idle\n    MOTIONSTATE_DIVING_SWIM = -1855028596, // MotionState_Diving_Swim\n    MOTIONSTATE_SWIMMING_TREADWATER = -776007225, // MotionState_Swimming_TreadWater\n    MOTIONSTATE_DEAD = 230360860, // MotionState_Dead\n    MOTIONSTATE_STEALTH_IDLE = 1110276645, // MotionState_Stealth_Idle\n    MOTIONSTATE_STEALTH_WALK = 69908130, // MotionState_Stealth_Walk\n    MOTIONSTATE_STEALTH_RUN = -83133983, // MotionState_Stealth_Run\n    MOTIONSTATE_PARACHUTING = -1161760501, // MotionState_Parachuting\n    MOTIONSTATE_ACTIONMODE_IDLE = -633298724, // MotionState_ActionMode_Idle\n    MOTIONSTATE_ACTIONMODE_WALK = -762290521, // MotionState_ActionMode_Walk\n    MOTIONSTATE_ACTIONMODE_RUN = 834330132, // MotionState_ActionMode_Run\n    MOTIONSTATE_JETPACK = 1398696542 // MotionState_Jetpack\n}",
+  "codeBlocks": [
+    "// ForcePedMotionState\nBOOL FORCE_PED_MOTION_STATE(Ped ped, Hash motionStateHash, BOOL shouldReset, int updateState, BOOL forceAIPreCameraUpdate);",
+    "enum ePedMotionState\n{\n    MOTIONSTATE_NONE = -294553821, // MotionState_None\n    MOTIONSTATE_IDLE = -1871534317, // MotionState_Idle\n    MOTIONSTATE_WALK = -668482597, // MotionState_Walk\n    MOTIONSTATE_RUN = -530524, // MotionState_Run\n    MOTIONSTATE_SPRINT = -1115154469, // MotionState_Sprint\n    MOTIONSTATE_CROUCH_IDLE = 1140525470, // MotionState_Crouch_Idle\n    MOTIONSTATE_CROUCH_WALK = 147004056, // MotionState_Crouch_Walk\n    MOTIONSTATE_CROUCH_RUN = 898879241, // MotionState_Crouch_Run\n    MOTIONSTATE_DONOTHING = 247561816, // MotionState_DoNothing\n    MOTIONSTATE_ANIMATEDVELOCITY = 1427811395, // MotionState_AnimatedVelocity\n    MOTIONSTATE_INVEHICLE = -1797663347, // MotionState_InVehicle\n    MOTIONSTATE_AIMING = 1063765679, // MotionState_Aiming\n    MOTIONSTATE_DIVING_IDLE = 1212730861, // MotionState_Diving_Idle\n    MOTIONSTATE_DIVING_SWIM = -1855028596, // MotionState_Diving_Swim\n    MOTIONSTATE_SWIMMING_TREADWATER = -776007225, // MotionState_Swimming_TreadWater\n    MOTIONSTATE_DEAD = 230360860, // MotionState_Dead\n    MOTIONSTATE_STEALTH_IDLE = 1110276645, // MotionState_Stealth_Idle\n    MOTIONSTATE_STEALTH_WALK = 69908130, // MotionState_Stealth_Walk\n    MOTIONSTATE_STEALTH_RUN = -83133983, // MotionState_Stealth_Run\n    MOTIONSTATE_PARACHUTING = -1161760501, // MotionState_Parachuting\n    MOTIONSTATE_ACTIONMODE_IDLE = -633298724, // MotionState_ActionMode_Idle\n    MOTIONSTATE_ACTIONMODE_WALK = -762290521, // MotionState_ActionMode_Walk\n    MOTIONSTATE_ACTIONMODE_RUN = 834330132, // MotionState_ActionMode_Run\n    MOTIONSTATE_JETPACK = 1398696542 // MotionState_Jetpack\n}",
+    "local ped = PlayerPedId()\n-- Example usage for FORCE_PED_MOTION_STATE\nForcePedMotionState(ped, GetHashKey('prop'), false, 0, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/ForcePedMotionState.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

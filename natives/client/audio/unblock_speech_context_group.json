@@ -1,0 +1,24 @@
+{
+  "title": "UNBLOCK_SPEECH_CONTEXT_GROUP",
+  "breadcrumbs": [
+    "Native Reference",
+    "AUDIOAPI",
+    "UNBLOCK_SPEECH_CONTEXT_GROUP"
+  ],
+  "content": "0x2ACABED337622DF2// UnblockSpeechContextGroup\nvoid UNBLOCK_SPEECH_CONTEXT_GROUP(char* groupName);Parameters:groupName: Context group name to unblock.NativeDB Introduced: v1493Removes all instances of a given context block.",
+  "codeBlocks": [
+    "// UnblockSpeechContextGroup\nvoid UNBLOCK_SPEECH_CONTEXT_GROUP(char* groupName);",
+    "NativeDB Introduced: v1493",
+    "-- Example usage for UNBLOCK_SPEECH_CONTEXT_GROUP\nUnblockSpeechContextGroup('')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/AUDIO/UnblockSpeechContextGroup.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "title": "GET_VEHICLE_NODE_IS_GPS_ALLOWED",
+  "breadcrumbs": [
+    "Native Reference",
+    "PATHFINDAPI",
+    "GET_VEHICLE_NODE_IS_GPS_ALLOWED"
+  ],
+  "content": "0xA2AE5C478B96E3B60xEE4B1219// GetVehicleNodeIsGpsAllowed\nBOOL GET_VEHICLE_NODE_IS_GPS_ALLOWED(int nodeID);Returns false for nodes that aren't used for GPS routes.\nExample:\nNodes in Fort Zancudo and LSIA are false\nOld name:  _GET_SUPPORTS_GPS_ROUTE_FLAG",
+  "codeBlocks": [
+    "// GetVehicleNodeIsGpsAllowed\nBOOL GET_VEHICLE_NODE_IS_GPS_ALLOWED(int nodeID);",
+    "Returns false for nodes that aren't used for GPS routes.\nExample:\nNodes in Fort Zancudo and LSIA are false",
+    "-- Example usage for GET_VEHICLE_NODE_IS_GPS_ALLOWED\nGetVehicleNodeIsGpsAllowed(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PATHFIND/GetVehicleNodeIsGpsAllowed.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

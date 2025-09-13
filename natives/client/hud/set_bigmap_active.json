@@ -1,0 +1,24 @@
+{
+  "title": "SET_BIGMAP_ACTIVE",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "SET_BIGMAP_ACTIVE"
+  ],
+  "content": "0x231C8F89D0539D8F0x08EB83D2// SetBigmapActive\nvoid SET_BIGMAP_ACTIVE(BOOL toggleBigMap, BOOL showFullMap);Parameters:toggleBigMap: Enable or disable the expanded minimap.showFullMap: Enable or disable the full map from being shown on the minimap, requires p0 to be true.Toggles the big minimap state like in GTA:Online.To get the current state of the minimap, use IS_BIGMAP_ACTIVE.Old name:  _SET_RADAR_BIGMAP_ENABLED",
+  "codeBlocks": [
+    "// SetBigmapActive\nvoid SET_BIGMAP_ACTIVE(BOOL toggleBigMap, BOOL showFullMap);",
+    "-- Example usage for SET_BIGMAP_ACTIVE\nSetBigmapActive(false, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/SetBigmapActive.md",
+    "https://docs.fivem.net/natives/?_0xFFF65C63",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

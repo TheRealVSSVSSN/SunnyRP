@@ -1,0 +1,25 @@
+{
+  "title": "GET_NEXT_BLIP_INFO_ID",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "GET_NEXT_BLIP_INFO_ID"
+  ],
+  "content": "0x14F96AA50D6FBEA70x9356E92F// GetNextBlipInfoId\nBlip GET_NEXT_BLIP_INFO_ID(int blipSprite);Parameters:blipSprite: Sprite ID, see the Game Reference for the full list.Returns: Returns the next blip ID in an interator that has the specified blip sprite.Examples:Luafunction GetAllBlipsWithSprite(blip_sprite)\n  local current_blip = GetFirstBlipInfoId(blip_sprite)\n  local blips_array = {}\n\n  if not DoesBlipExist(current_blip) then \n    print('there are no blips with this sprite set') \n    return blips_array \n  end\n\n  while DoesBlipExist(current_blip) do\n    table.insert(blips_array, current_blip)\n    current_blip = GetNextBlipInfoId(blip_sprite)\n  end\n\n  return blips_array\nend",
+  "codeBlocks": [
+    "// GetNextBlipInfoId\nBlip GET_NEXT_BLIP_INFO_ID(int blipSprite);",
+    "function GetAllBlipsWithSprite(blip_sprite)\n  local current_blip = GetFirstBlipInfoId(blip_sprite)\n  local blips_array = {}\n\n  if not DoesBlipExist(current_blip) then \n    return blips_array \n  end\n\n  while DoesBlipExist(current_blip) do\n    table.insert(blips_array, current_blip)\n    current_blip = GetNextBlipInfoId(blip_sprite)\n  end\n\n  return blips_array\nend",
+    "-- Example usage for GET_NEXT_BLIP_INFO_ID\nGetNextBlipInfoId(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/GetNextBlipInfoId.md",
+    "https://docs.fivem.net/docs/game-references/blips/",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "title": "SET_PED_WALLA_DENSITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "AUDIOAPI",
+    "SET_PED_WALLA_DENSITY"
+  ],
+  "content": "0x149AEE66F0CB3A990xE64F97A0// SetPedWallaDensity\nvoid SET_PED_WALLA_DENSITY(float density, float applyValue);Parameters:density: desired walla densityapplyValue: how much the desired density affects the actual oneOverrides the calculated ped density that is used to modulate the ambient ped walla sounds (in exteriors only)If you want to use this for interiors, use SET_PED_INTERIOR_WALLA_DENSITY",
+  "codeBlocks": [
+    "// SetPedWallaDensity\nvoid SET_PED_WALLA_DENSITY(float density, float applyValue);",
+    "-- Example usage for SET_PED_WALLA_DENSITY\nSetPedWallaDensity(0.0, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/AUDIO/SetPedWallaDensity.md",
+    "https://docs.fivem.net/natives/?_0x8BF907833BE275DE",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

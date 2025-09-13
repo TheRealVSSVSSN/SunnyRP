@@ -1,0 +1,25 @@
+{
+  "title": "SET_PED_PHONE_PALETTE_IDX",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "SET_PED_PHONE_PALETTE_IDX"
+  ],
+  "content": "0x83A169EABCDB10A2// SetPedPhonePaletteIdx\nvoid SET_PED_PHONE_PALETTE_IDX(Ped ped, int index);Parameters:ped: The Ped whose phone palette is to be set.index: The index of the color palette to apply to the ped's phone.Sets the palette index of a ped's phone.ValueColor0Light Blue1Green2Red3Orange4Grey5Purple6PinkNativeDB Introduced: v323Examples:LuaJavaScriptC#-- Define a table with color names mapped to their corresponding palette indices for phone colors\nlocal PhoneColors = {\n    Blue = 0,\n    Green = 1,\n    Red = 2,\n    Orange = 3,\n    Grey = 4,\n    Purple = 5,\n    Pink = 6\n}\n\n-- Retrieve the current player ped\nlocal playerPed = PlayerPedId()\n\n-- Set the phone color of the player's ped to Green using the corresponding index from the PhoneColors table\nSetPedPhonePaletteIdx(playerPed, PhoneColors.Green)",
+  "codeBlocks": [
+    "// SetPedPhonePaletteIdx\nvoid SET_PED_PHONE_PALETTE_IDX(Ped ped, int index);",
+    "NativeDB Introduced: v323",
+    "-- Define a table with color names mapped to their corresponding palette indices for phone colors\nlocal PhoneColors = {\n    Blue = 0,\n    Green = 1,\n    Red = 2,\n    Orange = 3,\n    Grey = 4,\n    Purple = 5,\n    Pink = 6\n}\n\n-- Retrieve the current player ped\nlocal playerPed = PlayerPedId()\n\n-- Set the phone color of the player's ped to Green using the corresponding index from the PhoneColors table\nSetPedPhonePaletteIdx(playerPed, PhoneColors.Green)",
+    "local ped = PlayerPedId()\n-- Example usage for SET_PED_PHONE_PALETTE_IDX\nSetPedPhonePaletteIdx(ped, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/SetPedPhonePaletteIdx.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

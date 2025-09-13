@@ -1,0 +1,23 @@
+{
+  "title": "CLEAR_PED_TASKS",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "CLEAR_PED_TASKS"
+  ],
+  "content": "0xE1EF3C1216AFF2CD0xDE3316AB// ClearPedTasks\nvoid CLEAR_PED_TASKS(Ped ped);Parameters:ped: Ped id. Use PlayerPedId() for your own character.Clear a ped's tasks. Stop animations and other tasks created by scripts.",
+  "codeBlocks": [
+    "// ClearPedTasks\nvoid CLEAR_PED_TASKS(Ped ped);",
+    "local ped = PlayerPedId()\n-- Example usage for CLEAR_PED_TASKS\nClearPedTasks(ped)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/ClearPedTasks.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

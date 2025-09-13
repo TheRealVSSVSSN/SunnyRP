@@ -1,0 +1,26 @@
+{
+  "title": "REGISTER_PEDHEADSHOT",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "REGISTER_PEDHEADSHOT"
+  ],
+  "content": "0x44626587884250760xFFE2667B// RegisterPedheadshot\nint REGISTER_PEDHEADSHOT(Ped ped);Parameters:ped: The ped you want to take the \"headshot\" of.Returns: It returns a Pedheadshot handle, which can be used by natives such as GET_PEDHEADSHOT_TXD_STRINGgtaforums.com/topic/885580-ped-headshotmugshot-txd/  Examples:LuaJavaScriptCreateThread(function()\n    -- Get the ped headshot image.\n    local handle = RegisterPedheadshot(PlayerPedId())\n    while not IsPedheadshotReady(handle) or not IsPedheadshotValid(handle) do\n        Wait(0)\n    end\n    local txd = GetPedheadshotTxdString(handle)\n\n    -- Add the notification text, the more text you add the smaller the font\n    -- size will become (text is forced on 1 line only), so keep this short!\n    SetNotificationTextEntry(\"STRING\")\n    AddTextComponentSubstringPlayerName(\"Headshot\")\n\n    -- Draw the notification\n    DrawNotificationAward(txd, txd, 200, 0, \"FM_GEN_UNLOCK\")\n\n    -- Cleanup after yourself!\n    UnregisterPedheadshot(handle)\nend)",
+  "codeBlocks": [
+    "// RegisterPedheadshot\nint REGISTER_PEDHEADSHOT(Ped ped);",
+    "gtaforums.com/topic/885580-ped-headshotmugshot-txd/",
+    "CreateThread(function()\n    -- Get the ped headshot image.\n    local handle = RegisterPedheadshot(PlayerPedId())\n    while not IsPedheadshotReady(handle) or not IsPedheadshotValid(handle) do\n        Wait(0)\n    end\n    local txd = GetPedheadshotTxdString(handle)\n\n    -- Add the notification text, the more text you add the smaller the font\n    -- size will become (text is forced on 1 line only), so keep this short!\n    SetNotificationTextEntry(\"STRING\")\n    AddTextComponentSubstringPlayerName(\"Headshot\")\n\n    -- Draw the notification\n    DrawNotificationAward(txd, txd, 200, 0, \"FM_GEN_UNLOCK\")\n\n    -- Cleanup after yourself!\n    UnregisterPedheadshot(handle)\nend)",
+    "local ped = PlayerPedId()\n-- Example usage for REGISTER_PEDHEADSHOT\nRegisterPedheadshot(ped)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/RegisterPedheadshot.md",
+    "https://docs.fivem.net/natives/?_0xDB4EACD4AD0A5D6B",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

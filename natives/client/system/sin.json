@@ -1,0 +1,24 @@
+{
+  "title": "SIN",
+  "breadcrumbs": [
+    "Native Reference",
+    "SYSTEMAPI",
+    "SIN"
+  ],
+  "content": "0x0BADBFA3B172435F0xBF987F58// Sin\nfloat SIN(float value);Parameters:value: The number of degrees (in degrees, not radians)Returns: The sine of the given numberReturns the sine of the given number.Examples:Lua-- Get the heading\nlocal heading = GetEntityHeading(PlayerPedId())\nlocal sin = Sin(heading)\n\n-- equivalent in lua\nlocal sinLua = math.sin(heading * (math.pi / 180))",
+  "codeBlocks": [
+    "// Sin\nfloat SIN(float value);",
+    "-- Get the heading\nlocal heading = GetEntityHeading(PlayerPedId())\nlocal sin = Sin(heading)\n\n-- equivalent in lua\nlocal sinLua = math.sin(heading * (math.pi / 180))",
+    "-- Example usage for SIN\nSin(0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/SYSTEM/Sin.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

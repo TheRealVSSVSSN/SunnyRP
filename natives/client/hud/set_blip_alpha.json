@@ -1,0 +1,24 @@
+{
+  "title": "SET_BLIP_ALPHA",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "SET_BLIP_ALPHA"
+  ],
+  "content": "0x45FF974EEE1C87340xA791FCCD// SetBlipAlpha\nvoid SET_BLIP_ALPHA(Blip blip, int alpha);Sets alpha-channel for blip color.\nExample:\nBlip blip = HUD::ADD_BLIP_FOR_ENTITY(entity);\nHUD::SET_BLIP_COLOUR(blip , 3);\nHUD::SET_BLIP_ALPHA(blip , 64);",
+  "codeBlocks": [
+    "// SetBlipAlpha\nvoid SET_BLIP_ALPHA(Blip blip, int alpha);",
+    "Sets alpha-channel for blip color.\nExample:\nBlip blip = HUD::ADD_BLIP_FOR_ENTITY(entity);\nHUD::SET_BLIP_COLOUR(blip , 3);\nHUD::SET_BLIP_ALPHA(blip , 64);",
+    "-- Example usage for SET_BLIP_ALPHA\nSetBlipAlpha(0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/SetBlipAlpha.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

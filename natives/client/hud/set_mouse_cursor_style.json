@@ -1,0 +1,24 @@
+{
+  "title": "SET_MOUSE_CURSOR_STYLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "SET_MOUSE_CURSOR_STYLE"
+  ],
+  "content": "0x8DB8CFFD58B62552// SetMouseCursorStyle\nvoid SET_MOUSE_CURSOR_STYLE(int style);Parameters:style: Which sprite to change to, see declared enum eMousePointerStyle.Changes the mouse style.enum eMousePointerStyle {\n\tARROW = 1,\n\tARROW_DIMMED = 2,\n\tHAND_OPEN = 3,\n\tHAND_GRAB = 4,\n\tHAND_MIDDLE_FINGER = 5,\n\tARROW_LEFT = 6,\n\tARROW_RIGHT = 7,\n\tARROW_UP = 8,\n\tARROW_DOWN = 9,\n\tARROW_TRIMMING = 10,\n\tARROW_PLUS = 11,\n\tARROW_MINUS = 12\n};\nOld name:  _SET_CURSOR_SPRITEOld name:  _SET_MOUSE_CURSOR_SPRITE",
+  "codeBlocks": [
+    "// SetMouseCursorStyle\nvoid SET_MOUSE_CURSOR_STYLE(int style);",
+    "enum eMousePointerStyle {\n\tARROW = 1,\n\tARROW_DIMMED = 2,\n\tHAND_OPEN = 3,\n\tHAND_GRAB = 4,\n\tHAND_MIDDLE_FINGER = 5,\n\tARROW_LEFT = 6,\n\tARROW_RIGHT = 7,\n\tARROW_UP = 8,\n\tARROW_DOWN = 9,\n\tARROW_TRIMMING = 10,\n\tARROW_PLUS = 11,\n\tARROW_MINUS = 12\n};",
+    "-- Example usage for SET_MOUSE_CURSOR_STYLE\nSetMouseCursorStyle(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/SetMouseCursorStyle.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

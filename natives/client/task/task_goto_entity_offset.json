@@ -1,0 +1,24 @@
+{
+  "title": "TASK_GOTO_ENTITY_OFFSET",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "TASK_GOTO_ENTITY_OFFSET"
+  ],
+  "content": "0xE39B4FF4FDEBDE270x1A17A85E// TaskGotoEntityOffset\nvoid TASK_GOTO_ENTITY_OFFSET(Ped ped, Entity entity, int duration, float seekRadius, float seekAngleDeg, float moveBlendRatio, int gotoEntityOffsetFlags);Parameters:ped: The ped handleentity: The target entity handleduration: The duration in seconds or -1 for foreverseekRadius: How many meters the destination is from the entityseekAngleDeg: The angle the destination is from the entitymoveBlendRatio: The move blend ratio (speed)gotoEntityOffsetFlags: The goto entity offset flagsInstructs the ped to go to the entity with the given offset.enum eSeekEntityOffsetFlags {\n    ESEEK_OFFSET_ORIENTATES_WITH_ENTITY = 1,\n    ESEEK_KEEP_TO_PAVEMENTS = 2\n};",
+  "codeBlocks": [
+    "// TaskGotoEntityOffset\nvoid TASK_GOTO_ENTITY_OFFSET(Ped ped, Entity entity, int duration, float seekRadius, float seekAngleDeg, float moveBlendRatio, int gotoEntityOffsetFlags);",
+    "enum eSeekEntityOffsetFlags {\n    ESEEK_OFFSET_ORIENTATES_WITH_ENTITY = 1,\n    ESEEK_KEEP_TO_PAVEMENTS = 2\n};",
+    "local ped = PlayerPedId()\nlocal entity = PlayerPedId()\n-- Example usage for TASK_GOTO_ENTITY_OFFSET\nTaskGotoEntityOffset(ped, entity, 0, 0.0, 0.0, 0.0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/TaskGotoEntityOffset.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

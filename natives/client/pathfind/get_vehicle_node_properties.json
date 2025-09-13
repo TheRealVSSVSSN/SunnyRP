@@ -1,0 +1,24 @@
+{
+  "title": "GET_VEHICLE_NODE_PROPERTIES",
+  "breadcrumbs": [
+    "Native Reference",
+    "PATHFINDAPI",
+    "GET_VEHICLE_NODE_PROPERTIES"
+  ],
+  "content": "0x0568566ACBB5DEDC0xCC90110B// GetVehicleNodeProperties\nBOOL GET_VEHICLE_NODE_PROPERTIES(float x, float y, float z, int* density, int* flags);Parameters:x: x position of searchy: y position of searchz: z position of searchdensity: The traffic density the current node will spawn in a range of 0-15.flags: The vehicle node flags, see eVehicleNodeProperties.Returns: Returns true if the node was found, or false if the node was not found, or was not streamed in.Gets the density and flags of the closest node to the specified position.\\\nDensity is a value between 0 and 15, indicating how busy the road is.enum eVehicleNodeProperties {\n\tOFF_ROAD = 1 << 0,\n\tON_PLAYERS_ROAD =  1 << 1,\n\tNO_BIG_VEHICLES = 1 << 2,\n\tSWITCHED_OFF = 1 << 3,\n\tTUNNEL_OR_INTERIOR = 1 << 4,\n\tLEADS_TO_DEAD_END = 1 << 5,\n\tHIGHWAY = 1 << 6,\n\tJUNCTION = 1 << 7,\n\tTRAFFIC_LIGHT = 1 << 8,\n\tGIVE_WAY = 1 << 9,\n\tWATER = 1 << 10,\n}",
+  "codeBlocks": [
+    "// GetVehicleNodeProperties\nBOOL GET_VEHICLE_NODE_PROPERTIES(float x, float y, float z, int* density, int* flags);",
+    "enum eVehicleNodeProperties {\n\tOFF_ROAD = 1 << 0,\n\tON_PLAYERS_ROAD =  1 << 1,\n\tNO_BIG_VEHICLES = 1 << 2,\n\tSWITCHED_OFF = 1 << 3,\n\tTUNNEL_OR_INTERIOR = 1 << 4,\n\tLEADS_TO_DEAD_END = 1 << 5,\n\tHIGHWAY = 1 << 6,\n\tJUNCTION = 1 << 7,\n\tTRAFFIC_LIGHT = 1 << 8,\n\tGIVE_WAY = 1 << 9,\n\tWATER = 1 << 10,\n}",
+    "-- Example usage for GET_VEHICLE_NODE_PROPERTIES\nGetVehicleNodeProperties(0.0, 0.0, 0.0, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PATHFIND/GetVehicleNodeProperties.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

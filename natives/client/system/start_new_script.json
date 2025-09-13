@@ -1,0 +1,24 @@
+{
+  "title": "START_NEW_SCRIPT",
+  "breadcrumbs": [
+    "Native Reference",
+    "SYSTEMAPI",
+    "START_NEW_SCRIPT"
+  ],
+  "content": "0xE81651AD79516E480x3F166D0E// StartNewScript\nint START_NEW_SCRIPT(char* scriptName, int stackSize);Examples:\n g_384A = SYSTEM::START_NEW_SCRIPT(\"cellphone_flashhand\", 1424);\n l_10D = SYSTEM::START_NEW_SCRIPT(\"taxiService\", 1828);\n SYSTEM::START_NEW_SCRIPT(\"AM_MP_YACHT\", 5000);\n SYSTEM::START_NEW_SCRIPT(\"emergencycall\", 512);\n SYSTEM::START_NEW_SCRIPT(\"emergencycall\", 512);\n SYSTEM::START_NEW_SCRIPT(\"FM_maintain_cloud_header_data\", 1424);\n SYSTEM::START_NEW_SCRIPT(\"FM_Mission_Controller\", 31000);\n SYSTEM::START_NEW_SCRIPT(\"tennis_family\", 3650);\n SYSTEM::START_NEW_SCRIPT(\"Celebrations\", 3650);\nDecompiled examples of usage when starting a script:\n\n    SCRIPT::REQUEST_SCRIPT(a_0);\n    if (SCRIPT::HAS_SCRIPT_LOADED(a_0)) {\n        SYSTEM::START_NEW_SCRIPT(a_0, v_3);\n        SCRIPT::SET_SCRIPT_AS_NO_LONGER_NEEDED(a_0);\n        return 1;\n    }\n\nor:\n    v_2 = \"MrsPhilips2\";\n    SCRIPT::REQUEST_SCRIPT(v_2);\n    while (!SCRIPT::HAS_SCRIPT_LOADED(v_2)) {\n    SCRIPT::REQUEST_SCRIPT(v_2);\n    SYSTEM::WAIT(0);\n    }\n    sub_8792(36);\n    SYSTEM::START_NEW_SCRIPT(v_2, 17000);\n    SCRIPT::SET_SCRIPT_AS_NO_LONGER_NEEDED(v_2);\nAll native script names: pastebin.com/K9adDsu4 and pastebin.com/yLNWicUi",
+  "codeBlocks": [
+    "// StartNewScript\nint START_NEW_SCRIPT(char* scriptName, int stackSize);",
+    "Examples:\n g_384A = SYSTEM::START_NEW_SCRIPT(\"cellphone_flashhand\", 1424);\n l_10D = SYSTEM::START_NEW_SCRIPT(\"taxiService\", 1828);\n SYSTEM::START_NEW_SCRIPT(\"AM_MP_YACHT\", 5000);\n SYSTEM::START_NEW_SCRIPT(\"emergencycall\", 512);\n SYSTEM::START_NEW_SCRIPT(\"emergencycall\", 512);\n SYSTEM::START_NEW_SCRIPT(\"FM_maintain_cloud_header_data\", 1424);\n SYSTEM::START_NEW_SCRIPT(\"FM_Mission_Controller\", 31000);\n SYSTEM::START_NEW_SCRIPT(\"tennis_family\", 3650);\n SYSTEM::START_NEW_SCRIPT(\"Celebrations\", 3650);\nDecompiled examples of usage when starting a script:\n\n    SCRIPT::REQUEST_SCRIPT(a_0);\n    if (SCRIPT::HAS_SCRIPT_LOADED(a_0)) {\n        SYSTEM::START_NEW_SCRIPT(a_0, v_3);\n        SCRIPT::SET_SCRIPT_AS_NO_LONGER_NEEDED(a_0);\n        return 1;\n    }\n\nor:\n    v_2 = \"MrsPhilips2\";\n    SCRIPT::REQUEST_SCRIPT(v_2);\n    while (!SCRIPT::HAS_SCRIPT_LOADED(v_2)) {\n    SCRIPT::REQUEST_SCRIPT(v_2);\n    SYSTEM::WAIT(0);\n    }\n    sub_8792(36);\n    SYSTEM::START_NEW_SCRIPT(v_2, 17000);\n    SCRIPT::SET_SCRIPT_AS_NO_LONGER_NEEDED(v_2);\nAll native script names: pastebin.com/K9adDsu4 and pastebin.com/yLNWicUi",
+    "-- Example usage for START_NEW_SCRIPT\nStartNewScript('', 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/SYSTEM/StartNewScript.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

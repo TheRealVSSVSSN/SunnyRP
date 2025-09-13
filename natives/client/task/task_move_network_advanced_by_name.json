@@ -1,0 +1,24 @@
+{
+  "title": "TASK_MOVE_NETWORK_ADVANCED_BY_NAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "TASK_MOVE_NETWORK_ADVANCED_BY_NAME"
+  ],
+  "content": "0xD5B35BEA41919ACB0x71A5C5DB// TaskMoveNetworkAdvancedByName\nvoid TASK_MOVE_NETWORK_ADVANCED_BY_NAME(Ped ped, char* p1, float p2, float p3, float p4, float p5, float p6, float p7, Any p8, float p9, BOOL p10, char* animDict, int flags);Example:\nTASK::TASK_MOVE_NETWORK_ADVANCED_BY_NAME(PLAYER::PLAYER_PED_ID(), \"minigame_tattoo_michael_parts\", 324.13f, 181.29f, 102.6f, 0.0f, 0.0f, 22.32f, 2, 0, false, 0, 0);\nOld name:  _TASK_MOVE_NETWORK_ADVANCED",
+  "codeBlocks": [
+    "// TaskMoveNetworkAdvancedByName\nvoid TASK_MOVE_NETWORK_ADVANCED_BY_NAME(Ped ped, char* p1, float p2, float p3, float p4, float p5, float p6, float p7, Any p8, float p9, BOOL p10, char* animDict, int flags);",
+    "Example:\nTASK::TASK_MOVE_NETWORK_ADVANCED_BY_NAME(PLAYER::PLAYER_PED_ID(), \"minigame_tattoo_michael_parts\", 324.13f, 181.29f, 102.6f, 0.0f, 0.0f, 22.32f, 2, 0, false, 0, 0);",
+    "local ped = PlayerPedId()\n-- Example usage for TASK_MOVE_NETWORK_ADVANCED_BY_NAME\nTaskMoveNetworkAdvancedByName(ped, '', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0.0, false, '', 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/TaskMoveNetworkAdvancedByName.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

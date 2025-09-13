@@ -1,0 +1,24 @@
+{
+  "title": "BEGIN_TEXT_COMMAND_THEFEED_POST",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "BEGIN_TEXT_COMMAND_THEFEED_POST"
+  ],
+  "content": "0x202709F4C58A04240x574EE85C// BeginTextCommandThefeedPost\nvoid BEGIN_TEXT_COMMAND_THEFEED_POST(char* text);Parameters:text: The text label to use.Declares the entry type of a notification, for example \"STRING\".\nint ShowNotification(char *text)\n{\nBEGIN_TEXT_COMMAND_THEFEED_POST(\"STRING\");\nADD_TEXT_COMPONENT_SUBSTRING_PLAYER_NAME(text);\nreturn _DRAW_NOTIFICATION(1, 1);\n}Old name:  _SET_NOTIFICATION_TEXT_ENTRYExamples:LuaBeginTextCommandThefeedPost(\"STRING\")\nAddTextComponentSubstringPlayerName(\"Hello \" .. GetPlayerName(PlayerId()) .. \".\")\nEndTextCommandThefeedPostTicker(true, true)",
+  "codeBlocks": [
+    "// BeginTextCommandThefeedPost\nvoid BEGIN_TEXT_COMMAND_THEFEED_POST(char* text);",
+    "BeginTextCommandThefeedPost(\"STRING\")\nAddTextComponentSubstringPlayerName(\"Hello \" .. GetPlayerName(PlayerId()) .. \".\")\nEndTextCommandThefeedPostTicker(true, true)",
+    "-- Example usage for BEGIN_TEXT_COMMAND_THEFEED_POST\nBeginTextCommandThefeedPost('')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/BeginTextCommandThefeedPost.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

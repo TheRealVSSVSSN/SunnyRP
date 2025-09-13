@@ -1,0 +1,24 @@
+{
+  "title": "GET_FILENAME_FOR_AUDIO_CONVERSATION",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "GET_FILENAME_FOR_AUDIO_CONVERSATION"
+  ],
+  "content": "0x7B5280EBA9840C720x95C4B5AD// GetFilenameForAudioConversation\nchar* GET_FILENAME_FOR_AUDIO_CONVERSATION(char* labelName);Parameters:labelName: The label name for which the audio conversation filename is requested.Returns: Returns the filename associated with the provided labelName.Gets a localized string literal from a label name. This is used to get the filename of the audio conversation associated with the provided label name.Old name:  _GET_LABEL_TEXTExamples:LuaJavaScriptC#-- Get the vehicle in which the player is currently seated\nlocal vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n\n-- Get the model of the vehicle\nlocal model = GetEntityModel(vehicle)\n\n-- Get the display name of the vehicle model\nlocal displayName = GetDisplayNameFromVehicleModel(model)\n\n-- Get the label text for the audio conversation associated with the display name\nlocal label = GetFilenameForAudioConversation(displayName)\n\n-- Print the label text\nprint(label)",
+  "codeBlocks": [
+    "// GetFilenameForAudioConversation\nchar* GET_FILENAME_FOR_AUDIO_CONVERSATION(char* labelName);",
+    "-- Get the vehicle in which the player is currently seated\nlocal vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n\n-- Get the model of the vehicle\nlocal model = GetEntityModel(vehicle)\n\n-- Get the display name of the vehicle model\nlocal displayName = GetDisplayNameFromVehicleModel(model)\n\n-- Get the label text for the audio conversation associated with the display name\nlocal label = GetFilenameForAudioConversation(displayName)\n\n-- Print the label text",
+    "-- Example usage for GET_FILENAME_FOR_AUDIO_CONVERSATION\nGetFilenameForAudioConversation('')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/GetFilenameForAudioConversation.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

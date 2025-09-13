@@ -1,0 +1,23 @@
+{
+  "title": "SET_PED_MAX_TIME_UNDERWATER",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "SET_PED_MAX_TIME_UNDERWATER"
+  ],
+  "content": "0x6BA428C528D9E5220x082EF240// SetPedMaxTimeUnderwater\nvoid SET_PED_MAX_TIME_UNDERWATER(Ped ped, float value);Parameters:ped: Ped id.value: Time in seconds. Maximum is 50.0, any value above will be changed to 50.0.Set the maximum time a ped can stay underwater. Maximum seems to be 50 seconds.",
+  "codeBlocks": [
+    "// SetPedMaxTimeUnderwater\nvoid SET_PED_MAX_TIME_UNDERWATER(Ped ped, float value);",
+    "local ped = PlayerPedId()\n-- Example usage for SET_PED_MAX_TIME_UNDERWATER\nSetPedMaxTimeUnderwater(ped, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/SetPedMaxTimeUnderwater.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

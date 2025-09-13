@@ -1,0 +1,23 @@
+{
+  "title": "SET_PED_SUFFERS_CRITICAL_HITS",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "SET_PED_SUFFERS_CRITICAL_HITS"
+  ],
+  "content": "0xEBD76F2359F190AC0x6F6FC7E6// SetPedSuffersCriticalHits\nvoid SET_PED_SUFFERS_CRITICAL_HITS(Ped ped, BOOL toggle);Ped no longer takes critical damage modifiers if set to FALSE.Example: Headshotting a player no longer one shots them. Instead they will take the same damage as a torso shot.",
+  "codeBlocks": [
+    "// SetPedSuffersCriticalHits\nvoid SET_PED_SUFFERS_CRITICAL_HITS(Ped ped, BOOL toggle);",
+    "local ped = PlayerPedId()\n-- Example usage for SET_PED_SUFFERS_CRITICAL_HITS\nSetPedSuffersCriticalHits(ped, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/SetPedSuffersCriticalHits.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

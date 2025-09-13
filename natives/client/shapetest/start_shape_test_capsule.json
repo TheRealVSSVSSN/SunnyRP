@@ -1,0 +1,24 @@
+{
+  "title": "START_SHAPE_TEST_CAPSULE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SHAPETESTAPI",
+    "START_SHAPE_TEST_CAPSULE"
+  ],
+  "content": "0x28579D1B8F8AAC800x591EA833// StartShapeTestCapsule\nint START_SHAPE_TEST_CAPSULE(float x1, float y1, float z1, float x2, float y2, float z2, float radius, int flags, Entity entity, int p9);Parameters:x1: Starting X coordinate.y1: Starting Y coordinate.z1: Starting Z coordinate.x2: Ending X coordinate.y2: Ending Y coordinate.z2: Ending Z coordinate.radius: flags: See START_SHAPE_TEST_LOS_PROBEentity: Entity to ignore, or 0.p9: A bit mask with bits 1, 2, 4, or 7 relating to collider types. 4 and 7 are usually used.Raycast from point to point, where the ray has a radius.Old name:  _CAST_3D_RAY_POINT_TO_POINT",
+  "codeBlocks": [
+    "// StartShapeTestCapsule\nint START_SHAPE_TEST_CAPSULE(float x1, float y1, float z1, float x2, float y2, float z2, float radius, int flags, Entity entity, int p9);",
+    "local entity = PlayerPedId()\n-- Example usage for START_SHAPE_TEST_CAPSULE\nStartShapeTestCapsule(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, entity, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/SHAPETEST/StartShapeTestCapsule.md",
+    "https://docs.fivem.net/natives/?_0x7EE9F5D83DD4F90E",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

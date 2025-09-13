@@ -1,0 +1,23 @@
+{
+  "title": "EXPLODE_PED_HEAD",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "EXPLODE_PED_HEAD"
+  ],
+  "content": "0x2D05CED3A38D0F3A0x05CC1380// ExplodePedHead\nvoid EXPLODE_PED_HEAD(Ped ped, Hash weaponHash);Parameters:ped: The ped to lethally injure.weaponHash: The weapon to attribute the damage to.Applies lethal damage (FLT_MAX) to the SKEL_Head bone of the specified ped using the weapon passed, leading to the\nped's untimely demise.The naming of the native is a legacy leftover (formerly EXPLODE_CHAR_HEAD in GTA3) as in the early 3D GTA games, lethal\ndamage to a ped head would 'explode' it.Do note that this native function does not work in multiplayer/network environment.",
+  "codeBlocks": [
+    "// ExplodePedHead\nvoid EXPLODE_PED_HEAD(Ped ped, Hash weaponHash);",
+    "local ped = PlayerPedId()\n-- Example usage for EXPLODE_PED_HEAD\nExplodePedHead(ped, GetHashKey('prop'))"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/ExplodePedHead.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

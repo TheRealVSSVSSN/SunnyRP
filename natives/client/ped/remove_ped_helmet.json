@@ -1,0 +1,23 @@
+{
+  "title": "REMOVE_PED_HELMET",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "REMOVE_PED_HELMET"
+  ],
+  "content": "0xA7B2458D0AD6DED80x2086B1F0// RemovePedHelmet\nvoid REMOVE_PED_HELMET(Ped ped, BOOL instantly);Parameters:ped: Ped index.instantly: Force to remove.Remove a helmet from a ped",
+  "codeBlocks": [
+    "// RemovePedHelmet\nvoid REMOVE_PED_HELMET(Ped ped, BOOL instantly);",
+    "local ped = PlayerPedId()\n-- Example usage for REMOVE_PED_HELMET\nRemovePedHelmet(ped, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/RemovePedHelmet.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

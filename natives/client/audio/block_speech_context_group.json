@@ -1,0 +1,24 @@
+{
+  "title": "BLOCK_SPEECH_CONTEXT_GROUP",
+  "breadcrumbs": [
+    "Native Reference",
+    "AUDIOAPI",
+    "BLOCK_SPEECH_CONTEXT_GROUP"
+  ],
+  "content": "0xA8A7D434AFB4B97B// BlockSpeechContextGroup\nvoid BLOCK_SPEECH_CONTEXT_GROUP(char* groupName, int contextBlockTarget);Parameters:groupName: the name of the context group to be blockedcontextBlockTarget: the group of peds that should be used (refer to eAudContextBlockTarget)enum eAudContextBlockTarget {\n\tAUD_CONTEXT_BLOCK_PLAYER = 0,\n\tAUD_CONTEXT_BLOCK_NPCS = 1,\n\tAUD_CONTEXT_BLOCK_BUDDYS = 2,\n\tAUD_CONTEXT_BLOCK_EVERYONE = 3,\n\n\tAUD_CONTEXT_BLOCK_TARGETS_TOTAL\n}\nStop a certain group of peds from using a certain group of speech contexts.Note that the block will be automatically removed when the calling script finishes",
+  "codeBlocks": [
+    "// BlockSpeechContextGroup\nvoid BLOCK_SPEECH_CONTEXT_GROUP(char* groupName, int contextBlockTarget);",
+    "enum eAudContextBlockTarget {\n\tAUD_CONTEXT_BLOCK_PLAYER = 0,\n\tAUD_CONTEXT_BLOCK_NPCS = 1,\n\tAUD_CONTEXT_BLOCK_BUDDYS = 2,\n\tAUD_CONTEXT_BLOCK_EVERYONE = 3,\n\n\tAUD_CONTEXT_BLOCK_TARGETS_TOTAL\n}",
+    "-- Example usage for BLOCK_SPEECH_CONTEXT_GROUP\nBlockSpeechContextGroup('', 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/AUDIO/BlockSpeechContextGroup.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

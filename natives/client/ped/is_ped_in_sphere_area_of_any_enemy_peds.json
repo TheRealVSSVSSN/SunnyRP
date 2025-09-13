@@ -1,0 +1,24 @@
+{
+  "title": "IS_PED_IN_SPHERE_AREA_OF_ANY_ENEMY_PEDS",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "IS_PED_IN_SPHERE_AREA_OF_ANY_ENEMY_PEDS"
+  ],
+  "content": "0x082D79E15302F0C2// IsPedInSphereAreaOfAnyEnemyPeds\nBOOL IS_PED_IN_SPHERE_AREA_OF_ANY_ENEMY_PEDS(Ped ped, float x, float y, float z, float range);Parameters:ped: The ped to check.x: X coordinatey: Y coordinatez: Z coordinaterange: Radius of sphere.Returns: Returns true if ped is within range of any enemies, false otherwise.NativeDB Introduced: v3407",
+  "codeBlocks": [
+    "// IsPedInSphereAreaOfAnyEnemyPeds\nBOOL IS_PED_IN_SPHERE_AREA_OF_ANY_ENEMY_PEDS(Ped ped, float x, float y, float z, float range);",
+    "NativeDB Introduced: v3407",
+    "local ped = PlayerPedId()\n-- Example usage for IS_PED_IN_SPHERE_AREA_OF_ANY_ENEMY_PEDS\nIsPedInSphereAreaOfAnyEnemyPeds(ped, 0.0, 0.0, 0.0, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/IsPedInSphereAreaOfAnyEnemyPeds.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

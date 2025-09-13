@@ -1,0 +1,24 @@
+{
+  "title": "IS_EXPLOSION_IN_SPHERE",
+  "breadcrumbs": [
+    "Native Reference",
+    "FIREAPI",
+    "IS_EXPLOSION_IN_SPHERE"
+  ],
+  "content": "0xAB0F816885B0E4830xD455A7F3// IsExplosionInSphere\nBOOL IS_EXPLOSION_IN_SPHERE(int explosionType, float x, float y, float z, float radius);Parameters:explosionType: See ADD_EXPLOSION.x: y: z: radius:",
+  "codeBlocks": [
+    "// IsExplosionInSphere\nBOOL IS_EXPLOSION_IN_SPHERE(int explosionType, float x, float y, float z, float radius);",
+    "-- Example usage for IS_EXPLOSION_IN_SPHERE\nIsExplosionInSphere(0, 0.0, 0.0, 0.0, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/FIRE/IsExplosionInSphere.md",
+    "https://docs.fivem.net/natives/?_0xE3AD2BDBAEE269AC",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

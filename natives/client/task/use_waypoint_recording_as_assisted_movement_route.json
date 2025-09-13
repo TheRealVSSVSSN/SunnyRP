@@ -1,0 +1,23 @@
+{
+  "title": "USE_WAYPOINT_RECORDING_AS_ASSISTED_MOVEMENT_ROUTE",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "USE_WAYPOINT_RECORDING_AS_ASSISTED_MOVEMENT_ROUTE"
+  ],
+  "content": "0x5A353B8E6B1095B50x4DFD5FEC// UseWaypointRecordingAsAssistedMovementRoute\nvoid USE_WAYPOINT_RECORDING_AS_ASSISTED_MOVEMENT_ROUTE(char* name, BOOL p1, float p2, float p3);Parameters:name: Waypoint recording name.p1: p2: p3:",
+  "codeBlocks": [
+    "// UseWaypointRecordingAsAssistedMovementRoute\nvoid USE_WAYPOINT_RECORDING_AS_ASSISTED_MOVEMENT_ROUTE(char* name, BOOL p1, float p2, float p3);",
+    "-- Example usage for USE_WAYPOINT_RECORDING_AS_ASSISTED_MOVEMENT_ROUTE\nUseWaypointRecordingAsAssistedMovementRoute('', false, 0.0, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/UseWaypointRecordingAsAssistedMovementRoute.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

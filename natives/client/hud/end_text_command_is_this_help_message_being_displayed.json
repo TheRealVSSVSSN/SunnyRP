@@ -1,0 +1,24 @@
+{
+  "title": "END_TEXT_COMMAND_IS_THIS_HELP_MESSAGE_BEING_DISPLAYED",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "END_TEXT_COMMAND_IS_THIS_HELP_MESSAGE_BEING_DISPLAYED"
+  ],
+  "content": "0x10BDDBFC529428DD0xF63A13EC// EndTextCommandIsThisHelpMessageBeingDisplayed\nBOOL END_TEXT_COMMAND_IS_THIS_HELP_MESSAGE_BEING_DISPLAYED(int hudIndex);Parameters:hudIndex: The hud index for help message.Returns: true: Indicates if the specific help message has been displayed.\\\nfalse: Indicates that the specific help message is still being displayed.Returns whether a specific help message is being displayed or not.enum HudIndexes {\n    HELP_TEXT = 0,\n    FLOATING_HELP_TEXT_1 = 1,\n    FLOATING_HELP_TEXT_2 = 2,\n}",
+  "codeBlocks": [
+    "// EndTextCommandIsThisHelpMessageBeingDisplayed\nBOOL END_TEXT_COMMAND_IS_THIS_HELP_MESSAGE_BEING_DISPLAYED(int hudIndex);",
+    "enum HudIndexes {\n    HELP_TEXT = 0,\n    FLOATING_HELP_TEXT_1 = 1,\n    FLOATING_HELP_TEXT_2 = 2,\n}",
+    "-- Example usage for END_TEXT_COMMAND_IS_THIS_HELP_MESSAGE_BEING_DISPLAYED\nEndTextCommandIsThisHelpMessageBeingDisplayed(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/EndTextCommandIsThisHelpMessageBeingDisplayed.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

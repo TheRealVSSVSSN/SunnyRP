@@ -1,0 +1,25 @@
+{
+  "title": "ADD_PATROL_ROUTE_LINK",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "ADD_PATROL_ROUTE_LINK"
+  ],
+  "content": "0x23083260DEC3A5510xD8761BB3// AddPatrolRouteLink\nvoid ADD_PATROL_ROUTE_LINK(int id1, int id2);Parameters:id1: the id representing the first route nodeid2: the id representing the second route nodeconnects/links 2 route nodes\\\nimage representing the cyclic example below:\\\nExamples:Lua-- these lines connect 1,2,3,4,5,6 in a cyclic manner (1 > 2 > 3 > 4 > 5 > 6 > 1)\n\n\nAddPatrolRouteLink(1,2)\nAddPatrolRouteLink(2,3)\nAddPatrolRouteLink(3,4)\nAddPatrolRouteLink(4,5)\nAddPatrolRouteLink(5,6)\nAddPatrolRouteLink(6,1)",
+  "codeBlocks": [
+    "// AddPatrolRouteLink\nvoid ADD_PATROL_ROUTE_LINK(int id1, int id2);",
+    "-- these lines connect 1,2,3,4,5,6 in a cyclic manner (1 > 2 > 3 > 4 > 5 > 6 > 1)\n\n\nAddPatrolRouteLink(1,2)\nAddPatrolRouteLink(2,3)\nAddPatrolRouteLink(3,4)\nAddPatrolRouteLink(4,5)\nAddPatrolRouteLink(5,6)\nAddPatrolRouteLink(6,1)",
+    "-- Example usage for ADD_PATROL_ROUTE_LINK\nAddPatrolRouteLink(0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/AddPatrolRouteLink.md",
+    "https://docs.fivem.net/natives/?_0x8EDF950167586B7C",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

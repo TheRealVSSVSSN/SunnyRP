@@ -1,0 +1,24 @@
+{
+  "title": "GET_PED_PROP_TEXTURE_INDEX",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "GET_PED_PROP_TEXTURE_INDEX"
+  ],
+  "content": "0xE131A28626F81AB20x922A6653// GetPedPropTextureIndex\nint GET_PED_PROP_TEXTURE_INDEX(Ped ped, int componentId);Parameters:ped: The ped handle.componentId: The component id to get the prop texture index from. Refer to SET_PED_COMPONENT_VARIATION.",
+  "codeBlocks": [
+    "// GetPedPropTextureIndex\nint GET_PED_PROP_TEXTURE_INDEX(Ped ped, int componentId);",
+    "local ped = PlayerPedId()\n-- Example usage for GET_PED_PROP_TEXTURE_INDEX\nGetPedPropTextureIndex(ped, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/GetPedPropTextureIndex.md",
+    "https://docs.fivem.net/natives/?_0x262B14F48D29DE80",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

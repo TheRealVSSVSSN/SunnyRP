@@ -1,0 +1,25 @@
+{
+  "title": "GET_FIRST_BLIP_INFO_ID",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "GET_FIRST_BLIP_INFO_ID"
+  ],
+  "content": "0x1BEDE233E6CD2A1F0x64C0273D// GetFirstBlipInfoId\nBlip GET_FIRST_BLIP_INFO_ID(int blipSprite);Parameters:blipSprite: Sprite ID, see the Blips Game Reference for the full list.Returns: Returns the first blip ID in an interator that has the specified blip sprite.Also see GET_NEXT_BLIP_INFO_ID for an example.",
+  "codeBlocks": [
+    "// GetFirstBlipInfoId\nBlip GET_FIRST_BLIP_INFO_ID(int blipSprite);",
+    "-- Example usage for GET_FIRST_BLIP_INFO_ID\nGetFirstBlipInfoId(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/GetFirstBlipInfoId.md",
+    "https://docs.fivem.net/docs/game-references/blips/",
+    "https://docs.fivem.net/natives/?_0x14F96AA50D6FBEA7",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

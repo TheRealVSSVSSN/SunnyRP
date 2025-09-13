@@ -1,0 +1,23 @@
+{
+  "title": "PREPARE_SYNCHRONIZED_AUDIO_EVENT",
+  "breadcrumbs": [
+    "Native Reference",
+    "AUDIOAPI",
+    "PREPARE_SYNCHRONIZED_AUDIO_EVENT"
+  ],
+  "content": "0xC7ABCACA4985A7660xE1D91FD0// PrepareSynchronizedAudioEvent\nBOOL PREPARE_SYNCHRONIZED_AUDIO_EVENT(char* audioEvent, int startOffsetMs);Parameters:audioEvent: The audio event name.startOffsetMs: Unused parameter (since v323)",
+  "codeBlocks": [
+    "// PrepareSynchronizedAudioEvent\nBOOL PREPARE_SYNCHRONIZED_AUDIO_EVENT(char* audioEvent, int startOffsetMs);",
+    "-- Example usage for PREPARE_SYNCHRONIZED_AUDIO_EVENT\nPrepareSynchronizedAudioEvent('', 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/AUDIO/PrepareSynchronizedAudioEvent.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

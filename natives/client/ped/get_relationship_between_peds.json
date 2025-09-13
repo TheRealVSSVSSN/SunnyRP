@@ -1,0 +1,24 @@
+{
+  "title": "GET_RELATIONSHIP_BETWEEN_PEDS",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "GET_RELATIONSHIP_BETWEEN_PEDS"
+  ],
+  "content": "0xEBA5AD3A0EAF71210xE254C39C// GetRelationshipBetweenPeds\nint GET_RELATIONSHIP_BETWEEN_PEDS(Ped ped1, Ped ped2);Gets the relationship between two peds. This should be called twice (once for each ped).  \nRelationship types:  \n0 = Companion  \n1 = Respect  \n2 = Like  \n3 = Neutral  \n4 = Dislike  \n5 = Hate  \n255 = Pedestrians  \n(Credits: Inco)  \nExample:  \nPED::GET_RELATIONSHIP_BETWEEN_PEDS(2, l_1017, 0xA49E591C);  \nPED::GET_RELATIONSHIP_BETWEEN_PEDS(2, 0xA49E591C, l_1017);",
+  "codeBlocks": [
+    "// GetRelationshipBetweenPeds\nint GET_RELATIONSHIP_BETWEEN_PEDS(Ped ped1, Ped ped2);",
+    "Gets the relationship between two peds. This should be called twice (once for each ped).  \nRelationship types:  \n0 = Companion  \n1 = Respect  \n2 = Like  \n3 = Neutral  \n4 = Dislike  \n5 = Hate  \n255 = Pedestrians  \n(Credits: Inco)  \nExample:  \nPED::GET_RELATIONSHIP_BETWEEN_PEDS(2, l_1017, 0xA49E591C);  \nPED::GET_RELATIONSHIP_BETWEEN_PEDS(2, 0xA49E591C, l_1017);",
+    "local ped = PlayerPedId()\n-- Example usage for GET_RELATIONSHIP_BETWEEN_PEDS\nGetRelationshipBetweenPeds(ped, ped)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/GetRelationshipBetweenPeds.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

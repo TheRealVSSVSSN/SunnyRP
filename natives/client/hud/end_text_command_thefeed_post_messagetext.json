@@ -1,0 +1,25 @@
+{
+  "title": "END_TEXT_COMMAND_THEFEED_POST_MESSAGETEXT",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "END_TEXT_COMMAND_THEFEED_POST_MESSAGETEXT"
+  ],
+  "content": "0x1CCD9A37359072CF0xE7E3C98B// EndTextCommandThefeedPostMessagetext\nint END_TEXT_COMMAND_THEFEED_POST_MESSAGETEXT(char* textureDict, char* textureName, BOOL flash, int iconType, char* sender, char* subject);Parameters:textureDict: The texture dictionary for the icon.textureName: The texture name for the icon.flash: Flash, doesn't seem to work no matter what.iconType: The icon type, see the list in the description below.sender: The notification title.subject: The notification subtitle.Returns: The notification handle.Sets some extra options for a notification. It adds an image (or icon type) and sets a notification title (sender) and subtitle (subject).Texture dictionary and texture name parameters are usually the same exact value.Example result:Old description with list of possible icons and texture names:List of picNames: pastebin.com/XdpJVbHz  \nflash is a bool for fading in.  \niconTypes:  \n1 : Chat Box  \n2 : Email  \n3 : Add Friend Request  \n4 : Nothing  \n5 : Nothing  \n6 : Nothing  \n7 : Right Jumping Arrow  \n8 : RP Icon  \n9 : $ Icon  \n\"sender\" is the very top header. This can be any old string.  \n\"subject\" is the header under the sender.  \nOld name:  _SET_NOTIFICATION_MESSAGEExamples:LuaCitizen.CreateThread(function()\n    -- Get the ped headshot image.\n    local handle = RegisterPedheadshot(PlayerPedId())\n    while not IsPedheadshotReady(handle) or not IsPedheadshotValid(handle) do\n        Citizen.Wait(0)\n    end\n    local txd = GetPedheadshotTxdString(handle)\n\n    -- Add the notification text\n    BeginTextCommandThefeedPost(\"STRING\")\n    AddTextComponentSubstringPlayerName(\"This is the private message :o\")\n\n    -- Set the notification icon, title and subtitle.\n    local title = GetPlayerName(PlayerId())\n    local subtitle = \"Private Message\"\n    local iconType = 0\n    local flash = false -- Flash doesn't seem to work no matter what.\n    EndTextCommandThefeedPostMessagetext(txd, txd, flash, iconType, title, subtitle)\n\n    -- Draw the notification\n    local showInBrief = true\n    local blink = false -- blink doesn't work when using icon notifications.\n    EndTextCommandThefeedPostTicker(blink, showInBrief)\n    \n    -- Cleanup after yourself!\n    UnregisterPedheadshot(handle)\nend)",
+  "codeBlocks": [
+    "// EndTextCommandThefeedPostMessagetext\nint END_TEXT_COMMAND_THEFEED_POST_MESSAGETEXT(char* textureDict, char* textureName, BOOL flash, int iconType, char* sender, char* subject);",
+    "List of picNames: pastebin.com/XdpJVbHz  \nflash is a bool for fading in.  \niconTypes:  \n1 : Chat Box  \n2 : Email  \n3 : Add Friend Request  \n4 : Nothing  \n5 : Nothing  \n6 : Nothing  \n7 : Right Jumping Arrow  \n8 : RP Icon  \n9 : $ Icon  \n\"sender\" is the very top header. This can be any old string.  \n\"subject\" is the header under the sender.",
+    "Citizen.CreateThread(function()\n    -- Get the ped headshot image.\n    local handle = RegisterPedheadshot(PlayerPedId())\n    while not IsPedheadshotReady(handle) or not IsPedheadshotValid(handle) do\n        Citizen.Wait(0)\n    end\n    local txd = GetPedheadshotTxdString(handle)\n\n    -- Add the notification text\n    BeginTextCommandThefeedPost(\"STRING\")\n    AddTextComponentSubstringPlayerName(\"This is the private message :o\")\n\n    -- Set the notification icon, title and subtitle.\n    local title = GetPlayerName(PlayerId())\n    local subtitle = \"Private Message\"\n    local iconType = 0\n    local flash = false -- Flash doesn't seem to work no matter what.\n    EndTextCommandThefeedPostMessagetext(txd, txd, flash, iconType, title, subtitle)\n\n    -- Draw the notification\n    local showInBrief = true\n    local blink = false -- blink doesn't work when using icon notifications.\n    EndTextCommandThefeedPostTicker(blink, showInBrief)\n    \n    -- Cleanup after yourself!\n    UnregisterPedheadshot(handle)\nend)",
+    "-- Example usage for END_TEXT_COMMAND_THEFEED_POST_MESSAGETEXT\nEndTextCommandThefeedPostMessagetext('', '', false, 0, '', '')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/EndTextCommandThefeedPostMessagetext.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "title": "GET_PED_PALETTE_VARIATION",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "GET_PED_PALETTE_VARIATION"
+  ],
+  "content": "0xE3DD5F2A84B422810xEF1BC082// GetPedPaletteVariation\nint GET_PED_PALETTE_VARIATION(Ped ped, int componentId);Parameters:ped: The ped handle.componentId: The component id to get the palette variation from. Refer to SET_PED_COMPONENT_VARIATION.",
+  "codeBlocks": [
+    "// GetPedPaletteVariation\nint GET_PED_PALETTE_VARIATION(Ped ped, int componentId);",
+    "local ped = PlayerPedId()\n-- Example usage for GET_PED_PALETTE_VARIATION\nGetPedPaletteVariation(ped, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/GetPedPaletteVariation.md",
+    "https://docs.fivem.net/natives/?_0x262B14F48D29DE80",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "title": "GET_VEHICLE_PED_IS_IN",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "GET_VEHICLE_PED_IS_IN"
+  ],
+  "content": "0x9A9112A0FE9A47130xAFE92319// GetVehiclePedIsIn\nVehicle GET_VEHICLE_PED_IS_IN(Ped ped, BOOL lastVehicle);Parameters:ped: The target pedlastVehicle: A boolean value where false represents the current vehicle the Ped is in, and true represents the last vehicle the Ped was in.Returns: The vehicle id. Returns 0 if the ped is/was not in a vehicle.Retrieves the vehicle the specified ped is currently in, or the last vehicle they were in.Examples:LuaJavaScriptC#-- This example gets the vehicle the player is currently in and print the vehicle id.\n\n-- Retrieve the LocalPlayer.\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the vehicle the player is currently in. \nlocal vehicle = GetVehiclePedIsIn(playerPed, false)\n\n-- Check if the vehicle exists in the game world.\nif not DoesEntityExist(vehicle) then \n    -- If the vehicle does not exist, end the execution of the code here.\n    return \nend\n\n-- Print the vehicle id\nprint(\"Vehicle ID: \" .. vehicle)",
+  "codeBlocks": [
+    "// GetVehiclePedIsIn\nVehicle GET_VEHICLE_PED_IS_IN(Ped ped, BOOL lastVehicle);",
+    "-- This example gets the vehicle the player is currently in and print the vehicle id.\n\n-- Retrieve the LocalPlayer.\nlocal playerPed = PlayerPedId()\n\n-- Retrieve the vehicle the player is currently in. \nlocal vehicle = GetVehiclePedIsIn(playerPed, false)\n\n-- Check if the vehicle exists in the game world.\nif not DoesEntityExist(vehicle) then \n    -- If the vehicle does not exist, end the execution of the code here.\n    return \nend\n\n-- Print the vehicle id",
+    "local ped = PlayerPedId()\n-- Example usage for GET_VEHICLE_PED_IS_IN\nGetVehiclePedIsIn(ped, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/GetVehiclePedIsIn.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}
