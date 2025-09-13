@@ -1,0 +1,25 @@
+{
+  "title": "GET_TIMECYCLE_VAR_NAME_BY_INDEX",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_TIMECYCLE_VAR_NAME_BY_INDEX"
+  ],
+  "content": "0xC6C55AAF// GetTimecycleVarNameByIndex\nchar* GET_TIMECYCLE_VAR_NAME_BY_INDEX(int varIndex);Parameters:varIndex: The index of variable.Returns: The name of a timecycle variable.See GET_TIMECYCLE_VAR_COUNT.Examples:Lualocal varCount = GetTimecycleVarCount()\n\nif varCount ~= 0 then\n  for index = 0, varCount - 1 do\n    local varName = GetTimecycleVarNameByIndex(index)\n    local varDefault = GetTimecycleVarDefaultValueByIndex(index)\n\n    print(string.format(\"[%d] %s (%f)\", index, varName, varDefault))\n  end\nend",
+  "codeBlocks": [
+    "// GetTimecycleVarNameByIndex\nchar* GET_TIMECYCLE_VAR_NAME_BY_INDEX(int varIndex);",
+    "local varCount = GetTimecycleVarCount()\n\nif varCount ~= 0 then\n  for index = 0, varCount - 1 do\n    local varName = GetTimecycleVarNameByIndex(index)\n    local varDefault = GetTimecycleVarDefaultValueByIndex(index)\n\n  end\nend",
+    "-- Example usage for GET_TIMECYCLE_VAR_NAME_BY_INDEX\nGetTimecycleVarNameByIndex(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetTimecycleVarNameByIndex.md",
+    "https://docs.fivem.net/natives/?_0x838B34D8",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

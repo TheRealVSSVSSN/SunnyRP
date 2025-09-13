@@ -136,9 +136,7 @@ function main() {
 
   for (const native of slice) {
     native.codeBlocks = sanitizeCodeBlocks(native.codeBlocks);
-    if (native.codeBlocks.length < 2) {
-      native.codeBlocks.push(generateExample(native));
-    }
+    native.codeBlocks.push(generateExample(native));
     const { scope, category } = classify(native);
     const dir = path.join(OUTPUT_ROOT, scope, category);
     fs.mkdirSync(dir, { recursive: true });

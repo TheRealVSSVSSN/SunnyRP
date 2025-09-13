@@ -1,0 +1,23 @@
+{
+  "title": "GET_RUNTIME_TEXTURE_HEIGHT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_RUNTIME_TEXTURE_HEIGHT"
+  ],
+  "content": "0x3574AACE// GetRuntimeTextureHeight\nint GET_RUNTIME_TEXTURE_HEIGHT(long tex);Parameters:tex: A handle to the runtime texture.Returns: The height in pixels.Gets the height of the specified runtime texture.",
+  "codeBlocks": [
+    "// GetRuntimeTextureHeight\nint GET_RUNTIME_TEXTURE_HEIGHT(long tex);",
+    "-- Example usage for GET_RUNTIME_TEXTURE_HEIGHT\nGetRuntimeTextureHeight(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetRuntimeTextureHeight.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

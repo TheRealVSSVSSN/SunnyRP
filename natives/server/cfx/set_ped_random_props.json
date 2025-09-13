@@ -1,0 +1,24 @@
+{
+  "title": "SET_PED_RANDOM_PROPS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_PED_RANDOM_PROPS"
+  ],
+  "content": "0xE3318E0E// SetPedRandomProps\nvoid SET_PED_RANDOM_PROPS(Ped ped);Parameters:ped: The ped handle.SET_PED_RANDOM_PROPSThis is the server-side RPC native equivalent of the client native SET_PED_RANDOM_PROPS.",
+  "codeBlocks": [
+    "// SetPedRandomProps\nvoid SET_PED_RANDOM_PROPS(Ped ped);",
+    "local ped = PlayerPedId()\n-- Example usage for SET_PED_RANDOM_PROPS\nSetPedRandomProps(ped)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetPedRandomProps.md",
+    "https://docs.fivem.net/natives/?_0xC44AA05345C992C6",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "title": "SET_SUPER_JUMP_THIS_FRAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "SET_SUPER_JUMP_THIS_FRAME"
+  ],
+  "content": "0x57FFF03E423A4C0B0x86745EF3// SetSuperJumpThisFrame\nvoid SET_SUPER_JUMP_THIS_FRAME(Player player);Parameters:player: The player we are setting this for.Allows the player to perform super jumps. This function must be called every frame for it to work.\nIt basically OR's a flag for a single frame, allowing the ped to perform a super jump only when the flag is set.Examples:LuaCitizen.CreateThread(function()\n    while true do\n        SetSuperJumpThisFrame(PlayerId())\n        -- Try enabling the two down below if you also want invincibility and no ragdoll effects\n        --SetPlayerInvincible(PlayerId(), true)\n        --SetPedCanRagdoll(PlayerPedId(), false)\n        Citizen.Wait(0)\n    end\nend)",
+  "codeBlocks": [
+    "// SetSuperJumpThisFrame\nvoid SET_SUPER_JUMP_THIS_FRAME(Player player);",
+    "Citizen.CreateThread(function()\n    while true do\n        SetSuperJumpThisFrame(PlayerId())\n        -- Try enabling the two down below if you also want invincibility and no ragdoll effects\n        --SetPlayerInvincible(PlayerId(), true)\n        --SetPedCanRagdoll(PlayerPedId(), false)\n        Citizen.Wait(0)\n    end\nend)",
+    "local player = PlayerId()\n-- Example usage for SET_SUPER_JUMP_THIS_FRAME\nSetSuperJumpThisFrame(player)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/SetSuperJumpThisFrame.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

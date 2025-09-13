@@ -1,0 +1,24 @@
+{
+  "title": "GET_TRAIN_CRUISE_SPEED",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_TRAIN_CRUISE_SPEED"
+  ],
+  "content": "0xA4921EF5// GetTrainCruiseSpeed\nfloat GET_TRAIN_CRUISE_SPEED(Vehicle train);Parameters:train: The train handleReturns: The desired cruise speed of the train. Not the speed the train is currently traveling atGets the trains desired speed.",
+  "codeBlocks": [
+    "// GetTrainCruiseSpeed\nfloat GET_TRAIN_CRUISE_SPEED(Vehicle train);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for GET_TRAIN_CRUISE_SPEED\nGetTrainCruiseSpeed(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetTrainCruiseSpeed.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client",
+    "server"
+  ]
+}

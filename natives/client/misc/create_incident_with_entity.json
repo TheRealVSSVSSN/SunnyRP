@@ -1,0 +1,25 @@
+{
+  "title": "CREATE_INCIDENT_WITH_ENTITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "CREATE_INCIDENT_WITH_ENTITY"
+  ],
+  "content": "0x05983472F0494E600xBBC35B03// CreateIncidentWithEntity\nBOOL CREATE_INCIDENT_WITH_ENTITY(int dispatchService, Ped ped, int numUnits, float radius, int* outIncidentID);Parameters:dispatchService: Refer to ENABLE_DISPATCH_SERVICE for dispatch typesped: numUnits: radius: outIncidentID: Returns: Returns true if the incident was succesfully madeNativeDB Added Parameter 6: Any p5\nNativeDB Added Parameter 7: Any p6",
+  "codeBlocks": [
+    "// CreateIncidentWithEntity\nBOOL CREATE_INCIDENT_WITH_ENTITY(int dispatchService, Ped ped, int numUnits, float radius, int* outIncidentID);",
+    "NativeDB Added Parameter 6: Any p5\nNativeDB Added Parameter 7: Any p6",
+    "local ped = PlayerPedId()\n-- Example usage for CREATE_INCIDENT_WITH_ENTITY\nCreateIncidentWithEntity(0, ped, 0, 0.0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/CreateIncidentWithEntity.md",
+    "https://docs.fivem.net/natives/?_0xDC0F817884CDD856",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

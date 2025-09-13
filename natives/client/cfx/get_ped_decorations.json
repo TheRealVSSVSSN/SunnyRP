@@ -1,0 +1,24 @@
+{
+  "title": "GET_PED_DECORATIONS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PED_DECORATIONS"
+  ],
+  "content": "0x7CCE1163// GetPedDecorations\nobject GET_PED_DECORATIONS(Ped ped);Parameters:ped: The ped you want to retrieve data for.Returns: An object containing a list of applied decorations.Returns a list of decorations applied to a ped.The data returned adheres to the following layout:[ [ collectionHash1, overlayHash1 ], ..., [c ollectionHashN, overlayHashN ] ]This command will return undefined data if invoked on a remote player ped.",
+  "codeBlocks": [
+    "// GetPedDecorations\nobject GET_PED_DECORATIONS(Ped ped);",
+    "[ [ collectionHash1, overlayHash1 ], ..., [c ollectionHashN, overlayHashN ] ]",
+    "local ped = PlayerPedId()\n-- Example usage for GET_PED_DECORATIONS\nGetPedDecorations(ped)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPedDecorations.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

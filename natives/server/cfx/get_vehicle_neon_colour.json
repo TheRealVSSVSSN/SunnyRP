@@ -1,0 +1,25 @@
+{
+  "title": "GET_VEHICLE_NEON_COLOUR",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_VEHICLE_NEON_COLOUR"
+  ],
+  "content": "0xD9319DCB// GetVehicleNeonColour\nvoid GET_VEHICLE_NEON_COLOUR(Vehicle vehicle, int* red, int* green, int* blue);Parameters:vehicle: The vehicle to check.red: Pointer to an integer where the red component of the neon color will be stored.green: Pointer to an integer where the green component of the neon color will be stored.blue: Pointer to an integer where the blue component of the neon color will be stored.Returns: None. The neon color values are retrieved and stored in the red, green, and blue pointers. Make sure to store the returned values in variables for further use.Getter to check the neon colour of a vehicle. This native is the server side getter of GET_VEHICLE_NEON_LIGHTS_COLOUR.Examples:LuaJavaScriptC#local vehicle = GetVehiclePedIsIn(GetPlayerPed(1), false) -- 1 is the source here\nlocal red, green, blue = GetVehicleNeonColour(vehicle)\nprint(red, green, blue)",
+  "codeBlocks": [
+    "// GetVehicleNeonColour\nvoid GET_VEHICLE_NEON_COLOUR(Vehicle vehicle, int* red, int* green, int* blue);",
+    "local vehicle = GetVehiclePedIsIn(GetPlayerPed(1), false) -- 1 is the source here\nlocal red, green, blue = GetVehicleNeonColour(vehicle)",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for GET_VEHICLE_NEON_COLOUR\nGetVehicleNeonColour(vehicle, 0, 0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetVehicleNeonColour.md",
+    "https://docs.fivem.net/natives/?_0x7619EEE8C886757F",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

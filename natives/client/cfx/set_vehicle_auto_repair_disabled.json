@@ -1,0 +1,23 @@
+{
+  "title": "SET_VEHICLE_AUTO_REPAIR_DISABLED",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_VEHICLE_AUTO_REPAIR_DISABLED"
+  ],
+  "content": "0x5F3A3574// SetVehicleAutoRepairDisabled\nvoid SET_VEHICLE_AUTO_REPAIR_DISABLED(Vehicle vehicle, BOOL value);Parameters:vehicle: The vehicle to set disable auto vehicle repair.value: Setting the value to  true prevents the vehicle from being repaired when a extra is enabled. Setting the value to false allows the vehicle from being repaired when a extra is enabled.Disables the vehicle from being repaired when a vehicle extra is enabled.",
+  "codeBlocks": [
+    "// SetVehicleAutoRepairDisabled\nvoid SET_VEHICLE_AUTO_REPAIR_DISABLED(Vehicle vehicle, BOOL value);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for SET_VEHICLE_AUTO_REPAIR_DISABLED\nSetVehicleAutoRepairDisabled(vehicle, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetVehicleAutoRepairDisabled.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

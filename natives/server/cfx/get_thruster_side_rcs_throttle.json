@@ -1,0 +1,23 @@
+{
+  "title": "GET_THRUSTER_SIDE_RCS_THROTTLE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_THRUSTER_SIDE_RCS_THROTTLE"
+  ],
+  "content": "0x1C939E87// GetThrusterSideRcsThrottle\nfloat GET_THRUSTER_SIDE_RCS_THROTTLE(Vehicle jetpack);Parameters:jetpack: The jetpack to check.Returns: Returns a value representing the side RCS (Reaction Control System) throttle of the jetpack. The values range from 0.0 (no throttle) to 1.0 (full throttle).",
+  "codeBlocks": [
+    "// GetThrusterSideRcsThrottle\nfloat GET_THRUSTER_SIDE_RCS_THROTTLE(Vehicle jetpack);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for GET_THRUSTER_SIDE_RCS_THROTTLE\nGetThrusterSideRcsThrottle(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetThrusterSideRcsThrottle.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

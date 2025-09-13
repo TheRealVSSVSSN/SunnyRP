@@ -1,0 +1,24 @@
+{
+  "title": "GET_INTERIOR_ROOM_NAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_INTERIOR_ROOM_NAME"
+  ],
+  "content": "0x11755DF2// GetInteriorRoomName\nchar* GET_INTERIOR_ROOM_NAME(int interiorId, int roomIndex);Parameters:interiorId: The target interior.roomIndex: Interior room index.Returns: Room's name.Examples:Lualocal playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\nlocal roomHash = GetRoomKeyFromEntity(playerPed)\nlocal roomId = GetInteriorRoomIndexByHash(interiorId, roomHash)\n\nif roomId ~= -1 then\n  local roomName = GetInteriorRoomName(interiorId, roomId)\n  print(\"current room name is: \" .. roomName)\nend",
+  "codeBlocks": [
+    "// GetInteriorRoomName\nchar* GET_INTERIOR_ROOM_NAME(int interiorId, int roomIndex);",
+    "local playerPed = PlayerPedId()\nlocal interiorId = GetInteriorFromEntity(playerPed)\nlocal roomHash = GetRoomKeyFromEntity(playerPed)\nlocal roomId = GetInteriorRoomIndexByHash(interiorId, roomHash)\n\nif roomId ~= -1 then\n  local roomName = GetInteriorRoomName(interiorId, roomId)\nend",
+    "-- Example usage for GET_INTERIOR_ROOM_NAME\nGetInteriorRoomName(0, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetInteriorRoomName.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

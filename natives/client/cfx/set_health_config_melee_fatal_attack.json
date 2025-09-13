@@ -1,0 +1,23 @@
+{
+  "title": "SET_HEALTH_CONFIG_MELEE_FATAL_ATTACK",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_HEALTH_CONFIG_MELEE_FATAL_ATTACK"
+  ],
+  "content": "0xDD443E53// SetHealthConfigMeleeFatalAttack\nvoid SET_HEALTH_CONFIG_MELEE_FATAL_ATTACK(char* configName, BOOL newValue);Parameters:configName: Name of health config.newValue: ValueSets default melee cardinal fatal attack value for specific health config.",
+  "codeBlocks": [
+    "// SetHealthConfigMeleeFatalAttack\nvoid SET_HEALTH_CONFIG_MELEE_FATAL_ATTACK(char* configName, BOOL newValue);",
+    "-- Example usage for SET_HEALTH_CONFIG_MELEE_FATAL_ATTACK\nSetHealthConfigMeleeFatalAttack('', false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetHealthConfigMeleeFatalAttack.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

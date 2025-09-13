@@ -1,0 +1,26 @@
+{
+  "title": "GET_RESOURCE_KVP_STRING",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_RESOURCE_KVP_STRING"
+  ],
+  "content": "0x5240DA5A// GetResourceKvpString\nchar* GET_RESOURCE_KVP_STRING(char* key);Parameters:key: The key to fetchReturns: The string value stored under the specified key, or nil/null if not found.A getter for SET_RESOURCE_KVP.Examples:Lualocal kvpValue = GetResourceKvpString('codfish') \nif kvpValue then\n\t-- do something!\nend",
+  "codeBlocks": [
+    "// GetResourceKvpString\nchar* GET_RESOURCE_KVP_STRING(char* key);",
+    "local kvpValue = GetResourceKvpString('codfish') \nif kvpValue then\n\t-- do something!\nend",
+    "-- Example usage for GET_RESOURCE_KVP_STRING\nGetResourceKvpString('')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetResourceKvpString.md",
+    "https://docs.fivem.net/natives/?_0x21C7A35B",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client",
+    "server"
+  ]
+}

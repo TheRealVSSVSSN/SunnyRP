@@ -1,0 +1,25 @@
+{
+  "title": "GET_VEHICLE_HAS_FLAG",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_VEHICLE_HAS_FLAG"
+  ],
+  "content": "0xD85C9F57// GetVehicleHasFlag\nbool GET_VEHICLE_HAS_FLAG(Vehicle vehicle, int flagIndex);Parameters:vehicle: The vehicle to obtain flags for.flagIndex: Flag index.Returns: A boolean for whether the flag is set.### Example`lua\nlocal vehicleFlags = {\n    FLAG_SMALL_WORKER = 0,\n    FLAG_BIG = 1,\n    FLAG_NO_BOOT = 2,\n    FLAG_ONLY_DURING_OFFICE_HOURS = 3\n    -- This is just a example, see fivem-docs to see all flags.\n}local function getAllVehicleFlags(vehicle)\n    local flags = {}\n    for i = 0, 256 do\n        if GetVehicleHasFlag(vehicle, i) then\n            flags#flags+1 = i\n        end\n    end\n    return flags\nendlocal flagsVehicle = GetVehiclePedIsIn(PlayerPedId(), false)\nprint(getAllVehicleFlags)const VEHICLE_FLAGS = {\n    FLAG_SMALL_WORKER: 0,\n    FLAG_BIG: 1,\n    FLAG_NO_BOOT: 2,\n    FLAG_ONLY_DURING_OFFICE_HOURS: 3\n    // This is just a example, see fivem-docs to see all flags.\n};\n\nfunction getAllVehicleFlags(mVehicle = GetVehiclePedIsIn(PlayerPedId(), false)) {\n    const flags = [];\n    for (let i = 0; i < 204; i++) {\n        if (GetVehicleHasFlag(mVehicle, i)) {\n            flags.push(i);\n        }\n    }\n    return flags;\n}\n\nlet flagsVehicle = GetVehiclePedIsIn(PlayerPedId(), false);\nconsole.log(getAllVehicleFlags);\n```Note: Flags are not the same based on your gamebuild. Please see here to see a complete list of all vehicle flags.Get vehicle.meta flag by index. Useful examples include FLAG_LAW_ENFORCEMENT (31), FLAG_RICH_CAR (36), FLAG_IS_ELECTRIC (43), FLAG_IS_OFFROAD_VEHICLE (48).",
+  "codeBlocks": [
+    "// GetVehicleHasFlag\nbool GET_VEHICLE_HAS_FLAG(Vehicle vehicle, int flagIndex);",
+    "const VEHICLE_FLAGS = {\n    FLAG_SMALL_WORKER: 0,\n    FLAG_BIG: 1,\n    FLAG_NO_BOOT: 2,\n    FLAG_ONLY_DURING_OFFICE_HOURS: 3\n    // This is just a example, see fivem-docs to see all flags.\n};\n\nfunction getAllVehicleFlags(mVehicle = GetVehiclePedIsIn(PlayerPedId(), false)) {\n    const flags = [];\n    for (let i = 0; i < 204; i++) {\n        if (GetVehicleHasFlag(mVehicle, i)) {\n            flags.push(i);\n        }\n    }\n    return flags;\n}\n\nlet flagsVehicle = GetVehiclePedIsIn(PlayerPedId(), false);\n```",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for GET_VEHICLE_HAS_FLAG\nGetVehicleHasFlag(vehicle, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetVehicleHasFlag.md",
+    "https://docs.fivem.net/docs/game-references/vehicle-references/vehicle-flags/",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

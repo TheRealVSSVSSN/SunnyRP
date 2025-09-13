@@ -1,0 +1,26 @@
+{
+  "title": "REMOVE_MODEL_HIDE",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENTITYAPI",
+    "REMOVE_MODEL_HIDE"
+  ],
+  "content": "0xD9E3006FB3CBD7650x993DBC10// RemoveModelHide\nvoid REMOVE_MODEL_HIDE(float x, float y, float z, float radius, Hash model, BOOL lazy);Parameters:x: X Coordinate of the sphere center.y: Y Coordinate of the sphere center.z: Z Coordinate of the sphere center.radius: Radius of the sphere.model: The model hash to make visible again.lazy: false to apply the change immediately.Makes all objects of the specified model that were hidden using CREATE_MODEL_HIDE or CREATE_MODEL_HIDE_EXCLUDING_SCRIPT_OBJECTS visible again.If lazy is false, all matching objects currently in scope are restored immediately.\nIf lazy is true, objects will only reappear when their map is reloaded.Examples:Lua-- This could be any coordinates, in this example I am using the players ped coordinates\nlocal playerPedCoords = GetEntityCoords(PlayerPedId())\n\n-- Hides all entities with the hash \"1437508529\" within 1.0 gta units.\nCreateModelHide(playerPedCoords, 1.0, 1437508529, true)\n\nCitizen.Wait(2500)\n\n-- This will make all hidden entities with the hash \"1437508529\" within 1.0 gta units visible.\nRemoveModelHide(playerPedCoords, 1.0, 1437508529, false)",
+  "codeBlocks": [
+    "// RemoveModelHide\nvoid REMOVE_MODEL_HIDE(float x, float y, float z, float radius, Hash model, BOOL lazy);",
+    "-- This could be any coordinates, in this example I am using the players ped coordinates\nlocal playerPedCoords = GetEntityCoords(PlayerPedId())\n\n-- Hides all entities with the hash \"1437508529\" within 1.0 gta units.\nCreateModelHide(playerPedCoords, 1.0, 1437508529, true)\n\nCitizen.Wait(2500)\n\n-- This will make all hidden entities with the hash \"1437508529\" within 1.0 gta units visible.\nRemoveModelHide(playerPedCoords, 1.0, 1437508529, false)",
+    "-- Example usage for REMOVE_MODEL_HIDE\nRemoveModelHide(0.0, 0.0, 0.0, 0.0, GetHashKey('prop'), false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/RemoveModelHide.md",
+    "https://docs.fivem.net/natives/?_0x8A97BCA30A0CE478",
+    "https://docs.fivem.net/natives/?_0x3A52AE588830BF7F",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

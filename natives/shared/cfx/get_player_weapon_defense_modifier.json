@@ -1,0 +1,25 @@
+{
+  "title": "GET_PLAYER_WEAPON_DEFENSE_MODIFIER",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_PLAYER_WEAPON_DEFENSE_MODIFIER"
+  ],
+  "content": "0xF1543251// GetPlayerWeaponDefenseModifier\nfloat GET_PLAYER_WEAPON_DEFENSE_MODIFIER(Player playerId);Parameters:playerId: The player index.Returns: The value of player weapon defense modifier.A getter for SET_PLAYER_WEAPON_DEFENSE_MODIFIER.",
+  "codeBlocks": [
+    "// GetPlayerWeaponDefenseModifier\nfloat GET_PLAYER_WEAPON_DEFENSE_MODIFIER(Player playerId);",
+    "local player = PlayerId()\n-- Example usage for GET_PLAYER_WEAPON_DEFENSE_MODIFIER\nGetPlayerWeaponDefenseModifier(player)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetPlayerWeaponDefenseModifier.md",
+    "https://docs.fivem.net/natives/?_0x2D83BC011CA14A3C",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client",
+    "server"
+  ]
+}

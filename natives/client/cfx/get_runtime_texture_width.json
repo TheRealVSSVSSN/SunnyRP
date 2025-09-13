@@ -1,0 +1,23 @@
+{
+  "title": "GET_RUNTIME_TEXTURE_WIDTH",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_RUNTIME_TEXTURE_WIDTH"
+  ],
+  "content": "0xC9F55558// GetRuntimeTextureWidth\nint GET_RUNTIME_TEXTURE_WIDTH(long tex);Parameters:tex: A handle to the runtime texture.Returns: The width in pixels.Gets the width of the specified runtime texture.",
+  "codeBlocks": [
+    "// GetRuntimeTextureWidth\nint GET_RUNTIME_TEXTURE_WIDTH(long tex);",
+    "-- Example usage for GET_RUNTIME_TEXTURE_WIDTH\nGetRuntimeTextureWidth(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetRuntimeTextureWidth.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

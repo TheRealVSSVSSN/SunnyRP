@@ -1,0 +1,23 @@
+{
+  "title": "ACTIVITY_FEED_CREATE",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "ACTIVITY_FEED_CREATE"
+  ],
+  "content": "0x4DCDF92BF64236CD// ActivityFeedCreate\nvoid ACTIVITY_FEED_CREATE(char* captionString, char* condensedCaptionString);Parameters:captionString: The main text or caption for the activity feed post. This is the primary message displayed in the feed entry.condensedCaptionString: A shorter or condensed version of the caption, used in cases where space is limited or a brief summary is required.Creates and opens a new activity feed post to start filling in.Note: This is a PS4 related native, resulting in a nullsub on the PC platform. This native won't do anything when invoked.",
+  "codeBlocks": [
+    "// ActivityFeedCreate\nvoid ACTIVITY_FEED_CREATE(char* captionString, char* condensedCaptionString);",
+    "-- Example usage for ACTIVITY_FEED_CREATE\nActivityFeedCreate('', '')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/ActivityFeedCreate.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

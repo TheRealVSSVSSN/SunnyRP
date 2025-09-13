@@ -1,0 +1,24 @@
+{
+  "title": "NEXT_ONSCREEN_KEYBOARD_RESULT_WILL_DISPLAY_USING_THESE_FONTS",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "NEXT_ONSCREEN_KEYBOARD_RESULT_WILL_DISPLAY_USING_THESE_FONTS"
+  ],
+  "content": "0x3ED1438C1F5C66120x3301EA47// NextOnscreenKeyboardResultWillDisplayUsingTheseFonts\nvoid NEXT_ONSCREEN_KEYBOARD_RESULT_WILL_DISPLAY_USING_THESE_FONTS(int fontBitField);Parameters:fontBitField: See the list above.enum eFontBitField\n{\n  FONT_BIT_STANDARD = 1,\n  FONT_BIT_CURSIVE = 2,\n  FONT_BIT_ROCKSTAR_TAG = 4\n  FONT_BIT_LEADERBOARD = 8\n  FONT_BIT_CONDENSED = 16\n  FONT_BIT_FIXED_WIDTH_NUMBERS = 32\n  FONT_BIT_CONDENSED_NOT_GAMERNAME = 64\n  FONT_BIT_PRICEDOWN = 128\n};",
+  "codeBlocks": [
+    "// NextOnscreenKeyboardResultWillDisplayUsingTheseFonts\nvoid NEXT_ONSCREEN_KEYBOARD_RESULT_WILL_DISPLAY_USING_THESE_FONTS(int fontBitField);",
+    "enum eFontBitField\n{\n  FONT_BIT_STANDARD = 1,\n  FONT_BIT_CURSIVE = 2,\n  FONT_BIT_ROCKSTAR_TAG = 4\n  FONT_BIT_LEADERBOARD = 8\n  FONT_BIT_CONDENSED = 16\n  FONT_BIT_FIXED_WIDTH_NUMBERS = 32\n  FONT_BIT_CONDENSED_NOT_GAMERNAME = 64\n  FONT_BIT_PRICEDOWN = 128\n};",
+    "-- Example usage for NEXT_ONSCREEN_KEYBOARD_RESULT_WILL_DISPLAY_USING_THESE_FONTS\nNextOnscreenKeyboardResultWillDisplayUsingTheseFonts(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/NextOnscreenKeyboardResultWillDisplayUsingTheseFonts.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

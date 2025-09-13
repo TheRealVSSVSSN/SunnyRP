@@ -1,0 +1,23 @@
+{
+  "title": "SET_TRACK_BRAKING_DISTANCE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_TRACK_BRAKING_DISTANCE"
+  ],
+  "content": "0x77EB78D0// SetTrackBrakingDistance\nvoid SET_TRACK_BRAKING_DISTANCE(int track, float brakingDistance);Parameters:track: The track id (between 0 - 27)brakingDistance: The new braking distanceSets the braking distance of the track. Used by trains to determine the point to slow down when entering a station.",
+  "codeBlocks": [
+    "// SetTrackBrakingDistance\nvoid SET_TRACK_BRAKING_DISTANCE(int track, float brakingDistance);",
+    "-- Example usage for SET_TRACK_BRAKING_DISTANCE\nSetTrackBrakingDistance(0, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetTrackBrakingDistance.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

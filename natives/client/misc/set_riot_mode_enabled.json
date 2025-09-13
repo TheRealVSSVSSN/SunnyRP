@@ -1,0 +1,23 @@
+{
+  "title": "SET_RIOT_MODE_ENABLED",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "SET_RIOT_MODE_ENABLED"
+  ],
+  "content": "0x2587A48BC88DFADF0xD9660339// SetRiotModeEnabled\nvoid SET_RIOT_MODE_ENABLED(BOOL toggle);Parameters:toggle: Turn on or off riot mode. Set to true to enable riot mode.Activates riot mode. All NPCs are being hostile to each other (including player). Also the game will give weapons (pistols, smgs) to random NPCs.",
+  "codeBlocks": [
+    "// SetRiotModeEnabled\nvoid SET_RIOT_MODE_ENABLED(BOOL toggle);",
+    "-- Example usage for SET_RIOT_MODE_ENABLED\nSetRiotModeEnabled(false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/SetRiotModeEnabled.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

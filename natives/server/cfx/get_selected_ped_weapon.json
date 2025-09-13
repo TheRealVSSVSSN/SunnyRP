@@ -1,0 +1,25 @@
+{
+  "title": "GET_SELECTED_PED_WEAPON",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_SELECTED_PED_WEAPON"
+  ],
+  "content": "0xD240123E// GetSelectedPedWeapon\nHash GET_SELECTED_PED_WEAPON(Ped ped);Parameters:ped: The target ped.Returns: The weapon hash.An alias of GET_CURRENT_PED_WEAPON.Note, the client-side GET_SELECTED_PED_WEAPON native returns the weapon selected via the HUD (weapon wheel). This data is not available to FXServer.",
+  "codeBlocks": [
+    "// GetSelectedPedWeapon\nHash GET_SELECTED_PED_WEAPON(Ped ped);",
+    "local ped = PlayerPedId()\n-- Example usage for GET_SELECTED_PED_WEAPON\nGetSelectedPedWeapon(ped)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetSelectedPedWeapon.md",
+    "https://docs.fivem.net/natives/?_0xB0237302",
+    "https://docs.fivem.net/natives/?_0x0A6DB4965674D243",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

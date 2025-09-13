@@ -1,0 +1,25 @@
+{
+  "title": "GET_RESOURCE_COMMANDS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_RESOURCE_COMMANDS"
+  ],
+  "content": "0x97628584// GetResourceCommands\nobject GET_RESOURCE_COMMANDS(char* resource);Returns: An object containing registered commands.Returns all commands registered by the specified resource.\nThe data returned adheres to the following layout:[\n{\n\"name\": \"cmdlist\",\n\"resource\": \"example_resource\",\n\"arity\" = -1,\n},\n{\n\"name\": \"command1\"\n\"resource\": \"example_resource2\",\n\"arity\" = -1,\n}\n]",
+  "codeBlocks": [
+    "// GetResourceCommands\nobject GET_RESOURCE_COMMANDS(char* resource);",
+    "[\n{\n\"name\": \"cmdlist\",\n\"resource\": \"example_resource\",\n\"arity\" = -1,\n},\n{\n\"name\": \"command1\"\n\"resource\": \"example_resource2\",\n\"arity\" = -1,\n}\n]",
+    "-- Example usage for GET_RESOURCE_COMMANDS\nGetResourceCommands('')"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetResourceCommands.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client",
+    "server"
+  ]
+}

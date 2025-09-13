@@ -1,0 +1,23 @@
+{
+  "title": "SET_VEHICLE_HANDLING_FIELD",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_VEHICLE_HANDLING_FIELD"
+  ],
+  "content": "0x2BA40795// SetVehicleHandlingField\nvoid SET_VEHICLE_HANDLING_FIELD(Vehicle vehicle, char* class_, char* fieldName, Any value);Parameters:vehicle: The vehicle to set data for.class_: The handling class to set. Only \"CHandlingData\" is supported at this time.fieldName: The field name to set. These match the keys in handling.meta.value: The value to set.Sets a handling override for a specific vehicle. Certain handling flags can only be set globally using SET_HANDLING_FIELD, this might require some experimentation.\nExample: SetVehicleHandlingField(vehicle, 'CHandlingData', 'fSteeringLock', 360.0)",
+  "codeBlocks": [
+    "// SetVehicleHandlingField\nvoid SET_VEHICLE_HANDLING_FIELD(Vehicle vehicle, char* class_, char* fieldName, Any value);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for SET_VEHICLE_HANDLING_FIELD\nSetVehicleHandlingField(vehicle, '', '', 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetVehicleHandlingField.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

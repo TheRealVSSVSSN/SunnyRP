@@ -1,0 +1,26 @@
+{
+  "title": "SET_RESOURCE_KVP_FLOAT_NO_SYNC",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_RESOURCE_KVP_FLOAT_NO_SYNC"
+  ],
+  "content": "0x3517BFBE// SetResourceKvpFloatNoSync\nvoid SET_RESOURCE_KVP_FLOAT_NO_SYNC(char* key, float value);Parameters:key: The key to setvalue: The value to writeNonsynchronous SET_RESOURCE_KVP_FLOAT operation; see FLUSH_RESOURCE_KVP.",
+  "codeBlocks": [
+    "// SetResourceKvpFloatNoSync\nvoid SET_RESOURCE_KVP_FLOAT_NO_SYNC(char* key, float value);",
+    "-- Example usage for SET_RESOURCE_KVP_FLOAT_NO_SYNC\nSetResourceKvpFloatNoSync('', 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetResourceKvpFloatNoSync.md",
+    "https://docs.fivem.net/natives/?_0x9ADD2938",
+    "https://docs.fivem.net/natives/?_0x5240DA5A",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client",
+    "server"
+  ]
+}

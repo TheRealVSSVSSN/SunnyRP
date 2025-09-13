@@ -1,0 +1,23 @@
+{
+  "title": "SET_REACTION_TO_VEHICLE_WITH_SIREN_DISABLED",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_REACTION_TO_VEHICLE_WITH_SIREN_DISABLED"
+  ],
+  "content": "0xB90BBC6E// SetReactionToVehicleWithSirenDisabled\nvoid SET_REACTION_TO_VEHICLE_WITH_SIREN_DISABLED(BOOL state);Parameters:state: Toggle on or off.This completely disables pedestrian vehicles from reacting to sirens. They will not try to do any maneuver to evade.",
+  "codeBlocks": [
+    "// SetReactionToVehicleWithSirenDisabled\nvoid SET_REACTION_TO_VEHICLE_WITH_SIREN_DISABLED(BOOL state);",
+    "-- Example usage for SET_REACTION_TO_VEHICLE_WITH_SIREN_DISABLED\nSetReactionToVehicleWithSirenDisabled(false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetReactionToVehicleWithSirenDisabled.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

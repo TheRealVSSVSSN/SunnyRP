@@ -1,0 +1,24 @@
+{
+  "title": "SET_VEHICLE_DIRT_LEVEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "SET_VEHICLE_DIRT_LEVEL"
+  ],
+  "content": "0x2B39128B// SetVehicleDirtLevel\nvoid SET_VEHICLE_DIRT_LEVEL(Vehicle vehicle, float dirtLevel);Parameters:vehicle: The vehicle to set.dirtLevel: A number between 0.0 and 15.0 representing the vehicles dirt level.Sets the dirt level of the passed vehicle.This is the server-side RPC native equivalent of the client native SET_VEHICLE_DIRT_LEVEL.",
+  "codeBlocks": [
+    "// SetVehicleDirtLevel\nvoid SET_VEHICLE_DIRT_LEVEL(Vehicle vehicle, float dirtLevel);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for SET_VEHICLE_DIRT_LEVEL\nSetVehicleDirtLevel(vehicle, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/SetVehicleDirtLevel.md",
+    "https://docs.fivem.net/natives/?_0x79D3B596FE44EE8B",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "title": "GET_ENTITY_HEALTH",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENTITYAPI",
+    "GET_ENTITY_HEALTH"
+  ],
+  "content": "0xEEF059FAD016D2090x8E3222B7// GetEntityHealth\nint GET_ENTITY_HEALTH(Entity entity);Parameters:entity: The entity to get the health from.Returns: The current entity health.Returns an integer value of entity's current health.\nExample of range for ped:\n- Player [0 to 200]\n- Ped [100 to 200]\n- Vehicle [0 to 1000]\n- Object [0 to 1000]\nHealth is actually a float value but this native casts it to int.\nIn order to get the actual value, do:\nfloat health = *(float *)(entityAddress + 0x280);\nExamples:LuaJavaScriptC#local health = GetEntityHealth(PlayerPedId())\nprint(health)",
+  "codeBlocks": [
+    "// GetEntityHealth\nint GET_ENTITY_HEALTH(Entity entity);",
+    "Returns an integer value of entity's current health.\nExample of range for ped:\n- Player [0 to 200]\n- Ped [100 to 200]\n- Vehicle [0 to 1000]\n- Object [0 to 1000]\nHealth is actually a float value but this native casts it to int.\nIn order to get the actual value, do:\nfloat health = *(float *)(entityAddress + 0x280);",
+    "local health = GetEntityHealth(PlayerPedId())",
+    "local entity = PlayerPedId()\n-- Example usage for GET_ENTITY_HEALTH\nGetEntityHealth(entity)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/GetEntityHealth.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

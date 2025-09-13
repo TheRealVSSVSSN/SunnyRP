@@ -1,0 +1,24 @@
+{
+  "title": "IS_ENTITY_ATTACHED",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENTITYAPI",
+    "IS_ENTITY_ATTACHED"
+  ],
+  "content": "0xB346476EF1A648970xEC1479D5// IsEntityAttached\nBOOL IS_ENTITY_ATTACHED(Entity entity);Parameters:entity: The entity to check if it is attached to another entity.Returns: Whether the entity is attached to another entity.Examples:LuaJavaScriptC#local ped = PlayerPedId()\n\nif IsEntityAttached(ped) then\n    DetachEntity(ped, true, true)\nend",
+  "codeBlocks": [
+    "// IsEntityAttached\nBOOL IS_ENTITY_ATTACHED(Entity entity);",
+    "local ped = PlayerPedId()\n\nif IsEntityAttached(ped) then\n    DetachEntity(ped, true, true)\nend",
+    "local entity = PlayerPedId()\n-- Example usage for IS_ENTITY_ATTACHED\nIsEntityAttached(entity)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/IsEntityAttached.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

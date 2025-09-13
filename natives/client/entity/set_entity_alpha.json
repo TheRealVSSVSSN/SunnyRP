@@ -1,0 +1,24 @@
+{
+  "title": "SET_ENTITY_ALPHA",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENTITYAPI",
+    "SET_ENTITY_ALPHA"
+  ],
+  "content": "0x44A0870B7E92D7C00xAE667CB0// SetEntityAlpha\nvoid SET_ENTITY_ALPHA(Entity entity, int alphaLevel, BOOL skin);Parameters:entity: The entity to change the alpha for.alphaLevel: The alpha level ranges from 0 to 255, but changes occur every 20% (every 51).skin: Whether or not to change the alpha of the entity's skin.This native sets the entity's alpha level.Examples:LuaJavaScriptC#SetEntityAlpha(PlayerPedId(), 51, false)",
+  "codeBlocks": [
+    "// SetEntityAlpha\nvoid SET_ENTITY_ALPHA(Entity entity, int alphaLevel, BOOL skin);",
+    "SetEntityAlpha(PlayerPedId(), 51, false)",
+    "local entity = PlayerPedId()\n-- Example usage for SET_ENTITY_ALPHA\nSetEntityAlpha(entity, 0, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/SetEntityAlpha.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

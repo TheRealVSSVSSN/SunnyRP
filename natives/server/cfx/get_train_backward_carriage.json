@@ -1,0 +1,23 @@
+{
+  "title": "GET_TRAIN_BACKWARD_CARRIAGE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_TRAIN_BACKWARD_CARRIAGE"
+  ],
+  "content": "0x456E34A// GetTrainBackwardCarriage\nint GET_TRAIN_BACKWARD_CARRIAGE(Vehicle train);Parameters:train: The train handleReturns: The handle of the carriage behind this train in the chain. Otherwise returns 0 if the train is the caboose of the chain.",
+  "codeBlocks": [
+    "// GetTrainBackwardCarriage\nint GET_TRAIN_BACKWARD_CARRIAGE(Vehicle train);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for GET_TRAIN_BACKWARD_CARRIAGE\nGetTrainBackwardCarriage(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetTrainBackwardCarriage.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}

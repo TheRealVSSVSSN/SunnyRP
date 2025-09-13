@@ -1,0 +1,25 @@
+{
+  "title": "GET_ENTITY_HEADING",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENTITYAPI",
+    "GET_ENTITY_HEADING"
+  ],
+  "content": "0xE83D4F9BA2A389140x972CC383// GetEntityHeading\nfloat GET_ENTITY_HEADING(Entity entity);Parameters:entity: The entity to get the heading from.Returns: The current entity heading.Returns the heading of the entity in degrees. Also know as the \"Yaw\" of an entity.Examples:LuaJavaScriptC#local heading = GetEntityHeading(PlayerPedId())\nprint(heading)",
+  "codeBlocks": [
+    "// GetEntityHeading\nfloat GET_ENTITY_HEADING(Entity entity);",
+    "Returns the heading of the entity in degrees. Also know as the \"Yaw\" of an entity.",
+    "local heading = GetEntityHeading(PlayerPedId())",
+    "local entity = PlayerPedId()\n-- Example usage for GET_ENTITY_HEADING\nGetEntityHeading(entity)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/GetEntityHeading.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

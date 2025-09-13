@@ -1,0 +1,25 @@
+{
+  "title": "ENABLE_DISPATCH_SERVICE",
+  "breadcrumbs": [
+    "Native Reference",
+    "MISCAPI",
+    "ENABLE_DISPATCH_SERVICE"
+  ],
+  "content": "0xDC0F817884CDD8560x0B710A51// EnableDispatchService\nvoid ENABLE_DISPATCH_SERVICE(int dispatchService, BOOL toggle);Parameters:dispatchService: The ID of the dispatch service to toggle.toggle: True to enable the dispatch service, false to disable the dispatch service.Enables or disables the specified 'dispatch service' type. 'Dispatch services' are used for spawning AI response peds/vehicles for events such as a fire in the street (type 3 - DT_FireDepartment), or gunfire in a gang area (type 11 - DT_Gangs).List of dispatch services:enum eDispatchType\n{\n\tDT_Invalid = 0,\n\tDT_PoliceAutomobile = 1,\n\tDT_PoliceHelicopter = 2,\n\tDT_FireDepartment = 3,\n\tDT_SwatAutomobile = 4,\n\tDT_AmbulanceDepartment = 5,\n\tDT_PoliceRiders = 6,\n\tDT_PoliceVehicleRequest = 7,\n\tDT_PoliceRoadBlock = 8,\n\tDT_PoliceAutomobileWaitPulledOver = 9,\n\tDT_PoliceAutomobileWaitCruising = 10,\n\tDT_Gangs = 11,\n\tDT_SwatHelicopter = 13,\n\tDT_PoliceBoat = 14,\n\tDT_ArmyVehicle = 15,\n\tDT_BikerBackup = 15\n};\nNote that 'dispatch service' has nothing to do with the police scanner (audio), to toggle that, use SET_AUDIO_FLAG with 'PoliceScannerDisabled'.",
+  "codeBlocks": [
+    "// EnableDispatchService\nvoid ENABLE_DISPATCH_SERVICE(int dispatchService, BOOL toggle);",
+    "enum eDispatchType\n{\n\tDT_Invalid = 0,\n\tDT_PoliceAutomobile = 1,\n\tDT_PoliceHelicopter = 2,\n\tDT_FireDepartment = 3,\n\tDT_SwatAutomobile = 4,\n\tDT_AmbulanceDepartment = 5,\n\tDT_PoliceRiders = 6,\n\tDT_PoliceVehicleRequest = 7,\n\tDT_PoliceRoadBlock = 8,\n\tDT_PoliceAutomobileWaitPulledOver = 9,\n\tDT_PoliceAutomobileWaitCruising = 10,\n\tDT_Gangs = 11,\n\tDT_SwatHelicopter = 13,\n\tDT_PoliceBoat = 14,\n\tDT_ArmyVehicle = 15,\n\tDT_BikerBackup = 15\n};",
+    "-- Example usage for ENABLE_DISPATCH_SERVICE\nEnableDispatchService(0, false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/MISC/EnableDispatchService.md",
+    "https://docs.fivem.net/natives/?_0xB9EFD5C25018725A",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

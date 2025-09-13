@@ -1,0 +1,24 @@
+{
+  "title": "GET_WAVE_QUAD_AT_COORDS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_WAVE_QUAD_AT_COORDS"
+  ],
+  "content": "0x3F5A61A7// GetWaveQuadAtCoords\nint GET_WAVE_QUAD_AT_COORDS(float x, float y);Parameters:x: The X coordinatey: The Y coordinateReturns: The wave quad index at the given position. Returns -1 if there isn't any there.This native returns the index of a wave quad if the given point is inside its bounds.Examples:Lualocal currentPedPosition = GetEntityCoords(PlayerPedId())\nlocal waveQuadIndex = GetWaveQuadAtCoords(currentPedPosition.x, currentPedPosition.y)",
+  "codeBlocks": [
+    "// GetWaveQuadAtCoords\nint GET_WAVE_QUAD_AT_COORDS(float x, float y);",
+    "local currentPedPosition = GetEntityCoords(PlayerPedId())\nlocal waveQuadIndex = GetWaveQuadAtCoords(currentPedPosition.x, currentPedPosition.y)",
+    "-- Example usage for GET_WAVE_QUAD_AT_COORDS\nGetWaveQuadAtCoords(0.0, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetWaveQuadAtCoords.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

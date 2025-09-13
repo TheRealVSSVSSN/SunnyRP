@@ -1,0 +1,23 @@
+{
+  "title": "IS_ENTITY_A_PED",
+  "breadcrumbs": [
+    "Native Reference",
+    "ENTITYAPI",
+    "IS_ENTITY_A_PED"
+  ],
+  "content": "0x524AC5ECEA15343E0x55D33EAB// IsEntityAPed\nBOOL IS_ENTITY_A_PED(Entity entity);Parameters:entity: The entity to check if it's a Ped.Returns: Whether the entity is a Ped.",
+  "codeBlocks": [
+    "// IsEntityAPed\nBOOL IS_ENTITY_A_PED(Entity entity);",
+    "local entity = PlayerPedId()\n-- Example usage for IS_ENTITY_A_PED\nIsEntityAPed(entity)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/ENTITY/IsEntityAPed.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

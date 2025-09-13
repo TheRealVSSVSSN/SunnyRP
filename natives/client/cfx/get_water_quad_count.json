@@ -1,0 +1,24 @@
+{
+  "title": "GET_WATER_QUAD_COUNT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_WATER_QUAD_COUNT"
+  ],
+  "content": "0xB1884159// GetWaterQuadCount\nint GET_WATER_QUAD_COUNT();Returns: Returns the amount of water quads loaded.Examples:Lualocal waterQuadCount = GetWaterQuadCount()",
+  "codeBlocks": [
+    "// GetWaterQuadCount\nint GET_WATER_QUAD_COUNT();",
+    "local waterQuadCount = GetWaterQuadCount()",
+    "-- Example usage for GET_WATER_QUAD_COUNT\nGetWaterQuadCount()"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetWaterQuadCount.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

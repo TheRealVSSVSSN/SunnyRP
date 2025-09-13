@@ -1,0 +1,23 @@
+{
+  "title": "GET_TRAIN_SPEED",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_TRAIN_SPEED"
+  ],
+  "content": "0x428668B7// GetTrainSpeed\nfloat GET_TRAIN_SPEED(Vehicle train);Parameters:train: The train handleReturns: The current speed of the trainGets the speed the train is currently going.",
+  "codeBlocks": [
+    "// GetTrainSpeed\nfloat GET_TRAIN_SPEED(Vehicle train);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for GET_TRAIN_SPEED\nGetTrainSpeed(vehicle)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetTrainSpeed.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

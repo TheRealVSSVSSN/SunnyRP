@@ -1,0 +1,23 @@
+{
+  "title": "GET_VEHICLE_DOOR_STATUS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CFXAPI",
+    "GET_VEHICLE_DOOR_STATUS"
+  ],
+  "content": "0x6E35C49C// GetVehicleDoorStatus\nint GET_VEHICLE_DOOR_STATUS(Vehicle vehicle, int doorIndex);Parameters:vehicle: The target vehicle.doorIndex: Index of door to check (0-6).Returns: A number from 0 to 7.Returns the open position of the specified door on the target vehicle.",
+  "codeBlocks": [
+    "// GetVehicleDoorStatus\nint GET_VEHICLE_DOOR_STATUS(Vehicle vehicle, int doorIndex);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for GET_VEHICLE_DOOR_STATUS\nGetVehicleDoorStatus(vehicle, 0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/fivem/edit/master/ext/native-decls/GetVehicleDoorStatus.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "server"
+  ]
+}
