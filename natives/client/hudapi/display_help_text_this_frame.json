@@ -1,0 +1,23 @@
+{
+  "title": "DISPLAY_HELP_TEXT_THIS_FRAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "DISPLAY_HELP_TEXT_THIS_FRAME"
+  ],
+  "content": "0x960C9FF8F616E41C0x18E3360A// DisplayHelpTextThisFrame\nvoid DISPLAY_HELP_TEXT_THIS_FRAME(char* pTextLabel, BOOL bCurvedWindow);Parameters:pTextLabel: Text label for this message.bCurvedWindow: Unused parameter.Shows a help message for one frame.\nDo note that this message doesn't get added to the Pause Menu info section.",
+  "codeBlocks": [
+    "// DisplayHelpTextThisFrame\nvoid DISPLAY_HELP_TEXT_THIS_FRAME(char* pTextLabel, BOOL bCurvedWindow);",
+    "-- Example usage for DISPLAY_HELP_TEXT_THIS_FRAME\nDisplayHelpTextThisFrame('', false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/DisplayHelpTextThisFrame.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

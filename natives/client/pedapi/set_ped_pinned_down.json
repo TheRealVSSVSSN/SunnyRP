@@ -1,0 +1,23 @@
+{
+  "title": "SET_PED_PINNED_DOWN",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "SET_PED_PINNED_DOWN"
+  ],
+  "content": "0xAAD6D1ACF08F46120xCC78999D// SetPedPinnedDown\nAny SET_PED_PINNED_DOWN(Ped ped, BOOL pinned, int i);i could be time. Only example in the decompiled scripts uses it as -1.",
+  "codeBlocks": [
+    "// SetPedPinnedDown\nAny SET_PED_PINNED_DOWN(Ped ped, BOOL pinned, int i);",
+    "i could be time. Only example in the decompiled scripts uses it as -1."
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/SetPedPinnedDown.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

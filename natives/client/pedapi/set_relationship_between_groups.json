@@ -1,0 +1,23 @@
+{
+  "title": "SET_RELATIONSHIP_BETWEEN_GROUPS",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "SET_RELATIONSHIP_BETWEEN_GROUPS"
+  ],
+  "content": "0xBF25EB89375A37AD0xD4A215BA// SetRelationshipBetweenGroups\nvoid SET_RELATIONSHIP_BETWEEN_GROUPS(int relationship, Hash group1, Hash group2);Sets the relationship between two groups. This should be called twice (once for each group).  \nRelationship types:  \n0 = Companion  \n1 = Respect  \n2 = Like  \n3 = Neutral  \n4 = Dislike  \n5 = Hate  \n255 = Pedestrians  \nExample:  \nPED::SET_RELATIONSHIP_BETWEEN_GROUPS(2, l_1017, 0xA49E591C);  \nPED::SET_RELATIONSHIP_BETWEEN_GROUPS(2, 0xA49E591C, l_1017);",
+  "codeBlocks": [
+    "// SetRelationshipBetweenGroups\nvoid SET_RELATIONSHIP_BETWEEN_GROUPS(int relationship, Hash group1, Hash group2);",
+    "Sets the relationship between two groups. This should be called twice (once for each group).  \nRelationship types:  \n0 = Companion  \n1 = Respect  \n2 = Like  \n3 = Neutral  \n4 = Dislike  \n5 = Hate  \n255 = Pedestrians  \nExample:  \nPED::SET_RELATIONSHIP_BETWEEN_GROUPS(2, l_1017, 0xA49E591C);  \nPED::SET_RELATIONSHIP_BETWEEN_GROUPS(2, 0xA49E591C, l_1017);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/SetRelationshipBetweenGroups.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

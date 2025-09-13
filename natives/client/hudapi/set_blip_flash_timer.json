@@ -1,0 +1,23 @@
+{
+  "title": "SET_BLIP_FLASH_TIMER",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "SET_BLIP_FLASH_TIMER"
+  ],
+  "content": "0xD3CD6FD297AE87CC0x8D5DF611// SetBlipFlashTimer\nvoid SET_BLIP_FLASH_TIMER(Blip blip, int duration);Parameters:blip: The blip to start flashingduration: Time in milliseconds to flash the blip before stoppingFlashes blip for time in milliseconds before stopping.Examples:LuaJavaScriptlocal blip = AddBlipForCoord(0, 0, 0)\n\n-- flash blip for seven seconds then stop\nSetBlipFlashTimer(blip, 7000)",
+  "codeBlocks": [
+    "// SetBlipFlashTimer\nvoid SET_BLIP_FLASH_TIMER(Blip blip, int duration);",
+    "local blip = AddBlipForCoord(0, 0, 0)\n\n-- flash blip for seven seconds then stop\nSetBlipFlashTimer(blip, 7000)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/SetBlipFlashTimer.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

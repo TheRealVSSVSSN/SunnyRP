@@ -1,0 +1,23 @@
+{
+  "title": "IS_PED_USING_ANY_SCENARIO",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "IS_PED_USING_ANY_SCENARIO"
+  ],
+  "content": "0x57AB4A3080F851430x195EF5B7// IsPedUsingAnyScenario\nBOOL IS_PED_USING_ANY_SCENARIO(Ped ped);Parameters:ped: The ped handle.Returns: Returns true if the ped is using any scenario.",
+  "codeBlocks": [
+    "// IsPedUsingAnyScenario\nBOOL IS_PED_USING_ANY_SCENARIO(Ped ped);",
+    "local ped = PlayerPedId()\n-- Example usage for IS_PED_USING_ANY_SCENARIO\nIsPedUsingAnyScenario(ped)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/IsPedUsingAnyScenario.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

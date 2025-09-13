@@ -1,0 +1,23 @@
+{
+  "title": "CAN_PED_RAGDOLL",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "CAN_PED_RAGDOLL"
+  ],
+  "content": "0x128F79EDCECE4FD50xC0EFB7A3// CanPedRagdoll\nBOOL CAN_PED_RAGDOLL(Ped ped);Prevents the ped from going limp.  \n[Example: Can prevent peds from falling when standing on moving vehicles.]",
+  "codeBlocks": [
+    "// CanPedRagdoll\nBOOL CAN_PED_RAGDOLL(Ped ped);",
+    "Prevents the ped from going limp.  \n[Example: Can prevent peds from falling when standing on moving vehicles.]"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/CanPedRagdoll.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

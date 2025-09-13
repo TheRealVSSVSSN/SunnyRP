@@ -1,0 +1,27 @@
+{
+  "title": "CREATE_MP_GAMER_TAG_WITH_CREW_COLOR",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "CREATE_MP_GAMER_TAG_WITH_CREW_COLOR"
+  ],
+  "content": "0x6DD05E9D83EFA4C90xC969F2D0// CreateMpGamerTagWithCrewColor\nvoid CREATE_MP_GAMER_TAG_WITH_CREW_COLOR(Player player, char* username, BOOL crewIsPrivate, BOOL crewIsRockstar, char* crewName, int crewRank, int crewR, int crewG, int crewB);Parameters:player: The local player ID to assign the gamer tag to.username: The name displayed on the gamer tag.crewIsPrivate: If the crew is private. Public crews have a pointed end cap, private crews do not.crewIsRockstar: If the crew is a Rockstar crew. Rockstar crews include a Rockstar logo before the name.crewName: The name of the crew.crewRank: The rank from 1-5 that the player is within the crew. Use 0 if the player is the founder of the crew. Only relevant for private crews.crewR: Red component of the crew colour.crewG: Green component of the crew colour.crewB: Blue component of the crew colour.Creates a gamer tag for the specified local player ID, automatically attached to the player's current ped.\nThe created gamer tag will have the same ID as the player. You can use IS_MP_GAMER_TAG_ACTIVE to check if a gamer tag already exists for a player.\nAfter the gamer tag is created, all components will be set as invisible. Use SET_MP_GAMER_TAG_VISIBILITY to change the visibility of individual components or _SET_MP_GAMER_TAG_VISIBILITY_ALL to set all of them at once.To create a gamer tag for a ped that is not a player, see CREATE_FAKE_MP_GAMER_TAG.Old name:  _CREATE_MP_GAMER_TAG_COLOROld name:  _SET_MP_GAMER_TAG_COLOROld name:  _CREATE_MP_GAMER_TAG_FOR_NET_PLAYERExamples:Lualocal playerId = PlayerId() -- you can use any local player ID here\n\n-- clear any already existing gamer tag associated with this player\nif IsMpGamerTagActive(playerId) then\n\tRemoveMpGamerTag(playerId)\n\n\t-- wait until the gamer tag actually becomes free\n\trepeat Wait(0) until IsMpGamerTagFree(playerId)\nend\n\n-- create the gamer tag\nCreateMpGamerTagWithCrewColor(playerId, \"jaymoo\", false, true, \"RSG\", 0, 200, 0, 200)\n\n-- set the name, crew and typing indicator components as visible\nSetMpGamerTagVisibility(playerId, 0, true)\nSetMpGamerTagVisibility(playerId, 1, true)\nSetMpGamerTagVisibility(playerId, 16, true)",
+  "codeBlocks": [
+    "// CreateMpGamerTagWithCrewColor\nvoid CREATE_MP_GAMER_TAG_WITH_CREW_COLOR(Player player, char* username, BOOL crewIsPrivate, BOOL crewIsRockstar, char* crewName, int crewRank, int crewR, int crewG, int crewB);",
+    "local playerId = PlayerId() -- you can use any local player ID here\n\n-- clear any already existing gamer tag associated with this player\nif IsMpGamerTagActive(playerId) then\n\tRemoveMpGamerTag(playerId)\n\n\t-- wait until the gamer tag actually becomes free\n\trepeat Wait(0) until IsMpGamerTagFree(playerId)\nend\n\n-- create the gamer tag\nCreateMpGamerTagWithCrewColor(playerId, \"jaymoo\", false, true, \"RSG\", 0, 200, 0, 200)\n\n-- set the name, crew and typing indicator components as visible\nSetMpGamerTagVisibility(playerId, 0, true)\nSetMpGamerTagVisibility(playerId, 1, true)\nSetMpGamerTagVisibility(playerId, 16, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/CreateMpGamerTagWithCrewColor.md",
+    "https://docs.fivem.net/natives/?_0x4E929E7A5796FD26",
+    "https://docs.fivem.net/natives/?_0x63BB75ABEDC1F6A0",
+    "https://docs.fivem.net/natives/?_0xEE76FF7E6A0166B0",
+    "https://docs.fivem.net/natives/?_0xBFEFE3321A3F5015",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

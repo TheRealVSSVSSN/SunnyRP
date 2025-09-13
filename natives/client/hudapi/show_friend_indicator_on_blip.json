@@ -1,0 +1,24 @@
+{
+  "title": "SHOW_FRIEND_INDICATOR_ON_BLIP",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "SHOW_FRIEND_INDICATOR_ON_BLIP"
+  ],
+  "content": "0x23C3EB807312F01A0x4C8F02B4// ShowFriendIndicatorOnBlip\nvoid SHOW_FRIEND_INDICATOR_ON_BLIP(Blip blip, BOOL toggle);Parameters:blip: The blip to toggle the half circle on.toggle: Enables or disables the half circle around the blip (on the right side of the blip).Highlights a blip by a half cyan circle on the right side of the blip.  Indicating that that player is a friend (in GTA:O). This color can not be changed.To toggle the left side (crew member indicator) of the half circle around the blip, use: SHOW_CREW_INDICATOR_ON_BLIP.Old name:  SET_BLIP_FRIENDExamples:Lualocal player = 1 -- make sure this is an actual player, dont just use this example code!\nlocal blip = GetBlipFromEntity(GetPlayerPed(player))\n\n-- Toggle the friend outline indicator on the blip.\nShowFriendIndicatorOnBlip(blip, true)",
+  "codeBlocks": [
+    "// ShowFriendIndicatorOnBlip\nvoid SHOW_FRIEND_INDICATOR_ON_BLIP(Blip blip, BOOL toggle);",
+    "local player = 1 -- make sure this is an actual player, dont just use this example code!\nlocal blip = GetBlipFromEntity(GetPlayerPed(player))\n\n-- Toggle the friend outline indicator on the blip.\nShowFriendIndicatorOnBlip(blip, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/ShowFriendIndicatorOnBlip.md",
+    "https://docs.fivem.net/natives/?_0xDCFB5D4DB8BF367E",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

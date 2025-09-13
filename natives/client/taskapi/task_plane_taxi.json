@@ -1,0 +1,23 @@
+{
+  "title": "TASK_PLANE_TAXI",
+  "breadcrumbs": [
+    "Native Reference",
+    "TASKAPI",
+    "TASK_PLANE_TAXI"
+  ],
+  "content": "0x92C360B5F15D2302// TaskPlaneTaxi\nvoid TASK_PLANE_TAXI(Ped pilot, Vehicle aircraft, float xPos, float yPos, float zPos, float fCruiseSpeed, float fTargetReachedDist);Parameters:pilot: The ped driving the plane.aircraft: The plane used.xPos: The X coordinate.yPos: The Y coordinate.zPos: The Z coordinate.fCruiseSpeed: The speed of the plane (in m/s).fTargetReachedDist: Distance (in meters) at which the plane thinks it has arrived to the given coordinates.The given ped will try to drive the plane to the given coordinates and will then drive around the given coords (the plane will form 8s on the ground)Old name:  _TASK_PLANE_TAXI",
+  "codeBlocks": [
+    "// TaskPlaneTaxi\nvoid TASK_PLANE_TAXI(Ped pilot, Vehicle aircraft, float xPos, float yPos, float zPos, float fCruiseSpeed, float fTargetReachedDist);",
+    "local ped = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(ped, false)\n-- Example usage for TASK_PLANE_TAXI\nTaskPlaneTaxi(ped, vehicle, 0.0, 0.0, 0.0, 0.0, 0.0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/TASK/TaskPlaneTaxi.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "_PAUSE_MENU_DISABLE_BUSYSPINNER",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "_PAUSE_MENU_DISABLE_BUSYSPINNER"
+  ],
+  "content": "0x9245E81072704B8A// PauseMenuDisableBusyspinner\nvoid _PAUSE_MENU_DISABLE_BUSYSPINNER(BOOL toggle);Parameters:toggle: true to disable and false to re-enable the loading icon.Disables the loading spinner in Pause Menu when switching from one header tab to another.",
+  "codeBlocks": [
+    "// PauseMenuDisableBusyspinner\nvoid _PAUSE_MENU_DISABLE_BUSYSPINNER(BOOL toggle);",
+    "-- Example usage for _PAUSE_MENU_DISABLE_BUSYSPINNER\n_PauseMenuDisableBusyspinner(false)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/PauseMenuDisableBusyspinner.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

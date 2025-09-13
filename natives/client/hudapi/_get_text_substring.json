@@ -1,0 +1,23 @@
+{
+  "title": "_GET_TEXT_SUBSTRING",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "_GET_TEXT_SUBSTRING"
+  ],
+  "content": "0x169BD9382084C8C00x34A396EE// GetTextSubstring\nchar* _GET_TEXT_SUBSTRING(char* text, int position, int length);Returns a substring of a specified length starting at a specified position.\nExample:\n// Get \"STRING\" text from \"MY_STRING\"\nsubStr = HUD::_GET_TEXT_SUBSTRING(\"MY_STRING\", 3, 6);",
+  "codeBlocks": [
+    "// GetTextSubstring\nchar* _GET_TEXT_SUBSTRING(char* text, int position, int length);",
+    "Returns a substring of a specified length starting at a specified position.\nExample:\n// Get \"STRING\" text from \"MY_STRING\"\nsubStr = HUD::_GET_TEXT_SUBSTRING(\"MY_STRING\", 3, 6);"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/GetTextSubstring.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

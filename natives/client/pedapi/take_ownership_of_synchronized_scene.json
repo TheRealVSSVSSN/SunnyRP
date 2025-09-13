@@ -1,0 +1,24 @@
+{
+  "title": "TAKE_OWNERSHIP_OF_SYNCHRONIZED_SCENE",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "TAKE_OWNERSHIP_OF_SYNCHRONIZED_SCENE"
+  ],
+  "content": "0xCD9CC7E200A52A6F0xBF7F9035// TakeOwnershipOfSynchronizedScene\nvoid TAKE_OWNERSHIP_OF_SYNCHRONIZED_SCENE(int scene);Parameters:scene: Scene ID returned by CREATE_SYNCHRONIZED_SCENEOld name:  _DISPOSE_SYNCHRONIZED_SCENE",
+  "codeBlocks": [
+    "// TakeOwnershipOfSynchronizedScene\nvoid TAKE_OWNERSHIP_OF_SYNCHRONIZED_SCENE(int scene);",
+    "-- Example usage for TAKE_OWNERSHIP_OF_SYNCHRONIZED_SCENE\nTakeOwnershipOfSynchronizedScene(0)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/TakeOwnershipOfSynchronizedScene.md",
+    "https://docs.fivem.net/natives/?_0x8C18E0F9080ADD73",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

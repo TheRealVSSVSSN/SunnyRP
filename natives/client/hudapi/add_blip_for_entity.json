@@ -1,0 +1,24 @@
+{
+  "title": "ADD_BLIP_FOR_ENTITY",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "ADD_BLIP_FOR_ENTITY"
+  ],
+  "content": "0x5CDE92C702A8FCE70x30822554// AddBlipForEntity\nBlip ADD_BLIP_FOR_ENTITY(Entity entity);Parameters:entity: The entity handle to create the blip.Returns: A blip handle.Create a blip that by default is red (enemy), you can use SET_BLIP_AS_FRIENDLY to make it blue (friend).\\\nCan be used for objects, vehicles and peds.Example of enemy:\n\nExample of friend:\nExamples:LuaJavaScriptlocal blip = AddBlipForEntity(PlayerPedId()) -- This adds an enemy blip to yourself",
+  "codeBlocks": [
+    "// AddBlipForEntity\nBlip ADD_BLIP_FOR_ENTITY(Entity entity);",
+    "local blip = AddBlipForEntity(PlayerPedId()) -- This adds an enemy blip to yourself"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/AddBlipForEntity.md",
+    "https://docs.fivem.net/natives/?_0xC6F43D0E",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

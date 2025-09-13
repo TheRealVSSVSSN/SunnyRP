@@ -1,0 +1,23 @@
+{
+  "title": "SET_PED_DENSITY_MULTIPLIER_THIS_FRAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "PEDAPI",
+    "SET_PED_DENSITY_MULTIPLIER_THIS_FRAME"
+  ],
+  "content": "0x95E3D6257B166CF20x039C82BB// SetPedDensityMultiplierThisFrame\nvoid SET_PED_DENSITY_MULTIPLIER_THIS_FRAME(float multiplier);Parameters:multiplier: Adjust from 0.0 (minimum, indicating no pedestrians in the street) to 1.0 (maximum, representing a normal amount of pedestrians on the street).Usage: Call this native every frameExamples:LuaJavaScript-- 0.0 means no peds, while 1.0 indicates the regular density of peds.\nlocal pedsDensityFactor = 0.0 \n\nCitizen.CreateThread(function()\n   while true do\n       SetPedDensityMultiplierThisFrame(pedsDensityFactor)\n       Citizen.Wait(0)    \n   end\nend)",
+  "codeBlocks": [
+    "// SetPedDensityMultiplierThisFrame\nvoid SET_PED_DENSITY_MULTIPLIER_THIS_FRAME(float multiplier);",
+    "-- 0.0 means no peds, while 1.0 indicates the regular density of peds.\nlocal pedsDensityFactor = 0.0 \n\nCitizen.CreateThread(function()\n   while true do\n       SetPedDensityMultiplierThisFrame(pedsDensityFactor)\n       Citizen.Wait(0)    \n   end\nend)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/PED/SetPedDensityMultiplierThisFrame.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}

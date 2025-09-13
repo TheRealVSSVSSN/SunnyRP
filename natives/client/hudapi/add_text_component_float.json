@@ -1,0 +1,23 @@
+{
+  "title": "ADD_TEXT_COMPONENT_FLOAT",
+  "breadcrumbs": [
+    "Native Reference",
+    "HUDAPI",
+    "ADD_TEXT_COMPONENT_FLOAT"
+  ],
+  "content": "0xE7DCB5B874BCD96E0x24D78013// AddTextComponentFloat\nvoid ADD_TEXT_COMPONENT_FLOAT(float value, int decimalPlaces);Parameters:value: The number to substitute in the label.decimalPlaces: How many decimal places to addAdds a float to a text component placeholder, replacing ~1~ in the current text command's text label.Examples:Lua-- on initialization\nAddTextEntry('TEST_LABEL', 'Label: ~1~')\n\n-- when drawing\nBeginTextCommandThefeedPost('TEST_LABEL')\nAddTextComponentFloat(1000.0, 2)\nEndTextCommandThefeedPostTicker(false, true)",
+  "codeBlocks": [
+    "// AddTextComponentFloat\nvoid ADD_TEXT_COMPONENT_FLOAT(float value, int decimalPlaces);",
+    "-- on initialization\nAddTextEntry('TEST_LABEL', 'Label: ~1~')\n\n-- when drawing\nBeginTextCommandThefeedPost('TEST_LABEL')\nAddTextComponentFloat(1000.0, 2)\nEndTextCommandThefeedPostTicker(false, true)"
+  ],
+  "urls": [
+    "https://docs.fivem.net/docs/",
+    "https://docs.fivem.net/natives/",
+    "https://github.com/citizenfx/natives/edit/master/HUD/AddTextComponentFloat.md",
+    "https://www.rockstargames.com/privacy",
+    "https://www.rockstargames.com/cookies"
+  ],
+  "tags": [
+    "client"
+  ]
+}
