@@ -1,0 +1,13 @@
+{
+  "title": "ADD_VEHICLE_UPSIDEDOWN_CHECK",
+  "breadcrumbs": [
+    "Native Reference",
+    "ADD_VEHICLE_UPSIDEDOWN_CHECK"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ADD_VEHICLE_UPSIDEDOWN_CHECK\nAddVehicleUpsidedownCheck()"
+  ],
+  "urls": [],
+  "tags": []
+}

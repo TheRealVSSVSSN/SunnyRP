@@ -1,0 +1,13 @@
+{
+  "title": "ASSISTED_MOVEMENT_REQUEST_ROUTE",
+  "breadcrumbs": [
+    "Native Reference",
+    "ASSISTED_MOVEMENT_REQUEST_ROUTE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ASSISTED_MOVEMENT_REQUEST_ROUTE\nAssistedMovementRequestRoute()"
+  ],
+  "urls": [],
+  "tags": []
+}

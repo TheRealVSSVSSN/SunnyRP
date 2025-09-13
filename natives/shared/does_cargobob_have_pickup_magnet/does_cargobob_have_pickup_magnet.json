@@ -1,0 +1,13 @@
+{
+  "title": "DOES_CARGOBOB_HAVE_PICKUP_MAGNET",
+  "breadcrumbs": [
+    "Native Reference",
+    "DOES_CARGOBOB_HAVE_PICKUP_MAGNET"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DOES_CARGOBOB_HAVE_PICKUP_MAGNET\nDoesCargobobHavePickupMagnet()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "CAN_PED_SEE_HATED_PED",
+  "breadcrumbs": [
+    "Native Reference",
+    "CAN_PED_SEE_HATED_PED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CAN_PED_SEE_HATED_PED\nCanPedSeeHatedPed()"
+  ],
+  "urls": [],
+  "tags": []
+}

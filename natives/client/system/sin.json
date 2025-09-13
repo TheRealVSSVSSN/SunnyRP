@@ -9,7 +9,7 @@
   "codeBlocks": [
     "// Sin\nfloat SIN(float value);",
     "-- Get the heading\nlocal heading = GetEntityHeading(PlayerPedId())\nlocal sin = Sin(heading)\n\n-- equivalent in lua\nlocal sinLua = math.sin(heading * (math.pi / 180))",
-    "-- Example usage for SIN\nSin(0.0)"
+    "-- Example usage for SIN\nSin(1.0)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

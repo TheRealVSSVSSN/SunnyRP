@@ -1,0 +1,13 @@
+{
+  "title": "SET_RUNTIME_TEXTURE_ARGB_DATA",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_RUNTIME_TEXTURE_ARGB_DATA"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_RUNTIME_TEXTURE_ARGB_DATA\nSetRuntimeTextureArgbData()"
+  ],
+  "urls": [],
+  "tags": []
+}

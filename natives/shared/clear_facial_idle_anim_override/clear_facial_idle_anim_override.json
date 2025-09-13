@@ -1,0 +1,13 @@
+{
+  "title": "CLEAR_FACIAL_IDLE_ANIM_OVERRIDE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CLEAR_FACIAL_IDLE_ANIM_OVERRIDE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CLEAR_FACIAL_IDLE_ANIM_OVERRIDE\nClearFacialIdleAnimOverride()"
+  ],
+  "urls": [],
+  "tags": []
+}

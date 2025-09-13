@@ -1,0 +1,13 @@
+{
+  "title": "SET_RADAR_ZOOM_TO_BLIP",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_RADAR_ZOOM_TO_BLIP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_RADAR_ZOOM_TO_BLIP\nSetRadarZoomToBlip()"
+  ],
+  "urls": [],
+  "tags": []
+}

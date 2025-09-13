@@ -1,0 +1,13 @@
+{
+  "title": "SET_TEXT_CHAT_ENABLED",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_TEXT_CHAT_ENABLED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_TEXT_CHAT_ENABLED\nSetTextChatEnabled()"
+  ],
+  "urls": [],
+  "tags": []
+}

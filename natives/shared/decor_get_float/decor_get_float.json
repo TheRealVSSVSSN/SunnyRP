@@ -1,0 +1,13 @@
+{
+  "title": "DECOR_GET_FLOAT",
+  "breadcrumbs": [
+    "Native Reference",
+    "DECOR_GET_FLOAT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DECOR_GET_FLOAT\nDecorGetFloat()"
+  ],
+  "urls": [],
+  "tags": []
+}

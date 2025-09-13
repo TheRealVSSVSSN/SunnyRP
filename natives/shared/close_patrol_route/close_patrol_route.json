@@ -1,0 +1,13 @@
+{
+  "title": "CLOSE_PATROL_ROUTE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CLOSE_PATROL_ROUTE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CLOSE_PATROL_ROUTE\nClosePatrolRoute()"
+  ],
+  "urls": [],
+  "tags": []
+}

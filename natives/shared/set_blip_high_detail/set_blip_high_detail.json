@@ -1,0 +1,13 @@
+{
+  "title": "SET_BLIP_HIGH_DETAIL",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_BLIP_HIGH_DETAIL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_BLIP_HIGH_DETAIL\nSetBlipHighDetail()"
+  ],
+  "urls": [],
+  "tags": []
+}

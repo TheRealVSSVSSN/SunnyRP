@@ -9,7 +9,7 @@
   "codeBlocks": [
     "// DoorSystemSetOpenRatio\nvoid DOOR_SYSTEM_SET_OPEN_RATIO(Hash doorHash, float ajar, BOOL requestDoor, BOOL forceUpdate);",
     "Sets the ajar angle of a door.\nRanges from -1.0 to 1.0, and 0.0 is closed / default.",
-    "-- Example usage for DOOR_SYSTEM_SET_OPEN_RATIO\nDoorSystemSetOpenRatio(GetHashKey('prop'), 0.0, false, false)"
+    "-- Example usage for DOOR_SYSTEM_SET_OPEN_RATIO\nDoorSystemSetOpenRatio(GetHashKey('prop'), 1.0, true, true)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

@@ -1,0 +1,13 @@
+{
+  "title": "ASSISTED_MOVEMENT_REMOVE_ROUTE",
+  "breadcrumbs": [
+    "Native Reference",
+    "ASSISTED_MOVEMENT_REMOVE_ROUTE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ASSISTED_MOVEMENT_REMOVE_ROUTE\nAssistedMovementRemoveRoute()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "SET_BLIP_BRIGHT",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_BLIP_BRIGHT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_BLIP_BRIGHT\nSetBlipBright()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "CONTROL_MOUNTED_WEAPON",
+  "breadcrumbs": [
+    "Native Reference",
+    "CONTROL_MOUNTED_WEAPON"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CONTROL_MOUNTED_WEAPON\nControlMountedWeapon()"
+  ],
+  "urls": [],
+  "tags": []
+}

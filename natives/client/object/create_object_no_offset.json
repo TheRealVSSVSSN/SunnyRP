@@ -8,7 +8,7 @@
   "content": "0x9A294B2138ABB8840x58040420// CreateObjectNoOffset\nObject CREATE_OBJECT_NO_OFFSET(Hash modelHash, float x, float y, float z, BOOL isNetwork, BOOL netMissionEntity, BOOL doorFlag);Parameters:modelHash: The model to spawn.x: Spawn coordinate X component.y: Spawn coordinate Y component.z: Spawn coordinate Z component.isNetwork: Whether to create a network object for the object. If false, the object exists only locally.netMissionEntity: Whether to register the object as pinned to the script host in the R* network model.doorFlag: False to create a door archetype (archetype flag bit 26 set) as a door. Required to be set to true to create door models in network mode.Returns: A script handle (fwScriptGuid index) for the object, or 0 if the object failed to be created.Creates an object (prop) with the specified model centered at the specified position.\nThis object will initially be owned by the creating script as a mission entity, and the model should be loaded already (e.g. using REQUEST_MODEL).",
   "codeBlocks": [
     "// CreateObjectNoOffset\nObject CREATE_OBJECT_NO_OFFSET(Hash modelHash, float x, float y, float z, BOOL isNetwork, BOOL netMissionEntity, BOOL doorFlag);",
-    "-- Example usage for CREATE_OBJECT_NO_OFFSET\nCreateObjectNoOffset(GetHashKey('prop'), 0.0, 0.0, 0.0, false, false, false)"
+    "-- Example usage for CREATE_OBJECT_NO_OFFSET\nCreateObjectNoOffset(GetHashKey('prop'), 1.0, 1.0, 1.0, true, true, true)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

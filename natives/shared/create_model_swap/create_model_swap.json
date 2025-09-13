@@ -1,0 +1,13 @@
+{
+  "title": "CREATE_MODEL_SWAP",
+  "breadcrumbs": [
+    "Native Reference",
+    "CREATE_MODEL_SWAP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CREATE_MODEL_SWAP\nCreateModelSwap()"
+  ],
+  "urls": [],
+  "tags": []
+}

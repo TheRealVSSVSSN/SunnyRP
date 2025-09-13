@@ -1,0 +1,13 @@
+{
+  "title": "ADD_ARMOUR_TO_PED",
+  "breadcrumbs": [
+    "Native Reference",
+    "ADD_ARMOUR_TO_PED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ADD_ARMOUR_TO_PED\nAddArmourToPed()"
+  ],
+  "urls": [],
+  "tags": []
+}

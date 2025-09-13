@@ -1,0 +1,13 @@
+{
+  "title": "GET_SCENARIO_PED_DENSITY_MULTIPLIER",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_SCENARIO_PED_DENSITY_MULTIPLIER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_SCENARIO_PED_DENSITY_MULTIPLIER\nGetScenarioPedDensityMultiplier()"
+  ],
+  "urls": [],
+  "tags": []
+}

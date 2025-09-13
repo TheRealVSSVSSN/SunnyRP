@@ -1,0 +1,13 @@
+{
+  "title": "WAIT",
+  "breadcrumbs": [
+    "Native Reference",
+    "WAIT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for WAIT\nWait()"
+  ],
+  "urls": [],
+  "tags": []
+}

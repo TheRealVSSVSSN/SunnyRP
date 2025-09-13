@@ -1,0 +1,13 @@
+{
+  "title": "DISABLE_PLANE_AILERON",
+  "breadcrumbs": [
+    "Native Reference",
+    "DISABLE_PLANE_AILERON"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DISABLE_PLANE_AILERON\nDisablePlaneAileron()"
+  ],
+  "urls": [],
+  "tags": []
+}

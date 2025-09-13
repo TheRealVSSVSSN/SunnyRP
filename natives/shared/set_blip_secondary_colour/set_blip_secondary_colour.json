@@ -1,0 +1,13 @@
+{
+  "title": "SET_BLIP_SECONDARY_COLOUR",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_BLIP_SECONDARY_COLOUR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_BLIP_SECONDARY_COLOUR\nSetBlipSecondaryColour()"
+  ],
+  "urls": [],
+  "tags": []
+}

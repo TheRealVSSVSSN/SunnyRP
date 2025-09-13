@@ -1,0 +1,13 @@
+{
+  "title": "SET_BLIP_FLASHES",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_BLIP_FLASHES"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_BLIP_FLASHES\nSetBlipFlashes()"
+  ],
+  "urls": [],
+  "tags": []
+}

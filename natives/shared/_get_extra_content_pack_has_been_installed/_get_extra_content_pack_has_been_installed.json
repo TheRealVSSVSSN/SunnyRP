@@ -1,0 +1,13 @@
+{
+  "title": "_GET_EXTRA_CONTENT_PACK_HAS_BEEN_INSTALLED",
+  "breadcrumbs": [
+    "Native Reference",
+    "_GET_EXTRA_CONTENT_PACK_HAS_BEEN_INSTALLED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_EXTRA_CONTENT_PACK_HAS_BEEN_INSTALLED\n_GetExtraContentPackHasBeenInstalled()"
+  ],
+  "urls": [],
+  "tags": []
+}

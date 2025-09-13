@@ -1,0 +1,13 @@
+{
+  "title": "_DISABLE_VEHICLE_NEON_LIGHTS",
+  "breadcrumbs": [
+    "Native Reference",
+    "_DISABLE_VEHICLE_NEON_LIGHTS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _DISABLE_VEHICLE_NEON_LIGHTS\n_DisableVehicleNeonLights()"
+  ],
+  "urls": [],
+  "tags": []
+}

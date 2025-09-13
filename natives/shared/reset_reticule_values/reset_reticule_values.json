@@ -1,0 +1,13 @@
+{
+  "title": "RESET_RETICULE_VALUES",
+  "breadcrumbs": [
+    "Native Reference",
+    "RESET_RETICULE_VALUES"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for RESET_RETICULE_VALUES\nResetReticuleValues()"
+  ],
+  "urls": [],
+  "tags": []
+}

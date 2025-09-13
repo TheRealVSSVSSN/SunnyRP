@@ -1,0 +1,13 @@
+{
+  "title": "CLEAR_PED_ALTERNATE_MOVEMENT_ANIM",
+  "breadcrumbs": [
+    "Native Reference",
+    "CLEAR_PED_ALTERNATE_MOVEMENT_ANIM"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CLEAR_PED_ALTERNATE_MOVEMENT_ANIM\nClearPedAlternateMovementAnim()"
+  ],
+  "urls": [],
+  "tags": []
+}

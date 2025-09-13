@@ -1,0 +1,13 @@
+{
+  "title": "DECOR_SET_BOOL",
+  "breadcrumbs": [
+    "Native Reference",
+    "DECOR_SET_BOOL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DECOR_SET_BOOL\nDecorSetBool()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_WEAPON_OBJECT_TINT_INDEX",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_WEAPON_OBJECT_TINT_INDEX"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_WEAPON_OBJECT_TINT_INDEX\nGetWeaponObjectTintIndex()"
+  ],
+  "urls": [],
+  "tags": []
+}

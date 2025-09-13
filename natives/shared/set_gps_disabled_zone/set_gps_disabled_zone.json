@@ -1,0 +1,13 @@
+{
+  "title": "SET_GPS_DISABLED_ZONE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_GPS_DISABLED_ZONE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_GPS_DISABLED_ZONE\nSetGpsDisabledZone()"
+  ],
+  "urls": [],
+  "tags": []
+}

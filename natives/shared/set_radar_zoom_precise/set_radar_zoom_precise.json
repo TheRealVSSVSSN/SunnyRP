@@ -1,0 +1,13 @@
+{
+  "title": "SET_RADAR_ZOOM_PRECISE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_RADAR_ZOOM_PRECISE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_RADAR_ZOOM_PRECISE\nSetRadarZoomPrecise()"
+  ],
+  "urls": [],
+  "tags": []
+}

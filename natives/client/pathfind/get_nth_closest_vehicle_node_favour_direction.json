@@ -8,7 +8,7 @@
   "content": "0x45905BE8654AE0670x928A4DEC// GetNthClosestVehicleNodeFavourDirection\nBOOL GET_NTH_CLOSEST_VEHICLE_NODE_FAVOUR_DIRECTION(float x, float y, float z, float desiredX, float desiredY, float desiredZ, int nthClosest, Vector3* outPosition, float* outHeading, int nodeFlags, float zMeasureMult, float zTolerance);Parameters:x: X coordinatey: Y coordinatez: Z coordinatedesiredX: The X direction to favourdesiredY: The Y direction to favourdesiredZ: The Z direction to favournthClosest: The index of the node to returnoutPosition: Pointer to the found nodes coordsoutHeading: Pointer to the found nodes headingnodeFlags: Node flags, see GET_CLOSEST_VEHICLE_NODEzMeasureMult: How strongly the difference in the Z direction should be weightedzTolerance: How far apart the Z coords have to be before zMeasureMult kicks inReturns: Returns the nth closest vehicle node with its heading favouring the desired direction.Like GET_CLOSEST_VEHICLE_NODE_WITH_HEADING, but returns the nth closest node instead of the first.",
   "codeBlocks": [
     "// GetNthClosestVehicleNodeFavourDirection\nBOOL GET_NTH_CLOSEST_VEHICLE_NODE_FAVOUR_DIRECTION(float x, float y, float z, float desiredX, float desiredY, float desiredZ, int nthClosest, Vector3* outPosition, float* outHeading, int nodeFlags, float zMeasureMult, float zTolerance);",
-    "-- Example usage for GET_NTH_CLOSEST_VEHICLE_NODE_FAVOUR_DIRECTION\nGetNthClosestVehicleNodeFavourDirection(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0, 0, 0, 0.0, 0.0)"
+    "-- Example usage for GET_NTH_CLOSEST_VEHICLE_NODE_FAVOUR_DIRECTION\nGetNthClosestVehicleNodeFavourDirection(1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1, 0, 0, 1, 1.0, 1.0)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

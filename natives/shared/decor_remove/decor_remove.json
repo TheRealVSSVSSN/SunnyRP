@@ -1,0 +1,13 @@
+{
+  "title": "DECOR_REMOVE",
+  "breadcrumbs": [
+    "Native Reference",
+    "DECOR_REMOVE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DECOR_REMOVE\nDecorRemove()"
+  ],
+  "urls": [],
+  "tags": []
+}

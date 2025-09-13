@@ -1,0 +1,13 @@
+{
+  "title": "SET_BLIP_FLASHES_ALTERNATE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_BLIP_FLASHES_ALTERNATE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_BLIP_FLASHES_ALTERNATE\nSetBlipFlashesAlternate()"
+  ],
+  "urls": [],
+  "tags": []
+}

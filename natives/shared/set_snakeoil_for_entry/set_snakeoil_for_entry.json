@@ -1,0 +1,13 @@
+{
+  "title": "SET_SNAKEOIL_FOR_ENTRY",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_SNAKEOIL_FOR_ENTRY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_SNAKEOIL_FOR_ENTRY\nSetSnakeoilForEntry()"
+  ],
+  "urls": [],
+  "tags": []
+}

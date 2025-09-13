@@ -8,7 +8,7 @@
   "content": "0xFE466162C4401D180x249BC876// StartShapeTestBox\nint START_SHAPE_TEST_BOX(float x, float y, float z, float x1, float y1, float z1, float rotX, float rotY, float rotZ, int p9, int flags, Entity entity, int p12);Parameters:x: Starting X coordinate.y: Starting Y coordinate.z: Starting Z coordinate.x1: Ending X coordinate.y1: Ending Y coordinate.z1: Ending Z coordinate.rotX: rotY: rotZ: p9: Unknown, always 2 or 0flags: See START_SHAPE_TEST_LOS_PROBEentity: p12: A bit mask with bits 1, 2, 4, or 7 relating to collider types. 4 and 7 are usually used.For more information, see START_EXPENSIVE_SYNCHRONOUS_SHAPE_TEST_LOS_PROBE and START_SHAPE_TEST_LOS_PROBE.",
   "codeBlocks": [
     "// StartShapeTestBox\nint START_SHAPE_TEST_BOX(float x, float y, float z, float x1, float y1, float z1, float rotX, float rotY, float rotZ, int p9, int flags, Entity entity, int p12);",
-    "local entity = PlayerPedId()\n-- Example usage for START_SHAPE_TEST_BOX\nStartShapeTestBox(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0, entity, 0)"
+    "local entity = PlayerPedId()\n-- Example usage for START_SHAPE_TEST_BOX\nStartShapeTestBox(1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1, 1, entity, 1)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

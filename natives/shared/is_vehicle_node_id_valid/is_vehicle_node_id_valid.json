@@ -1,0 +1,13 @@
+{
+  "title": "IS_VEHICLE_NODE_ID_VALID",
+  "breadcrumbs": [
+    "Native Reference",
+    "IS_VEHICLE_NODE_ID_VALID"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for IS_VEHICLE_NODE_ID_VALID\nIsVehicleNodeIdValid()"
+  ],
+  "urls": [],
+  "tags": []
+}

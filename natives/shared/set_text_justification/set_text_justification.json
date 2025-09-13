@@ -1,0 +1,13 @@
+{
+  "title": "SET_TEXT_JUSTIFICATION",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_TEXT_JUSTIFICATION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_TEXT_JUSTIFICATION\nSetTextJustification()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "_CLEAR_RESTART_CUSTOM_POSITION",
+  "breadcrumbs": [
+    "Native Reference",
+    "_CLEAR_RESTART_CUSTOM_POSITION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _CLEAR_RESTART_CUSTOM_POSITION\n_ClearRestartCustomPosition()"
+  ],
+  "urls": [],
+  "tags": []
+}

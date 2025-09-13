@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_AI_BLIP_HAS_CONE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_AI_BLIP_HAS_CONE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_AI_BLIP_HAS_CONE\nSetPedAiBlipHasCone()"
+  ],
+  "urls": [],
+  "tags": []
+}

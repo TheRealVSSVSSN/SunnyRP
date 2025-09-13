@@ -1,0 +1,13 @@
+{
+  "title": "_GET_PROJECTILE_NEAR_PED",
+  "breadcrumbs": [
+    "Native Reference",
+    "_GET_PROJECTILE_NEAR_PED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _GET_PROJECTILE_NEAR_PED\n_GetProjectileNearPed()"
+  ],
+  "urls": [],
+  "tags": []
+}

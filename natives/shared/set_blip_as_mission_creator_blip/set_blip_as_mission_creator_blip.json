@@ -1,0 +1,13 @@
+{
+  "title": "SET_BLIP_AS_MISSION_CREATOR_BLIP",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_BLIP_AS_MISSION_CREATOR_BLIP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_BLIP_AS_MISSION_CREATOR_BLIP\nSetBlipAsMissionCreatorBlip()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "GET_WEAPON_TINT_COUNT",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_WEAPON_TINT_COUNT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_WEAPON_TINT_COUNT\nGetWeaponTintCount()"
+  ],
+  "urls": [],
+  "tags": []
+}

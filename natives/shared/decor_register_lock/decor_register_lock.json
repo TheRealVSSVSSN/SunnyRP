@@ -1,0 +1,13 @@
+{
+  "title": "DECOR_REGISTER_LOCK",
+  "breadcrumbs": [
+    "Native Reference",
+    "DECOR_REGISTER_LOCK"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DECOR_REGISTER_LOCK\nDecorRegisterLock()"
+  ],
+  "urls": [],
+  "tags": []
+}

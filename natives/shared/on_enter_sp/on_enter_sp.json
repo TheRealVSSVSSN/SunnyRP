@@ -1,0 +1,13 @@
+{
+  "title": "ON_ENTER_SP",
+  "breadcrumbs": [
+    "Native Reference",
+    "ON_ENTER_SP"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ON_ENTER_SP\nOnEnterSp()"
+  ],
+  "urls": [],
+  "tags": []
+}

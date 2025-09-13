@@ -1,0 +1,13 @@
+{
+  "title": "GET_WEAPON_DAMAGE_TYPE",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_WEAPON_DAMAGE_TYPE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_WEAPON_DAMAGE_TYPE\nGetWeaponDamageType()"
+  ],
+  "urls": [],
+  "tags": []
+}

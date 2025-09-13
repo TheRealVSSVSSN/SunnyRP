@@ -1,0 +1,13 @@
+{
+  "title": "SET_BLIP_ROUTE_COLOUR",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_BLIP_ROUTE_COLOUR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_BLIP_ROUTE_COLOUR\nSetBlipRouteColour()"
+  ],
+  "urls": [],
+  "tags": []
+}

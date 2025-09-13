@@ -1,0 +1,13 @@
+{
+  "title": "GET_WEAPONTYPE_SLOT",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_WEAPONTYPE_SLOT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_WEAPONTYPE_SLOT\nGetWeapontypeSlot()"
+  ],
+  "urls": [],
+  "tags": []
+}

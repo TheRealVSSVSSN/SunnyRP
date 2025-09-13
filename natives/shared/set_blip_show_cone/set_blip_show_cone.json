@@ -1,0 +1,13 @@
+{
+  "title": "SET_BLIP_SHOW_CONE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_BLIP_SHOW_CONE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_BLIP_SHOW_CONE\nSetBlipShowCone()"
+  ],
+  "urls": [],
+  "tags": []
+}

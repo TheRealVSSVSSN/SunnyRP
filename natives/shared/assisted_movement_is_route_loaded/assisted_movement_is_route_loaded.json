@@ -1,0 +1,13 @@
+{
+  "title": "ASSISTED_MOVEMENT_IS_ROUTE_LOADED",
+  "breadcrumbs": [
+    "Native Reference",
+    "ASSISTED_MOVEMENT_IS_ROUTE_LOADED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ASSISTED_MOVEMENT_IS_ROUTE_LOADED\nAssistedMovementIsRouteLoaded()"
+  ],
+  "urls": [],
+  "tags": []
+}

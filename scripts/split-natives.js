@@ -1,7 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const BATCH_SIZE = parseInt(process.argv[2], 10) || 200;
+// Process roughly 400 natives per run by default to align with project workflow
+const BATCH_SIZE = parseInt(process.argv[2], 10) || 400;
 const SOURCE_FILE = path.join(__dirname, '..', 'natives.json');
 const OUTPUT_ROOT = path.join(__dirname, '..', 'natives');
 const LEDGER_FILE = path.join(OUTPUT_ROOT, 'ledger.json');

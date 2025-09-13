@@ -1,0 +1,13 @@
+{
+  "title": "CAN_CREATE_RANDOM_COPS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CAN_CREATE_RANDOM_COPS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CAN_CREATE_RANDOM_COPS\nCanCreateRandomCops()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "SET_TEXT_INPUT_BOX_ENABLED",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_TEXT_INPUT_BOX_ENABLED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_TEXT_INPUT_BOX_ENABLED\nSetTextInputBoxEnabled()"
+  ],
+  "urls": [],
+  "tags": []
+}

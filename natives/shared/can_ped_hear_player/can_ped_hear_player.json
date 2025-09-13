@@ -1,0 +1,13 @@
+{
+  "title": "CAN_PED_HEAR_PLAYER",
+  "breadcrumbs": [
+    "Native Reference",
+    "CAN_PED_HEAR_PLAYER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CAN_PED_HEAR_PLAYER\nCanPedHearPlayer()"
+  ],
+  "urls": [],
+  "tags": []
+}

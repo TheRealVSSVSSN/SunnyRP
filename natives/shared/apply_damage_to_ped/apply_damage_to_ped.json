@@ -1,0 +1,13 @@
+{
+  "title": "APPLY_DAMAGE_TO_PED",
+  "breadcrumbs": [
+    "Native Reference",
+    "APPLY_DAMAGE_TO_PED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for APPLY_DAMAGE_TO_PED\nApplyDamageToPed()"
+  ],
+  "urls": [],
+  "tags": []
+}

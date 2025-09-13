@@ -9,7 +9,7 @@
   "codeBlocks": [
     "// AddNavmeshBlockingObject\nAny ADD_NAVMESH_BLOCKING_OBJECT(float x, float y, float z, float width, float length, float height, float heading, BOOL bPermanent, int flags);",
     "enum eBlockingObjectFlags {\n    // Default Flag\n    BLOCKING_OBJECT_DEFAULT = 0,\n    // Blocking object will block wander paths\n    BLOCKING_OBJECT_WANDERPATH = 1,\n    // Blocking object will block (regular) shortest-paths\n    BLOCKING_OBJECT_SHORTESTPATH = 2,\n    // Blocking object will block flee paths\n    BLOCKING_OBJECT_FLEEPATH = 4,\n    // Blocking object will block all paths\n    BLOCKING_OBJECT_ALLPATHS = 7,\n}",
-    "-- Example usage for ADD_NAVMESH_BLOCKING_OBJECT\nAddNavmeshBlockingObject(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, false, 0)"
+    "-- Example usage for ADD_NAVMESH_BLOCKING_OBJECT\nAddNavmeshBlockingObject(1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, true, 1)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

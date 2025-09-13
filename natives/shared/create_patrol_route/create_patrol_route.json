@@ -1,0 +1,13 @@
+{
+  "title": "CREATE_PATROL_ROUTE",
+  "breadcrumbs": [
+    "Native Reference",
+    "CREATE_PATROL_ROUTE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CREATE_PATROL_ROUTE\nCreatePatrolRoute()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -8,7 +8,7 @@
   "content": "0x163E252DE035A1330x87A42A12// GetOffsetFromCoordAndHeadingInWorldCoords\nVector3 GET_OFFSET_FROM_COORD_AND_HEADING_IN_WORLD_COORDS(float xPos, float yPos, float zPos, float heading, float xOffset, float yOffset, float zOffset);Parameters:xPos: The X coordinate of the original position.yPos: The Y coordinate of the original position.zPos: The Z coordinate of the original position.heading: The heading (in degrees) relative to which the offsets are applied.xOffset: Left/right offset from the coord.yOffset: Forward/backward offset from the coord.zOffset: Upward/downward offset from the coord.Returns: Returns a Vector3 representing the new world coordinates after applying the offsets to the original position relative to the specified heading.Calculates the world coordinates after applying the specified offsets to the given position, relative to a certain heading.\nThis native is similar to GET_OFFSET_FROM_ENTITY_IN_WORLD_COORDS, but uses a world position and heading as the reference point.Old name:  _GET_OBJECT_OFFSET_FROM_COORDS",
   "codeBlocks": [
     "// GetOffsetFromCoordAndHeadingInWorldCoords\nVector3 GET_OFFSET_FROM_COORD_AND_HEADING_IN_WORLD_COORDS(float xPos, float yPos, float zPos, float heading, float xOffset, float yOffset, float zOffset);",
-    "-- Example usage for GET_OFFSET_FROM_COORD_AND_HEADING_IN_WORLD_COORDS\nGetOffsetFromCoordAndHeadingInWorldCoords(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)"
+    "-- Example usage for GET_OFFSET_FROM_COORD_AND_HEADING_IN_WORLD_COORDS\nGetOffsetFromCoordAndHeadingInWorldCoords(1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

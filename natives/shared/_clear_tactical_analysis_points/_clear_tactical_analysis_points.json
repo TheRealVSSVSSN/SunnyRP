@@ -1,0 +1,13 @@
+{
+  "title": "_CLEAR_TACTICAL_ANALYSIS_POINTS",
+  "breadcrumbs": [
+    "Native Reference",
+    "_CLEAR_TACTICAL_ANALYSIS_POINTS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _CLEAR_TACTICAL_ANALYSIS_POINTS\n_ClearTacticalAnalysisPoints()"
+  ],
+  "urls": [],
+  "tags": []
+}

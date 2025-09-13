@@ -1,0 +1,13 @@
+{
+  "title": "CLEAR_PED_DECORATIONS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CLEAR_PED_DECORATIONS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CLEAR_PED_DECORATIONS\nClearPedDecorations()"
+  ],
+  "urls": [],
+  "tags": []
+}

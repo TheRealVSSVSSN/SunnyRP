@@ -1,0 +1,13 @@
+{
+  "title": "GET_RAIN_LEVEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_RAIN_LEVEL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_RAIN_LEVEL\nGetRainLevel()"
+  ],
+  "urls": [],
+  "tags": []
+}

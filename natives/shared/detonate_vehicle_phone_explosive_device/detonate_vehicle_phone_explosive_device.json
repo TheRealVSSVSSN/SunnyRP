@@ -1,0 +1,13 @@
+{
+  "title": "DETONATE_VEHICLE_PHONE_EXPLOSIVE_DEVICE",
+  "breadcrumbs": [
+    "Native Reference",
+    "DETONATE_VEHICLE_PHONE_EXPLOSIVE_DEVICE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DETONATE_VEHICLE_PHONE_EXPLOSIVE_DEVICE\nDetonateVehiclePhoneExplosiveDevice()"
+  ],
+  "urls": [],
+  "tags": []
+}

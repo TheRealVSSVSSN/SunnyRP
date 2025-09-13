@@ -1,0 +1,13 @@
+{
+  "title": "SET_RADAR_AS_INTERIOR_THIS_FRAME",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_RADAR_AS_INTERIOR_THIS_FRAME"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_RADAR_AS_INTERIOR_THIS_FRAME\nSetRadarAsInteriorThisFrame()"
+  ],
+  "urls": [],
+  "tags": []
+}

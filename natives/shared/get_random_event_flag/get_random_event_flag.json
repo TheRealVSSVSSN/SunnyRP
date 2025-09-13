@@ -1,0 +1,13 @@
+{
+  "title": "GET_RANDOM_EVENT_FLAG",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_RANDOM_EVENT_FLAG"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_RANDOM_EVENT_FLAG\nGetRandomEventFlag()"
+  ],
+  "urls": [],
+  "tags": []
+}

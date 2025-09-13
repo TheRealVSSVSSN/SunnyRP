@@ -1,0 +1,13 @@
+{
+  "title": "SET_STATE_BAG_VALUE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_STATE_BAG_VALUE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_STATE_BAG_VALUE\nSetStateBagValue()"
+  ],
+  "urls": [],
+  "tags": []
+}

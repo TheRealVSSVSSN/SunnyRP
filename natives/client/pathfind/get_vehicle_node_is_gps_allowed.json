@@ -9,7 +9,7 @@
   "codeBlocks": [
     "// GetVehicleNodeIsGpsAllowed\nBOOL GET_VEHICLE_NODE_IS_GPS_ALLOWED(int nodeID);",
     "Returns false for nodes that aren't used for GPS routes.\nExample:\nNodes in Fort Zancudo and LSIA are false",
-    "-- Example usage for GET_VEHICLE_NODE_IS_GPS_ALLOWED\nGetVehicleNodeIsGpsAllowed(0)"
+    "-- Example usage for GET_VEHICLE_NODE_IS_GPS_ALLOWED\nGetVehicleNodeIsGpsAllowed(1)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

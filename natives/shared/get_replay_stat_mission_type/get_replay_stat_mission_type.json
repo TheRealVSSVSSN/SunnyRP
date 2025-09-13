@@ -1,0 +1,13 @@
+{
+  "title": "GET_REPLAY_STAT_MISSION_TYPE",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_REPLAY_STAT_MISSION_TYPE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_REPLAY_STAT_MISSION_TYPE\nGetReplayStatMissionType()"
+  ],
+  "urls": [],
+  "tags": []
+}

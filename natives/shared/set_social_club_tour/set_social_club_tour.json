@@ -1,0 +1,13 @@
+{
+  "title": "SET_SOCIAL_CLUB_TOUR",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_SOCIAL_CLUB_TOUR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_SOCIAL_CLUB_TOUR\nSetSocialClubTour()"
+  ],
+  "urls": [],
+  "tags": []
+}

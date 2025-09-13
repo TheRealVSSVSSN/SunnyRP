@@ -1,0 +1,13 @@
+{
+  "title": "_SET_BLIP_SCALE_TRANSFORMATION",
+  "breadcrumbs": [
+    "Native Reference",
+    "_SET_BLIP_SCALE_TRANSFORMATION"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_BLIP_SCALE_TRANSFORMATION\n_SetBlipScaleTransformation()"
+  ],
+  "urls": [],
+  "tags": []
+}

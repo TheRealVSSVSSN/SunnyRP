@@ -9,7 +9,7 @@
   "codeBlocks": [
     "// Cos\nfloat COS(float value);",
     "-- Get the heading\nlocal heading = GetEntityHeading(PlayerPedId())\nlocal cos = Cos(heading)\n\n-- equivalent in lua\nlocal cosLua = math.cos(heading * (math.pi / 180))",
-    "-- Example usage for COS\nCos(0.0)"
+    "-- Example usage for COS\nCos(1.0)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

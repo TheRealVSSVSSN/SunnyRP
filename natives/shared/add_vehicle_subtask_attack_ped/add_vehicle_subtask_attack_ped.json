@@ -1,0 +1,13 @@
+{
+  "title": "ADD_VEHICLE_SUBTASK_ATTACK_PED",
+  "breadcrumbs": [
+    "Native Reference",
+    "ADD_VEHICLE_SUBTASK_ATTACK_PED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ADD_VEHICLE_SUBTASK_ATTACK_PED\nAddVehicleSubtaskAttackPed()"
+  ],
+  "urls": [],
+  "tags": []
+}

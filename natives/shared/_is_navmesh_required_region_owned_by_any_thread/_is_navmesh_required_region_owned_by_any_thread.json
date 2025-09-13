@@ -1,0 +1,13 @@
+{
+  "title": "_IS_NAVMESH_REQUIRED_REGION_OWNED_BY_ANY_THREAD",
+  "breadcrumbs": [
+    "Native Reference",
+    "_IS_NAVMESH_REQUIRED_REGION_OWNED_BY_ANY_THREAD"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _IS_NAVMESH_REQUIRED_REGION_OWNED_BY_ANY_THREAD\n_IsNavmeshRequiredRegionOwnedByAnyThread()"
+  ],
+  "urls": [],
+  "tags": []
+}

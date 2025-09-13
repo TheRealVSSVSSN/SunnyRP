@@ -1,0 +1,13 @@
+{
+  "title": "SET_PED_AI_BLIP_FORCED_ON",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PED_AI_BLIP_FORCED_ON"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PED_AI_BLIP_FORCED_ON\nSetPedAiBlipForcedOn()"
+  ],
+  "urls": [],
+  "tags": []
+}

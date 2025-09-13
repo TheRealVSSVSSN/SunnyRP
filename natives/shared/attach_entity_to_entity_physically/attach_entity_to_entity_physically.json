@@ -1,0 +1,13 @@
+{
+  "title": "ATTACH_ENTITY_TO_ENTITY_PHYSICALLY",
+  "breadcrumbs": [
+    "Native Reference",
+    "ATTACH_ENTITY_TO_ENTITY_PHYSICALLY"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ATTACH_ENTITY_TO_ENTITY_PHYSICALLY\nAttachEntityToEntityPhysically()"
+  ],
+  "urls": [],
+  "tags": []
+}

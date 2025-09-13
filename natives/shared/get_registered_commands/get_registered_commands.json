@@ -1,0 +1,13 @@
+{
+  "title": "GET_REGISTERED_COMMANDS",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_REGISTERED_COMMANDS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_REGISTERED_COMMANDS\nGetRegisteredCommands()"
+  ],
+  "urls": [],
+  "tags": []
+}

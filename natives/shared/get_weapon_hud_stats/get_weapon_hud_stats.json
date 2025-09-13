@@ -1,0 +1,13 @@
+{
+  "title": "GET_WEAPON_HUD_STATS",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_WEAPON_HUD_STATS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_WEAPON_HUD_STATS\nGetWeaponHudStats()"
+  ],
+  "urls": [],
+  "tags": []
+}

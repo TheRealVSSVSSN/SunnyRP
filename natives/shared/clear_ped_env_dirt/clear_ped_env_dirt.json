@@ -1,0 +1,13 @@
+{
+  "title": "CLEAR_PED_ENV_DIRT",
+  "breadcrumbs": [
+    "Native Reference",
+    "CLEAR_PED_ENV_DIRT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CLEAR_PED_ENV_DIRT\nClearPedEnvDirt()"
+  ],
+  "urls": [],
+  "tags": []
+}

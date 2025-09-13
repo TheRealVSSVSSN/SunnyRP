@@ -1,0 +1,13 @@
+{
+  "title": "CAN_PED_IN_COMBAT_SEE_TARGET",
+  "breadcrumbs": [
+    "Native Reference",
+    "CAN_PED_IN_COMBAT_SEE_TARGET"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CAN_PED_IN_COMBAT_SEE_TARGET\nCanPedInCombatSeeTarget()"
+  ],
+  "urls": [],
+  "tags": []
+}

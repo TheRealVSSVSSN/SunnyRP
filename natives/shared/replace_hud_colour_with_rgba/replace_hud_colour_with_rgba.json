@@ -1,0 +1,13 @@
+{
+  "title": "REPLACE_HUD_COLOUR_WITH_RGBA",
+  "breadcrumbs": [
+    "Native Reference",
+    "REPLACE_HUD_COLOUR_WITH_RGBA"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REPLACE_HUD_COLOUR_WITH_RGBA\nReplaceHudColourWithRgba()"
+  ],
+  "urls": [],
+  "tags": []
+}

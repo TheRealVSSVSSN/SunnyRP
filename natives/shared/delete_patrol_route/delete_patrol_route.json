@@ -1,0 +1,13 @@
+{
+  "title": "DELETE_PATROL_ROUTE",
+  "breadcrumbs": [
+    "Native Reference",
+    "DELETE_PATROL_ROUTE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DELETE_PATROL_ROUTE\nDeletePatrolRoute()"
+  ],
+  "urls": [],
+  "tags": []
+}

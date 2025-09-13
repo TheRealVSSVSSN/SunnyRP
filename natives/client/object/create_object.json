@@ -9,7 +9,7 @@
   "codeBlocks": [
     "// CreateObject\nObject CREATE_OBJECT(Hash modelHash, float x, float y, float z, BOOL isNetwork, BOOL netMissionEntity, BOOL doorFlag);",
     "local modelHash = `prop_weed_01` -- The ` return the jenkins hash of a string. see more at: https://cookbook.fivem.net/2019/06/23/lua-support-for-compile-time-jenkins-hashes/\n\nif not HasModelLoaded(modelHash) then\n    -- If the model isnt loaded we request the loading of the model and wait that the model is loaded\n    RequestModel(modelHash)\n\n    while not HasModelLoaded(modelHash) do\n        Citizen.Wait(1)\n    end\nend\n\n-- At this moment the model its loaded, so now we can create the object\nlocal obj = CreateObject(modelHash, vector3(0.0, 0.0, 0.0), true)",
-    "-- Example usage for CREATE_OBJECT\nCreateObject(GetHashKey('prop'), 0.0, 0.0, 0.0, false, false, false)"
+    "-- Example usage for CREATE_OBJECT\nCreateObject(GetHashKey('prop'), 1.0, 1.0, 1.0, true, true, true)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

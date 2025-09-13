@@ -10,7 +10,7 @@
     "// ToggleUsePickupsForPlayer\nvoid _TOGGLE_USE_PICKUPS_FOR_PLAYER(Player player, Hash pickupHash, BOOL toggle);",
     "Disabling/enabling a player from getting pickups. From the scripts:\nOBJECT::_616093EC6B139DD9(PLAYER::PLAYER_ID(), ${pickup_portable_package}, 0);",
     "-- Toggles the possibility for the player to drop the weapon pickups after death\nlocal pickup = GetHashKey(\"PICKUP_WEAPON_ADVANCEDRIFLE\")\nToggleUsePickupsForPlayer(PlayerId(), pickup, false)",
-    "local player = PlayerId()\n-- Example usage for _TOGGLE_USE_PICKUPS_FOR_PLAYER\n_ToggleUsePickupsForPlayer(player, GetHashKey('prop'), false)"
+    "local player = PlayerId()\n-- Example usage for _TOGGLE_USE_PICKUPS_FOR_PLAYER\n_ToggleUsePickupsForPlayer(player, GetHashKey('prop'), true)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

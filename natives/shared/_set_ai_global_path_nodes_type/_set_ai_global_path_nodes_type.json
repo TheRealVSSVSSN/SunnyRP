@@ -1,0 +1,13 @@
+{
+  "title": "_SET_AI_GLOBAL_PATH_NODES_TYPE",
+  "breadcrumbs": [
+    "Native Reference",
+    "_SET_AI_GLOBAL_PATH_NODES_TYPE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_AI_GLOBAL_PATH_NODES_TYPE\n_SetAiGlobalPathNodesType()"
+  ],
+  "urls": [],
+  "tags": []
+}

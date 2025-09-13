@@ -1,0 +1,13 @@
+{
+  "title": "DETACH_VEHICLE_FROM_TRAILER",
+  "breadcrumbs": [
+    "Native Reference",
+    "DETACH_VEHICLE_FROM_TRAILER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DETACH_VEHICLE_FROM_TRAILER\nDetachVehicleFromTrailer()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "DECOR_REGISTER",
+  "breadcrumbs": [
+    "Native Reference",
+    "DECOR_REGISTER"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DECOR_REGISTER\nDecorRegister()"
+  ],
+  "urls": [],
+  "tags": []
+}

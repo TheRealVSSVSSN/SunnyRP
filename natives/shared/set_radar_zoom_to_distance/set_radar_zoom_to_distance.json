@@ -1,0 +1,13 @@
+{
+  "title": "SET_RADAR_ZOOM_TO_DISTANCE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_RADAR_ZOOM_TO_DISTANCE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_RADAR_ZOOM_TO_DISTANCE\nSetRadarZoomToDistance()"
+  ],
+  "urls": [],
+  "tags": []
+}

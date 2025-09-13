@@ -1,0 +1,13 @@
+{
+  "title": "HAS_WEAPON_ASSET_LOADED",
+  "breadcrumbs": [
+    "Native Reference",
+    "HAS_WEAPON_ASSET_LOADED"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for HAS_WEAPON_ASSET_LOADED\nHasWeaponAssetLoaded()"
+  ],
+  "urls": [],
+  "tags": []
+}

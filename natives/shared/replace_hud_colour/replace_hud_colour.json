@@ -1,0 +1,13 @@
+{
+  "title": "REPLACE_HUD_COLOUR",
+  "breadcrumbs": [
+    "Native Reference",
+    "REPLACE_HUD_COLOUR"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for REPLACE_HUD_COLOUR\nReplaceHudColour()"
+  ],
+  "urls": [],
+  "tags": []
+}

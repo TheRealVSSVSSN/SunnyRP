@@ -1,0 +1,13 @@
+{
+  "title": "SET_BLIP_HIDDEN_ON_LEGEND",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_BLIP_HIDDEN_ON_LEGEND"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_BLIP_HIDDEN_ON_LEGEND\nSetBlipHiddenOnLegend()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "HAS_PED_BEEN_DAMAGED_BY_WEAPON",
+  "breadcrumbs": [
+    "Native Reference",
+    "HAS_PED_BEEN_DAMAGED_BY_WEAPON"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for HAS_PED_BEEN_DAMAGED_BY_WEAPON\nHasPedBeenDamagedByWeapon()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "ADD_VEHICLE_SUBTASK_ATTACK_COORD",
+  "breadcrumbs": [
+    "Native Reference",
+    "ADD_VEHICLE_SUBTASK_ATTACK_COORD"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ADD_VEHICLE_SUBTASK_ATTACK_COORD\nAddVehicleSubtaskAttackCoord()"
+  ],
+  "urls": [],
+  "tags": []
+}

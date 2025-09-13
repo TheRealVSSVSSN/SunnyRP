@@ -1,0 +1,13 @@
+{
+  "title": "GET_WEAPONTYPE_MODEL",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_WEAPONTYPE_MODEL"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_WEAPONTYPE_MODEL\nGetWeapontypeModel()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "SET_TEXT_DROP_SHADOW",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_TEXT_DROP_SHADOW"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_TEXT_DROP_SHADOW\nSetTextDropShadow()"
+  ],
+  "urls": [],
+  "tags": []
+}

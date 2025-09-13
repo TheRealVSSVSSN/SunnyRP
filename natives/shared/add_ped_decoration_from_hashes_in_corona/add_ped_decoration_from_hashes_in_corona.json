@@ -1,0 +1,13 @@
+{
+  "title": "ADD_PED_DECORATION_FROM_HASHES_IN_CORONA",
+  "breadcrumbs": [
+    "Native Reference",
+    "ADD_PED_DECORATION_FROM_HASHES_IN_CORONA"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ADD_PED_DECORATION_FROM_HASHES_IN_CORONA\nAddPedDecorationFromHashesInCorona()"
+  ],
+  "urls": [],
+  "tags": []
+}

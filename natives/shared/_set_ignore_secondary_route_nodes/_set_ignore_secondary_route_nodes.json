@@ -1,0 +1,13 @@
+{
+  "title": "_SET_IGNORE_SECONDARY_ROUTE_NODES",
+  "breadcrumbs": [
+    "Native Reference",
+    "_SET_IGNORE_SECONDARY_ROUTE_NODES"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _SET_IGNORE_SECONDARY_ROUTE_NODES\n_SetIgnoreSecondaryRouteNodes()"
+  ],
+  "urls": [],
+  "tags": []
+}

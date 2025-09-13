@@ -1,0 +1,13 @@
+{
+  "title": "ADD_COVER_BLOCKING_AREA",
+  "breadcrumbs": [
+    "Native Reference",
+    "ADD_COVER_BLOCKING_AREA"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for ADD_COVER_BLOCKING_AREA\nAddCoverBlockingArea()"
+  ],
+  "urls": [],
+  "tags": []
+}

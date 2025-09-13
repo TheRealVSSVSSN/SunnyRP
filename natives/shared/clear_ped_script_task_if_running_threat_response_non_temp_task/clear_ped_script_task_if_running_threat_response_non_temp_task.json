@@ -1,0 +1,13 @@
+{
+  "title": "CLEAR_PED_SCRIPT_TASK_IF_RUNNING_THREAT_RESPONSE_NON_TEMP_TASK",
+  "breadcrumbs": [
+    "Native Reference",
+    "CLEAR_PED_SCRIPT_TASK_IF_RUNNING_THREAT_RESPONSE_NON_TEMP_TASK"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CLEAR_PED_SCRIPT_TASK_IF_RUNNING_THREAT_RESPONSE_NON_TEMP_TASK\nClearPedScriptTaskIfRunningThreatResponseNonTempTask()"
+  ],
+  "urls": [],
+  "tags": []
+}

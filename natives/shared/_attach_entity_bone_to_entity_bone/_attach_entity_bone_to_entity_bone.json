@@ -1,0 +1,13 @@
+{
+  "title": "_ATTACH_ENTITY_BONE_TO_ENTITY_BONE",
+  "breadcrumbs": [
+    "Native Reference",
+    "_ATTACH_ENTITY_BONE_TO_ENTITY_BONE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for _ATTACH_ENTITY_BONE_TO_ENTITY_BONE\n_AttachEntityBoneToEntityBone()"
+  ],
+  "urls": [],
+  "tags": []
+}

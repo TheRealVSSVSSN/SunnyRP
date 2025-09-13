@@ -1,0 +1,13 @@
+{
+  "title": "DELETE_INCIDENT",
+  "breadcrumbs": [
+    "Native Reference",
+    "DELETE_INCIDENT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for DELETE_INCIDENT\nDeleteIncident()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -9,7 +9,7 @@
   "codeBlocks": [
     "// Vdist2\nfloat VDIST2(float x1, float y1, float z1, float x2, float y2, float z2);",
     "NativeDB Introduced: v323",
-    "-- Example usage for VDIST2\nVdist2(0.0, 0.0, 0.0, 0.0, 0.0, 0.0)"
+    "-- Example usage for VDIST2\nVdist2(1.0, 1.0, 1.0, 1.0, 1.0, 1.0)"
   ],
   "urls": [
     "https://docs.fivem.net/docs/",

@@ -1,0 +1,13 @@
+{
+  "title": "SET_BLIP_SCALE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_BLIP_SCALE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_BLIP_SCALE\nSetBlipScale()"
+  ],
+  "urls": [],
+  "tags": []
+}

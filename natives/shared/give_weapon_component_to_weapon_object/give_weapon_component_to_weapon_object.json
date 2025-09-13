@@ -1,0 +1,13 @@
+{
+  "title": "GIVE_WEAPON_COMPONENT_TO_WEAPON_OBJECT",
+  "breadcrumbs": [
+    "Native Reference",
+    "GIVE_WEAPON_COMPONENT_TO_WEAPON_OBJECT"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GIVE_WEAPON_COMPONENT_TO_WEAPON_OBJECT\nGiveWeaponComponentToWeaponObject()"
+  ],
+  "urls": [],
+  "tags": []
+}

@@ -1,0 +1,13 @@
+{
+  "title": "SET_PAUSE_MENU_ACTIVE",
+  "breadcrumbs": [
+    "Native Reference",
+    "SET_PAUSE_MENU_ACTIVE"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for SET_PAUSE_MENU_ACTIVE\nSetPauseMenuActive()"
+  ],
+  "urls": [],
+  "tags": []
+}

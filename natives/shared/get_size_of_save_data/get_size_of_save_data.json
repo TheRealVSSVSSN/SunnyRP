@@ -1,0 +1,13 @@
+{
+  "title": "GET_SIZE_OF_SAVE_DATA",
+  "breadcrumbs": [
+    "Native Reference",
+    "GET_SIZE_OF_SAVE_DATA"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for GET_SIZE_OF_SAVE_DATA\nGetSizeOfSaveData()"
+  ],
+  "urls": [],
+  "tags": []
+}

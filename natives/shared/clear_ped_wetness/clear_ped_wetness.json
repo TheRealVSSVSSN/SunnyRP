@@ -1,0 +1,13 @@
+{
+  "title": "CLEAR_PED_WETNESS",
+  "breadcrumbs": [
+    "Native Reference",
+    "CLEAR_PED_WETNESS"
+  ],
+  "content": "",
+  "codeBlocks": [
+    "-- Example usage for CLEAR_PED_WETNESS\nClearPedWetness()"
+  ],
+  "urls": [],
+  "tags": []
+}
